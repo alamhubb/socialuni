@@ -18,64 +18,73 @@
             <template v-else>
               <div v-if="mineUser && swiperIndex === 0" class="px-sm">
                 <div class="row-all-center color-main mt-sm chunk-default pd-xs">
-                  {{mineUser.openContactInfo?'下拉刷新将您的排名前置':'开启联系方式您的信息将在此处展示'}}
+                  {{ mineUser.openContactInfo ? '下拉刷新将您的排名前置' : '开启联系方式您的信息将在此处展示' }}
                 </div>
               </div>
-              <div class="flex-row px-smm py-sm bb" v-for="user in item.queryQO.listData" :key="user.id"
+              <div class="flex-col px-smm py-sm bb" v-for="user in item.queryQO.listData" :key="user.id"
                    @click="toUserDetailVue(user)">
-                <image
-                    class="card-title-avatar bd"
-                    mode="aspectFill"
-                    :src="user.avatar"
-                />
-                <view class="flex-1 row-between">
-                  <view class="flex-col py-xs">
-                    <view class="row-col-center">
-                      <text :class="{'text-red':user.vipFlag}">{{ user.nickname }}</text>
-                      <view v-if="user.vipFlag" class="ml-5px cu-tag bg-orange radius sm"
-                            @click.stop="openVip">
-                        VIP
+                <div class="row-col-center">
+                  <image
+                      class="card-title-avatar bd flex-none"
+                      mode="aspectFill"
+                      :src="user.avatar"
+                  />
+                  <view class="flex-1 row-between-center py-xs">
+                    <div class="flex-col flex-1">
+                      <view class="row-col-center">
+                        <text :class="{'text-red':user.vipFlag}">{{ user.nickname }}</text>
+                        <view v-if="user.vipFlag" class="ml-5px cu-tag bg-orange radius sm"
+                              @click.stop="openVip">
+                          VIP
+                        </view>
+                        <social-gender-tag class="ml-xs" :user="user"></social-gender-tag>
                       </view>
-                      <social-gender-tag class="ml-xs" :user="user"></social-gender-tag>
-                    </view>
-                    <view class="row-col-center mt-xss font-12 color-content">
-                      {{ formatTime(user.lastOnlineTime) }}
-                      <div class="px-xs row-col-center">|</div>
-                      <!--        有市区的名称就不显示省的名称-->
-                      <text v-if="!user.cityName || !user.districtName">{{ user.provinceName }}</text>
-                      <text v-if="user.cityName">
-                        <text v-if="!user.districtName">-</text>
-                        {{ user.cityName }}
-                      </text>
-                      <text v-if="user.districtName">-{{ user.districtName }}</text>
-
-                      <view class="row-col-center" v-if="user.distance|| user.distance===0">
+                      <view class="row-col-center mt-xss font-12 color-content">
+                        {{ formatTime(user.lastOnlineTime) }}
                         <div class="px-xs row-col-center">|</div>
-                        <text v-if="user.distance<0.5">{{ 0.5 }}公里</text>
-                        <text v-else-if="user.distance<1">{{ 1 }}公里</text>
-                        <text v-else-if="user.distance<5">{{ 5 }}公里</text>
-                        <text v-else>{{ numFixed1(user.distance) }}公里</text>
+                        <!--        有市区的名称就不显示省的名称-->
+                        <text v-if="!user.cityName || !user.districtName">{{ user.provinceName }}</text>
+                        <text v-if="user.cityName">
+                          <text v-if="!user.districtName">-</text>
+                          {{ user.cityName }}
+                        </text>
+                        <text v-if="user.districtName">-{{ user.districtName }}</text>
+
+                        <view class="row-col-center" v-if="user.distance|| user.distance===0">
+                          <div class="px-xs row-col-center">|</div>
+                          <text v-if="user.distance<0.5">{{ 0.5 }}公里</text>
+                          <text v-else-if="user.distance<1">{{ 1 }}公里</text>
+                          <text v-else-if="user.distance<5">{{ 5 }}公里</text>
+                          <text v-else>{{ numFixed1(user.distance) }}公里</text>
+                        </view>
                       </view>
+                    </div>
+
+                    <view class="col-center flex-none">
+                      <div v-if="user.openContactInfo" class="use-click row-col-center">
+                        <q-button light @click="copyContactInfo">
+                          <div class="color-content ml-xs font-12">
+                            已获取( 点击复制 )
+                          </div>
+                        </q-button>
+                      </div>
+                      <div v-else class="use-click row-col-center">
+                        <q-button text @click="getOpenContactInfo(user)" :disabled="showUserContactBtnDisabled">
+                          <q-icon prefix="uni-icons" icon="uniui-personadd" size="22"></q-icon>
+                        </q-button>
+                      </div>
+                      <!--                    <socialuni-follow-tag :user="user" @change="userFollowChange"></socialuni-follow-tag>-->
                     </view>
+
                   </view>
-                  <view class="col-center">
-
-                    <div v-if="user.openContactInfo" class="use-click row-col-center">
-                      <q-button light @click="copyContactInfo">
-                        <div class="color-content ml-xs font-12">
-                          已获取( 点击复制 )
-                        </div>
-                      </q-button>
-                    </div>
-                    <div v-else class="use-click row-col-center">
-                      <q-button text @click="getOpenContactInfo(user)" :disabled="showUserContactBtnDisabled">
-                        <q-icon prefix="uni-icons" icon="uniui-personadd" size="22"></q-icon>
-                      </q-button>
-
-                    </div>
-
-                    <!--                    <socialuni-follow-tag :user="user" @change="userFollowChange"></socialuni-follow-tag>-->
-                  </view>
+                </div>
+                <view class="ml-60 row-col-center mt-xs">
+                  <image v-for="img in imgUrls(user).slice(0,3)" class="size40 bd-radius bd mr-sm"
+                         mode="aspectFill"
+                         :data-src="img"
+                         @click.stop="previewImage(img,user)"
+                         :src="img"
+                  ></image>
                 </view>
               </div>
               <view class="mt-xs">
@@ -121,6 +130,7 @@ import UniUtil from "socialuni-sdk/src/utils/UniUtil";
 import NumUtil from "socialuni-sdk/src/utils/NumUtil";
 import DateUtil from "socialuni-sdk/src/utils/DateUtil";
 import SocialuniUserExtendDetailRO from "socialuni-api/src/model/social/SocialuniUserExtendDetailRO";
+import ImgUtil from "socialuni-sdk/src/utils/ImgUtil";
 
 @Options({
   components: {QButton, QIcon, SocialuniFollowTag, SocialGenderTag, QTabs}
@@ -264,6 +274,22 @@ export default class SocialuniFollowView extends Vue {
   formatTime(dateStr) {
     return DateUtil.formatTime(dateStr)
   }
+
+  imgUrls(user: CenterUserDetailRO) {
+    if (user && user.imgs) {
+      return user.imgs.map(item => ImgUtil.getUserLargeImgUrl(item.src))
+    } else {
+      return []
+    }
+  }
+
+  previewImage(current, user: CenterUserDetailRO) {
+    uni.previewImage({
+      current: current,
+      urls: this.imgUrls(user)
+    })
+  }
+
 
 }
 </script>

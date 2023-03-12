@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "s_user_extend_friend_log",
         indexes = {
+                @Index(columnList = "userId"),
                 @Index(columnList = "adCode"),
                 @Index(columnList = "updateTime"),
         })

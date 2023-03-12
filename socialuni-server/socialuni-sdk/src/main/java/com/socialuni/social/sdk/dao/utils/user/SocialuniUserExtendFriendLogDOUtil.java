@@ -27,6 +27,7 @@ public class SocialuniUserExtendFriendLogDOUtil {
         if (socialuniUserExpandDo == null) {
             return;
         }
+        //未开启则不记录
         if (!socialuniUserExpandDo.getOpenContactInfo()) {
             return;
         }
@@ -52,10 +53,6 @@ public class SocialuniUserExtendFriendLogDOUtil {
             log.info(e.getMessage());
             return null;
         });*/
-    }
-
-    public static void findFirstUserExtendLogDOByIdDesc() {
-
     }
 
 }

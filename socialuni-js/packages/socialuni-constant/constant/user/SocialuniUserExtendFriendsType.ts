@@ -5,7 +5,7 @@ export default class SocialuniUserExtendFriendsType {
 
     static readonly allTypes: string [] = [
         SocialuniUserExtendFriendsType.recently,
-        SocialuniUserExtendFriendsType.hot,
+        // SocialuniUserExtendFriendsType.hot,
         SocialuniUserExtendFriendsType.city,
     ]
 }
