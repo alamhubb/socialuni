@@ -148,15 +148,6 @@ export default class SocialuniFollowView extends Vue {
   showUserContactBtnDisabled: boolean = false
 
   created() {
-    request.post<CenterUserDetailRO[]>('socialuni/keyQuery/query', {
-      queryData: {
-        userId: "d077ece6a78b43a09f0ab09d6008face",
-      },
-      keyJson: {
-        userId: 'user.id'
-      },
-    })
-
     this.tabsPageQueryUtil = [new SocialuniPageQueryUtil(SocialuniUserExpandAPI.queryExtendFriendUsersAPI), new SocialuniPageQueryUtil(SocialuniUserExpandAPI.queryExtendFriendUsersAPI)]
 
     onPullDownRefresh(async () => {

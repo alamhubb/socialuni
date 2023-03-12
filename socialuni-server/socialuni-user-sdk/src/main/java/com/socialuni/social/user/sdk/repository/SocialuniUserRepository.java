@@ -4,8 +4,10 @@ package com.socialuni.social.user.sdk.repository;
 import cn.hutool.core.bean.BeanUtil;
 import com.socialuni.social.common.api.constant.CommonRedisKey;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -20,17 +22,20 @@ public interface SocialuniUserRepository extends JpaRepository<SocialuniUserDo, 
     @Cacheable(cacheNames = CommonRedisKey.userById, key = "#id")
     SocialuniUserDo findOneByUnionId(Integer id);
 
-    @CachePut(cacheNames = CommonRedisKey.userById, key = "#user.unionId")
+    @Caching(
+            evict = {@CacheEvict(cacheNames = CommonRedisKey.findUserIdsByStatusOrderByUpdateTimeDesc, allEntries = true)},
+            put = {@CachePut(cacheNames = CommonRedisKey.userById,  key = "#user.unionId")}
+    )
     default SocialuniUserDo savePut(SocialuniUserDo user){
         return this.save(BeanUtil.toBean(user,SocialuniUserDo.class));
     }
-
 
     @Query(value = "select u from SocialuniUserDo u,SocialUserViolationDo su where u.status = :userStatus and u.id = su.userId and su.violationEndTime < :curDate")
     List<SocialuniUserDo> findCanUnfreezeViolationUser(@Param("userStatus") String userStatus, @Param("curDate") Date curDate);
 
     List<SocialuniUserDo> findTop10ByStatusOrderByIdDesc(@Param("userStatus") String userStatus);
 
+    @Cacheable(cacheNames = CommonRedisKey.findUserIdsByStatusOrderByUpdateTimeDesc)
     @Query("select s.userId from SocialuniUserDo s where s.status = :status order by s.updateTime desc")
     List<Integer> findUserIdsByStatusOrderByUpdateTimeDesc(String status);
 
