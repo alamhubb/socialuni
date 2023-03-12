@@ -1,19 +1,14 @@
 package com.socialuni.social.sdk.logic.service.bussiness;
 
-import com.socialuni.social.common.api.constant.ErrorCode;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.facade.SocialuniRepositoryFacade;
-import com.socialuni.social.sdk.constant.shell.ExpenseType;
-import com.socialuni.social.sdk.constant.shell.SocialuniCoinOrderType;
 import com.socialuni.social.sdk.dao.DO.bussiness.SocialuniCoinOrderDO;
 import com.socialuni.social.sdk.dao.DO.bussiness.SocialuniGetUserContactRecordDO;
 import com.socialuni.social.sdk.dao.factory.SocialuniCoinOrderFactory;
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserExpandDOUtil;
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserSocialCoinDOUtil;
 import com.socialuni.social.sdk.facade.SocialuniUserContactRepositoryFacede;
-import com.socialuni.social.sdk.facade.SocialuniUserRepositoryFacede;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserCoinDo;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
@@ -23,7 +18,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Optional;
 
 //获取对方联系方式，扣减金币，和给对方添加金币的逻辑
 @Service

@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.facade;
+package com.socialuni.social.user.sdk.facede;
 
 import com.socialuni.social.common.api.entity.SocialuniUserInfoBaseDO;
 import com.socialuni.social.common.sdk.facade.SocialuniRepositoryFacade;

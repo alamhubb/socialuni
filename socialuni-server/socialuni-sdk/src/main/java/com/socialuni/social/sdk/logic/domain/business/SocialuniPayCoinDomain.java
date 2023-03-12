@@ -15,7 +15,7 @@ import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.sdk.dao.DO.bussiness.SocialuniPayCoinOrderDO;
 import com.socialuni.social.sdk.model.QO.business.SocialuniPayCoinQO;
 import com.socialuni.social.sdk.model.QO.business.SocialuniCoinPayRO;
-import com.socialuni.social.sdk.utils.DateUtils;
+import com.socialuni.social.common.sdk.utils.DateUtils;
 import com.socialuni.social.user.sdk.constant.UniappProviderType;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.utils.AuthCodeUtil;

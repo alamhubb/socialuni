@@ -6,7 +6,6 @@ import com.socialuni.admin.web.manage.DevAuthCodeManage;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.utils.RequestUtil;
-import com.socialuni.social.sdk.facade.SocialuniUserRepositoryFacede;
 import com.socialuni.social.user.sdk.constant.UserType;
 import com.socialuni.social.user.sdk.logic.entity.SocialUserPhoneEntity;
 import com.socialuni.social.tance.entity.DevAccountEntity;

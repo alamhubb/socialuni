@@ -11,7 +11,7 @@ import com.socialuni.social.tance.config.AppConfigConst;
 import com.socialuni.social.user.sdk.repository.KeywordsRepository;
 import com.socialuni.social.user.sdk.repository.KeywordsTriggerDetailRepository;
 import com.socialuni.social.sdk.logic.factory.ReportFactory;
-import com.socialuni.social.sdk.utils.DateUtils;
+import com.socialuni.social.common.sdk.utils.DateUtils;
 import com.socialuni.social.sdk.utils.ReportDetailUtils;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;

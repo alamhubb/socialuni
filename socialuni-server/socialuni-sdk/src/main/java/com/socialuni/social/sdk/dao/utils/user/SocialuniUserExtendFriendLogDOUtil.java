@@ -1,7 +1,6 @@
 package com.socialuni.social.sdk.dao.utils.user;
 
-import com.socialuni.social.common.api.utils.RequestUtil;
-import com.socialuni.social.sdk.facade.SocialuniUserRepositoryFacede;
+import com.socialuni.social.user.sdk.facede.SocialuniUserRepositoryFacede;
 import com.socialuni.social.sdk.utils.SocialuniRequestUtil;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserExpandDo;
@@ -9,8 +8,6 @@ import com.socialuni.social.user.sdk.model.DO.SocialuniUserExtendFriendLogDo;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-
-import java.util.concurrent.CompletableFuture;
 
 @Component
 @Slf4j
