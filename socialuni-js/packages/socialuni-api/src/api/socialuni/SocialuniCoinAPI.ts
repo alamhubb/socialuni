@@ -1,4 +1,4 @@
-import request from '../../request/request';
+import request from '../../../socialuni-common-api/src/request/request';
 import UserPayResultVO from "socialuni-api/src/model/user/UserPayResultVO";
 import SocialuniPayCoinQO from "socialuni-api/src/model/user/SocialuniPayCoinQO";
 

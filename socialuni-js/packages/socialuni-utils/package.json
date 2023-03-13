@@ -1,0 +1,17 @@
+{
+  "name": "socialuni-utils",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "pinia": "^2.0.22",
+    "pinia-class-component": "^0.9.4",
+    "@dcloudio/types": "^3.0.17"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

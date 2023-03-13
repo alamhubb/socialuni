@@ -1,14 +1,14 @@
 import HttpRequest, {requestConfig} from "./httpRequest"
-import {socialLocationModule, socialSystemModule} from "socialuni-sdk/src/store/store"
+import {socialSystemModule} from "socialuni-utils/src/store/store"
 import {socialUserModule} from "socialuni-sdk/src/store/store"
-import ErrorConst from "socialuni-constant/constant/ErrorConst"
+import ErrorConst from "socialuni-common-constant/constant/ErrorConst"
 import UserService from "socialuni-sdk/src/service/UserService"
 import MsgUtil from "socialuni-sdk/src/utils/MsgUtil"
 import UniUtil from "socialuni-sdk/src/utils/UniUtil"
 import AlertUtil from "socialuni-sdk/src/utils/AlertUtil"
 import ObjectUtil from "socialuni-sdk/src/utils/ObjectUtil"
-import SocialuniConfig from "../config/SocialuniConfig";
-import SocialuniAppAPI from "../api/socialuni/SocialuniAppAPI";
+import SocialuniConfig from "../../../src/config/SocialuniConfig";
+import SocialuniAppAPI from "../../../src/api/socialuni/SocialuniAppAPI";
 import SocialuniRequestHeaderName from "socialuni-constant/constant/SocialuniRequestHeaderName";
 
 const request: HttpRequest = new HttpRequest()
@@ -37,11 +37,13 @@ request.interceptor.request((config: requestConfig) => { /* 请求之前拦截�
     config.header[SocialuniRequestHeaderName.system] = socialSystemModule.system
     config.header[SocialuniRequestHeaderName.platform] = socialSystemModule.platform
     config.header[SocialuniRequestHeaderName.provider] = socialSystemModule.provider
-    if (socialLocationModule.location && socialLocationModule.location.position) {
+
+    //放user里面
+    /*if (socialLocationModule.location && socialLocationModule.location.position) {
         config.header[SocialuniRequestHeaderName.socialuniCityAdCode] = socialLocationModule.location.adCode
         config.header[SocialuniRequestHeaderName.socialuniCityLon] = socialLocationModule.location.lon
         config.header[SocialuniRequestHeaderName.socialuniCityLat] = socialLocationModule.location.lat
-    }
+    }*/
 
     /* else {
       //如果未登录，只允许查询talk，其他全部提示要登录

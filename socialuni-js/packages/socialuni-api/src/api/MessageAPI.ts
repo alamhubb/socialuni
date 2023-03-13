@@ -2,7 +2,7 @@ import MessageAddVO from '../../../socialuni-api/src/model/message/MessageAddVO'
 import MessageQueryVO from '../../../socialuni-api/src/model/message/MessageQueryVO'
 import MsgDelete from '../../../socialuni-api/src/model/message/MsgDeleteVO'
 import MessageVO from 'socialuni-sdk/src/model/message/MessageVO'
-import request from "../request/request";
+import request from "../../socialuni-common-api/src/request/request";
 
 export default class MessageAPI {
     static sendMsgAPI<T>(chatId: string, content: string) {

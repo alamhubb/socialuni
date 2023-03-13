@@ -6,7 +6,7 @@ import DistrictVO from '../../model/DistrictVO'
 import TalkDeleteVO from '../../model/talk/TalkDeleteVO'
 import CommentDeleteVO from '../../model/comment/CommentDeleteVO'
 import TalkVO from '../../model/talk/TalkVO'
-import request from '../../request/request';
+import request from '../../../socialuni-common-api/src/request/request';
 import ImgAddQO from "socialuni-api/src/model/user/ImgAddQO";
 import DomFile from "socialuni-api/src/model/DomFile";
 import UserTalkQueryVO from "socialuni-api/src/model/user/UserTalkQueryVO";

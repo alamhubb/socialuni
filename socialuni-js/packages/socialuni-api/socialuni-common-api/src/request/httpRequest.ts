@@ -8,7 +8,7 @@
  * http://ext.dcloud.net.cn/plugin?id=392
  */
 import RequestOptions = UniApp.RequestOptions
-import ResultRO from "../model/social/ResultRO";
+import ResultRO from "../../../src/model/social/ResultRO";
 
 interface header { // header 接口
     'Content-Type'?: string;

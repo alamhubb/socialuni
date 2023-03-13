@@ -1,5 +1,5 @@
 import FollowAddVO from '../../model/FollowAddVO'
-import request from '../../request/request';
+import request from '../../../socialuni-common-api/src/request/request';
 import SocialuniPageQueryQO from "../../model/common/SocialuniPageQueryQO";
 import SocialUserContentRO from "../../model/social/SocialUserContentRO";
 import SocialUserFollowDetailRO from "../../model/social/SocialUserFollowDetailRO";

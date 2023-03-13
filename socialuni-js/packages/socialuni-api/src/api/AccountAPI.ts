@@ -1,4 +1,4 @@
-import request from '../request/request';
+import request from '../../socialuni-common-api/src/request/request';
 import UniProviderLoginQO from '../../src/model/login/UniProviderLoginQO'
 
 
