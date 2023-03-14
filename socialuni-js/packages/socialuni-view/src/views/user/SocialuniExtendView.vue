@@ -204,7 +204,6 @@ export default class SocialuniExtendView extends Vue {
     this.currentTabIndex = index
     if (this.tabsPageQueryUtil[this.currentTabIndex].queryQO.firstLoad) {
       this.startPulldownRefresh()
-      this.initQuery()
     }
   }
 
