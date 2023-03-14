@@ -7,95 +7,97 @@
       </template>
     </q-tabs>
     <div class="flex-1 overflow-hidden">
-      <swiper class="h100p" :current="currentTabIndex" @change="talkSwiperChange">
-        <swiper-item class="h100p" v-for="(item, swiperIndex) in tabsPageQueryUtil" :key="swiperIndex">
-          <scroll-view class="h100p overflow-hidden"
-                       :scroll-y="true" @scrolltolower="autoChooseUseLocationQueryTalks"
-                       :lower-threshold="400">
-            <div v-if="!item.queryQO.listData.length" class="row-all-center h100 color-content">
-              <div>暂无数据</div>
-            </div>
-            <template v-else>
-              <div v-if="mineUser && swiperIndex === 0" class="px-sm">
-                <div class="row-all-center color-main mt-sm chunk-default pd-xs">
-                  {{ mineUser.openContactInfo ? '下拉刷新将您的排名前置' : '开启联系方式您的信息将在此处展示' }}
-                </div>
+      <q-pull-refresh ref="pullRefresh" @refresh="manualPulldownRefresh" class="h100p">
+        <swiper class="h100p" :current="currentTabIndex" @change="talkSwiperChange">
+          <swiper-item class="h100p" v-for="(item, swiperIndex) in tabsPageQueryUtil" :key="swiperIndex">
+            <scroll-view class="h100p overflow-hidden"
+                         :scroll-y="true" @scrolltolower="autoChooseUseLocationQueryTalks"
+                         :lower-threshold="400">
+              <div v-if="!item.queryQO.listData.length" class="row-all-center h100 color-content">
+                <div>暂无数据</div>
               </div>
-              <div class="flex-col px-smm py-sm bb" v-for="user in item.queryQO.listData" :key="user.id"
-                   @click="toUserDetailVue(user)">
-                <div class="row-col-center">
-                  <image
-                      class="card-title-avatar bd flex-none"
-                      mode="aspectFill"
-                      :src="user.avatar"
-                  />
-                  <view class="flex-1 row-between-center py-xs">
-                    <div class="flex-col flex-1">
-                      <view class="row-col-center">
-                        <text :class="{'text-red':user.vipFlag}">{{ user.nickname }}</text>
-                        <view v-if="user.vipFlag" class="ml-5px cu-tag bg-orange radius sm"
-                              @click.stop="openVip">
-                          VIP
+              <template v-else>
+                <div v-if="mineUser && swiperIndex === 0" class="px-sm">
+                  <div class="row-all-center color-main mt-sm chunk-default pd-xs">
+                    {{ mineUser.openContactInfo ? '下拉刷新将您的排名前置' : '开启联系方式您的信息将在此处展示' }}
+                  </div>
+                </div>
+                <div class="flex-col px-smm py-sm bb" v-for="user in item.queryQO.listData" :key="user.id"
+                     @click="toUserDetailVue(user)">
+                  <div class="row-col-center">
+                    <image
+                        class="card-title-avatar bd flex-none"
+                        mode="aspectFill"
+                        :src="user.avatar"
+                    />
+                    <view class="flex-1 row-between-center py-xs">
+                      <div class="flex-col flex-1">
+                        <view class="row-col-center">
+                          <text :class="{'text-red':user.vipFlag}">{{ user.nickname }}</text>
+                          <view v-if="user.vipFlag" class="ml-5px cu-tag bg-orange radius sm"
+                                @click.stop="openVip">
+                            VIP
+                          </view>
+                          <social-gender-tag class="ml-xs" :user="user"></social-gender-tag>
                         </view>
-                        <social-gender-tag class="ml-xs" :user="user"></social-gender-tag>
-                      </view>
-                      <view class="row-col-center mt-xss font-12 color-content">
-                        {{ formatTime(user.lastOnlineTime) }}
-                        <div class="px-xs row-col-center">|</div>
-                        <!--        有市区的名称就不显示省的名称-->
-                        <text v-if="!user.cityName || !user.districtName">{{ user.provinceName }}</text>
-                        <text v-if="user.cityName">
-                          <text v-if="!user.districtName">-</text>
-                          {{ user.cityName }}
-                        </text>
-                        <text v-if="user.districtName">-{{ user.districtName }}</text>
-
-                        <view class="row-col-center" v-if="user.distance|| user.distance===0">
+                        <view class="row-col-center mt-xss font-12 color-content">
+                          {{ formatTime(user.lastOnlineTime) }}
                           <div class="px-xs row-col-center">|</div>
-                          <text v-if="user.distance<0.5">{{ 0.5 }}公里</text>
-                          <text v-else-if="user.distance<1">{{ 1 }}公里</text>
-                          <text v-else-if="user.distance<5">{{ 5 }}公里</text>
-                          <text v-else>{{ numFixed1(user.distance) }}公里</text>
+                          <!--        有市区的名称就不显示省的名称-->
+                          <text v-if="!user.cityName || !user.districtName">{{ user.provinceName }}</text>
+                          <text v-if="user.cityName">
+                            <text v-if="!user.districtName">-</text>
+                            {{ user.cityName }}
+                          </text>
+                          <text v-if="user.districtName">-{{ user.districtName }}</text>
+
+                          <view class="row-col-center" v-if="user.distance|| user.distance===0">
+                            <div class="px-xs row-col-center">|</div>
+                            <text v-if="user.distance<0.5">{{ 0.5 }}公里</text>
+                            <text v-else-if="user.distance<1">{{ 1 }}公里</text>
+                            <text v-else-if="user.distance<5">{{ 5 }}公里</text>
+                            <text v-else>{{ numFixed1(user.distance) }}公里</text>
+                          </view>
                         </view>
+                      </div>
+
+                      <view class="col-center flex-none">
+                        <div v-if="user.openContactInfo" class="use-click row-col-center">
+                          <q-button light @click="copyContactInfo">
+                            <div class="color-content ml-xs font-12">
+                              已获取( 点击复制 )
+                            </div>
+                          </q-button>
+                        </div>
+                        <div v-else class="use-click row-col-center">
+                          <q-button text @click="getOpenContactInfo(user)" :disabled="showUserContactBtnDisabled">
+                            <q-icon prefix="uni-icons" icon="uniui-personadd" size="22"></q-icon>
+                          </q-button>
+                        </div>
+                        <!--                    <socialuni-follow-tag :user="user" @change="userFollowChange"></socialuni-follow-tag>-->
                       </view>
-                    </div>
 
-                    <view class="col-center flex-none">
-                      <div v-if="user.openContactInfo" class="use-click row-col-center">
-                        <q-button light @click="copyContactInfo">
-                          <div class="color-content ml-xs font-12">
-                            已获取( 点击复制 )
-                          </div>
-                        </q-button>
-                      </div>
-                      <div v-else class="use-click row-col-center">
-                        <q-button text @click="getOpenContactInfo(user)" :disabled="showUserContactBtnDisabled">
-                          <q-icon prefix="uni-icons" icon="uniui-personadd" size="22"></q-icon>
-                        </q-button>
-                      </div>
-                      <!--                    <socialuni-follow-tag :user="user" @change="userFollowChange"></socialuni-follow-tag>-->
                     </view>
-
+                  </div>
+                  <view class="ml-60 row-col-center mt-xs">
+                    <image v-for="img in imgUrls(user).slice(0,3)" class="size40 bd-radius bd mr-sm"
+                           mode="aspectFill"
+                           :data-src="img"
+                           @click.stop="previewImage(img,user)"
+                           :src="img"
+                    ></image>
                   </view>
                 </div>
-                <view class="ml-60 row-col-center mt-xs">
-                  <image v-for="img in imgUrls(user).slice(0,3)" class="size40 bd-radius bd mr-sm"
-                         mode="aspectFill"
-                         :data-src="img"
-                         @click.stop="previewImage(img,user)"
-                         :src="img"
-                  ></image>
+                <view class="mt-xs">
+                  <uni-load-more :status="item.queryQO.loadMore"
+                                 @click="clickOnreachBottom"
+                                 :contentText="loadMoreText"></uni-load-more>
                 </view>
-              </div>
-              <view class="mt-xs">
-                <uni-load-more :status="item.queryQO.loadMore"
-                               @click="clickOnreachBottom"
-                               :contentText="loadMoreText"></uni-load-more>
-              </view>
-            </template>
-          </scroll-view>
-        </swiper-item>
-      </swiper>
+              </template>
+            </scroll-view>
+          </swiper-item>
+        </swiper>
+      </q-pull-refresh>
     </div>
   </view>
 </template>
@@ -131,11 +133,16 @@ import NumUtil from "socialuni-sdk/src/utils/NumUtil";
 import DateUtil from "socialuni-sdk/src/utils/DateUtil";
 import SocialuniUserExtendDetailRO from "socialuni-api/src/model/social/SocialuniUserExtendDetailRO";
 import ImgUtil from "socialuni-sdk/src/utils/ImgUtil";
+import QPullRefresh from "../../components/QPullRefresh/QPullRefresh.vue";
 
 @Options({
-  components: {QButton, QIcon, SocialuniFollowTag, SocialGenderTag, QTabs}
+  components: {QPullRefresh, QButton, QIcon, SocialuniFollowTag, SocialGenderTag, QTabs}
 })
-export default class SocialuniFollowView extends Vue {
+export default class SocialuniExtendView extends Vue {
+  $refs:{
+    pullRefresh:QPullRefresh
+  }
+
   tabs = SocialuniUserExtendFriendsType.allTypes
   tabsPageQueryUtil: SocialuniPageQueryUtil<SocialuniUserExtendDetailRO, SocialuniUserExtendFriendQueryQO>[] = [new SocialuniPageQueryUtil(), new SocialuniPageQueryUtil()]
   currentTabIndex = 0
@@ -147,15 +154,13 @@ export default class SocialuniFollowView extends Vue {
   }
   showUserContactBtnDisabled: boolean = false
 
+
+  async manualPulldownRefresh() {
+    await this.initQuery()
+  }
+
   created() {
     this.tabsPageQueryUtil = [new SocialuniPageQueryUtil(SocialuniUserExpandAPI.queryExtendFriendUsersAPI), new SocialuniPageQueryUtil(SocialuniUserExpandAPI.queryExtendFriendUsersAPI)]
-
-    onPullDownRefresh(async () => {
-      await this.initQuery()
-    })
-    onReachBottom(() => {
-      this.autoChooseUseLocationQueryTalks()
-    })
 
     onLoad((params: { followType: string }) => {
       if (params) {
@@ -166,16 +171,24 @@ export default class SocialuniFollowView extends Vue {
         }
       }
       this.$nextTick(() => {
-        uni.startPullDownRefresh({})
+        this.startPulldownRefresh()
       })
     })
   }
+
+  startPulldownRefresh(){
+    this.$refs.pullRefresh.startPulldownRefresh()
+  }
+  endPulldownRefresh(){
+    this.$refs.pullRefresh.endPulldownRefresh()
+  }
+
 
   async initQuery() {
     const queryData = new SocialuniUserExtendFriendQueryQO(this.tabs[this.currentTabIndex]);
     console.log(queryData)
     await this.tabsPageQueryUtil[this.currentTabIndex].initQuery(queryData)
-    uni.stopPullDownRefresh()
+    this.endPulldownRefresh()
   }
 
   openVip() {
@@ -190,7 +203,7 @@ export default class SocialuniFollowView extends Vue {
   tabsChange(index) {
     this.currentTabIndex = index
     if (this.tabsPageQueryUtil[this.currentTabIndex].queryQO.firstLoad) {
-      uni.startPullDownRefresh({})
+      this.startPulldownRefresh()
       this.initQuery()
     }
   }

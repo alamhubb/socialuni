@@ -15,8 +15,7 @@
     {
       "path": "pages/user/extend",
       "style": {
-        "navigationBarTitleText": "扩列",
-        "enablePullDownRefresh": true
+        "navigationBarTitleText": "扩列"
       }
     },
     {
@@ -111,9 +110,7 @@
         {
           "path": "user/follow",
           "style": {
-            "navigationBarTitleText": "关注列表",
-            "enablePullDownRefresh": true,
-            "onReachBottomDistance": 100
+            "navigationBarTitleText": "关注列表"
           }
         },
         {
@@ -126,8 +123,7 @@
         {
           "path": "user/coinRecord",
           "style": {
-            "navigationBarTitleText": "贝壳记录",
-            "enablePullDownRefresh": true
+            "navigationBarTitleText": "贝壳记录"
           }
         }
       ]
