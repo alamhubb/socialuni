@@ -3,6 +3,7 @@ package com.socialuni.social.user.sdk.logic.domain;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
+import com.socialuni.social.user.sdk.dao.utils.SocialuniUserDOUtil;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.QO.SocialUserEditQO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
@@ -27,15 +28,12 @@ public class SocialEditUserDomain {
         String nickname = socialUserEditQO.getNickname();
         if (StringUtils.isEmpty(nickname)) {
             throw new SocialBusinessException("昵称不能为空");
-        }
-        if (nickname.length() > 6) {
-            throw new SocialBusinessException("昵称长度不能大于6");
         } else {
             String oldNickname = mineUser.getNickname();
             //新旧昵称不一样，则更新
             if (!nickname.equals(oldNickname)) {
                 SocialuniTextContentUtil.checkTextHasUnderageAndContactAndViolateWords(nickname);
-                mineUser.setNickname(StringUtils.substring(nickname, 0, 6));
+                mineUser.setNickname(nickname);
             }
         }
 
@@ -50,32 +48,22 @@ public class SocialEditUserDomain {
         if (StringUtils.isNotEmpty(birthday)) {
             mineUser.setBirthday(birthday);
             int age = BirthdayAgeUtil.getAgeByBirth(birthday);
-            if (age < 18) {
-                throw new SocialBusinessException("年龄不能小于18岁");
-            } else if (age > 50) {
-                //临时解决方案，初始时间1970 如果小于1970注册im系统会存在问题
-                throw new SocialBusinessException("年龄不能大于50岁");
-            }
-            mineUser.setAge(BirthdayAgeUtil.getAgeByBirth(birthday));
+            mineUser.setAge(age);
         }
 
         String userCity = socialUserEditQO.getCity();
         //保存地区名
         if (StringUtils.isNotEmpty(userCity)) {
-            if (userCity.length() > 10) {
-                throw new SocialBusinessException("市县区名称长度不能大于10");
-            } else {
-                String oldCity = mineUser.getCity();
-                //新旧昵称不一样，则更新
-                if (!userCity.equals(oldCity)) {
-                    SocialuniTextContentUtil.checkTextHasUnderageAndContactAndViolateWords(userCity);
-                    mineUser.setCity(userCity);
-                }
+            String oldCity = mineUser.getCity();
+            //新旧昵称不一样，则更新
+            if (!userCity.equals(oldCity)) {
+                SocialuniTextContentUtil.checkTextHasUnderageAndContactAndViolateWords(userCity);
+                mineUser.setCity(userCity);
             }
         }
         mineUser.setUpdateTime(new Date());
 
-        mineUser = userApi.savePut(mineUser);
+        mineUser = SocialuniUserDOUtil.save(mineUser);
 
         SocialuniUserRO socialuniUserRO = SocialuniUserROFactory.getUserRO(mineUser, mineUser);
         return socialuniUserRO;
