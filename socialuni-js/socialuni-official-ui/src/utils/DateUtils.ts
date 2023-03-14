@@ -10,7 +10,7 @@ export default class DateUtils {
   static getWeekday(dateStr: string | Date | number): number {
     let curDate = new Date()
     if (dateStr) {
-      curDate = new Date(dateStr)
+      curDate = new Date(dateStr as any)
     }
     const day = curDate.getDay()
     return day === 0 ? 7 : day
@@ -24,7 +24,7 @@ export default class DateUtils {
   static getMonthDay(dateStr: string | Date | number): number {
     let curDate = new Date()
     if (dateStr) {
-      curDate = new Date(dateStr)
+      curDate = new Date(dateStr as any)
     }
     return Number(parseTime(curDate, '{d}'))
   }
@@ -33,7 +33,7 @@ export default class DateUtils {
   static getMonAllDayNum(dateStr: string | Date | number): number {
     let curDate = new Date()
     if (dateStr) {
-      curDate = new Date(dateStr)
+      curDate = new Date(dateStr as any)
     }
     const date = new Date(curDate.getFullYear(), curDate.getMonth() + 1, 0)
     return this.getMonthDay(date)
