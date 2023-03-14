@@ -456,7 +456,7 @@ export default class TabsTalk extends Vue {
   async talkSwiperChange(e) {
     const current = e.detail.current
     //首次加载可能为空
-    if (current) {
+    if (current || current === 0) {
       const curTab = socialTalkModule.setCurTabIndexUpdateCircle(current)
       // 存入store
       // 切换时截取其他的只保留后20条
@@ -467,7 +467,6 @@ export default class TabsTalk extends Vue {
           item.loadMore = LoadMoreType.more
         }
       })
-      console.log(curTab.firstLoad)
       //如果首次加载，则需要查询
       if (curTab.firstLoad) {
         this.startPullDown()
