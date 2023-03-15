@@ -1,23 +1,23 @@
 {
   "name": "socialuni-view",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "socialuni-api": "1.0.0",
-    "socialuni-sdk": "1.0.0",
-    "socialuni-constant": "1.0.0",
-    "vue": "3.2.41",
-    "pinia": "^2.0.22",
-    "pinia-class-component": "^0.9.4",
-    "vue-class-component": "^8.0.0-rc.1",
-    "vue-property-decorator": "^10.0.0-rc.3",
     "@dcloudio/types": "^3.0.17",
     "@dcloudio/uni-app": "3.0.0-3070320230222002",
-    "@dcloudio/uni-ui": "^1.4.23"
+    "@dcloudio/uni-ui": "^1.4.23",
+    "pinia": "^2.0.22",
+    "pinia-class-component": "^0.9.4",
+    "socialuni-api": "^0.1.0",
+    "socialuni-constant": "^0.1.0",
+    "socialuni-sdk": "^0.1.0",
+    "vue": "3.2.41",
+    "vue-class-component": "^8.0.0-rc.1",
+    "vue-property-decorator": "^10.0.0-rc.3"
   },
   "keywords": [],
   "author": "",
