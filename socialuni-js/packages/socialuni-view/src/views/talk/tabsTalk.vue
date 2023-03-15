@@ -13,108 +13,111 @@
         <q-icon icon="list-dot" size="20" @click="openTalkFilterDialog"></q-icon>
       </div>
     </div>
-    <q-pull-refresh ref="pullRefresh" @refresh="manualPulldownRefresh" class="flex-1 overflow-hidden">
-      <swiper :current="currentTabIndex" class="h100p"
-              @change="talkSwiperChange">
-        <swiper-item class="h100p" v-for="(item, swiperIndex) in talkTabs" :key="swiperIndex">
-          <!--
-          使用view实现的问题，没有scroll事件小程序上
-          <view class="h100p bg-default" :class="[scrollEnable?'overflow-scroll':'overflow-hidden']" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
-                :lower-threshold="800"
-                @scroll.native="talksScrollEvent"
-                @scroll="talksScrollEvent"
-          >-->
 
-          <!--          首页展示区分不同类型，
-                    圈子类型、关注类型、首页类型、同城类型-->
-          <scroll-view class="h100p bd-radius-10 mx-sm overflow-hidden" style="width: calc(100% - 20px)"
-                       :scroll-y="true" @scrolltolower="autoChooseUseLocationQueryTalks"
-                       :scroll-top="talkTabs[swiperIndex].pageScrollTop"
-                       :lower-threshold="800"
-                       @scroll="talksScrollEvent">
-            <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
-            <div class="pb-60"
-                 v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].name !== followTabName">
-              <talk-swipers v-if="talkTabs[swiperIndex].name === homeTabName && configShowSwipers"></talk-swipers>
+    <div class="flex-1 overflow-hidden">
+      <q-pull-refresh ref="pullRefresh" @refresh="manualPulldownRefresh" class="h100p">
+        <swiper :current="currentTabIndex" class="h100p"
+                @change="talkSwiperChange">
+          <swiper-item class="h100p" v-for="(item, swiperIndex) in talkTabs" :key="swiperIndex">
+            <!--
+            使用view实现的问题，没有scroll事件小程序上
+            <view class="h100p bg-default" :class="[scrollEnable?'overflow-scroll':'overflow-hidden']" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
+                  :lower-threshold="800"
+                  @scroll.native="talksScrollEvent"
+                  @scroll="talksScrollEvent"
+            >-->
+
+            <!--          首页展示区分不同类型，
+                      圈子类型、关注类型、首页类型、同城类型-->
+            <scroll-view class="h100p bd-radius-10 mx-sm overflow-hidden" style="width: calc(100% - 20px)"
+                         :scroll-y="true" @scrolltolower="autoChooseUseLocationQueryTalks"
+                         :scroll-top="talkTabs[swiperIndex].pageScrollTop"
+                         :lower-threshold="800"
+                         @scroll="talksScrollEvent">
+              <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
+              <div class="pb-60"
+                   v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].name !== followTabName">
+                <talk-swipers v-if="talkTabs[swiperIndex].name === homeTabName && configShowSwipers"></talk-swipers>
 
 
-              <div class="card mb-sm elevation-4 px-sm" v-if="talkTabs[swiperIndex].circle">
-                <!--                创建自己的圈子-->
-                <div class="row-between-center">
-                  <div>{{ talkTabs[swiperIndex].name }}圈</div>
-                  <!--                    圈主：客服-->
-                  <div class="q-tag use-click" @click="joinCircleGroupChat(talkTabs[swiperIndex].circle)">进入群聊
+                <div class="card mb-sm elevation-4 px-sm" v-if="talkTabs[swiperIndex].circle">
+                  <!--                创建自己的圈子-->
+                  <div class="row-between-center">
+                    <div>{{ talkTabs[swiperIndex].name }}圈</div>
+                    <!--                    圈主：客服-->
+                    <div class="q-tag use-click" @click="joinCircleGroupChat(talkTabs[swiperIndex].circle)">进入群聊
+                    </div>
+                    <!--                  显示圈主，如果没有圈主，则显示，此圈没有圈主，申请成为圈主-->
                   </div>
-                  <!--                  显示圈主，如果没有圈主，则显示，此圈没有圈主，申请成为圈主-->
+                  <!--                <div>处对象圈子介绍</div>-->
                 </div>
-                <!--                <div>处对象圈子介绍</div>-->
-              </div>
 
-              <!--              <div v-else-if="talkTabs[swiperIndex].type === 'circle'" class="card mb-sm elevation-4 px">
-                              <div class="row-between-center mb-sm">
-                                <div>
-                                  圈主：xxxx
+                <!--              <div v-else-if="talkTabs[swiperIndex].type === 'circle'" class="card mb-sm elevation-4 px">
+                                <div class="row-between-center mb-sm">
+                                  <div>
+                                    圈主：xxxx
+                                  </div>
+                                  <div class="row-col-center">
+                                    <div class="color-sub">竞选详情</div>
+                                    <div class="color-sub ml-md">圈子管理</div>
+                                  </div>
                                 </div>
                                 <div class="row-col-center">
-                                  <div class="color-sub">竞选详情</div>
-                                  <div class="color-sub ml-md">圈子管理</div>
+                                  小圈主：胺分散法，撒飞洒地方，阿斯蒂芬阿萨德，士大夫撒地方，
                                 </div>
-                              </div>
-                              <div class="row-col-center">
-                                小圈主：胺分散法，撒飞洒地方，阿斯蒂芬阿萨德，士大夫撒地方，
-                              </div>
-                            </div>-->
+                              </div>-->
 
 
-              <view v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
-                <talk-item :talk="talk"
-                           :talk-tab-type="curTalkTabObj.type"
-                           @delete-talk="deleteTalk"
-                />
-                <!-- app端广告有问题-->
-                <!--  #ifdef APP-PLUS -->
-                <!--<view v-if="showAd&&showAdIndexList.includes(index)" class="mb-5">
-                  <ad class="bg-white" adpid="1890536227"></ad>
-                </view>-->
-                <!--  #endif -->
-                <!--wx平台显示的广告-->
-                <!--  #ifdef MP-WEIXIN -->
-                <ad v-if="showAd&&showAdIndexList.includes(index)"
-                    class="bg-white mb-5" unit-id="adunit-65c8911d279d228f" ad-type="video" ad-theme="white"></ad>
-                <!--  #endif -->
+                <view v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
+                  <talk-item :talk="talk"
+                             :talk-tab-type="curTalkTabObj.type"
+                             @delete-talk="deleteTalk"
+                  />
+                  <!-- app端广告有问题-->
+                  <!--  #ifdef APP-PLUS -->
+                  <!--<view v-if="showAd&&showAdIndexList.includes(index)" class="mb-5">
+                    <ad class="bg-white" adpid="1890536227"></ad>
+                  </view>-->
+                  <!--  #endif -->
+                  <!--wx平台显示的广告-->
+                  <!--  #ifdef MP-WEIXIN -->
+                  <ad v-if="showAd&&showAdIndexList.includes(index)"
+                      class="bg-white mb-5" unit-id="adunit-65c8911d279d228f" ad-type="video" ad-theme="white"></ad>
+                  <!--  #endif -->
 
-                <!--qq平台显示的广告-->
-                <!--  #ifdef MP-QQ -->
-                <ad v-if="showAd&&showAdIndexList.includes(index)"
-                    class="bg-white mb-5" unit-id="bcc21923107071ac3f8aa076c7e00229" type="card"></ad>
-                <!--  #endif -->
+                  <!--qq平台显示的广告-->
+                  <!--  #ifdef MP-QQ -->
+                  <ad v-if="showAd&&showAdIndexList.includes(index)"
+                      class="bg-white mb-5" unit-id="bcc21923107071ac3f8aa076c7e00229" type="card"></ad>
+                  <!--  #endif -->
 
-                <!--头条平台显示的广告-->
-                <!--  #ifdef MP-TOUTIAO -->
-                <ad v-if="showAd&&showAdIndexList.includes(index)"
-                    class="bg-white mb-5" type="banner video large" unit-id="3snract0gqnc3fn16d"></ad>
-                <!--  #endif -->
-              </view>
+                  <!--头条平台显示的广告-->
+                  <!--  #ifdef MP-TOUTIAO -->
+                  <ad v-if="showAd&&showAdIndexList.includes(index)"
+                      class="bg-white mb-5" type="banner video large" unit-id="3snract0gqnc3fn16d"></ad>
+                  <!--  #endif -->
+                </view>
 
-              <!-- 下拉刷新组件 -->
-              <view class="mt-xs">
-                <uni-load-more :status="talkTabs[swiperIndex].loadMore"
-                               @click="clickOnreachBottom"
-                               :contentText="loadMoreText"></uni-load-more>
-              </view>
-            </div>
-            <template v-else>
-              <view v-if="user" class="row-center h500 pt-100 font-bold text-gray text-md">
-                您还没有关注其他人
-              </view>
-              <view v-else class="row-center h500 pt-100 font-bold text-gray text-md" @click="toLoginVue">
-                您还没有登录，点击登录
-              </view>
-            </template>
-          </scroll-view>
-        </swiper-item>
-      </swiper>
-    </q-pull-refresh>
+                <!-- 下拉刷新组件 -->
+                <view class="mt-xs">
+                  <uni-load-more :status="talkTabs[swiperIndex].loadMore"
+                                 @click="clickOnreachBottom"
+                                 :contentText="loadMoreText"></uni-load-more>
+                </view>
+              </div>
+              <template v-else>
+                <view v-if="user" class="row-center h500 pt-100 font-bold text-gray text-md">
+                  您还没有关注其他人
+                </view>
+                <view v-else class="row-center h500 pt-100 font-bold text-gray text-md" @click="toLoginVue">
+                  您还没有登录，点击登录
+                </view>
+              </template>
+            </scroll-view>
+          </swiper-item>
+        </swiper>
+      </q-pull-refresh>
+    </div>
     <!--            从附近哪里选择城市-->
     <!--            搜索栏左边加个筛选按钮可以筛选性别年龄-->
     <!--            除去搜索栏和导航栏的高度就是剩余高度-->
