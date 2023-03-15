@@ -18,7 +18,7 @@ public class SocialuniUserDetailRO extends SocialuniUserFollowInfoRO {
     private Integer hugNum;
     //每天可以点赞，今天是否赞过
     private Boolean hasHugged;
-    private Date lastOnlineTime;
+    private Date updateTime;
     private String contactInfo;
     //为他人详情是，则意义为是否已经拥有查看用户联系方式的权限
     private Boolean openContactInfo;
@@ -29,7 +29,7 @@ public class SocialuniUserDetailRO extends SocialuniUserFollowInfoRO {
         this.schoolName = userRO.getSchoolName();
         this.contactInfo = userRO.getContactInfo();
         this.openContactInfo = userRO.getOpenContactInfo();
-        this.lastOnlineTime = userRO.getLastOnlineTime();
+        this.updateTime = userRO.getUpdateTime();
     }
 
     public SocialuniUserDetailRO(SocialuniUserFollowInfoRO centerUserFollowDetailRO) {

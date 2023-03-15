@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface SocialuniUserExtendFriendLogRepository extends JpaRepository<SocialuniUserExtendFriendLogDo, Integer> {
 
-    @Query("select s.userId from SocialuniUserExtendFriendLogDo s where s.updateTime>=:updateTime and s.updateTime<:queryTime")
-    List<Integer> findUserIdByUpdateTimeLessThan(Date updateTime,Date queryTime);
+    @Query("select s.userId from SocialuniUserExtendFriendLogDo s where s.updateTime>=:updateTime")
+    List<Integer> findUserIdByUpdateTimeLessThan(Date updateTime);
 }
 

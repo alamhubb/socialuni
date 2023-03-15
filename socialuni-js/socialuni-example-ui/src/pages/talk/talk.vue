@@ -14,10 +14,5 @@ import TalkView from "socialuni-view/src/views/talk/TalkView.vue"
   }
 })
 export default class TalkPage extends Vue {
-	
-	created(){
-		const socialuni = uniCloud.importObject('socialuni-api')
-		socialuni.main({dd:123})
-	}
 }
 </script>

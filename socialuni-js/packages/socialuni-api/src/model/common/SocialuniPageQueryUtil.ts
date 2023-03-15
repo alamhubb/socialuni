@@ -14,24 +14,20 @@ export default class SocialuniPageQueryUtil<T extends SocialuniContentRO, Q> {
     }
 
     async initQuery(queryData?: Q) {
-        let lastQueryData = this.queryQO.queryData
-        this.queryQO = new SocialuniPageQueryQO()
+        this.queryQO.firstLoad = true
+        this.queryQO.queryTime = new Date()
         if (queryData) {
-            lastQueryData = queryData
-        }
-        if (lastQueryData) {
-            this.queryQO.queryData = lastQueryData
+            this.queryQO.queryData = queryData
         }
         this.queryQO.loadMore = LoadMoreType.loading
         try {
-            console.log(this.queryQO)
             const res = await this.api(this.queryQO)
             this.queryQO.firstLoad = false
             this.queryQO.listData = res.data
             this.queryQO.loadMore = LoadMoreType.noMore
             if (res.data.length) {
                 this.queryQO.queryTime = res.data[res.data.length - 1].updateTime
-                if (res.data.length > 10) {
+                if (res.data.length >= this.queryQO.pageSize) {
                     this.queryQO.loadMore = LoadMoreType.more
                 }
             }
@@ -57,7 +53,7 @@ export default class SocialuniPageQueryUtil<T extends SocialuniContentRO, Q> {
             this.queryQO.loadMore = LoadMoreType.noMore
             if (res.data.length) {
                 this.queryQO.queryTime = res.data[res.data.length - 1].updateTime
-                if (res.data.length > 10) {
+                if (res.data.length >= this.queryQO.pageSize) {
                     this.queryQO.loadMore = LoadMoreType.more
                 }
             }

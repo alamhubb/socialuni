@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "@dcloudio/types": "^3.0.17",
-    "@dcloudio/uni-app": "3.0.0-alpha-3060820221027002",
+    "@dcloudio/uni-app": "3.0.0-3061520221228001",
     "@dcloudio/uni-ui": "^1.4.23",
     "pinia": "^2.0.22",
     "pinia-class-component": "^0.9.4",

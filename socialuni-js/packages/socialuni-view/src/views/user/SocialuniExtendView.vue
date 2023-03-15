@@ -32,16 +32,34 @@
                     />
                     <view class="flex-1 row-between-center py-xs">
                       <div class="flex-col flex-1">
-                        <view class="row-col-center">
-                          <text :class="{'text-red':user.vipFlag}">{{ user.nickname }}</text>
-                          <view v-if="user.vipFlag" class="ml-5px cu-tag bg-orange radius sm"
-                                @click.stop="openVip">
-                            VIP
+                        <view class="row-between-center">
+                          <div class="row-col-center">
+                            <text :class="{'text-red':user.vipFlag}">{{ user.nickname }}</text>
+                            <view v-if="user.vipFlag" class="ml-5px cu-tag bg-orange radius sm"
+                                  @click.stop="openVip">
+                              VIP
+                            </view>
+                            <social-gender-tag class="ml-xs" :user="user"></social-gender-tag>
+                          </div>
+
+                          <view class="col-center flex-none">
+                            <div v-if="user.openContactInfo" class="use-click row-col-center">
+                              <q-button light @click="copyContactInfo(user)">
+                                <div class="color-content ml-xs font-12">
+                                  已获取( 点击复制 )
+                                </div>
+                              </q-button>
+                            </div>
+                            <div v-else class="use-click row-col-center">
+                              <q-button text @click="getOpenContactInfo(user)" :disabled="showUserContactBtnDisabled">
+                                <q-icon prefix="uni-icons" icon="uniui-personadd" size="22"></q-icon>
+                              </q-button>
+                            </div>
+                            <!--                    <socialuni-follow-tag :user="user" @change="userFollowChange"></socialuni-follow-tag>-->
                           </view>
-                          <social-gender-tag class="ml-xs" :user="user"></social-gender-tag>
                         </view>
                         <view class="row-col-center mt-xss font-12 color-content">
-                          {{ formatTime(user.lastOnlineTime) }}
+                          {{ formatTime(user.updateTime) }}
                           <div class="px-xs row-col-center">|</div>
                           <!--        有市区的名称就不显示省的名称-->
                           <text v-if="!user.cityName || !user.districtName">{{ user.provinceName }}</text>
@@ -60,23 +78,6 @@
                           </view>
                         </view>
                       </div>
-
-                      <view class="col-center flex-none">
-                        <div v-if="user.openContactInfo" class="use-click row-col-center">
-                          <q-button light @click="copyContactInfo">
-                            <div class="color-content ml-xs font-12">
-                              已获取( 点击复制 )
-                            </div>
-                          </q-button>
-                        </div>
-                        <div v-else class="use-click row-col-center">
-                          <q-button text @click="getOpenContactInfo(user)" :disabled="showUserContactBtnDisabled">
-                            <q-icon prefix="uni-icons" icon="uniui-personadd" size="22"></q-icon>
-                          </q-button>
-                        </div>
-                        <!--                    <socialuni-follow-tag :user="user" @change="userFollowChange"></socialuni-follow-tag>-->
-                      </view>
-
                     </view>
                   </div>
                   <view class="ml-60 row-col-center mt-xs">
@@ -139,8 +140,8 @@ import QPullRefresh from "../../components/QPullRefresh/QPullRefresh.vue";
   components: {QPullRefresh, QButton, QIcon, SocialuniFollowTag, SocialGenderTag, QTabs}
 })
 export default class SocialuniExtendView extends Vue {
-  $refs:{
-    pullRefresh:QPullRefresh
+  $refs: {
+    pullRefresh: QPullRefresh
   }
 
   tabs = SocialuniUserExtendFriendsType.allTypes
@@ -176,18 +177,21 @@ export default class SocialuniExtendView extends Vue {
     })
   }
 
-  startPulldownRefresh(){
+  startPulldownRefresh() {
     this.$refs.pullRefresh.startPulldownRefresh()
   }
-  endPulldownRefresh(){
+
+  endPulldownRefresh() {
     this.$refs.pullRefresh.endPulldownRefresh()
   }
 
 
   async initQuery() {
     const queryData = new SocialuniUserExtendFriendQueryQO(this.tabs[this.currentTabIndex]);
-    console.log(queryData)
     await this.tabsPageQueryUtil[this.currentTabIndex].initQuery(queryData)
+    for (const listDatum of this.tabsPageQueryUtil[this.currentTabIndex].queryQO.listData) {
+      listDatum.getUserContactBtnDisabled = false
+    }
     this.endPulldownRefresh()
   }
 
@@ -212,8 +216,11 @@ export default class SocialuniExtendView extends Vue {
     this.tabsChange(e.detail.current)
   }
 
-  autoChooseUseLocationQueryTalksHandler() {
-    this.tabsPageQueryUtil[this.currentTabIndex].nextPageQuery()
+  async autoChooseUseLocationQueryTalksHandler() {
+    await this.tabsPageQueryUtil[this.currentTabIndex].nextPageQuery()
+    for (const listDatum of this.tabsPageQueryUtil[this.currentTabIndex].queryQO.listData) {
+      listDatum.getUserContactBtnDisabled = false
+    }
   }
 
   autoChooseUseLocationQueryTalks = CommonUtil.debounce(() => {
@@ -254,11 +261,11 @@ export default class SocialuniExtendView extends Vue {
 
   async getOpenContactInfo(user: CenterUserDetailRO) {
     //打开获取对方联系方式功能，支付贝壳
-    this.showUserContactBtnDisabled = true
+    user.getUserContactBtnDisabled = true
     try {
       await socialUserModule.getOpenContactInfo(user)
     } finally {
-      this.showUserContactBtnDisabled = false
+      user.getUserContactBtnDisabled = false
     }
   }
 

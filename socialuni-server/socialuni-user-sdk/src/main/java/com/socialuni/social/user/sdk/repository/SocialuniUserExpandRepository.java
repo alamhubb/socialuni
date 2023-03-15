@@ -8,6 +8,7 @@ import org.springframework.cache.annotation.Caching;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.Date;
 import java.util.List;
 
 public interface SocialuniUserExpandRepository extends JpaRepository<SocialuniUserExpandDo, Integer> {
@@ -22,8 +23,8 @@ public interface SocialuniUserExpandRepository extends JpaRepository<SocialuniUs
     }
 
 
-    @Query("select s.userId from SocialuniUserExpandDo s where s.openContactInfo = true order by s.updateTime desc")
-    List<Integer> findUserIdsByOpenContactInfoOrderByUpdateTimeDesc();
+    @Query("select s.userId from SocialuniUserExpandDo s where s.openContactInfo = true and s.lastOnlineTime<:queryTime order by s.lastOnlineTime desc")
+    List<Integer> findUserIdsByOpenContactInfoOrderByLastOnlineTimeDesc(Date queryTime);
 
 }
 

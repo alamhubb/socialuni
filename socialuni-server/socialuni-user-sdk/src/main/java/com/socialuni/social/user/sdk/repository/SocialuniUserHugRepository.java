@@ -11,7 +11,7 @@ public interface SocialuniUserHugRepository extends JpaRepository<SocialuniUserH
 
     //按赞的数量排序
 
-    @Query("select s.userId from SocialuniUserHugDo s order by s.hugNum desc,s.updateTime desc ")
+    @Query(nativeQuery = true, value = "select s.user_id from s_user_hug s order by s.hug_num desc,s.updateTime desc ")
     List<Integer> findUserIdsOrderByHugNum();
 }
 

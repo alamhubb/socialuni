@@ -77,6 +77,10 @@ public class SocialuniUserExpandService {
         SocialuniUserExtendFriendLogDOUtil.createUserExtendFriendLog();
 
         List<Integer> pageTypeUserIds = null;
+        //查询本周内上线的用户
+        Date curDate = new Date();
+        long lastWeekTime = curDate.getTime() - DateTimeType.week;
+        Date lastWeekDate = new Date(lastWeekTime);
         //赞个人主页。本周内获得赞最多的吗，就先上线一个最近的。
         if (pageType.equals(SocialuniUserExtendFriendsPageType.hot)) {
             //热门id列表, 然后把他们的赞排序
@@ -104,24 +108,23 @@ public class SocialuniUserExpandService {
             if (!StringUtils.isEmpty(adCode)) {
                 pageTypeUserIds = socialuniUserExtendLogRepository.findUserIdsByLickAdCode(adCode);
             }
+        }else if (pageType.equals(SocialuniUserExtendFriendsPageType.recently)) {
+            //周id列表, 一周内使用过此功能的用户，你最近没用过这个功能，没必要展示你
+            pageTypeUserIds = socialuniUserExtendFriendLogRepository.findUserIdByUpdateTimeLessThan(lastWeekDate);
         }
-        //查询本周内上线的用户
-        Date curDate = new Date();
-        long lastWeekTime = curDate.getTime() - DateTimeType.week;
-        Date lastWeekDate = new Date(lastWeekTime);
-        //周id列表
-        List<Integer> weekUserIds = socialuniUserExtendFriendLogRepository.findUserIdByUpdateTimeLessThan(lastWeekDate, queryTime);
+//        List<Integer> weekUserIds = socialuniUserExtendFriendLogRepository.findUserIdByUpdateTimeLessThan(lastWeekDate);
+        //分页应该使用排序的表
         //查询打开了联系方式的用户
-        List<Integer> openContactIds = socialuniUserExpandRepository.findUserIdsByOpenContactInfoOrderByUpdateTimeDesc();
+        List<Integer> openContactIds = socialuniUserExpandRepository.findUserIdsByOpenContactInfoOrderByLastOnlineTimeDesc(queryTime);
         //查询用户状态不为封禁的
         List<Integer> userIds = socialuniUserRepository.findUserIdsByStatus(SocialuniUserStatus.enable);
         List<Integer> queryIds;
         if (pageTypeUserIds == null) {
-            queryIds = ListConvertUtil.intersectionMany(weekUserIds, openContactIds, userIds);
+            queryIds = ListConvertUtil.intersectionMany(openContactIds, userIds);
         } else {
-            queryIds = ListConvertUtil.intersectionMany(pageTypeUserIds, weekUserIds, openContactIds, userIds);
+            queryIds = ListConvertUtil.intersectionMany(openContactIds, pageTypeUserIds, userIds);
         }
-        List<Integer> pageQueryIds = CollUtil.sub(queryIds, 0, 10);
+        List<Integer> pageQueryIds = CollUtil.sub(queryIds, 0, socialuniPageQueryQO.getPageSize());
         List<SocialuniUserDo> userDos = SocialuniUserUtil.getUsers(pageQueryIds);
 
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();

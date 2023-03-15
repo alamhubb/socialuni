@@ -7,8 +7,9 @@ export default class CenterUserDetailRO extends SocialUserFollowDetailRO {
     //联系方式
     contactInfo: string = null
     openContactInfo: boolean = null
-    lastOnlineTime: Date = null
+    updateTime: Date = null
     hugNum: number = null
     //前端字段
     hasFriend = false
+    getUserContactBtnDisabled = false
 }

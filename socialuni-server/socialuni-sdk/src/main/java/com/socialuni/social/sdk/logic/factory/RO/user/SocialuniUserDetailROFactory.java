@@ -30,7 +30,7 @@ public class SocialuniUserDetailROFactory {
 
         SocialuniUserExpandDo socialuniUserExpandDo = SocialuniUserExpandDOUtil.getOrCreate(userUnionId);
         userDetailVO.setSchoolName(socialuniUserExpandDo.getSchoolName());
-        userDetailVO.setLastOnlineTime(socialuniUserExpandDo.getLastOnlineTime());
+        userDetailVO.setUpdateTime(socialuniUserExpandDo.getLastOnlineTime());
         //联系方式需要认证
         //每次设置联系方式
         // 联系方式需要审核，联系方式单独开一张表
