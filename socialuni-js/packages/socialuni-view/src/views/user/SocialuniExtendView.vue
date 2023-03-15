@@ -65,7 +65,7 @@
                           <text v-if="!user.cityName || !user.districtName">{{ user.provinceName }}</text>
                           <text v-if="user.cityName">
                             <text v-if="!user.districtName">-</text>
-                            {{ user.cityName }}
+                            {{ user.cityName.substring(0,6) }}
                           </text>
                           <text v-if="user.districtName">-{{ user.districtName }}</text>
 
