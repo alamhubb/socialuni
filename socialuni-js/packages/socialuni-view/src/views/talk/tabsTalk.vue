@@ -2,7 +2,7 @@
   <view v-if="talkTabs.length" class="flex-col h100p">
     <!--  <view v-if="talkTabs.length" class="flex-col h100p bg-primary">-->
     <!--    <q-tabs :tabs="talkTabs" v-model="current" type="bar" @input="tabsChange"-->
-    <div class="flex-row px-sm mb-xss">
+    <div class="flex-row px-sm mb-xss flex-none">
       <q-tabs :tabs="talkTabs" :value="currentTabIndex" type="line" @input="tabsChange"
               class="bd-radius flex-1 mr-sm">
         <template #default="{tab,index,value}">
@@ -13,10 +13,10 @@
         <q-icon icon="list-dot" size="20" @click="openTalkFilterDialog"></q-icon>
       </div>
     </div>
-    <q-pull-refresh ref="pullRefresh" @refresh="manualPulldownRefresh" class="h100p">
+    <q-pull-refresh ref="pullRefresh" @refresh="manualPulldownRefresh" class="flex-1 overflow-hidden">
       <swiper :current="currentTabIndex" class="h100p"
               @change="talkSwiperChange">
-        <swiper-item v-for="(item, swiperIndex) in talkTabs" :key="swiperIndex">
+        <swiper-item class="h100p" v-for="(item, swiperIndex) in talkTabs" :key="swiperIndex">
           <!--
           使用view实现的问题，没有scroll事件小程序上
           <view class="h100p bg-default" :class="[scrollEnable?'overflow-scroll':'overflow-hidden']" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
@@ -27,8 +27,7 @@
 
           <!--          首页展示区分不同类型，
                     圈子类型、关注类型、首页类型、同城类型-->
-
-          <scroll-view class="h100p bd-radius-10 mx-sm overflow-hidden " style="width: calc(100% - 20px)"
+          <scroll-view class="h100p bd-radius-10 mx-sm overflow-hidden" style="width: calc(100% - 20px)"
                        :scroll-y="true" @scrolltolower="autoChooseUseLocationQueryTalks"
                        :scroll-top="talkTabs[swiperIndex].pageScrollTop"
                        :lower-threshold="800"
@@ -269,23 +268,6 @@ export default class TabsTalk extends Vue {
 
   get user() {
     return socialUserModule.mineUser
-  }
-
-  tabsHeight = 0
-  // 去除的高度,单位px
-  talksListHeightSub = 0
-
-  getTabBarTop() {
-    this.tabsHeight = 40
-    // h5有头顶和下边导航栏都算了高度
-    // #ifdef H5
-    //tab的高度加上导航栏的高度,h5+ 50 底部
-    this.talksListHeightSub = socialSystemModule.navBarHeight + this.tabsHeight + 52
-    // #endif
-    // #ifndef H5
-    this.talksListHeightSub = socialSystemModule.navBarHeight + this.tabsHeight + socialSystemModule.statusBarHeight
-    // #endif
-    console.log(this.talksListHeightSub)
   }
 
   openTalkFilterDialog() {
