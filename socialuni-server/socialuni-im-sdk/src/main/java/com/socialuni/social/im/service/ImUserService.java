@@ -1,6 +1,9 @@
 package com.socialuni.social.im.service;
 
+import cn.hutool.core.util.ReUtil;
+import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.common.sdk.constant.SocialuniConst;
 import com.socialuni.social.im.feign.SocialuniOpenImUserFeign;
 import com.socialuni.social.im.logic.domain.SocialBindUserOpenImAccountDomain;
 import com.socialuni.social.im.model.SocialuniImUserModel;
@@ -78,12 +81,29 @@ public class ImUserService {
         String mineUserUid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(mineUser.getUserId());
 
         imUserModel.setUserID(mineUserUid);
+
+        String nickname = mineUser.getNickname();
+
+        boolean containsSpecialChars = ReUtil.contains("[^a-zA-Z0-9\\u4E00-\\u9FA5]", nickname);
+        if (containsSpecialChars) {
+            nickname = "名称已重置";
+        }
         //因为openIm不支持表情昵称
-        imUserModel.setNickname("名称已重置");
+        imUserModel.setNickname(nickname);
         imUserModel.setFaceURL(mineUser.getAvatar());
         imUserModel.setGender(GenderTypeNumEnum.getValueByName(mineUser.getGender()));
+
+        int age = BirthdayAgeUtil.getAgeByBirth(mineUser.getBirthday());
+        if (age > 50 || age < 18) {
+            //如果值溢出，使用默认值
+            imUserModel.setBirth((int) (BirthdayAgeUtil.getBirthDayByBirthString(BirthdayAgeUtil.getYearBirthDateByAge(SocialuniConst.defaultAge)).getTime() / 1000));
+        } else {
+            //否则使用自带的值
+            imUserModel.setBirth((int) (BirthdayAgeUtil.getBirthDayByBirthString(mineUser.getBirthday()).getTime() / 1000));
+        }
+
 //        imUserModel.setPhoneNumber(mineUser.getPhoneNum());
-        imUserModel.setBirth((int) (BirthdayAgeUtil.getBirthDayByBirthString(mineUser.getBirthday()).getTime() / 1000));
+
         imUserModel.setCreateTime(new Date());
         return imUserModel;
     }

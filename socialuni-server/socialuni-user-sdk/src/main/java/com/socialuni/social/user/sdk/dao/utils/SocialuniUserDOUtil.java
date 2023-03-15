@@ -1,5 +1,6 @@
 package com.socialuni.social.user.sdk.dao.utils;
 
+import cn.hutool.core.util.ReUtil;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
@@ -40,6 +41,10 @@ public class SocialuniUserDOUtil {
         }
         if (nickname.length() > 6) {
             throw new SocialBusinessException("昵称长度不能大于6");
+        }
+        boolean containsSpecialChars = ReUtil.contains("[^a-zA-Z0-9\\u4E00-\\u9FA5]", nickname);
+        if (containsSpecialChars) {
+            throw new SocialBusinessException("昵称不允许包含特殊字符");
         }
 
         String editGender = socialuniUserDo.getGender();
