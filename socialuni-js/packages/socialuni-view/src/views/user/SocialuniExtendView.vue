@@ -205,9 +205,13 @@ export default class SocialuniExtendView extends Vue {
 
   // tabs通知swiper切换
   tabsChange(index) {
-    this.currentTabIndex = index
-    if (this.tabsPageQueryUtil[this.currentTabIndex].queryQO.firstLoad) {
+    if (index === this.currentTabIndex) {
       this.startPulldownRefresh()
+    } else {
+      this.currentTabIndex = index
+      if (this.tabsPageQueryUtil[this.currentTabIndex].queryQO.firstLoad) {
+        this.startPulldownRefresh()
+      }
     }
   }
 
