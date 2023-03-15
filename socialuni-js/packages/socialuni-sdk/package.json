@@ -1,6 +1,6 @@
 {
   "name": "socialuni-sdk",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "",
   "main": "axios.ts",
   "scripts": {
@@ -11,8 +11,8 @@
     "@dcloudio/uni-app": "3.0.0-3070320230222002",
     "cos-wx-sdk-v5": "^0.7.11",
     "open-im-sdk": "^2.3.0-beta.2",
-    "socialuni-api": "^0.1.0",
-    "socialuni-constant": "^0.1.0",
+    "socialuni-api": "^0.1.2",
+    "socialuni-constant": "^0.1.2",
     "uuid": "^7.0.3"
   },
   "devDependencies": {
