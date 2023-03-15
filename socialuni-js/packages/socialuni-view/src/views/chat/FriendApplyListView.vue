@@ -154,8 +154,8 @@ export default class ChatFriendPage extends Vue {
   /**
    * 获取好友列表。
    */
-  getFriendList() {
-    socialChatModule.openIm.getFriendList().then(({data}) => {
+  async getFriendList() {
+    (await socialChatModule.openIm()).getFriendList().then(({data}) => {
       this.friendList = JSON.parse(data);
       console.log('friendList', data, this.friendList);
     }).catch(err => {
@@ -165,8 +165,8 @@ export default class ChatFriendPage extends Vue {
   /**
    * 从好友列表中删除用户。
    */
-  deleteFriend(user) {
-    socialChatModule.openIm.deleteFriend(user.userID).then(({data}) => {
+  async deleteFriend(user) {
+    (await socialChatModule.openIm()).deleteFriend(user.userID).then(({data}) => {
       console.log('deleteFriend', data);
       this.refresh();
       // socialChatModule.checkFriend(this.user);
@@ -177,8 +177,8 @@ export default class ChatFriendPage extends Vue {
   /**
    * 获取黑名单列表
    */
-  getBlacklist() {
-    socialChatModule.openIm.getBlackList().then(({data}) => {
+  async getBlacklist() {
+    (await socialChatModule.openIm()).getBlackList().then(({data}) => {
       this.blackList = JSON.parse(data);
       console.log('getBlackList', data, this.blackList);
     }).catch(err => {
@@ -188,8 +188,8 @@ export default class ChatFriendPage extends Vue {
   /**
    * 将用户添加到黑名单。
    */
-  addBlack(black) {
-    socialChatModule.openIm.addBlack(black.userID).then(({data}) => {
+  async addBlack(black) {
+    (await socialChatModule.openIm()).addBlack(black.userID).then(({data}) => {
       console.log('addBlack', data);
       this.refresh();
     }).catch(err => {
@@ -199,8 +199,8 @@ export default class ChatFriendPage extends Vue {
   /**
    * 将用户添加到黑名单。
    */
-  removeBlack(black) {
-    socialChatModule.openIm.removeBlack(black.userID).then(({data}) => {
+  async removeBlack(black) {
+    (await socialChatModule.openIm()).removeBlack(black.userID).then(({data}) => {
       this.refresh();
     }).catch(err => {
     })
@@ -209,8 +209,10 @@ export default class ChatFriendPage extends Vue {
   /**
    * 获取发出的好友请求列表
    */
-  getSendFriendApplicationList() {
-    socialChatModule.openIm.getSendFriendApplicationList().then(({data}) => {
+  async getSendFriendApplicationList() {
+    console.log(111)
+    ;(await socialChatModule.openIm()).getSendFriendApplicationList().then(({data}) => {
+      console.log(data)
       const list = JSON.parse(data);
       const newList = []
       for (const datum of list) {
@@ -226,8 +228,8 @@ export default class ChatFriendPage extends Vue {
   /**
    * 获取收到的好友请求列表
    */
-  getRecvFriendApplicationList() {
-    socialChatModule.refreshRecvFriendApplicationList()
+  async getRecvFriendApplicationList() {
+    await socialChatModule.refreshRecvFriendApplicationList()
     this.recvFriendApplicationList = socialChatModule.recvFriendApplicationList;
   }
 
@@ -235,13 +237,12 @@ export default class ChatFriendPage extends Vue {
    * 接受好友请求。
    * @param item
    */
-  acceptFriendApplication(item) {
+  async acceptFriendApplication(item) {
     const options: AccessFriendParams = {
       toUserID: item.fromUserID,
       handleMsg: "接受您的好友请求"
     }
-    socialChatModule.openIm.acceptFriendApplication(options).then(({data}) => {
-      console.log('acceptFriendApplication', data);
+    ;(await socialChatModule.openIm()).acceptFriendApplication(options).then(({data}) => {
       // 刷新请求列表
       this.refresh();
     }).catch(err => {
@@ -252,12 +253,12 @@ export default class ChatFriendPage extends Vue {
    * 拒绝好友请求。
    * @param item
    */
-  refuseFriendApplication(item) {
+  async refuseFriendApplication(item) {
     const options: AccessFriendParams = {
       toUserID: item.fromUserID,
       handleMsg: "拒绝您的好友请求"
     }
-    socialChatModule.openIm.refuseFriendApplication(options).then(({data}) => {
+    ;(await socialChatModule.openIm()).refuseFriendApplication(options).then(({data}) => {
       console.log('refuseFriendApplication', data);
       // 刷新请求列表
       this.refresh();

@@ -208,18 +208,18 @@ export default class ChatView extends Vue {
   /**
    * '开启阅后即焚'
    */
-  setOneConversationPrivateChat(){
+  async setOneConversationPrivateChat(){
     let toUserId =  '5c8d2cb04a774a7f8a4817996e380f29';
     let fromUserID =  '768091f75a8c46688baa3c1137161c5f';
 
-    socialChatModule.openIm.clearC2CHistoryMessageFromLocalAndSvr(fromUserID).then(({ data })=>{
+    (await socialChatModule.openIm()).clearC2CHistoryMessageFromLocalAndSvr(fromUserID).then(({ data })=>{
       console.log(  '  clearC2CHistoryMessageFromLocalAndSvr  ',toUserId,data);
     }).catch(err=>{
     })
   }
-  frontDeleteChat() {
-    AlertUtil.confirm('是否确定从列表中删除会话，可从私信处再次找回').then(() => {
-      socialChatModule.openIm.deleteConversationFromLocalAndSvr(this.chatId).then(({ data })=>{
+  async frontDeleteChat() {
+    AlertUtil.confirm('是否确定从列表中删除会话，可从私信处再次找回').then(async () => {
+      (await socialChatModule.openIm()).deleteConversationFromLocalAndSvr(this.chatId).then(({ data })=>{
         socialChatModule.deleteChatAction(this.chatId);
       }).catch(err=>{
       })

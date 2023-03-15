@@ -3,7 +3,7 @@ import {socialChatModule} from "./store/store";
 
 export default class SocialuniMsg {
     static async sendMsgAPI<T>(chat: SocialuniChatRO, content: string) {
-        const {data} = await socialChatModule.openIm.createTextMessage(content);
+        const {data} = await (await socialChatModule.openIm()).createTextMessage(content);
         const params = {
             recvID: chat.receiveUserId,
             groupID: "",
@@ -12,6 +12,6 @@ export default class SocialuniMsg {
         console.log(params)
         // const msgAdd: MessageAddVO = new MessageAddVO(chatId, content)
         // return request.post <T>('message/sendMsg', msgAdd)
-        return socialChatModule.openIm.sendMessage(params)
+        return await (await socialChatModule.openIm()).sendMessage(params)
     }
 }

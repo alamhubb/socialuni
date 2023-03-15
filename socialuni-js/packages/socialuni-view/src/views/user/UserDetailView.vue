@@ -249,9 +249,9 @@ export default class UserDetailView extends Vue {
   /**
    * 从好友列表中删除用户。
    */
-  deleteFriend() {
-    AlertUtil.confirm('是否确认解除好友关系').then(res => {
-      socialChatModule.openIm.deleteFriend(this.user.id).then(({data}) => {
+  async deleteFriend() {
+    AlertUtil.confirm('是否确认解除好友关系').then(async () => {
+      (await socialChatModule.openIm()).deleteFriend(this.user.id).then(({data}) => {
         console.log('deleteFriend', data);
         ToastUtil.toast('成功解除好友关系')
         socialChatModule.checkFriend(this.user);
@@ -263,9 +263,9 @@ export default class UserDetailView extends Vue {
   /**
    * 将用户添加到黑名单。
    */
-  addBlack() {
-    AlertUtil.confirm('是否确认添加到黑名单').then(res => {
-      socialChatModule.openIm.addBlack(this.user.id).then(({data}) => {
+  async addBlack() {
+    AlertUtil.confirm('是否确认添加到黑名单').then(async () => {
+      (await socialChatModule.openIm()).addBlack(this.user.id).then(({data}) => {
         socialChatModule.checkFriend(this.user);
       }).catch(err => {
       })
@@ -276,9 +276,9 @@ export default class UserDetailView extends Vue {
   /**
    * 将用户从黑名单移除。
    */
-  removeBlack() {
-    AlertUtil.confirm('是否确认从黑名单移除').then(res => {
-      socialChatModule.openIm.removeBlack(this.user.id).then(({data}) => {
+  async removeBlack() {
+    AlertUtil.confirm('是否确认从黑名单移除').then(async () => {
+      (await socialChatModule.openIm()).removeBlack(this.user.id).then(({data}) => {
         socialChatModule.checkFriend(this.user);
       }).catch(err => {
       })
@@ -335,7 +335,7 @@ export default class UserDetailView extends Vue {
       toUserID: this.user.id,
       reqMsg: this.applyUserFriendContent
     };
-    await socialChatModule.openIm.addFriend(options)
+    await (await socialChatModule.openIm()).addFriend(options)
     ToastUtil.toastLong('添加好友申请发送成功，请耐心等待对方回复')
   }
 

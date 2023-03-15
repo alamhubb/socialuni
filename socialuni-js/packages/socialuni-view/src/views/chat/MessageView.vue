@@ -676,8 +676,8 @@ export default class MessageView extends Vue {
   /**
    * 撤回某条消息
    */
-  revokeMessage() {
-    socialChatModule.openIm.revokeMessage(JSON.stringify(this.message.originalMsg)).then(({data}) => {
+  async revokeMessage() {
+    (await socialChatModule.openIm()).revokeMessage(JSON.stringify(this.message.originalMsg)).then(({data}) => {
       console.log('revokeMessage', data);
     }).catch(err => {
       console.log('revokeMessage---err', err);

@@ -42,12 +42,36 @@ const openIM = new OpenIMSDK()
 
 @Store
 export default class SocialChatModule extends Pinia {
-    openIm = openIM
-    openImIsLogin = false
+    //请使用getOpenIm
+    private _openIm = openIM
+    //0.1.2
+    //3个状态，加载中，成功，未加载
+    openImIsLogin = 0
     private userImToken: string = SocialuniImUserTokenUtil.get() || null
     recvFriendApplicationList: OpenImFriendApplyRO[] = []
+
     setOpenImLoginSuccess() {
-        this.openImIsLogin = true
+        this.openImIsLogin = 2
+    }
+
+    setOpenImLogging() {
+        this.openImIsLogin = 1
+    }
+
+    setOpenImUnLogin() {
+        this.openImIsLogin = 0
+    }
+
+    async openIm() {
+        await this.initSocialuniChatModule()
+        return this._openIm
+    }
+
+    async waitLoginSuccess() {
+        if (this.openImIsLogin === 1) {
+            await CommonUtil.delayTime(10);
+            await this.waitLoginSuccess();
+        }
     }
 
     get imToken() {
@@ -61,7 +85,8 @@ export default class SocialChatModule extends Pinia {
     chatsUnreadNumTotal = 0
 
     async initSocialuniChatModule() {
-        if (!this.openImIsLogin) {
+        if (this.openImIsLogin === 0) {
+            this.setOpenImLogging()
             //获取imToken
             const config: InitConfig = {
                 userID: socialUserModule.userId,
@@ -69,39 +94,47 @@ export default class SocialChatModule extends Pinia {
                 url: SocialuniConfig.openImJsImUrl,
                 platformID: OpenImPlatformType.web
             }
-            const res = await this.openIm.login(config)
-            this.setOpenImLoginSuccess()
-            this.refreshChats()
-            this.initOpenImListeners()
-            this.refreshRecvFriendApplicationList();
-            this.computedChatsUnreadNumTotalAction();
+            try {
+                const res = await this._openIm.login(config)
+                this.setOpenImLoginSuccess()
+                this.refreshChats()
+                this.initOpenImListeners()
+                this.refreshRecvFriendApplicationList();
+                this.computedChatsUnreadNumTotalAction();
+            } catch (e) {
+                this.setOpenImUnLogin()
+                await this.initSocialuniChatModule()
+            }
+        } else {
+            //如果未成功则无限等待，否则，执行下一步
+            await this.waitLoginSuccess()
         }
     }
 
-    initOpenImListeners() {
-        this.openIm.on(CbEvents.ONNEWCONVERSATION, (data) => {
-            console.log('ONNEWCONVERSATION',data)
+    async initOpenImListeners() {
+        ;(await this.openIm()).on(CbEvents.ONNEWCONVERSATION, (data) => {
+            console.log('ONNEWCONVERSATION', data)
         })
-        this.openIm.on(CbEvents.ONCONVERSATIONCHANGED, (data) => {
-            console.log('ONCONVERSATIONCHANGED',data)
+        ;(await this.openIm()).on(CbEvents.ONCONVERSATIONCHANGED, (data) => {
+            console.log('ONCONVERSATIONCHANGED', data)
             // 撤回消息回显。
             this.refreshChats();
             // this.showTabBarRedDot();
         })
-        this.openIm.on(CbEvents.ONTOTALUNREADMESSAGECOUNTCHANGED, (data) => {
-            console.log('ONTOTALUNREADMESSAGECOUNTCHANGED',data)
+        ;(await this.openIm()).on(CbEvents.ONTOTALUNREADMESSAGECOUNTCHANGED, (data) => {
+            console.log('ONTOTALUNREADMESSAGECOUNTCHANGED', data)
         })
-        this.openIm.on(CbEvents.ONRECVNEWMESSAGE, (data) => {
-            console.log('ONRECVNEWMESSAGE',data)
+        ;(await this.openIm()).on(CbEvents.ONRECVNEWMESSAGE, (data) => {
+            console.log('ONRECVNEWMESSAGE', data)
             this.refreshChats();
             this.showTabBarRedDot();
         })
-        this.openIm.on(CbEvents.ONRECVNEWMESSAGES, (data) => {
-            console.log('ONRECVNEWMESSAGES',data)
+        ;(await this.openIm()).on(CbEvents.ONRECVNEWMESSAGES, (data) => {
+            console.log('ONRECVNEWMESSAGES', data)
         })
         // 收到新邀请时
-        this.openIm.on(CbEvents.ONFRIENDAPPLICATIONADDED, (data) => {
-            console.log('收到新邀请时ONFRIENDAPPLICATIONADDED',data)
+        ;(await this.openIm()).on(CbEvents.ONFRIENDAPPLICATIONADDED, (data) => {
+            console.log('收到新邀请时ONFRIENDAPPLICATIONADDED', data)
             this.refreshRecvFriendApplicationList();
             // this.showTabBarRedDot();
         })
@@ -110,21 +143,21 @@ export default class SocialChatModule extends Pinia {
     /**
      * 设置 底部导航栏红点
      */
-    showTabBarRedDot(){
-        uni.showTabBarRedDot( {
+    showTabBarRedDot() {
+        uni.showTabBarRedDot({
             index: 2
         })
     }
+
     setImToken(token: string) {
         this.userImToken = token
         SocialuniImUserTokenUtil.set(token)
     }
 
-    removeImToken() {
+    async removeImToken() {
         this.setImToken(null)
-        this.openIm.logout().then(_ => {
-            this.openImIsLogin = false
-
+        ;(await this.openIm()).logout().then(_ => {
+            this.setOpenImUnLogin()
         })
     }
 
@@ -134,12 +167,12 @@ export default class SocialChatModule extends Pinia {
     }
 
 
-    refreshChats() {
+    async refreshChats() {
         const options = {
             offset: 0,
             count: 20
-        }
-        this.openIm.getConversationListSplit(options).then(({data}) => {
+        };
+        ;(await this.openIm()).getConversationListSplit(options).then(({data}) => {
             const chats: OpenImChatRO[] = JsonUtil.toParse(data)
             const newChats = chats.map(item => {
                 const chat = new SocialuniChatRO(item)
@@ -152,10 +185,10 @@ export default class SocialChatModule extends Pinia {
         })
     }
 
-    checkFriend(user: CenterUserDetailRO) {
+    async checkFriend(user: CenterUserDetailRO) {
         if (!user.isMine) {
             // console.log('=========checkFriend==========')
-            socialChatModule.openIm.checkFriend([user.id]).then(({data}) => {
+            (await socialChatModule.openIm()).checkFriend([user.id]).then(({data}) => {
                 // console.log('checkFriend',data,this.hasFriend,typeof data);
                 // 他是string需要手动转化一下。
                 data = JSON.parse(data);
@@ -179,40 +212,43 @@ export default class SocialChatModule extends Pinia {
     async queryChats() {
 
     }
-    pinConversation(conversationID : string , isPinned  : boolean = true) {
-        const options:PinCveParams = {
-            conversationID,
-            isPinned
-        }
-        this.openIm.pinConversation(options).then(({ data })=>{
-        }).catch(err=>{
+
+    async pinConversation(conversationID: string, isPinned: boolean = true) {
+        const options: PinCveParams = {
+                conversationID,
+                isPinned
+            }
+        ;(await this.openIm()).pinConversation(options).then(({data}) => {
+        }).catch(err => {
         })
     }
-    setOneConversationPrivateChat(conversationID : string , isPrivate  : boolean = true) {
-        const options:setPrvParams  = {
-            conversationID,
-            isPrivate
-        }
-        this.openIm.setOneConversationPrivateChat(options).then(({ data })=>{
-        }).catch(err=>{
+
+    async setOneConversationPrivateChat(conversationID: string, isPrivate: boolean = true) {
+        const options: setPrvParams = {
+                conversationID,
+                isPrivate
+            }
+        ;(await this.openIm()).setOneConversationPrivateChat(options).then(({data}) => {
+        }).catch(err => {
         })
     }
+
     /**
      * 获取收到的好友请求列表
      * @param handleResult -1 拒绝   0 未处理   1 同意
      */
-    getRecvFriendApplicationList(handleResult:number) {
+    getRecvFriendApplicationList(handleResult: number) {
         return this.recvFriendApplicationList.filter(item => item.handleResult == handleResult);
     }
+
     /**
      * 获取收到的好友请求列表
      */
-    refreshRecvFriendApplicationList() {
-        this.openIm.getRecvFriendApplicationList().then(({data}) => {
+    async refreshRecvFriendApplicationList() {
+        await (await this.openIm()).getRecvFriendApplicationList().then(({data}) => {
             const list = JSON.parse(data);
             const newList = []
             for (const datum of list) {
-                console.log('datum===',datum);
                 const item = new OpenImFriendApplyRO(datum)
                 item.type = FriendApplyType.recvFriendApply
                 newList.push(item)
@@ -262,7 +298,7 @@ export default class SocialChatModule extends Pinia {
     //为避免异步加载性能问题，进入用户详情页面就设置chat信息
     async setCurChatByUserId(userId: string) {
         await this.initSocialuniChatModule()
-        this.openIm.getOneConversation({
+        ;(await this.openIm()).getOneConversation({
             sessionType: OpenImSessionType.Single,
             sourceID: userId
         }).then(res => {
@@ -277,11 +313,11 @@ export default class SocialChatModule extends Pinia {
             this.setChat(chat)
         })
         // 设置实时消息已读回执
-        const options:MarkC2CParams = {
-            userID:userId,
-            msgIDList:[]
-        }
-        socialChatModule.openIm.markC2CMessageAsRead(options).then(({data}) => {
+        const options: MarkC2CParams = {
+                userID: userId,
+                msgIDList: []
+            }
+        ;(await socialChatModule.openIm()).markC2CMessageAsRead(options).then(({data}) => {
             console.log('markC2CMessageAsRead', data);
             this.computedChatsUnreadNumTotalAction()
 
@@ -292,13 +328,12 @@ export default class SocialChatModule extends Pinia {
     //为避免异步加载性能问题，进入用户详情页面就设置chat信息
     async setCurChatByGroupId(groupId: string) {
         await this.initSocialuniChatModule()
-        this.openIm.getOneConversation({
+        ;(await this.openIm()).getOneConversation({
             sessionType: OpenImSessionType.Group,
             sourceID: groupId
         }).then(res => {
             const data = res.data
             const openImChatRO: OpenImChatRO = JsonUtil.toParse(data)
-            console.log(openImChatRO)
             const chat = new SocialuniChatRO(openImChatRO)
             /*SocialuniUserAPI.queryUserDetailAPI(openImChatRO.userID).then(res => {
                 const userRO: SocialuniUserRO = res.data
@@ -308,32 +343,32 @@ export default class SocialChatModule extends Pinia {
             this.setChat(chat)
         })
         // 设置实时消息已读回执
-        const options:GroupMsgReadParams = {
+        const options: GroupMsgReadParams = {
             groupID: groupId,
-            msgIDList:[]
+            msgIDList: []
         }
-        openIM.markGroupMessageAsRead(options).then(({ data })=>{
+        openIM.markGroupMessageAsRead(options).then(({data}) => {
             console.log('markGroupMessageAsRead', data);
             this.computedChatsUnreadNumTotalAction()
-        }).catch(err=>{
+        }).catch(err => {
         })
     }
 
 
-    setChat(openImChat: SocialuniChatRO) {
+    async setChat(openImChat: SocialuniChatRO) {
         const options = {
-            conversationID: openImChat.id,
-            startClientMsgID: "",
-            count: 100,
-            groupID: "",
-            userID: "",
-        }
-        // const user = new SocialuniUserRO()
-        // user.id = openImChat.receiveUserId
-        // user.avatar = openImChat.avatar
-        // user.nickname = openImChat.nickname
-        // user.isMine = false
-        socialChatModule.openIm.getHistoryMessageList(options).then(({data}) => {
+                conversationID: openImChat.id,
+                startClientMsgID: "",
+                count: 100,
+                groupID: "",
+                userID: "",
+            }
+            // const user = new SocialuniUserRO()
+            // user.id = openImChat.receiveUserId
+            // user.avatar = openImChat.avatar
+            // user.nickname = openImChat.nickname
+            // user.isMine = false
+        ;(await socialChatModule.openIm()).getHistoryMessageList(options).then(({data}) => {
             const msgs: OpenImMsgRO[] = JsonUtil.toParse(data)
             console.log(msgs)
             openImChat.messages = msgs.map(item => new MessageVO(null, item))
@@ -464,20 +499,20 @@ export default class SocialChatModule extends Pinia {
      * 初始化消息总未读数。
      * 应该在这里计算是否显示红点
      */
-    computedChatsUnreadNumTotalAction() {
+    async computedChatsUnreadNumTotalAction() {
         // 获取消息总未读。
-        this.openIm.getTotalUnreadMsgCount().then(({ data })=>{
+        ;(await this.openIm()).getTotalUnreadMsgCount().then(({data}) => {
             // 获得好友申请
             let recvFriendApplicationLength = this.getRecvFriendApplicationList(0).length;
-            console.log('---recvFriendApplicationLength------',recvFriendApplicationLength);
-            if( recvFriendApplicationLength + data > 0){
+            console.log('---recvFriendApplicationLength------', recvFriendApplicationLength);
+            if (recvFriendApplicationLength + data > 0) {
                 this.showTabBarRedDot();
-            }else{
-                uni.hideTabBarRedDot( {
+            } else {
+                uni.hideTabBarRedDot({
                     index: 2
                 })
             }
-        }).catch(err=>{
+        }).catch(err => {
         })
         /*this.chatsUnreadNumTotal = this.chats.reduce((total, chat) => {
           total = total + chat.unreadNum
@@ -552,52 +587,54 @@ export default class SocialChatModule extends Pinia {
         //计算未读数量
         this.computedChatsUnreadNumTotalAction()
     }
+
     /**
      * 发送视频消息。
      * @param data
      * @param extension
      * @param description
      */
-    async pushVideoMessage( url : string ){
-        const options:VideoMsgParams = {
+    async pushVideoMessage(url: string) {
+        const options: VideoMsgParams = {
             videoPath: "",
             duration: 60,
             videoType: "mp4",
             snapshotPath: "",
-            videoUUID:UUIDUtil.getUUID(),
-            videoUrl:url,
-            videoSize:1234,
-            snapshotUUID:UUIDUtil.getUUID(),
-            snapshotSize:123,
-            snapshotUrl:"",
-            snapshotWidth:124,
-            snapshotHeight:125
+            videoUUID: UUIDUtil.getUUID(),
+            videoUrl: url,
+            videoSize: 1234,
+            snapshotUUID: UUIDUtil.getUUID(),
+            snapshotSize: 123,
+            snapshotUrl: "",
+            snapshotWidth: 124,
+            snapshotHeight: 125
         };
-        const msg: MessageVO =  MessageVO.create("createVideoMessage", options);
+        const msg: MessageVO = MessageVO.create("createVideoMessage", options);
         msg.content = '视频';
         await socialChatModule.pushMessageAction(msg)
     }
+
     /**
      * 发送图片消息。
      * @param data
      * @param extension
      * @param description
      */
-    async pushImageMessage( url : string ){
-        const baseInfo:PicBaseInfo = {
+    async pushImageMessage(url: string) {
+        const baseInfo: PicBaseInfo = {
             uuid: UUIDUtil.getUUID(),
-            type:"png",
-            size:12465,
-            width:1080,
-            height:720,
+            type: "png",
+            size: 12465,
+            width: 1080,
+            height: 720,
             url: url
         }
-        const options:ImageMsgParams = {
-            sourcePicture:baseInfo,
-            bigPicture:baseInfo,
-            snapshotPicture:baseInfo,
+        const options: ImageMsgParams = {
+            sourcePicture: baseInfo,
+            bigPicture: baseInfo,
+            snapshotPicture: baseInfo,
         }
-        const msg: MessageVO =  MessageVO.create("createImageMessage", options);
+        const msg: MessageVO = MessageVO.create("createImageMessage", options);
         msg.content = '图片';
         await socialChatModule.pushMessageAction(msg)
     }
@@ -608,13 +645,13 @@ export default class SocialChatModule extends Pinia {
      * @param extension
      * @param description
      */
-    async pushCustomMessage(data :string,extension :string,description :string){
-        const options:CustomMsgParams = {
+    async pushCustomMessage(data: string, extension: string, description: string) {
+        const options: CustomMsgParams = {
             data,
             extension,
             description
         }
-        const msg: MessageVO =  MessageVO.create("createCustomMessage", options);
+        const msg: MessageVO = MessageVO.create("createCustomMessage", options);
         msg.content = description;
         await socialChatModule.pushMessageAction(msg)
     }
@@ -632,27 +669,27 @@ export default class SocialChatModule extends Pinia {
         // this.chat.lastContent = msg.content
         // 滚屏到最后面
         // 不能监控变化滚动，有时候是往前面插入
-        const {data} = await socialChatModule.openIm[msg.action](msg.contentData);
+        const {data} = await (await socialChatModule.openIm())[msg.action](msg.contentData);
         const params = {
             recvID: this.chat.receiveUserId,
             groupID: this.chat.groupId,
             message: data,
         };
-        console.log('-------params-------',params);
+        console.log('-------params-------', params);
 
         // const msgAdd: MessageAddVO = new MessageAddVO(chatId, content)
         // return request.post <T>('message/sendMsg', msgAdd)
         //
-        let actionMethod : Function = null;
-        switch (msg.action){
+        let actionMethod: Function = null;
+        switch (msg.action) {
             case 'createImageMessage':
             case 'createSoundMessage':
             case 'createVideoMessage':
             case 'createFileMessage':
-                actionMethod = socialChatModule.openIm.sendMessageNotOss;
+                actionMethod = (await socialChatModule.openIm()).sendMessageNotOss;
                 break;
             default:
-                actionMethod = socialChatModule.openIm.sendMessage;
+                actionMethod = (await socialChatModule.openIm()).sendMessage;
                 break;
         }
         // 执行方法。
@@ -740,7 +777,7 @@ export default class SocialChatModule extends Pinia {
                         reqMsg: "",
                         joinSource: GroupJoinSource.Search
                     }
-                    await this.openIm.joinGroup(options)
+                    await (await this.openIm()).joinGroup(options)
                 }
             } finally {
                 UniUtil.hideLoading()
@@ -774,15 +811,15 @@ export default class SocialChatModule extends Pinia {
             }
             console.log(options)
             try {
-                const res = await socialChatModule.openIm.createGroup(options)
+                const res = await (await socialChatModule.openIm()).createGroup(options)
                 const resData: { groupID: string } = JsonUtil.toParse(res.data)
                 const cRes = await SocialuniCircleAPI.createCircleChatAPI(new CircleCreateChatQO(circle.name, resData.groupID))
                 socialTalkModule.curTab.circle.groupChatId = cRes.data
                 const optionsVerification: SetGroupVerificationParams = {
-                    groupID: circle.groupChatId,
-                    verification: 2,
-                }
-                this.openIm.setGroupVerification(optionsVerification)
+                        groupID: circle.groupChatId,
+                        verification: 2,
+                    }
+                ;(await this.openIm()).setGroupVerification(optionsVerification)
                 socialChatModule.toMessagePageFromGroupChat(cRes.data)
             } finally {
                 UniUtil.hideLoading()

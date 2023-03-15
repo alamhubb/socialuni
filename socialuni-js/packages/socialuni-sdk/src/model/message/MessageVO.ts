@@ -72,9 +72,11 @@ export default class MessageVO {
                 this.content = customMessage.description;
 
                 // 删除。
-                socialChatModule.openIm.clearC2CHistoryMessageFromLocalAndSvr(customMessage.data).then(({ data })=>{
-                    console.log(  '  clearC2CHistoryMessageFromLocalAndSvr  ');
-                }).catch(err=>{
+                socialChatModule.openIm().then(openIm=>{
+                    openIm.clearC2CHistoryMessageFromLocalAndSvr(customMessage.data).then(({ data })=>{
+                        console.log(  '  clearC2CHistoryMessageFromLocalAndSvr  ');
+                    }).catch(err=>{
+                    })
                 })
             } else if (msg.contentType === MessageType.PICTUREMESSAGE) {
                 // 描述用于展示给用户。

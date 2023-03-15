@@ -287,7 +287,6 @@ export default class TabsTalk extends Vue {
 
   //js触发下拉刷新效果
   startPullDown() {
-    console.log('chufae')
     this.tabScrollToTop()
     this.$refs.pullRefresh.startPulldownRefresh()
   }

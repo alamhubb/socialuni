@@ -120,8 +120,8 @@ export default class GroupMemberView extends Vue {
   /**
    * 置零群聊会话未读数
    */
-  markGroupMessageHasRead(){
-    socialChatModule.openIm.markGroupMessageHasRead(this.groupID).then(({ data })=>{
+  async markGroupMessageHasRead(){
+    (await socialChatModule.openIm()).markGroupMessageHasRead(this.groupID).then(({ data })=>{
       console.log('markGroupMessageHasRead',data);
     }).catch(err=>{
     })
@@ -129,8 +129,8 @@ export default class GroupMemberView extends Vue {
   /**
    * 删除本地跟服务器的群聊天记录
    */
-  clearGroupHistoryMessageFromLocalAndSvr(){
-    socialChatModule.openIm.clearGroupHistoryMessageFromLocalAndSvr(this.groupID).then(({ data })=>{
+  async clearGroupHistoryMessageFromLocalAndSvr(){
+    (await socialChatModule.openIm()).clearGroupHistoryMessageFromLocalAndSvr(this.groupID).then(({ data })=>{
       console.log('clearGroupHistoryMessageFromLocalAndSvr',data);
     }).catch(err=>{
     })
@@ -138,8 +138,8 @@ export default class GroupMemberView extends Vue {
   /**
    * 从本地删除指定群聊会话中所有消息
    */
-  clearGroupHistoryMessage(){
-    socialChatModule.openIm.clearGroupHistoryMessage(this.groupID).then(({ data })=>{
+  async clearGroupHistoryMessage(){
+    (await socialChatModule.openIm()).clearGroupHistoryMessage(this.groupID).then(({ data })=>{
       console.log('clearGroupHistoryMessage',data);
     }).catch(err=>{
     })
@@ -147,12 +147,12 @@ export default class GroupMemberView extends Vue {
   /**
    * 设置进群验证规则
    */
-  setGroupVerification(verification: GroupVerificationType){
+  async setGroupVerification(verification: GroupVerificationType){
     const options:SetGroupVerificationParams = {
       groupID: this.groupID ,
       verification
     }
-    socialChatModule.openIm.setGroupVerification(options).then(({ data })=>{
+    ;(await socialChatModule.openIm()).setGroupVerification(options).then(({ data })=>{
       console.log('setGroupVerification',data);
     }).catch(err=>{
     })
@@ -160,12 +160,12 @@ export default class GroupMemberView extends Vue {
   /**
    * 开启群禁言，所有普通群成员禁止发言
    */
-  changeGroupMute(isMute : boolean){
+  async changeGroupMute(isMute : boolean){
     const options:ChangeGroupMuteParams = {
       groupID: this.groupID ,
       isMute
     }
-    socialChatModule.openIm.changeGroupMute(options).then(({ data })=>{
+    ;(await socialChatModule.openIm()).changeGroupMute(options).then(({ data })=>{
       console.log('changeGroupMute',data);
     }).catch(err=>{
     })
@@ -173,8 +173,8 @@ export default class GroupMemberView extends Vue {
   /**
    * 解散群聊
    */
-  dismissGroup(){
-    socialChatModule.openIm.dismissGroup(this.groupID).then(({ data })=>{
+  async dismissGroup(){
+    (await socialChatModule.openIm()).dismissGroup(this.groupID).then(({ data })=>{
       console.log('dismissGroup',data);
     }).catch(err=>{
     })
@@ -182,8 +182,8 @@ export default class GroupMemberView extends Vue {
   /**
    * 退出群聊
    */
-  quitGroup(){
-    socialChatModule.openIm.quitGroup(this.groupID).then(({ data })=>{
+  async quitGroup(){
+    (await socialChatModule.openIm()).quitGroup(this.groupID).then(({ data })=>{
       console.log('quitGroup',data);
     }).catch(err=>{
     })
@@ -191,7 +191,7 @@ export default class GroupMemberView extends Vue {
   /**
    * 获取群成员列表。
    */
-  getGroupMemberList(){
+  async getGroupMemberList(){
     const count = 20;
     const options:GetGroupMemberParams = {
       groupID:this.groupID,
@@ -199,7 +199,7 @@ export default class GroupMemberView extends Vue {
       offset:this.offset,
       count
     }
-    socialChatModule.openIm.getGroupMemberList(options).then(({ data })=>{
+    ;(await socialChatModule.openIm()).getGroupMemberList(options).then(({ data })=>{
       let parse = JSON.parse(data);
       this.groupMemberList.push(...parse);
       //
@@ -215,13 +215,13 @@ export default class GroupMemberView extends Vue {
 
   }
 
-  getGroupMembersInfo(){
+  async getGroupMembersInfo(){
     const options:Omit<InviteGroupParams, "reason"> = {
       groupID:this.groupID,
       userIDList:[socialUserModule.userId]
     }
     //
-    socialChatModule.openIm.getGroupMembersInfo(options).then(({ data })=>{
+    ;(await socialChatModule.openIm()).getGroupMembersInfo(options).then(({ data })=>{
       const arr = JSON.parse(data);
       this.groupInfo = arr[0];
       console.log('----getGroupMembersInfo-----',JSON.parse(data),this.groupInfo);
@@ -312,13 +312,13 @@ export default class GroupMemberView extends Vue {
   /**
    * 修改针对某个群员的禁言状态
    */
-  changeGroupMemberMute(groupMember : GroupMemberItem){
+  async changeGroupMemberMute(groupMember : GroupMemberItem){
     const options:ChangeGroupMemberMuteParams = {
       groupID:this.groupID,
       userID:groupMember.userID,
       mutedSeconds: 60 * 60 * 24   // 禁言时长，为0时即解除禁言
     }
-    socialChatModule.openIm.changeGroupMemberMute(options).then(({ data })=>{
+    ;(await socialChatModule.openIm()).changeGroupMemberMute(options).then(({ data })=>{
       console.log('changeGroupMemberMute',data);
     }).catch(err=>{
     })
@@ -328,13 +328,13 @@ export default class GroupMemberView extends Vue {
    * 踢出群聊
    * 移除群成员
    */
-  kickGroupMember(groupMember : GroupMemberItem){
+  async kickGroupMember(groupMember : GroupMemberItem){
     const options:InviteGroupParams = {
       groupID: this.groupID,
       reason:"",
       userIDList:[groupMember.userID]
     }
-    socialChatModule.openIm.kickGroupMember(options).then(({ data })=>{
+    ;(await socialChatModule.openIm()).kickGroupMember(options).then(({ data })=>{
       console.log('kickGroupMember',data);
     }).catch(err=>{
     })
@@ -344,12 +344,12 @@ export default class GroupMemberView extends Vue {
    * 转让群主。
    * @param groupMember
    */
-  transferGroupOwner(groupMember : GroupMemberItem){
+  async transferGroupOwner(groupMember : GroupMemberItem){
     const options:TransferGroupParams = {
       groupID: this.groupID,
       newOwnerUserID:groupMember.userID
     }
-    socialChatModule.openIm.transferGroupOwner(options).then(({ data })=>{
+    ;(await socialChatModule.openIm()).transferGroupOwner(options).then(({ data })=>{
       console.log('transferGroupOwner',data);
     }).catch(err=>{
     })
@@ -359,13 +359,13 @@ export default class GroupMemberView extends Vue {
    * 修改某个群员在群内的昵称。
    * @param groupMember
    */
-  setGroupMemberNickname(groupMember : GroupMemberItem , GroupMemberNickname : string){
+  async setGroupMemberNickname(groupMember : GroupMemberItem , GroupMemberNickname : string){
     const options:MemberNameParams = {
       groupID:this.groupID,
       userID:groupMember.userID,
       GroupMemberNickname
     }
-    socialChatModule.openIm.setGroupMemberNickname(options).then(({ data })=>{
+    ;(await socialChatModule.openIm()).setGroupMemberNickname(options).then(({ data })=>{
       console.log('setGroupMemberNickname',data);
     }).catch(err=>{
     })
@@ -376,13 +376,13 @@ export default class GroupMemberView extends Vue {
    * @param groupMember
    * @param roleLevel 群成员角色类型 1:普通成员 2:群主 3:管理员
    */
-  setGroupMemberRoleLevel(groupMember : GroupMemberItem,roleLevel : GroupRole){
+  async setGroupMemberRoleLevel(groupMember : GroupMemberItem,roleLevel : GroupRole){
     const options:SetGroupRoleParams = {
       groupID:this.groupID,
       userID:groupMember.userID,
       roleLevel
     }
-    socialChatModule.openIm.setGroupMemberRoleLevel(options).then(({ data })=>{
+    ;(await socialChatModule.openIm()).setGroupMemberRoleLevel(options).then(({ data })=>{
       console.log('setGroupMemberRoleLevel',data);
     }).catch(err=>{
     })

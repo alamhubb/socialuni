@@ -463,7 +463,7 @@ export default class UserInfo extends Vue {
       toUserID: this.user.id,
       reqMsg: this.applyUserFriendContent
     };
-    await socialChatModule.openIm.addFriend(options)
+    await (await socialChatModule.openIm()).addFriend(options)
     ToastUtil.toastLong('添加好友申请发送成功，请耐心等待对方回复')
   }
 
