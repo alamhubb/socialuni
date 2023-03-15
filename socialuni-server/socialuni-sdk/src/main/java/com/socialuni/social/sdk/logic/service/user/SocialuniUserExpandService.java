@@ -108,7 +108,7 @@ public class SocialuniUserExpandService {
             if (!StringUtils.isEmpty(adCode)) {
                 pageTypeUserIds = socialuniUserExtendLogRepository.findUserIdsByLickAdCode(adCode);
             }
-        }else if (pageType.equals(SocialuniUserExtendFriendsPageType.recently)) {
+        } else if (pageType.equals(SocialuniUserExtendFriendsPageType.recently)) {
             //周id列表, 一周内使用过此功能的用户，你最近没用过这个功能，没必要展示你
             pageTypeUserIds = socialuniUserExtendFriendLogRepository.findUserIdByUpdateTimeLessThan(lastWeekDate);
         }
@@ -124,7 +124,11 @@ public class SocialuniUserExpandService {
         } else {
             queryIds = ListConvertUtil.intersectionMany(openContactIds, pageTypeUserIds, userIds);
         }
-        List<Integer> pageQueryIds = CollUtil.sub(queryIds, 0, socialuniPageQueryQO.getPageSize());
+        Integer pageSize = socialuniPageQueryQO.getPageSize();
+        if (pageSize == null) {
+            pageSize = 10;
+        }
+        List<Integer> pageQueryIds = CollUtil.sub(queryIds, 0, pageSize);
         List<SocialuniUserDo> userDos = SocialuniUserUtil.getUsers(pageQueryIds);
 
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();

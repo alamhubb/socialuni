@@ -23,18 +23,6 @@
       "style": {
         "navigationStyle": "custom"
       }
-    },{
-      "path": "pages/chat/friend"
-    },{
-      "path": "pages/chat/group",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },{
-      "path": "pages/chat/groupMember",
-      "style": {
-        "navigationStyle": "custom"
-      }
     },
     {
       "path": "pages/user/mine",
@@ -125,6 +113,21 @@
           "style": {
             "navigationBarTitleText": "贝壳记录"
           }
+        },
+        {
+          "path": "chat/friend"
+        },
+        {
+          "path": "chat/group",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "chat/groupMember",
+          "style": {
+            "navigationStyle": "custom"
+          }
         }
       ]
     }
@@ -169,13 +172,14 @@
     "style": {
       "width": "300px"
     }
-  },/*
-  "topWindow": {
-    "path": "windows/topWindow.vue",
-    "style": {
-      "height": "60px"
-    }
-  },*/
+  },
+  /*
+    "topWindow": {
+      "path": "windows/topWindow.vue",
+      "style": {
+        "height": "60px"
+      }
+    },*/
   "globalStyle": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "社区",
