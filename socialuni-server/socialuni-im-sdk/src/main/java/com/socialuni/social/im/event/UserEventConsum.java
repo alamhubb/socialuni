@@ -9,6 +9,7 @@ import com.socialuni.social.common.sdk.event.ddd.AbstractJsonEventConsum;
 import com.socialuni.social.common.sdk.event.ddd.AbstractPublishDataModelConsum;
 import com.socialuni.social.im.model.SocialuniImUserModel;
 import com.socialuni.social.im.service.ImAuthService;
+import com.socialuni.social.im.service.ImUserService;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
@@ -63,20 +64,15 @@ public class UserEventConsum extends AbstractPublishDataModelConsum {
     public void consumEvent(PublishDataModel publishDataModel) {
         RequestMethod method = publishDataModel.getMethod();
         Object data = publishDataModel.getData();
+
+
+
         SocialuniImUserModel userModel = new SocialuniImUserModel();
         if (data instanceof SocialuniUserDo) {
             SocialuniUserDo userDo = (SocialuniUserDo) data;
-            userModel.setBirth(Long.valueOf(DateUtil.parse(userDo.getBirthday(), "yyyy-mm-ss").getTime() / 1000).intValue());
-            userModel.setNickname(userDo.getNickname());
-            userModel.setFaceURL(userDo.getAvatar());
-            String mineUserUid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(userDo.getUserId());
-            userModel.setUserID(mineUserUid);
-            userModel.setGender(GenderTypeNumEnum.getEnumByName(userDo.getGender()).getValue());
+            userModel = ImUserService.toImUserModel(userDo);
             // 邮箱
-
             // 手机号
-
-
             // 同步im。
             if (RequestMethod.POST.equals(method)) {
                 // 增加就不操作啦。 ， 之前的代码用了异步http调用去实现啦。

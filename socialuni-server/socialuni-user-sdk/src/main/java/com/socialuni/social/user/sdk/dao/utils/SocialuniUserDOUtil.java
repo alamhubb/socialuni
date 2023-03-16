@@ -46,6 +46,7 @@ public class SocialuniUserDOUtil {
         if (containsSpecialChars) {
             throw new SocialBusinessException("昵称不允许包含特殊字符");
         }
+        SocialuniTextContentUtil.checkTextHasUnderageAndContactAndViolateWords(nickname);
 
         String editGender = socialuniUserDo.getGender();
 
@@ -71,6 +72,7 @@ public class SocialuniUserDOUtil {
             if (userCity.length() > 10) {
                 throw new SocialBusinessException("市县区名称长度不能大于10");
             }
+            SocialuniTextContentUtil.checkTextHasUnderageAndContactAndViolateWords(userCity);
         }
         socialuniUserDo = socialuniUserRepository.savePut(socialuniUserDo);
 

@@ -57,7 +57,12 @@ public class SocialUserDOFactory {
             }
         }
         if (ObjectUtils.isNotEmpty(loginQO.getCity())) {
-            user.setCity(StringUtils.substring(loginQO.getCity(), 0, 10));
+            try {
+                SocialuniTextContentUtil.checkTextHasUnderageAndContactAndViolateWords(loginQO.getCity());
+                user.setCity(StringUtils.substring(loginQO.getCity(), 0, 10));
+            } catch (SocialException e) {
+                e.printStackTrace();
+            }
         }
         return user;
     }

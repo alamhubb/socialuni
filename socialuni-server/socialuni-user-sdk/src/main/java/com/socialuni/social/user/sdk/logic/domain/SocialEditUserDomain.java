@@ -32,7 +32,6 @@ public class SocialEditUserDomain {
             String oldNickname = mineUser.getNickname();
             //新旧昵称不一样，则更新
             if (!nickname.equals(oldNickname)) {
-                SocialuniTextContentUtil.checkTextHasUnderageAndContactAndViolateWords(nickname);
                 mineUser.setNickname(nickname);
             }
         }
@@ -57,7 +56,6 @@ public class SocialEditUserDomain {
             String oldCity = mineUser.getCity();
             //新旧昵称不一样，则更新
             if (!userCity.equals(oldCity)) {
-                SocialuniTextContentUtil.checkTextHasUnderageAndContactAndViolateWords(userCity);
                 mineUser.setCity(userCity);
             }
         }
