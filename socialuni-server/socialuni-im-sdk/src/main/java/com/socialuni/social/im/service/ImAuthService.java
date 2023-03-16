@@ -55,7 +55,12 @@ public class ImAuthService {
      */
     public String update_user_info(SocialuniImUserModel userModel) {
         String userID = userModel.getUserID();
-        String token = this.getToken(userID);
+        String token;
+        try {
+            token = this.getToken(userID);
+        } catch (Exception e) {
+            token = this.userRegister(userModel);
+        }
         String response = imHttpComponent.post("/user/update_user_info", userModel, token);
         return response;
     }
