@@ -18,4 +18,5 @@ public class PlatformType {
 
 
     public static final List<String> values = Arrays.asList(PlatformType.mp, PlatformType.app, PlatformType.h5);
+    public static final List<String> notApp = Arrays.asList(PlatformType.mp, PlatformType.h5);
 }

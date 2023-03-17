@@ -8,9 +8,8 @@
   },
   "dependencies": {
     "@dcloudio/types": "^3.0.17",
-    "@dcloudio/uni-app": "3.0.0-3061520221228001",
+    "@dcloudio/uni-app": "3.0.0-alpha-3070620230227001",
     "cos-wx-sdk-v5": "^0.7.11",
-    "open-im-sdk": "^2.3.0-beta.2",
     "socialuni-api": "^0.1.2",
     "socialuni-constant": "^0.1.2",
     "uuid": "^7.0.3"

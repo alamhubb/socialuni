@@ -16,7 +16,7 @@ import {
     Member,
     OpenIMSDK, PicBaseInfo, PinCveParams, SearchGroupParams,
     SetGroupVerificationParams, setPrvParams, VideoMsgParams
-} from "open-im-sdk"
+} from "socialuni-sdk/src/plugins/open-im-sdk"
 import {InitConfig} from "open-im-sdk/types"
 import SocialuniConfig from "socialuni-api/src/config/SocialuniConfig"
 import {socialChatModule} from './store'

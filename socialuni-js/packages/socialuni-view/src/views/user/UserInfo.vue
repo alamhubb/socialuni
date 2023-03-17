@@ -375,7 +375,7 @@ import SocialuniMineUserAPI from "socialuni-api/src/api/socialuni/SocialuniMineU
 import SocialuniTalkAPI from "socialuni-api/src/api/socialuni/SocialuniTalkAPI";
 import FollowAddVO from "socialuni-api/src/model/FollowAddVO";
 import FollowAPI from "socialuni-api/src/api/socialuni/FollowAPI";
-import {AccessFriendParams, AddFriendParams} from "open-im-sdk";
+import {AccessFriendParams, AddFriendParams} from "socialuni-sdk/src/plugins/open-im-sdk";
 import UserService from "socialuni-sdk/src/service/UserService";
 import UserSchoolEditDialog from "./UserSchoolEditDialog.vue";
 import SocialuniUserInfoImg from "./SocialuniUserInfoImg.vue";

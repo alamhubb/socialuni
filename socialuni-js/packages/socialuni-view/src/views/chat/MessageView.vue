@@ -15,7 +15,7 @@
           </view>
         </view>-->
 
-    <scroll-view scroll-y="true" class="flex-col h100p"
+    <scroll-view scroll-y="true" class="flex-col h100p pb-60"
                  @scrolltoupper="upper"
                  :upper-threshold="upperThreshold"
                  :show-scrollbar="true"

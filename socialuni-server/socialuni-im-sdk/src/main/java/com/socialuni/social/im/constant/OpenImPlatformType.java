@@ -2,6 +2,7 @@ package com.socialuni.social.im.constant;
 
 import com.socialuni.social.common.api.constant.PlatformType;
 import com.socialuni.social.common.api.constant.SystemType;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 
 /**
  * @author qinkaiyuan
@@ -18,13 +19,14 @@ public class OpenImPlatformType {
 
 
     public static Integer getOpenImPlatformType(String platformType, String system) {
-        if (PlatformType.h5.equals(platformType)) {
+        if (PlatformType.notApp.contains(platformType)) {
             return OpenImPlatformType.web;
         } else if (SystemType.android.equals(system)) {
             return OpenImPlatformType.android;
-        } else {
+        } else if (SystemType.ios.equals(system)) {
             return OpenImPlatformType.ios;
         }
+        throw new SocialParamsException("错误的openIm类型");
     }
 
 }
