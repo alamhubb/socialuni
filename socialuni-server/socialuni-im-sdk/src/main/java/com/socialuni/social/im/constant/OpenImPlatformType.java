@@ -21,10 +21,12 @@ public class OpenImPlatformType {
     public static Integer getOpenImPlatformType(String platformType, String system) {
         if (PlatformType.notApp.contains(platformType)) {
             return OpenImPlatformType.web;
-        } else if (SystemType.android.equals(system)) {
-            return OpenImPlatformType.android;
-        } else if (SystemType.ios.equals(system)) {
-            return OpenImPlatformType.ios;
+        } else if (PlatformType.app.equals(platformType)) {
+            if (SystemType.android.equals(system)) {
+                return OpenImPlatformType.android;
+            } else if (SystemType.ios.equals(system)) {
+                return OpenImPlatformType.ios;
+            }
         }
         throw new SocialParamsException("错误的openIm类型");
     }
