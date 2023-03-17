@@ -122,7 +122,7 @@ npm run serve
 * [演示系统后端代码](https://gitee.com/socialuni/socialuni/tree/master/socialuni-official-web)
 * [演示系统前端代码](https://gitee.com/socialuni/socialuni/blob/master/socialuni-docs/src/views/demo/DemoView.vue)
 
-### 更新记录
+# 更新记录
 
 **当前版本V0.31-2023.3.15**
 
