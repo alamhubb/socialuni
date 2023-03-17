@@ -32,6 +32,7 @@
         <module>socialuni-tance-api</module>
         <module>socialuni-user-sdk</module>
         <module>socialuni-report-sdk</module>
+        <module>socialuni-admin-sdk</module>
         <module>socialuni-community-sdk</module>
         <module>socialuni-im-sdk</module>
     </modules>
@@ -52,6 +53,11 @@
             <dependency>
                 <groupId>com.socialuni.social</groupId>
                 <artifactId>socialuni-im-sdk</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni.social</groupId>
+                <artifactId>socialuni-admin-sdk</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>
