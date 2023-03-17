@@ -139,6 +139,10 @@ export default class PhoneLoginForm extends Vue {
     return PhoneNumFormData.phoneNumberError(this.value.phoneNum) || Boolean(this.countDown)
   }
 
+  resetAuthCodeCountDown(){
+    this.countDown = 0
+  }
+
   phoneNumClear() {
     console.log(this.value.phoneNum)
     this.value.phoneNum = ''

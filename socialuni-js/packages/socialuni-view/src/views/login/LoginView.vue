@@ -15,7 +15,7 @@
       </div>
 
       <view class="mt-xs h145">
-        <phone-login-form v-if="showPhoneView" v-model="phoneFormData"></phone-login-form>
+        <phone-login-form ref="loginForm" v-if="showPhoneView" v-model="phoneFormData"></phone-login-form>
 
         <view class="h120 row-center" v-else>
           <!--          头部-->
@@ -148,6 +148,10 @@ import RouterUtil from "socialuni-sdk/src/utils/RouterUtil";
   }
 })
 export default class LoginView extends Vue {
+  $refs: {
+    loginForm: PhoneLoginForm
+  }
+
   get user() {
     return socialUserModule.mineUser
   }
@@ -235,9 +239,15 @@ export default class LoginView extends Vue {
         this.loginAfterHint('登录成功')
       } finally {
         this.goToOAuthPage()
+        this.resetAuthCodeCountDown()
         this.openTypeBtnEnable = true
       }
     }
+
+  }
+
+  resetAuthCodeCountDown() {
+    this.$refs.loginForm.resetAuthCodeCountDown()
   }
 
   goToOAuthPage() {
@@ -260,6 +270,7 @@ export default class LoginView extends Vue {
       } catch (e) {
         this.goToOAuthPage()
       } finally {
+        this.resetAuthCodeCountDown()
         this.openTypeBtnEnable = true
       }
     }

@@ -5,6 +5,7 @@ import BindWxPhoneNumQO from '../../model/phone/BindWxPhoneNumQO'
 import SocialSendAuthCodeQO from '../../model/phone/SocialSendAuthCodeQO'
 import request from '../../request/request';
 import UniProviderLoginQO from "../../model/login/UniProviderLoginQO";
+import SocialuniMineUserRO from "../../model/user/SocialuniMineUserRO";
 
 export default class PhoneAPI {
   static bindSocialuniPhoneNum (loginData: UniProviderLoginQO) {
@@ -17,7 +18,7 @@ export default class PhoneAPI {
 
   static bindPhoneNumAPI (phoneNum: string, authCode: string) {
     const phoneNumObj: SocialPhoneNumLoginQO = new SocialPhoneNumLoginQO(phoneNum, authCode)
-    return request.post<CenterUserDetailRO>('socialuni/phone/bindPhoneNum', phoneNumObj).then(res => {
+    return request.post<SocialuniMineUserRO>('socialuni/phone/bindPhoneNum', phoneNumObj).then(res => {
       return res.data
     })
   }
