@@ -1,5 +1,6 @@
 package com.socialuni.social.sdk.logic.factory;
 
+import com.socialuni.social.common.api.entity.SocialuniImgBaseDo;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
 import com.socialuni.social.sdk.model.RO.talk.SocialuniTalkImgRO;
@@ -12,7 +13,7 @@ import java.util.stream.Collectors;
 public class SocialTalkImgROFactory {
 
 
-    public static SocialuniTalkImgRO newTalkImgRO(SocialuniTalkImgDO socialTalkImgDO) {
+    public static <T extends SocialuniImgBaseDo> SocialuniTalkImgRO newTalkImgRO(T socialTalkImgDO) {
         SocialuniTalkImgRO socialTalkImgRO = new SocialuniTalkImgRO();
         socialTalkImgRO.setSrc(SocialuniSystemConst.getStaticResourceUrl() + socialTalkImgDO.getSrc());
         socialTalkImgRO.setAspectRatio(socialTalkImgDO.getAspectRatio());
@@ -20,7 +21,7 @@ public class SocialTalkImgROFactory {
     }
 
 
-    public static List<SocialuniTalkImgRO> newTalkImgROS(List<SocialuniTalkImgDO> imgDOS) {
+    public static List<SocialuniTalkImgRO> newTalkImgROS(List<? extends SocialuniImgBaseDo> imgDOS) {
         return imgDOS.stream().map(SocialTalkImgROFactory::newTalkImgRO).collect(Collectors.toList());
     }
 }

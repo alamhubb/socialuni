@@ -49,7 +49,7 @@ public class SocialuniImTestController {
     SocialuniUserRepository socialuniUserRepository;
 
 
-//    @GetMapping("getUserImTokenAll")
+    //    @GetMapping("getUserImTokenAll")
     public ResultRO<String> getUserImToken(Integer index) throws JsonProcessingException {
 
         log.info(String.valueOf(System.currentTimeMillis() / 1000));
@@ -159,7 +159,7 @@ public class SocialuniImTestController {
 
     private ResultRO<String> getUserImToken(SocialuniUserDo mineUser, SocialuniImUserModel socialuniImUserModel) {
 
-        String imToken = null;
+       /* String imToken = null;
         try {
             //存在脏数据，所以特殊处理
             imToken = socialuniOpenImUserFeign.getAndRefreshToken(socialuniImUserModel.getUserID());
@@ -168,7 +168,7 @@ public class SocialuniImTestController {
         }
 
         //设置openIm的key
-        /*SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUserId(SocialuniAccountProviderType.openIm, mineUser.getUserId());
+        *//*SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUserId(SocialuniAccountProviderType.openIm, mineUser.getUserId());
 
         if (socialUserAccountDO == null) {
             if (StringUtils.isEmpty(imToken)) {
@@ -184,7 +184,7 @@ public class SocialuniImTestController {
                 imToken = resultRO.getData();
             }
 
-        }*/
+        }*//*
         try {
             //如果为登录，则刷新token
             imToken = socialuniOpenImUserFeign.userLogin(socialuniImUserModel);
@@ -197,7 +197,8 @@ public class SocialuniImTestController {
 //            imToken = resultRO.getData();
         }
         SocialUserAccountDO socialUserAccountDO = socialBindUserOpenImAccountDomain.bindOrUpdateUserOpenImAccount(mineUser, socialuniImUserModel.getUserID(), imToken);
-        return ResultRO.success(socialUserAccountDO.getSessionKey());
+        return ResultRO.success(socialUserAccountDO.getSessionKey());*/
+        return null;
     }
 
 
