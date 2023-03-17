@@ -13,7 +13,6 @@ public class SocialRequestUserConfiguration {
     @Bean
     @ConditionalOnMissingBean(SocialRequestUserConfig.class)
     public SocialRequestUserConfig defaultSocialRequestUserConfig() {
-        log.info("用户性别123123");
         return new SocialRequestUserConfigDefaultImpl();
     }
 }

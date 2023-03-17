@@ -43,7 +43,7 @@
 | 必须设置校园才能发帖       | √    | SocialuniAppConfig.appConfig.mustSetSchoolCanPost     |
 | 违禁词管理            | √    | 无     |
 | 敏感词管理            | √    | 无     |
-| 必须实名认证才能发帖       | ×    | SocialuniAppConfig.appConfig.mustIdentityAuthCanPost     |
+| 必须实名认证才能发帖       | √    | SocialuniAppConfig.appConfig.mustIdentityAuthCanPost     |
 | 仅(男生，女生)性别社区     | ×    | SocialuniAppConfig.appConfig.appGender     |
 | 付费获取联系方式    | ×    |      |
 
