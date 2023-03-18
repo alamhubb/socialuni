@@ -536,16 +536,7 @@ export default class UserInfo extends Vue {
   }
 
   moreAction() {
-    if (this.isMine) {
-      const menuList: string [] = ['上传头像', '退出登录']
-      UniUtil.actionSheet(menuList).then((index: number) => {
-        if (index === 0) {
-          this.uploadUserAvatarImg()
-        } else if (index === 1) {
-          this.loginOut()
-        }
-      })
-    }
+
   }
 
   /*mounted () {

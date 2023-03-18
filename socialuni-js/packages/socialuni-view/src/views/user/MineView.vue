@@ -11,8 +11,7 @@
               class="size65 bd-round bd-3 bd-white mr-sm"
               mode="aspectFill"
               :src="mineUser.avatar"
-              @click="seeAvatarDetail"
-              @longpress="moreAction"
+              @click="moreAction"
           />
           <view class="flex-1 row-between">
             <view class="flex-col flex-1">
@@ -113,11 +112,11 @@
           </div>
           <div v-else class="row-col-center q-tag" @click="openSetContactInfo">设置联系方式</div>
         </div>
-<!--        <div v-if="mineUser.openContactInfo" class="row-col-center mb-smm">
-          <q-icon class="text-gray mr-xs" icon="mdi-school"/>
-          联系方式：
-          <div class="q-tag">{{ mineUser.contactInfo }}(点击获取联系方式)</div>
-        </div>-->
+        <!--        <div v-if="mineUser.openContactInfo" class="row-col-center mb-smm">
+                  <q-icon class="text-gray mr-xs" icon="mdi-school"/>
+                  联系方式：
+                  <div class="q-tag">{{ mineUser.contactInfo }}(点击获取联系方式)</div>
+                </div>-->
       </div>
 
       <div v-if="!isIos" class="row-between-center use-click bg-white px-sm py-sm bd-radius-10 elevation-4 mx-sm mt-smm"
@@ -268,7 +267,7 @@ export default class MineView extends Vue {
     return socialUserModule.mineUser
   }
 
-  get isIos(){
+  get isIos() {
     return socialSystemModule.isIos
   }
 
@@ -365,9 +364,11 @@ export default class MineView extends Vue {
   }
 
   moreAction() {
-    const menuList: string [] = ['上传头像']
+    const menuList: string [] = ['查看头像', '上传头像']
     UniUtil.actionSheet(menuList).then((index: number) => {
       if (index === 0) {
+        this.seeAvatarDetail()
+      } else if (index === 1) {
         this.uploadUserAvatarImg()
       }
     })
