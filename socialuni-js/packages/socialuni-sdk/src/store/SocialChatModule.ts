@@ -246,6 +246,7 @@ export default class SocialChatModule extends Pinia {
      */
     async refreshRecvFriendApplicationList() {
         await (await this.openIm()).getRecvFriendApplicationList().then(({data}) => {
+            console.log(data)
             const list = JSON.parse(data);
             const newList = []
             for (const datum of list) {

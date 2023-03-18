@@ -66,7 +66,6 @@ export default class OpenIMSDK extends Emitter {
   private ws: WebSocket | undefined;
   private uid: string | undefined;
   private token: string | undefined;
-  private platform: string = "web";
   private wsUrl: string = "";
   private lock: boolean = false;
   private logoutFlag: boolean = false;
@@ -80,7 +79,6 @@ export default class OpenIMSDK extends Emitter {
 
   constructor() {
     super();
-    this.getPlatform();
   }
 
   /**
@@ -94,6 +92,9 @@ export default class OpenIMSDK extends Emitter {
    * @returns
    */
   login(config: InitConfig) {
+      //建立连接
+
+
     return new Promise<WsResponse>((resolve, reject) => {
       const { userID, token, url, platformID, isBatch = false, operationID } = config;
       this.wsUrl = `${url}?sendID=${userID}&token=${token}&platformID=${platformID}`;
@@ -111,12 +112,15 @@ export default class OpenIMSDK extends Emitter {
       };
 
       const onOpen = () => {
+          console.log('open')
         this.uid = userID;
         this.token = token;
         this.isBatch = isBatch;
         this.iLogin(loginData, operationID)
           .then((res) => {
+          console.log('open123')
             this.logoutFlag = false;
+              //建立心跳
             this.heartbeat();
             resolve(res);
           })
@@ -1033,6 +1037,7 @@ export default class OpenIMSDK extends Emitter {
         userID: this.uid,
         data: "",
       };
+      console.log(args)
       this.wsSend(args, resolve, reject);
     });
   };
@@ -1669,28 +1674,6 @@ export default class OpenIMSDK extends Emitter {
   //tool methods
 
   private wsSend = (params: WsParams, resolve: (value: WsResponse | PromiseLike<WsResponse>) => void, reject: (reason?: any) => void) => {
-    if (window?.navigator && !window.navigator.onLine) {
-      let errData: WsResponse = {
-        event: params.reqFuncName,
-        errCode: 113,
-        errMsg: "net work error",
-        data: "",
-        operationID: params.operationID || "",
-      };
-      reject(errData);
-      return;
-    }
-    // if (this.ws === undefined) {
-    //   let errData: WsResponse = {
-    //     event: params.reqFuncName,
-    //     errCode: 112,
-    //     errMsg: "ws conect failed...",
-    //     data: "",
-    //     operationID: params.operationID || "",
-    //   };
-    //   reject(errData);
-    //   return;
-    // }
     if (typeof params.data === "object") {
       params.data = JSON.stringify(params.data);
     }
@@ -1731,17 +1714,12 @@ export default class OpenIMSDK extends Emitter {
     };
 
     try {
-      if (this.platform == "web") {
-        this.ws!.send(JSON.stringify(params));
-        this.ws!.onmessage = handleMessage;
-      } else {
         this.ws!.send({
           //@ts-ignore
           data: JSON.stringify(params),
           success: (res: any) => {
             //@ts-ignore
             if (
-              this.platform === "uni" &&
               //@ts-ignore
               this.ws!._callbacks !== undefined &&
               //@ts-ignore
@@ -1757,7 +1735,6 @@ export default class OpenIMSDK extends Emitter {
           this.ws!.onMessage(handleMessage);
           this.onceFlag = false;
         }
-      }
     } catch (error) {
       if (this.wsUrl && this.token && this.token) {
         this.createWs().then(() => {
@@ -1779,27 +1756,6 @@ export default class OpenIMSDK extends Emitter {
       this.onceFlag = true;
     }
   };
-
-  private getPlatform() {
-    const wflag = typeof WebSocket;
-    //@ts-ignore
-    const uflag = typeof uni;
-    //@ts-ignore
-    const xflag = typeof wx;
-
-    if (wflag !== "undefined") {
-      this.platform = "web";
-      return;
-    }
-
-    if (uflag === "object" && xflag !== "object") {
-      this.platform = "uni";
-    } else if (uflag !== "object" && xflag === "object") {
-      this.platform = "wx";
-    } else {
-      this.platform = "unknow";
-    }
-  }
 
   private createWs(_onOpen?: Function, _onClose?: Function, _onError?: Function) {
     console.log("start createWs...");
@@ -1826,6 +1782,7 @@ export default class OpenIMSDK extends Emitter {
 
       let onClose: any = () => {
         console.log("ws close agin:::");
+          //不为登出
         if (!this.logoutFlag) {
           Object.values(this.ws2promise).forEach((promise) =>
             promise.mrjet({
@@ -1849,17 +1806,8 @@ export default class OpenIMSDK extends Emitter {
         onError = _onError;
       }
 
-      if (this.platform === "web") {
-        this.ws = new WebSocket(this.wsUrl);
-        this.ws.onclose = onClose;
-        this.ws.onopen = onOpen;
-        this.ws.onerror = onError;
-        return;
-      }
-
       // @ts-ignore
-      const platformNamespace = this.platform === "uni" ? uni : wx;
-      this.ws = platformNamespace.connectSocket({
+      this.ws = uni.connectSocket({
         url: this.wsUrl,
         complete: () => {},
       });
