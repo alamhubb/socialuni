@@ -93,8 +93,6 @@ export default class OpenIMSDK extends Emitter {
    */
   login(config: InitConfig) {
       //建立连接
-
-
     return new Promise<WsResponse>((resolve, reject) => {
       const { userID, token, url, platformID, isBatch = false, operationID } = config;
       this.wsUrl = `${url}?sendID=${userID}&token=${token}&platformID=${platformID}`;
@@ -111,10 +109,13 @@ export default class OpenIMSDK extends Emitter {
         operationID: operationID || "",
       };
 
-      const onOpen = () => {
-          console.log('open')
+      const onOpen = (e) => {
+        console.log('dchldajfk')
+        console.log(e)
         this.uid = userID;
         this.token = token;
+        console.log(userID)
+        console.log(token)
         this.isBatch = isBatch;
         this.iLogin(loginData, operationID)
           .then((res) => {
@@ -165,6 +166,202 @@ export default class OpenIMSDK extends Emitter {
         reject(errData);
       }
     });
+  }
+
+  //tool methods
+
+  private wsSend = (params: WsParams, resolve: (value: WsResponse | PromiseLike<WsResponse>) => void, reject: (reason?: any) => void) => {
+    if (typeof params.data === "object") {
+      params.data = JSON.stringify(params.data);
+    }
+
+    const ws2p = {
+      oid: params.operationID || uuid(this.uid as string),
+      mname: params.reqFuncName,
+      mrsve: resolve,
+      mrjet: reject,
+      flag: false,
+    };
+
+    this.ws2promise[ws2p.oid] = ws2p;
+
+    const handleMessage = (ev: MessageEvent<string>) => {
+      const data = JSON.parse(ev.data);
+      if ((CbEvents as Record<string, string>)[data.event.toUpperCase()]) {
+        this.emit(data.event, data);
+        return;
+      }
+
+      if (params.reqFuncName === RequestFunc.LOGOUT) {
+        this.logoutFlag = true;
+        this.ws!.close();
+        this.ws = undefined;
+      }
+
+      const callbackJob = this.ws2promise[data.operationID];
+      if (!callbackJob) {
+        return;
+      }
+      if (data.errCode === 0) {
+        callbackJob.mrsve(data);
+      } else {
+        callbackJob.mrjet(data);
+      }
+      delete this.ws2promise[data.operationID];
+    };
+
+    try {
+      this.ws!.send({
+        //@ts-ignore
+        data: JSON.stringify(params),
+        success: (res: any) => {
+          console.log(JSON.stringify(params))
+          console.log('send chenggon')
+          console.log(res)
+          //@ts-ignore
+          if (
+              //@ts-ignore
+              this.ws!._callbacks !== undefined &&
+              //@ts-ignore
+              this.ws!._callbacks.message !== undefined
+          ) {
+            //@ts-ignore
+            this.ws!._callbacks.message = [];
+          }
+        },
+        fail(e){
+          console.log('send shibai')
+          console.log(e)
+        },
+      });
+      if (this.onceFlag) {
+        //@ts-ignore
+        this.ws!.onMessage(handleMessage);
+        this.onceFlag = false;
+      }
+    } catch (error) {
+      if (this.wsUrl && this.token && this.token) {
+        this.createWs().then(() => {
+          this.wsSend(params, resolve, reject);
+        });
+      } else {
+        let errData: WsResponse = {
+          event: params.reqFuncName,
+          errCode: 112,
+          errMsg: "no ws conect...",
+          data: "",
+          operationID: params.operationID || "",
+        };
+        reject(errData);
+        return;
+      }
+    }
+    if (params.reqFuncName === RequestFunc.LOGOUT) {
+      this.onceFlag = true;
+    }
+  };
+
+  private createWs(_onOpen?: Function, _onClose?: Function, _onError?: Function) {
+    console.log("start createWs...");
+    return new Promise<void>((resolve, reject) => {
+      //上锁，防止无限重连，因为会触发close会触发重连
+      this.lock = true;
+      this.ws?.close();
+      this.ws = undefined;
+
+      let onOpen: any = (e) => {
+        const loginData = {
+          userID: this.uid!,
+          token: this.token!,
+        };
+        this.iLogin(loginData).then((res) => {
+          this.logoutFlag = false;
+          this.lock = false;
+          console.log("iLogin suc...");
+          this.heartbeat();
+          resolve();
+        });
+      };
+
+      if (_onOpen) {
+        onOpen = _onOpen;
+      }
+
+      let onClose: any = () => {
+        console.log("ws close agin:::");
+        //不为登出
+        if (!this.logoutFlag) {
+          Object.values(this.ws2promise).forEach((promise) =>
+              promise.mrjet({
+                event: promise.mname,
+                errCode: 111,
+                errMsg: "ws connect close...",
+                data: "",
+                operationID: promise.oid,
+              })
+          );
+          this.reconnect();
+        }
+      };
+
+      if (_onClose) {
+        onClose = _onClose;
+      }
+
+      let onError: any = () => {};
+      if (_onError) {
+        onError = _onError;
+      }
+
+      // @ts-ignore
+      this.ws = uni.connectSocket({
+        url: this.wsUrl,
+        complete: () => {},
+      });
+      //@ts-ignore
+      this.ws.onClose(onClose);
+      //@ts-ignore
+      this.ws.onOpen(onOpen);
+      //@ts-ignore
+      this.ws.onError(onError);
+    });
+  }
+
+  private reconnect() {
+    if (!this.onceFlag) this.onceFlag = true;
+    if (this.lock) return;
+    setTimeout(() => {
+      this.createWs();
+    }, 5000);
+  }
+
+  private heartbeat() {
+    console.log("start heartbeat...");
+
+    if (this.platformID !== 5) return;
+    if (this.timer) clearTimeout(this.timer);
+
+    this.heartbeatCount = 0;
+    this.heartbeatStartTime = new Date().getTime();
+
+    const heartbeatCallback = () => {
+      this.heartbeatCount += 1;
+      const offset = new Date().getTime() - (this.heartbeatStartTime + this.heartbeatCount * 30000);
+      console.log("offset::::", offset);
+
+      let nextTime = 30000 - offset;
+      if (nextTime < 0) {
+        nextTime = 0;
+      }
+      if (this.logoutFlag) {
+        this.timer && clearTimeout(this.timer);
+        return;
+      }
+      this.getLoginStatus().catch((err) => this.reconnect());
+      this.timer = setTimeout(heartbeatCallback, nextTime);
+    };
+
+    this.timer = setTimeout(heartbeatCallback, 30000);
   }
 
   private iLogin(data: LoginParams, operationID?: string) {
@@ -1037,7 +1234,6 @@ export default class OpenIMSDK extends Emitter {
         userID: this.uid,
         data: "",
       };
-      console.log(args)
       this.wsSend(args, resolve, reject);
     });
   };
@@ -1670,192 +1866,4 @@ export default class OpenIMSDK extends Emitter {
       this.wsSend(args, resolve, reject);
     });
   };
-
-  //tool methods
-
-  private wsSend = (params: WsParams, resolve: (value: WsResponse | PromiseLike<WsResponse>) => void, reject: (reason?: any) => void) => {
-    if (typeof params.data === "object") {
-      params.data = JSON.stringify(params.data);
-    }
-
-    const ws2p = {
-      oid: params.operationID || uuid(this.uid as string),
-      mname: params.reqFuncName,
-      mrsve: resolve,
-      mrjet: reject,
-      flag: false,
-    };
-
-    this.ws2promise[ws2p.oid] = ws2p;
-
-    const handleMessage = (ev: MessageEvent<string>) => {
-      const data = JSON.parse(ev.data);
-      if ((CbEvents as Record<string, string>)[data.event.toUpperCase()]) {
-        this.emit(data.event, data);
-        return;
-      }
-
-      if (params.reqFuncName === RequestFunc.LOGOUT) {
-        this.logoutFlag = true;
-        this.ws!.close();
-        this.ws = undefined;
-      }
-
-      const callbackJob = this.ws2promise[data.operationID];
-      if (!callbackJob) {
-        return;
-      }
-      if (data.errCode === 0) {
-        callbackJob.mrsve(data);
-      } else {
-        callbackJob.mrjet(data);
-      }
-      delete this.ws2promise[data.operationID];
-    };
-
-    try {
-        this.ws!.send({
-          //@ts-ignore
-          data: JSON.stringify(params),
-          success: (res: any) => {
-            //@ts-ignore
-            if (
-              //@ts-ignore
-              this.ws!._callbacks !== undefined &&
-              //@ts-ignore
-              this.ws!._callbacks.message !== undefined
-            ) {
-              //@ts-ignore
-              this.ws!._callbacks.message = [];
-            }
-          },
-        });
-        if (this.onceFlag) {
-          //@ts-ignore
-          this.ws!.onMessage(handleMessage);
-          this.onceFlag = false;
-        }
-    } catch (error) {
-      if (this.wsUrl && this.token && this.token) {
-        this.createWs().then(() => {
-          this.wsSend(params, resolve, reject);
-        });
-      } else {
-        let errData: WsResponse = {
-          event: params.reqFuncName,
-          errCode: 112,
-          errMsg: "no ws conect...",
-          data: "",
-          operationID: params.operationID || "",
-        };
-        reject(errData);
-        return;
-      }
-    }
-    if (params.reqFuncName === RequestFunc.LOGOUT) {
-      this.onceFlag = true;
-    }
-  };
-
-  private createWs(_onOpen?: Function, _onClose?: Function, _onError?: Function) {
-    console.log("start createWs...");
-    return new Promise<void>((resolve, reject) => {
-      this.ws?.close();
-      this.ws = undefined;
-
-      let onOpen: any = () => {
-        const loginData = {
-          userID: this.uid!,
-          token: this.token!,
-        };
-        this.iLogin(loginData).then((res) => {
-          this.logoutFlag = false;
-          console.log("iLogin suc...");
-          this.heartbeat();
-          resolve();
-        });
-      };
-
-      if (_onOpen) {
-        onOpen = _onOpen;
-      }
-
-      let onClose: any = () => {
-        console.log("ws close agin:::");
-          //不为登出
-        if (!this.logoutFlag) {
-          Object.values(this.ws2promise).forEach((promise) =>
-            promise.mrjet({
-              event: promise.mname,
-              errCode: 111,
-              errMsg: "ws connect close...",
-              data: "",
-              operationID: promise.oid,
-            })
-          );
-          this.reconnect();
-        }
-      };
-
-      if (_onClose) {
-        onClose = _onClose;
-      }
-
-      let onError: any = () => {};
-      if (_onError) {
-        onError = _onError;
-      }
-
-      // @ts-ignore
-      this.ws = uni.connectSocket({
-        url: this.wsUrl,
-        complete: () => {},
-      });
-      //@ts-ignore
-      this.ws.onClose(onClose);
-      //@ts-ignore
-      this.ws.onOpen(onOpen);
-      //@ts-ignore
-      this.ws.onError(onError);
-    });
-  }
-
-  private reconnect() {
-    if (!this.onceFlag) this.onceFlag = true;
-    if (this.lock) return;
-    this.lock = true;
-    setTimeout(() => {
-      this.createWs();
-      this.lock = false;
-    }, 5000);
-  }
-
-  private heartbeat() {
-    console.log("start heartbeat...");
-
-    if (this.platformID !== 5) return;
-    if (this.timer) clearTimeout(this.timer);
-
-    this.heartbeatCount = 0;
-    this.heartbeatStartTime = new Date().getTime();
-
-    const heartbeatCallback = () => {
-      this.heartbeatCount += 1;
-      const offset = new Date().getTime() - (this.heartbeatStartTime + this.heartbeatCount * 30000);
-      console.log("offset::::", offset);
-
-      let nextTime = 30000 - offset;
-      if (nextTime < 0) {
-        nextTime = 0;
-      }
-      if (this.logoutFlag) {
-        this.timer && clearTimeout(this.timer);
-        return;
-      }
-      this.getLoginStatus().catch((err) => this.reconnect());
-      this.timer = setTimeout(heartbeatCallback, nextTime);
-    };
-
-    this.timer = setTimeout(heartbeatCallback, 30000);
-  }
 }
