@@ -240,6 +240,7 @@ public class QQUtil {
 
     //发起支付
     public static String postPayUrl(String deviceIp, String orderNo, String total_feeStr) throws IOException {
+        log.info("jinrujzhifu:{}", orderNo);
         Map<String, String> map = new HashMap<>();
         map.put("appid", qq_mp_id);
         String attachStr = "qingchiapp";
@@ -272,6 +273,8 @@ public class QQUtil {
         String out_trade_no = "<out_trade_no>" + orderNo + "</out_trade_no>";
         String spbill_create_ip = "<spbill_create_ip>" + deviceIp + "</spbill_create_ip>";
         String total_fee = "<total_fee>" + total_feeStr + "</total_fee>";
+
+        log.info("map:{}", map.size());
         xmlString.append("<xml>")
                 .append(appid)
                 .append(attach)
@@ -287,13 +290,14 @@ public class QQUtil {
                 .append(signXmlStr)
                 .append("</xml>");
         // 创建 HttpEntity
+        log.info("请求：{}", xmlString);
         HttpEntity<String> requestEntity = new HttpEntity<>(xmlString.toString(), requestHeader);
         ResponseEntity<String> responseEntity = RestUtil.getXmlRestTemplate().postForEntity(QQConst.qq_pay_url, requestEntity, String.class);
         XStream xstream = new XStream();
         xstream.alias("xml", QQPayResult.class);
         Object qqPayResult = xstream.fromXML(responseEntity.getBody());
         String result = objectMapper.writeValueAsString(qqPayResult);
-        log.info(result);
+        log.info("结果：{}", result);
         QQPayResult result1 = objectMapper.readValue(result, QQPayResult.class);
         if (result1.hasError()) {
             throw new SocialParamsException("支付失败");

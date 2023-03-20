@@ -11,6 +11,7 @@ import com.socialuni.social.sdk.dao.factory.SocialuniCoinOrderFactory;
 import com.socialuni.social.sdk.dao.repository.bussiness.SocialuniPayOrderRepository;
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserSocialCoinDOUtil;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserCoinDo;
+import com.socialuni.social.user.sdk.platform.QQPayNotifyResult;
 import com.socialuni.social.user.sdk.platform.WXPayNotifyResult;
 import com.socialuni.social.user.sdk.platform.qq.QQPayResult;
 import com.socialuni.social.user.sdk.platform.weixin.WxConst;
@@ -19,14 +20,17 @@ import com.thoughtworks.xstream.XStream;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.util.ObjectUtils;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @RequestMapping("socialuni/callback")
 @RestController
@@ -75,6 +79,11 @@ public class SocialuniCallbackController {
         return getQqPayResult(sign, out_trade_no, total_fee, transaction_id);
     }
 
+
+    @PostMapping(value = "qqPayNotify", consumes = MediaType.APPLICATION_XML_VALUE, produces = MediaType.APPLICATION_XML_VALUE)
+    public String qqPayNotify(@RequestBody QQPayNotifyResult result) {
+        return getQqPayResult(result.getSign(), result.getOut_trade_no(), result.getTotal_fee(), result.getTransaction_id());
+    }
 
     private String getQqPayResult(String sign, String inside_order_no, Integer total_fee, String transaction_id) {
         QQPayResult qqPayResult = new QQPayResult();
