@@ -1,2 +1,4 @@
 #忽略所有.idea目录
 ../.idea
+/socialuni-js/.idea/
+/.idea/
