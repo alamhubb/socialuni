@@ -38,10 +38,16 @@ public class TencentSmsServe {
     }
 
     public static String sendAuthCode(String phoneNum) {
-        String authCode = AuthCodeUtil.getAuthCode();
+        String authCode = "9999";
+        if (SocialuniSystemConst.getIsProdEnv() && StringUtil.isNotEmpty(appKey)) {
+            authCode = AuthCodeUtil.getAuthCode();
+        } else {
+            log.info("非生产环境不发送验证码，开发环境验证码为：{}", authCode);
+        }
         return TencentSmsServe.sendAuthCode(phoneNum, authCode, "30");
     }
-    public static String sendAuthCode(String phoneNum,String sendAuthCode) {
+
+    public static String sendAuthCode(String phoneNum, String sendAuthCode) {
         String authCode = AuthCodeUtil.getAuthCode();
         return TencentSmsServe.sendAuthCode(phoneNum, authCode, "30");
     }
@@ -53,7 +59,6 @@ public class TencentSmsServe {
         // 签名
         // 签名参数未提供或者为空时，会使用默认签名发送短信
         try {
-            log.info("发送验证码authCode:{}", authCode);
             //生产环境才发送验证码
             if (SocialuniSystemConst.getIsProdEnv() && StringUtil.isNotEmpty(appKey)) {
                 SmsSingleSenderResult result = ssender.sendWithParam("86", phoneNum, templateId, params, smsSign, "", "");

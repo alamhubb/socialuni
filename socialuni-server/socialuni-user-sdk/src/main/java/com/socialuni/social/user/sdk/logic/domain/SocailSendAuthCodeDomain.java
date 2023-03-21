@@ -7,6 +7,7 @@ import com.socialuni.social.common.api.exception.exception.SocialParamsException
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.utils.IpUtil;
 import com.socialuni.social.common.sdk.constant.StatusConst;
+import com.socialuni.social.common.sdk.utils.StringUtil;
 import com.socialuni.social.tance.config.ErrorMsg;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
