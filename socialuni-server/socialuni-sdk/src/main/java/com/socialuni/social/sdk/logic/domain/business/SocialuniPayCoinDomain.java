@@ -74,6 +74,8 @@ public class SocialuniPayCoinDomain {
             SocialuniCoinPayRO userPayResultVO = new SocialuniCoinPayRO();
 
             String platform = rechargeOrder.getPlatform();
+
+            log.info("payTYpe:{}", payType);
             if (SocialuniPayProviderType.wx.equals(payType)) {
                 prepay_id = WxUtil.postPayUrl(platform, userIp, orderNo, total_feeStr, user.getUserId());
                 String nonceStr = UUIDUtil.getUUID();
@@ -92,6 +94,7 @@ public class SocialuniPayCoinDomain {
 
                 rechargeOrder.setOutSysSign(sign);
             } else {
+                log.info("orderNo:{}", orderNo);
                 prepay_id = QQUtil.postPayUrl(userIp, orderNo, total_feeStr);
                 packageStr = "prepay_id=" + prepay_id;
                 userPayResultVO.setPackage_alias(packageStr);

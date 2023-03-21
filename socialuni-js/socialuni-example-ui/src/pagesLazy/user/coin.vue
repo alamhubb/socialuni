@@ -1,4 +1,5 @@
 <template>
+<!--  <div>123</div>-->
   <socialuni-coin-view></socialuni-coin-view>
 </template>
 

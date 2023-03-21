@@ -9,12 +9,9 @@ import ToastUtil from "socialuni-sdk/src/utils/ToastUtil"
 import WxUtils from "./WxUtils"
 import MPUtil from "socialuni-sdk/src/utils/MPUtil"
 import APPUtil from "./APPUtil"
-import UserPayResultVO from "../model/user/UserPayResultVO";
-import SocialuniMineUserAPI from "socialuni-api/src/api/socialuni/SocialuniMineUserAPI";
 import SocialuniCoinAPI from "socialuni-api/src/api/socialuni/SocialuniCoinAPI";
 import SocialuniAppAPI from "socialuni-api/src/api/socialuni/SocialuniAppAPI";
-import PageUtil from "./PageUtil";
-import SocialuniProviderType from "socialuni-constant/constant/SocialuniProviderType";
+import UserPayResultVO from "socialuni-api/src/model/user/UserPayResultVO";
 
 
 // 统一处理各平台的订阅
@@ -83,8 +80,8 @@ export default class PlatformUtils {
     static async payCoin(amount: number) {
         PlatformUtils.checkPay()
         //目前支持微信支付
-        const provider: string = SocialuniProviderType.wx
-        return SocialuniCoinAPI.payCoinAPI(provider, amount).then((res) => {
+        // const provider: string = SocialuniProviderType.wx
+        return SocialuniCoinAPI.payCoinAPI(socialSystemModule.provider, amount).then((res) => {
             return PlatformUtils.cashPay(res.data)
         })
     }

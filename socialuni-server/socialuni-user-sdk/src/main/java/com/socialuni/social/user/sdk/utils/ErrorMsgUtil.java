@@ -1,6 +1,7 @@
 package com.socialuni.social.user.sdk.utils;
 
 
+import com.socialuni.social.common.api.exception.exception.SocialNullUserException;
 import com.socialuni.social.common.sdk.utils.DateUtils;
 import com.socialuni.social.tance.config.ErrorMsg;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
@@ -13,7 +14,10 @@ import java.util.Date;
 
 public class ErrorMsgUtil {
     public static String getErrorCode605ContactServiceValue() {
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+        Integer mineUserId = SocialuniUserUtil.getMineUserIdAllowNull();
+        if (mineUserId == null) {
+            throw new SocialNullUserException();
+        }
         SocialUserViolationDo socialUserViolationDo = SocialuniUserRepositoryFacede.findByUserId(mineUserId, SocialUserViolationDo.class);
         Date violationEndTime = socialUserViolationDo.getViolationEndTime();
         return ErrorMsgUtil.getErrorCode605ContactServiceValue(violationEndTime);

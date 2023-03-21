@@ -7,8 +7,6 @@ import com.socialuni.social.tance.sdk.model.DevAccountProviderModler;
 import java.util.List;
 
 public interface DevAccountProviderInterface {
-
-
     DevAccountProviderModler savePut(DevAccountProviderModler devAccountProviderModler);
 
     List<DevAccountProviderModler> findAllByDevId(Integer devId);

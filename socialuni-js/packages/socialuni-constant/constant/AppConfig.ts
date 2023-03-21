@@ -11,7 +11,8 @@ export default class AppConfig {
 
     // qq相关
     // qq小程序商户
-    static readonly qq_bargainor_id: string = import.meta.env.VUE_APP_QQ_BARGAINOR_ID
+    static readonly qq_bargainor_id: string = '1571477541'
+    // static readonly qq_bargainor_id: string = import.meta.env.VUE_APP_QQ_BARGAINOR_ID
     //app广告id
     static readonly app_feed_ad_id: string = '1890536227'
     static readonly app_award_ad_id: string = '1947278043'

@@ -35,7 +35,7 @@ export default class QQUtils {
       //@ts-ignore
       qq.requestPayment({
         package: payResult.package,
-        bargainor_id: AppConfig.qq_bargainor_id,
+        bargainor_id: "",
         success () {
           resolve(null)
         },
