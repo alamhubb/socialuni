@@ -374,7 +374,7 @@ public class QQUtil {
 
         // 创建 HttpEntity
         HttpEntity<String> requestEntity = new HttpEntity<>(xmlString.toString(), requestHeader);
-        log.info(map);
+        log.info(map.toString());
         log.info(xmlString.toString());
         ResponseEntity<String> responseEntity = RestUtil.getXmlRestTemplate().postForEntity(MessageFormat.format(QQConst.qq_wx_pay_url, qq_mp_id, getAccessToken(), WxConst.wx_pay_result_notify_url), requestEntity, String.class);
         String xmlStr = responseEntity.getBody();
