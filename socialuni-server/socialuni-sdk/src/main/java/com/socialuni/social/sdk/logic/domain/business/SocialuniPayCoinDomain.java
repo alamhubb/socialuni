@@ -95,9 +95,9 @@ public class SocialuniPayCoinDomain {
                 rechargeOrder.setOutSysSign(sign);
             } else {
                 log.info("orderNo:{}", orderNo);
-                prepay_id = QQUtil.postPayUrl(userIp, orderNo, total_feeStr);
-                packageStr = "prepay_id=" + prepay_id;
-                userPayResultVO.setPackage_alias(packageStr);
+                String mweb_url = QQUtil.postWxPayUrl(userIp, orderNo, total_feeStr);
+//                packageStr = "prepay_id=" + prepay_id;
+                userPayResultVO.setMweb_url(mweb_url);
             }
             rechargeOrder = SocialuniRepositoryFacade.save(rechargeOrder);
             return userPayResultVO;

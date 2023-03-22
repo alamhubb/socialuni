@@ -14,6 +14,7 @@ public class SocialuniCoinPayRO {
     private String prepayid;
     @JsonProperty("package")
     private String package_alias;
+    private String mweb_url;
     private String nonceStr;
     private String timeStamp;
     private String paySign;

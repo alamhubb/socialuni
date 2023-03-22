@@ -82,12 +82,15 @@ public class SocialuniCallbackController {
 
     @PostMapping(value = "qqPayNotify", consumes = MediaType.APPLICATION_XML_VALUE, produces = MediaType.APPLICATION_XML_VALUE)
     public String qqPayNotify(@RequestBody QQPayNotifyResult result) {
+        log.info("接收到支付成功通知：" + result);
         return getQqPayResult(result.getSign(), result.getOut_trade_no(), result.getTotal_fee(), result.getTransaction_id());
     }
 
     private String getQqPayResult(String sign, String inside_order_no, Integer total_fee, String transaction_id) {
         QQPayResult qqPayResult = new QQPayResult();
         qqPayResult.setReturn_code("SUCCESS");
+
+        log.info("收到了qq支付通知");
 
         SocialuniPayCoinOrderDO rechargeOrderDO = socialuniRechargeOrderRepository.findFirstByOrderNo(inside_order_no);
 

@@ -12,7 +12,7 @@ import com.socialuni.social.user.sdk.platform.weixin.token.WxTokenResult;
 public class QQConst {
     public static final String qq_pay_url = "https://qpay.qq.com/cgi-bin/pay/qpay_unified_order.cgi";
     public static final String qq_pay_result_notify_url = "https://api.socialuni.cn/socialuni/callback/qqPayNotify";
-
+    public static final String qq_wx_pay_url = "https://api.q.qq.com/wxpay/unifiedorder?appid={0}&access_token={1}&&real_notify_url={2}";
     public static final String qqLoginUrl = "https://api.q.qq.com/sns/jscode2session?";
     public static final String qq_msg_sec_check_url = "https://api.q.qq.com/api/json/security/MsgSecCheck?access_token=";
     public static final String qq_img_sec_check_url = "https://api.q.qq.com/api/json/security/ImgSecCheck?access_token=";

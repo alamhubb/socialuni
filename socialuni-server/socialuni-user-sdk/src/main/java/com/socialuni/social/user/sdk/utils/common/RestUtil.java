@@ -6,9 +6,12 @@ import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class RestUtil {
@@ -28,6 +31,8 @@ public class RestUtil {
         xmlTypes.add(MediaType.APPLICATION_XML);
         xmlTypes.add(MediaType.TEXT_PLAIN);
         xmlConverter.setSupportedMediaTypes(xmlTypes);
+        //解决中文乱码
+        xmlConverter.setDefaultCharset(StandardCharsets.UTF_8);
         // json
         MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
         List<MediaType> jsonTypes = new ArrayList<>();
@@ -49,12 +54,15 @@ public class RestUtil {
         jsonTypes.add(MediaType.TEXT_XML);
         jsonConverter.setSupportedMediaTypes(jsonTypes);
 
+
+
         messageConverters.add(xmlConverter);
         messageConverters.add(jsonConverter);
         //form
         messageConverters.add(new FormHttpMessageConverter());
 
         restTemplate.setMessageConverters(messageConverters);
+
         //使用build()方法进行获取
         return restTemplate;
     }

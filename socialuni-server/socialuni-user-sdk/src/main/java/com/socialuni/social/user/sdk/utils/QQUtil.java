@@ -1,7 +1,11 @@
 package com.socialuni.social.user.sdk.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.socialuni.social.common.api.constant.PlatformType;
 import com.socialuni.social.common.api.utils.UUIDUtil;
+import com.socialuni.social.user.sdk.constant.UniappProviderType;
+import com.socialuni.social.user.sdk.constant.platform.WxUrl;
+import com.socialuni.social.user.sdk.model.DO.SocialUserAccountDO;
 import com.socialuni.social.user.sdk.platform.PushMsgDTO;
 import com.socialuni.social.user.sdk.platform.PushMsgErrCode;
 import com.socialuni.social.user.sdk.platform.WxErrCode;
@@ -9,6 +13,7 @@ import com.socialuni.social.user.sdk.platform.qq.HttpImgCheckResult;
 import com.socialuni.social.user.sdk.platform.qq.QQConst;
 import com.socialuni.social.user.sdk.platform.qq.QQPayResult;
 import com.socialuni.social.user.sdk.model.weixin.HttpResult;
+import com.socialuni.social.user.sdk.platform.weixin.WxConst;
 import com.socialuni.social.user.sdk.platform.weixin.token.WxTokenResult;
 import com.socialuni.social.user.sdk.utils.common.RestUtil;
 import com.socialuni.social.common.api.constant.DateTimeType;
@@ -34,6 +39,7 @@ import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.text.MessageFormat;
 import java.util.*;
 
 /**
@@ -237,7 +243,6 @@ public class QQUtil {
         }
     }
 
-
     //发起支付
     public static String postPayUrl(String deviceIp, String orderNo, String total_feeStr) throws IOException {
         log.info("jinrujzhifu:{}", orderNo);
@@ -256,7 +261,8 @@ public class QQUtil {
         map.put("out_trade_no", orderNo);
         map.put("spbill_create_ip", deviceIp);
         map.put("total_fee", total_feeStr);
-        map.put("trade_type", "MINIAPP");
+        String trade_typeStr = "JSAPI";
+        map.put("trade_type", trade_typeStr);
         HttpHeaders requestHeader = new HttpHeaders();
         requestHeader.setContentType(MediaType.APPLICATION_XML);
         StringBuilder xmlString = new StringBuilder();
@@ -273,6 +279,7 @@ public class QQUtil {
         String out_trade_no = "<out_trade_no>" + orderNo + "</out_trade_no>";
         String spbill_create_ip = "<spbill_create_ip>" + deviceIp + "</spbill_create_ip>";
         String total_fee = "<total_fee>" + total_feeStr + "</total_fee>";
+        String trade_type = "<trade_type>" + trade_typeStr + "</trade_type>";
 
         log.info("map:{}", map.size());
         xmlString.append("<xml>")
@@ -286,7 +293,7 @@ public class QQUtil {
                 .append(out_trade_no)
                 .append(spbill_create_ip)
                 .append(total_fee)
-                .append("<trade_type>MINIAPP</trade_type>")
+                .append(trade_type)
                 .append(signXmlStr)
                 .append("</xml>");
         // 创建 HttpEntity
@@ -305,6 +312,81 @@ public class QQUtil {
         return result1.getPrepay_id();
     }
 
+    //发起支付
+    public static String postWxPayUrl(String deviceIp, String orderNo, String total_feeStr) throws IOException {
+
+        String trade_type = "MWEB";
+        String appId = WxUtil.getWx_mp_id();
+
+        Map<String, String> map = new HashMap<>();
+
+        map.put("appid", appId);
+        String bodystr = "qingchiapp";
+        map.put("body", bodystr);
+        map.put("mch_id", WxUtil.getWx_merchant_id());
+        String nonce_strstr = UUIDUtil.getUUID();
+        map.put("nonce_str", nonce_strstr);
+
+        String qqWxNotifyUrl = "https://api.q.qq.com/wxpay/notify";
+        map.put("notify_url", qqWxNotifyUrl);
+
+        map.put("out_trade_no", orderNo);
+        map.put("spbill_create_ip", deviceIp);
+        //10元
+        map.put("total_fee", total_feeStr);
+        map.put("trade_type", trade_type);
+        String scene_infoStr = "{\"h5_info\": {\"type\":\"Wap\",\"wap_url\": \"https://pay.qq.com\",\"wap_name\": \"腾讯充值\"}}";
+        map.put("scene_info", scene_infoStr);
+
+        HttpHeaders requestHeader = new HttpHeaders();
+        requestHeader.setContentType(MediaType.APPLICATION_XML);
+        StringBuilder xmlString = new StringBuilder();
+
+        String appIdStr = "<appid>" + appId + "</appid>";
+        String mch_id = "<mch_id>" + WxUtil.getWx_merchant_id() + "</mch_id>";
+        String body = "<body>" + bodystr + "</body>";
+        String nonce_str = "<nonce_str>" + nonce_strstr + "</nonce_str>";
+
+        String sign = WxUtil.getSignToken(map);
+        String signStr = "<sign>" + sign + "</sign>";
+
+
+        String notify = "<notify_url>" + qqWxNotifyUrl + "</notify_url>";
+        String out_trade_no_xml = "<out_trade_no>" + orderNo + "</out_trade_no>";
+        String spbill_create_ip = "<spbill_create_ip>" + deviceIp + "</spbill_create_ip>";
+        String total_fee = "<total_fee>" + total_feeStr + "</total_fee>";
+        String trade_typeStr = "<trade_type>" + trade_type + "</trade_type>";
+        String scene_info = "<scene_info>" + scene_infoStr + "</scene_info>";
+
+        xmlString.append("<xml>")
+                .append(appIdStr)
+                .append(body)
+                .append(mch_id)
+                .append(nonce_str)
+                .append(notify)
+                .append(out_trade_no_xml)
+                .append(spbill_create_ip)
+                .append(total_fee)
+                .append(trade_typeStr)
+                .append(scene_info)
+                .append(signStr)
+                .append("</xml>");
+
+        // 创建 HttpEntity
+        HttpEntity<String> requestEntity = new HttpEntity<>(xmlString.toString(), requestHeader);
+        log.info(map);
+        log.info(xmlString.toString());
+        ResponseEntity<String> responseEntity = RestUtil.getXmlRestTemplate().postForEntity(MessageFormat.format(QQConst.qq_wx_pay_url, qq_mp_id, getAccessToken(), WxConst.wx_pay_result_notify_url), requestEntity, String.class);
+        String xmlStr = responseEntity.getBody();
+        XStream xstream = new XStream();
+        xstream.alias("xml", QQPayResult.class);
+        Object qqPayResult = xstream.fromXML(xmlStr);
+        String result = objectMapper.writeValueAsString(qqPayResult);
+        log.info(result);
+        QQPayResult result1 = objectMapper.readValue(result, QQPayResult.class);
+
+        return result1.getMweb_url();
+    }
 
     /**
      * Description:MD5工具生成token

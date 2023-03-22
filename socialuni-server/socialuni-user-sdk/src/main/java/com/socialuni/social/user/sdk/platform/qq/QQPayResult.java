@@ -23,6 +23,7 @@ public class QQPayResult {
     private String trade_type;
     private String prepay_id;
     private String code_url;
+    private String mweb_url;
 
     public boolean hasError() {
         return "FAIL".equals(return_code);
