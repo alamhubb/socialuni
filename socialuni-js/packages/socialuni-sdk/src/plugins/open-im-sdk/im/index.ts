@@ -330,8 +330,10 @@ export default class OpenIMSDK extends Emitter {
   private reconnect() {
     if (!this.onceFlag) this.onceFlag = true;
     if (this.lock) return;
+    this.lock = true;
     setTimeout(() => {
       this.createWs();
+      this.lock = false;
     }, 5000);
   }
 
