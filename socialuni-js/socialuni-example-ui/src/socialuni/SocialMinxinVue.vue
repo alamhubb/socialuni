@@ -66,7 +66,7 @@ export default class SocialMinxinVue extends Vue {
 
   onShareAppMessage() {
     const title = '年轻人生活分享社区'
-    const path = '/pages/talk'
+    const path = '/pages/talk/talk"'
     const imageUrl = 'https://cdxapp-1257733245.file.myqcloud.com/qingchi/home/full.jpg!avatar'
     return {
       title: title,
