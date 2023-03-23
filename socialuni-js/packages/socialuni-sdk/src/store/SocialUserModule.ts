@@ -14,6 +14,7 @@ import LoginAPI from "socialuni-api/src/api/socialuni/LoginAPI";
 import SocialuniUserExpandAPI from "socialuni-api/src/api/socialuni/SocialuniUserExpandAPI";
 import PlatformUtils from "../utils/PlatformUtils";
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
+import MsgUtil from "../utils/MsgUtil";
 
 @Store
 export default class SocialUserModule extends Pinia {
@@ -127,6 +128,9 @@ export default class SocialUserModule extends Pinia {
     }
 
     async getOpenContactInfo(user: CenterUserDetailRO) {
+        if (!this.mineUser){
+            MsgUtil.unLoginMessage()
+        }
         if (user.openContactInfo){
             ToastUtil.error("已成功获取，无需再次获取")
         }

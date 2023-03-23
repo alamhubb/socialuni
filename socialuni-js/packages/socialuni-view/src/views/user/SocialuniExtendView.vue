@@ -42,7 +42,7 @@
                             <social-gender-tag class="ml-xs" :user="user"></social-gender-tag>
                           </div>
 
-                          <view class="col-center flex-none">
+                          <view v-if="!isIos" class="col-center flex-none">
                             <div v-if="user.openContactInfo" class="use-click row-col-center">
                               <q-button light @click="copyContactInfo(user)">
                                 <div class="color-content ml-xs font-12">
@@ -113,7 +113,7 @@ import SocialuniFollowTag from "socialuni-view/src/components/SocialuniFollow/So
 import PageUtil from "socialuni-sdk/src/utils/PageUtil";
 import PagePath from "socialuni-constant/constant/PagePath";
 import {onLoad, onPullDownRefresh, onReachBottom, onShow} from "@dcloudio/uni-app";
-import {socialTalkModule, socialUserModule} from "socialuni-sdk/src/store/store";
+import {socialSystemModule, socialTalkModule, socialUserModule} from "socialuni-sdk/src/store/store";
 import QTabs from "socialuni-view/src/components/QTabs/QTabs.vue";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import SocialuniPageQueryQO from "socialuni-api/src/model/common/SocialuniPageQueryQO";
@@ -154,6 +154,10 @@ export default class SocialuniExtendView extends Vue {
     contentnomore: '没有更多数据了,点击刷新'
   }
   showUserContactBtnDisabled: boolean = false
+
+  get isIos(){
+    return socialSystemModule.isIos
+  }
 
 
   async manualPulldownRefresh() {

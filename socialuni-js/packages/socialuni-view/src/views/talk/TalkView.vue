@@ -151,6 +151,7 @@ export default class TalkView extends Vue {
 
   // life
   mounted() {
+   console.log('talkView页面触发了分享')
     UniUtil.showShareMenu()
     this.initQuery()
   }

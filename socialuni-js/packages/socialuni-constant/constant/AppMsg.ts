@@ -5,11 +5,11 @@ export default class AppMsg {
   static readonly notMpDisablePayMsg: string = '非小程序平台暂不支持此类支付功能'
   static readonly notPayMsg: string = '因平台政策原因暂不支持支付功能'
 
-  static readonly contactServiceMsg: string = '，请联系客服微信：491369310'
+  // static readonly contactServiceMsg: string = '，请联系客服微信：491369310'
 
-  static readonly vipOpenFailMsg: string = '开通会员失败' + AppMsg.contactServiceMsg
+  // static readonly vipOpenFailMsg: string = '开通会员失败' + AppMsg.contactServiceMsg
 
-  static readonly payFailMsg: string = '充值失败' + AppMsg.contactServiceMsg
+  static readonly payFailMsg: string = '充值失败'
 
   static readonly payCancelMsg: string = '您取消了充值'
 

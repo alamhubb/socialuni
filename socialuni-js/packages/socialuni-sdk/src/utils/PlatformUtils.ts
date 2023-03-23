@@ -88,6 +88,7 @@ export default class PlatformUtils {
 
     //所有只能直接调用这个
     static async checkPay() {
+        console.log(`isProd:${socialSystemModule.isProd}`)
         if (!socialUserModule.mineUser) {
             return MsgUtil.unLoginMessage()
         } else if (socialSystemModule.isIos && socialSystemModule.isProd) {
@@ -106,7 +107,7 @@ export default class PlatformUtils {
                     throw err
                 } else {
                     SocialuniAppAPI.sendErrorLogAPI(null, '支付失败', res, err)
-                    MsgUtil.payFailMsg()
+                    // MsgUtil.payFailMsg()
                     throw err
                 }
             })

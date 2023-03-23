@@ -84,7 +84,7 @@
       </view>
 
 
-      <div v-if="user.contactInfo"
+      <div v-if="!isIos && user.contactInfo"
            class="row-between-center bg-white px-sm py-sm bd-radius-10 elevation-4 mx-sm mt-smm mb-sm">
         <div class="row-col-center">
           <q-icon class="color-sub mr-xs" prefix="uni-icons" icon="uniui-chat" size="14"/>

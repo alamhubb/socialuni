@@ -306,6 +306,7 @@ export default class UniUtil {
 
     static showShareMenu() {
         // #ifdef MP-QQ || MP-WEIXIN
+        console.log('zhixingle')
         uni.showShareMenu({})
         // #endif
     }

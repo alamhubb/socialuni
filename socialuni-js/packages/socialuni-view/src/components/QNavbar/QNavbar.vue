@@ -5,13 +5,13 @@
       <view class="w100p" :style="{ height: statusBarHeight + 'px' }"></view>
       <!--            此处为导航栏-->
       <view class="row-col-center px-sm" :style="[navbarInnerStyle]">
-        <div @click="goBack">
+        <div @click="goBack" class="flex-none">
           <slot name="back">
             <q-icon v-if="showBack" icon="arrow-left" class="color-th mr"></q-icon>
           </slot>
         </div>
         <q-icon v-if="showHome" icon="home" class="color-th mr" @click="goHome"></q-icon>
-        <div v-if="title" class="font-bold font-md">
+        <div v-if="title" class="font-bold font-md flex-none">
           {{ title }}
         </div>
         <slot></slot>
