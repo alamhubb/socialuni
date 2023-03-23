@@ -12,5 +12,7 @@ import SocialuniExtendView from "socialuni-view/src/views/user/SocialuniExtendVi
   }
 })
 export default class ExtendPage extends Vue {
+  created(){
+  }
 }
 </script>

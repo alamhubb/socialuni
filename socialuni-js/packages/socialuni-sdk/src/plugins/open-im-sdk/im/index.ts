@@ -94,6 +94,7 @@ export default class OpenIMSDK extends Emitter {
      * @returns
      */
     login(config: InitConfig) {
+        console.log('执行登录')
         return new Promise<WsResponse>((resolve, reject) => {
             const {userID, token, url, platformID, isBatch = false, operationID} = config;
             this.wsUrl = `${url}?sendID=${userID}&token=${token}&platformID=${platformID}`;
@@ -114,13 +115,17 @@ export default class OpenIMSDK extends Emitter {
                 this.uid = userID;
                 this.token = token;
                 this.isBatch = isBatch;
+                console.log('开始登录')
+                console.log(this.token)
                 this.iLogin(loginData, operationID)
                     .then((res) => {
+                        console.log('登录成功')
                         this.logoutFlag = false;
                         this.heartbeat();
                         resolve(res);
                     })
                     .catch((err) => {
+                        console.log('登录失败')
                         errData.errCode = err.errCode;
                         errData.errMsg = err.errMsg;
                         reject(errData);
@@ -284,8 +289,6 @@ export default class OpenIMSDK extends Emitter {
         const wflag = typeof WebSocket;
         //@ts-ignore
         const uflag = typeof uni;
-        //@ts-ignore
-        const xflag = typeof wx;
 
         if (wflag !== "undefined") {
             this.platform = "web";
@@ -307,16 +310,20 @@ export default class OpenIMSDK extends Emitter {
             this.ws = undefined;
 
             let onOpen: any = () => {
+                console.log(this.uid)
+                console.log(this.token)
                 const loginData = {
                     userID: this.uid!,
                     token: this.token!,
                 };
+                console.log('开始登录')
                 this.iLogin(loginData).then((res) => {
                     this.logoutFlag = false;
                     console.log("iLogin suc...");
                     this.heartbeat();
                     resolve();
                 }).finally(() => {
+                    console.log('开始结束')
                     this.lock = false;
                 })
             };
@@ -360,11 +367,16 @@ export default class OpenIMSDK extends Emitter {
                 return;
             }
 
+            console.log('faqilianjie')
             // @ts-ignore
             this.ws = uni.connectSocket({
                 url: this.wsUrl,
                 complete: () => {
+                    console.log('llianjiechenggong')
                 },
+                fail(e){
+                    console.log('lianjieshibai')
+                }
             });
             //@ts-ignore
             this.ws.onClose(onClose);
@@ -391,9 +403,10 @@ export default class OpenIMSDK extends Emitter {
         this.timer = setInterval(() => {
             if (this.logoutFlag) {
                 this.timer && clearInterval(this.timer);
-                console.log(this.timer)
+                console.log("clear heartbeat...");
                 return;
             }
+            console.log("timer heartbeat...");
             this.getLoginStatus().catch((err) => {
                 this.reconnect()
             });
