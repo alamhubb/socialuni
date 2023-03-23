@@ -36,6 +36,14 @@ export default class UniUtil {
             })
         })
     }
+    public static showCopyAction(copyText: string) {
+        UniUtil.actionSheet(['复制']).then((index: number) => {
+            if (index === 0) {
+                UniUtil.textCopy(copyText)
+            }
+        })
+    }
+
 
     public static createRewardedVideoAd(adUnitId: string) {
         if (socialSystemModule.isMp) {

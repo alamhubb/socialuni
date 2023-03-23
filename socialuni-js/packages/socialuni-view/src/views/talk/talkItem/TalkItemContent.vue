@@ -1,6 +1,6 @@
 <template>
   <view>
-    <div class="card-text text-df" @click="toTalkDetailVue" selectable>
+    <div class="card-text text-df" @click="toTalkDetailVue" selectable @longpress="copyContent(talk)">
       {{ talk.content }}
     </div>
     <view v-if="talk.imgs.length" class="card-text-row mt-10">
@@ -101,6 +101,7 @@ import MsgUtil from "socialuni-sdk/src/utils/MsgUtil";
 import PageUtil from "socialuni-sdk/src/utils/PageUtil";
 import NumUtil from "socialuni-sdk/src/utils/NumUtil";
 import CommonUtil from "socialuni-sdk/src/utils/CommonUtil";
+import UniUtil from "socialuni-sdk/src/utils/UniUtil";
 
 @Options({
   components: {QIcon}
@@ -166,6 +167,10 @@ export default class TalkItemContent extends Vue {
 
   toIdentityAuth() {
     MsgUtil.identityAuthHint()
+  }
+
+  copyContent(talk:TalkVO){
+    UniUtil.showCopyAction(talk.content)
   }
 }
 </script>

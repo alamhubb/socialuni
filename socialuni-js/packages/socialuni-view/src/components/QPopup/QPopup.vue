@@ -5,7 +5,7 @@
       <!--        ios端不支持prevent需要用stop代替-->
     </q-model>
     <div class="h100p" :class="bottom?'col-end':'row-all-center'">
-      <div class="q-popup bg-white position-absolute index-1005 flex-col"
+      <div class="q-popup bg-white position-absolute index-1005 flex-col overflow-hidden"
            :class="bottom?'w100vw bt-radius-20':'w90vw bd-radius-20'"
            @touchmove.stop.prevent
            @click.stop

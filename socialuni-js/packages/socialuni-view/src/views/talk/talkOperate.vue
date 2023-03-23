@@ -1,15 +1,15 @@
 <template>
   <view>
     <q-popup :value="commentVisible" @input="commentActionClose">
-      <view class="uni-tip w180">
-        <uni-list class="w100">
-          <uni-list-item :show-arrow="true" title="复制" @click="copyText"/>
-          <uni-list-item v-if="user&&comment&&(user.id === comment.user.id||user.id ===talk.user.id)"
+      <div class="w100p">
+        <uni-list class="pd-sm w100p">
+          <uni-list-item link :show-arrow="true" title="复制" @click="copyText"/>
+          <uni-list-item link v-if="user&&comment&&(user.id === comment.user.id||user.id ===talk.user.id)"
                          :show-arrow="true" title="删除" @click="userDeleteComment"/>
-          <uni-list-item v-if="user" :show-arrow="true" title="举报"
+          <uni-list-item link v-if="user" :show-arrow="true" title="举报"
                          @click="openReportDialog"/>
         </uni-list>
-      </view>
+      </div>
     </q-popup>
 
 
@@ -52,7 +52,7 @@
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
 import QPopup from "socialuni-view/src/components/QPopup/QPopup.vue";
-import {socialAppModule,  socialTalkModule} from "socialuni-sdk/src/store/store";
+import {socialAppModule, socialTalkModule} from "socialuni-sdk/src/store/store";
 import ReportType from "socialuni-constant/constant/ReportType";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
