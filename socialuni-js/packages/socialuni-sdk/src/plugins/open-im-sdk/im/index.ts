@@ -316,7 +316,7 @@ export default class OpenIMSDK extends Emitter {
                     console.log("iLogin suc...");
                     this.heartbeat();
                     resolve();
-                }).finally(()=>{
+                }).finally(() => {
                     this.lock = false;
                 })
             };
@@ -386,33 +386,18 @@ export default class OpenIMSDK extends Emitter {
 
     private heartbeat() {
         console.log("start heartbeat...");
-
         if (this.platformID !== 5) return;
-        if (this.timer) clearTimeout(this.timer);
-
-        this.heartbeatCount = 0;
-        this.heartbeatStartTime = new Date().getTime();
-
-        const heartbeatCallback = () => {
-            this.heartbeatCount += 1;
-            const offset = new Date().getTime() - (this.heartbeatStartTime + this.heartbeatCount * 30000);
-            console.log("offset::::", offset);
-
-            let nextTime = 30000 - offset;
-            if (nextTime < 0) {
-                nextTime = 0;
-            }
+        this.timer && clearInterval(this.timer);
+        this.timer = setInterval(() => {
             if (this.logoutFlag) {
-                this.timer && clearTimeout(this.timer);
+                this.timer && clearInterval(this.timer);
+                console.log(this.timer)
                 return;
             }
             this.getLoginStatus().catch((err) => {
                 this.reconnect()
             });
-            this.timer = setTimeout(heartbeatCallback, nextTime);
-        };
-
-        this.timer = setTimeout(heartbeatCallback, 30000);
+        }, 30000)
     }
 
     private iLogin(data: LoginParams, operationID?: string) {
