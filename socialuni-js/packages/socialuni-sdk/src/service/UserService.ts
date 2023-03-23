@@ -14,8 +14,8 @@ export default class UserService {
         ) {
             const imRes = await SocialuniImUserAPI.getImUserTokenAPI()
             socialChatModule.setImToken(imRes.data)
+            socialChatModule.initSocialuniChatModule()
         }
-        socialChatModule.initSocialuniChatModule()
         /*socialNotifyModule.queryNotifiesAction()
         */
         // socialChatModule.initSocialuniChatModule()

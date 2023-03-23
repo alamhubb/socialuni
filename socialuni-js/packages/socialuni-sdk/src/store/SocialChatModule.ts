@@ -63,7 +63,9 @@ export default class SocialChatModule extends Pinia {
     }
 
     async openIm() {
-        await this.initSocialuniChatModule()
+        if (this.imToken) {
+            await this.initSocialuniChatModule()
+        }
         return this._openIm
     }
 
