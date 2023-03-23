@@ -1,6 +1,6 @@
 <template>
   <view>
-    <div class="card-text text-df" @click="toTalkDetailVue" selectable @longpress="copyContent(talk)">
+    <div class="px-15" @click="toTalkDetailVue" selectable @longpress="copyContent(talk)">
       {{ talk.content }}
     </div>
     <view v-if="talk.imgs.length" class="card-text-row mt-10">
