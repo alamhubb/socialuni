@@ -14,7 +14,7 @@ import com.socialuni.social.sdk.logic.service.ReportService;
 import com.socialuni.social.report.sdk.enumeration.SocialuniUserStatus;
 import com.socialuni.social.common.sdk.constant.UserType;
 import com.socialuni.social.user.sdk.model.DO.SocialUserViolationDo;
-import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -47,7 +47,7 @@ public class ViolationService {
         //存在被举报后，用户自己把这条状态删了的情况
         if (ReportStatus.auditStatus.contains(contentStatus)) {
             modelDO.setUpdateTime(curDate);
-            modelDO.setStatus(ContentStatus.enable);
+            modelDO.setStatus(ContentStatus.init);
         } else {
             log.info("用户已经自行删除此条内容：{}", contentStatus);
         }

@@ -1,10 +1,5 @@
 package com.socialuni.social.sdk.facade;
 
-import com.socialuni.social.common.api.entity.SocialuniUserInfoBaseDO;
-import com.socialuni.social.common.sdk.facade.SocialuniRepositoryFacade;
-
-import java.lang.reflect.InvocationTargetException;
-import java.util.Date;
 import java.util.List;
 
 /**

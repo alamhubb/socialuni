@@ -1,7 +1,7 @@
 package com.socialuni.social.community.sdk.repository;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.socialuni.social.common.api.enumeration.CommonStatus;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -63,7 +63,7 @@ public interface CommentRepository extends JpaRepository<SocialuniCommentDO, Int
 
     @Transactional
     @Modifying
-    @Query("update SocialuniCommentDO t set t.status = '" + CommonStatus.delete + "' where t.userId=:userId and t.status in (:status)")
+    @Query("update SocialuniCommentDO t set t.status = '" + SocialuniCommonStatus.delete + "' where t.userId=:userId and t.status in (:status)")
     Integer updateUserCommentStatusIn(@Param("userId") Integer userId, @Param("status") List<String> status);
 
     Optional<?  extends SocialuniCommentDO> findOneByUnionIdAndStatusIn(Integer id, List<String> status);

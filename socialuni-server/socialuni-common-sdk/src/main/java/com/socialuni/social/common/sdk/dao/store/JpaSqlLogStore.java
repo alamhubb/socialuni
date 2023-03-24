@@ -1,6 +1,6 @@
 package com.socialuni.social.common.sdk.dao.store;
 
-import com.socialuni.social.common.sdk.dao.DO.keywords.JpaSqlLogDO;
+import com.socialuni.social.common.sdk.dao.DO.JpaSqlLogDO;
 import com.socialuni.social.common.sdk.dao.repository.JpaSqlLogRepository;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;

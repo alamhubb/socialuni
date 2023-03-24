@@ -24,7 +24,7 @@ import com.socialuni.social.sdk.logic.factory.ReportFactory;
 import com.socialuni.social.sdk.logic.service.KeywordsService;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
-import com.socialuni.social.common.sdk.dao.DO.keywords.NotifyDO;
+import com.socialuni.social.common.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.report.sdk.dao.DO.KeywordsDO;
 import com.socialuni.social.report.sdk.dao.DO.KeywordsTriggerDetailDO;
 import com.socialuni.social.report.sdk.dao.repository.KeywordsRepository;
@@ -116,7 +116,7 @@ public class AdminReportService {
             if (socialuniTalkHasUnderageImgAuditDO == null) {
                 throw new SocialParamsException("不存在的图片审核内容");
             }
-            socialuniTalkHasUnderageImgAuditDO.setStatus(ContentStatus.enable);
+            socialuniTalkHasUnderageImgAuditDO.setStatus(ContentStatus.init);
             talkAdultImgAuditRepository.save(socialuniTalkHasUnderageImgAuditDO);
             contentId = socialuniTalkHasUnderageImgAuditDO.getTalkId();
 

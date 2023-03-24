@@ -2,7 +2,7 @@ package com.socialuni.social.report.sdk.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.socialuni.social.common.api.utils.UUIDUtil;
-import com.socialuni.social.common.sdk.model.weixin.HttpResult;
+import com.socialuni.social.common.sdk.platform.weixin.HttpResult;
 import com.socialuni.social.common.sdk.platform.PushMsgDTO;
 import com.socialuni.social.common.sdk.platform.PushMsgErrCode;
 import com.socialuni.social.common.sdk.platform.WxErrCode;
@@ -14,7 +14,7 @@ import com.socialuni.social.common.sdk.utils.RestUtil;
 import com.socialuni.social.common.sdk.platform.weixin.WxConst;
 import com.socialuni.social.common.sdk.platform.weixin.token.WxTokenResult;
 import com.socialuni.social.common.api.constant.DateTimeType;
-import com.socialuni.social.common.sdk.dao.DO.keywords.NotifyDO;
+import com.socialuni.social.common.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.thoughtworks.xstream.XStream;

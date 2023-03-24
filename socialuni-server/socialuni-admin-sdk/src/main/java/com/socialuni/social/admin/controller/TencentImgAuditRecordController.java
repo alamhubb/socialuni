@@ -6,7 +6,7 @@ import com.socialuni.social.admin.model.RO.TencentCosAuditRecordRO;
 import com.socialuni.social.admin.service.ViolationService;
 import com.socialuni.social.admin.utils.CheckIsAdminUtil;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
-import com.socialuni.social.common.api.enumeration.CommonStatus;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
@@ -44,7 +44,7 @@ public class TencentImgAuditRecordController {
     @PostMapping("queryImgAuditHistory")
     public ResultRO<List<TencentCosAuditRecordRO>> queryImgAuditHistory(@RequestBody SocialIntQO intQO) {
         CheckIsAdminUtil.checkAdmin();
-        List<TencentCosAuditRecordDO> list = tencentCosAuditRecordRepository.findTop20ByStatusNotAndScoreGreaterThanEqualAndForbiddenStatusAndImgThumbTypeAndUserIdNotNullAndContentTypeOrderByIdDesc(CommonStatus.delete, intQO.getNumber(), TencentCosAuditStatus.enable, ImgThumbnailType.thumbnail, SocialuniContentType.talk);
+        List<TencentCosAuditRecordDO> list = tencentCosAuditRecordRepository.findTop20ByStatusNotAndScoreGreaterThanEqualAndForbiddenStatusAndImgThumbTypeAndUserIdNotNullAndContentTypeOrderByIdDesc(SocialuniCommonStatus.delete, intQO.getNumber(), TencentCosAuditStatus.enable, ImgThumbnailType.thumbnail, SocialuniContentType.talk);
         List<TencentCosAuditRecordRO> listRo = ListConvertUtil.toList(TencentCosAuditRecordRO::new, list);
         return ResultRO.success(listRo);
     }
@@ -58,7 +58,7 @@ public class TencentImgAuditRecordController {
         List<TencentCosAuditRecordDO> list = new ArrayList<>();
         for (SocialIntIdQO socialIntIdQO : idQOList) {
             TencentCosAuditRecordDO tencentCosAuditRecordDO = tencentCosAuditRecordRepository.getOne(socialIntIdQO.getId());
-            tencentCosAuditRecordDO.setStatus(CommonStatus.delete);
+            tencentCosAuditRecordDO.setStatus(SocialuniCommonStatus.delete);
             tencentCosAuditRecordDO.setUpdateTime(new Date());
             list.add(tencentCosAuditRecordDO);
         }
@@ -79,7 +79,7 @@ public class TencentImgAuditRecordController {
 
     public void reportAudit(ImgAuditQO auditQO) {
         TencentCosAuditRecordDO tencentCosAuditRecordDO = tencentCosAuditRecordRepository.getOne(auditQO.getId());
-        tencentCosAuditRecordDO.setStatus(CommonStatus.delete);
+        tencentCosAuditRecordDO.setStatus(SocialuniCommonStatus.delete);
         if (!AdminAuditResultType.noViolation.equals(auditQO.getViolateType())) {
             SocialuniTalkDO talkDO = SocialuniTalkDOUtil.getTalkNotNull(tencentCosAuditRecordDO.getImgParentContentId());
             violationService.modelContentViolation(talkDO, auditQO.getViolateType());

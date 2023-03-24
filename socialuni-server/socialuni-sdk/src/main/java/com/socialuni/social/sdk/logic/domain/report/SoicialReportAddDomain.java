@@ -15,7 +15,7 @@ import com.socialuni.social.report.sdk.model.SocialuniReportAddQO;
 import com.socialuni.social.common.sdk.utils.DateUtils;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
-import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 

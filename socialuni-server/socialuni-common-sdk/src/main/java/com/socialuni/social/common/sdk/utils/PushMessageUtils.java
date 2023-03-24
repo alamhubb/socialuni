@@ -2,9 +2,9 @@ package com.socialuni.social.common.sdk.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.social.common.api.utils.JsonUtil;
-import com.socialuni.social.common.sdk.dao.DO.keywords.NotifyDO;
-import com.socialuni.social.common.sdk.dao.DO.keywords.PushMessageDO;
-import com.socialuni.social.common.sdk.model.weixin.HttpResult;
+import com.socialuni.social.common.sdk.dao.DO.NotifyDO;
+import com.socialuni.social.common.sdk.dao.DO.PushMessageDO;
+import com.socialuni.social.common.sdk.platform.weixin.HttpResult;
 import com.socialuni.social.common.sdk.platform.PushMsgDTO;
 import com.socialuni.social.common.sdk.dao.repository.PushMessageRepository;
 import lombok.extern.slf4j.Slf4j;

@@ -1,7 +1,7 @@
 package com.socialuni.social.report.sdk.dao.DO;
 
 import com.github.promeg.pinyinhelper.Pinyin;
-import com.socialuni.social.common.api.enumeration.CommonStatus;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -92,7 +92,7 @@ public class KeywordsDO implements Serializable {
     }
 
     public KeywordsDO(String content, String cause) {
-        this.setStatus(CommonStatus.enable);
+        this.setStatus(SocialuniCommonStatus.init);
 
         this.setTextShow(content);
         this.setText(content.toUpperCase());

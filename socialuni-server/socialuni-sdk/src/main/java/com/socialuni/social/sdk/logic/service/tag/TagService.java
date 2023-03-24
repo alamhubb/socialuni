@@ -10,7 +10,7 @@ import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.sdk.dao.store.SocialTagRedis;
 import com.socialuni.social.sdk.utils.SocialTagStore;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
-import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -60,7 +60,7 @@ public class TagService {
                     TagDO TagDO = socialTagRedis.findTagById(tagId);
                     //如果话题存在且可用
                     if (TagDO != null) {
-                        if (!ContentStatus.enable.equals(TagDO.getStatus())) {
+                        if (!ContentStatus.init.equals(TagDO.getStatus())) {
                             throw new SocialParamsException("引用了不可使用的话题");
                         }
 

@@ -45,7 +45,7 @@ public class CommentFactory {
         SocialuniCommentDO comment = new SocialuniCommentDO();
         comment.setNo(++commentNo);
         comment.setContent(addQO.getContent());
-        comment.setStatus(ContentStatus.enable);
+        comment.setStatus(ContentStatus.init);
         comment.setContentType(SocialuniContentType.comment);
         comment.setHugNum(0);
         comment.setChildCommentNum(0);

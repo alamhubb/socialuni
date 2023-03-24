@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.factory;
 
-import com.socialuni.social.common.api.enumeration.CommonStatus;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.community.sdk.entity.HugDO;
 import com.socialuni.social.community.sdk.entity.SocialuniCircleDO;
 import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
@@ -26,7 +26,7 @@ import com.socialuni.social.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.social.common.api.model.user.SocialuniContentUserRO;
 import com.socialuni.social.common.sdk.model.RO.SocialuniRectangleRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -183,7 +183,7 @@ public class SocialTalkROFactory {
 
         SocialTalkCircleDO socialTalkCircleDO = socialTalkCircleRepository.findFirstByTalkId(talkId);
         if (socialTalkCircleDO != null) {
-            SocialuniCircleDO socialCircleDO = socialCircleApi.findFirstByIdAndStatus(socialTalkCircleDO.getCircleId(), CommonStatus.enable);
+            SocialuniCircleDO socialCircleDO = socialCircleApi.findFirstByIdAndStatus(socialTalkCircleDO.getCircleId(), SocialuniCommonStatus.init);
             if (socialCircleDO != null) {
                 circles.add(socialCircleDO.getName());
             }

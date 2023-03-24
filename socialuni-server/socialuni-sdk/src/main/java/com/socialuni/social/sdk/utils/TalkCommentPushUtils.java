@@ -5,7 +5,7 @@ import com.socialuni.social.common.sdk.utils.DateUtils;
 import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
 import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
 import com.socialuni.social.common.sdk.constant.AppConfigConst;
-import com.socialuni.social.common.sdk.dao.DO.keywords.NotifyDO;
+import com.socialuni.social.common.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.report.sdk.constant.SocialuniSupportProviderType;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniCommentDOUtil;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
@@ -14,7 +14,7 @@ import com.socialuni.social.common.sdk.platform.weixin.WxConst;
 import com.socialuni.social.common.sdk.platform.PushMsgDTO;
 import com.socialuni.social.sdk.model.PushNotifyVO;
 import com.socialuni.social.sdk.model.PushValue;
-import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;

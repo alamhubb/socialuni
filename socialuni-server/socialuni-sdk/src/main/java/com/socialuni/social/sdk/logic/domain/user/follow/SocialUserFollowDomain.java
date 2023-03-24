@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.logic.domain.user.follow;
 import com.socialuni.social.sdk.logic.manage.FollowManage;
 import com.socialuni.social.sdk.logic.manage.SocialUserFansDetailManage;
 import com.socialuni.social.sdk.dao.redis.FollowRedis;
-import com.socialuni.social.common.api.enumeration.CommonStatus;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.sdk.dao.DO.SocialuniFollowDO;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import org.springframework.scheduling.annotation.Async;
@@ -38,7 +38,7 @@ public class SocialUserFollowDomain {
             followManage.createFollow(mineUserId, beUserId);
         } else {
             //已经关注
-            followManage.updateFollow(followDO, CommonStatus.enable);
+            followManage.updateFollow(followDO, SocialuniCommonStatus.init);
         }
     }
 
@@ -54,6 +54,6 @@ public class SocialUserFollowDomain {
         socialUserFansDetailManage.mineFollowNumSub(mineUserId);
         socialUserFansDetailManage.beUserFansNumSub(beUserId);
         SocialuniFollowDO followDO = followRedis.findFirstByUserIdAndBeUserId(mineUserId, beUserId);
-        followManage.updateFollow(followDO, CommonStatus.delete);
+        followManage.updateFollow(followDO, SocialuniCommonStatus.delete);
     }
 }

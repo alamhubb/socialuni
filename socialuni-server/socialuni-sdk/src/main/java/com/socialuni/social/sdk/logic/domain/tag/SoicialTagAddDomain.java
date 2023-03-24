@@ -9,7 +9,7 @@ import com.socialuni.social.sdk.logic.manage.SocialTagManage;
 import com.socialuni.social.report.sdk.utils.SocialuniTextContentUtil;
 import com.socialuni.social.sdk.model.QO.community.tag.TagAddQO;
 import com.socialuni.social.sdk.model.RO.community.tag.TagRO;
-import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

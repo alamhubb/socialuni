@@ -14,7 +14,7 @@ import com.socialuni.social.sdk.logic.factory.ReportFactory;
 import com.socialuni.social.common.sdk.utils.DateUtils;
 import com.socialuni.social.sdk.utils.ReportDetailUtils;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

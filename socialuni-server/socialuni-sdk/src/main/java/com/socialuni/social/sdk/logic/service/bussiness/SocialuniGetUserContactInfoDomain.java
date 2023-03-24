@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.logic.service.bussiness;
 
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import com.socialuni.social.common.sdk.facade.SocialuniRepositoryFacade;
+import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.sdk.dao.DO.bussiness.SocialuniCoinOrderDO;
 import com.socialuni.social.sdk.dao.DO.bussiness.SocialuniGetUserContactRecordDO;
 import com.socialuni.social.sdk.dao.factory.SocialuniCoinOrderFactory;
@@ -11,7 +11,7 @@ import com.socialuni.social.sdk.dao.utils.user.SocialuniUserSocialCoinDOUtil;
 import com.socialuni.social.sdk.facade.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserCoinDo;
-import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserExpandDo;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;

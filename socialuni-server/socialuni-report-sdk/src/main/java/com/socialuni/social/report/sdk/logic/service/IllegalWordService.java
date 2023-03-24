@@ -4,7 +4,7 @@ package com.socialuni.social.report.sdk.logic.service;
 import com.socialuni.social.common.sdk.constant.ErrorMsg;
 import com.socialuni.social.report.sdk.store.AppConfigStatic;
 import com.socialuni.social.report.sdk.dao.DO.IllegalWordDO;
-import com.socialuni.social.common.sdk.utils.TextContentUtil;
+import com.socialuni.social.report.sdk.utils.TextContentUtil;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.report.sdk.dao.repository.IllegalWordRepository;
 import org.apache.commons.lang3.StringUtils;

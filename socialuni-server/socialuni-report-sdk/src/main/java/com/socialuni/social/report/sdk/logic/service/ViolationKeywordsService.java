@@ -1,6 +1,6 @@
 package com.socialuni.social.report.sdk.logic.service;
 
-import com.socialuni.social.common.api.enumeration.CommonStatus;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.report.sdk.store.AppConfigStatic;
 import com.socialuni.social.report.sdk.dao.DO.IllegalWordDO;
 import com.socialuni.social.report.sdk.dao.DO.KeywordsDO;
@@ -24,10 +24,10 @@ public class ViolationKeywordsService {
     private KeywordsRepository keywordsRepository;
 
     public void refreshKeywords() {
-        List<IllegalWordDO> illegalWordDOS = illegalWordRepository.findAllByStatus(CommonStatus.enable);
+        List<IllegalWordDO> illegalWordDOS = illegalWordRepository.findAllByStatus(SocialuniCommonStatus.init);
         AppConfigStatic.setIllegals(illegalWordDOS);
 
-        List<KeywordsDO> keywordsDOS= keywordsRepository.findAllByStatus(CommonStatus.enable);
+        List<KeywordsDO> keywordsDOS= keywordsRepository.findAllByStatus(SocialuniCommonStatus.init);
         AppConfigStatic.setKeywordDOs(keywordsDOS);
         //目前不需要全部检索然后删除了，已经使用了举报机制
         /*for (String illegal : illegals) {

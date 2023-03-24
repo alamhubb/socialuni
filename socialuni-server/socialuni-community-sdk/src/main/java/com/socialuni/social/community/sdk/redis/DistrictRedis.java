@@ -1,6 +1,6 @@
 package com.socialuni.social.community.sdk.redis;
 
-import com.socialuni.social.common.api.enumeration.CommonStatus;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
 import com.socialuni.social.community.sdk.entity.DistrictDO;
 import com.socialuni.social.community.sdk.model.SocialDistrictRO;
@@ -101,7 +101,7 @@ public class DistrictRedis {
         hotDistrict.setAdName("热门");
         hotDistrict.setProvinceName("中国");
         hotDistrict.setAdCode("999999");
-        List<DistrictDO> districtDOS = districtRepository.findTop20ByDistrictCodeAndStatusOrderByCountDesc("1", CommonStatus.enable);
+        List<DistrictDO> districtDOS = districtRepository.findTop20ByDistrictCodeAndStatusOrderByCountDesc("1", SocialuniCommonStatus.init);
 
         hotDistrict.setChilds(recurseSetChildOnce(districtDOS));
         return hotDistrict;
@@ -115,10 +115,10 @@ public class DistrictRedis {
      * @return
      */
     private List<DistrictDO> getByParentAdCode(String parentAdCode) {
-        return districtRepository.findByParentAdCodeAndStatusOrderByAdCode(parentAdCode, CommonStatus.enable);
+        return districtRepository.findByParentAdCodeAndStatusOrderByAdCode(parentAdCode, SocialuniCommonStatus.init);
     }
 
     private List<DistrictDO> getChinaProvinces() {
-        return districtRepository.findByParentAdCodeAndStatusOrderByAdCode(SocialuniConst.chinaDistrictCode, CommonStatus.enable);
+        return districtRepository.findByParentAdCodeAndStatusOrderByAdCode(SocialuniConst.chinaDistrictCode, SocialuniCommonStatus.init);
     }
 }

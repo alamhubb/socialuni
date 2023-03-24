@@ -10,7 +10,7 @@ import com.socialuni.social.sdk.dao.repository.ChatUserRepository;
 import com.socialuni.social.sdk.logic.factory.SocialChatROFactory;
 import com.socialuni.social.sdk.logic.service.CreateSingleChatResult;
 import com.socialuni.social.sdk.model.RO.message.chat.ChatRO;
-import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -32,7 +32,7 @@ public class ChatService {
     //获取私聊的chat
     //查看对方主页时
     public ChatRO seeUserDetailGetOrCreateChat(SocialuniUserDo user, Integer receiveUserId) {
-        Optional<ChatUserDO> chatUserDOOptional = chatUserRepository.findFirstByChatStatusAndUserIdAndReceiveUserId(ChatStatus.enable, user.getUnionId(), receiveUserId);
+        Optional<ChatUserDO> chatUserDOOptional = chatUserRepository.findFirstByChatStatusAndUserIdAndReceiveUserId(ChatStatus.init, user.getUnionId(), receiveUserId);
         ChatUserDO chatUserDO;
         //如果创建过，则获取。返回
         if (chatUserDOOptional.isPresent()) {

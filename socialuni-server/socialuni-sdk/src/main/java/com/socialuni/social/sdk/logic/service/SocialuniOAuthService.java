@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.service;
 
-import com.socialuni.social.common.api.enumeration.CommonStatus;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.sdk.constant.AuthType;
 import com.socialuni.social.sdk.dao.DO.dev.ThirdUserAuthDO;
@@ -16,7 +16,7 @@ import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
-import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -35,7 +35,7 @@ public class SocialuniOAuthService {
     public ResultRO<OAuthGetUserPhoneNumRO> getUserPhoneNum() {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
         Integer devId = DevAccountFacade.getDevIdNotNull();
-        ThirdUserAuthDO thirdUserAuthDO = thirdUserAuthRepository.findByDevIdAndUserIdAndAuthTypeAndStatus(devId, mineUser.getUnionId(), AuthType.phone, CommonStatus.enable);
+        ThirdUserAuthDO thirdUserAuthDO = thirdUserAuthRepository.findByDevIdAndUserIdAndAuthTypeAndStatus(devId, mineUser.getUnionId(), AuthType.phone, SocialuniCommonStatus.init);
         if (thirdUserAuthDO == null) {
             return new ResultRO<>();
         }

@@ -1,6 +1,6 @@
 package com.socialuni.social.admin.model;
 
-import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import lombok.Data;
 
 

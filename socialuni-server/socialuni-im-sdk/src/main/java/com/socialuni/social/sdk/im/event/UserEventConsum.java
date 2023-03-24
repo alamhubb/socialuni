@@ -8,7 +8,7 @@ import com.socialuni.social.common.sdk.event.ddd.AbstractPublishDataModelConsum;
 import com.socialuni.social.sdk.im.model.SocialuniImUserModel;
 import com.socialuni.social.sdk.im.service.ImAuthService;
 import com.socialuni.social.sdk.im.service.ImUserService;
-import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.support.GenericConversionService;

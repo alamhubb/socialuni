@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.logic.entity;
 
 import com.socialuni.social.user.sdk.logic.entity.SocialPhoneLoginEntity;
 import com.socialuni.social.sdk.logic.manage.SocialUserFansDetailManage;
-import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumQO;
 import org.springframework.stereotype.Service;
 

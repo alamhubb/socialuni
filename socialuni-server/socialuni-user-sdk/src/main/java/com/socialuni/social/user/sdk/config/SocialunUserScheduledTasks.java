@@ -1,7 +1,7 @@
 package com.socialuni.social.user.sdk.config;
 
 import com.socialuni.social.report.sdk.enumeration.SocialuniUserStatus;
-import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -43,7 +43,7 @@ public class SocialunUserScheduledTasks {
         List<SocialuniUserDo> users = userApi.findCanUnfreezeViolationUser(SocialuniUserStatus.violation, curDate);
         for (SocialuniUserDo user : users) {
             user.setUpdateTime(curDate);
-            user.setStatus(SocialuniUserStatus.enable);
+            user.setStatus(SocialuniUserStatus.init);
             userApi.savePut(user);
         }
         log.info("今日时间{}，解封用户数量：{}", curDate, users.size());

@@ -1,6 +1,6 @@
 package com.socialuni.social.common.sdk.utils;
 
-import com.socialuni.social.common.sdk.dao.DO.keywords.JpaSqlLogDO;
+import com.socialuni.social.common.sdk.dao.DO.JpaSqlLogDO;
 import com.socialuni.social.common.sdk.dao.store.JpaSqlLogStore;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

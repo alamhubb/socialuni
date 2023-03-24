@@ -1,6 +1,5 @@
 package com.socialuni.social.sdk.constant.business;
 
-import com.socialuni.social.common.api.enumeration.CommonStatus;
 import com.socialuni.social.common.api.enumeration.SuccessFailStatus;
 
 public class SocialuniPayStatus extends SuccessFailStatus {

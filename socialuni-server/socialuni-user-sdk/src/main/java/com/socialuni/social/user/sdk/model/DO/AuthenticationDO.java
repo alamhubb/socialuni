@@ -1,7 +1,7 @@
 package com.socialuni.social.user.sdk.model.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
-import com.socialuni.social.common.api.enumeration.CommonStatus;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.constant.DateTimeType;
 import lombok.Data;
 
@@ -52,7 +52,7 @@ public class AuthenticationDO extends SocialuniContentBaseDO implements Serializ
         this.ip = ip;
         Date curDate = new Date();
         this.createTime = curDate;
-        this.status = CommonStatus.enable;
+        this.status = SocialuniCommonStatus.init;
         this.validTime = DateTimeType.halfHour;
         this.expiredTime = new Date(curDate.getTime() + this.getValidTime());
     }

@@ -1,6 +1,6 @@
 package com.socialuni.social.user.sdk.manage;
 
-import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.user.sdk.model.factory.SocialUserDOFactory;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;

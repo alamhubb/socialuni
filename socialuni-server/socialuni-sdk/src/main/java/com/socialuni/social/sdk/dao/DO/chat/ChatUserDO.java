@@ -102,7 +102,7 @@ public class ChatUserDO implements Serializable {
             this.status = ChatUserStatus.waitOpen;
         } else {
             //官方群聊，匹配，直接是开启
-            this.status = ChatUserStatus.enable;
+            this.status = ChatUserStatus.init;
             this.frontShow = true;
         }
         //如果是系统的，则默认指定

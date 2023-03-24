@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.openService;
 
-import com.socialuni.social.common.api.enumeration.CommonStatus;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.sdk.dao.DO.TencentCosAuditRecordDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
 import com.socialuni.social.sdk.dao.repository.community.TalkImgRepository;
@@ -34,7 +34,7 @@ public class TencentCloudCosService {
         } else {
             contentType = SocialuniContentType.user;
         }
-        recordDO.setStatus(CommonStatus.enable);
+        recordDO.setStatus(SocialuniCommonStatus.init);
         recordDO.setContentType(contentType);
         //thumbType
         String[] imgThumbTypes = imgUrl.split("%21");

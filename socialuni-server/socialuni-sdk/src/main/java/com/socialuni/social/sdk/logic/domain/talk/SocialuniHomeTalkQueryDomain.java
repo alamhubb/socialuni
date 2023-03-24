@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.domain.talk;
 
 import cn.hutool.core.util.BooleanUtil;
-import com.socialuni.social.common.api.enumeration.CommonStatus;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
@@ -23,7 +23,7 @@ import com.socialuni.social.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
-import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
@@ -138,7 +138,7 @@ public class SocialuniHomeTalkQueryDomain {
         }
         for (String tagName : tagNames) {
             TagDO TagDO = tagApi.findFirstByName(tagName);
-            if (TagDO == null || !TagDO.getStatus().equals(CommonStatus.enable)) {
+            if (TagDO == null || !TagDO.getStatus().equals(SocialuniCommonStatus.init)) {
                 throw new SocialBusinessException("选择了无效的话题");
             }
             tagIds.add(TagDO.getId());

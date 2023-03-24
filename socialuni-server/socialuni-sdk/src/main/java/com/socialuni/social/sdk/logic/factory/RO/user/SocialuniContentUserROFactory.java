@@ -5,7 +5,7 @@ import com.socialuni.social.sdk.dao.DO.user.SocialUserIdentityAuthDO;
 import com.socialuni.social.sdk.dao.repository.user.identity.SocialUserIdentityAuthRepository;
 import com.socialuni.social.sdk.logic.manage.FollowManage;
 import com.socialuni.social.common.api.model.user.SocialuniContentUserRO;
-import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.factory.SocialuniUserROFactory;
 import org.springframework.stereotype.Component;
 

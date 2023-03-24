@@ -8,7 +8,7 @@ import com.socialuni.social.sdk.dao.DO.user.SocialUserIdentityAuthDO;
 import com.socialuni.social.sdk.dao.DO.user.SocialUserIdentityAuthImgDO;
 import com.socialuni.social.sdk.dao.repository.user.identity.SocialUserIdentityAuthImgRepository;
 import com.socialuni.social.sdk.dao.repository.user.identity.SocialUserIdentityAuthRepository;
-import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -59,7 +59,7 @@ public class UserIdentityAuditController {
         for (UserIdentityAuditRO audit : audits) {
             SocialUserIdentityAuthDO socialUserIdentityAuthDO = socialUserIdentityAuthRepository.getOne(audit.getId());
             if (audit.getSuccess()) {
-                socialUserIdentityAuthDO.setStatus(UserIdentityAuthStatus.enable);
+                socialUserIdentityAuthDO.setStatus(UserIdentityAuthStatus.init);
             } else {
                 socialUserIdentityAuthDO.setStatus(UserIdentityAuthStatus.delete);
             }

@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.logic.entity.talk;
 
 import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
 import com.socialuni.social.sdk.dao.store.TalkQueryStore;
-import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

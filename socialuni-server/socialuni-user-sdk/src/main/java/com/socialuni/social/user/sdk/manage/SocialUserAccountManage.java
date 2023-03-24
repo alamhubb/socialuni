@@ -4,7 +4,7 @@ import com.socialuni.social.common.api.constant.PlatformType;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.user.sdk.constant.GenderTypeNumEnum;
-import com.socialuni.social.common.sdk.dao.DO.keywords.SocialUserAccountDO;
+import com.socialuni.social.common.sdk.dao.DO.SocialUserAccountDO;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.user.sdk.model.RO.UniUnionIdRO;
 import com.socialuni.social.common.sdk.dao.repository.SocialUserAccountRepository;

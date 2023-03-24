@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.domain.talk;
 
-import com.socialuni.social.common.api.enumeration.CommonStatus;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.community.sdk.entity.DistrictDO;
@@ -33,7 +33,7 @@ import com.socialuni.social.sdk.model.TalkAddValidateRO;
 import com.socialuni.social.community.sdk.utils.DistrictStoreUtils;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
-import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -135,7 +135,7 @@ public class SocialuniPostTalkDomain {
         }
         for (String tagName : tagNames) {
             TagDO TagDO = tagApi.findFirstByName(tagName);
-            if (TagDO == null || !TagDO.getStatus().equals(CommonStatus.enable)) {
+            if (TagDO == null || !TagDO.getStatus().equals(SocialuniCommonStatus.init)) {
                 throw new SocialBusinessException("选择了无效的话题");
             }
             tagIds.add(TagDO.getId());

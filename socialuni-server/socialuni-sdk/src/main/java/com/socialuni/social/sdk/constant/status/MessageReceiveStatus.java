@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.constant.status;
 
 
-import com.socialuni.social.common.api.enumeration.CommonStatus;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.enumeration.ConstStatus;
 
 import java.util.Arrays;
@@ -10,10 +10,10 @@ import java.util.List;
 /**
  * 会话聊天的状态，暂不使用，全局使用一样的，全局统一，避免出现文字不一致问题
  */
-public class MessageReceiveStatus extends CommonStatus {
+public class MessageReceiveStatus extends SocialuniCommonStatus {
     public static final String waitOpen = ConstStatus.waitOpen;
 
-    public static final List<String> allStatus = Arrays.asList(MessageReceiveStatus.enable);
+    public static final List<String> allStatus = Arrays.asList(MessageReceiveStatus.init);
 
    /* //启用
     public static final String normal = "正常";

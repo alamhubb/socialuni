@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.DO.message;
 
-import com.socialuni.social.common.api.enumeration.CommonStatus;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.sdk.dao.DO.chat.ChatUserDO;
 import lombok.Data;
 import lombok.ToString;
@@ -61,7 +61,7 @@ public class MessageReceiveDO implements Serializable {
         this.userId = userId;
         this.receiveUserId = receiveUserId;
         this.message = message;
-        this.status = CommonStatus.enable;
+        this.status = SocialuniCommonStatus.init;
         //接受消息的人看的
         this.isRead = false;
         this.isMine = false;

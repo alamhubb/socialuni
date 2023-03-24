@@ -15,7 +15,7 @@ import com.socialuni.social.sdk.logic.service.bussiness.SocialuniGetUserContactI
 import com.socialuni.social.sdk.utils.SocialuniRequestUtil;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
 import com.socialuni.social.report.sdk.enumeration.SocialuniUserStatus;
-import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.QO.SocialUserContactInfoEditQO;
 import com.socialuni.social.user.sdk.model.QO.SocialUserSchoolNameEditQO;
 import com.socialuni.social.common.api.model.ResultRO;

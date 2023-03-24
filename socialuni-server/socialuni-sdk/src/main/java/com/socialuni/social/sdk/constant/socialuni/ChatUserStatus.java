@@ -1,12 +1,12 @@
 package com.socialuni.social.sdk.constant.socialuni;
 
-import com.socialuni.social.common.api.enumeration.CommonStatus;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.enumeration.ConstStatus;
 
 /**
  * 会话聊天的状态，暂不使用，全局使用一样的，全局统一，避免出现文字不一致问题
  */
-public class ChatUserStatus extends CommonStatus {
+public class ChatUserStatus extends SocialuniCommonStatus {
     //enable 只有enable时可以发送消息，其他状态必须先转为开启才能发送消息
 
     //1，如果为关闭，则显示发起开启，和待开启一样，只要状态不为代开起，就没有pay

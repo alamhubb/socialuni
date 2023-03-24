@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.manage;
 
-import com.socialuni.social.common.api.enumeration.CommonStatus;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.sdk.dao.DO.SocialuniFollowDO;
 import com.socialuni.social.sdk.dao.repository.FollowRepository;
 import com.socialuni.social.sdk.dao.redis.FollowRedis;
@@ -35,6 +35,6 @@ public class FollowManage {
 
     public boolean userHasFollowBeUser(Integer userId, Integer beUserId) {
         SocialuniFollowDO followDO = followRedis.findFirstByUserIdAndBeUserId(userId, beUserId);
-        return followDO != null && CommonStatus.enable.equals(followDO.getStatus());
+        return followDO != null && SocialuniCommonStatus.init.equals(followDO.getStatus());
     }
 }

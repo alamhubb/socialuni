@@ -1,7 +1,7 @@
 package com.socialuni.social.common.sdk.dao.repository;
 
 
-import com.socialuni.social.common.sdk.dao.DO.keywords.SocialUserAccountDO;
+import com.socialuni.social.common.sdk.dao.DO.SocialUserAccountDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

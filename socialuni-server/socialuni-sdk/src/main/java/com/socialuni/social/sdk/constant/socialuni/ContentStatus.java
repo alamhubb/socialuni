@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.constant.socialuni;
 
 
-import com.socialuni.social.common.api.enumeration.CommonStatus;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.enumeration.ConstStatus;
 
 import java.util.Arrays;
@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * 会话聊天的状态，暂不使用，全局使用一样的，全局统一，避免出现文字不一致问题
  */
-public class ContentStatus extends CommonStatus {
+public class ContentStatus extends SocialuniCommonStatus {
     //启用
     //删除
 
@@ -25,10 +25,10 @@ public class ContentStatus extends CommonStatus {
     public static final String violation = ConstStatus.violation;
 
     //他人可见
-    public static final List<String> otherCanSeeContentStatus = Collections.singletonList(enable);
+    public static final List<String> otherCanSeeContentStatus = Collections.singletonList(init);
 
     //自己可见，自己能比别人多看见预审核状态的信息
-    public static final List<String> selfCanSeeContentStatus = Arrays.asList(enable, ContentStatus.preAudit);
+    public static final List<String> selfCanSeeContentStatus = Arrays.asList(init, ContentStatus.preAudit);
 
     //查询 不为审核中的内容
     public static final List<String> auditStatus = Arrays.asList(ContentStatus.preAudit, ContentStatus.auditing);

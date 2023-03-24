@@ -6,7 +6,7 @@ import com.socialuni.social.report.sdk.constant.SocialuniSupportProviderType;
 import com.socialuni.social.report.sdk.entity.ReportDO;
 import com.socialuni.social.report.sdk.dao.repository.ReportRepository;
 import com.socialuni.social.common.sdk.constant.ErrorMsg;
-import com.socialuni.social.common.sdk.dao.DO.keywords.NotifyDO;
+import com.socialuni.social.common.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
 import com.socialuni.social.common.sdk.platform.qq.QQConst;
 import com.socialuni.social.common.sdk.platform.weixin.WxConst;

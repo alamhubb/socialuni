@@ -18,7 +18,7 @@ import com.socialuni.social.sdk.logic.manage.FollowManage;
 import com.socialuni.social.sdk.model.RO.message.chat.ChatRO;
 import com.socialuni.social.sdk.model.RO.message.message.SocialMessageRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
@@ -95,7 +95,7 @@ public class SocialChatROFactory {
         ChatRO chatRO = SocialChatROFactory.getChatRO(chatDO);
         //查询用户这个chatUser下的消息
         //已经确认过chat为可用的
-        List<MessageDO> messageDOS = messageRepository.findTop31ByChatIdAndStatusAndIdNotInOrderByIdDesc(chatDO.getId(), ChatStatus.enable, SocialuniConst.emptyIds);
+        List<MessageDO> messageDOS = messageRepository.findTop31ByChatIdAndStatusAndIdNotInOrderByIdDesc(chatDO.getId(), ChatStatus.init, SocialuniConst.emptyIds);
         if (messageDOS.size() > 30) {
             messageDOS.subList(1, 31);
             chatRO.setLoadMore(LoadMoreType.more);
@@ -164,7 +164,7 @@ public class SocialChatROFactory {
         ChatRO chatRO = SocialChatROFactory.getChatRO(chatDO, chatUserDO);
         //系统群聊读取message表
         //查询用户这个chatUser下的消息
-        List<MessageReceiveDO> messageReceiveDOS = messageReceiveRepository.findTop31ByChatUserIdAndChatUserStatusAndStatusAndMessageIdNotInOrderByIdDesc(chatUserDO.getId(), ChatUserStatus.enable, MessageStatus.enable, SocialuniConst.emptyIds);
+        List<MessageReceiveDO> messageReceiveDOS = messageReceiveRepository.findTop31ByChatUserIdAndChatUserStatusAndStatusAndMessageIdNotInOrderByIdDesc(chatUserDO.getId(), ChatUserStatus.init, MessageStatus.init, SocialuniConst.emptyIds);
         if (messageReceiveDOS.size() > 30) {
             messageReceiveDOS.subList(1, 31);
             chatRO.setLoadMore(LoadMoreType.more);

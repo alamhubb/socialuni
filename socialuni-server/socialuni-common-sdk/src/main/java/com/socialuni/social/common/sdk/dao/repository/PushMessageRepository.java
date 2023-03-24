@@ -1,7 +1,7 @@
 package com.socialuni.social.common.sdk.dao.repository;
 
 
-import com.socialuni.social.common.sdk.dao.DO.keywords.PushMessageDO;
+import com.socialuni.social.common.sdk.dao.DO.PushMessageDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

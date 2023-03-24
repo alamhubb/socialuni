@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.controller;
 
 
 import com.socialuni.social.common.api.utils.JsonUtil;
-import com.socialuni.social.common.sdk.facade.SocialuniRepositoryFacade;
+import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.sdk.constant.business.SocialuniPayStatus;
 import com.socialuni.social.sdk.dao.DO.bussiness.SocialuniCoinOrderDO;
 import com.socialuni.social.sdk.dao.DO.bussiness.SocialuniPayCoinOrderDO;

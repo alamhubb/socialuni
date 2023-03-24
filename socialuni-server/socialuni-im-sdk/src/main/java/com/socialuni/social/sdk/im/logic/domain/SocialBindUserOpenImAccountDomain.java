@@ -4,8 +4,8 @@ import com.socialuni.social.common.api.constant.PlatformType;
 import com.socialuni.social.user.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.user.sdk.constant.SocialuniAccountProviderType;
 import com.socialuni.social.user.sdk.logic.entity.SocialBindUserProviderAccountEntity;
-import com.socialuni.social.common.sdk.dao.DO.keywords.SocialUserAccountDO;
-import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialUserAccountDO;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import org.springframework.stereotype.Service;
 

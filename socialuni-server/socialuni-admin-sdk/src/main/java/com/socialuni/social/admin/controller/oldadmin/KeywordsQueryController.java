@@ -3,7 +3,7 @@ package com.socialuni.social.admin.controller.oldadmin;
 import com.socialuni.social.admin.model.KeywordsDetailVO;
 import com.socialuni.social.admin.utils.CheckIsAdminUtil;
 import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
-import com.socialuni.social.common.api.enumeration.CommonStatus;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
@@ -64,7 +64,7 @@ public class KeywordsQueryController {
     public ResultRO<List<KeywordsDO>> queryKeywords() {
         CheckIsAdminUtil.checkAdmin();
         //先查询出来所有的关键词
-        List<KeywordsDO> wordDOs = keywordsRepository.findAllByStatusOrderByTextViolateRatioDesc(CommonStatus.enable);
+        List<KeywordsDO> wordDOs = keywordsRepository.findAllByStatusOrderByTextViolateRatioDesc(SocialuniCommonStatus.init);
 
         return new ResultRO<>(wordDOs);
     }

@@ -8,7 +8,7 @@ import com.socialuni.social.sdk.dao.repository.ChatRepository;
 import com.socialuni.social.sdk.dao.repository.ChatUserRepository;
 import com.socialuni.social.sdk.logic.factory.SocialChatROFactory;
 import com.socialuni.social.sdk.model.RO.message.chat.ChatRO;
-import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -29,7 +29,7 @@ public class ChatQueryDomain {
     //初始化和查询chat列表触发的
     public List<ChatRO> getChats(SocialuniUserDo user) {
         //未登录的情况只插叙你官方的chats
-        List<ChatUserDO> chatUsers = chatUserRepository.findByChatStatusAndUserIdAndFrontShowTrueOrderByChatTopLevelDescTopFlagDescUpdateTimeDesc(ChatStatus.enable, user.getUnionId());
+        List<ChatUserDO> chatUsers = chatUserRepository.findByChatStatusAndUserIdAndFrontShowTrueOrderByChatTopLevelDescTopFlagDescUpdateTimeDesc(ChatStatus.init, user.getUnionId());
         //查询的时候chat列表展示不为当前用户的
         /*return chatUsers.stream().map((ChatUserDO chatUserDO) -> {
             //只有启用的才显示消息列表
@@ -45,7 +45,7 @@ public class ChatQueryDomain {
     //未登录的情况下查询官方chat，官方群聊
     public List<ChatRO> getChats() {
         //未登录的情况只插叙你官方的chats
-        List<ChatDO> chats = chatRepository.findByStatusAndTypeInOrderByTopLevelDescUpdateTimeDesc(ChatStatus.enable, ChatType.systemChats);
+        List<ChatDO> chats = chatRepository.findByStatusAndTypeInOrderByTopLevelDescUpdateTimeDesc(ChatStatus.init, ChatType.systemChats);
         return SocialChatROFactory.chatDOToVOS(chats);
     }
 }

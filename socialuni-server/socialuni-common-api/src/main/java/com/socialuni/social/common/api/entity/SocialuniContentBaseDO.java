@@ -1,6 +1,6 @@
 package com.socialuni.social.common.api.entity;
 
-import com.socialuni.social.common.api.enumeration.CommonStatus;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -19,12 +19,12 @@ public class SocialuniContentBaseDO extends SocialuniUserInfoBaseDO implements S
 
     public SocialuniContentBaseDO() {
         this.updateTime = super.getCreateTime();
-        this.status = CommonStatus.enable;
+        this.status = SocialuniCommonStatus.init;
     }
 
     public SocialuniContentBaseDO(Integer userId) {
         super(userId);
         this.updateTime = super.getCreateTime();
-        this.status = CommonStatus.enable;
+        this.status = SocialuniCommonStatus.init;
     }
 }

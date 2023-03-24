@@ -95,7 +95,7 @@ public class SocialuniUserIdentityService {
         SocialUserIdentityAuthDO socialUserIdentityDO = socialUserIdentityAuthRepository.findFirstByUserId(userId);
         if (socialUserIdentityDO != null) {
             String authStatus = socialUserIdentityDO.getStatus();
-            if (Arrays.asList(UserIdentityAuthStatus.preAudit, UserIdentityAuthStatus.enable).contains(authStatus)) {
+            if (Arrays.asList(UserIdentityAuthStatus.preAudit, UserIdentityAuthStatus.init).contains(authStatus)) {
                 throw new SocialBusinessException("您已认证成功，无需重复认证");
             }
             if (UserIdentityAuthStatus.audit.equals(authStatus)) {

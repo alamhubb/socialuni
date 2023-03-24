@@ -5,7 +5,7 @@ import com.socialuni.social.common.sdk.constant.AppConfigConst;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.model.RO.UserImgVO;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
-import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserImgDo;
 import lombok.Data;
 import org.springframework.stereotype.Component;
@@ -60,7 +60,7 @@ public class UserImgBO {
         userImgDO.setQuality(this.getQuality());
         userImgDO.setSize(this.size);
         userImgDO.setUserId(user.getUnionId());
-        userImgDO.setStatus(ContentStatus.enable);
+        userImgDO.setStatus(ContentStatus.init);
         userImgDO.setCreateTime(new Date());
         userImgDO.setContent(AppConfigConst.img_content);
         userImgDO.setContentType(SocialuniContentType.userImg);

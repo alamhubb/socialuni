@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.im.contrller;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.sdk.im.api.SocialuniImUserAPI;
 import com.socialuni.social.sdk.im.service.ImUserService;
-import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RestController;
