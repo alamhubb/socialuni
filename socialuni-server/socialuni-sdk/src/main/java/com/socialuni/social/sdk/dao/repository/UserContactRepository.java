@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.dao.repository;
 
 
-import com.socialuni.social.sdk.dao.DO.bussiness.SocialuniGetUserContactRecordDO;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniGetUserContactRecordDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

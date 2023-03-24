@@ -1,6 +1,7 @@
 package com.socialuni.social.common.sdk.dao.facede;
 
 import com.socialuni.social.common.api.entity.SocialuniUserContactBaseDO;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniGetUserContactRecordDO;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniUserContactFacedeRepository;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniUserContactFacedeRepositoryImpl;
 import org.springframework.data.jpa.repository.support.JpaRepositoryFactory;
@@ -43,7 +44,7 @@ public abstract class SocialuniUserContactRepositoryFacede extends SocialuniUser
             throw new RuntimeException(e);
         }
         //手动创建实例
-        SocialuniUserContactFacedeRepositoryImpl<T> socialuniUserContactFacedeRepository = new SocialuniUserContactFacedeRepositoryImpl<T>(getEntityManager(), tClass);
+        SocialuniUserContactFacedeRepositoryImpl<T> socialuniUserContactFacedeRepository = new SocialuniUserContactFacedeRepositoryImpl<>(getEntityManager(), tClass);
         return socialuniUserContactFacedeRepository.getUserRepository().countByUserIdAndBeUserIdAndStatus(userId, beUserId, status);
     }
 

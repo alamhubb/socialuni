@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.dao.DO.bussiness;
+package com.socialuni.social.common.sdk.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniUserContactBaseDO;
 import com.socialuni.social.common.api.entity.SocialuniUserInfoBaseDO;
