@@ -2,18 +2,18 @@ package com.socialuni.social.sdk.logic.domain.phone;
 
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.utils.JsonUtil;
-import com.socialuni.social.user.sdk.constant.UniappProviderType;
+import com.socialuni.social.report.sdk.constant.SocialuniSupportProviderType;
 import com.socialuni.social.user.sdk.logic.entity.SocialUserPhoneEntity;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.social.user.sdk.manage.SocialUserAccountManage;
-import com.socialuni.social.user.sdk.platform.WxDecode;
-import com.socialuni.social.user.sdk.platform.WxPhoneNumRO;
+import com.socialuni.social.common.sdk.platform.WxDecode;
+import com.socialuni.social.common.sdk.platform.WxPhoneNumRO;
 import com.socialuni.social.sdk.model.QO.SocialBindWxPhoneNumQO;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.user.sdk.model.RO.UniUnionIdRO;
 import com.socialuni.social.user.sdk.utils.UniProviderUtil;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -32,14 +32,14 @@ public class SocialBindWxPhoneNumDomain {
     public SocialuniMineUserDetailRO bindWxPhoneNum(@Valid SocialBindWxPhoneNumQO bindPhoneQO, SocialuniUserDo mineUser) {
         //校验各个参数
         SocialProviderLoginQO socialProviderLoginQO = new SocialProviderLoginQO();
-        socialProviderLoginQO.setProvider(UniappProviderType.wx);
+        socialProviderLoginQO.setProvider(SocialuniSupportProviderType.wx);
 //        socialProviderLoginQO.setPlatform(PlatformType.mp);
         socialProviderLoginQO.setCode(bindPhoneQO.getCode());
 
         UniUnionIdRO loginResult = UniProviderUtil.getUnionIdRO(socialProviderLoginQO);
         String sessionKey = loginResult.getSession_key();
 
-        socialUserAccountManage.updateSessionKey(mineUser.getUnionId(), UniappProviderType.wx, loginResult.getSession_key());
+        socialUserAccountManage.updateSessionKey(mineUser.getUnionId(), SocialuniSupportProviderType.wx, loginResult.getSession_key());
         WxPhoneNumRO phoneNumVO;
         try {
             String phoneJson = WxDecode.decrypt(sessionKey, bindPhoneQO.getEncryptedData(), bindPhoneQO.getIv());

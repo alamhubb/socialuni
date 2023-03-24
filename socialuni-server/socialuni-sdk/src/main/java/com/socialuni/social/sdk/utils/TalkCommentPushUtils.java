@@ -4,17 +4,17 @@ package com.socialuni.social.sdk.utils;
 import com.socialuni.social.common.sdk.utils.DateUtils;
 import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
 import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
-import com.socialuni.social.tance.config.AppConfigConst;
-import com.socialuni.social.user.sdk.constant.UniappProviderType;
-import com.socialuni.social.user.sdk.model.DO.NotifyDO;
+import com.socialuni.social.common.sdk.constant.AppConfigConst;
+import com.socialuni.social.common.sdk.dao.DO.keywords.NotifyDO;
+import com.socialuni.social.report.sdk.constant.SocialuniSupportProviderType;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniCommentDOUtil;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
-import com.socialuni.social.user.sdk.platform.qq.QQConst;
-import com.socialuni.social.user.sdk.platform.weixin.WxConst;
-import com.socialuni.social.user.sdk.platform.PushMsgDTO;
+import com.socialuni.social.common.sdk.platform.qq.QQConst;
+import com.socialuni.social.common.sdk.platform.weixin.WxConst;
+import com.socialuni.social.common.sdk.platform.PushMsgDTO;
 import com.socialuni.social.sdk.model.PushNotifyVO;
 import com.socialuni.social.sdk.model.PushValue;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
@@ -40,7 +40,7 @@ public class TalkCommentPushUtils {
         PushMsgDTO pushMsgDTO = null;
 //        String page = AppConfigConst.notify_skip_page + UnionIdDbUtil.createTalkUid(talk.getId(), notify.getReceiveUserId());
         String page = AppConfigConst.notify_skip_page;
-        if (provider.equals(UniappProviderType.qq)) {
+        if (provider.equals(SocialuniSupportProviderType.qq)) {
             //评论内容
             data.put("keyword3", pushNotifyVO.getContent());
             //评论用户
@@ -50,7 +50,7 @@ public class TalkCommentPushUtils {
             //帖子内容
             data.put("keyword2", pushNotifyVO.getBeContent());
             pushMsgDTO = new PushMsgDTO(QQConst.talk_template_id, page, data, "keyword3.DATA");
-        } else if (provider.equals(UniappProviderType.wx)) {
+        } else if (provider.equals(SocialuniSupportProviderType.wx)) {
             //评论内容
             data.put("thing2", pushNotifyVO.getContent());
             //评论用户

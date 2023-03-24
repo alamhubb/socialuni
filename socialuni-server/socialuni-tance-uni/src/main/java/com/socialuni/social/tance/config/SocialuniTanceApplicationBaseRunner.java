@@ -7,16 +7,9 @@ import com.socialuni.social.tance.repository.AppConfigRepository;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfigBO;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfigInterface;
 import com.socialuni.social.tance.sdk.config.SocialuniAppMoreConfigBO;
-import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
-import com.socialuni.social.user.sdk.constant.GenderTypeNumEnum;
-import com.socialuni.social.user.sdk.logic.entity.SocialUserPhoneEntity;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
-import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.user.sdk.utils.WxUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.ApplicationArguments;
@@ -26,7 +19,6 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 

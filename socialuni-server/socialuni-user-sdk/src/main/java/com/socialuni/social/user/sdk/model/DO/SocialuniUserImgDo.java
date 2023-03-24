@@ -1,7 +1,7 @@
 package com.socialuni.social.user.sdk.model.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniImgBaseDo;
-import com.socialuni.social.user.sdk.api.SocialuniTextCheckDO;
+import com.socialuni.social.report.sdk.dao.DO.SocialuniTextCheckDO;
 import lombok.Data;
 
 import javax.persistence.*;

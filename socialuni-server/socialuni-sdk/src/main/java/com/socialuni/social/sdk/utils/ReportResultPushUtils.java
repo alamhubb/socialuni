@@ -2,15 +2,15 @@ package com.socialuni.social.sdk.utils;
 
 import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.common.sdk.utils.DateUtils;
+import com.socialuni.social.report.sdk.constant.SocialuniSupportProviderType;
 import com.socialuni.social.report.sdk.entity.ReportDO;
-import com.socialuni.social.report.sdk.repository.ReportRepository;
-import com.socialuni.social.tance.config.ErrorMsg;
-import com.socialuni.social.user.sdk.constant.UniappProviderType;
-import com.socialuni.social.user.sdk.model.DO.NotifyDO;
+import com.socialuni.social.report.sdk.dao.repository.ReportRepository;
+import com.socialuni.social.common.sdk.constant.ErrorMsg;
+import com.socialuni.social.common.sdk.dao.DO.keywords.NotifyDO;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
-import com.socialuni.social.user.sdk.platform.qq.QQConst;
-import com.socialuni.social.user.sdk.platform.weixin.WxConst;
-import com.socialuni.social.user.sdk.platform.PushMsgDTO;
+import com.socialuni.social.common.sdk.platform.qq.QQConst;
+import com.socialuni.social.common.sdk.platform.weixin.WxConst;
+import com.socialuni.social.common.sdk.platform.PushMsgDTO;
 import com.socialuni.social.sdk.model.PushNotifyVO;
 import com.socialuni.social.sdk.model.PushValue;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
@@ -62,7 +62,7 @@ public class ReportResultPushUtils {
 
         HashMap<String, Object> data = new HashMap<>();
         PushMsgDTO pushMsgDTO = null;
-        if (provider.equals(UniappProviderType.qq)) {
+        if (provider.equals(SocialuniSupportProviderType.qq)) {
             //举报内容
             data.put("keyword5", notifyVO.getBeContent());
             //被举报人
@@ -77,7 +77,7 @@ public class ReportResultPushUtils {
             data.put("keyword2", notifyVO.getRemark());
 
             pushMsgDTO = new PushMsgDTO(QQConst.report_result_template_id, data, "keyword4.DATA");
-        } else if (provider.equals(UniappProviderType.wx)) {
+        } else if (provider.equals(SocialuniSupportProviderType.wx)) {
             //审核内容
             data.put("thing5", notifyVO.getBeContent());
             //审核结果

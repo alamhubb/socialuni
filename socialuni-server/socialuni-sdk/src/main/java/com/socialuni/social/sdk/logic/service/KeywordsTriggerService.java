@@ -1,13 +1,13 @@
 package com.socialuni.social.sdk.logic.service;
 
 import com.github.promeg.pinyinhelper.Pinyin;
+import com.socialuni.social.report.sdk.dao.DO.*;
 import com.socialuni.social.sdk.constant.CustomWordsRuleType;
 import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.sdk.dao.repository.BlackKeywordsRepository;
 import com.socialuni.social.sdk.dao.repository.CustomKeywordsRepository;
 import com.socialuni.social.sdk.dao.repository.WhiteKeywordsRepository;
-import com.socialuni.social.user.sdk.model.DO.keywords.*;
-import com.socialuni.social.user.sdk.utils.TextContentUtil;
+import com.socialuni.social.common.sdk.utils.TextContentUtil;
 import com.socialuni.social.common.api.enumeration.CommonStatus;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;

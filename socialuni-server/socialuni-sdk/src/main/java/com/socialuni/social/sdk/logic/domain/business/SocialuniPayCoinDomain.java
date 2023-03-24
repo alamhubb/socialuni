@@ -8,6 +8,7 @@ import com.socialuni.social.common.api.utils.IpUtil;
 import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.common.api.utils.UUIDUtil;
 import com.socialuni.social.common.sdk.facade.SocialuniRepositoryFacade;
+import com.socialuni.social.report.sdk.constant.SocialuniSupportProviderType;
 import com.socialuni.social.sdk.constant.business.SocialuniAllowPayCoinAmountType;
 import com.socialuni.social.sdk.constant.business.SocialuniPayStatus;
 import com.socialuni.social.sdk.constant.business.SocialuniPayProviderType;
@@ -16,12 +17,11 @@ import com.socialuni.social.sdk.dao.DO.bussiness.SocialuniPayCoinOrderDO;
 import com.socialuni.social.sdk.model.QO.business.SocialuniPayCoinQO;
 import com.socialuni.social.sdk.model.QO.business.SocialuniCoinPayRO;
 import com.socialuni.social.common.sdk.utils.DateUtils;
-import com.socialuni.social.user.sdk.constant.UniappProviderType;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
 import com.socialuni.social.user.sdk.utils.AuthCodeUtil;
-import com.socialuni.social.user.sdk.utils.QQUtil;
+import com.socialuni.social.report.sdk.utils.QQUtil;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.user.sdk.utils.WxUtil;
+import com.socialuni.social.report.sdk.utils.WxUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -116,9 +116,9 @@ public class SocialuniPayCoinDomain {
 
         //第二位，支付渠道，qq,wx
         StringBuilder orderNo = new StringBuilder();
-        if (UniappProviderType.wx.equals(payProvider)) {
+        if (SocialuniSupportProviderType.wx.equals(payProvider)) {
             orderNo.append("W");
-        } else if (UniappProviderType.qq.equals(payProvider)) {
+        } else if (SocialuniSupportProviderType.qq.equals(payProvider)) {
             orderNo.append("Q");
         } else {
             throw new SocialSystemException("错误的支付渠道");

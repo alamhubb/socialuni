@@ -10,7 +10,7 @@ import com.socialuni.social.sdk.dao.DO.SocialuniFollowDO;
 import com.socialuni.social.sdk.dao.repository.FollowRepository;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniUserFollowDetailROFactory;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

@@ -34,7 +34,11 @@
         <module>socialuni-report-sdk</module>
         <module>socialuni-admin-sdk</module>
         <module>socialuni-community-sdk</module>
+        <module>socialuni-im</module>
+        <module>socialuni-user-friend</module>
         <module>socialuni-im-sdk</module>
+        <module>socialuni-user-base</module>
+        <module>socialuni-business</module>
     </modules>
 
     <properties>
@@ -53,6 +57,26 @@
             <dependency>
                 <groupId>com.socialuni.social</groupId>
                 <artifactId>socialuni-im-sdk</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni.social</groupId>
+                <artifactId>socialuni-business</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni.social</groupId>
+                <artifactId>socialuni-im</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni.social</groupId>
+                <artifactId>socialuni-user-friend</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni.social</groupId>
+                <artifactId>socialuni-user-base</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>

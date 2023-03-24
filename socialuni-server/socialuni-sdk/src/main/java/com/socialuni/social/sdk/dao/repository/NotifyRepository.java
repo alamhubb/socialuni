@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.dao.repository;
 
 
-import com.socialuni.social.user.sdk.model.DO.NotifyDO;
+import com.socialuni.social.common.sdk.dao.DO.keywords.NotifyDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

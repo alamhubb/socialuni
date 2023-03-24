@@ -3,7 +3,6 @@ package com.socialuni.social.sdk.dao.factory;
 import com.socialuni.social.sdk.constant.shell.SocialuniCoinOrderType;
 import com.socialuni.social.sdk.dao.DO.bussiness.SocialuniCoinOrderDO;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserCoinDo;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 
 public class SocialuniCoinOrderFactory {
 

@@ -1,13 +1,14 @@
 package com.socialuni.social.user.sdk.utils;
 
 import com.socialuni.social.common.api.utils.SocialTokenFacade;
+import com.socialuni.social.common.sdk.utils.RequestLogUtil;
 import com.socialuni.social.user.sdk.model.DO.SocialTokenDO;
 import com.socialuni.social.user.sdk.repository.SocialuniCommonTokenRepository;
 import com.socialuni.social.common.api.utils.IntegerUtils;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.common.api.exception.exception.SocialNotLoginException;
 import com.socialuni.social.common.api.exception.exception.SocialUserTokenExpireException;
-import com.socialuni.social.user.sdk.model.DO.RequestLogDO;
+import com.socialuni.social.common.api.dao.DO.RequestLogDO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -58,8 +59,8 @@ public class SocialTokenDOUtil {
             if (!userId.equals(doUserId)) {
                 log.error("绕过验证，错误的userId:{},{}", doUserId, userId);
                 RequestLogDO requestLogDO = RequestLogUtil.get();
+                requestLogDO.setErrorMsg("绕过验证，错误的userId:{},{}");
                 requestLogDO.setUserId(doUserId);
-                RequestLogUtil.save(requestLogDO);
                 throw new SocialNotLoginException();
             }
         } else {
@@ -69,8 +70,8 @@ public class SocialTokenDOUtil {
                 log.error("绕过验证，错误的userId:{},{}", uid, userKey);
                 RequestLogDO requestLogDO = RequestLogUtil.get();
                 if (requestLogDO != null) {
+                    requestLogDO.setErrorMsg("绕过验证，错误的userId:{},{}");
                     requestLogDO.setUserId(doUserId);
-                    RequestLogUtil.save(requestLogDO);
                 }
                 throw new SocialNotLoginException();
             }

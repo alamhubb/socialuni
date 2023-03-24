@@ -5,7 +5,7 @@ import com.socialuni.social.admin.factory.ReportContentROFactory;
 import com.socialuni.social.admin.model.ReportContentVO;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.sdk.dao.DO.TencentCosAuditRecordDO;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.Data;
 

@@ -1,11 +1,9 @@
 package com.socialuni.social.user.sdk.logic.service;
 
-import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
-import com.socialuni.social.common.sdk.event.ddd.EventPublisherFacade;
+import com.socialuni.social.report.sdk.constant.SocialuniSupportProviderType;
 import com.socialuni.social.user.sdk.logic.domain.SocialuniLoginDomain;
-import com.socialuni.social.user.sdk.constant.UniappProviderType;
 import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumQO;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
@@ -26,9 +24,7 @@ public class SocialuniLoginService {
     public ResultRO<SocialLoginRO<SocialuniUserRO>> providerLogin(SocialProviderLoginQO loginQO) {
         // 只有清池支持渠道登录
         // 其他的只支持社交联盟登陆
-        if (!UniappProviderType.values.contains(loginQO.getProvider())) {
-            throw new SocialParamsException(UniappProviderType.notSupportTypeErrorMsg);
-        }
+        SocialuniSupportProviderType.checkSupportType(loginQO.getProvider());
         SocialLoginRO<SocialuniUserRO> socialLoginRO = socialPhoneLoginDomain.providerLogin(loginQO);
         return ResultRO.success(socialLoginRO);
     }

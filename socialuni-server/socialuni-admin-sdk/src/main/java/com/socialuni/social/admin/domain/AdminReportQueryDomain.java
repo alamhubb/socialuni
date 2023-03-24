@@ -3,7 +3,7 @@ package com.socialuni.social.admin.domain;
 import com.socialuni.social.admin.model.ReportRO;
 import com.socialuni.social.report.sdk.entity.ReportDO;
 import com.socialuni.social.report.sdk.enumeration.ReportStatus;
-import com.socialuni.social.report.sdk.repository.ReportRepository;
+import com.socialuni.social.report.sdk.dao.repository.ReportRepository;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkHasUnderageImgAuditDO;
 import com.socialuni.social.sdk.dao.repository.community.TalkAdultImgAuditRepository;

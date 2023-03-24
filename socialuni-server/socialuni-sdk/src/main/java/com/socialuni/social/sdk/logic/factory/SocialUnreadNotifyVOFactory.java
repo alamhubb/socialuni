@@ -4,7 +4,7 @@ import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
 import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
 import com.socialuni.social.sdk.constant.NotifyType;
-import com.socialuni.social.user.sdk.model.DO.NotifyDO;
+import com.socialuni.social.common.sdk.dao.DO.keywords.NotifyDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniCommentDOUtil;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
@@ -12,7 +12,7 @@ import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkImgDOUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.model.RO.app.SocialUnreadNotifyVO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

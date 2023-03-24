@@ -10,7 +10,6 @@ import com.socialuni.social.sdk.feignAPI.user.SocialuniUserAPI;
 import com.socialuni.social.sdk.logic.service.user.SocialuniMineUserService;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
 import com.socialuni.social.sdk.logic.service.user.SocialuniUserService;
-import com.socialuni.social.user.sdk.model.QO.SocialuniUserIdQO;
 import com.socialuni.social.user.sdk.model.QO.SocialuniUserImgDeleteQO;
 import com.socialuni.social.user.sdk.model.QO.SocialUserEditQO;
 import com.socialuni.social.user.sdk.model.QO.user.SocialuniUserExtendFriendQueryQO;

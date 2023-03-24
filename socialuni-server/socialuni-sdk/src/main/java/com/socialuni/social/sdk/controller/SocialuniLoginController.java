@@ -6,7 +6,7 @@ import com.socialuni.social.sdk.feignAPI.user.SocialuniLoginAPI;
 import com.socialuni.social.sdk.logic.service.login.SocialuniDetailLoginService;
 import com.socialuni.social.user.sdk.manage.SocialuniTokenManage;
 import com.socialuni.social.user.sdk.model.DO.SocialTokenDO;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumQO;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;

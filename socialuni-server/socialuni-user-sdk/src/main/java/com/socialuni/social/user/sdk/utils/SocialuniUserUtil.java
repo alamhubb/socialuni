@@ -2,17 +2,17 @@ package com.socialuni.social.user.sdk.utils;
 
 import com.socialuni.social.common.api.exception.exception.SocialNotLoginException;
 import com.socialuni.social.common.api.exception.exception.SocialNullUserException;
-import com.socialuni.social.user.sdk.constant.SocialuniUserStatus;
+import com.socialuni.social.common.api.config.SocialRequestUserConfig;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
+import com.socialuni.social.report.sdk.enumeration.SocialuniUserStatus;
 import com.socialuni.social.user.sdk.exception.SocialUserBannedException;
 import com.socialuni.social.user.sdk.model.DO.SocialTokenDO;
-import com.socialuni.social.user.sdk.redis.SocialUserPhoneRedis;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.common.api.config.SocialRequestUserConfig;
 import com.socialuni.social.user.sdk.model.DO.SocialUserPhoneDo;
 import com.socialuni.social.user.sdk.model.DO.SocialUserViolationDo;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.user.sdk.redis.SocialUserPhoneRedis;
 import com.socialuni.social.user.sdk.repository.SocialUserViolationRepository;
-import com.socialuni.social.user.sdk.repository.SocialuniUserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

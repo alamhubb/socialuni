@@ -7,11 +7,12 @@ import {fileURLToPath, URL} from "node:url";
 const IN_PRODUCTION = process.env.NODE_ENV === 'production'
 
 let plugins = []
-if (IN_PRODUCTION) {
     plugins = [
         require('@fullhuman/postcss-purgecss')({
+            rejected: true,
             // require('@fullhuman/postcss-purgecss')({
-            content: ['./public/**/*.html', './node_modules/socialuni-view/**/*.scss', './node_modules/@dcloudio/**/*.scss', './node_modules/@dcloudio/**/*.vue', './node_modules/socialuni-view/**/*.vue', './src/**/*.vue', './src/**/*.scss'],
+            content: ['./public/**/*.html', './src/**/*.vue'],
+            // content: ['./public/**/*.html', './node_modules/socialuni-view/**/*.scss', './node_modules/@dcloudio/**/*.scss', './node_modules/@dcloudio/**/*.vue', './node_modules/socialuni-view/**/*.vue', './src/**/*.vue', './src/**/*.scss'],
             defaultExtractor(content) {
                 const contentWithoutStyleBlocks = content.replace(
                     /<style[^]+?<\/style>/gi,
@@ -38,7 +39,6 @@ if (IN_PRODUCTION) {
             ]
         })
     ]
-}
 // vite.config.ts
 // https://vitejs.dev/config/
 export default defineConfig({

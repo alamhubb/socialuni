@@ -25,6 +25,10 @@
             <artifactId>socialuni-common-api</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.socialuni.social</groupId>
+            <artifactId>socialuni-common-sdk</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>${springdoc.version}</version>
@@ -98,6 +102,19 @@
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
+        </dependency>
+
+        <!--审核内容时使用-->
+        <dependency>
+            <groupId>com.github.promeg</groupId>
+            <artifactId>tinypinyin</artifactId>
+            <version>2.0.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.promeg</groupId>
+            <artifactId>tinypinyin</artifactId>
+            <version>2.0.3</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

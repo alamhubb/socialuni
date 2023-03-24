@@ -7,22 +7,22 @@ import com.socialuni.social.common.api.utils.JsonUtil;
 import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
 import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
 import com.socialuni.social.community.sdk.repository.CommentRepository;
+import com.socialuni.social.report.sdk.constant.SocialuniSupportProviderType;
 import com.socialuni.social.sdk.constant.NotifyType;
-import com.socialuni.social.user.sdk.constant.UniappProviderType;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.social.user.sdk.model.DO.NotifyDO;
+import com.socialuni.social.common.sdk.dao.DO.keywords.NotifyDO;
 import com.socialuni.social.sdk.dao.DO.chat.ChatUserDO;
 import com.socialuni.social.sdk.dao.DO.message.MessageReceiveDO;
-import com.socialuni.social.user.sdk.model.DO.SocialUserAccountDO;
+import com.socialuni.social.common.sdk.dao.DO.keywords.SocialUserAccountDO;
 import com.socialuni.social.sdk.dao.repository.MessageReceiveRepository;
 import com.socialuni.social.sdk.dao.repository.NotifyRepository;
-import com.socialuni.social.user.sdk.repository.SocialUserAccountRepository;
+import com.socialuni.social.common.sdk.dao.repository.SocialUserAccountRepository;
 import com.socialuni.social.sdk.model.NotifyVO;
-import com.socialuni.social.user.sdk.platform.PushMsgDTO;
+import com.socialuni.social.common.sdk.platform.PushMsgDTO;
 import com.socialuni.social.sdk.utils.*;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
-import com.socialuni.social.user.sdk.utils.QQUtil;
-import com.socialuni.social.user.sdk.utils.WxUtil;
+import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
+import com.socialuni.social.report.sdk.utils.QQUtil;
+import com.socialuni.social.report.sdk.utils.WxUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -179,9 +179,9 @@ public class NotifyDomain {
 
                 }
                 assert pushMsgDTO != null;
-                if (provider.equals(UniappProviderType.qq)) {
+                if (provider.equals(SocialuniSupportProviderType.qq)) {
                     QQUtil.qqPushMsgCommon(receiveAccount.getMpOpenId(), provider, pushMsgDTO, notify);
-                } else if (provider.equals(UniappProviderType.wx)) {
+                } else if (provider.equals(SocialuniSupportProviderType.wx)) {
                     WxUtil.wxPushMsgCommon(receiveAccount.getMpOpenId(), provider, pushMsgDTO, notify);
                 }
             }

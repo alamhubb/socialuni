@@ -3,10 +3,10 @@ package com.socialuni.social.user.sdk.utils;
 
 import com.socialuni.social.common.api.exception.exception.SocialNullUserException;
 import com.socialuni.social.common.sdk.utils.DateUtils;
-import com.socialuni.social.tance.config.ErrorMsg;
+import com.socialuni.social.common.sdk.constant.ErrorMsg;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.tance.sdk.facade.ConfigFacade;
-import com.socialuni.social.user.sdk.facede.SocialuniUserRepositoryFacede;
+import com.socialuni.social.user.base.facade.SocialuniUserRepositoryFacede;
 import com.socialuni.social.user.sdk.model.DO.SocialUserViolationDo;
 
 import java.text.MessageFormat;

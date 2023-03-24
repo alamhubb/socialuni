@@ -9,7 +9,7 @@ import com.socialuni.social.sdk.logic.factory.UserImgROFactory;
 import com.socialuni.social.common.api.model.user.SocialuniUserDetailRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserFollowInfoRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserImgRO;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserExpandDo;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserImgDo;
 import org.apache.commons.lang3.StringUtils;

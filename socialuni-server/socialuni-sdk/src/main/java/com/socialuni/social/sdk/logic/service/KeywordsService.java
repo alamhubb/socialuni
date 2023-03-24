@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.service;
 
-import com.socialuni.social.user.sdk.model.DO.keywords.KeywordsDO;
-import com.socialuni.social.user.sdk.model.DO.keywords.KeywordsTriggerDetailDO;
+import com.socialuni.social.report.sdk.dao.DO.KeywordsDO;
+import com.socialuni.social.report.sdk.dao.DO.KeywordsTriggerDetailDO;
 import com.socialuni.social.report.sdk.enumeration.ReportStatus;
 import org.springframework.stereotype.Service;
 

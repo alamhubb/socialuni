@@ -2,20 +2,16 @@ package com.socialuni.social.user.sdk.dao.utils;
 
 import cn.hutool.core.util.ReUtil;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
-import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserExpandDo;
-import com.socialuni.social.user.sdk.repository.SocialuniUserExpandRepository;
-import com.socialuni.social.user.sdk.repository.SocialuniUserRepository;
-import com.socialuni.social.user.sdk.utils.BirthdayAgeUtil;
+import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
+import com.socialuni.social.report.sdk.utils.BirthdayAgeUtil;
 import com.socialuni.social.user.sdk.utils.GenderUtil;
-import com.socialuni.social.user.sdk.utils.content.SocialuniTextContentUtil;
+import com.socialuni.social.report.sdk.utils.SocialuniTextContentUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.util.Date;
 
 @Component
 @Slf4j

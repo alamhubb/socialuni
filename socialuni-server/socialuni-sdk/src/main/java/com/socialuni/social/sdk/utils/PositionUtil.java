@@ -1,11 +1,9 @@
 package com.socialuni.social.sdk.utils;
 
 import com.socialuni.social.common.api.utils.IpUtil;
-import com.socialuni.social.sdk.model.QO.community.talk.SocialHomeTabTalkQueryBO;
-import com.socialuni.social.user.sdk.model.RO.LocationQueryRO;
-import com.socialuni.social.user.sdk.model.RO.SocialuniRectangleRO;
-import com.socialuni.social.user.sdk.platform.QQMapAPI;
-import org.apache.commons.lang3.StringUtils;
+import com.socialuni.social.common.sdk.model.RO.LocationQueryRO;
+import com.socialuni.social.common.sdk.model.RO.SocialuniRectangleRO;
+import com.socialuni.social.common.sdk.platform.QQMapAPI;
 
 public class PositionUtil {
     public static SocialuniRectangleRO getRectangle() {

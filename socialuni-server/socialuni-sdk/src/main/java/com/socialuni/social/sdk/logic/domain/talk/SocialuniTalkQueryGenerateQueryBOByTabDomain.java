@@ -8,7 +8,7 @@ import com.socialuni.social.sdk.model.QO.community.talk.SocialHomeTabTalkQueryBO
 import com.socialuni.social.sdk.model.QO.talk.SocialuniHomeTabTalkQueryQO;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfigBO;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;

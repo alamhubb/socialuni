@@ -3,19 +3,19 @@ package com.socialuni.social.sdk.utils;
 import com.socialuni.social.common.api.constant.SocialSystemConst;
 import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.common.sdk.utils.DateUtils;
+import com.socialuni.social.report.sdk.constant.SocialuniSupportProviderType;
 import com.socialuni.social.report.sdk.entity.ReportDO;
-import com.socialuni.social.report.sdk.repository.ReportRepository;
-import com.socialuni.social.tance.config.ErrorMsg;
-import com.socialuni.social.user.sdk.constant.UniappProviderType;
-import com.socialuni.social.user.sdk.model.DO.NotifyDO;
+import com.socialuni.social.report.sdk.dao.repository.ReportRepository;
+import com.socialuni.social.common.sdk.constant.ErrorMsg;
+import com.socialuni.social.common.sdk.dao.DO.keywords.NotifyDO;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
-import com.socialuni.social.user.sdk.platform.qq.QQConst;
-import com.socialuni.social.user.sdk.platform.weixin.WxConst;
-import com.socialuni.social.user.sdk.platform.PushMsgDTO;
+import com.socialuni.social.common.sdk.platform.qq.QQConst;
+import com.socialuni.social.common.sdk.platform.weixin.WxConst;
+import com.socialuni.social.common.sdk.platform.PushMsgDTO;
 import com.socialuni.social.sdk.model.PushNotifyVO;
 import com.socialuni.social.sdk.model.PushValue;
 import com.socialuni.social.tance.sdk.facade.ConfigFacade;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -67,7 +67,7 @@ public class ViolationPushUtils {
 
         HashMap<String, Object> data = new HashMap<>();
         PushMsgDTO pushMsgDTO = null;
-        if (platform.equals(UniappProviderType.qq)) {
+        if (platform.equals(SocialuniSupportProviderType.qq)) {
             //违规内容
             data.put("keyword5", pushNotifyVO.getBeContent());
             //违规原因+结果
@@ -80,7 +80,7 @@ public class ViolationPushUtils {
             data.put("keyword2", pushNotifyVO.getRemark());
 
             pushMsgDTO = new PushMsgDTO(QQConst.violation_template_id, data, "keyword5.DATA");
-        } else if (platform.equals(UniappProviderType.wx)) {
+        } else if (platform.equals(SocialuniSupportProviderType.wx)) {
             //违规用户名称
             data.put("name1", pushNotifyVO.getBeNickname());
             //违规内容

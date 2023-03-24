@@ -2,7 +2,7 @@ package com.socialuni.social.user.sdk.model.factory;
 
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.keywords.SocialuniUserDo;
 
 import java.util.List;
 import java.util.stream.Collectors;
