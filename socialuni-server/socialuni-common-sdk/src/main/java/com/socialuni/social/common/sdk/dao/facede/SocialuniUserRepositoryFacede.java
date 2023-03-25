@@ -48,6 +48,7 @@ public abstract class SocialuniUserRepositoryFacede extends SocialuniRepositoryF
         criteriaQuery.orderBy(criteriaBuilder.desc(userInfo.get("id")));
 
         TypedQuery<T> query = entityManager.createQuery(criteriaQuery);
+
         return query.setFirstResult(0).setMaxResults(1).getSingleResult();
     }
 }

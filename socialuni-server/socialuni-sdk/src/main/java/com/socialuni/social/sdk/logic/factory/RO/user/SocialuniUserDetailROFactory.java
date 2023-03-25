@@ -4,7 +4,7 @@ import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniGetUserContactRecordDO;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniUserImgDOUtil;
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserExpandDOUtil;
-import com.socialuni.social.sdk.facade.SocialuniUserContactRepositoryFacede;
+import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.sdk.logic.factory.UserImgROFactory;
 import com.socialuni.social.common.api.model.user.SocialuniUserDetailRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserFollowInfoRO;

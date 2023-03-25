@@ -1,11 +1,12 @@
 package com.socialuni.social.common.sdk.dao.facede;
 
 import com.socialuni.social.common.api.entity.SocialuniUserContactBaseDO;
-import com.socialuni.social.common.sdk.dao.DO.SocialuniGetUserContactRecordDO;
-import com.socialuni.social.common.sdk.dao.repository.SocialuniUserContactFacedeRepository;
-import com.socialuni.social.common.sdk.dao.repository.SocialuniUserContactFacedeRepositoryImpl;
-import org.springframework.data.jpa.repository.support.JpaRepositoryFactory;
 
+import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.lang.reflect.InvocationTargetException;
 
 /**
@@ -36,16 +37,50 @@ public abstract class SocialuniUserContactRepositoryFacede extends SocialuniUser
         return findByExample(userInfo);
     }
 
-    public static <T extends SocialuniUserContactBaseDO> Long countByUserIdAndBeUserIdAndStatus(Integer userId, Integer beUserId, String status, Class<T> tClass) {
+    public static <T extends SocialuniUserContactBaseDO> T findByUserIdAndBeUserIdAndStatus(Integer userId, Integer beUserId, String status, Class<T> tClass) {
         T userInfo = null;
         try {
             userInfo = tClass.getDeclaredConstructor().newInstance();
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             throw new RuntimeException(e);
         }
-        //手动创建实例
-        SocialuniUserContactFacedeRepositoryImpl<T> socialuniUserContactFacedeRepository = new SocialuniUserContactFacedeRepositoryImpl<>(getEntityManager(), tClass);
-        return socialuniUserContactFacedeRepository.getUserRepository().countByUserIdAndBeUserIdAndStatus(userId, beUserId, status);
+        userInfo.setUserId(userId);
+        userInfo.setBeUserId(beUserId);
+        userInfo.setStatus(status);
+        return findByExample(userInfo);
     }
 
+    public static <T extends SocialuniUserContactBaseDO> Long countByUserIdAndBeUserIdAndStatus(Integer userId, Integer beUserId, String status, Class<T> tClass) {
+        EntityManager entityManager = getEntityManager();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
+        Root<T> userInfo = criteriaQuery.from(tClass);
+
+        criteriaQuery.select(criteriaBuilder.count(userInfo));
+
+        Predicate userIdPredicate = criteriaBuilder.equal(userInfo.get("userId"), userId);
+        Predicate beUserIdPredicate = criteriaBuilder.equal(userInfo.get("beUserId"), beUserId);
+        Predicate statusPredicate = criteriaBuilder.equal(userInfo.get("status"), status);
+        criteriaQuery.where(userIdPredicate, beUserIdPredicate, statusPredicate);
+
+        criteriaQuery.orderBy(criteriaBuilder.desc(userInfo.get("id")));
+
+        return entityManager.createQuery(criteriaQuery).getSingleResult();
+    }
+
+    public static <T extends SocialuniUserContactBaseDO> T countByUserIdAndBeUserIdAndNotStatus(Integer userId, Integer beUserId, String status, Class<T> tClass) {
+        EntityManager entityManager = getEntityManager();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
+        Root<T> userInfo = criteriaQuery.from(tClass);
+
+        Predicate userIdPredicate = criteriaBuilder.equal(userInfo.get("userId"), userId);
+        Predicate beUserIdPredicate = criteriaBuilder.equal(userInfo.get("beUserId"), beUserId);
+        Predicate statusPredicate = criteriaBuilder.notEqual(userInfo.get("status"), status);
+        criteriaQuery.where(userIdPredicate, beUserIdPredicate, statusPredicate);
+
+        criteriaQuery.orderBy(criteriaBuilder.desc(userInfo.get("id")));
+
+        return entityManager.createQuery(criteriaQuery).setMaxResults(0).getSingleResult();
+    }
 }

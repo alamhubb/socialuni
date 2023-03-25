@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 
 @Entity
@@ -17,11 +16,13 @@ import javax.persistence.UniqueConstraint;
                 //关联需要键索引，索引列不能为空
                 @Index(columnList = "userId"),
                 @Index(columnList = "beUserId"),
+                @Index(columnList = "status"),
         }
 )
 @Data
 @NoArgsConstructor
 public class SocialuniFriendApplyRecordDO extends SocialuniUserContactBaseDO {
-
-
+        public SocialuniFriendApplyRecordDO(Integer userId, Integer beUserId) {
+                super(userId, beUserId);
+        }
 }

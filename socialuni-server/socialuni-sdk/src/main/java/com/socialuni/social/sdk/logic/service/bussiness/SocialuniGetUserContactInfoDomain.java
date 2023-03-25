@@ -8,7 +8,7 @@ import com.socialuni.social.common.sdk.dao.DO.SocialuniGetUserContactRecordDO;
 import com.socialuni.social.sdk.dao.factory.SocialuniCoinOrderFactory;
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserExpandDOUtil;
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserSocialCoinDOUtil;
-import com.socialuni.social.sdk.facade.SocialuniUserContactRepositoryFacede;
+import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserCoinDo;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
