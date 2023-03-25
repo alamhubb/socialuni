@@ -7,6 +7,8 @@ public class ConstStatus {
     //启用
     public static final String init = "初始";
     public static final String enable = "正常";
+    public static final String apply = "添加";
+    public static final String beApply = "被添加";
 
     //待开启，需要有一方发送一条消息后，才改为开启状态
     public static final String waitOpen = "待开启";

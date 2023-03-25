@@ -3,6 +3,8 @@ package com.socialuni.social.im.model.RO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class SocialuniFriendApplyUserRO extends SocialuniUserRO {
     // 待同意
@@ -11,6 +13,7 @@ public class SocialuniFriendApplyUserRO extends SocialuniUserRO {
     // 已拒绝
     String friendApplyStatus;
     String applyMsg;
+    Date createTime;
 
     public SocialuniFriendApplyUserRO(SocialuniUserRO userRO) {
         super(userRO);

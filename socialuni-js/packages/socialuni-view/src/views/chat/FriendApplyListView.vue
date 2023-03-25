@@ -2,11 +2,11 @@
   <view class="bg-default h100p">
     <!--    <input class="uni-input" focus placeholder="自动获得焦点" @confirm="addFriend"/>-->
     <uni-list>
-      <uni-list-chat v-for="(applyData,index) in dataList"
-                     :title="applyData.toNickname" :avatar="applyData.toFaceURL"
-                     :note="applyData.reqMsg">
-
-        <template v-if="applyData.type === FriendApplyType.sendFriendApply">
+      <uni-list-chat v-for="(applyData,index) in friendApplyList"
+                     :title="applyData.nickname" :avatar="applyData.avatar"
+                     :note="applyData.applyMsg"
+                     @click="toUserDetail(applyData.id)">
+        <template v-if="applyData.isMine">
           <view class="chat-custom-right">
             <text class="chat-custom-text">{{ formatTime(applyData.createTime) }}</text>
 
@@ -14,16 +14,16 @@
             <!--          <uni-icons type="star-filled" color="#999" size="18"></uni-icons>-->
           </view>
           <view class="chat-custom-right">
-            {{ friendRuestResult(applyData.handleResult) }}
+            {{ friendRuestResult(applyData.friendApplyStatus) }}
           </view>
         </template>
         <template v-else>
           <view class="chat-custom-right">
             <text class="chat-custom-text">{{ formatTime(applyData.createTime) }}</text>
           </view>
-          <view class="chat-custom-right" v-if="applyData.handleResult === 0">
+          <view class="chat-custom-right" v-if="applyData.friendApplyStatus === SocialuniAddFriendStatus.init">
             <uni-tag type="primary" class="mr-sm" text="同意" @click="acceptFriendApplication(applyData)"></uni-tag>
-            <uni-tag type="success" text="拒绝" @click="refuseFriendApplication(applyData)"></uni-tag>
+            <!--            <uni-tag type="success" text="拒绝" @click="refuseFriendApplication(applyData)"></uni-tag>-->
           </view>
           <view class="chat-custom-right" v-else>
             {{ friendRuestResult(applyData.handleResult) }}
@@ -82,13 +82,19 @@
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
 import {socialChatFriendModule, socialChatModule} from "socialuni-sdk/src/store/store"
-import {onLoad} from "@dcloudio/uni-app";
+import {onLoad, onPullDownRefresh} from "@dcloudio/uni-app";
 import UniUtil from "socialuni-sdk/src/utils/UniUtil";
 import DateUtil from "socialuni-sdk/src/utils/DateUtil";
-import {AccessFriendParams, AddFriendParams} from "socialuni-sdk/src/plugins/open-im-sdk";
 import QTabs from "../../components/QTabs/QTabs.vue";
 import OpenImFriendApplyRO from "socialuni-sdk/src/model/friend/OpenImFriendApplyRO";
 import FriendApplyType from "socialuni-constant/constant/FriendApplyType";
+import SocialuniFriendAPI from "socialuni-im-api/src/api/SocialuniFriendAPI";
+import SocialuniFriendApplyUserRO from "socialuni-im-api/src/model/RO/SocialuniFriendApplyUserRO";
+import SocialuniAddFriendStatus from "socialuni-im-api/constant/SocialuniAddFriendStatus";
+import SocialuniCommonStatus from "socialuni-constant/constant/status/SocialuniCommonStatus";
+import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
+import FriendAddQO from "socialuni-im-api/src/model/QO/firend/FriendAddQO";
+import PageUtil from "socialuni-sdk/src/utils/PageUtil";
 
 @Options({components: {QTabs}})
 export default class ChatFriendPage extends Vue {
@@ -99,12 +105,35 @@ export default class ChatFriendPage extends Vue {
   friendList: Object[] = []
   type = "";
 
+  SocialuniAddFriendStatus = SocialuniAddFriendStatus
+
+
+  friendApplyList: SocialuniFriendApplyUserRO [] = []
+
+  created() {
+    onPullDownRefresh(() => {
+      this.queryList()
+    })
+    uni.startPullDownRefresh()
+  }
+
+  async queryList() {
+    const res = await SocialuniFriendAPI.queryFriendApplyList()
+    this.friendApplyList = res.data
+    uni.stopPullDownRefresh()
+  }
+
+
   applyRecordList() {
 
   }
 
-  formatTime(dateStr: number) {
-    return DateUtil.parseTime(dateStr * 1000)
+  formatTime(dateStr) {
+    return DateUtil.parseTime(dateStr)
+  }
+
+  toUserDetail(userId: string) {
+    PageUtil.toUserDetail(userId)
   }
 
   // addFriend(e) {
@@ -237,16 +266,9 @@ export default class ChatFriendPage extends Vue {
    * 接受好友请求。
    * @param item
    */
-  async acceptFriendApplication(item) {
-    const options: AccessFriendParams = {
-      toUserID: item.fromUserID,
-      handleMsg: "接受您的好友请求"
-    }
-    ;(await socialChatModule.openIm()).acceptFriendApplication(options).then(({data}) => {
-      // 刷新请求列表
-      this.refresh();
-    }).catch(err => {
-    })
+  async acceptFriendApplication(item: SocialuniFriendApplyUserRO) {
+    await SocialuniFriendAPI.addFriend(new FriendAddQO(item.id, '接受您的好友请求'))
+    ToastUtil.toastLong('添加好友成功')
   }
 
   /**
@@ -255,9 +277,9 @@ export default class ChatFriendPage extends Vue {
    */
   async refuseFriendApplication(item) {
     const options: AccessFriendParams = {
-      toUserID: item.fromUserID,
-      handleMsg: "拒绝您的好友请求"
-    }
+          toUserID: item.fromUserID,
+          handleMsg: "拒绝您的好友请求"
+        }
     ;(await socialChatModule.openIm()).refuseFriendApplication(options).then(({data}) => {
       console.log('refuseFriendApplication', data);
       // 刷新请求列表
@@ -266,14 +288,12 @@ export default class ChatFriendPage extends Vue {
     })
   }
 
-  friendRuestResult(status: number) {
+  friendRuestResult(status: string) {
     switch (status) {
-      case 0:
-        return "未处理中";
-      case 1:
-        return "已同意";
-      case -1:
-        return "已拒绝";
+      case SocialuniAddFriendStatus.init:
+        return "待处理";
+      case SocialuniAddFriendStatus.enable:
+        return "添加成功";
     }
   }
 }

@@ -239,7 +239,7 @@ import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import {socialAppModule, socialSystemModule} from "socialuni-sdk/src/store/store";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import Constants from "socialuni-constant/constant/Constant";
-import CommonStatus from "socialuni-constant/constant/CommonStatus";
+import SocialuniCommonStatus from "socialuni-constant/constant/status/SocialuniCommonStatus";
 import HintMsg from "socialuni-constant/constant/HintMsg";
 import UserType from "socialuni-constant/constant/UserType";
 // import MessageAPI from "@/api/MessageAPI";
@@ -344,8 +344,8 @@ export default class MessageView extends Vue {
   reportContentType: string = ReportContentType.message
   systemMsgType: string = SocialuniMessageType.system
   showMsgHint: boolean = uni.getStorageSync(Constants.showMsgHintKey) !== 'false'
-  readonly waitOpenStatus: string = CommonStatus.waitOpen
-  readonly closeStatus: string = CommonStatus.close
+  readonly waitOpenStatus: string = SocialuniCommonStatus.waitOpen
+  readonly closeStatus: string = SocialuniCommonStatus.close
   upperThreshold = 300
   userId: string = null
   groupId: string = null
@@ -527,7 +527,7 @@ export default class MessageView extends Vue {
         const msg: MessageVO = new MessageVO(msgContent)
         this.msgContent = ''
         socialChatModule.pushMessageAction(msg)
-        /*if (this.chat.status === CommonStatus.enable) {
+        /*if (this.chat.status === SocialuniCommonStatus.enable) {
 
 
         } */

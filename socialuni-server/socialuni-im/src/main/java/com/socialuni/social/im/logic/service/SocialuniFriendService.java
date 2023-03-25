@@ -3,23 +3,32 @@ package com.socialuni.social.im.logic.service;
 
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.im.dao.DO.SocialuniFriendApplyRecordDO;
+import com.socialuni.social.im.dao.repository.SocialuniFriendApplyRecordRepository;
 import com.socialuni.social.im.enumeration.SocialuniAddFriendStatus;
+import com.socialuni.social.im.logic.foctory.SocialuniFriendApplyUserROFactory;
 import com.socialuni.social.im.model.QO.friend.SocialuniFriendAddQO;
+import com.socialuni.social.im.model.RO.SocialuniFriendApplyUserRO;
 import com.socialuni.social.report.sdk.utils.SocialuniTextContentUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SocialuniFriendService {
+    @Resource
+    SocialuniFriendApplyRecordRepository socialuniFriendApplyRecordRepository;
 
     //添加朋友
-    public void addFriend(SocialuniFriendAddQO friendAddQO) {
+    public ResultRO<Void> addFriend(SocialuniFriendAddQO friendAddQO) {
         SocialuniUserCheck.checkUserBindPhoneNumAndStatusNoEnable();
 
         SocialuniTextContentUtil.checkTextHasViolateWords(friendAddQO.getApplyMsg());
@@ -55,11 +64,10 @@ public class SocialuniFriendService {
         //todo 这里消息需要验证，禁止发送敏感内容， 用户意思违规情况禁止添加好友
 
 
-
         SocialuniFriendApplyRecordDO beUserFriendApplyRecordDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserIdAndNotStatus(beUserId, mineUserId, SocialuniAddFriendStatus.delete, SocialuniFriendApplyRecordDO.class);
 
         if (beUserFriendApplyRecordDO == null) {
-            return;
+            return ResultRO.success();
         }
         //添加好友成功
         //删除好友只会把自己这边的状态改为删除
@@ -70,11 +78,18 @@ public class SocialuniFriendService {
         beUserFriendApplyRecordDO.setStatus(SocialuniAddFriendStatus.enable);
         beUserFriendApplyRecordDO.setUpdateTime(new Date());
         SocialuniUserContactRepositoryFacede.save(beUserFriendApplyRecordDO);
-
+        return ResultRO.success();
     }
 
     //删除朋友
-    public void deleteFriend() {
+    public ResultRO<List<SocialuniFriendApplyUserRO>> queryFriendApplyList() {
+        //查询你申请的和被申请的。
 
+        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+
+        List<SocialuniFriendApplyRecordDO> list = socialuniFriendApplyRecordRepository.findTop30ByUserIdOrBeUserId(mineUserId, mineUserId);
+
+        List<SocialuniFriendApplyUserRO> list1 = list.stream().map(SocialuniFriendApplyUserROFactory::getSocialuniFriendApplyUserRO).collect(Collectors.toList());
+        return ResultRO.success(list1);
     }
 }

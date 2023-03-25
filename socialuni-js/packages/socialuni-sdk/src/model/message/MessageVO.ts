@@ -1,4 +1,4 @@
-import CommonStatus from "socialuni-constant/constant/CommonStatus";
+import SocialuniCommonStatus from "socialuni-constant/constant/status/SocialuniCommonStatus";
 import MessageContentType from "socialuni-constant/constant/mesaage/MessageContentType";
 import {OpenImMsgRO} from "socialuni-api/src/model/openIm/OpenImMsgRO";
 import JsonUtil from "../../utils/JsonUtil";
@@ -101,7 +101,7 @@ export default class MessageVO {
             this.isMine = this.user.isMine
             this.id = msg.serverMsgID
             this.readNum = 0
-            this.readStatus = CommonStatus.enable
+            this.readStatus = SocialuniCommonStatus.enable
             this.status   = msg.status;
             this.isRead = msg.isRead
             this.createTime = msg.createTime
@@ -112,7 +112,7 @@ export default class MessageVO {
             this.readNum = 0
             this.content = content
             this.contentData = content;
-            this.readStatus = CommonStatus.sending
+            this.readStatus = SocialuniCommonStatus.sending
             this.status = 1;
             this.isMine = true
             this.isRead = true

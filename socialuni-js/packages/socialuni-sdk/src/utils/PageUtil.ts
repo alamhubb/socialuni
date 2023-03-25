@@ -24,7 +24,9 @@ export default class PageUtil {
 
 
     static toUserDetail(userId: string) {
-        RouterUtil.navigateTo(PagePath.userDetail + '?userId=' + userId)
+        if (RouterUtil.getCurrentPageURI() !== PagePath.userDetail) {
+            RouterUtil.navigateTo(PagePath.userDetail + '?userId=' + userId)
+        }
     }
 
     static toEditMineInfo() {

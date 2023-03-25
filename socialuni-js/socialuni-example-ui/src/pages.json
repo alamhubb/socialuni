@@ -68,7 +68,8 @@
         {
           "path": "chat/friendApplyList",
           "style": {
-            "navigationBarTitleText": "好友申请"
+            "navigationBarTitleText": "好友申请",
+            "enablePullDownRefresh": true
           }
         },
         {

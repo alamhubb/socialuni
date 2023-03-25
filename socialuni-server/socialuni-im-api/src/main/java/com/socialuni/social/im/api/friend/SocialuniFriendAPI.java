@@ -3,12 +3,15 @@ package com.socialuni.social.im.api.friend;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.im.model.QO.friend.SocialuniFriendAddQO;
+import com.socialuni.social.im.model.RO.SocialuniFriendApplyUserRO;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * @author qinkaiyuan
@@ -24,7 +27,7 @@ public interface SocialuniFriendAPI {
     ResultRO<Void> addFriend(@Valid @NotNull SocialuniFriendAddQO friendAddQO);
 
 
-    @PostMapping("queryFriendApplyList")
-    ResultRO<Void> queryFriendApplyList();
+    @GetMapping("queryFriendApplyList")
+    ResultRO<List<SocialuniFriendApplyUserRO>> queryFriendApplyList();
 }
 
