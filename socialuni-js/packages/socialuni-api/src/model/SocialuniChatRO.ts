@@ -61,7 +61,7 @@ export default class SocialuniChatRO {
         chat.updateTime = new Date()
         chat.lastContent = ''
         chat.vipFlag = user.vipFlag
-        chat.status = CommonStatus.waitOpen
+        chat.status = SocialuniCommonStatus.waitOpen
         // chat.needPayOpen = user.showBuyMsg
         return chat
       }*/

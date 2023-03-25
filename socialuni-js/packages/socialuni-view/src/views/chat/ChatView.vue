@@ -101,7 +101,7 @@
 
 <script lang="ts">
 import ChatType from 'socialuni-constant/constant/ChatType'
-import CommonStatus from 'socialuni-constant/constant/CommonStatus'
+import SocialuniCommonStatus from 'socialuni-constant/constant/status/SocialuniCommonStatus'
 import {Options, Vue} from 'vue-property-decorator'
 import Constants from 'socialuni-constant/constant/Constant'
 import ChatAPI from 'socialuni-api/src/api/ChatAPI'
@@ -139,8 +139,8 @@ export default class ChatView extends Vue {
 
   readonly systemChats: string[] = ChatType.systemChats
   chatId = null;
-  readonly waitOpenStatus: string = CommonStatus.waitOpen
-  readonly closeStatus: string = CommonStatus.close
+  readonly waitOpenStatus: string = SocialuniCommonStatus.waitOpen
+  readonly closeStatus: string = SocialuniCommonStatus.close
   showChatHint: boolean = uni.getStorageSync(Constants.showChatHintKey) !== 'false'
 
   closeUploadImgHint() {
