@@ -30,7 +30,7 @@ public class UserController {
         if (!user.getStatus().equals(SocialuniUserStatus.violation)) {
             throw new SocialBusinessException("用户未被封禁");
         }
-        user.setStatus(SocialuniUserStatus.enable);
+        user.setStatus(SocialuniUserStatus.init);
         user.setUpdateTime(new Date());
         userApi.savePut(user);
         return ResultRO.success();

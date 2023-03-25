@@ -98,7 +98,7 @@ public class ReportService {
                     }
                 } else {
                     //如果今天已经成功举报了10个以上，则不再发放奖励
-                    ReportDetailDO.setStatus(ReportStatus.enable);
+                    ReportDetailDO.setStatus(ReportStatus.init);
                     //错误的举报，user减分
                     justiceValueOrderDO.setJusticeValue(-AppConfigConst.reportErrorValue);
 //                    detailUser.setJusticeValue(detailUser.getJusticeValue() - AppConfigConst.reportErrorValue);

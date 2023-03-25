@@ -1,10 +1,12 @@
 package com.socialuni.social.im.logic.service;
 
 
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.im.dao.DO.SocialuniFriendApplyRecordDO;
 import com.socialuni.social.im.enumeration.SocialuniAddFriendStatus;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 
 import javax.annotation.Resource;
@@ -14,7 +16,8 @@ import java.util.Date;
 public class SocialuniFriendService {
 
     //添加朋友
-    public void addFriend(Integer beUserId) {
+    public void addFriend(String userId) {
+        Integer beUserId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(userId);
         Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
         //添加对方的时候只看对方的状态，不看自己的状态
 
@@ -25,7 +28,7 @@ public class SocialuniFriendService {
         }
 
         //对方未响应的数据
-        Long countNum = SocialuniUserContactRepositoryFacede.countByUserIdAndBeUserIdAndStatus(mineUserId, beUserId, SocialuniAddFriendStatus.init, SocialuniFriendApplyRecordDO.class);
+        Long countNum = SocialuniUserContactRepositoryFacede.countByUserIdAndBeUserIdAndStatus(mineUserId, beUserId, SocialuniCommonStatus.init, SocialuniFriendApplyRecordDO.class);
 
         //禁止多次添加，如果2次以上对上不加不能再申请
         if (countNum > 2) {

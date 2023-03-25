@@ -63,7 +63,7 @@ public class SocialuniUserService {
     }
 
     public ResultRO<List<SocialuniContentUserRO>> queryRecentlyUsers() {
-        List<SocialuniUserDo> userDos = socialuniUserRepository.findTop10ByStatusOrderByIdDesc(SocialuniUserStatus.enable);
+        List<SocialuniUserDo> userDos = socialuniUserRepository.findTop10ByStatusOrderByIdDesc(SocialuniUserStatus.init);
 
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
         List<SocialuniContentUserRO> userROS = SocialuniContentUserROFactory.toList(userDos, mineUser);

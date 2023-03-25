@@ -35,6 +35,7 @@
         <module>socialuni-admin-sdk</module>
         <module>socialuni-community-sdk</module>
         <module>socialuni-im</module>
+        <module>socialuni-im-api</module>
         <module>socialuni-im-sdk</module>
         <module>socialuni-business</module>
     </modules>
@@ -52,6 +53,11 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.socialuni.social</groupId>
+                <artifactId>socialuni-im-api</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.socialuni.social</groupId>
                 <artifactId>socialuni-im-sdk</artifactId>
