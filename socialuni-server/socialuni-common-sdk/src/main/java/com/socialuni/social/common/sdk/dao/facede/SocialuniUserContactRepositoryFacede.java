@@ -68,7 +68,7 @@ public abstract class SocialuniUserContactRepositoryFacede extends SocialuniUser
         return entityManager.createQuery(criteriaQuery).getSingleResult();
     }
 
-    public static <T extends SocialuniUserContactBaseDO> T countByUserIdAndBeUserIdAndNotStatus(Integer userId, Integer beUserId, String status, Class<T> tClass) {
+    public static <T extends SocialuniUserContactBaseDO> T findByUserIdAndBeUserIdAndNotStatus(Integer userId, Integer beUserId, String status, Class<T> tClass) {
         EntityManager entityManager = getEntityManager();
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);

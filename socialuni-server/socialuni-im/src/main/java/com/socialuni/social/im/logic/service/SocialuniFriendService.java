@@ -1,8 +1,6 @@
 package com.socialuni.social.im.logic.service;
 
 
-import com.socialuni.social.common.api.entity.SocialuniUserContactBaseDO;
-import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.im.dao.DO.SocialuniFriendApplyRecordDO;
@@ -10,6 +8,7 @@ import com.socialuni.social.im.enumeration.SocialuniAddFriendStatus;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 @Resource
 public class SocialuniFriendService {
@@ -43,7 +42,7 @@ public class SocialuniFriendService {
 
         //如果对方有初始，加过你，或者正常，你把对方删了的情况，则成功为好友
         //有对方不为把你删除的记录
-        SocialuniFriendApplyRecordDO beUserFriendApplyRecordDO = SocialuniUserContactRepositoryFacede.countByUserIdAndBeUserIdAndNotStatus(beUserId, mineUserId, SocialuniAddFriendStatus.delete, SocialuniFriendApplyRecordDO.class);
+        SocialuniFriendApplyRecordDO beUserFriendApplyRecordDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserIdAndNotStatus(beUserId, mineUserId, SocialuniAddFriendStatus.delete, SocialuniFriendApplyRecordDO.class);
 
         if (beUserFriendApplyRecordDO == null) {
             return;
@@ -51,9 +50,11 @@ public class SocialuniFriendService {
         //添加好友成功
         //删除好友只会把自己这边的状态改为删除
         socialuniFriendApplyRecordDO.setStatus(SocialuniAddFriendStatus.enable);
+        socialuniFriendApplyRecordDO.setUpdateTime(new Date());
         SocialuniUserContactRepositoryFacede.save(socialuniFriendApplyRecordDO);
 
         beUserFriendApplyRecordDO.setStatus(SocialuniAddFriendStatus.enable);
+        beUserFriendApplyRecordDO.setUpdateTime(new Date());
         SocialuniUserContactRepositoryFacede.save(beUserFriendApplyRecordDO);
 
     }
