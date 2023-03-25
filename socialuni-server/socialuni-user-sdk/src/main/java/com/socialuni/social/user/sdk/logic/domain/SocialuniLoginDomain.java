@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Service
 public class SocialuniLoginDomain {
@@ -46,6 +47,7 @@ public class SocialuniLoginDomain {
         SocialuniUserRO userDetailRO = SocialuniMineUserROFactory.getMineUser(mineUser);
 
         SocialTokenDO socialUserTokenDO = tokenManage.create(mineUser.getUnionId());
+
 
         EventPublisherFacade.publishEvent("userLogin", mineUser);
 

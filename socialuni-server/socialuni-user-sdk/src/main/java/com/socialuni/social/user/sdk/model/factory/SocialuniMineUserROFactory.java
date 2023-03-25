@@ -10,6 +10,8 @@ import com.socialuni.social.user.sdk.redis.SocialUserPhoneRedis;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Optional;
+
 public class SocialuniMineUserROFactory {
     public final static SocialUserPhoneRedis socialUserPhoneRedis = SpringUtil.getBean(SocialUserPhoneRedis.class);
 
@@ -41,6 +43,25 @@ public class SocialuniMineUserROFactory {
                 }
             }
         }
+
+
+        //注释掉圈子功能, 加入圈子
+        Optional<ChatDO> optionalChatDO = chatRepository.findFirstOneByTypeAndStatusOrderByCreateTime(ChatType.system_group, CommonStatus.normal);
+        if (optionalChatDO.isPresent()) {
+            ChatDO chat = optionalChatDO.get();
+            ChatUserDO chatUserDO = new ChatUserDO(chat.getId(), user.getId(), ChatType.system_group);
+            chatUserRepository.save(chatUserDO);
+        }
+
+        Optional<UserDO> systemUserOptional = userRepository.findById(UserUtils.getSystemId());
+
+        if (systemUserOptional.isPresent()) {
+            UserDO sysUser = systemUserOptional.get();
+            //所有人注册默认关注系统用户
+            followService.addFlow(user, sysUser);
+        }
+
+
         return socialuniMineUserRO;
     }
 

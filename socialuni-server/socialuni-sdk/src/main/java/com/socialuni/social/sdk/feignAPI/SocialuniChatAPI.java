@@ -2,6 +2,7 @@ package com.socialuni.social.sdk.feignAPI;
 
 
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.sdk.model.OpenChatVO;
 import com.socialuni.social.sdk.model.RO.message.chat.ChatRO;
 import com.socialuni.social.sdk.model.RO.message.chat.ChatReadVO;
 import com.socialuni.social.sdk.model.RO.message.chat.ChatRemoveVO;
@@ -30,6 +31,9 @@ public interface SocialuniChatAPI {
 
     @PostMapping("queryChats")
     ResultRO<List<ChatRO>> queryChats();
+
+    @PostMapping("openChat")
+    ResultRO<List<ChatRO>> openChat(@RequestBody @Valid OpenChatVO chatVO);
 
     /*@PostMapping("queryChat")
     ResultRO<ChatVO> queryChat(@RequestBody @Valid UserIdVO receiveUserVO);
