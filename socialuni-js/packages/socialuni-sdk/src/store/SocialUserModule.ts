@@ -2,7 +2,7 @@
 import {Pinia, Store} from "pinia-class-component"
 import SocialLoginRO from "socialuni-api/src/model/social/SocialLoginRO";
 import {socialConfigModule, socialSystemModule, socialUserModule} from "./store";
-import SocialuniTokenUtil from "socialuni-sdk/src/utils/SocialuniTokenUtil";
+import SocialuniTokenUtil from "socialuni-base/src/utils/SocialuniTokenUtil";
 import SocialuniUserStorageUtil from "socialuni-sdk/src/utils/SocialuniUserStorageUtil";
 import SocialuniImUserTokenUtil from "../utils/SocialuniImUserTokenUtil";
 import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
@@ -15,11 +15,12 @@ import SocialuniUserExpandAPI from "socialuni-api/src/api/socialuni/SocialuniUse
 import PlatformUtils from "../utils/PlatformUtils";
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
 import MsgUtil from "../utils/MsgUtil";
+import {socialuniUserData} from "socialuni-base/src/socialuniData/SocialuniUserData";
 
 @Store
 export default class SocialUserModule extends Pinia {
     private userInfo: SocialuniMineUserRO = SocialuniUserStorageUtil.get() || null
-    private userToken: string = SocialuniTokenUtil.get() || null
+    // private userToken: string = SocialuniTokenUtil.get() || null
 
     //查询用户信息
     getUserInfo(user: SocialuniMineUserRO) {
@@ -58,11 +59,11 @@ export default class SocialUserModule extends Pinia {
     }
 
     get hasToken(): boolean {
-        return !!this.userToken
+        return !!socialuniUserData.token
     }
 
     get token() {
-        return this.userToken
+        return socialuniUserData.token
     }
 
     setUserAndToken(loginRO: SocialLoginRO<SocialuniMineUserRO>) {
@@ -76,7 +77,7 @@ export default class SocialUserModule extends Pinia {
     }
 
     private setToken(token: string) {
-        this.userToken = token
+        socialuniUserData.setToken(token)
         SocialuniTokenUtil.set(token)
     }
 

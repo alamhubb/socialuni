@@ -6,7 +6,7 @@ import com.socialuni.social.common.sdk.constant.SocialuniConst;
 import com.socialuni.social.common.sdk.constant.UserType;
 import com.socialuni.social.sdk.dao.store.SocialTagRedis;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.sdk.logic.check.SocialuniUserCheck;
+import com.socialuni.social.user.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.social.sdk.logic.domain.report.SoicialuniSystemPreCheckReportDomainDOUtil;
 import com.socialuni.social.sdk.logic.entity.comment.SocialPostCommentEntity;
 import com.socialuni.social.sdk.logic.factory.SocialCommentROFactory;
@@ -47,7 +47,7 @@ public class SocialuniCommentPostDomain {
             //不为开发环境，则校验内容
             if (!tagNames.contains(SocialuniConst.devEnvTagName)) {
                 //校验用户
-                SocialuniUserCheck.checkUserBindPhoneNumAndStatusNoEnable(mineUser);
+                SocialuniUserCheck.checkUserBindPhoneNumAndStatusNoEnable();
             }
             SocialuniTextContentUtil.checkTextHasUnderageAndContactAndViolateWords(addQO.getContent());
         }

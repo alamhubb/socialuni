@@ -1,4 +1,4 @@
-import StorageUtil from 'socialuni-sdk/src/utils/StorageUtil'
+import StorageUtil from "socialuni-base/src/utils/StorageUtil"
 import TalkTabType from "socialuni-constant/constant/TalkTabType";
 import SocialuniTalkTabRO from "socialuni-api/src/model/talk/SocialuniTalkTabRO";
 

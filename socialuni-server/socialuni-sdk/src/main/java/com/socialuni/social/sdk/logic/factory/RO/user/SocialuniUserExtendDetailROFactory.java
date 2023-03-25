@@ -25,7 +25,8 @@ public class SocialuniUserExtendDetailROFactory {
         //user基础信息
         SocialuniUserExtendDetailRO socialuniUserExtendDetailRO = new SocialuniUserExtendDetailRO(socialuniUserDetailRO);
 
-        SocialuniUserExtendFriendLogDo socialuniUserExtendFriendLogDo = SocialuniUserRepositoryFacede.findFirstByUserId(userDO.getUserId(), SocialuniUserExtendFriendLogDo.class);
+        //获取用户扩列记录
+        SocialuniUserExtendFriendLogDo socialuniUserExtendFriendLogDo = SocialuniUserRepositoryFacede.findFirstByUserIdNotNull(userDO.getUserId(), SocialuniUserExtendFriendLogDo.class);
 
         if (socialuniUserExtendFriendLogDo == null) {
             throw new SocialParamsException("不该为空");

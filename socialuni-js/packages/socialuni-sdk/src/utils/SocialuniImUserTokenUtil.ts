@@ -1,4 +1,4 @@
-import StorageUtil from "socialuni-sdk/src/utils/StorageUtil";
+import StorageUtil from "socialuni-base/src/utils/StorageUtil";
 
 export default class SocialuniImUserTokenUtil {
     // 开发生产区分token，避免混淆，不区分的话会冲突

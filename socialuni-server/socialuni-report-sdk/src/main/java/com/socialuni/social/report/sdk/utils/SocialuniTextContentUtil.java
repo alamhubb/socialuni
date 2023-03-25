@@ -58,7 +58,7 @@ public class SocialuniTextContentUtil {
     }
 
     //短文本内容中不校验年龄相关
-    private static void checkTextHasViolateWords(String content) {
+    public static void checkTextHasViolateWords(String content) {
         //不为空才进行校验
         if (StringUtils.isNotEmpty(content)) {
             //校验是否包含违禁词

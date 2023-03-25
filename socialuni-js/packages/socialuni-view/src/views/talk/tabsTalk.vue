@@ -153,7 +153,7 @@ import SocialuniTalkAPI from "socialuni-api/src/api/socialuni/SocialuniTalkAPI";
 import CommonUtil from "socialuni-sdk/src/utils/CommonUtil";
 import TalkVO from "socialuni-api/src/model/talk/TalkVO";
 import Constants from "socialuni-constant/constant/Constant";
-import StorageUtil from "socialuni-sdk/src/utils/StorageUtil";
+import StorageUtil from "socialuni-base/src/utils/StorageUtil";
 import PageUtil from "socialuni-sdk/src/utils/PageUtil"; // todo 后台可控制是否显示轮播图
 import {socialConfigModule, socialSystemModule, socialUserModule} from 'socialuni-sdk/src/store/store'
 import SocialCircleRO from "socialuni-api/src/model/community/circle/SocialCircleRO";

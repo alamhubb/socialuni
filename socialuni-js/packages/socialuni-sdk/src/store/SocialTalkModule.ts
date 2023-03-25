@@ -9,9 +9,9 @@ import {socialUserModule} from "socialuni-sdk/src/store/store"
 import SocialuniTalkAPI from "socialuni-api/src/api/socialuni/SocialuniTalkAPI"
 import MsgUtil from "socialuni-sdk/src/utils/MsgUtil"
 import CommonUtil from "socialuni-sdk/src/utils/CommonUtil"
-import SocialuniAppAPI from "socialuni-api/src/api/socialuni/SocialuniAppAPI"
+import SocialuniAppAPI from "socialuni-base/src/api/socialuni/SocialuniAppAPI"
 import TalkTabType from "socialuni-constant/constant/TalkTabType"
-import StorageUtil from "socialuni-sdk/src/utils/StorageUtil"
+import StorageUtil from "socialuni-base/src/utils/StorageUtil"
 import SocialuniTalkTabRO from "socialuni-api/src/model/talk/SocialuniTalkTabRO";
 import TalkTabVO from "socialuni-api/src/model/talk/SocialuniTalkTabRO";
 import {Vue} from "vue-class-component";
@@ -165,6 +165,7 @@ export default class SocialTalkModule extends Pinia {
             }
         }
         const newTabs = []
+        console.log(talkTabs)
         //遍历后端返回的tabs数据
         for (const talkTab of talkTabs) {
             //如果前端缓存的tabs数据，包含与后台返回一致的

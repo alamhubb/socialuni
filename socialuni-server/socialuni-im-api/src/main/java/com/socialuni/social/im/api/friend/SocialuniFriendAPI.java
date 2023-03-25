@@ -2,10 +2,13 @@ package com.socialuni.social.im.api.friend;
 
 
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.im.model.QO.friend.SocialuniFriendAddQO;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author qinkaiyuan
@@ -17,8 +20,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Tag(name = "消息模块/好友模块",description = "暂未支持")
 public interface SocialuniFriendAPI {
 
-    @GetMapping("addFriend/{userId}")
-    ResultRO<Void> addFriend(@PathVariable("userId") String userId);
+    @PostMapping("addFriend")
+    ResultRO<Void> addFriend(@Valid @NotNull SocialuniFriendAddQO friendAddQO);
 
+
+    @PostMapping("queryFriendApplyList")
+    ResultRO<Void> queryFriendApplyList();
 }
 

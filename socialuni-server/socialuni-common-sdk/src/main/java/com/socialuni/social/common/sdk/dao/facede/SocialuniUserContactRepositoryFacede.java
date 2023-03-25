@@ -8,6 +8,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 /**
  * @author wulinghui
@@ -29,7 +30,8 @@ public abstract class SocialuniUserContactRepositoryFacede extends SocialuniUser
         T userInfo = null;
         try {
             userInfo = tClass.getDeclaredConstructor().newInstance();
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                 NoSuchMethodException e) {
             throw new RuntimeException(e);
         }
         userInfo.setUserId(userId);
@@ -41,7 +43,8 @@ public abstract class SocialuniUserContactRepositoryFacede extends SocialuniUser
         T userInfo = null;
         try {
             userInfo = tClass.getDeclaredConstructor().newInstance();
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                 NoSuchMethodException e) {
             throw new RuntimeException(e);
         }
         userInfo.setUserId(userId);
@@ -81,6 +84,11 @@ public abstract class SocialuniUserContactRepositoryFacede extends SocialuniUser
 
         criteriaQuery.orderBy(criteriaBuilder.desc(userInfo.get("id")));
 
-        return entityManager.createQuery(criteriaQuery).setMaxResults(0).getSingleResult();
+        List<T> list = entityManager.createQuery(criteriaQuery).setFirstResult(0).setMaxResults(1).getResultList();
+
+        if (list.size() > 0) {
+            return list.get(0);
+        }
+        return null;
     }
 }

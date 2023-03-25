@@ -265,7 +265,7 @@ import SocialuniMessageType from "socialuni-constant/constant/mesaage/SocialuniM
 import QIcon from 'socialuni-view/src/components/QIcon/QIcon.vue'
 import CosUtil from "socialuni-sdk/src/utils/CosUtil";
 import DomFile from "socialuni-api/src/model/DomFile";
-import SocialuniAppAPI from "socialuni-api/src/api/socialuni/SocialuniAppAPI";
+import SocialuniAppAPI from "socialuni-base/src/api/socialuni/SocialuniAppAPI";
 import AppMsg from "socialuni-constant/constant/AppMsg";
 import CosAuthRO from "socialuni-api/src/model/cos/CosAuthRO";
 import CosAPI from "socialuni-api/src/api/CosAPI";

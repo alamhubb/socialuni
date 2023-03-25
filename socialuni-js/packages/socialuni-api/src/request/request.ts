@@ -7,8 +7,8 @@ import MsgUtil from "socialuni-sdk/src/utils/MsgUtil"
 import UniUtil from "socialuni-sdk/src/utils/UniUtil"
 import AlertUtil from "socialuni-sdk/src/utils/AlertUtil"
 import ObjectUtil from "socialuni-sdk/src/utils/ObjectUtil"
-import SocialuniConfig from "../config/SocialuniConfig";
-import SocialuniAppAPI from "../api/socialuni/SocialuniAppAPI";
+import SocialuniConfig from "../../../socialuni-base/src/config/SocialuniConfig";
+import SocialuniAppAPI from "socialuni-base/src/api/socialuni/SocialuniAppAPI";
 import SocialuniRequestHeaderName from "socialuni-constant/constant/SocialuniRequestHeaderName";
 
 const request: HttpRequest = new HttpRequest()

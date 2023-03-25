@@ -22,7 +22,7 @@ import com.socialuni.social.sdk.dao.repository.community.TalkTagRepository;
 import com.socialuni.social.sdk.dao.utils.SocialuniCircleDOUtil;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDORedis;
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserExpandDOUtil;
-import com.socialuni.social.sdk.logic.check.SocialuniUserCheck;
+import com.socialuni.social.user.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.social.sdk.logic.factory.TalkImgDOFactory;
 import com.socialuni.social.sdk.logic.manage.talk.SocialTalkCreateManage;
 import com.socialuni.social.report.sdk.utils.SocialuniTextContentUtil;
@@ -104,7 +104,7 @@ public class SocialuniPostTalkDomain {
             //不为开发环境，则校验内容
             if (!tagNames.contains(SocialuniConst.devEnvTagName)) {
                 //校验用户
-                SocialuniUserCheck.checkUserBindPhoneNumAndStatusNoEnable(mineUser);
+                SocialuniUserCheck.checkUserBindPhoneNumAndStatusNoEnable();
             }
             SocialuniTextContentUtil.checkTextHasUnderageAndContactAndViolateWords(talkVOContent);
         }

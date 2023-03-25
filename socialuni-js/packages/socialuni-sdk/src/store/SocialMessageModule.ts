@@ -13,7 +13,7 @@ import {SocialuniChatModuleInterface} from "socialuni-sdk/src/interface/Socialun
 
 import {OpenIMSDK} from "socialuni-sdk/src/plugins/open-im-sdk"
 import {InitConfig} from "open-im-sdk/types"
-import SocialuniConfig from "socialuni-api/src/config/SocialuniConfig"
+import SocialuniConfig from "socialuni-base/src/config/SocialuniConfig"
 import {socialChatModule} from './store'
 import OpenImPlatformType from '../plugins/openIm/OpenImPlatformType'
 import SocialuniChatRO from "socialuni-api/src/model/SocialuniChatRO";

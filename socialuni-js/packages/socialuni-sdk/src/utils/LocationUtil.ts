@@ -1,4 +1,4 @@
-import StorageUtil from 'socialuni-sdk/src/utils/StorageUtil'
+import StorageUtil from "socialuni-base/src/utils/StorageUtil"
 import MapUtil from './MapUtil'
 import AppAuthUtil from 'socialuni-sdk/src/utils/AppAuthUtil'
 import DistrictVO from "socialuni-api/src/model/DistrictVO";

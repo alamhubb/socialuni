@@ -1,7 +1,6 @@
 package com.socialuni.social.common.sdk.dao.facede;
 
 import com.socialuni.social.common.api.entity.SocialuniUserInfoBaseDO;
-import org.springframework.data.jpa.repository.support.JpaRepositoryFactory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -36,7 +35,7 @@ public abstract class SocialuniUserRepositoryFacede extends SocialuniRepositoryF
         return SocialuniRepositoryFacade.findByExample(userInfo);
     }
 
-    public static <T extends SocialuniUserInfoBaseDO> T findFirstByUserId(Integer userId, Class<T> tClass) {
+    public static <T extends SocialuniUserInfoBaseDO> T findFirstByUserIdNotNull(Integer userId, Class<T> tClass) {
         EntityManager entityManager = SocialuniRepositoryFacade.getEntityManager();
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);

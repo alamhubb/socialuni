@@ -18,7 +18,7 @@ import {
     SetGroupVerificationParams, setPrvParams, VideoMsgParams
 } from "socialuni-sdk/src/plugins/open-im-sdk"
 import {InitConfig} from "open-im-sdk/types"
-import SocialuniConfig from "socialuni-api/src/config/SocialuniConfig"
+import SocialuniConfig from "socialuni-base/src/config/SocialuniConfig"
 import {socialChatModule} from './store'
 import OpenImPlatformType from '../plugins/openIm/OpenImPlatformType'
 import SocialuniChatRO from "socialuni-api/src/model/SocialuniChatRO";
@@ -38,7 +38,7 @@ import FriendApplyType from "socialuni-constant/constant/FriendApplyType";
 import UUIDUtil from "../utils/UUIDUtil";
 
 
-const openIM = new OpenIMSDK()
+const openIM = null
 
 @Store
 export default class SocialChatModule extends Pinia {
@@ -90,7 +90,7 @@ export default class SocialChatModule extends Pinia {
         if (this.openImIsLogin === 0) {
             this.setOpenImLogging()
             //获取imToken
-            const config: InitConfig = {
+            /*const config: InitConfig = {
                 userID: socialUserModule.userId,
                 token: socialChatModule.imToken,
                 url: SocialuniConfig.openImJsImUrl,
@@ -106,7 +106,7 @@ export default class SocialChatModule extends Pinia {
             } catch (e) {
                 this.setOpenImUnLogin()
                 await this.initSocialuniChatModule()
-            }
+            }*/
         } else {
             //如果未成功则无限等待，否则，执行下一步
             await this.waitLoginSuccess()

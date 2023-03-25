@@ -10,7 +10,7 @@ import com.socialuni.social.common.sdk.constant.UserType;
 import com.socialuni.social.sdk.constant.ViolateType;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.sdk.logic.check.SocialuniUserCheck;
+import com.socialuni.social.user.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.social.report.sdk.model.SocialuniReportAddQO;
 import com.socialuni.social.common.sdk.utils.DateUtils;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
@@ -52,7 +52,7 @@ public class SoicialReportAddDomain {
         //正义值小于300不能再举报
         //给用户通知，您举报成功失败，奖励或扣除积分，每天满多少，低于0 2练个，低于200不能再举报
         if (!mineUser.getType().equals(UserType.system)) {
-            SocialuniUserCheck.checkUserBindPhoneNumAndStatusNoEnable(mineUser);
+            SocialuniUserCheck.checkUserBindPhoneNumAndStatusNoEnable();
             //校验内容是否违规
             /*if (resultRO.hasError()) {
                 return new ResultRO<>(resultRO);

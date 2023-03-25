@@ -202,8 +202,8 @@ import SocialGenderTag from "../../components/SocialGenderTag/SocialGenderTag.vu
 import QRowItem from "../../components/QRowItem/QRowItem.vue";
 import SocialuniUserInfoImg from "./SocialuniUserInfoImg.vue";
 import SocialuniFollowTag from "../../components/SocialuniFollow/SocialuniFollowTag.vue";
-import PlatformUtils from "socialuni-sdk/src/utils/PlatformUtils";
-import SocialuniUserExpandAPI from "socialuni-api/src/api/socialuni/SocialuniUserExpandAPI";
+import SocialuniFriendAPI from "socialuni-im-api/src/api/SocialuniFriendAPI";
+import FriendAddQO from "socialuni-im-api/src/model/firend/FriendAddQO";
 
 @Options({
   components: {
@@ -331,11 +331,14 @@ export default class UserDetailView extends Vue {
    */
   async addFriend() {
     // socialChatFriendModule.addFriend(this.user.id, "请求加好友");
-    const options: AddFriendParams = {
+    /*const options: AddFriendParams = {
       toUserID: this.user.id,
       reqMsg: this.applyUserFriendContent
     };
-    await (await socialChatModule.openIm()).addFriend(options)
+*/
+    console.log('123123')
+    await SocialuniFriendAPI.addFriend(new FriendAddQO(this.user.id, this.applyUserFriendContent))
+    // await (await socialChatModule.openIm()).addFriend(options)
     ToastUtil.toastLong('添加好友申请发送成功，请耐心等待对方回复')
   }
 

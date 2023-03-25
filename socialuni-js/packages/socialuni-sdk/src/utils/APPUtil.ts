@@ -3,7 +3,7 @@ import AppConfig from "socialuni-constant/constant/AppConfig";
 import UniUtil from "./UniUtil";
 import {socialConfigModule} from "socialuni-sdk/src/store/store";
 import AppUpdateType from "socialuni-constant/constant/AppUpdateType";
-import SocialuniAppAPI from "socialuni-api/src/api/socialuni/SocialuniAppAPI";
+import SocialuniAppAPI from "socialuni-base/src/api/socialuni/SocialuniAppAPI";
 
 export default class APPUtil {
     static checkUpdate() {

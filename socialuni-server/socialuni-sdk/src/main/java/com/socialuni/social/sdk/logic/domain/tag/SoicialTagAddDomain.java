@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.logic.domain.tag;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.community.sdk.entity.TagDO;
 import com.socialuni.social.community.sdk.repository.TagRepository;
-import com.socialuni.social.sdk.logic.check.SocialuniUserCheck;
+import com.socialuni.social.user.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.social.sdk.logic.factory.community.SocialTagROFactory;
 import com.socialuni.social.sdk.logic.manage.SocialTagManage;
 import com.socialuni.social.report.sdk.utils.SocialuniTextContentUtil;
@@ -27,7 +27,7 @@ public class SoicialTagAddDomain {
 
     public TagRO addTag(SocialuniUserDo mineUser, TagAddQO tagAddVO) {
         //校验用户
-        SocialuniUserCheck.checkUserBindPhoneNumAndStatusNoEnable(mineUser);
+        SocialuniUserCheck.checkUserBindPhoneNumAndStatusNoEnable();
         /*if (SocialAppEnv.getIsDevProdEnv()) {
             throw new SocialBusinessException("demo演示环境不支持创建tag，防止tag与生产环境不一致");
         }*/

@@ -22,7 +22,10 @@ import javax.persistence.Table;
 @Data
 @NoArgsConstructor
 public class SocialuniFriendApplyRecordDO extends SocialuniUserContactBaseDO {
-        public SocialuniFriendApplyRecordDO(Integer userId, Integer beUserId) {
-                super(userId, beUserId);
-        }
+    String applyMsg;
+
+    public SocialuniFriendApplyRecordDO(Integer userId, Integer beUserId, String applyMsg) {
+        super(userId, beUserId);
+        this.applyMsg = applyMsg;
+    }
 }

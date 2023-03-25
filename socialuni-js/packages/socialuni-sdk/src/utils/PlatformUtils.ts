@@ -10,7 +10,7 @@ import WxUtils from "./WxUtils"
 import MPUtil from "socialuni-sdk/src/utils/MPUtil"
 import APPUtil from "./APPUtil"
 import SocialuniCoinAPI from "socialuni-api/src/api/socialuni/SocialuniCoinAPI";
-import SocialuniAppAPI from "socialuni-api/src/api/socialuni/SocialuniAppAPI";
+import SocialuniAppAPI from "socialuni-base/src/api/socialuni/SocialuniAppAPI";
 import UserPayResultVO from "socialuni-api/src/model/user/UserPayResultVO";
 
 
