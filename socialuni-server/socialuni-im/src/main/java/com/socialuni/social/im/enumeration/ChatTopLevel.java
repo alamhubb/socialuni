@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.constant.socialuni;
+package com.socialuni.social.im.enumeration;
 
 /**
  * 置顶类型

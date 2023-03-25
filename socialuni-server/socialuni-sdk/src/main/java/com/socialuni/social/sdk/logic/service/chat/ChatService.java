@@ -1,10 +1,10 @@
 package com.socialuni.social.sdk.logic.service.chat;
 
 
-import com.socialuni.social.sdk.constant.socialuni.ChatStatus;
-import com.socialuni.social.sdk.constant.socialuni.ChatType;
-import com.socialuni.social.sdk.dao.DO.chat.ChatDO;
-import com.socialuni.social.sdk.dao.DO.chat.ChatUserDO;
+import com.socialuni.social.im.dao.DO.ChatUserDO;
+import com.socialuni.social.im.enumeration.ChatStatus;
+import com.socialuni.social.im.enumeration.ChatType;
+import com.socialuni.social.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.sdk.dao.repository.ChatRepository;
 import com.socialuni.social.sdk.dao.repository.ChatUserRepository;
 import com.socialuni.social.sdk.logic.factory.SocialChatROFactory;
@@ -55,7 +55,7 @@ public class ChatService {
     //详情页面，需要知道是否关注你了
 
     public CreateSingleChatResult seeUserDetailCreateChat(SocialuniUserDo user, Integer receiveUserId) {
-        ChatDO chat = new ChatDO(ChatType.single);
+        SocialuniChatDO chat = new SocialuniChatDO(ChatType.single);
 
         //生成chat
         chat = chatRepository.save(chat);

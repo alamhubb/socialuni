@@ -1,14 +1,14 @@
 package com.socialuni.social.sdk.logic.factory;
 
 
+import com.socialuni.social.im.dao.DO.ChatUserDO;
 import com.socialuni.social.sdk.constant.LoadMoreType;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
-import com.socialuni.social.sdk.constant.socialuni.ChatStatus;
-import com.socialuni.social.sdk.constant.socialuni.ChatType;
-import com.socialuni.social.sdk.constant.socialuni.ChatUserStatus;
+import com.socialuni.social.im.enumeration.ChatStatus;
+import com.socialuni.social.im.enumeration.ChatType;
+import com.socialuni.social.im.enumeration.ChatUserStatus;
 import com.socialuni.social.sdk.constant.socialuni.MessageStatus;
-import com.socialuni.social.sdk.dao.DO.chat.ChatDO;
-import com.socialuni.social.sdk.dao.DO.chat.ChatUserDO;
+import com.socialuni.social.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.sdk.dao.DO.message.MessageDO;
 import com.socialuni.social.sdk.dao.DO.message.MessageReceiveDO;
 import com.socialuni.social.sdk.dao.repository.ChatRepository;
@@ -68,7 +68,7 @@ public class SocialChatROFactory {
 
     //chat
 
-    public static ChatRO getChatRO(ChatDO chatDO) {
+    public static ChatRO getChatRO(SocialuniChatDO chatDO) {
         ChatRO chatRO = new ChatRO();
 
         chatRO.setId(chatDO.getId());
@@ -91,7 +91,7 @@ public class SocialChatROFactory {
 
     //初始查询的时候为99
     //用户未登录的情况，和群聊的情况会触发这里
-    public static ChatRO getChatRO(ChatDO chatDO, Integer userId) {
+    public static ChatRO getChatRO(SocialuniChatDO chatDO, Integer userId) {
         ChatRO chatRO = SocialChatROFactory.getChatRO(chatDO);
         //查询用户这个chatUser下的消息
         //已经确认过chat为可用的
@@ -122,7 +122,7 @@ public class SocialChatROFactory {
 
     //chatuser
     //推消息时，查列表时  的基础
-    public static ChatRO getChatRO(ChatDO chat, ChatUserDO chatUserDO) {
+    public static ChatRO getChatRO(SocialuniChatDO chat, ChatUserDO chatUserDO) {
         ChatRO chatRO = SocialChatROFactory.getChatRO(chat);
 
         //暂时不支持删除系统群聊
@@ -133,7 +133,7 @@ public class SocialChatROFactory {
         //根据类型区分不同nick和ava
         //如果群聊则直接使用
         if (!ChatType.systemChats.contains(chatRO.getType())) {
-            SocialuniUserDo receiveUser = SocialuniUserUtil.getUserNotNull(chatUserDO.getReceiveUserId());
+            SocialuniUserDo receiveUser = SocialuniUserUtil.getUserNotNull(chatUserDO.getBeUserId());
 
             chatRO.setNickname(receiveUser.getNickname());
             chatRO.setNickname(receiveUser.getAvatar());
@@ -160,7 +160,7 @@ public class SocialChatROFactory {
     //3个地方使用，开启会话时，如果是一个已关闭的则获取之前的，所以需要获取列表
     //初始查询列表时需要列表，
     // 还有查看用户详情页面,查看时有时候不为已开启，所以需要判断
-    public static ChatRO getChatRO(ChatDO chatDO, ChatUserDO chatUserDO, boolean queryMsgFlag) {
+    public static ChatRO getChatRO(SocialuniChatDO chatDO, ChatUserDO chatUserDO, boolean queryMsgFlag) {
         ChatRO chatRO = SocialChatROFactory.getChatRO(chatDO, chatUserDO);
         //系统群聊读取message表
         //查询用户这个chatUser下的消息
@@ -182,21 +182,22 @@ public class SocialChatROFactory {
 
     public static List<ChatRO> chatUserDOToVOS(List<ChatUserDO> chatUsers) {
         //查询的时候chat列表展示不为当前用户的
-        return chatUsers.stream().map((ChatUserDO chatUserDO) -> {
-            ChatDO chat = chatUserDO.getChat();
+        /*return chatUsers.stream().map((ChatUserDO chatUserDO) -> {
+            *//*SocialuniChatDO chat = chatUserDO.getChat();
             if (chat.getType().equals(ChatType.system_group)) {
                 return SocialChatROFactory.getChatRO(chat, chatUserDO.getUserId());
             } else {
                 return SocialChatROFactory.getChatRO(chat, chatUserDO, true);
-            }
-        }).collect(Collectors.toList());
+            }*//*
+        }).collect(Collectors.toList());*/
+        return null;
     }
 
     //用户未登陆时
-    public static List<ChatRO> chatDOToVOS(List<ChatDO> chats) {
+    public static List<ChatRO> chatDOToVOS(List<SocialuniChatDO> chats) {
         Integer userId = null;
         //查询的时候chat列表展示不为当前用户的
-        return chats.stream().map((ChatDO chatDO) -> SocialChatROFactory.getChatRO(chatDO, userId)).collect(Collectors.toList());
+        return chats.stream().map((SocialuniChatDO chatDO) -> SocialChatROFactory.getChatRO(chatDO, userId)).collect(Collectors.toList());
     }
 
     /*public static List<ChatVO> chatDOToVOS(List<ChatDO> chats, Integer userId) {
@@ -208,7 +209,7 @@ public class SocialChatROFactory {
     //推送部分
 
     //给用户推送消息
-    public static ChatRO getChatRO(ChatDO chat, MessageDO messageDO) {
+    public static ChatRO getChatRO(SocialuniChatDO chat, MessageDO messageDO) {
         ChatRO chatRO = SocialChatROFactory.getChatRO(chat);
         //没user ，没记录未读数量，所以设置为1
         chatRO.setUnreadNum(1);
@@ -219,7 +220,7 @@ public class SocialChatROFactory {
     }
 
     //推送单个消息的chat，推送单个消息
-    public static ChatRO getChatRO(ChatDO chat, ChatUserDO chatUser, MessageReceiveDO messageReceiveDO) {
+    public static ChatRO getChatRO(SocialuniChatDO chat, ChatUserDO chatUser, MessageReceiveDO messageReceiveDO) {
         ChatRO chatRO = SocialChatROFactory.getChatRO(chat, chatUser);
         List<SocialMessageRO> messageROS = Collections.singletonList(SocialMessageROFactory.getMessageRO(messageReceiveDO));
         chatRO.setMessages(messageROS);

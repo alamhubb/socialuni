@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.constant.socialuni;
+package com.socialuni.social.im.enumeration;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,6 +10,9 @@ import java.util.List;
  * @date 2018-09-16 10:58
  */
 public class ChatType {
+    /**
+     * chat的type 为匹配，或者普通聊天，或者群聊，或者通知等等,4 匹配中
+     */
     //系统
     public static final String system = "公告";
     //系统

@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.repository;
 
-import com.socialuni.social.sdk.dao.DO.chat.ChatDO;
+import com.socialuni.social.im.dao.DO.SocialuniChatDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -13,17 +13,17 @@ import java.util.Optional;
  * @author qinkaiyuan
  * @since TODO[起始版本号]
  */
-public interface ChatRepository extends JpaRepository<ChatDO, Long> {
+public interface ChatRepository extends JpaRepository<SocialuniChatDO, Long> {
 
     //未登录只能查询官方的消息列表
-    List<ChatDO> findByStatusAndTypeInOrderByTopLevelDescUpdateTimeDesc(String status, List<String> types);
+    List<SocialuniChatDO> findByStatusAndTypeInOrderByTopLevelDescUpdateTimeDesc(String status, List<String> types);
 
     //查询对应的chat,读取时，任何类型的chat都可以改为已读，但是sys类型不操作
-    Optional<ChatDO> findFirstByIdAndStatus(Integer id, String status);
+    Optional<SocialuniChatDO> findFirstByIdAndStatus(Integer id, String status);
 
     //开启时，只有私聊的才能开启
-    Optional<ChatDO> findFirstByIdAndTypeAndStatus(Integer id, String type, String status);
+    Optional<SocialuniChatDO> findFirstByIdAndTypeAndStatus(Integer id, String type, String status);
 
     //用户注册的时候查询系统群聊，把用户加入启用的系统群聊
-    List<ChatDO> findByTypeAndStatus(String type, String status);
+    List<SocialuniChatDO> findByTypeAndStatus(String type, String status);
 }

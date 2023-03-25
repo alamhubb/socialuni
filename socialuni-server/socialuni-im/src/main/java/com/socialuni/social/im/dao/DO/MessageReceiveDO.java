@@ -1,7 +1,7 @@
 package com.socialuni.social.im.dao.DO;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.qingchi.base.constant.CommonStatus;
+import com.socialuni.social.common.api.enumeration.ConstStatus;
 import lombok.Data;
 import lombok.ToString;
 
@@ -57,7 +57,7 @@ public class MessageReceiveDO {
         this.userId = userId;
         this.receiveUserId = receiveUserId;
         this.messageId = messageId;
-        this.status = CommonStatus.normal;
+        this.status = ConstStatus.init;
         //接受消息的人看的
         this.isRead = false;
         this.isMine = false;

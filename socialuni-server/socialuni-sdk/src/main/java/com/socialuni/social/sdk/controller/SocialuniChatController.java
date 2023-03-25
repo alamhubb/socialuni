@@ -2,6 +2,7 @@ package com.socialuni.social.sdk.controller;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.sdk.feignAPI.SocialuniChatAPI;
+import com.socialuni.social.sdk.model.OpenChatVO;
 import com.socialuni.social.sdk.model.RO.message.chat.ChatRO;
 import com.socialuni.social.sdk.model.RO.message.chat.ChatReadVO;
 import com.socialuni.social.sdk.model.RO.message.chat.ChatRemoveVO;
@@ -33,6 +34,11 @@ public class SocialuniChatController implements SocialuniChatAPI {
     public ResultRO<List<ChatRO>> queryChats() {
         List<ChatRO> list = new ArrayList<>();
         return ResultRO.success(list);
+    }
+
+    @Override
+    public ResultRO<List<ChatRO>> openChat(OpenChatVO chatVO) {
+        return null;
     }
 
 /*    @Override

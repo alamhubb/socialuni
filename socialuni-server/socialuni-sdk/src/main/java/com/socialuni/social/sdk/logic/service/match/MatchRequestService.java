@@ -1,10 +1,10 @@
 package com.socialuni.social.sdk.logic.service.match;
 
-import com.socialuni.social.sdk.constant.socialuni.ChatType;
+import com.socialuni.social.im.dao.DO.ChatUserDO;
+import com.socialuni.social.im.enumeration.ChatType;
 import com.socialuni.social.sdk.constant.socialuni.MatchType;
 import com.socialuni.social.sdk.constant.socialuni.MessageType;
-import com.socialuni.social.sdk.dao.DO.chat.ChatDO;
-import com.socialuni.social.sdk.dao.DO.chat.ChatUserDO;
+import com.socialuni.social.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.sdk.dao.DO.message.MessageDO;
 import com.socialuni.social.sdk.dao.DO.message.MessageReceiveDO;
 import com.socialuni.social.sdk.dao.repository.ChatRepository;
@@ -45,7 +45,7 @@ public class MatchRequestService {
         //一个自己
         //一个对方
         //上来系统给对方发一个匹配成功;然后对方回复
-        ChatDO chat = new ChatDO(ChatType.match);
+        SocialuniChatDO chat = new SocialuniChatDO(ChatType.match);
         //match属于私聊，需要保存对方的内容，方便展示头像昵称
         ChatUserDO mineChatUser = new ChatUserDO(chat, user.getUnionId(), receiveUser.getUnionId());
         //自己的设置为待匹配状态，需要等对方回复后才能改为正常
@@ -64,7 +64,7 @@ public class MatchRequestService {
         for (ChatUserDO chatUserDO : chatUserDOS) {
 //            chatUserDO.setLastContent(message.getContent());
             chatUserDO.setUpdateTime(new Date());
-            MessageReceiveDO messageReceiveDO = new MessageReceiveDO(chatUserDO, chatUserDO.getUserId(), chatUserDO.getReceiveUserId(), message);
+            MessageReceiveDO messageReceiveDO = new MessageReceiveDO(chatUserDO, chatUserDO.getUserId(), chatUserDO.getBeUserId(), message);
             messageReceiveDOS.add(messageReceiveDO);
         }
         messageReceiveDORepository.saveAll(messageReceiveDOS);

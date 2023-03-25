@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.logic.entity.chat;
 
-import com.socialuni.social.sdk.constant.socialuni.ChatType;
-import com.socialuni.social.sdk.dao.DO.chat.ChatDO;
-import com.socialuni.social.sdk.dao.DO.chat.ChatUserDO;
+import com.socialuni.social.im.dao.DO.ChatUserDO;
+import com.socialuni.social.im.enumeration.ChatType;
+import com.socialuni.social.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.sdk.dao.repository.ChatRepository;
 import com.socialuni.social.sdk.dao.repository.ChatUserRepository;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
@@ -21,7 +21,7 @@ public class ChatEntity {
 
     //创建群聊
     public void createGroupChat(SocialuniUserDo groupOwner, List<SocialuniUserDo> groupers) {
-        ChatDO chat = new ChatDO(ChatType.group);
+        SocialuniChatDO chat = new SocialuniChatDO(ChatType.group);
 
         //生成chat
         chat = chatRepository.save(chat);

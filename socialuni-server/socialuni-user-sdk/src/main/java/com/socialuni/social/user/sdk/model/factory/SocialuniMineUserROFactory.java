@@ -46,7 +46,7 @@ public class SocialuniMineUserROFactory {
 
 
         //注释掉圈子功能, 加入圈子
-        Optional<ChatDO> optionalChatDO = chatRepository.findFirstOneByTypeAndStatusOrderByCreateTime(ChatType.system_group, CommonStatus.normal);
+        /*Optional<ChatDO> optionalChatDO = chatRepository.findFirstOneByTypeAndStatusOrderByCreateTime(ChatType.system_group, CommonStatus.normal);
         if (optionalChatDO.isPresent()) {
             ChatDO chat = optionalChatDO.get();
             ChatUserDO chatUserDO = new ChatUserDO(chat.getId(), user.getId(), ChatType.system_group);
@@ -59,7 +59,7 @@ public class SocialuniMineUserROFactory {
             UserDO sysUser = systemUserOptional.get();
             //所有人注册默认关注系统用户
             followService.addFlow(user, sysUser);
-        }
+        }*/
 
 
         return socialuniMineUserRO;

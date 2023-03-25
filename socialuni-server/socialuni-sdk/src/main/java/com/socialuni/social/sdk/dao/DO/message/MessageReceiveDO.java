@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.dao.DO.message;
 
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
-import com.socialuni.social.sdk.dao.DO.chat.ChatUserDO;
+import com.socialuni.social.im.dao.DO.ChatUserDO;
 import lombok.Data;
 import lombok.ToString;
 
@@ -46,7 +46,8 @@ public class MessageReceiveDO implements Serializable {
      * 这个用来记录chat的昵称，和头像的。只有私聊的状态下才有
      */
     @ManyToOne
-    private ChatUserDO chatUser;
+    private
+    ChatUserDO chatUser;
 
     private Date createTime;
 

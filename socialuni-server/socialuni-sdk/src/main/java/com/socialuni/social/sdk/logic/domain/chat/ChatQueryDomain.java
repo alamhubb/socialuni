@@ -1,9 +1,9 @@
 package com.socialuni.social.sdk.logic.domain.chat;
 
-import com.socialuni.social.sdk.constant.socialuni.ChatStatus;
-import com.socialuni.social.sdk.constant.socialuni.ChatType;
-import com.socialuni.social.sdk.dao.DO.chat.ChatDO;
-import com.socialuni.social.sdk.dao.DO.chat.ChatUserDO;
+import com.socialuni.social.im.dao.DO.ChatUserDO;
+import com.socialuni.social.im.enumeration.ChatStatus;
+import com.socialuni.social.im.enumeration.ChatType;
+import com.socialuni.social.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.sdk.dao.repository.ChatRepository;
 import com.socialuni.social.sdk.dao.repository.ChatUserRepository;
 import com.socialuni.social.sdk.logic.factory.SocialChatROFactory;
@@ -45,7 +45,7 @@ public class ChatQueryDomain {
     //未登录的情况下查询官方chat，官方群聊
     public List<ChatRO> getChats() {
         //未登录的情况只插叙你官方的chats
-        List<ChatDO> chats = chatRepository.findByStatusAndTypeInOrderByTopLevelDescUpdateTimeDesc(ChatStatus.init, ChatType.systemChats);
+        List<SocialuniChatDO> chats = chatRepository.findByStatusAndTypeInOrderByTopLevelDescUpdateTimeDesc(ChatStatus.init, ChatType.systemChats);
         return SocialChatROFactory.chatDOToVOS(chats);
     }
 }

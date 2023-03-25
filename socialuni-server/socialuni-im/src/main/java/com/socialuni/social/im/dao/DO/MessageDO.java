@@ -1,22 +1,20 @@
+/*
 package com.socialuni.social.im.dao.DO;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.qingchi.base.constant.CommonStatus;
-import com.qingchi.base.constant.MessageContentType;
-import com.qingchi.base.constant.MessageType;
-import com.qingchi.base.constant.ReportContentType;
-import com.qingchi.base.model.BaseModelDO;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+*/
 /**
  * @author qinkaiyuan
  * @date 2018-11-18 20:48
- */
+ *//*
+
 @Data
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
@@ -33,9 +31,11 @@ public class MessageDO implements BaseModelDO, Serializable {
 
     private Date createTime;
     private Date updateTime;
-    /**
+    */
+/**
      * 哪个评论的
-     */
+     *//*
+
     private Integer userId;
 
     //状态
@@ -48,9 +48,11 @@ public class MessageDO implements BaseModelDO, Serializable {
     private String readStatus;
     //有多少人已读
     private Integer readNum;
-    /**
+    */
+/**
      * 删除原因
-     */
+     *//*
+
     private String deleteReason;
     private Integer reportNum;
 
@@ -87,3 +89,4 @@ public class MessageDO implements BaseModelDO, Serializable {
         return this.getId().intValue();
     }
 }
+*/
