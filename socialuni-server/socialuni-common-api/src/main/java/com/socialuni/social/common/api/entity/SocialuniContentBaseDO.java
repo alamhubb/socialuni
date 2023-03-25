@@ -13,6 +13,7 @@ import java.util.Date;
 public class SocialuniContentBaseDO extends SocialuniUserInfoBaseDO implements Serializable {
     @Column(nullable = false)
     private String status;
+    private String type;
 
     @Column(nullable = false, columnDefinition = "timestamp default current_timestamp")
     private Date updateTime;

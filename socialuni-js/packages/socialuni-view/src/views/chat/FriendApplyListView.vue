@@ -26,7 +26,7 @@
             <!--            <uni-tag type="success" text="拒绝" @click="refuseFriendApplication(applyData)"></uni-tag>-->
           </view>
           <view class="chat-custom-right" v-else>
-            {{ friendRuestResult(applyData.handleResult) }}
+            {{ friendRuestResult(applyData.friendApplyStatus) }}
           </view>
         </template>
       </uni-list-chat>

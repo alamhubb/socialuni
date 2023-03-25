@@ -11,10 +11,10 @@
         <view class="pd-sm bg-white bt-radius-10">
           <view class="row-col-center py-sm">
             <image
-                class="size65 bd-radius-xs mr-sm bd"
-                mode="aspectFill"
-                :src="user.avatar"
-                @click="seeAvatarDetail"
+              class="size65 bd-radius-xs mr-sm bd"
+              mode="aspectFill"
+              :src="user.avatar"
+              @click="seeAvatarDetail"
             />
             <view class="flex-1 row-between h65 py-xs">
               <view class="flex-col flex-1">
@@ -72,11 +72,11 @@
 
           <div class="flex-row my-sm">
             <view v-if="user.city" class="row-col-center q-tag">
-              <q-icon icon="map-fill" class="color-purple mr-mn" size="12"/>
+              <q-icon icon="map-fill" class="color-purple mr-mn" size="12" />
               {{ user.city || '' }}
             </view>
             <view v-if="user.schoolName" class="row-col-center q-tag">
-              <q-icon class="color-blue mr-xs" icon="mdi-school" size="12"/>
+              <q-icon class="color-blue mr-xs" icon="mdi-school" size="12" />
               {{ user.schoolName }}
             </view>
           </div>
@@ -87,7 +87,7 @@
       <div v-if="!isIos && user.contactInfo"
            class="row-between-center bg-white px-sm py-sm bd-radius-10 elevation-4 mx-sm mt-smm mb-sm">
         <div class="row-col-center">
-          <q-icon class="color-sub mr-xs" prefix="uni-icons" icon="uniui-chat" size="14"/>
+          <q-icon class="color-sub mr-xs" prefix="uni-icons" icon="uniui-chat" size="14" />
           联系方式：
           <!--          如果开启了，则代表获取过，无需再次获取，点击为复制-->
           <div v-if="user.openContactInfo" class="use-click row-col-center">
@@ -163,47 +163,48 @@
 </template>
 
 <script lang="ts">
-import {Options, Prop, Vue, Watch} from 'vue-property-decorator'
-import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
-import UniUtil from "socialuni-sdk/src/utils/UniUtil";
-import MsgInput from "socialuni-view/src/components/MsgInput.vue";
-import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
-import UserInfo from "socialuni-view/src/views/user/UserInfo.vue";
+import { Options, Prop, Vue, Watch } from 'vue-property-decorator'
+import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO"
+import UniUtil from "socialuni-sdk/src/utils/UniUtil"
+import MsgInput from "socialuni-view/src/components/MsgInput.vue"
+import { onHide, onLoad, onShow } from "@dcloudio/uni-app"
+import UserInfo from "socialuni-view/src/views/user/UserInfo.vue"
 import {
   socialChatModule,
   socialConfigModule,
   socialSystemModule,
   socialUserModule
-} from "socialuni-sdk/src/store/store";
-import {AddFriendParams} from "socialuni-sdk/src/plugins/open-im-sdk";
-import {onMounted} from "vue";
-import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
-import QNavbar from "../../components/QNavbar/QNavbar.vue";
-import QIcon from "../../components/QIcon/QIcon.vue";
-import QPopup from "../../components/QPopup/QPopup.vue";
-import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
-import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
-import UserSchoolEditDialog from "./UserSchoolEditDialog.vue";
-import TalkVO from "socialuni-api/src/model/talk/TalkVO";
-import FollowStatus from "socialuni-constant/constant/FollowStatus";
-import PageUtil from "socialuni-sdk/src/utils/PageUtil";
-import MsgUtil from "socialuni-sdk/src/utils/MsgUtil";
-import SocialuniTalkAPI from "socialuni-api/src/api/socialuni/SocialuniTalkAPI";
-import UserUtil from "socialuni-sdk/src/utils/UserUtil";
-import FollowAddVO from "socialuni-api/src/model/FollowAddVO";
-import FollowAPI from "socialuni-api/src/api/socialuni/FollowAPI";
-import QInput from "../../components/QInput/QInput.vue";
-import TalkItem from "../talk/talkItem/TalkItem.vue";
-import TalkOperate from "../talk/talkOperate.vue";
-import QButton from "../../components/QButton/QButton.vue";
-import QSearch from "../../components/QSearch/QSearch.vue";
-import QPcModel from "../../components/QPcModel/QPcModel.vue";
-import SocialGenderTag from "../../components/SocialGenderTag/SocialGenderTag.vue";
-import QRowItem from "../../components/QRowItem/QRowItem.vue";
-import SocialuniUserInfoImg from "./SocialuniUserInfoImg.vue";
-import SocialuniFollowTag from "../../components/SocialuniFollow/SocialuniFollowTag.vue";
-import SocialuniFriendAPI from "socialuni-im-api/src/api/SocialuniFriendAPI";
-import FriendAddQO from "socialuni-im-api/src/model/firend/FriendAddQO";
+} from "socialuni-sdk/src/store/store"
+import { AddFriendParams } from "socialuni-sdk/src/plugins/open-im-sdk"
+import { onMounted } from "vue"
+import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI"
+import QNavbar from "../../components/QNavbar/QNavbar.vue"
+import QIcon from "../../components/QIcon/QIcon.vue"
+import QPopup from "../../components/QPopup/QPopup.vue"
+import AlertUtil from "socialuni-sdk/src/utils/AlertUtil"
+import ToastUtil from "socialuni-sdk/src/utils/ToastUtil"
+import UserSchoolEditDialog from "./UserSchoolEditDialog.vue"
+import TalkVO from "socialuni-api/src/model/talk/TalkVO"
+import FollowStatus from "socialuni-constant/constant/FollowStatus"
+import PageUtil from "socialuni-sdk/src/utils/PageUtil"
+import MsgUtil from "socialuni-sdk/src/utils/MsgUtil"
+import SocialuniTalkAPI from "socialuni-api/src/api/socialuni/SocialuniTalkAPI"
+import UserUtil from "socialuni-sdk/src/utils/UserUtil"
+import FollowAddVO from "socialuni-api/src/model/FollowAddVO"
+import FollowAPI from "socialuni-api/src/api/socialuni/FollowAPI"
+import QInput from "../../components/QInput/QInput.vue"
+import TalkItem from "../talk/talkItem/TalkItem.vue"
+import TalkOperate from "../talk/talkOperate.vue"
+import QButton from "../../components/QButton/QButton.vue"
+import QSearch from "../../components/QSearch/QSearch.vue"
+import QPcModel from "../../components/QPcModel/QPcModel.vue"
+import SocialGenderTag from "../../components/SocialGenderTag/SocialGenderTag.vue"
+import QRowItem from "../../components/QRowItem/QRowItem.vue"
+import SocialuniUserInfoImg from "./SocialuniUserInfoImg.vue"
+import SocialuniFollowTag from "../../components/SocialuniFollow/SocialuniFollowTag.vue"
+import SocialuniFriendAPI from "socialuni-im-api/src/api/SocialuniFriendAPI"
+import FriendAddQO from "socialuni-im-api/src/model/firend/FriendAddQO"
+import SocialuniAddFriendType from 'socialuni-im-api/constant/SocialuniAddFriendType'
 
 @Options({
   components: {
@@ -233,13 +234,13 @@ export default class UserDetailView extends Vue {
     this.$refs.moreActionMenu.open()
   }
 
-  init(params: { userId: string }) {
+  init(params: {userId: string}) {
     const userId = params.userId
     // 这里有问题，有时候直接进入页面没有userId
     SocialuniUserAPI.queryUserDetailAPI(userId).then((res: any) => {
       this.user = res.data
       if (!this.user.isMine) {
-        socialChatModule.checkFriend(this.user);
+        socialChatModule.checkFriend(this.user)
         // socialChatModule.setCurChatByUserId(this.user.id)
       }
     })
@@ -251,10 +252,10 @@ export default class UserDetailView extends Vue {
    */
   async deleteFriend() {
     AlertUtil.confirm('是否确认解除好友关系').then(async () => {
-      (await socialChatModule.openIm()).deleteFriend(this.user.id).then(({data}) => {
-        console.log('deleteFriend', data);
+      (await socialChatModule.openIm()).deleteFriend(this.user.id).then(({ data }) => {
+        console.log('deleteFriend', data)
         ToastUtil.toast('成功解除好友关系')
-        socialChatModule.checkFriend(this.user);
+        socialChatModule.checkFriend(this.user)
       }).catch(err => {
       })
     })
@@ -265,8 +266,8 @@ export default class UserDetailView extends Vue {
    */
   async addBlack() {
     AlertUtil.confirm('是否确认添加到黑名单').then(async () => {
-      (await socialChatModule.openIm()).addBlack(this.user.id).then(({data}) => {
-        socialChatModule.checkFriend(this.user);
+      (await socialChatModule.openIm()).addBlack(this.user.id).then(({ data }) => {
+        socialChatModule.checkFriend(this.user)
       }).catch(err => {
       })
     })
@@ -278,8 +279,8 @@ export default class UserDetailView extends Vue {
    */
   async removeBlack() {
     AlertUtil.confirm('是否确认从黑名单移除').then(async () => {
-      (await socialChatModule.openIm()).removeBlack(this.user.id).then(({data}) => {
-        socialChatModule.checkFriend(this.user);
+      (await socialChatModule.openIm()).removeBlack(this.user.id).then(({ data }) => {
+        socialChatModule.checkFriend(this.user)
       }).catch(err => {
       })
     })
@@ -337,7 +338,7 @@ export default class UserDetailView extends Vue {
     };
 */
     console.log('123123')
-    await SocialuniFriendAPI.addFriend(new FriendAddQO(this.user.id, this.applyUserFriendContent))
+    await SocialuniFriendAPI.addFriend(new FriendAddQO(this.user.id, this.applyUserFriendContent, SocialuniAddFriendType.accept))
     // await (await socialChatModule.openIm()).addFriend(options)
     ToastUtil.toastLong('添加好友申请发送成功，请耐心等待对方回复')
   }
@@ -393,7 +394,7 @@ export default class UserDetailView extends Vue {
   }
 
   get mineUser() {
-    return socialUserModule.mineUser;
+    return socialUserModule.mineUser
   }
 
   async getOpenContactInfo() {

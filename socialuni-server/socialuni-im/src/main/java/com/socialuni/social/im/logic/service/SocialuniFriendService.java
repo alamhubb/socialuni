@@ -8,6 +8,7 @@ import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepository
 import com.socialuni.social.im.dao.DO.SocialuniFriendApplyRecordDO;
 import com.socialuni.social.im.dao.repository.SocialuniFriendApplyRecordRepository;
 import com.socialuni.social.im.enumeration.SocialuniAddFriendStatus;
+import com.socialuni.social.im.enumeration.SocialuniAddFriendType;
 import com.socialuni.social.im.logic.foctory.SocialuniFriendApplyUserROFactory;
 import com.socialuni.social.im.model.QO.friend.SocialuniFriendAddQO;
 import com.socialuni.social.im.model.RO.SocialuniFriendApplyUserRO;
@@ -33,6 +34,10 @@ public class SocialuniFriendService {
 
         SocialuniTextContentUtil.checkTextHasViolateWords(friendAddQO.getApplyMsg());
 
+        if (!SocialuniAddFriendType.values.contains(friendAddQO.getApplyType())) {
+            throw new SocialBusinessException("错误的申请类型");
+        }
+
         Integer beUserId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(friendAddQO.getUserId());
         Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
         //添加对方的时候只看对方的状态，不看自己的状态
@@ -53,7 +58,7 @@ public class SocialuniFriendService {
 
 
         //首先生成一条记录
-        SocialuniFriendApplyRecordDO socialuniFriendApplyRecordDO = new SocialuniFriendApplyRecordDO(mineUserId, beUserId, friendAddQO.getApplyMsg());
+        SocialuniFriendApplyRecordDO socialuniFriendApplyRecordDO = new SocialuniFriendApplyRecordDO(mineUserId, beUserId, friendAddQO.getApplyMsg(), friendAddQO.getApplyType());
 
         //发起申请成功
         socialuniFriendApplyRecordDO = SocialuniUserContactRepositoryFacede.save(socialuniFriendApplyRecordDO);
@@ -87,7 +92,7 @@ public class SocialuniFriendService {
 
         Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
 
-        List<SocialuniFriendApplyRecordDO> list = socialuniFriendApplyRecordRepository.findTop30ByUserIdOrBeUserId(mineUserId, mineUserId);
+        List<SocialuniFriendApplyRecordDO> list = socialuniFriendApplyRecordRepository.findTop30ByUserIdOrBeUserIdAndType(mineUserId, SocialuniAddFriendType.apply);
 
         List<SocialuniFriendApplyUserRO> list1 = list.stream().map(SocialuniFriendApplyUserROFactory::getSocialuniFriendApplyUserRO).collect(Collectors.toList());
         return ResultRO.success(list1);

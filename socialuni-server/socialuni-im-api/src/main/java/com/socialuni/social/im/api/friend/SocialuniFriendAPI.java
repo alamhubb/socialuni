@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -24,7 +25,7 @@ import java.util.List;
 public interface SocialuniFriendAPI {
 
     @PostMapping("addFriend")
-    ResultRO<Void> addFriend(@Valid @NotNull SocialuniFriendAddQO friendAddQO);
+    ResultRO<Void> addFriend(@RequestBody @Valid @NotNull SocialuniFriendAddQO friendAddQO);
 
 
     @GetMapping("queryFriendApplyList")

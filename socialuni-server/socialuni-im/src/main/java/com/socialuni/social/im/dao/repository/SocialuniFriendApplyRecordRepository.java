@@ -10,12 +10,8 @@ import java.util.List;
 
 
 public interface SocialuniFriendApplyRecordRepository extends JpaRepository<SocialuniFriendApplyRecordDO, Integer> {
-
-    /*@Query("select SocialuniFriendApplyRecordDO from SocialuniFriendApplyRecordDO s where (s.userId=:userId or s.beUserId = :userId) ")
-    List<SocialuniFriendApplyRecordDO> findTop30ByUserIdAndStatus(Integer userId);*/
-
-
-    List<SocialuniFriendApplyRecordDO> findTop30ByUserIdOrBeUserId(Integer userId, Integer beUserId);
+    @Query(nativeQuery = true, value = "select distinct t.* from s_user_friend_apply_record t where (t.user_id=:userId or t.be_user_id = :userId) and t.type = :type GROUP BY t.user_id desc limit 30")
+    List<SocialuniFriendApplyRecordDO> findTop30ByUserIdOrBeUserIdAndType(Integer userId, String type);
 }
 
 
