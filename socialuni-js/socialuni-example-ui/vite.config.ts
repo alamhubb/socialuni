@@ -9,10 +9,10 @@ const IN_PRODUCTION = process.env.NODE_ENV === 'production'
 let plugins = []
     plugins = [
         require('@fullhuman/postcss-purgecss')({
-            rejected: true,
+            // rejected: true,
             // require('@fullhuman/postcss-purgecss')({
-            content: ['./public/**/*.html', './src/**/*.vue'],
-            // content: ['./public/**/*.html', './node_modules/socialuni-view/**/*.scss', './node_modules/@dcloudio/**/*.scss', './node_modules/@dcloudio/**/*.vue', './node_modules/socialuni-view/**/*.vue', './src/**/*.vue', './src/**/*.scss'],
+            // content: ['./public/**/*.html', './src/**/*.vue'],
+            content: ['./public/**/*.html', './node_modules/socialuni-view/**/*.scss', './node_modules/@dcloudio/**/*.scss', './node_modules/@dcloudio/**/*.vue', './node_modules/socialuni-view/**/*.vue', './src/**/*.vue', './src/**/*.scss'],
             defaultExtractor(content) {
                 const contentWithoutStyleBlocks = content.replace(
                     /<style[^]+?<\/style>/gi,

@@ -26,7 +26,7 @@ public class CustomKeywordsDO implements Serializable {
     private String cause;
     @Column(columnDefinition = "varchar(255) default 'word'")
     private String ruleType;
-    @Column(columnDefinition = "varchar(255) default '正常'")
+    @Column(columnDefinition = "varchar(255) default '初始'")
     private String status;
     //触发次数
     @Column(columnDefinition = "int default 0")

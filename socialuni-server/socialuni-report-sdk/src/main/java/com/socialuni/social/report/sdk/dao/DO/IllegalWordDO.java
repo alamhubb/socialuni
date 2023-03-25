@@ -24,7 +24,7 @@ public class IllegalWordDO implements Serializable {
     private Integer id;
     private String word;
     private String cause;
-    @Column(columnDefinition = "varchar(255) default '正常'")
+    @Column(columnDefinition = "varchar(255) default '初始'")
     private String status;
     //触发次数
     @Column(columnDefinition = "int default 0")
