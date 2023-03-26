@@ -1,6 +1,7 @@
 package com.socialuni.social.sdk.logic.service.chat;
 
 
+import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.im.dao.DO.ChatUserDO;
 import com.socialuni.social.im.enumeration.ChatStatus;
 import com.socialuni.social.im.enumeration.ChatType;
@@ -43,7 +44,11 @@ public class ChatService {
             CreateSingleChatResult chatResult = this.seeUserDetailCreateChat(user, receiveUserId);
             chatUserDO = chatResult.getMineChatUser();
         }
-        ChatRO chatUserVO = SocialChatROFactory.getChatRO(chatUserDO.getChat(), chatUserDO, true);
+
+        SocialuniChatDO socialuniChatDO = SocialuniRepositoryFacade.findById(chatUserDO.getChatId(), SocialuniChatDO.class);
+
+
+        ChatRO chatUserVO = SocialChatROFactory.getChatRO(socialuniChatDO, chatUserDO, true);
         return chatUserVO;
     }
 

@@ -36,8 +36,9 @@ public class MessageReceiveDO implements Serializable {
     //是否自己的,如果有接收人id，应该指定是为自己的吧
     private Boolean isMine;
 
-    @ManyToOne
-    private MessageDO message;
+//    @ManyToOne
+//    private MessageDO message;
+    private Integer messageId;
 
     //
     private Integer receiveUserId;
@@ -45,9 +46,11 @@ public class MessageReceiveDO implements Serializable {
     /**
      * 这个用来记录chat的昵称，和头像的。只有私聊的状态下才有
      */
-    @ManyToOne
-    private
-    ChatUserDO chatUser;
+//    @ManyToOne
+//    private
+//    ChatUserDO chatUser;
+
+    private Integer chatUserId;
 
     private Date createTime;
 
@@ -56,12 +59,12 @@ public class MessageReceiveDO implements Serializable {
     public MessageReceiveDO() {
     }
 
-    public MessageReceiveDO(ChatUserDO chatUser, Integer userId, Integer receiveUserId, MessageDO message) {
+    public MessageReceiveDO(Integer chatUserId, Integer userId, Integer receiveUserId, Integer messageId) {
         Date curDate = new Date();
-        this.chatUser = chatUser;
+        this.chatUserId = chatUserId;
         this.userId = userId;
         this.receiveUserId = receiveUserId;
-        this.message = message;
+        this.messageId = messageId;
         this.status = SocialuniCommonStatus.init;
         //接受消息的人看的
         this.isRead = false;

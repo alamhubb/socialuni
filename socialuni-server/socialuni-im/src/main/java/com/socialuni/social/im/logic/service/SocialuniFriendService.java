@@ -9,6 +9,7 @@ import com.socialuni.social.im.dao.DO.SocialuniFriendApplyRecordDO;
 import com.socialuni.social.im.dao.repository.SocialuniFriendApplyRecordRepository;
 import com.socialuni.social.im.enumeration.SocialuniAddFriendStatus;
 import com.socialuni.social.im.enumeration.SocialuniAddFriendType;
+import com.socialuni.social.im.logic.domain.SocialuniOpenChatDomain;
 import com.socialuni.social.im.logic.foctory.SocialuniFriendApplyUserROFactory;
 import com.socialuni.social.im.model.QO.friend.SocialuniFriendAddQO;
 import com.socialuni.social.im.model.RO.SocialuniFriendApplyUserRO;
@@ -27,6 +28,9 @@ import java.util.stream.Collectors;
 public class SocialuniFriendService {
     @Resource
     SocialuniFriendApplyRecordRepository socialuniFriendApplyRecordRepository;
+
+    @Resource
+    SocialuniOpenChatDomain socialuniOpenChatDomain;
 
     //添加朋友
     public ResultRO<Void> addFriend(SocialuniFriendAddQO friendAddQO) {
@@ -83,6 +87,18 @@ public class SocialuniFriendService {
         beUserFriendApplyRecordDO.setStatus(SocialuniAddFriendStatus.enable);
         beUserFriendApplyRecordDO.setUpdateTime(new Date());
         SocialuniUserContactRepositoryFacede.save(beUserFriendApplyRecordDO);
+
+
+        //加好友那边，则看的是有没有初始的，为初始以后就失效了。
+
+        //看两个表的状态，先看好友表，有数据，如果对方为好友，。
+
+        //好友状态，chat状态 ，维护chatUser状态。发送消息的时候只需要看chatUser状态就行。
+        //给用户发消息。 只需要对方用户的id，就行。
+        //那就是判断，读取和对方的chat，有的话展示，没有的话就不展示
+
+        socialuniOpenChatDomain.openChatByCreateFriend(beUserId);
+
         return ResultRO.success();
     }
 

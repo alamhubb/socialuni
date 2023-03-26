@@ -1,6 +1,7 @@
 package com.socialuni.social.sdk.logic.factory;
 
 
+import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.sdk.constant.socialuni.MessageStatus;
 import com.socialuni.social.sdk.dao.DO.message.MessageDO;
@@ -62,12 +63,15 @@ public class SocialMessageROFactory {
     }*/
 
     public static SocialMessageRO getMessageRO(MessageReceiveDO messageReceive) {
-        SocialMessageRO messageRO = SocialMessageROFactory.getMessageRO(messageReceive.getMessage(), messageReceive.getReceiveUserId());
+
+        MessageDO messageDO = SocialuniRepositoryFacade.findById(messageReceive.getMessageId(),MessageDO.class);
+
+        SocialMessageRO messageRO = SocialMessageROFactory.getMessageRO(messageDO, messageReceive.getReceiveUserId());
         //涉及到举报，不知道是msgid还是msguserid，所以暂时取消，统一使用msgid，删除和举报
 //        this.id = messageReceive.getId();
         if (messageReceive.getIsMine()) {
             //自己发的消息就去msg上的发送状态
-            messageRO.setReadStatus(messageReceive.getMessage().getReadStatus());
+            messageRO.setReadStatus(messageRO.getReadStatus());
         } else {
             //否则就取自己的阅读状态
             messageRO.setIsRead(messageReceive.getIsRead());

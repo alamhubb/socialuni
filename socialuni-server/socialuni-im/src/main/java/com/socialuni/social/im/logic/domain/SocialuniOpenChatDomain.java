@@ -8,9 +8,9 @@ import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Service;
 
 @Service
-public class OpenChatDomain {
+public class SocialuniOpenChatDomain {
 
-    public void openChatByAgreeFriend(Integer userId) {
+    public void openChatByCreateFriend(Integer userId) {
 
         Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
         //创建 chat new do
@@ -36,7 +36,6 @@ public class OpenChatDomain {
 
         SocialuniRepositoryFacade.save(chatBeUserDO);
         SocialuniRepositoryFacade.save(chatBeUserDO);
-
 
         // 创建 chatUser 设置 user id
     }

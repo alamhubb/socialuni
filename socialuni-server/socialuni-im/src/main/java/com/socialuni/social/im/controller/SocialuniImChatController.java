@@ -12,5 +12,5 @@ import java.util.List;
 
 @RestController
 //@RequestMapping("socialuni/chat")
-public class SocialuniChatController {
+public class SocialuniImChatController {
 }

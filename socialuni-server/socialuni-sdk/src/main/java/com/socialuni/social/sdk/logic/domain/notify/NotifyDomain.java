@@ -4,10 +4,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.social.common.api.exception.base.SocialException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.utils.JsonUtil;
+import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
 import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
 import com.socialuni.social.community.sdk.repository.CommentRepository;
 import com.socialuni.social.im.dao.DO.ChatUserDO;
+import com.socialuni.social.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.report.sdk.constant.SocialuniSupportProviderType;
 import com.socialuni.social.sdk.constant.NotifyType;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
@@ -148,11 +150,12 @@ public class NotifyDomain {
             if (NotifyType.message.equals(notifyType)) {
                 Optional<MessageReceiveDO> messageReceiveDOOptional = messageReceiveRepository.findById(notify.getMessageReceiveId());
                 MessageReceiveDO messageReceiveDO = messageReceiveDOOptional.get();
-                ChatUserDO chatUserDO = messageReceiveDO.getChatUser();
+                ChatUserDO chatUserDO = SocialuniRepositoryFacade.findById(messageReceiveDO.getChatUserId(), ChatUserDO.class);
 //                Optional<ChatDO> chatDOOptional = chatRepository.findById();
                 //如果群聊，直接发送给两个服务器在线的所有用户，并且查找他们未读的。
                 //未登录的时候也查询群聊里面的所有内容
-                NotifyVO notifyVO = new NotifyVO(notify, requestUser, messageReceiveDO, chatUserDO, chatUserDO.getChat());
+                SocialuniChatDO socialuniChatDO = SocialuniRepositoryFacade.findById(chatUserDO.getChatId(), SocialuniChatDO.class);
+                NotifyVO notifyVO = new NotifyVO(notify, requestUser, messageReceiveDO, chatUserDO, socialuniChatDO);
                 try {
                     stringRedisTemplate.convertAndSend(receiveUserId.toString(), JsonUtil.objectMapper.writeValueAsString(notifyVO));
                 } catch (JsonProcessingException e) {

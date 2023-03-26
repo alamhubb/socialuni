@@ -20,14 +20,14 @@ import java.util.Date;
 @Entity
 @Table(name = "s_chat_user", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"userId", "chatId"}),
-        @UniqueConstraint(columnNames = {"userId", "beUseId"})
+        @UniqueConstraint(columnNames = {"userId", "beUserId"})
 })
 public class ChatUserDO extends SocialuniUserContactBaseDO {
 
     //置顶标识
     //用户手动操作的，系统没有操作方法，暂时没用
     private Boolean topFlag;
-    private SocialuniChatDO chat;
+//    private SocialuniChatDO chat;
     private Integer chatId;
 
 
