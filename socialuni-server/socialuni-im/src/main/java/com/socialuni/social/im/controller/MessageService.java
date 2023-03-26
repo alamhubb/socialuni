@@ -12,6 +12,7 @@ import com.socialuni.social.im.dao.ChatUserRepository;
 import com.socialuni.social.im.dao.DO.ChatSocialuniUserDo;
 import com.socialuni.social.im.dao.DO.ChatUserDO;
 import com.socialuni.social.im.dao.DO.SocialuniChatDO;
+import com.socialuni.social.im.dao.DO.SocialuniUserChatConfigDO;
 import com.socialuni.social.im.dao.DO.message.MessageDO;
 import com.socialuni.social.im.dao.DO.message.MessageReceiveDO;
 import com.socialuni.social.im.dao.MessageReceiveRepository;
@@ -21,6 +22,7 @@ import com.socialuni.social.im.enumeration.ChatUserStatus;
 import com.socialuni.social.im.logic.entity.SocialuniChatUserEntity;
 import com.socialuni.social.im.logic.foctory.SocialMessageROFactory;
 import com.socialuni.social.im.logic.manage.SocialuniChatDOFactory;
+import com.socialuni.social.im.logic.manage.SocialuniUserChatConfigDOFactory;
 import com.socialuni.social.im.model.message.message.MessageAddVO;
 import com.socialuni.social.report.sdk.logic.service.IllegalWordService;
 import com.socialuni.social.report.sdk.utils.SocialuniTextContentUtil;
@@ -105,8 +107,34 @@ public class MessageService {
             chatUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(mineUser.getUserId(), receiveId, ChatUserDO.class);
             if (chatUserDO == null) {
                 //会话不存在则创建
-                chatUserDO = SocialuniChatUserEntity.createChatUserBySingle(mineUser.getUserId(), receiveId);
+                chatUserDO = SocialuniChatUserEntity.createChatUserBySingleSendMsg(mineUser.getUserId(), receiveId);
             }
+            //还得看自己的，你是否把对方拉黑了
+            //
+            if (chatUserDO.getBlacklist()) {
+                throw new SocialBusinessException("对方已被您拉黑，无法发送消息");
+            }
+            //对方是否把你拉黑了
+            //对方不接收陌生人消息的情况下，你是不是对方的好友
+            //判断对方是否接收陌生人消息，判断对方是否把你拉黑了。如果对方没有，则可以发送，不需要查看其他了把
+            ChatUserDO chatBeUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(receiveId, mineUser.getUserId(), ChatUserDO.class);
+            //则代表对方没把你拉黑
+            if (chatBeUserDO != null) {
+                if (chatBeUserDO.getBlacklist()) {
+                    throw new SocialBusinessException("您已被对方拉黑，无法发送消息");
+                }
+            }
+            SocialuniUserChatConfigDO socialuniUserChatConfigDO = SocialuniUserChatConfigDOFactory.getOrCreateUserChatConfigDO(receiveId);
+
+
+            //好友和拉黑功能怎么做，
+
+            //你把对方删除，但是你开起了陌生人消息，对方还是不能给你发信息。
+            //所以如果你开起了陌生人消息，且你俩不为好友，但是你不想接受她的消息，但是你还不能把对方 chat 删除。能改chat 状态吗，
+            //不能改成查不出来的状态，所以 chatUser的职责是什么呢。负责是否展示？负责删除功能。负责前台是否展示？
+            // 还有有个好友表。不需要这个表。
+            // 这俩级联？
+
 
 //            if (chatUserDO.)
 

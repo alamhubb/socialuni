@@ -22,11 +22,15 @@ import javax.persistence.UniqueConstraint;
         }
 )
 @Data
-@NoArgsConstructor
 public class SocialuniUserChatConfigDO extends SocialuniUserInfoBaseDO {
 
     //是否接收陌生人消息
     Boolean allowStrangerMsg;
     //陌生人给你发消息需要的金币数量
-    Boolean strangerMsgCoin;
+    Integer strangerMsgCoin;
+
+    public SocialuniUserChatConfigDO() {
+        this.allowStrangerMsg = true;
+        this.strangerMsgCoin = 0;
+    }
 }

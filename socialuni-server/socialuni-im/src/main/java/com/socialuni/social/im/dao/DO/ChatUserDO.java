@@ -29,6 +29,8 @@ public class ChatUserDO extends SocialuniUserContactBaseDO {
     private Boolean topFlag;
 //    private SocialuniChatDO chat;
     private Integer chatId;
+    //是否拉黑了对方
+    private Boolean blacklist;
 
 
     //每一个用户对于这个群聊的状态
