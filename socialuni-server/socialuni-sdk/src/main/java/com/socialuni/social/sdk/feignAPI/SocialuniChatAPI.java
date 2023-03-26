@@ -2,12 +2,13 @@ package com.socialuni.social.sdk.feignAPI;
 
 
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.sdk.model.OpenChatVO;
-import com.socialuni.social.sdk.model.RO.message.chat.ChatRO;
-import com.socialuni.social.sdk.model.RO.message.chat.ChatReadVO;
-import com.socialuni.social.sdk.model.RO.message.chat.ChatRemoveVO;
+import com.socialuni.social.im.model.message.chat.OpenChatVO;
+import com.socialuni.social.im.api.model.RO.ChatRO;
+import com.socialuni.social.im.model.message.chat.ChatReadVO;
+import com.socialuni.social.im.model.message.chat.ChatRemoveVO;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -29,8 +30,8 @@ public interface SocialuniChatAPI {
     @PostMapping("queryHomeChat")
     ResultRO<List<ChatRO>> queryHomeChat();
 
-    @PostMapping("queryChats")
-    ResultRO<List<ChatRO>> queryChats();
+    @GetMapping("queryChatList")
+    ResultRO<List<ChatRO>> queryChatList();
 
     @PostMapping("openChat")
     ResultRO<List<ChatRO>> openChat(@RequestBody @Valid OpenChatVO chatVO);

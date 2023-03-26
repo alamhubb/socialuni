@@ -3,8 +3,7 @@ package com.socialuni.social.im.logic.foctory;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.im.dao.DO.SocialuniFriendApplyRecordDO;
-import com.socialuni.social.im.enumeration.SocialuniAddFriendStatus;
-import com.socialuni.social.im.model.RO.SocialuniFriendApplyUserRO;
+import com.socialuni.social.im.api.model.RO.SocialuniFriendApplyUserRO;
 import com.socialuni.social.user.sdk.model.factory.SocialuniUserROFactory;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 

@@ -1,11 +1,13 @@
 package com.socialuni.social.common.sdk.dao.facede;
 
+import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import com.socialuni.social.common.api.entity.SocialuniUserInfoBaseDO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 /**
  * @author wulinghui
@@ -33,6 +35,19 @@ public abstract class SocialuniUserRepositoryFacede extends SocialuniRepositoryF
         }
         userInfo.setUserId(userId);
         return SocialuniRepositoryFacade.findByExample(userInfo);
+    }
+
+    public static <T extends SocialuniContentBaseDO> List<T> findAllByUserIdAndStatus(Integer userId, String status, Class<T> tClass) {
+        T userInfo = null;
+        try {
+            userInfo = tClass.getDeclaredConstructor().newInstance();
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
+        userInfo.setUserId(userId);
+        userInfo.setStatus(status);
+        return SocialuniRepositoryFacade.findAllByExample(userInfo);
     }
 
     public static <T extends SocialuniUserInfoBaseDO> T findFirstByUserIdNotNull(Integer userId, Class<T> tClass) {

@@ -43,7 +43,7 @@ public interface ReportRepository extends JpaRepository<ReportDO, Integer> {
 
 //    List<ReportDO> findTop30ByStatusAndTalkStatusInOrStatusAndUserImgStatusInOrStatusAndCommentStatusInOrStatusAndMessageStatusInOrderByCreateTimeAsc(String status, List<String> talkStatus, String status1, List<String> userImgStatus, String status2, List<String> commentStatus, String status3, List<String> messageStatus);
 
-//    List<ReportDO> findTop10ByReceiveUserIdAndStatusOrderByUpdateTimeDesc(Integer userId, String status);
+//    List<ReportDO> findTop10ByBeUserIdAndStatusOrderByUpdateTimeDesc(Integer userId, String status);
 
 //    Page<ReportDO> findByStatusAndAuditTypeAndReceiveUserStatusNotOrderByIdDesc(Pageable pageable, String status, String auditType, String userStatus);
 

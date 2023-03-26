@@ -12,7 +12,7 @@ public class ChatStatus extends SocialuniCommonStatus {
 //    public static final String waitOpen = CommonStatus.waitOpen;
 
     public static final List<String> allStatus = Arrays.asList(ChatStatus.init);
-//    public static final List<String> allStatus = Arrays.asList(ChatStatus.enable, ChatStatus.waitOpen);
+//    public static final List<String> allStatus = Arrays.asList(Status.enable, Status.waitOpen);
 
    /* //启用
     public static final String normal = "正常";

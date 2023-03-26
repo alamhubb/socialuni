@@ -203,7 +203,7 @@ import QRowItem from "../../components/QRowItem/QRowItem.vue"
 import SocialuniUserInfoImg from "./SocialuniUserInfoImg.vue"
 import SocialuniFollowTag from "../../components/SocialuniFollow/SocialuniFollowTag.vue"
 import SocialuniFriendAPI from "socialuni-im-api/src/api/SocialuniFriendAPI"
-import FriendAddQO from "socialuni-im-api/src/model/firend/FriendAddQO"
+import FriendAddQO from "socialuni-im-api/src/model/QO/firend/FriendAddQO"
 import SocialuniAddFriendType from 'socialuni-im-api/constant/SocialuniAddFriendType'
 
 @Options({

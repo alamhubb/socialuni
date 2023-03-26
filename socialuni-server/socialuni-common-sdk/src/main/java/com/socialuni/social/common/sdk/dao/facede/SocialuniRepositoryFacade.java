@@ -7,6 +7,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 
 @Slf4j
 public abstract class SocialuniRepositoryFacade {
@@ -31,6 +32,10 @@ public abstract class SocialuniRepositoryFacade {
      */
     public static <T> T findByExample(T example) {
         return getRepository().findByExample(example);
+    }
+
+    public static <T> List<T> findAllByExample(T example) {
+        return getRepository().findAllByExample(example);
     }
 
     public static <T> Long countByExample(T exampleObj) {

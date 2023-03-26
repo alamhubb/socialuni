@@ -3,8 +3,8 @@ package com.socialuni.social.im.controller;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.im.api.friend.SocialuniFriendAPI;
 import com.socialuni.social.im.logic.service.SocialuniFriendService;
-import com.socialuni.social.im.model.QO.friend.SocialuniFriendAddQO;
-import com.socialuni.social.im.model.RO.SocialuniFriendApplyUserRO;
+import com.socialuni.social.im.api.model.QO.friend.SocialuniFriendAddQO;
+import com.socialuni.social.im.api.model.RO.SocialuniFriendApplyUserRO;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

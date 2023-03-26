@@ -18,7 +18,7 @@ public class NotifyDO implements Serializable {
 
     private Integer userId;
 
-    private Integer receiveUserId;
+    private Integer beUserId;
 
     //加入一列作为外键
     private Integer messageReceiveId;
@@ -46,30 +46,30 @@ public class NotifyDO implements Serializable {
         this.hasRead = false;
     }
 
-    public NotifyDO(Integer userId, Integer receiveUserId) {
+    public NotifyDO(Integer userId, Integer beUserId) {
         this();
         this.userId = userId;
-        this.receiveUserId = receiveUserId;
+        this.beUserId = beUserId;
     }
 
-    public NotifyDO(Integer userId, Integer receiveUserId, String type) {
-        this(userId, receiveUserId);
+    public NotifyDO(Integer userId, Integer beUserId, String type) {
+        this(userId, beUserId);
         this.type = type;
     }
 
   /*  public NotifyDO(MessageReceiveDO msg) {
-        this(msg.getUserId(), msg.getReceiveUserId(), NotifyType.message);
+        this(msg.getUserId(), msg.getBeUserId(), NotifyType.message);
         this.messageReceiveId = msg.getId();
     }*/
 
-    public NotifyDO(Integer userId, Integer receiveUserId, Integer commentId, Integer talkId, String type) {
-        this(userId, receiveUserId, type);
+    public NotifyDO(Integer userId, Integer beUserId, Integer commentId, Integer talkId, String type) {
+        this(userId, beUserId, type);
         this.commentId = commentId;
 // 理论上无用，都使用comment.getTalkId       this.talkId = talkId;
     }
 
-    public NotifyDO(Integer userId, Integer receiveUserId, Integer reportId, String type) {
-        this(userId, receiveUserId, type);
+    public NotifyDO(Integer userId, Integer beUserId, Integer reportId, String type) {
+        this(userId, beUserId, type);
         this.reportId = reportId;
     }
 

@@ -66,7 +66,7 @@ public abstract class SocialuniUserContactRepositoryFacede extends SocialuniUser
         Predicate statusPredicate = criteriaBuilder.equal(userInfo.get("status"), status);
         criteriaQuery.where(userIdPredicate, beUserIdPredicate, statusPredicate);
 
-        criteriaQuery.orderBy(criteriaBuilder.desc(userInfo.get("id")));
+//        criteriaQuery.orderBy(criteriaBuilder.desc(userInfo.get("id")));
 
         return entityManager.createQuery(criteriaQuery).getSingleResult();
     }

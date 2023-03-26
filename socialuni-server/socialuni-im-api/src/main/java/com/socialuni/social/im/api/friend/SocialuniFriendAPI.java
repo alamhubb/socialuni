@@ -2,8 +2,8 @@ package com.socialuni.social.im.api.friend;
 
 
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.im.model.QO.friend.SocialuniFriendAddQO;
-import com.socialuni.social.im.model.RO.SocialuniFriendApplyUserRO;
+import com.socialuni.social.im.api.model.QO.friend.SocialuniFriendAddQO;
+import com.socialuni.social.im.api.model.RO.SocialuniFriendApplyUserRO;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

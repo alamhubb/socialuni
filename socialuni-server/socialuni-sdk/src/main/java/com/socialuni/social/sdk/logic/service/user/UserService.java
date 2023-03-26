@@ -6,7 +6,7 @@ import com.socialuni.web.constant.ChatType;
 import com.socialuni.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.web.constant.PlatformType;
 import com.socialuni.web.constant.ProviderType;
-import com.socialuni.web.constant.status.ChatStatus;
+import com.socialuni.web.constant.status.Status;
 import com.socialuni.web.model.chat.ChatDO;
 import com.socialuni.web.model.chat.ChatUserDO;
 import com.socialuni.web.model.user.IdCardDO;
@@ -249,7 +249,7 @@ public class UserService {
 //        user.setInviteCode(userInviteCode.substring(userInviteCode.length() - 8));
         user = userRepository.save(user);
         //注释掉圈子功能
-        List<ChatDO> chatDOS = chatRepository.findByTypeAndStatus(ChatType.system_group, ChatStatus.enable);
+        List<ChatDO> chatDOS = chatRepository.findByTypeAndStatus(ChatType.system_group, Status.enable);
         for (ChatDO chat : chatDOS) {
             ChatUserDO chatUserDO = new ChatUserDO(chat, user.getId());
             chatUserRepository.save(chatUserDO);

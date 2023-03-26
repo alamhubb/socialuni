@@ -29,7 +29,7 @@ public class RedisSubListenerConfig {
             try {
                 NotifyVO notifyVO = objectMapper.readValue(message.toString(), NotifyVO.class);
                 WebsocketServer.sendMessage(notifyVO.getReceiveUserId().toString(), notifyVO);
-//                NewWebSocketServer.sendInfo(message.toString(), notifyVO.getReceiveUserId().toString());
+//                NewWebSocketServer.sendInfo(message.toString(), notifyVO.getBeUserId().toString());
             } catch (IOException e) {
                 e.printStackTrace();
             }

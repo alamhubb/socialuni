@@ -91,7 +91,7 @@ public class SocialUserDetailEntity {
 //        user.setInviteCode(userInviteCode.substring(userInviteCode.length() - 8));
 
         //注释掉圈子功能
-        /*List<ChatDO> chatDOS = chatRepository.findByTypeAndStatus(ChatType.system_group, ChatStatus.enable);
+        /*List<ChatDO> chatDOS = chatRepository.findByTypeAndStatus(ChatType.system_group, Status.enable);
         for (ChatDO chat : chatDOS) {
             ChatUserDO chatUserDO = new ChatUserDO(chat, user.getId());
             chatUserRepository.save(chatUserDO);

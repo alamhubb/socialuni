@@ -38,7 +38,7 @@ public class TalkCommentPushUtils {
 
         HashMap<String, Object> data = new HashMap<>();
         PushMsgDTO pushMsgDTO = null;
-//        String page = AppConfigConst.notify_skip_page + UnionIdDbUtil.createTalkUid(talk.getId(), notify.getReceiveUserId());
+//        String page = AppConfigConst.notify_skip_page + UnionIdDbUtil.createTalkUid(talk.getId(), notify.getBeUserId());
         String page = AppConfigConst.notify_skip_page;
         if (provider.equals(SocialuniSupportProviderType.qq)) {
             //评论内容

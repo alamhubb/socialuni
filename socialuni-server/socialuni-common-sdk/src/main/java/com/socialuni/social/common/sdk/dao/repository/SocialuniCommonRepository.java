@@ -58,6 +58,12 @@ public class SocialuniCommonRepository {
         return simpleJpaRepository.findOne(example).orElse(null);
     }
 
+    public <T> List<T> findAllByExample(T exampleObj) {
+        SimpleJpaRepository<T, Integer> simpleJpaRepository = getSimpleJpaRepository(exampleObj);
+        Example<T> example = Example.of(exampleObj);
+        return simpleJpaRepository.findAll(example);
+    }
+
     public <T> Long countByExample(T exampleObj) {
         SimpleJpaRepository<T, Integer> simpleJpaRepository = getSimpleJpaRepository(exampleObj);
         Example<T> example = Example.of(exampleObj);

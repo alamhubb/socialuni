@@ -1,15 +1,16 @@
 package com.socialuni.social.sdk.controller;
 
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.im.logic.service.chat.ChatService;
 import com.socialuni.social.sdk.feignAPI.SocialuniChatAPI;
-import com.socialuni.social.sdk.model.OpenChatVO;
-import com.socialuni.social.sdk.model.RO.message.chat.ChatRO;
-import com.socialuni.social.sdk.model.RO.message.chat.ChatReadVO;
-import com.socialuni.social.sdk.model.RO.message.chat.ChatRemoveVO;
+import com.socialuni.social.im.model.message.chat.OpenChatVO;
+import com.socialuni.social.im.api.model.RO.ChatRO;
+import com.socialuni.social.im.model.message.chat.ChatReadVO;
+import com.socialuni.social.im.model.message.chat.ChatRemoveVO;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -20,6 +21,9 @@ import java.util.List;
 @RestController
 @RequestMapping("socialuni/chat")
 public class SocialuniChatController implements SocialuniChatAPI {
+    @Resource
+    ChatService chatService;
+
     @Override
     public ResultRO<?> readChatMessages(ChatReadVO chatVO) {
         return null;
@@ -31,9 +35,8 @@ public class SocialuniChatController implements SocialuniChatAPI {
     }
 
     @Override
-    public ResultRO<List<ChatRO>> queryChats() {
-        List<ChatRO> list = new ArrayList<>();
-        return ResultRO.success(list);
+    public ResultRO<List<ChatRO>> queryChatList() {
+        return chatService.queryChatList();
     }
 
     @Override

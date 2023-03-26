@@ -7,9 +7,12 @@ import com.socialuni.social.im.enumeration.ChatType;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
 public class SocialuniOpenChatDomain {
 
+    @Transactional
     public void openChatByCreateFriend(Integer userId) {
 
         Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
@@ -28,13 +31,13 @@ public class SocialuniOpenChatDomain {
 
         ChatUserDO chatBeUserDO = new ChatUserDO();
 
-        chatUserDO.setChatId(socialuniChatDO.getId());
-        chatUserDO.setUserId(userId);
-        chatUserDO.setBeUserId(mineUserId);
-        chatUserDO.setType(socialuniChatDO.getType());
+        chatBeUserDO.setChatId(socialuniChatDO.getId());
+        chatBeUserDO.setUserId(userId);
+        chatBeUserDO.setBeUserId(mineUserId);
+        chatBeUserDO.setType(socialuniChatDO.getType());
 
 
-        SocialuniRepositoryFacade.save(chatBeUserDO);
+        SocialuniRepositoryFacade.save(chatUserDO);
         SocialuniRepositoryFacade.save(chatBeUserDO);
 
         // 创建 chatUser 设置 user id

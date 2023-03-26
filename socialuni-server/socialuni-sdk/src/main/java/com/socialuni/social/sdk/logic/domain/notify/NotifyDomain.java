@@ -14,9 +14,9 @@ import com.socialuni.social.report.sdk.constant.SocialuniSupportProviderType;
 import com.socialuni.social.sdk.constant.NotifyType;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.common.sdk.dao.DO.NotifyDO;
-import com.socialuni.social.sdk.dao.DO.message.MessageReceiveDO;
+import com.socialuni.social.im.dao.DO.message.MessageReceiveDO;
 import com.socialuni.social.common.sdk.dao.DO.SocialUserAccountDO;
-import com.socialuni.social.sdk.dao.repository.MessageReceiveRepository;
+import com.socialuni.social.im.dao.MessageReceiveRepository;
 import com.socialuni.social.sdk.dao.repository.NotifyRepository;
 import com.socialuni.social.common.sdk.dao.repository.SocialUserAccountRepository;
 import com.socialuni.social.sdk.model.NotifyVO;
@@ -108,7 +108,7 @@ public class NotifyDomain {
         }
         Collections.reverse(notifies);
         notifies = notifies.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() ->
-                new TreeSet<>(Comparator.comparing(NotifyDO::getReceiveUserId))), ArrayList::new));
+                new TreeSet<>(Comparator.comparing(NotifyDO::getMessageReceiveId))), ArrayList::new));
         notifies = notifyRepository.saveAll(notifies);
         return notifies;
     }
@@ -130,7 +130,7 @@ public class NotifyDomain {
     public void sendNotify(NotifyDO notify, SocialuniUserDo requestUser) throws SocialException {
         //评论动态
 //        UserDO receiveUser = userRepository.findById(receiveUserId).get();
-        Integer receiveUserId = notify.getReceiveUserId();
+        Integer receiveUserId = notify.getBeUserId();
 
         SocialUserAccountDO receiveAccount = socialUserAccountRepository.findByUserIdOrderByUpdateTimeDesc(receiveUserId);
         if (receiveAccount != null) {

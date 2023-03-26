@@ -21,7 +21,7 @@ public class ChatUserStatus extends SocialuniCommonStatus {
     //自己被对方关闭，或者双方都主动关闭后，一方恢复，也为被关闭
     public static final String beClose = ConstStatus.beClose;
 
-//    public static final List<String> allStatus = Arrays.asList(ChatStatus.enable, ChatUserStatus.waitOpen);
+//    public static final List<String> allStatus = Arrays.asList(Status.enable, ChatUserStatus.waitOpen);
 
    /* //启用
     public static final String normal = "正常";
