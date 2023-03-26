@@ -53,7 +53,7 @@ public class SocialUserPhoneManage {
         //校验手机号状态是否可用
         SocialUserPhoneDo SocialUserPhoneDo = socialUserPhoneRedis.findByPhoneNum(phoneNum);
         if (SocialUserPhoneDo != null) {
-            SocialuniUserDo phoneUser = SocialuniUserUtil.getUserNotNull(SocialUserPhoneDo.getUserId());
+            SocialuniUserDo phoneUser = SocialuniUserUtil.getAndCheckUserNotNull(SocialUserPhoneDo.getUserId());
             //如果手机号违规，则返回手机号不可用
             if (phoneUser.getStatus().equals(SocialuniUserStatus.violation)) {
                 throw new SocialBusinessException("手机号不可用");

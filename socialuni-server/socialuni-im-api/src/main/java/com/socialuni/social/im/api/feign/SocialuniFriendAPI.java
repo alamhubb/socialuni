@@ -1,4 +1,4 @@
-package com.socialuni.social.im.api.friend;
+package com.socialuni.social.im.api.feign;
 
 
 import com.socialuni.social.common.api.model.ResultRO;

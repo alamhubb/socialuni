@@ -82,7 +82,7 @@ public class SocialuniUserUtil {
     //下面都是联盟的
     public static SocialuniUserDo getMineUserNotNull(String token) {
         SocialTokenDO tokenDO = SocialTokenDOUtil.getCommonTokenDONotNull(token);
-        return SocialuniUserUtil.getUserNotNull(tokenDO.getUserId());
+        return SocialuniUserUtil.getAndCheckUserNotNull(tokenDO.getUserId());
     }
 
     public static SocialuniUserDo getMineUserAllowNull() {
@@ -91,7 +91,7 @@ public class SocialuniUserUtil {
             return null;
         }
         //返回user
-        SocialuniUserDo mineUser = SocialuniUserUtil.getUserNotNull(userId);
+        SocialuniUserDo mineUser = SocialuniUserUtil.getAndCheckUserNotNull(userId);
         if (mineUser.getStatus().equals(SocialuniUserStatus.violation)) {
             throw new SocialUserBannedException();
         }
@@ -111,7 +111,7 @@ public class SocialuniUserUtil {
             return null;
         }
         //返回user
-        SocialuniUserDo user = SocialuniUserUtil.getUserNotNull(tokenDO.getUserId());
+        SocialuniUserDo user = SocialuniUserUtil.getAndCheckUserNotNull(tokenDO.getUserId());
         return user;
     }
 
@@ -153,7 +153,7 @@ public class SocialuniUserUtil {
         return UserUtils.get(Integer.valueOf(userId));
     }*/
 
-    public static SocialuniUserDo getUserNotNull(Integer userId) {
+    public static SocialuniUserDo getAndCheckUserNotNull(Integer userId) {
         if (userId == null) {
             throw new SocialNullUserException();
         }
@@ -167,7 +167,7 @@ public class SocialuniUserUtil {
     public static List<SocialuniUserDo> getUsers(List<Integer> ids) {
         List<SocialuniUserDo> userDos = new ArrayList<>();
         for (Integer id : ids) {
-            SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getUserNotNull(id);
+            SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getAndCheckUserNotNull(id);
             userDos.add(socialuniUserDo);
         }
         return userDos;
@@ -175,7 +175,7 @@ public class SocialuniUserUtil {
 
     public static SocialuniUserDo getUserByUuid(String uid) {
         Integer id = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(uid);
-        return SocialuniUserUtil.getUserNotNull(id);
+        return SocialuniUserUtil.getAndCheckUserNotNull(id);
     }
 
     public static SocialuniUserDo getAllowNull(Integer userId) {

@@ -11,11 +11,12 @@ import javax.validation.constraints.NotNull;
  */
 @Data
 public class MessageAddVO {
-    @NotNull
-    private Integer chatId;
+    //接收者 id
+    @NotBlank
+    private String receiveId;
 
     @NotBlank
     private String content;
     //暂时未使用
-    private Integer receiveUserId;
+//    private Integer receiveUserId;
 }

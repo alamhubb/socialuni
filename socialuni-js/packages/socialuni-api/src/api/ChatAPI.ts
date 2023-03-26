@@ -9,8 +9,8 @@ export default class ChatAPI {
     }*/
 
 
-    static getChatsAPI() {
-        return request.post('chat/queryChats')
+    static queryChatListAPI() {
+        return request.get<SocialuniChatRO[]>('socialuni/chat/queryChatList')
     }
 
     static readChatAPI(chatId: string, messageIds: string[]) {

@@ -143,7 +143,7 @@ public class SocialChatROFactory {
         //根据类型区分不同nick和ava
         //如果群聊则直接使用
         if (!ChatType.systemChats.contains(chatRO.getType())) {
-            SocialuniUserDo receiveUser = SocialuniUserUtil.getUserNotNull(chatUserDO.getBeUserId());
+            SocialuniUserDo receiveUser = SocialuniUserUtil.getAndCheckUserNotNull(chatUserDO.getBeUserId());
 
             chatRO.setNickname(receiveUser.getNickname());
             chatRO.setAvatar(receiveUser.getAvatar());

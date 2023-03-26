@@ -41,7 +41,7 @@ public class UserIdentityAuditController {
         for (SocialUserIdentityAuthDO socialUserIdentityAuthDO : list) {
             SocialUserIdentityAuthImgDO socialUserIdentityAuthImgDO = socialUserIdentityAuthImgRepository.findFirstById(socialUserIdentityAuthDO.getUserIdentityImgId());
 
-            SocialuniUserDo userDO = SocialuniUserUtil.getUserNotNull(socialUserIdentityAuthDO.getUserId());
+            SocialuniUserDo userDO = SocialuniUserUtil.getAndCheckUserNotNull(socialUserIdentityAuthDO.getUserId());
 
             UserIdentityAuditRO userIdentityAuditRO = new UserIdentityAuditRO(socialUserIdentityAuthDO, socialUserIdentityAuthImgDO, userDO);
             list1.add(userIdentityAuditRO);

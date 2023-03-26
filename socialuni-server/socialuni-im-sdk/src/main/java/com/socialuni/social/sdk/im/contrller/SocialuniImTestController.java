@@ -93,7 +93,7 @@ public class SocialuniImTestController {
         for (Integer imNotHasId : imNotHasIds) {
             Integer finalI = i;
             CompletableFuture.supplyAsync(() -> {
-                SocialuniUserDo mineUser = SocialuniUserUtil.getUserNotNull(imNotHasId);
+                SocialuniUserDo mineUser = SocialuniUserUtil.getAndCheckUserNotNull(imNotHasId);
                 //数据库存在编码问题，统一名称消除编码问题
 //                mineUser.setNickname("名称被重置");
 

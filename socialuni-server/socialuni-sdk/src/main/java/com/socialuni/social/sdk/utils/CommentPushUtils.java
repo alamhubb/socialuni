@@ -41,7 +41,7 @@ public class CommentPushUtils {
         pushNotifyVO.setNickname(new PushValue(requestUser.getNickname()));
         pushNotifyVO.setDate(new PushValue(DateUtils.simpleTimeFormat.format(comment.getCreateTime())));
         pushNotifyVO.setBeContent(new PushValue(StringUtils.substring(replyComment.getContent(), 0, 20)));
-        pushNotifyVO.setBeNickname(new PushValue(SocialuniUserUtil.getUserNotNull(replyComment.getUserId()).getNickname()));
+        pushNotifyVO.setBeNickname(new PushValue(SocialuniUserUtil.getAndCheckUserNotNull(replyComment.getUserId()).getNickname()));
 
         HashMap<String, Object> data = new HashMap<>();
         PushMsgDTO pushMsgDTO = null;

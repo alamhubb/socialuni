@@ -35,6 +35,10 @@ public class SocialuniUnionIdFacede {
         return createUnionIdByContentType(SocialuniContentType.user);
     }
 
+    public static Integer createChatUnionId() {
+        return createUnionIdByContentType(SocialuniContentType.user);
+    }
+
     public static Integer createUserImgUnionId() {
         return createUnionIdByContentType(SocialuniContentType.userImg);
     }

@@ -1,7 +1,7 @@
 package com.socialuni.social.im.controller;
 
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.im.api.friend.SocialuniFriendAPI;
+import com.socialuni.social.im.api.feign.SocialuniFriendAPI;
 import com.socialuni.social.im.logic.service.SocialuniFriendService;
 import com.socialuni.social.im.api.model.QO.friend.SocialuniFriendAddQO;
 import com.socialuni.social.im.api.model.RO.SocialuniFriendApplyUserRO;

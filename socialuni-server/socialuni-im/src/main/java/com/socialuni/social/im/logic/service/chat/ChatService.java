@@ -42,6 +42,14 @@ public class ChatService {
     ChatQueryDomain chatQueryDomain;
 
 
+    //一个陌生用户，他允许陌生人消息。
+    //点击消息，就可以直接进入消息页面。
+    //这时候是否创建 chat，还是发了消息再创建。
+    //那这时候他会不会添加到你的 chat列表，
+    //那总得来说，进入这个页面的时候就应该创建了。
+    //那如果后来，他又开启了非好友禁止发送消息呢。所以还是应该发送消息的时候校验。
+
+
     public ResultRO<?> readChatMessages(ChatReadVO chatVO) {
         return null;
     }

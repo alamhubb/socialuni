@@ -54,7 +54,7 @@ public class ReportResultPushUtils {
         PushNotifyVO notifyVO = new PushNotifyVO();
         notifyVO.setNickname(new PushValue(ErrorMsg.serviceName));
         notifyVO.setBeContent(new PushValue(StringUtils.substring(baseModelDO.getContent(), 0, 20)));
-        notifyVO.setBeNickname(new PushValue(SocialuniUserUtil.getUserNotNull(baseModelDO.getUserId()).getNickname()));
+        notifyVO.setBeNickname(new PushValue(SocialuniUserUtil.getAndCheckUserNotNull(baseModelDO.getUserId()).getNickname()));
         notifyVO.setCause(new PushValue(reportCause));
         notifyVO.setResult(new PushValue(reportResult));
         notifyVO.setDate(new PushValue(DateUtils.simpleTimeFormat.format(ReportDO.getUpdateTime())));

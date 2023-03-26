@@ -35,7 +35,7 @@ public class SocialProviderLoginEntity {
         SocialuniUserDo mineUser;
         //如果已经注册过
         if (socialUserAccountDO != null) {
-            mineUser = SocialuniUserUtil.getUserNotNull(socialUserAccountDO.getUserId());
+            mineUser = SocialuniUserUtil.getAndCheckUserNotNull(socialUserAccountDO.getUserId());
         } else {
             mineUser = socialUserEntity.createUserAndDetail(loginQO);
         }

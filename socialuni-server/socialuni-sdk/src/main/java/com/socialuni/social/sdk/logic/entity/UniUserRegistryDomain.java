@@ -65,7 +65,7 @@ public class UniUserRegistryDomain {
             }
         } else {
             //已注册，更新token
-            mineUser = SocialuniUserUtil.getUserNotNull(uniContentUnionIdDO.getId());
+            mineUser = SocialuniUserUtil.getAndCheckUserNotNull(uniContentUnionIdDO.getId());
         }
         SocialTokenDO socialUserTokenDO = tokenManage.create(mineUser.getUnionId());
 

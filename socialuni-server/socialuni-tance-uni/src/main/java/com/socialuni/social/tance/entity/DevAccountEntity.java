@@ -75,7 +75,7 @@ public class DevAccountEntity {
             //如果没注册账号，则直接注册
             socialuniUserDo = socialUserPhoneEntity.createUserPhoneEntity(phoneNum);
         } else {
-            socialuniUserDo = SocialuniUserUtil.getUserNotNull(SocialUserPhoneDo.getUserId());
+            socialuniUserDo = SocialuniUserUtil.getAndCheckUserNotNull(SocialUserPhoneDo.getUserId());
         }
         devAccountModel.setUserId(socialuniUserDo.getUserId());
         devAccountModel = (DevAccountDo) devAccountRedis.saveDevAccount(devAccountModel);

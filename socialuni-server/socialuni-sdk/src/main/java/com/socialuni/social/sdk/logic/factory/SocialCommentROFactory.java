@@ -39,7 +39,7 @@ public class SocialCommentROFactory {
         socialCommentRO.setId(uid);
         socialCommentRO.setNo(comment.getNo());
 
-        SocialuniUserDo commentUser = SocialuniUserUtil.getUserNotNull(comment.getUserId());
+        SocialuniUserDo commentUser = SocialuniUserUtil.getAndCheckUserNotNull(comment.getUserId());
         SocialuniUserRO commentUserRO = SocialuniUserROFactory.getUserRO(commentUser, mineUser);
         socialCommentRO.setUser(commentUserRO);
 

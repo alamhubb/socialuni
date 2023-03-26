@@ -29,7 +29,7 @@ public class SocialuniDevAccountEntity {
             //            throw new SocialBusinessException("默认使用开发者账号绑定的手机号对应的清池账号进行测试，请登录清池注册后测试");
             mineUser = socialUserPhoneEntity.createUserPhoneEntity(phoneNum);
         } else {
-            mineUser = SocialuniUserUtil.getUserNotNull(SocialUserPhoneDo.getUserId());
+            mineUser = SocialuniUserUtil.getAndCheckUserNotNull(SocialUserPhoneDo.getUserId());
         }
         return mineUser;
     }

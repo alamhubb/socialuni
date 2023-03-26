@@ -99,6 +99,12 @@ public class ChatUserDO extends SocialuniUserContactBaseDO {
         this.unreadNum = 0;
     }
 
+    public ChatUserDO(Integer chatId, Integer userId,Integer beUserId) {
+        this.chatId = chatId;
+        this.setUserId(userId);
+        this.setBeUserId(beUserId);
+    }
+
     //私聊，比群聊多一个对方用户id,对方用户，方便获取对方的头像昵称，展示, 匹配模块有使用
     public ChatUserDO(SocialuniChatDO chat, Integer userId, Integer receiveUserId) {
         this(chat, userId);
