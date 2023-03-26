@@ -306,7 +306,7 @@ export default class ChatView extends Vue {
     if (chat.receiveUserId) {
       socialChatModule.setChatIdToMessagePage(chat.receiveUserId)
     } else {
-      socialChatModule.toMessagePageFromGroupChat(chat.groupId)
+      socialChatModule.setChatIdToMessagePage(chat.groupId)
     }
   }
 

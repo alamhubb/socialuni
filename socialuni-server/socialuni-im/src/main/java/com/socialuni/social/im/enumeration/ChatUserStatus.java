@@ -18,7 +18,7 @@ public class ChatUserStatus extends SocialuniCommonStatus {
     public static final String waitOpen = ConstStatus.waitOpen;
     //自己主动关闭会话，关闭会话，删除会话
     public static final String close = ConstStatus.close;
-    public static final String enable = ConstStatus.enable;
+//    public static final String enable = ConstStatus.enable;
     //自己被对方关闭，或者双方都主动关闭后，一方恢复，也为被关闭
     public static final String beClose = ConstStatus.beClose;
 

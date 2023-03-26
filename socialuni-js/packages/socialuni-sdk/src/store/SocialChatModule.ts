@@ -36,6 +36,8 @@ import {GroupJoinSource} from "../plugins/openIm/OpenImMessageType";
 import OpenImFriendApplyRO from "../model/friend/OpenImFriendApplyRO";
 import FriendApplyType from "socialuni-constant/constant/FriendApplyType";
 import UUIDUtil from "../utils/UUIDUtil";
+import AlertUtil from "../utils/AlertUtil";
+import MessageAddVO from "socialuni-base/src/model/message/MessageAddVO";
 
 
 const openIM = null
@@ -381,15 +383,26 @@ export default class SocialChatModule extends Pinia {
     }
 
     toMessagePageFromUserDetail(userId: string) {
-        PageUtil.toMessagePageByUserId(userId)
-        socialChatModule.scrollToMessagePageBottom()
+        // PageUtil.toMessagePageByUserId(userId)
+        // PageUtil.toMessagePageByUserId(userId)
+        // socialChatModule.scrollToMessagePageBottom()
     }
 
     toMessagePageFromGroupChat(groupId: string) {
-        PageUtil.toMessagePageByGroupId(groupId)
-        socialChatModule.scrollToMessagePageBottom()
+        // PageUtil.toMessagePageByGroupId(groupId)
+        // socialChatModule.scrollToMessagePageBottom()
     }
 
+    //从列表中进入
+    setChatIdToMessagePage(chatId: string) {
+        // this.setChatId(chatId)
+        // this.readChatAction(this.chat)
+        if (!chatId){
+            AlertUtil.error('缺少会话信息')
+        }
+        PageUtil.toMessagePageByChatId(chatId)
+        socialChatModule.scrollToMessagePageBottom()
+    }
 
     /*get chatIndex(): number {
         return this.chats.findIndex(item => item.id === this.chatId)
@@ -407,13 +420,7 @@ export default class SocialChatModule extends Pinia {
     //从详情进入，查看列表中是否有与此人的chat？如何查看，
     //列表中进入，需要调用后台，更新时间。
 
-    //从列表中进入
-    setChatIdToMessagePage(userId: string) {
-        // this.setChatId(chatId)
-        // this.readChatAction(this.chat)
-        PageUtil.toMessagePageByUserId(userId)
-        this.scrollToMessagePageBottom()
-    }
+
 
     /*setChatId(chatId: string) {
         this.chatId = chatId
@@ -672,16 +679,16 @@ export default class SocialChatModule extends Pinia {
         // this.chat.lastContent = msg.content
         // 滚屏到最后面
         // 不能监控变化滚动，有时候是往前面插入
-        const {data} = await (await socialChatModule.openIm())[msg.action](msg.contentData);
+        /*const {data} = await (await socialChatModule.openIm())[msg.action](msg.contentData);
         const params = {
             recvID: this.chat.receiveUserId,
             groupID: this.chat.groupId,
             message: data,
-        };
+        };*/
         console.log('-------params-------', params);
 
-        // const msgAdd: MessageAddVO = new MessageAddVO(chatId, content)
-        // return request.post <T>('message/sendMsg', msgAdd)
+        const msgAdd: MessageAddVO = new MessageAddVO(chatId, content)
+        return request.post <T>('message/sendMsg', msgAdd)
         //
         let actionMethod: Function = null;
         switch (msg.action) {
@@ -785,7 +792,7 @@ export default class SocialChatModule extends Pinia {
             } finally {
                 UniUtil.hideLoading()
             }
-            socialChatModule.toMessagePageFromGroupChat(circle.groupChatId)
+            socialChatModule.setChatIdToMessagePage(circle.groupChatId)
         } else {
             UniUtil.showLoading('加载中')
             console.log(circle)
@@ -823,7 +830,7 @@ export default class SocialChatModule extends Pinia {
                         verification: 2,
                     }
                 ;(await this.openIm()).setGroupVerification(optionsVerification)
-                socialChatModule.toMessagePageFromGroupChat(cRes.data)
+                socialChatModule.setChatIdToMessagePage(cRes.data)
             } finally {
                 UniUtil.hideLoading()
             }

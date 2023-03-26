@@ -35,7 +35,7 @@ public class MessageReceiveDO implements Serializable {
     //是否自己的,如果有接收人id，应该指定是为自己的吧
     private Boolean isMine;
 
-//    @ManyToOne
+    //    @ManyToOne
 //    private MessageDO message;
     private Integer messageId;
 
@@ -58,11 +58,11 @@ public class MessageReceiveDO implements Serializable {
     public MessageReceiveDO() {
     }
 
-    public MessageReceiveDO(Integer chatUserId, Integer userId, Integer receiveUserId, Integer messageId) {
+    public MessageReceiveDO(ChatUserDO chatUserDO, Integer messageId) {
         Date curDate = new Date();
-        this.chatUserId = chatUserId;
-        this.userId = userId;
-        this.receiveUserId = receiveUserId;
+        this.chatUserId = chatUserDO.getId();
+        this.userId = chatUserDO.getUserId();
+        this.receiveUserId = chatUserDO.getBeUserId();
         this.messageId = messageId;
         this.status = SocialuniCommonStatus.init;
         //接受消息的人看的

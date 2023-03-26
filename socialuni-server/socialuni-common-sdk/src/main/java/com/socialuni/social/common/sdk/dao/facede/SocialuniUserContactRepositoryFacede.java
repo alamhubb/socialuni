@@ -71,6 +71,26 @@ public abstract class SocialuniUserContactRepositoryFacede extends SocialuniUser
         return entityManager.createQuery(criteriaQuery).getSingleResult();
     }
 
+
+    public static <T extends SocialuniUserContactBaseDO> T findByUserIdAndBeUserIdOrderByIdDesc(Integer userId, Integer beUserId, Class<T> tClass) {
+        EntityManager entityManager = getEntityManager();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
+        Root<T> userInfo = criteriaQuery.from(tClass);
+
+        Predicate userIdPredicate = criteriaBuilder.equal(userInfo.get("userId"), userId);
+        Predicate beUserIdPredicate = criteriaBuilder.equal(userInfo.get("beUserId"), beUserId);
+        criteriaQuery.where(userIdPredicate, beUserIdPredicate);
+
+        criteriaQuery.orderBy(criteriaBuilder.desc(userInfo.get("id")));
+
+        List<T> list = entityManager.createQuery(criteriaQuery).setFirstResult(0).setMaxResults(1).getResultList();
+
+        if (list.size() > 0) {
+            return list.get(0);
+        }
+        return null;
+    }
     public static <T extends SocialuniUserContactBaseDO> T findByUserIdAndBeUserIdAndNotStatus(Integer userId, Integer beUserId, String status, Class<T> tClass) {
         EntityManager entityManager = getEntityManager();
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();

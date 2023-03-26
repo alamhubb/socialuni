@@ -1,4 +1,5 @@
 export default class MessageViewParams {
-    userId?: string
-    groupId?: string
+    // userId?: string
+    chatId: string
+    // groupId?: string
 }

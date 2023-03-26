@@ -16,6 +16,7 @@ import com.socialuni.social.im.dao.MessageReceiveRepository;
 import com.socialuni.social.im.dao.MessageRepository;
 import com.socialuni.social.im.api.model.RO.ChatRO;
 import com.socialuni.social.im.api.model.RO.SocialMessageRO;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import lombok.Data;
@@ -145,9 +146,11 @@ public class SocialChatROFactory {
         if (!ChatType.systemChats.contains(chatRO.getType())) {
             SocialuniUserDo receiveUser = SocialuniUserUtil.getAndCheckUserNotNull(chatUserDO.getBeUserId());
 
+            String beUserId  = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(receiveUser.getUserId());
+
             chatRO.setNickname(receiveUser.getNickname());
             chatRO.setAvatar(receiveUser.getAvatar());
-            chatRO.setReceiveUserId(receiveUser.getUnionId());
+            chatRO.setReceiveUserId(beUserId);
             chatRO.setUnreadNum(chatUserDO.getUnreadNum());
 //            this.vipFlag = receiveUser.getVipFlag();
             //不为系统群聊才有记录了未读数量，才有未读数量

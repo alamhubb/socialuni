@@ -1,6 +1,7 @@
 package com.socialuni.social.im.controller;
 
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
@@ -9,9 +10,9 @@ import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepository
 import com.socialuni.social.im.api.model.RO.SocialMessageRO;
 import com.socialuni.social.im.dao.ChatRepository;
 import com.socialuni.social.im.dao.ChatUserRepository;
-import com.socialuni.social.im.dao.DO.ChatSocialuniUserDo;
 import com.socialuni.social.im.dao.DO.ChatUserDO;
 import com.socialuni.social.im.dao.DO.SocialuniChatDO;
+import com.socialuni.social.im.dao.DO.SocialuniFriendApplyRecordDO;
 import com.socialuni.social.im.dao.DO.SocialuniUserChatConfigDO;
 import com.socialuni.social.im.dao.DO.message.MessageDO;
 import com.socialuni.social.im.dao.DO.message.MessageReceiveDO;
@@ -19,9 +20,9 @@ import com.socialuni.social.im.dao.MessageReceiveRepository;
 import com.socialuni.social.im.dao.MessageRepository;
 import com.socialuni.social.im.enumeration.ChatType;
 import com.socialuni.social.im.enumeration.ChatUserStatus;
+import com.socialuni.social.im.enumeration.SocialuniAddFriendStatus;
 import com.socialuni.social.im.logic.entity.SocialuniChatUserEntity;
 import com.socialuni.social.im.logic.foctory.SocialMessageROFactory;
-import com.socialuni.social.im.logic.manage.SocialuniChatDOFactory;
 import com.socialuni.social.im.logic.manage.SocialuniUserChatConfigDOFactory;
 import com.socialuni.social.im.model.message.message.MessageAddVO;
 import com.socialuni.social.report.sdk.logic.service.IllegalWordService;
@@ -38,6 +39,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -47,37 +49,16 @@ import java.util.List;
  */
 @Service
 public class MessageService {
-    private final Logger log = LoggerFactory.getLogger(getClass());
-
-    @Resource
-    private UserRepository userRepository;
     @Resource
     private ChatRepository chatRepository;
     @Resource
     private MessageRepository messageRepository;
     @Resource
-    private NotifyService notifyService;
-    @Resource
-    private NotifyRepository notifyRepository;
-    @Resource
-    private StringRedisTemplate stringRedisTemplate;
-    @Resource
     private ChatUserRepository chatUserRepository;
     @Resource
     private MessageReceiveRepository messageReceiveRepository;
-    @Resource
-    private ReportService reportService;
-    @Resource
-    private ReportDomain reportDomain;
-    @Resource
-    private ChatUserVerify chatUserVerify;
-    @Resource
-    private IllegalWordService illegalWordService;
-    @Resource
-    private ModelContentCheck modelContentCheck;
 
-
-    public ResultRO<SocialMessageRO> sendMsg(MessageAddVO msgAddVO) throws IOException {
+    public ResultRO<SocialMessageRO> sendMsg(MessageAddVO msgAddVO) {
         String receiveIdUid = msgAddVO.getReceiveId();
         String msgContent = msgAddVO.getContent();
         if (StringUtils.isEmpty(msgContent)) {
@@ -91,7 +72,8 @@ public class MessageService {
         SocialuniChatDO chat = SocialuniRepositoryFacade.findById(Integer.valueOf(receiveIdUid), SocialuniChatDO.class);
 
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
-        ChatUserDO chatUserDO;
+        ChatUserDO chatUserDO = null;
+        Integer beUserId = null;
 
         //创建 chatUser 的逻辑，点击进入页面，会话页加一条
         //发送消息，还有添加好友成功
@@ -99,15 +81,15 @@ public class MessageService {
         //为私聊相关校验
         if (chat == null) {
             //后端区分这个值是群聊还是私聊。
-            Integer receiveId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(receiveIdUid);
+            beUserId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(receiveIdUid);
             //校验用户是否存在
-            SocialuniUserUtil.getAndCheckUserNotNull(receiveId);
+            SocialuniUserUtil.getAndCheckUserNotNull(beUserId);
 
             //如果用户存在查看会话
-            chatUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(mineUser.getUserId(), receiveId, ChatUserDO.class);
+            chatUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(mineUser.getUserId(), beUserId, ChatUserDO.class);
             if (chatUserDO == null) {
                 //会话不存在则创建
-                chatUserDO = SocialuniChatUserEntity.createChatUserBySingleSendMsg(mineUser.getUserId(), receiveId);
+                chatUserDO = SocialuniChatUserEntity.getOrCreateChatUserBySingleSendMsg(mineUser.getUserId(), beUserId);
             }
             //还得看自己的，你是否把对方拉黑了
             //
@@ -117,15 +99,22 @@ public class MessageService {
             //对方是否把你拉黑了
             //对方不接收陌生人消息的情况下，你是不是对方的好友
             //判断对方是否接收陌生人消息，判断对方是否把你拉黑了。如果对方没有，则可以发送，不需要查看其他了把
-            ChatUserDO chatBeUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(receiveId, mineUser.getUserId(), ChatUserDO.class);
+            ChatUserDO chatBeUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(beUserId, mineUser.getUserId(), ChatUserDO.class);
             //则代表对方没把你拉黑
             if (chatBeUserDO != null) {
                 if (chatBeUserDO.getBlacklist()) {
                     throw new SocialBusinessException("您已被对方拉黑，无法发送消息");
                 }
             }
-            SocialuniUserChatConfigDO socialuniUserChatConfigDO = SocialuniUserChatConfigDOFactory.getOrCreateUserChatConfigDO(receiveId);
 
+            //查询对方是否你俩的 chatUser状态，对方对你的。 你就当对方不允许，但是你可以进入chat 页面，但是不能发送消息。
+
+            //进入就创建,但是 chatUser 状态可以为其他的。
+
+            //如果你给对方发送了消息，但是你不接收陌生人消息怎么办。
+            //只看会话吧。 如果你开起陌生人，然后给对方发了个消息。然后关闭了陌生人。这时候对方还能回你消息不。需要做到能回，现在从哪里控制
+            //那就是已开启的会话，不受你关闭了陌生人影响？也不行。
+            //那就是你对对方的没开启，那就还是要看对方是否接受陌生人消息，先这样做吧。
 
             //好友和拉黑功能怎么做，
 
@@ -136,14 +125,29 @@ public class MessageService {
             // 这俩级联？
 
 
-//            if (chatUserDO.)
-
-
-//                chat = SocialuniRepositoryFacade.findById(chatUserDO.getChatId(), SocialuniChatDO.class);
+            //校验 chat 中是否包含了用户。 只考虑正向逻辑。
+            //你给用户发送消息，是否考虑简单考虑，插头 User 必须创建成功才能发送消息。
+            SocialuniUserChatConfigDO socialuniUserChatConfigDO = SocialuniUserChatConfigDOFactory.getOrCreateUserChatConfigDO(beUserId);
+            //如果对方不接收陌生人消息
+            if (!socialuniUserChatConfigDO.getAllowStrangerMsg()) {
+                SocialuniFriendApplyRecordDO socialuniFriendApplyRecordDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserIdOrderByIdDesc(beUserId, mineUser.getUserId(), SocialuniFriendApplyRecordDO.class);
+                //没有添加，或者为初始
+                if (socialuniFriendApplyRecordDO == null || socialuniFriendApplyRecordDO.getStatus().equals(SocialuniAddFriendStatus.init)) {
+                    throw new SocialBusinessException("对方不接受陌生人消息，无法发送消息");
+                } else if (socialuniFriendApplyRecordDO.getStatus().equals(SocialuniAddFriendStatus.delete)) {
+                    throw new SocialBusinessException("您不是对方的好友，无法发送消息");
+                }
+                SocialuniFriendApplyRecordDO socialuniUserFriendApplyRecordDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserIdOrderByIdDesc(mineUser.getUserId(), beUserId, SocialuniFriendApplyRecordDO.class);
+                if (socialuniUserFriendApplyRecordDO == null) {
+                    throw new SocialSystemException("对方有了好友数据，则不应该存在己方不为好友的情况");
+                } else if (socialuniUserFriendApplyRecordDO.getStatus().equals(SocialuniAddFriendStatus.delete)) {
+                    throw new SocialBusinessException("对方不是您的好友，无法发送消息");
+                }
+            }
+            chat = SocialuniRepositoryFacade.findById(chatUserDO.getChatId(), SocialuniChatDO.class);
             //如果是官方通知和
             //如果为官方群聊，则所有人都可以发送内容
             //查询用户是否有权限往chat中发送内容
-
 
         }
         //构建消息
@@ -155,23 +159,13 @@ public class MessageService {
         chatRepository.save(chat);
 
 
-        //查询对方是否你俩的 chatUser状态，对方对你的。 你就当对方不允许，但是你可以进入chat 页面，但是不能发送消息。
-
-        //进入就创建,但是 chatUser 状态可以为其他的。
-
-        //如果你给对方发送了消息，但是你不接收陌生人消息怎么办。
-        //只看会话吧。 如果你开起陌生人，然后给对方发了个消息。然后关闭了陌生人。这时候对方还能回你消息不。需要做到能回，现在从哪里控制
-        //那就是已开启的会话，不受你关闭了陌生人影响？也不行。
-        //那就是你对对方的没开启，那就还是要看对方是否接受陌生人消息，先这样做吧。
-
-
-        //校验 chat 中是否包含了用户。 只考虑正向逻辑。
-        //你给用户发送消息，是否考虑简单考虑，插头 User 必须创建成功才能发送消息。
         if (chat.getType().equals(ChatType.system_group)) {
             SocialMessageRO messageVO = SocialMessageROFactory.getMessageRO(message, mineUser.getUserId());
             return ResultRO.success(messageVO);
         } else {
+            ChatUserDO chatBeUserDO = SocialuniChatUserEntity.getOrCreateChatUserBySingleReceiveMsg(chat.getId(), beUserId, mineUser.getUserId());
 
+            List<ChatUserDO> chatSocialuniUserDoS = Arrays.asList(chatUserDO, chatBeUserDO);
 
             //如果是官方通知和
             //如果为官方群聊，则所有人都可以发送内容
@@ -190,19 +184,19 @@ public class MessageService {
 
             MessageReceiveDO mineMessageUser = new MessageReceiveDO();
             //发送消息
-            for (ChatSocialuniUserDo chatSocialuniUserDo : chatSocialuniUserDoS) {
+            for (ChatUserDO chatSocialuniUserDo : chatSocialuniUserDoS) {
 //                chatSocialuniUserDo.setLastContent(message.getContent());
                 chatSocialuniUserDo.setUpdateTime(curDate);
                 //如果为匹配chat，且为待匹配状态
-                if (ChatType.match.equals(chat.getType()) && CommonStatus.waitMatch.equals(chat.getMatchStatus())) {
+                /*if (ChatType.match.equals(chat.getType()) && CommonStatus.waitMatch.equals(chat.getMatchStatus())) {
                     //则将用户的chat改为匹配成功
                     chatSocialuniUserDo.setStatus(ChatUserStatus.enable);
-                }
+                }*/
                 //获取当起chatUser的userId
                 Integer chatUserId = chatSocialuniUserDo.getUserId();
-                MessageReceiveDO messageReceiveDO = new MessageReceiveDO(chatSocialuniUserDo, user.getId(), chatUserId, message);
+                MessageReceiveDO messageReceiveDO = new MessageReceiveDO(chatSocialuniUserDo, message.getId());
                 //自己的话不发送通知，自己的话也要构建消息，要不看不见，因为读是读这个表
-                if (chatUserId.equals(user.getId())) {
+                if (chatUserId.equals(mineUser.getUserId())) {
                     messageReceiveDO.setIsMine(true);
                     messageReceiveDO.setIsRead(true);
                     mineMessageUser = messageReceiveRepository.save(messageReceiveDO);
@@ -212,27 +206,16 @@ public class MessageService {
                     //接收方，更改前端显示为显示
                     chatSocialuniUserDo.checkFrontShowAndSetTrue();
                     MessageReceiveDO messageReceiveDO1 = messageReceiveRepository.save(messageReceiveDO);
-                    NotifyDO notifyDO = notifyRepository.save(new NotifyDO(messageReceiveDO1));
-                    notifies.add(notifyDO);
+//                    NotifyDO notifyDO = notifyRepository.save(new NotifyDO(messageReceiveDO1));
+//                    notifies.add(notifyDO);
                 }
             }
             chatUserRepository.saveAll(chatSocialuniUserDoS);
-            notifyRepository.saveAll(notifies);
+//            notifyRepository.saveAll(notifies);
             //保存message
-            notifyService.sendNotifies(notifies, user);
+//            notifyService.sendNotifies(notifies, user);
             //只需要返回自己的
-            return new ResultRO<>(new MessageVO(mineMessageUser));
-        }
-
-
-        //生成消息，先不管群聊只管私聊，私聊会有receiveUser，用来判断已读未读
-        //只管群聊
-        //查看chat的类型
-        if (chat.getType().equals(ChatType.system_group)) {
-
-            //不为官方群聊
-        } else {
-
+            return new ResultRO<>(SocialMessageROFactory.getMessageRO(mineMessageUser));
         }
     }
 

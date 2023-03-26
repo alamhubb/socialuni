@@ -1,5 +1,5 @@
 <template>
-  <view v-if="chat" class="pb-50 h100p bg-default">
+  <view class="pb-50 h100p bg-default">
     <q-navbar show-back :title="title">
       <div class="row-end-center flex-1">
         <q-icon icon="list-dot" size="20" @click="openMoreMenu"></q-icon>
@@ -22,20 +22,21 @@
                  :scroll-top="scrollTop"
     >
       <!--    <view class="cu-chat">-->
-      <view v-if="chat.status === waitOpenStatus||chat.status === closeStatus" class="w100p h100p col-row-center">
+      <view class="w100p h100p col-row-center">
+        <!--      <view v-if="chat.status === waitOpenStatus||chat.status === closeStatus" class="w100p h100p col-row-center">-->
         <view class="uni-tip  mt-80px">
-          <view class="uni-tip-content text-bold">
-            <template v-if="chat.needPayOpen">
-              会话未开启，为避免用户被频繁恶意骚扰，只能给关注您的和给您发过消息的用户直接发送消息
-              <!--              ，给其他用户发送消息，需要支付10贝壳开启对话-->
-            </template>
-            <view v-else-if="chat.status === closeStatus" class="row-center">
-              您已关闭会话，发送消息即可再次开启对话
-            </view>
-            <view v-else class="row-center">
-              对方关注了您，发送消息即可开启对话
-            </view>
-          </view>
+          <!--          <view class="uni-tip-content text-bold">
+                      <template v-if="chat.needPayOpen">
+                        会话未开启，为避免用户被频繁恶意骚扰，只能给关注您的和给您发过消息的用户直接发送消息
+                        &lt;!&ndash;              ，给其他用户发送消息，需要支付10贝壳开启对话&ndash;&gt;
+                      </template>
+                      <view v-else-if="chat.status === closeStatus" class="row-center">
+                        您已关闭会话，发送消息即可再次开启对话
+                      </view>
+                      <view v-else class="row-center">
+                        对方关注了您，发送消息即可开启对话
+                      </view>
+                    </view>-->
 
           <!--<view v-if="chat.needPayOpen" class="uni-tip-group-button">
             <button class="uni-tip-button w40r" type="default" :plain="true" @click="goBack">
@@ -47,12 +48,12 @@
           </view>-->
         </view>
       </view>
-      <view v-else class="w100p row-center" :class="showMsgHint?'pt-70px':'pt-10px'">
-        <view v-if="chat.loadMore === noMore || messages.length===0" class="py-xs px bg-white bd-radius mt-sm">
-          会话已开启
-        </view>
-        <!--        <uni-load-more v-else :status="chat.loadMore"></uni-load-more>-->
-      </view>
+      <!--      <view v-else class="w100p row-center" :class="showMsgHint?'pt-70px':'pt-10px'">
+              <view v-if="chat.loadMore === noMore || messages.length===0" class="py-xs px bg-white bd-radius mt-sm">
+                会话已开启
+              </view>
+              &lt;!&ndash;        <uni-load-more v-else :status="chat.loadMore"></uni-load-more>&ndash;&gt;
+            </view>-->
 
       <div v-for="msg in messages" :id="'m'+msg.id" :key="msg.id">
         <div v-if="msg.type === systemMsgType">
@@ -284,7 +285,7 @@ export default class MessageView extends Vue {
     deleteReasonDialog: any;
   }
 
-  created(){
+  created() {
     //TODO 同一会话时，这里要改成onRead，不然需要刷新页面才会触发已读的标志。
     onLoad((params: MessageViewParams) => {
       //不这么写refs是空
@@ -300,13 +301,16 @@ export default class MessageView extends Vue {
     //  issue: I6EZ82
     socialChatModule.chat = null;
     //
-    if (params.userId) {
-      socialChatModule.setCurChatByUserId(params.userId)
-      this.userId = params.userId;
-    } else if (params.groupId) {
-      socialChatModule.setCurChatByGroupId(params.groupId)
-      this.groupId = params.groupId;
+    if (!params.chatId) {
+      AlertUtil.error('缺少会话信息')
     }
+    this.chatId = params.chatId
+    // socialChatModule.setCurChatByUserId(params.userId)
+    // this.userId = params.userId;
+    /*else if (params.groupId) {
+      // socialChatModule.setCurChatByGroupId(params.groupId)
+      // this.groupId = params.groupId;
+    }*/
   }
 
 
@@ -349,6 +353,7 @@ export default class MessageView extends Vue {
   upperThreshold = 300
   userId: string = null
   groupId: string = null
+  chatId: string = null
   title: string = '聊天'
 
   onUnload() {
