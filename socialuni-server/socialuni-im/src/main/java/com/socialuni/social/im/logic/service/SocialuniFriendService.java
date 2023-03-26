@@ -20,6 +20,7 @@ import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,12 +34,13 @@ public class SocialuniFriendService {
     SocialuniOpenChatDomain socialuniOpenChatDomain;
 
     //添加朋友
+    @Transactional
     public ResultRO<Void> addFriend(SocialuniFriendAddQO friendAddQO) {
         SocialuniUserCheck.checkUserBindPhoneNumAndStatusNoEnable();
 
         SocialuniTextContentUtil.checkTextHasViolateWords(friendAddQO.getApplyMsg());
 
-        if (!SocialuniAddFriendType.values.contains(friendAddQO.getApplyType())) {
+        if (!SocialuniAddFriendType.values.contains(friendAddQO.getReqType())) {
             throw new SocialBusinessException("错误的申请类型");
         }
 
@@ -62,7 +64,7 @@ public class SocialuniFriendService {
 
 
         //首先生成一条记录
-        SocialuniFriendApplyRecordDO socialuniFriendApplyRecordDO = new SocialuniFriendApplyRecordDO(mineUserId, beUserId, friendAddQO.getApplyMsg(), friendAddQO.getApplyType());
+        SocialuniFriendApplyRecordDO socialuniFriendApplyRecordDO = new SocialuniFriendApplyRecordDO(mineUserId, beUserId, friendAddQO.getApplyMsg(), friendAddQO.getReqType());
 
         //发起申请成功
         socialuniFriendApplyRecordDO = SocialuniUserContactRepositoryFacede.save(socialuniFriendApplyRecordDO);

@@ -95,6 +95,7 @@ import SocialuniCommonStatus from "socialuni-constant/constant/status/SocialuniC
 import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
 import FriendAddQO from "socialuni-im-api/src/model/QO/firend/FriendAddQO";
 import PageUtil from "socialuni-sdk/src/utils/PageUtil";
+import SocialuniAddFriendType from 'socialuni-im-api/constant/SocialuniAddFriendType'
 
 @Options({components: {QTabs}})
 export default class ChatFriendPage extends Vue {
@@ -267,7 +268,7 @@ export default class ChatFriendPage extends Vue {
    * @param item
    */
   async acceptFriendApplication(item: SocialuniFriendApplyUserRO) {
-    await SocialuniFriendAPI.addFriend(new FriendAddQO(item.id, '接受您的好友请求'))
+    await SocialuniFriendAPI.addFriend(new FriendAddQO(item.id, '接受您的好友请求',SocialuniAddFriendType.accept))
     ToastUtil.toastLong('添加好友成功')
   }
 
