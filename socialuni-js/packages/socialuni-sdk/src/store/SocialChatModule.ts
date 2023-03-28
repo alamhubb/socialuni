@@ -38,6 +38,8 @@ import FriendApplyType from "socialuni-constant/constant/FriendApplyType";
 import UUIDUtil from "../utils/UUIDUtil";
 import AlertUtil from "../utils/AlertUtil";
 import MessageAddVO from "socialuni-base/src/model/message/MessageAddVO";
+import request from "socialuni-api/src/request/request";
+import socialuniImRequest from "socialuni-im-api/src/api/socialuniImRequest";
 
 
 const openIM = null
@@ -49,6 +51,7 @@ export default class SocialChatModule extends Pinia {
     //0.1.2
     //3个状态，加载中，成功，未加载
     openImIsLogin = 0
+    chatId = ''
     private userImToken: string = SocialuniImUserTokenUtil.get() || null
     recvFriendApplicationList: OpenImFriendApplyRO[] = []
 
@@ -361,7 +364,8 @@ export default class SocialChatModule extends Pinia {
 
 
     async setChat(openImChat: SocialuniChatRO) {
-        const options = {
+        this.chat = openImChat
+        /*const options = {
                 conversationID: openImChat.id,
                 startClientMsgID: "",
                 count: 100,
@@ -379,7 +383,7 @@ export default class SocialChatModule extends Pinia {
             openImChat.messages = msgs.map(item => new MessageVO(null, item))
             this.chat = openImChat
             socialChatModule.scrollToMessagePageBottom()
-        })
+        })*/
     }
 
     toMessagePageFromUserDetail(userId: string) {
@@ -394,13 +398,17 @@ export default class SocialChatModule extends Pinia {
     }
 
     //从列表中进入
-    setChatIdToMessagePage(chatId: string) {
+    setChatIdToMessagePage(receiveId: string, chatName: string) {
         // this.setChatId(chatId)
         // this.readChatAction(this.chat)
-        if (!chatId){
+        if (!receiveId) {
             AlertUtil.error('缺少会话信息')
         }
-        PageUtil.toMessagePageByChatId(chatId)
+        /*const chat = new SocialuniChatRO()
+        chat.receiveId = receiveId
+        chat.nickname = chatName
+        this.setChat(chat)*/
+        PageUtil.toMessagePageByChatId(receiveId, chatName)
         socialChatModule.scrollToMessagePageBottom()
     }
 
@@ -419,7 +427,6 @@ export default class SocialChatModule extends Pinia {
 
     //从详情进入，查看列表中是否有与此人的chat？如何查看，
     //列表中进入，需要调用后台，更新时间。
-
 
 
     /*setChatId(chatId: string) {
@@ -685,12 +692,12 @@ export default class SocialChatModule extends Pinia {
             groupID: this.chat.groupId,
             message: data,
         };*/
-        console.log('-------params-------', params);
+        // console.log('-------params-------', params);
 
-        const msgAdd: MessageAddVO = new MessageAddVO(chatId, content)
-        return request.post <T>('message/sendMsg', msgAdd)
+        const msgAdd: MessageAddVO = new MessageAddVO(this.chat.receiveId, msg.content)
+        return socialuniImRequest.post('message/sendMsg', msgAdd)
         //
-        let actionMethod: Function = null;
+        /*let actionMethod: Function = null;
         switch (msg.action) {
             case 'createImageMessage':
             case 'createSoundMessage':
@@ -713,10 +720,10 @@ export default class SocialChatModule extends Pinia {
             this.messages.splice(index, 1)
         }).finally(() => {
             console.log(666)
-        })
+        })*/
         // socialChatModule.refreshMessages()
 
-        PlatformUtils.requestSubscribeChat()
+        // PlatformUtils.requestSubscribeChat()
     }
 
 

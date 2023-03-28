@@ -23,6 +23,7 @@ export default class SocialuniChatRO {
     public vipFlag: boolean = null
     public needPayOpen: boolean = null
     public receiveUserId: string = null
+    public receiveId: string = null
     public loadMore: string = null
 
     constructor(openImChat?: OpenImChatRO) {

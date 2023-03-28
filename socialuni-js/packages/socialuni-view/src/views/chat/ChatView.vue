@@ -4,7 +4,7 @@
       <div class="row-end-center flex-1 pl">
         <q-search class="w100p mx-sm bg-white">
           <q-icon class="mx-xs text-gray" icon="search" size="16"></q-icon>
-          <input class="flex-1" v-model="searchContent" :adjust-position="false" type="text" />
+          <input class="flex-1" v-model="searchContent" :adjust-position="false" type="text"/>
           <q-icon v-if="searchContent" class="mr text-gray row-all-center" icon="close" size="16"
                   @click="clearSearchContent"
           ></q-icon>
@@ -54,7 +54,7 @@
       <!--      {{ chats }}-->
       <view v-for="chat in chatList" :key="chat.id" class="cu-item" @click="toMessagePage(chat)"
             @longpress="showBottomMenuClick(chat.id)">
-        <image class="cu-avatar radius lg" :src="chat.avatar" />
+        <image class="cu-avatar radius lg" :src="chat.avatar"/>
         <view class="content h45 col-between">
           <view>
             <view class="text-cut text-df text-black" :class="{'color-red':chat.vipFlag}">{{
@@ -103,15 +103,15 @@
 <script lang="ts">
 import ChatType from 'socialuni-constant/constant/ChatType'
 import SocialuniCommonStatus from 'socialuni-constant/constant/status/SocialuniCommonStatus'
-import { Options, Vue } from 'vue-property-decorator'
+import {Options, Vue} from 'vue-property-decorator'
 import Constants from 'socialuni-constant/constant/Constant'
 import ChatAPI from 'socialuni-api/src/api/ChatAPI'
-import { socialChatModule, socialUserModule } from "socialuni-sdk/src/store/store"
+import {socialChatModule, socialUserModule} from "socialuni-sdk/src/store/store"
 import DateUtil from "socialuni-sdk/src/utils/DateUtil"
 import UniUtil from "socialuni-sdk/src/utils/UniUtil"
 import AlertUtil from "socialuni-sdk/src/utils/AlertUtil"
 import ToastUtil from "socialuni-sdk/src/utils/ToastUtil"
-import { onLoad, onShow } from "@dcloudio/uni-app"
+import {onLoad, onShow} from "@dcloudio/uni-app"
 import PageUtil from "socialuni-sdk/src/utils/PageUtil"
 import SocialUserContentRO from "socialuni-api/src/model/social/SocialUserContentRO"
 import QNavbar from "socialuni-view/src/components/QNavbar/QNavbar.vue"
@@ -121,7 +121,7 @@ import QInput from "../../components/QInput/QInput.vue"
 import QSearch from "../../components/QSearch/QSearch.vue"
 
 @Options({
-  components: { QSearch, QInput, QIcon, QNavbar }
+  components: {QSearch, QInput, QIcon, QNavbar}
 })
 export default class ChatView extends Vue {
   users: SocialUserContentRO[] = []
@@ -178,7 +178,7 @@ export default class ChatView extends Vue {
     }*/
   }
 
-  async queryChatList(){
+  async queryChatList() {
     const res = await ChatAPI.queryChatListAPI()
     this.chatList = res.data
   }
@@ -225,7 +225,7 @@ export default class ChatView extends Vue {
     let toUserId = '5c8d2cb04a774a7f8a4817996e380f29'
     let fromUserID = '768091f75a8c46688baa3c1137161c5f';
 
-    (await socialChatModule.openIm()).clearC2CHistoryMessageFromLocalAndSvr(fromUserID).then(({ data }) => {
+    (await socialChatModule.openIm()).clearC2CHistoryMessageFromLocalAndSvr(fromUserID).then(({data}) => {
       console.log('  clearC2CHistoryMessageFromLocalAndSvr  ', toUserId, data)
     }).catch(err => {
     })
@@ -233,7 +233,7 @@ export default class ChatView extends Vue {
 
   async frontDeleteChat() {
     AlertUtil.confirm('是否确定从列表中删除会话，可从私信处再次找回').then(async () => {
-      (await socialChatModule.openIm()).deleteConversationFromLocalAndSvr(this.chatId).then(({ data }) => {
+      (await socialChatModule.openIm()).deleteConversationFromLocalAndSvr(this.chatId).then(({data}) => {
         socialChatModule.deleteChatAction(this.chatId)
       }).catch(err => {
       })
@@ -304,9 +304,9 @@ export default class ChatView extends Vue {
   toMessagePage(chat: SocialuniChatRO) {
     //需要先清除，再跳转页面
     if (chat.receiveUserId) {
-      socialChatModule.setChatIdToMessagePage(chat.receiveUserId)
+      socialChatModule.setChatIdToMessagePage(chat.receiveUserId, chat.nickname)
     } else {
-      socialChatModule.setChatIdToMessagePage(chat.groupId)
+      socialChatModule.setChatIdToMessagePage(chat.id, chat.nickname)
     }
   }
 

@@ -1,5 +1,9 @@
 package com.socialuni.social.im.controller;
 
+import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.im.api.feign.SocialuniMessageAPI;
+import com.socialuni.social.im.api.model.QO.message.MessageAddVO;
+import com.socialuni.social.im.api.model.RO.SocialMessageRO;
 import com.socialuni.social.im.dao.ChatRepository;
 import com.socialuni.social.im.dao.MessageReceiveRepository;
 import com.socialuni.social.im.dao.MessageRepository;
@@ -23,7 +27,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("message")
-public class SocialuniMessageController {
+public class SocialuniMessageController implements SocialuniMessageAPI {
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     @Resource
@@ -36,7 +40,12 @@ public class SocialuniMessageController {
     private ChatUserVerify chatUserVerify;
     @Resource
     private MessageService messageService;
-/*
+
+    @Override
+    public ResultRO<SocialMessageRO> sendMsg(MessageAddVO messageAddVO) {
+        return messageService.sendMsg(messageAddVO);
+    }
+    /*
     *//**
      * toDO 这里有问题，都统一用的 msgid
      *

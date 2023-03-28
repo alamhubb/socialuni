@@ -15,7 +15,7 @@ import com.socialuni.social.im.dao.MessageRepository;
 import com.socialuni.social.im.enumeration.ChatStatus;
 import com.socialuni.social.im.enumeration.ChatType;
 import com.socialuni.social.im.enumeration.ChatUserStatus;
-import com.socialuni.social.im.model.message.message.MessageAddVO;
+import com.socialuni.social.im.api.model.QO.message.MessageAddVO;
 import com.socialuni.social.report.sdk.logic.service.IllegalWordService;
 import org.flywaydb.core.internal.util.JsonUtils;
 import org.slf4j.Logger;

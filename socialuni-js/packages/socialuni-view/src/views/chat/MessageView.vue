@@ -1,6 +1,6 @@
 <template>
   <view class="pb-50 h100p bg-default">
-    <q-navbar show-back :title="title">
+    <q-navbar show-back :title="pageTitle">
       <div class="row-end-center flex-1">
         <q-icon icon="list-dot" size="20" @click="openMoreMenu"></q-icon>
       </div>
@@ -275,6 +275,7 @@ import QNavbar from "../../components/QNavbar/QNavbar.vue";
 import SocialuniProviderType from "socialuni-constant/constant/SocialuniProviderType";
 import {onLoad} from "@dcloudio/uni-app";
 import {onMounted} from "vue";
+import SocialuniChatRO from "socialuni-api/src/model/SocialuniChatRO";
 
 
 @Options({components: {MessageItemContent, SocialuniReportDialog, QIcon, QNavbar}})
@@ -299,12 +300,20 @@ export default class MessageView extends Vue {
   init(params: MessageViewParams) {
     //  不存在前台缓存的问题,防止页面数据没有被及时刷新。 缓存之前页面的数据。
     //  issue: I6EZ82
-    socialChatModule.chat = null;
     //
-    if (!params.chatId) {
+    socialChatModule.chat = null;
+    if (!params.receiveId) {
       AlertUtil.error('缺少会话信息')
     }
-    this.chatId = params.chatId
+    const chat = new SocialuniChatRO()
+    chat.receiveId = params.receiveId
+    if (params.nickname) {
+      chat.nickname = params.nickname
+    }
+    socialChatModule.setChat(chat)
+
+
+    // socialChatModule.chatId = params.receiveId
     // socialChatModule.setCurChatByUserId(params.userId)
     // this.userId = params.userId;
     /*else if (params.groupId) {
@@ -359,6 +368,11 @@ export default class MessageView extends Vue {
   onUnload() {
     socialChatModule.scrollTop = 0
   }
+
+  get pageTitle() {
+    return this.chat.nickname
+  }
+
 
   openMessageMoreHandleDialog(message: MessageVO) {
     this.message = message
@@ -512,6 +526,7 @@ export default class MessageView extends Vue {
   }
 
   async sendMsgClick() {
+    console.log(123)
     // 微信支持 hold-keyboard
     // app和h5支持 @touchend.prevent
     // 只有qq需要特殊处理

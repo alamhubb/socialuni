@@ -1,9 +1,9 @@
 export default class MessageAddVO {
-  public chatId: string
+  public receiveId: string
   public content: string
 
-  constructor (chatId: string, content: string) {
-    this.chatId = chatId
+  constructor (receiveId: string, content: string) {
+    this.receiveId = receiveId
     this.content = content
   }
 }
