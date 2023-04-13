@@ -1,10 +1,7 @@
 import JsonUtil from 'socialuni-sdk/src/utils/JsonUtil'
 import {OpenImMsgRO} from "./openIm/OpenImMsgRO";
-import MessageVO from "socialuni-sdk/src/model/message/MessageVO";
 import {OpenImChatRO} from "./openIm/OpenImChatRO";
-import {socialChatModule} from "socialuni-sdk/src/store/store";
-import SocialuniUserAPI from "../api/socialuni/SocialuniUserAPI";
-import SocialuniUserRO from "./user/SocialuniUserRO";
+import MessageVO from "socialuni-im-api/src/model/RO/MessageVO";
 
 export default class SocialuniChatRO {
     public id: string = null
@@ -46,7 +43,7 @@ export default class SocialuniChatRO {
                 this.lastMsg = new MessageVO(null, openImMsg)
                 this.lastContent = this.lastMsg.content
             }
-            // this.loadMore = chat.loadMore
+            // this.loadMore = openImChat.loadMore
         }
     }
 

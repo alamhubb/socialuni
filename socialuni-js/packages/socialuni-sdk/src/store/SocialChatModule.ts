@@ -31,7 +31,7 @@ import SocialuniTalkTabCircleRO from "socialuni-api/src/model/community/circle/S
 import SocialuniCircleAPI from "socialuni-api/src/api/socialuni/SocialuniCircleAPI";
 import CircleCreateChatQO from "socialuni-api/src/model/community/circle/CircleCreateChatQO";
 import UniUtil from "../utils/UniUtil";
-import MessageVO from "../model/message/MessageVO";
+import MessageVO from "socialuni-im-api/src/model/RO/MessageVO";
 import {GroupJoinSource} from "../plugins/openIm/OpenImMessageType";
 import OpenImFriendApplyRO from "../model/friend/OpenImFriendApplyRO";
 import FriendApplyType from "socialuni-constant/constant/FriendApplyType";
@@ -411,7 +411,6 @@ export default class SocialChatModule extends Pinia {
         chat.nickname = chatName
         this.setChat(chat)*/
         PageUtil.toMessagePageByChatId(receiveId)
-        socialChatModule.scrollToMessagePageBottom()
     }
 
     /*get chatIndex(): number {
@@ -554,7 +553,7 @@ export default class SocialChatModule extends Pinia {
 
     scrollToMessagePageBottom() {
         CommonUtil.delayTime(100).then(() => {
-            this.scrollTop = this.messages.length * 5000
+            this.scrollTop = this.messages.length * 500
             // this.scrollTop = -1000
         })
         // ScrollUtil.scrollTo(this.messages.length * 500)

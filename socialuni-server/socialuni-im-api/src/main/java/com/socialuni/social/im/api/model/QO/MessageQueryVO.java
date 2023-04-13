@@ -3,6 +3,7 @@ package com.socialuni.social.im.api.model.QO;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -12,5 +13,5 @@ import java.util.List;
 @Data
 public class MessageQueryVO {
     private String  chatId;
-    private List<String> msgIds;
+    private Date queryTime;
 }

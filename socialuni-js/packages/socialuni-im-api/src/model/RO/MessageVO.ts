@@ -1,11 +1,11 @@
 import SocialuniCommonStatus from "socialuni-constant/constant/status/SocialuniCommonStatus";
 import MessageContentType from "socialuni-constant/constant/mesaage/MessageContentType";
 import {OpenImMsgRO} from "socialuni-api/src/model/openIm/OpenImMsgRO";
-import JsonUtil from "../../utils/JsonUtil";
-import {socialChatModule, socialUserModule} from "../../store/store";
-import UUIDUtil from "../../utils/UUIDUtil";
+import JsonUtil from "socialuni-sdk/src/utils/JsonUtil";
+import {socialChatModule, socialUserModule} from "socialuni-sdk/src/store/store";
+import UUIDUtil from "socialuni-sdk/src/utils/UUIDUtil";
 import SocialuniUserRO from "socialuni-api/src/model/user/SocialuniUserRO";
-import {MessageType} from "../../plugins/openIm/OpenImMessageType";
+import {MessageType} from "socialuni-sdk/src/plugins/openIm/OpenImMessageType";
 import SocialuniMessageType from "socialuni-constant/constant/mesaage/SocialuniMessageType";
 
 export default class MessageVO {
@@ -15,7 +15,7 @@ export default class MessageVO {
     public contentData: any  // 原始的数据内容
     public content: string // 用于展示
     public action: string  // 触发创建的api
-    public createTime: number
+    public createTime: Date
     public readStatus: string
     public status: number // 发送的状态。
     public type: string

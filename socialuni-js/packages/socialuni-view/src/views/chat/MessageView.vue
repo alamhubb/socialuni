@@ -46,48 +46,48 @@
               开启对话
             </button>
           </view>-->
-<!--          <view v-for="msg in messages" :id="'m'+msg.id" :key="msg.id"
-                :class="[msg.type === systemMsgType?'row-center':'cu-item',msg.isMine?'self':'']">
-            <template v-if="msg.type === systemMsgType">
-              <view class="cu-info round">
-                {{ msg.content }}
-              </view>
-            </template>
-            <template v-else-if="msg.isMine">
+          <!--          <view v-for="msg in messages" :id="'m'+msg.id" :key="msg.id"
+                          :class="[msg.type === systemMsgType?'row-center':'cu-item',msg.isMine?'self':'']">
+                      <template v-if="msg.type === systemMsgType">
+                        <view class="cu-info round">
+                          {{ msg.content }}
+                        </view>
+                      </template>
+                      <template v-else-if="msg.isMine">
 
-            </template>
-            <template v-else>
-              <image class="cu-avatar bd-radius"
-                     :src="msg.user.avatar"
-                     @click="toUserDetailVue(msg.user.id)"
-              />
-              <view class="flex-col w100p">
-                <view class="ml-20 h44 row-col-center">
-                  {{ msg.user.nickname }}
-                  &lt;!&ndash;              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
-                                      @click="toUserDetailVue(msg.user.id)">
-                                  {{ msg.user.nickname }}
-                                </text>
-                                <image v-if="msg.user.vipFlag" class="ml-6 size30 mt-10"
-                                       src="/static/img/crown.png"
-                                       @click="toVipVue"></image>&ndash;&gt;
-                </view>
-                <view class="main">
-                  <view class="content bg-white" @longpress="openMessageMoreHandleDialog(msg)">
-                    <text v-if="msg.status === 3"> 发送失败</text>
+                      </template>
+                      <template v-else>
+                        <image class="cu-avatar bd-radius"
+                               :src="msg.user.avatar"
+                               @click="toUserDetailVue(msg.user.id)"
+                        />
+                        <view class="flex-col w100p">
+                          <view class="ml-20 h44 row-col-center">
+                            {{ msg.user.nickname }}
+                            &lt;!&ndash;              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
+                                                @click="toUserDetailVue(msg.user.id)">
+                                            {{ msg.user.nickname }}
+                                          </text>
+                                          <image v-if="msg.user.vipFlag" class="ml-6 size30 mt-10"
+                                                 src="/static/img/crown.png"
+                                                 @click="toVipVue"></image>&ndash;&gt;
+                          </view>
+                          <view class="main">
+                            <view class="content bg-white" @longpress="openMessageMoreHandleDialog(msg)">
+                              <text v-if="msg.status === 3"> 发送失败</text>
 
-                    <img v-if="msg.contentType === 102" class="bd-round size100" :src="msg.contentData.sourcePicture.url"/>
-                    <video v-else-if="msg.contentType === 104" class="bd-round size50" :src="msg.contentData.videoUrl"
-                           enable-danmu danmu-btn controls></video>
-                    <text v-else-if="msg.contentType !== 3"> {{ msg.content }}</text>
+                              <img v-if="msg.contentType === 102" class="bd-round size100" :src="msg.contentData.sourcePicture.url"/>
+                              <video v-else-if="msg.contentType === 104" class="bd-round size50" :src="msg.contentData.videoUrl"
+                                     enable-danmu danmu-btn controls></video>
+                              <text v-else-if="msg.contentType !== 3"> {{ msg.content }}</text>
 
-                  </view>
-                </view>
-              </view>
-              <view class="date">{{ formatTime(msg.createTime) }}</view>
-            </template>
-          </view>-->
-          <div v-for="msg in messages" :id="'m'+msg.id" :key="msg.id" class="mt-sm">
+                            </view>
+                          </view>
+                        </view>
+                        <view class="date">{{ formatTime(msg.createTime) }}</view>
+                      </template>
+                    </view>-->
+          <div v-for="msg in messages" :id="'m'+msg.id" :key="msg.id">
             <div v-if="msg.type === systemMsgType">
               <view class="cu-info round row-all-center">
                 {{ formatTime(msg.createTime) }} , {{ msg.content }}
@@ -155,7 +155,6 @@
               </view>
               &lt;!&ndash;        <uni-load-more v-else :status="chat.loadMore"></uni-load-more>&ndash;&gt;
             </view>-->
-
 
 
     </scroll-view>
@@ -258,7 +257,6 @@ import SocialuniReportDialog from "socialuni-view/src/components/SocialuniReport
 import CommonUtil from "socialuni-sdk/src/utils/CommonUtil";
 import DateUtil from "socialuni-sdk/src/utils/DateUtil";
 import MessageViewParams from "./MessageViewParams";
-import MessageVO from "socialuni-sdk/src/model/message/MessageVO";
 import SocialuniMessageType from "socialuni-constant/constant/mesaage/SocialuniMessageType";
 import QIcon from 'socialuni-view/src/components/QIcon/QIcon.vue'
 import CosUtil from "socialuni-sdk/src/utils/CosUtil";
@@ -274,6 +272,8 @@ import {onLoad} from "@dcloudio/uni-app";
 import {onMounted} from "vue";
 import SocialuniChatRO from "socialuni-api/src/model/SocialuniChatRO";
 import MessageAPI from "socialuni-im-api/src/api/MessageAPI";
+import MessageVO from "socialuni-im-api/src/model/RO/MessageVO";
+import NodeInfo = UniNamespace.NodeInfo;
 
 
 @Options({components: {MessageItemContent, SocialuniReportDialog, QIcon, QNavbar}})
@@ -283,6 +283,34 @@ export default class MessageView extends Vue {
     messageMoreHandleDialog: any;
     deleteReasonDialog: any;
   }
+
+
+  screenHeight: number = socialSystemModule.screenHeight
+  windowHeight: number = socialSystemModule.windowHeight
+  msgContent = ''
+  inputFocus = false
+  noMore: string = LoadMoreType.noMore
+  lazyLoadNum = 30
+  topId = ''
+  deleteReason: string = null
+  // 是否封禁
+  violation = false
+  curMsg: MessageVO = null
+  showEmoji = false
+  keyboardHeight = 200
+  emojiModelHeight = 300
+  message: MessageVO = null
+  reportContentType: string = ReportContentType.message
+  systemMsgType: string = SocialuniMessageType.system
+  showMsgHint: boolean = uni.getStorageSync(Constants.showMsgHintKey) !== 'false'
+  readonly waitOpenStatus: string = SocialuniCommonStatus.waitOpen
+  readonly closeStatus: string = SocialuniCommonStatus.close
+  upperThreshold = 300
+  userId: string = null
+  groupId: string = null
+  chatId: string = null
+  title: string = '聊天'
+  queryTime: Date = null
 
   created() {
     //TODO 同一会话时，这里要改成onRead，不然需要刷新页面才会触发已读的标志。
@@ -295,7 +323,7 @@ export default class MessageView extends Vue {
   }
 
 
-  init(params: MessageViewParams) {
+  async init(params: MessageViewParams) {
     //  不存在前台缓存的问题,防止页面数据没有被及时刷新。 缓存之前页面的数据。
     //  issue: I6EZ82
     //
@@ -306,12 +334,16 @@ export default class MessageView extends Vue {
     const chat = new SocialuniChatRO()
     // chat.receiveId = params.chatId
     chat.id = params.chatId
+    chat.loadMore = LoadMoreType.more
     // if (params.nickname) {
     //   chat.nickname = params.nickname
     // }
     socialChatModule.setChat(chat)
 
-    this.queryMessages()
+    this.queryTime = new Date()
+    await this.queryMessages()
+
+    socialChatModule.scrollToMessagePageBottom()
 
 
     // socialChatModule.chatId = params.receiveId
@@ -339,32 +371,6 @@ export default class MessageView extends Vue {
   get mineUser() {
     return socialUserModule.mineUser
   }
-
-  screenHeight: number = socialSystemModule.screenHeight
-  windowHeight: number = socialSystemModule.windowHeight
-  msgContent = ''
-  inputFocus = false
-  noMore: string = LoadMoreType.noMore
-  lazyLoadNum = 30
-  topId = ''
-  deleteReason: string = null
-  // 是否封禁
-  violation = false
-  curMsg: MessageVO = null
-  showEmoji = false
-  keyboardHeight = 200
-  emojiModelHeight = 300
-  message: MessageVO = null
-  reportContentType: string = ReportContentType.message
-  systemMsgType: string = SocialuniMessageType.system
-  showMsgHint: boolean = uni.getStorageSync(Constants.showMsgHintKey) !== 'false'
-  readonly waitOpenStatus: string = SocialuniCommonStatus.waitOpen
-  readonly closeStatus: string = SocialuniCommonStatus.close
-  upperThreshold = 300
-  userId: string = null
-  groupId: string = null
-  chatId: string = null
-  title: string = '聊天'
 
   onUnload() {
     socialChatModule.scrollTop = 0
@@ -634,23 +640,21 @@ export default class MessageView extends Vue {
   }
 
   queryMessages() {
-    MessageAPI.queryMessagesAPI(this.chat.id, this.msgIds).then((res) => {
+    return MessageAPI.queryMessagesAPI(this.chat.id, this.queryTime).then((res) => {
       const resMessages: MessageVO[] = res.data
-      if (resMessages.length) {
-        this.messages.unshift(...resMessages)
-      }
-      console.log(this.messages)
-      console.log(this.messages.length)
-      /*if (this.messages.length){
-
-      }
       //获取拼接消息之前，顶部消息的位置
-      const preFirstMsgId: string = '#m' + this.messages[0].id
-      const query: SelectorQuery = uni.createSelectorQuery().in(this)
       // const nodeBox: NodesRef = query.select('.scrollView')
+      const query: SelectorQuery = uni.createSelectorQuery().in(this)
+      let preFirstMsgId: string = null
+      if (this.messages.length) {
+        preFirstMsgId = '#m' + this.messages[0].id
+      }
       const nodeBox: NodesRef = query.select(preFirstMsgId)
-      nodeBox.boundingClientRect((preNodeRes) => {
-        const preTop = preNodeRes.top
+      nodeBox.boundingClientRect((preNodeRes: NodeInfo) => {
+        let preTop = 0
+        if (preNodeRes) {
+          preTop = preNodeRes.top
+        }
         // this.topId = lastFirstMsgId
         // 如果还有大于等于30个就还可以加载
         if (resMessages && resMessages.length >= this.lazyLoadNum) {
@@ -660,39 +664,42 @@ export default class MessageView extends Vue {
           this.chat.loadMore = LoadMoreType.noMore
         }
         if (resMessages.length) {
+          this.queryTime = resMessages[0].createTime
           this.messages.unshift(...resMessages)
           //获取添加后的之前顶部位置，然后滚动到此位置
           this.$nextTick(() => {
             const query: SelectorQuery = uni.createSelectorQuery().in(this)
             // const nodeBox: NodesRef = query.select('.scrollView')
             const nodeBox: NodesRef = query.select(preFirstMsgId)
-            nodeBox.boundingClientRect((lastNodeRes) => {
-              socialChatModule.scrollTop = lastNodeRes.top - preTop
+            nodeBox.boundingClientRect((lastNodeRes: NodeInfo) => {
+              if (lastNodeRes) {
+                socialChatModule.scrollTop = lastNodeRes.top - preTop
+              }
             }).exec()
           })
         }
-      }).exec()*/
-      /*setTimeout(() => {
-              const query: SelectorQuery = uni.createSelectorQuery().in(this)
-              // const nodeBox: NodesRef = query.select('.scrollView')
-              const nodeBox: NodesRef = query.select(preFirstMsgId)
-              nodeBox.boundingClientRect((lastNodeRes) => {
-                if (res) {
-                  console.log(lastNodeRes)
-                  console.log(preTop)
-                  chatModule.scrollTop = lastNodeRes.top - preTop
-                  console.log(chatModule.scrollTop)
-                }
-              }).exec()
-              // this.topId = lastFirstMsgId
-              // 如果还有大于等于30个就还可以加载
-              if (res.data && res.data.length >= this.lazyLoadNum) {
-                this.chat.loadMore = LoadMoreType.more
-              } else {
-                // 否则没有了
-                this.chat.loadMore = LoadMoreType.noMore
-              }
-            }, 100)*/
+      }).exec()
+      /* setTimeout(() => {
+         const query: SelectorQuery = uni.createSelectorQuery().in(this)
+         // const nodeBox: NodesRef = query.select('.scrollView')
+         const nodeBox: NodesRef = query.select(preFirstMsgId)
+         nodeBox.boundingClientRect((lastNodeRes) => {
+           if (res) {
+             console.log(lastNodeRes)
+             console.log(preTop)
+             chatModule.scrollTop = lastNodeRes.top - preTop
+             console.log(chatModule.scrollTop)
+           }
+         }).exec()
+         // this.topId = lastFirstMsgId
+         // 如果还有大于等于30个就还可以加载
+         if (res.data && res.data.length >= this.lazyLoadNum) {
+           this.chat.loadMore = LoadMoreType.more
+         } else {
+           // 否则没有了
+           this.chat.loadMore = LoadMoreType.noMore
+         }
+       }, 100)*/
     })
   }
 
