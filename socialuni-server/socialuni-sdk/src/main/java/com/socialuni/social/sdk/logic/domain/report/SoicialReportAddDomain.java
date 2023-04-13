@@ -52,7 +52,7 @@ public class SoicialReportAddDomain {
         //正义值小于300不能再举报
         //给用户通知，您举报成功失败，奖励或扣除积分，每天满多少，低于0 2练个，低于200不能再举报
         if (!mineUser.getType().equals(UserType.system)) {
-            SocialuniUserCheck.checkUserBindPhoneNumAndStatusNoEnable();
+            SocialuniUserCheck.checkUserBindPhoneNumAndStatusEnable();
             //校验内容是否违规
             /*if (resultRO.hasError()) {
                 return new ResultRO<>(resultRO);

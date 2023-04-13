@@ -1,24 +1,34 @@
 package com.socialuni.social.im.controller;
 
+import com.socialuni.social.common.api.constant.SocialuniContentType;
+import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
+import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.im.api.feign.SocialuniMessageAPI;
 import com.socialuni.social.im.api.model.QO.message.MessageAddVO;
 import com.socialuni.social.im.api.model.RO.SocialMessageRO;
 import com.socialuni.social.im.dao.ChatRepository;
+import com.socialuni.social.im.dao.DO.ChatUserDO;
+import com.socialuni.social.im.dao.DO.SocialuniChatDO;
+import com.socialuni.social.im.dao.DO.message.MessageDO;
+import com.socialuni.social.im.dao.DO.message.MessageReceiveDO;
 import com.socialuni.social.im.dao.MessageReceiveRepository;
 import com.socialuni.social.im.dao.MessageRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.socialuni.social.im.enumeration.*;
+import com.socialuni.social.im.logic.foctory.SocialMessageROFactory;
+import com.socialuni.social.im.api.model.QO.MessageQueryVO;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
+import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author qinkaiyuan
@@ -26,10 +36,8 @@ import java.util.Optional;
  */
 
 @RestController
-@RequestMapping("message")
+@RequestMapping("socialuni/message")
 public class SocialuniMessageController implements SocialuniMessageAPI {
-    private final Logger log = LoggerFactory.getLogger(getClass());
-
     @Resource
     private ChatRepository chatRepository;
     @Resource
@@ -46,19 +54,19 @@ public class SocialuniMessageController implements SocialuniMessageAPI {
         return messageService.sendMsg(messageAddVO);
     }
     /*
-    *//**
+     */
+
+    /**
      * toDO 这里有问题，都统一用的 msgid
      *
-     * @param user
      * @param queryVO
      * @return
-     *//*
-    @PostMapping("queryMessages")
-    public ResultRO<List<SocialMessageRO>> queryMessages(SocialuniUserDo user, @RequestBody @Valid MessageQueryVO queryVO) {
+     */
+    public ResultRO<List<SocialMessageRO>> queryMessages(@RequestBody @Valid MessageQueryVO queryVO) {
         List<SocialMessageRO> messageVOS = new ArrayList<>();
-        Long chatId = queryVO.getChatId();
+        String chatUuid = queryVO.getChatId();
         //msg id也要统一，举报的时候不知道是哪个
-        List<Long> msgIds = queryVO.getMsgIds();
+//        List<Long> msgIds = queryVO.getMsgIds();
         //前台传入chatId，
         //校验chatId，对应的chatDO是否存在，
         //校验chat下是否存在此user
@@ -80,7 +88,7 @@ public class SocialuniMessageController implements SocialuniMessageAPI {
 
         //首先获取chatId
         //无论是否登陆，都是先获取chatId
-        if (chatId == null) {
+        /*if (chatId == null) {
             if (msgIds.size() < 1) {
                 return new ResultRO<>(messageVOS);
             }
@@ -89,43 +97,43 @@ public class SocialuniMessageController implements SocialuniMessageAPI {
                 return new ResultRO<>(messageVOS);
             }
             chatId = messageDOOptional.get().getChatId();
-        }
+        }*/
 
-        //用户为空，则判断chat是否为官方类型，如果是允许查询，返回数据
-        Optional<ChatDO> chatDOOptional = chatRepository.findFirstByIdAndStatus(chatId, ChatStatus.enable);
-        if (!chatDOOptional.isPresent()) {
-            log.error("已删除的会话");
-            return new ResultRO<>(ErrorCode.SYSTEM_ERROR);
-        }
-        ChatDO chatDO = chatDOOptional.get();
-        //为群聊，
-        if (chatDO.getType().equals(ChatType.system_group)) {
-            Integer userId = null;
-            if (user != null) {
-                userId = user.getId();
+
+        SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidNotNull(chatUuid);
+
+
+        //私聊
+        if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.user)) {
+            Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+            Integer beUserId = socialuniUnionIdModler.getId();
+
+            //如果用户存在查看会话
+            ChatUserDO chatUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(mineUserId, beUserId, ChatUserDO.class);
+            if (chatUserDO == null) {
+                return ResultRO.success(new ArrayList<>());
             }
-            //查询用户这个chatUser下的消息
-            //已经确认过chat为可用的
-            //则无论是否登陆都值查询chatId下的
-            List<MessageDO> messageDOS = messageRepository.findTop30ByChatIdAndStatusAndIdNotInOrderByIdDesc(chatId, ChatStatus.enable, msgIds);
-            messageVOS = MessageVO.messageDOToVOS(messageDOS, userId);
-            //如果不为空，则判断用户是否有chat的权限
+            List<MessageReceiveDO> messageDOS = messageReceiveRepository.findTop31ByChatUserIdAndStatusAndCreateTimeLessThanOrderByCreateTimeDesc(chatUserDO.getId(), MessageReceiveStatus.init, new Date());
+            messageVOS = SocialMessageROFactory.messageReceiveDOToVOS(messageDOS);
+            return ResultRO.success(messageVOS);
+        } else if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.chatUser)) {
+            //则为chatId
+
+            Integer chatId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(chatUuid);
+
+            SocialuniChatDO chatDO = SocialuniRepositoryFacade.findById(chatId, SocialuniChatDO.class);
+            if (!chatDO.getStatus().equals(ChatStatus.init)) {
+                throw new SocialBusinessException("会话已被删除");
+            }
+            List<MessageDO> messageDOS = messageRepository.findTop30ByChatIdAndStatusAndCreateTimeLessThanOrderByCreateTimeDesc(chatId, MessageStatus.init, new Date());
+            messageVOS = SocialMessageROFactory.messageDOToVOS(messageDOS, SocialuniUserUtil.getMineUserIdAllowNull());
+            return ResultRO.success(messageVOS);
         } else {
-            if (user == null) {
-                log.error("无权限访问的会话");
-                return new ResultRO<>(ErrorCode.SYSTEM_ERROR);
-            }
-            //如果用户没权限，则异常
-            ResultRO<ChatSocialuniUserDo> ResultRO = chatUserVerify.checkChatHasUserId(chatId, user.getId());
-            if (ResultRO.hasError()) {
-                return new ResultRO<>(ResultRO);
-            }
-            ChatSocialuniUserDo chatSocialuniUserDo = ResultRO.getData();
-            List<MessageReceiveDO> messageDOS = messageReceiveRepository.findTop30ByChatUserIdAndChatUserStatusAndStatusAndMessageIdNotInOrderByIdDesc(chatSocialuniUserDo.getId(), ChatUserStatus.enable, MessageReceiveStatus.enable, msgIds);
-            messageVOS = MessageVO.messageReceiveDOToVOS(messageDOS);
+            throw new SocialParamsException("错误的会话标识");
         }
-        return new ResultRO<>(messageVOS);
     }
+    /*
+
 
 
     @PostMapping("sendMsg")
@@ -138,10 +146,10 @@ public class SocialuniMessageController implements SocialuniMessageAPI {
     @ResponseBody
     public ResultRO<Object> deleteMsg(SocialuniUserDo user, @RequestBody @Valid MsgDeleteVO msgVO) {
         *//**
-         * 删除动态操作，
-         * 如果是系统管理员删除动态，则必须填写原因，删除后发表动态的用户将被封禁
-         * 如果是自己删的自己的动态，则不需要填写原因，默认原因是用户自己删除
-         *//*
+     * 删除动态操作，
+     * 如果是系统管理员删除动态，则必须填写原因，删除后发表动态的用户将被封禁
+     * 如果是自己删的自己的动态，则不需要填写原因，默认原因是用户自己删除
+     *//*
         Optional<MessageDO> optionalMsgDO = messageRepository.findFirstOneByIdAndStatusIn(msgVO.getMsgId(), ContentStatus.otherCanSeeContentStatus);
         if (!optionalMsgDO.isPresent()) {
             return new ResultRO<>("无法删除不存在的消息");

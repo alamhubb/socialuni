@@ -30,13 +30,13 @@ public abstract class SocialuniRepositoryFacade {
      * @return
      * @see SocialuniCommonRepositoryInterface#findByExample(Object)
      */
-    public static <T> T findByExample(T example) {
+    /*public static <T> T findByExample(T example) {
         return getRepository().findByExample(example);
     }
-
-    public static <T> List<T> findAllByExample(T example) {
+*/
+    /*public static <T> List<T> findAllByExample(T example) {
         return getRepository().findAllByExample(example);
-    }
+    }*/
 
     public static <T> Long countByExample(T exampleObj) {
         return getRepository().countByExample(exampleObj);

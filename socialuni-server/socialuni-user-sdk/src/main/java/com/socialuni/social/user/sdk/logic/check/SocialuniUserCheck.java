@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class SocialuniUserCheck {
 
     //校验用户是否设置了手机号
-    public static void checkUserBindPhoneNumAndStatusNoEnable() {
+    public static void checkUserBindPhoneNumAndStatusEnable() {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
         SocialUserPhoneDo userPhoneNum = SocialuniUserUtil.getUserPhoneNumDO(mineUser.getUnionId());
         //如果不为系统管理员，只有管理员才能评论置顶内容
@@ -22,11 +22,11 @@ public class SocialuniUserCheck {
         if (userPhoneNum == null) {
             throw new SocialParamsException(ErrorMsg.bindPhoneNumCan);
         }
-        SocialuniUserCheck.checkUserStatusNoEnable();
+        SocialuniUserCheck.checkUserStatusEnable();
     }
 
     //如果用户状态不为可用
-    private static void checkUserStatusNoEnable() {
+    private static void checkUserStatusEnable() {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
         //如果用户状态不为可用
         if (!SocialuniUserStatus.init.equals(mineUser.getStatus())) {

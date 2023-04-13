@@ -1,14 +1,13 @@
 package com.socialuni.social.im.logic.manage;
 
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
-import com.socialuni.social.im.dao.DO.SocialuniChatDO;
+import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
 import com.socialuni.social.im.dao.DO.SocialuniUserChatConfigDO;
-import com.socialuni.social.im.enumeration.ChatType;
 
-public class SocialuniUserChatConfigDOFactory {
+public class SocialuniUserChatConfigManage {
 
     public static SocialuniUserChatConfigDO getOrCreateUserChatConfigDO(Integer userId) {
-        SocialuniUserChatConfigDO socialuniUserChatConfigDO = SocialuniRepositoryFacade.findById(userId, SocialuniUserChatConfigDO.class);
+        SocialuniUserChatConfigDO socialuniUserChatConfigDO = SocialuniUserRepositoryFacede.findByUserId(userId, SocialuniUserChatConfigDO.class);
 
         if (socialuniUserChatConfigDO == null) {
             socialuniUserChatConfigDO = new SocialuniUserChatConfigDO();

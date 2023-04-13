@@ -1,4 +1,4 @@
-package com.socialuni.social.im.model.message.message;
+package com.socialuni.social.im.api.model.QO;
 
 import lombok.Data;
 
@@ -11,7 +11,6 @@ import java.util.List;
  */
 @Data
 public class MessageQueryVO {
-    private Integer chatId;
-    @NotNull
+    private String  chatId;
     private List<String> msgIds;
 }

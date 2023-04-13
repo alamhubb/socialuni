@@ -7,7 +7,7 @@ import org.springframework.cache.annotation.EnableCaching;
 
 @SpringBootApplication(scanBasePackages = {"com.socialuni.social"})
 @EnableSpringUtil
-@EnableCaching
+//@EnableCaching
 public class SocialuniUserWebApplication {
     public static void main(String[] args) {
 

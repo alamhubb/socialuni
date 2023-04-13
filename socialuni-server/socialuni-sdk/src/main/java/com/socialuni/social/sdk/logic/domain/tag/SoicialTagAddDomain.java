@@ -27,7 +27,7 @@ public class SoicialTagAddDomain {
 
     public TagRO addTag(SocialuniUserDo mineUser, TagAddQO tagAddVO) {
         //校验用户
-        SocialuniUserCheck.checkUserBindPhoneNumAndStatusNoEnable();
+        SocialuniUserCheck.checkUserBindPhoneNumAndStatusEnable();
         /*if (SocialAppEnv.getIsDevProdEnv()) {
             throw new SocialBusinessException("demo演示环境不支持创建tag，防止tag与生产环境不一致");
         }*/

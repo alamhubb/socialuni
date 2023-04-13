@@ -161,7 +161,6 @@ export default class UniAppHttpRequest {
     }
 
     post<T>(url: string, data: object = {}, options: handleOptions = {}) {
-        console.log(456456)
         return this.request <T>({
             url,
             data,

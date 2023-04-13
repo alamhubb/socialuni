@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +19,8 @@ import java.util.Optional;
  */
 public interface MessageRepository extends JpaRepository<MessageDO, Integer> {
     SocialuniUnionContentBaseDO findOneByUnionIdAndStatus(Integer id, String status);
+
+    List<MessageDO> findTop30ByChatIdAndStatusAndCreateTimeLessThanOrderByCreateTimeDesc(Integer chatId, String msgStatus, Date queryTime);
 
     List<MessageDO> findTop30ByChatIdAndStatusAndIdNotInOrderByIdDesc(Integer chatId, String msgStatus, List<Integer> ids);
 

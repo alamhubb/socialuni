@@ -135,8 +135,8 @@ export default class PageUtil {
         RouterUtil.navigateTo(PagePath.message + '?userId=' + userId)
     }
 
-    static toMessagePageByChatId(receiveId: string, nickname) {
-        RouterUtil.navigateTo(PagePath.message + '?receiveId=' + receiveId + '&nickname=' + nickname)
+    static toMessagePageByChatId(receiveId: string) {
+        RouterUtil.navigateTo(PagePath.message + '?receiveId=' + receiveId)
     }
 
     static toMessagePageByGroupId(groupId: string) {

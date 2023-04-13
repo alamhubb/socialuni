@@ -2,6 +2,7 @@ package com.socialuni.social.im.api.feign;
 
 
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.im.api.model.QO.MessageQueryVO;
 import com.socialuni.social.im.api.model.QO.message.MessageAddVO;
 import com.socialuni.social.im.api.model.RO.SocialMessageRO;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -25,5 +26,7 @@ public interface SocialuniMessageAPI {
     @PostMapping("sendMsg")
     ResultRO<SocialMessageRO> sendMsg(@RequestBody @Valid MessageAddVO messageAddVO);
 
+    @PostMapping("queryMessages")
+    public ResultRO<List<SocialMessageRO>> queryMessages(@RequestBody @Valid MessageQueryVO queryVO);
 }
 

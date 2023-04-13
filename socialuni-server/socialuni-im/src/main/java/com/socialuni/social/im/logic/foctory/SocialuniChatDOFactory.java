@@ -1,4 +1,4 @@
-package com.socialuni.social.im.logic.manage;
+package com.socialuni.social.im.logic.foctory;
 
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.im.dao.DO.SocialuniChatDO;

@@ -105,6 +105,12 @@ public class ChatUserDO extends SocialuniUserContactBaseDO {
         this.chatId = chatId;
         this.setUserId(userId);
         this.setBeUserId(beUserId);
+        //如果是系统的，则默认指定
+        this.topFlag = false;
+        //为什么不设置成99，因为此版本没有阅读功能？先试试99
+        this.unreadNum = 0;
+        this.frontShow = true;
+        this.blacklist = false;
     }
 
     //私聊，比群聊多一个对方用户id,对方用户，方便获取对方的头像昵称，展示, 匹配模块有使用

@@ -64,6 +64,10 @@ public class SocialuniUserUtil {
         return getMineUserNotNull().getUnionId();
     }
 
+    public static boolean hasMineUser() {
+        return getMineUserAllowNull() != null;
+    }
+
     public static String getMineUserUuidIdNotNull() {
         Integer mineUserId = getMineUserIdNotNull();
         return SocialuniUnionIdFacede.getUuidByUnionIdNotNull(mineUserId);

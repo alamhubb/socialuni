@@ -104,7 +104,7 @@ public class SocialuniPostTalkDomain {
             //不为开发环境，则校验内容
             if (!tagNames.contains(SocialuniConst.devEnvTagName)) {
                 //校验用户
-                SocialuniUserCheck.checkUserBindPhoneNumAndStatusNoEnable();
+                SocialuniUserCheck.checkUserBindPhoneNumAndStatusEnable();
             }
             SocialuniTextContentUtil.checkTextHasUnderageAndContactAndViolateWords(talkVOContent);
         }

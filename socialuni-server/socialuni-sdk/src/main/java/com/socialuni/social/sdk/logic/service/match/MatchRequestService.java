@@ -2,6 +2,7 @@ package com.socialuni.social.sdk.logic.service.match;
 
 import com.socialuni.social.im.dao.DO.ChatUserDO;
 import com.socialuni.social.im.enumeration.ChatType;
+import com.socialuni.social.im.logic.foctory.SocialuniMessageDOFactory;
 import com.socialuni.social.sdk.constant.socialuni.MatchType;
 import com.socialuni.social.im.enumeration.MessageType;
 import com.socialuni.social.im.dao.DO.SocialuniChatDO;
@@ -58,7 +59,7 @@ public class MatchRequestService {
 
 
 //        List<NotifyDO> notifies = new ArrayList<>();
-        MessageDO message = new MessageDO(chat.getId(), "匹配成功，只有您能主动发起会话", user.getUnionId(), MessageType.system);
+        MessageDO message = SocialuniMessageDOFactory.createMessage(chat.getId(), "匹配成功，只有您能主动发起会话", user.getUnionId(), MessageType.system);
         List<MessageReceiveDO> messageReceiveDOS = new ArrayList<>();
         //给自己和对方各生成一条消息
         for (ChatUserDO chatUserDO : chatUserDOS) {

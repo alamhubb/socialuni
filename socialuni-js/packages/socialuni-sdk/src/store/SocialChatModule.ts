@@ -40,6 +40,7 @@ import AlertUtil from "../utils/AlertUtil";
 import MessageAddVO from "socialuni-base/src/model/message/MessageAddVO";
 import request from "socialuni-api/src/request/request";
 import socialuniImRequest from "socialuni-im-api/src/api/socialuniImRequest";
+import MessageAPI from "socialuni-im-api/src/api/MessageAPI";
 
 
 const openIM = null
@@ -365,6 +366,7 @@ export default class SocialChatModule extends Pinia {
 
     async setChat(openImChat: SocialuniChatRO) {
         this.chat = openImChat
+
         /*const options = {
                 conversationID: openImChat.id,
                 startClientMsgID: "",
@@ -398,7 +400,7 @@ export default class SocialChatModule extends Pinia {
     }
 
     //从列表中进入
-    setChatIdToMessagePage(receiveId: string, chatName: string) {
+    setChatIdToMessagePage(receiveId: string) {
         // this.setChatId(chatId)
         // this.readChatAction(this.chat)
         if (!receiveId) {
@@ -408,7 +410,7 @@ export default class SocialChatModule extends Pinia {
         chat.receiveId = receiveId
         chat.nickname = chatName
         this.setChat(chat)*/
-        PageUtil.toMessagePageByChatId(receiveId, chatName)
+        PageUtil.toMessagePageByChatId(receiveId)
         socialChatModule.scrollToMessagePageBottom()
     }
 
@@ -694,8 +696,7 @@ export default class SocialChatModule extends Pinia {
         };*/
         // console.log('-------params-------', params);
 
-        const msgAdd: MessageAddVO = new MessageAddVO(this.chat.receiveId, msg.content)
-        return socialuniImRequest.post('message/sendMsg', msgAdd)
+        return MessageAPI.sendMsgAPI(this.chat.id, msg.content)
         //
         /*let actionMethod: Function = null;
         switch (msg.action) {

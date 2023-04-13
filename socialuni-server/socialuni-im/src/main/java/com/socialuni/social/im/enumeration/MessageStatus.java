@@ -10,12 +10,5 @@ import java.util.List;
  */
 public class MessageStatus extends SocialuniCommonStatus {
     public static final List<String> allStatus = Arrays.asList(MessageStatus.init);
-
-    public static final String sending = "发送中";//未发送
-    public static final String sended = "已发送";//未读
-    public static final String read = "已读";//已读
-
-    //阅读状态
-    public static final String unread = "未读";//已读
 }
 

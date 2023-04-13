@@ -3,6 +3,7 @@ package com.socialuni.social.im.logic.foctory;
 
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
+import com.socialuni.social.im.enumeration.MessageReadStatus;
 import com.socialuni.social.im.enumeration.MessageStatus;
 import com.socialuni.social.im.dao.DO.message.MessageDO;
 import com.socialuni.social.im.dao.DO.message.MessageReceiveDO;
@@ -38,7 +39,7 @@ public class SocialMessageROFactory {
         messageRO.setUser(messageUser);
         messageRO.setIsMine(isMine);
 
-        messageRO.setReadStatus(MessageStatus.sended);
+        messageRO.setReadStatus(MessageReadStatus.sended);
         messageRO.setReadNum(messageDO.getReadNum());
         messageRO.setType(messageDO.getType());
         return messageRO;

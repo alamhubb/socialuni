@@ -26,18 +26,23 @@ public abstract class SocialuniUserRepositoryFacede extends SocialuniRepositoryF
      * @return
      */
     public static <T extends SocialuniUserInfoBaseDO> T findByUserId(Integer userId, Class<T> tClass) {
-        T userInfo = null;
-        try {
-            userInfo = tClass.getDeclaredConstructor().newInstance();
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-                 NoSuchMethodException e) {
-            throw new RuntimeException(e);
+        EntityManager entityManager = getEntityManager();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
+        Root<T> userInfo = criteriaQuery.from(tClass);
+
+        Predicate userIdPredicate = criteriaBuilder.equal(userInfo.get("userId"), userId);
+        criteriaQuery.where(userIdPredicate);
+
+        List<T> list = entityManager.createQuery(criteriaQuery).setFirstResult(0).setMaxResults(1).getResultList();
+
+        if (list.size() > 0) {
+            return list.get(0);
         }
-        userInfo.setUserId(userId);
-        return SocialuniRepositoryFacade.findByExample(userInfo);
+        return null;
     }
 
-    public static <T extends SocialuniContentBaseDO> List<T> findAllByUserIdAndStatus(Integer userId, String status, Class<T> tClass) {
+    /*public static <T extends SocialuniContentBaseDO> List<T> findAllByUserIdAndStatus(Integer userId, String status, Class<T> tClass) {
         T userInfo = null;
         try {
             userInfo = tClass.getDeclaredConstructor().newInstance();
@@ -48,7 +53,7 @@ public abstract class SocialuniUserRepositoryFacede extends SocialuniRepositoryF
         userInfo.setUserId(userId);
         userInfo.setStatus(status);
         return SocialuniRepositoryFacade.findAllByExample(userInfo);
-    }
+    }*/
 
     public static <T extends SocialuniUserInfoBaseDO> T findFirstByUserIdNotNull(Integer userId, Class<T> tClass) {
         EntityManager entityManager = SocialuniRepositoryFacade.getEntityManager();

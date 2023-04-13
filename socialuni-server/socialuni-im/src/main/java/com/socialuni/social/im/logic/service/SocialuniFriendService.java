@@ -36,7 +36,7 @@ public class SocialuniFriendService {
     //添加朋友
     @Transactional
     public ResultRO<Void> addFriend(SocialuniFriendAddQO friendAddQO) {
-        SocialuniUserCheck.checkUserBindPhoneNumAndStatusNoEnable();
+        SocialuniUserCheck.checkUserBindPhoneNumAndStatusEnable();
 
         SocialuniTextContentUtil.checkTextHasViolateWords(friendAddQO.getApplyMsg());
 

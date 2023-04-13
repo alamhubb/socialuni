@@ -1,5 +1,5 @@
 <template>
-  <view class="pb-50 h100p bg-default">
+  <view class="pb-50 h100p">
     <q-navbar show-back :title="pageTitle">
       <div class="row-end-center flex-1">
         <q-icon icon="list-dot" size="20" @click="openMoreMenu"></q-icon>
@@ -22,9 +22,9 @@
                  :scroll-top="scrollTop"
     >
       <!--    <view class="cu-chat">-->
-      <view class="w100p h100p col-row-center">
+      <view class="w100p h100p">
         <!--      <view v-if="chat.status === waitOpenStatus||chat.status === closeStatus" class="w100p h100p col-row-center">-->
-        <view class="uni-tip  mt-80px">
+        <view class="mt-80px">
           <!--          <view class="uni-tip-content text-bold">
                       <template v-if="chat.needPayOpen">
                         会话未开启，为避免用户被频繁恶意骚扰，只能给关注您的和给您发过消息的用户直接发送消息
@@ -46,6 +46,107 @@
               开启对话
             </button>
           </view>-->
+<!--          <view v-for="msg in messages" :id="'m'+msg.id" :key="msg.id"
+                :class="[msg.type === systemMsgType?'row-center':'cu-item',msg.isMine?'self':'']">
+            <template v-if="msg.type === systemMsgType">
+              <view class="cu-info round">
+                {{ msg.content }}
+              </view>
+            </template>
+            <template v-else-if="msg.isMine">
+
+            </template>
+            <template v-else>
+              <image class="cu-avatar bd-radius"
+                     :src="msg.user.avatar"
+                     @click="toUserDetailVue(msg.user.id)"
+              />
+              <view class="flex-col w100p">
+                <view class="ml-20 h44 row-col-center">
+                  {{ msg.user.nickname }}
+                  &lt;!&ndash;              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
+                                      @click="toUserDetailVue(msg.user.id)">
+                                  {{ msg.user.nickname }}
+                                </text>
+                                <image v-if="msg.user.vipFlag" class="ml-6 size30 mt-10"
+                                       src="/static/img/crown.png"
+                                       @click="toVipVue"></image>&ndash;&gt;
+                </view>
+                <view class="main">
+                  <view class="content bg-white" @longpress="openMessageMoreHandleDialog(msg)">
+                    <text v-if="msg.status === 3"> 发送失败</text>
+
+                    <img v-if="msg.contentType === 102" class="bd-round size100" :src="msg.contentData.sourcePicture.url"/>
+                    <video v-else-if="msg.contentType === 104" class="bd-round size50" :src="msg.contentData.videoUrl"
+                           enable-danmu danmu-btn controls></video>
+                    <text v-else-if="msg.contentType !== 3"> {{ msg.content }}</text>
+
+                  </view>
+                </view>
+              </view>
+              <view class="date">{{ formatTime(msg.createTime) }}</view>
+            </template>
+          </view>-->
+          <div v-for="msg in messages" :id="'m'+msg.id" :key="msg.id" class="mt-sm">
+            <div v-if="msg.type === systemMsgType">
+              <view class="cu-info round row-all-center">
+                {{ formatTime(msg.createTime) }} , {{ msg.content }}
+              </view>
+
+            </div>
+            <div v-else-if="msg.user.isMine" class="flex-row pd-sm">
+              <div class="flex-1 flex-col mr overflow-hidden">
+                <view class="h44px row-end-center mb-xs">
+                  {{ msg.user.nickname }}
+                  <!--              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
+                                      @click="toUserDetailVue(msg.user.id)">
+                                  {{ msg.user.nickname }}
+                                </text>
+                                <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
+                                       src="/static/img/crown.png"
+                                       @click="toVipVue"></image>-->
+                </view>
+
+                <view class="row-end-center" @longpress="openMessageMoreHandleDialog(msg)">
+                  <q-icon v-if="msg.status === 3" icon="mdi-alert-circle" size="25" class="mb-nm"/>
+                  <message-item-content :msg="msg"></message-item-content>
+                </view>
+
+                <div class="col-all-center mt-xs">
+                  <view class="date">{{ formatTime(msg.createTime) }}</view>
+                </div>
+              </div>
+              <image class="size50 bd-radius flex-none"
+                     :src="msg.user.avatar"
+                     @click="toUserDetailVue(msg.user.id)"
+              />
+            </div>
+            <div v-else class="flex-row pd-sm">
+              <image class="size50 bd-radius flex-none"
+                     :src="msg.user.avatar"
+                     @click="toUserDetailVue(msg.user.id)"
+              />
+              <div class="flex-1 flex-col mr overflow-hidden">
+                <view class="h44px row-col-center mb-xs">
+                  {{ msg.user.nickname }}
+                  <!--              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
+                                      @click="toUserDetailVue(msg.user.id)">
+                                  {{ msg.user.nickname }}
+                                </text>
+                                <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
+                                       src="/static/img/crown.png"
+                                       @click="toVipVue"></image>-->
+                </view>
+
+                <view class="row-start" @longpress="openMessageMoreHandleDialog(msg)">
+                  <message-item-content :msg="msg"></message-item-content>
+                </view>
+                <div class="col-all-center mt-xs">
+                  <view class="date">{{ formatTime(msg.createTime) }}</view>
+                </div>
+              </div>
+            </div>
+          </div>
         </view>
       </view>
       <!--      <view v-else class="w100p row-center" :class="showMsgHint?'pt-70px':'pt-10px'">
@@ -55,110 +156,8 @@
               &lt;!&ndash;        <uni-load-more v-else :status="chat.loadMore"></uni-load-more>&ndash;&gt;
             </view>-->
 
-      <div v-for="msg in messages" :id="'m'+msg.id" :key="msg.id">
-        <div v-if="msg.type === systemMsgType">
-          <view class="cu-info round row-all-center">
-            {{ formatTime(msg.createTime) }} , {{ msg.content }}
-          </view>
-
-        </div>
-        <div v-else-if="msg.isMine" class="flex-row pd-sm">
-          <div class="flex-1 flex-col mr overflow-hidden">
-            <view class="h44px row-end-center mb-xs">
-              {{ msg.user.nickname }}
-              <!--              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
-                                  @click="toUserDetailVue(msg.user.id)">
-                              {{ msg.user.nickname }}
-                            </text>
-                            <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
-                                   src="/static/img/crown.png"
-                                   @click="toVipVue"></image>-->
-            </view>
-
-            <view class="row-end-center" @longpress="openMessageMoreHandleDialog(msg)">
-              <q-icon v-if="msg.status === 3" icon="mdi-alert-circle" size="25" class="mb-nm"/>
-              <message-item-content :msg="msg"></message-item-content>
-            </view>
-
-            <div class="col-all-center mt-xs">
-              <view class="date">{{ formatTime(msg.createTime) }}</view>
-            </div>
-          </div>
-          <image class="size50 bd-radius flex-none"
-                 :src="msg.user.avatar"
-                 @click="toUserDetailVue(msg.user.id)"
-          />
-        </div>
-        <div v-else class="flex-row pd-sm">
-          <image class="size50 bd-radius flex-none"
-                 :src="msg.user.avatar"
-                 @click="toUserDetailVue(msg.user.id)"
-          />
-          <div class="flex-1 flex-col mr overflow-hidden">
-            <view class="h44px row-col-center mb-xs">
-              {{ msg.user.nickname }}
-              <!--              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
-                                  @click="toUserDetailVue(msg.user.id)">
-                              {{ msg.user.nickname }}
-                            </text>
-                            <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
-                                   src="/static/img/crown.png"
-                                   @click="toVipVue"></image>-->
-            </view>
-
-            <view class="row-start" @longpress="openMessageMoreHandleDialog(msg)">
-              <message-item-content :msg="msg"></message-item-content>
-            </view>
-            <div class="col-all-center mt-xs">
-              <view class="date">{{ formatTime(msg.createTime) }}</view>
-            </div>
-          </div>
-        </div>
-      </div>
 
 
-      <!--      <view v-for="msg in messages" :id="'m'+msg.id" :key="msg.id"
-                  :class="[msg.type === systemMsgType?'row-center':'cu-item',msg.isMine?'self':'']">
-              <template v-if="msg.type === systemMsgType">
-                <view class="cu-info round">
-                  {{ msg.content }}
-                </view>
-              </template>
-              <template v-else-if="msg.isMine">
-
-              </template>
-              <template v-else>
-                <image class="cu-avatar bd-radius"
-                       :src="msg.user.avatar"
-                       @click="toUserDetailVue(msg.user.id)"
-                />
-                <view class="flex-col w100p">
-                  <view class="ml-20 h44 row-col-center">
-                    {{ msg.user.nickname }}
-                    &lt;!&ndash;              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
-                                        @click="toUserDetailVue(msg.user.id)">
-                                    {{ msg.user.nickname }}
-                                  </text>
-                                  <image v-if="msg.user.vipFlag" class="ml-6 size30 mt-10"
-                                         src="/static/img/crown.png"
-                                         @click="toVipVue"></image>&ndash;&gt;
-                  </view>
-                  <view class="main">
-                    <view class="content bg-white" @longpress="openMessageMoreHandleDialog(msg)">
-                      <text v-if="msg.status === 3"> 发送失败</text>
-
-                      <img v-if="msg.contentType === 102" class="bd-round size100" :src="msg.contentData.sourcePicture.url"/>
-                      <video v-else-if="msg.contentType === 104" class="bd-round size50" :src="msg.contentData.videoUrl"
-                             enable-danmu danmu-btn controls></video>
-                      <text v-else-if="msg.contentType !== 3"> {{ msg.content }}</text>
-
-                    </view>
-                  </view>
-                </view>
-                <view class="date">{{ formatTime(msg.createTime) }}</view>
-              </template>
-            </view>-->
-      <!--    </view>-->
     </scroll-view>
 
     <view class="fixed-footer">
@@ -243,7 +242,6 @@ import Constants from "socialuni-constant/constant/Constant";
 import SocialuniCommonStatus from "socialuni-constant/constant/status/SocialuniCommonStatus";
 import HintMsg from "socialuni-constant/constant/HintMsg";
 import UserType from "socialuni-constant/constant/UserType";
-// import MessageAPI from "@/api/MessageAPI";
 import PagePath from "socialuni-constant/constant/PagePath";
 import SelectorQuery = UniNamespace.SelectorQuery;
 import NodesRef = UniNamespace.NodesRef;
@@ -256,7 +254,6 @@ import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
 import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
 import PlatformUtils from "socialuni-sdk/src/utils/PlatformUtils";
 import UniUtil from "socialuni-sdk/src/utils/UniUtil";
-import MessageAPI from "socialuni-api/src/api/MessageAPI";
 import SocialuniReportDialog from "socialuni-view/src/components/SocialuniReportDialog";
 import CommonUtil from "socialuni-sdk/src/utils/CommonUtil";
 import DateUtil from "socialuni-sdk/src/utils/DateUtil";
@@ -276,6 +273,7 @@ import SocialuniProviderType from "socialuni-constant/constant/SocialuniProvider
 import {onLoad} from "@dcloudio/uni-app";
 import {onMounted} from "vue";
 import SocialuniChatRO from "socialuni-api/src/model/SocialuniChatRO";
+import MessageAPI from "socialuni-im-api/src/api/MessageAPI";
 
 
 @Options({components: {MessageItemContent, SocialuniReportDialog, QIcon, QNavbar}})
@@ -302,15 +300,18 @@ export default class MessageView extends Vue {
     //  issue: I6EZ82
     //
     socialChatModule.chat = null;
-    if (!params.receiveId) {
+    if (!params.chatId) {
       AlertUtil.error('缺少会话信息')
     }
     const chat = new SocialuniChatRO()
-    chat.receiveId = params.receiveId
-    if (params.nickname) {
-      chat.nickname = params.nickname
-    }
+    // chat.receiveId = params.chatId
+    chat.id = params.chatId
+    // if (params.nickname) {
+    //   chat.nickname = params.nickname
+    // }
     socialChatModule.setChat(chat)
+
+    this.queryMessages()
 
 
     // socialChatModule.chatId = params.receiveId
@@ -635,6 +636,14 @@ export default class MessageView extends Vue {
   queryMessages() {
     MessageAPI.queryMessagesAPI(this.chat.id, this.msgIds).then((res) => {
       const resMessages: MessageVO[] = res.data
+      if (resMessages.length) {
+        this.messages.unshift(...resMessages)
+      }
+      console.log(this.messages)
+      console.log(this.messages.length)
+      /*if (this.messages.length){
+
+      }
       //获取拼接消息之前，顶部消息的位置
       const preFirstMsgId: string = '#m' + this.messages[0].id
       const query: SelectorQuery = uni.createSelectorQuery().in(this)
@@ -662,7 +671,7 @@ export default class MessageView extends Vue {
             }).exec()
           })
         }
-      }).exec()
+      }).exec()*/
       /*setTimeout(() => {
               const query: SelectorQuery = uni.createSelectorQuery().in(this)
               // const nodeBox: NodesRef = query.select('.scrollView')

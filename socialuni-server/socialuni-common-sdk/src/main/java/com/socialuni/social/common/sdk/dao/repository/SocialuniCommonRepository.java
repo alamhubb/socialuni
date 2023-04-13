@@ -1,6 +1,8 @@
 package com.socialuni.social.common.sdk.dao.repository;
 
+import com.socialuni.social.common.api.entity.SocialuniBaseDO;
 import com.socialuni.social.common.api.entity.SocialuniUserContactBaseDO;
+import com.socialuni.social.common.api.entity.SocialuniUserInfoBaseDO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.*;
@@ -51,18 +53,18 @@ public class SocialuniCommonRepository {
         return t;
     }
 
-    @Cacheable(cacheNames = "commonRepostoryFindByExample")
+    /*@Cacheable(cacheNames = "commonRepostoryFindByExample",key = "#exampleObj.toString()")
     public <T> T findByExample(T exampleObj) {
         SimpleJpaRepository<T, Integer> simpleJpaRepository = getSimpleJpaRepository(exampleObj);
         Example<T> example = Example.of(exampleObj);
         return simpleJpaRepository.findOne(example).orElse(null);
-    }
+    }*/
 
-    public <T> List<T> findAllByExample(T exampleObj) {
+    /*public <T> List<T> findAllByExample(T exampleObj) {
         SimpleJpaRepository<T, Integer> simpleJpaRepository = getSimpleJpaRepository(exampleObj);
         Example<T> example = Example.of(exampleObj);
         return simpleJpaRepository.findAll(example);
-    }
+    }*/
 
     public <T> Long countByExample(T exampleObj) {
         SimpleJpaRepository<T, Integer> simpleJpaRepository = getSimpleJpaRepository(exampleObj);

@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.constant.status;
+package com.socialuni.social.im.enumeration;
 
 
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
