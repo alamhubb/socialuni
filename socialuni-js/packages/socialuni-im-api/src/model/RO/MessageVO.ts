@@ -1,10 +1,10 @@
 import SocialuniCommonStatus from "socialuni-constant/constant/status/SocialuniCommonStatus";
 import MessageContentType from "socialuni-constant/constant/mesaage/MessageContentType";
-import {OpenImMsgRO} from "socialuni-api/src/model/openIm/OpenImMsgRO";
-import JsonUtil from "socialuni-sdk/src/utils/JsonUtil";
-import {socialChatModule, socialUserModule} from "socialuni-sdk/src/store/store";
-import UUIDUtil from "socialuni-sdk/src/utils/UUIDUtil";
-import SocialuniUserRO from "socialuni-api/src/model/user/SocialuniUserRO";
+import {OpenImMsgRO} from "socialuni-base-api/src/model/openIm/OpenImMsgRO";
+import JsonUtil from "socialuni-util/src/util/JsonUtil";
+import {socialChatModule, socialuniUserModule} from "socialuni-sdk/src/store/store";
+import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
+import SocialuniUserRO from "socialuni-base-api/src/model/user/SocialuniUserRO";
 import {MessageType} from "socialuni-sdk/src/plugins/openIm/OpenImMessageType";
 import SocialuniMessageType from "socialuni-constant/constant/mesaage/SocialuniMessageType";
 
@@ -88,8 +88,8 @@ export default class MessageVO {
                 this.contentData = JSON.parse(msg.content);
             }
 
-            if ( msg.sendID === socialUserModule?.mineUser?.id) {
-                this.user = socialUserModule.mineUser
+            if ( msg.sendID === socialuniUserModule?.mineUser?.id) {
+                this.user = socialuniUserModule.mineUser
             } else {
                 const user = new SocialuniUserRO()
                 user.id = msg.sendID
@@ -108,7 +108,7 @@ export default class MessageVO {
             this.contentType = msg.contentType//MessageContentType.text
         } else {
             this.id = UUIDUtil.getUUID()
-            this.user = socialUserModule.mineUser
+            this.user = socialuniUserModule.mineUser
             this.readNum = 0
             this.content = content
             this.contentData = content;
@@ -127,7 +127,7 @@ export default class MessageVO {
     getUserRO(msg: OpenImMsgRO) {
         const user = new SocialuniUserRO()
         user.id = msg.sendID
-        user.isMine = msg.sendID === socialUserModule.userId
+        user.isMine = msg.sendID === socialuniUserModule.userId
         user.nickname = msg.senderNickname
         user.avatar = msg.senderFaceUrl
         return user

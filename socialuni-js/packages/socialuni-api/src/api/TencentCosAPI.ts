@@ -8,15 +8,15 @@ import COS from 'cos-wx-sdk-v5'
 import COS from 'cos-js-sdk-v5'
 // #endif
 import AppMsg from "socialuni-constant/constant/AppMsg";
-import TencentCosIdInfoRO from "socialuni-api/src/model/RO/tencent/cos/idImgInfo/TencentCosIdInfoRO";
-import request from "../request/request";
-import UniUtil from "../../../socialuni-sdk/src/utils/UniUtil";
-import CosAuthRO from "../model/cos/CosAuthRO";
-import CosUploadResult from "../model/cos/CosUploadResult";
-import DomFile from "../model/DomFile";
+import TencentCosIdInfoRO from "socialuni-base-api/src/model/RO/tencent/cos/idImgInfo/TencentCosIdInfoRO";
+import UniUtil from "../../../socialuni-util/src/util/UniUtil";
+import CosAuthRO from "socialuni-base-api/src/model/cos/CosAuthRO";
+import DomFile from "socialuni-util/src/model/DomFile";
+import CosUploadResult from "socialuni-base-api/src/model/cos/CosUploadResult";
+import AlertUtil from "socialuni-util/src/util/AlertUtil";
 
 export default class TencentCosAPI {
-    static async getImgTagAPI(imgUrl, imgKey, cosAuthRO: CosAuthRO) {
+    /*static async getImgTagAPI(imgUrl, imgKey, cosAuthRO: CosAuthRO) {
         const authKey = COS.getAuthorization({
             SecretId: cosAuthRO.credentials.tmpSecretId,
             SecretKey: cosAuthRO.credentials.tmpSecretKey,
@@ -31,7 +31,7 @@ export default class TencentCosAPI {
             }
         })
         return res
-        /*
+        /!*
         const res = await cosAuthRO.cos.getObject({
           Bucket: cosAuthRO.bucket,
           Region: cosAuthRO.region,
@@ -41,10 +41,10 @@ export default class TencentCosAPI {
           onProgress: function (progressData) {
             console.log(JSON.stringify(progressData))
           }
-        })*/
-    }
+        })*!/
+    }*/
 
-    static async getImgTextContentAPI(imgUrl, imgKey, cosAuthRO: CosAuthRO) {
+   /* static async getImgTextContentAPI(imgUrl, imgKey, cosAuthRO: CosAuthRO) {
         const authKey = COS.getAuthorization({
             SecretId: cosAuthRO.credentials.tmpSecretId,
             SecretKey: cosAuthRO.credentials.tmpSecretKey,
@@ -60,7 +60,7 @@ export default class TencentCosAPI {
         })
         console.log(res)
         return res
-        /*
+        /!*
         const res = await cosAuthRO.cos.getObject({
           Bucket: cosAuthRO.bucket,
           Region: cosAuthRO.region,
@@ -70,10 +70,10 @@ export default class TencentCosAPI {
           onProgress: function (progressData) {
             console.log(JSON.stringify(progressData))
           }
-        })*/
-    }
+        })*!/
+    }*/
 
-    static async getIdCardInfoAPI(imgUrl, imgKey, cosAuthRO: CosAuthRO) {
+    /*static async getIdCardInfoAPI(imgUrl, imgKey, cosAuthRO: CosAuthRO) {
         const authKey = COS.getAuthorization({
             SecretId: cosAuthRO.credentials.tmpSecretId,
             SecretKey: cosAuthRO.credentials.tmpSecretKey,
@@ -87,7 +87,7 @@ export default class TencentCosAPI {
             }
         }) as any
         return new TencentCosIdInfoRO(res)
-    }
+    }*/
 
     static async uploadFileAPI(imgFile: DomFile, cosAuthRO: CosAuthRO) {
         return new Promise<CosUploadResult>(async (resolve, reject) => {

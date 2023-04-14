@@ -1,14 +1,14 @@
-import ToastUtil from 'socialuni-sdk/src/utils/ToastUtil'
-import UniLoginUtil from 'socialuni-sdk/src/utils/UniLoginUtil'
-import PhoneAPI from "socialuni-api/src/api/socialuni/PhoneAPI";
-import {socialUserModule} from 'socialuni-sdk/src/store/store';
-import {socialSystemModule} from "socialuni-sdk/src/store/store";
+import ToastUtil from 'socialuni-util/src/util/ToastUtil'
+import UniLoginUtil from 'socialuni-util/src/util/UniLoginUtil'
+import {socialuniUserModule} from 'socialuni-user-sdk/src/store/SocialuniUserModule';
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
 
 export default class PhoneService {
     static async bindPhoneNum(phoneNum: string, authCode: string) {
         //手机号绑定
         const user = await PhoneAPI.bindPhoneNumAPI(phoneNum, authCode)
-        socialUserModule.setUser(user)
+        socialuniUserModule.setUser(user)
     }
 
     static async bindWxPhoneNum(wxGetPhoneInfoResult: any) {
@@ -23,9 +23,9 @@ export default class PhoneService {
             // encryptedData: ""
             // errMsg: "getPhoneNumber:ok"
             // iv: ""
-            wxGetPhoneInfoResult.detail.code = await UniLoginUtil.getLoginCode(socialSystemModule.provider)
+            wxGetPhoneInfoResult.detail.code = await UniLoginUtil.getLoginCode(socialuniSystemModule.provider)
             const res = await PhoneAPI.bindWxPhoneNumAPI(wxGetPhoneInfoResult.detail)
-            socialUserModule.setUser(res.data)
+            socialuniUserModule.setUser(res.data)
         } else {
             ToastUtil.error('您选择了不绑定')
         }

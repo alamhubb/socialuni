@@ -1,8 +1,9 @@
-import {socialUserModule} from "socialuni-sdk/src/store/store";
-import CommonUtil from "socialuni-sdk/src/utils/CommonUtil";
-import NotifyVO from "../model/NotifyVO";
-import JsonUtil from "./JsonUtil";
-import SocialuniConfig from "../config/SocialuniConfig";
+import CommonUtil from "socialuni-util/src/util/CommonUtil";
+import JsonUtil from "../../../socialuni-base-api/src/util/JsonUtil";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
+import {socialuniConfigModule} from "socialuni-base-api/src/store/SocialuniConfigModule";
+import NotifyVO from "socialuni-base-api/src/model/NotifyVO";
 
 export default class WebsocketUtil {
 
@@ -13,17 +14,15 @@ export default class WebsocketUtil {
   static websocketConnect (reload: boolean) {
     let token: string
 
-    if (socialUserModule.hasToken) {
-      token = socialUserModule.token
+    if (socialuniUserModule.hasToken) {
+      token = socialuniUserModule.token
     } else {
-      token = CommonUtil.getUUID()
+      token = UUIDUtil.getUUID()
     }
-    console.log(token)
-    console.log(SocialuniConfig.socialuniImWebsocketUrl)
     uni.connectSocket({
       //因为app不支持header中传参
       // url: AppConfig.websocketUrl + 'imserver/' + token,
-      url: SocialuniConfig.socialuniImWebsocketUrl + 'webSocket/message?token=' + token,
+      url: socialuniConfigModule.socialuniImWebsocketUrl + 'webSocket/message?token=' + token,
       /* url: CommonUtil.websocketUrl + 'webSocket/message',
       header: {
         token: token

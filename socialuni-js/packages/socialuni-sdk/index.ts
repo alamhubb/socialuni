@@ -16,7 +16,7 @@ const Socialuni = {
             }
         })
         app.mixin(shareComponent)
-       await initSocialuniStore()
+       // await initSocialuniStore()
         // UniUtil.showShareMenu()
     }
 }

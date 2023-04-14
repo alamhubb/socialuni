@@ -1,18 +1,17 @@
 import UserService from 'socialuni-sdk/src/service/UserService'
-import UniUserUtil from 'socialuni-sdk/src/utils/UniUserUtil'
-import ToastUtil from 'socialuni-sdk/src/utils/ToastUtil'
-import {socialSystemModule} from "socialuni-sdk/src/store/store";
+import UniUserUtil from 'socialuni-util/src/util/UniUserUtil'
+import ToastUtil from 'socialuni-util/src/util/ToastUtil'
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import Constants from "socialuni-constant/constant/Constant";
-import SocialPhoneNumLoginQO from "socialuni-api/src/model/phone/SocialPhoneNumLoginQO";
-import SocialuniMineUserAPI from "socialuni-api/src/api/socialuni/SocialuniMineUserAPI";
-import LoginAPI from "socialuni-api/src/api/socialuni/LoginAPI";
+import SocialPhoneNumLoginQO from "socialuni-base-api/src/model/phone/SocialPhoneNumLoginQO";
+import LoginAPI from "socialuni-user-api/src/api/LoginAPI";
 
 export default class LoginService {
     /**
      * 渠道登录的同一方法
      */
     static async providerLogin(provider: string, result: any) {
-        if (socialSystemModule.isMpQQ) {
+        if (socialuniSystemModule.isMpQQ) {
             if (result.detail.errMsg !== Constants.loginSuccess) {
                 return ToastUtil.toast('您取消了登录')
             }
@@ -22,16 +21,16 @@ export default class LoginService {
 
         const {data} = await LoginAPI.providerLoginAPI(loginQO)
 
-        UserService.getMineUserInitDataActionByToken(data)
+        // UserService.getMineUserInitDataActionByToken(data)
     }
 
-    static async phoneLogin(phoneNum: string, authCode: string) {
+    /*static async phoneLogin(phoneNum: string, authCode: string) {
         const phoneBindQO = new SocialPhoneNumLoginQO(phoneNum, authCode)
 
         const {data} = await LoginAPI.phoneLoginAPI(phoneBindQO)
 
         UserService.getMineUserInitDataActionByToken(data)
-    }
+    }*/
 
     /*static async mockSocialuniLogin () {
       constant mockRes = await MockAPI.mockOAuthUserInfoAPI()

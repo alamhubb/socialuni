@@ -7,9 +7,9 @@ import TalkDeleteVO from '../../model/talk/TalkDeleteVO'
 import CommentDeleteVO from '../../model/comment/CommentDeleteVO'
 import TalkVO from '../../model/talk/TalkVO'
 import request from '../../request/request';
-import ImgAddQO from "socialuni-api/src/model/user/ImgAddQO";
-import DomFile from "socialuni-api/src/model/DomFile";
-import UserTalkQueryVO from "socialuni-api/src/model/user/UserTalkQueryVO";
+import ImgAddQO from "socialuni-base-api/src/model/user/ImgAddQO";
+import DomFile from "socialuni-base-api/src/model/DomFile";
+import UserTalkQueryVO from "socialuni-base-api/src/model/user/UserTalkQueryVO";
 
 export default class SocialuniTalkAPI {
     static queryStickTalksAPI() {

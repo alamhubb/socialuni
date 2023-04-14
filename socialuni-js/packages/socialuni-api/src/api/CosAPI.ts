@@ -1,4 +1,4 @@
-import CosAuthRO from 'socialuni-api/src/model/cos/CosAuthRO'
+import CosAuthRO from 'socialuni-base-api/src/model/cos/CosAuthRO'
 import request from '../request/request';;
 
 export default class CosAPI {

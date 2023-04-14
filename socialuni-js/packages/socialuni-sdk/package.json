@@ -17,8 +17,6 @@
   },
   "devDependencies": {
     "@dcloudio/types": "^3.0.13",
-    "pinia": "^2.0.22",
-    "pinia-class-component": "^0.9.4",
     "typescript": "^4.7.4",
     "vue": "^3.2.41",
     "vue-class-component": "^8.0.0-rc.1",

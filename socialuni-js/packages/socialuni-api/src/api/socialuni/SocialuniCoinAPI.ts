@@ -1,6 +1,6 @@
 import request from '../../request/request';
-import UserPayResultVO from "socialuni-api/src/model/user/UserPayResultVO";
-import SocialuniPayCoinQO from "socialuni-api/src/model/user/SocialuniPayCoinQO";
+import UserPayResultVO from "socialuni-base-api/src/model/user/UserPayResultVO";
+import SocialuniPayCoinQO from "socialuni-base-api/src/model/user/SocialuniPayCoinQO";
 
 export default class SocialuniCoinAPI {
   static payCoinAPI(provider: string, amount: number) {

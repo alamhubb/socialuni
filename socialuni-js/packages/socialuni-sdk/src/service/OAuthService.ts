@@ -3,7 +3,7 @@ import UserService from 'socialuni-sdk/src/service/UserService'
 import UniProviderLoginQO from '@/socialuni/model/UniProviderLoginQO'
 import LoginProvider from '@/socialuni/constant/LoginProvider'
 import PhoneAPI from '@/socialuni/api/socialuni/PhoneAPI'
-import { socialUserModule } from '@/socialuni/store'
+import { socialuniUserModule } from '@/socialuni/store'
 import SocialLoginRO from '@/socialuni/model/social/SocialLoginRO'
 import UniUserInfoRO from '@/socialuni/model/UniUserInfoRO'
 import ResultRO from '@/socialuni/model/social/ResultRO'
@@ -20,7 +20,7 @@ export default class OAuthService {
       if (extraData) {
         if (extraData.success) {
           const authData: SocialLoginRO<UniUserInfoRO> = extraData.data
-          if (socialUserModule.hasUser) {
+          if (socialuniUserModule.hasUser) {
             await OAuthService.oAuthBindSocialuniPhone(authData)
           } else {
             await OAuthService.oAuthUserPhoneNumLogin(authData)
@@ -46,6 +46,6 @@ export default class OAuthService {
 
     const { data } = await PhoneAPI.bindSocialuniPhoneNum(providerLoginQO)
 
-    socialUserModule.setUser(data)
+    socialuniUserModule.setUser(data)
   }
 }

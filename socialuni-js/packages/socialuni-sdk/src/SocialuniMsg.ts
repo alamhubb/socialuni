@@ -1,4 +1,4 @@
-import SocialuniChatRO from "socialuni-api/src/model/SocialuniChatRO";
+import SocialuniChatRO from "socialuni-base-api/src/model/SocialuniChatRO";
 import {socialChatModule} from "./store/store";
 
 export default class SocialuniMsg {

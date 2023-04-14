@@ -57,6 +57,7 @@
     "pinia": "^2.0.22",
     "pinia-class-component": "^0.9.4",
     "socialuni-api": "../packages/socialuni-api",
+    "socialuni-user": "../packages/socialuni-user",
     "socialuni-constant": "../packages/socialuni-constant",
     "socialuni-sdk": "../packages/socialuni-sdk",
     "socialuni-view": "../packages/socialuni-view",

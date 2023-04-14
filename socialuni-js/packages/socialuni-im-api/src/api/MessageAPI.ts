@@ -1,4 +1,4 @@
-import MsgDelete from 'socialuni-api/src/model/message/MsgDeleteVO'
+import MsgDelete from 'socialuni-base-api/src/model/message/MsgDeleteVO'
 import socialuniImRequest from "./socialuniImRequest";
 import MessageQueryVO from "../model/QO/message/MessageQueryVO";
 import MessageAddVO from "../model/QO/message/MessageAddVO";

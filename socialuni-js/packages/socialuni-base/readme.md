@@ -1,2 +1,1 @@
-基础包
-无业务
+socialuni-base-sdk
