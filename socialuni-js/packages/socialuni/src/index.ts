@@ -1,4 +1,6 @@
 import {App, defineComponent} from "vue";
+import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
+import UniUtil from "socialuni-util/src/util/UniUtil";
 
 const Socialuni = {
     async install(app:App) {
@@ -12,6 +14,11 @@ const Socialuni = {
                     path: path,
                     imageUrl: imageUrl
                 }
+            },
+            created() {
+                onLoad((params) => {
+                    UniUtil.showShareMenu()
+                })
             }
         })
         app.mixin(shareComponent)

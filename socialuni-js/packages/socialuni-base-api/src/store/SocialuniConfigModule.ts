@@ -7,8 +7,8 @@ import ReportAPI from "socialuni-api/src/api/ReportAPI";
 
 class SocialuniConfigModule {
     readonly socialuniUrl = (import.meta.env.VITE_APP_SOCIALUNI_URL || 'https://api.socialuni.cn') + '/'
-    readonly socialuniUserUrl = (import.meta.env.VITE_APP_SOCIALUNI_USER_URL || socialuniConfigModule.socialuniUrl) + '/'
-    readonly socialuniImUrl = (import.meta.env.VITE_APP_SOCIALUNI_IM_URL || socialuniConfigModule.socialuniUrl) + '/'
+    readonly socialuniUserUrl = (import.meta.env.VITE_APP_SOCIALUNI_USER_URL || this.socialuniUrl) + '/'
+    readonly socialuniImUrl = (import.meta.env.VITE_APP_SOCIALUNI_IM_URL || this.socialuniUrl) + '/'
     readonly socialuniImWebsocketUrl = (import.meta.env.VITE_APP_SOCIALUNI_IM_WEBSOCKET_URL) + '/'
     readonly socialuniSecretKey = import.meta.env.VITE_APP_SOCIALUNI_SECRET_KEY || null
 
