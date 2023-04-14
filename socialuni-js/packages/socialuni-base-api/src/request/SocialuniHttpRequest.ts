@@ -1,7 +1,6 @@
 import SocialuniRequestHeaderName from "socialuni-constant/constant/SocialuniRequestHeaderName";
 import UniUtil from "socialuni-util/src/util/UniUtil";
 import ErrorConst from "socialuni-constant/constant/ErrorConst";
-import UserService from "socialuni-sdk/src/service/UserService";
 import MsgUtil from "socialuni-util/src/util/MsgUtil";
 import AlertUtil from "socialuni-util/src/util/AlertUtil";
 import UniAppHttpRequest, {Config, Interceptor, RequestConfig, Response} from "./UniAppHttpRequest";
@@ -10,6 +9,7 @@ import JsonUtil from "../util/JsonUtil";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";;
 import {socialuniConfigModule} from "../store/SocialuniConfigModule";
 import SocialuniAppAPI from "../api/SocialuniAppAPI";
+import UserService from "socialuni-user-sdk/src/service/UserService";
 
 export default class SocialuniHttpRequest extends UniAppHttpRequest {
     config: Config = {

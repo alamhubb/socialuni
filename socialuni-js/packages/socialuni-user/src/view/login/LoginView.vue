@@ -124,8 +124,6 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import LoginService from "socialuni-sdk/src/service/LoginService";
-import PhoneService from "socialuni-sdk/src/service/PhoneService";
 import AlertUtil from "socialuni-util/src/util/AlertUtil";
 import PhoneNumFormData from "./PhoneNumFormData";
 import UserPrivacyAgreement from "./UserPrivacyAgreement.vue";
@@ -136,6 +134,8 @@ import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
 import PageUtil from "socialuni-util/src/util/PageUtil";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import LoginService from "socialuni-user-sdk/src/service/LoginService";
+import PhoneService from "socialuni-user-sdk/src/service/PhoneService";
 
 @Options({
   components: {

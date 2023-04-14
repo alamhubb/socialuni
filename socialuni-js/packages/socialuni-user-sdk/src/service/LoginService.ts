@@ -1,10 +1,10 @@
-import UserService from 'socialuni-sdk/src/service/UserService'
 import UniUserUtil from 'socialuni-util/src/util/UniUserUtil'
 import ToastUtil from 'socialuni-util/src/util/ToastUtil'
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import Constants from "socialuni-constant/constant/Constant";
 import SocialPhoneNumLoginQO from "socialuni-base-api/src/model/phone/SocialPhoneNumLoginQO";
 import LoginAPI from "socialuni-user-api/src/api/LoginAPI";
+import UserService from "./UserService";
 
 export default class LoginService {
     /**
@@ -24,13 +24,11 @@ export default class LoginService {
         // UserService.getMineUserInitDataActionByToken(data)
     }
 
-    /*static async phoneLogin(phoneNum: string, authCode: string) {
+    static async phoneLogin(phoneNum: string, authCode: string) {
         const phoneBindQO = new SocialPhoneNumLoginQO(phoneNum, authCode)
-
         const {data} = await LoginAPI.phoneLoginAPI(phoneBindQO)
-
         UserService.getMineUserInitDataActionByToken(data)
-    }*/
+    }
 
     /*static async mockSocialuniLogin () {
       constant mockRes = await MockAPI.mockOAuthUserInfoAPI()
