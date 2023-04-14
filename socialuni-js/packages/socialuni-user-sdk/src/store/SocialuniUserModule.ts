@@ -1,6 +1,16 @@
 import {reactive, UnwrapNestedRefs} from "vue";
 import SocialuniMineUserRO from "socialuni-base-api/src/model/user/SocialuniMineUserRO";
 import SocialuniUserStorageUtil from "../util/SocialuniUserStorageUtil";
+import SocialLoginRO from "socialuni-base-api/src/model/social/SocialLoginRO";
+import LoginAPI from "socialuni-user-api/src/api/LoginAPI";
+import {socialuniTokenModule} from "socialuni-base-api/src/store/SocialuniTokenModule";
+import AlertUtil from "socialuni-util/src/util/AlertUtil";
+import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
+import CenterUserDetailRO from "socialuni-base-api/src/model/social/CenterUserDetailRO";
+import UserMsgUtil from "../util/UserMsgUtil";
+import ToastUtil from "socialuni-util/src/util/ToastUtil";
+import {socialuniConfigModule} from "socialuni-base-api/src/store/SocialuniConfigModule";
+import SocialuniUserExpandAPI from "socialuni-user-api/src/api/SocialuniUserExpandAPI";
 
 class SocialuniUserModule {
     private userInfo: SocialuniMineUserRO = SocialuniUserStorageUtil.get() || null
@@ -14,7 +24,6 @@ class SocialuniUserModule {
         return this.mineUser && this.mineUser.phoneNum
     }
 
-    /*
     // private userToken: string = SocialuniTokenUtil.get() || null
 
     //查询用户信息
@@ -41,7 +50,7 @@ class SocialuniUserModule {
             const tokenRo = await LoginAPI.refreshToken();
             // 有才设置新的token.
             if (tokenRo?.data?.token) {
-                this.setToken(tokenRo?.data?.token);
+                socialuniTokenModule.setToken(tokenRo?.data?.token);
             }
         }
     }
@@ -49,17 +58,18 @@ class SocialuniUserModule {
     //对外开放的只有一个的登录接口
 
 
-
     get hasToken(): boolean {
-        return !!socialuniUserModule.token
+        return !!socialuniTokenModule.token
     }
 
     setUserAndToken(loginRO: SocialLoginRO<SocialuniMineUserRO>) {
+            console.log(loginRO)
         if (loginRO) {
             this.setUser(loginRO.user)
-            this.setToken(loginRO.token)
+            console.log(loginRO.token)
+            socialuniTokenModule.setToken(loginRO.token)
         } else {
-            this.setToken(null)
+            socialuniTokenModule.setToken(null)
             this.setUser(null)
         }
     }
@@ -92,16 +102,16 @@ class SocialuniUserModule {
 
     destroyAccount() {
         return AlertUtil.confirm('是否注销账号，7天内不再登录，账号将彻底清空无法使用').then(() => {
-            /!*SocialuniMineUserAPI.destroyAccountAPI().then(() => {
+            /*SocialuniMineUserAPI.destroyAccountAPI().then(() => {
                 UserService.userLogout()
                 ToastUtil.toast('注销成功')
-            })*!/
+            })*/
         })
     }
 
-    /!**
+    /**
      * 调用后台仅获取user信息
-     *!/
+     */
 
     getMineUserAction() {
         return SocialuniMineUserAPI.getMineUserInfoAPI().then((res: any) => {
@@ -110,10 +120,10 @@ class SocialuniUserModule {
     }
 
     async getOpenContactInfo(user: CenterUserDetailRO) {
-        if (!this.mineUser){
-            MsgUtil.unLoginMessage()
+        if (!this.mineUser) {
+            UserMsgUtil.unLoginMessage()
         }
-        if (user.openContactInfo){
+        if (user.openContactInfo) {
             ToastUtil.error("已成功获取，无需再次获取")
         }
         const userShell = this.mineUser.socialCoin
@@ -131,7 +141,7 @@ class SocialuniUserModule {
             //递归调用自己
             await this.getOpenContactInfo(user)
         }
-    }*/
+    }
 }
 
 export const socialuniUserModule: UnwrapNestedRefs<SocialuniUserModule> = reactive(new SocialuniUserModule())

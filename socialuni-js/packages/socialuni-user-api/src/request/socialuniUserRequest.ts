@@ -1,11 +1,11 @@
 import SocialuniHttpRequest from "socialuni-base-api/src/request/SocialuniHttpRequest";
-import {socialuniConfigModule} from "socialuni-base-api/src/store/SocialuniConfigModule";
+import SocialuniConfig from "socialuni-base-api/src/config/SocialuniConfigModule";
 
 const socialuniUserRequest: SocialuniHttpRequest = new SocialuniHttpRequest()
 
 /* 设置全局配置 */
 socialuniUserRequest.setConfig(config => {
-    config.baseUrl = socialuniConfigModule.socialuniUserUrl
+    config.baseUrl = SocialuniConfig.socialuniUserUrl
     return config
 })
 

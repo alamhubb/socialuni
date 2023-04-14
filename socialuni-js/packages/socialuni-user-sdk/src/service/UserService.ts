@@ -29,13 +29,14 @@ export default class UserService {
      * 调用后台仅user和user初始化相关信息,通知列表，开启websocket连接
      */
     static getMineUserInitDataActionByToken(loginRO: SocialLoginRO<SocialuniMineUserRO>) {
-        // socialuniUserModule.setUserAndToken(loginRO)
+        console.log(loginRO)
+        socialuniUserModule.setUserAndToken(loginRO)
         //登录之后重连websocket
         // WebsocketUtil.websocketClose()
-        // UserService.getAppLunchDataByHasUser()
+        UserService.getAppLunchDataByHasUser()
         // socialChatModule.getChatsAction()
         // appModule.getImgPathAction()
-        // return loginRO.user
+        return loginRO.user
     }
 
     static loginOut() {

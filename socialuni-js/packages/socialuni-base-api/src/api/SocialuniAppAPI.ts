@@ -1,13 +1,15 @@
-import FrontErrorLogVO from "socialuni-base-api/src/model/FrontErrorLogVO";
-import ObjectUtil from "socialuni-util/src/util/ObjectUtil";
-import socialuniAppRequest from "../request/socialuniAppRequest";
-import AppInitDataRO from "../model/config/AppInitDataRO";
-import AppUpdateResultVO from "../model/app/AppUpdateResultVO";
-import HomeSwiperVO from "../model/HomeSwiperVO";
-import AppUpdateVO from "../model/app/AppUpdateVO";
-import SocialuniTalkTabRO from "../model/talk/SocialuniTalkTabRO";
-import JsonUtil from "../util/JsonUtil";
+// import FrontErrorLogVO from "socialuni-base-api/src/model/FrontErrorLogVO";
+// import ObjectUtil from "socialuni-util/src/util/ObjectUtil";
+// import socialuniAppRequest from "../request/socialuniAppRequest";
+// import AppInitDataRO from "../model/config/AppInitDataRO";
+// import AppUpdateResultVO from "../model/app/AppUpdateResultVO";
+// import HomeSwiperVO from "../model/HomeSwiperVO";
+// import AppUpdateVO from "../model/app/AppUpdateVO";
+// import SocialuniTalkTabRO from "../model/talk/SocialuniTalkTabRO";
+// import JsonUtil from "../util/JsonUtil";
 
+
+import socialuniAppRequest from "../request/socialuniAppRequest";
 
 export default class SocialuniAppAPI {
   static getImgPathAPI() {

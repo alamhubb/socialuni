@@ -10,10 +10,11 @@ import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemMod
 import {socialuniConfigModule} from "../store/SocialuniConfigModule";
 import SocialuniAppAPI from "../api/SocialuniAppAPI";
 import UserService from "socialuni-user-sdk/src/service/UserService";
+import SocialuniConfig from "../config/SocialuniConfigModule";
 
 export default class SocialuniHttpRequest extends UniAppHttpRequest {
     config: Config = {
-        baseUrl: socialuniConfigModule.socialuniUrl,
+        baseUrl: SocialuniConfig.socialuniUrl,
         timeout: 10 * 1000,
         header: {
             'Content-Type': 'application/json'
@@ -34,8 +35,8 @@ export default class SocialuniHttpRequest extends UniAppHttpRequest {
         // 如果配置了开发环境，就可以展示具体的报错内容。
         config.header['X-NODE-ENV'] = socialuniSystemModule.NODE_ENV
         //
-        if (socialuniConfigModule.socialuniSecretKey) {
-            config.header.socialuniSecretKey = socialuniConfigModule.socialuniSecretKey
+        if (SocialuniConfig.socialuniSecretKey) {
+            config.header.socialuniSecretKey = SocialuniConfig.socialuniSecretKey
         }
         config.header[SocialuniRequestHeaderName.system] = socialuniSystemModule.system
         config.header[SocialuniRequestHeaderName.platform] = socialuniSystemModule.platform
@@ -84,7 +85,7 @@ export default class SocialuniHttpRequest extends UniAppHttpRequest {
                         // 理论上不需要，因为token不会失效，也不会错误
                         // 已知可能，切换环境导致token不同
                         UserService.clearUserInfo()
-                        MsgUtil.unLoginMessage()
+                        // MsgUtil.unLoginMessage()
                         break
                     case ErrorConst.banned:
                         // 理论上不需要，因为token不会失效，也不会错误
