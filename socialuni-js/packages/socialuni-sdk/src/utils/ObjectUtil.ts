@@ -7,19 +7,6 @@ export default class ObjectUtil {
         return null
     }
 
-    static toJson(object: any): string {
-        // return JSON.stringify(object)
-        return JSON.stringify(object)
-    }
-
-    static toParse(objJson: string): any {
-        return JSON.parse(objJson)
-    }
-
-    static log(object: any) {
-        console.log(JSON.stringify(object))
-    }
-
     static toFormData(object: Record<string, any> | any): FormData {
         const formData = new FormData()
         Object.keys(object).forEach((key) => {

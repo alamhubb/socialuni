@@ -1,25 +1,31 @@
-//用来存储当前用户的一些信息
-import {Pinia, Store} from "pinia-class-component"
-import SocialLoginRO from "socialuni-api/src/model/social/SocialLoginRO";
-import {socialConfigModule, socialSystemModule, socialUserModule} from "./store";
-import SocialuniTokenUtil from "socialuni-base/src/utils/SocialuniTokenUtil";
-import SocialuniUserStorageUtil from "socialuni-sdk/src/utils/SocialuniUserStorageUtil";
-import SocialuniImUserTokenUtil from "../utils/SocialuniImUserTokenUtil";
-import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
-import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
-import UserService from "../service/UserService";
+import {reactive, UnwrapNestedRefs} from "vue";
+import SocialuniTokenUtil from "../utils/SocialuniTokenUtil";
 import SocialuniMineUserRO from "socialuni-api/src/model/user/SocialuniMineUserRO";
+import SocialuniUserStorageUtil from "socialuni-sdk/src/utils/SocialuniUserStorageUtil";
 import SocialuniMineUserAPI from "socialuni-api/src/api/socialuni/SocialuniMineUserAPI";
 import LoginAPI from "socialuni-api/src/api/socialuni/LoginAPI";
-import SocialuniUserExpandAPI from "socialuni-api/src/api/socialuni/SocialuniUserExpandAPI";
-import PlatformUtils from "../utils/PlatformUtils";
+import SocialLoginRO from "socialuni-api/src/model/social/SocialLoginRO";
+import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
+import {socialConfigModule} from "socialuni-sdk/src/store/store";
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
-import MsgUtil from "../utils/MsgUtil";
-import {socialuniUserData} from "socialuni-base/src/socialuniData/SocialuniUserData";
+import MsgUtil from "socialuni-sdk/src/utils/MsgUtil";
+import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
+import SocialuniUserExpandAPI from "socialuni-api/src/api/socialuni/SocialuniUserExpandAPI";
+import PlatformUtils from "socialuni-sdk/src/utils/PlatformUtils";
 
-@Store
-export default class SocialUserModule extends Pinia {
+class SocialuniUserModule {
+    userToken: string = SocialuniTokenUtil.get() || null
     private userInfo: SocialuniMineUserRO = SocialuniUserStorageUtil.get() || null
+
+    setToken(token: string) {
+        this.userToken = token
+        SocialuniTokenUtil.set(token)
+    }
+
+    get token() {
+        return this.userToken
+    }
+
     // private userToken: string = SocialuniTokenUtil.get() || null
 
     //查询用户信息
@@ -59,11 +65,7 @@ export default class SocialUserModule extends Pinia {
     }
 
     get hasToken(): boolean {
-        return !!socialuniUserData.token
-    }
-
-    get token() {
-        return socialuniUserData.token
+        return !!socialuniUserModule.token
     }
 
     setUserAndToken(loginRO: SocialLoginRO<SocialuniMineUserRO>) {
@@ -74,11 +76,6 @@ export default class SocialUserModule extends Pinia {
             this.setToken(null)
             this.setUser(null)
         }
-    }
-
-    private setToken(token: string) {
-        socialuniUserData.setToken(token)
-        SocialuniTokenUtil.set(token)
     }
 
     isMine(user: SocialuniMineUserRO) {
@@ -109,6 +106,7 @@ export default class SocialUserModule extends Pinia {
         return null
     }
 
+
     destroyAccount() {
         return AlertUtil.confirm('是否注销账号，7天内不再登录，账号将彻底清空无法使用').then(() => {
             /*SocialuniMineUserAPI.destroyAccountAPI().then(() => {
@@ -124,7 +122,7 @@ export default class SocialUserModule extends Pinia {
 
     getMineUserAction() {
         return SocialuniMineUserAPI.getMineUserInfoAPI().then((res: any) => {
-            socialUserModule.setUser(res.data)
+            socialuniUserModule.setUser(res.data)
         })
     }
 
@@ -152,3 +150,5 @@ export default class SocialUserModule extends Pinia {
         }
     }
 }
+
+export const socialuniUserModule: UnwrapNestedRefs<SocialuniUserModule> = reactive(new SocialuniUserModule())

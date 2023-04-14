@@ -1,6 +1,8 @@
-import SocialuniConfig from "socialuni-base/src/config/SocialuniConfig";
 import {socialUserModule} from "socialuni-sdk/src/store/store";
 import CommonUtil from "socialuni-sdk/src/utils/CommonUtil";
+import NotifyVO from "../model/NotifyVO";
+import JsonUtil from "./JsonUtil";
+import SocialuniConfig from "../config/SocialuniConfig";
 
 export default class WebsocketUtil {
 
@@ -74,9 +76,10 @@ export default class WebsocketUtil {
     })
 
     uni.onSocketMessage((res: any) => {
-      /*const notify: NotifyVO = JsonUtils.jsonParse(res.data)
+      const notify: NotifyVO = JsonUtil.parse(res.data)
+      console.log(notify)
       // todo 直接将这个评论添加到talk中
-      if (notify.type === NotifyType.comment) {
+      /*if (notify.type === NotifyType.comment) {
         appModule.addUnreadNotifies(notify.user)
       } else if (notify.type === NotifyType.message) {
         console.log('接受了消息')

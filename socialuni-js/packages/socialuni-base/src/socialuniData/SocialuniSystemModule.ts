@@ -5,7 +5,7 @@ import SocialuniUniDeviceType from "socialuni-constant/constant/SocialuniUniDevi
 import SocialuniSystemType from "socialuni-constant/constant/SocialuniSystemType";
 import {reactive} from "vue";
 
-class SocialuniSystemData {
+class SocialuniSystemModule {
     //设备，pc，手机，ipad
     //@ts-ignore
     isDev = process.env.NODE_ENV === 'development'
@@ -124,4 +124,4 @@ class SocialuniSystemData {
     }
 }
 
-export const socialuniSystemData: SocialuniSystemData = reactive(new SocialuniSystemData())
+export const socialuniSystemModule: SocialuniSystemModule = reactive(new SocialuniSystemModule())

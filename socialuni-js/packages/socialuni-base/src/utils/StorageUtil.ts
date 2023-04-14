@@ -3,8 +3,8 @@
  * @Date 2021-03-05 20:09
  * @Version 1.0
  */
-import ObjectUtil from 'socialuni-sdk/src/utils/ObjectUtil'
 import SocialSystemInfo from "socialuni-constant/constant/SocialSystemInfo";
+import JsonUtil from "./JsonUtil";
 
 export default class StorageUtil {
     private static readonly devPre: string = 'dev_'
@@ -15,7 +15,7 @@ export default class StorageUtil {
             key = StorageUtil.devPre + key
         }
         if (value) {
-            uni.setStorageSync(key, ObjectUtil.toJson(value))
+            uni.setStorageSync(key, JsonUtil.toJson(value))
         } else {
             StorageUtil.remove(key)
         }
@@ -27,7 +27,7 @@ export default class StorageUtil {
         }
         const objStr: string = uni.getStorageSync(key)
         if (objStr) {
-            return ObjectUtil.toParse(objStr)
+            return JsonUtil.parse(objStr)
         }
         return null
     }
@@ -39,7 +39,7 @@ export default class StorageUtil {
         if (value || value === 0 || value === '') {
             //string直接转换的话会加上""
             if (value instanceof Object) {
-                uni.setStorageSync(key, ObjectUtil.toJson(value))
+                uni.setStorageSync(key, JsonUtil.toJson(value))
             } else {
                 uni.setStorageSync(key, value)
             }
@@ -55,7 +55,7 @@ export default class StorageUtil {
         const objStr: string = uni.getStorageSync(key)
         if (objStr) {
             try {
-                return ObjectUtil.toParse(objStr)
+                return JsonUtil.parse(objStr)
             } catch {
                 return objStr
             }

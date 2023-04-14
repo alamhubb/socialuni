@@ -1,7 +1,7 @@
 import SocialuniRequestHeaderName from "socialuni-constant/constant/SocialuniRequestHeaderName";
-import {socialuniUserData} from "../socialuniData/SocialuniUserData";
-import {socialuniConfigData} from "../socialuniData/SocialuniConfigData";
-import {socialuniSystemData} from "../socialuniData/SocialuniSystemData";
+import {socialuniUserData} from "../socialuniData/SocialuniUserModule";
+import {socialuniConfigModule} from "../socialuniData/SocialuniConfigModule";
+import {socialuniSystemModule} from "../socialuniData/SocialuniSystemModule";
 import UniUtil from "socialuni-sdk/src/utils/UniUtil";
 import ErrorConst from "socialuni-constant/constant/ErrorConst";
 import UserService from "socialuni-sdk/src/service/UserService";
@@ -13,7 +13,7 @@ import SocialuniAppAPI from "../api/socialuni/SocialuniAppAPI";
 
 export default class SocialuniHttpRequest extends UniAppHttpRequest {
     config: Config = {
-        baseUrl: socialuniConfigData.socialuniUrl,
+        baseUrl: socialuniConfigModule.socialuniUrl,
         timeout: 10 * 1000,
         header: {
             'Content-Type': 'application/json'
@@ -34,12 +34,12 @@ export default class SocialuniHttpRequest extends UniAppHttpRequest {
         // 如果配置了开发环境，就可以展示具体的报错内容。
         config.header['X-NODE-ENV'] = process.env.NODE_ENV
         //
-        if (socialuniConfigData.socialuniSecretKey) {
-            config.header.socialuniSecretKey = socialuniConfigData.socialuniSecretKey
+        if (socialuniConfigModule.socialuniSecretKey) {
+            config.header.socialuniSecretKey = socialuniConfigModule.socialuniSecretKey
         }
-        config.header[SocialuniRequestHeaderName.system] = socialuniSystemData.system
-        config.header[SocialuniRequestHeaderName.platform] = socialuniSystemData.platform
-        config.header[SocialuniRequestHeaderName.provider] = socialuniSystemData.provider
+        config.header[SocialuniRequestHeaderName.system] = socialuniSystemModule.system
+        config.header[SocialuniRequestHeaderName.platform] = socialuniSystemModule.platform
+        config.header[SocialuniRequestHeaderName.provider] = socialuniSystemModule.provider
         /*if (socialLocationModule.location && socialLocationModule.location.position) {
             config.header[SocialuniRequestHeaderName.socialuniCityAdCode] = socialLocationModule.location.adCode
             config.header[SocialuniRequestHeaderName.socialuniCityLon] = socialLocationModule.location.lon

@@ -1,15 +1,12 @@
-import ObjectUtil from "./ObjectUtil";
-
 export default class JsonUtil {
     static toJson(object: any): string {
-        // return JSON.stringify(object)
         if (object) {
             return JSON.stringify(object)
         }
-        return null
+        return ""
     }
 
-    static toParse(objJson: string): any {
+    static parse(objJson: string): any {
         if (objJson) {
             return JSON.parse(objJson)
         }
