@@ -1,6 +1,6 @@
 <template>
-  <view class="bg-default pb-100">
-<!--    <view class="mb-sm pt-200 bg-no-repeat"
+  <view v-if="user" class="bg-default pb-100">
+    <view class="mb-sm pt-200 bg-no-repeat"
           style="background-image: url('https://cdxapp-1257733245.file.myqcloud.com/socialuni/common/app/userDefaultTopImg.jpg')">
       <view class="pd-sm bg-white bt-radius-10">
         <view class="row-col-center py-sm">
@@ -17,8 +17,8 @@
               </view>
               <view class="flex-row">
                 <social-gender-tag class="mt-sm" :user="user"></social-gender-tag>
-                &lt;!&ndash;                <view v-if="userProp.vipFlag" class="cu-tag bg-red radius" @click="openVip">VIP</view>
-                                <view v-else class="cu-tag bg-grey radius" @click="openVip">VIP</view>&ndash;&gt;
+                <!--                <view v-if="userProp.vipFlag" class="cu-tag bg-red radius" @click="openVip">VIP</view>
+                                <view v-else class="cu-tag bg-grey radius" @click="openVip">VIP</view>-->
               </view>
             </view>
 
@@ -29,9 +29,9 @@
               </q-button>
             </view>
             <view v-else class="row-col-center">
-              &lt;!&ndash;                不为自己且未关注&ndash;&gt;
-              &lt;!&ndash;            不为ios，或者不为付费，则显示&ndash;&gt;
-              &lt;!&ndash;              <q-button v-if="!isIos||!user.chat.needPayOpen" @click="toMessagePage">&ndash;&gt;
+              <!--                不为自己且未关注-->
+              <!--            不为ios，或者不为付费，则显示-->
+              <!--              <q-button v-if="!isIos||!user.chat.needPayOpen" @click="toMessagePage">-->
               <q-button @click="toMessagePage" class="mr-sm">
                 <q-icon icon="mdi-chat-outline" size="14"></q-icon>私信
               </q-button>
@@ -40,7 +40,7 @@
                 {{ followStatus }}
               </q-button>
               <view v-else class="color-content" @click.stop="addFollow">{{ followStatus }}</view>
-              &lt;!&ndash;              <button v-else class="cu-btn round bd-gray bg-white" @click.stop="addFollow">已关注</button>&ndash;&gt;
+              <!--              <button v-else class="cu-btn round bd-gray bg-white" @click.stop="addFollow">已关注</button>-->
             </view>
           </view>
         </view>
@@ -67,8 +67,8 @@
           </view>
         </view>
 
-        &lt;!&ndash;因微信平台不允许认证功能平台问题暂时注释成年认证相关功能&ndash;&gt;
-        &lt;!&ndash;        <div class="flex-row pl-xs">
+        <!--因微信平台不允许认证功能平台问题暂时注释成年认证相关功能-->
+        <!--        <div class="flex-row pl-xs">
                   <div v-if="user.identityAuth" class="q-tag-success q-box-nn" @click.stop="toIdentityAuth">
                     <q-icon class="color-success mr-mn" size="14" icon="level"/>
                     <div class="font-xs">成年</div>
@@ -77,8 +77,8 @@
                     <q-icon class="color-sub mr-mn" size="14" icon="level"/>
                     <div class="font-xs">成年</div>
                   </div>
-                </div>&ndash;&gt;
-        &lt;!&ndash;        <view class="ml-5 cu-capsule radius" @click="hintJusticeInfo">
+                </div>-->
+        <!--        <view class="ml-5 cu-capsule radius" @click="hintJusticeInfo">
                   <view class='cu-tag bg-green'>
                     <q-icon size="18" icon="mdi-sword-cross"/>
                   </view>
@@ -101,14 +101,14 @@
                   <view class="cu-tag bg-white bd-orange bd-r-radius">
                     {{ userProp.faceRatio }}
                   </view>
-                </view>&ndash;&gt;
+                </view>-->
 
         <view class="row-col-center my">
           <q-icon class="text-gray mr-xs" icon="map-fill"/>
           地区：{{ user.city || '' }}
         </view>
 
-        &lt;!&ndash;        <view v-if="isMine" class="py-sm q-solid-bottom">
+        <!--        <view v-if="isMine" class="py-sm q-solid-bottom">
                   <div class="row-col-center">
                     <image class="size20px mr-xs"
                            mode="aspectFit"
@@ -128,7 +128,7 @@
                       </button>
                     </view>
                   </div>
-                </view>&ndash;&gt;
+                </view>-->
         <view v-if="isMine" class="mb">
           <div class="row-col-center">
             <q-icon class="text-gray mr-xs" icon="mdi-cellphone-android"/>
@@ -158,7 +158,7 @@
 
         <slot name="list"></slot>
 
-        &lt;!&ndash;        <div v-if="isMine" class="row-col-center mb-smm">
+        <!--        <div v-if="isMine" class="row-col-center mb-smm">
                   <q-icon class="text-gray mr-xs" icon="account-fill"/>
                   联系方式：
                   <div v-if="user.contactInfo" @click="openSetContactInfo" class="row-col-center ">
@@ -174,17 +174,17 @@
                   <q-icon class="text-gray mr-xs" icon="mdi-school"/>
                   联系方式：
                   <div class="q-tag">{{ user.contactInfo }}(点击获取联系方式)</div>
-                </div>&ndash;&gt;
+                </div>-->
 
         <user-school-edit-dialog ref="schoolEditDialog"></user-school-edit-dialog>
 
         <user-contact-info-edit-dialog ref="contactInfoEditDialog"></user-contact-info-edit-dialog>
 
-        &lt;!&ndash;        你看一个人的时候想看他的什么，看他的背景图，看他的关注动态。看他的图片。&ndash;&gt;
-        &lt;!&ndash;        看他的性别等级&ndash;&gt;
+        <!--        你看一个人的时候想看他的什么，看他的背景图，看他的关注动态。看他的图片。-->
+        <!--        看他的性别等级-->
 
-        &lt;!&ndash; #ifndef MP-WEIXIN &ndash;&gt;
-        &lt;!&ndash;        <view class="row-col-center py-sm q-solid-bottom">
+        <!-- #ifndef MP-WEIXIN -->
+        <!--        <view class="row-col-center py-sm q-solid-bottom">
                   <q-icon class="text-gray mr-xs" icon="mdi-alpha-v-circle"/>
                   照片认证：
                   &lt;!&ndash; 为自己且未绑定&ndash;&gt;
@@ -202,17 +202,17 @@
                       未认证
                     </view>
                   </view>
-                </view>&ndash;&gt;
-        &lt;!&ndash; #endif &ndash;&gt;
-        &lt;!&ndash;<view v-if="userProp.wxAccount" class="row-col-center q-solid-bottom">
+                </view>-->
+        <!-- #endif -->
+        <!--<view v-if="userProp.wxAccount" class="row-col-center q-solid-bottom">
           微信：
           <text selectable>{{userProp.wxAccount}}</text>
           <button class="cu-btn radius sm bd-blue ml-10 bg-white"
                   @click="copyText(userProp.wxAccount)">
             复制
           </button>
-        </view>&ndash;&gt;
-        &lt;!&ndash;        <view v-if="isMine && !userProp.contactAccount" class="row-col-center row-between-center bg-click"
+        </view>-->
+        <!--        <view v-if="isMine && !userProp.contactAccount" class="row-col-center row-between-center bg-click"
                       @click="$pageUtil.toUserContactInfoPage">
                   <view class="row-col-center">
                     <text class="text-md text-orange">他人获取您的联系方式时，您就能获得贝壳</text>
@@ -221,11 +221,11 @@
                     <text class="text-md text-gray text-md">详情</text>
                     <q-icon class="text-gray" size="32" icon="arrow-right"/>
                   </view>
-                </view>&ndash;&gt;
-        &lt;!&ndash; 如果自己的话&ndash;&gt;
-        &lt;!&ndash; 左边格式不变，如果未填写则可以填写，填写之后可以选择开启或者关闭，填写后可选择隐藏展示。&ndash;&gt;
-        &lt;!&ndash;        todo qq不支持联系方式，改为判断qq一件加好友&ndash;&gt;
-        &lt;!&ndash;        <view class="row-col-center row-between-center">
+                </view>-->
+        <!-- 如果自己的话-->
+        <!-- 左边格式不变，如果未填写则可以填写，填写之后可以选择开启或者关闭，填写后可选择隐藏展示。-->
+        <!--        todo qq不支持联系方式，改为判断qq一件加好友-->
+        <!--        <view class="row-col-center row-between-center">
                   <view class="row-col-center">
                     <q-icon class="text-gray mr-xs" icon="account"/>
                     联系方式：
@@ -259,9 +259,9 @@
                       10 贝壳获取
                     </button>
                   </view>
-                </view>&ndash;&gt;
-        &lt;!&ndash;        todo 暂时注释掉支付功能，qq需要改用为米大师&ndash;&gt;
-        &lt;!&ndash;<view v-if="isMine" class="q-solid-top row-col-center row-between-center" @click="toUserShell">
+                </view>-->
+        <!--        todo 暂时注释掉支付功能，qq需要改用为米大师-->
+        <!--<view v-if="isMine" class="q-solid-top row-col-center row-between-center" @click="toUserShell">
           <view class="row-col-center">
             <q-icon class="text-green mr-xs" icon="mdi-bitcoin"/>
             <text class="text-md">我的贝壳（{{ mineUser.shell }}）</text>
@@ -270,9 +270,9 @@
             <text class="text-md text-gray text-md">充值</text>
             <q-icon class="text-gray" size="32" icon="arrow-right"/>
           </view>
-        </view>&ndash;&gt;
+        </view>-->
       </view>
-      &lt;!&ndash;      <view>
+      <!--      <view>
               <swiper v-if="imgUrls.length" class="square-dot w100vw h230">
                 <swiper-item v-for="(img,index) in imgUrls" :key="img">
                   <image class="size100p" @longpress="showBottomMenuClick(index)"
@@ -295,7 +295,7 @@
                   <q-icon icon="close-circle-fill" size="18" @click="closeUploadImgHint"></q-icon>
                 </view>
               </view>
-            </view>&ndash;&gt;
+            </view>-->
     </view>
 
     <socialuni-user-info-img :user="user" v-if="user.isMine || user.imgs.length"></socialuni-user-info-img>
@@ -312,23 +312,23 @@
     </q-popup>
 
     <talk-operate @deleteTalk="deleteTalk"></talk-operate>
-    &lt;!&ndash;  #ifdef MP-WEIXIN &ndash;&gt;
+    <!--  #ifdef MP-WEIXIN -->
     <ad v-if="talks.length>1" class="bg-white mb-5 w100vw" unit-id="adunit-65c8911d279d228f" ad-type="video"
         ad-theme="white"></ad>
-    &lt;!&ndash;  #endif &ndash;&gt;
-    &lt;!&ndash;qq平台显示的广告&ndash;&gt;
-    &lt;!&ndash;  #ifdef MP-QQ &ndash;&gt;
+    <!--  #endif -->
+    <!--qq平台显示的广告-->
+    <!--  #ifdef MP-QQ -->
     <ad v-if="talks.length>0" class="bg-white mb-5 w100vw" unit-id="72d8cb09a1bae9fa30d9e03e7cb8a25d"
         type="feeds" ad-height="160"></ad>
-    &lt;!&ndash;  #endif &ndash;&gt;
-    &lt;!&ndash;  #ifdef APP-PLUS &ndash;&gt;
+    <!--  #endif -->
+    <!--  #ifdef APP-PLUS -->
     <ad v-if="talks.length>0" class="bg-white mb-5 w100vw" adpid="1890536227"></ad>
-    &lt;!&ndash;  #endif &ndash;&gt;
+    <!--  #endif -->
 
     <div class="px-smm mb-xs">动态</div>
     <view v-for="talk in talks" :key="talk.id" class="px-sm">
       <talk-item :talk="talk" @deleteTalk="deleteTalk"></talk-item>
-    </view>-->
+    </view>
 
     <!--wx平台显示的广告-->
     <!--  #ifdef MP-WEIXIN -->
@@ -373,8 +373,6 @@ import QInput from "socialuni-ui/src/components/QInput/QInput.vue";
 @Options({
   components: {
     QInput,
-    TalkItem,
-    TalkOperate,
     QButton,
     UserSchoolEditDialog,
     QSearch,
@@ -387,7 +385,7 @@ import QInput from "socialuni-ui/src/components/QInput/QInput.vue";
   }
 })
 export default class UserInfo extends Vue {
-  /*@Prop() user: CenterUserDetailRO
+  @Prop() user: CenterUserDetailRO
 
   applyUserFriendContent: string = null
 
@@ -439,9 +437,9 @@ export default class UserInfo extends Vue {
   }
 
 
-  /!**
+  /**
    * 添加好友申请。
-   *!/
+   */
   async addFriend() {
     // socialChatFriendModule.addFriend(this.user.id, "请求加好友");
     const options: AddFriendParams = {
@@ -452,7 +450,7 @@ export default class UserInfo extends Vue {
     ToastUtil.toastLong('添加好友申请发送成功，请耐心等待对方回复')
   }
 
-  /!*shellPayForUserContact () {
+  /*shellPayForUserContact () {
     if (!this.showUserContactBtnDisabled) {
       this.showUserContactBtnDisabled = true
       constant userShell = this.mineUser.shell
@@ -486,7 +484,7 @@ export default class UserInfo extends Vue {
     } else {
       Toast.toast('获取中，请稍等')
     }
-  }*!/
+  }*/
 
   async toPhonePage() {
     await PageUtil.toPhonePage()
@@ -524,9 +522,9 @@ export default class UserInfo extends Vue {
 
   }
 
-  /!*mounted () {
+  /*mounted () {
     this.openEditDialog()
-  }*!/
+  }*/
 
   @Watch('user', {
     deep: true,
@@ -636,7 +634,7 @@ export default class UserInfo extends Vue {
     if (this.isMine) {
       this.$refs.contactInfoEditDialog.open()
     }
-  }*/
+  }
 
   /*getUserContactInfo(){
     if (!this.showUserContactBtnDisabled) {

@@ -1,10 +1,10 @@
-import {socialuniUserModule} from "socialuni-sdk/src/store/store";
-import MsgUtil from "./MsgUtil";
+import UserMsgUtil from "./UserMsgUtil";
+import {socialuniUserModule} from "../store/SocialuniUserModule";
 
 export default class CheckUtil {
     static unLoginCheck() {
         if (!socialuniUserModule.mineUser) {
-            MsgUtil.unLoginMessage()
+            UserMsgUtil.unLoginMessage()
             Error('未登录')
         }
     }
