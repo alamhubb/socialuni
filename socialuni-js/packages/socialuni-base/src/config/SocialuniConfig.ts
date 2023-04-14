@@ -3,6 +3,7 @@ import ObjectUtil from "socialuni-sdk/src/utils/ObjectUtil";
 export default class SocialuniConfig {
     readonly static socialuniUrl = (import.meta.env.VITE_APP_SOCIALUNI_URL || 'https://api.socialuni.cn') + '/'
     readonly static socialuniImUrl = (import.meta.env.VITE_APP_SOCIALUNI_IM_URL || SocialuniConfig.socialuniUrl) + '/'
+    readonly static socialuniImWebsocketUrl = (import.meta.env.VITE_APP_SOCIALUNI_IM_WEBSOCKET_URL) + '/'
     readonly static socialuniSecretKey = import.meta.env.VITE_APP_SOCIALUNI_SECRET_KEY || null
 
     // readonly useIm = true

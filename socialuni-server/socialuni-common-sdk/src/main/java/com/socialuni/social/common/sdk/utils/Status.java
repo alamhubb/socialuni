@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.config.redis;
+package com.socialuni.social.common.sdk.utils;
 
 import java.util.concurrent.TimeUnit;
 

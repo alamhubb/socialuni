@@ -10,7 +10,7 @@ import com.socialuni.social.community.sdk.repository.CommentRepository;
 import com.socialuni.social.sdk.dao.DO.base.BaseModelParentDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
 import com.socialuni.social.im.dao.DO.message.MessageDO;
-import com.socialuni.social.im.dao.MessageRepository;
+import com.socialuni.social.im.dao.repository.MessageRepository;
 import com.socialuni.social.sdk.dao.repository.community.TalkImgRepository;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;

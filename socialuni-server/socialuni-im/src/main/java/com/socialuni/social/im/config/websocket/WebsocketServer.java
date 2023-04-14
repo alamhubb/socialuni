@@ -1,12 +1,11 @@
-package com.socialuni.social.sdk.config.websocket;
+package com.socialuni.social.im.config.websocket;
 
-
-import com.socialuni.social.sdk.model.NotifyVO;
+import cn.hutool.core.lang.Console;
 import com.socialuni.social.common.api.utils.IntegerUtils;
-import com.socialuni.social.sdk.utils.RedisUtil;
+import com.socialuni.social.common.sdk.utils.RedisUtil;
+import com.socialuni.social.im.model.message.notify.NotifyVO;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
@@ -23,9 +22,8 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Service
+@Slf4j
 public class WebsocketServer extends TextWebSocketHandler {
-    public static final Logger logger = LoggerFactory.getLogger(WebsocketServer.class);
-
     /**
      * concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。
      */
@@ -67,7 +65,18 @@ public class WebsocketServer extends TextWebSocketHandler {
         }
     }
 
-    public static void sendMessage(String userId, NotifyVO notify) {
+    public static void sendMessage(Integer userId, NotifyVO notify) {
+        WebSocketSession session = onlineUsersSessionMap.get(userId.toString());
+        //如果用户在线才发送
+        if (session != null && session.isOpen()) {
+            try {
+                session.sendMessage(notify.toMessage());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    public static void sendMessage(String  userId, NotifyVO notify) {
         WebSocketSession session = onlineUsersSessionMap.get(userId);
         //如果用户在线才发送
         if (session != null && session.isOpen()) {
@@ -78,11 +87,11 @@ public class WebsocketServer extends TextWebSocketHandler {
             }
         }
     }
-
     @Override
     public void afterConnectionEstablished(WebSocketSession session) {
         Principal user = session.getPrincipal();
         if (user != null && StringUtils.isNotEmpty(user.getName())) {
+            log.info("登录成功:{}", user.getName());
             String userId = user.getName();
             if (onlineUsersSessionMap.containsKey(userId)) {
                 onlineUsersSessionMap.remove(userId);
@@ -100,13 +109,13 @@ public class WebsocketServer extends TextWebSocketHandler {
             if (IntegerUtils.strIsAllNumber(userId)) {
 //                userService.setUserOnlineTrue(userId);
             }
-            logger.debug("用户标识：{}，Session：{}，在线数量：{}", userId, session.toString(), onlineUsersChannelTopicMap.size());
+            log.debug("用户标识：{}，Session：{}，在线数量：{}", userId, session.toString(), onlineUsersChannelTopicMap.size());
         }
     }
 
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) {
-        logger.debug("收到客户端消息：{}", message.getPayload());
+        log.debug("收到客户端消息：{}", message.getPayload());
         /*JSONObject msgJson = JSONObject.parseObject(message.getPayload());
         String to = msgJson.getString("to");
         String msg = msgJson.getString("msg");
@@ -119,7 +128,7 @@ public class WebsocketServer extends TextWebSocketHandler {
                 sendMessageToUser(to, new TextMessage(getUserId(session) + ":" + msg));
             }
         } catch (IOException e) {
-            logger.debug("handleTextMessage method error：{}", e);
+            log.debug("handleTextMessage method error：{}", e);
         }*/
     }
 
@@ -132,12 +141,12 @@ public class WebsocketServer extends TextWebSocketHandler {
                 e.printStackTrace();
             }
         }
-        logger.debug("连接出错");
+        log.debug("连接出错");
     }
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
-        logger.debug("连接已关闭：" + status);
+        log.debug("连接已关闭：" + status);
         try {
             Principal user = session.getPrincipal();
             if (user != null && StringUtils.isNotEmpty(user.getName())) {
@@ -173,10 +182,10 @@ public class WebsocketServer extends TextWebSocketHandler {
                 if (session.isOpen()) {
                     session.sendMessage(message);
                 } else {
-                    logger.debug("客户端:{},已断开连接，发送消息失败", userId);
+                    log.debug("客户端:{},已断开连接，发送消息失败", userId);
                 }
             } catch (IOException e) {
-                logger.debug("sendMessageToAllUsers method error：{}", e);
+                log.debug("sendMessageToAllUsers method error：{}", e);
                 allSendSuccess = false;
             }
         }*/

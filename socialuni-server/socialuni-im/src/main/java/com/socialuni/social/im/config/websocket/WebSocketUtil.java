@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.config.websocket;
+package com.socialuni.social.im.config.websocket;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
@@ -8,7 +8,7 @@ import java.security.Principal;
 
 @Data
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class WebSocketUser implements Principal {
+public class WebSocketUtil implements Principal {
 
     private String username;
 
@@ -17,10 +17,10 @@ public class WebSocketUser implements Principal {
         return this.username;
     }
 
-    public WebSocketUser() {
+    public WebSocketUtil() {
     }
 
-    public WebSocketUser(String username) {
+    public WebSocketUtil(String username) {
         this.username = username;
     }
 }

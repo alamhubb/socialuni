@@ -8,10 +8,10 @@ import com.socialuni.social.im.enumeration.MessageType;
 import com.socialuni.social.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.im.dao.DO.message.MessageDO;
 import com.socialuni.social.im.dao.DO.message.MessageReceiveDO;
-import com.socialuni.social.im.dao.ChatRepository;
-import com.socialuni.social.im.dao.ChatUserRepository;
-import com.socialuni.social.im.dao.MessageReceiveRepository;
-import com.socialuni.social.im.dao.MessageRepository;
+import com.socialuni.social.im.dao.repository.ChatRepository;
+import com.socialuni.social.im.dao.repository.ChatUserRepository;
+import com.socialuni.social.im.dao.repository.MessageReceiveRepository;
+import com.socialuni.social.im.dao.repository.MessageRepository;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import org.springframework.stereotype.Service;
 

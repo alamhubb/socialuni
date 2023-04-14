@@ -11,8 +11,8 @@ import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
 import com.socialuni.social.common.sdk.platform.qq.QQConst;
 import com.socialuni.social.common.sdk.platform.weixin.WxConst;
 import com.socialuni.social.common.sdk.platform.PushMsgDTO;
-import com.socialuni.social.sdk.model.PushNotifyVO;
-import com.socialuni.social.sdk.model.PushValue;
+import com.socialuni.social.im.model.message.notify.PushNotifyVO;
+import com.socialuni.social.im.model.message.notify.PushValue;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -35,7 +35,7 @@ public class ReportResultPushUtils {
 
     //动态评论通知
     public static PushMsgDTO getReportResultPushDTO(String provider, NotifyDO notify) {
-        ReportDO ReportDO = reportApi.findById(notify.getReportId()).get();
+        ReportDO ReportDO = reportApi.findById(notify.getContentId()).get();
         SocialuniUnionContentBaseDO baseModelDO = SocialuniContentDOUtil.getContentDOByContentId(ReportDO.getContentId());
 
         //举报原因

@@ -16,7 +16,7 @@ import com.socialuni.social.sdk.constant.ReportSourceType;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.sdk.constant.socialuni.SocialuniAuditContentType;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkHasUnderageImgAuditDO;
-import com.socialuni.social.sdk.dao.repository.NotifyRepository;
+import com.socialuni.social.common.sdk.dao.repository.NotifyRepository;
 import com.socialuni.social.sdk.dao.repository.community.TalkAdultImgAuditRepository;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;

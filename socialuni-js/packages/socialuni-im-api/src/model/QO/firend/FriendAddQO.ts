@@ -1,4 +1,4 @@
-import SocialuniAddFriendType from '../../../../constant/SocialuniAddFriendType'
+import SocialuniAddFriendType from '../../../constant/SocialuniAddFriendType'
 
 export default class FriendAddQO {
     userId: string = null

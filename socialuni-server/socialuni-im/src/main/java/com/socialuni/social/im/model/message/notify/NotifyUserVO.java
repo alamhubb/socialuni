@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.model;
+package com.socialuni.social.im.model.message.notify;
 
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import lombok.Data;

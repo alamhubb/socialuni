@@ -1,25 +1,24 @@
 package com.socialuni.social.im.logic.entity;
 
+import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
-import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
-import com.socialuni.social.im.api.model.QO.message.MessageAddVO;
+import com.socialuni.social.common.sdk.dao.repository.NotifyRepository;
 import com.socialuni.social.im.api.model.RO.SocialMessageRO;
-import com.socialuni.social.im.dao.ChatRepository;
-import com.socialuni.social.im.dao.ChatUserRepository;
+import com.socialuni.social.im.dao.repository.*;
 import com.socialuni.social.im.dao.DO.ChatUserDO;
 import com.socialuni.social.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.im.dao.DO.SocialuniFriendApplyRecordDO;
 import com.socialuni.social.im.dao.DO.SocialuniUserChatConfigDO;
 import com.socialuni.social.im.dao.DO.message.MessageDO;
 import com.socialuni.social.im.dao.DO.message.MessageReceiveDO;
-import com.socialuni.social.im.dao.MessageReceiveRepository;
-import com.socialuni.social.im.dao.MessageRepository;
+import com.socialuni.social.im.enumeration.NotifyType;
 import com.socialuni.social.im.enumeration.SocialuniAddFriendStatus;
+import com.socialuni.social.im.logic.domain.NotifyDomain;
 import com.socialuni.social.im.logic.foctory.SocialMessageROFactory;
 import com.socialuni.social.im.logic.foctory.SocialuniChatUserDOFactory;
 import com.socialuni.social.im.logic.foctory.SocialuniMessageDOFactory;
@@ -44,15 +43,19 @@ public class MessageEntity {
     private ChatUserRepository chatUserRepository;
     @Resource
     private MessageReceiveRepository messageReceiveRepository;
+    @Resource
+    NotifyRepository notifyRepository;
+    @Resource
+    NotifyDomain notifyDomain;
 
-    public SocialMessageRO sendSingleMsg(Integer beUserId, String msgContent){
+    public SocialMessageRO sendSingleMsg(Integer beUserId, String msgContent) {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
 
         //校验用户是否存在
         SocialuniUserUtil.getAndCheckUserNotNull(beUserId);
 
         //如果用户存在查看会话
-        ChatUserDO chatUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(mineUser.getUserId(), beUserId, ChatUserDO .class);
+        ChatUserDO chatUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(mineUser.getUserId(), beUserId, ChatUserDO.class);
         if (chatUserDO == null) {
             //会话不存在则创建
             chatUserDO = SocialuniChatUserDOFactory.getOrCreateChatUserBySingleSendMsg(mineUser.getUserId(), beUserId);
@@ -110,7 +113,7 @@ public class MessageEntity {
                 throw new SocialBusinessException("对方不是您的好友，无法发送消息");
             }
         }
-        SocialuniChatDO chat = SocialuniRepositoryFacade.findById(chatUserDO.getChatId(), SocialuniChatDO .class);
+        SocialuniChatDO chat = SocialuniRepositoryFacade.findById(chatUserDO.getChatId(), SocialuniChatDO.class);
         //如果是官方通知和
         //如果为官方群聊，则所有人都可以发送内容
         //查询用户是否有权限往chat中发送内容
@@ -158,8 +161,6 @@ public class MessageEntity {
             MessageReceiveDO messageReceiveDO = new MessageReceiveDO(chatSocialuniUserDo, message.getId());
             //自己的话不发送通知，自己的话也要构建消息，要不看不见，因为读是读这个表
             if (chatUserId.equals(mineUser.getUserId())) {
-                messageReceiveDO.setIsMine(true);
-                messageReceiveDO.setIsRead(true);
                 mineMessageUser = messageReceiveRepository.save(messageReceiveDO);
             } else {
                 //别人的chatUser，要增加未读，自己刚发的消息，别人肯定还没看
@@ -167,14 +168,18 @@ public class MessageEntity {
                 //接收方，更改前端显示为显示
                 chatSocialuniUserDo.checkFrontShowAndSetTrue();
                 MessageReceiveDO messageReceiveDO1 = messageReceiveRepository.save(messageReceiveDO);
-//                    NotifyDO notifyDO = notifyRepository.save(new NotifyDO(messageReceiveDO1));
-//                    notifies.add(notifyDO);
+
+                NotifyDO notifyDO = new NotifyDO(messageReceiveDO1);
+                notifyDO.setType(NotifyType.message);
+                notifyDO.setContentId(messageReceiveDO1.getId());
+                notifyDO = notifyRepository.save(notifyDO);
+                notifies.add(notifyDO);
             }
         }
         chatUserRepository.saveAll(chatSocialuniUserDoS);
-//            notifyRepository.saveAll(notifies);
+        notifyRepository.saveAll(notifies);
         //保存message
-//            notifyService.sendNotifies(notifies, user);
+        notifyDomain.sendNotifies(notifies, mineUser);
         //只需要返回自己的
         return SocialMessageROFactory.getMessageRO(mineMessageUser);
     }

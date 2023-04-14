@@ -10,7 +10,7 @@ import com.socialuni.social.common.api.utils.RequestUtil;
 public class SocialRequestUserConfigDefaultImpl implements SocialRequestUserConfig {
     @Override
     public String getToken() {
-        return RequestUtil.getHeader(SocialuniWebConfig.getTokenName());
+        return RequestUtil.getRequestValue(SocialuniWebConfig.getTokenName());
     }
 
     @Override

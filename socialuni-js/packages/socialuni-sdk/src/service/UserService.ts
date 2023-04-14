@@ -5,15 +5,19 @@ import AlertUtil from "../utils/AlertUtil";
 import ToastUtil from "../utils/ToastUtil";
 import SocialuniMineUserRO from "socialuni-api/src/model/user/SocialuniMineUserRO";
 import SocialuniUserImAPI from "socialuni-api/src/api/SocialuniImUserAPI";
+import WebsocketUtil from "socialuni-im-api/src/util/WebsocketUtil";
 
 export default class UserService {
     static async getAppLunchDataByHasUser() {
+        console.log(2222222222)
+        console.log(socialUserModule.token)
         if (socialUserModule && socialUserModule.token
             /* && !socialChatModule.imToken   // 修复imToken过期后，需要重新登录的才能聊天的bug。 https://gitee.com/socialuni/socialuni/issues/I6GGP7
             * */
         ) {
-            const imRes = await SocialuniImUserAPI.getImUserTokenAPI()
-            socialChatModule.setImToken(imRes.data)
+            // const imRes = await SocialuniImUserAPI.getImUserTokenAPI()
+            // socialChatModule.setImToken(imRes.data)
+            WebsocketUtil.websocketConnect(false)
             socialChatModule.initSocialuniChatModule()
         }
         /*socialNotifyModule.queryNotifiesAction()

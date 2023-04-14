@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.dao.repository;
+package com.socialuni.social.common.sdk.dao.repository;
 
 
 import com.socialuni.social.common.sdk.dao.DO.NotifyDO;

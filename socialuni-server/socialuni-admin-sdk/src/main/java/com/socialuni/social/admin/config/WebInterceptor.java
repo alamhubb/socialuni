@@ -3,7 +3,7 @@ package com.socialuni.social.admin.config;
 import com.socialuni.social.common.api.constant.ErrorCode;
 import com.socialuni.social.common.api.exception.exception.SocialNotLoginException;
 import com.socialuni.social.common.api.utils.RequestUtil;
-import com.socialuni.social.sdk.utils.RedisUtil;
+import com.socialuni.social.common.sdk.utils.RedisUtil;
 import com.socialuni.social.tance.sdk.enumeration.SocialFeignHeaderName;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;

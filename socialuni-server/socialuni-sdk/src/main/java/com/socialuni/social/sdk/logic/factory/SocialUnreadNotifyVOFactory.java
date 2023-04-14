@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.logic.factory;
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
 import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
-import com.socialuni.social.sdk.constant.NotifyType;
+import com.socialuni.social.im.enumeration.NotifyType;
 import com.socialuni.social.common.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniCommentDOUtil;
@@ -39,7 +39,7 @@ public class SocialUnreadNotifyVOFactory {
         SocialuniUserDo notifyUser = SocialuniUserUtil.getAndCheckUserNotNull(notifyDO.getUserId());
         SocialUnreadNotifyVO notifyVO = SocialUnreadNotifyVOFactory.newUnreadNotifyVO(notifyUser);
 
-        Integer commentId = notifyDO.getCommentId();
+        Integer commentId = notifyDO.getContentId();
         SocialuniCommentDO commentDO = SocialuniCommentDOUtil.getNotCommentNull(commentId);
         SocialuniTalkDO talk = SocialuniTalkDOUtil.getTalkNotNull(commentDO.getTalkId());
 

@@ -1,4 +1,4 @@
-package com.socialuni.social.im.dao;
+package com.socialuni.social.im.dao.repository;
 
 import com.socialuni.social.im.dao.DO.SocialuniChatDO;
 import org.springframework.data.jpa.repository.JpaRepository;

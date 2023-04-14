@@ -1,4 +1,4 @@
-package com.socialuni.social.im.dao;
+package com.socialuni.social.im.dao.repository;
 
 import com.socialuni.social.im.dao.DO.message.MessageReceiveDO;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,6 +21,6 @@ public interface MessageReceiveRepository extends JpaRepository<MessageReceiveDO
 //
 //    //查询消息列表，根据chatUserId、msgReceiveStatus、msgIds 按照msgReceiveStatus 倒序排序
 //    //调用这两个之前必须先判断 chat 为enable
-    List<MessageReceiveDO> findTop31ByChatUserIdAndStatusAndCreateTimeLessThanOrderByCreateTimeDesc(Integer chatUserId, String status, Date createTime);
+    List<MessageReceiveDO> findTop30ByChatUserIdAndStatusAndCreateTimeLessThanOrderByCreateTimeDesc(Integer chatUserId, String status, Date createTime);
 
 }

@@ -1,7 +1,6 @@
-package com.socialuni.social.sdk.utils;
+package com.socialuni.social.common.sdk.utils;
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.socialuni.social.sdk.config.redis.Status;
 import org.springframework.data.redis.core.BoundListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;

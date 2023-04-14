@@ -3,14 +3,12 @@ package com.socialuni.social.im.logic.service.chat;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
-import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
 import com.socialuni.social.im.dao.DO.ChatUserDO;
 import com.socialuni.social.im.enumeration.ChatStatus;
 import com.socialuni.social.im.enumeration.ChatType;
 import com.socialuni.social.im.dao.DO.SocialuniChatDO;
-import com.socialuni.social.im.dao.ChatRepository;
-import com.socialuni.social.im.dao.ChatUserRepository;
-import com.socialuni.social.im.enumeration.ChatUserStatus;
+import com.socialuni.social.im.dao.repository.ChatRepository;
+import com.socialuni.social.im.dao.repository.ChatUserRepository;
 import com.socialuni.social.im.logic.domain.ChatQueryDomain;
 import com.socialuni.social.im.logic.foctory.SocialChatROFactory;
 import com.socialuni.social.im.api.model.RO.ChatRO;
@@ -18,14 +16,12 @@ import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.im.model.message.chat.ChatReadVO;
 import com.socialuni.social.im.model.message.chat.ChatRemoveVO;
 import com.socialuni.social.im.model.message.chat.OpenChatVO;
-import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * @author qinkaiyuan

@@ -1,8 +1,10 @@
 package com.socialuni.social.im.dao.DO.message;
 
+import com.socialuni.social.common.api.entity.SocialuniUserContactBaseDO;
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.im.dao.DO.ChatUserDO;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
@@ -16,18 +18,15 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "s_message_receive", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"receiveUserId", "messageId"})
+        @UniqueConstraint(columnNames = {"beUserId", "messageId"})
 })
+@NoArgsConstructor
 //发送出去的消息表，接收人是谁，基于哪个chatUser
-public class MessageReceiveDO implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class MessageReceiveDO extends SocialuniUserContactBaseDO implements Serializable {
 
     //msg上存储了是否已撤回状态，以及发送的消息的状态，撤回和已删除冲突，有可能已删除，但是已撤回，一个字段记录不了两个状态
     private String msgStatus;
     //置顶标识，用类记录接收的状态
-    private String status;
     private Boolean isRead;
     /*
         //自己的chatUser，记录自己的未读消息数量，和是否置顶了，生成chatVo时使用
@@ -39,9 +38,6 @@ public class MessageReceiveDO implements Serializable {
 //    private MessageDO message;
     private Integer messageId;
 
-    //
-    private Integer receiveUserId;
-    private Integer userId;
     /**
      * 这个用来记录chat的昵称，和头像的。只有私聊的状态下才有
      */
@@ -51,24 +47,12 @@ public class MessageReceiveDO implements Serializable {
 
     private Integer chatUserId;
 
-    private Date createTime;
-
-    private Date updateTime;
-
-    public MessageReceiveDO() {
-    }
-
     public MessageReceiveDO(ChatUserDO chatUserDO, Integer messageId) {
-        Date curDate = new Date();
+        super(chatUserDO);
         this.chatUserId = chatUserDO.getId();
-        this.userId = chatUserDO.getUserId();
-        this.receiveUserId = chatUserDO.getBeUserId();
         this.messageId = messageId;
-        this.status = SocialuniCommonStatus.init;
-        //接受消息的人看的
-        this.isRead = false;
-        this.isMine = false;
-        this.createTime = curDate;
-        this.updateTime = curDate;
+        this.isMine = chatUserDO.getBeUserId().equals(chatUserDO.getUserId());
+        //接受消息的人看的,自己的默认已读
+        this.isRead = this.isMine;
     }
 }

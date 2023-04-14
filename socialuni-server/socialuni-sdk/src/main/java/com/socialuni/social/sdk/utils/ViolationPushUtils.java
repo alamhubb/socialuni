@@ -12,8 +12,8 @@ import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
 import com.socialuni.social.common.sdk.platform.qq.QQConst;
 import com.socialuni.social.common.sdk.platform.weixin.WxConst;
 import com.socialuni.social.common.sdk.platform.PushMsgDTO;
-import com.socialuni.social.sdk.model.PushNotifyVO;
-import com.socialuni.social.sdk.model.PushValue;
+import com.socialuni.social.im.model.message.notify.PushNotifyVO;
+import com.socialuni.social.im.model.message.notify.PushValue;
 import com.socialuni.social.tance.sdk.facade.ConfigFacade;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
@@ -39,7 +39,7 @@ public class ViolationPushUtils {
 
     //动态评论通知
     public static PushMsgDTO getViolationPushDTO(String platform, NotifyDO notify) {
-        ReportDO ReportDO = reportApi.findById(notify.getReportId()).get();
+        ReportDO ReportDO = reportApi.findById(notify.getContentId()).get();
 
         SocialuniUnionContentBaseDO baseModelDO = SocialuniContentDOUtil.getContentDOByContentId(ReportDO.getContentId());
 

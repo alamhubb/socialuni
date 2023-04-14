@@ -1,16 +1,13 @@
 package com.socialuni.social.im.controller;
 
-import com.socialuni.social.common.api.constant.ErrorCode;
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.im.dao.ChatRepository;
-import com.socialuni.social.im.dao.ChatUserRepository;
+import com.socialuni.social.im.dao.repository.ChatRepository;
+import com.socialuni.social.im.dao.repository.ChatUserRepository;
 import com.socialuni.social.im.dao.DO.ChatUserDO;
-import com.socialuni.social.im.enumeration.ChatStatus;
 import com.socialuni.social.im.enumeration.ChatUserStatus;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Optional;
 
 @Service
 public class ChatUserVerify {

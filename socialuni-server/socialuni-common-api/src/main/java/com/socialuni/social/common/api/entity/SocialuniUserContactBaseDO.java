@@ -18,6 +18,10 @@ public class SocialuniUserContactBaseDO extends SocialuniContentBaseDO implement
     @Column(nullable = false)
     private Integer beUserId;
 
+    public SocialuniUserContactBaseDO(SocialuniUserContactBaseDO socialuniUserContactBaseDO) {
+        super(socialuniUserContactBaseDO.getUserId());
+        this.beUserId = socialuniUserContactBaseDO.getBeUserId();
+    }
     public SocialuniUserContactBaseDO(Integer userId, Integer beUserId) {
         super(userId);
         this.beUserId = beUserId;

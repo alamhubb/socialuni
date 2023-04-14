@@ -1,33 +1,20 @@
 package com.socialuni.social.im.controller;
 
-import cn.hutool.core.util.NumberUtil;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.common.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
-import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.im.api.model.RO.SocialMessageRO;
-import com.socialuni.social.im.dao.ChatRepository;
-import com.socialuni.social.im.dao.ChatUserRepository;
-import com.socialuni.social.im.dao.DO.ChatUserDO;
+import com.socialuni.social.im.dao.repository.ChatRepository;
 import com.socialuni.social.im.dao.DO.SocialuniChatDO;
-import com.socialuni.social.im.dao.DO.SocialuniFriendApplyRecordDO;
-import com.socialuni.social.im.dao.DO.SocialuniUserChatConfigDO;
 import com.socialuni.social.im.dao.DO.message.MessageDO;
-import com.socialuni.social.im.dao.DO.message.MessageReceiveDO;
-import com.socialuni.social.im.dao.MessageReceiveRepository;
-import com.socialuni.social.im.dao.MessageRepository;
-import com.socialuni.social.im.enumeration.ChatType;
-import com.socialuni.social.im.enumeration.SocialuniAddFriendStatus;
+import com.socialuni.social.im.dao.repository.MessageReceiveRepository;
+import com.socialuni.social.im.dao.repository.MessageRepository;
 import com.socialuni.social.im.logic.entity.MessageEntity;
-import com.socialuni.social.im.logic.foctory.SocialuniChatUserDOFactory;
 import com.socialuni.social.im.logic.foctory.SocialuniMessageDOFactory;
 import com.socialuni.social.im.logic.foctory.SocialMessageROFactory;
-import com.socialuni.social.im.logic.manage.SocialuniUserChatConfigManage;
 import com.socialuni.social.im.api.model.QO.message.MessageAddVO;
 import com.socialuni.social.report.sdk.utils.SocialuniTextContentUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
@@ -38,10 +25,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author qinkaiyuan

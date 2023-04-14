@@ -1,13 +1,13 @@
-package com.socialuni.social.sdk.model;
+package com.socialuni.social.im.model.message.notify;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.social.common.api.utils.JsonUtil;
 import com.socialuni.social.im.dao.DO.ChatUserDO;
-import com.socialuni.social.sdk.constant.NotifyType;
 import com.socialuni.social.common.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.im.dao.DO.message.MessageDO;
 import com.socialuni.social.im.dao.DO.message.MessageReceiveDO;
+import com.socialuni.social.im.enumeration.NotifyType;
 import com.socialuni.social.im.logic.foctory.SocialChatROFactory;
 import com.socialuni.social.im.api.model.RO.ChatRO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;

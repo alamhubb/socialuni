@@ -9,13 +9,13 @@ import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepository
 import com.socialuni.social.im.api.feign.SocialuniMessageAPI;
 import com.socialuni.social.im.api.model.QO.message.MessageAddVO;
 import com.socialuni.social.im.api.model.RO.SocialMessageRO;
-import com.socialuni.social.im.dao.ChatRepository;
+import com.socialuni.social.im.dao.repository.ChatRepository;
 import com.socialuni.social.im.dao.DO.ChatUserDO;
 import com.socialuni.social.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.im.dao.DO.message.MessageDO;
 import com.socialuni.social.im.dao.DO.message.MessageReceiveDO;
-import com.socialuni.social.im.dao.MessageReceiveRepository;
-import com.socialuni.social.im.dao.MessageRepository;
+import com.socialuni.social.im.dao.repository.MessageReceiveRepository;
+import com.socialuni.social.im.dao.repository.MessageRepository;
 import com.socialuni.social.im.enumeration.*;
 import com.socialuni.social.im.logic.foctory.SocialMessageROFactory;
 import com.socialuni.social.im.api.model.QO.MessageQueryVO;
@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -113,7 +112,7 @@ public class SocialuniMessageController implements SocialuniMessageAPI {
             if (chatUserDO == null) {
                 return ResultRO.success(new ArrayList<>());
             }
-            List<MessageReceiveDO> messageDOS = messageReceiveRepository.findTop31ByChatUserIdAndStatusAndCreateTimeLessThanOrderByCreateTimeDesc(chatUserDO.getId(), MessageReceiveStatus.init, queryVO.getQueryTime());
+            List<MessageReceiveDO> messageDOS = messageReceiveRepository.findTop30ByChatUserIdAndStatusAndCreateTimeLessThanOrderByCreateTimeDesc(chatUserDO.getId(), MessageReceiveStatus.init, queryVO.getQueryTime());
             messageVOS = SocialMessageROFactory.messageReceiveDOToVOS(messageDOS);
             return ResultRO.success(messageVOS);
         } else if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.chatUser)) {

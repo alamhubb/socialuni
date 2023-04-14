@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.config.redis;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.socialuni.social.sdk.config.websocket.WebsocketServer;
-import com.socialuni.social.sdk.model.NotifyVO;
+import com.socialuni.social.im.config.websocket.WebsocketServer;
+import com.socialuni.social.im.model.message.notify.NotifyVO;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.MessageListener;
@@ -28,7 +28,7 @@ public class RedisSubListenerConfig {
             //解析message获取中的用户信息，和消息信息
             try {
                 NotifyVO notifyVO = objectMapper.readValue(message.toString(), NotifyVO.class);
-                WebsocketServer.sendMessage(notifyVO.getReceiveUserId().toString(), notifyVO);
+                WebsocketServer.sendMessage(notifyVO.getReceiveUserId(), notifyVO);
 //                NewWebSocketServer.sendInfo(message.toString(), notifyVO.getBeUserId().toString());
             } catch (IOException e) {
                 e.printStackTrace();

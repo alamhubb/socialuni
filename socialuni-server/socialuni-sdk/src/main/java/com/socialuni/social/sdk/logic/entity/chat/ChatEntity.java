@@ -3,8 +3,8 @@ package com.socialuni.social.sdk.logic.entity.chat;
 import com.socialuni.social.im.dao.DO.ChatUserDO;
 import com.socialuni.social.im.enumeration.ChatType;
 import com.socialuni.social.im.dao.DO.SocialuniChatDO;
-import com.socialuni.social.im.dao.ChatRepository;
-import com.socialuni.social.im.dao.ChatUserRepository;
+import com.socialuni.social.im.dao.repository.ChatRepository;
+import com.socialuni.social.im.dao.repository.ChatUserRepository;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import org.springframework.stereotype.Component;
 

@@ -1,49 +1,42 @@
-package com.socialuni.social.sdk.logic.domain.notify;
+package com.socialuni.social.im.logic.domain;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.social.common.api.exception.base.SocialException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.utils.JsonUtil;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
-import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
-import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
-import com.socialuni.social.community.sdk.repository.CommentRepository;
+import com.socialuni.social.im.config.websocket.WebsocketServer;
 import com.socialuni.social.im.dao.DO.ChatUserDO;
 import com.socialuni.social.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.report.sdk.constant.SocialuniSupportProviderType;
-import com.socialuni.social.sdk.constant.NotifyType;
-import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
+import com.socialuni.social.im.enumeration.NotifyType;
 import com.socialuni.social.common.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.im.dao.DO.message.MessageReceiveDO;
 import com.socialuni.social.common.sdk.dao.DO.SocialUserAccountDO;
-import com.socialuni.social.im.dao.MessageReceiveRepository;
-import com.socialuni.social.sdk.dao.repository.NotifyRepository;
+import com.socialuni.social.im.dao.repository.MessageReceiveRepository;
+import com.socialuni.social.common.sdk.dao.repository.NotifyRepository;
 import com.socialuni.social.common.sdk.dao.repository.SocialUserAccountRepository;
-import com.socialuni.social.sdk.model.NotifyVO;
+import com.socialuni.social.im.model.message.notify.NotifyVO;
 import com.socialuni.social.common.sdk.platform.PushMsgDTO;
-import com.socialuni.social.sdk.utils.*;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.report.sdk.utils.QQUtil;
-import com.socialuni.social.report.sdk.utils.WxUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 @Slf4j
 public class NotifyDomain {
 
-    @Resource
-    private CommentRepository commentApi;
+//    @Resource
+//    private CommentRepository commentApi;
 
     @Resource
     private NotifyRepository notifyRepository;
 
-    public List<NotifyDO> saveCreateCommentNotifies(SocialuniCommentDO commentDO, SocialuniTalkDO talkDO, SocialuniCommentDO parentCommentDO, SocialuniCommentDO replyCommentDO, SocialuniUserDo requestUser) {
+    /*public List<NotifyDO> saveCreateCommentNotifies(SocialuniCommentDO commentDO, SocialuniTalkDO talkDO, SocialuniCommentDO parentCommentDO, SocialuniCommentDO replyCommentDO, SocialuniUserDo requestUser) {
         List<NotifyDO> notifies = new ArrayList<>();
         Integer talkUserId = talkDO.getUserId();
         Integer commentId = commentDO.getUnionId();
@@ -111,7 +104,7 @@ public class NotifyDomain {
                 new TreeSet<>(Comparator.comparing(NotifyDO::getMessageReceiveId))), ArrayList::new));
         notifies = notifyRepository.saveAll(notifies);
         return notifies;
-    }
+    }*/
 
     @Resource
     private SocialUserAccountRepository socialUserAccountRepository;
@@ -120,9 +113,9 @@ public class NotifyDomain {
     @Resource
     private MessageReceiveRepository messageReceiveRepository;
 
-    public void sendNotifies(List<NotifyDO> notifies, SocialuniUserDo requestUser) {
+    public void sendNotifies(List<NotifyDO> notifies, SocialuniUserDo mineUser) {
         for (NotifyDO notify : notifies) {
-            sendNotify(notify, requestUser);
+            sendNotify(notify, mineUser);
         }
     }
 
@@ -148,22 +141,22 @@ public class NotifyDomain {
             }
 
             if (NotifyType.message.equals(notifyType)) {
-                Optional<MessageReceiveDO> messageReceiveDOOptional = messageReceiveRepository.findById(notify.getMessageReceiveId());
-                MessageReceiveDO messageReceiveDO = messageReceiveDOOptional.get();
+                MessageReceiveDO messageReceiveDO = messageReceiveRepository.getReferenceById(notify.getContentId());
                 ChatUserDO chatUserDO = SocialuniRepositoryFacade.findById(messageReceiveDO.getChatUserId(), ChatUserDO.class);
 //                Optional<ChatDO> chatDOOptional = chatRepository.findById();
                 //如果群聊，直接发送给两个服务器在线的所有用户，并且查找他们未读的。
                 //未登录的时候也查询群聊里面的所有内容
                 SocialuniChatDO socialuniChatDO = SocialuniRepositoryFacade.findById(chatUserDO.getChatId(), SocialuniChatDO.class);
                 NotifyVO notifyVO = new NotifyVO(notify, requestUser, messageReceiveDO, chatUserDO, socialuniChatDO);
-                try {
+                WebsocketServer.sendMessage(receiveUserId, notifyVO);
+                /*try {
                     stringRedisTemplate.convertAndSend(receiveUserId.toString(), JsonUtil.objectMapper.writeValueAsString(notifyVO));
                 } catch (JsonProcessingException e) {
                     e.printStackTrace();
-                }
+                }*/
             } else {
                 //评论动态
-                switch (notifyType) {
+                /*switch (notifyType) {
                     case NotifyType.talk_comment:
                         pushMsgDTO = TalkCommentPushUtils.getTalkPushDTO(provider, notify, requestUser);
                         break;
@@ -186,7 +179,7 @@ public class NotifyDomain {
                     QQUtil.qqPushMsgCommon(receiveAccount.getMpOpenId(), provider, pushMsgDTO, notify);
                 } else if (provider.equals(SocialuniSupportProviderType.wx)) {
                     WxUtil.wxPushMsgCommon(receiveAccount.getMpOpenId(), provider, pushMsgDTO, notify);
-                }
+                }*/
             }
         }
 
@@ -194,14 +187,14 @@ public class NotifyDomain {
 //        messagingTemplate.convertAndSendToUser(notify.getReceiveUser().getId().toString(), "/queue/notifications", notifyVO);
         //消息入库
         /*NotifyVO notifyVO = new NotifyVO(notify);*/
-        /*//给前台发送消息
-        String notifyString = null;
+        //给前台发送消息
+        /*String notifyString = null;
         try {
             notifyString = JsonUtil.objectMapper.writeValueAsString(notifyVO);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-        }*/
-        /*//给对方发送喜欢通知，不发送通知
+        }
+        //给对方发送喜欢通知，不发送通知
         stringRedisTemplate.convertAndSend(notify.getReceiveUser().getId(), notifyString);
         // 注释掉使用redis部分，暂不使用redis，仅使用websocket
         //给前台发送消息
