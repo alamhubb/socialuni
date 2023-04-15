@@ -5,14 +5,12 @@ import MsgUtil from "socialuni-util/src/util/MsgUtil";
 import AlertUtil from "socialuni-util/src/util/AlertUtil";
 import UniAppHttpRequest, {Config, Interceptor, RequestConfig, Response} from "./UniAppHttpRequest";
 import {socialuniTokenModule} from "../store/SocialuniTokenModule";
-import JsonUtil from "../util/JsonUtil";
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";;
-import SocialuniAppAPI from "../api/SocialuniAppAPI";
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import SocialuniConfig from "../config/SocialuniConfigModule";
 
 export default class SocialuniHttpRequest extends UniAppHttpRequest {
     config: Config = {
-        baseUrl: SocialuniConfig.socialuniUrl,
+        baseUrl: SocialuniConfig.socialuniUrl + '/',
         timeout: 10 * 1000,
         header: {
             'Content-Type': 'application/json'

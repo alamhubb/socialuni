@@ -158,6 +158,10 @@ import {socialuniTagModule} from "../../store/SocialTagModule";
 import TalkQueryVO from "socialuni-base-api/src/model/talk/TalkQueryVO";
 import TalkQOFactory from "../../factory/TalkQOFactory";
 import {socialLocationModule} from "../../store/SocialLocationModule";
+import {socialuniConfigModule} from "socialuni-base-api/src/store/SocialuniConfigModule";
+import StorageUtil from "socialuni-base-api/src/util/StorageUtil";
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 
 // todo 后台可控制是否显示轮播图
 @Options({
@@ -246,7 +250,6 @@ export default class TabsTalk extends Vue {
 
   mounted() {
     // 获取元素高度，用来计算scroll-view高度
-    this.getTabBarTop()
   }
 
   // 供父组件调用，每次隐藏把数据缓存进storage

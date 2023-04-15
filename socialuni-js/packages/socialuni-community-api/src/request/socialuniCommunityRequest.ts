@@ -5,7 +5,7 @@ const socialuniCommunityRequest: SocialuniHttpRequest = new SocialuniHttpRequest
 
 /* 设置全局配置 */
 socialuniCommunityRequest.setConfig(config => {
-    config.baseUrl = SocialuniConfig.socialuniCommunityUrl
+    config.baseUrl = SocialuniConfig.socialuniCommunityUrl+'/'
     return config
 })
 

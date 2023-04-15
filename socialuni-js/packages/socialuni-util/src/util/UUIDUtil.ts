@@ -16,4 +16,14 @@ export default class UUIDUtil {
       random: randoms
     }).replace(/-/g, '')
   }
+
+  public static getClassUUID (): string {
+    const randoms: number[] = []
+    for (let i = 0; i < 16; i++) {
+      randoms.push(Math.round(Math.random() * 255))
+    }
+    return 'uuid' + uuidv4({
+      random: randoms
+    }).replace(/-/g, '')
+  }
 }

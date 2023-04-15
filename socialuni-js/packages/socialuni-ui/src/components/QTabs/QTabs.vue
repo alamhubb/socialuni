@@ -29,6 +29,7 @@ import NodesRef = UniApp.NodesRef
 import SelectorQuery = UniApp.SelectorQuery
 import TalkTabVO from "socialuni-base-api/src/model/talk/TalkTabVO";
 import CommonUtil from "socialuni-util/src/util/CommonUtil";
+import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
 
 @Options({})
 export default class QTabs extends Vue {
@@ -53,7 +54,7 @@ export default class QTabs extends Vue {
   }
 
   //唯一id值
-  uuid: string = CommonUtil.getClassUUID()
+  uuid: string = UUIDUtil.getClassUUID()
 
   @Prop() readonly value: number
   @Prop({default: []}) readonly tabs: TalkTabVO[]
