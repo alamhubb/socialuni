@@ -210,65 +210,65 @@ class SocialTalkModule {
     }*/
         return curTab
     }
-    //
-    // setCurrentTabIndex(currentTabIndex: number) {
-    //     this.currentTabIndex = currentTabIndex
-    // }
-    //
-    // setCurTabIndexUpdateCircle(currentTabIndex: number) {
-    //     this.setCurrentTabIndex(currentTabIndex)
-    //     return this.updateCircleByTabIndex()
-    // }
-    //
-    // //tab选中当前的圈子
-    // setCircleNameUpdateCurTabIndex(circleName: string) {
-    //     if (circleName) {
-    //         if (this.curTab.name === circleName) {
-    //             return
-    //         }
-    //         const circleTabIndex = this.talkTabs.findIndex(item => (item.type === TalkTabType.circle_type) && item.name === circleName)
-    //         let circleTab: SocialuniTalkTabRO
-    //         if (circleTabIndex > -1) {
-    //             circleTab = this.talkTabs[circleTabIndex]
-    //             if (circleTab.appDefaultTab) {
-    //                 return this.setCurTabIndexUpdateCircle(circleTabIndex)
-    //             } else {
-    //                 //从当前位置删除
-    //                 this.talkTabs.splice(circleTabIndex, 1)
-    //                 //注释此行，如果存在此行则存在不查询的问题
-    //                 circleTab.firstLoad = false
-    //             }
-    //         } else {
-    //             circleTab = new TalkTabVO(circleName, TalkTabType.circle_type)
-    //         }
-    //         const appTas = this.talkTabs.filter(item => item.appDefaultTab)
-    //
-    //         //添加到第四个位置
-    //         this.talkTabs.splice(appTas.length, 0, circleTab)
-    //         //最多保存了9个
-    //         this.talkTabs = this.talkTabs.slice(0, 9)
-    //         return this.setCurTabIndexUpdateCircle(appTas.length)
-    //     }
-    //     return this.setCurTabIndexUpdateCircle(1)
-    // }
-    //
-    // saveLastTalkTabs(talkTabs: TalkTabVO [], talkTabIndex: number, talkTabType: string) {
-    //     //缓存记录本次推出时的默认值
-    //     // TalkVueUtil.setTalkTabsAll(talkTabs, talkTabIndex, talkTabType)
-    //     if (talkTabs.length) {
-    //         StorageUtil.setObj(TalkVueUtil.TalkTabsKey, talkTabs)
-    //     }
-    //     StorageUtil.setObj(TalkVueUtil.talkTabIndexKey, talkTabIndex)
-    //     StorageUtil.setObj(TalkVueUtil.talkTabTypeKey, talkTabType)
-    // }
-    //
-    // get curTab() {
-    //     return this.talkTabs[this.currentTabIndex]
-    // }
-    //
-    // get curTabIsCircle() {
-    //     return this.curTab.type === TalkTabType.circle_type
-    // }
+
+    setCurrentTabIndex(currentTabIndex: number) {
+        this.currentTabIndex = currentTabIndex
+    }
+
+    setCurTabIndexUpdateCircle(currentTabIndex: number) {
+        this.setCurrentTabIndex(currentTabIndex)
+        return this.updateCircleByTabIndex()
+    }
+
+    //tab选中当前的圈子
+    setCircleNameUpdateCurTabIndex(circleName: string) {
+        if (circleName) {
+            if (this.curTab.name === circleName) {
+                return
+            }
+            const circleTabIndex = this.talkTabs.findIndex(item => (item.type === TalkTabType.circle_type) && item.name === circleName)
+            let circleTab: SocialuniTalkTabRO
+            if (circleTabIndex > -1) {
+                circleTab = this.talkTabs[circleTabIndex]
+                if (circleTab.appDefaultTab) {
+                    return this.setCurTabIndexUpdateCircle(circleTabIndex)
+                } else {
+                    //从当前位置删除
+                    this.talkTabs.splice(circleTabIndex, 1)
+                    //注释此行，如果存在此行则存在不查询的问题
+                    circleTab.firstLoad = false
+                }
+            } else {
+                circleTab = new TalkTabVO(circleName, TalkTabType.circle_type)
+            }
+            const appTas = this.talkTabs.filter(item => item.appDefaultTab)
+
+            //添加到第四个位置
+            this.talkTabs.splice(appTas.length, 0, circleTab)
+            //最多保存了9个
+            this.talkTabs = this.talkTabs.slice(0, 9)
+            return this.setCurTabIndexUpdateCircle(appTas.length)
+        }
+        return this.setCurTabIndexUpdateCircle(1)
+    }
+
+    saveLastTalkTabs(talkTabs: TalkTabVO [], talkTabIndex: number, talkTabType: string) {
+        //缓存记录本次推出时的默认值
+        // TalkVueUtil.setTalkTabsAll(talkTabs, talkTabIndex, talkTabType)
+        if (talkTabs.length) {
+            StorageUtil.setObj(TalkVueUtil.TalkTabsKey, talkTabs)
+        }
+        StorageUtil.setObj(TalkVueUtil.talkTabIndexKey, talkTabIndex)
+        StorageUtil.setObj(TalkVueUtil.talkTabTypeKey, talkTabType)
+    }
+
+    get curTab() {
+        return this.talkTabs[this.currentTabIndex]
+    }
+
+    get curTabIsCircle() {
+        return this.curTab.type === TalkTabType.circle_type
+    }
 }
 
 

@@ -1,5 +1,5 @@
 import StorageUtil from "socialuni-base-api/src/util/StorageUtil";
-import {socialuniTagModule} from "socialuni-community/src/store/SocialTagModule";
+import {socialuniTagModule} from "../store/SocialTagModule";
 
 export default class TagStorageUtil {
     static getMineHistoryTagNamesKey = 'mineTagNamesKey'

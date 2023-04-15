@@ -101,6 +101,7 @@ import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
 import DateUtil from "socialuni-util/src/util/DateUtil";
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
 import FollowAPI from "socialuni-community-api/src/api/FollowAPI";
+import SocialGenderTag from "socialuni-user/src/component/SocialGenderTag/SocialGenderTag.vue";
 
 @Options({
   components: {

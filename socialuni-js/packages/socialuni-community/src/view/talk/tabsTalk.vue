@@ -154,21 +154,22 @@ import HugAddVO from "socialuni-base-api/src/model/HugAddVO";
 import MsgUtil from "socialuni-util/src/util/MsgUtil";
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
 import {socialTalkModule} from "../../store/SocialTalkModule";
-// import {socialuniTagModule} from "../../store/SocialTagModule";
-// import TalkQueryVO from "socialuni-base-api/src/model/talk/TalkQueryVO";
-// import TalkQOFactory from "../../factory/TalkQOFactory";
+import {socialuniTagModule} from "../../store/SocialTagModule";
+import TalkQueryVO from "socialuni-base-api/src/model/talk/TalkQueryVO";
+import TalkQOFactory from "../../factory/TalkQOFactory";
+import {socialLocationModule} from "../../store/SocialLocationModule";
 
 // todo 后台可控制是否显示轮播图
 @Options({
   components: {
-    // SocialTalkFilterDialog,
-    // QPullRefresh,
-    // QIcon,
-    // QTabs,
-    // QTab,
-    // TalkOperate,
-    // TalkSwipers,
-    // TalkItem
+    SocialTalkFilterDialog,
+    QPullRefresh,
+    QIcon,
+    QTabs,
+    QTab,
+    TalkOperate,
+    TalkSwipers,
+    TalkItem
   }
 })
 export default class TabsTalk extends Vue {

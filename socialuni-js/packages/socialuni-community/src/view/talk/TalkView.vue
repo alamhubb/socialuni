@@ -1,7 +1,7 @@
 <template>
   <view class="flex-col h100p bg-theme-bg">
     <!--    不能使用100%，h5，不包含tabbar，尺寸计算不正确，所以需要使用h100vh-->
-<!--    <view class="flex-col h100vh">
+    <view class="flex-col h100vh">
       <q-navbar class="flex-none">
         <div class="row-col-center ml-xs mr-sm font-bold bg-click" @click="openCityPicker">
           <q-icon size="14" icon="map-fill"></q-icon>
@@ -18,22 +18,22 @@
           </view>
           <div v-else class="cursor-text flex-1" @click="openTagPicker">选择话题</div>
         </q-search>
-        &lt;!&ndash;        <view class="mr-sm" :class="{'text-theme':useFilters}">
+        <!--        <view class="mr-sm" :class="{'text-theme':useFilters}">
                   <q-icon icon="mdi-filter-variant" size="28" @click="showFilterModel"></q-icon>
-                </view>&ndash;&gt;
+                </view>-->
         <view v-if="user" class="position-relative mr-sm">
           <q-icon icon="bell-fill" @click="toNotifyVue" size="28"></q-icon>
-          &lt;!&ndash;          <u-badge :count="unreadNotifiesNum" size="mini"
-                             :offset="[0, 0]" @click="toNotifyVue"></u-badge>&ndash;&gt;
+          <!--          <u-badge :count="unreadNotifiesNum" size="mini"
+                             :offset="[0, 0]" @click="toNotifyVue"></u-badge>-->
         </view>
         <view>
           <q-icon icon="plus-circle" size="28" @click="toTalkAdd"></q-icon>
         </view>
       </q-navbar>
 
-      &lt;!&ndash;  #ifdef APP-PLUS &ndash;&gt;
-      &lt;!&ndash; <ad class="bg-white mt-10 w100vw" adpid="1890536227"></ad>&ndash;&gt;
-      &lt;!&ndash;  #endif &ndash;&gt;
+      <!--  #ifdef APP-PLUS -->
+      <!-- <ad class="bg-white mt-10 w100vw" adpid="1890536227"></ad>-->
+      <!--  #endif -->
 
       <tabs-talk class="flex-1" ref="tabsTalk"></tabs-talk>
     </view>
@@ -42,8 +42,7 @@
 
 
     <social-tag-picker ref="tagPicker" @change="changeTag"></social-tag-picker>
-    <q-city-picker ref="cityPicker" :value="location" @input="cityChange"></q-city-picker>-->
-    123
+    <q-city-picker ref="cityPicker" :value="location" @input="cityChange"></q-city-picker>
   </view>
 </template>
 
@@ -154,65 +153,65 @@ export default class TalkView extends Vue {
     this.initQuery()
   }
 
- //  // 必须这么写否则不生效
- //  @Watch('unreadNotifies')
- //  unreadNotifiesWatch() {
- //    this.unreadNotifiesNum = this.unreadNotifies.length
- //  }
- //
- //  // 去除页面初始化的，初始化查询
- //  initQuery() {
- //    // this.$refs.tabsTalk.initQuery()
- //    this.$nextTick(() => {
- //      //首次打开talk页面，获取用户位置用来查询
- //      // locationModule.appLunchInitDistrict().then(() => {
- //      //首次打开talk页面，获取用户位置用来查询
- //      socialLocationModule.appLunchInitDistrict().then(() => {
- //        this.$refs.tabsTalk.initQuery()
- //      })
- //    })
- //  }
- //
- //  startPullDown() {
- //    this.$refs.tabsTalk.startPullDown()
- //  }
- //
- //  openTagPicker() {
- //    this.$refs.tagPicker.open()
- //  }
- //
- //  @Watch('selectTagName')
- //  selectTagNameWatch() {
- //    //已经watch了，所以修改tag无需重新设置查询
- //    this.startPullDown()
- //  }
- //
- //  // tag
- //  changeTag(tag: TagVO) {
- //    socialuniTagModule.setSelectTagName(tag.name)
- //  }
- //
- //  deleteTag() {
- //    socialuniTagModule.setSelectTagName(null)
- //  }
- //
- //  toNotifyVue() {
- //    socialNotifyModule.queryUnreadNotifiesAndUpdateHasReadAction()
- //    RouterUtil.navigateTo(PagePath.notify)
- //  }
- //
- //  // 点击加号去新增talk
- //  toTalkAdd() {
- //    PageUtil.toTalkAddPage()
- //  }
- //
- //  openCityPicker() {
- //    this.$refs.cityPicker.open()
- //  }
- //
- //  cityChange(district: DistrictVO) {
- //    socialLocationModule.setLocation(district)
- //    this.startPullDown()
- //  }
+  // 必须这么写否则不生效
+  @Watch('unreadNotifies')
+  unreadNotifiesWatch() {
+    this.unreadNotifiesNum = this.unreadNotifies.length
+  }
+
+  // 去除页面初始化的，初始化查询
+  initQuery() {
+    // this.$refs.tabsTalk.initQuery()
+    this.$nextTick(() => {
+      //首次打开talk页面，获取用户位置用来查询
+      // locationModule.appLunchInitDistrict().then(() => {
+      //首次打开talk页面，获取用户位置用来查询
+      socialLocationModule.appLunchInitDistrict().then(() => {
+        this.$refs.tabsTalk.initQuery()
+      })
+    })
+  }
+
+  startPullDown() {
+    this.$refs.tabsTalk.startPullDown()
+  }
+
+  openTagPicker() {
+    this.$refs.tagPicker.open()
+  }
+
+  @Watch('selectTagName')
+  selectTagNameWatch() {
+    //已经watch了，所以修改tag无需重新设置查询
+    this.startPullDown()
+  }
+
+  // tag
+  changeTag(tag: TagVO) {
+    socialuniTagModule.setSelectTagName(tag.name)
+  }
+
+  deleteTag() {
+    socialuniTagModule.setSelectTagName(null)
+  }
+
+  toNotifyVue() {
+    socialNotifyModule.queryUnreadNotifiesAndUpdateHasReadAction()
+    RouterUtil.navigateTo(PagePath.notify)
+  }
+
+  // 点击加号去新增talk
+  toTalkAdd() {
+    PageUtil.toTalkAddPage()
+  }
+
+  openCityPicker() {
+    this.$refs.cityPicker.open()
+  }
+
+  cityChange(district: DistrictVO) {
+    socialLocationModule.setLocation(district)
+    this.startPullDown()
+  }
 }
 </script>
