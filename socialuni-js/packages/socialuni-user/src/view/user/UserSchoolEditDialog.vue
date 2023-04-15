@@ -39,8 +39,8 @@ import SocialCircleRO from "socialuni-base-api/src/model/community/circle/Social
 import {socialuniUserModule} from 'socialuni-user-sdk/src/store/SocialuniUserModule';
 import ToastUtil from "socialuni-util/src/util/ToastUtil";
 import AlertUtil from "socialuni-util/src/util/AlertUtil";
-import SocialuniCircleAPI from "socialuni-api/src/api/socialuni/SocialuniCircleAPI";
 import SocialuniUserExpandAPI from "socialuni-user-api/src/api/SocialuniUserExpandAPI";
+import SocialuniCircleAPI from "socialuni-community-api/src/api/SocialuniCircleAPI";
 
 @Options({
   components: {QSelect, QIcon, QPopup, QSearch}

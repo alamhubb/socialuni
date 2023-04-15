@@ -11,12 +11,13 @@
       "style": {
         "navigationStyle": "custom"
       }
-    },{
+    },
+    {
       "path": "pages/user/mine",
       "style": {
         "navigationStyle": "custom"
       }
-
+    },
   ],
   "tabBar": {
     "color": "#9E9E9E",
