@@ -200,7 +200,7 @@
 
 <script lang="ts">
 import {Options, Prop, Vue} from 'vue-property-decorator'
-import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
 import LoginView from "../login/LoginView.vue";
 import PageUtil from "socialuni-util/src/util/PageUtil";
 import MsgUtil from "socialuni-util/src/util/MsgUtil";
@@ -228,7 +228,7 @@ import CosService from "socialuni-base/src/service/CosService";
 import TencentCosAPI from "socialuni-api/src/api/TencentCosAPI";
 import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
 import ImgAddQO from "socialuni-base-api/src/model/user/ImgAddQO";
-import UserService from "socialuni-user-sdk/src/service/UserService";
+import UserService from "socialuni-user/src/service/UserService";
 
 @Options({
   components: {

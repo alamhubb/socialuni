@@ -222,7 +222,7 @@ import MsgUtil from 'socialuni-util/src/util/MsgUtil'
 import UserContactInfoEditDialog from "./UserContactInfoEditDialog.vue";
 import LoginView from "../login/LoginView.vue";
 import UserInfo from "./UserInfo.vue";
-import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 
 @Options({

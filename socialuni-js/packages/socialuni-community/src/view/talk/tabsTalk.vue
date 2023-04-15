@@ -161,7 +161,7 @@ import {socialLocationModule} from "../../store/SocialLocationModule";
 import {socialuniConfigModule} from "socialuni-base-api/src/store/SocialuniConfigModule";
 import StorageUtil from "socialuni-base-api/src/util/StorageUtil";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
-import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
 
 // todo 后台可控制是否显示轮播图
 @Options({

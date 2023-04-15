@@ -142,7 +142,7 @@ import TalkAddTagSearch from "socialuni-community/src/component/TalkAddTagSearch
 import QCityPicker from "socialuni-community/src/component/QCityPicker/QCityPicker.vue";
 import AlertUtil from "socialuni-util/src/util/AlertUtil";
 import PlatformUtils from "../../../../packages/socialuni-base/src/utils/PlatformUtils";
-import { socialuniUserModule } from 'socialuni-user-sdk/src/store/SocialuniUserModule';
+import { socialuniUserModule } from 'socialuni-user/src/store/SocialuniUserModule';
 import {socialLocationModule} from "socialuni-community/src/store/SocialLocationModule";
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
 import {socialTalkModule} from "socialuni-community/src/store/SocialTalkModule";

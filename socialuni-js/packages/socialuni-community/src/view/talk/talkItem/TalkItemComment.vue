@@ -80,7 +80,7 @@ import {Options, Prop, Vue, Watch} from 'vue-property-decorator'
 import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
 import QButton from "socialuni-ui/src/components/QButton/QButton.vue";
 import ChildComment from "../ChildComment.vue";
-import {socialuniUserModule} from 'socialuni-user-sdk/src/store/SocialuniUserModule';
+import {socialuniUserModule} from 'socialuni-user/src/store/SocialuniUserModule';
 import TalkVO from "socialuni-base-api/src/model/talk/TalkVO";
 import ObjectUtil from "socialuni-util/src/util/ObjectUtil";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";

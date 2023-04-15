@@ -1,6 +1,6 @@
 import SocialLoginRO from "socialuni-base-api/src/model/social/SocialLoginRO";
 import SocialuniMineUserRO from "socialuni-base-api/src/model/user/SocialuniMineUserRO";
-import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
 import WebsocketUtil from "socialuni-base/src/utils/WebsocketUtil";
 import AlertUtil from "socialuni-util/src/util/AlertUtil";
 import ToastUtil from "socialuni-util/src/util/ToastUtil";

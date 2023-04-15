@@ -364,7 +364,7 @@ import AlertUtil from "socialuni-util/src/util/AlertUtil";
 import FollowAddVO from "socialuni-base-api/src/model/FollowAddVO";
 import UserSchoolEditDialog from "./UserSchoolEditDialog.vue";
 import SocialuniUserInfoImg from "./SocialuniUserInfoImg.vue";
-import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
 import {socialuniConfigModule} from "socialuni-base-api/src/store/SocialuniConfigModule";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import SocialGenderTag from "../../component/SocialGenderTag/SocialGenderTag.vue";

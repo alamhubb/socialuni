@@ -86,7 +86,7 @@
 import {Options, Prop, Vue, Watch} from 'vue-property-decorator'
 import TalkVO from "socialuni-base-api/src/model/talk/TalkVO";
 import ObjectUtil from "socialuni-util/src/util/ObjectUtil";
-import {socialuniUserModule} from 'socialuni-user-sdk/src/store/SocialuniUserModule';
+import {socialuniUserModule} from 'socialuni-user/src/store/SocialuniUserModule';
 import TalkTabType from "socialuni-constant/constant/TalkTabType";
 import RouterUtil from "socialuni-util/src/util/RouterUtil";
 import PagePath from "socialuni-constant/constant/PagePath";

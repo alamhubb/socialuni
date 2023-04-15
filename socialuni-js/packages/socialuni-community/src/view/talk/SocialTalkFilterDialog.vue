@@ -100,7 +100,7 @@ import {Emit, Options, Vue, Watch} from 'vue-property-decorator'
 // import QPopup from "socialuni-ui/src/components/QPopup/QPopup.vue";
 // import SocialTagPicker from '../../component/SocialTagPicker.vue';
 // import SocialCirclePicker from "../../component/SocialCirclePicker.vue";
-// import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+// import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
 // import {socialuniTagModule} from "../../store/SocialTagModule";
 // import {socialCircleModule} from "../../store/SocialCircleModule";
 // import {socialLocationModule} from "../../store/SocialLocationModule";

@@ -132,10 +132,10 @@ import LoginFooterAppInfo from "./LoginFooterAppInfo.vue";
 import QButton from "socialuni-ui/src/components/QButton/QButton.vue";
 import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
 import PageUtil from "socialuni-util/src/util/PageUtil";
-import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
-import LoginService from "socialuni-user-sdk/src/service/LoginService";
-import PhoneService from "socialuni-user-sdk/src/service/PhoneService";
+import LoginService from "socialuni-user/src/service/LoginService";
+import PhoneService from "socialuni-user/src/service/PhoneService";
 
 @Options({
   components: {
