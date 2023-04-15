@@ -10,9 +10,12 @@
     "@dcloudio/types": "^3.0.17",
     "@dcloudio/uni-app": "3.0.0-alpha-3070620230227001",
     "cos-wx-sdk-v5": "^0.7.11",
-    "socialuni-base": "^0.1.2",
     "socialuni-constant": "^0.1.2",
-    "uuid": "^7.0.3"
+    "uuid": "^7.0.3",
+    "@dcloudio/uni-ui": "^1.4.23",
+    "socialuni-base-api": "^0.1.2",
+    "socialuni-ui": "^0.1.2",
+    "vue": "3.2.41"
   },
   "devDependencies": {
     "@dcloudio/types": "^3.0.13",
