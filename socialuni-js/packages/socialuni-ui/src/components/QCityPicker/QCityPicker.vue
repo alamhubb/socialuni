@@ -41,11 +41,11 @@
 import {Options, Emit, Model, Vue, Prop} from 'vue-property-decorator'
 import QPopup from "socialuni-ui/src/components/QPopup/QPopup.vue";
 import QPicker from "socialuni-ui/src/components/QPicker/QPicker.vue";
-import {socialLocationModule} from "socialuni-sdk/src/store/store";
 import DistrictVO from "socialuni-base-api/src/model/DistrictVO";
-import LocationUtil from "socialuni-util/src/util/LocationUtil";
 import AlertUtil from "socialuni-util/src/util/AlertUtil";
 import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
+import {socialLocationModule} from "socialuni-community/src/store/SocialLocationModule";
+import LocationUtil from "socialuni-community/src/util/LocationUtil";
 
 @Options({
   components: {

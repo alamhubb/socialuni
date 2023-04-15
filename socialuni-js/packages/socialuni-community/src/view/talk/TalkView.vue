@@ -55,19 +55,11 @@ import QSearch from 'socialuni-ui/src/components/QSearch/QSearch.vue'
 import QIcon from 'socialuni-ui/src/components/QIcon/QIcon.vue'
 import QPopup from 'socialuni-ui/src/components/QPopup/QPopup.vue'
 import QSlider from 'socialuni-ui/src/components/QSlider/QSlider.vue'
-import SocialTagPicker from "socialuni-ui/src/components/SocialTagPicker.vue";
 import QCityPicker from "socialuni-ui/src/components/QCityPicker/QCityPicker.vue";
 import QTabs from "socialuni-ui/src/components/QTabs/QTabs.vue";
-import MsgInput from "socialuni-ui/src/components/MsgInput.vue";
 import TagSearch from "./TagSearch.vue";
 import TabsTalk from "./tabsTalk.vue";
 import TalkSwipers from "./talkSwipers.vue";
-import {
-  socialAppModule, socialChatModule,
-  socialLocationModule,
-  socialNotifyModule,
-  socialTagModule,
-} from "socialuni-sdk/src/store/store";
 import UniUtil from "socialuni-util/src/util/UniUtil";
 import RouterUtil from "socialuni-util/src/util/RouterUtil";
 import PagePath from "socialuni-constant/constant/PagePath";
@@ -75,7 +67,13 @@ import PageUtil from "socialuni-util/src/util/PageUtil";
 import TagVO from "socialuni-base-api/src/model/community/tag/TagVO";
 import DistrictVO from "socialuni-base-api/src/model/DistrictVO";
 import {onHide, onShow} from "@dcloudio/uni-app";
-import {socialuniConfigModule, socialuniUserModule} from "socialuni-sdk/src/store/store"; // todo 后台可控制是否显示轮播图
+import SocialTagPicker from "../../component/SocialTagPicker.vue";
+import {socialuniTagModule} from "../../store/SocialTagModule";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+import { socialNotifyModule } from '../../store/SocialNotifyModule'
+import {socialAppModule} from "../../store/SocialAppModule";
+import {socialLocationModule} from "../../store/SocialLocationModule";
+import {socialuniConfigModule} from "socialuni-base-api/src/store/SocialuniConfigModule";
 
 // todo 后台可控制是否显示轮播图
 
@@ -89,7 +87,7 @@ import {socialuniConfigModule, socialuniUserModule} from "socialuni-sdk/src/stor
     QIcon,
     QSearch,
     QNavbar,
-    MsgInput,
+    // MsgInput,
     QButton,
     TagSearch,
     TabsTalk,
@@ -104,7 +102,7 @@ export default class TalkView extends Vue {
   }
 
   get tags() {
-    return socialTagModule.tags
+    return socialuniTagModule.tags
   }
 
   get user() {
@@ -121,7 +119,7 @@ export default class TalkView extends Vue {
   }
 
   get selectTagName() {
-    return socialTagModule.selectTagName
+    return socialuniTagModule.selectTagName
   }
 
   get location() {
@@ -190,11 +188,11 @@ export default class TalkView extends Vue {
 
   // tag
   changeTag(tag: TagVO) {
-    socialTagModule.setSelectTagName(tag.name)
+    socialuniTagModule.setSelectTagName(tag.name)
   }
 
   deleteTag() {
-    socialTagModule.setSelectTagName(null)
+    socialuniTagModule.setSelectTagName(null)
   }
 
   toNotifyVue() {

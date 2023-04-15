@@ -1,11 +1,11 @@
-import StorageUtil from "socialuni-base/src/utils/StorageUtil";
-import {socialTagModule} from "socialuni-sdk/src/store/store";
+import {socialuniTagModule} from "socialuni-community/src/store/SocialTagModule";
+import StorageUtil from "socialuni-base-api/src/util/StorageUtil";
 
 export default class SocialCircleStorageUtil {
     static getMineCircleNamesKeyKey = 'mineCircleNamesKey'
 
     static saveCircleNames() {
-        StorageUtil.set(SocialCircleStorageUtil.getMineCircleNamesKeyKey, socialTagModule.mineHistoryTagNames)
+        StorageUtil.set(SocialCircleStorageUtil.getMineCircleNamesKeyKey, socialuniTagModule.mineHistoryTagNames)
     }
 
     static getCircleNames(): string[] {

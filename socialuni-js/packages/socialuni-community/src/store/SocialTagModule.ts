@@ -1,11 +1,12 @@
 
 import TagVO from "socialuni-base-api/src/model/community/tag/TagVO";
 import TagTypeVO from "socialuni-base-api/src/model/community/tag/TagTypeVO";
-import TagAPI from "socialuni-base-api/src/api/socialuni/TagAPI";
 import TagStorageUtil from "socialuni-util/src/util/TagStorageUtil";
+import {reactive, UnwrapNestedRefs} from "vue";
+import TagAPI from "socialuni-community-api/src/api/TagAPI";
 
 
-class SocialTagModule {
+class SocialuniTagModule {
     tags: TagVO[] = []
     tagTypes: TagTypeVO[] = []
     checkedTags: TagVO[] = []
@@ -93,3 +94,4 @@ class SocialTagModule {
         }
     }
 }
+export const socialuniTagModule: SocialuniTagModule = reactive(new SocialuniTagModule())

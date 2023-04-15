@@ -1,6 +1,6 @@
-import StorageUtil from "socialuni-base/src/utils/StorageUtil"
 import TalkTabType from "socialuni-constant/constant/TalkTabType";
 import SocialuniTalkTabRO from "socialuni-base-api/src/model/talk/SocialuniTalkTabRO";
+import StorageUtil from "socialuni-base-api/src/util/StorageUtil";
 
 const talkTabFollowDefault = new SocialuniTalkTabRO()
 talkTabFollowDefault.name = TalkTabType.follow_name

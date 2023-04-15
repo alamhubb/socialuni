@@ -97,7 +97,6 @@ import QIcon from 'socialuni-ui/src/components/QIcon/QIcon.vue'
 import QNavbar from 'socialuni-ui/src/components/QNavbar/QNavbar.vue'
 import QSearch from 'socialuni-ui/src/components/QSearch/QSearch.vue'
 import QSidebar from 'socialuni-ui/src/components/QSidebar/QSidebar.vue'
-import {socialTagModule} from "socialuni-sdk/src/store/store";
 import TagVO from "socialuni-base-api/src/model/community/tag/TagVO";
 import TagUtil from "socialuni-util/src/util/TagUtil";
 
@@ -121,15 +120,15 @@ export default class TagSearch extends Vue {
   }) readonly isAdd: boolean
 
   get tagTypes() {
-    return socialTagModule.tagTypes
+    return socialuniTagModule.tagTypes
   }
 
   get tags() {
-    return socialTagModule.tags
+    return socialuniTagModule.tags
   }
 
   mounted() {
-    socialTagModule.getTagTypesAction()
+    socialuniTagModule.getTagTypesAction()
   }
 
   openTagSearchDialog() {

@@ -141,26 +141,22 @@ import QIcon from 'socialuni-ui/src/components/QIcon/QIcon.vue'
 import SocialTalkFilterDialog from "./SocialTalkFilterDialog.vue";
 import QPullRefresh from "socialuni-ui/src/components/QPullRefresh/QPullRefresh.vue";
 import TalkItem from "./talkItem/TalkItem.vue";
-import {
-  socialChatModule,
-  socialLocationModule,
-  socialTagModule,
-  socialTalkModule,
-} from "socialuni-sdk/src/store/store";
 import TalkTabVO from "socialuni-base-api/src/model/talk/SocialuniTalkTabRO";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
-import SocialuniTalkAPI from "socialuni-base-api/src/api/socialuni/SocialuniTalkAPI";
 import CommonUtil from "socialuni-util/src/util/CommonUtil";
 import TalkVO from "socialuni-base-api/src/model/talk/TalkVO";
 import Constants from "socialuni-constant/constant/Constant";
-import StorageUtil from "socialuni-base/src/utils/StorageUtil";
 import PageUtil from "socialuni-util/src/util/PageUtil"; // todo 后台可控制是否显示轮播图
-import {socialuniConfigModule, socialuniSystemModule, socialuniUserModule} from 'socialuni-sdk/src/store/store'
 import SocialCircleRO from "socialuni-base-api/src/model/community/circle/SocialCircleRO";
 import SocialuniTalkTabCircleRO from "socialuni-base-api/src/model/community/circle/SocialuniTalkTabCircleRO";
 import ToastUtil from "socialuni-util/src/util/ToastUtil";
 import HugAddVO from "socialuni-base-api/src/model/HugAddVO";
 import MsgUtil from "socialuni-util/src/util/MsgUtil";
+import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
+import {socialTalkModule} from "../../store/SocialTalkModule";
+import {socialuniTagModule} from "../../store/SocialTagModule";
+import TalkQueryVO from "socialuni-base-api/src/model/talk/TalkQueryVO";
+import TalkQOFactory from "../../factory/TalkQOFactory";
 
 // todo 后台可控制是否显示轮播图
 @Options({
@@ -356,7 +352,11 @@ export default class TabsTalk extends Vue {
         talkTabObj.firstLoad = false
       }
       const resDataTalks = []
-      return SocialuniTalkAPI.queryTalksAPI(talkTabObj.name, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, talkTabObj.queryTime, socialTagModule.selectTagNames, firstLoad).then((res: any) => {
+
+
+      const talkQO = TalkQOFactory.getTalkQueryQO(talkTabObj.name, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, talkTabObj.queryTime, socialuniTagModule.selectTagNames, firstLoad)
+
+      return SocialuniTalkAPI.queryTalksAPI(talkQO).then((res: any) => {
         // 如果不是上拉加载，则是下拉刷新，则停止下拉刷新动画
         if (talkTabObj.loadMore === LoadMoreType.loading) {
           if (res.data) {

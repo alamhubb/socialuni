@@ -1,7 +1,7 @@
 import {QQMapResult} from "socialuni-base-api/src/model/location/QQMapResult";
 import LocationQueryQO from "socialuni-base-api/src/model/location/LocationQueryQO";
 import ResultRO from "socialuni-base-api/src/model/social/ResultRO";
-import SocialuniLocationAPI from "socialuni-base-api/src/api/socialuni/SocialuniLocationAPI";
+import SocialuniLocationAPI from "socialuni-community-api/src/api/SocialuniLocationAPI";
 
 export default class MapUtil {
     static async getLocationBySdk(): Promise<unknown> {

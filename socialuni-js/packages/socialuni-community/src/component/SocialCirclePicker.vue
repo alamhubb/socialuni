@@ -51,7 +51,6 @@
 <script lang="ts">
 import {Options, Emit, Vue} from 'vue-property-decorator'
 import QPopup from "socialuni-ui/src/components/QPopup/QPopup.vue";
-import {socialCircleModule} from "socialuni-sdk/src/store/store";
 import SocialCircleRO from "socialuni-base-api/src/model/community/circle/SocialCircleRO";
 import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
 import QInput from "socialuni-ui/src/components/QInput/QInput.vue";

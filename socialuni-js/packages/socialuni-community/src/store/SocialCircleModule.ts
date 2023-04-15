@@ -1,9 +1,10 @@
 
 import SocialCircleRO from "socialuni-base-api/src/model/community/circle/SocialCircleRO";
 import CircleTypeRO from "socialuni-base-api/src/model/community/circle/CircleTypeRO";
-import SocialuniCircleAPI from "socialuni-base-api/src/api/socialuni/SocialuniCircleAPI";
 import TagStorageUtil from "socialuni-util/src/util/TagStorageUtil";
 import SocialCircleStorageUtil from "socialuni-util/src/util/SocialCircleStorageUtil";
+import {reactive} from "vue";
+import SocialuniCircleAPI from "socialuni-community-api/src/api/SocialuniCircleAPI";
 
 
 class SocialCircleModule {
@@ -79,3 +80,5 @@ class SocialCircleModule {
         }
     }
 }
+
+export const socialCircleModule: SocialCircleModule = reactive(new SocialCircleModule())

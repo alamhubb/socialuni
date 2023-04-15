@@ -87,20 +87,12 @@
 
 <script lang="ts">
 import {Emit, Options, Vue, Watch} from 'vue-property-decorator'
-import {
-  socialCircleModule,
-  socialLocationModule,
-  socialTagModule,
-  socialTalkModule,
-} from "socialuni-sdk/src/store/store";
 import TalkFilterUtil from "socialuni-util/src/util/TalkFilterUtil";
 import DistrictVO from "socialuni-base-api/src/model/DistrictVO";
 import TagVO from "socialuni-base-api/src/model/community/tag/TagVO";
 import SocialCircleRO from "socialuni-base-api/src/model/community/circle/SocialCircleRO";
 import GenderType from "socialuni-constant/constant/GenderType";
 import AlertUtil from "socialuni-util/src/util/AlertUtil";
-import SocialTagPicker from "socialuni-ui/src/components/SocialTagPicker.vue";
-import SocialCirclePicker from "socialuni-ui/src/components/SocialCirclePicker.vue";
 import TagSearch from "./TagSearch.vue";
 import QInput from "socialuni-ui/src/components/QInput/QInput.vue";
 import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
@@ -108,7 +100,13 @@ import QSlider from "socialuni-ui/src/components/QSlider/QSlider.vue";
 import QPopup from "socialuni-ui/src/components/QPopup/QPopup.vue";
 import QCityPicker from "socialuni-ui/src/components/QCityPicker/QCityPicker.vue";
 import QCityInfo from "socialuni-ui/src/components/QCityInfo/QCityInfo.vue";
-import { socialuniUserModule } from 'socialuni-sdk/src/store/store';
+import SocialTagPicker from '../../component/SocialTagPicker.vue';
+import SocialCirclePicker from "../../component/SocialCirclePicker.vue";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+import {socialuniTagModule} from "../../store/SocialTagModule";
+import {socialCircleModule} from "../../store/SocialCircleModule";
+import {socialLocationModule} from "../../store/SocialLocationModule";
+import {socialTalkModule} from "../../store/SocialTalkModule";
 
 
 @Options({
@@ -136,15 +134,15 @@ export default class SocialTalkFilterDialog extends Vue {
   }
 
   get tagTypes() {
-    return socialTagModule.tagTypes
+    return socialuniTagModule.tagTypes
   }
 
   get tags() {
-    return socialTagModule.tags
+    return socialuniTagModule.tags
   }
 
   get mineTagsTop10() {
-    return socialTagModule.mineTagsTop10
+    return socialuniTagModule.mineTagsTop10
   }
 
   get circles() {
@@ -173,7 +171,7 @@ export default class SocialTalkFilterDialog extends Vue {
 
   selectCircleName = socialCircleModule.circleName
   checkedTags: TagVO[] = []
-  selectTagName: string = socialTagModule.selectTagName
+  selectTagName: string = socialuniTagModule.selectTagName
 
   @Watch('location')
   locationWatch() {
@@ -182,7 +180,7 @@ export default class SocialTalkFilterDialog extends Vue {
 
 
   open() {
-    this.selectTagName = socialTagModule.selectTagName
+    this.selectTagName = socialuniTagModule.selectTagName
     this.selectCircleName = socialCircleModule.circleName
     this.initFilterValue()
     this.$refs.filterDialog.open()
@@ -228,7 +226,7 @@ export default class SocialTalkFilterDialog extends Vue {
   @Emit()
   confirm() {
     socialTalkModule.setCircleNameUpdateCurTabIndex(this.selectCircleName)
-    socialTagModule.setSelectTagName(this.selectTagName)
+    socialuniTagModule.setSelectTagName(this.selectTagName)
     socialLocationModule.setLocation(this.district)
     socialTalkModule.setFilterData(this.genderTypeValue, this.rangeValue[0], this.rangeValue[1])
   }
@@ -254,7 +252,7 @@ export default class SocialTalkFilterDialog extends Vue {
 
   // tag
   changeTag(tag: TagVO) {
-    socialTagModule.setMineHistoryTagNames(tag.name)
+    socialuniTagModule.setMineHistoryTagNames(tag.name)
     this.changeTagName(tag.name)
   }
 

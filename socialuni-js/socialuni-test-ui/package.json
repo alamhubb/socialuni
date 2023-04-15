@@ -57,6 +57,7 @@
     "pinia": "^2.0.22",
     "pinia-class-component": "^0.9.4",
     "socialuni-user": "../packages/socialuni-user",
+    "socialuni-community": "../packages/socialuni-community",
     "uuid": "^7.0.3",
     "vite-plugin-require-transform": "^1.0.4",
     "vue": "3.2.47",

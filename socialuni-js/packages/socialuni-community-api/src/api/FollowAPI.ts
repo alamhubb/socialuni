@@ -6,14 +6,14 @@ import SocialUserFollowDetailRO from "../../model/social/SocialUserFollowDetailR
 
 export default class FollowAPI {
     static addFollowAPI(followAdd: FollowAddVO) {
-        return request.post('socialuni/follow/addFollow', followAdd)
+        return socialuniCommunityRequest.post('socialuni/follow/addFollow', followAdd)
     }
 
     static cancelFollowAPI(followAdd: FollowAddVO) {
-        return request.post('socialuni/follow/cancelFollow', followAdd)
+        return socialuniCommunityRequest.post('socialuni/follow/cancelFollow', followAdd)
     }
 
     static queryUserFollowsAPI(queryQO: SocialuniPageQueryQO<SocialUserFollowDetailRO>) {
-        return request.post<SocialUserFollowDetailRO[]>('socialuni/follow/queryUserFollows', queryQO)
+        return socialuniCommunityRequest.post<SocialUserFollowDetailRO[]>('socialuni/follow/queryUserFollows', queryQO)
     }
 }

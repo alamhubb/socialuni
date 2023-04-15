@@ -1,6 +1,6 @@
 import DistrictVO from '../DistrictVO'
 import ImgAddQO from '../user/ImgAddQO'
-import LocationUtil from "socialuni-util/src/util/LocationUtil";
+import LocationConst from "socialuni-constant/constant/community/LocationConst";
 
 export default class TalkAddVO {
     public content: string
@@ -17,7 +17,7 @@ export default class TalkAddVO {
 
     constructor(content: string, imgs: ImgAddQO[], district: DistrictVO, visibleType: string, visibleGender: string, circleName: string, tagNames: string[]) {
         this.content = content
-        this.adCode = LocationUtil.chinaAdCode
+        this.adCode = LocationConst.chinaAdCode
         this.visibleType = visibleType
         this.visibleGender = visibleGender
         this.imgs = imgs

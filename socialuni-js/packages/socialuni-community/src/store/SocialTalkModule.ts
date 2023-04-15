@@ -4,19 +4,19 @@ import TalkVueUtil from "socialuni-util/src/util/TalkVueUtil"
 import TalkVO from "socialuni-base-api/src/model/talk/TalkVO"
 import CommentVO from "socialuni-base-api/src/model/comment/CommentVO"
 import CommentAddVO from "socialuni-base-api/src/model/comment/CommentAddVO"
-import {socialCircleModule} from "./store"
-import {socialuniUserModule} from "socialuni-sdk/src/store/store"
-import SocialuniTalkAPI from "socialuni-base-api/src/api/socialuni/SocialuniTalkAPI"
 import MsgUtil from "socialuni-util/src/util/MsgUtil"
 import CommonUtil from "socialuni-util/src/util/CommonUtil"
-import SocialuniAppAPI from "socialuni-base/src/api/socialuni/SocialuniAppAPI"
 import TalkTabType from "socialuni-constant/constant/TalkTabType"
-import StorageUtil from "socialuni-base/src/utils/StorageUtil"
 import SocialuniTalkTabRO from "socialuni-base-api/src/model/talk/SocialuniTalkTabRO";
 import TalkTabVO from "socialuni-base-api/src/model/talk/SocialuniTalkTabRO";
 import {Vue} from "vue-class-component";
-import SocialuniCircleAPI from "socialuni-base-api/src/api/socialuni/SocialuniCircleAPI";
 import CircleCreateChatQO from "socialuni-base-api/src/model/community/circle/CircleCreateChatQO";
+import {reactive} from "vue";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+import SocialuniAppAPI from "socialuni-base-api/src/api/SocialuniAppAPI";
+import {socialCircleModule} from "./SocialCircleModule";
+import SocialuniCircleAPI from "socialuni-community-api/src/api/SocialuniCircleAPI";
+import StorageUtil from "socialuni-base-api/src/util/StorageUtil";
 
 
 class SocialTalkModule {
@@ -270,3 +270,6 @@ class SocialTalkModule {
         return this.curTab.type === TalkTabType.circle_type
     }
 }
+
+
+export const socialTalkModule: SocialTalkModule = reactive(new SocialTalkModule())

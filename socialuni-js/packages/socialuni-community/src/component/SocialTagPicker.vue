@@ -53,7 +53,6 @@ import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
 import QInput from "socialuni-ui/src/components/QInput/QInput.vue";
 import QSidebar from "socialuni-ui/src/components/QSidebar/QSidebar.vue";
 import QPopup from "socialuni-ui/src/components/QPopup/QPopup.vue";
-import {socialTagModule} from "socialuni-sdk/src/store/store";
 import SocialCircleRO from "socialuni-base-api/src/model/community/circle/SocialCircleRO";
 
 
@@ -71,7 +70,7 @@ export default class SocialTagPicker extends Vue {
   }
 
   get tagTypes() {
-    return socialTagModule.tagTypes
+    return socialuniTagModule.tagTypes
   }
 
   get showTags() {
@@ -89,7 +88,7 @@ export default class SocialTagPicker extends Vue {
 
   open() {
     this.searchText = ''
-    socialTagModule.getTagTypesAction()
+    socialuniTagModule.getTagTypesAction()
     this.$refs.dialog.open()
   }
 

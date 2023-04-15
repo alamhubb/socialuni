@@ -1,24 +1,21 @@
-import StorageUtil from "socialuni-base/src/utils/StorageUtil"
 import MapUtil from './MapUtil'
 import AppAuthUtil from 'socialuni-util/src/util/AppAuthUtil'
 import DistrictVO from "socialuni-base-api/src/model/DistrictVO";
-import {socialLocationModule} from "socialuni-sdk/src/store/store";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import {QQMapResult} from "socialuni-base-api/src/model/location/QQMapResult";
-
-const chinaAdCode = '100000'
+import StorageUtil from "socialuni-base-api/src/util/StorageUtil";
+import {socialLocationModule} from "socialuni-community/src/store/SocialLocationModule";
+import LocationConst from "socialuni-constant/constant/community/LocationConst";
 
 const chinaDistrict = new DistrictVO()
 chinaDistrict.id = 1
 chinaDistrict.adName = '中国'
 chinaDistrict.provinceName = '中国'
-chinaDistrict.adCode = chinaAdCode
+chinaDistrict.adCode = LocationConst.chinaAdCode
 
 //只在第一次进入系统查询时，设置初始值使用，查询之后就会把默认值替换了
 
 export default class LocationUtil {
-    static readonly chinaAdCode = chinaAdCode
-
     static readonly nationwide = '全国'
 
     static readonly locationKey = 'location'

@@ -1,5 +1,5 @@
-import StorageUtil from "socialuni-base/src/utils/StorageUtil"
 import GenderType from "socialuni-constant/constant/GenderType";
+import StorageUtil from "socialuni-base-api/src/util/StorageUtil";
 
 export default class TalkFilterUtil {
   static readonly minAgeFilterKey: string = 'minAgeFilter'

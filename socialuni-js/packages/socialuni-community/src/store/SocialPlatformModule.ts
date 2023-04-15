@@ -1,5 +1,6 @@
 
 import AppConfig from "socialuni-constant/constant/AppConfig";
+import {reactive} from "vue";
 
 
 class SocialPlatformModule {
@@ -49,3 +50,6 @@ class SocialPlatformModule {
         return [this.wx_reportResultTemplateId]
     }
 }
+
+
+export const socialPlatformModule: SocialPlatformModule = reactive(new SocialPlatformModule())

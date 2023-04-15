@@ -10,34 +10,34 @@ import SocialuniCircleQueryByTypeQO from "socialuni-base-api/src/model/QO/circle
 
 export default class SocialuniCircleAPI {
   static createCircleAPI(createQO: CircleCreateQO) {
-    return socialuniAppRequest.post<SocialCircleRO>('socialuni/circle/createCircle', createQO).then(res => {
+    return socialuniAppsocialuniCommunityRequest.post<SocialCircleRO>('socialuni/circle/createCircle', createQO).then(res => {
       ToastUtil.toast('创建成功')
       return res
     })
   }
 
   static createCircleChatAPI(createQO: CircleCreateChatQO) {
-    return socialuniAppRequest.post<string>('socialuni/circle/createCircleChat', createQO)
+    return socialuniAppsocialuniCommunityRequest.post<string>('socialuni/circle/createCircleChat', createQO)
   }
 
   static queryCircleTalkTabInfoAPI(createQO: CircleCreateChatQO) {
-    return socialuniAppRequest.post<SocialuniTalkTabCircleRO>('socialuni/circle/queryCircleTalkTabInfo', createQO)
+    return socialuniAppsocialuniCommunityRequest.post<SocialuniTalkTabCircleRO>('socialuni/circle/queryCircleTalkTabInfo', createQO)
   }
 
   static queryHotCirclesAPI() {
-    return socialuniAppRequest.get<SocialCircleRO []>('socialuni/circle/queryHotCircles')
+    return socialuniAppsocialuniCommunityRequest.get<SocialCircleRO []>('socialuni/circle/queryHotCircles')
   }
 
   static queryHotCircleTypesAPI() {
-    return socialuniAppRequest.get<CircleTypeRO []>('socialuni/circle/queryHotCircleTypes')
+    return socialuniAppsocialuniCommunityRequest.get<CircleTypeRO []>('socialuni/circle/queryHotCircleTypes')
   }
 
   static queryCircleTypesAPI() {
-    return socialuniAppRequest.get<CircleTypeRO []>('socialuni/circle/queryCircleTypes')
+    return socialuniAppsocialuniCommunityRequest.get<CircleTypeRO []>('socialuni/circle/queryCircleTypes')
   }
 
   static queryCirclesByTypeAPI(circleTypeName: string) {
     const qo = new SocialuniCircleQueryByTypeQO(circleTypeName)
-    return socialuniAppRequest.post<SocialCircleRO []>('socialuni/circle/queryCirclesByCircleType', qo)
+    return socialuniAppsocialuniCommunityRequest.post<SocialCircleRO []>('socialuni/circle/queryCirclesByCircleType', qo)
   }
 }

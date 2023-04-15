@@ -94,7 +94,6 @@ import RouterUtil from "socialuni-util/src/util/RouterUtil";
 import PagePath from "socialuni-constant/constant/PagePath";
 import TalkVO from "socialuni-base-api/src/model/talk/TalkVO";
 import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
-import {socialTagModule, socialTalkModule} from "socialuni-sdk/src/store/store";
 import AlertUtil from "socialuni-util/src/util/AlertUtil";
 import ImgUtil from "socialuni-util/src/util/ImgUtil";
 import MsgUtil from "socialuni-util/src/util/MsgUtil";
@@ -134,7 +133,7 @@ export default class TalkItemContent extends Vue {
 
   chooseTags(tagName) {
     AlertUtil.confirm(`是否筛选${tagName}话题的内容`).then(() => {
-      socialTagModule.setSelectTagName(tagName)
+      socialuniTagModule.setSelectTagName(tagName)
     })
   }
 

@@ -38,7 +38,7 @@ public class TencentSmsServe {
     }
 
     public static String sendAuthCode(String phoneNum) {
-        String authCode = "9999";
+        String authCode = "1111";
         if (SocialuniSystemConst.getIsProdEnv() && StringUtil.isNotEmpty(appKey)) {
             authCode = AuthCodeUtil.getAuthCode();
         } else {

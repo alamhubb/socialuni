@@ -94,14 +94,13 @@ import MsgUtil from "socialuni-util/src/util/MsgUtil";
 import ToastUtil from "socialuni-util/src/util/ToastUtil";
 import PageUtil from "socialuni-util/src/util/PageUtil";
 import AlertUtil from "socialuni-util/src/util/AlertUtil";
-import SocialuniTalkAPI from "socialuni-base-api/src/api/socialuni/SocialuniTalkAPI";
 import FollowAddVO from "socialuni-base-api/src/model/FollowAddVO";
-import FollowAPI from "socialuni-base-api/src/api/socialuni/FollowAPI";
 import CenterUserDetailRO from "socialuni-base-api/src/model/social/CenterUserDetailRO";
 import UserUtil from "socialuni-util/src/util/UserUtil";
-import SocialGenderTag from "socialuni-ui/src/components/SocialGenderTag/SocialGenderTag.vue";
 import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
 import DateUtil from "socialuni-util/src/util/DateUtil";
+import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
+import FollowAPI from "socialuni-community-api/src/api/FollowAPI";
 
 @Options({
   components: {

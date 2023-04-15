@@ -5,7 +5,7 @@ import SocialLocationModule from "./SocialLocationModule";
 import SocialAppModule from "./SocialAppModule";
 import SocialCircleModule from "./SocialCircleModule";
 import SocialTalkModule from "./SocialTalkModule";
-import SocialTagModule from "./SocialTagModule";
+import socialuniTagModule from "./socialuniTagModule";
 import SocialNotifyModule from "./SocialNotifyModule";
 import SocialPlatformModule from "./SocialPlatformModule";
 import socialuniSystemModule from "./socialuniSystemModule";
@@ -24,7 +24,7 @@ export let socialAppModule: SocialAppModule
 export let socialLocationModule: SocialLocationModule
 export let socialCircleModule: SocialCircleModule
 export let socialTalkModule: SocialTalkModule
-export let socialTagModule: SocialTagModule
+export let socialuniTagModule: socialuniTagModule
 export let socialNotifyModule: SocialNotifyModule
 export let socialPlatformModule: SocialPlatformModule
 // export let socialRouterModule: SocialRouterModule
@@ -40,7 +40,7 @@ export async function initSocialuniStore() {
     socialLocationModule = new SocialLocationModule()
     socialTalkModule = new SocialTalkModule()
     socialCircleModule = new SocialCircleModule()
-    socialTagModule = new SocialTagModule()
+    socialuniTagModule = new socialuniTagModule()
     socialNotifyModule = new SocialNotifyModule()
     socialPlatformModule = new SocialPlatformModule()
     socialuniSystemModule.initSystemInfo()
@@ -56,8 +56,8 @@ export async function initSocialuniStore() {
     socialAppModule.getHomeSwipersAction()
     socialLocationModule.getHotDistrictsAction()
     socialTalkModule.getTalkTabs()
-    socialTagModule.getHotTagsAction()
-    socialTagModule.getHotTagTypesAction()
+    socialuniTagModule.getHotTagsAction()
+    socialuniTagModule.getHotTagTypesAction()
     socialCircleModule.getHotCirclesAction()
     socialCircleModule.getHotCircleTypesAction()
     // socialOAuthModule = new SocialOAuthModule()

@@ -2,7 +2,8 @@
 
 import UnreadNotifyVO from "socialuni-base-api/src/model/notify/UnreadNotifyVO";
 import CenterUserDetailRO from "socialuni-base-api/src/model/social/CenterUserDetailRO";
-import NotifyAPI from "socialuni-base-api/src/api/socialuni/NotifyAPI";
+import {reactive} from "vue";
+import NotifyAPI from "socialuni-community-api/src/api/NotifyAPI";
 
 
 class SocialNotifyModule {
@@ -46,3 +47,6 @@ class SocialNotifyModule {
         })
     }
 }
+
+
+export const socialNotifyModule: SocialNotifyModule = reactive(new SocialNotifyModule())

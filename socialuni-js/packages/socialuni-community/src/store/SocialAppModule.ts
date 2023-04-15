@@ -37,4 +37,4 @@ class SocialAppModule {
     }
 }
 
-export default socialAppModule = reactive(new SocialAppModule())
+export const socialAppModule: SocialAppModule = reactive(new SocialAppModule())
