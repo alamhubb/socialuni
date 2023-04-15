@@ -12,7 +12,6 @@
     "@dcloudio/uni-ui": "^1.4.23",
     "socialuni-user-api": "^0.1.2",
     "socialuni-community-api": "^0.1.2",
-    "socialuni-user-sdk": "^0.1.2",
     "socialuni-base": "^0.1.2",
     "vue": "3.2.41",
     "vue-class-component": "^8.0.0-rc.1",
