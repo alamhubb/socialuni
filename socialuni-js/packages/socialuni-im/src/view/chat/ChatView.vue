@@ -105,8 +105,6 @@ import ChatType from 'socialuni-constant/constant/ChatType'
 import SocialuniCommonStatus from 'socialuni-constant/constant/status/SocialuniCommonStatus'
 import {Options, Vue} from 'vue-property-decorator'
 import Constants from 'socialuni-constant/constant/Constant'
-import ChatAPI from 'socialuni-base-api/src/api/ChatAPI'
-import {socialChatModule, socialuniUserModule} from "socialuni-sdk/src/store/store"
 import DateUtil from "socialuni-util/src/util/DateUtil"
 import UniUtil from "socialuni-util/src/util/UniUtil"
 import AlertUtil from "socialuni-util/src/util/AlertUtil"
@@ -116,9 +114,11 @@ import PageUtil from "socialuni-util/src/util/PageUtil"
 import SocialUserContentRO from "socialuni-base-api/src/model/social/SocialUserContentRO"
 import QNavbar from "socialuni-ui/src/components/QNavbar/QNavbar.vue"
 import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue"
+import QSearch from "socialuni-ui/src/components/QSearch/QSearch.vue"
+import QInput from "socialuni-ui/src/components/QInput/QInput.vue"
 import SocialuniChatRO from "socialuni-base-api/src/model/SocialuniChatRO"
-import QInput from "../../components/QInput/QInput.vue"
-import QSearch from "../../components/QSearch/QSearch.vue"
+import {socialChatModule} from "../../store/SocialChatModule";
+import ChatAPI from "socialuni-im-api/src/api/ChatAPI";
 
 @Options({
   components: {QSearch, QInput, QIcon, QNavbar}
@@ -135,7 +135,8 @@ export default class ChatView extends Vue {
   }
 
   get recvFriendApplication() {
-    return socialChatModule.getRecvFriendApplicationList(0).length
+    // return socialChatModule.getRecvFriendApplicationList(0).length
+    return 0
   }
 
   // @chatStore.Getter('chatsUnreadNumTotal') readonly chatsUnreadNumTotal: number

@@ -1,7 +1,7 @@
-import request from '../request/request';
-import ChatReadVO from '../model/chat/ChatReadVO'
-import ChatRemoveVO from '../model/chat/ChatRemoveVO'
 import SocialuniChatRO from 'socialuni-base-api/src/model/SocialuniChatRO'
+import socialuniImRequest from "./socialuniImRequest";
+import ChatReadVO from "socialuni-base-api/src/model/chat/ChatReadVO";
+import ChatRemoveVO from "socialuni-base-api/src/model/chat/ChatRemoveVO";
 
 export default class ChatAPI {
     /*static getChatAPI (user: UserVO) {
@@ -10,25 +10,25 @@ export default class ChatAPI {
 
 
     static queryChatListAPI() {
-        return request.get<SocialuniChatRO[]>('socialuni/chat/queryChatList')
+        return socialuniImRequest.get<SocialuniChatRO[]>('socialuni/chat/queryChatList')
     }
 
     static readChatAPI(chatId: string, messageIds: string[]) {
         const chatRead: ChatReadVO = new ChatReadVO(chatId, messageIds)
-        return request.post('chat/readChat', chatRead)
+        return socialuniImRequest.post('chat/readChat', chatRead)
     }
 
     static frontDeleteChatAPI(chatId: number) {
         const chat: ChatRemoveVO = new ChatRemoveVO(chatId)
-        return request.post('chat/frontDeleteChat', chat)
+        return socialuniImRequest.post('chat/frontDeleteChat', chat)
     }
 
     static closeChatAPI(chatId: number) {
         const chat: ChatRemoveVO = new ChatRemoveVO(chatId)
-        return request.post('chat/closeChat', chat)
+        return socialuniImRequest.post('chat/closeChat', chat)
     }
 
     static openChatAPI(chatId: string, needPayOpen = false, content) {
-        return request.post<SocialuniChatRO>('chat/openChat', {id: chatId, needPayOpen, content})
+        return socialuniImRequest.post<SocialuniChatRO>('chat/openChat', {id: chatId, needPayOpen, content})
     }
 }
