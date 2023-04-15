@@ -2,16 +2,20 @@ import {App, defineComponent} from "vue";
 import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
 import UniUtil from "socialuni-util/src/util/UniUtil";
 import {SocialuniPlugin} from "./interface/SocialuniPlugin";
+import {ImportModule} from "./interface/ImportModule";
 
 const Socialuni = {
     async install(app: App, socialuniPlugins: SocialuniPlugin[]) {
         // 社交联盟内置支持的插件
-        const socialuniCommunityPlugin: { default: SocialuniPlugin } = await import('socialuni-community/src/index');
-        if (socialuniCommunityPlugin) {
-            socialuniCommunityPlugin.default.onLaunch()
+        try {
+            //查询是否包含community模块，如果存在则加载
+            const socialuniCommunityPlugin: ImportModule<SocialuniPlugin> = await import('socialuni-community/src/index');
+            if (socialuniCommunityPlugin) {
+                socialuniCommunityPlugin.default.onLaunch()
+            }
+        } catch (e) {
+            // 如果导入失败，则不触发任何操作
         }
-        //查询是否包含community模块，如果存在则加载
-
         if (socialuniPlugins && Array.isArray(socialuniPlugins) && socialuniPlugins.length) {
             for (const plugin of socialuniPlugins) {
                 plugin.onLaunch()
