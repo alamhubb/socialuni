@@ -9,8 +9,9 @@ import APPUtil from "socialuni-util/src/util/APPUtil"
 import UserPayResultVO from "socialuni-base-api/src/model/user/UserPayResultVO";
 import {socialPlatformModule} from "../store/SocialPlatformModule";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
-import SocialuniCoinAPI from "socialuni-api/src/api/socialuni/SocialuniCoinAPI";
 import SocialuniAppAPI from "socialuni-base-api/src/api/SocialuniAppAPI";
+import SocialuniCoinAPI from "socialuni-base-api/src/api/socialuni/SocialuniCoinAPI";
+import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
 
 
 // 统一处理各平台的订阅
