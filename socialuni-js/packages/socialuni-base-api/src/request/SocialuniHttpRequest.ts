@@ -7,9 +7,7 @@ import UniAppHttpRequest, {Config, Interceptor, RequestConfig, Response} from ".
 import {socialuniTokenModule} from "../store/SocialuniTokenModule";
 import JsonUtil from "../util/JsonUtil";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";;
-import {socialuniConfigModule} from "../store/SocialuniConfigModule";
 import SocialuniAppAPI from "../api/SocialuniAppAPI";
-import UserService from "socialuni-user-sdk/src/service/UserService";
 import SocialuniConfig from "../config/SocialuniConfigModule";
 
 export default class SocialuniHttpRequest extends UniAppHttpRequest {
@@ -84,31 +82,31 @@ export default class SocialuniHttpRequest extends UniAppHttpRequest {
                     case ErrorConst.not_logged:
                         // 理论上不需要，因为token不会失效，也不会错误
                         // 已知可能，切换环境导致token不同
-                        UserService.clearUserInfo()
-                        // MsgUtil.unLoginMessage()
+                        // UserService.clearUserInfo()
+                        // UserMsgUtil.unLoginMessage()
                         break
                     case ErrorConst.banned:
                         // 理论上不需要，因为token不会失效，也不会错误
                         // 已知可能，切换环境导致token不同
-                        UserService.clearUserInfo()
+                        // UserService.clearUserInfo()
                         AlertUtil.hint(errorMsg)
                         break
                     case ErrorConst.custom:
                         break
                     default:
                         AlertUtil.hint(errorMsg)
-                        SocialuniAppAPI.sendErrorLogAPI(error.config.url, errorMsg)
+                        // SocialuniAppAPI.sendErrorLogAPI(error.config.url, errorMsg)
                         break
                 }
             } else {
                 MsgUtil.systemErrorMsg()
-                SocialuniAppAPI.sendErrorLogAPI(error.config.url, result)
+                // SocialuniAppAPI.sendErrorLogAPI(error.config.url, result)
             }
             // 返回接口返回的错误信息
             return result
         }
         MsgUtil.systemErrorMsg()
-        SocialuniAppAPI.sendErrorLogAPI(error.config.url, JsonUtil.toJson(error))
+        // SocialuniAppAPI.sendErrorLogAPI(error.config.url, JsonUtil.toJson(error))
         return error
     }
 

@@ -87,39 +87,39 @@
 
 <script lang="ts">
 import {Emit, Options, Vue, Watch} from 'vue-property-decorator'
-import TalkFilterUtil from "socialuni-util/src/util/TalkFilterUtil";
-import DistrictVO from "socialuni-base-api/src/model/DistrictVO";
-import TagVO from "socialuni-base-api/src/model/community/tag/TagVO";
-import SocialCircleRO from "socialuni-base-api/src/model/community/circle/SocialCircleRO";
-import GenderType from "socialuni-constant/constant/GenderType";
-import AlertUtil from "socialuni-util/src/util/AlertUtil";
-import TagSearch from "./TagSearch.vue";
-import QInput from "socialuni-ui/src/components/QInput/QInput.vue";
-import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
-import QSlider from "socialuni-ui/src/components/QSlider/QSlider.vue";
-import QPopup from "socialuni-ui/src/components/QPopup/QPopup.vue";
-import QCityPicker from "socialuni-ui/src/components/QCityPicker/QCityPicker.vue";
-import QCityInfo from "socialuni-ui/src/components/QCityInfo/QCityInfo.vue";
-import SocialTagPicker from '../../component/SocialTagPicker.vue';
-import SocialCirclePicker from "../../component/SocialCirclePicker.vue";
-import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
-import {socialuniTagModule} from "../../store/SocialTagModule";
-import {socialCircleModule} from "../../store/SocialCircleModule";
-import {socialLocationModule} from "../../store/SocialLocationModule";
-import {socialTalkModule} from "../../store/SocialTalkModule";
+// import TalkFilterUtil from "socialuni-util/src/util/TalkFilterUtil";
+// import DistrictVO from "socialuni-base-api/src/model/DistrictVO";
+// import TagVO from "socialuni-base-api/src/model/community/tag/TagVO";
+// import SocialCircleRO from "socialuni-base-api/src/model/community/circle/SocialCircleRO";
+// import GenderType from "socialuni-constant/constant/GenderType";
+// import AlertUtil from "socialuni-util/src/util/AlertUtil";
+// import TagSearch from "./TagSearch.vue";
+// import QInput from "socialuni-ui/src/components/QInput/QInput.vue";
+// import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
+// import QSlider from "socialuni-ui/src/components/QSlider/QSlider.vue";
+// import QPopup from "socialuni-ui/src/components/QPopup/QPopup.vue";
+// import SocialTagPicker from '../../component/SocialTagPicker.vue';
+// import SocialCirclePicker from "../../component/SocialCirclePicker.vue";
+// import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+// import {socialuniTagModule} from "../../store/SocialTagModule";
+// import {socialCircleModule} from "../../store/SocialCircleModule";
+// import {socialLocationModule} from "../../store/SocialLocationModule";
+// import {socialTalkModule} from "../../store/SocialTalkModule";
+// import QCityPicker from "../../component/QCityPicker/QCityPicker.vue";
+// import QCityInfo from "../../component/QCityInfo/QCityInfo.vue";
 
 
 @Options({
   components: {
-    SocialTagPicker,
-    SocialCirclePicker,
-    TagSearch,
-    QCityPicker,
-    QInput,
-    QCityInfo,
-    QIcon,
-    QPopup,
-    QSlider
+    // SocialTagPicker,
+    // SocialCirclePicker,
+    // TagSearch,
+    // QCityPicker,
+    // QInput,
+    // QCityInfo,
+    // QIcon,
+    // QPopup,
+    // QSlider
   }
 })
 export default class SocialTalkFilterDialog extends Vue {

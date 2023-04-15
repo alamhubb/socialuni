@@ -1,15 +1,11 @@
-// import FrontErrorLogVO from "socialuni-base-api/src/model/FrontErrorLogVO";
-// import ObjectUtil from "socialuni-util/src/util/ObjectUtil";
-// import socialuniAppRequest from "../request/socialuniAppRequest";
-// import AppInitDataRO from "../model/config/AppInitDataRO";
-// import AppUpdateResultVO from "../model/app/AppUpdateResultVO";
-// import HomeSwiperVO from "../model/HomeSwiperVO";
-// import AppUpdateVO from "../model/app/AppUpdateVO";
-// import SocialuniTalkTabRO from "../model/talk/SocialuniTalkTabRO";
-// import JsonUtil from "../util/JsonUtil";
-
-
 import socialuniAppRequest from "../request/socialuniAppRequest";
+import AppInitDataRO from "../model/config/AppInitDataRO";
+import AppUpdateResultVO from "../model/app/AppUpdateResultVO";
+import HomeSwiperVO from "../model/HomeSwiperVO";
+import SocialuniTalkTabRO from "../model/talk/SocialuniTalkTabRO";
+import FrontErrorLogVO from "../model/FrontErrorLogVO";
+import JsonUtil from "../util/JsonUtil";
+import AppUpdateVO from "../model/app/AppUpdateVO";
 
 export default class SocialuniAppAPI {
   static getImgPathAPI() {
@@ -38,6 +34,6 @@ export default class SocialuniAppAPI {
     if (uri && uri.indexOf('sendErrorLog') > -1) {
       return
     }
-    return socialuniAppRequest.post('socialuni/app/sendErrorLog', new FrontErrorLogVO(uri, detail, JsonUtil.toJson(params), ObjectUtil.toJson(errorMsg)))
+    return socialuniAppRequest.post('socialuni/app/sendErrorLog', new FrontErrorLogVO(uri, detail, JsonUtil.toJson(params), JsonUtil.toJson(errorMsg)))
   }
 }

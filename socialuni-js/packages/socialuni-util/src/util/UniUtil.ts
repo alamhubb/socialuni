@@ -11,7 +11,7 @@ import GetImageInfoSuccessData = UniApp.GetImageInfoSuccessData;
 import ToastUtil from 'socialuni-util/src/util/ToastUtil'
 import UUIDUtil from 'socialuni-util/src/util/UUIDUtil'
 import AppMsg from "socialuni-constant/constant/AppMsg";
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";;
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule"
 
 export default class UniUtil {
     public static textCopy(copyText: string, hint: string = '已复制') {

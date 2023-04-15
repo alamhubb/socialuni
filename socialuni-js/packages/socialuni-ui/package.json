@@ -10,10 +10,8 @@
     "@dcloudio/types": "^3.0.17",
     "@dcloudio/uni-app": "3.0.0-alpha-3070620230227001",
     "@dcloudio/uni-ui": "^1.4.23",
-    "socialuni-api": "^0.1.2",
+    "socialuni-util": "^0.1.2",
     "socialuni-constant": "^0.1.2",
-    "socialuni-sdk": "^0.1.2",
-    "socialuni-im-api": "^0.1.2",
     "vue": "3.2.41",
     "vue-class-component": "^8.0.0-rc.1",
     "vue-property-decorator": "^10.0.0-rc.3"
