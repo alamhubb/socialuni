@@ -1,12 +1,11 @@
 import SocialuniCommonStatus from "socialuni-constant/constant/status/SocialuniCommonStatus";
-import MessageContentType from "socialuni-constant/constant/mesaage/MessageContentType";
 import {OpenImMsgRO} from "socialuni-base-api/src/model/openIm/OpenImMsgRO";
-import JsonUtil from "socialuni-util/src/util/JsonUtil";
-import {socialChatModule, socialuniUserModule} from "socialuni-sdk/src/store/store";
 import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
 import SocialuniUserRO from "socialuni-base-api/src/model/user/SocialuniUserRO";
-import {MessageType} from "socialuni-sdk/src/plugins/openIm/OpenImMessageType";
 import SocialuniMessageType from "socialuni-constant/constant/mesaage/SocialuniMessageType";
+import {MessageType} from "socialuni-constant/constant/openIm/OpenImMessageType";
+import {socialChatModule} from "socialuni-im/src/store/SocialChatModule";
+import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
 
 export default class MessageVO {
     public id: string
@@ -117,7 +116,6 @@ export default class MessageVO {
             this.isMine = true
             this.isRead = true
             this.createTime = new Date().getTime()
-
             this.contentType = MessageType.TEXTMESSAGE //MessageContentType.text
             this.action = 'createTextMessage'
         }

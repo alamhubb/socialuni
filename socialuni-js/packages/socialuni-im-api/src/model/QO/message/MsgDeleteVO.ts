@@ -1,4 +1,4 @@
-export default class TalkDelete {
+export default class MsgDeleteVO {
   public msgId: number
   public deleteReason: string
   public violation: boolean

@@ -6,7 +6,7 @@ export default class JsonUtil {
         return ""
     }
 
-    static parse(objJson: string): any {
+    static toParse(objJson: string): any {
         if (objJson) {
             return JSON.parse(objJson)
         }

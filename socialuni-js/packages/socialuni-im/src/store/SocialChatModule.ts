@@ -1,6 +1,5 @@
 
 import PageUtil from "socialuni-util/src/util/PageUtil"
-import ChatAPI from "socialuni-base-api/src/api/ChatAPI"
 import RouterUtil from "socialuni-util/src/util/RouterUtil"
 import PagePath from "socialuni-constant/constant/PagePath"
 import PlatformUtils from "socialuni/src/utils/PlatformUtils"
@@ -202,7 +201,7 @@ class SocialChatModule {
 
     }
 
-    /*async pinConversation(conversationID: string, isPinned: boolean = true) {
+    async pinConversation(conversationID: string, isPinned: boolean = true) {
         const options: PinCveParams = {
                 conversationID,
                 isPinned
@@ -222,17 +221,17 @@ class SocialChatModule {
         })
     }
 
-    /!**
+    /**
      * 获取收到的好友请求列表
      * @param handleResult -1 拒绝   0 未处理   1 同意
-     *!/
+     */
     getRecvFriendApplicationList(handleResult: number) {
         return this.recvFriendApplicationList.filter(item => item.handleResult == handleResult);
     }
 
-    /!**
+    /**
      * 获取收到的好友请求列表
-     *!/
+     */
     async refreshRecvFriendApplicationList() {
         await (await this.openIm()).getRecvFriendApplicationList().then(({data}) => {
             console.log(data)
@@ -250,7 +249,7 @@ class SocialChatModule {
     }
 
     //仅负责，排序展示，在chatVue界面实现了
-    /!*get chats (): SocialuniChatRO[] {
+    /*get chats (): SocialuniChatRO[] {
       //a和b比较，返回结果1，则倒序，后者在前面
       return this.queryChats.sort((chat, chatAfter) => {
         //如果置顶优先级比较高，则排前面
@@ -272,16 +271,16 @@ class SocialChatModule {
           }
         }
       })
-    }*!/
+    }*/
 
 
     //因为存在排序，所以index并不是更新了update就是第一个，不总是为0，并不总是第一个,
-    /!*get chat(): SocialuniChatRO {
+    /*get chat(): SocialuniChatRO {
         //不再使用index，存在陌生人情况
         return this.chats[this.chatIndex]
 
         // return this.chats[0this.chatIndex.]
-    }*!/
+    }*/
 
     chat: SocialuniChatRO = null
 
@@ -295,11 +294,11 @@ class SocialChatModule {
             const data = res.data
             const openImChatRO: OpenImChatRO = JsonUtil.toParse(data)
             const chat = new SocialuniChatRO(openImChatRO)
-            /!*SocialuniUserAPI.queryUserDetailAPI(openImChatRO.userID).then(res => {
+            /*SocialuniUserAPI.queryUserDetailAPI(openImChatRO.userID).then(res => {
                 const userRO: SocialuniUserRO = res.data
                 chat.nickname = userRO.nickname
                 chat.avatar = userRO.avatar
-            })*!/
+            })*/
             this.setChat(chat)
         })
         // 设置实时消息已读回执
@@ -325,11 +324,11 @@ class SocialChatModule {
             const data = res.data
             const openImChatRO: OpenImChatRO = JsonUtil.toParse(data)
             const chat = new SocialuniChatRO(openImChatRO)
-            /!*SocialuniUserAPI.queryUserDetailAPI(openImChatRO.userID).then(res => {
+            /*SocialuniUserAPI.queryUserDetailAPI(openImChatRO.userID).then(res => {
                 const userRO: SocialuniUserRO = res.data
                 chat.nickname = userRO.nickname
                 chat.avatar = userRO.avatar
-            })*!/
+            })*/
             this.setChat(chat)
         })
         // 设置实时消息已读回执
@@ -348,7 +347,7 @@ class SocialChatModule {
     async setChat(openImChat: SocialuniChatRO) {
         this.chat = openImChat
 
-        /!*const options = {
+        /*const options = {
                 conversationID: openImChat.id,
                 startClientMsgID: "",
                 count: 100,
@@ -366,7 +365,7 @@ class SocialChatModule {
             openImChat.messages = msgs.map(item => new MessageVO(null, item))
             this.chat = openImChat
             socialChatModule.scrollToMessagePageBottom()
-        })*!/
+        })*/
     }
 
     toMessagePageFromUserDetail(userId: string) {
@@ -387,16 +386,16 @@ class SocialChatModule {
         if (!receiveId) {
             AlertUtil.error('缺少会话信息')
         }
-        /!*const chat = new SocialuniChatRO()
+        /*const chat = new SocialuniChatRO()
         chat.receiveId = receiveId
         chat.nickname = chatName
-        this.setChat(chat)*!/
+        this.setChat(chat)*/
         PageUtil.toMessagePageByChatId(receiveId)
     }
 
-    /!*get chatIndex(): number {
+    /*get chatIndex(): number {
         return this.chats.findIndex(item => item.id === this.chatId)
-    }*!/
+    }*/
 
     get messages(): MessageVO[] {
         if (this.chat) {
@@ -411,9 +410,9 @@ class SocialChatModule {
     //列表中进入，需要调用后台，更新时间。
 
 
-    /!*setChatId(chatId: string) {
+    /*setChatId(chatId: string) {
         this.chatId = chatId
-    }*!/
+    }*/
 
 
     userDetailToMessagePage(chat: SocialuniChatRO) {
@@ -428,7 +427,7 @@ class SocialChatModule {
             //如果本地没有则更新时间为最新，同步后台逻辑
             chat.updateTime = new Date().getTime()
             this.chats.unshift(chat)
-            /!*!//修改当前chat的id
+            /*!//修改当前chat的id
             this.setChatId(chat.id)
             //后台创建真实chat
             ChatAPI.getChatAPI(user).then(res => {
@@ -439,7 +438,7 @@ class SocialChatModule {
               this.setChatId(resultChat.id)
               //替换当前chat
               this.replaceChat(resultChat)
-            })*!/
+            })*/
         }
         this.setChatIdToMessagePage(chat.id)
     }
@@ -473,7 +472,7 @@ class SocialChatModule {
     }
 
 
-    /!*get chatsUnreadNumTotal () {
+    /*get chatsUnreadNumTotal () {
       // 应该在这里计算是否显示红点
       constant chatUnreadNum = this.queryChats.reduce((total, chat) => {
         total = total + chat.unreadNum
@@ -490,14 +489,14 @@ class SocialChatModule {
         })
       }
       return chatUnreadNum
-    }*!/
+    }*/
 
     // 四个地方使用，初始查询，推送消息，阅读清空消息，删除消息
     //为什么不使用get呢,get不行微信小程序有兼容问题
-    /!**
+    /**
      * 初始化消息总未读数。
      * 应该在这里计算是否显示红点
-     *!/
+     */
     async computedChatsUnreadNumTotalAction() {
         // 获取消息总未读。
         ;(await this.openIm()).getTotalUnreadMsgCount().then(({data}) => {
@@ -513,7 +512,7 @@ class SocialChatModule {
             }
         }).catch(err => {
         })
-        /!*this.chatsUnreadNumTotal = this.chats.reduce((total, chat) => {
+        /*this.chatsUnreadNumTotal = this.chats.reduce((total, chat) => {
           total = total + chat.unreadNum
           return total
         }, 0)
@@ -528,7 +527,7 @@ class SocialChatModule {
           uni.hideTabBarRedDot({
             index: 2
           })
-        }*!/
+        }*/
     }
 
 
@@ -570,12 +569,12 @@ class SocialChatModule {
                 this.chats.unshift(newChat)
             }
             //不需要吧，后台chat应该计算好当前未读数量
-            /!*!// 如果已登录
+            /*!// 如果已登录
             if (UserStore.hasUser() && chat.type !== ChatType.system_group) {
               chat.unreadNum = newChat.unreadNum
             } else {
               chat.unreadNum = chat.unreadNum + 1
-            }*!/
+            }*/
 
             // 不是正在这个chat聊天，但是chats列表中包含这个chat
             // 如果列表中已经包含次chat
@@ -587,12 +586,12 @@ class SocialChatModule {
         this.computedChatsUnreadNumTotalAction()
     }
 
-    /!**
+    /**
      * 发送视频消息。
      * @param data
      * @param extension
      * @param description
-     *!/
+     */
     async pushVideoMessage(url: string) {
         const options: VideoMsgParams = {
             videoPath: "",
@@ -613,12 +612,12 @@ class SocialChatModule {
         await socialChatModule.pushMessageAction(msg)
     }
 
-    /!**
+    /**
      * 发送图片消息。
      * @param data
      * @param extension
      * @param description
-     *!/
+     */
     async pushImageMessage(url: string) {
         const baseInfo: PicBaseInfo = {
             uuid: UUIDUtil.getUUID(),
@@ -638,12 +637,12 @@ class SocialChatModule {
         await socialChatModule.pushMessageAction(msg)
     }
 
-    /!**
+    /**
      * 发送自定义消息。
      * @param data
      * @param extension
      * @param description
-     *!/
+     */
     async pushCustomMessage(data: string, extension: string, description: string) {
         const options: CustomMsgParams = {
             data,
@@ -668,17 +667,17 @@ class SocialChatModule {
         // this.chat.lastContent = msg.content
         // 滚屏到最后面
         // 不能监控变化滚动，有时候是往前面插入
-        /!*const {data} = await (await socialChatModule.openIm())[msg.action](msg.contentData);
+        /*const {data} = await (await socialChatModule.openIm())[msg.action](msg.contentData);
         const params = {
             recvID: this.chat.receiveUserId,
             groupID: this.chat.groupId,
             message: data,
-        };*!/
+        };*/
         // console.log('-------params-------', params);
 
         return MessageAPI.sendMsgAPI(this.chat.id, msg.content)
         //
-        /!*let actionMethod: Function = null;
+        /*let actionMethod: Function = null;
         switch (msg.action) {
             case 'createImageMessage':
             case 'createSoundMessage':
@@ -701,7 +700,7 @@ class SocialChatModule {
             this.messages.splice(index, 1)
         }).finally(() => {
             console.log(666)
-        })*!/
+        })*/
         // socialChatModule.refreshMessages()
 
         // PlatformUtils.requestSubscribeChat()
@@ -736,9 +735,9 @@ class SocialChatModule {
     //获取chats
 
     getChatsAction() {
-        /!*return ChatAPI.getChatsAPI().then((res: ResultRO<ChatVO[]>) => {
+        /*return ChatAPI.getChatsAPI().then((res: ResultRO<ChatVO[]>) => {
           this.setChats(res.data)
-        })*!/
+        })*/
     }
 
     setChats(chats: SocialuniChatRO[]) {
@@ -793,10 +792,10 @@ class SocialChatModule {
                 faceURL: circle.avatar,  //
                 ex: ""   // 扩展字段
             }
-            /!**
+            /**
              * 经过测试: 会自动添加群主。 roleLevel: 默认为2 。
              * 还有下面这个是邀请成员的 level为1 。  类似于微信的拉群聊。不需要同意就直接能拉进群聊。
-             *!/
+             */
             const memberList: Member[] = [
                 {
                     userID: socialuniConfigModule.appConfig.systemUserId,
@@ -823,7 +822,7 @@ class SocialChatModule {
                 UniUtil.hideLoading()
             }
         }
-    }*/
+    }
 }
 
 /*

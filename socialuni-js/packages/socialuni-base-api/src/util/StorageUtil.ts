@@ -27,7 +27,7 @@ export default class StorageUtil {
         }
         const objStr: string = uni.getStorageSync(key)
         if (objStr) {
-            return JsonUtil.parse(objStr)
+            return JsonUtil.toParse(objStr)
         }
         return null
     }
@@ -55,7 +55,7 @@ export default class StorageUtil {
         const objStr: string = uni.getStorageSync(key)
         if (objStr) {
             try {
-                return JsonUtil.parse(objStr)
+                return JsonUtil.toParse(objStr)
             } catch {
                 return objStr
             }

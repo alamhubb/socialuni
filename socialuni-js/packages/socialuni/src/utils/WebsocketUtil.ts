@@ -75,7 +75,7 @@ export default class WebsocketUtil {
     })
 
     uni.onSocketMessage((res: any) => {
-      const notify: NotifyVO = JsonUtil.parse(res.data)
+      const notify: NotifyVO = JsonUtil.toParse(res.data)
       console.log(notify)
       // todo 直接将这个评论添加到talk中
       /*if (notify.type === NotifyType.comment) {

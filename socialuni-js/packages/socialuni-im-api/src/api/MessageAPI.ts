@@ -1,8 +1,8 @@
-import MsgDelete from 'socialuni-base-api/src/model/message/MsgDeleteVO'
 import socialuniImRequest from "./socialuniImRequest";
 import MessageQueryVO from "../model/QO/message/MessageQueryVO";
 import MessageAddVO from "../model/QO/message/MessageAddVO";
 import MessageVO from "../model/RO/MessageVO";
+import MsgDeleteVO from "../model/QO/message/MsgDeleteVO";
 
 export default class MessageAPI {
     static sendMsgAPI<T>(chatId: string, content: string) {
@@ -15,6 +15,6 @@ export default class MessageAPI {
     }
 
     static deleteMsgAPI(msgId: number, deleteReason: string, violation: boolean) {
-        return socialuniImRequest.post('message/deleteMsg', new MsgDelete(msgId, deleteReason, violation))
+        return socialuniImRequest.post('message/deleteMsg', new MsgDeleteVO(msgId, deleteReason, violation))
     }
 }
