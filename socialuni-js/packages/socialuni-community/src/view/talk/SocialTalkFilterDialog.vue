@@ -89,8 +89,8 @@
 import {Emit, Options, Vue, Watch} from 'vue-property-decorator'
 // import TalkFilterUtil from "socialuni-util/src/util/TalkFilterUtil";
 // import DistrictVO from "socialuni-base-api/src/model/DistrictVO";
-// import TagVO from "socialuni-base-api/src/model/community/tag/TagVO";
-// import SocialCircleRO from "socialuni-base-api/src/model/community/circle/SocialCircleRO";
+// import TagVO from "socialuni-base-api/src/model/communityPages/tag/TagVO";
+// import SocialCircleRO from "socialuni-base-api/src/model/communityPages/circle/SocialCircleRO";
 // import GenderType from "socialuni-constant/constant/GenderType";
 // import AlertUtil from "socialuni-util/src/util/AlertUtil";
 // import TagSearch from "./TagSearch.vue";

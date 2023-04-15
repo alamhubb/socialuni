@@ -21,6 +21,7 @@ import {reactive} from "vue";
 import OpenImFriendApplyRO from "socialuni-base-api/src/model/openIm/OpenImFriendApplyRO";
 import JsonUtil from "socialuni-base-api/src/util/JsonUtil";
 import OpenImSessionType from "socialuni-constant/constant/openIm/constant/OpenImSessionType";
+import ImPageUtil from "../util/ImPageUtil";
 
 
 const openIM = null
@@ -390,7 +391,7 @@ class SocialChatModule {
         chat.receiveId = receiveId
         chat.nickname = chatName
         this.setChat(chat)*/
-        PageUtil.toMessagePageByChatId(receiveId)
+        ImPageUtil.toMessagePageByChatId(receiveId)
     }
 
     /*get chatIndex(): number {
@@ -499,7 +500,7 @@ class SocialChatModule {
      */
     async computedChatsUnreadNumTotalAction() {
         // 获取消息总未读。
-        ;(await this.openIm()).getTotalUnreadMsgCount().then(({data}) => {
+        /*;(await this.openIm()).getTotalUnreadMsgCount().then(({data}) => {
             // 获得好友申请
             let recvFriendApplicationLength = this.getRecvFriendApplicationList(0).length;
             console.log('---recvFriendApplicationLength------', recvFriendApplicationLength);
@@ -511,7 +512,7 @@ class SocialChatModule {
                 })
             }
         }).catch(err => {
-        })
+        })*/
         /*this.chatsUnreadNumTotal = this.chats.reduce((total, chat) => {
           total = total + chat.unreadNum
           return total

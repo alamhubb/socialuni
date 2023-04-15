@@ -131,7 +131,7 @@ import SocialuniTalkAPI from 'socialuni-api/src/api/socialuni/SocialuniTalkAPI'
 import UniUtil from 'socialuni-sdk/src/utils/UniUtil'
 import DistrictVO from 'socialuni-api/src/model/DistrictVO'
 import JsonUtils from 'socialuni-sdk/src/utils/ObjectUtil'
-import TagVO from 'socialuni-api/src/model/community/tag/TagVO'
+import TagVO from 'socialuni-api/src/model/communityPages/tag/TagVO'
 import CosUtil from 'socialuni-sdk/src/utils/CosUtil'
 import PlatformUtils from 'socialuni-sdk/src/utils/PlatformUtils'
 import QIcon from 'socialuni-view/src/components/QIcon/QIcon.vue'
@@ -156,7 +156,7 @@ import QInput from 'socialuni-view/src/components/QInput/QInput.vue'
 import SocialCirclePicker from 'socialuni-view/src/components/SocialCirclePicker.vue'
 import AppMsg from 'socialuni-constant/constant/AppMsg'
 import QCityInfo from 'socialuni-view/src/components/QCityInfo/QCityInfo.vue'
-import SocialCircleRO from 'socialuni-api/src/model/community/circle/SocialCircleRO'
+import SocialCircleRO from 'socialuni-api/src/model/communityPages/circle/SocialCircleRO'
 import {
   socialCircleModule,
   socialLocationModule,

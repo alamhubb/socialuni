@@ -27,7 +27,49 @@
   ],
   "subPackages": [
     {
-      "root": "pagesLazy",
+      "root": "pagesLazy/user",
+      "pages": [
+        {
+          "path": "userDetail",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "editMineInfo",
+          "style": {
+            "navigationBarTitleText": "编辑资料"
+          }
+        },
+        {
+          "path": "userImgList",
+          "style": {
+            "navigationBarTitleText": "相册列表"
+          }
+        },
+        {
+          "path": "follow",
+          "style": {
+            "navigationBarTitleText": "关注列表"
+          }
+        },
+        {
+          "path": "coin",
+          "style": {
+            "navigationBarTitleText": "贝壳充值",
+            "enablePullDownRefresh": true
+          }
+        },
+        {
+          "path": "coinRecord",
+          "style": {
+            "navigationBarTitleText": "贝壳记录"
+          }
+        }
+      ]
+    },
+    {
+      "root": "pagesLazy/community",
       "pages": [
         {
           "path": "talk/talkAdd",
@@ -36,48 +78,29 @@
           }
         },
         {
-          "path": "user/userDetail",
+          "path": "notify/notify",
+          "style": {
+            "navigationBarTitleText": "通知列表"
+          }
+        }
+      ]
+    },
+    {
+      "root": "pagesLazy/im",
+      "pages": [
+        {
+          "path": "message",
           "style": {
             "navigationStyle": "custom"
           }
         },
         {
-          "path": "user/editMineInfo",
+          "path": "friendApplyList",
           "style": {
-            "navigationBarTitleText": "编辑资料"
-          }
-        },
-        {
-          "path": "user/userImgList",
-          "style": {
-            "navigationBarTitleText": "相册列表"
-          }
-        },
-        {
-          "path": "notify/notify",
-          "style": {
-            "navigationBarTitleText": "通知列表"
-          }
-        },
-        {
-          "path": "user/follow",
-          "style": {
-            "navigationBarTitleText": "关注列表"
-          }
-        },
-        {
-          "path": "user/coin",
-          "style": {
-            "navigationBarTitleText": "贝壳充值",
+            "navigationBarTitleText": "好友申请",
             "enablePullDownRefresh": true
           }
-        },
-        {
-          "path": "user/coinRecord",
-          "style": {
-            "navigationBarTitleText": "贝壳记录"
-          }
-        },
+        }
       ]
     }
   ],

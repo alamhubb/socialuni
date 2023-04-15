@@ -4,8 +4,6 @@ export default class PagePath {
   static readonly share: string = '/pages/share/share'
 
   static readonly faceValueInfo: string = '/pages/match/faceValueInfo'
-  static readonly message: string = '/pagesLazy/chat/message'
-
 
   // 不明白这个页面干嘛的 static readonly messageSetting: string = '/pages/user/messageSetting'
   //贝壳充值界面
