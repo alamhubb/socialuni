@@ -2,7 +2,7 @@
 import { socialuniSystemModule } from '../../store'
 import DistrictVO from '../DistrictVO'
 import TalkFilterUtil from '../../utils/TalkFilterUtil'
-import TalkTabVO from '../talk/TalkTabVO'
+import TalkTabVO from '../home/TalkTabVO'
 import GenderType from '../../constant/GenderType'
 
 export default class AppInitQueryVO {

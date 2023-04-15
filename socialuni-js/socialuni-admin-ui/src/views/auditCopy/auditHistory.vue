@@ -121,11 +121,11 @@
 
           </el-col>
           <el-col cols="2">
-            <div v-for="comment in report.talk.comments">
+            <div v-for="comment in report.home.comments">
               {{ comment.content }}
             </div>
             <div>
-              <span v-for="tag in report.talk.tags">{{ tag.name }} ,</span>
+              <span v-for="tag in report.home.tags">{{ tag.name }} ,</span>
             </div>
           </el-col>
 
@@ -177,7 +177,7 @@ export default class ViolationHistoryPage extends Vue {
       if (src.split('/').length > 1) {
         imgUrl = this.imgUrl + src
       } else {
-        imgUrl = this.imgUrl + 'user/' + userId + '/talk/normal/' + src
+        imgUrl = this.imgUrl + 'user/' + userId + '/home/normal/' + src
       }
     }
     return imgUrl

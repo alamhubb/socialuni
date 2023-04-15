@@ -7,7 +7,7 @@
   },
   "pages": [
     {
-      "path": "pages/talk/talk",
+      "path": "pages/home/home",
       "style": {
         "navigationStyle": "custom"
       }
@@ -85,7 +85,7 @@
     "height": "52px",
     "list": [
       {
-        "pagePath": "pages/talk/talk",
+        "pagePath": "pages/home/home",
         "iconPath": "static/img/deck-gray-36dp.png",
         "selectedIconPath": "static/img/deck-blue-36dp.png",
         "text": "社区"

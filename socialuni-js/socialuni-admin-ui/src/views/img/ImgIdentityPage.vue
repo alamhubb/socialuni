@@ -116,7 +116,7 @@ export default class ImgIdentity extends Vue {
         if (src.split('/').length > 1) {
           imgUrl = this.imgUrl + src
         } else {
-          imgUrl = this.imgUrl + 'user/' + userId + '/talk/normal/' + src
+          imgUrl = this.imgUrl + 'user/' + userId + '/home/normal/' + src
         }
       }
       return imgUrl

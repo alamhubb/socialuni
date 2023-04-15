@@ -1,6 +1,19 @@
+import RouterUtil from "./RouterUtil";
+import PagePath from "socialuni-constant/constant/PagePath";
+
 export default class PageUtil {
-    /*static goHome(): void {
-        PageUtil.toTalkPage()
+    static goHome(): void {
+        RouterUtil.switchTab(PagePath.home)
+    }
+
+    static goBackOrHome(): void {
+        const pages = getCurrentPages()
+        if (pages.length === 1) {
+            PageUtil.goHome()
+        } else {
+            RouterUtil.goBack()
+        }
+        // uni.navigateBack({ delta: 1 })
     }
 
     static toTalkDetail(talkId: string) {
@@ -31,7 +44,7 @@ export default class PageUtil {
     }
 
     static toVipPage() {
-        /!*constant isIos: boolean = systemModule.isIos
+        /*constant isIos: boolean = systemModule.isIos
         if (isIos) {
           // 由于相关规范，iOS功能暂不可用
           MsgUtil.iosDisablePay()
@@ -42,7 +55,7 @@ export default class PageUtil {
           } else {
             MsgUtil.unLoginMessage()
           }
-        }*!/
+        }*/
     }
 
     static toCoinPage() {
@@ -104,7 +117,7 @@ export default class PageUtil {
     }
 
     static toTalkPage() {
-        RouterUtil.switchTab(UserPagePath.talk)
+        RouterUtil.switchTab(PagePath.talk)
     }
 
     static toIdentityAuthPage() {
@@ -161,13 +174,13 @@ export default class PageUtil {
         return null
     }
 
-    /!**
+    /**
      * 保留当前页面，跳转到应用内的某个页面，使用uni.navigateBack可以返回到原页面。
      * @param pagePath
      * @param params
-     *!/
+     */
 
-    /!*static navigateTo(pagePath: string, params?: object): void {
+    /*static navigateTo(pagePath: string, params?: object): void {
         console.log(pagePath)
         if (params) {
             const paramObj = new URLSearchParams()
@@ -177,7 +190,7 @@ export default class PageUtil {
             pagePath = pagePath + '?' + paramObj.toString()
         }
         uni.navigateTo({url: pagePath})
-    }*!/
+    }*/
 
     static navigateToAll(type: string, skipUrl: string, pageTitle: string) {
         if (type === SkipType.mp) {
@@ -216,26 +229,26 @@ export default class PageUtil {
         })
     }
 
-    /!**
+    /**
      * 关闭当前页面，跳转到应用内的某个页面，需要跳转的应用内非 tabBar 的页面的路径。
      * @param pagePath
-     *!/
+     */
     static redirectTo(pagePath: string): void {
         uni.redirectTo({url: pagePath})
     }
 
-    /!**
+    /**
      * 关闭所有页面，打开到应用内的某个页面。，如果跳转的页面路径是 tabBar 页面则不能带参数
      * @param pagePath
-     *!/
+     */
     static reLaunch(pagePath: string): void {
         uni.reLaunch({url: pagePath})
     }
 
-    /!**
+    /**
      * 跳转到 tabBar 页面，并关闭其他所有非 tabBar 页面，跳转到 tabBar 页面只能使用 switchTab 跳转。
      * @param pagePath
-     *!/
+     */
     static switchTab(pagePath: string): void {
         if (socialuniSystemModule.isApp) {
             uni.showTabBar()
@@ -243,18 +256,10 @@ export default class PageUtil {
         uni.switchTab({url: pagePath})
     }
 
-    /!**
+    /**
      * 关闭当前页面，返回上一页面或多级页面。可通过 getCurrentPages() 获取当前的页面栈，决定需要返回几层。
-     *!/
-    static goBackOrHome(): void {
-        const pages = getCurrentPages()
-        if (pages.length === 1) {
-            PageUtil.goHome()
-        } else {
-            RouterUtil.goBack()
-        }
-        // uni.navigateBack({ delta: 1 })
-    }
+     */
+
 
     static goBackOrMine(): void {
         const pages = getCurrentPages()
@@ -276,5 +281,5 @@ export default class PageUtil {
 
     static getCurrentPage(): any {
         return getCurrentPages()[getCurrentPages().length - 1]
-    }*/
+    }
 }

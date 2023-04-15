@@ -63,24 +63,24 @@
         </view>
       </view>
       <!--        <div class="color-sub text-sm h25 row-col-center ml-smm">
-                {{ talk.updateTime| formatTime }}
+                {{ home.updateTime| formatTime }}
               </div>-->
 
       <!--      <view class="row-col-center">
               &lt;!&ndash;      只有非单性才需要这样显示&ndash;&gt;
               <template v-if="appGenderType === GenderTypeAll">
-                <view v-if="talk.visibleGender === GenderTypeGirl" class="cu-tag round bg-pink light">
+                <view v-if="home.visibleGender === GenderTypeGirl" class="cu-tag round bg-pink light">
                   女生可见
                 </view>
-                <view v-else-if="talk.visibleGender === GenderTypeBoy" class="cu-tag round bg-blue light">
+                <view v-else-if="home.visibleGender === GenderTypeBoy" class="cu-tag round bg-blue light">
                   男生可见
                 </view>
               </template>
               &lt;!&ndash; 三方数据才显示数据来源&ndash;&gt;
-              <view v-if="talk.threeContent" class="ml-sm cu-tag round bg-orange light"
-                    @click.stop="goToThreeAppClick(talk.threeAppId,talk.threeTalkPath)">
-                {{ talk.threeAppName }}
-                <q-icon v-if="talk.threeAppId" icon="mdi-near-me" class="ml-xs" size="14"></q-icon>
+              <view v-if="home.threeContent" class="ml-sm cu-tag round bg-orange light"
+                    @click.stop="goToThreeAppClick(home.threeAppId,home.threeTalkPath)">
+                {{ home.threeAppName }}
+                <q-icon v-if="home.threeAppId" icon="mdi-near-me" class="ml-xs" size="14"></q-icon>
               </view>
             </view>-->
     </view>

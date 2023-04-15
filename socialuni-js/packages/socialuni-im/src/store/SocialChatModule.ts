@@ -3,7 +3,7 @@ import PageUtil from "socialuni-util/src/util/PageUtil"
 import ChatAPI from "socialuni-base-api/src/api/ChatAPI"
 import RouterUtil from "socialuni-util/src/util/RouterUtil"
 import PagePath from "socialuni-constant/constant/PagePath"
-import PlatformUtils from "socialuni-util/src/util/PlatformUtils"
+import PlatformUtils from "socialuni-base/src/utils/PlatformUtils"
 import ChatType from "socialuni-constant/constant/ChatType"
 import CommonUtil from "socialuni-util/src/util/CommonUtil"
 import JsonUtil from "socialuni-util/src/util/JsonUtil"
@@ -18,7 +18,7 @@ import {
     SetGroupVerificationParams, setPrvParams, VideoMsgParams
 } from "socialuni-sdk/src/plugins/open-im-sdk"
 import {InitConfig} from "open-im-sdk/types"
-import SocialuniConfig from "packages/socialuni-base-api/src/config/SocialuniConfig"
+import SocialuniConfig from "socialuni-base-api/src/config/SocialuniConfig"
 import {socialChatModule} from './store'
 import OpenImPlatformType from 'socialuni-sdk/src/plugins/openIm/OpenImPlatformType'
 import SocialuniChatRO from "socialuni-base-api/src/model/SocialuniChatRO";

@@ -9,39 +9,39 @@
       <view class="col-center">
         <view class="h20 row-col-center">
           <text class="text-df font-bold">{{ talk.user.nickname }}</text>
-          <!--          <text class="text-md" :class="{'color-red':talk.user.vipFlag}">{{ talk.user.nickname }}</text>-->
+          <!--          <text class="text-md" :class="{'color-red':home.user.vipFlag}">{{ home.user.nickname }}</text>-->
           <template v-if="!talk.globalTop">
             <social-gender-tag class="ml-xs" :user="talk.user"></social-gender-tag>
-<!--            <div v-if="talk.user.identityAuth" class="q-tag-success q-box-nn" @click.stop="toIdentityAuth">
+<!--            <div v-if="home.user.identityAuth" class="q-tag-success q-box-nn" @click.stop="toIdentityAuth">
               <q-icon size="14" icon="level"/>
             </div>-->
             <!--              <q-icon class="color-blue" size="18" icon="level" @click.stop="toIdentityAuth"/>-->
           </template>
 
-          <!--          <view v-if="!talk.globalTop" class="ml-5 cu-tag sm radius text-sm row-col-center"
-                          :class="[getGenderBgColor(talk.user)]">
-                      {{ talk.user.age }}
+          <!--          <view v-if="!home.globalTop" class="ml-5 cu-tag sm radius text-sm row-col-center"
+                          :class="[getGenderBgColor(home.user)]">
+                      {{ home.user.age }}
                       <q-icon class="ml-nm"
                               size="12"
-                              :icon="getGenderIcon(talk.user)"/>
+                              :icon="getGenderIcon(home.user)"/>
                     </view>-->
-          <!--          <view v-if="talk.user.vipFlag" class="ml-5 cu-tag bg-red radius sm text-sm font-bold"
+          <!--          <view v-if="home.user.vipFlag" class="ml-5 cu-tag bg-red radius sm text-sm font-bold"
                           @click.stop="openVip">
                       VIP
                     </view>-->
           <!--    如果爱心值不为0，且大于正义值显示爱心值-->
-          <!--          <view v-else-if="talk.user.loveValue&& talk.user.loveValue>talk.user.justiceValue"
+          <!--          <view v-else-if="home.user.loveValue&& home.user.loveValue>home.user.justiceValue"
                           class="ml-5 cu-capsule radius"
                           @click.stop="toLoveValuePage">
                       <view class='cu-tag bg-red sm'>
                         <q-icon icon="heart"/>
                       </view>
                       <view class="cu-tag bg-white bd-red bd-r-radius sm">
-                        {{ talk.user.loveValue }}
+                        {{ home.user.loveValue }}
                       </view>
                     </view>-->
           <!--    如果正义值不为0，且大于等于爱心值显示正义值-->
-          <!--          <view v-else-if="talk.user.justiceValue&& talk.user.justiceValue >= talk.user.loveValue"
+          <!--          <view v-else-if="home.user.justiceValue&& home.user.justiceValue >= home.user.loveValue"
                           class="ml-5 cu-capsule radius"
                           @click.stop="hintJusticeInfo">
                       <view class='cu-tag bg-green sm'>
@@ -49,13 +49,13 @@
                       </view>
                       <view class="cu-tag bg-white bd-green bd-r-radius sm">
                         {{
-                          talk.user.justiceValue > 1000 ? Math.floor(talk.user.justiceValue / 1000) + 'k' : talk.user.justiceValue
+                          home.user.justiceValue > 1000 ? Math.floor(home.user.justiceValue / 1000) + 'k' : home.user.justiceValue
                         }}
                       </view>
                     </view>-->
         </view>
 
-        <!--        <view class="color-sub text-sm h20 row-col-end" v-if="talk.user.identityAuth || talk.globalTop ||isMine">-->
+        <!--        <view class="color-sub text-sm h20 row-col-end" v-if="home.user.identityAuth || home.globalTop ||isMine">-->
         <view class="color-sub text-sm h20 row-col-end line-h1">
           {{ formatTime(talk.updateTime) }}
           <view v-if="talk.globalTop" class="ml-sm q-tag-theme q-box-nn">

@@ -55,10 +55,11 @@ import QPopup from "socialuni-ui/src/components/QPopup/QPopup.vue";
 import ReportType from "socialuni-constant/constant/ReportType";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import AlertUtil from "socialuni-util/src/util/AlertUtil";
-import PlatformUtils from "socialuni-util/src/util/PlatformUtils";
+import PlatformUtils from "socialuni-base/src/utils/PlatformUtils";
 import UniUtil from "socialuni-util/src/util/UniUtil";
 import MsgUtil from "socialuni-util/src/util/MsgUtil";
 import ReportAddVO from "socialuni-base-api/src/model/report/ReportAddVO";
+import {socialTalkModule} from "../../store/SocialTalkModule";
 
 
 // todo 后台可控制是否显示轮播图
@@ -134,9 +135,9 @@ export default class TalkOperate extends Vue {
           this.frontDeleteComment()
         } else {
           /*
-          const reportNum: number = this.talk.reportNum + 1
+          const reportNum: number = this.home.reportNum + 1
           if (reportNum >= this.reportCountHide) {
-            this.$emit('deleteTalk', this.talk.id)
+            this.$emit('deleteTalk', this.home.id)
           }*/
           this.$emit('deleteTalk', this.talk.id)
         }

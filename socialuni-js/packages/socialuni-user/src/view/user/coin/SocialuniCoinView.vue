@@ -56,7 +56,7 @@ import QTabs from "../../../components/QTabs/QTabs.vue";
 import SocialuniCoinPageType from "socialuni-constant/constant/user/SocialuniCoinPageType";
 import PageUtil from "socialuni-util/src/util/PageUtil";
 import SocialuniProviderType from "socialuni-constant/constant/SocialuniProviderType";
-import PlatformUtils from "socialuni-util/src/util/PlatformUtils";
+import PlatformUtils from "socialuni-base/src/utils/PlatformUtils";
 import PayType from "socialuni-constant/constant/PayType";
 
 @Options({

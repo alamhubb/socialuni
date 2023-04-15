@@ -80,7 +80,7 @@ export default class ImgUtil {
     }
 
     static getTalkUploadFormat(userId: string, filePath: string): string {
-        return 'user/' + userId + '/talk/normal/' + CommonUtil.getUUID() + ImgUtil.getFileSuffixName(filePath)
+        return 'user/' + userId + '/home/normal/' + CommonUtil.getUUID() + ImgUtil.getFileSuffixName(filePath)
     }
 
     static getUserAvatarUploadFormat(userId: string, filePath: string): string {
@@ -111,10 +111,10 @@ export default class ImgUtil {
     }
 
     /* static getTalkLargeImgUrl(userId: string): string {
-      return ImgUtil.imgUrl + 'talk/' + userId + '/normal/'
+      return ImgUtil.imgUrl + 'home/' + userId + '/normal/'
     }
 
     static getTalkSmallImgUrl(userId: string): string {
-      return ImgUtil.imgUrl + 'talk/' + userId + '/thumbnail/'
+      return ImgUtil.imgUrl + 'home/' + userId + '/thumbnail/'
     } */
 }

@@ -251,7 +251,7 @@ import MsgUtil from "socialuni-util/src/util/MsgUtil";
 import PageUtil from "socialuni-util/src/util/PageUtil";
 import AlertUtil from "socialuni-util/src/util/AlertUtil";
 import ToastUtil from "socialuni-util/src/util/ToastUtil";
-import PlatformUtils from "socialuni-util/src/util/PlatformUtils";
+import PlatformUtils from "socialuni-base/src/utils/PlatformUtils";
 import UniUtil from "socialuni-util/src/util/UniUtil";
 import SocialuniReportDialog from "socialuni-ui/src/components/SocialuniReportDialog";
 import CommonUtil from "socialuni-util/src/util/CommonUtil";

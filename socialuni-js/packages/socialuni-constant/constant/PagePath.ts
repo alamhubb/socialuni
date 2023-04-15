@@ -1,6 +1,7 @@
 export default class PagePath {
-  static readonly oAuth: string = '/pages/oAuth/oAuth'
-
+  static readonly home: string = '/pages/home/home'
+  static readonly webBrowser: string = '/pages/web/webBrowser'
+  static readonly share: string = '/pages/share/share'
 
   static readonly faceValueInfo: string = '/pages/match/faceValueInfo'
   static readonly message: string = '/pagesLazy/chat/message'
@@ -12,8 +13,7 @@ export default class PagePath {
   static readonly coinRecord: string = '/pagesLazy/user/coinRecord'
   static readonly loveValue: string = '/pages/user/loveValue'
 
-  static readonly webBrowser: string = '/pages/web/webBrowser'
-  static readonly share: string = '/pages/share/share'
+
 
   static readonly friend: string = '/pages/chat/friend'
   static readonly friendApply: string = '/pagesLazy/chat/friendApplyList'

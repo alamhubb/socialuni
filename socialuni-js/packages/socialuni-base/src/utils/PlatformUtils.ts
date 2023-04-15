@@ -1,18 +1,22 @@
-import QQUtils from './QQUtils'
-import MsgUtil from "./MsgUtil"
+import QQUtils from 'socialuni-util/src/util/QQUtils'
+import MsgUtil from "socialuni-util/src/util/MsgUtil"
 import Constants from "socialuni-constant/constant/Constant"
 import AppMsg from "socialuni-constant/constant/AppMsg"
 import ToastUtil from "socialuni-util/src/util/ToastUtil"
-import WxUtils from "./WxUtils"
+import WxUtils from "socialuni-util/src/util/WxUtils"
 import MPUtil from "socialuni-util/src/util/MPUtil"
-import APPUtil from "./APPUtil"
+import APPUtil from "socialuni-util/src/util/APPUtil"
 import UserPayResultVO from "socialuni-base-api/src/model/user/UserPayResultVO";
+import {socialPlatformModule} from "../store/SocialPlatformModule";
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import SocialuniCoinAPI from "socialuni-api/src/api/socialuni/SocialuniCoinAPI";
+import SocialuniAppAPI from "socialuni-base-api/src/api/SocialuniAppAPI";
 
 
 // 统一处理各平台的订阅
 export default class PlatformUtils {
     // talk相关订阅
-   /* static requestSubscribeTalk() {
+    static requestSubscribeTalk() {
         // #ifdef MP-WEIXIN
         PlatformUtils.requestSubscribeMessage(socialPlatformModule.wx_talkTemplateIds)
         // #endif
@@ -49,7 +53,7 @@ export default class PlatformUtils {
         // #ifdef MP-QQ
         PlatformUtils.requestSubscribeMessage(socialPlatformModule.qq_reportTemplateIds)
         // #endif
-    }*/
+    }
 
     // 统一处理各平台的订阅
     static requestSubscribeMessage(tmplIds: string[]) {
@@ -62,17 +66,17 @@ export default class PlatformUtils {
     }
 
     // 统一处理各平台的支付
-    /*static userPay(amount?: number) {
+    static userPay(amount?: number) {
         return PlatformUtils.payCoin(amount).then(() => {
-            /!* UserStore.getMineUserAction().then(() => {
+            /* UserStore.getMineUserAction().then(() => {
                AlertUtil.hint(HintMsg.paySuccessMsg)
                RouterUtil.reLaunch(UserPagePath.userMine)
-             })*!/
+             })*/
         })
-    }*/
+    }
 
     //所有只能直接调用这个
-    /*static async payCoin(amount: number) {
+    static async payCoin(amount: number) {
         PlatformUtils.checkPay()
         //目前支持微信支付
         // const provider: string = SocialuniProviderType.wx
@@ -121,7 +125,7 @@ export default class PlatformUtils {
             throw '不存在的支付渠道'
         }
     }
-*/
+
     static checkUpdate() {
         // #ifdef MP
         MPUtil.checkUpdate()

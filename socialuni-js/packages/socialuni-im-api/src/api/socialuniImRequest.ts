@@ -1,4 +1,4 @@
-import SocialuniConfig from "packages/socialuni-base-api/src/config/SocialuniConfig";
+import SocialuniConfig from "socialuni-base-api/src/config/SocialuniConfig";
 import SocialuniHttpRequest from "socialuni-base/src/request/SocialuniHttpRequest";
 
 const socialuniImRequest: SocialuniHttpRequest = new SocialuniHttpRequest()

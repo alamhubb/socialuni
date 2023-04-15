@@ -49,7 +49,7 @@ import QIcon from 'socialuni-view/src/components/QIcon/QIcon.vue'
 import MsgInput from 'socialuni-view/src/components/MsgInput.vue'
 import TalkItem from 'socialuni-view/src/views/talk/talkItem/TalkItem.vue'
 import TalkOperate from 'socialuni-view/src/views/talk/talkOperate.vue'
-import TalkVO from 'socialuni-api/src/model/talk/TalkVO'
+import TalkVO from 'socialuni-api/src/model/home/TalkVO'
 import RouterUtil from 'socialuni-sdk/src/utils/RouterUtil'
 import PageUtil from 'socialuni-sdk/src/utils/PageUtil'
 import SocialuniTalkAPI from 'socialuni-api/src/api/socialuni/SocialuniTalkAPI'
@@ -81,7 +81,7 @@ export default class TalkDetail extends Vue {
       const talkId = params.talkId
       SocialuniTalkAPI.queryTalkDetailAPI(talkId).then((res: any) => {
         this.talk = res.data
-        // this.$store.commit('talk/setTalk', this.talk)
+        // this.$store.commit('home/setTalk', this.home)
       })
     })
   }

@@ -140,6 +140,8 @@ import QCityInfo from "socialuni-community/src/component/QCityInfo/QCityInfo.vue
 import SocialTagAdd from "socialuni-community/src/component/SocialTagAdd/SocialTagAdd.vue";
 import TalkAddTagSearch from "socialuni-community/src/component/TalkAddTagSearch.vue";
 import QCityPicker from "socialuni-community/src/component/QCityPicker/QCityPicker.vue";
+import AlertUtil from "socialuni-util/src/util/AlertUtil";
+import PlatformUtils from "../../../../packages/socialuni-base/src/utils/PlatformUtils";
 
 @Options({
   components: {
@@ -425,7 +427,7 @@ export default class TalkAddView extends Vue {
     this.showImgFiles.forEach(item => {
       //只有不包含，才赋值src，有值代表已经赋值过了
       if (item.src.indexOf('https') < 0) {
-        item.src = this.cosAuthRO.uploadImgPath + 'talk/' + item.src
+        item.src = this.cosAuthRO.uploadImgPath + 'home/' + item.src
       }
       // item.src = ImgUtil.imgUrl + item.cosSrc
     })

@@ -40,7 +40,7 @@ export default class UniUtil {
     }
 
 
-    /*public static createRewardedVideoAd(adUnitId: string) {
+    public static createRewardedVideoAd(adUnitId: string) {
         if (socialuniSystemModule.isMp) {
             //eslint-disable-next-line
             //@ts-ignore
@@ -56,7 +56,7 @@ export default class UniUtil {
                 adpid: adUnitId
             })
         }
-    }*/
+    }
 
     static copyLink(webUrl: string) {
         return UniUtil.textCopy(webUrl, '链接已复制，可在浏览器打开')

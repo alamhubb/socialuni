@@ -38,13 +38,13 @@
           <el-col cols="2">
             <el-row>
               <el-col
-                  v-for="(img,index) in report.talk.imgs"
+                  v-for="(img,index) in report.home.imgs"
                   :key="img.id"
               >
                 <el-img class="max-w100"
-                       :src="getImgUrl(img.src,report.talk.userId)"
+                       :src="getImgUrl(img.src,report.home.userId)"
                        aspect-ratio="1"
-                       @click.native="show(report.talk,report.talk.imgs,index)"
+                       @click.native="show(report.home,report.home.imgs,index)"
                 >
                 </el-img>
               </el-col>
@@ -60,14 +60,14 @@
               </el-avatar>
               {{ report.user.id }}-&#45;&#45;{{ report.user.nickname }}
             </div>
-            {{ report.talk.id }} -&#45;&#45; {{ report.talk.content }}
+            {{ report.home.id }} -&#45;&#45; {{ report.home.content }}
           </el-col>
           <el-col cols="2">
-            <div v-for="comment in report.talk.comments">
+            <div v-for="comment in report.home.comments">
               {{ comment.content }}
             </div>
             <div>
-              <span v-for="tag in report.talk.tags">{{ tag.name }} ,</span>
+              <span v-for="tag in report.home.tags">{{ tag.name }} ,</span>
             </div>
           </el-col>
           <el-col cols="1" :class="{'bg-green':report.hasKeyword}">
@@ -77,7 +77,7 @@
             {{ report.triggerKeywords }}
           </el-col>
           <el-col cols="1">
-            {{ report.talk.status }}
+            {{ report.home.status }}
           </el-col>
           <el-col cols="1">
             {{ report.status }}
@@ -126,7 +126,7 @@ export default class ViolationHistoryPage extends Vue {
       if (src.split('/').length > 1) {
         imgUrl = this.imgUrl + src
       } else {
-        imgUrl = this.imgUrl + 'user/' + userId + '/talk/normal/' + src
+        imgUrl = this.imgUrl + 'user/' + userId + '/home/normal/' + src
       }
     }
     return imgUrl
