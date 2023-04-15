@@ -225,10 +225,10 @@ import QButton from "socialuni-ui/src/components/QButton/QButton.vue";
 import QSearch from "socialuni-ui/src/components/QSearch/QSearch.vue";
 import SocialGenderTag from "../../component/SocialGenderTag/SocialGenderTag.vue";
 import CosService from "socialuni-base/src/service/CosService";
-import TencentCosAPI from "socialuni-api/src/api/TencentCosAPI";
 import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
 import ImgAddQO from "socialuni-base-api/src/model/user/ImgAddQO";
 import UserService from "socialuni-user/src/service/UserService";
+import TencentCosAPI from "socialuni-base-api/src/api/TencentCosAPI";
 
 @Options({
   components: {

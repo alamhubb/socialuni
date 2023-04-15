@@ -33,8 +33,8 @@ import ReportType from "socialuni-constant/constant/ReportType";
 import ReportAddVO from "socialuni-base-api/src/model/report/ReportAddVO";
 import AlertUtil from "socialuni-util/src/util/AlertUtil";
 import {socialuniConfigModule} from "socialuni-base-api/src/store/SocialuniConfigModule";
-import ReportAPI from "socialuni-api/src/api/ReportAPI";
 import UserCheckUtil from "socialuni-user/src/util/UserCheckUtil";
+import ReportAPI from "socialuni-base-api/src/api/ReportAPI";
 
 @Options({
   components: {QPopup}

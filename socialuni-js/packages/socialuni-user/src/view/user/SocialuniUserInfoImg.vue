@@ -56,9 +56,11 @@ import AlertUtil from "socialuni-util/src/util/AlertUtil";
 import ImgFileVO from "socialuni-base-api/src/model/ImgFileVO";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import PageUtil from "socialuni-util/src/util/PageUtil";
-import TencentCosAPI from "socialuni-api/src/api/TencentCosAPI";
 import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
 import SocialuniReportDialog from "../../component/SocialuniReportDialog.vue";
+import DomFile from "socialuni-util/src/model/DomFile";
+import TencentCosAPI from "socialuni-base-api/src/api/TencentCosAPI";
+import CosService from "socialuni-base/src/service/CosService";
 
 @Options({
   components: {QIcon, SocialuniReportDialog}
@@ -89,7 +91,7 @@ export default class SocialuniUserInfoImg extends Vue {
 
   async uploadUserImg() {
     try {
-      const cosAuthRO = await CosUtil.getCosAuthRO()
+      const cosAuthRO = await CosService.getCosAuthRO()
       const imgFiles: DomFile[] = await UniUtil.chooseImage(1)
       UniUtil.showLoading('上传中')
       const imgFile: DomFile = imgFiles[0]
