@@ -235,7 +235,6 @@
 <script lang="ts">
 import {Options, Vue} from "vue-property-decorator";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
-import {socialAppModule, socialuniSystemModule} from "socialuni-sdk/src/store/store";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import Constants from "socialuni-constant/constant/Constant";
 import SocialuniCommonStatus from "socialuni-constant/constant/status/SocialuniCommonStatus";
@@ -245,36 +244,36 @@ import PagePath from "socialuni-constant/constant/PagePath";
 import SelectorQuery = UniNamespace.SelectorQuery;
 import NodesRef = UniNamespace.NodesRef;
 import PayType from "socialuni-constant/constant/PayType";
-import {socialuniUserModule} from "socialuni-sdk/src/store/store";
-import {socialChatModule} from "socialuni-sdk/src/store/store";
 import MsgUtil from "socialuni-util/src/util/MsgUtil";
 import PageUtil from "socialuni-util/src/util/PageUtil";
 import AlertUtil from "socialuni-util/src/util/AlertUtil";
 import ToastUtil from "socialuni-util/src/util/ToastUtil";
 import PlatformUtils from "socialuni/src/utils/PlatformUtils";
 import UniUtil from "socialuni-util/src/util/UniUtil";
-import SocialuniReportDialog from "socialuni-ui/src/components/SocialuniReportDialog";
 import CommonUtil from "socialuni-util/src/util/CommonUtil";
 import DateUtil from "socialuni-util/src/util/DateUtil";
 import MessageViewParams from "./MessageViewParams";
 import SocialuniMessageType from "socialuni-constant/constant/mesaage/SocialuniMessageType";
 import QIcon from 'socialuni-ui/src/components/QIcon/QIcon.vue'
+import QNavbar from 'socialuni-ui/src/components/QNavbar/QNavbar.vue'
 import CosUtil from "socialuni-util/src/util/CosUtil";
-import DomFile from "socialuni-base-api/src/model/DomFile";
-import SocialuniAppAPI from "socialuni/src/api/socialuni/SocialuniAppAPI";
 import AppMsg from "socialuni-constant/constant/AppMsg";
 import CosAuthRO from "socialuni-base-api/src/model/cos/CosAuthRO";
-import CosAPI from "socialuni-base-api/src/api/CosAPI";
 import MessageItemContent from "./MessageItemContent.vue";
-import QNavbar from "../../components/QNavbar/QNavbar.vue";
 import SocialuniProviderType from "socialuni-constant/constant/SocialuniProviderType";
 import {onLoad} from "@dcloudio/uni-app";
 import {onMounted} from "vue";
 import SocialuniChatRO from "socialuni-base-api/src/model/SocialuniChatRO";
 import MessageAPI from "socialuni-im-api/src/api/MessageAPI";
 import MessageVO from "socialuni-im-api/src/model/RO/MessageVO";
+import SocialuniReportDialog from "socialuni/src/component/SocialuniReportDialog.vue";
 import NodeInfo = UniNamespace.NodeInfo;
-
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {socialChatModule} from "../../store/SocialChatModule";
+import {socialAppModule} from "socialuni-community/src/store/SocialAppModule";
+import SocialuniAppAPI from "socialuni-base-api/src/api/SocialuniAppAPI";
+import DomFile from "socialuni-util/src/model/DomFile";
+import CosService from "socialuni/src/service/CosService";
 
 @Options({components: {MessageItemContent, SocialuniReportDialog, QIcon, QNavbar}})
 export default class MessageView extends Vue {
@@ -482,7 +481,7 @@ export default class MessageView extends Vue {
 
   async chooseVideo() {
     //获取cos认证信息
-    const cosAuthRO: CosAuthRO = await CosUtil.getCosAuthRO()
+    const cosAuthRO: CosAuthRO = await CosService.getCosAuthRO()
     //获取cos认证信息
     const imgFiles: DomFile[] = await UniUtil.chooseVideo();
 
@@ -521,7 +520,7 @@ export default class MessageView extends Vue {
       })
       console.log('-----------imgFiles--------', imgFiles);
       // 上传
-      await CosUtil.postImgList(imgFiles, cosAuthRO)
+      await CosService.postImgList(imgFiles, cosAuthRO)
       // 发送图片
       imgFiles.forEach(item => {
         socialChatModule.pushImageMessage(item.url);
