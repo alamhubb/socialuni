@@ -218,7 +218,7 @@ export default class UserEditView extends Vue {
     }
     this.btnDisabled = true
     AlertUtil.confirm('是否确定修改个人信息').then(() => {
-      const userCopy: UserEditVO = JsonUtils.deepClone(this.user) as any
+      const userCopy: UserEditVO = ObjectUtil.deepClone(this.user) as any
       userCopy.nickname = this.nickname
       userCopy.gender = this.gender
       userCopy.birthday = this.birthday

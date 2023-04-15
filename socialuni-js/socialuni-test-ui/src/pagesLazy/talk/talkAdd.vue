@@ -142,6 +142,29 @@ import TalkAddTagSearch from "socialuni-community/src/component/TalkAddTagSearch
 import QCityPicker from "socialuni-community/src/component/QCityPicker/QCityPicker.vue";
 import AlertUtil from "socialuni-util/src/util/AlertUtil";
 import PlatformUtils from "../../../../packages/socialuni-base/src/utils/PlatformUtils";
+import { socialuniUserModule } from 'socialuni-user-sdk/src/store/SocialuniUserModule';
+import {socialLocationModule} from "socialuni-community/src/store/SocialLocationModule";
+import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
+import {socialTalkModule} from "socialuni-community/src/store/SocialTalkModule";
+import {socialCircleModule} from "socialuni-community/src/store/SocialCircleModule";
+import RouterUtil from "socialuni-util/src/util/RouterUtil";
+import CommunityPageUtil from 'socialuni-community/src/util/CommunityPageUtil';
+import CommunityPagePath from "socialuni-community/src/constant/CommunityPagePath";
+import TagVO from "socialuni-base-api/src/model/community/tag/TagVO";
+import JsonUtil from "socialuni-base-api/src/util/JsonUtil";
+import ObjectUtil from "socialuni-util/src/util/ObjectUtil";
+import DistrictVO from "socialuni-base-api/src/model/DistrictVO";
+import CosService from "socialuni-base/src/service/CosService";
+import DomFile from "socialuni-util/src/model/DomFile";
+import UniUtil from "socialuni-util/src/util/UniUtil";
+import SocialuniAppAPI from "socialuni-base-api/src/api/SocialuniAppAPI";
+import SocialCircleRO from "socialuni-base-api/src/model/community/circle/SocialCircleRO";
+import {socialuniTagModule} from "socialuni-community/src/store/SocialTagModule";
+import VisibleType from "socialuni-constant/constant/VisibleType";
+import GenderType from "socialuni-constant/constant/GenderType";
+import CosAuthRO from "socialuni-base-api/src/model/cos/CosAuthRO";
+import LocationUtil from "socialuni-community/src/util/LocationUtil";
+import EnumStrVO from "socialuni-constant/constant/EnumStrVO";
 
 @Options({
   components: {
@@ -168,15 +191,15 @@ export default class TalkAddView extends Vue {
   }
 
   get storeTags() {
-    return socialTagModule.tags
+    return socialuniTagModule.tags
   }
 
   get user() {
-    return socialUserModule.mineUser
+    return socialuniUserModule.mineUser
   }
 
   get tagTypes() {
-    return socialTagModule.tagTypes
+    return socialuniTagModule.tagTypes
   }
 
   // @socialTalkStore.State('circleName') circleName: string
@@ -246,7 +269,7 @@ export default class TalkAddView extends Vue {
     })
     this.cosAuthRO = null
     this.showImgFiles = []
-    this.tags = JsonUtils.deepClone(this.storeTags)
+    this.tags = ObjectUtil.deepClone(this.storeTags)
     this.circleName = socialCircleModule.circleName
     this.district = socialLocationModule.cityLocation
 
@@ -275,7 +298,7 @@ export default class TalkAddView extends Vue {
 
   openTagSearchVue(query: boolean) {
     if (query || this.tags.length < 11) {
-      socialTagModule.getTagsAction()
+      socialuniTagModule.getTagsAction()
     }
     this.closeTagAddVue()
     this.showTagSearch = true
@@ -291,7 +314,7 @@ export default class TalkAddView extends Vue {
 
   @Watch('storeTags')
   watchStoreHotTagsChange() {
-    const tags = JsonUtils.deepClone(this.storeTags)
+    const tags = ObjectUtil.deepClone(this.storeTags)
     this.selectTags.forEach(item => {
       const tag: TagVO = tags.find(tag => item.id === tag.id)
       if (tag) {
@@ -413,7 +436,8 @@ export default class TalkAddView extends Vue {
       } else {
         socialCircleModule.setCircleName(this.circleName)
       }
-      RouterUtil.reLaunch(PagePath.talk + '?load=true')
+      CommunityPageUtil.reLaunchTalkPage()
+      // RouterUtil.reLaunch(CommunityPagePath.talk + '?load=true')
     } finally {
       this.buttonDisabled = false
       uni.hideLoading()
@@ -431,7 +455,7 @@ export default class TalkAddView extends Vue {
       }
       // item.src = ImgUtil.imgUrl + item.cosSrc
     })
-    CosUtil.postImgList(this.showImgFiles, this.cosAuthRO)
+    CosService.postImgList(this.showImgFiles, this.cosAuthRO)
     //qq平台才进行未成年人图片校验
     /*if (socialSystemModule.isMpQQ) {
       if (!this.user.identityAuth) {
@@ -470,7 +494,7 @@ export default class TalkAddView extends Vue {
       }
     }
     //获取cos认证信息
-    this.cosAuthRO = await CosUtil.getCosAuthRO()
+    this.cosAuthRO = await CosService.getCosAuthRO()
     const count = this.imgMaxSize - this.showImgFiles.length
     const imgFiles: DomFile[] = await UniUtil.chooseImage(count)
     this.showImgFiles.push(...imgFiles)
@@ -516,7 +540,7 @@ export default class TalkAddView extends Vue {
       this.closeTagAddVue()
       this.openTagSearchVue(false)
     } else {
-      PageUtil.toTalkPage()
+      CommunityPageUtil.toTalkPage()
     }
   }
 

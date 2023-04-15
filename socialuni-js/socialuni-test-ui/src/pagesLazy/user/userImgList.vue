@@ -44,7 +44,7 @@ export default class UserImgList extends Vue {
   }
 
   get mineUser() {
-    return socialUserModule.mineUser
+    return socialuniUserModule.mineUser
   }
 
   pageUser: CenterUserDetailRO = null
@@ -105,7 +105,7 @@ export default class UserImgList extends Vue {
     AlertUtil.warning('请确认是否删除照片？').then(() => {
       const imgs: ImgFileVO[] = this.frontDeleteImg(imgIndex)
       SocialuniMineUserAPI.deleteUserImgNewAPI(imgs[0]).then((res: any) => {
-        socialUserModule.setUser(res.data)
+        socialuniUserModule.setUser(res.data)
       })
     })
   }

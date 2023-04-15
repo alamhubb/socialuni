@@ -7,15 +7,9 @@ import {socialuniConfigModule} from "socialuni-base-api/src/store/SocialuniConfi
 import UserPageUtil from "./UserPageUtil";
 
 export default class UserCheckUtil {
-    static unLoginCheck() {
-        if (!socialuniUserModule.mineUser) {
-            UserMsgUtil.unLoginMessage()
-            Error('未登录')
-        }
-    }
-
     static checkUserLogin() {
         const user = socialuniUserModule.mineUser
+        console.log(user)
         if (!user) {
             AlertUtil.confirm(socialuniConfigModule.appMoreConfig.errorMsg601UnLogin)
             Error('未登录')

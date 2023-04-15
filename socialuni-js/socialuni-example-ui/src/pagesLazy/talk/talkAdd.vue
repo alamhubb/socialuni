@@ -270,7 +270,7 @@ export default class TalkAddView extends Vue {
     })
     this.cosAuthRO = null
     this.showImgFiles = []
-    this.tags = JsonUtils.deepClone(this.storeTags)
+    this.tags = ObjectUtil.deepClone(this.storeTags)
     this.circleName = socialCircleModule.circleName
     this.district = socialLocationModule.cityLocation
 
@@ -315,7 +315,7 @@ export default class TalkAddView extends Vue {
 
   @Watch('storeTags')
   watchStoreHotTagsChange() {
-    const tags = JsonUtils.deepClone(this.storeTags)
+    const tags = ObjectUtil.deepClone(this.storeTags)
     this.selectTags.forEach(item => {
       const tag: TagVO = tags.find(tag => item.id === tag.id)
       if (tag) {

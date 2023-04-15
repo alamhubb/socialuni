@@ -59,7 +59,7 @@ export default class SocialuniReportDialog extends Vue {
   reportContentId = null
 
   openReportDialog(reportContentType: string, reportContentId: string) {
-    UserCheckUtil.unLoginCheck()
+    UserCheckUtil.checkUserLogin()
     this.reportContentType = reportContentType
     this.reportContentId = reportContentId
     this.reportContent = ''

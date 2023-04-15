@@ -137,7 +137,7 @@ import PageUtil from "socialuni-sdk/src/utils/PageUtil";
 })
 export default class IdentityAuthView extends Vue {
   get user() {
-    return socialUserModule.mineUser
+    return socialuniUserModule.mineUser
   }
 
   imgFile: DomFile = null
@@ -217,7 +217,7 @@ export default class IdentityAuthView extends Vue {
     try {
       const {data} = await SocialUserIdentityAPI.userIdentityAuthAPI(new SocialUserIdentityAuthQO(this.userIdImgFile.src, this.imgFile.src))
       AlertUtil.hint(data)
-      socialUserModule.getMineUserAction()
+      socialuniUserModule.getMineUserAction()
     } finally {
       UniUtil.hideLoading()
       this.authBtnDisabled = false

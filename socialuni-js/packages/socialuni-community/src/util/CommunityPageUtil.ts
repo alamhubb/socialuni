@@ -20,6 +20,11 @@ export default class CommunityPageUtil {
         RouterUtil.switchTab(CommunityPagePath.talk)
     }
 
+    static reLaunchTalkPage() {
+        RouterUtil.reLaunch(CommunityPagePath.talk + '?load=true')
+    }
+
+
     static toNotifyPage() {
         RouterUtil.switchTab(CommunityPagePath.notify)
     }
