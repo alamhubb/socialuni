@@ -13,11 +13,9 @@
     "socialuni-constant": "^0.1.2",
     "uuid": "^7.0.3",
     "@dcloudio/uni-ui": "^1.4.23",
-    "socialuni-base-api": "^0.1.2",
-    "socialuni-user-api": "^0.1.2",
+    "socialuni-api": "^0.1.2",
     "socialuni-ui": "^0.1.2",
     "vue": "3.2.41",
-    "socialuni-community-api": "^0.1.2",
     "vue-class-component": "^8.0.0-rc.1",
     "vue-property-decorator": "^10.0.0-rc.3"
   },

@@ -1,22 +1,20 @@
 {
-  "name": "socialuni-im-api",
+  "name": "socialuni-api",
   "version": "0.1.2",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "cos-js-sdk-v5": "^1.2.18",
-    "cos-wx-sdk-v5": "^0.7.11",
-    "socialuni-constant": "^0.1.2",
-    "socialuni-base-api": "^0.1.2"
+    "socialuni-base-api": "^0.1.2",
+    "socialuni-user-api": "^0.1.2",
+    "socialuni-community-api": "^0.1.2",
+    "socialuni-im-api": "^0.1.2"
   },
   "devDependencies": {
     "@dcloudio/types": "^3.0.13",
     "typescript": "^4.7.4",
-    "vue": "^3.2.41",
-    "vue-class-component": "^8.0.0-rc.1",
-    "vue-property-decorator": "^10.0.0-rc.3"
+    "vue": "^3.2.41"
   },
   "author": "",
   "license": "ISC",
