@@ -7,17 +7,12 @@ import ToastUtil from "socialuni-util/src/util/ToastUtil";
 
 export default class UserService {
     static async getAppLunchDataByHasUser() {
-        console.log(2222222222)
-        console.log(socialuniUserModule.token)
-        if (socialuniUserModule && socialuniUserModule.token
-            /* && !socialChatModule.imToken   // 修复imToken过期后，需要重新登录的才能聊天的bug。 https://gitee.com/socialuni/socialuni/issues/I6GGP7
-            * */
-        ) {
-            // const imRes = await SocialuniImUserAPI.getImUserTokenAPI()
-            // socialChatModule.setImToken(imRes.data)
-            WebsocketUtil.websocketConnect(false)
-            // socialChatModule.initSocialuniChatModule()
-        }
+        /* && !socialChatModule.imToken   // 修复imToken过期后，需要重新登录的才能聊天的bug。 https://gitee.com/socialuni/socialuni/issues/I6GGP7
+        * */
+        // const imRes = await SocialuniImUserAPI.getImUserTokenAPI()
+        // socialChatModule.setImToken(imRes.data)
+        WebsocketUtil.websocketConnect(false)
+        // socialChatModule.initSocialuniChatModule()
         /*socialNotifyModule.queryNotifiesAction()
         */
         // socialChatModule.initSocialuniChatModule()
@@ -29,7 +24,6 @@ export default class UserService {
      * 调用后台仅user和user初始化相关信息,通知列表，开启websocket连接
      */
     static getMineUserInitDataActionByToken(loginRO: SocialLoginRO<SocialuniMineUserRO>) {
-        console.log(loginRO)
         socialuniUserModule.setUserAndToken(loginRO)
         //登录之后重连websocket
         // WebsocketUtil.websocketClose()

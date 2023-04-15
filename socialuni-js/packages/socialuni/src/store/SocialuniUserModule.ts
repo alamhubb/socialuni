@@ -11,12 +11,16 @@ import UserMsgUtil from "../util/UserMsgUtil";
 import ToastUtil from "socialuni-util/src/util/ToastUtil";
 import {socialuniConfigModule} from "socialuni-base-api/src/store/SocialuniConfigModule";
 import SocialuniUserExpandAPI from "socialuni-user-api/src/api/SocialuniUserExpandAPI";
+import SocialuniTokenUtil from "socialuni-base-api/src/util/SocialuniTokenUtil";
 
 class SocialuniUserModule {
+    get token() {
+        return socialuniTokenModule.token
+    }
+
     private userInfo: SocialuniMineUserRO = SocialuniUserStorageUtil.get() || null
 
     get mineUser() {
-        console.log(this.userInfo)
         return this.userInfo
     }
 

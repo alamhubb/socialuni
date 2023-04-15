@@ -658,7 +658,6 @@ class SocialChatModule {
     //在聊天界面的时候，自己发送msg 本地添加msg
 
     async pushMessageAction(msg: MessageVO) {
-        console.log(456)
         this.messages.push(msg)
         // JsonUtils.log(this.messages)
         // console.log(JSON.stringify(msg))
@@ -666,7 +665,6 @@ class SocialChatModule {
         const index: number = this.messages.length - 1
         // console.log(index)
         this.chat.updateTime = new Date().getTime()
-        console.log(123)
         // this.chat.lastContent = msg.content
         // 滚屏到最后面
         // 不能监控变化滚动，有时候是往前面插入

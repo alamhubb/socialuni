@@ -37,7 +37,6 @@ export default class UserDetail extends Vue {
     onLoad((params: any) => {
       console.log(123)
       onMounted(() => {
-        console.log(456)
         this.$refs.userDetail.init(params)
       })
     })

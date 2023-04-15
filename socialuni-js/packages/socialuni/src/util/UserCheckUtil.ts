@@ -9,7 +9,6 @@ import UserPageUtil from "./UserPageUtil";
 export default class UserCheckUtil {
     static checkUserLogin() {
         const user = socialuniUserModule.mineUser
-        console.log(user)
         if (!user) {
             AlertUtil.confirm(socialuniConfigModule.appMoreConfig.errorMsg601UnLogin)
             Error('未登录')

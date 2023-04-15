@@ -534,7 +534,6 @@ export default class MessageView extends Vue {
 
     async sendMsgClick() {
         UserCheckUtil.checkUserBindPhoneNum()
-        console.log(123)
         // 微信支持 hold-keyboard
         // app和h5支持 @touchend.prevent
         // 只有qq需要特殊处理
@@ -546,11 +545,8 @@ export default class MessageView extends Vue {
         })
         // #endif
         const msgContent = this.msgContent || (this.chat.needPayOpen ? HintMsg.payOpenDefaultMsg : '')
-        console.log(this.msgContent)
-        console.log(msgContent)
         if (msgContent) {
             // 点击发送后立即push
-            console.log(this.chat)
             //启用状态可以直接发送
             const msg: MessageVO = new MessageVO(msgContent)
             this.msgContent = ''

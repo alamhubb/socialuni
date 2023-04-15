@@ -4,6 +4,7 @@ import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
 import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
 import {socialuniConfigModule} from "socialuni-base-api/src/store/SocialuniConfigModule";
 import NotifyVO from "socialuni-base-api/src/model/NotifyVO";
+import SocialuniConfig from "socialuni-base-api/src/config/SocialuniConfigModule";
 
 export default class WebsocketUtil {
 
@@ -22,7 +23,7 @@ export default class WebsocketUtil {
     uni.connectSocket({
       //因为app不支持header中传参
       // url: AppConfig.websocketUrl + 'imserver/' + token,
-      url: socialuniConfigModule.socialuniImWebsocketUrl + 'webSocket/message?token=' + token,
+      url: SocialuniConfig.socialuniWebsocketUrl + 'webSocket/message?token=' + token,
       /* url: CommonUtil.websocketUrl + 'webSocket/message',
       header: {
         token: token

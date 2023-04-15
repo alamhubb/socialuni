@@ -139,15 +139,9 @@ export default class UniAppHttpRequest {
                 reject(err)
                 next = false
             }
-            console.log(789789)
             _config = {...this.requestBeforeFun(_options, cancel)}
             if (!next) return
-            console.log(22222)
-            console.log(uni)
-            console.log(uni.request)
-            console.log(_config)
             uni.request(_config as RequestOptions)
-            console.log(333333)
         })
     }
 

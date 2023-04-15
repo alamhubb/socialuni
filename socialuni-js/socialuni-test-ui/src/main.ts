@@ -5,7 +5,7 @@ import '@/styles/index.scss'
 
 export function createApp() {
     const app = createSSRApp(App);
-    app.use(Socialuni)
+    app.use(Socialuni,'asdf')
     return {
         app,
     };
