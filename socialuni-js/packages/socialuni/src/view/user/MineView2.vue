@@ -200,35 +200,30 @@
 
 <script lang="ts">
 import {Options, Prop, Vue} from 'vue-property-decorator'
-import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
-import LoginView from "../login/LoginView.vue";
-import PageUtil from "socialuni-util/src/util/PageUtil";
-import MsgUtil from "socialuni-util/src/util/MsgUtil";
-import AlertUtil from "socialuni-util/src/util/AlertUtil";
-import ToastUtil from "socialuni-util/src/util/ToastUtil";
-import UniUtil from "socialuni-util/src/util/UniUtil";
-import DomFile from "socialuni-util/src/model/DomFile";
-import SkipUrlConst from "socialuni-constant/constant/SkipUrlConst";
-import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
-import SocialuniFollowType from 'socialuni-constant/constant/user/SocialuniFollowType';
+import QPopup from 'socialuni-ui/src/components/QPopup/QPopup.vue'
+import QIcon from 'socialuni-ui/src/components/QIcon/QIcon.vue'
+import QNavbar from 'socialuni-ui/src/components/QNavbar/QNavbar.vue'
+import QRowItem from 'socialuni-ui/src/components/QRowItem/QRowItem.vue'
+import MsgInput from 'socialuni-ui/src/components/MsgInput.vue'
+import UniUtil from 'socialuni-util/src/util/UniUtil'
+import SkipUrlConst from 'socialuni-constant/constant/SkipUrlConst'
+import SocialuniFollowType from 'socialuni-constant/constant/user/SocialuniFollowType'
+import ToastUtil from 'socialuni-util/src/util/ToastUtil'
+import {onHide, onLoad, onShow} from '@dcloudio/uni-app'
+import UserService from 'socialuni-sdk/src/service/UserService'
+import SocialuniUserInfoImg from './SocialuniUserInfoImg.vue'
+import PageUtil from 'socialuni-util/src/util/PageUtil'
+import CosUtil from 'socialuni-util/src/util/CosUtil'
+import DomFile from 'socialuni-base-api/src/model/DomFile'
+import ImgAddQO from 'socialuni-base-api/src/model/user/ImgAddQO'
+import UserSchoolEditDialog from './UserSchoolEditDialog.vue'
+import AlertUtil from 'socialuni-util/src/util/AlertUtil'
+import MsgUtil from 'socialuni-util/src/util/MsgUtil'
 import UserContactInfoEditDialog from "./UserContactInfoEditDialog.vue";
-import QPopup from "socialuni-ui/src/components/QPopup/QPopup.vue";
-import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
-import QNavbar from "socialuni-ui/src/components/QNavbar/QNavbar.vue";
-import QRowItem from "socialuni-ui/src/components/QRowItem/QRowItem.vue";
+import LoginView from "../login/LoginView.vue";
 import UserInfo from "./UserInfo.vue";
-import SocialuniUserInfoImg from "./SocialuniUserInfoImg.vue";
-import UserSchoolEditDialog from "./UserSchoolEditDialog.vue";
-import QInput from "socialuni-ui/src/components/QInput/QInput.vue";
-import QButton from "socialuni-ui/src/components/QButton/QButton.vue";
-import QSearch from "socialuni-ui/src/components/QSearch/QSearch.vue";
-import SocialGenderTag from "../../component/SocialGenderTag/SocialGenderTag.vue";
-import CosService from "socialuni-base/src/service/CosService";
-import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
-import ImgAddQO from "socialuni-base-api/src/model/user/ImgAddQO";
-import UserService from "socialuni-user/src/service/UserService";
-import TencentCosAPI from "socialuni-base-api/src/api/TencentCosAPI";
+import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 
 @Options({
   components: {
@@ -240,14 +235,23 @@ import TencentCosAPI from "socialuni-base-api/src/api/TencentCosAPI";
     QRowItem,
     UserInfo,
     SocialuniUserInfoImg,
+    MsgInput,
     QInput,
+    TalkItem,
+    TalkOperate,
     QButton,
     UserSchoolEditDialog,
     QSearch,
+    QPcModel,
     SocialGenderTag,
   }
 })
 export default class MineView extends Vue {
+  $refs: {
+    moreActionList: QPopup
+    schoolEditDialog: UserSchoolEditDialog
+    contactInfoEditDialog: UserContactInfoEditDialog;
+  }
 
   get mineUser() {
     return socialuniUserModule.mineUser
@@ -366,7 +370,7 @@ export default class MineView extends Vue {
 
   async uploadUserAvatarImg() {
     try {
-      const cosAuthRO = await CosService.getCosAuthRO()
+      const cosAuthRO = await CosUtil.getCosAuthRO()
       const imgFiles: DomFile[] = await UniUtil.chooseImage(1)
       UniUtil.showLoading('上传中')
       const imgFile: DomFile = imgFiles[0]

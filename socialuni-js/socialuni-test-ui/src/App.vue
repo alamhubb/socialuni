@@ -1,6 +1,6 @@
 <script>
 
-import PlatformUtils from "../../packages/socialuni-base/src/utils/PlatformUtils";
+import PlatformUtils from "../../packages/socialuni/src/utils/PlatformUtils";
 
 export default {
  async onLaunch() {

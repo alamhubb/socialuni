@@ -11,7 +11,7 @@ import {socialPlatformModule} from "../store/SocialPlatformModule";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import SocialuniAppAPI from "socialuni-base-api/src/api/SocialuniAppAPI";
 import SocialuniCoinAPI from "socialuni-base-api/src/api/socialuni/SocialuniCoinAPI";
-import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
+import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
 
 
 // 统一处理各平台的订阅

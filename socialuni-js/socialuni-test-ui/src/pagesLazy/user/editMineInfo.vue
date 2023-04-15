@@ -111,7 +111,7 @@ import PageUtil from "socialuni-sdk/src/utils/PageUtil";
 import QButton from "socialuni-view/src/components/QButton/QButton.vue";
 import DateUtil from "socialuni-sdk/src/utils/DateUtil";
 import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
-import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
+import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
 import UniUtil from "socialuni-util/src/util/UniUtil";
 
 @Options({

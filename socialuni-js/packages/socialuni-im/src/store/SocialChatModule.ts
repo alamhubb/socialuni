@@ -3,7 +3,7 @@ import PageUtil from "socialuni-util/src/util/PageUtil"
 import ChatAPI from "socialuni-base-api/src/api/ChatAPI"
 import RouterUtil from "socialuni-util/src/util/RouterUtil"
 import PagePath from "socialuni-constant/constant/PagePath"
-import PlatformUtils from "socialuni-base/src/utils/PlatformUtils"
+import PlatformUtils from "socialuni/src/utils/PlatformUtils"
 import ChatType from "socialuni-constant/constant/ChatType"
 import CommonUtil from "socialuni-util/src/util/CommonUtil"
 import JsonUtil from "socialuni-util/src/util/JsonUtil"
@@ -37,7 +37,7 @@ import OpenImFriendApplyRO from "socialuni-sdk/src/model/friend/OpenImFriendAppl
 import FriendApplyType from "socialuni-constant/constant/FriendApplyType";
 import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
 import AlertUtil from "socialuni-util/src/util/AlertUtil";
-import MessageAddVO from "socialuni-base/src/model/message/MessageAddVO";
+import MessageAddVO from "socialuni/src/model/message/MessageAddVO";
 import request from "socialuni-base-api/src/request/request";
 import socialuniImRequest from "socialuni-im-api/src/api/socialuniImRequest";
 import MessageAPI from "socialuni-im-api/src/api/MessageAPI";

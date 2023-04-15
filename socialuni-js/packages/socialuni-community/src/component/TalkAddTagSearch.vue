@@ -74,7 +74,7 @@ import TagVO from 'socialuni-base-api/src/model/community/tag/TagVO'
 import CenterUserDetailRO from 'socialuni-base-api/src/model/social/CenterUserDetailRO'
 import QIcon from 'socialuni-ui/src/components/QIcon/QIcon.vue'
 import QNavbar from 'socialuni-ui/src/components/QNavbar/QNavbar.vue'
-import {socialuniUserModule} from 'socialuni-user/src/store/SocialuniUserModule';
+import {socialuniUserModule} from 'socialuni/src/store/SocialuniUserModule';
 
 @Options({
     components: {QNavbar, QIcon}

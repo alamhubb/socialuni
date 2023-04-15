@@ -2,7 +2,7 @@ import AlertUtil from 'socialuni-util/src/util/AlertUtil'
 import AppConfig from "socialuni-constant/constant/AppConfig";
 import UniUtil from "./UniUtil";
 import AppUpdateType from "socialuni-constant/constant/AppUpdateType";
-import SocialuniAppAPI from "socialuni-base/src/api/socialuni/SocialuniAppAPI";
+import SocialuniAppAPI from "socialuni/src/api/socialuni/SocialuniAppAPI";
 import {socialuniConfigModule} from "socialuni-base-api/src/store/SocialuniConfigModule";
 
 export default class APPUtil {

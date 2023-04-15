@@ -86,7 +86,7 @@
 import {Options, Prop, Vue, Watch} from 'vue-property-decorator'
 import TalkVO from "socialuni-base-api/src/model/talk/TalkVO";
 import ObjectUtil from "socialuni-util/src/util/ObjectUtil";
-import {socialuniUserModule} from 'socialuni-user/src/store/SocialuniUserModule';
+import {socialuniUserModule} from 'socialuni/src/store/SocialuniUserModule';
 import TalkTabType from "socialuni-constant/constant/TalkTabType";
 import RouterUtil from "socialuni-util/src/util/RouterUtil";
 import PagePath from "socialuni-constant/constant/PagePath";
@@ -101,7 +101,7 @@ import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
 import DateUtil from "socialuni-util/src/util/DateUtil";
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
 import FollowAPI from "socialuni-community-api/src/api/FollowAPI";
-import SocialGenderTag from "socialuni-user/src/component/SocialGenderTag/SocialGenderTag.vue";
+import SocialGenderTag from "socialuni/src/component/SocialGenderTag/SocialGenderTag.vue";
 
 @Options({
   components: {

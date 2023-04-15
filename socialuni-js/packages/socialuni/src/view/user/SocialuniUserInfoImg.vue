@@ -46,7 +46,7 @@
 <script lang="ts">
 import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
 import {Options, Prop, Vue} from "vue-property-decorator";
-import {socialuniUserModule} from 'socialuni-user/src/store/SocialuniUserModule';
+import {socialuniUserModule} from 'socialuni/src/store/SocialuniUserModule';
 import CenterUserDetailRO from "socialuni-base-api/src/model/social/CenterUserDetailRO";
 import ImgUtil from "socialuni-util/src/util/ImgUtil";
 import CosUtil from "socialuni-util/src/util/CosUtil";
@@ -60,7 +60,7 @@ import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAP
 import SocialuniReportDialog from "../../component/SocialuniReportDialog.vue";
 import DomFile from "socialuni-util/src/model/DomFile";
 import TencentCosAPI from "socialuni-base-api/src/api/TencentCosAPI";
-import CosService from "socialuni-base/src/service/CosService";
+import CosService from "socialuni/src/service/CosService";
 
 @Options({
   components: {QIcon, SocialuniReportDialog}

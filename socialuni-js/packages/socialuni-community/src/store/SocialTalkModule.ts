@@ -10,7 +10,7 @@ import SocialuniTalkTabRO from "socialuni-base-api/src/model/talk/SocialuniTalkT
 import TalkTabVO from "socialuni-base-api/src/model/talk/SocialuniTalkTabRO";
 import {Vue} from "vue-class-component";
 import CircleCreateChatQO from "socialuni-base-api/src/model/community/circle/CircleCreateChatQO";
-import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
+import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
 import SocialuniAppAPI from "socialuni-base-api/src/api/SocialuniAppAPI";
 import {socialCircleModule} from "./SocialCircleModule";
 import SocialuniCircleAPI from "socialuni-community-api/src/api/SocialuniCircleAPI";

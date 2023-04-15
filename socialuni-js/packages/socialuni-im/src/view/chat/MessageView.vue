@@ -251,7 +251,7 @@ import MsgUtil from "socialuni-util/src/util/MsgUtil";
 import PageUtil from "socialuni-util/src/util/PageUtil";
 import AlertUtil from "socialuni-util/src/util/AlertUtil";
 import ToastUtil from "socialuni-util/src/util/ToastUtil";
-import PlatformUtils from "socialuni-base/src/utils/PlatformUtils";
+import PlatformUtils from "socialuni/src/utils/PlatformUtils";
 import UniUtil from "socialuni-util/src/util/UniUtil";
 import SocialuniReportDialog from "socialuni-ui/src/components/SocialuniReportDialog";
 import CommonUtil from "socialuni-util/src/util/CommonUtil";
@@ -261,7 +261,7 @@ import SocialuniMessageType from "socialuni-constant/constant/mesaage/SocialuniM
 import QIcon from 'socialuni-ui/src/components/QIcon/QIcon.vue'
 import CosUtil from "socialuni-util/src/util/CosUtil";
 import DomFile from "socialuni-base-api/src/model/DomFile";
-import SocialuniAppAPI from "socialuni-base/src/api/socialuni/SocialuniAppAPI";
+import SocialuniAppAPI from "socialuni/src/api/socialuni/SocialuniAppAPI";
 import AppMsg from "socialuni-constant/constant/AppMsg";
 import CosAuthRO from "socialuni-base-api/src/model/cos/CosAuthRO";
 import CosAPI from "socialuni-base-api/src/api/CosAPI";

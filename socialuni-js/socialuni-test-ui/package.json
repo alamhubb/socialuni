@@ -56,7 +56,7 @@
     "cos-wx-sdk-v5": "^0.7.11",
     "pinia": "^2.0.22",
     "pinia-class-component": "^0.9.4",
-    "socialuni-user": "../packages/socialuni-user",
+    "socialuni": "../packages/socialuni",
     "socialuni-community": "../packages/socialuni-community",
     "uuid": "^7.0.3",
     "vite-plugin-require-transform": "^1.0.4",

@@ -68,7 +68,7 @@ import DistrictVO from "socialuni-base-api/src/model/DistrictVO";
 import {onHide, onShow} from "@dcloudio/uni-app";
 import SocialTagPicker from "../../component/SocialTagPicker.vue";
 import {socialuniTagModule} from "../../store/SocialTagModule";
-import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
+import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
 import { socialNotifyModule } from '../../store/SocialNotifyModule'
 import {socialAppModule} from "../../store/SocialAppModule";
 import {socialLocationModule} from "../../store/SocialLocationModule";
