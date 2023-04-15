@@ -125,7 +125,7 @@ export default class TalkItemHead extends Vue {
   followType: string = TalkTabType.follow_type
 
   created() {
-    if (RouterUtil.getCurrentPageURI() === PagePath.userDetail) {
+    if (RouterUtil.getCurrentPageURI() === UserPagePath.userDetail) {
       this.isUserDetail = true
     }
     this.updateTalk()
@@ -158,7 +158,7 @@ export default class TalkItemHead extends Vue {
   }
 
   toUserDetailVue() {
-    if (RouterUtil.getCurrentPageURI() !== PagePath.userDetail) {
+    if (RouterUtil.getCurrentPageURI() !== UserPagePath.userDetail) {
       PageUtil.toUserDetail(this.talk.user.id)
     }
   }

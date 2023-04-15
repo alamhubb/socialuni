@@ -19,6 +19,62 @@
       }
     },
   ],
+  "subPackages": [
+    {
+      "root": "pagesLazy",
+      "pages": [
+        {
+          "path": "talk/talkAdd",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "user/userDetail",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "user/editMineInfo",
+          "style": {
+            "navigationBarTitleText": "编辑资料"
+          }
+        },
+        {
+          "path": "user/userImgList",
+          "style": {
+            "navigationBarTitleText": "相册列表"
+          }
+        },
+        {
+          "path": "notify/notify",
+          "style": {
+            "navigationBarTitleText": "通知列表"
+          }
+        },
+        {
+          "path": "user/follow",
+          "style": {
+            "navigationBarTitleText": "关注列表"
+          }
+        },
+        {
+          "path": "user/coin",
+          "style": {
+            "navigationBarTitleText": "贝壳充值",
+            "enablePullDownRefresh": true
+          }
+        },
+        {
+          "path": "user/coinRecord",
+          "style": {
+            "navigationBarTitleText": "贝壳记录"
+          }
+        },
+      ]
+    }
+  ],
   "tabBar": {
     "color": "#9E9E9E",
     "selectedColor": "#2196F3",

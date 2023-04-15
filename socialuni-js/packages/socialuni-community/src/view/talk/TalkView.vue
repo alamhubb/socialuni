@@ -74,6 +74,7 @@ import {socialAppModule} from "../../store/SocialAppModule";
 import {socialLocationModule} from "../../store/SocialLocationModule";
 import {socialuniConfigModule} from "socialuni-base-api/src/store/SocialuniConfigModule";
 import QCityPicker from "../../component/QCityPicker/QCityPicker.vue";
+import CommunityPageUtil from "../../util/CommunityPageUtil";
 
 // todo 后台可控制是否显示轮播图
 
@@ -197,12 +198,12 @@ export default class TalkView extends Vue {
 
   toNotifyVue() {
     socialNotifyModule.queryUnreadNotifiesAndUpdateHasReadAction()
-    RouterUtil.navigateTo(PagePath.notify)
+    CommunityPageUtil.toNotifyPage()
   }
 
   // 点击加号去新增talk
   toTalkAdd() {
-    PageUtil.toTalkAddPage()
+    CommunityPageUtil.toTalkAddPage()
   }
 
   openCityPicker() {

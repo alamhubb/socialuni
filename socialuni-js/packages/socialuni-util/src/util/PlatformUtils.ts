@@ -66,7 +66,7 @@ export default class PlatformUtils {
         return PlatformUtils.payCoin(amount).then(() => {
             /!* UserStore.getMineUserAction().then(() => {
                AlertUtil.hint(HintMsg.paySuccessMsg)
-               RouterUtil.reLaunch(PagePath.userMine)
+               RouterUtil.reLaunch(UserPagePath.userMine)
              })*!/
         })
     }*/

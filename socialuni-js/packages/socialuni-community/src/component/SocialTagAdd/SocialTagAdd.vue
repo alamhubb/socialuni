@@ -37,10 +37,10 @@
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
 import TagVO from 'socialuni-base-api/src/model/community/tag/TagVO'
-import TagAPI from 'socialuni-base-api/src/api/socialuni/TagAPI'
 import ErrorConst from 'socialuni-constant/constant/ErrorConst'
 import AlertUtil from 'socialuni-util/src/util/AlertUtil'
 import ResultRO from 'socialuni-base-api/src/model/social/ResultRO'
+import TagAPI from "socialuni-community-api/src/api/TagAPI";
 
 @Options({})
 export default class SocialTagAdd extends Vue {

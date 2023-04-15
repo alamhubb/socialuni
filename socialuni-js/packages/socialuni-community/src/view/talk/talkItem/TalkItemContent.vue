@@ -109,7 +109,7 @@ export default class TalkItemContent extends Vue {
   @Prop() talk: TalkVO
 
   toTalkDetailVue() {
-    if (RouterUtil.getCurrentPageURI() !== PagePath.talkDetail) {
+    if (RouterUtil.getCurrentPageURI() !== UserPagePath.talkDetail) {
       PageUtil.toTalkDetail(this.talk.id)
     }
   }
@@ -120,7 +120,7 @@ export default class TalkItemContent extends Vue {
 
   chooseCircle(circleName) {
     AlertUtil.confirm(`是否进入${circleName}圈`).then(() => {
-      if (RouterUtil.getCurrentPageURI() === PagePath.talk) {
+      if (RouterUtil.getCurrentPageURI() === UserPagePath.talk) {
         socialTalkModule.setCircleNameUpdateCurTabIndex(circleName)
       } else {
         CommonUtil.delayTime(500).then(() => {

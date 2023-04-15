@@ -34,7 +34,7 @@ import ReportAddVO from "socialuni-base-api/src/model/report/ReportAddVO";
 import AlertUtil from "socialuni-util/src/util/AlertUtil";
 import {socialuniConfigModule} from "socialuni-base-api/src/store/SocialuniConfigModule";
 import ReportAPI from "socialuni-api/src/api/ReportAPI";
-import CheckUtil from "socialuni-user-sdk/src/util/CheckUtil";
+import UserCheckUtil from "packages/socialuni-user-sdk/src/util/UserCheckUtil";
 
 @Options({
   components: {QPopup}
@@ -59,7 +59,7 @@ export default class SocialuniReportDialog extends Vue {
   reportContentId = null
 
   openReportDialog(reportContentType: string, reportContentId: string) {
-    CheckUtil.unLoginCheck()
+    UserCheckUtil.unLoginCheck()
     this.reportContentType = reportContentType
     this.reportContentId = reportContentId
     this.reportContent = ''

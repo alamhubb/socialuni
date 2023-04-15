@@ -4,30 +4,30 @@ export default class PageUtil {
     }
 
     static toTalkDetail(talkId: string) {
-        RouterUtil.navigateTo(PagePath.talkDetail + '?talkId=' + talkId)
+        RouterUtil.navigateTo(UserPagePath.talkDetail + '?talkId=' + talkId)
     }
 
 
     static toUserDetail(userId: string) {
-        if (RouterUtil.getCurrentPageURI() !== PagePath.userDetail) {
-            RouterUtil.navigateTo(PagePath.userDetail + '?userId=' + userId)
+        if (RouterUtil.getCurrentPageURI() !== UserPagePath.userDetail) {
+            RouterUtil.navigateTo(UserPagePath.userDetail + '?userId=' + userId)
         }
     }
 
     static toEditMineInfo() {
-        RouterUtil.navigateTo(PagePath.editMineInfo)
+        RouterUtil.navigateTo(UserPagePath.editMineInfo)
     }
 
     static toUserFollowPage(followType: string) {
-        RouterUtil.navigateTo(PagePath.userFollow + '?followType=' + followType)
+        RouterUtil.navigateTo(UserPagePath.userFollow + '?followType=' + followType)
     }
 
     static toUserImgList(userId: string) {
-        RouterUtil.navigateTo(PagePath.userImgList + '?userId=' + userId)
+        RouterUtil.navigateTo(UserPagePath.userImgList + '?userId=' + userId)
     }
 
     static toOAuthPage() {
-        RouterUtil.navigateTo(PagePath.oAuth)
+        RouterUtil.navigateTo(UserPagePath.oAuth)
     }
 
     static toVipPage() {
@@ -38,7 +38,7 @@ export default class PageUtil {
         } else {
           constant user: UserVO = userModule.user
           if (user) {
-            RouterUtil.navigateTo(PagePath.userVip)
+            RouterUtil.navigateTo(UserPagePath.userVip)
           } else {
             MsgUtil.unLoginMessage()
           }
@@ -51,7 +51,7 @@ export default class PageUtil {
             MsgUtil.iosDisablePay()
         } else {
             if (socialuniUserModule.mineUser) {
-                RouterUtil.navigateTo(PagePath.coin)
+                RouterUtil.navigateTo(UserPagePath.coin)
             } else {
                 MsgUtil.unLoginMessage()
             }
@@ -61,26 +61,26 @@ export default class PageUtil {
     static toCoinRecordPage(pageType: string) {
         PlatformUtils.checkPay()
         if (socialuniUserModule.mineUser) {
-            RouterUtil.navigateTo(PagePath.coinRecord + '?pageType=' + pageType)
+            RouterUtil.navigateTo(UserPagePath.coinRecord + '?pageType=' + pageType)
         } else {
             MsgUtil.unLoginMessage()
         }
     }
 
     static toLoveValuePage() {
-        RouterUtil.navigateTo(PagePath.loveValue)
+        RouterUtil.navigateTo(UserPagePath.loveValue)
     }
 
     static toChatFriend() {
-        RouterUtil.navigateTo(PagePath.friend)
+        RouterUtil.navigateTo(UserPagePath.friend)
     }
 
     static toFriendApply() {
-        RouterUtil.navigateTo(PagePath.friendApply)
+        RouterUtil.navigateTo(UserPagePath.friendApply)
     }
 
     static toMinePage() {
-        RouterUtil.switchTab(PagePath.userMine)
+        RouterUtil.switchTab(UserPagePath.userMine)
     }
 
     static toTalkAddPage() {
@@ -95,37 +95,37 @@ export default class PageUtil {
                     PageUtil.toMinePage()
                 })
         } else {
-            RouterUtil.navigateTo(PagePath.talkAdd)
+            RouterUtil.navigateTo(UserPagePath.talkAdd)
         }
     }
 
     static async toPhonePage() {
-        RouterUtil.navigateTo(PagePath.userPhone)
+        RouterUtil.navigateTo(UserPagePath.userPhone)
     }
 
     static toTalkPage() {
-        RouterUtil.switchTab(PagePath.talk)
+        RouterUtil.switchTab(UserPagePath.talk)
     }
 
     static toIdentityAuthPage() {
-        RouterUtil.navigateTo(PagePath.identityAuth)
+        RouterUtil.navigateTo(UserPagePath.identityAuth)
     }
 
     static toUserMatchPage(user: CenterUserDetailRO) {
         // store.commit('match/setUser', user)
-        // RouterUtil.navigateTo(PagePath.userMatch)
+        // RouterUtil.navigateTo(UserPagePath.userMatch)
     }
 
     static toMessagePageByUserId(userId: string) {
-        RouterUtil.navigateTo(PagePath.message + '?userId=' + userId)
+        RouterUtil.navigateTo(UserPagePath.message + '?userId=' + userId)
     }
 
     static toMessagePageByChatId(receiveId: string) {
-        RouterUtil.navigateTo(PagePath.message + '?chatId=' + receiveId)
+        RouterUtil.navigateTo(UserPagePath.message + '?chatId=' + receiveId)
     }
 
     static toMessagePageByGroupId(groupId: string) {
-        RouterUtil.navigateTo(PagePath.message + '?groupId=' + groupId)
+        RouterUtil.navigateTo(UserPagePath.message + '?groupId=' + groupId)
     }
 
     static toIMGroupMember(groupId: string) {
@@ -134,12 +134,12 @@ export default class PageUtil {
 
     static toFaceValuePage() {
         AlertUtil.confirm('是否查看颜值分介绍').then(() => {
-            RouterUtil.navigateTo(PagePath.faceValueInfo)
+            RouterUtil.navigateTo(UserPagePath.faceValueInfo)
         })
     }
 
     static toUserContactInfoPage() {
-        RouterUtil.navigateTo(PagePath.userContactInfo)
+        RouterUtil.navigateTo(UserPagePath.userContactInfo)
     }
 
     static async toSocialUniAuth(authVO: SocialuniAuthQO) {
@@ -156,7 +156,7 @@ export default class PageUtil {
 
     static getWebUrl(webUrl: string, pageTitle = ''): string {
         if (webUrl) {
-            return PagePath.webBrowser + '?title=' + pageTitle + '&url=' + webUrl
+            return UserPagePath.webBrowser + '?title=' + pageTitle + '&url=' + webUrl
         }
         return null
     }

@@ -243,7 +243,7 @@ class SocialMessageModule {
     pushChatAndMessagesAction(newChat: SocialuniChatRO) {
         // console.log('出发了pushchat')
         // 如果正在这个chat聊天
-        if (RouterUtil.getCurrentPageURI() === PagePath.message && this.chatId === newChat.id) {
+        if (RouterUtil.getCurrentPageURI() === UserPagePath.message && this.chatId === newChat.id) {
             // if (this.chatId === newChat.id) {
             // 则直接往msg增加消息
             // 前台将消息改为已读,修改时间使用后台的就行
