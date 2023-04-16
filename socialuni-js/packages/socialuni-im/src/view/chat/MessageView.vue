@@ -270,7 +270,7 @@ import SocialuniReportDialog from "socialuni/src/component/SocialuniReportDialog
 import NodeInfo = UniNamespace.NodeInfo;
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import {socialChatModule} from "../../store/SocialChatModule";
-import {socialAppModule} from "socialuni-community/src/store/SocialAppModule";
+import {socialAppModule} from "socialuni/src/store/SocialAppModule";
 import SocialuniAppAPI from "socialuni-base-api/src/api/SocialuniAppAPI";
 import DomFile from "socialuni-util/src/model/DomFile";
 import CosService from "socialuni/src/service/CosService";

@@ -4,6 +4,11 @@ import UniUtil from "socialuni-util/src/util/UniUtil";
 import {SocialuniPlugin} from "./interface/SocialuniPlugin";
 import {ImportModule} from "./interface/ImportModule";
 import {socialuniPluginsModule} from "./store/SocialuniPluginsModule";
+import {socialuniUserModule} from "./store/SocialuniUserModule";
+import UserService from "./service/UserService";
+import {socialuniConfigModule} from "socialuni-base-api/src/store/SocialuniConfigModule";
+import CosAPI from "socialuni-base-api/src/api/CosAPI";
+import {socialAppModule} from "socialuni/src/store/SocialAppModule";
 
 
 async function installSocialuniPluginIns() {
@@ -26,10 +31,24 @@ async function installSocialuniPluginIns() {
 
 const Socialuni = {
     async install(app: App, socialuniPlugins: SocialuniPlugin[]) {
+        await socialuniUserModule.initSocialuniUserModule()
+        UserService.getAppLunchDataByHasUser()
+        socialuniConfigModule.getAppConfigAction()
+        socialuniConfigModule.getReportTypesAction()
+        CosAPI.getCosPathAPI().then(res => {
+            socialAppModule.cosHttpPath = res.data
+        })
+        socialAppModule.getHomeSwipersAction()
+
         // 社交联盟内置支持的插件
         await installSocialuniPluginIns()
-        if (socialuniPlugins && Array.isArray(socialuniPlugins) && socialuniPlugins.length) {
-            socialuniPluginsModule.addPlugin(...socialuniPlugins)
+
+        if (socialuniPlugins) {
+            if (Array.isArray(socialuniPlugins)) {
+                socialuniPluginsModule.addPlugin(...socialuniPlugins)
+            } else {
+                socialuniPluginsModule.addPlugin(socialuniPlugins)
+            }
         }
 
         for (const plugin of socialuniPluginsModule.plugins) {

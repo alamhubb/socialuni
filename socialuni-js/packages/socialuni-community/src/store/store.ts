@@ -43,6 +43,9 @@ export async function initSocialuniStore() {
     socialuniTagModule = new socialuniTagModule()
     socialNotifyModule = new SocialNotifyModule()
     socialPlatformModule = new SocialPlatformModule()
+
+
+
     socialuniSystemModule.initSystemInfo()
     socialuniConfigModule.getAppConfigAction()
     socialuniConfigModule.getReportTypesAction()

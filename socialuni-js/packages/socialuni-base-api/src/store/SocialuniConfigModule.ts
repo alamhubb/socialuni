@@ -3,6 +3,7 @@ import SocialuniAppConfigRO from "../model/config/SocialuniAppConfigRO";
 import SocialuniAppMoreConfigRO from "../model/config/SocialuniAppMoreConfigRO";
 import AppInitDataRO from "../model/config/AppInitDataRO";
 import SocialuniAppAPI from "../api/SocialuniAppAPI";
+import ReportAPI from "../api/ReportAPI";
 
 class SocialuniConfigModule {
 
@@ -20,11 +21,11 @@ class SocialuniConfigModule {
     }
 
     // actions
-    /*getReportTypesAction() {
+    getReportTypesAction() {
         ReportAPI.queryReportTypesAPI().then(res => {
             this.reportTypes = res.data
         })
-    }*/
+    }
 }
 
 export const socialuniConfigModule: SocialuniConfigModule = reactive(new SocialuniConfigModule())

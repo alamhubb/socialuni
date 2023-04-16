@@ -70,11 +70,11 @@ import SocialTagPicker from "../../component/SocialTagPicker.vue";
 import {socialuniTagModule} from "../../store/SocialTagModule";
 import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
 import { socialNotifyModule } from '../../store/SocialNotifyModule'
-import {socialAppModule} from "../../store/SocialAppModule";
 import {socialLocationModule} from "../../store/SocialLocationModule";
 import {socialuniConfigModule} from "socialuni-base-api/src/store/SocialuniConfigModule";
 import QCityPicker from "../../component/QCityPicker/QCityPicker.vue";
 import CommunityPageUtil from "../../util/CommunityPageUtil";
+import {socialAppModule} from "socialuni/src/store/SocialAppModule";
 
 // todo 后台可控制是否显示轮播图
 

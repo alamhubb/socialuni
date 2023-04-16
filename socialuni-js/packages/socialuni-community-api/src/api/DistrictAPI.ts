@@ -1,4 +1,4 @@
-import request from '../../request/request';
+import socialuniCommunityRequest from "../request/socialuniCommunityRequest";
 
 export default class DistrictAPI {
   //初始化时获取，选择全部街道时获取
