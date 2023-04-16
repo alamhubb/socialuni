@@ -9,9 +9,23 @@ import UserService from "./service/UserService";
 import {socialuniConfigModule} from "socialuni-base-api/src/store/SocialuniConfigModule";
 import CosAPI from "socialuni-base-api/src/api/CosAPI";
 import {socialAppModule} from "socialuni/src/store/SocialAppModule";
+import NotifyVO from "socialuni-base-api/src/model/NotifyVO";
 
+const socialuniInitPlugin: SocialuniPlugin = {
+    async onLaunch() {
+        await socialuniUserModule.initSocialuniUserModule()
+        UserService.getAppLunchDataByHasUser()
+        socialuniConfigModule.getAppConfigAction()
+        socialuniConfigModule.getReportTypesAction()
+        CosAPI.getCosPathAPI().then(res => {
+            socialAppModule.cosHttpPath = res.data
+        })
+        socialAppModule.getHomeSwipersAction()
+    }
+}
 
 async function installSocialuniPluginIns() {
+    socialuniPluginsModule.addPlugin(socialuniInitPlugin)
     try {
         //查询是否包含community模块，如果存在则加载
         const socialuniCommunityPlugin: ImportModule<SocialuniPlugin> = await import('socialuni-community/src/index');
@@ -31,18 +45,8 @@ async function installSocialuniPluginIns() {
 
 const Socialuni = {
     async install(app: App, socialuniPlugins: SocialuniPlugin[]) {
-        await socialuniUserModule.initSocialuniUserModule()
-        UserService.getAppLunchDataByHasUser()
-        socialuniConfigModule.getAppConfigAction()
-        socialuniConfigModule.getReportTypesAction()
-        CosAPI.getCosPathAPI().then(res => {
-            socialAppModule.cosHttpPath = res.data
-        })
-        socialAppModule.getHomeSwipersAction()
-
         // 社交联盟内置支持的插件
         await installSocialuniPluginIns()
-
         if (socialuniPlugins) {
             if (Array.isArray(socialuniPlugins)) {
                 socialuniPluginsModule.addPlugin(...socialuniPlugins)
@@ -52,7 +56,7 @@ const Socialuni = {
         }
 
         for (const plugin of socialuniPluginsModule.plugins) {
-            plugin.onLaunch()
+            await plugin.onLaunch()
         }
 
         const shareComponent = defineComponent({

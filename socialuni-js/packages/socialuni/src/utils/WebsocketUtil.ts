@@ -5,6 +5,7 @@ import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
 import {socialuniConfigModule} from "socialuni-base-api/src/store/SocialuniConfigModule";
 import NotifyVO from "socialuni-base-api/src/model/NotifyVO";
 import SocialuniConfig from "socialuni-base-api/src/config/SocialuniConfigModule";
+import {socialuniPluginsModule} from "../store/SocialuniPluginsModule";
 
 export default class WebsocketUtil {
 
@@ -13,6 +14,7 @@ export default class WebsocketUtil {
   static timer: number
 
   static websocketConnect (reload: boolean) {
+    console.log('websocket连接')
     let token: string
 
     if (socialuniUserModule.hasToken) {
@@ -20,10 +22,12 @@ export default class WebsocketUtil {
     } else {
       token = UUIDUtil.getUUID()
     }
+    console.log(token)
+    console.log(SocialuniConfig.socialuniWebsocketUrl + '/webSocket/message?token=' + token)
     uni.connectSocket({
       //因为app不支持header中传参
       // url: AppConfig.websocketUrl + 'imserver/' + token,
-      url: SocialuniConfig.socialuniWebsocketUrl + 'webSocket/message?token=' + token,
+      url: SocialuniConfig.socialuniWebsocketUrl + '/webSocket/message?token=' + token,
       /* url: CommonUtil.websocketUrl + 'webSocket/message',
       header: {
         token: token
@@ -77,15 +81,9 @@ export default class WebsocketUtil {
 
     uni.onSocketMessage((res: any) => {
       const notify: NotifyVO = JsonUtil.toParse(res.data)
-      console.log(notify)
-      // todo 直接将这个评论添加到talk中
-      /*if (notify.type === NotifyType.comment) {
-        appModule.addUnreadNotifies(notify.user)
-      } else if (notify.type === NotifyType.message) {
-        console.log('接受了消息')
-        // 暂不支持圈子功能，推送的时候把所有未读都推送过来，还没做，匹配成功的话在talk和match页都显示匹配成功通知？，还有阅读消息后后台也要清0
-        chatModule.pushChatAndMessagesAction(notify.chat)
-      }*/
+      for (const plugin of socialuniPluginsModule.plugins) {
+        plugin.onMessage?.(notify)
+      }
     })
   }
 

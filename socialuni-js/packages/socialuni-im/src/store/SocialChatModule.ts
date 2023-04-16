@@ -22,6 +22,8 @@ import OpenImFriendApplyRO from "socialuni-base-api/src/model/openIm/OpenImFrien
 import JsonUtil from "socialuni-base-api/src/util/JsonUtil";
 import OpenImSessionType from "socialuni-constant/constant/openIm/constant/OpenImSessionType";
 import ImPageUtil from "../util/ImPageUtil";
+import ImPagePath from "../constant/ImPagePath";
+import ChatAPI from "socialuni-im-api/src/api/ChatAPI";
 
 
 const openIM = null
@@ -36,6 +38,12 @@ class SocialChatModule {
     chatId = ''
     private userImToken: string = SocialuniImUserTokenUtil.get() || null
     recvFriendApplicationList: OpenImFriendApplyRO[] = []
+
+    // chatId: string = null
+    chats: SocialuniChatRO[] = []
+
+    scrollTop: number = 0
+    chatsUnreadNumTotal = 0
 
     setOpenImLoginSuccess() {
         this.openImIsLogin = 2
@@ -67,11 +75,7 @@ class SocialChatModule {
         return this.userImToken
     }
 
-    // chatId: string = null
-    chats: SocialuniChatRO[] = []
 
-    scrollTop: number = 0
-    chatsUnreadNumTotal = 0
 
     async initSocialuniChatModule() {
         if (this.openImIsLogin === 0) {
@@ -550,7 +554,7 @@ class SocialChatModule {
     pushChatAndMessagesAction(newChat: SocialuniChatRO) {
         // console.log('出发了pushchat')
         // 如果正在这个chat聊天
-        if (RouterUtil.getCurrentPageURI() === UserPagePath.message && this.chatId === newChat.id) {
+        if (RouterUtil.getCurrentPageURI() === ImPagePath.message && this.chatId === newChat.id) {
             // if (this.chatId === newChat.id) {
             // 则直接往msg增加消息
             // 前台将消息改为已读,修改时间使用后台的就行
@@ -735,10 +739,9 @@ class SocialChatModule {
 
     //获取chats
 
-    getChatsAction() {
-        /*return ChatAPI.getChatsAPI().then((res: ResultRO<ChatVO[]>) => {
-          this.setChats(res.data)
-        })*/
+    async getChatsAction() {
+        const res = await ChatAPI.queryChatListAPI()
+        this.setChats(res.data)
     }
 
     setChats(chats: SocialuniChatRO[]) {

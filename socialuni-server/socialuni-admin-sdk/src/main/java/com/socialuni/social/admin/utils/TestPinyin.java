@@ -27,6 +27,42 @@ public class TestPinyin {
             adf.add(s);
         }
         System.out.println(adf.toString());
+        String chineseCharacter = "汉"; // 要获取笔画数量的汉字
+        int strokeCount = getStrokeCount(chineseCharacter);
+        System.out.println("汉字 " + chineseCharacter + " 的笔画数量为：" + strokeCount);
+
+    }
+
+    public static int getStrokeCount(String chineseCharacter) {
+        int strokeCount = 0;
+        char[] charArray = chineseCharacter.toCharArray();
+        for (char c : charArray) {
+            strokeCount += getStrokeCountOfCharacter(c);
+        }
+        return strokeCount;
+    }
+
+    public static int getStrokeCountOfCharacter(char c) {
+        if (isChineseCharacter(c)) {
+            int unicode = c;
+            // 根据 Unicode 编码范围判断笔画数量
+            if (unicode >= 0x4E00 && unicode <= 0x9FA5) {
+                // 在 Unicode 编码范围内的汉字，可以通过以下公式计算笔画数量
+                // 具体的笔画数量对应关系可以参考汉字的笔画数据库或者笔画查询工具
+                return (unicode <= 0x9FBB) ? 1 : 2;
+            }
+        }
+        return 0;
+    }
+
+    public static boolean isChineseCharacter(char c) {
+        // 判断字符是否为汉字
+        Character.UnicodeBlock ub = Character.UnicodeBlock.of(c);
+        return ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS
+                || ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A
+                || ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_B
+                || ub == Character.UnicodeBlock.CJK_COMPATIBILITY_IDEOGRAPHS
+                || ub == Character.UnicodeBlock.CJK_COMPATIBILITY_IDEOGRAPHS_SUPPLEMENT;
     }
 
     public static String StringFilter(String str) throws PatternSyntaxException {
