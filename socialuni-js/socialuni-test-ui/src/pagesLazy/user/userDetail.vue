@@ -1,28 +1,22 @@
 <template>
   <view class="bg-default">
     <user-detail-view ref="userDetail"></user-detail-view>
-    <msg-input v-if="showMsgInput">
-    </msg-input>
+<!--    <msg-input v-if="showMsgInput">
+    </msg-input>-->
   </view>
 </template>
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
-import {onMounted} from "vue";
-import UniUtil from "socialuni-util/src/util/UniUtil";
 import UserDetailView from "socialuni/src/view/user/UserDetailView.vue";
 
 @Options({
-  components: {MsgInput, UserDetailView}
+  components: {UserDetailView}
 })
-export default class UserDetail extends Vue {
-  $refs: {
-    userDetail: UserDetailView
-  }
-  showMsgInput = false
+export default class UserDetailPage extends Vue {
+  // showMsgInput = false
 
-  created() {
+  /*created() {
     UniUtil.showShareMenu()
 
     onShow(() => {
@@ -38,6 +32,6 @@ export default class UserDetail extends Vue {
         this.$refs.userDetail.init(params)
       })
     })
-  }
+  }*/
 }
 </script>
