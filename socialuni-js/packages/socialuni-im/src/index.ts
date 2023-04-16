@@ -9,6 +9,7 @@ const socialuniImPlugin: SocialuniPlugin = {
         socialChatModule.getChatsAction()
     },
     onMessage(notify: NotifyVO) {
+        console.log('接受了消息')
         if (notify.type === NotifyType.message) {
             console.log('接受了消息')
             console.log(notify.chat)

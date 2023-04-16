@@ -70,7 +70,7 @@ public class MessageService {
 
             return ResultRO.success(socialMessageRO);
 
-        } else if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.chatUser)) {
+        } else if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.chat)) {
 
             SocialuniChatDO chat = SocialuniRepositoryFacade.findById(socialuniUnionIdModler.getId(), SocialuniChatDO.class);
 

@@ -126,36 +126,36 @@ public class NotifyDomain {
         Integer receiveUserId = notify.getBeUserId();
 
         SocialUserAccountDO receiveAccount = socialUserAccountRepository.findByUserIdOrderByUpdateTimeDesc(receiveUserId);
-        if (receiveAccount != null) {
-            String notifyType = notify.getType();
-            String provider = receiveAccount.getProvider();
-            if (NotifyType.comments.contains(notifyType)) {
-                //显示在动态主页右上角的通知，只需要发送者的名称头像图片
+//        if (receiveAccount != null) {
+        String notifyType = notify.getType();
+//        String provider = receiveAccount.getProvider();
+        if (NotifyType.comments.contains(notifyType)) {
+            //显示在动态主页右上角的通知，只需要发送者的名称头像图片
 //                WebsocketServer.sendMessage(receiveUserId.toString(), new NotifyVO(requestUser));
-            }
-            PushMsgDTO pushMsgDTO = null;
+        }
+        PushMsgDTO pushMsgDTO = null;
 
-            if (!NotifyType.notifies.contains(notifyType)) {
-                log.error("错误的通知类型：{}", notifyType);
-                throw new SocialParamsException("错误的通知类型");
-            }
+        if (!NotifyType.notifies.contains(notifyType)) {
+            log.error("错误的通知类型：{}", notifyType);
+            throw new SocialParamsException("错误的通知类型");
+        }
 
-            if (NotifyType.message.equals(notifyType)) {
-                MessageReceiveDO messageReceiveDO = messageReceiveRepository.getReferenceById(notify.getContentId());
-                ChatUserDO chatUserDO = SocialuniRepositoryFacade.findById(messageReceiveDO.getChatUserId(), ChatUserDO.class);
+        if (NotifyType.message.equals(notifyType)) {
+            MessageReceiveDO messageReceiveDO = messageReceiveRepository.getReferenceById(notify.getContentId());
+            ChatUserDO chatUserDO = SocialuniRepositoryFacade.findById(messageReceiveDO.getChatUserId(), ChatUserDO.class);
 //                Optional<ChatDO> chatDOOptional = chatRepository.findById();
-                //如果群聊，直接发送给两个服务器在线的所有用户，并且查找他们未读的。
-                //未登录的时候也查询群聊里面的所有内容
-                SocialuniChatDO socialuniChatDO = SocialuniRepositoryFacade.findById(chatUserDO.getChatId(), SocialuniChatDO.class);
-                NotifyVO notifyVO = new NotifyVO(notify, sendUser, messageReceiveDO, chatUserDO, socialuniChatDO);
-                WebsocketServer.sendMessage(receiveUserId, notifyVO);
+            //如果群聊，直接发送给两个服务器在线的所有用户，并且查找他们未读的。
+            //未登录的时候也查询群聊里面的所有内容
+            SocialuniChatDO socialuniChatDO = SocialuniRepositoryFacade.findById(chatUserDO.getChatId(), SocialuniChatDO.class);
+            NotifyVO notifyVO = new NotifyVO(notify, sendUser, messageReceiveDO, chatUserDO, socialuniChatDO);
+            WebsocketServer.sendMessage(receiveUserId, notifyVO);
                 /*try {
                     stringRedisTemplate.convertAndSend(receiveUserId.toString(), JsonUtil.objectMapper.writeValueAsString(notifyVO));
                 } catch (JsonProcessingException e) {
                     e.printStackTrace();
                 }*/
-            } else {
-                //评论动态
+        } else {
+            //评论动态
                 /*switch (notifyType) {
                     case NotifyType.talk_comment:
                         pushMsgDTO = TalkCommentPushUtils.getTalkPushDTO(provider, notify, requestUser);
@@ -180,8 +180,8 @@ public class NotifyDomain {
                 } else if (provider.equals(SocialuniSupportProviderType.wx)) {
                     WxUtil.wxPushMsgCommon(receiveAccount.getMpOpenId(), provider, pushMsgDTO, notify);
                 }*/
-            }
         }
+//        }
 
 
 //        messagingTemplate.convertAndSendToUser(notify.getReceiveUser().getId().toString(), "/queue/notifications", notifyVO);

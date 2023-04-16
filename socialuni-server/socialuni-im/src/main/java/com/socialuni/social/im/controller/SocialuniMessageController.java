@@ -115,7 +115,7 @@ public class SocialuniMessageController implements SocialuniMessageAPI {
             List<MessageReceiveDO> messageDOS = messageReceiveRepository.findTop30ByChatUserIdAndStatusAndCreateTimeLessThanOrderByCreateTimeDesc(chatUserDO.getId(), MessageReceiveStatus.init, queryVO.getQueryTime());
             messageVOS = SocialMessageROFactory.messageReceiveDOToVOS(messageDOS);
             return ResultRO.success(messageVOS);
-        } else if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.chatUser)) {
+        } else if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.chat)) {
             //则为chatId
 
             Integer chatId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(chatUuid);

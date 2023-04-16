@@ -118,7 +118,7 @@ public class MessageEntity {
         //如果为官方群聊，则所有人都可以发送内容
         //查询用户是否有权限往chat中发送内容
 
-        chatBeUserDO = SocialuniChatUserDOFactory.getOrCreateChatUserBySingleReceiveMsg(chat.getId(), beUserId, mineUser.getUserId());
+        chatBeUserDO = SocialuniChatUserDOFactory.getOrCreateChatUserBySingleReceiveMsg(chat, beUserId, mineUser.getUserId());
 
         List<ChatUserDO> chatSocialuniUserDoS = Arrays.asList(chatUserDO, chatBeUserDO);
 

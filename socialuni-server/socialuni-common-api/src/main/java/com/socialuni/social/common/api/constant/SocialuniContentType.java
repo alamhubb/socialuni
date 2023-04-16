@@ -10,7 +10,7 @@ import java.util.List;
 public class SocialuniContentType {
     public final static String user = "用户";
     public final static String chat = "会话";
-    public final static String chatUser = "用户会话";
+//    public final static String chatUser = "用户会话";
     public final static String userImg = "用户照片";
     public final static String talkImg = "动态照片";
     public final static String talk = "动态";

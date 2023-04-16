@@ -27,7 +27,7 @@ public class ChatUserDO extends SocialuniUserContactBaseDO {
     //置顶标识
     //用户手动操作的，系统没有操作方法，暂时没用
     private Boolean topFlag;
-//    private SocialuniChatDO chat;
+    //    private SocialuniChatDO chat;
     private Integer chatId;
     //是否拉黑了对方
     private Boolean blacklist;
@@ -77,6 +77,12 @@ public class ChatUserDO extends SocialuniUserContactBaseDO {
     //usedetail是否显示buysend
 
     public ChatUserDO() {
+        //如果是系统的，则默认指定
+        this.topFlag = false;
+        //为什么不设置成99，因为此版本没有阅读功能？先试试99
+        this.unreadNum = 0;
+        this.frontShow = true;
+        this.blacklist = false;
     }
 
     //群聊，不需要对方用户
@@ -101,23 +107,12 @@ public class ChatUserDO extends SocialuniUserContactBaseDO {
         this.unreadNum = 0;
     }
 
-    public ChatUserDO(Integer chatId, Integer userId,Integer beUserId) {
-        this.chatId = chatId;
+    public ChatUserDO(SocialuniChatDO chat, Integer userId, Integer beUserId) {
+        this();
+        this.chatId = chat.getId();
         this.setUserId(userId);
         this.setBeUserId(beUserId);
-        //如果是系统的，则默认指定
-        this.topFlag = false;
-        //为什么不设置成99，因为此版本没有阅读功能？先试试99
-        this.unreadNum = 0;
-        this.frontShow = true;
-        this.blacklist = false;
-    }
-
-    //私聊，比群聊多一个对方用户id,对方用户，方便获取对方的头像昵称，展示, 匹配模块有使用
-    public ChatUserDO(SocialuniChatDO chat, Integer userId, Integer receiveUserId) {
-        this(chat, userId);
-        //这里需要看一下，匹配情况，是否要改为1
-//        this.receiveUserId = receiveUserId;
+        this.setType(chat.getType());
     }
 
     public void checkFrontShowAndSetTrue() {
