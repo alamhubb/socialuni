@@ -100,7 +100,7 @@ export default class MessageVO {
             this.isMine = this.user.isMine
             this.id = msg.serverMsgID
             this.readNum = 0
-            this.readStatus = SocialuniCommonStatus.enable
+            this.readStatus = SocialuniCommonStatus.init
             this.status   = msg.status;
             this.isRead = msg.isRead
             this.createTime = msg.createTime

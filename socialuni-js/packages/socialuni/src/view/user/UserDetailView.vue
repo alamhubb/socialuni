@@ -110,7 +110,7 @@
 
             <socialuni-user-info-img :user="user" v-if="user.imgs.length"></socialuni-user-info-img>
 
-            <q-popup ref="applyUserFriendDialog" title="申请添加好友" @confirm="addFriend">
+            <q-popup ref="applyUserFriendDialog" title="申请添加好友111" @confirm="addFriend">
                 <div class="pd">
                     <div>
                         添加好友后才可发起会话，申请原因:
@@ -167,7 +167,6 @@
 import {Options, Prop, Vue, Watch} from 'vue-property-decorator'
 import CenterUserDetailRO from "socialuni-base-api/src/model/social/CenterUserDetailRO"
 import UniUtil from "socialuni-util/src/util/UniUtil"
-import UserInfo from "socialuni/src/view/user/UserInfo.vue"
 import {onMounted} from "vue"
 import AlertUtil from "socialuni-util/src/util/AlertUtil"
 import ToastUtil from "socialuni-util/src/util/ToastUtil"
@@ -194,13 +193,13 @@ import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemMod
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
 import {socialuniUserModule} from "../../store/SocialuniUserModule";
 import {onLoad} from "@dcloudio/uni-app";
+import SocialuniAddFriendType from "socialuni-im-api/src/constant/SocialuniAddFriendType";
 
 @Options({
     components: {
         SocialuniFollowTag,
         QPopup, QIcon, QNavbar,
         MsgInput,
-        UserInfo,
         QInput,
         // TalkItem,
         // TalkOperate,
@@ -339,7 +338,7 @@ export default class UserDetailView extends Vue {
         };
     */
         console.log('123123')
-        await SocialuniFriendAPI.addFriend(new FriendAddQO(this.user.id, this.applyUserFriendContent, SocialuniAddFriendType.accept))
+        await SocialuniFriendAPI.addFriend(new FriendAddQO(this.user.id, this.applyUserFriendContent, SocialuniAddFriendType.apply))
         // await (await socialChatModule.openIm()).addFriend(options)
         ToastUtil.toastLong('添加好友申请发送成功，请耐心等待对方回复')
     }

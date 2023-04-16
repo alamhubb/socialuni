@@ -218,7 +218,6 @@ import QPopup from "socialuni-ui/src/components/QPopup/QPopup.vue";
 import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
 import QNavbar from "socialuni-ui/src/components/QNavbar/QNavbar.vue";
 import QRowItem from "socialuni-ui/src/components/QRowItem/QRowItem.vue";
-import UserInfo from "./UserInfo.vue";
 import SocialuniUserInfoImg from "./SocialuniUserInfoImg.vue";
 import UserSchoolEditDialog from "./UserSchoolEditDialog.vue";
 import QInput from "socialuni-ui/src/components/QInput/QInput.vue";
@@ -239,7 +238,6 @@ import TencentCosAPI from "socialuni-base-api/src/api/TencentCosAPI";
         QIcon,
         QNavbar,
         QRowItem,
-        UserInfo,
         SocialuniUserInfoImg,
         QInput,
         QButton,

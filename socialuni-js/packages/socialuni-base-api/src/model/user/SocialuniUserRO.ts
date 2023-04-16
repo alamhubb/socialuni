@@ -1,4 +1,3 @@
-import {socialuniUserModule} from "socialuni-sdk/src/store/store";
 import SocialUserContentRO from "../social/SocialuniContentRO";
 
 export default class SocialuniUserRO extends SocialUserContentRO{
