@@ -140,7 +140,6 @@ import QTabs from 'socialuni-ui/src/components/QTabs/QTabs.vue'
 import QIcon from 'socialuni-ui/src/components/QIcon/QIcon.vue'
 import SocialTalkFilterDialog from "./SocialTalkFilterDialog.vue";
 import QPullRefresh from "socialuni-ui/src/components/QPullRefresh/QPullRefresh.vue";
-import TalkItem from "./talkItem/TalkItem.vue";
 import TalkTabVO from "socialuni-base-api/src/model/talk/SocialuniTalkTabRO";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import CommonUtil from "socialuni-util/src/util/CommonUtil";
@@ -162,6 +161,7 @@ import {socialuniConfigModule} from "socialuni-base-api/src/store/SocialuniConfi
 import StorageUtil from "socialuni-base-api/src/util/StorageUtil";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
+import TalkItem from "../../component/talkItem/TalkItem.vue";
 
 // todo 后台可控制是否显示轮播图
 @Options({

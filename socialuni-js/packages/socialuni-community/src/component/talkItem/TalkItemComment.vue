@@ -79,7 +79,6 @@
 import {Options, Prop, Vue, Watch} from 'vue-property-decorator'
 import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
 import QButton from "socialuni-ui/src/components/QButton/QButton.vue";
-import ChildComment from "../ChildComment.vue";
 import {socialuniUserModule} from 'socialuni/src/store/SocialuniUserModule';
 import TalkVO from "socialuni-base-api/src/model/talk/TalkVO";
 import ObjectUtil from "socialuni-util/src/util/ObjectUtil";
@@ -92,8 +91,8 @@ import HugAddVO from "socialuni-base-api/src/model/HugAddVO";
 import RouterUtil from "socialuni-util/src/util/RouterUtil";
 import PagePath from "socialuni-constant/constant/PagePath";
 import PageUtil from "socialuni-util/src/util/PageUtil";
-import {socialTalkModule} from "../../../store/SocialTalkModule";
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
+import ChildComment from "./ChildComment.vue";
 
 @Options({
   components: {
