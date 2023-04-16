@@ -81,24 +81,24 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import {socialChatFriendModule, socialChatModule} from "socialuni-sdk/src/store/store"
 import {onLoad, onPullDownRefresh} from "@dcloudio/uni-app";
 import UniUtil from "socialuni-util/src/util/UniUtil";
 import DateUtil from "socialuni-util/src/util/DateUtil";
-import QTabs from "../../components/QTabs/QTabs.vue";
-import OpenImFriendApplyRO from "socialuni-sdk/src/model/friend/OpenImFriendApplyRO";
 import FriendApplyType from "socialuni-constant/constant/FriendApplyType";
 import SocialuniFriendAPI from "socialuni-im-api/src/api/SocialuniFriendAPI";
 import SocialuniFriendApplyUserRO from "socialuni-im-api/src/model/RO/SocialuniFriendApplyUserRO";
-import SocialuniAddFriendStatus from "socialuni-im-api/constant/SocialuniAddFriendStatus";
 import SocialuniCommonStatus from "socialuni-constant/constant/status/SocialuniCommonStatus";
 import ToastUtil from "socialuni-util/src/util/ToastUtil";
 import FriendAddQO from "socialuni-im-api/src/model/QO/firend/FriendAddQO";
 import PageUtil from "socialuni-util/src/util/PageUtil";
-import SocialuniAddFriendType from 'socialuni-im-api/constant/SocialuniAddFriendType'
+import OpenImFriendApplyRO from "socialuni-base-api/src/model/openIm/OpenImFriendApplyRO";
+import {socialChatModule} from "../../store/SocialChatModule";
+import QTabs from "socialuni-ui/src/components/QTabs/QTabs.vue";
 
-@Options({components: {QTabs}})
-export default class ChatFriendPage extends Vue {
+@Options({components: {
+    QTabs
+}})
+export default class FriendApplyListView extends Vue {
   sendFriendApplicationList: OpenImFriendApplyRO[] = []
   FriendApplyType = FriendApplyType
   recvFriendApplicationList: OpenImFriendApplyRO[] = []
@@ -241,7 +241,7 @@ export default class ChatFriendPage extends Vue {
    */
   async getSendFriendApplicationList() {
     console.log(111)
-    ;(await socialChatModule.openIm()).getSendFriendApplicationList().then(({data}) => {
+    /*;(await socialChatModule.openIm()).getSendFriendApplicationList().then(({data}) => {
       console.log(data)
       const list = JSON.parse(data);
       const newList = []
@@ -251,16 +251,15 @@ export default class ChatFriendPage extends Vue {
         newList.push(item)
       }
       this.sendFriendApplicationList = newList
-    })
-
+    })*/
   }
 
   /**
    * 获取收到的好友请求列表
    */
   async getRecvFriendApplicationList() {
-    await socialChatModule.refreshRecvFriendApplicationList()
-    this.recvFriendApplicationList = socialChatModule.recvFriendApplicationList;
+    /*await socialChatModule.refreshRecvFriendApplicationList()
+    this.recvFriendApplicationList = socialChatModule.recvFriendApplicationList;*/
   }
 
   /**

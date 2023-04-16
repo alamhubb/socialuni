@@ -27,7 +27,6 @@
 import {Options, Emit, Model, Prop, Vue, Watch} from 'vue-property-decorator'
 import NodesRef = UniApp.NodesRef
 import SelectorQuery = UniApp.SelectorQuery
-import TalkTabVO from "socialuni-base-api/src/model/talk/TalkTabVO";
 import CommonUtil from "socialuni-util/src/util/CommonUtil";
 import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
 
@@ -57,7 +56,7 @@ export default class QTabs extends Vue {
   uuid: string = UUIDUtil.getClassUUID()
 
   @Prop() readonly value: number
-  @Prop({default: []}) readonly tabs: TalkTabVO[]
+  @Prop({default: []}) readonly tabs: any[]
 
   @Watch('value')
   valueWatch(val, oldVal) {

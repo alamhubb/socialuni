@@ -13,6 +13,4 @@ export default class PagePath {
 
 
 
-  static readonly friend: string = '/pages/chat/friend'
-  static readonly friendApply: string = '/pagesLazy/chat/friendApplyList'
 }

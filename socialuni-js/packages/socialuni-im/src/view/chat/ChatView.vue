@@ -124,6 +124,7 @@ import QInput from "socialuni-ui/src/components/QInput/QInput.vue"
 import SocialuniChatRO from "socialuni-base-api/src/model/SocialuniChatRO"
 import {socialChatModule} from "../../store/SocialChatModule";
 import ChatAPI from "socialuni-im-api/src/api/ChatAPI";
+import ImPageUtil from "../../util/ImPageUtil";
 
 @Options({
     components: {QSearch, QInput, QIcon, QNavbar}
@@ -325,7 +326,7 @@ export default class ChatView extends Vue {
     }
 
     toUserApplyPage() {
-        PageUtil.toFriendApply()
+        ImPageUtil.toFriendApply()
     }
 }
 </script>

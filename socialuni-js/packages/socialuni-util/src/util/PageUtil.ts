@@ -1,5 +1,7 @@
 import RouterUtil from "./RouterUtil";
 import PagePath from "socialuni-constant/constant/PagePath";
+import ImPagePath from "socialuni-im/src/constant/ImPagePath";
+import UserPagePath from "socialuni/src/constant/UserPagePath";
 
 export default class PageUtil {
     static goHome(): void {
@@ -85,11 +87,11 @@ export default class PageUtil {
     }
 
     static toChatFriend() {
-        RouterUtil.navigateTo(UserPagePath.friend)
+        RouterUtil.navigateTo(ImPagePath.friend)
     }
 
     static toFriendApply() {
-        RouterUtil.navigateTo(UserPagePath.friendApply)
+        RouterUtil.navigateTo(ImPagePath.friendApply)
     }
 
     static toMinePage() {
