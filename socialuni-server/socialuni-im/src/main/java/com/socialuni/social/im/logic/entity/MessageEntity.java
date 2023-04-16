@@ -158,7 +158,7 @@ public class MessageEntity {
                 }*/
             //获取当起chatUser的userId
             Integer chatUserId = chatSocialuniUserDo.getUserId();
-            MessageReceiveDO messageReceiveDO = new MessageReceiveDO(chatSocialuniUserDo, message.getId());
+            MessageReceiveDO messageReceiveDO = new MessageReceiveDO(chatSocialuniUserDo, message.getUserId(), message.getId());
             //自己的话不发送通知，自己的话也要构建消息，要不看不见，因为读是读这个表
             if (chatUserId.equals(mineUser.getUserId())) {
                 mineMessageUser = messageReceiveRepository.save(messageReceiveDO);
@@ -167,11 +167,11 @@ public class MessageEntity {
                 chatSocialuniUserDo.setUnreadNum(chatSocialuniUserDo.getUnreadNum() + 1);
                 //接收方，更改前端显示为显示
                 chatSocialuniUserDo.checkFrontShowAndSetTrue();
-                MessageReceiveDO messageReceiveDO1 = messageReceiveRepository.save(messageReceiveDO);
+                messageReceiveDO = messageReceiveRepository.save(messageReceiveDO);
 
-                NotifyDO notifyDO = new NotifyDO(messageReceiveDO1);
+                NotifyDO notifyDO = new NotifyDO(messageReceiveDO);
                 notifyDO.setType(NotifyType.message);
-                notifyDO.setContentId(messageReceiveDO1.getId());
+                notifyDO.setContentId(messageReceiveDO.getId());
                 notifyDO = notifyRepository.save(notifyDO);
                 notifies.add(notifyDO);
             }

@@ -2,6 +2,8 @@ package com.socialuni.social.im.dao.DO;
 
 
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
+import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
+import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -22,7 +24,7 @@ import java.io.Serializable;
         }
 )
 @NoArgsConstructor
-public class SocialuniChatDO extends SocialuniContentBaseDO implements Serializable {
+public class SocialuniChatDO extends SocialuniUnionContentBaseDO implements Serializable {
     private String chatName;
     private String avatar;
     //置顶标识

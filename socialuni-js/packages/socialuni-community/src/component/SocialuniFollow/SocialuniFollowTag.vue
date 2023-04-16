@@ -15,7 +15,7 @@ import QButton from "socialuni-ui/src/components/QButton/QButton.vue";
 import FollowStatus from "socialuni-constant/constant/FollowStatus";
 import SocialUserContentRO from "socialuni-base-api/src/model/social/SocialUserContentRO";
 import FollowAddVO from "socialuni-base-api/src/model/FollowAddVO";
-import FollowAPI from "socialuni-base-api/src/api/socialuni/FollowAPI";
+import FollowAPI from "socialuni-community-api/src/api/FollowAPI";
 
 @Options({
   components: {

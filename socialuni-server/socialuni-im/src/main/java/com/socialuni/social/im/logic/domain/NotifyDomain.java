@@ -120,7 +120,7 @@ public class NotifyDomain {
     }
 
     //发送通知
-    public void sendNotify(NotifyDO notify, SocialuniUserDo requestUser) throws SocialException {
+    public void sendNotify(NotifyDO notify, SocialuniUserDo sendUser) throws SocialException {
         //评论动态
 //        UserDO receiveUser = userRepository.findById(receiveUserId).get();
         Integer receiveUserId = notify.getBeUserId();
@@ -147,7 +147,7 @@ public class NotifyDomain {
                 //如果群聊，直接发送给两个服务器在线的所有用户，并且查找他们未读的。
                 //未登录的时候也查询群聊里面的所有内容
                 SocialuniChatDO socialuniChatDO = SocialuniRepositoryFacade.findById(chatUserDO.getChatId(), SocialuniChatDO.class);
-                NotifyVO notifyVO = new NotifyVO(notify, requestUser, messageReceiveDO, chatUserDO, socialuniChatDO);
+                NotifyVO notifyVO = new NotifyVO(notify, sendUser, messageReceiveDO, chatUserDO, socialuniChatDO);
                 WebsocketServer.sendMessage(receiveUserId, notifyVO);
                 /*try {
                     stringRedisTemplate.convertAndSend(receiveUserId.toString(), JsonUtil.objectMapper.writeValueAsString(notifyVO));

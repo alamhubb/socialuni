@@ -11,7 +11,7 @@ import java.util.List;
  */
 @Data//chatdo+chatUserdo
 public class ChatRO {
-    private Integer id;
+    private String id;
     private String nickname;
     //暂时未用，未来有用的，参考微信私聊右上角，会从那里可以进入用户的详情
     private String receiveUserId;

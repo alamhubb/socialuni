@@ -1,4 +1,3 @@
-
 import PageUtil from "socialuni-util/src/util/PageUtil"
 import RouterUtil from "socialuni-util/src/util/RouterUtil"
 import PagePath from "socialuni-constant/constant/PagePath"
@@ -24,6 +23,8 @@ import OpenImSessionType from "socialuni-constant/constant/openIm/constant/OpenI
 import ImPageUtil from "../util/ImPageUtil";
 import ImPagePath from "../constant/ImPagePath";
 import ChatAPI from "socialuni-im-api/src/api/ChatAPI";
+import MessageViewParams from "../view/chat/MessageViewParams";
+import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 
 
 const openIM = null
@@ -41,6 +42,47 @@ class SocialChatModule {
 
     // chatId: string = null
     chats: SocialuniChatRO[] = []
+
+
+    //仅负责，排序展示，在chatVue界面实现了
+    get showChats (): SocialuniChatRO[] {
+        //a和b比较，返回结果1，则倒序，后者在前面
+        return this.chats.sort((chat, chatAfter) => {
+            //对比时间
+            if (chatAfter.updateTime > chat.updateTime) {
+                return 1
+            } else {
+                return -1
+            }
+            /*//如果置顶优先级比较高，则排前面
+            if (chatAfter.topLevel > chat.topLevel) {
+                return 1
+            } else if (chatAfter.topFlag != chat.topFlag) {
+                //是否置顶，如果一个置顶，一个不置顶，则置顶的排前面
+                if (chatAfter.topFlag) {
+                    return 1
+                } else {
+                    return -1
+                }
+            } else {
+                //对比时间
+                if (chatAfter.updateTime > chat.updateTime) {
+                    return 1
+                } else {
+                    return -1
+                }
+            }*/
+        })
+    }
+
+
+    //因为存在排序，所以index并不是更新了update就是第一个，不总是为0，并不总是第一个,
+    get chat(): SocialuniChatRO {
+        //不再使用index，存在陌生人情况
+        return this.chats[this.chatIndex]
+    }
+
+    // chat: SocialuniChatRO = null
 
     scrollTop: number = 0
     chatsUnreadNumTotal = 0
@@ -74,7 +116,6 @@ class SocialChatModule {
     get imToken() {
         return this.userImToken
     }
-
 
 
     async initSocialuniChatModule() {
@@ -160,24 +201,6 @@ class SocialChatModule {
     }
 
 
-    /*async refreshChats() {
-        const options = {
-            offset: 0,
-            count: 20
-        };
-        ;(await this.openIm()).getConversationListSplit(options).then(({data}) => {
-            const chats: OpenImChatRO[] = JsonUtil.parse(data)
-            const newChats = chats.map(item => {
-                const chat = new SocialuniChatRO(item)
-                if (this.chat && chat.id === this.chat.id) {
-                    this.setChat(chat)
-                }
-                return chat
-            })
-            this.setChats(newChats)
-        })
-    }*/
-
     async checkFriend(user: CenterUserDetailRO) {
         if (!user.isMine) {
             // console.log('=========checkFriend==========')
@@ -202,9 +225,7 @@ class SocialChatModule {
     }
 
 
-    async queryChats() {
 
-    }
 
     async pinConversation(conversationID: string, isPinned: boolean = true) {
         const options: PinCveParams = {
@@ -253,41 +274,6 @@ class SocialChatModule {
         })
     }
 
-    //仅负责，排序展示，在chatVue界面实现了
-    /*get chats (): SocialuniChatRO[] {
-      //a和b比较，返回结果1，则倒序，后者在前面
-      return this.queryChats.sort((chat, chatAfter) => {
-        //如果置顶优先级比较高，则排前面
-        if (chatAfter.topLevel > chat.topLevel) {
-          return 1
-        } else if (chatAfter.topFlag != chat.topFlag) {
-          //是否置顶，如果一个置顶，一个不置顶，则置顶的排前面
-          if (chatAfter.topFlag) {
-            return 1
-          } else {
-            return -1
-          }
-        } else {
-          //对比时间
-          if (chatAfter.updateTime > chat.updateTime) {
-            return 1
-          } else {
-            return -1
-          }
-        }
-      })
-    }*/
-
-
-    //因为存在排序，所以index并不是更新了update就是第一个，不总是为0，并不总是第一个,
-    /*get chat(): SocialuniChatRO {
-        //不再使用index，存在陌生人情况
-        return this.chats[this.chatIndex]
-
-        // return this.chats[0this.chatIndex.]
-    }*/
-
-    chat: SocialuniChatRO = null
 
     //为避免异步加载性能问题，进入用户详情页面就设置chat信息
     async setCurChatByUserId(userId: string) {
@@ -349,10 +335,10 @@ class SocialChatModule {
     }
 
 
-    async setChat(openImChat: SocialuniChatRO) {
+    /*async setChat(openImChat: SocialuniChatRO) {
         this.chat = openImChat
 
-        /*const options = {
+        /!*const options = {
                 conversationID: openImChat.id,
                 startClientMsgID: "",
                 count: 100,
@@ -370,8 +356,8 @@ class SocialChatModule {
             openImChat.messages = msgs.map(item => new MessageVO(null, item))
             this.chat = openImChat
             socialChatModule.scrollToMessagePageBottom()
-        })*/
-    }
+        })*!/
+    }*/
 
     toMessagePageFromUserDetail(userId: string) {
         // PageUtil.toMessagePageByUserId(userId)
@@ -395,12 +381,18 @@ class SocialChatModule {
         chat.receiveId = receiveId
         chat.nickname = chatName
         this.setChat(chat)*/
+
         ImPageUtil.toMessagePageByChatId(receiveId)
     }
 
-    /*get chatIndex(): number {
+    messageViewInit(params: MessageViewParams) {
+
+
+    }
+
+    get chatIndex(): number {
         return this.chats.findIndex(item => item.id === this.chatId)
-    }*/
+    }
 
     get messages(): MessageVO[] {
         if (this.chat) {
@@ -415,9 +407,9 @@ class SocialChatModule {
     //列表中进入，需要调用后台，更新时间。
 
 
-    /*setChatId(chatId: string) {
+    setChatId(chatId: string) {
         this.chatId = chatId
-    }*/
+    }
 
 
     userDetailToMessagePage(chat: SocialuniChatRO) {
@@ -560,7 +552,7 @@ class SocialChatModule {
             // 前台将消息改为已读,修改时间使用后台的就行
             this.readChatAction(newChat)
             //将新消息放到当前msg中并替换
-            // this.pushMsgReplaceChat(this.chatIndex, newChat)
+            this.pushMsgReplaceChat(this.chatIndex, newChat)
             this.scrollToMessagePageBottom()
             // 后台改为已读
             // 向后台发送消息，将收到的消息改为已读
@@ -839,4 +831,4 @@ class SocialChatModule {
     this.chats.unshift(newChat)
   }*/
 
-export const socialChatModule:SocialChatModule = reactive(new SocialChatModule())
+export const socialChatModule: SocialChatModule = reactive(new SocialChatModule())

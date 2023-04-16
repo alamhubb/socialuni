@@ -166,57 +166,40 @@
 import { Options, Prop, Vue, Watch } from 'vue-property-decorator'
 import CenterUserDetailRO from "socialuni-base-api/src/model/social/CenterUserDetailRO"
 import UniUtil from "socialuni-util/src/util/UniUtil"
-import MsgInput from "socialuni-ui/src/components/MsgInput.vue"
-import { onHide, onLoad, onShow } from "@dcloudio/uni-app"
-import UserInfo from "socialuni-ui/src/views/user/UserInfo.vue"
-import {
-  socialChatModule,
-  socialuniConfigModule,
-  socialuniSystemModule,
-  socialuniUserModule
-} from "socialuni-sdk/src/store/store"
-import { AddFriendParams } from "socialuni-sdk/src/plugins/open-im-sdk"
+import UserInfo from "socialuni/src/view/user/UserInfo.vue"
 import { onMounted } from "vue"
-import SocialuniUserAPI from "socialuni-base-api/src/api/socialuni/SocialuniUserAPI"
-import QNavbar from "../../components/QNavbar/QNavbar.vue"
-import QIcon from "../../components/QIcon/QIcon.vue"
-import QPopup from "../../components/QPopup/QPopup.vue"
 import AlertUtil from "socialuni-util/src/util/AlertUtil"
 import ToastUtil from "socialuni-util/src/util/ToastUtil"
 import UserSchoolEditDialog from "./UserSchoolEditDialog.vue"
 import TalkVO from "socialuni-base-api/src/model/talk/TalkVO"
 import FollowStatus from "socialuni-constant/constant/FollowStatus"
-import PageUtil from "socialuni-util/src/util/PageUtil"
-import MsgUtil from "socialuni-util/src/util/MsgUtil"
-import SocialuniTalkAPI from "socialuni-base-api/src/api/socialuni/SocialuniTalkAPI"
-import UserUtil from "socialuni-util/src/util/UserUtil"
-import FollowAddVO from "socialuni-base-api/src/model/FollowAddVO"
-import FollowAPI from "socialuni-base-api/src/api/socialuni/FollowAPI"
-import QInput from "../../components/QInput/QInput.vue"
-import TalkItem from "../talk/talkItem/TalkItem.vue"
-import TalkOperate from "../talk/talkOperate.vue"
-import QButton from "../../components/QButton/QButton.vue"
-import QSearch from "../../components/QSearch/QSearch.vue"
-import QPcModel from "../../components/QPcModel/QPcModel.vue"
-import SocialGenderTag from "../../components/SocialGenderTag/SocialGenderTag.vue"
-import QRowItem from "../../components/QRowItem/QRowItem.vue"
 import SocialuniUserInfoImg from "./SocialuniUserInfoImg.vue"
-import SocialuniFollowTag from "../../components/SocialuniFollow/SocialuniFollowTag.vue"
 import SocialuniFriendAPI from "socialuni-im-api/src/api/SocialuniFriendAPI"
 import FriendAddQO from "socialuni-im-api/src/model/QO/firend/FriendAddQO"
-import SocialuniAddFriendType from 'socialuni-im-api/constant/SocialuniAddFriendType'
+import QPopup from "socialuni-ui/src/components/QPopup/QPopup.vue";
+import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
+import QInput from "socialuni-ui/src/components/QInput/QInput.vue";
+import QButton from "socialuni-ui/src/components/QButton/QButton.vue";
+import QSearch from "socialuni-ui/src/components/QSearch/QSearch.vue";
+import QNavbar from "socialuni-ui/src/components/QNavbar/QNavbar.vue";
+import SocialuniFollowTag from "socialuni-community/src/component/SocialuniFollow/SocialuniFollowTag.vue";
+import MsgInput from "socialuni-community/src/component/MsgInput.vue";
+import SocialGenderTag from "../../component/SocialGenderTag/SocialGenderTag.vue";
+import QRowItem from "socialuni-ui/src/components/QRowItem/QRowItem.vue";
 
 @Options({
   components: {
     SocialuniFollowTag,
-    QPopup, QIcon, QNavbar, MsgInput, UserInfo,
+    QPopup, QIcon, QNavbar,
+      MsgInput,
+      UserInfo,
     QInput,
-    TalkItem,
-    TalkOperate,
+    // TalkItem,
+    // TalkOperate,
     QButton,
     UserSchoolEditDialog,
     QSearch,
-    QPcModel,
+    // QPcModel,
     SocialGenderTag,
     QRowItem,
     SocialuniUserInfoImg

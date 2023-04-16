@@ -102,6 +102,8 @@ import DateUtil from "socialuni-util/src/util/DateUtil";
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
 import FollowAPI from "socialuni-community-api/src/api/FollowAPI";
 import SocialGenderTag from "socialuni/src/component/SocialGenderTag/SocialGenderTag.vue";
+import UserPagePath from "socialuni/src/constant/UserPagePath";
+import UserPageUtil from "socialuni/src/util/UserPageUtil";
 
 @Options({
   components: {
@@ -159,7 +161,7 @@ export default class TalkItemHead extends Vue {
 
   toUserDetailVue() {
     if (RouterUtil.getCurrentPageURI() !== UserPagePath.userDetail) {
-      PageUtil.toUserDetail(this.talk.user.id)
+      UserPageUtil.toUserDetail(this.talk.user.id)
     }
   }
 

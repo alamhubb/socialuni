@@ -12,6 +12,9 @@ public class SocialuniChatDOFactory {
 
     public static Integer getChatIdByCreateSingleChat() {
         SocialuniChatDO chatDO = new SocialuniChatDO();
+
+        Integer uid = SocialuniUnionIdFacede.createChatUnionId();
+        chatDO.setUnionId(uid);
         chatDO.setType(ChatType.single);
         chatDO = SocialuniRepositoryFacade.save(chatDO);
         return chatDO.getId();

@@ -51,7 +51,6 @@
               {{ chatsUnreadNumTotal }}
             </view>-->
         <view class="cu-list menu-avatar pb-50px">
-            <!--      {{ chats }}-->
             <view v-for="chat in chatList" :key="chat.id" class="cu-item" @click="toMessagePage(chat)"
                   @longpress="showBottomMenuClick(chat.id)">
                 <image class="cu-avatar radius lg" :src="chat.avatar"/>
@@ -70,6 +69,12 @@
                     <view>
                         <view class="color-content text-sm flex">
                             <view class="text-cut text-sm">
+                                <template v-if="chat.messages.length">
+                                    {{ chat.messages[chat.messages.length - 1].content }}
+                                </template>
+                                <template v-else>
+                                    {{ chat.lastContent }}
+                                </template>
                                 <!--                <template v-if="chat.status === waitOpenStatus">
                                                   会话待开启
                                                 </template>
@@ -82,7 +87,7 @@
                                                 <template v-else>
                                                   会话已开启
                                                 </template>-->
-                                {{ chat.lastContent }}
+
                             </view>
                         </view>
                     </view>

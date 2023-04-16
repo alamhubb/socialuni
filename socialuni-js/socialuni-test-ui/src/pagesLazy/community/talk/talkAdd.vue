@@ -141,7 +141,6 @@ import SocialTagAdd from "socialuni-community/src/component/SocialTagAdd/SocialT
 import TalkAddTagSearch from "socialuni-community/src/component/TalkAddTagSearch.vue";
 import QCityPicker from "socialuni-community/src/component/QCityPicker/QCityPicker.vue";
 import AlertUtil from "socialuni-util/src/util/AlertUtil";
-import PlatformUtils from "../../../../packages/socialuni/src/utils/PlatformUtils";
 import { socialuniUserModule } from 'socialuni/src/store/SocialuniUserModule';
 import {socialLocationModule} from "socialuni-community/src/store/SocialLocationModule";
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
@@ -165,6 +164,7 @@ import GenderType from "socialuni-constant/constant/GenderType";
 import CosAuthRO from "socialuni-base-api/src/model/cos/CosAuthRO";
 import LocationUtil from "socialuni-community/src/util/LocationUtil";
 import EnumStrVO from "socialuni-constant/constant/EnumStrVO";
+import PlatformUtils from "socialuni/src/utils/PlatformUtils";
 
 @Options({
   components: {

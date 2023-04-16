@@ -8,11 +8,10 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import UniUtil from "socialuni-sdk/src/utils/UniUtil";
-import MsgInput from "socialuni-view/src/components/MsgInput.vue";
 import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
-import UserDetailView from "socialuni-view/src/views/user/UserDetailView.vue";
 import {onMounted} from "vue";
+import UniUtil from "socialuni-util/src/util/UniUtil";
+import UserDetailView from "socialuni/src/view/user/UserDetailView.vue";
 
 @Options({
   components: {MsgInput, UserDetailView}

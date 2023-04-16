@@ -47,8 +47,8 @@ public class MessageReceiveDO extends SocialuniUserContactBaseDO implements Seri
 
     private Integer chatUserId;
 
-    public MessageReceiveDO(ChatUserDO chatUserDO, Integer messageId) {
-        super(chatUserDO);
+    public MessageReceiveDO(ChatUserDO chatUserDO, Integer sendUserId, Integer messageId) {
+        super(sendUserId, chatUserDO.getUserId());
         this.chatUserId = chatUserDO.getId();
         this.messageId = messageId;
         this.isMine = chatUserDO.getBeUserId().equals(chatUserDO.getUserId());

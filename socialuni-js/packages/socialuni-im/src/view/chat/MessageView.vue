@@ -1,5 +1,6 @@
 <template>
     <view class="pb-50 h100p">
+        {{123}}
         <q-navbar show-back :title="pageTitle">
             <div class="row-end-center flex-1">
                 <q-icon icon="list-dot" size="20" @click="openMoreMenu"></q-icon>
@@ -147,6 +148,15 @@
                             </div>
                         </div>
                     </div>
+                    <div>
+                        {{ chatId }}
+                    </div>
+                    <div>
+                        {{ chatIndex }}
+                    </div>
+                    <div>
+                        {{ chat.nickname }}
+                    </div>
                 </view>
             </view>
             <!--      <view v-else class="w100p row-center" :class="showMsgHint?'pt-70px':'pt-10px'">
@@ -275,6 +285,7 @@ import SocialuniAppAPI from "socialuni-base-api/src/api/SocialuniAppAPI";
 import DomFile from "socialuni-util/src/model/DomFile";
 import CosService from "socialuni/src/service/CosService";
 import UserCheckUtil from "socialuni/src/util/UserCheckUtil";
+import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
 
 @Options({components: {MessageItemContent, SocialuniReportDialog, QIcon, QNavbar}})
 export default class MessageView extends Vue {
@@ -308,7 +319,6 @@ export default class MessageView extends Vue {
     upperThreshold = 300
     userId: string = null
     groupId: string = null
-    chatId: string = null
     title: string = '聊天'
     queryTime: Date = null
 
@@ -322,23 +332,51 @@ export default class MessageView extends Vue {
         })
     }
 
+    get chatId() {
+        return socialChatModule.chatId
+    }
+    get chatIndex() {
+        return socialChatModule.chatIndex
+    }
+
+    get chat() {
+        return socialChatModule.chat
+    }
+
+
+    get messages() {
+        return socialChatModule.messages
+    }
+
+    get scrollTop() {
+        return socialChatModule.scrollTop
+    }
+
+    get mineUser() {
+        return socialuniUserModule.mineUser
+    }
 
     async init(params: MessageViewParams) {
         //  不存在前台缓存的问题,防止页面数据没有被及时刷新。 缓存之前页面的数据。
         //  issue: I6EZ82
         //
-        socialChatModule.chat = null;
         if (!params.chatId) {
             AlertUtil.error('缺少会话信息')
         }
-        const chat = new SocialuniChatRO()
-        // chat.receiveId = params.chatId
-        chat.id = params.chatId
-        chat.loadMore = LoadMoreType.more
+        let chat = socialChatModule.chats.find(item => item.id === params.chatId)
+        console.log(1111)
+        console.log(chat)
+        if (!chat) {
+            chat = new SocialuniChatRO()
+            // chat.receiveId = params.chatId
+            chat.id = params.chatId
+            chat.loadMore = LoadMoreType.more
+            socialChatModule.chats.unshift(chat)
+        }
         // if (params.nickname) {
         //   chat.nickname = params.nickname
         // }
-        socialChatModule.setChat(chat)
+        socialChatModule.setChatId(chat.id)
 
         this.queryTime = new Date()
         await this.queryMessages()
@@ -355,22 +393,6 @@ export default class MessageView extends Vue {
         }*/
     }
 
-
-    get messages() {
-        return socialChatModule.messages
-    }
-
-    get chat() {
-        return socialChatModule.chat
-    }
-
-    get scrollTop() {
-        return socialChatModule.scrollTop
-    }
-
-    get mineUser() {
-        return socialuniUserModule.mineUser
-    }
 
     onUnload() {
         socialChatModule.scrollTop = 0
@@ -492,7 +514,7 @@ export default class MessageView extends Vue {
                 item.url = socialAppModule.cosHttpPath + item.src;
             })
             // 上传
-            await CosUtil.postImgList(imgFiles, cosAuthRO)
+            await CosService.postImgList(imgFiles, cosAuthRO)
             // 发送图片
             imgFiles.forEach(item => {
                 socialChatModule.pushVideoMessage(item.url);
@@ -508,7 +530,7 @@ export default class MessageView extends Vue {
      */
     async chooseImage() {
         //获取cos认证信息
-        const cosAuthRO: CosAuthRO = await CosUtil.getCosAuthRO()
+        const cosAuthRO: CosAuthRO = await CosService.getCosAuthRO()
         const imgFiles: DomFile[] = await UniUtil.chooseImage(1)
         //  this.showImgFiles.push(...imgFiles)
         if (cosAuthRO) {
