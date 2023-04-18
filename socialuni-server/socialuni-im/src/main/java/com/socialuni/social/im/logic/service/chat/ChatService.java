@@ -1,27 +1,45 @@
 package com.socialuni.social.im.logic.service.chat;
 
 
+import com.socialuni.social.common.api.constant.SocialuniContentType;
+import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
+import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
+import com.socialuni.social.im.api.model.QO.SocialuniChatQueryQO;
+import com.socialuni.social.im.api.model.RO.SocialMessageRO;
 import com.socialuni.social.im.dao.DO.ChatUserDO;
+import com.socialuni.social.im.dao.DO.message.MessageDO;
+import com.socialuni.social.im.dao.DO.message.MessageReceiveDO;
+import com.socialuni.social.im.dao.repository.MessageReceiveRepository;
 import com.socialuni.social.im.enumeration.ChatStatus;
 import com.socialuni.social.im.enumeration.ChatType;
 import com.socialuni.social.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.im.dao.repository.ChatRepository;
 import com.socialuni.social.im.dao.repository.ChatUserRepository;
+import com.socialuni.social.im.enumeration.MessageReceiveStatus;
+import com.socialuni.social.im.enumeration.MessageStatus;
 import com.socialuni.social.im.logic.domain.ChatQueryDomain;
 import com.socialuni.social.im.logic.foctory.SocialChatROFactory;
 import com.socialuni.social.im.api.model.RO.ChatRO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
+import com.socialuni.social.im.logic.foctory.SocialMessageROFactory;
+import com.socialuni.social.im.logic.foctory.SocialuniChatUserDOFactory;
 import com.socialuni.social.im.model.message.chat.ChatReadVO;
 import com.socialuni.social.im.model.message.chat.ChatRemoveVO;
 import com.socialuni.social.im.model.message.chat.OpenChatVO;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
+import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @author qinkaiyuan
@@ -37,7 +55,8 @@ public class ChatService {
     @Resource
     ChatQueryDomain chatQueryDomain;
 
-
+    @Resource
+    private MessageReceiveRepository messageReceiveRepository;
     //一个陌生用户，他允许陌生人消息。
     //点击消息，就可以直接进入消息页面。
     //这时候是否创建 chat，还是发了消息再创建。
@@ -62,14 +81,39 @@ public class ChatService {
         //怎么排序呢。 没登录查 chats, 登录了查 chatUsers.
 
 
-
         return new ResultRO<>(chatQueryDomain.getChats());
 //        return new ResultRO<>();
     }
 
-//    public ResultRO<ChatRO> queryChat(UserIdVO receiveUserVO) {
-//        return null;
-//    }
+    public ResultRO<ChatRO> queryChat(SocialuniChatQueryQO socialuniChatQueryQO) {
+        String chatUuid = socialuniChatQueryQO.getChatId();
+
+        SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidNotNull(chatUuid);
+
+        //私聊
+        if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.user)) {
+            Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+            Integer beUserId = socialuniUnionIdModler.getId();
+
+            //如果用户存在查看会话
+            ChatUserDO chatUserDO = SocialuniChatUserDOFactory.getOrCreateChatUserBySingleSendMsg(mineUserId, beUserId);
+
+            ChatRO chatRO = SocialChatROFactory.getChatROByQueryChat(chatUserDO, true);
+
+            return ResultRO.success(chatRO);
+        } else if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.chat)) {
+            //则为chatId
+            Integer chatId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(chatUuid);
+
+            SocialuniChatDO chatDO = SocialuniRepositoryFacade.findById(chatId, SocialuniChatDO.class);
+
+            ChatRO chatRO = SocialChatROFactory.getNoLoginChatRO(chatDO);
+
+            return ResultRO.success(chatRO);
+        } else {
+            throw new SocialParamsException("错误的会话标识");
+        }
+    }
 
 
     public ResultRO<ChatRO> openChat(OpenChatVO chatVO) {
@@ -116,10 +160,7 @@ public class ChatService {
             chatUserDO = chatResult.getMineChatUser();
         }
 
-        SocialuniChatDO socialuniChatDO = SocialuniRepositoryFacade.findById(chatUserDO.getChatId(), SocialuniChatDO.class);
-
-
-        ChatRO chatUserVO = SocialChatROFactory.getChatRO(socialuniChatDO, chatUserDO, true);
+        ChatRO chatUserVO = SocialChatROFactory.getChatROByQueryChat(chatUserDO, true);
         return chatUserVO;
     }
 

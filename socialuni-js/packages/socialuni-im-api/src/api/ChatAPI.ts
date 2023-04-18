@@ -2,6 +2,7 @@ import SocialuniChatRO from 'socialuni-base-api/src/model/SocialuniChatRO'
 import socialuniImRequest from "./socialuniImRequest";
 import ChatReadVO from "socialuni-base-api/src/model/chat/ChatReadVO";
 import ChatRemoveVO from "socialuni-base-api/src/model/chat/ChatRemoveVO";
+import ChatQueryQO from "../model/QO/chat/ChatQueryQO";
 
 export default class ChatAPI {
     /*static getChatAPI (user: UserVO) {
@@ -11,6 +12,10 @@ export default class ChatAPI {
 
     static queryChatListAPI() {
         return socialuniImRequest.get<SocialuniChatRO[]>('socialuni/chat/queryChatList')
+    }
+
+    static queryChatAPI(queryQO: ChatQueryQO) {
+        return socialuniImRequest.get<SocialuniChatRO>('socialuni/chat/queryChat', queryQO)
     }
 
     static readChatAPI(chatId: string, messageIds: string[]) {

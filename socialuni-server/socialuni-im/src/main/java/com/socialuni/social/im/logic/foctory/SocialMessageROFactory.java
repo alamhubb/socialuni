@@ -2,6 +2,8 @@ package com.socialuni.social.im.logic.foctory;
 
 
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
+import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
+import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.im.enumeration.MessageReadStatus;
 import com.socialuni.social.im.enumeration.MessageStatus;
@@ -26,12 +28,17 @@ import java.util.List;
 @Component
 public class SocialMessageROFactory {
 
-    public static SocialMessageRO getMessageRO(MessageDO messageDO, Integer lookMessageUserId) {
+    public static SocialMessageRO getMessageRO(MessageDO messageDO, Integer beUserId) {
         SocialMessageRO messageRO = new SocialMessageRO();
-
         SocialuniUserDo userDO = SocialuniUserUtil.getAndCheckUserNotNull(messageDO.getUserId());
-        SocialuniUserRO messageUser = SocialuniUserROFactory.getUserRO(userDO, SocialuniUserUtil.getMineUserNotNull());
-        boolean isMine = messageDO.getUserId().equals(lookMessageUserId);
+
+
+        SocialuniUserDo beUser = SocialuniUserUtil.getAllowNull(beUserId);
+
+
+        SocialuniUserRO messageUser = SocialuniUserROFactory.getUserRO(userDO, beUser);
+
+        boolean isMine = messageDO.getUserId().equals(beUserId);
 
         messageRO.setId(messageDO.getUnionId());
         messageRO.setContent(messageDO.getContent());
@@ -65,7 +72,7 @@ public class SocialMessageROFactory {
 
     public static SocialMessageRO getMessageRO(MessageReceiveDO messageReceive) {
 
-        MessageDO messageDO = SocialuniRepositoryFacade.findById(messageReceive.getMessageId(),MessageDO.class);
+        MessageDO messageDO = SocialuniRepositoryFacade.findById(messageReceive.getMessageId(), MessageDO.class);
 
         SocialMessageRO messageRO = SocialMessageROFactory.getMessageRO(messageDO, messageReceive.getBeUserId());
         //涉及到举报，不知道是msgid还是msguserid，所以暂时取消，统一使用msgid，删除和举报

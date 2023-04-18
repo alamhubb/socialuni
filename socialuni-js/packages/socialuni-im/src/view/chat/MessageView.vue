@@ -1,6 +1,6 @@
 <template>
     <view class="pb-50 h100p">
-        {{123}}
+        {{ 123 }}
         <q-navbar show-back :title="pageTitle">
             <div class="row-end-center flex-1">
                 <q-icon icon="list-dot" size="20" @click="openMoreMenu"></q-icon>
@@ -147,15 +147,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div>
-                        {{ chatId }}
-                    </div>
-                    <div>
-                        {{ chatIndex }}
-                    </div>
-                    <div>
-                        {{ chat.nickname }}
                     </div>
                 </view>
             </view>
@@ -335,6 +326,7 @@ export default class MessageView extends Vue {
     get chatId() {
         return socialChatModule.chatId
     }
+
     get chatIndex() {
         return socialChatModule.chatIndex
     }
@@ -363,22 +355,13 @@ export default class MessageView extends Vue {
         if (!params.chatId) {
             AlertUtil.error('缺少会话信息')
         }
-        let chat = socialChatModule.chats.find(item => item.id === params.chatId)
-        console.log(1111)
-        console.log(chat)
-        if (!chat) {
-            chat = new SocialuniChatRO()
-            // chat.receiveId = params.chatId
-            chat.id = params.chatId
-            chat.loadMore = LoadMoreType.more
-            socialChatModule.chats.unshift(chat)
-        }
         // if (params.nickname) {
         //   chat.nickname = params.nickname
         // }
-        socialChatModule.setChatId(chat.id)
+        socialChatModule.setChatId(params.chatId)
 
         this.queryTime = new Date()
+        console.log('初始查询')
         await this.queryMessages()
 
         socialChatModule.scrollToMessagePageBottom()
@@ -413,6 +396,7 @@ export default class MessageView extends Vue {
         if (this.chat.loadMore === LoadMoreType.more) {
             // 执行正在加载动画
             this.chat.loadMore = LoadMoreType.loading
+            console.log('滚动到顶部查询')
             this.queryMessages()
         }
     }
@@ -655,12 +639,18 @@ export default class MessageView extends Vue {
         return []
     }
 
-    queryMessages() {
+    queryChat(){
+
+    }
+
+    queryMessages(initQuery: boolean = false) {
+        // console.trace('chaxun')
         return MessageAPI.queryMessagesAPI(this.chat.id, this.queryTime).then((res) => {
             const resMessages: MessageVO[] = res.data
             //获取拼接消息之前，顶部消息的位置
             // const nodeBox: NodesRef = query.select('.scrollView')
             const query: SelectorQuery = uni.createSelectorQuery().in(this)
+            //保持当前位置使用
             let preFirstMsgId: string = null
             if (this.messages.length) {
                 preFirstMsgId = '#m' + this.messages[0].id
@@ -681,18 +671,22 @@ export default class MessageView extends Vue {
                 }
                 if (resMessages.length) {
                     this.queryTime = resMessages[0].createTime
-                    this.messages.unshift(...resMessages)
-                    //获取添加后的之前顶部位置，然后滚动到此位置
-                    this.$nextTick(() => {
-                        const query: SelectorQuery = uni.createSelectorQuery().in(this)
-                        // const nodeBox: NodesRef = query.select('.scrollView')
-                        const nodeBox: NodesRef = query.select(preFirstMsgId)
-                        nodeBox.boundingClientRect((lastNodeRes: NodeInfo) => {
-                            if (lastNodeRes) {
-                                socialChatModule.scrollTop = lastNodeRes.top - preTop
-                            }
-                        }).exec()
-                    })
+                    if (initQuery){
+                        socialChatModule.chat.messages = resMessages
+                    }else {
+                        socialChatModule.chat.messages.unshift(...resMessages)
+                        //获取添加后的之前顶部位置，然后滚动到此位置
+                        this.$nextTick(() => {
+                            const query: SelectorQuery = uni.createSelectorQuery().in(this)
+                            // const nodeBox: NodesRef = query.select('.scrollView')
+                            const nodeBox: NodesRef = query.select(preFirstMsgId)
+                            nodeBox.boundingClientRect((lastNodeRes: NodeInfo) => {
+                                if (lastNodeRes) {
+                                    socialChatModule.scrollTop = lastNodeRes.top - preTop
+                                }
+                            }).exec()
+                        })
+                    }
                 }
             }).exec()
             /* setTimeout(() => {

@@ -8,14 +8,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class SocialuniUserROFactory {
-    public static SocialuniUserRO getUserRO(SocialuniUserDo userDO, SocialuniUserDo mineUser) {
+    public static SocialuniUserRO getUserRO(SocialuniUserDo userDO, SocialuniUserDo lookUser) {
         //user基础信息
         SocialuniUserRO user = new SocialuniUserRO();
         String userUid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(userDO.getUnionId());
-        if (mineUser == null) {
+        if (lookUser == null) {
             user.setIsMine(false);
         } else {
-            user.setIsMine(mineUser.getUserId().equals(userDO.getUserId()));
+            user.setIsMine(lookUser.getUserId().equals(userDO.getUserId()));
         }
         user.setId(userUid);
         user.setAge(userDO.getAge());

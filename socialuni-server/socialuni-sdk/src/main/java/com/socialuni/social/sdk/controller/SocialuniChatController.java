@@ -1,6 +1,7 @@
 package com.socialuni.social.sdk.controller;
 
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.im.api.model.QO.SocialuniChatQueryQO;
 import com.socialuni.social.im.logic.service.chat.ChatService;
 import com.socialuni.social.sdk.feignAPI.SocialuniChatAPI;
 import com.socialuni.social.im.model.message.chat.OpenChatVO;
@@ -37,6 +38,11 @@ public class SocialuniChatController implements SocialuniChatAPI {
     @Override
     public ResultRO<List<ChatRO>> queryChatList() {
         return chatService.queryChatList();
+    }
+
+    @Override
+    public ResultRO<ChatRO> queryChat(SocialuniChatQueryQO socialuniChatQueryQO) {
+        return chatService.queryChat(socialuniChatQueryQO);
     }
 
     @Override

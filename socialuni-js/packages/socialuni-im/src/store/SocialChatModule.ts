@@ -25,6 +25,7 @@ import ImPagePath from "../constant/ImPagePath";
 import ChatAPI from "socialuni-im-api/src/api/ChatAPI";
 import MessageViewParams from "../view/chat/MessageViewParams";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
+import ChatQueryQO from "socialuni-im-api/src/model/QO/chat/ChatQueryQO";
 
 
 const openIM = null
@@ -45,7 +46,7 @@ class SocialChatModule {
 
 
     //仅负责，排序展示，在chatVue界面实现了
-    get showChats (): SocialuniChatRO[] {
+    get showChats(): SocialuniChatRO[] {
         //a和b比较，返回结果1，则倒序，后者在前面
         return this.chats.sort((chat, chatAfter) => {
             //对比时间
@@ -90,6 +91,105 @@ class SocialChatModule {
     setOpenImLoginSuccess() {
         this.openImIsLogin = 2
     }
+
+
+    setChatId(chatId: string) {
+        let chat = socialChatModule.chats.find(item => item.id === chatId)
+        if (!chat) {
+            chat = new SocialuniChatRO()
+            // chat.receiveId = params.chatId
+            chat.id = chatId
+            chat.loadMore = LoadMoreType.more
+            socialChatModule.chats.unshift(chat)
+
+            ChatAPI.queryChatAPI(new ChatQueryQO(chatId)).then(res => {
+                this.pushMsgReplaceChatByChat(res.data)
+            })
+        }
+        this.chatId = chatId
+    }
+
+    //后台推送了一条消息，你不知道前台是否有这条消息，后台更不可能知道前台是否删除了这条消息
+    //就直接push进去就行了。然后方法内部判断，是否有，有的话替换，msg push，没有的话直接unshift
+    //有三种可能
+    //一，在展示当前chat，2没在，但是列表中有，3列表中没有
+    //如果是正在聊的，需要改为，已读，先不做已读未读
+
+    pushChatAndMessagesAction(newChat: SocialuniChatRO) {
+        // console.log('出发了pushchat')
+        // 如果正在这个chat聊天
+        if (RouterUtil.getCurrentPageURI() === ImPagePath.message && this.chatId === newChat.id) {
+            // if (this.chatId === newChat.id) {
+            // 则直接往msg增加消息
+            // 前台将消息改为已读,修改时间使用后台的就行
+            this.readChatAction(newChat)
+            //将新消息放到当前msg中并替换
+            this.pushMsgReplaceChat(this.chatIndex, newChat)
+            this.scrollToMessagePageBottom()
+            // 后台改为已读
+            // 向后台发送消息，将收到的消息改为已读
+            // 如果当前就是这个聊天
+        } else {
+            //将新消息放到当前msg中并替换
+            this.pushMsgReplaceChatByChat(newChat)
+            //不需要吧，后台chat应该计算好当前未读数量
+            /*!// 如果已登录
+            if (UserStore.hasUser() && chat.type !== ChatType.system_group) {
+              chat.unreadNum = newChat.unreadNum
+            } else {
+              chat.unreadNum = chat.unreadNum + 1
+            }*/
+
+            // 不是正在这个chat聊天，但是chats列表中包含这个chat
+            // 如果列表中已经包含次chat
+            // 则找到chat，赋值,加入新message
+            // 在列表中将这个chat放到最前面
+            // 找到需要添加内容的chat
+        }
+        //计算未读数量
+        this.computedChatsUnreadNumTotalAction()
+    }
+
+    //替换chat消息，如果不存在则添加
+    pushMsgReplaceChatByChat(chat: SocialuniChatRO) {
+        if (chat){
+            let chatIndex = socialChatModule.chats.findIndex(item => item.id === chat.id)
+            if (chatIndex > 0) {
+                const oldChat = this.chats[chatIndex]
+                const messages: MessageVO[] = oldChat.messages
+                //将新消息放到当前msg中
+                messages.push(...chat.messages)
+
+                messages
+
+                chat.messages = messages
+                chat.loadMore = oldChat.loadMore
+                //不需要替换，修改了
+                this.replaceChat(chatIndex, chat)
+            } else {
+                this.chats.unshift(chat)
+            }
+        }
+    }
+
+
+    //来消息后，替换已有chat
+    pushMsgReplaceChat(chatIndex, chat: SocialuniChatRO) {
+        const oldChat = this.chats[chatIndex]
+        const messages: MessageVO[] = oldChat.messages
+        //将新消息放到当前msg中
+        messages.push(...chat.messages)
+        chat.messages = messages
+        chat.loadMore = oldChat.loadMore
+        //不需要替换，修改了
+        this.replaceChat(chatIndex, chat)
+    }
+
+
+    replaceChat(chatIndex, chat: SocialuniChatRO) {
+        this.chats.splice(chatIndex, 1, chat)
+    }
+
 
     setOpenImLogging() {
         this.openImIsLogin = 1
@@ -223,8 +323,6 @@ class SocialChatModule {
             })
         }
     }
-
-
 
 
     async pinConversation(conversationID: string, isPinned: boolean = true) {
@@ -407,11 +505,6 @@ class SocialChatModule {
     //列表中进入，需要调用后台，更新时间。
 
 
-    setChatId(chatId: string) {
-        this.chatId = chatId
-    }
-
-
     userDetailToMessagePage(chat: SocialuniChatRO) {
         //第一步，先看列表中是否已有与此用户的聊天列表
         const findChat = this.chats.find(item => item.id === chat.id)
@@ -449,23 +542,6 @@ class SocialChatModule {
                 // userModule.user.shell -= 10
             }
         })
-    }
-
-    //来消息后，替换已有chat
-    pushMsgReplaceChat(chatIndex, chat: SocialuniChatRO) {
-        const oldChat = this.chats[chatIndex]
-        const messages: MessageVO[] = oldChat.messages
-        //将新消息放到当前msg中
-        messages.push(...chat.messages)
-        chat.messages = messages
-        chat.loadMore = oldChat.loadMore
-        //不需要替换，修改了
-        this.replaceChat(chatIndex, chat)
-    }
-
-
-    replaceChat(chatIndex, chat: SocialuniChatRO) {
-        this.chats.splice(chatIndex, 1, chat)
     }
 
 
@@ -536,52 +612,6 @@ class SocialChatModule {
         // ScrollUtil.scrollTo(this.messages.length * 500)
     }
 
-
-    //后台推送了一条消息，你不知道前台是否有这条消息，后台更不可能知道前台是否删除了这条消息
-    //就直接push进去就行了。然后方法内部判断，是否有，有的话替换，msg push，没有的话直接unshift
-    //有三种可能
-    //一，在展示当前chat，2没在，但是列表中有，3列表中没有
-    //如果是正在聊的，需要改为，已读，先不做已读未读
-
-    pushChatAndMessagesAction(newChat: SocialuniChatRO) {
-        // console.log('出发了pushchat')
-        // 如果正在这个chat聊天
-        if (RouterUtil.getCurrentPageURI() === ImPagePath.message && this.chatId === newChat.id) {
-            // if (this.chatId === newChat.id) {
-            // 则直接往msg增加消息
-            // 前台将消息改为已读,修改时间使用后台的就行
-            this.readChatAction(newChat)
-            //将新消息放到当前msg中并替换
-            this.pushMsgReplaceChat(this.chatIndex, newChat)
-            this.scrollToMessagePageBottom()
-            // 后台改为已读
-            // 向后台发送消息，将收到的消息改为已读
-            // 如果当前就是这个聊天
-        } else {
-            const newChatIndex = this.chats.findIndex(item => item.id === newChat.id)
-            if (newChatIndex > -1) {
-                //将新消息放到当前msg中并替换
-                this.pushMsgReplaceChat(newChatIndex, newChat)
-            } else {
-                this.chats.unshift(newChat)
-            }
-            //不需要吧，后台chat应该计算好当前未读数量
-            /*!// 如果已登录
-            if (UserStore.hasUser() && chat.type !== ChatType.system_group) {
-              chat.unreadNum = newChat.unreadNum
-            } else {
-              chat.unreadNum = chat.unreadNum + 1
-            }*/
-
-            // 不是正在这个chat聊天，但是chats列表中包含这个chat
-            // 如果列表中已经包含次chat
-            // 则找到chat，赋值,加入新message
-            // 在列表中将这个chat放到最前面
-            // 找到需要添加内容的chat
-        }
-        //计算未读数量
-        this.computedChatsUnreadNumTotalAction()
-    }
 
     /**
      * 发送视频消息。
@@ -737,6 +767,12 @@ class SocialChatModule {
     }
 
     setChats(chats: SocialuniChatRO[]) {
+        if (this.chats.length) {
+
+        } else {
+
+        }
+
         this.chats = chats
         // this.computedChatsUnreadNumTotalAction()
     }

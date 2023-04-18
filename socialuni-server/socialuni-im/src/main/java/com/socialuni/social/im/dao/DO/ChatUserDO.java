@@ -92,6 +92,7 @@ public class ChatUserDO extends SocialuniUserContactBaseDO {
 //        this.chatId = chat.getId();
 //        this.userId = userId;
         String chatType = chat.getType();
+        this.setUserId(userId);
         if (chatType.equals(ChatType.single)) {
             //私聊聊，直接是开启，创建时 只能为待开启和 不在前台显示
             this.frontShow = false;

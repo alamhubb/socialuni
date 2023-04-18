@@ -2,6 +2,8 @@ package com.socialuni.social.sdk.feignAPI;
 
 
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.im.api.model.QO.MessageQueryVO;
+import com.socialuni.social.im.api.model.QO.SocialuniChatQueryQO;
 import com.socialuni.social.im.model.message.chat.OpenChatVO;
 import com.socialuni.social.im.api.model.RO.ChatRO;
 import com.socialuni.social.im.model.message.chat.ChatReadVO;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -32,6 +35,9 @@ public interface SocialuniChatAPI {
 
     @GetMapping("queryChatList")
     ResultRO<List<ChatRO>> queryChatList();
+
+    @GetMapping("queryChat")
+    ResultRO<ChatRO> queryChat(@RequestBody @Valid @NotNull SocialuniChatQueryQO socialuniChatQueryQO);
 
     @PostMapping("openChat")
     ResultRO<List<ChatRO>> openChat(@RequestBody @Valid OpenChatVO chatVO);

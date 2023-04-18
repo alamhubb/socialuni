@@ -1,14 +1,12 @@
 package com.socialuni.social.im.logic.domain;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.social.common.api.exception.base.SocialException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import com.socialuni.social.common.api.utils.JsonUtil;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.im.config.websocket.WebsocketServer;
 import com.socialuni.social.im.dao.DO.ChatUserDO;
 import com.socialuni.social.im.dao.DO.SocialuniChatDO;
-import com.socialuni.social.report.sdk.constant.SocialuniSupportProviderType;
+import com.socialuni.social.im.logic.foctory.SocaluniNotifyROFactory;
 import com.socialuni.social.im.enumeration.NotifyType;
 import com.socialuni.social.common.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.im.dao.DO.message.MessageReceiveDO;
@@ -146,8 +144,7 @@ public class NotifyDomain {
 //                Optional<ChatDO> chatDOOptional = chatRepository.findById();
             //如果群聊，直接发送给两个服务器在线的所有用户，并且查找他们未读的。
             //未登录的时候也查询群聊里面的所有内容
-            SocialuniChatDO socialuniChatDO = SocialuniRepositoryFacade.findById(chatUserDO.getChatId(), SocialuniChatDO.class);
-            NotifyVO notifyVO = new NotifyVO(notify, sendUser, messageReceiveDO, chatUserDO, socialuniChatDO);
+            NotifyVO notifyVO = SocaluniNotifyROFactory.getNotifyROBySendMsg(notify, sendUser, messageReceiveDO, chatUserDO);
             WebsocketServer.sendMessage(receiveUserId, notifyVO);
                 /*try {
                     stringRedisTemplate.convertAndSend(receiveUserId.toString(), JsonUtil.objectMapper.writeValueAsString(notifyVO));
