@@ -36,7 +36,7 @@ public interface SocialuniChatAPI {
     @GetMapping("queryChatList")
     ResultRO<List<ChatRO>> queryChatList();
 
-    @GetMapping("queryChat")
+    @PostMapping("queryChat")
     ResultRO<ChatRO> queryChat(@RequestBody @Valid @NotNull SocialuniChatQueryQO socialuniChatQueryQO);
 
     @PostMapping("openChat")

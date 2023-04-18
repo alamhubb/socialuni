@@ -80,8 +80,8 @@ public class ChatService {
 
         //怎么排序呢。 没登录查 chats, 登录了查 chatUsers.
 
-
-        return new ResultRO<>(chatQueryDomain.getChats());
+        List<ChatRO> list = chatQueryDomain.getChats();
+        return new ResultRO<>(list);
 //        return new ResultRO<>();
     }
 

@@ -100,6 +100,7 @@ public class SocialChatROFactory {
             String lastContent = messageROS.get(messageROS.size() - 1).getContent();
             chatRO.setLastContent(lastContent);
         }
+        chatRO.setMessages(messageROS);
         return chatRO;
     }
 
@@ -170,6 +171,7 @@ public class SocialChatROFactory {
             chatRO.setLastContent(lastContent);
             chatRO.setLoadMore(LoadMoreType.more);
         }
+        chatRO.setMessages(messages);
         return chatRO;
     }
 

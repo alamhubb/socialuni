@@ -26,6 +26,7 @@ import ChatAPI from "socialuni-im-api/src/api/ChatAPI";
 import MessageViewParams from "../view/chat/MessageViewParams";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import ChatQueryQO from "socialuni-im-api/src/model/QO/chat/ChatQueryQO";
+import Arrays from "socialuni-util/src/util/Arrays";
 
 
 const openIM = null
@@ -152,20 +153,10 @@ class SocialChatModule {
 
     //替换chat消息，如果不存在则添加
     pushMsgReplaceChatByChat(chat: SocialuniChatRO) {
-        if (chat){
+        if (chat) {
             let chatIndex = socialChatModule.chats.findIndex(item => item.id === chat.id)
             if (chatIndex > 0) {
-                const oldChat = this.chats[chatIndex]
-                const messages: MessageVO[] = oldChat.messages
-                //将新消息放到当前msg中
-                messages.push(...chat.messages)
-
-                messages
-
-                chat.messages = messages
-                chat.loadMore = oldChat.loadMore
-                //不需要替换，修改了
-                this.replaceChat(chatIndex, chat)
+                this.pushMsgReplaceChat(chatIndex, chat)
             } else {
                 this.chats.unshift(chat)
             }
@@ -176,9 +167,12 @@ class SocialChatModule {
     //来消息后，替换已有chat
     pushMsgReplaceChat(chatIndex, chat: SocialuniChatRO) {
         const oldChat = this.chats[chatIndex]
-        const messages: MessageVO[] = oldChat.messages
+        let messages: MessageVO[] = oldChat.messages
         //将新消息放到当前msg中
         messages.push(...chat.messages)
+
+        messages = Arrays.unique(messages, 'id')
+
         chat.messages = messages
         chat.loadMore = oldChat.loadMore
         //不需要替换，修改了
@@ -767,13 +761,16 @@ class SocialChatModule {
     }
 
     setChats(chats: SocialuniChatRO[]) {
+        console.log(3333)
+        console.log(this.chats.length)
         if (this.chats.length) {
-
+            for (const chat1 of chats) {
+                this.pushMsgReplaceChatByChat(chat1)
+            }
         } else {
-
+            this.chats = chats
         }
 
-        this.chats = chats
         // this.computedChatsUnreadNumTotalAction()
     }
 
