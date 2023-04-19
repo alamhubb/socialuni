@@ -3,6 +3,7 @@ package com.socialuni.social.im.logic.service.chat;
 
 import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.api.exception.exception.SocialNotLoginException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
@@ -13,13 +14,10 @@ import com.socialuni.social.im.dao.DO.ChatUserDO;
 import com.socialuni.social.im.dao.DO.message.MessageDO;
 import com.socialuni.social.im.dao.DO.message.MessageReceiveDO;
 import com.socialuni.social.im.dao.repository.MessageReceiveRepository;
-import com.socialuni.social.im.enumeration.ChatStatus;
-import com.socialuni.social.im.enumeration.ChatType;
+import com.socialuni.social.im.enumeration.*;
 import com.socialuni.social.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.im.dao.repository.ChatRepository;
 import com.socialuni.social.im.dao.repository.ChatUserRepository;
-import com.socialuni.social.im.enumeration.MessageReceiveStatus;
-import com.socialuni.social.im.enumeration.MessageStatus;
 import com.socialuni.social.im.logic.domain.ChatQueryDomain;
 import com.socialuni.social.im.logic.foctory.SocialChatROFactory;
 import com.socialuni.social.im.api.model.RO.ChatRO;
@@ -35,10 +33,7 @@ import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -65,8 +60,47 @@ public class ChatService {
     //那如果后来，他又开启了非好友禁止发送消息呢。所以还是应该发送消息的时候校验。
 
 
-    public ResultRO<?> readChatMessages(ChatReadVO chatVO) {
-        return null;
+    public ResultRO<Void> readChatMessages(ChatReadVO chatVO) {
+            Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+        String chatUuid = chatVO.getChatId();
+        SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidNotNull(chatUuid);
+
+        //私聊
+        if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.user)) {
+            Integer beUserId = socialuniUnionIdModler.getId();
+
+            //如果用户存在查看会话
+            ChatUserDO chatUserDO = SocialuniChatUserDOFactory.getOrCreateChatUserBySingleSendMsg(mineUserId, beUserId);
+//全部已读
+            chatUserDO.setUnreadNum(0);
+            //进入chat页，列表中进入，肯定是展示的，所以不会走这里
+            chatUserDO.checkFrontShowAndSetTrue();
+            //目前不根据点击时间更新，只根据消息时间更新
+//                chatUserDb.setUpdateTime(new Date());
+            chatUserRepository.save(chatUserDO);
+            //toDO 这里需要细想怎么个逻辑
+            //需要将chatUser的未读数量更新一下
+//            messageReceiveDORepository.updateMessageReceiveRead(chatUserDb, readVO.getMessageIds());
+            List<MessageReceiveDO> messageReceiveDOS = messageReceiveRepository.findByChatUserIdAndStatusAndIsReadFalse(chatUserDO.getId(), MessageStatus.init);
+//                List<MessageReceiveDO> messageReceiveDOS = new ArrayList<>();
+            //把具体的每一条改为已读
+            if (messageReceiveDOS.size() > 0) {
+                Date curDate = new Date();
+                for (MessageReceiveDO messageReceiveDO : messageReceiveDOS) {
+                    messageReceiveDO.setUpdateTime(curDate);
+                    messageReceiveDO.setIsRead(true);
+                        /*
+                        toDO 暂时不需要的逻辑，这个逻辑是把msg改为已读，并且已读次数加1
+                        MessageDO messageDO = messageReceiveDO.getMessage();
+                        messageDO.setReadStatus(CommonStatus.read);
+                        if (ChatType.groupChats.contains(chat.getType())) {
+                            messageDO.setReadNum(messageDO.getReadNum() + 1);
+                        }*/
+                }
+                messageReceiveRepository.saveAll(messageReceiveDOS);
+            }
+        }
+        return ResultRO.success();
     }
 
     public ResultRO<List<ChatRO>> queryHomeChat() {

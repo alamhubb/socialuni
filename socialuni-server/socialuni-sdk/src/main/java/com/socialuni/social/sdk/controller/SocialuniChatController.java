@@ -27,7 +27,7 @@ public class SocialuniChatController implements SocialuniChatAPI {
 
     @Override
     public ResultRO<?> readChatMessages(ChatReadVO chatVO) {
-        return null;
+        return chatService.readChatMessages(chatVO);
     }
 
     @Override

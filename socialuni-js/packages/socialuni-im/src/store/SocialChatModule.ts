@@ -27,6 +27,7 @@ import MessageViewParams from "../view/chat/MessageViewParams";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import ChatQueryQO from "socialuni-im-api/src/model/QO/chat/ChatQueryQO";
 import Arrays from "socialuni-util/src/util/Arrays";
+import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
 
 
 const openIM = null
@@ -104,6 +105,7 @@ class SocialChatModule {
             socialChatModule.chats.unshift(chat)
 
             ChatAPI.queryChatAPI(new ChatQueryQO(chatId)).then(res => {
+                this.readChatAction(res.data.messages)
                 this.pushMsgReplaceChatByChat(res.data)
             })
         }
@@ -124,7 +126,7 @@ class SocialChatModule {
             // if (this.chatId === newChat.id) {
             // 则直接往msg增加消息
             // 前台将消息改为已读,修改时间使用后台的就行
-            this.readChatAction(newChat)
+            this.readChatAction(newChat.messages)
             //将新消息放到当前msg中并替换
             this.pushMsgReplaceChat(this.chatIndex, newChat)
             this.scrollToMessagePageBottom()
@@ -732,26 +734,26 @@ class SocialChatModule {
 
     // 前台和后台都将chat和msg改为已读,更新chat的时间
 
-    readChatAction(chat: SocialuniChatRO) {
+    readChatAction(messagesROs: MessageVO[]) {
         //目前不根据点击时间更新，只根据消息时间更新
         // chat.updateTime = new Date().getTime()
         // 不为自己的 且未读的
-        const messages: MessageVO[] = chat.messages.filter(item => !item.isMine && !item.isRead)
+        const messages: MessageVO[] = messagesROs.filter(item => !item.isMine && !item.isRead)
         const msgIds: string[] = messages.map(msg => msg.id)
-        // if (messages.length > 0) {
-        // msgIds =
-        //如果登录了，才调用后台
-        // 如果登录了
-        //目前 官方群聊没记录已读状态，读取也不管用
-        // if (socialuniUserModule.hasUser && chat.type !== ChatType.system_group) {
-        //     ChatAPI.readChatAPI(chat.id, msgIds)
-        // }
-        for (const message of messages) {
-            message.isRead = true
+        if (msgIds.length) {
+            // msgIds =
+            //如果登录了，才调用后台
+            // 如果登录了
+            //目前 官方群聊没记录已读状态，读取也不管用
+            if (socialuniUserModule.hasUser && this.chat.type === ChatType.single) {
+                ChatAPI.readChatAPI(this.chatId)
+            }
+            for (const message of messages) {
+                message.isRead = true
+            }
+            this.chat.unreadNum = 0
+            this.computedChatsUnreadNumTotalAction()
         }
-        chat.unreadNum = 0
-        this.computedChatsUnreadNumTotalAction()
-        // }
     }
 
 

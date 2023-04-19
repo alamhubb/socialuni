@@ -672,8 +672,10 @@ export default class MessageView extends Vue {
                     this.queryTime = resMessages[0].createTime
                     if (initQuery){
                         socialChatModule.chat.messages = resMessages
+                        socialChatModule.readChatAction(socialChatModule.chat.messages)
                     }else {
                         socialChatModule.chat.messages.unshift(...resMessages)
+                        socialChatModule.readChatAction(socialChatModule.chat.messages)
                         //获取添加后的之前顶部位置，然后滚动到此位置
                         this.$nextTick(() => {
                             const query: SelectorQuery = uni.createSelectorQuery().in(this)

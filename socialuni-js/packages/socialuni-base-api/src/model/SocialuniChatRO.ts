@@ -7,7 +7,7 @@ export default class SocialuniChatRO {
     public id: string = null
     public nickname: string = null
     public groupId: string = null
-    public type: number = null
+    public type: string = null
     public status: string = null
     public messages: MessageVO[] = []
     public avatar: string = null
@@ -25,6 +25,7 @@ export default class SocialuniChatRO {
     constructor(openImChat?: OpenImChatRO) {
         if (openImChat) {
             this.id = openImChat.conversationID
+            //@ts-ignore
             this.type = openImChat.conversationType
             this.nickname = openImChat.showName
             this.groupId = openImChat.groupID

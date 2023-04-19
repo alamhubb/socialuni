@@ -6,6 +6,7 @@ import {socialuniConfigModule} from "socialuni-base-api/src/store/SocialuniConfi
 import NotifyVO from "socialuni-base-api/src/model/NotifyVO";
 import SocialuniConfig from "socialuni-base-api/src/config/SocialuniConfigModule";
 import {socialuniPluginsModule} from "../store/SocialuniPluginsModule";
+import {socialChatModule} from "socialuni-im/src/store/SocialChatModule";
 
 export default class WebsocketUtil {
 
@@ -53,7 +54,7 @@ export default class WebsocketUtil {
 
             if (reload) {
                 console.log('重新加载')
-                // chatModule.getChatsAction()
+                socialChatModule.getChatsAction()
             }
             //心跳保活
             WebsocketUtil.timer = setInterval(() => {
