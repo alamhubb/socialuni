@@ -108,6 +108,7 @@ class SocialChatModule {
             })
         }
         this.chatId = chatId
+        socialChatModule.scrollToMessagePageBottom()
     }
 
     //后台推送了一条消息，你不知道前台是否有这条消息，后台更不可能知道前台是否删除了这条消息
