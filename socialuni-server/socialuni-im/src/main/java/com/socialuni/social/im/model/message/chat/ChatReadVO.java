@@ -12,8 +12,7 @@ import java.util.List;
 @Data
 //添加注释
 public class ChatReadVO {
-    private Integer chatUserId;
-    private Integer chatId;
     @NotNull
+    private String chatId;
     private List<Integer> messageIds;
 }

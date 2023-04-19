@@ -17,7 +17,7 @@ public interface MessageReceiveRepository extends JpaRepository<MessageReceiveDO
 
     //chatId下所有未读变为已读，查询出来更改
 //    List<MessageReceiveDO> findByChatUserIdAndMessageStatusInAndStatusAndIsReadFalseAndIdInOrderByCreateTimeDescIdDesc(Integer chatUserId, List<String> msgStatus, String status, List<Long> ids);
-//    List<MessageReceiveDO> findByChatUserIdAndStatusAndIsReadFalse(Integer chatUserId, String chatUserStatus, String status);
+    List<MessageReceiveDO> findByChatUserIdAndStatusAndIsReadFalse(Integer chatUserId, String status);
 //
 //    //查询消息列表，根据chatUserId、msgReceiveStatus、msgIds 按照msgReceiveStatus 倒序排序
 //    //调用这两个之前必须先判断 chat 为enable

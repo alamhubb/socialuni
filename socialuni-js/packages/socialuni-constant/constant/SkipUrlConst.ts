@@ -1,7 +1,6 @@
 import AppConfig from "./AppConfig";
-// import {socialuniConfigModule} from "socialuni-sdk/src/store/store";
-// import PageUtil from "socialuni-util/src/util/PageUtil";
 import {socialuniConfigModule} from "socialuni-base-api/src/store/SocialuniConfigModule";
+import PageUtil from "socialuni-util/src/util/PageUtil";
 
 export default class SkipUrlConst {
   static homeUrl(): string {

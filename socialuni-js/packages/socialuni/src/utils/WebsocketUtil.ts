@@ -11,12 +11,17 @@ import {socialChatModule} from "socialuni-im/src/store/SocialChatModule";
 export default class WebsocketUtil {
 
     //失败重连时间
-    static failedReconnectTime = 2000
+    static failedReconnectTime = 5000
     static timer: number = null
     static locking: boolean = false
 
     static websocketConnect(reload: boolean) {
         console.log('websocket连接')
+
+        for (const plugin of socialuniPluginsModule.plugins) {
+            plugin.onWebsocketConnect?.(reload)
+        }
+
         let token: string
 
         if (socialuniUserModule.hasToken) {
@@ -39,7 +44,6 @@ export default class WebsocketUtil {
                   token: token
                 }, */
                 complete: () => {
-                    this.locking = false
                     console.log('完成')
                 }
             })
@@ -47,14 +51,12 @@ export default class WebsocketUtil {
 
         uni.onSocketOpen(() => {
             console.log('打开')
-
             if (reload || WebsocketUtil.timer) {
                 clearInterval(WebsocketUtil.timer)
             }
 
             if (reload) {
                 console.log('重新加载')
-                socialChatModule.getChatsAction()
             }
             //心跳保活
             WebsocketUtil.timer = setInterval(() => {

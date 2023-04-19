@@ -131,12 +131,9 @@
 
             <socialuni-user-info-img class="mt-sm" :user="mineUser"></socialuni-user-info-img>
 
-            <q-popup ref="moreActionList" bottom>
+            <q-popup ref="moreActionList" bottom title="清池 app">
                 <view class="flex-col h100p pb-50">
-                    <view class="row-all-center font-bold text-lg py-sm">
-                        清池 app
-                    </view>
-                    <!--<q-row-item>
+<!--                    <q-row-item>
                       <navigator :url="messageSettingUrl" class="row-col-center flex-1">
                         <view class="row-col-center flex-1">
                           消息设置
@@ -229,6 +226,7 @@ import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAP
 import ImgAddQO from "socialuni-base-api/src/model/user/ImgAddQO";
 import UserService from "socialuni/src/service/UserService";
 import TencentCosAPI from "socialuni-base-api/src/api/TencentCosAPI";
+import {socialChatModule} from "socialuni-im/src/store/SocialChatModule";
 
 @Options({
     components: {
