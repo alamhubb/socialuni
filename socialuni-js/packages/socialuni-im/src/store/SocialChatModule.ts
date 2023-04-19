@@ -156,7 +156,8 @@ class SocialChatModule {
     pushMsgReplaceChatByChat(chat: SocialuniChatRO) {
         if (chat) {
             let chatIndex = socialChatModule.chats.findIndex(item => item.id === chat.id)
-            if (chatIndex > 0) {
+
+            if (chatIndex > -1) {
                 this.pushMsgReplaceChat(chatIndex, chat)
             } else {
                 this.chats.unshift(chat)

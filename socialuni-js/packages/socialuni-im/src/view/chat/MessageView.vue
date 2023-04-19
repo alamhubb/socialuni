@@ -1,7 +1,6 @@
 <template>
     <view class="pb-50 h100p">
-        {{ 123 }}
-        <q-navbar show-back :title="pageTitle">
+        <q-navbar class="bb" show-back :title="pageTitle">
             <div class="row-end-center flex-1">
                 <q-icon icon="list-dot" size="20" @click="openMoreMenu"></q-icon>
             </div>
@@ -362,7 +361,7 @@ export default class MessageView extends Vue {
 
         this.queryTime = new Date()
         console.log('初始查询')
-        await this.queryMessages()
+        await this.queryMessages(true)
 
         socialChatModule.scrollToMessagePageBottom()
 
