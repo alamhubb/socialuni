@@ -25,6 +25,7 @@
             <view class="w100p h100p">
                 <!--      <view v-if="chat.status === waitOpenStatus||chat.status === closeStatus" class="w100p h100p col-row-center">-->
                 <view class="mt-80px">
+                    123
                     <!--          <view class="uni-tip-content text-bold">
                                 <template v-if="chat.needPayOpen">
                                   会话未开启，为避免用户被频繁恶意骚扰，只能给关注您的和给您发过消息的用户直接发送消息
@@ -381,6 +382,9 @@ export default class MessageView extends Vue {
     }
 
     get pageTitle() {
+        console.log(3333)
+        console.log(this.chat)
+        console.log(this.chat.nickname)
         return this.chat.nickname
     }
 
