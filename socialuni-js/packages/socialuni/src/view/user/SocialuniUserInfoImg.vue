@@ -47,19 +47,19 @@
 import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
 import {Options, Prop, Vue} from "vue-property-decorator";
 import {socialuniUserModule} from 'socialuni/src/store/SocialuniUserModule';
-import CenterUserDetailRO from "socialuni-base-api/src/model/social/CenterUserDetailRO";
+import CenterUserDetailRO from "socialuni/src/model/social/CenterUserDetailRO";
 import ImgUtil from "socialuni-util/src/util/ImgUtil";
 import CosUtil from "socialuni-util/src/util/CosUtil";
 import UniUtil from "socialuni-util/src/util/UniUtil";
-import ImgAddQO from "socialuni-base-api/src/model/user/ImgAddQO";
+import ImgAddQO from "socialuni/src/model/user/ImgAddQO";
 import AlertUtil from "socialuni-util/src/util/AlertUtil";
-import ImgFileVO from "socialuni-base-api/src/model/ImgFileVO";
+import ImgFileVO from "socialuni/src/model/ImgFileVO";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import PageUtil from "socialuni-util/src/util/PageUtil";
 import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
 import SocialuniReportDialog from "../../component/SocialuniReportDialog.vue";
 import DomFile from "socialuni-util/src/model/DomFile";
-import TencentCosAPI from "socialuni-base-api/src/api/TencentCosAPI";
+import TencentCosAPI from "socialuni/src/api/TencentCosAPI";
 import CosService from "socialuni/src/service/CosService";
 
 @Options({

@@ -1,4 +1,4 @@
-import SocialUserContentRO from "socialuni-base-api/src/model/social/SocialUserContentRO";
+import SocialUserContentRO from "socialuni/src/model/social/SocialUserContentRO";
 import GenderType from "socialuni-constant/constant/GenderType";
 import FollowStatus from "socialuni-constant/constant/FollowStatus";
 

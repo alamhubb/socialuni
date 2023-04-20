@@ -6,10 +6,10 @@ import {ImportModule} from "./interface/ImportModule";
 import {socialuniPluginsModule} from "./store/SocialuniPluginsModule";
 import {socialuniUserModule} from "./store/SocialuniUserModule";
 import UserService from "./service/UserService";
-import {socialuniConfigModule} from "socialuni-base-api/src/store/SocialuniConfigModule";
-import CosAPI from "socialuni-base-api/src/api/CosAPI";
+import {socialuniConfigModule} from "socialuni/src/store/SocialuniConfigModule";
+import CosAPI from "socialuni/src/api/CosAPI";
 import {socialAppModule} from "socialuni/src/store/SocialAppModule";
-import NotifyVO from "socialuni-base-api/src/model/NotifyVO";
+import NotifyVO from "socialuni/src/model/NotifyVO";
 
 const socialuniInitPlugin: SocialuniPlugin = {
     async onLaunch() {

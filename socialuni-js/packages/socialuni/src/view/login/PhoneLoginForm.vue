@@ -71,7 +71,7 @@ import PhoneNumFormData from "./PhoneNumFormData";
 import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
 import CommonUtil from "socialuni-util/src/util/CommonUtil";
 import ToastUtil from "socialuni-util/src/util/ToastUtil";
-import {socialuniConfigModule} from "socialuni-base-api/src/store/SocialuniConfigModule";
+import {socialuniConfigModule} from "socialuni/src/store/SocialuniConfigModule";
 import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
 
 @Options({

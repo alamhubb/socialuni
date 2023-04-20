@@ -223,9 +223,9 @@ import QSearch from "socialuni-ui/src/components/QSearch/QSearch.vue";
 import SocialGenderTag from "../../component/SocialGenderTag/SocialGenderTag.vue";
 import CosService from "socialuni/src/service/CosService";
 import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
-import ImgAddQO from "socialuni-base-api/src/model/user/ImgAddQO";
+import ImgAddQO from "socialuni/src/model/user/ImgAddQO";
 import UserService from "socialuni/src/service/UserService";
-import TencentCosAPI from "socialuni-base-api/src/api/TencentCosAPI";
+import TencentCosAPI from "socialuni/src/api/TencentCosAPI";
 import {socialChatModule} from "socialuni-im/src/store/SocialChatModule";
 
 @Options({

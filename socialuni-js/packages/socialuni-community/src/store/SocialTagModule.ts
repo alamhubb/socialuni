@@ -1,7 +1,7 @@
 import TagAPI from "socialuni-community-api/src/api/TagAPI";
 import {reactive} from "vue";
-import TagVO from "socialuni-base-api/src/model/community/tag/TagVO";
-import TagTypeVO from "socialuni-base-api/src/model/community/tag/TagTypeVO";
+import TagVO from "socialuni/src/model/community/tag/TagVO";
+import TagTypeVO from "socialuni/src/model/community/tag/TagTypeVO";
 import TagStorageUtil from "../util/TagStorageUtil";
 
 class SocialuniTagModule {

@@ -1,7 +1,7 @@
 /*
 
 import PageUtil from "socialuni-util/src/util/PageUtil"
-import ChatAPI from "socialuni-base-api/src/api/ChatAPI"
+import ChatAPI from "socialuni/src/api/ChatAPI"
 import RouterUtil from "socialuni-util/src/util/RouterUtil"
 import PagePath from "socialuni-constant/constant/PagePath"
 import PlatformUtils from "socialuni-util/src/util/PlatformUtils"
@@ -16,9 +16,9 @@ import {InitConfig} from "open-im-sdk/types"
 import SocialuniConfig from "socialuni/src/config/SocialuniConfig"
 import {socialChatModule} from './store'
 import OpenImPlatformType from '../plugins/openIm/OpenImPlatformType'
-import SocialuniChatRO from "socialuni-base-api/src/model/SocialuniChatRO";
-import {OpenImChatRO} from "socialuni-base-api/src/model/openIm/OpenImChatRO";
-import MessageVO from "socialuni-base-api/src/model/message/MessageVO";
+import SocialuniChatRO from "socialuni/src/model/SocialuniChatRO";
+import {OpenImChatRO} from "socialuni/src/model/openIm/OpenImChatRO";
+import MessageVO from "socialuni/src/model/message/MessageVO";
 
 
 class SocialMessageModule {

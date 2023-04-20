@@ -91,10 +91,6 @@ export default class PageUtil {
         }
     }
 
-    static async toPhonePage() {
-        RouterUtil.navigateTo(UserPagePath.userPhone)
-    }
-
     static toTalkPage() {
         RouterUtil.switchTab(PagePath.talk)
     }
@@ -239,16 +235,6 @@ export default class PageUtil {
      * 关闭当前页面，返回上一页面或多级页面。可通过 getCurrentPages() 获取当前的页面栈，决定需要返回几层。
      */
 
-
-    static goBackOrMine(): void {
-        const pages = getCurrentPages()
-        if (pages.length === 1) {
-            PageUtil.toMinePage()
-        } else {
-            RouterUtil.goBack()
-        }
-        // uni.navigateBack({ delta: 1 })
-    }
 
     static goBack(): void {
         uni.navigateBack({delta: 1})

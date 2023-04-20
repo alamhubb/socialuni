@@ -6,12 +6,13 @@ import ToastUtil from "socialuni-util/src/util/ToastUtil"
 import WxUtils from "socialuni-util/src/util/WxUtils"
 import MPUtil from "socialuni-util/src/util/MPUtil"
 import APPUtil from "socialuni-util/src/util/APPUtil"
-import UserPayResultVO from "socialuni-base-api/src/model/user/UserPayResultVO";
+import UserPayResultVO from "socialuni/src/model/user/UserPayResultVO";
 import {socialPlatformModule} from "../store/SocialPlatformModule";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
-import SocialuniAppAPI from "socialuni-base-api/src/api/SocialuniAppAPI";
-import SocialuniCoinAPI from "socialuni-base-api/src/api/socialuni/SocialuniCoinAPI";
-import {socialuniUserModule} from "../store/SocialuniUserModule";
+import SocialuniAppAPI from "socialuni/src/api/SocialuniAppAPI";
+import SocialuniCoinAPI from "socialuni/src/api/socialuni/SocialuniCoinAPI";
+import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
+import UserMsgUtil from "socialuni/src/util/UserMsgUtil";
 
 
 // 统一处理各平台的订阅
@@ -90,7 +91,7 @@ export default class PlatformUtils {
     static async checkPay() {
         console.log(`isProd:${socialuniSystemModule.isProd}`)
         if (!socialuniUserModule.mineUser) {
-            return MsgUtil.unLoginMessage()
+            return UserMsgUtil.unLoginMessage()
         } else if (socialuniSystemModule.isIos && socialuniSystemModule.isProd) {
             MsgUtil.iosDisablePay()
             throw '禁止支付功能'

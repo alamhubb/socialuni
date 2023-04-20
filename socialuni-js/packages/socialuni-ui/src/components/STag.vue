@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import {Options, Prop, Vue} from 'vue-property-decorator'
-import CenterUserDetailRO from "socialuni-base-api/src/model/social/CenterUserDetailRO";
+import CenterUserDetailRO from "socialuni/src/model/social/CenterUserDetailRO";
 import UserUtil from "socialuni-util/src/util/UserUtil";
 import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
 

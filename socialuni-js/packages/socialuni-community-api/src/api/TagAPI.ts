@@ -1,5 +1,5 @@
 import socialuniCommunityRequest from "../request/socialuniCommunityRequest";
-import TagAddVO from "socialuni-base-api/src/model/community/tag/TagAddVO";
+import TagAddVO from "socialuni/src/model/community/tag/TagAddVO";
 
 export default class TagAPI {
   static addTagAPI(tagName: string, description: string) {

@@ -3,7 +3,7 @@ import {socialLocationModule} from "./store/SocialLocationModule";
 import {socialTalkModule} from "./store/SocialTalkModule";
 import {socialuniTagModule} from "./store/SocialTagModule";
 import {socialCircleModule} from "./store/SocialCircleModule";
-import NotifyVO from "socialuni-base-api/src/model/NotifyVO";
+import NotifyVO from "socialuni/src/model/NotifyVO";
 import NotifyType from "socialuni-constant/constant/NotifyType";
 import {socialNotifyModule} from "./store/SocialNotifyModule";
 

@@ -1,6 +1,6 @@
-import SocialuniUserRO from "socialuni-base-api/src/model/user/SocialuniUserRO";
-import ImgFileVO from "socialuni-base-api/src/model/ImgFileVO";
-import CenterUserDetailRO from "socialuni-base-api/src/model/social/CenterUserDetailRO";
+import SocialuniUserRO from "socialuni/src/model/user/SocialuniUserRO";
+import ImgFileVO from "socialuni/src/model/ImgFileVO";
+import CenterUserDetailRO from "socialuni/src/model/social/CenterUserDetailRO";
 import socialuniUserRequest from "../request/socialuniUserRequest";
 
 export default class SocialuniUserAPI {

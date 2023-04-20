@@ -7,8 +7,8 @@ import COS from 'cos-wx-sdk-v5'
 //@ts-ignore
 import COS from 'cos-js-sdk-v5'
 // #endif
-import DomFile from "../../../socialuni-base-api/src/model/DomFile";
-import CosAuthRO from "../../../socialuni-base-api/src/model/cos/CosAuthRO";
+import DomFile from "../../../socialuni/src/model/DomFile";
+import CosAuthRO from "../../../socialuni/src/model/cos/CosAuthRO";
 
 export default class CosUtil {
   static getAuthorizationCos(cosAuthRO: CosAuthRO): COS {

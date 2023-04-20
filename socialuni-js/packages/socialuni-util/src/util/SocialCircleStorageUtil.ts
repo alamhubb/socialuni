@@ -1,5 +1,5 @@
 import {socialuniTagModule} from "socialuni-community/src/store/SocialTagModule";
-import StorageUtil from "socialuni-base-api/src/util/StorageUtil";
+import StorageUtil from "socialuni/src/util/StorageUtil";
 
 export default class SocialCircleStorageUtil {
     static getMineCircleNamesKeyKey = 'mineCircleNamesKey'

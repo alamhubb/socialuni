@@ -48,7 +48,7 @@ import {Vue, Options} from 'vue-property-decorator'
 import QRowItem from '@/components/div-item/div-item.vue'
 import {onLoad} from "@dcloudio/uni-app";
 import {socialuniConfigModule, socialuniSystemModule, socialuniUserModule} from "socialuni-sdk/src/store/store";
-import ShellOrderVO from "socialuni-base-api/src/model/ShellOrderVO";
+import ShellOrderVO from "socialuni/src/model/ShellOrderVO";
 import QIcon from 'socialuni-ui/src/components/QIcon/QIcon.vue'
 import EnumVO from "socialuni-constant/constant/EnumVO";
 import QButton from "socialuni-ui/src/components/QButton/QButton.vue";

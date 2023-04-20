@@ -1,7 +1,7 @@
 //用来存储当前用户的一些信息
 
-import UnreadNotifyVO from "socialuni-base-api/src/model/notify/UnreadNotifyVO";
-import CenterUserDetailRO from "socialuni-base-api/src/model/social/CenterUserDetailRO";
+import UnreadNotifyVO from "socialuni/src/model/notify/UnreadNotifyVO";
+import CenterUserDetailRO from "socialuni/src/model/social/CenterUserDetailRO";
 import {reactive} from "vue";
 import NotifyAPI from "socialuni-community-api/src/api/NotifyAPI";
 

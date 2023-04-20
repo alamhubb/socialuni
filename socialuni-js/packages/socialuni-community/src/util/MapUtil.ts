@@ -1,6 +1,6 @@
-import {QQMapResult} from "socialuni-base-api/src/model/location/QQMapResult";
-import LocationQueryQO from "socialuni-base-api/src/model/location/LocationQueryQO";
-import ResultRO from "socialuni-base-api/src/model/social/ResultRO";
+import {QQMapResult} from "socialuni/src/model/location/QQMapResult";
+import LocationQueryQO from "socialuni/src/model/location/LocationQueryQO";
+import ResultRO from "socialuni/src/model/social/ResultRO";
 import SocialuniLocationAPI from "socialuni-community-api/src/api/SocialuniLocationAPI";
 
 export default class MapUtil {

@@ -84,7 +84,7 @@
 
 <script lang="ts">
 import {Options, Prop, Vue, Watch} from 'vue-property-decorator'
-import TalkVO from "socialuni-base-api/src/model/talk/TalkVO";
+import TalkVO from "socialuni/src/model/talk/TalkVO";
 import ObjectUtil from "socialuni-util/src/util/ObjectUtil";
 import {socialuniUserModule} from 'socialuni/src/store/SocialuniUserModule';
 import TalkTabType from "socialuni-constant/constant/TalkTabType";
@@ -94,8 +94,8 @@ import MsgUtil from "socialuni-util/src/util/MsgUtil";
 import ToastUtil from "socialuni-util/src/util/ToastUtil";
 import PageUtil from "socialuni-util/src/util/PageUtil";
 import AlertUtil from "socialuni-util/src/util/AlertUtil";
-import FollowAddVO from "socialuni-base-api/src/model/FollowAddVO";
-import CenterUserDetailRO from "socialuni-base-api/src/model/social/CenterUserDetailRO";
+import FollowAddVO from "socialuni/src/model/FollowAddVO";
+import CenterUserDetailRO from "socialuni/src/model/social/CenterUserDetailRO";
 import UserUtil from "socialuni-util/src/util/UserUtil";
 import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
 import DateUtil from "socialuni-util/src/util/DateUtil";

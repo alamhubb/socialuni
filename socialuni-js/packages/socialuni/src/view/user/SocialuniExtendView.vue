@@ -106,8 +106,8 @@
 <script lang="ts">
 import {Vue, Options, Prop, Emit} from 'vue-property-decorator'
 import SocialuniFollowType from "socialuni-constant/constant/user/SocialuniFollowType";
-import SocialUserContentRO from "socialuni-base-api/src/model/social/SocialUserContentRO";
-import FollowAPI from "socialuni-base-api/src/api/socialuni/FollowAPI";
+import SocialUserContentRO from "socialuni/src/model/social/SocialUserContentRO";
+import FollowAPI from "socialuni/src/api/socialuni/FollowAPI";
 import SocialGenderTag from "socialuni-ui/src/components/SocialGenderTag/SocialGenderTag.vue";
 import SocialuniFollowTag from "socialuni-ui/src/components/SocialuniFollow/SocialuniFollowTag.vue";
 import PageUtil from "socialuni-util/src/util/PageUtil";
@@ -116,23 +116,23 @@ import {onLoad, onPullDownRefresh, onReachBottom, onShow} from "@dcloudio/uni-ap
 import {socialuniSystemModule, socialTalkModule, socialuniUserModule} from "socialuni-sdk/src/store/store";
 import QTabs from "socialuni-ui/src/components/QTabs/QTabs.vue";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
-import SocialuniPageQueryQO from "socialuni-base-api/src/model/common/SocialuniPageQueryQO";
-import SocialuniPageQueryUtil from "socialuni-base-api/src/model/common/SocialuniPageQueryUtil";
-import SocialuniUserRO from "socialuni-base-api/src/model/user/SocialuniUserRO";
+import SocialuniPageQueryQO from "socialuni/src/model/common/SocialuniPageQueryQO";
+import SocialuniPageQueryUtil from "socialuni/src/model/common/SocialuniPageQueryUtil";
+import SocialuniUserRO from "socialuni/src/model/user/SocialuniUserRO";
 import CommonUtil from "socialuni-util/src/util/CommonUtil";
-import SocialUserFollowDetailRO from "socialuni-base-api/src/model/social/SocialUserFollowDetailRO";
+import SocialUserFollowDetailRO from "socialuni/src/model/social/SocialUserFollowDetailRO";
 import SocialuniUserExtendFriendsType from "socialuni-constant/constant/user/SocialuniUserExtendFriendsType";
-import SocialuniUserAPI from "socialuni-base-api/src/api/socialuni/SocialuniUserAPI";
-import SocialuniUserExtendFriendQueryQO from "socialuni-base-api/src/model/user/SocialuniUserExtendFriendQueryQO";
-import SocialuniUserExpandAPI from "socialuni-base-api/src/api/socialuni/SocialuniUserExpandAPI";
-import request from "socialuni-base-api/src/request/request";
-import CenterUserDetailRO from "socialuni-base-api/src/model/social/CenterUserDetailRO";
+import SocialuniUserAPI from "socialuni/src/api/socialuni/SocialuniUserAPI";
+import SocialuniUserExtendFriendQueryQO from "socialuni/src/model/user/SocialuniUserExtendFriendQueryQO";
+import SocialuniUserExpandAPI from "socialuni/src/api/socialuni/SocialuniUserExpandAPI";
+import request from "socialuni/src/request/request";
+import CenterUserDetailRO from "socialuni/src/model/social/CenterUserDetailRO";
 import QIcon from "../../components/QIcon/QIcon.vue";
 import QButton from "../../components/QButton/QButton.vue";
 import UniUtil from "socialuni-util/src/util/UniUtil";
 import NumUtil from "socialuni-util/src/util/NumUtil";
 import DateUtil from "socialuni-util/src/util/DateUtil";
-import SocialuniUserExtendDetailRO from "socialuni-base-api/src/model/social/SocialuniUserExtendDetailRO";
+import SocialuniUserExtendDetailRO from "socialuni/src/model/social/SocialuniUserExtendDetailRO";
 import ImgUtil from "socialuni-util/src/util/ImgUtil";
 import QPullRefresh from "../../components/QPullRefresh/QPullRefresh.vue";
 

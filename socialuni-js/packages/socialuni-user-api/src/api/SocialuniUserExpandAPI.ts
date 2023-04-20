@@ -1,8 +1,8 @@
 import socialuniUserRequest from "../request/socialuniUserRequest";
-import SocialuniMineUserRO from "socialuni-base-api/src/model/user/SocialuniMineUserRO";
-import SocialUserSchoolNameEditQO from "socialuni-base-api/src/model/QO/user/SocialUserSchoolNameEditQO";
-import SocialuniUserExtendFriendQueryQO from "socialuni-base-api/src/model/user/SocialuniUserExtendFriendQueryQO";
-import CenterUserDetailRO from "socialuni-base-api/src/model/social/CenterUserDetailRO";
+import SocialuniMineUserRO from "socialuni/src/model/user/SocialuniMineUserRO";
+import SocialUserSchoolNameEditQO from "socialuni/src/model/QO/user/SocialUserSchoolNameEditQO";
+import SocialuniUserExtendFriendQueryQO from "socialuni/src/model/user/SocialuniUserExtendFriendQueryQO";
+import CenterUserDetailRO from "socialuni/src/model/social/CenterUserDetailRO";
 
 export default class SocialuniUserExpandAPI {
   static editUserSchoolNameAPI (schoolName: string) {

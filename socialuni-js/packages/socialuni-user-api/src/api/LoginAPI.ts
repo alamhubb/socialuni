@@ -1,8 +1,8 @@
-import socialuniAppRequest from "socialuni-base-api/src/request/socialuniAppRequest";
-import UniProviderLoginQO from "socialuni-base-api/src/model/login/UniProviderLoginQO";
-import SocialLoginRO from "socialuni-base-api/src/model/social/SocialLoginRO";
-import SocialuniMineUserRO from "socialuni-base-api/src/model/user/SocialuniMineUserRO";
-import SocialPhoneNumLoginQO from "socialuni-base-api/src/model/phone/SocialPhoneNumLoginQO";
+import socialuniAppRequest from "socialuni/src/request/socialuniAppRequest";
+import UniProviderLoginQO from "socialuni/src/model/login/UniProviderLoginQO";
+import SocialLoginRO from "socialuni/src/model/social/SocialLoginRO";
+import SocialuniMineUserRO from "socialuni/src/model/user/SocialuniMineUserRO";
+import SocialPhoneNumLoginQO from "socialuni/src/model/phone/SocialPhoneNumLoginQO";
 
 export default class LoginAPI {
   static providerLoginAPI () {

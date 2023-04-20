@@ -63,15 +63,15 @@ import UniUtil from "socialuni-util/src/util/UniUtil";
 import RouterUtil from "socialuni-util/src/util/RouterUtil";
 import PagePath from "socialuni-constant/constant/PagePath";
 import PageUtil from "socialuni-util/src/util/PageUtil";
-import TagVO from "socialuni-base-api/src/model/community/tag/TagVO";
-import DistrictVO from "socialuni-base-api/src/model/DistrictVO";
+import TagVO from "socialuni/src/model/community/tag/TagVO";
+import DistrictVO from "socialuni/src/model/DistrictVO";
 import {onHide, onShow} from "@dcloudio/uni-app";
 import SocialTagPicker from "../../component/SocialTagPicker.vue";
 import {socialuniTagModule} from "../../store/SocialTagModule";
 import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
 import { socialNotifyModule } from '../../store/SocialNotifyModule'
 import {socialLocationModule} from "../../store/SocialLocationModule";
-import {socialuniConfigModule} from "socialuni-base-api/src/store/SocialuniConfigModule";
+import {socialuniConfigModule} from "socialuni/src/store/SocialuniConfigModule";
 import QCityPicker from "../../component/QCityPicker/QCityPicker.vue";
 import CommunityPageUtil from "../../util/CommunityPageUtil";
 import {socialAppModule} from "socialuni/src/store/SocialAppModule";

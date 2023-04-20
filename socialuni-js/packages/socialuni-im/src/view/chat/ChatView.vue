@@ -116,12 +116,12 @@ import AlertUtil from "socialuni-util/src/util/AlertUtil"
 import ToastUtil from "socialuni-util/src/util/ToastUtil"
 import {onLoad, onShow} from "@dcloudio/uni-app"
 import PageUtil from "socialuni-util/src/util/PageUtil"
-import SocialUserContentRO from "socialuni-base-api/src/model/social/SocialUserContentRO"
+import SocialUserContentRO from "socialuni/src/model/social/SocialUserContentRO"
 import QNavbar from "socialuni-ui/src/components/QNavbar/QNavbar.vue"
 import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue"
 import QSearch from "socialuni-ui/src/components/QSearch/QSearch.vue"
 import QInput from "socialuni-ui/src/components/QInput/QInput.vue"
-import SocialuniChatRO from "socialuni-base-api/src/model/SocialuniChatRO"
+import SocialuniChatRO from "socialuni/src/model/SocialuniChatRO"
 import {socialChatModule} from "../../store/SocialChatModule";
 import ChatAPI from "socialuni-im-api/src/api/ChatAPI";
 import ImPageUtil from "../../util/ImPageUtil";

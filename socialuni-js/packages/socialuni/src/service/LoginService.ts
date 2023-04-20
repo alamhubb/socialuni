@@ -2,7 +2,7 @@ import UniUserUtil from 'socialuni-util/src/util/UniUserUtil'
 import ToastUtil from 'socialuni-util/src/util/ToastUtil'
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import Constants from "socialuni-constant/constant/Constant";
-import SocialPhoneNumLoginQO from "socialuni-base-api/src/model/phone/SocialPhoneNumLoginQO";
+import SocialPhoneNumLoginQO from "socialuni/src/model/phone/SocialPhoneNumLoginQO";
 import LoginAPI from "socialuni-user-api/src/api/LoginAPI";
 import UserService from "./UserService";
 

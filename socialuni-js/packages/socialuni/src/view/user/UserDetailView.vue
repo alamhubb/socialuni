@@ -165,13 +165,13 @@
 
 <script lang="ts">
 import {Options, Prop, Vue, Watch} from 'vue-property-decorator'
-import CenterUserDetailRO from "socialuni-base-api/src/model/social/CenterUserDetailRO"
+import CenterUserDetailRO from "socialuni/src/model/social/CenterUserDetailRO"
 import UniUtil from "socialuni-util/src/util/UniUtil"
 import {onMounted} from "vue"
 import AlertUtil from "socialuni-util/src/util/AlertUtil"
 import ToastUtil from "socialuni-util/src/util/ToastUtil"
 import UserSchoolEditDialog from "./UserSchoolEditDialog.vue"
-import TalkVO from "socialuni-base-api/src/model/talk/TalkVO"
+import TalkVO from "socialuni/src/model/talk/TalkVO"
 import FollowStatus from "socialuni-constant/constant/FollowStatus"
 import SocialuniUserInfoImg from "./SocialuniUserInfoImg.vue"
 import SocialuniFriendAPI from "socialuni-im-api/src/api/SocialuniFriendAPI"
@@ -188,7 +188,7 @@ import SocialGenderTag from "../../component/SocialGenderTag/SocialGenderTag.vue
 import QRowItem from "socialuni-ui/src/components/QRowItem/QRowItem.vue";
 import SocialuniUserAPI from "socialuni-user-api/src/api/SocialuniUserAPI";
 import {socialChatModule} from "socialuni-im/src/store/SocialChatModule";
-import {socialuniConfigModule} from "socialuni-base-api/src/store/SocialuniConfigModule";
+import {socialuniConfigModule} from "socialuni/src/store/SocialuniConfigModule";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
 import {socialuniUserModule} from "../../store/SocialuniUserModule";

@@ -1,6 +1,6 @@
 import UniUtil from './UniUtil'
 import AppConfig from "socialuni-constant/constant/AppConfig";
-import UserPayResultVO from "socialuni-base-api/src/model/user/UserPayResultVO";
+import UserPayResultVO from "socialuni/src/model/user/UserPayResultVO";
 
 export default class QQUtils {
   static subscribeAppMsg (tmplIds: string[]) {

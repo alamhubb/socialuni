@@ -259,12 +259,12 @@ import QIcon from 'socialuni-ui/src/components/QIcon/QIcon.vue'
 import QNavbar from 'socialuni-ui/src/components/QNavbar/QNavbar.vue'
 import CosUtil from "socialuni-util/src/util/CosUtil";
 import AppMsg from "socialuni-constant/constant/AppMsg";
-import CosAuthRO from "socialuni-base-api/src/model/cos/CosAuthRO";
+import CosAuthRO from "socialuni/src/model/cos/CosAuthRO";
 import MessageItemContent from "./MessageItemContent.vue";
 import SocialuniProviderType from "socialuni-constant/constant/SocialuniProviderType";
 import {onLoad} from "@dcloudio/uni-app";
 import {onMounted} from "vue";
-import SocialuniChatRO from "socialuni-base-api/src/model/SocialuniChatRO";
+import SocialuniChatRO from "socialuni/src/model/SocialuniChatRO";
 import MessageAPI from "socialuni-im-api/src/api/MessageAPI";
 import MessageVO from "socialuni-im-api/src/model/RO/MessageVO";
 import SocialuniReportDialog from "socialuni/src/component/SocialuniReportDialog.vue";
@@ -272,7 +272,7 @@ import NodeInfo = UniNamespace.NodeInfo;
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import {socialChatModule} from "../../store/SocialChatModule";
 import {socialAppModule} from "socialuni/src/store/SocialAppModule";
-import SocialuniAppAPI from "socialuni-base-api/src/api/SocialuniAppAPI";
+import SocialuniAppAPI from "socialuni/src/api/SocialuniAppAPI";
 import DomFile from "socialuni-util/src/model/DomFile";
 import CosService from "socialuni/src/service/CosService";
 import UserCheckUtil from "socialuni/src/util/UserCheckUtil";

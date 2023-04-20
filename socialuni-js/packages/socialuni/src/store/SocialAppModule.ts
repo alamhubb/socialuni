@@ -1,7 +1,7 @@
-import HomeSwiperVO from "socialuni-base-api/src/model/HomeSwiperVO";
+import HomeSwiperVO from "socialuni/src/model/HomeSwiperVO";
 import PlatformUtils from "socialuni/src/utils/PlatformUtils";
 import {reactive} from "vue";
-import SocialuniAppAPI from "socialuni-base-api/src/api/SocialuniAppAPI";
+import SocialuniAppAPI from "socialuni/src/api/SocialuniAppAPI";
 
 
 class SocialAppModule {

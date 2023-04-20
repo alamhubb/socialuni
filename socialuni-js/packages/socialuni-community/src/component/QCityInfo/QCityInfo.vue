@@ -26,7 +26,7 @@
 import {Emit, Model, Options, Prop, Vue} from 'vue-property-decorator'
 import QCityPicker from "../QCityPicker/QCityPicker.vue";
 import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
-import DistrictVO from "socialuni-base-api/src/model/DistrictVO";
+import DistrictVO from "socialuni/src/model/DistrictVO";
 
 @Options({
   components: {

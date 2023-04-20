@@ -77,13 +77,13 @@
 <script lang="ts">
 import {Vue, Options, Prop, Emit} from 'vue-property-decorator'
 import SocialuniFollowType from "socialuni-constant/constant/user/SocialuniFollowType";
-import SocialUserContentRO from "socialuni-base-api/src/model/social/SocialUserContentRO";
+import SocialUserContentRO from "socialuni/src/model/social/SocialUserContentRO";
 import PageUtil from "socialuni-util/src/util/PageUtil";
 import {onLoad, onPullDownRefresh, onReachBottom, onShow} from "@dcloudio/uni-app";
 import QTabs from "socialuni-ui/src/components/QTabs/QTabs.vue";
-import SocialuniPageQueryQO from "socialuni-base-api/src/model/common/SocialuniPageQueryQO";
-import SocialuniPageQueryUtil from "socialuni-base-api/src/model/common/SocialuniPageQueryUtil";
-import SocialuniUserRO from "socialuni-base-api/src/model/user/SocialuniUserRO";
+import SocialuniPageQueryQO from "socialuni/src/model/common/SocialuniPageQueryQO";
+import SocialuniPageQueryUtil from "socialuni/src/model/common/SocialuniPageQueryUtil";
+import SocialuniUserRO from "socialuni/src/model/user/SocialuniUserRO";
 import SocialuniFollowTag from "socialuni-community/src/component/SocialuniFollow/SocialuniFollowTag.vue";
 import SocialGenderTag from "../../../component/SocialGenderTag/SocialGenderTag.vue";
 import FollowAPI from "socialuni-community-api/src/api/FollowAPI";

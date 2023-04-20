@@ -1,4 +1,4 @@
-import NotifyVO from "socialuni-base-api/src/model/NotifyVO";
+import NotifyVO from "socialuni/src/model/NotifyVO";
 
 export interface SocialuniPlugin{
     //应用启动

@@ -1,10 +1,10 @@
 import ToastUtil from "socialuni-util/src/util/ToastUtil";
-import CircleCreateQO from "socialuni-base-api/src/model/community/circle/CircleCreateQO";
-import SocialCircleRO from "socialuni-base-api/src/model/community/circle/SocialCircleRO";
-import CircleCreateChatQO from "socialuni-base-api/src/model/community/circle/CircleCreateChatQO";
-import SocialuniTalkTabCircleRO from "socialuni-base-api/src/model/community/circle/SocialuniTalkTabCircleRO";
-import CircleTypeRO from "socialuni-base-api/src/model/community/circle/CircleTypeRO";
-import SocialuniCircleQueryByTypeQO from "socialuni-base-api/src/model/QO/circle/SocialuniCircleQueryByTypeQO";
+import CircleCreateQO from "socialuni/src/model/community/circle/CircleCreateQO";
+import SocialCircleRO from "socialuni/src/model/community/circle/SocialCircleRO";
+import CircleCreateChatQO from "socialuni/src/model/community/circle/CircleCreateChatQO";
+import SocialuniTalkTabCircleRO from "socialuni/src/model/community/circle/SocialuniTalkTabCircleRO";
+import CircleTypeRO from "socialuni/src/model/community/circle/CircleTypeRO";
+import SocialuniCircleQueryByTypeQO from "socialuni/src/model/QO/circle/SocialuniCircleQueryByTypeQO";
 import socialuniCommunityRequest from "../request/socialuniCommunityRequest";
 
 export default class SocialuniCircleAPI {

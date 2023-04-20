@@ -1,6 +1,6 @@
-import socialuniAppRequest from "socialuni-base-api/src/request/socialuniAppRequest";
-import SocialUserIdentityAuthQO from "socialuni-base-api/src/model/QO/user/SocialUserIdentityAuthQO";
-import SocialUserIdentityAuthPreCheckRO from "socialuni-base-api/src/model/RO/user/SocialUserIdentityAuthPreCheckRO";
+import socialuniAppRequest from "socialuni/src/request/socialuniAppRequest";
+import SocialUserIdentityAuthQO from "socialuni/src/model/QO/user/SocialUserIdentityAuthQO";
+import SocialUserIdentityAuthPreCheckRO from "socialuni/src/model/RO/user/SocialUserIdentityAuthPreCheckRO";
 
 
 export default class SocialUserIdentityAPI {

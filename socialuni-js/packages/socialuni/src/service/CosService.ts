@@ -8,10 +8,10 @@ import COS from 'cos-wx-sdk-v5'
 import COS from 'cos-js-sdk-v5'
 // #endif
 import CosUtil from "socialuni-util/src/util/CosUtil";
-import CosAuthRO from "socialuni-base-api/src/model/cos/CosAuthRO";
-import CosAPI from "socialuni-base-api/src/api/CosAPI";
+import CosAuthRO from "socialuni/src/model/cos/CosAuthRO";
+import CosAPI from "socialuni/src/api/CosAPI";
 import DomFile from "socialuni-util/src/model/DomFile";
-import TencentCosAPI from "socialuni-base-api/src/api/TencentCosAPI";
+import TencentCosAPI from "socialuni/src/api/TencentCosAPI";
 
 export default class CosService {
     //向cos上传图片

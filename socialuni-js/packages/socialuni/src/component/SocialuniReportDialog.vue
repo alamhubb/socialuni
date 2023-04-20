@@ -30,11 +30,11 @@ import {Emit, Options, Vue} from 'vue-property-decorator'
 import QPopup from "socialuni-ui/src/components/QPopup/QPopup.vue";
 import {socialuniUserModule} from 'socialuni/src/store/SocialuniUserModule';
 import ReportType from "socialuni-constant/constant/ReportType";
-import ReportAddVO from "socialuni-base-api/src/model/report/ReportAddVO";
+import ReportAddVO from "socialuni/src/model/report/ReportAddVO";
 import AlertUtil from "socialuni-util/src/util/AlertUtil";
-import {socialuniConfigModule} from "socialuni-base-api/src/store/SocialuniConfigModule";
+import {socialuniConfigModule} from "socialuni/src/store/SocialuniConfigModule";
 import UserCheckUtil from "socialuni/src/util/UserCheckUtil";
-import ReportAPI from "socialuni-base-api/src/api/ReportAPI";
+import ReportAPI from "socialuni/src/api/ReportAPI";
 
 @Options({
   components: {QPopup}

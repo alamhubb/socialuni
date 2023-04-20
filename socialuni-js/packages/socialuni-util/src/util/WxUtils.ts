@@ -1,6 +1,6 @@
 import UniUtil from './UniUtil'
 import AppConfig from "socialuni-constant/constant/AppConfig";
-import UserPayResultVO from "socialuni-base-api/src/model/user/UserPayResultVO";
+import UserPayResultVO from "socialuni/src/model/user/UserPayResultVO";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import PlatformType from "socialuni-constant/constant/PlatformType";
 
