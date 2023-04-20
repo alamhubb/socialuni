@@ -1,6 +1,8 @@
 package com.socialuni.social.im.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniUserContactBaseDO;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
+import com.socialuni.social.im.enumeration.SocialuniAddFriendStatus;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -25,9 +27,10 @@ import javax.persistence.Table;
 public class SocialuniFriendApplyRecordDO extends SocialuniUserContactBaseDO {
     String applyMsg;
 
-    public SocialuniFriendApplyRecordDO(Integer userId, Integer beUserId, String applyMsg,String applyType) {
+    public SocialuniFriendApplyRecordDO(Integer userId, Integer beUserId, String applyMsg, String applyType) {
         super(userId, beUserId);
         this.applyMsg = applyMsg;
+        this.setStatus(SocialuniAddFriendStatus.init);
         this.setType(applyType);
     }
 }
