@@ -1,8 +1,11 @@
 import {reactive, UnwrapNestedRefs} from "vue";
 import {SocialuniPlugin} from "../interface/SocialuniPlugin";
+import HttpRequestConfig from '../request/HttpRequestConfig'
+import SocialuniHttpRequestConfig from '../request/SocialuniHttpRequestConfig'
 
 class SocialuniPluginsModule {
     private socialuniPlugins: SocialuniPlugin[] = []
+    requestConfig: HttpRequestConfig = new SocialuniHttpRequestConfig()
 
     init() {
         this.socialuniPlugins = []

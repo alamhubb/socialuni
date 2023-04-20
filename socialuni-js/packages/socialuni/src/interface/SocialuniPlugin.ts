@@ -8,7 +8,6 @@ export interface SocialuniPlugin{
     onMessage?(notify: NotifyVO)
 
     onWebsocketConnect?(reload:boolean)
-
 }
 
 

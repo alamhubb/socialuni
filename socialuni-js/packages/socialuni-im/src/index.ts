@@ -22,3 +22,8 @@ const socialuniImPlugin: SocialuniPlugin = {
 }
 
 export default socialuniImPlugin
+
+//提供默认的
+//可重写 可覆盖
+
+//common

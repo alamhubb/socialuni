@@ -6,8 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "socialuni-base-api": "^0.1.2",
-    "socialuni-user-api": "^0.1.2",
+    "socialuni": "^0.1.2",
     "socialuni-community-api": "^0.1.2",
     "socialuni-im-api": "^0.1.2"
   },

@@ -83,26 +83,26 @@ export default class UniAppHttpRequest {
     interceptor: Interceptor = {
         request: (callback: (config: RequestConfig) => RequestConfig) => {
             if (callback) {
-                this.requestBeforeFun = callback
+                this.requestBefore = callback
             }
         },
         response: (cb: (rep: Response) => any, ecb: (rep: Response) => any) => {
             if (cb && ecb) {
-                this.requestComFun = cb
-                this.requestComFail = ecb
+                this.responseSuccess = cb
+                this.responseFail = ecb
             }
         }
     }
 
-    protected requestBeforeFun: (config: RequestConfig, cancel?: Function) => RequestConfig = (config: RequestConfig) => {
+    protected requestBefore: (config: RequestConfig, cancel?: Function) => RequestConfig = (config: RequestConfig) => {
         return config
     }
 
-    protected requestComFun: (response: Response) => any = (response: Response) => {
+    protected responseSuccess: (response: Response) => any = (response: Response) => {
         return response
     }
 
-    protected requestComFail: (response: Response) => Response = (response: Response) => {
+    protected responseFail: (response: Response) => Response = (response: Response) => {
         return response
     }
 
@@ -126,9 +126,9 @@ export default class UniAppHttpRequest {
             _options.complete = (response: Response) => {
                 response.config = _config
                 if (response.statusCode === 200) { // 成功
-                    resolve(this.requestComFun(response))
+                    resolve(this.responseSuccess(response))
                 } else {
-                    reject(this.requestComFail(response))
+                    reject(this.responseFail(response))
                 }
             }
             const cancel = (t = 'handle cancel', config = _options): void => {
@@ -139,7 +139,7 @@ export default class UniAppHttpRequest {
                 reject(err)
                 next = false
             }
-            _config = {...this.requestBeforeFun(_options, cancel)}
+            _config = {...this.requestBefore(_options, cancel)}
             if (!next) return
             uni.request(_config as RequestOptions)
         })
