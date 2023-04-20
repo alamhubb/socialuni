@@ -765,7 +765,7 @@ class SocialChatModule {
     }
 
     setChats(chats: SocialuniChatRO[]) {
-        console.log(3333)
+        /*console.log(3333)
         console.log(this.chats.length)
         if (this.chats.length) {
             for (const chat1 of chats) {
@@ -773,8 +773,8 @@ class SocialChatModule {
             }
         } else {
             this.chats = chats
-        }
-
+        }*/
+        this.chats = chats
         // this.computedChatsUnreadNumTotalAction()
     }
 

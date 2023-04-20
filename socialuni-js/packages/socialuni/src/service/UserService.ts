@@ -43,6 +43,7 @@ export default class UserService {
     //清空用户信息的组合操作
     static clearUserInfo() {
         socialuniUserModule.removeUserAndToken()
+        UserService.getAppLunchDataByHasUser()
         // socialChatModule.removeImToken()
         // socialNotifyModule.clearNotifies()
         // WebsocketUtil.websocketClose()
