@@ -3,7 +3,7 @@ import JsonUtil from "../../../socialuni-base-api/src/util/JsonUtil";
 import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
 import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
 import NotifyVO from "socialuni-base-api/src/model/NotifyVO";
-import SocialuniConfig from "socialuni-base-api/src/config/SocialuniConfigModule";
+import SocialuniConfig from "socialuni-base-api/src/config/SocialuniConfig";
 import {socialuniPluginsModule} from "../store/SocialuniPluginsModule";
 import SocketTask = UniNamespace.SocketTask;
 

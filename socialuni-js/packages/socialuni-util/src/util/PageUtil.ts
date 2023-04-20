@@ -18,29 +18,6 @@ export default class PageUtil {
         // uni.navigateBack({ delta: 1 })
     }
 
-    static toTalkDetail(talkId: string) {
-        RouterUtil.navigateTo(UserPagePath.talkDetail + '?talkId=' + talkId)
-    }
-
-
-    static toUserDetail(userId: string) {
-        if (RouterUtil.getCurrentPageURI() !== UserPagePath.userDetail) {
-            RouterUtil.navigateTo(UserPagePath.userDetail + '?userId=' + userId)
-        }
-    }
-
-    static toEditMineInfo() {
-        RouterUtil.navigateTo(UserPagePath.editMineInfo)
-    }
-
-    static toUserFollowPage(followType: string) {
-        RouterUtil.navigateTo(UserPagePath.userFollow + '?followType=' + followType)
-    }
-
-    static toUserImgList(userId: string) {
-        RouterUtil.navigateTo(UserPagePath.userImgList + '?userId=' + userId)
-    }
-
     static toOAuthPage() {
         RouterUtil.navigateTo(UserPagePath.oAuth)
     }
