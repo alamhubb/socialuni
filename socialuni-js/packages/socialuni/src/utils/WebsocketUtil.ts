@@ -2,20 +2,32 @@ import CommonUtil from "socialuni-util/src/util/CommonUtil";
 import JsonUtil from "../../../socialuni-base-api/src/util/JsonUtil";
 import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
 import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
-import {socialuniConfigModule} from "socialuni-base-api/src/store/SocialuniConfigModule";
 import NotifyVO from "socialuni-base-api/src/model/NotifyVO";
 import SocialuniConfig from "socialuni-base-api/src/config/SocialuniConfigModule";
 import {socialuniPluginsModule} from "../store/SocialuniPluginsModule";
-import {socialChatModule} from "socialuni-im/src/store/SocialChatModule";
+import SocketTask = UniNamespace.SocketTask;
 
 export default class WebsocketUtil {
-
     //失败重连时间
-    static failedReconnectTime = 5000
+    static failedReconnectTime = 2000
     static timer: number = null
     static locking: boolean = false
+    static ws: SocketTask = null
+
+    static reConnect() {
+        if (this.locking) return;
+        this.locking = true;
+        CommonUtil.delayTime(WebsocketUtil.failedReconnectTime).then(() => {
+            WebsocketUtil.websocketConnect(true)
+        })
+    }
 
     static websocketConnect(reload: boolean) {
+        this.locking = true;
+        //上锁，防止无限重连，因为会触发close会触发重连
+        this.ws?.close(null);
+        this.ws = undefined;
+
         console.log('websocket连接')
 
         for (const plugin of socialuniPluginsModule.plugins) {
@@ -33,23 +45,24 @@ export default class WebsocketUtil {
         console.log(SocialuniConfig.socialuniWebsocketUrl + '/webSocket/message?token=' + token)
 
 
-        if (!this.locking) {
-            this.locking = true
-            uni.connectSocket({
-                //因为app不支持header中传参
-                // url: AppConfig.websocketUrl + 'imserver/' + token,
-                url: SocialuniConfig.socialuniWebsocketUrl + '/webSocket/message?token=' + token,
-                /* url: CommonUtil.websocketUrl + 'webSocket/message',
-                header: {
-                  token: token
-                }, */
-                complete: () => {
-                    console.log('完成')
-                }
-            })
-        }
+        this.ws = uni.connectSocket({
+            //因为app不支持header中传参
+            // url: AppConfig.websocketUrl + 'imserver/' + token,
+            url: SocialuniConfig.socialuniWebsocketUrl + '/webSocket/message?token=' + token,
+            /* url: CommonUtil.websocketUrl + 'webSocket/message',
+            header: {
+              token: token
+            }, */
+            complete: () => {
+                console.log('完成')
+                this.locking = false
+            }
+        })
 
-        uni.onSocketOpen(() => {
+        console.log(this.ws)
+
+        this.ws.onOpen(() => {
+            this.locking = false
             console.log('打开')
             if (reload || WebsocketUtil.timer) {
                 clearInterval(WebsocketUtil.timer)
@@ -76,23 +89,19 @@ export default class WebsocketUtil {
             }, 30000)
         })
 
-        uni.onSocketError(() => {
+        this.ws.onError(() => {
             console.log('触发了错误')
             // #ifndef MP
-            CommonUtil.delayTime(WebsocketUtil.failedReconnectTime).then(() => {
-                WebsocketUtil.websocketConnect(true)
-            })
+            this.reConnect()
             // #endif
         })
 
-        uni.onSocketClose((e) => {
+        this.ws.onClose((e) => {
             console.log('触发了关闭:' + e)
-            CommonUtil.delayTime(WebsocketUtil.failedReconnectTime).then(() => {
-                WebsocketUtil.websocketConnect(true)
-            })
+            this.reConnect()
         })
 
-        uni.onSocketMessage((res: any) => {
+        this.ws.onMessage((res: any) => {
             const notify: NotifyVO = JsonUtil.toParse(res.data)
             for (const plugin of socialuniPluginsModule.plugins) {
                 plugin.onMessage?.(notify)
