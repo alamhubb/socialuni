@@ -13,7 +13,7 @@ import java.util.List;
 public class MessageReceiveStatus extends SocialuniCommonStatus {
     public static final String waitOpen = ConstStatus.waitOpen;
 
-    public static final List<String> allStatus = Arrays.asList(MessageReceiveStatus.init);
+    public static final List<String> allStatus = Arrays.asList(MessageReceiveStatus.enable);
 
    /* //启用
     public static final String normal = "正常";

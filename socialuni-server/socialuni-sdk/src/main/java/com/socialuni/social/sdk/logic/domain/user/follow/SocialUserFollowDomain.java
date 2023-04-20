@@ -38,7 +38,7 @@ public class SocialUserFollowDomain {
             followManage.createFollow(mineUserId, beUserId);
         } else {
             //已经关注
-            followManage.updateFollow(followDO, SocialuniCommonStatus.init);
+            followManage.updateFollow(followDO, SocialuniCommonStatus.enable);
         }
     }
 

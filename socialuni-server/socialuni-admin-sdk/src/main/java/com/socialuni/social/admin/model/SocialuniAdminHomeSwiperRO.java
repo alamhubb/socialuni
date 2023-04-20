@@ -24,7 +24,7 @@ public class SocialuniAdminHomeSwiperRO {
 
     public SocialuniAdminHomeSwiperRO(SocialuniHomeSwiperDO SocialuniHomeSwiperDO) {
         this.id = SocialuniHomeSwiperDO.getId();
-        this.enable = SocialuniHomeSwiperDO.getStatus().equals(SocialuniCommonStatus.init);
+        this.enable = SocialuniHomeSwiperDO.getStatus().equals(SocialuniCommonStatus.enable);
         this.name = SocialuniHomeSwiperDO.getName();
         this.skipType = SocialuniHomeSwiperDO.getSkipType();
         this.skipUrl = SocialuniHomeSwiperDO.getSkipUrl();

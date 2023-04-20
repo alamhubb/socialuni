@@ -40,7 +40,7 @@ public class ChatQueryDomain {
     //初始化和查询chat列表触发的
     public List<ChatRO> getUserChats(SocialuniUserDo user) {
         //未登录的情况只插叙你官方的chats
-        List<ChatUserDO> chatUsers = chatUserRepository.findByStatusAndUserIdOrderByUpdateTimeDesc(ChatStatus.init, user.getUserId());
+        List<ChatUserDO> chatUsers = chatUserRepository.findByStatusAndUserIdOrderByUpdateTimeDesc(ChatStatus.enable, user.getUserId());
         //查询的时候chat列表展示不为当前用户的
         /*return chatUsers.stream().map((ChatUserDO chatUserDO) -> {
             //只有启用的才显示消息列表
@@ -56,7 +56,7 @@ public class ChatQueryDomain {
     //未登录的情况下查询官方chat，官方群聊
     public List<ChatRO> getNoLoginChats() {
         //未登录的情况只插叙你官方的chats
-        List<SocialuniChatDO> chats = chatRepository.findByStatusAndTypeInOrderByTopLevelDescUpdateTimeDesc(ChatStatus.init, ChatType.systemChats);
+        List<SocialuniChatDO> chats = chatRepository.findByStatusAndTypeInOrderByTopLevelDescUpdateTimeDesc(ChatStatus.enable, ChatType.systemChats);
         return SocialChatROFactory.chatDOToVOS(chats);
     }
 }

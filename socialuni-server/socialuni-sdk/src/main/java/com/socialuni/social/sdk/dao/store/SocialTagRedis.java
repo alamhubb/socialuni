@@ -32,7 +32,7 @@ public class SocialTagRedis {
 
     @Cacheable(cacheNames = TagRedisKey.tagById, key = "#tagId")
     public TagDO findTagById(Integer tagId) {
-        return tagApi.findByIdAndStatus(tagId, SocialuniCommonStatus.init);
+        return tagApi.findByIdAndStatus(tagId, SocialuniCommonStatus.enable);
     }
 
     @Cacheable(cacheNames = TagRedisKey.talkTagsByTalkId, key = "#talkId")
@@ -43,7 +43,7 @@ public class SocialTagRedis {
 
     //获取talk下的
     private List<Integer> getTagIdsByTalkId(Integer talkId) {
-        return tagApi.findTagIdsByTalkIdAndStatusAndShowFront(talkId, ContentStatus.init, true);
+        return tagApi.findTagIdsByTalkIdAndStatusAndShowFront(talkId, ContentStatus.enable, true);
     }
 
     /**
@@ -55,9 +55,9 @@ public class SocialTagRedis {
     public List<TagRO> getHotTagsRedis(String appGenderType) {
         List<?  extends TagDO> TagDOs;
         if (GenderType.all.equals(appGenderType)) {
-            TagDOs = tagApi.findByStatusOrderByCountDesc(ContentStatus.init, PageRequest.of(0, 10));
+            TagDOs = tagApi.findByStatusOrderByCountDesc(ContentStatus.enable, PageRequest.of(0, 10));
         } else {
-            TagDOs = tagApi.findByStatusAndVisibleGenderOrderByCountDesc(ContentStatus.init, appGenderType, PageRequest.of(0, 10));
+            TagDOs = tagApi.findByStatusAndVisibleGenderOrderByCountDesc(ContentStatus.enable, appGenderType, PageRequest.of(0, 10));
         }
         return SocialTagROFactory.tagDOToROS(TagDOs);
     }
@@ -66,9 +66,9 @@ public class SocialTagRedis {
     public List<TagRO> getAllTagsRedis(String appGenderType) {
         List<?  extends TagDO> TagDOs;
         if (appGenderType.equals(GenderType.all)) {
-            TagDOs = tagApi.findAllByStatusOrderByCountDesc(ContentStatus.init);
+            TagDOs = tagApi.findAllByStatusOrderByCountDesc(ContentStatus.enable);
         } else {
-            TagDOs = tagApi.findAllByStatusAndVisibleGenderOrderByCountDesc(ContentStatus.init, appGenderType);
+            TagDOs = tagApi.findAllByStatusAndVisibleGenderOrderByCountDesc(ContentStatus.enable, appGenderType);
         }
         return SocialTagROFactory.tagDOToROS(TagDOs);
     }
@@ -113,7 +113,7 @@ public class SocialTagRedis {
 
     private List<?  extends SocialuniTagTypeDO> getTagTypes() {
         //查询出来所有启用的类型的tagTypes，按talk数量排序
-        return tagTypeRepository.findByStatusOrderByOrderLevelDescTalkCountDesc(ContentStatus.init);
+        return tagTypeRepository.findByStatusOrderByOrderLevelDescTalkCountDesc(ContentStatus.enable);
     }
 
     //给tagtype设置它的子标签
@@ -126,7 +126,7 @@ public class SocialTagRedis {
                 if (!appGenderType.equals(GenderType.boy)) {
                     //获取所有女生话题
                     TagTypeRO tagTypeRO = SocialTagTypeROFactory.getTagTypeRO(tagTypeDO);
-                    List<?  extends TagDO> TagDOs = tagApi.findByStatusAndVisibleGenderOrderByCountDesc(ContentStatus.init, GenderType.girl);
+                    List<?  extends TagDO> TagDOs = tagApi.findByStatusAndVisibleGenderOrderByCountDesc(ContentStatus.enable, GenderType.girl);
                     tagTypeRO.setTags(SocialTagROFactory.tagDOToROS(TagDOs));
                     tagTypeROS.add(tagTypeRO);
                 }
@@ -136,7 +136,7 @@ public class SocialTagRedis {
                 if (!appGenderType.equals(GenderType.girl)) {
                     //获取所有男生话题
                     TagTypeRO tagTypeRO = SocialTagTypeROFactory.getTagTypeRO(tagTypeDO);
-                    List<?  extends TagDO> TagDOs = tagApi.findByStatusAndVisibleGenderOrderByCountDesc(ContentStatus.init, GenderType.boy);
+                    List<?  extends TagDO> TagDOs = tagApi.findByStatusAndVisibleGenderOrderByCountDesc(ContentStatus.enable, GenderType.boy);
                     tagTypeRO.setTags(SocialTagROFactory.tagDOToROS(TagDOs));
                     tagTypeROS.add(tagTypeRO);
                 }
@@ -153,9 +153,9 @@ public class SocialTagRedis {
     private List<TagRO> getTagsByTagTypeId(SocialuniTagTypeDO tagTypeDO, String appGenderType) {
         List<?  extends TagDO> TagDOs;
         if (appGenderType.equals(GenderType.all)) {
-            TagDOs = tagApi.findByTagTypeIdAndStatusOrderByCountDesc(tagTypeDO.getId(), ContentStatus.init);
+            TagDOs = tagApi.findByTagTypeIdAndStatusOrderByCountDesc(tagTypeDO.getId(), ContentStatus.enable);
         } else {
-            TagDOs = tagApi.findByTagTypeIdAndStatusAndVisibleGenderOrderByCountDesc(tagTypeDO.getId(), ContentStatus.init, appGenderType);
+            TagDOs = tagApi.findByTagTypeIdAndStatusAndVisibleGenderOrderByCountDesc(tagTypeDO.getId(), ContentStatus.enable, appGenderType);
         }
         // 从数据库中获取tag列表
         return SocialTagROFactory.tagDOToROS(TagDOs);

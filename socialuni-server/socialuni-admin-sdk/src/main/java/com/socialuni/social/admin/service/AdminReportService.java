@@ -116,7 +116,7 @@ public class AdminReportService {
             if (socialuniTalkHasUnderageImgAuditDO == null) {
                 throw new SocialParamsException("不存在的图片审核内容");
             }
-            socialuniTalkHasUnderageImgAuditDO.setStatus(ContentStatus.init);
+            socialuniTalkHasUnderageImgAuditDO.setStatus(ContentStatus.enable);
             talkAdultImgAuditRepository.save(socialuniTalkHasUnderageImgAuditDO);
             contentId = socialuniTalkHasUnderageImgAuditDO.getTalkId();
 

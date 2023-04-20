@@ -29,7 +29,7 @@ public class SocialuniUserCheck {
     private static void checkUserStatusEnable() {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
         //如果用户状态不为可用
-        if (!SocialuniUserStatus.init.equals(mineUser.getStatus())) {
+        if (!SocialuniUserStatus.enable.equals(mineUser.getStatus())) {
 //            throw new SocialBusinessException(ErrorMsg.userMaybeViolation);
             ConfigFacade.throwBusinessException(ErrorMsg.userMaybeViolation, SocialSystemConst.CONFIGS_KEY_QQ_ACCOUNT);
         }

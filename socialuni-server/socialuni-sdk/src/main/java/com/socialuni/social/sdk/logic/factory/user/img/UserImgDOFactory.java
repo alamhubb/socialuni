@@ -27,7 +27,7 @@ public class UserImgDOFactory {
         userImgDO.setContent(socialUserImgAddQO.getContent());
         userImgDO.setSize(socialUserImgAddQO.getSize());
         userImgDO.setUserId(mineUser.getUnionId());
-        userImgDO.setStatus(ContentStatus.init);
+        userImgDO.setStatus(ContentStatus.enable);
         userImgDO.setCreateTime(new Date());
         userImgDO.setContentType(SocialuniContentType.userImg);
         userImgDO.setReportNum(0);

@@ -21,7 +21,7 @@ public class SocialTagDOFactory implements Serializable {
         TagDO.setName(tagName);
         TagDO.setAvatar(SocialuniSystemConst.getStaticResourceUrl() + "qingchi/static/qclogo.jpg!avatar");
         TagDO.setDescription(tagDesc);
-        TagDO.setStatus(ContentStatus.init);
+        TagDO.setStatus(ContentStatus.enable);
         TagDO.setCount(0);
         TagDO.setTalkCount(0);
         TagDO.setShowFront(true);

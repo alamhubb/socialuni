@@ -118,7 +118,7 @@ public class SocialuniUserExpandService {
         //查询打开了联系方式的用户
         List<Integer> openContactIds = socialuniUserExpandRepository.findUserIdsByOpenContactInfoOrderByLastOnlineTimeDesc(queryTime);
         //查询用户状态不为封禁的
-        List<Integer> userIds = socialuniUserRepository.findUserIdsByStatus(SocialuniUserStatus.init);
+        List<Integer> userIds = socialuniUserRepository.findUserIdsByStatus(SocialuniUserStatus.enable);
         List<Integer> queryIds;
         if (pageTypeUserIds == null) {
             queryIds = ListConvertUtil.intersectionMany(openContactIds, userIds);

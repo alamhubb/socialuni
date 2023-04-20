@@ -34,7 +34,7 @@ public class ChatUserVerify {
             return ResultRO;
         }
         ChatUserDO chatUserDO = ResultRO.getData();
-        if (!chatUserDO.getStatus().equals(ChatUserStatus.init)) {
+        if (!chatUserDO.getStatus().equals(ChatUserStatus.enable)) {
 //            return new ResultRO<>(ErrorCode.SYSTEM_ERROR);
         }
         return new ResultRO<>(chatUserDO);

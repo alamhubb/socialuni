@@ -55,7 +55,7 @@ public class SocialuniFriendService {
         }
 
         //对方未响应的数据
-        Long countNum = SocialuniUserContactRepositoryFacede.countByUserIdAndBeUserIdAndStatus(mineUserId, beUserId, SocialuniCommonStatus.init, SocialuniFriendApplyRecordDO.class);
+        Long countNum = SocialuniUserContactRepositoryFacede.countByUserIdAndBeUserIdAndStatus(mineUserId, beUserId, SocialuniCommonStatus.enable, SocialuniFriendApplyRecordDO.class);
 
         //禁止多次添加，如果2次以上对上不加不能再申请
         if (countNum > 2) {

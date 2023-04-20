@@ -25,10 +25,10 @@ public class ContentStatus extends SocialuniCommonStatus {
     public static final String violation = ConstStatus.violation;
 
     //他人可见
-    public static final List<String> otherCanSeeContentStatus = Collections.singletonList(init);
+    public static final List<String> otherCanSeeContentStatus = Collections.singletonList(enable);
 
     //自己可见，自己能比别人多看见预审核状态的信息
-    public static final List<String> selfCanSeeContentStatus = Arrays.asList(init, ContentStatus.preAudit);
+    public static final List<String> selfCanSeeContentStatus = Arrays.asList(enable, ContentStatus.preAudit);
 
     //查询 不为审核中的内容
     public static final List<String> auditStatus = Arrays.asList(ContentStatus.preAudit, ContentStatus.auditing);

@@ -17,7 +17,7 @@ public class SocialuniUserStatus extends SocialuniCommonStatus {
     public static final String violation = ConstStatus.violation;
 //    public static final String waitOpen = CommonStatus.waitOpen;
 
-    public static final List<String> allStatus = Arrays.asList(SocialuniUserStatus.init);
+    public static final List<String> allStatus = Arrays.asList(SocialuniUserStatus.enable);
 //    public static final List<String> allStatus = Arrays.asList(Status.enable, Status.waitOpen);
 
    /* //启用

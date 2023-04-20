@@ -64,7 +64,7 @@ public class KeywordsQueryController {
     public ResultRO<List<KeywordsDO>> queryKeywords() {
         CheckIsAdminUtil.checkAdmin();
         //先查询出来所有的关键词
-        List<KeywordsDO> wordDOs = keywordsRepository.findAllByStatusOrderByTextViolateRatioDesc(SocialuniCommonStatus.init);
+        List<KeywordsDO> wordDOs = keywordsRepository.findAllByStatusOrderByTextViolateRatioDesc(SocialuniCommonStatus.enable);
 
         return new ResultRO<>(wordDOs);
     }

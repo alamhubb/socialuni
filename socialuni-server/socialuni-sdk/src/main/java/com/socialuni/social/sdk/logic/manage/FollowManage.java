@@ -35,6 +35,6 @@ public class FollowManage {
 
     public boolean userHasFollowBeUser(Integer userId, Integer beUserId) {
         SocialuniFollowDO followDO = followRedis.findFirstByUserIdAndBeUserId(userId, beUserId);
-        return followDO != null && SocialuniCommonStatus.init.equals(followDO.getStatus());
+        return followDO != null && SocialuniCommonStatus.enable.equals(followDO.getStatus());
     }
 }

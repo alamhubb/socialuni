@@ -60,7 +60,7 @@ public class TagService {
                     TagDO TagDO = socialTagRedis.findTagById(tagId);
                     //如果话题存在且可用
                     if (TagDO != null) {
-                        if (!ContentStatus.init.equals(TagDO.getStatus())) {
+                        if (!ContentStatus.enable.equals(TagDO.getStatus())) {
                             throw new SocialParamsException("引用了不可使用的话题");
                         }
 

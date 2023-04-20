@@ -43,7 +43,7 @@ public class SocialunUserScheduledTasks {
         List<SocialuniUserDo> users = userApi.findCanUnfreezeViolationUser(SocialuniUserStatus.violation, curDate);
         for (SocialuniUserDo user : users) {
             user.setUpdateTime(curDate);
-            user.setStatus(SocialuniUserStatus.init);
+            user.setStatus(SocialuniUserStatus.enable);
             userApi.savePut(user);
         }
         log.info("今日时间{}，解封用户数量：{}", curDate, users.size());

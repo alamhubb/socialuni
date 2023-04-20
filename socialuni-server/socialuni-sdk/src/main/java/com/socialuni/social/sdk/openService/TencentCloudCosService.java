@@ -34,7 +34,7 @@ public class TencentCloudCosService {
         } else {
             contentType = SocialuniContentType.user;
         }
-        recordDO.setStatus(SocialuniCommonStatus.init);
+        recordDO.setStatus(SocialuniCommonStatus.enable);
         recordDO.setContentType(contentType);
         //thumbType
         String[] imgThumbTypes = imgUrl.split("%21");

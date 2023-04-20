@@ -135,7 +135,7 @@ public class SocialuniPostTalkDomain {
         }
         for (String tagName : tagNames) {
             TagDO TagDO = tagApi.findFirstByName(tagName);
-            if (TagDO == null || !TagDO.getStatus().equals(SocialuniCommonStatus.init)) {
+            if (TagDO == null || !TagDO.getStatus().equals(SocialuniCommonStatus.enable)) {
                 throw new SocialBusinessException("选择了无效的话题");
             }
             tagIds.add(TagDO.getId());

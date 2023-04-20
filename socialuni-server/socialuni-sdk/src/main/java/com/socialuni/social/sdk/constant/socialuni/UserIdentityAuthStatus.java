@@ -14,6 +14,6 @@ public class UserIdentityAuthStatus extends SocialuniCommonStatus {
     public static final String fail =  ConstStatus.fail;
 
     public static final List<String> auditList = Arrays.asList(preAudit, audit);
-    public static final List<String> authSuccessList = Arrays.asList(preAudit, init);
+    public static final List<String> authSuccessList = Arrays.asList(preAudit, enable);
 }
 

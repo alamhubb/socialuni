@@ -90,7 +90,7 @@ public class KeywordsManageController {
     //    @GetMapping("batchClosePinyinOrTexts"),批量关闭时使用
     public ResultRO<KeywordsDO> batchOpenPinyinOrTexts() {
         //获取关键词
-        List<KeywordsDO> optionalViolateWordDOs = keywordsRepository.findAllByStatusAndOpenPinyinIsTrueAndPinyinNormalNumGreaterThanAndPinyinViolateRatioLessThan(SocialuniCommonStatus.init, 19, 0.4);
+        List<KeywordsDO> optionalViolateWordDOs = keywordsRepository.findAllByStatusAndOpenPinyinIsTrueAndPinyinNormalNumGreaterThanAndPinyinViolateRatioLessThan(SocialuniCommonStatus.enable, 19, 0.4);
 
         for (KeywordsDO keywordsDO : optionalViolateWordDOs) {
             getKeywordsDOResultVO(keywordsDO, "pinyin", "批量关闭");

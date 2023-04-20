@@ -16,7 +16,7 @@ public class ThirdUserAuthManage {
 
     public void getOrCreate(ThirdUserDO threeUserDO, String oAuthType) {
         //查看是否授权过
-        ThirdUserAuthDO threeUserAuthDOOptional = thirdUserAuthRepository.findByDevIdAndUserIdAndAuthTypeAndStatus(threeUserDO.getDevId(), threeUserDO.getUserId(), oAuthType, SocialuniCommonStatus.init);
+        ThirdUserAuthDO threeUserAuthDOOptional = thirdUserAuthRepository.findByDevIdAndUserIdAndAuthTypeAndStatus(threeUserDO.getDevId(), threeUserDO.getUserId(), oAuthType, SocialuniCommonStatus.enable);
         //授权过
         if (threeUserAuthDOOptional == null) {
             //只是记录一个授权记录

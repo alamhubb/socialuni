@@ -60,7 +60,7 @@ public class UserImgBO {
         userImgDO.setQuality(this.getQuality());
         userImgDO.setSize(this.size);
         userImgDO.setUserId(user.getUnionId());
-        userImgDO.setStatus(ContentStatus.init);
+        userImgDO.setStatus(ContentStatus.enable);
         userImgDO.setCreateTime(new Date());
         userImgDO.setContent(AppConfigConst.img_content);
         userImgDO.setContentType(SocialuniContentType.userImg);

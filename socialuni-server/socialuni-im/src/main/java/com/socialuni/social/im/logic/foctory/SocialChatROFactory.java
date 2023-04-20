@@ -89,7 +89,7 @@ public class SocialChatROFactory {
         ChatRO chatRO = SocialChatROFactory.getChatRO1(chatDO);
         //查询用户这个chatUser下的消息
         //已经确认过chat为可用的
-        List<MessageDO> messageDOS = messageRepository.findTop31ByChatIdAndStatusAndIdNotInOrderByIdDesc(chatDO.getId(), ChatStatus.init, SocialuniConst.emptyIds);
+        List<MessageDO> messageDOS = messageRepository.findTop31ByChatIdAndStatusAndIdNotInOrderByIdDesc(chatDO.getId(), ChatStatus.enable, SocialuniConst.emptyIds);
         if (messageDOS.size() > 30) {
             messageDOS.subList(1, 31);
             chatRO.setLoadMore(LoadMoreType.more);
@@ -163,7 +163,7 @@ public class SocialChatROFactory {
         ChatRO chatRO = SocialChatROFactory.getChatROByUserLogin(chatUserDO);
         //系统群聊读取message表
         //查询用户这个chatUser下的消息
-        List<MessageReceiveDO> messageReceiveDOS = messageReceiveRepository.findTop30ByChatUserIdAndStatusAndCreateTimeLessThanOrderByCreateTimeDesc(chatUserDO.getId(), MessageStatus.init, new Date());
+        List<MessageReceiveDO> messageReceiveDOS = messageReceiveRepository.findTop30ByChatUserIdAndStatusAndCreateTimeLessThanOrderByCreateTimeDesc(chatUserDO.getId(), MessageStatus.enable, new Date());
         List<SocialMessageRO> messages = SocialMessageROFactory.messageReceiveDOToVOS(messageReceiveDOS);
         //最后一个的content
         if (messages.size() > 0) {

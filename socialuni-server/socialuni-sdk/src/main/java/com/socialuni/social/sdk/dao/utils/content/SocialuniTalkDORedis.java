@@ -74,7 +74,7 @@ public class SocialuniTalkDORedis {
     //这里有问题，应该清楚所有引用了当前用户的
     @Cacheable(cacheNames = CommonRedisKey.queryUserFollowsTalkIds, key = "#userId+'-'+#userIds+'-'+#pageable.pageNumber+'-'+#pageable.pageSize")
     public List<Integer> queryUserFollowsTalkIds(Integer userId, List<Integer> userIds, Pageable pageable) {
-        return talkApi.queryTalkIdsByUserFollow(userId, ContentStatus.selfCanSeeContentStatus, userIds, ContentStatus.init, pageable);
+        return talkApi.queryTalkIdsByUserFollow(userId, ContentStatus.selfCanSeeContentStatus, userIds, ContentStatus.enable, pageable);
     }
 
     public List<Integer> filterTalkIds(List<Integer> talkIds, List<Integer> tagTalkIds) {

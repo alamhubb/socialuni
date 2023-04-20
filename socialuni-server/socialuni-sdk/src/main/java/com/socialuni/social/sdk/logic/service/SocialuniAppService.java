@@ -41,7 +41,7 @@ public class SocialuniAppService {
 
     public ResultRO<List<HomeSwiperVO>> queryHomeSwipers() {
         //homeSwipers
-        List<SocialuniHomeSwiperDO> homeSwiperDOS = homeSwiperRepository.findAllByStatusAndDevIdOrderByTopLevelAscIdDesc(SocialuniCommonStatus.init, DevAccountFacade.getDevIdNotNull());
+        List<SocialuniHomeSwiperDO> homeSwiperDOS = homeSwiperRepository.findAllByStatusAndDevIdOrderByTopLevelAscIdDesc(SocialuniCommonStatus.enable, DevAccountFacade.getDevIdNotNull());
         List<HomeSwiperVO> homeSwiperVOS = SocialHomeSwiperROFactory.toVOS(homeSwiperDOS);
         return new ResultRO<>(homeSwiperVOS);
     }

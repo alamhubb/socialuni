@@ -21,7 +21,7 @@ public class FollowRedis {
 
     @Cacheable(cacheNames = CommonRedisKey.queryUserFollowUserIds, key = "#userId")
     public List<Integer> queryUserFollowUserIds(Integer userId) {
-        return followRepository.queryUserFollowUserIds(userId, SocialuniCommonStatus.init);
+        return followRepository.queryUserFollowUserIds(userId, SocialuniCommonStatus.enable);
     }
 
     @Cacheable(cacheNames = CommonRedisKey.queryUserAndBeUserFollow, key = "#userId+'-'+#beUserId")

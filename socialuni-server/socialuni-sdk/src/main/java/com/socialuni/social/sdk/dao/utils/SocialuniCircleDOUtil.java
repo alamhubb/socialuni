@@ -18,7 +18,7 @@ public class SocialuniCircleDOUtil {
     }
 
     public static SocialuniCircleDO getCircleEnableNotNull(String circleName) {
-        SocialuniCircleDO circleDO = socialCircleApi.findFirstByNameAndStatus(circleName, SocialuniCommonStatus.init);
+        SocialuniCircleDO circleDO = socialCircleApi.findFirstByNameAndStatus(circleName, SocialuniCommonStatus.enable);
         if (circleDO == null) {
             throw new SocialParamsException("使用了不存在的圈子");
         }
@@ -26,7 +26,7 @@ public class SocialuniCircleDOUtil {
     }
 
     public static SocialuniCircleDO getCircleEnableAllowNull(String circleName) {
-        SocialuniCircleDO circleDO = socialCircleApi.findFirstByNameAndStatus(circleName, SocialuniCommonStatus.init);
+        SocialuniCircleDO circleDO = socialCircleApi.findFirstByNameAndStatus(circleName, SocialuniCommonStatus.enable);
         return circleDO;
     }
 }

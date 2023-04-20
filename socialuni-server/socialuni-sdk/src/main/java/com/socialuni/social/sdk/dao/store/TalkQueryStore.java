@@ -47,7 +47,7 @@ public class TalkQueryStore {
     private TalkRepository talkRepository;
 
     public List<SocialuniTalkDO> queryStickTalks() {
-        List<SocialuniTalkDO> list = talkRepository.findTop2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc(ContentStatus.init, DevAccountFacade.getDevIdNotNull(), SocialuniConst.initNum);
+        List<SocialuniTalkDO> list = talkRepository.findTop2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc(ContentStatus.enable, DevAccountFacade.getDevIdNotNull(), SocialuniConst.initNum);
         //转换为rolist
         return list;
     }
@@ -61,7 +61,7 @@ public class TalkQueryStore {
             list = this.queryStickTalks();
         }else{
             // 如果有内容就连表查询。
-            list = talkRepository.findTop2ByStatusAndDevIdAndGlobalTopGreaterThanAndCircleIdOrderByGlobalTopDesc(ContentStatus.init, DevAccountFacade.getDevIdNotNull(), SocialuniConst.initNum,circleEnableNotNull.getId());
+            list = talkRepository.findTop2ByStatusAndDevIdAndGlobalTopGreaterThanAndCircleIdOrderByGlobalTopDesc(ContentStatus.enable, DevAccountFacade.getDevIdNotNull(), SocialuniConst.initNum,circleEnableNotNull.getId());
         }
         //转换为rolist
         return list;
@@ -140,9 +140,9 @@ public class TalkQueryStore {
         //为什么要用程序过滤，为了多缓存内容
         //查询所有talkId
         //需要连接用户表查询，后面不需要重复筛选，因为已经基础过滤出来了这些值，后面与合并逻辑，所以不需要在过滤
-        List<Integer> userTalkUnionIds = talkMapper.queryTalkIdsByAndUser(talkUserGender, queryBO.getMinAge(), queryBO.getMaxAge(), ContentStatus.init, appConfig.getDisableUnderageContent());
+        List<Integer> userTalkUnionIds = talkMapper.queryTalkIdsByAndUser(talkUserGender, queryBO.getMinAge(), queryBO.getMaxAge(), ContentStatus.enable, appConfig.getDisableUnderageContent());
         List<Integer> talkUnionIds = talkMapper.queryTalkIdsByTalkCondition(
-                ContentStatus.init, queryBO.getAdCode(),
+                ContentStatus.enable, queryBO.getAdCode(),
                 queryBO.getTalkVisibleGender(), mineUserGender, null,
                 disableUnderageContent,
                 disableContentHasContactInfo,

@@ -33,6 +33,6 @@ public class DevAuthCodeDO implements Serializable {
         this.authCode = authCode;
         this.ip = ip;
         this.createTime = new Date();
-        this.status = SocialuniCommonStatus.init;
+        this.status = SocialuniCommonStatus.enable;
     }
 }

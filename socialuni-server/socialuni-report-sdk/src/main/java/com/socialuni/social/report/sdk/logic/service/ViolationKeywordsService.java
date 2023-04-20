@@ -24,10 +24,10 @@ public class ViolationKeywordsService {
     private KeywordsRepository keywordsRepository;
 
     public void refreshKeywords() {
-        List<IllegalWordDO> illegalWordDOS = illegalWordRepository.findAllByStatus(SocialuniCommonStatus.init);
+        List<IllegalWordDO> illegalWordDOS = illegalWordRepository.findAllByStatus(SocialuniCommonStatus.enable);
         AppConfigStatic.setIllegals(illegalWordDOS);
 
-        List<KeywordsDO> keywordsDOS= keywordsRepository.findAllByStatus(SocialuniCommonStatus.init);
+        List<KeywordsDO> keywordsDOS= keywordsRepository.findAllByStatus(SocialuniCommonStatus.enable);
         AppConfigStatic.setKeywordDOs(keywordsDOS);
         //目前不需要全部检索然后删除了，已经使用了举报机制
         /*for (String illegal : illegals) {

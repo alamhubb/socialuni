@@ -1,6 +1,6 @@
 package com.socialuni.social.im.logic.entity;
 
-import com.socialuni.social.common.api.constant.SocialuniContentType;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.common.sdk.dao.DO.NotifyDO;
@@ -101,7 +101,7 @@ public class MessageEntity {
         if (!socialuniUserChatConfigDO.getAllowStrangerMsg()) {
             SocialuniFriendApplyRecordDO socialuniFriendApplyRecordDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserIdOrderByIdDesc(beUserId, mineUser.getUserId(), SocialuniFriendApplyRecordDO.class);
             //没有添加，或者为初始
-            if (socialuniFriendApplyRecordDO == null || socialuniFriendApplyRecordDO.getStatus().equals(SocialuniAddFriendStatus.init)) {
+            if (socialuniFriendApplyRecordDO == null || socialuniFriendApplyRecordDO.getStatus().equals(SocialuniCommonStatus.enable)) {
                 throw new SocialBusinessException("对方不接受陌生人消息，无法发送消息");
             } else if (socialuniFriendApplyRecordDO.getStatus().equals(SocialuniAddFriendStatus.delete)) {
                 throw new SocialBusinessException("您不是对方的好友，无法发送消息");

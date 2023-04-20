@@ -3,6 +3,7 @@ package com.socialuni.social.admin.controller;
 import com.socialuni.social.admin.factory.SocialuniAdminStickTalkROFactory;
 import com.socialuni.social.admin.model.ReportUserVO;
 import com.socialuni.social.admin.model.SocialuniAdminStickTalkRO;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
 import com.socialuni.social.community.sdk.repository.TalkRepository;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
@@ -25,7 +26,7 @@ public class SocialuniAdminStickTalkManageController {
     public List<SocialuniAdminStickTalkRO> querySystemManageTalks() {
         Integer userId = DevAccountFacade.getDevUserId();
 
-        List<Integer> talkIds = talkInterface.findTop10ByUserIdOrderByGlobalTopDescIdDesc(userId);
+        List<Integer> talkIds = talkInterface.findTop10ByUserIdAndStatusOrderByGlobalTopDescIdDesc(userId, SocialuniCommonStatus.enable);
 
         List<SocialuniAdminStickTalkRO> talkROS = talkIds.stream().map(item -> {
             SocialuniAdminStickTalkRO talkvo = SocialuniAdminStickTalkROFactory.getTalkRO(item);

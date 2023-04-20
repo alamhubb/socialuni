@@ -101,7 +101,7 @@ public class DistrictRedis {
         hotDistrict.setAdName("热门");
         hotDistrict.setProvinceName("中国");
         hotDistrict.setAdCode("999999");
-        List<DistrictDO> districtDOS = districtRepository.findTop20ByDistrictCodeAndStatusOrderByCountDesc("1", SocialuniCommonStatus.init);
+        List<DistrictDO> districtDOS = districtRepository.findTop20ByDistrictCodeAndStatusOrderByCountDesc("1", SocialuniCommonStatus.enable);
 
         hotDistrict.setChilds(recurseSetChildOnce(districtDOS));
         return hotDistrict;
@@ -115,10 +115,10 @@ public class DistrictRedis {
      * @return
      */
     private List<DistrictDO> getByParentAdCode(String parentAdCode) {
-        return districtRepository.findByParentAdCodeAndStatusOrderByAdCode(parentAdCode, SocialuniCommonStatus.init);
+        return districtRepository.findByParentAdCodeAndStatusOrderByAdCode(parentAdCode, SocialuniCommonStatus.enable);
     }
 
     private List<DistrictDO> getChinaProvinces() {
-        return districtRepository.findByParentAdCodeAndStatusOrderByAdCode(SocialuniConst.chinaDistrictCode, SocialuniCommonStatus.init);
+        return districtRepository.findByParentAdCodeAndStatusOrderByAdCode(SocialuniConst.chinaDistrictCode, SocialuniCommonStatus.enable);
     }
 }

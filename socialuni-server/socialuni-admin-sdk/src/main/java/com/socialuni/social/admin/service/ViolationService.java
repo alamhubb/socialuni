@@ -47,7 +47,7 @@ public class ViolationService {
         //存在被举报后，用户自己把这条状态删了的情况
         if (ReportStatus.auditStatus.contains(contentStatus)) {
             modelDO.setUpdateTime(curDate);
-            modelDO.setStatus(ContentStatus.init);
+            modelDO.setStatus(ContentStatus.enable);
         } else {
             log.info("用户已经自行删除此条内容：{}", contentStatus);
         }
@@ -59,7 +59,7 @@ public class ViolationService {
         String userStatus = violationUser.getStatus();
         //存在用户发表其他内容，被封的情况
         if (ReportStatus.auditStatus.contains(userStatus)) {
-            violationUser.setStatus(SocialuniUserStatus.init);
+            violationUser.setStatus(SocialuniUserStatus.enable);
         } else {
             log.info("用户状态已经被更改：{}", userStatus);
         }
@@ -69,7 +69,7 @@ public class ViolationService {
         ReportDO.setAuditType(AdminAuditResultType.noViolation);
         ReportDO.setAuditNote(auditNote);
         //审核状态变更
-        ReportDO.setStatus(ReportStatus.init);
+        ReportDO.setStatus(ReportStatus.enable);
         ReportDO.setUpdateTime(curDate);
         ReportDO.setValid(false);
         reportApi.savePut(ReportDO);
@@ -212,7 +212,7 @@ public class ViolationService {
                 calendar.add(Calendar.DATE, violationDay);
                 SocialUserViolationDo.setViolationEndTime(calendar.getTime());
             } else {
-                violationUser.setStatus(SocialuniUserStatus.init);
+                violationUser.setStatus(SocialuniUserStatus.enable);
             }
         }
         //不删除之前的内容

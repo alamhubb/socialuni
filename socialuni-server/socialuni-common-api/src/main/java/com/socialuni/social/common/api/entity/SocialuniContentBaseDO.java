@@ -20,12 +20,12 @@ public class SocialuniContentBaseDO extends SocialuniUserInfoBaseDO implements S
 
     public SocialuniContentBaseDO() {
         this.updateTime = super.getCreateTime();
-        this.status = SocialuniCommonStatus.init;
+        this.status = SocialuniCommonStatus.enable;
     }
 
     public SocialuniContentBaseDO(Integer userId) {
         super(userId);
         this.updateTime = super.getCreateTime();
-        this.status = SocialuniCommonStatus.init;
+        this.status = SocialuniCommonStatus.enable;
     }
 }

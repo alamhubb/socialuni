@@ -92,7 +92,7 @@ public class KeywordsDO implements Serializable {
     }
 
     public KeywordsDO(String content, String cause) {
-        this.setStatus(SocialuniCommonStatus.init);
+        this.setStatus(SocialuniCommonStatus.enable);
 
         this.setTextShow(content);
         this.setText(content.toUpperCase());

@@ -35,7 +35,7 @@ public class SocialuniOAuthService {
     public ResultRO<OAuthGetUserPhoneNumRO> getUserPhoneNum() {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
         Integer devId = DevAccountFacade.getDevIdNotNull();
-        ThirdUserAuthDO thirdUserAuthDO = thirdUserAuthRepository.findByDevIdAndUserIdAndAuthTypeAndStatus(devId, mineUser.getUnionId(), AuthType.phone, SocialuniCommonStatus.init);
+        ThirdUserAuthDO thirdUserAuthDO = thirdUserAuthRepository.findByDevIdAndUserIdAndAuthTypeAndStatus(devId, mineUser.getUnionId(), AuthType.phone, SocialuniCommonStatus.enable);
         if (thirdUserAuthDO == null) {
             return new ResultRO<>();
         }

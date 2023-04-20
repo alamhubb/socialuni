@@ -52,7 +52,7 @@ public class AuthenticationDO extends SocialuniContentBaseDO implements Serializ
         this.ip = ip;
         Date curDate = new Date();
         this.createTime = curDate;
-        this.status = SocialuniCommonStatus.init;
+        this.status = SocialuniCommonStatus.enable;
         this.validTime = DateTimeType.halfHour;
         this.expiredTime = new Date(curDate.getTime() + this.getValidTime());
     }

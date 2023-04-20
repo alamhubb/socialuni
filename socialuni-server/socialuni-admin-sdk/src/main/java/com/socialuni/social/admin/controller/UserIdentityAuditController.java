@@ -59,7 +59,7 @@ public class UserIdentityAuditController {
         for (UserIdentityAuditRO audit : audits) {
             SocialUserIdentityAuthDO socialUserIdentityAuthDO = socialUserIdentityAuthRepository.getOne(audit.getId());
             if (audit.getSuccess()) {
-                socialUserIdentityAuthDO.setStatus(UserIdentityAuthStatus.init);
+                socialUserIdentityAuthDO.setStatus(UserIdentityAuthStatus.enable);
             } else {
                 socialUserIdentityAuthDO.setStatus(UserIdentityAuthStatus.delete);
             }

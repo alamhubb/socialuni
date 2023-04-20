@@ -61,7 +61,7 @@ public class DevAccountEntity {
         devAccountModel.setAppGenderType(GenderType.all);
         devAccountModel.setDevNum(curDevNum);
         devAccountModel.setType(DevAccountType.personal);
-        devAccountModel.setStatus(SocialuniCommonStatus.init);
+        devAccountModel.setStatus(SocialuniCommonStatus.enable);
         devAccountModel.setCreateTime(curDate);
         devAccountModel.setCallApiCount(0);
         devAccountModel.setUpdateTime(curDate);

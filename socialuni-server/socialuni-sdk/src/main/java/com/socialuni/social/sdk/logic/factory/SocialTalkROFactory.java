@@ -183,7 +183,7 @@ public class SocialTalkROFactory {
 
         SocialTalkCircleDO socialTalkCircleDO = socialTalkCircleRepository.findFirstByTalkId(talkId);
         if (socialTalkCircleDO != null) {
-            SocialuniCircleDO socialCircleDO = socialCircleApi.findFirstByIdAndStatus(socialTalkCircleDO.getCircleId(), SocialuniCommonStatus.init);
+            SocialuniCircleDO socialCircleDO = socialCircleApi.findFirstByIdAndStatus(socialTalkCircleDO.getCircleId(), SocialuniCommonStatus.enable);
             if (socialCircleDO != null) {
                 circles.add(socialCircleDO.getName());
             }
