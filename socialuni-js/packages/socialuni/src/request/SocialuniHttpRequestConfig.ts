@@ -9,6 +9,8 @@ import UserService from '../service/UserService'
 import UserMsgUtil from '../util/UserMsgUtil'
 import AlertUtil from 'socialuni-util/src/util/AlertUtil'
 import MsgUtil from 'socialuni-util/src/util/MsgUtil'
+import SocialuniAppAPI from '../api/SocialuniAppAPI'
+import JsonUtil from '../util/JsonUtil'
 
 export default class SocialuniHttpRequestConfig extends HttpRequestConfig {
   getConfig(): Config {
@@ -58,31 +60,31 @@ export default class SocialuniHttpRequestConfig extends HttpRequestConfig {
           case ErrorConst.not_logged:
             // 理论上不需要，因为token不会失效，也不会错误
             // 已知可能，切换环境导致token不同
-            // UserService.clearUserInfo()
-            // UserMsgUtil.unLoginMessage()
+            UserService.clearUserInfo()
+            UserMsgUtil.unLoginMessage()
             break
           case ErrorConst.banned:
             // 理论上不需要，因为token不会失效，也不会错误
             // 已知可能，切换环境导致token不同
-            // UserService.clearUserInfo()
-            // AlertUtil.hint(errorMsg)
+            UserService.clearUserInfo()
+            AlertUtil.hint(errorMsg)
             break
           case ErrorConst.custom:
             break
           default:
-            // AlertUtil.hint(errorMsg)
-            // SocialuniAppAPI.sendErrorLogAPI(response.config.url, errorMsg)
+            AlertUtil.hint(errorMsg)
+            SocialuniAppAPI.sendErrorLogAPI(response.config.url, errorMsg)
             break
         }
       } else {
-        // MsgUtil.systemErrorMsg()
-        // SocialuniAppAPI.sendErrorLogAPI(response.config.url, result)
+        MsgUtil.systemErrorMsg()
+        SocialuniAppAPI.sendErrorLogAPI(response.config.url, result)
       }
       // 返回接口返回的错误信息
       return result
     }
-    // MsgUtil.systemErrorMsg()
-    // SocialuniAppAPI.sendErrorLogAPI(response.config.url, JsonUtil.toJson(response))
+    MsgUtil.systemErrorMsg()
+    SocialuniAppAPI.sendErrorLogAPI(response.config.url, JsonUtil.toJson(response))
     return response
   }
 }
