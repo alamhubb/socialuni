@@ -1,6 +1,6 @@
 <script>
 
-import PlatformUtils from "../../packages/socialuni/src/utils/PlatformUtils";
+// import PlatformUtils from "../../packages/socialuni/src/utils/PlatformUtils";
 
 export default {
  async onLaunch() {
@@ -8,7 +8,7 @@ export default {
     // socialSystemModule.initSystemInfo()
     //如果有跳转信息
    //校验更新
-   PlatformUtils.checkUpdate()
+   // PlatformUtils.checkUpdate()
     // await socialAppModule.appLunchAction()
   },
   onError(e) {

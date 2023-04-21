@@ -1,6 +1,9 @@
 import UniAppHttpRequest, {Config, Interceptor, RequestConfig, Response} from "./UniAppHttpRequest";
 import { socialuniPluginsModule } from '../store/SocialuniPluginsModule'
 
+console.trace(465)
+console.log(465)
+
 export default class SocialuniHttpRequest extends UniAppHttpRequest {
     config: Config = socialuniPluginsModule.requestConfig.getConfig()
 
@@ -8,7 +11,7 @@ export default class SocialuniHttpRequest extends UniAppHttpRequest {
         return socialuniPluginsModule.requestConfig.requestBefore(config)
     }
 
-    protected requestComFun: (response: Response) => any = (response: Response) => {
+    protected responseSuccess: (response: Response) => any = (response: Response) => {
         return socialuniPluginsModule.requestConfig.responseSuccess(response)
     }
 

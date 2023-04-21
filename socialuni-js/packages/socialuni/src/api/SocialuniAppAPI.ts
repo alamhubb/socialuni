@@ -7,6 +7,8 @@ import FrontErrorLogVO from "../model/FrontErrorLogVO";
 import JsonUtil from "../util/JsonUtil";
 import AppUpdateVO from "../model/app/AppUpdateVO";
 
+console.log(444)
+
 export default class SocialuniAppAPI {
   static getImgPathAPI() {
     return socialuniAppRequest.post<string>('socialuni/app/getImgPath')

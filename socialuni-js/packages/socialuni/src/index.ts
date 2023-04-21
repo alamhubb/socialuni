@@ -1,3 +1,5 @@
+console.log(1111)
+
 import { App, defineComponent } from "vue"
 import { onHide, onLoad, onShow } from "@dcloudio/uni-app"
 import UniUtil from "socialuni-util/src/util/UniUtil"
@@ -10,9 +12,6 @@ import { socialuniConfigModule } from "socialuni/src/store/SocialuniConfigModule
 import CosAPI from "socialuni/src/api/CosAPI"
 import { socialAppModule } from "socialuni/src/store/SocialAppModule"
 import { SocialuniOptions } from './interface/socialuniOptions'
-import HttpRequestConfig from './request/HttpRequestConfig'
-
-let socialuniRequestConfig:HttpRequestConfig = null
 
 const socialuniInitPlugin: SocialuniPlugin = {
   async onLaunch() {
@@ -28,6 +27,7 @@ const socialuniInitPlugin: SocialuniPlugin = {
 }
 
 async function installSocialuniPluginIns() {
+
   socialuniPluginsModule.addPlugin(socialuniInitPlugin)
   try {
     //查询是否包含community模块，如果存在则加载
@@ -48,15 +48,22 @@ async function installSocialuniPluginIns() {
 
 const Socialuni = {
   async install(app: App, socialuniOptions: SocialuniOptions) {
+
+    console.log(3333)
+
+    if (socialuniOptions) {
+      if (socialuniOptions.requestConfig) {
+        socialuniPluginsModule.init(socialuniOptions.requestConfig)
+      }
+    }
+
     // 社交联盟内置支持的插件
     await installSocialuniPluginIns()
 
-    if (socialuniOptions.requestConfig) {
-      socialuniRequestConfig = socialuniOptions.requestConfig
-    }
-
-    if (socialuniOptions.plugins) {
-      socialuniPluginsModule.addPlugin(...socialuniOptions.plugins)
+    if (socialuniOptions){
+      if (socialuniOptions.plugins) {
+        socialuniPluginsModule.addPlugin(...socialuniOptions.plugins)
+      }
     }
 
     for (const plugin of socialuniPluginsModule.plugins) {

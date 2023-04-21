@@ -75,6 +75,7 @@ import {socialuniConfigModule} from "socialuni/src/store/SocialuniConfigModule";
 import QCityPicker from "../../component/QCityPicker/QCityPicker.vue";
 import CommunityPageUtil from "../../util/CommunityPageUtil";
 import {socialAppModule} from "socialuni/src/store/SocialAppModule";
+import {socialChatModule} from "socialuni-im/src/store/SocialChatModule";
 
 // todo 后台可控制是否显示轮播图
 
@@ -140,6 +141,8 @@ export default class TalkView extends Vue {
   }
 
   created() {
+     console.log(1111)
+
     onHide(() => {
       this.$refs.tabsTalk.tabsTalkOnHide()
     })

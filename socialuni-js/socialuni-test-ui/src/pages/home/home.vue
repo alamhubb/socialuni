@@ -5,6 +5,8 @@
 </template>
 
 <script lang="ts">
+console.log(777777)
+
 import {Options, Vue, Watch} from 'vue-property-decorator'
 import TalkView from "socialuni-community/src/view/talk/TalkView.vue"
 

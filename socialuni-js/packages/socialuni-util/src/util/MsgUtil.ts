@@ -3,7 +3,10 @@ import ToastUtil from 'socialuni-util/src/util/ToastUtil'
 import PageUtil from './PageUtil'
 import UniUtil from "./UniUtil";
 import AppMsg from "socialuni-constant/constant/AppMsg";
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";;
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniConfigModule} from "socialuni/src/store/SocialuniConfigModule";
+
+;
 
 export default class MsgUtil {
     static showUploadLoading() {
@@ -11,7 +14,7 @@ export default class MsgUtil {
     }
 
     static systemErrorMsg() {
-        // AlertUtil.hint(socialuniConfigModule.appMoreConfig.errorMsg604SystemError)
+        AlertUtil.hint(socialuniConfigModule.appMoreConfig.errorMsg604SystemError)
     }
 
     static unUploadImg() {
