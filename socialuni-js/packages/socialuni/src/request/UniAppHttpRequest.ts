@@ -9,6 +9,7 @@
  */
 import RequestOptions = UniApp.RequestOptions
 import ResultRO from "../model/social/ResultRO";
+import SocialuniConfig from '../config/SocialuniConfig'
 
 interface header { // header 接口
     'Content-Type'?: string;
@@ -67,7 +68,8 @@ interface RequestConfig { // 请求之前参数配置项 (public)
 
 export default class UniAppHttpRequest {
     config: Config = {
-        baseUrl: '',
+        // baseUrl: '',
+        baseUrl: SocialuniConfig.socialuniUrl + '/',
         header: {
             'Content-Type': 'application/json'
         },
