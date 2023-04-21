@@ -9,6 +9,16 @@ export default class UserPageUtil {
         }
     }
 
+    static goBackOrMine(): void {
+        const pages = getCurrentPages()
+        if (pages.length === 1) {
+            UserPageUtil.toMinePage()
+        } else {
+            RouterUtil.goBack()
+        }
+        // uni.navigateBack({ delta: 1 })
+    }
+
     static toEditMineInfo() {
         RouterUtil.navigateTo(UserPagePath.editMineInfo)
     }

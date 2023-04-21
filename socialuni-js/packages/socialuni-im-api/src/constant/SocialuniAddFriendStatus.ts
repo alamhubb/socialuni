@@ -2,5 +2,5 @@ import SocialuniConstStatus from "socialuni-constant/constant/status/SocialuniCo
 import SocialuniCommonStatus from "socialuni-constant/constant/status/SocialuniCommonStatus";
 
 export default class SocialuniAddFriendStatus extends SocialuniCommonStatus {
-    static readonly enable: string =  SocialuniConstStatus.enable
+    static readonly init: string =  SocialuniConstStatus.init
 }

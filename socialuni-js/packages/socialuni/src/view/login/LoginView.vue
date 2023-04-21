@@ -136,6 +136,7 @@ import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import LoginService from "socialuni/src/service/LoginService";
 import PhoneService from "socialuni/src/service/PhoneService";
+import UserPageUtil from '../../util/UserPageUtil'
 
 @Options({
   components: {
@@ -300,7 +301,7 @@ export default class LoginView extends Vue {
     AlertUtil.hint(msg).finally(() => {
       //有手机号才直接返回，没手机号继续提示绑定手机号
       if (this.hasPhoneNum) {
-        PageUtil.goBackOrMine()
+        UserPageUtil.goBackOrMine()
       }
       /*if (socialOAuthModule.isThreeAuth) {
         if (this.hasPhoneNum) {

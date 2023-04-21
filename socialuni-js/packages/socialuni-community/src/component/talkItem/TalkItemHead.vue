@@ -1,9 +1,9 @@
 <template>
   <view class="card-title pb-10" @click="toUserDetailVue" v-if="talk">
     <image
-        class="size40 bd-radius mr-sm"
-        mode="aspectFill"
-        :src="talk.user.avatar"
+      class="size40 bd-radius mr-sm"
+      mode="aspectFill"
+      :src="talk.user.avatar"
     />
     <view class="row-between flex-1">
       <view class="col-center">
@@ -12,9 +12,9 @@
           <!--          <text class="text-md" :class="{'color-red':home.user.vipFlag}">{{ home.user.nickname }}</text>-->
           <template v-if="!talk.globalTop">
             <social-gender-tag class="ml-xs" :user="talk.user"></social-gender-tag>
-<!--            <div v-if="home.user.identityAuth" class="q-tag-success q-box-nn" @click.stop="toIdentityAuth">
-              <q-icon size="14" icon="level"/>
-            </div>-->
+            <!--            <div v-if="home.user.identityAuth" class="q-tag-success q-box-nn" @click.stop="toIdentityAuth">
+                          <q-icon size="14" icon="level"/>
+                        </div>-->
             <!--              <q-icon class="color-blue" size="18" icon="level" @click.stop="toIdentityAuth"/>-->
           </template>
 
@@ -67,7 +67,7 @@
                 @click.stop="confirmDeleteTalk">
             删除
           </text>
-          <text v-if="talk.status !== '初始'"
+          <text v-if="talk.status !== SocialuniCommonStatus.enable"
                 class="ml-5 color-red bg-click row-col-end line-h1">
             审核中
           </text>
@@ -83,27 +83,28 @@
 </template>
 
 <script lang="ts">
-import {Options, Prop, Vue, Watch} from 'vue-property-decorator'
-import TalkVO from "socialuni/src/model/talk/TalkVO";
-import ObjectUtil from "socialuni-util/src/util/ObjectUtil";
-import {socialuniUserModule} from 'socialuni/src/store/SocialuniUserModule';
-import TalkTabType from "socialuni-constant/constant/TalkTabType";
-import RouterUtil from "socialuni-util/src/util/RouterUtil";
-import PagePath from "socialuni-constant/constant/PagePath";
-import MsgUtil from "socialuni-util/src/util/MsgUtil";
-import ToastUtil from "socialuni-util/src/util/ToastUtil";
-import PageUtil from "socialuni-util/src/util/PageUtil";
-import AlertUtil from "socialuni-util/src/util/AlertUtil";
-import FollowAddVO from "socialuni/src/model/FollowAddVO";
-import CenterUserDetailRO from "socialuni/src/model/social/CenterUserDetailRO";
-import UserUtil from "socialuni-util/src/util/UserUtil";
-import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
-import DateUtil from "socialuni-util/src/util/DateUtil";
-import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
-import FollowAPI from "socialuni-community-api/src/api/FollowAPI";
-import SocialGenderTag from "socialuni/src/component/SocialGenderTag/SocialGenderTag.vue";
-import UserPagePath from "socialuni/src/constant/UserPagePath";
-import UserPageUtil from "socialuni/src/util/UserPageUtil";
+import { Options, Prop, Vue, Watch } from 'vue-property-decorator'
+import TalkVO from "socialuni/src/model/talk/TalkVO"
+import ObjectUtil from "socialuni-util/src/util/ObjectUtil"
+import { socialuniUserModule } from 'socialuni/src/store/SocialuniUserModule'
+import TalkTabType from "socialuni-constant/constant/TalkTabType"
+import RouterUtil from "socialuni-util/src/util/RouterUtil"
+import PagePath from "socialuni-constant/constant/PagePath"
+import MsgUtil from "socialuni-util/src/util/MsgUtil"
+import ToastUtil from "socialuni-util/src/util/ToastUtil"
+import PageUtil from "socialuni-util/src/util/PageUtil"
+import AlertUtil from "socialuni-util/src/util/AlertUtil"
+import FollowAddVO from "socialuni/src/model/FollowAddVO"
+import CenterUserDetailRO from "socialuni/src/model/social/CenterUserDetailRO"
+import UserUtil from "socialuni-util/src/util/UserUtil"
+import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue"
+import DateUtil from "socialuni-util/src/util/DateUtil"
+import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI"
+import FollowAPI from "socialuni-community-api/src/api/FollowAPI"
+import SocialGenderTag from "socialuni/src/component/SocialGenderTag/SocialGenderTag.vue"
+import UserPagePath from "socialuni/src/constant/UserPagePath"
+import UserPageUtil from "socialuni/src/util/UserPageUtil"
+import SocialuniCommonStatus from 'socialuni-constant/constant/status/SocialuniCommonStatus'
 
 @Options({
   components: {
@@ -125,6 +126,8 @@ export default class TalkItemHead extends Vue {
   followBtnDisabled = false
   isUserDetail = false
   followType: string = TalkTabType.follow_type
+
+  SocialuniCommonStatus = SocialuniCommonStatus
 
   created() {
     if (RouterUtil.getCurrentPageURI() === UserPagePath.userDetail) {
@@ -204,13 +207,13 @@ export default class TalkItemHead extends Vue {
   }
 
   getGenderIcon(user:
-                    CenterUserDetailRO
+                  CenterUserDetailRO
   ) {
     return UserUtil.getGenderIcon(user)
   }
 
   getGenderBgColor(user:
-                       CenterUserDetailRO
+                     CenterUserDetailRO
   ) {
     return UserUtil.getGenderBgColor(user)
   }

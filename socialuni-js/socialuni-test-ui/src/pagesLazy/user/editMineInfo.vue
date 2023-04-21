@@ -105,7 +105,7 @@ import AlertUtil from 'socialuni-sdk/src/utils/AlertUtil'
 import ToastUtil from 'socialuni-sdk/src/utils/ToastUtil'
 import EnumStrVO from 'socialuni-constant/constant/EnumStrVO'
 import GenderType from 'socialuni-constant/constant/GenderType'
-import UserEditVO from 'socialuni-base-api/src/model/user/UserEditVO'
+import UserEditVO from 'socialuni/src/model/user/UserEditVO'
 import BirthAgeUtil from 'socialuni-sdk/src/utils/BirthAgeUtil'
 import PageUtil from "socialuni-sdk/src/utils/PageUtil";
 import QButton from "socialuni-view/src/components/QButton/QButton.vue";
