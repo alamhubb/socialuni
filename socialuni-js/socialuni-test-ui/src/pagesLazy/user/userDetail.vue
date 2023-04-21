@@ -14,24 +14,5 @@ import UserDetailView from "socialuni/src/view/user/UserDetailView.vue";
   components: {UserDetailView}
 })
 export default class UserDetailPage extends Vue {
-  // showMsgInput = false
-
-  /*created() {
-    UniUtil.showShareMenu()
-
-    onShow(() => {
-      this.showMsgInput = true
-    })
-
-    onHide(() => {
-      this.showMsgInput = false
-    })
-
-    onLoad((params: any) => {
-      onMounted(() => {
-        this.$refs.userDetail.init(params)
-      })
-    })
-  }*/
 }
 </script>

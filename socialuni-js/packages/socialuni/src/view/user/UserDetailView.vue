@@ -154,7 +154,7 @@
         </view>
 
         <q-popup ref="moreActionMenu" bottom>
-            <uni-list class="pb-xl mt-sm">
+            <uni-list class="pb-xl">
                 <uni-list-item title="解除好友" link @click="deleteFriend"></uni-list-item>
                 <uni-list-item title="加入黑名单" link @click="addBlack"></uni-list-item>
                 <uni-list-item title="从黑名单移除" link @click="removeBlack"></uni-list-item>
