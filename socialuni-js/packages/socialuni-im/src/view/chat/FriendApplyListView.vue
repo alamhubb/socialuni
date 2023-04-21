@@ -22,7 +22,7 @@
                         <text class="chat-custom-text">{{ formatTime(applyData.createTime) }}</text>
                     </view>
                     <view class="chat-custom-right"
-                          v-if="applyData.friendApplyStatus === SocialuniAddFriendStatus.enable">
+                          v-if="applyData.friendApplyStatus === SocialuniAddFriendStatus.init">
                         <uni-tag type="primary" class="mr-sm" text="同意"
                                  @click="acceptFriendApplication(applyData)"></uni-tag>
                         <!--            <uni-tag type="success" text="拒绝" @click="refuseFriendApplication(applyData)"></uni-tag>-->
@@ -301,7 +301,7 @@ export default class FriendApplyListView extends Vue {
 
     friendRuestResult(status: string) {
         switch (status) {
-            case SocialuniAddFriendStatus.enable:
+            case SocialuniAddFriendStatus.init:
                 return "待处理";
             case SocialuniAddFriendStatus.enable:
                 return "添加成功";
