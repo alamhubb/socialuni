@@ -51,16 +51,12 @@ const Socialuni = {
 
     console.log(3333)
 
-    if (socialuniOptions) {
-      if (socialuniOptions.requestConfig) {
-        socialuniPluginsModule.init(socialuniOptions.requestConfig)
-      }
-    }
+    socialuniPluginsModule.init(socialuniOptions?.requestConfig)
 
     // 社交联盟内置支持的插件
     await installSocialuniPluginIns()
 
-    if (socialuniOptions){
+    if (socialuniOptions) {
       if (socialuniOptions.plugins) {
         socialuniPluginsModule.addPlugin(...socialuniOptions.plugins)
       }

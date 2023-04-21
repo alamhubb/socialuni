@@ -5,7 +5,7 @@ import SocialuniHttpRequestConfig from "../request/SocialuniHttpRequestConfig";
 
 class SocialuniPluginsModule {
     private socialuniPlugins: SocialuniPlugin[] = []
-    requestConfig: HttpRequestConfigInterface = new SocialuniHttpRequestConfig()
+    requestConfig: HttpRequestConfigInterface = null
 
     init(requestConfig: HttpRequestConfigInterface = new SocialuniHttpRequestConfig()) {
         this.requestConfig = requestConfig

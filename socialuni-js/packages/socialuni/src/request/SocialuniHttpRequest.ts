@@ -5,9 +5,11 @@ console.trace(465)
 console.log(465)
 
 export default class SocialuniHttpRequest extends UniAppHttpRequest {
-    config: Config = socialuniPluginsModule.requestConfig.getConfig()
+    // config: Config = socialuniPluginsModule.requestConfig.getConfig()
 
     protected requestBefore: (config: RequestConfig) => RequestConfig = (config: RequestConfig) => {
+        console.log(123)
+        console.log(socialuniPluginsModule)
         return socialuniPluginsModule.requestConfig.requestBefore(config)
     }
 
