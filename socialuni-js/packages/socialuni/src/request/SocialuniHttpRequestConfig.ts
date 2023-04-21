@@ -11,13 +11,13 @@ import AlertUtil from 'socialuni-util/src/util/AlertUtil'
 import MsgUtil from 'socialuni-util/src/util/MsgUtil'
 
 export default class SocialuniHttpRequestConfig extends HttpRequestConfig {
-  getConfig(): Config {
+  override getConfig(): Config {
     const config = super.getConfig()
     config.baseUrl = SocialuniConfig.socialuniUrl + '/'
     return config
   }
 
-  requestBefore: (config: RequestConfig) => RequestConfig = (config: RequestConfig) => {
+  override requestBefore: (config: RequestConfig) => RequestConfig = (config: RequestConfig) => {
     super.requestBefore(config)
     // 如果配置了开发环境，就可以展示具体的报错内容。
     config.header['X-NODE-ENV'] = socialuniSystemModule.NODE_ENV
@@ -31,11 +31,11 @@ export default class SocialuniHttpRequestConfig extends HttpRequestConfig {
     return config
   }
 
-  responseSuccess: (response: Response) => any = (response: Response) => {
+  override responseSuccess: (response: Response) => any = (response: Response) => {
     return response.data
   }
 
-  responseFail: (response: Response) => Response = (response: Response) => {
+  override responseFail: (response: Response) => Response = (response: Response) => {
     super.responseFail(response)
     //第一步，先判断 有没有error
     //判断data类型，如果没类型，直接走

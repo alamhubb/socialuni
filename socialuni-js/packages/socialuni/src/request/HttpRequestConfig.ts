@@ -3,7 +3,7 @@ import { Config, RequestConfig, Response } from "./UniAppHttpRequest"
 import { socialuniTokenModule } from "../store/SocialuniTokenModule"
 import { HttpRequestConfigInterface } from './HttpRequestConfigInterface'
 
-export default class HttpRequestConfig implements HttpRequestConfigInterface{
+export default class HttpRequestConfig implements HttpRequestConfigInterface {
   getConfig() {
     const config: Config = {
       baseUrl: '/',
@@ -18,7 +18,7 @@ export default class HttpRequestConfig implements HttpRequestConfigInterface{
     return config
   }
 
-  requestBefore: (config: RequestConfig) => RequestConfig = (config: RequestConfig) => {
+  requestBefore(config: RequestConfig): RequestConfig {
     const token = socialuniTokenModule.token
     if (token) {
       config.header.token = token
@@ -29,11 +29,11 @@ export default class HttpRequestConfig implements HttpRequestConfigInterface{
     return config
   }
 
-  responseSuccess: (response: Response) => any = (response: Response) => {
+  responseSuccess(response: Response): any {
     return response.data
   }
 
-  responseFail: (response: Response) => Response = (response: Response) => {
+  responseFail(response: Response): Response {
     UniUtil.hideLoading()
     return response
   }
