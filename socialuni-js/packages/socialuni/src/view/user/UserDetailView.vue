@@ -223,6 +223,7 @@ export default class UserDetailView extends Vue {
 
     user: CenterUserDetailRO = null
     showUserContactBtnDisabled: boolean = false
+    userImInfo
 
     openMoreMenu() {
         this.$refs.moreActionMenu.open()
@@ -245,6 +246,9 @@ export default class UserDetailView extends Vue {
             SocialuniUserAPI.queryUserDetailAPI(userId).then((res: any) => {
                 this.user = res.data
                 if (!this.user.isMine) {
+                    //1. 是否被拉黑
+                    //1. 是否接收陌生人消息，如果接收，则
+
                     socialChatModule.checkFriend(this.user)
                     // socialChatModule.setCurChatByUserId(this.user.id)
                 }

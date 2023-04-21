@@ -1,4 +1,4 @@
-package com.socialuni.social.im.model.message.chat;
+package com.socialuni.social.im.api.model.QO.chat;
 
 import lombok.Data;
 

@@ -7,5 +7,5 @@ import javax.validation.constraints.NotNull;
 @Data
 public class SocialuniUserIdQO {
     @NotNull
-    Integer userId;
+    String userId;
 }

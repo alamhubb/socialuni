@@ -1,14 +1,11 @@
 package com.socialuni.social.im.dao.DO;
 
-import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import com.socialuni.social.common.api.entity.SocialuniUserContactBaseDO;
-import com.socialuni.social.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.im.enumeration.ChatType;
 import com.socialuni.social.im.enumeration.ChatUserStatus;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -30,7 +27,7 @@ public class ChatUserDO extends SocialuniUserContactBaseDO {
     //    private SocialuniChatDO chat;
     private Integer chatId;
     //是否拉黑了对方
-    private Boolean blacklist;
+    private Boolean blackUser;
 
 
     //每一个用户对于这个群聊的状态
@@ -43,7 +40,7 @@ public class ChatUserDO extends SocialuniUserContactBaseDO {
     //仅前台展示字段,前台自己判断生成
 //    private String lastContent;
     //是否为陌生人
-    private Boolean stranger;
+    private Boolean friendUser;
     //是否在前台显示
 //    前台删除，前台删除时改变，
 //    1。进入时，从用户详情页进入时，如果为关闭，则打开
@@ -82,7 +79,7 @@ public class ChatUserDO extends SocialuniUserContactBaseDO {
         //为什么不设置成99，因为此版本没有阅读功能？先试试99
         this.unreadNum = 0;
         this.frontShow = true;
-        this.blacklist = false;
+        this.blackUser = false;
     }
 
     //群聊，不需要对方用户

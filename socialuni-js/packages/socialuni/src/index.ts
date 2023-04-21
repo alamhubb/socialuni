@@ -15,7 +15,7 @@ import { SocialuniOptions } from './interface/socialuniOptions'
 
 const socialuniInitPlugin: SocialuniPlugin = {
   async onLaunch() {
-    await socialuniUserModule.initSocialuniUserModule()
+    socialuniUserModule.initSocialuniUserModule()
     UserService.getAppLunchDataByHasUser()
     socialuniConfigModule.getAppConfigAction()
     socialuniConfigModule.getReportTypesAction()

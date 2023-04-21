@@ -1,13 +1,15 @@
-package com.socialuni.social.sdk.controller;
+package com.socialuni.social.im.controller;
 
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserIdQO;
+import com.socialuni.social.im.api.feign.SocialuniChatAPI;
 import com.socialuni.social.im.api.model.QO.SocialuniChatQueryQO;
+import com.socialuni.social.im.api.model.RO.SocialuniImUserDetailRO;
 import com.socialuni.social.im.logic.service.chat.ChatService;
-import com.socialuni.social.sdk.feignAPI.SocialuniChatAPI;
-import com.socialuni.social.im.model.message.chat.OpenChatVO;
+import com.socialuni.social.im.api.model.QO.chat.OpenChatVO;
 import com.socialuni.social.im.api.model.RO.ChatRO;
-import com.socialuni.social.im.model.message.chat.ChatReadVO;
-import com.socialuni.social.im.model.message.chat.ChatRemoveVO;
+import com.socialuni.social.im.api.model.QO.chat.ChatReadVO;
+import com.socialuni.social.im.api.model.QO.chat.ChatRemoveVO;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -72,6 +74,11 @@ public class SocialuniChatController implements SocialuniChatAPI {
 
     @Override
     public ResultRO<?> closeChat(ChatRemoveVO chatVO) {
+        return null;
+    }
+
+    @Override
+    public ResultRO<SocialuniImUserDetailRO> getImUserDetail(SocialuniUserIdQO socialuniUserIdQO) {
         return null;
     }
 }

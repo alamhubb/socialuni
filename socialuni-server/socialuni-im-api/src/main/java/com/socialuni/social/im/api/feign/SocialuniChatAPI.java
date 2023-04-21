@@ -1,13 +1,14 @@
-package com.socialuni.social.sdk.feignAPI;
+package com.socialuni.social.im.api.feign;
 
 
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.im.api.model.QO.MessageQueryVO;
+import com.socialuni.social.common.api.model.user.SocialuniUserIdQO;
 import com.socialuni.social.im.api.model.QO.SocialuniChatQueryQO;
-import com.socialuni.social.im.model.message.chat.OpenChatVO;
+import com.socialuni.social.im.api.model.QO.chat.ChatReadVO;
+import com.socialuni.social.im.api.model.QO.chat.ChatRemoveVO;
+import com.socialuni.social.im.api.model.QO.chat.OpenChatVO;
 import com.socialuni.social.im.api.model.RO.ChatRO;
-import com.socialuni.social.im.model.message.chat.ChatReadVO;
-import com.socialuni.social.im.model.message.chat.ChatRemoveVO;
+import com.socialuni.social.im.api.model.RO.SocialuniImUserDetailRO;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,5 +59,8 @@ public interface SocialuniChatAPI {
 
     @PostMapping("closeChat")
     ResultRO<?> closeChat(@RequestBody @Valid ChatRemoveVO chatVO);
+
+    @PostMapping("getImUserDetail")
+    ResultRO<SocialuniImUserDetailRO> getImUserDetail(@RequestBody @Valid SocialuniUserIdQO socialuniUserIdQO);
 }
 

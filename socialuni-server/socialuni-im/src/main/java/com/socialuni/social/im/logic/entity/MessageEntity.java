@@ -62,7 +62,7 @@ public class MessageEntity {
         }
         //还得看自己的，你是否把对方拉黑了
         //
-        if (chatUserDO.getBlacklist()) {
+        if (chatUserDO.getBlackUser()) {
             throw new SocialBusinessException("对方已被您拉黑，无法发送消息");
         }
         //对方是否把你拉黑了
@@ -71,7 +71,7 @@ public class MessageEntity {
         ChatUserDO chatBeUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(beUserId, mineUser.getUserId(), ChatUserDO.class);
         //则代表对方没把你拉黑
         if (chatBeUserDO != null) {
-            if (chatBeUserDO.getBlacklist()) {
+            if (chatBeUserDO.getBlackUser()) {
                 throw new SocialBusinessException("您已被对方拉黑，无法发送消息");
             }
         }
