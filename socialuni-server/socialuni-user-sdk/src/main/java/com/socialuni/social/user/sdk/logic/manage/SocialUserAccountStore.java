@@ -1,4 +1,4 @@
-package com.socialuni.social.user.sdk.manage;
+package com.socialuni.social.user.sdk.logic.manage;
 
 import com.socialuni.social.common.api.constant.PlatformType;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;

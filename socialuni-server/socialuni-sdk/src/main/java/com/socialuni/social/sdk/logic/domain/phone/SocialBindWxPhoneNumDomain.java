@@ -5,7 +5,7 @@ import com.socialuni.social.common.api.utils.JsonUtil;
 import com.socialuni.social.report.sdk.constant.SocialuniSupportProviderType;
 import com.socialuni.social.user.sdk.logic.entity.SocialUserPhoneEntity;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
-import com.socialuni.social.user.sdk.manage.SocialUserAccountManage;
+import com.socialuni.social.user.sdk.logic.manage.SocialUserAccountManage;
 import com.socialuni.social.common.sdk.platform.WxDecode;
 import com.socialuni.social.common.sdk.platform.WxPhoneNumRO;
 import com.socialuni.social.sdk.model.QO.SocialBindWxPhoneNumQO;

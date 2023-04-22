@@ -1,7 +1,7 @@
 package com.socialuni.social.im.controller;
 
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.im.dao.repository.ChatRepository;
+import com.socialuni.social.im.dao.repository.SocialuniChatRepository;
 import com.socialuni.social.im.dao.repository.ChatUserRepository;
 import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.im.enumeration.ChatUserStatus;
@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 @Service
 public class ChatUserVerify {
     @Resource
-    private ChatRepository chatRepository;
+    private SocialuniChatRepository chatRepository;
     @Resource
     private ChatUserRepository chatUserRepository;
 

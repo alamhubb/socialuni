@@ -13,7 +13,7 @@ import java.util.Optional;
  * @author qinkaiyuan
  * @since TODO[起始版本号]
  */
-public interface ChatRepository extends JpaRepository<SocialuniChatDO, Long> {
+public interface SocialuniChatRepository extends JpaRepository<SocialuniChatDO, Long> {
 
     //未登录只能查询官方的消息列表
     List<SocialuniChatDO> findByStatusAndTypeInOrderByTopLevelDescUpdateTimeDesc(String status, List<String> types);

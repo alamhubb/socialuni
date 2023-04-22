@@ -17,7 +17,7 @@ import java.util.Optional;
  * @author qinkaiyuan
  * @since TODO[起始版本号]
  */
-public interface MessageRepository extends JpaRepository<SocialuniMessageDO, Integer> {
+public interface SocialuniMessageRepository extends JpaRepository<SocialuniMessageDO, Integer> {
     SocialuniUnionContentBaseDO findOneByUnionIdAndStatus(Integer id, String status);
 
     List<SocialuniMessageDO> findTop30ByChatIdAndStatusAndCreateTimeLessThanOrderByCreateTimeDesc(Integer chatId, String msgStatus, Date queryTime);

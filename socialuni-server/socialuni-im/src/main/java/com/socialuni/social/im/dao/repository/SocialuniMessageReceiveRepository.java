@@ -13,7 +13,7 @@ import java.util.List;
  * @author qinkaiyuan
  * @since TODO[起始版本号]
  */
-public interface MessageReceiveRepository extends JpaRepository<SocialuniMessageReceiveDO, Integer> {
+public interface SocialuniMessageReceiveRepository extends JpaRepository<SocialuniMessageReceiveDO, Integer> {
 
     //chatId下所有未读变为已读，查询出来更改
 //    List<MessageReceiveDO> findByChatUserIdAndMessageStatusInAndStatusAndIsReadFalseAndIdInOrderByCreateTimeDescIdDesc(Integer chatUserId, List<String> msgStatus, String status, List<Long> ids);

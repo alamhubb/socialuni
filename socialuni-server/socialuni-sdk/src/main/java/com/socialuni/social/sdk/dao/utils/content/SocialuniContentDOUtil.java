@@ -10,7 +10,7 @@ import com.socialuni.social.community.sdk.repository.CommentRepository;
 import com.socialuni.social.sdk.dao.DO.base.BaseModelParentDO;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkImgDO;
 import com.socialuni.social.im.dao.DO.message.SocialuniMessageDO;
-import com.socialuni.social.im.dao.repository.MessageRepository;
+import com.socialuni.social.im.dao.repository.SocialuniMessageRepository;
 import com.socialuni.social.sdk.dao.repository.community.TalkImgRepository;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
@@ -24,14 +24,14 @@ import javax.annotation.Resource;
 
 @Component
 public class SocialuniContentDOUtil<T> {
-    private static MessageRepository messageRepository;
+    private static SocialuniMessageRepository messageRepository;
     private static SocialuniUserImgRepository userImgRepository;
     private static CommentRepository commentApi;
     private static SocialuniTalkDORedis talkRedis;
     private static TalkImgRepository talkImgRepository;
 
     @Resource
-    public void setMessageRepository(MessageRepository messageRepository) {
+    public void setMessageRepository(SocialuniMessageRepository messageRepository) {
         SocialuniContentDOUtil.messageRepository = messageRepository;
     }
 

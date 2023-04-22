@@ -1,4 +1,4 @@
-package com.socialuni.social.user.sdk.manage;
+package com.socialuni.social.user.sdk.logic.manage;
 
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.common.api.utils.IntegerUtils;

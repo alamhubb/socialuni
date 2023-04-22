@@ -7,12 +7,12 @@ import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.im.api.model.RO.SocialMessageRO;
-import com.socialuni.social.im.dao.repository.ChatRepository;
+import com.socialuni.social.im.dao.repository.SocialuniChatRepository;
 import com.socialuni.social.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.im.dao.DO.message.SocialuniMessageDO;
-import com.socialuni.social.im.dao.repository.MessageReceiveRepository;
-import com.socialuni.social.im.dao.repository.MessageRepository;
-import com.socialuni.social.im.logic.entity.MessageEntity;
+import com.socialuni.social.im.dao.repository.SocialuniMessageReceiveRepository;
+import com.socialuni.social.im.dao.repository.SocialuniMessageRepository;
+import com.socialuni.social.im.logic.entity.SocialuniMessageEntity;
 import com.socialuni.social.im.logic.foctory.SocialuniMessageDOFactory;
 import com.socialuni.social.im.logic.foctory.SocialMessageROFactory;
 import com.socialuni.social.im.api.model.QO.message.MessageAddVO;
@@ -25,6 +25,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.util.Date;
 
 /**
@@ -32,15 +33,15 @@ import java.util.Date;
  * @date 2019-06-16 12:39
  */
 @Service
-public class MessageService {
+public class SocialuniMessageService {
     @Resource
-    private ChatRepository chatRepository;
+    private SocialuniChatRepository chatRepository;
     @Resource
-    private MessageRepository messageRepository;
+    private SocialuniMessageRepository messageRepository;
     @Resource
-    private MessageEntity messageEntity;
+    private SocialuniMessageEntity messageEntity;
     @Resource
-    private MessageReceiveRepository messageReceiveRepository;
+    private SocialuniMessageReceiveRepository messageReceiveRepository;
 
     public ResultRO<SocialMessageRO> sendMsg(MessageAddVO msgAddVO) {
         String receiveIdUid = msgAddVO.getReceiveId();

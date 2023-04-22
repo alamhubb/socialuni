@@ -1,6 +1,6 @@
-package com.socialuni.social.sdk.logic.manage;
+package com.socialuni.social.user.sdk.logic.manage;
 
-import com.socialuni.social.sdk.dao.redis.UserFansDetailRedis;
+import com.socialuni.social.user.sdk.logic.redis.UserFansDetailRedis;
 import com.socialuni.social.user.sdk.model.DO.SocialUserFansDetailDo;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import org.springframework.scheduling.annotation.Async;

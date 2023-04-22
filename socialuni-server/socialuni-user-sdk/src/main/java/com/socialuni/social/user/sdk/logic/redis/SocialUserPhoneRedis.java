@@ -1,4 +1,4 @@
-package com.socialuni.social.user.sdk.redis;
+package com.socialuni.social.user.sdk.logic.redis;
 
 import com.socialuni.social.common.api.constant.CommonRedisKey;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;

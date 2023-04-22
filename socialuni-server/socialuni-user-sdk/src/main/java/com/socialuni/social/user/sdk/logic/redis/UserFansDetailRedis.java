@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.dao.redis;
+package com.socialuni.social.user.sdk.logic.redis;
 
 import com.socialuni.social.common.api.constant.CommonRedisKey;
 import com.socialuni.social.user.sdk.model.DO.SocialUserFansDetailDo;

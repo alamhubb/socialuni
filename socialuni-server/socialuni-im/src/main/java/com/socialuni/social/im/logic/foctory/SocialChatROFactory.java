@@ -11,9 +11,9 @@ import com.socialuni.social.im.enumeration.ChatUserStatus;
 import com.socialuni.social.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.im.dao.DO.message.SocialuniMessageDO;
 import com.socialuni.social.im.dao.DO.message.SocialuniMessageReceiveDO;
-import com.socialuni.social.im.dao.repository.ChatRepository;
-import com.socialuni.social.im.dao.repository.MessageReceiveRepository;
-import com.socialuni.social.im.dao.repository.MessageRepository;
+import com.socialuni.social.im.dao.repository.SocialuniChatRepository;
+import com.socialuni.social.im.dao.repository.SocialuniMessageReceiveRepository;
+import com.socialuni.social.im.dao.repository.SocialuniMessageRepository;
 import com.socialuni.social.im.api.model.RO.ChatRO;
 import com.socialuni.social.im.api.model.RO.SocialMessageRO;
 import com.socialuni.social.im.enumeration.MessageStatus;
@@ -37,24 +37,24 @@ import java.util.stream.Collectors;
 @Component
 @Data//chatdo+chatUserdo
 public class SocialChatROFactory {
-    private static MessageReceiveRepository messageReceiveRepository;
+    private static SocialuniMessageReceiveRepository messageReceiveRepository;
 
-    private static MessageRepository messageRepository;
+    private static SocialuniMessageRepository messageRepository;
 
-    private static ChatRepository chatRepository;
+    private static SocialuniChatRepository chatRepository;
 
     @Resource
-    public void setMessageReceiveRepository(MessageReceiveRepository messageReceiveRepository) {
+    public void setMessageReceiveRepository(SocialuniMessageReceiveRepository messageReceiveRepository) {
         SocialChatROFactory.messageReceiveRepository = messageReceiveRepository;
     }
 
     @Resource
-    public void setMessageRepository(MessageRepository messageRepository) {
+    public void setMessageRepository(SocialuniMessageRepository messageRepository) {
         SocialChatROFactory.messageRepository = messageRepository;
     }
 
     @Resource
-    public void setChatRepository(ChatRepository chatRepository) {
+    public void setChatRepository(SocialuniChatRepository chatRepository) {
         SocialChatROFactory.chatRepository = chatRepository;
     }
 

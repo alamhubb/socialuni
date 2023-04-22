@@ -1,6 +1,7 @@
 package com.socialuni.social.user.sdk.model.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
+import com.socialuni.social.common.api.entity.SocialuniUserContactBaseDO;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -19,16 +20,5 @@ import javax.persistence.*;
                 @UniqueConstraint(columnNames = {"userId", "beUserId"}),
         }
 )
-public class SocialuniUserFollowDO extends SocialuniContentBaseDO {
-    /**
-     * 主用户
-     */
-    @Column(nullable = false, updatable = false)
-    private Integer userId;
-
-    /**
-     * 被关联用户
-     */
-    @Column(nullable = false, updatable = false)
-    private Integer beUserId;
+public class SocialuniUserFollowDO extends SocialuniUserContactBaseDO {
 }

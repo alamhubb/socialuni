@@ -1,4 +1,4 @@
-package com.socialuni.social.user.sdk.manage;
+package com.socialuni.social.user.sdk.logic.manage;
 
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;

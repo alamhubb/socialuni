@@ -1,4 +1,4 @@
-package com.socialuni.social.user.sdk.manage;
+package com.socialuni.social.user.sdk.logic.manage;
 
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
@@ -6,7 +6,7 @@ import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.report.sdk.enumeration.SocialuniUserStatus;
 import com.socialuni.social.user.sdk.model.DO.SocialUserPhoneDo;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.user.sdk.redis.SocialUserPhoneRedis;
+import com.socialuni.social.user.sdk.logic.redis.SocialUserPhoneRedis;
 import com.socialuni.social.user.sdk.repository.SocialUserPhoneRepository;
 import com.socialuni.social.user.sdk.utils.PhoneNumUtil;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;

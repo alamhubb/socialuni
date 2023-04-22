@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.dao.redis;
+package com.socialuni.social.user.sdk.logic.redis;
 
 import com.socialuni.social.common.api.constant.CommonRedisKey;
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
@@ -15,7 +15,7 @@ import java.util.List;
  * @date 2018-10-17 21:59
  */
 @Component
-public class FollowRedis {
+public class SocialuniUserFollowRedis {
     @Resource
     SocialuniFollowRepository followRepository;
 

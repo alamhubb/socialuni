@@ -8,10 +8,10 @@ import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.im.api.model.QO.SocialuniChatQueryQO;
 import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.im.dao.DO.message.SocialuniMessageReceiveDO;
-import com.socialuni.social.im.dao.repository.MessageReceiveRepository;
+import com.socialuni.social.im.dao.repository.SocialuniMessageReceiveRepository;
 import com.socialuni.social.im.enumeration.*;
 import com.socialuni.social.im.dao.DO.SocialuniChatDO;
-import com.socialuni.social.im.dao.repository.ChatRepository;
+import com.socialuni.social.im.dao.repository.SocialuniChatRepository;
 import com.socialuni.social.im.dao.repository.ChatUserRepository;
 import com.socialuni.social.im.logic.domain.ChatQueryDomain;
 import com.socialuni.social.im.logic.foctory.SocialChatROFactory;
@@ -36,7 +36,7 @@ import java.util.*;
 @Service
 public class ChatService {
     @Resource
-    ChatRepository chatRepository;
+    SocialuniChatRepository chatRepository;
     @Resource
     ChatUserRepository chatUserRepository;
 
@@ -44,7 +44,7 @@ public class ChatService {
     ChatQueryDomain chatQueryDomain;
 
     @Resource
-    private MessageReceiveRepository messageReceiveRepository;
+    private SocialuniMessageReceiveRepository messageReceiveRepository;
     //一个陌生用户，他允许陌生人消息。
     //点击消息，就可以直接进入消息页面。
     //这时候是否创建 chat，还是发了消息再创建。

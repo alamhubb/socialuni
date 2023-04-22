@@ -1,5 +1,6 @@
 package com.socialuni.social.common.sdk.dao.repository;
 
+import com.socialuni.social.common.api.constant.CommonRedisKey;
 import com.socialuni.social.common.api.entity.SocialuniBaseDO;
 import com.socialuni.social.common.api.entity.SocialuniUserContactBaseDO;
 import com.socialuni.social.common.api.entity.SocialuniUserInfoBaseDO;
@@ -149,6 +150,7 @@ public class SocialuniCommonRepository {
      * @param <T>
      * @return
      */
+    @Cacheable(cacheNames = CommonRedisKey.commonFindByUserIdAndBeUserId, key = "#tClass.getSimpleName()+'-'+#userId+'-'+#beUserId")
     public <T extends SocialuniUserContactBaseDO> T findByUserIdAndBeUserId(Integer userId, Integer beUserId, Class<T> tClass) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);

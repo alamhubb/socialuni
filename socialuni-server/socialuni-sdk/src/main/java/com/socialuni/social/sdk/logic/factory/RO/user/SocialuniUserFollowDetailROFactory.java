@@ -4,7 +4,7 @@ import com.socialuni.social.common.api.model.user.SocialuniUserFollowDetailListR
 import com.socialuni.social.common.api.model.user.SocialuniUserFollowInfoRO;
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserFollowDO;
-import com.socialuni.social.sdk.logic.manage.SocialUserFansDetailManage;
+import com.socialuni.social.user.sdk.logic.manage.SocialUserFansDetailManage;
 import com.socialuni.social.user.sdk.model.DO.SocialUserFansDetailDo;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;

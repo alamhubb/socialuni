@@ -10,7 +10,7 @@ import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfigBO;
 import com.socialuni.social.common.api.enumeration.ContentStatus;
 import com.socialuni.social.sdk.dao.mapper.TalkMapper;
-import com.socialuni.social.sdk.dao.redis.FollowRedis;
+import com.socialuni.social.user.sdk.logic.redis.SocialuniUserFollowRedis;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDORedis;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
@@ -39,7 +39,7 @@ public class TalkQueryStore {
     @Resource
     private SocialuniTalkDORedis talkRedis;
     @Resource
-    FollowRedis followRedis;
+    SocialuniUserFollowRedis followRedis;
     @Resource
     private TalkMapper talkMapper;
 

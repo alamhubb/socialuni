@@ -8,10 +8,10 @@ import com.socialuni.social.im.enumeration.MessageType;
 import com.socialuni.social.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.im.dao.DO.message.SocialuniMessageDO;
 import com.socialuni.social.im.dao.DO.message.SocialuniMessageReceiveDO;
-import com.socialuni.social.im.dao.repository.ChatRepository;
+import com.socialuni.social.im.dao.repository.SocialuniChatRepository;
 import com.socialuni.social.im.dao.repository.ChatUserRepository;
-import com.socialuni.social.im.dao.repository.MessageReceiveRepository;
-import com.socialuni.social.im.dao.repository.MessageRepository;
+import com.socialuni.social.im.dao.repository.SocialuniMessageReceiveRepository;
+import com.socialuni.social.im.dao.repository.SocialuniMessageRepository;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import org.springframework.stereotype.Service;
 
@@ -27,14 +27,14 @@ import java.util.*;
 @Service
 public class MatchRequestService {
     @Resource
-    private MessageRepository messageRepository;
+    private SocialuniMessageRepository messageRepository;
 
     @Resource
     private ChatUserRepository chatUserRepository;
     @Resource
-    private ChatRepository chatRepository;
+    private SocialuniChatRepository chatRepository;
     @Resource
-    private MessageReceiveRepository messageReceiveDORepository;
+    private SocialuniMessageReceiveRepository messageReceiveDORepository;
     @Resource
     private EntityManager entityManager;
 

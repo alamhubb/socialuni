@@ -4,7 +4,7 @@ import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.im.enumeration.ChatStatus;
 import com.socialuni.social.im.enumeration.ChatType;
 import com.socialuni.social.im.dao.DO.SocialuniChatDO;
-import com.socialuni.social.im.dao.repository.ChatRepository;
+import com.socialuni.social.im.dao.repository.SocialuniChatRepository;
 import com.socialuni.social.im.dao.repository.ChatUserRepository;
 import com.socialuni.social.im.logic.foctory.SocialChatROFactory;
 import com.socialuni.social.im.api.model.RO.ChatRO;
@@ -22,7 +22,7 @@ import java.util.List;
 @Component
 public class ChatQueryDomain {
     @Resource
-    ChatRepository chatRepository;
+    SocialuniChatRepository chatRepository;
     @Resource
     ChatUserRepository chatUserRepository;
 

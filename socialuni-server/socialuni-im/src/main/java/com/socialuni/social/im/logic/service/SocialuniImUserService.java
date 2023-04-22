@@ -6,15 +6,15 @@ import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepository
 import com.socialuni.social.im.api.model.RO.SocialuniImMineUserDetailRO;
 import com.socialuni.social.im.api.model.RO.SocialuniImUserDetailRO;
 import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
-import com.socialuni.social.im.dao.DO.SocialuniFriendApplyRecordDO;
 import com.socialuni.social.im.dao.DO.SocialuniUserChatConfigDO;
-import com.socialuni.social.im.enumeration.SocialuniAddFriendStatus;
 import com.socialuni.social.im.logic.manage.SocialuniUserChatConfigManage;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.user.sdk.logic.manage.SocialuniUserFollowManage;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
 
 @Service
@@ -26,6 +26,7 @@ public class SocialuniImUserService {
 
         Integer mineUserId = SocialuniUserUtil.getMineUserIdAllowNull();
 
+        //获取对方是否接收陌生人消息
         SocialuniUserChatConfigDO socialuniUserChatConfigDO = SocialuniUserChatConfigManage.getOrCreateUserChatConfigDO(beUserId);
 
         SocialuniImUserDetailRO socialuniImUserDetailRO = new SocialuniImUserDetailRO();
@@ -33,20 +34,12 @@ public class SocialuniImUserService {
         //设置对方是否允许陌生人消息
         socialuniImUserDetailRO.setAllowStrangerMsg(socialuniUserChatConfigDO.getAllowStrangerMsg());
         if (mineUserId != null) {
-            SocialuniChatUserDO beChatUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(beUserId, mineUserId, SocialuniChatUserDO.class);
-            if (beChatUserDO != null && beChatUserDO.getBlackUser()) {
-                socialuniImUserDetailRO.setBeBlackUser(true);
-            }
-            SocialuniChatUserDO chatUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(mineUserId, beUserId, SocialuniChatUserDO.class);
+            SocialuniChatUserDO chatUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(beUserId, mineUserId, SocialuniChatUserDO.class);
             if (chatUserDO != null && chatUserDO.getBlackUser()) {
                 socialuniImUserDetailRO.setBlackUser(true);
             }
-
-
-            SocialuniFriendApplyRecordDO socialuniFriendApplyRecordDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(mineUserId, beUserId, SocialuniFriendApplyRecordDO.class);
-            if (socialuniFriendApplyRecordDO != null && socialuniFriendApplyRecordDO.getStatus().equals(SocialuniAddFriendStatus.enable)) {
-                socialuniImUserDetailRO.setFriendUser(true);
-            }
+            //查看对方是否关注了你
+//            socialuniImUserDetailRO.setBeFollow(socialuniUserFollowManage.userHasFollowBeUser(beUserId, mineUserId));
         }
 
         return ResultRO.success(socialuniImUserDetailRO);

@@ -1,8 +1,8 @@
 package com.socialuni.social.user.sdk.logic.entity;
 
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import com.socialuni.social.user.sdk.manage.SocialUserAccountManage;
-import com.socialuni.social.user.sdk.manage.SocialUserAccountStore;
+import com.socialuni.social.user.sdk.logic.manage.SocialUserAccountManage;
+import com.socialuni.social.user.sdk.logic.manage.SocialUserAccountStore;
 import com.socialuni.social.common.sdk.dao.DO.SocialUserAccountDO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;

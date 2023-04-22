@@ -1,6 +1,6 @@
 package com.socialuni.social.user.sdk.logic.entity;
 
-import com.socialuni.social.user.sdk.manage.SocialUserManage;
+import com.socialuni.social.user.sdk.logic.manage.SocialUserManage;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import org.springframework.stereotype.Service;

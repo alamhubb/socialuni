@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.logic.factory.RO.user;
 import com.socialuni.social.sdk.constant.socialuni.UserIdentityAuthStatus;
 import com.socialuni.social.sdk.dao.DO.user.SocialUserIdentityAuthDO;
 import com.socialuni.social.sdk.dao.repository.user.identity.SocialUserIdentityAuthRepository;
-import com.socialuni.social.sdk.logic.manage.FollowManage;
+import com.socialuni.social.user.sdk.logic.manage.SocialuniUserFollowManage;
 import com.socialuni.social.common.api.model.user.SocialuniContentUserRO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.factory.SocialuniUserROFactory;
@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class SocialuniContentUserROFactory {
-    static FollowManage followManage;
+    static SocialuniUserFollowManage followManage;
 
     static SocialUserIdentityAuthRepository socialUserIdentityAuthRepository;
 
@@ -25,7 +25,7 @@ public class SocialuniContentUserROFactory {
     }
 
     @Resource
-    public void setFollowManage(FollowManage followManage) {
+    public void setFollowManage(SocialuniUserFollowManage followManage) {
         SocialuniContentUserROFactory.followManage = followManage;
     }
 

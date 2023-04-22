@@ -10,7 +10,7 @@ import com.socialuni.social.im.enumeration.NotifyType;
 import com.socialuni.social.common.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.im.dao.DO.message.SocialuniMessageReceiveDO;
 import com.socialuni.social.common.sdk.dao.DO.SocialUserAccountDO;
-import com.socialuni.social.im.dao.repository.MessageReceiveRepository;
+import com.socialuni.social.im.dao.repository.SocialuniMessageReceiveRepository;
 import com.socialuni.social.common.sdk.dao.repository.NotifyRepository;
 import com.socialuni.social.common.sdk.dao.repository.SocialUserAccountRepository;
 import com.socialuni.social.im.model.message.notify.NotifyVO;
@@ -108,7 +108,7 @@ public class NotifyDomain {
     @Resource
     private StringRedisTemplate stringRedisTemplate;
     @Resource
-    private MessageReceiveRepository messageReceiveRepository;
+    private SocialuniMessageReceiveRepository messageReceiveRepository;
 
     public void sendNotifies(List<NotifyDO> notifies, SocialuniUserDo mineUser) {
         for (NotifyDO notify : notifies) {

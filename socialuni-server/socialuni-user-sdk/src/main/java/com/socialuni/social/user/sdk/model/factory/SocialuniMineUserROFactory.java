@@ -6,11 +6,9 @@ import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.user.sdk.model.DO.SocialUserPhoneDo;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.user.sdk.redis.SocialUserPhoneRedis;
+import com.socialuni.social.user.sdk.logic.redis.SocialUserPhoneRedis;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.apache.commons.lang3.StringUtils;
-
-import java.util.Optional;
 
 public class SocialuniMineUserROFactory {
     public final static SocialUserPhoneRedis socialUserPhoneRedis = SpringUtil.getBean(SocialUserPhoneRedis.class);

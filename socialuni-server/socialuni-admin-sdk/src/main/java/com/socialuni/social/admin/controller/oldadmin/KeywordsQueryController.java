@@ -13,7 +13,7 @@ import com.socialuni.social.community.sdk.repository.TalkRepository;
 import com.socialuni.social.report.sdk.enumeration.ReportStatus;
 import com.socialuni.social.common.api.enumeration.ContentStatus;
 import com.socialuni.social.im.dao.DO.message.SocialuniMessageDO;
-import com.socialuni.social.im.dao.repository.MessageRepository;
+import com.socialuni.social.im.dao.repository.SocialuniMessageRepository;
 import com.socialuni.social.sdk.logic.service.KeywordsService;
 import com.socialuni.social.sdk.logic.service.KeywordsTriggerService;
 import com.socialuni.social.report.sdk.dao.DO.KeywordsDO;
@@ -47,7 +47,7 @@ public class KeywordsQueryController {
     @Resource
     private CommentRepository commentApi;
     @Resource
-    private MessageRepository messageRepository;
+    private SocialuniMessageRepository messageRepository;
     @Resource
     private KeywordsService keywordsService;
 

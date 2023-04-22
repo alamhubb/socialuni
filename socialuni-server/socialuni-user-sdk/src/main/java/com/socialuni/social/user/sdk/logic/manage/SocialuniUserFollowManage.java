@@ -1,9 +1,9 @@
-package com.socialuni.social.sdk.logic.manage;
+package com.socialuni.social.user.sdk.logic.manage;
 
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
+import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserFollowDO;
 import com.socialuni.social.user.sdk.repository.SocialuniFollowRepository;
-import com.socialuni.social.sdk.dao.redis.FollowRedis;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
@@ -11,11 +11,9 @@ import javax.annotation.Resource;
 import java.util.Date;
 
 @Component
-public class FollowManage {
+public class SocialuniUserFollowManage {
     @Resource
     private SocialuniFollowRepository followRepository;
-    @Resource
-    private FollowRedis followRedis;
 
     @Async
     public void createFollow(Integer mineUserId, Integer beUserId) {
@@ -34,7 +32,7 @@ public class FollowManage {
     }
 
     public boolean userHasFollowBeUser(Integer userId, Integer beUserId) {
-        SocialuniUserFollowDO followDO = followRedis.findFirstByUserIdAndBeUserId(userId, beUserId);
+        SocialuniUserFollowDO followDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(userId, beUserId, SocialuniUserFollowDO.class);
         return followDO != null && SocialuniCommonStatus.enable.equals(followDO.getStatus());
     }
 }

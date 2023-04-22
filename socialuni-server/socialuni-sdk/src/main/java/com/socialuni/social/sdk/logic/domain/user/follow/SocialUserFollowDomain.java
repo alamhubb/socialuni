@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.logic.domain.user.follow;
 
-import com.socialuni.social.sdk.logic.manage.FollowManage;
-import com.socialuni.social.sdk.logic.manage.SocialUserFansDetailManage;
-import com.socialuni.social.sdk.dao.redis.FollowRedis;
+import com.socialuni.social.user.sdk.logic.manage.SocialuniUserFollowManage;
+import com.socialuni.social.user.sdk.logic.manage.SocialUserFansDetailManage;
+import com.socialuni.social.user.sdk.logic.redis.SocialuniUserFollowRedis;
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserFollowDO;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
@@ -15,11 +15,11 @@ import javax.validation.constraints.NotNull;
 @Component
 public class SocialUserFollowDomain {
     @Resource
-    private FollowRedis followRedis;
+    private SocialuniUserFollowRedis followRedis;
     @Resource
     private SocialUserFansDetailManage socialUserFansDetailManage;
     @Resource
-    FollowManage followManage;
+    SocialuniUserFollowManage followManage;
 
     @Async
     public void addFlow(@NotNull Integer mineUserId, @NotNull Integer beUserId) {

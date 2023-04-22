@@ -1,4 +1,4 @@
-package com.socialuni.social.user.sdk.manage;
+package com.socialuni.social.user.sdk.logic.manage;
 
 import com.socialuni.social.common.api.utils.SocialTokenFacade;
 import com.socialuni.social.user.sdk.model.DO.SocialuniTokenDO;

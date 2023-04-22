@@ -1,7 +1,7 @@
 package com.socialuni.social.user.sdk.logic.entity;
 
-import com.socialuni.social.user.sdk.manage.SocialUserPhoneManage;
-import com.socialuni.social.user.sdk.manage.SocialuniAuthenticationManage;
+import com.socialuni.social.user.sdk.logic.manage.SocialUserPhoneManage;
+import com.socialuni.social.user.sdk.logic.manage.SocialuniAuthenticationManage;
 import com.socialuni.social.user.sdk.model.DO.SocialUserPhoneDo;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumQO;
