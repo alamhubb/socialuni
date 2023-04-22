@@ -2,8 +2,8 @@ package com.socialuni.social.sdk.utils;
 
 
 import com.socialuni.social.common.sdk.utils.DateUtils;
-import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
-import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniCommentDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
 import com.socialuni.social.common.sdk.constant.AppConfigConst;
 import com.socialuni.social.common.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.report.sdk.constant.SocialuniSupportProviderType;

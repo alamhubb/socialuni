@@ -1,7 +1,7 @@
-package com.socialuni.social.sdk.dao.repository;
+package com.socialuni.social.user.sdk.repository;
 
 import com.socialuni.social.common.api.constant.CommonRedisKey;
-import com.socialuni.social.sdk.dao.DO.SocialuniFollowDO;
+import com.socialuni.social.user.sdk.model.DO.SocialuniUserFollowDO;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 
-public interface FollowRepository extends JpaRepository<SocialuniFollowDO, Integer> {
+public interface SocialuniFollowRepository extends JpaRepository<SocialuniUserFollowDO, Integer> {
     //关注后用户缓存修改，一人+粉丝，一人+关注
     @Caching(evict = {
             //新增一条数据肯定所有数据清空，数据的显示数据变了
@@ -22,24 +22,24 @@ public interface FollowRepository extends JpaRepository<SocialuniFollowDO, Integ
             @CacheEvict(cacheNames = CommonRedisKey.userById, key = "#follow.beUserId"),
             @CacheEvict(cacheNames = CommonRedisKey.queryUserAndBeUserFollow, key = "#follow.userId+'-'+#follow.beUserId")
     })
-    SocialuniFollowDO save(SocialuniFollowDO follow);
+    SocialuniUserFollowDO save(SocialuniUserFollowDO follow);
 
-    @Query("select f.beUserId from SocialuniFollowDO f where f.userId = :userId and f.status=:followStatus order by f.beUserId asc")
+    @Query("select f.beUserId from SocialuniUserFollowDO f where f.userId = :userId and f.status=:followStatus order by f.beUserId asc")
     List<Integer> queryUserFollowUserIds(
             @Param("userId") Integer userId,
             @Param("followStatus") String followStatus
     );
 
-    SocialuniFollowDO findFirstByUserIdAndBeUserId(Integer userId, Integer beUserId);
+    SocialuniUserFollowDO findFirstByUserIdAndBeUserId(Integer userId, Integer beUserId);
 
     //查询他的关注
-    List<SocialuniFollowDO> findTop30ByUserIdAndStatusAndUpdateTimeLessThanOrderByUpdateTimeDesc(Integer userId, String status, Date updateTime);
+    List<SocialuniUserFollowDO> findTop30ByUserIdAndStatusAndUpdateTimeLessThanOrderByUpdateTimeDesc(Integer userId, String status, Date updateTime);
 
     //查询他的粉丝
-    List<SocialuniFollowDO> findTop30ByBeUserIdAndStatusAndUpdateTimeLessThanOrderByUpdateTimeDesc(Integer beUserId, String status, Date updateTime);
+    List<SocialuniUserFollowDO> findTop30ByBeUserIdAndStatusAndUpdateTimeLessThanOrderByUpdateTimeDesc(Integer beUserId, String status, Date updateTime);
 
     //查询他的粉丝
-    List<SocialuniFollowDO> findAllByBeUserIdAndStatus(Integer userId, String status);
+    List<SocialuniUserFollowDO> findAllByBeUserIdAndStatus(Integer userId, String status);
 }
 
 

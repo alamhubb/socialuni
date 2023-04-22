@@ -1,15 +1,15 @@
 package com.socialuni.social.sdk.logic.factory;
 
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
-import com.socialuni.social.community.sdk.entity.HugDO;
-import com.socialuni.social.community.sdk.entity.SocialuniCircleDO;
-import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
-import com.socialuni.social.community.sdk.entity.TagDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniHugDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniCircleDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTagDO;
 import com.socialuni.social.community.sdk.repository.CommentRepository;
 import com.socialuni.social.community.sdk.repository.SocialuniCircleRepository;
 import com.socialuni.social.sdk.dao.CommentDao;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialTalkCircleDO;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialTalkCircleDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkImgDO;
 import com.socialuni.social.sdk.dao.redis.HugRedis;
 import com.socialuni.social.sdk.dao.repository.community.SocialTalkCircleRepository;
 import com.socialuni.social.sdk.dao.store.SocialTagRedis;
@@ -191,7 +191,7 @@ public class SocialTalkROFactory {
         socialTalkRO.setCircles(circles);
 
         //10 毫秒
-        List<? extends TagDO> TagDOs = socialTagRedis.getTagsByTalkId(talkDO.getUnionId());
+        List<? extends SocialuniTagDO> TagDOs = socialTagRedis.getTagsByTalkId(talkDO.getUnionId());
         List<SocialTalkTagRO> tagROs = TagDOs.stream().map(tagDO -> new SocialTalkTagRO(tagDO.getId(), tagDO.getName())).collect(Collectors.toList());
         //50毫秒
 //        socialTalkRO.setContentType(talkDO.getContentType());
@@ -252,7 +252,7 @@ public class SocialTalkROFactory {
         //40毫秒
         if (mineUser != null) {
             //20毫秒
-            HugDO HugDO = hugRedis.findHugByTalkIdAndUserId(talkDO.getUnionId(), mineUser.getUnionId());
+            SocialuniHugDO HugDO = hugRedis.findHugByTalkIdAndUserId(talkDO.getUnionId(), mineUser.getUnionId());
             if (HugDO != null) {
                 socialTalkRO.setHasHugged(true);
             }

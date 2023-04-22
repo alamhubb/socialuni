@@ -1,4 +1,4 @@
-package com.socialuni.social.community.sdk.entity;
+package com.socialuni.social.community.sdk.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import lombok.Data;
@@ -9,13 +9,13 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "s_hug", uniqueConstraints = {
+@Table(name = "s_community_hug", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"userId", "talkId"}),
         @UniqueConstraint(columnNames = {"userId", "commentId"})
 })
 @Data
 @NoArgsConstructor
-public class HugDO extends SocialuniContentBaseDO {
+public class SocialuniHugDO extends SocialuniContentBaseDO {
     /**
      * 哪个评论的
      */
@@ -30,7 +30,7 @@ public class HugDO extends SocialuniContentBaseDO {
      */
     private Integer commentId;
 
-    public HugDO(Integer userId, Integer talkId, Integer commentId) {
+    public SocialuniHugDO(Integer userId, Integer talkId, Integer commentId) {
         this.userId = userId;
         this.talkId = talkId;
         this.commentId = commentId;

@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.store;
 
-import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniCommentDO;
 import com.socialuni.social.community.sdk.repository.CommentRepository;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniCommentDOUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;

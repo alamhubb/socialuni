@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.dao.DO.community.talk;
+package com.socialuni.social.community.sdk.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniImgBaseDo;
 import lombok.Data;
@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "s_talk_img",
+@Table(name = "s_community_talk_img",
         indexes = {
                 @Index(columnList = "status"),
                 @Index(columnList = "userId"),

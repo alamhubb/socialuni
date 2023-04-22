@@ -2,11 +2,10 @@ package com.socialuni.social.admin.factory;
 
 import com.socialuni.social.admin.model.ReportContentVO;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
-import com.socialuni.social.common.api.entity.SocialuniImgBaseDo;
-import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
-import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
-import com.socialuni.social.community.sdk.entity.TagDO;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniCommentDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTagDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkImgDO;
 import com.socialuni.social.sdk.dao.store.SocialTagRedis;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniCommentDOUtil;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
@@ -47,7 +46,7 @@ public class ReportContentROFactory {
 //            CommentUtils.getAll(talkDO.getId()).stream().filter((SocialCommentDO commentDO) -> commentDO.getUserId().equals(userId)).map(talk::new).collect(Collectors.toList());
 //            reportContentVO.setComments(talkDO.getUserId());
 
-            List<?  extends TagDO> TagDOs = socialTagRedis.getTagsByTalkId(contentId);
+            List<?  extends SocialuniTagDO> TagDOs = socialTagRedis.getTagsByTalkId(contentId);
             List<TagRO> tagROES = SocialTagROFactory.tagDOToROS(TagDOs);
             reportContentVO.setTags(tagROES);
             reportContentVO.setStatus(talkDO.getStatus());

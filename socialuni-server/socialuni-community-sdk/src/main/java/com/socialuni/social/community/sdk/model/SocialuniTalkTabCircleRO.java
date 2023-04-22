@@ -1,6 +1,6 @@
 package com.socialuni.social.community.sdk.model;
 
-import com.socialuni.social.community.sdk.entity.SocialuniCircleDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniCircleDO;
 import lombok.Data;
 
 /**

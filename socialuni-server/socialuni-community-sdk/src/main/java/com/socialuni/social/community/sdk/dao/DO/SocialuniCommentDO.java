@@ -1,4 +1,4 @@
-package com.socialuni.social.community.sdk.entity;
+package com.socialuni.social.community.sdk.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.report.sdk.dao.DO.SocialuniTextCheckDO;
@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "s_comment",
+@Table(name = "s_community_comment",
         indexes = {
                 @Index(columnList = "status"),
                 @Index(columnList = "userId"),

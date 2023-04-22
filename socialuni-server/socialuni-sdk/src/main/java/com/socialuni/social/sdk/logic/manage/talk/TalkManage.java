@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.manage.talk;
 
-import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDORedis;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;

@@ -1,15 +1,12 @@
 package com.socialuni.social.im.dao.DO.message;
 
 import com.socialuni.social.common.api.entity.SocialuniUserContactBaseDO;
-import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
-import com.socialuni.social.im.dao.DO.ChatUserDO;
+import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @author qinkaiyuan
@@ -17,12 +14,12 @@ import java.util.Date;
  */
 @Data
 @Entity
-@Table(name = "s_message_receive", uniqueConstraints = {
+@Table(name = "s_im_message_receive", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"beUserId", "messageId"})
 })
 @NoArgsConstructor
 //发送出去的消息表，接收人是谁，基于哪个chatUser
-public class MessageReceiveDO extends SocialuniUserContactBaseDO implements Serializable {
+public class SocialuniMessageReceiveDO extends SocialuniUserContactBaseDO implements Serializable {
 
     //msg上存储了是否已撤回状态，以及发送的消息的状态，撤回和已删除冲突，有可能已删除，但是已撤回，一个字段记录不了两个状态
     private String msgStatus;
@@ -47,7 +44,7 @@ public class MessageReceiveDO extends SocialuniUserContactBaseDO implements Seri
 
     private Integer chatUserId;
 
-    public MessageReceiveDO(ChatUserDO chatUserDO, Integer sendUserId, Integer messageId) {
+    public SocialuniMessageReceiveDO(SocialuniChatUserDO chatUserDO, Integer sendUserId, Integer messageId) {
         super(sendUserId, chatUserDO.getUserId());
         this.chatUserId = chatUserDO.getId();
         this.messageId = messageId;

@@ -1,4 +1,4 @@
-package com.socialuni.social.community.sdk.entity;
+package com.socialuni.social.community.sdk.dao.DO;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +12,7 @@ import java.util.Date;
  * @date 2019-11-07 15:20
  */
 @Entity
-@Table(name = "s_tag",
+@Table(name = "s_community_tag",
         indexes = {
                 @Index(columnList = "status"),
                 @Index(columnList = "showFront"),
@@ -25,7 +25,7 @@ import java.util.Date;
 )
 @Data
 @NoArgsConstructor
-public class TagDO implements Serializable {
+public class SocialuniTagDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

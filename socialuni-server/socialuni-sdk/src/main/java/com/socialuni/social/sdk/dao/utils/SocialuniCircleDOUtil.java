@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.dao.utils;
 
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import com.socialuni.social.community.sdk.entity.SocialuniCircleDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniCircleDO;
 import com.socialuni.social.community.sdk.repository.SocialuniCircleRepository;
 import org.springframework.stereotype.Component;
 

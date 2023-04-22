@@ -1,4 +1,4 @@
-package com.socialuni.social.community.sdk.entity;
+package com.socialuni.social.community.sdk.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
@@ -13,7 +13,7 @@ import javax.persistence.*;
  */
 //                @Index(columnList = "showFront"),
 @Entity
-@Table(name = "s_circle",
+@Table(name = "s_community_circle",
         indexes = {
                 @Index(columnList = "status"),
                 @Index(columnList = "showFront"),

@@ -1,9 +1,8 @@
 package com.socialuni.social.im.logic.domain;
 
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
-import com.socialuni.social.im.dao.DO.ChatUserDO;
+import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.im.dao.DO.SocialuniChatDO;
-import com.socialuni.social.im.enumeration.ChatType;
 import com.socialuni.social.im.logic.foctory.SocialuniChatDOFactory;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,7 @@ public class SocialuniOpenChatDomain {
         SocialuniChatDO socialuniChatDO =  SocialuniChatDOFactory.getChatIdByCreateSingleChat();
 
 
-        ChatUserDO chatUserDO = new ChatUserDO();
+        SocialuniChatUserDO chatUserDO = new SocialuniChatUserDO();
 
         chatUserDO.setChatId(socialuniChatDO.getId());
         chatUserDO.setUserId(mineUserId);
@@ -29,7 +28,7 @@ public class SocialuniOpenChatDomain {
         chatUserDO.setType(socialuniChatDO.getType());
 
 
-        ChatUserDO chatBeUserDO = new ChatUserDO();
+        SocialuniChatUserDO chatBeUserDO = new SocialuniChatUserDO();
 
         chatBeUserDO.setChatId(socialuniChatDO.getId());
         chatBeUserDO.setUserId(userId);

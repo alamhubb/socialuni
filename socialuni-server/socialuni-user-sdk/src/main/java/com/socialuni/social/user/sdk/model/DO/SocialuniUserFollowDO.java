@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.dao.DO;
+package com.socialuni.social.user.sdk.model.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import lombok.Data;
@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "s_follow",
+@Table(name = "s_user_follow",
         indexes = {
                 @Index(columnList = "userId"),
                 @Index(columnList = "beUserId"),
@@ -19,7 +19,7 @@ import javax.persistence.*;
                 @UniqueConstraint(columnNames = {"userId", "beUserId"}),
         }
 )
-public class SocialuniFollowDO extends SocialuniContentBaseDO {
+public class SocialuniUserFollowDO extends SocialuniContentBaseDO {
     /**
      * 主用户
      */

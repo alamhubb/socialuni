@@ -2,7 +2,7 @@ package com.socialuni.social.community.sdk.repository;
 
 
 import cn.hutool.core.bean.BeanUtil;
-import com.socialuni.social.community.sdk.entity.SocialuniTagTypeDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTagTypeDO;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;

@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.factory;
 
 import com.socialuni.social.common.api.constant.SocialuniContentType;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkImgDO;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import lombok.Data;

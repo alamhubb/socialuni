@@ -5,8 +5,8 @@ import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
-import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
-import com.socialuni.social.community.sdk.entity.TagDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTagDO;
 import com.socialuni.social.community.sdk.repository.TagRepository;
 import com.socialuni.social.community.sdk.repository.TalkRepository;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
@@ -137,7 +137,7 @@ public class SocialuniHomeTalkQueryDomain {
             tagNames = new ArrayList<>();
         }
         for (String tagName : tagNames) {
-            TagDO TagDO = tagApi.findFirstByName(tagName);
+            SocialuniTagDO TagDO = tagApi.findFirstByName(tagName);
             if (TagDO == null || !TagDO.getStatus().equals(SocialuniCommonStatus.enable)) {
                 throw new SocialBusinessException("选择了无效的话题");
             }

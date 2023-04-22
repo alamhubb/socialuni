@@ -2,7 +2,7 @@ package com.socialuni.social.community.sdk.redis;
 
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
-import com.socialuni.social.community.sdk.entity.DistrictDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniDistrictDO;
 import com.socialuni.social.community.sdk.model.SocialDistrictRO;
 import com.socialuni.social.community.sdk.model.SocialDistrictROFactory;
 import com.socialuni.social.community.sdk.repository.DistrictRepository;
@@ -21,7 +21,7 @@ public class DistrictRedis {
     private DistrictRepository districtRepository;
 
     @Cacheable(cacheNames = "districtByAdCode", key = "#adCode")
-    public Optional<DistrictDO> findFirstOneByAdCode(String adCode) {
+    public Optional<SocialuniDistrictDO> findFirstOneByAdCode(String adCode) {
         return districtRepository.findFirstOneByAdCode(adCode);
     }
 
@@ -51,21 +51,21 @@ public class DistrictRedis {
 
         //获取热门和热门的子节点
         //查出来所有，平级结构，按城市编码排序，省在市前，市在区县前
-        List<DistrictDO> districtDOS = getChinaProvinces();
+        List<SocialuniDistrictDO> districtDOS = getChinaProvinces();
         //递归设置子节点
         list.addAll(recurseSetChild(districtDOS));
 
         return list;
     }
 
-    private List<SocialDistrictRO> recurseSetChildOnce(List<DistrictDO> districts) {
+    private List<SocialDistrictRO> recurseSetChildOnce(List<SocialuniDistrictDO> districts) {
         List<SocialDistrictRO> socialDistrictROS = new ArrayList<>();
         //遍历转vo设置子节点
-        for (DistrictDO district : districts) {
+        for (SocialuniDistrictDO district : districts) {
             SocialDistrictRO socialDistrictRO = SocialDistrictROFactory.getDistrictRO(district);
             //如果街道为空设置子节点
             if (StringUtils.isEmpty(district.getDistrictName())) {
-                List<DistrictDO> districtDOS = getByParentAdCode(district.getAdCode());
+                List<SocialuniDistrictDO> districtDOS = getByParentAdCode(district.getAdCode());
                 socialDistrictRO.setChilds(SocialDistrictROFactory.districtDOToVOS(districtDOS));
             }
             socialDistrictROS.add(socialDistrictRO);
@@ -75,14 +75,14 @@ public class DistrictRedis {
 
 
     //递归设置child
-    private List<SocialDistrictRO> recurseSetChild(List<DistrictDO> districts) {
+    private List<SocialDistrictRO> recurseSetChild(List<SocialuniDistrictDO> districts) {
         List<SocialDistrictRO> socialDistrictROS = new ArrayList<>();
         //遍历转vo设置子节点
-        for (DistrictDO district : districts) {
+        for (SocialuniDistrictDO district : districts) {
             SocialDistrictRO socialDistrictRO = SocialDistrictROFactory.getDistrictRO(district);
             //如果街道为空设置子节点
             if (StringUtils.isEmpty(district.getDistrictName())) {
-                List<DistrictDO> districtDOS = getByParentAdCode(district.getAdCode());
+                List<SocialuniDistrictDO> districtDOS = getByParentAdCode(district.getAdCode());
                 socialDistrictRO.setChilds(this.recurseSetChild(districtDOS));
             }
             socialDistrictROS.add(socialDistrictRO);
@@ -101,7 +101,7 @@ public class DistrictRedis {
         hotDistrict.setAdName("热门");
         hotDistrict.setProvinceName("中国");
         hotDistrict.setAdCode("999999");
-        List<DistrictDO> districtDOS = districtRepository.findTop20ByDistrictCodeAndStatusOrderByCountDesc("1", SocialuniCommonStatus.enable);
+        List<SocialuniDistrictDO> districtDOS = districtRepository.findTop20ByDistrictCodeAndStatusOrderByCountDesc("1", SocialuniCommonStatus.enable);
 
         hotDistrict.setChilds(recurseSetChildOnce(districtDOS));
         return hotDistrict;
@@ -114,11 +114,11 @@ public class DistrictRedis {
      * @param parentAdCode
      * @return
      */
-    private List<DistrictDO> getByParentAdCode(String parentAdCode) {
+    private List<SocialuniDistrictDO> getByParentAdCode(String parentAdCode) {
         return districtRepository.findByParentAdCodeAndStatusOrderByAdCode(parentAdCode, SocialuniCommonStatus.enable);
     }
 
-    private List<DistrictDO> getChinaProvinces() {
+    private List<SocialuniDistrictDO> getChinaProvinces() {
         return districtRepository.findByParentAdCodeAndStatusOrderByAdCode(SocialuniConst.chinaDistrictCode, SocialuniCommonStatus.enable);
     }
 }

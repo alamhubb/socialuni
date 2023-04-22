@@ -8,7 +8,7 @@ import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
 import com.socialuni.social.report.sdk.enumeration.SocialuniUserStatus;
 import com.socialuni.social.user.sdk.exception.SocialUserBannedException;
-import com.socialuni.social.user.sdk.model.DO.SocialTokenDO;
+import com.socialuni.social.user.sdk.model.DO.SocialuniTokenDO;
 import com.socialuni.social.user.sdk.model.DO.SocialUserPhoneDo;
 import com.socialuni.social.user.sdk.model.DO.SocialUserViolationDo;
 import com.socialuni.social.user.sdk.redis.SocialUserPhoneRedis;
@@ -85,7 +85,7 @@ public class SocialuniUserUtil {
 
     //下面都是联盟的
     public static SocialuniUserDo getMineUserNotNull(String token) {
-        SocialTokenDO tokenDO = SocialTokenDOUtil.getCommonTokenDONotNull(token);
+        SocialuniTokenDO tokenDO = SocialTokenDOUtil.getCommonTokenDONotNull(token);
         return SocialuniUserUtil.getAndCheckUserNotNull(tokenDO.getUserId());
     }
 
@@ -110,7 +110,7 @@ public class SocialuniUserUtil {
     //必须有，websocket无法从request中获取token只能传入
     public static SocialuniUserDo getUserByToken(String token) {
         //解析token
-        SocialTokenDO tokenDO = SocialTokenDOUtil.getCommonTokenDOAllowNull(token);
+        SocialuniTokenDO tokenDO = SocialTokenDOUtil.getCommonTokenDOAllowNull(token);
         if (tokenDO == null) {
             return null;
         }

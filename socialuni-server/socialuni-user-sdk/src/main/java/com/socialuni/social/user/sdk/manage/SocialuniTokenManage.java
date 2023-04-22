@@ -1,7 +1,7 @@
 package com.socialuni.social.user.sdk.manage;
 
 import com.socialuni.social.common.api.utils.SocialTokenFacade;
-import com.socialuni.social.user.sdk.model.DO.SocialTokenDO;
+import com.socialuni.social.user.sdk.model.DO.SocialuniTokenDO;
 import com.socialuni.social.user.sdk.repository.SocialuniCommonTokenRepository;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.common.api.constant.DateTimeType;
@@ -15,14 +15,14 @@ public class SocialuniTokenManage {
     @Resource
     SocialuniCommonTokenRepository commonTokenRepository;
 
-    public SocialTokenDO create(Integer userId) {
+    public SocialuniTokenDO create(Integer userId) {
         String token = SocialTokenFacade.generateTokenByUserId(userId);
-        SocialTokenDO commonUserTokenDO = this.create(userId, token);
+        SocialuniTokenDO commonUserTokenDO = this.create(userId, token);
         return commonUserTokenDO;
     }
 
-    public SocialTokenDO create(Integer userId, String token) {
-        SocialTokenDO commonUserTokenDO = new SocialTokenDO();
+    public SocialuniTokenDO create(Integer userId, String token) {
+        SocialuniTokenDO commonUserTokenDO = new SocialuniTokenDO();
         commonUserTokenDO.setToken(token);
         commonUserTokenDO.setUserId(userId);
         commonUserTokenDO.setDevId(DevAccountFacade.getDevIdNotNull());

@@ -15,11 +15,11 @@ import java.util.Date;
  */
 @Data
 @Entity
-@Table(name = "s_chat_user", uniqueConstraints = {
+@Table(name = "s_im_chat_user", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"userId", "chatId"}),
         @UniqueConstraint(columnNames = {"userId", "beUserId"})
 })
-public class ChatUserDO extends SocialuniUserContactBaseDO {
+public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {
 
     //置顶标识
     //用户手动操作的，系统没有操作方法，暂时没用
@@ -73,7 +73,7 @@ public class ChatUserDO extends SocialuniUserContactBaseDO {
     //用户详情页面，只要买过就不显示5b。
     //usedetail是否显示buysend
 
-    public ChatUserDO() {
+    public SocialuniChatUserDO() {
         //如果是系统的，则默认指定
         this.topFlag = false;
         //为什么不设置成99，因为此版本没有阅读功能？先试试99
@@ -85,7 +85,7 @@ public class ChatUserDO extends SocialuniUserContactBaseDO {
     //群聊，不需要对方用户
     //这个方法暂时没生效，群的时候没有使用chatUser表的数据
     //私聊群聊创建ChatUserDO的逻辑
-    public ChatUserDO(SocialuniChatDO chat, Integer userId) {
+    public SocialuniChatUserDO(SocialuniChatDO chat, Integer userId) {
 //        this.chatId = chat.getId();
 //        this.userId = userId;
         String chatType = chat.getType();
@@ -105,7 +105,7 @@ public class ChatUserDO extends SocialuniUserContactBaseDO {
         this.unreadNum = 0;
     }
 
-    public ChatUserDO(SocialuniChatDO chat, Integer userId, Integer beUserId) {
+    public SocialuniChatUserDO(SocialuniChatDO chat, Integer userId, Integer beUserId) {
         this();
         this.chatId = chat.getId();
         this.setUserId(userId);

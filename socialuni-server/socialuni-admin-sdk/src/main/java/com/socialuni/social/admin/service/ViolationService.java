@@ -6,7 +6,7 @@ import com.socialuni.social.report.sdk.entity.ReportDO;
 import com.socialuni.social.report.sdk.enumeration.ReportStatus;
 import com.socialuni.social.report.sdk.dao.repository.ReportRepository;
 import com.socialuni.social.sdk.constant.ViolateLevel;
-import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
+import com.socialuni.social.common.api.enumeration.ContentStatus;
 import com.socialuni.social.sdk.dao.store.ReportStore;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
 import com.socialuni.social.sdk.logic.entity.user.SocialUserViolationEntity;

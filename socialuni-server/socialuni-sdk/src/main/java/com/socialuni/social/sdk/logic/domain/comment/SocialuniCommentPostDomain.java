@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.domain.comment;
 
-import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
-import com.socialuni.social.community.sdk.entity.TagDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniCommentDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTagDO;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
 import com.socialuni.social.common.sdk.constant.UserType;
 import com.socialuni.social.sdk.dao.store.SocialTagRedis;
@@ -39,8 +39,8 @@ public class SocialuniCommentPostDomain {
 
         Integer talkId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(addQO.getTalkId());
 
-        List<?  extends TagDO> TagDOs = socialTagRedis.getTagsByTalkId(talkId);
-        List<String> tagNames = TagDOs.stream().map(TagDO::getName).collect(Collectors.toList());
+        List<?  extends SocialuniTagDO> TagDOs = socialTagRedis.getTagsByTalkId(talkId);
+        List<String> tagNames = TagDOs.stream().map(SocialuniTagDO::getName).collect(Collectors.toList());
 
         //系统管理员不校验相关内容
         if (!UserType.system.equals(mineUser.getType())) {

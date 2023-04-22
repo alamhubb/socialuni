@@ -1,4 +1,4 @@
-package com.socialuni.social.community.sdk.entity;
+package com.socialuni.social.community.sdk.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import lombok.Data;
@@ -12,7 +12,7 @@ import java.util.Date;
  * @date 2019-11-07 15:20
  */
 @Entity
-@Table(name = "s_tag_type",
+@Table(name = "s_community_tag_type",
         indexes = {
                 @Index(columnList = "orderLevel"),
                 @Index(columnList = "talkCount")

@@ -1,7 +1,7 @@
 package com.socialuni.social.community.sdk.model;
 
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
-import com.socialuni.social.community.sdk.entity.DistrictDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniDistrictDO;
 import lombok.Data;
 
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
  */
 @Data
 public class SocialDistrictROFactory {
-    public static SocialDistrictRO getDistrictRO(DistrictDO district) {
+    public static SocialDistrictRO getDistrictRO(SocialuniDistrictDO district) {
         SocialDistrictRO socialDistrictRO = new SocialDistrictRO();
         socialDistrictRO.setId(district.getId());
         socialDistrictRO.setProvinceName(district.getProvinceName());
@@ -27,7 +27,7 @@ public class SocialDistrictROFactory {
     }
 
 
-    public static List<SocialDistrictRO> districtDOToVOS(List<DistrictDO> DOs) {
+    public static List<SocialDistrictRO> districtDOToVOS(List<SocialuniDistrictDO> DOs) {
         return ListConvertUtil.toList(SocialDistrictROFactory::getDistrictRO, DOs);
     }
 }

@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.entity.chat;
 
-import com.socialuni.social.im.dao.DO.ChatUserDO;
+import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.im.enumeration.ChatType;
 import com.socialuni.social.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.im.dao.repository.ChatRepository;
@@ -27,12 +27,12 @@ public class ChatEntity {
         chat = chatRepository.save(chat);
 
         //match属于私聊，需要保存对方的内容，方便展示头像昵称
-        ChatUserDO groupOwnerChatUser = new ChatUserDO(chat, groupOwner.getUnionId());
+        SocialuniChatUserDO groupOwnerChatUser = new SocialuniChatUserDO(chat, groupOwner.getUnionId());
 
-        List<ChatUserDO> chatUserDOS = new ArrayList<>();
+        List<SocialuniChatUserDO> chatUserDOS = new ArrayList<>();
         chatUserDOS.add(groupOwnerChatUser);
         for (SocialuniUserDo grouper : groupers) {
-            ChatUserDO grouperChatUser = new ChatUserDO(chat, grouper.getUnionId());
+            SocialuniChatUserDO grouperChatUser = new SocialuniChatUserDO(chat, grouper.getUnionId());
             chatUserDOS.add(grouperChatUser);
         }
         chatUserRepository.saveAll(chatUserDOS);

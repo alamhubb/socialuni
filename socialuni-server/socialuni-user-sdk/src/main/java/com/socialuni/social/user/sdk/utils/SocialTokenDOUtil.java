@@ -2,7 +2,7 @@ package com.socialuni.social.user.sdk.utils;
 
 import com.socialuni.social.common.api.utils.SocialTokenFacade;
 import com.socialuni.social.common.sdk.utils.RequestLogUtil;
-import com.socialuni.social.user.sdk.model.DO.SocialTokenDO;
+import com.socialuni.social.user.sdk.model.DO.SocialuniTokenDO;
 import com.socialuni.social.user.sdk.repository.SocialuniCommonTokenRepository;
 import com.socialuni.social.common.api.utils.IntegerUtils;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
@@ -26,7 +26,7 @@ public class SocialTokenDOUtil {
         SocialTokenDOUtil.commonTokenRepository = commonTokenRepository;
     }
 
-    public static SocialTokenDO getCommonTokenDOAllowNull() {
+    public static SocialuniTokenDO getCommonTokenDOAllowNull() {
         String token = SocialTokenFacade.getToken();
         if (StringUtils.isEmpty(token)) {
             return null;
@@ -34,7 +34,7 @@ public class SocialTokenDOUtil {
         return SocialTokenDOUtil.getCommonTokenDONotNull(token);
     }
 
-    public static SocialTokenDO getCommonTokenDOAllowNull(String token) {
+    public static SocialuniTokenDO getCommonTokenDOAllowNull(String token) {
         if (StringUtils.isEmpty(token)) {
             return null;
         }
@@ -42,12 +42,12 @@ public class SocialTokenDOUtil {
     }
 
 
-    public static SocialTokenDO getCommonTokenDONotNull(String token) {
+    public static SocialuniTokenDO getCommonTokenDONotNull(String token) {
         String userKey = SocialTokenFacade.getUserKeyByToken(token);
         if (userKey == null) {
             throw new SocialNotLoginException();
         }
-        SocialTokenDO tokenDO = commonTokenRepository.findOneByToken(token);
+        SocialuniTokenDO tokenDO = commonTokenRepository.findOneByToken(token);
         if (tokenDO == null) {
             throw new SocialNotLoginException();
         }

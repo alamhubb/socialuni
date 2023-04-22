@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.logic.check;
 
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import com.socialuni.social.community.sdk.entity.SocialuniCircleDO;
-import com.socialuni.social.community.sdk.entity.SocialuniTagTypeDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniCircleDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTagTypeDO;
 import com.socialuni.social.community.sdk.repository.SocialuniTagTypeRepository;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
 import com.socialuni.social.sdk.dao.store.SocialuniCircleRedis;

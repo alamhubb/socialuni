@@ -4,12 +4,11 @@ import com.socialuni.social.common.api.exception.base.SocialException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.im.config.websocket.WebsocketServer;
-import com.socialuni.social.im.dao.DO.ChatUserDO;
-import com.socialuni.social.im.dao.DO.SocialuniChatDO;
+import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.im.logic.foctory.SocaluniNotifyROFactory;
 import com.socialuni.social.im.enumeration.NotifyType;
 import com.socialuni.social.common.sdk.dao.DO.NotifyDO;
-import com.socialuni.social.im.dao.DO.message.MessageReceiveDO;
+import com.socialuni.social.im.dao.DO.message.SocialuniMessageReceiveDO;
 import com.socialuni.social.common.sdk.dao.DO.SocialUserAccountDO;
 import com.socialuni.social.im.dao.repository.MessageReceiveRepository;
 import com.socialuni.social.common.sdk.dao.repository.NotifyRepository;
@@ -139,8 +138,8 @@ public class NotifyDomain {
         }
 
         if (NotifyType.message.equals(notifyType)) {
-            MessageReceiveDO messageReceiveDO = messageReceiveRepository.getReferenceById(notify.getContentId());
-            ChatUserDO chatUserDO = SocialuniRepositoryFacade.findById(messageReceiveDO.getChatUserId(), ChatUserDO.class);
+            SocialuniMessageReceiveDO messageReceiveDO = messageReceiveRepository.getReferenceById(notify.getContentId());
+            SocialuniChatUserDO chatUserDO = SocialuniRepositoryFacade.findById(messageReceiveDO.getChatUserId(), SocialuniChatUserDO.class);
 //                Optional<ChatDO> chatDOOptional = chatRepository.findById();
             //如果群聊，直接发送给两个服务器在线的所有用户，并且查找他们未读的。
             //未登录的时候也查询群聊里面的所有内容

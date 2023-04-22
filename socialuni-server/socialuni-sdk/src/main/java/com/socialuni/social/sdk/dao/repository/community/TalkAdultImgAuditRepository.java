@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.repository.community;
 
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkHasUnderageImgAuditDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkHasUnderageImgAuditDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "s_user_chat_config",
+@Table(name = "s_im_user_chat_config",
         //查询条件索引
         indexes = {
                 //关联需要键索引，索引列不能为空

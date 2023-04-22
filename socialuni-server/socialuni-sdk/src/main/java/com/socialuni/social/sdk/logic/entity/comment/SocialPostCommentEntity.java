@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.entity.comment;
 
-import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniCommentDO;
 import com.socialuni.social.sdk.dao.store.CommentStore;
 import com.socialuni.social.sdk.logic.manage.talk.TalkManage;
 import com.socialuni.social.sdk.model.QO.comment.SocialuniCommentPostQO;

@@ -6,8 +6,8 @@ import com.socialuni.social.common.api.exception.exception.SocialParamsException
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.im.api.model.QO.SocialuniChatQueryQO;
-import com.socialuni.social.im.dao.DO.ChatUserDO;
-import com.socialuni.social.im.dao.DO.message.MessageReceiveDO;
+import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
+import com.socialuni.social.im.dao.DO.message.SocialuniMessageReceiveDO;
 import com.socialuni.social.im.dao.repository.MessageReceiveRepository;
 import com.socialuni.social.im.enumeration.*;
 import com.socialuni.social.im.dao.DO.SocialuniChatDO;
@@ -63,7 +63,7 @@ public class ChatService {
             Integer beUserId = socialuniUnionIdModler.getId();
 
             //如果用户存在查看会话
-            ChatUserDO chatUserDO = SocialuniChatUserDOFactory.getOrCreateChatUserBySingleSendMsg(mineUserId, beUserId);
+            SocialuniChatUserDO chatUserDO = SocialuniChatUserDOFactory.getOrCreateChatUsersBySingleSendMsg1(mineUserId, beUserId);
 //全部已读
             chatUserDO.setUnreadNum(0);
             //进入chat页，列表中进入，肯定是展示的，所以不会走这里
@@ -74,12 +74,12 @@ public class ChatService {
             //toDO 这里需要细想怎么个逻辑
             //需要将chatUser的未读数量更新一下
 //            messageReceiveDORepository.updateMessageReceiveRead(chatUserDb, readVO.getMessageIds());
-            List<MessageReceiveDO> messageReceiveDOS = messageReceiveRepository.findByChatUserIdAndStatusAndIsReadFalse(chatUserDO.getId(), MessageStatus.enable);
+            List<SocialuniMessageReceiveDO> messageReceiveDOS = messageReceiveRepository.findByChatUserIdAndStatusAndIsReadFalse(chatUserDO.getId(), MessageStatus.enable);
 //                List<MessageReceiveDO> messageReceiveDOS = new ArrayList<>();
             //把具体的每一条改为已读
             if (messageReceiveDOS.size() > 0) {
                 Date curDate = new Date();
-                for (MessageReceiveDO messageReceiveDO : messageReceiveDOS) {
+                for (SocialuniMessageReceiveDO messageReceiveDO : messageReceiveDOS) {
                     messageReceiveDO.setUpdateTime(curDate);
                     messageReceiveDO.setIsRead(true);
                         /*
@@ -123,7 +123,7 @@ public class ChatService {
             Integer beUserId = socialuniUnionIdModler.getId();
 
             //如果用户存在查看会话
-            ChatUserDO chatUserDO = SocialuniChatUserDOFactory.getOrCreateChatUserBySingleSendMsg(mineUserId, beUserId);
+            SocialuniChatUserDO chatUserDO = SocialuniChatUserDOFactory.getOrCreateChatUsersBySingleSendMsg1(mineUserId, beUserId);
 
             ChatRO chatRO = SocialChatROFactory.getChatROByQueryChat(chatUserDO, true);
 
@@ -175,8 +175,8 @@ public class ChatService {
     //获取私聊的chat
     //查看对方主页时
     public ChatRO seeUserDetailGetOrCreateChat(SocialuniUserDo user, Integer receiveUserId) {
-        Optional<ChatUserDO> chatUserDOOptional = chatUserRepository.findFirstByStatusAndUserIdAndBeUserId(ChatStatus.enable, user.getUnionId(), receiveUserId);
-        ChatUserDO chatUserDO;
+        Optional<SocialuniChatUserDO> chatUserDOOptional = chatUserRepository.findFirstByStatusAndUserIdAndBeUserId(ChatStatus.enable, user.getUnionId(), receiveUserId);
+        SocialuniChatUserDO chatUserDO;
         //如果创建过，则获取。返回
         if (chatUserDOOptional.isPresent()) {
             chatUserDO = chatUserDOOptional.get();
@@ -205,13 +205,13 @@ public class ChatService {
         chat = chatRepository.save(chat);
 
         //match属于私聊，需要保存对方的内容，方便展示头像昵称
-        ChatUserDO mineChatUser = new ChatUserDO(chat, user.getUnionId(), receiveUserId);
+        SocialuniChatUserDO mineChatUser = new SocialuniChatUserDO(chat, user.getUnionId(), receiveUserId);
         //创建时不改为true，详见fronshow字段，修改状态逻辑
 //        mineChatUser.setFrontShow(true);
 
-        ChatUserDO receiveChatUser = new ChatUserDO(chat, receiveUserId, user.getUnionId());
+        SocialuniChatUserDO receiveChatUser = new SocialuniChatUserDO(chat, receiveUserId, user.getUnionId());
 
-        List<ChatUserDO> chatUserDOS = Arrays.asList(mineChatUser, receiveChatUser);
+        List<SocialuniChatUserDO> chatUserDOS = Arrays.asList(mineChatUser, receiveChatUser);
         chatUserRepository.saveAll(chatUserDOS);
 
         //你需要自己的chat为代开起

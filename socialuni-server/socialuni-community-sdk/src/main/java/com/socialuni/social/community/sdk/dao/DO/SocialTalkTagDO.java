@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.dao.DO.community.talk;
+package com.socialuni.social.community.sdk.dao.DO;
 
 import lombok.Data;
 
@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @date 2019-11-07 15:20
  */
 @Entity
-@Table(name = "s_talk_tag",
+@Table(name = "s_community_talk_tag",
         indexes = {
                 @Index(columnList = "talkId"),
                 @Index(columnList = "tagId")

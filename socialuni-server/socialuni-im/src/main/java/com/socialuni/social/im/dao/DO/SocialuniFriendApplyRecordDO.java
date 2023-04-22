@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "s_user_friend_apply_record",
+@Table(name = "s_im_user_friend_apply_record",
         //查询条件索引
         indexes = {
                 //关联需要键索引，索引列不能为空

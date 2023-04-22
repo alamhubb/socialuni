@@ -2,13 +2,10 @@ package com.socialuni.social.im.logic.foctory;
 
 
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
-import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
-import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.im.enumeration.MessageReadStatus;
-import com.socialuni.social.im.enumeration.MessageStatus;
-import com.socialuni.social.im.dao.DO.message.MessageDO;
-import com.socialuni.social.im.dao.DO.message.MessageReceiveDO;
+import com.socialuni.social.im.dao.DO.message.SocialuniMessageDO;
+import com.socialuni.social.im.dao.DO.message.SocialuniMessageReceiveDO;
 import com.socialuni.social.user.sdk.model.factory.SocialuniUserROFactory;
 import com.socialuni.social.im.api.model.RO.SocialMessageRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
@@ -28,7 +25,7 @@ import java.util.List;
 @Component
 public class SocialMessageROFactory {
 
-    public static SocialMessageRO getMessageRO(MessageDO messageDO, Integer beUserId) {
+    public static SocialMessageRO getMessageRO(SocialuniMessageDO messageDO, Integer beUserId) {
         SocialMessageRO messageRO = new SocialMessageRO();
         SocialuniUserDo userDO = SocialuniUserUtil.getAndCheckUserNotNull(messageDO.getUserId());
 
@@ -53,7 +50,7 @@ public class SocialMessageROFactory {
     }
 
     //websocket推新消息时设置为未读
-    public SocialMessageRO getMessageRO(MessageDO messageDO, boolean readFlag, SocialuniUserDo user) {
+    public SocialMessageRO getMessageRO(SocialuniMessageDO messageDO, boolean readFlag, SocialuniUserDo user) {
         SocialMessageRO socialMessageRO = SocialMessageROFactory.getMessageRO(messageDO, user.getUnionId());
         socialMessageRO.setIsRead(false);
         return socialMessageRO;
@@ -70,9 +67,9 @@ public class SocialMessageROFactory {
         this(messageDO, user.getUserId());
     }*/
 
-    public static SocialMessageRO getMessageRO(MessageReceiveDO messageReceive) {
+    public static SocialMessageRO getMessageRO(SocialuniMessageReceiveDO messageReceive) {
 
-        MessageDO messageDO = SocialuniRepositoryFacade.findById(messageReceive.getMessageId(), MessageDO.class);
+        SocialuniMessageDO messageDO = SocialuniRepositoryFacade.findById(messageReceive.getMessageId(), SocialuniMessageDO.class);
 
         SocialMessageRO messageRO = SocialMessageROFactory.getMessageRO(messageDO, messageReceive.getBeUserId());
         //涉及到举报，不知道是msgid还是msguserid，所以暂时取消，统一使用msgid，删除和举报
@@ -89,7 +86,7 @@ public class SocialMessageROFactory {
 //            this.updateTIme = messageDO.getUpdateTime();
     }
 
-    public static List<SocialMessageRO> messageReceiveDOToVOS(List<MessageReceiveDO> messageDOS) {
+    public static List<SocialMessageRO> messageReceiveDOToVOS(List<SocialuniMessageReceiveDO> messageDOS) {
         //翻转数组,因为查出来的是倒序的
         List<SocialMessageRO> messageVOS = ListConvertUtil.toList(SocialMessageROFactory::getMessageRO, messageDOS);
         Collections.reverse(messageVOS);
@@ -97,7 +94,7 @@ public class SocialMessageROFactory {
     }
 
     //未登录的消息，消息发给谁的，应该是谁的id，查看消息的人的id，因为消息存在推的情况
-    public static List<SocialMessageRO> messageDOToVOS(List<MessageDO> messageDOS, Integer lookMessageUserId) {
+    public static List<SocialMessageRO> messageDOToVOS(List<SocialuniMessageDO> messageDOS, Integer lookMessageUserId) {
         //翻转数组,因为查出来的是倒序的
         List<SocialMessageRO> messageVOS = ListConvertUtil.toList(SocialMessageROFactory::getMessageRO, messageDOS, lookMessageUserId);
         Collections.reverse(messageVOS);

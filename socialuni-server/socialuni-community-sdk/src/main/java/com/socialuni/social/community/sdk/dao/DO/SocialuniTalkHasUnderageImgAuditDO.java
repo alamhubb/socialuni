@@ -1,7 +1,7 @@
-package com.socialuni.social.sdk.dao.DO.community.talk;
+package com.socialuni.social.community.sdk.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
-import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
+import com.socialuni.social.common.api.enumeration.ContentStatus;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "s_talk_has_underage_img_audit",
+@Table(name = "s_community_talk_has_underage_img_audit",
         indexes = {
                 @Index(columnList = "status")
         },

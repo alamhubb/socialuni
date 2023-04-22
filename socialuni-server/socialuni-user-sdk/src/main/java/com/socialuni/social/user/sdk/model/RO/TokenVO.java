@@ -1,6 +1,6 @@
 package com.socialuni.social.user.sdk.model.RO;
 
-import com.socialuni.social.user.sdk.model.DO.SocialTokenDO;
+import com.socialuni.social.user.sdk.model.DO.SocialuniTokenDO;
 import lombok.Data;
 
 /**
@@ -11,7 +11,7 @@ import lombok.Data;
 public class TokenVO {
     private String tokenCode;
 
-    public TokenVO(SocialTokenDO tokenDO) {
+    public TokenVO(SocialuniTokenDO tokenDO) {
         this.tokenCode = tokenDO.getToken();
     }
 }

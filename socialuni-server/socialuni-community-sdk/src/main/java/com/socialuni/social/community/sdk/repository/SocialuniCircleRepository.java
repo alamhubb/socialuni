@@ -1,7 +1,7 @@
 package com.socialuni.social.community.sdk.repository;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.socialuni.social.community.sdk.entity.SocialuniCircleDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniCircleDO;
 import com.socialuni.social.community.sdk.enumeration.CircleRedisKey;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;

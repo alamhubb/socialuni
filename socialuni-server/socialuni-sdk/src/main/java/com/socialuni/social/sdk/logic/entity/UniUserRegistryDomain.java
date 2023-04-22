@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.entity;
 
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import com.socialuni.social.user.sdk.model.DO.SocialTokenDO;
+import com.socialuni.social.user.sdk.model.DO.SocialuniTokenDO;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.logic.entity.SocialPhoneLoginEntity;
 import com.socialuni.social.user.sdk.logic.entity.SocialUserEntity;
@@ -67,7 +67,7 @@ public class UniUserRegistryDomain {
             //已注册，更新token
             mineUser = SocialuniUserUtil.getAndCheckUserNotNull(uniContentUnionIdDO.getId());
         }
-        SocialTokenDO socialUserTokenDO = tokenManage.create(mineUser.getUnionId());
+        SocialuniTokenDO socialUserTokenDO = tokenManage.create(mineUser.getUnionId());
 
         SocialuniMineUserDetailRO userDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
 

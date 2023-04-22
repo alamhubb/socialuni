@@ -5,7 +5,7 @@ import com.socialuni.social.common.sdk.event.ddd.EventPublisherFacade;
 import com.socialuni.social.user.sdk.logic.entity.SocialPhoneLoginEntity;
 import com.socialuni.social.user.sdk.logic.entity.SocialProviderLoginEntity;
 import com.socialuni.social.user.sdk.manage.SocialuniTokenManage;
-import com.socialuni.social.user.sdk.model.DO.SocialTokenDO;
+import com.socialuni.social.user.sdk.model.DO.SocialuniTokenDO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumQO;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
-import java.util.Optional;
 
 @Service
 public class SocialuniLoginDomain {
@@ -46,7 +45,7 @@ public class SocialuniLoginDomain {
     public SocialLoginRO<SocialuniUserRO> getSocialLoginROByMineUser(SocialuniUserDo mineUser) {
         SocialuniUserRO userDetailRO = SocialuniMineUserROFactory.getMineUser(mineUser);
 
-        SocialTokenDO socialUserTokenDO = tokenManage.create(mineUser.getUnionId());
+        SocialuniTokenDO socialUserTokenDO = tokenManage.create(mineUser.getUnionId());
 
 
         EventPublisherFacade.publishEvent("userLogin", mineUser);

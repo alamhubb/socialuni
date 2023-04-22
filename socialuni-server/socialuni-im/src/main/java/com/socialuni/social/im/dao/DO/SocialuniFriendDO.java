@@ -11,7 +11,7 @@ import javax.persistence.UniqueConstraint;
 
 
 @Entity
-@Table(name = "s_user_friend",
+@Table(name = "s_im_user_friend",
         //查询条件索引
         indexes = {
                 //关联需要键索引，索引列不能为空

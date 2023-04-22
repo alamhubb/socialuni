@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.utils;
 
-import com.socialuni.social.community.sdk.entity.TagDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTagDO;
 import com.socialuni.social.community.sdk.repository.TagRepository;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +16,7 @@ public class SocialuniTagDOUtils {
         SocialuniTagDOUtils.tagApi = tagApi;
     }
 
-    public static List<TagDO> save(List<TagDO> TagDOs) {
+    public static List<SocialuniTagDO> save(List<SocialuniTagDO> TagDOs) {
         return tagApi.savePutAll(TagDOs);
     }
 }

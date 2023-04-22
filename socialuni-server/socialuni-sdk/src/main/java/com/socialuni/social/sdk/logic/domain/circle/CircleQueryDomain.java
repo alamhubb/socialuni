@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.domain.circle;
 
-import com.socialuni.social.community.sdk.entity.SocialuniCircleDO;
-import com.socialuni.social.community.sdk.entity.SocialuniTagTypeDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniCircleDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTagTypeDO;
 import com.socialuni.social.community.sdk.repository.SocialuniTagTypeRepository;
 import com.socialuni.social.sdk.logic.factory.community.SocialCircleROFactory;
 import com.socialuni.social.sdk.model.QO.circle.SocialuniCircleQueryByTypeQO;

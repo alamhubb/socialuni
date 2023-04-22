@@ -12,7 +12,7 @@ import com.socialuni.social.report.sdk.constant.SocialuniSupportProviderType;
 import com.socialuni.social.sdk.constant.business.SocialuniAllowPayCoinAmountType;
 import com.socialuni.social.sdk.constant.business.SocialuniPayStatus;
 import com.socialuni.social.sdk.constant.business.SocialuniPayProviderType;
-import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
+import com.socialuni.social.common.api.enumeration.ContentStatus;
 import com.socialuni.social.sdk.dao.DO.bussiness.SocialuniPayCoinOrderDO;
 import com.socialuni.social.sdk.model.QO.business.SocialuniPayCoinQO;
 import com.socialuni.social.sdk.model.QO.business.SocialuniCoinPayRO;

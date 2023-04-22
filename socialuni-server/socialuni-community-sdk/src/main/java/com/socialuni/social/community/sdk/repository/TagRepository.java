@@ -1,7 +1,7 @@
 package com.socialuni.social.community.sdk.repository;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.socialuni.social.community.sdk.entity.TagDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTagDO;
 import com.socialuni.social.community.sdk.enumeration.TagRedisKey;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -14,53 +14,53 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public interface TagRepository extends JpaRepository<TagDO, Integer> {
-    TagDO findByIdAndStatus(Integer tagId, String status);
-    default  List<TagDO> savePutAll(List<TagDO> TagDOs){
-        List<TagDO> list = new ArrayList<>();
-        for (TagDO TagDO : TagDOs) {
-            TagDO save = this.save(BeanUtil.toBean(TagDO, TagDO.class));
+public interface TagRepository extends JpaRepository<SocialuniTagDO, Integer> {
+    SocialuniTagDO findByIdAndStatus(Integer tagId, String status);
+    default  List<SocialuniTagDO> savePutAll(List<SocialuniTagDO> TagDOs){
+        List<SocialuniTagDO> list = new ArrayList<>();
+        for (SocialuniTagDO TagDO : TagDOs) {
+            SocialuniTagDO save = this.save(BeanUtil.toBean(TagDO, SocialuniTagDO.class));
             list.add(save);
         }
         return list;
     }
-    default TagDO savePut(TagDO TagDO){
-        return this.save(BeanUtil.toBean(TagDO,TagDO.class));
+    default SocialuniTagDO savePut(SocialuniTagDO TagDO){
+        return this.save(BeanUtil.toBean(TagDO, SocialuniTagDO.class));
     }
     @Caching(
             put = {
                     @CachePut(cacheNames = TagRedisKey.tagByName, key = "#TagDO.name"),
             }
     )
-    TagDO save(TagDO TagDO);
+    SocialuniTagDO save(SocialuniTagDO TagDO);
 
 
 
     @Cacheable(cacheNames = TagRedisKey.tagByName, key = "#name")
-    TagDO findFirstByName(String name);
+    SocialuniTagDO findFirstByName(String name);
 
     @Cacheable(cacheNames = TagRedisKey.tagByDevId, key = "#devId")
-    TagDO findFirstByDevId(Integer devId);
+    SocialuniTagDO findFirstByDevId(Integer devId);
 
-    @Query("select t.id from TagDO t,SocialTalkTagDO tt where t.id = tt.tagId and tt.talkId =:talkId and t.status =:status and t.showFront = :showFront")
+    @Query("select t.id from SocialuniTagDO t,SocialTalkTagDO tt where t.id = tt.tagId and tt.talkId =:talkId and t.status =:status and t.showFront = :showFront")
     List<Integer> findTagIdsByTalkIdAndStatusAndShowFront(Integer talkId, String status, Boolean showFront);
 
-    List<TagDO> findByStatusAndVisibleGenderOrderByCountDesc(String status, String gender);
+    List<SocialuniTagDO> findByStatusAndVisibleGenderOrderByCountDesc(String status, String gender);
 
     //获取tagTYpe所有子tag
-    List<TagDO> findByTagTypeIdAndStatusOrderByCountDesc(Integer tagTypeId, String status);
+    List<SocialuniTagDO> findByTagTypeIdAndStatusOrderByCountDesc(Integer tagTypeId, String status);
 
-    List<TagDO> findByTagTypeIdAndStatusAndVisibleGenderOrderByCountDesc(Integer tagTypeId, String status, String gender);
+    List<SocialuniTagDO> findByTagTypeIdAndStatusAndVisibleGenderOrderByCountDesc(Integer tagTypeId, String status, String gender);
 
 
     //查询热门前10tag
-    List<TagDO> findByStatusOrderByCountDesc(String status, Pageable pageable);
+    List<SocialuniTagDO> findByStatusOrderByCountDesc(String status, Pageable pageable);
 
-    List<TagDO> findByStatusAndVisibleGenderOrderByCountDesc(String status, String gender, Pageable pageable);
+    List<SocialuniTagDO> findByStatusAndVisibleGenderOrderByCountDesc(String status, String gender, Pageable pageable);
 
 
     //查询所有tag
-    List<TagDO> findAllByStatusOrderByCountDesc(String status);
+    List<SocialuniTagDO> findAllByStatusOrderByCountDesc(String status);
 
-    List<TagDO> findAllByStatusAndVisibleGenderOrderByCountDesc(String status, String gender);
+    List<SocialuniTagDO> findAllByStatusAndVisibleGenderOrderByCountDesc(String status, String gender);
 }

@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.dao.DO;
+package com.socialuni.social.community.sdk.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniBaseDO;
 import lombok.Data;
@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 //                @Index(columnList = "showFront"),
 @Entity
-@Table(name = "s_school",
+@Table(name = "s_community_school",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = {"name"})
         }

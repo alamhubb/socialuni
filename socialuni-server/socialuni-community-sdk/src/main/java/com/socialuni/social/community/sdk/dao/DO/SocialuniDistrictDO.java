@@ -1,4 +1,4 @@
-package com.socialuni.social.community.sdk.entity;
+package com.socialuni.social.community.sdk.dao.DO;
 
 import lombok.Data;
 
@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Data
 @Entity
-@Table(name = "s_district",
+@Table(name = "s_community_district",
         uniqueConstraints = {@UniqueConstraint(columnNames = {"adCode"})}
         , indexes = {
         @Index(columnList = "count"),
@@ -25,7 +25,7 @@ import java.util.List;
         @Index(columnList = "parentAdCode")
 }
 )
-public class DistrictDO implements Serializable {
+public class SocialuniDistrictDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -49,7 +49,7 @@ public class DistrictDO implements Serializable {
     private String parentAdCode;
 
     @Transient
-    private List<DistrictDO> childs = new ArrayList<>();
+    private List<SocialuniDistrictDO> childs = new ArrayList<>();
 
     @Override
     public String toString() {

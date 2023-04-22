@@ -7,7 +7,7 @@ import com.socialuni.social.common.api.exception.exception.SocialBusinessExcepti
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.utils.UUIDUtil;
-import com.socialuni.social.community.sdk.entity.TagDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTagDO;
 import com.socialuni.social.community.sdk.repository.TagRepository;
 import com.socialuni.social.sdk.constant.MpType;
 import com.socialuni.social.sdk.logic.manage.SocialTagManage;
@@ -64,7 +64,7 @@ public class AdminAccountService {
             throw new SocialBusinessException("开发者名称已被注册，请改名后重试");
         }
         //如果创建过，则一定有，所以下面可以直接使用
-        TagDO checkNameTag = tagApi.findFirstByName(appName);
+        SocialuniTagDO checkNameTag = tagApi.findFirstByName(appName);
         //tag名称已被注册，不为空，还不为当前用户
         if (checkNameTag != null && !checkNameTag.getDevId().equals(devAccountModel.getId())) {
             throw new SocialBusinessException("开发者名称已被注册，请改名后重试");

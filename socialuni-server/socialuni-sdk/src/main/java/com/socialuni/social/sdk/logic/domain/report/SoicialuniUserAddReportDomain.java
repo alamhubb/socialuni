@@ -10,7 +10,7 @@ import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.common.sdk.constant.ErrorMsg;
 import com.socialuni.social.sdk.constant.ReportSourceType;
 import com.socialuni.social.common.sdk.constant.UserType;
-import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
+import com.socialuni.social.common.api.enumeration.ContentStatus;
 import com.socialuni.social.report.sdk.enumeration.SocialuniUserStatus;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;

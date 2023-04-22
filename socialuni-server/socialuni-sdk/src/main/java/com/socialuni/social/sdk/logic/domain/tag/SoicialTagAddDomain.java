@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.domain.tag;
 
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
-import com.socialuni.social.community.sdk.entity.TagDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTagDO;
 import com.socialuni.social.community.sdk.repository.TagRepository;
 import com.socialuni.social.user.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.social.sdk.logic.factory.community.SocialTagROFactory;
@@ -38,14 +38,14 @@ public class SoicialTagAddDomain {
         SocialuniTextContentUtil.checkTextHasUnderageAndContactAndViolateWords(tagName);
         //校验内容是否违规
 
-        TagDO dbTag = tagApi.findFirstByName(tagName);
+        SocialuniTagDO dbTag = tagApi.findFirstByName(tagName);
         //toDO 这里有坑，就是没有查询标签状态，如果标签已经禁用，这里也可以直接用了
         if (dbTag != null) {
             throw new SocialBusinessException("标签已经存在，请直接使用");
         }
         String description = tagAddVO.getDescription();
         SocialuniTextContentUtil.checkTextHasUnderageAndContactAndViolateWords(description);
-        TagDO TagDO = socialTagManage.createTagDO(tagAddVO, mineUser.getUnionId());
+        SocialuniTagDO TagDO = socialTagManage.createTagDO(tagAddVO, mineUser.getUnionId());
         TagRO tagRO = SocialTagROFactory.getTagRO(TagDO);
         return tagRO;
     }

@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.domain.talk;
 
-import com.socialuni.social.community.sdk.entity.SocialuniCircleDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniCircleDO;
 import com.socialuni.social.sdk.constant.TalkTabType;
 import com.socialuni.social.sdk.dao.utils.SocialuniCircleDOUtil;
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserExpandDOUtil;

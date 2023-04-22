@@ -2,8 +2,8 @@ package com.socialuni.social.sdk.logic.service.circle;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
-import com.socialuni.social.community.sdk.entity.SocialuniCircleChatDO;
-import com.socialuni.social.community.sdk.entity.SocialuniCircleDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniCircleChatDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniCircleDO;
 import com.socialuni.social.community.sdk.model.SocialuniTalkTabCircleRO;
 import com.socialuni.social.community.sdk.repository.SocialuniCircleChatRepository;
 import com.socialuni.social.community.sdk.repository.SocialuniCircleRepository;

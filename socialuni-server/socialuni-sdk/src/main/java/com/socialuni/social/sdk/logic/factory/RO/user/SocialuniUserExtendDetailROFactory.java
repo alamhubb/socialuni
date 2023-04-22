@@ -4,7 +4,7 @@ import com.socialuni.social.common.api.exception.exception.SocialParamsException
 import com.socialuni.social.common.api.model.user.SocialuniUserDetailRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserExtendDetailRO;
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
-import com.socialuni.social.community.sdk.entity.DistrictDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniDistrictDO;
 import com.socialuni.social.community.sdk.utils.DistrictStoreUtils;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
@@ -37,7 +37,7 @@ public class SocialuniUserExtendDetailROFactory {
             throw new SocialParamsException("不该为空");
         }
 
-        DistrictDO districtDO = DistrictStoreUtils.findFirstOneByAdCode(adCode);
+        SocialuniDistrictDO districtDO = DistrictStoreUtils.findFirstOneByAdCode(adCode);
 
 
         socialuniUserExtendDetailRO.setCityName(districtDO.getCityName());

@@ -1,6 +1,6 @@
 package com.socialuni.social.community.sdk.utils;
 
-import com.socialuni.social.community.sdk.entity.DistrictDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniDistrictDO;
 import com.socialuni.social.community.sdk.redis.DistrictRedis;
 import org.springframework.stereotype.Component;
 
@@ -16,8 +16,8 @@ public class DistrictStoreUtils {
         DistrictStoreUtils.districtRedis = districtRedis;
     }
 
-    public static DistrictDO findFirstOneByAdCode(String adCode) {
-        Optional<DistrictDO> optionalDistrictDO = districtRedis.findFirstOneByAdCode(adCode);
+    public static SocialuniDistrictDO findFirstOneByAdCode(String adCode) {
+        Optional<SocialuniDistrictDO> optionalDistrictDO = districtRedis.findFirstOneByAdCode(adCode);
         return optionalDistrictDO.orElse(null);
     }
 

@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 @Data
 @Entity
-@Table(name = "s_account",
+@Table(name = "s_user_account",
         //查询条件索引
         indexes = {
                 //关联需要键索引，索引列不能为空

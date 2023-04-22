@@ -6,13 +6,13 @@ import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
-import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniCommentDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
 import com.socialuni.social.community.sdk.repository.CommentRepository;
 import com.socialuni.social.community.sdk.repository.TalkRepository;
 import com.socialuni.social.report.sdk.enumeration.ReportStatus;
-import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.social.im.dao.DO.message.MessageDO;
+import com.socialuni.social.common.api.enumeration.ContentStatus;
+import com.socialuni.social.im.dao.DO.message.SocialuniMessageDO;
 import com.socialuni.social.im.dao.repository.MessageRepository;
 import com.socialuni.social.sdk.logic.service.KeywordsService;
 import com.socialuni.social.sdk.logic.service.KeywordsTriggerService;
@@ -105,7 +105,7 @@ public class KeywordsQueryController {
         Pageable pageable = PageRequest.of(0, count);
         Page<?  extends SocialuniTalkDO> talkModels = talkApi.findByStatusNotInOrderByIdDesc(pageable, ContentStatus.auditStatus);
         Page<?  extends SocialuniCommentDO> commentDOS = commentApi.findByStatusNotInOrderByIdDesc(pageable, ContentStatus.auditStatus);
-        Page<MessageDO> messageDOS = messageRepository.findByStatusNotInOrderByIdDesc(pageable, ContentStatus.auditStatus);
+        Page<SocialuniMessageDO> messageDOS = messageRepository.findByStatusNotInOrderByIdDesc(pageable, ContentStatus.auditStatus);
 
         baseModelDOS.addAll(talkModels.getContent());
         baseModelDOS.addAll(commentDOS.getContent());

@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.model.BO;
 
-import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
+import com.socialuni.social.common.api.enumeration.ContentStatus;
 import com.socialuni.social.common.sdk.constant.AppConfigConst;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.model.RO.UserImgVO;

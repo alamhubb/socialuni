@@ -16,7 +16,7 @@ import java.io.Serializable;
  */
 @Entity
 @Data
-@Table(name = "s_chat",
+@Table(name = "s_im_chat",
         //查询条件索引
         indexes = {
                 //关联需要键索引，索引列不能为空

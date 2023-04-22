@@ -10,10 +10,10 @@ import com.socialuni.social.im.api.feign.SocialuniMessageAPI;
 import com.socialuni.social.im.api.model.QO.message.MessageAddVO;
 import com.socialuni.social.im.api.model.RO.SocialMessageRO;
 import com.socialuni.social.im.dao.repository.ChatRepository;
-import com.socialuni.social.im.dao.DO.ChatUserDO;
+import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.im.dao.DO.SocialuniChatDO;
-import com.socialuni.social.im.dao.DO.message.MessageDO;
-import com.socialuni.social.im.dao.DO.message.MessageReceiveDO;
+import com.socialuni.social.im.dao.DO.message.SocialuniMessageDO;
+import com.socialuni.social.im.dao.DO.message.SocialuniMessageReceiveDO;
 import com.socialuni.social.im.dao.repository.MessageReceiveRepository;
 import com.socialuni.social.im.dao.repository.MessageRepository;
 import com.socialuni.social.im.enumeration.*;
@@ -109,11 +109,11 @@ public class SocialuniMessageController implements SocialuniMessageAPI {
             Integer beUserId = socialuniUnionIdModler.getId();
 
             //如果用户存在查看会话
-            ChatUserDO chatUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(mineUserId, beUserId, ChatUserDO.class);
+            SocialuniChatUserDO chatUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(mineUserId, beUserId, SocialuniChatUserDO.class);
             if (chatUserDO == null) {
                 return ResultRO.success(new ArrayList<>());
             }
-            List<MessageReceiveDO> messageDOS = messageReceiveRepository.findTop30ByChatUserIdAndStatusAndCreateTimeLessThanOrderByCreateTimeDesc(chatUserDO.getId(), MessageReceiveStatus.enable, queryVO.getQueryTime());
+            List<SocialuniMessageReceiveDO> messageDOS = messageReceiveRepository.findTop30ByChatUserIdAndStatusAndCreateTimeLessThanOrderByCreateTimeDesc(chatUserDO.getId(), MessageReceiveStatus.enable, queryVO.getQueryTime());
             messageVOS = SocialMessageROFactory.messageReceiveDOToVOS(messageDOS);
             return ResultRO.success(messageVOS);
         } else if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.chat)) {
@@ -125,7 +125,7 @@ public class SocialuniMessageController implements SocialuniMessageAPI {
             if (!chatDO.getStatus().equals(ChatStatus.enable)) {
                 throw new SocialBusinessException("会话已被删除");
             }
-            List<MessageDO> messageDOS = messageRepository.findTop30ByChatIdAndStatusAndCreateTimeLessThanOrderByCreateTimeDesc(chatId, MessageStatus.enable, queryVO.getQueryTime());
+            List<SocialuniMessageDO> messageDOS = messageRepository.findTop30ByChatIdAndStatusAndCreateTimeLessThanOrderByCreateTimeDesc(chatId, MessageStatus.enable, queryVO.getQueryTime());
             messageVOS = SocialMessageROFactory.messageDOToVOS(messageDOS, SocialuniUserUtil.getMineUserIdAllowNull());
             return ResultRO.success(messageVOS);
         } else {

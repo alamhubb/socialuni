@@ -1,6 +1,6 @@
 package com.socialuni.social.im.logic.domain;
 
-import com.socialuni.social.im.dao.DO.ChatUserDO;
+import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.im.enumeration.ChatStatus;
 import com.socialuni.social.im.enumeration.ChatType;
 import com.socialuni.social.im.dao.DO.SocialuniChatDO;
@@ -40,7 +40,7 @@ public class ChatQueryDomain {
     //初始化和查询chat列表触发的
     public List<ChatRO> getUserChats(SocialuniUserDo user) {
         //未登录的情况只插叙你官方的chats
-        List<ChatUserDO> chatUsers = chatUserRepository.findByStatusAndUserIdOrderByUpdateTimeDesc(ChatStatus.enable, user.getUserId());
+        List<SocialuniChatUserDO> chatUsers = chatUserRepository.findByStatusAndUserIdOrderByUpdateTimeDesc(ChatStatus.enable, user.getUserId());
         //查询的时候chat列表展示不为当前用户的
         /*return chatUsers.stream().map((ChatUserDO chatUserDO) -> {
             //只有启用的才显示消息列表

@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.dao.redis;
 
 import com.socialuni.social.common.api.constant.CommonRedisKey;
-import com.socialuni.social.community.sdk.entity.HugDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniHugDO;
 import com.socialuni.social.community.sdk.repository.HugRepository;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -19,12 +19,12 @@ public class HugRedis {
     @Caching(
             put = {@CachePut(cacheNames = CommonRedisKey.findHugByTalkIdAndUserId, key = "#HugDO.userId+'-'+#HugDO.talkId")}
     )
-    public HugDO save(HugDO HugDO) {
+    public SocialuniHugDO save(SocialuniHugDO HugDO) {
         return hugApi.savePut(HugDO);
     }
 
     @Cacheable(cacheNames = CommonRedisKey.findHugByTalkIdAndUserId, key = "#userId+'-'+#talkId")
-    public HugDO findHugByTalkIdAndUserId(Integer talkId, Integer userId) {
+    public SocialuniHugDO findHugByTalkIdAndUserId(Integer talkId, Integer userId) {
         return hugApi.findByTalkIdAndUserId(talkId, userId);
     }
 }

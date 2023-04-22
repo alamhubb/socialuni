@@ -1,4 +1,4 @@
-package com.socialuni.social.community.sdk.entity;
+package com.socialuni.social.community.sdk.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniBaseDO;
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
@@ -16,7 +16,7 @@ import javax.persistence.*;
  */
 //                @Index(columnList = "showFront"),
 @Entity
-@Table(name = "s_circle_chat",
+@Table(name = "s_community_circle_chat",
         indexes = {
                 @Index(columnList = "circleName"),
                 @Index(columnList = "devId")

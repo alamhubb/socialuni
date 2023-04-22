@@ -1,10 +1,10 @@
 package com.socialuni.social.sdk.dao.store;
 
-import com.socialuni.social.community.sdk.entity.SocialuniCircleDO;
-import com.socialuni.social.community.sdk.entity.SocialuniTagTypeDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniCircleDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTagTypeDO;
 import com.socialuni.social.community.sdk.repository.SocialuniCircleRepository;
 import com.socialuni.social.community.sdk.repository.SocialuniTagTypeRepository;
-import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
+import com.socialuni.social.common.api.enumeration.ContentStatus;
 import com.socialuni.social.sdk.logic.factory.community.SociaCircleTypeROFactory;
 import com.socialuni.social.sdk.logic.factory.community.SocialCircleROFactory;
 import com.socialuni.social.sdk.model.RO.community.circle.CircleTypeRO;

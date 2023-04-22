@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.logic.factory.RO.user;
 import com.socialuni.social.common.api.model.user.SocialuniUserFollowDetailListRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserFollowInfoRO;
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
-import com.socialuni.social.sdk.dao.DO.SocialuniFollowDO;
+import com.socialuni.social.user.sdk.model.DO.SocialuniUserFollowDO;
 import com.socialuni.social.sdk.logic.manage.SocialUserFansDetailManage;
 import com.socialuni.social.user.sdk.model.DO.SocialUserFansDetailDo;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
@@ -43,7 +43,7 @@ public class SocialuniUserFollowDetailROFactory {
         return ListConvertUtil.toList(SocialuniUserFollowDetailROFactory::newSocialFollowUserRO, users, mineUser);
     }
 
-    public static List<SocialuniUserFollowDetailListRO> getFollowUserLists(List<SocialuniFollowDO> users, SocialuniUserDo mineUser) {
+    public static List<SocialuniUserFollowDetailListRO> getFollowUserLists(List<SocialuniUserFollowDO> users, SocialuniUserDo mineUser) {
         return ListConvertUtil.toList((followDO, user) -> {
             SocialuniUserDo userDo = SocialuniUserUtil.getAndCheckUserNotNull(followDO.getBeUserId());
             SocialuniUserFollowInfoRO socialuniUserFollowDetailRO = SocialuniUserFollowDetailROFactory.newSocialFollowUserRO(userDo, user);
@@ -53,7 +53,7 @@ public class SocialuniUserFollowDetailROFactory {
         }, users, mineUser);
     }
 
-    public static List<SocialuniUserFollowDetailListRO> getFansUserLists(List<SocialuniFollowDO> users, SocialuniUserDo mineUser) {
+    public static List<SocialuniUserFollowDetailListRO> getFansUserLists(List<SocialuniUserFollowDO> users, SocialuniUserDo mineUser) {
         return ListConvertUtil.toList((followDO) -> {
             SocialuniUserDo userDo = SocialuniUserUtil.getAndCheckUserNotNull(followDO.getUserId());
             SocialuniUserFollowInfoRO socialuniUserFollowDetailRO = SocialuniUserFollowDetailROFactory.newSocialFollowUserRO(userDo, mineUser);

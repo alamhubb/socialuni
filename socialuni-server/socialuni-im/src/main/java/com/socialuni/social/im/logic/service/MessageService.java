@@ -9,7 +9,7 @@ import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.im.api.model.RO.SocialMessageRO;
 import com.socialuni.social.im.dao.repository.ChatRepository;
 import com.socialuni.social.im.dao.DO.SocialuniChatDO;
-import com.socialuni.social.im.dao.DO.message.MessageDO;
+import com.socialuni.social.im.dao.DO.message.SocialuniMessageDO;
 import com.socialuni.social.im.dao.repository.MessageReceiveRepository;
 import com.socialuni.social.im.dao.repository.MessageRepository;
 import com.socialuni.social.im.logic.entity.MessageEntity;
@@ -75,7 +75,7 @@ public class MessageService {
             SocialuniChatDO chat = SocialuniRepositoryFacade.findById(socialuniUnionIdModler.getId(), SocialuniChatDO.class);
 
             //构建消息
-            MessageDO message = messageRepository.save(SocialuniMessageDOFactory.createMessage(chat.getId(), msgContent, mineUser.getUserId()));
+            SocialuniMessageDO message = messageRepository.save(SocialuniMessageDOFactory.createMessage(chat.getId(), msgContent, mineUser.getUserId()));
 
             Date curDate = new Date();
             chat.setUpdateTime(curDate);

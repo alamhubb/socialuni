@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.factory.RO.comment;
 
-import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniCommentDO;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniCommentDOUtil;
 import com.socialuni.social.user.sdk.model.factory.SocialuniUserROFactory;
 import com.socialuni.social.sdk.model.RO.talk.SocialuniReplyCommentRO;

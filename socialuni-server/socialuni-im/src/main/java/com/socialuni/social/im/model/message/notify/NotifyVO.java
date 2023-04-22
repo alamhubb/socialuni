@@ -3,7 +3,7 @@ package com.socialuni.social.im.model.message.notify;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.social.common.api.utils.JsonUtil;
 import com.socialuni.social.im.dao.DO.SocialuniChatDO;
-import com.socialuni.social.im.dao.DO.message.MessageDO;
+import com.socialuni.social.im.dao.DO.message.SocialuniMessageDO;
 import com.socialuni.social.im.enumeration.NotifyType;
 import com.socialuni.social.im.logic.foctory.SocialChatROFactory;
 import com.socialuni.social.im.api.model.RO.ChatRO;
@@ -34,7 +34,7 @@ public class NotifyVO {
         this.type = NotifyType.comment;
     }
 
-    public NotifyVO(SocialuniChatDO chat, SocialuniUserDo user, MessageDO message) {
+    public NotifyVO(SocialuniChatDO chat, SocialuniUserDo user, SocialuniMessageDO message) {
         this(user);
         this.chat = SocialChatROFactory.getChatROByQueryChat(chat, message);
         this.type = NotifyType.message;
