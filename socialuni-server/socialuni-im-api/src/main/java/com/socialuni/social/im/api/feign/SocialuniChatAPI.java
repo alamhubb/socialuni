@@ -59,8 +59,5 @@ public interface SocialuniChatAPI {
 
     @PostMapping("closeChat")
     ResultRO<?> closeChat(@RequestBody @Valid ChatRemoveVO chatVO);
-
-    @PostMapping("getImUserDetail")
-    ResultRO<SocialuniImUserDetailRO> getImUserDetail(@RequestBody @Valid SocialuniUserIdQO socialuniUserIdQO);
 }
 

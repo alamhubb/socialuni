@@ -40,7 +40,7 @@ public class ChatUserDO extends SocialuniUserContactBaseDO {
     //仅前台展示字段,前台自己判断生成
 //    private String lastContent;
     //是否为陌生人
-    private Boolean friendUser;
+//    private Boolean friendUser;
     //是否在前台显示
 //    前台删除，前台删除时改变，
 //    1。进入时，从用户详情页进入时，如果为关闭，则打开

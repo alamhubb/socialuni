@@ -8,6 +8,7 @@ import com.socialuni.social.im.api.model.QO.chat.ChatReadVO;
 import com.socialuni.social.im.api.model.QO.chat.ChatRemoveVO;
 import com.socialuni.social.im.api.model.QO.chat.OpenChatVO;
 import com.socialuni.social.im.api.model.RO.ChatRO;
+import com.socialuni.social.im.api.model.RO.SocialuniImMineUserDetailRO;
 import com.socialuni.social.im.api.model.RO.SocialuniImUserDetailRO;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -32,6 +33,6 @@ public interface SocialuniImUserAPI {
     ResultRO<SocialuniImUserDetailRO> getImUserDetail(@RequestBody @Valid SocialuniUserIdQO socialuniUserIdQO);
 
     @PostMapping("getImMineUser")
-    ResultRO<SocialuniImUserDetailRO> getImMineUser();
+    ResultRO<SocialuniImMineUserDetailRO> getImMineUser();
 }
 

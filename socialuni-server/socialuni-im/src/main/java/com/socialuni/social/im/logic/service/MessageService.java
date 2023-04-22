@@ -1,4 +1,4 @@
-package com.socialuni.social.im.controller;
+package com.socialuni.social.im.logic.service;
 
 import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;

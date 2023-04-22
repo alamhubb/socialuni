@@ -19,6 +19,7 @@ import com.socialuni.social.im.dao.repository.MessageRepository;
 import com.socialuni.social.im.enumeration.*;
 import com.socialuni.social.im.logic.foctory.SocialMessageROFactory;
 import com.socialuni.social.im.api.model.QO.MessageQueryVO;
+import com.socialuni.social.im.logic.service.MessageService;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;

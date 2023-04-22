@@ -76,9 +76,4 @@ public class SocialuniChatController implements SocialuniChatAPI {
     public ResultRO<?> closeChat(ChatRemoveVO chatVO) {
         return null;
     }
-
-    @Override
-    public ResultRO<SocialuniImUserDetailRO> getImUserDetail(SocialuniUserIdQO socialuniUserIdQO) {
-        return null;
-    }
 }
