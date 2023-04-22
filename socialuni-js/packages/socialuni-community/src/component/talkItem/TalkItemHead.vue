@@ -196,7 +196,9 @@ export default class TalkItemHead extends Vue {
         } else {
           this.followBtnDisabled = true
           this.talk.hasFollowed = true
-          FollowAPI.addFollowAPI(followAdd).finally(() => {
+          FollowAPI.addFollowAPI(followAdd).catch(()=>{
+            this.talk.hasFollowed = false
+          }).finally(() => {
             this.followBtnDisabled = false
           })
         }
