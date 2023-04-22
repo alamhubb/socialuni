@@ -15,7 +15,7 @@ import java.util.Date;
  * @date 2019-11-07 15:20
  */
 @Entity
-@Table(name = "s_circle_period", indexes = {@Index(columnList = "circleId"), @Index(columnList = "period")})
+@Table(name = "s_community_circle_period", indexes = {@Index(columnList = "circleId"), @Index(columnList = "period")})
 @Data
 @NoArgsConstructor
 public class SocialCirclePeriodDO extends SocialuniContentBaseDO implements Serializable {

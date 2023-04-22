@@ -13,7 +13,7 @@ import java.io.Serializable;
  * @date 2019-11-07 15:20
  */
 //@Entity
-@Table(name = "s_circle_leader_record", indexes = {
+@Table(name = "s_community_circle_leader_record", indexes = {
         @Index(columnList = "circleId"),
         @Index(columnList = "userId"),
         @Index(columnList = "period")

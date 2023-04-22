@@ -3,7 +3,7 @@
 <mapper namespace="com.socialuni.social.sdk.dao.mapper.TalkMapper">
     <!--        mybatis 一个参数时自定义属性名不生效 所以使用list-->
     <select id="queryTalkIdsByAndTag" resultType="java.lang.Integer">
-        SELECT t.union_id FROM s_talk t,s_talk_tag tt WHERE t.union_id = tt.talk_id
+        SELECT t.union_id FROM s_community_talk t,s_community_talk_tag tt WHERE t.union_id = tt.talk_id
         AND tt.tag_id in
         <foreach item="item" index="index" collection="list"
                  open="(" separator="," close=")">
@@ -14,15 +14,15 @@
 
     <select id="queryTalkIdsByAndCircle" resultType="java.lang.Integer">
         SELECT t.union_id
-        FROM s_talk t,
-             s_talk_circle tc
+        FROM s_community_talk t,
+             s_community_talk_circle tc
         WHERE t.union_id = tc.talk_id AND tc.circle_id = #{circleId}
         order by t.update_time desc
     </select>
 
     <select id="queryTalkIdsByAndUserExpand" resultType="java.lang.Integer">
         SELECT t.union_id
-        FROM s_talk t,
+        FROM s_community_talk t,
              s_user_expand ue
         WHERE t.user_id = ue.user_id
           AND ue.school_name is not null
@@ -30,7 +30,7 @@
     </select>
 
     <!--<select id="queryMineTalkIdsByCom" resultType="java.lang.Integer">
-        SELECT t.union_id FROM s_talk t WHERE t.user_id=#{userId}
+        SELECT t.union_id FROM s_community_talk t WHERE t.user_id=#{userId}
         and t.status in
         <foreach item="item" index="index" collection="statusList"
                  open="(" separator="," close=")">
@@ -42,7 +42,7 @@
     <select id="queryTalkIdsByAndUser" resultType="java.lang.Integer">
         SELECT t.union_id
         FROM
-        s_talk t,`s_user` u
+        s_community_talk t,`s_user` u
         WHERE
         t.user_id = u.union_id
         and t.global_top = 0
@@ -65,7 +65,7 @@
     <select id="queryTalkIdsByTalkCondition" resultType="java.lang.Integer">
         SELECT t.union_id
         FROM
-        s_talk t
+        s_community_talk t
         WHERE
         t.global_top = 0
         and (t.status = #{status})
@@ -115,7 +115,7 @@
     <!--<select id="queryTalkIdsByAndUser" resultType="java.lang.Integer">
         SELECT t.union_id
         FROM
-        s_talk t,`s_user` u
+        s_community_talk t,`s_user` u
         WHERE
         t.user_id = u.union_id
         and t.global_top = 0
@@ -178,12 +178,12 @@
     <!--<select id="queryTalkIdsByCom" resultType="java.lang.Integer">
         SELECT t.union_id
         FROM
-        s_talk t,
+        s_community_talk t,
         <if test="tagIds!=null and tagIds.size()>0">
-            s_talk_tag tt,
+            s_community_talk_tag tt,
         </if>
         <if test="circleId!=null">
-            s_talk_circle tc,
+            s_community_talk_circle tc,
         </if>
         `s_user` u
         WHERE

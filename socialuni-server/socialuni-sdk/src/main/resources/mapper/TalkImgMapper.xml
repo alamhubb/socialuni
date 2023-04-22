@@ -4,7 +4,7 @@
     <!--          不为null代表禁用-->
     <select id="queryTalkImgIdsTop3ByTalkIdOrderByIdAsc" resultType="java.lang.Integer">
         SELECT t.union_id
-        FROM s_talk_img t
+        FROM s_community_talk_img t
         WHERE t.talk_id = #{talkId}
         order by t.id asc LIMIT 3
     </select>

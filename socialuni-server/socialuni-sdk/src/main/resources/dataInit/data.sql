@@ -73,11 +73,11 @@ INSERT INTO s_app_config (dev_id, config_key, value, label, status) VALUES (0, '
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-/*Table structure for table `s_district` */
+/*Table structure for table `s_community_district` */
 
-DROP TABLE IF EXISTS `s_district`;
+DROP TABLE IF EXISTS `s_community_district`;
 
-CREATE TABLE `s_district` (
+CREATE TABLE `s_community_district` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
 `ad_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
 `ad_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -102,9 +102,9 @@ KEY `IDXapcqvl4gjbjdaau7p4mwtceln` (`district_code`),
 KEY `IDXwe1gkjhvjxkxkcg3mbv8gvqk` (`parent_ad_code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3264 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-/*Data for the table `s_district` */
+/*Data for the table `s_community_district` */
 
-insert  into `s_district`(`id`,`ad_code`,`ad_name`,`city_code`,`city_name`,`count`,`district_code`,`district_name`,`parent_ad_code`,`province_code`,`province_name`,`status`,`talk_count`) values
+insert  into `s_community_district`(`id`,`ad_code`,`ad_name`,`city_code`,`city_name`,`count`,`district_code`,`district_name`,`parent_ad_code`,`province_code`,`province_name`,`status`,`talk_count`) values
 
 (1,'100000','中国','1','',5400689,'1','',NULL,'100000','中国','正常',125278),
 
@@ -6633,11 +6633,11 @@ insert  into `s_district`(`id`,`ad_code`,`ad_name`,`city_code`,`city_name`,`coun
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-/*Table structure for table `s_tag_type` */
+/*Table structure for table `s_community_tag_type` */
 
-DROP TABLE IF EXISTS `s_tag_type`;
+DROP TABLE IF EXISTS `s_community_tag_type`;
 
-CREATE TABLE `s_tag_type` (
+CREATE TABLE `s_community_tag_type` (
                               `id` int(11) NOT NULL AUTO_INCREMENT,
                               `count` int(11) DEFAULT NULL,
                               `create_time` datetime DEFAULT NULL,
@@ -6656,9 +6656,9 @@ CREATE TABLE `s_tag_type` (
                               KEY `IDXk4hevhey34wlg0241rsv6t2sq` (`talk_count`)
 ) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-/*Data for the table `s_tag_type` */
+/*Data for the table `s_community_tag_type` */
 
-insert  into `s_tag_type`(`id`,`count`,`create_time`,`description`,`name`,`show_in_home`,`show_wx_account`,`status`,`talk_count`,`update_time`,`order_level`,`user_id`) values
+insert  into `s_community_tag_type`(`id`,`count`,`create_time`,`description`,`name`,`show_in_home`,`show_wx_account`,`status`,`talk_count`,`update_time`,`order_level`,`user_id`) values
 
 (1,1394245,NULL,NULL,'交友',NULL,NULL,'正常',120999,NULL,0,0),
 
@@ -6746,11 +6746,11 @@ insert  into `s_tag_type`(`id`,`count`,`create_time`,`description`,`name`,`show_
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-/*Table structure for table `s_tag` */
+/*Table structure for table `s_community_tag` */
 
-DROP TABLE IF EXISTS `s_tag`;
+DROP TABLE IF EXISTS `s_community_tag`;
 
-CREATE TABLE `s_tag` (
+CREATE TABLE `s_community_tag` (
                          `id` int(11) NOT NULL AUTO_INCREMENT,
                          `count` int(11) DEFAULT NULL,
                          `create_reason` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -6779,9 +6779,9 @@ CREATE TABLE `s_tag` (
                          KEY `IDXjhrcmy6w1kyqe25mlg0qk6se` (`visible_gender`)
 ) ENGINE=InnoDB AUTO_INCREMENT=653 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-/*Data for the table `s_tag` */
+/*Data for the table `s_community_tag` */
 
-insert  into `s_tag`(`id`,`count`,`create_reason`,`create_time`,`create_user`,`tag_type_id`,`name`,`status`,`talk_count`,`update_time`,`apply_user_id`,`description`,`show_in_home`,`show_wx_account`,`tag_classify_id`,`avatar`,`gender`,`dev_id`,`show_front`,`visible_gender`) values
+insert  into `s_community_tag`(`id`,`count`,`create_reason`,`create_time`,`create_user`,`tag_type_id`,`name`,`status`,`talk_count`,`update_time`,`apply_user_id`,`description`,`show_in_home`,`show_wx_account`,`tag_classify_id`,`avatar`,`gender`,`dev_id`,`show_front`,`visible_gender`) values
 
 (1,880111,NULL,NULL,NULL,1,'处对象','正常',51609,NULL,NULL,NULL,NULL,NULL,NULL,'https://cdxapp-1257733245.file.myqcloud.com/qingchi/static/qclogo.jpg!avatar','全部',NULL,'','all'),
 
@@ -8062,11 +8062,11 @@ insert  into `s_tag`(`id`,`count`,`create_reason`,`create_time`,`create_user`,`t
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-/*Table structure for table `s_circle` */
+/*Table structure for table `s_community_circle` */
 
-DROP TABLE IF EXISTS `s_circle`;
+DROP TABLE IF EXISTS `s_community_circle`;
 
-CREATE TABLE `s_circle` (
+CREATE TABLE `s_community_circle` (
                             `id` int(11) NOT NULL AUTO_INCREMENT,
                             `count` int(11) DEFAULT NULL,
                             `create_reason` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -8098,9 +8098,9 @@ CREATE TABLE `s_circle` (
                             KEY `IDX90q0wgie5egud3ifmgwjg66l7` (`visible_gender`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3262 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-/*Data for the table `s_circle` */
+/*Data for the table `s_community_circle` */
 
-insert  into `s_circle`(`id`,`count`,`create_reason`,`create_time`,`create_user`,`tag_type_id`,`name`,`status`,`talk_count`,`update_time`,`apply_user_id`,`description`,`show_in_home`,`show_wx_account`,`tag_classify_id`,`avatar`,`gender`,`dev_id`,`show_front`,`visible_gender`,`city_name`,`user_id`) values
+insert  into `s_community_circle`(`id`,`count`,`create_reason`,`create_time`,`create_user`,`tag_type_id`,`name`,`status`,`talk_count`,`update_time`,`apply_user_id`,`description`,`show_in_home`,`show_wx_account`,`tag_classify_id`,`avatar`,`gender`,`dev_id`,`show_front`,`visible_gender`,`city_name`,`user_id`) values
 
 (1,7029,NULL,NULL,NULL,1,'处对象','正常',0,NULL,NULL,NULL,NULL,NULL,NULL,'https://cdxapp-1257733245.file.myqcloud.com/qingchi/static/qclogo.jpg!avatar','全部',NULL,'','all',NULL,0),
 
