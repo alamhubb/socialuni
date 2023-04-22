@@ -20,8 +20,9 @@ public class SocialuniUserRepositoryFacede extends SocialuniRepositoryFacade {
 
     @Resource
     public void setSocialuniCommonRepository(SocialuniCommonRepository socialuniCommonRepository) {
-        SocialuniUserContactRepositoryFacede.socialuniCommonRepository = socialuniCommonRepository;
+        SocialuniUserRepositoryFacede.socialuniCommonRepository = socialuniCommonRepository;
     }
+
 
     /**
      * 通过userId获得对应的子类。

@@ -6,6 +6,7 @@ import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.user.sdk.api.SocialuniFollowAPI;
 import com.socialuni.social.user.sdk.logic.domain.SocialQueryUserFollowsDomain;
 import com.socialuni.social.user.sdk.logic.domain.SocialUserFollowDomain;
+import com.socialuni.social.user.sdk.logic.domain.SocialUserFollowDomainInterface;
 import com.socialuni.social.user.sdk.model.QO.follow.SocialuniUserFollowAddQO;
 import com.socialuni.social.common.api.model.ResultRO;
 import org.springframework.scheduling.annotation.Async;
@@ -17,17 +18,16 @@ import java.util.List;
 @Service
 public class SocialuniFollowService {
     @Resource
-    private SocialUserFollowDomain socialUserFollowDomain;
+    private SocialUserFollowDomainInterface socialUserFollowDomainInterface;
     @Resource
     private SocialQueryUserFollowsDomain socialQueryUserFollowsDomain;
 
     @Resource
     SocialuniFollowAPI socialuniFollowAPI;
 
-    @Async
     public ResultRO<Void> addFollow(SocialuniUserFollowAddQO addQO) {
         //有问题，应该关注完刷新前台用户
-        socialUserFollowDomain.addFlow(addQO);
+        socialUserFollowDomainInterface.addFlow(addQO);
         //如果应用，则调用中心
         if (SocialuniSystemConst.serverIsChild()) {
             return socialuniFollowAPI.addFollow(addQO);
@@ -35,10 +35,9 @@ public class SocialuniFollowService {
         return new ResultRO<>();
     }
 
-    @Async
     public ResultRO<Void> cancelFollow(SocialuniUserFollowAddQO addQO) {
         //有问题，应该关注完刷新前台用户
-        socialUserFollowDomain.cancelFollow(addQO);
+        socialUserFollowDomainInterface.cancelFollow(addQO);
         //如果应用，则调用中心
         if (SocialuniSystemConst.serverIsChild()) {
             return socialuniFollowAPI.cancelFollow(addQO);

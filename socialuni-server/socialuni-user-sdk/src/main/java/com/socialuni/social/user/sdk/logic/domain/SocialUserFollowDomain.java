@@ -11,12 +11,14 @@ import com.socialuni.social.user.sdk.model.QO.follow.SocialuniUserFollowAddQO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 
-@Component
-public class SocialUserFollowDomain {
+@Service
+public class SocialUserFollowDomain implements SocialUserFollowDomainInterface {
     @Resource
     private SocialuniUserFollowRedis followRedis;
     @Resource
@@ -24,6 +26,7 @@ public class SocialUserFollowDomain {
     @Resource
     SocialuniUserFollowManage followManage;
 
+    @Transactional
     public SocialuniUserFollowDO addFlow(SocialuniUserFollowAddQO addVO) {
         //有问题，应该关注完刷新前台用户
         Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
@@ -41,10 +44,10 @@ public class SocialUserFollowDomain {
         SocialuniUserFollowDO followDO = followRedis.findFirstByUserIdAndBeUserId(mineUserId, beUserId);
         //未关注过
         if (followDO == null) {
-            followManage.createFollow(mineUserId, beUserId);
+            followDO = followManage.createFollow(mineUserId, beUserId);
         } else {
             //已经关注
-            followManage.updateFollow(followDO, SocialuniCommonStatus.enable);
+            followDO = followManage.updateFollow(followDO, SocialuniCommonStatus.enable);
         }
         return followDO;
     }

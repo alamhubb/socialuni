@@ -15,20 +15,20 @@ public class SocialuniUserFollowManage {
     @Resource
     private SocialuniFollowRepository followRepository;
 
-    @Async
-    public void createFollow(Integer mineUserId, Integer beUserId) {
+    public SocialuniUserFollowDO createFollow(Integer mineUserId, Integer beUserId) {
         SocialuniUserFollowDO followDO = new SocialuniUserFollowDO();
         //两个用户粉丝和关注各加1
         followDO.setUserId(mineUserId);
         followDO.setBeUserId(beUserId);
         followDO = followRepository.save(followDO);
+        return followDO;
     }
 
-    @Async
-    public void updateFollow(SocialuniUserFollowDO followDO, String status) {
+    public SocialuniUserFollowDO updateFollow(SocialuniUserFollowDO followDO, String status) {
         followDO.setStatus(status);
         followDO.setUpdateTime(new Date());
         followDO = followRepository.save(followDO);
+        return followDO;
     }
 
     public boolean userHasFollowBeUser(Integer userId, Integer beUserId) {

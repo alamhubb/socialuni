@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -22,10 +23,7 @@ public class SocialuniImUserFollowDomain extends SocialUserFollowDomain {
     @Resource
     SocialuniUserFollowManage socialuniUserFollowManage;
 
-    @Resource
-    SocialuniMessageEntity socialuniMessageEntity;
-
-
+    @Transactional
     public SocialuniUserFollowDO addFlow(SocialuniUserFollowAddQO addVO) {
         SocialuniUserFollowDO socialuniUserFollowDO = super.addFlow(addVO);
 
