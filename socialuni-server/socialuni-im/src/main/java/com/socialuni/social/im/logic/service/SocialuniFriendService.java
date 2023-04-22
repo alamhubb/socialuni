@@ -5,11 +5,12 @@ import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
+import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.im.dao.DO.SocialuniFriendApplyRecordDO;
 import com.socialuni.social.im.dao.repository.SocialuniFriendApplyRecordRepository;
 import com.socialuni.social.im.enumeration.SocialuniAddFriendStatus;
 import com.socialuni.social.im.enumeration.SocialuniAddFriendType;
-import com.socialuni.social.im.logic.domain.SocialuniOpenChatDomain;
+import com.socialuni.social.im.logic.foctory.SocialuniChatUserDOFactory;
 import com.socialuni.social.im.logic.foctory.SocialuniFriendApplyUserROFactory;
 import com.socialuni.social.im.api.model.QO.friend.SocialuniFriendAddQO;
 import com.socialuni.social.im.api.model.RO.SocialuniFriendApplyUserRO;
@@ -29,9 +30,6 @@ import java.util.stream.Collectors;
 public class SocialuniFriendService {
     @Resource
     SocialuniFriendApplyRecordRepository socialuniFriendApplyRecordRepository;
-
-    @Resource
-    SocialuniOpenChatDomain socialuniOpenChatDomain;
 
     //添加朋友
     @Transactional
@@ -99,7 +97,7 @@ public class SocialuniFriendService {
         //给用户发消息。 只需要对方用户的id，就行。
         //那就是判断，读取和对方的chat，有的话展示，没有的话就不展示
 
-        socialuniOpenChatDomain.openChatByCreateFriend(beUserId);
+        List<SocialuniChatUserDO> chatSocialuniUserDoS = SocialuniChatUserDOFactory.getOrCreateChatUsersBySingleSendMsg(mineUserId, beUserId);
 
         return ResultRO.success();
     }

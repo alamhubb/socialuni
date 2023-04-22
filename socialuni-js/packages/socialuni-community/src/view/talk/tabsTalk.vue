@@ -313,6 +313,10 @@ export default class TabsTalk extends Vue {
     //停止查询方法
     const talkTab = this.curTalkTabObj
     if (talkTab) {
+      if (!talkTab.talks.length){
+          this.curTalkTabObj.queryTime = new Date()
+          this.curTalkTabObj.firstLoad = true
+      }
       //如果正在查询，则停止查询，没办法省略因为修改和使用的是一个变量
       if (talkTab.loadMore === LoadMoreType.loading) {
         talkTab.loadMore = LoadMoreType.more
@@ -355,8 +359,6 @@ export default class TabsTalk extends Vue {
       if (firstLoad) {
         talkTabObj.firstLoad = false
       }
-      const resDataTalks = []
-
 
       const talkQO = TalkQOFactory.getTalkQueryQO(talkTabObj.name, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, talkTabObj.queryTime, socialuniTagModule.selectTagNames, firstLoad)
 
@@ -367,9 +369,8 @@ export default class TabsTalk extends Vue {
             console.log(res.data)
             if (firstLoad) {
               //必须这么写，要不然存在置顶后返回的情况就有问题了，也不能直接使用talkTabObj.talks.push。那样会存在闪烁的情况那样等于分了两次push
-              resDataTalks.push(...res.data)
               //首次加载，则重新赋值重置内容
-              talkTabObj.talks = resDataTalks
+              talkTabObj.talks = res.data
             } else {
               //追加新内容
               talkTabObj.talks.push(...res.data)

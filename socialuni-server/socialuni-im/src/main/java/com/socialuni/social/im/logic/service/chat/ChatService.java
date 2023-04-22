@@ -63,7 +63,7 @@ public class ChatService {
             Integer beUserId = socialuniUnionIdModler.getId();
 
             //如果用户存在查看会话
-            SocialuniChatUserDO chatUserDO = SocialuniChatUserDOFactory.getOrCreateChatUsersBySingleSendMsg1(mineUserId, beUserId);
+            SocialuniChatUserDO chatUserDO = SocialuniChatUserDOFactory.getOrCreateChatUsersBySingleSendMsg(mineUserId, beUserId).get(0);
 //全部已读
             chatUserDO.setUnreadNum(0);
             //进入chat页，列表中进入，肯定是展示的，所以不会走这里
@@ -123,7 +123,7 @@ public class ChatService {
             Integer beUserId = socialuniUnionIdModler.getId();
 
             //如果用户存在查看会话
-            SocialuniChatUserDO chatUserDO = SocialuniChatUserDOFactory.getOrCreateChatUsersBySingleSendMsg1(mineUserId, beUserId);
+            SocialuniChatUserDO chatUserDO = SocialuniChatUserDOFactory.getOrCreateChatUsersBySingleSendMsg(mineUserId, beUserId).get(0);
 
             ChatRO chatRO = SocialChatROFactory.getChatROByQueryChat(chatUserDO, true);
 

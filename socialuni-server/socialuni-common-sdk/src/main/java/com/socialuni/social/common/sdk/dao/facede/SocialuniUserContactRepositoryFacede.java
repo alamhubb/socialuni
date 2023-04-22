@@ -2,6 +2,7 @@ package com.socialuni.social.common.sdk.dao.facede;
 
 import com.socialuni.social.common.api.entity.SocialuniUserContactBaseDO;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniCommonRepository;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
@@ -19,13 +20,14 @@ import java.util.List;
  * @date 2022/9/27 9:54
  * @since 1.0
  */
-public abstract class SocialuniUserContactRepositoryFacede extends SocialuniUserRepositoryFacede {
+@Component
+public class SocialuniUserContactRepositoryFacede extends SocialuniUserRepositoryFacede {
 
     static SocialuniCommonRepository socialuniCommonRepository;
 
     @Resource
-    public void setSocialuniCommonUserRepository(SocialuniCommonRepository socialuniCommonRepository) {
-        SocialuniUserRepositoryFacede.socialuniCommonRepository = socialuniCommonRepository;
+    public void setSocialuniCommonRepository(SocialuniCommonRepository socialuniCommonRepository) {
+        SocialuniUserContactRepositoryFacede.socialuniCommonRepository = socialuniCommonRepository;
     }
 
 
