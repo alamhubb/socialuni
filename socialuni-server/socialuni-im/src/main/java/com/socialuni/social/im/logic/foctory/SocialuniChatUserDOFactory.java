@@ -12,15 +12,8 @@ import java.util.List;
 
 public class SocialuniChatUserDOFactory {
 
-    public static SocialuniChatUserDO createChatUserBySingle(Integer userId, Integer beUserId) {
-//        Integer chatId = SocialuniChatDOFactory.getChatIdByCreateSingleChat();
-        //会话不存在则创建
-        SocialuniChatUserDO chatUserDO = new SocialuniChatUserDO();
-//        ChatUserDO chatUserDO = new ChatUserDO(0, userId, beUserId);
-
-        chatUserDO = SocialuniRepositoryFacade.save(chatUserDO);
-
-        return chatUserDO;
+    public static SocialuniChatUserDO getChatUserDO(Integer userId, Integer beUserId) {
+        return SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(userId, beUserId, SocialuniChatUserDO.class);
     }
 
     public static List<SocialuniChatUserDO> getOrCreateChatUsersBySingleSendMsg(Integer userId, Integer beUserId) {
@@ -32,27 +25,24 @@ public class SocialuniChatUserDOFactory {
             if (beChatUserDO != null) {
                 throw new SocialSystemException("异常逻辑，非正常存在的会话");
             }
-
-            //会话不存在则创建
-            SocialuniChatDO chatDO = SocialuniChatDOFactory.getChatIdByCreateSingleChat();
-            //会话不存在则创建
-            chatUserDO = new SocialuniChatUserDO(chatDO, userId, beUserId);
-            beChatUserDO = new SocialuniChatUserDO(chatDO, beUserId, userId);
-
-            chatUserDO = SocialuniRepositoryFacade.save(chatUserDO);
-            beChatUserDO = SocialuniRepositoryFacade.save(beChatUserDO);
+            return createSocialuniChatUserDOS(userId, beUserId);
         }
         return Arrays.asList(chatUserDO, beChatUserDO);
     }
 
-    public static SocialuniChatUserDO createChatUserByCreateFriend(SocialuniChatDO chatDO, Integer userId, Integer beUserId) {
+    public static List<SocialuniChatUserDO> createSocialuniChatUserDOS(Integer userId, Integer beUserId) {
+        SocialuniChatUserDO chatUserDO;
+        SocialuniChatUserDO beChatUserDO;
         //会话不存在则创建
-        SocialuniChatUserDO chatUserDO = new SocialuniChatUserDO(chatDO, userId, beUserId);
+        SocialuniChatDO chatDO = SocialuniChatDOFactory.getChatIdByCreateSingleChat();
+        //会话不存在则创建
+        chatUserDO = new SocialuniChatUserDO(chatDO, userId, beUserId);
+        beChatUserDO = new SocialuniChatUserDO(chatDO, beUserId, userId);
 
         chatUserDO = SocialuniRepositoryFacade.save(chatUserDO);
-        return chatUserDO;
+        beChatUserDO = SocialuniRepositoryFacade.save(beChatUserDO);
+        return Arrays.asList(chatUserDO, beChatUserDO);
     }
-
 
     public static SocialuniChatUserDO getOrCreateChatUserBySingleReceiveMsg(SocialuniChatDO chatDO, Integer userId, Integer beUserId) {
         SocialuniChatUserDO chatUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(userId, beUserId, SocialuniChatUserDO.class);

@@ -25,7 +25,7 @@ public class SocialuniMessageDOFactory {
     }
 
     public static SocialuniMessageDO createMessage(Integer chatId, String content, Integer userId, String messageType) {
-        SocialuniMessageDO messageDO = SocialuniMessageDOFactory.createMessage(userId, content, userId);
+        SocialuniMessageDO messageDO = SocialuniMessageDOFactory.createMessage(chatId, content, userId);
         messageDO.setType(messageType);
 
         return messageDO;

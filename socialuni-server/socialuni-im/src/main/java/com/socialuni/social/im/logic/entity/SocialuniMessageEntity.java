@@ -16,6 +16,7 @@ import com.socialuni.social.im.dao.DO.SocialuniFriendApplyRecordDO;
 import com.socialuni.social.im.dao.DO.SocialuniUserChatConfigDO;
 import com.socialuni.social.im.dao.DO.message.SocialuniMessageDO;
 import com.socialuni.social.im.dao.DO.message.SocialuniMessageReceiveDO;
+import com.socialuni.social.im.enumeration.MessageType;
 import com.socialuni.social.im.enumeration.NotifyType;
 import com.socialuni.social.im.enumeration.SocialuniAddFriendStatus;
 import com.socialuni.social.im.logic.domain.NotifyDomain;
@@ -127,15 +128,21 @@ public class SocialuniMessageEntity {
         //查询对方对你的关系，是不是好友。那如果你把对方删除了呢，你还能给对方发消息吗。则不能。
 
 
+        SocialuniMessageReceiveDO mineMessageUser = sendMsgNotifyList(msgContent, mineUser, chatSocialuniUserDoS, MessageType.simple);
+        //只需要返回自己的
+        return SocialMessageROFactory.getMessageRO(mineMessageUser);
+    }
+
+    public SocialuniMessageReceiveDO sendMsgNotifyList(String msgContent, SocialuniUserDo sendUser, List<SocialuniChatUserDO> chatSocialuniUserDoS, String msgType) {
         List<NotifyDO> notifies = new ArrayList<>();
         //有权限，则给chat中的所有用户发送内容
 
         SocialuniMessageReceiveDO mineMessageUser = new SocialuniMessageReceiveDO();
 
 
-        SocialuniChatDO chat = SocialuniRepositoryFacade.findById(beChatUserDO.getChatId(), SocialuniChatDO.class);
+        SocialuniChatDO chat = SocialuniRepositoryFacade.findById(chatSocialuniUserDoS.get(0).getChatId(), SocialuniChatDO.class);
         //构建消息
-        SocialuniMessageDO message = messageRepository.save(SocialuniMessageDOFactory.createMessage(chat.getId(), msgContent, mineUser.getUserId()));
+        SocialuniMessageDO message = messageRepository.save(SocialuniMessageDOFactory.createMessage(chat.getId(), msgContent, sendUser.getUserId(), msgType));
 
         Date curDate = new Date();
         chat.setUpdateTime(curDate);
@@ -156,7 +163,7 @@ public class SocialuniMessageEntity {
             Integer chatUserId = chatSocialuniUserDo.getUserId();
             SocialuniMessageReceiveDO messageReceiveDO = new SocialuniMessageReceiveDO(chatSocialuniUserDo, message.getUserId(), message.getId());
             //自己的话不发送通知，自己的话也要构建消息，要不看不见，因为读是读这个表
-            if (chatUserId.equals(mineUser.getUserId())) {
+            if (chatUserId.equals(sendUser.getUserId())) {
                 mineMessageUser = messageReceiveRepository.save(messageReceiveDO);
             } else {
                 //别人的chatUser，要增加未读，自己刚发的消息，别人肯定还没看
@@ -175,9 +182,8 @@ public class SocialuniMessageEntity {
         chatUserRepository.saveAll(chatSocialuniUserDoS);
         notifyRepository.saveAll(notifies);
         //保存message
-        notifyDomain.sendNotifies(notifies, mineUser);
-        //只需要返回自己的
-        return SocialMessageROFactory.getMessageRO(mineMessageUser);
+        notifyDomain.sendNotifies(notifies, sendUser);
+        return mineMessageUser;
     }
 
     //用户详情页，判断是否能发消息

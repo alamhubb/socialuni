@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.model.QO.follow;
+package com.socialuni.social.user.sdk.model.QO.follow;
 
 import lombok.Data;
 
@@ -12,7 +12,7 @@ import javax.validation.constraints.NotBlank;
  * @since TODO[起始版本号]
  */
 @Data
-public class SocialuniFollowAddQO {
+public class SocialuniUserFollowAddQO {
     /**
      * 被关注的用户id
      */

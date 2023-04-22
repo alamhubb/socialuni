@@ -1,12 +1,11 @@
-package com.socialuni.social.sdk.logic.factory.RO.user;
+package com.socialuni.social.user.sdk.model.factory;
 
-import com.socialuni.social.sdk.constant.socialuni.UserIdentityAuthStatus;
-import com.socialuni.social.sdk.dao.DO.user.SocialUserIdentityAuthDO;
-import com.socialuni.social.sdk.dao.repository.user.identity.SocialUserIdentityAuthRepository;
+import com.socialuni.social.user.sdk.constant.UserIdentityAuthStatus;
 import com.socialuni.social.user.sdk.logic.manage.SocialuniUserFollowManage;
 import com.socialuni.social.common.api.model.user.SocialuniContentUserRO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.user.sdk.model.factory.SocialuniUserROFactory;
+import com.socialuni.social.user.sdk.model.DO.SocialUserIdentityAuthDO;
+import com.socialuni.social.user.sdk.repository.SocialUserIdentityAuthRepository;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

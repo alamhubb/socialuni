@@ -1,7 +1,7 @@
-package com.socialuni.social.sdk.dao.repository.user.identity;
+package com.socialuni.social.user.sdk.repository;
 
 
-import com.socialuni.social.sdk.dao.DO.user.SocialUserIdentityAuthImgDO;
+import com.socialuni.social.user.sdk.model.DO.SocialUserIdentityAuthImgDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

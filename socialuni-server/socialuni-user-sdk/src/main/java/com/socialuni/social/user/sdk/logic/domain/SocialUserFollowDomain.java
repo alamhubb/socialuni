@@ -1,11 +1,14 @@
-package com.socialuni.social.sdk.logic.domain.user.follow;
+package com.socialuni.social.user.sdk.logic.domain;
 
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.logic.manage.SocialuniUserFollowManage;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserFansDetailManage;
 import com.socialuni.social.user.sdk.logic.redis.SocialuniUserFollowRedis;
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserFollowDO;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.socialuni.social.user.sdk.model.QO.follow.SocialuniUserFollowAddQO;
+import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
@@ -21,8 +24,11 @@ public class SocialUserFollowDomain {
     @Resource
     SocialuniUserFollowManage followManage;
 
-    @Async
-    public void addFlow(@NotNull Integer mineUserId, @NotNull Integer beUserId) {
+    public SocialuniUserFollowDO addFlow(SocialuniUserFollowAddQO addVO) {
+        //有问题，应该关注完刷新前台用户
+        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+
+        Integer beUserId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(addVO.getBeUserId());
         if (beUserId.equals(mineUserId)) {
             throw new SocialParamsException("不能自己关注自己哦");
         }
@@ -40,10 +46,13 @@ public class SocialUserFollowDomain {
             //已经关注
             followManage.updateFollow(followDO, SocialuniCommonStatus.enable);
         }
+        return followDO;
     }
 
-    @Async
-    public void cancelFollow(@NotNull Integer mineUserId, @NotNull Integer beUserId) {
+    public void cancelFollow(SocialuniUserFollowAddQO addVO) {
+        //有问题，应该关注完刷新前台用户
+        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+        Integer beUserId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(addVO.getBeUserId());
         if (beUserId.equals(mineUserId)) {
             throw new SocialParamsException("不能自己取消关注自己哦");
         }

@@ -1,9 +1,9 @@
-package com.socialuni.social.sdk.feignAPI.community;
+package com.socialuni.social.user.sdk.api;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
 import com.socialuni.social.common.api.model.user.SocialuniUserFollowDetailListRO;
-import com.socialuni.social.sdk.model.QO.follow.SocialuniFollowAddQO;
+import com.socialuni.social.user.sdk.model.QO.follow.SocialuniUserFollowAddQO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -24,10 +24,10 @@ public interface SocialuniFollowAPI {
 
     @PostMapping("addFollow")
     @Operation(summary = "关注用户")
-    ResultRO<Void> addFollow(@RequestBody @Valid SocialuniFollowAddQO addVO);
+    ResultRO<Void> addFollow(@RequestBody @Valid SocialuniUserFollowAddQO addVO);
 
     @PostMapping("cancelFollow")
     @Operation(summary = "取消关注")
-    ResultRO<Void> cancelFollow(@RequestBody @Valid SocialuniFollowAddQO addVO);
+    ResultRO<Void> cancelFollow(@RequestBody @Valid SocialuniUserFollowAddQO addVO);
 
 }

@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.constant.user;
+package com.socialuni.social.user.sdk.constant;
 
 /**
  * @author qinkaiyuan

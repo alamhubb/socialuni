@@ -3,6 +3,8 @@ package com.socialuni.social.user.sdk.utils;
 import com.socialuni.social.common.api.exception.exception.SocialNotLoginException;
 import com.socialuni.social.common.api.exception.exception.SocialNullUserException;
 import com.socialuni.social.common.api.config.SocialRequestUserConfig;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
@@ -145,6 +147,15 @@ public class SocialuniUserUtil {
         return SocialUserPhoneDo;
     }
 
+    public static SocialuniUserDo getUserByPhoneNumNotNull(String phoneNum) {
+        SocialUserPhoneDo socialUserPhoneDo = socialUserPhoneRedis.findByPhoneNum(phoneNum);
+        if (socialUserPhoneDo == null) {
+            throw new SocialParamsException("手机号异常");
+        }
+        SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getAndCheckUserNotNull(socialUserPhoneDo.getUserId());
+        return socialuniUserDo;
+    }
+
     public static SocialUserViolationDo getUserViolationDO(Integer userId) {
         SocialUserViolationDo SocialUserViolationDo = socialUserViolationApi.findOneByUserId(userId);
         return SocialUserViolationDo;
@@ -194,5 +205,13 @@ public class SocialuniUserUtil {
             return false;
         }
         return userId.equals(mineUser.getUnionId());
+    }
+
+    public static SocialuniUserDo getSystemUserNotNull() {
+        String phoneNum = DevAccountFacade.getDevPhoneNumNotNull();
+
+        SocialuniUserDo systemUser = getUserByPhoneNumNotNull(phoneNum);
+
+        return systemUser;
     }
 }

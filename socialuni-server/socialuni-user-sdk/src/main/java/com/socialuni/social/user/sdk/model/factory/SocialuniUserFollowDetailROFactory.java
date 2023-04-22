@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.logic.factory.RO.user;
+package com.socialuni.social.user.sdk.model.factory;
 
 import com.socialuni.social.common.api.model.user.SocialuniUserFollowDetailListRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserFollowInfoRO;

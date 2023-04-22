@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.dao.DO.user;
+package com.socialuni.social.user.sdk.model.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import lombok.Data;
