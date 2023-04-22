@@ -73,7 +73,7 @@ public class SocialuniCommonRepository {
     }
 
 
-    public <T> T findFirstByExample(Example<T> example,CriteriaQuery<T> criteriaQuery) {
+    public <T> T findFirstByExample(Example<T> example, CriteriaQuery<T> criteriaQuery) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 
         TypedQuery<T> query = entityManager.createQuery(criteriaQuery);
@@ -106,5 +106,138 @@ public class SocialuniCommonRepository {
 
     public EntityManager getEntityManager() {
         return this.entityManager;
+    }
+
+
+    public <T extends SocialuniUserInfoBaseDO> T findByUserId(Integer userId, Class<T> tClass) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
+        Root<T> userInfo = criteriaQuery.from(tClass);
+
+        Predicate userIdPredicate = criteriaBuilder.equal(userInfo.get("userId"), userId);
+        criteriaQuery.where(userIdPredicate);
+
+        List<T> list = entityManager.createQuery(criteriaQuery).setFirstResult(0).setMaxResults(1).getResultList();
+
+        if (list.size() > 0) {
+            return list.get(0);
+        }
+        return null;
+    }
+
+    public <T extends SocialuniUserInfoBaseDO> T findFirstByUserIdNotNull(Integer userId, Class<T> tClass) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
+        Root<T> userInfo = criteriaQuery.from(tClass);
+
+        Predicate userIdPredicate = criteriaBuilder.equal(userInfo.get("userId"), userId);
+        criteriaQuery.where(userIdPredicate);
+
+        criteriaQuery.orderBy(criteriaBuilder.desc(userInfo.get("id")));
+
+        TypedQuery<T> query = entityManager.createQuery(criteriaQuery);
+
+        return query.setFirstResult(0).setMaxResults(1).getSingleResult();
+    }
+
+
+    /**
+     * 通过userId获得对应的子类。
+     *
+     * @param userId
+     * @param tClass
+     * @param <T>
+     * @return
+     */
+    public <T extends SocialuniUserContactBaseDO> T findByUserIdAndBeUserId(Integer userId, Integer beUserId, Class<T> tClass) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
+        Root<T> userInfo = criteriaQuery.from(tClass);
+
+        Predicate userIdPredicate = criteriaBuilder.equal(userInfo.get("userId"), userId);
+        Predicate beUserIdPredicate = criteriaBuilder.equal(userInfo.get("beUserId"), beUserId);
+        criteriaQuery.where(userIdPredicate, beUserIdPredicate);
+
+        List<T> list = entityManager.createQuery(criteriaQuery).setFirstResult(0).setMaxResults(1).getResultList();
+
+        if (list.size() > 0) {
+            return list.get(0);
+        }
+        return null;
+    }
+
+    public <T extends SocialuniUserContactBaseDO> T findByUserIdAndBeUserIdAndStatus(Integer userId, Integer beUserId, String status, Class<T> tClass) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
+        Root<T> userInfo = criteriaQuery.from(tClass);
+
+        Predicate userIdPredicate = criteriaBuilder.equal(userInfo.get("userId"), userId);
+        Predicate beUserIdPredicate = criteriaBuilder.equal(userInfo.get("beUserId"), beUserId);
+        Predicate statusPredicate = criteriaBuilder.equal(userInfo.get("status"), status);
+        criteriaQuery.where(userIdPredicate, beUserIdPredicate, statusPredicate);
+
+        List<T> list = entityManager.createQuery(criteriaQuery).setFirstResult(0).setMaxResults(1).getResultList();
+
+        if (list.size() > 0) {
+            return list.get(0);
+        }
+        return null;
+    }
+
+    public <T extends SocialuniUserContactBaseDO> Long countByUserIdAndBeUserIdAndStatus(Integer userId, Integer beUserId, String status, Class<T> tClass) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
+        Root<T> userInfo = criteriaQuery.from(tClass);
+
+        criteriaQuery.select(criteriaBuilder.count(userInfo));
+
+        Predicate userIdPredicate = criteriaBuilder.equal(userInfo.get("userId"), userId);
+        Predicate beUserIdPredicate = criteriaBuilder.equal(userInfo.get("beUserId"), beUserId);
+        Predicate statusPredicate = criteriaBuilder.equal(userInfo.get("status"), status);
+        criteriaQuery.where(userIdPredicate, beUserIdPredicate, statusPredicate);
+
+//        criteriaQuery.orderBy(criteriaBuilder.desc(userInfo.get("id")));
+
+        return entityManager.createQuery(criteriaQuery).getSingleResult();
+    }
+
+
+    public <T extends SocialuniUserContactBaseDO> T findByUserIdAndBeUserIdOrderByIdDesc(Integer userId, Integer beUserId, Class<T> tClass) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
+        Root<T> userInfo = criteriaQuery.from(tClass);
+
+        Predicate userIdPredicate = criteriaBuilder.equal(userInfo.get("userId"), userId);
+        Predicate beUserIdPredicate = criteriaBuilder.equal(userInfo.get("beUserId"), beUserId);
+        criteriaQuery.where(userIdPredicate, beUserIdPredicate);
+
+        criteriaQuery.orderBy(criteriaBuilder.desc(userInfo.get("id")));
+
+        List<T> list = entityManager.createQuery(criteriaQuery).setFirstResult(0).setMaxResults(1).getResultList();
+
+        if (list.size() > 0) {
+            return list.get(0);
+        }
+        return null;
+    }
+
+    public <T extends SocialuniUserContactBaseDO> T findByUserIdAndBeUserIdAndNotStatus(Integer userId, Integer beUserId, String status, Class<T> tClass) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
+        Root<T> userInfo = criteriaQuery.from(tClass);
+
+        Predicate userIdPredicate = criteriaBuilder.equal(userInfo.get("userId"), userId);
+        Predicate beUserIdPredicate = criteriaBuilder.equal(userInfo.get("beUserId"), beUserId);
+        Predicate statusPredicate = criteriaBuilder.notEqual(userInfo.get("status"), status);
+        criteriaQuery.where(userIdPredicate, beUserIdPredicate, statusPredicate);
+
+        criteriaQuery.orderBy(criteriaBuilder.desc(userInfo.get("id")));
+
+        List<T> list = entityManager.createQuery(criteriaQuery).setFirstResult(0).setMaxResults(1).getResultList();
+
+        if (list.size() > 0) {
+            return list.get(0);
+        }
+        return null;
     }
 }

@@ -41,6 +41,8 @@ public class SocialuniImUserService {
             if (chatUserDO != null && chatUserDO.getBlackUser()) {
                 socialuniImUserDetailRO.setBlackUser(true);
             }
+
+
             SocialuniFriendApplyRecordDO socialuniFriendApplyRecordDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(mineUserId, beUserId, SocialuniFriendApplyRecordDO.class);
             if (socialuniFriendApplyRecordDO != null && socialuniFriendApplyRecordDO.getStatus().equals(SocialuniAddFriendStatus.enable)) {
                 socialuniImUserDetailRO.setFriendUser(true);

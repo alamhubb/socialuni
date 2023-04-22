@@ -1,13 +1,9 @@
 package com.socialuni.social.common.sdk.dao.facede;
 
-import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import com.socialuni.social.common.api.entity.SocialuniUserInfoBaseDO;
+import com.socialuni.social.common.sdk.dao.repository.SocialuniCommonRepository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.*;
-import java.lang.reflect.InvocationTargetException;
-import java.util.List;
+import javax.annotation.Resource;
 
 /**
  * @author wulinghui
@@ -17,6 +13,14 @@ import java.util.List;
  * @since 1.0
  */
 public abstract class SocialuniUserRepositoryFacede extends SocialuniRepositoryFacade {
+
+    static SocialuniCommonRepository socialuniCommonRepository;
+
+    @Resource
+    public void setSocialuniCommonUserRepository(SocialuniCommonRepository socialuniCommonRepository) {
+        SocialuniUserRepositoryFacede.socialuniCommonRepository = socialuniCommonRepository;
+    }
+
     /**
      * 通过userId获得对应的子类。
      *
@@ -26,48 +30,10 @@ public abstract class SocialuniUserRepositoryFacede extends SocialuniRepositoryF
      * @return
      */
     public static <T extends SocialuniUserInfoBaseDO> T findByUserId(Integer userId, Class<T> tClass) {
-        EntityManager entityManager = getEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
-        Root<T> userInfo = criteriaQuery.from(tClass);
-
-        Predicate userIdPredicate = criteriaBuilder.equal(userInfo.get("userId"), userId);
-        criteriaQuery.where(userIdPredicate);
-
-        List<T> list = entityManager.createQuery(criteriaQuery).setFirstResult(0).setMaxResults(1).getResultList();
-
-        if (list.size() > 0) {
-            return list.get(0);
-        }
-        return null;
+        return socialuniCommonRepository.findByUserId(userId, tClass);
     }
 
-    /*public static <T extends SocialuniContentBaseDO> List<T> findAllByUserIdAndStatus(Integer userId, String status, Class<T> tClass) {
-        T userInfo = null;
-        try {
-            userInfo = tClass.getDeclaredConstructor().newInstance();
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-                NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        }
-        userInfo.setUserId(userId);
-        userInfo.setStatus(status);
-        return SocialuniRepositoryFacade.findAllByExample(userInfo);
-    }*/
-
     public static <T extends SocialuniUserInfoBaseDO> T findFirstByUserIdNotNull(Integer userId, Class<T> tClass) {
-        EntityManager entityManager = SocialuniRepositoryFacade.getEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
-        Root<T> userInfo = criteriaQuery.from(tClass);
-
-        Predicate userIdPredicate = criteriaBuilder.equal(userInfo.get("userId"), userId);
-        criteriaQuery.where(userIdPredicate);
-
-        criteriaQuery.orderBy(criteriaBuilder.desc(userInfo.get("id")));
-
-        TypedQuery<T> query = entityManager.createQuery(criteriaQuery);
-
-        return query.setFirstResult(0).setMaxResults(1).getSingleResult();
+        return socialuniCommonRepository.findFirstByUserIdNotNull(userId, tClass);
     }
 }

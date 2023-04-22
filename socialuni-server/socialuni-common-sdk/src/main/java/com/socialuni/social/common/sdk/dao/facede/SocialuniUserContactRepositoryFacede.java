@@ -1,7 +1,9 @@
 package com.socialuni.social.common.sdk.dao.facede;
 
 import com.socialuni.social.common.api.entity.SocialuniUserContactBaseDO;
+import com.socialuni.social.common.sdk.dao.repository.SocialuniCommonRepository;
 
+import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -18,6 +20,15 @@ import java.util.List;
  * @since 1.0
  */
 public abstract class SocialuniUserContactRepositoryFacede extends SocialuniUserRepositoryFacede {
+
+    static SocialuniCommonRepository socialuniCommonRepository;
+
+    @Resource
+    public void setSocialuniCommonUserRepository(SocialuniCommonRepository socialuniCommonRepository) {
+        SocialuniUserRepositoryFacede.socialuniCommonRepository = socialuniCommonRepository;
+    }
+
+
     /**
      * 通过userId获得对应的子类。
      *
@@ -27,98 +38,23 @@ public abstract class SocialuniUserContactRepositoryFacede extends SocialuniUser
      * @return
      */
     public static <T extends SocialuniUserContactBaseDO> T findByUserIdAndBeUserId(Integer userId, Integer beUserId, Class<T> tClass) {
-        EntityManager entityManager = getEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
-        Root<T> userInfo = criteriaQuery.from(tClass);
-
-        Predicate userIdPredicate = criteriaBuilder.equal(userInfo.get("userId"), userId);
-        Predicate beUserIdPredicate = criteriaBuilder.equal(userInfo.get("beUserId"), beUserId);
-        criteriaQuery.where(userIdPredicate, beUserIdPredicate);
-
-        List<T> list = entityManager.createQuery(criteriaQuery).setFirstResult(0).setMaxResults(1).getResultList();
-
-        if (list.size() > 0) {
-            return list.get(0);
-        }
-        return null;
+        return socialuniCommonRepository.findByUserIdAndBeUserId(userId, beUserId, tClass);
     }
 
     public static <T extends SocialuniUserContactBaseDO> T findByUserIdAndBeUserIdAndStatus(Integer userId, Integer beUserId, String status, Class<T> tClass) {
-        EntityManager entityManager = getEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
-        Root<T> userInfo = criteriaQuery.from(tClass);
-
-        Predicate userIdPredicate = criteriaBuilder.equal(userInfo.get("userId"), userId);
-        Predicate beUserIdPredicate = criteriaBuilder.equal(userInfo.get("beUserId"), beUserId);
-        Predicate statusPredicate = criteriaBuilder.equal(userInfo.get("status"), status);
-        criteriaQuery.where(userIdPredicate, beUserIdPredicate, statusPredicate);
-
-        List<T> list = entityManager.createQuery(criteriaQuery).setFirstResult(0).setMaxResults(1).getResultList();
-
-        if (list.size() > 0) {
-            return list.get(0);
-        }
-        return null;
+        return socialuniCommonRepository.findByUserIdAndBeUserIdAndStatus(userId, beUserId, status, tClass);
     }
 
     public static <T extends SocialuniUserContactBaseDO> Long countByUserIdAndBeUserIdAndStatus(Integer userId, Integer beUserId, String status, Class<T> tClass) {
-        EntityManager entityManager = getEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
-        Root<T> userInfo = criteriaQuery.from(tClass);
-
-        criteriaQuery.select(criteriaBuilder.count(userInfo));
-
-        Predicate userIdPredicate = criteriaBuilder.equal(userInfo.get("userId"), userId);
-        Predicate beUserIdPredicate = criteriaBuilder.equal(userInfo.get("beUserId"), beUserId);
-        Predicate statusPredicate = criteriaBuilder.equal(userInfo.get("status"), status);
-        criteriaQuery.where(userIdPredicate, beUserIdPredicate, statusPredicate);
-
-//        criteriaQuery.orderBy(criteriaBuilder.desc(userInfo.get("id")));
-
-        return entityManager.createQuery(criteriaQuery).getSingleResult();
+        return socialuniCommonRepository.countByUserIdAndBeUserIdAndStatus(userId, beUserId, status, tClass);
     }
 
 
     public static <T extends SocialuniUserContactBaseDO> T findByUserIdAndBeUserIdOrderByIdDesc(Integer userId, Integer beUserId, Class<T> tClass) {
-        EntityManager entityManager = getEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
-        Root<T> userInfo = criteriaQuery.from(tClass);
-
-        Predicate userIdPredicate = criteriaBuilder.equal(userInfo.get("userId"), userId);
-        Predicate beUserIdPredicate = criteriaBuilder.equal(userInfo.get("beUserId"), beUserId);
-        criteriaQuery.where(userIdPredicate, beUserIdPredicate);
-
-        criteriaQuery.orderBy(criteriaBuilder.desc(userInfo.get("id")));
-
-        List<T> list = entityManager.createQuery(criteriaQuery).setFirstResult(0).setMaxResults(1).getResultList();
-
-        if (list.size() > 0) {
-            return list.get(0);
-        }
-        return null;
+        return socialuniCommonRepository.findByUserIdAndBeUserIdOrderByIdDesc(userId, beUserId, tClass);
     }
+
     public static <T extends SocialuniUserContactBaseDO> T findByUserIdAndBeUserIdAndNotStatus(Integer userId, Integer beUserId, String status, Class<T> tClass) {
-        EntityManager entityManager = getEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
-        Root<T> userInfo = criteriaQuery.from(tClass);
-
-        Predicate userIdPredicate = criteriaBuilder.equal(userInfo.get("userId"), userId);
-        Predicate beUserIdPredicate = criteriaBuilder.equal(userInfo.get("beUserId"), beUserId);
-        Predicate statusPredicate = criteriaBuilder.notEqual(userInfo.get("status"), status);
-        criteriaQuery.where(userIdPredicate, beUserIdPredicate, statusPredicate);
-
-        criteriaQuery.orderBy(criteriaBuilder.desc(userInfo.get("id")));
-
-        List<T> list = entityManager.createQuery(criteriaQuery).setFirstResult(0).setMaxResults(1).getResultList();
-
-        if (list.size() > 0) {
-            return list.get(0);
-        }
-        return null;
+        return socialuniCommonRepository.findByUserIdAndBeUserIdAndNotStatus(userId, beUserId, status, tClass);
     }
 }
