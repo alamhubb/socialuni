@@ -94,6 +94,7 @@ class SocialChatModule {
         this.openImIsLogin = 2
     }
 
+    //进来就展示对方是否支持
 
     setChatId(chatId: string) {
         let chat = socialChatModule.chats.find(item => item.id === chatId)

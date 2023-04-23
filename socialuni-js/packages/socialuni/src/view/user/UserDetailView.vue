@@ -197,6 +197,7 @@ import SocialuniAddFriendType from "socialuni-im-api/src/constant/SocialuniAddFr
 import SocialuniImUserAPI from 'socialuni-im-api/src/api/SocialuniImUserAPI'
 import SocialuniUserIdQO from '../../model/QO/user/SocialuniUserIdQO'
 import SocialuniImUserDetailRO from 'socialuni-im-api/src/model/RO/SocialuniImUserDetailRO'
+import MsgUtil from 'socialuni-util/src/util/MsgUtil'
 
 @Options({
   components: {
@@ -255,10 +256,6 @@ export default class UserDetailView extends Vue {
           // socialChatModule.checkFriend(this.user)
           // socialChatModule.setCurChatByUserId(this.user.id)
         }
-      })
-
-      SocialuniImUserAPI.getImUserDetailAPI(new SocialuniUserIdQO(userId)).then(res => {
-        this.imUserDetail = res.data
       })
     })
   }
@@ -322,6 +319,9 @@ export default class UserDetailView extends Vue {
   }
 
   async toMessagePage() {
+    //无论什么情况都可以进入消息页面，比如要查看两个人的历史聊天消息呢
+    socialChatModule.setChatIdToMessagePage(this.user.id)
+
     //未登录不能发消息
     //然后判断对方是否接收陌生人消息
     //不接收，判断是否是好友
@@ -350,13 +350,18 @@ export default class UserDetailView extends Vue {
 
       //能不能发消息，
 
+    //应该能进入页面的，
+    // if (this.imUserDetail.blackUser){
+    //   ToastUtil.toast("您已被对方拉黑，无法发送消息")
+    // }
+    //未关注，但是也可以都是可以进入聊天页面的
 
-    if (!this.user.hasFriend) {
-      this.applyUserFriendContent = null
-      this.$refs.applyUserFriendDialog.open()
-    } else {
-      socialChatModule.toMessagePageFromUserDetail(this.user.id)
-    }
+
+    // if (this.user.hasBeFollowed) {
+    //   this.applyUserFriendContent = null
+    //   this.$refs.applyUserFriendDialog.open()
+    // } else {
+    // }
     // socialChatModule.setCurChatByUserId(this.user.id)
     //除了是否关注，还有是否已经发起过对话，chatuservo里面要保存还能再发几条
     //判断是否已经支付过了。3条，然后对方每次回复你都可以发三条，然后就需要再次支付，开启了支付

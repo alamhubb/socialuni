@@ -7,6 +7,11 @@ export default class SocialuniChatRO {
     public id: string = null
     public nickname: string = null
     public groupId: string = null
+    //是否是黑名单用户
+    public blackUser: boolean = null
+    //是否是
+    public allowStrangerMsg: boolean = null
+    public strangerUser: boolean = null
     public type: string = null
     public status: string = null
     public messages: MessageVO[] = []
