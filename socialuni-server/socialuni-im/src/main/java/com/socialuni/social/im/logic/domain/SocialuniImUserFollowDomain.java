@@ -3,8 +3,10 @@ package com.socialuni.social.im.logic.domain;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
+import com.socialuni.social.im.enumeration.MessageType;
 import com.socialuni.social.im.logic.entity.SocialuniMessageEntity;
 import com.socialuni.social.im.logic.foctory.SocialuniChatUserDOFactory;
+import com.socialuni.social.im.logic.service.SocialuniMessageService;
 import com.socialuni.social.user.sdk.logic.domain.SocialUserFollowDomain;
 import com.socialuni.social.user.sdk.logic.manage.SocialuniUserFollowManage;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserFollowDO;
@@ -22,6 +24,9 @@ import java.util.List;
 public class SocialuniImUserFollowDomain extends SocialUserFollowDomain {
     @Resource
     SocialuniUserFollowManage socialuniUserFollowManage;
+
+    @Resource
+    SocialuniMessageEntity socialuniMessageEntity;
 
     @Transactional
     public SocialuniUserFollowDO addFlow(SocialuniUserFollowAddQO addVO) {
@@ -50,9 +55,9 @@ public class SocialuniImUserFollowDomain extends SocialUserFollowDomain {
         //互相关注，添加 chat
         List<SocialuniChatUserDO> chatSocialuniUserDoS = SocialuniChatUserDOFactory.createSocialuniChatUserDOS(mineUserId, beUserId);
 
-//        SocialuniUserDo systemUser = SocialuniUserUtil.getSystemUserNotNull();
-//        String msg = "互相关注，成为好友了";
-//        socialuniMessageEntity.sendMsgNotifyList("",)
+        SocialuniUserDo systemUser = SocialuniUserUtil.getSystemUserNotNull();
+        String msg = "互相关注，成为好友了";
+        socialuniMessageEntity.sendMsgNotifyList(msg, systemUser, chatSocialuniUserDoS, MessageType.system);
         return socialuniUserFollowDO;
     }
 
