@@ -20,7 +20,7 @@ export default class ChatAPI {
 
     static readChatAPI(chatId: string, messageIds: string[] = []) {
         const chatRead: ChatReadVO = new ChatReadVO(chatId, messageIds)
-        return socialuniImRequest.post('chat/readChat', chatRead)
+        return socialuniImRequest.post('socialuni/chat/readChat', chatRead)
     }
 
     static frontDeleteChatAPI(chatId: number) {

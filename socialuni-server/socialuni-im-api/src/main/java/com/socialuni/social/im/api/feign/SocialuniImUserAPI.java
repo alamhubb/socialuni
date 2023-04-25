@@ -34,5 +34,11 @@ public interface SocialuniImUserAPI {
 
     @PostMapping("getImMineUser")
     ResultRO<SocialuniImMineUserDetailRO> getImMineUser();
+
+    @PostMapping("closeStrangerMsg")
+    ResultRO<SocialuniImMineUserDetailRO> closeStrangerMsg();
+
+    @PostMapping("openStrangerMsg")
+    ResultRO<SocialuniImMineUserDetailRO> openStrangerMsg();
 }
 

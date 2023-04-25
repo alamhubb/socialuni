@@ -26,7 +26,7 @@ public class SocialuniChatUserDOFactory {
             }
             return createSocialuniChatUserDOS(userId, beUserId);
         }
-        return Collections.emptyList();
+        return Arrays.asList(chatUserDO, beChatUserDO);
     }
 
     public static List<SocialuniChatUserDO> createSocialuniChatUserDOS(Integer userId, Integer beUserId) {

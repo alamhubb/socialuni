@@ -11,6 +11,14 @@ export default class SocialuniImUserAPI {
     }
 
     static getImMineUser() {
-        return socialuniImRequest.post<SocialuniImMineUserDetailRO[]>('socialuni/imUser/getImMineUser')
+        return socialuniImRequest.post<SocialuniImMineUserDetailRO>('socialuni/imUser/getImMineUser')
+    }
+
+    static closeStrangerMsg() {
+        return socialuniImRequest.post<SocialuniImMineUserDetailRO>('socialuni/imUser/closeStrangerMsg')
+    }
+
+    static openStrangerMsg() {
+        return socialuniImRequest.post<SocialuniImMineUserDetailRO>('socialuni/imUser/openStrangerMsg')
     }
 }

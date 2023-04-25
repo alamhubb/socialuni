@@ -9,9 +9,9 @@
                             @click="clearSearchContent"
                     ></q-icon>
                 </q-search>
-                <!--        <view @click="toAddFriend">
-                          <q-icon icon="plus-circle"></q-icon>
-                        </view>-->
+                <view @click="toAddFriend">
+                    <q-icon icon="list-dot" size="20" @click="openUserChatSetting"></q-icon>
+                </view>
             </div>
         </q-navbar>
         <!--    <view v-if="showChatHint&& showChats && showChats.length" class="row-col-center bg-orange">
@@ -125,12 +125,16 @@ import SocialuniChatRO from "socialuni/src/model/SocialuniChatRO"
 import {socialChatModule} from "../../store/SocialChatModule";
 import ChatAPI from "socialuni-im-api/src/api/ChatAPI";
 import ImPageUtil from "../../util/ImPageUtil";
+import SocialuniImUserDetailRO from "socialuni-im-api/src/model/RO/SocialuniImUserDetailRO";
+import SocialuniImMineUserDetailRO from "socialuni-im-api/src/model/RO/SocialuniImMineUserDetailRO";
+import SocialuniImUserAPI from "socialuni-im-api/src/api/SocialuniImUserAPI";
 
 @Options({
     components: {QSearch, QInput, QIcon, QNavbar}
 })
 export default class ChatView extends Vue {
     users: SocialUserContentRO[] = []
+    imMineUserInfo: SocialuniImMineUserDetailRO = null
 
     searchContent = null
 
@@ -139,6 +143,7 @@ export default class ChatView extends Vue {
         const chats = socialChatModule.chats
         return chats.filter(item => !this.searchContent || item.nickname.includes(this.searchContent))
     }
+
     get chatList() {
         console.log(socialChatModule.chats)
         const chats = socialChatModule.chats
@@ -159,8 +164,6 @@ export default class ChatView extends Vue {
     showChatHint: boolean = uni.getStorageSync(Constants.showChatHintKey) !== 'false'
 
 
-
-
     closeUploadImgHint() {
         this.showChatHint = false
         uni.setStorageSync(Constants.showChatHintKey, 'false')
@@ -177,6 +180,7 @@ export default class ChatView extends Vue {
         onShow(() => {
             socialChatModule.computedChatsUnreadNumTotalAction()
         })
+        this.queryMineImUserInfo()
         /*setInterval(()=>{
           this.$forceUpdate()
           console.log(123)
@@ -186,6 +190,11 @@ export default class ChatView extends Vue {
             this.users = res.data
           })
         }*/
+    }
+
+    async queryMineImUserInfo() {
+        const res = await SocialuniImUserAPI.getImMineUser()
+        this.imMineUserInfo = res.data
     }
 
     onPullDownRefresh() {
@@ -327,6 +336,33 @@ export default class ChatView extends Vue {
 
     toUserApplyPage() {
         ImPageUtil.toFriendApply()
+    }
+
+    openUserChatSetting() {
+        let msg = []
+        if (this.imMineUserInfo.allowStrangerMsg) {
+            msg = ['关闭陌生人免费消息']
+        } else {
+            msg = ['打开陌生人免费消息']
+        }
+        UniUtil.actionSheet(msg).then(res => {
+            if (res === 0) {
+                if (this.imMineUserInfo.allowStrangerMsg) {
+                    this.imMineUserInfo.allowStrangerMsg = false
+                    ToastUtil.toast('关闭陌生人免费消息成功')
+                    SocialuniImUserAPI.closeStrangerMsg().then(res => {
+                        this.imMineUserInfo = res.data
+                    })
+                } else {
+                    this.imMineUserInfo.allowStrangerMsg = true
+                    ToastUtil.toast('打开陌生人免费消息成功')
+                    SocialuniImUserAPI.openStrangerMsg().then(res => {
+                        this.imMineUserInfo = res.data
+                    })
+                }
+            }
+            console.log(res)
+        })
     }
 }
 </script>

@@ -2,6 +2,7 @@ package com.socialuni.social.im.logic.service;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserIdQO;
+import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.im.api.model.RO.SocialuniImMineUserDetailRO;
 import com.socialuni.social.im.api.model.RO.SocialuniImUserDetailRO;
@@ -49,6 +50,34 @@ public class SocialuniImUserService {
         Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
 
         SocialuniUserChatConfigDO socialuniUserChatConfigDO = SocialuniUserChatConfigManage.getOrCreateUserChatConfigDO(mineUserId);
+
+        SocialuniImMineUserDetailRO socialuniImMineUserDetailRO = new SocialuniImMineUserDetailRO();
+        socialuniImMineUserDetailRO.setAllowStrangerMsg(socialuniUserChatConfigDO.getAllowStrangerMsg());
+        return ResultRO.success(socialuniImMineUserDetailRO);
+    }
+
+    public ResultRO<SocialuniImMineUserDetailRO> closeStrangerMsg() {
+        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+
+        SocialuniUserChatConfigDO socialuniUserChatConfigDO = SocialuniUserChatConfigManage.getOrCreateUserChatConfigDO(mineUserId);
+
+        socialuniUserChatConfigDO.setAllowStrangerMsg(false);
+
+        socialuniUserChatConfigDO = SocialuniRepositoryFacade.save(socialuniUserChatConfigDO);
+
+        SocialuniImMineUserDetailRO socialuniImMineUserDetailRO = new SocialuniImMineUserDetailRO();
+        socialuniImMineUserDetailRO.setAllowStrangerMsg(socialuniUserChatConfigDO.getAllowStrangerMsg());
+        return ResultRO.success(socialuniImMineUserDetailRO);
+    }
+
+    public ResultRO<SocialuniImMineUserDetailRO> openStrangerMsg() {
+        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+
+        SocialuniUserChatConfigDO socialuniUserChatConfigDO = SocialuniUserChatConfigManage.getOrCreateUserChatConfigDO(mineUserId);
+
+        socialuniUserChatConfigDO.setAllowStrangerMsg(true);
+
+        socialuniUserChatConfigDO = SocialuniRepositoryFacade.save(socialuniUserChatConfigDO);
 
         SocialuniImMineUserDetailRO socialuniImMineUserDetailRO = new SocialuniImMineUserDetailRO();
         socialuniImMineUserDetailRO.setAllowStrangerMsg(socialuniUserChatConfigDO.getAllowStrangerMsg());

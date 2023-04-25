@@ -40,4 +40,14 @@ public class SocialuniImUserController implements SocialuniImUserAPI {
     public ResultRO<SocialuniImMineUserDetailRO> getImMineUser() {
         return socialuniImUserService.getImMineUser();
     }
+
+    @Override
+    public ResultRO<SocialuniImMineUserDetailRO> closeStrangerMsg() {
+        return socialuniImUserService.closeStrangerMsg();
+    }
+
+    @Override
+    public ResultRO<SocialuniImMineUserDetailRO> openStrangerMsg() {
+        return socialuniImUserService.openStrangerMsg();
+    }
 }
