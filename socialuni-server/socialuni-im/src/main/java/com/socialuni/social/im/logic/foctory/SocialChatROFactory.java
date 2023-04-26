@@ -1,6 +1,7 @@
 package com.socialuni.social.im.logic.foctory;
 
 
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.sdk.constant.LoadMoreType;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
@@ -21,6 +22,7 @@ import com.socialuni.social.im.api.model.RO.SocialMessageRO;
 import com.socialuni.social.im.enumeration.MessageStatus;
 import com.socialuni.social.im.logic.manage.SocialuniUserChatConfigManage;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.user.sdk.model.DO.SocialuniUserFollowDO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import lombok.Data;
@@ -149,8 +151,14 @@ public class SocialChatROFactory {
 
             chatRO.setBlackUser(chatRO.getBlackUser());
 
-            SocialuniChatUserDO socialuniChatUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(chatUserDO.getBeUserId(), chatUserDO.getUserId(), SocialuniChatUserDO.class);
+            SocialuniChatUserDO beChatUser = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(chatUserDO.getBeUserId(), chatUserDO.getUserId(), SocialuniChatUserDO.class);
+            chatRO.setBeBlackUser(beChatUser.getBlackUser());
 
+            SocialuniUserFollowDO beFollowDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(chatUserDO.getBeUserId(), chatUserDO.getUserId(), SocialuniUserFollowDO.class);
+
+            if (beFollowDO != null && beFollowDO.getStatus().equals(SocialuniCommonStatus.enable)) {
+                chatRO.setBeFollow(true);
+            }
 
 //            this.vipFlag = receiveUser.getVipFlag();
             //不为系统群聊才有记录了未读数量，才有未读数量
