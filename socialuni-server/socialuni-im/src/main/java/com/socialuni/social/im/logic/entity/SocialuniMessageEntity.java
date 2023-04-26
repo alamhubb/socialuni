@@ -89,10 +89,17 @@ public class SocialuniMessageEntity {
         List<SocialuniChatUserDO> chatSocialuniUserDoS = SocialuniChatUserDOFactory.getOrCreateChatUsersBySingleSendMsg(beUserId, mineUserId);
         SocialuniChatUserDO beChatUserDO = chatSocialuniUserDoS.get(0);
 
-
         //对方是否把你拉黑了
         if (beChatUserDO != null && beChatUserDO.getBlackUser()) {
             throw new SocialBusinessException("您已被对方拉黑，无法发送消息");
+        }
+
+
+        SocialuniChatUserDO chatUser = chatSocialuniUserDoS.get(1);
+
+        //对方是否把你拉黑了
+        if (chatUser != null && chatUser.getBlackUser()) {
+            throw new SocialBusinessException("您已将对方拉黑，无法发送消息");
         }
 
         //先看是否已经被关注

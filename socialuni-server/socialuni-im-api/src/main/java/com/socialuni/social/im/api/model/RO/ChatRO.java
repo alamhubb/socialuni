@@ -13,6 +13,11 @@ import java.util.List;
 public class ChatRO {
     private String id;
     private String nickname;
+    private Boolean allowStrangerMsg;
+    private Boolean beFollow;
+    //是否被拉黑
+    private String blackUser;
+    private String beBlackUser;
     //暂时未用，未来有用的，参考微信私聊右上角，会从那里可以进入用户的详情
     private String receiveUserId;
     private String avatar;

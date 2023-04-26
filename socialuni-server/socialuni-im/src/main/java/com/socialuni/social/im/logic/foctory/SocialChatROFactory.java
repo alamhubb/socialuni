@@ -3,8 +3,10 @@ package com.socialuni.social.im.logic.foctory;
 
 import com.socialuni.social.common.sdk.constant.LoadMoreType;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
+import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
+import com.socialuni.social.im.dao.DO.SocialuniUserChatConfigDO;
 import com.socialuni.social.im.enumeration.ChatStatus;
 import com.socialuni.social.im.enumeration.ChatType;
 import com.socialuni.social.im.enumeration.ChatUserStatus;
@@ -17,6 +19,7 @@ import com.socialuni.social.im.dao.repository.SocialuniMessageRepository;
 import com.socialuni.social.im.api.model.RO.ChatRO;
 import com.socialuni.social.im.api.model.RO.SocialMessageRO;
 import com.socialuni.social.im.enumeration.MessageStatus;
+import com.socialuni.social.im.logic.manage.SocialuniUserChatConfigManage;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
@@ -80,6 +83,10 @@ public class SocialChatROFactory {
         chatRO.setLoadMore(LoadMoreType.noMore);
         chatRO.setNeedPayOpen(false);
         chatRO.setLastContent("会话已开启");
+
+        SocialuniUserChatConfigDO socialuniBeUserChatConfigDO = SocialuniUserChatConfigManage.getOrCreateUserChatConfigDO(chatDO.getUserId());
+
+        chatRO.setAllowStrangerMsg(socialuniBeUserChatConfigDO.getAllowStrangerMsg());
         return chatRO;
     }
 
@@ -138,6 +145,13 @@ public class SocialChatROFactory {
             chatRO.setAvatar(receiveUser.getAvatar());
             chatRO.setReceiveUserId(beUserId);
             chatRO.setUnreadNum(chatUserDO.getUnreadNum());
+
+
+            chatRO.setBlackUser(chatRO.getBlackUser());
+
+            SocialuniChatUserDO socialuniChatUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(chatUserDO.getBeUserId(), chatUserDO.getUserId(), SocialuniChatUserDO.class);
+
+
 //            this.vipFlag = receiveUser.getVipFlag();
             //不为系统群聊才有记录了未读数量，才有未读数量
         }
