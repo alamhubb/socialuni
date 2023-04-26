@@ -63,17 +63,17 @@ public class SocialuniChatController implements SocialuniChatAPI {
     }*/
 
     @Override
-    public ResultRO<?> frontDeleteChat(ChatRemoveVO chatVO) {
+    public ResultRO<?> frontDeleteChat(SocialuniChatQueryQO chatVO) {
         return null;
     }
 
     @Override
-    public ResultRO<?> removeChat(ChatRemoveVO chatVO) {
+    public ResultRO<?> removeChat(SocialuniChatQueryQO chatVO) {
         return null;
     }
 
     @Override
-    public ResultRO<?> closeChat(ChatRemoveVO chatVO) {
-        return null;
+    public ResultRO<?> quitGroupChat(SocialuniChatQueryQO chatVO) {
+        return chatService.quitGroupChat(chatVO);
     }
 }

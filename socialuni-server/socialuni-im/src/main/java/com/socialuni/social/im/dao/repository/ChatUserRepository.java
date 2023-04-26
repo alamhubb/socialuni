@@ -30,6 +30,9 @@ public interface ChatUserRepository extends JpaRepository<SocialuniChatUserDO, I
     Optional<SocialuniChatUserDO> findFirstByStatusAndUserIdAndBeUserId(String Status, Integer userId, Integer BeUserId);
 
 
+    SocialuniChatUserDO findOneByChatIdAndUserId(Integer chatId, Integer userId);
+
+
     //只有发送消息时，才需要使用这个，校验状态，其他情况不需要
     List<SocialuniChatUserDO> findByChatIdAndStatusAndStatus(Integer chatId, String Status, String status);
 
@@ -39,5 +42,6 @@ public interface ChatUserRepository extends JpaRepository<SocialuniChatUserDO, I
 
     //先不使用chat状态，查询user下的chatuser,根据topLevel倒序，topflag倒序，更新时间倒序
     List<SocialuniChatUserDO> findByStatusAndUserIdOrderByUpdateTimeDesc(String Status, Integer userId);
+
     List<SocialuniChatUserDO> findByStatusAndUserIdAndFrontShowTrueOrderByTopFlagDescTopFlagDescUpdateTimeDesc(String Status, Integer userId);
 }

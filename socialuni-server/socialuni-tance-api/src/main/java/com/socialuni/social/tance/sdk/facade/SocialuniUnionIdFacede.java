@@ -2,6 +2,7 @@ package com.socialuni.social.tance.sdk.facade;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.common.api.utils.UUIDUtil;
 import com.socialuni.social.tance.sdk.api.SocialuniUnionIdInterface;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
@@ -38,6 +39,7 @@ public class SocialuniUnionIdFacede {
     public static Integer createChatUnionId() {
         return createUnionIdByContentType(SocialuniContentType.chat);
     }
+
     public static Integer createMessageUnionId() {
         return createUnionIdByContentType(SocialuniContentType.message);
     }
@@ -112,6 +114,14 @@ public class SocialuniUnionIdFacede {
         return getUnionByUuidNotNull(uuid).getId();
     }
 
+    public static Integer getChatUnionIdByUuidNotNull(String uuid) {
+        SocialuniUnionIdModler chatUnion = getUnionByUuidNotNull(uuid);
+        if (!chatUnion.getContentType().equals(SocialuniContentType.chat)) {
+            throw new SocialSystemException("不存在的会话");
+        }
+        return chatUnion.getId();
+    }
+
     //根据uid获取真实id,获取不可为空, 为前台传入的数据，防止错误，不可为空
     public static SocialuniUnionIdModler getUnionByUuidNotNull(String uuid) {
         SocialuniUnionIdModler uniContentUnionIdDO = getUnionByUuidAllowNull(uuid);
@@ -174,11 +184,11 @@ public class SocialuniUnionIdFacede {
         return pattern.matcher(str).matches();
     }
 
-    public static List<String> findUuidAllByContentType(String contentTyp){
+    public static List<String> findUuidAllByContentType(String contentTyp) {
         return socialuniUnionIdApi.findUuidAllByContentType(contentTyp);
     }
 
-    public static List<Integer> findAllIdsByContentType(String contentTyp){
+    public static List<Integer> findAllIdsByContentType(String contentTyp) {
         return socialuniUnionIdApi.findAllIdsByContentType(contentTyp);
     }
 

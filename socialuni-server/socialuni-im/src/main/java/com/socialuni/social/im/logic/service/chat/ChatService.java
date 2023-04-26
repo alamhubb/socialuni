@@ -3,6 +3,7 @@ package com.socialuni.social.im.logic.service.chat;
 
 import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.im.api.model.QO.SocialuniChatQueryQO;
@@ -54,7 +55,7 @@ public class ChatService {
 
 
     public ResultRO<Void> readChatMessages(ChatReadVO chatVO) {
-            Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
         String chatUuid = chatVO.getChatId();
         SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidNotNull(chatUuid);
 
@@ -217,6 +218,25 @@ public class ChatService {
         //你需要自己的chat为代开起
         //需要对方的用户名，昵称。会话未开启
         return new CreateSingleChatResult(chat, mineChatUser, receiveChatUser);
+    }
+
+
+    //从chatUser上控制
+    public ResultRO<?> quitGroupChat(SocialuniChatQueryQO chatVO) {
+        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+        String chatIdStr = chatVO.getChatId();
+        Integer chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(chatIdStr);
+
+        SocialuniChatUserDO chatUserDO = chatUserRepository.findOneByChatIdAndUserId(chatId, mineUserId);
+
+        if (chatUserDO == null || !chatUserDO.getStatus().equals(ChatStatus.enable)) {
+            throw new SocialSystemException("未加入群聊");
+        }
+        chatUserDO.setStatus(ChatStatus.delete);
+
+        SocialuniRepositoryFacade.save(chatUserDO);
+
+        return ResultRO.success();
     }
 
     /*public CreateSingleChatResult createSingleChat(UserDO user, UserDO receiveUser) {

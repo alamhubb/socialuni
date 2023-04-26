@@ -52,12 +52,12 @@ public interface SocialuniChatAPI {
     ResultRO<ChatVO> openChat(@RequestBody @Valid OpenChatVO chatVO);*/
 
     @PostMapping("frontDeleteChat")
-    ResultRO<?> frontDeleteChat(@RequestBody @Valid ChatRemoveVO chatVO);
+    ResultRO<?> frontDeleteChat(@RequestBody @Valid SocialuniChatQueryQO chatVO);
 
     @PostMapping("removeChat")
-    ResultRO<?> removeChat(@RequestBody @Valid ChatRemoveVO chatVO);
+    ResultRO<?> removeChat(@RequestBody @Valid SocialuniChatQueryQO chatVO);
 
-    @PostMapping("closeChat")
-    ResultRO<?> closeChat(@RequestBody @Valid ChatRemoveVO chatVO);
+    @PostMapping("quitGroupChat")
+    ResultRO<?> quitGroupChat(@RequestBody @Valid SocialuniChatQueryQO chatVO);
 }
 
