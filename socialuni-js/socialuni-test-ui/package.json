@@ -59,6 +59,7 @@
     "socialuni": "../packages/socialuni",
     "socialuni-community": "../packages/socialuni-community",
     "socialuni-im": "../packages/socialuni-im",
+    "util": "^0.12.5",
     "uuid": "^7.0.3",
     "vite-plugin-require-transform": "^1.0.4",
     "vue": "3.2.47",

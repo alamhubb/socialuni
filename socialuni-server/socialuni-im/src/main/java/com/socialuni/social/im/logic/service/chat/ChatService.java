@@ -131,7 +131,7 @@ public class ChatService {
             return ResultRO.success(chatRO);
         } else if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.chat)) {
             //则为chatId
-            Integer chatId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(chatUuid);
+            Integer chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(chatUuid);
 
             SocialuniChatDO chatDO = SocialuniRepositoryFacade.findById(chatId, SocialuniChatDO.class);
 
@@ -176,20 +176,21 @@ public class ChatService {
     //获取私聊的chat
     //查看对方主页时
     public ChatRO seeUserDetailGetOrCreateChat(SocialuniUserDo user, Integer receiveUserId) {
-        Optional<SocialuniChatUserDO> chatUserDOOptional = chatUserRepository.findFirstByStatusAndUserIdAndBeUserId(ChatStatus.enable, user.getUnionId(), receiveUserId);
-        SocialuniChatUserDO chatUserDO;
-        //如果创建过，则获取。返回
-        if (chatUserDOOptional.isPresent()) {
-            chatUserDO = chatUserDOOptional.get();
-//            Optional<ChatDO> chatDOOptional = chatRepository.findById(chatUserDO.getChatId());
-            //如果没创建过，则创建，并返回
-        } else {
-            CreateSingleChatResult chatResult = this.seeUserDetailCreateChat(user, receiveUserId);
-            chatUserDO = chatResult.getMineChatUser();
-        }
-
-        ChatRO chatUserVO = SocialChatROFactory.getChatROByQueryChat(chatUserDO, true);
-        return chatUserVO;
+//        Optional<SocialuniChatUserDO> chatUserDOOptional = chatUserRepository.findFirstByStatusAndUserIdAndBeUserId(ChatStatus.enable, user.getUnionId(), receiveUserId);
+//        SocialuniChatUserDO chatUserDO;
+//        //如果创建过，则获取。返回
+//        if (chatUserDOOptional.isPresent()) {
+//            chatUserDO = chatUserDOOptional.get();
+////            Optional<ChatDO> chatDOOptional = chatRepository.findById(chatUserDO.getChatId());
+//            //如果没创建过，则创建，并返回
+//        } else {
+//            CreateSingleChatResult chatResult = this.seeUserDetailCreateChat(user, receiveUserId);
+//            chatUserDO = chatResult.getMineChatUser();
+//        }
+//
+//        ChatRO chatUserVO = SocialChatROFactory.getChatROByQueryChat(chatUserDO, true);
+//        return chatUserVO;
+        return null;
     }
 
     //点击一个人，陌生人，点击发送消息。

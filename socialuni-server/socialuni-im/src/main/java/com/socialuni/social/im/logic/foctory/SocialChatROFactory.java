@@ -63,6 +63,10 @@ public class SocialChatROFactory {
         SocialChatROFactory.chatRepository = chatRepository;
     }
 
+    public static ChatRO getChatROByChatUser(SocialuniChatDO chatDO) {
+
+    }
+
     //chat
 
     public static ChatRO getChatRO1(SocialuniChatDO chatDO) {
