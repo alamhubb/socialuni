@@ -64,7 +64,7 @@ public class SocialChatROFactory {
     }
 
     public static ChatRO getChatROByChatUser(SocialuniChatDO chatDO) {
-
+        return null;
     }
 
     //chat
