@@ -87,6 +87,4 @@ const Socialuni = {
   }
 }
 
-export { socialuniRequestConfig }
-
 export default Socialuni
