@@ -216,10 +216,6 @@ public class SocialuniUserUtil {
     }
 
     public static Integer getSystemUserIdNotNull() {
-        String phoneNum = DevAccountFacade.getDevPhoneNumNotNull();
-
-        SocialuniUserDo systemUser = getUserByPhoneNumNotNull(phoneNum);
-
-        return systemUser.getUserId();
+        return getSystemUserNotNull().getUserId();
     }
 }

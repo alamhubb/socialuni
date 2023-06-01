@@ -54,6 +54,7 @@ public class SocialuniAppConfig {
         appConfig.setCityTabName(configApi.getString("cityTabName"));
         //
         appConfig.setTabNames(configApi.getListString("tabNames"));
+        appConfig.setDefaultChatGroups(configApi.getListString("defaultChatGroups"));
 
         Integer devUserId = DevAccountFacade.getDevUserId();
 

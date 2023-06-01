@@ -122,6 +122,8 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
                 configDO1.setValue(socialuniAppConfigBO.getCityTabName());
             } else if (configKey.equals(AppConfigDOKeyConst.tabNames)) {
                 configDO1.setValue(StringUtils.join(socialuniAppConfigBO.getTabNames(), ","));
+            } else if (configKey.equals(AppConfigDOKeyConst.defaultChatGroups)) {
+                configDO1.setValue(StringUtils.join(socialuniAppConfigBO.getDefaultChatGroups(), ","));
             } else if (configKey.equals(AppConfigDOKeyConst.disableUnderageContent)) {
                 configDO1.setValue(socialuniAppConfigBO.getDisableUnderageContent().toString());
             } else if (configKey.equals(AppConfigDOKeyConst.disableContentHasQrCode)) {

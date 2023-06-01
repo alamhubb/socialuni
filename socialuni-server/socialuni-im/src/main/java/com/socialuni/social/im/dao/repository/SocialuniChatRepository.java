@@ -18,6 +18,8 @@ public interface SocialuniChatRepository extends JpaRepository<SocialuniChatDO, 
     //未登录只能查询官方的消息列表
     List<SocialuniChatDO> findByStatusAndTypeInOrderByTopLevelDescUpdateTimeDesc(String status, List<String> types);
 
+    SocialuniChatDO findFirstByTypeAndChatName(String type, String chatName);
+
     //查询对应的chat,读取时，任何类型的chat都可以改为已读，但是sys类型不操作
     Optional<SocialuniChatDO> findFirstByIdAndStatus(Integer id, String status);
 
