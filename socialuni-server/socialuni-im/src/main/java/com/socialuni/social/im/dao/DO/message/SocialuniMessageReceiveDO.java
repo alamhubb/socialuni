@@ -48,7 +48,7 @@ public class SocialuniMessageReceiveDO extends SocialuniUserContactBaseDO implem
         super(sendUserId, chatUserDO.getUserId());
         this.chatUserId = chatUserDO.getId();
         this.messageId = messageId;
-        this.isMine = chatUserDO.getBeUserId().equals(chatUserDO.getUserId());
+        this.isMine = sendUserId.equals(chatUserDO.getUserId());
         //接受消息的人看的,自己的默认已读
         this.isRead = this.isMine;
     }

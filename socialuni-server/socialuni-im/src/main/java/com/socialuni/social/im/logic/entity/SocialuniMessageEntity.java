@@ -2,6 +2,7 @@ package com.socialuni.social.im.logic.entity;
 
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.common.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
@@ -16,9 +17,7 @@ import com.socialuni.social.im.dao.DO.SocialuniFriendApplyRecordDO;
 import com.socialuni.social.im.dao.DO.SocialuniUserChatConfigDO;
 import com.socialuni.social.im.dao.DO.message.SocialuniMessageDO;
 import com.socialuni.social.im.dao.DO.message.SocialuniMessageReceiveDO;
-import com.socialuni.social.im.enumeration.MessageType;
-import com.socialuni.social.im.enumeration.NotifyType;
-import com.socialuni.social.im.enumeration.SocialuniAddFriendStatus;
+import com.socialuni.social.im.enumeration.*;
 import com.socialuni.social.im.logic.domain.NotifyDomain;
 import com.socialuni.social.im.logic.foctory.SocialMessageROFactory;
 import com.socialuni.social.im.logic.foctory.SocialuniChatUserDOFactory;
@@ -141,6 +140,37 @@ public class SocialuniMessageEntity {
         return SocialMessageROFactory.getMessageRO(mineMessageUser);
     }
 
+    public SocialMessageRO sendGroupMessage(Integer chatId, String message) {
+        SocialuniChatDO chat = SocialuniRepositoryFacade.findByUnionId(chatId, SocialuniChatDO.class);
+
+        if (chat == null) {
+            throw new SocialParamsException("不存在的群聊");
+        }
+
+        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
+
+        SocialuniChatUserDO chatUserDO = chatUserRepository.findFirstByChatIdAndUserIdAndStatus(chatId, mineUser.getUserId(), ChatUserStatus.enable);
+
+        if (chatUserDO == null) {
+            throw new SocialParamsException("未加入群聊");
+        }
+
+        List<SocialuniChatUserDO> chatUserDOS = chatUserRepository.findByChatIdAndStatus(chatId, ChatUserStatus.enable);
+
+
+
+        SocialuniMessageReceiveDO mineMessageUser = sendMsgNotifyList(message, mineUser, chatUserDOS, MessageType.simple);
+
+
+        //默认所有群都要加入群了，才可以发送消息
+
+        //确认是否存在chatUser且状态。
+
+        //
+        //只需要返回自己的
+        return SocialMessageROFactory.getMessageRO(mineMessageUser);
+    }
+
     public SocialuniMessageReceiveDO sendMsgNotifyList(String msgContent, SocialuniUserDo sendUser, List<SocialuniChatUserDO> chatSocialuniUserDoS, String msgType) {
         List<NotifyDO> notifies = new ArrayList<>();
         //有权限，则给chat中的所有用户发送内容
@@ -148,7 +178,7 @@ public class SocialuniMessageEntity {
         SocialuniMessageReceiveDO mineMessageUser = null;
 
 
-        SocialuniChatDO chat = SocialuniRepositoryFacade.findById(chatSocialuniUserDoS.get(0).getChatId(), SocialuniChatDO.class);
+        SocialuniChatDO chat = SocialuniRepositoryFacade.findByUnionId(chatSocialuniUserDoS.get(0).getChatId(), SocialuniChatDO.class);
         //构建消息
         SocialuniMessageDO message = messageRepository.save(SocialuniMessageDOFactory.createMessage(chat.getUnionId(), msgContent, sendUser.getUserId(), msgType));
 
@@ -162,6 +192,7 @@ public class SocialuniMessageEntity {
         for (SocialuniChatUserDO chatSocialuniUserDo : chatSocialuniUserDoS) {
 //                chatSocialuniUserDo.setLastContent(message.getContent());
             chatSocialuniUserDo.setUpdateTime(curDate);
+            chatSocialuniUserDo.setLastContent(message.getContent());
             //如果为匹配chat，且为待匹配状态
                 /*if (ChatType.match.equals(chat.getType()) && CommonStatus.waitMatch.equals(chat.getMatchStatus())) {
                     //则将用户的chat改为匹配成功
@@ -169,7 +200,7 @@ public class SocialuniMessageEntity {
                 }*/
             //获取当起chatUser的userId
             Integer chatUserId = chatSocialuniUserDo.getUserId();
-            SocialuniMessageReceiveDO messageReceiveDO = new SocialuniMessageReceiveDO(chatSocialuniUserDo, message.getUserId(), message.getId());
+            SocialuniMessageReceiveDO messageReceiveDO = new SocialuniMessageReceiveDO(chatSocialuniUserDo, message.getUserId(), message.getUnionId());
 
             if (!chatUserId.equals(sendUser.getUserId())) {
                 //别人的chatUser，要增加未读，自己刚发的消息，别人肯定还没看

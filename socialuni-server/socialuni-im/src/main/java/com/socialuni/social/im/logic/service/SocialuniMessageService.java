@@ -56,36 +56,27 @@ public class SocialuniMessageService {
 
         SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidNotNull(receiveIdUid);
 
-        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
-
         //创建 chatUser 的逻辑，点击进入页面，会话页加一条
         //发送消息，还有添加好友成功
 
+        Integer unionId = socialuniUnionIdModler.getId();
         //私聊
         if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.user)) {
             //为私聊相关校验
             //后端区分这个值是群聊还是私聊。
-            Integer beUserId = socialuniUnionIdModler.getId();
 
-            SocialMessageRO socialMessageRO = messageEntity.sendSingleMsg(beUserId, msgAddVO.getContent());
+            SocialMessageRO socialMessageRO = messageEntity.sendSingleMsg(unionId, msgAddVO.getContent());
 
             return ResultRO.success(socialMessageRO);
 
         } else if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.chat)) {
-
-            SocialuniChatDO chat = SocialuniRepositoryFacade.findByUnionId(socialuniUnionIdModler.getId(), SocialuniChatDO.class);
-
-            //构建消息
-            SocialuniMessageDO message = messageRepository.save(SocialuniMessageDOFactory.createMessage(chat.getUnionId(), msgContent, mineUser.getUserId()));
-
-            Date curDate = new Date();
-            chat.setUpdateTime(curDate);
-//            chat.setLastContent(content);
-            chatRepository.save(chat);
-
             //群聊
-            SocialMessageRO messageVO = SocialMessageROFactory.getMessageRO(message, mineUser.getUserId());
-            return ResultRO.success(messageVO);
+
+
+            SocialMessageRO socialMessageRO = messageEntity.sendGroupMessage(unionId, msgAddVO.getContent());
+
+            return ResultRO.success(socialMessageRO);
+
         } else {
             throw new SocialParamsException("错误的会话标识");
         }

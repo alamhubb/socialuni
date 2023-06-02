@@ -69,7 +69,7 @@ public class SocialMessageROFactory {
 
     public static SocialMessageRO getMessageRO(SocialuniMessageReceiveDO messageReceive) {
 
-        SocialuniMessageDO messageDO = SocialuniRepositoryFacade.findById(messageReceive.getMessageId(), SocialuniMessageDO.class);
+        SocialuniMessageDO messageDO = SocialuniRepositoryFacade.findByUnionId(messageReceive.getMessageId(), SocialuniMessageDO.class);
 
         SocialMessageRO messageRO = SocialMessageROFactory.getMessageRO(messageDO, messageReceive.getBeUserId());
         //涉及到举报，不知道是msgid还是msguserid，所以暂时取消，统一使用msgid，删除和举报

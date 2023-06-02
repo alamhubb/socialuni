@@ -37,8 +37,8 @@ public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {
     //2.如果为代开起，付费，则需要点击开启，或者发送时提示是否要给对方发送并开启会话
     //3. 如果为被关闭，则不显示，发送消息报错
     private Integer unreadNum;
-    //仅前台展示字段,前台自己判断生成
-//    private String lastContent;
+    //仅前台展示字段,前台自己判断生成, 需要此字段，进入页面才查询消息列表
+    private String lastContent;
     //是否为陌生人
 //    private Boolean friendUser;
     //是否在前台显示

@@ -21,7 +21,7 @@ public class ChatType {
     public static final String single = "私聊";
     public static final String match = "匹配";
     //群聊
-    public static final String group = "群聊";
+//    public static final String group = "群聊";
     //群聊
     public static final String system_group = "官方群聊";
     //启用,暂时只用了system_group等同于 system_group

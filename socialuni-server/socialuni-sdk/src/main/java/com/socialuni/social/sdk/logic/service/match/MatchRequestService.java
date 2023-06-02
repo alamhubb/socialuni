@@ -65,7 +65,7 @@ public class MatchRequestService {
         for (SocialuniChatUserDO chatUserDO : chatUserDOS) {
 //            chatUserDO.setLastContent(message.getContent());
             chatUserDO.setUpdateTime(new Date());
-            SocialuniMessageReceiveDO messageReceiveDO = new SocialuniMessageReceiveDO(chatUserDO, message.getUserId(), message.getId());
+            SocialuniMessageReceiveDO messageReceiveDO = new SocialuniMessageReceiveDO(chatUserDO, message.getUserId(), message.getUnionId());
             messageReceiveDOS.add(messageReceiveDO);
         }
         messageReceiveDORepository.saveAll(messageReceiveDOS);
