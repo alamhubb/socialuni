@@ -50,7 +50,7 @@ public class SocialMessageROFactory {
     }
 
     //websocket推新消息时设置为未读
-    public SocialMessageRO getMessageRO(SocialuniMessageDO messageDO, boolean readFlag, SocialuniUserDo user) {
+    public static SocialMessageRO getMessageRO(SocialuniMessageDO messageDO, SocialuniUserDo user, boolean readFlag) {
         SocialMessageRO socialMessageRO = SocialMessageROFactory.getMessageRO(messageDO, user.getUnionId());
         socialMessageRO.setIsRead(false);
         return socialMessageRO;

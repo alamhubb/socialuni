@@ -10,6 +10,7 @@ import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.common.sdk.dao.repository.NotifyRepository;
 import com.socialuni.social.im.api.model.RO.SocialMessageRO;
+import com.socialuni.social.im.config.websocket.WebsocketServer;
 import com.socialuni.social.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.im.dao.repository.*;
 import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
@@ -19,10 +20,12 @@ import com.socialuni.social.im.dao.DO.message.SocialuniMessageDO;
 import com.socialuni.social.im.dao.DO.message.SocialuniMessageReceiveDO;
 import com.socialuni.social.im.enumeration.*;
 import com.socialuni.social.im.logic.domain.NotifyDomain;
+import com.socialuni.social.im.logic.foctory.SocaluniNotifyROFactory;
 import com.socialuni.social.im.logic.foctory.SocialMessageROFactory;
 import com.socialuni.social.im.logic.foctory.SocialuniChatUserDOFactory;
 import com.socialuni.social.im.logic.foctory.SocialuniMessageDOFactory;
 import com.socialuni.social.im.logic.manage.SocialuniUserChatConfigManage;
+import com.socialuni.social.im.model.message.notify.NotifyVO;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserFollowDO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Service;
@@ -140,27 +143,76 @@ public class SocialuniMessageEntity {
         return SocialMessageROFactory.getMessageRO(mineMessageUser);
     }
 
-    public SocialMessageRO sendGroupMessage(Integer chatId, String message) {
+    public SocialMessageRO sendGroupMessage(Integer chatId, String msgContent) {
         SocialuniChatDO chat = SocialuniRepositoryFacade.findByUnionId(chatId, SocialuniChatDO.class);
 
         if (chat == null) {
             throw new SocialParamsException("不存在的群聊");
         }
 
-        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
+        SocialuniUserDo sendUser = SocialuniUserUtil.getMineUserNotNull();
 
-        SocialuniChatUserDO chatUserDO = chatUserRepository.findFirstByChatIdAndUserIdAndStatus(chatId, mineUser.getUserId(), ChatUserStatus.enable);
+        SocialuniChatUserDO chatUserDO = chatUserRepository.findFirstByChatIdAndUserIdAndStatus(chatId, sendUser.getUserId(), ChatUserStatus.enable);
 
         if (chatUserDO == null) {
             throw new SocialParamsException("未加入群聊");
         }
 
-        List<SocialuniChatUserDO> chatUserDOS = chatUserRepository.findByChatIdAndStatus(chatId, ChatUserStatus.enable);
+        List<SocialuniChatUserDO> chatSocialuniUserDoS = chatUserRepository.findByChatIdAndStatus(chatId, ChatUserStatus.enable);
 
 
+        //有权限，则给chat中的所有用户发送内容
 
-        SocialuniMessageReceiveDO mineMessageUser = sendMsgNotifyList(message, mineUser, chatUserDOS, MessageType.simple);
+        SocialuniMessageReceiveDO mineMessageUser = null;
 
+
+        //构建消息
+        SocialuniMessageDO message = messageRepository.save(SocialuniMessageDOFactory.createMessage(chat.getUnionId(), msgContent, sendUser.getUserId(), MessageType.simple));
+
+        Date curDate = new Date();
+        chat.setUpdateTime(curDate);
+//            chat.setLastContent(content);
+        chatRepository.save(chat);
+
+
+        //发送消息
+        for (SocialuniChatUserDO chatSocialuniUserDo : chatSocialuniUserDoS) {
+//                chatSocialuniUserDo.setLastContent(message.getContent());
+            chatSocialuniUserDo.setUpdateTime(curDate);
+            chatSocialuniUserDo.setLastContent(message.getContent());
+            //如果为匹配chat，且为待匹配状态
+                /*if (ChatType.match.equals(chat.getType()) && CommonStatus.waitMatch.equals(chat.getMatchStatus())) {
+                    //则将用户的chat改为匹配成功
+                    chatSocialuniUserDo.setStatus(ChatUserStatus.enable);
+                }*/
+            //获取当起chatUser的userId
+            Integer chatUserId = chatSocialuniUserDo.getUserId();
+//            SocialuniMessageReceiveDO messageReceiveDO = new SocialuniMessageReceiveDO(chatSocialuniUserDo, message.getUserId(), message.getUnionId());
+
+            if (!chatUserId.equals(sendUser.getUserId())) {
+                //别人的chatUser，要增加未读，自己刚发的消息，别人肯定还没看
+                chatSocialuniUserDo.setUnreadNum(chatSocialuniUserDo.getUnreadNum() + 1);
+                //接收方，更改前端显示为显示
+                chatSocialuniUserDo.checkFrontShowAndSetTrue();
+//                messageReceiveDO = messageReceiveRepository.save(messageReceiveDO);
+//                NotifyDO notifyDO = new NotifyDO(messageReceiveDO);
+//                notifyDO.setType(NotifyType.message);
+//                notifyDO.setContentId(messageReceiveDO.getId());
+//                notifyDO = notifyRepository.save(notifyDO);
+//                notifies.add(notifyDO);
+            } else {
+                //自己的话不发送通知，自己的话也要构建消息，要不看不见，因为读是读这个表
+//                mineMessageUser = messageReceiveRepository.save(messageReceiveDO);
+            }
+        }
+        chatUserRepository.saveAll(chatSocialuniUserDoS);
+        //保存message
+
+//                Optional<ChatDO> chatDOOptional = chatRepository.findById();
+        //如果群聊，直接发送给两个服务器在线的所有用户，并且查找他们未读的。
+        //未登录的时候也查询群聊里面的所有内容
+        NotifyVO notifyVO = SocaluniNotifyROFactory.getNotifyROBySendMsg(NotifyType.message, sendUser, message, chat);
+        WebsocketServer.sendMessageToAllUsers(notifyVO);
 
         //默认所有群都要加入群了，才可以发送消息
 
@@ -168,7 +220,7 @@ public class SocialuniMessageEntity {
 
         //
         //只需要返回自己的
-        return SocialMessageROFactory.getMessageRO(mineMessageUser);
+        return SocialMessageROFactory.getMessageRO(message, sendUser, true);
     }
 
     public SocialuniMessageReceiveDO sendMsgNotifyList(String msgContent, SocialuniUserDo sendUser, List<SocialuniChatUserDO> chatSocialuniUserDoS, String msgType) {
