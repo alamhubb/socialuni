@@ -133,6 +133,12 @@
       }
     ]
   },
+  "leftWindow": {
+    "path": "windows/leftWindow.vue",
+    "style": {
+      "width": "300px"
+    }
+  },
   "globalStyle": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "社区",

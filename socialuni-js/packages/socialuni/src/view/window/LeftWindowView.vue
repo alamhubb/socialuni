@@ -1,17 +1,37 @@
 <template>
   <div class="h100p bg-white px">
-    <div v-for="menu in menus" class="use-click px-sm hover-theme_light q-box bd-round">
-      {{menu}}
+    <div class="use-click px-sm hover-theme_light q-box bd-round">
+      首页
+    </div>
+    <div class="use-click px-sm hover-theme_light q-box bd-round" @click="toChatView">
+      聊天室
+    </div>
+    <div class="use-click px-sm hover-theme_light q-box bd-round">
+      晒自拍
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
+import PageUtil from 'socialuni-util/src/util/PageUtil'
+import ImPageUtil from 'socialuni-im/src/util/ImPageUtil'
+import RouterUtil from 'socialuni-util/src/util/RouterUtil'
+import ImPagePath from 'socialuni-im/src/constant/ImPagePath'
 
 @Options({})
 export default class LeftWindowView extends Vue {
 
   menus = ['首页','聊天室','晒自拍']
+
+
+  toChatView(){
+    RouterUtil.switchTab(ImPagePath.chatView)
+  }
+
+  created(){
+    console.log(5767868)
+  }
+
 }
 </script>
