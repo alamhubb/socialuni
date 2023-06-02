@@ -16,8 +16,8 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "s_im_chat_user", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"userId", "chatId"}),
-        @UniqueConstraint(columnNames = {"userId", "beUserId"})
+        @UniqueConstraint(columnNames = {"chatId", "userId"}),
+        @UniqueConstraint(columnNames = {"type", "userId", "beUserId"})
 })
 public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {
 
@@ -90,6 +90,8 @@ public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {
 //        this.userId = userId;
         String chatType = chat.getType();
         this.setUserId(userId);
+        this.setType(chat.getType());
+        this.chatId = chat.getUnionId();
         if (chatType.equals(ChatType.single)) {
             //私聊聊，直接是开启，创建时 只能为待开启和 不在前台显示
             this.frontShow = false;
@@ -106,11 +108,8 @@ public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {
     }
 
     public SocialuniChatUserDO(SocialuniChatDO chat, Integer userId, Integer beUserId) {
-        this();
-        this.chatId = chat.getId();
-        this.setUserId(userId);
+        this(chat, userId);
         this.setBeUserId(beUserId);
-        this.setType(chat.getType());
     }
 
     public void checkFrontShowAndSetTrue() {

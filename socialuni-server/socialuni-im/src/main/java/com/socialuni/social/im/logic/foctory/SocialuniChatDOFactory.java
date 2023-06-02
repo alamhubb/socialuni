@@ -26,7 +26,7 @@ public class SocialuniChatDOFactory {
         chatDO.setUnionId(uid);
         chatDO.setChatName(chatName);
         chatDO.setContentType(SocialuniContentType.chat);
-        chatDO.setType(ChatType.group);
+        chatDO.setType(ChatType.system_group);
         chatDO = SocialuniRepositoryFacade.save(chatDO);
         return chatDO;
     }

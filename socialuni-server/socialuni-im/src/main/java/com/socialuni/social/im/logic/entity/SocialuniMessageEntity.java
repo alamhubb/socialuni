@@ -150,7 +150,7 @@ public class SocialuniMessageEntity {
 
         SocialuniChatDO chat = SocialuniRepositoryFacade.findById(chatSocialuniUserDoS.get(0).getChatId(), SocialuniChatDO.class);
         //构建消息
-        SocialuniMessageDO message = messageRepository.save(SocialuniMessageDOFactory.createMessage(chat.getId(), msgContent, sendUser.getUserId(), msgType));
+        SocialuniMessageDO message = messageRepository.save(SocialuniMessageDOFactory.createMessage(chat.getUnionId(), msgContent, sendUser.getUserId(), msgType));
 
         Date curDate = new Date();
         chat.setUpdateTime(curDate);

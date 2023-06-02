@@ -73,10 +73,10 @@ public class SocialuniMessageService {
 
         } else if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.chat)) {
 
-            SocialuniChatDO chat = SocialuniRepositoryFacade.findById(socialuniUnionIdModler.getId(), SocialuniChatDO.class);
+            SocialuniChatDO chat = SocialuniRepositoryFacade.findByUnionId(socialuniUnionIdModler.getId(), SocialuniChatDO.class);
 
             //构建消息
-            SocialuniMessageDO message = messageRepository.save(SocialuniMessageDOFactory.createMessage(chat.getId(), msgContent, mineUser.getUserId()));
+            SocialuniMessageDO message = messageRepository.save(SocialuniMessageDOFactory.createMessage(chat.getUnionId(), msgContent, mineUser.getUserId()));
 
             Date curDate = new Date();
             chat.setUpdateTime(curDate);

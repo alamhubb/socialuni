@@ -1,6 +1,7 @@
 package com.socialuni.social.common.sdk.dao.facede;
 
 import cn.hutool.extra.spring.SpringUtil;
+import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniCommonRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Example;
@@ -22,6 +23,10 @@ public abstract class SocialuniRepositoryFacade {
 
     public static <T> T findById(Integer id, Class<T> tClass) {
         return getRepository().findById(id, tClass);
+    }
+
+    public static <T extends SocialuniUnionContentBaseDO> T findByUnionId(Integer id, Class<T> tClass) {
+        return getRepository().findByUnionId(id, tClass);
     }
 
     /**

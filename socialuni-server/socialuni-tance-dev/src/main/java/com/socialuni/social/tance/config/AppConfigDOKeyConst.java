@@ -71,6 +71,7 @@ public class AppConfigDOKeyConst {
             homeTabName,
             cityTabName,
             tabNames,
+            defaultChatGroups,
             disableUnderageContent,
             disableContentHasQrCode,
             disableContentHasContactInfo,

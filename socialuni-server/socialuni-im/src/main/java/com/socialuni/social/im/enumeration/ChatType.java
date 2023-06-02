@@ -26,6 +26,6 @@ public class ChatType {
     public static final String system_group = "官方群聊";
     //启用,暂时只用了system_group等同于 system_group
     public static final List<String> systemChats = Arrays.asList(system, system_group);
-    public static final List<String> groupChats = Arrays.asList(group, system_group);
+//    public static final List<String> groupChats = Arrays.asList(group, system_group);
 }
 
