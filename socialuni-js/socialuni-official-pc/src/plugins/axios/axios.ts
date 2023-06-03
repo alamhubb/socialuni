@@ -1,5 +1,5 @@
 import axios, {AxiosRequestConfig} from 'axios'
-import uniAxiosAdapter from "./uniAxiosAdapter";
+import uniAxiosAdapter from "../../modules/socialuni-api-base/src/uniAxiosAdapter";
 
 const axiosCreate = axios.create
 
