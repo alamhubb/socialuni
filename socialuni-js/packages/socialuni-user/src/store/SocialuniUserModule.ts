@@ -86,6 +86,7 @@ class SocialuniUserModule {
 
     setUser(user: SocialuniMineUserRO) {
         this.userInfo = user
+        console.log(this.userInfo)
         SocialuniUserStorageUtil.set(user)
     }
 

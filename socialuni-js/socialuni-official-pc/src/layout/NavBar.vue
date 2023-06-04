@@ -26,11 +26,9 @@
                 </div>
             </div>
             <div class="row-col-center">
-                <el-avatar class="use-click" @click="toLogin" v-if="!mineUser">登录</el-avatar>
+                <el-avatar v-if="!mineUser" class="use-click" @click="toLogin">登录</el-avatar>
                 <div v-else>
-                    <el-tag class="mr-10" type="warning" effect="dark">{{
-                        mineUser.phoneNum
-                        }}
+                    <el-tag class="mr-10" type="warning" effect="dark">{{ mineUser.nickname }}
                     </el-tag>
                     <el-dropdown>
                         <el-avatar shape="square"
