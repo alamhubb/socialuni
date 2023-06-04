@@ -1,5 +1,5 @@
 import {reactive, UnwrapNestedRefs} from "vue";
-import {SocialuniPlugin} from "../plugin/SocialuniPlugin";
+import {SocialuniPlugin} from "socialuni/src/SocialuniPlugin";
 
 class SocialuniPluginsModule {
     private socialuniPlugins: SocialuniPlugin[] = []

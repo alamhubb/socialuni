@@ -19,7 +19,9 @@ const SocialuniAxiosCreate = (config?: AxiosRequestConfig) => {
     socialuniAxios.interceptors.request.use(
         config => {
             for (const socialuniPlugin of socialuniPluginsModule.plugins) {
-                socialuniPlugin.onRequestInterceptors(config)
+                if (socialuniPlugin.onRequestInterceptors) {
+                    socialuniPlugin.onRequestInterceptors(config)
+                }
             }
             return config
         }
@@ -41,9 +43,9 @@ const SocialuniAxiosCreate = (config?: AxiosRequestConfig) => {
             return response.data
         },
         error => {
-            for (const plugin of socialuniPluginsModule.plugins) {
-                if (plugin.onRequestInterceptors().response) {
-
+            for (const socialuniPlugin of socialuniPluginsModule.plugins) {
+                if (socialuniPlugin.onRequestInterceptors) {
+                    socialuniPlugin.onRequestInterceptors(error)
                 }
             }
         }
