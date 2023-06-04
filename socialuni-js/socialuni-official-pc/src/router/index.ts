@@ -1,8 +1,20 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import Layout from "@/layout/Layout.vue";
+import ChatView from '@/views/ChatView.vue'
 
 export const menuRoutes = [
+  {
+    path: '/',
+    name: 'chat',
+    component: ChatView,
+    meta: {title: '首页', hidden: true},
+  },
+  {
+    path: '/login',
+    component: () => import('@/views/login/login.vue'),
+    hidden: true
+  },
   {
     path: '',
     name: 'home',
@@ -18,11 +30,6 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/',
     children: menuRoutes
-  },
-  {
-    path: '/login',
-    component: () => import('@/views/login/login.vue'),
-    hidden: true
   },
   {
     path: '/404',
