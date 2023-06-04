@@ -94,7 +94,7 @@ import ToastUtil from "socialuni-util/src/util/ToastUtil";
 import FriendAddQO from "socialuni-im-api/src/model/QO/firend/FriendAddQO";
 import SocialuniAddFriendStatus from "socialuni-im-api/src/constant/SocialuniAddFriendStatus";
 import PageUtil from "socialuni-util/src/util/PageUtil";
-import OpenImFriendApplyRO from "socialuni/src/model/openIm/OpenImFriendApplyRO";
+import OpenImFriendApplyRO from "socialuni-api-base/src/model/openIm/OpenImFriendApplyRO";
 import {socialChatModule} from "../../store/SocialChatModule";
 import QTabs from "socialuni-ui/src/components/QTabs/QTabs.vue";
 import SocialuniAddFriendType from "socialuni-im-api/src/constant/SocialuniAddFriendType";

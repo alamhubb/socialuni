@@ -97,7 +97,7 @@ import QIcon from 'socialuni-ui/src/components/QIcon/QIcon.vue'
 import QNavbar from 'socialuni-ui/src/components/QNavbar/QNavbar.vue'
 import QSearch from 'socialuni-ui/src/components/QSearch/QSearch.vue'
 import QSidebar from 'socialuni-ui/src/components/QSidebar/QSidebar.vue'
-import TagVO from "socialuni/src/model/community/tag/TagVO";
+import TagVO from "socialuni-api-base/src/model/community/tag/TagVO";
 import TagUtil from "socialuni-util/src/util/TagUtil";
 
 

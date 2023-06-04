@@ -1,21 +1,21 @@
-import socialuniAppRequest from "socialuni/src/request/socialuniAppRequest";
-import UniProviderLoginQO from "socialuni/src/model/login/UniProviderLoginQO";
-import SocialLoginRO from "socialuni/src/model/social/SocialLoginRO";
-import SocialuniMineUserRO from "socialuni/src/model/user/SocialuniMineUserRO";
-import SocialPhoneNumLoginQO from "socialuni/src/model/phone/SocialPhoneNumLoginQO";
+import socialuniUserRequest from "../request/socialuniUserRequest";
+import UniProviderLoginQO from "socialuni-api-base/src/model/login/UniProviderLoginQO";
+import SocialLoginRO from "socialuni-api-base/src/model/social/SocialLoginRO";
+import SocialuniMineUserRO from "socialuni-api-base/src/model/user/SocialuniMineUserRO";
+import SocialPhoneNumLoginQO from "socialuni-api-base/src/model/phone/SocialPhoneNumLoginQO";
 
 export default class LoginAPI {
   static providerLoginAPI () {
-    return socialuniAppRequest.post('socialuni/login/providerLogin')
+    return socialuniUserRequest.post('socialuni/login/providerLogin')
   }
 
   static socialuniPhoneLoginAPI (loginData: UniProviderLoginQO) {
     //接口已作废
-    return socialuniAppRequest.post<SocialLoginRO<SocialuniMineUserRO>>('socialuni/login/socialuniPhoneLogin', loginData)
+    return socialuniUserRequest.post<SocialLoginRO<SocialuniMineUserRO>>('socialuni/login/socialuniPhoneLogin', loginData)
   }
 
   static phoneLoginAPI (loginData: SocialPhoneNumLoginQO) {
-    return socialuniAppRequest.post<SocialLoginRO<SocialuniMineUserRO>>('socialuni/login/phoneLogin', loginData)
+    return socialuniUserRequest.post<SocialLoginRO<SocialuniMineUserRO>>('socialuni/login/phoneLogin', loginData)
   }
 
   /**
@@ -23,6 +23,6 @@ export default class LoginAPI {
    * @param loginData
    */
   static refreshToken () {
-    return socialuniAppRequest.post<SocialLoginRO<SocialuniMineUserRO>>('socialuni/login/refreshToken', {});
+    return socialuniUserRequest.post<SocialLoginRO<SocialuniMineUserRO>>('socialuni/login/refreshToken', {});
   }
 }

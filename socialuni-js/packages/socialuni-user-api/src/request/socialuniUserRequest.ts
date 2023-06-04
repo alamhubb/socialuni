@@ -1,17 +1,8 @@
-console.log(8888)
+import SocialuniAxiosCreate from "socialuni-api-base/src/SocialuniAxios";
+import SocialuniAPIConfig from "socialuni-api-base/src/SocialuniAPIConfig";
 
-import SocialuniHttpRequest from "socialuni/src/request/SocialuniHttpRequest";
-import SocialuniConfig from "socialuni/src/config/SocialuniConfig";
-
-
-console.log(54444)
-
-const socialuniUserRequest: SocialuniHttpRequest = new SocialuniHttpRequest()
-
-/* 设置全局配置 */
-socialuniUserRequest.setConfig(config => {
-    config.baseUrl = SocialuniConfig.socialuniUserUrl + '/'
-    return config
+const socialuniUserRequest = SocialuniAxiosCreate({
+    baseURL: SocialuniAPIConfig.socialuniUserUrl
 })
 
 export default socialuniUserRequest

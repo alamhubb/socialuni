@@ -41,7 +41,7 @@
 import {Options, Emit, Model, Vue, Prop} from 'vue-property-decorator'
 import QPopup from "socialuni-ui/src/components/QPopup/QPopup.vue";
 import QPicker from "socialuni-ui/src/components/QPicker/QPicker.vue";
-import DistrictVO from "socialuni/src/model/DistrictVO";
+import DistrictVO from "socialuni-api-base/src/model/DistrictVO";
 import AlertUtil from "socialuni-util/src/util/AlertUtil";
 import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
 import {socialLocationModule} from "socialuni-community/src/store/SocialLocationModule";

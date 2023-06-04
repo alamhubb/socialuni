@@ -1,0 +1,17 @@
+{
+  "name": "socialuni-base",
+  "version": "0.1.2",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "typescript": "^4.7.4",
+    "vue": "^3.2.41"
+  },
+  "author": "",
+  "license": "ISC",
+  "gitHead": "8b17f4a250aa54f47a17a2639efe2b511fd59358"
+}

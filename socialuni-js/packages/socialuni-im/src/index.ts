@@ -1,5 +1,5 @@
 import {SocialuniPlugin} from 'socialuni/src/interface/SocialuniPlugin'
-import NotifyVO from "socialuni/src/model/NotifyVO";
+import NotifyVO from "socialuni-api-base/src/model/NotifyVO";
 import NotifyType from "socialuni-constant/constant/NotifyType";
 import {socialChatModule} from "./store/SocialChatModule";
 

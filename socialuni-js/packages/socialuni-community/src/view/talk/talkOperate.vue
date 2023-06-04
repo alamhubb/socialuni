@@ -58,7 +58,7 @@ import AlertUtil from "socialuni-util/src/util/AlertUtil";
 import PlatformUtils from "socialuni/src/utils/PlatformUtils";
 import UniUtil from "socialuni-util/src/util/UniUtil";
 import MsgUtil from "socialuni-util/src/util/MsgUtil";
-import ReportAddVO from "socialuni/src/model/report/ReportAddVO";
+import ReportAddVO from "socialuni-api-base/src/model/report/ReportAddVO";
 import {socialTalkModule} from "../../store/SocialTalkModule";
 
 

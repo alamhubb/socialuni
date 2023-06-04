@@ -80,14 +80,14 @@ import {Options, Prop, Vue, Watch} from 'vue-property-decorator'
 import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
 import QButton from "socialuni-ui/src/components/QButton/QButton.vue";
 import {socialuniUserModule} from 'socialuni/src/store/SocialuniUserModule';
-import TalkVO from "socialuni/src/model/talk/TalkVO";
+import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
 import ObjectUtil from "socialuni-util/src/util/ObjectUtil";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import MsgUtil from "socialuni-util/src/util/MsgUtil";
 import UniUtil from "socialuni-util/src/util/UniUtil";
-import CommentVO from "socialuni/src/model/comment/CommentVO";
+import CommentVO from "socialuni-api-base/src/model/comment/CommentVO";
 import ToastUtil from "socialuni-util/src/util/ToastUtil";
-import HugAddVO from "socialuni/src/model/HugAddVO";
+import HugAddVO from "socialuni-api-base/src/model/HugAddVO";
 import RouterUtil from "socialuni-util/src/util/RouterUtil";
 import PagePath from "socialuni-constant/constant/PagePath";
 import PageUtil from "socialuni-util/src/util/PageUtil";

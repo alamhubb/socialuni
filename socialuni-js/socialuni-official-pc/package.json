@@ -10,7 +10,10 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.1.0",
+    "axios": "^1.4.0",
     "element-plus": "^2.3.6",
+    "socialuni-user-api": "../packages/socialuni-user-api",
     "vue": "^3.3.2",
     "vue-class-component": "^8.0.0-rc.1",
     "vue-property-decorator": "^10.0.0-rc.3",
