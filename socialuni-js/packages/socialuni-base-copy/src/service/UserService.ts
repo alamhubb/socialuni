@@ -28,6 +28,7 @@ export default class UserService {
         //登录之后重连websocket
         // WebsocketUtil.websocketClose()
         UserService.getAppLunchDataByHasUser()
+        WebsocketUtil.websocketConnect(false)
         // socialChatModule.getChatsAction()
         // appModule.getImgPathAction()
         return loginRO.user

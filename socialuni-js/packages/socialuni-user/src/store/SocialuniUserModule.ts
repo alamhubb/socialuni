@@ -66,10 +66,8 @@ class SocialuniUserModule {
     }
 
     setUserAndToken(loginRO: SocialLoginRO<SocialuniMineUserRO>) {
-            console.log(loginRO)
         if (loginRO) {
             this.setUser(loginRO.user)
-            console.log(loginRO.token)
             socialuniTokenModule.setToken(loginRO.token)
         } else {
             socialuniTokenModule.setToken(null)
