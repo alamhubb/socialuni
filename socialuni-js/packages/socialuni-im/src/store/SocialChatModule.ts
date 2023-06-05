@@ -148,7 +148,7 @@ class SocialChatModule {
             // 找到需要添加内容的chat
         }
         //计算未读数量
-        this.computedChatsUnreadNumTotalAction()
+        // this.computedChatsUnreadNumTotalAction()
     }
 
     //替换chat消息，如果不存在则添加
@@ -757,13 +757,7 @@ class SocialChatModule {
     //获取chats
 
     async getChatsAction() {
-        console.log(socialuniPluginsModule.plugins)
-        for (const plugin of socialuniPluginsModule.plugins) {
-            console.log(plugin.name)
-        }
-        console.log(socialuniPluginsModule.plugins.length)
         const res = await ChatAPI.queryChatListAPI()
-        console.log(res)
         this.setChats(res.data)
     }
 

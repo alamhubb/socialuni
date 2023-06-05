@@ -36,11 +36,17 @@
 <script lang="ts">
 import {Options, Vue} from "vue-property-decorator";
 import SocialuniChatViewLogic from "@/views/chat/SocialuniChatViewLogic";
+import {getCurrentInstance, getCurrentScope} from "vue";
 
 @Options({})
 export default class ChatView extends Vue {
-
     logic = new SocialuniChatViewLogic()
 
+    created() {
+        console.log(getCurrentScope())
+        console.log(123123)
+        console.log(getCurrentInstance())
+        this.logic.created()
+    }
 }
 </script>

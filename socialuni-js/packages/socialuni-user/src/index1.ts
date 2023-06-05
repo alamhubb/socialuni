@@ -15,7 +15,6 @@ const socialuniUserPlugin: SocialuniPlugin = {
     },
     onRequestInterceptors(config: InternalAxiosRequestConfig) {
         const token = SocialuniTokenUtil.get()
-        console.log(token)
         if (token) {
             config.headers.token = token
         } else {

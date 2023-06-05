@@ -38,8 +38,8 @@ export default class WebsocketUtil {
         const config = {} as any
 
         for (const socialuniPlugin of socialuniPluginsModule.plugins) {
-            if (socialuniPlugin.onRequestInterceptors) {
-                socialuniPlugin.onRequestInterceptors(config)
+            if (socialuniPlugin.onWebsocketInterceptors) {
+                socialuniPlugin.onWebsocketInterceptors(config)
             }
         }
 
@@ -52,7 +52,9 @@ export default class WebsocketUtil {
 
         this.ws = new WebSocket(websocketUrl)
 
-        this.ws.onopen(() => {
+        console.log(this.ws)
+
+        this.ws.onopen = (() => {
             this.locking = false
             console.log('打开')
             if (reload || WebsocketUtil.timer) {
@@ -67,20 +69,21 @@ export default class WebsocketUtil {
             }, 30000)
         })
 
-        this.ws.onerror(() => {
+        this.ws.onerror = (() => {
             console.log('触发了错误')
             // #ifndef MP
             this.reConnect()
             // #endif
         })
 
-        this.ws.onclose((e) => {
+        this.ws.onclose = ((e) => {
             console.log('触发了关闭:' + e)
             this.reConnect()
         })
 
-        this.ws.onmessage(() => {
+        this.ws.onmessage = ((res: MessageEvent) => {
             const notify: NotifyVO = JsonUtil.toParse(res.data)
+            console.log(notify)
             for (const plugin of socialuniPluginsModule.plugins) {
                 plugin.onMessage?.(notify)
             }

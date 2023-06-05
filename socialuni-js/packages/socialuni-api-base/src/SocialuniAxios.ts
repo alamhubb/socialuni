@@ -14,13 +14,8 @@ const SocialuniAxiosCreate = (config?: AxiosRequestConfig) => {
     config.timeout = 120000
     const socialuniAxios = axios.create(config)
 
-    console.log(socialuniPluginsModule)
-    console.log(socialuniPluginsModule.plugins)
-    console.log(socialuniPluginsModule.plugins.length)
     socialuniAxios.interceptors.request.use(
         config => {
-            console.log(socialuniPluginsModule)
-            console.log(socialuniPluginsModule.plugins.length)
             for (const socialuniPlugin of socialuniPluginsModule.plugins) {
                 if (socialuniPlugin.onRequestInterceptors) {
                     socialuniPlugin.onRequestInterceptors(config)

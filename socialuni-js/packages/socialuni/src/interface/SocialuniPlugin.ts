@@ -17,6 +17,8 @@ export interface SocialuniPlugin {
 
     onResponseErrorInterceptors?(error: AxiosResponse)
 
+    onWebsocketInterceptors?(config: any)
+
 }
 
 

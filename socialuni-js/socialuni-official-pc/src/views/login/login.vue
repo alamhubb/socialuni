@@ -93,12 +93,12 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import SocialPhoneNumLoginQO from "socialuni-user-api/src/model/phone/SocialPhoneNumLoginQO";
 import ElInput from "element-plus/es/components/input";
 import NumberUtil from "socialuni-util/src/util/NumberUtil";
 import ToastUtil from "socialuni-util/src/util/ToastUtil";
 import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
 import SocialuniLoginService from "@/logic/service/SocialuniLoginService";
+import SocialPhoneNumLoginQO from "socialuni-api-base/src/model/phone/SocialPhoneNumLoginQO";
 
 @Options({})
 export default class LoginPage extends Vue {

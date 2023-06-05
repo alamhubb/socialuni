@@ -382,9 +382,6 @@ export default class MessageView extends Vue {
     }
 
     get pageTitle() {
-        console.log(3333)
-        console.log(this.chat)
-        console.log(this.chat.nickname)
         return this.chat.nickname
     }
 

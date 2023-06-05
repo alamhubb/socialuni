@@ -1,9 +1,8 @@
 import AlertUtil from 'socialuni-util/src/util/AlertUtil'
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
 import {socialuniUserModule} from "../store/SocialuniUserModule";
-import PageUtil from "socialuni-util/src/util/PageUtil";
-import {socialuniConfigModule} from "socialuni/src/store/SocialuniConfigModule";
 import UserPageUtil from "./UserPageUtil";
+import {socialuniConfigModule} from "../store/SocialuniConfigModule";
 
 export default class UserMsgUtil {
     static unBindPhoneNum() {

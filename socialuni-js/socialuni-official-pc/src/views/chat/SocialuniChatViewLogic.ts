@@ -8,9 +8,15 @@ import {socialChatModule} from "socialuni-im/src/store/SocialChatModule";
 import ToastUtil from "socialuni-util/src/util/ToastUtil";
 import MessageAddVO from "socialuni-im-api/src/model/QO/message/MessageAddVO";
 import MessageAPI from "socialuni-im-api/src/api/MessageAPI";
+import {useRouter} from "vue-router";
 
 export default class SocialuniChatViewLogic {
     msgContent = ''
+
+    created(){
+        console.log(useRouter().currentRoute.value)
+    }
+
 
     get chat() {
         return socialuniChatModule.chat
