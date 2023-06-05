@@ -7,7 +7,9 @@
             <div class="pd-sm use-click">热门</div>
         </div>
         <div>
-
+          <div v-for="chat in chatList">
+              {{chat.nickname}}
+          </div>
         </div>
 
 <!--      <div>123</div>
@@ -23,6 +25,9 @@ import {socialChatModule} from "socialuni-im/src/store/SocialChatModule";
 @Options({})
 export default class ChatView extends Vue {
 
+    get chatList(){
+        return socialChatModule.chats
+    }
 
 }
 </script>
