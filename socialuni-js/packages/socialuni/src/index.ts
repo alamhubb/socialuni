@@ -1,41 +1,42 @@
-console.log(1111)
-
 import { App, defineComponent } from "vue"
 import { onHide, onLoad, onShow } from "@dcloudio/uni-app"
 import UniUtil from "socialuni-util/src/util/UniUtil"
-import { SocialuniPlugin } from "./interface/SocialuniPlugin"
-import { ImportModule } from "./interface/ImportModule"
-import { socialuniPluginsModule } from "./store/SocialuniPluginsModule"
-import { socialuniUserModule } from "./store/SocialuniUserModule"
-import UserService from "./service/UserService"
-import { socialuniConfigModule } from "socialuni/src/store/SocialuniConfigModule"
-import CosAPI from "socialuni/src/api/CosAPI"
-import { socialAppModule } from "socialuni/src/store/SocialAppModule"
-import { SocialuniOptions } from './interface/socialuniOptions'
+import {socialuniPluginsModule} from "./store/SocialuniPluginsModule";
+import {SocialuniPlugin} from "./interface/SocialuniPlugin";
+import {ImportModule} from "./interface/ImportModule";
 
 const socialuniInitPlugin: SocialuniPlugin = {
   async onLaunch() {
-    socialuniUserModule.initSocialuniUserModule()
+    /*socialuniUserModule.initSocialuniUserModule()
     UserService.getAppLunchDataByHasUser()
     socialuniConfigModule.getAppConfigAction()
     socialuniConfigModule.getReportTypesAction()
     CosAPI.getCosPathAPI().then(res => {
       socialAppModule.cosHttpPath = res.data
     })
-    socialAppModule.getHomeSwipersAction()
+    socialAppModule.getHomeSwipersAction()*/
   }
 }
 
 async function installSocialuniPluginIns() {
 
   socialuniPluginsModule.addPlugin(socialuniInitPlugin)
+
+  try {
+    //查询是否包含community模块，如果存在则加载
+    const socialuniCommunityPlugin: ImportModule<SocialuniPlugin> = await import('socialuni-user/src/index')
+    socialuniPluginsModule.addPlugin(socialuniCommunityPlugin.default)
+  } catch (e) {
+    // 如果导入失败，则不触发任何操作
+  }
   try {
     //查询是否包含community模块，如果存在则加载
     const socialuniCommunityPlugin: ImportModule<SocialuniPlugin> = await import('socialuni-community/src/index')
     socialuniPluginsModule.addPlugin(socialuniCommunityPlugin.default)
   } catch (e) {
     // 如果导入失败，则不触发任何操作
-  }// 社交联盟内置支持的插件
+  }
+  // 社交联盟内置支持的插件
   try {
     //查询是否包含community模块，如果存在则加载
     const socialuniImPlugin: ImportModule<SocialuniPlugin> = await import('socialuni-im/src/index')
@@ -47,20 +48,20 @@ async function installSocialuniPluginIns() {
 
 
 const Socialuni = {
-  async install(app: App, socialuniOptions: SocialuniOptions) {
+  async install(app: App, socialuniPlugins: SocialuniPlugin[]) {
 
     console.log(3333)
 
-    socialuniPluginsModule.init(socialuniOptions?.requestConfig)
+    // socialuniPluginsModule.init(socialuniOptions?.requestConfig)
 
     // 社交联盟内置支持的插件
     await installSocialuniPluginIns()
 
-    if (socialuniOptions) {
-      if (socialuniOptions.plugins) {
-        socialuniPluginsModule.addPlugin(...socialuniOptions.plugins)
+    // if (socialuniOptions) {
+      if (socialuniPlugins) {
+        socialuniPluginsModule.addPlugin(...socialuniPlugins)
       }
-    }
+    // }
 
     for (const plugin of socialuniPluginsModule.plugins) {
       await plugin.onLaunch()

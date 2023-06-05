@@ -13,6 +13,8 @@
     "@element-plus/icons-vue": "^2.1.0",
     "axios": "^1.4.0",
     "element-plus": "^2.3.6",
+    "socialuni": "../packages/socialuni",
+    "socialuni-user": "../packages/socialuni-user",
     "socialuni-user-api": "../packages/socialuni-user-api",
     "socialuni-im": "../packages/socialuni-im",
     "socialuni-im-api": "../packages/socialuni-im-api",

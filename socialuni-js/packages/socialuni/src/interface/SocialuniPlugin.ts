@@ -11,9 +11,9 @@ export interface SocialuniPlugin {
 
     onWebsocketConnect?(reload: boolean)
 
-    onRequestInterceptors(config: InternalAxiosRequestConfig)
+    onRequestInterceptors?(config: InternalAxiosRequestConfig)
 
-    onResponseErrorInterceptors(error: AxiosResponse)
+    onResponseErrorInterceptors?(error: AxiosResponse)
 
 }
 

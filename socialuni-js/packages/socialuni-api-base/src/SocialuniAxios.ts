@@ -1,8 +1,6 @@
 import axios, {AxiosRequestConfig} from 'axios'
 import uniAxiosAdapter from "./uniAxiosAdapter";
-import {socialuniPluginsModule} from "socialuni-base/src/store/SocialuniPluginsModule";
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
-import SocialuniRequestHeaderName from "socialuni-constant/constant/SocialuniRequestHeaderName";
+import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
 
 const SocialuniAxiosCreate = (config?: AxiosRequestConfig) => {
     try {
@@ -16,8 +14,13 @@ const SocialuniAxiosCreate = (config?: AxiosRequestConfig) => {
     config.timeout = 120000
     const socialuniAxios = axios.create(config)
 
+    console.log(socialuniPluginsModule)
+    console.log(socialuniPluginsModule.plugins)
+    console.log(socialuniPluginsModule.plugins.length)
     socialuniAxios.interceptors.request.use(
         config => {
+            console.log(socialuniPluginsModule)
+            console.log(socialuniPluginsModule.plugins.length)
             for (const socialuniPlugin of socialuniPluginsModule.plugins) {
                 if (socialuniPlugin.onRequestInterceptors) {
                     socialuniPlugin.onRequestInterceptors(config)

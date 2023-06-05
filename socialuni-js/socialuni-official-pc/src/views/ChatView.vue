@@ -25,6 +25,7 @@ export default class ChatView extends Vue {
 
 
   created(){
+      console.log('chufale')
     socialChatModule.getChatsAction()
   }
 }

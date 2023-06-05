@@ -23,6 +23,7 @@ import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import ChatQueryQO from "socialuni-im-api/src/model/QO/chat/ChatQueryQO";
 import Arrays from "socialuni-util/src/util/Arrays";
 import JsonUtil from "socialuni-util/src/util/JsonUtil";
+import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
 
 
 const openIM = null
@@ -756,6 +757,7 @@ class SocialChatModule {
     //获取chats
 
     async getChatsAction() {
+        console.log(socialuniPluginsModule.plugins.length)
         const res = await ChatAPI.queryChatListAPI()
         this.setChats(res.data)
     }
