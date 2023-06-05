@@ -18,13 +18,14 @@
 
 <script lang="ts">
 import {Options, Vue} from "vue-property-decorator";
+import {socialChatModule} from "socialuni-im/src/store/SocialChatModule";
 
 @Options({})
 export default class ChatView extends Vue {
 
 
   created(){
-
+    socialChatModule.getChatsAction()
   }
 }
 </script>

@@ -1,5 +1,5 @@
 import SocialuniMineUserRO from "socialuni-api-base/src/model/user/SocialuniMineUserRO";
-import StorageUtil from "./StorageUtil";
+import StorageUtil from "socialuni-util/src/util/StorageUtil";
 
 export default class SocialuniUserStorageUtil {
     // 开发生产区分user，避免混淆，不区分的话会冲突

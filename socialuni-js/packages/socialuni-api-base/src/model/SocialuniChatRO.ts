@@ -1,7 +1,6 @@
 import {OpenImMsgRO} from "./openIm/OpenImMsgRO";
 import {OpenImChatRO} from "./openIm/OpenImChatRO";
 import MessageVO from "socialuni-im-api/src/model/RO/MessageVO";
-import JsonUtil from "../util/JsonUtil";
 
 export default class SocialuniChatRO {
     public id: string = null
@@ -44,9 +43,9 @@ export default class SocialuniChatRO {
             // this.vipFlag = chat.vipFlag
             this.receiveUserId = openImChat.userID
             if (openImChat.latestMsg) {
-                const openImMsg: OpenImMsgRO = JsonUtil.toParse(openImChat.latestMsg)
-                this.lastMsg = new MessageVO(null, openImMsg)
-                this.lastContent = this.lastMsg.content
+                // const openImMsg: OpenImMsgRO = JsonUtil.toParse(openImChat.latestMsg)
+                // this.lastMsg = new MessageVO(null, openImMsg)
+                // this.lastContent = this.lastMsg.content
             }
             // this.loadMore = chat.loadMore
         }

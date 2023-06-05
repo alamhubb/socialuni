@@ -4,7 +4,7 @@ import AppUpdateResultVO from "socialuni-api-base/src/model/app/AppUpdateResultV
 import HomeSwiperVO from "socialuni-api-base/src/model/HomeSwiperVO";
 import SocialuniTalkTabRO from "socialuni-api-base/src/model/talk/SocialuniTalkTabRO";
 import FrontErrorLogVO from "socialuni-api-base/src/model/FrontErrorLogVO";
-import JsonUtil from "socialuni-user/src/util/JsonUtil";
+import JsonUtil from "socialuni-util/src/util/JsonUtil";
 
 
 

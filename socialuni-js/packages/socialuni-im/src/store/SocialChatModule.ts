@@ -1,14 +1,10 @@
-import PageUtil from "socialuni-util/src/util/PageUtil"
 import RouterUtil from "socialuni-util/src/util/RouterUtil"
-import PagePath from "socialuni-constant/constant/PagePath"
-import PlatformUtils from "socialuni/src/utils/PlatformUtils"
 import ChatType from "socialuni-constant/constant/ChatType"
 import CommonUtil from "socialuni-util/src/util/CommonUtil"
 import SocialuniChatRO from "socialuni-api-base/src/model/SocialuniChatRO";
 import {OpenImChatRO} from "socialuni-api-base/src/model/openIm/OpenImChatRO";
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
 import SocialuniImUserTokenUtil from "socialuni-util/src/util/SocialuniImUserTokenUtil";
-import {OpenImMsgRO} from "socialuni-api-base/src/model/openIm/OpenImMsgRO";
 import SocialuniTalkTabCircleRO from "socialuni-api-base/src/model/community/circle/SocialuniTalkTabCircleRO";
 import CircleCreateChatQO from "socialuni-api-base/src/model/community/circle/CircleCreateChatQO";
 import MessageVO from "socialuni-im-api/src/model/RO/MessageVO";
@@ -18,7 +14,6 @@ import AlertUtil from "socialuni-util/src/util/AlertUtil";
 import MessageAPI from "socialuni-im-api/src/api/MessageAPI";
 import {reactive} from "vue";
 import OpenImFriendApplyRO from "socialuni-api-base/src/model/openIm/OpenImFriendApplyRO";
-import JsonUtil from "socialuni/src/util/JsonUtil";
 import OpenImSessionType from "socialuni-constant/constant/openIm/constant/OpenImSessionType";
 import ImPageUtil from "../util/ImPageUtil";
 import ImPagePath from "../constant/ImPagePath";
@@ -27,7 +22,7 @@ import MessageViewParams from "../view/chat/MessageViewParams";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import ChatQueryQO from "socialuni-im-api/src/model/QO/chat/ChatQueryQO";
 import Arrays from "socialuni-util/src/util/Arrays";
-import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
+import JsonUtil from "socialuni-util/src/util/JsonUtil";
 
 
 const openIM = null
@@ -741,7 +736,7 @@ class SocialChatModule {
         // 不为自己的 且未读的
         const messages: MessageVO[] = messagesROs.filter(item => !item.isMine && !item.isRead)
         const msgIds: string[] = messages.map(msg => msg.id)
-        if (msgIds.length) {
+        /*if (msgIds.length) {
             // msgIds =
             //如果登录了，才调用后台
             // 如果登录了
@@ -754,7 +749,7 @@ class SocialChatModule {
             }
             this.chat.unreadNum = 0
             this.computedChatsUnreadNumTotalAction()
-        }
+        }*/
     }
 
 

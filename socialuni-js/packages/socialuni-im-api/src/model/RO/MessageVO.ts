@@ -1,11 +1,6 @@
-import SocialuniCommonStatus from "socialuni-constant/constant/status/SocialuniCommonStatus";
 import {OpenImMsgRO} from "socialuni-api-base/src/model/openIm/OpenImMsgRO";
-import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
 import SocialuniUserRO from "socialuni-api-base/src/model/user/SocialuniUserRO";
 import SocialuniMessageType from "socialuni-constant/constant/mesaage/SocialuniMessageType";
-import {MessageType} from "socialuni-constant/constant/openIm/OpenImMessageType";
-import {socialChatModule} from "socialuni-im/src/store/SocialChatModule";
-import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
 
 export default class MessageVO {
     public id: string
@@ -38,21 +33,21 @@ export default class MessageVO {
     constructor(content: string, msg: OpenImMsgRO = null) {
         this.originalMsg = msg;
         this.type = SocialuniMessageType.simple
-        if (msg) {
+        /*if (msg) {
             this.contentData = msg.content;
             if (msg.contentType === MessageType.TEXTMESSAGE) {
                 this.content = msg.content
             } else if (msg.contentType === MessageType.GROUPCREATED) {
-                /*const contentObj: { jsonDetail: string } = JsonUtil.toParse(msg.content)
+                /!*const contentObj: { jsonDetail: string } = JsonUtil.toParse(msg.content)
                 const jsonObj = JsonUtil.toParse(contentObj.jsonDetail)
                 console.log(123)
-                console.log(jsonObj)*/
+                console.log(jsonObj)*!/
                 this.content = '群聊创建成功'
             } else if (msg.contentType === MessageType.FRIENDADDED) {
-                /*const contentObj: { jsonDetail: string } = JsonUtil.toParse(msg.content)
+                /!*const contentObj: { jsonDetail: string } = JsonUtil.toParse(msg.content)
                 const jsonObj = JsonUtil.toParse(contentObj.jsonDetail)
                 console.log(123)
-                console.log(jsonObj)*/
+                console.log(jsonObj)*!/
                 this.content = '好友添加成功'
                 this.type = SocialuniMessageType.system;
             } else if (msg.contentType === MessageType.FRIENDDELETED) {
@@ -118,7 +113,7 @@ export default class MessageVO {
             this.createTime = new Date().getTime()
             this.contentType = MessageType.TEXTMESSAGE //MessageContentType.text
             this.action = 'createTextMessage'
-        }
+        }*/
     }
 
 
