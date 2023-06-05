@@ -9,12 +9,13 @@ import ToastUtil from "socialuni-util/src/util/ToastUtil";
 import MessageAddVO from "socialuni-im-api/src/model/QO/message/MessageAddVO";
 import MessageAPI from "socialuni-im-api/src/api/MessageAPI";
 import {useRouter} from "vue-router";
+import DateUtil from "socialuni-util/src/util/DateUtil";
 
 export default class SocialuniChatViewLogic {
     msgContent = ''
 
-    created(){
-        console.log(useRouter().currentRoute.value)
+    formatTime(time: any) {
+        return DateUtil.formatTime(time)
     }
 
 
@@ -30,7 +31,6 @@ export default class SocialuniChatViewLogic {
     setChatId(chat: SocialuniChatRO) {
         socialuniChatModule.setChatId(chat.id)
     }
-
 
 
     async sendMsgClick() {

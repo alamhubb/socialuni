@@ -44,19 +44,29 @@ class SocialuniChatModule {
         this.chats = chats
         // this.computedChatsUnreadNumTotalAction()
     }
+
     async getChatsAction() {
         const res = await ChatAPI.queryChatListAPI()
         this.setChats(res.data)
+        console.log(this.chats.length)
+        if (this.chats.length) {
+            console.log(this.chats.length)
+            this.setChatId(this.chats[0].id)
+        }
     }
 
     setChatId(chatId: string) {
-        let chat = socialChatModule.chats.find(item => item.id === chatId)
+        console.log(chatId)
+        let chat = socialuniChatModule.chats.find(item => item.id === chatId)
+        console.log(chat)
         if (!chat) {
             chat = new SocialuniChatRO()
             // chat.receiveId = params.chatId
             chat.id = chatId
             chat.loadMore = LoadMoreType.more
             socialChatModule.chats.unshift(chat)
+
+            console.log('chaxunchat messag')
 
             ChatAPI.queryChatAPI(new ChatQueryQO(chatId)).then(res => {
                 this.readChatAction(res.data.messages)
