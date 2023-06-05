@@ -2,11 +2,12 @@ import {SocialuniPlugin} from 'socialuni/src/interface/SocialuniPlugin'
 import NotifyVO from "socialuni-api-base/src/model/NotifyVO";
 import NotifyType from "socialuni-constant/constant/NotifyType";
 import {socialChatModule} from "./store/SocialChatModule";
+import {socialuniChatModule} from "./store/SocialuniChatModule";
 
 const socialuniImPlugin: SocialuniPlugin = {
     onLaunch() {
         console.log('触发了Im')
-        socialChatModule.getChatsAction()
+        socialuniChatModule.getChatsAction()
     },
     onMessage(notify: NotifyVO) {
         console.log('接受了消息')
