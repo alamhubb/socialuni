@@ -1,6 +1,7 @@
 package com.socialuni.social.im.model.message.notify;
 
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import lombok.Data;
 
 /**
@@ -21,7 +22,7 @@ public class NotifyUserVO {
     //与其他业务不同，推送，所以是给接收方看的，为接收方id
     public NotifyUserVO(SocialuniUserDo sendUser) {
 //        Integer devId = DevAccountUtils.getDevId();
-//        this.id = UnionIdDbUtil.createUserUid(sendUser.getId(),  receiveUserId);
+        this.id = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(sendUser.getUserId());
         this.nickname = sendUser.getNickname();
         this.avatar = sendUser.getAvatar();
 //        this.vipFlag = sendUser.getVipFlag();

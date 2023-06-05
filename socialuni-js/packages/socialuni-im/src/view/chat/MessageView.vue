@@ -557,7 +557,6 @@ export default class MessageView extends Vue {
         if (msgContent) {
             // 点击发送后立即push
             //启用状态可以直接发送
-            const msg: MessageVO = new MessageVO(msgContent)
             this.msgContent = ''
             socialChatModule.pushMessageAction(msg)
             /*if (this.chat.status === SocialuniCommonStatus.enable) {

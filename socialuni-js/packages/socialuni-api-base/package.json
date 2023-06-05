@@ -11,7 +11,8 @@
   "devDependencies": {
     "axios": "^1.4.0",
     "typescript": "^4.7.4",
-    "vue": "^3.2.41"
+    "vue": "^3.2.41",
+    "socialuni-util": "^0.1.2"
   },
   "author": "",
   "license": "ISC",

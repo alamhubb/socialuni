@@ -48,7 +48,7 @@ public class WebsocketServer extends TextWebSocketHandler {
      * 广播信息
      */
     public static void sendMessageToAllUsers(NotifyVO notify) {
-        /*String userId = notify.getUser().getId().toString();
+        String userId = notify.getUser().getId().toString();
         for (WebSocketSession userSession : onlineUsersSessionMap.values()) {
             if (userSession != null && userSession.isOpen()) {
                 String sessionUserId = Objects.requireNonNull(userSession.getPrincipal()).getName();
@@ -62,7 +62,7 @@ public class WebsocketServer extends TextWebSocketHandler {
                     }
                 }
             }
-        }*/
+        }
     }
 
     public static void sendMessage(Integer userId, NotifyVO notify) {
