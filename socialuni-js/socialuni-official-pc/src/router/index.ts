@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
-import ChatView from '@/views/ChatView.vue'
+import ChatView from '@/views/chat/ChatView.vue'
 
 export const constantRoutes = [
   {

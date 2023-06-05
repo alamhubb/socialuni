@@ -1,9 +1,7 @@
-import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
 import AlertUtil from "socialuni-util/src/util/AlertUtil";
-import PageUtil from "socialuni-util/src/util/PageUtil";
-import {socialuniConfigModule} from "socialuni-user/src/store/SocialuniConfigModule";
 import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
-import UserPageUtil from "socialuni/src/util/UserPageUtil";
+import {socialuniConfigModule} from "socialuni-app/src/store/SocialuniConfigModule";
+import UserPageUtil from "./UserPageUtil";
 
 export default class UserCheckUtil {
     static checkUserLogin() {

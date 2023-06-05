@@ -9,13 +9,22 @@
                 <div class="pd-sm use-click">测试</div>
             </div>
             <div class="br">
-                <div v-for="chat in chatList" @click="setChatId(chat)">
+                <div v-for="chat in logic.chatList" @click="logic.setChatId(chat)">
                     <!--              {{chat.nickname}}-->
                     测试
                 </div>
             </div>
-            <div v-if="chat">
+            <div v-if="logic.chat">
                 测试
+
+                <div v-for="msg in logic.chat.messages">
+                    <!--                    {{msg.content}}-->
+                </div>
+
+                <div>
+                    <el-input v-model="logic.msgContent"></el-input>
+                    <el-button @click="logic.sendMsgClick()">发送</el-button>
+                </div>
             </div>
 
             <!--      <div>123</div>
@@ -26,24 +35,12 @@
 
 <script lang="ts">
 import {Options, Vue} from "vue-property-decorator";
-import {socialuniChatModule} from "socialuni-im/src/store/SocialuniChatModule";
-import type SocialuniChatRO from "socialuni-api-base/src/model/SocialuniChatRO";
+import SocialuniChatViewLogic from "@/views/chat/SocialuniChatViewLogic";
 
 @Options({})
 export default class ChatView extends Vue {
 
-    get chat() {
-        return socialuniChatModule.chat
-    }
-
-    get chatList() {
-        return socialuniChatModule.chats
-    }
-
-
-    setChatId(chat: SocialuniChatRO) {
-        socialuniChatModule.setChatId(chat.id)
-    }
+    logic = new SocialuniChatViewLogic()
 
 }
 </script>

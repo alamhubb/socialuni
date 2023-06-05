@@ -679,7 +679,7 @@ class SocialChatModule {
     //在聊天界面的时候，自己发送msg 本地添加msg
 
     async pushMessageAction(msg: MessageVO) {
-        this.messages.push(msg)
+        // this.messages.push(msg)
         // JsonUtils.log(this.messages)
         // console.log(JSON.stringify(msg))
         this.scrollToMessagePageBottom()

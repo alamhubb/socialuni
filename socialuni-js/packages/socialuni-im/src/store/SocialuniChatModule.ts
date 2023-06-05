@@ -7,6 +7,8 @@ import ChatQueryQO from "socialuni-im-api/src/model/QO/chat/ChatQueryQO";
 import {socialChatModule} from "./SocialChatModule";
 import MessageVO from "socialuni-im-api/src/model/RO/MessageVO";
 import Arrays from "socialuni-util/src/util/Arrays";
+import MessageAPI from "socialuni-im-api/src/api/MessageAPI";
+import CommonUtil from "socialuni-util/src/util/CommonUtil";
 
 class SocialuniChatModule {
     chatId = ''
@@ -20,6 +22,13 @@ class SocialuniChatModule {
 
     get chatIndex(): number {
         return this.chats.findIndex(item => item.id === this.chatId)
+    }
+
+    get messages(): MessageVO[] {
+        if (this.chat) {
+            return this.chat.messages
+        }
+        return []
     }
 
     setChats(chats: SocialuniChatRO[]) {
@@ -117,6 +126,66 @@ class SocialuniChatModule {
 
     replaceChat(chatIndex, chat: SocialuniChatRO) {
         this.chats.splice(chatIndex, 1, chat)
+    }
+
+    scrollToMessagePageBottom() {
+        CommonUtil.delayTime(100).then(() => {
+            this.scrollTop = this.messages.length * 500
+            // this.scrollTop = -1000
+        })
+        // ScrollUtil.scrollTo(this.messages.length * 500)
+    }
+
+
+    async pushMessageAction(msg: MessageVO) {
+        // this.messages.push(msg)
+        // JsonUtils.log(this.messages)
+        // console.log(JSON.stringify(msg))
+        this.scrollToMessagePageBottom()
+        const index: number = this.messages.length - 1
+        // console.log(index)
+        this.chat.updateTime = new Date().getTime()
+        // this.chat.lastContent = msg.content
+        // 滚屏到最后面
+        // 不能监控变化滚动，有时候是往前面插入
+        /*const {data} = await (await socialChatModule.openIm())[msg.action](msg.contentData);
+        const params = {
+            recvID: this.chat.receiveUserId,
+            groupID: this.chat.groupId,
+            message: data,
+        };*/
+        // console.log('-------params-------', params);
+
+        console.log(msg)
+        return MessageAPI.sendMsgAPI(this.chat.id, msg.content)
+        //
+        /*let actionMethod: Function = null;
+        switch (msg.action) {
+            case 'createImageMessage':
+            case 'createSoundMessage':
+            case 'createVideoMessage':
+            case 'createFileMessage':
+                actionMethod = (await socialChatModule.openIm()).sendMessageNotOss;
+                break;
+            default:
+                actionMethod = (await socialChatModule.openIm()).sendMessage;
+                break;
+        }
+        // 执行方法。
+        actionMethod(params).then((res) => {
+            // 后台返回后再替换
+            this.chat.updateTime = res.data.createTime
+            this.messages.splice(index, 1, new MessageVO(null, JsonUtil.toParse(res.data)))
+        }).catch((e) => {
+            console.log(e)
+            // 这里应该变为发送失败
+            this.messages.splice(index, 1)
+        }).finally(() => {
+            console.log(666)
+        })*/
+        // socialChatModule.refreshMessages()
+
+        // PlatformUtils.requestSubscribeChat()
     }
 }
 
