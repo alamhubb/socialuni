@@ -3,6 +3,8 @@ import {AxiosResponse, InternalAxiosRequestConfig} from "axios";
 
 
 export interface SocialuniPlugin {
+    name?: string
+
     //应用启动
     onLaunch?();
 

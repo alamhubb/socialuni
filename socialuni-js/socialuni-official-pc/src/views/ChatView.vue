@@ -24,9 +24,5 @@ import {socialChatModule} from "socialuni-im/src/store/SocialChatModule";
 export default class ChatView extends Vue {
 
 
-  created(){
-      console.log('chufale')
-    socialChatModule.getChatsAction()
-  }
 }
 </script>

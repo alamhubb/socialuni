@@ -757,8 +757,13 @@ class SocialChatModule {
     //获取chats
 
     async getChatsAction() {
+        console.log(socialuniPluginsModule.plugins)
+        for (const plugin of socialuniPluginsModule.plugins) {
+            console.log(plugin.name)
+        }
         console.log(socialuniPluginsModule.plugins.length)
         const res = await ChatAPI.queryChatListAPI()
+        console.log(res)
         this.setChats(res.data)
     }
 

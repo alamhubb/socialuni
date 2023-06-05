@@ -6,7 +6,7 @@ import {SocialuniPlugin} from "socialuni/src/interface/SocialuniPlugin";
 const socialuniUserPlugin: SocialuniPlugin = {
     name: 'socialuniUserPlugin',
     onLaunch() {
-        console.log('触发了User')
+        console.log('触发了Im')
     },
     onMessage(notify: NotifyVO) {
         console.log('接受了消息')
@@ -16,7 +16,6 @@ const socialuniUserPlugin: SocialuniPlugin = {
     onRequestInterceptors(config: InternalAxiosRequestConfig) {
         const token = SocialuniTokenUtil.get()
         console.log(token)
-        console.log(config)
         if (token) {
             config.headers.token = token
         } else {

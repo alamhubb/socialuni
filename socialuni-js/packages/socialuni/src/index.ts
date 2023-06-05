@@ -63,6 +63,7 @@ const Socialuni = {
     // }
 
     for (const plugin of socialuniPluginsModule.plugins) {
+      console.log('之心lunck')
       await plugin.onLaunch()
     }
 

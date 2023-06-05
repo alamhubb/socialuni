@@ -6,6 +6,7 @@ import {socialChatModule} from "./store/SocialChatModule";
 const socialuniImPlugin: SocialuniPlugin = {
     onLaunch() {
         console.log('触发了Im')
+        socialChatModule.getChatsAction()
     },
     onMessage(notify: NotifyVO) {
         console.log('接受了消息')
