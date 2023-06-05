@@ -20,7 +20,13 @@ export default class SocialuniChatViewLogic {
 
 
     get chat() {
-        return socialuniChatModule.chat
+        if (socialuniChatModule.chat) {
+            console.log(socialuniChatModule.chat.messages)
+            console.log(socialuniChatModule.chat.messages.length)
+
+            return socialuniChatModule.chat
+        }
+        return null
     }
 
     get chatList() {

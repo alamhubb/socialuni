@@ -1,6 +1,6 @@
 <template>
     <main class="h100p overflow-hidden row-all-center">
-        <div class="w600 h100p bg-white row-center">
+        <div class="w600 h100p bg-white px-sm">
 
             <!--        分三块，第一块列表，第二块分类，第三块聊天信息。-->
 
@@ -15,7 +15,7 @@
                         </div>-->
             <div v-if="logic.chat" class="h100p flex-col">
                 <y-scrollbar class="flex-1">
-                    <div v-for="msg in logic.chat.messages" :id="'m'+msg.id" :key="msg.id">
+                    <div class="w100p" v-for="msg in logic.chat.messages" :id="'m'+msg.id" :key="msg.id">
                         <div v-if="false">
                             <!--                    <div v-if="msg.type === systemMsgType">-->
                             <div class="cu-info round row-all-center">
