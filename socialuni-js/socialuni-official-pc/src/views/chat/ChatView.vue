@@ -16,15 +16,7 @@
             <div v-if="logic.chat" class="h100p flex-col">
                 <y-scrollbar class="flex-1">
                     <div class="w100p" v-for="msg in logic.chat.messages" :id="'m'+msg.id" :key="msg.id">
-                        <div v-if="false">
-                            <!--                    <div v-if="msg.type === systemMsgType">-->
-                            <div class="cu-info round row-all-center">
-                                <!--                            {{ formatTime(msg.createTime) }}-->
-                                , {{ msg.content }}
-                            </div>
-
-                        </div>
-                        <div v-else-if="msg.user.isMine" class="flex-row pd-sm">
+                        <div v-if="msg.user.isMine" class="flex-row pd-sm">
                             <div class="flex-1 flex-col mr overflow-hidden">
                                 <div class="h44px row-end-center mb-xs">
                                     {{ msg.user.nickname }}
@@ -38,7 +30,7 @@
                                 </div>
 
                                 <view class="row-end-center" @longpress="openMessageMoreHandleDialog(msg)">
-                                    <q-icon v-if="msg.status === 3" icon="mdi-alert-circle" size="25" class="mb-nm"/>
+<!--                                    <q-icon v-if="msg.status === 3" icon="mdi-alert-circle" size="25" class="mb-nm"/>-->
                                     <!--                                <message-item-content :msg="msg"></message-item-content>-->
 
                                     <div class="pd-xs bg-white bd-radius"> {{ msg.content }}</div>
@@ -73,7 +65,8 @@
                                 </div>
 
                                 <div class="row-start" @longpress="openMessageMoreHandleDialog(msg)">
-                                    <message-item-content :msg="msg"></message-item-content>
+<!--                                    <message-item-content :msg="msg"></message-item-content>-->
+                                    <div class="pd-xs bg-white bd-radius"> {{ msg.content }}</div>
                                 </div>
                                 <div class="col-all-center mt-xs">
                                     <div class="date">

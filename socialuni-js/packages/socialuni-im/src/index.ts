@@ -14,7 +14,7 @@ class SocialuniImPlugin implements SocialuniPlugin {
         console.log('接受了消息')
         if (notify.type === NotifyType.message) {
             console.log('接受了消息')
-            console.log(notify.chat)
+            console.log(notify.chat.messages.length)
             // 暂不支持圈子功能，推送的时候把所有未读都推送过来，还没做，匹配成功的话在talk和match页都显示匹配成功通知？，还有阅读消息后后台也要清0
             socialChatModule.pushChatAndMessagesAction(notify.chat)
         }
