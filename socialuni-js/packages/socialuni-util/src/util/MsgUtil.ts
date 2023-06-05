@@ -4,7 +4,7 @@ import PageUtil from './PageUtil'
 import UniUtil from "./UniUtil";
 import AppMsg from "socialuni-constant/constant/AppMsg";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
-import {socialuniConfigModule} from "socialuni/src/store/SocialuniConfigModule";
+import {socialuniConfigModule} from "socialuni-app/src/store/SocialuniConfigModule";
 
 ;
 

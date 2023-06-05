@@ -3,9 +3,9 @@ import AppAuthUtil from 'socialuni-util/src/util/AppAuthUtil'
 import DistrictVO from "socialuni-api-base/src/model/DistrictVO";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import {QQMapResult} from "socialuni-api-base/src/model/location/QQMapResult";
-import StorageUtil from "socialuni/src/util/StorageUtil";
 import {socialLocationModule} from "socialuni-community/src/store/SocialLocationModule";
 import LocationConst from "socialuni-constant/constant/community/LocationConst";
+import StorageUtil from "socialuni-util/src/util/StorageUtil";
 
 const chinaDistrict = new DistrictVO()
 chinaDistrict.id = 1

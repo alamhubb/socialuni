@@ -10,13 +10,13 @@ import SocialuniTalkTabRO from "socialuni-api-base/src/model/talk/SocialuniTalkT
 import TalkTabVO from "socialuni-api-base/src/model/talk/SocialuniTalkTabRO";
 import {Vue} from "vue-class-component";
 import CircleCreateChatQO from "socialuni-api-base/src/model/community/circle/CircleCreateChatQO";
-import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
-import SocialuniAppAPI from "socialuni/src/api/SocialuniAppAPI";
 import {socialCircleModule} from "./SocialCircleModule";
 import SocialuniCircleAPI from "socialuni-community-api/src/api/SocialuniCircleAPI";
-import StorageUtil from "socialuni/src/util/StorageUtil";
 import {reactive} from "vue";
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
+import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
+import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
+import StorageUtil from "socialuni-util/src/util/StorageUtil";
 
 class SocialTalkModule {
     //方便操作页面动作

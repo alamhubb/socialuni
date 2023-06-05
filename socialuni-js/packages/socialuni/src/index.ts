@@ -1,5 +1,4 @@
 import { App, defineComponent } from "vue"
-import { onHide, onLoad, onShow } from "@dcloudio/uni-app"
 import UniUtil from "socialuni-util/src/util/UniUtil"
 import {socialuniPluginsModule} from "./store/SocialuniPluginsModule";
 import {SocialuniPlugin} from "./interface/SocialuniPlugin";
@@ -79,9 +78,9 @@ const Socialuni = {
         }
       },
       created() {
-        onLoad((params) => {
+        /*onLoad((params) => {
           UniUtil.showShareMenu()
-        })
+        })*/
       }
     })
     app.mixin(shareComponent)
