@@ -1,7 +1,7 @@
 <template>
-    <main class="h100p pd row-all-center">
+    <main class="h100p mt-sm row-all-center">
         <div class="w800 h500">
-            <div>123</div>
+            <div>123</div>456
             <el-button @click="sendAuthCode">123</el-button>
         </div>
     </main>

@@ -1,11 +1,17 @@
-<script setup lang="ts">
-import {RouterView} from 'vue-router'
-import NavBar from "@/layout/NavBar.vue";
-</script>
-
 <template>
-    <div class="h100p flex-col">
+    <div class="h100p flex-col bg-default">
         <nav-bar/>
         <RouterView/>
     </div>
 </template>
+
+<script lang="ts">
+import {Options, Vue} from "vue-property-decorator";
+import NavBar from "@/layout/NavBar.vue";
+
+@Options({
+    components: {NavBar}
+})
+export default class App extends Vue {
+}
+</script>

@@ -1,11 +1,11 @@
 <template>
-    <div class="row-between shadow-bottom index-sm px-smm h50">
+    <div class="row-between shadow-bottom index-sm px-smm h50 bg-white">
         <div class="flex-none row-col-center mr-40 bg-click" @click="toHome">
             <!--      <img src="@/assets/img/logo.jpg" class="h40" alt="logo">-->
             <div class="font-19 font-bold">演示系统</div>
         </div>
 
-        <div class="flex-1 row-end-center">
+<!--        <div class="flex-1 row-end-center">
             <div class="flex-none row-col-center mr">
                 <a href="https://socialuni.cn" target="_blank" class="mr-sm md:mr bg-click">
                     <div class="row-all-center">官网文档</div>
@@ -41,7 +41,7 @@
                     </el-dropdown>
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
 </template>
 

@@ -1,8 +1,17 @@
 <template>
-  <main class="h100p pd row-all-center">
-    <div class="w800 h500">
-      <div>123</div>
-      <el-button>123</el-button>
+  <main class="h100p mt-sm row-all-center">
+      123
+    <div class="w1200 h100p bg-white flex-row">
+
+        <div class="flex-col br">
+            <div class="pd-sm use-click">热门</div>
+        </div>
+        <div>
+
+        </div>
+
+<!--      <div>123</div>
+      <el-button>123456</el-button>-->
     </div>
   </main>
 </template>
