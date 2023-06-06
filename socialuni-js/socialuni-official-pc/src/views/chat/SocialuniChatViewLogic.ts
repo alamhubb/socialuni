@@ -1,28 +1,16 @@
 import {socialuniChatModule} from "socialuni-im/src/store/SocialuniChatModule";
 import SocialuniChatRO from "socialuni-api-base/src/model/SocialuniChatRO";
 import UserCheckUtil from "socialuni-user/src/util/UserCheckUtil";
-import CommonUtil from "socialuni-util/src/util/CommonUtil";
-import HintMsg from "socialuni-constant/constant/HintMsg";
 import MessageVO from "socialuni-im-api/src/model/RO/MessageVO";
-import {socialChatModule} from "socialuni-im/src/store/SocialChatModule";
 import ToastUtil from "socialuni-util/src/util/ToastUtil";
-import MessageAddVO from "socialuni-im-api/src/model/QO/message/MessageAddVO";
 import MessageAPI from "socialuni-im-api/src/api/MessageAPI";
-import {useRoute, useRouter} from "vue-router";
 import DateUtil from "socialuni-util/src/util/DateUtil";
 import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
 import {MessageStatus} from "socialuni-constant/constant/openIm/OpenImMessageType";
-import YScrollbar from "@/components/YScrollbar.vue";
 import {watch} from "vue";
-import SocialuniLoginService from "@/logic/service/SocialuniLoginService";
-import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
-import AlertUtil from "socialuni-util/src/util/AlertUtil";
-import {socialuniConfigModule} from "socialuni-app/src/store/SocialuniConfigModule";
-import mitt from "mitt";
-import SocialuniUserEventConst from "socialuni-user/src/constant/SocialuniUserEventConst";
 
 export interface SocialuniChatViewLogicRefs {
-    messageBox: YScrollbar
+    messageBox:HTMLDivElement
 }
 
 export default class SocialuniChatViewLogic {
@@ -32,7 +20,8 @@ export default class SocialuniChatViewLogic {
         this.$refs = value;
         watch(() => socialuniChatModule.scrollTop, () => {
             console.log('触发了滚动')
-            this.$refs.messageBox.$el.scrollTop = socialuniChatModule.scrollTop
+            console.log(this.$refs.messageBox)
+            this.$refs.messageBox.scrollTop = socialuniChatModule.scrollTop
             // this.scrollTop = -1000
         })
     }
