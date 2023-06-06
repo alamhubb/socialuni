@@ -4,28 +4,16 @@
             <el-form :model="editUser" label-width="70px">
                 <el-form-item label="头像">
                     <div class="row-col-end">
-                        <el-upload
-                                v-model:file-list="fileList"
-                                class="upload-demo"
-                                action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
-                                multiple
-                                :on-preview="handlePreview"
-                                :on-remove="handleRemove"
-                                :before-remove="beforeRemove"
-                                :limit="3"
-                                :on-exceed="handleExceed"
-                        >
-                        </el-upload>
-
                         <el-popover v-if="mineUser" placement="right-start">
                             <template #reference>
                                 <el-avatar size="large" class="bd" shape="square" :src="editUser.avatar"/>
                             </template>
                             <div>
-                                <el-upload class="w100p">
+                                <input id="fileSelector" type="file" @change="uploadData"/>
+                                <el-upload class="w100p" @change="uploadData" :auto-upload="false">
                                     <el-button text class="ml-xs pr-lgg">上传头像</el-button>
                                 </el-upload>
-                                <el-divider class="mb-sm mt-0" />
+                                <el-divider class="mb-sm mt-0"/>
                                 <el-button text class="w100p" @click.native="randomGenerateAvatar">随机生成头像
                                 </el-button>
                             </div>
@@ -77,6 +65,8 @@ import DomFile from "socialuni-util/src/model/DomFile";
 import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
 import CosService from "socialuni-app/src/util/CosService";
 import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
+import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
+import ImgUtil from "socialuni-util/src/util/ImgUtil";
 
 @Options({
     components: {SDialog, SButton}
@@ -136,14 +126,17 @@ export default class SocialuniUserEditDialog extends Vue {
         })
     }
 
-    async uploadUserAvatarImg() {
+    async uploadData(e: any) {
+
+        const file = e.target.files[0]
+        console.log(e)
+        console.log(e.target)
+        console.log(e.target.files[0])
         try {
             const cosAuthRO = await CosService.getCosAuthRO()
-            const imgFiles: DomFile[] = await UniUtil.chooseImage(1)
-            UniUtil.showLoading('上传中')
-            const imgFile: DomFile = imgFiles[0]
-            imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src
-            const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO), SocialuniMineUserAPI.addUserAvatarImgAPI(new ImgAddQO(imgFile))])
+            console.log(cosAuthRO)
+            const imgKey = UUIDUtil.getUUID() + ImgUtil.getFileSuffixName(file.name)
+            const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgKey, file, cosAuthRO), SocialuniMineUserAPI.addUserAvatarImgAPI(new ImgAddQO(file))])
             socialuniUserModule.setUser(res[1].data)
         } catch (e) {
             console.error(e)
