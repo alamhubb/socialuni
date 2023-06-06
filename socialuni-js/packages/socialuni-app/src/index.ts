@@ -1,11 +1,11 @@
 import {SocialuniPlugin} from 'socialuni/src/interface/SocialuniPlugin'
-import NotifyVO from "socialuni-api-base/src/model/NotifyVO";
-import NotifyType from "socialuni-constant/constant/NotifyType";
+import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
+import {socialuniConfigModule} from "./store/SocialuniConfigModule";
 
 class SocialuniAppPlugin implements SocialuniPlugin {
     onLaunch() {
-        console.log('触发了Im')
-        socialuniChatModule.getChatsAction()
+        WebsocketUtil.websocketConnect(false)
+        socialuniConfigModule.getAppConfigAction()
     }
 }
 

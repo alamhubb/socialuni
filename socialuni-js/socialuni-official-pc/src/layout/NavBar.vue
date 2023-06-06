@@ -42,6 +42,9 @@
                 </div>
             </div>
         </div>
+
+
+        <s-dialog ref="loginDialog" title="登录"></s-dialog>
     </div>
 </template>
 
@@ -51,17 +54,25 @@ import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule"
 import {ArrowDown} from "@element-plus/icons-vue";
 import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
 import ToastUtil from "socialuni-util/src/util/ToastUtil";
+import SDialog from "@/components/socialuni/SDialog.vue";
 
 @Options({
-    components: {ArrowDown}
+    components: {SDialog, ArrowDown}
 })
 export default class NavBar extends Vue {
+    $refs: {
+        loginDialog: SDialog
+    }
+
     toHome() {
         this.$router.push('/')
     }
 
     toLogin() {
-        this.$router.push('/login')
+        console.log(this.$refs)
+        console.log(this.$refs.loginDialog)
+        this.$refs.loginDialog.open()
+        // this.$router.push('/login')
     }
 
     loginOut() {
