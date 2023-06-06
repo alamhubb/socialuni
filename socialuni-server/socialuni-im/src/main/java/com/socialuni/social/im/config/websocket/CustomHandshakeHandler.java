@@ -2,6 +2,7 @@ package com.socialuni.social.im.config.websocket;
 
 import com.socialuni.social.common.api.utils.SocialTokenFacade;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.server.ServerHttpRequest;
@@ -23,12 +24,13 @@ public class CustomHandshakeHandler extends DefaultHandshakeHandler {
 
         System.out.println("触发了");
         System.out.println(token);
-        if (SocialTokenFacade.isError(token)){
+        if (SocialTokenFacade.isError(token)) {
             return null;
         }
         SocialuniUserDo user = SocialuniUserUtil.getUserByToken(token);
         if (user != null) {
-            return new WebSocketUser(user.getUserId().toString());
+            String userUid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(user.getUserId());
+            return new WebSocketUser(userUid);
         } else {
             return new WebSocketUser(token);
         }
