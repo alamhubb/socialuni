@@ -60,6 +60,7 @@ import SDialog from "@/components/socialuni/SDialog.vue";
 import LoginView from "@/components/view/loginView.vue";
 import mitt from "mitt";
 import SocialuniUserEventConst from "socialuni-user/src/constant/SocialuniUserEventConst";
+import SocialuniEventUtil from "socialuni/src/util/SocialuniEventUtil";
 
 @Options({
     components: {LoginView, SDialog, ArrowDown}
@@ -70,7 +71,7 @@ export default class NavBar extends Vue {
     }
 
     created() {
-        mitt().on(SocialuniUserEventConst.toLogin, () => {
+        SocialuniEventUtil.on(SocialuniUserEventConst.toLogin, () => {
             console.log('接收到了')
             this.toLogin()
         })
