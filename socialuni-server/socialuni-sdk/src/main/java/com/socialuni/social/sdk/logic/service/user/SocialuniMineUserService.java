@@ -2,6 +2,7 @@ package com.socialuni.social.sdk.logic.service.user;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
+import com.socialuni.social.sdk.feignAPI.user.SocialuniMineUserAPI;
 import com.socialuni.social.sdk.feignAPI.user.SocialuniUserAPI;
 import com.socialuni.social.sdk.logic.domain.user.SocialAddUserImgDomain;
 import com.socialuni.social.sdk.logic.domain.user.SocialDeleteUserImgDomain;
@@ -36,12 +37,12 @@ public class SocialuniMineUserService {
     @Resource
     SocialuniUnionIdInterface uniContentUnionIdRepository;
     @Resource
-    SocialuniUserAPI socialuniUserAPI;
+    SocialuniMineUserAPI socialuniMineUserAPI;
 
     public ResultRO<SocialuniMineUserDetailRO> getMineUser() {
         SocialuniMineUserDetailRO mineUserDetailRO;
         if (SocialuniSystemConst.serverIsChild()) {
-            ResultRO<SocialuniMineUserDetailRO> resultRO = socialuniUserAPI.getMineUser();
+            ResultRO<SocialuniMineUserDetailRO> resultRO = socialuniMineUserAPI.getMineUser();
             mineUserDetailRO = new SocialuniMineUserDetailRO(resultRO.getData());
         } else {
             mineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail();
@@ -57,7 +58,7 @@ public class SocialuniMineUserService {
         SocialuniMineUserDetailRO socialMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
 
         if (SocialuniSystemConst.serverIsChild()) {
-            return socialuniUserAPI.editUser(socialUserEditQO);
+            return socialuniMineUserAPI.editUser(socialUserEditQO);
         }
 
         return ResultRO.success(socialMineUserDetailRO);
@@ -69,7 +70,19 @@ public class SocialuniMineUserService {
         SocialuniMineUserDetailRO socialMineUserDetailRO = socialAddUserImgDomain.addUserImg(socialUserImgAddQO, mineUser);
 
         if (SocialuniSystemConst.serverIsChild()) {
-            return socialuniUserAPI.addUserImg(socialUserImgAddQO);
+            return socialuniMineUserAPI.addUserImg(socialUserImgAddQO);
+        }
+
+        return ResultRO.success(socialMineUserDetailRO);
+    }
+
+    public ResultRO<SocialuniMineUserDetailRO> randomUserAvatar() {
+        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
+
+        SocialuniMineUserDetailRO socialMineUserDetailRO = socialAddUserImgDomain.randomUserAvatar(mineUser);
+
+        if (SocialuniSystemConst.serverIsChild()) {
+            return socialuniMineUserAPI.randomUserAvatar();
         }
 
         return ResultRO.success(socialMineUserDetailRO);
@@ -82,7 +95,7 @@ public class SocialuniMineUserService {
         SocialuniMineUserDetailRO socialMineUserDetailRO = socialAddUserImgDomain.addUserAvatarImg(socialUserImgAddQO, mineUser);
 
         if (SocialuniSystemConst.serverIsChild()) {
-            return socialuniUserAPI.addUserAvatarImg(socialUserImgAddQO);
+            return socialuniMineUserAPI.addUserAvatarImg(socialUserImgAddQO);
         }
 
         return ResultRO.success(socialMineUserDetailRO);
@@ -96,7 +109,7 @@ public class SocialuniMineUserService {
 
         SocialuniMineUserDetailRO socialMineUserDetailRO = socialDeleteUserImgDomain.deleteUserImg(new SocialUserImgDeleteQO(userImgId), mineUser);
         if (SocialuniSystemConst.serverIsChild()) {
-            return socialuniUserAPI.deleteUserImg(centerUserImgDeleteQO);
+            return socialuniMineUserAPI.deleteUserImg(centerUserImgDeleteQO);
         }
         return ResultRO.success(socialMineUserDetailRO);
     }

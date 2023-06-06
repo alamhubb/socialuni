@@ -41,6 +41,20 @@ public class SocialAddUserImgDomain {
         return socialMineUserDetailRO;
     }
 
+    public SocialuniMineUserDetailRO randomUserAvatar(SocialuniUserDo mineUser) {
+
+
+
+
+        mineUser.setAvatar(SocialuniSystemConst.getStaticResourceUrl() + socialUserImgAddQO.getSrc() + "!avatar");
+
+        userApi.savePut(mineUser);
+
+        SocialuniMineUserDetailRO socialMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
+
+        return socialMineUserDetailRO;
+    }
+
     public SocialuniMineUserDetailRO addUserAvatarImg(SocialuniImgAddQO socialUserImgAddQO, SocialuniUserDo mineUser) {
 
         SocialuniTextContentUtil.validateImg(socialUserImgAddQO, mineUser);
