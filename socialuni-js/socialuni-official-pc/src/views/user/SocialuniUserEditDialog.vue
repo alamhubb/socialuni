@@ -2,6 +2,36 @@
     <s-dialog ref="userEditDialog" title="编辑用户信息" width="500px" :confirm="confirmEditUser">
         <div v-if="mineUser" class="row-center">
             <el-form :model="editUser" label-width="70px">
+                <el-form-item label="头像">
+                    <div class="row-col-end">
+                        <el-upload
+                                v-model:file-list="fileList"
+                                class="upload-demo"
+                                action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
+                                multiple
+                                :on-preview="handlePreview"
+                                :on-remove="handleRemove"
+                                :before-remove="beforeRemove"
+                                :limit="3"
+                                :on-exceed="handleExceed"
+                        >
+                        </el-upload>
+
+                        <el-popover v-if="mineUser" placement="right-start">
+                            <template #reference>
+                                <el-avatar size="large" class="bd" shape="square" :src="editUser.avatar"/>
+                            </template>
+                            <div>
+                                <el-upload class="w100p">
+                                    <el-button text class="ml-xs pr-lgg">上传头像</el-button>
+                                </el-upload>
+                                <el-divider class="mb-sm mt-0" />
+                                <el-button text class="w100p" @click.native="randomGenerateAvatar">随机生成头像
+                                </el-button>
+                            </div>
+                        </el-popover>
+                    </div>
+                </el-form-item>
                 <el-form-item label="昵称">
                     <el-input class="w200" v-model.trim="editUser.nickname" clearable maxlength="6"/>
                 </el-form-item>
@@ -38,11 +68,15 @@ import ToastUtil from "socialuni-util/src/util/ToastUtil";
 import BirthAgeUtil from "socialuni-util/src/util/BirthAgeUtil";
 import type UserEditVO from "socialuni-api-base/src/model/user/UserEditVO";
 import ObjectUtil from "socialuni-util/src/util/ObjectUtil";
-import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
+import SocialuniMineUserAPI, {SocialuniGetRandomAvatarRO} from "socialuni-user-api/src/api/SocialuniMineUserAPI";
 import PageUtil from "socialuni-util/src/util/PageUtil";
 import SButton from "@/components/socialuni/SButton.vue";
 import type SocialuniMineUserRO from "socialuni-api-base/src/model/user/SocialuniMineUserRO";
 import SDialog from "@/components/socialuni/SDialog.vue";
+import DomFile from "socialuni-util/src/model/DomFile";
+import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
+import CosService from "socialuni-app/src/util/CosService";
+import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
 
 @Options({
     components: {SDialog, SButton}
@@ -100,6 +134,28 @@ export default class SocialuniUserEditDialog extends Vue {
             ToastUtil.success('编辑成功')
             this.closeUserEditPop()
         })
+    }
+
+    async uploadUserAvatarImg() {
+        try {
+            const cosAuthRO = await CosService.getCosAuthRO()
+            const imgFiles: DomFile[] = await UniUtil.chooseImage(1)
+            UniUtil.showLoading('上传中')
+            const imgFile: DomFile = imgFiles[0]
+            imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src
+            const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO), SocialuniMineUserAPI.addUserAvatarImgAPI(new ImgAddQO(imgFile))])
+            socialuniUserModule.setUser(res[1].data)
+        } catch (e) {
+            console.error(e)
+        } finally {
+            UniUtil.hideLoading()
+        }
+    }
+
+    async randomGenerateAvatar() {
+        await AlertUtil.confirm('是否使用随机头像，替换当前头像后无法恢复')
+        const res = await SocialuniMineUserAPI.randomUserAvatar()
+        socialuniUserModule.setUser(res.data)
     }
 
     @Watch('mineUser')

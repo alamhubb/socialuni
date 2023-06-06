@@ -67,13 +67,12 @@ import SDialog from "@/components/socialuni/SDialog.vue";
 import LoginView from "@/components/view/loginView.vue";
 import SocialuniUserEventConst from "socialuni-user/src/constant/SocialuniUserEventConst";
 import SocialuniEventUtil from "socialuni/src/util/SocialuniEventUtil";
-import UserEditView from "@/views/user/UserEditView.vue";
 import UniUtil from "socialuni-util/src/util/UniUtil";
 import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
 import SocialuniUserEditDialog from "@/views/user/SocialuniUserEditDialog.vue";
 
 @Options({
-    components: {SocialuniUserEditDialog, UserEditView, Tools, LoginView, SDialog, ArrowDown}
+    components: {SocialuniUserEditDialog, Tools, LoginView, SDialog, ArrowDown}
 })
 export default class NavBar extends Vue {
     $refs: {

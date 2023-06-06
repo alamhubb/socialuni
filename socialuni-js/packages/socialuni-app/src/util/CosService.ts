@@ -1,17 +1,8 @@
-/* eslint-disable */
-// #ifdef MP
-//@ts-ignore
-import COS from 'cos-wx-sdk-v5'
-// #endif
-// #ifdef H5
-//@ts-ignore
-import COS from 'cos-js-sdk-v5'
-// #endif
 import CosUtil from "socialuni-util/src/util/CosUtil";
 import CosAuthRO from "socialuni-api-base/src/model/cos/CosAuthRO";
-import CosAPI from "socialuni/src/api/CosAPI";
 import DomFile from "socialuni-util/src/model/DomFile";
-import TencentCosAPI from "socialuni/src/api/TencentCosAPI";
+import CosAPI from "socialuni-app-api/src/api/CosAPI";
+import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
 
 export default class CosService {
     //向cos上传图片

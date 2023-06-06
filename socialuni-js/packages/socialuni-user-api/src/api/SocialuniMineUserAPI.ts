@@ -6,6 +6,11 @@ import UserEditVO from "socialuni-api-base/src/model/user/UserEditVO";
 import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
 
+export interface SocialuniGetRandomAvatarRO{
+  path:string
+  fullPath:string
+}
+
 export default class SocialuniMineUserAPI {
   static getMineUserInfoAPI() {
     return socialuniUserRequest.get<SocialuniMineUserRO>('socialuni/mineUser/getMineUser')
@@ -20,7 +25,11 @@ export default class SocialuniMineUserAPI {
   }
 
   static addUserImgAPI(userImg: ImgAddQO) {
-    return socialuniUserRequest.post<CenterUserDetailRO>('socialuni/mineUser/addUserImg', userImg)
+    return socialuniUserRequest.post<SocialuniMineUserRO>('socialuni/mineUser/addUserImg', userImg)
+  }
+
+  static randomUserAvatar() {
+    return socialuniUserRequest.get<SocialuniMineUserRO>('socialuni/mineUser/randomUserAvatar')
   }
 
   static addUserAvatarImgAPI(userImg: ImgAddQO) {

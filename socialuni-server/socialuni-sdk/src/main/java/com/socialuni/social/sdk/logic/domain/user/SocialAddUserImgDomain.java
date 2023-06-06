@@ -46,9 +46,9 @@ public class SocialAddUserImgDomain {
     public SocialuniMineUserDetailRO randomUserAvatar(SocialuniUserDo mineUser) {
         String avatarUrl;
         if (mineUser.getGender().equals(GenderType.boy)) {
-            avatarUrl = SocialuniGenerateAvatarUtil.getBoyAvatar(mineUser.getUnionId());
+            avatarUrl = SocialuniGenerateAvatarUtil.getBoyAvatar();
         } else {
-            avatarUrl = SocialuniGenerateAvatarUtil.getGirlAvatar(mineUser.getUnionId());
+            avatarUrl = SocialuniGenerateAvatarUtil.getGirlAvatar();
         }
         mineUser.setAvatar(avatarUrl);
 

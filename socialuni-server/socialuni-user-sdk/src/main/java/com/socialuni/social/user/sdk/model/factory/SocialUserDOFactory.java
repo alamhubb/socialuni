@@ -73,7 +73,7 @@ public class SocialUserDOFactory {
         user.setUserId(userUnionId);
         user.setUnionId(userUnionId);
         user.setNickname(GenerateNicknameUtil.getGirlName());
-        user.setAvatar(SocialuniGenerateAvatarUtil.getGirlAvatar(userUnionId));
+        user.setAvatar(SocialuniGenerateAvatarUtil.getGirlAvatar());
         user.setGender(GenderType.girl);
         user.setContentType(SocialuniContentType.user);
         user.setAge(SocialuniConst.defaultAge);

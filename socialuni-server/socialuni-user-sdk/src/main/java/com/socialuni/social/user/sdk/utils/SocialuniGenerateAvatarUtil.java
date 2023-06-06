@@ -2,8 +2,7 @@ package com.socialuni.social.user.sdk.utils;
 
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class SocialuniGenerateAvatarUtil {
     static final List<String> boyAvatars = Arrays.asList(
@@ -96,13 +95,15 @@ public class SocialuniGenerateAvatarUtil {
             "socialuni/common/app/defaultAvatar/girl/fcfaaf51f3deb48fd6936713b51f3a292cf57801.jpg"
     );
 
-    public static String getBoyAvatar(Integer userId) {
+    public static String getBoyAvatar() {
+        Random random = new Random();
         Integer size = boyAvatars.size();
-        return SocialuniSystemConst.getStaticResourceUrl() + boyAvatars.get(userId % size) + "!avatar";
+        return SocialuniSystemConst.getStaticResourceUrl() + boyAvatars.get(random.nextInt(size)) + "!avatar";
     }
 
-    public static String getGirlAvatar(Integer userId) {
+    public static String getGirlAvatar() {
+        Random random = new Random();
         Integer size = girlAvatars.size();
-        return SocialuniSystemConst.getStaticResourceUrl() + girlAvatars.get(userId % size) + "!avatar";
+        return SocialuniSystemConst.getStaticResourceUrl() + girlAvatars.get(random.nextInt(size)) + "!avatar";
     }
 }
