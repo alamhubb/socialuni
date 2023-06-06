@@ -14,6 +14,8 @@ import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule"
 import {MessageStatus} from "socialuni-constant/constant/openIm/OpenImMessageType";
 import YScrollbar from "@/components/YScrollbar.vue";
 import {watch} from "vue";
+import SocialuniLoginService from "@/logic/service/SocialuniLoginService";
+import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
 
 export interface SocialuniChatViewLogicRefs {
     messageBox: YScrollbar

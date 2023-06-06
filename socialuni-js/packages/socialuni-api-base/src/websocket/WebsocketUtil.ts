@@ -14,8 +14,10 @@ export default class WebsocketUtil {
     static ws: WebSocket = null
 
     static reConnect() {
+        console.log('触发了重连')
         if (this.locking) return;
         this.locking = true;
+        console.log('触发了重连未执行')
         CommonUtil.delayTime(WebsocketUtil.failedReconnectTime).then(() => {
             WebsocketUtil.websocketConnect(true)
         })
@@ -24,7 +26,7 @@ export default class WebsocketUtil {
     static websocketConnect(reload: boolean) {
         this.locking = true;
         //上锁，防止无限重连，因为会触发close会触发重连
-        this.ws?.close(null);
+        this.websocketClose()
         this.ws = undefined;
 
         console.log('websocket连接')
@@ -71,9 +73,7 @@ export default class WebsocketUtil {
 
         this.ws.onerror = (() => {
             console.log('触发了错误')
-            // #ifndef MP
             this.reConnect()
-            // #endif
         })
 
         this.ws.onclose = ((e) => {
@@ -91,6 +91,6 @@ export default class WebsocketUtil {
     }
 
     static websocketClose() {
-        this.ws.close()
+        this.ws?.close(null);
     }
 }

@@ -3,6 +3,7 @@ import SocialuniMineUserRO from "socialuni-api-base/src/model/user/SocialuniMine
 import AlertUtil from "socialuni-util/src/util/AlertUtil";
 import ToastUtil from "socialuni-util/src/util/ToastUtil";
 import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
+import {socialuniUserModule} from "../store/SocialuniUserModule";
 
 export default class UserService {
     static async getAppLunchDataByHasUser() {

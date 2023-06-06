@@ -78,7 +78,7 @@ class SocialuniChatModule {
             })
         }
         this.chatId = chatId
-        socialChatModule.scrollToMessagePageBottom()
+        socialuniChatModule.scrollToMessagePageBottom()
     }
 
     readChatAction(messagesROs: MessageVO[]) {

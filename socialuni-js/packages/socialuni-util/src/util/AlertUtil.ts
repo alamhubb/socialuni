@@ -1,97 +1,37 @@
+import { ElMessageBox } from 'element-plus'
+
 export default class AlertUtil {
-  public static confirm (msg: string, okLabel = '确定', cancel = '取消') {
-    return new Promise((resolve, reject) => {
-      uni.showModal({
-        content: msg,
-        confirmText: okLabel,
-        cancelText: cancel,
-        success (res) {
-          if (res.confirm) {
-            resolve(true)
-          } else if (res.cancel) {
-            reject(false)
-          }
-        }
-      })
+  static confirm(message: string, okLabel = '确定', cancel = '取消') {
+    return ElMessageBox.confirm(message, {
+      type: 'info',
+      distinguishCancelAndClose: true,
+      confirmButtonText: okLabel,
+      cancelButtonText: cancel
     })
   }
 
-
-  //没有title
-  public static hint (msg: string, okLabel?: string) {
-    return new Promise((resolve, reject) => {
-      uni.showModal({
-        content: msg,
-        showCancel: false,
-        confirmText: okLabel || '确定',
-        success (res) {
-          if (res.confirm) {
-            resolve(null)
-          } else if (res.cancel) {
-            reject(new Error('点击了取消'))
-          }
-        }
-      })
+  static info(message: string, title?: string) {
+    return ElMessageBox.alert(message, title, {
+      type: 'info'
     })
   }
 
-  public static info (msg: string, okLabel?: string) {
-    return new Promise((resolve, reject) => {
-      uni.showModal({
-        title: '提示',
-        content: msg,
-        confirmText: okLabel || '确定',
-        success (res) {
-          if (res.confirm) {
-            resolve(null)
-          } else if (res.cancel) {
-            reject(new Error('点击了取消'))
-          }
-        }
-      })
+  static warning(message: string, okLabel = '确定', cancel = '取消') {
+    return ElMessageBox.confirm(message, {
+      type: 'warning'
     })
   }
 
-  public static warning (msg: string, okLabel?: string) {
-    return new Promise((resolve, reject) => {
-      uni.showModal({
-        title: '警告',
-        content: msg,
-        confirmText: okLabel || '确定',
-        success (res) {
-          if (res.confirm) {
-            resolve(null)
-          } else if (res.cancel) {
-            reject(new Error('点击了取消'))
-          }
-        }
-      })
+  static error(message: string) {
+    ElMessageBox.alert(message, {
+      type: 'error'
     })
+    throw new Error(message)
   }
 
-  public static success (msg: string, okLabel?: string) {
-    return new Promise((resolve, reject) => {
-      uni.showModal({
-        title: '成功',
-        content: msg,
-        showCancel: false,
-        confirmText: okLabel || '确定',
-        success (res) {
-          if (res.confirm) {
-            resolve(null)
-          } else if (res.cancel) {
-            reject()
-          }
-        }
-      })
+  static success(message: string, okLabel = '确定', cancel = '取消') {
+    return ElMessageBox.confirm(message, {
+      type: 'success'
     })
-  }
-
-  public static error (msg: string, title?: string) {
-    uni.showModal({
-      content: msg,
-      showCancel: false
-    })
-    throw new Error(msg)
   }
 }

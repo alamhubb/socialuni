@@ -102,7 +102,7 @@ public class SocialChatROFactory {
         ChatRO chatRO = SocialChatROFactory.getChatRO1(chatDO);
         //查询用户这个chatUser下的消息
         //已经确认过chat为可用的
-        List<SocialuniMessageDO> messageDOS = messageRepository.findTop31ByChatIdAndStatusAndIdNotInOrderByIdDesc(chatDO.getId(), ChatStatus.enable, SocialuniConst.emptyIds);
+        List<SocialuniMessageDO> messageDOS = messageRepository.findTop31ByChatIdAndStatusAndIdNotInOrderByIdDesc(chatDO.getUnionId(), ChatStatus.enable, SocialuniConst.emptyIds);
         if (messageDOS.size() > 30) {
             messageDOS.subList(1, 31);
             chatRO.setLoadMore(LoadMoreType.more);

@@ -35,7 +35,7 @@
                                    src="https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png"/>
                         <template #dropdown>
                             <el-dropdown-menu>
-                                <el-dropdown-item divided @click.native="longinOut">退出登陆</el-dropdown-item>
+                                <el-dropdown-item divided @click.native="loginOut">退出登陆</el-dropdown-item>
                             </el-dropdown-menu>
                         </template>
                     </el-dropdown>
@@ -49,19 +49,25 @@
 import {Options, Vue} from 'vue-property-decorator'
 import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
 import {ArrowDown} from "@element-plus/icons-vue";
+import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
+import ToastUtil from "socialuni-util/src/util/ToastUtil";
 
 @Options({
     components: {ArrowDown}
 })
 export default class NavBar extends Vue {
-
-
     toHome() {
         this.$router.push('/')
     }
 
-    toLogin(){
+    toLogin() {
         this.$router.push('/login')
+    }
+
+    loginOut() {
+        ToastUtil.success('退出登录成功')
+        socialuniUserModule.removeUserAndToken()
+        WebsocketUtil.websocketConnect(false)
     }
 
     get mineUser() {
