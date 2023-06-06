@@ -28,36 +28,31 @@
 
 
         <!--  自定义区域    -->
-        <div :style="{height: dialogBodyHeight}">
-            <y-scrollbar class="h100p">
-                <div>
-                    <slot></slot>
-                </div>
-            </y-scrollbar>
-        </div>
-
-        <div
-                v-if="!noShowFooter"
-                class="row-end-center shadow-top index-xs px py-10 mt-mn">
-            <!-- dialog底部自定义弹框区域 -->
-            <slot name="dialogFooter"></slot>
-            <!--   不显示确定的时候，取消按钮改名为关闭-->
-            <s-page-footer
-                    v-if="!hideBtn && dialogVisible"
-                    :hide-cancel="hideCancel"
-                    :hide-confirm="hideConfirm"
-                    :confirm-text="confirmText"
-                    :show-loading="configLoad"
-                    :disabled="disabled"
-                    :no-debounce="noDebounce"
-                    :cancel-text="hideConfirm?'关 闭' :cancelText"
-                    @cancel="dialogCancel"
-                    :confirm="confirmMethod()"
-                    @confirm="dialogConfirm"
-                    @confirm-after="confirmAfter"
-            >
-            </s-page-footer>
-        </div>
+        <!--        <y-scrollbar class="h100p">-->
+        <slot></slot>
+        <!--        </y-scrollbar>-->
+        <!--        <div
+                        v-if="!noShowFooter"
+                        class="row-end-center shadow-top index-xs px py-10 mt-mn">
+                    &lt;!&ndash; dialog底部自定义弹框区域 &ndash;&gt;
+                    <slot name="dialogFooter"></slot>
+                    &lt;!&ndash;   不显示确定的时候，取消按钮改名为关闭&ndash;&gt;
+                    <s-page-footer
+                            v-if="!hideBtn && dialogVisible"
+                            :hide-cancel="hideCancel"
+                            :hide-confirm="hideConfirm"
+                            :confirm-text="confirmText"
+                            :show-loading="configLoad"
+                            :disabled="disabled"
+                            :no-debounce="noDebounce"
+                            :cancel-text="hideConfirm?'关 闭' :cancelText"
+                            @cancel="dialogCancel"
+                            :confirm="confirmMethod()"
+                            @confirm="dialogConfirm"
+                            @confirm-after="confirmAfter"
+                    >
+                    </s-page-footer>
+                </div>-->
     </el-dialog>
 </template>
 <script lang="ts">
@@ -93,7 +88,7 @@ export default class SDialog extends Vue {
     }) width: string
 
     @Prop({
-        default: '12vh%'
+        default: '12vh'
     }) top: string
 
     // 设置弹框body部分的高度，默认500px

@@ -44,7 +44,9 @@
         </div>
 
 
-        <s-dialog ref="loginDialog" title="登录"></s-dialog>
+        <s-dialog ref="loginDialog" title="登录" width="500px">
+            <login-view @login-success="loginSuccess"></login-view>
+        </s-dialog>
     </div>
 </template>
 
@@ -55,9 +57,10 @@ import {ArrowDown} from "@element-plus/icons-vue";
 import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
 import ToastUtil from "socialuni-util/src/util/ToastUtil";
 import SDialog from "@/components/socialuni/SDialog.vue";
+import LoginView from "@/components/view/loginView.vue";
 
 @Options({
-    components: {SDialog, ArrowDown}
+    components: {LoginView, SDialog, ArrowDown}
 })
 export default class NavBar extends Vue {
     $refs: {
@@ -73,6 +76,11 @@ export default class NavBar extends Vue {
         console.log(this.$refs.loginDialog)
         this.$refs.loginDialog.open()
         // this.$router.push('/login')
+    }
+
+    loginSuccess(){
+        ToastUtil.success('登录成功')
+        this.$refs.loginDialog.close()
     }
 
     loginOut() {
