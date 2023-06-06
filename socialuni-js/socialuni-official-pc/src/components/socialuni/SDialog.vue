@@ -14,7 +14,6 @@
     <el-dialog
             :title="title"
             v-bind="$attrs"
-            v-on="$listeners"
             v-model="dialogVisible"
             :width="width"
             append-to-body
@@ -97,7 +96,7 @@ export default class SDialog extends Vue {
 
     // 设置弹框body部分的高度，默认500px
     @Prop({
-        default: '500px'
+        default: '350px'
     }) dialogBodyHeight: string
 
 
@@ -145,10 +144,7 @@ export default class SDialog extends Vue {
     }) configLoad: boolean
 
     // 确定按钮的loading状态
-    @Prop({
-        type: Function | Object | Array,
-        default: null
-    }) confirm: any
+    @Prop() confirm: any
 
     @Prop({
         type: Boolean,

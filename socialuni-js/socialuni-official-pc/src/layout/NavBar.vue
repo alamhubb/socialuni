@@ -48,14 +48,12 @@
             </template>
         </el-dropdown>
 
-        <s-dialog ref="loginDialog" title="登录" width="500px">
+        <s-dialog ref="loginDialog" title="登录" width="400px" no-show-footer>
             <login-view @login-success="loginSuccess"></login-view>
         </s-dialog>
 
 
-        <s-dialog ref="userEditDialog" title="编辑用户信息" width="500px">
-            <user-edit-view></user-edit-view>
-        </s-dialog>
+        <socialuni-user-edit-dialog ref="userEditDialog"></socialuni-user-edit-dialog>
     </div>
 </template>
 
@@ -70,14 +68,17 @@ import LoginView from "@/components/view/loginView.vue";
 import SocialuniUserEventConst from "socialuni-user/src/constant/SocialuniUserEventConst";
 import SocialuniEventUtil from "socialuni/src/util/SocialuniEventUtil";
 import UserEditView from "@/views/user/UserEditView.vue";
+import UniUtil from "socialuni-util/src/util/UniUtil";
+import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
+import SocialuniUserEditDialog from "@/views/user/SocialuniUserEditDialog.vue";
 
 @Options({
-    components: {UserEditView, Tools, LoginView, SDialog, ArrowDown}
+    components: {SocialuniUserEditDialog, UserEditView, Tools, LoginView, SDialog, ArrowDown}
 })
 export default class NavBar extends Vue {
     $refs: {
         loginDialog: SDialog
-        userEditDialog: SDialog
+        userEditDialog: SocialuniUserEditDialog
     }
 
     created() {
@@ -106,6 +107,7 @@ export default class NavBar extends Vue {
     editUserInfo() {
         this.$refs.userEditDialog.open()
     }
+
 
     loginOut() {
         ToastUtil.success('退出登录成功')
