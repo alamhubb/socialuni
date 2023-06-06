@@ -9,11 +9,15 @@ import MessageVO from "socialuni-im-api/src/model/RO/MessageVO";
 import Arrays from "socialuni-util/src/util/Arrays";
 import MessageAPI from "socialuni-im-api/src/api/MessageAPI";
 import CommonUtil from "socialuni-util/src/util/CommonUtil";
+import RouterUtil from "socialuni-util/src/util/RouterUtil";
+import ImPagePath from "../constant/ImPagePath";
 
 class SocialuniChatModule {
     chatId = ''
     chats: SocialuniChatRO[] = []
+    scrollTop: number = 0
 
+    //为什么放到store，因为推送消息时使用，不放store获取不到
     //因为存在排序，所以index并不是更新了update就是第一个，不总是为0，并不总是第一个,
     get chat(): SocialuniChatRO {
         //不再使用index，存在陌生人情况
@@ -134,6 +138,7 @@ class SocialuniChatModule {
 
     scrollToMessagePageBottom() {
         CommonUtil.delayTime(100).then(() => {
+            console.log('xiugai top zhi')
             this.scrollTop = this.messages.length * 500
             // this.scrollTop = -1000
         })
@@ -191,6 +196,22 @@ class SocialuniChatModule {
 
         // PlatformUtils.requestSubscribeChat()
     }
+
+
+    pushChatAndMessagesAction(newChat: SocialuniChatRO) {
+
+        // 则直接往msg增加消息
+        // 前台将消息改为已读,修改时间使用后台的就行
+        this.readChatAction(newChat.messages)
+        //将新消息放到当前msg中并替换
+        this.pushMsgReplaceChat(this.chatIndex, newChat)
+        this.scrollToMessagePageBottom()
+        // 后台改为已读
+        // 向后台发送消息，将收到的消息改为已读
+        // 如果当前就是这个聊天
+    }
+
+
 }
 
 export const socialuniChatModule: SocialuniChatModule = reactive(new SocialuniChatModule())

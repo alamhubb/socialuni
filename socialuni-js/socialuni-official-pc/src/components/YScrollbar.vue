@@ -1,7 +1,7 @@
 <template>
-  <el-scrollbar class="overflow-x-hidden overflow-hidden">
+  <div class="overflow-x-hidden overflow-auto">
     <slot></slot>
-  </el-scrollbar>
+  </div>
 </template>
 
 <script lang="ts">

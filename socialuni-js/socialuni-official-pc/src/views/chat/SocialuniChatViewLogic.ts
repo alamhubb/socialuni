@@ -8,18 +8,38 @@ import {socialChatModule} from "socialuni-im/src/store/SocialChatModule";
 import ToastUtil from "socialuni-util/src/util/ToastUtil";
 import MessageAddVO from "socialuni-im-api/src/model/QO/message/MessageAddVO";
 import MessageAPI from "socialuni-im-api/src/api/MessageAPI";
-import {useRouter} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import DateUtil from "socialuni-util/src/util/DateUtil";
+import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
+import {MessageStatus} from "socialuni-constant/constant/openIm/OpenImMessageType";
+import YScrollbar from "@/components/YScrollbar.vue";
+import {watch} from "vue";
+
+export interface SocialuniChatViewLogicRefs {
+    messageBox: YScrollbar
+}
 
 export default class SocialuniChatViewLogic {
+    private $refs: SocialuniChatViewLogicRefs = null
+
+    init(value: SocialuniChatViewLogicRefs) {
+        this.$refs = value;
+        watch(() => socialuniChatModule.scrollTop, () => {
+            console.log('触发了滚动')
+            this.$refs.messageBox.$el.scrollTop = socialuniChatModule.scrollTop
+            // this.scrollTop = -1000
+        })
+    }
+
     msgContent = ''
+    scrollTop: number = 0
 
     formatTime(time: any) {
         return DateUtil.formatTime(time)
     }
 
 
-    get chat() {
+    get chat(): SocialuniChatRO {
         if (socialuniChatModule.chat) {
             console.log(socialuniChatModule.chat.messages)
             console.log(socialuniChatModule.chat.messages.length)
@@ -40,38 +60,34 @@ export default class SocialuniChatViewLogic {
 
 
     async sendMsgClick() {
+        console.log(this.$refs.messageBox)
+        console.log(this.$refs.messageBox.$el.scrollTop)
+        if (!socialuniChatModule.chat) {
+            ToastUtil.throwError('缺少会话')
+        }
         UserCheckUtil.checkUserBindPhoneNum()
-        const msgContent = this.msgContent || (this.chat.needPayOpen ? HintMsg.payOpenDefaultMsg : '')
+        const msgContent = this.msgContent
+        // || (this.chat.needPayOpen ? HintMsg.payOpenDefaultMsg : '')
         console.log(this.msgContent)
+
         if (msgContent) {
+            const newMsg = new MessageVO(this.msgContent, socialuniUserModule.mineUser)
+            socialuniChatModule.messages.push(newMsg)
+            socialuniChatModule.scrollToMessagePageBottom()
+            const index: number = socialuniChatModule.messages.length - 1
             // 点击发送后立即push
             //启用状态可以直接发送
             this.msgContent = ''
-            // console.log(index)
             this.chat.updateTime = new Date().getTime()
-            // this.chat.lastContent = msg.content
-            // 滚屏到最后面
-            // 不能监控变化滚动，有时候是往前面插入
-            /*const {data} = await (await socialChatModule.openIm())[msg.action](msg.contentData);
-            const params = {
-                recvID: this.chat.receiveUserId,
-                groupID: this.chat.groupId,
-                message: data,
-            };*/
-            // console.log('-------params-------', params);
-
-            return MessageAPI.sendMsgAPI(this.chat.id, msgContent)
-            /*if (this.chat.status === SocialuniCommonStatus.enable) {
-
-
-            } */
-            /*else {
-              this.openChatPromise(msgContent).finally(() => {
-                this.isOpeningChatDisableBtn = false
-              })
-            }*/
+            try {
+                const res = await MessageAPI.sendMsgAPI(this.chat.id, msgContent)
+                this.chat.updateTime = res.data.createTime
+                socialuniChatModule.messages.splice(index, 1, res.data)
+            } catch (e) {
+                newMsg.readStatus = MessageStatus.Failed
+            }
         } else {
-            ToastUtil.toast('不能发送空白内容')
+            ToastUtil.throwError('不能发送空白内容')
         }
     }
 }

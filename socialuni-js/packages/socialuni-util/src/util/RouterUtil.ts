@@ -1,4 +1,4 @@
-import {useRouter} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import {getCurrentInstance} from "vue";
 import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
 
@@ -52,6 +52,8 @@ export default class RouterUtil {
     }
 
     static getCurrentPageURI(): string {
+        // console.log(useRoute())
+        // console.log(useRouter())
         return socialuniPluginsModule.router.currentRoute.path
     }
 

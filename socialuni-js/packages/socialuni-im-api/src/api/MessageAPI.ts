@@ -5,9 +5,9 @@ import MessageVO from "../model/RO/MessageVO";
 import MsgDeleteVO from "../model/QO/message/MsgDeleteVO";
 
 export default class MessageAPI {
-    static sendMsgAPI<T>(chatId: string, content: string) {
+    static sendMsgAPI(chatId: string, content: string) {
         const msgAdd: MessageAddVO = new MessageAddVO(chatId, content)
-        return socialuniImRequest.post <T>('socialuni/message/sendMsg', msgAdd)
+        return socialuniImRequest.post <MessageVO>('socialuni/message/sendMsg', msgAdd)
     }
 
     static queryMessagesAPI(chatId: string, queryTime: Date) {
