@@ -58,6 +58,8 @@ import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
 import ToastUtil from "socialuni-util/src/util/ToastUtil";
 import SDialog from "@/components/socialuni/SDialog.vue";
 import LoginView from "@/components/view/loginView.vue";
+import mitt from "mitt";
+import SocialuniUserEventConst from "socialuni-user/src/constant/SocialuniUserEventConst";
 
 @Options({
     components: {LoginView, SDialog, ArrowDown}
@@ -65,6 +67,13 @@ import LoginView from "@/components/view/loginView.vue";
 export default class NavBar extends Vue {
     $refs: {
         loginDialog: SDialog
+    }
+
+    created() {
+        mitt().on(SocialuniUserEventConst.toLogin, () => {
+            console.log('接收到了')
+            this.toLogin()
+        })
     }
 
     toHome() {
@@ -78,7 +87,7 @@ export default class NavBar extends Vue {
         // this.$router.push('/login')
     }
 
-    loginSuccess(){
+    loginSuccess() {
         ToastUtil.success('登录成功')
         this.$refs.loginDialog.close()
     }

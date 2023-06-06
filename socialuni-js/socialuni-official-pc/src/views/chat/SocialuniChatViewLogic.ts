@@ -16,6 +16,10 @@ import YScrollbar from "@/components/YScrollbar.vue";
 import {watch} from "vue";
 import SocialuniLoginService from "@/logic/service/SocialuniLoginService";
 import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
+import AlertUtil from "socialuni-util/src/util/AlertUtil";
+import {socialuniConfigModule} from "socialuni-app/src/store/SocialuniConfigModule";
+import mitt from "mitt";
+import SocialuniUserEventConst from "socialuni-user/src/constant/SocialuniUserEventConst";
 
 export interface SocialuniChatViewLogicRefs {
     messageBox: YScrollbar
@@ -67,7 +71,9 @@ export default class SocialuniChatViewLogic {
         if (!socialuniChatModule.chat) {
             ToastUtil.throwError('缺少会话')
         }
+        console.log(123123)
         UserCheckUtil.checkUserBindPhoneNum()
+        console.log(456456)
         const msgContent = this.msgContent
         // || (this.chat.needPayOpen ? HintMsg.payOpenDefaultMsg : '')
         console.log(this.msgContent)

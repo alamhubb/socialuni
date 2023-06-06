@@ -9,7 +9,8 @@
   "devDependencies": {
     "socialuni": "^0.1.2",
     "socialuni-app": "^0.1.2",
-    "socialuni-user-api": "^0.1.2"
+    "socialuni-user-api": "^0.1.2",
+    "mitt": "^3.0.0"
   },
   "keywords": [],
   "author": "",

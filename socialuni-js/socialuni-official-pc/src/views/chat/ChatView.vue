@@ -81,7 +81,13 @@
                 </y-scrollbar>
 
                 <div class="flex-row flex-none">
-                    <el-input v-model="logic.msgContent"></el-input>
+                    <el-input
+                            v-model="logic.msgContent"
+                            :rows="1"
+                            :autosize="{minRows:1,maxRows:5}"
+                            type="textarea"
+                            placeholder="Please input"
+                    />
                     <el-button @click="logic.sendMsgClick()">发送</el-button>
                 </div>
             </div>
