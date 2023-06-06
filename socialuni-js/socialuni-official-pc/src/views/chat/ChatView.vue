@@ -14,7 +14,7 @@
                             </div>
                         </div>-->
             <div class="h100p flex-col">
-                <y-scrollbar id="tesfasdfaf" ref="messageBox" class="flex-1">
+                <div ref="messageBox" class="flex-1 overflow-auto">
                     <div v-if="logic.chat">
                         <div class="w100p" v-for="msg in logic.chat.messages" :id="'m'+msg.id" :key="msg.id">
                             <div v-if="msg.user.isMine" class="flex-row pd-sm">
@@ -78,7 +78,7 @@
                             </div>
                         </div>
                     </div>
-                </y-scrollbar>
+                </div>
 
                 <div class="flex-row flex-none">
                     <el-input

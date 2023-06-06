@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.utils;
+package com.socialuni.social.user.sdk.utils;
 
 /**
  * @author qinkaiyuan
@@ -35,7 +35,8 @@ public class GenerateNicknameUtil {
 
     public static void main(String[] args) {
         for (int i = 0; i < 20; i++) {
-            System.out.println(GenerateNicknameUtil.getAllName());
+            System.out.println(GenerateNicknameUtil.getGirlName());
+            System.out.println(GenerateNicknameUtil.getBoyName());
         }
     }
 }

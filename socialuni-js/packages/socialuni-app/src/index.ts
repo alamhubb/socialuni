@@ -7,6 +7,10 @@ class SocialuniAppPlugin implements SocialuniPlugin {
         WebsocketUtil.websocketConnect(false)
         socialuniConfigModule.getAppConfigAction()
     }
+
+    onResponseErrorInterceptors(res){
+        console.log(res)
+    }
 }
 
 

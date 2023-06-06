@@ -99,6 +99,10 @@ export default class LoginView extends Vue {
         authCode: ElInput;
     }
 
+    created(){
+        console.log('123123')
+    }
+
     secretKey = ''
 
     loginUser: SocialPhoneNumLoginQO = new SocialPhoneNumLoginQO()

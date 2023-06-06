@@ -1,11 +1,11 @@
 <template>
-  <div class="overflow-x-hidden overflow-auto">
-    <slot></slot>
-  </div>
+    <el-scrollbar class="overflow-x-hidden overflow-hidden">
+        <slot></slot>
+    </el-scrollbar>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-property-decorator'
+import {Options, Vue} from 'vue-property-decorator'
 
 @Options({})
 export default class YScrollbar extends Vue {
@@ -22,6 +22,6 @@ export default class YScrollbar extends Vue {
 
 //如果内部还包含el-scroller则会导致冲突问题
 .overflow-x-hidden > .el-scrollbar__bar.is-horizontal {
-    display: none;
+  display: none;
 }
 </style>

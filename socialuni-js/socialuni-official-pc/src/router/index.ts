@@ -22,6 +22,12 @@ export const constantRoutes = [
     meta: {title: '首页', hidden: true},
   },
   {
+    path: '/mine',
+    name: 'mine',
+    component: () => import('@/views/user/mine.vue'),
+    meta: {title: '我的', hidden: true},
+  },
+  {
     path: '/404',
     component: () => import('@/views/404/404.vue'),
     hidden: true

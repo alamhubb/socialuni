@@ -22,26 +22,32 @@ const socialuniInitPlugin: SocialuniPlugin = {
 async function installSocialuniPluginIns() {
 
     socialuniPluginsModule.addPlugin(socialuniInitPlugin)
-
     try {
         //查询是否包含community模块，如果存在则加载
-        const socialuniCommunityPlugin: ImportModule<SocialuniPlugin> = await import('socialuni-user/src/index')
-        socialuniPluginsModule.addPlugin(socialuniCommunityPlugin.default)
+        const socialuniPlugin: ImportModule<SocialuniPlugin> = await import('socialuni-app/src/index')
+        socialuniPluginsModule.addPlugin(socialuniPlugin.default)
     } catch (e) {
         // 如果导入失败，则不触发任何操作
     }
     try {
         //查询是否包含community模块，如果存在则加载
-        const socialuniCommunityPlugin: ImportModule<SocialuniPlugin> = await import('socialuni-community/src/index')
-        socialuniPluginsModule.addPlugin(socialuniCommunityPlugin.default)
+        const socialuniPlugin: ImportModule<SocialuniPlugin> = await import('socialuni-user/src/index')
+        socialuniPluginsModule.addPlugin(socialuniPlugin.default)
+    } catch (e) {
+        // 如果导入失败，则不触发任何操作
+    }
+    try {
+        //查询是否包含community模块，如果存在则加载
+        const socialuniPlugin: ImportModule<SocialuniPlugin> = await import('socialuni-community/src/index')
+        socialuniPluginsModule.addPlugin(socialuniPlugin.default)
     } catch (e) {
         // 如果导入失败，则不触发任何操作
     }
     // 社交联盟内置支持的插件
     try {
         //查询是否包含community模块，如果存在则加载
-        const socialuniImPlugin: ImportModule<SocialuniPlugin> = await import('socialuni-im/src/index')
-        socialuniPluginsModule.addPlugin(socialuniImPlugin.default)
+        const socialuniPlugin: ImportModule<SocialuniPlugin> = await import('socialuni-im/src/index')
+        socialuniPluginsModule.addPlugin(socialuniPlugin.default)
     } catch (e) {
         // 如果导入失败，则不触发任何操作
     }
