@@ -9,10 +9,12 @@ import LoginRes = UniApp.LoginRes;
 import GetUserInfoRes = UniApp.GetUserInfoRes;
 import GetImageInfoSuccessData = UniApp.GetImageInfoSuccessData;
 import ToastUtil from 'socialuni-util/src/util/ToastUtil'
-import UUIDUtil from 'socialuni-util/src/util/UUIDUtil'
 import AppMsg from "socialuni-constant/constant/AppMsg";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule"
 import DomFile from "../model/DomFile";
+import UniappH5 from "./UniappH5";
+import ImgUtil from "./ImgUtil";
+import UUIDUtil from "./UUIDUtil";
 
 
 export default class UniUtil {
@@ -126,11 +128,11 @@ export default class UniUtil {
     }
 
     public static showLoading(loadText: string) {
-        uni.showLoading({title: loadText || ''})
+        // uni.showLoading({title: loadText || ''})
     }
 
     public static hideLoading() {
-        uni.hideLoading()
+        // uni.hideLoading()
     }
 
     public static actionSheet(itemList: string[]): Promise<any> {
@@ -190,91 +192,9 @@ export default class UniUtil {
 
     //选择图片
     public static chooseImage(count = 1) {
-
-
-
-
-        return new Promise<DomFile[]>((resolve, reject) => {
-
-
-
-
-
-            const {
-                invokeCallbackHandler: invoke
-            } = UniServiceJSBridge
-
-            let imageInput = null
-
-            export function chooseImage ({
-                                             count,
-                                             // sizeType,
-                                             sourceType,
-                                             extension
-                                         }, callbackId) {
-                // TODO handle sizeType 尝试通过 canvas 压缩
-
-                if (imageInput) {
-                    document.body.removeChild(imageInput)
-                    imageInput = null
-                }
-
-                imageInput = _createInput({
-                    count,
-                    sourceType,
-                    extension,
-                    type: 'image'
-                })
-                document.body.appendChild(imageInput)
-                imageInput.addEventListener('change', function (event) {
-                    const tempFiles = []
-                    const fileCount = event.target.files.length
-                    for (let i = 0; i < fileCount; i++) {
-                        const file = event.target.files[i]
-                        let filePath
-                        Object.defineProperty(file, 'path', {
-                            get () {
-                                filePath = filePath || fileToUrl(file)
-                                return filePath
-                            }
-                        })
-                        if (i < count) tempFiles.push(file)
-                    }
-                    const res = {
-                        errMsg: 'chooseImage:ok',
-                        get tempFilePaths () {
-                            return tempFiles.map(({ path }) => path)
-                        },
-                        tempFiles: tempFiles
-                    }
-                    invoke(callbackId, res)
-
-                    // TODO 用户取消选择时，触发 fail，目前尚未找到合适的方法。
-                })
-
-                imageInput.click()
-
-                if (!interact.getStatus()) {
-                    console.warn(`${t('uni.chooseFile.notUserActivation')}`)
-                }
-            }
-
-
-
-
-            uni.chooseImage({
-                // sourceType: ['album'],
-                sizeType: ['original'],
-                // sizeType: ['compressed'],
-                count: count,
-                success(res) {
-                    const imgFiles = UniUtil.imgFilesCompressHandler(res)
-                    resolve(imgFiles)
-                },
-                fail(err) {
-                    reject(err)
-                }
-            })
+        return UniappH5.chooseImage(count).then(res=>{
+            const imgFiles = UniUtil.imgFilesCompressHandler(res)
+            return imgFiles
         })
     }
 
@@ -297,7 +217,7 @@ export default class UniUtil {
         })
     }
 
-    private static async imgFilesCompressHandler(res: UniApp.ChooseImageSuccessCallbackResult) {
+    private static async imgFilesCompressHandler(res) {
         const imgFiles: DomFile[] = res.tempFiles as DomFile[]
         const tempFilePaths: string[] = res.tempFilePaths as string[]
         for (let i = 0; i < imgFiles.length; i++) {
@@ -317,12 +237,6 @@ export default class UniUtil {
                 ratio = Math.round(10000 / (imgSize / 1024))
             }
             imgFile.quality = ratio
-            if (!socialuniSystemModule.isH5) {
-                const res = await UniUtil.compressImage(tempFilePaths[i], ratio)
-                imgFile.path = res
-                //计算压缩后的大小
-                imgFile.size = Math.round(imgSize * ratio / 100)
-            }
             const image = await UniUtil.getImageInfo(imgFile.path)
             // 获取文件名
             imgFile.aspectRatio = image.width / image.height
@@ -338,21 +252,6 @@ export default class UniUtil {
         return imgFiles
     }
 
-    public static compressImage(filePath: string, quality: number): Promise<string> {
-        return new Promise<string>((resolve, reject) => {
-            uni.compressImage({
-                src: filePath,
-                //默认最低20
-                quality: Math.max(quality, 20),
-                success: res => {
-                    resolve(res.tempFilePath)
-                },
-                fail: err => {
-                    reject(err)
-                }
-            })
-        })
-    }
 
     public static getImageInfo(filePath: string) {
         return new Promise<GetImageInfoSuccessData>((resolve, reject) => {

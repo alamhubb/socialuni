@@ -1,6 +1,6 @@
 import SocialuniAPIConfig from "socialuni-api-base/src/SocialuniAPIConfig";
 import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
-import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
+import UUIDUtil from "socialuni-app/src/util/UUIDUtil";
 import CommonUtil from "socialuni-util/src/util/CommonUtil";
 import NotifyVO from "../model/NotifyVO";
 import JsonUtil from "socialuni-util/src/util/JsonUtil";

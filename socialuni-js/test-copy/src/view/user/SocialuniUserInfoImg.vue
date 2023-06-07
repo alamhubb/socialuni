@@ -48,7 +48,7 @@ import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
 import {Options, Prop, Vue} from "vue-property-decorator";
 import {socialuniUserModule} from 'socialuni/src/store/SocialuniUserModule';
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
-import ImgUtil from "socialuni-util/src/util/ImgUtil";
+import ImgUtil from "socialuni-app/src/util/ImgUtil";
 import CosUtil from "socialuni-util/src/util/CosUtil";
 import UniUtil from "socialuni-app/src/util/UniUtil";
 import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";

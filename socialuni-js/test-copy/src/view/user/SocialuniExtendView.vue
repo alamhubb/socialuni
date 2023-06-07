@@ -133,7 +133,7 @@ import UniUtil from "socialuni-app/src/util/UniUtil";
 import NumUtil from "socialuni-util/src/util/NumUtil";
 import DateUtil from "socialuni-util/src/util/DateUtil";
 import SocialuniUserExtendDetailRO from "socialuni-api-base/src/model/social/SocialuniUserExtendDetailRO";
-import ImgUtil from "socialuni-util/src/util/ImgUtil";
+import ImgUtil from "socialuni-app/src/util/ImgUtil";
 import QPullRefresh from "../../components/QPullRefresh/QPullRefresh.vue";
 
 @Options({

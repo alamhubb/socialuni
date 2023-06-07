@@ -1,8 +1,8 @@
 import CosAuthRO from "socialuni-api-base/src/model/cos/CosAuthRO";
-import DomFile from "socialuni-util/src/model/DomFile";
 import CosAPI from "socialuni-app-api/src/api/CosAPI";
 import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
 import CosUtil from "./CosUtil";
+import DomFile from "../model/DomFile";
 
 export default class CosService {
     //向cos上传图片
@@ -10,6 +10,8 @@ export default class CosService {
         const authRes = await CosAPI.getCosAuthorizationAPI()
         const cosAuthRO = authRes.data
         cosAuthRO.cos = CosUtil.getAuthorizationCos(cosAuthRO)
+        console.log(45646545)
+        console.log(cosAuthRO)
         return cosAuthRO
     }
 

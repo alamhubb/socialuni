@@ -2,9 +2,9 @@ import AppMsg from "socialuni-constant/constant/AppMsg";
 import TencentCosIdInfoRO from "socialuni-api-base/src/model/RO/tencent/cos/idImgInfo/TencentCosIdInfoRO";
 import UniUtil from "../../../socialuni-app/src/util/UniUtil";
 import CosAuthRO from "socialuni-api-base/src/model/cos/CosAuthRO";
-import DomFile from "socialuni-util/src/model/DomFile";
 import CosUploadResult from "socialuni-api-base/src/model/cos/CosUploadResult";
 import AlertUtil from "socialuni-app/src/util/AlertUtil";
+import DomFile from "socialuni-app/src/model/DomFile";
 
 export default class TencentCosAPI {
     /*static async getImgTagAPI(imgUrl, imgKey, cosAuthRO: CosAuthRO) {
@@ -80,7 +80,7 @@ export default class TencentCosAPI {
         return new TencentCosIdInfoRO(res)
     }*/
 
-    static async uploadFileAPI(imgKey: string, imgFile: DomFile, cosAuthRO: CosAuthRO) {
+    static async uploadFileAPI(imgFile: DomFile, cosAuthRO: CosAuthRO) {
         // imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src
         return new Promise<CosUploadResult>(async (resolve, reject) => {
             const headers = {};
@@ -88,9 +88,9 @@ export default class TencentCosAPI {
             console.log(imgFile.fileType)
             // "fileid": "bba022e9313849acafeb34fd5d5a65f5avatar.jpg"
             // 通过 imageMogr2 接口使用图片缩放功能：指定图片宽度为 200，宽度等比压缩
-            headers['Pic-Operations'] = `{"is_pic_info": 1, "rules":[{"fileid": "${imgKey}!avatar", "rule": "imageMogr2/thumbnail/100x/interlace/0"},{"fileid": "${imgKey}!normal", "rule": "imageMogr2/thumbnail/800x/interlace/1"},{"fileid": "${imgKey}!thumbnail", "rule": "imageMogr2/thumbnail/300x/interlace/0"}]}`;
-            console.log(imgKey)
+            headers['Pic-Operations'] = `{"is_pic_info": 1, "rules":[{"fileid": "${imgFile.fileName}!avatar", "rule": "imageMogr2/thumbnail/100x/interlace/0"},{"fileid": "${imgFile.fileName}!normal", "rule": "imageMogr2/thumbnail/800x/interlace/1"},{"fileid": "${imgFile.fileName}!thumbnail", "rule": "imageMogr2/thumbnail/300x/interlace/0"}]}`;
             console.log(imgFile)
+            console.log(cosAuthRO)
             console.log(cosAuthRO.bucket)
             console.log(cosAuthRO.region)
             console.log(cosAuthRO.cos)
@@ -99,7 +99,7 @@ export default class TencentCosAPI {
             cosAuthRO.cos.putObject({
                 Bucket: cosAuthRO.bucket,
                 Region: cosAuthRO.region,
-                Key: cosAuthRO.uploadImgPath + 'img/' + imgKey,
+                Key: imgFile.src,
                 Body: imgFile,
                 Headers: headers,
                 // {"fileid": "${imgFile.fileName}!avatar", "rule": "imageMogr2/thumbnail/100x/interlace/0|imageMogr2/gravity/center/crop/100x100"},

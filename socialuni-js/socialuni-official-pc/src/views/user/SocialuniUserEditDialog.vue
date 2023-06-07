@@ -65,8 +65,8 @@ import DomFile from "socialuni-util/src/model/DomFile";
 import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
 import CosService from "socialuni-app/src/util/CosService";
 import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
-import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
-import ImgUtil from "socialuni-util/src/util/ImgUtil";
+import UUIDUtil from "socialuni-app/src/util/UUIDUtil";
+import ImgUtil from "socialuni-app/src/util/ImgUtil";
 
 @Options({
     components: {SDialog, SButton}

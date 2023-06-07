@@ -6,35 +6,35 @@
         </div>
 
         <div class="row-end-center">
-<!--            <div class="flex-none row-col-center mr">
-                <a href="https://socialuni.cn" target="_blank" class="mr-sm md:mr bg-click">
-                    <div class="row-all-center">官网文档</div>
-                </a>
-                <el-divider direction="vertical" class="mr"/>
-                <a href="https://socialuni.cn/demo" target="_blank" class="mr-sm md:mr bg-click">
-                    <div class="row-all-center">demo演示</div>
-                </a>
-                <el-divider direction="vertical" class="mr"/>
-                <div class="row-col-center">
-                    <a href="https://gitee.com/socialuni/socialuni" target="_blank" class="mr-sm md:mr">
-                        <div class="row-all-center"><img src="@/assets/imgs/giteelogo.png" class="use-click size31"/>
-                        </div>
-                    </a>
-                    <a href="https://github.com/social-uni/socialuni" target="_blank" class="md:mr-sm">
-                        <div class="row-all-center"><i class="mdi mdi-github font-36 use-click color-black"/></div>
-                    </a>
-                </div>
-            </div>-->
+            <!--            <div class="flex-none row-col-center mr">
+                            <a href="https://socialuni.cn" target="_blank" class="mr-sm md:mr bg-click">
+                                <div class="row-all-center">官网文档</div>
+                            </a>
+                            <el-divider direction="vertical" class="mr"/>
+                            <a href="https://socialuni.cn/demo" target="_blank" class="mr-sm md:mr bg-click">
+                                <div class="row-all-center">demo演示</div>
+                            </a>
+                            <el-divider direction="vertical" class="mr"/>
+                            <div class="row-col-center">
+                                <a href="https://gitee.com/socialuni/socialuni" target="_blank" class="mr-sm md:mr">
+                                    <div class="row-all-center"><img src="@/assets/imgs/giteelogo.png" class="use-click size31"/>
+                                    </div>
+                                </a>
+                                <a href="https://github.com/social-uni/socialuni" target="_blank" class="md:mr-sm">
+                                    <div class="row-all-center"><i class="mdi mdi-github font-36 use-click color-black"/></div>
+                                </a>
+                            </div>
+                        </div>-->
             <div class="row-col-center">
                 <input id="fileSelector" type="file" @change="uploadData"/>
                 <el-button @click="uploadUserAvatarImg">test</el-button>
-<!--                <el-avatar v-if="!mineUser" class="use-click" @click="toLogin">登录</el-avatar>
-                <div v-else class="row-col-center">
-                    <el-tag class="mr-10" type="warning" effect="dark">{{ mineUser.nickname }}
-                    </el-tag>
-                    <el-avatar shape="square" :src="mineUser.avatar"/>
+                <!--                <el-avatar v-if="!mineUser" class="use-click" @click="toLogin">登录</el-avatar>
+                                <div v-else class="row-col-center">
+                                    <el-tag class="mr-10" type="warning" effect="dark">{{ mineUser.nickname }}
+                                    </el-tag>
+                                    <el-avatar shape="square" :src="mineUser.avatar"/>
 
-                </div>-->
+                                </div>-->
             </div>
         </div>
 
@@ -73,8 +73,8 @@ import UniUtil from "socialuni-app/src/util/UniUtil";
 import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
 import SocialuniUserEditDialog from "@/views/user/SocialuniUserEditDialog.vue";
 import CosService from "socialuni-app/src/util/CosService";
-import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
-import ImgUtil from "socialuni-util/src/util/ImgUtil";
+import UUIDUtil from "socialuni-app/src/util/UUIDUtil";
+import ImgUtil from "socialuni-app/src/util/ImgUtil";
 import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
 import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
 import DomFile from "socialuni-util/src/model/DomFile";
@@ -116,8 +116,15 @@ export default class NavBar extends Vue {
     }
 
     async uploadUserAvatarImg() {
+        console.log(123123)
         try {
             const cosAuthRO = await CosService.getCosAuthRO()
+
+            console.log(123123)
+            console.log(cosAuthRO.uploadImgPath)
+            console.log(cosAuthRO)
+            console.log(456465)
+            console.log(cosAuthRO)
             const imgFiles: DomFile[] = await UniUtil.chooseImage(1)
             UniUtil.showLoading('上传中')
             const imgFile: DomFile = imgFiles[0]

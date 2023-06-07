@@ -9,7 +9,7 @@ import LoginRes = UniApp.LoginRes;
 import GetUserInfoRes = UniApp.GetUserInfoRes;
 import GetImageInfoSuccessData = UniApp.GetImageInfoSuccessData;
 import ToastUtil from 'socialuni-util/src/util/ToastUtil'
-import UUIDUtil from 'socialuni-util/src/util/UUIDUtil'
+import UUIDUtil from 'socialuni-app/src/util/UUIDUtil'
 import AppMsg from "socialuni-constant/constant/AppMsg";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule"
 import DomFile from "socialuni-app/src/model/DomFile";
