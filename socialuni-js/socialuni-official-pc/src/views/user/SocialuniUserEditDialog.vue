@@ -4,20 +4,16 @@
             <el-form :model="editUser" label-width="70px">
                 <el-form-item label="头像">
                     <div class="row-col-end">
-                        <el-popover v-if="mineUser" placement="right-start">
-                            <template #reference>
-                                <el-avatar size="large" class="bd" shape="square" :src="editUser.avatar"/>
+
+                        <el-dropdown v-if="mineUser" trigger="click">
+                            <el-avatar size="large" class="bd" shape="square" :src="editUser.avatar"/>
+                            <template #dropdown>
+                                <el-dropdown-menu>
+                                    <el-dropdown-item @click.native="uploadUserAvatarImg">上传头像</el-dropdown-item>
+                                    <el-dropdown-item divided @click.native="randomGenerateAvatar">随机生成头像</el-dropdown-item>
+                                </el-dropdown-menu>
                             </template>
-                            <div>
-                                <input id="fileSelector" type="file" @change="uploadData"/>
-                                <el-upload class="w100p" @change="uploadData" :auto-upload="false">
-                                    <el-button text class="ml-xs pr-lgg">上传头像</el-button>
-                                </el-upload>
-                                <el-divider class="mb-sm mt-0"/>
-                                <el-button text class="w100p" @click.native="randomGenerateAvatar">随机生成头像
-                                </el-button>
-                            </div>
-                        </el-popover>
+                        </el-dropdown>
                     </div>
                 </el-form-item>
                 <el-form-item label="昵称">
@@ -150,6 +146,30 @@ export default class SocialuniUserEditDialog extends Vue {
         const res = await SocialuniMineUserAPI.randomUserAvatar()
         socialuniUserModule.setUser(res.data)
     }
+
+    async uploadUserAvatarImg() {
+        console.log(123123)
+        try {
+            const cosAuthRO = await CosService.getCosAuthRO()
+
+            console.log(123123)
+            console.log(cosAuthRO.uploadImgPath)
+            console.log(cosAuthRO)
+            console.log(456465)
+            console.log(cosAuthRO)
+            const imgFiles: DomFile[] = await UniUtil.chooseImage(1)
+            UniUtil.showLoading('上传中')
+            const imgFile: DomFile = imgFiles[0]
+            imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src
+            const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO), SocialuniMineUserAPI.addUserAvatarImgAPI(new ImgAddQO(imgFile))])
+            socialuniUserModule.setUser(res[1].data)
+        } catch (e) {
+            console.error(e)
+        } finally {
+            UniUtil.hideLoading()
+        }
+    }
+
 
     @Watch('mineUser')
     watchUserChange() {

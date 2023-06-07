@@ -26,15 +26,14 @@
                             </div>
                         </div>-->
             <div class="row-col-center">
-                <input id="fileSelector" type="file" @change="uploadData"/>
+<!--                <input id="fileSelector" type="file" @change="uploadData"/>-->
                 <el-button @click="uploadUserAvatarImg">test</el-button>
-                <!--                <el-avatar v-if="!mineUser" class="use-click" @click="toLogin">登录</el-avatar>
-                                <div v-else class="row-col-center">
-                                    <el-tag class="mr-10" type="warning" effect="dark">{{ mineUser.nickname }}
-                                    </el-tag>
-                                    <el-avatar shape="square" :src="mineUser.avatar"/>
-
-                                </div>-->
+                <el-avatar v-if="!mineUser" class="use-click" @click="toLogin">登录</el-avatar>
+                <div v-else class="row-col-center">
+                    <el-tag class="mr-10" type="warning" effect="dark">{{ mineUser.nickname }}
+                    </el-tag>
+                    <el-avatar shape="square" :src="mineUser.avatar"/>
+                </div>
             </div>
         </div>
 
