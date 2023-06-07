@@ -94,13 +94,13 @@ import RouterUtil from "socialuni-util/src/util/RouterUtil";
 import PagePath from "socialuni-constant/constant/PagePath";
 import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
 import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
-import AlertUtil from "socialuni-util/src/util/AlertUtil";
+import AlertUtil from "socialuni-app/src/util/AlertUtil";
 import ImgUtil from "socialuni-util/src/util/ImgUtil";
-import MsgUtil from "socialuni-util/src/util/MsgUtil";
+import MsgUtil from "socialuni-app/src/util/MsgUtil";
 import PageUtil from "socialuni-util/src/util/PageUtil";
 import NumUtil from "socialuni-util/src/util/NumUtil";
 import CommonUtil from "socialuni-util/src/util/CommonUtil";
-import UniUtil from "socialuni-util/src/util/UniUtil";
+import UniUtil from "socialuni-app/src/util/UniUtil";
 
 @Options({
   components: {QIcon}

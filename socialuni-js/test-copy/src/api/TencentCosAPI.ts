@@ -9,11 +9,11 @@ import COS from 'cos-js-sdk-v5'
 // #endif
 import AppMsg from "socialuni-constant/constant/AppMsg";
 import TencentCosIdInfoRO from "socialuni-api-base/src/model/RO/tencent/cos/idImgInfo/TencentCosIdInfoRO";
-import UniUtil from "../../../socialuni-util/src/util/UniUtil";
+import UniUtil from "../../../socialuni-app/src/util/UniUtil";
 import CosAuthRO from "socialuni-api-base/src/model/cos/CosAuthRO";
 import DomFile from "socialuni-util/src/model/DomFile";
 import CosUploadResult from "socialuni-api-base/src/model/cos/CosUploadResult";
-import AlertUtil from "socialuni-util/src/util/AlertUtil";
+import AlertUtil from "socialuni-app/src/util/AlertUtil";
 
 export default class TencentCosAPI {
     /*static async getImgTagAPI(imgUrl, imgKey, cosAuthRO: CosAuthRO) {

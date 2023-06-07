@@ -12,6 +12,11 @@ import ToastUtil from 'socialuni-util/src/util/ToastUtil'
 import UUIDUtil from 'socialuni-util/src/util/UUIDUtil'
 import AppMsg from "socialuni-constant/constant/AppMsg";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule"
+import DomFile from "socialuni-app/src/model/DomFile";
+
+console.log(11111)
+console.log(uni)
+console.log(2222)
 
 export default class UniUtil {
     public static textCopy(copyText: string, hint: string = '已复制') {

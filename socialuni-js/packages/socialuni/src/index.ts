@@ -1,5 +1,5 @@
 import {App, defineComponent} from "vue"
-import UniUtil from "socialuni-util/src/util/UniUtil"
+import UniUtil from "socialuni-app/src/util/UniUtil"
 import {socialuniPluginsModule} from "./store/SocialuniPluginsModule";
 import {SocialuniPlugin} from "./interface/SocialuniPlugin";
 import {ImportModule} from "./interface/ImportModule";

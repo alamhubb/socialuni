@@ -1,4 +1,4 @@
-import AlertUtil from 'socialuni-util/src/util/AlertUtil'
+import AlertUtil from 'socialuni-app/src/util/AlertUtil'
 import AppConfig from "socialuni-constant/constant/AppConfig";
 import UniUtil from "./UniUtil";
 import AppUpdateType from "socialuni-constant/constant/AppUpdateType";

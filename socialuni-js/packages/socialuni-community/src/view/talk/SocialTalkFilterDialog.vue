@@ -92,7 +92,7 @@ import {Emit, Options, Vue, Watch} from 'vue-property-decorator'
 // import TagVO from "socialuni-api-base/src/model/communityPages/tag/TagVO";
 // import SocialCircleRO from "socialuni-api-base/src/model/communityPages/circle/SocialCircleRO";
 // import GenderType from "socialuni-constant/constant/GenderType";
-// import AlertUtil from "socialuni-util/src/util/AlertUtil";
+// import AlertUtil from "socialuni-app/src/util/AlertUtil";
 // import TagSearch from "./TagSearch.vue";
 // import QInput from "socialuni-ui/src/components/QInput/QInput.vue";
 // import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";

@@ -1,11 +1,10 @@
 import QQUtils from 'socialuni-util/src/util/QQUtils'
-import MsgUtil from "socialuni-util/src/util/MsgUtil"
+import MsgUtil from "socialuni-app/src/util/MsgUtil"
 import Constants from "socialuni-constant/constant/Constant"
 import AppMsg from "socialuni-constant/constant/AppMsg"
 import ToastUtil from "socialuni-util/src/util/ToastUtil"
 import WxUtils from "socialuni-util/src/util/WxUtils"
 import MPUtil from "socialuni-util/src/util/MPUtil"
-import APPUtil from "socialuni-util/src/util/APPUtil"
 import UserPayResultVO from "socialuni-api-base/src/model/user/UserPayResultVO";
 import {socialPlatformModule} from "../store/SocialPlatformModule";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
@@ -13,6 +12,7 @@ import SocialuniAppAPI from "socialuni/src/api/SocialuniAppAPI";
 import SocialuniCoinAPI from "socialuni/src/api/socialuni/SocialuniCoinAPI";
 import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
 import UserMsgUtil from "socialuni/src/util/UserMsgUtil";
+import APPUtil from "socialuni-app/src/util/APPUtil";
 
 
 // 统一处理各平台的订阅

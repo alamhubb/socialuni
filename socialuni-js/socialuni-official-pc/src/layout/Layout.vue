@@ -3,11 +3,11 @@
     <div class="flex-row flex-1 overflow-hidden">
 <!--        <nav-menu class="w150 flex-none"/>-->
 
-        <div class="flex-1 overflow-auto pd-sm bg-default">
+<!--        <div class="flex-1 overflow-auto pd-sm bg-default">
             <transition name="fade-transform" mode="out-in">
                 <router-view :key="$route.path" class="h100p bg-white bd-radius"/>
             </transition>
-        </div>
+        </div>-->
     </div>
 </template>
 

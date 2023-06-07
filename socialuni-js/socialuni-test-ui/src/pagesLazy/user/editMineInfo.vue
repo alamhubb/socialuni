@@ -112,7 +112,7 @@ import QButton from "socialuni-view/src/components/QButton/QButton.vue";
 import DateUtil from "socialuni-sdk/src/utils/DateUtil";
 import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
 import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
-import UniUtil from "socialuni-util/src/util/UniUtil";
+import UniUtil from "socialuni-app/src/util/UniUtil";
 
 @Options({
   components: {QButton}

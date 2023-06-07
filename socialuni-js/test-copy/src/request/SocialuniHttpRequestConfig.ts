@@ -1,4 +1,4 @@
-import UniUtil from "socialuni-util/src/util/UniUtil"
+import UniUtil from "socialuni-app/src/util/UniUtil"
 import { Config, RequestConfig, Response } from "./UniAppHttpRequest"
 import HttpRequestConfig from './HttpRequestConfig'
 import SocialuniConfig from '../config/SocialuniConfig'
@@ -7,8 +7,8 @@ import SocialuniRequestHeaderName from 'socialuni-constant/constant/SocialuniReq
 import ErrorConst from 'socialuni-constant/constant/ErrorConst'
 import UserService from '../service/UserService'
 import UserMsgUtil from '../util/UserMsgUtil'
-import AlertUtil from 'socialuni-util/src/util/AlertUtil'
-import MsgUtil from 'socialuni-util/src/util/MsgUtil'
+import AlertUtil from 'socialuni-app/src/util/AlertUtil'
+import MsgUtil from 'socialuni-app/src/util/MsgUtil'
 import SocialuniAppAPI from '../api/SocialuniAppAPI'
 import JsonUtil from '../util/JsonUtil'
 

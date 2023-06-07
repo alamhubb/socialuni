@@ -10,7 +10,7 @@ import CircleCreateChatQO from "socialuni-api-base/src/model/community/circle/Ci
 import MessageVO from "socialuni-im-api/src/model/RO/MessageVO";
 import FriendApplyType from "socialuni-constant/constant/FriendApplyType";
 import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
-import AlertUtil from "socialuni-util/src/util/AlertUtil";
+import AlertUtil from "socialuni-app/src/util/AlertUtil";
 import MessageAPI from "socialuni-im-api/src/api/MessageAPI";
 import {reactive} from "vue";
 import OpenImFriendApplyRO from "socialuni-api-base/src/model/openIm/OpenImFriendApplyRO";

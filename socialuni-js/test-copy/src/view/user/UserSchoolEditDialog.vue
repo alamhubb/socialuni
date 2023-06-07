@@ -38,7 +38,7 @@ import QSelect from "socialuni-ui/src/components/QSelect/QSelect.vue";
 import SocialCircleRO from "socialuni-api-base/src/model/community/circle/SocialCircleRO";
 import {socialuniUserModule} from 'socialuni/src/store/SocialuniUserModule';
 import ToastUtil from "socialuni-util/src/util/ToastUtil";
-import AlertUtil from "socialuni-util/src/util/AlertUtil";
+import AlertUtil from "socialuni-app/src/util/AlertUtil";
 import SocialuniUserExpandAPI from "socialuni-user-api/src/api/SocialuniUserExpandAPI";
 import SocialuniCircleAPI from "socialuni-community-api/src/api/SocialuniCircleAPI";
 

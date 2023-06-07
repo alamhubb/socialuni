@@ -3,7 +3,7 @@ import TalkVueUtil from "socialuni-util/src/util/TalkVueUtil"
 import TalkVO from "socialuni-api-base/src/model/talk/TalkVO"
 import CommentVO from "socialuni-api-base/src/model/comment/CommentVO"
 import CommentAddVO from "socialuni-api-base/src/model/comment/CommentAddVO"
-import MsgUtil from "socialuni-util/src/util/MsgUtil"
+import MsgUtil from "socialuni-app/src/util/MsgUtil"
 import CommonUtil from "socialuni-util/src/util/CommonUtil"
 import TalkTabType from "socialuni-constant/constant/TalkTabType"
 import SocialuniTalkTabRO from "socialuni-api-base/src/model/talk/SocialuniTalkTabRO";

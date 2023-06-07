@@ -46,12 +46,12 @@
 
 <script lang="ts">
 import {Emit, Options, Vue, Watch} from 'vue-property-decorator'
-import UniUtil from "socialuni-util/src/util/UniUtil";
+import UniUtil from "socialuni-app/src/util/UniUtil";
 import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
 import GenderType from "socialuni-constant/constant/GenderType";
 import type EnumStrVO from "socialuni-constant/constant/EnumStrVO";
 import DateUtil from "socialuni-util/src/util/DateUtil";
-import AlertUtil from "socialuni-util/src/util/AlertUtil";
+import AlertUtil from "socialuni-app/src/util/AlertUtil";
 import ToastUtil from "socialuni-util/src/util/ToastUtil";
 import BirthAgeUtil from "socialuni-util/src/util/BirthAgeUtil";
 import type UserEditVO from "socialuni-api-base/src/model/user/UserEditVO";

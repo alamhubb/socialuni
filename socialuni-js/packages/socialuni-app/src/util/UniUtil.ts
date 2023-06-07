@@ -12,6 +12,8 @@ import ToastUtil from 'socialuni-util/src/util/ToastUtil'
 import UUIDUtil from 'socialuni-util/src/util/UUIDUtil'
 import AppMsg from "socialuni-constant/constant/AppMsg";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule"
+import DomFile from "../model/DomFile";
+
 
 export default class UniUtil {
     public static textCopy(copyText: string, hint: string = '已复制') {
@@ -31,6 +33,7 @@ export default class UniUtil {
             })
         })
     }
+
     public static showCopyAction(copyText: string) {
         UniUtil.actionSheet(['复制']).then((index: number) => {
             if (index === 0) {
@@ -187,7 +190,78 @@ export default class UniUtil {
 
     //选择图片
     public static chooseImage(count = 1) {
+
+
+
+
         return new Promise<DomFile[]>((resolve, reject) => {
+
+
+
+
+
+            const {
+                invokeCallbackHandler: invoke
+            } = UniServiceJSBridge
+
+            let imageInput = null
+
+            export function chooseImage ({
+                                             count,
+                                             // sizeType,
+                                             sourceType,
+                                             extension
+                                         }, callbackId) {
+                // TODO handle sizeType 尝试通过 canvas 压缩
+
+                if (imageInput) {
+                    document.body.removeChild(imageInput)
+                    imageInput = null
+                }
+
+                imageInput = _createInput({
+                    count,
+                    sourceType,
+                    extension,
+                    type: 'image'
+                })
+                document.body.appendChild(imageInput)
+                imageInput.addEventListener('change', function (event) {
+                    const tempFiles = []
+                    const fileCount = event.target.files.length
+                    for (let i = 0; i < fileCount; i++) {
+                        const file = event.target.files[i]
+                        let filePath
+                        Object.defineProperty(file, 'path', {
+                            get () {
+                                filePath = filePath || fileToUrl(file)
+                                return filePath
+                            }
+                        })
+                        if (i < count) tempFiles.push(file)
+                    }
+                    const res = {
+                        errMsg: 'chooseImage:ok',
+                        get tempFilePaths () {
+                            return tempFiles.map(({ path }) => path)
+                        },
+                        tempFiles: tempFiles
+                    }
+                    invoke(callbackId, res)
+
+                    // TODO 用户取消选择时，触发 fail，目前尚未找到合适的方法。
+                })
+
+                imageInput.click()
+
+                if (!interact.getStatus()) {
+                    console.warn(`${t('uni.chooseFile.notUserActivation')}`)
+                }
+            }
+
+
+
+
             uni.chooseImage({
                 // sourceType: ['album'],
                 sizeType: ['original'],
@@ -282,16 +356,19 @@ export default class UniUtil {
 
     public static getImageInfo(filePath: string) {
         return new Promise<GetImageInfoSuccessData>((resolve, reject) => {
-            // 获取文件名
-            uni.getImageInfo({
-                src: filePath,
-                success: (image) => {
-                    resolve(image)
-                },
-                fail: err => {
-                    reject(err)
-                }
-            })
+            const img = new Image()
+            img.onload = function () {
+                resolve({
+                    width: img.naturalWidth,
+                    height: img.naturalHeight
+                })
+            }
+            img.onerror = function (e) {
+                reject({
+                    errMsg: 'getImageInfo:fail'
+                })
+            }
+            img.src = filePath
         })
     }
 

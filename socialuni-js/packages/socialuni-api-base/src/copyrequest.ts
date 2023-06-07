@@ -2,13 +2,13 @@ import {socialuniPluginsModule} from "socialuni-base/src/store/SocialuniPluginsM
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import SocialuniConfig from "socialuni/src/config/SocialuniConfig";
 import SocialuniRequestHeaderName from "socialuni-constant/constant/SocialuniRequestHeaderName";
-import UniUtil from "socialuni-util/src/util/UniUtil";
+import UniUtil from "socialuni-app/src/util/UniUtil";
 import ErrorConst from "socialuni-constant/constant/ErrorConst";
 import UserService from "socialuni/src/service/UserService";
 import UserMsgUtil from "socialuni/src/util/UserMsgUtil";
-import AlertUtil from "socialuni-util/src/util/AlertUtil";
+import AlertUtil from "socialuni-app/src/util/AlertUtil";
 import SocialuniAppAPI from "socialuni/src/api/SocialuniAppAPI";
-import MsgUtil from "socialuni-util/src/util/MsgUtil";
+import MsgUtil from "socialuni-app/src/util/MsgUtil";
 import JsonUtil from "socialuni/src/util/JsonUtil";
 
 socialuniAxios.interceptors.request.use(

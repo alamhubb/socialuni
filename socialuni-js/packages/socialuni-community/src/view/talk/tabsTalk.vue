@@ -150,7 +150,7 @@ import SocialCircleRO from "socialuni-api-base/src/model/community/circle/Social
 import SocialuniTalkTabCircleRO from "socialuni-api-base/src/model/community/circle/SocialuniTalkTabCircleRO";
 import ToastUtil from "socialuni-util/src/util/ToastUtil";
 import HugAddVO from "socialuni-api-base/src/model/HugAddVO";
-import MsgUtil from "socialuni-util/src/util/MsgUtil";
+import MsgUtil from "socialuni-app/src/util/MsgUtil";
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
 import {socialTalkModule} from "../../store/SocialTalkModule";
 import {socialuniTagModule} from "../../store/SocialTagModule";

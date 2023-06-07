@@ -1,4 +1,4 @@
-import UniUtil from "socialuni-util/src/util/UniUtil"
+import UniUtil from "socialuni-app/src/util/UniUtil"
 import { Config, RequestConfig, Response } from "./UniAppHttpRequest"
 import { socialuniTokenModule } from "../store/SocialuniTokenModule"
 import { HttpRequestConfigInterface } from './HttpRequestConfigInterface'

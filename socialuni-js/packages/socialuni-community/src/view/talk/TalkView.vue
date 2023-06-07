@@ -59,7 +59,7 @@ import QTabs from "socialuni-ui/src/components/QTabs/QTabs.vue";
 import TagSearch from "./TagSearch.vue";
 import TabsTalk from "./tabsTalk.vue";
 import TalkSwipers from "./talkSwipers.vue";
-import UniUtil from "socialuni-util/src/util/UniUtil";
+import UniUtil from "socialuni-app/src/util/UniUtil";
 import RouterUtil from "socialuni-util/src/util/RouterUtil";
 import PagePath from "socialuni-constant/constant/PagePath";
 import PageUtil from "socialuni-util/src/util/PageUtil";

@@ -201,10 +201,10 @@ import {Options, Prop, Vue} from 'vue-property-decorator'
 import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
 import LoginView from "../login/LoginView.vue";
 import PageUtil from "socialuni-util/src/util/PageUtil";
-import MsgUtil from "socialuni-util/src/util/MsgUtil";
-import AlertUtil from "socialuni-util/src/util/AlertUtil";
+import MsgUtil from "socialuni-app/src/util/MsgUtil";
+import AlertUtil from "socialuni-app/src/util/AlertUtil";
 import ToastUtil from "socialuni-util/src/util/ToastUtil";
-import UniUtil from "socialuni-util/src/util/UniUtil";
+import UniUtil from "socialuni-app/src/util/UniUtil";
 import DomFile from "socialuni-util/src/model/DomFile";
 import SkipUrlConst from "socialuni-constant/constant/SkipUrlConst";
 import {onHide, onLoad, onShow} from "@dcloudio/uni-app";

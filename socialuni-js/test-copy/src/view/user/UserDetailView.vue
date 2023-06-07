@@ -166,9 +166,9 @@
 <script lang="ts">
 import { Options, Prop, Vue, Watch } from 'vue-property-decorator'
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO"
-import UniUtil from "socialuni-util/src/util/UniUtil"
+import UniUtil from "socialuni-app/src/util/UniUtil"
 import { onMounted } from "vue"
-import AlertUtil from "socialuni-util/src/util/AlertUtil"
+import AlertUtil from "socialuni-app/src/util/AlertUtil"
 import ToastUtil from "socialuni-util/src/util/ToastUtil"
 import UserSchoolEditDialog from "./UserSchoolEditDialog.vue"
 import TalkVO from "socialuni-api-base/src/model/talk/TalkVO"
@@ -197,7 +197,7 @@ import SocialuniAddFriendType from "socialuni-im-api/src/constant/SocialuniAddFr
 import SocialuniImUserAPI from 'socialuni-im-api/src/api/SocialuniImUserAPI'
 import SocialuniUserIdQO from '../../model/QO/user/SocialuniUserIdQO'
 import SocialuniImUserDetailRO from 'socialuni-im-api/src/model/RO/SocialuniImUserDetailRO'
-import MsgUtil from 'socialuni-util/src/util/MsgUtil'
+import MsgUtil from 'socialuni-app/src/util/MsgUtil'
 
 @Options({
   components: {

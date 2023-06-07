@@ -140,7 +140,7 @@ import QCityInfo from "socialuni-community/src/component/QCityInfo/QCityInfo.vue
 import SocialTagAdd from "socialuni-community/src/component/SocialTagAdd/SocialTagAdd.vue";
 import TalkAddTagSearch from "socialuni-community/src/component/TalkAddTagSearch.vue";
 import QCityPicker from "socialuni-community/src/component/QCityPicker/QCityPicker.vue";
-import AlertUtil from "socialuni-util/src/util/AlertUtil";
+import AlertUtil from "socialuni-app/src/util/AlertUtil";
 import { socialuniUserModule } from 'socialuni/src/store/SocialuniUserModule';
 import {socialLocationModule} from "socialuni-community/src/store/SocialLocationModule";
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
@@ -155,7 +155,7 @@ import ObjectUtil from "socialuni-util/src/util/ObjectUtil";
 import DistrictVO from "socialuni/src/model/DistrictVO";
 import CosService from "socialuni/src/service/CosService";
 import DomFile from "socialuni-util/src/model/DomFile";
-import UniUtil from "socialuni-util/src/util/UniUtil";
+import UniUtil from "socialuni-app/src/util/UniUtil";
 import SocialuniAppAPI from "socialuni/src/api/SocialuniAppAPI";
 import SocialCircleRO from "socialuni/src/model/community/circle/SocialCircleRO";
 import {socialuniTagModule} from "socialuni-community/src/store/SocialTagModule";

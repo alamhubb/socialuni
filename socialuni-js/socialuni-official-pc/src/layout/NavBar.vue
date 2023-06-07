@@ -6,7 +6,7 @@
         </div>
 
         <div class="row-end-center">
-            <div class="flex-none row-col-center mr">
+<!--            <div class="flex-none row-col-center mr">
                 <a href="https://socialuni.cn" target="_blank" class="mr-sm md:mr bg-click">
                     <div class="row-all-center">官网文档</div>
                 </a>
@@ -24,15 +24,17 @@
                         <div class="row-all-center"><i class="mdi mdi-github font-36 use-click color-black"/></div>
                     </a>
                 </div>
-            </div>
+            </div>-->
             <div class="row-col-center">
-                <el-avatar v-if="!mineUser" class="use-click" @click="toLogin">登录</el-avatar>
+                <input id="fileSelector" type="file" @change="uploadData"/>
+                <el-button @click="uploadUserAvatarImg">test</el-button>
+<!--                <el-avatar v-if="!mineUser" class="use-click" @click="toLogin">登录</el-avatar>
                 <div v-else class="row-col-center">
                     <el-tag class="mr-10" type="warning" effect="dark">{{ mineUser.nickname }}
                     </el-tag>
                     <el-avatar shape="square" :src="mineUser.avatar"/>
 
-                </div>
+                </div>-->
             </div>
         </div>
 
@@ -67,9 +69,15 @@ import SDialog from "@/components/socialuni/SDialog.vue";
 import LoginView from "@/components/view/loginView.vue";
 import SocialuniUserEventConst from "socialuni-user/src/constant/SocialuniUserEventConst";
 import SocialuniEventUtil from "socialuni/src/util/SocialuniEventUtil";
-import UniUtil from "socialuni-util/src/util/UniUtil";
+import UniUtil from "socialuni-app/src/util/UniUtil";
 import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
 import SocialuniUserEditDialog from "@/views/user/SocialuniUserEditDialog.vue";
+import CosService from "socialuni-app/src/util/CosService";
+import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
+import ImgUtil from "socialuni-util/src/util/ImgUtil";
+import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
+import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
+import DomFile from "socialuni-util/src/model/DomFile";
 
 @Options({
     components: {SocialuniUserEditDialog, Tools, LoginView, SDialog, ArrowDown}
@@ -105,6 +113,41 @@ export default class NavBar extends Vue {
 
     editUserInfo() {
         this.$refs.userEditDialog.open()
+    }
+
+    async uploadUserAvatarImg() {
+        try {
+            const cosAuthRO = await CosService.getCosAuthRO()
+            const imgFiles: DomFile[] = await UniUtil.chooseImage(1)
+            UniUtil.showLoading('上传中')
+            const imgFile: DomFile = imgFiles[0]
+            imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src
+            const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO), SocialuniMineUserAPI.addUserAvatarImgAPI(new ImgAddQO(imgFile))])
+            socialuniUserModule.setUser(res[1].data)
+        } catch (e) {
+            console.error(e)
+        } finally {
+            UniUtil.hideLoading()
+        }
+    }
+
+    async uploadData(e: any) {
+
+        const file = e.target.files[0]
+        console.log(e)
+        console.log(e.target)
+        console.log(e.target.files[0])
+        try {
+            const cosAuthRO = await CosService.getCosAuthRO()
+            console.log(cosAuthRO)
+            const imgKey = UUIDUtil.getUUID() + ImgUtil.getFileSuffixName(file.name)
+            const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgKey, file, cosAuthRO), SocialuniMineUserAPI.addUserAvatarImgAPI(new ImgAddQO(file))])
+            socialuniUserModule.setUser(res[1].data)
+        } catch (e) {
+            console.error(e)
+        } finally {
+            UniUtil.hideLoading()
+        }
     }
 
 

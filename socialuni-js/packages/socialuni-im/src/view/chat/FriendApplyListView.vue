@@ -84,7 +84,7 @@
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
 import {onLoad, onPullDownRefresh} from "@dcloudio/uni-app";
-import UniUtil from "socialuni-util/src/util/UniUtil";
+import UniUtil from "socialuni-app/src/util/UniUtil";
 import DateUtil from "socialuni-util/src/util/DateUtil";
 import FriendApplyType from "socialuni-constant/constant/FriendApplyType";
 import SocialuniFriendAPI from "socialuni-im-api/src/api/SocialuniFriendAPI";

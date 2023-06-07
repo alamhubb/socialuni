@@ -29,7 +29,7 @@ import QInput from "socialuni-ui/src/components/QInput/QInput.vue";
 import QPopup from "socialuni-ui/src/components/QPopup/QPopup.vue";
 import SSwitch from "socialuni-ui/src/components/SSwitch.vue";
 import ToastUtil from "socialuni-util/src/util/ToastUtil";
-import AlertUtil from "socialuni-util/src/util/AlertUtil";
+import AlertUtil from "socialuni-app/src/util/AlertUtil";
 import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
 import {socialuniConfigModule} from "socialuni/src/store/SocialuniConfigModule";
 import SocialuniUserExpandAPI from "socialuni-user-api/src/api/SocialuniUserExpandAPI";

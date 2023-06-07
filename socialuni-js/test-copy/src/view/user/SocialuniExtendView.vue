@@ -129,7 +129,7 @@ import request from "socialuni/src/request/request";
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
 import QIcon from "../../components/QIcon/QIcon.vue";
 import QButton from "../../components/QButton/QButton.vue";
-import UniUtil from "socialuni-util/src/util/UniUtil";
+import UniUtil from "socialuni-app/src/util/UniUtil";
 import NumUtil from "socialuni-util/src/util/NumUtil";
 import DateUtil from "socialuni-util/src/util/DateUtil";
 import SocialuniUserExtendDetailRO from "socialuni-api-base/src/model/social/SocialuniUserExtendDetailRO";
