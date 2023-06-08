@@ -1,4 +1,3 @@
-import ToastUtil from "socialuni-util/src/util/ToastUtil";
 import CircleCreateQO from "socialuni-api-base/src/model/community/circle/CircleCreateQO";
 import SocialCircleRO from "socialuni-api-base/src/model/community/circle/SocialCircleRO";
 import CircleCreateChatQO from "socialuni-api-base/src/model/community/circle/CircleCreateChatQO";
@@ -6,6 +5,7 @@ import SocialuniTalkTabCircleRO from "socialuni-api-base/src/model/community/cir
 import CircleTypeRO from "socialuni-api-base/src/model/community/circle/CircleTypeRO";
 import SocialuniCircleQueryByTypeQO from "socialuni-api-base/src/model/QO/circle/SocialuniCircleQueryByTypeQO";
 import socialuniCommunityRequest from "../request/socialuniCommunityRequest";
+import ToastUtil from "socialuni-app-h5/src/util/ToastUtil";
 
 export default class SocialuniCircleAPI {
   static createCircleAPI(createQO: CircleCreateQO) {
