@@ -20,7 +20,6 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import {socialuniUserModule} from 'socialuni/src/store/SocialuniUserModule';
 import SkipUrlConst from "socialuni-constant/constant/SkipUrlConst";
 
 @Options({})

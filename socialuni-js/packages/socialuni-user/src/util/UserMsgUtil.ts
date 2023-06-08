@@ -1,4 +1,3 @@
-import AlertUtil from 'socialuni-app/src/util/AlertUtil'
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
 import {socialuniUserModule} from "../store/SocialuniUserModule";
 import PageUtil from "socialuni-util/src/util/PageUtil";

@@ -198,14 +198,9 @@
 
 <script lang="ts">
 import {Options, Prop, Vue} from 'vue-property-decorator'
-import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
 import LoginView from "../login/LoginView.vue";
 import PageUtil from "socialuni-util/src/util/PageUtil";
-import MsgUtil from "socialuni-app/src/util/MsgUtil";
-import AlertUtil from "socialuni-app/src/util/AlertUtil";
-import ToastUtil from "socialuni-util/src/util/ToastUtil";
 import UniUtil from "socialuni-app/src/util/UniUtil";
-import DomFile from "socialuni-util/src/model/DomFile";
 import SkipUrlConst from "socialuni-constant/constant/SkipUrlConst";
 import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
@@ -220,12 +215,8 @@ import UserSchoolEditDialog from "./UserSchoolEditDialog.vue";
 import QInput from "socialuni-ui/src/components/QInput/QInput.vue";
 import QButton from "socialuni-ui/src/components/QButton/QButton.vue";
 import QSearch from "socialuni-ui/src/components/QSearch/QSearch.vue";
-import SocialGenderTag from "../../component/SocialGenderTag/SocialGenderTag.vue";
-import CosService from "socialuni/src/service/CosService";
 import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
 import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
-import UserService from "socialuni/src/service/UserService";
-import TencentCosAPI from "socialuni/src/api/TencentCosAPI";
 import {socialChatModule} from "socialuni-im/src/store/SocialChatModule";
 
 @Options({

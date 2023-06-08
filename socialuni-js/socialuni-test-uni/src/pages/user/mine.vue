@@ -4,6 +4,7 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
+import MineView from "socialuni-user-view-uni/src/views/user/MineView.vue";
 
 @Options({
   components: {
