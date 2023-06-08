@@ -13,25 +13,20 @@ import UUIDUtil from 'src/util/UUIDUtil'
 import AppMsg from "socialuni-constant/constant/AppMsg";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule"
 import DomFile from "../model/DomFile";
+import {inject} from "vue";
+import SocialuniProvideKey from "../constant/SocialuniProvideKey";
+import {UniInterface} from "../UniInterface";
 
 
-export default class UniUtil {
-    public static textCopy(copyText: string, hint: string = '已复制') {
-        return new Promise((resolve, reject) => {
-            uni.setClipboardData({
-                data: copyText,
-                success() {
-                    if (hint) {
-                        uni.hideToast()
-                        ToastUtil.toast(hint)
-                    }
-                    resolve(null)
-                },
-                fail(err) {
-                    reject(err)
-                }
-            })
-        })
+export default class UniappUtil {
+    get uniappUtil(): UniInterface {
+        return inject<UniInterface>(SocialuniProvideKey.uniappUtilKey) as UniInterface
+    }
+
+    setClipboardData<T extends UniNamespace.SetClipboardDataOptions = UniNamespace.SetClipboardDataOptions>(options: T): UniNamespace.PromisifySuccessResult<T, UniNamespace.SetClipboardDataOptions>;
+
+    public setClipboardData<T extends UniNamespace.SetClipboardDataOptions = UniNamespace.SetClipboardDataOptions>(options: T) {
+        return this.uniappUtil.setClipboardData(options)
     }
 
     public static showCopyAction(copyText: string) {

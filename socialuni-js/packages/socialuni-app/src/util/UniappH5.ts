@@ -7,7 +7,9 @@ import UniappInner from "./UniappInner";
 
 let imageInput
 
-export default class UniappH5 {
+export default class UniappH5 implements Uni{
+
+
     public static chooseImage(count,
                               // sizeType,
                               sourceType = ['album', 'camera'],
