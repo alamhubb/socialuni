@@ -28,13 +28,10 @@
 <script lang="ts">
 import {Emit, Options, Vue} from 'vue-property-decorator'
 import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue";
-import {socialuniUserModule} from 'socialuni/src/store/SocialuniUserModule';
 import ReportType from "socialuni-constant/constant/ReportType";
 import ReportAddVO from "socialuni-api-base/src/model/report/ReportAddVO";
-import AlertUtil from "socialuni-app/src/util/AlertUtil";
-import {socialuniConfigModule} from "socialuni/src/store/SocialuniConfigModule";
-import UserCheckUtil from "socialuni/src/util/UserCheckUtil";
-import ReportAPI from "socialuni/src/api/ReportAPI";
+import {socialuniConfigModule} from "socialuni-app/src/store/SocialuniConfigModule";
+import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
 
 @Options({
   components: {QPopup}

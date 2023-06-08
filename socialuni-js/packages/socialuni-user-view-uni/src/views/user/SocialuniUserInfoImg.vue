@@ -54,6 +54,7 @@ import ImgFileVO from "socialuni-api-base/src/model/ImgFileVO";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import PageUtil from "socialuni-util/src/util/PageUtil";
 import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
+import SocialuniReportDialog from "../../component/SocialuniReportDialog.vue";
 
 @Options({
   components: {QIcon, SocialuniReportDialog}
