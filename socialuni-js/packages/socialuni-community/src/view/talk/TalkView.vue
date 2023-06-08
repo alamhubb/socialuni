@@ -67,15 +67,15 @@ import TagVO from "socialuni-api-base/src/model/community/tag/TagVO";
 import DistrictVO from "socialuni-api-base/src/model/DistrictVO";
 import {onHide, onShow} from "@dcloudio/uni-app";
 import SocialTagPicker from "../../component/SocialTagPicker.vue";
-import {socialuniTagModule} from "../../store/SocialTagModule";
-import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
-import { socialNotifyModule } from '../../store/SocialNotifyModule'
-import {socialLocationModule} from "../../store/SocialLocationModule";
-import {socialuniConfigModule} from "socialuni/src/store/SocialuniConfigModule";
 import QCityPicker from "../../component/QCityPicker/QCityPicker.vue";
 import CommunityPageUtil from "../../util/CommunityPageUtil";
-import {socialAppModule} from "socialuni/src/store/SocialAppModule";
 import {socialChatModule} from "socialuni-im/src/store/SocialChatModule";
+import {socialuniTagModule} from "../../store/SocialTagModule";
+import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
+import {socialNotifyModule} from "../../store/SocialNotifyModule";
+import {socialAppModule} from "socialuni-app/src/store/SocialAppModule";
+import {socialLocationModule} from "../../store/SocialLocationModule";
+import {socialuniConfigModule} from "socialuni-app/src/store/SocialuniConfigModule";
 
 // todo 后台可控制是否显示轮播图
 

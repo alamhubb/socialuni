@@ -39,17 +39,18 @@ export default class WebsocketUtil {
 
         const config = {} as any
 
+        if (config.token) {
+            token = config.token
+        } else {
+            token = UUIDUtil.getUUID()
+        }
+
         for (const socialuniPlugin of socialuniPluginsModule.plugins) {
             if (socialuniPlugin.onWebsocketInterceptors) {
                 socialuniPlugin.onWebsocketInterceptors(config)
             }
         }
 
-        if (config.token) {
-            token = config.token
-        } else {
-            token = UUIDUtil.getUUID()
-        }
         const websocketUrl = SocialuniAPIConfig.socialuniWebsocketUrl + '/webSocket/message?token=' + token
 
         this.ws = new WebSocket(websocketUrl)
