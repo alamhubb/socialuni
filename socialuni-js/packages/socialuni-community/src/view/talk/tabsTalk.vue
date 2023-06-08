@@ -135,11 +135,11 @@ import {Options, Vue, Watch} from 'vue-property-decorator'
 import TalkSwipers from './talkSwipers.vue'
 
 import TalkOperate from './talkOperate.vue'
-import QTab from 'socialuni-ui/src/components/QTab/QTab.vue'
-import QTabs from 'socialuni-ui/src/components/QTabs/QTabs.vue'
-import QIcon from 'socialuni-ui/src/components/QIcon/QIcon.vue'
+import QTab from 'socialuni-ui-uni/src/components/QTab/QTab.vue'
+import QTabs from 'socialuni-ui-uni/src/components/QTabs/QTabs.vue'
+import QIcon from 'socialuni-ui-uni/src/components/QIcon/QIcon.vue'
 import SocialTalkFilterDialog from "./SocialTalkFilterDialog.vue";
-import QPullRefresh from "socialuni-ui/src/components/QPullRefresh/QPullRefresh.vue";
+import QPullRefresh from "socialuni-ui-uni/src/components/QPullRefresh/QPullRefresh.vue";
 import TalkTabVO from "socialuni-api-base/src/model/talk/SocialuniTalkTabRO";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import CommonUtil from "socialuni-util/src/util/CommonUtil";

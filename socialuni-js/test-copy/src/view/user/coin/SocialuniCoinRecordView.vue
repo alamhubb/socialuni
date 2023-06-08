@@ -80,7 +80,7 @@ import SocialuniFollowType from "socialuni-constant/constant/user/SocialuniFollo
 import SocialUserContentRO from "socialuni-api-base/src/model/social/SocialUserContentRO";
 import PageUtil from "socialuni-util/src/util/PageUtil";
 import {onLoad, onPullDownRefresh, onReachBottom, onShow} from "@dcloudio/uni-app";
-import QTabs from "socialuni-ui/src/components/QTabs/QTabs.vue";
+import QTabs from "socialuni-ui-uni/src/components/QTabs/QTabs.vue";
 import SocialuniPageQueryQO from "socialuni-api-base/src/model/common/SocialuniPageQueryQO";
 import SocialuniPageQueryUtil from "socialuni-api-base/src/model/common/SocialuniPageQueryUtil";
 import SocialuniUserRO from "socialuni-api-base/src/model/user/SocialuniUserRO";

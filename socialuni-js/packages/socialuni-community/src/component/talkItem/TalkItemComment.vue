@@ -77,8 +77,8 @@
 
 <script lang="ts">
 import {Options, Prop, Vue, Watch} from 'vue-property-decorator'
-import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
-import QButton from "socialuni-ui/src/components/QButton/QButton.vue";
+import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
+import QButton from "socialuni-ui-uni/src/components/QButton/QButton.vue";
 import {socialuniUserModule} from 'socialuni/src/store/SocialuniUserModule';
 import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
 import ObjectUtil from "socialuni-util/src/util/ObjectUtil";

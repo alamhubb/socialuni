@@ -200,11 +200,11 @@
 
 <script lang="ts">
 import {Options, Prop, Vue} from 'vue-property-decorator'
-import QPopup from 'socialuni-ui/src/components/QPopup/QPopup.vue'
-import QIcon from 'socialuni-ui/src/components/QIcon/QIcon.vue'
-import QNavbar from 'socialuni-ui/src/components/QNavbar/QNavbar.vue'
-import QRowItem from 'socialuni-ui/src/components/QRowItem/QRowItem.vue'
-import MsgInput from 'socialuni-ui/src/components/MsgInput.vue'
+import QPopup from 'socialuni-ui-uni/src/components/QPopup/QPopup.vue'
+import QIcon from 'socialuni-ui-uni/src/components/QIcon/QIcon.vue'
+import QNavbar from 'socialuni-ui-uni/src/components/QNavbar/QNavbar.vue'
+import QRowItem from 'socialuni-ui-uni/src/components/QRowItem/QRowItem.vue'
+import MsgInput from 'socialuni-ui-uni/src/components/MsgInput.vue'
 import UniUtil from 'socialuni-app/src/util/UniUtil'
 import SkipUrlConst from 'socialuni-constant/constant/SkipUrlConst'
 import SocialuniFollowType from 'socialuni-constant/constant/user/SocialuniFollowType'

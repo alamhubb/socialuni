@@ -49,9 +49,9 @@ import QRowItem from '@/components/div-item/div-item.vue'
 import {onLoad} from "@dcloudio/uni-app";
 import {socialuniConfigModule, socialuniSystemModule, socialuniUserModule} from "socialuni-sdk/src/store/store";
 import ShellOrderVO from "socialuni-api-base/src/model/ShellOrderVO";
-import QIcon from 'socialuni-ui/src/components/QIcon/QIcon.vue'
+import QIcon from 'socialuni-ui-uni/src/components/QIcon/QIcon.vue'
 import EnumVO from "socialuni-constant/constant/EnumVO";
-import QButton from "socialuni-ui/src/components/QButton/QButton.vue";
+import QButton from "socialuni-ui-uni/src/components/QButton/QButton.vue";
 import QTabs from "../../../components/QTabs/QTabs.vue";
 import SocialuniCoinPageType from "socialuni-constant/constant/user/SocialuniCoinPageType";
 import PageUtil from "socialuni-util/src/util/PageUtil";

@@ -49,13 +49,13 @@
 <script lang="ts">
 import {Options, Vue, Watch} from 'vue-property-decorator'
 
-import QButton from 'socialuni-ui/src/components/QButton/QButton.vue'
-import QNavbar from 'socialuni-ui/src/components/QNavbar/QNavbar.vue'
-import QSearch from 'socialuni-ui/src/components/QSearch/QSearch.vue'
-import QIcon from 'socialuni-ui/src/components/QIcon/QIcon.vue'
-import QPopup from 'socialuni-ui/src/components/QPopup/QPopup.vue'
-import QSlider from 'socialuni-ui/src/components/QSlider/QSlider.vue'
-import QTabs from "socialuni-ui/src/components/QTabs/QTabs.vue";
+import QButton from 'socialuni-ui-uni/src/components/QButton/QButton.vue'
+import QNavbar from 'socialuni-ui-uni/src/components/QNavbar/QNavbar.vue'
+import QSearch from 'socialuni-ui-uni/src/components/QSearch/QSearch.vue'
+import QIcon from 'socialuni-ui-uni/src/components/QIcon/QIcon.vue'
+import QPopup from 'socialuni-ui-uni/src/components/QPopup/QPopup.vue'
+import QSlider from 'socialuni-ui-uni/src/components/QSlider/QSlider.vue'
+import QTabs from "socialuni-ui-uni/src/components/QTabs/QTabs.vue";
 import TagSearch from "./TagSearch.vue";
 import TabsTalk from "./tabsTalk.vue";
 import TalkSwipers from "./talkSwipers.vue";

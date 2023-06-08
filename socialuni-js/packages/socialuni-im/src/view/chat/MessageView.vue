@@ -255,8 +255,8 @@ import CommonUtil from "socialuni-util/src/util/CommonUtil";
 import DateUtil from "socialuni-util/src/util/DateUtil";
 import MessageViewParams from "./MessageViewParams";
 import SocialuniMessageType from "socialuni-constant/constant/mesaage/SocialuniMessageType";
-import QIcon from 'socialuni-ui/src/components/QIcon/QIcon.vue'
-import QNavbar from 'socialuni-ui/src/components/QNavbar/QNavbar.vue'
+import QIcon from 'socialuni-ui-uni/src/components/QIcon/QIcon.vue'
+import QNavbar from 'socialuni-ui-uni/src/components/QNavbar/QNavbar.vue'
 import CosUtil from "socialuni-util/src/util/CosUtil";
 import AppMsg from "socialuni-constant/constant/AppMsg";
 import CosAuthRO from "socialuni-api-base/src/model/cos/CosAuthRO";

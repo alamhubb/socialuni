@@ -94,10 +94,10 @@ import {Emit, Options, Vue, Watch} from 'vue-property-decorator'
 // import GenderType from "socialuni-constant/constant/GenderType";
 // import AlertUtil from "socialuni-app/src/util/AlertUtil";
 // import TagSearch from "./TagSearch.vue";
-// import QInput from "socialuni-ui/src/components/QInput/QInput.vue";
-// import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
-// import QSlider from "socialuni-ui/src/components/QSlider/QSlider.vue";
-// import QPopup from "socialuni-ui/src/components/QPopup/QPopup.vue";
+// import QInput from "socialuni-ui-uni/src/components/QInput/QInput.vue";
+// import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
+// import QSlider from "socialuni-ui-uni/src/components/QSlider/QSlider.vue";
+// import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue";
 // import SocialTagPicker from '../../component/SocialTagPicker.vue';
 // import SocialCirclePicker from "../../component/SocialCirclePicker.vue";
 // import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";

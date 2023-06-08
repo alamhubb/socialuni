@@ -44,7 +44,7 @@
 </template>
 
 <script lang="ts">
-import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
+import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 import {Options, Prop, Vue} from "vue-property-decorator";
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
 import ImgUtil from "socialuni-app/src/util/ImgUtil";

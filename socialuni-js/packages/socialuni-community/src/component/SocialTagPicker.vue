@@ -49,10 +49,10 @@
 
 <script lang="ts">
 import {Options, Emit, Vue} from 'vue-property-decorator'
-import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
-import QInput from "socialuni-ui/src/components/QInput/QInput.vue";
-import QSidebar from "socialuni-ui/src/components/QSidebar/QSidebar.vue";
-import QPopup from "socialuni-ui/src/components/QPopup/QPopup.vue";
+import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
+import QInput from "socialuni-ui-uni/src/components/QInput/QInput.vue";
+import QSidebar from "socialuni-ui-uni/src/components/QSidebar/QSidebar.vue";
+import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue";
 import SocialCircleRO from "socialuni-api-base/src/model/community/circle/SocialCircleRO";
 
 

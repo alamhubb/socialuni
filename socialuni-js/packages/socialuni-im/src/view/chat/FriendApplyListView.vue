@@ -96,7 +96,7 @@ import SocialuniAddFriendStatus from "socialuni-im-api/src/constant/SocialuniAdd
 import PageUtil from "socialuni-util/src/util/PageUtil";
 import OpenImFriendApplyRO from "socialuni-api-base/src/model/openIm/OpenImFriendApplyRO";
 import {socialChatModule} from "../../store/SocialChatModule";
-import QTabs from "socialuni-ui/src/components/QTabs/QTabs.vue";
+import QTabs from "socialuni-ui-uni/src/components/QTabs/QTabs.vue";
 import SocialuniAddFriendType from "socialuni-im-api/src/constant/SocialuniAddFriendType";
 
 @Options({

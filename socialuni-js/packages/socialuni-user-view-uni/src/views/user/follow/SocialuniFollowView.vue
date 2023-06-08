@@ -68,7 +68,7 @@ import PageUtil from "socialuni-util/src/util/PageUtil";
 import PagePath from "socialuni-constant/constant/PagePath";
 import {onLoad, onPullDownRefresh, onReachBottom, onShow} from "@dcloudio/uni-app";
 import {socialTalkModule} from "socialuni-sdk/src/store/store";
-import QTabs from "socialuni-ui/src/components/QTabs/QTabs.vue";
+import QTabs from "socialuni-ui-uni/src/components/QTabs/QTabs.vue";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import SocialuniFollowTag from "../../../components/SocialuniFollow/SocialuniFollowTag.vue";
 import SocialuniPageQueryQO from "socialuni-api-base/src/model/common/SocialuniPageQueryQO";

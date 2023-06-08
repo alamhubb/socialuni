@@ -25,9 +25,9 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import QInput from "socialuni-ui/src/components/QInput/QInput.vue";
-import QPopup from "socialuni-ui/src/components/QPopup/QPopup.vue";
-import SSwitch from "socialuni-ui/src/components/SSwitch.vue";
+import QInput from "socialuni-ui-uni/src/components/QInput/QInput.vue";
+import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue";
+import SSwitch from "socialuni-ui-uni/src/components/SSwitch.vue";
 import ToastUtil from "socialuni-util/src/util/ToastUtil";
 import AlertUtil from "socialuni-app/src/util/AlertUtil";
 import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";

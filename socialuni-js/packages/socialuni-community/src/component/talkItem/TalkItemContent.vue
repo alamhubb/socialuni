@@ -93,7 +93,7 @@ import {Options, Prop, Vue} from 'vue-property-decorator'
 import RouterUtil from "socialuni-util/src/util/RouterUtil";
 import PagePath from "socialuni-constant/constant/PagePath";
 import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
-import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
+import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 import AlertUtil from "socialuni-app/src/util/AlertUtil";
 import ImgUtil from "socialuni-app/src/util/ImgUtil";
 import MsgUtil from "socialuni-app/src/util/MsgUtil";
