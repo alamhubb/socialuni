@@ -1,6 +1,4 @@
-import RouterUtil from "socialuni-util/src/util/RouterUtil";
 import ImPagePath from "../constant/ImPagePath";
-import UserPagePath from "socialuni/src/constant/UserPagePath";
 
 export default class ImPageUtil {
 

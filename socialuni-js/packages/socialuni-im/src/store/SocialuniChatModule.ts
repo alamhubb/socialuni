@@ -6,10 +6,7 @@ import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import ChatQueryQO from "socialuni-im-api/src/model/QO/chat/ChatQueryQO";
 import {socialChatModule} from "./SocialChatModule";
 import MessageVO from "socialuni-im-api/src/model/RO/MessageVO";
-import Arrays from "socialuni-util/src/util/Arrays";
 import MessageAPI from "socialuni-im-api/src/api/MessageAPI";
-import CommonUtil from "socialuni-util/src/util/CommonUtil";
-import RouterUtil from "socialuni-util/src/util/RouterUtil";
 import ImPagePath from "../constant/ImPagePath";
 
 class SocialuniChatModule {

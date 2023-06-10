@@ -1,9 +1,6 @@
-import TalkFilterUtil from "socialuni-util/src/util/TalkFilterUtil"
-import TalkVueUtil from "socialuni-util/src/util/TalkVueUtil"
 import TalkVO from "socialuni-api-base/src/model/talk/TalkVO"
 import CommentVO from "socialuni-api-base/src/model/comment/CommentVO"
 import CommentAddVO from "socialuni-api-base/src/model/comment/CommentAddVO"
-import CommonUtil from "socialuni-util/src/util/CommonUtil"
 import TalkTabType from "socialuni-constant/constant/TalkTabType"
 import SocialuniTalkTabRO from "socialuni-api-base/src/model/talk/SocialuniTalkTabRO";
 import TalkTabVO from "socialuni-api-base/src/model/talk/SocialuniTalkTabRO";
@@ -15,7 +12,6 @@ import {reactive} from "vue";
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
 import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
 import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
-import StorageUtil from "socialuni-util/src/util/StorageUtil";
 
 class SocialTalkModule {
     //方便操作页面动作

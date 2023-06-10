@@ -1,10 +1,7 @@
-import RouterUtil from "socialuni-util/src/util/RouterUtil"
 import ChatType from "socialuni-constant/constant/ChatType"
-import CommonUtil from "socialuni-util/src/util/CommonUtil"
 import SocialuniChatRO from "socialuni-api-base/src/model/SocialuniChatRO";
 import {OpenImChatRO} from "socialuni-api-base/src/model/openIm/OpenImChatRO";
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
-import SocialuniImUserTokenUtil from "socialuni-util/src/util/SocialuniImUserTokenUtil";
 import SocialuniTalkTabCircleRO from "socialuni-api-base/src/model/community/circle/SocialuniTalkTabCircleRO";
 import CircleCreateChatQO from "socialuni-api-base/src/model/community/circle/CircleCreateChatQO";
 import MessageVO from "socialuni-im-api/src/model/RO/MessageVO";
@@ -20,8 +17,6 @@ import ChatAPI from "socialuni-im-api/src/api/ChatAPI";
 import MessageViewParams from "../view/chat/MessageViewParams";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import ChatQueryQO from "socialuni-im-api/src/model/QO/chat/ChatQueryQO";
-import Arrays from "socialuni-util/src/util/Arrays";
-import JsonUtil from "socialuni-util/src/util/JsonUtil";
 import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
 
 
