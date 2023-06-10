@@ -12,7 +12,7 @@ import {Options, Emit, Prop, Vue} from 'vue-property-decorator'
 import TalkItemHead from './TalkItemHead.vue'
 import TalkItemContent from './TalkItemContent.vue'
 import TalkItemComment from './TalkItemComment.vue'
-import TalkVO from "socialuni/src/model/talk/TalkVO";
+import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
 
 @Options({
   components: {

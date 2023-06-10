@@ -1,4 +1,4 @@
-import DistrictVO from "socialuni/src/model/DistrictVO";
+import DistrictVO from "socialuni-api-base/src/model/DistrictVO";
 import {reactive} from "vue";
 import {socialTalkModule} from "./SocialTalkModule";
 import DistrictAPI from "socialuni-community-api/src/api/DistrictAPI";

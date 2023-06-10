@@ -10,8 +10,10 @@ import UserStore from "@/store/UserStore";
 const request = axios.create({
   // baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
   baseURL: AppConst.baseUrl,
-  withCredentials: true, // send cookies when cross-domain requests
-  timeout: 120000 // request timeout
+    // send cookies when cross-domain requests
+  withCredentials: true,
+    // request timeout
+  timeout: 120000,
 })
 
 // request interceptor

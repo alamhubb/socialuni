@@ -245,26 +245,26 @@ import PagePath from "socialuni-constant/constant/PagePath";
 import SelectorQuery = UniNamespace.SelectorQuery;
 import NodesRef = UniNamespace.NodesRef;
 import PayType from "socialuni-constant/constant/PayType";
-import MsgUtil from "socialuni-util/src/util/MsgUtil";
+import MsgUtil from "socialuni-app/src/util/MsgUtil";
 import PageUtil from "socialuni-util/src/util/PageUtil";
-import AlertUtil from "socialuni-util/src/util/AlertUtil";
+import AlertUtil from "socialuni-app/src/util/AlertUtil";
 import ToastUtil from "socialuni-util/src/util/ToastUtil";
 import PlatformUtils from "socialuni/src/utils/PlatformUtils";
-import UniUtil from "socialuni-util/src/util/UniUtil";
+import UniUtil from "socialuni-app/src/util/UniUtil";
 import CommonUtil from "socialuni-util/src/util/CommonUtil";
 import DateUtil from "socialuni-util/src/util/DateUtil";
 import MessageViewParams from "./MessageViewParams";
 import SocialuniMessageType from "socialuni-constant/constant/mesaage/SocialuniMessageType";
-import QIcon from 'socialuni-ui/src/components/QIcon/QIcon.vue'
-import QNavbar from 'socialuni-ui/src/components/QNavbar/QNavbar.vue'
+import QIcon from 'socialuni-ui-uni/src/components/QIcon/QIcon.vue'
+import QNavbar from 'socialuni-ui-uni/src/components/QNavbar/QNavbar.vue'
 import CosUtil from "socialuni-util/src/util/CosUtil";
 import AppMsg from "socialuni-constant/constant/AppMsg";
-import CosAuthRO from "socialuni/src/model/cos/CosAuthRO";
+import CosAuthRO from "socialuni-api-base/src/model/cos/CosAuthRO";
 import MessageItemContent from "./MessageItemContent.vue";
 import SocialuniProviderType from "socialuni-constant/constant/SocialuniProviderType";
 import {onLoad} from "@dcloudio/uni-app";
 import {onMounted} from "vue";
-import SocialuniChatRO from "socialuni/src/model/SocialuniChatRO";
+import SocialuniChatRO from "socialuni-api-base/src/model/SocialuniChatRO";
 import MessageAPI from "socialuni-im-api/src/api/MessageAPI";
 import MessageVO from "socialuni-im-api/src/model/RO/MessageVO";
 import SocialuniReportDialog from "socialuni/src/component/SocialuniReportDialog.vue";
@@ -382,9 +382,6 @@ export default class MessageView extends Vue {
     }
 
     get pageTitle() {
-        console.log(3333)
-        console.log(this.chat)
-        console.log(this.chat.nickname)
         return this.chat.nickname
     }
 
@@ -557,7 +554,6 @@ export default class MessageView extends Vue {
         if (msgContent) {
             // 点击发送后立即push
             //启用状态可以直接发送
-            const msg: MessageVO = new MessageVO(msgContent)
             this.msgContent = ''
             socialChatModule.pushMessageAction(msg)
             /*if (this.chat.status === SocialuniCommonStatus.enable) {

@@ -1,22 +1,21 @@
 import TalkFilterUtil from "socialuni-util/src/util/TalkFilterUtil"
 import TalkVueUtil from "socialuni-util/src/util/TalkVueUtil"
-import TalkVO from "socialuni/src/model/talk/TalkVO"
-import CommentVO from "socialuni/src/model/comment/CommentVO"
-import CommentAddVO from "socialuni/src/model/comment/CommentAddVO"
-import MsgUtil from "socialuni-util/src/util/MsgUtil"
+import TalkVO from "socialuni-api-base/src/model/talk/TalkVO"
+import CommentVO from "socialuni-api-base/src/model/comment/CommentVO"
+import CommentAddVO from "socialuni-api-base/src/model/comment/CommentAddVO"
 import CommonUtil from "socialuni-util/src/util/CommonUtil"
 import TalkTabType from "socialuni-constant/constant/TalkTabType"
-import SocialuniTalkTabRO from "socialuni/src/model/talk/SocialuniTalkTabRO";
-import TalkTabVO from "socialuni/src/model/talk/SocialuniTalkTabRO";
+import SocialuniTalkTabRO from "socialuni-api-base/src/model/talk/SocialuniTalkTabRO";
+import TalkTabVO from "socialuni-api-base/src/model/talk/SocialuniTalkTabRO";
 import {Vue} from "vue-class-component";
-import CircleCreateChatQO from "socialuni/src/model/community/circle/CircleCreateChatQO";
-import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
-import SocialuniAppAPI from "socialuni/src/api/SocialuniAppAPI";
+import CircleCreateChatQO from "socialuni-api-base/src/model/community/circle/CircleCreateChatQO";
 import {socialCircleModule} from "./SocialCircleModule";
 import SocialuniCircleAPI from "socialuni-community-api/src/api/SocialuniCircleAPI";
-import StorageUtil from "socialuni/src/util/StorageUtil";
 import {reactive} from "vue";
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
+import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
+import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
+import StorageUtil from "socialuni-util/src/util/StorageUtil";
 
 class SocialTalkModule {
     //方便操作页面动作

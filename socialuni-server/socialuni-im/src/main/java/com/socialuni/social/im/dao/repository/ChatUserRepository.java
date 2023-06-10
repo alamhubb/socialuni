@@ -21,11 +21,8 @@ public interface ChatUserRepository extends JpaRepository<SocialuniChatUserDO, I
     List<ChatUserDO> findByChatTypeNotInAndStatusAndUserIdAndStatusOrderByTopFlagDescChatTopLevelAscUpdateTimeDesc(List<String> chatTypes, String Status, Integer userId, String status);
 */
 
-    //查询chat下，user的chatUser
-    Optional<SocialuniChatUserDO> findFirstByChatIdAndStatusAndUserId(Integer chatId, String Status, Integer userId);
-
     //只有发送消息时，才需要使用这个，校验状态，其他情况不需要
-    Optional<SocialuniChatUserDO> findFirstByChatIdAndStatusAndUserIdAndStatus(Integer chatId, String Status, Integer userId, String status);
+    SocialuniChatUserDO findFirstByChatIdAndUserIdAndStatus(Integer chatId, Integer userId, String Status);
 
     Optional<SocialuniChatUserDO> findFirstByStatusAndUserIdAndBeUserId(String Status, Integer userId, Integer BeUserId);
 

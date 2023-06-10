@@ -1,14 +1,21 @@
 import {reactive, UnwrapNestedRefs} from "vue";
 import {SocialuniPlugin} from "../interface/SocialuniPlugin";
-import {HttpRequestConfigInterface} from "../request/HttpRequestConfigInterface";
-import SocialuniHttpRequestConfig from "../request/SocialuniHttpRequestConfig";
+import {Router} from "vue-router";
 
 class SocialuniPluginsModule {
+    private _router: Router = null
     private socialuniPlugins: SocialuniPlugin[] = []
-    requestConfig: HttpRequestConfigInterface = null
 
-    init(requestConfig: HttpRequestConfigInterface = new SocialuniHttpRequestConfig()) {
-        this.requestConfig = requestConfig
+
+    get router(): Router {
+        return this._router;
+    }
+
+    setRouter(value: Router) {
+        this._router = value;
+    }
+
+    init() {
         this.socialuniPlugins = []
     }
 

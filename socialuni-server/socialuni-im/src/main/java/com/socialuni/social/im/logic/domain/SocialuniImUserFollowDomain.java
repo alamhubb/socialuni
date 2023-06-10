@@ -3,6 +3,7 @@ package com.socialuni.social.im.logic.domain;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
+import com.socialuni.social.im.enumeration.ChatType;
 import com.socialuni.social.im.enumeration.MessageType;
 import com.socialuni.social.im.logic.entity.SocialuniMessageEntity;
 import com.socialuni.social.im.logic.foctory.SocialuniChatUserDOFactory;

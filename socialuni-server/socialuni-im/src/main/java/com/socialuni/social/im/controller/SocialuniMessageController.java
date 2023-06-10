@@ -121,7 +121,7 @@ public class SocialuniMessageController implements SocialuniMessageAPI {
 
             Integer chatId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(chatUuid);
 
-            SocialuniChatDO chatDO = SocialuniRepositoryFacade.findById(chatId, SocialuniChatDO.class);
+            SocialuniChatDO chatDO = SocialuniRepositoryFacade.findByUnionId(chatId, SocialuniChatDO.class);
             if (!chatDO.getStatus().equals(ChatStatus.enable)) {
                 throw new SocialBusinessException("会话已被删除");
             }

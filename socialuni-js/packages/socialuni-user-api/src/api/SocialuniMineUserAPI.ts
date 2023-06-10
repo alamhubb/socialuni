@@ -1,10 +1,15 @@
 import socialuniUserRequest from "../request/socialuniUserRequest";
-import SocialuniUserRO from "socialuni/src/model/user/SocialuniUserRO";
-import SocialuniMineUserRO from "socialuni/src/model/user/SocialuniMineUserRO";
-import ImgFileVO from "socialuni/src/model/ImgFileVO";
-import UserEditVO from "socialuni/src/model/user/UserEditVO";
-import ImgAddQO from "socialuni/src/model/user/ImgAddQO";
-import CenterUserDetailRO from "socialuni/src/model/social/CenterUserDetailRO";
+import SocialuniUserRO from "socialuni-api-base/src/model/user/SocialuniUserRO";
+import SocialuniMineUserRO from "socialuni-api-base/src/model/user/SocialuniMineUserRO";
+import ImgFileVO from "socialuni-api-base/src/model/ImgFileVO";
+import UserEditVO from "socialuni-api-base/src/model/user/UserEditVO";
+import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
+import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
+
+export interface SocialuniGetRandomAvatarRO{
+  path:string
+  fullPath:string
+}
 
 export default class SocialuniMineUserAPI {
   static getMineUserInfoAPI() {
@@ -20,7 +25,11 @@ export default class SocialuniMineUserAPI {
   }
 
   static addUserImgAPI(userImg: ImgAddQO) {
-    return socialuniUserRequest.post<CenterUserDetailRO>('socialuni/mineUser/addUserImg', userImg)
+    return socialuniUserRequest.post<SocialuniMineUserRO>('socialuni/mineUser/addUserImg', userImg)
+  }
+
+  static randomUserAvatar() {
+    return socialuniUserRequest.get<SocialuniMineUserRO>('socialuni/mineUser/randomUserAvatar')
   }
 
   static addUserAvatarImgAPI(userImg: ImgAddQO) {

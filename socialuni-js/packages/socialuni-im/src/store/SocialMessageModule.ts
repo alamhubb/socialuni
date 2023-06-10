@@ -16,9 +16,9 @@ import {InitConfig} from "open-im-sdk/types"
 import SocialuniConfig from "socialuni/src/config/SocialuniConfig"
 import {socialChatModule} from './store'
 import OpenImPlatformType from '../plugins/openIm/OpenImPlatformType'
-import SocialuniChatRO from "socialuni/src/model/SocialuniChatRO";
-import {OpenImChatRO} from "socialuni/src/model/openIm/OpenImChatRO";
-import MessageVO from "socialuni/src/model/message/MessageVO";
+import SocialuniChatRO from "socialuni-api-base/src/model/SocialuniChatRO";
+import {OpenImChatRO} from "socialuni-api-base/src/model/openIm/OpenImChatRO";
+import MessageVO from "socialuni-api-base/src/model/message/MessageVO";
 
 
 class SocialMessageModule {

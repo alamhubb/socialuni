@@ -4,6 +4,7 @@ import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import lombok.Data;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Data
@@ -18,6 +19,7 @@ public class SocialuniAppConfigBO {
     private String selfSchoolTabName = "本校";
 //    private String systemUserId = "关注";
     private List<String> tabNames = Arrays.asList("关注", "首页", "同城");
+    private List<String> defaultChatGroups = Collections.singletonList("交友");
 
     //是否禁止未成年人内容
     private Boolean disableUnderageContent = false;

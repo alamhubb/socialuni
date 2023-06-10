@@ -36,10 +36,10 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import TagVO from 'socialuni/src/model/community/tag/TagVO'
+import TagVO from 'socialuni-api-base/src/model/community/tag/TagVO'
 import ErrorConst from 'socialuni-constant/constant/ErrorConst'
-import AlertUtil from 'socialuni-util/src/util/AlertUtil'
-import ResultRO from 'socialuni/src/model/social/ResultRO'
+import AlertUtil from 'socialuni-app/src/util/AlertUtil'
+import ResultRO from 'socialuni-api-base/src/model/social/ResultRO'
 import TagAPI from "socialuni-community-api/src/api/TagAPI";
 
 @Options({})

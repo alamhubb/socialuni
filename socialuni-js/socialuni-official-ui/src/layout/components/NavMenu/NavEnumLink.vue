@@ -5,15 +5,14 @@
 </template>
 
 <script lang="ts">
-import { isExternal } from '@/utils/validate'
-import { Component, Prop, Vue } from 'vue-property-decorator'
+import { Options, Prop, Vue } from 'vue-property-decorator'
 
-@Component
+@Options({})
 export default class NavEnumLink extends Vue {
   @Prop() to: string
 
   get isExternal() {
-    return isExternal(this.to)
+    return /^(https?:|mailto:|tel:)/.test(this.to)
   }
 
   get type() {

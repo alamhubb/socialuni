@@ -50,7 +50,7 @@ public class SocialMessageROFactory {
     }
 
     //websocket推新消息时设置为未读
-    public SocialMessageRO getMessageRO(SocialuniMessageDO messageDO, boolean readFlag, SocialuniUserDo user) {
+    public static SocialMessageRO getMessageRO(SocialuniMessageDO messageDO, SocialuniUserDo user, boolean readFlag) {
         SocialMessageRO socialMessageRO = SocialMessageROFactory.getMessageRO(messageDO, user.getUnionId());
         socialMessageRO.setIsRead(false);
         return socialMessageRO;
@@ -69,7 +69,7 @@ public class SocialMessageROFactory {
 
     public static SocialMessageRO getMessageRO(SocialuniMessageReceiveDO messageReceive) {
 
-        SocialuniMessageDO messageDO = SocialuniRepositoryFacade.findById(messageReceive.getMessageId(), SocialuniMessageDO.class);
+        SocialuniMessageDO messageDO = SocialuniRepositoryFacade.findByUnionId(messageReceive.getMessageId(), SocialuniMessageDO.class);
 
         SocialMessageRO messageRO = SocialMessageROFactory.getMessageRO(messageDO, messageReceive.getBeUserId());
         //涉及到举报，不知道是msgid还是msguserid，所以暂时取消，统一使用msgid，删除和举报

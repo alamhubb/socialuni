@@ -33,7 +33,7 @@ public class SpringEventPublisher implements EventPublisher {
      */
     @Override
     public void publishEvent(String topicName,Object event) {
-        delegatApplicationEventPublisher.publishEvent(new SpringDDDEvent(topicName,event));
+//        delegatApplicationEventPublisher.publishEvent(new SpringDDDEvent(topicName,event));
     }
 
     /**
@@ -42,13 +42,13 @@ public class SpringEventPublisher implements EventPublisher {
      */
     @EventListener(classes = {SpringDDDEvent.class})
     public void listen(SpringDDDEvent event) {
-        Object source = event.getSource();
+        /*Object source = event.getSource();
         String topicName = event.getTopicName();
         // 调用所有项目中定义的消费者
         for (EventConsum eventConsum : eventConsumList) {
             if (eventConsum.canConsum(topicName,source)) {
                 eventConsum.consumEvent(source);
             }
-        }
+        }*/
     }
 }

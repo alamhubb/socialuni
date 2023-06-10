@@ -7,9 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "@dcloudio/types": "^3.0.17",
-    "socialuni": "^0.1.2",
-    "vue": "3.2.41"
+    "socialuni-api-base": "^0.1.2"
   },
   "keywords": [],
   "author": "",

@@ -59,13 +59,13 @@ public class MatchRequestService {
 
 
 //        List<NotifyDO> notifies = new ArrayList<>();
-        SocialuniMessageDO message = SocialuniMessageDOFactory.createMessage(chat.getId(), "匹配成功，只有您能主动发起会话", user.getUnionId(), MessageType.system);
+        SocialuniMessageDO message = SocialuniMessageDOFactory.createMessage(chat.getUnionId(), "匹配成功，只有您能主动发起会话", user.getUnionId(), MessageType.system);
         List<SocialuniMessageReceiveDO> messageReceiveDOS = new ArrayList<>();
         //给自己和对方各生成一条消息
         for (SocialuniChatUserDO chatUserDO : chatUserDOS) {
 //            chatUserDO.setLastContent(message.getContent());
             chatUserDO.setUpdateTime(new Date());
-            SocialuniMessageReceiveDO messageReceiveDO = new SocialuniMessageReceiveDO(chatUserDO, message.getUserId(), message.getId());
+            SocialuniMessageReceiveDO messageReceiveDO = new SocialuniMessageReceiveDO(chatUserDO, message.getUserId(), message.getUnionId());
             messageReceiveDOS.add(messageReceiveDO);
         }
         messageReceiveDORepository.saveAll(messageReceiveDOS);

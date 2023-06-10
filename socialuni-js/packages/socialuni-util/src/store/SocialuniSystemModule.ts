@@ -57,67 +57,73 @@ class SocialuniSystemModule {
 
 
     constructor() {
-        //设置平台
-        // #ifdef APP-PLUS
-        this.isApp = true
-        this.platform = SocialuniPlatformType.app
-        //获取app版本号
-        plus.runtime.getProperty(plus.runtime.appid, (widgetInfo) => {
-            this.appVersion = Number(widgetInfo.version.split('.').join(''))
-        })
-        const phoneInfo = plus.push.getClientInfo()
-        this.clientid = phoneInfo.clientid
-        // #endif
+        try {
+            if (uni) {
+                //设置平台
+                // #ifdef APP-PLUS
+                this.isApp = true
+                this.platform = SocialuniPlatformType.app
+                //获取app版本号
+                plus.runtime.getProperty(plus.runtime.appid, (widgetInfo) => {
+                    this.appVersion = Number(widgetInfo.version.split('.').join(''))
+                })
+                const phoneInfo = plus.push.getClientInfo()
+                this.clientid = phoneInfo.clientid
+                // #endif
 
-        // #ifdef MP
-        this.isMp = true
-        this.platform = SocialuniPlatformType.mp
-        // #ifdef MP-WEIXIN
-        this.isMpWx = true
-        this.provider = SocialuniMpPlatformType.wx
-        // #endif
-        // #ifdef MP-QQ
-        this.isMpQQ = true
-        this.provider = SocialuniMpPlatformType.qq
-        // #endif
-        // #endif
+                // #ifdef MP
+                this.isMp = true
+                this.platform = SocialuniPlatformType.mp
+                // #ifdef MP-WEIXIN
+                this.isMpWx = true
+                this.provider = SocialuniMpPlatformType.wx
+                // #endif
+                // #ifdef MP-QQ
+                this.isMpQQ = true
+                this.provider = SocialuniMpPlatformType.qq
+                // #endif
+                // #endif
 
-        // #ifdef H5
-        this.isH5 = true
-        this.platform = SocialuniPlatformType.h5
-        // #endif
+                // #ifdef H5
+                this.isH5 = true
+                this.platform = SocialuniPlatformType.h5
+                // #endif
 
-        // 判断是否为ios平台
-        const systemInfo: GetSystemInfoResult = uni.getSystemInfoSync()
-        this.systemInfo = systemInfo
-        //获取是否苹果平台
-        const model: string = systemInfo.model
-        //小程序开发工具时会为 devtools
-        const platform: string = systemInfo.platform
-        //设置系统
-        if (model === SocialuniUniDeviceType.pc) {
-            this.isPc = true
-            this.isMobile = false
-            this.device = SocialuniUniDeviceType.pc
-        } else {
-            this.isPc = false
-            this.isMobile = true
-            this.device = SocialuniUniDeviceType.phone
+                // 判断是否为ios平台
+                const systemInfo: GetSystemInfoResult = uni.getSystemInfoSync()
+                this.systemInfo = systemInfo
+                //获取是否苹果平台
+                const model: string = systemInfo.model
+                //小程序开发工具时会为 devtools
+                const platform: string = systemInfo.platform
+                //设置系统
+                if (model === SocialuniUniDeviceType.pc) {
+                    this.isPc = true
+                    this.isMobile = false
+                    this.device = SocialuniUniDeviceType.pc
+                } else {
+                    this.isPc = false
+                    this.isMobile = true
+                    this.device = SocialuniUniDeviceType.phone
+                }
+                if ((platform && (platform === SocialuniSystemType.ios)) || (model && (model.indexOf('iPhone') > -1 || model.indexOf('iPad') > -1))) {
+                    this.isIos = true
+                    //必须有此判断，要不然会覆盖mp的值
+                    this.system = SocialuniSystemType.ios
+                } else {
+                    this.isAndroid = true
+                    this.system = SocialuniSystemType.android
+                }
+
+                this.screenHeight = systemInfo.screenHeight
+                this.windowHeight = systemInfo.windowHeight
+                this.statusBarHeight = systemInfo.statusBarHeight
+                this.titleHeight = this.statusBarHeight + this.navBarHeight
+                this.contentHeight = this.screenHeight - this.titleHeight
+            }
+        } catch (e) {
+
         }
-        if ((platform && (platform === SocialuniSystemType.ios)) || (model && (model.indexOf('iPhone') > -1 || model.indexOf('iPad') > -1))) {
-            this.isIos = true
-            //必须有此判断，要不然会覆盖mp的值
-            this.system = SocialuniSystemType.ios
-        } else {
-            this.isAndroid = true
-            this.system = SocialuniSystemType.android
-        }
-
-        this.screenHeight = systemInfo.screenHeight
-        this.windowHeight = systemInfo.windowHeight
-        this.statusBarHeight = systemInfo.statusBarHeight
-        this.titleHeight = this.statusBarHeight + this.navBarHeight
-        this.contentHeight = this.screenHeight - this.titleHeight
     }
 
     //ios和qq小程序禁止虚拟支付，统一判断

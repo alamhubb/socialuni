@@ -49,33 +49,33 @@
 <script lang="ts">
 import {Options, Vue, Watch} from 'vue-property-decorator'
 
-import QButton from 'socialuni-ui/src/components/QButton/QButton.vue'
-import QNavbar from 'socialuni-ui/src/components/QNavbar/QNavbar.vue'
-import QSearch from 'socialuni-ui/src/components/QSearch/QSearch.vue'
-import QIcon from 'socialuni-ui/src/components/QIcon/QIcon.vue'
-import QPopup from 'socialuni-ui/src/components/QPopup/QPopup.vue'
-import QSlider from 'socialuni-ui/src/components/QSlider/QSlider.vue'
-import QTabs from "socialuni-ui/src/components/QTabs/QTabs.vue";
+import QButton from 'socialuni-ui-uni/src/components/QButton/QButton.vue'
+import QNavbar from 'socialuni-ui-uni/src/components/QNavbar/QNavbar.vue'
+import QSearch from 'socialuni-ui-uni/src/components/QSearch/QSearch.vue'
+import QIcon from 'socialuni-ui-uni/src/components/QIcon/QIcon.vue'
+import QPopup from 'socialuni-ui-uni/src/components/QPopup/QPopup.vue'
+import QSlider from 'socialuni-ui-uni/src/components/QSlider/QSlider.vue'
+import QTabs from "socialuni-ui-uni/src/components/QTabs/QTabs.vue";
 import TagSearch from "./TagSearch.vue";
 import TabsTalk from "./tabsTalk.vue";
 import TalkSwipers from "./talkSwipers.vue";
-import UniUtil from "socialuni-util/src/util/UniUtil";
+import UniUtil from "socialuni-app/src/util/UniUtil";
 import RouterUtil from "socialuni-util/src/util/RouterUtil";
 import PagePath from "socialuni-constant/constant/PagePath";
 import PageUtil from "socialuni-util/src/util/PageUtil";
-import TagVO from "socialuni/src/model/community/tag/TagVO";
-import DistrictVO from "socialuni/src/model/DistrictVO";
+import TagVO from "socialuni-api-base/src/model/community/tag/TagVO";
+import DistrictVO from "socialuni-api-base/src/model/DistrictVO";
 import {onHide, onShow} from "@dcloudio/uni-app";
 import SocialTagPicker from "../../component/SocialTagPicker.vue";
-import {socialuniTagModule} from "../../store/SocialTagModule";
-import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
-import { socialNotifyModule } from '../../store/SocialNotifyModule'
-import {socialLocationModule} from "../../store/SocialLocationModule";
-import {socialuniConfigModule} from "socialuni/src/store/SocialuniConfigModule";
 import QCityPicker from "../../component/QCityPicker/QCityPicker.vue";
 import CommunityPageUtil from "../../util/CommunityPageUtil";
-import {socialAppModule} from "socialuni/src/store/SocialAppModule";
 import {socialChatModule} from "socialuni-im/src/store/SocialChatModule";
+import {socialuniTagModule} from "../../store/SocialTagModule";
+import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
+import {socialNotifyModule} from "../../store/SocialNotifyModule";
+import {socialAppModule} from "socialuni-app/src/store/SocialAppModule";
+import {socialLocationModule} from "../../store/SocialLocationModule";
+import {socialuniConfigModule} from "socialuni-app/src/store/SocialuniConfigModule";
 
 // todo 后台可控制是否显示轮播图
 

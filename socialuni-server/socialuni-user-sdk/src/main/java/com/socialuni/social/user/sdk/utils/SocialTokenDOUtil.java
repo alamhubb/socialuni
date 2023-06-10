@@ -38,17 +38,12 @@ public class SocialTokenDOUtil {
         if (StringUtils.isEmpty(token)) {
             return null;
         }
-        return SocialTokenDOUtil.getCommonTokenDONotNull(token);
-    }
-
-
-    public static SocialuniTokenDO getCommonTokenDONotNull(String token) {
-        String userKey = SocialTokenFacade.getUserKeyByToken(token);
-        if (userKey == null) {
-            throw new SocialNotLoginException();
-        }
         SocialuniTokenDO tokenDO = commonTokenRepository.findOneByToken(token);
         if (tokenDO == null) {
+            return null;
+        }
+        String userKey = SocialTokenFacade.getUserKeyByToken(token);
+        if (userKey == null) {
             throw new SocialNotLoginException();
         }
         Integer doUserId = tokenDO.getUserId();
@@ -84,6 +79,15 @@ public class SocialTokenDOUtil {
             throw new SocialUserTokenExpireException();
         }
         //返回user
+        return tokenDO;
+    }
+
+
+    public static SocialuniTokenDO getCommonTokenDONotNull(String token) {
+        SocialuniTokenDO tokenDO = SocialTokenDOUtil.getCommonTokenDOAllowNull(token);
+        if (tokenDO == null) {
+            throw new SocialNotLoginException();
+        }
         return tokenDO;
     }
 }

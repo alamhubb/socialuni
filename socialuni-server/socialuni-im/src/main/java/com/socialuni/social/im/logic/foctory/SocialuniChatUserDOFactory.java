@@ -53,4 +53,12 @@ public class SocialuniChatUserDOFactory {
         }
         return chatUserDO;
     }
+
+    public static SocialuniChatUserDO createGroupChatUser(SocialuniChatDO chatDO, Integer userId) {
+        //会话不存在则创建
+        SocialuniChatUserDO chatUserDO = new SocialuniChatUserDO(chatDO, userId);
+
+        chatUserDO = SocialuniRepositoryFacade.save(chatUserDO);
+        return chatUserDO;
+    }
 }

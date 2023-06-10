@@ -88,16 +88,16 @@
 <script lang="ts">
 import {Emit, Options, Vue, Watch} from 'vue-property-decorator'
 // import TalkFilterUtil from "socialuni-util/src/util/TalkFilterUtil";
-// import DistrictVO from "socialuni/src/model/DistrictVO";
-// import TagVO from "socialuni/src/model/communityPages/tag/TagVO";
-// import SocialCircleRO from "socialuni/src/model/communityPages/circle/SocialCircleRO";
+// import DistrictVO from "socialuni-api-base/src/model/DistrictVO";
+// import TagVO from "socialuni-api-base/src/model/communityPages/tag/TagVO";
+// import SocialCircleRO from "socialuni-api-base/src/model/communityPages/circle/SocialCircleRO";
 // import GenderType from "socialuni-constant/constant/GenderType";
-// import AlertUtil from "socialuni-util/src/util/AlertUtil";
+// import AlertUtil from "socialuni-app/src/util/AlertUtil";
 // import TagSearch from "./TagSearch.vue";
-// import QInput from "socialuni-ui/src/components/QInput/QInput.vue";
-// import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
-// import QSlider from "socialuni-ui/src/components/QSlider/QSlider.vue";
-// import QPopup from "socialuni-ui/src/components/QPopup/QPopup.vue";
+// import QInput from "socialuni-ui-uni/src/components/QInput/QInput.vue";
+// import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
+// import QSlider from "socialuni-ui-uni/src/components/QSlider/QSlider.vue";
+// import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue";
 // import SocialTagPicker from '../../component/SocialTagPicker.vue';
 // import SocialCirclePicker from "../../component/SocialCirclePicker.vue";
 // import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";

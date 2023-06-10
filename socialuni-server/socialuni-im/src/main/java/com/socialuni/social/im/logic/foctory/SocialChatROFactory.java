@@ -102,7 +102,7 @@ public class SocialChatROFactory {
         ChatRO chatRO = SocialChatROFactory.getChatRO1(chatDO);
         //查询用户这个chatUser下的消息
         //已经确认过chat为可用的
-        List<SocialuniMessageDO> messageDOS = messageRepository.findTop31ByChatIdAndStatusAndIdNotInOrderByIdDesc(chatDO.getId(), ChatStatus.enable, SocialuniConst.emptyIds);
+        List<SocialuniMessageDO> messageDOS = messageRepository.findTop31ByChatIdAndStatusAndIdNotInOrderByIdDesc(chatDO.getUnionId(), ChatStatus.enable, SocialuniConst.emptyIds);
         if (messageDOS.size() > 30) {
             messageDOS.subList(1, 31);
             chatRO.setLoadMore(LoadMoreType.more);
@@ -131,7 +131,7 @@ public class SocialChatROFactory {
     //chatuser
     //推消息时，查列表时  的基础
     public static ChatRO getChatROByUserLogin(SocialuniChatUserDO chatUserDO) {
-        SocialuniChatDO chat = SocialuniUserContactRepositoryFacede.findById(chatUserDO.getChatId(), SocialuniChatDO.class);
+        SocialuniChatDO chat = SocialuniRepositoryFacade.findByUnionId(chatUserDO.getChatId(), SocialuniChatDO.class);
         ChatRO chatRO = SocialChatROFactory.getChatRO1(chat);
 
         //暂时不支持删除系统群聊
@@ -141,7 +141,7 @@ public class SocialChatROFactory {
 //        this.id = chatUserDO.getId();
         //根据类型区分不同nick和ava
         //如果群聊则直接使用
-        if (!ChatType.systemChats.contains(chatRO.getType())) {
+        if (!ChatType.system_group.contains(chatRO.getType())) {
             SocialuniUserDo receiveUser = SocialuniUserUtil.getAndCheckUserNotNull(chatUserDO.getBeUserId());
 
             String beUserId = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(receiveUser.getUserId());
@@ -187,10 +187,23 @@ public class SocialChatROFactory {
     // 还有查看用户详情页面,查看时有时候不为已开启，所以需要判断
     public static ChatRO getChatROByQueryChat(SocialuniChatUserDO chatUserDO, boolean queryMsgFlag) {
         ChatRO chatRO = SocialChatROFactory.getChatROByUserLogin(chatUserDO);
-        //系统群聊读取message表
-        //查询用户这个chatUser下的消息
-        List<SocialuniMessageReceiveDO> messageReceiveDOS = messageReceiveRepository.findTop30ByChatUserIdAndStatusAndCreateTimeLessThanOrderByCreateTimeDesc(chatUserDO.getId(), MessageStatus.enable, new Date());
-        List<SocialMessageRO> messages = SocialMessageROFactory.messageReceiveDOToVOS(messageReceiveDOS);
+
+        List<SocialMessageRO> messages;
+        if (chatRO.getType().equals(ChatType.single)){
+            //系统群聊读取message表
+            //查询用户这个chatUser下的消息
+            List<SocialuniMessageReceiveDO> messageReceiveDOS = messageReceiveRepository.findTop30ByChatUserIdAndStatusAndCreateTimeLessThanOrderByCreateTimeDesc(chatUserDO.getId(), MessageStatus.enable, new Date());
+            messages = SocialMessageROFactory.messageReceiveDOToVOS(messageReceiveDOS);
+        }else {
+            //查询用户这个chatUser下的消息
+            //已经确认过chat为可用的
+            List<SocialuniMessageDO> messageDOS = messageRepository.findTop31ByChatIdAndStatusAndIdNotInOrderByIdDesc(chatUserDO.getChatId(), ChatStatus.enable, SocialuniConst.emptyIds);
+            if (messageDOS.size() > 30) {
+                messageDOS.subList(1, 31);
+                chatRO.setLoadMore(LoadMoreType.more);
+            }
+            messages = SocialMessageROFactory.messageDOToVOS(messageDOS, chatUserDO.getUserId());
+        }
         //最后一个的content
         if (messages.size() > 0) {
             String lastContent = messages.get(messages.size() - 1).getContent();

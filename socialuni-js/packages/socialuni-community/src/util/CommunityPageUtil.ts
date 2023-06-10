@@ -1,6 +1,6 @@
 import RouterUtil from "socialuni-util/src/util/RouterUtil"
 import CommunityPagePath from "../constant/CommunityPagePath";
-import UserCheckUtil from "socialuni/src/util/UserCheckUtil";
+import UserCheckUtil from "socialuni-user/src/util/UserCheckUtil";
 
 export default class CommunityPageUtil {
     static goHome(): void {

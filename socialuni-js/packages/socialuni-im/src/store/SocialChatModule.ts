@@ -1,24 +1,18 @@
-import PageUtil from "socialuni-util/src/util/PageUtil"
 import RouterUtil from "socialuni-util/src/util/RouterUtil"
-import PagePath from "socialuni-constant/constant/PagePath"
-import PlatformUtils from "socialuni/src/utils/PlatformUtils"
 import ChatType from "socialuni-constant/constant/ChatType"
 import CommonUtil from "socialuni-util/src/util/CommonUtil"
-import SocialuniChatRO from "socialuni/src/model/SocialuniChatRO";
-import {OpenImChatRO} from "socialuni/src/model/openIm/OpenImChatRO";
-import CenterUserDetailRO from "socialuni/src/model/social/CenterUserDetailRO";
+import SocialuniChatRO from "socialuni-api-base/src/model/SocialuniChatRO";
+import {OpenImChatRO} from "socialuni-api-base/src/model/openIm/OpenImChatRO";
+import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
 import SocialuniImUserTokenUtil from "socialuni-util/src/util/SocialuniImUserTokenUtil";
-import {OpenImMsgRO} from "socialuni/src/model/openIm/OpenImMsgRO";
-import SocialuniTalkTabCircleRO from "socialuni/src/model/community/circle/SocialuniTalkTabCircleRO";
-import CircleCreateChatQO from "socialuni/src/model/community/circle/CircleCreateChatQO";
+import SocialuniTalkTabCircleRO from "socialuni-api-base/src/model/community/circle/SocialuniTalkTabCircleRO";
+import CircleCreateChatQO from "socialuni-api-base/src/model/community/circle/CircleCreateChatQO";
 import MessageVO from "socialuni-im-api/src/model/RO/MessageVO";
 import FriendApplyType from "socialuni-constant/constant/FriendApplyType";
-import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
-import AlertUtil from "socialuni-util/src/util/AlertUtil";
+import UUIDUtil from "socialuni-app/src/util/UUIDUtil";
 import MessageAPI from "socialuni-im-api/src/api/MessageAPI";
 import {reactive} from "vue";
-import OpenImFriendApplyRO from "socialuni/src/model/openIm/OpenImFriendApplyRO";
-import JsonUtil from "socialuni/src/util/JsonUtil";
+import OpenImFriendApplyRO from "socialuni-api-base/src/model/openIm/OpenImFriendApplyRO";
 import OpenImSessionType from "socialuni-constant/constant/openIm/constant/OpenImSessionType";
 import ImPageUtil from "../util/ImPageUtil";
 import ImPagePath from "../constant/ImPagePath";
@@ -27,7 +21,8 @@ import MessageViewParams from "../view/chat/MessageViewParams";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import ChatQueryQO from "socialuni-im-api/src/model/QO/chat/ChatQueryQO";
 import Arrays from "socialuni-util/src/util/Arrays";
-import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
+import JsonUtil from "socialuni-util/src/util/JsonUtil";
+import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
 
 
 const openIM = null
@@ -152,7 +147,7 @@ class SocialChatModule {
             // 找到需要添加内容的chat
         }
         //计算未读数量
-        this.computedChatsUnreadNumTotalAction()
+        // this.computedChatsUnreadNumTotalAction()
     }
 
     //替换chat消息，如果不存在则添加
@@ -683,7 +678,7 @@ class SocialChatModule {
     //在聊天界面的时候，自己发送msg 本地添加msg
 
     async pushMessageAction(msg: MessageVO) {
-        this.messages.push(msg)
+        // this.messages.push(msg)
         // JsonUtils.log(this.messages)
         // console.log(JSON.stringify(msg))
         this.scrollToMessagePageBottom()
@@ -741,7 +736,7 @@ class SocialChatModule {
         // 不为自己的 且未读的
         const messages: MessageVO[] = messagesROs.filter(item => !item.isMine && !item.isRead)
         const msgIds: string[] = messages.map(msg => msg.id)
-        if (msgIds.length) {
+        /*if (msgIds.length) {
             // msgIds =
             //如果登录了，才调用后台
             // 如果登录了
@@ -754,7 +749,7 @@ class SocialChatModule {
             }
             this.chat.unreadNum = 0
             this.computedChatsUnreadNumTotalAction()
-        }
+        }*/
     }
 
 

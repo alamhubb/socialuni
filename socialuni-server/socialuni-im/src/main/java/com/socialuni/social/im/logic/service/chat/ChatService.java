@@ -133,7 +133,7 @@ public class ChatService {
             //则为chatId
             Integer chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(chatUuid);
 
-            SocialuniChatDO chatDO = SocialuniRepositoryFacade.findById(chatId, SocialuniChatDO.class);
+            SocialuniChatDO chatDO = SocialuniRepositoryFacade.findByUnionId(chatId, SocialuniChatDO.class);
 
             ChatRO chatRO = SocialChatROFactory.getNoLoginChatRO(chatDO);
 

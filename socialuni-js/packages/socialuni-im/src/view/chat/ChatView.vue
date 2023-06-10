@@ -111,17 +111,17 @@ import SocialuniCommonStatus from 'socialuni-constant/constant/status/SocialuniC
 import {Options, Vue} from 'vue-property-decorator'
 import Constants from 'socialuni-constant/constant/Constant'
 import DateUtil from "socialuni-util/src/util/DateUtil"
-import UniUtil from "socialuni-util/src/util/UniUtil"
-import AlertUtil from "socialuni-util/src/util/AlertUtil"
+import UniUtil from "socialuni-app/src/util/UniUtil"
+import AlertUtil from "socialuni-app-uni/src/util/AlertUtil"
 import ToastUtil from "socialuni-util/src/util/ToastUtil"
 import {onLoad, onShow} from "@dcloudio/uni-app"
 import PageUtil from "socialuni-util/src/util/PageUtil"
-import SocialUserContentRO from "socialuni/src/model/social/SocialUserContentRO"
-import QNavbar from "socialuni-ui/src/components/QNavbar/QNavbar.vue"
-import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue"
-import QSearch from "socialuni-ui/src/components/QSearch/QSearch.vue"
-import QInput from "socialuni-ui/src/components/QInput/QInput.vue"
-import SocialuniChatRO from "socialuni/src/model/SocialuniChatRO"
+import SocialUserContentRO from "socialuni-api-base/src/model/social/SocialUserContentRO"
+import QNavbar from "socialuni-ui-uni/src/components/QNavbar/QNavbar.vue"
+import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue"
+import QSearch from "socialuni-ui-uni/src/components/QSearch/QSearch.vue"
+import QInput from "socialuni-ui-uni/src/components/QInput/QInput.vue"
+import SocialuniChatRO from "socialuni-api-base/src/model/SocialuniChatRO"
 import {socialChatModule} from "../../store/SocialChatModule";
 import ChatAPI from "socialuni-im-api/src/api/ChatAPI";
 import ImPageUtil from "../../util/ImPageUtil";

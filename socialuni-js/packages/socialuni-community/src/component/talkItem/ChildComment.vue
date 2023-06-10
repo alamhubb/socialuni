@@ -36,9 +36,9 @@
 
 <script lang="ts">
 import {Options, Prop, Vue, Watch} from 'vue-property-decorator'
-import TalkVO from "socialuni/src/model/talk/TalkVO";
-import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
-import CommentVO from "socialuni/src/model/comment/CommentVO";
+import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
+import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
+import CommentVO from "socialuni-api-base/src/model/comment/CommentVO";
 import ObjectUtil from "socialuni-util/src/util/ObjectUtil";
 import RouterUtil from "socialuni-util/src/util/RouterUtil";
 import PagePath from "socialuni-constant/constant/PagePath";

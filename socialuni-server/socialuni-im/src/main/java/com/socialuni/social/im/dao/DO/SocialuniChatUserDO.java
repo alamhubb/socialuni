@@ -16,8 +16,8 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "s_im_chat_user", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"userId", "chatId"}),
-        @UniqueConstraint(columnNames = {"userId", "beUserId"})
+        @UniqueConstraint(columnNames = {"chatId", "userId"}),
+        @UniqueConstraint(columnNames = {"type", "userId", "beUserId"})
 })
 public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {
 
@@ -37,8 +37,8 @@ public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {
     //2.如果为代开起，付费，则需要点击开启，或者发送时提示是否要给对方发送并开启会话
     //3. 如果为被关闭，则不显示，发送消息报错
     private Integer unreadNum;
-    //仅前台展示字段,前台自己判断生成
-//    private String lastContent;
+    //仅前台展示字段,前台自己判断生成, 需要此字段，进入页面才查询消息列表
+    private String lastContent;
     //是否为陌生人
 //    private Boolean friendUser;
     //是否在前台显示
@@ -90,6 +90,8 @@ public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {
 //        this.userId = userId;
         String chatType = chat.getType();
         this.setUserId(userId);
+        this.setType(chat.getType());
+        this.chatId = chat.getUnionId();
         if (chatType.equals(ChatType.single)) {
             //私聊聊，直接是开启，创建时 只能为待开启和 不在前台显示
             this.frontShow = false;
@@ -106,11 +108,8 @@ public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {
     }
 
     public SocialuniChatUserDO(SocialuniChatDO chat, Integer userId, Integer beUserId) {
-        this();
-        this.chatId = chat.getId();
-        this.setUserId(userId);
+        this(chat, userId);
         this.setBeUserId(beUserId);
-        this.setType(chat.getType());
     }
 
     public void checkFrontShowAndSetTrue() {

@@ -1,7 +1,7 @@
 import socialuniCommunityRequest from "../request/socialuniCommunityRequest";
-import FollowAddVO from "socialuni/src/model/FollowAddVO";
-import SocialuniPageQueryQO from "socialuni/src/model/common/SocialuniPageQueryQO";
-import SocialUserFollowDetailRO from "socialuni/src/model/social/SocialUserFollowDetailRO";
+import FollowAddVO from "socialuni-api-base/src/model/FollowAddVO";
+import SocialuniPageQueryQO from "socialuni-api-base/src/model/common/SocialuniPageQueryQO";
+import SocialUserFollowDetailRO from "socialuni-api-base/src/model/social/SocialUserFollowDetailRO";
 
 export default class FollowAPI {
     static addFollowAPI(followAdd: FollowAddVO) {

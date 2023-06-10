@@ -95,7 +95,6 @@ public class SocialTokenFacade {
 
     public static Boolean isError(String token) {
         return StringUtils.isEmpty(token)
-                || RequestUtil.headerIsEmpty(token)
-                || token.length() == 32;
+                || RequestUtil.headerIsEmpty(token);
     }
 }

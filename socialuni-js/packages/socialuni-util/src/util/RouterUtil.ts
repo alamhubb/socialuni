@@ -1,3 +1,7 @@
+import {useRoute, useRouter} from "vue-router";
+import {getCurrentInstance} from "vue";
+import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
+
 export default class RouterUtil {
     /**
      * 保留当前页面，跳转到应用内的某个页面，使用uni.navigateBack可以返回到原页面。
@@ -48,7 +52,9 @@ export default class RouterUtil {
     }
 
     static getCurrentPageURI(): string {
-        return '/' + getCurrentPages()[getCurrentPages().length - 1].route
+        // console.log(useRoute())
+        // console.log(useRouter())
+        return socialuniPluginsModule.router.currentRoute.path
     }
 
     static getCurrentPage(): any {
