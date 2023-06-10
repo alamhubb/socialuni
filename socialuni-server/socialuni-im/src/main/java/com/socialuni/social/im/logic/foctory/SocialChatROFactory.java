@@ -131,7 +131,7 @@ public class SocialChatROFactory {
     //chatuser
     //推消息时，查列表时  的基础
     public static ChatRO getChatROByUserLogin(SocialuniChatUserDO chatUserDO) {
-        SocialuniChatDO chat = SocialuniRepositoryFacade.findById(chatUserDO.getChatId(), SocialuniChatDO.class);
+        SocialuniChatDO chat = SocialuniUserContactRepositoryFacede.findById(chatUserDO.getChatId(), SocialuniChatDO.class);
         ChatRO chatRO = SocialChatROFactory.getChatRO1(chat);
 
         //暂时不支持删除系统群聊
