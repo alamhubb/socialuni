@@ -31,8 +31,8 @@ class SocialuniUserPlugin implements SocialuniPlugin {
             config.headers.token = null
         }
     }
-    onResponseErrorInterceptors(error: AxiosResponse) {
-        UniUtil.hideLoading()
+    onResponseErrorInterceptors(response: AxiosResponse) {
+        /*UniUtil.hideLoading()
         //第一步，先判断 有没有error
         //判断data类型，如果没类型，直接走
         //有内容则为本系统？也不一定，判断拿内容类型
@@ -78,7 +78,7 @@ class SocialuniUserPlugin implements SocialuniPlugin {
             return result
         }
         MsgUtil.systemErrorMsg()
-        SocialuniAppAPI.sendErrorLogAPI(response.config.url, JsonUtil.toJson(response))
+        SocialuniAppAPI.sendErrorLogAPI(response.config.url, JsonUtil.toJson(response))*/
         return response
     }
 }
