@@ -54,8 +54,6 @@
     "axios": "^0.27.2",
     "cos-js-sdk-v5": "^1.2.18",
     "cos-wx-sdk-v5": "^0.7.11",
-    "pinia": "^2.0.22",
-    "pinia-class-component": "^0.9.4",
     "socialuni": "../packages/socialuni",
     "socialuni-community": "../packages/socialuni-community",
     "socialuni-im": "../packages/socialuni-im",
