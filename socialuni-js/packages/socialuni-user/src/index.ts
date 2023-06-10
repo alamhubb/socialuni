@@ -5,6 +5,13 @@ import {socialuniUserModule} from "./store/SocialuniUserModule";
 import {socialuniTokenModule} from "./store/SocialuniTokenModule";
 import UniUtil from 'socialuni-app/src/util/UniUtil'
 import ErrorConst from 'socialuni-constant/constant/ErrorConst'
+import ResultRO from 'socialuni-api-base/src/model/social/ResultRO'
+import UserService from './logic/UserService'
+import UserMsgUtil from './util/UserMsgUtil'
+import AlertUtil from 'socialuni-app-h5/src/util/AlertUtil'
+import SocialuniAppAPI from 'socialuni-app-api/src/api/SocialuniAppAPI'
+import MsgUtil from 'socialuni-app-h5/src/util/MsgUtil'
+import JsonUtil from 'socialuni-util/src/util/JsonUtil'
 
 class SocialuniUserPlugin implements SocialuniPlugin {
     onLaunch() {
@@ -32,25 +39,18 @@ class SocialuniUserPlugin implements SocialuniPlugin {
         }
     }
     onResponseErrorInterceptors(response: AxiosResponse) {
-        /*UniUtil.hideLoading()
+        console.log(response)
+        UniUtil.hideLoading()
         //第一步，先判断 有没有error
         //判断data类型，如果没类型，直接走
         //有内容则为本系统？也不一定，判断拿内容类型
         //然后本系统处理
-        if (response && response.statusCode) {
-            const result = response.data
-            if (result) {
-                if (!result.errorMsg) {
-
-                }
-            }
-        }
         UniUtil.hideLoading()
-        const result = response.data
-        if (response.statusCode && result) {
+        const result:ResultRO = response.data
+        if (result) {
             const errorMsg = result.errorMsg
             if (errorMsg) {
-                switch (response.statusCode) {
+                switch (result.errorCode) {
                     case ErrorConst.not_logged:
                         // 理论上不需要，因为token不会失效，也不会错误
                         // 已知可能，切换环境导致token不同
@@ -78,7 +78,7 @@ class SocialuniUserPlugin implements SocialuniPlugin {
             return result
         }
         MsgUtil.systemErrorMsg()
-        SocialuniAppAPI.sendErrorLogAPI(response.config.url, JsonUtil.toJson(response))*/
+        SocialuniAppAPI.sendErrorLogAPI(response.config.url, JsonUtil.toJson(response))
         return response
     }
 }
