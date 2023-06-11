@@ -144,7 +144,7 @@ class SocialuniChatModule {
     }
 
 
-    async pushMessageAction(msg: MessageVO) {
+    async pushMessageAction(msgContent) {
         // this.messages.push(msg)
         // JsonUtils.log(this.messages)
         // console.log(JSON.stringify(msg))
@@ -163,8 +163,8 @@ class SocialuniChatModule {
         };*/
         // console.log('-------params-------', params);
 
-        console.log(msg)
-        return MessageAPI.sendMsgAPI(this.chat.id, msg.content)
+        console.log(msgContent)
+        return MessageAPI.sendMsgAPI(this.chat.id, msgContent)
         //
         /*let actionMethod: Function = null;
         switch (msg.action) {

@@ -1,12 +1,11 @@
 <template>
     <div class="pb-50 h100p">
-        123
-<!--        <q-navbar class="bb" show-back :title="pageTitle">
+        <q-navbar class="bb" show-back :title="pageTitle">
             <div class="row-end-center flex-1">
                 <q-icon icon="list-dot" size="20" @click="openMoreMenu"></q-icon>
             </div>
         </q-navbar>
-        &lt;!&ndash;    <view v-if="showMsgHint" class="fixed-105 row-col-center bg-orange">
+        <!--    <view v-if="showMsgHint" class="fixed-105 row-col-center bg-orange">
               <view class="flex-1 card-text-row">
                 长按消息可进行举报，欢迎大家积极举报不良内容获取正义值
               </view>
@@ -14,7 +13,7 @@
                 <q-button @click="consoleMessage">{{ scrollTop }}</q-button>
                 <q-icon icon="close-circle-fill" size="36" @click="closeShowMsgHint"></q-icon>
               </view>
-            </view>&ndash;&gt;
+            </view>-->
 
         <scroll-view scroll-y="true" class="flex-col h100p pb-60"
                      @scrolltoupper="upper"
@@ -22,12 +21,11 @@
                      :show-scrollbar="true"
                      :scroll-top="scrollTop"
         >
-            &lt;!&ndash;    <view class="cu-chat">&ndash;&gt;
+            <!--    <view class="cu-chat">-->
             <view class="w100p h100p">
-                &lt;!&ndash;      <view v-if="chat.status === waitOpenStatus||chat.status === closeStatus" class="w100p h100p col-row-center">&ndash;&gt;
+                <!--      <view v-if="chat.status === waitOpenStatus||chat.status === closeStatus" class="w100p h100p col-row-center">-->
                 <view class="mt-80px">
-                    123
-                    &lt;!&ndash;          <view class="uni-tip-content text-bold">
+                    <!--          <view class="uni-tip-content text-bold">
                                 <template v-if="chat.needPayOpen">
                                   会话未开启，为避免用户被频繁恶意骚扰，只能给关注您的和给您发过消息的用户直接发送消息
                                   &lt;!&ndash;              ，给其他用户发送消息，需要支付10贝壳开启对话&ndash;&gt;
@@ -38,17 +36,17 @@
                                 <view v-else class="row-center">
                                   对方关注了您，发送消息即可开启对话
                                 </view>
-                              </view>&ndash;&gt;
+                              </view>-->
 
-                    &lt;!&ndash;<view v-if="chat.needPayOpen" class="uni-tip-group-button">
+                    <!--<view v-if="chat.needPayOpen" class="uni-tip-group-button">
                       <button class="uni-tip-button w40r" type="default" :plain="true" @click="goBack">
                         返回
                       </button>
                       <button class="uni-tip-button w40r" type="primary" @click="payOpenChat">
                         开启对话
                       </button>
-                    </view>&ndash;&gt;
-                    &lt;!&ndash;          <view v-for="msg in messages" :id="'m'+msg.id" :key="msg.id"
+                    </view>-->
+                    <!--          <view v-for="msg in messages" :id="'m'+msg.id" :key="msg.id"
                                     :class="[msg.type === systemMsgType?'row-center':'cu-item',msg.isMine?'self':'']">
                                 <template v-if="msg.type === systemMsgType">
                                   <view class="cu-info round">
@@ -88,7 +86,7 @@
                                   </view>
                                   <view class="date">{{ formatTime(msg.createTime) }}</view>
                                 </template>
-                              </view>&ndash;&gt;
+                              </view>-->
                     <div v-for="msg in messages" :id="'m'+msg.id" :key="msg.id">
                         <div v-if="msg.type === systemMsgType">
                             <view class="cu-info round row-all-center">
@@ -100,13 +98,13 @@
                             <div class="flex-1 flex-col mr overflow-hidden">
                                 <view class="h44px row-end-center mb-xs">
                                     {{ msg.user.nickname }}
-                                    &lt;!&ndash;              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
+                                    <!--              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
                                                         @click="toUserDetailVue(msg.user.id)">
                                                     {{ msg.user.nickname }}
                                                   </text>
                                                   <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
                                                          src="/static/img/crown.png"
-                                                         @click="toVipVue"></image>&ndash;&gt;
+                                                         @click="toVipVue"></image>-->
                                 </view>
 
                                 <view class="row-end-center" @longpress="openMessageMoreHandleDialog(msg)">
@@ -131,13 +129,13 @@
                             <div class="flex-1 flex-col mr overflow-hidden">
                                 <view class="h44px row-col-center mb-xs">
                                     {{ msg.user.nickname }}
-                                    &lt;!&ndash;              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
+                                    <!--              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
                                                         @click="toUserDetailVue(msg.user.id)">
                                                     {{ msg.user.nickname }}
                                                   </text>
                                                   <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
                                                          src="/static/img/crown.png"
-                                                         @click="toVipVue"></image>&ndash;&gt;
+                                                         @click="toVipVue"></image>-->
                                 </view>
 
                                 <view class="row-start" @longpress="openMessageMoreHandleDialog(msg)">
@@ -151,22 +149,22 @@
                     </div>
                 </view>
             </view>
-            &lt;!&ndash;      <view v-else class="w100p row-center" :class="showMsgHint?'pt-70px':'pt-10px'">
+            <!--      <view v-else class="w100p row-center" :class="showMsgHint?'pt-70px':'pt-10px'">
                     <view v-if="chat.loadMore === noMore || messages.length===0" class="py-xs px bg-white bd-radius mt-sm">
                       会话已开启
                     </view>
                     &lt;!&ndash;        <uni-load-more v-else :status="chat.loadMore"></uni-load-more>&ndash;&gt;
-                  </view>&ndash;&gt;
+                  </view>-->
 
 
         </scroll-view>
 
         <view class="fixed-footer">
             <view class="cu-bar footer input">
-                &lt;!&ndash;<view class="action">
+                <!--<view class="action">
                     <text class="cuIcon-sound text-grey"></text>
-                </view>&ndash;&gt;
-                &lt;!&ndash;                @focus="inputFocusEvent"&ndash;&gt;
+                </view>-->
+                <!--                @focus="inputFocusEvent"-->
                 <input class="solid-bottom"
                        v-model.trim="msgContent"
                        maxlength="300"
@@ -179,16 +177,16 @@
                        :confirm-hold="true"
                        confirm-type="send"
                 >
-                &lt;!&ndash;<view class="action" @click="showEmojiClick">
+                <!--<view class="action" @click="showEmojiClick">
                     <text class="cuIcon-emojifill text-grey"></text>
-                </view>&ndash;&gt;
+                </view>-->
                 <button v-if="msgContent" class="cu-btn bg-green shadow color-white" @touchend.prevent="sendMsgClick">发送
                 </button>
                 <view v-else class="ml-sm">
                     <q-icon icon="plus-circle" size="28" @click="openPhoto"></q-icon>
                 </view>
             </view>
-            &lt;!&ndash;      <view v-show="showEmoji" class="w100vw bg-blue" :style="{height:keyboardHeight+'px'}"></view>&ndash;&gt;
+            <!--      <view v-show="showEmoji" class="w100vw bg-blue" :style="{height:keyboardHeight+'px'}"></view>-->
         </view>
 
         <uni-popup ref="deleteReasonDialog" :show="false" :custom="true" :mask-click="false">
@@ -225,12 +223,12 @@
             </view>
         </uni-popup>
 
-        &lt;!&ndash;<view v-show="showEmoji" class="emoji-model" :style="{height:emojiModelHeight+'px'}"
+        <!--<view v-show="showEmoji" class="emoji-model" :style="{height:emojiModelHeight+'px'}"
               @touchstart="inputBlur">
-        </view>&ndash;&gt;
+        </view>-->
 
         <socialuni-report-dialog ref="reportDialog" :report-info="message"
-                                 :report-info-type="reportContentType"></socialuni-report-dialog>-->
+                                 :report-info-type="reportContentType"></socialuni-report-dialog>
     </div>
 </template>
 
@@ -544,6 +542,7 @@ export default class MessageView extends Vue {
     }
 
     async sendMsgClick() {
+        console.log(123)
         UserCheckUtil.checkUserBindPhoneNum()
         // 微信支持 hold-keyboard
         // app和h5支持 @touchend.prevent
@@ -560,7 +559,7 @@ export default class MessageView extends Vue {
             // 点击发送后立即push
             //启用状态可以直接发送
             this.msgContent = ''
-            socialuniChatModule.pushMessageAction(msg)
+            socialuniChatModule.pushMessageAction(msgContent)
             /*if (this.chat.status === SocialuniCommonStatus.enable) {
 
 
