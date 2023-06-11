@@ -1,4 +1,4 @@
-import SocialuniAppUtil from "socialuni-app/src/util/SocialuniAppUtil";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 export default class SocialuniImUserTokenUtil {
     // 开发生产区分token，避免混淆，不区分的话会冲突

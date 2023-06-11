@@ -28,7 +28,8 @@
 import {Options, Prop, Vue} from 'vue-property-decorator'
 import GetMenuButtonBoundingClientRectRes = UniApp.GetMenuButtonBoundingClientRectRes;
 import QIcon from "../QIcon/QIcon.vue";
-import PageUtil from "socialuni-util/src/util/PageUtil";
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 // 如果是小程序，获取右上角胶囊的尺寸信息，避免导航栏右侧内容与胶囊重叠(支付宝小程序非本API，尚未兼容)
 // #ifdef MP
@@ -91,7 +92,7 @@ export default class QNavBar extends Vue {
   }
 
   goBack() {
-    PageUtil.goBackOrHome()
+    SocialuniAppUtil.PageUtil.goBackOrHome()
   }
 
   goHome() {

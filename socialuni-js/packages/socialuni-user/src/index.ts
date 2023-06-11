@@ -11,7 +11,7 @@ import UserMsgUtil from "./util/UserMsgUtil";
 import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
 import MsgUtil from "socialuni-util/src/util/MsgUtil";
 import JsonUtil from "socialuni-util/src/util/JsonUtil";
-import SocialuniAppUtil from "socialuni-app/src/util/SocialuniAppUtil";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 class SocialuniUserPlugin implements SocialuniPlugin {
     onLaunch() {

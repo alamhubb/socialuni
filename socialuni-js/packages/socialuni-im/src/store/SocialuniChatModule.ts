@@ -3,13 +3,12 @@ import ChatAPI from "socialuni-im-api/src/api/ChatAPI";
 import SocialuniChatRO from "socialuni-api-base/src/model/SocialuniChatRO";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import ChatQueryQO from "socialuni-im-api/src/model/QO/chat/ChatQueryQO";
-import {socialuniChatModule} from "./socialuniChatModule";
 import MessageVO from "socialuni-im-api/src/model/RO/MessageVO";
 import MessageAPI from "socialuni-im-api/src/api/MessageAPI";
 import CommonUtil from "socialuni-util/src/util/CommonUtil";
 import Arrays from "socialuni-util/src/util/Arrays";
 import ImPageUtil from "../util/ImPageUtil";
-import SocialuniAppUtil from "socialuni-app/src/util/SocialuniAppUtil";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 class SocialuniChatModule {
     chatId = ''

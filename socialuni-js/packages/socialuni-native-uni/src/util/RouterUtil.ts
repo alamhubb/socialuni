@@ -54,4 +54,18 @@ export default class RouterUtil {
     static getCurrentPage(): any {
         return getCurrentPages()[getCurrentPages().length - 1]
     }
+
+    static goBackOrHome(): void {
+        const pages = getCurrentPages()
+        if (pages.length === 1) {
+            RouterUtil.goHome()
+        } else {
+            RouterUtil.goBack()
+        }
+        // uni.navigateBack({ delta: 1 })
+    }
+
+    static goHome(): void {
+        // RouterUtil.switchTab(PagePath.home)
+    }
 }

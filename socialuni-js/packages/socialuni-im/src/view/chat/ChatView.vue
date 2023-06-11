@@ -114,7 +114,7 @@ import QSearch from "socialuni-ui-uni/src/components/QSearch/QSearch.vue"
 import QInput from "socialuni-ui-uni/src/components/QInput/QInput.vue"
 import SocialuniImMineUserDetailRO from "socialuni-im-api/src/model/RO/SocialuniImMineUserDetailRO";
 import {socialuniChatModule} from "../../store/SocialuniChatModule";
-import SocialuniAppUtil from "socialuni-app/src/util/SocialuniAppUtil";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 import SocialuniImUserAPI from "socialuni-im-api/src/api/SocialuniImUserAPI";
 import ImPageUtil from "../../util/ImPageUtil";
 import SocialuniChatRO from "socialuni-api-base/src/model/SocialuniChatRO";

@@ -1,5 +1,5 @@
 import ImPagePath from "../constant/ImPagePath";
-import SocialuniAppUtil from "socialuni-app/src/util/SocialuniAppUtil";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 export default class ImPageUtil {
 

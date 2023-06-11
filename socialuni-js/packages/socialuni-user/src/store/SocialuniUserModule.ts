@@ -10,7 +10,7 @@ import UserMsgUtil from "../util/UserMsgUtil";
 import {socialuniConfigModule} from "socialuni-app/src/store/SocialuniConfigModule";
 import SocialuniUserExpandAPI from "socialuni-user-api/src/api/SocialuniUserExpandAPI";
 import ToastUtil from "socialuni-native-uni/src/util/ToastUtil";
-import SocialuniAppUtil from "socialuni-app/src/util/SocialuniAppUtil";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 class SocialuniUserModule {
     get token() {

@@ -1,5 +1,4 @@
 import PlatformType from "socialuni-constant/constant/PlatformType";
-import RouterUtil from "socialuni-util/src/util/RouterUtil";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 
 export default class FrontErrorLogVO {
@@ -12,12 +11,11 @@ export default class FrontErrorLogVO {
     frontPage: string = null
     appVersion: number = null
 
-    constructor(uri: string, detail: string, params: string, errorMsg: string) {
+    constructor(uri: string, detail: string, params: string, errorMsg: string, frontPage: string) {
         this.uri = uri
         this.detail = detail
         this.params = params
         this.errorMsg = errorMsg
-        this.frontPage = RouterUtil.getCurrentPageURI()
         this.platform = socialuniSystemModule.platform
         if (this.platform === PlatformType.mp) {
             this.provider = socialuniSystemModule.provider
