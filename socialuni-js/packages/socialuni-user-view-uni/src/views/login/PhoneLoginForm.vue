@@ -71,6 +71,8 @@ import PhoneNumFormData from "./PhoneNumFormData";
 import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 import CommonUtil from "socialuni-util/src/util/CommonUtil";
 import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
+import {socialuniConfigModule} from "socialuni-app/src/store/SocialuniConfigModule";
+import SocialuniAppUtil from "socialuni-app/src/util/SocialuniAppUtil";
 
 @Options({
   components: {QIcon}
@@ -158,10 +160,10 @@ export default class PhoneLoginForm extends Vue {
 
   sendCodeClick() {
     if (PhoneNumFormData.phoneNumberError(this.value.phoneNum)) {
-      return ToastUtil.toast('请输入正确的手机号')
+      return SocialuniAppUtil.ToastUtil.toast('请输入正确的手机号')
     }
     if (this.countDown) {
-      return ToastUtil.toast('验证码发送频繁，请等待')
+      return SocialuniAppUtil.ToastUtil.toast('验证码发送频繁，请等待')
     }
 
     this.authCodeInputFocus()
@@ -178,7 +180,7 @@ export default class PhoneLoginForm extends Vue {
     // 如果怕太频繁，就显示相同手机号每天只能发送几次，一小时内只能5次
     PhoneAPI.sendAuthCodeAPI(this.value.phoneNum).then(() => {
       // 提示验证码发送成功
-      ToastUtil.toast('验证码发送成功')
+        SocialuniAppUtil.ToastUtil.toast('验证码发送成功')
     })
   }
 }
