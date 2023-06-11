@@ -52,9 +52,10 @@ import UniUtil from "socialuni-app/src/util/UniUtil";
 import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
 import ImgFileVO from "socialuni-api-base/src/model/ImgFileVO";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
-import PageUtil from "socialuni-util/src/util/PageUtil";
 import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
 import SocialuniReportDialog from "../../component/SocialuniReportDialog.vue";
+import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
+import UserPageUtil from "socialuni-user/src/util/UserPageUtil";
 
 @Options({
   components: {QIcon, SocialuniReportDialog}
@@ -146,7 +147,7 @@ export default class SocialuniUserInfoImg extends Vue {
   }
 
   toUserImgList() {
-    PageUtil.toUserImgList(this.user.id)
+    UserPageUtil.toUserImgList(this.user.id)
   }
 }
 </script>

@@ -130,7 +130,6 @@ import PhoneLoginForm from "./PhoneLoginForm.vue";
 import LoginFooterAppInfo from "./LoginFooterAppInfo.vue";
 import QButton from "socialuni-ui-uni/src/components/QButton/QButton.vue";
 import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
-import PageUtil from "socialuni-util/src/util/PageUtil";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
 import LoginService from "socialuni-user/src/logic/LoginService";

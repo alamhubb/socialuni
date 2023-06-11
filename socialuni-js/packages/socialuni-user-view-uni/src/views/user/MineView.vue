@@ -202,7 +202,6 @@
 <script lang="ts">
 import {Options, Prop, Vue} from 'vue-property-decorator'
 import LoginView from "../login/LoginView.vue";
-import PageUtil from "socialuni-util/src/util/PageUtil";
 import UniUtil from "socialuni-app/src/util/UniUtil";
 import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
 import SocialuniFollowType from 'socialuni-constant/constant/user/SocialuniFollowType';
@@ -224,6 +223,8 @@ import { socialuniUserModule } from 'socialuni-user/src/store/SocialuniUserModul
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import SkipUrlConst from "socialuni-user/src/constant/SkipUrlConst";
 import UserService from "socialuni-user/src/logic/UserService";
+import UserPageUtil from "socialuni-user/src/util/UserPageUtil";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 @Options({
     components: {
@@ -378,38 +379,38 @@ export default class MineView extends Vue {
     }
 
     toFollowVue(followType: string) {
-        PageUtil.toUserFollowPage(followType)
+        UserPageUtil.toUserFollowPage(followType)
     }
 
     toEditUserInfo() {
-        PageUtil.toEditMineInfo()
+        UserPageUtil.toEditMineInfo()
     }
 
     toMineUserDetailPage() {
-        PageUtil.toUserDetail(this.mineUser.id)
+        UserPageUtil.toUserDetail(this.mineUser.id)
     }
 
     refreshMine() {
-        AlertUtil.confirm('是否刷新用户信息').then(() => {
+        SocialuniAppUtil.AlertUtil.confirm('是否刷新用户信息').then(() => {
             socialuniUserModule.getMineUserAction().then(() => {
-                ToastUtil.toast('刷新成功')
+                SocialuniAppUtil.ToastUtil.toast('刷新成功')
             })
         })
     }
 
     toFaceValuePage() {
-        PageUtil.toFaceValuePage()
+        UserPageUtil.toFaceValuePage()
     }
 
     async toPhonePage() {
-        await PageUtil.toPhonePage()
+        await UserPageUtil.toPhonePage()
     }
 
     toLoveValuePage() {
         if (this.mineUser) {
-            PageUtil.toLoveValuePage()
+            UserPageUtil.toLoveValuePage()
         } else {
-            MsgUtil.unLoginMessage()
+            // MsgUtil.unLoginMessage()
         }
     }
 
@@ -418,7 +419,7 @@ export default class MineView extends Vue {
     }
 
     toCoinPage() {
-        PageUtil.toCoinPage()
+        // UserPageUtil.toCoinPage()
     }
 
     openSetContactInfo() {

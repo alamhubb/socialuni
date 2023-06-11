@@ -1,10 +1,11 @@
 import UserPagePath from "../constant/UserPagePath";
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 export default class UserPageUtil {
     static toUserDetail(userId: string) {
-        if (RouterUtil.getCurrentPageURI() !== UserPagePath.userDetail) {
-            RouterUtil.navigateTo(UserPagePath.userDetail + '?userId=' + userId)
+        if (SocialuniAppUtil.RouterUtil.getCurrentPageURI() !== UserPagePath.userDetail) {
+            SocialuniAppUtil.RouterUtil.navigateTo(UserPagePath.userDetail + '?userId=' + userId)
         }
     }
 
@@ -13,21 +14,21 @@ export default class UserPageUtil {
         if (pages.length === 1) {
             UserPageUtil.toMinePage()
         } else {
-            RouterUtil.goBack()
+            SocialuniAppUtil.RouterUtil.goBack()
         }
         // uni.navigateBack({ delta: 1 })
     }
 
     static toEditMineInfo() {
-        RouterUtil.navigateTo(UserPagePath.editMineInfo)
+        SocialuniAppUtil.RouterUtil.navigateTo(UserPagePath.editMineInfo)
     }
 
     static toUserFollowPage(followType: string) {
-        RouterUtil.navigateTo(UserPagePath.userFollow + '?followType=' + followType)
+        SocialuniAppUtil.RouterUtil.navigateTo(UserPagePath.userFollow + '?followType=' + followType)
     }
 
     static toUserImgList(userId: string) {
-        RouterUtil.navigateTo(UserPagePath.userImgList + '?userId=' + userId)
+        SocialuniAppUtil.RouterUtil.navigateTo(UserPagePath.userImgList + '?userId=' + userId)
     }
 
     static toVipPage() {
@@ -46,18 +47,18 @@ export default class UserPageUtil {
     }
 
     static toMinePage() {
-        RouterUtil.switchTab(UserPagePath.userMine)
+        SocialuniAppUtil.RouterUtil.switchTab(UserPagePath.userMine)
     }
 
 
 
     static async toPhonePage() {
-        RouterUtil.navigateTo(UserPagePath.userPhone)
+        SocialuniAppUtil.RouterUtil.navigateTo(UserPagePath.userPhone)
     }
 
 
     static toIdentityAuthPage() {
-        RouterUtil.navigateTo(UserPagePath.identityAuth)
+        SocialuniAppUtil.RouterUtil.navigateTo(UserPagePath.identityAuth)
     }
 
     static toUserMatchPage(user: CenterUserDetailRO) {
@@ -67,6 +68,6 @@ export default class UserPageUtil {
 
 
     static toUserContactInfoPage() {
-        RouterUtil.navigateTo(UserPagePath.userContactInfo)
+        SocialuniAppUtil.RouterUtil.navigateTo(UserPagePath.userContactInfo)
     }
 }
