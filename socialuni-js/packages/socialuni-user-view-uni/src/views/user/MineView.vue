@@ -150,41 +150,41 @@
                         </view>
                         <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
                     </navigator>
-                    <!--                    <navigator :url="contactUsUrl" class="q-box-between bb bg-click">
-                                            <view class="row-col-center flex-1">
-                                                联系我们
-                                            </view>
-                                            <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
-                                        </navigator>
-                                        <navigator :url="homeUrl" class="q-box-between bb bg-click">
-                                            <view class="row-col-center flex-1">
-                                                关于我们
-                                            </view>
-                                            <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
-                                        </navigator>
-                                        <q-row-item @click="destroyAccount">
-                                            <view class="row-col-center flex-1">
-                                                注销账号
-                                            </view>
-                                            <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
-                                        </q-row-item>
-                                        <q-row-item @click="logout">
-                                            <view class="row-col-center flex-1">
-                                                退出登录
-                                            </view>
-                                            <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
-                                        </q-row-item>
-                                        <view class="px-smm py-sm w100p row-wrap">
-                                            <navigator :url="userAgreementUrl" class="color-blue">
-                                                《用户协议》
-                                            </navigator>
-                                            <navigator :url="userPrivacyUrl" class="color-blue">
-                                                《隐私政策》
-                                            </navigator>
-                                            <navigator :url="childProtectUrl" class="color-blue">
-                                                《儿童个人信息保护规则及监护人须知》
-                                            </navigator>
-                                        </view>-->
+                    <navigator :url="contactUsUrl" class="q-box-between bb bg-click">
+                        <view class="row-col-center flex-1">
+                            联系我们
+                        </view>
+                        <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
+                    </navigator>
+                    <navigator :url="homeUrl" class="q-box-between bb bg-click">
+                        <view class="row-col-center flex-1">
+                            关于我们
+                        </view>
+                        <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
+                    </navigator>
+                    <q-row-item @click="destroyAccount">
+                        <view class="row-col-center flex-1">
+                            注销账号
+                        </view>
+                        <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
+                    </q-row-item>
+                    <q-row-item @click="logout">
+                        <view class="row-col-center flex-1">
+                            退出登录
+                        </view>
+                        <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
+                    </q-row-item>
+                    <view class="px-smm py-sm w100p row-wrap">
+                        <navigator :url="userAgreementUrl" class="color-blue">
+                            《用户协议》
+                        </navigator>
+                        <navigator :url="userPrivacyUrl" class="color-blue">
+                            《隐私政策》
+                        </navigator>
+                        <navigator :url="childProtectUrl" class="color-blue">
+                            《儿童个人信息保护规则及监护人须知》
+                        </navigator>
+                    </view>
                 </view>
             </q-popup>
 
@@ -204,7 +204,6 @@ import {Options, Prop, Vue} from 'vue-property-decorator'
 import LoginView from "../login/LoginView.vue";
 import PageUtil from "socialuni-util/src/util/PageUtil";
 import UniUtil from "socialuni-app/src/util/UniUtil";
-import SkipUrlConst from "socialuni-constant/constant/SkipUrlConst";
 import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
 import SocialuniFollowType from 'socialuni-constant/constant/user/SocialuniFollowType';
 import UserContactInfoEditDialog from "./UserContactInfoEditDialog.vue";
@@ -223,6 +222,7 @@ import {socialChatModule} from "socialuni-im/src/store/SocialChatModule";
 import SocialGenderTag from "../../component/SocialGenderTag/SocialGenderTag.vue";
 import { socialuniUserModule } from 'socialuni-user/src/store/SocialuniUserModule';
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import SkipUrlConst from "socialuni-user/src/constant/SkipUrlConst";
 
 @Options({
     components: {
@@ -307,6 +307,7 @@ export default class MineView extends Vue {
     }
 
     get contactUsUrl(): string {
+        console.log(SkipUrlConst.contactUsUrl())
         return SkipUrlConst.contactUsUrl()
     }
 
