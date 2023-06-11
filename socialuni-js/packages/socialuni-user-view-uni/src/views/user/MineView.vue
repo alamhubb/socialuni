@@ -1,5 +1,5 @@
 <template>
-    <view class="h100p" @click="chose">
+    <view class="h100p">
         123
 <!--        <view v-if="mineUser" class="bg-default h100p flex-col">
             <div class="bg-theme-gradual px-smm pb-smm pt-100">
@@ -202,12 +202,47 @@
 
 <script lang="ts">
 import {Options, Prop, Vue} from 'vue-property-decorator'
-import SocialuniAppNativeUtil from "socialuni-app/src/util/SocialuniAppNativeUtil";
+import LoginView from "../login/LoginView.vue";
+import PageUtil from "socialuni-util/src/util/PageUtil";
+import UniUtil from "socialuni-app/src/util/UniUtil";
+import SkipUrlConst from "socialuni-constant/constant/SkipUrlConst";
+import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
+import SocialuniFollowType from 'socialuni-constant/constant/user/SocialuniFollowType';
+import UserContactInfoEditDialog from "./UserContactInfoEditDialog.vue";
+import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue";
+import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
+import QNavbar from "socialuni-ui-uni/src/components/QNavbar/QNavbar.vue";
+import QRowItem from "socialuni-ui-uni/src/components/QRowItem/QRowItem.vue";
+import SocialuniUserInfoImg from "./SocialuniUserInfoImg.vue";
+import UserSchoolEditDialog from "./UserSchoolEditDialog.vue";
+import QInput from "socialuni-ui-uni/src/components/QInput/QInput.vue";
+import QButton from "socialuni-ui-uni/src/components/QButton/QButton.vue";
+import QSearch from "socialuni-ui-uni/src/components/QSearch/QSearch.vue";
+import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
+import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
+import {socialChatModule} from "socialuni-im/src/store/SocialChatModule";
+import SocialGenderTag from "../../component/SocialGenderTag/SocialGenderTag.vue";
+import { socialuniUserModule } from 'socialuni-user/src/store/SocialuniUserModule';
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 
 @Options({
+    components: {
+        UserContactInfoEditDialog,
+        LoginView,
+        QPopup,
+        QIcon,
+        QNavbar,
+        QRowItem,
+        SocialuniUserInfoImg,
+        QInput,
+        QButton,
+        UserSchoolEditDialog,
+        QSearch,
+        SocialGenderTag,
+    }
 })
 export default class MineView extends Vue {
-   /* $refs: {
+    $refs: {
         moreActionList: QPopup
         schoolEditDialog: UserSchoolEditDialog
         contactInfoEditDialog: UserContactInfoEditDialog;
@@ -234,10 +269,7 @@ export default class MineView extends Vue {
         })
         onShow(() => {
             this.showMsgInput = true
-            socialChatModule.computedChatsUnreadNumTotalAction()
-        })
-        onHide(() => {
-            this.showMsgInput = false
+            // socialChatModule.computedChatsUnreadNumTotalAction()
         })
     }
 
@@ -390,6 +422,6 @@ export default class MineView extends Vue {
 
     openSetContactInfo() {
         this.$refs.contactInfoEditDialog.open()
-    }*/
+    }
 }
 </script>
