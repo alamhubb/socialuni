@@ -2,6 +2,8 @@ import SocialLoginRO from "socialuni-api-base/src/model/social/SocialLoginRO";
 import SocialuniMineUserRO from "socialuni-api-base/src/model/user/SocialuniMineUserRO";
 import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
 import {socialuniUserModule} from "../store/SocialuniUserModule";
+import SocialuniAlertUtil from "socialuni-app/src/util/SocialuniAlertUtil";
+import SocialuniAppUtil from "socialuni-app/src/util/SocialuniAppUtil";
 
 export default class UserService {
     static async getAppLunchDataByHasUser() {
@@ -33,9 +35,9 @@ export default class UserService {
     }
 
     static loginOut() {
-        return AlertUtil.confirm('是否退出登录').then(() => {
+        return SocialuniAppUtil.AlertUtil.confirm('是否退出登录').then(() => {
             UserService.clearUserInfo()
-            ToastUtil.toast('用户退出')
+            SocialuniAppUtil.ToastUtil.toast('用户退出')
         })
     }
 

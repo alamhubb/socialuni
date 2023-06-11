@@ -8,10 +8,10 @@ import ResultRO from "socialuni-api-base/src/model/social/ResultRO";
 import ErrorConst from "socialuni-constant/constant/ErrorConst";
 import UserService from "./logic/UserService";
 import UserMsgUtil from "./util/UserMsgUtil";
-import AlertUtil from "socialuni-util/src/util/AlertUtil";
 import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
 import MsgUtil from "socialuni-util/src/util/MsgUtil";
 import JsonUtil from "socialuni-util/src/util/JsonUtil";
+import SocialuniAppUtil from "socialuni-app/src/util/SocialuniAppUtil";
 
 class SocialuniUserPlugin implements SocialuniPlugin {
     onLaunch() {
@@ -61,12 +61,12 @@ class SocialuniUserPlugin implements SocialuniPlugin {
                         // 理论上不需要，因为token不会失效，也不会错误
                         // 已知可能，切换环境导致token不同
                         UserService.clearUserInfo()
-                        AlertUtil.hint(errorMsg)
+                        SocialuniAppUtil.AlertUtil.hint(errorMsg)
                         break
                     case ErrorConst.custom:
                         break
                     default:
-                        AlertUtil.hint(errorMsg)
+                        SocialuniAppUtil.AlertUtil.hint(errorMsg)
                         SocialuniAppAPI.sendErrorLogAPI(response.config.url, errorMsg)
                         break
                 }

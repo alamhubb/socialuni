@@ -1,4 +1,3 @@
-import {UniInterface} from "../UniInterface";
 import {ImportModule} from "socialuni/src/interface/ImportModule";
 import UniUtil from "./UniUtil";
 

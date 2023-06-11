@@ -144,7 +144,7 @@
                                             <q-icon icon="arrow-right" class="font-md margin-right-sm"></q-icon>
                                           </navigator>
                                         </q-row-item>-->
-                    <navigator :url="suggestUrl" class="q-box-between bb bg-click">
+<!--                    <navigator :url="suggestUrl" class="q-box-between bb bg-click">
                         <view class="row-col-center flex-1">
                             意见反馈
                         </view>
@@ -161,7 +161,7 @@
                             关于我们
                         </view>
                         <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
-                    </navigator>
+                    </navigator>-->
                     <q-row-item @click="destroyAccount">
                         <view class="row-col-center flex-1">
                             注销账号
@@ -174,7 +174,7 @@
                         </view>
                         <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
                     </q-row-item>
-                    <view class="px-smm py-sm w100p row-wrap">
+<!--                    <view class="px-smm py-sm w100p row-wrap">
                         <navigator :url="userAgreementUrl" class="color-blue">
                             《用户协议》
                         </navigator>
@@ -184,7 +184,7 @@
                         <navigator :url="childProtectUrl" class="color-blue">
                             《儿童个人信息保护规则及监护人须知》
                         </navigator>
-                    </view>
+                    </view>-->
                 </view>
             </q-popup>
 
@@ -223,6 +223,7 @@ import SocialGenderTag from "../../component/SocialGenderTag/SocialGenderTag.vue
 import { socialuniUserModule } from 'socialuni-user/src/store/SocialuniUserModule';
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import SkipUrlConst from "socialuni-user/src/constant/SkipUrlConst";
+import UserService from "socialuni-user/src/logic/UserService";
 
 @Options({
     components: {

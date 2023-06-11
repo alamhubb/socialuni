@@ -10,7 +10,7 @@ import UserMsgUtil from "../util/UserMsgUtil";
 import {socialuniConfigModule} from "socialuni-app/src/store/SocialuniConfigModule";
 import SocialuniUserExpandAPI from "socialuni-user-api/src/api/SocialuniUserExpandAPI";
 import ToastUtil from "socialuni-native-uni/src/util/ToastUtil";
-import AlertUtil from "socialuni-util/src/util/AlertUtil";
+import SocialuniAppUtil from "socialuni-app/src/util/SocialuniAppUtil";
 
 class SocialuniUserModule {
     get token() {
@@ -131,13 +131,13 @@ class SocialuniUserModule {
         const userShell = this.mineUser.socialCoin
         const getUserInfoNeedCoin = socialuniConfigModule.appMoreConfig.contactExpenseShell
         if (userShell >= getUserInfoNeedCoin) {
-            await AlertUtil.confirm('是否消耗100个贝壳查看用户：' + user.nickname + ' 的联系方式')
+            await SocialuniAppUtil.AlertUtil.confirm('是否消耗100个贝壳查看用户：' + user.nickname + ' 的联系方式')
             const res = await SocialuniUserExpandAPI.getUserContactInfoAPI(user.id)
             user.contactInfo = res.data
             user.openContactInfo = true
             this.mineUser.socialCoin = userShell - getUserInfoNeedCoin
         } else {
-            await AlertUtil.confirm('您没有贝壳了，是否直接使用现金支付')
+            await SocialuniAppUtil.AlertUtil.confirm('您没有贝壳了，是否直接使用现金支付')
             // await PlatformUtils.payCoin(getUserInfoNeedCoin / 100)
             this.mineUser.socialCoin = userShell + getUserInfoNeedCoin
             //递归调用自己
