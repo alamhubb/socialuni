@@ -52,7 +52,7 @@ import ImgUtil from "socialuni-app/src/util/ImgUtil";
 import CosUtil from "socialuni-util/src/util/CosUtil";
 import UniUtil from "socialuni-app/src/util/UniUtil";
 import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
-import AlertUtil from "socialuni-app/src/util/AlertUtil";
+import AlertUtil from "socialuni-native-uni/src/util/AlertUtil";
 import ImgFileVO from "socialuni-api-base/src/model/ImgFileVO";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import PageUtil from "socialuni-util/src/util/PageUtil";

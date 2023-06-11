@@ -54,7 +54,7 @@ import {Options, Vue} from 'vue-property-decorator'
 import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue";
 import ReportType from "socialuni-constant/constant/ReportType";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
-import AlertUtil from "socialuni-app/src/util/AlertUtil";
+import AlertUtil from "socialuni-native-uni/src/util/AlertUtil";
 import PlatformUtils from "socialuni/src/utils/PlatformUtils";
 import UniUtil from "socialuni-app/src/util/UniUtil";
 import MsgUtil from "socialuni-app/src/util/MsgUtil";

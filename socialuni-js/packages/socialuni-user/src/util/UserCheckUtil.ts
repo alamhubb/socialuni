@@ -1,4 +1,4 @@
-import AlertUtil from "socialuni-app/src/util/AlertUtil";
+import AlertUtil from "socialuni-native-uni/src/util/AlertUtil";
 import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
 import {socialuniConfigModule} from "socialuni-app/src/store/SocialuniConfigModule";
 import UserPageUtil from "./UserPageUtil";

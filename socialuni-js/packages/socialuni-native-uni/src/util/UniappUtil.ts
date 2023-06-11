@@ -8,7 +8,7 @@ import GetProviderRes = UniApp.GetProviderRes;
 import LoginRes = UniApp.LoginRes;
 import GetUserInfoRes = UniApp.GetUserInfoRes;
 import GetImageInfoSuccessData = UniApp.GetImageInfoSuccessData;
-import ToastUtil from 'socialuni-util/src/util/ToastUtil'
+import ToastUtil from 'socialuni-native-uni/src/util/ToastUtil'
 import UUIDUtil from 'src/util/UUIDUtil'
 import AppMsg from "socialuni-constant/constant/AppMsg";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule"

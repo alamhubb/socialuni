@@ -6,7 +6,7 @@ import UniUtil from "socialuni-app/src/util/UniUtil";
 import ErrorConst from "socialuni-constant/constant/ErrorConst";
 import UserService from "socialuni/src/service/UserService";
 import UserMsgUtil from "socialuni/src/util/UserMsgUtil";
-import AlertUtil from "socialuni-app/src/util/AlertUtil";
+import AlertUtil from "socialuni-native-uni/src/util/AlertUtil";
 import SocialuniAppAPI from "socialuni/src/api/SocialuniAppAPI";
 import MsgUtil from "socialuni-app/src/util/MsgUtil";
 import JsonUtil from "socialuni/src/util/JsonUtil";

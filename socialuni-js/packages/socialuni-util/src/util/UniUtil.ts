@@ -8,16 +8,15 @@ import GetProviderRes = UniApp.GetProviderRes;
 import LoginRes = UniApp.LoginRes;
 import GetUserInfoRes = UniApp.GetUserInfoRes;
 import GetImageInfoSuccessData = UniApp.GetImageInfoSuccessData;
+import ToastUtil from 'socialuni-native-uni/src/util/ToastUtil'
+import UUIDUtil from 'socialuni-app/src/util/UUIDUtil'
 import AppMsg from "socialuni-constant/constant/AppMsg";
-import DomFile from "../model/DomFile";
-import UniappH5 from "./UniappH5";
-import ImgUtil from "./ImgUtil";
-import UUIDUtil from "./UUIDUtil";
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule"
+import DomFile from "socialuni-app/src/model/DomFile";
 
-
-
-
-
+console.log(11111)
+console.log(uni)
+console.log(2222)
 
 export default class UniUtil {
     public static textCopy(copyText: string, hint: string = '已复制') {
@@ -37,7 +36,6 @@ export default class UniUtil {
             })
         })
     }
-
     public static showCopyAction(copyText: string) {
         UniUtil.actionSheet(['复制']).then((index: number) => {
             if (index === 0) {
@@ -130,11 +128,11 @@ export default class UniUtil {
     }
 
     public static showLoading(loadText: string) {
-        // uni.showLoading({title: loadText || ''})
+        uni.showLoading({title: loadText || ''})
     }
 
     public static hideLoading() {
-        // uni.hideLoading()
+        uni.hideLoading()
     }
 
     public static actionSheet(itemList: string[]): Promise<any> {
@@ -194,9 +192,20 @@ export default class UniUtil {
 
     //选择图片
     public static chooseImage(count = 1) {
-        return UniappH5.chooseImage(count).then(res=>{
-            const imgFiles = UniUtil.imgFilesCompressHandler(res)
-            return imgFiles
+        return new Promise<DomFile[]>((resolve, reject) => {
+            uni.chooseImage({
+                // sourceType: ['album'],
+                sizeType: ['original'],
+                // sizeType: ['compressed'],
+                count: count,
+                success(res) {
+                    const imgFiles = UniUtil.imgFilesCompressHandler(res)
+                    resolve(imgFiles)
+                },
+                fail(err) {
+                    reject(err)
+                }
+            })
         })
     }
 
@@ -219,7 +228,7 @@ export default class UniUtil {
         })
     }
 
-    private static async imgFilesCompressHandler(res) {
+    private static async imgFilesCompressHandler(res: UniApp.ChooseImageSuccessCallbackResult) {
         const imgFiles: DomFile[] = res.tempFiles as DomFile[]
         const tempFilePaths: string[] = res.tempFilePaths as string[]
         for (let i = 0; i < imgFiles.length; i++) {
@@ -239,6 +248,12 @@ export default class UniUtil {
                 ratio = Math.round(10000 / (imgSize / 1024))
             }
             imgFile.quality = ratio
+            if (!socialuniSystemModule.isH5) {
+                const res = await UniUtil.compressImage(tempFilePaths[i], ratio)
+                imgFile.path = res
+                //计算压缩后的大小
+                imgFile.size = Math.round(imgSize * ratio / 100)
+            }
             const image = await UniUtil.getImageInfo(imgFile.path)
             // 获取文件名
             imgFile.aspectRatio = image.width / image.height
@@ -254,22 +269,34 @@ export default class UniUtil {
         return imgFiles
     }
 
+    public static compressImage(filePath: string, quality: number): Promise<string> {
+        return new Promise<string>((resolve, reject) => {
+            uni.compressImage({
+                src: filePath,
+                //默认最低20
+                quality: Math.max(quality, 20),
+                success: res => {
+                    resolve(res.tempFilePath)
+                },
+                fail: err => {
+                    reject(err)
+                }
+            })
+        })
+    }
 
     public static getImageInfo(filePath: string) {
         return new Promise<GetImageInfoSuccessData>((resolve, reject) => {
-            const img = new Image()
-            img.onload = function () {
-                resolve({
-                    width: img.naturalWidth,
-                    height: img.naturalHeight
-                })
-            }
-            img.onerror = function (e) {
-                reject({
-                    errMsg: 'getImageInfo:fail'
-                })
-            }
-            img.src = filePath
+            // 获取文件名
+            uni.getImageInfo({
+                src: filePath,
+                success: (image) => {
+                    resolve(image)
+                },
+                fail: err => {
+                    reject(err)
+                }
+            })
         })
     }
 

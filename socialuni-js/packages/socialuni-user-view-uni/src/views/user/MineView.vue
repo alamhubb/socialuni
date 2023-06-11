@@ -206,7 +206,6 @@ import PageUtil from "socialuni-util/src/util/PageUtil";
 import UniUtil from "socialuni-app/src/util/UniUtil";
 import SkipUrlConst from "socialuni-constant/constant/SkipUrlConst";
 import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import SocialuniFollowType from 'socialuni-constant/constant/user/SocialuniFollowType';
 import UserContactInfoEditDialog from "./UserContactInfoEditDialog.vue";
 import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue";

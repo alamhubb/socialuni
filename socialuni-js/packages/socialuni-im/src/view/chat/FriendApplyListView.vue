@@ -90,7 +90,7 @@ import FriendApplyType from "socialuni-constant/constant/FriendApplyType";
 import SocialuniFriendAPI from "socialuni-im-api/src/api/SocialuniFriendAPI";
 import SocialuniFriendApplyUserRO from "socialuni-im-api/src/model/RO/SocialuniFriendApplyUserRO";
 import SocialuniCommonStatus from "socialuni-constant/constant/status/SocialuniCommonStatus";
-import ToastUtil from "socialuni-util/src/util/ToastUtil";
+import ToastUtil from "socialuni-native-uni/src/util/ToastUtil";
 import FriendAddQO from "socialuni-im-api/src/model/QO/firend/FriendAddQO";
 import SocialuniAddFriendStatus from "socialuni-im-api/src/constant/SocialuniAddFriendStatus";
 import PageUtil from "socialuni-util/src/util/PageUtil";

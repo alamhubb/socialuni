@@ -13,7 +13,7 @@ import UniUtil from "../../../socialuni-app/src/util/UniUtil";
 import CosAuthRO from "socialuni-api-base/src/model/cos/CosAuthRO";
 import DomFile from "socialuni-util/src/model/DomFile";
 import CosUploadResult from "socialuni-api-base/src/model/cos/CosUploadResult";
-import AlertUtil from "socialuni-app/src/util/AlertUtil";
+import AlertUtil from "socialuni-native-uni/src/util/AlertUtil";
 
 export default class TencentCosAPI {
     /*static async getImgTagAPI(imgUrl, imgKey, cosAuthRO: CosAuthRO) {

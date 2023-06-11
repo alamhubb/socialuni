@@ -70,7 +70,7 @@ import {Options, Emit, Model, Prop, Vue, Watch} from 'vue-property-decorator'
 import PhoneNumFormData from "./PhoneNumFormData";
 import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 import CommonUtil from "socialuni-util/src/util/CommonUtil";
-import ToastUtil from "socialuni-util/src/util/ToastUtil";
+import ToastUtil from "socialuni-native-uni/src/util/ToastUtil";
 import {socialuniConfigModule} from "socialuni/src/store/SocialuniConfigModule";
 import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
 

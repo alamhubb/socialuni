@@ -39,7 +39,7 @@
 <script lang="ts">
 import {Options, Vue, Watch} from 'vue-property-decorator'
 import {socialuniUserModule} from 'socialuni/src/store/SocialuniUserModule';
-import ToastUtil from "socialuni-util/src/util/ToastUtil";
+import ToastUtil from "socialuni-native-uni/src/util/ToastUtil";
 import MsgUtil from "socialuni-app/src/util/MsgUtil";
 import {socialTalkModule} from "../store/SocialTalkModule";
 import PlatformUtils from "socialuni/src/utils/PlatformUtils";

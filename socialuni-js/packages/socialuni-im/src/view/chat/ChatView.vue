@@ -112,8 +112,8 @@ import {Options, Vue} from 'vue-property-decorator'
 import Constants from 'socialuni-constant/constant/Constant'
 import DateUtil from "socialuni-util/src/util/DateUtil"
 import UniUtil from "socialuni-app/src/util/UniUtil"
-import AlertUtil from "socialuni-app-uni/src/util/AlertUtil"
-import ToastUtil from "socialuni-util/src/util/ToastUtil"
+import AlertUtil from "socialuni-native-uni/src/util/AlertUtil"
+import ToastUtil from "socialuni-native-uni/src/util/ToastUtil"
 import {onLoad, onShow} from "@dcloudio/uni-app"
 import PageUtil from "socialuni-util/src/util/PageUtil"
 import SocialUserContentRO from "socialuni-api-base/src/model/social/SocialUserContentRO"

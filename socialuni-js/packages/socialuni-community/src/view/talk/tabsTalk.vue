@@ -148,7 +148,7 @@ import Constants from "socialuni-constant/constant/Constant";
 import PageUtil from "socialuni-util/src/util/PageUtil";
 import SocialCircleRO from "socialuni-api-base/src/model/community/circle/SocialCircleRO";
 import SocialuniTalkTabCircleRO from "socialuni-api-base/src/model/community/circle/SocialuniTalkTabCircleRO";
-import ToastUtil from "socialuni-util/src/util/ToastUtil";
+import ToastUtil from "socialuni-native-uni/src/util/ToastUtil";
 import HugAddVO from "socialuni-api-base/src/model/HugAddVO";
 import MsgUtil from "socialuni-app/src/util/MsgUtil";
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";

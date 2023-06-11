@@ -37,8 +37,8 @@ import QSearch from "socialuni-ui-uni/src/components/QSearch/QSearch.vue";
 import QSelect from "socialuni-ui-uni/src/components/QSelect/QSelect.vue";
 import SocialCircleRO from "socialuni-api-base/src/model/community/circle/SocialCircleRO";
 import {socialuniUserModule} from 'socialuni/src/store/SocialuniUserModule';
-import ToastUtil from "socialuni-util/src/util/ToastUtil";
-import AlertUtil from "socialuni-app/src/util/AlertUtil";
+import ToastUtil from "socialuni-native-uni/src/util/ToastUtil";
+import AlertUtil from "socialuni-native-uni/src/util/AlertUtil";
 import SocialuniUserExpandAPI from "socialuni-user-api/src/api/SocialuniUserExpandAPI";
 import SocialuniCircleAPI from "socialuni-community-api/src/api/SocialuniCircleAPI";
 

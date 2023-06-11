@@ -2,7 +2,7 @@ import QQUtils from 'socialuni-util/src/util/QQUtils'
 import MsgUtil from "socialuni-app/src/util/MsgUtil"
 import Constants from "socialuni-constant/constant/Constant"
 import AppMsg from "socialuni-constant/constant/AppMsg"
-import ToastUtil from "socialuni-util/src/util/ToastUtil"
+import ToastUtil from "socialuni-native-uni/src/util/ToastUtil"
 import WxUtils from "socialuni-util/src/util/WxUtils"
 import MPUtil from "socialuni-util/src/util/MPUtil"
 import UserPayResultVO from "socialuni-api-base/src/model/user/UserPayResultVO";

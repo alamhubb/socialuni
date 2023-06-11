@@ -8,10 +8,10 @@ import ErrorConst from 'socialuni-constant/constant/ErrorConst'
 import ResultRO from 'socialuni-api-base/src/model/social/ResultRO'
 import UserService from './logic/UserService'
 import UserMsgUtil from './util/UserMsgUtil'
-import AlertUtil from 'socialuni-app-h5/src/util/AlertUtil'
+import AlertUtil from 'socialuni-native-uni/src/util/AlertUtil'
 import SocialuniAppAPI from 'socialuni-app-api/src/api/SocialuniAppAPI'
-import MsgUtil from 'socialuni-app-h5/src/util/MsgUtil'
-import JsonUtil from 'socialuni-util/src/util/JsonUtil'
+import MsgUtil from 'socialuni-native-uni/src/util/MsgUtil'
+import JsonUtil from "socialuni-util/src/util/JsonUtil";
 
 class SocialuniUserPlugin implements SocialuniPlugin {
     onLaunch() {

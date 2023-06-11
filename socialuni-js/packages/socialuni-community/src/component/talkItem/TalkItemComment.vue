@@ -86,7 +86,7 @@ import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import MsgUtil from "socialuni-app/src/util/MsgUtil";
 import UniUtil from "socialuni-app/src/util/UniUtil";
 import CommentVO from "socialuni-api-base/src/model/comment/CommentVO";
-import ToastUtil from "socialuni-util/src/util/ToastUtil";
+import ToastUtil from "socialuni-native-uni/src/util/ToastUtil";
 import HugAddVO from "socialuni-api-base/src/model/HugAddVO";
 import RouterUtil from "socialuni-util/src/util/RouterUtil";
 import PagePath from "socialuni-constant/constant/PagePath";

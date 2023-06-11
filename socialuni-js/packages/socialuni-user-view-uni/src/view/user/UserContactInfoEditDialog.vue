@@ -28,8 +28,8 @@ import {Options, Vue} from 'vue-property-decorator'
 import QInput from "socialuni-ui-uni/src/components/QInput/QInput.vue";
 import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue";
 import SSwitch from "socialuni-ui-uni/src/components/SSwitch.vue";
-import ToastUtil from "socialuni-util/src/util/ToastUtil";
-import AlertUtil from "socialuni-app/src/util/AlertUtil";
+import ToastUtil from "socialuni-native-uni/src/util/ToastUtil";
+import AlertUtil from "socialuni-native-uni/src/util/AlertUtil";
 import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
 import {socialuniConfigModule} from "socialuni/src/store/SocialuniConfigModule";
 import SocialuniUserExpandAPI from "socialuni-user-api/src/api/SocialuniUserExpandAPI";

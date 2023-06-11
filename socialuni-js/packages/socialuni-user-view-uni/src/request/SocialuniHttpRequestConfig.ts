@@ -7,7 +7,7 @@ import SocialuniRequestHeaderName from 'socialuni-constant/constant/SocialuniReq
 import ErrorConst from 'socialuni-constant/constant/ErrorConst'
 import UserService from '../service/UserService'
 import UserMsgUtil from '../util/UserMsgUtil'
-import AlertUtil from 'socialuni-app/src/util/AlertUtil'
+import AlertUtil from 'socialuni-native-uni/src/util/AlertUtil'
 import MsgUtil from 'socialuni-app/src/util/MsgUtil'
 import SocialuniAppAPI from '../api/SocialuniAppAPI'
 import JsonUtil from '../util/JsonUtil'

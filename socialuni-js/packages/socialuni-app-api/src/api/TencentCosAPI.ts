@@ -3,7 +3,7 @@ import TencentCosIdInfoRO from "socialuni-api-base/src/model/RO/tencent/cos/idIm
 import UniUtil from "../../../socialuni-app/src/util/UniUtil";
 import CosAuthRO from "socialuni-api-base/src/model/cos/CosAuthRO";
 import CosUploadResult from "socialuni-api-base/src/model/cos/CosUploadResult";
-import AlertUtil from "socialuni-app/src/util/AlertUtil";
+import AlertUtil from "socialuni-native-uni/src/util/AlertUtil";
 import DomFile from "socialuni-app/src/model/DomFile";
 
 export default class TencentCosAPI {

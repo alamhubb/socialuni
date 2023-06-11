@@ -1,4 +1,3 @@
-import RouterUtil from "socialuni-util/src/util/RouterUtil";
 import UserPagePath from "../constant/UserPagePath";
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
 
