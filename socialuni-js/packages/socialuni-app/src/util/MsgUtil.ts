@@ -1,8 +1,7 @@
 import AppMsg from "socialuni-constant/constant/AppMsg";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
-import UniUtil from "socialuni-util/src/util/UniUtil";
-import {socialuniConfigModule} from "src/store/SocialuniConfigModule";
 import SocialuniAppUtil from 'socialuni-native-util/src/util/SocialuniAppUtil'
+import { socialuniConfigModule } from '../store/SocialuniConfigModule'
 
 
 export default class MsgUtil {

@@ -268,6 +268,8 @@ import NodeInfo = UniNamespace.NodeInfo;
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import {socialChatModule} from "../../store/SocialChatModule";
 import SocialuniAppUtil from 'socialuni-native-util/src/util/SocialuniAppUtil'
+import MsgUtil from 'socialuni-app/src/util/MsgUtil'
+import PlatformUtils from 'socialuni-user/src/util/PlatformUtils'
 
 @Options({components: {MessageItemContent, SocialuniReportDialog, QIcon, QNavbar}})
 export default class MessageView extends Vue {

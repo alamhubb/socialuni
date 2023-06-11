@@ -6,13 +6,13 @@ import ToastUtil from "socialuni-native-uni/src/util/ToastUtil"
 import WxUtils from "socialuni-util/src/util/WxUtils"
 import MPUtil from "socialuni-util/src/util/MPUtil"
 import UserPayResultVO from "socialuni-api-base/src/model/user/UserPayResultVO";
-import {socialPlatformModule} from "../store/SocialPlatformModule";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
-import SocialuniAppAPI from "socialuni/src/api/SocialuniAppAPI";
-import SocialuniCoinAPI from "socialuni/src/api/socialuni/SocialuniCoinAPI";
-import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
-import UserMsgUtil from "socialuni/src/util/UserMsgUtil";
 import APPUtil from "socialuni-app/src/util/APPUtil";
+import { socialPlatformModule } from 'socialuni-app/src/store/SocialPlatformModule'
+import SocialuniCoinAPI from 'socialuni-user-view-uni/src/api/socialuni/SocialuniCoinAPI'
+import SocialuniAppAPI from 'socialuni-app-api/src/api/SocialuniAppAPI'
+import UserMsgUtil from './UserMsgUtil'
+import { socialuniUserModule } from '../store/SocialuniUserModule'
 
 
 // 统一处理各平台的订阅
@@ -101,17 +101,17 @@ export default class PlatformUtils {
 
     private static async cashPay(res: UserPayResultVO): Promise<any> {
         return PlatformUtils.requestPayment(res)
-            .catch((err) => {
-                // qq的取消支付没有走着里
-                if (err.errMsg === Constants.wxPayCancel || err.errMsg === Constants.qqPayCancel || err.errMsg === Constants.appWxPayCancel) {
-                    ToastUtil.toast(AppMsg.payCancelMsg)
-                    throw err
-                } else {
-                    SocialuniAppAPI.sendErrorLogAPI(null, '支付失败', res, err)
-                    // MsgUtil.payFailMsg()
-                    throw err
-                }
-            })
+          .catch((err) => {
+              // qq的取消支付没有走着里
+              if (err.errMsg === Constants.wxPayCancel || err.errMsg === Constants.qqPayCancel || err.errMsg === Constants.appWxPayCancel) {
+                  ToastUtil.toast(AppMsg.payCancelMsg)
+                  throw err
+              } else {
+                  SocialuniAppAPI.sendErrorLogAPI(null, '支付失败', res, err)
+                  // MsgUtil.payFailMsg()
+                  throw err
+              }
+          })
     }
 
     //会员走payVip
