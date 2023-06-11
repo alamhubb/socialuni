@@ -1,4 +1,4 @@
-import StorageUtil from "socialuni/src/util/StorageUtil";
+import SocialuniAppUtil from "socialuni-app/src/util/SocialuniAppUtil";
 
 export default class SocialuniImUserTokenUtil {
     // 开发生产区分token，避免混淆，不区分的话会冲突
@@ -6,17 +6,17 @@ export default class SocialuniImUserTokenUtil {
 
     static set(token: string) {
         if (token) {
-            StorageUtil.set(this.socialuniUserImTokenKey, token)
+            SocialuniAppUtil.StorageUtil.set(this.socialuniUserImTokenKey, token)
         } else {
             this.remove()
         }
     }
 
     static get(): string {
-        return StorageUtil.get(this.socialuniUserImTokenKey)
+        return SocialuniAppUtil.StorageUtil.get(this.socialuniUserImTokenKey)
     }
 
     static remove() {
-        StorageUtil.remove(this.socialuniUserImTokenKey)
+        SocialuniAppUtil.StorageUtil.remove(this.socialuniUserImTokenKey)
     }
 }

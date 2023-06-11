@@ -4,6 +4,8 @@ import SocialuniAlertUtil from "./SocialuniAlertUtil";
 import SocialuniAppNativeUtil from "./SocialuniAppNativeUtil";
 import SocialuniToastUtil from "./SocialuniToastUtil";
 import ToastUtil from "socialuni-native-uni/src/util/ToastUtil";
+import StorageUtil from "socialuni-native-uni/src/util/StorageUtil";
+import SocialuniStorageUtil from "./SocialuniStorageUtil";
 
 export default class SocialuniAppUtil {
     static get nativeUtil(): UniUtil {
@@ -13,7 +15,13 @@ export default class SocialuniAppUtil {
     static get AlertUtil(): AlertUtil {
         return SocialuniAlertUtil.nativeUtil
     }
+
     static get ToastUtil(): ToastUtil {
         return SocialuniToastUtil.nativeUtil
     }
+
+    static get StorageUtil(): StorageUtil {
+        return SocialuniStorageUtil.nativeUtil
+    }
+
 }

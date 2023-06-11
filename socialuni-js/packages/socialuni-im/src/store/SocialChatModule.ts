@@ -18,6 +18,7 @@ import MessageViewParams from "../view/chat/MessageViewParams";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import ChatQueryQO from "socialuni-im-api/src/model/QO/chat/ChatQueryQO";
 import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
+import SocialuniImUserTokenUtil from "../util/SocialuniImUserTokenUtil";
 
 
 const openIM = null

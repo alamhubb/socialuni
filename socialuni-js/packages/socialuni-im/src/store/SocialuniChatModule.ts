@@ -1,5 +1,4 @@
 import {reactive} from "vue";
-import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
 import ChatAPI from "socialuni-im-api/src/api/ChatAPI";
 import SocialuniChatRO from "socialuni-api-base/src/model/SocialuniChatRO";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
@@ -7,7 +6,8 @@ import ChatQueryQO from "socialuni-im-api/src/model/QO/chat/ChatQueryQO";
 import {socialChatModule} from "./SocialChatModule";
 import MessageVO from "socialuni-im-api/src/model/RO/MessageVO";
 import MessageAPI from "socialuni-im-api/src/api/MessageAPI";
-import ImPagePath from "../constant/ImPagePath";
+import CommonUtil from "socialuni-util/src/util/CommonUtil";
+import Arrays from "socialuni-util/src/util/Arrays";
 
 class SocialuniChatModule {
     chatId = ''

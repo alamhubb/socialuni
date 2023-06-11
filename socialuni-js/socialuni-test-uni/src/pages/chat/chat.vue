@@ -1,16 +1,13 @@
 <template>
-<!--  <chat-view></chat-view>-->
-  <div>
-      123
-  </div>
+  <chat-view></chat-view>
 </template>
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-// import ChatView from 'socialuni-im/src/view/chat/ChatView.vue'
+import ChatView from 'socialuni-im/src/view/chat/ChatView.vue'
 
 @Options({
-  // components: {ChatView}
+  components: {ChatView}
 })
 export default class ChatPage extends Vue {
 
