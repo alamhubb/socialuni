@@ -245,11 +245,8 @@ import PagePath from "socialuni-constant/constant/PagePath";
 import SelectorQuery = UniNamespace.SelectorQuery;
 import NodesRef = UniNamespace.NodesRef;
 import PayType from "socialuni-constant/constant/PayType";
-import MsgUtil from "socialuni-app/src/util/MsgUtil";
-import PageUtil from "socialuni-util/src/util/PageUtil";
 import AlertUtil from "socialuni-native-uni/src/util/AlertUtil";
 import ToastUtil from "socialuni-native-uni/src/util/ToastUtil";
-import PlatformUtils from "socialuni/src/utils/PlatformUtils";
 import UniUtil from "socialuni-app/src/util/UniUtil";
 import CommonUtil from "socialuni-util/src/util/CommonUtil";
 import DateUtil from "socialuni-util/src/util/DateUtil";
@@ -267,16 +264,10 @@ import {onMounted} from "vue";
 import SocialuniChatRO from "socialuni-api-base/src/model/SocialuniChatRO";
 import MessageAPI from "socialuni-im-api/src/api/MessageAPI";
 import MessageVO from "socialuni-im-api/src/model/RO/MessageVO";
-import SocialuniReportDialog from "socialuni/src/component/SocialuniReportDialog.vue";
 import NodeInfo = UniNamespace.NodeInfo;
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import {socialChatModule} from "../../store/SocialChatModule";
-import {socialAppModule} from "socialuni/src/store/SocialAppModule";
-import SocialuniAppAPI from "socialuni/src/api/SocialuniAppAPI";
-import DomFile from "socialuni-util/src/model/DomFile";
-import CosService from "socialuni/src/service/CosService";
-import UserCheckUtil from "socialuni/src/util/UserCheckUtil";
-import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
+import SocialuniAppUtil from 'socialuni-native-util/src/util/SocialuniAppUtil'
 
 @Options({components: {MessageItemContent, SocialuniReportDialog, QIcon, QNavbar}})
 export default class MessageView extends Vue {
@@ -817,7 +808,7 @@ export default class MessageView extends Vue {
     }
 
     goBack() {
-        PageUtil.goBack()
+        SocialuniAppUtil.RouterUtil.goBack()
     }
 }
 </script>

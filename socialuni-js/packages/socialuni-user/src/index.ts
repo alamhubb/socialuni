@@ -9,7 +9,6 @@ import ErrorConst from "socialuni-constant/constant/ErrorConst";
 import UserService from "./logic/UserService";
 import UserMsgUtil from "./util/UserMsgUtil";
 import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
-import MsgUtil from "socialuni-util/src/util/MsgUtil";
 import JsonUtil from "socialuni-util/src/util/JsonUtil";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 

@@ -333,7 +333,7 @@ export default class ChatView extends Vue {
         } else {
             msg = ['打开陌生人免费消息']
         }
-        SocialuniAppUtil.nativeUtil.actionSheet(msg).then(res => {
+        SocialuniAppUtil.NativeUtil.actionSheet(msg).then(res => {
             if (res === 0) {
                 if (this.imMineUserInfo.allowStrangerMsg) {
                     this.imMineUserInfo.allowStrangerMsg = false

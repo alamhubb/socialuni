@@ -1,4 +1,3 @@
-import UniUtil from "./UniUtil";
 import AlertUtil from "socialuni-native-uni/src/util/AlertUtil";
 import SocialuniAlertUtil from "./SocialuniAlertUtil";
 import SocialuniAppNativeUtil from "./SocialuniAppNativeUtil";
@@ -8,9 +7,10 @@ import StorageUtil from "socialuni-native-uni/src/util/StorageUtil";
 import SocialuniStorageUtil from "./SocialuniStorageUtil";
 import SocialuniRouterUtil from "./SocialuniRouterUtil";
 import RouterUtil from "socialuni-native-uni/src/util/RouterUtil";
+import NativeUtil from 'socialuni-native-uni/src/util/NativeUtil'
 
 export default class SocialuniAppUtil {
-    static get nativeUtil(): UniUtil {
+    static get NativeUtil(): NativeUtil {
         return SocialuniAppNativeUtil.nativeUtil
     }
 
