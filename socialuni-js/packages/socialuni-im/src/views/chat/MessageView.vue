@@ -1,11 +1,12 @@
 <template>
-    <view class="pb-50 h100p">
-        <q-navbar class="bb" show-back :title="pageTitle">
+    <div class="pb-50 h100p">
+        123
+<!--        <q-navbar class="bb" show-back :title="pageTitle">
             <div class="row-end-center flex-1">
                 <q-icon icon="list-dot" size="20" @click="openMoreMenu"></q-icon>
             </div>
         </q-navbar>
-        <!--    <view v-if="showMsgHint" class="fixed-105 row-col-center bg-orange">
+        &lt;!&ndash;    <view v-if="showMsgHint" class="fixed-105 row-col-center bg-orange">
               <view class="flex-1 card-text-row">
                 长按消息可进行举报，欢迎大家积极举报不良内容获取正义值
               </view>
@@ -13,7 +14,7 @@
                 <q-button @click="consoleMessage">{{ scrollTop }}</q-button>
                 <q-icon icon="close-circle-fill" size="36" @click="closeShowMsgHint"></q-icon>
               </view>
-            </view>-->
+            </view>&ndash;&gt;
 
         <scroll-view scroll-y="true" class="flex-col h100p pb-60"
                      @scrolltoupper="upper"
@@ -21,12 +22,12 @@
                      :show-scrollbar="true"
                      :scroll-top="scrollTop"
         >
-            <!--    <view class="cu-chat">-->
+            &lt;!&ndash;    <view class="cu-chat">&ndash;&gt;
             <view class="w100p h100p">
-                <!--      <view v-if="chat.status === waitOpenStatus||chat.status === closeStatus" class="w100p h100p col-row-center">-->
+                &lt;!&ndash;      <view v-if="chat.status === waitOpenStatus||chat.status === closeStatus" class="w100p h100p col-row-center">&ndash;&gt;
                 <view class="mt-80px">
                     123
-                    <!--          <view class="uni-tip-content text-bold">
+                    &lt;!&ndash;          <view class="uni-tip-content text-bold">
                                 <template v-if="chat.needPayOpen">
                                   会话未开启，为避免用户被频繁恶意骚扰，只能给关注您的和给您发过消息的用户直接发送消息
                                   &lt;!&ndash;              ，给其他用户发送消息，需要支付10贝壳开启对话&ndash;&gt;
@@ -37,17 +38,17 @@
                                 <view v-else class="row-center">
                                   对方关注了您，发送消息即可开启对话
                                 </view>
-                              </view>-->
+                              </view>&ndash;&gt;
 
-                    <!--<view v-if="chat.needPayOpen" class="uni-tip-group-button">
+                    &lt;!&ndash;<view v-if="chat.needPayOpen" class="uni-tip-group-button">
                       <button class="uni-tip-button w40r" type="default" :plain="true" @click="goBack">
                         返回
                       </button>
                       <button class="uni-tip-button w40r" type="primary" @click="payOpenChat">
                         开启对话
                       </button>
-                    </view>-->
-                    <!--          <view v-for="msg in messages" :id="'m'+msg.id" :key="msg.id"
+                    </view>&ndash;&gt;
+                    &lt;!&ndash;          <view v-for="msg in messages" :id="'m'+msg.id" :key="msg.id"
                                     :class="[msg.type === systemMsgType?'row-center':'cu-item',msg.isMine?'self':'']">
                                 <template v-if="msg.type === systemMsgType">
                                   <view class="cu-info round">
@@ -87,7 +88,7 @@
                                   </view>
                                   <view class="date">{{ formatTime(msg.createTime) }}</view>
                                 </template>
-                              </view>-->
+                              </view>&ndash;&gt;
                     <div v-for="msg in messages" :id="'m'+msg.id" :key="msg.id">
                         <div v-if="msg.type === systemMsgType">
                             <view class="cu-info round row-all-center">
@@ -99,13 +100,13 @@
                             <div class="flex-1 flex-col mr overflow-hidden">
                                 <view class="h44px row-end-center mb-xs">
                                     {{ msg.user.nickname }}
-                                    <!--              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
+                                    &lt;!&ndash;              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
                                                         @click="toUserDetailVue(msg.user.id)">
                                                     {{ msg.user.nickname }}
                                                   </text>
                                                   <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
                                                          src="/static/img/crown.png"
-                                                         @click="toVipVue"></image>-->
+                                                         @click="toVipVue"></image>&ndash;&gt;
                                 </view>
 
                                 <view class="row-end-center" @longpress="openMessageMoreHandleDialog(msg)">
@@ -130,13 +131,13 @@
                             <div class="flex-1 flex-col mr overflow-hidden">
                                 <view class="h44px row-col-center mb-xs">
                                     {{ msg.user.nickname }}
-                                    <!--              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
+                                    &lt;!&ndash;              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
                                                         @click="toUserDetailVue(msg.user.id)">
                                                     {{ msg.user.nickname }}
                                                   </text>
                                                   <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
                                                          src="/static/img/crown.png"
-                                                         @click="toVipVue"></image>-->
+                                                         @click="toVipVue"></image>&ndash;&gt;
                                 </view>
 
                                 <view class="row-start" @longpress="openMessageMoreHandleDialog(msg)">
@@ -150,22 +151,22 @@
                     </div>
                 </view>
             </view>
-            <!--      <view v-else class="w100p row-center" :class="showMsgHint?'pt-70px':'pt-10px'">
+            &lt;!&ndash;      <view v-else class="w100p row-center" :class="showMsgHint?'pt-70px':'pt-10px'">
                     <view v-if="chat.loadMore === noMore || messages.length===0" class="py-xs px bg-white bd-radius mt-sm">
                       会话已开启
                     </view>
                     &lt;!&ndash;        <uni-load-more v-else :status="chat.loadMore"></uni-load-more>&ndash;&gt;
-                  </view>-->
+                  </view>&ndash;&gt;
 
 
         </scroll-view>
 
         <view class="fixed-footer">
             <view class="cu-bar footer input">
-                <!--<view class="action">
+                &lt;!&ndash;<view class="action">
                     <text class="cuIcon-sound text-grey"></text>
-                </view>-->
-                <!--                @focus="inputFocusEvent"-->
+                </view>&ndash;&gt;
+                &lt;!&ndash;                @focus="inputFocusEvent"&ndash;&gt;
                 <input class="solid-bottom"
                        v-model.trim="msgContent"
                        maxlength="300"
@@ -178,16 +179,16 @@
                        :confirm-hold="true"
                        confirm-type="send"
                 >
-                <!--<view class="action" @click="showEmojiClick">
+                &lt;!&ndash;<view class="action" @click="showEmojiClick">
                     <text class="cuIcon-emojifill text-grey"></text>
-                </view>-->
+                </view>&ndash;&gt;
                 <button v-if="msgContent" class="cu-btn bg-green shadow color-white" @touchend.prevent="sendMsgClick">发送
                 </button>
                 <view v-else class="ml-sm">
                     <q-icon icon="plus-circle" size="28" @click="openPhoto"></q-icon>
                 </view>
             </view>
-            <!--      <view v-show="showEmoji" class="w100vw bg-blue" :style="{height:keyboardHeight+'px'}"></view>-->
+            &lt;!&ndash;      <view v-show="showEmoji" class="w100vw bg-blue" :style="{height:keyboardHeight+'px'}"></view>&ndash;&gt;
         </view>
 
         <uni-popup ref="deleteReasonDialog" :show="false" :custom="true" :mask-click="false">
@@ -224,13 +225,13 @@
             </view>
         </uni-popup>
 
-        <!--<view v-show="showEmoji" class="emoji-model" :style="{height:emojiModelHeight+'px'}"
+        &lt;!&ndash;<view v-show="showEmoji" class="emoji-model" :style="{height:emojiModelHeight+'px'}"
               @touchstart="inputBlur">
-        </view>-->
+        </view>&ndash;&gt;
 
         <socialuni-report-dialog ref="reportDialog" :report-info="message"
-                                 :report-info-type="reportContentType"></socialuni-report-dialog>
-    </view>
+                                 :report-info-type="reportContentType"></socialuni-report-dialog>-->
+    </div>
 </template>
 
 <script lang="ts">
@@ -270,11 +271,22 @@ import {socialChatModule} from "../../store/SocialChatModule";
 import SocialuniAppUtil from 'socialuni-native-util/src/util/SocialuniAppUtil'
 import MsgUtil from 'socialuni-app/src/util/MsgUtil'
 import PlatformUtils from 'socialuni-user/src/util/PlatformUtils'
+import UserPageUtil from 'socialuni-user/src/util/UserPageUtil'
+import DomFile from 'socialuni-app/src/model/DomFile'
+import CosService from 'socialuni-app/src/util/CosService'
+import { socialAppModule } from 'socialuni-app/src/store/SocialAppModule'
+import SocialuniAppAPI from 'socialuni-app-api/src/api/SocialuniAppAPI'
+import UserCheckUtil from 'socialuni-user/src/util/UserCheckUtil'
+import { socialuniChatModule } from "../../store/SocialuniChatModule";
 
-@Options({components: {MessageItemContent, SocialuniReportDialog, QIcon, QNavbar}})
+@Options(
+  {
+      components: {MessageItemContent, QIcon, QNavbar}
+  }
+)
 export default class MessageView extends Vue {
     public $refs!: {
-        reportDialog: SocialuniReportDialog;
+        // reportDialog: SocialuniReportDialog;
         messageMoreHandleDialog: any;
         deleteReasonDialog: any;
     }
@@ -317,24 +329,24 @@ export default class MessageView extends Vue {
     }
 
     get chatId() {
-        return socialChatModule.chatId
+        return socialuniChatModule.chatId
     }
 
     get chatIndex() {
-        return socialChatModule.chatIndex
+        return socialuniChatModule.chatIndex
     }
 
     get chat() {
-        return socialChatModule.chat
+        return socialuniChatModule.chat
     }
 
 
     get messages() {
-        return socialChatModule.messages
+        return socialuniChatModule.messages
     }
 
     get scrollTop() {
-        return socialChatModule.scrollTop
+        return socialuniChatModule.scrollTop
     }
 
     get mineUser() {
@@ -351,27 +363,27 @@ export default class MessageView extends Vue {
         // if (params.nickname) {
         //   chat.nickname = params.nickname
         // }
-        socialChatModule.setChatId(params.chatId)
+        socialuniChatModule.setChatId(params.chatId)
 
         this.queryTime = new Date()
         console.log('初始查询')
         await this.queryMessages(true)
 
-        socialChatModule.scrollToMessagePageBottom()
+        socialuniChatModule.scrollToMessagePageBottom()
 
 
-        // socialChatModule.chatId = params.receiveId
-        // socialChatModule.setCurChatByUserId(params.userId)
+        // socialuniChatModule.chatId = params.receiveId
+        // socialuniChatModule.setCurChatByUserId(params.userId)
         // this.userId = params.userId;
         /*else if (params.groupId) {
-          // socialChatModule.setCurChatByGroupId(params.groupId)
+          // socialuniChatModule.setCurChatByGroupId(params.groupId)
           // this.groupId = params.groupId;
         }*/
     }
 
 
     onUnload() {
-        socialChatModule.scrollTop = 0
+        socialuniChatModule.scrollTop = 0
     }
 
     get pageTitle() {
@@ -469,7 +481,7 @@ export default class MessageView extends Vue {
                     AlertUtil.error('暂不支持,开发中');
                     break;
                 case '删除对方聊天记录':
-                    socialChatModule.pushCustomMessage(socialuniUserModule.userId, "{}", "发送删除对方聊天记录");
+                    socialuniChatModule.pushCustomMessage(socialuniUserModule.userId, "{}", "发送删除对方聊天记录");
                     break;
                 default :
                     break;
@@ -494,7 +506,7 @@ export default class MessageView extends Vue {
             await CosService.postImgList(imgFiles, cosAuthRO)
             // 发送图片
             imgFiles.forEach(item => {
-                socialChatModule.pushVideoMessage(item.url);
+                socialuniChatModule.pushVideoMessage(item.url);
             });
         } else {
             SocialuniAppAPI.sendErrorLogAPI(null, '用户发表动态失败，未获取上传图片所需要的认证信息')
@@ -523,7 +535,7 @@ export default class MessageView extends Vue {
             await CosService.postImgList(imgFiles, cosAuthRO)
             // 发送图片
             imgFiles.forEach(item => {
-                socialChatModule.pushImageMessage(item.url);
+                socialuniChatModule.pushImageMessage(item.url);
             });
         } else {
             SocialuniAppAPI.sendErrorLogAPI(null, '用户发表动态失败，未获取上传图片所需要的认证信息')
@@ -548,7 +560,7 @@ export default class MessageView extends Vue {
             // 点击发送后立即push
             //启用状态可以直接发送
             this.msgContent = ''
-            socialChatModule.pushMessageAction(msg)
+            socialuniChatModule.pushMessageAction(msg)
             /*if (this.chat.status === SocialuniCommonStatus.enable) {
 
 
@@ -576,7 +588,7 @@ export default class MessageView extends Vue {
     }
 
     deleteMsgAction(msg: MessageVO) {
-        // socialChatModule.deleteMsgAction(msg.id)
+        // socialuniChatModule.deleteMsgAction(msg.id)
         // MessageAPI.deleteMsgAPI(msg.id, this.deleteReason, this.violation)
     }
 
@@ -595,20 +607,20 @@ export default class MessageView extends Vue {
     }
 
     toUserDetailVue(userId: string) {
-        PageUtil.toUserDetail(userId)
+        UserPageUtil.toUserDetail(userId)
     }
 
     openMoreMenu() {
         if (this.groupId) {
-            PageUtil.toIMGroupMember(this.groupId); // 权限问题，内容有问题。
+            UserPageUtil.toIMGroupMember(this.groupId); // 权限问题，内容有问题。
         } else {
-            PageUtil.toUserDetail(this.userId);
+            UserPageUtil.toUserDetail(this.userId);
         }
 
     }
 
     toVipVue() {
-        PageUtil.toVipPage()
+        UserPageUtil.toVipPage()
     }
 
     get showLoadMore() {
@@ -664,11 +676,11 @@ export default class MessageView extends Vue {
                 if (resMessages.length) {
                     this.queryTime = resMessages[0].createTime
                     if (initQuery){
-                        socialChatModule.chat.messages = resMessages
-                        socialChatModule.readChatAction(socialChatModule.chat.messages)
+                        socialuniChatModule.chat.messages = resMessages
+                        socialuniChatModule.readChatAction(socialuniChatModule.chat.messages)
                     }else {
-                        socialChatModule.chat.messages.unshift(...resMessages)
-                        socialChatModule.readChatAction(socialChatModule.chat.messages)
+                        socialuniChatModule.chat.messages.unshift(...resMessages)
+                        socialuniChatModule.readChatAction(socialuniChatModule.chat.messages)
                         //获取添加后的之前顶部位置，然后滚动到此位置
                         this.$nextTick(() => {
                             const query: SelectorQuery = uni.createSelectorQuery().in(this)
@@ -676,7 +688,7 @@ export default class MessageView extends Vue {
                             const nodeBox: NodesRef = query.select(preFirstMsgId)
                             nodeBox.boundingClientRect((lastNodeRes: NodeInfo) => {
                                 if (lastNodeRes) {
-                                    socialChatModule.scrollTop = lastNodeRes.top - preTop
+                                    socialuniChatModule.scrollTop = lastNodeRes.top - preTop
                                 }
                             }).exec()
                         })
@@ -717,7 +729,7 @@ export default class MessageView extends Vue {
      * 撤回某条消息
      */
     async revokeMessage() {
-        (await socialChatModule.openIm()).revokeMessage(JSON.stringify(this.message.originalMsg)).then(({data}) => {
+        (await socialuniChatModule.openIm()).revokeMessage(JSON.stringify(this.message.originalMsg)).then(({data}) => {
             console.log('revokeMessage', data);
         }).catch(err => {
             console.log('revokeMessage---err', err);
@@ -765,13 +777,13 @@ export default class MessageView extends Vue {
                         await AlertUtil.confirm('会话未开启，您没有贝壳了，是否直接使用现金支付开启开启与 ' + this.chat.nickname + ' 的对话，并给对方发送消息：' + content, content)
                         const provider = socialuniSystemModule.isMp ? socialuniSystemModule.provider : SocialuniProviderType.wx
                         try {
-                            await PlatformUtils.payCoin(provider, PayType.shell, 1)
+                            // await PlatformUtils.payCoin(1)
                         } catch (e) {
                             MsgUtil.notPay()
                         }
                         //校验了有用户后清空消息
                         this.msgContent = ''
-                        await socialChatModule.openChatAction(content)
+                        await socialuniChatModule.openChatAction(content)
                     }
                     //不需要付费
                 } else {
@@ -800,7 +812,7 @@ export default class MessageView extends Vue {
         return AlertUtil.confirm(hintMsg).then(() => {
             //校验了有用户后清空消息
             this.msgContent = ''
-            return socialChatModule.openChatAction(content)
+            return socialuniChatModule.openChatAction(content)
         })
     }
 
