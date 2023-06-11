@@ -3,11 +3,13 @@ import ChatAPI from "socialuni-im-api/src/api/ChatAPI";
 import SocialuniChatRO from "socialuni-api-base/src/model/SocialuniChatRO";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import ChatQueryQO from "socialuni-im-api/src/model/QO/chat/ChatQueryQO";
-import {socialChatModule} from "./SocialChatModule";
+import {socialuniChatModule} from "./socialuniChatModule";
 import MessageVO from "socialuni-im-api/src/model/RO/MessageVO";
 import MessageAPI from "socialuni-im-api/src/api/MessageAPI";
 import CommonUtil from "socialuni-util/src/util/CommonUtil";
 import Arrays from "socialuni-util/src/util/Arrays";
+import ImPageUtil from "../util/ImPageUtil";
+import SocialuniAppUtil from "socialuni-app/src/util/SocialuniAppUtil";
 
 class SocialuniChatModule {
     chatId = ''
@@ -65,7 +67,7 @@ class SocialuniChatModule {
             // chat.receiveId = params.chatId
             chat.id = chatId
             chat.loadMore = LoadMoreType.more
-            socialChatModule.chats.unshift(chat)
+            this.chats.unshift(chat)
 
             console.log('chaxunchat messag')
 
@@ -103,7 +105,7 @@ class SocialuniChatModule {
     //替换chat消息，如果不存在则添加
     pushMsgReplaceChatByChat(chat: SocialuniChatRO) {
         if (chat) {
-            let chatIndex = socialChatModule.chats.findIndex(item => item.id === chat.id)
+            let chatIndex = socialuniChatModule.chats.findIndex(item => item.id === chat.id)
 
             if (chatIndex > -1) {
                 this.pushMsgReplaceChat(chatIndex, chat)
@@ -154,7 +156,7 @@ class SocialuniChatModule {
         // this.chat.lastContent = msg.content
         // 滚屏到最后面
         // 不能监控变化滚动，有时候是往前面插入
-        /*const {data} = await (await socialChatModule.openIm())[msg.action](msg.contentData);
+        /*const {data} = await (await socialuniChatModule.openIm())[msg.action](msg.contentData);
         const params = {
             recvID: this.chat.receiveUserId,
             groupID: this.chat.groupId,
@@ -171,10 +173,10 @@ class SocialuniChatModule {
             case 'createSoundMessage':
             case 'createVideoMessage':
             case 'createFileMessage':
-                actionMethod = (await socialChatModule.openIm()).sendMessageNotOss;
+                actionMethod = (await socialuniChatModule.openIm()).sendMessageNotOss;
                 break;
             default:
-                actionMethod = (await socialChatModule.openIm()).sendMessage;
+                actionMethod = (await socialuniChatModule.openIm()).sendMessage;
                 break;
         }
         // 执行方法。
@@ -189,7 +191,7 @@ class SocialuniChatModule {
         }).finally(() => {
             console.log(666)
         })*/
-        // socialChatModule.refreshMessages()
+        // socialuniChatModule.refreshMessages()
 
         // PlatformUtils.requestSubscribeChat()
     }
@@ -208,6 +210,19 @@ class SocialuniChatModule {
         // 如果当前就是这个聊天
     }
 
+    setChatIdToMessagePage(receiveId: string) {
+        // this.setChatId(chatId)
+        // this.readChatAction(this.chat)
+        if (!receiveId) {
+            SocialuniAppUtil.AlertUtil.error('缺少会话信息')
+        }
+        /*const chat = new SocialuniChatRO()
+        chat.receiveId = receiveId
+        chat.nickname = chatName
+        this.setChat(chat)*/
+
+        ImPageUtil.toMessagePageByChatId(receiveId)
+    }
 
 }
 
