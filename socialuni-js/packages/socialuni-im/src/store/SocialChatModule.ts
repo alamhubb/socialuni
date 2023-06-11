@@ -14,7 +14,7 @@ import OpenImSessionType from "socialuni-constant/constant/openIm/constant/OpenI
 import ImPageUtil from "../util/ImPageUtil";
 import ImPagePath from "../constant/ImPagePath";
 import ChatAPI from "socialuni-im-api/src/api/ChatAPI";
-import MessageViewParams from "../view/chat/MessageViewParams";
+import MessageViewParams from "../views/chat/MessageViewParams";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import ChatQueryQO from "socialuni-im-api/src/model/QO/chat/ChatQueryQO";
 import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
