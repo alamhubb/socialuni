@@ -13,7 +13,7 @@ try {
 
 
 export default class SocialuniRouterUtil {
-    get nativeUtil(): RouterUtil {
+    static get nativeUtil(): RouterUtil {
         return nativeUtil
     }
 }

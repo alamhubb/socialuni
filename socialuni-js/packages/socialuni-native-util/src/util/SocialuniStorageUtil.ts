@@ -13,7 +13,7 @@ try {
 
 
 export default class SocialuniStorageUtil {
-    get nativeUtil(): StorageUtil {
+    static get nativeUtil(): StorageUtil {
         return nativeUtil
     }
 }
