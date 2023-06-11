@@ -9,6 +9,7 @@ class SocialuniAppPlugin implements SocialuniPlugin {
     }
 
     onResponseErrorInterceptors(res){
+        console.trace(123)
         console.log(res)
     }
 }

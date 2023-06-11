@@ -9,6 +9,8 @@ import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDe
 import UserMsgUtil from "../util/UserMsgUtil";
 import {socialuniConfigModule} from "socialuni-app/src/store/SocialuniConfigModule";
 import SocialuniUserExpandAPI from "socialuni-user-api/src/api/SocialuniUserExpandAPI";
+import ToastUtil from "socialuni-native-uni/src/util/ToastUtil";
+import AlertUtil from "socialuni-util/src/util/AlertUtil";
 
 class SocialuniUserModule {
     get token() {

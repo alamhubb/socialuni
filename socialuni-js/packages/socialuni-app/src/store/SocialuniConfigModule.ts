@@ -14,6 +14,7 @@ class SocialuniConfigModule {
 
     getAppConfigAction() {
         SocialuniAppAPI.getAppConfigAPI().then(res => {
+            console.log(res)
             const appInitData: AppInitDataRO = res.data
             this.appConfig = appInitData.appConfig
             this.appMoreConfig = appInitData.appMoreConfig

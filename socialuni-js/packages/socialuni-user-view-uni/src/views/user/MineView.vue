@@ -1,6 +1,7 @@
 <template>
     <view class="h100p">
-        <view v-if="mineUser" class="bg-default h100p flex-col">
+        123
+<!--        <view v-if="mineUser" class="bg-default h100p flex-col">
             <div class="bg-theme-gradual px-smm pb-smm pt-100">
                 <div class="row-end-center">
                     <uni-icons type="compose" size="24" class="use-click" @click="toEditUserInfo"></uni-icons>
@@ -20,16 +21,16 @@
                             </view>
                             <view class="flex-row">
                                 <social-gender-tag class="mt-sm" :user="mineUser" border></social-gender-tag>
-                                <!--                <view v-if="userProp.vipFlag" class="cu-tag bg-red radius" @click="openVip">VIP</view>
-                                                <view v-else class="cu-tag bg-grey radius" @click="openVip">VIP</view>-->
+                                &lt;!&ndash;                <view v-if="userProp.vipFlag" class="cu-tag bg-red radius" @click="openVip">VIP</view>
+                                                <view v-else class="cu-tag bg-grey radius" @click="openVip">VIP</view>&ndash;&gt;
                             </view>
                         </view>
 
                         <view class="row-col-center font-12 use-click" @click="toMineUserDetailPage">
-                            <!--          <q-button @click="toEditUserInfo" theme light round>-->
+                            &lt;!&ndash;          <q-button @click="toEditUserInfo" theme light round>&ndash;&gt;
                             <div class="mt-1">空间</div>
                             <q-icon icon="arrow-right" class="ml-nn" size="12"></q-icon>
-                            <!--          </q-button>-->
+                            &lt;!&ndash;          </q-button>&ndash;&gt;
                         </view>
                     </view>
                 </view>
@@ -53,12 +54,12 @@
                     </view>
                 </view>
 
-                <!--      <view class="mr">
+                &lt;!&ndash;      <view class="mr">
                         <q-icon icon="setting" size="26" @click="showMoreListAction"></q-icon>
-                      </view>-->
+                      </view>&ndash;&gt;
 
 
-                <!--      <div class="h200">123</div>-->
+                &lt;!&ndash;      <div class="h200">123</div>&ndash;&gt;
             </div>
 
             <div class="bg-white px-sm bd-radius-10 elevation-4 mx-sm">
@@ -94,14 +95,14 @@
                     <div v-else class="q-tag" @click="openSetSchoolDialog">设置大学名称</div>
                 </view>
 
-                <!--        <view class="row-col-center mb-smm">
+                &lt;!&ndash;        <view class="row-col-center mb-smm">
                           <q-icon class="color-sub mr-xs" prefix="uni-icons" icon="uniui-chat" size="14"/>
                           联系方式：
                           <div v-if="mineUser.contactInfo" @click="openSetSchoolDialog">
                             {{ mineUser.contactInfo }}
                           </div>
                           <div v-else class="q-tag" @click="openSetSchoolDialog">设置联系方式</div>
-                        </view>-->
+                        </view>&ndash;&gt;
 
                 <div class="row-col-center mb-smm">
                     <q-icon class="color-sub mr-xs" prefix="uni-icons" icon="uniui-chat" size="14"/>
@@ -112,11 +113,11 @@
                     </div>
                     <div v-else class="row-col-center q-tag" @click="openSetContactInfo">设置联系方式</div>
                 </div>
-                <!--        <div v-if="mineUser.openContactInfo" class="row-col-center mb-smm">
+                &lt;!&ndash;        <div v-if="mineUser.openContactInfo" class="row-col-center mb-smm">
                           <q-icon class="text-gray mr-xs" icon="mdi-school"/>
                           联系方式：
                           <div class="q-tag">{{ mineUser.contactInfo }}(点击获取联系方式)</div>
-                        </div>-->
+                        </div>&ndash;&gt;
             </div>
 
             <div v-if="!isIos"
@@ -136,21 +137,21 @@
                 <div>123123</div>
                 <view class="flex-col h100p pb-50">
                     456465
-                    <!--                    <q-row-item>
+                    &lt;!&ndash;                    <q-row-item>
                                           <navigator :url="messageSettingUrl" class="row-col-center flex-1">
                                             <view class="row-col-center flex-1">
                                               消息设置
                                             </view>
                                             <q-icon icon="arrow-right" class="font-md margin-right-sm"></q-icon>
                                           </navigator>
-                                        </q-row-item>-->
+                                        </q-row-item>&ndash;&gt;
                     <navigator :url="suggestUrl" class="q-box-between bb bg-click">
                         <view class="row-col-center flex-1">
                             意见反馈
                         </view>
                         <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
                     </navigator>
-                    <!--                    <navigator :url="contactUsUrl" class="q-box-between bb bg-click">
+                    &lt;!&ndash;                    <navigator :url="contactUsUrl" class="q-box-between bb bg-click">
                                             <view class="row-col-center flex-1">
                                                 联系我们
                                             </view>
@@ -184,7 +185,7 @@
                                             <navigator :url="childProtectUrl" class="color-blue">
                                                 《儿童个人信息保护规则及监护人须知》
                                             </navigator>
-                                        </view>-->
+                                        </view>&ndash;&gt;
                 </view>
             </q-popup>
 
@@ -194,53 +195,18 @@
             </msg-input>
         </view>
 
-        <!--      title="欢迎登录清池app"-->
-        <login-view v-else class="h100p"></login-view>
+        &lt;!&ndash;      title="欢迎登录清池app"&ndash;&gt;
+        <login-view v-else class="h100p"></login-view>-->
     </view>
 </template>
 
 <script lang="ts">
 import {Options, Prop, Vue} from 'vue-property-decorator'
-import LoginView from "../login/LoginView.vue";
-import PageUtil from "socialuni-util/src/util/PageUtil";
-import UniUtil from "socialuni-app/src/util/UniUtil";
-import SkipUrlConst from "socialuni-constant/constant/SkipUrlConst";
-import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
-import SocialuniFollowType from 'socialuni-constant/constant/user/SocialuniFollowType';
-import UserContactInfoEditDialog from "./UserContactInfoEditDialog.vue";
-import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue";
-import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
-import QNavbar from "socialuni-ui-uni/src/components/QNavbar/QNavbar.vue";
-import QRowItem from "socialuni-ui-uni/src/components/QRowItem/QRowItem.vue";
-import SocialuniUserInfoImg from "./SocialuniUserInfoImg.vue";
-import UserSchoolEditDialog from "./UserSchoolEditDialog.vue";
-import QInput from "socialuni-ui-uni/src/components/QInput/QInput.vue";
-import QButton from "socialuni-ui-uni/src/components/QButton/QButton.vue";
-import QSearch from "socialuni-ui-uni/src/components/QSearch/QSearch.vue";
-import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
-import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
-import {socialChatModule} from "socialuni-im/src/store/SocialChatModule";
-import SocialGenderTag from "../../component/SocialGenderTag/SocialGenderTag.vue";
-import { socialuniUserModule } from 'socialuni-user/src/store/SocialuniUserModule';
 
 @Options({
-    components: {
-        UserContactInfoEditDialog,
-        LoginView,
-        QPopup,
-        QIcon,
-        QNavbar,
-        QRowItem,
-        SocialuniUserInfoImg,
-        QInput,
-        QButton,
-        UserSchoolEditDialog,
-        QSearch,
-        SocialGenderTag,
-    }
 })
 export default class MineView extends Vue {
-    $refs: {
+   /* $refs: {
         moreActionList: QPopup
         schoolEditDialog: UserSchoolEditDialog
         contactInfoEditDialog: UserContactInfoEditDialog;
@@ -423,6 +389,6 @@ export default class MineView extends Vue {
 
     openSetContactInfo() {
         this.$refs.contactInfoEditDialog.open()
-    }
+    }*/
 }
 </script>

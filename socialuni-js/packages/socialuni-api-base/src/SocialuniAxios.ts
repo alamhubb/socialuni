@@ -42,6 +42,10 @@ const SocialuniAxiosCreate = (config?: AxiosRequestConfig) => {
         },
         error => {
             for (const socialuniPlugin of socialuniPluginsModule.plugins) {
+
+                console.log(socialuniPluginsModule.plugins)
+                console.log(socialuniPluginsModule.plugins.length)
+
                 if (socialuniPlugin.onResponseErrorInterceptors) {
                     socialuniPlugin.onResponseErrorInterceptors(error)
                 }

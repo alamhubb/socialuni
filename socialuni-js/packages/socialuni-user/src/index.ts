@@ -1,16 +1,16 @@
 import {AxiosResponse, InternalAxiosRequestConfig} from "axios";
 import {SocialuniPlugin} from "socialuni/src/interface/SocialuniPlugin";
-import {socialuniConfigModule} from "socialuni-app/src/store/SocialuniConfigModule";
 import {socialuniUserModule} from "./store/SocialuniUserModule";
+import {socialuniConfigModule} from "socialuni-app/src/store/SocialuniConfigModule";
 import {socialuniTokenModule} from "./store/SocialuniTokenModule";
-import UniUtil from 'socialuni-app/src/util/UniUtil'
-import ErrorConst from 'socialuni-constant/constant/ErrorConst'
-import ResultRO from 'socialuni-api-base/src/model/social/ResultRO'
-import UserService from './logic/UserService'
-import UserMsgUtil from './util/UserMsgUtil'
-import AlertUtil from 'socialuni-native-uni/src/util/AlertUtil'
-import SocialuniAppAPI from 'socialuni-app-api/src/api/SocialuniAppAPI'
-import MsgUtil from 'socialuni-native-uni/src/util/MsgUtil'
+import UniUtil from "socialuni-app/src/util/UniUtil";
+import ResultRO from "socialuni-api-base/src/model/social/ResultRO";
+import ErrorConst from "socialuni-constant/constant/ErrorConst";
+import UserService from "./logic/UserService";
+import UserMsgUtil from "./util/UserMsgUtil";
+import AlertUtil from "socialuni-util/src/util/AlertUtil";
+import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
+import MsgUtil from "socialuni-util/src/util/MsgUtil";
 import JsonUtil from "socialuni-util/src/util/JsonUtil";
 
 class SocialuniUserPlugin implements SocialuniPlugin {
