@@ -13,9 +13,10 @@ import AppMsg from "socialuni-constant/constant/AppMsg";
 import UniappH5 from "./UniappH5";
 import ImgUtil from "./ImgUtil";
 import UUIDUtil from "./UUIDUtil";
+import {UniInterface} from "socialuni-app/src/UniInterface";
 
 
-export default class UniUtil {
+export default class UniUtil implements UniInterface {
     public static textCopy(copyText: string, hint: string = '已复制') {
         return new Promise((resolve, reject) => {
             uni.setClipboardData({
@@ -190,7 +191,7 @@ export default class UniUtil {
 
     //选择图片
     public static chooseImage(count = 1) {
-        return UniappH5.chooseImage(count).then(res=>{
+        return UniappH5.chooseImage(count).then(res => {
             const imgFiles = UniUtil.imgFilesCompressHandler(res)
             return imgFiles
         })

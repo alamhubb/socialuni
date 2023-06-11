@@ -1,5 +1,6 @@
 import PlatformType from "socialuni-constant/constant/PlatformType";
 import RouterUtil from "socialuni-util/src/util/RouterUtil";
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 
 export default class FrontErrorLogVO {
     uri: string = null

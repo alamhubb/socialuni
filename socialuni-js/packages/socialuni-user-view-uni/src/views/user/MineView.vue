@@ -1,5 +1,5 @@
 <template>
-    <view class="h100p">
+    <view class="h100p" @click="chose">
         123
 <!--        <view v-if="mineUser" class="bg-default h100p flex-col">
             <div class="bg-theme-gradual px-smm pb-smm pt-100">
@@ -202,6 +202,7 @@
 
 <script lang="ts">
 import {Options, Prop, Vue} from 'vue-property-decorator'
+import SocialuniAppNativeUtil from "socialuni-app/src/util/SocialuniAppNativeUtil";
 
 @Options({
 })
