@@ -172,7 +172,7 @@
                        :focus="inputFocus"
                        @blur="inputBlur"
                        @focus="inputFocusEvent"
-                       @confirm="viewService.pushMessageAction"
+                       @confirm="viewService.sendMsgClick"
                        :hold-keyboard="true"
                        :confirm-hold="true"
                        confirm-type="send"
@@ -180,7 +180,8 @@
                 <!--<view class="action" @click="showEmojiClick">
                     <text class="cuIcon-emojifill text-grey"></text>
                 </view>-->
-                <button v-if="viewService.msgContent" class="cu-btn bg-green shadow color-white" @touchend.prevent="viewService.pushMessageAction">发送
+                <button v-if="viewService.msgContent" class="cu-btn bg-green shadow color-white"
+                        @click.prevent="viewService.sendMsgClick">发送
                 </button>
                 <view v-else class="ml-sm">
                     <q-icon icon="plus-circle" size="28" @click="openPhoto"></q-icon>
@@ -271,16 +272,16 @@ import PlatformUtils from 'socialuni-user/src/util/PlatformUtils'
 import UserPageUtil from 'socialuni-user/src/util/UserPageUtil'
 import DomFile from 'socialuni-app/src/model/DomFile'
 import CosService from 'socialuni-app/src/util/CosService'
-import { socialAppModule } from 'socialuni-app/src/store/SocialAppModule'
+import {socialAppModule} from 'socialuni-app/src/store/SocialAppModule'
 import SocialuniAppAPI from 'socialuni-app-api/src/api/SocialuniAppAPI'
 import UserCheckUtil from 'socialuni-user/src/util/UserCheckUtil'
-import { socialuniChatModule } from "../../store/SocialuniChatModule";
+import {socialuniChatModule} from "../../store/SocialuniChatModule";
 import SocialuniMsgViewService from "../../logic/SocialuniMsgViewService";
 
 @Options(
-  {
-      components: {MessageItemContent, QIcon, QNavbar}
-  }
+    {
+        components: {MessageItemContent, QIcon, QNavbar}
+    }
 )
 export default class MessageView extends Vue {
     public $refs!: {
@@ -289,8 +290,8 @@ export default class MessageView extends Vue {
         deleteReasonDialog: any;
     }
 
+    viewService= new SocialuniMsgViewService()
 
-    viewService = new SocialuniMsgViewService()
 
     screenHeight: number = socialuniSystemModule.screenHeight
     windowHeight: number = socialuniSystemModule.windowHeight
@@ -317,8 +318,6 @@ export default class MessageView extends Vue {
     groupId: string = null
     title: string = '聊天'
     queryTime: Date = null
-
-
 
 
     created() {
@@ -462,6 +461,10 @@ export default class MessageView extends Vue {
         // #endif
         /*
         this.showEmoji = false */
+    }
+
+    test111(){
+        console.log(123)
     }
 
     openPhoto() {
@@ -614,7 +617,7 @@ export default class MessageView extends Vue {
         return []
     }
 
-    queryChat(){
+    queryChat() {
 
     }
 
@@ -646,10 +649,10 @@ export default class MessageView extends Vue {
                 }
                 if (resMessages.length) {
                     this.queryTime = resMessages[0].createTime
-                    if (initQuery){
+                    if (initQuery) {
                         socialuniChatModule.chat.messages = resMessages
                         socialuniChatModule.readChatAction(socialuniChatModule.chat.messages)
-                    }else {
+                    } else {
                         socialuniChatModule.chat.messages.unshift(...resMessages)
                         socialuniChatModule.readChatAction(socialuniChatModule.chat.messages)
                         //获取添加后的之前顶部位置，然后滚动到此位置

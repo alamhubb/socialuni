@@ -10,22 +10,31 @@ export default class SocialuniMsgViewService {
     msgContent = ''
 
     async sendMsgClick() {
+        console.log(123456)
         if (!socialuniChatModule.chat) {
             SocialuniAppUtil.ToastUtil.throwError('缺少会话')
         }
+        console.log(123456)
         UserCheckUtil.checkUserBindPhoneNum()
-
+        console.log(123)
         const msgContent = this.msgContent
-
+        console.log(this.msgContent)
+        console.log(msgContent)
+        console.log(123456)
         if (msgContent) {
+            console.log(123456)
+            console.log(123)
             const newMsg = new MessageVO(msgContent, socialuniUserModule.mineUser)
             socialuniChatModule.messages.push(newMsg)
+            console.log(123)
             socialuniChatModule.scrollToMessagePageBottom()
             const index: number = socialuniChatModule.messages.length - 1
             // 点击发送后立即push
+            console.log(123)
             //启用状态可以直接发送
             this.msgContent = ''
             socialuniChatModule.chat.updateTime = new Date()
+            console.log(123)
             try {
                 const res = await MessageAPI.sendMsgAPI(socialuniChatModule.chat.id, msgContent)
                 socialuniChatModule.chat.updateTime = res.data.createTime
