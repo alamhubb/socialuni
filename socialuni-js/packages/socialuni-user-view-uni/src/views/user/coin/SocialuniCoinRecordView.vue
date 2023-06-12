@@ -85,7 +85,7 @@ import SocialuniPageQueryQO from "socialuni-api-base/src/model/common/SocialuniP
 import SocialuniPageQueryUtil from "socialuni-api-base/src/model/common/SocialuniPageQueryUtil";
 import SocialuniUserRO from "socialuni-api-base/src/model/user/SocialuniUserRO";
 import SocialuniFollowTag from "socialuni-community/src/component/SocialuniFollow/SocialuniFollowTag.vue";
-import SocialGenderTag from "../../../component/SocialGenderTag/SocialGenderTag.vue";
+import SocialGenderTag from "../../../components/SocialGenderTag/SocialGenderTag.vue";
 import FollowAPI from "socialuni-community-api/src/api/FollowAPI";
 
 @Options({

@@ -214,7 +214,7 @@ import QSearch from "socialuni-ui-uni/src/components/QSearch/QSearch.vue";
 import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
 import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
 import {socialChatModule} from "socialuni-im/src/store/SocialChatModule";
-import SocialGenderTag from "../../component/SocialGenderTag/SocialGenderTag.vue";
+import SocialGenderTag from "../../components/SocialGenderTag/SocialGenderTag.vue";
 import { socialuniUserModule } from 'socialuni-user/src/store/SocialuniUserModule';
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import SkipUrlConst from "socialuni-user/src/constant/SkipUrlConst";
