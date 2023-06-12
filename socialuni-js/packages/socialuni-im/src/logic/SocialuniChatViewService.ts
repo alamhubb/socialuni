@@ -8,12 +8,13 @@ import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule"
 import {MessageStatus} from "socialuni-constant/constant/openIm/OpenImMessageType";
 import {watch} from "vue";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import SocialuniViewService from "socialuni/src/interface/SocialuniViewService";
 
 export interface SocialuniChatViewServiceRefs {
     messageBox:HTMLDivElement
 }
 
-export default class SocialuniChatViewService {
+export default class SocialuniChatViewService extends SocialuniViewService{
     private $refs: SocialuniChatViewServiceRefs = null
 
     init(value: SocialuniChatViewServiceRefs) {

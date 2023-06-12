@@ -1,9 +1,9 @@
 <template>
     <div class="h100p overflow-hidden flex-col bg-default">
         <nav-bar/>
-<!--        <div class="flex-1 overflow-hidden pd-sm">
-            <RouterView/>
-        </div>-->
+        <div class="flex-1 overflow-hidden pd-sm">
+<!--            <RouterView/>-->
+        </div>
     </div>
 </template>
 

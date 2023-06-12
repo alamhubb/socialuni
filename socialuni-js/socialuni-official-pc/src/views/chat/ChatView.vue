@@ -15,8 +15,8 @@
                         </div>-->
             <div class="h100p flex-col">
                 <div ref="messageBox" class="flex-1 overflow-auto">
-                    <div v-if="logic.chat">
-                        <div class="w100p" v-for="msg in logic.chat.messages" :id="'m'+msg.id" :key="msg.id">
+                    <div v-if="viewService.chat">
+                        <div class="w100p" v-for="msg in viewService.chat.messages" :id="'m'+msg.id" :key="msg.id">
                             <div v-if="msg.user.isMine" class="flex-row pd-sm">
                                 <div class="flex-1 flex-col mr overflow-hidden">
                                     <div class="h44px row-end-center mb-xs">
@@ -39,7 +39,7 @@
 
                                     <div class="col-all-center mt-xs">
                                         <view class="date">
-                                            {{ logic.formatTime(msg.createTime) }}
+                                            {{ viewService.formatTime(msg.createTime) }}
                                         </view>
                                     </div>
                                 </div>
@@ -71,7 +71,7 @@
                                     </div>
                                     <div class="col-all-center mt-xs">
                                         <div class="date">
-                                            {{ logic.formatTime(msg.createTime) }}
+                                            {{ viewService.formatTime(msg.createTime) }}
                                         </div>
                                     </div>
                                 </div>
@@ -82,13 +82,13 @@
 
                 <div class="flex-row flex-none">
                     <el-input
-                            v-model="logic.msgContent"
+                            v-model="viewService.msgContent"
                             :rows="1"
                             :autosize="{minRows:1,maxRows:5}"
                             type="textarea"
                             placeholder="Please input"
                     />
-                    <el-button @click="logic.sendMsgClick()">发送</el-button>
+                    <el-button @click="viewService.sendMsgClick()">发送</el-button>
                 </div>
             </div>
 
@@ -111,13 +111,5 @@ export default class ChatView extends Vue {
 
     viewService = new SocialuniChatViewService()
 
-    created(){
-        console.log(6644646)
-    }
-
-    mounted() {
-        console.log(this.$refs)
-        this.viewService.init(this.$refs)
-    }
 }
 </script>

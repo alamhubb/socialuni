@@ -95,7 +95,7 @@ export default class NavBar extends Vue {
     }
 
     mounted() {
-        console.log(6644646)
+
     }
 
     toHome() {
