@@ -62,21 +62,18 @@
 import {Vue, Options, Prop, Emit} from 'vue-property-decorator'
 import SocialuniFollowType from "socialuni-constant/constant/user/SocialuniFollowType";
 import SocialUserContentRO from "socialuni-api-base/src/model/social/SocialUserContentRO";
-import FollowAPI from "socialuni/src/api/socialuni/FollowAPI";
-import SocialGenderTag from "../../../components/SocialGenderTag/SocialGenderTag.vue";
-import PageUtil from "socialuni-util/src/util/PageUtil";
+import SocialGenderTag from "socialuni-user-view-uni/src/components/SocialGenderTag/SocialGenderTag.vue";
 import PagePath from "socialuni-constant/constant/PagePath";
 import {onLoad, onPullDownRefresh, onReachBottom, onShow} from "@dcloudio/uni-app";
-import {socialTalkModule} from "socialuni-sdk/src/store/store";
 import QTabs from "socialuni-ui-uni/src/components/QTabs/QTabs.vue";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
-import SocialuniFollowTag from "../../../components/SocialuniFollow/SocialuniFollowTag.vue";
+import SocialuniFollowTag from "socialuni-user-view-uni/src/components/SocialuniFollow/SocialuniFollowTag.vue";
 import SocialuniPageQueryQO from "socialuni-api-base/src/model/common/SocialuniPageQueryQO";
 import SocialuniPageQueryUtil from "socialuni-api-base/src/model/common/SocialuniPageQueryUtil";
 import SocialuniUserRO from "socialuni-api-base/src/model/user/SocialuniUserRO";
 import CommonUtil from "socialuni-util/src/util/CommonUtil";
 import SocialUserFollowDetailRO from "socialuni-api-base/src/model/social/SocialUserFollowDetailRO";
-import QPullRefresh from "../../../components/QPullRefresh/QPullRefresh.vue";
+import QPullRefresh from "socialuni-user-view-uni/src/components/QPullRefresh/QPullRefresh.vue";
 
 @Options({
   components: {QPullRefresh, SocialuniFollowTag, SocialGenderTag, QTabs}
