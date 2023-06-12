@@ -1,7 +1,9 @@
 import {SocialuniPlugin} from 'socialuni/src/interface/SocialuniPlugin'
 
-const socialuniCommunityPlugin: SocialuniPlugin = {
+class  SocialuniCommunityPlugin implements SocialuniPlugin  {
 
 }
+
+const socialuniCommunityPlugin: SocialuniPlugin = new SocialuniCommunityPlugin()
 
 export default socialuniCommunityPlugin

@@ -7,7 +7,6 @@ import {socialuniChatModule} from "./store/SocialuniChatModule";
 class SocialuniImPlugin implements SocialuniPlugin {
     onLaunch() {
         console.log('触发了Im')
-        socialuniChatModule.getChatsAction()
     }
 
     onMessage(notify: NotifyVO) {
@@ -21,7 +20,7 @@ class SocialuniImPlugin implements SocialuniPlugin {
     }
 
     onWebsocketConnect(reload: boolean) {
-        socialChatModule.getChatsAction()
+        socialuniChatModule.getChatsAction()
     }
 }
 
