@@ -202,7 +202,6 @@
 <script lang="ts">
 import {Options, Prop, Vue} from 'vue-property-decorator'
 import LoginView from "../login/LoginView.vue";
-import UniUtil from "socialuni-app/src/util/UniUtil";
 import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
 import SocialuniFollowType from 'socialuni-constant/constant/user/SocialuniFollowType';
 import UserContactInfoEditDialog from "./UserContactInfoEditDialog.vue";
@@ -225,6 +224,9 @@ import SkipUrlConst from "socialuni-user/src/constant/SkipUrlConst";
 import UserService from "socialuni-user/src/logic/UserService";
 import UserPageUtil from "socialuni-user/src/util/UserPageUtil";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import CosService from "socialuni-app/src/util/CosService";
+import DomFile from "socialuni-app/src/model/DomFile";
+import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
 
 @Options({
     components: {
@@ -365,8 +367,8 @@ export default class MineView extends Vue {
     async uploadUserAvatarImg() {
         try {
             const cosAuthRO = await CosService.getCosAuthRO()
-            const imgFiles: DomFile[] = await UniUtil.chooseImage(1)
-            UniUtil.showLoading('上传中')
+            const imgFiles: DomFile[] = await SocialuniAppUtil.UniUtil.chooseImage(1)
+            SocialuniAppUtil.UniUtil.showLoading('上传中')
             const imgFile: DomFile = imgFiles[0]
             imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src
             const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO), SocialuniMineUserAPI.addUserAvatarImgAPI(new ImgAddQO(imgFile))])
@@ -374,7 +376,7 @@ export default class MineView extends Vue {
         } catch (e) {
             console.error(e)
         } finally {
-            UniUtil.hideLoading()
+            SocialuniAppUtil.UniUtil.hideLoading()
         }
     }
 

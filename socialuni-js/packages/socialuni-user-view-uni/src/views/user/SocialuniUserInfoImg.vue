@@ -48,7 +48,6 @@ import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 import {Options, Prop, Vue} from "vue-property-decorator";
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
 import ImgUtil from "socialuni-app/src/util/ImgUtil";
-import UniUtil from "socialuni-app/src/util/UniUtil";
 import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
 import ImgFileVO from "socialuni-api-base/src/model/ImgFileVO";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
@@ -56,6 +55,11 @@ import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAP
 import SocialuniReportDialog from "../../component/SocialuniReportDialog.vue";
 import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
 import UserPageUtil from "socialuni-user/src/util/UserPageUtil";
+import CosService from "socialuni-app/src/util/CosService";
+import UniUtil from "socialuni-util/src/util/UniUtil";
+import DomFile from "socialuni-app/src/model/DomFile";
+import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 @Options({
   components: {QIcon, SocialuniReportDialog}
@@ -124,7 +128,7 @@ export default class SocialuniUserInfoImg extends Vue {
   }
 
   deleteImg(imgIndex) {
-    AlertUtil.warning('请确认是否删除照片？').then(() => {
+      SocialuniAppUtil.AlertUtil.warning('请确认是否删除照片？').then(() => {
       const imgs: ImgFileVO[] = this.frontDeleteImg(imgIndex)
       SocialuniMineUserAPI.deleteUserImgNewAPI(imgs[0]).then((res: any) => {
         socialuniUserModule.setUser(res.data)
