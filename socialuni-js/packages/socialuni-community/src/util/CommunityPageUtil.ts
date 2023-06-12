@@ -1,6 +1,6 @@
-import RouterUtil from "socialuni-util/src/util/RouterUtil"
 import CommunityPagePath from "../constant/CommunityPagePath";
 import UserCheckUtil from "socialuni-user/src/util/UserCheckUtil";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 export default class CommunityPageUtil {
     static goHome(): void {
@@ -8,24 +8,24 @@ export default class CommunityPageUtil {
     }
 
     static toTalkDetail(talkId: string) {
-        RouterUtil.navigateTo(CommunityPagePath.talkDetail + '?talkId=' + talkId)
+        SocialuniAppUtil.RouterUtil.navigateTo(CommunityPagePath.talkDetail + '?talkId=' + talkId)
     }
 
     static toTalkAddPage() {
         UserCheckUtil.checkUserBindSchool()
-        RouterUtil.navigateTo(CommunityPagePath.talkAdd)
+        SocialuniAppUtil.RouterUtil.navigateTo(CommunityPagePath.talkAdd)
     }
 
     static toTalkPage() {
-        RouterUtil.switchTab(CommunityPagePath.talk)
+        SocialuniAppUtil.RouterUtil.switchTab(CommunityPagePath.talk)
     }
 
     static reLaunchTalkPage() {
-        RouterUtil.reLaunch(CommunityPagePath.talk + '?load=true')
+        SocialuniAppUtil.RouterUtil.reLaunch(CommunityPagePath.talk + '?load=true')
     }
 
 
     static toNotifyPage() {
-        RouterUtil.switchTab(CommunityPagePath.notify)
+        SocialuniAppUtil.RouterUtil.switchTab(CommunityPagePath.notify)
     }
 }

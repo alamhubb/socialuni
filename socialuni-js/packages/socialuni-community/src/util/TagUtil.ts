@@ -1,6 +1,6 @@
 import TagVO from "socialuni-api-base/src/model/community/tag/TagVO";
 import Constants from "socialuni-constant/constant/Constant";
-import StorageUtil from "socialuni/src/util/StorageUtil";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 const initTag = new TagVO()
 initTag.name = Constants.initTagName
@@ -13,11 +13,11 @@ export default class TagUtil {
   private static readonly historyTagsKey: string = 'historyTags'
 
   static getStorageHistoryTags (): TagVO[] {
-    const tags: TagVO[] = StorageUtil.getObj(this.historyTagsKey)
+    const tags: TagVO[] = SocialuniAppUtil.StorageUtil.getObj(this.historyTagsKey)
     return tags || []
   }
 
   static setStorageHistoryTags (tags: TagVO[]) {
-    StorageUtil.setObj(this.historyTagsKey, tags)
+    SocialuniAppUtil.StorageUtil.setObj(this.historyTagsKey, tags)
   }
 }

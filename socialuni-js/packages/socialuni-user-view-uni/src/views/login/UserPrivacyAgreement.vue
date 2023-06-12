@@ -20,7 +20,8 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import SkipUrlConst from "socialuni-user/src/constant/SkipUrlConst";
+import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
+import SkipUrlConst from "socialuni-app/src/constant/SkipUrlConst";
 
 @Options({})
 export default class UserPrivacyAgreement extends Vue {

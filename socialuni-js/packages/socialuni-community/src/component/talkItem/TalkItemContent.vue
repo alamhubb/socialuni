@@ -90,17 +90,20 @@
 
 <script lang="ts">
 import {Options, Prop, Vue} from 'vue-property-decorator'
-import RouterUtil from "socialuni-util/src/util/RouterUtil";
 import PagePath from "socialuni-constant/constant/PagePath";
 import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
 import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
-import AlertUtil from "socialuni-app/src/util/AlertUtil";
-import ImgUtil from "socialuni-app/src/util/ImgUtil";
 import MsgUtil from "socialuni-app/src/util/MsgUtil";
-import PageUtil from "socialuni-util/src/util/PageUtil";
 import NumUtil from "socialuni-util/src/util/NumUtil";
 import CommonUtil from "socialuni-util/src/util/CommonUtil";
-import UniUtil from "socialuni-app/src/util/UniUtil";
+import UserPagePath from "socialuni-user/src/constant/UserPagePath";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import CommunityPageUtil from "../../util/CommunityPageUtil";
+import CommunityPagePath from "../../constant/CommunityPagePath";
+import {socialTalkModule} from "../../store/SocialTalkModule";
+import {socialuniTagModule} from "../../store/SocialTagModule";
+import UserMsgUtil from "socialuni-user/src/util/UserMsgUtil";
+import SocialuniImgUtil from "socialuni-user/src/util/SocialuniImgUtil";
 
 @Options({
   components: {QIcon}
@@ -109,8 +112,8 @@ export default class TalkItemContent extends Vue {
   @Prop() talk: TalkVO
 
   toTalkDetailVue() {
-    if (RouterUtil.getCurrentPageURI() !== UserPagePath.talkDetail) {
-      PageUtil.toTalkDetail(this.talk.id)
+    if (SocialuniAppUtil.RouterUtil.getCurrentPageURI() !== CommunityPagePath.talkDetail) {
+        CommunityPageUtil.toTalkDetail(this.talk.id)
     }
   }
 
@@ -119,30 +122,30 @@ export default class TalkItemContent extends Vue {
   }
 
   chooseCircle(circleName) {
-    AlertUtil.confirm(`是否进入${circleName}圈`).then(() => {
-      if (RouterUtil.getCurrentPageURI() === UserPagePath.talk) {
+      SocialuniAppUtil.AlertUtil.confirm(`是否进入${circleName}圈`).then(() => {
+      if (SocialuniAppUtil.RouterUtil.getCurrentPageURI() === UserPagePath.talk) {
         socialTalkModule.setCircleNameUpdateCurTabIndex(circleName)
       } else {
         CommonUtil.delayTime(500).then(() => {
           socialTalkModule.setCircleNameUpdateCurTabIndex(circleName)
         })
-        PageUtil.toTalkPage()
+          CommunityPageUtil.toTalkPage()
       }
     })
   }
 
   chooseTags(tagName) {
-    AlertUtil.confirm(`是否筛选${tagName}话题的内容`).then(() => {
+      SocialuniAppUtil.AlertUtil.confirm(`是否筛选${tagName}话题的内容`).then(() => {
       socialuniTagModule.setSelectTagName(tagName)
     })
   }
 
   getTalkLargeImgUrl(userId: string, src: string) {
-    return ImgUtil.getTalkLargeImgUrl(userId, src)
+    return SocialuniImgUtil.getTalkLargeImgUrl(userId, src)
   }
 
   getTalkSmallImgUrl(userId: string, src: string) {
-    return ImgUtil.getTalkSmallImgUrl(userId, src)
+    return SocialuniImgUtil.getTalkSmallImgUrl(userId, src)
   }
 
   /* previewImage(e) {
@@ -161,15 +164,15 @@ export default class TalkItemContent extends Vue {
   }
 
   goToThreeAppClick(appId, path) {
-    PageUtil.navigateToMp(appId, path)
+    SocialuniAppUtil.RouterUtil.navigateToMp(appId, path)
   }
 
   toIdentityAuth() {
-    MsgUtil.identityAuthHint()
+    UserMsgUtil.identityAuthHint()
   }
 
   copyContent(talk:TalkVO){
-    UniUtil.showCopyAction(talk.content)
+      SocialuniAppUtil.UniUtil.showCopyAction(talk.content)
   }
 }
 </script>

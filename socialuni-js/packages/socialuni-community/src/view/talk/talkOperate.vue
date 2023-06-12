@@ -54,12 +54,14 @@ import {Options, Vue} from 'vue-property-decorator'
 import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue";
 import ReportType from "socialuni-constant/constant/ReportType";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
-import AlertUtil from "socialuni-app/src/util/AlertUtil";
-import PlatformUtils from "socialuni/src/utils/PlatformUtils";
-import UniUtil from "socialuni-app/src/util/UniUtil";
-import MsgUtil from "socialuni-app/src/util/MsgUtil";
 import ReportAddVO from "socialuni-api-base/src/model/report/ReportAddVO";
 import {socialTalkModule} from "../../store/SocialTalkModule";
+import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
+import {socialuniConfigModule} from "socialuni-app/src/store/SocialuniConfigModule";
+import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
+import ReportAPI from "socialuni-app-api/src/api/ReportAPI";
+import UserMsgUtil from "socialuni-user/src/util/UserMsgUtil";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 
 // todo 后台可控制是否显示轮播图
@@ -157,7 +159,7 @@ export default class TalkOperate extends Vue {
   }
 
   copyText() {
-    UniUtil.textCopy(this.comment.content)
+      SocialuniAppUtil.UniUtil.textCopy(this.comment.content)
     this.closeActionAndInitData()
   }
 
@@ -178,7 +180,7 @@ export default class TalkOperate extends Vue {
   // 用户自己删除
   userDeleteComment() {
     this.commentActionClose()
-    AlertUtil.confirm('是否确定删除此条评论，此操作无法恢复').then(() => {
+    SocialuniAppUtil.AlertUtil.confirm('是否确定删除此条评论，此操作无法恢复').then(() => {
       this.deleteComment()
     })
   }
@@ -189,7 +191,7 @@ export default class TalkOperate extends Vue {
       socialTalkModule.reportContentType = ReportContentType.comment
       socialTalkModule.reportDialogShow = true
     } else {
-      MsgUtil.unLoginMessage()
+      UserMsgUtil.unLoginMessage()
     }
   }
 

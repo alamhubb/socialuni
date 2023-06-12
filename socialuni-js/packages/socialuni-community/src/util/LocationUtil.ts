@@ -1,11 +1,11 @@
 import MapUtil from './MapUtil'
-import AppAuthUtil from 'socialuni-util/src/util/AppAuthUtil'
 import DistrictVO from "socialuni-api-base/src/model/DistrictVO";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import {QQMapResult} from "socialuni-api-base/src/model/location/QQMapResult";
 import {socialLocationModule} from "socialuni-community/src/store/SocialLocationModule";
 import LocationConst from "socialuni-constant/constant/community/LocationConst";
-import StorageUtil from "socialuni-util/src/util/StorageUtil";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import AppAuthUtil from "socialuni-user/src/util/AppAuthUtil";
 
 const chinaDistrict = new DistrictVO()
 chinaDistrict.id = 1
@@ -28,36 +28,36 @@ export default class LocationUtil {
     static readonly chinaDistrict: DistrictVO = chinaDistrict
 
     static openLocation() {
-        StorageUtil.setObj(LocationUtil.openLocationKey, '1')
+        SocialuniAppUtil.StorageUtil.setObj(LocationUtil.openLocationKey, '1')
     }
 
     static getOpenLocation() {
-        return !!StorageUtil.get(LocationUtil.openLocationKey)
+        return !!SocialuniAppUtil.StorageUtil.get(LocationUtil.openLocationKey)
     }
 
     static getLocation(): DistrictVO {
-        return StorageUtil.getObj(LocationUtil.locationKey) || LocationUtil.chinaDistrict
+        return SocialuniAppUtil.StorageUtil.getObj(LocationUtil.locationKey) || LocationUtil.chinaDistrict
     }
 
     static getCircleLocation(): DistrictVO {
-        return StorageUtil.getObj(LocationUtil.circleLocationKey) || LocationUtil.chinaDistrict
+        return SocialuniAppUtil.StorageUtil.getObj(LocationUtil.circleLocationKey) || LocationUtil.chinaDistrict
     }
 
     static setLocation(district: DistrictVO) {
-        StorageUtil.setObj(LocationUtil.locationKey, district)
+        SocialuniAppUtil.StorageUtil.setObj(LocationUtil.locationKey, district)
     }
 
     static setCircleLocation(district: DistrictVO) {
-        StorageUtil.setObj(LocationUtil.circleLocationKey, district)
+        SocialuniAppUtil.StorageUtil.setObj(LocationUtil.circleLocationKey, district)
     }
 
 
     static setFilterLocation(district: DistrictVO) {
-        StorageUtil.setObj(LocationUtil.filterLocationKey, district)
+        SocialuniAppUtil.StorageUtil.setObj(LocationUtil.filterLocationKey, district)
     }
 
     static getFilterLocation(): DistrictVO {
-        return StorageUtil.getObj(LocationUtil.filterLocationKey) || LocationUtil.chinaDistrict
+        return SocialuniAppUtil.StorageUtil.getObj(LocationUtil.filterLocationKey) || LocationUtil.chinaDistrict
     }
 
     //查询地理位置的功能，

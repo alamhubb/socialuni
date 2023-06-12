@@ -10,10 +10,10 @@ import GetUserInfoRes = UniApp.GetUserInfoRes;
 import GetImageInfoSuccessData = UniApp.GetImageInfoSuccessData;
 import ToastUtil from 'socialuni-native-uni/src/util/ToastUtil'
 import AppMsg from "socialuni-constant/constant/AppMsg";
-import UniappH5 from "./UniappH5";
-import ImgUtil from "./ImgUtil";
-import UUIDUtil from "./UUIDUtil";
-import {UniInterface} from "socialuni-app/src/UniInterface";
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import DomFile from "socialuni-app/src/model/DomFile";
+import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
+import ImgUtil from "socialuni-util/src/util/ImgUtil";
 
 
 export default class NativeUtil {
@@ -36,9 +36,9 @@ export default class NativeUtil {
   }
 
   public static showCopyAction(copyText: string) {
-    UniUtil.actionSheet(['复制']).then((index: number) => {
+    NativeUtil.actionSheet(['复制']).then((index: number) => {
       if (index === 0) {
-        UniUtil.textCopy(copyText)
+        NativeUtil.textCopy(copyText)
       }
     })
   }
@@ -63,7 +63,7 @@ export default class NativeUtil {
   }
 
   static copyLink(webUrl: string) {
-    return UniUtil.textCopy(webUrl, '链接已复制，可在浏览器打开')
+    return NativeUtil.textCopy(webUrl, '链接已复制，可在浏览器打开')
   }
 
   public static upxToPx(rpx: number): number {
@@ -190,10 +190,22 @@ export default class NativeUtil {
   }
 
   //选择图片
+  //选择图片
   public static chooseImage(count = 1) {
-    return UniappH5.chooseImage(count).then(res => {
-      const imgFiles = UniUtil.imgFilesCompressHandler(res)
-      return imgFiles
+    return new Promise<DomFile[]>((resolve, reject) => {
+      uni.chooseImage({
+        // sourceType: ['album'],
+        sizeType: ['original'],
+        // sizeType: ['compressed'],
+        count: count,
+        success(res) {
+          const imgFiles = NativeUtil.imgFilesCompressHandler(res)
+          resolve(imgFiles)
+        },
+        fail(err) {
+          reject(err)
+        }
+      })
     })
   }
 
@@ -206,7 +218,7 @@ export default class NativeUtil {
         // sizeType: ['compressed'],
         count: 1,
         success(res) {
-          const imgFiles = UniUtil.imgFilesCompressHandler(res)
+          const imgFiles = NativeUtil.imgFilesCompressHandler(res)
           resolve(imgFiles)
         },
         fail(err) {
@@ -236,7 +248,7 @@ export default class NativeUtil {
         ratio = Math.round(10000 / (imgSize / 1024))
       }
       imgFile.quality = ratio
-      const image = await UniUtil.getImageInfo(imgFile.path)
+      const image = await NativeUtil.getImageInfo(imgFile.path)
       // 获取文件名
       imgFile.aspectRatio = image.width / image.height
       let fileName = null

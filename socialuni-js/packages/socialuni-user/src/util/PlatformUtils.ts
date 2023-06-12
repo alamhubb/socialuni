@@ -9,7 +9,6 @@ import UserPayResultVO from "socialuni-api-base/src/model/user/UserPayResultVO";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import APPUtil from "socialuni-app/src/util/APPUtil";
 import { socialPlatformModule } from 'socialuni-app/src/store/SocialPlatformModule'
-import SocialuniCoinAPI from 'socialuni-user-view-uni/src/api/socialuni/SocialuniCoinAPI'
 import SocialuniAppAPI from 'socialuni-app-api/src/api/SocialuniAppAPI'
 import UserMsgUtil from './UserMsgUtil'
 import { socialuniUserModule } from '../store/SocialuniUserModule'

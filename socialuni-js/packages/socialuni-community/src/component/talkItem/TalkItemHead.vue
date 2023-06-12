@@ -86,25 +86,22 @@
 import { Options, Prop, Vue, Watch } from 'vue-property-decorator'
 import TalkVO from "socialuni-api-base/src/model/talk/TalkVO"
 import ObjectUtil from "socialuni-util/src/util/ObjectUtil"
-import { socialuniUserModule } from 'socialuni/src/store/SocialuniUserModule'
 import TalkTabType from "socialuni-constant/constant/TalkTabType"
-import RouterUtil from "socialuni-util/src/util/RouterUtil"
 import PagePath from "socialuni-constant/constant/PagePath"
 import MsgUtil from "socialuni-app/src/util/MsgUtil"
-import ToastUtil from "socialuni-util/src/util/ToastUtil"
-import PageUtil from "socialuni-util/src/util/PageUtil"
-import AlertUtil from "socialuni-app/src/util/AlertUtil"
 import FollowAddVO from "socialuni-api-base/src/model/FollowAddVO"
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO"
-import UserUtil from "socialuni-util/src/util/UserUtil"
 import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue"
 import DateUtil from "socialuni-util/src/util/DateUtil"
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI"
 import FollowAPI from "socialuni-community-api/src/api/FollowAPI"
-import SocialGenderTag from "socialuni/src/component/SocialGenderTag/SocialGenderTag.vue"
-import UserPagePath from "socialuni/src/constant/UserPagePath"
-import UserPageUtil from "socialuni/src/util/UserPageUtil"
 import SocialuniCommonStatus from 'socialuni-constant/constant/status/SocialuniCommonStatus'
+import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import UserPagePath from "socialuni-user/src/constant/UserPagePath";
+import UserPageUtil from "socialuni-user/src/util/UserPageUtil";
+import UserMsgUtil from "socialuni-user/src/util/UserMsgUtil";
+import UserUtil from "socialuni-user/src/util/UserUtil";
 
 @Options({
   components: {
@@ -130,7 +127,7 @@ export default class TalkItemHead extends Vue {
   SocialuniCommonStatus = SocialuniCommonStatus
 
   created() {
-    if (RouterUtil.getCurrentPageURI() === UserPagePath.userDetail) {
+    if (SocialuniAppUtil.RouterUtil.getCurrentPageURI() === UserPagePath.userDetail) {
       this.isUserDetail = true
     }
     this.updateTalk()
@@ -154,7 +151,7 @@ export default class TalkItemHead extends Vue {
   }
 
   hintJusticeInfo() {
-    ToastUtil.toastLong('正义值，正确举报会增加正义值')
+      SocialuniAppUtil.ToastUtil.toastLong('正义值，正确举报会增加正义值')
   }
 
   // 自己不为null，且是自己
@@ -163,22 +160,22 @@ export default class TalkItemHead extends Vue {
   }
 
   toUserDetailVue() {
-    if (RouterUtil.getCurrentPageURI() !== UserPagePath.userDetail) {
+    if (SocialuniAppUtil.RouterUtil.getCurrentPageURI() !== UserPagePath.userDetail) {
       UserPageUtil.toUserDetail(this.talk.user.id)
     }
   }
 
   confirmDeleteTalk() {
-    AlertUtil.confirm('是否确定删除此条动态，此操作无法恢复').then(() => {
+      SocialuniAppUtil.AlertUtil.confirm('是否确定删除此条动态，此操作无法恢复').then(() => {
       this.$emit('deleteTalk', this.talk.id)
       SocialuniTalkAPI.deleteTalkAPI(this.talk.id).then(() => {
-        ToastUtil.toast('删除成功')
+          SocialuniAppUtil.ToastUtil.toast('删除成功')
       })
     })
   }
 
   openVip() {
-    PageUtil.toVipPage()
+    UserPageUtil.toVipPage()
   }
 
   addFollow() {
@@ -186,7 +183,7 @@ export default class TalkItemHead extends Vue {
       if (!this.followBtnDisabled) {
         const followAdd: FollowAddVO = new FollowAddVO(this.talk.user.id)
         if (this.talk.hasFollowed) {
-          AlertUtil.confirm('是否取消关注用户：' + this.talk.user.nickname).then(() => {
+            SocialuniAppUtil.AlertUtil.confirm('是否取消关注用户：' + this.talk.user.nickname).then(() => {
             this.followBtnDisabled = true
             this.talk.hasFollowed = false
             FollowAPI.cancelFollowAPI(followAdd).finally(() => {
@@ -204,7 +201,7 @@ export default class TalkItemHead extends Vue {
         }
       }
     } else {
-      MsgUtil.unLoginMessage()
+      UserMsgUtil.unLoginMessage()
     }
   }
 

@@ -145,23 +145,16 @@ import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import CommonUtil from "socialuni-util/src/util/CommonUtil";
 import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
 import Constants from "socialuni-constant/constant/Constant";
-import PageUtil from "socialuni-util/src/util/PageUtil";
-import SocialCircleRO from "socialuni-api-base/src/model/community/circle/SocialCircleRO";
 import SocialuniTalkTabCircleRO from "socialuni-api-base/src/model/community/circle/SocialuniTalkTabCircleRO";
-import ToastUtil from "socialuni-util/src/util/ToastUtil";
-import HugAddVO from "socialuni-api-base/src/model/HugAddVO";
 import MsgUtil from "socialuni-app/src/util/MsgUtil";
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
 import {socialTalkModule} from "../../store/SocialTalkModule";
 import {socialuniTagModule} from "../../store/SocialTagModule";
-import TalkQueryVO from "socialuni-api-base/src/model/talk/TalkQueryVO";
 import TalkQOFactory from "../../factory/TalkQOFactory";
 import {socialLocationModule} from "../../store/SocialLocationModule";
-import {socialuniConfigModule} from "socialuni/src/store/SocialuniConfigModule";
-import StorageUtil from "socialuni/src/util/StorageUtil";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
-import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
 import TalkItem from "../../component/talkItem/TalkItem.vue";
+import {socialuniConfigModule} from "socialuni-app/src/store/SocialuniConfigModule";
 
 // todo 后台可控制是否显示轮播图
 @Options({

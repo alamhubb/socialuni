@@ -17,9 +17,9 @@
 import {Options, Vue} from 'vue-property-decorator'
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 // import {socialuniConfigModule} from "socialuni-sdk/src/store/store";
-import SkipUrlConst from "socialuni-user/src/constant/SkipUrlConst";
 import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import SkipUrlConst from "socialuni-app/src/constant/SkipUrlConst";
 
 @Options({
   components: {QIcon}

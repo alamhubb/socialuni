@@ -1,4 +1,3 @@
-import ChatType from "socialuni-constant/constant/ChatType"
 import SocialuniChatRO from "socialuni-api-base/src/model/SocialuniChatRO";
 import {OpenImChatRO} from "socialuni-api-base/src/model/openIm/OpenImChatRO";
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
@@ -6,7 +5,6 @@ import SocialuniTalkTabCircleRO from "socialuni-api-base/src/model/community/cir
 import CircleCreateChatQO from "socialuni-api-base/src/model/community/circle/CircleCreateChatQO";
 import MessageVO from "socialuni-im-api/src/model/RO/MessageVO";
 import FriendApplyType from "socialuni-constant/constant/FriendApplyType";
-import UUIDUtil from "socialuni-app/src/util/UUIDUtil";
 import MessageAPI from "socialuni-im-api/src/api/MessageAPI";
 import {reactive} from "vue";
 import OpenImFriendApplyRO from "socialuni-api-base/src/model/openIm/OpenImFriendApplyRO";

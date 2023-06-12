@@ -68,4 +68,24 @@ export default class RouterUtil {
     static goHome(): void {
         // RouterUtil.switchTab(PagePath.home)
     }
+
+    static async navigateToMp(appId: string, path: string = null, extraData: any = null) {
+        return new Promise((resolve, reject) => {
+            uni.navigateToMiniProgram({
+                appId: appId,
+                path: path,
+                extraData: extraData,
+                success(res) {
+                    resolve(res)
+                },
+                fail(err) {
+                    reject(err)
+                }
+            })
+        })
+    }
+
+
+
+
 }

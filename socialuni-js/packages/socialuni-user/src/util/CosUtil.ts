@@ -1,6 +1,13 @@
+/* eslint-disable */
+// #ifdef MP
+//@ts-ignore
+import COS from 'cos-wx-sdk-v5'
+// #endif
+// #ifdef H5
 //@ts-ignore
 import COS from 'cos-js-sdk-v5'
-import CosAuthRO from "socialuni-api-base/src/model/cos/CosAuthRO";
+// #endif
+import CosAuthRO from "../../../socialuni-api-base/src/model/cos/CosAuthRO";
 
 export default class CosUtil {
   static getAuthorizationCos(cosAuthRO: CosAuthRO): COS {

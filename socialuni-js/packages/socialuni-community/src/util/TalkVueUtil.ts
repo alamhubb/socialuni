@@ -1,6 +1,6 @@
 import TalkTabType from "socialuni-constant/constant/TalkTabType";
 import SocialuniTalkTabRO from "socialuni-api-base/src/model/talk/SocialuniTalkTabRO";
-import StorageUtil from "socialuni/src/util/StorageUtil";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 const talkTabFollowDefault = new SocialuniTalkTabRO()
 talkTabFollowDefault.name = TalkTabType.follow_name
@@ -39,12 +39,12 @@ export default class TalkVueUtil {
 
 
   static getTalkTabs(): SocialuniTalkTabRO [] {
-    const homeTypeTalks: SocialuniTalkTabRO [] = StorageUtil.getObj(TalkVueUtil.TalkTabsKey)
+    const homeTypeTalks: SocialuniTalkTabRO [] = SocialuniAppUtil.StorageUtil.getObj(TalkVueUtil.TalkTabsKey)
     return homeTypeTalks || TalkVueUtil.TalkTabsDefault
   }
 
   static getCurTalkTabIndex(): number {
-    let index = StorageUtil.getObj(TalkVueUtil.talkTabIndexKey)
+    let index = SocialuniAppUtil.StorageUtil.getObj(TalkVueUtil.talkTabIndexKey)
     if (index !== 0) {
       index = index || TalkVueUtil.talkTabIndexDefault
     }

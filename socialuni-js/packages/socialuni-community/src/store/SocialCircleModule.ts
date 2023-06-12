@@ -1,9 +1,9 @@
 import SocialCircleRO from "socialuni-api-base/src/model/community/circle/SocialCircleRO";
 import CircleTypeRO from "socialuni-api-base/src/model/community/circle/CircleTypeRO";
-import SocialCircleStorageUtil from "socialuni-util/src/util/SocialCircleStorageUtil";
 import {reactive} from "vue";
 import SocialuniCircleAPI from "socialuni-community-api/src/api/SocialuniCircleAPI";
 import TagStorageUtil from "../util/TagStorageUtil";
+import SocialCircleStorageUtil from "../util/SocialCircleStorageUtil";
 
 
 class SocialCircleModule {

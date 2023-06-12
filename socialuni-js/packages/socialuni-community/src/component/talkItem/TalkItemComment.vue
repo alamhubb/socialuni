@@ -79,20 +79,21 @@
 import {Options, Prop, Vue, Watch} from 'vue-property-decorator'
 import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 import QButton from "socialuni-ui-uni/src/components/QButton/QButton.vue";
-import {socialuniUserModule} from 'socialuni/src/store/SocialuniUserModule';
 import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
 import ObjectUtil from "socialuni-util/src/util/ObjectUtil";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import MsgUtil from "socialuni-app/src/util/MsgUtil";
-import UniUtil from "socialuni-app/src/util/UniUtil";
 import CommentVO from "socialuni-api-base/src/model/comment/CommentVO";
-import ToastUtil from "socialuni-util/src/util/ToastUtil";
 import HugAddVO from "socialuni-api-base/src/model/HugAddVO";
-import RouterUtil from "socialuni-util/src/util/RouterUtil";
-import PagePath from "socialuni-constant/constant/PagePath";
-import PageUtil from "socialuni-util/src/util/PageUtil";
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
 import ChildComment from "./ChildComment.vue";
+import {socialTalkModule} from "../../store/SocialTalkModule";
+import UserMsgUtil from "socialuni-user/src/util/UserMsgUtil";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import UserPageUtil from "socialuni-user/src/util/UserPageUtil";
+import CommunityPageUtil from "../../util/CommunityPageUtil";
+import UserPagePath from "socialuni-user/src/constant/UserPagePath";
+import CommunityPagePath from "../../constant/CommunityPagePath";
 
 @Options({
   components: {
@@ -143,12 +144,12 @@ export default class TalkItemComment extends Vue {
       socialTalkModule.reportContentType = ReportContentType.talk
       socialTalkModule.reportDialogShow = true
     } else {
-      MsgUtil.unLoginMessage()
+      UserMsgUtil.unLoginMessage()
     }
   }
 
   showShareMenu() {
-    UniUtil.showShareMenu()
+    SocialuniAppUtil.UniUtil.showShareMenu()
   }
 
 
@@ -160,7 +161,7 @@ export default class TalkItemComment extends Vue {
     // 登录才可以点赞
     if (this.user) {
       if (this.talk.hasHugged) {
-        ToastUtil.toast('已抱过不能取消')
+          SocialuniAppUtil.ToastUtil.toast('已抱过不能取消')
         return
       }
       this.talk.hasHugged = true
@@ -168,21 +169,21 @@ export default class TalkItemComment extends Vue {
       const hugAdd: HugAddVO = new HugAddVO(this.talk.id)
       SocialuniTalkAPI.addHugAPI(hugAdd)
     } else {
-      MsgUtil.unLoginMessage()
+      UserMsgUtil.unLoginMessage()
     }
   }
 
   toUserDetail(userId: string) {
-    if (RouterUtil.getCurrentPageURI() !== UserPagePath.userDetail || RouterUtil.getCurrentPage().options.userId !== String(userId)) {
-      PageUtil.toUserDetail(userId)
+    if (SocialuniAppUtil.RouterUtil.getCurrentPageURI() !== UserPagePath.userDetail || SocialuniAppUtil.RouterUtil.getCurrentPage().options.userId !== String(userId)) {
+      UserPageUtil.toUserDetail(userId)
     }
   }
 
   showOtherCommentClicked = false
 
   toTalkDetailVue() {
-    if (RouterUtil.getCurrentPageURI() !== UserPagePath.talkDetail) {
-      PageUtil.toTalkDetail(this.talk.id)
+    if (SocialuniAppUtil.RouterUtil.getCurrentPageURI() !== CommunityPagePath.talkDetail) {
+      CommunityPageUtil.toTalkDetail(this.talk.id)
     }
   }
 

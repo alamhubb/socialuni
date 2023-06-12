@@ -7,6 +7,12 @@
   },
   "pages": [
     {
+      "path": "pages/home/home",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
       "path": "pages/chat/chat",
       "style": {
         "navigationStyle": "custom"
@@ -20,6 +26,30 @@
     }
   ],
   "subPackages": [
+    {
+      "root": "pagesLazy/community",
+      "pages": [
+        {
+          "path": "talk/talkAdd",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "talk/talkDetail",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "notify/notify",
+          "style": {
+            "navigationBarTitleText": "通知列表",
+            "enablePullDownRefresh": true
+          }
+        }
+      ]
+    },
     {
       "root": "pagesLazy/user",
       "pages": [
@@ -90,6 +120,12 @@
     "iconWidth": "30px",
     "height": "52px",
     "list": [
+      {
+        "pagePath": "pages/home/home",
+        "iconPath": "static/img/deck-gray-36dp.png",
+        "selectedIconPath": "static/img/deck-blue-36dp.png",
+        "text": "社区"
+      },
       {
         "pagePath": "pages/chat/chat",
         "iconPath": "static/img/question_answer-gray-36dp.png",

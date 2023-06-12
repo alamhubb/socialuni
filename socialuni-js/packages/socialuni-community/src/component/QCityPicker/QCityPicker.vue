@@ -42,10 +42,10 @@ import {Options, Emit, Model, Vue, Prop} from 'vue-property-decorator'
 import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue";
 import QPicker from "socialuni-ui-uni/src/components/QPicker/QPicker.vue";
 import DistrictVO from "socialuni-api-base/src/model/DistrictVO";
-import AlertUtil from "socialuni-app/src/util/AlertUtil";
 import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 import {socialLocationModule} from "socialuni-community/src/store/SocialLocationModule";
 import LocationUtil from "socialuni-community/src/util/LocationUtil";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 @Options({
   components: {
@@ -101,12 +101,12 @@ export default class QCityPicker extends Vue {
 
   // 如果当前定位是附近则发表后跳转到talk页要查询附近的，发表动态时修改store
   getLocation() {
-    return AlertUtil.confirm('是否将当前定位地区设置为选择地区').then(() => {
+    return SocialuniAppUtil.AlertUtil.confirm('是否将当前定位地区设置为选择地区').then(() => {
       return LocationUtil.getCurLocationCom().then((district: DistrictVO) => {
         this.cityValue = district
         this.initPopupCity()
       }).catch(() => {
-        AlertUtil.hint('定位功能已关闭，请手动开启')
+          SocialuniAppUtil.AlertUtil.hint('定位功能已关闭，请手动开启')
         throw Error()
       })
     })
