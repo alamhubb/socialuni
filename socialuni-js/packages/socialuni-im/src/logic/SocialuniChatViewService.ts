@@ -27,7 +27,6 @@ export default class SocialuniChatViewService extends SocialuniViewService{
         })
     }
 
-    msgContent = ''
     scrollTop: number = 0
 
     formatTime(time: any) {
@@ -52,38 +51,5 @@ export default class SocialuniChatViewService extends SocialuniViewService{
 
     setChatId(chat: SocialuniChatRO) {
         socialuniChatModule.setChatId(chat.id)
-    }
-
-
-    async sendMsgClick() {
-        if (!socialuniChatModule.chat) {
-            SocialuniAppUtil.ToastUtil.throwError('缺少会话')
-        }
-        console.log(123123)
-        UserCheckUtil.checkUserBindPhoneNum()
-        console.log(456456)
-        const msgContent = this.msgContent
-        // || (this.chat.needPayOpen ? HintMsg.payOpenDefaultMsg : '')
-        console.log(this.msgContent)
-
-        if (msgContent) {
-            const newMsg = new MessageVO(this.msgContent, socialuniUserModule.mineUser)
-            socialuniChatModule.messages.push(newMsg)
-            socialuniChatModule.scrollToMessagePageBottom()
-            const index: number = socialuniChatModule.messages.length - 1
-            // 点击发送后立即push
-            //启用状态可以直接发送
-            this.msgContent = ''
-            this.chat.updateTime = new Date().getTime()
-            try {
-                const res = await MessageAPI.sendMsgAPI(this.chat.id, msgContent)
-                this.chat.updateTime = res.data.createTime
-                socialuniChatModule.messages.splice(index, 1, res.data)
-            } catch (e) {
-                newMsg.readStatus = MessageStatus.Failed
-            }
-        } else {
-            SocialuniAppUtil.ToastUtil.throwError('不能发送空白内容')
-        }
     }
 }

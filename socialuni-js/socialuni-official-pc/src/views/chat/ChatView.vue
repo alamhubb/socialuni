@@ -82,13 +82,13 @@
 
                 <div class="flex-row flex-none">
                     <el-input
-                            v-model="viewService.msgContent"
+                            v-model="msgViewService.msgContent"
                             :rows="1"
                             :autosize="{minRows:1,maxRows:5}"
                             type="textarea"
                             placeholder="Please input"
                     />
-                    <el-button @click="viewService.sendMsgClick()">发送</el-button>
+                    <el-button @click="msgViewService.sendMsgClick">发送</el-button>
                 </div>
             </div>
 
@@ -102,6 +102,7 @@
 import {Options, Vue} from "vue-property-decorator";
 import YScrollbar from "@/components/YScrollbar.vue";
 import SocialuniChatViewService, {SocialuniChatViewServiceRefs} from "socialuni-im/src/logic/SocialuniChatViewService";
+import SocialuniMsgViewService from "socialuni-im/src/logic/SocialuniMsgViewService";
 
 @Options({
     components: {YScrollbar}
@@ -109,7 +110,8 @@ import SocialuniChatViewService, {SocialuniChatViewServiceRefs} from "socialuni-
 export default class ChatView extends Vue {
     $refs: SocialuniChatViewServiceRefs
 
-    viewService = new SocialuniChatViewService()
+    ViewService = new SocialuniChatViewService()
+    msgViewService = new SocialuniMsgViewService()
 
 }
 </script>

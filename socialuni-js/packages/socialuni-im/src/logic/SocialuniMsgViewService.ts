@@ -9,7 +9,7 @@ import {socialuniChatModule} from "../store/SocialuniChatModule";
 export default class SocialuniMsgViewService {
     msgContent = ''
 
-    async pushMessageAction() {
+    async sendMsgClick() {
         if (!socialuniChatModule.chat) {
             SocialuniAppUtil.ToastUtil.throwError('缺少会话')
         }
