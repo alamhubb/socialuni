@@ -39,18 +39,19 @@
 
 <script lang="ts">
 import {Options, Emit, Model, Vue, Prop} from 'vue-property-decorator'
-// import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue";
-// import QPicker from "socialuni-ui-uni/src/components/QPicker/QPicker.vue";
-// import DistrictVO from "socialuni-api-base/src/model/DistrictVO";
-// import {socialLocationModule} from "socialuni-community/src/store/SocialLocationModule";
-// import LocationUtil from "socialuni-community/src/util/LocationUtil";
-// import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue";
+import QPicker from "socialuni-ui-uni/src/components/QPicker/QPicker.vue";
+import DistrictVO from "socialuni-api-base/src/model/DistrictVO";
+import {socialLocationModule} from "socialuni-community/src/store/SocialLocationModule";
+import LocationUtil from "socialuni-community/src/util/LocationUtil";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 
 @Options({
   components: {
-    // QPicker,
-    // QIcon,
-    // QPopup
+    QPicker,
+    QIcon,
+    QPopup
   }
 })
 export default class QCityPicker extends Vue {
