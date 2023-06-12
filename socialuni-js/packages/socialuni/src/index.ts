@@ -1,5 +1,4 @@
 import { App, defineComponent } from "vue"
-import UniUtil from "socialuni-app/src/util/UniUtil"
 import { socialuniPluginsModule } from "./store/SocialuniPluginsModule"
 import { SocialuniPlugin } from "./interface/SocialuniPlugin"
 import { ImportModule } from "./interface/ImportModule"
@@ -114,7 +113,7 @@ const Socialuni = {
     // }
 
     for (const plugin of socialuniPluginsModule.plugins) {
-      await plugin && plugin.onLaunch && plugin.onLaunch()
+      plugin && plugin.onLaunch && plugin.onLaunch()
     }
   }
 }
