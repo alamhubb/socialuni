@@ -113,11 +113,16 @@ import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue"
 import QSearch from "socialuni-ui-uni/src/components/QSearch/QSearch.vue"
 import QInput from "socialuni-ui-uni/src/components/QInput/QInput.vue"
 import SocialuniImMineUserDetailRO from "socialuni-im-api/src/model/RO/SocialuniImMineUserDetailRO";
-import {socialuniChatModule} from "../../store/SocialuniChatModule";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 import SocialuniImUserAPI from "socialuni-im-api/src/api/SocialuniImUserAPI";
-import ImPageUtil from "../../util/ImPageUtil";
 import SocialuniChatRO from "socialuni-api-base/src/model/SocialuniChatRO";
+import {socialuniChatModule} from "socialuni-im/src/store/SocialuniChatModule";
+import ChatType from "socialuni-constant/constant/ChatType";
+import SocialuniCommonStatus from "socialuni-constant/constant/status/SocialuniCommonStatus";
+import Constants from "socialuni-constant/constant/Constant";
+import DateUtil from "socialuni-util/src/util/DateUtil";
+import {onLoad, onShow} from "@dcloudio/uni-app";
+import ImPageUtil from "socialuni-im/src/util/ImPageUtil";
 
 @Options({
     components: {QSearch, QInput, QIcon, QNavbar}
@@ -163,10 +168,10 @@ export default class ChatView extends Vue {
 
     created() {
         onLoad((params) => {
-            UniUtil.showShareMenu()
+            SocialuniAppUtil.UniUtil.showShareMenu()
         })
         onShow(() => {
-            socialuniChatModule.computedChatsUnreadNumTotalAction()
+            // socialuniChatModule.computedChatsUnreadNumTotalAction()
         })
         this.queryMineImUserInfo()
         /*setInterval(()=>{
@@ -203,7 +208,7 @@ export default class ChatView extends Vue {
     showBottomMenuClick(chatId: number) {
         this.chatId = chatId
         console.log('chatId===', chatId)
-        UniUtil.actionSheet(['置顶', '删除']).then((index: number) => {
+        SocialuniAppUtil.UniUtil.actionSheet(['置顶', '删除']).then((index: number) => {
             if (index === 0) {
                 this.pinConversation()
             } else if (index === 1) {
@@ -217,7 +222,7 @@ export default class ChatView extends Vue {
     }
 
     pinConversation() {
-        socialuniChatModule.pinConversation(this.chatId)
+        // socialuniChatModule.pinConversation(this.chatId)
     }
 
     /**
