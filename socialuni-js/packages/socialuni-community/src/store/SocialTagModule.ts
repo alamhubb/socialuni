@@ -88,7 +88,7 @@ class SocialuniTagModule {
         if (tagName) {
             this.mineHistoryTagNames.unshift(tagName)
             this.mineHistoryTagNames = this.mineHistoryTagNames.slice(0, 4)
-            TagStorageUtil.saveTagNames()
+            TagStorageUtil.saveTagNames(this.mineHistoryTagNames)
         }
     }
 }

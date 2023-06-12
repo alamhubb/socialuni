@@ -155,6 +155,10 @@ import {socialLocationModule} from "../../store/SocialLocationModule";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import TalkItem from "../../component/talkItem/TalkItem.vue";
 import {socialuniConfigModule} from "socialuni-app/src/store/SocialuniConfigModule";
+import UserMsgUtil from "socialuni-user/src/util/UserMsgUtil";
+import UserPageUtil from "socialuni-user/src/util/UserPageUtil";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
 
 // todo 后台可控制是否显示轮播图
 @Options({
@@ -469,7 +473,7 @@ export default class TabsTalk extends Vue {
   updateShowAd() {
     // 如果展示广告
     // 获取上次展示时间
-    const lastDateStr: string = StorageUtil.get(Constants.lastShowAdTime)
+    const lastDateStr: string = SocialuniAppUtil.StorageUtil.get(Constants.lastShowAdTime)
     // 如果有上次展示时间
     if (lastDateStr) {
       const lastDateTime: number = new Date(lastDateStr).getTime()
@@ -494,7 +498,7 @@ export default class TabsTalk extends Vue {
   watchTalks() {
     // 如果已有talk数量大于系统阀值，加载出来第2页后，就重置下次看广告时间
     if (this.showAd && this.talks.length >= 50) {
-      StorageUtil.set(Constants.lastShowAdTime, String(new Date()))
+      SocialuniAppUtil.StorageUtil.set(Constants.lastShowAdTime, String(new Date()))
     }
   }
 
@@ -543,15 +547,15 @@ export default class TabsTalk extends Vue {
   }
 
   toLoginVue() {
-    PageUtil.toMinePage()
+    UserPageUtil.toMinePage()
   }
 
   joinCircleGroupChat(circle: SocialuniTalkTabCircleRO) {
     // 登录才可以点赞
     if (this.user) {
-      socialChatModule.joinCircleGroupChat(circle)
+      // socialChatModule.joinCircleGroupChat(circle)
     } else {
-      MsgUtil.unLoginMessage()
+      UserMsgUtil.unLoginMessage()
     }
   }
 }

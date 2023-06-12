@@ -42,8 +42,8 @@ export default class TalkFilterUtil {
     }
 
     static setFistSetUserAge(minAge: number, maxAge: number) {
-        StorageUtil.setObj(TalkFilterUtil.notFirstSetAgeKey, true)
-        StorageUtil.setObj(TalkFilterUtil.minAgeFilterKey, minAge)
-        StorageUtil.setObj(TalkFilterUtil.maxAgeFilterKey, maxAge)
+        SocialuniAppUtil.StorageUtil.setObj(TalkFilterUtil.notFirstSetAgeKey, true)
+        SocialuniAppUtil.StorageUtil.setObj(TalkFilterUtil.minAgeFilterKey, minAge)
+        SocialuniAppUtil.StorageUtil.setObj(TalkFilterUtil.maxAgeFilterKey, maxAge)
     }
 }

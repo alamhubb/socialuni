@@ -102,6 +102,7 @@ import UserPagePath from "socialuni-user/src/constant/UserPagePath";
 import UserPageUtil from "socialuni-user/src/util/UserPageUtil";
 import UserMsgUtil from "socialuni-user/src/util/UserMsgUtil";
 import UserUtil from "socialuni-user/src/util/UserUtil";
+import SocialGenderTag from "socialuni-user-view-uni/src/components/SocialGenderTag/SocialGenderTag.vue";
 
 @Options({
   components: {

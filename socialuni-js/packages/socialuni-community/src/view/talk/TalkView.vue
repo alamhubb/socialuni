@@ -72,6 +72,7 @@ import {socialNotifyModule} from "../../store/SocialNotifyModule";
 import {socialAppModule} from "socialuni-app/src/store/SocialAppModule";
 import {socialLocationModule} from "../../store/SocialLocationModule";
 import {socialuniConfigModule} from "socialuni-app/src/store/SocialuniConfigModule";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 // todo 后台可控制是否显示轮播图
 
@@ -149,7 +150,7 @@ export default class TalkView extends Vue {
 
   // life
   mounted() {
-    UniUtil.showShareMenu()
+    SocialuniAppUtil.UniUtil.showShareMenu()
     this.initQuery()
   }
 

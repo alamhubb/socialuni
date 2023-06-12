@@ -1,3 +1,4 @@
+import {reactive} from "vue";
 import TalkVO from "socialuni-api-base/src/model/talk/TalkVO"
 import CommentVO from "socialuni-api-base/src/model/comment/CommentVO"
 import CommentAddVO from "socialuni-api-base/src/model/comment/CommentAddVO"
@@ -9,7 +10,6 @@ import {Vue} from "vue-class-component";
 import CircleCreateChatQO from "socialuni-api-base/src/model/community/circle/CircleCreateChatQO";
 import {socialCircleModule} from "./SocialCircleModule";
 import SocialuniCircleAPI from "socialuni-community-api/src/api/SocialuniCircleAPI";
-import {reactive} from "vue";
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
 import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
 import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
@@ -23,14 +23,14 @@ class SocialTalkModule {
     //方便操作页面动作
     talkVue: Vue = null
 
-    // filter内容
+    filter内容
     userMinAge: number = TalkFilterUtil.getMinAgeFilter()
     userMaxAge: number = TalkFilterUtil.getMaxAgeFilter()
     userGender: string = TalkFilterUtil.getGenderFilter()
     talkTabs: SocialuniTalkTabRO [] = TalkVueUtil.getTalkTabs()
     currentTabIndex: number = TalkVueUtil.getCurTalkTabIndex()
 
-    // state
+    state
     currentContent: null
     talk: TalkVO = null
     comment: CommentVO = null
@@ -86,7 +86,7 @@ class SocialTalkModule {
             this.currentContent = talk.content
             this.inputContentFocusEvent()
         } else {
-            MsgUtil.unBindPhoneNum()
+            UserMsgUtil.unBindPhoneNum()
         }
     }
 
@@ -102,7 +102,7 @@ class SocialTalkModule {
             this.currentContent = comment.content
             this.inputContentFocusEvent()
         } else {
-            MsgUtil.unLoginMessage()
+            UserMsgUtil.unLoginMessage()
         }
     }
 
@@ -195,6 +195,11 @@ class SocialTalkModule {
     }
 
     updateCircleByTabIndex() {
+        /*
+//不处理，前三个切来切去，不能修改上次使用的
+else {
+this.setCircleName(null)
+}*/
         const curTab = this.talkTabs.find((item, index) => index === this.currentTabIndex)
         if (curTab.type === TalkTabType.circle_type) {
             socialCircleModule.setCircleName(curTab.name)
@@ -204,11 +209,6 @@ class SocialTalkModule {
         } else {
             socialCircleModule.setCircleName(null)
         }
-        /*
-    //不处理，前三个切来切去，不能修改上次使用的
-    else {
-      this.setCircleName(null)
-    }*/
         return curTab
     }
 

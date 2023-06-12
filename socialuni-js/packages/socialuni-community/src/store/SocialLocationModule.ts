@@ -1,8 +1,8 @@
+import LocationUtil from "../util/LocationUtil";
 import DistrictVO from "socialuni-api-base/src/model/DistrictVO";
 import {reactive} from "vue";
-import {socialTalkModule} from "./SocialTalkModule";
 import DistrictAPI from "socialuni-community-api/src/api/DistrictAPI";
-import LocationUtil from "../util/LocationUtil";
+import {socialTalkModule} from "./SocialTalkModule";
 
 class SocialLocationModule {
     // 系统加载时通过getDistrictAction赋值
