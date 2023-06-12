@@ -26,7 +26,7 @@
                             </div>
                         </div>-->
             <div class="row-col-center">
-<!--                <input id="fileSelector" type="file" @change="uploadData"/>-->
+                <!--                <input id="fileSelector" type="file" @change="uploadData"/>-->
                 <el-button @click="uploadUserAvatarImg">test</el-button>
                 <el-avatar v-if="!mineUser" class="use-click" @click="toLogin">登录</el-avatar>
                 <div v-else class="row-col-center">
@@ -91,6 +91,11 @@ export default class NavBar extends Vue {
             console.log('接收到了')
             this.toLogin()
         })
+        console.log(3232323)
+    }
+
+    mounted() {
+        console.log(6644646)
     }
 
     toHome() {

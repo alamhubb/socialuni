@@ -64,12 +64,45 @@ async function installSocialuniPluginIns() {
 
 const Socialuni = {
   async install(app: App, socialuniOption: SocialuniOption) {
+
+    console.log(456465)
+    const shareComponent = defineComponent({
+      onShareAppMessage() {
+        const title = '年轻人生活分享社区'
+        const path = '/pages/home/home"'
+        const imageUrl = 'https://cdxapp-1257733245.file.myqcloud.com/qingchi/home/full.jpg!avatar'
+        return {
+          title: title,
+          path: path,
+          imageUrl: imageUrl
+        }
+      },
+      created(){
+        socialuniPluginsModule.setRouter(this.$router)
+        socialuniPluginsModule.setRoute(this.$route)
+      },
+      mounted() {
+        console.log(12312312)
+        console.log(this)
+        console.log(this.$route)
+        console.log(this.$data)
+        console.log(45646)
+        /*onLoad((params) => {
+          UniUtil.showShareMenu()
+        })*/
+      }
+    })
+    console.log(shareComponent)
+    console.log(app)
+    console.log(898989)
+    app.mixin(shareComponent)
+
     // router: Router, socialuniPlugins: SocialuniPlugin[]
     // socialuniPluginsModule.init(socialuniOptions?.requestConfig)
 
-    if (socialuniOption && socialuniOption.router) {
-      socialuniPluginsModule.setRouter(socialuniOption.router)
-    }
+    /*if (socialuniOption && socialuniOption.router) {
+
+    }*/
 
     // 社交联盟内置支持的插件
     await installSocialuniPluginIns()
@@ -83,42 +116,6 @@ const Socialuni = {
     for (const plugin of socialuniPluginsModule.plugins) {
       await plugin && plugin.onLaunch && plugin.onLaunch()
     }
-
-    const shareComponent = defineComponent({
-      onShareAppMessage() {
-        const title = '年轻人生活分享社区'
-        const path = '/pages/home/home"'
-        const imageUrl = 'https://cdxapp-1257733245.file.myqcloud.com/qingchi/home/full.jpg!avatar'
-        return {
-          title: title,
-          path: path,
-          imageUrl: imageUrl
-        }
-      },
-      created(){
-        console.log(1778787)
-      },
-      mounted() {
-        console.log(12312312)
-        console.log(this)
-        console.log(this.$route)
-        console.log(this.$data)
-        const fasdf = this
-        for (let key in fasdf) {
-          console.log(`${key}:${fasdf[key]}`) // foo, bar
-        }
-        const data = this.$data
-        const obj = new Object()
-        for (let key in data) {
-          console.log(data[key]) // foo, bar
-        }
-        console.log(45646)
-        /*onLoad((params) => {
-          UniUtil.showShareMenu()
-        })*/
-      }
-    })
-    app.mixin(shareComponent)
   }
 }
 

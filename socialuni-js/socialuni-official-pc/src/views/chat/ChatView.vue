@@ -111,6 +111,10 @@ export default class ChatView extends Vue {
 
     viewService = new SocialuniChatViewService()
 
+    created(){
+        console.log(6644646)
+    }
+
     mounted() {
         console.log(this.$refs)
         this.viewService.init(this.$refs)

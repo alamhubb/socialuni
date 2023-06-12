@@ -3,6 +3,6 @@ import {Router} from "vue-router";
 
 export interface SocialuniOption {
   plugins: SocialuniPlugin[]
-  router: Router
+  // router: Router
   // requestConfig: HttpRequestConfigInterface
 }
