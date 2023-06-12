@@ -1,4 +1,3 @@
-import MapUtil from './MapUtil'
 import DistrictVO from "socialuni-api-base/src/model/DistrictVO";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import {QQMapResult} from "socialuni-api-base/src/model/location/QQMapResult";
@@ -6,6 +5,7 @@ import {socialLocationModule} from "socialuni-community/src/store/SocialLocation
 import LocationConst from "socialuni-constant/constant/community/LocationConst";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 import AppAuthUtil from "socialuni-user/src/util/AppAuthUtil";
+import MapUtil from "socialuni-app/src/util/MapUtil";
 
 const chinaDistrict = new DistrictVO()
 chinaDistrict.id = 1
