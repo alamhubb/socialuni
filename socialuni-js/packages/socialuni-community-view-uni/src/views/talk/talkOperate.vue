@@ -55,7 +55,7 @@ import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue";
 import ReportType from "socialuni-constant/constant/ReportType";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import ReportAddVO from "socialuni-api-base/src/model/report/ReportAddVO";
-import {socialTalkModule} from "../../store/SocialTalkModule";
+import {socialTalkModule} from "socialuni-community/src/store/SocialTalkModule";
 import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
 import {socialuniConfigModule} from "socialuni-app/src/store/SocialuniConfigModule";
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";

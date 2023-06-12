@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import {Options, Vue, Watch} from 'vue-property-decorator'
-import TalkView from "socialuni-community/src/view/talk/TalkView.vue"
+import TalkView from "socialuni-community-view-uni/src/views/talk/TalkView.vue"
 
 @Options({
   components: {
