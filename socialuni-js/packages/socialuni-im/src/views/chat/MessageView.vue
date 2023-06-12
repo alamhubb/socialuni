@@ -97,7 +97,7 @@
                         <div v-else-if="msg.user.isMine" class="flex-row pd-sm">
                             <div class="flex-1 flex-col mr overflow-hidden">
                                 <view class="h44px row-end-center mb-xs">
-                                    {{ msg.user.nickname }}
+                                    {{ mineUser.nickname }}
                                     <!--              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
                                                         @click="toUserDetailVue(msg.user.id)">
                                                     {{ msg.user.nickname }}
@@ -117,7 +117,7 @@
                                 </div>
                             </div>
                             <image class="size50 bd-radius flex-none"
-                                   :src="msg.user.avatar"
+                                   :src="mineUser.avatar"
                                    @click="toUserDetailVue(msg.user.id)"
                             />
                         </div>
@@ -277,6 +277,7 @@ import SocialuniAppAPI from 'socialuni-app-api/src/api/SocialuniAppAPI'
 import UserCheckUtil from 'socialuni-user/src/util/UserCheckUtil'
 import {socialuniChatModule} from "../../store/SocialuniChatModule";
 import SocialuniMsgViewService from "../../logic/SocialuniMsgViewService";
+import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
 
 @Options(
     {
