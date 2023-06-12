@@ -246,7 +246,6 @@ import NodesRef = UniNamespace.NodesRef;
 import PayType from "socialuni-constant/constant/PayType";
 import AlertUtil from "socialuni-native-uni/src/util/AlertUtil";
 import ToastUtil from "socialuni-native-uni/src/util/ToastUtil";
-import UniUtil from "socialuni-app/src/util/UniUtil";
 import CommonUtil from "socialuni-util/src/util/CommonUtil";
 import DateUtil from "socialuni-util/src/util/DateUtil";
 import MessageViewParams from "./MessageViewParams";
@@ -473,7 +472,7 @@ export default class MessageView extends Vue {
         }
 
         //调用相册api，可选择拍照和引用相册
-        UniUtil.actionSheet(itemList).then((index: number) => {
+        SocialuniAppUtil.UniUtil.actionSheet(itemList).then((index: number) => {
             switch (itemList[index]) {
                 case '图片':
                     that.chooseImage();
@@ -499,7 +498,7 @@ export default class MessageView extends Vue {
         //获取cos认证信息
         const cosAuthRO: CosAuthRO = await CosService.getCosAuthRO()
         //获取cos认证信息
-        const imgFiles: DomFile[] = await UniUtil.chooseVideo();
+        const imgFiles: DomFile[] = await SocialuniAppUtil.UniUtil.chooseVideo();
 
         if (cosAuthRO) {
             imgFiles.forEach(item => {
@@ -524,7 +523,7 @@ export default class MessageView extends Vue {
     async chooseImage() {
         //获取cos认证信息
         const cosAuthRO: CosAuthRO = await CosService.getCosAuthRO()
-        const imgFiles: DomFile[] = await UniUtil.chooseImage(1)
+        const imgFiles: DomFile[] = await SocialuniAppUtil.UniUtil.chooseImage(1)
         //  this.showImgFiles.push(...imgFiles)
         if (cosAuthRO) {
             imgFiles.forEach(item => {
@@ -692,7 +691,7 @@ export default class MessageView extends Vue {
     }
 
     copyText() {
-        UniUtil.textCopy(this.message.content)
+        SocialuniAppUtil.UniUtil.textCopy(this.message.content)
         this.closeMessageMoreDialog()
         this.initChooseCommentData()
     }
