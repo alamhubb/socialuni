@@ -17,6 +17,7 @@ export default class SocialuniMsgViewService {
         console.log(123456)
         UserCheckUtil.checkUserBindPhoneNum()
         console.log(123)
+        console.log(this)
         const msgContent = this.msgContent
         console.log(this.msgContent)
         console.log(msgContent)

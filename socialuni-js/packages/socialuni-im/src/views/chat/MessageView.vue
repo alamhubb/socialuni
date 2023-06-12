@@ -181,7 +181,7 @@
                     <text class="cuIcon-emojifill text-grey"></text>
                 </view>-->
                 <button v-if="viewService.msgContent" class="cu-btn bg-green shadow color-white"
-                        @click.prevent="viewService.sendMsgClick">发送
+                        @click.prevent="viewService.sendMsgClick()">发送
                 </button>
                 <view v-else class="ml-sm">
                     <q-icon icon="plus-circle" size="28" @click="openPhoto"></q-icon>
@@ -290,7 +290,11 @@ export default class MessageView extends Vue {
         deleteReasonDialog: any;
     }
 
-    viewService= new SocialuniMsgViewService()
+    viewService = new SocialuniMsgViewService()
+
+    sendclick() {
+        this.viewService.sendMsgClick()
+    }
 
 
     screenHeight: number = socialuniSystemModule.screenHeight
@@ -463,7 +467,7 @@ export default class MessageView extends Vue {
         this.showEmoji = false */
     }
 
-    test111(){
+    test111() {
         console.log(123)
     }
 
