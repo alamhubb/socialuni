@@ -509,27 +509,31 @@ export default class TabsTalk extends Vue {
 
   // app端兼容问题，滚动页面评论input不会失去焦点，需要手动控制
   talksScrollEvent({detail}) {
+      console.log(detail.scrollTop)
+      console.log('触发了滚动')
     // 如果处于获取焦点状态，则失去焦点
     if (socialTalkModule.inputContentFocus) {
       socialTalkModule.inputContentBlur()
     }
-    this.talkTabScroll(detail.scrollTop)
+    // this.talkTabScroll(detail.scrollTop)
     //只有app端处理滚动隐藏显示tabbar逻辑，小程序平台一卡一卡的
     if (!socialuniSystemModule.isMp) {
       //记录当前位置
       this.curScrollTop = detail.scrollTop
-      this.throttleScroll()
+      // this.throttleScroll()
     }
   }
 
   //为了每次保存后重新加载可以记录上次的位置
-  talkTabScroll = CommonUtil.debounce((scrollTop) => {
+  /*talkTabScroll = CommonUtil.debounce((scrollTop) => {
+      console.log('触发了滚动')
     this.curTalkTabObj.scrollTop = scrollTop
-  }, 100)
+  }, 100)*/
 
-  throttleScroll = CommonUtil.throttle(() => {
+  /*throttleScroll = CommonUtil.throttle(() => {
     //如果向下滚动超过50隐藏
     if (this.curScrollTop > (this.lastScrollTop + 500)) {
+        console.log('触发了hide')
       uni.hideTabBar()
       //如果向上滚动超过20显示
     } else if (this.curScrollTop < (this.lastScrollTop - 500)) {
@@ -540,7 +544,7 @@ export default class TabsTalk extends Vue {
     }
     //修改上次位置为当前位置
     this.lastScrollTop = this.curScrollTop
-  }, 300)
+  }, 300)*/
 
   scrollHandler() {
 
