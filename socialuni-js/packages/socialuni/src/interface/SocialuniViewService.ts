@@ -1,0 +1,3 @@
+export interface SocialuniViewService{
+    init?()
+}

@@ -8,7 +8,8 @@ try {
         nativeUtil = res.default
     }
 } catch (e) {
-
+    const res: ImportModule<StorageUtil> = await import('socialuni-native-h5/src/util/StorageUtil')
+    nativeUtil = res.default
 }
 
 

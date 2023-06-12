@@ -166,13 +166,13 @@
                 </view>-->
                 <!--                @focus="inputFocusEvent"-->
                 <input class="solid-bottom"
-                       v-model.trim="msgContent"
+                       v-model.trim="viewService.msgContent"
                        maxlength="300"
                        :cursor-spacing="8"
                        :focus="inputFocus"
                        @blur="inputBlur"
                        @focus="inputFocusEvent"
-                       @confirm="sendMsgClick"
+                       @confirm="viewService.pushMessageAction"
                        :hold-keyboard="true"
                        :confirm-hold="true"
                        confirm-type="send"
@@ -180,7 +180,7 @@
                 <!--<view class="action" @click="showEmojiClick">
                     <text class="cuIcon-emojifill text-grey"></text>
                 </view>-->
-                <button v-if="msgContent" class="cu-btn bg-green shadow color-white" @touchend.prevent="sendMsgClick">发送
+                <button v-if="viewService.msgContent" class="cu-btn bg-green shadow color-white" @touchend.prevent="viewService.pushMessageAction">发送
                 </button>
                 <view v-else class="ml-sm">
                     <q-icon icon="plus-circle" size="28" @click="openPhoto"></q-icon>
@@ -276,6 +276,7 @@ import { socialAppModule } from 'socialuni-app/src/store/SocialAppModule'
 import SocialuniAppAPI from 'socialuni-app-api/src/api/SocialuniAppAPI'
 import UserCheckUtil from 'socialuni-user/src/util/UserCheckUtil'
 import { socialuniChatModule } from "../../store/SocialuniChatModule";
+import SocialuniMsgViewService from "../../logic/SocialuniMsgViewService";
 
 @Options(
   {
@@ -289,6 +290,8 @@ export default class MessageView extends Vue {
         deleteReasonDialog: any;
     }
 
+
+    viewService = new SocialuniMsgViewService()
 
     screenHeight: number = socialuniSystemModule.screenHeight
     windowHeight: number = socialuniSystemModule.windowHeight
@@ -315,6 +318,9 @@ export default class MessageView extends Vue {
     groupId: string = null
     title: string = '聊天'
     queryTime: Date = null
+
+
+
 
     created() {
         //TODO 同一会话时，这里要改成onRead，不然需要刷新页面才会触发已读的标志。
@@ -538,39 +544,6 @@ export default class MessageView extends Vue {
         } else {
             SocialuniAppAPI.sendErrorLogAPI(null, '用户发表动态失败，未获取上传图片所需要的认证信息')
             AlertUtil.error(AppMsg.uploadFailMsg)
-        }
-    }
-
-    async sendMsgClick() {
-        console.log(123)
-        UserCheckUtil.checkUserBindPhoneNum()
-        // 微信支持 hold-keyboard
-        // app和h5支持 @touchend.prevent
-        // 只有qq需要特殊处理
-        // #ifdef MP-QQ
-        this.inputFocus = false
-        // 严格测试150毫秒时间比较合适，不卡顿，且不出bug
-        CommonUtil.delayTime(150).then(() => {
-            this.inputFocus = true
-        })
-        // #endif
-        const msgContent = this.msgContent || (this.chat.needPayOpen ? HintMsg.payOpenDefaultMsg : '')
-        if (msgContent) {
-            // 点击发送后立即push
-            //启用状态可以直接发送
-            this.msgContent = ''
-            socialuniChatModule.pushMessageAction(msgContent)
-            /*if (this.chat.status === SocialuniCommonStatus.enable) {
-
-
-            } */
-            /*else {
-              this.openChatPromise(msgContent).finally(() => {
-                this.isOpeningChatDisableBtn = false
-              })
-            }*/
-        } else {
-            ToastUtil.toast('不能发送空白内容')
         }
     }
 

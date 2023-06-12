@@ -3,7 +3,6 @@ import {SocialuniPlugin} from "socialuni/src/interface/SocialuniPlugin";
 import {socialuniUserModule} from "./store/SocialuniUserModule";
 import {socialuniConfigModule} from "socialuni-app/src/store/SocialuniConfigModule";
 import {socialuniTokenModule} from "./store/SocialuniTokenModule";
-import UniUtil from "socialuni-app/src/util/UniUtil";
 import ResultRO from "socialuni-api-base/src/model/social/ResultRO";
 import ErrorConst from "socialuni-constant/constant/ErrorConst";
 import UserService from "./logic/UserService";
@@ -40,12 +39,12 @@ class SocialuniUserPlugin implements SocialuniPlugin {
     }
     onResponseErrorInterceptors(response: AxiosResponse) {
         console.log(response)
-        UniUtil.hideLoading()
+        SocialuniAppUtil.UniUtil.hideLoading()
         //第一步，先判断 有没有error
         //判断data类型，如果没类型，直接走
         //有内容则为本系统？也不一定，判断拿内容类型
         //然后本系统处理
-        UniUtil.hideLoading()
+        SocialuniAppUtil.UniUtil.hideLoading()
         const result:ResultRO = response.data
         if (result) {
             const errorMsg = result.errorMsg

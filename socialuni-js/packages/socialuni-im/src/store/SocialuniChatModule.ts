@@ -9,6 +9,9 @@ import CommonUtil from "socialuni-util/src/util/CommonUtil";
 import Arrays from "socialuni-util/src/util/Arrays";
 import ImPageUtil from "../util/ImPageUtil";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import UserCheckUtil from "socialuni-user/src/util/UserCheckUtil";
+import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
+import {MessageStatus} from "socialuni-constant/constant/openIm/OpenImMessageType";
 
 class SocialuniChatModule {
     chatId = ''
@@ -144,56 +147,35 @@ class SocialuniChatModule {
     }
 
 
-    async pushMessageAction(msgContent) {
-        // this.messages.push(msg)
-        // JsonUtils.log(this.messages)
-        // console.log(JSON.stringify(msg))
-        this.scrollToMessagePageBottom()
-        const index: number = this.messages.length - 1
-        // console.log(index)
-        this.chat.updateTime = new Date().getTime()
-        // this.chat.lastContent = msg.content
-        // 滚屏到最后面
-        // 不能监控变化滚动，有时候是往前面插入
-        /*const {data} = await (await socialuniChatModule.openIm())[msg.action](msg.contentData);
-        const params = {
-            recvID: this.chat.receiveUserId,
-            groupID: this.chat.groupId,
-            message: data,
-        };*/
-        // console.log('-------params-------', params);
-
-        console.log(msgContent)
-        return MessageAPI.sendMsgAPI(this.chat.id, msgContent)
-        //
-        /*let actionMethod: Function = null;
-        switch (msg.action) {
-            case 'createImageMessage':
-            case 'createSoundMessage':
-            case 'createVideoMessage':
-            case 'createFileMessage':
-                actionMethod = (await socialuniChatModule.openIm()).sendMessageNotOss;
-                break;
-            default:
-                actionMethod = (await socialuniChatModule.openIm()).sendMessage;
-                break;
+    /*async pushMessageAction(msgContent) {
+        if (!socialuniChatModule.chat) {
+            SocialuniAppUtil.ToastUtil.throwError('缺少会话')
         }
-        // 执行方法。
-        actionMethod(params).then((res) => {
-            // 后台返回后再替换
-            this.chat.updateTime = res.data.createTime
-            this.messages.splice(index, 1, new MessageVO(null, JsonUtil.toParse(res.data)))
-        }).catch((e) => {
-            console.log(e)
-            // 这里应该变为发送失败
-            this.messages.splice(index, 1)
-        }).finally(() => {
-            console.log(666)
-        })*/
+        UserCheckUtil.checkUserBindPhoneNum()
+
+        if (msgContent) {
+            const newMsg = new MessageVO(msgContent, socialuniUserModule.mineUser)
+            socialuniChatModule.messages.push(newMsg)
+            socialuniChatModule.scrollToMessagePageBottom()
+            const index: number = socialuniChatModule.messages.length - 1
+            // 点击发送后立即push
+            //启用状态可以直接发送
+            this.msgContent = ''
+            this.chat.updateTime = new Date().getTime()
+            try {
+                const res = await MessageAPI.sendMsgAPI(this.chat.id, msgContent)
+                this.chat.updateTime = res.data.createTime
+                socialuniChatModule.messages.splice(index, 1, res.data)
+            } catch (e) {
+                newMsg.readStatus = MessageStatus.Failed
+            }
+        } else {
+            SocialuniAppUtil.ToastUtil.throwError('不能发送空白内容')
+        }
         // socialuniChatModule.refreshMessages()
 
         // PlatformUtils.requestSubscribeChat()
-    }
+    }*/
 
 
     pushChatAndMessagesAction(newChat: SocialuniChatRO) {

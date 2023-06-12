@@ -10,7 +10,7 @@ import RouterUtil from "socialuni-native-uni/src/util/RouterUtil";
 import NativeUtil from 'socialuni-native-uni/src/util/NativeUtil'
 
 export default class SocialuniAppUtil {
-    static get NativeUtil(): NativeUtil {
+    static get UniUtil(): NativeUtil {
         return SocialuniAppNativeUtil.nativeUtil
     }
 

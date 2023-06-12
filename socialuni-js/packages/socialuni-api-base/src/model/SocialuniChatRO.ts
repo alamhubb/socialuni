@@ -16,7 +16,7 @@ export default class SocialuniChatRO {
     public messages: MessageVO[] = []
     public avatar: string = null
     public unreadNum: number = null
-    public updateTime: number = null
+    public updateTime: Date = null
     public lastMsg: MessageVO = null
     public topLevel: number = null
     public topFlag: boolean = null

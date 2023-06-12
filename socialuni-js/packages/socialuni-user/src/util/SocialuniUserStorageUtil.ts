@@ -1,5 +1,6 @@
 import SocialuniMineUserRO from "socialuni-api-base/src/model/user/SocialuniMineUserRO";
 import StorageUtil from "socialuni-native-uni/src/util/StorageUtil";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 export default class SocialuniUserStorageUtil {
     // 开发生产区分user，避免混淆，不区分的话会冲突
@@ -7,7 +8,7 @@ export default class SocialuniUserStorageUtil {
 
     static set(user: SocialuniMineUserRO) {
         if (user) {
-            StorageUtil.setObj(this.user_key, user)
+            SocialuniAppUtil.StorageUtil.setObj(this.user_key, user)
         } else {
             this.remove()
         }
@@ -15,10 +16,10 @@ export default class SocialuniUserStorageUtil {
 
     static get(): SocialuniMineUserRO {
         // 开发环境方便测试
-        return StorageUtil.getObj(this.user_key)
+        return SocialuniAppUtil.StorageUtil.getObj(this.user_key)
     }
 
     static remove() {
-        StorageUtil.remove(this.user_key)
+        SocialuniAppUtil.StorageUtil.remove(this.user_key)
     }
 }

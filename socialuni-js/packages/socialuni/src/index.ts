@@ -95,7 +95,24 @@ const Socialuni = {
           imageUrl: imageUrl
         }
       },
-      created() {
+      created(){
+        console.log(1778787)
+      },
+      mounted() {
+        console.log(12312312)
+        console.log(this)
+        console.log(this.$route)
+        console.log(this.$data)
+        const fasdf = this
+        for (let key in fasdf) {
+          console.log(`${key}:${fasdf[key]}`) // foo, bar
+        }
+        const data = this.$data
+        const obj = new Object()
+        for (let key in data) {
+          console.log(data[key]) // foo, bar
+        }
+        console.log(45646)
         /*onLoad((params) => {
           UniUtil.showShareMenu()
         })*/

@@ -6,7 +6,7 @@ import { socialuniConfigModule } from '../store/SocialuniConfigModule'
 
 export default class MsgUtil {
     static showUploadLoading() {
-        SocialuniAppUtil.NativeUtil.showLoading('上传中')
+        SocialuniAppUtil.UniUtil.showLoading('上传中')
     }
 
     static systemErrorMsg() {
