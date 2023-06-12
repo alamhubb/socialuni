@@ -132,10 +132,7 @@
             <socialuni-user-info-img class="mt-sm" :user="mineUser"></socialuni-user-info-img>
 
             <q-popup ref="moreActionList" bottom title="清池 app">
-                123
-                <div>123123</div>
                 <view class="flex-col h100p pb-50">
-                    456465
                     <!--                    <q-row-item>
                                           <navigator :url="messageSettingUrl" class="row-col-center flex-1">
                                             <view class="row-col-center flex-1">
