@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SocialuniSystemConst {
     private static String userDefaultAvatar;
+    private static String tagDefaultAvatar;
     //    private static Integer systemUserId;
     private static String staticResourceUrl;
     private static String socialuniDevSecretKey;
@@ -60,6 +61,11 @@ public class SocialuniSystemConst {
 
     public static String getUserDefaultAvatar() {
         return userDefaultAvatar;
+    }
+
+
+    public static String getTagDefaultAvatar() {
+        return SocialuniSystemConst.getStaticResourceUrl() + "qingchi/static/qclogo.jpg!avatar";
     }
 
     /**
