@@ -42,6 +42,12 @@
           }
         },
         {
+          "path": "follow",
+          "style": {
+            "navigationBarTitleText": "关注列表"
+          }
+        },
+        {
           "path": "coin",
           "style": {
             "navigationBarTitleText": "贝壳充值",
