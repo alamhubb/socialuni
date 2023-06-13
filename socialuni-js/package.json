@@ -2,9 +2,9 @@
   "name": "root",
   "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/*/*"
   ],
   "devDependencies": {
-    "lerna": "^5.5.2"
+    "lerna": "^5.6.2"
   }
 }

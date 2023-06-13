@@ -1,15 +1,15 @@
 {
-  "name": "socialuni-user-api",
+  "name": "socialuni-scss",
   "version": "0.1.2",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "devDependencies": {
-    "socialuni-api-base": "^0.1.2"
+  "dependencies": {
   },
-  "keywords": [],
+  "devDependencies": {
+    "sass": "^1.58.3"
+  },
   "author": "",
   "license": "ISC",
   "gitHead": "8b17f4a250aa54f47a17a2639efe2b511fd59358"
