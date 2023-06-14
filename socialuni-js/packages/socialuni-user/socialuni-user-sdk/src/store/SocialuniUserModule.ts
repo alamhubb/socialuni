@@ -8,7 +8,6 @@ import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAP
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
 import UserMsgUtil from "../util/UserMsgUtil";
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
-import SocialuniUserExpandAPI from "socialuni-user-api/src/api/SocialuniUserExpandAPI";
 import ToastUtil from "socialuni-native-uni/src/util/ToastUtil";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
@@ -103,7 +102,7 @@ class SocialuniUserModule {
 
 
     destroyAccount() {
-        return AlertUtil.confirm('是否注销账号，7天内不再登录，账号将彻底清空无法使用').then(() => {
+        return SocialuniAppUtil.AlertUtil.confirm('是否注销账号，7天内不再登录，账号将彻底清空无法使用').then(() => {
             /*SocialuniMineUserAPI.destroyAccountAPI().then(() => {
                 UserService.userLogout()
                 ToastUtil.toast('注销成功')
@@ -119,30 +118,6 @@ class SocialuniUserModule {
         return SocialuniMineUserAPI.getMineUserInfoAPI().then((res: any) => {
             socialuniUserModule.setUser(res.data)
         })
-    }
-
-    async getOpenContactInfo(user: CenterUserDetailRO) {
-        if (!this.mineUser) {
-            UserMsgUtil.unLoginMessage()
-        }
-        if (user.openContactInfo) {
-            ToastUtil.error("已成功获取，无需再次获取")
-        }
-        const userShell = this.mineUser.socialCoin
-        const getUserInfoNeedCoin = socialuniConfigModule.appMoreConfig.contactExpenseShell
-        if (userShell >= getUserInfoNeedCoin) {
-            await SocialuniAppUtil.AlertUtil.confirm('是否消耗100个贝壳查看用户：' + user.nickname + ' 的联系方式')
-            const res = await SocialuniUserExpandAPI.getUserContactInfoAPI(user.id)
-            user.contactInfo = res.data
-            user.openContactInfo = true
-            this.mineUser.socialCoin = userShell - getUserInfoNeedCoin
-        } else {
-            await SocialuniAppUtil.AlertUtil.confirm('您没有贝壳了，是否直接使用现金支付')
-            // await PlatformUtils.payCoin(getUserInfoNeedCoin / 100)
-            this.mineUser.socialCoin = userShell + getUserInfoNeedCoin
-            //递归调用自己
-            await this.getOpenContactInfo(user)
-        }
     }
 }
 

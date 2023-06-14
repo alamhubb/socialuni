@@ -107,39 +107,34 @@
 import {Vue, Options, Prop, Emit} from 'vue-property-decorator'
 import SocialuniFollowType from "socialuni-constant/constant/user/SocialuniFollowType";
 import SocialUserContentRO from "socialuni-api-base/src/model/social/SocialUserContentRO";
-import FollowAPI from "socialuni/src/api/socialuni/FollowAPI";
-import SocialGenderTag from "socialuni-ui-uni/src/components/SocialGenderTag/SocialGenderTag.vue";
-import SocialuniFollowTag from "socialuni-ui-uni/src/components/SocialuniFollow/SocialuniFollowTag.vue";
-import PageUtil from "socialuni-util/src/util/PageUtil";
-import PagePath from "socialuni-constant/constant/PagePath";
 import {onLoad, onPullDownRefresh, onReachBottom, onShow} from "@dcloudio/uni-app";
-import {socialuniSystemModule, socialTalkModule, socialuniUserModule} from "socialuni-sdk/src/store/store";
 import QTabs from "socialuni-ui-uni/src/components/QTabs/QTabs.vue";
+import QButton from "socialuni-ui-uni/src/components/QButton/QButton.vue";
+import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
+import QPullRefresh from "socialuni-ui-uni/src/components/QPullRefresh/QPullRefresh.vue";
+import SocialuniFollowTag from "socialuni-community-view-uni/src/components/SocialuniFollow/SocialuniFollowTag.vue";
+import SocialGenderTag from "socialuni-user-view-uni/src/components/SocialGenderTag/SocialGenderTag.vue";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
-import SocialuniPageQueryQO from "socialuni-api-base/src/model/common/SocialuniPageQueryQO";
 import SocialuniPageQueryUtil from "socialuni-api-base/src/model/common/SocialuniPageQueryUtil";
-import SocialuniUserRO from "socialuni-api-base/src/model/user/SocialuniUserRO";
 import CommonUtil from "socialuni-util/src/util/CommonUtil";
-import SocialUserFollowDetailRO from "socialuni-api-base/src/model/social/SocialUserFollowDetailRO";
 import SocialuniUserExtendFriendsType from "socialuni-constant/constant/user/SocialuniUserExtendFriendsType";
-import SocialuniUserAPI from "socialuni/src/api/socialuni/SocialuniUserAPI";
 import SocialuniUserExtendFriendQueryQO from "socialuni-api-base/src/model/user/SocialuniUserExtendFriendQueryQO";
-import SocialuniUserExpandAPI from "socialuni/src/api/socialuni/SocialuniUserExpandAPI";
-import request from "socialuni/src/request/request";
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
-import QIcon from "../../components/QIcon/QIcon.vue";
-import QButton from "../../components/QButton/QButton.vue";
-import UniUtil from "socialuni-app-sdk/src/util/UniUtil";
 import NumUtil from "socialuni-util/src/util/NumUtil";
 import DateUtil from "socialuni-util/src/util/DateUtil";
 import SocialuniUserExtendDetailRO from "socialuni-api-base/src/model/social/SocialuniUserExtendDetailRO";
-import ImgUtil from "socialuni-app-sdk/src/util/ImgUtil";
-import QPullRefresh from "../../components/QPullRefresh/QPullRefresh.vue";
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import SocialuniDatingAPI from "../api/SocialuniDatingAPI";
+import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import SocialuniImgUtil from "socialuni-user-sdk/src/util/SocialuniImgUtil";
+import SocialuniDatingService from "../service/SocialuniDatingService";
 
 @Options({
   components: {QPullRefresh, QButton, QIcon, SocialuniFollowTag, SocialGenderTag, QTabs}
 })
-export default class SocialuniExtendView extends Vue {
+export default class SocialuniDatingView extends Vue {
   $refs: {
     pullRefresh: QPullRefresh
   }
@@ -165,7 +160,7 @@ export default class SocialuniExtendView extends Vue {
   }
 
   created() {
-    this.tabsPageQueryUtil = [new SocialuniPageQueryUtil(SocialuniUserExpandAPI.queryExtendFriendUsersAPI), new SocialuniPageQueryUtil(SocialuniUserExpandAPI.queryExtendFriendUsersAPI)]
+    this.tabsPageQueryUtil = [new SocialuniPageQueryUtil(SocialuniDatingAPI.queryExtendFriendUsersAPI), new SocialuniPageQueryUtil(SocialuniDatingAPI.queryExtendFriendUsersAPI)]
 
     onLoad((params: { followType: string }) => {
       if (params) {
@@ -199,12 +194,12 @@ export default class SocialuniExtendView extends Vue {
     this.endPulldownRefresh()
   }
 
-  openVip() {
+  /*openVip() {
     PageUtil.toVipPage()
-  }
+  }*/
 
   toUserDetailVue(user: SocialUserContentRO) {
-    PageUtil.toUserDetail(user.id)
+    UserPageUtil.toUserDetail(user.id)
   }
 
   // tabs通知swiper切换
@@ -271,14 +266,14 @@ export default class SocialuniExtendView extends Vue {
     //打开获取对方联系方式功能，支付贝壳
     user.getUserContactBtnDisabled = true
     try {
-      await socialuniUserModule.getOpenContactInfo(user)
+      await SocialuniDatingService.getOpenContactInfo(user)
     } finally {
       user.getUserContactBtnDisabled = false
     }
   }
 
   copyContactInfo(user: CenterUserDetailRO) {
-    UniUtil.textCopy(user.contactInfo)
+    SocialuniAppUtil.UniUtil.textCopy(user.contactInfo)
   }
 
   get mineUser() {
@@ -295,7 +290,7 @@ export default class SocialuniExtendView extends Vue {
 
   imgUrls(user: CenterUserDetailRO) {
     if (user && user.imgs) {
-      return user.imgs.map(item => ImgUtil.getUserLargeImgUrl(item.src))
+      return user.imgs.map(item => SocialuniImgUtil.getUserLargeImgUrl(item.src))
     } else {
       return []
     }
