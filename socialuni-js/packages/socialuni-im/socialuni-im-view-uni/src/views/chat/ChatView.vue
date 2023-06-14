@@ -239,7 +239,7 @@ export default class ChatView extends Vue {
     }
 
     async frontDeleteChat() {
-        AlertUtil.confirm('是否确定从列表中删除会话，可从私信处再次找回').then(async () => {
+        SocialuniAppUtil.AlertUtil.confirm('是否确定从列表中删除会话，可从私信处再次找回').then(async () => {
             (await socialuniChatModule.openIm()).deleteConversationFromLocalAndSvr(this.chatId).then(({data}) => {
                 socialuniChatModule.deleteChatAction(this.chatId)
             }).catch(err => {

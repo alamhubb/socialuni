@@ -90,7 +90,7 @@ const Socialuni = {
                     }
                 }
                 /*onLoad((params) => {
-                  UniUtil.showShareMenu()
+                  SocialuniAppUtil.UniUtil.showShareMenu()
                 })*/
             }
         })

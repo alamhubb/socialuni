@@ -318,7 +318,7 @@ export default class ViolationHistoryPage extends Vue {
 
   openPinyinOrText(id: number, type: string) {
     /* KeywordsManageAPI.openPinyinOrTextAPI(id, type).then(res => {
-      ToastUtil.success('成功了')
+      SocialuniAppUtil.ToastUtil.success('成功了')
       this.queryKeywords()
     })*/
   }

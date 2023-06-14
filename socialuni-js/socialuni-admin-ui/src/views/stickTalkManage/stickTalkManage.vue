@@ -68,7 +68,7 @@ export default class StickTalkManageView extends Vue {
   saveData() {
     //this.configs保存到后台
     request.post('socialuni/admin/stickTalk/updateStickTalks', this.tableData).then(res => {
-      ToastUtil.success('更新成功')
+      SocialuniAppUtil.ToastUtil.success('更新成功')
       this.queryData()
     })
   }

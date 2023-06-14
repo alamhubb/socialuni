@@ -50,7 +50,7 @@ class SocialOAuthModule {
                     socialOAuthModule.threeAuthType = extraData.authType
                     socialOAuthModule.queryDevAccountAction()
                     if (!extraData.authType) {
-                        AlertUtil.hint('授权类型错误')
+                        SocialuniAppUtil.AlertUtil.hint('授权类型错误')
                     }
                     //支持非授权跳转
                     /!*if (!appModule.threeSecretKey) {
@@ -58,7 +58,7 @@ class SocialOAuthModule {
                       result.errorCode = ErrorCode.business
                       result.errorMsg = '社交联盟密钥错误'
                       result.success = false
-                      UniUtil.showLoading('密钥错误，返回中...')
+                      SocialuniAppUtil.UniUtil.showLoading('密钥错误，返回中...')
                       uni.navigateBackMiniProgram({ extraData: result })
                     }*!/
                 }

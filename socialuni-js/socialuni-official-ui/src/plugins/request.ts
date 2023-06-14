@@ -63,7 +63,7 @@ request.interceptors.response.use(
                         // userModule.clearUserInfo()
                         UserStore.clearUser()
                         if (result && result.errorMsg) {
-                            ToastUtil.error(result.errorMsg)
+                            SocialuniAppUtil.ToastUtil.error(result.errorMsg)
                         } else {
                             MsgUtil.unLoginMessage()
                         }
@@ -73,7 +73,7 @@ request.interceptors.response.use(
                         break
                     default:
                         if (result && result.errorMsg) {
-                            ToastUtil.error(result.errorMsg)
+                            SocialuniAppUtil.ToastUtil.error(result.errorMsg)
                         } else {
                             MsgUtil.systemErrorMsg()
                         }

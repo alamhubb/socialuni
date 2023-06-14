@@ -265,7 +265,7 @@ export default class MineView extends Vue {
 
     created() {
         onLoad((params) => {
-            UniUtil.showShareMenu()
+            SocialuniAppUtil.UniUtil.showShareMenu()
         })
         onShow(() => {
             this.showMsgInput = true
@@ -328,7 +328,7 @@ export default class MineView extends Vue {
     initQuery() {
         if (this.mineUser) {
             socialuniUserModule.getMineUserAction().then(() => {
-                ToastUtil.toast('刷新成功')
+                SocialuniAppUtil.ToastUtil.toast('刷新成功')
             }).finally(() => {
                 this.stopPullDownRefresh()
             })
@@ -348,7 +348,7 @@ export default class MineView extends Vue {
 
     moreAction() {
         const menuList: string [] = ['查看头像', '上传头像']
-        UniUtil.actionSheet(menuList).then((index: number) => {
+        SocialuniAppUtil.UniUtil.actionSheet(menuList).then((index: number) => {
             if (index === 0) {
                 this.seeAvatarDetail()
             } else if (index === 1) {

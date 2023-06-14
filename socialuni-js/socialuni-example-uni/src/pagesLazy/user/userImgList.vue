@@ -29,7 +29,7 @@ import ImgUtil from "socialuni-sdk/src/utils/ImgUtil";
 import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
 import HintMsg from "socialuni-constant/constant/HintMsg";
 import SocialuniMineUserAPI from "socialuni-api/src/api/socialuni/SocialuniMineUserAPI";
-import UniUtil from "socialuni-sdk/src/utils/UniUtil";
+import SocialuniAppUtil from "socialuni-sdk/src/utils/UniUtil";
 import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
@@ -67,7 +67,7 @@ export default class UserImgList extends Vue {
   onLoad(params) {
     const userId = params.userId
     if (!userId) {
-      ToastUtil.error('系统错误' + HintMsg.contactServiceMsg)
+      SocialuniAppUtil.ToastUtil.error('系统错误' + HintMsg.contactServiceMsg)
     }
     // 这里有问题，有时候直接进入页面没有userId
     SocialuniUserAPI.queryUserDetailAPI(userId).then((res: any) => {
@@ -87,13 +87,13 @@ export default class UserImgList extends Vue {
 
   imgLongPress(imgIndex: number) {
     if (this.isMine) {
-      UniUtil.actionSheet(['删除']).then((index: number) => {
+      SocialuniAppUtil.UniUtil.actionSheet(['删除']).then((index: number) => {
         if (index === 0) {
           this.deleteImg(imgIndex)
         }
       })
     } else {
-      UniUtil.actionSheet(['举报']).then((index: number) => {
+      SocialuniAppUtil.UniUtil.actionSheet(['举报']).then((index: number) => {
         if (index === 0) {
           this.openReportDialog(imgIndex)
         }
@@ -102,7 +102,7 @@ export default class UserImgList extends Vue {
   }
 
   deleteImg(imgIndex) {
-    AlertUtil.warning('请确认是否删除照片？').then(() => {
+    SocialuniAppUtil.AlertUtil.warning('请确认是否删除照片？').then(() => {
       const imgs: ImgFileVO[] = this.frontDeleteImg(imgIndex)
       SocialuniMineUserAPI.deleteUserImgNewAPI(imgs[0]).then((res: any) => {
         socialuniUserModule.setUser(res.data)

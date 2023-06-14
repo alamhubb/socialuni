@@ -1,8 +1,8 @@
-import UniUtil from './UniUtil'
 import AppConfig from "socialuni-constant/constant/AppConfig";
 import UserPayResultVO from "socialuni-api-base/src/model/user/UserPayResultVO";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import PlatformType from "socialuni-constant/constant/PlatformType";
+import SocialuniAppUtil from "socialuni-native-h5/src/util/UniappUtil";
 
 export default class WxUtils {
     static subscribeAppMsg(tmplIds: string[]) {
@@ -22,7 +22,7 @@ export default class WxUtils {
     }
 
     static createRewardedVideoAd() {
-        return UniUtil.createRewardedVideoAd(AppConfig.wx_award_ad_id)
+        return SocialuniAppUtil.UniUtil.createRewardedVideoAd(AppConfig.wx_award_ad_id)
     }
 
     static createInterstitialAd() {

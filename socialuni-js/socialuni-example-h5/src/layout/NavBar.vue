@@ -156,13 +156,13 @@ export default class NavBar extends Vue {
         } catch (e) {
             console.error(e)
         } finally {
-            UniUtil.hideLoading()
+            SocialuniAppUtil.UniUtil.hideLoading()
         }
     }
 
 
     loginOut() {
-        ToastUtil.success('退出登录成功')
+        SocialuniAppUtil.ToastUtil.success('退出登录成功')
         socialuniUserModule.removeUserAndToken()
         WebsocketUtil.websocketConnect(false)
     }

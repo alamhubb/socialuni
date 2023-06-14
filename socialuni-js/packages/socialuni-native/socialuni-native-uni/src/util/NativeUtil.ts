@@ -28,7 +28,7 @@ export default class NativeUtil {
                 success() {
                     if (hint) {
                         uni.hideToast()
-                        ToastUtil.toast(hint)
+                        SocialuniAppUtil.ToastUtil.toast(hint)
                     }
                     resolve(null)
                 },
@@ -267,7 +267,7 @@ export default class NativeUtil {
             // 获取压缩比
             const imgSize: number = imgFile.size
             if (imgSize / 1024 / 1024 > 50) {
-                ToastUtil.error(AppMsg.imgSizeNotGt50MBMsg)
+                SocialuniAppUtil.ToastUtil.error(AppMsg.imgSizeNotGt50MBMsg)
             }
             let ratio: number = 100
             //如果大于100k 按照100k标准压缩

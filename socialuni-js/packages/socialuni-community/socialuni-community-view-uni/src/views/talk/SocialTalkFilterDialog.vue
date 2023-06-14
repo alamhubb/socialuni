@@ -232,7 +232,7 @@ export default class SocialTalkFilterDialog extends Vue {
   }
 
   async clearCheckedTags() {
-    await AlertUtil.confirm('是否确认清空已选择的话题？')
+    await SocialuniAppUtil.AlertUtil.confirm('是否确认清空已选择的话题？')
     this.checkedTags = []
   }
 

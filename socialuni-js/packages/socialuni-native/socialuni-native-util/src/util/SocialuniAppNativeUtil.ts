@@ -1,5 +1,5 @@
 import {ImportModule} from "socialuni/src/interface/ImportModule";
-import NativeUtil from 'packages/socialuni-native/socialuni-native-uni/src/util/NativeUtil'
+import NativeUtil from "socialuni-native-uni/src/util/NativeUtil";
 
 let nativeUtil: NativeUtil
 try {

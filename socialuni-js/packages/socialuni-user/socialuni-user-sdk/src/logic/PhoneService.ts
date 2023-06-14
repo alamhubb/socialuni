@@ -27,7 +27,7 @@ export default class PhoneService {
             const res = await PhoneAPI.bindWxPhoneNumAPI(wxGetPhoneInfoResult.detail)
             socialuniUserModule.setUser(res.data)
         } else {
-            ToastUtil.error('您选择了不绑定')
+            SocialuniAppUtil.ToastUtil.error('您选择了不绑定')
         }
     }
 }

@@ -166,7 +166,7 @@
 <script lang="ts">
 import { Options, Prop, Vue, Watch } from 'vue-property-decorator'
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO"
-import UniUtil from "socialuni-app-sdk/src/util/UniUtil"
+import SocialuniAppUtil from "socialuni-app-sdk/src/util/UniUtil"
 import { onMounted } from "vue"
 import AlertUtil from "socialuni-native-uni/src/util/AlertUtil"
 import ToastUtil from "socialuni-native-uni/src/util/ToastUtil"
@@ -234,7 +234,7 @@ export default class UserDetailView extends Vue {
   }
 
   created() {
-    UniUtil.showShareMenu()
+    SocialuniAppUtil.UniUtil.showShareMenu()
 
     /*onShow(() => {
         this.showMsgInput = true
@@ -265,10 +265,10 @@ export default class UserDetailView extends Vue {
    * 从好友列表中删除用户。
    */
   async deleteFriend() {
-    AlertUtil.confirm('是否确认解除好友关系').then(async () => {
+    SocialuniAppUtil.AlertUtil.confirm('是否确认解除好友关系').then(async () => {
       (await socialChatModule.openIm()).deleteFriend(this.user.id).then(({ data }) => {
         console.log('deleteFriend', data)
-        ToastUtil.toast('成功解除好友关系')
+        SocialuniAppUtil.ToastUtil.toast('成功解除好友关系')
         socialChatModule.checkFriend(this.user)
       }).catch(err => {
       })
@@ -279,7 +279,7 @@ export default class UserDetailView extends Vue {
    * 将用户添加到黑名单。
    */
   async addBlack() {
-    AlertUtil.confirm('是否确认添加到黑名单').then(async () => {
+    SocialuniAppUtil.AlertUtil.confirm('是否确认添加到黑名单').then(async () => {
       (await socialChatModule.openIm()).addBlack(this.user.id).then(({ data }) => {
         socialChatModule.checkFriend(this.user)
       }).catch(err => {
@@ -292,7 +292,7 @@ export default class UserDetailView extends Vue {
    * 将用户从黑名单移除。
    */
   async removeBlack() {
-    AlertUtil.confirm('是否确认从黑名单移除').then(async () => {
+    SocialuniAppUtil.AlertUtil.confirm('是否确认从黑名单移除').then(async () => {
       (await socialChatModule.openIm()).removeBlack(this.user.id).then(({ data }) => {
         socialChatModule.checkFriend(this.user)
       }).catch(err => {
@@ -352,7 +352,7 @@ export default class UserDetailView extends Vue {
 
     //应该能进入页面的，
     // if (this.imUserDetail.blackUser){
-    //   ToastUtil.toast("您已被对方拉黑，无法发送消息")
+    //   SocialuniAppUtil.ToastUtil.toast("您已被对方拉黑，无法发送消息")
     // }
     //未关注，但是也可以都是可以进入聊天页面的
 
@@ -385,7 +385,7 @@ export default class UserDetailView extends Vue {
     console.log('123123')
     await SocialuniFriendAPI.addFriend(new FriendAddQO(this.user.id, this.applyUserFriendContent, SocialuniAddFriendType.apply))
     // await (await socialChatModule.openIm()).addFriend(options)
-    ToastUtil.toastLong('添加好友申请发送成功，请耐心等待对方回复')
+    SocialuniAppUtil.ToastUtil.toastLong('添加好友申请发送成功，请耐心等待对方回复')
   }
 
   get isMine(): boolean {
@@ -401,7 +401,7 @@ export default class UserDetailView extends Vue {
   }
 
   copyText(textCopy: string) {
-    UniUtil.textCopy(textCopy)
+    SocialuniAppUtil.UniUtil.textCopy(textCopy)
   }
 
   deleteTalk(talkId: string) {
@@ -435,7 +435,7 @@ export default class UserDetailView extends Vue {
   }
 
   copyContactInfo() {
-    UniUtil.textCopy(this.user.contactInfo)
+    SocialuniAppUtil.UniUtil.textCopy(this.user.contactInfo)
   }
 
   get mineUser() {

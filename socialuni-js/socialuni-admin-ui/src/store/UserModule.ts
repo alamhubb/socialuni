@@ -29,7 +29,7 @@ export default class UserModule extends VuexModule {
       TokenUtil.set(res.token)
       this.setUser(res.user)
       // this.addPermission()
-      ToastUtil.success('登录成功')
+      SocialuniAppUtil.ToastUtil.success('登录成功')
     })
   }
 
@@ -39,7 +39,7 @@ export default class UserModule extends VuexModule {
       TokenUtil.set(res.token)
       this.setUser(res.user)
       // this.addPermission()
-      ToastUtil.success('登录成功')
+      SocialuniAppUtil.ToastUtil.success('登录成功')
     })
   }
 

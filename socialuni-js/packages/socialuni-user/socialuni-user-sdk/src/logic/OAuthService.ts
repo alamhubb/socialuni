@@ -25,7 +25,7 @@ export default class OAuthService {
           } else {
             await OAuthService.oAuthUserPhoneNumLogin(authData)
           }
-          ToastUtil.toastLong('授权成功')
+          SocialuniAppUtil.ToastUtil.toastLong('授权成功')
           PageUtil.toMinePage()
         }
       }

@@ -461,7 +461,7 @@ class SocialChatModule {
         // this.setChatId(chatId)
         // this.readChatAction(this.chat)
         if (!receiveId) {
-            AlertUtil.error('缺少会话信息')
+            SocialuniAppUtil.AlertUtil.error('缺少会话信息')
         }
         /*const chat = new SocialuniChatRO()
         chat.receiveId = receiveId
@@ -783,7 +783,7 @@ class SocialChatModule {
     async joinCircleGroupChat(circle: SocialuniTalkTabCircleRO) {
         //如果已经创建群聊
         if (circle.groupChatId) {
-            UniUtil.showLoading('加载中')
+            SocialuniAppUtil.UniUtil.showLoading('加载中')
             const optionsSearch: SearchGroupParams = {
                 keywordList: [circle.groupChatId],
                 isSearchGroupID: true,
@@ -801,11 +801,11 @@ class SocialChatModule {
                     await (await this.openIm()).joinGroup(options)
                 }
             } finally {
-                UniUtil.hideLoading()
+                SocialuniAppUtil.UniUtil.hideLoading()
             }
             socialChatModule.setChatIdToMessagePage(circle.groupChatId)
         } else {
-            UniUtil.showLoading('加载中')
+            SocialuniAppUtil.UniUtil.showLoading('加载中')
             console.log(circle)
             //未创建则创建，并且更新话题的群聊id
             const groupBaseInfo: GroupInitInfo = {
@@ -843,7 +843,7 @@ class SocialChatModule {
                 ;(await this.openIm()).setGroupVerification(optionsVerification)
                 socialChatModule.setChatIdToMessagePage(cRes.data)
             } finally {
-                UniUtil.hideLoading()
+                SocialuniAppUtil.UniUtil.hideLoading()
             }
         }
     }

@@ -10,7 +10,7 @@ export default class UserCheckUtil {
     static checkUserLogin() {
         const user = socialuniUserModule.mineUser
         if (!user) {
-            AlertUtil.confirm(socialuniConfigModule.appMoreConfig.errorMsg601UnLogin).then(() => {
+            SocialuniAppUtil.AlertUtil.confirm(socialuniConfigModule.appMoreConfig.errorMsg601UnLogin).then(() => {
                 SocialuniEventUtil.emit(SocialuniUserEventConst.toLogin)
             })
             throw Error('未登录')
@@ -22,7 +22,7 @@ export default class UserCheckUtil {
         const user = this.checkUserLogin()
         if (!user || !user.phoneNum) {
             // 如果登录了仅仅没绑定手机号，则提示跳转，区分qq和微信不同
-            AlertUtil.confirm('绑定手机号才能发布内容，是否前往绑定手机号页面')
+            SocialuniAppUtil.AlertUtil.confirm('绑定手机号才能发布内容，是否前往绑定手机号页面')
                 .then(() => {
                     UserPageUtil.toPhonePage()
                 })
@@ -36,7 +36,7 @@ export default class UserCheckUtil {
         const user = this.checkUserBindPhoneNum()
         if (!user.schoolName && socialuniConfigModule.appConfig.mustSetSchoolCanPost) {
             // 如果登录了仅仅没绑定手机号，则提示跳转，区分qq和微信不同
-            AlertUtil.confirm('设置学校名称才能发表内容，是否前往设置学校名称页面')
+            SocialuniAppUtil.AlertUtil.confirm('设置学校名称才能发表内容，是否前往设置学校名称页面')
                 .then(() => {
                     UserPageUtil.toMinePage()
                 })

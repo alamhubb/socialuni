@@ -10,7 +10,7 @@ import ToastUtil from "socialuni-native-uni/src/util/ToastUtil";
 export default class SocialuniCircleAPI {
   static createCircleAPI(createQO: CircleCreateQO) {
     return socialuniCommunityRequest.post<SocialCircleRO>('socialuni/circle/createCircle', createQO).then(res => {
-      ToastUtil.toast('创建成功')
+      SocialuniAppUtil.ToastUtil.toast('创建成功')
       return res
     })
   }

@@ -146,7 +146,7 @@ export default class DevInfoPage extends Vue {
   }
 
   getSecretKey() {
-    AlertUtil.confirm('是否确认重置开发者秘钥？').then(() => {
+    SocialuniAppUtil.AlertUtil.confirm('是否确认重置开发者秘钥？').then(() => {
       AdminUserAPI.resetSecretKeyAPI().then(res => {
         this.user.secretKey = res.data
       })
@@ -156,12 +156,12 @@ export default class DevInfoPage extends Vue {
   }
 
   copySecretKey() {
-    ToastUtil.success('复制成功')
+    SocialuniAppUtil.ToastUtil.success('复制成功')
   }
 
   async updateUser() {
     await this.$refs.devForm.validate()
-    AlertUtil.confirm('是否确定要修改开发者信息').then(() => {
+    SocialuniAppUtil.AlertUtil.confirm('是否确定要修改开发者信息').then(() => {
       AdminUserAPI.updateDevAccountAPI(this.user).then(res => {
         userModule.user = res.data
       })

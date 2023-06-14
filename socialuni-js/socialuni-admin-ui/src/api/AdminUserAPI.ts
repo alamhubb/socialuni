@@ -13,14 +13,14 @@ export default class AdminUserAPI {
 
     static updateDevAccountAPI(user: DevAccountRO) {
         return request.post<DevAccountRO>('user/updateDevAccount', user).then(res => {
-            ToastUtil.success('修改成功')
+            SocialuniAppUtil.ToastUtil.success('修改成功')
             return res
         })
     }
 
     static removeUserBanByPhoneNumAPI(phoneNum: string) {
         return request.post('user/removeUserBanByPhoneNum?phoneNum=' + phoneNum).then(res => {
-            ToastUtil.success('解封成功')
+            SocialuniAppUtil.ToastUtil.success('解封成功')
             return res
         })
     }

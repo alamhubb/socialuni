@@ -51,9 +51,9 @@ const user = computed(() => {
   return UserStore.user
 })
 async function logout() {
-  await AlertUtil.confirm('是否确认退出')
+  await SocialuniAppUtil.AlertUtil.confirm('是否确认退出')
   UserStore.clearUser()
   TokenUtil.remove()
-  ToastUtil.success('退出成功')
+  SocialuniAppUtil.ToastUtil.success('退出成功')
 }
 </script>

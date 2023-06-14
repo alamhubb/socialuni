@@ -112,7 +112,7 @@ import QButton from "socialuni-view/src/components/QButton/QButton.vue";
 import DateUtil from "socialuni-sdk/src/utils/DateUtil";
 import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
 import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
-import UniUtil from "socialuni-app-sdk/src/util/UniUtil";
+import SocialuniAppUtil from "socialuni-app-sdk/src/util/UniUtil";
 
 @Options({
   components: {QButton}
@@ -194,30 +194,30 @@ export default class UserEditView extends Vue {
   async saveUser() {
     if (this.contactAccount) {
       if (this.contactAccount.length > 30) {
-        AlertUtil.hint('联系方式不能超过30个字符，例如：vx:491369310')
+        SocialuniAppUtil.AlertUtil.hint('联系方式不能超过30个字符，例如：vx:491369310')
         return
       } else if (this.contactAccount.length < 5) {
-        AlertUtil.hint('联系方式必须大于4个字符，例如：vx:491369310')
+        SocialuniAppUtil.AlertUtil.hint('联系方式必须大于4个字符，例如：vx:491369310')
         return
       }
     }
 
     //修改了性别
     if (this.user.gender !== this.gender) {
-      const confirm = await AlertUtil.confirm('性别修改后不可再更改，请确认是否修改')
+      const confirm = await SocialuniAppUtil.AlertUtil.confirm('性别修改后不可再更改，请确认是否修改')
       if (!confirm) {
-        return ToastUtil.toastLong('您选择了不修改性别')
+        return SocialuniAppUtil.ToastUtil.toastLong('您选择了不修改性别')
       }
     }
 
     if (this.birthday && this.birthday.length > 4) {
       const age = BirthAgeUtil.getAgeByBirth(this.birthday)
       if (age < 18) {
-        return AlertUtil.hint('年龄不能小于18岁')
+        return SocialuniAppUtil.AlertUtil.hint('年龄不能小于18岁')
       }
     }
     this.btnDisabled = true
-    AlertUtil.confirm('是否确定修改个人信息').then(() => {
+    SocialuniAppUtil.AlertUtil.confirm('是否确定修改个人信息').then(() => {
       const userCopy: UserEditVO = ObjectUtil.deepClone(this.user) as any
       userCopy.nickname = this.nickname
       userCopy.gender = this.gender
@@ -227,14 +227,14 @@ export default class UserEditView extends Vue {
       userCopy.wxAccount = this.wxAccount
       userCopy.qqAccount = this.qqAccount
       userCopy.wbAccount = this.wbAccount
-      UniUtil.showLoading('保存中')
+      SocialuniAppUtil.UniUtil.showLoading('保存中')
       SocialuniMineUserAPI.editUserAPI(userCopy).then((res: any) => {
         socialuniUserModule.setUser(res.data)
-        ToastUtil.toast('已修改')
+        SocialuniAppUtil.ToastUtil.toast('已修改')
         this.closeUserEditPop()
       }).finally(() => {
         this.btnDisabled = false
-        UniUtil.hideLoading()
+        SocialuniAppUtil.UniUtil.hideLoading()
       })
     }).catch(() => {
       this.closeUserEditPop()

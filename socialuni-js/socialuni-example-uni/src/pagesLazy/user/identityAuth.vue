@@ -119,7 +119,7 @@ import TencentCosIdInfoRO from "socialuni-api/src/model/RO/tencent/cos/idImgInfo
 import QButton from "socialuni-view/src/components/QButton/QButton.vue";
 import QIcon from "socialuni-view/src/components/QIcon/QIcon.vue";
 import CosUtil from "socialuni-sdk/src/utils/CosUtil";
-import UniUtil from "socialuni-sdk/src/utils/UniUtil";
+import SocialuniAppUtil from "socialuni-sdk/src/utils/UniUtil";
 import MsgUtil from "socialuni-sdk/src/utils/MsgUtil";
 import TencentCosAPI from "socialuni-api/src/api/TencentCosAPI";
 import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
@@ -155,7 +155,7 @@ export default class IdentityAuthView extends Vue {
    */
   async chooseIdImage() {
     const cosAuthRO = await CosUtil.getCosAuthRO()
-    const imgFiles: DomFile[] = await UniUtil.chooseImage()
+    const imgFiles: DomFile[] = await SocialuniAppUtil.UniUtil.chooseImage()
     const imgFile = imgFiles[0]
     try {
       MsgUtil.showUploadLoading()
@@ -173,7 +173,7 @@ export default class IdentityAuthView extends Vue {
       this.clearIdInfoPreCheckResult()
     } finally {
       this.clearPreCheckResult()
-      UniUtil.hideLoading()
+      SocialuniAppUtil.UniUtil.hideLoading()
     }
   }
 
@@ -194,7 +194,7 @@ export default class IdentityAuthView extends Vue {
 
   async chooseImg() {
     const cosAuthRO = await CosUtil.getCosAuthRO()
-    const imgFiles: DomFile[] = await UniUtil.takePicture()
+    const imgFiles: DomFile[] = await SocialuniAppUtil.UniUtil.takePicture()
     const imgFile = imgFiles[0]
     try {
       MsgUtil.showUploadLoading()
@@ -203,23 +203,23 @@ export default class IdentityAuthView extends Vue {
       TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO)
     } finally {
       this.clearPreCheckResult()
-      UniUtil.hideLoading()
+      SocialuniAppUtil.UniUtil.hideLoading()
     }
   }
 
   async identityAuth() {
     this.idAuthCheck()
     if (!this.preCheckResult) {
-      ToastUtil.error('请先点击预校验再进行认证')
+      SocialuniAppUtil.ToastUtil.error('请先点击预校验再进行认证')
     }
     this.authBtnDisabled = true
-    UniUtil.showLoading('认证中')
+    SocialuniAppUtil.UniUtil.showLoading('认证中')
     try {
       const {data} = await SocialUserIdentityAPI.userIdentityAuthAPI(new SocialUserIdentityAuthQO(this.userIdImgFile.src, this.imgFile.src))
-      AlertUtil.hint(data)
+      SocialuniAppUtil.AlertUtil.hint(data)
       socialuniUserModule.getMineUserAction()
     } finally {
-      UniUtil.hideLoading()
+      SocialuniAppUtil.UniUtil.hideLoading()
       this.authBtnDisabled = false
     }
   }
@@ -234,23 +234,23 @@ export default class IdentityAuthView extends Vue {
 
   checkIdInfoResult() {
     if (!this.userIdImgFile) {
-      ToastUtil.error('请上传真实的身份证正面照片')
+      SocialuniAppUtil.ToastUtil.error('请上传真实的身份证正面照片')
     }
     if (!this.idInfoPreCheckResult || !this.idInfoPreCheckResult.Birth) {
-      ToastUtil.error('请上传真实的身份证正面照片，' + socialConfigModule.appMoreConfig.errorMsgContactService)
+      SocialuniAppUtil.ToastUtil.error('请上传真实的身份证正面照片，' + socialConfigModule.appMoreConfig.errorMsgContactService)
     }
   }
 
   idAuthCheck() {
     this.checkIdInfoResult()
     if (!this.imgFile || !this.imgFile.src) {
-      ToastUtil.error('请上传自拍照片')
+      SocialuniAppUtil.ToastUtil.error('请上传自拍照片')
     }
   }
 
   async idAuthPreCheck() {
     this.idAuthCheck()
-    UniUtil.showLoading('校验中')
+    SocialuniAppUtil.UniUtil.showLoading('校验中')
     this.authBtnDisabled = true
     this.clearPreCheckResult()
     try {
@@ -258,7 +258,7 @@ export default class IdentityAuthView extends Vue {
       const res = await SocialUserIdentityAPI.userIdentityAuthPreCheckAPI(new SocialUserIdentityAuthQO(this.userIdImgFile.src, this.imgFile.src))
       this.preCheckResult = res.data
     } finally {
-      UniUtil.hideLoading()
+      SocialuniAppUtil.UniUtil.hideLoading()
       this.authBtnDisabled = false
     }
   }

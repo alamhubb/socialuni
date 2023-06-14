@@ -94,7 +94,7 @@ export default class TencentCosAPI {
             console.log(cosAuthRO.region)
             console.log(cosAuthRO.cos)
             console.log(cosAuthRO.cos.putObject)
-            // const uploadImgFile = await UniUtil.getFile(imgFile) as any
+            // const uploadImgFile = await SocialuniAppUtil.UniUtil.getFile(imgFile) as any
             cosAuthRO.cos.putObject({
                 Bucket: cosAuthRO.bucket,
                 Region: cosAuthRO.region,
@@ -107,7 +107,7 @@ export default class TencentCosAPI {
                     resolve(data)
                 } else {
                     console.log('---cosAuthRO.cos.putObject----', err);
-                    AlertUtil.error(AppMsg.uploadFailMsg)
+                    SocialuniAppUtil.AlertUtil.error(AppMsg.uploadFailMsg)
                     reject(err)
                 }
             })

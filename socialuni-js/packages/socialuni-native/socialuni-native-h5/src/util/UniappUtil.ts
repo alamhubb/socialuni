@@ -8,11 +8,12 @@ import GetProviderRes = UniApp.GetProviderRes;
 import LoginRes = UniApp.LoginRes;
 import GetUserInfoRes = UniApp.GetUserInfoRes;
 import GetImageInfoSuccessData = UniApp.GetImageInfoSuccessData;
-import ToastUtil from 'packages/socialuni-native/socialuni-native-uni/src/util/ToastUtil'
-import UUIDUtil from 'src/util/UUIDUtil'
 import AppMsg from "socialuni-constant/constant/AppMsg";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule"
-import DomFile from "../model/DomFile";
+import DomFile from "socialuni-app-sdk/src/model/DomFile";
+import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
+import ImgUtil from "socialuni-util/src/util/ImgUtil";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 
 export default class UniUtil {
@@ -23,7 +24,7 @@ export default class UniUtil {
                 success() {
                     if (hint) {
                         uni.hideToast()
-                        ToastUtil.toast(hint)
+                        SocialuniAppUtil.ToastUtil.toast(hint)
                     }
                     resolve(null)
                 },
@@ -235,7 +236,7 @@ export default class UniUtil {
             // 获取压缩比
             const imgSize: number = imgFile.size
             if (imgSize / 1024 / 1024 > 50) {
-                ToastUtil.error(AppMsg.imgSizeNotGt50MBMsg)
+                SocialuniAppUtil.ToastUtil.error(AppMsg.imgSizeNotGt50MBMsg)
             }
             let ratio: number = 100
             //如果大于100k 按照100k标准压缩

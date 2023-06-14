@@ -84,7 +84,7 @@
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
 import {onLoad, onPullDownRefresh} from "@dcloudio/uni-app";
-import UniUtil from "socialuni-app-sdk/src/util/UniUtil";
+import SocialuniAppUtil from "socialuni-app-sdk/src/util/UniUtil";
 import DateUtil from "socialuni-util/src/util/DateUtil";
 import FriendApplyType from "socialuni-constant/constant/FriendApplyType";
 import SocialuniFriendAPI from "socialuni-im-api/src/api/SocialuniFriendAPI";
@@ -278,7 +278,7 @@ export default class FriendApplyListView extends Vue {
      */
     async acceptFriendApplication(item: SocialuniFriendApplyUserRO) {
         await SocialuniFriendAPI.addFriend(new FriendAddQO(item.id, '接受您的好友请求', SocialuniAddFriendType.accept))
-        ToastUtil.toastLong('添加好友成功')
+        SocialuniAppUtil.ToastUtil.toastLong('添加好友成功')
         this.startQuery()
     }
 

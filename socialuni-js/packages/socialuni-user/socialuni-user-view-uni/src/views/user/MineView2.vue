@@ -205,7 +205,7 @@ import QIcon from 'socialuni-ui-uni/src/components/QIcon/QIcon.vue'
 import QNavbar from 'socialuni-ui-uni/src/components/QNavbar/QNavbar.vue'
 import QRowItem from 'socialuni-ui-uni/src/components/QRowItem/QRowItem.vue'
 import MsgInput from 'socialuni-ui-uni/src/components/MsgInput.vue'
-import UniUtil from 'socialuni-app-sdk/src/util/UniUtil'
+import SocialuniAppUtil from 'socialuni-app-sdk/src/util/UniUtil'
 import SkipUrlConst from 'socialuni-user-sdk/src/constant/SkipUrlConst'
 import SocialuniFollowType from 'socialuni-constant/constant/user/SocialuniFollowType'
 import ToastUtil from 'socialuni-native-uni/src/util/ToastUtil'
@@ -270,7 +270,7 @@ export default class MineView extends Vue {
 
   created() {
     onLoad((params) => {
-      UniUtil.showShareMenu()
+      SocialuniAppUtil.UniUtil.showShareMenu()
     })
     onShow(() => {
       this.showMsgInput = true
@@ -335,7 +335,7 @@ export default class MineView extends Vue {
   initQuery() {
     if (this.mineUser) {
       socialuniUserModule.getMineUserAction().then(() => {
-        ToastUtil.toast('刷新成功')
+        SocialuniAppUtil.ToastUtil.toast('刷新成功')
       }).finally(() => {
         this.stopPullDownRefresh()
       })
@@ -355,7 +355,7 @@ export default class MineView extends Vue {
 
   moreAction() {
     const menuList: string [] = ['查看头像', '上传头像']
-    UniUtil.actionSheet(menuList).then((index: number) => {
+    SocialuniAppUtil.UniUtil.actionSheet(menuList).then((index: number) => {
       if (index === 0) {
         this.seeAvatarDetail()
       } else if (index === 1) {
@@ -371,8 +371,8 @@ export default class MineView extends Vue {
   async uploadUserAvatarImg() {
     try {
       const cosAuthRO = await CosUtil.getCosAuthRO()
-      const imgFiles: DomFile[] = await UniUtil.chooseImage(1)
-      UniUtil.showLoading('上传中')
+      const imgFiles: DomFile[] = await SocialuniAppUtil.UniUtil.chooseImage(1)
+      SocialuniAppUtil.UniUtil.showLoading('上传中')
       const imgFile: DomFile = imgFiles[0]
       imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src
       const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO), SocialuniMineUserAPI.addUserAvatarImgAPI(new ImgAddQO(imgFile))])
@@ -380,7 +380,7 @@ export default class MineView extends Vue {
     } catch (e) {
       console.error(e)
     } finally {
-      UniUtil.hideLoading()
+      SocialuniAppUtil.UniUtil.hideLoading()
     }
   }
 
@@ -397,9 +397,9 @@ export default class MineView extends Vue {
   }
 
   refreshMine() {
-    AlertUtil.confirm('是否刷新用户信息').then(() => {
+    SocialuniAppUtil.AlertUtil.confirm('是否刷新用户信息').then(() => {
       socialuniUserModule.getMineUserAction().then(() => {
-        ToastUtil.toast('刷新成功')
+        SocialuniAppUtil.ToastUtil.toast('刷新成功')
       })
     })
   }

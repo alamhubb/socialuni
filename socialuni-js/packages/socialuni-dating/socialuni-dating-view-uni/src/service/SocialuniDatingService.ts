@@ -12,7 +12,7 @@ export default class SocialuniDatingService{
             UserMsgUtil.unLoginMessage()
         }
         if (user.openContactInfo) {
-            ToastUtil.error("已成功获取，无需再次获取")
+            SocialuniAppUtil.ToastUtil.error("已成功获取，无需再次获取")
         }
         const userShell = socialuniUserModule.mineUser.socialCoin
         const getUserInfoNeedCoin = socialuniConfigModule.appMoreConfig.contactExpenseShell

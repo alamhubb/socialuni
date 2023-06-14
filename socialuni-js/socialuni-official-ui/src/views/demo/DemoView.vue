@@ -207,14 +207,14 @@ if (token) {
 
 async function userLogin() {
   if (!userName.value) {
-    ToastUtil.throwError('请输入用户名')
+    SocialuniAppUtil.ToastUtil.throwError('请输入用户名')
   }
   const res: any = await request.get('/login', {params: {name: userName.value}})
   const loginRO: { user: any, token: string } = res.data
   UserStore.setUser(loginRO.user)
   TokenUtil.set(loginRO.token)
   loginAPIActive.value = 2
-  ToastUtil.success('登录成功')
+  SocialuniAppUtil.ToastUtil.success('登录成功')
   userName.value = ''
   queryTalks()
 }
@@ -236,29 +236,29 @@ async function queryTalks() {
 
 async function postTalk() {
   if (!user.value) {
-    ToastUtil.throwError('请进行登录')
+    SocialuniAppUtil.ToastUtil.throwError('请进行登录')
   }
   if (!talkContent.value) {
-    ToastUtil.throwError('请填写动态内容')
+    SocialuniAppUtil.ToastUtil.throwError('请填写动态内容')
   }
   await request.get('/postTalk', {params: {content: talkContent.value}})
-  ToastUtil.success('发布动态成功')
+  SocialuniAppUtil.ToastUtil.success('发布动态成功')
   talkContent.value = ''
   await queryTalks()
 }
 
 async function postComment() {
   if (!user.value) {
-    ToastUtil.throwError('请进行登录')
+    SocialuniAppUtil.ToastUtil.throwError('请进行登录')
   }
   if (!talks.value.length) {
-    ToastUtil.throwError('请先发布动态再进行评论')
+    SocialuniAppUtil.ToastUtil.throwError('请先发布动态再进行评论')
   }
   if (!commentContent.value) {
-    ToastUtil.throwError('请填写评论内容')
+    SocialuniAppUtil.ToastUtil.throwError('请填写评论内容')
   }
   await request.get('/postComment', {params: {talkId: talks.value[0].id, content: commentContent.value}})
-  ToastUtil.success('评论成功')
+  SocialuniAppUtil.ToastUtil.success('评论成功')
   commentContent.value = ''
   await queryTalks()
 }

@@ -157,17 +157,17 @@ export default class LoginPage extends Vue {
   // 手机号登陆和手机号绑定
   handleLogin() {
     if (this.bindBtnDisabled) {
-      return ToastUtil.warning('正在登陆中，请勿重复点击')
+      return SocialuniAppUtil.ToastUtil.warning('正在登陆中，请勿重复点击')
     }
     // 再次校验
     if (!this.phoneNumberRight) {
-      return ToastUtil.error('请输入正确的手机号')
+      return SocialuniAppUtil.ToastUtil.error('请输入正确的手机号')
     }
     if (!this.authCodeRight) {
-      return ToastUtil.error('请输入正确的验证码')
+      return SocialuniAppUtil.ToastUtil.error('请输入正确的验证码')
     }
     if (!this.contractChecked) {
-      return ToastUtil.warning('请仔细阅读用户协议、隐私政策等内容后勾选同意')
+      return SocialuniAppUtil.ToastUtil.warning('请仔细阅读用户协议、隐私政策等内容后勾选同意')
     }
     this.bindBtnDisabled = true
     userModule.userLogin(this.loginUser).then(() => {
@@ -179,7 +179,7 @@ export default class LoginPage extends Vue {
 
   secretKeyLogin() {
     if (this.bindBtnDisabled) {
-      return ToastUtil.warning('正在登陆中，请勿重复点击')
+      return SocialuniAppUtil.ToastUtil.warning('正在登陆中，请勿重复点击')
     }
     this.bindBtnDisabled = true
     userModule.userSecretKeyLogin(this.secretKey).then(() => {
@@ -191,10 +191,10 @@ export default class LoginPage extends Vue {
 
   sendCodeClick() {
     if (!this.loginUser.phoneNum) {
-      return ToastUtil.error('请输入正确的手机号')
+      return SocialuniAppUtil.ToastUtil.error('请输入正确的手机号')
     }
     if (this.countDown) {
-      return ToastUtil.error('验证码发送频繁，请等待')
+      return SocialuniAppUtil.ToastUtil.error('验证码发送频繁，请等待')
     }
 
     this.loginUser.authCode = ''
@@ -212,7 +212,7 @@ export default class LoginPage extends Vue {
     // 如果怕太频繁，就显示相同手机号每天只能发送几次，一小时内只能5次
     PhoneAPI.sendAuthCodeAPI(this.loginUser.phoneNum).then(() => {
       // 提示验证码发送成功
-      ToastUtil.success('验证码发送成功')
+      SocialuniAppUtil.ToastUtil.success('验证码发送成功')
     })
   }
 }

@@ -105,7 +105,7 @@ class SocialuniUserModule {
         return SocialuniAppUtil.AlertUtil.confirm('是否注销账号，7天内不再登录，账号将彻底清空无法使用').then(() => {
             /*SocialuniMineUserAPI.destroyAccountAPI().then(() => {
                 UserService.userLogout()
-                ToastUtil.toast('注销成功')
+                SocialuniAppUtil.ToastUtil.toast('注销成功')
             })*/
         })
     }

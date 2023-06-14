@@ -38,9 +38,9 @@
 import {Options, Vue} from 'vue-property-decorator'
 import TagVO from 'socialuni-api-base/src/model/community/tag/TagVO'
 import ErrorConst from 'socialuni-constant/constant/ErrorConst'
-import AlertUtil from 'socialuni-app-sdk/src/util/AlertUtil'
 import ResultRO from 'socialuni-api-base/src/model/social/ResultRO'
 import TagAPI from "socialuni-community-api/src/api/TagAPI";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 @Options({})
 export default class SocialTagAdd extends Vue {
@@ -64,7 +64,7 @@ export default class SocialTagAdd extends Vue {
       this.checkTag(res.data)
     }).catch((res: ResultRO<TagVO>) => {
       if (res.errorCode === ErrorConst.custom) {
-        AlertUtil.confirm(res.errorMsg, '使用').then(() => {
+        SocialuniAppUtil.AlertUtil.confirm(res.errorMsg, '使用').then(() => {
           this.checkTag(res.data)
         })
       }

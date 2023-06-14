@@ -13,7 +13,7 @@ export default class LoginService {
     static async providerLogin(provider: string, result: any) {
         if (socialuniSystemModule.isMpQQ) {
             if (result.detail.errMsg !== Constants.loginSuccess) {
-                return ToastUtil.toast('您取消了登录')
+                return SocialuniAppUtil.ToastUtil.toast('您取消了登录')
             }
         }
         //一行代码就可以获取登录所需要的信息, 还可以配合后台使用，一键登录，记住用户

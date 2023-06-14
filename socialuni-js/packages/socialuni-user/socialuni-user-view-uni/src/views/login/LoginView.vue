@@ -294,7 +294,7 @@ export default class LoginView extends Vue {
     if (socialuniSystemModule.isIosAndMpQQ) {
       msg += '，如遇无法弹出输入框，请重启应用'
     }
-    AlertUtil.hint(msg).finally(() => {
+    SocialuniAppUtil.AlertUtil.hint(msg).finally(() => {
       //有手机号才直接返回，没手机号继续提示绑定手机号
       if (this.hasPhoneNum) {
         UserPageUtil.goBackOrMine()

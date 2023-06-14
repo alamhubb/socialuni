@@ -365,7 +365,7 @@ export default class MessageView extends Vue {
         //  issue: I6EZ82
         //
         if (!params.chatId) {
-            AlertUtil.error('缺少会话信息')
+            SocialuniAppUtil.AlertUtil.error('缺少会话信息')
         }
         // if (params.nickname) {
         //   chat.nickname = params.nickname
@@ -433,7 +433,7 @@ export default class MessageView extends Vue {
     }
 
     /* showEmojiClick () {
-      UniUtils.delayTime(100).then(() => {
+      SocialuniAppUtil.UniUtil.s.delayTime(100).then(() => {
         this.showEmoji = true
       })
     }
@@ -489,7 +489,7 @@ export default class MessageView extends Vue {
                     that.chooseVideo();
                     break;
                 case '录音':
-                    AlertUtil.error('暂不支持,开发中');
+                    SocialuniAppUtil.AlertUtil.error('暂不支持,开发中');
                     break;
                 case '删除对方聊天记录':
                     socialuniChatModule.pushCustomMessage(socialuniUserModule.userId, "{}", "发送删除对方聊天记录");
@@ -521,7 +521,7 @@ export default class MessageView extends Vue {
             });
         } else {
             SocialuniAppAPI.sendErrorLogAPI(null, '用户发表动态失败，未获取上传图片所需要的认证信息')
-            AlertUtil.error(AppMsg.uploadFailMsg)
+            SocialuniAppUtil.AlertUtil.error(AppMsg.uploadFailMsg)
         }
     }
 
@@ -550,7 +550,7 @@ export default class MessageView extends Vue {
             });
         } else {
             SocialuniAppAPI.sendErrorLogAPI(null, '用户发表动态失败，未获取上传图片所需要的认证信息')
-            AlertUtil.error(AppMsg.uploadFailMsg)
+            SocialuniAppUtil.AlertUtil.error(AppMsg.uploadFailMsg)
         }
     }
 
@@ -559,7 +559,7 @@ export default class MessageView extends Vue {
         if (this.mineUser.type === UserType.systemUser) {
             this.deleteMsgAction(this.curMsg)
         } else {
-            AlertUtil.confirm('是否确定删除此条消息，此操作无法恢复').then(() => {
+            SocialuniAppUtil.AlertUtil.confirm('是否确定删除此条消息，此操作无法恢复').then(() => {
                 this.deleteMsgAction(msg)
             })
         }
@@ -728,7 +728,7 @@ export default class MessageView extends Vue {
     openReportDialog() {
 
         this.closeMessageMoreDialog()
-        AlertUtil.error('暂不支持,开发中');
+        SocialuniAppUtil.AlertUtil.error('暂不支持,开发中');
         console.log('-----举报--openReportDialog-------')
         // this.$refs.reportDialog.openReport()
     }
@@ -753,7 +753,7 @@ export default class MessageView extends Vue {
                         await this.openChatAndPrompt('会话未开启，是否消耗10个贝壳开启与 ' + this.chat.nickname + ' 的对话，并给对方发送消息：' + content, content)
                         //需要充值提示
                     } else {
-                        await AlertUtil.confirm('会话未开启，您没有贝壳了，是否直接使用现金支付开启开启与 ' + this.chat.nickname + ' 的对话，并给对方发送消息：' + content, content)
+                        await SocialuniAppUtil.AlertUtil.confirm('会话未开启，您没有贝壳了，是否直接使用现金支付开启开启与 ' + this.chat.nickname + ' 的对话，并给对方发送消息：' + content, content)
                         const provider = socialuniSystemModule.isMp ? socialuniSystemModule.provider : SocialuniProviderType.wx
                         try {
                             // await PlatformUtils.payCoin(1)
@@ -773,7 +773,7 @@ export default class MessageView extends Vue {
                 throw Error(e)
             }
         } else {
-            await ToastUtil.toast('会话开启中，请稍等')
+            await SocialuniAppUtil.ToastUtil.toast('会话开启中，请稍等')
         }
         throw Error()
     }
@@ -788,7 +788,7 @@ export default class MessageView extends Vue {
 
     //校验已通过，最后一个确认， 是否确认开启
     openChatAndPrompt(hintMsg: string, content: string) {
-        return AlertUtil.confirm(hintMsg).then(() => {
+        return SocialuniAppUtil.AlertUtil.confirm(hintMsg).then(() => {
             //校验了有用户后清空消息
             this.msgContent = ''
             return socialuniChatModule.openChatAction(content)

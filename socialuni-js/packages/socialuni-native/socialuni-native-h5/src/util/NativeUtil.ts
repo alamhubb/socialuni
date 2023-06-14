@@ -24,7 +24,7 @@ export default class NativeUtil {
         success() {
           if (hint) {
             uni.hideToast()
-            ToastUtil.toast(hint)
+            SocialuniAppUtil.ToastUtil.toast(hint)
           }
           resolve(null)
         },
@@ -36,9 +36,9 @@ export default class NativeUtil {
   }
 
   public static showCopyAction(copyText: string) {
-    UniUtil.actionSheet(['复制']).then((index: number) => {
+    SocialuniAppUtil.UniUtil.actionSheet(['复制']).then((index: number) => {
       if (index === 0) {
-        UniUtil.textCopy(copyText)
+        SocialuniAppUtil.UniUtil.textCopy(copyText)
       }
     })
   }
@@ -63,7 +63,7 @@ export default class NativeUtil {
   }
 
   static copyLink(webUrl: string) {
-    return UniUtil.textCopy(webUrl, '链接已复制，可在浏览器打开')
+    return SocialuniAppUtil.UniUtil.textCopy(webUrl, '链接已复制，可在浏览器打开')
   }
 
   public static upxToPx(rpx: number): number {
@@ -192,7 +192,7 @@ export default class NativeUtil {
   //选择图片
   public static chooseImage(count = 1) {
     return UniappH5.chooseImage(count).then(res => {
-      const imgFiles = UniUtil.imgFilesCompressHandler(res)
+      const imgFiles = SocialuniAppUtil.UniUtil.imgFilesCompressHandler(res)
       return imgFiles
     })
   }
@@ -206,7 +206,7 @@ export default class NativeUtil {
         // sizeType: ['compressed'],
         count: 1,
         success(res) {
-          const imgFiles = UniUtil.imgFilesCompressHandler(res)
+          const imgFiles = SocialuniAppUtil.UniUtil.imgFilesCompressHandler(res)
           resolve(imgFiles)
         },
         fail(err) {
@@ -225,7 +225,7 @@ export default class NativeUtil {
       // 获取压缩比
       const imgSize: number = imgFile.size
       if (imgSize / 1024 / 1024 > 50) {
-        ToastUtil.error(AppMsg.imgSizeNotGt50MBMsg)
+        SocialuniAppUtil.ToastUtil.error(AppMsg.imgSizeNotGt50MBMsg)
       }
       let ratio: number = 100
       //如果大于100k 按照100k标准压缩
@@ -236,7 +236,7 @@ export default class NativeUtil {
         ratio = Math.round(10000 / (imgSize / 1024))
       }
       imgFile.quality = ratio
-      const image = await UniUtil.getImageInfo(imgFile.path)
+      const image = await SocialuniAppUtil.UniUtil.getImageInfo(imgFile.path)
       // 获取文件名
       imgFile.aspectRatio = image.width / image.height
       let fileName = null

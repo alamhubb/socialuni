@@ -1,6 +1,6 @@
-import UniUtil from './UniUtil'
 import AppConfig from "socialuni-constant/constant/AppConfig";
 import UserPayResultVO from "socialuni-api-base/src/model/user/UserPayResultVO";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 export default class QQUtils {
   static subscribeAppMsg (tmplIds: string[]) {
@@ -20,7 +20,7 @@ export default class QQUtils {
   }
 
   static createRewardedVideoAd () {
-    return UniUtil.createRewardedVideoAd(AppConfig.qq_award_ad_id)
+    return SocialuniAppUtil.UniUtil.createRewardedVideoAd(AppConfig.qq_award_ad_id)
   }
 
   static createInterstitialAd () {

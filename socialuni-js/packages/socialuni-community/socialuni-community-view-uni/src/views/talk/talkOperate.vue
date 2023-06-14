@@ -126,7 +126,7 @@ export default class TalkOperate extends Vue {
       reportAdd.contentId = this.comment.id
     }
     if (ReportType.other === this.reportType && !this.reportContent) {
-      AlertUtil.hint('选择其他违规时，请您补充观点')
+      SocialuniAppUtil.AlertUtil.hint('选择其他违规时，请您补充观点')
     } else {
       ReportAPI.addReportAPI(reportAdd).then((res: any) => {
         if (this.reportContentType === ReportContentType.comment) {
@@ -145,7 +145,7 @@ export default class TalkOperate extends Vue {
         }
         // 必须最后清空因为前面还要使用做判断
         this.reportDialogClose()
-        AlertUtil.hint(res.data)
+        SocialuniAppUtil.AlertUtil.hint(res.data)
         PlatformUtils.requestSubscribeReport()
       })
     }

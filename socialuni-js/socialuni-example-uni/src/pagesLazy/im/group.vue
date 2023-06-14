@@ -17,7 +17,7 @@
 import {Options, Vue} from 'vue-property-decorator'
 import {socialChatFriendModule, socialChatModule, socialConfigModule} from "socialuni-sdk/src/store/store"
 import {onLoad} from "@dcloudio/uni-app";
-import UniUtil from "socialuni-sdk/src/utils/UniUtil";
+import SocialuniAppUtil from "socialuni-sdk/src/utils/UniUtil";
 import DateUtil from "socialuni-sdk/src/utils/DateUtil";
 import {CreateGroupParams, GroupInitInfo, Member, SetGroupVerificationParams} from "open-im-sdk";
 

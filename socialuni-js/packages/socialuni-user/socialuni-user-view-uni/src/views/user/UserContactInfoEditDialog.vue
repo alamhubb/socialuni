@@ -61,7 +61,7 @@ export default class UserContactInfoEditDialog extends Vue {
 
   async confirm() {
     if (!this.contactInfoValue) {
-      ToastUtil.error('联系方式不能为空')
+      SocialuniAppUtil.ToastUtil.error('联系方式不能为空')
     }
     try {
       let msg = '是否确认将联系方式设置为' + this.contactInfoValue
@@ -70,7 +70,7 @@ export default class UserContactInfoEditDialog extends Vue {
       } else {
         msg += '，并设置为他人不可获取'
       }
-      await AlertUtil.confirm(msg)
+      await SocialuniAppUtil.AlertUtil.confirm(msg)
       this.$refs.dialog.close()
       const res = await SocialuniUserExpandAPI.editUserContactInfoAPI(this.contactInfoValue, this.openContactInfo)
       socialuniUserModule.setUser(res.data)

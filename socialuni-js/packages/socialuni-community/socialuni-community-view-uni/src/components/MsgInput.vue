@@ -92,7 +92,7 @@ export default class MsgInput extends Vue {
         // 申请订阅
         PlatformUtils.requestSubscribeComment()
       } else {
-        ToastUtil.toast('不能发表内容为空的评论')
+        SocialuniAppUtil.ToastUtil.toast('不能发表内容为空的评论')
       }
     } else {
       MsgUtil.unBindPhoneNum()

@@ -92,7 +92,7 @@ export default class HomeSwiperManageView extends Vue {
   saveData() {
     //this.configs保存到后台
     request.post('socialuni/admin/homeSwiper/updateHomeSwipers', this.homeSwipers).then(res => {
-      ToastUtil.success('更新成功')
+      SocialuniAppUtil.ToastUtil.success('更新成功')
       this.queryData()
     })
   }

@@ -54,7 +54,7 @@ import RouterUtil from 'socialuni-sdk/src/utils/RouterUtil'
 import PageUtil from 'socialuni-sdk/src/utils/PageUtil'
 import SocialuniTalkAPI from 'socialuni-api/src/api/socialuni/SocialuniTalkAPI'
 import QNavbar from 'socialuni-view/src/components/QNavbar/QNavbar.vue'
-import UniUtil from 'socialuni-sdk/src/utils/UniUtil'
+import SocialuniAppUtil from 'socialuni-sdk/src/utils/UniUtil'
 import {socialConfigModule} from 'socialuni-sdk/src/store/store'
 import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
 
@@ -76,7 +76,7 @@ export default class TalkDetail extends Vue {
   }
 
   created() {
-    UniUtil.showShareMenu()
+    SocialuniAppUtil.UniUtil.showShareMenu()
     onLoad((params) => {
       const talkId = params.talkId
       SocialuniTalkAPI.queryTalkDetailAPI(talkId).then((res: any) => {

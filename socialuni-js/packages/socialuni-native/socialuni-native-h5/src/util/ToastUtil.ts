@@ -33,12 +33,12 @@ export default class ToastUtil {
   }
 
   public static error (title: string) {
-    ToastUtil.toast(title)
+    SocialuniAppUtil.ToastUtil.toast(title)
     throw new Error(title)
   }
 
   public static throwError (title: string) {
-    ToastUtil.toast(title)
+    SocialuniAppUtil.ToastUtil.toast(title)
     throw new Error(title)
   }
 }
