@@ -13,7 +13,7 @@ import java.util.Date;
  */
 @Data
 @Entity
-@Table(name = "s_match_request", uniqueConstraints = @UniqueConstraint(columnNames = {"userId", "receiveUserId"}))
+@Table(name = "s_match_request", uniqueConstraints = @UniqueConstraint(columnNames = {"userId", "beUserId"}))
 public class MatchRequestDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +21,7 @@ public class MatchRequestDO implements Serializable {
 
     private Integer userId;
 
-    private Integer receiveUserId;
+    private Integer beUserId;
 
     private String status;
 

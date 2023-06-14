@@ -40,7 +40,7 @@ public class ThirdUserAuthDO implements Serializable {
     //三方也要有内容审核功能
 
     //启用，还是失效
-    @Column(nullable = false, columnDefinition = "varchar(20) default '" + ConstStatus.enable + "'")
+    @Column(nullable = false, columnDefinition = "varchar(20) default '" + ConstStatus.init + "'")
     private String status;
     //创建时间
     @Column(nullable = false)
@@ -61,7 +61,7 @@ public class ThirdUserAuthDO implements Serializable {
         this.userId = threeUserDO.getUserId();
         this.authType = authType;
 
-        this.status = ConstStatus.enable;
+        this.status = ConstStatus.init;
 
         Date curDate = new Date();
 

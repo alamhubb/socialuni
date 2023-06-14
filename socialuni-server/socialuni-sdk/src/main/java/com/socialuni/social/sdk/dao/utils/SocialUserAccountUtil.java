@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.dao.utils;
 
 import com.socialuni.social.user.sdk.constant.SocialuniAccountProviderType;
-import com.socialuni.social.user.sdk.model.DO.SocialUserAccountDO;
-import com.socialuni.social.user.sdk.repository.SocialUserAccountRepository;
+import com.socialuni.social.common.sdk.dao.DO.SocialUserAccountDO;
+import com.socialuni.social.common.sdk.dao.repository.SocialUserAccountRepository;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.dao.store;
 
 import com.socialuni.social.report.sdk.entity.ReportDO;
 import com.socialuni.social.report.sdk.enumeration.ReportStatus;
-import com.socialuni.social.report.sdk.repository.ReportRepository;
+import com.socialuni.social.report.sdk.dao.repository.ReportRepository;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

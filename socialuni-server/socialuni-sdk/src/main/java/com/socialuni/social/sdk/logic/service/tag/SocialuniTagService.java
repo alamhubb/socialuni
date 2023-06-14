@@ -10,7 +10,7 @@ import com.socialuni.social.sdk.model.RO.community.tag.TagTypeRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

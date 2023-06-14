@@ -1,6 +1,6 @@
 package com.socialuni.social.admin.model;
 
-import com.socialuni.social.common.api.enumeration.CommonStatus;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.sdk.dao.DO.SocialuniHomeSwiperDO;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import lombok.Data;
@@ -24,7 +24,7 @@ public class SocialuniAdminHomeSwiperRO {
 
     public SocialuniAdminHomeSwiperRO(SocialuniHomeSwiperDO SocialuniHomeSwiperDO) {
         this.id = SocialuniHomeSwiperDO.getId();
-        this.enable = SocialuniHomeSwiperDO.getStatus().equals(CommonStatus.enable);
+        this.enable = SocialuniHomeSwiperDO.getStatus().equals(SocialuniCommonStatus.enable);
         this.name = SocialuniHomeSwiperDO.getName();
         this.skipType = SocialuniHomeSwiperDO.getSkipType();
         this.skipUrl = SocialuniHomeSwiperDO.getSkipUrl();
@@ -44,7 +44,7 @@ public class SocialuniAdminHomeSwiperRO {
         SocialuniHomeSwiperDO.setStandUrl(this.getStandUrl());
         SocialuniHomeSwiperDO.setStandType(this.getStandType());
         if (!this.enable) {
-            SocialuniHomeSwiperDO.setStatus(CommonStatus.delete);
+            SocialuniHomeSwiperDO.setStatus(SocialuniCommonStatus.delete);
         }
         SocialuniHomeSwiperDO.setDevId(DevAccountFacade.getDevIdNotNull());
         return SocialuniHomeSwiperDO;

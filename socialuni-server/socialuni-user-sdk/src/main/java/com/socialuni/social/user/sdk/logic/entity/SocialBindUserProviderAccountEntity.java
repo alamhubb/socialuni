@@ -1,10 +1,10 @@
 package com.socialuni.social.user.sdk.logic.entity;
 
-import com.socialuni.social.user.sdk.manage.SocialUserAccountManage;
+import com.socialuni.social.user.sdk.logic.manage.SocialUserAccountManage;
 import com.socialuni.social.user.sdk.model.RO.UniUnionIdRO;
 import com.socialuni.social.user.sdk.utils.SocialUniProviderUtil;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
-import com.socialuni.social.user.sdk.model.DO.SocialUserAccountDO;
+import com.socialuni.social.common.sdk.dao.DO.SocialUserAccountDO;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

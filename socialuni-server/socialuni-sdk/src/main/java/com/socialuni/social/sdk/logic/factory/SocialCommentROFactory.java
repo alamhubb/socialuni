@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.factory;
 
-import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
-import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniCommentDO;
+import com.socialuni.social.common.api.enumeration.ContentStatus;
 import com.socialuni.social.sdk.dao.CommentDao;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.logic.factory.RO.comment.SocialuniReplyCommentROFactory;
@@ -10,7 +10,7 @@ import com.socialuni.social.sdk.model.RO.talk.SocialuniCommentRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.sdk.utils.SystemUtil;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
@@ -39,7 +39,7 @@ public class SocialCommentROFactory {
         socialCommentRO.setId(uid);
         socialCommentRO.setNo(comment.getNo());
 
-        SocialuniUserDo commentUser = SocialuniUserUtil.getUserNotNull(comment.getUserId());
+        SocialuniUserDo commentUser = SocialuniUserUtil.getAndCheckUserNotNull(comment.getUserId());
         SocialuniUserRO commentUserRO = SocialuniUserROFactory.getUserRO(commentUser, mineUser);
         socialCommentRO.setUser(commentUserRO);
 

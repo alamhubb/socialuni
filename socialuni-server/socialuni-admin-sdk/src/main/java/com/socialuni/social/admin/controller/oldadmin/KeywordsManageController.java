@@ -2,12 +2,12 @@ package com.socialuni.social.admin.controller.oldadmin;
 
 
 import com.socialuni.social.admin.utils.CheckIsAdminUtil;
-import com.socialuni.social.common.api.enumeration.CommonStatus;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.sdk.constant.status.ConstBoolean;
-import com.socialuni.social.user.sdk.model.DO.keywords.KeywordsDO;
-import com.socialuni.social.user.sdk.repository.KeywordsRepository;
+import com.socialuni.social.report.sdk.dao.DO.KeywordsDO;
+import com.socialuni.social.report.sdk.dao.repository.KeywordsRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -62,7 +62,7 @@ public class KeywordsManageController {
 
     private KeywordsDO getKeywordsDOResultVO(KeywordsDO keywordsDO, String closeCause) {
 
-        keywordsDO.setStatus(CommonStatus.delete);
+        keywordsDO.setStatus(SocialuniCommonStatus.delete);
         keywordsDO.setOpenPinyin(ConstBoolean.close);
         keywordsDO.setOpenText(ConstBoolean.close);
 
@@ -90,7 +90,7 @@ public class KeywordsManageController {
     //    @GetMapping("batchClosePinyinOrTexts"),批量关闭时使用
     public ResultRO<KeywordsDO> batchOpenPinyinOrTexts() {
         //获取关键词
-        List<KeywordsDO> optionalViolateWordDOs = keywordsRepository.findAllByStatusAndOpenPinyinIsTrueAndPinyinNormalNumGreaterThanAndPinyinViolateRatioLessThan(CommonStatus.enable, 19, 0.4);
+        List<KeywordsDO> optionalViolateWordDOs = keywordsRepository.findAllByStatusAndOpenPinyinIsTrueAndPinyinNormalNumGreaterThanAndPinyinViolateRatioLessThan(SocialuniCommonStatus.enable, 19, 0.4);
 
         for (KeywordsDO keywordsDO : optionalViolateWordDOs) {
             getKeywordsDOResultVO(keywordsDO, "pinyin", "批量关闭");

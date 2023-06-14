@@ -1,0 +1,19 @@
+{
+  "name": "socialuni-im-api",
+  "version": "0.1.2",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "socialuni-api-base": "^0.1.2"
+  },
+  "devDependencies": {
+    "@dcloudio/types": "^3.0.13",
+    "typescript": "^4.7.4",
+    "vue": "^3.2.41"
+  },
+  "author": "",
+  "license": "ISC",
+  "gitHead": "8b17f4a250aa54f47a17a2639efe2b511fd59358"
+}

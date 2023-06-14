@@ -1,14 +1,14 @@
 package com.socialuni.social.sdk.logic.service;
 
 import com.github.promeg.pinyinhelper.Pinyin;
+import com.socialuni.social.report.sdk.dao.DO.*;
 import com.socialuni.social.sdk.constant.CustomWordsRuleType;
 import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.sdk.dao.repository.BlackKeywordsRepository;
 import com.socialuni.social.sdk.dao.repository.CustomKeywordsRepository;
 import com.socialuni.social.sdk.dao.repository.WhiteKeywordsRepository;
-import com.socialuni.social.user.sdk.model.DO.keywords.*;
-import com.socialuni.social.user.sdk.utils.TextContentUtil;
-import com.socialuni.social.common.api.enumeration.CommonStatus;
+import com.socialuni.social.report.sdk.utils.TextContentUtil;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -235,7 +235,7 @@ public class KeywordsTriggerService {
 
     //是否包含违规自定义关键词
     private boolean checkCustomKeywords(String contentFormat, String keywordsText) {
-        List<CustomKeywordsDO> customKeywordsDOS = customKeywordsRepository.findAllByStatus(CommonStatus.enable);
+        List<CustomKeywordsDO> customKeywordsDOS = customKeywordsRepository.findAllByStatus(SocialuniCommonStatus.enable);
         for (CustomKeywordsDO customKeywordsDO : customKeywordsDOS) {
             //转大写
             String customKeywords = customKeywordsDO.getWord().toUpperCase();
@@ -247,7 +247,7 @@ public class KeywordsTriggerService {
                 //二层不违规 不5，拒5，别5, 5别，绝5, 5的别，不要5 5🉐别，5的别，5得别, 5kg, 5斤，5岁，5公斤
 
                 //不{0}的
-                List<BlackKeywordsDO> blackKeywordsDOS = blackKeywordsRepository.findAllByStatus(CommonStatus.enable);
+                List<BlackKeywordsDO> blackKeywordsDOS = blackKeywordsRepository.findAllByStatus(SocialuniCommonStatus.enable);
 //                List<String> blacklist = Arrays.asList("不5的", "拒5的", "5不5", "不拒5", "特别5", "不拒绝{0}");
 
                 boolean isViolate = false;
@@ -276,7 +276,7 @@ public class KeywordsTriggerService {
                 List<String> whitelist = Arrays.asList("不{0}", "拒{0}", "别{0}", "绝{0}", "{0}的别", "不要{0}", "{0}🉐别", "{0}的别"
                         , "{0}得别", "{0}kg", "{0}斤", "{0}岁", "{0}公斤");
 
-                List<WhiteKeywordsDO> whiteKeywordsDOS = whiteKeywordsRepository.findAllByStatus(CommonStatus.enable);
+                List<WhiteKeywordsDO> whiteKeywordsDOS = whiteKeywordsRepository.findAllByStatus(SocialuniCommonStatus.enable);
                 //不违规
                 if (!isViolate) {
                     isViolate = true;

@@ -2,17 +2,19 @@ package com.socialuni.social.user.sdk.utils;
 
 import com.socialuni.social.common.api.exception.exception.SocialNotLoginException;
 import com.socialuni.social.common.api.exception.exception.SocialNullUserException;
-import com.socialuni.social.user.sdk.constant.SocialuniUserStatus;
-import com.socialuni.social.user.sdk.exception.SocialUserBannedException;
-import com.socialuni.social.user.sdk.model.DO.SocialTokenDO;
-import com.socialuni.social.user.sdk.redis.SocialUserPhoneRedis;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.common.api.config.SocialRequestUserConfig;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
+import com.socialuni.social.report.sdk.enumeration.SocialuniUserStatus;
+import com.socialuni.social.user.sdk.exception.SocialUserBannedException;
+import com.socialuni.social.user.sdk.model.DO.SocialuniTokenDO;
 import com.socialuni.social.user.sdk.model.DO.SocialUserPhoneDo;
 import com.socialuni.social.user.sdk.model.DO.SocialUserViolationDo;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.user.sdk.logic.redis.SocialUserPhoneRedis;
 import com.socialuni.social.user.sdk.repository.SocialUserViolationRepository;
-import com.socialuni.social.user.sdk.repository.SocialuniUserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -64,6 +66,10 @@ public class SocialuniUserUtil {
         return getMineUserNotNull().getUnionId();
     }
 
+    public static boolean hasMineUser() {
+        return getMineUserAllowNull() != null;
+    }
+
     public static String getMineUserUuidIdNotNull() {
         Integer mineUserId = getMineUserIdNotNull();
         return SocialuniUnionIdFacede.getUuidByUnionIdNotNull(mineUserId);
@@ -81,8 +87,8 @@ public class SocialuniUserUtil {
 
     //下面都是联盟的
     public static SocialuniUserDo getMineUserNotNull(String token) {
-        SocialTokenDO tokenDO = SocialTokenDOUtil.getCommonTokenDONotNull(token);
-        return SocialuniUserUtil.getUserNotNull(tokenDO.getUserId());
+        SocialuniTokenDO tokenDO = SocialTokenDOUtil.getCommonTokenDONotNull(token);
+        return SocialuniUserUtil.getAndCheckUserNotNull(tokenDO.getUserId());
     }
 
     public static SocialuniUserDo getMineUserAllowNull() {
@@ -91,7 +97,7 @@ public class SocialuniUserUtil {
             return null;
         }
         //返回user
-        SocialuniUserDo mineUser = SocialuniUserUtil.getUserNotNull(userId);
+        SocialuniUserDo mineUser = SocialuniUserUtil.getAndCheckUserNotNull(userId);
         if (mineUser.getStatus().equals(SocialuniUserStatus.violation)) {
             throw new SocialUserBannedException();
         }
@@ -106,12 +112,12 @@ public class SocialuniUserUtil {
     //必须有，websocket无法从request中获取token只能传入
     public static SocialuniUserDo getUserByToken(String token) {
         //解析token
-        SocialTokenDO tokenDO = SocialTokenDOUtil.getCommonTokenDOAllowNull(token);
+        SocialuniTokenDO tokenDO = SocialTokenDOUtil.getCommonTokenDOAllowNull(token);
         if (tokenDO == null) {
             return null;
         }
         //返回user
-        SocialuniUserDo user = SocialuniUserUtil.getUserNotNull(tokenDO.getUserId());
+        SocialuniUserDo user = SocialuniUserUtil.getAndCheckUserNotNull(tokenDO.getUserId());
         return user;
     }
 
@@ -141,6 +147,15 @@ public class SocialuniUserUtil {
         return SocialUserPhoneDo;
     }
 
+    public static SocialuniUserDo getUserByPhoneNumNotNull(String phoneNum) {
+        SocialUserPhoneDo socialUserPhoneDo = socialUserPhoneRedis.findByPhoneNum(phoneNum);
+        if (socialUserPhoneDo == null) {
+            throw new SocialParamsException("手机号异常");
+        }
+        SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getAndCheckUserNotNull(socialUserPhoneDo.getUserId());
+        return socialuniUserDo;
+    }
+
     public static SocialUserViolationDo getUserViolationDO(Integer userId) {
         SocialUserViolationDo SocialUserViolationDo = socialUserViolationApi.findOneByUserId(userId);
         return SocialUserViolationDo;
@@ -153,7 +168,7 @@ public class SocialuniUserUtil {
         return UserUtils.get(Integer.valueOf(userId));
     }*/
 
-    public static SocialuniUserDo getUserNotNull(Integer userId) {
+    public static SocialuniUserDo getAndCheckUserNotNull(Integer userId) {
         if (userId == null) {
             throw new SocialNullUserException();
         }
@@ -167,7 +182,7 @@ public class SocialuniUserUtil {
     public static List<SocialuniUserDo> getUsers(List<Integer> ids) {
         List<SocialuniUserDo> userDos = new ArrayList<>();
         for (Integer id : ids) {
-            SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getUserNotNull(id);
+            SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getAndCheckUserNotNull(id);
             userDos.add(socialuniUserDo);
         }
         return userDos;
@@ -175,7 +190,7 @@ public class SocialuniUserUtil {
 
     public static SocialuniUserDo getUserByUuid(String uid) {
         Integer id = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(uid);
-        return SocialuniUserUtil.getUserNotNull(id);
+        return SocialuniUserUtil.getAndCheckUserNotNull(id);
     }
 
     public static SocialuniUserDo getAllowNull(Integer userId) {
@@ -190,5 +205,17 @@ public class SocialuniUserUtil {
             return false;
         }
         return userId.equals(mineUser.getUnionId());
+    }
+
+    public static SocialuniUserDo getSystemUserNotNull() {
+        String phoneNum = DevAccountFacade.getDevPhoneNumNotNull();
+
+        SocialuniUserDo systemUser = getUserByPhoneNumNotNull(phoneNum);
+
+        return systemUser;
+    }
+
+    public static Integer getSystemUserIdNotNull() {
+        return getSystemUserNotNull().getUserId();
     }
 }

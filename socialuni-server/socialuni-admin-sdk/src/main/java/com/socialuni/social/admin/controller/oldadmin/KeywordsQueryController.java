@@ -3,22 +3,22 @@ package com.socialuni.social.admin.controller.oldadmin;
 import com.socialuni.social.admin.model.KeywordsDetailVO;
 import com.socialuni.social.admin.utils.CheckIsAdminUtil;
 import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
-import com.socialuni.social.common.api.enumeration.CommonStatus;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
-import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniCommentDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
 import com.socialuni.social.community.sdk.repository.CommentRepository;
 import com.socialuni.social.community.sdk.repository.TalkRepository;
 import com.socialuni.social.report.sdk.enumeration.ReportStatus;
-import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.social.sdk.dao.DO.message.MessageDO;
-import com.socialuni.social.sdk.dao.repository.MessageRepository;
+import com.socialuni.social.common.api.enumeration.ContentStatus;
+import com.socialuni.social.im.dao.DO.message.SocialuniMessageDO;
+import com.socialuni.social.im.dao.repository.SocialuniMessageRepository;
 import com.socialuni.social.sdk.logic.service.KeywordsService;
 import com.socialuni.social.sdk.logic.service.KeywordsTriggerService;
-import com.socialuni.social.user.sdk.model.DO.keywords.KeywordsDO;
-import com.socialuni.social.user.sdk.model.DO.keywords.KeywordsTriggerDetailDO;
-import com.socialuni.social.user.sdk.repository.KeywordsRepository;
+import com.socialuni.social.report.sdk.dao.DO.KeywordsDO;
+import com.socialuni.social.report.sdk.dao.DO.KeywordsTriggerDetailDO;
+import com.socialuni.social.report.sdk.dao.repository.KeywordsRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -47,7 +47,7 @@ public class KeywordsQueryController {
     @Resource
     private CommentRepository commentApi;
     @Resource
-    private MessageRepository messageRepository;
+    private SocialuniMessageRepository messageRepository;
     @Resource
     private KeywordsService keywordsService;
 
@@ -64,7 +64,7 @@ public class KeywordsQueryController {
     public ResultRO<List<KeywordsDO>> queryKeywords() {
         CheckIsAdminUtil.checkAdmin();
         //先查询出来所有的关键词
-        List<KeywordsDO> wordDOs = keywordsRepository.findAllByStatusOrderByTextViolateRatioDesc(CommonStatus.enable);
+        List<KeywordsDO> wordDOs = keywordsRepository.findAllByStatusOrderByTextViolateRatioDesc(SocialuniCommonStatus.enable);
 
         return new ResultRO<>(wordDOs);
     }
@@ -105,7 +105,7 @@ public class KeywordsQueryController {
         Pageable pageable = PageRequest.of(0, count);
         Page<?  extends SocialuniTalkDO> talkModels = talkApi.findByStatusNotInOrderByIdDesc(pageable, ContentStatus.auditStatus);
         Page<?  extends SocialuniCommentDO> commentDOS = commentApi.findByStatusNotInOrderByIdDesc(pageable, ContentStatus.auditStatus);
-        Page<MessageDO> messageDOS = messageRepository.findByStatusNotInOrderByIdDesc(pageable, ContentStatus.auditStatus);
+        Page<SocialuniMessageDO> messageDOS = messageRepository.findByStatusNotInOrderByIdDesc(pageable, ContentStatus.auditStatus);
 
         baseModelDOS.addAll(talkModels.getContent());
         baseModelDOS.addAll(commentDOS.getContent());

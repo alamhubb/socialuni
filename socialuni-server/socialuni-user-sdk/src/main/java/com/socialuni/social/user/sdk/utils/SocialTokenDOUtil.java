@@ -1,13 +1,14 @@
 package com.socialuni.social.user.sdk.utils;
 
 import com.socialuni.social.common.api.utils.SocialTokenFacade;
-import com.socialuni.social.user.sdk.model.DO.SocialTokenDO;
+import com.socialuni.social.common.sdk.utils.RequestLogUtil;
+import com.socialuni.social.user.sdk.model.DO.SocialuniTokenDO;
 import com.socialuni.social.user.sdk.repository.SocialuniCommonTokenRepository;
 import com.socialuni.social.common.api.utils.IntegerUtils;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.common.api.exception.exception.SocialNotLoginException;
 import com.socialuni.social.common.api.exception.exception.SocialUserTokenExpireException;
-import com.socialuni.social.user.sdk.model.DO.RequestLogDO;
+import com.socialuni.social.common.api.dao.DO.RequestLogDO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -25,7 +26,7 @@ public class SocialTokenDOUtil {
         SocialTokenDOUtil.commonTokenRepository = commonTokenRepository;
     }
 
-    public static SocialTokenDO getCommonTokenDOAllowNull() {
+    public static SocialuniTokenDO getCommonTokenDOAllowNull() {
         String token = SocialTokenFacade.getToken();
         if (StringUtils.isEmpty(token)) {
             return null;
@@ -33,21 +34,16 @@ public class SocialTokenDOUtil {
         return SocialTokenDOUtil.getCommonTokenDONotNull(token);
     }
 
-    public static SocialTokenDO getCommonTokenDOAllowNull(String token) {
+    public static SocialuniTokenDO getCommonTokenDOAllowNull(String token) {
         if (StringUtils.isEmpty(token)) {
             return null;
         }
-        return SocialTokenDOUtil.getCommonTokenDONotNull(token);
-    }
-
-
-    public static SocialTokenDO getCommonTokenDONotNull(String token) {
+        SocialuniTokenDO tokenDO = commonTokenRepository.findOneByToken(token);
+        if (tokenDO == null) {
+            return null;
+        }
         String userKey = SocialTokenFacade.getUserKeyByToken(token);
         if (userKey == null) {
-            throw new SocialNotLoginException();
-        }
-        SocialTokenDO tokenDO = commonTokenRepository.findOneByToken(token);
-        if (tokenDO == null) {
             throw new SocialNotLoginException();
         }
         Integer doUserId = tokenDO.getUserId();
@@ -58,8 +54,8 @@ public class SocialTokenDOUtil {
             if (!userId.equals(doUserId)) {
                 log.error("绕过验证，错误的userId:{},{}", doUserId, userId);
                 RequestLogDO requestLogDO = RequestLogUtil.get();
+                requestLogDO.setErrorMsg("绕过验证，错误的userId:{},{}");
                 requestLogDO.setUserId(doUserId);
-                RequestLogUtil.save(requestLogDO);
                 throw new SocialNotLoginException();
             }
         } else {
@@ -69,8 +65,8 @@ public class SocialTokenDOUtil {
                 log.error("绕过验证，错误的userId:{},{}", uid, userKey);
                 RequestLogDO requestLogDO = RequestLogUtil.get();
                 if (requestLogDO != null) {
+                    requestLogDO.setErrorMsg("绕过验证，错误的userId:{},{}");
                     requestLogDO.setUserId(doUserId);
-                    RequestLogUtil.save(requestLogDO);
                 }
                 throw new SocialNotLoginException();
             }
@@ -83,6 +79,15 @@ public class SocialTokenDOUtil {
             throw new SocialUserTokenExpireException();
         }
         //返回user
+        return tokenDO;
+    }
+
+
+    public static SocialuniTokenDO getCommonTokenDONotNull(String token) {
+        SocialuniTokenDO tokenDO = SocialTokenDOUtil.getCommonTokenDOAllowNull(token);
+        if (tokenDO == null) {
+            throw new SocialNotLoginException();
+        }
         return tokenDO;
     }
 }

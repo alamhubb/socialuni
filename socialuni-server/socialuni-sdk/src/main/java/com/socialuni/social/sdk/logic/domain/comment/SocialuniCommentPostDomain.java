@@ -1,20 +1,20 @@
 package com.socialuni.social.sdk.logic.domain.comment;
 
-import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
-import com.socialuni.social.community.sdk.entity.TagDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniCommentDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTagDO;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
-import com.socialuni.social.user.sdk.constant.UserType;
+import com.socialuni.social.common.sdk.constant.UserType;
 import com.socialuni.social.sdk.dao.store.SocialTagRedis;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.sdk.logic.check.SocialuniUserCheck;
+import com.socialuni.social.user.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.social.sdk.logic.domain.report.SoicialuniSystemPreCheckReportDomainDOUtil;
 import com.socialuni.social.sdk.logic.entity.comment.SocialPostCommentEntity;
 import com.socialuni.social.sdk.logic.factory.SocialCommentROFactory;
-import com.socialuni.social.user.sdk.utils.content.SocialuniTextContentUtil;
+import com.socialuni.social.report.sdk.utils.SocialuniTextContentUtil;
 import com.socialuni.social.sdk.model.QO.comment.SocialuniCommentPostQO;
 import com.socialuni.social.sdk.model.RO.talk.SocialuniCommentRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -39,15 +39,15 @@ public class SocialuniCommentPostDomain {
 
         Integer talkId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(addQO.getTalkId());
 
-        List<?  extends TagDO> TagDOs = socialTagRedis.getTagsByTalkId(talkId);
-        List<String> tagNames = TagDOs.stream().map(TagDO::getName).collect(Collectors.toList());
+        List<?  extends SocialuniTagDO> TagDOs = socialTagRedis.getTagsByTalkId(talkId);
+        List<String> tagNames = TagDOs.stream().map(SocialuniTagDO::getName).collect(Collectors.toList());
 
         //系统管理员不校验相关内容
         if (!UserType.system.equals(mineUser.getType())) {
             //不为开发环境，则校验内容
             if (!tagNames.contains(SocialuniConst.devEnvTagName)) {
                 //校验用户
-                SocialuniUserCheck.checkUserBindPhoneNumAndStatusNoEnable(mineUser);
+                SocialuniUserCheck.checkUserBindPhoneNumAndStatusEnable();
             }
             SocialuniTextContentUtil.checkTextHasUnderageAndContactAndViolateWords(addQO.getContent());
         }

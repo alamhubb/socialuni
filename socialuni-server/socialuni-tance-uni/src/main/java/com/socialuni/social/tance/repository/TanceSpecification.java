@@ -1,6 +1,6 @@
 package com.socialuni.social.tance.repository;
 
-import com.socialuni.social.common.sdk.repository.SuperInfo;
+import com.socialuni.social.common.sdk.dao.repository.SuperInfo;
 import com.socialuni.social.tance.sdk.model.TanceRequestModel;
 import org.springframework.data.jpa.domain.Specification;
 

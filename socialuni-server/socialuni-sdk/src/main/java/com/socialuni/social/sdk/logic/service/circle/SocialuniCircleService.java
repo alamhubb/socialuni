@@ -2,12 +2,11 @@ package com.socialuni.social.sdk.logic.service.circle;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
-import com.socialuni.social.community.sdk.entity.SocialuniCircleChatDO;
-import com.socialuni.social.community.sdk.entity.SocialuniCircleDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniCircleChatDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniCircleDO;
 import com.socialuni.social.community.sdk.model.SocialuniTalkTabCircleRO;
 import com.socialuni.social.community.sdk.repository.SocialuniCircleChatRepository;
 import com.socialuni.social.community.sdk.repository.SocialuniCircleRepository;
-import com.socialuni.social.sdk.constant.socialuni.TalkTabType;
 import com.socialuni.social.sdk.dao.store.SocialuniCircleRedis;
 import com.socialuni.social.sdk.dao.utils.SocialuniCircleDOUtil;
 import com.socialuni.social.sdk.feignAPI.community.SocialuniCircleAPI;
@@ -23,7 +22,7 @@ import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

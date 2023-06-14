@@ -1,9 +1,8 @@
 package com.socialuni.social.sdk.controller;
 
 
-import com.socialuni.social.common.api.constant.PlatformType;
 import com.socialuni.social.common.api.utils.JsonUtil;
-import com.socialuni.social.common.sdk.facade.SocialuniRepositoryFacade;
+import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.sdk.constant.business.SocialuniPayStatus;
 import com.socialuni.social.sdk.dao.DO.bussiness.SocialuniCoinOrderDO;
 import com.socialuni.social.sdk.dao.DO.bussiness.SocialuniPayCoinOrderDO;
@@ -11,11 +10,10 @@ import com.socialuni.social.sdk.dao.factory.SocialuniCoinOrderFactory;
 import com.socialuni.social.sdk.dao.repository.bussiness.SocialuniPayOrderRepository;
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserSocialCoinDOUtil;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserCoinDo;
-import com.socialuni.social.user.sdk.platform.QQPayNotifyResult;
-import com.socialuni.social.user.sdk.platform.WXPayNotifyResult;
-import com.socialuni.social.user.sdk.platform.qq.QQPayResult;
-import com.socialuni.social.user.sdk.platform.weixin.WxConst;
-import com.socialuni.social.user.sdk.utils.WxUtil;
+import com.socialuni.social.common.sdk.platform.QQPayNotifyResult;
+import com.socialuni.social.common.sdk.platform.WXPayNotifyResult;
+import com.socialuni.social.common.sdk.platform.qq.QQPayResult;
+import com.socialuni.social.report.sdk.utils.WxUtil;
 import com.thoughtworks.xstream.XStream;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -27,10 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.io.IOException;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 @RequestMapping("socialuni/callback")
 @RestController

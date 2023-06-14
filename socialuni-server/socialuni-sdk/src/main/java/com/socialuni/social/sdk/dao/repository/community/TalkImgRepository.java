@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.repository.community;
 
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkImgDO;
 import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -24,7 +24,7 @@ public interface TalkImgRepository extends JpaRepository<SocialuniTalkImgDO, Int
     List<Integer> findUnionIdTop3ByTalkIdAndStatusInOrderByIdAsc(Integer talkId, List<String> status);*/
 
     @Cacheable(cacheNames = "getTalkImgUnionIdsByTalkIdTop3", key = "#talkId")
-    @Query(nativeQuery = true, value = "select t.* from s_talk_img t where t.talk_id =:talkId order by t.id asc limit 3")
+    @Query(nativeQuery = true, value = "select t.* from s_community_talk_img t where t.talk_id =:talkId order by t.id asc limit 3")
     List<SocialuniTalkImgDO> findUnionIdTop3ByTalkIdOrderByIdAsc(Integer talkId);
 
     @Cacheable(cacheNames = "getTalkImgByUnionId", key = "#unionId")

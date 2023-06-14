@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.utils;
 
 import com.socialuni.social.report.sdk.entity.ReportDetailDO;
-import com.socialuni.social.report.sdk.repository.ReportDetailRepository;
+import com.socialuni.social.report.sdk.dao.repository.ReportDetailRepository;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

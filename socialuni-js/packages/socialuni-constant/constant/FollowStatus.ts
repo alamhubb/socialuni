@@ -1,4 +1,4 @@
-import SocialUserContentRO from "socialuni-api/src/model/social/SocialUserContentRO";
+import SocialUserContentRO from "socialuni-api-base/src/model/social/SocialUserContentRO";
 
 export default class FollowStatus {
     // 私信

@@ -5,7 +5,7 @@ import com.socialuni.social.sdk.model.QO.community.talk.SocialUserTalkQueryQO;
 import com.socialuni.social.sdk.model.QO.talk.SocialuniUserTalkQueryQO;
 import com.socialuni.social.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

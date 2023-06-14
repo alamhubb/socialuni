@@ -4,10 +4,10 @@ package com.socialuni.social.sdk.logic.domain.log;
 import com.socialuni.social.user.sdk.model.FrontErrorLogVO;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.constant.ErrorPlatformType;
-import com.socialuni.social.user.sdk.model.DO.ErrorRequestLogDO;
-import com.socialuni.social.user.sdk.model.DO.RequestLogDO;
-import com.socialuni.social.user.sdk.utils.ErrorLogUtil;
-import com.socialuni.social.user.sdk.utils.RequestLogUtil;
+import com.socialuni.social.common.api.dao.DO.ErrorRequestLogDO;
+import com.socialuni.social.common.api.dao.DO.RequestLogDO;
+import com.socialuni.social.web.sdk.dao.utils.ErrorLogUtil;
+import com.socialuni.social.common.sdk.utils.RequestLogUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

@@ -55,7 +55,7 @@ public class DevAccountModel extends SocialuniBaseDO implements Serializable {
 
 
     public DevAccountModel() {
-        this.status = ConstStatus.enable;
+        this.status = ConstStatus.init;
         this.updateTime = this.getCreateTime();
     }
 }

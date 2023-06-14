@@ -5,7 +5,7 @@
     <select id="queryTagTalkIdsByCom" resultType="java.lang.Integer">
         SELECT ttg.talk_id
         FROM
-        s_tag tg,s_talk_tag ttg
+        s_community_tag tg,s_community_talk_tag ttg
         WHERE
         ttg.tag_id = tg.id
         <if test="tagIds!=null and tagIds.size()>0">

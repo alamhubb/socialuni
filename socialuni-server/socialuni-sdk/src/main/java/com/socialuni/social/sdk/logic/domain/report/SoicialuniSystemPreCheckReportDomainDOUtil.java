@@ -1,18 +1,18 @@
 package com.socialuni.social.sdk.logic.domain.report;
 
 import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
-import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
 import com.socialuni.social.report.sdk.entity.ReportDO;
 import com.socialuni.social.report.sdk.entity.ReportDetailDO;
-import com.socialuni.social.report.sdk.repository.ReportDetailRepository;
-import com.socialuni.social.report.sdk.repository.ReportRepository;
+import com.socialuni.social.report.sdk.dao.repository.ReportDetailRepository;
+import com.socialuni.social.report.sdk.dao.repository.ReportRepository;
 import com.socialuni.social.sdk.constant.ReportSourceType;
 import com.socialuni.social.sdk.constant.ViolateType;
-import com.socialuni.social.user.sdk.config.AppConfigStatic;
-import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
-import com.socialuni.social.user.sdk.model.DO.keywords.KeywordsTriggerDetailDO;
-import com.socialuni.social.user.sdk.repository.KeywordsTriggerDetailRepository;
+import com.socialuni.social.report.sdk.store.AppConfigStatic;
+import com.socialuni.social.common.api.enumeration.ContentStatus;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkImgDO;
+import com.socialuni.social.report.sdk.dao.DO.KeywordsTriggerDetailDO;
+import com.socialuni.social.report.sdk.dao.repository.KeywordsTriggerDetailRepository;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;

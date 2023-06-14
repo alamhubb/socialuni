@@ -12,7 +12,7 @@ import java.util.List;
 public interface TalkMapper {
 
 //    @Cacheable(cacheNames = CommonRedisKey.queryTalkIdsByAndUser, key = "#talkUserGender+'-'+#status+'-'+#minAge+'-'+#maxAge+'-'+#disableUnderageContent")
-    @PublishDataCacheable(cacheNames = CommonRedisKey.queryTalkIdsByAndUser, key = "#talkUserGender+'-'+#status+'-'+#minAge+'-'+#maxAge+'-'+#disableUnderageContent" , modelClassName = {"com.socialuni.social.community.sdk.entity.SocialuniTalkDO"})
+    @PublishDataCacheable(cacheNames = CommonRedisKey.queryTalkIdsByAndUser, key = "#talkUserGender+'-'+#status+'-'+#minAge+'-'+#maxAge+'-'+#disableUnderageContent" , modelClassName = {"com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO"})
     List<Integer> queryTalkIdsByAndUser(
             @Param("talkUserGender") String talkUserGender,
             @Param("minAge") Integer minAge,

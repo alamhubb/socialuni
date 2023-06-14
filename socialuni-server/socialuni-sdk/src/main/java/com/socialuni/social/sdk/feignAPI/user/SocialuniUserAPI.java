@@ -8,7 +8,6 @@ import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserDetailRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserImgRO;
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.user.sdk.model.QO.SocialuniUserIdQO;
 import com.socialuni.social.user.sdk.model.QO.SocialuniUserImgDeleteQO;
 import com.socialuni.social.user.sdk.model.QO.user.SocialuniUserExtendFriendQueryQO;
 import io.swagger.v3.oas.annotations.Operation;

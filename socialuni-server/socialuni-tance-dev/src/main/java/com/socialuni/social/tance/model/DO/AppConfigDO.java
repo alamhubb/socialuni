@@ -14,9 +14,16 @@ import java.util.Date;
 @Entity
 /**
  * 全局配置表
- * @deprecated  表设计冗余。
+ * @deprecated 表设计冗余。
  */
-@Table(name = "s_app_config")
+@Table(name = "s_app_config",
+        indexes = {
+                @Index(columnList = "devId"),
+                @Index(columnList = "status"),
+                @Index(columnList = "configKey"),
+                @Index(columnList = "createTime")
+        }
+)
 @IdClass(value = AppConfigPk.class)
 public class AppConfigDO implements Serializable {
     @Id

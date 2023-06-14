@@ -44,6 +44,11 @@ public class SocialuniUnionContentBaseDO extends SocialuniContentBaseDO implemen
         this.content = content;
     }
 
+    @Deprecated
+    public Integer getId() {
+        return super.getId();
+    }
+
     /*public SocialUnionContentBaseDO(SocialUnionContentBaseDO socialUnionContentBaseDO, String content) {
         this.userId = socialUnionContentBaseDO.getUserId();
         this.unionId = socialUnionContentBaseDO.getUnionId();

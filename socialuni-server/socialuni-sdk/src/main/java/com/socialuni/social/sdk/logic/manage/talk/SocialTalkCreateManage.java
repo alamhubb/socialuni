@@ -1,16 +1,16 @@
 package com.socialuni.social.sdk.logic.manage.talk;
 
-import com.socialuni.social.community.sdk.entity.DistrictDO;
-import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkHasUnderageImgAuditDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniDistrictDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkHasUnderageImgAuditDO;
 import com.socialuni.social.sdk.dao.repository.community.TalkAdultImgAuditRepository;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDORedis;
 import com.socialuni.social.sdk.logic.factory.TalkDOFactory;
-import com.socialuni.social.user.sdk.utils.content.SocialuniTextContentUtil;
+import com.socialuni.social.report.sdk.utils.SocialuniTextContentUtil;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
 import com.socialuni.social.sdk.model.QO.community.talk.SocialuniTalkPostQO;
-import com.socialuni.social.user.sdk.utils.SocialuniImgContentUtil;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.report.sdk.utils.SocialuniImgContentUtil;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -26,7 +26,7 @@ public class SocialTalkCreateManage {
     @Resource
     TalkAdultImgAuditRepository talkAdultImgAuditRepository;
 
-    public SocialuniTalkDO createTalkDO(SocialuniUserDo user, SocialuniTalkPostQO socialTalkPostQO, DistrictDO district) {
+    public SocialuniTalkDO createTalkDO(SocialuniUserDo user, SocialuniTalkPostQO socialTalkPostQO, SocialuniDistrictDO district) {
         SocialuniTalkDO talkDO = TalkDOFactory.newTalkDO(user, socialTalkPostQO, district);
 
         //img相关放在外面，因为有 注入，省事而已

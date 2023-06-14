@@ -1,22 +1,22 @@
 package com.socialuni.social.sdk.logic.factory;
 
-import com.socialuni.social.common.api.enumeration.CommonStatus;
-import com.socialuni.social.community.sdk.entity.HugDO;
-import com.socialuni.social.community.sdk.entity.SocialuniCircleDO;
-import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
-import com.socialuni.social.community.sdk.entity.TagDO;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniHugDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniCircleDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTagDO;
 import com.socialuni.social.community.sdk.repository.CommentRepository;
 import com.socialuni.social.community.sdk.repository.SocialuniCircleRepository;
 import com.socialuni.social.sdk.dao.CommentDao;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialTalkCircleDO;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialTalkCircleDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkImgDO;
 import com.socialuni.social.sdk.dao.redis.HugRedis;
 import com.socialuni.social.sdk.dao.repository.community.SocialTalkCircleRepository;
 import com.socialuni.social.sdk.dao.store.SocialTagRedis;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkImgDOUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniContentUserROFactory;
+import com.socialuni.social.user.sdk.model.factory.SocialuniContentUserROFactory;
 import com.socialuni.social.sdk.utils.PositionUtil;
 import com.socialuni.social.sdk.model.QO.community.talk.SocialHomeTabTalkQueryBO;
 import com.socialuni.social.sdk.model.RO.talk.SocialTalkDistrictRO;
@@ -24,9 +24,9 @@ import com.socialuni.social.sdk.model.RO.talk.SocialTalkTagRO;
 import com.socialuni.social.sdk.model.RO.talk.SocialuniCommentRO;
 import com.socialuni.social.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.social.common.api.model.user.SocialuniContentUserRO;
-import com.socialuni.social.user.sdk.model.RO.SocialuniRectangleRO;
+import com.socialuni.social.common.sdk.model.RO.SocialuniRectangleRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -157,7 +157,7 @@ public class SocialTalkROFactory {
         String uid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(talkId);
 
         socialTalkRO.setId(uid);
-        SocialuniUserDo talkUser = SocialuniUserUtil.getUserNotNull(talkDO.getUserId());
+        SocialuniUserDo talkUser = SocialuniUserUtil.getAndCheckUserNotNull(talkDO.getUserId());
         SocialuniContentUserRO socialTalkUserRO = SocialuniContentUserROFactory.newContentUserRO(talkUser, mineUser);
 //        socialTalkUserRO.setId(UnionIdDbUtil.createUserUid(socialTalkUserRO.getId(), user));
 
@@ -183,7 +183,7 @@ public class SocialTalkROFactory {
 
         SocialTalkCircleDO socialTalkCircleDO = socialTalkCircleRepository.findFirstByTalkId(talkId);
         if (socialTalkCircleDO != null) {
-            SocialuniCircleDO socialCircleDO = socialCircleApi.findFirstByIdAndStatus(socialTalkCircleDO.getCircleId(), CommonStatus.enable);
+            SocialuniCircleDO socialCircleDO = socialCircleApi.findFirstByIdAndStatus(socialTalkCircleDO.getCircleId(), SocialuniCommonStatus.enable);
             if (socialCircleDO != null) {
                 circles.add(socialCircleDO.getName());
             }
@@ -191,7 +191,7 @@ public class SocialTalkROFactory {
         socialTalkRO.setCircles(circles);
 
         //10 毫秒
-        List<? extends TagDO> TagDOs = socialTagRedis.getTagsByTalkId(talkDO.getUnionId());
+        List<? extends SocialuniTagDO> TagDOs = socialTagRedis.getTagsByTalkId(talkDO.getUnionId());
         List<SocialTalkTagRO> tagROs = TagDOs.stream().map(tagDO -> new SocialTalkTagRO(tagDO.getId(), tagDO.getName())).collect(Collectors.toList());
         //50毫秒
 //        socialTalkRO.setContentType(talkDO.getContentType());
@@ -252,7 +252,7 @@ public class SocialTalkROFactory {
         //40毫秒
         if (mineUser != null) {
             //20毫秒
-            HugDO HugDO = hugRedis.findHugByTalkIdAndUserId(talkDO.getUnionId(), mineUser.getUnionId());
+            SocialuniHugDO HugDO = hugRedis.findHugByTalkIdAndUserId(talkDO.getUnionId(), mineUser.getUnionId());
             if (HugDO != null) {
                 socialTalkRO.setHasHugged(true);
             }

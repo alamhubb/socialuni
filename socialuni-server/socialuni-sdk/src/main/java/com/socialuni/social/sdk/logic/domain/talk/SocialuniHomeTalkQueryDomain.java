@@ -1,12 +1,12 @@
 package com.socialuni.social.sdk.logic.domain.talk;
 
 import cn.hutool.core.util.BooleanUtil;
-import com.socialuni.social.common.api.enumeration.CommonStatus;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
-import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
-import com.socialuni.social.community.sdk.entity.TagDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTagDO;
 import com.socialuni.social.community.sdk.repository.TagRepository;
 import com.socialuni.social.community.sdk.repository.TalkRepository;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
@@ -14,8 +14,6 @@ import com.socialuni.social.sdk.constant.GenderTypeQueryVO;
 import com.socialuni.social.sdk.constant.GenderTypeVO;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
 import com.socialuni.social.sdk.constant.TalkTabType;
-import com.socialuni.social.tance.sdk.config.SocialuniAppType;
-import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.sdk.dao.store.TalkQueryStore;
 import com.socialuni.social.sdk.logic.entity.talk.SocialFollowUserTalksQueryEntity;
 import com.socialuni.social.sdk.logic.factory.SocialTalkROFactory;
@@ -25,10 +23,9 @@ import com.socialuni.social.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
@@ -140,8 +137,8 @@ public class SocialuniHomeTalkQueryDomain {
             tagNames = new ArrayList<>();
         }
         for (String tagName : tagNames) {
-            TagDO TagDO = tagApi.findFirstByName(tagName);
-            if (TagDO == null || !TagDO.getStatus().equals(CommonStatus.enable)) {
+            SocialuniTagDO TagDO = tagApi.findFirstByName(tagName);
+            if (TagDO == null || !TagDO.getStatus().equals(SocialuniCommonStatus.enable)) {
                 throw new SocialBusinessException("选择了无效的话题");
             }
             tagIds.add(TagDO.getId());

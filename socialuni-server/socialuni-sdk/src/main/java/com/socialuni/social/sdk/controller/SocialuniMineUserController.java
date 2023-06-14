@@ -37,6 +37,11 @@ public class SocialuniMineUserController implements SocialuniMineUserAPI {
     }
 
     @Override
+    public ResultRO<SocialuniMineUserDetailRO> randomUserAvatar() {
+        return socialuniMineUserService.randomUserAvatar();
+    }
+
+    @Override
     public ResultRO<SocialuniMineUserDetailRO> addUserAvatarImg(SocialuniImgAddQO socialUserImgAddQO) {
         return socialuniMineUserService.addUserAvatarImg(socialUserImgAddQO);
     }

@@ -1,19 +1,17 @@
 package com.socialuni.social.tance.entity;
 
-import com.socialuni.social.common.api.enumeration.CommonStatus;
-import com.socialuni.social.common.api.utils.RequestUtil;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.utils.UUIDUtil;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.api.DevAccountRedisInterface;
 import com.socialuni.social.tance.sdk.constant.AdminAppConfigConst;
 import com.socialuni.social.tance.sdk.enumeration.DevAccountType;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
-import com.socialuni.social.tance.sdk.enumeration.SocialFeignHeaderName;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.user.sdk.logic.entity.SocialUserPhoneEntity;
 import com.socialuni.social.user.sdk.model.DO.SocialUserPhoneDo;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
-import com.socialuni.social.user.sdk.redis.SocialUserPhoneRedis;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
+import com.socialuni.social.user.sdk.logic.redis.SocialUserPhoneRedis;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Service;
 
@@ -63,7 +61,7 @@ public class DevAccountEntity {
         devAccountModel.setAppGenderType(GenderType.all);
         devAccountModel.setDevNum(curDevNum);
         devAccountModel.setType(DevAccountType.personal);
-        devAccountModel.setStatus(CommonStatus.enable);
+        devAccountModel.setStatus(SocialuniCommonStatus.enable);
         devAccountModel.setCreateTime(curDate);
         devAccountModel.setCallApiCount(0);
         devAccountModel.setUpdateTime(curDate);
@@ -77,7 +75,7 @@ public class DevAccountEntity {
             //如果没注册账号，则直接注册
             socialuniUserDo = socialUserPhoneEntity.createUserPhoneEntity(phoneNum);
         } else {
-            socialuniUserDo = SocialuniUserUtil.getUserNotNull(SocialUserPhoneDo.getUserId());
+            socialuniUserDo = SocialuniUserUtil.getAndCheckUserNotNull(SocialUserPhoneDo.getUserId());
         }
         devAccountModel.setUserId(socialuniUserDo.getUserId());
         devAccountModel = (DevAccountDo) devAccountRedis.saveDevAccount(devAccountModel);

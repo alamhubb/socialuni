@@ -4,14 +4,14 @@ package com.socialuni.social.sdk.logic.entity;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.sdk.constant.AuthType;
 import com.socialuni.social.sdk.dao.DO.dev.ThirdUserDO;
-import com.socialuni.social.user.sdk.redis.SocialUserPhoneRedis;
+import com.socialuni.social.user.sdk.logic.redis.SocialUserPhoneRedis;
 import com.socialuni.social.sdk.logic.manage.ThirdUserAuthManage;
 import com.socialuni.social.sdk.logic.manage.ThirdUserManage;
 import com.socialuni.social.sdk.logic.manage.ThirdUserTokenManage;
 import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.user.sdk.model.DO.SocialUserPhoneDo;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

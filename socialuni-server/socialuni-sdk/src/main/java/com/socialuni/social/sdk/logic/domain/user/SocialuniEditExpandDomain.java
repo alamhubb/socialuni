@@ -5,7 +5,7 @@ import com.socialuni.social.sdk.dao.utils.user.SocialuniUserExpandDOUtil;
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserExtendFriendLogDOUtil;
 import com.socialuni.social.sdk.logic.check.SocialuniSchoolCheck;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
-import com.socialuni.social.user.sdk.utils.content.SocialuniTextContentUtil;
+import com.socialuni.social.report.sdk.utils.SocialuniTextContentUtil;
 import com.socialuni.social.user.sdk.model.QO.SocialUserContactInfoEditQO;
 import com.socialuni.social.user.sdk.model.QO.SocialUserSchoolNameEditQO;
 import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;

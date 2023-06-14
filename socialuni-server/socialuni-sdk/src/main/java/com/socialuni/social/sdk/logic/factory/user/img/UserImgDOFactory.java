@@ -1,13 +1,13 @@
 package com.socialuni.social.sdk.logic.factory.user.img;
 
 
-import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
+import com.socialuni.social.common.api.enumeration.ContentStatus;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.user.sdk.utils.content.SocialuniTextContentUtil;
+import com.socialuni.social.report.sdk.utils.SocialuniTextContentUtil;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
-import com.socialuni.social.user.sdk.utils.SocialuniImgContentUtil;
+import com.socialuni.social.report.sdk.utils.SocialuniImgContentUtil;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserImgDo;
 
 import java.util.Date;

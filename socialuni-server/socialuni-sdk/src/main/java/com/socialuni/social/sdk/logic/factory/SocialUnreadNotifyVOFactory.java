@@ -1,18 +1,18 @@
 package com.socialuni.social.sdk.logic.factory;
 
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
-import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
-import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
-import com.socialuni.social.sdk.constant.NotifyType;
-import com.socialuni.social.user.sdk.model.DO.NotifyDO;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniCommentDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
+import com.socialuni.social.im.enumeration.NotifyType;
+import com.socialuni.social.common.sdk.dao.DO.NotifyDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkImgDO;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniCommentDOUtil;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkImgDOUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.model.RO.app.SocialUnreadNotifyVO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -36,10 +36,10 @@ public class SocialUnreadNotifyVOFactory {
     }
 
     public static SocialUnreadNotifyVO newUnreadNotifyVO(NotifyDO notifyDO) {
-        SocialuniUserDo notifyUser = SocialuniUserUtil.getUserNotNull(notifyDO.getUserId());
+        SocialuniUserDo notifyUser = SocialuniUserUtil.getAndCheckUserNotNull(notifyDO.getUserId());
         SocialUnreadNotifyVO notifyVO = SocialUnreadNotifyVOFactory.newUnreadNotifyVO(notifyUser);
 
-        Integer commentId = notifyDO.getCommentId();
+        Integer commentId = notifyDO.getContentId();
         SocialuniCommentDO commentDO = SocialuniCommentDOUtil.getNotCommentNull(commentId);
         SocialuniTalkDO talk = SocialuniTalkDOUtil.getTalkNotNull(commentDO.getTalkId());
 

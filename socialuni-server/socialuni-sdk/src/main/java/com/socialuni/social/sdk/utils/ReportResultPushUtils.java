@@ -2,17 +2,17 @@ package com.socialuni.social.sdk.utils;
 
 import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.common.sdk.utils.DateUtils;
+import com.socialuni.social.report.sdk.constant.SocialuniSupportProviderType;
 import com.socialuni.social.report.sdk.entity.ReportDO;
-import com.socialuni.social.report.sdk.repository.ReportRepository;
-import com.socialuni.social.tance.config.ErrorMsg;
-import com.socialuni.social.user.sdk.constant.UniappProviderType;
-import com.socialuni.social.user.sdk.model.DO.NotifyDO;
+import com.socialuni.social.report.sdk.dao.repository.ReportRepository;
+import com.socialuni.social.common.sdk.constant.ErrorMsg;
+import com.socialuni.social.common.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
-import com.socialuni.social.user.sdk.platform.qq.QQConst;
-import com.socialuni.social.user.sdk.platform.weixin.WxConst;
-import com.socialuni.social.user.sdk.platform.PushMsgDTO;
-import com.socialuni.social.sdk.model.PushNotifyVO;
-import com.socialuni.social.sdk.model.PushValue;
+import com.socialuni.social.common.sdk.platform.qq.QQConst;
+import com.socialuni.social.common.sdk.platform.weixin.WxConst;
+import com.socialuni.social.common.sdk.platform.PushMsgDTO;
+import com.socialuni.social.im.model.message.notify.PushNotifyVO;
+import com.socialuni.social.im.model.message.notify.PushValue;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -35,7 +35,7 @@ public class ReportResultPushUtils {
 
     //动态评论通知
     public static PushMsgDTO getReportResultPushDTO(String provider, NotifyDO notify) {
-        ReportDO ReportDO = reportApi.findById(notify.getReportId()).get();
+        ReportDO ReportDO = reportApi.findById(notify.getContentId()).get();
         SocialuniUnionContentBaseDO baseModelDO = SocialuniContentDOUtil.getContentDOByContentId(ReportDO.getContentId());
 
         //举报原因
@@ -54,7 +54,7 @@ public class ReportResultPushUtils {
         PushNotifyVO notifyVO = new PushNotifyVO();
         notifyVO.setNickname(new PushValue(ErrorMsg.serviceName));
         notifyVO.setBeContent(new PushValue(StringUtils.substring(baseModelDO.getContent(), 0, 20)));
-        notifyVO.setBeNickname(new PushValue(SocialuniUserUtil.getUserNotNull(baseModelDO.getUserId()).getNickname()));
+        notifyVO.setBeNickname(new PushValue(SocialuniUserUtil.getAndCheckUserNotNull(baseModelDO.getUserId()).getNickname()));
         notifyVO.setCause(new PushValue(reportCause));
         notifyVO.setResult(new PushValue(reportResult));
         notifyVO.setDate(new PushValue(DateUtils.simpleTimeFormat.format(ReportDO.getUpdateTime())));
@@ -62,7 +62,7 @@ public class ReportResultPushUtils {
 
         HashMap<String, Object> data = new HashMap<>();
         PushMsgDTO pushMsgDTO = null;
-        if (provider.equals(UniappProviderType.qq)) {
+        if (provider.equals(SocialuniSupportProviderType.qq)) {
             //举报内容
             data.put("keyword5", notifyVO.getBeContent());
             //被举报人
@@ -77,7 +77,7 @@ public class ReportResultPushUtils {
             data.put("keyword2", notifyVO.getRemark());
 
             pushMsgDTO = new PushMsgDTO(QQConst.report_result_template_id, data, "keyword4.DATA");
-        } else if (provider.equals(UniappProviderType.wx)) {
+        } else if (provider.equals(SocialuniSupportProviderType.wx)) {
             //审核内容
             data.put("thing5", notifyVO.getBeContent());
             //审核结果

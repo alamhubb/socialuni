@@ -2,20 +2,19 @@ package com.socialuni.social.user.sdk.logic.domain;
 
 import com.socialuni.social.common.api.constant.DateTimeType;
 import com.socialuni.social.common.api.constant.SocialSystemConst;
+import com.socialuni.social.common.api.enumeration.ConstStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.utils.IpUtil;
-import com.socialuni.social.common.sdk.constant.StatusConst;
-import com.socialuni.social.common.sdk.utils.StringUtil;
-import com.socialuni.social.tance.config.ErrorMsg;
+import com.socialuni.social.common.sdk.constant.ErrorMsg;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.tance.sdk.facade.ConfigFacade;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
-import com.socialuni.social.user.sdk.manage.SocialUserPhoneManage;
+import com.socialuni.social.user.sdk.logic.manage.SocialUserPhoneManage;
 import com.socialuni.social.user.sdk.model.DO.AuthenticationDO;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.QO.phone.SocialSendAuthCodeQO;
 import com.socialuni.social.user.sdk.repository.AuthenticationRepository;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
@@ -116,13 +115,13 @@ public class SocailSendAuthCodeDomain {
 
 
         AuthenticationDO authenticationDO = new AuthenticationDO(SocialuniUserUtil.getMineUserIdAllowNull(mineUser), phoneNum, null, userIp, DevAccountFacade.getDevIdNotNull());
-        authenticationDO.setStatus(StatusConst.fail);
+        authenticationDO.setStatus(ConstStatus.fail);
         authRepository.save(authenticationDO);
 
         String authCode = TencentSmsServe.sendAuthCode(phoneNum);
 
         authenticationDO.setAuthCode(authCode);
-        authenticationDO.setStatus(StatusConst.success);
+        authenticationDO.setStatus(ConstStatus.success);
         authRepository.save(authenticationDO);
 
         return new ResultRO<>();

@@ -19,6 +19,7 @@ public class AppConfigDOKeyConst {
     public static final String homeTabName = "homeTabName";
     public static final String cityTabName = "cityTabName";
     public static final String tabNames = "tabNames";
+    public static final String defaultChatGroups = "defaultChatGroups";
 
     public static final String disableUnderageContent = "disableUnderageContent";
     public static final String disableContentHasQrCode = "disableContentHasQrCode";
@@ -70,6 +71,7 @@ public class AppConfigDOKeyConst {
             homeTabName,
             cityTabName,
             tabNames,
+            defaultChatGroups,
             disableUnderageContent,
             disableContentHasQrCode,
             disableContentHasContactInfo,

@@ -3,8 +3,8 @@ package com.socialuni.social.admin.service;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.sdk.dao.repository.dev.ThirdUserRepository;
 import com.socialuni.social.user.sdk.model.DO.SocialUserPhoneDo;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
-import com.socialuni.social.user.sdk.redis.SocialUserPhoneRedis;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
+import com.socialuni.social.user.sdk.logic.redis.SocialUserPhoneRedis;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +23,7 @@ public class AdminUserService {
         if (SocialUserPhoneDo == null) {
             throw new SocialParamsException("用户不存在或开发者无权限");
         }
-        SocialuniUserDo user = SocialuniUserUtil.getUserNotNull(SocialUserPhoneDo.getUserId());
+        SocialuniUserDo user = SocialuniUserUtil.getAndCheckUserNotNull(SocialUserPhoneDo.getUserId());
         return user;
     }
 }

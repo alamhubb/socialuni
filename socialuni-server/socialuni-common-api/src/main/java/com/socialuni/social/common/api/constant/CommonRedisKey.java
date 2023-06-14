@@ -40,4 +40,8 @@ public class CommonRedisKey {
     public static final String findUserPhoneByUserId = "findUserPhoneByUserId";
     public static final String findUserFansDetailByUserId = "findUserFansDetailByUserId";
     public static final String talkById = "talkById";
+
+
+    public static final String commonFindByUserIdAndBeUserId = "commonFindByUserIdAndBeUserId";
+
 }

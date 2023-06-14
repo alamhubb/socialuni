@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.repository.community;
 
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialTalkCircleDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialTalkCircleDO;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 

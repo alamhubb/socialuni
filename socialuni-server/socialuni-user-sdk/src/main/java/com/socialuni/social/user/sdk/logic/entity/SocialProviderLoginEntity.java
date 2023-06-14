@@ -1,10 +1,10 @@
 package com.socialuni.social.user.sdk.logic.entity;
 
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import com.socialuni.social.user.sdk.manage.SocialUserAccountManage;
-import com.socialuni.social.user.sdk.manage.SocialUserAccountStore;
-import com.socialuni.social.user.sdk.model.DO.SocialUserAccountDO;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.user.sdk.logic.manage.SocialUserAccountManage;
+import com.socialuni.social.user.sdk.logic.manage.SocialUserAccountStore;
+import com.socialuni.social.common.sdk.dao.DO.SocialUserAccountDO;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.user.sdk.model.RO.UniUnionIdRO;
 import com.socialuni.social.user.sdk.utils.SocialUniProviderUtil;
@@ -35,7 +35,7 @@ public class SocialProviderLoginEntity {
         SocialuniUserDo mineUser;
         //如果已经注册过
         if (socialUserAccountDO != null) {
-            mineUser = SocialuniUserUtil.getUserNotNull(socialUserAccountDO.getUserId());
+            mineUser = SocialuniUserUtil.getAndCheckUserNotNull(socialUserAccountDO.getUserId());
         } else {
             mineUser = socialUserEntity.createUserAndDetail(loginQO);
         }

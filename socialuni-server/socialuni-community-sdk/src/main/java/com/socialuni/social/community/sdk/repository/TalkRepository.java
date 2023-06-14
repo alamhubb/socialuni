@@ -2,7 +2,7 @@ package com.socialuni.social.community.sdk.repository;
 
 
 import com.socialuni.social.common.api.constant.CommonRedisKey;
-import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -38,25 +38,26 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
     /**
      * 连表过滤圈子内容
      * <pre>
-     *     select * from s_talk st where id in ( select talk_id from s_talk_circle where circle_id = 1) and status = '正常' and dev_id = 1 and global_top > -1 order by  global_top desc;
+     *     select * from s_community_talk st where id in ( select talk_id from s_community_talk_circle where circle_id = 1) and status = '正常' and dev_id = 1 and global_top > -1 order by  global_top desc;
      * </pre>
+     *
      * @param status
      * @param devId
      * @param globalTop
      * @param circleId
-     * @see #findTop2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc
      * @return
+     * @see #findTop2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc
      */
     @Cacheable(cacheNames = "stickTalks", key = "#devId+'-'+#circleId")
-    @Query(nativeQuery = true, value = "select * from s_talk st where st.union_id in ( select talk_id from s_talk_circle where circle_id = :circleId ) and status = :status and dev_id = :devId and global_top > :globalTop order by  global_top desc limit 2")
-    List<SocialuniTalkDO> findTop2ByStatusAndDevIdAndGlobalTopGreaterThanAndCircleIdOrderByGlobalTopDesc(String status, Integer devId, Integer globalTop,Integer circleId);
+    @Query(nativeQuery = true, value = "select * from s_community_talk st where st.union_id in ( select talk_id from s_community_talk_circle where circle_id = :circleId ) and status = :status and dev_id = :devId and global_top > :globalTop order by  global_top desc limit 2")
+    List<SocialuniTalkDO> findTop2ByStatusAndDevIdAndGlobalTopGreaterThanAndCircleIdOrderByGlobalTopDesc(String status, Integer devId, Integer globalTop, Integer circleId);
 
     @Cacheable(cacheNames = "stickTalkIdsByDevId", key = "#devId")
-    @Query(nativeQuery = true, value = "SELECT s.union_id from s_talk s where s.status = :status and s.dev_id =:devId and s.global_top > :globalTop order by t.global_top desc,t.id desc limit 2)")
+    @Query(nativeQuery = true, value = "SELECT s.union_id from s_community_talk s where s.status = :status and s.dev_id =:devId and s.global_top > :globalTop order by t.global_top desc,t.id desc limit 2)")
     List<Integer> findTopTalkId2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc(String status, Integer devId, Integer globalTop);
 
-    @Query(nativeQuery = true, value = "SELECT t.union_id FROM s_talk t where t.user_id = :userId and t.status = '正常' order by t.global_top desc,t.id desc limit 10")
-    List<Integer> findTop10ByUserIdOrderByGlobalTopDescIdDesc(Integer userId);
+    @Query(nativeQuery = true, value = "SELECT t.union_id FROM s_community_talk t where t.user_id = :userId and t.status = :status order by t.global_top desc,t.id desc limit 10")
+    List<Integer> findTop10ByUserIdAndStatusOrderByGlobalTopDescIdDesc(Integer userId, String status);
 
     //查询自己talk和他人详情talk
     @Query(value = "SELECT t.unionId FROM SocialuniTalkDO t where t.status in (:status) and t.userId=:userId order by t.createTime desc")
@@ -106,7 +107,7 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
             @Param("devId") Integer devId);
 
     /*@Cacheable(cacheNames = RedisKeysConst.queryTalkIdsByGenderAndAgeAndAdCodeAndGender, key = "#userGender+'-'+#minAge+'-'+#maxAge+'-'+#adCode+'-'+#talkGender+'-'+#mineUserGender+'-'+#devId")
-    @Query(nativeQuery = true, value = "SELECT t.unionId FROM s_talk t,s_content c,u_dev_content d,c_user u " +
+    @Query(nativeQuery = true, value = "SELECT t.unionId FROM s_community_talk t,s_content c,u_dev_content d,c_user u " +
             "where c.global_top = 0 " +
             "and c.content_type = '动态' and c.id = t.content_id and c.user_id = u.id and c.id = d.content_id " +
             "and (:userGender is null or u.gender = :userGender) " +

@@ -7,9 +7,9 @@ import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.report.sdk.entity.ReportDO;
 import com.socialuni.social.sdk.constant.socialuni.SocialuniAuditContentType;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkHasUnderageImgAuditDO;
-import com.socialuni.social.user.sdk.model.DO.keywords.KeywordsTriggerDetailDO;
-import com.socialuni.social.user.sdk.repository.KeywordsTriggerDetailRepository;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkHasUnderageImgAuditDO;
+import com.socialuni.social.report.sdk.dao.DO.KeywordsTriggerDetailDO;
+import com.socialuni.social.report.sdk.dao.repository.KeywordsTriggerDetailRepository;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.Data;
 import org.springframework.stereotype.Component;
@@ -64,7 +64,7 @@ public class ReportRO {
 //        this.reportContentType = reportContentType;
 
 //        this.childReports = reportDO.getChildReports().stream().map(ReportDetailVO::new).collect(Collectors.toList());
-        this.user = new ReportUserVO(SocialuniUserUtil.getUserNotNull(reportDO.getContentUserId()));
+        this.user = new ReportUserVO(SocialuniUserUtil.getAndCheckUserNotNull(reportDO.getContentUserId()));
 //        this.updateTime = new Date();
 //        this.status = reportDO.getStatus();
         this.checked = true;
@@ -82,7 +82,7 @@ public class ReportRO {
 //        this.reportContentType = reportContentType;
 
 //        this.childReports = reportDO.getChildReports().stream().map(ReportDetailVO::new).collect(Collectors.toList());
-        this.user = new ReportUserVO(SocialuniUserUtil.getUserNotNull(imgAuditDO.getUserId()));
+        this.user = new ReportUserVO(SocialuniUserUtil.getAndCheckUserNotNull(imgAuditDO.getUserId()));
 //        this.updateTime = new Date();
 //        this.status = reportDO.getStatus();
         this.checked = true;
@@ -92,7 +92,7 @@ public class ReportRO {
 
     public ReportRO(SocialuniUnionContentBaseDO modelDO) {
         this.talk = ReportContentROFactory.getReportContentVO(modelDO.getContentType(), modelDO.getUnionId());
-        this.user = new ReportUserVO(SocialuniUserUtil.getUserNotNull(modelDO.getUserId()));
+        this.user = new ReportUserVO(SocialuniUserUtil.getAndCheckUserNotNull(modelDO.getUserId()));
         this.triggerKeywords = new ArrayList<>();
         this.violateType = modelDO.getViolateType();
         this.auditContentType = SocialuniAuditContentType.report;

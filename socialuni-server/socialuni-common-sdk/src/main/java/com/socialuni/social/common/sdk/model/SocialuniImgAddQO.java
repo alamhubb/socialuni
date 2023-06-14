@@ -10,7 +10,6 @@ import javax.validation.constraints.NotNull;
 public class SocialuniImgAddQO {
     @NotBlank
     private String src;
-    @NotNull
     private Double aspectRatio;
     //压缩率
     private Double quality;

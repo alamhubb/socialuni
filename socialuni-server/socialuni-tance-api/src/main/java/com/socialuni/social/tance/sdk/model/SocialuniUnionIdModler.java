@@ -8,6 +8,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 public class SocialuniUnionIdModler extends SocialuniBaseDO implements Serializable{
+    //为什么使用id，方便，可以拆分为id+类型
     private String contentType;
 
     private String uuid;

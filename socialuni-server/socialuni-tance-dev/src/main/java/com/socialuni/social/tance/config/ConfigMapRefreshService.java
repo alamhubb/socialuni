@@ -54,7 +54,6 @@ public class ConfigMapRefreshService {
             showAdList.add(a);
         }
         //todo 下版本删除AppConfigConst.appConfigMap 相关内容
-        AppConfigConst.appConfigMap.put(AppConfigConst.talkShowAdIndexListKey, showAdList);
         SocialuniAppConfig.getAppMoreConfig().setTalkShowAdIndexList(showAdList);
         log.info("系统配置表数据：{},{}", JsonUtil.objectMapper.writeValueAsString(SocialuniAppConfig.getAppConfig()), JsonUtil.objectMapper.writeValueAsString(SocialuniAppConfig.getAppMoreConfig()));
     }

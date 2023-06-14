@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.factory.community;
 
-import com.socialuni.social.community.sdk.entity.TagDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTagDO;
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.sdk.model.RO.community.tag.TagRO;
 import org.apache.commons.lang3.StringUtils;
@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.List;
 
 public class SocialTagROFactory {
-    public static TagRO getTagRO(TagDO TagDO) {
+    public static TagRO getTagRO(SocialuniTagDO TagDO) {
         TagRO tagRO = new TagRO();
         tagRO.setId(TagDO.getId());
         tagRO.setName(StringUtils.substring(TagDO.getName(), 0, 4));
@@ -19,7 +19,7 @@ public class SocialTagROFactory {
         return tagRO;
     }
 
-    public static List<TagRO> tagDOToROS(List<?  extends TagDO> DOs) {
+    public static List<TagRO> tagDOToROS(List<?  extends SocialuniTagDO> DOs) {
         return ListConvertUtil.toList(SocialTagROFactory::getTagRO, DOs);
     }
 }

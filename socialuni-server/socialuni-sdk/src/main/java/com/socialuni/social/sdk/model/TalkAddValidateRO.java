@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.model;
 
-import com.socialuni.social.community.sdk.entity.DistrictDO;
-import com.socialuni.social.community.sdk.entity.SocialuniCircleDO;
-import com.socialuni.social.community.sdk.entity.TagDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniDistrictDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniCircleDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTagDO;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,11 +16,11 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class TalkAddValidateRO {
-    private DistrictDO district;
-    private List<TagDO> tags;
+    private SocialuniDistrictDO district;
+    private List<SocialuniTagDO> tags;
     private SocialuniCircleDO circle;
 
-    public TalkAddValidateRO(DistrictDO district, List<TagDO> tags, SocialuniCircleDO circle) {
+    public TalkAddValidateRO(SocialuniDistrictDO district, List<SocialuniTagDO> tags, SocialuniCircleDO circle) {
         this.district = district;
         this.tags = tags;
         this.circle = circle;

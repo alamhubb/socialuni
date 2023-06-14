@@ -2,15 +2,8 @@ package com.socialuni.social.sdk.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.social.common.api.utils.JsonUtil;
-import com.socialuni.social.common.sdk.facade.SocialuniRepositoryFacade;
-import com.socialuni.social.sdk.constant.business.SocialuniPayStatus;
-import com.socialuni.social.sdk.dao.DO.bussiness.SocialuniCoinOrderDO;
-import com.socialuni.social.sdk.dao.DO.bussiness.SocialuniPayCoinOrderDO;
-import com.socialuni.social.sdk.dao.factory.SocialuniCoinOrderFactory;
-import com.socialuni.social.sdk.dao.utils.user.SocialuniUserSocialCoinDOUtil;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserCoinDo;
-import com.socialuni.social.user.sdk.platform.WXPayNotifyResult;
-import com.socialuni.social.user.sdk.platform.qq.QQPayResult;
+import com.socialuni.social.common.sdk.platform.WXPayNotifyResult;
+import com.socialuni.social.common.sdk.platform.qq.QQPayResult;
 import com.thoughtworks.xstream.XStream;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.ObjectUtils;

@@ -3,12 +3,12 @@ package com.socialuni.social.admin.controller;
 import com.socialuni.social.admin.model.RO.UserIdentityAuditRO;
 import com.socialuni.social.admin.utils.CheckIsAdminUtil;
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.sdk.constant.socialuni.UserIdentityAuthStatus;
-import com.socialuni.social.sdk.dao.DO.user.SocialUserIdentityAuthDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialUserIdentityAuthImgDO;
-import com.socialuni.social.sdk.dao.repository.user.identity.SocialUserIdentityAuthImgRepository;
-import com.socialuni.social.sdk.dao.repository.user.identity.SocialUserIdentityAuthRepository;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.user.sdk.constant.UserIdentityAuthStatus;
+import com.socialuni.social.user.sdk.model.DO.SocialUserIdentityAuthDO;
+import com.socialuni.social.user.sdk.model.DO.SocialUserIdentityAuthImgDO;
+import com.socialuni.social.user.sdk.repository.SocialUserIdentityAuthImgRepository;
+import com.socialuni.social.user.sdk.repository.SocialUserIdentityAuthRepository;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,7 +41,7 @@ public class UserIdentityAuditController {
         for (SocialUserIdentityAuthDO socialUserIdentityAuthDO : list) {
             SocialUserIdentityAuthImgDO socialUserIdentityAuthImgDO = socialUserIdentityAuthImgRepository.findFirstById(socialUserIdentityAuthDO.getUserIdentityImgId());
 
-            SocialuniUserDo userDO = SocialuniUserUtil.getUserNotNull(socialUserIdentityAuthDO.getUserId());
+            SocialuniUserDo userDO = SocialuniUserUtil.getAndCheckUserNotNull(socialUserIdentityAuthDO.getUserId());
 
             UserIdentityAuditRO userIdentityAuditRO = new UserIdentityAuditRO(socialUserIdentityAuthDO, socialUserIdentityAuthImgDO, userDO);
             list1.add(userIdentityAuditRO);

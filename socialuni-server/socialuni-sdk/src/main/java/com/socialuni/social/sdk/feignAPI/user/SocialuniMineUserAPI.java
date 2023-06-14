@@ -35,6 +35,10 @@ public interface SocialuniMineUserAPI {
     @Operation(summary = "添加用户图片")
     ResultRO<SocialuniMineUserDetailRO> addUserImg(@RequestBody @Valid SocialuniImgAddQO socialUserImgAddQO);
 
+    @GetMapping("randomUserAvatar")
+    @Operation(summary = "添加用户图片")
+    ResultRO<SocialuniMineUserDetailRO> randomUserAvatar();
+
     @PostMapping("addUserAvatarImg")
     @Operation(summary = "添加用户图片")
     ResultRO<SocialuniMineUserDetailRO> addUserAvatarImg(@RequestBody @Valid SocialuniImgAddQO socialUserImgAddQO);

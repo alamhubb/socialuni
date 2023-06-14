@@ -9,7 +9,7 @@ public interface MatchRequestRepository extends JpaRepository<MatchRequestDO, In
     @CacheEvict(cacheNames = CommonRedisKey.userById, key = "#matchRequest.receiveUserId")
     MatchRequestDO save(MatchRequestDO matchRequest);
 
-    MatchRequestDO queryMatchRequestByUserIdAndReceiveUserIdAndStatus(Integer userId, Integer receiveUserId, String status);
+    MatchRequestDO queryMatchRequestByUserIdAndBeUserIdAndStatus(Integer userId, Integer receiveUserId, String status);
 
-    MatchRequestDO queryMatchRequestByUserIdAndReceiveUserId(Integer userId, Integer receiveUserId);
+    MatchRequestDO queryMatchRequestByUserIdAndBeUserId(Integer userId, Integer receiveUserId);
 }

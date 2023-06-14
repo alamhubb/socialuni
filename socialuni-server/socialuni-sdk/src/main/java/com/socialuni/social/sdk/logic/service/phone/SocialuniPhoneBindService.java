@@ -5,7 +5,7 @@ import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.sdk.logic.domain.phone.SocialBindPhoneNumDomain;
 import com.socialuni.social.sdk.logic.domain.phone.SocialBindWxPhoneNumDomain;
 import com.socialuni.social.sdk.model.QO.SocialBindWxPhoneNumQO;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumQO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;

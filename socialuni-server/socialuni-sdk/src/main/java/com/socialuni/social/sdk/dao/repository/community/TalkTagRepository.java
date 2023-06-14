@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.repository.community;
 
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialTalkTagDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialTalkTagDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

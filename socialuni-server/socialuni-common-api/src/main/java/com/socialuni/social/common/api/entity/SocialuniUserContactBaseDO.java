@@ -15,9 +15,13 @@ import java.io.Serializable;
 @MappedSuperclass
 @NoArgsConstructor
 public class SocialuniUserContactBaseDO extends SocialuniContentBaseDO implements Serializable {
-    @Column(nullable = false)
+    @Column
     private Integer beUserId;
 
+    public SocialuniUserContactBaseDO(SocialuniUserContactBaseDO socialuniUserContactBaseDO) {
+        super(socialuniUserContactBaseDO.getUserId());
+        this.beUserId = socialuniUserContactBaseDO.getBeUserId();
+    }
     public SocialuniUserContactBaseDO(Integer userId, Integer beUserId) {
         super(userId);
         this.beUserId = beUserId;

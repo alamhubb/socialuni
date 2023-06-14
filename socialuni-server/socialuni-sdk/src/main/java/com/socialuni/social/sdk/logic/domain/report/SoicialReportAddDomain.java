@@ -4,18 +4,18 @@ import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.report.sdk.repository.ReportDetailRepository;
+import com.socialuni.social.report.sdk.dao.repository.ReportDetailRepository;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
-import com.socialuni.social.user.sdk.constant.UserType;
+import com.socialuni.social.common.sdk.constant.UserType;
 import com.socialuni.social.sdk.constant.ViolateType;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.sdk.logic.check.SocialuniUserCheck;
+import com.socialuni.social.user.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.social.report.sdk.model.SocialuniReportAddQO;
 import com.socialuni.social.common.sdk.utils.DateUtils;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -52,7 +52,7 @@ public class SoicialReportAddDomain {
         //正义值小于300不能再举报
         //给用户通知，您举报成功失败，奖励或扣除积分，每天满多少，低于0 2练个，低于200不能再举报
         if (!mineUser.getType().equals(UserType.system)) {
-            SocialuniUserCheck.checkUserBindPhoneNumAndStatusNoEnable(mineUser);
+            SocialuniUserCheck.checkUserBindPhoneNumAndStatusEnable();
             //校验内容是否违规
             /*if (resultRO.hasError()) {
                 return new ResultRO<>(resultRO);
@@ -88,7 +88,7 @@ public class SoicialReportAddDomain {
 
         Integer receiveUserUnionId = modelDO.getUserId();
         //这里之后才能校验
-        SocialuniUserDo receiveUser = SocialuniUserUtil.getUserNotNull(receiveUserUnionId);
+        SocialuniUserDo receiveUser = SocialuniUserUtil.getAndCheckUserNotNull(receiveUserUnionId);
 
         //举报人不为系统管理员才校验
         if (!mineUser.getType().equals(UserType.system)) {

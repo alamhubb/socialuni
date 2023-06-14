@@ -2,9 +2,9 @@ package com.socialuni.social.sdk.logic.domain.talk;
 
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
 import com.socialuni.social.community.sdk.repository.TalkRepository;
-import com.socialuni.social.user.sdk.constant.UserType;
+import com.socialuni.social.common.sdk.constant.UserType;
 import com.socialuni.social.common.api.constant.DateTimeType;
 import com.socialuni.social.sdk.logic.domain.report.SoicialuniSystemPreCheckReportDomainDOUtil;
 import com.socialuni.social.sdk.logic.factory.SocialTalkROFactory;
@@ -14,7 +14,7 @@ import com.socialuni.social.sdk.model.TalkAddValidateRO;
 import com.socialuni.social.common.sdk.utils.DateUtils;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

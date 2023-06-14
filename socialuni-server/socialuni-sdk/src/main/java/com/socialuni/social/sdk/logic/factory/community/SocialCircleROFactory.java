@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.factory.community;
 
-import com.socialuni.social.community.sdk.entity.SocialuniCircleDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniCircleDO;
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.community.sdk.model.SocialCircleRO;
 

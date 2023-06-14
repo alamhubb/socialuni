@@ -2,17 +2,15 @@ package com.socialuni.social.sdk.dao.store;
 
 import cn.hutool.core.util.StrUtil;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
-import com.socialuni.social.community.sdk.entity.SocialuniCircleDO;
-import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniCircleDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
 import com.socialuni.social.community.sdk.repository.TalkRepository;
 import com.socialuni.social.sdk.dao.utils.SocialuniCircleDOUtil;
-import com.socialuni.social.sdk.logic.factory.SocialTalkROFactory;
-import com.socialuni.social.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfigBO;
-import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
+import com.socialuni.social.common.api.enumeration.ContentStatus;
 import com.socialuni.social.sdk.dao.mapper.TalkMapper;
-import com.socialuni.social.sdk.dao.redis.FollowRedis;
+import com.socialuni.social.user.sdk.logic.redis.SocialuniUserFollowRedis;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDORedis;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
@@ -21,7 +19,7 @@ import com.socialuni.social.sdk.model.QO.community.talk.SocialUserTalkQueryQO;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
@@ -41,7 +39,7 @@ public class TalkQueryStore {
     @Resource
     private SocialuniTalkDORedis talkRedis;
     @Resource
-    FollowRedis followRedis;
+    SocialuniUserFollowRedis followRedis;
     @Resource
     private TalkMapper talkMapper;
 

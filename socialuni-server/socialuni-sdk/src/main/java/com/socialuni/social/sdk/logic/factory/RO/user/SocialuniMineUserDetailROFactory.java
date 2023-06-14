@@ -1,19 +1,19 @@
 package com.socialuni.social.sdk.logic.factory.RO.user;
 
 import cn.hutool.extra.spring.SpringUtil;
-import com.socialuni.social.im.feign.SocialuniOpenImUserFeign;
-import com.socialuni.social.im.logic.domain.SocialBindUserOpenImAccountDomain;
+import com.socialuni.social.sdk.im.feign.SocialuniOpenImUserFeign;
+import com.socialuni.social.sdk.im.logic.domain.SocialBindUserOpenImAccountDomain;
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserExpandDOUtil;
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserSocialCoinDOUtil;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.user.sdk.model.DO.SocialUserPhoneDo;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserExpandDo;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserCoinDo;
 import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserDetailRO;
-import com.socialuni.social.user.sdk.redis.SocialUserPhoneRedis;
-import com.socialuni.social.user.sdk.repository.SocialUserAccountRepository;
+import com.socialuni.social.user.sdk.logic.redis.SocialUserPhoneRedis;
+import com.socialuni.social.common.sdk.dao.repository.SocialUserAccountRepository;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -39,7 +39,7 @@ public class SocialuniMineUserDetailROFactory {
     }
 
     public static SocialuniMineUserDetailRO getMineUserDetail(Integer mineUserId) {
-        SocialuniUserDo mineUser = SocialuniUserUtil.getUserNotNull(mineUserId);
+        SocialuniUserDo mineUser = SocialuniUserUtil.getAndCheckUserNotNull(mineUserId);
         return SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
     }
 

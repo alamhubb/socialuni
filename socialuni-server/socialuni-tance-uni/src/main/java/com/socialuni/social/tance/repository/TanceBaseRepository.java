@@ -1,8 +1,8 @@
 package com.socialuni.social.tance.repository;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.socialuni.social.common.sdk.repository.ExtendBaseRepository;
-import com.socialuni.social.common.sdk.repository.SuperInfo;
+import com.socialuni.social.common.sdk.dao.repository.ExtendBaseRepository;
+import com.socialuni.social.common.sdk.dao.repository.SuperInfo;
 import com.socialuni.social.tance.sdk.model.TanceRequestModel;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Sort;

@@ -1,22 +1,22 @@
 package com.socialuni.social.sdk.logic.entity;
 
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import com.socialuni.social.user.sdk.model.DO.SocialTokenDO;
+import com.socialuni.social.user.sdk.model.DO.SocialuniTokenDO;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.logic.entity.SocialPhoneLoginEntity;
 import com.socialuni.social.user.sdk.logic.entity.SocialUserEntity;
 import com.socialuni.social.user.sdk.logic.entity.SocialUserPhoneEntity;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
-import com.socialuni.social.sdk.logic.manage.SocialUserFansDetailManage;
-import com.socialuni.social.user.sdk.manage.SocialUserManage;
-import com.socialuni.social.user.sdk.manage.SocialuniTokenManage;
-import com.socialuni.social.user.sdk.manage.SocialUserPhoneManage;
+import com.socialuni.social.user.sdk.logic.manage.SocialUserFansDetailManage;
+import com.socialuni.social.user.sdk.logic.manage.SocialUserManage;
+import com.socialuni.social.user.sdk.logic.manage.SocialuniTokenManage;
+import com.socialuni.social.user.sdk.logic.manage.SocialUserPhoneManage;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -65,9 +65,9 @@ public class UniUserRegistryDomain {
             }
         } else {
             //已注册，更新token
-            mineUser = SocialuniUserUtil.getUserNotNull(uniContentUnionIdDO.getId());
+            mineUser = SocialuniUserUtil.getAndCheckUserNotNull(uniContentUnionIdDO.getId());
         }
-        SocialTokenDO socialUserTokenDO = tokenManage.create(mineUser.getUnionId());
+        SocialuniTokenDO socialUserTokenDO = tokenManage.create(mineUser.getUnionId());
 
         SocialuniMineUserDetailRO userDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
 

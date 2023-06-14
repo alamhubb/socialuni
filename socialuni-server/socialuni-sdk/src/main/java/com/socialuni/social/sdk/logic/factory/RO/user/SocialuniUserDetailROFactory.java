@@ -1,17 +1,18 @@
 package com.socialuni.social.sdk.logic.factory.RO.user;
 
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
-import com.socialuni.social.sdk.dao.DO.bussiness.SocialuniGetUserContactRecordDO;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniGetUserContactRecordDO;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniUserImgDOUtil;
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserExpandDOUtil;
-import com.socialuni.social.sdk.facade.SocialuniUserContactRepositoryFacede;
+import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.sdk.logic.factory.UserImgROFactory;
 import com.socialuni.social.common.api.model.user.SocialuniUserDetailRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserFollowInfoRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserImgRO;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserExpandDo;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserImgDo;
+import com.socialuni.social.user.sdk.model.factory.SocialuniUserFollowDetailROFactory;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 

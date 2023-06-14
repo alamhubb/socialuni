@@ -1,12 +1,12 @@
 package com.socialuni.social.sdk.dao.store;
 
-import com.socialuni.social.common.api.enumeration.CommonStatus;
-import com.socialuni.social.community.sdk.entity.SocialuniTagTypeDO;
-import com.socialuni.social.community.sdk.entity.TagDO;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTagTypeDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTagDO;
 import com.socialuni.social.community.sdk.enumeration.TagRedisKey;
 import com.socialuni.social.community.sdk.repository.SocialuniTagTypeRepository;
 import com.socialuni.social.community.sdk.repository.TagRepository;
-import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
+import com.socialuni.social.common.api.enumeration.ContentStatus;
 import com.socialuni.social.sdk.logic.factory.community.SocialTagROFactory;
 import com.socialuni.social.sdk.logic.factory.community.SocialTagTypeROFactory;
 import com.socialuni.social.sdk.model.RO.community.tag.TagRO;
@@ -31,12 +31,12 @@ public class SocialTagRedis {
     private SocialTagStore socialTagStore;
 
     @Cacheable(cacheNames = TagRedisKey.tagById, key = "#tagId")
-    public TagDO findTagById(Integer tagId) {
-        return tagApi.findByIdAndStatus(tagId, CommonStatus.enable);
+    public SocialuniTagDO findTagById(Integer tagId) {
+        return tagApi.findByIdAndStatus(tagId, SocialuniCommonStatus.enable);
     }
 
     @Cacheable(cacheNames = TagRedisKey.talkTagsByTalkId, key = "#talkId")
-    public List<?  extends TagDO> getTagsByTalkId(Integer talkId) {
+    public List<?  extends SocialuniTagDO> getTagsByTalkId(Integer talkId) {
         List<Integer> tagIds = this.getTagIdsByTalkId(talkId);
         return socialTagStore.findTagsByIds(tagIds);
     }
@@ -53,7 +53,7 @@ public class SocialTagRedis {
      */
     @Cacheable(cacheNames = "tagsHot", key = "#appGenderType")
     public List<TagRO> getHotTagsRedis(String appGenderType) {
-        List<?  extends TagDO> TagDOs;
+        List<?  extends SocialuniTagDO> TagDOs;
         if (GenderType.all.equals(appGenderType)) {
             TagDOs = tagApi.findByStatusOrderByCountDesc(ContentStatus.enable, PageRequest.of(0, 10));
         } else {
@@ -64,7 +64,7 @@ public class SocialTagRedis {
 
     @Cacheable(cacheNames = "tagsAll", key = "#appGenderType")
     public List<TagRO> getAllTagsRedis(String appGenderType) {
-        List<?  extends TagDO> TagDOs;
+        List<?  extends SocialuniTagDO> TagDOs;
         if (appGenderType.equals(GenderType.all)) {
             TagDOs = tagApi.findAllByStatusOrderByCountDesc(ContentStatus.enable);
         } else {
@@ -126,7 +126,7 @@ public class SocialTagRedis {
                 if (!appGenderType.equals(GenderType.boy)) {
                     //获取所有女生话题
                     TagTypeRO tagTypeRO = SocialTagTypeROFactory.getTagTypeRO(tagTypeDO);
-                    List<?  extends TagDO> TagDOs = tagApi.findByStatusAndVisibleGenderOrderByCountDesc(ContentStatus.enable, GenderType.girl);
+                    List<?  extends SocialuniTagDO> TagDOs = tagApi.findByStatusAndVisibleGenderOrderByCountDesc(ContentStatus.enable, GenderType.girl);
                     tagTypeRO.setTags(SocialTagROFactory.tagDOToROS(TagDOs));
                     tagTypeROS.add(tagTypeRO);
                 }
@@ -136,7 +136,7 @@ public class SocialTagRedis {
                 if (!appGenderType.equals(GenderType.girl)) {
                     //获取所有男生话题
                     TagTypeRO tagTypeRO = SocialTagTypeROFactory.getTagTypeRO(tagTypeDO);
-                    List<?  extends TagDO> TagDOs = tagApi.findByStatusAndVisibleGenderOrderByCountDesc(ContentStatus.enable, GenderType.boy);
+                    List<?  extends SocialuniTagDO> TagDOs = tagApi.findByStatusAndVisibleGenderOrderByCountDesc(ContentStatus.enable, GenderType.boy);
                     tagTypeRO.setTags(SocialTagROFactory.tagDOToROS(TagDOs));
                     tagTypeROS.add(tagTypeRO);
                 }
@@ -151,7 +151,7 @@ public class SocialTagRedis {
 
     //根据typeid获取所有
     private List<TagRO> getTagsByTagTypeId(SocialuniTagTypeDO tagTypeDO, String appGenderType) {
-        List<?  extends TagDO> TagDOs;
+        List<?  extends SocialuniTagDO> TagDOs;
         if (appGenderType.equals(GenderType.all)) {
             TagDOs = tagApi.findByTagTypeIdAndStatusOrderByCountDesc(tagTypeDO.getId(), ContentStatus.enable);
         } else {

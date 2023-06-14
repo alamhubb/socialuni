@@ -3,10 +3,10 @@ package com.socialuni.social.admin.service;
 
 import com.socialuni.social.admin.config.AppStaticData;
 import com.socialuni.social.admin.repository.DevAuthCodeRepository;
+import com.socialuni.social.common.api.enumeration.ConstStatus;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.utils.IpUtil;
-import com.socialuni.social.common.sdk.constant.StatusConst;
 import com.socialuni.social.sdk.dao.DO.dev.DevAuthCodeDO;
 import com.socialuni.social.user.sdk.model.QO.phone.SocialSendAuthCodeQO;
 import com.socialuni.social.user.sdk.utils.PhoneNumUtil;
@@ -48,13 +48,13 @@ public class AdminPhoneService {
 //        DevAccountDO devAccountDO = devAccountRepository.findFirstByPhoneNumOrderByIdAsc(phoneNum);
 
         DevAuthCodeDO devAuthCodeDO = new DevAuthCodeDO(phoneNum, null, userIp);
-        devAuthCodeDO.setStatus(StatusConst.fail);
+        devAuthCodeDO.setStatus(ConstStatus.fail);
         devAuthCodeRepository.save(devAuthCodeDO);
 
         String authCode = TencentSmsServe.sendAuthCode(phoneNum);
 
         devAuthCodeDO.setAuthCode(authCode);
-        devAuthCodeDO.setStatus(StatusConst.success);
+        devAuthCodeDO.setStatus(ConstStatus.success);
         devAuthCodeRepository.save(devAuthCodeDO);
 
         //然后查ip总次数，大于2也不行

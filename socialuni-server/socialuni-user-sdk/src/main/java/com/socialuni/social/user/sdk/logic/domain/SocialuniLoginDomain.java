@@ -4,9 +4,9 @@ import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.common.sdk.event.ddd.EventPublisherFacade;
 import com.socialuni.social.user.sdk.logic.entity.SocialPhoneLoginEntity;
 import com.socialuni.social.user.sdk.logic.entity.SocialProviderLoginEntity;
-import com.socialuni.social.user.sdk.manage.SocialuniTokenManage;
-import com.socialuni.social.user.sdk.model.DO.SocialTokenDO;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.user.sdk.logic.manage.SocialuniTokenManage;
+import com.socialuni.social.user.sdk.model.DO.SocialuniTokenDO;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumQO;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
@@ -45,7 +45,8 @@ public class SocialuniLoginDomain {
     public SocialLoginRO<SocialuniUserRO> getSocialLoginROByMineUser(SocialuniUserDo mineUser) {
         SocialuniUserRO userDetailRO = SocialuniMineUserROFactory.getMineUser(mineUser);
 
-        SocialTokenDO socialUserTokenDO = tokenManage.create(mineUser.getUnionId());
+        SocialuniTokenDO socialUserTokenDO = tokenManage.create(mineUser.getUnionId());
+
 
         EventPublisherFacade.publishEvent("userLogin", mineUser);
 

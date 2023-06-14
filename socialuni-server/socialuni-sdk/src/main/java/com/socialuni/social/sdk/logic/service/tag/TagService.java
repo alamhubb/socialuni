@@ -1,16 +1,16 @@
 package com.socialuni.social.sdk.logic.service.tag;
 
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import com.socialuni.social.community.sdk.entity.SocialuniTagTypeDO;
-import com.socialuni.social.community.sdk.entity.TagDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTagTypeDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTagDO;
 import com.socialuni.social.community.sdk.repository.SocialuniTagTypeRepository;
 import com.socialuni.social.community.sdk.repository.TagRepository;
 import com.socialuni.social.sdk.constant.TalkOperateType;
-import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
+import com.socialuni.social.common.api.enumeration.ContentStatus;
 import com.socialuni.social.sdk.dao.store.SocialTagRedis;
 import com.socialuni.social.sdk.utils.SocialTagStore;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -38,8 +38,8 @@ public class TagService {
     @Resource
     private SocialTagRedis socialTagRedis;
 
-    public List<TagDO> checkAndUpdateTagCount(SocialuniUserDo user, List<Integer> tagIds, String talkOperateType) {
-        List<TagDO> TagDOList = new ArrayList<>();
+    public List<SocialuniTagDO> checkAndUpdateTagCount(SocialuniUserDo user, List<Integer> tagIds, String talkOperateType) {
+        List<SocialuniTagDO> TagDOList = new ArrayList<>();
 
 //        Integer devId = DevAccountUtils.getDevId();
 
@@ -57,7 +57,7 @@ public class TagService {
             for (Integer tagId : tagIdsSet) {
                 if (!ObjectUtils.isEmpty(tagId) && tagId != 0) {
                     //查询启用的话题
-                    TagDO TagDO = socialTagRedis.findTagById(tagId);
+                    SocialuniTagDO TagDO = socialTagRedis.findTagById(tagId);
                     //如果话题存在且可用
                     if (TagDO != null) {
                         if (!ContentStatus.enable.equals(TagDO.getStatus())) {

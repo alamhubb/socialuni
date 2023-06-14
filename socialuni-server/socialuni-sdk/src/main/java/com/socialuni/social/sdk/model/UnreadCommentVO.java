@@ -1,12 +1,12 @@
 package com.socialuni.social.sdk.model;
 
-import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniCommentDO;
 import com.socialuni.social.community.sdk.repository.CommentRepository;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniCommentDOUtil;
 import com.socialuni.social.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
@@ -58,7 +58,7 @@ public class UnreadCommentVO {
         this.no = commentDO.getNo();
         this.content = commentDO.getContent();
         this.createTime = commentDO.getCreateTime();
-        this.user = new UserCommentBO(SocialuniUserUtil.getUserNotNull(commentDO.getUserId()), sessionUser).toVO();
+        this.user = new UserCommentBO(SocialuniUserUtil.getAndCheckUserNotNull(commentDO.getUserId()), sessionUser).toVO();
         //不明白下面这行的意义，未读消息不需要显示子评论吧
         //        this.childComments = UnreadCommentVO.commentDOToVOS(commentRepository.findTop3ByParentCommentOrderByUpdateTimeDescIdDesc(commentDO));
         if (!ObjectUtils.isEmpty(commentDO.getReplyCommentId())) {

@@ -1,16 +1,11 @@
 package com.socialuni.social.community.sdk.repository;
 
-import cn.hutool.core.bean.BeanUtil;
-import com.socialuni.social.community.sdk.entity.SocialuniCircleChatDO;
-import com.socialuni.social.community.sdk.entity.SocialuniCircleDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniCircleChatDO;
 import com.socialuni.social.community.sdk.enumeration.CircleRedisKey;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.List;
 
 
 public interface SocialuniCircleChatRepository extends JpaRepository<SocialuniCircleChatDO, Integer> {

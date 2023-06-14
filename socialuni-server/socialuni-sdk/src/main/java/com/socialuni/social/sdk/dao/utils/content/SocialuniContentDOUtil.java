@@ -4,13 +4,13 @@ package com.socialuni.social.sdk.dao.utils.content;
 import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
-import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniCommentDO;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
 import com.socialuni.social.community.sdk.repository.CommentRepository;
 import com.socialuni.social.sdk.dao.DO.base.BaseModelParentDO;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
-import com.socialuni.social.sdk.dao.DO.message.MessageDO;
-import com.socialuni.social.sdk.dao.repository.MessageRepository;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkImgDO;
+import com.socialuni.social.im.dao.DO.message.SocialuniMessageDO;
+import com.socialuni.social.im.dao.repository.SocialuniMessageRepository;
 import com.socialuni.social.sdk.dao.repository.community.TalkImgRepository;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
@@ -24,14 +24,14 @@ import javax.annotation.Resource;
 
 @Component
 public class SocialuniContentDOUtil<T> {
-    private static MessageRepository messageRepository;
+    private static SocialuniMessageRepository messageRepository;
     private static SocialuniUserImgRepository userImgRepository;
     private static CommentRepository commentApi;
     private static SocialuniTalkDORedis talkRedis;
     private static TalkImgRepository talkImgRepository;
 
     @Resource
-    public void setMessageRepository(MessageRepository messageRepository) {
+    public void setMessageRepository(SocialuniMessageRepository messageRepository) {
         SocialuniContentDOUtil.messageRepository = messageRepository;
     }
 
@@ -66,8 +66,8 @@ public class SocialuniContentDOUtil<T> {
         } else if (model instanceof SocialuniCommentDO) {
             SocialuniCommentDO commentDO = (SocialuniCommentDO) model;
             return commentApi.savePut(commentDO);
-        } else if (model instanceof MessageDO) {
-            MessageDO messageDO = (MessageDO) model;
+        } else if (model instanceof SocialuniMessageDO) {
+            SocialuniMessageDO messageDO = (SocialuniMessageDO) model;
             return messageRepository.save(messageDO);
         } else if (model instanceof SocialuniUserImgDo) {
             SocialuniUserImgDo userImgDO = (SocialuniUserImgDo) model;
@@ -88,7 +88,7 @@ public class SocialuniContentDOUtil<T> {
         }
         SocialuniUnionContentBaseDO contentBaseDO;
         if (contentType.equals(SocialuniContentType.user)) {
-            contentBaseDO = SocialuniUserUtil.getUserNotNull(contentId);
+            contentBaseDO = SocialuniUserUtil.getAndCheckUserNotNull(contentId);
         } else if (contentType.equals(SocialuniContentType.userImg)) {
             contentBaseDO = SocialuniUserImgDOUtil.getUserImgNotNull(contentId);
         } else if (contentType.equals(SocialuniContentType.talk)) {
@@ -110,8 +110,8 @@ public class SocialuniContentDOUtil<T> {
         } else if (model instanceof SocialuniCommentDO) {
             SocialuniCommentDO commentDO = SocialuniContentDOUtil.getModelByClass(model);
             baseModelParentDO.setCommentId(commentDO.getUnionId());
-        } else if (model instanceof MessageDO) {
-            MessageDO messageDO = SocialuniContentDOUtil.getModelByClass(model);
+        } else if (model instanceof SocialuniMessageDO) {
+            SocialuniMessageDO messageDO = SocialuniContentDOUtil.getModelByClass(model);
             baseModelParentDO.setMessageId(messageDO.getUnionId());
         } else if (model instanceof SocialuniUserImgDo) {
             SocialuniUserImgDo userImgDO = SocialuniContentDOUtil.getModelByClass(model);

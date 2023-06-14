@@ -15,7 +15,7 @@ import com.socialuni.social.tance.sdk.model.DevTokenModler;
 import com.socialuni.social.user.sdk.logic.entity.SocialUserPhoneEntity;
 import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumQO;
 import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
-import com.socialuni.social.user.sdk.redis.SocialUserPhoneRedis;
+import com.socialuni.social.user.sdk.logic.redis.SocialUserPhoneRedis;
 import com.socialuni.social.user.sdk.utils.PhoneNumUtil;
 import org.springframework.stereotype.Service;
 

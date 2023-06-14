@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.repository;
 
-import com.socialuni.social.user.sdk.model.DO.keywords.CustomKeywordsDO;
+import com.socialuni.social.report.sdk.dao.DO.CustomKeywordsDO;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
