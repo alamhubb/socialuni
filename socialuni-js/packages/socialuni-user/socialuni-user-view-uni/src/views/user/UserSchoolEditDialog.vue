@@ -36,8 +36,10 @@ import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue";
 import QSearch from "socialuni-ui-uni/src/components/QSearch/QSearch.vue";
 import QSelect from "socialuni-ui-uni/src/components/QSelect/QSelect.vue";
 import SocialCircleRO from "socialuni-api-base/src/model/community/circle/SocialCircleRO";
-import SocialuniUserExpandAPI from "socialuni-user-api/src/api/SocialuniUserExpandAPI";
 import SocialuniCircleAPI from "socialuni-community-api/src/api/SocialuniCircleAPI";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+import SocialuniUserExpandAPI from "socialuni-user-api/src/api/SocialuniUserExpandAPI";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 @Options({
   components: {QSelect, QIcon, QPopup, QSearch}
@@ -81,10 +83,10 @@ export default class UserSchoolEditDialog extends Vue {
 
   async confirm() {
     if (!this.schoolNameValue) {
-      ToastUtil.error('学校名称不能为空')
+        SocialuniAppUtil.ToastUtil.error('学校名称不能为空')
     }
     try {
-      await AlertUtil.confirm('是否确认将学校名称设置为' + this.schoolNameValue + '确认后不可变更')
+      await SocialuniAppUtil.AlertUtil.confirm('是否确认将学校名称设置为' + this.schoolNameValue + '确认后不可变更')
       this.$refs.schoolDialog.close()
       const res = await SocialuniUserExpandAPI.editUserSchoolNameAPI(this.schoolNameValue)
       socialuniUserModule.setUser(res.data)
