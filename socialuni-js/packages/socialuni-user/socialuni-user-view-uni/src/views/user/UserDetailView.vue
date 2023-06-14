@@ -197,7 +197,7 @@ import SocialuniAddFriendType from "socialuni-im-api/src/constant/SocialuniAddFr
 import SocialuniImUserAPI from 'socialuni-im-api/src/api/SocialuniImUserAPI'
 import SocialuniUserIdQO from '../../model/QO/user/SocialuniUserIdQO'
 import SocialuniImUserDetailRO from 'socialuni-im-api/src/model/RO/SocialuniImUserDetailRO'
-import MsgUtil from 'socialuni-app/src/util/MsgUtil'
+import MsgUtil from 'socialuni-app-sdk/src/util/MsgUtil'
 
 @Options({
   components: {

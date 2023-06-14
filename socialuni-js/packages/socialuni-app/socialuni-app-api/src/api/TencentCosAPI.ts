@@ -1,6 +1,5 @@
 import AppMsg from "socialuni-constant/constant/AppMsg";
 import TencentCosIdInfoRO from "socialuni-api-base/src/model/RO/tencent/cos/idImgInfo/TencentCosIdInfoRO";
-import UniUtil from "../../../socialuni-app/src/util/UniUtil";
 import CosAuthRO from "socialuni-api-base/src/model/cos/CosAuthRO";
 import CosUploadResult from "socialuni-api-base/src/model/cos/CosUploadResult";
 import AlertUtil from "socialuni-native-uni/src/util/AlertUtil";

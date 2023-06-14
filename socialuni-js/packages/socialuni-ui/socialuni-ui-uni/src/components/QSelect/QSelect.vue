@@ -15,7 +15,8 @@
 </template>
 <script lang="ts">
 import {Emit, Model, Options, Prop, Vue} from 'vue-property-decorator'
-import QIcon from 'src/components/QIcon/QIcon.vue' /*
+import QIcon from "../QIcon/QIcon.vue";
+/*
 显示出来已经选了的城市，给她画上钩
 * */
 

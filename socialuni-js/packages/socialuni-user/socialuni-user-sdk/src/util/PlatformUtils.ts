@@ -8,7 +8,7 @@ import MPUtil from "socialuni-util/src/util/MPUtil"
 import UserPayResultVO from "socialuni-api-base/src/model/user/UserPayResultVO";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import APPUtil from "socialuni-app-sdk/src/util/APPUtil";
-import { socialPlatformModule } from 'socialuni-app/src/store/SocialPlatformModule'
+import { socialPlatformModule } from 'socialuni-app-sdk/src/store/SocialPlatformModule'
 import SocialuniAppAPI from 'socialuni-app-api/src/api/SocialuniAppAPI'
 import UserMsgUtil from './UserMsgUtil'
 import { socialuniUserModule } from '../store/SocialuniUserModule'
