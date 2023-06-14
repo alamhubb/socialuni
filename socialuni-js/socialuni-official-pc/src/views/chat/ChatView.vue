@@ -101,8 +101,8 @@
 <script lang="ts">
 import {Options, Vue} from "vue-property-decorator";
 import YScrollbar from "@/components/YScrollbar.vue";
-import SocialuniChatViewService, {SocialuniChatViewServiceRefs} from "socialuni-im/src/logic/SocialuniChatViewService";
-import SocialuniMsgViewService from "socialuni-im/src/logic/SocialuniMsgViewService";
+import SocialuniChatViewService, {SocialuniChatViewServiceRefs} from "socialuni-im-sdk/src/logic/SocialuniChatViewService";
+import SocialuniMsgViewService from "socialuni-im-sdk/src/logic/SocialuniMsgViewService";
 
 @Options({
     components: {YScrollbar}

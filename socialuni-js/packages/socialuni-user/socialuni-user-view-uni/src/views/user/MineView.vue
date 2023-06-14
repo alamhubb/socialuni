@@ -213,17 +213,17 @@ import QButton from "socialuni-ui-uni/src/components/QButton/QButton.vue";
 import QSearch from "socialuni-ui-uni/src/components/QSearch/QSearch.vue";
 import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
 import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
-import {socialChatModule} from "socialuni-im/src/store/SocialChatModule";
+import {socialChatModule} from "socialuni-im-sdk/src/store/SocialChatModule";
 import SocialGenderTag from "../../components/SocialGenderTag/SocialGenderTag.vue";
 import { socialuniUserModule } from 'socialuni-user/src/store/SocialuniUserModule';
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
-import UserService from "socialuni-user/src/logic/UserService";
-import UserPageUtil from "socialuni-user/src/util/UserPageUtil";
+import UserService from "socialuni-user-sdk/src/logic/UserService";
+import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
-import CosService from "socialuni-app/src/util/CosService";
-import DomFile from "socialuni-app/src/model/DomFile";
+import CosService from "socialuni-app-sdk/src/util/CosService";
+import DomFile from "socialuni-app-sdk/src/model/DomFile";
 import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
-import SkipUrlConst from "socialuni-app/src/constant/SkipUrlConst";
+import SkipUrlConst from "socialuni-app-sdk/src/constant/SkipUrlConst";
 
 @Options({
     components: {

@@ -2,7 +2,7 @@ import CosAuthRO from "socialuni-api-base/src/model/cos/CosAuthRO";
 import CosAPI from "socialuni-app-api/src/api/CosAPI";
 import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
 import DomFile from "../model/DomFile";
-import CosUtil from "socialuni-user/src/util/CosUtil";
+import CosUtil from "socialuni-user-sdk/src/util/CosUtil";
 
 export default class CosService {
     //向cos上传图片

@@ -9,8 +9,8 @@ import CommonUtil from "socialuni-util/src/util/CommonUtil";
 import Arrays from "socialuni-util/src/util/Arrays";
 import ImPageUtil from "../util/ImPageUtil";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
-import UserCheckUtil from "socialuni-user/src/util/UserCheckUtil";
-import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
+import UserCheckUtil from "socialuni-user-sdk/src/util/UserCheckUtil";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 import {MessageStatus} from "socialuni-constant/constant/openIm/OpenImMessageType";
 
 class SocialuniChatModule {

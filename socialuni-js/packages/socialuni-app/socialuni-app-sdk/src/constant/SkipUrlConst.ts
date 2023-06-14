@@ -1,4 +1,4 @@
-import {socialuniConfigModule} from "socialuni-app/src/store/SocialuniConfigModule";
+import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 import AppConfig from "socialuni-constant/constant/AppConfig";
 import SocialuniAppPageUtil from "../util/SocialuniAppPageUtil";
 

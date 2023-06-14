@@ -15,9 +15,9 @@
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
 import PageUtil from 'socialuni-util/src/util/PageUtil'
-import ImPageUtil from 'socialuni-im/src/util/ImPageUtil'
+import ImPageUtil from 'socialuni-im-sdk/src/util/ImPageUtil'
 import RouterUtil from 'socialuni-util/src/util/RouterUtil'
-import ImPagePath from 'socialuni-im/src/constant/ImPagePath'
+import ImPagePath from 'socialuni-im-sdk/src/constant/ImPagePath'
 
 @Options({})
 export default class LeftWindowView extends Vue {

@@ -62,16 +62,16 @@ import TalkSwipers from "./talkSwipers.vue";
 import TagVO from "socialuni-api-base/src/model/community/tag/TagVO";
 import DistrictVO from "socialuni-api-base/src/model/DistrictVO";
 import {onHide, onShow} from "@dcloudio/uni-app";
-import SocialTagPicker from "socialuni-community/src/component/SocialTagPicker.vue";
-import QCityPicker from "socialuni-community/src/component/QCityPicker/QCityPicker.vue";
-import CommunityPageUtil from "socialuni-community/src/util/CommunityPageUtil";
-import {socialChatModule} from "socialuni-im/src/store/SocialChatModule";
-import {socialuniTagModule} from "socialuni-community/src/store/SocialTagModule";
-import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
-import {socialNotifyModule} from "socialuni-community/src/store/SocialNotifyModule";
-import {socialAppModule} from "socialuni-app/src/store/SocialAppModule";
-import {socialLocationModule} from "socialuni-community/src/store/SocialLocationModule";
-import {socialuniConfigModule} from "socialuni-app/src/store/SocialuniConfigModule";
+import SocialTagPicker from "socialuni-community-sdk/src/component/SocialTagPicker.vue";
+import QCityPicker from "socialuni-community-sdk/src/component/QCityPicker/QCityPicker.vue";
+import CommunityPageUtil from "socialuni-community-sdk/src/util/CommunityPageUtil";
+import {socialChatModule} from "socialuni-im-sdk/src/store/SocialChatModule";
+import {socialuniTagModule} from "socialuni-community-sdk/src/store/SocialTagModule";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+import {socialNotifyModule} from "socialuni-community-sdk/src/store/SocialNotifyModule";
+import {socialAppModule} from "socialuni-app-sdk/src/store/SocialAppModule";
+import {socialLocationModule} from "socialuni-community-sdk/src/store/SocialLocationModule";
+import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 // todo 后台可控制是否显示轮播图

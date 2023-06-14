@@ -53,13 +53,13 @@ import ImgFileVO from "socialuni-api-base/src/model/ImgFileVO";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
 import SocialuniReportDialog from "../../components/SocialuniReportDialog.vue";
-import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
-import UserPageUtil from "socialuni-user/src/util/UserPageUtil";
-import CosService from "socialuni-app/src/util/CosService";
-import DomFile from "socialuni-app/src/model/DomFile";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
+import CosService from "socialuni-app-sdk/src/util/CosService";
+import DomFile from "socialuni-app-sdk/src/model/DomFile";
 import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
-import SocialuniImgUtil from "socialuni-user/src/util/SocialuniImgUtil";
+import SocialuniImgUtil from "socialuni-user-sdk/src/util/SocialuniImgUtil";
 
 @Options({
     components: {QIcon, SocialuniReportDialog}

@@ -19,7 +19,7 @@ import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemMod
 // import {socialuniConfigModule} from "socialuni-sdk/src/store/store";
 import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
-import SkipUrlConst from "socialuni-app/src/constant/SkipUrlConst";
+import SkipUrlConst from "socialuni-app-sdk/src/constant/SkipUrlConst";
 
 @Options({
   components: {QIcon}

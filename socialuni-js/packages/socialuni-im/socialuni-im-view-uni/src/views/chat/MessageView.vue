@@ -277,7 +277,7 @@ import SocialuniAppAPI from 'socialuni-app-api/src/api/SocialuniAppAPI'
 import UserCheckUtil from 'socialuni-user/src/util/UserCheckUtil'
 import {socialuniChatModule} from "../../store/SocialuniChatModule";
 import SocialuniMsgViewService from "../../logic/SocialuniMsgViewService";
-import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 
 @Options(
     {

@@ -55,7 +55,7 @@
 import {Options, Vue} from 'vue-property-decorator'
 import {socialChatFriendModule, socialChatModule, socialuniUserModule} from "socialuni-sdk/src/store/store"
 import {onLoad} from "@dcloudio/uni-app";
-import UniUtil from "socialuni-app/src/util/UniUtil";
+import UniUtil from "socialuni-app-sdk/src/util/UniUtil";
 import DateUtil from "socialuni-util/src/util/DateUtil";
 import {
   ChangeGroupMemberMuteParams, ChangeGroupMuteParams,

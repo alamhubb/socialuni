@@ -3,7 +3,7 @@ import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemMod
 import Constants from "socialuni-constant/constant/Constant";
 import SocialPhoneNumLoginQO from "socialuni-api-base/src/model/phone/SocialPhoneNumLoginQO";
 import LoginAPI from "socialuni-user-api/src/api/LoginAPI";
-import UserService from "socialuni-user/src/logic/UserService";
+import UserService from "socialuni-user-sdk/src/logic/UserService";
 import UniUserUtil from "../util/UniUserUtil";
 
 export default class LoginService {

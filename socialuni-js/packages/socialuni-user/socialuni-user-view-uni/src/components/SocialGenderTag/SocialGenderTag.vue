@@ -20,7 +20,7 @@ import {Options, Prop, Vue} from 'vue-property-decorator'
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
 import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 import STag from "socialuni-ui-uni/src/components/STag.vue";
-import UserUtil from "socialuni-user/src/util/UserUtil";
+import UserUtil from "socialuni-user-sdk/src/util/UserUtil";
 
 @Options({
   components: {

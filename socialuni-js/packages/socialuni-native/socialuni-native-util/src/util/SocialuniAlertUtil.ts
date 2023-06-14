@@ -4,7 +4,7 @@ import AlertUtil from "packages/socialuni-native/socialuni-native-uni/src/util/A
 let nativeUtil: AlertUtil
 try {
     if (uni) {
-        const res: ImportModule<AlertUtil> = await import('packages/socialuni-native/socialuni-native-uni/src/util/AlertUtil')
+        const res: ImportModule<AlertUtil> = await import('socialuni-native-uni/src/util/AlertUtil')
         nativeUtil = res.default
     }
 } catch (e) {

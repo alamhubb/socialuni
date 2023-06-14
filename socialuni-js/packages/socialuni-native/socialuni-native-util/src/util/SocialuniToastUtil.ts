@@ -4,7 +4,7 @@ import { ImportModule } from "socialuni/src/interface/ImportModule"
 let nativeUtil: ToastUtil
 try {
   if (uni) {
-    const res: ImportModule<ToastUtil> = await import('packages/socialuni-native/socialuni-native-uni/src/util/ToastUtil')
+    const res: ImportModule<ToastUtil> = await import('socialuni-native-uni/src/util/ToastUtil')
     nativeUtil = res.default
   }
 } catch (e) {

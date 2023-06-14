@@ -93,17 +93,17 @@ import {Options, Prop, Vue} from 'vue-property-decorator'
 import PagePath from "socialuni-constant/constant/PagePath";
 import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
 import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
-import MsgUtil from "socialuni-app/src/util/MsgUtil";
+import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil";
 import NumUtil from "socialuni-util/src/util/NumUtil";
 import CommonUtil from "socialuni-util/src/util/CommonUtil";
-import UserPagePath from "socialuni-user/src/constant/UserPagePath";
+import UserPagePath from "socialuni-user-sdk/src/constant/UserPagePath";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 import CommunityPageUtil from "../../util/CommunityPageUtil";
 import CommunityPagePath from "../../constant/CommunityPagePath";
 import {socialTalkModule} from "../../store/SocialTalkModule";
 import {socialuniTagModule} from "../../store/SocialTagModule";
-import UserMsgUtil from "socialuni-user/src/util/UserMsgUtil";
-import SocialuniImgUtil from "socialuni-user/src/util/SocialuniImgUtil";
+import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
+import SocialuniImgUtil from "socialuni-user-sdk/src/util/SocialuniImgUtil";
 
 @Options({
   components: {QIcon}

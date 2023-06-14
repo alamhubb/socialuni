@@ -71,7 +71,7 @@ import PhoneNumFormData from "./PhoneNumFormData";
 import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 import CommonUtil from "socialuni-util/src/util/CommonUtil";
 import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
-import {socialuniConfigModule} from "socialuni-app/src/store/SocialuniConfigModule";
+import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 @Options({

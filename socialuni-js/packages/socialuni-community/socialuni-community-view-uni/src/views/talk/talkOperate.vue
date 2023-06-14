@@ -55,12 +55,12 @@ import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue";
 import ReportType from "socialuni-constant/constant/ReportType";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import ReportAddVO from "socialuni-api-base/src/model/report/ReportAddVO";
-import {socialTalkModule} from "socialuni-community/src/store/SocialTalkModule";
-import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
-import {socialuniConfigModule} from "socialuni-app/src/store/SocialuniConfigModule";
+import {socialTalkModule} from "socialuni-community-sdk/src/store/SocialTalkModule";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
 import ReportAPI from "socialuni-app-api/src/api/ReportAPI";
-import UserMsgUtil from "socialuni-user/src/util/UserMsgUtil";
+import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 

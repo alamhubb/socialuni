@@ -60,22 +60,22 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 import {ArrowDown, Tools} from "@element-plus/icons-vue";
 import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
 import SDialog from "@/components/socialuni/SDialog.vue";
 import LoginView from "@/components/view/loginView.vue";
-import SocialuniUserEventConst from "socialuni-user/src/constant/SocialuniUserEventConst";
+import SocialuniUserEventConst from "socialuni-user-sdk/src/constant/SocialuniUserEventConst";
 import SocialuniEventUtil from "socialuni/src/util/SocialuniEventUtil";
 import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
 import SocialuniUserEditDialog from "@/views/user/SocialuniUserEditDialog.vue";
-import CosService from "socialuni-app/src/util/CosService";
-import UUIDUtil from "socialuni-app/src/util/UUIDUtil";
-import ImgUtil from "socialuni-app/src/util/ImgUtil";
+import CosService from "socialuni-app-sdk/src/util/CosService";
+import UUIDUtil from "socialuni-app-sdk/src/util/UUIDUtil";
+import ImgUtil from "socialuni-app-sdk/src/util/ImgUtil";
 import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
 import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
-import type DomFile from "socialuni-app/src/model/DomFile";
+import type DomFile from "socialuni-app-sdk/src/model/DomFile";
 
 @Options({
     components: {SocialuniUserEditDialog, Tools, LoginView, SDialog, ArrowDown}

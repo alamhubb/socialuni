@@ -1,5 +1,5 @@
 import CommunityPagePath from "../constant/CommunityPagePath";
-import UserCheckUtil from "socialuni-user/src/util/UserCheckUtil";
+import UserCheckUtil from "socialuni-user-sdk/src/util/UserCheckUtil";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 export default class CommunityPageUtil {

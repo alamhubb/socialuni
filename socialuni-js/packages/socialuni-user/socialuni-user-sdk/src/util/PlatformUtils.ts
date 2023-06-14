@@ -1,5 +1,5 @@
 import QQUtils from 'socialuni-util/src/util/QQUtils'
-import MsgUtil from "socialuni-app/src/util/MsgUtil"
+import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil"
 import Constants from "socialuni-constant/constant/Constant"
 import AppMsg from "socialuni-constant/constant/AppMsg"
 import ToastUtil from "socialuni-native-uni/src/util/ToastUtil"
@@ -7,7 +7,7 @@ import WxUtils from "socialuni-util/src/util/WxUtils"
 import MPUtil from "socialuni-util/src/util/MPUtil"
 import UserPayResultVO from "socialuni-api-base/src/model/user/UserPayResultVO";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
-import APPUtil from "socialuni-app/src/util/APPUtil";
+import APPUtil from "socialuni-app-sdk/src/util/APPUtil";
 import { socialPlatformModule } from 'socialuni-app/src/store/SocialPlatformModule'
 import SocialuniAppAPI from 'socialuni-app-api/src/api/SocialuniAppAPI'
 import UserMsgUtil from './UserMsgUtil'

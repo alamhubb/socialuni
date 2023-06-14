@@ -8,16 +8,16 @@ import GetProviderRes = UniApp.GetProviderRes;
 import LoginRes = UniApp.LoginRes;
 import GetUserInfoRes = UniApp.GetUserInfoRes;
 import GetImageInfoSuccessData = UniApp.GetImageInfoSuccessData;
-import ToastUtil from 'src/util/ToastUtil'
 import AppMsg from "socialuni-constant/constant/AppMsg";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
-import DomFile from "socialuni-app/src/model/DomFile";
 import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
 import ImgUtil from "socialuni-util/src/util/ImgUtil";
 import SocialuniLocationAPI from "socialuni-community-api/src/api/SocialuniLocationAPI";
 import LocationQueryQO from "socialuni-api-base/src/model/location/LocationQueryQO";
 import ResultRO from "socialuni-api-base/src/model/social/ResultRO";
 import {QQMapResult} from "socialuni-api-base/src/model/location/QQMapResult";
+import ToastUtil from "./ToastUtil";
+import DomFile from "socialuni-app-sdk/src/model/DomFile";
 
 
 export default class NativeUtil {

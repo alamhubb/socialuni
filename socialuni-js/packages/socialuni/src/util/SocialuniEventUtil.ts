@@ -1,5 +1,5 @@
 import mitt from "mitt";
-import SocialuniUserEventConst from "socialuni-user/src/constant/SocialuniUserEventConst";
+import SocialuniUserEventConst from "socialuni-user-sdk/src/constant/SocialuniUserEventConst";
 
 export default class SocialuniEventUtil {
     private static event = mitt()

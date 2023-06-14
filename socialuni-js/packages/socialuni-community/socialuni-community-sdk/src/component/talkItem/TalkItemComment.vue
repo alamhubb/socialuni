@@ -82,17 +82,17 @@ import QButton from "socialuni-ui-uni/src/components/QButton/QButton.vue";
 import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
 import ObjectUtil from "socialuni-util/src/util/ObjectUtil";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
-import MsgUtil from "socialuni-app/src/util/MsgUtil";
+import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil";
 import CommentVO from "socialuni-api-base/src/model/comment/CommentVO";
 import HugAddVO from "socialuni-api-base/src/model/HugAddVO";
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
 import ChildComment from "./ChildComment.vue";
 import {socialTalkModule} from "../../store/SocialTalkModule";
-import UserMsgUtil from "socialuni-user/src/util/UserMsgUtil";
+import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
-import UserPageUtil from "socialuni-user/src/util/UserPageUtil";
+import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import CommunityPageUtil from "../../util/CommunityPageUtil";
-import UserPagePath from "socialuni-user/src/constant/UserPagePath";
+import UserPagePath from "socialuni-user-sdk/src/constant/UserPagePath";
 import CommunityPagePath from "../../constant/CommunityPagePath";
 
 @Options({

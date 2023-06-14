@@ -42,7 +42,7 @@
 
 <script lang="ts">
 import {Emit, Options, Vue, Watch} from 'vue-property-decorator'
-import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 import GenderType from "socialuni-constant/constant/GenderType";
 import type EnumStrVO from "socialuni-constant/constant/EnumStrVO";
 import DateUtil from "socialuni-util/src/util/DateUtil";
@@ -53,12 +53,12 @@ import SButton from "@/components/socialuni/SButton.vue";
 import type SocialuniMineUserRO from "socialuni-api-base/src/model/user/SocialuniMineUserRO";
 import SDialog from "@/components/socialuni/SDialog.vue";
 import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
-import CosService from "socialuni-app/src/util/CosService";
+import CosService from "socialuni-app-sdk/src/util/CosService";
 import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
-import UUIDUtil from "socialuni-app/src/util/UUIDUtil";
-import ImgUtil from "socialuni-app/src/util/ImgUtil";
+import UUIDUtil from "socialuni-app-sdk/src/util/UUIDUtil";
+import ImgUtil from "socialuni-app-sdk/src/util/ImgUtil";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
-import type DomFile from "socialuni-app/src/model/DomFile";
+import type DomFile from "socialuni-app-sdk/src/model/DomFile";
 
 @Options({
     components: {SDialog, SButton}

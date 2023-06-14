@@ -4,7 +4,7 @@ import RouterUtil from "packages/socialuni-native/socialuni-native-uni/src/util/
 let nativeUtil: RouterUtil
 try {
     if (uni) {
-        const res: ImportModule<RouterUtil> = await import('packages/socialuni-native/socialuni-native-uni/src/util/RouterUtil')
+        const res: ImportModule<RouterUtil> = await import('socialuni-native-uni/src/util/RouterUtil')
         nativeUtil = res.default
     }
 } catch (e) {

@@ -13,7 +13,7 @@ import AppMsg from "socialuni-constant/constant/AppMsg";
 import UniappH5 from "./UniappH5";
 import ImgUtil from "./ImgUtil";
 import UUIDUtil from "./UUIDUtil";
-import {UniInterface} from "socialuni-app/src/UniInterface";
+import {UniInterface} from "socialuni-app-sdk/src/UniInterface";
 
 
 export default class NativeUtil {

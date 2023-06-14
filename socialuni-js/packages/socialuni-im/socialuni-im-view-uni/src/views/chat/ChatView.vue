@@ -116,13 +116,13 @@ import SocialuniImMineUserDetailRO from "socialuni-im-api/src/model/RO/Socialuni
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 import SocialuniImUserAPI from "socialuni-im-api/src/api/SocialuniImUserAPI";
 import SocialuniChatRO from "socialuni-api-base/src/model/SocialuniChatRO";
-import {socialuniChatModule} from "socialuni-im/src/store/SocialuniChatModule";
+import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
 import ChatType from "socialuni-constant/constant/ChatType";
 import SocialuniCommonStatus from "socialuni-constant/constant/status/SocialuniCommonStatus";
 import Constants from "socialuni-constant/constant/Constant";
 import DateUtil from "socialuni-util/src/util/DateUtil";
 import {onLoad, onShow} from "@dcloudio/uni-app";
-import ImPageUtil from "socialuni-im/src/util/ImPageUtil";
+import ImPageUtil from "socialuni-im-sdk/src/util/ImPageUtil";
 
 @Options({
     components: {QSearch, QInput, QIcon, QNavbar}

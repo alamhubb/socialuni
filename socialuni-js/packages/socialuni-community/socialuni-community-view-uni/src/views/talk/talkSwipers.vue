@@ -18,11 +18,11 @@
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
 import SkipType from "socialuni-constant/constant/SkipType";
-import {socialAppModule} from "socialuni-app/src/store/SocialAppModule";
-import {socialuniConfigModule} from "socialuni-app/src/store/SocialuniConfigModule";
+import {socialAppModule} from "socialuni-app-sdk/src/store/SocialAppModule";
+import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
-import SocialuniAppPageUtil from "socialuni-app/src/util/SocialuniAppPageUtil";
+import SocialuniAppPageUtil from "socialuni-app-sdk/src/util/SocialuniAppPageUtil";
 
 
 // todo 后台可控制是否显示轮播图

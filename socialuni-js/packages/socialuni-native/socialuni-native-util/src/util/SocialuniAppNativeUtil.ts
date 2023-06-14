@@ -4,7 +4,7 @@ import NativeUtil from 'packages/socialuni-native/socialuni-native-uni/src/util/
 let nativeUtil: NativeUtil
 try {
     if (uni) {
-        const res: ImportModule<NativeUtil> = await import('packages/socialuni-native/socialuni-native-uni/src/util/NativeUtil')
+        const res: ImportModule<NativeUtil> = await import('socialuni-native-uni/src/util/NativeUtil')
         nativeUtil = res.default
     }
 } catch (e) {

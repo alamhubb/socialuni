@@ -1,7 +1,7 @@
 import {AxiosResponse, InternalAxiosRequestConfig} from "axios";
 import {SocialuniPlugin} from "socialuni/src/interface/SocialuniPlugin";
 import {socialuniUserModule} from "./store/SocialuniUserModule";
-import {socialuniConfigModule} from "socialuni-app/src/store/SocialuniConfigModule";
+import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 import {socialuniTokenModule} from "./store/SocialuniTokenModule";
 import ResultRO from "socialuni-api-base/src/model/social/ResultRO";
 import ErrorConst from "socialuni-constant/constant/ErrorConst";
@@ -10,7 +10,7 @@ import UserMsgUtil from "./util/UserMsgUtil";
 import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
 import JsonUtil from "socialuni-util/src/util/JsonUtil";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
-import MsgUtil from "socialuni-app/src/util/MsgUtil";
+import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil";
 
 class SocialuniUserPlugin implements SocialuniPlugin {
     onLaunch() {

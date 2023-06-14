@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import FriendApplyListView from 'socialuni-im/src/views/chat/FriendApplyListView.vue'
+import FriendApplyListView from 'socialuni-im-sdk/src/views/chat/FriendApplyListView.vue'
 
 @Options({components: {FriendApplyListView}})
 export default class FriendApplyListPage extends Vue {

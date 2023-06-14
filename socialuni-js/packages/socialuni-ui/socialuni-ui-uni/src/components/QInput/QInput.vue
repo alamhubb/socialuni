@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import {Options, Emit, Model, Prop, Vue} from 'vue-property-decorator'
-import QIcon from 'src/components/QIcon/QIcon.vue'
+import QIcon from "../QIcon/QIcon.vue";
 
 @Options({
   components: {QIcon}

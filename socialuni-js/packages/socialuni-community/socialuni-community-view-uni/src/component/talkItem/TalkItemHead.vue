@@ -88,7 +88,7 @@ import TalkVO from "socialuni-api-base/src/model/talk/TalkVO"
 import ObjectUtil from "socialuni-util/src/util/ObjectUtil"
 import TalkTabType from "socialuni-constant/constant/TalkTabType"
 import PagePath from "socialuni-constant/constant/PagePath"
-import MsgUtil from "socialuni-app/src/util/MsgUtil"
+import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil"
 import FollowAddVO from "socialuni-api-base/src/model/FollowAddVO"
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO"
 import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue"
@@ -96,12 +96,12 @@ import DateUtil from "socialuni-util/src/util/DateUtil"
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI"
 import FollowAPI from "socialuni-community-api/src/api/FollowAPI"
 import SocialuniCommonStatus from 'socialuni-constant/constant/status/SocialuniCommonStatus'
-import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
-import UserPagePath from "socialuni-user/src/constant/UserPagePath";
-import UserPageUtil from "socialuni-user/src/util/UserPageUtil";
-import UserMsgUtil from "socialuni-user/src/util/UserMsgUtil";
-import UserUtil from "socialuni-user/src/util/UserUtil";
+import UserPagePath from "socialuni-user-sdk/src/constant/UserPagePath";
+import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
+import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
+import UserUtil from "socialuni-user-sdk/src/util/UserUtil";
 import SocialGenderTag from "socialuni-user-view-uni/src/components/SocialGenderTag/SocialGenderTag.vue";
 
 @Options({

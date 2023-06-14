@@ -11,10 +11,10 @@ import CircleCreateChatQO from "socialuni-api-base/src/model/community/circle/Ci
 import {socialCircleModule} from "./SocialCircleModule";
 import SocialuniCircleAPI from "socialuni-community-api/src/api/SocialuniCircleAPI";
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
-import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
-import MsgUtil from "socialuni-app/src/util/MsgUtil";
-import UserMsgUtil from "socialuni-user/src/util/UserMsgUtil";
+import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil";
+import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 import TalkFilterUtil from "../util/TalkFilterUtil";
 import TalkVueUtil from "../util/TalkVueUtil";

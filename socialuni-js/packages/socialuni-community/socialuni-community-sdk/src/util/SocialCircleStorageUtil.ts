@@ -1,4 +1,4 @@
-import {socialuniTagModule} from "socialuni-community/src/store/SocialTagModule";
+import {socialuniTagModule} from "socialuni-community-sdk/src/store/SocialTagModule";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 export default class SocialCircleStorageUtil {

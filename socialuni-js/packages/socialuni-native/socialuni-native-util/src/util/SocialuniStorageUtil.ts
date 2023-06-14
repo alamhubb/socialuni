@@ -4,7 +4,7 @@ import StorageUtil from "packages/socialuni-native/socialuni-native-uni/src/util
 let nativeUtil: StorageUtil
 try {
     if (uni) {
-        const res: ImportModule<StorageUtil> = await import('packages/socialuni-native/socialuni-native-uni/src/util/StorageUtil')
+        const res: ImportModule<StorageUtil> = await import('socialuni-native-uni/src/util/StorageUtil')
         nativeUtil = res.default
     }
 } catch (e) {

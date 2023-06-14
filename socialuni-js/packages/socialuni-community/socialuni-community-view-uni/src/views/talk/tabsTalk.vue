@@ -146,19 +146,19 @@ import CommonUtil from "socialuni-util/src/util/CommonUtil";
 import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
 import Constants from "socialuni-constant/constant/Constant";
 import SocialuniTalkTabCircleRO from "socialuni-api-base/src/model/community/circle/SocialuniTalkTabCircleRO";
-import MsgUtil from "socialuni-app/src/util/MsgUtil";
+import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil";
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
-import {socialTalkModule} from "socialuni-community/src/store/SocialTalkModule";
-import {socialuniTagModule} from "socialuni-community/src/store/SocialTagModule";
-import TalkQOFactory from "socialuni-community/src/factory/TalkQOFactory";
-import {socialLocationModule} from "socialuni-community/src/store/SocialLocationModule";
+import {socialTalkModule} from "socialuni-community-sdk/src/store/SocialTalkModule";
+import {socialuniTagModule} from "socialuni-community-sdk/src/store/SocialTagModule";
+import TalkQOFactory from "socialuni-community-sdk/src/factory/TalkQOFactory";
+import {socialLocationModule} from "socialuni-community-sdk/src/store/SocialLocationModule";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
-import TalkItem from "socialuni-community/src/component/talkItem/TalkItem.vue";
-import {socialuniConfigModule} from "socialuni-app/src/store/SocialuniConfigModule";
-import UserMsgUtil from "socialuni-user/src/util/UserMsgUtil";
-import UserPageUtil from "socialuni-user/src/util/UserPageUtil";
+import TalkItem from "socialuni-community-sdk/src/component/talkItem/TalkItem.vue";
+import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
+import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
+import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
-import {socialuniUserModule} from "socialuni-user/src/store/SocialuniUserModule";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 
 // todo 后台可控制是否显示轮播图
 @Options({

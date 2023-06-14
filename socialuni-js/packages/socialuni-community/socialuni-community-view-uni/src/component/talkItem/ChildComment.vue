@@ -41,8 +41,8 @@ import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 import CommentVO from "socialuni-api-base/src/model/comment/CommentVO";
 import ObjectUtil from "socialuni-util/src/util/ObjectUtil";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
-import UserPagePath from "socialuni-user/src/constant/UserPagePath";
-import UserPageUtil from "socialuni-user/src/util/UserPageUtil";
+import UserPagePath from "socialuni-user-sdk/src/constant/UserPagePath";
+import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import {socialTalkModule} from "../../store/SocialTalkModule";
 
 @Options({

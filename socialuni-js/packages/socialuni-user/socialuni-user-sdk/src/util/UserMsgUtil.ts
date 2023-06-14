@@ -1,7 +1,7 @@
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
 import {socialuniUserModule} from "../store/SocialuniUserModule";
 import PageUtil from "socialuni-util/src/util/PageUtil";
-import {socialuniConfigModule} from "socialuni-app/src/store/SocialuniConfigModule";
+import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 import UserPageUtil from "./UserPageUtil";
 
 export default class UserMsgUtil {

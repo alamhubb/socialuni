@@ -98,8 +98,8 @@ import QNavbar from 'socialuni-ui-uni/src/components/QNavbar/QNavbar.vue'
 import QSearch from 'socialuni-ui-uni/src/components/QSearch/QSearch.vue'
 import QSidebar from 'socialuni-ui-uni/src/components/QSidebar/QSidebar.vue'
 import TagVO from "socialuni-api-base/src/model/community/tag/TagVO";
-import {socialuniTagModule} from "socialuni-community/src/store/SocialTagModule";
-import TagUtil from "socialuni-community/src/util/TagUtil";
+import {socialuniTagModule} from "socialuni-community-sdk/src/store/SocialTagModule";
+import TagUtil from "socialuni-community-sdk/src/util/TagUtil";
 
 
 @Options({

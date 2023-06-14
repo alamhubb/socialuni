@@ -24,7 +24,7 @@ async function installSocialuniPluginIns() {
     socialuniPluginsModule.addPlugin(socialuniInitPlugin)
     try {
         //查询是否包含community模块，如果存在则加载
-        const socialuniPlugin: ImportModule<SocialuniPlugin> = await import('socialuni-app/src/index')
+        const socialuniPlugin: ImportModule<SocialuniPlugin> = await import('socialuni-app-sdk/src/index')
         console.log('tianjia app')
         socialuniPluginsModule.addPlugin(socialuniPlugin.default)
     } catch (e) {
@@ -33,7 +33,7 @@ async function installSocialuniPluginIns() {
     }
     try {
         //查询是否包含community模块，如果存在则加载
-        const socialuniPlugin: ImportModule<SocialuniPlugin> = await import('socialuni-user/src/index')
+        const socialuniPlugin: ImportModule<SocialuniPlugin> = await import('socialuni-user-sdk/src/index')
         console.log('tianjia user')
         socialuniPluginsModule.addPlugin(socialuniPlugin.default)
     } catch (e) {
@@ -42,7 +42,7 @@ async function installSocialuniPluginIns() {
     }
     try {
         //查询是否包含community模块，如果存在则加载
-        const socialuniPlugin: ImportModule<SocialuniPlugin> = await import('socialuni-community/src/index.ts')
+        const socialuniPlugin: ImportModule<SocialuniPlugin> = await import('socialuni-community-sdk/src/index.ts')
         socialuniPluginsModule.addPlugin(socialuniPlugin.default)
     } catch (e) {
         console.error(e)
@@ -52,7 +52,7 @@ async function installSocialuniPluginIns() {
     try {
         console.log(12312)
         //查询是否包含community模块，如果存在则加载
-        const socialuniPlugin: ImportModule<SocialuniPlugin> = await import('socialuni-im/src/index')
+        const socialuniPlugin: ImportModule<SocialuniPlugin> = await import('socialuni-im-sdk/src/index')
         socialuniPluginsModule.addPlugin(socialuniPlugin.default)
     } catch (e) {
         console.error(e)
