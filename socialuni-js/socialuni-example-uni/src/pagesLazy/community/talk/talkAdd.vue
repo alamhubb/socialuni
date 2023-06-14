@@ -140,31 +140,27 @@ import QCityInfo from "socialuni-community-view-uni/src/components/QCityInfo/QCi
 import SocialTagAdd from "socialuni-community-view-uni/src/components/SocialTagAdd/SocialTagAdd.vue";
 import TalkAddTagSearch from "socialuni-community-view-uni/src/components/TalkAddTagSearch.vue";
 import QCityPicker from "socialuni-community-view-uni/src/components/QCityPicker/QCityPicker.vue";
-import AlertUtil from "socialuni-app-uni/src/util/AlertUtil";
-import { socialuniUserModule } from 'socialuni/src/store/SocialuniUserModule';
 import {socialLocationModule} from "socialuni-community-sdk/src/store/SocialLocationModule";
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
 import {socialTalkModule} from "socialuni-community-sdk/src/store/SocialTalkModule";
 import {socialCircleModule} from "socialuni-community-sdk/src/store/SocialCircleModule";
-import RouterUtil from "socialuni-util/src/util/RouterUtil";
 import CommunityPageUtil from 'socialuni-community-sdk/src/util/CommunityPageUtil';
-import CommunityPagePath from "socialuni-community-sdk/src/constant/CommunityPagePath";
-import TagVO from "socialuni/src/model/community/tag/TagVO";
-import JsonUtil from "socialuni/src/util/JsonUtil";
 import ObjectUtil from "socialuni-util/src/util/ObjectUtil";
-import DistrictVO from "socialuni/src/model/DistrictVO";
-import CosService from "socialuni/src/service/CosService";
-import DomFile from "socialuni-util/src/model/DomFile";
-import UniUtil from "socialuni-app-sdk/src/util/UniUtil";
-import SocialuniAppAPI from "socialuni/src/api/SocialuniAppAPI";
-import SocialCircleRO from "socialuni/src/model/community/circle/SocialCircleRO";
 import {socialuniTagModule} from "socialuni-community-sdk/src/store/SocialTagModule";
 import VisibleType from "socialuni-constant/constant/VisibleType";
 import GenderType from "socialuni-constant/constant/GenderType";
-import CosAuthRO from "socialuni/src/model/cos/CosAuthRO";
 import LocationUtil from "socialuni-community-sdk/src/util/LocationUtil";
 import EnumStrVO from "socialuni-constant/constant/EnumStrVO";
-import PlatformUtils from "socialuni/src/utils/PlatformUtils";
+import { socialuniUserModule } from 'socialuni-user-sdk/src/store/SocialuniUserModule';
+import DistrictVO from "socialuni-api-base/src/model/DistrictVO";
+import DomFile from "socialuni-app-sdk/src/model/DomFile";
+import TagVO from "socialuni-api-base/src/model/community/tag/TagVO";
+import CosAuthRO from "socialuni-api-base/src/model/cos/CosAuthRO";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import PlatformUtils from "socialuni-user-sdk/src/util/PlatformUtils";
+import CosService from "socialuni-app-sdk/src/util/CosService";
+import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
+import SocialCircleRO from "socialuni-api-base/src/model/community/circle/SocialCircleRO";
 
 @Options({
   components: {
@@ -341,7 +337,7 @@ export default class TalkAddView extends Vue {
   checkTag(tag: TagVO) {
     if (this.selectTags.length > 4) {
       // todo 后台还没有校验
-      AlertUtil.hint('最多选择5个话题')
+      SocialuniAppUtil.AlertUtil.hint('最多选择5个话题')
       return
     }
     let tagInTags: TagVO = this.tags.find(item => item.id === tag.id)
@@ -391,7 +387,7 @@ export default class TalkAddView extends Vue {
 
   async addTalk() {
     if (!this.user) {
-      AlertUtil.error('请进行登录')
+        SocialuniAppUtil.AlertUtil.error('请进行登录')
     }
     /*if (!this.user.school) {
       AlertUtil.error('请设置您所在的学校后才可发表动态')
@@ -409,13 +405,13 @@ export default class TalkAddView extends Vue {
     this.buttonDisabled = true
     if (this.talkContent || this.showImgFiles.length) {
       if (this.talkContent && this.talkContent.length > 200) {
-        return AlertUtil.hint('动态最多支持200个字，请精简动态内容')
+        return SocialuniAppUtil.AlertUtil.hint('动态最多支持200个字，请精简动态内容')
       }
       this.addTalkHandler()
       // 申请订阅
       PlatformUtils.requestSubscribeTalk()
     } else {
-      AlertUtil.hint('不能发布文字和图片均为空的动态')
+        SocialuniAppUtil.AlertUtil.hint('不能发布文字和图片均为空的动态')
       this.buttonDisabled = false
     }
   }
@@ -496,13 +492,13 @@ export default class TalkAddView extends Vue {
     //获取cos认证信息
     this.cosAuthRO = await CosService.getCosAuthRO()
     const count = this.imgMaxSize - this.showImgFiles.length
-    const imgFiles: DomFile[] = await UniUtil.chooseImage(count)
+    const imgFiles: DomFile[] = await SocialuniAppUtil.UniUtil.chooseImage(count)
     this.showImgFiles.push(...imgFiles)
     if (this.cosAuthRO) {
       this.uploadImgList()
     } else {
       SocialuniAppAPI.sendErrorLogAPI(null, '用户发表动态失败，未获取上传图片所需要的认证信息')
-      AlertUtil.error(AppMsg.uploadFailMsg)
+        SocialuniAppUtil.AlertUtil.error(AppMsg.uploadFailMsg)
     }
   }
 

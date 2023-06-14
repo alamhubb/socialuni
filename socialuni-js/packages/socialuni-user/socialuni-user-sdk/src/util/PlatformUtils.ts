@@ -1,10 +1,7 @@
-import QQUtils from 'socialuni-util/src/util/QQUtils'
 import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil"
 import Constants from "socialuni-constant/constant/Constant"
 import AppMsg from "socialuni-constant/constant/AppMsg"
 import ToastUtil from "socialuni-native-uni/src/util/ToastUtil"
-import WxUtils from "socialuni-util/src/util/WxUtils"
-import MPUtil from "socialuni-util/src/util/MPUtil"
 import UserPayResultVO from "socialuni-api-base/src/model/user/UserPayResultVO";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import APPUtil from "socialuni-app-sdk/src/util/APPUtil";
@@ -12,6 +9,9 @@ import { socialPlatformModule } from 'socialuni-app-sdk/src/store/SocialPlatform
 import SocialuniAppAPI from 'socialuni-app-api/src/api/SocialuniAppAPI'
 import UserMsgUtil from './UserMsgUtil'
 import { socialuniUserModule } from '../store/SocialuniUserModule'
+import QQUtils from "socialuni-app-sdk/src/util/QQUtils";
+import WxUtils from "socialuni-app-sdk/src/util/WxUtils";
+import MPUtil from "socialuni-app-sdk/src/util/MPUtil";
 
 
 // 统一处理各平台的订阅
@@ -73,16 +73,6 @@ export default class PlatformUtils {
                AlertUtil.hint(HintMsg.paySuccessMsg)
                RouterUtil.reLaunch(UserPagePath.userMine)
              })*/
-        })
-    }
-
-    //所有只能直接调用这个
-    static async payCoin(amount: number) {
-        PlatformUtils.checkPay()
-        //目前支持微信支付
-        // const provider: string = SocialuniProviderType.wx
-        return SocialuniCoinAPI.payCoinAPI(socialuniSystemModule.provider, amount).then((res) => {
-            return PlatformUtils.cashPay(res.data)
         })
     }
 
