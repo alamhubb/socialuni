@@ -71,10 +71,9 @@
 <script lang="ts">
 import {Options, Emit, Prop, Vue, Watch} from 'vue-property-decorator'
 import TagVO from 'socialuni-api-base/src/model/community/tag/TagVO'
-import CenterUserDetailRO from 'socialuni-api-base/src/model/social/CenterUserDetailRO'
 import QIcon from 'socialuni-ui-uni/src/components/QIcon/QIcon.vue'
 import QNavbar from 'socialuni-ui-uni/src/components/QNavbar/QNavbar.vue'
-import {socialuniUserModule} from 'socialuni/src/store/SocialuniUserModule';
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 
 @Options({
     components: {QNavbar, QIcon}
