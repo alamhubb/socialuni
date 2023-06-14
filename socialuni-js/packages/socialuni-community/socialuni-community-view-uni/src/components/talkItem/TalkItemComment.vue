@@ -87,13 +87,14 @@ import CommentVO from "socialuni-api-base/src/model/comment/CommentVO";
 import HugAddVO from "socialuni-api-base/src/model/HugAddVO";
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
 import ChildComment from "./ChildComment.vue";
-import {socialTalkModule} from "../../store/SocialTalkModule";
 import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
-import CommunityPageUtil from "../../util/CommunityPageUtil";
 import UserPagePath from "socialuni-user-sdk/src/constant/UserPagePath";
-import CommunityPagePath from "../../constant/CommunityPagePath";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+import {socialTalkModule} from "socialuni-community-sdk/src/store/SocialTalkModule";
+import CommunityPageUtil from "socialuni-community-sdk/src/util/CommunityPageUtil";
+import CommunityPagePath from "socialuni-community-sdk/src/constant/CommunityPagePath";
 
 @Options({
   components: {

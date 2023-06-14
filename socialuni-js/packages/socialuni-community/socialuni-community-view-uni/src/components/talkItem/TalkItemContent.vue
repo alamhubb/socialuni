@@ -98,12 +98,12 @@ import NumUtil from "socialuni-util/src/util/NumUtil";
 import CommonUtil from "socialuni-util/src/util/CommonUtil";
 import UserPagePath from "socialuni-user-sdk/src/constant/UserPagePath";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
-import CommunityPageUtil from "../../util/CommunityPageUtil";
-import CommunityPagePath from "../../constant/CommunityPagePath";
-import {socialTalkModule} from "../../store/SocialTalkModule";
-import {socialuniTagModule} from "../../store/SocialTagModule";
 import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
 import SocialuniImgUtil from "socialuni-user-sdk/src/util/SocialuniImgUtil";
+import CommunityPagePath from "socialuni-community-sdk/src/constant/CommunityPagePath";
+import CommunityPageUtil from "socialuni-community-sdk/src/util/CommunityPageUtil";
+import {socialTalkModule} from "socialuni-community-sdk/src/store/SocialTalkModule";
+import {socialuniTagModule} from "socialuni-community-sdk/src/store/SocialTagModule";
 
 @Options({
   components: {QIcon}

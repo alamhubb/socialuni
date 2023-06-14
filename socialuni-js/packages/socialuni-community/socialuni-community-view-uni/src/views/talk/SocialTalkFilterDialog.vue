@@ -98,15 +98,15 @@ import {Emit, Options, Vue, Watch} from 'vue-property-decorator'
 // import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 // import QSlider from "socialuni-ui-uni/src/components/QSlider/QSlider.vue";
 // import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue";
-// import SocialTagPicker from 'socialuni-community-sdk/src/component/SocialTagPicker.vue';
-// import SocialCirclePicker from "socialuni-community-sdk/src/component/SocialCirclePicker.vue";
+// import SocialTagPicker from 'socialuni-community-view-uni/src/components/SocialTagPicker.vue';
+// import SocialCirclePicker from "socialuni-community-view-uni/src/components/SocialCirclePicker.vue";
 // import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
 // import {socialuniTagModule} from "socialuni-community-sdk/src/store/SocialTagModule";
 // import {socialCircleModule} from "socialuni-community-sdk/src/store/SocialCircleModule";
 // import {socialLocationModule} from "socialuni-community-sdk/src/store/SocialLocationModule";
 // import {socialTalkModule} from "socialuni-community-sdk/src/store/SocialTalkModule";
-// import QCityPicker from "socialuni-community-sdk/src/component/QCityPicker/QCityPicker.vue";
-// import QCityInfo from "socialuni-community-sdk/src/component/QCityInfo/QCityInfo.vue";
+// import QCityPicker from "socialuni-community-view-uni/src/components/QCityPicker/QCityPicker.vue";
+// import QCityInfo from "socialuni-community-view-uni/src/components/QCityInfo/QCityInfo.vue";
 
 
 @Options({

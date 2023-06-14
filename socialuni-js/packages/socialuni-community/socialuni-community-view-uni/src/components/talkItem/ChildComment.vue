@@ -43,7 +43,7 @@ import ObjectUtil from "socialuni-util/src/util/ObjectUtil";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 import UserPagePath from "socialuni-user-sdk/src/constant/UserPagePath";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
-import {socialTalkModule} from "../../store/SocialTalkModule";
+import {socialTalkModule} from "socialuni-community-sdk/src/store/SocialTalkModule";
 
 @Options({
     components: {QIcon}

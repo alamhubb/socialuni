@@ -84,7 +84,7 @@ import QTabs from "socialuni-ui-uni/src/components/QTabs/QTabs.vue";
 import SocialuniPageQueryQO from "socialuni-api-base/src/model/common/SocialuniPageQueryQO";
 import SocialuniPageQueryUtil from "socialuni-api-base/src/model/common/SocialuniPageQueryUtil";
 import SocialuniUserRO from "socialuni-api-base/src/model/user/SocialuniUserRO";
-import SocialuniFollowTag from "socialuni-community-sdk/src/component/SocialuniFollow/SocialuniFollowTag.vue";
+import SocialuniFollowTag from "socialuni-community-view-uni/src/components/SocialuniFollow/SocialuniFollowTag.vue";
 import SocialGenderTag from "../../../components/SocialGenderTag/SocialGenderTag.vue";
 import FollowAPI from "socialuni-community-api/src/api/FollowAPI";
 
