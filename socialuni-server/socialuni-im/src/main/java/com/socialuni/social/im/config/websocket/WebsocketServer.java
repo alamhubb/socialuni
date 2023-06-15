@@ -3,7 +3,14 @@ package com.socialuni.social.im.config.websocket;
 import cn.hutool.core.lang.Console;
 import com.socialuni.social.common.api.utils.IntegerUtils;
 import com.socialuni.social.common.sdk.utils.RedisUtil;
+import com.socialuni.social.im.api.model.RO.ChatRO;
+import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
+import com.socialuni.social.im.dao.repository.ChatUserRepository;
+import com.socialuni.social.im.enumeration.ChatStatus;
+import com.socialuni.social.im.enumeration.ChatUserStatus;
+import com.socialuni.social.im.enumeration.NotifyType;
 import com.socialuni.social.im.model.message.notify.NotifyVO;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.redis.listener.ChannelTopic;
@@ -22,7 +29,9 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Service
-@Slf4j
+        @Slf4j
+        @
+
 public class WebsocketServer extends TextWebSocketHandler {
     /**
      * concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。
@@ -39,6 +48,13 @@ public class WebsocketServer extends TextWebSocketHandler {
 
     private static RedisUtil redisUtil;
 
+    private static ChatUserRepository chatUserRepository;
+
+    @Resource
+    public void setChatUserRepository(ChatUserRepository chatUserRepository) {
+        WebsocketServer.chatUserRepository = chatUserRepository;
+    }
+
     @Resource
     public void setRedisUtil(RedisUtil redisUtil) {
         WebsocketServer.redisUtil = redisUtil;
@@ -48,11 +64,26 @@ public class WebsocketServer extends TextWebSocketHandler {
      * 广播信息
      */
     public static void sendMessageToAllUsers(NotifyVO notify) {
-        String userId = notify.getUser().getId().toString();
-        for (WebSocketSession userSession : onlineUsersSessionMap.values()) {
-            if (userSession != null && userSession.isOpen()) {
-                String sessionUserId = Objects.requireNonNull(userSession.getPrincipal()).getName();
-                if (!userId.equals(sessionUserId)) {
+        String userIdStr = notify.getUser().getId().toString();
+        if (notify.getType().equals(NotifyType.message)) {
+            for (WebSocketSession userSession : onlineUsersSessionMap.values()) {
+                if (userSession != null && userSession.isOpen()) {
+                    String sessionUserId = Objects.requireNonNull(userSession.getPrincipal()).getName();
+                    if (!userIdStr.equals(sessionUserId)) {
+                        continue;
+                    }
+                    Integer userId = SocialuniUnionIdFacede.getUnionIdByUuidAllowNull(sessionUserId);
+                    if (userId != null) {
+                        String chatIdStr = notify.getChat().getId();
+                        Integer chatId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(chatIdStr);
+                        SocialuniChatUserDO socialuniChatUserDO = chatUserRepository.findFirstByChatIdAndUserIdAndStatus(chatId, userId, ChatUserStatus.enable);
+                        if (socialuniChatUserDO == null) {
+                            continue;
+                        }
+                    }
+                    //发给不是自己的
+                    System.out.println(userIdStr);
+                    System.out.println(sessionUserId);
                     //如果用户在线才发送
                     //有不为数字的代表是没登陆的用户才发送
                     try {
@@ -63,6 +94,8 @@ public class WebsocketServer extends TextWebSocketHandler {
                 }
             }
         }
+
+
     }
 
     public static void sendMessage(Integer userId, NotifyVO notify) {
@@ -76,7 +109,8 @@ public class WebsocketServer extends TextWebSocketHandler {
             }
         }
     }
-    public static void sendMessage(String  userId, NotifyVO notify) {
+
+    public static void sendMessage(String userId, NotifyVO notify) {
         WebSocketSession session = onlineUsersSessionMap.get(userId);
         //如果用户在线才发送
         if (session != null && session.isOpen()) {
@@ -87,6 +121,7 @@ public class WebsocketServer extends TextWebSocketHandler {
             }
         }
     }
+
     @Override
     public void afterConnectionEstablished(WebSocketSession session) {
         Principal user = session.getPrincipal();

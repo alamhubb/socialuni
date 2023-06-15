@@ -139,6 +139,14 @@ public class SocialuniUnionIdFacede {
         return socialuniUnionIdApi.findByUuId(uuid);
     }
 
+    public static Integer getUnionIdByUuidAllowNull(String uuid) {
+        SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidAllowNull(uuid);
+        if (socialuniUnionIdModler == null) {
+            return null;
+        }
+        return socialuniUnionIdModler.getId();
+    }
+
 
     public static List<Integer> getContentIdsByTalkUnionIds(List<String> contentUnionIds) {
         return getContentIdsByUnionIds(contentUnionIds, SocialuniContentType.talk);
