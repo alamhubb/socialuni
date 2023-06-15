@@ -98,6 +98,9 @@ public class DevAccountFacade {
 
     public static Integer getDevIdNotNull() {
         DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNotNull();
+        if (devAccountModel == null) {
+            return 1;
+        }
         return devAccountModel.getId();
     }
 

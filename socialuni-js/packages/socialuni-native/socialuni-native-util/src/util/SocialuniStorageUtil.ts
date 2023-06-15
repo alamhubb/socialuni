@@ -1,5 +1,5 @@
 import {ImportModule} from "socialuni/src/interface/ImportModule";
-import StorageUtil from "packages/socialuni-native/socialuni-native-uni/src/util/StorageUtil";
+import StorageUtil from "socialuni-native-h5/src/util/StorageUtil";
 
 let nativeUtil: StorageUtil
 try {

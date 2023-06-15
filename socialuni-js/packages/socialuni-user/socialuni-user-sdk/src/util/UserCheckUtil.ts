@@ -1,10 +1,9 @@
-import AlertUtil from "socialuni-native-uni/src/util/AlertUtil";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 import UserPageUtil from "./UserPageUtil";
 import SocialuniUserEventConst from "../constant/SocialuniUserEventConst";
-import mitt from "mitt";
 import SocialuniEventUtil from "socialuni/src/util/SocialuniEventUtil";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 export default class UserCheckUtil {
     static checkUserLogin() {

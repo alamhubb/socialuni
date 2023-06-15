@@ -25,7 +25,6 @@ async function installSocialuniPluginIns() {
     try {
         //查询是否包含community模块，如果存在则加载
         const socialuniPlugin: ImportModule<SocialuniPlugin> = await import('socialuni-app-sdk/src/index')
-        console.log('tianjia app')
         socialuniPluginsModule.addPlugin(socialuniPlugin.default)
     } catch (e) {
         console.error(e)
@@ -34,7 +33,6 @@ async function installSocialuniPluginIns() {
     try {
         //查询是否包含community模块，如果存在则加载
         const socialuniPlugin: ImportModule<SocialuniPlugin> = await import('socialuni-user-sdk/src/index')
-        console.log('tianjia user')
         socialuniPluginsModule.addPlugin(socialuniPlugin.default)
     } catch (e) {
         console.error(e)
@@ -50,13 +48,11 @@ async function installSocialuniPluginIns() {
     }
     // 社交联盟内置支持的插件
     try {
-        console.log(12312)
         //查询是否包含community模块，如果存在则加载
         const socialuniPlugin: ImportModule<SocialuniPlugin> = await import('socialuni-im-sdk/src/index')
         socialuniPluginsModule.addPlugin(socialuniPlugin.default)
     } catch (e) {
         console.error(e)
-        console.log(12312)
         // 如果导入失败，则不触发任何操作
     }
 }
@@ -64,8 +60,6 @@ async function installSocialuniPluginIns() {
 
 const Socialuni = {
     async install(app: App, socialuniOption: SocialuniOption) {
-
-        console.log(456465)
         const shareComponent = defineComponent({
             onShareAppMessage() {
                 const title = '年轻人生活分享社区'
@@ -89,22 +83,9 @@ const Socialuni = {
                         socialuniViewServiceObj.init(this.$refs)
                     }
                 }
-                /*onLoad((params) => {
-                  SocialuniAppUtil.UniUtil.showShareMenu()
-                })*/
             }
         })
-        console.log(shareComponent)
-        console.log(app)
-        console.log(898989)
         app.mixin(shareComponent)
-
-        // router: Router, socialuniPlugins: SocialuniPlugin[]
-        // socialuniPluginsModule.init(socialuniOptions?.requestConfig)
-
-        /*if (socialuniOption && socialuniOption.router) {
-
-        }*/
 
         // 社交联盟内置支持的插件
         await installSocialuniPluginIns()
