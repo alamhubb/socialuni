@@ -34,21 +34,23 @@ export default class WebsocketUtil {
         for (const plugin of socialuniPluginsModule.plugins) {
             plugin.onWebsocketConnect?.(reload)
         }
-
-        let token: string
-
         const config = {} as any
 
-        if (config.token) {
-            token = config.token
-        } else {
-            token = UUIDUtil.getUUID()
-        }
+        let token: string
 
         for (const socialuniPlugin of socialuniPluginsModule.plugins) {
             if (socialuniPlugin.onWebsocketInterceptors) {
                 socialuniPlugin.onWebsocketInterceptors(config)
             }
+        }
+
+        console.log(111111)
+        console.log(config.token)
+
+        if (config.token) {
+            token = config.token
+        } else {
+            token = UUIDUtil.getUUID()
         }
 
         const websocketUrl = SocialuniAPIConfig.socialuniWebsocketUrl + '/webSocket/message?token=' + token

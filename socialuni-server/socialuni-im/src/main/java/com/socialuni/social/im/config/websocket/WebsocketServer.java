@@ -29,9 +29,7 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Service
-        @Slf4j
-        @
-
+@Slf4j
 public class WebsocketServer extends TextWebSocketHandler {
     /**
      * concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。
