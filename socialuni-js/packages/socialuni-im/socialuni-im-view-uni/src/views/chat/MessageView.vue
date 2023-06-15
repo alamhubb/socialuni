@@ -239,49 +239,35 @@ import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import Constants from "socialuni-constant/constant/Constant";
 import SocialuniCommonStatus from "socialuni-constant/constant/status/SocialuniCommonStatus";
-import HintMsg from "socialuni-constant/constant/HintMsg";
 import UserType from "socialuni-constant/constant/UserType";
-import PagePath from "socialuni-constant/constant/PagePath";
 import SelectorQuery = UniNamespace.SelectorQuery;
 import NodesRef = UniNamespace.NodesRef;
-import PayType from "socialuni-constant/constant/PayType";
-import AlertUtil from "socialuni-native-uni/src/util/AlertUtil";
-import ToastUtil from "socialuni-native-uni/src/util/ToastUtil";
-import CommonUtil from "socialuni-util/src/util/CommonUtil";
 import DateUtil from "socialuni-util/src/util/DateUtil";
 import MessageViewParams from "./MessageViewParams";
 import SocialuniMessageType from "socialuni-constant/constant/mesaage/SocialuniMessageType";
-import QIcon from 'socialuni-ui-uni/src/components/QIcon/QIcon.vue'
-import QNavbar from 'socialuni-ui-uni/src/components/QNavbar/QNavbar.vue'
-import CosUtil from "socialuni-util/src/util/CosUtil";
 import AppMsg from "socialuni-constant/constant/AppMsg";
 import CosAuthRO from "socialuni-api-base/src/model/cos/CosAuthRO";
-import MessageItemContent from "./MessageItemContent.vue";
 import SocialuniProviderType from "socialuni-constant/constant/SocialuniProviderType";
 import {onLoad} from "@dcloudio/uni-app";
 import {onMounted} from "vue";
-import SocialuniChatRO from "socialuni-api-base/src/model/SocialuniChatRO";
 import MessageAPI from "socialuni-im-api/src/api/MessageAPI";
 import MessageVO from "socialuni-im-api/src/model/RO/MessageVO";
 import NodeInfo = UniNamespace.NodeInfo;
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
-import {socialChatModule} from "../../store/SocialChatModule";
 import SocialuniAppUtil from 'socialuni-native-util/src/util/SocialuniAppUtil'
 import MsgUtil from 'socialuni-app-sdk/src/util/MsgUtil'
-import PlatformUtils from 'socialuni-user-sdk/src/util/PlatformUtils'
 import UserPageUtil from 'socialuni-user-sdk/src/util/UserPageUtil'
 import DomFile from 'socialuni-app-sdk/src/model/DomFile'
 import CosService from 'socialuni-app-sdk/src/util/CosService'
 import {socialAppModule} from 'socialuni-app-sdk/src/store/SocialAppModule'
 import SocialuniAppAPI from 'socialuni-app-api/src/api/SocialuniAppAPI'
-import UserCheckUtil from 'socialuni-user-sdk/src/util/UserCheckUtil'
-import {socialuniChatModule} from "../../store/SocialuniChatModule";
-import SocialuniMsgViewService from "../../logic/SocialuniMsgViewService";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+import SocialuniMsgViewService from "socialuni-im-sdk/src/logic/SocialuniMsgViewService";
+import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
 
 @Options(
     {
-        components: {MessageItemContent, QIcon, QNavbar}
+        // components: {MessageItemContent, QIcon, QNavbar}
     }
 )
 export default class MessageView extends Vue {
