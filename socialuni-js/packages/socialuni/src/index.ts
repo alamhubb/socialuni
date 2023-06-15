@@ -5,6 +5,17 @@ import {ImportModule} from "./interface/ImportModule"
 import {SocialuniOption} from "./interface/socialuniOption"
 import SocialuniViewService from "./interface/SocialuniViewService";
 
+try {
+    await import('socialuni-ui-uni/src/styles/index.scss')
+} catch (e) {
+    console.log(e)
+}
+
+try {
+    await import('socialuni-app-view-uni/src/styles/index.scss')
+} catch (e) {
+    console.log(e)
+}
 
 const socialuniInitPlugin: SocialuniPlugin = {
     async onLaunch() {
