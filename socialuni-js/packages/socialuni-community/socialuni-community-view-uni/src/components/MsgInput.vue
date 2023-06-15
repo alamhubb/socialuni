@@ -38,11 +38,12 @@
 
 <script lang="ts">
 import {Options, Vue, Watch} from 'vue-property-decorator'
-import {socialuniUserModule} from 'socialuni/src/store/SocialuniUserModule';
-import ToastUtil from "socialuni-util/src/util/ToastUtil";
 import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil";
-import {socialTalkModule} from "../store/SocialTalkModule";
-import PlatformUtils from "socialuni/src/utils/PlatformUtils";
+import {socialTalkModule} from "socialuni-community-sdk/src/store/SocialTalkModule";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import PlatformUtils from "socialuni-user-sdk/src/util/PlatformUtils";
+import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
 
 @Options({})
 export default class MsgInput extends Vue {
@@ -95,7 +96,7 @@ export default class MsgInput extends Vue {
         SocialuniAppUtil.ToastUtil.toast('不能发表内容为空的评论')
       }
     } else {
-      MsgUtil.unBindPhoneNum()
+      UserMsgUtil.unBindPhoneNum()
     }
   }
 
