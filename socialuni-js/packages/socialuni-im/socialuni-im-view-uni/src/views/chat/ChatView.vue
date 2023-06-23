@@ -309,7 +309,6 @@ export default class ChatView extends Vue {
     }*/
 
     toMessagePage(chat: SocialuniChatRO) {
-        console.log(chat)
         //需要先清除，再跳转页面
         //进入页面需要查询，不查询则不显示
         if (chat.receiveUserId) {

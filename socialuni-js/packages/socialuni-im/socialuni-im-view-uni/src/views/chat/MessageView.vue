@@ -356,11 +356,9 @@ export default class MessageView extends Vue {
         // if (params.nickname) {
         //   chat.nickname = params.nickname
         // }
-        console.log('chufale 初始')
         socialuniChatModule.setChatId(params.chatId)
 
         this.queryTime = new Date()
-        console.log('初始查询')
         await this.queryMessages(true)
 
         socialuniChatModule.scrollToMessagePageBottom()
@@ -395,7 +393,6 @@ export default class MessageView extends Vue {
         if (this.chat.loadMore === LoadMoreType.more) {
             // 执行正在加载动画
             this.chat.loadMore = LoadMoreType.loading
-            console.log('滚动到顶部查询')
             this.queryMessages()
         }
     }

@@ -53,25 +53,19 @@ class SocialuniChatModule {
     async getChatsAction() {
         const res = await ChatAPI.queryChatListAPI()
         this.setChats(res.data)
-        console.log(this.chats.length)
         if (this.chats.length) {
-            console.log(this.chats.length)
             this.setChatId(this.chats[0].id)
         }
     }
 
     setChatId(chatId: string) {
-        console.log(chatId)
         let chat = socialuniChatModule.chats.find(item => item.id === chatId)
-        console.log(chat)
         if (!chat) {
             chat = new SocialuniChatRO()
             // chat.receiveId = params.chatId
             chat.id = chatId
             chat.loadMore = LoadMoreType.more
             this.chats.unshift(chat)
-
-            console.log('chaxunchat messag')
 
             ChatAPI.queryChatAPI(new ChatQueryQO(chatId)).then(res => {
                 this.readChatAction(res.data.messages)
@@ -139,7 +133,6 @@ class SocialuniChatModule {
 
     scrollToMessagePageBottom() {
         CommonUtil.delayTime(100).then(() => {
-            console.log('xiugai top zhi')
             this.scrollTop = this.messages.length * 500
             // this.scrollTop = -1000
         })

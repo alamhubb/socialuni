@@ -33,7 +33,6 @@ export default class WebsocketUtil {
 
         console.log('websocket连接')
 
-
         const config = {} as any
 
         let token: string
@@ -43,9 +42,6 @@ export default class WebsocketUtil {
                 socialuniPlugin.onWebsocketInterceptors(config)
             }
         }
-
-        console.log(111111)
-        console.log(config.token)
 
         if (config.token) {
             token = config.token
@@ -57,13 +53,9 @@ export default class WebsocketUtil {
 
         this.ws = new WebSocket(websocketUrl)
 
-        console.log(this.ws)
 
         this.ws.onopen = (() => {
             this.locking = false
-            console.log(this.ws.readyState)
-            console.log(444444)
-            console.log('打开')
             if (reload || WebsocketUtil.timer) {
                 clearInterval(WebsocketUtil.timer)
             }
