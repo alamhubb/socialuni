@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import UserDetailView from "socialuni/src/view/user/UserDetailView.vue";
+import UserDetailView from "socialuni-user-view-uni/src/views/user/UserDetailView.vue";
 
 @Options({
   components: {UserDetailView}

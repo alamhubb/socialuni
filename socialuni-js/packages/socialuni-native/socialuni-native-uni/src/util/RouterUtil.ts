@@ -1,3 +1,5 @@
+import PagePath from "socialuni-constant/constant/PagePath";
+
 export default class RouterUtil {
     /**
      * 保留当前页面，跳转到应用内的某个页面，使用uni.navigateBack可以返回到原页面。
@@ -66,7 +68,7 @@ export default class RouterUtil {
     }
 
     static goHome(): void {
-        // RouterUtil.switchTab(PagePath.home)
+        RouterUtil.switchTab(PagePath.home)
     }
 
     static async navigateToMp(appId: string, path: string = null, extraData: any = null) {

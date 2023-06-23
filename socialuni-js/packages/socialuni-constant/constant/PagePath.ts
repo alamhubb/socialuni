@@ -11,6 +11,4 @@ export default class PagePath {
   static readonly coinRecord: string = '/pagesLazy/user/coinRecord'
   static readonly loveValue: string = '/pages/user/loveValue'
 
-
-
 }
