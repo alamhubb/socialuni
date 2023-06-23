@@ -13,10 +13,14 @@ import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil";
 import UserType from "socialuni-constant/constant/UserType";
 import {onLoad} from "@dcloudio/uni-app";
 import MessageViewParams from "socialuni-im-view-uni/src/views/chat/MessageViewParams";
-import {onMounted} from "vue";
+import {nextTick, onMounted} from "vue";
 import SocialuniViewService from "socialuni/src/interface/SocialuniViewService";
 import Constants from "socialuni-constant/constant/Constant";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
+import SelectorQuery = UniNamespace.SelectorQuery;
+import NodesRef = UniNamespace.NodesRef;
+import NodeInfo = UniNamespace.NodeInfo;
+import {Vue} from "vue-class-component";
 
 export default class SocialuniMsgViewService extends SocialuniViewService {
     public $refs!: {
@@ -31,6 +35,7 @@ export default class SocialuniMsgViewService extends SocialuniViewService {
     deleteReason: string = null
     queryTime: Date = null
     reportContentType: string = ReportContentType.message
+    lazyLoadNum = 30
 
     get chatId() {
         return socialuniChatModule.chatId
@@ -56,15 +61,18 @@ export default class SocialuniMsgViewService extends SocialuniViewService {
         return socialuniUserModule.mineUser
     }
 
-    initService(refs: any) {
+    initService(vueInstance: Vue) {
+        this.thisInstance = vueInstance
+        console.log(this.thisInstance)
+        console.log(this.thisInstance.$refs)
         console.log('chufale initService')
         //TODO 同一会话时，这里要改成onRead，不然需要刷新页面才会触发已读的标志。
         onLoad((params: MessageViewParams) => {
             console.log('chufale onLoad')
             //不这么写refs是空
             // onMounted(() => {
-                console.log('chufale onMounted')
-                this.init(params)
+            console.log('chufale onMounted')
+            this.init(params)
             // })
         })
     }
@@ -98,7 +106,6 @@ export default class SocialuniMsgViewService extends SocialuniViewService {
     }
 
 
-
     openMoreMenu() {
         if (this.chat.type === ChatType.single) {
             UserPageUtil.toUserDetail(this.chat.id);
@@ -125,7 +132,7 @@ export default class SocialuniMsgViewService extends SocialuniViewService {
         console.log(123456)
         UserCheckUtil.checkUserBindPhoneNum()
         console.log(123)
-        console.log(this)
+        console.log(this.thisInstance)
         const msgContent = this.msgContent
         console.log(this.msgContent)
         console.log(msgContent)
@@ -288,8 +295,8 @@ export default class SocialuniMsgViewService extends SocialuniViewService {
                         socialuniChatModule.chat.messages.unshift(...resMessages)
                         socialuniChatModule.readChatAction(socialuniChatModule.chat.messages)
                         //获取添加后的之前顶部位置，然后滚动到此位置
-                        this.$nextTick(() => {
-                            const query: SelectorQuery = uni.createSelectorQuery().in(this)
+                        nextTick(() => {
+                            const query: SelectorQuery = uni.createSelectorQuery().in(this.thisInstance)
                             // const nodeBox: NodesRef = query.select('.scrollView')
                             const nodeBox: NodesRef = query.select(preFirstMsgId)
                             nodeBox.boundingClientRect((lastNodeRes: NodeInfo) => {
