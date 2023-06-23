@@ -86,6 +86,7 @@ public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {
     //这个方法暂时没生效，群的时候没有使用chatUser表的数据
     //私聊群聊创建ChatUserDO的逻辑
     public SocialuniChatUserDO(SocialuniChatDO chat, Integer userId) {
+        this();
 //        this.chatId = chat.getId();
 //        this.userId = userId;
         String chatType = chat.getType();
@@ -105,6 +106,7 @@ public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {
         this.topFlag = false;
         //为什么不设置成99，因为此版本没有阅读功能？先试试99
         this.unreadNum = 0;
+        this.blackUser = false;
     }
 
     public SocialuniChatUserDO(SocialuniChatDO chat, Integer userId, Integer beUserId) {

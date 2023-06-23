@@ -26,7 +26,10 @@ public class SocialuniChatUserDOFactory {
             }
             return createSocialuniChatUserDOS(userId, beUserId);
         }
-        return Arrays.asList(chatUserDO, beChatUserDO);
+        if (!userId.equals(beUserId)) {
+            return Arrays.asList(chatUserDO, beChatUserDO);
+        }
+        return Arrays.asList(chatUserDO);
     }
 
     public static List<SocialuniChatUserDO> createSocialuniChatUserDOS(Integer userId, Integer beUserId) {
@@ -36,11 +39,15 @@ public class SocialuniChatUserDOFactory {
         SocialuniChatDO chatDO = SocialuniChatDOFactory.getChatIdByCreateSingleChat();
         //会话不存在则创建
         chatUserDO = new SocialuniChatUserDO(chatDO, userId, beUserId);
-        beChatUserDO = new SocialuniChatUserDO(chatDO, beUserId, userId);
-
         chatUserDO = SocialuniRepositoryFacade.save(chatUserDO);
-        beChatUserDO = SocialuniRepositoryFacade.save(beChatUserDO);
-        return Arrays.asList(chatUserDO, beChatUserDO);
+
+        //存在自己给自己发消息的情况
+        if (!userId.equals(beUserId)) {
+            beChatUserDO = new SocialuniChatUserDO(chatDO, beUserId, userId);
+            beChatUserDO = SocialuniRepositoryFacade.save(beChatUserDO);
+            return Arrays.asList(chatUserDO, beChatUserDO);
+        }
+        return Arrays.asList(chatUserDO, chatUserDO);
     }
 
     public static SocialuniChatUserDO getOrCreateChatUserBySingleReceiveMsg(SocialuniChatDO chatDO, Integer userId, Integer beUserId) {

@@ -97,11 +97,13 @@ public class SocialuniMessageEntity {
         }
 
 
-        SocialuniChatUserDO chatUser = chatSocialuniUserDoS.get(1);
+        if (!beUserId.equals(mineUserId)){
+            SocialuniChatUserDO chatUser = chatSocialuniUserDoS.get(1);
 
-        //对方是否把你拉黑了
-        if (chatUser != null && chatUser.getBlackUser()) {
-            throw new SocialBusinessException("您已将对方拉黑，无法发送消息");
+            //对方是否把你拉黑了
+            if (chatUser != null && chatUser.getBlackUser()) {
+                throw new SocialBusinessException("您已将对方拉黑，无法发送消息");
+            }
         }
 
         //先看是否已经被关注
