@@ -70,7 +70,9 @@ export default class WebsocketUtil {
             }
             //心跳保活
             WebsocketUtil.timer = setInterval(() => {
-                this.ws.send('ping')
+                if (this.ws.OPEN) {
+                    this.ws.send('ping')
+                }
             }, 30000)
         })
 

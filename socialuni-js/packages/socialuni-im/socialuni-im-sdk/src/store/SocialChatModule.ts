@@ -85,24 +85,6 @@ class SocialChatModule {
 
     //进来就展示对方是否支持
 
-    setChatId(chatId: string) {
-        let chat = socialChatModule.chats.find(item => item.id === chatId)
-        if (!chat) {
-            chat = new SocialuniChatRO()
-            // chat.receiveId = params.chatId
-            chat.id = chatId
-            chat.loadMore = LoadMoreType.more
-            socialChatModule.chats.unshift(chat)
-
-            ChatAPI.queryChatAPI(new ChatQueryQO(chatId)).then(res => {
-                this.readChatAction(res.data.messages)
-                this.pushMsgReplaceChatByChat(res.data)
-            })
-        }
-        this.chatId = chatId
-        socialChatModule.scrollToMessagePageBottom()
-    }
-
     //后台推送了一条消息，你不知道前台是否有这条消息，后台更不可能知道前台是否删除了这条消息
     //就直接push进去就行了。然后方法内部判断，是否有，有的话替换，msg push，没有的话直接unshift
     //有三种可能

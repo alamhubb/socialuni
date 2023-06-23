@@ -1,6 +1,8 @@
 package com.socialuni.social.im.config.websocket;
 
 import cn.hutool.core.lang.Console;
+import com.socialuni.social.common.api.exception.exception.SocialNullUserException;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.utils.IntegerUtils;
 import com.socialuni.social.common.sdk.utils.RedisUtil;
 import com.socialuni.social.im.api.model.RO.ChatRO;
@@ -99,9 +101,13 @@ public class WebsocketServer extends TextWebSocketHandler {
     }
 
     public static void sendMessage(Integer userId, NotifyVO notify) {
-        WebSocketSession session = onlineUsersSessionMap.get(userId.toString());
+        String uuid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(userId);
+        WebSocketSession session = onlineUsersSessionMap.get(uuid);
+        if (session == null){
+            throw new SocialParamsException("用户参数异常");
+        }
         //如果用户在线才发送
-        if (session != null && session.isOpen()) {
+        if (session.isOpen()) {
             try {
                 session.sendMessage(notify.toMessage());
             } catch (IOException e) {

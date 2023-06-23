@@ -17,6 +17,26 @@ try {
     console.log(e)
 }
 
+let socialuniAppPlugin: ImportModule<SocialuniPlugin> = null
+try {
+    //查询是否包含community模块，如果存在则加载
+    socialuniAppPlugin = await import('socialuni-app-sdk/src/index')
+} catch (e) {
+    console.error(e)
+    // 如果导入失败，则不触发任何操作
+}
+
+let socialuniUserPlugin: ImportModule<SocialuniPlugin> = null
+try {
+    //查询是否包含community模块，如果存在则加载
+    socialuniUserPlugin = await import('socialuni-user-sdk/src/index')
+} catch (e) {
+    console.error(e)
+    // 如果导入失败，则不触发任何操作
+}
+
+let userModule = null
+
 const socialuniInitPlugin: SocialuniPlugin = {
     async onLaunch() {
         /*socialuniUserModule.initSocialuniUserModule()
@@ -33,21 +53,12 @@ const socialuniInitPlugin: SocialuniPlugin = {
 async function installSocialuniPluginIns() {
 
     socialuniPluginsModule.addPlugin(socialuniInitPlugin)
-    try {
-        //查询是否包含community模块，如果存在则加载
-        const socialuniPlugin: ImportModule<SocialuniPlugin> = await import('socialuni-app-sdk/src/index')
-        socialuniPluginsModule.addPlugin(socialuniPlugin.default)
-    } catch (e) {
-        console.error(e)
-        // 如果导入失败，则不触发任何操作
+
+    if (socialuniAppPlugin) {
+        socialuniPluginsModule.addPlugin(socialuniUserPlugin.default)
     }
-    try {
-        //查询是否包含community模块，如果存在则加载
-        const socialuniPlugin: ImportModule<SocialuniPlugin> = await import('socialuni-user-sdk/src/index')
-        socialuniPluginsModule.addPlugin(socialuniPlugin.default)
-    } catch (e) {
-        console.error(e)
-        // 如果导入失败，则不触发任何操作
+    if (socialuniUserPlugin) {
+        socialuniPluginsModule.addPlugin(socialuniUserPlugin.default)
     }
     try {
         //查询是否包含community模块，如果存在则加载

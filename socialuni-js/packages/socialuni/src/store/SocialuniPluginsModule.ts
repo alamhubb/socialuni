@@ -30,6 +30,7 @@ class SocialuniPluginsModule {
 
 
     addPlugin(...socialuniPlugins: SocialuniPlugin[]) {
+        console.log('tianjiachajian')
         this.socialuniPlugins.push(...socialuniPlugins)
     }
 
