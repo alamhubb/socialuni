@@ -7,6 +7,7 @@ import {socialuniChatModule} from "./store/SocialuniChatModule";
 class SocialuniImPlugin implements SocialuniPlugin {
     onLaunch() {
         console.log('触发了Im')
+        socialuniChatModule.queryMineImUserInfo()
     }
 
     onMessage(notify: NotifyVO) {

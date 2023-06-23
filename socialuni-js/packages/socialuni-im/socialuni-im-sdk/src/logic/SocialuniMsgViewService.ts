@@ -88,6 +88,7 @@ export default class SocialuniMsgViewService extends SocialuniViewService {
         // if (params.nickname) {
         //   chat.nickname = params.nickname
         // }
+        console.log(params.chatId)
         socialuniChatModule.setChatIdAndQueryMsg(params.chatId)
 
         this.queryTime = new Date()

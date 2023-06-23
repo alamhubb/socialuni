@@ -129,7 +129,6 @@ import ImPageUtil from "socialuni-im-sdk/src/util/ImPageUtil";
 })
 export default class ChatView extends Vue {
     users: SocialUserContentRO[] = []
-    imMineUserInfo: SocialuniImMineUserDetailRO = null
 
     searchContent = null
 
@@ -173,7 +172,6 @@ export default class ChatView extends Vue {
         onShow(() => {
             // socialuniChatModule.computedChatsUnreadNumTotalAction()
         })
-        this.queryMineImUserInfo()
         /*setInterval(()=>{
           this.$forceUpdate()
           console.log(123)
@@ -185,10 +183,6 @@ export default class ChatView extends Vue {
         }*/
     }
 
-    async queryMineImUserInfo() {
-        const res = await SocialuniImUserAPI.getImMineUser()
-        this.imMineUserInfo = res.data
-    }
 
     onPullDownRefresh() {
         this.initQuery()
@@ -332,24 +326,24 @@ export default class ChatView extends Vue {
 
     openUserChatSetting() {
         let msg = []
-        if (this.imMineUserInfo.allowStrangerMsg) {
+        if (socialuniChatModule.imMineUserInfo.allowStrangerMsg) {
             msg = ['关闭陌生人免费消息']
         } else {
             msg = ['打开陌生人免费消息']
         }
         SocialuniAppUtil.UniUtil.actionSheet(msg).then(res => {
             if (res === 0) {
-                if (this.imMineUserInfo.allowStrangerMsg) {
-                    this.imMineUserInfo.allowStrangerMsg = false
+                if (socialuniChatModule.imMineUserInfo.allowStrangerMsg) {
+                    socialuniChatModule.imMineUserInfo.allowStrangerMsg = false
                     SocialuniAppUtil.ToastUtil.toast('关闭陌生人免费消息成功')
                     SocialuniImUserAPI.closeStrangerMsg().then(res => {
-                        this.imMineUserInfo = res.data
+                        socialuniChatModule.imMineUserInfo = res.data
                     })
                 } else {
-                    this.imMineUserInfo.allowStrangerMsg = true
+                    socialuniChatModule.imMineUserInfo.allowStrangerMsg = true
                     SocialuniAppUtil.ToastUtil.toast('打开陌生人免费消息成功')
                     SocialuniImUserAPI.openStrangerMsg().then(res => {
-                        this.imMineUserInfo = res.data
+                        socialuniChatModule.imMineUserInfo = res.data
                     })
                 }
             }

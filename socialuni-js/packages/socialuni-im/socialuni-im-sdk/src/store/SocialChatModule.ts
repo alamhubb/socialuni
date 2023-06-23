@@ -140,20 +140,6 @@ class SocialChatModule {
     }
 
 
-    //来消息后，替换已有chat
-    pushMsgReplaceChat(chatIndex, chat: SocialuniChatRO) {
-        const oldChat = this.chats[chatIndex]
-        let messages: MessageVO[] = oldChat.messages
-        //将新消息放到当前msg中
-        messages.push(...chat.messages)
-
-        messages = Arrays.unique(messages, 'id')
-
-        chat.messages = messages
-        chat.loadMore = oldChat.loadMore
-        //不需要替换，修改了
-        this.replaceChat(chatIndex, chat)
-    }
 
 
     replaceChat(chatIndex, chat: SocialuniChatRO) {
