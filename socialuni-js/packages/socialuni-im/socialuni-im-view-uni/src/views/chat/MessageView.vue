@@ -356,6 +356,7 @@ export default class MessageView extends Vue {
         // if (params.nickname) {
         //   chat.nickname = params.nickname
         // }
+        console.log('chufale 初始')
         socialuniChatModule.setChatId(params.chatId)
 
         this.queryTime = new Date()

@@ -82,6 +82,7 @@ async function installSocialuniPluginIns() {
 
 const Socialuni = {
     async install(app: App, socialuniOption: SocialuniOption) {
+        console.log('触发了安装插件')
         const shareComponent = defineComponent({
             onShareAppMessage() {
                 const title = '年轻人生活分享社区'
