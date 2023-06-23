@@ -64,13 +64,16 @@ public class WebsocketServer extends TextWebSocketHandler {
     public static void sendMessageToAllUsers(NotifyVO notify) {
         String userIdStr = notify.getUser().getId().toString();
         if (notify.getType().equals(NotifyType.message)) {
+            //发送给所有在线的群组里面的用户
             for (WebSocketSession userSession : onlineUsersSessionMap.values()) {
                 if (userSession != null && userSession.isOpen()) {
                     String sessionUserId = Objects.requireNonNull(userSession.getPrincipal()).getName();
-                    if (!userIdStr.equals(sessionUserId)) {
+                    //如果发送人是自己则不发送
+                    if (userIdStr.equals(sessionUserId)) {
                         continue;
                     }
                     Integer userId = SocialuniUnionIdFacede.getUnionIdByUuidAllowNull(sessionUserId);
+                    //如果不为空，并且用户不在群组中，则不推送
                     if (userId != null) {
                         String chatIdStr = notify.getChat().getId();
                         Integer chatId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(chatIdStr);
@@ -80,8 +83,7 @@ public class WebsocketServer extends TextWebSocketHandler {
                         }
                     }
                     //发给不是自己的
-                    System.out.println(userIdStr);
-                    System.out.println(sessionUserId);
+                    log.info("消息发送用户id:{},sessionId:{}", userIdStr, sessionUserId);
                     //如果用户在线才发送
                     //有不为数字的代表是没登陆的用户才发送
                     try {
