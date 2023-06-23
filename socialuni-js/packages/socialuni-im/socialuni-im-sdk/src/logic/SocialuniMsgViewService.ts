@@ -266,7 +266,7 @@ export default class SocialuniMsgViewService extends SocialuniViewService {
             const resMessages: MessageVO[] = res.data
             //获取拼接消息之前，顶部消息的位置
             // const nodeBox: NodesRef = query.select('.scrollView')
-            const query: SelectorQuery = uni.createSelectorQuery().in(this)
+            const query: SelectorQuery = uni.createSelectorQuery().in(this.thisInstance)
             //保持当前位置使用
             let preFirstMsgId: string = null
             if (this.messages.length) {
