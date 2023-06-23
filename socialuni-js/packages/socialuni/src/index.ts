@@ -17,26 +17,6 @@ try {
     console.log(e)
 }
 
-let socialuniAppPlugin: ImportModule<SocialuniPlugin> = null
-try {
-    //查询是否包含community模块，如果存在则加载
-    socialuniAppPlugin = await import('socialuni-app-sdk/src/index')
-} catch (e) {
-    console.error(e)
-    // 如果导入失败，则不触发任何操作
-}
-
-let socialuniUserPlugin: ImportModule<SocialuniPlugin> = null
-try {
-    //查询是否包含community模块，如果存在则加载
-    socialuniUserPlugin = await import('socialuni-user-sdk/src/index')
-} catch (e) {
-    console.error(e)
-    // 如果导入失败，则不触发任何操作
-}
-
-let userModule = null
-
 const socialuniInitPlugin: SocialuniPlugin = {
     async onLaunch() {
         /*socialuniUserModule.initSocialuniUserModule()
@@ -53,12 +33,21 @@ const socialuniInitPlugin: SocialuniPlugin = {
 async function installSocialuniPluginIns() {
 
     socialuniPluginsModule.addPlugin(socialuniInitPlugin)
-
-    if (socialuniAppPlugin) {
-        socialuniPluginsModule.addPlugin(socialuniUserPlugin.default)
+    try {
+        //查询是否包含community模块，如果存在则加载
+        const socialuniPlugin: ImportModule<SocialuniPlugin> = await import('socialuni-app-sdk/src/index')
+        socialuniPluginsModule.addPlugin(socialuniPlugin.default)
+    } catch (e) {
+        console.error(e)
+        // 如果导入失败，则不触发任何操作
     }
-    if (socialuniUserPlugin) {
-        socialuniPluginsModule.addPlugin(socialuniUserPlugin.default)
+    try {
+        //查询是否包含community模块，如果存在则加载
+        const socialuniPlugin: ImportModule<SocialuniPlugin> = await import('socialuni-user-sdk/src/index')
+        socialuniPluginsModule.addPlugin(socialuniPlugin.default)
+    } catch (e) {
+        console.error(e)
+        // 如果导入失败，则不触发任何操作
     }
     try {
         //查询是否包含community模块，如果存在则加载
@@ -82,7 +71,6 @@ async function installSocialuniPluginIns() {
 
 const Socialuni = {
     async install(app: App, socialuniOption: SocialuniOption) {
-        console.log('触发了安装插件')
         const shareComponent = defineComponent({
             onShareAppMessage() {
                 const title = '年轻人生活分享社区'
