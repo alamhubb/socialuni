@@ -5,9 +5,62 @@ import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserMod
 import MessageAPI from "socialuni-im-api/src/api/MessageAPI";
 import {MessageStatus} from "socialuni-constant/constant/openIm/OpenImMessageType";
 import {socialuniChatModule} from "../store/SocialuniChatModule";
+import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
+import ChatType from "socialuni-constant/constant/ChatType";
+import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
+import DateUtil from "socialuni-util/src/util/DateUtil";
+import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil";
 
 export default class SocialuniMsgViewService {
+    public $refs!: {
+        // reportDialog: SocialuniReportDialog;
+        messageMoreHandleDialog: any;
+        deleteReasonDialog: any;
+    }
+    inputFocus = false
+    upperThreshold = 300
     msgContent = ''
+    message: MessageVO = null
+
+    get chatId() {
+        return socialuniChatModule.chatId
+    }
+
+    get chat() {
+        return socialuniChatModule.chat
+    }
+
+    get pageTitle() {
+        return this.chat.nickname
+    }
+
+
+    get scrollTop() {
+        return socialuniChatModule.scrollTop
+    }
+
+    get messages() {
+        return socialuniChatModule.messages
+    }
+
+    openMoreMenu() {
+        if (this.chat.type === ChatType.single) {
+            UserPageUtil.toUserDetail(this.chat.id);
+        } else {
+            UserPageUtil.toIMGroupMember(this.groupId); // 权限问题，内容有问题。
+        }
+    }
+
+    upper() {
+        //只有为more才允许加载
+        if (this.chat.loadMore === LoadMoreType.more) {
+            // 执行正在加载动画
+            this.chat.loadMore = LoadMoreType.loading
+            this.queryMessages()
+        }
+    }
+
+
 
     async sendMsgClick() {
         console.log(123456)
@@ -50,4 +103,32 @@ export default class SocialuniMsgViewService {
 
         // PlatformUtils.requestSubscribeChat()
     }
+
+    formatTime(time) {
+        return DateUtil.formatTime(time)
+    }
+
+    toUserDetailVue(userId: string) {
+        UserPageUtil.toUserDetail(userId)
+    }
+
+    openMessageMoreHandleDialog(message: MessageVO) {
+        this.message = message
+        this.$refs.messageMoreHandleDialog.open()
+    }
+
+    inputBlur() {
+        if (this.inputFocus) {
+            this.inputFocus = false
+        }
+        // #ifndef MP-WEIXIN
+        // #endif
+        /*
+        this.showEmoji = false */
+    }
+
+    inputFocusEvent() {
+        MsgUtil.cantPopupPromptToast()
+    }
+
 }

@@ -1,8 +1,8 @@
 <template>
     <div class="pb-50 h100p">
-        <q-navbar class="bb" show-back :title="viewLogic.pageTitle">
+        <q-navbar class="bb" show-back :title="viewService.pageTitle">
             <div class="row-end-center flex-1">
-                <q-icon icon="list-dot" size="20" @click="openMoreMenu"></q-icon>
+                <q-icon icon="list-dot" size="20" @click="viewService.openMoreMenu"></q-icon>
             </div>
         </q-navbar>
         <!--    <view v-if="showMsgHint" class="fixed-105 row-col-center bg-orange">
@@ -16,18 +16,16 @@
             </view>-->
 
         <scroll-view scroll-y="true" class="flex-col h100p pb-60"
-                     @scrolltoupper="upper"
-                     :upper-threshold="upperThreshold"
+                     @scrolltoupper="viewService.upper"
+                     :upper-threshold="viewService.upperThreshold"
                      :show-scrollbar="true"
-                     :scroll-top="scrollTop"
+                     :scroll-top="viewService.scrollTop"
         >
             <!--    <view class="cu-chat">-->
             <view class="w100p h100p">
                 <!--      <view v-if="chat.status === waitOpenStatus||chat.status === closeStatus" class="w100p h100p col-row-center">-->
                 <view class="mt-80px">
-                    <div v-for="msg in messages" :id="'m'+msg.id" :key="msg.id">
-
-
+                    <div v-for="msg in viewService.messages" :id="'m'+msg.id" :key="msg.id">
                         <div v-if="msg.user.isMine" class="flex-row pd-sm">
                             <div class="flex-1 flex-col mr overflow-hidden">
                                 <div class="h44px row-end-center mb-xs">
@@ -50,19 +48,19 @@
 
                                 <div class="col-all-center mt-xs">
                                     <div class="date">
-                                        {{ formatTime(msg.createTime) }}
+                                        {{ viewService.formatTime(msg.createTime) }}
                                     </div>
                                 </div>
                             </div>
                             <img class="size50 bd-radius flex-none"
                                  :src="msg.user.avatar"
-                                 @click="toUserDetailVue(msg.user.id)"
+                                 @click="viewService.toUserDetailVue(msg.user.id)"
                             />
                         </div>
                         <div v-else class="flex-row pd-sm">
                             <image class="size50 bd-radius flex-none"
                                    :src="msg.user.avatar"
-                                   @click="toUserDetailVue(msg.user.id)"
+                                   @click="viewService.toUserDetailVue(msg.user.id)"
                             />
                             <div class="flex-1 flex-col mr overflow-hidden">
                                 <div class="h44px row-col-center mb-xs">
@@ -82,7 +80,7 @@
                                 </div>
                                 <div class="col-all-center mt-xs">
                                     <div class="date">
-                                        {{ formatTime(msg.createTime) }}
+                                        {{ viewService.formatTime(msg.createTime) }}
                                     </div>
                                 </div>
                             </div>
@@ -106,7 +104,7 @@
                        :focus="inputFocus"
                        @blur="inputBlur"
                        @focus="inputFocusEvent"
-                       @confirm="viewService.sendMsgClick"
+                       @confirm="viewService.sendMsgCl ick"
                        :hold-keyboard="true"
                        :confirm-hold="true"
                        confirm-type="send"
@@ -214,20 +212,14 @@ export default class MessageView extends Vue {
         deleteReasonDialog: any;
     }
 
-    viewLogic = new SocialuniMsgViewLogic()
-
 
     viewService = new SocialuniMsgViewService()
-
-    sendclick() {
-        this.viewService.sendMsgClick()
-    }
 
 
     screenHeight: number = socialuniSystemModule.screenHeight
     windowHeight: number = socialuniSystemModule.windowHeight
     msgContent = ''
-    inputFocus = false
+
     noMore: string = LoadMoreType.noMore
     lazyLoadNum = 30
     topId = ''
@@ -238,13 +230,13 @@ export default class MessageView extends Vue {
     showEmoji = false
     keyboardHeight = 200
     emojiModelHeight = 300
-    message: MessageVO = null
+
     reportContentType: string = ReportContentType.message
     systemMsgType: string = SocialuniMessageType.system
     showMsgHint: boolean = uni.getStorageSync(Constants.showMsgHintKey) !== 'false'
     readonly waitOpenStatus: string = SocialuniCommonStatus.waitOpen
     readonly closeStatus: string = SocialuniCommonStatus.close
-    upperThreshold = 300
+
     userId: string = null
     groupId: string = null
     title: string = '聊天'
@@ -261,26 +253,14 @@ export default class MessageView extends Vue {
         })
     }
 
-    get chatId() {
-        return socialuniChatModule.chatId
-    }
-
     get chatIndex() {
         return socialuniChatModule.chatIndex
     }
 
-    get chat() {
-        return socialuniChatModule.chat
-    }
 
 
-    get messages() {
-        return socialuniChatModule.messages
-    }
 
-    get scrollTop() {
-        return socialuniChatModule.scrollTop
-    }
+
 
     get mineUser() {
         return socialuniUserModule.mineUser
@@ -328,14 +308,7 @@ export default class MessageView extends Vue {
         this.$refs.messageMoreHandleDialog.open()
     }
 
-    upper() {
-        //只有为more才允许加载
-        if (this.chat.loadMore === LoadMoreType.more) {
-            // 执行正在加载动画
-            this.chat.loadMore = LoadMoreType.loading
-            this.queryMessages()
-        }
-    }
+
 
     consoleMessage() {
         console.log(this.chat)
@@ -352,9 +325,7 @@ export default class MessageView extends Vue {
         this.violation = detail.value
     }
 
-    formatTime(time) {
-        return DateUtil.formatTime(time)
-    }
+
 
     /* showEmojiClick () {
       SocialuniAppUtil.UniUtil.s.delayTime(100).then(() => {
@@ -378,19 +349,8 @@ export default class MessageView extends Vue {
       this.inputFocus = true
     } */
 
-    inputFocusEvent() {
-        MsgUtil.cantPopupPromptToast()
-    }
 
-    inputBlur() {
-        if (this.inputFocus) {
-            this.inputFocus = false
-        }
-        // #ifndef MP-WEIXIN
-        // #endif
-        /*
-        this.showEmoji = false */
-    }
+
 
     test111() {
         console.log(123)
@@ -509,18 +469,7 @@ export default class MessageView extends Vue {
         this.deleteReason = ''
     }
 
-    toUserDetailVue(userId: string) {
-        UserPageUtil.toUserDetail(userId)
-    }
 
-    openMoreMenu() {
-        if (this.groupId) {
-            UserPageUtil.toIMGroupMember(this.groupId); // 权限问题，内容有问题。
-        } else {
-            UserPageUtil.toUserDetail(this.userId);
-        }
-
-    }
 
     toVipVue() {
         UserPageUtil.toVipPage()
@@ -719,13 +668,5 @@ export default class MessageView extends Vue {
         })
     }
 
-    //开启聊天支付
-    shellPayForUserContact() {
-
-    }
-
-    goBack() {
-        SocialuniAppUtil.RouterUtil.goBack()
-    }
 }
 </script>
