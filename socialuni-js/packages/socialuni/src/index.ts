@@ -82,16 +82,14 @@ const Socialuni = {
                     imageUrl: imageUrl
                 }
             },
-            created() {
+            mounted() {
                 socialuniPluginsModule.setRouter(this.$router)
                 socialuniPluginsModule.setRoute(this.$route)
-            },
-            mounted() {
                 const data = this
                 for (const key in data) {
                     const socialuniViewServiceObj: SocialuniViewService = data[key]
                     if (socialuniViewServiceObj instanceof SocialuniViewService) {
-                        socialuniViewServiceObj.init(this.$refs)
+                        socialuniViewServiceObj.initService(this.$refs)
                     }
                 }
             }

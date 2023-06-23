@@ -17,7 +17,7 @@ export interface SocialuniChatViewServiceRefs {
 export default class SocialuniChatViewService extends SocialuniViewService{
     private $refs: SocialuniChatViewServiceRefs = null
 
-    init(value: SocialuniChatViewServiceRefs) {
+    initService(value: SocialuniChatViewServiceRefs) {
         this.$refs = value;
         watch(() => socialuniChatModule.scrollTop, () => {
             console.log('触发了滚动')
@@ -50,6 +50,6 @@ export default class SocialuniChatViewService extends SocialuniViewService{
 
 
     setChatId(chat: SocialuniChatRO) {
-        socialuniChatModule.setChatId(chat.id)
+        socialuniChatModule.setChatIdAndQueryMsg(chat.id)
     }
 }

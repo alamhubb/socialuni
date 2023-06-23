@@ -7,13 +7,13 @@
   },
   "pages": [
     {
-      "path": "pages/dating/dating",
+      "path": "pages/home/home",
       "style": {
         "navigationStyle": "custom"
       }
     },
     {
-      "path": "pages/home/home",
+      "path": "pages/dating/dating",
       "style": {
         "navigationStyle": "custom"
       }

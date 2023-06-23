@@ -424,7 +424,7 @@ export default class MessageView extends Vue {
         // if (params.nickname) {
         //   chat.nickname = params.nickname
         // }
-        socialuniChatModule.setChatId(params.chatId)
+        socialuniChatModule.setChatIdAndQueryMsg(params.chatId)
 
         this.queryTime = new Date()
         await this.queryMessages(true)

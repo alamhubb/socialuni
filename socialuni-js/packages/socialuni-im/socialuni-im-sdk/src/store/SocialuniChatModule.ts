@@ -53,12 +53,9 @@ class SocialuniChatModule {
     async getChatsAction() {
         const res = await ChatAPI.queryChatListAPI()
         this.setChats(res.data)
-        if (this.chats.length) {
-            this.setChatId(this.chats[0].id)
-        }
     }
 
-    setChatId(chatId: string) {
+    setChatIdAndQueryMsg(chatId: string) {
         let chat = socialuniChatModule.chats.find(item => item.id === chatId)
         if (!chat) {
             chat = new SocialuniChatRO()
@@ -72,9 +69,15 @@ class SocialuniChatModule {
                 this.pushMsgReplaceChatByChat(res.data)
             })
         }
-        this.chatId = chatId
+        this.setChatId(chatId)
         socialuniChatModule.scrollToMessagePageBottom()
     }
+
+
+    setChatId(chatId: string){
+        this.chatId = chatId
+    }
+
 
     readChatAction(messagesROs: MessageVO[]) {
         //目前不根据点击时间更新，只根据消息时间更新
