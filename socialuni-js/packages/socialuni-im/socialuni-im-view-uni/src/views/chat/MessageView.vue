@@ -88,46 +88,11 @@
                                 </template>
                               </view>-->
                     <div v-for="msg in messages" :id="'m'+msg.id" :key="msg.id">
-                        <div v-if="msg.type === systemMsgType">
-                            <view class="cu-info round row-all-center">
-                                {{ formatTime(msg.createTime) }} , {{ msg.content }}
-                            </view>
 
-                        </div>
-                        <div v-else-if="msg.user.isMine" class="flex-row pd-sm">
+
+                        <div v-if="msg.user.isMine" class="flex-row pd-sm">
                             <div class="flex-1 flex-col mr overflow-hidden">
-                                <view class="h44px row-end-center mb-xs">
-                                    {{ mineUser.nickname }}
-                                    <!--              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
-                                                        @click="toUserDetailVue(msg.user.id)">
-                                                    {{ msg.user.nickname }}
-                                                  </text>
-                                                  <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
-                                                         src="/static/img/crown.png"
-                                                         @click="toVipVue"></image>-->
-                                </view>
-
-                                <view class="row-end-center" @longpress="openMessageMoreHandleDialog(msg)">
-                                    <q-icon v-if="msg.status === 3" icon="mdi-alert-circle" size="25" class="mb-nm"/>
-                                    <message-item-content :msg="msg"></message-item-content>
-                                </view>
-
-                                <div class="col-all-center mt-xs">
-                                    <view class="date">{{ formatTime(msg.createTime) }}</view>
-                                </div>
-                            </div>
-                            <image class="size50 bd-radius flex-none"
-                                   :src="mineUser.avatar"
-                                   @click="toUserDetailVue(msg.user.id)"
-                            />
-                        </div>
-                        <div v-else class="flex-row pd-sm">
-                            <image class="size50 bd-radius flex-none"
-                                   :src="msg.user.avatar"
-                                   @click="toUserDetailVue(msg.user.id)"
-                            />
-                            <div class="flex-1 flex-col mr overflow-hidden">
-                                <view class="h44px row-col-center mb-xs">
+                                <div class="h44px row-end-center mb-xs">
                                     {{ msg.user.nickname }}
                                     <!--              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
                                                         @click="toUserDetailVue(msg.user.id)">
@@ -136,16 +101,113 @@
                                                   <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
                                                          src="/static/img/crown.png"
                                                          @click="toVipVue"></image>-->
-                                </view>
+                                </div>
 
-                                <view class="row-start" @longpress="openMessageMoreHandleDialog(msg)">
-                                    <message-item-content :msg="msg"></message-item-content>
-                                </view>
+                                <div class="row-end-center" @longpress="openMessageMoreHandleDialog(msg)">
+                                    <!--                                    <q-icon v-if="msg.status === 3" icon="mdi-alert-circle" size="25" class="mb-nm"/>-->
+                                    <!--                                <message-item-content :msg="msg"></message-item-content>-->
+
+                                    <div class="pd-xs bg-white bd-radius"> {{ msg.content }}</div>
+                                </div>
+
                                 <div class="col-all-center mt-xs">
-                                    <view class="date">{{ formatTime(msg.createTime) }}</view>
+                                    <div class="date">
+                                        {{ formatTime(msg.createTime) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <img class="size50 bd-radius flex-none"
+                                 :src="msg.user.avatar"
+                                 @click="toUserDetailVue(msg.user.id)"
+                            />
+                        </div>
+                        <div v-else class="flex-row pd-sm">
+                            <image class="size50 bd-radius flex-none"
+                                   :src="msg.user.avatar"
+                                   @click="toUserDetailVue(msg.user.id)"
+                            />
+                            <div class="flex-1 flex-col mr overflow-hidden">
+                                <div class="h44px row-col-center mb-xs">
+                                    {{ msg.user.nickname }}
+                                    <!--              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
+                                                        @click="toUserDetailVue(msg.user.id)">
+                                                    {{ msg.user.nickname }}
+                                                  </text>
+                                                  <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
+                                                         src="/static/img/crown.png"
+                                                         @click="toVipVue"></image>-->
+                                </div>
+
+                                <div class="row-start" @longpress="openMessageMoreHandleDialog(msg)">
+                                    <!--                                    <message-item-content :msg="msg"></message-item-content>-->
+                                    <div class="pd-xs bg-white bd-radius"> {{ msg.content }}</div>
+                                </div>
+                                <div class="col-all-center mt-xs">
+                                    <div class="date">
+                                        {{ formatTime(msg.createTime) }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
+                        <!--                        <div v-if="msg.type === systemMsgType">
+                                                    <view class="cu-info round row-all-center">
+                                                        {{ formatTime(msg.createTime) }} , {{ msg.content }}
+                                                    </view>
+
+                                                </div>
+                                                <div v-else-if="msg.user.isMine" class="flex-row pd-sm">
+                                                    <div class="flex-1 flex-col mr overflow-hidden">
+                                                        <view class="h44px row-end-center mb-xs">
+                                                            {{ mineUser.nickname }}
+                                                            &lt;!&ndash;              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
+                                                                                @click="toUserDetailVue(msg.user.id)">
+                                                                            {{ msg.user.nickname }}
+                                                                          </text>
+                                                                          <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
+                                                                                 src="/static/img/crown.png"
+                                                                                 @click="toVipVue"></image>&ndash;&gt;
+                                                        </view>
+
+                                                        <view class="row-end-center" @longpress="openMessageMoreHandleDialog(msg)">
+                                                            <q-icon v-if="msg.status === 3" icon="mdi-alert-circle" size="25" class="mb-nm"/>
+                                                            <message-item-content :msg="msg"></message-item-content>
+                                                        </view>
+
+                                                        <div class="col-all-center mt-xs">
+                                                            <view class="date">{{ formatTime(msg.createTime) }}</view>
+                                                        </div>
+                                                    </div>
+                                                    <image class="size50 bd-radius flex-none"
+                                                           :src="mineUser.avatar"
+                                                           @click="toUserDetailVue(msg.user.id)"
+                                                    />
+                                                </div>
+                                                <div v-else class="flex-row pd-sm">
+                                                    <image class="size50 bd-radius flex-none"
+                                                           :src="msg.user.avatar"
+                                                           @click="toUserDetailVue(msg.user.id)"
+                                                    />
+                                                    <div class="flex-1 flex-col mr overflow-hidden">
+                                                        <view class="h44px row-col-center mb-xs">
+                                                            {{ msg.user.nickname }}
+                                                            &lt;!&ndash;              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
+                                                                                @click="toUserDetailVue(msg.user.id)">
+                                                                            {{ msg.user.nickname }}
+                                                                          </text>
+                                                                          <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
+                                                                                 src="/static/img/crown.png"
+                                                                                 @click="toVipVue"></image>&ndash;&gt;
+                                                        </view>
+
+                                                        <view class="row-start" @longpress="openMessageMoreHandleDialog(msg)">
+                                                            <message-item-content :msg="msg"></message-item-content>
+                                                        </view>
+                                                        <div class="col-all-center mt-xs">
+                                                            <view class="date">{{ formatTime(msg.createTime) }}</view>
+                                                        </div>
+                                                    </div>
+                                                </div>-->
                     </div>
                 </view>
             </view>
