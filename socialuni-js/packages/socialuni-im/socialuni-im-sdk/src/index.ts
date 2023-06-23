@@ -19,7 +19,7 @@ class SocialuniImPlugin implements SocialuniPlugin {
         }
     }
 
-    onWebsocketConnect(reload: boolean) {
+    onWebsocketConnected(reload: boolean) {
         socialuniChatModule.getChatsAction()
     }
 }

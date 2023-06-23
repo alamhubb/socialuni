@@ -11,7 +11,7 @@ const socialuniUserPlugin: SocialuniPlugin = {
     onMessage(notify: NotifyVO) {
         console.log('接受了消息')
     },
-    onWebsocketConnect(reload: boolean) {
+    onWebsocketConnected(reload: boolean) {
     },
     onRequestInterceptors(config: InternalAxiosRequestConfig) {
         const token = SocialuniTokenUtil.get()

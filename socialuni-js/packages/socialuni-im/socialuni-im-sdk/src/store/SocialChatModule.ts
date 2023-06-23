@@ -732,10 +732,6 @@ class SocialChatModule {
 
     //获取chats
 
-    async getChatsAction() {
-        const res = await ChatAPI.queryChatListAPI()
-        this.setChats(res.data)
-    }
 
     setChats(chats: SocialuniChatRO[]) {
         /*console.log(3333)

@@ -33,9 +33,7 @@ export default class WebsocketUtil {
 
         console.log('websocket连接')
 
-        for (const plugin of socialuniPluginsModule.plugins) {
-            plugin.onWebsocketConnect?.(reload)
-        }
+
         const config = {} as any
 
         let token: string
@@ -71,6 +69,9 @@ export default class WebsocketUtil {
             }
             if (reload) {
                 console.log('重新加载')
+            }
+            for (const plugin of socialuniPluginsModule.plugins) {
+                plugin.onWebsocketConnected?.(reload)
             }
             //心跳保活
             WebsocketUtil.timer = setInterval(() => {

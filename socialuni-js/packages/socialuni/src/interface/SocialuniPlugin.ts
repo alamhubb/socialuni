@@ -11,7 +11,7 @@ export interface SocialuniPlugin {
     //收到websocket消息
     onMessage?(notify: NotifyVO)
 
-    onWebsocketConnect?(reload: boolean)
+    onWebsocketConnected?(reload: boolean)
 
     onRequestInterceptors?(config: InternalAxiosRequestConfig)
 
