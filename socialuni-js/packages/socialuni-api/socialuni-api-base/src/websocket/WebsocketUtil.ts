@@ -8,23 +8,25 @@ import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
 
 export default class WebsocketUtil {
     //失败重连时间
-    static failedReconnectTime = 2000
+    static failedReconnectTime = 3000
+    static pingTime = 10000
     static timer: number = null
     static locking: boolean = false
     static ws: WebSocket = null
 
     static reConnect() {
-        console.log('触发了重连')
+        console.log('触发了重连未执行')
         if (this.locking) return;
         this.locking = true;
-        console.log('触发了重连未执行')
+        console.log('触发了重连')
         CommonUtil.delayTime(WebsocketUtil.failedReconnectTime).then(() => {
+            console.log('触发了延时开启')
             WebsocketUtil.websocketConnect(true)
         })
     }
 
     static websocketConnect(reload: boolean) {
-        this.locking = true;
+        this.locking = false;
         //上锁，防止无限重连，因为会触发close会触发重连
         this.websocketClose()
         this.ws = undefined;
@@ -61,6 +63,8 @@ export default class WebsocketUtil {
 
         this.ws.onopen = (() => {
             this.locking = false
+            console.log(this.ws.readyState)
+            console.log(444444)
             console.log('打开')
             if (reload || WebsocketUtil.timer) {
                 clearInterval(WebsocketUtil.timer)
@@ -70,10 +74,10 @@ export default class WebsocketUtil {
             }
             //心跳保活
             WebsocketUtil.timer = setInterval(() => {
-                if (this.ws.OPEN) {
+                if (this.ws.readyState === this.ws.OPEN) {
                     this.ws.send('ping')
                 }
-            }, 30000)
+            }, WebsocketUtil.pingTime)
         })
 
         this.ws.onerror = (() => {
@@ -96,6 +100,8 @@ export default class WebsocketUtil {
     }
 
     static websocketClose() {
-        this.ws?.close(null);
+        if (this.ws && this.ws.readyState === this.ws.OPEN) {
+            this.ws?.close(null);
+        }
     }
 }

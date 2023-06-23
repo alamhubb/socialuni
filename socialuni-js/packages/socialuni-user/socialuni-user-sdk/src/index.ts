@@ -38,7 +38,6 @@ class SocialuniUserPlugin implements SocialuniPlugin {
         }
     }
     onResponseErrorInterceptors(response: AxiosResponse) {
-        console.log(response)
         SocialuniAppUtil.UniUtil.hideLoading()
         //第一步，先判断 有没有error
         //判断data类型，如果没类型，直接走
