@@ -3,7 +3,7 @@
         <q-navbar class="flex-none" show-back :title="viewService.pageTitle">
             <div class="row-end-center flex-1">
 <!--                <button @click="viewService.scrollToMessagePageBottom">滚动到底部</button>-->
-                <q-icon icon="list-dot" size="20" @click="viewService.openMoreMenu"></q-icon>
+                <q-icon icon="list-dot" size="20" @click="viewService.openMoreMenu()"></q-icon>
             </div>
         </q-navbar>
         <!--    <view v-if="showMsgHint" class="fixed-105 row-col-center bg-orange">
@@ -18,7 +18,7 @@
 
         <div class="flex-1 overflow-hidden">
             <scroll-view scroll-y="true" class="h100p"
-                         @scrolltoupper="viewService.upper"
+                         @scrolltoupper="viewService.upper()"
                          :upper-threshold="viewService.upperThreshold"
                          :show-scrollbar="true"
                          :scroll-top="viewService.scrollTop"
@@ -27,8 +27,8 @@
                 <!--      <view v-if="chat.status === waitOpenStatus||chat.status === closeStatus" class="w100p h100p col-row-center">-->
                 <div class="pb-60">
                     <div v-for="msg in viewService.messages" :id="'m'+msg.id" :key="msg.id">
-                        <div v-if="msg.user.isMine" class="flex-row pd-sm">
-                            <div class="flex-1 flex-col mr overflow-hidden">
+                        <div v-if="msg.user.isMine" class="flex-row pr-sm pl-70">
+                            <div class="flex-1 flex-col mr-sm overflow-hidden">
                                 <div class="h44px row-end-center mb-xs">
                                     {{ msg.user.nickname }}
                                     <!--              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
@@ -58,12 +58,12 @@
                                  @click="viewService.toUserDetailVue(msg.user.id)"
                             />
                         </div>
-                        <div v-else class="flex-row pd-sm">
+                        <div v-else class="flex-row pl-sm pr-70">
                             <image class="size50 bd-radius flex-none"
                                    :src="msg.user.avatar"
                                    @click="viewService.toUserDetailVue(msg.user.id)"
                             />
-                            <div class="flex-1 flex-col mr overflow-hidden">
+                            <div class="flex-1 flex-col ml-sm overflow-hidden">
                                 <div class="h44px row-col-center mb-xs">
                                     {{ msg.user.nickname }}
                                     <!--              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
@@ -102,8 +102,8 @@
                        maxlength="300"
                        :cursor-spacing="8"
                        :focus="viewService.inputFocus"
-                       @blur="viewService.inputBlur"
-                       @focus="viewService.inputFocusEvent"
+                       @blur="viewService.inputBlur()"
+                       @focus="viewService.inputFocusEvent()"
                        @confirm="viewService.sendMsgClick()"
                        :hold-keyboard="true"
                        :confirm-hold="true"
@@ -116,7 +116,7 @@
                         @click.prevent="viewService.sendMsgClick()">发送
                 </button>
                 <view v-else class="ml-sm">
-                    <q-icon icon="plus-circle" size="28" @click="viewService.openPhoto"></q-icon>
+                    <q-icon icon="plus-circle" size="28" @click="viewService.openPhoto()"></q-icon>
                 </view>
             </view>
             <!--      <view v-show="showEmoji" class="w100vw bg-blue" :style="{height:keyboardHeight+'px'}"></view>-->
@@ -130,15 +130,15 @@
                         :show-confirm-bar="false"
               />
                 </view>
-                <view class="uni-common-mt">
+<!--                <view class="uni-common-mt">
                     是否封禁:
-                    <switch class="ml-5px" @change="viewService.banChange"/>
-                </view>
+                    <switch class="ml-5px" @change="viewService.banChange()"/>
+                </view>-->
                 <view class="uni-tip-group-button">
-                    <button class="uni-tip-button w40r" type="default" @click="viewService.closeDeleteDialog"
+                    <button class="uni-tip-button w40r" type="default" @click="viewService.closeDeleteDialog()"
                             :plain="true">取消
                     </button>
-                    <button class="uni-tip-button w40r" type="primary" @click="viewService.confirmDeleteTalk"
+                    <button class="uni-tip-button w40r" type="primary" @click="viewService.confirmDeleteTalk()"
                             :disabled="!viewService.deleteReason">确定
                     </button>
                 </view>
@@ -148,13 +148,13 @@
         <uni-popup ref="messageMoreHandleDialog" :custom="true" :mask-click="true">
             <view class="uni-tip w180px">
                 <uni-list class="w100px">
-                    <uni-list-item :show-arrow="true" title="复制" clickable @click="viewService.copyText"/>
+                    <uni-list-item :show-arrow="true" title="复制" clickable @click="viewService.copyText()"/>
                     <uni-list-item v-if="viewService.message&&viewService.message.isMine" :show-arrow="true"
                                    title="撤回消息"
-                                   clickable @click="viewService.revokeMessage"/>
+                                   clickable @click="viewService.revokeMessage()"/>
                     <uni-list-item v-if="viewService.message&&!viewService.message.isMine" :show-arrow="true"
                                    title="举报"
-                                   clickable @click="viewService.openReportDialog"/>
+                                   clickable @click="viewService.openReportDialog()"/>
                 </uni-list>
             </view>
         </uni-popup>

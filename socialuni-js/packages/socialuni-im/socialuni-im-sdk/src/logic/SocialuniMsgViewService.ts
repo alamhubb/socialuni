@@ -193,9 +193,12 @@ export default class SocialuniMsgViewService extends SocialuniViewService {
     }
 
     inputBlur() {
+        console.log('chufale shiqu jiaodian ')
+        console.log(this)
         if (this.inputFocus) {
             this.inputFocus = false
         }
+        console.log('chufale shiqu jiaodian ')
         // #ifndef MP-WEIXIN
         // #endif
         /*
@@ -203,7 +206,9 @@ export default class SocialuniMsgViewService extends SocialuniViewService {
     }
 
     inputFocusEvent() {
+        console.log('获取了焦点')
         MsgUtil.cantPopupPromptToast()
+        console.log('获取了焦点')
     }
 
 
