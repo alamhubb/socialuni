@@ -1,19 +1,27 @@
 import {ImportModule} from "socialuni/src/interface/ImportModule";
-import RouterUtil from "packages/socialuni-native/socialuni-native-uni/src/util/RouterUtil";
 
-let nativeUtil: RouterUtil
-try {
-    if (uni) {
-        const res: ImportModule<RouterUtil> = await import('socialuni-native-uni/src/util/RouterUtil')
+let nativeUtil: any
+
+async function importPackage() {
+    try {
+        if (uni) {
+            const modulePath = 'socialuni-native-uni/src/util/RouterUtil';
+            const res: ImportModule<any> = await import(modulePath)
+            nativeUtil = res.default
+        }
+    } catch (e) {
+        const modulePath = 'socialuni-native-h5/src/util/RouterUtil';
+        const res: ImportModule<any> = await import(modulePath)
         nativeUtil = res.default
     }
-} catch (e) {
-
 }
+
+importPackage()
+
 
 
 export default class SocialuniRouterUtil {
-    static get nativeUtil(): RouterUtil {
+    static get nativeUtil(): any {
         return nativeUtil
     }
 }

@@ -2,14 +2,23 @@ import {ImportModule} from "socialuni/src/interface/ImportModule";
 import NativeUtil from "socialuni-native-uni/src/util/NativeUtil";
 
 let nativeUtil: NativeUtil
-try {
-    if (uni) {
-        const res: ImportModule<NativeUtil> = await import('socialuni-native-uni/src/util/NativeUtil')
+
+async function importPackage() {
+    try {
+        if (uni) {
+            const modulePath = 'socialuni-native-uni/src/util/NativeUtil';
+            const res: ImportModule<any> = await import(modulePath)
+            nativeUtil = res.default
+        }
+    } catch (e) {
+        const modulePath = 'socialuni-native-h5/src/util/NativeUtil';
+        const res: ImportModule<any> = await import(modulePath)
         nativeUtil = res.default
     }
-} catch (e) {
-
 }
+
+importPackage()
+
 
 export default class SocialuniAppNativeUtil {
     static get nativeUtil(): NativeUtil {

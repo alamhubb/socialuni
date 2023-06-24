@@ -11,7 +11,6 @@ import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import DateUtil from "socialuni-util/src/util/DateUtil";
 import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil";
 import UserType from "socialuni-constant/constant/UserType";
-import {onLoad, onUnload} from "@dcloudio/uni-app";
 import MessageViewParams from "socialuni-im-view-uni/src/views/chat/MessageViewParams";
 import {nextTick, onBeforeMount, onMounted, onUnmounted} from "vue";
 import SocialuniViewService from "socialuni/src/interface/SocialuniViewService";

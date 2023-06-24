@@ -6,6 +6,7 @@ import SocialuniSystemType from "socialuni-constant/constant/SocialuniSystemType
 import {reactive} from "vue";
 
 class SocialuniSystemModule {
+    isUniApp = false
     //设备，pc，手机，ipad
     //@ts-ignore
     NODE_ENV = process.env.NODE_ENV
@@ -59,6 +60,7 @@ class SocialuniSystemModule {
     constructor() {
         try {
             if (uni) {
+                this.isUniApp = true
                 //设置平台
                 // #ifdef APP-PLUS
                 this.isApp = true
