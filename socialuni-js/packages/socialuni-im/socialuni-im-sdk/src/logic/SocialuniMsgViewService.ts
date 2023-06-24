@@ -11,9 +11,9 @@ import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import DateUtil from "socialuni-util/src/util/DateUtil";
 import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil";
 import UserType from "socialuni-constant/constant/UserType";
-import {onLoad} from "@dcloudio/uni-app";
+import {onLoad, onUnload} from "@dcloudio/uni-app";
 import MessageViewParams from "socialuni-im-view-uni/src/views/chat/MessageViewParams";
-import {nextTick, onMounted} from "vue";
+import {nextTick, onBeforeMount, onMounted, onUnmounted} from "vue";
 import SocialuniViewService from "socialuni/src/interface/SocialuniViewService";
 import Constants from "socialuni-constant/constant/Constant";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
@@ -53,6 +53,12 @@ export default class SocialuniMsgViewService extends SocialuniViewService {
         return socialuniChatModule.scrollTop
     }
 
+    scrollToMessagePageBottom() {
+        socialuniChatModule.scrollTop = 0
+        socialuniChatModule.scrollToMessagePageBottom()
+    }
+
+
     get messages() {
         return socialuniChatModule.messages
     }
@@ -66,6 +72,12 @@ export default class SocialuniMsgViewService extends SocialuniViewService {
         console.log(this.thisInstance)
         console.log(this.thisInstance.$refs)
         console.log('chufale initService')
+        onMounted(()=>{
+            socialuniChatModule.scrollTop = 0
+        })
+        onUnmounted(()=>{
+            socialuniChatModule.scrollTop = 0
+        })
         //TODO 同一会话时，这里要改成onRead，不然需要刷新页面才会触发已读的标志。
         onLoad((params: MessageViewParams) => {
             console.log('chufale onLoad')
@@ -78,25 +90,25 @@ export default class SocialuniMsgViewService extends SocialuniViewService {
     }
 
     async init(params: MessageViewParams) {
-        console.log('执行了')
-        //  不存在前台缓存的问题,防止页面数据没有被及时刷新。 缓存之前页面的数据。
-        //  issue: I6EZ82
-        //
-        if (!params.chatId) {
-            SocialuniAppUtil.AlertUtil.error('缺少会话信息')
+        if (params) {
+            console.log('执行了')
+            //  不存在前台缓存的问题,防止页面数据没有被及时刷新。 缓存之前页面的数据。
+            //  issue: I6EZ82
+            //
+            if (!params.chatId) {
+                SocialuniAppUtil.AlertUtil.error('缺少会话信息')
+            }
+            // if (params.nickname) {
+            //   chat.nickname = params.nickname
+            // }
+            console.log(params.chatId)
+            socialuniChatModule.setChatIdAndQueryMsg(params.chatId)
+
+            this.queryTime = new Date()
+            await this.queryMessages(true)
+
+            socialuniChatModule.scrollToMessagePageBottom()
         }
-        // if (params.nickname) {
-        //   chat.nickname = params.nickname
-        // }
-        console.log(params.chatId)
-        socialuniChatModule.setChatIdAndQueryMsg(params.chatId)
-
-        this.queryTime = new Date()
-        await this.queryMessages(true)
-
-        socialuniChatModule.scrollToMessagePageBottom()
-
-
         // socialuniChatModule.chatId = params.receiveId
         // socialuniChatModule.setCurChatByUserId(params.userId)
         // this.userId = params.userId;

@@ -1,4 +1,4 @@
-import {App, defineComponent} from "vue"
+import {App, defineComponent, onMounted} from "vue"
 import {socialuniPluginsModule} from "./store/SocialuniPluginsModule"
 import {SocialuniPlugin} from "./interface/SocialuniPlugin"
 import {ImportModule} from "./interface/ImportModule"
@@ -82,7 +82,7 @@ const Socialuni = {
                     imageUrl: imageUrl
                 }
             },
-            mounted() {
+            beforeMount() {
                 socialuniPluginsModule.setRouter(this.$router)
                 socialuniPluginsModule.setRoute(this.$route)
                 const data = this

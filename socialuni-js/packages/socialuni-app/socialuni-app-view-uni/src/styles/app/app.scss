@@ -4,6 +4,7 @@ html {
   color: #303133;
   font-size: 14px;
   line-height: 1.4;
+  box-sizing: border-box;
 }
 
 page {
@@ -36,6 +37,7 @@ body {
 #app {
   height: 100%;
   width: 100%;
+  overflow: hidden;
 }
 
 text {

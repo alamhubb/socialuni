@@ -442,9 +442,6 @@ export default class MessageView extends Vue {
     }
 
 
-    onUnload() {
-        socialuniChatModule.scrollTop = 0
-    }
 
     get pageTitle() {
         return this.chat.nickname

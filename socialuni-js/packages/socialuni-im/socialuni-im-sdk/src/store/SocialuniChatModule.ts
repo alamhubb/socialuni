@@ -1,4 +1,4 @@
-import {reactive} from "vue";
+import {nextTick, reactive} from "vue";
 import ChatAPI from "socialuni-im-api/src/api/ChatAPI";
 import SocialuniChatRO from "socialuni-api-base/src/model/SocialuniChatRO";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
@@ -16,6 +16,8 @@ import SocialuniImMineUserDetailRO from "socialuni-im-api/src/model/RO/Socialuni
 import SocialuniImUserAPI from "socialuni-im-api/src/api/SocialuniImUserAPI";
 import RouterUtil from "socialuni-native-h5/src/util/RouterUtil";
 import ImPagePath from "../constant/ImPagePath";
+import SelectorQuery = UniNamespace.SelectorQuery;
+import NodesRef = UniNamespace.NodesRef;
 
 class SocialuniChatModule {
     chatId = ''
@@ -145,7 +147,11 @@ class SocialuniChatModule {
 
     scrollToMessagePageBottom() {
         CommonUtil.delayTime(100).then(() => {
+            console.log('滚动到底部')
             this.scrollTop = this.messages.length * 500
+
+
+
             // this.scrollTop = -1000
         })
         // ScrollUtil.scrollTo(this.messages.length * 500)

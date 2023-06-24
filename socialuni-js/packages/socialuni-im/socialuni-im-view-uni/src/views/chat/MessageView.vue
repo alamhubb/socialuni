@@ -1,7 +1,8 @@
 <template>
-    <div class="pb-50 h100p">
-        <q-navbar class="bb" show-back :title="viewService.pageTitle">
+    <div class="h100p flex-col">
+        <q-navbar class="flex-none" show-back :title="viewService.pageTitle">
             <div class="row-end-center flex-1">
+                <button @click="viewService.scrollToMessagePageBottom">滚动到底部</button>
                 <q-icon icon="list-dot" size="20" @click="viewService.openMoreMenu"></q-icon>
             </div>
         </q-navbar>
@@ -15,16 +16,16 @@
               </view>
             </view>-->
 
-        <scroll-view scroll-y="true" class="flex-col h100p pb-60"
-                     @scrolltoupper="viewService.upper"
-                     :upper-threshold="viewService.upperThreshold"
-                     :show-scrollbar="true"
-                     :scroll-top="viewService.scrollTop"
-        >
-            <!--    <view class="cu-chat">-->
-            <view class="w100p h100p">
+        <div class="flex-1 overflow-hidden">
+            <scroll-view scroll-y="true" class="h100p"
+                         @scrolltoupper="viewService.upper"
+                         :upper-threshold="viewService.upperThreshold"
+                         :show-scrollbar="true"
+                         :scroll-top="viewService.scrollTop"
+            >
+                <!--    <view class="cu-chat">-->
                 <!--      <view v-if="chat.status === waitOpenStatus||chat.status === closeStatus" class="w100p h100p col-row-center">-->
-                <view class="mt-80px">
+                <div class="pb-60">
                     <div v-for="msg in viewService.messages" :id="'m'+msg.id" :key="msg.id">
                         <div v-if="msg.user.isMine" class="flex-row pd-sm">
                             <div class="flex-1 flex-col mr overflow-hidden">
@@ -86,10 +87,9 @@
                             </div>
                         </div>
                     </div>
-                </view>
-            </view>
-
-        </scroll-view>
+                </div>
+            </scroll-view>
+        </div>
 
         <view class="fixed-footer">
             <view class="cu-bar footer input">
@@ -135,7 +135,8 @@
                     <switch class="ml-5px" @change="viewService.banChange"/>
                 </view>
                 <view class="uni-tip-group-button">
-                    <button class="uni-tip-button w40r" type="default" @click="viewService.closeDeleteDialog" :plain="true">取消
+                    <button class="uni-tip-button w40r" type="default" @click="viewService.closeDeleteDialog"
+                            :plain="true">取消
                     </button>
                     <button class="uni-tip-button w40r" type="primary" @click="viewService.confirmDeleteTalk"
                             :disabled="!viewService.deleteReason">确定
@@ -148,9 +149,11 @@
             <view class="uni-tip w180px">
                 <uni-list class="w100px">
                     <uni-list-item :show-arrow="true" title="复制" clickable @click="viewService.copyText"/>
-                    <uni-list-item v-if="viewService.message&&viewService.message.isMine" :show-arrow="true" title="撤回消息"
+                    <uni-list-item v-if="viewService.message&&viewService.message.isMine" :show-arrow="true"
+                                   title="撤回消息"
                                    clickable @click="viewService.revokeMessage"/>
-                    <uni-list-item v-if="viewService.message&&!viewService.message.isMine" :show-arrow="true" title="举报"
+                    <uni-list-item v-if="viewService.message&&!viewService.message.isMine" :show-arrow="true"
+                                   title="举报"
                                    clickable @click="viewService.openReportDialog"/>
                 </uni-list>
             </view>
