@@ -2,7 +2,7 @@
     <div class="h100p flex-col">
         <q-navbar class="flex-none" show-back :title="viewService.pageTitle">
             <div class="row-end-center flex-1">
-                <button @click="viewService.scrollToMessagePageBottom">滚动到底部</button>
+<!--                <button @click="viewService.scrollToMessagePageBottom">滚动到底部</button>-->
                 <q-icon icon="list-dot" size="20" @click="viewService.openMoreMenu"></q-icon>
             </div>
         </q-navbar>
@@ -104,7 +104,7 @@
                        :focus="viewService.inputFocus"
                        @blur="viewService.inputBlur"
                        @focus="viewService.inputFocusEvent"
-                       @confirm="viewService.sendMsgClick"
+                       @confirm="viewService.sendMsgClick()"
                        :hold-keyboard="true"
                        :confirm-hold="true"
                        confirm-type="send"
