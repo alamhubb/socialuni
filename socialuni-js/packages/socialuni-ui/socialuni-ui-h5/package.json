@@ -1,20 +1,20 @@
 {
-  "name": "socialuni-app-sdk",
+  "name": "socialuni-ui-h5",
   "version": "0.1.2",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "socialuni-app-sdk": "^0.1.2",
     "socialuni-app-api": "^0.1.2",
     "socialuni-constant": "^0.1.2",
-    "socialuni-util": "^0.1.2",
     "socialuni-native-util": "^0.1.2",
-    "cos-js-sdk-v5": "^1.2.18",
-    "vue": "^3.3.2"
+    "socialuni-util": "^0.1.2",
+    "socialuni-scss": "^0.1.2",
+    "cos-js-sdk-v5": "^1.2.18"
   },
   "devDependencies": {
-    "@dcloudio/types": "^3.0.17",
     "typescript": "^4.7.4",
     "vue": "^3.2.41"
   },

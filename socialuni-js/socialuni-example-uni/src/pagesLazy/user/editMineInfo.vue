@@ -100,19 +100,11 @@
 
 <script lang="ts">
 import {Emit, Options, Vue, Watch} from 'vue-property-decorator'
-import JsonUtils from 'socialuni-sdk/src/utils/ObjectUtil'
-import AlertUtil from 'socialuni-sdk/src/utils/AlertUtil'
-import ToastUtil from 'socialuni-sdk/src/utils/ToastUtil'
 import EnumStrVO from 'socialuni-constant/constant/EnumStrVO'
 import GenderType from 'socialuni-constant/constant/GenderType'
-import UserEditVO from 'socialuni/src/model/user/UserEditVO'
-import BirthAgeUtil from 'socialuni-sdk/src/utils/BirthAgeUtil'
-import PageUtil from "socialuni-sdk/src/utils/PageUtil";
-import QButton from "socialuni-view/src/components/QButton/QButton.vue";
-import DateUtil from "socialuni-sdk/src/utils/DateUtil";
 import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
-import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
-import SocialuniAppUtil from "socialuni-app-sdk/src/util/UniUtil";
+import QButton from "socialuni-ui-uni/src/components/QButton/QButton.vue";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 
 @Options({
   components: {QButton}

@@ -42,22 +42,22 @@
 
 <script lang="ts">
 import {Emit, Options, Vue, Watch} from 'vue-property-decorator'
-import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
-import GenderType from "socialuni-constant/constant/GenderType";
-import type EnumStrVO from "socialuni-constant/constant/EnumStrVO";
-import DateUtil from "socialuni-util/src/util/DateUtil";
-import BirthAgeUtil from "socialuni-util/src/util/BirthAgeUtil";
-import ObjectUtil from "socialuni-util/src/util/ObjectUtil";
-import SocialuniMineUserAPI, {SocialuniGetRandomAvatarRO} from "socialuni-user-api/src/api/SocialuniMineUserAPI";
 import SButton from "@/components/socialuni/SButton.vue";
-import type SocialuniMineUserRO from "socialuni-api-base/src/model/user/SocialuniMineUserRO";
 import SDialog from "@/components/socialuni/SDialog.vue";
-import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
-import CosService from "socialuni-app-sdk/src/util/CosService";
-import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
-import UUIDUtil from "socialuni-app-sdk/src/util/UUIDUtil";
-import ImgUtil from "socialuni-app-sdk/src/util/ImgUtil";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+import type SocialuniMineUserRO from "socialuni-api-base/src/model/user/SocialuniMineUserRO";
+import type EnumStrVO from "socialuni-constant/constant/EnumStrVO";
+import GenderType from "socialuni-constant/constant/GenderType";
+import DateUtil from "socialuni-util/src/util/DateUtil";
+import ObjectUtil from "socialuni-util/src/util/ObjectUtil";
+import BirthAgeUtil from "socialuni-user-sdk/src/util/BirthAgeUtil";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
+import CosService from "socialuni-app-sdk/src/util/CosService";
+import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
+import ImgUtil from "socialuni-util/src/util/ImgUtil";
+import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
+import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
 import type DomFile from "socialuni-app-sdk/src/model/DomFile";
 
 @Options({

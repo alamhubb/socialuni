@@ -7,9 +7,6 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "@dcloudio/types": "^3.0.17",
-    "@dcloudio/uni-app": "3.0.0-alpha-3070620230227001",
-    "@dcloudio/uni-ui": "^1.4.23",
     "socialuni": "^0.1.2",
     "socialuni-native-util": "^0.1.2",
     "socialuni-im-api": "^0.1.2",

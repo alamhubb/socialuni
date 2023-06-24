@@ -60,22 +60,21 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
-import {ArrowDown, Tools} from "@element-plus/icons-vue";
-import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
 import SDialog from "@/components/socialuni/SDialog.vue";
 import LoginView from "@/components/view/loginView.vue";
-import SocialuniUserEventConst from "socialuni-user-sdk/src/constant/SocialuniUserEventConst";
-import SocialuniEventUtil from "socialuni/src/util/SocialuniEventUtil";
-import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
 import SocialuniUserEditDialog from "@/views/user/SocialuniUserEditDialog.vue";
-import CosService from "socialuni-app-sdk/src/util/CosService";
-import UUIDUtil from "socialuni-app-sdk/src/util/UUIDUtil";
-import ImgUtil from "socialuni-app-sdk/src/util/ImgUtil";
-import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
-import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
+import SocialuniEventUtil from "socialuni/src/util/SocialuniEventUtil";
+import SocialuniUserEventConst from "socialuni-user-sdk/src/constant/SocialuniUserEventConst";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import CosService from "socialuni-app-sdk/src/util/CosService";
 import type DomFile from "socialuni-app-sdk/src/model/DomFile";
+import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
+import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
+import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
+import ImgUtil from "socialuni-util/src/util/ImgUtil";
+import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
 
 @Options({
     components: {SocialuniUserEditDialog, Tools, LoginView, SDialog, ArrowDown}
