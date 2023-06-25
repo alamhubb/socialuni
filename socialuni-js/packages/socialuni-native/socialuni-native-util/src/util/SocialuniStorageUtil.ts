@@ -1,19 +1,11 @@
-import {ImportModule} from "socialuni/src/interface/ImportModule";
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+let nativeUtil
 
-let nativeUtil: any = {get(){return {}},getObj(){return {}}}
-/*
-let modulePath
+const modules = import.meta.globEager('../../../*/src/util/StorageUtil.ts')
 
-if (socialuniSystemModule.isUniApp) {
-    modulePath = '../../../socialuni-native-uni/src/util/StorageUtil.ts';
-} else {
-    modulePath = '../../../socialuni-native-h5/src/util/StorageUtil.ts';
+for (const path in modules) {
+    const module = modules[path]
+    nativeUtil = module.default
 }
-const res: ImportModule<any> = await import(/!* @vite-ignore *!/ modulePath)
-
-nativeUtil = res.default
-*/
 
 export default class SocialuniStorageUtil {
     static get nativeUtil(): any {
