@@ -22,3 +22,4 @@ app.mount('#app')
 
 
 
+console.log(123)

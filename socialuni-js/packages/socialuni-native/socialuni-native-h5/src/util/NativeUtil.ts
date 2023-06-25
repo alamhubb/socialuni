@@ -8,12 +8,10 @@ import GetProviderRes = UniApp.GetProviderRes;
 import LoginRes = UniApp.LoginRes;
 import GetUserInfoRes = UniApp.GetUserInfoRes;
 import GetImageInfoSuccessData = UniApp.GetImageInfoSuccessData;
-import ToastUtil from 'packages/socialuni-native/socialuni-native-uni/src/util/ToastUtil'
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import DomFile from "socialuni-app-sdk/src/model/DomFile";
 import AppMsg from "socialuni-constant/constant/AppMsg";
-import UniappH5 from "./UniappH5";
-import ImgUtil from "./ImgUtil";
-import UUIDUtil from "./UUIDUtil";
-import {UniInterface} from "socialuni-app-sdk/src/UniInterface";
 
 
 export default class NativeUtil {

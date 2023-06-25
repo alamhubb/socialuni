@@ -1,27 +1,21 @@
 import {ImportModule} from "socialuni/src/interface/ImportModule";
-import NativeUtil from "socialuni-native-uni/src/util/NativeUtil";
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 
-let nativeUtil: NativeUtil
+let nativeUtil: any
+let modulePath
 
-async function importPackage() {
-    try {
-        if (uni) {
-            const modulePath = 'socialuni-native-uni/src/util/NativeUtil';
-            const res: ImportModule<any> = await import(modulePath)
-            nativeUtil = res.default
-        }
-    } catch (e) {
-        const modulePath = 'socialuni-native-h5/src/util/NativeUtil';
-        const res: ImportModule<any> = await import(modulePath)
-        nativeUtil = res.default
-    }
+if (socialuniSystemModule.isUniApp) {
+    modulePath = '../../../socialuni-native-uni/src/util/NativeUtil.ts';
+} else {
+    modulePath = '../../../socialuni-native-h5/src/util/NativeUtil.ts';
 }
+const res: ImportModule<any> = await import(/* @vite-ignore */ modulePath)
 
-importPackage()
+nativeUtil = res.default
 
 
 export default class SocialuniAppNativeUtil {
-    static get nativeUtil(): NativeUtil {
+    static get nativeUtil(): any {
         return nativeUtil
     }
 }

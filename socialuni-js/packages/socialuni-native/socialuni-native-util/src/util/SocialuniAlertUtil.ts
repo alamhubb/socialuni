@@ -1,26 +1,20 @@
 import {ImportModule} from "socialuni/src/interface/ImportModule";
-import AlertUtil from "packages/socialuni-native/socialuni-native-uni/src/util/AlertUtil";
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 
-let nativeUtil: AlertUtil
+let nativeUtil: any
+let modulePath
 
-async function importPackage() {
-    try {
-        if (uni) {
-            const modulePath = 'socialuni-native-uni/src/util/AlertUtil';
-            const res: ImportModule<any> = await import(modulePath)
-            nativeUtil = res.default
-        }
-    } catch (e) {
-        const modulePath = 'socialuni-native-h5/src/util/AlertUtil';
-        const res: ImportModule<any> = await import(modulePath)
-        nativeUtil = res.default
-    }
+if (socialuniSystemModule.isUniApp) {
+    modulePath = '../../../socialuni-native-uni/src/util/AlertUtil.ts';
+} else {
+    modulePath = '../../../socialuni-native-h5/src/util/AlertUtil.ts';
 }
+const res: ImportModule<any> = await import(/* @vite-ignore */ modulePath)
 
-importPackage()
+nativeUtil = res.default
 
 export default class SocialuniAlertUtil {
-    static get nativeUtil(): AlertUtil {
+    static get nativeUtil(): any {
         return nativeUtil
     }
 }
