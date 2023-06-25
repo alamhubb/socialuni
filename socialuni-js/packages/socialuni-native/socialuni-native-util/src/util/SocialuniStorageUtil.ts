@@ -1,7 +1,8 @@
 import {ImportModule} from "socialuni/src/interface/ImportModule";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 
-let nativeUtil: any
+let nativeUtil: any = {get(){return {}},getObj(){return {}}}
+/*
 let modulePath
 
 if (socialuniSystemModule.isUniApp) {
@@ -9,9 +10,10 @@ if (socialuniSystemModule.isUniApp) {
 } else {
     modulePath = '../../../socialuni-native-h5/src/util/StorageUtil.ts';
 }
-const res: ImportModule<any> = await import(/* @vite-ignore */ modulePath)
+const res: ImportModule<any> = await import(/!* @vite-ignore *!/ modulePath)
 
 nativeUtil = res.default
+*/
 
 export default class SocialuniStorageUtil {
     static get nativeUtil(): any {

@@ -75,6 +75,7 @@ import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
 import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
 import ImgUtil from "socialuni-util/src/util/ImgUtil";
 import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
+import {ArrowDown, Tools} from "@element-plus/icons-vue";
 
 @Options({
     components: {SocialuniUserEditDialog, Tools, LoginView, SDialog, ArrowDown}

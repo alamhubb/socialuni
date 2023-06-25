@@ -4,9 +4,7 @@ import {SocialuniPlugin} from "./interface/SocialuniPlugin"
 import {ImportModule} from "./interface/ImportModule"
 import {SocialuniOption} from "./interface/socialuniOption"
 import SocialuniViewService from "./interface/SocialuniViewService";
-
-
-
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 
 const socialuniInitPlugin: SocialuniPlugin = {
     async onLaunch() {
@@ -62,13 +60,14 @@ async function installSocialuniPluginIns() {
 
 const Socialuni = {
     async install(app: App, socialuniOption: SocialuniOption) {
-        console.log(uni)
-        if (uni) {
+        if (socialuniSystemModule.isUniApp) {
             try {
                 // import('socialuni-ui-uni/src/styles/index.scss')
             } catch (e) {
                 console.log(e)
             }
+
+        } else {
             try {
                 // import('socialuni-app-view-uni/src/styles/index.scss')
             } catch (e) {
