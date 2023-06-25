@@ -1,13 +1,15 @@
 import {SocialuniPlugin} from 'socialuni/src/interface/SocialuniPlugin'
 import NotifyVO from "socialuni-api-base/src/model/NotifyVO";
 import NotifyType from "socialuni-constant/constant/NotifyType";
-import {socialChatModule} from "./store/SocialChatModule";
 import {socialuniChatModule} from "./store/SocialuniChatModule";
+import {socialuniTokenModule} from "socialuni-user-sdk/src/store/SocialuniTokenModule";
 
 class SocialuniImPlugin implements SocialuniPlugin {
     onLaunch() {
         console.log('触发了Im')
-        socialuniChatModule.queryMineImUserInfo()
+        if (socialuniTokenModule.token) {
+            socialuniChatModule.queryMineImUserInfo()
+        }
     }
 
     onMessage(notify: NotifyVO) {
