@@ -12,7 +12,7 @@
   "dependencies": {
     "@element-plus/icons-vue": "^2.1.0",
     "axios": "^1.4.0",
-    "element-plus": "^2.3.6",
+    "element-plus": "^2.3.7",
     "mitt": "^3.0.0",
     "socialuni": "../packages/socialuni",
     "socialuni-app-view-h5": "../packages/socialuni-app-view-h5",
