@@ -3,16 +3,16 @@ import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemMod
 
 let nativeUtil: any = {get(){return {}},getObj(){return {}}}
 
-/*let modulePath
+let modulePath
 
 if (socialuniSystemModule.isUniApp) {
     modulePath = '../../../socialuni-native-uni/src/util/AlertUtil.ts';
 } else {
     modulePath = '../../../socialuni-native-h5/src/util/AlertUtil.ts';
 }
-const res: ImportModule<any> = await import(/!* @vite-ignore *!/ modulePath)
+const res: ImportModule<any> = await import(/* @vite-ignore */ modulePath)
 
-nativeUtil = res.default*/
+nativeUtil = res.default
 
 export default class SocialuniAlertUtil {
     static get nativeUtil(): any {
