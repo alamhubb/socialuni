@@ -1,11 +1,7 @@
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import {nextTick, onBeforeMount, onMounted, onUnmounted} from "vue";
-import {createRouter, createWebHistory} from "vue-router";
+import {getCurrentRoute} from "./RouterUtil";
 
-const router = createRouter({
-    history: createWebHistory(import.meta.env.BASE_URL),
-    routes: [],
-})
 
 export async function onLoad(hook: (params: any) => any) {
     console.log(socialuniSystemModule.isUniApp)
@@ -20,12 +16,17 @@ export async function onLoad(hook: (params: any) => any) {
             console.log(e)
         }
     } else {
+        const route = getCurrentRoute()
         console.log('zhixingle')
-        console.log(router.currentRoute)
-        console.log(router.currentRoute.value)
+        console.log(route.value)
+        console.log(route.value.query)
+        for (const key in route.value.query) {
+            console.log(route.value.query[key])
+        }
+        console.log(route.query)
         onMounted(() => {
-            router.currentRoute
-            hook()
+            // router.currentRoute
+            // hook()
         })
     }
 }
