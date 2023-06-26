@@ -1,6 +1,6 @@
 import mitt from "mitt";
 
-export default class SocialuniEventUtil {
+export default class CommonEventUtil {
     private static event = mitt()
 
     static emit(name: string, data?: any) {

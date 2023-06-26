@@ -63,7 +63,7 @@ import {Options, Vue} from 'vue-property-decorator'
 import SDialog from "@/components/socialuni/SDialog.vue";
 import LoginView from "@/components/view/loginView.vue";
 import SocialuniUserEditDialog from "@/views/user/SocialuniUserEditDialog.vue";
-import SocialuniEventUtil from "socialuni/src/util/SocialuniEventUtil";
+import CommonEventUtil from "../../../packages/uniapp-api/src/util/CommonEventUtil";
 import SocialuniUserEventConst from "socialuni-user-sdk/src/constant/SocialuniUserEventConst";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 import CosService from "socialuni-app-sdk/src/util/CosService";
@@ -87,7 +87,7 @@ export default class NavBar extends Vue {
     }
 
     created() {
-        SocialuniEventUtil.on(SocialuniUserEventConst.toLogin, () => {
+        CommonEventUtil.on(SocialuniUserEventConst.toLogin, () => {
             console.log('接收到了')
             this.toLogin()
         })

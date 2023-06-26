@@ -5,6 +5,9 @@ import {ImportModule} from "./interface/ImportModule"
 import {SocialuniOption} from "./interface/socialuniOption"
 import SocialuniViewService from "./interface/SocialuniViewService";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import UniappAPI from "uniapp-api/src";
+import SystemUtil from "socialuni-util/src/util/SystemUtil";
+import SocialuniUiH5 from "socialuni-ui-h5/src";
 
 const socialuniInitPlugin: SocialuniPlugin = {
     async onLaunch() {
@@ -60,22 +63,11 @@ async function installSocialuniPluginIns() {
 
 const Socialuni = {
     async install(app: App, socialuniOption: SocialuniOption) {
+        app.use(UniappAPI)
         if (socialuniSystemModule.isUniApp) {
-            try {
-                // import('socialuni-ui-uni/src/styles/index.scss')
-            } catch (e) {
-                console.log(e)
-            }
-
         } else {
-            try {
-                // import('socialuni-app-view-uni/src/styles/index.scss')
-            } catch (e) {
-                console.log(e)
-            }
+            app.use(SocialuniUiH5)
         }
-
-
         const shareComponent = defineComponent({
             onShareAppMessage() {
                 const title = '年轻人生活分享社区'

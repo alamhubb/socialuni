@@ -1,5 +1,5 @@
 import NotifyVO from "socialuni-api-base/src/model/NotifyVO";
-import {AxiosResponse, InternalAxiosRequestConfig} from "axios";
+import {AxiosError, InternalAxiosRequestConfig} from "axios";
 
 
 export interface SocialuniPlugin {
@@ -15,7 +15,7 @@ export interface SocialuniPlugin {
 
     onRequestInterceptors?(config: InternalAxiosRequestConfig)
 
-    onResponseErrorInterceptors?(error: AxiosResponse)
+    onResponseErrorInterceptors?(error: AxiosError)
 
     onWebsocketInterceptors?(config: any)
 

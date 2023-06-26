@@ -1,4 +1,4 @@
-import {AxiosResponse, InternalAxiosRequestConfig} from "axios";
+import {AxiosError, InternalAxiosRequestConfig} from "axios";
 import {SocialuniPlugin} from "socialuni/src/interface/SocialuniPlugin";
 import {socialuniUserModule} from "./store/SocialuniUserModule";
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
@@ -37,14 +37,14 @@ class SocialuniUserPlugin implements SocialuniPlugin {
             config.headers.token = null
         }
     }
-    onResponseErrorInterceptors(response: AxiosResponse) {
+    onResponseErrorInterceptors(error: AxiosError) {
         SocialuniAppUtil.UniUtil.hideLoading()
         //第一步，先判断 有没有error
         //判断data类型，如果没类型，直接走
         //有内容则为本系统？也不一定，判断拿内容类型
         //然后本系统处理
-        SocialuniAppUtil.UniUtil.hideLoading()
-        const result:ResultRO = response.data
+        const result:ResultRO = error.response.data
+        console.log(result)
         if (result) {
             const errorMsg = result.errorMsg
             if (errorMsg) {

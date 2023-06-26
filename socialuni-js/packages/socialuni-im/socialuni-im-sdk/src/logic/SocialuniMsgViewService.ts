@@ -11,7 +11,6 @@ import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import DateUtil from "socialuni-util/src/util/DateUtil";
 import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil";
 import UserType from "socialuni-constant/constant/UserType";
-import MessageViewParams from "socialuni-im-view-uni/src/views/chat/MessageViewParams";
 import {nextTick, onBeforeMount, onMounted, onUnmounted} from "vue";
 import SocialuniViewService from "socialuni/src/interface/SocialuniViewService";
 import Constants from "socialuni-constant/constant/Constant";
@@ -22,6 +21,7 @@ import NodeInfo = UniNamespace.NodeInfo;
 import {Vue} from "vue-class-component";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import {onLoad} from "uniapp-api/src/page";
+import MessageViewParams from "../model/MessageViewParams";
 
 export default class SocialuniMsgViewService extends SocialuniViewService {
     public $refs!: {
@@ -81,12 +81,7 @@ export default class SocialuniMsgViewService extends SocialuniViewService {
         })
         //TODO 同一会话时，这里要改成onRead，不然需要刷新页面才会触发已读的标志。
         onLoad((params: MessageViewParams) => {
-            console.log('chufale onLoad')
-            //不这么写refs是空
-            // onMounted(() => {
-            console.log('chufale onMounted')
             this.init(params)
-            // })
         })
     }
 

@@ -2,15 +2,15 @@ import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserMod
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 import UserPageUtil from "./UserPageUtil";
 import SocialuniUserEventConst from "../constant/SocialuniUserEventConst";
-import SocialuniEventUtil from "socialuni/src/util/SocialuniEventUtil";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import CommonEventUtil from "uniapp-api/src/util/CommonEventUtil";
 
 export default class UserCheckUtil {
     static checkUserLogin() {
         const user = socialuniUserModule.mineUser
         if (!user) {
             SocialuniAppUtil.AlertUtil.confirm(socialuniConfigModule.appMoreConfig.errorMsg601UnLogin).then(() => {
-                SocialuniEventUtil.emit(SocialuniUserEventConst.toLogin)
+                CommonEventUtil.emit(SocialuniUserEventConst.toLogin)
             })
             throw Error('未登录')
         }
