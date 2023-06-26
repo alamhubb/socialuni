@@ -20,6 +20,8 @@ import SelectorQuery = UniNamespace.SelectorQuery;
 import NodesRef = UniNamespace.NodesRef;
 import NodeInfo = UniNamespace.NodeInfo;
 import {Vue} from "vue-class-component";
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {onLoad} from "uniapp-api/src/page";
 
 export default class SocialuniMsgViewService extends SocialuniViewService {
     public $refs!: {
@@ -71,10 +73,10 @@ export default class SocialuniMsgViewService extends SocialuniViewService {
         console.log(this.thisInstance)
         console.log(this.thisInstance.$refs)
         console.log('chufale initService')
-        onMounted(()=>{
+        onMounted(() => {
             socialuniChatModule.scrollTop = 0
         })
-        onUnmounted(()=>{
+        onUnmounted(() => {
             socialuniChatModule.scrollTop = 0
         })
         //TODO 同一会话时，这里要改成onRead，不然需要刷新页面才会触发已读的标志。
