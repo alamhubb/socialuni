@@ -1,5 +1,6 @@
 export default class PagePath {
   static readonly home: string = '/pages/home/home'
+  static readonly homeH5: string = '/'
   static readonly webBrowser: string = '/pages/web/webBrowser'
   static readonly share: string = '/pages/share/share'
 

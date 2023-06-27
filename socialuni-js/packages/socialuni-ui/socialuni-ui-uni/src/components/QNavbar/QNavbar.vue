@@ -96,7 +96,7 @@ export default class QNavBar extends Vue {
   }
 
   goHome() {
-    PageUtil.goHome()
+    SocialuniAppUtil.RouterUtil.goHome()
   }
 }
 </script>

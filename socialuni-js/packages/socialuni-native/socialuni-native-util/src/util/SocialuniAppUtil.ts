@@ -3,6 +3,7 @@ import SocialuniAppNativeUtil from "./SocialuniAppNativeUtil";
 import SocialuniToastUtil from "./SocialuniToastUtil";
 import SocialuniStorageUtil from "./SocialuniStorageUtil";
 import SocialuniRouterUtil from "./SocialuniRouterUtil";
+import {SocialuniRouterUtilInterface} from "../interface/SocialuniRouterUtilInterface";
 
 export default class SocialuniAppUtil {
     static get UniUtil(): any {
@@ -21,7 +22,7 @@ export default class SocialuniAppUtil {
         return SocialuniStorageUtil.nativeUtil
     }
 
-    static get RouterUtil(): any {
+    static get RouterUtil(): SocialuniRouterUtilInterface {
         return SocialuniRouterUtil.nativeUtil
     }
 }

@@ -1,6 +1,25 @@
 import PagePath from "socialuni-constant/constant/PagePath";
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 
 export default class RouterUtil {
+
+    /**
+     * 保留当前页面，跳转到应用内的某个页面，使用uni.navigateBack可以返回到原页面。
+     * @param pagePath
+     * @param params
+     */
+    static push(pagePath: string, params?: object): void {
+        //微信小程序不支持URLSearchParams
+        /*if (params) {
+            const paramObj = new URLSearchParams()
+            for (const key in params) {
+                paramObj.append(key, params[key])
+            }
+            pagePath = pagePath + '?' + paramObj.toString()
+        }*/
+        uni.navigateTo({url: pagePath})
+    }
+
     /**
      * 保留当前页面，跳转到应用内的某个页面，使用uni.navigateBack可以返回到原页面。
      * @param pagePath
@@ -68,7 +87,11 @@ export default class RouterUtil {
     }
 
     static goHome(): void {
-        RouterUtil.switchTab(PagePath.home)
+        if (socialuniSystemModule.isUniApp) {
+            RouterUtil.switchTab(PagePath.home)
+        } else {
+            this.push('/')
+        }
     }
 
     static async navigateToMp(appId: string, path: string = null, extraData: any = null) {
@@ -86,8 +109,6 @@ export default class RouterUtil {
             })
         })
     }
-
-
 
 
 }
