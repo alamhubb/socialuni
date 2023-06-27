@@ -21,17 +21,15 @@ const socialuniInitPlugin: SocialuniPlugin = {
     }
 }
 
-async function installSocialuniPluginIns() {
-
+async function installSocialuniPluginIns(app: App) {
     socialuniPluginsModule.addPlugin(socialuniInitPlugin)
-    try {
-        //查询是否包含community模块，如果存在则加载
-        const socialuniPlugin: ImportModule<SocialuniPlugin> = await import('socialuni-app-sdk/src/index')
-        socialuniPluginsModule.addPlugin(socialuniPlugin.default)
-    } catch (e) {
-        console.error(e)
-        // 如果导入失败，则不触发任何操作
+    //查询是否包含community模块，如果存在则加载
+    const modules = await import('../../socialuni-app/socialuni-app-sdk/src/index')
+    const socialuniApp = PlatformModuleLoadUtil.getFirstModule(modules)
+    if (socialuniApp) {
+        app.use(socialuniApp)
     }
+
     try {
         //查询是否包含community模块，如果存在则加载
         const socialuniPlugin: ImportModule<SocialuniPlugin> = await import('socialuni-user-sdk/src/index')
@@ -98,7 +96,7 @@ const Socialuni = {
         app.mixin(shareComponent)
 
         // 社交联盟内置支持的插件
-        await installSocialuniPluginIns()
+        await installSocialuniPluginIns(app)
 
         // if (socialuniOptions) {
         if (socialuniOption && socialuniOption.plugins) {

@@ -1,5 +1,5 @@
 <template>
-    <div class="h100p flex-col">
+    <div class="h100p flex-col bg-default">
         <q-navbar class="flex-none" show-back :title="viewService.pageTitle">
             <div class="row-end-center flex-1">
 <!--                <button @click="viewService.scrollToMessagePageBottom">滚动到底部</button>-->
