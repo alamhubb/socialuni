@@ -19,6 +19,7 @@ import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import {Vue} from "vue-class-component";
 import MessageViewParams from "../model/MessageViewParams";
 import {onLoad} from "uniapp-api/src/UniappPageLifecycleHook";
+import {socialuniMsgModule} from "../store/SocialMessageModule";
 
 export default class SocialuniMsgViewService extends SocialuniViewService {
     public $refs!: {
@@ -33,7 +34,6 @@ export default class SocialuniMsgViewService extends SocialuniViewService {
     deleteReason: string = null
     queryTime: Date = null
     reportContentType: string = ReportContentType.message
-    lazyLoadNum = 30
 
     get chatId() {
         return socialuniChatModule.chatId
@@ -78,38 +78,9 @@ export default class SocialuniMsgViewService extends SocialuniViewService {
         onLoad((params: MessageViewParams) => {
             console.log('触发了回调2222')
             console.log(params)
-            this.init(params)
+            socialuniMsgModule.init(params)
         })
     }
-
-    async init(params: MessageViewParams) {
-        if (params) {
-            console.log('执行了')
-            //  不存在前台缓存的问题,防止页面数据没有被及时刷新。 缓存之前页面的数据。
-            //  issue: I6EZ82
-            //
-            if (!params.chatId) {
-                SocialuniAppUtil.AlertUtil.error('缺少会话信息')
-            }
-            // if (params.nickname) {
-            //   chat.nickname = params.nickname
-            // }
-            socialuniChatModule.setChatIdAndQueryMsg(params.chatId)
-
-            this.queryTime = new Date()
-            await this.queryMessages(true)
-
-            socialuniChatModule.scrollToMessagePageBottom()
-        }
-        // socialuniChatModule.chatId = params.receiveId
-        // socialuniChatModule.setCurChatByUserId(params.userId)
-        // this.userId = params.userId;
-        /*else if (params.groupId) {
-          // socialuniChatModule.setCurChatByGroupId(params.groupId)
-          // this.groupId = params.groupId;
-        }*/
-    }
-
 
     openMoreMenu() {
         if (this.chat.type === ChatType.single) {
@@ -267,32 +238,6 @@ export default class SocialuniMsgViewService extends SocialuniViewService {
 
     initChooseCommentData() {
         this.message = null
-    }
-
-
-    queryMessages(initQuery: boolean = false) {
-        // console.trace('chaxun')
-        return MessageAPI.queryMessagesAPI(this.chat.id, this.queryTime).then((res) => {
-            const resMessages: MessageVO[] = res.data
-            // this.topId = lastFirstMsgId
-            // 如果还有大于等于30个就还可以加载
-            if (resMessages && resMessages.length >= this.lazyLoadNum) {
-                this.chat.loadMore = LoadMoreType.more
-            } else {
-                // 否则没有了
-                this.chat.loadMore = LoadMoreType.noMore
-            }
-            if (resMessages.length) {
-                this.queryTime = resMessages[0].createTime
-                if (initQuery) {
-                    socialuniChatModule.chat.messages = resMessages
-                    socialuniChatModule.readChatAction(socialuniChatModule.chat.messages)
-                } else {
-                    socialuniChatModule.chat.messages.unshift(...resMessages)
-                    socialuniChatModule.readChatAction(socialuniChatModule.chat.messages)
-                }
-            }
-        })
     }
 
 

@@ -109,22 +109,12 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import SocialUserContentRO from "socialuni-api-base/src/model/social/SocialUserContentRO"
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
-import SocialuniImUserAPI from "socialuni-im-api/src/api/SocialuniImUserAPI";
-import SocialuniChatRO from "socialuni-api-base/src/model/SocialuniChatRO";
-import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
-import ChatType from "socialuni-constant/constant/ChatType";
-import SocialuniCommonStatus from "socialuni-constant/constant/status/SocialuniCommonStatus";
-import Constants from "socialuni-constant/constant/Constant";
-import DateUtil from "socialuni-util/src/util/DateUtil";
-import ImPageUtil from "socialuni-im-sdk/src/util/ImPageUtil";
 import SScrollbar from "socialuni-ui-h5/src/components/SScrollbar.vue";
-import SocialuniChatViewService from "socialuni-im-sdk/src/logic/SocialuniChatViewService";
+import SocialuniChatViewServiceH5 from "../logic/SocialuniChatViewServiceH5";
 
 @Options({components: {SScrollbar}})
 export default class SocialuniChatView extends Vue {
 
-    viewService: SocialuniChatViewService = new SocialuniChatViewService()
+    viewService: SocialuniChatViewServiceH5 = new SocialuniChatViewServiceH5()
 }
 </script>
