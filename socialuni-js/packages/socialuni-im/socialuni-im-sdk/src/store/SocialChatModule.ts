@@ -419,26 +419,6 @@ class SocialChatModule {
         // socialChatModule.scrollToMessagePageBottom()
     }
 
-    //从列表中进入
-    setChatIdToMessagePage(receiveId: string) {
-        // this.setChatId(chatId)
-        // this.readChatAction(this.chat)
-        if (!receiveId) {
-            SocialuniAppUtil.AlertUtil.error('缺少会话信息')
-        }
-        /*const chat = new SocialuniChatRO()
-        chat.receiveId = receiveId
-        chat.nickname = chatName
-        this.setChat(chat)*/
-
-        ImPageUtil.toMessagePageByChatId(receiveId)
-    }
-
-    messageViewInit(params: MessageViewParams) {
-
-
-    }
-
     get chatIndex(): number {
         return this.chats.findIndex(item => item.id === this.chatId)
     }

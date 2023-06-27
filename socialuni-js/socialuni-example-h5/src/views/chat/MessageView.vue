@@ -12,8 +12,6 @@
 
 <script lang="ts">
 import {Options, Vue} from "vue-property-decorator";
-import SocialuniChatViewService from "socialuni-im-sdk/src/logic/SocialuniChatViewService";
-import SocialuniMsgViewService from "socialuni-im-sdk/src/logic/SocialuniMsgViewService";
 import SocialuniChatView from "socialuni-im-view-h5/src/views/SocialuniChatView.vue";
 import SocialuniMsgView from "socialuni-im-view-h5/src/views/SocialuniMsgView.vue";
 

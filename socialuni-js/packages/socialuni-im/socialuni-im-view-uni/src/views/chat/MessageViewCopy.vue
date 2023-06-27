@@ -414,35 +414,6 @@ export default class MessageView extends Vue {
         return socialuniUserModule.mineUser
     }
 
-    async init(params: MessageViewParams) {
-        //  不存在前台缓存的问题,防止页面数据没有被及时刷新。 缓存之前页面的数据。
-        //  issue: I6EZ82
-        //
-        if (!params.chatId) {
-            SocialuniAppUtil.AlertUtil.error('缺少会话信息')
-        }
-        // if (params.nickname) {
-        //   chat.nickname = params.nickname
-        // }
-        socialuniChatModule.setChatIdAndQueryMsg(params.chatId)
-
-        this.queryTime = new Date()
-        await this.queryMessages(true)
-
-        socialuniChatModule.scrollToMessagePageBottom()
-
-
-        // socialuniChatModule.chatId = params.receiveId
-        // socialuniChatModule.setCurChatByUserId(params.userId)
-        // this.userId = params.userId;
-        /*else if (params.groupId) {
-          // socialuniChatModule.setCurChatByGroupId(params.groupId)
-          // this.groupId = params.groupId;
-        }*/
-    }
-
-
-
     get pageTitle() {
         return this.chat.nickname
     }

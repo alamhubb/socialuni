@@ -4,6 +4,7 @@ export default class CommonEventUtil {
     private static event = mitt()
 
     static emit(name: string, data?: any) {
+        console.log('发布：' + name)
         this.event.emit(name, data)
     }
 
