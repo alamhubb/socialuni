@@ -104,7 +104,7 @@ public class WebsocketServer extends TextWebSocketHandler {
         String uuid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(userId);
         WebSocketSession session = onlineUsersSessionMap.get(uuid);
         if (session == null){
-            throw new SocialParamsException("用户参数异常");
+            return;
         }
         //如果用户在线才发送
         if (session.isOpen()) {
