@@ -89,7 +89,7 @@ import {Emit, Options, Vue} from 'vue-property-decorator'
 import SocialuniLoginViewService from "socialuni-user-sdk/src/logic/SocialuniLoginViewService";
 
 @Options({})
-export default class LoginView extends Vue {
+export default class SocialuniLoginView extends Vue {
     viewService: SocialuniLoginViewService = SocialuniLoginViewService()
 }
 </script>

@@ -27,7 +27,7 @@
                         </div>-->
             <div class="row-col-center">
                 <!--                <input id="fileSelector" type="file" @change="uploadData"/>-->
-                <el-button @click="uploadUserAvatarImg">test</el-button>
+<!--                <el-button @click="uploadUserAvatarImg">test</el-button>-->
                 <el-avatar v-if="!mineUser" class="use-click" @click="toLogin">登录</el-avatar>
                 <div v-else class="row-col-center">
                     <el-tag class="mr-10" type="warning" effect="dark">{{ mineUser.nickname }}
@@ -50,7 +50,7 @@
         </el-dropdown>
 
         <s-dialog ref="loginDialog" title="登录" width="400px" no-show-footer>
-            <login-view @login-success="loginSuccess"></login-view>
+            <socialuni-login-view-h5 @login-success="loginSuccess"></socialuni-login-view-h5>
         </s-dialog>
 
 
@@ -76,9 +76,10 @@ import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
 import ImgUtil from "socialuni-util/src/util/ImgUtil";
 import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
 import {ArrowDown, Tools} from "@element-plus/icons-vue";
+import SocialuniLoginView from "socialuni-user-view-h5/src/views/SocialuniLoginView.vue";
 
 @Options({
-    components: {SocialuniUserEditDialog, Tools, LoginView, SDialog, ArrowDown}
+    components: {SocialuniUserEditDialog, Tools, SocialuniLoginView, SDialog, ArrowDown}
 })
 export default class NavBar extends Vue {
     $refs: {
