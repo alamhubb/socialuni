@@ -84,7 +84,6 @@ const Socialuni = {
                 }
             },
             created() {
-                console.log('zhiixnglecreated')
                 socialuniPluginsModule.setRouter(this.$router)
                 socialuniPluginsModule.setRoute(this.$route)
                 const data = this

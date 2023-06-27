@@ -12,6 +12,7 @@
     "@dcloudio/uni-ui": "^1.4.23",
     "socialuni": "^0.1.2",
     "socialuni-im-sdk": "^0.1.2",
+    "socialuni-im-uni-sdk": "^0.1.2",
     "socialuni-native-util": "^0.1.2",
     "socialuni-im-api": "^0.1.2",
     "vue": "3.2.41"

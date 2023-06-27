@@ -1,5 +1,5 @@
 {
-  "name": "socialuni-im-view-h5",
+  "name": "socialuni-im-uni-sdk",
   "version": "0.1.2",
   "description": "",
   "main": "index.js",
@@ -8,12 +8,9 @@
   },
   "devDependencies": {
     "socialuni": "^0.1.2",
-    "socialuni-constant": "^0.1.2",
-    "socialuni-im-sdk": "^0.1.2",
     "socialuni-native-util": "^0.1.2",
-    "socialuni-im-h5-sdk": "^0.1.2",
     "socialuni-im-api": "^0.1.2",
-    "socialuni-ui-h5": "^0.1.2",
+    "socialuni-user-sdk": "^0.1.2",
     "vue": "3.2.41"
   },
   "keywords": [],
