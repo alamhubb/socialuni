@@ -1,12 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
-import ChatView from '@/views/chat/ChatView.vue'
+import MessageView from "@/views/chat/MessageView.vue";
 
 export const constantRoutes = [
   {
-    path: '',
-    name: 'chat',
-    component: ChatView,
+    path: '/',
+    name: 'message',
+    component: MessageView,
     meta: {title: '消息', hidden: true},
   },
   {

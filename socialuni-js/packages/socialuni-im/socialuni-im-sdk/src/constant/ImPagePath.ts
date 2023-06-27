@@ -1,9 +1,6 @@
-export default class ImPagePath {
-
-    static readonly message: string = '/pagesLazy/im/message'
-    static readonly chatView: string = 'pages/chat/chat'
-
-    static readonly friend: string = '/pages/chat/friend'
-    static readonly friendApply: string = '/pagesLazy/im/friendApplyList'
-
+export interface SocialuniImPagePathInterface {
+    readonly message: string
+    readonly chatView: string
+    readonly friend: string
+    readonly friendApply: string
 }

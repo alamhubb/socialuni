@@ -10,12 +10,7 @@ import {reactive} from "vue";
 import OpenImFriendApplyRO from "socialuni-api-base/src/model/openIm/OpenImFriendApplyRO";
 import OpenImSessionType from "socialuni-constant/constant/openIm/constant/OpenImSessionType";
 import ImPageUtil from "../util/ImPageUtil";
-import ImPagePath from "../constant/ImPagePath";
 import ChatAPI from "socialuni-im-api/src/api/ChatAPI";
-import MessageViewParams from "../views/chat/MessageViewParams";
-import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
-import ChatQueryQO from "socialuni-im-api/src/model/QO/chat/ChatQueryQO";
-import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
 import SocialuniImUserTokenUtil from "../util/SocialuniImUserTokenUtil";
 
 

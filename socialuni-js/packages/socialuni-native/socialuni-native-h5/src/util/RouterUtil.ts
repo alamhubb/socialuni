@@ -1,3 +1,4 @@
+import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
 
 export default class RouterUtil{
     /**
@@ -6,6 +7,7 @@ export default class RouterUtil{
      * @param params
      */
     static navigateTo(pagePath: string, params?: object): void {
+        socialuniPluginsModule.router.push(pagePath)
         //微信小程序不支持URLSearchParams
         /*if (params) {
             const paramObj = new URLSearchParams()
@@ -14,7 +16,7 @@ export default class RouterUtil{
             }
             pagePath = pagePath + '?' + paramObj.toString()
         }*/
-        uni.navigateTo({url: pagePath})
+        // uni.navigateTo({url: pagePath})
     }
 
     /**

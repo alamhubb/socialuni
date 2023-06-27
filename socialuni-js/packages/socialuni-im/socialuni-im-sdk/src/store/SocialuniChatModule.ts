@@ -15,9 +15,6 @@ import {MessageStatus} from "socialuni-constant/constant/openIm/OpenImMessageTyp
 import SocialuniImMineUserDetailRO from "socialuni-im-api/src/model/RO/SocialuniImMineUserDetailRO";
 import SocialuniImUserAPI from "socialuni-im-api/src/api/SocialuniImUserAPI";
 import RouterUtil from "socialuni-native-h5/src/util/RouterUtil";
-import ImPagePath from "../constant/ImPagePath";
-import SelectorQuery = UniNamespace.SelectorQuery;
-import NodesRef = UniNamespace.NodesRef;
 
 class SocialuniChatModule {
     chatId = ''

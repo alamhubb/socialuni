@@ -3,7 +3,6 @@ import SocialuniAppNativeUtil from "./SocialuniAppNativeUtil";
 import SocialuniToastUtil from "./SocialuniToastUtil";
 import SocialuniStorageUtil from "./SocialuniStorageUtil";
 import SocialuniRouterUtil from "./SocialuniRouterUtil";
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 
 export default class SocialuniAppUtil {
     static get UniUtil(): any {

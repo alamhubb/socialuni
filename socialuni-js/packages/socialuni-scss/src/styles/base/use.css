@@ -3,19 +3,19 @@
 }
 
 .use-click:hover {
-    opacity: 0.8;
+    opacity: 0.9;
 }
 
 .use-click:active {
-    opacity: 0.6;
+    opacity: 0.7;
 }
 
 .use-hover {
-    opacity: 0.8;
+    opacity: 0.9;
 }
 
 .use-active {
-    opacity: 0.6;
+    opacity: 0.7;
 }
 
 .use-disabled {
