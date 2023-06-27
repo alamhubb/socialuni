@@ -5,12 +5,13 @@ import {watch} from "vue";
 import SocialuniViewService from "socialuni/src/interface/SocialuniViewService";
 import {Vue} from "vue-class-component";
 
-export default class SocialuniChatViewService extends SocialuniViewService {
-    $refs!: {
-        messageBox: HTMLDivElement;
-    }
+interface SocialuniChatViewServiceRefs {
+    messageBox: HTMLDivElement;
+}
 
-    initService(vueInstance: Vue) {
+export default class SocialuniChatViewService extends SocialuniViewService<SocialuniChatViewServiceRefs> {
+
+    initService(vueInstance: SocialuniChatViewServiceRefs) {
         super.initService(vueInstance)
         watch(() => socialuniChatModule.scrollTop, () => {
             console.log('触发了滚动')

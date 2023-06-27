@@ -86,7 +86,7 @@ const Socialuni = {
                 for (const key in data) {
                     const socialuniViewServiceObj: SocialuniViewService = data[key]
                     if (socialuniViewServiceObj instanceof SocialuniViewService) {
-                        socialuniViewServiceObj.initService(this)
+                        socialuniViewServiceObj.initService(this.$refs)
                     }
                 }
             }
