@@ -24,20 +24,19 @@ const socialuniInitPlugin: SocialuniPlugin = {
 async function installSocialuniPluginIns(app: App) {
     socialuniPluginsModule.addPlugin(socialuniInitPlugin)
     //查询是否包含community模块，如果存在则加载
-    const modules = await import('../../socialuni-app/socialuni-app-sdk/src/index')
-    const socialuniApp = PlatformModuleLoadUtil.getFirstModule(modules)
-    if (socialuniApp) {
-        app.use(socialuniApp)
+    const appModules =  import.meta.globEager('../../socialuni-app/socialuni-app-sdk/src/index.ts')
+    const socialuniApp = PlatformModuleLoadUtil.getFirstModule(appModules)
+    console.log(socialuniApp)
+    if (socialuniApp && socialuniApp.default) {
+        app.use(socialuniApp.default)
+    }
+    const userModules = import.meta.globEager('../../socialuni-user/socialuni-user-sdk/src/index.ts')
+    const socialuniUser = PlatformModuleLoadUtil.getFirstModule(userModules)
+    console.log(socialuniUser)
+    if (socialuniUser && socialuniUser.default) {
+        app.use(socialuniUser.default)
     }
 
-    try {
-        //查询是否包含community模块，如果存在则加载
-        const socialuniPlugin: ImportModule<SocialuniPlugin> = await import('socialuni-user-sdk/src/index')
-        socialuniPluginsModule.addPlugin(socialuniPlugin.default)
-    } catch (e) {
-        console.error(e)
-        // 如果导入失败，则不触发任何操作
-    }
     try {
         //查询是否包含community模块，如果存在则加载
         const socialuniPlugin: ImportModule<SocialuniPlugin> = await import('socialuni-community-sdk/src/index.ts')

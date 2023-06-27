@@ -3,6 +3,8 @@ import {socialuniUserModule} from "../store/SocialuniUserModule";
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 import UserPageUtil from "./UserPageUtil";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import CommonEventUtil from "uniapp-api/src/util/CommonEventUtil";
+import SocialuniUserEventConst from "../constant/SocialuniUserEventConst";
 
 export default class UserMsgUtil {
     static unBindPhoneNum() {
@@ -19,13 +21,13 @@ export default class UserMsgUtil {
     }
 
     static unLoginMessage() {
-        if (!socialuniUserModule.mineUser) {
-            SocialuniAppUtil.AlertUtil.info(socialuniConfigModule.appMoreConfig.errorMsg601UnLogin)
-                .then(() => {
-                    // 没token才执行登录,有token证明已经登录，如果有错误应该清空token在执行这个
-                    UserPageUtil.toMinePage()
-                })
+        const user = socialuniUserModule.mineUser
+        if (!user) {
+            SocialuniAppUtil.AlertUtil.confirm(socialuniConfigModule.appMoreConfig.errorMsg601UnLogin).then(() => {
+                CommonEventUtil.emit(SocialuniUserEventConst.toLogin)
+            })
             throw new Error('未登录')
         }
+        return user
     }
 }
