@@ -178,6 +178,7 @@ export default class SDialog extends Vue {
           this.dialogVisible = true
         })*/
         this.dialogVisible = true
+        console.log(this.dialogVisible)
         this.modifyVisible()
     }
 

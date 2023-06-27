@@ -52,7 +52,9 @@
                                 :disabled="viewService.sendAuthCodeBtnDisabled"
                                 @click="viewService.sendCodeClick()"
                         >
-                            {{ viewService.countDown ? (viewService.authCodeInterval + 1 - viewService.countDown) + '秒后可重试' : '发送验证码' }}
+                            {{
+                            viewService.countDown ? (viewService.authCodeInterval + 1 - viewService.countDown) + '秒后可重试' : '发送验证码'
+                            }}
                         </el-button>
                     </div>
                 </el-form-item>
@@ -90,6 +92,6 @@ import SocialuniLoginViewService from "socialuni-user-sdk/src/logic/SocialuniLog
 
 @Options({})
 export default class SocialuniLoginView extends Vue {
-    viewService: SocialuniLoginViewService = SocialuniLoginViewService()
+    viewService: SocialuniLoginViewService = new SocialuniLoginViewService()
 }
 </script>

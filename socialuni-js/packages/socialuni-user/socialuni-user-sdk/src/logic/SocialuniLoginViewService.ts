@@ -5,14 +5,13 @@ import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
 import SocialuniLoginService from "./SocialuniLoginService";
 import SocialuniViewService from "socialuni/src/interface/SocialuniViewService";
-import {SocialuniViewServiceInterface} from "socialuni/src/interface/SocialuniViewServiceInterface";
 
-export default class SocialuniLoginViewService extends SocialuniViewService implements SocialuniViewServiceInterface {
-    $refs: {
-        authCode: {
-            focus()
-        }
-    }
+interface SocialuniLoginViewServiceRefs {
+    authCode: HTMLInputElement
+}
+
+export default class SocialuniLoginViewService extends SocialuniViewService<SocialuniLoginViewServiceRefs> {
+
 
     loginUser: SocialPhoneNumLoginQO = new SocialPhoneNumLoginQO()
 
