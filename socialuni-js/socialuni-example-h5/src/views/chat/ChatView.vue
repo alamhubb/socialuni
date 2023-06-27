@@ -1,7 +1,7 @@
 <template>
     <div class="flex-row h100p overflow-hidden">
         <div>
-            123
+            <socialuni-chat-view></socialuni-chat-view>
         </div>
 
         <!--        <div class="w600 h100p bg-white px-sm">
@@ -108,9 +108,10 @@ import YScrollbar from "@/components/YScrollbar.vue";
 import type {SocialuniChatViewServiceRefs} from "socialuni-im-sdk/src/logic/SocialuniChatViewService";
 import SocialuniChatViewService from "socialuni-im-sdk/src/logic/SocialuniChatViewService";
 import SocialuniMsgViewService from "socialuni-im-sdk/src/logic/SocialuniMsgViewService";
+import SocialuniChatView from "socialuni-im-view-h5/src/views/SocialuniChatView.vue";
 
 @Options({
-    components: {YScrollbar}
+    components: {SocialuniChatView}
 })
 export default class ChatView extends Vue {
     viewService = new SocialuniChatViewService()

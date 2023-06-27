@@ -20,6 +20,7 @@
     "socialuni-im-sdk": "../packages/socialuni-im-sdk",
     "socialuni-native-h5": "../packages/socialuni-native-h5",
     "socialuni-user-view-h5": "../packages/socialuni-user/socialuni-user-view-h5",
+    "socialuni-im-view-h5": "../packages/socialuni-im/socialuni-im-view-h5",
     "socialuni-user-api": "../packages/socialuni-user-api",
     "socialuni-user-sdk": "../packages/socialuni-user-sdk",
     "vue": "^3.3.2",
