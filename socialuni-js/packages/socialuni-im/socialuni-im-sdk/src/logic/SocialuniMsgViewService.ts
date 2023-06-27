@@ -17,12 +17,10 @@ import Constants from "socialuni-constant/constant/Constant";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
 
 import {Vue} from "vue-class-component";
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import MessageViewParams from "../model/MessageViewParams";
-import {SocialuniViewServiceInterface} from "socialuni/src/interface/SocialuniViewServiceInterface";
 import {onLoad} from "uniapp-api/src/UniappPageLifecycleHook";
 
-export default class SocialuniMsgViewService extends SocialuniViewService implements SocialuniViewServiceInterface {
+export default class SocialuniMsgViewService extends SocialuniViewService {
     public $refs!: {
         // reportDialog: SocialuniReportDialog;
         messageMoreHandleDialog: any;
