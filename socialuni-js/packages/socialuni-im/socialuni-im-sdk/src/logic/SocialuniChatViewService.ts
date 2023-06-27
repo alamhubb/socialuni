@@ -11,7 +11,7 @@ interface SocialuniChatViewServiceRefs {
 
 export default class SocialuniChatViewService extends SocialuniViewService<SocialuniChatViewServiceRefs> {
 
-    initService(vueInstance: SocialuniChatViewServiceRefs) {
+    initService(vueInstance: Vue) {
         super.initService(vueInstance)
         watch(() => socialuniChatModule.scrollTop, () => {
             console.log('触发了滚动')

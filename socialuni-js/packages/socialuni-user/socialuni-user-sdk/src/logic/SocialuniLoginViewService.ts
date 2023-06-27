@@ -74,6 +74,8 @@ export default class SocialuniLoginViewService extends SocialuniViewService<Soci
         }
 
         this.loginUser.authCode = ''
+        console.log(this.$refs)
+        console.log(this.$refs.authCode)
         this.$refs.authCode.focus()
 
         this.countDown++
