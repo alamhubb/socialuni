@@ -88,7 +88,7 @@
                             type="textarea"
                             placeholder="Please input"
                     />
-                    <el-button @click="msgViewService.sendMsgClick">发送</el-button>
+                    <el-button @click="msgViewService.sendMsgClick()">发送</el-button>
                 </div>
             </div>
 

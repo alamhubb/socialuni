@@ -10,6 +10,6 @@ export default class CommonEventUtil {
 
     static on(name: string, handler: (data: any) => void): void {
         console.log('收到通知：' + name)
-        // this.event.on(name, handler)
+        this.event.on(name, handler)
     }
 }

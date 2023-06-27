@@ -75,7 +75,7 @@
                     type="textarea"
                     placeholder="Please input"
             />
-            <el-button @click="viewService.sendMsgClick">发送</el-button>
+            <el-button @click="viewService.sendMsgClick()">发送</el-button>
         </div>
     </div>
 </template>

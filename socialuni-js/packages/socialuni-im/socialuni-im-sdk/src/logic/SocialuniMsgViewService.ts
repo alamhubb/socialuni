@@ -108,7 +108,6 @@ export default class SocialuniMsgViewService extends SocialuniViewService {
         console.log(123456)
         UserCheckUtil.checkUserBindPhoneNum()
         console.log(123)
-        console.log(this.thisInstance)
         const msgContent = this.msgContent
         console.log(this.msgContent)
         console.log(msgContent)
