@@ -68,7 +68,7 @@ export default class SocialuniMsgViewService extends SocialuniViewService implem
     }
 
     initService(vueInstance: Vue) {
-        this.thisInstance = vueInstance
+        super.initService(vueInstance)
         onMounted(() => {
             socialuniChatModule.scrollTop = 0
         })

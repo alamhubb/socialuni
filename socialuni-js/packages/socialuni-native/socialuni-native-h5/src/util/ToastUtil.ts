@@ -1,44 +1,40 @@
+import { ElMessage } from 'element-plus'
+
 export default class ToastUtil {
-  //交互
-  public static toast (title: string, time?: number) {
-    return new Promise((resolve, reject) => {
-      uni.showToast({
-        icon: 'none',
-        title: title,
-        duration: time || 800,
-        success () {
-          resolve(null)
-        },
-        fail (err) {
-          reject(err)
-        }
-      })
+  static info(message: string) {
+    return ElMessage.info({
+      message, duration: 1500,
+      showClose: true
     })
   }
 
-  public static toastLong (title: string) {
-    return new Promise((resolve, reject) => {
-      uni.showToast({
-        icon: 'none',
-        title: title,
-        duration: 1500,
-        success () {
-          resolve(null)
-        },
-        fail (err) {
-          reject(err)
-        }
-      })
+  static warning(message: string) {
+    return ElMessage.warning({
+      message, duration: 1500,
+      showClose: true
     })
   }
 
-  public static error (title: string) {
-    SocialuniAppUtil.ToastUtil.toast(title)
-    throw new Error(title)
+  static throwError(message: string, duration = 1500) {
+    ElMessage.error({
+      message, duration,
+      showClose: true
+    })
+    throw new Error(message)
   }
 
-  public static throwError (title: string) {
-    SocialuniAppUtil.ToastUtil.toast(title)
-    throw new Error(title)
+  static error(message: string, duration = 1500) {
+    ElMessage.error({
+      message,
+      duration,
+      showClose: true
+    })
+  }
+
+  static success(message: string) {
+    return ElMessage.success({
+      message, duration: 1500,
+      showClose: true
+    })
   }
 }
