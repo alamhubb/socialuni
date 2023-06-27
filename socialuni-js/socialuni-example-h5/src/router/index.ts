@@ -10,12 +10,6 @@ export const constantRoutes = [
     meta: {title: '消息', hidden: true},
   },
   {
-    path: '/login',
-    component: () => import('@/views/login/login.vue'),
-    meta: {title: '登录', hidden: true},
-    hidden: true
-  },
-  {
     path: '/home',
     name: 'home',
     component: HomeView,

@@ -1,101 +1,105 @@
 <template>
-    <main class="h100p overflow-hidden row-all-center">
-        <div class="w600 h100p bg-white px-sm">
+    <div class="flex-row h100p overflow-hidden">
+        <div>
+            123
+        </div>
 
-            <!--        分三块，第一块列表，第二块分类，第三块聊天信息。-->
+        <!--        <div class="w600 h100p bg-white px-sm">
 
-            <!--            <div class="flex-col br">
-                            <div class="pd-sm use-click">测试</div>
+                    &lt;!&ndash;        分三块，第一块列表，第二块分类，第三块聊天信息。&ndash;&gt;
+
+                    &lt;!&ndash;            <div class="flex-col br">
+                                    <div class="pd-sm use-click">测试</div>
+                                </div>&ndash;&gt;
+                    <div class="br">
+                        <div v-for="chat in viewService.chatList" @click="viewService.setChatId(chat)">
+                            {{ chat.nickname }}
                         </div>
-                        <div class="br">
-                            <div v-for="chat in logic.chatList" @click="logic.setChatId(chat)">
-                                &lt;!&ndash;              {{chat.nickname}}&ndash;&gt;
-                                测试
-                            </div>
-                        </div>-->
-            <div class="h100p flex-col">
-                <div ref="messageBox" class="flex-1 overflow-auto">
-                    <div v-if="msgViewService.chat">
-                        <div class="w100p" v-for="msg in viewService.chat.messages" :id="'m'+msg.id" :key="msg.id">
-                            <div v-if="msg.user.isMine" class="flex-row pd-sm">
-                                <div class="flex-1 flex-col mr overflow-hidden">
-                                    <div class="h44px row-end-center mb-xs">
-                                        {{ msg.user.nickname }}
-                                        <!--              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
-                                                            @click="toUserDetailVue(msg.user.id)">
-                                                        {{ msg.user.nickname }}
-                                                      </text>
-                                                      <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
-                                                             src="/static/img/crown.png"
-                                                             @click="toVipVue"></image>-->
-                                    </div>
+                    </div>
+                    <div class="h100p flex-col">
+                        <div ref="messageBox" class="flex-1 overflow-auto">
+                            <div v-if="msgViewService.chat">
+                                <div class="w100p" v-for="msg in viewService.chat.messages" :id="'m'+msg.id" :key="msg.id">
+                                    <div v-if="msg.user.isMine" class="flex-row pd-sm">
+                                        <div class="flex-1 flex-col mr overflow-hidden">
+                                            <div class="h44px row-end-center mb-xs">
+                                                {{ msg.user.nickname }}
+                                                &lt;!&ndash;              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
+                                                                    @click="toUserDetailVue(msg.user.id)">
+                                                                {{ msg.user.nickname }}
+                                                              </text>
+                                                              <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
+                                                                     src="/static/img/crown.png"
+                                                                     @click="toVipVue"></image>&ndash;&gt;
+                                            </div>
 
-                                    <view class="row-end-center" @longpress="msgViewService.openMessageMoreHandleDialog(msg)">
-                                        <!--                                    <q-icon v-if="msg.status === 3" icon="mdi-alert-circle" size="25" class="mb-nm"/>-->
-                                        <!--                                <message-item-content :msg="msg"></message-item-content>-->
+                                            <view class="row-end-center"
+                                                  @longpress="msgViewService.openMessageMoreHandleDialog(msg)">
+                                                &lt;!&ndash;                                    <q-icon v-if="msg.status === 3" icon="mdi-alert-circle" size="25" class="mb-nm"/>&ndash;&gt;
+                                                &lt;!&ndash;                                <message-item-content :msg="msg"></message-item-content>&ndash;&gt;
 
-                                        <div class="pd-xs bg-white bd-radius"> {{ msg.content }}</div>
-                                    </view>
+                                                <div class="pd-xs bg-white bd-radius"> {{ msg.content }}</div>
+                                            </view>
 
-                                    <div class="col-all-center mt-xs">
-                                        <view class="date">
-                                            {{ viewService.formatTime(msg.createTime) }}
-                                        </view>
+                                            <div class="col-all-center mt-xs">
+                                                <view class="date">
+                                                    {{ viewService.formatTime(msg.createTime) }}
+                                                </view>
+                                            </div>
+                                        </div>
+                                        <img class="size50 bd-radius flex-none"
+                                             :src="msg.user.avatar"
+                                             @click="msgViewService.toUserDetailVue(msg.user.id)"
+                                        />
                                     </div>
-                                </div>
-                                <img class="size50 bd-radius flex-none"
-                                     :src="msg.user.avatar"
-                                     @click="msgViewService.toUserDetailVue(msg.user.id)"
-                                />
-                            </div>
-                            <div v-else class="flex-row pd-sm">
-                                <image class="size50 bd-radius flex-none"
-                                       :src="msg.user.avatar"
-                                       @click="msgViewService.toUserDetailVue(msg.user.id)"
-                                />
-                                <div class="flex-1 flex-col mr overflow-hidden">
-                                    <div class="h44px row-col-center mb-xs">
-                                        {{ msg.user.nickname }}
-                                        <!--              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
-                                                            @click="toUserDetailVue(msg.user.id)">
-                                                        {{ msg.user.nickname }}
-                                                      </text>
-                                                      <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
-                                                             src="/static/img/crown.png"
-                                                             @click="toVipVue"></image>-->
-                                    </div>
+                                    <div v-else class="flex-row pd-sm">
+                                        <image class="size50 bd-radius flex-none"
+                                               :src="msg.user.avatar"
+                                               @click="msgViewService.toUserDetailVue(msg.user.id)"
+                                        />
+                                        <div class="flex-1 flex-col mr overflow-hidden">
+                                            <div class="h44px row-col-center mb-xs">
+                                                {{ msg.user.nickname }}
+                                                &lt;!&ndash;              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
+                                                                    @click="toUserDetailVue(msg.user.id)">
+                                                                {{ msg.user.nickname }}
+                                                              </text>
+                                                              <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
+                                                                     src="/static/img/crown.png"
+                                                                     @click="toVipVue"></image>&ndash;&gt;
+                                            </div>
 
-                                    <div class="row-start" @longpress="msgViewService.openMessageMoreHandleDialog(msg)">
-                                        <!--                                    <message-item-content :msg="msg"></message-item-content>-->
-                                        <div class="pd-xs bg-white bd-radius"> {{ msg.content }}</div>
-                                    </div>
-                                    <div class="col-all-center mt-xs">
-                                        <div class="date">
-                                            {{ viewService.formatTime(msg.createTime) }}
+                                            <div class="row-start" @longpress="msgViewService.openMessageMoreHandleDialog(msg)">
+                                                &lt;!&ndash;                                    <message-item-content :msg="msg"></message-item-content>&ndash;&gt;
+                                                <div class="pd-xs bg-white bd-radius"> {{ msg.content }}</div>
+                                            </div>
+                                            <div class="col-all-center mt-xs">
+                                                <div class="date">
+                                                    {{ viewService.formatTime(msg.createTime) }}
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        <div class="flex-row flex-none">
+                            <el-input
+                                    v-model="msgViewService.msgContent"
+                                    :rows="1"
+                                    :autosize="{minRows:1,maxRows:5}"
+                                    type="textarea"
+                                    placeholder="Please input"
+                            />
+                            <el-button @click="msgViewService.sendMsgClick">发送</el-button>
+                        </div>
                     </div>
-                </div>
 
-                <div class="flex-row flex-none">
-                    <el-input
-                            v-model="msgViewService.msgContent"
-                            :rows="1"
-                            :autosize="{minRows:1,maxRows:5}"
-                            type="textarea"
-                            placeholder="Please input"
-                    />
-                    <el-button @click="msgViewService.sendMsgClick">发送</el-button>
-                </div>
-            </div>
-
-            <!--      <div>123</div>
-                  <el-button>123456</el-button>-->
-        </div>
-    </main>
+                    &lt;!&ndash;      <div>123</div>
+                          <el-button>123456</el-button>&ndash;&gt;
+                </div>-->
+    </div>
 </template>
 
 <script lang="ts">
@@ -109,9 +113,7 @@ import SocialuniMsgViewService from "socialuni-im-sdk/src/logic/SocialuniMsgView
     components: {YScrollbar}
 })
 export default class ChatView extends Vue {
-    $refs: SocialuniChatViewServiceRefs
-
-    ViewService = new SocialuniChatViewService()
+    viewService = new SocialuniChatViewService()
     msgViewService = new SocialuniMsgViewService()
 
 }

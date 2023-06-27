@@ -28,7 +28,7 @@
             <div class="row-col-center">
                 <!--                <input id="fileSelector" type="file" @change="uploadData"/>-->
 <!--                <el-button @click="uploadUserAvatarImg">test</el-button>-->
-                <el-avatar v-if="!mineUser" class="use-click" @click="toLogin">登录</el-avatar>
+                <el-avatar size="default" v-if="!mineUser" class="use-click" @click="toLogin">登录</el-avatar>
                 <div v-else class="row-col-center">
                     <el-tag class="mr-10" type="warning" effect="dark">{{ mineUser.nickname }}
                     </el-tag>
@@ -50,7 +50,7 @@
         </el-dropdown>
 
         <s-dialog ref="loginDialog" title="登录" width="400px" no-show-footer>
-            <socialuni-login-view-h5 @login-success="loginSuccess"></socialuni-login-view-h5>
+            <socialuni-login-view @login-success="loginSuccess"></socialuni-login-view>
         </s-dialog>
 
 
