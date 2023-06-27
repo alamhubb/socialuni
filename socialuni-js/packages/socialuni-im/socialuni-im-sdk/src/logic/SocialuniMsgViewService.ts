@@ -22,8 +22,9 @@ import {Vue} from "vue-class-component";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import {onLoad} from "uniapp-api/src/page";
 import MessageViewParams from "../model/MessageViewParams";
+import { SocialuniViewServiceInterface } from "socialuni/src/interface/SocialuniViewServiceInterface";
 
-export default class SocialuniMsgViewService extends SocialuniViewService {
+export default class SocialuniMsgViewService extends SocialuniViewService implements SocialuniViewServiceInterface{
     public $refs!: {
         // reportDialog: SocialuniReportDialog;
         messageMoreHandleDialog: any;
