@@ -58,7 +58,7 @@ export default class SocialuniLoginViewService extends SocialuniViewService<Soci
         }
         this.bindBtnDisabled = true
         SocialuniLoginService.phoneLogin(this.loginUser.phoneNum, this.loginUser.authCode).then(() => {
-            socialuniPluginsModule.router.push({path: '/'})
+            this.instance.$emit('loginSuccess')
         }).finally(() => {
             this.bindBtnDisabled = false
         })
