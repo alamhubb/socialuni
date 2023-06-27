@@ -15,7 +15,7 @@
                         </div>-->
             <div class="h100p flex-col">
                 <div ref="messageBox" class="flex-1 overflow-auto">
-                    <div v-if="viewService.chat">
+                    <div v-if="msgViewService.chat">
                         <div class="w100p" v-for="msg in viewService.chat.messages" :id="'m'+msg.id" :key="msg.id">
                             <div v-if="msg.user.isMine" class="flex-row pd-sm">
                                 <div class="flex-1 flex-col mr overflow-hidden">
@@ -30,7 +30,7 @@
                                                              @click="toVipVue"></image>-->
                                     </div>
 
-                                    <view class="row-end-center" @longpress="openMessageMoreHandleDialog(msg)">
+                                    <view class="row-end-center" @longpress="msgViewService.openMessageMoreHandleDialog(msg)">
                                         <!--                                    <q-icon v-if="msg.status === 3" icon="mdi-alert-circle" size="25" class="mb-nm"/>-->
                                         <!--                                <message-item-content :msg="msg"></message-item-content>-->
 
@@ -45,13 +45,13 @@
                                 </div>
                                 <img class="size50 bd-radius flex-none"
                                      :src="msg.user.avatar"
-                                     @click="toUserDetailVue(msg.user.id)"
+                                     @click="msgViewService.toUserDetailVue(msg.user.id)"
                                 />
                             </div>
                             <div v-else class="flex-row pd-sm">
                                 <image class="size50 bd-radius flex-none"
                                        :src="msg.user.avatar"
-                                       @click="toUserDetailVue(msg.user.id)"
+                                       @click="msgViewService.toUserDetailVue(msg.user.id)"
                                 />
                                 <div class="flex-1 flex-col mr overflow-hidden">
                                     <div class="h44px row-col-center mb-xs">
@@ -65,7 +65,7 @@
                                                              @click="toVipVue"></image>-->
                                     </div>
 
-                                    <div class="row-start" @longpress="openMessageMoreHandleDialog(msg)">
+                                    <div class="row-start" @longpress="msgViewService.openMessageMoreHandleDialog(msg)">
                                         <!--                                    <message-item-content :msg="msg"></message-item-content>-->
                                         <div class="pd-xs bg-white bd-radius"> {{ msg.content }}</div>
                                     </div>
@@ -101,7 +101,8 @@
 <script lang="ts">
 import {Options, Vue} from "vue-property-decorator";
 import YScrollbar from "@/components/YScrollbar.vue";
-import SocialuniChatViewService, {SocialuniChatViewServiceRefs} from "socialuni-im-sdk/src/logic/SocialuniChatViewService";
+import type {SocialuniChatViewServiceRefs} from "socialuni-im-sdk/src/logic/SocialuniChatViewService";
+import SocialuniChatViewService from "socialuni-im-sdk/src/logic/SocialuniChatViewService";
 import SocialuniMsgViewService from "socialuni-im-sdk/src/logic/SocialuniMsgViewService";
 
 @Options({
