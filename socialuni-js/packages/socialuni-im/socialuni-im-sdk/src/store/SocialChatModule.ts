@@ -86,41 +86,6 @@ class SocialChatModule {
     //一，在展示当前chat，2没在，但是列表中有，3列表中没有
     //如果是正在聊的，需要改为，已读，先不做已读未读
 
-    pushChatAndMessagesAction(newChat: SocialuniChatRO) {
-        // console.log('出发了pushchat')
-        // 如果正在这个chat聊天
-        if (RouterUtil.getCurrentPageURI() === ImPagePath.message && this.chatId === newChat.id) {
-            // if (this.chatId === newChat.id) {
-            // 则直接往msg增加消息
-            // 前台将消息改为已读,修改时间使用后台的就行
-            this.readChatAction(newChat.messages)
-            //将新消息放到当前msg中并替换
-            this.pushMsgReplaceChat(this.chatIndex, newChat)
-            this.scrollToMessagePageBottom()
-            // 后台改为已读
-            // 向后台发送消息，将收到的消息改为已读
-            // 如果当前就是这个聊天
-        } else {
-            //将新消息放到当前msg中并替换
-            this.pushMsgReplaceChatByChat(newChat)
-            //不需要吧，后台chat应该计算好当前未读数量
-            /*!// 如果已登录
-            if (UserStore.hasUser() && chat.type !== ChatType.system_group) {
-              chat.unreadNum = newChat.unreadNum
-            } else {
-              chat.unreadNum = chat.unreadNum + 1
-            }*/
-
-            // 不是正在这个chat聊天，但是chats列表中包含这个chat
-            // 如果列表中已经包含次chat
-            // 则找到chat，赋值,加入新message
-            // 在列表中将这个chat放到最前面
-            // 找到需要添加内容的chat
-        }
-        //计算未读数量
-        // this.computedChatsUnreadNumTotalAction()
-    }
-
     //替换chat消息，如果不存在则添加
     pushMsgReplaceChatByChat(chat: SocialuniChatRO) {
         if (chat) {

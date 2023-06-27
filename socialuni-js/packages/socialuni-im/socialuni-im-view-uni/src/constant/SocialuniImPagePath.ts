@@ -1,4 +1,4 @@
-export default class ImPagePath {
+export default class SocialuniImPagePath {
 
     static readonly message: string = '/pagesLazy/im/message'
     static readonly chatView: string = 'pages/chat/chat'

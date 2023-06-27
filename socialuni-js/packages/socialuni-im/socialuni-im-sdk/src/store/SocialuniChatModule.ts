@@ -15,6 +15,7 @@ import {MessageStatus} from "socialuni-constant/constant/openIm/OpenImMessageTyp
 import SocialuniImMineUserDetailRO from "socialuni-im-api/src/model/RO/SocialuniImMineUserDetailRO";
 import SocialuniImUserAPI from "socialuni-im-api/src/api/SocialuniImUserAPI";
 import RouterUtil from "socialuni-native-h5/src/util/RouterUtil";
+import ImPagePath from "../constant/ImPagePath";
 
 class SocialuniChatModule {
     chatId = ''
@@ -189,7 +190,7 @@ class SocialuniChatModule {
     pushChatAndMessagesAction(newChat: SocialuniChatRO) {
         // console.log('出发了pushchat')
         // 如果正在这个chat聊天
-        if (RouterUtil.getCurrentPageURI() === ImPagePath.message && this.chatId === newChat.id) {
+        if (RouterUtil.getCurrentPageURI() === ImPagePath.imPagePath.message && this.chatId === newChat.id) {
             // 则直接往msg增加消息
             // 前台将消息改为已读,修改时间使用后台的就行
             this.readChatAction(newChat.messages)
