@@ -1,6 +1,8 @@
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import CommonEventUtil from "./util/CommonEventUtil";
 import UniappPageLifecycleConst from "./UniappPageLifecycleConst";
+import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
+import {onBeforeMount} from "vue";
 
 
 export async function onLoad(hook: (params: any) => any) {
@@ -13,8 +15,8 @@ export async function onLoad(hook: (params: any) => any) {
             console.log(e)
         }
     } else {
-        CommonEventUtil.on(UniappPageLifecycleConst.onLoad,(params)=>{
-            hook(params)
+        onBeforeMount(()=>{
+            hook(socialuniPluginsModule.route.query)
         })
     }
 }

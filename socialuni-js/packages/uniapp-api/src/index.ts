@@ -6,7 +6,7 @@ const UniappAPI = {
     async install(app: App) {
         const shareComponent = defineComponent({
             created() {
-                CommonEventUtil.emit(UniappPageLifecycleConst.onLoad, this.$route.query)
+                CommonEventUtil.emit(UniappPageLifecycleConst.getOnLoadKey(this.$route), this.$route.query)
             }
         })
         app.mixin(shareComponent)

@@ -1,6 +1,6 @@
 import {reactive, UnwrapNestedRefs} from "vue";
 import {SocialuniPlugin} from "../interface/SocialuniPlugin";
-import {Router, RouteRecord} from "vue-router";
+import {RouteLocationPathRaw, RouteLocationRaw, Router, RouteRecord} from "vue-router";
 
 class SocialuniPluginsModule {
     private _router: Router = null
@@ -8,7 +8,7 @@ class SocialuniPluginsModule {
     private socialuniPlugins: SocialuniPlugin[] = []
 
 
-    get route(): RouteRecord {
+    get route(): RouteLocationPathRaw {
         return this._route;
     }
 

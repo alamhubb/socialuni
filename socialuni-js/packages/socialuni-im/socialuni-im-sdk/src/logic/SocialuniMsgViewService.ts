@@ -76,7 +76,10 @@ export default class SocialuniMsgViewService extends SocialuniViewService implem
             socialuniChatModule.scrollTop = 0
         })
         //TODO 同一会话时，这里要改成onRead，不然需要刷新页面才会触发已读的标志。
+        console.log('触发了回调1111')
         onLoad((params: MessageViewParams) => {
+            console.log('触发了回调2222')
+            console.log(params)
             this.init(params)
         })
     }
