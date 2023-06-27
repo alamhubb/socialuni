@@ -8,7 +8,6 @@ nativeUtil = PlatformAutoLoadUtil.getNativeUtil(modules)
 
 export default class SocialuniStorageUtil {
     static get nativeUtil(): any {
-        console.log(nativeUtil)
         return nativeUtil
     }
 }

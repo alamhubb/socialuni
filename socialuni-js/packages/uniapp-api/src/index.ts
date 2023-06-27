@@ -1,12 +1,12 @@
 import {App, defineComponent} from "vue";
 import CommonEventUtil from "./util/CommonEventUtil";
-import UniappPageLifecycle from "./UniappPage";
+import UniappPageLifecycleConst from "./UniappPageLifecycleConst";
 
 const UniappAPI = {
     async install(app: App) {
         const shareComponent = defineComponent({
-            beforeMount() {
-                CommonEventUtil.emit(UniappPageLifecycle.onLoad)
+            created() {
+                CommonEventUtil.emit(UniappPageLifecycleConst.onLoad, this.$route.query)
             }
         })
         app.mixin(shareComponent)

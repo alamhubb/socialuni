@@ -92,7 +92,6 @@ export default class NavBar extends Vue {
             console.log('接收到了')
             this.toLogin()
         })
-        console.log(3232323)
     }
 
     mounted() {
@@ -169,7 +168,6 @@ export default class NavBar extends Vue {
     }
 
     get mineUser() {
-        console.log(socialuniUserModule.mineUser)
         return socialuniUserModule.mineUser
     }
 }

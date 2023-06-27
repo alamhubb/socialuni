@@ -1,28 +1,24 @@
 import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
 import SocialuniChatRO from "socialuni-api-base/src/model/SocialuniChatRO";
-import UserCheckUtil from "socialuni-user-sdk/src/util/UserCheckUtil";
-import MessageVO from "socialuni-im-api/src/model/RO/MessageVO";
-import MessageAPI from "socialuni-im-api/src/api/MessageAPI";
 import DateUtil from "socialuni-util/src/util/DateUtil";
-import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
-import {MessageStatus} from "socialuni-constant/constant/openIm/OpenImMessageType";
 import {watch} from "vue";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 import SocialuniViewService from "socialuni/src/interface/SocialuniViewService";
+import {Vue} from "vue-class-component";
 
-export interface SocialuniChatViewServiceRefs {
-    messageBox:HTMLDivElement
-}
+export default class SocialuniChatViewService extends SocialuniViewService {
+    $refs!: {
+        messageBox: HTMLDivElement;
+    }
 
-export default class SocialuniChatViewService extends SocialuniViewService{
-    private $refs: SocialuniChatViewServiceRefs = null
-
-    initService(value: SocialuniChatViewServiceRefs) {
-        this.$refs = value;
+    initService(vueInstance: Vue) {
+        super.initService(vueInstance)
         watch(() => socialuniChatModule.scrollTop, () => {
             console.log('触发了滚动')
-            console.log(this.$refs.messageBox)
-            this.$refs.messageBox.scrollTop = socialuniChatModule.scrollTop
+            console.log(this.$refs)
+            if (this.$refs.messageBox) {
+                console.log(this.$refs.messageBox)
+                this.$refs.messageBox.scrollTop = socialuniChatModule.scrollTop
+            }
             // this.scrollTop = -1000
         })
     }

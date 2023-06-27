@@ -112,6 +112,9 @@ import SocialuniChatView from "socialuni-im-view-h5/src/views/SocialuniChatView.
     components: {SocialuniChatView}
 })
 export default class MessageView extends Vue {
+    created(){
+    }
+
     viewService = new SocialuniChatViewService()
     msgViewService = new SocialuniMsgViewService()
 

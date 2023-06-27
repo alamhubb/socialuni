@@ -18,4 +18,3 @@ app.use(Socialuni, {router})
 
 app.mount('#app')
 
-console.log(123)
