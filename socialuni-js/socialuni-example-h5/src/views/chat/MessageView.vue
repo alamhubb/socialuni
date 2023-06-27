@@ -1,6 +1,6 @@
 <template>
     <div class="flex-row h100p overflow-hidden">
-        <div class="w200 bd-radius shadow">
+        <div class="w200 bd-radius shadow flex-row">
             <socialuni-chat-view></socialuni-chat-view>
         </div>
 
@@ -11,11 +11,6 @@
             <!--            <div class="flex-col br">
                             <div class="pd-sm use-click">测试</div>
                         </div>-->
-            <div class="br">
-                <div v-for="chat in viewService.chatList" @click="viewService.setChatId(chat)">
-                    {{ chat.nickname }}
-                </div>
-            </div>
             <div class="h100p flex-col">
                 <div ref="messageBox" class="flex-1 overflow-auto">
                     <div v-if="msgViewService.chat">
