@@ -1,11 +1,10 @@
+import PlatformAutoLoadUtil from "./PlatformAutoLoadUtil";
+
 let nativeUtil
 
-const modules = import.meta.globEager('../../../*/src/util/StorageUtil.ts')
+const modules = import.meta.globEager('../../../socialuni-native-*/src/util/StorageUtil.ts')
 
-for (const path in modules) {
-    const module = modules[path]
-    nativeUtil = module.default
-}
+nativeUtil = PlatformAutoLoadUtil.getNativeUtil(modules)
 
 export default class SocialuniStorageUtil {
     static get nativeUtil(): any {

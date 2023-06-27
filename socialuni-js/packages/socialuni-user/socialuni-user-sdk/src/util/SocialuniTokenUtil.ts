@@ -1,4 +1,3 @@
-import StorageUtil from "socialuni-native-uni/src/util/StorageUtil";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 export default class SocialuniTokenUtil {
