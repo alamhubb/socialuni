@@ -1,10 +1,10 @@
-import PlatformAutoLoadUtil from "./PlatformAutoLoadUtil";
+import PlatformModuleLoadUtil from "./PlatformModuleLoadUtil";
 
 let nativeUtil
 
 const modules = import.meta.globEager('../../../*/src/util/ToastUtil.ts')
 
-nativeUtil = PlatformAutoLoadUtil.getNativeUtil(modules)
+nativeUtil = PlatformModuleLoadUtil.getModule(modules)
 
 export default class SocialuniToastUtil {
   static get nativeUtil(): any {

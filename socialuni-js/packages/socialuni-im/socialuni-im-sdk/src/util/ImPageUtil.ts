@@ -1,10 +1,10 @@
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
-import PlatformAutoLoadUtil from "socialuni-native-util/src/util/PlatformAutoLoadUtil";
 import {SocialuniImPagePathInterface} from "../constant/ImPagePath";
+import PlatformModuleLoadUtil from "socialuni-native-util/src/util/PlatformModuleLoadUtil";
 
 const modules = import.meta.globEager('../../../socialuni-im-*-sdk/src/constant/SocialuniImPagePath.ts')
 
-const imPagePath:SocialuniImPagePathInterface = PlatformAutoLoadUtil.getNativeUtil(modules)
+const imPagePath:SocialuniImPagePathInterface = PlatformModuleLoadUtil.getModule(modules)
 
 console.log(imPagePath)
 export default class ImPageUtil {

@@ -1,7 +1,7 @@
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 
-export default class PlatformAutoLoadUtil {
-    static getNativeUtil(modules) {
+export default class PlatformModuleLoadUtil {
+    static getModule(modules) {
         console.log('isuniap:' + socialuniSystemModule.isUniApp)
         for (const path in modules) {
             if (socialuniSystemModule.isUniApp) {
@@ -16,6 +16,11 @@ export default class PlatformAutoLoadUtil {
                     return module.default
                 }
             }
+        }
+    }
+    static getFirstModule(modules) {
+        for (const path in modules) {
+           return modules[path]
         }
     }
 }

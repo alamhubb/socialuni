@@ -6,7 +6,7 @@ import {SocialuniOption} from "./interface/socialuniOption"
 import SocialuniViewService from "./interface/SocialuniViewService";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import UniappAPI from "uniapp-api/src";
-import PlatformAutoLoadUtil from "socialuni-native-util/src/util/PlatformAutoLoadUtil";
+import PlatformModuleLoadUtil from "socialuni-native-util/src/util/PlatformModuleLoadUtil";
 
 const socialuniInitPlugin: SocialuniPlugin = {
     async onLaunch() {
@@ -65,11 +65,11 @@ const Socialuni = {
         app.use(UniappAPI)
         if (socialuniSystemModule.isUniApp) {
             const modules = import.meta.globEager('../../socialuni-ui/socialuni-ui-uni/src/index.ts')
-            const SocialuniUiUni = PlatformAutoLoadUtil.getNativeUtil(modules)
+            const SocialuniUiUni = PlatformModuleLoadUtil.getModule(modules)
             app.use(SocialuniUiUni)
         } else {
             const modules = import.meta.globEager('../../socialuni-ui/socialuni-ui-h5/src/index.ts')
-            const SocialuniUiH5 = PlatformAutoLoadUtil.getNativeUtil(modules)
+            const SocialuniUiH5 = PlatformModuleLoadUtil.getModule(modules)
             app.use(SocialuniUiH5)
         }
         const shareComponent = defineComponent({
