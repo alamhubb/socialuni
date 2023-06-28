@@ -59,9 +59,7 @@ class SocialuniSystemModule {
 
     constructor() {
         try {
-            console.log('chfjads')
             if (uni) {
-                console.log('chfjads123123')
                 this.isUniApp = true
                 //设置平台
                 // #ifdef APP-PLUS

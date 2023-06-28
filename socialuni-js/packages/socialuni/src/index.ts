@@ -26,13 +26,11 @@ async function installSocialuniPluginIns(app: App) {
     //查询是否包含community模块，如果存在则加载
     const appModules =  import.meta.globEager('../../socialuni-app/socialuni-app-sdk/src/index.ts')
     const socialuniApp = PlatformModuleLoadUtil.getFirstModule(appModules)
-    console.log(socialuniApp)
     if (socialuniApp && socialuniApp.default) {
         app.use(socialuniApp.default)
     }
     const userModules = import.meta.globEager('../../socialuni-user/socialuni-user-sdk/src/index.ts')
     const socialuniUser = PlatformModuleLoadUtil.getFirstModule(userModules)
-    console.log(socialuniUser)
     if (socialuniUser && socialuniUser.default) {
         app.use(socialuniUser.default)
     }

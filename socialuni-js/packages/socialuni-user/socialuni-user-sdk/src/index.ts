@@ -101,7 +101,6 @@ const socialuniUserPlugin: SocialuniPlugin = new SocialuniUserPlugin()
 
 const SocialuniUser = {
     async install(app: App, socialuniOption: SocialuniOption) {
-        console.log('tianjiale use plu')
         socialuniPluginsModule.addPlugin(socialuniUserPlugin)
         CommonEventUtil.on(SocialuniUserEventConst.toLogin, () => {
             UserPageUtil.toMinePage()

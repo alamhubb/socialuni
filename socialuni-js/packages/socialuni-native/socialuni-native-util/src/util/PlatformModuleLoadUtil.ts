@@ -2,12 +2,10 @@ import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemMod
 
 export default class PlatformModuleLoadUtil {
     static getModule(modules) {
-        console.log('isuniap:' + socialuniSystemModule.isUniApp)
         for (const path in modules) {
             if (socialuniSystemModule.isUniApp) {
                 if (path.includes('-uni')) {
                     const module = modules[path]
-                    console.log(path)
                     return module.default
                 }
             } else {

@@ -308,7 +308,6 @@ export default class MineView extends Vue {
     }
 
     get contactUsUrl(): string {
-        console.log(SkipUrlConst.contactUsUrl())
         return SkipUrlConst.contactUsUrl()
     }
 

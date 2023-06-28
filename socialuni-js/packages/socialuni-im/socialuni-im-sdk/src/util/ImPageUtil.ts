@@ -6,11 +6,9 @@ const modules = import.meta.globEager('../../../socialuni-im-*-sdk/src/constant/
 
 const imPagePath:SocialuniImPagePathInterface = PlatformModuleLoadUtil.getModule(modules)
 
-console.log(imPagePath)
 export default class ImPageUtil {
 
     static toMessagePageByChatId(receiveId: string) {
-        console.log(imPagePath)
         SocialuniAppUtil.RouterUtil.navigateTo(imPagePath.message + '?chatId=' + receiveId)
     }
 
