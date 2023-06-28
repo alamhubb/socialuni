@@ -1,6 +1,6 @@
 import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
 
-export default class RouterUtil{
+export default class RouterUtil {
     /**
      * 保留当前页面，跳转到应用内的某个页面，使用uni.navigateBack可以返回到原页面。
      * @param pagePath
@@ -51,7 +51,7 @@ export default class RouterUtil{
     }
 
     static getCurrentPageURI(): string {
-        return '/' + getCurrentPages()[getCurrentPages().length - 1].route
+        return socialuniPluginsModule.route.path
     }
 
     static getCurrentPage(): any {

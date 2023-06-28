@@ -5,6 +5,8 @@ import {App, defineComponent, onErrorCaptured} from "vue";
 import {SocialuniOption} from "socialuni/src/interface/socialuniOption";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
+import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 class SocialuniAppPlugin implements SocialuniPlugin {
     onLaunch() {
@@ -12,7 +14,7 @@ class SocialuniAppPlugin implements SocialuniPlugin {
         socialuniConfigModule.getAppConfigAction()
     }
 
-    onResponseErrorInterceptors(res){
+    onResponseErrorInterceptors(res) {
     }
 }
 
@@ -20,19 +22,10 @@ const socialuniAppPlugin: SocialuniPlugin = new SocialuniAppPlugin()
 
 const SocialuniApp = {
     async install(app: App, socialuniOption: SocialuniOption) {
-        /*onErrorCaptured((...args)=>{
-            console.log(111111)
-            console.log(args)
-        })*/
-
-
-        /*app.config.errorHandler = (err, instance, info) => {
+        app.config.errorHandler = (e: Error, instance, info) => {
             // 处理错误，例如：报告给一个服务
-            console.log(222222222)
-            console.log(err)
-            console.log(info)
-            console.log(info)
-        }*/
+            SocialuniAppAPI.sendErrorLogAPI('front page error', SocialuniAppUtil.RouterUtil.getCurrentPageURI(), e.message)
+        }
         if (socialuniSystemModule.isUniApp) {
             import.meta.globEager('../../socialuni-app-view-uni/src/styles/index.scss')
         } else {
