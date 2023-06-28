@@ -1,9 +1,13 @@
-import {Vue} from "vue-class-component";
+import {Vue, VueBase} from "vue-class-component";
 import {SocialuniViewServiceInterface} from "./SocialuniViewServiceInterface";
 
-export default abstract class SocialuniViewService<T> implements SocialuniViewServiceInterface{
+export default abstract class SocialuniViewService<T> implements SocialuniViewServiceInterface {
     //存储实例，因为初始时还没有$refs
     instance: Vue = null
+
+    created?()
+
+    mounted?()
 
     initService(instance: Vue) {
         this.instance = instance
@@ -12,4 +16,5 @@ export default abstract class SocialuniViewService<T> implements SocialuniViewSe
     get $refs(): T {
         return this.instance.$refs as T
     }
+
 }

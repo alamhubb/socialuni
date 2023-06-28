@@ -7,6 +7,7 @@ import SocialuniViewService from "./interface/SocialuniViewService";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import UniappAPI from "uniapp-api/src";
 import PlatformModuleLoadUtil from "socialuni-native-util/src/util/PlatformModuleLoadUtil";
+import {VueBase} from "vue-class-component";
 
 const socialuniInitPlugin: SocialuniPlugin = {
     async onLaunch() {
@@ -24,7 +25,7 @@ const socialuniInitPlugin: SocialuniPlugin = {
 async function installSocialuniPluginIns(app: App) {
     socialuniPluginsModule.addPlugin(socialuniInitPlugin)
     //查询是否包含community模块，如果存在则加载
-    const appModules =  import.meta.globEager('../../socialuni-app/socialuni-app-sdk/src/index.ts')
+    const appModules = import.meta.globEager('../../socialuni-app/socialuni-app-sdk/src/index.ts')
     const socialuniApp = PlatformModuleLoadUtil.getFirstModule(appModules)
     if (socialuniApp && socialuniApp.default) {
         app.use(socialuniApp.default)
@@ -67,6 +68,7 @@ const Socialuni = {
             const SocialuniUiH5 = PlatformModuleLoadUtil.getModule(modules)
             app.use(SocialuniUiH5)
         }
+        console.log(456)
         const shareComponent = defineComponent({
             onShareAppMessage() {
                 const title = '年轻人生活分享社区'
@@ -83,9 +85,20 @@ const Socialuni = {
                 socialuniPluginsModule.setRoute(this.$route)
                 const data = this
                 for (const key in data) {
-                    const socialuniViewServiceObj: SocialuniViewService = data[key]
+                    const socialuniViewServiceObj: SocialuniViewService<any> = data[key]
                     if (socialuniViewServiceObj instanceof SocialuniViewService) {
+                        console.log(123)
                         socialuniViewServiceObj.initService(this)
+                        socialuniViewServiceObj.created?.()
+                    }
+                }
+            },
+            mounted() {
+                const data = this
+                for (const key in data) {
+                    const socialuniViewServiceObj: SocialuniViewService<any> = data[key]
+                    if (socialuniViewServiceObj instanceof SocialuniViewService) {
+                        socialuniViewServiceObj.mounted?.()
                     }
                 }
             }
