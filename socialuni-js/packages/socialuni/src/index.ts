@@ -68,7 +68,6 @@ const Socialuni = {
             const SocialuniUiH5 = PlatformModuleLoadUtil.getModule(modules)
             app.use(SocialuniUiH5)
         }
-        console.log(456)
         const shareComponent = defineComponent({
             onShareAppMessage() {
                 const title = '年轻人生活分享社区'
@@ -87,7 +86,6 @@ const Socialuni = {
                 for (const key in data) {
                     const socialuniViewServiceObj: SocialuniViewService<any> = data[key]
                     if (socialuniViewServiceObj instanceof SocialuniViewService) {
-                        console.log(123)
                         socialuniViewServiceObj.initService(this)
                         socialuniViewServiceObj.created?.()
                     }
