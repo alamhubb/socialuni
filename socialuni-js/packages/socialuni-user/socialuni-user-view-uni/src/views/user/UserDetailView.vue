@@ -308,10 +308,6 @@ export default class UserDetailView extends Vue {
 
   talks: TalkVO[] = []
 
-  get followStatus() {
-    return FollowStatus.getFollowStatus(this.user)
-  }
-
   async toMessagePage() {
     //无论什么情况都可以进入消息页面，比如要查看两个人的历史聊天消息呢
     socialChatModule.setChatIdToMessagePage(this.user.id)
@@ -380,11 +376,6 @@ export default class UserDetailView extends Vue {
     await SocialuniFriendAPI.addFriend(new FriendAddQO(this.user.id, this.applyUserFriendContent, SocialuniAddFriendType.apply))
     // await (await socialChatModule.openIm()).addFriend(options)
     SocialuniAppUtil.ToastUtil.toastLong('添加好友申请发送成功，请耐心等待对方回复')
-  }
-
-  get isMine(): boolean {
-    // 两个都有值，且两个都相等，才为自己
-    return this.user.isMine
   }
 
   get talkIds() {

@@ -8,6 +8,7 @@ export default class FollowStatus {
     static readonly eachFollow: string = '互相关注'
 
     static getFollowStatus(user: SocialUserContentRO) {
+        console.log(user)
         if (user.hasFollowed && user.hasBeFollowed) {
             return FollowStatus.eachFollow
         } else if (user.hasFollowed) {
