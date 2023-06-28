@@ -1,3 +1,5 @@
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+
 export default class ToastUtil {
   //交互
   public static toast (title: string, time?: number) {

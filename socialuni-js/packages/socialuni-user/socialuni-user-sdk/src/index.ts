@@ -103,13 +103,13 @@ const SocialuniUser = {
     async install(app: App, socialuniOption: SocialuniOption) {
         console.log('tianjiale use plu')
         socialuniPluginsModule.addPlugin(socialuniUserPlugin)
+        CommonEventUtil.on(SocialuniUserEventConst.toLogin, () => {
+            UserPageUtil.toMinePage()
+        })
 
         if (socialuniSystemModule.isUniApp) {
             const shareComponent = defineComponent({
                 created() {
-                    CommonEventUtil.on(SocialuniUserEventConst.toLogin, () => {
-                        UserPageUtil.toMinePage()
-                    })
                 }
             })
             app.mixin(shareComponent)

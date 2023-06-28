@@ -5,6 +5,7 @@
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
 import MineView from "socialuni-user-view-uni/src/views/user/MineView.vue";
+import {onLaunch} from "@dcloudio/uni-app";
 
 @Options({
   components: {
@@ -12,5 +13,8 @@ import MineView from "socialuni-user-view-uni/src/views/user/MineView.vue";
   }
 })
 export default class MinePage extends Vue {
+
+    created(){
+    }
 }
 </script>
