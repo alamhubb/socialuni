@@ -382,7 +382,6 @@ export default class MineView extends Vue {
     }
 
     toEditUserInfo() {
-        // SocialuniAppUtil.ToastUtil.throwError('afsdf')
         UserPageUtil.toEditMineInfo()
     }
 
