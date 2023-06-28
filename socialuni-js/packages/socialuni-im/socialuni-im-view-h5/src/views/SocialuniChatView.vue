@@ -110,7 +110,7 @@
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
 import SScrollbar from "socialuni-ui-h5/src/components/SScrollbar.vue";
-import SocialuniChatViewServiceH5 from "../logic/SocialuniChatViewServiceH5";
+import SocialuniChatViewServiceH5 from "socialuni-im-h5-sdk/src/logic/SocialuniChatViewServiceH5";
 
 @Options({components: {SScrollbar}})
 export default class SocialuniChatView extends Vue {
