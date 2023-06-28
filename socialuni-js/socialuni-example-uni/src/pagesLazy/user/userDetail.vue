@@ -1,18 +1,15 @@
 <template>
-  <view class="bg-default">
-    <user-detail-view ref="userDetail"></user-detail-view>
-<!--    <msg-input v-if="showMsgInput">
-    </msg-input>-->
-  </view>
+    <view class="bg-default">
+        <socialuni-community-user-detail-view ref="userDetail">
+
+        </socialuni-community-user-detail-view>
+        <!--    <msg-input v-if="showMsgInput">
+            </msg-input>-->
+    </view>
 </template>
 
-<script lang="ts">
-import {Options, Vue} from 'vue-property-decorator'
-import UserDetailView from "socialuni-user-view-uni/src/views/user/UserDetailView.vue";
+<script setup lang="ts">
+import SocialuniCommunityUserDetailView
+    from "socialuni-community-view-uni/src/views/user/SocialuniCommunityUserDetailView.vue";
 
-@Options({
-  components: {UserDetailView}
-})
-export default class UserDetailPage extends Vue {
-}
 </script>
