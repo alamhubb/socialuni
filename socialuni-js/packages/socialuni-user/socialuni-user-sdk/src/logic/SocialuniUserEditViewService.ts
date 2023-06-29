@@ -17,8 +17,6 @@ import SocialuniViewService from "socialuni/src/interface/SocialuniViewService";
 import {ComponentInternalInstance} from "@vue/runtime-core";
 import {reactive, watch} from "vue";
 import {SDialog} from "socialuni-ui-types/src/types/SocialuniUiTypes";
-import {Emit, Watch} from "vue-property-decorator";
-import UserEditVO from "socialuni-api-base/src/model/user/UserEditVO";
 import UserPageUtil from "../util/UserPageUtil";
 
 interface SocialuniUserEditViewServiceRefs {

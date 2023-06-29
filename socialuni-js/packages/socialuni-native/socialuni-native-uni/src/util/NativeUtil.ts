@@ -132,11 +132,11 @@ export default class NativeUtil {
     }
 
     public static showLoading(loadText: string) {
-        // uni.showLoading({title: loadText || ''})
+        uni.showLoading({title: loadText || ''})
     }
 
     public static hideLoading() {
-        // uni.hideLoading()
+        uni.hideLoading()
     }
 
     public static actionSheet(itemList: string[]): Promise<any> {
