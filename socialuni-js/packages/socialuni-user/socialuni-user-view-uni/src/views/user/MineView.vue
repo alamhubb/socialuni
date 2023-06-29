@@ -124,7 +124,7 @@
                         </div>-->
             </div>
 
-            <div v-if="!isIos"
+            <div v-if="!isIosAndMpQQ"
                  class="row-between-center use-click bg-white px-sm py-sm bd-radius-10 elevation-4 mx-sm mt-smm"
                  @click="toCoinPage">
                 <div class="row-col-center">
@@ -254,8 +254,8 @@ export default class MineView extends Vue {
         return socialuniUserModule.mineUser
     }
 
-    get isIos() {
-        return socialuniSystemModule.isIos
+    get isIosAndMpQQ() {
+        return socialuniSystemModule.isIosAndMpQQ
     }
 
     SocialuniFollowType = SocialuniFollowType
