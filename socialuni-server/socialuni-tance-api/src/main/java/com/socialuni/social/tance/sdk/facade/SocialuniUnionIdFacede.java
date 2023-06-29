@@ -93,6 +93,18 @@ public class SocialuniUnionIdFacede {
         return uniContentUnionIdDO;
     }
 
+    public static SocialuniUnionIdModler getUnionDOByUnionIdAllowNull(Integer unionId) {
+        if (unionId == null) {
+            return null;
+        }
+        SocialuniUnionIdModler uniContentUnionIdDO = socialuniUnionIdApi.findById(unionId);
+        if (uniContentUnionIdDO == null) {
+            return null;
+        }
+        return uniContentUnionIdDO;
+    }
+
+
     public static String createUnionIdByUuid(String contentType, String uuid) {
         if (StringUtils.isEmpty(uuid)) {
             throw new SocialParamsException("无效的内容标识3");

@@ -31,7 +31,10 @@ public class SocialuniCommentDOUtil {
     }
 
     public static SocialuniCommentDO getAllowNull(Integer unionId) {
-        SocialuniUnionIdModler uniContentUnionIdDO = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(unionId);
+        SocialuniUnionIdModler uniContentUnionIdDO = SocialuniUnionIdFacede.getUnionDOByUnionIdAllowNull(unionId);
+        if (uniContentUnionIdDO == null) {
+            return null;
+        }
         SocialuniCommentDO commentDO = commentApi.findOneByUnionId(unionId);
         if (commentDO == null) {
             if (Objects.equals(DevAccountFacade.getDevIdNotNull(), uniContentUnionIdDO.getFromDevId())) {
@@ -42,7 +45,7 @@ public class SocialuniCommentDOUtil {
     }
 
 
-    public static List<?  extends SocialuniCommentDO> getAll(Integer talkId) {
+    public static List<? extends SocialuniCommentDO> getAll(Integer talkId) {
         return commentApi.findTop50ByTalkIdAndStatusInAndParentCommentIdIsNullOrderByUpdateTimeDesc(talkId, ContentStatus.selfCanSeeContentStatus);
     }
 }

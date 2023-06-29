@@ -1,11 +1,13 @@
 package com.socialuni.social.sdk.dao.store;
 
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniCommentDO;
 import com.socialuni.social.community.sdk.repository.CommentRepository;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniCommentDOUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.logic.factory.CommentFactory;
 import com.socialuni.social.sdk.model.QO.comment.SocialuniCommentPostQO;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -59,17 +61,24 @@ public class CommentStore {
         //只有直接回复父评论，才更新时间
         parentComment.setUpdateTime(curDate);
 
-        if (addVO.getCommentId() != null) {
-            Integer replyId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(addVO.getReplyCommentId());
+        String replyIdStr = addVO.getReplyCommentId();
+        if (!StringUtils.isEmpty(replyIdStr)){
 
-            SocialuniCommentDO replyComment = SocialuniCommentDOUtil.getAllowNull(replyId);
-            if (replyComment != null) {
-                //测试所有自己评论自己，刚才处空指针了
-                replyComment.setUpdateTime(curDate);
-                //更新后保存到数据库
-                commentApi.savePut(replyComment);
+            Integer replyId = SocialuniUnionIdFacede.getUnionIdByUuidAllowNull(addVO.getReplyCommentId());
+
+            if (replyId != null) {
+                SocialuniCommentDO replyComment = SocialuniCommentDOUtil.getAllowNull(replyId);
+                if (replyComment != null) {
+                    //测试所有自己评论自己，刚才处空指针了
+                    replyComment.setUpdateTime(curDate);
+                    //更新后保存到数据库
+                    commentApi.savePut(replyComment);
+                }
             }
         }
+
+
+
         //更新后保存到数据库
         commentApi.savePut(parentComment);
     }
