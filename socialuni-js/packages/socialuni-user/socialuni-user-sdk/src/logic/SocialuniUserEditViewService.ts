@@ -38,6 +38,7 @@ class SocialuniUserEditViewService extends SocialuniViewService<SocialuniUserEdi
 
     initService(instance: ComponentInternalInstance) {
         super.initService(instance);
+        this.initData()
         watch(() => this.mineUser, () => {
             this.initData()
         })
