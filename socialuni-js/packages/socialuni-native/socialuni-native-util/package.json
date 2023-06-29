@@ -8,7 +8,8 @@
   "dependencies": {
     "socialuni-constant": "^0.1.2",
     "socialuni-util": "^0.1.2",
-    "cos-js-sdk-v5": "^1.2.18"
+    "cos-js-sdk-v5": "^1.2.18",
+    "@dcloudio/uni-app": "3.0.0-alpha-3070620230227001"
   },
   "devDependencies": {
     "typescript": "^4.7.4",

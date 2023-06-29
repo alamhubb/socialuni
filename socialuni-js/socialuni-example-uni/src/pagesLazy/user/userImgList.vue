@@ -20,19 +20,16 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import UserSchoolEditDialog from "socialuni-view/src/views/user/UserSchoolEditDialog";
-import SocialuniReportDialog from "socialuni-view/src/components/SocialuniReportDialog";
-import {socialUserModule} from 'socialuni-sdk/src/store/store';
-import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
-import ImgFileVO from "socialuni-api/src/model/ImgFileVO";
-import ImgUtil from "socialuni-sdk/src/utils/ImgUtil";
-import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
-import HintMsg from "socialuni-constant/constant/HintMsg";
-import SocialuniMineUserAPI from "socialuni-api/src/api/socialuni/SocialuniMineUserAPI";
-import SocialuniAppUtil from "socialuni-sdk/src/utils/UniUtil";
-import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
+import SocialuniReportDialog from "socialuni-user-view-uni/src/components/SocialuniReportDialog.vue";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
+import ImgFileVO from "socialuni-api-base/src/model/ImgFileVO";
+import SocialuniImgUtil from "socialuni-user-sdk/src/util/SocialuniImgUtil";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import AppMsg from "socialuni-constant/constant/AppMsg";
+import SocialuniUserAPI from "socialuni-user-api/src/api/SocialuniUserAPI";
+import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
-import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
 
 @Options({
   components: {SocialuniReportDialog}
@@ -40,7 +37,6 @@ import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
 export default class UserImgList extends Vue {
   $refs!: {
     reportDialog: SocialuniReportDialog;
-    schoolEditDialog: UserSchoolEditDialog;
   }
 
   get mineUser() {
@@ -58,16 +54,21 @@ export default class UserImgList extends Vue {
 
   get imgUrls() {
     if (this.imgs) {
-      return this.imgs.map(item => ImgUtil.getUserLargeImgUrl(item.src))
+      return this.imgs.map(item => SocialuniImgUtil.getUserLargeImgUrl(item.src))
     } else {
       return []
     }
   }
 
+  onShow(){
+      console.log(123123)
+  }
+
   onLoad(params) {
+      console.log(123)
     const userId = params.userId
     if (!userId) {
-      SocialuniAppUtil.ToastUtil.error('系统错误' + HintMsg.contactServiceMsg)
+      SocialuniAppUtil.ToastUtil.error('系统错误' + AppMsg.contactServiceMsg)
     }
     // 这里有问题，有时候直接进入页面没有userId
     SocialuniUserAPI.queryUserDetailAPI(userId).then((res: any) => {

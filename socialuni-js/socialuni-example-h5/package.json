@@ -16,7 +16,6 @@
     "mitt": "^3.0.0",
     "socialuni": "../packages/socialuni",
     "socialuni-app-view-h5": "../packages/socialuni-app-view-h5",
-    "socialuni-im-api": "../packages/socialuni-im-api",
     "socialuni-im-sdk": "../packages/socialuni-im-sdk",
     "socialuni-native-h5": "../packages/socialuni-native-h5",
     "socialuni-user-view-h5": "../packages/socialuni-user/socialuni-user-view-h5",

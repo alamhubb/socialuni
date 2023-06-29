@@ -2,6 +2,8 @@ import JsonUtils from 'socialuni-util/src/util/ObjectUtil'
 import CommonUtil from 'socialuni-util/src/util/CommonUtil'
 import ErrorConst from "socialuni-constant/constant/ErrorConst";
 import {socialuniUserModule} from "socialuni-sdk/src/store/store";
+import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
+import ImgUtil from "socialuni-util/src/util/ImgUtil";
 
 export default class SocialuniImgUtil {
     // static readonly imgUrl: string = process.env.VUE_APP_BASE + 'img/'
@@ -80,19 +82,19 @@ export default class SocialuniImgUtil {
     }
 
     static getTalkUploadFormat(userId: string, filePath: string): string {
-        return 'user/' + userId + '/home/normal/' + CommonUtil.getUUID() + ImgUtil.getFileSuffixName(filePath)
+        return 'user/' + userId + '/home/normal/' + UUIDUtil.getUUID() + ImgUtil.getFileSuffixName(filePath)
     }
 
     static getUserAvatarUploadFormat(userId: string, filePath: string): string {
-        return 'user/' + userId + '/avatar/' + CommonUtil.getUUID() + ImgUtil.getFileSuffixName(filePath)
+        return 'user/' + userId + '/avatar/' + UUIDUtil.getUUID() + ImgUtil.getFileSuffixName(filePath)
     }
 
     static getUserImgUploadFormat(userId: string, filePath: string): string {
-        return 'user/' + userId + '/img/' + CommonUtil.getUUID() + ImgUtil.getFileSuffixName(filePath)
+        return 'user/' + userId + '/img/' + UUIDUtil.getUUID() + ImgUtil.getFileSuffixName(filePath)
     }
 
     static getUserIdentityUploadFormat(userId: string, filePath: string): string {
-        return 'user/' + userId + '/identity/' + CommonUtil.getUUID() + ImgUtil.getFileSuffixName(filePath)
+        return 'user/' + userId + '/identity/' + UUIDUtil.getUUID() + ImgUtil.getFileSuffixName(filePath)
     }
 
 
