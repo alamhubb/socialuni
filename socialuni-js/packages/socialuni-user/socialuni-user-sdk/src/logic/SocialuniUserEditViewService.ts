@@ -35,6 +35,8 @@ class SocialuniUserEditViewService extends SocialuniViewService<SocialuniUserEdi
     endDate = ''
     btnDisabled = false
     genders: EnumStrVO [] = GenderType.userEditEnums
+    appGenderType = GenderType.all
+    GenderTypeAll = GenderType.all
 
     initService(instance: ComponentInternalInstance) {
         super.initService(instance);
@@ -61,31 +63,7 @@ class SocialuniUserEditViewService extends SocialuniViewService<SocialuniUserEdi
     }
 
 
-    async confirmEditUser() {
-        console.log(123)
-        if (this.editUser.birthday && this.editUser.birthday.length > 4) {
-            const age = BirthAgeUtil.getAgeByBirth(this.editUser.birthday)
-            if (age < 18) {
-                return SocialuniAppUtil.ToastUtil.throwError('年龄不能小于18岁')
-            }
-        }
-        //修改了性别
-        if (this.mineUser.gender !== this.editUser.gender) {
-            await SocialuniAppUtil.AlertUtil.confirm('性别修改后不可再更改，请确认是否修改').catch(() => {
-                return SocialuniAppUtil.ToastUtil.info('您选择了不修改性别')
-            })
-        } else {
-            await SocialuniAppUtil.AlertUtil.confirm('是否确定修改个人信息')
-        }
-        await SocialuniMineUserAPI.editUserAPI(this.editUser).then((res: any) => {
-            socialuniUserModule.setUser(res.data)
-            SocialuniAppUtil.ToastUtil.success('编辑成功')
-            this.closeUserEditPop()
-        })
-    }
-
     async uploadData(e: any) {
-
         const file = e.target.files[0]
         console.log(e)
         console.log(e.target)
@@ -137,79 +115,44 @@ class SocialuniUserEditViewService extends SocialuniViewService<SocialuniUserEdi
         emits('close')
     }
 
-
-
     async saveUser() {
-        if (this.contactAccount) {
-            if (this.contactAccount.length > 30) {
-                SocialuniAppUtil.AlertUtil.hint('联系方式不能超过30个字符，例如：vx:491369310')
-                return
-            } else if (this.contactAccount.length < 5) {
-                SocialuniAppUtil.AlertUtil.hint('联系方式必须大于4个字符，例如：vx:491369310')
-                return
-            }
-        }
-
-        //修改了性别
-        if (this.mineUser.gender !== this.gender) {
-            const confirm = await SocialuniAppUtil.AlertUtil.confirm('性别修改后不可再更改，请确认是否修改')
-            if (!confirm) {
-                return SocialuniAppUtil.ToastUtil.toastLong('您选择了不修改性别')
-            }
-        }
-
-        if (this.birthday && this.birthday.length > 4) {
-            const age = BirthAgeUtil.getAgeByBirth(this.birthday)
+        if (this.editUser.birthday && this.editUser.birthday.length > 4) {
+            const age = BirthAgeUtil.getAgeByBirth(this.editUser.birthday)
             if (age < 18) {
-                return SocialuniAppUtil.AlertUtil.hint('年龄不能小于18岁')
+                return SocialuniAppUtil.ToastUtil.throwError('年龄不能小于18岁')
             }
+        }
+        //修改了性别
+        if (this.mineUser.gender !== this.editUser.gender) {
+            await SocialuniAppUtil.AlertUtil.confirm('性别修改后不可再更改，请确认是否修改').catch(() => {
+                return SocialuniAppUtil.ToastUtil.info('您选择了不修改性别')
+            })
+        } else {
+            await SocialuniAppUtil.AlertUtil.confirm('是否确定修改个人信息')
         }
         this.btnDisabled = true
-        SocialuniAppUtil.AlertUtil.confirm('是否确定修改个人信息').then(() => {
-            const userCopy: UserEditVO = ObjectUtil.deepClone(this.mineUser) as any
-            userCopy.nickname = this.nickname
-            userCopy.gender = this.gender
-            userCopy.birthday = this.birthday
-            userCopy.city = this.city
-            userCopy.contactAccount = this.contactAccount
-            userCopy.wxAccount = this.wxAccount
-            userCopy.qqAccount = this.qqAccount
-            userCopy.wbAccount = this.wbAccount
-            SocialuniAppUtil.UniUtil.showLoading('保存中')
-            SocialuniMineUserAPI.editUserAPI(userCopy).then((res: any) => {
-                socialuniUserModule.setUser(res.data)
-                SocialuniAppUtil.ToastUtil.toast('已修改')
-                this.closeUserEditPop()
-            }).finally(() => {
-                this.btnDisabled = false
-                SocialuniAppUtil.UniUtil.hideLoading()
-            })
-        }).catch(() => {
+        SocialuniAppUtil.UniUtil.showLoading('保存中')
+        SocialuniMineUserAPI.editUserAPI(this.editUser).then((res: any) => {
+            socialuniUserModule.setUser(res.data)
+            SocialuniAppUtil.ToastUtil.success('编辑成功')
             this.closeUserEditPop()
+        }).finally(() => {
             this.btnDisabled = false
+            SocialuniAppUtil.UniUtil.hideLoading()
         })
     }
 
     dateChange({detail}) {
-        this.birthday = detail.value
+        this.editUser.birthday = detail.value
     }
 
     genderChange({detail}) {
-        this.gender = detail.value
+        this.editUser.gender = detail.value
     }
 
     goBack() {
         UserPageUtil.goBackOrMine()
     }
-
-
-    get user() {
-        return socialuniUserModule.mineUser
-    }
-
-
-    appGenderType = GenderType.all
-    GenderTypeAll = GenderType.all
 
 }
 
