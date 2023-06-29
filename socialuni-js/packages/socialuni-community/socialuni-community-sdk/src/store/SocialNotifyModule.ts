@@ -7,7 +7,7 @@ import NotifyAPI from "socialuni-community-api/src/api/NotifyAPI";
 
 
 class SocialNotifyModule {
-    private notifies: UnreadNotifyVO [] = []
+    notifies: UnreadNotifyVO [] = []
 
     clearNotifies() {
         this.notifies = []

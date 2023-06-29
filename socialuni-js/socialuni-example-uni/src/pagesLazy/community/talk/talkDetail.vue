@@ -45,18 +45,16 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import QIcon from 'socialuni-view/src/components/QIcon/QIcon.vue'
-import MsgInput from 'socialuni-view/src/components/MsgInput.vue'
-import TalkItem from 'socialuni-view/src/views/talk/talkItem/TalkItem.vue'
-import TalkOperate from 'socialuni-view/src/views/talk/talkOperate.vue'
-import TalkVO from 'socialuni-api/src/model/home/TalkVO'
-import RouterUtil from 'socialuni-sdk/src/utils/RouterUtil'
-import PageUtil from 'socialuni-sdk/src/utils/PageUtil'
-import SocialuniTalkAPI from 'socialuni-api/src/api/socialuni/SocialuniTalkAPI'
-import QNavbar from 'socialuni-view/src/components/QNavbar/QNavbar.vue'
-import SocialuniAppUtil from 'socialuni-sdk/src/utils/UniUtil'
-import {socialConfigModule} from 'socialuni-sdk/src/store/store'
 import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
+import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
+import QNavbar from "socialuni-ui-uni/src/components/QNavbar/QNavbar.vue";
+import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
+import MsgInput from "socialuni-community-view-uni/src/components/MsgInput.vue";
+import TalkItem from "socialuni-community-view-uni/src/components/talkItem/TalkItem.vue";
+import TalkOperate from "socialuni-community-view-uni/src/views/talk/talkOperate.vue";
+import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
 
 @Options({
   components: {
@@ -72,7 +70,7 @@ export default class TalkDetail extends Vue {
   showMsgInput = false
 
   get appConfig() {
-    return socialConfigModule.appConfig
+    return socialuniConfigModule.appConfig
   }
 
   created() {
@@ -88,15 +86,15 @@ export default class TalkDetail extends Vue {
 
 
   deleteTalk() {
-    PageUtil.goBackOrHome()
+    SocialuniAppUtil.RouterUtil.goBackOrHome()
   }
 
   goHome() {
-    PageUtil.goHome()
+      SocialuniAppUtil.RouterUtil.goHome()
   }
 
   goBack() {
-    PageUtil.goBackOrHome()
+      SocialuniAppUtil.RouterUtil.goBackOrHome()
   }
 
   onShow() {

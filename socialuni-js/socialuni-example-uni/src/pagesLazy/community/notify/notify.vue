@@ -38,10 +38,10 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import ImgUtil from 'socialuni-sdk/src/utils/ImgUtil'
-import {socialNotifyModule} from "socialuni-sdk/src/store/store";
-import DateUtil from "socialuni-sdk/src/utils/DateUtil";
-import PageUtil from "socialuni-sdk/src/utils/PageUtil";
+import {socialNotifyModule} from "socialuni-community-sdk/src/store/SocialNotifyModule";
+import DateUtil from "socialuni-util/src/util/DateUtil";
+import CommunityPageUtil from "socialuni-community-sdk/src/util/CommunityPageUtil";
+import SocialuniImgUtil from "socialuni-user-sdk/src/util/SocialuniImgUtil";
 
 
 /**
@@ -60,12 +60,12 @@ export default class NotifyPage extends Vue {
   }
 
   toTalkDetailVue(talkId: string) {
-    PageUtil.toTalkDetail(talkId)
+    CommunityPageUtil.toTalkDetail(talkId)
 
   }
 
   getTalkSmallImgUrl(userId: string, src: string) {
-    return ImgUtil.getTalkSmallImgUrl(userId, src)
+    return SocialuniImgUtil.getTalkSmallImgUrl(userId, src)
   }
 }
 </script>

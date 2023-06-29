@@ -78,15 +78,13 @@
 import {Vue, Options, Prop, Emit} from 'vue-property-decorator'
 import SocialuniFollowType from "socialuni-constant/constant/user/SocialuniFollowType";
 import SocialUserContentRO from "socialuni-api-base/src/model/social/SocialUserContentRO";
-import PageUtil from "socialuni-util/src/util/PageUtil";
 import {onLoad, onPullDownRefresh, onReachBottom, onShow} from "@dcloudio/uni-app";
 import QTabs from "socialuni-ui-uni/src/components/QTabs/QTabs.vue";
-import SocialuniPageQueryQO from "socialuni-api-base/src/model/common/SocialuniPageQueryQO";
 import SocialuniPageQueryUtil from "socialuni-api-base/src/model/common/SocialuniPageQueryUtil";
-import SocialuniUserRO from "socialuni-api-base/src/model/user/SocialuniUserRO";
 import SocialuniFollowTag from "socialuni-community-view-uni/src/components/SocialuniFollow/SocialuniFollowTag.vue";
 import SocialGenderTag from "../../../components/SocialGenderTag/SocialGenderTag.vue";
 import FollowAPI from "socialuni-community-api/src/api/FollowAPI";
+import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 
 @Options({
     components: {SocialuniFollowTag, SocialGenderTag, QTabs}
@@ -127,11 +125,11 @@ export default class SocialuniCoinRecordView extends Vue {
     }
 
     openVip() {
-        PageUtil.toVipPage()
+        UserPageUtil.toVipPage()
     }
 
     toUserDetailVue(user: SocialUserContentRO) {
-        PageUtil.toUserDetail(user.id)
+        UserPageUtil.toUserDetail(user.id)
     }
 
     // tabs通知swiper切换
