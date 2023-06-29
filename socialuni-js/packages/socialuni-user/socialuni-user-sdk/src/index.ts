@@ -52,7 +52,19 @@ class SocialuniUserPlugin implements SocialuniPlugin {
     }
 
     onResponseErrorInterceptors(error: AxiosError) {
+        // uni
+        // config: {transitional: {…}, transformRequest: Array(1), transformResponse: Array(1), timeout: 120000, adapter: ƒ, …}
+        // cookies: []
+        // data: {code: 607, errorCode: 607, success: false, errorMsg: '不能举报自己的评论', msg: '不能举报自己的评论', …}
+        // errMsg: "request:ok"
+        // header: {content-type: 'application/json'}
+        // headers: {content-type: 'application/json'}
+        // status: 607
+        // statusCode: 607
+        // statusText: "request:ok"
+
         SocialuniAppUtil.UniUtil.hideLoading()
+        console.log(error)
         //第一步，先判断 有没有error
         //判断data类型，如果没类型，直接走
         //有内容则为本系统？也不一定，判断拿内容类型
@@ -80,19 +92,19 @@ class SocialuniUserPlugin implements SocialuniPlugin {
                         break
                     default:
                         SocialuniAppUtil.AlertUtil.hint(errorMsg)
-                        SocialuniAppAPI.sendErrorLogAPI(response.config.url, errorMsg)
+                        SocialuniAppAPI.sendErrorLogAPI(error.config.url, SocialuniAppUtil.RouterUtil.getCurrentPageURI(), errorMsg)
                         break
                 }
             } else {
                 MsgUtil.systemErrorMsg()
-                SocialuniAppAPI.sendErrorLogAPI(response.config.url, result)
+                SocialuniAppAPI.sendErrorLogAPI(error.config.url, SocialuniAppUtil.RouterUtil.getCurrentPageURI(), result)
             }
             // 返回接口返回的错误信息
             return result
         }
         MsgUtil.systemErrorMsg()
-        SocialuniAppAPI.sendErrorLogAPI(response.config.url, JsonUtil.toJson(response))
-        return response
+        SocialuniAppAPI.sendErrorLogAPI(error.config.url, SocialuniAppUtil.RouterUtil.getCurrentPageURI(), JsonUtil.toJson(response))
+        return error
     }
 }
 

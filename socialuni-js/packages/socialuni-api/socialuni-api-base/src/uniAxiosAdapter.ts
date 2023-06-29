@@ -23,7 +23,11 @@ export default function uniAxiosAdapter(config: AxiosRequestConfig) {
                 if (response.statusCode === 200) { // 成功
                     resolve(response)
                 } else {
-                    reject(response)
+                    const error = {
+                        ...response,
+                        response: response
+                    }
+                    reject(error)
                 }
             }
         })

@@ -46,7 +46,7 @@ const SocialuniAxiosCreate = (config?: AxiosRequestConfig) => {
                     socialuniPlugin.onResponseErrorInterceptors(error)
                 }
             }
-            throw new Error(error.errMsg || error.message)
+            throw new Error(error.errorMsg || error.message || error.errMsg)
         }
     )
     return socialuniAxios
