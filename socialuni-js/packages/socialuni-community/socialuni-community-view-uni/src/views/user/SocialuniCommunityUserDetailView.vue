@@ -66,6 +66,7 @@
         <!--  #endif -->
 
 
+        <msg-input></msg-input>
     </socialuni-user-detail-view>
 </template>
 
@@ -81,6 +82,7 @@ import socialuniUserDetailViewService from "socialuni-user-sdk/src/logic/Socialu
 import QButton from "socialuni-ui-uni/src/components/QButton/QButton.vue";
 import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 import SocialuniFollowTag from "../../components/SocialuniFollow/SocialuniFollowTag.vue";
+import MsgInput from "../../components/MsgInput.vue";
 
 socialuniCommunityUserDetailViewService.initService(getCurrentInstance())
 </script>
