@@ -1,5 +1,6 @@
 <template>
   <div>
+      123
     <!--    <u-alert v-if="isMine" type="primary" description="长按图片可删除"></u-alert>-->
     <!--    <u-alert v-else type="primary" description="长按图片可举报"></u-alert>-->
     <div class="bg-white py-sm px-xs row-wrap">
