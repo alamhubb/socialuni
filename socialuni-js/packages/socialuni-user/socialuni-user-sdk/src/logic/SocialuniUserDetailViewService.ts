@@ -25,16 +25,13 @@ class SocialuniUserDetailViewService implements SocialuniViewServiceInterface {
 
     instance: ComponentInternalInstance = null
 
+    user: CenterUserDetailRO = null
+
     async initService(instance: ComponentInternalInstance) {
         this.instance = instance
         SocialuniAppUtil.UniUtil.showShareMenu()
 
-        const params = SocialuniAppUtil.RouterUtil.getCurrentPageParams()
-        const userId = params.userId
-        console.log('chufale :' + userId)
-        // 这里有问题，有时候直接进入页面没有userId
-        const res = await SocialuniUserAPI.queryUserDetailAPI(userId)
-        this.user = res.data
+        this.queryUserInfo()
 
 
         /*onShow(() => {
@@ -46,8 +43,15 @@ class SocialuniUserDetailViewService implements SocialuniViewServiceInterface {
         })*/
     }
 
+    async queryUserInfo(){
+        const params = SocialuniAppUtil.RouterUtil.getCurrentPageParams()
+        const userId = params.userId
+        console.log('chufale :' + userId)
+        // 这里有问题，有时候直接进入页面没有userId
+        const res = await SocialuniUserAPI.queryUserDetailAPI(userId)
+        this.user = res.data
+    }
 
-    user: CenterUserDetailRO = null
 
 
     openMoreMenu() {
