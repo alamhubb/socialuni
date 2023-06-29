@@ -93,5 +93,9 @@ import SocialuniLoginViewService from "socialuni-user-sdk/src/logic/SocialuniLog
 @Options({})
 export default class SocialuniLoginView extends Vue {
     viewService: SocialuniLoginViewService = new SocialuniLoginViewService()
+
+    created() {
+        this.viewService.initService(this as any)
+    }
 }
 </script>
