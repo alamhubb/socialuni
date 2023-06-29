@@ -8,6 +8,20 @@ export default class ToastUtil {
     })
   }
 
+  static toast(message: string) {
+    return ElMessage.info({
+      message, duration: 1500,
+      showClose: true
+    })
+  }
+
+  static toastLong(message: string) {
+    return ElMessage.info({
+      message, duration: 1500,
+      showClose: true
+    })
+  }
+
   static warning(message: string) {
     return ElMessage.warning({
       message, duration: 1500,

@@ -12,12 +12,13 @@ import AppMsg from "socialuni-constant/constant/AppMsg";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
 import ImgUtil from "socialuni-util/src/util/ImgUtil";
-import SocialuniLocationAPI from "socialuni-community-api/src/api/SocialuniLocationAPI";
 import LocationQueryQO from "socialuni-api-base/src/model/location/LocationQueryQO";
 import ResultRO from "socialuni-api-base/src/model/social/ResultRO";
 import {QQMapResult} from "socialuni-api-base/src/model/location/QQMapResult";
 import ToastUtil from "./ToastUtil";
 import DomFile from "socialuni-app-sdk/src/model/DomFile";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import SocialuniLocationAPI from "socialuni-app-api/src/api/SocialuniLocationAPI";
 
 
 export default class NativeUtil {

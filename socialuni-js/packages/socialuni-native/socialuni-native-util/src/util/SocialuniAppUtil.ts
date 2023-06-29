@@ -6,9 +6,10 @@ import SocialuniRouterUtil from "./SocialuniRouterUtil";
 import {SocialuniRouterUtilInterface} from "../interface/SocialuniRouterUtilInterface";
 import {SocialuniAlertUtilInterface} from "../interface/SocialuniAlertUtilInterface";
 import {SocialuniToastUtilInterface} from "../interface/SocialuniToastUtilInterface";
+import {SocialuniNativeUtilInterface} from "../interface/SocialuniNativeUtilInterface";
 
 export default class SocialuniAppUtil {
-    static get UniUtil(): any {
+    static get UniUtil(): SocialuniNativeUtilInterface {
         return SocialuniAppNativeUtil.nativeUtil
     }
 

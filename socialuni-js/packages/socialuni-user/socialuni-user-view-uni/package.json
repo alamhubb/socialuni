@@ -9,6 +9,7 @@
     "socialuni-app-sdk": "^0.1.2",
     "socialuni-user-sdk": "^0.1.2",
     "socialuni-ui-uni": "^0.1.2",
+    "socialuni-community-api": "^0.1.2",
     "socialuni-native-uni": "^0.1.2",
     "socialuni-constant": "^0.1.2",
     "socialuni-util": "^0.1.2",

@@ -7,5 +7,7 @@ export default class UserPagePath {
     static readonly userVip: string = '/pages/user/vip'
     static readonly userContactInfo: string = '/pages/user/contactInfo'
     static readonly userFollow: string = '/pagesLazy/user/follow'
+    static readonly userCoin: string = '/pagesLazy/user/coin'
     static readonly identityAuth: string = '/pagesLazy/user/identityAuth'
+    static readonly coinRecord: string = '/pagesLazy/user/coinRecord'
 }

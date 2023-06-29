@@ -6,33 +6,38 @@
                     <uni-icons type="compose" size="24" class="use-click" @click="toEditUserInfo"></uni-icons>
                     <q-icon class="ml" icon="setting" size="20" @click="showMoreListAction"></q-icon>
                 </div>
-                <view class="row-col-center mt">
-                    <image
-                            class="size65 bd-round bd-3 bd-white mr-sm"
-                            mode="aspectFill"
-                            :src="mineUser.avatar"
-                            @click="moreAction"
-                    />
-                    <view class="flex-1 row-between">
-                        <view class="flex-col flex-1">
-                            <view class="text-md font-bold" :class="{'color-red':mineUser.vipFlag}">
-                                {{ mineUser.nickname }}
+                <slot name="baseInfo" :mine="mineUser">
+                    <view class="row-between mt">
+                        <slot name="baseInfoLeft" :mine="mineUser">
+                            <div class="row-col-center">
+                                <image
+                                        class="size65 bd-round bd-3 bd-white mr-sm"
+                                        mode="aspectFill"
+                                        :src="mineUser.avatar"
+                                        @click="moreAction"
+                                />
+                                <view class="flex-col">
+                                    <view class="text-md font-bold" :class="{'color-red':mineUser.vipFlag}">
+                                        {{ mineUser.nickname }}
+                                    </view>
+                                    <view class="flex-row">
+                                        <social-gender-tag class="mt-sm" :user="mineUser" border></social-gender-tag>
+                                        <!--                <view v-if="userProp.vipFlag" class="cu-tag bg-red radius" @click="openVip">VIP</view>
+                                                        <view v-else class="cu-tag bg-grey radius" @click="openVip">VIP</view>-->
+                                    </view>
+                                </view>
+                            </div>
+                        </slot>
+                        <slot name="baseInfoRight" :mine="mineUser">
+                            <view class="row-col-center font-12 use-click" @click="toMineUserDetailPage">
+                                <!--          <q-button @click="toEditUserInfo" theme light round>-->
+                                <div class="mt-1">空间</div>
+                                <q-icon icon="arrow-right" class="ml-nn" size="12"></q-icon>
+                                <!--          </q-button>-->
                             </view>
-                            <view class="flex-row">
-                                <social-gender-tag class="mt-sm" :user="mineUser" border></social-gender-tag>
-                                <!--                <view v-if="userProp.vipFlag" class="cu-tag bg-red radius" @click="openVip">VIP</view>
-                                                <view v-else class="cu-tag bg-grey radius" @click="openVip">VIP</view>-->
-                            </view>
-                        </view>
-
-                        <view class="row-col-center font-12 use-click" @click="toMineUserDetailPage">
-                            <!--          <q-button @click="toEditUserInfo" theme light round>-->
-                            <div class="mt-1">空间</div>
-                            <q-icon icon="arrow-right" class="ml-nn" size="12"></q-icon>
-                            <!--          </q-button>-->
-                        </view>
+                        </slot>
                     </view>
-                </view>
+                </slot>
 
                 <view class="row-between-center mt py-xs pr-xs">
                     <view class="flex-row flex-1 row-around">
@@ -141,24 +146,24 @@
                                             <q-icon icon="arrow-right" class="font-md margin-right-sm"></q-icon>
                                           </navigator>
                                         </q-row-item>-->
-<!--                    <navigator :url="suggestUrl" class="q-box-between bb bg-click">
-                        <view class="row-col-center flex-1">
-                            意见反馈
-                        </view>
-                        <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
-                    </navigator>
-                    <navigator :url="contactUsUrl" class="q-box-between bb bg-click">
-                        <view class="row-col-center flex-1">
-                            联系我们
-                        </view>
-                        <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
-                    </navigator>
-                    <navigator :url="homeUrl" class="q-box-between bb bg-click">
-                        <view class="row-col-center flex-1">
-                            关于我们
-                        </view>
-                        <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
-                    </navigator>-->
+                    <!--                    <navigator :url="suggestUrl" class="q-box-between bb bg-click">
+                                            <view class="row-col-center flex-1">
+                                                意见反馈
+                                            </view>
+                                            <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
+                                        </navigator>
+                                        <navigator :url="contactUsUrl" class="q-box-between bb bg-click">
+                                            <view class="row-col-center flex-1">
+                                                联系我们
+                                            </view>
+                                            <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
+                                        </navigator>
+                                        <navigator :url="homeUrl" class="q-box-between bb bg-click">
+                                            <view class="row-col-center flex-1">
+                                                关于我们
+                                            </view>
+                                            <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
+                                        </navigator>-->
                     <q-row-item @click="destroyAccount">
                         <view class="row-col-center flex-1">
                             注销账号
@@ -171,24 +176,22 @@
                         </view>
                         <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
                     </q-row-item>
-<!--                    <view class="px-smm py-sm w100p row-wrap">
-                        <navigator :url="userAgreementUrl" class="color-blue">
-                            《用户协议》
-                        </navigator>
-                        <navigator :url="userPrivacyUrl" class="color-blue">
-                            《隐私政策》
-                        </navigator>
-                        <navigator :url="childProtectUrl" class="color-blue">
-                            《儿童个人信息保护规则及监护人须知》
-                        </navigator>
-                    </view>-->
+                    <!--                    <view class="px-smm py-sm w100p row-wrap">
+                                            <navigator :url="userAgreementUrl" class="color-blue">
+                                                《用户协议》
+                                            </navigator>
+                                            <navigator :url="userPrivacyUrl" class="color-blue">
+                                                《隐私政策》
+                                            </navigator>
+                                            <navigator :url="childProtectUrl" class="color-blue">
+                                                《儿童个人信息保护规则及监护人须知》
+                                            </navigator>
+                                        </view>-->
                 </view>
             </q-popup>
 
             <user-school-edit-dialog ref="schoolEditDialog"></user-school-edit-dialog>
             <user-contact-info-edit-dialog ref="contactInfoEditDialog"></user-contact-info-edit-dialog>
-            <msg-input>
-            </msg-input>
         </view>
 
         <!--      title="欢迎登录清池app"-->
@@ -199,7 +202,6 @@
 <script lang="ts">
 import {Options, Prop, Vue} from 'vue-property-decorator'
 import LoginView from "../login/LoginView.vue";
-import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
 import SocialuniFollowType from 'socialuni-constant/constant/user/SocialuniFollowType';
 import UserContactInfoEditDialog from "./UserContactInfoEditDialog.vue";
 import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue";
@@ -214,7 +216,7 @@ import QSearch from "socialuni-ui-uni/src/components/QSearch/QSearch.vue";
 import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
 import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
 import SocialGenderTag from "../../components/SocialGenderTag/SocialGenderTag.vue";
-import { socialuniUserModule } from 'socialuni-user-sdk/src/store/SocialuniUserModule';
+import {socialuniUserModule} from 'socialuni-user-sdk/src/store/SocialuniUserModule';
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import UserService from "socialuni-user-sdk/src/logic/UserService";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
@@ -223,6 +225,7 @@ import CosService from "socialuni-app-sdk/src/util/CosService";
 import DomFile from "socialuni-app-sdk/src/model/DomFile";
 import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
 import SkipUrlConst from "socialuni-app-sdk/src/constant/SkipUrlConst";
+import {onLoad} from "uniapp-api/src/UniappPageLifecycleHook";
 
 @Options({
     components: {
@@ -266,10 +269,10 @@ export default class MineView extends Vue {
         onLoad((params) => {
             SocialuniAppUtil.UniUtil.showShareMenu()
         })
-        onShow(() => {
+        /*onShow(() => {
             this.showMsgInput = true
             // socialChatModule.computedChatsUnreadNumTotalAction()
-        })
+        })*/
     }
 
     destroyAccount() {
@@ -361,7 +364,10 @@ export default class MineView extends Vue {
 
     async uploadUserAvatarImg() {
         try {
-            const cosAuthRO = await CosService.getCosAuthRO()
+            let cosAuthRO
+            CosService.getCosAuthRO().then(res => {
+                cosAuthRO = res
+            })
             const imgFiles: DomFile[] = await SocialuniAppUtil.UniUtil.chooseImage(1)
             SocialuniAppUtil.UniUtil.showLoading('上传中')
             const imgFile: DomFile = imgFiles[0]
@@ -416,7 +422,7 @@ export default class MineView extends Vue {
     }
 
     toCoinPage() {
-        // UserPageUtil.toCoinPage()
+        UserPageUtil.toCoinPage()
     }
 
     openSetContactInfo() {

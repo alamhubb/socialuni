@@ -45,19 +45,18 @@
 
 <script lang="ts">
 import {Vue, Options} from 'vue-property-decorator'
-import QRowItem from '@/components/div-item/div-item.vue'
-import {onLoad} from "@dcloudio/uni-app";
-import {socialuniConfigModule, socialuniSystemModule, socialuniUserModule} from "socialuni-sdk/src/store/store";
 import ShellOrderVO from "socialuni-api-base/src/model/ShellOrderVO";
 import QIcon from 'socialuni-ui-uni/src/components/QIcon/QIcon.vue'
 import EnumVO from "socialuni-constant/constant/EnumVO";
 import QButton from "socialuni-ui-uni/src/components/QButton/QButton.vue";
-import QTabs from "../../../components/QTabs/QTabs.vue";
 import SocialuniCoinPageType from "socialuni-constant/constant/user/SocialuniCoinPageType";
-import PageUtil from "socialuni-util/src/util/PageUtil";
 import SocialuniProviderType from "socialuni-constant/constant/SocialuniProviderType";
-import PlatformUtils from "socialuni/src/utils/PlatformUtils";
 import PayType from "socialuni-constant/constant/PayType";
+import QTabs from "socialuni-ui-uni/src/components/QTabs/QTabs.vue";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+import {onLoad} from "uniapp-api/src/UniappPageLifecycleHook";
+import PlatformUtils from "socialuni-user-sdk/src/util/PlatformUtils";
+import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 
 @Options({
   components: {QTabs, QIcon, QButton}
@@ -99,7 +98,7 @@ export default class SocialuniCoinView extends Vue {
   }
 
   toCoinRecordPage(pageType: string) {
-    PageUtil.toCoinRecordPage(pageType)
+    UserPageUtil.toCoinRecordPage(pageType)
   }
 
   checkPayValue(payValue) {

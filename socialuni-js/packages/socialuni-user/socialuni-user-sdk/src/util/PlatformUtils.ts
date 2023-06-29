@@ -12,6 +12,7 @@ import { socialuniUserModule } from '../store/SocialuniUserModule'
 import QQUtils from "socialuni-app-sdk/src/util/QQUtils";
 import WxUtils from "socialuni-app-sdk/src/util/WxUtils";
 import MPUtil from "socialuni-app-sdk/src/util/MPUtil";
+import SocialuniCoinAPI from "socialuni-user-api/src/api/SocialuniCoinAPI";
 
 
 // 统一处理各平台的订阅
@@ -73,6 +74,16 @@ export default class PlatformUtils {
                SocialuniAppUtil.AlertUtil.hint(HintMsg.paySuccessMsg)
                RouterUtil.reLaunch(UserPagePath.userMine)
              })*/
+        })
+    }
+
+    //所有只能直接调用这个
+    static async payCoin(amount: number) {
+        PlatformUtils.checkPay()
+        //目前支持微信支付
+        // const provider: string = SocialuniProviderType.wx
+        return SocialuniCoinAPI.payCoinAPI(socialuniSystemModule.provider, amount).then((res) => {
+            return PlatformUtils.cashPay(res.data)
         })
     }
 

@@ -4,6 +4,7 @@ import CosAuthRO from "socialuni-api-base/src/model/cos/CosAuthRO";
 import CosUploadResult from "socialuni-api-base/src/model/cos/CosUploadResult";
 import AlertUtil from "socialuni-native-uni/src/util/AlertUtil";
 import DomFile from "socialuni-app-sdk/src/model/DomFile";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 export default class TencentCosAPI {
     /*static async getImgTagAPI(imgUrl, imgKey, cosAuthRO: CosAuthRO) {
@@ -94,12 +95,12 @@ export default class TencentCosAPI {
             console.log(cosAuthRO.region)
             console.log(cosAuthRO.cos)
             console.log(cosAuthRO.cos.putObject)
-            // const uploadImgFile = await SocialuniAppUtil.UniUtil.getFile(imgFile) as any
+            const uploadImgFile = await SocialuniAppUtil.UniUtil.getFile(imgFile) as any
             cosAuthRO.cos.putObject({
                 Bucket: cosAuthRO.bucket,
                 Region: cosAuthRO.region,
                 Key: imgFile.src,
-                Body: imgFile,
+                Body: uploadImgFile,
                 Headers: headers,
                 // {"fileid": "${imgFile.fileName}!avatar", "rule": "imageMogr2/thumbnail/100x/interlace/0|imageMogr2/gravity/center/crop/100x100"},
             }, (err, data: CosUploadResult) => {

@@ -1,6 +1,11 @@
 import UserPagePath from "../constant/UserPagePath";
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil";
+import {socialuniUserModule} from "../store/SocialuniUserModule";
+import UserMsgUtil from "./UserMsgUtil";
+import PlatformUtils from "./PlatformUtils";
 
 export default class UserPageUtil {
     static toUserDetail(userId: string) {
@@ -17,6 +22,28 @@ export default class UserPageUtil {
             SocialuniAppUtil.RouterUtil.goBack()
         }
         // uni.navigateBack({ delta: 1 })
+    }
+
+    static toCoinPage() {
+        if (socialuniSystemModule.isProd && socialuniSystemModule.isIos) {
+            // 由于相关规范，iOS功能暂不可用
+            MsgUtil.iosDisablePay()
+        } else {
+            if (socialuniUserModule.mineUser) {
+                SocialuniAppUtil.RouterUtil.navigateTo(UserPagePath.userCoin)
+            } else {
+                UserMsgUtil.unLoginMessage()
+            }
+        }
+    }
+
+    static toCoinRecordPage(pageType: string) {
+        PlatformUtils.checkPay()
+        if (socialuniUserModule.mineUser) {
+            SocialuniAppUtil.RouterUtil.navigateTo(UserPagePath.coinRecord + '?pageType=' + pageType)
+        } else {
+            UserMsgUtil.unLoginMessage()
+        }
     }
 
     static toEditMineInfo() {
