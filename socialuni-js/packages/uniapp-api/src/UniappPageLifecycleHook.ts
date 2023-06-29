@@ -13,10 +13,10 @@ export async function onLoad(hook: (params: any) => any) {
 
         //查询是否包含community模块，如果存在则加载
         try {
-            const modules = import.meta.globEager('../../../node_modules/@dcloudio/uni-app/dist/uni-app.es.js')
-            const {onLoad} = PlatformModuleLoadUtil.getFirstModule(modules)
+            // const modules = import.meta.globEager('../../../node_modules/@dcloudio/uni-app/dist/uni-app.es.js')
+            // const {onLoad} = PlatformModuleLoadUtil.getFirstModule(modules)
             console.log(965665)
-            onLoad(hook)
+            // onLoad(hook)
         } catch (e) {
             console.log(e)
         }

@@ -5,21 +5,10 @@ import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfig
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
 import {socialuniUserModule} from "../store/SocialuniUserModule";
-import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue"
-import {onLoad} from "uniapp-api/src/UniappPageLifecycleHook";
 import {watch, reactive, provide} from "vue";
 import {SocialuniViewServiceInterface} from "socialuni/src/interface/SocialuniViewServiceInterface";
 import {ComponentInternalInstance} from "@vue/runtime-core";
-import SocialuniUserProvideKeys from "../constant/SocialuniUserProvideKeys";
 
-
-export interface SocialuniUserDetailViewRefs {
-    moreActionMenu: QPopup
-    reportDialog: any;
-    schoolEditDialog: QPopup;
-    applyUserFriendDialog: QPopup;
-    // contactInfoEditDialog: UserContactInfoEditDialog;
-}
 
 class SocialuniUserDetailViewService implements SocialuniViewServiceInterface {
 
@@ -46,16 +35,9 @@ class SocialuniUserDetailViewService implements SocialuniViewServiceInterface {
     async queryUserInfo(){
         const params = SocialuniAppUtil.RouterUtil.getCurrentPageParams()
         const userId = params.userId
-        console.log('chufale :' + userId)
         // 这里有问题，有时候直接进入页面没有userId
         const res = await SocialuniUserAPI.queryUserDetailAPI(userId)
         this.user = res.data
-    }
-
-
-
-    openMoreMenu() {
-        this.$refs.moreActionMenu.open()
     }
 
     get appConfig() {

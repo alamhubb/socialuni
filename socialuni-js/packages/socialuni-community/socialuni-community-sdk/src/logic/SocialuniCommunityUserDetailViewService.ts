@@ -14,7 +14,6 @@ class SocialuniCommunityUserDetailViewService implements SocialuniViewServiceInt
         this.instance = instance
 
         watch<CenterUserDetailRO>(() => socialuniUserDetailViewService.user, (value, oldValue) => {
-            console.log(1232123)
             if (!oldValue) {
                 this.queryUserTalks()
             }

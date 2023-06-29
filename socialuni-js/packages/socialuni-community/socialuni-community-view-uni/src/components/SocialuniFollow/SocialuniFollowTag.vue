@@ -37,7 +37,6 @@ export default class SocialuniFollowTag extends Vue {
         if (this.user) {
             return this.user
         } else if (this.injectUser) {
-            console.log(this.injectUser.user)
             return this.injectUser.user
         }
         return null

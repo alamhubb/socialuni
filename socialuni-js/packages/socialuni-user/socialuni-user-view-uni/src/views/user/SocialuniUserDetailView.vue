@@ -90,18 +90,44 @@
     </view>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
+
 import SocialuniUserInfoImg from "./SocialuniUserInfoImg.vue"
 import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue"
 import QButton from "socialuni-ui-uni/src/components/QButton/QButton.vue"
 import QNavbar from "socialuni-ui-uni/src/components/QNavbar/QNavbar.vue"
-import SocialuniFollowTag from "socialuni-community-view-uni/src/components/SocialuniFollow/SocialuniFollowTag.vue"
 import SocialGenderTag from "../../components/SocialGenderTag/SocialGenderTag.vue"
 import socialuniUserDetailViewService from "socialuni-user-sdk/src/logic/SocialuniUserDetailViewService";
 import {getCurrentInstance, provide, reactive} from "vue";
 import SocialuniUserProvideKeys from "socialuni-user-sdk/src/constant/SocialuniUserProvideKeys";
 
-socialuniUserDetailViewService.initService(getCurrentInstance())
 
-provide(SocialuniUserProvideKeys.detailUser, socialuniUserDetailViewService)
+import {Options, Vue} from 'vue-property-decorator'
+import {setup} from "vue-class-component";
+
+setup(() => {
+    console.log(9989)
+})
+
+@Options({
+    components: {
+        SocialuniUserInfoImg,
+        QIcon,
+        QButton,
+        QNavbar,
+        SocialGenderTag,
+    }
+})
+export default class SocialuniUserDetailView extends Vue {
+    get socialuniUserDetailViewService() {
+        return socialuniUserDetailViewService
+    }
+
+    created() {
+        socialuniUserDetailViewService.initService(getCurrentInstance())
+
+        provide(SocialuniUserProvideKeys.detailUser, socialuniUserDetailViewService)
+    }
+}
+
 </script>
