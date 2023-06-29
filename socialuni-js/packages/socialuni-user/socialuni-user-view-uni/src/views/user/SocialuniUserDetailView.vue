@@ -100,14 +100,8 @@ import SocialGenderTag from "../../components/SocialGenderTag/SocialGenderTag.vu
 import socialuniUserDetailViewService from "socialuni-user-sdk/src/logic/SocialuniUserDetailViewService";
 import {getCurrentInstance, provide, reactive} from "vue";
 import SocialuniUserProvideKeys from "socialuni-user-sdk/src/constant/SocialuniUserProvideKeys";
-
-
 import {Options, Vue} from 'vue-property-decorator'
-import {setup} from "vue-class-component";
 
-setup(() => {
-    console.log(9989)
-})
 
 @Options({
     components: {
