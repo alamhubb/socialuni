@@ -1,5 +1,8 @@
 <template>
     <socialuni-user-detail-view>
+        <template #navBarRight="{user}">
+            <slot name="navBarRight" :user="user"></slot>
+        </template>
         <template #userBaseInfoRight="{user}">
             <div class="col-center flex-none">
                 <view class="row-end-center mr-xss">
@@ -62,16 +65,7 @@
         <ad class="bg-white mt-10 w100vw" adpid="1890536227"></ad>
         <!--  #endif -->
 
-        <q-popup ref="moreActionMenu" bottom>
-            <uni-list class="pb-xl">
-                <uni-list-item title="解除好友" link
-                               @click="socialuniCommunityUserDetailViewService.deleteFriend()"></uni-list-item>
-                <uni-list-item title="加入黑名单" link
-                               @click="socialuniCommunityUserDetailViewService.addBlack()"></uni-list-item>
-                <uni-list-item title="从黑名单移除" link
-                               @click="socialuniCommunityUserDetailViewService.removeBlack()"></uni-list-item>
-            </uni-list>
-        </q-popup>
+
     </socialuni-user-detail-view>
 </template>
 

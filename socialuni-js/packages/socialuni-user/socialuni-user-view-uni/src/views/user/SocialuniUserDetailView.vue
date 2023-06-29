@@ -1,9 +1,9 @@
 <template>
     <view class="bg-default">
         <q-navbar show-back title="用户详情">
-            <div class="row-end-center flex-1">
-                <q-icon icon="list-dot" size="20" @click="socialuniUserDetailViewService.openMoreMenu()"></q-icon>
-            </div>
+            <slot name="navBarRight" :user="socialuniUserDetailViewService.user">
+
+            </slot>
         </q-navbar>
         <view v-if="socialuniUserDetailViewService.user" class="bg-default pb-100">
             <view class="mb-sm pt-200 bg-no-repeat"
