@@ -1,12 +1,12 @@
 <template>
     <socialuni-user-detail-view>
-        <template #navBarRight="{user}">
-            <slot name="navBarRight" :user="user"></slot>
+        <template #navBarRight>
+            <slot name="navBarRight"></slot>
         </template>
-        <template #userBaseInfoRight="{user}">
+        <template #userBaseInfoRight>
             <div class="col-center flex-none">
                 <view class="row-end-center mr-xss">
-                    <view v-if="user.hasBeFollowed && !user.hasFollowed"
+                    <view v-if="socialuniUserDetailViewService.user.hasBeFollowed && !socialuniUserDetailViewService.user.hasFollowed"
                           class="px-5 py-1 bg-default">
                         <div class="color-content font-12">
                             对方关注了您
@@ -26,6 +26,24 @@
                     <!--              <button v-else class="cu-btn round bd-gray bg-white" @click.stop="addFollow">已关注</button>-->
                 </view>
             </div>
+        </template>
+        <template #userBaseInfoBottom>
+            <view class="row-between-center mt-sm py-xs pr-xs">
+                <view class="flex-row flex-1 row-around">
+                    <view class="px-lg line-height-1 col-all-center">
+                        <text class="text-lg font-bold color-main row-center">
+                            {{ socialuniUserDetailViewService.user.followNum }}
+                        </text>
+                        <text class="font-12 color-content mt-xs">关注</text>
+                    </view>
+                    <view class="px-lg line-height-1 col-all-center">
+                        <text class="text-lg font-bold color-main row-center">
+                            {{ socialuniUserDetailViewService.user.fansNum }}
+                        </text>
+                        <text class="font-12 color-content mt-xs">被关注</text>
+                    </view>
+                </view>
+            </view>
         </template>
 
         <q-popup ref="applyUserFriendDialog" title="申请添加好友111"

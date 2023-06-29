@@ -35,24 +35,9 @@
 
                         </slot>
                     </div>
+                    <slot name="userBaseInfoBottom">
 
-
-                    <view class="row-between-center mt-sm py-xs pr-xs">
-                        <view class="flex-row flex-1 row-around">
-                            <view class="px-lg line-height-1 col-all-center">
-                                <text class="text-lg font-bold color-main row-center">
-                                    {{ socialuniUserDetailViewService.user.followNum }}
-                                </text>
-                                <text class="font-12 color-content mt-xs">关注</text>
-                            </view>
-                            <view class="px-lg line-height-1 col-all-center">
-                                <text class="text-lg font-bold color-main row-center">
-                                    {{ socialuniUserDetailViewService.user.fansNum }}
-                                </text>
-                                <text class="font-12 color-content mt-xs">被关注</text>
-                            </view>
-                        </view>
-                    </view>
+                    </slot>
 
                     <div class="flex-row my-sm">
                         <view v-if="socialuniUserDetailViewService.user.city" class="row-col-center q-tag">

@@ -26,7 +26,7 @@ import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDe
     }
 })
 export default class SocialuniFollowTag extends Vue {
-    @Prop() user: SocialUserContentRO
+    @Prop() user: CenterUserDetailRO
 
     FollowStatus = FollowStatus
     followBtnDisabled = false
@@ -54,23 +54,35 @@ export default class SocialuniFollowTag extends Vue {
             // 如果已经关注
             if (this.followUser.hasFollowed) {
                 this.followUser.hasFollowed = false
+                if (this.followUser.fansNum || this.followUser.fansNum === 0) {
+                    this.followUser.fansNum -= 1
+                }
                 try {
                     // 进行取消关注操作
                     await FollowAPI.cancelFollowAPI(followAdd)
                     this.$emit('change', this.followUser)
                 } catch (e) {
+                    if (this.followUser.fansNum || this.followUser.fansNum === 0) {
+                        this.followUser.fansNum += 1
+                    }
                     this.followUser.hasFollowed = true
                 } finally {
                     this.followBtnDisabled = false
                 }
             } else {
                 this.followUser.hasFollowed = true
+                if (this.followUser.fansNum || this.followUser.fansNum === 0) {
+                    this.followUser.fansNum += 1
+                }
                 try {
                     await FollowAPI.addFollowAPI(followAdd)
 
                     this.$emit('change', this.followUser)
                 } catch (e) {
                     this.followUser.hasFollowed = false
+                    if (this.followUser.fansNum || this.followUser.fansNum === 0) {
+                        this.followUser.fansNum -= 1
+                    }
                 } finally {
                     this.followBtnDisabled = false
                 }
