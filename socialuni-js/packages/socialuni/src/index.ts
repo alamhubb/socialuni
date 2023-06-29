@@ -35,23 +35,17 @@ async function installSocialuniPluginIns(app: App) {
     if (socialuniUser && socialuniUser.default) {
         app.use(socialuniUser.default)
     }
-
-    try {
-        //查询是否包含community模块，如果存在则加载
-        const socialuniPlugin: ImportModule<SocialuniPlugin> = await import('socialuni-community-sdk/src/index.ts')
-        socialuniPluginsModule.addPlugin(socialuniPlugin.default)
-    } catch (e) {
-        console.error(e)
-        // 如果导入失败，则不触发任何操作
+    //查询是否包含community模块，如果存在则加载
+    const communityModules = import.meta.globEager('../../socialuni-user/socialuni-socialuniCommunity-sdk/src/index.ts')
+    const socialuniCommunity = PlatformModuleLoadUtil.getFirstModule(communityModules)
+    if (socialuniCommunity && socialuniCommunity.default) {
+        app.use(socialuniCommunity.default)
     }
-    // 社交联盟内置支持的插件
-    try {
-        //查询是否包含community模块，如果存在则加载
-        const socialuniPlugin: ImportModule<SocialuniPlugin> = await import('socialuni-im-sdk/src/index')
-        socialuniPluginsModule.addPlugin(socialuniPlugin.default)
-    } catch (e) {
-        console.error(e)
-        // 如果导入失败，则不触发任何操作
+    //查询是否包含Im模块，如果存在则加载
+    const imModules = import.meta.globEager('../../socialuni-user/socialuni-im-sdk/src/index.ts')
+    const socialuniIm = PlatformModuleLoadUtil.getFirstModule(imModules)
+    if (socialuniIm && socialuniIm.default) {
+        app.use(socialuniIm.default)
     }
 }
 

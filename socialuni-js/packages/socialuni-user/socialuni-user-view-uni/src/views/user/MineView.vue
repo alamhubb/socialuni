@@ -213,7 +213,6 @@ import QButton from "socialuni-ui-uni/src/components/QButton/QButton.vue";
 import QSearch from "socialuni-ui-uni/src/components/QSearch/QSearch.vue";
 import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
 import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
-import {socialChatModule} from "socialuni-im-sdk/src/store/SocialChatModule";
 import SocialGenderTag from "../../components/SocialGenderTag/SocialGenderTag.vue";
 import { socialuniUserModule } from 'socialuni-user-sdk/src/store/SocialuniUserModule';
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
