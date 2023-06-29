@@ -76,23 +76,9 @@ const Socialuni = {
             created() {
                 socialuniPluginsModule.setRouter(this.$router)
                 socialuniPluginsModule.setRoute(this.$route)
-                const data = this
-                for (const key in data) {
-                    const socialuniViewServiceObj: SocialuniViewService<any> = data[key]
-                    if (socialuniViewServiceObj instanceof SocialuniViewService) {
-                        socialuniViewServiceObj.initService(this)
-                        socialuniViewServiceObj.created?.()
-                    }
-                }
+
             },
             mounted() {
-                const data = this
-                for (const key in data) {
-                    const socialuniViewServiceObj: SocialuniViewService<any> = data[key]
-                    if (socialuniViewServiceObj instanceof SocialuniViewService) {
-                        socialuniViewServiceObj.mounted?.()
-                    }
-                }
             }
         })
         app.mixin(shareComponent)

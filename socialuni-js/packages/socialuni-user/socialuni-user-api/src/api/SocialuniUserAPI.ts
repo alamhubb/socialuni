@@ -5,7 +5,7 @@ import socialuniUserRequest from "../request/socialuniUserRequest";
 
 export default class SocialuniUserAPI {
     static queryUserDetailAPI(userId: string) {
-        return socialuniUserRequest.get<SocialuniUserRO>('socialuni/user/queryUserDetail/' + userId)
+        return socialuniUserRequest.get<CenterUserDetailRO>('socialuni/user/queryUserDetail/' + userId)
     }
 
     static getUserImgListAPI(userId: string) {

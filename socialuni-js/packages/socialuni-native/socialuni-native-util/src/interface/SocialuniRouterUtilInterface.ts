@@ -42,5 +42,7 @@ export interface SocialuniRouterUtilInterface {
 
     goHome(): void
 
+    getCurrentPageParams(): any
+
     navigateToMp(appId: string, path?: string, extraData?: any)
 }

@@ -11,9 +11,9 @@ export default {
         // PlatformUtils.checkUpdate()
         // await socialAppModule.appLunchAction()
     },
-    onError(e) {
+    /*onError(e) {
         SocialuniAppAPI.sendErrorLogAPI('front page error', SocialuniAppUtil.RouterUtil.getCurrentPageURI(), e.message)
         console.error(e)
-    },
+    },*/
 }
 </script>

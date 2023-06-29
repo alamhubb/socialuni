@@ -1,23 +1,16 @@
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
-import SocialuniImUserDetailRO from "socialuni-im-api/src/model/RO/SocialuniImUserDetailRO";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 import SocialuniUserAPI from "socialuni-user-api/src/api/SocialuniUserAPI";
-import {socialChatModule} from "socialuni-im-sdk/src/store/SocialChatModule";
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
-import SocialuniAddFriendType from "socialuni-im-api/src/constant/SocialuniAddFriendType";
-import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
 import {socialuniUserModule} from "../store/SocialuniUserModule";
-import SocialuniViewService from "socialuni/src/interface/SocialuniViewService";
-import SocialuniFriendAPI from "socialuni-im-api/src/api/SocialuniFriendAPI"
-import FriendAddQO from "socialuni-im-api/src/model/QO/firend/FriendAddQO"
 import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue"
 import {onLoad} from "uniapp-api/src/UniappPageLifecycleHook";
-import {watch, reactive} from "vue";
+import {watch, reactive, provide} from "vue";
 import {SocialuniViewServiceInterface} from "socialuni/src/interface/SocialuniViewServiceInterface";
-import {Vue} from "vue-class-component";
 import {ComponentInternalInstance} from "@vue/runtime-core";
+import SocialuniUserProvideKeys from "../constant/SocialuniUserProvideKeys";
 
 
 export interface SocialuniUserDetailViewRefs {
@@ -32,9 +25,17 @@ class SocialuniUserDetailViewService implements SocialuniViewServiceInterface {
 
     instance: ComponentInternalInstance = null
 
-    initService(instance: ComponentInternalInstance) {
+    async initService(instance: ComponentInternalInstance) {
         this.instance = instance
         SocialuniAppUtil.UniUtil.showShareMenu()
+
+        const params = SocialuniAppUtil.RouterUtil.getCurrentPageParams()
+        const userId = params.userId
+        console.log('chufale :' + userId)
+        // 这里有问题，有时候直接进入页面没有userId
+        const res = await SocialuniUserAPI.queryUserDetailAPI(userId)
+        this.user = res.data
+
 
         /*onShow(() => {
             this.showMsgInput = true
@@ -43,35 +44,11 @@ class SocialuniUserDetailViewService implements SocialuniViewServiceInterface {
         onHide(() => {
             this.showMsgInput = false
         })*/
-
-        onLoad((params: { userId: string }) => {
-            const userId = params.userId
-            console.log('chufale :' + userId)
-            // 这里有问题，有时候直接进入页面没有userId
-            SocialuniUserAPI.queryUserDetailAPI(userId).then((res: any) => {
-                this.user = res.data
-                console.log(this.user)
-                if (!this.user.isMine) {
-                    //1. 是否被拉黑
-                    //1. 是否接收陌生人消息，如果接收，则
-
-                    // socialChatModule.checkFriend(this.user)
-                    // socialChatModule.setCurChatByUserId(this.user.id)
-                }
-            })
-        })
-        watch<CenterUserDetailRO>(this.user, (value, oldValue) => {
-            console.log(1232)
-            if (!oldValue) {
-                this.queryUserTalks()
-            }
-        })
     }
 
 
     user: CenterUserDetailRO = null
 
-    imUserDetail: SocialuniImUserDetailRO = null
 
     openMoreMenu() {
         this.$refs.moreActionMenu.open()
@@ -81,15 +58,15 @@ class SocialuniUserDetailViewService implements SocialuniViewServiceInterface {
         return socialuniConfigModule.appConfig
     }
 
-    get isIos() {
-        return socialuniSystemModule.isIos
+    get isIosAndMpQQ() {
+        return socialuniSystemModule.isIosAndMpQQ
     }
 
     talks: TalkVO[] = []
 
     async toMessagePage() {
         //无论什么情况都可以进入消息页面，比如要查看两个人的历史聊天消息呢
-        socialChatModule.setChatIdToMessagePage(this.user.id)
+        // socialChatModule.setChatIdToMessagePage(this.user.id)
 
         //未登录不能发消息
         //然后判断对方是否接收陌生人消息
@@ -141,11 +118,9 @@ class SocialuniUserDetailViewService implements SocialuniViewServiceInterface {
     }
 
 
-
     copyText(textCopy: string) {
         SocialuniAppUtil.UniUtil.textCopy(textCopy)
     }
-
 
 
     seeAvatarDetail() {

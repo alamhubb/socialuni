@@ -133,6 +133,9 @@ import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 import LoginService from "socialuni-user-sdk/src/logic/LoginService";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
+import PhoneService from "socialuni-user-sdk/src/logic/PhoneService";
 
 @Options({
   components: {
@@ -199,7 +202,7 @@ export default class LoginView extends Vue {
      } else {
        RouterUtil.goBackOrHome()
      }*/
-    PageUtil.goBackOrHome()
+    SocialuniAppUtil.RouterUtil.goBackOrHome()
   }
 
   switchShowPhoneNum() {
@@ -231,19 +234,19 @@ export default class LoginView extends Vue {
     if (this.openTypeBtnEnable) {
       try {
         this.openTypeBtnEnable = false
+        this.resetAuthCodeCountDown()
         await LoginService.phoneLogin(this.phoneFormData.phoneNum, this.phoneFormData.authCode)
         this.loginAfterHint('登录成功')
       } finally {
-        this.goToOAuthPage()
-        this.resetAuthCodeCountDown()
         this.openTypeBtnEnable = true
+        this.goToOAuthPage()
       }
     }
 
   }
 
   resetAuthCodeCountDown() {
-    this.$refs.loginForm.resetAuthCodeCountDown()
+    this.$refs.loginForm?.resetAuthCodeCountDown()
   }
 
   goToOAuthPage() {

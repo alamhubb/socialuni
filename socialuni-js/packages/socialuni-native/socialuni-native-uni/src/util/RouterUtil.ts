@@ -1,5 +1,6 @@
 import PagePath from "socialuni-constant/constant/PagePath";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 export default class RouterUtil {
 
@@ -74,6 +75,10 @@ export default class RouterUtil {
 
     static getCurrentPage(): any {
         return getCurrentPages()[getCurrentPages().length - 1]
+    }
+
+    static getCurrentPageParams(): any {
+        return this.getCurrentPage().$page.options
     }
 
     static goBackOrHome(): void {

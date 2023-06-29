@@ -18,8 +18,8 @@
                         />
                         <view class="flex-1 row-between h65 py-xs">
                             <view class="flex-col flex-1">
-                                <view class="text-md font-bold"
-                                      :class="{'color-red':socialuniUserDetailViewService.user.vipFlag}">
+                                <!--                                :class="{'color-red':socialuniUserDetailViewService.user.vipFlag}"-->
+                                <view class="text-md font-bold">
                                     {{ socialuniUserDetailViewService.user.nickname }}
                                 </view>
                                 <view class="row-col-center mt-sm">
@@ -47,8 +47,7 @@
                                         <q-icon icon="mdi-chat-outline" size="14"></q-icon>
                                         私信
                                     </q-button>
-                                    <socialuni-follow-tag
-                                            :user="socialuniUserDetailViewService.user"></socialuni-follow-tag>
+                                    <socialuni-follow-tag></socialuni-follow-tag>
                                     <!--              <button v-else class="cu-btn round bd-gray bg-white" @click.stop="addFollow">已关注</button>-->
                                 </view>
                             </div>
@@ -86,7 +85,7 @@
             </view>
 
 
-            <div v-if="!socialuniUserDetailViewService.isIos && socialuniUserDetailViewService.user.contactInfo"
+            <div v-if="!socialuniUserDetailViewService.isIosAndMpQQ && socialuniUserDetailViewService.user.contactInfo"
                  class="row-between-center bg-white px-sm py-sm bd-radius-10 elevation-4 mx-sm mt-smm mb-sm">
                 <div class="row-col-center">
                     <q-icon class="color-sub mr-xs" prefix="uni-icons" icon="uniui-chat" size="14"/>
@@ -125,18 +124,16 @@
 
 <script setup lang="ts">
 import SocialuniUserInfoImg from "./SocialuniUserInfoImg.vue"
-import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue"
 import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue"
-import QInput from "socialuni-ui-uni/src/components/QInput/QInput.vue"
 import QButton from "socialuni-ui-uni/src/components/QButton/QButton.vue"
-import QSearch from "socialuni-ui-uni/src/components/QSearch/QSearch.vue"
 import QNavbar from "socialuni-ui-uni/src/components/QNavbar/QNavbar.vue"
 import SocialuniFollowTag from "socialuni-community-view-uni/src/components/SocialuniFollow/SocialuniFollowTag.vue"
-import MsgInput from "socialuni-community-view-uni/src/components/MsgInput.vue"
 import SocialGenderTag from "../../components/SocialGenderTag/SocialGenderTag.vue"
-import QRowItem from "socialuni-ui-uni/src/components/QRowItem/QRowItem.vue"
 import socialuniUserDetailViewService from "socialuni-user-sdk/src/logic/SocialuniUserDetailViewService";
-import {getCurrentInstance} from "vue";
+import {getCurrentInstance, provide, reactive} from "vue";
+import SocialuniUserProvideKeys from "socialuni-user-sdk/src/constant/SocialuniUserProvideKeys";
 
 socialuniUserDetailViewService.initService(getCurrentInstance())
+
+provide(SocialuniUserProvideKeys.detailUser, socialuniUserDetailViewService)
 </script>
