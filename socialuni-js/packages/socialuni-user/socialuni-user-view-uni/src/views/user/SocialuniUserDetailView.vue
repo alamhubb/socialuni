@@ -9,50 +9,33 @@
             <view class="mb-sm pt-200 bg-no-repeat"
                   style="background-image: url('https://cdxapp-1257733245.file.myqcloud.com/socialuni/common/app/userDefaultTopImg.jpg')">
                 <view class="pd-sm bg-white bt-radius-10">
-                    <view class="row-col-center py-sm">
-                        <image
-                                class="size65 bd-radius-xs mr-sm bd"
-                                mode="aspectFill"
-                                :src="socialuniUserDetailViewService.user.avatar"
-                                @click="socialuniUserDetailViewService.seeAvatarDetail()"
-                        />
-                        <view class="flex-1 row-between h65 py-xs">
-                            <view class="flex-col flex-1">
+                    <div class="row-between py-sm">
+                        <div class="flex-row">
+                            <image
+                                    class="size65 bd-radius-xs mr-sm bd"
+                                    mode="aspectFill"
+                                    :src="socialuniUserDetailViewService.user.avatar"
+                                    @click="socialuniUserDetailViewService.seeAvatarDetail()"
+                            />
+                            <view class="flex-1 flex-col h65 py-xs">
                                 <!--                                :class="{'color-red':socialuniUserDetailViewService.user.vipFlag}"-->
                                 <view class="text-md font-bold">
                                     {{ socialuniUserDetailViewService.user.nickname }}
                                 </view>
                                 <view class="row-col-center mt-sm">
-                                    <social-gender-tag :user="socialuniUserDetailViewService.user"></social-gender-tag>
+                                    <social-gender-tag
+                                            :user="socialuniUserDetailViewService.user"></social-gender-tag>
                                     <!--                <view v-if="userProp.vipFlag" class="cu-tag bg-red radius" @click="openVip">VIP</view>
                                                     <view v-else class="cu-tag bg-grey radius" @click="openVip">VIP</view>-->
                                 </view>
                             </view>
+                        </div>
 
-                            <div class="col-center flex-none">
-                                <view class="row-end-center mr-xss">
-                                    <view v-if="socialuniUserDetailViewService.user.hasBeFollowed && !socialuniUserDetailViewService.user.hasFollowed"
-                                          class="px-5 py-1 bg-default">
-                                        <div class="color-content font-12">
-                                            对方关注了您
-                                        </div>
-                                    </view>
-                                </view>
-                                <!--              不为自己才展示-->
-                                <view class="row-col-center mt-sm">
-                                    <!--                不为自己且未关注-->
-                                    <!--            不为ios，或者不为付费，则显示-->
-                                    <!--              <q-button v-if="!isIos||!user.chat.needPayOpen" @click="toMessagePage">-->
-                                    <q-button @click="socialuniUserDetailViewService.toMessagePage()" class="mr-sm">
-                                        <q-icon icon="mdi-chat-outline" size="14"></q-icon>
-                                        私信
-                                    </q-button>
-                                    <socialuni-follow-tag></socialuni-follow-tag>
-                                    <!--              <button v-else class="cu-btn round bd-gray bg-white" @click.stop="addFollow">已关注</button>-->
-                                </view>
-                            </div>
-                        </view>
-                    </view>
+                        <slot name="userBaseInfoRight" :user="socialuniUserDetailViewService.user">
+
+                        </slot>
+                    </div>
+
 
                     <view class="row-between-center mt-sm py-xs pr-xs">
                         <view class="flex-row flex-1 row-around">

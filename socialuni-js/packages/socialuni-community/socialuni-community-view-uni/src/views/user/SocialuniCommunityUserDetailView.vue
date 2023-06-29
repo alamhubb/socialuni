@@ -1,5 +1,30 @@
 <template>
     <socialuni-user-detail-view>
+        <template #userBaseInfoRight="{user}">
+            <div class="col-center flex-none">
+                <view class="row-end-center mr-xss">
+                    <view v-if="user.hasBeFollowed && !user.hasFollowed"
+                          class="px-5 py-1 bg-default">
+                        <div class="color-content font-12">
+                            对方关注了您
+                        </div>
+                    </view>
+                </view>
+                <!--              不为自己才展示-->
+                <view class="row-col-center mt-sm">
+                    <!--                不为自己且未关注-->
+                    <!--            不为ios，或者不为付费，则显示-->
+                    <!--              <q-button v-if="!isIos||!user.chat.needPayOpen" @click="toMessagePage">-->
+
+                    <slot name="userBaseInfoRightPre">
+
+                    </slot>
+                    <socialuni-follow-tag></socialuni-follow-tag>
+                    <!--              <button v-else class="cu-btn round bd-gray bg-white" @click.stop="addFollow">已关注</button>-->
+                </view>
+            </div>
+        </template>
+
         <q-popup ref="applyUserFriendDialog" title="申请添加好友111"
                  @confirm="socialuniCommunityUserDetailViewService.addFriend()">
             <div class="pd">cccc</div>
@@ -58,6 +83,10 @@ import TalkItem from "../../components/talkItem/TalkItem.vue";
 import socialuniCommunityUserDetailViewService
     from "socialuni-community-sdk/src/logic/SocialuniCommunityUserDetailViewService";
 import {getCurrentInstance} from "vue";
+import socialuniUserDetailViewService from "socialuni-user-sdk/src/logic/SocialuniUserDetailViewService";
+import QButton from "socialuni-ui-uni/src/components/QButton/QButton.vue";
+import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
+import SocialuniFollowTag from "../../components/SocialuniFollow/SocialuniFollowTag.vue";
 
 socialuniCommunityUserDetailViewService.initService(getCurrentInstance())
 </script>
