@@ -15,7 +15,7 @@ import java.io.Serializable;
  * 获取用户联系方式的记录，记录谁获取的谁
  */
 @Data
-@Table(name = "s_get_user_contact_record",
+@Table(name = "s_business_pay_order",
         uniqueConstraints = @UniqueConstraint(columnNames = {"userId", "beUserId"})
 )
 @Entity

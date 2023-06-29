@@ -6,7 +6,7 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "s_tencent_cos_audit_record")
+@Table(name = "s_open_tencent_cos_audit_record")
 @Data
 public class TencentCosAuditRecordDO extends SocialuniContentBaseDO {
     @Id

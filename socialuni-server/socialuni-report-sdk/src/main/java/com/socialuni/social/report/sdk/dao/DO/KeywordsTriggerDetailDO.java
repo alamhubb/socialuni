@@ -11,7 +11,7 @@ import java.util.Date;
 /**
  * 关键字触发记录
  */@Entity
-@Table(name = "s_keywords_trigger_detail")
+@Table(name = "s_app_keywords_trigger_detail")
 @Data
 public class KeywordsTriggerDetailDO implements Serializable {
     @Id

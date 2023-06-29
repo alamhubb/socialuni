@@ -12,7 +12,7 @@ import java.util.Date;
  */
 @Data
 @Entity
-@Table(name = "s_request_log", indexes = {
+@Table(name = "s_app_request_log", indexes = {
         @Index(columnList = "devId"),
         @Index(columnList = "userId"),
         @Index(columnList = "ip"),

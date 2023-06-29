@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Data
-@Table(name = "s_coin_order")
+@Table(name = "s_business_coin_order")
 @Entity
 public class SocialuniCoinOrderDO extends SocialuniContentBaseDO implements Serializable {
     //本单贝壳数量，可能是正值，也可能是负值

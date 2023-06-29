@@ -15,7 +15,7 @@ import java.util.Date;
 /**
  * 违规词
  */
-@Table(name = "s_white_keywords", uniqueConstraints = {
+@Table(name = "s_app_white_keywords", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"word"})
 })
 public class WhiteKeywordsDO implements Serializable {

@@ -10,7 +10,7 @@ import java.util.Date;
 /**
  * 举报信息
  */@Entity
-@Table(name = "s_antispam")
+@Table(name = "s_app_antispam")
 @Data
 public class AntispamDO implements Serializable {
     @Id

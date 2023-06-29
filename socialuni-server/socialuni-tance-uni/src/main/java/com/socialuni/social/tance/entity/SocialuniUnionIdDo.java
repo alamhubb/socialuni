@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "s_content_union_id",
+@Table(name = "s_dev_content_union_id",
         indexes = {
                 @Index(columnList = "contentType"),
         },

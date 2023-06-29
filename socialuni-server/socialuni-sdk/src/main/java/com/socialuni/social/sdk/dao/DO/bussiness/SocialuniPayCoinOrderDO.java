@@ -9,7 +9,7 @@ import java.io.Serializable;
 //金币充值订单
 @Data
 @Entity
-@Table(name = "s_pay_coin_order")
+@Table(name = "s_business_pay_coin_order")
 public class SocialuniPayCoinOrderDO extends SocialuniContentBaseDO implements Serializable {
     private String orderNo;
     private Integer coinNum;

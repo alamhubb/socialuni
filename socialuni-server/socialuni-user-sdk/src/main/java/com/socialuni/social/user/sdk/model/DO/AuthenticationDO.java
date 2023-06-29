@@ -14,7 +14,7 @@ import java.util.Date;
  * @date 2019-02-14 22:03
  */
 @Entity
-@Table(name = "s_authentication",
+@Table(name = "s_user_authentication",
         indexes = {
                 @Index(columnList = "phoneNum"),
                 @Index(columnList = "ip"),

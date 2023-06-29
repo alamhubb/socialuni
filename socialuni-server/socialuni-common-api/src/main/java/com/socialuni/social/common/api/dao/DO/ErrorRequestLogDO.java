@@ -15,7 +15,7 @@ import java.util.Date;
  */
 @Data
 @Entity
-@Table(name = "s_request_error_log", indexes = {
+@Table(name = "s_app_request_error_log", indexes = {
         @Index(columnList = "devId"),
         @Index(columnList = "userId"),
         @Index(columnList = "requestId"),

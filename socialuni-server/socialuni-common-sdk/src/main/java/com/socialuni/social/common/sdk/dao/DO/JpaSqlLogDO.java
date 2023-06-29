@@ -17,7 +17,7 @@ import java.util.Date;
  */
 @Data
 @Entity
-@Table(name = "s_jpa_sql_log", indexes = {
+@Table(name = "s_app_jpa_sql_log", indexes = {
         @Index(columnList = "requestId"),
         @Index(columnList = "interfaceMethod"),
         @Index(columnList = "spendTime"),

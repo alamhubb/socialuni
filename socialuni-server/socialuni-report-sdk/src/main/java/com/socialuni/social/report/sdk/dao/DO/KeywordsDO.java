@@ -17,7 +17,7 @@ import java.util.Date;
 /**
  * 违规单词表
  */
-@Table(name = "s_keywords", uniqueConstraints = {
+@Table(name = "s_app_keywords", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"text"})
 })
 public class KeywordsDO implements Serializable {

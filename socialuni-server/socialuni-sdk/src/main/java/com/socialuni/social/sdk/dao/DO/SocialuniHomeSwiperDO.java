@@ -15,7 +15,7 @@ import java.util.Date;
 /**
  * 全局配置表
  */
-@Table(name = "s_home_swiper")
+@Table(name = "s_community_home_swiper")
 public class SocialuniHomeSwiperDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

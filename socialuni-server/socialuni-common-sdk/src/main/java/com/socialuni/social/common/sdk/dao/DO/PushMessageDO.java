@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "s_push_message")
+@Table(name = "s_app_push_message")
 public class PushMessageDO implements Serializable {
 
     @Id

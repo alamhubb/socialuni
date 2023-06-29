@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "s_notify")
+@Table(name = "s_app_notify")
 @NoArgsConstructor
 public class NotifyDO extends SocialuniUserContactBaseDO implements Serializable {
     //加入一列作为外键

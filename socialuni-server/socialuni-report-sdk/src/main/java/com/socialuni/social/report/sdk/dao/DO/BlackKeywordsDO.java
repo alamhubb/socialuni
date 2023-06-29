@@ -15,7 +15,7 @@ import java.util.Date;
 /**
  * 违规词
  */
-@Table(name = "s_black_keywords", uniqueConstraints = {
+@Table(name = "s_app_black_keywords", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"word"})
 })
 public class BlackKeywordsDO implements Serializable {
