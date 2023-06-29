@@ -14,6 +14,6 @@ export interface SocialuniToastUtilInterface {
 
     success(title: string)
 
-    warn(title: string)
+    warning(title: string)
 
 }

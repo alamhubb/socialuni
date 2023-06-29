@@ -82,7 +82,7 @@ export default class PhoneLoginForm extends Vue {
   @Model('modelValue') readonly value!: PhoneNumFormData
 
   get authCodeInterval() {
-    return socialuniConfigModule.appMoreConfig.authCodeInterval
+    return socialuniConfigModule.appMoreConfig.authCodeInterval || 30
   }
 
   @Emit()
