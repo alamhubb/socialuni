@@ -21,11 +21,11 @@
                 <!--        <view class="mr-sm" :class="{'text-theme':useFilters}">
                           <q-icon icon="mdi-filter-variant" size="28" @click="showFilterModel"></q-icon>
                         </view>-->
-                <view v-if="user" class="position-relative mr-sm">
+<!--                <view v-if="user" class="position-relative mr-sm">
                     <q-icon icon="bell-fill" @click="toNotifyVue" size="28"></q-icon>
-                    <!--          <u-badge :count="unreadNotifiesNum" size="mini"
-                                       :offset="[0, 0]" @click="toNotifyVue"></u-badge>-->
-                </view>
+                    &lt;!&ndash;          <u-badge :count="unreadNotifiesNum" size="mini"
+                                       :offset="[0, 0]" @click="toNotifyVue"></u-badge>&ndash;&gt;
+                </view>-->
                 <view>
                     <q-icon icon="plus-circle" size="28" @click="toTalkAdd"></q-icon>
                 </view>
@@ -73,6 +73,7 @@ import {socialLocationModule} from "socialuni-community-sdk/src/store/SocialLoca
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 import {onLoad} from "uniapp-api/src/UniappPageLifecycleHook";
+import MsgInput from "../../components/MsgInput.vue";
 
 // todo 后台可控制是否显示轮播图
 
@@ -86,7 +87,7 @@ import {onLoad} from "uniapp-api/src/UniappPageLifecycleHook";
         QIcon,
         QSearch,
         QNavbar,
-        // MsgInput,
+        MsgInput,
         QButton,
         TagSearch,
         TabsTalk,
