@@ -55,6 +55,7 @@ import SocialCircleRO from "socialuni-api-base/src/model/community/circle/Social
 import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 import QInput from "socialuni-ui-uni/src/components/QInput/QInput.vue";
 import QSidebar from "socialuni-ui-uni/src/components/QSidebar/QSidebar.vue";
+import {socialCircleModule} from "socialuni-community-sdk/src/store/SocialCircleModule";
 
 
 @Options({

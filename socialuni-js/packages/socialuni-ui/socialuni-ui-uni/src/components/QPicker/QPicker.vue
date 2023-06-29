@@ -42,6 +42,7 @@ import {Emit, Model, Options, Prop, Vue, Watch} from 'vue-property-decorator'
 import QRowItem from '../QRowItem/QRowItem.vue'
 import SelectorQuery = UniApp.SelectorQuery;
 import NodesRef = UniApp.NodesRef;
+import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
 
 /*
 显示出来已经选了的城市，给她画上钩
@@ -57,7 +58,7 @@ import NodesRef = UniApp.NodesRef;
   }
 })
 export default class QPicker extends Vue {
-  readonly uuid: string = 'u' + CommonUtil.getUUID()
+  readonly uuid: string = 'u' + UUIDUtil.getUUID()
   @Model('modelValue') readonly value!: any
   @Prop() readonly dataList: any []
 

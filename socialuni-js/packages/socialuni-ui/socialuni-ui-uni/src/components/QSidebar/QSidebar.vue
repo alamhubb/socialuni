@@ -31,6 +31,7 @@ import CommonUtil from 'socialuni-util/src/util/CommonUtil';
 import {Options, Prop, Vue, Watch} from 'vue-property-decorator'
 import SelectorQuery = UniApp.SelectorQuery;
 import NodesRef = UniApp.NodesRef;
+import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
 
 /*
 显示出来已经选了的城市，给她画上钩
@@ -41,7 +42,7 @@ export default class QSidebar extends Vue {
   /**
    * 避免组件重复，设置uuid
    */
-  readonly uuid: string = 'u' + CommonUtil.getUUID()
+  readonly uuid: string = 'u' + UUIDUtil.getUUID()
   /**
    * 展示的数据
    */

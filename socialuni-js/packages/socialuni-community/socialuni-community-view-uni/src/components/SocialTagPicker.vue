@@ -54,6 +54,8 @@ import QInput from "socialuni-ui-uni/src/components/QInput/QInput.vue";
 import QSidebar from "socialuni-ui-uni/src/components/QSidebar/QSidebar.vue";
 import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue";
 import SocialCircleRO from "socialuni-api-base/src/model/community/circle/SocialCircleRO";
+import {socialuniTagModule} from "socialuni-community-sdk/src/store/SocialTagModule";
+import TagTypeVO from "socialuni-api-base/src/model/community/tag/TagTypeVO";
 
 
 @Options({
@@ -69,7 +71,7 @@ export default class SocialTagPicker extends Vue {
     dialog: QPopup
   }
 
-  get tagTypes() {
+  get tagTypes(): TagTypeVO[] {
     return socialuniTagModule.tagTypes
   }
 
