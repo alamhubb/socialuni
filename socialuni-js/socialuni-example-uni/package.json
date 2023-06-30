@@ -55,6 +55,7 @@
     "cos-js-sdk-v5": "^1.2.18",
     "cos-wx-sdk-v5": "^0.7.11",
     "socialuni": "../packages/socialuni",
+    "socialuni-ui-uni": "../packages/socialuni-ui/socialuni-ui-uni",
     "socialuni-app": "../packages/socialuni-app/socialuni-app-sdk",
     "socialuni-user-view-uni": "../packages/socialuni-user/socialuni-user-view-uni",
     "socialuni-community-view-uni": "../packages/socialuni-community/socialuni-community-view-uni",
