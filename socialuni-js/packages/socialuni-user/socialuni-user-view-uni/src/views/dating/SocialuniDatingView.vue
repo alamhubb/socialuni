@@ -129,10 +129,9 @@ import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 import SocialuniImgUtil from "socialuni-user-sdk/src/util/SocialuniImgUtil";
-import SocialuniDatingService from "../service/SocialuniDatingService";
 
 @Options({
-  components: {QPullRefresh, QButton, QIcon, SocialuniFollowTag, SocialGenderTag, QTabs}
+  components: {QPullRefresh, QButton, QIcon, SocialGenderTag, QTabs}
 })
 export default class SocialuniDatingView extends Vue {
   $refs: {

@@ -70,12 +70,11 @@ import CommonUtil from "socialuni-util/src/util/CommonUtil";
 import SocialUserFollowDetailRO from "socialuni-api-base/src/model/social/SocialUserFollowDetailRO";
 import QPullRefresh from "socialuni-ui-uni/src/components/QPullRefresh/QPullRefresh.vue";
 import SocialGenderTag from "../../../components/SocialGenderTag/SocialGenderTag.vue";
-import SocialuniFollowTag from "socialuni-community-view-uni/src/components/SocialuniFollow/SocialuniFollowTag.vue";
 import FollowAPI from "socialuni-community-api/src/api/FollowAPI";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 
 @Options({
-  components: {QPullRefresh, SocialuniFollowTag, SocialGenderTag, QTabs}
+  components: {QPullRefresh, SocialGenderTag, QTabs}
 })
 export default class SocialuniFollowView extends Vue {
   $refs: {

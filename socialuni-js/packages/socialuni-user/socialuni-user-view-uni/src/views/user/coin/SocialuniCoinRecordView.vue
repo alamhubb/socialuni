@@ -81,13 +81,12 @@ import SocialUserContentRO from "socialuni-api-base/src/model/social/SocialUserC
 import {onLoad, onPullDownRefresh, onReachBottom, onShow} from "@dcloudio/uni-app";
 import QTabs from "socialuni-ui-uni/src/components/QTabs/QTabs.vue";
 import SocialuniPageQueryUtil from "socialuni-api-base/src/model/common/SocialuniPageQueryUtil";
-import SocialuniFollowTag from "socialuni-community-view-uni/src/components/SocialuniFollow/SocialuniFollowTag.vue";
 import SocialGenderTag from "../../../components/SocialGenderTag/SocialGenderTag.vue";
 import FollowAPI from "socialuni-community-api/src/api/FollowAPI";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 
 @Options({
-    components: {SocialuniFollowTag, SocialGenderTag, QTabs}
+    components: {SocialGenderTag, QTabs}
 })
 export default class SocialuniCoinRecordView extends Vue {
     tabs = ['收入', '消费', '充值']
