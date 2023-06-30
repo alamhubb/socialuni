@@ -58,7 +58,6 @@
     "socialuni-app": "../packages/socialuni-app/socialuni-app-sdk",
     "socialuni-user-view-uni": "../packages/socialuni-user/socialuni-user-view-uni",
     "socialuni-community-view-uni": "../packages/socialuni-community/socialuni-community-view-uni",
-    "socialuni-im-view-uni": "../packages/socialuni-im/socialuni-im-view-uni",
     "util": "^0.12.5",
     "uuid": "^7.0.3",
     "vite-plugin-require-transform": "^1.0.4",
