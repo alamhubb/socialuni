@@ -1,5 +1,5 @@
 {
-  "name": "socialuni-constant",
+  "name": "@socialuni/socialuni-constant",
   "version": "0.1.2",
   "description": "",
   "main": "axios.ts",

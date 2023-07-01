@@ -1,5 +1,5 @@
 {
-  "name": "socialuni-example-uni",
+  "name": "@socialuni/socialuni-example-uni",
   "version": "0.0.0",
   "scripts": {
     "dev:app": "uni -p app",

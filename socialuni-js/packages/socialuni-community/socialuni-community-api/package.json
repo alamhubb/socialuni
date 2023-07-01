@@ -1,5 +1,5 @@
 {
-  "name": "socialuni-community-api",
+  "name": "@socialuni/socialuni-community-api",
   "version": "0.1.2",
   "description": "",
   "main": "index.js",

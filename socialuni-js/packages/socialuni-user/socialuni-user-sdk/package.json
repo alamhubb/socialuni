@@ -1,5 +1,5 @@
 {
-  "name": "socialuni-user-sdk",
+  "name": "@socialuni/socialuni-user-sdk",
   "version": "0.1.2",
   "description": "",
   "main": "index.js",

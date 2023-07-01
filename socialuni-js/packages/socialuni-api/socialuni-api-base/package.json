@@ -1,5 +1,5 @@
 {
-  "name": "socialuni-api-base",
+  "name": "@socialuni/socialuni-api-base",
   "version": "0.1.2",
   "description": "",
   "scripts": {
