@@ -22,13 +22,15 @@ const socialuniInitPlugin: SocialuniPlugin = {
     }
 }
 
+
+
 async function installSocialuniPluginIns(app: App) {
     socialuniPluginsModule.addPlugin(socialuniInitPlugin)
 
     const moudles = import.meta.globEager('./index.ts')
     console.log(moudles)
     //查询是否包含community模块，如果存在则加载
-    const appModules = import.meta.globEager('../../socialuni-app/socialuni-app-sdk/src/index.ts')
+    const appModules = import.meta.globEager('../../socialuni-app-sdk/src/index.ts')
     console.log(appModules)
     const socialuniApp = PlatformModuleLoadUtil.getFirstModule(appModules)
     if (socialuniApp && socialuniApp.default) {
