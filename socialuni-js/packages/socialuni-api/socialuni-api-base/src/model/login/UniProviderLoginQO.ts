@@ -40,7 +40,7 @@ export default class UniProviderLoginQO {
     constructor(providerCode: string, userInfoRes: any, userInfoRO: UniUserInfoRO, provider?: string) {
         this.platform = socialuniSystemModule.platform
         //如果为小程序的话不传值，默认为小程序类型
-        this.provider = provider || socialuniSystemModule.provider
+        this.provider = provider || socialuniSystemModule.mpPlatform
 
         this.code = providerCode || ''
 

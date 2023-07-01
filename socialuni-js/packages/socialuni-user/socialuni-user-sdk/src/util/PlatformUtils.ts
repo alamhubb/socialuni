@@ -82,7 +82,7 @@ export default class PlatformUtils {
         PlatformUtils.checkPay()
         //目前支持微信支付
         // const provider: string = SocialuniProviderType.wx
-        return SocialuniCoinAPI.payCoinAPI(socialuniSystemModule.provider, amount).then((res) => {
+        return SocialuniCoinAPI.payCoinAPI(socialuniSystemModule.mpPlatform, amount).then((res) => {
             return PlatformUtils.cashPay(res.data)
         })
     }

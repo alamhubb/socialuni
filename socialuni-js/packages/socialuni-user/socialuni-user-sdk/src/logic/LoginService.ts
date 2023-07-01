@@ -1,10 +1,10 @@
-import ToastUtil from 'socialuni-native-uni/src/util/ToastUtil'
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import Constants from "socialuni-constant/constant/Constant";
 import SocialPhoneNumLoginQO from "socialuni-api-base/src/model/phone/SocialPhoneNumLoginQO";
 import LoginAPI from "socialuni-user-api/src/api/LoginAPI";
 import UserService from "socialuni-user-sdk/src/logic/UserService";
 import UniUserUtil from "../util/UniUserUtil";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 export default class LoginService {
     /**
@@ -19,6 +19,7 @@ export default class LoginService {
         //一行代码就可以获取登录所需要的信息, 还可以配合后台使用，一键登录，记住用户
         const loginQO = await UniUserUtil.getUniProviderLoginQO(provider)
 
+        console.log('fasldfasjkl')
         const {data} = await LoginAPI.providerLoginAPI(loginQO)
 
         // UserService.getMineUserInitDataActionByToken(data)

@@ -7,11 +7,21 @@ import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemMod
 import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
 import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import {InternalAxiosRequestConfig} from "axios/index";
+import {socialuniTokenModule} from "socialuni-user-sdk/src/store/SocialuniTokenModule";
 
 class SocialuniAppPlugin implements SocialuniPlugin {
     onLaunch() {
         WebsocketUtil.websocketConnect(false)
         socialuniConfigModule.getAppConfigAction()
+    }
+
+    onRequestInterceptors(config: InternalAxiosRequestConfig) {
+        console.log('chufale')
+        config.headers.provider = socialuniSystemModule.mpPlatform
+        config.headers.mpPlatform = socialuniSystemModule.mpPlatform
+        config.headers.platform = socialuniSystemModule.platform
+        config.headers.system = socialuniSystemModule.system
     }
 
     onResponseErrorInterceptors(res) {

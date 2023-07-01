@@ -49,6 +49,7 @@ class SocialuniUserPlugin implements SocialuniPlugin {
         } else {
             config.headers.token = null
         }
+        config.headers['qqe'] = 'fasdfasdf'
     }
 
     onResponseErrorInterceptors(error: AxiosError) {

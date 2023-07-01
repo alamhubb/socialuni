@@ -23,7 +23,7 @@ export default class PhoneService {
             // encryptedData: ""
             // errMsg: "getPhoneNumber:ok"
             // iv: ""
-            wxGetPhoneInfoResult.detail.code = await UniLoginUtil.getLoginCode(socialuniSystemModule.provider)
+            wxGetPhoneInfoResult.detail.code = await UniLoginUtil.getLoginCode(socialuniSystemModule.mpPlatform)
             const res = await PhoneAPI.bindWxPhoneNumAPI(wxGetPhoneInfoResult.detail)
             socialuniUserModule.setUser(res.data)
         } else {

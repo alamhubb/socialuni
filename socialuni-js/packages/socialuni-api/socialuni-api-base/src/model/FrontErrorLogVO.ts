@@ -18,7 +18,7 @@ export default class FrontErrorLogVO {
         this.errorMsg = errorMsg
         this.platform = socialuniSystemModule.platform
         if (this.platform === PlatformType.mp) {
-            this.provider = socialuniSystemModule.provider
+            this.provider = socialuniSystemModule.mpPlatform
         } else {
             this.appVersion = socialuniSystemModule.appVersion
         }

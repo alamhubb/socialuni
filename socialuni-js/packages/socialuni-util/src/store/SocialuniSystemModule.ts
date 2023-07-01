@@ -4,6 +4,7 @@ import SocialuniMpPlatformType from "socialuni-constant/constant/SocialuniMpPlat
 import SocialuniUniDeviceType from "socialuni-constant/constant/SocialuniUniDeviceType";
 import SocialuniSystemType from "socialuni-constant/constant/SocialuniSystemType";
 import {reactive} from "vue";
+import PlatformType from "socialuni-constant/constant/PlatformType";
 
 class SocialuniSystemModule {
     isUniApp = false
@@ -39,9 +40,9 @@ class SocialuniSystemModule {
     system = ''
     systemInfo: GetSystemInfoResult = null
     //h5，小程序，app
-    platform = ''
+    platform = PlatformType.h5
     // 小程序类型
-    provider = ''
+    mpPlatform = null
 
 
     // 条件编译属性
@@ -78,11 +79,11 @@ class SocialuniSystemModule {
                 this.platform = SocialuniPlatformType.mp
                 // #ifdef MP-WEIXIN
                 this.isMpWx = true
-                this.provider = SocialuniMpPlatformType.wx
+                this.mpPlatform = SocialuniMpPlatformType.wx
                 // #endif
                 // #ifdef MP-QQ
                 this.isMpQQ = true
-                this.provider = SocialuniMpPlatformType.qq
+                this.mpPlatform = SocialuniMpPlatformType.qq
                 // #endif
                 // #endif
 
