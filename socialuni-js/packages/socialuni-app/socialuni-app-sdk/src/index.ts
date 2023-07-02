@@ -1,14 +1,14 @@
 import {SocialuniPlugin} from 'socialuni/src/interface/SocialuniPlugin'
-import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
+import WebsocketUtil from "@socialuni/socialuni-api-base/src/websocket/WebsocketUtil";
 import {socialuniConfigModule} from "./store/SocialuniConfigModule";
 import {App, defineComponent, onErrorCaptured} from "vue";
-import {SocialuniOption} from "socialuni/src/interface/socialuniOption";
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
-import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
-import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import {SocialuniOption} from "@socialuni/socialuni/src/interface/socialuniOption";
+import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniPluginsModule} from "@socialuni/socialuni/src/store/SocialuniPluginsModule";
+import SocialuniAppAPI from "@socialuni/socialuni-app-api/src/api/SocialuniAppAPI";
+import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
 import {InternalAxiosRequestConfig} from "axios/index";
-import {socialuniTokenModule} from "socialuni-user-sdk/src/store/SocialuniTokenModule";
+import {socialuniTokenModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniTokenModule";
 
 class SocialuniAppPlugin implements SocialuniPlugin {
     onLaunch() {

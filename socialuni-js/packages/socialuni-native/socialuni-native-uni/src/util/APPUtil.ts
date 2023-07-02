@@ -1,9 +1,9 @@
 import AlertUtil from 'src/util/AlertUtil'
-import AppConfig from "socialuni-constant/constant/AppConfig";
-import AppUpdateType from "socialuni-constant/constant/AppUpdateType";
-import SocialuniAppAPI from "socialuni/src/api/socialuni/SocialuniAppAPI";
-import {socialuniConfigModule} from "socialuni/src/store/SocialuniConfigModule";
-import SocialuniAppUtil from "socialuni-app-sdk/src/util/UniUtil";
+import AppConfig from "@socialuni/socialuni-constant/constant/AppConfig";
+import AppUpdateType from "@socialuni/socialuni-constant/constant/AppUpdateType";
+import SocialuniAppAPI from "@socialuni/socialuni/src/api/socialuni/SocialuniAppAPI";
+import {socialuniConfigModule} from "@socialuni/socialuni/src/store/SocialuniConfigModule";
+import SocialuniAppUtil from "@socialuni/socialuni-app-sdk/src/util/UniUtil";
 
 export default class APPUtil {
     static checkUpdate() {

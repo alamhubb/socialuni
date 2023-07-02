@@ -1,9 +1,9 @@
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
 import CommonEventUtil from "./util/CommonEventUtil";
 import UniappPageLifecycleConst from "./UniappPageLifecycleConst";
-import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
+import {socialuniPluginsModule} from "@socialuni/socialuni/src/store/SocialuniPluginsModule";
 import {onBeforeMount} from "vue";
-import PlatformModuleLoadUtil from "socialuni-native-util/src/util/PlatformModuleLoadUtil";
+import PlatformModuleLoadUtil from "@socialuni/socialuni-native-util/src/util/PlatformModuleLoadUtil";
 
 
 export async function onLoad(hook: (params: any) => any) {

@@ -99,9 +99,9 @@
 </template>
 
 <script lang="ts" setup>
-import QButton from "socialuni-ui-uni/src/components/QButton/QButton.vue";
+import QButton from "@socialuni/socialuni-ui-uni/src/components/QButton/QButton.vue";
 
-import socialuniUserEditViewService from "socialuni-user-sdk/src/logic/SocialuniUserEditViewService";
+import socialuniUserEditViewService from "@socialuni/socialuni-user-sdk/src/logic/SocialuniUserEditViewService";
 import {getCurrentInstance} from "vue";
 
 socialuniUserEditViewService.initService(getCurrentInstance())

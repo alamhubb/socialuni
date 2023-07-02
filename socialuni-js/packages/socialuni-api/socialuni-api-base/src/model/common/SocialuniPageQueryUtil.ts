@@ -1,6 +1,6 @@
 import SocialuniPageQueryQO from './SocialuniPageQueryQO'
 import SocialuniContentRO from "../social/SocialuniContentRO";
-import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
+import LoadMoreType from "@socialuni/socialuni-constant/constant/LoadMoreType";
 
 export default class SocialuniPageQueryUtil<T extends SocialuniContentRO, Q> {
     queryQO: SocialuniPageQueryQO<T, Q> = new SocialuniPageQueryQO()

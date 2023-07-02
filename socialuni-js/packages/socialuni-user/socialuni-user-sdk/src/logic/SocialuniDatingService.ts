@@ -1,9 +1,9 @@
-import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
-import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
-import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
-import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
-import SocialuniDatingAPI from "socialuni-user-api/src/api/SocialuniDatingAPI";
+import CenterUserDetailRO from "@socialuni/socialuni-api-base/src/model/social/CenterUserDetailRO";
+import UserMsgUtil from "@socialuni/socialuni-user-sdk/src/util/UserMsgUtil";
+import {socialuniConfigModule} from "@socialuni/socialuni-app-sdk/src/store/SocialuniConfigModule";
+import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
+import SocialuniDatingAPI from "@socialuni/socialuni-user-api/src/api/SocialuniDatingAPI";
 
 export default class SocialuniDatingService{
     static async getOpenContactInfo(user: CenterUserDetailRO) {

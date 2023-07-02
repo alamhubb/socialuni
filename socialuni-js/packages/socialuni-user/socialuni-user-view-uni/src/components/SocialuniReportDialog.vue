@@ -27,14 +27,14 @@
 
 <script lang="ts">
 import {Emit, Options, Vue} from 'vue-property-decorator'
-import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue";
-import ReportType from "socialuni-constant/constant/ReportType";
-import ReportAddVO from "socialuni-api-base/src/model/report/ReportAddVO";
-import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
-import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
-import ReportAPI from "socialuni-app-api/src/api/ReportAPI";
-import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
+import QPopup from "@socialuni/socialuni-ui-uni/src/components/QPopup/QPopup.vue";
+import ReportType from "@socialuni/socialuni-constant/constant/ReportType";
+import ReportAddVO from "@socialuni/socialuni-api-base/src/model/report/ReportAddVO";
+import {socialuniConfigModule} from "@socialuni/socialuni-app-sdk/src/store/SocialuniConfigModule";
+import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
+import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import ReportAPI from "@socialuni/socialuni-app-api/src/api/ReportAPI";
+import UserMsgUtil from "@socialuni/socialuni-user-sdk/src/util/UserMsgUtil";
 
 @Options({
     components: {QPopup}

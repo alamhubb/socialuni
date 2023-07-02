@@ -1,6 +1,6 @@
 import RouterUtil from "./RouterUtil";
-import PagePath from "socialuni-constant/constant/PagePath";
-import ImPagePath from "socialuni-im-sdk/src/constant/ImPagePath";
+import PagePath from "@socialuni/socialuni-constant/constant/PagePath";
+import ImPagePath from "@socialuni/socialuni-im-sdk/src/constant/ImPagePath";
 
 export default class PageUtil {
     /*static goHome(): void {

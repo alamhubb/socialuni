@@ -25,13 +25,13 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import QInput from "socialuni-ui-uni/src/components/QInput/QInput.vue";
-import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue";
-import SSwitch from "socialuni-ui-uni/src/components/SSwitch.vue";
-import SocialuniUserExpandAPI from "socialuni-user-api/src/api/SocialuniUserExpandAPI";
-import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
-import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QInput from "@socialuni/socialuni-ui-uni/src/components/QInput/QInput.vue";
+import QPopup from "@socialuni/socialuni-ui-uni/src/components/QPopup/QPopup.vue";
+import SSwitch from "@socialuni/socialuni-ui-uni/src/components/SSwitch.vue";
+import SocialuniUserExpandAPI from "@socialuni/socialuni-user-api/src/api/SocialuniUserExpandAPI";
+import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
+import {socialuniConfigModule} from "@socialuni/socialuni-app-sdk/src/store/SocialuniConfigModule";
+import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
 
 @Options({
   components: {

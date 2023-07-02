@@ -1,5 +1,5 @@
-import SkipType from "socialuni-constant/constant/SkipType";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import SkipType from "@socialuni/socialuni-constant/constant/SkipType";
+import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
 import SocialuniAppPagePath from "../constant/SocialuniAppPagePath";
 import SkipUrlConst from "../constant/SkipUrlConst";
 

@@ -8,17 +8,17 @@ import GetProviderRes = UniApp.GetProviderRes;
 import LoginRes = UniApp.LoginRes;
 import GetUserInfoRes = UniApp.GetUserInfoRes;
 import GetImageInfoSuccessData = UniApp.GetImageInfoSuccessData;
-import AppMsg from "socialuni-constant/constant/AppMsg";
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
-import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
-import ImgUtil from "socialuni-util/src/util/ImgUtil";
-import LocationQueryQO from "socialuni-api-base/src/model/location/LocationQueryQO";
-import ResultRO from "socialuni-api-base/src/model/social/ResultRO";
-import {QQMapResult} from "socialuni-api-base/src/model/location/QQMapResult";
+import AppMsg from "@socialuni/socialuni-constant/constant/AppMsg";
+import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
+import UUIDUtil from "@socialuni/socialuni-util/src/util/UUIDUtil";
+import ImgUtil from "@socialuni/socialuni-util/src/util/ImgUtil";
+import LocationQueryQO from "@socialuni/socialuni-api-base/src/model/location/LocationQueryQO";
+import ResultRO from "@socialuni/socialuni-api-base/src/model/social/ResultRO";
+import {QQMapResult} from "@socialuni/socialuni-api-base/src/model/location/QQMapResult";
 import ToastUtil from "./ToastUtil";
-import DomFile from "socialuni-app-sdk/src/model/DomFile";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
-import SocialuniLocationAPI from "socialuni-app-api/src/api/SocialuniLocationAPI";
+import DomFile from "@socialuni/socialuni-app-sdk/src/model/DomFile";
+import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import SocialuniLocationAPI from "@socialuni/socialuni-app-api/src/api/SocialuniLocationAPI";
 
 
 export default class NativeUtil {

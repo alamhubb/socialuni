@@ -6,12 +6,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "socialuni-app-sdk": "^0.1.2",
-    "socialuni-app-api": "^0.1.2",
-    "socialuni-constant": "^0.1.2",
-    "socialuni-native-util": "^0.1.2",
-    "socialuni-util": "^0.1.2",
-    "socialuni-scss": "^0.1.2",
+    "@socialuni/socialuni-app-sdk": "^0.1.2",
+    "@socialuni/socialuni-app-api": "^0.1.2",
+    "@socialuni/socialuni-constant": "^0.1.2",
+    "@socialuni/socialuni-native-util": "^0.1.2",
+    "@socialuni/socialuni-util": "^0.1.2",
+    "@socialuni/socialuni-scss": "^0.1.2",
     "cos-js-sdk-v5": "^1.2.18",
     "@dcloudio/types": "^3.0.17",
     "@dcloudio/uni-ui": "^1.4.23"

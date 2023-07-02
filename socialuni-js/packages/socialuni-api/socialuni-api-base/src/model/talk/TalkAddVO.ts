@@ -1,6 +1,6 @@
 import DistrictVO from '../DistrictVO'
 import ImgAddQO from '../user/ImgAddQO'
-import LocationConst from "socialuni-constant/constant/community/LocationConst";
+import LocationConst from "@socialuni/socialuni-constant/constant/community/LocationConst";
 
 export default class TalkAddVO {
     public content: string

@@ -6,13 +6,13 @@
 
 <script lang="ts">
 
-import SocialuniUserDetailView from "socialuni-user-view-uni/src/views/user/SocialuniUserDetailView.vue";
-import QButton from "socialuni-ui-uni/src/components/QButton/QButton.vue";
-import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
+import SocialuniUserDetailView from "@socialuni/socialuni-user-view-uni/src/views/user/SocialuniUserDetailView.vue";
+import QButton from "@socialuni/socialuni-ui-uni/src/components/QButton/QButton.vue";
+import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 
-import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue";
+import QPopup from "@socialuni/socialuni-ui-uni/src/components/QPopup/QPopup.vue";
 import {Options, Vue} from "vue-property-decorator";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
 
 @Options({
     components: {

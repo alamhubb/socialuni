@@ -1,4 +1,4 @@
-import {socialLocationModule} from "socialuni-sdk/src/store/store";
+import {socialLocationModule} from "@socialuni/socialuni-sdk/src/store/store";
 
 export default class TalkQueryVO {
     homeTabName: string

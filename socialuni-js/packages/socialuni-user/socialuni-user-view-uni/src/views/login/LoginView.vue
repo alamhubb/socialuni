@@ -128,14 +128,14 @@ import PhoneNumFormData from "./PhoneNumFormData";
 import UserPrivacyAgreement from "./UserPrivacyAgreement.vue";
 import PhoneLoginForm from "./PhoneLoginForm.vue";
 import LoginFooterAppInfo from "./LoginFooterAppInfo.vue";
-import QButton from "socialuni-ui-uni/src/components/QButton/QButton.vue";
-import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
-import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
-import LoginService from "socialuni-user-sdk/src/logic/LoginService";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
-import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
-import PhoneService from "socialuni-user-sdk/src/logic/PhoneService";
+import QButton from "@socialuni/socialuni-ui-uni/src/components/QButton/QButton.vue";
+import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue";
+import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
+import LoginService from "@socialuni/socialuni-user-sdk/src/logic/LoginService";
+import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import UserPageUtil from "@socialuni/socialuni-user-sdk/src/util/UserPageUtil";
+import PhoneService from "@socialuni/socialuni-user-sdk/src/logic/PhoneService";
 
 @Options({
   components: {

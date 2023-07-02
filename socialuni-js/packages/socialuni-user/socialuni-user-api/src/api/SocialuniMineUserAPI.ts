@@ -1,10 +1,10 @@
 import socialuniUserRequest from "../request/socialuniUserRequest";
-import SocialuniUserRO from "socialuni-api-base/src/model/user/SocialuniUserRO";
-import SocialuniMineUserRO from "socialuni-api-base/src/model/user/SocialuniMineUserRO";
-import ImgFileVO from "socialuni-api-base/src/model/ImgFileVO";
-import UserEditVO from "socialuni-api-base/src/model/user/UserEditVO";
-import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
-import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
+import SocialuniUserRO from "@socialuni/socialuni-api-base/src/model/user/SocialuniUserRO";
+import SocialuniMineUserRO from "@socialuni/socialuni-api-base/src/model/user/SocialuniMineUserRO";
+import ImgFileVO from "@socialuni/socialuni-api-base/src/model/ImgFileVO";
+import UserEditVO from "@socialuni/socialuni-api-base/src/model/user/UserEditVO";
+import ImgAddQO from "@socialuni/socialuni-api-base/src/model/user/ImgAddQO";
+import CenterUserDetailRO from "@socialuni/socialuni-api-base/src/model/social/CenterUserDetailRO";
 
 export interface SocialuniGetRandomAvatarRO{
   path:string

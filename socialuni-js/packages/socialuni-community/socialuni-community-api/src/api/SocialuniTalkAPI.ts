@@ -1,15 +1,15 @@
-import UserTalkQueryVO from "socialuni-api-base/src/model/user/UserTalkQueryVO";
+import UserTalkQueryVO from "@socialuni/socialuni-api-base/src/model/user/UserTalkQueryVO";
 import socialuniCommunityRequest from "../request/socialuniCommunityRequest";
-import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
-import DomFile from "socialuni-util/src/model/DomFile";
-import DistrictVO from "socialuni-api-base/src/model/DistrictVO";
-import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
-import TalkAddVO from "socialuni-api-base/src/model/talk/TalkAddVO";
-import TalkQueryVO from "socialuni-api-base/src/model/talk/TalkQueryVO";
-import CommentAddVO from "socialuni-api-base/src/model/comment/CommentAddVO";
-import HugAddVO from "socialuni-api-base/src/model/HugAddVO";
-import TalkDeleteVO from "socialuni-api-base/src/model/talk/TalkDeleteVO";
-import CommentDeleteVO from "socialuni-api-base/src/model/comment/CommentDeleteVO";
+import TalkVO from "@socialuni/socialuni-api-base/src/model/talk/TalkVO";
+import DomFile from "@socialuni/socialuni-util/src/model/DomFile";
+import DistrictVO from "@socialuni/socialuni-api-base/src/model/DistrictVO";
+import ImgAddQO from "@socialuni/socialuni-api-base/src/model/user/ImgAddQO";
+import TalkAddVO from "@socialuni/socialuni-api-base/src/model/talk/TalkAddVO";
+import TalkQueryVO from "@socialuni/socialuni-api-base/src/model/talk/TalkQueryVO";
+import CommentAddVO from "@socialuni/socialuni-api-base/src/model/comment/CommentAddVO";
+import HugAddVO from "@socialuni/socialuni-api-base/src/model/HugAddVO";
+import TalkDeleteVO from "@socialuni/socialuni-api-base/src/model/talk/TalkDeleteVO";
+import CommentDeleteVO from "@socialuni/socialuni-api-base/src/model/comment/CommentDeleteVO";
 
 export default class SocialuniTalkAPI {
     static queryStickTalksAPI() {

@@ -111,23 +111,23 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import {socialConfigModule} from "socialuni-sdk/src/store/store";
-import {socialUserModule} from 'socialuni-sdk/src/store/store';
-import DomFile from 'socialuni-api/src/model/DomFile';
-import SocialUserIdentityAuthPreCheckRO from "socialuni-api/src/model/RO/user/SocialUserIdentityAuthPreCheckRO";
-import TencentCosIdInfoRO from "socialuni-api/src/model/RO/tencent/cos/idImgInfo/TencentCosIdInfoRO";
-import QButton from "socialuni-view/src/components/QButton/QButton.vue";
-import QIcon from "socialuni-view/src/components/QIcon/QIcon.vue";
-import CosUtil from "socialuni-sdk/src/utils/CosUtil";
-import SocialuniAppUtil from "socialuni-sdk/src/utils/UniUtil";
-import MsgUtil from "socialuni-sdk/src/utils/MsgUtil";
-import TencentCosAPI from "socialuni-api/src/api/TencentCosAPI";
-import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
-import SocialUserIdentityAPI from "socialuni-api/src/api/socialuni/SocialUserIdentityAPI";
-import SocialUserIdentityAuthQO from "socialuni-api/src/model/QO/user/SocialUserIdentityAuthQO";
-import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
-import RouterUtil from "socialuni-sdk/src/utils/RouterUtil";
-import PageUtil from "socialuni-sdk/src/utils/PageUtil";
+import {socialConfigModule} from "@socialuni/socialuni-sdk/src/store/store";
+import {socialUserModule} from '@socialuni/socialuni-sdk/src/store/store';
+import DomFile from '@socialuni/socialuni-api/src/model/DomFile';
+import SocialUserIdentityAuthPreCheckRO from "@socialuni/socialuni-api/src/model/RO/user/SocialUserIdentityAuthPreCheckRO";
+import TencentCosIdInfoRO from "@socialuni/socialuni-api/src/model/RO/tencent/cos/idImgInfo/TencentCosIdInfoRO";
+import QButton from "@socialuni/socialuni-view/src/components/QButton/QButton.vue";
+import QIcon from "@socialuni/socialuni-view/src/components/QIcon/QIcon.vue";
+import CosUtil from "@socialuni/socialuni-sdk/src/utils/CosUtil";
+import SocialuniAppUtil from "@socialuni/socialuni-sdk/src/utils/UniUtil";
+import MsgUtil from "@socialuni/socialuni-sdk/src/utils/MsgUtil";
+import TencentCosAPI from "@socialuni/socialuni-api/src/api/TencentCosAPI";
+import ToastUtil from "@socialuni/socialuni-sdk/src/utils/ToastUtil";
+import SocialUserIdentityAPI from "@socialuni/socialuni-api/src/api/socialuni/SocialUserIdentityAPI";
+import SocialUserIdentityAuthQO from "@socialuni/socialuni-api/src/model/QO/user/SocialUserIdentityAuthQO";
+import AlertUtil from "@socialuni/socialuni-sdk/src/utils/AlertUtil";
+import RouterUtil from "@socialuni/socialuni-sdk/src/utils/RouterUtil";
+import PageUtil from "@socialuni/socialuni-sdk/src/utils/PageUtil";
 
 @Options({
   components: {

@@ -1,4 +1,4 @@
-import ReportAddVO from "socialuni-api-base/src/model/report/ReportAddVO";
+import ReportAddVO from "@socialuni/socialuni-api-base/src/model/report/ReportAddVO";
 import socialuniAppRequest from "../socialuniAppRequest";
 
 export default class ReportAPI {

@@ -1,10 +1,10 @@
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
-import Constants from "socialuni-constant/constant/Constant";
-import SocialPhoneNumLoginQO from "socialuni-api-base/src/model/phone/SocialPhoneNumLoginQO";
-import LoginAPI from "socialuni-user-api/src/api/LoginAPI";
-import UserService from "socialuni-user-sdk/src/logic/UserService";
+import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
+import Constants from "@socialuni/socialuni-constant/constant/Constant";
+import SocialPhoneNumLoginQO from "@socialuni/socialuni-api-base/src/model/phone/SocialPhoneNumLoginQO";
+import LoginAPI from "@socialuni/socialuni-user-api/src/api/LoginAPI";
+import UserService from "@socialuni/socialuni-user-sdk/src/logic/UserService";
 import UniUserUtil from "../util/UniUserUtil";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
 
 export default class LoginService {
     /**

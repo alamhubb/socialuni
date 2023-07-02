@@ -200,30 +200,30 @@
 
 <script lang="ts">
 import {Options, Prop, Vue} from 'vue-property-decorator'
-import QPopup from 'socialuni-ui-uni/src/components/QPopup/QPopup.vue'
-import QIcon from 'socialuni-ui-uni/src/components/QIcon/QIcon.vue'
-import QNavbar from 'socialuni-ui-uni/src/components/QNavbar/QNavbar.vue'
-import QRowItem from 'socialuni-ui-uni/src/components/QRowItem/QRowItem.vue'
-import MsgInput from 'socialuni-ui-uni/src/components/MsgInput.vue'
-import SocialuniAppUtil from 'socialuni-app-sdk/src/util/UniUtil'
-import SkipUrlConst from 'socialuni-user-sdk/src/constant/SkipUrlConst'
-import SocialuniFollowType from 'socialuni-constant/constant/user/SocialuniFollowType'
-import ToastUtil from 'socialuni-native-uni/src/util/ToastUtil'
+import QPopup from '@socialuni/socialuni-ui-uni/src/components/QPopup/QPopup.vue'
+import QIcon from '@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue'
+import QNavbar from '@socialuni/socialuni-ui-uni/src/components/QNavbar/QNavbar.vue'
+import QRowItem from '@socialuni/socialuni-ui-uni/src/components/QRowItem/QRowItem.vue'
+import MsgInput from '@socialuni/socialuni-ui-uni/src/components/MsgInput.vue'
+import SocialuniAppUtil from '@socialuni/socialuni-app-sdk/src/util/UniUtil'
+import SkipUrlConst from '@socialuni/socialuni-user-sdk/src/constant/SkipUrlConst'
+import SocialuniFollowType from '@socialuni/socialuni-constant/constant/user/SocialuniFollowType'
+import ToastUtil from '@socialuni/socialuni-native-uni/src/util/ToastUtil'
 import {onHide, onLoad, onShow} from '@dcloudio/uni-app'
-import UserService from 'socialuni-sdk/src/service/UserService'
+import UserService from '@socialuni/socialuni-sdk/src/service/UserService'
 import SocialuniUserInfoImg from './SocialuniUserInfoImg.vue'
-import PageUtil from 'socialuni-util/src/util/PageUtil'
-import CosUtil from 'socialuni-util/src/util/CosUtil'
-import DomFile from 'socialuni-api-base/src/model/DomFile'
-import ImgAddQO from 'socialuni-api-base/src/model/user/ImgAddQO'
+import PageUtil from '@socialuni/socialuni-util/src/util/PageUtil'
+import CosUtil from '@socialuni/socialuni-util/src/util/CosUtil'
+import DomFile from '@socialuni/socialuni-api-base/src/model/DomFile'
+import ImgAddQO from '@socialuni/socialuni-api-base/src/model/user/ImgAddQO'
 import UserSchoolEditDialog from './UserSchoolEditDialog.vue'
-import AlertUtil from 'socialuni-native-uni/src/util/AlertUtil'
-import MsgUtil from 'socialuni-app-sdk/src/util/MsgUtil'
+import AlertUtil from '@socialuni/socialuni-native-uni/src/util/AlertUtil'
+import MsgUtil from '@socialuni/socialuni-app-sdk/src/util/MsgUtil'
 import UserContactInfoEditDialog from "./UserContactInfoEditDialog.vue";
 import LoginView from "../login/LoginView.vue";
 import UserInfo from "./UserInfo.vue";
-import {socialuniUserModule} from "socialuni/src/store/SocialuniUserModule";
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniUserModule} from "@socialuni/socialuni/src/store/SocialuniUserModule";
+import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
 
 @Options({
   components: {

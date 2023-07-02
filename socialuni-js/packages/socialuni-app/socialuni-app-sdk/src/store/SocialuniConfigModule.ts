@@ -1,9 +1,9 @@
 import {reactive} from "vue";
-import SocialuniAppConfigRO from "socialuni-api-base/src/model/config/SocialuniAppConfigRO";
-import SocialuniAppMoreConfigRO from "socialuni-api-base/src/model/config/SocialuniAppMoreConfigRO";
-import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
-import AppInitDataRO from "socialuni-api-base/src/model/config/AppInitDataRO";
-import ReportAPI from "socialuni-app-api/src/api/ReportAPI";
+import SocialuniAppConfigRO from "@socialuni/socialuni-api-base/src/model/config/SocialuniAppConfigRO";
+import SocialuniAppMoreConfigRO from "@socialuni/socialuni-api-base/src/model/config/SocialuniAppMoreConfigRO";
+import SocialuniAppAPI from "@socialuni/socialuni-app-api/src/api/SocialuniAppAPI";
+import AppInitDataRO from "@socialuni/socialuni-api-base/src/model/config/AppInitDataRO";
+import ReportAPI from "@socialuni/socialuni-app-api/src/api/ReportAPI";
 
 class SocialuniConfigModule {
 

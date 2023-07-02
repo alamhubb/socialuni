@@ -1,7 +1,7 @@
 import DomFile from "../model/DomFile";
-import ToastUtil from "socialuni-native-uni/src/util/ToastUtil";
-import AppMsg from "socialuni-constant/constant/AppMsg";
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import ToastUtil from "@socialuni/socialuni-native-uni/src/util/ToastUtil";
+import AppMsg from "@socialuni/socialuni-constant/constant/AppMsg";
+import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
 import UUIDUtil from "src/util/UUIDUtil";
 import UniappInner from "./UniappInner";
 

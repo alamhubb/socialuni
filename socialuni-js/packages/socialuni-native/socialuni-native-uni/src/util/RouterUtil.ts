@@ -1,6 +1,6 @@
-import PagePath from "socialuni-constant/constant/PagePath";
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import PagePath from "@socialuni/socialuni-constant/constant/PagePath";
+import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
+import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
 
 export default class RouterUtil {
 

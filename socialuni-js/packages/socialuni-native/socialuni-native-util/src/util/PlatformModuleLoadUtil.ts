@@ -1,4 +1,4 @@
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
 
 export default class PlatformModuleLoadUtil {
     static getModule(modules) {

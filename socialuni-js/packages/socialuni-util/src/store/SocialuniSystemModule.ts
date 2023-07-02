@@ -1,10 +1,10 @@
 import GetSystemInfoResult = UniApp.GetSystemInfoResult
-import SocialuniPlatformType from "socialuni-constant/constant/SocialuniPlatformType";
-import SocialuniMpPlatformType from "socialuni-constant/constant/SocialuniMpPlatformType";
-import SocialuniUniDeviceType from "socialuni-constant/constant/SocialuniUniDeviceType";
-import SocialuniSystemType from "socialuni-constant/constant/SocialuniSystemType";
+import SocialuniPlatformType from "@socialuni/socialuni-constant/constant/SocialuniPlatformType";
+import SocialuniMpPlatformType from "@socialuni/socialuni-constant/constant/SocialuniMpPlatformType";
+import SocialuniUniDeviceType from "@socialuni/socialuni-constant/constant/SocialuniUniDeviceType";
+import SocialuniSystemType from "@socialuni/socialuni-constant/constant/SocialuniSystemType";
 import {reactive} from "vue";
-import PlatformType from "socialuni-constant/constant/PlatformType";
+import PlatformType from "@socialuni/socialuni-constant/constant/PlatformType";
 
 class SocialuniSystemModule {
     isUniApp = false

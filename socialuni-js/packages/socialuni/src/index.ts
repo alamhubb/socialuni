@@ -4,9 +4,9 @@ import {SocialuniPlugin} from "./interface/SocialuniPlugin"
 import {ImportModule} from "./interface/ImportModule"
 import {SocialuniOption} from "./interface/socialuniOption"
 import SocialuniViewService from "./interface/SocialuniViewService";
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
 import UniappAPI from "uniapp-api/src";
-import PlatformModuleLoadUtil from "socialuni-native-util/src/util/PlatformModuleLoadUtil";
+import PlatformModuleLoadUtil from "@socialuni/socialuni-native-util/src/util/PlatformModuleLoadUtil";
 import {VueBase} from "vue-class-component";
 
 const socialuniInitPlugin: SocialuniPlugin = {
@@ -27,7 +27,10 @@ const socialuniInitPlugin: SocialuniPlugin = {
 async function installSocialuniPluginIns(app: App) {
     socialuniPluginsModule.addPlugin(socialuniInitPlugin)
 
-    const moudles = import.meta.globEager('./index.ts')
+    const moudles = import.meta.globEager('../../**/**.json')
+    for (const moudle in moudles) {
+        console.log(moudle)
+    }
     console.log(moudles)
     //查询是否包含community模块，如果存在则加载
     const appModules = import.meta.globEager('../../socialuni-app-sdk/src/index.ts')

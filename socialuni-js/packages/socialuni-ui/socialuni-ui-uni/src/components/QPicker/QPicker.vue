@@ -37,12 +37,12 @@
   </view>
 </template>
 <script lang="ts">
-import CommonUtil from 'socialuni-util/src/util/CommonUtil'
+import CommonUtil from '@socialuni/socialuni-util/src/util/CommonUtil'
 import {Emit, Model, Options, Prop, Vue, Watch} from 'vue-property-decorator'
 import QRowItem from '../QRowItem/QRowItem.vue'
 import SelectorQuery = UniApp.SelectorQuery;
 import NodesRef = UniApp.NodesRef;
-import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
+import UUIDUtil from "@socialuni/socialuni-util/src/util/UUIDUtil";
 
 /*
 显示出来已经选了的城市，给她画上钩
