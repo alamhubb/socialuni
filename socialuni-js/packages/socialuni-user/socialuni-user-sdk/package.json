@@ -8,9 +8,16 @@
   },
   "devDependencies": {
     "@socialuni/socialuni": "^0.1.2",
+    "@socialuni/socialuni-util": "^0.1.2",
+    "@socialuni/socialuni-constant": "^0.1.2",
+    "@socialuni/socialuni-native-util": "^0.1.2",
+    "@socialuni/socialuni-api-base": "^0.1.2",
+    "@socialuni/socialuni-app-api": "^0.1.2",
     "@socialuni/socialuni-app-sdk": "^0.1.2",
     "@socialuni/socialuni-user-api": "^0.1.2",
-    "mitt": "^3.0.0"
+    "uniapp-api": "^0.1.2",
+    "mitt": "^3.0.0",
+    "vue": "^3.3.2"
   },
   "keywords": [],
   "author": "",

@@ -1,6 +1,6 @@
 import SocialuniMineUserRO from "@socialuni/socialuni-api-base/src/model/user/SocialuniMineUserRO";
 import SocialUserSchoolNameEditQO from "@socialuni/socialuni-api-base/src/model/QO/user/SocialUserSchoolNameEditQO";
-import socialuniUserRequest from "@socialuni/socialuni-user-api/src/request/socialuniUserRequest";
+import socialuniUserRequest from "../request/socialuniUserRequest";
 
 export default class SocialuniUserExpandAPI {
   static editUserSchoolNameAPI (schoolName: string) {

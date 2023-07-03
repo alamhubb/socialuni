@@ -3,13 +3,9 @@ import SocialuniMineUserRO from "@socialuni/socialuni-api-base/src/model/user/So
 import SocialuniUserStorageUtil from "../util/SocialuniUserStorageUtil";
 import SocialLoginRO from "@socialuni/socialuni-api-base/src/model/social/SocialLoginRO";
 import LoginAPI from "@socialuni/socialuni-user-api/src/api/LoginAPI";
-import {socialuniTokenModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniTokenModule";
 import SocialuniMineUserAPI from "@socialuni/socialuni-user-api/src/api/SocialuniMineUserAPI";
-import CenterUserDetailRO from "@socialuni/socialuni-api-base/src/model/social/CenterUserDetailRO";
-import UserMsgUtil from "../util/UserMsgUtil";
-import {socialuniConfigModule} from "@socialuni/socialuni-app-sdk/src/store/SocialuniConfigModule";
-import ToastUtil from "@socialuni/socialuni-native-uni/src/util/ToastUtil";
 import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import {socialuniTokenModule} from "./SocialuniTokenModule";
 
 class SocialuniUserModule {
     get token() {

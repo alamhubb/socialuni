@@ -1,8 +1,4 @@
 <script>
-import SocialuniAppAPI from "@socialuni/socialuni-app-api/src/api/SocialuniAppAPI";
-import JsonUtil from "@socialuni/socialuni-util/src/util/JsonUtil";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
-
 export default {
     async onLaunch() {
         console.log('app launch')

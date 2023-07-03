@@ -12,13 +12,7 @@ import AppMsg from "@socialuni/socialuni-constant/constant/AppMsg";
 import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
 import UUIDUtil from "@socialuni/socialuni-util/src/util/UUIDUtil";
 import ImgUtil from "@socialuni/socialuni-util/src/util/ImgUtil";
-import LocationQueryQO from "@socialuni/socialuni-api-base/src/model/location/LocationQueryQO";
-import ResultRO from "@socialuni/socialuni-api-base/src/model/social/ResultRO";
-import {QQMapResult} from "@socialuni/socialuni-api-base/src/model/location/QQMapResult";
 import ToastUtil from "./ToastUtil";
-import DomFile from "@socialuni/socialuni-app-sdk/src/model/DomFile";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
-import SocialuniLocationAPI from "@socialuni/socialuni-app-api/src/api/SocialuniLocationAPI";
 
 
 export default class NativeUtil {
@@ -29,7 +23,7 @@ export default class NativeUtil {
                 success() {
                     if (hint) {
                         uni.hideToast()
-                        SocialuniAppUtil.ToastUtil.toast(hint)
+                        ToastUtil.toast(hint)
                     }
                     resolve(null)
                 },
@@ -221,7 +215,7 @@ export default class NativeUtil {
         })
     }
 
-    public static getLocation() {
+    /*public static getLocation() {
         return new Promise((resolve, reject) => {
             uni.getLocation({
                 type: 'gcj02 ',
@@ -238,7 +232,7 @@ export default class NativeUtil {
                 }
             })
         })
-    }
+    }*/
 
     //选择图片
     public static takePicture() {
@@ -268,7 +262,7 @@ export default class NativeUtil {
             // 获取压缩比
             const imgSize: number = imgFile.size
             if (imgSize / 1024 / 1024 > 50) {
-                SocialuniAppUtil.ToastUtil.error(AppMsg.imgSizeNotGt50MBMsg)
+                ToastUtil.error(AppMsg.imgSizeNotGt50MBMsg)
             }
             let ratio: number = 100
             //如果大于100k 按照100k标准压缩

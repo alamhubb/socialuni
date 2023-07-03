@@ -1,6 +1,4 @@
 import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
-import CommonEventUtil from "./util/CommonEventUtil";
-import UniappPageLifecycleConst from "./UniappPageLifecycleConst";
 import {socialuniPluginsModule} from "@socialuni/socialuni/src/store/SocialuniPluginsModule";
 import {onBeforeMount} from "vue";
 import PlatformModuleLoadUtil from "@socialuni/socialuni-native-util/src/util/PlatformModuleLoadUtil";

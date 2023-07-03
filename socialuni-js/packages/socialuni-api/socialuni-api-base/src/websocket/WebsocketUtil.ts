@@ -1,9 +1,9 @@
-import SocialuniAPIConfig from "@socialuni/socialuni-api-base/src/SocialuniAPIConfig";
 import {socialuniPluginsModule} from "@socialuni/socialuni/src/store/SocialuniPluginsModule";
 import CommonUtil from "@socialuni/socialuni-util/src/util/CommonUtil";
 import NotifyVO from "../model/NotifyVO";
 import JsonUtil from "@socialuni/socialuni-util/src/util/JsonUtil";
 import UUIDUtil from "@socialuni/socialuni-util/src/util/UUIDUtil";
+import SocialuniAPIConfig from "../SocialuniAPIConfig";
 
 
 export default class WebsocketUtil {
