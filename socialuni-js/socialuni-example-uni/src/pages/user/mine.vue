@@ -8,8 +8,6 @@
 import {Options, Vue} from 'vue-property-decorator'
 import MineView from "@socialuni/socialuni-user-view-uni/src/views/user/MineView.vue";
 
-SociauniAppLoad
-
 @Options({
   components: {
     MineView

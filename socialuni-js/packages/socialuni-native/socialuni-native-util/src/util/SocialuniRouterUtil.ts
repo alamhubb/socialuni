@@ -5,7 +5,7 @@ let nativeUtil
 
 const modules = import.meta.globEager('../../../*/src/util/RouterUtil.ts')
 
-nativeUtil = PlatformModuleLoadUtil.getModule(modules)
+nativeUtil = PlatformModuleLoadUtil.getModuleDefault(modules)
 
 export default class SocialuniRouterUtil {
     static get nativeUtil(): SocialuniRouterUtilInterface {
