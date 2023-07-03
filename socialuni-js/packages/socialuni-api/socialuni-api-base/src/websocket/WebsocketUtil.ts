@@ -4,6 +4,7 @@ import NotifyVO from "../model/NotifyVO";
 import JsonUtil from "@socialuni/socialuni-util/src/util/JsonUtil";
 import UUIDUtil from "@socialuni/socialuni-util/src/util/UUIDUtil";
 import SocialuniAPIConfig from "../SocialuniAPIConfig";
+import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
 
 
 export default class WebsocketUtil {
@@ -33,28 +34,26 @@ export default class WebsocketUtil {
 
         console.log('websocket连接')
 
-        const config = {} as any
+        const header = {} as any
 
         let token: string
 
         for (const socialuniPlugin of socialuniPluginsModule.plugins) {
             if (socialuniPlugin.onWebsocketInterceptors) {
-                socialuniPlugin.onWebsocketInterceptors(config)
+                socialuniPlugin.onWebsocketInterceptors(header)
             }
         }
 
-        if (config.token) {
-            token = config.token
+        if (header.token) {
+            token = header.token
         } else {
             token = UUIDUtil.getUUID()
         }
 
         const websocketUrl = SocialuniAPIConfig.socialuniWebsocketUrl + '/webSocket/message?token=' + token
 
-        this.ws = new WebSocket(websocketUrl)
 
-
-        this.ws.onopen = (() => {
+        const onOpen = (() => {
             this.locking = false
             if (reload || WebsocketUtil.timer) {
                 clearInterval(WebsocketUtil.timer)
@@ -72,24 +71,52 @@ export default class WebsocketUtil {
                 }
             }, WebsocketUtil.pingTime)
         })
-
-        this.ws.onerror = (() => {
+        const onError = (() => {
             console.log('触发了错误')
             this.reConnect()
         })
-
-        this.ws.onclose = ((e) => {
+        const onClose = ((e) => {
             console.log('触发了关闭:' + e)
             this.reConnect()
         })
-
-        this.ws.onmessage = ((res: MessageEvent) => {
+        const onMessage = ((res: MessageEvent) => {
             const notify: NotifyVO = JsonUtil.toParse(res.data)
             console.log(notify)
             for (const plugin of socialuniPluginsModule.plugins) {
                 plugin.onMessage?.(notify)
             }
         })
+
+
+        if (socialuniSystemModule.isUniApp) {
+            uni.connectSocket({
+                url: websocketUrl
+            }).then(res=>{
+                this.ws = res
+                //@ts-ignore
+                this.ws.onOpen = onOpen
+
+                //@ts-ignore
+                this.ws.onError = onError
+
+                //@ts-ignore
+                this.ws.onClose = onClose
+
+                //@ts-ignore
+                this.ws.onMessage = onMessage
+            })
+        } else {
+            this.ws = new WebSocket(websocketUrl)
+
+            this.ws.onopen = onOpen
+
+            this.ws.onerror = onError
+
+            this.ws.onclose = onClose
+
+            this.ws.onmessage = onMessage
+        }
+
     }
 
     static websocketClose() {

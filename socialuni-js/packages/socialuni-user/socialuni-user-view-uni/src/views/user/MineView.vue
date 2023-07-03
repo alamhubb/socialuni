@@ -225,6 +225,7 @@ import CosService from "@socialuni/socialuni-app-sdk/src/util/CosService";
 import DomFile from "@socialuni/socialuni-app-sdk/src/model/DomFile";
 import TencentCosAPI from "@socialuni/socialuni-app-api/src/api/TencentCosAPI";
 import SkipUrlConst from "@socialuni/socialuni-app-sdk/src/constant/SkipUrlConst";
+import LoadAppViewUniUtil from "@socialuni/socialuni-app-view-uni/src/LoadAppViewUniUtil.ts";
 import {onLoad} from "uniapp-api/src/UniappPageLifecycleHook";
 
 @Options({
@@ -268,6 +269,7 @@ export default class MineView extends Vue {
     created() {
         onLoad((params) => {
             SocialuniAppUtil.UniUtil.showShareMenu()
+            LoadAppViewUniUtil.load()
         })
         /*onShow(() => {
             this.showMsgInput = true

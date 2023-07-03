@@ -6,6 +6,7 @@ export default class PlatformModuleLoadUtil {
             if (socialuniSystemModule.isUniApp) {
                 if (path.includes('-uni')) {
                     const module = modules[path]
+                    console.log(path)
                     return module.default
                 }
             } else {
@@ -18,6 +19,7 @@ export default class PlatformModuleLoadUtil {
     }
     static getFirstModule(modules) {
         for (const path in modules) {
+            console.log(path)
            return modules[path]
         }
     }

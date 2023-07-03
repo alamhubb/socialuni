@@ -57,6 +57,8 @@
     "@socialuni/socialuni": "../packages/socialuni",
     "@socialuni/socialuni-ui-uni": "../packages/socialuni-ui/socialuni-ui-uni",
     "@socialuni/socialuni-app-sdk": "../packages/socialuni-app/socialuni-app-sdk",
+    "@socialuni/socialuni-app-view-uni": "../packages/socialuni-user/socialuni-app-view-uni",
+    "@socialuni/socialuni-user-sdk": "../packages/socialuni-user/socialuni-user-sdk",
     "@socialuni/socialuni-user-view-uni": "../packages/socialuni-user/socialuni-user-view-uni",
     "util": "^0.12.5",
     "uuid": "^7.0.3",

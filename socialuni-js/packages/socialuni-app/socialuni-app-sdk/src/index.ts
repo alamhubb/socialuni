@@ -36,11 +36,6 @@ const SocialuniApp = {
             // 处理错误，例如：报告给一个服务
             SocialuniAppAPI.sendErrorLogAPI('front page error', SocialuniAppUtil.RouterUtil.getCurrentPageURI(), e.message)
         }
-        if (socialuniSystemModule.isUniApp) {
-            import.meta.globEager('../../socialuni-app-view-uni/src/styles/index.scss')
-        } else {
-            import.meta.globEager('../../socialuni-app-view-h5/src/styles/index.scss')
-        }
         socialuniPluginsModule.addPlugin(socialuniAppPlugin)
     }
 }
