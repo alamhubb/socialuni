@@ -7,7 +7,6 @@ import SocialuniViewService from "./interface/SocialuniViewService";
 import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
 import UniappAPI from "uniapp-api/src";
 import PlatformModuleLoadUtil from "@socialuni/socialuni-native-util/src/util/PlatformModuleLoadUtil";
-import {VueBase} from "vue-class-component";
 
 const socialuniInitPlugin: SocialuniPlugin = {
     async onLaunch() {
@@ -21,7 +20,6 @@ const socialuniInitPlugin: SocialuniPlugin = {
         socialAppModule.getHomeSwipersAction()*/
     }
 }
-
 
 async function installSocialuniPluginIns(app: App) {
     socialuniPluginsModule.addPlugin(socialuniInitPlugin)
