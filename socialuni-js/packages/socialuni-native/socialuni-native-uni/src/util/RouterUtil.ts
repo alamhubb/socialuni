@@ -78,6 +78,8 @@ export default class RouterUtil {
     }
 
     static getCurrentPageParams(): any {
+        console.log(this.getCurrentPage())
+        console.log(this.getCurrentPage().$page)
         return this.getCurrentPage().$page.options
     }
 

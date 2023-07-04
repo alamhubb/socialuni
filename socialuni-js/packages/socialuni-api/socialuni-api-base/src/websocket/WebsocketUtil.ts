@@ -73,7 +73,9 @@ export default class WebsocketUtil {
         })
         const onError = (() => {
             console.log('触发了错误')
+            // #ifndef MP
             this.reConnect()
+            // #endif
         })
         const onClose = ((e) => {
             console.log('触发了关闭:' + e)

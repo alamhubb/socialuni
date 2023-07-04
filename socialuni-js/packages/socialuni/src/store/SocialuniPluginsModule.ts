@@ -1,10 +1,12 @@
 import {reactive, UnwrapNestedRefs} from "vue";
 import {SocialuniPlugin} from "../interface/SocialuniPlugin";
 import {RouteLocationPathRaw, RouteLocationRaw, Router, RouteRecord} from "vue-router";
+import UUIDUtil from "@socialuni/socialuni-util/src/util/UUIDUtil";
 
 class SocialuniPluginsModule {
     private _router: Router = null
     private _route: RouteRecord = null
+    uid: string = UUIDUtil.getUUID()
     private socialuniPlugins: SocialuniPlugin[] = []
 
 
