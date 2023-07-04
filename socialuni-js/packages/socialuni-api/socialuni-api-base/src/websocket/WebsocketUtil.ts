@@ -87,24 +87,19 @@ export default class WebsocketUtil {
             }
         })
 
-
         if (socialuniSystemModule.isUniApp) {
-            uni.connectSocket({
-                url: websocketUrl
-            }).then(res=>{
-                this.ws = res
-                //@ts-ignore
-                this.ws.onOpen = onOpen
-
-                //@ts-ignore
-                this.ws.onError = onError
-
-                //@ts-ignore
-                this.ws.onClose = onClose
-
-                //@ts-ignore
-                this.ws.onMessage = onMessage
-            })
+            this.ws = uni.connectSocket({
+                url: websocketUrl,
+                complete: () => {},
+            });
+            //@ts-ignore
+            this.ws.onClose(onClose);
+            //@ts-ignore
+            this.ws.onOpen(onOpen);
+            //@ts-ignore
+            this.ws.onError(onError);
+            //@ts-ignore
+            this.ws.onMessage(onMessage);
         } else {
             this.ws = new WebSocket(websocketUrl)
 
