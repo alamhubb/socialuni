@@ -91,6 +91,7 @@ const Socialuni = {
                 }
             },
             created() {
+                console.log(socialuniPluginsModule.uid)
                 socialuniPluginsModule.setRouter(this.$router)
                 socialuniPluginsModule.setRoute(this.$route)
 

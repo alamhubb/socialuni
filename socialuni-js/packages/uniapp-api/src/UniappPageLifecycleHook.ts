@@ -5,6 +5,8 @@ import PlatformModuleLoadUtil from "@socialuni/socialuni-native-util/src/util/Pl
 
 
 export async function onLoad(hook: (params: any) => any) {
+    console.log(1111111111)
+    console.log(socialuniPluginsModule.uid)
     if (socialuniSystemModule.isUniApp) {
         //查询是否包含community模块，如果存在则加载
         try {

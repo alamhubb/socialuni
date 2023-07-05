@@ -2,7 +2,6 @@ import SocialPhoneNumLoginQO from "@socialuni/socialuni-api-base/src/model/phone
 import NumberUtil from "@socialuni/socialuni-util/src/util/NumberUtil";
 import PhoneAPI from "@socialuni/socialuni-user-api/src/api/PhoneAPI";
 import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
-import {socialuniPluginsModule} from "@socialuni/socialuni/src/store/SocialuniPluginsModule";
 import SocialuniLoginService from "./SocialuniLoginService";
 import SocialuniViewService from "@socialuni/socialuni/src/interface/SocialuniViewService";
 

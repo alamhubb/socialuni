@@ -27,6 +27,8 @@ export default class WebsocketUtil {
     }
 
     static websocketConnect(reload: boolean) {
+        console.log(3333333)
+        console.log(socialuniPluginsModule.uid)
         this.locking = false;
         //上锁，防止无限重连，因为会触发close会触发重连
         this.websocketClose()

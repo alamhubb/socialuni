@@ -16,7 +16,7 @@ const SocialuniAxiosCreate = (config?: AxiosRequestConfig) => {
 
     socialuniAxios.interceptors.request.use(
         config => {
-            console.log(1111111)
+            console.log(222222)
             console.log(socialuniPluginsModule.uid)
             console.log(socialuniPluginsModule.plugins)
             console.log(socialuniPluginsModule.plugins.length)
