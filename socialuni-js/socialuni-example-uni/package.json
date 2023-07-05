@@ -46,7 +46,7 @@
     "@dcloudio/uni-mp-lark": "3.0.0-alpha-3070620230227001",
     "@dcloudio/uni-mp-qq": "3.0.0-alpha-3070620230227001",
     "@dcloudio/uni-mp-toutiao": "3.0.0-alpha-3070620230227001",
-    "@dcloudio/uni-mp-weixin": "3.0.0-alpha-3070620230227001",
+    "@dcloudio/uni-mp-weixin": "../uni-app/packages/uni-mp-weixin",
     "@dcloudio/uni-quickapp-webview": "3.0.0-alpha-3070620230227001",
     "@dcloudio/uni-ui": "^1.4.23",
     "@fullhuman/postcss-purgecss": "^3.0.0",
