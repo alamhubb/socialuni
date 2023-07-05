@@ -141,7 +141,7 @@ export const bareImportRE = /^(?![a-zA-Z]:)[\w@](?!.*:\/\/)/
 export const deepImportRE = /^([^@][^/]*)\/|^(@[^/]+\/[^/]+)\//
 
 // TODO: use import()
-const _require = createRequire('/')
+const _require = createRequire(import.meta.url)
 
 // set in bin/vite.js
 const filter = process.env.VITE_DEBUG_FILTER
@@ -925,7 +925,8 @@ export const multilineCommentsRE = /\/\*[^*]*\*+(?:[^/*][^*]*\*+)*\//g
 export const singlelineCommentsRE = /\/\/.*/g
 export const requestQuerySplitRE = /\?(?!.*[/|}])/
 
-export const usingDynamicImport = true
+// @ts-expect-error jest only exists when running Jest
+export const usingDynamicImport = typeof jest === 'undefined'
 
 /**
  * Dynamically import files. It will make sure it's not being compiled away by TS/Rollup.
@@ -954,7 +955,7 @@ export function getHash(text: Buffer | string): string {
   return createHash('sha256').update(text).digest('hex').substring(0, 8)
 }
 
-const _dirname = path.dirname(fileURLToPath('/'))
+const _dirname = path.dirname(fileURLToPath(import.meta.url))
 
 export const requireResolveFromRootWithFallback = (
   root: string,

@@ -1,6 +1,7 @@
 {
   "name": "vite",
   "version": "4.3.9",
+  "type": "module",
   "license": "MIT",
   "author": "Evan You",
   "description": "Native-ESM powered web dev build tool",
@@ -96,7 +97,7 @@
     "cors": "^2.8.5",
     "cross-spawn": "^7.0.3",
     "debug": "^4.3.4",
-    "dep-types": "./src/types",
+    "dep-types": "link:./src/types",
     "dotenv": "^16.0.3",
     "dotenv-expand": "^9.0.0",
     "es-module-lexer": "^1.2.1",
@@ -128,7 +129,7 @@
     "strip-literal": "^1.0.1",
     "tsconfck": "^2.1.1",
     "tslib": "^2.5.0",
-    "types": "./types",
+    "types": "link:./types",
     "ufo": "^1.1.1",
     "ws": "^8.13.0"
   },

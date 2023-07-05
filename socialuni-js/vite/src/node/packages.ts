@@ -8,7 +8,7 @@ import type { Plugin } from './plugin'
 let pnp: typeof import('pnpapi') | undefined
 if (process.versions.pnp) {
   try {
-    pnp = createRequire('/')('pnpapi')
+    pnp = createRequire(import.meta.url)('pnpapi')
   } catch {}
 }
 
