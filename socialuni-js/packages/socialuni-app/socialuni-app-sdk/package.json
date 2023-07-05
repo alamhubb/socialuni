@@ -7,7 +7,6 @@
   },
   "dependencies": {
     "@socialuni/socialuni-ui-types": "^0.1.2",
-    "@socialuni/socialuni": "^0.1.2",
     "@socialuni/socialuni-util": "^0.1.2",
     "@socialuni/socialuni-constant": "^0.1.2",
     "@socialuni/socialuni-native-util": "^0.1.2",
