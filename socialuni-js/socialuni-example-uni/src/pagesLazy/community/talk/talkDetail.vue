@@ -49,14 +49,12 @@ import QIcon from '@socialuni/socialuni-view/src/components/QIcon/QIcon.vue'
 import MsgInput from '@socialuni/socialuni-view/src/components/MsgInput.vue'
 import TalkItem from '@socialuni/socialuni-view/src/views/talk/talkItem/TalkItem.vue'
 import TalkOperate from '@socialuni/socialuni-view/src/views/talk/talkOperate.vue'
-import TalkVO from '@socialuni/socialuni-api/src/model/home/TalkVO'
-import RouterUtil from '@socialuni/socialuni-sdk/src/utils/RouterUtil'
-import PageUtil from '@socialuni/socialuni-sdk/src/utils/PageUtil'
-import SocialuniTalkAPI from '@socialuni/socialuni-api/src/api/socialuni/SocialuniTalkAPI'
 import QNavbar from '@socialuni/socialuni-view/src/components/QNavbar/QNavbar.vue'
-import SocialuniAppUtil from '@socialuni/socialuni-sdk/src/utils/UniUtil'
-import {socialConfigModule} from '@socialuni/socialuni-sdk/src/store/store'
 import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
+import TalkVO from "@socialuni/socialuni-api-base/src/model/talk/TalkVO";
+import {socialuniConfigModule} from "@socialuni/socialuni-app-sdk/src/store/SocialuniConfigModule";
+import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import SocialuniTalkAPI from "@socialuni/socialuni-community-api/src/api/SocialuniTalkAPI";
 
 @Options({
   components: {
@@ -72,7 +70,7 @@ export default class TalkDetail extends Vue {
   showMsgInput = false
 
   get appConfig() {
-    return socialConfigModule.appConfig
+    return socialuniConfigModule.appConfig
   }
 
   created() {
@@ -88,15 +86,15 @@ export default class TalkDetail extends Vue {
 
 
   deleteTalk() {
-    PageUtil.goBackOrHome()
+    SocialuniAppUtil.RouterUtil.goBackOrHome()
   }
 
   goHome() {
-    PageUtil.goHome()
+      SocialuniAppUtil.RouterUtil.goHome()
   }
 
   goBack() {
-    PageUtil.goBackOrHome()
+      SocialuniAppUtil.RouterUtil.goBackOrHome()
   }
 
   onShow() {

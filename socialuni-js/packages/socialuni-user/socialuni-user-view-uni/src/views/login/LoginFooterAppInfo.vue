@@ -16,7 +16,6 @@
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
 import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
-// import {socialuniConfigModule} from "@socialuni/socialuni-sdk/src/store/store";
 import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
 import SkipUrlConst from "@socialuni/socialuni-app-sdk/src/constant/SkipUrlConst";
