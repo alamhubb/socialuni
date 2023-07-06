@@ -1,4 +1,4 @@
-import {SocialuniPlugin} from 'socialuni/src/interface/SocialuniPlugin'
+import {SocialuniPlugin} from '@socialuni/socialuni/src/interface/SocialuniPlugin'
 import WebsocketUtil from "@socialuni/socialuni-api-base/src/websocket/WebsocketUtil";
 import {socialuniConfigModule} from "./store/SocialuniConfigModule";
 import {App, defineComponent, onErrorCaptured} from "vue";
