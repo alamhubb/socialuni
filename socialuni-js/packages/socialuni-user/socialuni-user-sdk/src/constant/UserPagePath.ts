@@ -1,6 +1,6 @@
 export default class UserPagePath {
     static readonly userMine: string = '/pages/user/mine'
-    static readonly userPhone: string = '/pages/phone/phone'
+    static readonly userPhone: string = '/pagesLazy/user/phone'
     static readonly userDetail: string = '/pagesLazy/user/userDetail'
     static readonly editMineInfo: string = '/pagesLazy/user/editMineInfo'
     static readonly userImgList: string = '/pagesLazy/user/userImgList'

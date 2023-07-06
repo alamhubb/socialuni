@@ -3,6 +3,7 @@ export default {
     async onLaunch() {
         console.log('app launch')
         console.log('app launch')
+        console.log('app launch')
         // socialSystemModule.initSystemInfo()
         //如果有跳转信息
         //校验更新

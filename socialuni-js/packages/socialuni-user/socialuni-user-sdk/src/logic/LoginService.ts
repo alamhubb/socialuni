@@ -19,10 +19,9 @@ export default class LoginService {
         //一行代码就可以获取登录所需要的信息, 还可以配合后台使用，一键登录，记住用户
         const loginQO = await UniUserUtil.getUniProviderLoginQO(provider)
 
-        console.log('fasldfasjkl')
         const {data} = await LoginAPI.providerLoginAPI(loginQO)
 
-        // UserService.getMineUserInitDataActionByToken(data)
+        UserService.getMineUserInitDataActionByToken(data)
     }
 
     static async phoneLogin(phoneNum: string, authCode: string) {

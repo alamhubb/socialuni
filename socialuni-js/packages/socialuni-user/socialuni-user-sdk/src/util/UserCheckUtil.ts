@@ -9,6 +9,7 @@ import UserMsgUtil from "./UserMsgUtil";
 export default class UserCheckUtil {
     static checkUserBindPhoneNum() {
         const user = UserMsgUtil.unLoginMessage()
+        console.log(user)
         if (!user || !user.phoneNum) {
             // 如果登录了仅仅没绑定手机号，则提示跳转，区分qq和微信不同
             SocialuniAppUtil.AlertUtil.confirm('绑定手机号才能发布内容，是否前往绑定手机号页面')

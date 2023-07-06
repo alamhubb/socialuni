@@ -32,8 +32,11 @@ const socialuniAppPlugin: SocialuniPlugin = new SocialuniAppPlugin()
 const SocialuniApp = {
     async install(app: App, socialuniOption: SocialuniOption) {
         app.config.errorHandler = (e: Error, instance, info) => {
+            console.error(1111111111)
+            console.error(e)
+            console.error(222221)
             // 处理错误，例如：报告给一个服务
-            SocialuniAppAPI.sendErrorLogAPI('front page error', SocialuniAppUtil.RouterUtil.getCurrentPageURI(), e.message)
+            SocialuniAppAPI.sendErrorLogAPI('front page error123', SocialuniAppUtil.RouterUtil.getCurrentPageURI(), e.message)
         }
         socialuniPluginsModule.addPlugin(socialuniAppPlugin)
     }
