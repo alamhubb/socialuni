@@ -1,7 +1,7 @@
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
 
 export default class PlatformModuleLoadUtil {
-    static getModule(modules) {
+    static getModuleDefault(modules) {
         for (const path in modules) {
             if (socialuniSystemModule.isUniApp) {
                 if (path.includes('-uni')) {

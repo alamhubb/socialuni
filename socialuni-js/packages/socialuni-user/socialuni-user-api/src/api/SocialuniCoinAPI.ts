@@ -1,5 +1,5 @@
-import UserPayResultVO from "socialuni-api-base/src/model/user/UserPayResultVO";
-import SocialuniPayCoinQO from "socialuni-api-base/src/model/user/SocialuniPayCoinQO";
+import UserPayResultVO from "@socialuni/socialuni-api-base/src/model/user/UserPayResultVO";
+import SocialuniPayCoinQO from "@socialuni/socialuni-api-base/src/model/user/SocialuniPayCoinQO";
 import socialuniUserRequest from "../request/socialuniUserRequest";
 
 export default class SocialuniCoinAPI {

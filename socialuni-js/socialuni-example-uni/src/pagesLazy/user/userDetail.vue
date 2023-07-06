@@ -1,20 +1,21 @@
 <template>
     <view class="bg-default">
+<!--        <socialuni-user-detail-view></socialuni-user-detail-view>-->
         <socialuni-community-user-detail-view>
-            <template #navBarRight>
+<!--            <template #navBarRight>
                 <div class="row-end-center flex-1">
                     <q-icon icon="list-dot" size="20" @click="openMoreMenu"></q-icon>
                 </div>
-            </template>
-            <template #userBaseInfoRightPre>
+            </template>-->
+<!--            <template #userBaseInfoRightPre>
                 <q-button @click="toMessagePage" class="mr-sm">
                     <q-icon icon="mdi-chat-outline" size="14"></q-icon>
                     私信
                 </q-button>
-            </template>
+            </template>-->
         </socialuni-community-user-detail-view>
 
-        <q-popup ref="moreActionMenu" bottom>
+<!--        <q-popup ref="moreActionMenu" bottom>
             <uni-list class="pb-xl">
                 <uni-list-item title="解除好友" link
                                @click="deleteFriend"></uni-list-item>
@@ -23,27 +24,26 @@
                 <uni-list-item title="从黑名单移除" link
                                @click="removeBlack"></uni-list-item>
             </uni-list>
-        </q-popup>
+        </q-popup>-->
     </view>
 </template>
 
 <script lang="ts">
-import SocialuniCommunityUserDetailView
-    from "socialuni-community-view-uni/src/views/user/SocialuniCommunityUserDetailView.vue";
-import socialuniUserDetailViewService from "socialuni-user-sdk/src/logic/SocialuniUserDetailViewService";
-import QButton from "socialuni-ui-uni/src/components/QButton/QButton.vue";
-import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
-import socialuniCommunityUserDetailViewService
-    from "socialuni-community-sdk/src/logic/SocialuniCommunityUserDetailViewService";
-import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue";
+import SocialuniCommunityUserDetailView from "@socialuni/socialuni-community-view-uni/src/views/user/SocialuniCommunityUserDetailView.vue";
+import QButton from "@socialuni/socialuni-ui-uni/src/components/QButton/QButton.vue";
+import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue";
+import QPopup from "@socialuni/socialuni-ui-uni/src/components/QPopup/QPopup.vue";
 import {Options, Vue} from "vue-property-decorator";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import SocialuniUserDetailView from "@socialuni/socialuni-user-view-uni/src/views/user/SocialuniUserDetailView.vue";
+
 
 @Options({
     components: {
         QPopup,
         QButton,
         QIcon,
+        SocialuniUserDetailView,
         SocialuniCommunityUserDetailView
     }
 })

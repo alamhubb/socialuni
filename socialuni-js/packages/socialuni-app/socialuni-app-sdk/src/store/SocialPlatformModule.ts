@@ -1,4 +1,4 @@
-import AppConfig from "socialuni-constant/constant/AppConfig";
+import AppConfig from "@socialuni/socialuni-constant/constant/AppConfig";
 import {reactive} from "vue";
 
 

@@ -1,5 +1,3 @@
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
-
 export default class ToastUtil {
     //交互
     public static toast(title: string, time?: number) {
@@ -35,24 +33,24 @@ export default class ToastUtil {
     }
 
     public static error(title: string) {
-        SocialuniAppUtil.ToastUtil.toast(title)
+        ToastUtil.toast(title)
         throw new Error(title)
     }
 
     public static info(title: string) {
-        SocialuniAppUtil.ToastUtil.toast(title)
+        ToastUtil.toast(title)
     }
 
     public static success(title: string) {
-        SocialuniAppUtil.ToastUtil.toast(title)
+        ToastUtil.toast(title)
     }
 
     public static warning(title: string) {
-        SocialuniAppUtil.ToastUtil.toast(title)
+        ToastUtil.toast(title)
     }
 
     public static throwError(title: string) {
-        SocialuniAppUtil.ToastUtil.toast(title)
+        ToastUtil.toast(title)
         throw new Error(title)
     }
 }

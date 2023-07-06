@@ -1,17 +1,26 @@
-import {SocialuniPlugin} from 'socialuni/src/interface/SocialuniPlugin'
-import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
+import {SocialuniPlugin} from '@socialuni/socialuni/src/interface/SocialuniPlugin'
+import WebsocketUtil from "@socialuni/socialuni-api-base/src/websocket/WebsocketUtil";
 import {socialuniConfigModule} from "./store/SocialuniConfigModule";
 import {App, defineComponent, onErrorCaptured} from "vue";
-import {SocialuniOption} from "socialuni/src/interface/socialuniOption";
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
-import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
-import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import {SocialuniOption} from "@socialuni/socialuni/src/interface/socialuniOption";
+import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniPluginsModule} from "@socialuni/socialuni/src/store/SocialuniPluginsModule";
+import SocialuniAppAPI from "@socialuni/socialuni-app-api/src/api/SocialuniAppAPI";
+import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import {InternalAxiosRequestConfig} from "axios/index";
+import {socialuniTokenModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniTokenModule";
 
 class SocialuniAppPlugin implements SocialuniPlugin {
     onLaunch() {
         WebsocketUtil.websocketConnect(false)
         socialuniConfigModule.getAppConfigAction()
+    }
+
+    onRequestInterceptors(config: InternalAxiosRequestConfig) {
+        config.headers.provider = socialuniSystemModule.mpPlatform
+        config.headers.mpPlatform = socialuniSystemModule.mpPlatform
+        config.headers.platform = socialuniSystemModule.platform
+        config.headers.system = socialuniSystemModule.system
     }
 
     onResponseErrorInterceptors(res) {
@@ -23,13 +32,11 @@ const socialuniAppPlugin: SocialuniPlugin = new SocialuniAppPlugin()
 const SocialuniApp = {
     async install(app: App, socialuniOption: SocialuniOption) {
         app.config.errorHandler = (e: Error, instance, info) => {
+            console.error(1111111111)
+            console.error(e)
+            console.error(222221)
             // 处理错误，例如：报告给一个服务
-            SocialuniAppAPI.sendErrorLogAPI('front page error', SocialuniAppUtil.RouterUtil.getCurrentPageURI(), e.message)
-        }
-        if (socialuniSystemModule.isUniApp) {
-            import.meta.globEager('../../socialuni-app-view-uni/src/styles/index.scss')
-        } else {
-            import.meta.globEager('../../socialuni-app-view-h5/src/styles/index.scss')
+            SocialuniAppAPI.sendErrorLogAPI('front page error123', SocialuniAppUtil.RouterUtil.getCurrentPageURI(), e.message)
         }
         socialuniPluginsModule.addPlugin(socialuniAppPlugin)
     }

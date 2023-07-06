@@ -4,10 +4,9 @@ import {SocialuniPlugin} from "./interface/SocialuniPlugin"
 import {ImportModule} from "./interface/ImportModule"
 import {SocialuniOption} from "./interface/socialuniOption"
 import SocialuniViewService from "./interface/SocialuniViewService";
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
 import UniappAPI from "uniapp-api/src";
-import PlatformModuleLoadUtil from "socialuni-native-util/src/util/PlatformModuleLoadUtil";
-import {VueBase} from "vue-class-component";
+import PlatformModuleLoadUtil from "@socialuni/socialuni-native-util/src/util/PlatformModuleLoadUtil";
 
 const socialuniInitPlugin: SocialuniPlugin = {
     async onLaunch() {
@@ -24,25 +23,43 @@ const socialuniInitPlugin: SocialuniPlugin = {
 
 async function installSocialuniPluginIns(app: App) {
     socialuniPluginsModule.addPlugin(socialuniInitPlugin)
+
+   /* const moudles = import.meta.globEager('../../../../!**!/src/index.ts')
+    for (const moudle in moudles) {
+        console.log(moudle)
+    }
+    console.log(moudles)*/
+
     //查询是否包含community模块，如果存在则加载
-    const appModules = import.meta.globEager('../../socialuni-app/socialuni-app-sdk/src/index.ts')
+    const appModules = import.meta.globEager('../../**/socialuni-app-sdk/src/index.ts')
+    console.log(appModules)
     const socialuniApp = PlatformModuleLoadUtil.getFirstModule(appModules)
     if (socialuniApp && socialuniApp.default) {
         app.use(socialuniApp.default)
     }
-    const userModules = import.meta.globEager('../../socialuni-user/socialuni-user-sdk/src/index.ts')
+    const appViewModules = import.meta.globEager('../../**/socialuni-app-view-*/src/index.ts')
+    console.log(appViewModules)
+    const socialuniAppView = PlatformModuleLoadUtil.getModuleDefault(appViewModules)
+    if (socialuniAppView) {
+        console.log(socialuniAppView)
+        app.use(socialuniAppView)
+    }
+
+    console.log(socialuniApp)
+    const userModules = import.meta.globEager('../../**/socialuni-user-sdk/src/index.ts')
     const socialuniUser = PlatformModuleLoadUtil.getFirstModule(userModules)
     if (socialuniUser && socialuniUser.default) {
         app.use(socialuniUser.default)
     }
+    console.log(socialuniUser)
     //查询是否包含community模块，如果存在则加载
-    const communityModules = import.meta.globEager('../../socialuni-user/socialuni-socialuniCommunity-sdk/src/index.ts')
+    const communityModules = import.meta.globEager('../../**/socialuni-socialuniCommunity-sdk/src/index.ts')
     const socialuniCommunity = PlatformModuleLoadUtil.getFirstModule(communityModules)
     if (socialuniCommunity && socialuniCommunity.default) {
         app.use(socialuniCommunity.default)
     }
     //查询是否包含Im模块，如果存在则加载
-    const imModules = import.meta.globEager('../../socialuni-user/socialuni-im-sdk/src/index.ts')
+    const imModules = import.meta.globEager('../../**/socialuni-im-sdk/src/index.ts')
     const socialuniIm = PlatformModuleLoadUtil.getFirstModule(imModules)
     if (socialuniIm && socialuniIm.default) {
         app.use(socialuniIm.default)
@@ -55,11 +72,11 @@ const Socialuni = {
         app.use(UniappAPI)
         if (socialuniSystemModule.isUniApp) {
             const modules = import.meta.globEager('../../socialuni-ui/socialuni-ui-uni/src/index.ts')
-            const SocialuniUiUni = PlatformModuleLoadUtil.getModule(modules)
+            const SocialuniUiUni = PlatformModuleLoadUtil.getModuleDefault(modules)
             app.use(SocialuniUiUni)
         } else {
             const modules = import.meta.globEager('../../socialuni-ui/socialuni-ui-h5/src/index.ts')
-            const SocialuniUiH5 = PlatformModuleLoadUtil.getModule(modules)
+            const SocialuniUiH5 = PlatformModuleLoadUtil.getModuleDefault(modules)
             app.use(SocialuniUiH5)
         }
         const shareComponent = defineComponent({
@@ -76,7 +93,6 @@ const Socialuni = {
             created() {
                 socialuniPluginsModule.setRouter(this.$router)
                 socialuniPluginsModule.setRoute(this.$route)
-
             },
             mounted() {
             }

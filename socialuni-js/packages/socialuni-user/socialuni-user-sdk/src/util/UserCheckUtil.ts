@@ -1,14 +1,15 @@
-import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
-import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
+import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
+import {socialuniConfigModule} from "@socialuni/socialuni-app-sdk/src/store/SocialuniConfigModule";
 import UserPageUtil from "./UserPageUtil";
 import SocialuniUserEventConst from "../constant/SocialuniUserEventConst";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
 import CommonEventUtil from "uniapp-api/src/util/CommonEventUtil";
 import UserMsgUtil from "./UserMsgUtil";
 
 export default class UserCheckUtil {
     static checkUserBindPhoneNum() {
         const user = UserMsgUtil.unLoginMessage()
+        console.log(user)
         if (!user || !user.phoneNum) {
             // 如果登录了仅仅没绑定手机号，则提示跳转，区分qq和微信不同
             SocialuniAppUtil.AlertUtil.confirm('绑定手机号才能发布内容，是否前往绑定手机号页面')

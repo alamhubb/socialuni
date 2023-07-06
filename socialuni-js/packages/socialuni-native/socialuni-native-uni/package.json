@@ -1,13 +1,15 @@
 {
-  "name": "socialuni-native-uni",
+  "name": "@socialuni/socialuni-native-uni",
   "version": "0.1.2",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "socialuni-constant": "^0.1.2",
-    "socialuni-util": "^0.1.2",
+    "@socialuni/socialuni-constant": "^0.1.2",
+    "@socialuni/socialuni-api-base": "^0.1.2",
+    "@socialuni/socialuni-app-api": "^0.1.2",
+    "@socialuni/socialuni-util": "^0.1.2",
     "cos-js-sdk-v5": "^1.2.18",
     "@dcloudio/types": "^3.0.17"
   },

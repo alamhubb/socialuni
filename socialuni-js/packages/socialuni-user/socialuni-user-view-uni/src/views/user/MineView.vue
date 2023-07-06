@@ -202,29 +202,29 @@
 <script lang="ts">
 import {Options, Prop, Vue} from 'vue-property-decorator'
 import LoginView from "../login/LoginView.vue";
-import SocialuniFollowType from 'socialuni-constant/constant/user/SocialuniFollowType';
+import SocialuniFollowType from '@socialuni/socialuni-constant/constant/user/SocialuniFollowType';
 import UserContactInfoEditDialog from "./UserContactInfoEditDialog.vue";
-import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue";
-import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
-import QNavbar from "socialuni-ui-uni/src/components/QNavbar/QNavbar.vue";
-import QRowItem from "socialuni-ui-uni/src/components/QRowItem/QRowItem.vue";
+import QPopup from "@socialuni/socialuni-ui-uni/src/components/QPopup/QPopup.vue";
+import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue";
+import QNavbar from "@socialuni/socialuni-ui-uni/src/components/QNavbar/QNavbar.vue";
+import QRowItem from "@socialuni/socialuni-ui-uni/src/components/QRowItem/QRowItem.vue";
 import SocialuniUserInfoImg from "./SocialuniUserInfoImg.vue";
 import UserSchoolEditDialog from "./UserSchoolEditDialog.vue";
-import QInput from "socialuni-ui-uni/src/components/QInput/QInput.vue";
-import QButton from "socialuni-ui-uni/src/components/QButton/QButton.vue";
-import QSearch from "socialuni-ui-uni/src/components/QSearch/QSearch.vue";
-import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
-import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
+import QInput from "@socialuni/socialuni-ui-uni/src/components/QInput/QInput.vue";
+import QButton from "@socialuni/socialuni-ui-uni/src/components/QButton/QButton.vue";
+import QSearch from "@socialuni/socialuni-ui-uni/src/components/QSearch/QSearch.vue";
+import SocialuniMineUserAPI from "@socialuni/socialuni-user-api/src/api/SocialuniMineUserAPI";
+import ImgAddQO from "@socialuni/socialuni-api-base/src/model/user/ImgAddQO";
 import SocialGenderTag from "../../components/SocialGenderTag/SocialGenderTag.vue";
-import {socialuniUserModule} from 'socialuni-user-sdk/src/store/SocialuniUserModule';
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
-import UserService from "socialuni-user-sdk/src/logic/UserService";
-import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
-import CosService from "socialuni-app-sdk/src/util/CosService";
-import DomFile from "socialuni-app-sdk/src/model/DomFile";
-import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
-import SkipUrlConst from "socialuni-app-sdk/src/constant/SkipUrlConst";
+import {socialuniUserModule} from '@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule';
+import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
+import UserService from "@socialuni/socialuni-user-sdk/src/logic/UserService";
+import UserPageUtil from "@socialuni/socialuni-user-sdk/src/util/UserPageUtil";
+import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import CosService from "@socialuni/socialuni-app-sdk/src/util/CosService";
+import DomFile from "@socialuni/socialuni-app-sdk/src/model/DomFile";
+import TencentCosAPI from "@socialuni/socialuni-app-api/src/api/TencentCosAPI";
+import SkipUrlConst from "@socialuni/socialuni-app-sdk/src/constant/SkipUrlConst";
 import {onLoad} from "uniapp-api/src/UniappPageLifecycleHook";
 
 @Options({
@@ -255,7 +255,7 @@ export default class MineView extends Vue {
     }
 
     get isIosAndMpQQ() {
-        return socialuniSystemModule.isIosAndMpQQ
+        return socialuniSystemModule.isIosOrMpQQ
     }
 
     SocialuniFollowType = SocialuniFollowType

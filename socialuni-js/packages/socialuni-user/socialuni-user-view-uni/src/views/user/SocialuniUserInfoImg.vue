@@ -45,21 +45,21 @@
 </template>
 
 <script lang="ts">
-import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
+import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 import {Options, Prop, Vue} from "vue-property-decorator";
-import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
-import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
-import ImgFileVO from "socialuni-api-base/src/model/ImgFileVO";
-import ReportContentType from "socialuni-constant/constant/ReportContentType";
-import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
+import CenterUserDetailRO from "@socialuni/socialuni-api-base/src/model/social/CenterUserDetailRO";
+import ImgAddQO from "@socialuni/socialuni-api-base/src/model/user/ImgAddQO";
+import ImgFileVO from "@socialuni/socialuni-api-base/src/model/ImgFileVO";
+import ReportContentType from "@socialuni/socialuni-constant/constant/ReportContentType";
+import SocialuniMineUserAPI from "@socialuni/socialuni-user-api/src/api/SocialuniMineUserAPI";
 import SocialuniReportDialog from "../../components/SocialuniReportDialog.vue";
-import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
-import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
-import CosService from "socialuni-app-sdk/src/util/CosService";
-import DomFile from "socialuni-app-sdk/src/model/DomFile";
-import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
-import SocialuniImgUtil from "socialuni-user-sdk/src/util/SocialuniImgUtil";
+import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
+import UserPageUtil from "@socialuni/socialuni-user-sdk/src/util/UserPageUtil";
+import CosService from "@socialuni/socialuni-app-sdk/src/util/CosService";
+import DomFile from "@socialuni/socialuni-app-sdk/src/model/DomFile";
+import TencentCosAPI from "@socialuni/socialuni-app-api/src/api/TencentCosAPI";
+import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import SocialuniImgUtil from "@socialuni/socialuni-user-sdk/src/util/SocialuniImgUtil";
 
 @Options({
     components: {QIcon, SocialuniReportDialog}

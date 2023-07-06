@@ -1,10 +1,9 @@
 <script>
-import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
-import JsonUtil from "socialuni-util/src/util/JsonUtil";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
-
 export default {
     async onLaunch() {
+        console.log('app launch')
+        console.log('app launch')
+        console.log('app launch')
         // socialSystemModule.initSystemInfo()
         //如果有跳转信息
         //校验更新

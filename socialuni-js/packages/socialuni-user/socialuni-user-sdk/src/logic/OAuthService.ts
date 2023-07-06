@@ -1,14 +1,13 @@
-import LoginAPI from '../api/socialuni/LoginAPI'
-import UserService from 'socialuni-sdk/src/service/UserService'
-import UniProviderLoginQO from '@/socialuni/model/UniProviderLoginQO'
-import LoginProvider from '@/socialuni/constant/LoginProvider'
-import PhoneAPI from '@/socialuni/api/socialuni/PhoneAPI'
-import { socialuniUserModule } from '@/socialuni/store'
-import SocialLoginRO from '@/socialuni/model/social/SocialLoginRO'
-import UniUserInfoRO from '@/socialuni/model/UniUserInfoRO'
-import ResultRO from '@/socialuni/model/social/ResultRO'
-import ToastUtil from '@/socialuni/utils/ToastUtil'
-import PageUtil from '@/socialuni/utils/PageUtil'
+import ResultRO from "@socialuni/socialuni-api-base/src/model/social/ResultRO";
+import SocialLoginRO from "@socialuni/socialuni-api-base/src/model/social/SocialLoginRO";
+import UniUserInfoRO from "@socialuni/socialuni-api-base/src/model/login/UniUserInfoRO";
+import {socialuniUserModule} from "../store/SocialuniUserModule";
+import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import UniProviderLoginQO from "@socialuni/socialuni-api-base/src/model/login/UniProviderLoginQO";
+import LoginProvider from "@socialuni/socialuni-constant/constant/LoginProvider";
+import LoginAPI from "@socialuni/socialuni-user-api/src/api/LoginAPI";
+import UserService from "./UserService";
+import PhoneAPI from "@socialuni/socialuni-user-api/src/api/PhoneAPI";
 
 export default class OAuthService {
   static async oAuthUserInfo (params: any) {
@@ -26,7 +25,7 @@ export default class OAuthService {
             await OAuthService.oAuthUserPhoneNumLogin(authData)
           }
           SocialuniAppUtil.ToastUtil.toastLong('授权成功')
-          PageUtil.toMinePage()
+          // PageUtil.toMinePage()
         }
       }
     }

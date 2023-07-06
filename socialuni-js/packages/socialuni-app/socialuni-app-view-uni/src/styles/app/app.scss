@@ -155,3 +155,10 @@ input[type=number]::-webkit-outer-spin-button {
 .uni-app--showleftwindow uni-page-wrapper {
   height: 100%;
 }
+
+::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+  color: transparent;
+}

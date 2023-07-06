@@ -1,12 +1,12 @@
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
-import CommonEventUtil from "./util/CommonEventUtil";
-import UniappPageLifecycleConst from "./UniappPageLifecycleConst";
-import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
+import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniPluginsModule} from "@socialuni/socialuni/src/store/SocialuniPluginsModule";
 import {onBeforeMount} from "vue";
-import PlatformModuleLoadUtil from "socialuni-native-util/src/util/PlatformModuleLoadUtil";
+import PlatformModuleLoadUtil from "@socialuni/socialuni-native-util/src/util/PlatformModuleLoadUtil";
 
 
 export async function onLoad(hook: (params: any) => any) {
+    console.log(1111111111)
+    console.log(socialuniPluginsModule.uid)
     if (socialuniSystemModule.isUniApp) {
         //查询是否包含community模块，如果存在则加载
         try {

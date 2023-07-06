@@ -3,7 +3,7 @@
   <!--  过来的授权及时手机号授权，也会提示先登录，可以自己选择手机号登录-->
   <div class="h100p bg-white px col-between-center">
     <!--    上padding 7vh，兼容各平台，底部10px，左右20px-->
-    <div class="w100p pt-1% col-center flex-1">
+    <div class="h100p w100p pt-1p col-center flex-1">
       <div class="flex-none col-row-center h70">
         <div class="text-xxl font-bold">欢迎登录</div>
         <!--        <div class="text-xxl font-bold">欢迎使用社交联盟授权登录</div>-->
@@ -128,14 +128,14 @@ import PhoneNumFormData from "./PhoneNumFormData";
 import UserPrivacyAgreement from "./UserPrivacyAgreement.vue";
 import PhoneLoginForm from "./PhoneLoginForm.vue";
 import LoginFooterAppInfo from "./LoginFooterAppInfo.vue";
-import QButton from "socialuni-ui-uni/src/components/QButton/QButton.vue";
-import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
-import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
-import LoginService from "socialuni-user-sdk/src/logic/LoginService";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
-import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
-import PhoneService from "socialuni-user-sdk/src/logic/PhoneService";
+import QButton from "@socialuni/socialuni-ui-uni/src/components/QButton/QButton.vue";
+import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue";
+import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
+import LoginService from "@socialuni/socialuni-user-sdk/src/logic/LoginService";
+import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import UserPageUtil from "@socialuni/socialuni-user-sdk/src/util/UserPageUtil";
+import PhoneService from "@socialuni/socialuni-user-sdk/src/logic/PhoneService";
 
 @Options({
   components: {
@@ -221,7 +221,7 @@ export default class LoginView extends Vue {
         this.openTypeBtnEnable = false
         this.openTypeBtnEnable = false
         //一行代码就可以获取登录所需要的信息, 还可以配合后台使用，一键登录，记住用户
-        await LoginService.providerLogin(socialuniSystemModule.provider, result)
+        await LoginService.providerLogin(socialuniSystemModule.mpPlatform, result)
         this.loginAfterHint('登录成功')
       } finally {
         this.goToOAuthPage()
@@ -294,7 +294,7 @@ export default class LoginView extends Vue {
       msg += '，绑定手机号后才可发布内容'
     }
     //qq小程序下ios系统存在输入框冲突问题，使用了一个输入框，另一个就无法出现
-    if (socialuniSystemModule.isIosAndMpQQ) {
+    if (socialuniSystemModule.isIosOrMpQQ) {
       msg += '，如遇无法弹出输入框，请重启应用'
     }
     SocialuniAppUtil.AlertUtil.hint(msg).finally(() => {

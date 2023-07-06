@@ -10,7 +10,9 @@ export default function uniAxiosAdapter(config: AxiosRequestConfig) {
             url: config.baseURL + '/' + config.url,
             data: config.data,
             method: config.method as any,
-            header: config.headers,
+            header: {
+                ...config.headers
+            },
             timeout: config.timeout,
             complete: function (res: RequestSuccessCallbackResult & GeneralCallbackResult) {
                 const response = {

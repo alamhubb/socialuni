@@ -1,6 +1,6 @@
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
 import PlatformUtils from "../util/PlatformUtils";
-import SocialuniCoinAPI from "socialuni-user-api/src/api/SocialuniCoinAPI";
+import SocialuniCoinAPI from "@socialuni/socialuni-user-api/src/api/SocialuniCoinAPI";
 
 export default class SocialuniPay{
     //所有只能直接调用这个
@@ -8,7 +8,7 @@ export default class SocialuniPay{
         PlatformUtils.checkPay()
         //目前支持微信支付
         // const provider: string = SocialuniProviderType.wx
-        return SocialuniCoinAPI.payCoinAPI(socialuniSystemModule.provider, amount).then((res) => {
+        return SocialuniCoinAPI.payCoinAPI(socialuniSystemModule.mpPlatform, amount).then((res) => {
             return PlatformUtils.cashPay(res.data)
         })
     }

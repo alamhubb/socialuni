@@ -1,23 +1,23 @@
 import {AxiosError, InternalAxiosRequestConfig} from "axios";
-import {SocialuniPlugin} from "socialuni/src/interface/SocialuniPlugin";
+import {SocialuniPlugin} from "@socialuni/socialuni/src/interface/SocialuniPlugin";
 import {socialuniUserModule} from "./store/SocialuniUserModule";
-import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
+import {socialuniConfigModule} from "@socialuni/socialuni-app-sdk/src/store/SocialuniConfigModule";
 import {socialuniTokenModule} from "./store/SocialuniTokenModule";
-import ResultRO from "socialuni-api-base/src/model/social/ResultRO";
-import ErrorConst from "socialuni-constant/constant/ErrorConst";
+import ResultRO from "@socialuni/socialuni-api-base/src/model/social/ResultRO";
+import ErrorConst from "@socialuni/socialuni-constant/constant/ErrorConst";
 import UserService from "./logic/UserService";
 import UserMsgUtil from "./util/UserMsgUtil";
-import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
-import JsonUtil from "socialuni-util/src/util/JsonUtil";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
-import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil";
-import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
+import SocialuniAppAPI from "@socialuni/socialuni-app-api/src/api/SocialuniAppAPI";
+import JsonUtil from "@socialuni/socialuni-util/src/util/JsonUtil";
+import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import MsgUtil from "@socialuni/socialuni-app-sdk/src/util/MsgUtil";
+import WebsocketUtil from "@socialuni/socialuni-api-base/src/websocket/WebsocketUtil";
 import {App, defineComponent} from "vue";
-import {SocialuniOption} from "socialuni/src/interface/socialuniOption";
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
-import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
-import PlatformModuleLoadUtil from "socialuni-native-util/src/util/PlatformModuleLoadUtil";
-import SocialuniViewService from "socialuni/src/interface/SocialuniViewService";
+import {SocialuniOption} from "@socialuni/socialuni/src/interface/socialuniOption";
+import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniPluginsModule} from "@socialuni/socialuni/src/store/SocialuniPluginsModule";
+import PlatformModuleLoadUtil from "@socialuni/socialuni-native-util/src/util/PlatformModuleLoadUtil";
+import SocialuniViewService from "@socialuni/socialuni/src/interface/SocialuniViewService";
 import CommonEventUtil from "uniapp-api/src/util/CommonEventUtil";
 import SocialuniUserEventConst from "./constant/SocialuniUserEventConst";
 import UserPageUtil from "./util/UserPageUtil";
@@ -49,6 +49,7 @@ class SocialuniUserPlugin implements SocialuniPlugin {
         } else {
             config.headers.token = null
         }
+        config.headers['qqe'] = 'fasdfasdf'
     }
 
     onResponseErrorInterceptors(error: AxiosError) {

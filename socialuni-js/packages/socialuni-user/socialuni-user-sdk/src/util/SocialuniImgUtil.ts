@@ -1,9 +1,5 @@
-import JsonUtils from 'socialuni-util/src/util/ObjectUtil'
-import CommonUtil from 'socialuni-util/src/util/CommonUtil'
-import ErrorConst from "socialuni-constant/constant/ErrorConst";
-import {socialuniUserModule} from "socialuni-sdk/src/store/store";
-import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
-import ImgUtil from "socialuni-util/src/util/ImgUtil";
+import UUIDUtil from "@socialuni/socialuni-util/src/util/UUIDUtil";
+import ImgUtil from "@socialuni/socialuni-util/src/util/ImgUtil";
 
 export default class SocialuniImgUtil {
     // static readonly imgUrl: string = process.env.VUE_APP_BASE + 'img/'

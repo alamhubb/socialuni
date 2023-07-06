@@ -1,16 +1,19 @@
 {
-  "name": "socialuni-app-sdk",
+  "name": "@socialuni/socialuni-app-sdk",
   "version": "0.1.2",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "socialuni-app-api": "^0.1.2",
-    "socialuni-ui-types": "^0.1.2",
-    "socialuni-constant": "^0.1.2",
-    "socialuni-util": "^0.1.2",
-    "socialuni-native-util": "^0.1.2",
+    "@socialuni/socialuni-ui-types": "^0.1.2",
+    "@socialuni/socialuni-util": "^0.1.2",
+    "@socialuni/socialuni-constant": "^0.1.2",
+    "@socialuni/socialuni-native-util": "^0.1.2",
+    "@socialuni/socialuni-api-base": "^0.1.2",
+    "@socialuni/socialuni-app-api": "^0.1.2",
+    "@socialuni/socialuni-user-api": "^0.1.2",
+    "uniapp-api": "^0.1.2",
     "cos-js-sdk-v5": "^1.2.18",
     "cos-wx-sdk-v5": "^0.7.11",
     "vue": "^3.3.2"

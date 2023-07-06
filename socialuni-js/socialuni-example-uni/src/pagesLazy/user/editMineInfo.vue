@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import {Emit, Options, Vue, Watch} from 'vue-property-decorator'
-import SocialuniUserEditView from "socialuni-user-view-uni/src/views/user/SocialuniUserEditView.vue";
+import SocialuniUserEditView from "@socialuni/socialuni-user-view-uni/src/views/user/SocialuniUserEditView.vue";
 
 @Options({
   components: {SocialuniUserEditView}

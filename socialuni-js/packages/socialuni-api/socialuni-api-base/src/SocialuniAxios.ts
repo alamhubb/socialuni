@@ -1,6 +1,6 @@
 import axios, {AxiosRequestConfig} from 'axios'
 import uniAxiosAdapter from "./uniAxiosAdapter";
-import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
+import {socialuniPluginsModule} from "@socialuni/socialuni/src/store/SocialuniPluginsModule";
 
 const SocialuniAxiosCreate = (config?: AxiosRequestConfig) => {
     try {

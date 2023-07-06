@@ -1,11 +1,11 @@
 import socialuniUserRequest from "../request/socialuniUserRequest";
-import UniProviderLoginQO from "socialuni-api-base/src/model/login/UniProviderLoginQO";
-import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
-import SocialSendAuthCodeQO from "socialuni-api-base/src/model/phone/SocialSendAuthCodeQO";
-import SocialPhoneNumLoginQO from "socialuni-api-base/src/model/phone/SocialPhoneNumLoginQO";
-import SocialuniMineUserRO from "socialuni-api-base/src/model/user/SocialuniMineUserRO";
-import BindWxPhoneNumQO from "socialuni-api-base/src/model/phone/BindWxPhoneNumQO";
-import RefreshWxSessionKeyQO from "socialuni-api-base/src/model/phone/RefreshWxSessionKeyQO";
+import UniProviderLoginQO from "@socialuni/socialuni-api-base/src/model/login/UniProviderLoginQO";
+import CenterUserDetailRO from "@socialuni/socialuni-api-base/src/model/social/CenterUserDetailRO";
+import SocialSendAuthCodeQO from "@socialuni/socialuni-api-base/src/model/phone/SocialSendAuthCodeQO";
+import SocialPhoneNumLoginQO from "@socialuni/socialuni-api-base/src/model/phone/SocialPhoneNumLoginQO";
+import SocialuniMineUserRO from "@socialuni/socialuni-api-base/src/model/user/SocialuniMineUserRO";
+import BindWxPhoneNumQO from "@socialuni/socialuni-api-base/src/model/phone/BindWxPhoneNumQO";
+import RefreshWxSessionKeyQO from "@socialuni/socialuni-api-base/src/model/phone/RefreshWxSessionKeyQO";
 
 
 export default class PhoneAPI {

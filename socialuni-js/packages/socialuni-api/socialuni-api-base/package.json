@@ -1,12 +1,17 @@
 {
-  "name": "socialuni-api-base",
+  "name": "@socialuni/socialuni-api-base",
   "version": "0.1.2",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "socialuni": "^0.1.2"
+    "vue": "^3.3.2",
+    "mitt": "^3.0.0",
+    "@socialuni/socialuni": "^0.1.2",
+    "@socialuni/socialuni-util": "^0.1.2",
+    "@socialuni/socialuni-constant": "^0.1.2",
+    "@socialuni/socialuni-native-util": "^0.1.2"
   },
   "devDependencies": {
     "axios": "^1.4.0",

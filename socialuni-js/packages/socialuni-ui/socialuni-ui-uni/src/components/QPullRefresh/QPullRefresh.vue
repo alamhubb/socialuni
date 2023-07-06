@@ -23,7 +23,7 @@
 
 <script lang="ts">
 import {Options, Emit, Prop, Vue} from 'vue-property-decorator'
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
 
 @Options({})
 export default class QPullRefresh extends Vue {

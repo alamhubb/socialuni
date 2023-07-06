@@ -60,22 +60,21 @@
 
 <script lang="ts">
 import {Vue, Options, Prop, Emit} from 'vue-property-decorator'
-import SocialuniFollowType from "socialuni-constant/constant/user/SocialuniFollowType";
-import SocialUserContentRO from "socialuni-api-base/src/model/social/SocialUserContentRO";
+import SocialuniFollowType from "@socialuni/socialuni-constant/constant/user/SocialuniFollowType";
+import SocialUserContentRO from "@socialuni/socialuni-api-base/src/model/social/SocialUserContentRO";
 import {onLoad, onPullDownRefresh, onReachBottom, onShow} from "@dcloudio/uni-app";
-import QTabs from "socialuni-ui-uni/src/components/QTabs/QTabs.vue";
-import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
-import SocialuniPageQueryUtil from "socialuni-api-base/src/model/common/SocialuniPageQueryUtil";
-import CommonUtil from "socialuni-util/src/util/CommonUtil";
-import SocialUserFollowDetailRO from "socialuni-api-base/src/model/social/SocialUserFollowDetailRO";
-import QPullRefresh from "socialuni-ui-uni/src/components/QPullRefresh/QPullRefresh.vue";
+import QTabs from "@socialuni/socialuni-ui-uni/src/components/QTabs/QTabs.vue";
+import LoadMoreType from "@socialuni/socialuni-constant/constant/LoadMoreType";
+import SocialuniPageQueryUtil from "@socialuni/socialuni-api-base/src/model/common/SocialuniPageQueryUtil";
+import CommonUtil from "@socialuni/socialuni-util/src/util/CommonUtil";
+import SocialUserFollowDetailRO from "@socialuni/socialuni-api-base/src/model/social/SocialUserFollowDetailRO";
+import QPullRefresh from "@socialuni/socialuni-ui-uni/src/components/QPullRefresh/QPullRefresh.vue";
 import SocialGenderTag from "../../../components/SocialGenderTag/SocialGenderTag.vue";
-import SocialuniFollowTag from "socialuni-community-view-uni/src/components/SocialuniFollow/SocialuniFollowTag.vue";
-import FollowAPI from "socialuni-community-api/src/api/FollowAPI";
-import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
+import FollowAPI from "@socialuni/socialuni-community-api/src/api/FollowAPI";
+import UserPageUtil from "@socialuni/socialuni-user-sdk/src/util/UserPageUtil";
 
 @Options({
-  components: {QPullRefresh, SocialuniFollowTag, SocialGenderTag, QTabs}
+  components: {QPullRefresh, SocialGenderTag, QTabs}
 })
 export default class SocialuniFollowView extends Vue {
   $refs: {

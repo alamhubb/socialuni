@@ -5,7 +5,7 @@ let nativeUtil
 
 const modules = import.meta.globEager('../../../*/src/util/NativeUtil.ts')
 
-nativeUtil = PlatformModuleLoadUtil.getModule(modules)
+nativeUtil = PlatformModuleLoadUtil.getModuleDefault(modules)
 
 export default class SocialuniAppNativeUtil {
     static get nativeUtil(): SocialuniNativeUtilInterface {

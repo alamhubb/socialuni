@@ -1,6 +1,6 @@
-import AppMsg from "socialuni-constant/constant/AppMsg";
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
-import SocialuniAppUtil from 'socialuni-native-util/src/util/SocialuniAppUtil'
+import AppMsg from "@socialuni/socialuni-constant/constant/AppMsg";
+import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
+import SocialuniAppUtil from '@socialuni/socialuni-native-util/src/util/SocialuniAppUtil'
 import { socialuniConfigModule } from '../store/SocialuniConfigModule'
 
 
@@ -44,7 +44,7 @@ export default class MsgUtil {
     }
 
     static cantPopupPromptToast() {
-        if (socialuniSystemModule.isIosAndMpQQ) {
+        if (socialuniSystemModule.isIosOrMpQQ) {
             SocialuniAppUtil.ToastUtil.toastLong('如遇到无法弹出输入框，请重启应用')
         }
     }

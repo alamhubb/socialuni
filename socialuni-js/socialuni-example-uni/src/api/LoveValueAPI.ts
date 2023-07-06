@@ -1,4 +1,4 @@
-import request from "socialuni-api/src/request/request";
+import request from "@socialuni/socialuni-api/src/request/request";
 
 export default class LoveValueAPI {
   static watchVideoAdsAPI(success: boolean) {

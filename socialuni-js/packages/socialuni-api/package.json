@@ -1,12 +1,12 @@
 {
-  "name": "socialuni-api",
+  "name": "@socialuni/socialuni-api",
   "version": "0.1.2",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "socialuni": "^0.1.2"
+    "@socialuni/socialuni": "^0.1.2"
   },
   "devDependencies": {
     "typescript": "^4.7.4",

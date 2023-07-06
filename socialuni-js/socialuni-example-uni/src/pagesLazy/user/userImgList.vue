@@ -20,16 +20,16 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import SocialuniReportDialog from "socialuni-user-view-uni/src/components/SocialuniReportDialog.vue";
-import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
-import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
-import ImgFileVO from "socialuni-api-base/src/model/ImgFileVO";
-import SocialuniImgUtil from "socialuni-user-sdk/src/util/SocialuniImgUtil";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
-import AppMsg from "socialuni-constant/constant/AppMsg";
-import SocialuniUserAPI from "socialuni-user-api/src/api/SocialuniUserAPI";
-import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
-import ReportContentType from "socialuni-constant/constant/ReportContentType";
+import SocialuniReportDialog from "@socialuni/socialuni-user-view-uni/src/components/SocialuniReportDialog.vue";
+import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
+import CenterUserDetailRO from "@socialuni/socialuni-api-base/src/model/social/CenterUserDetailRO";
+import ImgFileVO from "@socialuni/socialuni-api-base/src/model/ImgFileVO";
+import SocialuniImgUtil from "@socialuni/socialuni-user-sdk/src/util/SocialuniImgUtil";
+import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import AppMsg from "@socialuni/socialuni-constant/constant/AppMsg";
+import SocialuniUserAPI from "@socialuni/socialuni-user-api/src/api/SocialuniUserAPI";
+import SocialuniMineUserAPI from "@socialuni/socialuni-user-api/src/api/SocialuniMineUserAPI";
+import ReportContentType from "@socialuni/socialuni-constant/constant/ReportContentType";
 import {onLoad} from 'uniapp-api/src/UniappPageLifecycleHook';
 
 @Options({
