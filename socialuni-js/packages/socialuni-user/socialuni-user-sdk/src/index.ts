@@ -43,8 +43,6 @@ class SocialuniUserPlugin implements SocialuniPlugin {
     }
 
     onRequestInterceptors(config: InternalAxiosRequestConfig) {
-        console.log(66666)
-        console.log(socialuniPluginsModule.uid)
         const token = socialuniTokenModule.token
         if (token) {
             config.headers.token = token

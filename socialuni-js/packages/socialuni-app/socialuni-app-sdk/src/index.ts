@@ -17,7 +17,6 @@ class SocialuniAppPlugin implements SocialuniPlugin {
     }
 
     onRequestInterceptors(config: InternalAxiosRequestConfig) {
-        console.log(socialuniPluginsModule.uid)
         config.headers.provider = socialuniSystemModule.mpPlatform
         config.headers.mpPlatform = socialuniSystemModule.mpPlatform
         config.headers.platform = socialuniSystemModule.platform
@@ -32,16 +31,11 @@ const socialuniAppPlugin: SocialuniPlugin = new SocialuniAppPlugin()
 
 const SocialuniApp = {
     async install(app: App, socialuniOption: SocialuniOption) {
-        console.log('执行了安装')
         app.config.errorHandler = (e: Error, instance, info) => {
             // 处理错误，例如：报告给一个服务
             SocialuniAppAPI.sendErrorLogAPI('front page error', SocialuniAppUtil.RouterUtil.getCurrentPageURI(), e.message)
         }
-        console.log(socialuniPluginsModule.uid)
-        console.log(socialuniPluginsModule.plugins.length)
-        console.log(33333333)
         socialuniPluginsModule.addPlugin(socialuniAppPlugin)
-        console.log(socialuniPluginsModule.plugins.length)
     }
 }
 

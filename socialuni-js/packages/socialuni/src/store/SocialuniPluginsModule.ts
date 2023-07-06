@@ -9,10 +9,6 @@ class SocialuniPluginsModule {
     uid: string = UUIDUtil.getUUID()
     private socialuniPlugins: SocialuniPlugin[] = []
 
-    constructor() {
-        console.trace('创建了socialplus')
-    }
-
     get route(): RouteLocationPathRaw {
         return this._route;
     }
