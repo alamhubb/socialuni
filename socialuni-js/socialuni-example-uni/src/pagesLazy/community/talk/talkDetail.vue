@@ -45,16 +45,16 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import QIcon from '@socialuni/socialuni-view/src/components/QIcon/QIcon.vue'
-import MsgInput from '@socialuni/socialuni-view/src/components/MsgInput.vue'
-import TalkItem from '@socialuni/socialuni-view/src/views/talk/talkItem/TalkItem.vue'
-import TalkOperate from '@socialuni/socialuni-view/src/views/talk/talkOperate.vue'
-import QNavbar from '@socialuni/socialuni-view/src/components/QNavbar/QNavbar.vue'
 import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
 import TalkVO from "@socialuni/socialuni-api-base/src/model/talk/TalkVO";
 import {socialuniConfigModule} from "@socialuni/socialuni-app-sdk/src/store/SocialuniConfigModule";
 import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
 import SocialuniTalkAPI from "@socialuni/socialuni-community-api/src/api/SocialuniTalkAPI";
+import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue";
+import MsgInput from "@socialuni/socialuni-community-view-uni/src/components/MsgInput.vue";
+import TalkItem from "@socialuni/socialuni-community-view-uni/src/components/talkItem/TalkItem.vue";
+import TalkOperate from "@socialuni/socialuni-community-view-uni/src/views/talk/talkOperate.vue";
+import QNavbar from "@socialuni/socialuni-ui-uni/src/components/QNavbar/QNavbar.vue";
 
 @Options({
   components: {
