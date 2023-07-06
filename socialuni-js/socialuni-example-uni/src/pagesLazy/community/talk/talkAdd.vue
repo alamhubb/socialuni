@@ -127,7 +127,7 @@
 </template>
 <script lang="ts">
 import {Options, Vue, Watch} from 'vue-property-decorator'
-import AppMsg from 'socialuni-constant/constant/AppMsg'
+import AppMsg from '@socialuni/socialuni-constant/constant/AppMsg'
 import {onUnload} from "@dcloudio/uni-app";
 import QInput from "@socialuni/socialuni-ui-uni/src/components/QInput/QInput.vue";
 import QSidebar from "@socialuni/socialuni-ui-uni/src/components/QSidebar/QSidebar.vue";
@@ -144,14 +144,14 @@ import {socialLocationModule} from "@socialuni/socialuni-community-sdk/src/store
 import SocialuniTalkAPI from "@socialuni/socialuni-community-api/src/api/SocialuniTalkAPI";
 import {socialTalkModule} from "@socialuni/socialuni-community-sdk/src/store/SocialTalkModule";
 import {socialCircleModule} from "@socialuni/socialuni-community-sdk/src/store/SocialCircleModule";
-import CommunityPageUtil from 'socialuni-community-sdk/src/util/CommunityPageUtil';
+import CommunityPageUtil from '@socialuni/socialuni-community-sdk/src/util/CommunityPageUtil';
 import ObjectUtil from "@socialuni/socialuni-util/src/util/ObjectUtil";
 import {socialuniTagModule} from "@socialuni/socialuni-community-sdk/src/store/SocialTagModule";
 import VisibleType from "@socialuni/socialuni-constant/constant/VisibleType";
 import GenderType from "@socialuni/socialuni-constant/constant/GenderType";
 import LocationUtil from "@socialuni/socialuni-community-sdk/src/util/LocationUtil";
 import EnumStrVO from "@socialuni/socialuni-constant/constant/EnumStrVO";
-import { socialuniUserModule } from 'socialuni-user-sdk/src/store/SocialuniUserModule';
+import { socialuniUserModule } from '@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule';
 import DistrictVO from "@socialuni/socialuni-api-base/src/model/DistrictVO";
 import DomFile from "@socialuni/socialuni-app-sdk/src/model/DomFile";
 import TagVO from "@socialuni/socialuni-api-base/src/model/community/tag/TagVO";

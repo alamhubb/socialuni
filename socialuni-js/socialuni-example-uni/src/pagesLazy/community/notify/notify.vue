@@ -38,7 +38,7 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import ImgUtil from 'socialuni-sdk/src/utils/ImgUtil'
+import ImgUtil from '@socialuni/socialuni-sdk/src/utils/ImgUtil'
 import {socialNotifyModule} from "@socialuni/socialuni-sdk/src/store/store";
 import DateUtil from "@socialuni/socialuni-sdk/src/utils/DateUtil";
 import PageUtil from "@socialuni/socialuni-sdk/src/utils/PageUtil";
