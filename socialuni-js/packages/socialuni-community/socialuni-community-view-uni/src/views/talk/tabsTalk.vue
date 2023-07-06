@@ -520,8 +520,6 @@ export default class TabsTalk extends Vue {
 
     // app端兼容问题，滚动页面评论input不会失去焦点，需要手动控制
     talksScrollEvent({detail}) {
-        console.log(detail.scrollTop)
-        console.log('触发了滚动')
         // 如果处于获取焦点状态，则失去焦点
         if (socialTalkModule.inputContentFocus) {
             socialTalkModule.inputContentBlur()
