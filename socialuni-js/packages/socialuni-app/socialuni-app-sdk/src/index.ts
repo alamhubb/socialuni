@@ -12,14 +12,11 @@ import {socialuniTokenModule} from "@socialuni/socialuni-user-sdk/src/store/Soci
 
 class SocialuniAppPlugin implements SocialuniPlugin {
     onLaunch() {
-        console.log(4444444)
-        console.log(socialuniPluginsModule.uid)
         WebsocketUtil.websocketConnect(false)
         socialuniConfigModule.getAppConfigAction()
     }
 
     onRequestInterceptors(config: InternalAxiosRequestConfig) {
-        console.log(5555555)
         console.log(socialuniPluginsModule.uid)
         config.headers.provider = socialuniSystemModule.mpPlatform
         config.headers.mpPlatform = socialuniSystemModule.mpPlatform

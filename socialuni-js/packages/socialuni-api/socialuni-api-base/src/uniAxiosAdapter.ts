@@ -5,12 +5,18 @@ import {AxiosRequestConfig, AxiosResponse} from "axios";
 
 export default function uniAxiosAdapter(config: AxiosRequestConfig) {
     return new Promise<AxiosResponse>((resolve, reject) => {
+        console.log(config)
+        console.log(11111111)
+        console.log(config.headers)
+        console.log(222222)
         uni.request({
             ...config,
             url: config.baseURL + '/' + config.url,
             data: config.data,
             method: config.method as any,
-            header: config.headers,
+            header: {
+                ...config.headers
+            },
             timeout: config.timeout,
             complete: function (res: RequestSuccessCallbackResult & GeneralCallbackResult) {
                 const response = {

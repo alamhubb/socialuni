@@ -10,21 +10,24 @@ const SocialuniAxiosCreate = (config?: AxiosRequestConfig) => {
     } catch (e) {
 
     }
+    console.log(444444)
+    console.log(config)
+    console.log(555555)
     config.withCredentials = true
     config.timeout = 120000
     const socialuniAxios = axios.create(config)
 
     socialuniAxios.interceptors.request.use(
         config => {
-            console.log(222222)
-            console.log(socialuniPluginsModule.uid)
-            console.log(socialuniPluginsModule.plugins)
             console.log(socialuniPluginsModule.plugins.length)
+            console.log(config.url)
+            console.log(config)
             for (const socialuniPlugin of socialuniPluginsModule.plugins) {
                 if (socialuniPlugin.onRequestInterceptors) {
                     socialuniPlugin.onRequestInterceptors(config)
                 }
             }
+            console.log(config)
             return config
         }
     )
