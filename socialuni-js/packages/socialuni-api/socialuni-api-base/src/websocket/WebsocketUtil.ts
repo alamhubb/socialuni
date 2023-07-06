@@ -78,7 +78,7 @@ export default class WebsocketUtil {
             // #endif
         })
         const onClose = ((e) => {
-            console.log('触发了关闭:' + e)
+            console.log('触发了关闭:' + JsonUtil.log(e))
             this.reConnect()
         })
         const onMessage = ((res: MessageEvent) => {
