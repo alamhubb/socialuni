@@ -3,6 +3,10 @@ package com.socialuni.social.common.api.utils;
 import com.socialuni.social.common.api.constant.SocialWebHeaderName;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.HttpInputMessage;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -10,6 +14,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.InputStream;
 
 
 /**
@@ -36,6 +42,14 @@ public class RequestUtil {
 
     public static String getParameter(String key) {
         HttpServletRequest request = getRequest();
+       /* HttpInputMessage inputMessage = new ServletServerHttpRequest(request);
+        InputStream inputStream;
+        //省略一些代码
+        try {
+            inputStream = inputMessage.getBody();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }*/
         if (request == null) {
             return null;
         }
