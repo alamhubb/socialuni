@@ -43,4 +43,6 @@ class SocialuniPluginsModule {
     }
 }
 
-export const socialuniPluginsModule: UnwrapNestedRefs<SocialuniPluginsModule> = reactive(new SocialuniPluginsModule())
+const socialuniPluginsModuleObj: UnwrapNestedRefs<SocialuniPluginsModule> = reactive(new SocialuniPluginsModule())
+
+export const socialuniPluginsModule = socialuniPluginsModuleObj
