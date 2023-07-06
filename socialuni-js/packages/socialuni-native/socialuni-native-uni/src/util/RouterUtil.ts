@@ -63,9 +63,9 @@ export default class RouterUtil {
      */
     static switchTab(pagePath: string): void {
         // if (socialuniSystemModule.isApp) {
-        uni.showTabBar()
         // }
         uni.switchTab({url: pagePath})
+        uni.showTabBar()
     }
 
     static goBack(): void {

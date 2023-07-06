@@ -255,7 +255,7 @@ export default class MineView extends Vue {
     }
 
     get isIosAndMpQQ() {
-        return socialuniSystemModule.isIosAndMpQQ
+        return socialuniSystemModule.isIosOrMpQQ
     }
 
     SocialuniFollowType = SocialuniFollowType

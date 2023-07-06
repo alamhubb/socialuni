@@ -294,7 +294,7 @@ export default class LoginView extends Vue {
       msg += '，绑定手机号后才可发布内容'
     }
     //qq小程序下ios系统存在输入框冲突问题，使用了一个输入框，另一个就无法出现
-    if (socialuniSystemModule.isIosAndMpQQ) {
+    if (socialuniSystemModule.isIosOrMpQQ) {
       msg += '，如遇无法弹出输入框，请重启应用'
     }
     SocialuniAppUtil.AlertUtil.hint(msg).finally(() => {

@@ -46,7 +46,7 @@ class SocialuniUserDetailViewService implements SocialuniViewServiceInterface {
     }
 
     get isIosAndMpQQ() {
-        return socialuniSystemModule.isIosAndMpQQ
+        return socialuniSystemModule.isIosOrMpQQ
     }
 
     talks: TalkVO[] = []

@@ -130,7 +130,7 @@ class SocialuniSystemModule {
     }
 
     //ios和qq小程序禁止虚拟支付，统一判断
-    get isIosAndMpQQ() {
+    get isIosOrMpQQ() {
         return this.isProd && (this.isIos || this.isMpQQ)
     }
 }
