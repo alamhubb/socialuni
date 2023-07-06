@@ -93,7 +93,6 @@ const Socialuni = {
             created() {
                 socialuniPluginsModule.setRouter(this.$router)
                 socialuniPluginsModule.setRoute(this.$route)
-
             },
             mounted() {
             }

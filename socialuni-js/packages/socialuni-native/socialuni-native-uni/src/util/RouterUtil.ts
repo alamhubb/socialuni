@@ -1,6 +1,9 @@
 import PagePath from "@socialuni/socialuni-constant/constant/PagePath";
 import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
 import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import JsonUtil from "@socialuni/socialuni-util/src/util/JsonUtil";
+import Lodash from "@socialuni/socialuni-util/src/util/Lodash";
+import {socialuniPluginsModule} from "@socialuni/socialuni/src/store/SocialuniPluginsModule";
 
 export default class RouterUtil {
 
@@ -77,11 +80,17 @@ export default class RouterUtil {
         return getCurrentPages()[getCurrentPages().length - 1]
     }
 
+    /*
+    //不支持必须onload之后才有值
     static getCurrentPageParams(): any {
         console.log(this.getCurrentPage())
+        console.log(socialuniPluginsModule.router)
+        console.log(socialuniPluginsModule.route)
+        JsonUtil.log(this.getCurrentPageURI())
+        console.log(this.getCurrentPage().options)
         console.log(this.getCurrentPage().$page)
-        return this.getCurrentPage().$page.options
-    }
+        return this.getCurrentPage().options
+    }*/
 
     static goBackOrHome(): void {
         const pages = getCurrentPages()

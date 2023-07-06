@@ -9,6 +9,7 @@ import {watch, reactive, provide} from "vue";
 import {SocialuniViewServiceInterface} from "@socialuni/socialuni/src/interface/SocialuniViewServiceInterface";
 import {ComponentInternalInstance} from "@vue/runtime-core";
 import SocialuniDatingService from "./SocialuniDatingService";
+import {onLoad} from "uniapp-api/src/UniappPageLifecycleHook";
 
 
 class SocialuniUserDetailViewService implements SocialuniViewServiceInterface {
@@ -21,8 +22,9 @@ class SocialuniUserDetailViewService implements SocialuniViewServiceInterface {
         this.instance = instance
         SocialuniAppUtil.UniUtil.showShareMenu()
 
-        this.queryUserInfo()
-
+        onLoad((params) => {
+            this.queryUserInfo(params.userId)
+        })
 
         /*onShow(() => {
             this.showMsgInput = true
@@ -33,9 +35,7 @@ class SocialuniUserDetailViewService implements SocialuniViewServiceInterface {
         })*/
     }
 
-    async queryUserInfo(){
-        const params = SocialuniAppUtil.RouterUtil.getCurrentPageParams()
-        const userId = params.userId
+    async queryUserInfo(userId) {
         // 这里有问题，有时候直接进入页面没有userId
         const res = await SocialuniUserAPI.queryUserDetailAPI(userId)
         this.user = res.data
@@ -50,7 +50,6 @@ class SocialuniUserDetailViewService implements SocialuniViewServiceInterface {
     }
 
     talks: TalkVO[] = []
-
 
 
     copyText(textCopy: string) {
