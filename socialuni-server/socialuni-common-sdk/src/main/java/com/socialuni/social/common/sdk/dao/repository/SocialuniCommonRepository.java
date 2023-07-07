@@ -168,7 +168,7 @@ public class SocialuniCommonRepository {
      * @param <T>
      * @return
      */
-    @Cacheable(cacheNames = CommonRedisKey.commonFindByUserIdAndBeUserId, key = "#tClass.getSimpleName()+'-'+#userId+'-'+#beUserId")
+//    @Cacheable(cacheNames = CommonRedisKey.commonFindByUserIdAndBeUserId, key = "#tClass.getSimpleName()+'-'+#userId+'-'+#beUserId")
     public <T extends SocialuniUserContactBaseDO> T findByUserIdAndBeUserId(Integer userId, Integer beUserId, Class<T> tClass) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);

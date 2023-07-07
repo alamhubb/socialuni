@@ -32,7 +32,7 @@ public class SocialuniUserFollowManage {
     }
 
     public boolean userHasFollowBeUser(Integer userId, Integer beUserId) {
-        SocialuniUserFollowDO followDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(userId, beUserId, SocialuniUserFollowDO.class);
+        SocialuniUserFollowDO followDO = followRepository.findFirstByUserIdAndBeUserId(userId, beUserId);
         return followDO != null && SocialuniCommonStatus.enable.equals(followDO.getStatus());
     }
 }
