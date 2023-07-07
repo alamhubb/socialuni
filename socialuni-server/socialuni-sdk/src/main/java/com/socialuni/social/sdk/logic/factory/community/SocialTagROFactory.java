@@ -11,7 +11,7 @@ public class SocialTagROFactory {
     public static TagRO getTagRO(SocialuniTagDO TagDO) {
         TagRO tagRO = new TagRO();
         tagRO.setId(TagDO.getId());
-        tagRO.setName(StringUtils.substring(TagDO.getName(), 0, 4));
+        tagRO.setName(TagDO.getName());
         tagRO.setCount(TagDO.getCount());
         tagRO.setTalkCount(TagDO.getTalkCount());
         tagRO.setAvatar(TagDO.getAvatar());
