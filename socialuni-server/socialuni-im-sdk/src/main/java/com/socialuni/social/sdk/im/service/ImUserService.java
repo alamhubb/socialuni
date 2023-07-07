@@ -53,7 +53,7 @@ public class ImUserService {
     public ResultRO<String> getImUserToken(SocialuniUserDo mineUser) {
         SocialuniImUserModel socialuniImUserModel = toImUserModel(mineUser);
 
-        String imToken = null;
+        /*String imToken = null;
         //设置openIm的key
         SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUserId(SocialuniAccountProviderType.openIm, mineUser.getUserId());
 
@@ -67,8 +67,8 @@ public class ImUserService {
                 imToken = socialuniOpenImUserFeign.userLogin(socialuniImUserModel);
             }
         }
-        socialUserAccountDO = socialBindUserOpenImAccountDomain.bindOrUpdateUserOpenImAccount(mineUser, socialuniImUserModel.getUserID(), imToken);
-        return ResultRO.success(socialUserAccountDO.getSessionKey());
+        socialUserAccountDO = socialBindUserOpenImAccountDomain.bindOrUpdateUserOpenImAccount(mineUser, socialuniImUserModel.getUserID(), imToken);*/
+        return ResultRO.success("");
     }
 
 

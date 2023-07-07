@@ -2,7 +2,6 @@ import SocialLoginRO from "@socialuni/socialuni-api-base/src/model/social/Social
 import SocialuniMineUserRO from "@socialuni/socialuni-api-base/src/model/user/SocialuniMineUserRO";
 import WebsocketUtil from "@socialuni/socialuni-api-base/src/websocket/WebsocketUtil";
 import {socialuniUserModule} from "../store/SocialuniUserModule";
-import SocialuniAlertUtil from "@socialuni/socialuni-app-sdk/src/util/SocialuniAlertUtil";
 import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
 
 export default class UserService {
