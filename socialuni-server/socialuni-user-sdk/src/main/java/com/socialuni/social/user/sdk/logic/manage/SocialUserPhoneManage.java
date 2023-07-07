@@ -43,7 +43,7 @@ public class SocialUserPhoneManage {
         SocialUserPhoneDo SocialUserPhoneDo = socialUserPhoneRedis.findByPhoneNum(phoneNum);
         if (SocialUserPhoneDo != null) {
             //用户为空，则代表就是这个用户，用户不为空才校验手机号是否已被使用
-            throw new SocialBusinessException("手机号已被绑定");
+            throw new SocialBusinessException("手机号已被绑定，请使用手机号登录");
         }
     }
 
