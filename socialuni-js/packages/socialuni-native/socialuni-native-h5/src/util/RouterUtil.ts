@@ -1,4 +1,4 @@
-import {socialuniPluginsModule} from "@socialuni/socialuni-/src/store/SocialuniPluginsModule";
+import {socialuniPluginsModule} from "@socialuni/socialuni/src/store/SocialuniPluginsModule";
 
 export default class RouterUtil {
     /**

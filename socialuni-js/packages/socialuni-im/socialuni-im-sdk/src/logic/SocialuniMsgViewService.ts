@@ -12,7 +12,7 @@ import DateUtil from "@socialuni/socialuni-util/src/util/DateUtil";
 import MsgUtil from "@socialuni/socialuni-app-sdk/src/util/MsgUtil";
 import UserType from "@socialuni/socialuni-constant/constant/UserType";
 import {nextTick, onBeforeMount, onMounted, onUnmounted} from "vue";
-import SocialuniViewService from "@socialuni/socialuni-/src/interface/SocialuniViewService";
+import SocialuniViewService from "@socialuni/socialuni/src/interface/SocialuniViewService";
 import Constants from "@socialuni/socialuni-constant/constant/Constant";
 import ReportContentType from "@socialuni/socialuni-constant/constant/ReportContentType";
 

@@ -2,7 +2,6 @@ import {socialuniChatModule} from "@socialuni/socialuni-im-sdk/src/store/Socialu
 import SocialuniChatRO from "@socialuni/socialuni-api-base/src/model/SocialuniChatRO";
 import DateUtil from "@socialuni/socialuni-util/src/util/DateUtil";
 import {watch} from "vue";
-import SocialuniViewService from "@socialuni/socialuni-/src/interface/SocialuniViewService";
 import {Vue} from "vue-class-component";
 import SocialUserContentRO from "@socialuni/socialuni-api-base/src/model/social/SocialUserContentRO";
 import ChatType from "@socialuni/socialuni-constant/constant/ChatType";
@@ -10,6 +9,7 @@ import Constants from "@socialuni/socialuni-constant/constant/Constant";
 import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
 import ImPageUtil from "../util/ImPageUtil";
 import SocialuniImUserAPI from "@socialuni/socialuni-im-api/src/api/SocialuniImUserAPI";
+import SocialuniViewService from "@socialuni/socialuni/src/interface/SocialuniViewService";
 
 interface SocialuniChatViewServiceRefs {
     messageBox: HTMLDivElement;

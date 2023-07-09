@@ -4,7 +4,7 @@ import {SocialuniImPagePathInterface} from "./SocialuniImPagePathInterface";
 
 const modules = import.meta.globEager('../../../socialuni-im-*-sdk/src/constant/SocialuniImPagePath.ts')
 
-const imPagePath: SocialuniImPagePathInterface = PlatformModuleLoadUtil.getModule(modules)
+const imPagePath: SocialuniImPagePathInterface = PlatformModuleLoadUtil.getModuleDefault(modules)
 
 export default class ImPagePath {
 
