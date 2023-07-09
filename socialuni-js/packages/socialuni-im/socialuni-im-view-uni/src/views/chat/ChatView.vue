@@ -107,23 +107,23 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import SocialUserContentRO from "socialuni-api-base/src/model/social/SocialUserContentRO"
-import QNavbar from "socialuni-ui-uni/src/components/QNavbar/QNavbar.vue"
-import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue"
-import QSearch from "socialuni-ui-uni/src/components/QSearch/QSearch.vue"
-import QInput from "socialuni-ui-uni/src/components/QInput/QInput.vue"
-import SocialuniImMineUserDetailRO from "socialuni-im-api/src/model/RO/SocialuniImMineUserDetailRO";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
-import SocialuniImUserAPI from "socialuni-im-api/src/api/SocialuniImUserAPI";
-import SocialuniChatRO from "socialuni-api-base/src/model/SocialuniChatRO";
-import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
-import ChatType from "socialuni-constant/constant/ChatType";
-import SocialuniCommonStatus from "socialuni-constant/constant/status/SocialuniCommonStatus";
-import Constants from "socialuni-constant/constant/Constant";
-import DateUtil from "socialuni-util/src/util/DateUtil";
+import SocialUserContentRO from "@socialuni/socialuni-api-base/src/model/social/SocialUserContentRO"
+import QNavbar from "@socialuni/socialuni-ui-uni/src/components/QNavbar/QNavbar.vue"
+import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue"
+import QSearch from "@socialuni/socialuni-ui-uni/src/components/QSearch/QSearch.vue"
+import QInput from "@socialuni/socialuni-ui-uni/src/components/QInput/QInput.vue"
+import SocialuniImMineUserDetailRO from "@socialuni/socialuni-im-api/src/model/RO/SocialuniImMineUserDetailRO";
+import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import SocialuniImUserAPI from "@socialuni/socialuni-im-api/src/api/SocialuniImUserAPI";
+import SocialuniChatRO from "@socialuni/socialuni-api-base/src/model/SocialuniChatRO";
+import {socialuniChatModule} from "@socialuni/socialuni-im-sdk/src/store/SocialuniChatModule";
+import ChatType from "@socialuni/socialuni-constant/constant/ChatType";
+import SocialuniCommonStatus from "@socialuni/socialuni-constant/constant/status/SocialuniCommonStatus";
+import Constants from "@socialuni/socialuni-constant/constant/Constant";
+import DateUtil from "@socialuni/socialuni-util/src/util/DateUtil";
 import {onLoad, onShow} from "@dcloudio/uni-app";
-import ImPageUtil from "socialuni-im-sdk/src/util/ImPageUtil";
-import SocialuniChatViewService from "socialuni-im-sdk/src/logic/SocialuniChatViewService";
+import ImPageUtil from "@socialuni/socialuni-im-sdk/src/util/ImPageUtil";
+import SocialuniChatViewService from "@socialuni/socialuni-im-sdk/src/logic/SocialuniChatViewService";
 
 @Options({
     components: {QSearch, QInput, QIcon, QNavbar}

@@ -1,5 +1,5 @@
 {
-  "name": "socialuni-im-view-uni",
+  "name": "@socialuni/socialuni-im-view-uni",
   "version": "0.1.2",
   "description": "",
   "main": "index.js",
@@ -10,11 +10,11 @@
     "@dcloudio/types": "^3.0.17",
     "@dcloudio/uni-app": "3.0.0-alpha-3070620230227001",
     "@dcloudio/uni-ui": "^1.4.23",
-    "socialuni": "^0.1.2",
-    "socialuni-im-sdk": "^0.1.2",
-    "socialuni-im-uni-sdk": "^0.1.2",
-    "socialuni-native-util": "^0.1.2",
-    "socialuni-im-api": "^0.1.2",
+    "@socialuni/socialuni": "^0.1.2",
+    "@socialuni/socialuni-im-sdk": "^0.1.2",
+    "@socialuni/socialuni-im-uni-sdk": "^0.1.2",
+    "@socialuni/socialuni-native-util": "^0.1.2",
+    "@socialuni/socialuni-im-api": "^0.1.2",
     "vue": "3.2.41"
   },
   "keywords": [],

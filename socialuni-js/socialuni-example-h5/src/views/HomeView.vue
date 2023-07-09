@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import {Options, Vue} from "vue-property-decorator";
-import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
+import PhoneAPI from "@socialuni/socialuni-user-api/src/api/PhoneAPI";
 
 @Options({})
 export default class IndexView extends Vue {

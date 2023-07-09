@@ -11,9 +11,9 @@ import SocialPlatformModule from "./SocialPlatformModule";
 import socialuniSystemModule from "./socialuniSystemModule";
 import socialuniUserModule from "./socialuniUserModule";
 import socialuniConfigModule from "./socialuniConfigModule";
-import SocialuniImUserAPI from "socialuni/src/api/SocialuniImUserAPI";
+import SocialuniImUserAPI from "@socialuni/socialuni-/src/api/SocialuniImUserAPI";
 import UserService from "../service/UserService";
-import CosAPI from "socialuni/src/api/CosAPI";
+import CosAPI from "@socialuni/socialuni-/src/api/CosAPI";
 
 export let socialuniSystemModule: socialuniSystemModule
 export let socialuniUserModule: socialuniUserModule

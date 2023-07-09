@@ -1,16 +1,16 @@
-import SocialuniChatRO from "socialuni-api-base/src/model/SocialuniChatRO";
-import {OpenImChatRO} from "socialuni-api-base/src/model/openIm/OpenImChatRO";
-import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
-import SocialuniTalkTabCircleRO from "socialuni-api-base/src/model/community/circle/SocialuniTalkTabCircleRO";
-import CircleCreateChatQO from "socialuni-api-base/src/model/community/circle/CircleCreateChatQO";
-import MessageVO from "socialuni-im-api/src/model/RO/MessageVO";
-import FriendApplyType from "socialuni-constant/constant/FriendApplyType";
-import MessageAPI from "socialuni-im-api/src/api/MessageAPI";
+import SocialuniChatRO from "@socialuni/socialuni-api-base/src/model/SocialuniChatRO";
+import {OpenImChatRO} from "@socialuni/socialuni-api-base/src/model/openIm/OpenImChatRO";
+import CenterUserDetailRO from "@socialuni/socialuni-api-base/src/model/social/CenterUserDetailRO";
+import SocialuniTalkTabCircleRO from "@socialuni/socialuni-api-base/src/model/community/circle/SocialuniTalkTabCircleRO";
+import CircleCreateChatQO from "@socialuni/socialuni-api-base/src/model/community/circle/CircleCreateChatQO";
+import MessageVO from "@socialuni/socialuni-im-api/src/model/RO/MessageVO";
+import FriendApplyType from "@socialuni/socialuni-constant/constant/FriendApplyType";
+import MessageAPI from "@socialuni/socialuni-im-api/src/api/MessageAPI";
 import {reactive} from "vue";
-import OpenImFriendApplyRO from "socialuni-api-base/src/model/openIm/OpenImFriendApplyRO";
-import OpenImSessionType from "socialuni-constant/constant/openIm/constant/OpenImSessionType";
+import OpenImFriendApplyRO from "@socialuni/socialuni-api-base/src/model/openIm/OpenImFriendApplyRO";
+import OpenImSessionType from "@socialuni/socialuni-constant/constant/openIm/constant/OpenImSessionType";
 import ImPageUtil from "../util/ImPageUtil";
-import ChatAPI from "socialuni-im-api/src/api/ChatAPI";
+import ChatAPI from "@socialuni/socialuni-im-api/src/api/ChatAPI";
 import SocialuniImUserTokenUtil from "../util/SocialuniImUserTokenUtil";
 
 

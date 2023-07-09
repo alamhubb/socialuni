@@ -53,10 +53,10 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import {socialChatFriendModule, socialChatModule, socialuniUserModule} from "socialuni-sdk/src/store/store"
+import {socialChatFriendModule, socialChatModule, socialuniUserModule} from "@socialuni/socialuni-sdk/src/store/store"
 import {onLoad} from "@dcloudio/uni-app";
-import SocialuniAppUtil from "socialuni-app-sdk/src/util/UniUtil";
-import DateUtil from "socialuni-util/src/util/DateUtil";
+import SocialuniAppUtil from "@socialuni/socialuni-app-sdk/src/util/UniUtil";
+import DateUtil from "@socialuni/socialuni-util/src/util/DateUtil";
 import {
   ChangeGroupMemberMuteParams, ChangeGroupMuteParams,
   CreateGroupParams,
@@ -64,11 +64,11 @@ import {
   GroupInitInfo, InviteGroupParams,
   Member, MemberNameParams, SetGroupRoleParams,
   SetGroupVerificationParams, TransferGroupParams
-} from "socialuni-sdk/src/plugins/open-im-sdk";
-import {GroupMemberItem, GroupRole, GroupVerificationType} from "socialuni-sdk/src/plugins/open-im-sdk";
+} from "@socialuni/socialuni-sdk/src/plugins/open-im-sdk";
+import {GroupMemberItem, GroupRole, GroupVerificationType} from "@socialuni/socialuni-sdk/src/plugins/open-im-sdk";
 import QNavbar from "../../components/QNavbar/QNavbar.vue";
 import MessageViewParams from "./MessageViewParams";
-import PageUtil from "socialuni-util/src/util/PageUtil";
+import PageUtil from "@socialuni/socialuni-util/src/util/PageUtil";
 
 @Options({components: {QNavbar}})
 export default class GroupMemberView extends Vue {

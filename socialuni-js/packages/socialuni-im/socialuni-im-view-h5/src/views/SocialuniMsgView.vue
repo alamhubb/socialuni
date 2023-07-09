@@ -82,9 +82,9 @@
 
 <script lang="ts">
 import {Options, Vue} from "vue-property-decorator";
-import SocialuniMsgViewService from "socialuni-im-sdk/src/logic/SocialuniMsgViewService";
-import SocialuniChatView from "socialuni-im-view-h5/src/views/SocialuniChatView.vue";
-import SScrollbar from "socialuni-ui-h5/src/components/SScrollbar.vue";
+import SocialuniMsgViewService from "@socialuni/socialuni-im-sdk/src/logic/SocialuniMsgViewService";
+import SocialuniChatView from "@socialuni/socialuni-im-view-h5/src/views/SocialuniChatView.vue";
+import SScrollbar from "@socialuni/socialuni-ui-h5/src/components/SScrollbar.vue";
 
 @Options({
     components: {SScrollbar, SocialuniChatView}

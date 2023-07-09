@@ -1,4 +1,4 @@
-import PlatformModuleLoadUtil from "socialuni-native-util/src/util/PlatformModuleLoadUtil";
+import PlatformModuleLoadUtil from "@socialuni/socialuni-native-util/src/util/PlatformModuleLoadUtil";
 import {SocialuniImPagePathInterface} from "./SocialuniImPagePathInterface";
 
 

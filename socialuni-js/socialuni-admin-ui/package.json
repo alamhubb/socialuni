@@ -1,5 +1,5 @@
 {
-  "name": "socialuni-admin",
+  "name": "@socialuni/socialuni-admin",
   "version": "0.1.0",
   "private": true,
   "scripts": {

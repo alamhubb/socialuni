@@ -63,19 +63,19 @@ import {Options, Vue} from 'vue-property-decorator'
 import SDialog from "@/components/socialuni/SDialog.vue";
 import SocialuniUserEditDialog from "@/views/user/SocialuniUserEditDialog.vue";
 import CommonEventUtil from "../../../packages/uniapp-api/src/util/CommonEventUtil";
-import SocialuniUserEventConst from "socialuni-user-sdk/src/constant/SocialuniUserEventConst";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
-import CosService from "socialuni-app-sdk/src/util/CosService";
-import type DomFile from "socialuni-app-sdk/src/model/DomFile";
-import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
-import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
-import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
-import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
-import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
-import ImgUtil from "socialuni-util/src/util/ImgUtil";
-import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
+import SocialuniUserEventConst from "@socialuni/socialuni-user-sdk/src/constant/SocialuniUserEventConst";
+import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import CosService from "@socialuni/socialuni-app-sdk/src/util/CosService";
+import type DomFile from "@socialuni/socialuni-app-sdk/src/model/DomFile";
+import TencentCosAPI from "@socialuni/socialuni-app-api/src/api/TencentCosAPI";
+import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
+import SocialuniMineUserAPI from "@socialuni/socialuni-user-api/src/api/SocialuniMineUserAPI";
+import ImgAddQO from "@socialuni/socialuni-api-base/src/model/user/ImgAddQO";
+import UUIDUtil from "@socialuni/socialuni-util/src/util/UUIDUtil";
+import ImgUtil from "@socialuni/socialuni-util/src/util/ImgUtil";
+import WebsocketUtil from "@socialuni/socialuni-api-base/src/websocket/WebsocketUtil";
 import {ArrowDown, Tools} from "@element-plus/icons-vue";
-import SocialuniLoginView from "socialuni-user-view-h5/src/views/SocialuniLoginView.vue";
+import SocialuniLoginView from "@socialuni/socialuni-user-view-h5/src/views/SocialuniLoginView.vue";
 
 @Options({
     components: {SocialuniUserEditDialog, Tools, SocialuniLoginView, SDialog, ArrowDown}

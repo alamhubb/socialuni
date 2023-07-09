@@ -84,20 +84,20 @@
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
 import {onLoad, onPullDownRefresh} from "@dcloudio/uni-app";
-import SocialuniAppUtil from "socialuni-app-sdk/src/util/UniUtil";
-import DateUtil from "socialuni-util/src/util/DateUtil";
-import FriendApplyType from "socialuni-constant/constant/FriendApplyType";
-import SocialuniFriendAPI from "socialuni-im-api/src/api/SocialuniFriendAPI";
-import SocialuniFriendApplyUserRO from "socialuni-im-api/src/model/RO/SocialuniFriendApplyUserRO";
-import SocialuniCommonStatus from "socialuni-constant/constant/status/SocialuniCommonStatus";
-import ToastUtil from "socialuni-native-uni/src/util/ToastUtil";
-import FriendAddQO from "socialuni-im-api/src/model/QO/firend/FriendAddQO";
-import SocialuniAddFriendStatus from "socialuni-im-api/src/constant/SocialuniAddFriendStatus";
-import PageUtil from "socialuni-util/src/util/PageUtil";
-import OpenImFriendApplyRO from "socialuni-api-base/src/model/openIm/OpenImFriendApplyRO";
+import SocialuniAppUtil from "@socialuni/socialuni-app-sdk/src/util/UniUtil";
+import DateUtil from "@socialuni/socialuni-util/src/util/DateUtil";
+import FriendApplyType from "@socialuni/socialuni-constant/constant/FriendApplyType";
+import SocialuniFriendAPI from "@socialuni/socialuni-im-api/src/api/SocialuniFriendAPI";
+import SocialuniFriendApplyUserRO from "@socialuni/socialuni-im-api/src/model/RO/SocialuniFriendApplyUserRO";
+import SocialuniCommonStatus from "@socialuni/socialuni-constant/constant/status/SocialuniCommonStatus";
+import ToastUtil from "@socialuni/socialuni-native-uni/src/util/ToastUtil";
+import FriendAddQO from "@socialuni/socialuni-im-api/src/model/QO/firend/FriendAddQO";
+import SocialuniAddFriendStatus from "@socialuni/socialuni-im-api/src/constant/SocialuniAddFriendStatus";
+import PageUtil from "@socialuni/socialuni-util/src/util/PageUtil";
+import OpenImFriendApplyRO from "@socialuni/socialuni-api-base/src/model/openIm/OpenImFriendApplyRO";
 import {socialChatModule} from "../../store/SocialChatModule";
-import QTabs from "socialuni-ui-uni/src/components/QTabs/QTabs.vue";
-import SocialuniAddFriendType from "socialuni-im-api/src/constant/SocialuniAddFriendType";
+import QTabs from "@socialuni/socialuni-ui-uni/src/components/QTabs/QTabs.vue";
+import SocialuniAddFriendType from "@socialuni/socialuni-im-api/src/constant/SocialuniAddFriendType";
 
 @Options({
     components: {

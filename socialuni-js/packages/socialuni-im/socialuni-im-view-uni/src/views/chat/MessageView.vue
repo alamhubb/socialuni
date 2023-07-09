@@ -170,9 +170,9 @@
 
 <script lang="ts">
 import {Options, Vue} from "vue-property-decorator";
-import SocialuniMsgViewService from "socialuni-im-sdk/src/logic/SocialuniMsgViewService";
-import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
-import QNavbar from "socialuni-ui-uni/src/components/QNavbar/QNavbar.vue";
+import SocialuniMsgViewService from "@socialuni/socialuni-im-sdk/src/logic/SocialuniMsgViewService";
+import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue";
+import QNavbar from "@socialuni/socialuni-ui-uni/src/components/QNavbar/QNavbar.vue";
 
 @Options(
     {

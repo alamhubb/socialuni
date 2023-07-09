@@ -1,5 +1,5 @@
 {
-  "name": "socialuni-official-ui",
+  "name": "@socialuni/socialuni-official-ui",
   "private": true,
   "version": "0.0.0",
   "type": "module",

@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import {Options, Prop, Vue} from "vue-property-decorator";
-import MessageVO from "socialuni-im-api/src/model/RO/MessageVO";
+import MessageVO from "@socialuni/socialuni-im-api/src/model/RO/MessageVO";
 
 @Options({})
 export default class MessageItemContent extends Vue {
