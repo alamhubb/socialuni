@@ -21,6 +21,17 @@
   ],
   "subPackages": [
     {
+      "root": "pagesLazy/app",
+      "pages": [
+        {
+          "path": "webBrowser",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        }
+      ]
+    },
+    {
       "root": "pagesLazy/community",
       "pages": [
         {

@@ -1,7 +1,7 @@
 export default class PagePath {
   static readonly home: string = '/pages/home/home'
+  static readonly webBrowser: string = '/pagesLazy/app/webBrowser'
   static readonly homeH5: string = '/'
-  static readonly webBrowser: string = '/pages/web/webBrowser'
   static readonly share: string = '/pages/share/share'
 
   static readonly faceValueInfo: string = '/pages/match/faceValueInfo'

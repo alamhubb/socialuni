@@ -1,44 +1,47 @@
 <template>
   <!--        隐私提示-->
-  <div>
-    <view v-if="!user" class="row-center row-wrap u-type-info">
-      <text class="mb-nm">
-        登录即代表同意
-      </text>
-      <navigator :url="userAgreementUrl" class="color-blue">
-        《用户协议》
-      </navigator>
-      <navigator :url="userPrivacyUrl" class="color-blue">
-        《隐私政策》
-      </navigator>
-      <navigator :url="childProtectUrl" class="color-blue">
-        《儿童个人信息保护规则及监护人须知》
-      </navigator>
-    </view>
-  </div>
+    <div>
+        <view v-if="!user" class="row-all-center row-wrap u-type-info">
+            <checkbox  class="mt-sm" :checked="viewService.contractChecked" @click="viewService.contractCheckedChange()">
+                <span>已阅读并同意</span>
+            </checkbox>
+            <navigator :url="userAgreementUrl" class="color-blue mt-sm">
+                《用户协议》
+            </navigator>
+            <navigator :url="userPrivacyUrl" class="color-blue mt-sm">
+                《隐私政策》
+            </navigator>
+            <navigator :url="childProtectUrl" class="color-blue mt-sm">
+                《儿童个人信息保护规则及监护人须知》
+            </navigator>
+        </view>
+    </div>
 </template>
 
 <script lang="ts">
-import {Options, Vue} from 'vue-property-decorator'
+import {Options, Prop, Vue} from 'vue-property-decorator'
 import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
 import SkipUrlConst from "@socialuni/socialuni-app-sdk/src/constant/SkipUrlConst";
+import SocialuniUserPrivacyAgreeService from "@socialuni/socialuni-user-sdk/src/logic/SocialuniUserPrivacyAgreeService";
 
 @Options({})
 export default class UserPrivacyAgreement extends Vue {
-  get user() {
-    return socialuniUserModule.mineUser
-  }
+    @Prop() viewService:SocialuniUserPrivacyAgreeService
 
-  get userAgreementUrl(): string {
-    return SkipUrlConst.userAgreementUrl()
-  }
+    get user() {
+        return socialuniUserModule.mineUser
+    }
 
-  get userPrivacyUrl(): string {
-    return SkipUrlConst.userPrivacyUrl()
-  }
+    get userAgreementUrl(): string {
+        return SkipUrlConst.userAgreementUrl()
+    }
 
-  get childProtectUrl(): string {
-    return SkipUrlConst.childProtectUrl()
-  }
+    get userPrivacyUrl(): string {
+        return SkipUrlConst.userPrivacyUrl()
+    }
+
+    get childProtectUrl(): string {
+        return SkipUrlConst.childProtectUrl()
+    }
 }
 </script>
