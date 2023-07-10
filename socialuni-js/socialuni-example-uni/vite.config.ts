@@ -9,6 +9,7 @@ import {transform} from '@babel/core';
 import {type} from "os";
 import fs from "fs";
 import {parse, compileScript} from "@vue/compiler-sfc";
+import dynamicImportTransform from "./vite-plugin-dynamic-import-transform";
 
 function processVueFile(filePath) {
     if (!filePath.endsWith('.vue')) {
@@ -150,7 +151,8 @@ export default defineConfig({
     base: '/',
     plugins: [
         uni(),
-        myPlugin(),
+        // myPlugin(),
+        // dynamicImportTransform(),
         commonjs(),
         requireTransform({
             fileRegex: /.js$|.vue$/
