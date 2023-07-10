@@ -86,7 +86,6 @@ function myBabelPlugin() {
             // 访问不同类型的节点并进行相应的修改
             // 这是一个示例，可以根据你的需求进行定制
             Identifier(path) {
-                console.log(path.node.name)
                 // 将所有的标识符名称转为大写
                 path.node.name = path.node.name.toUpperCase()
             }
@@ -98,29 +97,33 @@ function myBabelPlugin() {
 function transformDynamicImportCodeCompile(code) {
     const transformedCode = transform(code, {
         plugins: [
-            function ({types}) {
-                return {
-                    visitor: {
-                        CallExpression(path) {
-                            if (
-                                types.isIdentifier(path.node.callee, {name: 'dynamicImport'}) &&
-                                path.node.arguments.length === 1
-                            ) {
-                                const argument = path.node.arguments[0];
+            function ({ types }) {
+              return {
+                visitor: {
+                  CallExpression(path) {
+                      console.log(path.node.callee)
+                      if (
+                        types.isIdentifier(path.node.callee, { name: 'dynamicImport' }) &&
+                        path.node.arguments.length === 1
+                      ) {
+                        const argument = path.node.arguments[0];
 
-                                if (types.isStringLiteral(argument)) {
+                        console.log(path.node.callee)
+                        if (types.isStringLiteral(argument)) {
 
-                                    const src = argument.value
-                                    argument.value = src + (process.env.UNI_PLATFORM ? '-uni' : '-h5' + '/src/index.ts')
+                          const src = argument.value
 
-                                    path.replaceWith(
-                                        types.callExpression(types.import(), [argument])
-                                    );
-                                }
-                            }
-                        },
+                            console.log(src)
+                          argument.value = src + (process.env.UNI_PLATFORM ? '-uni' : '-h5' + '/src/index.ts')
+
+                          path.replaceWith(
+                            types.callExpression(types.import(), [argument])
+                          );
+                        }
+                      }
                     },
-                };
+                },
+              };
             },
         ],
     })
@@ -130,46 +133,11 @@ function transformDynamicImportCodeCompile(code) {
 function myPlugin() {
     return {
         name: 'transform-file',
-        enforce: 'post',
-        transform(src, id) {
+        transform(code, id) {
             if (/.js$|.ts$|.vue$/.test(id)) {
-                if (id.endsWith('.vue')) {
-                    const {descriptor} = parse(src);
-                    if (descriptor.script) {
-                        const scriptContent = descriptor.script.content
 
-                        const modifiedScriptContent = transformDynamicImportCodeCompile(scriptContent)
-                        console.log(modifiedScriptContent)
-
-                        descriptor.script.content = modifiedScriptContent.code
-
-                        // 重新编译为 JavaScript 代码
-                        const compiledScript = compileScript(descriptor, {
-                            id: id,
-                        });
-                        let updatedVueFileContent = null
-                        if (descriptor.template) {
-                            updatedVueFileContent = `
-                            <template>${descriptor.template.content}</template>
-                            <script>${compiledScript.content}</script>
-                            ${descriptor.styles.map(style => `<style${style.lang ? ` lang="${style.lang}"` : ''}>${style.content}</style>`).join('\n')}
-                        `
-                        } else {
-                            updatedVueFileContent = `
-                            <script>${compiledScript.content}</script>
-                            ${descriptor.styles.map(style => `<style${style.lang ? ` lang="${style.lang}"` : ''}>${style.content}</style>`).join('\n')}
-                        `
-                        }
-
-                        return {
-                            code: updatedVueFileContent,
-                            map: null
-                        }
-                    } else {
-                        throw new Error('Vue file does not contain <script> tag.');
-                    }
-                }
-                // return transformDynamicImportCodeCompile(src)
+                const modifiedScriptContent = transformDynamicImportCodeCompile(code)
+                return modifiedScriptContent
             }
 
         }
@@ -181,8 +149,8 @@ function myPlugin() {
 export default defineConfig({
     base: '/',
     plugins: [
-        myPlugin(),
         uni(),
+        myPlugin(),
         commonjs(),
         requireTransform({
             fileRegex: /.js$|.vue$/
