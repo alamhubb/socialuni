@@ -3,6 +3,7 @@ import uni from '@dcloudio/vite-plugin-uni'
 import requireTransform from 'vite-plugin-require-transform';
 import commonjs from "@rollup/plugin-commonjs";
 import {fileURLToPath, URL} from "node:url";
+import replaceDynamicImportPlugin from "./import-plugin-ttttt";
 
 const IN_PRODUCTION = process.env.NODE_ENV === 'production'
 
@@ -48,6 +49,7 @@ if (IN_PRODUCTION){
 export default defineConfig({
     base: '/',
     plugins: [
+        replaceDynamicImportPlugin(),
         uni(),
         commonjs(),
         requireTransform({

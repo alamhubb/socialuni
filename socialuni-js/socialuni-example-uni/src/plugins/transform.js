@@ -2,6 +2,7 @@ module.exports = function ({types}) {
     return {
         visitor: {
             CallExpression(path) {
+                console.log(path)
                 if (
                     types.isIdentifier(path.node.callee, {name: 'dynamicImport'}) &&
                     path.node.arguments.length === 1

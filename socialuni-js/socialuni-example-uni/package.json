@@ -52,10 +52,10 @@
     "@fullhuman/postcss-purgecss": "^3.0.0",
     "@rollup/plugin-commonjs": "^23.0.2",
     "@socialuni/socialuni-app-view-uni": "../packages/socialuni-app/socialuni-app-view-uni",
+    "@socialuni/socialuni-community-view-uni": "../packages/socialuni-community/socialuni-community-view-uni",
     "@socialuni/socialuni-scss": "../packages/socialuni-app/socialuni-scss",
     "@socialuni/socialuni-ui-uni": "../packages/socialuni-ui/socialuni-ui-uni",
     "@socialuni/socialuni-user-view-uni": "../packages/socialuni-user/socialuni-user-view-uni",
-    "@socialuni/socialuni-community-view-uni": "../packages/socialuni-community/socialuni-community-view-uni",
     "axios": "^0.27.2",
     "cos-js-sdk-v5": "^1.2.18",
     "cos-wx-sdk-v5": "^0.7.11",
@@ -67,6 +67,9 @@
     "vue-property-decorator": "^10.0.0-rc.3"
   },
   "devDependencies": {
+    "@babel/core": "^7.22.8",
+    "@babel/parser": "^7.22.7",
+    "@babel/traverse": "^7.22.8",
     "@dcloudio/types": "^3.0.17",
     "@dcloudio/uni-automator": "3.0.0-alpha-3070620230227001",
     "@dcloudio/uni-cli-shared": "3.0.0-alpha-3070620230227001",
