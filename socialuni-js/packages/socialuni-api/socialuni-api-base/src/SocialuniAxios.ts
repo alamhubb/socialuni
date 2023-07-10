@@ -14,13 +14,13 @@ const SocialuniAxiosCreate = (config?: AxiosRequestConfig) => {
     }
     config.withCredentials = true
     config.timeout = 120000
-    if (SocialuniAPIConfig.socialuniSecretKey) {
-        config.headers[SocialuniAPIHeaderName.socialuniSecretKeyName] = SocialuniAPIConfig.socialuniSecretKey
-    }
     const socialuniAxios = axios.create(config)
 
     socialuniAxios.interceptors.request.use(
         config => {
+            if (SocialuniAPIConfig.socialuniSecretKey) {
+                config.headers[SocialuniAPIHeaderName.socialuniSecretKeyName] = SocialuniAPIConfig.socialuniSecretKey
+            }
             for (const socialuniPlugin of socialuniPluginsModule.plugins) {
                 if (socialuniPlugin.onRequestInterceptors) {
                     socialuniPlugin.onRequestInterceptors(config)
