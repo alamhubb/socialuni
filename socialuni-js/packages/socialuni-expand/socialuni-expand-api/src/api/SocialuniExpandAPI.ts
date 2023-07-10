@@ -2,7 +2,7 @@ import SocialuniUserExtendFriendQueryQO from "@socialuni/socialuni-api-base/src/
 import CenterUserDetailRO from "@socialuni/socialuni-api-base/src/model/social/CenterUserDetailRO";
 import socialuniUserRequest from "@socialuni/socialuni-user-api/src/request/socialuniUserRequest";
 
-export default class SocialuniDatingAPI {
+export default class SocialuniExpandAPI {
 
   static queryExtendFriendUsersAPI(queryQO: SocialuniUserExtendFriendQueryQO) {
     return socialuniUserRequest.post<CenterUserDetailRO[]>('socialuni/userExpand/queryExtendFriendUsers', queryQO)

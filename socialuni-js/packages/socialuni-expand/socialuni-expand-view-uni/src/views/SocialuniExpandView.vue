@@ -124,16 +124,17 @@ import NumUtil from "@socialuni/socialuni-util/src/util/NumUtil";
 import DateUtil from "@socialuni/socialuni-util/src/util/DateUtil";
 import SocialuniUserExtendDetailRO from "@socialuni/socialuni-api-base/src/model/social/SocialuniUserExtendDetailRO";
 import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
-import SocialuniDatingAPI from "../api/SocialuniDatingAPI";
 import UserPageUtil from "@socialuni/socialuni-user-sdk/src/util/UserPageUtil";
 import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
 import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
 import SocialuniImgUtil from "@socialuni/socialuni-user-sdk/src/util/SocialuniImgUtil";
+import SocialuniExpandAPI from "@socialuni/socialuni-expand-api/src/api/SocialuniExpandAPI";
+import SocialuniUserExpandService from "../service/SocialuniDatingService";
 
 @Options({
   components: {QPullRefresh, QButton, QIcon, SocialGenderTag, QTabs}
 })
-export default class SocialuniDatingView extends Vue {
+export default class SocialuniExpandView extends Vue {
   $refs: {
     pullRefresh: QPullRefresh
   }
@@ -159,7 +160,7 @@ export default class SocialuniDatingView extends Vue {
   }
 
   created() {
-    this.tabsPageQueryUtil = [new SocialuniPageQueryUtil(SocialuniDatingAPI.queryExtendFriendUsersAPI), new SocialuniPageQueryUtil(SocialuniDatingAPI.queryExtendFriendUsersAPI)]
+    this.tabsPageQueryUtil = [new SocialuniPageQueryUtil(SocialuniExpandAPI.queryExtendFriendUsersAPI), new SocialuniPageQueryUtil(SocialuniExpandAPI.queryExtendFriendUsersAPI)]
 
     onLoad((params: { followType: string }) => {
       if (params) {
@@ -265,7 +266,7 @@ export default class SocialuniDatingView extends Vue {
     //打开获取对方联系方式功能，支付贝壳
     user.getUserContactBtnDisabled = true
     try {
-      await SocialuniDatingService.getOpenContactInfo(user)
+      await SocialuniUserExpandService.getOpenContactInfo(user)
     } finally {
       user.getUserContactBtnDisabled = false
     }

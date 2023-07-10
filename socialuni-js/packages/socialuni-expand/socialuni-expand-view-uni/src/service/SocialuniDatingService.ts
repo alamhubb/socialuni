@@ -3,9 +3,9 @@ import UserMsgUtil from "@socialuni/socialuni-user-sdk/src/util/UserMsgUtil";
 import {socialuniConfigModule} from "@socialuni/socialuni-app-sdk/src/store/SocialuniConfigModule";
 import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
 import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
-import SocialuniDatingAPI from "@socialuni/socialuni-user-api/src/api/SocialuniDatingAPI";
+import SocialuniExpandAPI from "@socialuni/socialuni-expand-api/src/api/SocialuniExpandAPI";
 
-export default class SocialuniDatingService{
+export default class SocialuniUserExpandService{
     static async getOpenContactInfo(user: CenterUserDetailRO) {
         if (!socialuniUserModule.mineUser) {
             UserMsgUtil.unLoginMessage()
@@ -18,7 +18,7 @@ export default class SocialuniDatingService{
 
         if (userShell >= getUserInfoNeedCoin) {
             await SocialuniAppUtil.AlertUtil.confirm('是否消耗100个贝壳查看用户：' + user.nickname + ' 的联系方式')
-            const res = await SocialuniDatingAPI.getUserContactInfoAPI(user.id)
+            const res = await SocialuniExpandAPI.getUserContactInfoAPI(user.id)
             user.contactInfo = res.data
             user.openContactInfo = true
             socialuniUserModule.mineUser.socialCoin = userShell - getUserInfoNeedCoin

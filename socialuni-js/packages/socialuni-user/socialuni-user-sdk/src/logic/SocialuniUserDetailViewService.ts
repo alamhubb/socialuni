@@ -8,8 +8,8 @@ import {socialuniUserModule} from "../store/SocialuniUserModule";
 import {watch, reactive, provide} from "vue";
 import {SocialuniViewServiceInterface} from "@socialuni/socialuni/src/interface/SocialuniViewServiceInterface";
 import {ComponentInternalInstance} from "@vue/runtime-core";
-import SocialuniDatingService from "./SocialuniDatingService";
 import {onLoad} from "uniapp-api/src/UniappPageLifecycleHook";
+import SocialuniUserExpandService from "./SocialuniUserExpandService";
 
 
 class SocialuniUserDetailViewService implements SocialuniViewServiceInterface {
@@ -80,7 +80,7 @@ class SocialuniUserDetailViewService implements SocialuniViewServiceInterface {
         //打开获取对方联系方式功能，支付贝壳
         this.showUserContactBtnDisabled = true
         try {
-            await SocialuniDatingService.getOpenContactInfo(this.user)
+            await SocialuniUserExpandService.getOpenContactInfo(this.user)
         } finally {
             this.showUserContactBtnDisabled = false
         }

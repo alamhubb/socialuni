@@ -13,6 +13,12 @@
       }
     },
     {
+      "path": "pages/expand/expand",
+      "style": {
+        "navigationBarTitleText": "扩列"
+      }
+    },
+    {
       "path": "pages/user/mine",
       "style": {
         "navigationStyle": "custom"
@@ -113,6 +119,12 @@
     "iconWidth": "30px",
     "height": "52px",
     "list": [
+      {
+        "pagePath": "pages/expand/expand",
+        "iconPath": "static/img/favorite-gray-36dp.png",
+        "selectedIconPath": "static/img/favorite-blue-36dp.png",
+        "text": "扩列"
+      },
       {
         "pagePath": "pages/home/home",
         "iconPath": "static/img/deck-gray-36dp.png",

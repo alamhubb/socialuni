@@ -55,6 +55,7 @@
     "@socialuni/socialuni-community-view-uni": "../packages/socialuni-community/socialuni-community-view-uni",
     "@socialuni/socialuni-scss": "../packages/socialuni-app/socialuni-scss",
     "@socialuni/socialuni-ui-uni": "../packages/socialuni-ui/socialuni-ui-uni",
+    "@socialuni/socialuni-expand-view-uni": "../packages/socialuni-expand/socialuni-expand-view-uni",
     "@socialuni/socialuni-user-view-uni": "../packages/socialuni-user/socialuni-user-view-uni",
     "axios": "^0.27.2",
     "cos-js-sdk-v5": "^1.2.18",

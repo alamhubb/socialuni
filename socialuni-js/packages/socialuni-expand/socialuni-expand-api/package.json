@@ -1,0 +1,24 @@
+{
+  "name": "@socialuni/socialuni-expand-api",
+  "version": "0.1.2",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@dcloudio/types": "^3.0.17",
+    "@dcloudio/uni-app": "3.0.0-alpha-3070620230227001",
+    "@dcloudio/uni-ui": "^1.4.23",
+    "@socialuni/socialuni": "^0.1.2",
+    "@socialuni/socialuni-im-sdk": "^0.1.2",
+    "@socialuni/socialuni-im-uni-sdk": "^0.1.2",
+    "@socialuni/socialuni-native-util": "^0.1.2",
+    "@socialuni/socialuni-im-api": "^0.1.2",
+    "vue": "3.2.41"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "gitHead": "8b17f4a250aa54f47a17a2639efe2b511fd59358"
+}
