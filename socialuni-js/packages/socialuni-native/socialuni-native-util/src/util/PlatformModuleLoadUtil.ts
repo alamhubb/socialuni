@@ -16,6 +16,11 @@ export default class PlatformModuleLoadUtil {
             }
         }
     }
+
+    static async dynamicImport(src){
+
+    }
+
     static getFirstModule(modules) {
         for (const path in modules) {
            return modules[path]

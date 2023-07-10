@@ -24,11 +24,11 @@ const socialuniInitPlugin: SocialuniPlugin = {
 async function installSocialuniPluginIns(app: App) {
     socialuniPluginsModule.addPlugin(socialuniInitPlugin)
 
-   /* const moudles = import.meta.globEager('../../../../!**!/src/index.ts')
-    for (const moudle in moudles) {
-        console.log(moudle)
-    }
-    console.log(moudles)*/
+    /* const moudles = import.meta.globEager('../../../../!**!/src/index.ts')
+     for (const moudle in moudles) {
+         console.log(moudle)
+     }
+     console.log(moudles)*/
 
     //查询是否包含community模块，如果存在则加载
     const appModules = import.meta.globEager('../../**/socialuni-app-sdk/src/index.ts')
@@ -70,15 +70,9 @@ async function installSocialuniPluginIns(app: App) {
 const Socialuni = {
     async install(app: App, socialuniOption: SocialuniOption) {
         app.use(UniappAPI)
-        if (socialuniSystemModule.isUniApp) {
-            const modules = import.meta.globEager('../../socialuni-ui/socialuni-ui-uni/src/index.ts')
-            const SocialuniUiUni = PlatformModuleLoadUtil.getModuleDefault(modules)
-            app.use(SocialuniUiUni)
-        } else {
-            const modules = import.meta.globEager('../../socialuni-ui/socialuni-ui-h5/src/index.ts')
-            const SocialuniUiH5 = PlatformModuleLoadUtil.getModuleDefault(modules)
-            app.use(SocialuniUiH5)
-        }
+        const SocialuniUiH5 = PlatformModuleLoadUtil.dynamicImport('socialuni-ui/socialuni-ui')
+        console.log(SocialuniUiH5)
+        app.use(SocialuniUiH5)
         const shareComponent = defineComponent({
             onShareAppMessage() {
                 const title = '年轻人生活分享社区'
