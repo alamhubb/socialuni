@@ -1,6 +1,8 @@
 import axios, {AxiosRequestConfig} from 'axios'
 import uniAxiosAdapter from "./uniAxiosAdapter";
 import {socialuniPluginsModule} from "@socialuni/socialuni/src/store/SocialuniPluginsModule";
+import SocialuniAPIHeaderName from "./SocialuniAPIHeaderName";
+import SocialuniAPIConfig from "./SocialuniAPIConfig";
 
 const SocialuniAxiosCreate = (config?: AxiosRequestConfig) => {
     try {
@@ -12,6 +14,9 @@ const SocialuniAxiosCreate = (config?: AxiosRequestConfig) => {
     }
     config.withCredentials = true
     config.timeout = 120000
+    if (SocialuniAPIConfig.socialuniSecretKey) {
+        config.headers[SocialuniAPIHeaderName.socialuniSecretKeyName] = SocialuniAPIConfig.socialuniSecretKey
+    }
     const socialuniAxios = axios.create(config)
 
     socialuniAxios.interceptors.request.use(
