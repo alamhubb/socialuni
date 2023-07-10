@@ -152,7 +152,7 @@ export default defineConfig({
     plugins: [
         uni(),
         // myPlugin(),
-        // dynamicImportTransform(),
+        dynamicImportTransform(),
         commonjs(),
         requireTransform({
             fileRegex: /.js$|.vue$/

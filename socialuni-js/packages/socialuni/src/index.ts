@@ -70,10 +70,10 @@ async function installSocialuniPluginIns(app: App) {
 const Socialuni = {
     async install(app: App, socialuniOption: SocialuniOption) {
         app.use(UniappAPI)
-        // const SocialuniUiH5 = PlatformModuleLoadUtil.dynamicImport('socialuni-ui/socialuni-ui')
-        // console.log(SocialuniUiH5)
-        // app.use(SocialuniUiH5)
-        if (socialuniSystemModule.isUniApp) {
+        const SocialuniUiH5 = PlatformModuleLoadUtil.dynamicImport('@socialuni/socialuni-ui')
+        console.log(SocialuniUiH5)
+        app.use(SocialuniUiH5)
+        /*if (socialuniSystemModule.isUniApp) {
             const modules = import.meta.globEager('../../socialuni-ui/socialuni-ui-uni/src/index.ts')
             const SocialuniUiUni = PlatformModuleLoadUtil.getModuleDefault(modules)
             app.use(SocialuniUiUni)
@@ -81,7 +81,7 @@ const Socialuni = {
             const modules = import.meta.globEager('../../socialuni-ui/socialuni-ui-h5/src/index.ts')
             const SocialuniUiH5 = PlatformModuleLoadUtil.getModuleDefault(modules)
             app.use(SocialuniUiH5)
-        }
+        }*/
 
         const shareComponent = defineComponent({
             onShareAppMessage() {
