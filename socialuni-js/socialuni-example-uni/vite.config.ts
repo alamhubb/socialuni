@@ -3,13 +3,10 @@ import uni from '@dcloudio/vite-plugin-uni'
 import requireTransform from 'vite-plugin-require-transform';
 import commonjs from "@rollup/plugin-commonjs";
 import {fileURLToPath, URL} from "node:url";
-import replace from 'rollup-plugin-replace';
-import babel from '@rollup/plugin-babel';
 import {transform} from '@babel/core';
 import {type} from "os";
 import fs from "fs";
 import {parse, compileScript} from "@vue/compiler-sfc";
-import dynamicImportTransform from "./vite-plugin-dynamic-import-transform";
 
 function processVueFile(filePath) {
     if (!filePath.endsWith('.vue')) {
@@ -99,38 +96,38 @@ function transformDynamicImportCodeCompile(code) {
     const transformedCode = transform(code, {
         plugins: [
             function ({ types }) {
-              return {
-                visitor: {
-                  CallExpression(path) {
-                      console.log(path.node.callee)
-                      if (
-                        types.isIdentifier(path.node.callee, { name: 'dynamicImport' }) &&
-                        path.node.arguments.length === 1
-                      ) {
-                        const argument = path.node.arguments[0];
+                return {
+                    visitor: {
+                        CallExpression(path) {
+                            // 检查调用表达式是否是 `Platform.dynamicImport()`
+                            if (
+                                path.node.callee.type === 'MemberExpression' &&
+                                path.node.callee.object.name === 'PlatformModuleLoadUtil' &&
+                                path.node.callee.property.name === 'dynamicImport' &&
+                                path.node.arguments.length === 1
+                            ) {
+                                const argument = path.node.arguments[0];
 
-                        console.log(path.node.callee)
-                        if (types.isStringLiteral(argument)) {
+                                if (types.isStringLiteral(argument)) {
 
-                          const src = argument.value
+                                    const src = argument.value
+                                    argument.value = src + (process.env.UNI_PLATFORM ? '-uni' : '-h5') + '/src/index.ts'
 
-                            console.log(src)
-                          argument.value = src + (process.env.UNI_PLATFORM ? '-uni' : '-h5' + '/src/index.ts')
-
-                          path.replaceWith(
-                            types.callExpression(types.import(), [argument])
-                          );
-                        }
-                      }
+                                    path.replaceWith(
+                                        types.callExpression(types.import(), [argument])
+                                    );
+                                }
+                            }
+                        },
                     },
-                },
-              };
+                };
             },
         ],
     })
     return transformedCode.code
 }
 
+//自动导入对应的包功能
 function myPlugin() {
     return {
         name: 'transform-file',
@@ -138,6 +135,7 @@ function myPlugin() {
             if (/.js$|.ts$|.vue$/.test(id)) {
 
                 const modifiedScriptContent = transformDynamicImportCodeCompile(code)
+
                 return modifiedScriptContent
             }
 
@@ -151,8 +149,7 @@ export default defineConfig({
     base: '/',
     plugins: [
         uni(),
-        // myPlugin(),
-        dynamicImportTransform(),
+        myPlugin(),
         commonjs(),
         requireTransform({
             fileRegex: /.js$|.vue$/

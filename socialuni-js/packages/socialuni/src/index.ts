@@ -70,7 +70,12 @@ async function installSocialuniPluginIns(app: App) {
 const Socialuni = {
     async install(app: App, socialuniOption: SocialuniOption) {
         app.use(UniappAPI)
-        const SocialuniUiH5 = PlatformModuleLoadUtil.dynamicImport('@socialuni/socialuni-ui')
+
+        // const SocialuniUiUni = await import("../../socialuni-ui/socialuni-ui")
+        // console.log(SocialuniUiUni)
+        // app.use(SocialuniUiUni)
+        // console.log(SocialuniUiUni)
+        const SocialuniUiH5 =await PlatformModuleLoadUtil.dynamicImport("../../socialuni-ui/socialuni-ui")
         console.log(SocialuniUiH5)
         app.use(SocialuniUiH5)
         /*if (socialuniSystemModule.isUniApp) {
