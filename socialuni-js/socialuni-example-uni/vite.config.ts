@@ -95,7 +95,7 @@ function myBabelPlugin() {
 function transformDynamicImportCodeCompile(code) {
     const transformedCode = transform(code, {
         plugins: [
-            function ({ types }) {
+            function ({types}) {
                 return {
                     visitor: {
                         CallExpression(path) {
@@ -131,9 +131,8 @@ function transformDynamicImportCodeCompile(code) {
 function myPlugin() {
     return {
         name: 'transform-file',
-        transform(code, id) {
-            if (/.js$|.ts$|.vue$/.test(id)) {
-
+        transform(code: string, id: string) {
+            if (/.js$|.ts$|.vue$/.test(id) && (/socialuni-(\w)*\/socialuni-(\S)*\/src/.test(id) || id.includes('socialuni/src'))) {
                 const modifiedScriptContent = transformDynamicImportCodeCompile(code)
 
                 return modifiedScriptContent
