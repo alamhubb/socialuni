@@ -104,19 +104,29 @@ function transformDynamicImportCodeCompile(code) {
                                 path.node.callee.type === 'MemberExpression' &&
                                 path.node.callee.object.name === 'PlatformModuleLoadUtil' &&
                                 path.node.callee.property.name === 'dynamicImport' &&
-                                path.node.arguments.length === 1
+                                path.node.arguments.length > 0
                             ) {
+                                const errorMsg = '调用PlatformModuleLoadUtil.dynamicImport只能传递字面量，不支持变量'
                                 const argument = path.node.arguments[0];
-
-                                if (types.isStringLiteral(argument)) {
-
-                                    const src = argument.value
-                                    argument.value = src + (process.env.UNI_PLATFORM ? '-uni' : '-h5') + '/src/index.ts'
-
-                                    path.replaceWith(
-                                        types.callExpression(types.import(), [argument])
-                                    );
+                                const suffix = path.node.arguments[1];
+                                if (!types.isStringLiteral(argument)) {
+                                    console.error(errorMsg)
+                                    throw new Error(errorMsg)
                                 }
+                                let suffixStr = 'src/index.ts'
+                                if (suffix) {
+                                    if (!types.isStringLiteral(argument)) {
+                                        console.error(errorMsg)
+                                        throw new Error(errorMsg)
+                                    }
+                                    suffixStr = suffix.value
+                                }
+                                const src = argument.value
+                                argument.value = src + (process.env.UNI_PLATFORM ? '-uni/' : '-h5/') + suffixStr
+
+                                path.replaceWith(
+                                    types.callExpression(types.import(), [argument])
+                                );
                             }
                         },
                     },

@@ -1,4 +1,5 @@
 import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
+import {ImportModule} from "@socialuni/socialuni/src/interface/ImportModule";
 
 export default class PlatformModuleLoadUtil {
     static getModuleDefault(modules) {
@@ -17,13 +18,13 @@ export default class PlatformModuleLoadUtil {
         }
     }
 
-    static async dynamicImport(src){
+    static async dynamicImport(prefix: string, suffix = '/src/index.ts'):Promise<ImportModule<any>> {
 
     }
 
     static getFirstModule(modules) {
         for (const path in modules) {
-           return modules[path]
+            return modules[path]
         }
     }
 }

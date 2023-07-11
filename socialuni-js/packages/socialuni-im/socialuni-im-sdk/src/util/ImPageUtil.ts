@@ -1,14 +1,14 @@
 import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
-import {SocialuniImPagePathInterface} from "../constant/ImPagePath";
 import PlatformModuleLoadUtil from "@socialuni/socialuni-native-util/src/util/PlatformModuleLoadUtil";
+import {SocialuniImPagePathInterface} from "../constant/SocialuniImPagePathInterface";
 
-const modules = import.meta.globEager('../../../socialuni-im-*-sdk/src/constant/SocialuniImPagePath.ts')
-
-const imPagePath:SocialuniImPagePathInterface = PlatformModuleLoadUtil.getModuleDefault(modules)
+const module = await PlatformModuleLoadUtil.dynamicImport('@socialuni/socialuni-im-view', 'src/constant/SocialuniImPagePath.ts')
+const imPagePath: SocialuniImPagePathInterface = module.default
 
 export default class ImPageUtil {
 
     static toMessagePageByChatId(receiveId: string) {
+        console.log(imPagePath)
         SocialuniAppUtil.RouterUtil.navigateTo(imPagePath.message + '?chatId=' + receiveId)
     }
 

@@ -98,11 +98,26 @@
     </view>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts">
+import SocialuniUserInfoImg from "./SocialuniUserInfoImg.vue"
+import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue"
+import QNavbar from "@socialuni/socialuni-ui-uni/src/components/QNavbar/QNavbar.vue"
+import SocialGenderTag from "../../components/SocialGenderTag/SocialGenderTag.vue"
+import {Options, Vue} from 'vue-property-decorator'
 import QButton from "@socialuni/socialuni-ui-uni/src/components/QButton/QButton.vue";
-
 import socialuniUserEditViewService from "@socialuni/socialuni-user-sdk/src/logic/SocialuniUserEditViewService";
-import {getCurrentInstance} from "vue";
 
-socialuniUserEditViewService.initService(getCurrentInstance())
+
+@Options({
+  components: {
+    SocialuniUserInfoImg,
+    QIcon,
+    QButton,
+    QNavbar,
+    SocialGenderTag,
+  }
+})
+export default class SocialuniUserDetailView extends Vue {
+  socialuniUserEditViewService = socialuniUserEditViewService
+}
 </script>

@@ -1,12 +1,11 @@
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
 import TalkVO from "@socialuni/socialuni-api-base/src/model/talk/TalkVO";
 import {ComponentInternalInstance, reactive, watch, watchEffect} from "vue";
 import {SocialuniViewServiceInterface} from "@socialuni/socialuni/src/interface/SocialuniViewServiceInterface";
 import CenterUserDetailRO from "@socialuni/socialuni-api-base/src/model/social/CenterUserDetailRO";
 import SocialuniTalkAPI from "@socialuni/socialuni-community-api/src/api/SocialuniTalkAPI";
-import socialuniUserDetailViewService from "@socialuni/socialuni-user-sdk/src/logic/SocialuniUserDetailViewService";
+import {socialuniUserDetailViewService} from "@socialuni/socialuni-user-sdk/src/logic/SocialuniUserDetailViewService";
 
-class SocialuniCommunityUserDetailViewService implements SocialuniViewServiceInterface {
+export default class SocialuniCommunityUserDetailViewService implements SocialuniViewServiceInterface {
 
     private instance: ComponentInternalInstance = null
 
@@ -60,12 +59,6 @@ class SocialuniCommunityUserDetailViewService implements SocialuniViewServiceInt
     deleteTalk(talkId: string) {
         this.talks.splice(this.talks.findIndex(talk => talk.id === talkId), 1)
     }
-
-
-
-
 }
 
-const socialuniCommunityUserDetailViewService = reactive(new SocialuniCommunityUserDetailViewService())
-
-export default socialuniCommunityUserDetailViewService
+export const socialuniCommunityUserDetailViewService = reactive(new SocialuniCommunityUserDetailViewService())

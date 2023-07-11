@@ -20,6 +20,7 @@ import {Vue} from "vue-class-component";
 import MessageViewParams from "../model/MessageViewParams";
 import {onLoad} from "uniapp-api/src/UniappPageLifecycleHook";
 import {socialuniMsgModule} from "../store/SocialMessageModule";
+import {ComponentInternalInstance} from "@vue/runtime-core";
 
 export default class SocialuniMsgViewService extends SocialuniViewService {
     public $refs!: {
@@ -44,7 +45,7 @@ export default class SocialuniMsgViewService extends SocialuniViewService {
     }
 
     get pageTitle() {
-        return this.chat.nickname
+        return this.chat?.nickname
     }
 
     get scrollTop() {
@@ -65,8 +66,8 @@ export default class SocialuniMsgViewService extends SocialuniViewService {
         return socialuniUserModule.mineUser
     }
 
-    initService(vueInstance: Vue) {
-        super.initService(vueInstance)
+    initService(instance: ComponentInternalInstance) {
+        super.initService(instance)
         onMounted(() => {
             socialuniChatModule.scrollTop = 0
         })
@@ -279,3 +280,5 @@ export default class SocialuniMsgViewService extends SocialuniViewService {
         this.initChooseCommentData()
     }
 }
+
+export const socialuniMsgViewService = new SocialuniMsgViewService()

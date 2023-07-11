@@ -10,13 +10,14 @@ import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/Socialun
 import ImPageUtil from "../util/ImPageUtil";
 import SocialuniImUserAPI from "@socialuni/socialuni-im-api/src/api/SocialuniImUserAPI";
 import SocialuniViewService from "@socialuni/socialuni/src/interface/SocialuniViewService";
+import {ComponentInternalInstance} from "@vue/runtime-core";
 
 interface SocialuniChatViewServiceRefs {
     messageBox: HTMLDivElement;
 }
 
-export default class SocialuniChatViewService extends SocialuniViewService<SocialuniChatViewServiceRefs> {
 
+export default class SocialuniChatViewService extends SocialuniViewService<SocialuniChatViewServiceRefs> {
     created() {
         /* onLoad((params) => {
              SocialuniAppUtil.UniUtil.showShareMenu()
@@ -40,8 +41,8 @@ export default class SocialuniChatViewService extends SocialuniViewService<Socia
     searchContent = null
 
 
-    initService(vueInstance: Vue) {
-        super.initService(vueInstance)
+    initService(instance: ComponentInternalInstance) {
+        super.initService(instance)
         watch(() => socialuniChatModule.scrollTop, () => {
             console.log('触发了滚动')
             console.log(this.$refs)
@@ -271,3 +272,5 @@ export default class SocialuniChatViewService extends SocialuniViewService<Socia
         })
     }
 }
+
+export const socialuniChatViewService = new SocialuniChatViewService()

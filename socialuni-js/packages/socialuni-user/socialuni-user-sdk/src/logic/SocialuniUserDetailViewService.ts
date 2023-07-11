@@ -11,8 +11,7 @@ import {ComponentInternalInstance} from "@vue/runtime-core";
 import {onLoad} from "uniapp-api/src/UniappPageLifecycleHook";
 import SocialuniUserExpandService from "./SocialuniUserExpandService";
 
-
-class SocialuniUserDetailViewService implements SocialuniViewServiceInterface {
+export default class SocialuniUserDetailViewService implements SocialuniViewServiceInterface {
 
     instance: ComponentInternalInstance = null
 
@@ -85,10 +84,6 @@ class SocialuniUserDetailViewService implements SocialuniViewServiceInterface {
             this.showUserContactBtnDisabled = false
         }
     }
-
-
 }
 
-const socialuniUserDetailViewService = reactive(new SocialuniUserDetailViewService())
-
-export default socialuniUserDetailViewService
+export const socialuniUserDetailViewService = reactive(new SocialuniUserDetailViewService())
