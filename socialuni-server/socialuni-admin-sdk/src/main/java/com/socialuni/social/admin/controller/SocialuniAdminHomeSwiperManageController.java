@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjUtil;
 import com.socialuni.social.admin.model.SocialuniAdminHomeSwiperRO;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.sdk.dao.DO.SocialuniHomeSwiperDO;
 import com.socialuni.social.sdk.dao.repository.HomeSwiperRepository;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
@@ -22,18 +23,18 @@ public class SocialuniAdminHomeSwiperManageController {
     HomeSwiperRepository homeSwiperRepository;
 
     @GetMapping("queryhomeSwipers")
-    public List<SocialuniAdminHomeSwiperRO> queryhomeSwipers() {
+    public ResultRO<List<SocialuniAdminHomeSwiperRO>> queryhomeSwipers() {
         //三方应用传的可以直接传用户id作为token
         Integer devId = DevAccountFacade.getDevIdNotNull();
 
         List<SocialuniHomeSwiperDO> homeSwiperModels = homeSwiperRepository.queryHomeSwipersByDevIdOrderByStatusDescUpdateTimeDescTopLevelDesc(devId);
 
         List<SocialuniAdminHomeSwiperRO> results = homeSwiperModels.stream().map(SocialuniAdminHomeSwiperRO::new).collect(Collectors.toList());
-        return results;
+        return ResultRO.success(results);
     }
 
     @PostMapping("updateHomeSwipers")
-    public List<SocialuniAdminHomeSwiperRO> updateHomeSwipers(@RequestBody List<SocialuniAdminHomeSwiperRO> homeSwiperROS) {
+    public ResultRO<List<SocialuniAdminHomeSwiperRO>> updateHomeSwipers(@RequestBody List<SocialuniAdminHomeSwiperRO> homeSwiperROS) {
         List<SocialuniHomeSwiperDO> SocialuniHomeSwiperDOs = new ArrayList<>();
         for (SocialuniAdminHomeSwiperRO homeSwiperRO : homeSwiperROS) {
             if (ObjUtil.isEmpty(homeSwiperRO.getId())) {
@@ -47,6 +48,6 @@ public class SocialuniAdminHomeSwiperManageController {
         }
 
         List<SocialuniAdminHomeSwiperRO> results = SocialuniHomeSwiperDOs.stream().map(SocialuniAdminHomeSwiperRO::new).collect(Collectors.toList());
-        return results;
+        return ResultRO.success(results);
     }
 }

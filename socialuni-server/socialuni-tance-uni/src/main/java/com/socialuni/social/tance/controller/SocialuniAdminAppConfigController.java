@@ -1,6 +1,7 @@
 package com.socialuni.social.tance.controller;
 
 import cn.hutool.core.collection.CollectionUtil;
+import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.utils.MapUtil;
 import com.socialuni.social.tance.model.DO.AppConfigDO;
 import com.socialuni.social.tance.model.DO.AppConfigPk;
@@ -54,7 +55,7 @@ public class SocialuniAdminAppConfigController {
      */
     @GetMapping("getAllConfigs")
     @ResponseBody
-    public List<AppConfigDO> getAllConfigs() {
+    public ResultRO<List<AppConfigDO>> getAllConfigs() {
         int status = 1;
         // 默认的内容。
         List<AppConfigDO> defaultList = appConfigRepository.findAllByDevIdAndStatusOrderByCreateTimeDesc(AppConfigRepository.DEFAULT_DEV_KEY, status);
@@ -65,14 +66,15 @@ public class SocialuniAdminAppConfigController {
         // 去重
         List<AppConfigDO> distinct = CollectionUtil.distinct(defaultList, AppConfigDO::getConfigKey, true);
 
-        return distinct;
+        return ResultRO.success(distinct);
     }
+
     /**
      * 获得所有列表属于map形式
      */
     @GetMapping("getAllConfigsOfMap")
     @ResponseBody
-    public Map<String,Object> getAllConfigsOfMap() {
+    public ResultRO<Map<String, Object>> getAllConfigsOfMap() {
         int status = 1;
         // 默认的内容。
         List<AppConfigDO> defaultList = appConfigRepository.findAllByDevIdAndStatusOrderByCreateTimeDesc(AppConfigRepository.DEFAULT_DEV_KEY, status);
@@ -83,6 +85,6 @@ public class SocialuniAdminAppConfigController {
         // 去重
         List<AppConfigDO> distinct = CollectionUtil.distinct(defaultList, AppConfigDO::getConfigKey, true);
         //
-        return  MapUtil.pivot(distinct,"configKey","value");
+        return ResultRO.success(MapUtil.pivot(distinct, "configKey", "value"));
     }
 }
