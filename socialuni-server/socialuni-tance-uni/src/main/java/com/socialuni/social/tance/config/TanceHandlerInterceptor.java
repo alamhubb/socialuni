@@ -37,7 +37,7 @@ public class TanceHandlerInterceptor implements HandlerInterceptor {
         // 初始化。
         PublishDataTanceBaseRepository.publishDataInitialized(request);
         // 设置配置属性。
-        Map<String, Object> allConfigsOfMap = appConfigController.getAllConfigsOfMap();
+        Map<String, Object> allConfigsOfMap = appConfigController.getAllConfigsOfMap().getData();
         request.setAttribute(SocialSystemConst.CONFIGS_REQUEST_NAME,allConfigsOfMap);
         //
         return HandlerInterceptor.super.preHandle(request, response, handler);
