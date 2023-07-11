@@ -7,7 +7,7 @@
       <div class="col-center flex-none">
         <view class="row-end-center mr-xss">
           <view
-              v-if="userDetail.hasBeFollowed && !userDetail.hasFollowed"
+              v-if="user.hasBeFollowed && !user.hasFollowed"
               class="px-5 py-1 bg-default">
             <div class="color-content font-12">
               对方关注了您
@@ -33,13 +33,13 @@
         <view class="flex-row flex-1 row-around">
           <view class="px-lg line-height-1 col-all-center">
             <text class="text-lg font-bold color-main row-center">
-              {{ userDetail.followNum }}
+              {{ user.followNum }}
             </text>
             <text class="font-12 color-content mt-xs">关注</text>
           </view>
           <view class="px-lg line-height-1 col-all-center">
             <text class="text-lg font-bold color-main row-center">
-              {{ userDetail.fansNum }}
+              {{ user.fansNum }}
             </text>
             <text class="font-12 color-content mt-xs">被关注</text>
           </view>
@@ -110,7 +110,7 @@ import SocialuniFollowTag from "../../components/SocialuniFollow/SocialuniFollow
   }
 })
 export default class SocialuniCommunityUserDetailView extends Vue {
-  get userDetail() {
+  get user() {
     return socialuniUserDetailViewService.user
   }
 

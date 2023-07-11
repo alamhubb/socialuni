@@ -1,4 +1,4 @@
-import {App, defineComponent, onMounted} from "vue"
+import {App, defineComponent, isReactive, onMounted, toRaw} from "vue"
 import {socialuniPluginsModule} from "./store/SocialuniPluginsModule"
 import {SocialuniPlugin} from "./interface/SocialuniPlugin"
 import {ImportModule} from "./interface/ImportModule"
@@ -75,7 +75,7 @@ const Socialuni = {
         // console.log(SocialuniUiUni)
         // app.use(SocialuniUiUni)
         // console.log(SocialuniUiUni)
-        const SocialuniUiH5 =await PlatformModuleLoadUtil.dynamicImport("@socialuni/socialuni-ui")
+        const SocialuniUiH5 = await PlatformModuleLoadUtil.dynamicImport("@socialuni/socialuni-ui")
         console.log(SocialuniUiH5.default)
         app.use(SocialuniUiH5.default)
         /*if (socialuniSystemModule.isUniApp) {
@@ -104,10 +104,16 @@ const Socialuni = {
                 socialuniPluginsModule.setRoute(this.$route)
                 const data = this
                 for (const key in data) {
-                    const socialuniViewServiceObj: SocialuniViewService = data[key]
-                    if (socialuniViewServiceObj instanceof SocialuniViewService) {
-                        socialuniViewServiceObj.initService(this.$refs)
+                    const socialuniViewServiceObj: any = data[key]
+                    if (socialuniViewServiceObj && typeof socialuniViewServiceObj === 'object') {
+                        if (isReactive(socialuniViewServiceObj)) {
+                            const socialuniViewServiceObjReal: SocialuniViewService = toRaw(socialuniViewServiceObj)
+                            if (socialuniViewServiceObjReal instanceof SocialuniViewService) {
+                                socialuniViewServiceObjReal.initService(this)
+                            }
+                        }
                     }
+
                 }
             },
             mounted() {

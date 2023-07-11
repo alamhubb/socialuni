@@ -4,8 +4,9 @@ import {SocialuniViewServiceInterface} from "@socialuni/socialuni/src/interface/
 import CenterUserDetailRO from "@socialuni/socialuni-api-base/src/model/social/CenterUserDetailRO";
 import SocialuniTalkAPI from "@socialuni/socialuni-community-api/src/api/SocialuniTalkAPI";
 import {socialuniUserDetailViewService} from "@socialuni/socialuni-user-sdk/src/logic/SocialuniUserDetailViewService";
+import SocialuniViewService from "@socialuni/socialuni/src/interface/SocialuniViewService";
 
-export default class SocialuniCommunityUserDetailViewService implements SocialuniViewServiceInterface {
+export default class SocialuniCommunityUserDetailViewService extends SocialuniViewService {
 
     private instance: ComponentInternalInstance = null
 

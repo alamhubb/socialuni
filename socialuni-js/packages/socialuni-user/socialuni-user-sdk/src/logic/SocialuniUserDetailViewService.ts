@@ -10,8 +10,9 @@ import {SocialuniViewServiceInterface} from "@socialuni/socialuni/src/interface/
 import {ComponentInternalInstance} from "@vue/runtime-core";
 import {onLoad} from "uniapp-api/src/UniappPageLifecycleHook";
 import SocialuniUserExpandService from "./SocialuniUserExpandService";
+import SocialuniViewService from "@socialuni/socialuni/src/interface/SocialuniViewService";
 
-export default class SocialuniUserDetailViewService implements SocialuniViewServiceInterface {
+export default class SocialuniUserDetailViewService extends SocialuniViewService {
 
     instance: ComponentInternalInstance = null
 
@@ -19,9 +20,11 @@ export default class SocialuniUserDetailViewService implements SocialuniViewServ
 
     async initService(instance: ComponentInternalInstance) {
         this.instance = instance
+        console.log('chufale inser')
         SocialuniAppUtil.UniUtil.showShareMenu()
 
         onLoad((params) => {
+            console.log('chufale onload')
             this.queryUserInfo(params.userId)
         })
 

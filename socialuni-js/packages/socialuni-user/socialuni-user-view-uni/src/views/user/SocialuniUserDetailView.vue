@@ -100,7 +100,6 @@ import {getCurrentInstance, provide, reactive} from "vue";
 import SocialuniUserProvideKeys from "@socialuni/socialuni-user-sdk/src/constant/SocialuniUserProvideKeys";
 import {Inject, Options, Vue} from 'vue-property-decorator'
 import {socialuniUserDetailViewService} from "@socialuni/socialuni-user-sdk/src/logic/SocialuniUserDetailViewService";
-import CenterUserDetailRO from "@socialuni/socialuni-api-base/src/model/social/CenterUserDetailRO";
 
 @Options({
   components: {
