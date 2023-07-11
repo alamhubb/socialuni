@@ -75,7 +75,7 @@ const Socialuni = {
         // console.log(SocialuniUiUni)
         // app.use(SocialuniUiUni)
         // console.log(SocialuniUiUni)
-        const SocialuniUiH5 =await PlatformModuleLoadUtil.dynamicImport("../../socialuni-ui/socialuni-ui")
+        const SocialuniUiH5 =await PlatformModuleLoadUtil.dynamicImport("@socialuni/socialuni-ui")
         console.log(SocialuniUiH5)
         app.use(SocialuniUiH5)
         /*if (socialuniSystemModule.isUniApp) {
