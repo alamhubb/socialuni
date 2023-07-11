@@ -1,5 +1,6 @@
 <template>
   <view class="bg-default">
+    {{socialuniUserDetailViewService.user}}
     <q-navbar show-back title="用户详情">
       <slot name="navBarRight" :user="socialuniUserDetailViewService.user">
 

@@ -250,7 +250,6 @@ export default class FriendApplyListView extends Vue {
      * 获取发出的好友请求列表
      */
     async getSendFriendApplicationList() {
-        console.log(111)
         /*;(await socialChatModule.openIm()).getSendFriendApplicationList().then(({data}) => {
           console.log(data)
           const list = JSON.parse(data);

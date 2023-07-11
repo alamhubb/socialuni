@@ -90,6 +90,7 @@
 </template>
 
 <script lang="ts">
+import QPopup from "@socialuni/socialuni-ui-uni/src/components/QPopup/QPopup.vue";
 import {Inject, Options, Vue} from 'vue-property-decorator'
 import {socialuniCommunityUserDetailViewService}
   from "@socialuni/socialuni-community-sdk/src/logic/SocialuniCommunityUserDetailViewService";
@@ -105,6 +106,7 @@ import SocialuniFollowTag from "../../components/SocialuniFollow/SocialuniFollow
     QIcon,
     QButton,
     QNavbar,
+    QPopup,
     SocialuniFollowTag,
     SocialuniUserDetailView
   }

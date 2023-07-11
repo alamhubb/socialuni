@@ -32,26 +32,20 @@ async function installSocialuniPluginIns(app: App) {
 
     //查询是否包含community模块，如果存在则加载
     const appModules = import.meta.globEager('../../**/socialuni-app-sdk/src/index.ts')
-    console.log(appModules)
     const socialuniApp = PlatformModuleLoadUtil.getFirstModule(appModules)
     if (socialuniApp && socialuniApp.default) {
         app.use(socialuniApp.default)
     }
     const appViewModules = import.meta.globEager('../../**/socialuni-app-view-*/src/index.ts')
-    console.log(appViewModules)
     const socialuniAppView = PlatformModuleLoadUtil.getModuleDefault(appViewModules)
     if (socialuniAppView) {
-        console.log(socialuniAppView)
         app.use(socialuniAppView)
     }
-
-    console.log(socialuniApp)
     const userModules = import.meta.globEager('../../**/socialuni-user-sdk/src/index.ts')
     const socialuniUser = PlatformModuleLoadUtil.getFirstModule(userModules)
     if (socialuniUser && socialuniUser.default) {
         app.use(socialuniUser.default)
     }
-    console.log(socialuniUser)
     //查询是否包含community模块，如果存在则加载
     const communityModules = import.meta.globEager('../../**/socialuni-socialuniCommunity-sdk/src/index.ts')
     const socialuniCommunity = PlatformModuleLoadUtil.getFirstModule(communityModules)
@@ -76,7 +70,6 @@ const Socialuni = {
         // app.use(SocialuniUiUni)
         // console.log(SocialuniUiUni)
         const SocialuniUiH5 = await PlatformModuleLoadUtil.dynamicImport("@socialuni/socialuni-ui")
-        console.log(SocialuniUiH5.default)
         app.use(SocialuniUiH5.default)
         /*if (socialuniSystemModule.isUniApp) {
             const modules = import.meta.globEager('../../socialuni-ui/socialuni-ui-uni/src/index.ts')
@@ -107,7 +100,10 @@ const Socialuni = {
                     const socialuniViewServiceObj: any = data[key]
                     if (socialuniViewServiceObj && typeof socialuniViewServiceObj === 'object') {
                         if (isReactive(socialuniViewServiceObj)) {
-                            const socialuniViewServiceObjReal: SocialuniViewService = toRaw(socialuniViewServiceObj)
+                            const socialuniViewServiceObjReal: SocialuniViewService = socialuniViewServiceObj
+                            console.log(socialuniViewServiceObjReal)
+                            console.log(socialuniViewServiceObjReal instanceof SocialuniViewService)
+                            // const socialuniViewServiceObjReal: SocialuniViewService = toRaw(socialuniViewServiceObj)
                             if (socialuniViewServiceObjReal instanceof SocialuniViewService) {
                                 socialuniViewServiceObjReal.initService(this)
                             }

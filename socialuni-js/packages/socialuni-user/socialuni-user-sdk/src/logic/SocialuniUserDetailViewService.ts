@@ -12,7 +12,7 @@ import {onLoad} from "uniapp-api/src/UniappPageLifecycleHook";
 import SocialuniUserExpandService from "./SocialuniUserExpandService";
 import SocialuniViewService from "@socialuni/socialuni/src/interface/SocialuniViewService";
 
-export default class SocialuniUserDetailViewService extends SocialuniViewService {
+export default class SocialuniUserDetailViewService extends SocialuniViewService<any> {
 
     instance: ComponentInternalInstance = null
 
@@ -25,6 +25,7 @@ export default class SocialuniUserDetailViewService extends SocialuniViewService
 
         onLoad((params) => {
             console.log('chufale onload')
+            console.log(params.userId)
             this.queryUserInfo(params.userId)
         })
 

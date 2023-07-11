@@ -139,8 +139,6 @@ export default class TalkView extends Vue {
     }
 
     created() {
-        console.log(1111)
-
         onLoad((params) => {
             if (params.load && params.load === 'true') {
                 this.initQuery()
