@@ -1,9 +1,9 @@
 <template>
   <view class="card-title pb-10" @click="toUserDetailVue" v-if="talk">
     <image
-      class="size40 bd-radius mr-sm"
-      mode="aspectFill"
-      :src="talk.user.avatar"
+        class="size40 bd-radius mr-sm"
+        mode="aspectFill"
+        :src="talk.user.avatar"
     />
     <view class="row-between flex-1">
       <view class="col-center">
@@ -83,7 +83,7 @@
 </template>
 
 <script lang="ts">
-import { Options, Prop, Vue, Watch } from 'vue-property-decorator'
+import {Options, Prop, Vue, Watch} from 'vue-property-decorator'
 import TalkVO from "@socialuni/socialuni-api-base/src/model/talk/TalkVO"
 import ObjectUtil from "@socialuni/socialuni-util/src/util/ObjectUtil"
 import TalkTabType from "@socialuni/socialuni-constant/constant/TalkTabType"
@@ -152,12 +152,12 @@ export default class TalkItemHead extends Vue {
   }
 
   hintJusticeInfo() {
-      SocialuniAppUtil.ToastUtil.toastLong('正义值，正确举报会增加正义值')
+    SocialuniAppUtil.ToastUtil.toastLong('正义值，正确举报会增加正义值')
   }
 
   // 自己不为null，且是自己
   get isMine(): boolean {
-    return this.user && this.user.id === this.talk.user.id
+    return this.user && this.talk && this.talk.user && (this.user.id === this.talk.user.id)
   }
 
   toUserDetailVue() {
@@ -167,10 +167,10 @@ export default class TalkItemHead extends Vue {
   }
 
   confirmDeleteTalk() {
-      SocialuniAppUtil.AlertUtil.confirm('是否确定删除此条动态，此操作无法恢复').then(() => {
+    SocialuniAppUtil.AlertUtil.confirm('是否确定删除此条动态，此操作无法恢复').then(() => {
       this.$emit('deleteTalk', this.talk.id)
       SocialuniTalkAPI.deleteTalkAPI(this.talk.id).then(() => {
-          SocialuniAppUtil.ToastUtil.toast('删除成功')
+        SocialuniAppUtil.ToastUtil.toast('删除成功')
       })
     })
   }
@@ -184,7 +184,7 @@ export default class TalkItemHead extends Vue {
       if (!this.followBtnDisabled) {
         const followAdd: FollowAddVO = new FollowAddVO(this.talk.user.id)
         if (this.talk.hasFollowed) {
-            SocialuniAppUtil.AlertUtil.confirm('是否取消关注用户：' + this.talk.user.nickname).then(() => {
+          SocialuniAppUtil.AlertUtil.confirm('是否取消关注用户：' + this.talk.user.nickname).then(() => {
             this.followBtnDisabled = true
             this.talk.hasFollowed = false
             FollowAPI.cancelFollowAPI(followAdd).finally(() => {
@@ -194,7 +194,7 @@ export default class TalkItemHead extends Vue {
         } else {
           this.followBtnDisabled = true
           this.talk.hasFollowed = true
-          FollowAPI.addFollowAPI(followAdd).catch(()=>{
+          FollowAPI.addFollowAPI(followAdd).catch(() => {
             this.talk.hasFollowed = false
           }).finally(() => {
             this.followBtnDisabled = false
@@ -207,13 +207,13 @@ export default class TalkItemHead extends Vue {
   }
 
   getGenderIcon(user:
-                  CenterUserDetailRO
+                    CenterUserDetailRO
   ) {
     return UserUtil.getGenderIcon(user)
   }
 
   getGenderBgColor(user:
-                     CenterUserDetailRO
+                       CenterUserDetailRO
   ) {
     return UserUtil.getGenderBgColor(user)
   }

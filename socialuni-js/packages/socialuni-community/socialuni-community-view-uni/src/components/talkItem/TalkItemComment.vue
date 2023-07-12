@@ -197,7 +197,7 @@ export default class TalkItemComment extends Vue {
   }
 
   get commentShowNum() {
-    return this.talk.commentNum > this.commentLimitNum ? (this.commentLimitNum - 1) : this.commentLimitNum
+    return this.talk && this.talk.commentNum > this.commentLimitNum ? (this.commentLimitNum - 1) : this.commentLimitNum
   }
 
   setComment(talk, comment) {
