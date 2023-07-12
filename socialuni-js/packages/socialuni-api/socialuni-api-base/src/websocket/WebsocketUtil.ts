@@ -84,6 +84,8 @@ export default class WebsocketUtil {
         const onMessage = ((res: MessageEvent) => {
             const notify: NotifyVO = JsonUtil.toParse(res.data)
             console.log(notify)
+            console.log(socialuniPluginsModule.plugins)
+            console.log(socialuniPluginsModule.plugins.length)
             for (const plugin of socialuniPluginsModule.plugins) {
                 plugin.onMessage?.(notify)
             }
