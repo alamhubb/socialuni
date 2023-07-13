@@ -115,9 +115,9 @@
         <button v-if="viewService.msgContent" class="cu-btn bg-green shadow color-white"
                 @click.prevent="viewService.sendMsgClick()">发送
         </button>
-        <view v-else class="ml-sm">
+<!--        <view v-else class="ml-sm">
           <q-icon icon="plus-circle" size="28" @click="viewService.openPhoto()"></q-icon>
-        </view>
+        </view>-->
       </view>
       <!--      <view v-show="showEmoji" class="w100vw bg-blue" :style="{height:keyboardHeight+'px'}"></view>-->
     </view>
