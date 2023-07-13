@@ -96,7 +96,7 @@ export default class SocialuniMsgViewService extends SocialuniViewService {
         if (this.chat.loadMore === LoadMoreType.more) {
             // 执行正在加载动画
             this.chat.loadMore = LoadMoreType.loading
-            this.queryMessages()
+            // this.queryMessages()
         }
     }
 

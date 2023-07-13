@@ -1,7 +1,7 @@
-import {ComponentInternalInstance} from "@vue/runtime-core";
+import {Vue} from "vue-class-component";
 
 export interface SocialuniViewServiceInterface {
-    instance: ComponentInternalInstance
+    instance: Vue
 
-    initService(instance: ComponentInternalInstance)
+    initService(instance: Vue)
 }
