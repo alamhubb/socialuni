@@ -3,6 +3,9 @@ import NotifyVO from "@socialuni/socialuni-api-base/src/model/NotifyVO";
 import NotifyType from "@socialuni/socialuni-constant/constant/NotifyType";
 import {socialuniChatModule} from "./store/SocialuniChatModule";
 import {socialuniTokenModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniTokenModule";
+import {socialuniPluginsModule} from "@socialuni/socialuni/src/store/SocialuniPluginsModule";
+import {SocialuniOption} from "@socialuni/socialuni/src/interface/socialuniOption";
+import {App} from "vue";
 
 class SocialuniImPlugin implements SocialuniPlugin {
     onLaunch() {
@@ -30,9 +33,11 @@ class SocialuniImPlugin implements SocialuniPlugin {
 
 const socialuniImPlugin: SocialuniPlugin = new SocialuniImPlugin()
 
-export default socialuniImPlugin
 
-//提供默认的
-//可重写 可覆盖
+const SocialuniIm = {
+    async install(app: App, socialuniOption: SocialuniOption) {
+        socialuniPluginsModule.addPlugin(socialuniImPlugin)
+    }
+}
 
-//common
+export default SocialuniIm
