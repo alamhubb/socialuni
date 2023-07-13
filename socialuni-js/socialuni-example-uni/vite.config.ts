@@ -4,10 +4,9 @@ import requireTransform from 'vite-plugin-require-transform';
 import commonjs from "@rollup/plugin-commonjs";
 import {fileURLToPath, URL} from "node:url";
 import {transform} from '@babel/core';
-import {type} from "os";
 import fs from "fs";
 import {parse, compileScript} from "@vue/compiler-sfc";
-import topLevelAwait from "vite-plugin-top-level-await";
+import babel from 'vite-plugin-babel';
 
 function processVueFile(filePath) {
     if (!filePath.endsWith('.vue')) {
@@ -159,17 +158,7 @@ export default defineConfig({
     base: '/',
     plugins: [
         uni(),
-        myPlugin(),
-        commonjs(),
-        requireTransform({
-            fileRegex: /.js$|.vue$/
-        }),
-        topLevelAwait({
-            // The export name of top-level await promise for each chunk module
-            promiseExportName: '__tla',
-            // The function to generate import names of top-level await promise in each chunk module
-            promiseImportName: i => `__tla_${i}`
-        })
+        myPlugin()
     ],
     server: {
         host: "0.0.0.0"
