@@ -84,20 +84,17 @@
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
 import {onLoad, onPullDownRefresh} from "@dcloudio/uni-app";
-import SocialuniAppUtil from "@socialuni/socialuni-app-sdk/src/util/UniUtil";
 import DateUtil from "@socialuni/socialuni-util/src/util/DateUtil";
 import FriendApplyType from "@socialuni/socialuni-constant/constant/FriendApplyType";
 import SocialuniFriendAPI from "@socialuni/socialuni-im-api/src/api/SocialuniFriendAPI";
 import SocialuniFriendApplyUserRO from "@socialuni/socialuni-im-api/src/model/RO/SocialuniFriendApplyUserRO";
-import SocialuniCommonStatus from "@socialuni/socialuni-constant/constant/status/SocialuniCommonStatus";
-import ToastUtil from "@socialuni/socialuni-native-uni/src/util/ToastUtil";
 import FriendAddQO from "@socialuni/socialuni-im-api/src/model/QO/firend/FriendAddQO";
 import SocialuniAddFriendStatus from "@socialuni/socialuni-im-api/src/constant/SocialuniAddFriendStatus";
-import PageUtil from "@socialuni/socialuni-util/src/util/PageUtil";
 import OpenImFriendApplyRO from "@socialuni/socialuni-api-base/src/model/openIm/OpenImFriendApplyRO";
-import {socialChatModule} from "../../store/SocialChatModule";
 import QTabs from "@socialuni/socialuni-ui-uni/src/components/QTabs/QTabs.vue";
 import SocialuniAddFriendType from "@socialuni/socialuni-im-api/src/constant/SocialuniAddFriendType";
+import UserPageUtil from "@socialuni/socialuni-user-sdk/src/util/UserPageUtil";
+import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
 
 @Options({
     components: {
@@ -144,7 +141,7 @@ export default class FriendApplyListView extends Vue {
     }
 
     toUserDetail(userId: string) {
-        PageUtil.toUserDetail(userId)
+        UserPageUtil.toUserDetail(userId)
     }
 
     // addFriend(e) {
@@ -195,55 +192,55 @@ export default class FriendApplyListView extends Vue {
      * 获取好友列表。
      */
     async getFriendList() {
-        (await socialChatModule.openIm()).getFriendList().then(({data}) => {
+        /*(await socialChatModule.openIm()).getFriendList().then(({data}) => {
             this.friendList = JSON.parse(data);
             console.log('friendList', data, this.friendList);
         }).catch(err => {
-        })
+        })*/
     }
 
     /**
      * 从好友列表中删除用户。
      */
     async deleteFriend(user) {
-        (await socialChatModule.openIm()).deleteFriend(user.userID).then(({data}) => {
+        /*(await socialChatModule.openIm()).deleteFriend(user.userID).then(({data}) => {
             console.log('deleteFriend', data);
             this.refresh();
             // socialChatModule.checkFriend(this.user);
         }).catch(err => {
-        })
+        })*/
     }
 
     /**
      * 获取黑名单列表
      */
     async getBlacklist() {
-        (await socialChatModule.openIm()).getBlackList().then(({data}) => {
+        /*(await socialChatModule.openIm()).getBlackList().then(({data}) => {
             this.blackList = JSON.parse(data);
             console.log('getBlackList', data, this.blackList);
         }).catch(err => {
-        })
+        })*/
     }
 
     /**
      * 将用户添加到黑名单。
      */
     async addBlack(black) {
-        (await socialChatModule.openIm()).addBlack(black.userID).then(({data}) => {
+        /*(await socialChatModule.openIm()).addBlack(black.userID).then(({data}) => {
             console.log('addBlack', data);
             this.refresh();
         }).catch(err => {
-        })
+        })*/
     }
 
     /**
      * 将用户添加到黑名单。
      */
     async removeBlack(black) {
-        (await socialChatModule.openIm()).removeBlack(black.userID).then(({data}) => {
+        /*(await socialChatModule.openIm()).removeBlack(black.userID).then(({data}) => {
             this.refresh();
         }).catch(err => {
-        })
+        })*/
     }
 
     /**
@@ -286,7 +283,7 @@ export default class FriendApplyListView extends Vue {
      * @param item
      */
     async refuseFriendApplication(item) {
-        const options: AccessFriendParams = {
+        /*const options: AccessFriendParams = {
                 toUserID: item.fromUserID,
                 handleMsg: "拒绝您的好友请求"
             }
@@ -295,7 +292,7 @@ export default class FriendApplyListView extends Vue {
             // 刷新请求列表
             this.refresh();
         }).catch(err => {
-        })
+        })*/
     }
 
     friendRuestResult(status: string) {

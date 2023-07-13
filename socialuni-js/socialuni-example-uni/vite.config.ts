@@ -7,6 +7,7 @@ import {transform} from '@babel/core';
 import {type} from "os";
 import fs from "fs";
 import {parse, compileScript} from "@vue/compiler-sfc";
+import topLevelAwait from "vite-plugin-top-level-await";
 
 function processVueFile(filePath) {
     if (!filePath.endsWith('.vue')) {
@@ -162,6 +163,12 @@ export default defineConfig({
         commonjs(),
         requireTransform({
             fileRegex: /.js$|.vue$/
+        }),
+        topLevelAwait({
+            // The export name of top-level await promise for each chunk module
+            promiseExportName: '__tla',
+            // The function to generate import names of top-level await promise in each chunk module
+            promiseImportName: i => `__tla_${i}`
         })
     ],
     server: {

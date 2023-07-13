@@ -233,7 +233,7 @@ class SocialuniChatModule {
         this.setChat(chat)*/
 
         ImPageUtil.toMessagePageByChatId(receiveId)
-        return receiveId
+        // return receiveId
     }
 
     async queryMineImUserInfo() {
