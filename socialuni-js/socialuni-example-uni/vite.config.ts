@@ -158,7 +158,16 @@ export default defineConfig({
     base: '/',
     plugins: [
         uni(),
-        myPlugin()
+        babel({
+            babelConfig: {
+                babelrc: false,
+                configFile: false,
+                plugins: [
+                    "@babel/plugin-syntax-top-level-await",
+                    "@babel/plugin-transform-modules-commonjs"
+                ]
+            }
+        })
     ],
     server: {
         host: "0.0.0.0"
