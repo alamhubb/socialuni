@@ -140,16 +140,18 @@ function transformDynamicImportCodeCompile(code) {
 //自动导入对应的包功能
 function myPlugin() {
     return {
-        name: 'transform-file',
-        transform(code: string, id: string) {
-            if (/.js$|.ts$|.vue$/.test(id) && (/socialuni-(\w)*\/socialuni-(\S)*\/src/.test(id) || id.includes('socialuni/src'))) {
-                const modifiedScriptContent = transformDynamicImportCodeCompile(code)
-
-                return modifiedScriptContent
+        name: 'dynamic-import-transform',
+        transform(code, id) {
+            const dynamicImportRegex = /PlatformModuleLoadUtil\.dynamicImport\(['"]([^'"]+)['"]\)/g;
+            if (dynamicImportRegex.test(code)) {
+                code = code.replace(dynamicImportRegex, "await import('$1-uni/src/index.ts')");
             }
-
-        }
-    }
+            return {
+                code,
+                map: null,
+            };
+        },
+    };
 }
 
 // vite.config.ts
