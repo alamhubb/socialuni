@@ -60,7 +60,7 @@
                   <a class="mr-20" target="_blank"
                      href="https://mp.weixin.qq.com/mp/waerrpage?type=lowest_version&appid=wx0bf5fe9ceeab514c&uin=MTU0NzIwOTU1&key=5dd492e10b98b5a21a6fb86af214079b588d6b15085fd4899babee3532d7d300a83b6d4b23cf7af2817687a76e21105215dd299ab3df9fd5335f7bb36299ffb5cfb808c851ea76960945d50244c1e79e&devicetype=Windows+10+x64&version=62090070&lang=zh_CN&ascene=1&pass_ticket=%2B6%2BVIm1E8wYnzkE1yZZyH%2B4yQJXPIGgcFMFRgUHPD4E%3D">
                     <img class="size200 bd-radius10px"
-                         src="@/imgs/wx_app_code.jpg">
+                         src="../../imgs/wx_app_code.jpg">
                     <div class="row-center grey--text body-2">
                       微信扫码识别或点击
                     </div>
@@ -71,7 +71,7 @@
                   <a target="_blank"
                      href="https://m.q.qq.com/a/s/512c898daab243c47e071279517963d5">
                     <img class="size200 bd-radius10px"
-                         src="@/imgs/qq_app_code.png">
+                         src="../../imgs/qq_app_code.png">
                     <div class="row-center grey--text body-2">
                       QQ扫码识别或点击
                     </div>

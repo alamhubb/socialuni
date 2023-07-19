@@ -4,11 +4,11 @@
   >
     <router-link to="/" class="flex-none row-col-center use-click">
       <div class="row-col-center" v-if="MediaUtil.gtMd">
-        <img src="@/imgs/logo.jpg" class="h50" alt="logo">
+        <img src="../imgs/logo.jpg" class="h50" alt="logo">
         <div class="font-22 ml-3 mb-2 font-bold color-main">社交联盟</div>
       </div>
       <div v-else class="row-col-center">
-        <img src="@/imgs/socialunilogo.jpg" class="h40" alt="logo">
+        <img src="../imgs/socialunilogo.jpg" class="h40" alt="logo">
       </div>
     </router-link>
 
@@ -29,7 +29,7 @@
             <div class="row-all-center">后台管理</div>
           </a>
           <a href="https://gitee.com/socialuni/socialuni" target="_blank" class="mr-sm md:mr">
-            <div class="row-all-center"><img src="@/imgs/giteelogo.png" class="use-click size31"/></div>
+            <div class="row-all-center"><img src="../imgs/giteelogo.png" class="use-click size31"/></div>
           </a>
           <a href="https://github.com/social-uni/socialuni" target="_blank" class="md:mr-sm">
             <div class="row-all-center"><i class="mdi mdi-github font-36 use-click color-black"/></div>
@@ -79,12 +79,12 @@ import {
   Star,
   StarFilled
 } from '@element-plus/icons-vue'
-import {constantRouters} from "@/router";
-import UserStore from "@/store/UserStore";
-import AlertUtil from "@/utils/AlertUtil";
-import TokenUtil from "@/utils/TokenUtil";
-import ToastUtil from "@/utils/ToastUtil";
-import MediaUtil from "@/styles/jsStyle/MediaUtil";
+import {constantRouters} from "@/router/index.js";
+import UserStore from "@/store/UserStore.js";
+import AlertUtil from "@/utils/AlertUtil.js";
+import TokenUtil from "@/utils/TokenUtil.js";
+import ToastUtil from "@/utils/ToastUtil.js";
+import MediaUtil from "@/styles/jsStyle/MediaUtil.js";
 import {computed} from "vue";
 
 const user = computed(() => {
