@@ -1,11 +1,12 @@
 {
-  "name": "root",
-  "private": true,
-  "workspaces": [
-    "packages/**"
-  ],
-  "dependencies": {},
-  "devDependencies": {
-    "lerna": "^7.1.1"
-  }
+  "name": "socialuni-js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
