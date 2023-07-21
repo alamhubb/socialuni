@@ -58,6 +58,7 @@
     "@socialuni/socialuni-scss": "^0.1.2",
     "@socialuni/socialuni-ui-uni": "^0.1.2",
     "@socialuni/socialuni-user-view-uni": "^0.1.2",
+    "@socialuni/socialuni": "^0.1.2",
     "axios": "^0.27.2",
     "cos-js-sdk-v5": "^1.2.18",
     "cos-wx-sdk-v5": "^0.7.11",
