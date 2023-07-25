@@ -1,4 +1,3 @@
-import {SocialuniPlugin} from 'socialuni/src/interface/SocialuniPlugin'
 import NotifyVO from "@socialuni/socialuni-api-base/src/model/NotifyVO";
 import NotifyType from "@socialuni/socialuni-constant/constant/NotifyType";
 import {socialuniChatModule} from "./store/SocialuniChatModule";
@@ -6,6 +5,7 @@ import {socialuniTokenModule} from "@socialuni/socialuni-user-sdk/src/store/Soci
 import {socialuniPluginsModule} from "@socialuni/socialuni/src/store/SocialuniPluginsModule";
 import {SocialuniOption} from "@socialuni/socialuni/src/interface/socialuniOption";
 import {App} from "vue";
+import {SocialuniPlugin} from "@socialuni/socialuni/src/interface/SocialuniPlugin";
 
 class SocialuniImPlugin implements SocialuniPlugin {
     onLaunch() {

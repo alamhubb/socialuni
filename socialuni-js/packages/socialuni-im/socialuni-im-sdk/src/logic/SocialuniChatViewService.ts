@@ -44,10 +44,7 @@ export default class SocialuniChatViewService extends SocialuniViewService<Socia
     initService(instance: ComponentInternalInstance) {
         super.initService(instance)
         watch(() => socialuniChatModule.scrollTop, () => {
-            console.log('触发了滚动')
-            console.log(this.$refs)
             if (this.$refs.messageBox) {
-                console.log(this.$refs.messageBox)
                 this.$refs.messageBox.scrollTop = socialuniChatModule.scrollTop
             }
             // this.scrollTop = -1000
