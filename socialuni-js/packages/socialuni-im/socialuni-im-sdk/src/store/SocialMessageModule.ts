@@ -23,6 +23,8 @@ class SocialuniMsgModule {
     lazyLoadNum = 30
 
     async init(params: MessageViewParams) {
+        console.log(params)
+        console.log(params.chatId)
         if (params && params.chatId) {
             // if (params.nickname) {
             //   chat.nickname = params.nickname

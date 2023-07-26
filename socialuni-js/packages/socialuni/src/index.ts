@@ -1,4 +1,4 @@
-import {App, defineComponent, isReactive, onMounted, toRaw} from "vue"
+import {App, defineComponent, getCurrentInstance, isReactive, onMounted, toRaw} from "vue"
 import {socialuniPluginsModule} from "./store/SocialuniPluginsModule"
 import {SocialuniPlugin} from "./interface/SocialuniPlugin"
 import {ImportModule} from "./interface/ImportModule"
@@ -97,13 +97,26 @@ const Socialuni = {
             created() {
                 socialuniPluginsModule.setRouter(this.$router)
                 socialuniPluginsModule.setRoute(this.$route)
-                const data = this
-                if (data.viewService){
+                const data = getCurrentInstance()
+                console.log(data)
+                console.log(data.data)
+                console.log(data.data.viewService)
+                if (data.data.viewService){
                     console.log(333333)
+                    console.log(data)
                     console.log(data.viewService)
+                    console.log(44444444)
                 }
                 for (const key in data) {
                     const socialuniViewServiceObj: any = data[key]
+                    if (socialuniViewServiceObj && typeof socialuniViewServiceObj === 'object'){
+                        // console.log(key)
+                    }
+                    if (key === 'viewService'){
+                        console.log(typeof socialuniViewServiceObj === 'object')
+                        const socialuniViewServiceObjReal: SocialuniViewService = socialuniViewServiceObj
+                        console.log(socialuniViewServiceObjReal instanceof SocialuniViewService)
+                    }
                     if (socialuniViewServiceObj && typeof socialuniViewServiceObj === 'object') {
                         // if (isReactive(socialuniViewServiceObj)) {
                         const socialuniViewServiceObjReal: SocialuniViewService = socialuniViewServiceObj

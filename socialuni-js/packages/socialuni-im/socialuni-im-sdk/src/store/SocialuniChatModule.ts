@@ -75,12 +75,16 @@ class SocialuniChatModule {
                 this.pushMsgReplaceChatByChat(res.data)
             })
         }
+        console.log('chatid')
+        console.log(chatId)
         this.setChatId(chatId)
         socialuniChatModule.scrollToMessagePageBottom()
     }
 
 
     setChatId(chatId: string){
+        console.log('chatid')
+        console.log(chatId)
         this.chatId = chatId
     }
 
@@ -222,6 +226,7 @@ class SocialuniChatModule {
     }
 
     setChatIdToMessagePage(receiveId: string) {
+        console.log(receiveId)
         // this.setChatId(chatId)
         // this.readChatAction(this.chat)
         if (!receiveId) {
