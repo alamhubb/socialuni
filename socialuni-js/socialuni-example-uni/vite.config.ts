@@ -176,9 +176,9 @@ export default defineConfig({
         uni(),
         myPlugin()
     ],
-    build: {
-        minify: false
-    },
+    // build: {
+    //     minify: false
+    // },
     server: {
         host: "0.0.0.0"
     },

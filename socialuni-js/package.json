@@ -3,6 +3,7 @@
   "private": true,
   "workspaces": [
     "packages/**",
+    "socialuni-example-h5",
     "socialuni-example-uni"
   ],
   "dependencies": {},
