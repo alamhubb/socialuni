@@ -22,7 +22,7 @@ import {onLoad} from "uniapp-api/src/UniappPageLifecycleHook";
 import {socialuniMsgModule} from "../store/SocialMessageModule";
 import {ComponentInternalInstance} from "@vue/runtime-core";
 
-export default class SocialuniMsgViewService extends SocialuniViewService {
+export default class SocialuniMsgViewService extends SocialuniViewService<any> {
     public $refs!: {
         // reportDialog: SocialuniReportDialog;
         messageMoreHandleDialog: any;
@@ -66,7 +66,7 @@ export default class SocialuniMsgViewService extends SocialuniViewService {
         return socialuniUserModule.mineUser
     }
 
-    initService(instance: ComponentInternalInstance) {
+    initService(instance: Vue) {
         super.initService(instance)
         onMounted(() => {
             socialuniChatModule.scrollTop = 0

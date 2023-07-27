@@ -176,6 +176,8 @@ import {
 import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 import QNavbar from "@socialuni/socialuni-ui-uni/src/components/QNavbar/QNavbar.vue";
 import {getCurrentInstance} from "vue";
+import {socialuniPluginsModule} from "@socialuni/socialuni/src/store/SocialuniPluginsModule";
+import SocialuniViewService from "@socialuni/socialuni/src/interface/SocialuniViewService";
 
 @Options(
     {
@@ -192,15 +194,7 @@ export default class SocialuniMessageView extends Vue {
   viewService = socialuniMsgViewService
 
   created(){
-    console.log(555555)
-    console.log(this)
-    console.log(this.viewService)
-    console.log(getCurrentInstance())
-    console.log(this.$data)
-    console.log(this.$data.keys())
-    console.log(this.keys())
-    console.log(666666)
+    this.viewService.initService(this)
   }
-
 }
 </script>

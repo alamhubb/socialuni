@@ -18,6 +18,7 @@ import {ComponentInternalInstance} from "@vue/runtime-core";
 import {reactive, watch} from "vue";
 import {SDialog} from "@socialuni/socialuni-ui-types/src/types/SocialuniUiTypes";
 import UserPageUtil from "../util/UserPageUtil";
+import {Vue} from "vue-class-component";
 
 interface SocialuniUserEditViewServiceRefs {
     userEditDialog: SDialog
@@ -36,7 +37,7 @@ class SocialuniUserEditViewService extends SocialuniViewService<SocialuniUserEdi
     appGenderType = GenderType.all
     GenderTypeAll = GenderType.all
 
-    initService(instance: ComponentInternalInstance) {
+    initService(instance: Vue) {
         super.initService(instance);
         this.initData()
         watch(() => this.mineUser, () => {
@@ -71,7 +72,7 @@ class SocialuniUserEditViewService extends SocialuniViewService<SocialuniUserEdi
             const cosAuthRO = await CosService.getCosAuthRO()
             console.log(cosAuthRO)
             const imgKey = UUIDUtil.getUUID() + ImgUtil.getFileSuffixName(file.name)
-            const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgKey, file, cosAuthRO), SocialuniMineUserAPI.addUserAvatarImgAPI(new ImgAddQO(file))])
+            const res = await Promise.all([TencentCosAPI.uploadFileAPI(file, cosAuthRO), SocialuniMineUserAPI.addUserAvatarImgAPI(new ImgAddQO(file))])
             socialuniUserModule.setUser(res[1].data)
         } catch (e) {
             console.error(e)

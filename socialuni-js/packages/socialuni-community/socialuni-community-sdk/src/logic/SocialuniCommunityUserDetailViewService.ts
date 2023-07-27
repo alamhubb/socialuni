@@ -5,12 +5,11 @@ import CenterUserDetailRO from "@socialuni/socialuni-api-base/src/model/social/C
 import SocialuniTalkAPI from "@socialuni/socialuni-community-api/src/api/SocialuniTalkAPI";
 import {socialuniUserDetailViewService} from "@socialuni/socialuni-user-sdk/src/logic/SocialuniUserDetailViewService";
 import SocialuniViewService from "@socialuni/socialuni/src/interface/SocialuniViewService";
+import {Vue} from "vue-class-component";
 
-export default class SocialuniCommunityUserDetailViewService extends SocialuniViewService {
+export default class SocialuniCommunityUserDetailViewService extends SocialuniViewService<any> {
 
-    private instance: ComponentInternalInstance = null
-
-    initService(instance: ComponentInternalInstance) {
+    initService(instance: Vue) {
         this.instance = instance
 
         watch<CenterUserDetailRO>(() => socialuniUserDetailViewService.user, (value, oldValue) => {

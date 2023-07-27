@@ -119,5 +119,9 @@ import socialuniUserEditViewService from "@socialuni/socialuni-user-sdk/src/logi
 })
 export default class SocialuniUserDetailView extends Vue {
   socialuniUserEditViewService = socialuniUserEditViewService
+
+  created(){
+    this.socialuniUserEditViewService.initService(this)
+  }
 }
 </script>

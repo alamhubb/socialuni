@@ -121,8 +121,11 @@ import {
   components: {QSearch, QInput, QIcon, QNavbar}
 })
 export default class SocialuniChatView extends Vue {
-  get viewService() {
-    return socialuniChatViewService
+
+  viewService = socialuniChatViewService
+
+  created() {
+    this.viewService.initService(this)
   }
 }
 </script>

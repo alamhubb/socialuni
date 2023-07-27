@@ -117,5 +117,9 @@ export default class SocialuniCommunityUserDetailView extends Vue {
   }
 
   socialuniCommunityUserDetailViewService = socialuniCommunityUserDetailViewService
+
+  created(){
+    this.socialuniCommunityUserDetailViewService.initService(this)
+  }
 }
 </script>

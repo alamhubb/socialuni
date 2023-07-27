@@ -97,38 +97,6 @@ const Socialuni = {
             created() {
                 socialuniPluginsModule.setRouter(this.$router)
                 socialuniPluginsModule.setRoute(this.$route)
-                const data = getCurrentInstance()
-                console.log(data)
-                console.log(data.data)
-                console.log(data.data.viewService)
-                if (data.data.viewService){
-                    console.log(333333)
-                    console.log(data)
-                    console.log(data.viewService)
-                    console.log(44444444)
-                }
-                for (const key in data) {
-                    const socialuniViewServiceObj: any = data[key]
-                    if (socialuniViewServiceObj && typeof socialuniViewServiceObj === 'object'){
-                        // console.log(key)
-                    }
-                    if (key === 'viewService'){
-                        console.log(typeof socialuniViewServiceObj === 'object')
-                        const socialuniViewServiceObjReal: SocialuniViewService = socialuniViewServiceObj
-                        console.log(socialuniViewServiceObjReal instanceof SocialuniViewService)
-                    }
-                    if (socialuniViewServiceObj && typeof socialuniViewServiceObj === 'object') {
-                        // if (isReactive(socialuniViewServiceObj)) {
-                        const socialuniViewServiceObjReal: SocialuniViewService = socialuniViewServiceObj
-                        // const socialuniViewServiceObjReal: SocialuniViewService = toRaw(socialuniViewServiceObj)
-                        if (socialuniViewServiceObjReal instanceof SocialuniViewService) {
-                            console.log(`${key}:执行初始化`)
-                            socialuniViewServiceObjReal.initService(this)
-                        }
-                        // }
-                    }
-
-                }
             }
         })
         app.mixin(shareComponent)
