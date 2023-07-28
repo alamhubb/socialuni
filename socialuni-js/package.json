@@ -2,8 +2,7 @@
   "name": "root",
   "private": true,
   "workspaces": [
-    "packages/**",
-    "socialuni-example-uni"
+    "packages/**"
   ],
   "dependencies": {},
   "devDependencies": {
