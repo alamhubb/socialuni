@@ -72,9 +72,9 @@
                             <q-button v-else :disabled="allButtonDisabled"
                                       add-class="bg-gradual-wx" md class="w90p mt"
                                       @click="providerLogin">
-                                <q-icon color="white" icon="weixin-fill" size="21"
-                                        class="mr-xs"></q-icon>
-                                微信登录
+<!--                                <q-icon color="white" icon="weixin-fill" size="21"
+                                        class="mr-xs"></q-icon>-->
+                                登录
                             </q-button>
                         </template>
                         <!--              有用户-->
