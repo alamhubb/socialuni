@@ -2,7 +2,7 @@ import {defineConfig} from 'vite'
 import uni from '@dcloudio/vite-plugin-uni'
 
 import {fileURLToPath, URL} from "node:url";
-import socialuniPlatformAutoImportPlugin from "./socialuniPlatformAutoImportPlugin";
+import socialuniPlatformAutoImportPlugin from "@socialuni/vite-plugin-socialuni-platform-auto-import/src/index";
 
 const IN_PRODUCTION = process.env.NODE_ENV === 'production'
 
