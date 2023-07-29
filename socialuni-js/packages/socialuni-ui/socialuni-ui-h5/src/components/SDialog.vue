@@ -27,11 +27,11 @@
 
         <!--  自定义区域    -->
         <div :style="{height: dialogBodyHeight}">
-            <y-scrollbar class="h100p">
+            <s-scrollbar class="h100p">
                 <div>
                     <slot></slot>
                 </div>
-            </y-scrollbar>
+            </s-scrollbar>
         </div>
 
         <div
@@ -61,9 +61,10 @@
 <script lang="ts">
 import {Options, Emit, Prop, Vue, Watch} from 'vue-property-decorator'
 import SPageFooter from "./SPageFooter.vue";
+import SScrollbar from "./SScrollbar.vue";
 
 @Options({
-    components: {SPageFooter}
+    components: {SScrollbar, SPageFooter}
 })
 export default class SDialog extends Vue {
     // 作用，下次在进入页面时，重置按钮焦点使用，否则会存在那种再次进入按钮已经获取焦点的问题
