@@ -6,11 +6,9 @@
 
 <script lang="ts">
 import {Options, Vue} from "vue-property-decorator";
-import SocialuniChatViewLogic, {SocialuniChatViewLogicRefs} from "@/views/chat/SocialuniChatViewLogic";
-import YScrollbar from "@/components/YScrollbar.vue";
 
 @Options({
-    components: {YScrollbar}
+    components: {}
 })
 export default class MinePage extends Vue {
 

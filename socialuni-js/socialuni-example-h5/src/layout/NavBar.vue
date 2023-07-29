@@ -60,7 +60,7 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import SDialog from "@/components/socialuni/SDialog.vue";
+import SDialog from "@socialuni/socialuni-ui-h5/src/components/SDialog.vue";
 import SocialuniUserEditDialog from "@/views/user/SocialuniUserEditDialog.vue";
 import CommonEventUtil from "../../../packages/uniapp-api/src/util/CommonEventUtil";
 import SocialuniUserEventConst from "@socialuni/socialuni-user-sdk/src/constant/SocialuniUserEventConst";
