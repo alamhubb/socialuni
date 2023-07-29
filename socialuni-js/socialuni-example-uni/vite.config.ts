@@ -2,8 +2,7 @@ import {defineConfig} from 'vite'
 import uni from '@dcloudio/vite-plugin-uni'
 
 import {fileURLToPath, URL} from "node:url";
-import fs from "fs";
-import {parse, compileScript} from "@vue/compiler-sfc";
+import socialuniPlatformAutoImportPlugin from "./socialuniPlatformAutoImportPlugin";
 
 const IN_PRODUCTION = process.env.NODE_ENV === 'production'
 
@@ -50,7 +49,7 @@ export default defineConfig({
     base: '/',
     plugins: [
         uni(),
-        myPlugin()
+        socialuniPlatformAutoImportPlugin()
     ],
     // build: {
     //     minify: false
