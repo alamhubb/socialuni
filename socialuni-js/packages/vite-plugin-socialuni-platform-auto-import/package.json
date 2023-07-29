@@ -1,0 +1,20 @@
+{
+  "name": "vite-plugin-socialuni-platform-auto-import",
+  "version": "0.1.2",
+  "description": "",
+  "main": "axios.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "typescript": "^4.7.4",
+    "@babel/core": "^7.22.8",
+    "@babel/parser": "^7.22.7",
+    "@babel/traverse": "^7.22.8"
+  },
+  "author": "",
+  "license": "ISC",
+  "gitHead": "8b17f4a250aa54f47a17a2639efe2b511fd59358"
+}

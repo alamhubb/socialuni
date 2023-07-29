@@ -73,15 +73,10 @@ const Socialuni = {
         // console.log(SocialuniUiUni)
 
         console.log(socialuniSystemModule.isDev)
-        if (socialuniSystemModule.isUniApp){
-            const SocialuniUiH5 = await PlatformModuleLoadUtil.dynamicImport("@socialuni/socialuni-ui")
-            console.log(SocialuniUiH5)
-            app.use(SocialuniUiH5.default)
-        }else {
-            // const SocialuniUiH5 = await import('@socialuni/socialuni-ui-h5/src/index.ts')
-            // console.log(SocialuniUiH5)
-            // app.use(SocialuniUiH5.default)
-        }
+        const SocialuniUiH5 = await PlatformModuleLoadUtil.dynamicImport("@socialuni/socialuni-ui")
+        console.log(SocialuniUiH5)
+        console.log(SocialuniUiH5)
+        app.use(SocialuniUiH5.default)
 
 
         /*if (socialuniSystemModule.isUniApp) {
