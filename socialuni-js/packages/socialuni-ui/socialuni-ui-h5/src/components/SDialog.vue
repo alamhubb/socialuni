@@ -148,7 +148,7 @@ export default class SDialog extends Vue {
 
     @Prop({
         type: Boolean,
-        default: false
+        default: true
     }) autoClose: boolean
 
     // 关闭按钮，默认自动关闭弹窗，默认自动关闭弹窗，可以通过这个属性，设置手动关闭弹窗
@@ -256,9 +256,9 @@ export default class SDialog extends Vue {
     // dialog 确定事件
     dialogConfirm() {
         this.$emit('confirm')
-        if (this.autoClose) {
-            this.close()
-        }
+        // if (this.autoClose) {
+        //   this.close()
+        // }
     }
 
 
