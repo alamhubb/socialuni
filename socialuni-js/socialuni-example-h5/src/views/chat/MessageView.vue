@@ -1,20 +1,22 @@
 <template>
     <div class="flex-row h100p overflow-hidden">
         <div class="w200 bd-radius shadow h100p flex-none">
-            <socialuni-chat-view></socialuni-chat-view>
+            <socialuni-chat-view-h5></socialuni-chat-view-h5>
         </div>
 
         <div class="flex-1 overflow-hidden h100p bg-white ml-sm">
-            <socialuni-msg-view></socialuni-msg-view>
         </div>
     </div>
 </template>
 
 <script lang="ts">
 import {Options, Vue} from "vue-property-decorator";
-import SocialuniChatView from "@socialuni/socialuni-im-view-uni/src/views/chat/SocialuniChatView.vue";
+
+
+import SocialuniChatViewH5 from "@socialuni/socialuni-im-view-h5/src/views/SocialuniChatViewH5.vue"
+
 @Options({
-    components: {SocialuniChatView, SocialuniMsgView}
+    components: {SocialuniChatViewH5}
 })
 export default class MessageView extends Vue {
 
