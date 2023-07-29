@@ -46,7 +46,7 @@ function transformDynamicImportCodeCompile(code) {
 }
 
 //自动导入对应的包功能
-function myPlugin() {
+export default function socialuniPlatformAutoImportPlugin() {
     return {
         name: 'transform-file',
         transform(code: string, id: string) {
