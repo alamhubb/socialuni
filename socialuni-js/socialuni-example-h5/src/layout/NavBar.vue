@@ -1,54 +1,55 @@
 <template>
-    <div class="row-between-center shadow-bottom index-sm px-smm h50 bg-white flex-none">
-        <div class="flex-none row-col-center mr-40 bg-click" @click="toHome">
-            <!--      <img src="@/assets/img/logo.jpg" class="h40" alt="logo">-->
-            <div class="font-19 font-bold">演示系统</div>
-        </div>
+    <div>
+        <div class="row-between-center shadow-bottom index-sm px-smm h50 bg-white flex-none">
+            <div class="flex-none row-col-center mr-40 bg-click" @click="toHome">
+                <!--      <img src="@/assets/img/logo.jpg" class="h40" alt="logo">-->
+                <div class="font-19 font-bold">演示系统</div>
+            </div>
 
-        <div class="row-end-center">
-            <!--            <div class="flex-none row-col-center mr">
-                            <a href="https://socialuni.cn" target="_blank" class="mr-sm md:mr bg-click">
-                                <div class="row-all-center">官网文档</div>
-                            </a>
-                            <el-divider direction="vertical" class="mr"/>
-                            <a href="https://socialuni.cn/demo" target="_blank" class="mr-sm md:mr bg-click">
-                                <div class="row-all-center">demo演示</div>
-                            </a>
-                            <el-divider direction="vertical" class="mr"/>
-                            <div class="row-col-center">
-                                <a href="https://gitee.com/socialuni/socialuni" target="_blank" class="mr-sm md:mr">
-                                    <div class="row-all-center"><img src="@/assets/imgs/giteelogo.png" class="use-click size31"/>
-                                    </div>
+            <div class="row-end-center">
+                <!--            <div class="flex-none row-col-center mr">
+                                <a href="https://socialuni.cn" target="_blank" class="mr-sm md:mr bg-click">
+                                    <div class="row-all-center">官网文档</div>
                                 </a>
-                                <a href="https://github.com/social-uni/socialuni" target="_blank" class="md:mr-sm">
-                                    <div class="row-all-center"><i class="mdi mdi-github font-36 use-click color-black"/></div>
+                                <el-divider direction="vertical" class="mr"/>
+                                <a href="https://socialuni.cn/demo" target="_blank" class="mr-sm md:mr bg-click">
+                                    <div class="row-all-center">demo演示</div>
                                 </a>
-                            </div>
-                        </div>-->
-            <div class="row-col-center">
-                <!--                <input id="fileSelector" type="file" @change="uploadData"/>-->
-<!--                <el-button @click="uploadUserAvatarImg">test</el-button>-->
-                <el-avatar size="default" v-if="!mineUser" class="use-click" @click="toLogin">登录</el-avatar>
-                <div v-else class="row-col-center">
-                    <el-tag class="mr-10" type="warning" effect="dark">{{ mineUser.nickname }}
-                    </el-tag>
-                    <el-avatar shape="square" :src="mineUser.avatar"/>
+                                <el-divider direction="vertical" class="mr"/>
+                                <div class="row-col-center">
+                                    <a href="https://gitee.com/socialuni/socialuni" target="_blank" class="mr-sm md:mr">
+                                        <div class="row-all-center"><img src="@/assets/imgs/giteelogo.png" class="use-click size31"/>
+                                        </div>
+                                    </a>
+                                    <a href="https://github.com/social-uni/socialuni" target="_blank" class="md:mr-sm">
+                                        <div class="row-all-center"><i class="mdi mdi-github font-36 use-click color-black"/></div>
+                                    </a>
+                                </div>
+                            </div>-->
+                <div class="row-col-center">
+                    <!--                <input id="fileSelector" type="file" @change="uploadData"/>-->
+                    <!--                <el-button @click="uploadUserAvatarImg">test</el-button>-->
+                    <el-avatar size="default" v-if="!mineUser" class="use-click" @click="toLogin">登录</el-avatar>
+                    <div v-else class="row-col-center">
+                        <el-tag class="mr-10" type="warning" effect="dark">{{ mineUser.nickname }}
+                        </el-tag>
+                        <el-avatar shape="square" :src="mineUser.avatar"/>
+                    </div>
                 </div>
             </div>
+
+            <el-dropdown v-if="mineUser" trigger="click">
+                <el-icon :size="20" class="ml">
+                    <Tools/>
+                </el-icon>
+                <template #dropdown>
+                    <el-dropdown-menu>
+                        <el-dropdown-item @click.native="editUserInfo">编辑信息</el-dropdown-item>
+                        <el-dropdown-item divided @click.native="loginOut">退出登陆</el-dropdown-item>
+                    </el-dropdown-menu>
+                </template>
+            </el-dropdown>
         </div>
-
-        <el-dropdown v-if="mineUser" trigger="click">
-            <el-icon :size="20" class="ml">
-                <Tools/>
-            </el-icon>
-            <template #dropdown>
-                <el-dropdown-menu>
-                    <el-dropdown-item @click.native="editUserInfo">编辑信息</el-dropdown-item>
-                    <el-dropdown-item divided @click.native="loginOut">退出登陆</el-dropdown-item>
-                </el-dropdown-menu>
-            </template>
-        </el-dropdown>
-
         <s-dialog ref="loginDialog" title="登录" width="400px" no-show-footer>
             <socialuni-login-view @login-success="loginSuccess"></socialuni-login-view>
         </s-dialog>
@@ -56,6 +57,7 @@
 
         <socialuni-user-edit-dialog ref="userEditDialog"></socialuni-user-edit-dialog>
     </div>
+
 </template>
 
 <script lang="ts">

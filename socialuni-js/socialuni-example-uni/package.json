@@ -69,14 +69,12 @@
     "vue-property-decorator": "^10.0.0-rc.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.8",
-    "@babel/parser": "^7.22.7",
-    "@babel/traverse": "^7.22.8",
     "@dcloudio/types": "^3.0.17",
     "@dcloudio/uni-automator": "3.0.0-alpha-3070620230227001",
     "@dcloudio/uni-cli-shared": "3.0.0-alpha-3070620230227001",
     "@dcloudio/uni-stacktracey": "3.0.0-alpha-3070620230227001",
     "@dcloudio/vite-plugin-uni": "3.0.0-alpha-3070620230227001",
+    "@socialuni/vite-plugin-socialuni-platform-auto-import": "../packages/vite-plugin-socialuni-platform-auto-import",
     "@types/node": "^16.11.47",
     "@vue/tsconfig": "^0.1.3",
     "sass": "^1.55.0",
