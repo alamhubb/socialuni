@@ -71,8 +71,19 @@ const Socialuni = {
         // console.log(SocialuniUiUni)
         // app.use(SocialuniUiUni)
         // console.log(SocialuniUiUni)
-        const SocialuniUiH5 = await PlatformModuleLoadUtil.dynamicImport("@socialuni/socialuni-ui")
-        app.use(SocialuniUiH5.default)
+
+        console.log(socialuniSystemModule.isDev)
+        if (socialuniSystemModule.isUniApp){
+            const SocialuniUiH5 = await PlatformModuleLoadUtil.dynamicImport("@socialuni/socialuni-ui")
+            console.log(SocialuniUiH5)
+            app.use(SocialuniUiH5.default)
+        }else {
+            // const SocialuniUiH5 = await import('@socialuni/socialuni-ui-h5/src/index.ts')
+            // console.log(SocialuniUiH5)
+            // app.use(SocialuniUiH5.default)
+        }
+
+
         /*if (socialuniSystemModule.isUniApp) {
             const modules = import.meta.globEager('../../socialuni-ui/socialuni-ui-uni/src/index.ts')
             const SocialuniUiUni = PlatformModuleLoadUtil.getModuleDefault(modules)
