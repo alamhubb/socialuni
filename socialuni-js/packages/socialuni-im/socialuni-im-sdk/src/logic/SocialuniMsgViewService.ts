@@ -1,3 +1,11 @@
+import { onMounted, onUnmounted} from "vue";
+import {Vue} from "vue-class-component";
+import SocialuniViewService from "@socialuni/socialuni/src/interface/SocialuniViewService";
+import ReportContentType from "@socialuni/socialuni-constant/constant/ReportContentType";
+import Constants from "@socialuni/socialuni-constant/constant/Constant";
+import MessageViewParams from "../model/MessageViewParams";
+import {onLoad} from "uniapp-api/src/UniappPageLifecycleHook";
+import {socialuniMsgModule} from "../store/SocialMessageModule";
 import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
 import UserCheckUtil from "@socialuni/socialuni-user-sdk/src/util/UserCheckUtil";
 import MessageVO from "@socialuni/socialuni-im-api/src/model/RO/MessageVO";
@@ -11,16 +19,6 @@ import LoadMoreType from "@socialuni/socialuni-constant/constant/LoadMoreType";
 import DateUtil from "@socialuni/socialuni-util/src/util/DateUtil";
 import MsgUtil from "@socialuni/socialuni-app-sdk/src/util/MsgUtil";
 import UserType from "@socialuni/socialuni-constant/constant/UserType";
-import {nextTick, onBeforeMount, onMounted, onUnmounted} from "vue";
-import SocialuniViewService from "@socialuni/socialuni/src/interface/SocialuniViewService";
-import Constants from "@socialuni/socialuni-constant/constant/Constant";
-import ReportContentType from "@socialuni/socialuni-constant/constant/ReportContentType";
-
-import {Vue} from "vue-class-component";
-import MessageViewParams from "../model/MessageViewParams";
-import {onLoad} from "uniapp-api/src/UniappPageLifecycleHook";
-import {socialuniMsgModule} from "../store/SocialMessageModule";
-import {ComponentInternalInstance} from "@vue/runtime-core";
 
 export default class SocialuniMsgViewService extends SocialuniViewService<any> {
     public $refs!: {
