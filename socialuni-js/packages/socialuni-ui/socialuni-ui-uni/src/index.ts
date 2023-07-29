@@ -1,6 +1,5 @@
 import {App} from "vue";
 import SocialuniScss from '@socialuni/socialuni-scss/src/index'
-import './styles/index.scss'
 
 const SocialuniUiUni = {
     async install(app: App) {

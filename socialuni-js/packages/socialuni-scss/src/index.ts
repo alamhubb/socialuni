@@ -1,6 +1,5 @@
 import "./styles/index.scss";
 
-
 const SocialuniScss = {
     install() {
 
