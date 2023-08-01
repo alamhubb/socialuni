@@ -49,6 +49,7 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
 
         //配置文件里配置的是1的默认的，修改以后，就不再使用了，就判断有没有1，没有的时候创建的时候从配置文件里面拿
 
+        //设置系统的默认值
         CompletableFuture.supplyAsync(() -> {
             this.resetDefaultAppConfigs();
             return null;
