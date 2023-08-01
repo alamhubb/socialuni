@@ -1,6 +1,8 @@
 package com.socialuni.social.sdk.logic.domain.report;
 
+import com.socialuni.social.common.api.constant.MpPlatformType;
 import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
+import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
 import com.socialuni.social.report.sdk.entity.ReportDO;
 import com.socialuni.social.report.sdk.entity.ReportDetailDO;
@@ -15,6 +17,7 @@ import com.socialuni.social.report.sdk.dao.DO.KeywordsTriggerDetailDO;
 import com.socialuni.social.report.sdk.dao.repository.KeywordsTriggerDetailRepository;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
+import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.logic.factory.ReportFactory;
 import com.socialuni.social.sdk.logic.service.KeywordsTriggerService;
@@ -27,6 +30,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -65,19 +69,31 @@ public class SoicialuniSystemPreCheckReportDomainDOUtil {
 
     public static void systemPreCheckReport(SocialuniUnionContentBaseDO socialuniContentBO) {
         CompletableFuture.runAsync(() -> {
+            String platform = RequestUtil.getPlatform();
+            String provider = RequestUtil.getProvider();
             String content = socialuniContentBO.getContent();
-            //不为空才校验内容
-            if (StringUtils.isEmpty(content)) {
-                return;
-            }
-            //网易三方审查
+            List<KeywordsTriggerDetailDO> keywordsTriggers = new ArrayList<>();
+            //如果系统处于审核中，则发布的状态需要设置为预审核，所以不走退出逻辑
+            if (SocialuniAppConfig.getAppMoreConfig().getMp_wx_auditing() && MpPlatformType.isMpWx(platform, provider)) {
+
+            } else if (SocialuniAppConfig.getAppMoreConfig().getMp_qq_auditing() && MpPlatformType.isMpQQ(platform, provider)) {
+
+            } else {
+
+                //不为空才校验内容
+                if (StringUtils.isEmpty(content)) {
+                    return;
+                }
+                //不为审核中，且违规为0才退出
+                //网易三方审查
 //            AntispamDO antispamDO = WangYiUtil.checkWYContentSecPost(modelDO);
-            //校验有没有触发系统的敏感词
-            // 校验是否触发关键词
-            List<KeywordsTriggerDetailDO> keywordsTriggers = keywordsTriggerService.checkContentTriggerKeywords(socialuniContentBO, AppConfigStatic.getKeywordDOs(), false);
-            //没有触发返回
-            if (CollectionUtils.isEmpty(keywordsTriggers)) {
-                return;
+                //校验有没有触发系统的敏感词
+                // 校验是否触发关键词
+                keywordsTriggers = keywordsTriggerService.checkContentTriggerKeywords(socialuniContentBO, AppConfigStatic.getKeywordDOs(), false);
+                //没有触发返回
+                if (CollectionUtils.isEmpty(keywordsTriggers)) {
+                    return;
+                }
             }
             Integer contentId = socialuniContentBO.getUnionId();
 
