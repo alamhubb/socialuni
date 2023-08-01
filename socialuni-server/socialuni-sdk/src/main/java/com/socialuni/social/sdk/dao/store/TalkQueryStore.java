@@ -51,58 +51,68 @@ public class TalkQueryStore {
         //转换为rolist
         return list;
     }
+
     public List<SocialuniTalkDO> queryStickTalks(String homeTabName) {
         List<SocialuniTalkDO> list = null;
 
         // 如果有内容就连表查询。
         SocialuniCircleDO circleEnableNotNull = SocialuniCircleDOUtil.getCircleEnableAllowNull(homeTabName);
-        if(StrUtil.isBlank(homeTabName) || ObjectUtils.isEmpty(circleEnableNotNull)){
+        if (StrUtil.isBlank(homeTabName) || ObjectUtils.isEmpty(circleEnableNotNull)) {
             //如果为空。
             list = this.queryStickTalks();
-        }else{
+        } else {
             // 如果有内容就连表查询。
-            list = talkRepository.findTop2ByStatusAndDevIdAndGlobalTopGreaterThanAndCircleIdOrderByGlobalTopDesc(ContentStatus.enable, DevAccountFacade.getDevIdNotNull(), SocialuniConst.initNum,circleEnableNotNull.getId());
+            list = talkRepository.findTop2ByStatusAndDevIdAndGlobalTopGreaterThanAndCircleIdOrderByGlobalTopDesc(ContentStatus.enable, DevAccountFacade.getDevIdNotNull(), SocialuniConst.initNum, circleEnableNotNull.getId());
         }
         //转换为rolist
         return list;
     }
-    public List<?  extends SocialuniTalkDO>  queryTalksTop10ByUserFollow(List<Integer> talkIds, Integer userId) {
+
+    public List<? extends SocialuniTalkDO> queryTalksTop10ByUserFollow(List<Integer> talkIds, Integer userId) {
         List<Integer> beUserIds = followRedis.queryUserFollowUserIds(userId);
         int page = talkIds.size() / 10;
         List<Integer> ids = talkRedis.queryUserFollowsTalkIds(userId, beUserIds, PageRequest.of(page, 10));
         return this.queryTalksByIds(ids);
     }
 
-    public List<?  extends SocialuniTalkDO>  queryUserTalks(SocialUserTalkQueryQO queryQO, SocialuniUserDo mineUser) {
+    public List<? extends SocialuniTalkDO> queryUserTalks(SocialUserTalkQueryQO queryQO, SocialuniUserDo mineUser) {
         List<Integer> talkIds = queryQO.getTalkIds();
         Integer userId = queryQO.getUserId();
 
         if (ObjectUtils.isEmpty(talkIds)) {
             talkIds = Collections.singletonList(0);
         }
-        List<?  extends SocialuniTalkDO>  talks;
+        List<? extends SocialuniTalkDO> talks;
         if (mineUser != null && mineUser.getUnionId().equals(userId)) {
-            talks = this.queryTalksTop10ByMine(talkIds, userId);
+            talks = this.queryTalksTop10ByMineUserId(talkIds, userId);
         } else {
             talks = this.queryTalksTop10ByUser(talkIds, userId);
         }
         return talks;
     }
 
-    public List<?  extends SocialuniTalkDO>  queryTalksTop10ByUser(List<Integer> talkIds, Integer userId) {
+    public List<? extends SocialuniTalkDO> queryTalksTop10ByUser(List<Integer> talkIds, Integer userId) {
         int page = talkIds.size() / 10;
         List<Integer> ids = talkRedis.queryUserTalkIds(userId, PageRequest.of(page, 10));
         return this.queryTalksByIds(ids);
     }
 
     //查看自己的动态，能查看到预审查状态的
-    public List<?  extends SocialuniTalkDO>  queryTalksTop10ByMine(List<Integer> talkIds, Integer userId) {
+    public List<? extends SocialuniTalkDO> queryTalksTop10ByMineUserId(List<Integer> talkIds, Integer userId) {
         int page = talkIds.size() / 10;
         List<Integer> ids = talkRedis.queryMineTalkIds(userId, PageRequest.of(page, 10));
         return this.queryTalksByIds(ids);
     }
 
-    public List<?  extends SocialuniTalkDO>  queryTalksTop10ByGenderAgeAndLikeAdCodeAndTagIds(SocialHomeTabTalkQueryBO queryBO) {
+    //查看自己的动态，能查看到预审查状态的
+    public List<? extends SocialuniTalkDO> queryTalksTop10ByMine(List<Integer> talkIds, SocialuniUserDo mineUser) {
+        if (mineUser == null) {
+            return new ArrayList<>();
+        }
+        return this.queryTalksTop10ByMineUserId(talkIds, mineUser.getUnionId());
+    }
+
+    public List<? extends SocialuniTalkDO> queryTalksTop10ByGenderAgeAndLikeAdCodeAndTagIds(SocialHomeTabTalkQueryBO queryBO) {
         String talkUserGender = queryBO.getTalkUserGender();
         //sql需要，为all改为null
         if (GenderType.all.equals(talkUserGender)) {
@@ -197,7 +207,7 @@ public class TalkQueryStore {
     }
 
     //根据id列表从缓存中读取talk列表
-    public List<SocialuniTalkDO>  queryTalksByIds(List<Integer> ids) {
+    public List<SocialuniTalkDO> queryTalksByIds(List<Integer> ids) {
         List<SocialuniTalkDO> talkDOS = new ArrayList<>();
         for (Integer id : ids) {
 //            SocialTalkRO talkEO = TalkROFactory.newTalkRO(id);

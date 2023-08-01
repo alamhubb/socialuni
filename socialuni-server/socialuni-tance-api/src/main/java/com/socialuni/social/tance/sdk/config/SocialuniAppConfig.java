@@ -2,12 +2,11 @@ package com.socialuni.social.tance.sdk.config;
 
 import cn.hutool.extra.spring.SpringUtil;
 import com.socialuni.social.tance.sdk.api.ConfigInterface;
+import com.socialuni.social.tance.sdk.constant.AppConfigDOKeyConst;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -97,6 +96,8 @@ public class SocialuniAppConfig {
         socialuniAppMoreConfigBO.setAuthCodePhoneCount(configApi.getInteger("authCodePhoneCount"));
         socialuniAppMoreConfigBO.setAuthCodeValidMinute(configApi.getInteger("authCodeValidMinute"));
         socialuniAppMoreConfigBO.setHighLimitReportCount(configApi.getInteger("highLimitReportCount"));
+        socialuniAppMoreConfigBO.setMp_wx_auditing(configApi.getBoolean(AppConfigDOKeyConst.mp_wx_auditing));
+        socialuniAppMoreConfigBO.setMp_qq_auditing(configApi.getBoolean(AppConfigDOKeyConst.mp_qq_auditing));
         return socialuniAppMoreConfigBO;
     }
 }

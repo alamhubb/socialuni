@@ -1,4 +1,4 @@
-package com.socialuni.social.tance.config;
+package com.socialuni.social.tance.sdk.constant;
 
 
 import com.socialuni.social.common.api.constant.DateTimeType;
@@ -63,6 +63,8 @@ public class AppConfigDOKeyConst {
     public static final String wx_merchant_id = "wx_merchant_id";
     public static final String wx_merchant_key = "wx_merchant_key";
     public static final String devPublishDataApiUrl = "devPublishDataApiUrl";
+    public static final String mp_wx_auditing = "mp_wx_auditing";
+    public static final String mp_qq_auditing = "mp_qq_auditing";
 
     public static final List<String> configKeys = Arrays.asList(
             appGender,
@@ -109,6 +111,9 @@ public class AppConfigDOKeyConst {
             wx_mp_secret,
             wx_merchant_id,
             wx_merchant_key,
+            wx_merchant_key,
+            mp_wx_auditing,
+            mp_qq_auditing,
             devPublishDataApiUrl
     );
 }

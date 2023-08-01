@@ -17,7 +17,7 @@ import javax.transaction.Transactional;
 @Slf4j
 public class SocialuniLoginService {
     @Resource
-    SocialuniLoginDomain socialPhoneLoginDomain;
+    SocialuniLoginDomain socialLoginDomain;
 
     //提供给借用社交联盟实现微信qq渠道登录的开发者， 不需要支持社交联盟登录，社交联盟登录是前台跳转登录返回信息，不走后台
     @Transactional
@@ -25,13 +25,13 @@ public class SocialuniLoginService {
         // 只有清池支持渠道登录
         // 其他的只支持社交联盟登陆
         SocialuniSupportProviderType.checkSupportType(loginQO.getProvider());
-        SocialLoginRO<SocialuniUserRO> socialLoginRO = socialPhoneLoginDomain.providerLogin(loginQO);
+        SocialLoginRO<SocialuniUserRO> socialLoginRO = socialLoginDomain.providerLogin(loginQO);
         return ResultRO.success(socialLoginRO);
     }
 
     @Transactional
     public ResultRO<SocialLoginRO<SocialuniUserRO>> phoneLogin(SocialPhoneNumQO socialPhoneNumQO) {
-        SocialLoginRO<SocialuniUserRO> socialLoginRO = socialPhoneLoginDomain.phoneLogin(socialPhoneNumQO);
+        SocialLoginRO<SocialuniUserRO> socialLoginRO = socialLoginDomain.phoneLogin(socialPhoneNumQO);
 //        CompletableFuture.supplyAsync(() -> socialuniOpenImgUserFeign.userLogin(SocialuniMineUserDetailROFactory.toImUserModel(user)));
         return ResultRO.success(socialLoginRO);
     }

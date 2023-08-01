@@ -1,10 +1,12 @@
 package com.socialuni.social.sdk.logic.domain.talk;
 
 import cn.hutool.core.util.BooleanUtil;
+import com.socialuni.social.common.api.constant.MpPlatformType;
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
+import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniTagDO;
 import com.socialuni.social.community.sdk.repository.TagRepository;
@@ -45,7 +47,7 @@ public class SocialuniHomeTalkQueryDomain {
     private TalkQueryStore talkQueryStore;
 
     public List<SocialuniTalkRO> queryStickTalks() {
-        List<?  extends SocialuniTalkDO>  list = talkQueryStore.queryStickTalks();
+        List<? extends SocialuniTalkDO> list = talkQueryStore.queryStickTalks();
         //转换为rolist
         List<SocialuniTalkRO> socialTalkROs = SocialTalkROFactory.newHomeTalkROs(SocialuniUserUtil.getMineUserAllowNull(), list, null);
         return socialTalkROs;
@@ -62,8 +64,15 @@ public class SocialuniHomeTalkQueryDomain {
 
         }*/
 
+
+        //得到数据库talk
+        List<? extends SocialuniTalkDO> talkDOS;
+
+
         //获取当前用户
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
+        //查询系统的和自己的
+
 
         //校验gender类型,生成BO，包含业务逻辑
         SocialHomeTabTalkQueryBO queryBO = this.checkAndGetHomeTalkQueryBO(queryQO, mineUser);
@@ -72,16 +81,26 @@ public class SocialuniHomeTalkQueryDomain {
         //根据不同的tab区分不同的查询逻辑
         String homeTabName = queryBO.getHomeTabName();
 
-        //得到数据库talk
-        List<? extends SocialuniTalkDO> talkDOS;
 
 //        SocialuniAppConfig.getAppConfig().getFollowTabName()
         if (homeTabName.equals(TalkTabType.follow_name)) {
             //查询关注的用户
             talkDOS = socialFollowUserTalksQueryEntity.queryUserFollowTalks(new ArrayList<>(), mineUser);
         } else {
-            //支持你修改bo
-            talkDOS = talkQueryStore.queryTalksTop10ByGenderAgeAndLikeAdCodeAndTagIds(queryBO);
+
+            String platform = RequestUtil.getPlatform();
+            String provider = RequestUtil.getProvider();
+            //如果系统处于审核中，则只返回自己发布的内容和系统置顶的内容
+            if (SocialuniAppConfig.getAppMoreConfig().getMp_wx_auditing() && MpPlatformType.isMpWx(platform, provider)) {
+                //支持你修改bo
+                talkDOS = talkQueryStore.queryTalksTop10ByMine(new ArrayList<>(), mineUser);
+            } else if (SocialuniAppConfig.getAppMoreConfig().getMp_qq_auditing() && MpPlatformType.isMpQQ(platform, provider)) {
+                //支持你修改bo
+                talkDOS = talkQueryStore.queryTalksTop10ByMine(new ArrayList<>(), mineUser);
+            } else {
+                //支持你修改bo
+                talkDOS = talkQueryStore.queryTalksTop10ByGenderAgeAndLikeAdCodeAndTagIds(queryBO);
+            }
             if (queryBO.getFirstLoad()) {
                 List<SocialuniTalkDO> queryStickTalks = talkQueryStore.queryStickTalks(homeTabName);
                 queryStickTalks.addAll(talkDOS);
@@ -123,7 +142,7 @@ public class SocialuniHomeTalkQueryDomain {
         SocialHomeTabTalkQueryBO socialHomeTabTalkQueryBO = socialuniTalkQueryGenerateQueryBOByTabDomain.generateQueryBOByTab(queryQO, mineUser);
         socialHomeTabTalkQueryBO.setFirstLoad(queryQO.getFirstLoad());
         //不为true，则设置为false
-        if (!BooleanUtil.isTrue(socialHomeTabTalkQueryBO.getFirstLoad())){
+        if (!BooleanUtil.isTrue(socialHomeTabTalkQueryBO.getFirstLoad())) {
             socialHomeTabTalkQueryBO.setFirstLoad(false);
         }
 

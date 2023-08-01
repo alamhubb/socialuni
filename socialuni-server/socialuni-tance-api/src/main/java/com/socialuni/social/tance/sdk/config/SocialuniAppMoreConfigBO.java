@@ -73,6 +73,10 @@ public class SocialuniAppMoreConfigBO {
     private String wx_merchant_id = "";
     private String wx_merchant_key = "";
     private String devPublishDataApiUrl = "";
+    //微信平台审核中
+    private Boolean mp_wx_auditing = false;
+    //qq平台审核中
+    private Boolean mp_qq_auditing = false;
 
     private List<Integer> computedTalkShowAdIndexList() {
         Integer talkAdInterval = this.getTalkShowAdInterval();

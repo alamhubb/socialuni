@@ -9,7 +9,7 @@ import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.utils.UUIDUtil;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniTagDO;
 import com.socialuni.social.community.sdk.repository.TagRepository;
-import com.socialuni.social.sdk.constant.MpType;
+import com.socialuni.social.common.api.constant.MpPlatformType;
 import com.socialuni.social.sdk.logic.manage.SocialTagManage;
 import com.socialuni.social.sdk.model.QO.dev.SyncProdDevAccountQO;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
@@ -104,7 +104,7 @@ public class AdminAccountService {
                     || !wxMpAppName.equals(wxDevAccountProviderModler.getAppName())) {
                 //未绑定创建
                 if (wxDevAccountProviderModler == null) {
-                    wxDevAccountProviderModler = new DevAccountProviderModler(devId, PlatformType.mp, MpType.wx);
+                    wxDevAccountProviderModler = new DevAccountProviderModler(devId, PlatformType.mp, MpPlatformType.wx);
                 }
                 //已绑定更新
                 wxDevAccountProviderModler.setAppId(wxMpAppId);
@@ -142,7 +142,7 @@ public class AdminAccountService {
                     || !qqMpAppName.equals(qqDevAccountProviderModler.getAppName())) {
                 //未绑定创建
                 if (qqDevAccountProviderModler == null) {
-                    qqDevAccountProviderModler = new DevAccountProviderModler(devId, PlatformType.mp, MpType.qq);
+                    qqDevAccountProviderModler = new DevAccountProviderModler(devId, PlatformType.mp, MpPlatformType.qq);
                 }
                 //已绑定更新
                 qqDevAccountProviderModler.setAppId(qqMpAppId);

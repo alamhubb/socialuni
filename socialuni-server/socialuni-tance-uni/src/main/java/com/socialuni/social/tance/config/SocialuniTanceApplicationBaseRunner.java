@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.social.tance.entity.DevAccountEntity;
 import com.socialuni.social.tance.model.DO.AppConfigDO;
 import com.socialuni.social.tance.repository.AppConfigRepository;
+import com.socialuni.social.tance.sdk.constant.AppConfigDOKeyConst;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfigBO;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfigInterface;
 import com.socialuni.social.tance.sdk.config.SocialuniAppMoreConfigBO;
@@ -199,6 +200,10 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
                 configDO1.setValue(socialuniAppMoreConfigBO.getWx_merchant_key());
             } else if (configKey.equals(AppConfigDOKeyConst.devPublishDataApiUrl)) {
                 configDO1.setValue(socialuniAppMoreConfigBO.getDevPublishDataApiUrl());
+            } else if (configKey.equals(AppConfigDOKeyConst.mp_wx_auditing)) {
+                configDO1.setValue(socialuniAppMoreConfigBO.getMp_wx_auditing().toString());
+            } else if (configKey.equals(AppConfigDOKeyConst.mp_qq_auditing)) {
+                configDO1.setValue(socialuniAppMoreConfigBO.getMp_qq_auditing().toString());
             }
             list.add(configDO1);
         }
