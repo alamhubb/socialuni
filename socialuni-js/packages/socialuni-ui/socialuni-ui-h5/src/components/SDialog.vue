@@ -11,6 +11,7 @@
 <template>
   <!-- v-bind="$attrs"  将外部参数绑定到指定内部组件，详见： https://cn.vuejs.org/v2/api/#vm-attrs-->
   <!-- v-on="$listeners"  将外部事件绑定到指定内部组件，详见： https://cn.vuejs.org/v2/api/#vm-listeners-->
+  {{dialogVisible}}
     <el-dialog
             :title="title"
             v-bind="$attrs"
@@ -26,7 +27,7 @@
         </template>
 
         <!--  自定义区域    -->
-        <div :style="{height: dialogBodyHeight}">
+        <div :style="{height: dialogBodyHeight}">123
             <s-scrollbar class="h100p">
                 <div>
                     <slot></slot>
