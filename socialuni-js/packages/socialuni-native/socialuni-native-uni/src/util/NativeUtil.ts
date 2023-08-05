@@ -13,6 +13,7 @@ import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/Socialu
 import UUIDUtil from "@socialuni/socialuni-util/src/util/UUIDUtil";
 import ImgUtil from "@socialuni/socialuni-util/src/util/ImgUtil";
 import ToastUtil from "./ToastUtil";
+import DomFile from "@socialuni/socialuni-api-base/src/model/DomFile";
 
 
 export default class NativeUtil {
@@ -283,6 +284,7 @@ export default class NativeUtil {
                 fileName = tempFilePaths[i]
             }
             imgFile.src = UUIDUtil.getUUID() + ImgUtil.getFileSuffixName(fileName)
+            console.log(imgFile.src)
             imgFile.fileName = imgFile.src
         }
         return imgFiles
