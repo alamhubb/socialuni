@@ -38,11 +38,16 @@ async function installSocialuniPluginIns(app: App) {
     if (socialuniApp && socialuniApp.default) {
         app.use(socialuniApp.default)
     }
-    const appViewModules = import.meta.globEager('../../**/socialuni-app-view-*/src/index.ts')
+
+    const SocialuniApp = await PlatformModuleLoadUtil.dynamicImport("@socialuni/socialuni-app-view")
+    console.log(SocialuniApp)
+    app.use(SocialuniApp.default)
+
+    /*const appViewModules = import.meta.globEager('../../!**!/socialuni-app-view-*!/src/index.ts')
     const socialuniAppView = PlatformModuleLoadUtil.getModuleDefault(appViewModules)
     if (socialuniAppView) {
         app.use(socialuniAppView)
-    }
+    }*/
     const userModules = import.meta.globEager('../../**/socialuni-user-sdk/src/index.ts')
     const socialuniUser = PlatformModuleLoadUtil.getFirstModule(userModules)
     if (socialuniUser && socialuniUser.default) {
