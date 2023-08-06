@@ -11,8 +11,6 @@
     "@dcloudio/uni-app": "3.0.0-alpha-3070620230227001",
     "@dcloudio/uni-ui": "^1.4.23",
     "@socialuni/socialuni": "^0.1.2",
-    "@socialuni/socialuni-im-sdk": "^0.1.2",
-    "@socialuni/socialuni-im-uni-sdk": "^0.1.2",
     "@socialuni/socialuni-native-util": "^0.1.2",
     "vue": "3.2.41"
   },
