@@ -293,19 +293,16 @@ export default class NativeUtil {
 
     public static getImageInfo(filePath: string) {
         return new Promise<GetImageInfoSuccessData>((resolve, reject) => {
-            const img = new Image()
-            img.onload = function () {
-                resolve({
-                    width: img.naturalWidth,
-                    height: img.naturalHeight
-                })
-            }
-            img.onerror = function (e) {
-                reject({
-                    errMsg: 'getImageInfo:fail'
-                })
-            }
-            img.src = filePath
+            // 获取文件名
+            uni.getImageInfo({
+                src: filePath,
+                success: (image) => {
+                    resolve(image)
+                },
+                fail: err => {
+                    reject(err)
+                }
+            })
         })
     }
 
