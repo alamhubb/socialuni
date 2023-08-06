@@ -1,14 +1,17 @@
 import PlatformModuleLoadUtil from "./PlatformModuleLoadUtil";
 import {SocialuniToastUtilInterface} from "../interface/SocialuniToastUtilInterface";
 
-let nativeUtil
-
-const modules = import.meta.globEager('../../../*/src/util/ToastUtil.ts')
-
-nativeUtil = PlatformModuleLoadUtil.getModuleDefault(modules)
-
 export default class SocialuniToastUtil {
-  static get nativeUtil(): SocialuniToastUtilInterface {
-    return nativeUtil
-  }
+    private static nativeUtilSelf = null
+
+    static async init() {
+        const modules = await PlatformModuleLoadUtil.dynamicImport('@socialuni/socialuni-native', '/src/util/ToastUtil.ts')
+        this.nativeUtilSelf = modules.default
+    }
+
+    static get nativeUtil(): SocialuniToastUtilInterface {
+        return this.nativeUtilSelf
+    }
 }
+
+SocialuniToastUtil.init()

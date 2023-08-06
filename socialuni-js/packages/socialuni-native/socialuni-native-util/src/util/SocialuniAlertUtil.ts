@@ -1,14 +1,17 @@
 import {SocialuniAlertUtilInterface} from "../interface/SocialuniAlertUtilInterface";
 import PlatformModuleLoadUtil from "./PlatformModuleLoadUtil";
 
-let nativeUtil: SocialuniAlertUtilInterface
-
-const modules = import.meta.globEager('../../../*/src/util/AlertUtil.ts')
-
-nativeUtil = PlatformModuleLoadUtil.getModuleDefault(modules)
-
 export default class SocialuniAlertUtil {
+    private static nativeUtilSelf = null
+
+    static async init() {
+        const modules = await PlatformModuleLoadUtil.dynamicImport('@socialuni/socialuni-native', '/src/util/AlertUtil.ts')
+        this.nativeUtilSelf = modules.default
+    }
+
     static get nativeUtil(): SocialuniAlertUtilInterface {
-        return nativeUtil
+        return this.nativeUtilSelf
     }
 }
+
+SocialuniAlertUtil.init()
