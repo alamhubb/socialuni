@@ -7,12 +7,115 @@
   },
   "pages": [
     {
+      "path": "pages/home/home",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
       "path": "pages/user/mine",
       "style": {
         "navigationStyle": "custom"
       }
     }
   ],
+  "subPackages": [
+    {
+      "root": "pagesLazy/community",
+      "pages": [
+        {
+          "path": "talk/talkAdd",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "talk/talkDetail",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "notify/notify",
+          "style": {
+            "navigationBarTitleText": "通知列表",
+            "enablePullDownRefresh": true
+          }
+        }
+      ]
+    },
+    {
+      "root": "pagesLazy/user",
+      "pages": [
+        {
+          "path": "userDetail",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "editMineInfo",
+          "style": {
+            "navigationBarTitleText": "编辑资料"
+          }
+        },
+        {
+          "path": "userImgList",
+          "style": {
+            "navigationBarTitleText": "相册列表"
+          }
+        },
+        {
+          "path": "follow",
+          "style": {
+            "navigationBarTitleText": "关注列表"
+          }
+        },
+        {
+          "path": "coin",
+          "style": {
+            "navigationBarTitleText": "贝壳充值",
+            "enablePullDownRefresh": true
+          }
+        },
+        {
+          "path": "coinRecord",
+          "style": {
+            "navigationBarTitleText": "贝壳记录"
+          }
+        },
+        {
+          "path": "phone",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        }
+      ]
+    }
+  ],
+  "tabBar": {
+    "color": "#9E9E9E",
+    "selectedColor": "#2196F3",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "fontSize": "14px",
+    "iconWidth": "30px",
+    "height": "52px",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "iconPath": "static/img/deck-gray-36dp.png",
+        "selectedIconPath": "static/img/deck-blue-36dp.png",
+        "text": "社区"
+      },
+      {
+        "pagePath": "pages/user/mine",
+        "iconPath": "static/img/account_box-gray-36dp.png",
+        "selectedIconPath": "static/img/account_box-blue-36dp.png",
+        "text": "我的"
+      }
+    ]
+  },
   "globalStyle": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "社区",
