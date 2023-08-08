@@ -18,13 +18,11 @@ export default class PlatformModuleLoadUtil {
         }
     }
 
-    static async dynamicImport(prefix: string, suffix = '/src/index.ts'):Promise<ImportModule<any>> {
+    static async dynamicImport(prefix: string, suffix = '/src/index.ts'): Promise<ImportModule<any>> {
 
     }
 
     static getFirstModule(modules) {
-        for (const path in modules) {
-            return modules[path]
-        }
+        return modules[0]
     }
 }

@@ -21,9 +21,10 @@ export default class SocialuniUserDetailViewService extends SocialuniViewService
         this.instance = instance
         console.log('chufale inser')
         SocialuniAppUtil.UniUtil.showShareMenu()
-
+        console.log(44444)
         onLoad((params) => {
             console.log('chufale onload')
+            console.log(55555)
             console.log(params.userId)
             this.queryUserInfo(params.userId)
         })
