@@ -9,7 +9,7 @@ import {Vue} from "vue-class-component";
 
 export default class SocialuniCommunityUserDetailViewService extends SocialuniViewService<any> {
 
-    initService(instance: Vue) {
+    initService(instance: ComponentInternalInstance) {
         this.instance = instance
 
         watch<CenterUserDetailRO>(() => socialuniUserDetailViewService.user, (value, oldValue) => {

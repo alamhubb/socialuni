@@ -1,10 +1,8 @@
-import { onMounted, onUnmounted} from "vue";
-import {Vue} from "vue-class-component";
+import {ComponentInternalInstance, getCurrentInstance, onMounted, onUnmounted} from "vue";
 import SocialuniViewService from "@socialuni/socialuni/src/interface/SocialuniViewService";
 import ReportContentType from "@socialuni/socialuni-constant/constant/ReportContentType";
 import Constants from "@socialuni/socialuni-constant/constant/Constant";
 import MessageViewParams from "../model/MessageViewParams";
-import {onLoad} from "uniapp-api/src/UniappPageLifecycleHook";
 import {socialuniMsgModule} from "../store/SocialMessageModule";
 import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
 import UserCheckUtil from "@socialuni/socialuni-user-sdk/src/util/UserCheckUtil";
@@ -64,8 +62,8 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
         return socialuniUserModule.mineUser
     }
 
-    initService(instance: Vue) {
-        super.initService(instance)
+    initService(instance: ComponentInternalInstance, params: MessageViewParams) {
+        super.initService(instance, params)
         onMounted(() => {
             socialuniChatModule.scrollTop = 0
         })
@@ -73,9 +71,8 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
             socialuniChatModule.scrollTop = 0
         })
         //TODO 同一会话时，这里要改成onRead，不然需要刷新页面才会触发已读的标志。
-        onLoad((params: MessageViewParams) => {
-            socialuniMsgModule.init(params)
-        })
+        console.log('chufale onload')
+        socialuniMsgModule.init(params)
     }
 
     openMoreMenu() {
@@ -98,6 +95,9 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
 
     async sendMsgClick() {
         console.log(123456)
+        console.log(socialuniChatModule.chats)
+        console.log(socialuniChatModule.chatIndex)
+        console.log(socialuniChatModule.chatId)
         if (!socialuniChatModule.chat) {
             SocialuniAppUtil.ToastUtil.throwError('缺少会话')
         }

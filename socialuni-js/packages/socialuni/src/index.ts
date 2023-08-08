@@ -5,7 +5,6 @@ import {ImportModule} from "./interface/ImportModule"
 import {SocialuniOption} from "./interface/socialuniOption"
 import SocialuniViewService from "./interface/SocialuniViewService";
 import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
-import UniappAPI from "uniapp-api/src";
 import PlatformModuleLoadUtil from "@socialuni/socialuni-native-util/src/util/PlatformModuleLoadUtil";
 import JsonUtil from "@socialuni/socialuni-util/src/util/JsonUtil";
 import ObjectUtil from "@socialuni/socialuni-util/src/util/ObjectUtil";
@@ -71,8 +70,6 @@ async function installSocialuniPluginIns(app: App) {
 
 const Socialuni = {
     async install(app: App, socialuniOption?: SocialuniOption) {
-        app.use(UniappAPI)
-
         // const SocialuniUiUni = await import("../../socialuni-ui/socialuni-ui")
         // console.log(SocialuniUiUni)
         // app.use(SocialuniUiUni)

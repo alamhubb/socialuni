@@ -3,8 +3,8 @@ import {socialuniUserModule} from "../store/SocialuniUserModule";
 import {socialuniConfigModule} from "@socialuni/socialuni-app-sdk/src/store/SocialuniConfigModule";
 import UserPageUtil from "./UserPageUtil";
 import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
-import CommonEventUtil from "uniapp-api/src/util/CommonEventUtil";
 import SocialuniUserEventConst from "../constant/SocialuniUserEventConst";
+import CommonEventUtil from "@socialuni/socialuni-native-uni/src/util/CommonetEventUtil";
 
 export default class UserMsgUtil {
     static unBindPhoneNum() {

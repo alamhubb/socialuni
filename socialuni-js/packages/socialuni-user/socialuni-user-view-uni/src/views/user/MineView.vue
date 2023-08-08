@@ -225,7 +225,8 @@ import CosService from "@socialuni/socialuni-app-sdk/src/util/CosService";
 import DomFile from "@socialuni/socialuni-app-sdk/src/model/DomFile";
 import TencentCosAPI from "@socialuni/socialuni-app-api/src/api/TencentCosAPI";
 import SkipUrlConst from "@socialuni/socialuni-app-sdk/src/constant/SkipUrlConst";
-import {onLoad} from "uniapp-api/src/UniappPageLifecycleHook";
+import {getCurrentInstance} from "vue";
+import {onLoad} from "@dcloudio/uni-app";
 
 @Options({
     components: {

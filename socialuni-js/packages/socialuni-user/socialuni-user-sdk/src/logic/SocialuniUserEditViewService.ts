@@ -37,7 +37,7 @@ class SocialuniUserEditViewService extends SocialuniViewService<SocialuniUserEdi
     appGenderType = GenderType.all
     GenderTypeAll = GenderType.all
 
-    initService(instance: Vue) {
+    initService(instance: ComponentInternalInstance) {
         super.initService(instance);
         this.initData()
         watch(() => this.mineUser, () => {

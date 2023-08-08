@@ -100,6 +100,7 @@ import {getCurrentInstance, provide, reactive} from "vue";
 import SocialuniUserProvideKeys from "@socialuni/socialuni-user-sdk/src/constant/SocialuniUserProvideKeys";
 import {Inject, Options, Vue} from 'vue-property-decorator'
 import {socialuniUserDetailViewService} from "@socialuni/socialuni-user-sdk/src/logic/SocialuniUserDetailViewService";
+import {onLoad} from "@dcloudio/uni-app";
 
 @Options({
   components: {
@@ -116,7 +117,9 @@ export default class SocialuniUserDetailView extends Vue {
   created() {
     provide(SocialuniUserProvideKeys.detailUser, socialuniUserDetailViewService)
 
-    this.socialuniUserDetailViewService.initService(this)
+    onLoad((params) => {
+      this.socialuniUserDetailViewService.initService(getCurrentInstance(), params)
+    })
   }
 }
 </script>

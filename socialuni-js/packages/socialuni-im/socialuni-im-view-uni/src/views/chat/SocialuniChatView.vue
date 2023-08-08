@@ -116,6 +116,7 @@ import QInput from "@socialuni/socialuni-ui-uni/src/components/QInput/QInput.vue
 import {
   socialuniChatViewService
 } from "@socialuni/socialuni-im-sdk/src/logic/SocialuniChatViewService";
+import {getCurrentInstance} from "vue";
 
 @Options({
   components: {QSearch, QInput, QIcon, QNavbar}
@@ -125,7 +126,7 @@ export default class SocialuniChatView extends Vue {
   viewService = socialuniChatViewService
 
   created() {
-    this.viewService.initService(this)
+    this.viewService.initService(getCurrentInstance())
   }
 }
 </script>

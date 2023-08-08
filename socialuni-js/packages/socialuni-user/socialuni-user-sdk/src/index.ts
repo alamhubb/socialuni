@@ -18,9 +18,9 @@ import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/Socialu
 import {socialuniPluginsModule} from "@socialuni/socialuni/src/store/SocialuniPluginsModule";
 import PlatformModuleLoadUtil from "@socialuni/socialuni-native-util/src/util/PlatformModuleLoadUtil";
 import SocialuniViewService from "@socialuni/socialuni/src/interface/SocialuniViewService";
-import CommonEventUtil from "uniapp-api/src/util/CommonEventUtil";
 import SocialuniUserEventConst from "./constant/SocialuniUserEventConst";
 import UserPageUtil from "./util/UserPageUtil";
+import CommonEventUtil from "@socialuni/socialuni-native-uni/src/util/CommonetEventUtil";
 
 
 class SocialuniUserPlugin implements SocialuniPlugin {

@@ -41,7 +41,7 @@ export default class SocialuniChatViewService extends SocialuniViewService<Socia
     searchContent = null
 
 
-    initService(instance: Vue) {
+    initService(instance: ComponentInternalInstance) {
         super.initService(instance)
         watch(() => socialuniChatModule.scrollTop, () => {
             if (this.$refs.messageBox) {

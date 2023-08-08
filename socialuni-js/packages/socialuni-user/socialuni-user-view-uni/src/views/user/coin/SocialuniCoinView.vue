@@ -54,9 +54,10 @@ import SocialuniProviderType from "@socialuni/socialuni-constant/constant/Social
 import PayType from "@socialuni/socialuni-constant/constant/PayType";
 import QTabs from "@socialuni/socialuni-ui-uni/src/components/QTabs/QTabs.vue";
 import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
-import {onLoad} from "uniapp-api/src/UniappPageLifecycleHook";
 import PlatformUtils from "@socialuni/socialuni-user-sdk/src/util/PlatformUtils";
 import UserPageUtil from "@socialuni/socialuni-user-sdk/src/util/UserPageUtil";
+import {getCurrentInstance} from "vue";
+import {onLoad} from "@dcloudio/uni-app";
 
 @Options({
   components: {QTabs, QIcon, QButton}
@@ -78,11 +79,9 @@ export default class SocialuniCoinView extends Vue {
   shellOrders: ShellOrderVO[] = []
 
   created() {
-    onLoad(() => {
-      /*UserAPI.queryShellAPI().then(res => {
+      /*SocialuniUserAPI.queryShellAPI().then(res => {
         this.shellOrders = res.data
       })*/
-    })
   }
 
   async userPay() {

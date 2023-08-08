@@ -1,9 +1,7 @@
 import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
 import {socialuniConfigModule} from "@socialuni/socialuni-app-sdk/src/store/SocialuniConfigModule";
 import UserPageUtil from "./UserPageUtil";
-import SocialuniUserEventConst from "../constant/SocialuniUserEventConst";
 import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
-import CommonEventUtil from "uniapp-api/src/util/CommonEventUtil";
 import UserMsgUtil from "./UserMsgUtil";
 
 export default class UserCheckUtil {

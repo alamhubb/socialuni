@@ -168,7 +168,6 @@ import UserMsgUtil from "@socialuni/socialuni-user-sdk/src/util/UserMsgUtil";
 import UserPageUtil from "@socialuni/socialuni-user-sdk/src/util/UserPageUtil";
 import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
 import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
-import {onLoad} from "uniapp-api/src/UniappPageLifecycleHook";
 
 // todo 后台可控制是否显示轮播图
 @Options({

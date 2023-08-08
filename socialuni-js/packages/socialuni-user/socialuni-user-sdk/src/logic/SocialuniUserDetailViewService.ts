@@ -5,27 +5,23 @@ import {socialuniConfigModule} from "@socialuni/socialuni-app-sdk/src/store/Soci
 import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
 import TalkVO from "@socialuni/socialuni-api-base/src/model/talk/TalkVO";
 import {socialuniUserModule} from "../store/SocialuniUserModule";
-import {watch, reactive, provide} from "vue";
-import {onLoad} from "uniapp-api/src/UniappPageLifecycleHook";
+import {watch, reactive, provide, ComponentInternalInstance, getCurrentInstance} from "vue";
 import SocialuniUserExpandService from "./SocialuniUserExpandService";
 import SocialuniViewService from "@socialuni/socialuni/src/interface/SocialuniViewService";
-import {Vue} from "vue-class-component";
 
 export default class SocialuniUserDetailViewService extends SocialuniViewService<any> {
 
     user: CenterUserDetailRO = null
 
-    async initService(instance: Vue) {
+    async initService(instance: ComponentInternalInstance, params: any) {
         this.instance = instance
         console.log('chufale inser')
         SocialuniAppUtil.UniUtil.showShareMenu()
         console.log(44444)
-        onLoad((params) => {
-            console.log('chufale onload')
-            console.log(55555)
-            console.log(params.userId)
-            this.queryUserInfo(params.userId)
-        })
+        console.log('chufale onload')
+        console.log(55555)
+        console.log(params.userId)
+        this.queryUserInfo(params.userId)
 
         /*onShow(() => {
             this.showMsgInput = true

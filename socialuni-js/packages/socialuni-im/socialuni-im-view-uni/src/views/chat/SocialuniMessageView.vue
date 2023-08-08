@@ -115,9 +115,9 @@
         <button v-if="viewService.msgContent" class="cu-btn bg-green shadow color-white"
                 @click.prevent="viewService.sendMsgClick()">发送
         </button>
-<!--        <view v-else class="ml-sm">
-          <q-icon icon="plus-circle" size="28" @click="viewService.openPhoto()"></q-icon>
-        </view>-->
+        <!--        <view v-else class="ml-sm">
+                  <q-icon icon="plus-circle" size="28" @click="viewService.openPhoto()"></q-icon>
+                </view>-->
       </view>
       <!--      <view v-show="showEmoji" class="w100vw bg-blue" :style="{height:keyboardHeight+'px'}"></view>-->
     </view>
@@ -175,13 +175,15 @@ import {
 } from "@socialuni/socialuni-im-sdk/src/logic/SocialuniMsgViewService";
 import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 import QNavbar from "@socialuni/socialuni-ui-uni/src/components/QNavbar/QNavbar.vue";
+import SocialuniReportDialog from "@socialuni/socialuni-user-view-uni/src/components/SocialuniReportDialog.vue"
+import MessageViewParams from "./MessageViewParams";
+import {socialuniMsgModule} from "@socialuni/socialuni-im-sdk/src/store/SocialMessageModule";
 import {getCurrentInstance} from "vue";
-import {socialuniPluginsModule} from "@socialuni/socialuni/src/store/SocialuniPluginsModule";
-import SocialuniViewService from "@socialuni/socialuni/src/interface/SocialuniViewService";
+import {onLoad} from "@dcloudio/uni-app";
 
 @Options(
     {
-      components: {QIcon, QNavbar}
+      components: {QIcon, QNavbar, SocialuniReportDialog}
     }
 )
 export default class SocialuniMessageView extends Vue {
@@ -193,8 +195,11 @@ export default class SocialuniMessageView extends Vue {
 
   viewService = socialuniMsgViewService
 
-  created(){
-    this.viewService.initService(this)
+  created() {
+    //TODO 同一会话时，这里要改成onRead，不然需要刷新页面才会触发已读的标志。
+    onLoad((params: MessageViewParams) => {
+      this.viewService.initService(getCurrentInstance(),params)
+    })
   }
 }
 </script>
