@@ -62,6 +62,7 @@ async function installSocialuniPluginIns(app: App) {
     //查询是否包含Im模块，如果存在则加载
     const imModules = import.meta.globEager('../../**/socialuni-im-sdk/src/index.ts')
     const socialuniIm = PlatformModuleLoadUtil.getFirstModule(imModules)
+    console.log(socialuniIm)
     if (socialuniIm && socialuniIm.default) {
         app.use(socialuniIm.default)
     }

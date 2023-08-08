@@ -23,6 +23,8 @@ export default class PlatformModuleLoadUtil {
     }
 
     static getFirstModule(modules) {
-        return modules[0]
+        for (const path in modules) {
+            return modules[path]
+        }
     }
 }
