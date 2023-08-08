@@ -6,8 +6,6 @@ import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/Socialu
 import TalkVO from "@socialuni/socialuni-api-base/src/model/talk/TalkVO";
 import {socialuniUserModule} from "../store/SocialuniUserModule";
 import {watch, reactive, provide} from "vue";
-import {SocialuniViewServiceInterface} from "@socialuni/socialuni/src/interface/SocialuniViewServiceInterface";
-import {ComponentInternalInstance} from "@vue/runtime-core";
 import {onLoad} from "uniapp-api/src/UniappPageLifecycleHook";
 import SocialuniUserExpandService from "./SocialuniUserExpandService";
 import SocialuniViewService from "@socialuni/socialuni/src/interface/SocialuniViewService";

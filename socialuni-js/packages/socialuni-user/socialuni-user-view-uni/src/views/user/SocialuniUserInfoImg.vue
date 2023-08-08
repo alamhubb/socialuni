@@ -89,7 +89,6 @@ export default class SocialuniUserInfoImg extends Vue {
     }
 
     async uploadUserImg() {
-        console.log('chufale')
         try {
             const cosAuthRO = await CosService.getCosAuthRO()
             const imgFiles: DomFile[] = await SocialuniAppUtil.UniUtil.chooseImage(1)

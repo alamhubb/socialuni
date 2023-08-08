@@ -84,7 +84,6 @@
     <ad class="bg-white mt-10 w100vw" adpid="1890536227"></ad>
     <!--  #endif -->
 
-
     <msg-input></msg-input>
   </socialuni-user-detail-view>
 </template>
@@ -101,8 +100,14 @@ import QNavbar from "@socialuni/socialuni-ui-uni/src/components/QNavbar/QNavbar.
 import {socialuniUserDetailViewService} from "@socialuni/socialuni-user-sdk/src/logic/SocialuniUserDetailViewService";
 import SocialuniUserDetailView from "@socialuni/socialuni-user-view-uni/src/views/user/SocialuniUserDetailView.vue";
 import SocialuniFollowTag from "../../components/SocialuniFollow/SocialuniFollowTag.vue";
+import TalkItem from "../../components/talkItem/TalkItem.vue";
+import TalkOperate from "../talk/talkOperate.vue";
+import MsgInput from "../../components/MsgInput.vue";
 @Options({
   components: {
+    MsgInput,
+    TalkOperate,
+    TalkItem,
     QIcon,
     QButton,
     QNavbar,
