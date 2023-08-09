@@ -1,3 +1,7 @@
+## 项目地址
+
+https://gitee.com/socialuni/socialuni
+
 ## 快速启动
 ### 在当前目录 socialuni-js 下执行npm i
 ### 再在需要启动的项目下 执行 npm i
