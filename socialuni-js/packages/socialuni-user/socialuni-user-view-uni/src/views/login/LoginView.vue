@@ -180,7 +180,7 @@ export default class LoginView extends Vue {
     openTypeBtnEnable = true
 
     get allButtonDisabled() {
-        return !this.viewService.contractChecked || !this.openTypeBtnEnable
+        return (!this.user && !this.viewService.contractChecked) || !this.openTypeBtnEnable
     }
 
     showPhoneView = false
