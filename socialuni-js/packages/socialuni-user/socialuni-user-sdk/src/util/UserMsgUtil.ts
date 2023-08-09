@@ -4,7 +4,7 @@ import {socialuniConfigModule} from "@socialuni/socialuni-app-sdk/src/store/Soci
 import UserPageUtil from "./UserPageUtil";
 import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
 import SocialuniUserEventConst from "../constant/SocialuniUserEventConst";
-import CommonEventUtil from "@socialuni/socialuni-native-uni/src/util/CommonetEventUtil";
+import CommonEventUtil from "@socialuni/socialuni-native-util/src/util/CommonEventUtil";
 
 export default class UserMsgUtil {
     static unBindPhoneNum() {

@@ -16,11 +16,9 @@ import {App, defineComponent} from "vue";
 import {SocialuniOption} from "@socialuni/socialuni/src/interface/socialuniOption";
 import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
 import {socialuniPluginsModule} from "@socialuni/socialuni/src/store/SocialuniPluginsModule";
-import PlatformModuleLoadUtil from "@socialuni/socialuni-native-util/src/util/PlatformModuleLoadUtil";
-import SocialuniViewService from "@socialuni/socialuni/src/interface/SocialuniViewService";
 import SocialuniUserEventConst from "./constant/SocialuniUserEventConst";
 import UserPageUtil from "./util/UserPageUtil";
-import CommonEventUtil from "@socialuni/socialuni-native-uni/src/util/CommonetEventUtil";
+import CommonEventUtil from "@socialuni/socialuni-native-util/src/util/CommonEventUtil";
 
 
 class SocialuniUserPlugin implements SocialuniPlugin {
