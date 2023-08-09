@@ -127,13 +127,4 @@ export default class PlatformUtils {
             throw '不存在的支付渠道'
         }
     }
-
-    static checkUpdate() {
-        // #ifdef MP
-        MPUtil.checkUpdate()
-        // #endif
-        // #ifdef APP-PLUS
-        APPUtil.checkUpdate()
-        // #endif
-    }
 }
