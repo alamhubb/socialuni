@@ -26,7 +26,7 @@
     </template>
 
     <!--  自定义区域    -->
-    <div :style="{height: dialogBodyHeight}">123
+    <div :style="{height: dialogBodyHeight}">
       <s-scrollbar class="h100p">
         <div>
           <slot></slot>

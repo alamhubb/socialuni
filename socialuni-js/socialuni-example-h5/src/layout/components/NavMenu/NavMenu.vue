@@ -1,5 +1,4 @@
 <template>
-  123
   <div v-if="menus.length">
     <div v-for="menu in menus" :id="menu.meta.title">
       {{ menu.meta.title }}
