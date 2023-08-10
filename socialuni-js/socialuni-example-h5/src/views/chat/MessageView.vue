@@ -22,5 +22,9 @@ import SocialuniMsgViewH5 from "@socialuni/socialuni-im-view-h5/src/views/Social
 })
 export default class MessageView extends Vue {
 
+  created(){
+    console.log(123)
+  }
+
 }
 </script>
