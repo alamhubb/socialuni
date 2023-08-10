@@ -14,6 +14,8 @@ import UUIDUtil from "@socialuni/socialuni-util/src/util/UUIDUtil";
 import ImgUtil from "@socialuni/socialuni-util/src/util/ImgUtil";
 import ToastUtil from "./ToastUtil";
 import DomFile from "@socialuni/socialuni-api-base/src/model/DomFile";
+import MPUtil from "@socialuni/socialuni-app-sdk/src/util/MPUtil";
+import APPUtil from "@socialuni/socialuni-app-sdk/src/util/APPUtil";
 
 
 export default class NativeUtil {

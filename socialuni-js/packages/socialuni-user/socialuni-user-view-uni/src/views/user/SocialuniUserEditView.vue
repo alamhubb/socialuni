@@ -106,6 +106,7 @@ import SocialGenderTag from "../../components/SocialGenderTag/SocialGenderTag.vu
 import {Options, Vue} from 'vue-property-decorator'
 import QButton from "@socialuni/socialuni-ui-uni/src/components/QButton/QButton.vue";
 import socialuniUserEditViewService from "@socialuni/socialuni-user-sdk/src/logic/SocialuniUserEditViewService";
+import {getCurrentInstance} from "vue";
 
 
 @Options({
