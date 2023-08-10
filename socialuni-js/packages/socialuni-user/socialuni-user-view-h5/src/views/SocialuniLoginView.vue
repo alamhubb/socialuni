@@ -89,13 +89,14 @@
 <script lang="ts">
 import {Emit, Options, Vue} from 'vue-property-decorator'
 import SocialuniLoginViewService from "@socialuni/socialuni-user-sdk/src/logic/SocialuniLoginViewService";
+import {getCurrentInstance} from "vue";
 
 @Options({})
 export default class SocialuniLoginView extends Vue {
     viewService: SocialuniLoginViewService = new SocialuniLoginViewService()
 
     created() {
-        this.viewService.initService(this as any)
+        this.viewService.initService(getCurrentInstance())
     }
 }
 </script>

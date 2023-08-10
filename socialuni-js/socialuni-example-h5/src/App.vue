@@ -1,6 +1,5 @@
 <template>
     <div class="h100p overflow-hidden flex-col bg-default">
-      <el-button>sdafd</el-button>
         <nav-bar/>
         <div class="flex-1 overflow-hidden pd-sm">
             <RouterView/>

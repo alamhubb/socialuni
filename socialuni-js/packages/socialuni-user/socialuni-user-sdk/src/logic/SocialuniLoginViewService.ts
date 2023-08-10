@@ -57,7 +57,7 @@ export default class SocialuniLoginViewService extends SocialuniViewService<Soci
         }
         this.bindBtnDisabled = true
         SocialuniLoginService.phoneLogin(this.loginUser.phoneNum, this.loginUser.authCode).then(() => {
-            this.instance.$emit('loginSuccess')
+            this.instance.emit('loginSuccess')
         }).finally(() => {
             this.bindBtnDisabled = false
         })
@@ -65,6 +65,7 @@ export default class SocialuniLoginViewService extends SocialuniViewService<Soci
 
 
     sendCodeClick() {
+        console.log(123)
         if (!this.loginUser.phoneNum) {
             return SocialuniAppUtil.ToastUtil.error('请输入正确的手机号')
         }

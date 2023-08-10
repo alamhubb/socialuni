@@ -67,7 +67,6 @@
       </template>
     </el-dialog>
 
-    <el-button>haha</el-button>
     <s-dialog ref="loginDialog" title="登录" width="400px" no-show-footer>
       <socialuni-login-view @login-success="loginSuccess"></socialuni-login-view>
     </s-dialog>
@@ -82,7 +81,6 @@
 import {Options, Vue} from 'vue-property-decorator'
 import SDialog from "@socialuni/socialuni-ui-h5/src/components/SDialog.vue";
 import SocialuniUserEditDialog from "@/views/user/SocialuniUserEditDialog.vue";
-import CommonEventUtil from "../../../packages/uniapp-api/src/util/CommonEventUtil";
 import SocialuniUserEventConst from "@socialuni/socialuni-user-sdk/src/constant/SocialuniUserEventConst";
 import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
 import CosService from "@socialuni/socialuni-app-sdk/src/util/CosService";
@@ -96,6 +94,7 @@ import ImgUtil from "@socialuni/socialuni-util/src/util/ImgUtil";
 import WebsocketUtil from "@socialuni/socialuni-api-base/src/websocket/WebsocketUtil";
 import {ArrowDown, Tools} from "@element-plus/icons-vue";
 import SocialuniLoginView from "@socialuni/socialuni-user-view-h5/src/views/SocialuniLoginView.vue";
+import CommonEventUtil from "@socialuni/socialuni-native-uni/src/util/CommonetEventUtil";
 
 @Options({
   components: {SocialuniUserEditDialog, Tools, SocialuniLoginView, SDialog, ArrowDown}
