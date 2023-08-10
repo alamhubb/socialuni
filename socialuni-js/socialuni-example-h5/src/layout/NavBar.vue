@@ -94,7 +94,7 @@ import ImgUtil from "@socialuni/socialuni-util/src/util/ImgUtil";
 import WebsocketUtil from "@socialuni/socialuni-api-base/src/websocket/WebsocketUtil";
 import {ArrowDown, Tools} from "@element-plus/icons-vue";
 import SocialuniLoginView from "@socialuni/socialuni-user-view-h5/src/views/SocialuniLoginView.vue";
-import CommonEventUtil from "@socialuni/socialuni-native-uni/src/util/CommonetEventUtil";
+import CommonEventUtil from "@socialuni/socialuni-native-util/src/util/CommonEventUtil";
 
 @Options({
   components: {SocialuniUserEditDialog, Tools, SocialuniLoginView, SDialog, ArrowDown}
