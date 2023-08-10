@@ -24,6 +24,11 @@ export default class MessageView extends Vue {
 
   created(){
     console.log(123)
+
+    //原创歌曲，可以分享出来， 听！心的乐曲
+
+    //第一步，上传音乐。
+    //请大家来听歌，选择你的歌曲。音源你来提供
   }
 
 }
