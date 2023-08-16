@@ -40,8 +40,8 @@
                             <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
                             <div class="pb-60"
                                  v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].name !== followTabName">
-                                <talk-swipers
-                                        v-if="talkTabs[swiperIndex].name === homeTabName && configShowSwipers"></talk-swipers>
+                                <talk-swipers class="px-mn pb-sm"
+                                              v-if="talkTabs[swiperIndex].name === homeTabName && configShowSwipers"></talk-swipers>
 
 
                                 <div class="card mb-sm elevation-4 px-sm" v-if="talkTabs[swiperIndex].circle">

@@ -1,5 +1,5 @@
 <template>
-    <view class="px-mn pb-sm" v-if="showSwipers">
+    <view v-if="showSwipers">
         <!--  <view class="bg-primary px-smm pt-xs">-->
         <swiper class="w100p" :indicator-dots="true" :autoplay="true" circular :interval="2500"
                 :style="{'height':swiperHeight+'px'}">
