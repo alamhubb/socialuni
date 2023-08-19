@@ -111,6 +111,7 @@ public class SocialuniCommonRepository {
     }
 
 
+    //使用这个的问题是缓存不会被清理
     public <T extends SocialuniUserInfoBaseDO> T findByUserId(Integer userId, Class<T> tClass) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
