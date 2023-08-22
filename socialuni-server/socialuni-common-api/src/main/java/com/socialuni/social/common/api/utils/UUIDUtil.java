@@ -22,4 +22,9 @@ public class UUIDUtil {
     public static String getUUID() {
         return UUID.randomUUID().toString().replace("-", "");
     }
+
+    public static String getUUIDByString(String content) {
+        UUID uuid = UUID.nameUUIDFromBytes(content.getBytes());
+        return uuid.toString().replace("-", "");
+    }
 }
