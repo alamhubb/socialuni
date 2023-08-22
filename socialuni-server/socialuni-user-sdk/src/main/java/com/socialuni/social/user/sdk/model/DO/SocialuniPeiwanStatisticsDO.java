@@ -20,9 +20,21 @@ import javax.persistence.Table;
 @Data
 public class SocialuniPeiwanStatisticsDO extends SocialuniBaseDO {
     private String inviterCode;
+    //扫码类型，哪个海报，海报的信息
+    private String scanType;
     private String referer;
     private String detailId;
     @Column(columnDefinition = "longtext")
     private String detail;
     private String userIp;
+
+    private String city;
+    private String district;
+    private String name;
+    private String nation;
+    private String province;
+    //纬度
+    private Double lat;
+    //经度
+    private Double lng;
 }

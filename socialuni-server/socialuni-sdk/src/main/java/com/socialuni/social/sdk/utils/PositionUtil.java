@@ -9,6 +9,10 @@ public class PositionUtil {
     public static SocialuniRectangleRO getRectangle() {
         String ip = IpUtil.getIpAddr();
         LocationQueryRO locationQueryRO = QQMapAPI.getIpLocation(ip);
+        return PositionUtil.getRectangle(locationQueryRO);
+    }
+
+    public static SocialuniRectangleRO getRectangle(LocationQueryRO locationQueryRO) {
         if (locationQueryRO == null || locationQueryRO.getLocation() == null) {
             return null;
         }
