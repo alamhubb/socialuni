@@ -11,8 +11,10 @@
         :options="options"
         :label="optionLabel"
         :value="optionValue"
-        @change="change(row[prop],$index)"
-      />
+        @change="change(row[prop],$index,row)"
+      >
+        <slot></slot>
+      </y-select>
     </template>
   </y-table-column>
 </template>
@@ -44,8 +46,8 @@ export default class YTableSelect extends Vue {
   @Prop() readonly optionValue: string
 
   @Emit()
-  change(value, index) {
-    return { value, index }
+  change(value, index, row) {
+    return { value, index, row }
   }
 }
 </script>

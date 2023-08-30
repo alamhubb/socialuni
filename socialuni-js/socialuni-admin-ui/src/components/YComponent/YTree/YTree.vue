@@ -6,7 +6,7 @@
       v-bind="$attrs"
   >
     <div
-        class="w100p h38"
+        class="w100p h38 row-col-center"
         slot-scope="{ node, data }">
       <div
           class="h28 flex-row w100p bd-radius px-sm"
@@ -27,7 +27,7 @@
         </div>
         <!--        是否点击的时候展开-->
         <div
-            v-if="expandClick"
+            v-if="expandClick || (!data.active&&!data.isExpand)"
             @click="nodeClick(data,node)"
             class="row-between-center flex-1 h100p pl-xs overflow-hidden">
           <slot
@@ -59,16 +59,6 @@
           </slot>
         </div>
       </div>
-      <div class="h10 flex-row">
-        <div
-            class="row-col-center flex-none h100p"
-            @click="nodeExpand(data)">
-        </div>
-        <div
-            @click.stop
-            class="row-between-center flex-1 h100p">
-        </div>
-      </div>
     </div>
   </el-tree>
 </template>
@@ -76,7 +66,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import TreeUtil from '@/components/YComponent/YTree/TreeUtil'
-import { ElTree } from 'element-ui/types/tree'
+import type {ElTree} from "element-ui/types/tree";
 
 /**
  * @author 秦开远
@@ -98,6 +88,9 @@ export default class YTree extends Vue {
   }
 
   nodeClick(rowData, node) {
+    if (this.expandClick || (!rowData.active && !rowData.isExpand)) {
+      this.$set(rowData, 'isExpand', !rowData.isExpand)
+    }
     TreeUtil.recurseSetActiveFalse(this.data, this)
     this.$set(rowData, 'active', true)
     this.$emit('node-click', rowData, node)

@@ -5,6 +5,7 @@
       :value="((model===0?String(model):model) || value)"
       :readonly="readonly"
       size="small"
+      :clearable="clearable"
       @click.native.stop
       v-on="$listeners"
       @input="change"
@@ -33,6 +34,7 @@ export default class YFormInput extends Vue {
   @Prop() readonly value: string
   @Prop() readonly prop: string
   @Prop({ default: false, type: Boolean }) readonly required: boolean
+  @Prop({ default: true, type: Boolean }) readonly clearable: boolean
   @Prop() readonly labelWidth: string
 
   @Prop() readonly options: []

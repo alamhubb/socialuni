@@ -2,6 +2,14 @@ $yy-btn-color: #C50F1A !default;
 $yy-color-white: #FFFFFF !default;
 $yy-color-black: #000000 !default;
 
+.color-yoyo {
+  color: $yy-btn-color;
+}
+
+.bg-yoyo {
+  background: $yy-btn-color;
+}
+
 .yy-btn {
   background: $yy-btn-color;
   color: #FFFFFF;
@@ -134,10 +142,6 @@ $yy-color-black: #000000 !default;
   padding-right: 0;
 }
 
-.el-select.hide-suffix .el-input__suffix {
-  display: none;
-}
-
 .yoyo-form.el-form--label-top .el-form-item__label {
   padding: 0;
   height: 28px;
@@ -166,6 +170,10 @@ $yy-color-black: #000000 !default;
   .el-tree-node__content {
     height: auto;
   }
+
+  .el-tree-node__loading-icon {
+    margin-right: 0;
+  }
 }
 
 
@@ -181,4 +189,100 @@ $yy-color-black: #000000 !default;
       margin-left: 4px;
     }
   }
+}
+
+
+.fullHeightTabs.el-tabs {
+  & > .el-tabs__content {
+    height: 100%;
+
+    & > .el-tab-pane {
+      height: 100%;
+    }
+  }
+}
+
+
+//yoyo通用左侧菜单专属的element-ui样式
+.yoyo-home-menus {
+  .el-menu {
+    background: #fff !important;
+    width: 240px;
+  }
+
+  //用来处理折叠后的左侧红条
+  .el-menu.el-menu--collapse {
+    width: 50px;
+
+    .el-submenu.is-active {
+      background: #f1f4fe !important;
+
+      &:before {
+        content: "";
+        position: absolute;
+        left: 1px;
+        width: 4px;
+        height: 100%;
+        background-color: #b62a26;
+      }
+    }
+  }
+
+  //用来处理后折叠后的宽度
+  .el-menu.yoyo-menu-collapse {
+    .el-menu-item, .el-submenu__title {
+      padding: 0 15px !important;
+
+      .el-tooltip {
+        padding: 0 15px !important;
+      }
+    }
+  }
+
+  .el-menu-item, .el-submenu__title {
+    @extend .row-col-center;
+    font-size: 16px;
+
+    &:focus, &:hover {
+      outline: 0;
+      background-color: transparent !important;
+    }
+  }
+
+  .el-menu-item.is-active {
+    background: #f1f4fe !important;
+
+    &:before {
+      content: "";
+      position: absolute;
+      left: 1px;
+      width: 4px;
+      height: 100%;
+      background-color: #b62a26;
+    }
+  }
+}
+
+.el-menu--vertical.el-menu--popup-container {
+  .nest-menu {
+    .el-menu-item:hover {
+      background-color: #f1f4fe !important;
+    }
+  }
+}
+
+.y-page-header {
+  .el-breadcrumb__inner {
+    color: $color-special;
+    @extend .font-16;
+  }
+
+  .el-breadcrumb__item:last-child .el-breadcrumb__inner, .el-breadcrumb__item:last-child .el-breadcrumb__inner a, .el-breadcrumb__item:last-child .el-breadcrumb__inner a:hover, .el-breadcrumb__item:last-child .el-breadcrumb__inner:hover {
+    @extend .font-14;
+    color: #666666;
+  }
+}
+
+.yoyo-badge.el-badge > .el-badge__content {
+  background-color: $yy-btn-color;
 }

@@ -12,27 +12,14 @@
 
     .el-dialog__body {
       padding: 0px;
-
-      .el-scrollbar {
-        .el-scrollbar__wrap {
-          margin: 0 !important;
-        }
-
-        //调整滚动条样式
-        .el-table {
-          ::-webkit-scrollbar {
-            width: 6px;
-            height: 10px;
-            top: 2px;
-          }
-        }
-
+      //因会导致样式冲突，表格中的table也无法滚动，所以注释此代码
+      /*.el-scrollbar {
         ::-webkit-scrollbar {
           width: 0;
           height: 0;
           top: 0;
         }
-      }
+      }*/
 
       .el-form-item {
         margin-bottom: 10px;
@@ -58,14 +45,15 @@
             }
           }
 
-          .el-input {
+          //统一输入框size，mini样式问题，会存在多选下拉框有问题的情况，溢出，所以注释掉
+         /* .el-input {
             height: 32px;
 
             .el-input__inner {
               height: 32px;
               line-height: 32px;
             }
-          }
+          }*/
 
           .el-select {
             width: 100%;

@@ -5,20 +5,26 @@
     :placeholder="hint"
     v-bind="$attrs"
     @change="change"
+    @blur="blurSetValue"
+    @focus="selectFocus"
+    @input.native="inputValue"
     filterable>
-    <!--    不能||item,因为存在null的情况会直接把对象赋值给value-->
-    <el-option
-      v-for="item in optionsGet"
-      :key="item[value]!==undefined?item[value]:item"
-      :label="optionLabel(item)"
-      :value="item[value]!==undefined?item[value]:item"
-    />
+    <slot name="prefix" slot="prefix"></slot>
+    <slot :options="optionsGet">
+      <!--    不能||item,因为存在null的情况会直接把对象赋值给value-->
+      <el-option
+        v-for="item in optionsGet"
+        :key="item[value]!==undefined?item[value]:item"
+        :label="optionLabel(item)"
+        :value="item[value]!==undefined?item[value]:item"
+      />
+    </slot>
   </el-select>
 </template>
 
 <script lang="ts">
+import type { ElSelect } from 'element-ui/types/select'
 import { Component, Emit, Model, Prop, Vue } from 'vue-property-decorator'
-import { ElSelect } from 'element-ui/types/select'
 
 /**
  * @author 秦开远
@@ -40,17 +46,25 @@ export default class YSelect extends Vue {
   // 第一种使用方式
   // @Prop() readonly option: DataTableColumnOptionVO
   // 第二种使用方式
-  @Prop() readonly options: []
+  @Prop() readonly options: any []
   @Prop({ default: 'name' }) readonly label: string
   @Prop({ default: 'value' }) readonly value: string
+  blurValue: string = null
+
+  //如果没有这个字段，除了输入以后失去焦点，其他情况也会触发失去焦点方法，比如切换select
+  canBlur = false
+
+  created() {
+    this.canBlur = false
+  }
 
   @Emit()
   change(value) {
     return value
   }
 
-  get optionsGet() {
-    return this.options
+  get optionsGet(): any[] {
+    return this.options as any[]
   }
 
   optionLabel(item) {
@@ -63,8 +77,25 @@ export default class YSelect extends Vue {
     }
   }
 
+  inputValue(v) {
+    this.canBlur = true
+  }
+
   blur() {
     this.$refs.select.blur()
+  }
+
+  blurSetValue(e: any) {
+    if (this.canBlur) {
+      this.canBlur = false
+      this.blurValue = e.target.value
+      this.$emit('blur', this.blurValue)
+    }
+    this.$emit('selectBlur')
+  }
+
+  selectFocus() {
+    this.$emit('focus')
   }
 }
 </script>

@@ -10,12 +10,14 @@
       :multiple="multiple"
       :value="optionValue"
       @change="change"
-    />
+    >
+      <slot></slot>
+    </y-select>
   </el-form-item>
 </template>
 
 <script lang="ts">
-import { Component, Emit, Model, Prop, Vue } from 'vue-property-decorator'
+import {Component, Emit, Model, Prop, Vue} from 'vue-property-decorator'
 import YSelect from '@/components/YComponent/YSelect/YSelect.vue'
 
 /**
@@ -25,7 +27,7 @@ import YSelect from '@/components/YComponent/YSelect/YSelect.vue'
  * 在数据源业务基础上，封装基础table
  */
 @Component({
-  components: { YSelect }
+  components: {YSelect}
 })
 export default class YFormSelect extends Vue {
 
@@ -36,11 +38,11 @@ export default class YFormSelect extends Vue {
   @Prop() readonly labelWidth: string
   @Prop() readonly label: string
 
-  @Prop() readonly options: []
+  @Prop() readonly options: any []
   @Prop() readonly readonly: boolean
-  @Prop({ default: false }) readonly multiple: boolean
-  @Prop({ default: 'name' }) readonly optionLabel: string
-  @Prop({ default: 'value' }) readonly optionValue: string
+  @Prop({default: false}) readonly multiple: boolean
+  @Prop({default: 'name'}) readonly optionLabel: string
+  @Prop({default: 'value'}) readonly optionValue: string
 
   @Emit()
   change(value) {

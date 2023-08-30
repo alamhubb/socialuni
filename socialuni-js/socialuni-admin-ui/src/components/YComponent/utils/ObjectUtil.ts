@@ -1,23 +1,29 @@
 export default class ObjectUtil {
   // 改成any类型
   static deepClone<T>(object: T): T {
-    if (object) {
-      return JSON.parse(JSON.stringify(object))
-    }
-    return null
+    return this.toParse(this.toJson(object))
   }
 
   static toJson(object: any): string {
-    // return JSON.stringify(object)
-    return JSON.stringify(object)
+    if (object || (object === 0) || (object === false)) {
+      return JSON.stringify(object)
+    }
+    return ''
   }
 
-  static toParse(objJson: string): any {
-    return JSON.parse(objJson)
+  static toParse(object: string): any {
+    if (object) {
+      return JSON.parse(object)
+    }
+    return ''
   }
 
   static log(object: any) {
-    console.log(JSON.stringify(object))
+    console.trace(this.toJson(object))
+  }
+
+  static logObj(object: any) {
+    console.trace(this.deepClone(object))
   }
 
   static toFormData(object: Record<string, any> | any): FormData {
@@ -81,7 +87,7 @@ export default class ObjectUtil {
     return obj === undefined
   }
 
-  private static isEmpty(value: string) {
+  static isEmpty(value: string) {
     return value === null || value === '' || value === undefined
   }
 
@@ -90,9 +96,21 @@ export default class ObjectUtil {
     return this.isUndefined(obj) ? null : obj
   }
 
-  static getValueByOrZero<T>(obj: any, obj1: T): T {
+  static getValueByOrZero<T>(obj: any, obj1: T = null): T {
     const value = this.getValue(obj)
     if (value === 0) {
+      return value
+    } else if (value === false) {
+      return value
+    }
+    return obj || obj1
+  }
+
+  static getValueByOrZeroOrFalseElseNull<T>(obj: any, obj1: T = null): T {
+    const value = this.getValue(obj)
+    if (value === 0) {
+      return value
+    } else if (value === false) {
       return value
     }
     return obj || obj1

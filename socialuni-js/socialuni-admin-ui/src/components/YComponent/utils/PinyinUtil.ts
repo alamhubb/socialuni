@@ -7,6 +7,7 @@ export default class PinyinUtil {
     }
     searchText = searchText.replaceAll('\'', '').replaceAll('/\s/g', '')
     return contents.some(content => {
+      content = String(content)
       const chineseMatch = Pinyin.match(content, searchText)
       if (chineseMatch) {
         return true

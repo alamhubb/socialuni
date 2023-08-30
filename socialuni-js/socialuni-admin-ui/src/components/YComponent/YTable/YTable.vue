@@ -4,42 +4,39 @@
     ref="table"
     v-bind="$attrs"
     :data="data"
-    border
     :header-cell-style="{background:'#f3f5fb',color:'#444444','font-weight': 'bold'}"
     v-on="$listeners"
   >
-    <y-table-column
+    <el-table-column
       width="50"
       v-if="index"
       type="index"
       :label="indexLabel"/>
-    <y-table-column
+    <el-table-column
       v-if="checked"
       width="35"
       align="left">
       <!--      不加scope不起作用-->
       <template slot="header">
-        <div>
-          <el-checkbox
-            :value="checkedAll"
-            :disabled="checkedAllDisabled"
-            @change="checkedAllClick"
-          >
-            <!--            <span class="color-th font-bold">全选</span>-->
-          </el-checkbox>
-        </div>
+        <el-checkbox
+          :value="checkedAll"
+          :disabled="checkedAllDisabled"
+          @change="checkedAllClick"
+        >
+          <!--            <span class="color-th font-bold">全选</span>-->
+        </el-checkbox>
       </template>
       <template #default="{row}">
         <div>
           <el-checkbox
             v-model="row.checked"
-            :disabled="row.checkedDisabled"
+            :disabled="row.checkedDisabled || rowCheckedDisabledFun(row)"
             @change="selectionChange"
             @click.native.stop
           />
         </div>
       </template>
-    </y-table-column>
+    </el-table-column>
     <slot/>
   </el-table>
 </template>
@@ -47,8 +44,8 @@
 <script lang="ts">
 import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-property-decorator'
 import YTableColumn from '@/components/YComponent/YTableColumn/YTableColumn.vue'
-import { ElTable } from 'element-ui/types/table'
 import ObjectUtil from '@/components/YComponent/utils/ObjectUtil'
+import type { ElTable } from 'element-ui/types/table'
 
 /**
  * @author 秦开远
@@ -70,6 +67,11 @@ export default class YTable extends Vue {
   @Prop({ default: '', type: String }) readonly indexLabel: string
   @Prop({ default: false, type: Boolean }) readonly checked: boolean
   @Prop({ default: false, type: Boolean }) readonly checkedAllDisabled: boolean
+  @Prop({
+    default: (row) => {
+      return false
+    }, type: Function
+  }) readonly rowCheckedDisabledFun: any
 
   $refs: {
     table: ElTable;
@@ -157,6 +159,10 @@ export default class YTable extends Vue {
   selectionChange() {
     this.updateCheckedAllStatus()
     return this.data.filter(item => item.checked)
+  }
+
+  clearSelection() {
+    this.checkedAllClick(false)
   }
 }
 </script>

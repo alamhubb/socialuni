@@ -12,18 +12,19 @@
   <!-- v-bind="$attrs"  将外部参数绑定到指定内部组件，详见： https://cn.vuejs.org/v2/api/#vm-attrs-->
   <!-- v-on="$listeners"  将外部事件绑定到指定内部组件，详见： https://cn.vuejs.org/v2/api/#vm-listeners-->
   <el-dialog
-      id="dialog_layout_control"
-      class="dialog_layout_control"
-      v-bind="$attrs"
-      v-on="$listeners"
-      :visible.sync="dialogVisible"
-      :close-on-press-escape='closeOnPressEscape'
-      :close-on-click-modal='closeOnClickModal'
-      :width="width"
-      append-to-body
-      @open="emitOpen"
-      @close="dialogClose"
-      :top='top'>
+    id="dialog_layout_control"
+    class="dialog_layout_control"
+    :title="title"
+    v-bind="$attrs"
+    v-on="$listeners"
+    :visible.sync="dialogVisible"
+    :close-on-press-escape='closeOnPressEscape'
+    :close-on-click-modal='closeOnClickModal'
+    :width="width"
+    append-to-body
+    @open="emitOpen"
+    @close="dialogClose"
+    :top='top'>
 
     <template #title>
       <slot name="title"></slot>
@@ -31,9 +32,9 @@
 
     <!-- dialog-body为单行展示时的区域 -->
     <div
-        class="dialogBodyOne_area"
-        :style="{height: dialogBodyHeight}"
-        v-if="$slots['dialogBodyOne_area']">
+      class="dialogBodyOne_area"
+      :style="{height: dialogBodyHeight}"
+      v-if="$slots['dialogBodyOne_area']">
       <y-scrollbar class="h100p">
         <div :style="customStyle">
           <slot name="dialogBodyOne_area"></slot>
@@ -43,9 +44,9 @@
 
     <!-- dialog-body为双行展示时的区域 -->
     <div
-        class="dialogBodyTwo_area"
-        :style="{height: dialogBodyHeight}"
-        v-else-if="$slots['dialogBodyTwo_area']">
+      class="dialogBodyTwo_area"
+      :style="{height: dialogBodyHeight}"
+      v-else-if="$slots['dialogBodyTwo_area']">
       <y-scrollbar class="h100p">
         <div :style="customStyle">
           <slot name="dialogBodyTwo_area"></slot>
@@ -55,8 +56,8 @@
 
     <!--  自定义区域    -->
     <div
-        :style="{height: dialogBodyHeight}"
-        v-else>
+      :style="{height: dialogBodyHeight}"
+      v-else>
       <y-scrollbar class="h100p">
         <div :style="customStyle">
           <slot></slot>
@@ -65,24 +66,24 @@
     </div>
 
     <div
-        v-if="!noShowFooter"
-        class="row-end-center shadow-top index-xs px py-10">
+      v-if="!noShowFooter"
+      class="row-end-center shadow-top index-xs px py-10 mt-mn">
       <!-- dialog底部自定义弹框区域 -->
       <slot name="dialogFooter_area"></slot>
       <!--   不显示确定的时候，取消按钮改名为关闭-->
       <y-page-footer
-          v-if="!hideBtn && dialogVisible"
-          :hide-cancel="hideCancel"
-          :hide-confirm="hideConfirm"
-          :confirm-text="confirmText"
-          :show-loading="configLoad"
-          :disabled="disabled"
-          :no-debounce="noDebounce"
-          :cancel-text="hideConfirm?'关 闭' :cancelText"
-          @cancel="dialogCancel"
-          :confirm="confirmMethod()"
-          @confirm="dialogConfirm"
-          @confirm-after="confirmAfter"
+        v-if="!hideBtn && dialogVisible"
+        :hide-cancel="hideCancel"
+        :hide-confirm="hideConfirm"
+        :confirm-text="confirmText"
+        :show-loading="configLoad"
+        :disabled="disabled"
+        :no-debounce="noDebounce"
+        :cancel-text="hideConfirm?'关 闭' :cancelText"
+        @cancel="dialogCancel"
+        :confirm="confirmMethod()"
+        @confirm="dialogConfirm"
+        @confirm-after="confirmAfter"
       >
       </y-page-footer>
     </div>
@@ -95,7 +96,7 @@ import YScrollbar from '@/components/YComponent/YScrollbar'
 
 export default {
   name: 'DialogBox',
-  components: { YScrollbar, YPageFooter },
+  components: {YScrollbar, YPageFooter},
   data() {
     return {
       // 作用，下次在进入页面时，重置按钮焦点使用，否则会存在那种再次进入按钮已经获取焦点的问题
@@ -107,6 +108,10 @@ export default {
   },
   // 更多参数和事件参考el-dialog https://element.eleme.cn/#/zh-CN/component/dialog
   props: {
+    title: {
+      type: String,
+      default: ''
+    },
     visible: {
       type: Boolean,
       default: false
@@ -202,10 +207,10 @@ export default {
       type: Boolean,
       default: false
     },*/
-    // 确认按钮默认不关闭弹窗，此属性设置为true，则自动关闭弹窗
+    // 确认按钮默认关闭弹窗，此属性设置为false，则不自动关闭弹窗
     autoClose: {
       type: Boolean,
-      default: false
+      default: true
     },
     // 关闭按钮，默认自动关闭弹窗，默认自动关闭弹窗，可以通过这个属性，设置手动关闭弹窗
     customCancelClose: {
@@ -254,7 +259,9 @@ export default {
       this.$emit('update:visible', this.dialogVisible)
     },
     confirmAfter() {
-      this.close()
+      if (this.autoClose) {
+        this.close()
+      }
     },
     // 关闭弹窗并且执行取消
     // dialog取消按钮事件
@@ -266,27 +273,31 @@ export default {
     },
     confirmMethod() {
       if (this.confirm) {
-        return async() => {
-          // 支持自动校验form
-          // @ts-ignore
-          if (this.$slots.default && this.$slots.default[0] && this.$slots.default[0].componentInstance && this.$slots.default[0].componentInstance.validate) {
+        return async () => {
+          try {
+            // 支持自动校验form
             // @ts-ignore
-            await this.$slots.default[0].componentInstance.validate()
-          }
-          if (typeof this.confirm === 'function') {
-            await this.confirm()
-          } else {
-            // 获取方法和参数列表
-            const clickMethodAndArgsAry = this.confirm
-            // 获取方法
-            const clickMethod = clickMethodAndArgsAry[0]
-            // 判断您是否包含参数
-            if (clickMethodAndArgsAry.length) {
-              const args = clickMethodAndArgsAry.slice(1, clickMethodAndArgsAry.length)
-              await clickMethod(...args)
-            } else {
-              await clickMethod()
+            if (this.$slots.default && this.$slots.default[0] && this.$slots.default[0].componentInstance && this.$slots.default[0].componentInstance.validate) {
+              // @ts-ignore
+              await this.$slots.default[0].componentInstance.validate()
             }
+            if (typeof this.confirm === 'function') {
+              await this.confirm()
+            } else {
+              // 获取方法和参数列表
+              const clickMethodAndArgsAry = this.confirm
+              // 获取方法
+              const clickMethod = clickMethodAndArgsAry[0]
+              // 判断您是否包含参数
+              if (clickMethodAndArgsAry.length) {
+                const args = clickMethodAndArgsAry.slice(1, clickMethodAndArgsAry.length)
+                await clickMethod(...args)
+              } else {
+                await clickMethod()
+              }
+            }
+          } catch (e) {
+            throw new Error(e)
           }
         }
       }
@@ -295,9 +306,9 @@ export default {
     // dialog 确定事件
     dialogConfirm() {
       this.$emit('confirm')
-      if (this.autoClose) {
-        this.close()
-      }
+      // if (this.autoClose) {
+      //   this.close()
+      // }
     },
     // 此方法仅内部使用,仅为右上角关闭弹窗时调用，关闭弹窗时触发， 需要判断你是不是自定义按钮的触发，还是右上角关闭的触发，右上角关闭触发则触发取消事件
     dialogClose() {

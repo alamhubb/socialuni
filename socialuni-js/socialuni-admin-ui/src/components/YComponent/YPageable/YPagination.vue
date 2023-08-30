@@ -24,11 +24,13 @@ export default class YPagination extends Vue {
 
   handleSizeChange(val) {
     this.pageable.pageSize = val
+    this.pageable.limit = val
     this.change(this.pageable)
   }
 
   handleCurrentChange(val) {
     this.pageable.pageNum = val
+    this.pageable.page = val
     this.change(this.pageable)
   }
 }

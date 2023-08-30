@@ -3,10 +3,11 @@ import TableSelectTagVO from '@/components/YComponent/TableGroup/TableSelectTagV
 
 export default class TableSelect {
   defaultValue: string = null
+  defaultPlaceholder: string = null
   optionList: TableOptionItem[] = []
   searchTags: TableSelectTagVO[] = []
 
-  constructor(optionList: TableOptionItem[], defaultValue: string = null, selectTags = []) {
+  constructor(optionList: TableOptionItem[], defaultValue: string = null, selectTags = [], defaultPlaceholder: string = null) {
     this.optionList = optionList
     if (defaultValue) {
       this.defaultValue = defaultValue
@@ -16,5 +17,6 @@ export default class TableSelect {
       }
     }
     this.searchTags = selectTags
+    this.defaultPlaceholder = defaultPlaceholder
   }
 }

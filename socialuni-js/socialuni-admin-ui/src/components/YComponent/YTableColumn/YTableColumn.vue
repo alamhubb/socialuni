@@ -3,6 +3,7 @@
     :label="label||prop"
     :prop="prop"
     :type="DataTableColumnTypeEnum.values.includes(type)?'':type"
+    show-overflow-tooltip
     v-bind="$attrs"
     :align="align"
   >

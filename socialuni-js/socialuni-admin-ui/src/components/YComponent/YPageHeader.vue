@@ -1,16 +1,20 @@
 <template>
-  <div class="row-between-center px py-smm bb-divider">
-    <div>
-      <slot name="left">
-        <slot name="title">
-          <div class="row-col-center">
-            <div class="w3 h16 bg-blue mr-sm"></div>
-            <div class="font-18 font-bold">{{ title }}</div>
-          </div>
+  <div class="y-page-header h50 px row-between-center bb flex-none">
+    <div class="font-16 color-special font-bold">
+      <div class="row-col-center">
+        <slot>
+          <slot name="left">
+            <slot name="titlePre"></slot>
+            <slot name="title">
+<!--              <div v-if="showPiece" class="w3 h16 bg-blue mr-sm"></div>-->
+<!--              <div class="y-piece mb-nn"></div>-->
+              <div class="font-16 font-bold">{{ title }}</div>
+            </slot>
+          </slot>
         </slot>
-      </slot>
+      </div>
     </div>
-    <div>
+    <div class="row-col-center">
       <slot name="right">
 
       </slot>
@@ -19,11 +23,12 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
+import {Component, Prop, Vue} from 'vue-property-decorator'
 
 @Component
 export default class YPageHeader extends Vue {
   @Prop() title: string
+  @Prop({default: false, type: Boolean}) showPiece: boolean
 }
 
 </script>

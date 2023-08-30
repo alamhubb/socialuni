@@ -9,20 +9,19 @@
 </template>
 
 <script lang="ts">
-import { Component, Emit, Prop, Vue } from 'vue-property-decorator'
+import {Component, Emit, Prop, Vue} from 'vue-property-decorator'
 import CommonUtil from '@/components/YComponent/utils/CommonUtil'
 
 //想要的效果，外部可以主动disable
 //可以主动loading
 @Component
 export default class YButton extends Vue {
-  @Prop({ default: false, type: Boolean }) disabled: boolean
-  @Prop({ default: true, type: Boolean }) useLoading: boolean
-  @Prop({ default: false, type: Boolean }) showLoading: boolean
+  @Prop({default: false, type: Boolean}) disabled: boolean
+  @Prop({default: true, type: Boolean}) useLoading: boolean
+  @Prop({default: false, type: Boolean}) showLoading: boolean
   @Prop({
-    default: null,
-    type: Function
-  }) click: () => Promise<void> | Array<() => Promise<void> | any>
+    default: null
+  }) click: () => Promise<void> | Array<(data?: any) => Promise<void> | any>
 
   // 防抖，一定时间内只能触发一次
   @Prop({
@@ -63,11 +62,13 @@ export default class YButton extends Vue {
               await clickMethod()
             }
           }
-          // 只有方法正常执行完毕才会触发click
-          this.clickAfter()
         }
+        // 只有方法正常执行完毕才会触发click
+        this.clickAfter()
+      } catch (e) {
+        throw Error(e)
       } finally {
-        if (this.click && !this.noDebounce) {
+        if (this.click || !this.noDebounce) {
           await CommonUtil.setTimeout(Number(this.debounceTime))
         }
         this.btnEnable = true

@@ -20,6 +20,8 @@ export default class PageableRO<T> {
   startRow: number = null
   total: number = null
   totalCount: number = null
+  //console里面使用的
+  pageTotal: number = null
 
   constructor(list?: T[], pageNum?: number, pageSize?: number) {
     if (list) {

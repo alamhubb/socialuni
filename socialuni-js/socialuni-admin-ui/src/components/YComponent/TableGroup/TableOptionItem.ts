@@ -4,6 +4,7 @@ export default class TableOptionItem {
   value: string = null
   label: string = null
   type: string = null
+  curValue: any = null
   multiple = false
   selectArr: TableSelectOptionItem[] = null
 

@@ -6,6 +6,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
+
 @Component
 export default class YScrollbar extends Vue {
 
@@ -17,5 +18,10 @@ export default class YScrollbar extends Vue {
   overflow-x: hidden;
   //修复配置修改页面底部使用滚动条被隐藏一部分的问题
   margin-bottom: 0 !important;
+}
+
+//如果内部还包含el-scroller则会导致冲突问题
+.overflow-x-hidden > .el-scrollbar__bar.is-horizontal {
+    display: none;
 }
 </style>
