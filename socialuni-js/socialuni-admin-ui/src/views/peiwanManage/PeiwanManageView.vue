@@ -5,6 +5,21 @@
         <el-input></el-input>
       </label-item>
 
+      <label-item label="头像">
+        <div class="row-col-end">
+
+          <el-dropdown trigger="click">
+            <el-avatar size="large" class="bd" shape="square" :src="editUser.avatar"/>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item @click.native="uploadUserAvatarImg">上传头像</el-dropdown-item>
+                <el-dropdown-item divided @click.native="randomGenerateAvatar">随机生成头像</el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
+        </div>
+      </label-item>
+
       <label-item label="位置和经纬度：">
         <el-button class="mr-sm" size="small" type="primary" @click="openMapDialog">选择位置</el-button>
         <div>
