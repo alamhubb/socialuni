@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
+import { Component, Prop, Vue } from 'vue-facing-decorator'
 import AppLink from '@/layout/components/HorizontalSidebar/Link.vue'
 import MenuItem from '@/layout/components/HorizontalSidebar/Item.vue'
 // @ts-ignore

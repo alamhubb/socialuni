@@ -8,10 +8,10 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue} from "vue-property-decorator";
+import { Component, Vue } from 'vue-facing-decorator';
 import PhoneAPI from "@socialuni/socialuni-user-api/src/api/PhoneAPI";
 
-@Options({})
+@Component({})
 export default class IndexView extends Vue {
 
     sendAuthCode(){

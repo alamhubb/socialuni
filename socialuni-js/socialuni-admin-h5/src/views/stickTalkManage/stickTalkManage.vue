@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-facing-decorator'
 import request from '@/plugins/request'
 import YTableInput from '@/components/YComponent/YTableInput/YTableInput.vue'
 import YTable from '@/components/YComponent/YTable/YTable.vue'

@@ -40,7 +40,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-property-decorator'
+import {Component, Vue} from 'vue-facing-decorator'
 import DataTable from '@/components/dataTable/DataTable.vue'
 import LabelItem from "@/components/LabelItem.vue";
 import {DialogInterface} from "@/interface/DialogInterface";

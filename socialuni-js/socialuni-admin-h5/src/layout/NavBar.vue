@@ -70,7 +70,6 @@ import { Component, Vue } from 'vue-facing-decorator'
   components: { NavBreadcrumb, NavMenu }
 })
 export default class NavBar extends Vue {
-  @userStore.State('user') user: DevAccountRO
 
   get user(){
     return userModule.user

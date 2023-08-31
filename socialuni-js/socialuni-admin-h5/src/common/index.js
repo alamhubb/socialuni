@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import store from '@/store/index'
 /**
  * 接受主应用的传参
  * @param props 主应用穿的公共数据

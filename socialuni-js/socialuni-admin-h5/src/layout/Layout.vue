@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-facing-decorator'
 import NavMenu from '@/layout/components/NavMenu/NavMenu.vue'
 import NavBreadcrumb from '@/layout/components/NavBreadcrumb.vue'
 import NavBar from '@/layout/NavBar.vue'

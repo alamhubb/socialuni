@@ -87,7 +87,7 @@
 </template>
 
 <script lang="tsx">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-facing-decorator'
 import DevAccountRO from '@/model/base/DevAccountRO'
 import DevAccountType from '@/constant/DevAccountType'
 import { OperationType } from '@/constant/OperationType'
@@ -101,8 +101,6 @@ export default class DevInfoPage extends Vue {
   $refs: {
     devForm: ElForm
   }
-
-  @userStore.State('user') user: DevAccountRO
 
   operateType = OperationType.detail
   backUser: DevAccountRO

@@ -60,7 +60,7 @@ import TencentCosAPI from "@socialuni/socialuni-app-api/src/api/TencentCosAPI";
 import ImgAddQO from "@socialuni/socialuni-api-base/src/model/user/ImgAddQO";
 import type DomFile from "@socialuni/socialuni-app-sdk/src/model/DomFile";
 
-@Options({
+@Component({
     components: {SDialog, SButton}
 })
 export default class SocialuniUserEditDialog extends Vue {

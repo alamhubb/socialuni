@@ -110,7 +110,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-facing-decorator'
 import { userModule } from '@/store'
 import SocialPhoneNumQO from '@/model/base/SocialPhoneNumQO'
 import ToastUtil from '@/utils/ToastUtil'

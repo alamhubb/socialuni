@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-facing-decorator'
 import UserIdCard from '@/model/UserIdCard'
 import Img from '@/model/Img'
 import UserImg from '@/model/UserImg'

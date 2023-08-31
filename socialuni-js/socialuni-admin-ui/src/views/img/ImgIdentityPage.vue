@@ -66,7 +66,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-facing-decorator'
 import Talk from '@/model/talk/Talk'
 import ReportVO from '@/model/report/ReportVO'
 import Identity from '@/model/user/Identity'

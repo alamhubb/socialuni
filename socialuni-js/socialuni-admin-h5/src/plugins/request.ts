@@ -3,7 +3,6 @@ import TokenUtil from '@/utils/TokenUtil'
 import ToastUtil from '@/utils/ToastUtil'
 import ErrorCode from '@/constant/ErrorCode'
 import MsgUtil from '@/utils/MsgUtil'
-import { userModule } from '@/store'
 import PageUtil from '@/utils/PageUtil'
 
 // create an axios instance

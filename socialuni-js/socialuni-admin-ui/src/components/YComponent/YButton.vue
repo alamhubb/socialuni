@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Prop, Vue} from 'vue-property-decorator'
+import {Component, Emit, Prop, Vue} from 'vue-facing-decorator'
 import CommonUtil from '@/components/YComponent/utils/CommonUtil'
 
 //想要的效果，外部可以主动disable

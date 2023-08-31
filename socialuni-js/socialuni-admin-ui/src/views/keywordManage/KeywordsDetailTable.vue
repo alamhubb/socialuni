@@ -149,7 +149,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
+import { Component, Prop, Vue } from 'vue-facing-decorator'
 import keywordsVO from '@/model/violateWord/KeywordsVO'
 import { Message, MessageBox } from 'element-ui'
 import KeywordsManageAPI from '@/api/KeywordsManageAPI'

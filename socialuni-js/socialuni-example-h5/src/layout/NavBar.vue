@@ -78,7 +78,7 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue} from 'vue-property-decorator'
+import { Component, Vue } from 'vue-facing-decorator'
 import SDialog from "@socialuni/socialuni-ui-h5/src/components/SDialog.vue";
 import SocialuniUserEditDialog from "@/views/user/SocialuniUserEditDialog.vue";
 import SocialuniUserEventConst from "@socialuni/socialuni-user-sdk/src/constant/SocialuniUserEventConst";
@@ -96,7 +96,7 @@ import {ArrowDown, Tools} from "@element-plus/icons-vue";
 import SocialuniLoginView from "@socialuni/socialuni-user-view-h5/src/views/SocialuniLoginView.vue";
 import CommonEventUtil from "@socialuni/socialuni-native-util/src/util/CommonEventUtil";
 
-@Options({
+@Component({
   components: {SocialuniUserEditDialog, Tools, SocialuniLoginView, SDialog, ArrowDown}
 })
 export default class NavBar extends Vue {

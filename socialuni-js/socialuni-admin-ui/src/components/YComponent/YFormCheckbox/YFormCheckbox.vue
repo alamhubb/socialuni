@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Emit, Model, Prop, Vue } from 'vue-property-decorator'
+import { Component, Emit, Model, Prop, Vue } from 'vue-facing-decorator'
 
 /**
  * @author 秦开远

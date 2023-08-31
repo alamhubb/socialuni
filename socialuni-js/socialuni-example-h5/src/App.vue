@@ -8,10 +8,10 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue} from "vue-property-decorator";
+import { Component, Vue } from 'vue-facing-decorator';
 import NavBar from "@/layout/NavBar.vue";
 
-@Options({
+@Component({
     components: {NavBar}
 })
 export default class App extends Vue {

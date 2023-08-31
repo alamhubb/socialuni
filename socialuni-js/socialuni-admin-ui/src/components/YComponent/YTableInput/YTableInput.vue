@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
+import { Component, Prop, Vue } from 'vue-facing-decorator'
 import YSelect from '@/components/YComponent/YSelect/YSelect.vue'
 
 /**

@@ -12,10 +12,10 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue} from 'vue-property-decorator'
+import { Component, Vue } from 'vue-facing-decorator'
 import NavMenu from '@/layout/NavMenu.vue'
 
-@Options({
+@Component({
     components: {NavMenu}
 })
 export default class Layout extends Vue {

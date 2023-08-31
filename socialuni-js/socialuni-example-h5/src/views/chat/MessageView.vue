@@ -11,13 +11,13 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue} from "vue-property-decorator";
+import { Component, Vue } from 'vue-facing-decorator';
 
 
 import SocialuniChatViewH5 from "@socialuni/socialuni-im-view-h5/src/views/SocialuniChatViewH5.vue"
 import SocialuniMsgViewH5 from "@socialuni/socialuni-im-view-h5/src/views/SocialuniMsgViewH5.vue"
 
-@Options({
+@Component({
     components: {SocialuniChatViewH5, SocialuniMsgViewH5}
 })
 export default class MessageView extends Vue {

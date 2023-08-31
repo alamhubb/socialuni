@@ -105,7 +105,7 @@
 </template>
 
 <script lang="tsx">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-facing-decorator'
 import DataTable from '@/components/dataTable/DataTable.vue'
 import TencentCosAuditHistoryRO from '@/model/audit/TencentCosAuditHistoryRO'
 import AuditAPI from '@/api/AuditAPI'

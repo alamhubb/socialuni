@@ -208,7 +208,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-facing-decorator'
 import KeywordsQueryAPI from '@/api/KeywordsQueryAPI'
 import keywordsVO from '@/model/violateWord/KeywordsVO'
 import keywordsTriggerVO from '@/model/violateWord/KeywordsTriggerVO'

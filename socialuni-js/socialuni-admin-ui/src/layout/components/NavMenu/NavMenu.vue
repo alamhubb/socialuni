@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-facing-decorator'
 import NavMenuItem from '@/layout/components/NavMenu/NavMenuItem.vue'
 import { menuRoutes } from '@/router/router'
 import DevAccountRO from '@/model/base/DevAccountRO'
