@@ -1,38 +1,38 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '@/views/HomeView.vue'
-import MessageView from "@/views/chat/MessageView.vue";
+import router from '@/router/router'
+import { userModule } from '@/store'
+import TokenUtil from '@/utils/TokenUtil'
 
-export const constantRoutes = [
-  {
-    path: '/',
-    name: 'message',
-    component: MessageView,
-    meta: {title: '消息', hidden: true},
-  },
-  {
-    path: '/home',
-    name: 'home',
-    component: HomeView,
-    meta: {title: '首页', hidden: true},
-  },
-  {
-    path: '/mine',
-    name: 'mine',
-    component: () => import('@/views/user/mine.vue'),
-    meta: {title: '我的', hidden: true},
-  },
-  {
-    path: '/404',
-    component: () => import('@/views/404/404.vue'),
-    hidden: true
-  },
-  // 404 page must be placed at the end !!!
-  { path: '/:pathMatch(.*)', redirect: '/404', hidden: true }
-]
+const whiteList = ['/login'] // no redirect whitelist
 
-const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: constantRoutes
+router.beforeEach(async(to, from, next) => {
+  // set page title
+  let user = userModule.user
+  if (!user) {
+    if (TokenUtil.hasToken()) {
+      user = await userModule.getUserAction()
+    }
+  }
+  if (user) {
+    if (to.path === '/login') {
+      // if is logged in, redirect to the home page
+      next({ path: '/' })
+    } else {
+      next()
+    }
+  } else {
+    /* has no token*/
+    if (whiteList.indexOf(to.path) !== -1) {
+      // in the free login whitelist, go directly
+      next()
+    } else {
+      // other pages that do not have permission to access are redirected to the login page.
+      next({ path: '/login' })
+    }
+  }
+})
+
+router.afterEach(() => {
+  // finish progress bar
 })
 
 export default router
