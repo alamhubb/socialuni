@@ -64,6 +64,7 @@ import NavMenu from '@/layout/NavMenu.vue'
 import NavBreadcrumb from '@/layout/NavBreadcrumb.vue'
 import DevAccountRO from '@/model/base/DevAccountRO'
 import { Component, Vue } from 'vue-facing-decorator'
+import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
 
 
 @Component({
@@ -72,7 +73,7 @@ import { Component, Vue } from 'vue-facing-decorator'
 export default class NavBar extends Vue {
 
   get user(){
-    return userModule.user
+    return socialuniUserModule.mineUser
   }
 
   longinOut() {

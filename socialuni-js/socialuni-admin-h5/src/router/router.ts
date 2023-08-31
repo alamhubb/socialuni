@@ -3,10 +3,11 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Layout from '@/layout/Layout.vue'
 import RouterName from '@/constant/RouterName'
 import TokenUtil from '@/utils/TokenUtil'
+import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
 
 
 export const menuRoutes = [
-  {
+  /*{
     path: '',
     name: RouterName.devAccount,
     component: () => import('@/views/devInfo/devInfo.vue'),
@@ -54,7 +55,7 @@ export const menuRoutes = [
     name: RouterName.userIdentityAudit,
     component: () => import('@/views/userIdentityAudit/UserIdentityAuditView.vue'),
     meta: { title: RouterName.userIdentityAudit, icon: 'strengthMonitoring' }
-  },
+  },*/
   {
     path: '/peiwanManage',
     name: 'peiwanManage',
@@ -123,10 +124,10 @@ const whiteList = ['/login'] // no redirect whitelist
 
 router.beforeEach(async(to, from, next) => {
   // set page title
-  let user = userModule.user
+  let user = socialuniUserModule.mineUser
   if (!user) {
     if (TokenUtil.hasToken()) {
-      user = await userModule.getUserAction()
+      user = await socialuniUserModule.getUserInfo()
     }
   }
   if (user) {
