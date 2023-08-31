@@ -19,9 +19,7 @@
     "cos-js-sdk-v5": "^1.2.18",
     "@dcloudio/uni-ui": "^1.4.23",
     "@dcloudio/types": "^3.0.17",
-    "vue": "^3.3.2",
-    "vue-class-component": "^8.0.0-rc.1",
-    "vue-property-decorator": "^10.0.0-rc.3"
+    "vue": "^3.3.2"
   },
   "devDependencies": {
     "typescript": "^4.7.4",

@@ -22,9 +22,7 @@
     "@socialuni/socialuni-im-view-h5": "../packages/socialuni-im/socialuni-im-view-h5",
     "@socialuni/socialuni-user-api": "../packages/socialuni-user-api",
     "@socialuni/socialuni-user-sdk": "../packages/socialuni-user-sdk",
-    "vue": "^3.3.2",
-    "vue-class-component": "^8.0.0-rc.1",
-    "vue-property-decorator": "^10.0.0-rc.3",
+    "vue": "^3.3.2"
     "vue-router": "^4.2.0"
   },
   "devDependencies": {
