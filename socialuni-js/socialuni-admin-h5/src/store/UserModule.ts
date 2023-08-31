@@ -1,4 +1,3 @@
-import { Action, Module, VuexModule } from 'vuex-class-modules'
 import LoginAPI from '@/api/LoginAPI'
 import StorageUtil from '@/utils/StorageUtil'
 import router from '@/router/router'
@@ -10,8 +9,7 @@ import TokenUtil from '@/utils/TokenUtil'
 import AdminUserAPI from '@/api/AdminUserAPI'
 import DevAccountRO from '@/model/base/DevAccountRO'
 
-@Module({ generateMutationSetters: true })
-export default class UserModule extends VuexModule {
+export default class UserModule {
   user: DevAccountRO = StorageUtil.getObj(AppConst.loginUser) || null
 
   setUser(user: DevAccountRO) {
@@ -23,7 +21,6 @@ export default class UserModule extends VuexModule {
     }
   }
 
-  @Action
   userLogin(user: SocialPhoneNumQO) {
     return LoginAPI.loginAPI(user).then((res) => {
       TokenUtil.set(res.token)
@@ -33,7 +30,6 @@ export default class UserModule extends VuexModule {
     })
   }
 
-  @Action
   userSecretKeyLogin(secretKey: string) {
     return LoginAPI.secretKeyLoginAPI(secretKey).then((res) => {
       TokenUtil.set(res.token)
@@ -43,7 +39,6 @@ export default class UserModule extends VuexModule {
     })
   }
 
-  @Action
   getUserAction() {
     const token = TokenUtil.get()
     if (token) {
@@ -54,7 +49,6 @@ export default class UserModule extends VuexModule {
     }
   }
 
-  @Action
   userLoginOut() {
     this.clearUserInfo()
     Message.success('登出成功')

@@ -16,10 +16,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 import NavMenuItem from '@/layout/components/NavMenu/NavMenuItem.vue'
 import { menuRoutes } from '@/router/router'
-import { namespace } from 'vuex-class'
 import DevAccountRO from '@/model/base/DevAccountRO'
-
-const userStore = namespace('user')
 
 @Component({
   components: { NavMenuItem }

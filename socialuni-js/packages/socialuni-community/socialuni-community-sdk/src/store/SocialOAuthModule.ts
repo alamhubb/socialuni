@@ -1,5 +1,4 @@
 /*
-import {Action, Module, VuexModule} from 'vuex-class-modules'
 import SocialAuthType from '@/socialuni/constant/SocialAuthType'
 import DevAccountAPI from '@/socialuni/api/DevAccountAPI'
 import DevAccountRO from '@/socialuni/model/dev/DevAccountRO'

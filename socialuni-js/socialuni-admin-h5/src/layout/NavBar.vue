@@ -60,21 +60,21 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
 import NavMenu from '@/layout/NavMenu.vue'
 import NavBreadcrumb from '@/layout/NavBreadcrumb.vue'
 import DevAccountRO from '@/model/base/DevAccountRO'
+import { Component, Vue } from 'vue-facing-decorator'
 
-import { namespace } from 'vuex-class'
-import { userModule } from '@/store'
-
-const userStore = namespace('user')
 
 @Component({
   components: { NavBreadcrumb, NavMenu }
 })
 export default class NavBar extends Vue {
   @userStore.State('user') user: DevAccountRO
+
+  get user(){
+    return userModule.user
+  }
 
   longinOut() {
     userModule.userLoginOut()

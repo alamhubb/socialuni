@@ -89,16 +89,13 @@
 <script lang="tsx">
 import { Component, Vue } from 'vue-property-decorator'
 import DevAccountRO from '@/model/base/DevAccountRO'
-import { namespace } from 'vuex-class'
 import DevAccountType from '@/constant/DevAccountType'
 import { OperationType } from '@/constant/OperationType'
 import ToastUtil from '@/utils/ToastUtil'
 import AlertUtil from '@/utils/AlertUtil'
 import AdminUserAPI from '@/api/AdminUserAPI'
 import { ElForm } from 'element-ui/types/form'
-import { userModule } from '@/store'
 
-const userStore = namespace('user')
 @Component
 export default class DevInfoPage extends Vue {
   $refs: {
