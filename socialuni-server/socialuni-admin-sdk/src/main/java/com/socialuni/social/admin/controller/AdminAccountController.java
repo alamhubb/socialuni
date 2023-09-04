@@ -1,6 +1,7 @@
 package com.socialuni.social.admin.controller;
 
 
+import com.socialuni.social.admin.facede.AdminDevAccountFacade;
 import com.socialuni.social.admin.service.AdminAccountService;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.utils.UUIDUtil;
@@ -27,7 +28,7 @@ public class AdminAccountController {
 
     @PostMapping("getUser")
     public ResultRO<DevAccountRO> getUser() {
-        DevAccountModel user = DevAccountFacade.getAdminDevAccountNotNull();
+        DevAccountModel user = AdminDevAccountFacade.getAdminDevAccountNotNull();
         DevAccountRO devAccountRO = new DevAccountRO(user);
         //则更新用户手机号
         return new ResultRO<>(devAccountRO);
@@ -35,7 +36,7 @@ public class AdminAccountController {
 
     @PostMapping("resetSecretKey")
     public ResultRO<String> resetSecretKey() {
-        DevAccountModel devAccount = DevAccountFacade.getAdminDevAccountNotNull();
+        DevAccountModel devAccount = AdminDevAccountFacade.getAdminDevAccountNotNull();
         String secretKey = UUIDUtil.getUUID();
         devAccount.setSecretKey(secretKey);
 

@@ -107,10 +107,7 @@ public class DevAccountFacade {
         return devAccountModel.getUserId();
     }
 
-    public static boolean isCenter() {
-        DevAccountModel devAccountModel = DevAccountFacade.getAdminDevAccountNotNull();
-        return devAccountModel.getId() == 1;
-    }
+
 
 
     /*public static Integer getDataOriginalDevIdNotNull() {
@@ -202,34 +199,8 @@ public class DevAccountFacade {
         return devId == 1;
     }
 
-    public static DevAccountModel getAdminDevAccountNotNull() {
-        DevAccountModel user = DevAccountFacade.getAdminDevAccountAllowNull();
-        if (user == null) {
-            throw new SocialNotLoginException();
-        }
-        return user;
-    }
-
-    public static DevAccountModel getAdminDevAccountAllowNull() {
-        String token = SocialTokenFacade.getToken();
-        return DevAccountFacade.getDevAccountByToken(token);
-    }
-
-    public static Integer getAdminDevAccountIdAllowNull() {
-        DevAccountModel devAccountModel = getAdminDevAccountAllowNull();
-        if (devAccountModel == null) {
-            return null;
-        }
-        return devAccountModel.getId();
-    }
-
-    //得到用户信息
-    private static DevAccountModel getDevAccountByToken(String token) {
-        useruti
-        DevAccountModel devAccountModel = devAccountApi.findOneBySecretKey(devSecretKey);
-        if (devAccountModel == null) {
-            throw new SocialParamsException("token被破解");
-        }
+    public static DevAccountModel getDevAccountByUserId(Integer userId) {
+        DevAccountModel devAccountModel = devAccountApi.findFirstByUserId(userId);
         return devAccountModel;
     }
 

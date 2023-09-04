@@ -1,5 +1,6 @@
 package com.socialuni.social.admin.config;
 
+import com.socialuni.social.admin.facede.AdminDevAccountFacade;
 import com.socialuni.social.common.api.constant.ErrorCode;
 import com.socialuni.social.common.api.exception.exception.SocialNotLoginException;
 import com.socialuni.social.common.api.utils.RequestUtil;
@@ -39,10 +40,9 @@ public class WebInterceptor extends SocialuniWebInterceptor {
             return true;
         }
         RequestLogDO requestLogDO = RequestLogUtil.get();
-        DevAccountModel user = DevAccountFacade.getAdminDevAccountAllowNull();
+        DevAccountModel user = AdminDevAccountFacade.getAdminDevAccountAllowNull();
         if (user != null) {
             RequestUtil.setAttribute(SocialFeignHeaderName.socialuniSecretKey, user.getSecretKey());
-            requestLogDO.setUserId(user.getId());
         }
         RequestLogUtil.saveAsync(requestLogDO);
         String ipKey = requestLogDO.getIp();
