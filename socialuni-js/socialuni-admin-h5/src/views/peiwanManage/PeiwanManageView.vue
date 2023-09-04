@@ -53,9 +53,6 @@ export default class PeiwanManageView extends Vue {
   }
 
   openMapDialog() {
-    console.log(this)
-    console.log(this.$refs)
-    console.log(this.$refs.mapDialog)
     this.$refs.mapDialog.open()
   }
 

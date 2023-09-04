@@ -13,7 +13,7 @@
   <!-- v-on="$listeners"  将外部事件绑定到指定内部组件，详见： https://cn.vuejs.org/v2/api/#vm-listeners-->
   <el-dialog
       v-bind="$attrs"
-      :visible.sync="dialogVisible"
+      v-model="dialogVisible"
       append-to-body
       @open="emitOpen"
       @close="dialogClose">
@@ -120,6 +120,7 @@ export default class SDialog extends Vue {
 
   // 提供给外部使用的方法
   open() {
+    console.log(12)
     // 重置按钮状态
     this.clearValidate()
     /* this.$nextTick(() => {
