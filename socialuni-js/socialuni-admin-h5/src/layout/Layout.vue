@@ -1,7 +1,7 @@
 <template>
   <!--  <div :class="classObj" class="app-wrapper">-->
   <div class="h100p flex-col">
-    <nav-bar/>
+<!--    <nav-bar/>-->
     <div class="flex-row flex-1 overflow-hidden">
       <nav-menu class="w150 flex-none"/>
       <div class="flex-1 overflow-auto pd-sm bg-default">
