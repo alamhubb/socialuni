@@ -10,7 +10,7 @@ export default class AppUtil {
   static $utils = null
   static $publicPath = null
   static $parentRouter = null
-  static appCode = null
+  static appCode = process.env.VUE_APP_CODE || null
   static readonly appName = process.env.VUE_APP_NAME
   static readonly baseUrl = process.env.VUE_APP_BASE_API
   // @ts-ignore

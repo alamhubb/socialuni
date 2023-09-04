@@ -20,6 +20,7 @@
               </div>
               <div class="row-col-center">
                 <y-search
+                  :placeholder="placeholder"
                   v-model="searchForm.searchText"
                   :title="searchTitle"
                   :show-btn="showBtn"
@@ -77,7 +78,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator'
+import {Component, Emit, Model, Prop, Vue, Watch} from 'vue-property-decorator'
 import YTable from '@/components/YComponent/YTable/YTable.vue'
 import ObjectUtil from '../utils/ObjectUtil'
 import YPagination from '@/components/YComponent/YPageable/YPagination.vue'
@@ -106,6 +107,7 @@ export default class DataTable extends Vue {
   @Prop({default: '检索'}) readonly searchTitle: string
   @Prop({default: false, type: Boolean}) readonly checked: boolean
   @Prop({default: false, type: Boolean}) readonly loading: boolean
+  @Prop({default: '', type: String}) readonly placeholder: string
   @Prop() readonly tableData: any[]
 
   @Prop({default: false, type: Boolean}) readonly showPage: boolean

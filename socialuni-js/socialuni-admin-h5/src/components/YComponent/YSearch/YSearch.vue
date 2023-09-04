@@ -91,7 +91,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator'
+import {Component, Emit, Model, Prop, Vue, Watch} from 'vue-property-decorator'
 import YSelect from '@/components/YComponent/YSelect/YSelect.vue'
 import TableSelect from '@/components/YComponent/TableGroup/TableSelect'
 import DataTypeStrEnum from '@/components/YComponent/constant/DataTypeStrEnum'
@@ -116,6 +116,7 @@ export default class YSearch extends Vue {
   @Model('change') readonly model!: any
   @Prop({default: '检索'}) readonly title: string
   @Prop({default: '搜索'}) readonly btnTitle: string
+  @Prop({default: ''}) readonly placeholder: string
   @Prop({default: false, type: Boolean}) readonly showBtn: boolean
   @Prop() selectOptions: TableSelect
   // 单独使用Ysearch时，不使用selectOptions时可通过这个传递下拉参数
@@ -133,7 +134,7 @@ export default class YSearch extends Vue {
 
   mounted() {
     this.inputAutoFocus()
-    this.inputPlaceholder = this.selectOptions && this.selectOptions['defaultPlaceholder'] ? this.selectOptions['defaultPlaceholder'] : ''
+    this.inputPlaceholder = this.selectOptions && this.selectOptions['defaultPlaceholder'] ? this.selectOptions['defaultPlaceholder'] : this.placeholder
   }
 
   inputAutoFocus() {

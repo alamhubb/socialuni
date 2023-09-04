@@ -559,9 +559,9 @@ export default {
     // 点击高级搜索按钮事件
     advancedSwitch() {
       this.advancedShow = !this.advancedShow
-      if (!this.advancedShow) {
-        this.advancedResetForm()
-      }
+      // if (!this.advancedShow) {
+      //   this.advancedResetForm()
+      // }
       this.$emit('advancedSwitch', this.advancedShow)
     },
 

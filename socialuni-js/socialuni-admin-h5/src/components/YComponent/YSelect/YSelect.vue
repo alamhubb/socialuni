@@ -24,7 +24,7 @@
 
 <script lang="ts">
 import type { ElSelect } from 'element-ui/types/select'
-import { Component, Emit, Model, Prop, Vue } from 'vue-facing-decorator'
+import { Component, Emit, Model, Prop, Vue } from 'vue-property-decorator'
 
 /**
  * @author 秦开远

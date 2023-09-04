@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-facing-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 
 @Component
 export default class YScrollbar extends Vue {

@@ -12,18 +12,19 @@
   }
 }
 
-.color-link {
-  @extend .bg-click;
+.use-link {
+  @extend .color-link;
+  @extend .use-click;
 }
 
-.color-link:hover {
+.use-link:hover {
   @extend .color-hover;
 }
 
-.color-link:focus {
+.use-link:focus {
   @extend .color-focus;
 }
 
-.color-link:active {
+.use-link:active {
   @extend .color-active;
 }

@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-facing-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 
 @Component
 export default class YPageHeader extends Vue {
