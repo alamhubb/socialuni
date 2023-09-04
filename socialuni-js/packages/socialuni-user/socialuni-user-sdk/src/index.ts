@@ -24,7 +24,6 @@ import CommonEventUtil from "@socialuni/socialuni-native-util/src/util/CommonEve
 class SocialuniUserPlugin implements SocialuniPlugin {
     onLaunch() {
         socialuniUserModule.initSocialuniUserModule()
-        socialuniConfigModule.getReportTypesAction()
         // CosAPI.getCosPathAPI().then(res => {
         //     socialAppModule.cosHttpPath = res.data
         // })

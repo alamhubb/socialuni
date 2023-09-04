@@ -133,6 +133,7 @@ const whiteList = ['/login'] // no redirect whitelist
 router.beforeEach(async(to, from, next) => {
     // set page title
     let user = socialuniUserModule.mineUser
+    console.log(user)
     if (!user) {
         if (TokenUtil.hasToken()) {
             user = await socialuniUserModule.getUserInfo()

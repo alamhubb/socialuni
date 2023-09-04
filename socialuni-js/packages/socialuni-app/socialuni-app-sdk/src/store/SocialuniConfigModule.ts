@@ -13,8 +13,8 @@ class SocialuniConfigModule {
     appMoreConfig: SocialuniAppMoreConfigRO = new SocialuniAppMoreConfigRO()
     reportTypes: string[] = []
 
-    getAppConfigAction() {
-        SocialuniAppAPI.getAppConfigAPI().then(res => {
+    async getAppConfigAction() {
+        await SocialuniAppAPI.getAppConfigAPI().then(res => {
             const appInitData: AppInitDataRO = res.data
             this.appConfig = appInitData.appConfig
             this.appMoreConfig = appInitData.appMoreConfig
