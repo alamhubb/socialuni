@@ -17,15 +17,15 @@
       width="35"
       align="left">
       <!--      不加scope不起作用-->
-      <template slot="header">
-        <el-checkbox
-          :value="checkedAll"
-          :disabled="checkedAllDisabled"
-          @change="checkedAllClick"
-        >
-          <!--            <span class="color-th font-bold">全选</span>-->
-        </el-checkbox>
-      </template>
+        <template #header>
+            <el-checkbox
+                    :value="checkedAll"
+                    :disabled="checkedAllDisabled"
+                    @change="checkedAllClick"
+            >
+                <!--            <span class="color-th font-bold">全选</span>-->
+            </el-checkbox>
+        </template>
       <template #default="{row}">
         <div>
           <el-checkbox
@@ -42,7 +42,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-property-decorator'
+import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-facing-decorator'
 import YTableColumn from '@/components/YComponent/YTableColumn/YTableColumn.vue'
 import ObjectUtil from '@/components/YComponent/utils/ObjectUtil'
 import type { ElTable } from 'element-ui/types/table'
