@@ -1,7 +1,6 @@
 <template>
   <div class="h100p">
     7/89789
-<!--
     <div class="flex-row">
       <label-item label="陪玩名称">
         <el-input></el-input>
@@ -37,7 +36,6 @@
       </iframe>
     </dialog-box>
 
--->
 
   </div>
 </template>
