@@ -1,5 +1,7 @@
 <template>
-  <div class="h100p row-all-center">
+  <div class="h100p row-all-center">+
+
+    7/46546
     <div class="pb-5p">
       <div class="row-center">
         <!-- <div class="system_title_2">数据创建像搭积木一样简单</div> -->
@@ -121,6 +123,10 @@ import LoginService from "@socialuni/socialuni-user-sdk/src/logic/LoginService";
 export default class AdminLoginPage extends Vue {
   $refs: {
     authCode: ElInput;
+  }
+
+  created(){
+    console.log(123)
   }
 
   appName = socialuniConfigModule.appName

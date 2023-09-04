@@ -12,7 +12,7 @@ import {socialAppModule} from "./store/SocialAppModule";
 
 class SocialuniAppPlugin implements SocialuniPlugin {
     onLaunch() {
-        WebsocketUtil.websocketConnect(false)
+        // WebsocketUtil.websocketConnect(false)
         this.initApp()
     }
 

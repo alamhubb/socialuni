@@ -1,5 +1,7 @@
 <template>
   <div class="h100p">
+    7/89789
+<!--
     <div class="flex-row">
       <label-item label="陪玩名称">
         <el-input></el-input>
@@ -35,19 +37,19 @@
       </iframe>
     </dialog-box>
 
+-->
 
   </div>
 </template>
 
 <script lang="ts">
 import {Component, Vue} from 'vue-facing-decorator'
-import DataTable from '@/components/dataTable/DataTable.vue'
 import LabelItem from "@/components/LabelItem.vue";
 import {DialogInterface} from "@/interface/DialogInterface";
-import PeiwanRO from "@/model/peiwan/PeiwanRO";
+import PeiwanRO from "@socialuni/socialuni-admin-api/src/model/peiwan/PeiwanRO";
 
 @Component({
-  components: {LabelItem, DataTable}
+  components: {LabelItem}
 })
 export default class PeiwanManageView extends Vue {
   $refs: {
@@ -61,6 +63,7 @@ export default class PeiwanManageView extends Vue {
   district = null
 
   peiwanInfo: PeiwanRO = new PeiwanRO()
+
 
   beijingDistrict = [
     '东城',
@@ -77,6 +80,7 @@ export default class PeiwanManageView extends Vue {
   ]
 
   created() {
+    console.log('进入了')
     window.addEventListener('message', (event) => {
       // 接收位置信息，用户选择确认位置点后选点组件会触发该事件，回传用户的位置信息
       const loc = event.data
@@ -97,7 +101,3 @@ export default class PeiwanManageView extends Vue {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

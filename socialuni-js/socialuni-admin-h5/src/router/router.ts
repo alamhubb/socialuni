@@ -1,12 +1,11 @@
 // 1. 定义路由组件.
 // 也可以从其他文件导入
-import {createRouter, createWebHashHistory, createWebHistory} from "vue-router";
+import {createRouter,  createWebHistory} from "vue-router";
 
 import Layout from '@/layout/Layout.vue'
-import RouterName from '@/constant/RouterName'
-import TokenUtil from '@/utils/TokenUtil'
 import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
-
+import SocialuniTokenUtil from "@socialuni/socialuni-user-sdk/src/util/SocialuniTokenUtil";
+import PeiwanManageView from '@/views/peiwanManage/PeiwanManageView.vue'
 
 export const menuRoutes = [
     /*{
@@ -61,7 +60,7 @@ export const menuRoutes = [
     {
         path: '/peiwanManage',
         name: 'peiwanManage',
-        component: () => import('@/views/peiwanManage/PeiwanManageView.vue'),
+        component: PeiwanManageView,
         meta: {title: '陪玩管理', icon: 'strengthMonitoring'}
     }
 ]
@@ -134,16 +133,19 @@ router.beforeEach(async(to, from, next) => {
     // set page title
     let user = socialuniUserModule.mineUser
     console.log(user)
+    const hasToken = socialuniUserModule.hasToken
     if (!user) {
-        if (TokenUtil.hasToken()) {
-            user = await socialuniUserModule.getUserInfo()
+        if (hasToken) {
+            socialuniUserModule.getUserInfo()
         }
     }
-    if (user) {
+    console.log(hasToken)
+    if (hasToken) {
         if (to.path === '/login') {
             // if is logged in, redirect to the home page
             next({ path: '/' })
         } else {
+            console.log(to.path)
             next()
         }
     } else {
