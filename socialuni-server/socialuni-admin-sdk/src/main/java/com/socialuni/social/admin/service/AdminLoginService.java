@@ -12,7 +12,6 @@ import com.socialuni.social.sdk.logic.service.login.SocialuniDetailLoginService;
 import com.socialuni.social.tance.entity.DevAccountEntity;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.api.DevAccountRedisInterface;
-import com.socialuni.social.tance.sdk.api.DevTokenInterface;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.tance.sdk.model.DevTokenModler;
 import com.socialuni.social.user.sdk.dao.utils.SocialuniUserDOUtil;
@@ -34,8 +33,6 @@ public class AdminLoginService {
     DevAccountInterface devAccountApi;
     @Resource
     DevAccountEntity devAccountEntity;
-    @Resource
-    DevTokenInterface devTokenApi;
 
     @Resource
     private SocialuniDetailLoginService centerLoginService;

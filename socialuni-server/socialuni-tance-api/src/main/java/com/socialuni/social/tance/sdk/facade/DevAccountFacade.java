@@ -7,7 +7,6 @@ import com.socialuni.social.common.api.utils.SocialTokenFacade;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.api.DevAccountProviderInterface;
 import com.socialuni.social.tance.sdk.api.DevAccountRedisInterface;
-import com.socialuni.social.tance.sdk.api.DevTokenInterface;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.tance.sdk.enumeration.SocialFeignHeaderName;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
@@ -29,7 +28,6 @@ public class DevAccountFacade {
     private static DevAccountInterface devAccountApi;
     private static DevAccountRedisInterface devAccountRedisInterface;
     private static DevAccountProviderInterface devAccountProviderApi;
-    private static DevTokenInterface devTokenApi;
 
     /*    private static SocialUserPhoneRedis socialUserPhoneRedis;
         private static SocialUserPhoneEntity socialUserPhoneEntity;*/
@@ -47,11 +45,6 @@ public class DevAccountFacade {
     public void setSocialUserPhoneEntity(SocialUserPhoneEntity socialUserPhoneEntity) {
         DevAccountFacade.socialUserPhoneEntity = socialUserPhoneEntity;
     }*/
-
-    @Resource
-    public void setDevTokenRepository(DevTokenInterface devTokenApi) {
-        DevAccountFacade.devTokenApi = devTokenApi;
-    }
 
     @Autowired
     public void setDevAccountRepository(DevAccountInterface devAccountApi) {
