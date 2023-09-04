@@ -1,6 +1,7 @@
 <template>
     <div class="h100p overflow-hidden flex-col bg-default">
 <!--        <nav-bar/>-->
+      456456
         <div class="flex-1 overflow-hidden pd-sm">
             <RouterView/>
         </div>

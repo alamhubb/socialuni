@@ -67,7 +67,7 @@ class SocialuniUserPlugin implements SocialuniPlugin {
         //判断data类型，如果没类型，直接走
         //有内容则为本系统？也不一定，判断拿内容类型
         //然后本系统处理
-        const result: ResultRO = error.response.data
+        const result: ResultRO = error?.response?.data
         console.log(result)
         if (result) {
             const errorMsg = result.errorMsg
