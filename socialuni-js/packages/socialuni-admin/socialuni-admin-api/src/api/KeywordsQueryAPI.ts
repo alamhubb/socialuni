@@ -1,7 +1,7 @@
 /**
  * 举报内容的api
  */
-import request from '@/plugins/request'
+import socialuniAdminRequest from '../socialuniAdminRequest'
 import ReportAudit from '@/model/report/ReportAudit'
 import ReportVO from '@/model/report/ReportVO'
 import ObjectUtils from '@/utils/ObjectUtils'
@@ -10,30 +10,30 @@ import keywordsVO from '@/model/violateWord/KeywordsVO'
 
 export default class KeywordsQueryAPI {
   public static scanTalkKeywordsAPI() {
-    return request.post('keywords/scanTalkKeywords')
+    return socialuniAdminRequest.post('keywords/scanTalkKeywords')
   }
 
   public static scanCommentKeywordsAPI() {
-    return request.post('keywords/scanCommentKeywords')
+    return socialuniAdminRequest.post('keywords/scanCommentKeywords')
   }
 
   public static scanMessageKeywordsAPI() {
-    return request.post('keywords/scanMessageKeywords')
+    return socialuniAdminRequest.post('keywords/scanMessageKeywords')
   }
 
   public static queryKeywordAPI(content: string, count = 1000) {
-    return request.post<KeywordsDetailVO>('keywords/queryKeyword', ObjectUtils.toFormData({
+    return socialuniAdminRequest.post<KeywordsDetailVO>('keywords/queryKeyword', ObjectUtils.toFormData({
       content, count
     }))
   }
 
   public static keywordsAddList(keywordList: string[], count = 10000) {
-    return request.post<keywordsVO[]>('keywords/keywordsAddList', ObjectUtils.toFormData({
+    return socialuniAdminRequest.post<keywordsVO[]>('keywords/keywordsAddList', ObjectUtils.toFormData({
       keywordList, count
     }))
   }
 
   public static queryKeywordsAPI() {
-    return request.post('keywords/queryKeywords')
+    return socialuniAdminRequest.post('keywords/queryKeywords')
   }
 }

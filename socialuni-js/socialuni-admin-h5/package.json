@@ -13,8 +13,6 @@
     "@element-plus/icons-vue": "^2.1.0",
     "@socialuni/socialuni": "../packages/socialuni",
     "@socialuni/socialuni-app-view-h5": "../packages/socialuni-app-view-h5",
-    "@socialuni/socialuni-im-sdk": "../packages/socialuni-im-sdk",
-    "@socialuni/socialuni-im-view-h5": "../packages/socialuni-im/socialuni-im-view-h5",
     "@socialuni/socialuni-native-h5": "../packages/socialuni-native-h5",
     "@socialuni/socialuni-user-api": "../packages/socialuni-user-api",
     "@socialuni/socialuni-admin-api": "../packages/socialuni-admin-api",

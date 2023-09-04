@@ -1,13 +1,13 @@
-import request from '@/plugins/request'
+import socialuniAdminRequest from '../socialuniAdminRequest'
 import { Message } from 'element-ui'
 
 export default class UserGroupManageAPI {
   static queryUserGroups() {
-    return request.get('GroupController/list')
+    return socialuniAdminRequest.get('GroupController/list')
   }
 
   static setStaffGroupRoleAPI(groupId: number, roleId: number) {
-    return request.post('GroupController/setWeightRole?groupId=' + groupId +
+    return socialuniAdminRequest.post('GroupController/setWeightRole?groupId=' + groupId +
         '&roleId=' + roleId
     ).then(() => {
       Message.success('设置成功')

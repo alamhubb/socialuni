@@ -1,7 +1,7 @@
-import request from '@/plugins/request'
+import socialuniAdminRequest from '../socialuniAdminRequest'
 
 export default class PhoneAPI {
   static sendAuthCodeAPI(phoneNum: string) {
-    return request.post('phone/sendAuthCode', { phoneNum })
+    return socialuniAdminRequest.post('phone/sendAuthCode', { phoneNum })
   }
 }

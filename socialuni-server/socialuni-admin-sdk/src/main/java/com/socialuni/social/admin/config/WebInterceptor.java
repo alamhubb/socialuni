@@ -69,9 +69,9 @@ public class WebInterceptor extends SocialuniWebInterceptor {
 
         if ((request.getMethod().equals(RequestMethod.OPTIONS.name())
                 || uri.contains("openService")
-                || uri.contains("user/phoneLogin")
-                || uri.contains("user/secretKeyLogin")
-                || uri.contains("phone/sendAuthCode")
+                || uri.contains("phoneLogin")
+                || uri.contains("secretKeyLogin")
+                || uri.contains("sendAuthCode")
                 //这里只查询没被封禁的
                 || user != null)
         ) {

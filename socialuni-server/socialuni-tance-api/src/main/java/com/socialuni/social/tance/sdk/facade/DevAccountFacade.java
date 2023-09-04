@@ -225,55 +225,10 @@ public class DevAccountFacade {
 
     //得到用户信息
     private static DevAccountModel getDevAccountByToken(String token) {
-        //开发和生产逻辑不一样，开发从生产拿数据，生产直接从库里拿数据
-        /*if (SocialAppEnv.getContainsProdEnv()) {
-            //校验解析token
-            String devSecretKey = SocialTokenUtil.getUserKeyByToken(token);
-            if (StringUtils.isEmpty(devSecretKey)) {
-                return null;
-            }
-            DevAccountDO devAccountDO = devAccountRepository.findOneBySecretKey(devSecretKey);
-            if (devAccountDO == null) {
-                throw new SocialParamsException("token被破解");
-            }
-            //todo 这里需要校验有效期吧
-            String tokenCode = devTokenRepository.findFirstTokenCodeByUserId(devAccountDO.getId());
-            if (!token.equals(tokenCode)) {
-                return null;
-            }
-            return devAccountDO;
-        } else {
-            //校验解析token
-            String devSecretKey = SocialTokenUtil.getUserKeyByToken(token);
-            if (StringUtils.isEmpty(devSecretKey)) {
-                return null;
-            }
-            ResultRO<DevAccountDO> resultRO = socialuniDevAccountAPI.queryDevAccount(new DevAccountQueryQO(devSecretKey));
-
-            DevAccountDO devAccountDO = resultRO.getData();
-            DevTokenDO devTokenDO = devTokenRepository.findFirstByTokenCode(token);
-            if (devAccountDO == null || devTokenDO == null) {
-                return null;
-            }
-            //todo 这里需要校验有效期吧
-            if (!devTokenDO.getDevId().equals(devAccountDO.getId())) {
-                throw new SocialParamsException("token被破解");
-            }
-            return devAccountDO;
-        }*/
-        //校验解析token
-        String devSecretKey = SocialTokenFacade.getUserKeyByToken(token);
-        if (StringUtils.isEmpty(devSecretKey)) {
-            return null;
-        }
+        useruti
         DevAccountModel devAccountModel = devAccountApi.findOneBySecretKey(devSecretKey);
         if (devAccountModel == null) {
             throw new SocialParamsException("token被破解");
-        }
-        //todo 这里需要校验有效期吧
-        String tokenCode = devTokenApi.findFirstTokenCodeByUserId(devAccountModel.getId());
-        if (!token.equals(tokenCode)) {
-            return null;
         }
         return devAccountModel;
     }

@@ -80,7 +80,7 @@ public class AdminLoginService {
         String devSecretKey = devAccountModel.getSecretKey();
         //生成userToken
         String userToken = SocialTokenFacade.generateTokenByUserKey(devSecretKey);
-        userToken = devTokenApi.savePut(new DevTokenModler(userToken, devAccountModel.getId())).getTokenCode();
+//        userToken = devTokenApi.savePut(new DevTokenModler(userToken, devAccountModel.getId())).getTokenCode();
 
         DevAccountRO devAccountRO = new DevAccountRO(devAccountModel);
         if (isNewAccount) {

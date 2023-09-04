@@ -65,12 +65,30 @@ import NavBreadcrumb from '@/layout/NavBreadcrumb.vue'
 import DevAccountRO from '@/model/base/DevAccountRO'
 import { Component, Vue } from 'vue-facing-decorator'
 import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
+import CommonEventUtil from "@socialuni/socialuni-native-util/src/util/CommonEventUtil";
+import SocialuniUserEventConst from "@socialuni/socialuni-user-sdk/src/constant/SocialuniUserEventConst";
 
 
 @Component({
   components: { NavBreadcrumb, NavMenu }
 })
 export default class NavBar extends Vue {
+
+  created() {
+    CommonEventUtil.on(SocialuniUserEventConst.toLogin, () => {
+      console.log('接收到了')
+      this.toLogin()
+    })
+  }
+
+  mounted() {
+
+  }
+
+  toLogin() {
+    this.$router.push('/login')
+  }
+
 
   get user(){
     return socialuniUserModule.mineUser

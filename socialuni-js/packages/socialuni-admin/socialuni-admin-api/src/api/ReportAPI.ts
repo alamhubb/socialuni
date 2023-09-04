@@ -1,47 +1,47 @@
 /**
  * 举报内容的api
  */
-import request from '@/plugins/request'
+import socialuniAdminRequest from '../socialuniAdminRequest'
 import ReportVO from '@/model/report/ReportVO'
 
 export default class ReportAPI {
   public static queryReportTypesAPI() {
-    return request.post('report/queryReportTypes')
+    return socialuniAdminRequest.post('report/queryReportTypes')
   }
 
   public static queryReportsAPI() {
-    return request.post('report/queryReports')
+    return socialuniAdminRequest.post('report/queryReports')
   }
 
   public static queryReportHistoryAPI() {
-    return request.post('report/queryReportHistory')
+    return socialuniAdminRequest.post('report/queryReportHistory')
   }
 
   public static queryViolationHistoryAPI() {
-    return request.post('report/queryViolationHistory')
+    return socialuniAdminRequest.post('report/queryViolationHistory')
   }
 
   public static reviewReportsAPI(reports: ReportVO[]) {
-    return request.post('report/reviewReports', reports)
+    return socialuniAdminRequest.post('report/reviewReports', reports)
   }
 
   public static queryUserReportsAPI(userId: number) {
-    return request.post('report/queryUserReports?userId=' + userId)
+    return socialuniAdminRequest.post('report/queryUserReports?userId=' + userId)
   }
 
   public static queryUserContentsByPhoneNumAPI(phoneNum: number) {
-    return request.post('report/queryUserContentsByPhoneNum?phoneNum=' + phoneNum)
+    return socialuniAdminRequest.post('report/queryUserContentsByPhoneNum?phoneNum=' + phoneNum)
   }
 
   public static reportAuditAPI(row:ReportVO) {
-    return request.post('report/reportAudit', row)
+    return socialuniAdminRequest.post('report/reportAudit', row)
   }
 
   public static reportAuditListAPI(reports: ReportVO []) {
-    return request.post('report/reportAuditList', reports)
+    return socialuniAdminRequest.post('report/reportAuditList', reports)
   }
 
   public static getViolationAPI() {
-    return request.post('report/getViolation')
+    return socialuniAdminRequest.post('report/getViolation')
   }
 }
