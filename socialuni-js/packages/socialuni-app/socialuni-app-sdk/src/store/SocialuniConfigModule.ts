@@ -7,6 +7,7 @@ import ReportAPI from "@socialuni/socialuni-app-api/src/api/ReportAPI";
 
 class SocialuniConfigModule {
 
+    appName = '测试系统'
     // 动态页展示广告,设置一些默认值，在这里设置还是去使用的地方设置
     appConfig: SocialuniAppConfigRO = new SocialuniAppConfigRO()
     appMoreConfig: SocialuniAppMoreConfigRO = new SocialuniAppMoreConfigRO()

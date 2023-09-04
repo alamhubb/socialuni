@@ -4,7 +4,7 @@
             <div class="row-center">
                 <!-- <div class="system_title_2">数据创建像搭积木一样简单</div> -->
                 <!--        <h6 class="system_desc">缩短了您与数据的距离,真正实现了数据的触手可及。同时也提供了命令行工具，方便您将算法嵌入到自己的工程中。</h6>-->
-                <div class="font-20 font-bold color-social">欢迎加入 - 社交软件联盟</div>
+                <div class="font-20 font-bold color-social">欢迎加入 - {{appName}}</div>
             </div>
             <div class="mt w300">
                 <el-form
@@ -56,7 +56,7 @@
                       </div>
                     </el-form-item>-->
                     <el-form-item label="验证码" prop="authCode" label-width="70px">
-                        <div class="flex-row">
+                        <div class="flex-row w100p">
                             <el-input
                                     ref="authCode"
                                     v-model="loginUser.authCode"
@@ -113,6 +113,7 @@ import ToastUtil from '@/utils/ToastUtil'
 import NumberUtil from '@/utils/NumberUtil'
 import SocialPhoneNumQO from "@socialuni/socialuni-admin-api/src/model/base/SocialPhoneNumQO";
 import PhoneAPI from "@socialuni/socialuni-user-api/src/api/PhoneAPI";
+import {socialuniConfigModule} from "@socialuni/socialuni-app-sdk/src/store/SocialuniConfigModule";
 
 
 @Component
@@ -120,6 +121,8 @@ export default class LoginPage extends Vue {
     $refs: {
         authCode: ElInput;
     }
+
+    appName = socialuniConfigModule.appName
 
     secretKey = ''
 
