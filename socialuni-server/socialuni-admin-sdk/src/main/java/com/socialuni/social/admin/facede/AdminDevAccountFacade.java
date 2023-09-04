@@ -33,6 +33,9 @@ public class AdminDevAccountFacade {
 
     //得到用户信息
     private static DevAccountModel getDevAccountByToken(String token) {
+        if (token == null) {
+            return null;
+        }
         SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getUserByToken(token);
         if (socialuniUserDo == null) {
             throw new SocialParamsException("token被破解");

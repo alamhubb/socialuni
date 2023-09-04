@@ -13,8 +13,18 @@ import {socialAppModule} from "./store/SocialAppModule";
 class SocialuniAppPlugin implements SocialuniPlugin {
     onLaunch() {
         WebsocketUtil.websocketConnect(false)
-        socialAppModule.getHomeSwipersAction()
-        socialuniConfigModule.getAppConfigAction()
+        this.initApp()
+    }
+
+    async initApp() {
+        try {
+            await socialuniConfigModule.getAppConfigAction()
+            console.log(1111)
+            socialAppModule.getHomeSwipersAction()
+            socialuniConfigModule.getReportTypesAction()
+        } catch (e) {
+
+        }
     }
 
     onRequestInterceptors(config: InternalAxiosRequestConfig) {
