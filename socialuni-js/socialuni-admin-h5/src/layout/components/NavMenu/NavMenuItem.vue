@@ -45,7 +45,7 @@ import { Component, Prop, Vue } from 'vue-facing-decorator'
 import AppLink from '@/layout/components/HorizontalSidebar/Link.vue'
 import MenuItem from '@/layout/components/HorizontalSidebar/Item.vue'
 // @ts-ignore
-import path from 'path'
+import path from 'path-browserify'
 
 @Component({
   components: { MenuItem, AppLink }

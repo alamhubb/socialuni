@@ -3,8 +3,8 @@
     class="row-between shadow-bottom index-sm px"
   >
     <div class="flex-none row-col-center mr-40 bg-click" @click="toHome">
-      <img src="@/assets/img/logo.jpg" class="h40" alt="logo">
-      <div class="font-19 ml-3 mt-1 font-bold color-social">社交软件联盟</div>
+<!--      <img src="@/assets/img/logo.jpg" class="h40" alt="logo">-->
+<!--      <div class="font-19 ml-3 mt-1 font-bold color-social">社交软件联盟</div>-->
     </div>
 
     <div class="flex-1 row-end">

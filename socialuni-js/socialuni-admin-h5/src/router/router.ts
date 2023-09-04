@@ -83,6 +83,8 @@ export const constantRoutes = [
         redirect: '/peiwanManage',
         children: menuRoutes
     },
+    // 404 page must be placed at the end !!!
+    {path: '/:pathMatch(.*)', redirect: '/404', hidden: true}
     /* {
       path: '/',
       component: Layout,

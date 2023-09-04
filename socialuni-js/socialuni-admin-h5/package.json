@@ -25,7 +25,8 @@
     "pinyin-match": "^1.2.4",
     "vue": "^3.3.2",
     "vue-facing-decorator": "^3.0.2",
-    "vue-router": "^4.2.0"
+    "vue-router": "^4.2.0",
+    "path-browserify": "^1.0.1"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.1.0",
