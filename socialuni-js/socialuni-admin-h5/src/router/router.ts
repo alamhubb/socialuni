@@ -118,6 +118,7 @@ export const constantRoutes = [
 
 console.log(constantRoutes)
 
+
 // 3. 创建路由实例并传递 `routes` 配置
 // 你可以在这里输入更多的配置，但我们在这里
 // 暂时保持简单
@@ -126,5 +127,39 @@ const router = createRouter({
     history: createWebHashHistory(),
     routes: constantRoutes, // `routes: routes` 的缩写
 })
+
+const whiteList = ['/login'] // no redirect whitelist
+
+router.beforeEach(async(to, from, next) => {
+    // set page title
+    let user = socialuniUserModule.mineUser
+    if (!user) {
+        if (TokenUtil.hasToken()) {
+            user = await socialuniUserModule.getUserInfo()
+        }
+    }
+    if (user) {
+        if (to.path === '/login') {
+            // if is logged in, redirect to the home page
+            next({ path: '/' })
+        } else {
+            next()
+        }
+    } else {
+        /* has no token*/
+        if (whiteList.indexOf(to.path) !== -1) {
+            // in the free login whitelist, go directly
+            next()
+        } else {
+            // other pages that do not have permission to access are redirected to the login page.
+            next({ path: '/login' })
+        }
+    }
+})
+
+router.afterEach(() => {
+    // finish progress bar
+})
+
 
 export default router

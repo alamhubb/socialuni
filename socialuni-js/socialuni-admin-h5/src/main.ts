@@ -1,7 +1,6 @@
 import {createApp} from 'vue'
 
 import App from './App.vue'
-import './styles/index.scss'
 import Socialuni from "@socialuni/socialuni/src";
 import router from "@/router/router";
 

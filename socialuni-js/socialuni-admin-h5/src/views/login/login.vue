@@ -111,11 +111,11 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-facing-decorator'
-import SocialPhoneNumQO from '@/model/base/SocialPhoneNumQO'
 import ToastUtil from '@/utils/ToastUtil'
 import NumberUtil from '@/utils/NumberUtil'
-import { ElInput } from 'element-ui/types/input'
-import PhoneAPI from '@/api/PhoneAPI'
+import SocialPhoneNumQO from "@socialuni/socialuni-admin-api/src/model/base/SocialPhoneNumQO";
+import PhoneAPI from "@socialuni/socialuni-user-api/src/api/PhoneAPI";
+
 
 @Component
 export default class LoginPage extends Vue {

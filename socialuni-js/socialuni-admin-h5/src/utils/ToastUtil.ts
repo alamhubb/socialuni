@@ -1,22 +1,22 @@
-import { Message } from 'element-ui'
+import { ElMessage } from 'element-plus'
 
 export default class ToastUtil {
   static info(message: string) {
-    return Message.info({
+    return ElMessage.info({
       message, duration: 1500,
       showClose: true
     })
   }
 
   static warning(message: string) {
-    return Message.warning({
+    return ElMessage.warning({
       message, duration: 1500,
       showClose: true
     })
   }
 
   static throwError(message: string, duration = 1500) {
-    Message.error({
+    ElMessage.error({
       message, duration,
       showClose: true
     })
@@ -24,7 +24,7 @@ export default class ToastUtil {
   }
 
   static error(message: string, duration = 1500) {
-    Message.error({
+    ElMessage.error({
       message,
       duration,
       showClose: true
@@ -32,7 +32,7 @@ export default class ToastUtil {
   }
 
   static success(message: string) {
-    return Message.success({
+    return ElMessage.success({
       message, duration: 1500,
       showClose: true
     })
