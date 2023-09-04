@@ -22,10 +22,10 @@
 </template>
 
 <script lang="ts">
-import {Options, Emit, Prop, Vue} from 'vue-property-decorator'
+import {Component, Emit, Prop, Vue} from 'vue-facing-decorator'
 import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
 
-@Options({})
+@Component({})
 export default class QPullRefresh extends Vue {
   @Prop({default: 50}) refreshNum: number
   //下偏移量

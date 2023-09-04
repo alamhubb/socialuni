@@ -108,11 +108,11 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue} from 'vue-property-decorator'
+import {Components, Vue} from 'vue-facing-decorator'
 import SScrollbar from "@socialuni/socialuni-ui-h5/src/components/SScrollbar.vue";
 import SocialuniChatViewServiceH5 from "@socialuni/socialuni-im-h5-sdk/src/logic/SocialuniChatViewServiceH5";
 
-@Options({components: {SScrollbar}})
+@Component({components: {SScrollbar}})
 export default class SocialuniChatView extends Vue {
 
     viewService: SocialuniChatViewServiceH5 = new SocialuniChatViewServiceH5()

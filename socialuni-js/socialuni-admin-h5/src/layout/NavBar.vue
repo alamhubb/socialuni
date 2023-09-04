@@ -36,7 +36,7 @@
             </div>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>{{
-                user ? user.username : '未登录'
+                user ? user.nickname : '未登录'
               }}
               </el-dropdown-item>
               <el-dropdown-item divided @click.native="longinOut">退出登陆</el-dropdown-item>
@@ -62,7 +62,6 @@
 <script lang="ts">
 import NavMenu from '@/layout/NavMenu.vue'
 import NavBreadcrumb from '@/layout/NavBreadcrumb.vue'
-import DevAccountRO from '@/model/base/DevAccountRO'
 import { Component, Vue } from 'vue-facing-decorator'
 import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
 import CommonEventUtil from "@socialuni/socialuni-native-util/src/util/CommonEventUtil";

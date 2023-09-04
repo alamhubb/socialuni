@@ -3,10 +3,10 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue} from 'vue-property-decorator'
+import {Components, Vue} from 'vue-facing-decorator'
 import MineView from "@socialuni/socialuni-user-view-uni/src/views/user/MineView.vue";
 
-@Options({
+@Component({
   components: {
     MineView
   }

@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-property-decorator'
+import { Options, Vue } from 'vue-facing-decorator'
 import { menuRoutes } from '@/router'
 
 @Component({})

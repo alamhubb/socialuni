@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue} from 'vue-property-decorator'
+import {Components, Vue} from 'vue-facing-decorator'
 import SkipType from "@socialuni/socialuni-constant/constant/SkipType";
 import {socialAppModule} from "@socialuni/socialuni-app-sdk/src/store/SocialAppModule";
 import {socialuniConfigModule} from "@socialuni/socialuni-app-sdk/src/store/SocialuniConfigModule";
@@ -26,7 +26,7 @@ import SocialuniAppPageUtil from "@socialuni/socialuni-app-sdk/src/util/Socialun
 
 
 // todo 后台可控制是否显示轮播图
-@Options({})
+@Component({})
 export default class TalkSwipers extends Vue {
     get homeSwipers() {
         return socialAppModule.homeSwipers

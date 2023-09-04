@@ -9,9 +9,9 @@
 </template>
 
 <script lang="ts">
-import { Emit, Options, Prop, Vue } from 'vue-property-decorator'
+import { Emit, Options, Prop, Vue } from 'vue-facing-decorator'
 
-@Options({})
+@Component({})
 export default class QIcon extends Vue {
   @Prop({ type: [String, Number] }) readonly size: string | number
   @Prop({

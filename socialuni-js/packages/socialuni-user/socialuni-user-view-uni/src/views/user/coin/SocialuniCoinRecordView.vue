@@ -75,7 +75,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Options, Prop, Emit} from 'vue-property-decorator'
+import {Vue, Options, Prop, Emit} from 'vue-facing-decorator'
 import SocialuniFollowType from "@socialuni/socialuni-constant/constant/user/SocialuniFollowType";
 import SocialUserContentRO from "@socialuni/socialuni-api-base/src/model/social/SocialUserContentRO";
 import {onLoad, onPullDownRefresh, onReachBottom, onShow} from "@dcloudio/uni-app";
@@ -85,7 +85,7 @@ import SocialGenderTag from "../../../components/SocialGenderTag/SocialGenderTag
 import FollowAPI from "@socialuni/socialuni-community-api/src/api/FollowAPI";
 import UserPageUtil from "@socialuni/socialuni-user-sdk/src/util/UserPageUtil";
 
-@Options({
+@Component({
     components: {SocialGenderTag, QTabs}
 })
 export default class SocialuniCoinRecordView extends Vue {

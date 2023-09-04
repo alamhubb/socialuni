@@ -5,10 +5,10 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue} from 'vue-property-decorator'
+import {Components, Vue} from 'vue-facing-decorator'
 import FriendApplyListView from "@socialuni/socialuni-im-view-uni/src/views/chat/FriendApplyListView.vue";
 
-@Options({components: {FriendApplyListView}})
+@Component({components: {FriendApplyListView}})
 export default class FriendApplyListPage extends Vue {
 
 }

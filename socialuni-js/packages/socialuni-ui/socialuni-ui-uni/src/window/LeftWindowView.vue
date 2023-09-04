@@ -13,13 +13,13 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue} from 'vue-property-decorator'
+import {Components, Vue} from 'vue-facing-decorator'
 import PageUtil from '@socialuni/socialuni-util/src/util/PageUtil'
 import ImPageUtil from '@socialuni/socialuni-im-sdk/src/util/ImPageUtil'
 import RouterUtil from '@socialuni/socialuni-util/src/util/RouterUtil'
 import ImPagePath from '@socialuni/socialuni-im-sdk/src/constant/ImPagePath'
 
-@Options({})
+@Component({})
 export default class LeftWindowView extends Vue {
 
   menus = ['首页','聊天室','晒自拍']

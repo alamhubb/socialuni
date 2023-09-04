@@ -14,13 +14,13 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue} from 'vue-property-decorator'
+import {Components, Vue} from 'vue-facing-decorator'
 import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
 import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
 import SkipUrlConst from "@socialuni/socialuni-app-sdk/src/constant/SkipUrlConst";
 
-@Options({
+@Component({
   components: {QIcon}
 })
 export default class LoginFooterAppInfo extends Vue {

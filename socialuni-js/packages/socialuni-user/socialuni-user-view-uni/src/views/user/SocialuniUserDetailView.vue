@@ -98,11 +98,11 @@ import QNavbar from "@socialuni/socialuni-ui-uni/src/components/QNavbar/QNavbar.
 import SocialGenderTag from "../../components/SocialGenderTag/SocialGenderTag.vue"
 import {getCurrentInstance, provide, reactive} from "vue";
 import SocialuniUserProvideKeys from "@socialuni/socialuni-user-sdk/src/constant/SocialuniUserProvideKeys";
-import {Inject, Options, Vue} from 'vue-property-decorator'
+import {Inject, Options, Vue} from 'vue-facing-decorator'
 import {socialuniUserDetailViewService} from "@socialuni/socialuni-user-sdk/src/logic/SocialuniUserDetailViewService";
 import {onLoad} from "@dcloudio/uni-app";
 
-@Options({
+@Component({
   components: {
     SocialuniUserInfoImg,
     QIcon,

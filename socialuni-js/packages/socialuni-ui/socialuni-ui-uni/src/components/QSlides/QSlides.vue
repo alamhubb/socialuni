@@ -12,13 +12,13 @@
 </template>
 
 <script lang="ts">
-import {Options, Emit, Model, Prop, Vue, Watch} from 'vue-property-decorator'
+import {Component, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator'
 
 /**
  * 获取每一块的高度
  */
 
-@Options({})
+@Component({})
 export default class YSlides extends Vue {
   $refs: {
     slides: HTMLDivElement[];

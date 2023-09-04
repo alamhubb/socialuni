@@ -21,10 +21,10 @@
 </template>
 
 <script lang="ts">
-import {Options, Prop, Vue} from "vue-property-decorator";
+import {Component, Prop, Vue} from "vue-facing-decorator";
 import MessageVO from "@socialuni/socialuni-im-api/src/model/RO/MessageVO";
 
-@Options({})
+@Component({})
 export default class MessageItemContent extends Vue {
   @Prop() msg: MessageVO
 

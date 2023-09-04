@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue, Watch} from 'vue-property-decorator'
+import {Component, Vue, Watch} from 'vue-facing-decorator'
 import MsgUtil from "@socialuni/socialuni-app-sdk/src/util/MsgUtil";
 import {socialTalkModule} from "@socialuni/socialuni-community-sdk/src/store/SocialTalkModule";
 import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
@@ -45,7 +45,7 @@ import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/Socialun
 import PlatformUtils from "@socialuni/socialuni-user-sdk/src/util/PlatformUtils";
 import UserMsgUtil from "@socialuni/socialuni-user-sdk/src/util/UserMsgUtil";
 
-@Options({})
+@Component({})
 export default class MsgInput extends Vue {
     content = ''
 

@@ -5,9 +5,9 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue} from 'vue-property-decorator'
+import {Components, Vue} from 'vue-facing-decorator'
 
-@Options({})
+@Component({})
 export default class QTab extends Vue {
 
 }

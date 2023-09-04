@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts">
-import {Emit, Options, Vue} from 'vue-property-decorator'
+import {Emit, Options, Vue} from 'vue-facing-decorator'
 import QPopup from "@socialuni/socialuni-ui-uni/src/components/QPopup/QPopup.vue";
 import ReportType from "@socialuni/socialuni-constant/constant/ReportType";
 import ReportAddVO from "@socialuni/socialuni-api-base/src/model/report/ReportAddVO";
@@ -36,7 +36,7 @@ import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/Socialun
 import ReportAPI from "@socialuni/socialuni-app-api/src/api/ReportAPI";
 import UserMsgUtil from "@socialuni/socialuni-user-sdk/src/util/UserMsgUtil";
 
-@Options({
+@Component({
     components: {QPopup}
 })
 export default class SocialuniReportDialog extends Vue {

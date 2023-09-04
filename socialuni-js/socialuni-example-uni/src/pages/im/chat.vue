@@ -3,10 +3,10 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue} from 'vue-property-decorator'
+import {Components, Vue} from 'vue-facing-decorator'
 
 import SocialuniChatView from "@socialuni/socialuni-im-view-uni/src/views/chat/SocialuniChatView.vue";
-@Options({
+@Component({
   components: {SocialuniChatView}
 })
 export default class ChatPage extends Vue {

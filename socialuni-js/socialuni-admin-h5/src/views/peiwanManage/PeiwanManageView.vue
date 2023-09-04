@@ -1,6 +1,5 @@
 <template>
   <div class="h100p">
-    7/89789
     <div class="flex-row">
       <label-item label="陪玩名称">
         <el-input></el-input>
@@ -24,18 +23,16 @@
       <label-item label="位置和经纬度：">
         <el-button class="mr-sm" size="small" type="primary" @click="openMapDialog">选择位置</el-button>
         <div>
-          {{peiwanInfo.district}}：{{peiwanInfo.lat}}，{{peiwanInfo.lng}}
+          {{ peiwanInfo.district }}：{{ peiwanInfo.lat }}，{{ peiwanInfo.lng }}
         </div>
       </label-item>
     </div>
 
-
-    <dialog-box title="选择位置" ref="mapDialog" width="70%" top="3vh" dialog-body-height="450px">
+    <s-dialog title="选择位置" ref="mapDialog" width="70%" top="3vh" dialog-body-height="450px">
       <iframe id="mapPage" width="100%" height="420px" frameborder=0
               src="https://apis.map.qq.com/tools/locpicker?search=1&type=1&policy=1&key=FZDBZ-5XCLO-OCYW6-SRG4Y-ZFP7O-IJBSD&referer=peiwan">
       </iframe>
-    </dialog-box>
-
+    </s-dialog>
 
   </div>
 </template>
@@ -45,16 +42,20 @@ import {Component, Vue} from 'vue-facing-decorator'
 import LabelItem from "@/components/LabelItem.vue";
 import {DialogInterface} from "@/interface/DialogInterface";
 import PeiwanRO from "@socialuni/socialuni-admin-api/src/model/peiwan/PeiwanRO";
+import SDialog from "@socialuni/socialuni-ui-h5/src/components/SDialog.vue";
 
 @Component({
-  components: {LabelItem}
+  components: {LabelItem, SDialog}
 })
 export default class PeiwanManageView extends Vue {
   $refs: {
-    mapDialog: DialogInterface
+    mapDialog: SDialog
   }
 
   openMapDialog() {
+    console.log(this)
+    console.log(this.$refs)
+    console.log(this.$refs.mapDialog)
     this.$refs.mapDialog.open()
   }
 

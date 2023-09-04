@@ -3,9 +3,9 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue} from 'vue-property-decorator'
+import {Components, Vue} from 'vue-facing-decorator'
 import SocialuniExpandView from "@socialuni/socialuni-expand-view-uni/src/views/SocialuniExpandView.vue";
-@Options({
+@Component({
   components: {SocialuniExpandView}
 })
 export default class SocialuniExpandPage extends Vue {

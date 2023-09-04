@@ -5,9 +5,9 @@
 </template>
 
 <script lang="ts">
-import {Vue, Options, Prop, Emit} from 'vue-property-decorator'
+import {Vue, Options, Prop, Emit} from 'vue-facing-decorator'
 
-@Options({
+@Component({
 })
 export default class SocialuniPeiwanView extends Vue {
 

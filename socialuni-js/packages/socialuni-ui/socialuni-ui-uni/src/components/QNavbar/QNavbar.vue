@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts">
-import {Options, Prop, Vue} from 'vue-property-decorator'
+import {Component, Prop, Vue} from 'vue-facing-decorator'
 import GetMenuButtonBoundingClientRectRes = UniApp.GetMenuButtonBoundingClientRectRes;
 import QIcon from "../QIcon/QIcon.vue";
 import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
@@ -38,7 +38,7 @@ const menuButtonInfo: GetMenuButtonBoundingClientRectRes = uni.getMenuButtonBoun
 /*
 显示出来已经选了的城市，给她画上钩
 * */
-@Options({
+@Component({
   components: {QIcon}
 })
 export default class QNavBar extends Vue {

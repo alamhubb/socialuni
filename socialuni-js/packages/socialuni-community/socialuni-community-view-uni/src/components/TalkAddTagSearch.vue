@@ -69,13 +69,13 @@
 </template>
 
 <script lang="ts">
-import {Options, Emit, Prop, Vue, Watch} from 'vue-property-decorator'
+import {Component, Emit, Prop, Vue, Watch} from 'vue-facing-decorator'
 import TagVO from '@socialuni/socialuni-api-base/src/model/community/tag/TagVO'
 import QIcon from '@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue'
 import QNavbar from '@socialuni/socialuni-ui-uni/src/components/QNavbar/QNavbar.vue'
 import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
 
-@Options({
+@Component({
     components: {QNavbar, QIcon}
 })
 export default class TalkAddTagSearch extends Vue {

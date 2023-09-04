@@ -104,7 +104,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Options, Prop, Emit} from 'vue-property-decorator'
+import {Vue, Options, Prop, Emit} from 'vue-facing-decorator'
 import SocialuniFollowType from "@socialuni/socialuni-constant/constant/user/SocialuniFollowType";
 import SocialUserContentRO from "@socialuni/socialuni-api-base/src/model/social/SocialUserContentRO";
 import {onLoad, onPullDownRefresh, onReachBottom, onShow} from "@dcloudio/uni-app";
@@ -131,7 +131,7 @@ import SocialuniImgUtil from "@socialuni/socialuni-user-sdk/src/util/SocialuniIm
 import SocialuniExpandAPI from "@socialuni/socialuni-expand-api/src/api/SocialuniExpandAPI";
 import SocialuniUserExpandService from "../service/SocialuniDatingService";
 
-@Options({
+@Component({
   components: {QPullRefresh, QButton, QIcon, SocialGenderTag, QTabs}
 })
 export default class SocialuniExpandView extends Vue {

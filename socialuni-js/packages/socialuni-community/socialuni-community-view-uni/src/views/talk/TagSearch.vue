@@ -90,7 +90,7 @@
 </template>
 
 <script lang="ts">
-import {Options, Emit, Model, Prop, Vue, Watch} from 'vue-property-decorator'
+import {Component, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator'
 
 import QRowItem from '@socialuni/socialuni-ui-uni/src/components/QRowItem/QRowItem.vue'
 import QIcon from '@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue'
@@ -102,7 +102,7 @@ import {socialuniTagModule} from "@socialuni/socialuni-community-sdk/src/store/S
 import TagUtil from "@socialuni/socialuni-community-sdk/src/util/TagUtil";
 
 
-@Options({
+@Component({
   components: {
     QSidebar,
     QSearch,

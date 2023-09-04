@@ -27,14 +27,14 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue} from 'vue-property-decorator'
+import {Components, Vue} from 'vue-facing-decorator'
 import {onLoad, onReady} from "@dcloudio/uni-app";
 import QNavbar from '@socialuni/socialuni-ui-uni/src/components/QNavbar/QNavbar.vue'
 import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
 import PagePath from "@socialuni/socialuni-constant/constant/PagePath";
 import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
 
-@Options({
+@Component({
   components: {QNavbar}
 })
 export default class WebBrowserPage extends Vue {

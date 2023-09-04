@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts">
-import {Emit, Options, Vue, Watch} from 'vue-property-decorator'
+import {Emit, Options, Vue, Watch} from 'vue-facing-decorator'
 import SButton from "@socialuni/socialuni-ui-h5/src/components/SButton.vue";
 import SDialog from "@socialuni/socialuni-ui-h5/src/components/SDialog.vue";
 import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";

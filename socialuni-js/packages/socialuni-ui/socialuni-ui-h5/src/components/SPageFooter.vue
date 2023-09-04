@@ -32,10 +32,10 @@
 </template>
 
 <script lang="ts">
-import { Options, Emit, Prop, Vue } from 'vue-property-decorator'
+import { Options, Emit, Prop, Vue } from 'vue-facing-decorator'
 import SButton from "./SButton.vue";
 
-@Options({
+@Component({
   components: { SButton }
 })
 export default class SPageFooter extends Vue {

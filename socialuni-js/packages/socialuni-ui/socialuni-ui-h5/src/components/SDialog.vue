@@ -12,21 +12,18 @@
   <!-- v-bind="$attrs"  将外部参数绑定到指定内部组件，详见： https://cn.vuejs.org/v2/api/#vm-attrs-->
   <!-- v-on="$listeners"  将外部事件绑定到指定内部组件，详见： https://cn.vuejs.org/v2/api/#vm-listeners-->
   <el-dialog
-      :title="title"
       v-bind="$attrs"
-      v-model="dialogVisible"
-      :width="width"
+      :visible.sync="dialogVisible"
       append-to-body
       @open="emitOpen"
-      @close="dialogClose"
-      :top='top'>
+      @close="dialogClose">
 
     <template #title>
       <slot name="title"></slot>
     </template>
 
     <!--  自定义区域    -->
-    <div :style="{height: dialogBodyHeight}">
+    <div>
       <s-scrollbar class="h100p">
         <div>
           <slot></slot>
@@ -35,7 +32,6 @@
     </div>
 
     <div
-        v-if="!noShowFooter"
         class="row-end-center shadow-top index-xs px py-10 mt-mn">
       <!-- dialog底部自定义弹框区域 -->
       <slot name="dialogFooter"></slot>
@@ -58,131 +54,80 @@
     </div>
   </el-dialog>
 </template>
-<script lang="ts">
-import {Options, Emit, Prop, Vue, Watch} from 'vue-property-decorator'
-import SPageFooter from "./SPageFooter.vue";
-import SScrollbar from "./SScrollbar.vue";
 
-@Options({
-  components: {SScrollbar, SPageFooter}
+<script lang="ts">
+import {Component, Prop, Vue} from 'vue-facing-decorator'
+import YPageFooter from "@/components/YComponent/YPageFooter.vue";
+import YScrollbar from "@/components/YComponent/YScrollbar.vue";
+
+@Component({
+  components: {YScrollbar, YPageFooter}
 })
 export default class SDialog extends Vue {
-  // 作用，下次在进入页面时，重置按钮焦点使用，否则会存在那种再次进入按钮已经获取焦点的问题
-  reloadPageFooterFlag = true
-  dialogVisible = false
-  // 用来判断，右上角关闭的时候，是否触发cancel事件
-  isBtnClose = false
-
-  @Prop() title: string
-  @Prop({
-    type: Boolean,
-    default: false
-  }) visible: boolean
-
-
   @Prop({
     type: Boolean,
     default: false
   }) noDebounce: boolean
-
-  // dialog宽度
-  @Prop({
-    default: '30%'
-  }) width: string
-
-  @Prop({
-    default: '12vh'
-  }) top: string
-
-  // 设置弹框body部分的高度，默认500px
-  @Prop({
-    default: '350px'
-  }) dialogBodyHeight: string
-
-
-  // 默认按钮是否需要
   @Prop({
     type: Boolean,
     default: false
   }) hideBtn: boolean
-
-
-  // 默认按钮是否需要
   @Prop({
     type: Boolean,
     default: false
   }) hideConfirm: boolean
-  // 默认按钮是否需要
-  @Prop({
-    type: Boolean,
-    default: false
-  }) noShowFooter: boolean
   @Prop({
     type: Boolean,
     default: false
   }) hideCancel: boolean
-
-
-  @Prop({
-    default: '确 定'
-  }) confirmText: string
-
-  @Prop({
-    default: '取 消'
-  }) cancelText: string
-
-
   @Prop({
     type: Boolean,
     default: false
   }) disabled: boolean
-
-  // 确定按钮的loading状态 ，已经支持了自动设置按钮loading
   @Prop({
     type: Boolean,
     default: false
   }) configLoad: boolean
-
-  // 确定按钮的loading状态
-  @Prop() confirm: any
-
   @Prop({
     type: Boolean,
     default: true
   }) autoClose: boolean
-
-  // 关闭按钮，默认自动关闭弹窗，默认自动关闭弹窗，可以通过这个属性，设置手动关闭弹窗
   @Prop({
     type: Boolean,
     default: false
   }) customCancelClose: boolean
 
+  @Prop({
+    type: String,
+    default: '确 定'
+  }) confirmText: string
+  @Prop({
+    type: String,
+    default: '取 消'
+  }) cancelText: string
 
-  @Watch('visible')
-  visibleWatch() {
-    if (this.visible) {
-      this.open()
-    } else {
-      this.close()
-    }
-  }
 
+  @Prop({
+    type: Function | Object | Array,
+    default: null
+  }) confirm: any
+
+  // 作用，下次在进入页面时，重置按钮焦点使用，否则会存在那种再次进入按钮已经获取焦点的问题
+  // reloadPageFooterFlag: true,
+  dialogVisible = false
+  // 用来判断，右上角关闭的时候，是否触发cancel事件
+  isBtnClose = false
 
   // 提供给外部使用的方法
   open() {
-    console.log('触发了')
     // 重置按钮状态
-    // this.reloadPageFooterDiv()
     this.clearValidate()
     /* this.$nextTick(() => {
       this.dialogVisible = true
     })*/
     this.dialogVisible = true
-    console.log(this.dialogVisible)
     this.modifyVisible()
   }
-
-
   clearValidate() {
     this.$nextTick(() => {
       if (this.$slots.default && this.$slots.default[0] && this.$slots.default[0].componentInstance && this.$slots.default[0].componentInstance.clearValidate) {
@@ -191,24 +136,19 @@ export default class SDialog extends Vue {
       }
     })
   }
-
-
   close() {
     this.isBtnClose = true
     this.dialogVisible = false
     this.modifyVisible()
   }
-
-
   modifyVisible() {
     this.$emit('update:visible', this.dialogVisible)
   }
-
-
   confirmAfter() {
-    this.close()
+    if (this.autoClose) {
+      this.close()
+    }
   }
-
   // 关闭弹窗并且执行取消
   // dialog取消按钮事件
   dialogCancel() {
@@ -217,8 +157,6 @@ export default class SDialog extends Vue {
     }
     this.$emit('cancel')
   }
-
-
   confirmMethod() {
     if (this.confirm) {
       return async () => {
@@ -251,8 +189,6 @@ export default class SDialog extends Vue {
     }
     return null
   }
-
-
   // dialog 确定事件
   dialogConfirm() {
     this.$emit('confirm')
@@ -260,8 +196,6 @@ export default class SDialog extends Vue {
     //   this.close()
     // }
   }
-
-
   // 此方法仅内部使用,仅为右上角关闭弹窗时调用，关闭弹窗时触发， 需要判断你是不是自定义按钮的触发，还是右上角关闭的触发，右上角关闭触发则触发取消事件
   dialogClose() {
     if (this.isBtnClose) {
@@ -272,21 +206,10 @@ export default class SDialog extends Vue {
       this.dialogCancel()
     }
     this.$emit('close')
-  }
-
-  // 刷新组件，清空之前的操作
-  reloadPageFooterDiv() {
-    this.reloadPageFooterFlag = false
-    this.$nextTick(() => {
-      this.reloadPageFooterFlag = true
-    })
-  }
-
+  } // 刷新组件，清空之前的操作
 
   emitOpen() {
     this.$emit('open')
   }
 }
-
-
 </script>

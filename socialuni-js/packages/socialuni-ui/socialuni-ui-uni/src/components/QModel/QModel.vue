@@ -7,12 +7,12 @@
   </view>
 </template>
 <script lang="ts">
-import {Emit, Options, Vue} from 'vue-property-decorator'
+import {Emit, Options, Vue} from 'vue-facing-decorator'
 
 /*
 显示出来已经选了的城市，给她画上钩
 * */
-@Options({})
+@Component({})
 export default class QModel extends Vue {
   @Emit()
   click() {

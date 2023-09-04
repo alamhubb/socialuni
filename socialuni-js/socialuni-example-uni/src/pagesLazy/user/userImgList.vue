@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue} from 'vue-property-decorator'
+import {Components, Vue} from 'vue-facing-decorator'
 import SocialuniReportDialog from "@socialuni/socialuni-user-view-uni/src/components/SocialuniReportDialog.vue";
 import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
 import CenterUserDetailRO from "@socialuni/socialuni-api-base/src/model/social/CenterUserDetailRO";
@@ -33,7 +33,7 @@ import ReportContentType from "@socialuni/socialuni-constant/constant/ReportCont
 import {getCurrentInstance} from "vue";
 import {onLoad} from "@dcloudio/uni-app";
 
-@Options({
+@Component({
   components: {SocialuniReportDialog}
 })
 export default class UserImgListPage extends Vue {

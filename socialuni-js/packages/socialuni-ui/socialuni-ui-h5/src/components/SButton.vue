@@ -9,12 +9,12 @@
 </template>
 
 <script lang="ts">
-import { Options, Emit, Prop, Vue } from 'vue-property-decorator'
+import { Options, Emit, Prop, Vue } from 'vue-facing-decorator'
 import CommonUtil from "@socialuni/socialuni-util/src/util/CommonUtil";
 
 //想要的效果，外部可以主动disable
 //可以主动loading
-@Options({})
+@Component({})
 export default class SButton extends Vue {
     @Prop({ default: false, type: Boolean }) disabled: boolean
     @Prop({ default: true, type: Boolean }) useLoading: boolean

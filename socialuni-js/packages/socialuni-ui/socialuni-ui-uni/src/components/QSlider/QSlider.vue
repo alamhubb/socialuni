@@ -70,9 +70,9 @@
 </template>
 
 <script lang="ts">
-import {Options, Prop, Vue, Watch} from 'vue-property-decorator'
+import {Component, Prop, Vue, Watch} from 'vue-facing-decorator'
 
-@Options({})
+@Component({})
 export default class QSlider extends Vue {
   //滑块区间当前取值
   @Prop({

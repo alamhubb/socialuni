@@ -3,10 +3,10 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-property-decorator'
+import { Options, Vue } from 'vue-facing-decorator'
 import SocialuniCoinRecordView from '@socialuni/socialuni-user-view-uni/src/views/user/coin/SocialuniCoinRecordView.vue'
 
-@Options({
+@Component({
   components: {
     SocialuniCoinRecordView
   }

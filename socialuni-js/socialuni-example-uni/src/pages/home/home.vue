@@ -5,10 +5,10 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue, Watch} from 'vue-property-decorator'
+import {Component, Vue, Watch} from 'vue-facing-decorator'
 import TalkView from "@socialuni/socialuni-community-view-uni/src/views/talk/TalkView.vue"
 
-@Options({
+@Component({
   components: {
    TalkView
   }

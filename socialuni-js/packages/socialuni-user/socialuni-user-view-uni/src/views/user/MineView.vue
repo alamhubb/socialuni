@@ -200,7 +200,7 @@
 </template>
 
 <script lang="ts">
-import {Options, Prop, Vue} from 'vue-property-decorator'
+import {Component, Prop, Vue} from 'vue-facing-decorator'
 import LoginView from "../login/LoginView.vue";
 import SocialuniFollowType from '@socialuni/socialuni-constant/constant/user/SocialuniFollowType';
 import UserContactInfoEditDialog from "./UserContactInfoEditDialog.vue";
@@ -228,7 +228,7 @@ import SkipUrlConst from "@socialuni/socialuni-app-sdk/src/constant/SkipUrlConst
 import {getCurrentInstance} from "vue";
 import {onLoad} from "@dcloudio/uni-app";
 
-@Options({
+@Component({
     components: {
         UserContactInfoEditDialog,
         LoginView,

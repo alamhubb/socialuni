@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue} from 'vue-property-decorator'
+import {Components, Vue} from 'vue-facing-decorator'
 import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 import QPopup from "@socialuni/socialuni-ui-uni/src/components/QPopup/QPopup.vue";
 import QSearch from "@socialuni/socialuni-ui-uni/src/components/QSearch/QSearch.vue";
@@ -41,7 +41,7 @@ import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/Socia
 import SocialuniUserExpandAPI from "@socialuni/socialuni-user-api/src/api/SocialuniUserExpandAPI";
 import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
 
-@Options({
+@Component({
   components: {QSelect, QIcon, QPopup, QSearch}
 })
 export default class UserSchoolEditDialog extends Vue {

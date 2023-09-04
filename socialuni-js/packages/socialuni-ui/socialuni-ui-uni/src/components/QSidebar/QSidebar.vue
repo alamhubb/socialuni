@@ -28,7 +28,7 @@
 </template>
 <script lang="ts">
 import CommonUtil from '@socialuni/socialuni-util/src/util/CommonUtil';
-import {Options, Prop, Vue, Watch} from 'vue-property-decorator'
+import {Component, Prop, Vue, Watch} from 'vue-facing-decorator'
 import SelectorQuery = UniApp.SelectorQuery;
 import NodesRef = UniApp.NodesRef;
 import UUIDUtil from "@socialuni/socialuni-util/src/util/UUIDUtil";
@@ -36,7 +36,7 @@ import UUIDUtil from "@socialuni/socialuni-util/src/util/UUIDUtil";
 /*
 显示出来已经选了的城市，给她画上钩
 * */
-@Options({})
+@Component({})
 export default class QSidebar extends Vue {
   multipleSlots = true
   /**
