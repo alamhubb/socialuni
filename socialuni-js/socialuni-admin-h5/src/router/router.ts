@@ -110,8 +110,6 @@ export const constantRoutes = [
     path: 'https://socialuni.cn/',
     meta: { title: '文档' }
   },*/
-  // 404 page must be placed at the end !!!
-  { path: '/404', redirect: '/404', hidden: true }
 ]
 
 const router = createRouter({
@@ -122,35 +120,5 @@ const router = createRouter({
 
 const whiteList = ['/login'] // no redirect whitelist
 
-router.beforeEach(async(to, from, next) => {
-  // set page title
-  let user = socialuniUserModule.mineUser
-  if (!user) {
-    if (TokenUtil.hasToken()) {
-      user = await socialuniUserModule.getUserInfo()
-    }
-  }
-  if (user) {
-    if (to.path === '/login') {
-      // if is logged in, redirect to the home page
-      next({ path: '/' })
-    } else {
-      next()
-    }
-  } else {
-    /* has no token*/
-    if (whiteList.indexOf(to.path) !== -1) {
-      // in the free login whitelist, go directly
-      next()
-    } else {
-      // other pages that do not have permission to access are redirected to the login page.
-      next({ path: '/login' })
-    }
-  }
-})
-
-router.afterEach(() => {
-  // finish progress bar
-})
 
 export default router
