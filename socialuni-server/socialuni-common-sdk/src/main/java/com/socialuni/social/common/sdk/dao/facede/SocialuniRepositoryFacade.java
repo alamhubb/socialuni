@@ -8,13 +8,16 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Slf4j
 public abstract class SocialuniRepositoryFacade {
 
     private final static SocialuniCommonRepository repository = SpringUtil.getBean(SocialuniCommonRepository.class);
-
 
     public static <T> T save(T t) {
         return getRepository().save(t);
@@ -23,6 +26,11 @@ public abstract class SocialuniRepositoryFacade {
 
     public static <T> T findById(Integer id, Class<T> tClass) {
         return getRepository().findById(id, tClass);
+    }
+
+
+    public static <T> List<T> findByAllByIdDesc(Class<T> tClass) {
+        return getRepository().findByAllByIdDesc(tClass);
     }
 
     public static <T extends SocialuniUnionContentBaseDO> T findByUnionId(Integer id, Class<T> tClass) {
@@ -42,7 +50,6 @@ public abstract class SocialuniRepositoryFacade {
     /*public static <T> List<T> findAllByExample(T example) {
         return getRepository().findAllByExample(example);
     }*/
-
     public static <T> Long countByExample(T exampleObj) {
         return getRepository().countByExample(exampleObj);
     }

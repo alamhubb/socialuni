@@ -261,4 +261,16 @@ public class SocialuniCommonRepository {
         }
         return null;
     }
+
+    public <T> List<T> findByAllByIdDesc(Class<T> tClass) {
+
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
+        Root<T> userInfo = criteriaQuery.from(tClass);
+
+        criteriaQuery.orderBy(criteriaBuilder.desc(userInfo.get("id")));
+
+        return entityManager.createQuery(criteriaQuery).getResultList();
+    }
+
 }

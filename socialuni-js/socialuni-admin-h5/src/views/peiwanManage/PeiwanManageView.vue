@@ -72,6 +72,25 @@ export default class PeiwanManageView extends Vue {
 
   created() {
     this.peiwanUuid = UUIDUtil.getUUID()
+
+    console.log('进入了')
+    window.addEventListener('message', (event) => {
+      // 接收位置信息，用户选择确认位置点后选点组件会触发该事件，回传用户的位置信息
+      const loc = event.data
+      if (loc) {
+        if (loc.module === 'locationPicker') {
+          if (loc.latlng) {
+            this.peiwanInfo.lat = loc.latlng.lat
+            this.peiwanInfo.lng = loc.latlng.lng
+          }
+          for (const district of this.beijingDistrict) {
+            if (loc.poiaddress && loc.poiaddress.includes(district)) {
+              this.peiwanInfo.district = district
+            }
+          }
+        }
+      }
+    }, false)
   }
 
   district = null
@@ -112,25 +131,5 @@ export default class PeiwanManageView extends Vue {
     // this.peiwanInfo.avatar = imgFile.src
   }
 
-  created() {
-    console.log('进入了')
-    window.addEventListener('message', (event) => {
-      // 接收位置信息，用户选择确认位置点后选点组件会触发该事件，回传用户的位置信息
-      const loc = event.data
-      if (loc) {
-        if (loc.module === 'locationPicker') {
-          if (loc.latlng) {
-            this.peiwanInfo.lat = loc.latlng.lat
-            this.peiwanInfo.lng = loc.latlng.lng
-          }
-          for (const district of this.beijingDistrict) {
-            if (loc.poiaddress && loc.poiaddress.includes(district)) {
-              this.peiwanInfo.district = district
-            }
-          }
-        }
-      }
-    }, false)
-  }
 }
 </script>

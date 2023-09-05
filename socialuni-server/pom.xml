@@ -26,6 +26,7 @@
         <module>socialuni-common-api</module>
         <module>socialuni-sdk</module>
         <module>socialuni-web-sdk</module>
+        <module>socialuni-peiwan-sdk</module>
         <module>socialuni-common-sdk</module>
         <module>socialuni-tance-uni</module>
         <module>socialuni-tance-dev</module>
@@ -56,6 +57,11 @@
             <dependency>
                 <groupId>com.socialuni.social</groupId>
                 <artifactId>socialuni-im-api</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni.social</groupId>
+                <artifactId>socialuni-peiwan-sdk</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>
