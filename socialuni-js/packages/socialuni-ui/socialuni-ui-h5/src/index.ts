@@ -3,6 +3,7 @@ import ElementPlus from 'element-plus'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import SocialuniScss from '@socialuni/socialuni-scss/src/index'
 import 'element-plus/dist/index.css'
+import './styles/elm.scss'
 
 const SocialuniUiH5 = {
     async install(app: App) {

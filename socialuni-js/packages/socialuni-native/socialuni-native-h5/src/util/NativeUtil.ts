@@ -12,6 +12,9 @@ import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/Socialun
 import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
 import DomFile from "@socialuni/socialuni-app-sdk/src/model/DomFile";
 import AppMsg from "@socialuni/socialuni-constant/constant/AppMsg";
+import IMgUtilH5 from "./IMgUtilH5";
+import UUIDUtil from "@socialuni/socialuni-util/src/util/UUIDUtil";
+import ImgUtil from "@socialuni/socialuni-util/src/util/ImgUtil";
 
 
 export default class NativeUtil {
@@ -189,7 +192,7 @@ export default class NativeUtil {
 
   //选择图片
   public static chooseImage(count = 1) {
-    return UniappH5.chooseImage(count).then(res => {
+    return IMgUtilH5.chooseImage(count).then(res => {
       const imgFiles = SocialuniAppUtil.UniUtil.imgFilesCompressHandler(res)
       return imgFiles
     })
@@ -223,7 +226,7 @@ export default class NativeUtil {
       // 获取压缩比
       const imgSize: number = imgFile.size
       if (imgSize / 1024 / 1024 > 50) {
-        SocialuniAppUtil.ToastUtil.error(AppMsg.imgSizeNotGt50MBMsg)
+        SocialuniAppUtil.ToastUtil.throwError(AppMsg.imgSizeNotGt50MBMsg)
       }
       let ratio: number = 100
       //如果大于100k 按照100k标准压缩

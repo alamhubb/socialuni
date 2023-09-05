@@ -1,9 +1,10 @@
-import DomFile from "../model/DomFile";
-import UniappInner from "./UniappInner";
+import FileUtilH5 from "./FileUtilH5";
+import InputUtilH5 from "./InputUtilH5";
+import DomFile from "@socialuni/socialuni-native-util/src/model/DomFile";
 
 let imageInput
 
-export default class UniappH5 {
+export default class IMgUtilH5 {
     public static chooseImage(count,
                               // sizeType,
                               sourceType = ['album', 'camera'],
@@ -13,7 +14,7 @@ export default class UniappH5 {
                 document.body.removeChild(imageInput)
                 imageInput = null
             }
-            imageInput = UniappInner.createFileInput({
+            imageInput = InputUtilH5.createFileInput({
                 count,
                 sourceType,
                 extension,
@@ -25,13 +26,7 @@ export default class UniappH5 {
                 const fileCount = event.target.files.length
                 for (let i = 0; i < fileCount; i++) {
                     const file = event.target.files[i]
-                    let filePath
-                    Object.defineProperty(file, 'path', {
-                        get() {
-                            filePath = filePath || UniappInner.fileToUrl(file)
-                            return filePath
-                        }
-                    })
+                    FileUtilH5.fileSetPath(file);
                     if (i < count) tempFiles.push(file)
                 }
                 const res = {
