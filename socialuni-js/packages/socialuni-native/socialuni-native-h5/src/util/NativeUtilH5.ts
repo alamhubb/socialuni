@@ -8,15 +8,16 @@ import GetProviderRes = UniApp.GetProviderRes;
 import LoginRes = UniApp.LoginRes;
 import GetUserInfoRes = UniApp.GetUserInfoRes;
 import GetImageInfoSuccessData = UniApp.GetImageInfoSuccessData;
-import AppMsg from "@socialuni/socialuni-constant/constant/AppMsg";
-import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule"
+import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
 import DomFile from "@socialuni/socialuni-app-sdk/src/model/DomFile";
+import AppMsg from "@socialuni/socialuni-constant/constant/AppMsg";
+import ImgUtilH5 from "./ImgUtilH5";
 import UUIDUtil from "@socialuni/socialuni-util/src/util/UUIDUtil";
 import ImgUtil from "@socialuni/socialuni-util/src/util/ImgUtil";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
 
 
-export default class UniUtil {
+export default class NativeUtilH5 {
     public static textCopy(copyText: string, hint: string = '已复制') {
         return new Promise((resolve, reject) => {
             uni.setClipboardData({
@@ -36,9 +37,9 @@ export default class UniUtil {
     }
 
     public static showCopyAction(copyText: string) {
-        UniUtil.actionSheet(['复制']).then((index: number) => {
+        SocialuniAppUtil.NativeUtil.actionSheet(['复制']).then((index: number) => {
             if (index === 0) {
-                UniUtil.textCopy(copyText)
+                SocialuniAppUtil.NativeUtil.textCopy(copyText)
             }
         })
     }
@@ -63,7 +64,7 @@ export default class UniUtil {
     }
 
     static copyLink(webUrl: string) {
-        return UniUtil.textCopy(webUrl, '链接已复制，可在浏览器打开')
+        return SocialuniAppUtil.NativeUtil.textCopy(webUrl, '链接已复制，可在浏览器打开')
     }
 
     public static upxToPx(rpx: number): number {
@@ -127,11 +128,11 @@ export default class UniUtil {
     }
 
     public static showLoading(loadText: string) {
-        uni.showLoading({title: loadText || ''})
+        // uni.showLoading({title: loadText || ''})
     }
 
     public static hideLoading() {
-        uni.hideLoading()
+        // uni.hideLoading()
     }
 
     public static actionSheet(itemList: string[]): Promise<any> {
@@ -191,20 +192,9 @@ export default class UniUtil {
 
     //选择图片
     public static chooseImage(count = 1) {
-        return new Promise<DomFile[]>((resolve, reject) => {
-            uni.chooseImage({
-                // sourceType: ['album'],
-                sizeType: ['original'],
-                // sizeType: ['compressed'],
-                count: count,
-                success(res) {
-                    const imgFiles = UniUtil.imgFilesCompressHandler(res)
-                    resolve(imgFiles)
-                },
-                fail(err) {
-                    reject(err)
-                }
-            })
+        return ImgUtilH5.chooseImage(count).then(async (res) => {
+            const imgFiles = await ImgUtilH5.imgFilesCompressHandler(res)
+            return imgFiles
         })
     }
 
@@ -217,7 +207,8 @@ export default class UniUtil {
                 // sizeType: ['compressed'],
                 count: 1,
                 success(res) {
-                    resolve([])
+                    const imgFiles = ImgUtilH5.imgFilesCompressHandler(res)
+                    resolve(imgFiles)
                 },
                 fail(err) {
                     reject(err)
@@ -226,40 +217,6 @@ export default class UniUtil {
         })
     }
 
-
-    public static compressImage(filePath: string, quality: number): Promise<string> {
-        return new Promise<string>((resolve, reject) => {
-            uni.compressImage({
-                src: filePath,
-                //默认最低20
-                quality: Math.max(quality, 20),
-                success: res => {
-                    resolve(res.tempFilePath)
-                },
-                fail: err => {
-                    reject(err)
-                }
-            })
-        })
-    }
-
-    public static getImageInfo(filePath: string) {
-        return new Promise<GetImageInfoSuccessData>((resolve, reject) => {
-            const img = new Image()
-            img.onload = function () {
-                resolve({
-                    width: img.naturalWidth,
-                    height: img.naturalHeight
-                })
-            }
-            img.onerror = function (e) {
-                reject({
-                    errMsg: 'getImageInfo:fail'
-                })
-            }
-            img.src = filePath
-        })
-    }
 
     public static install(filePath: '_www/' | '_doc/' | '_documents/' | '_downloads/') {
         return new Promise<any>((resolve, reject) => {

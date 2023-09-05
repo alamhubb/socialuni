@@ -154,7 +154,7 @@ export default class TalkView extends Vue {
 
   // life
   mounted() {
-    SocialuniAppUtil.UniUtil.showShareMenu()
+    SocialuniAppUtil.NativeUtil.showShareMenu()
     this.initQuery()
   }
 

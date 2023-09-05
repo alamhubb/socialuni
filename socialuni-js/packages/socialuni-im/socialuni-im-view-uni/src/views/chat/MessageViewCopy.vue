@@ -500,7 +500,7 @@ export default class MessageView extends Vue {
         }
 
         //调用相册api，可选择拍照和引用相册
-        SocialuniAppUtil.UniUtil.actionSheet(itemList).then((index: number) => {
+        SocialuniAppUtil.NativeUtil.actionSheet(itemList).then((index: number) => {
             switch (itemList[index]) {
                 case '图片':
                     that.chooseImage();
@@ -526,7 +526,7 @@ export default class MessageView extends Vue {
         //获取cos认证信息
         const cosAuthRO: CosAuthRO = await CosService.getCosAuthRO()
         //获取cos认证信息
-        const imgFiles: DomFile[] = await SocialuniAppUtil.UniUtil.chooseVideo();
+        const imgFiles: DomFile[] = await SocialuniAppUtil.NativeUtil.chooseVideo();
 
         if (cosAuthRO) {
             imgFiles.forEach(item => {
@@ -551,7 +551,7 @@ export default class MessageView extends Vue {
     async chooseImage() {
         //获取cos认证信息
         const cosAuthRO: CosAuthRO = await CosService.getCosAuthRO()
-        const imgFiles: DomFile[] = await SocialuniAppUtil.UniUtil.chooseImage(1)
+        const imgFiles: DomFile[] = await SocialuniAppUtil.NativeUtil.chooseImage(1)
         //  this.showImgFiles.push(...imgFiles)
         if (cosAuthRO) {
             imgFiles.forEach(item => {
@@ -719,7 +719,7 @@ export default class MessageView extends Vue {
     }
 
     copyText() {
-        SocialuniAppUtil.UniUtil.textCopy(this.message.content)
+        SocialuniAppUtil.NativeUtil.textCopy(this.message.content)
         this.closeMessageMoreDialog()
         this.initChooseCommentData()
     }

@@ -150,7 +150,7 @@ export default class TalkItemComment extends Vue {
   }
 
   showShareMenu() {
-    SocialuniAppUtil.UniUtil.showShareMenu()
+    SocialuniAppUtil.NativeUtil.showShareMenu()
   }
 
 

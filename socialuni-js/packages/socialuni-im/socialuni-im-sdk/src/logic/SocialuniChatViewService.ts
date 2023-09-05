@@ -120,7 +120,7 @@ export default class SocialuniChatViewService extends SocialuniViewService<Socia
     showBottomMenuClick(chatId: number) {
         this.chatId = chatId
         console.log('chatId===', chatId)
-        SocialuniAppUtil.UniUtil.actionSheet(['置顶', '删除']).then((index: number) => {
+        SocialuniAppUtil.NativeUtil.actionSheet(['置顶', '删除']).then((index: number) => {
             if (index === 0) {
                 this.pinConversation()
             } else if (index === 1) {
@@ -249,7 +249,7 @@ export default class SocialuniChatViewService extends SocialuniViewService<Socia
         } else {
             msg = ['打开陌生人免费消息']
         }
-        SocialuniAppUtil.UniUtil.actionSheet(msg).then(res => {
+        SocialuniAppUtil.NativeUtil.actionSheet(msg).then(res => {
             if (res === 0) {
                 if (socialuniChatModule.imMineUserInfo.allowStrangerMsg) {
                     socialuniChatModule.imMineUserInfo.allowStrangerMsg = false

@@ -13,9 +13,7 @@ import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/Socialu
 import UUIDUtil from "@socialuni/socialuni-util/src/util/UUIDUtil";
 import ImgUtil from "@socialuni/socialuni-util/src/util/ImgUtil";
 import ToastUtil from "./ToastUtil";
-import DomFile from "@socialuni/socialuni-api-base/src/model/DomFile";
-import MPUtil from "@socialuni/socialuni-app-sdk/src/util/MPUtil";
-import APPUtil from "@socialuni/socialuni-app-sdk/src/util/APPUtil";
+import DomFile from "@socialuni/socialuni-native-util/src/model/DomFile";
 
 
 export default class NativeUtil {
@@ -258,9 +256,7 @@ export default class NativeUtil {
 
     private static async imgFilesCompressHandler(res) {
         const imgFiles: DomFile[] = res.tempFiles as DomFile[]
-        const tempFilePaths: string[] = res.tempFilePaths as string[]
-        for (let i = 0; i < imgFiles.length; i++) {
-            const imgFile = imgFiles[i]
+        for (const imgFile of imgFiles) {
             // 不能大于10m大于10m就压缩不到100k
             // 获取压缩比
             const imgSize: number = imgFile.size
@@ -283,7 +279,7 @@ export default class NativeUtil {
             if (socialuniSystemModule.isH5) {
                 fileName = imgFile.name
             } else {
-                fileName = tempFilePaths[i]
+                fileName = imgFile.path
             }
             imgFile.src = UUIDUtil.getUUID() + ImgUtil.getFileSuffixName(fileName)
             console.log(imgFile.src)

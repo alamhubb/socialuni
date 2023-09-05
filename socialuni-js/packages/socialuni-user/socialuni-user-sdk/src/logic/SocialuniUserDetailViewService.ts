@@ -16,7 +16,7 @@ export default class SocialuniUserDetailViewService extends SocialuniViewService
     async initService(instance: ComponentInternalInstance, params: any) {
         this.instance = instance
         console.log('chufale inser')
-        SocialuniAppUtil.UniUtil.showShareMenu()
+        SocialuniAppUtil.NativeUtil.showShareMenu()
         console.log(44444)
         console.log('chufale onload')
         console.log(55555)
@@ -50,7 +50,7 @@ export default class SocialuniUserDetailViewService extends SocialuniViewService
 
 
     copyText(textCopy: string) {
-        SocialuniAppUtil.UniUtil.textCopy(textCopy)
+        SocialuniAppUtil.NativeUtil.textCopy(textCopy)
     }
 
 
@@ -68,7 +68,7 @@ export default class SocialuniUserDetailViewService extends SocialuniViewService
 
 
     copyContactInfo() {
-        SocialuniAppUtil.UniUtil.textCopy(this.user.contactInfo)
+        SocialuniAppUtil.NativeUtil.textCopy(this.user.contactInfo)
     }
 
     showUserContactBtnDisabled: boolean = false

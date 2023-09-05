@@ -159,7 +159,7 @@ export default class TalkOperate extends Vue {
   }
 
   copyText() {
-      SocialuniAppUtil.UniUtil.textCopy(this.comment.content)
+      SocialuniAppUtil.NativeUtil.textCopy(this.comment.content)
     this.closeActionAndInitData()
   }
 

@@ -133,7 +133,7 @@ export default class SocialuniUserEditDialog extends Vue {
         } catch (e) {
             console.error(e)
         } finally {
-            SocialuniAppUtil.UniUtil.hideLoading()
+            SocialuniAppUtil.NativeUtil.hideLoading()
         }
     }
 
@@ -153,8 +153,8 @@ export default class SocialuniUserEditDialog extends Vue {
             console.log(cosAuthRO)
             console.log(456465)
             console.log(cosAuthRO)
-            const imgFiles: DomFile[] = await SocialuniAppUtil.UniUtil.chooseImage(1)
-            SocialuniAppUtil.UniUtil.showLoading('上传中')
+            const imgFiles: DomFile[] = await SocialuniAppUtil.NativeUtil.chooseImage(1)
+            SocialuniAppUtil.NativeUtil.showLoading('上传中')
             const imgFile: DomFile = imgFiles[0]
             imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src
             const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO), SocialuniMineUserAPI.addUserAvatarImgAPI(new ImgAddQO(imgFile))])
@@ -162,7 +162,7 @@ export default class SocialuniUserEditDialog extends Vue {
         } catch (e) {
             console.error(e)
         } finally {
-            SocialuniAppUtil.UniUtil.hideLoading()
+            SocialuniAppUtil.NativeUtil.hideLoading()
         }
     }
 

@@ -1,10 +1,15 @@
 import FileUtilH5 from "./FileUtilH5";
 import InputUtilH5 from "./InputUtilH5";
 import DomFile from "@socialuni/socialuni-native-util/src/model/DomFile";
+import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import AppMsg from "@socialuni/socialuni-constant/constant/AppMsg";
+import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
+import UUIDUtil from "@socialuni/socialuni-util/src/util/UUIDUtil";
+import ImgUtil from "@socialuni/socialuni-util/src/util/ImgUtil";
 
 let imageInput
 
-export default class IMgUtilH5 {
+export default class ImgUtilH5 {
     public static chooseImage(count,
                               // sizeType,
                               sourceType = ['album', 'camera'],
@@ -42,6 +47,56 @@ export default class IMgUtilH5 {
         })
     }
 
+    public static async imgFilesCompressHandler(res) {
+        const imgFiles: DomFile[] = res.tempFiles as DomFile[]
+        for (const imgFile of imgFiles) {
+            await this.setImgQualityAndAspectRatio(imgFile);
+        }
+        return imgFiles
+    }
+
+    private static async setImgQualityAndAspectRatio(imgFile: DomFile) {
+        //设置压缩比
+        this.setImgQuality(imgFile)
+        //设置横宽比
+        await this.setImgAspectRatio(imgFile)
+    }
+
+
+    //设置图片压缩比
+    private static setImgQuality(imgFile: DomFile){
+        // 不能大于10m大于10m就压缩不到100k
+        // 获取压缩比
+        const imgSize: number = imgFile.size
+        if (imgSize / 1024 / 1024 > 50) {
+            SocialuniAppUtil.ToastUtil.throwError(AppMsg.imgSizeNotGt50MBMsg)
+        }
+        let ratio: number = 100
+        //如果大于100k 按照100k标准压缩
+        if (imgSize > 100 * 1024) {
+            //得出来100以下的压缩比
+            //(imgSize / 1024)计算kb
+            //100kb 除以 kb，再乘以百分数100
+            ratio = Math.round(10000 / (imgSize / 1024))
+        }
+        imgFile.quality = ratio
+    }
+
+    //设置图片宽高比
+    private static async setImgAspectRatio(imgFile: DomFile){
+        const image = await this.getImageInfo(imgFile.path)
+        // 获取文件名
+        imgFile.aspectRatio = image.width / image.height
+        let fileName = null
+        if (socialuniSystemModule.isH5) {
+            fileName = imgFile.name
+        } else {
+            fileName = imgFile.path
+        }
+        imgFile.src = UUIDUtil.getUUID() + ImgUtil.getFileSuffixName(fileName)
+        imgFile.fileName = imgFile.src
+    }
+
     public static getImageInfo(filePath: string) {
         return new Promise<any>((resolve, reject) => {
             const img = new Image()
@@ -59,7 +114,6 @@ export default class IMgUtilH5 {
             img.src = filePath
         })
     }
-
 
     public static compressImage(filePath: string, quality: number): Promise<string> {
         return new Promise<string>((resolve, reject) => {

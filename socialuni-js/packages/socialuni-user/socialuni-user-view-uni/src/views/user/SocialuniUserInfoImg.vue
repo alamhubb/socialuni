@@ -91,8 +91,8 @@ export default class SocialuniUserInfoImg extends Vue {
     async uploadUserImg() {
         try {
             const cosAuthRO = await CosService.getCosAuthRO()
-            const imgFiles: DomFile[] = await SocialuniAppUtil.UniUtil.chooseImage(1)
-            SocialuniAppUtil.UniUtil.showLoading('上传中')
+            const imgFiles: DomFile[] = await SocialuniAppUtil.NativeUtil.chooseImage(1)
+            SocialuniAppUtil.NativeUtil.showLoading('上传中')
             const imgFile: DomFile = imgFiles[0]
             imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src
             const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO), SocialuniMineUserAPI.addUserImgAPI(new ImgAddQO(imgFile))])
@@ -100,7 +100,7 @@ export default class SocialuniUserInfoImg extends Vue {
         } catch (e) {
             console.error(e)
         } finally {
-            SocialuniAppUtil.UniUtil.hideLoading()
+            SocialuniAppUtil.NativeUtil.hideLoading()
         }
     }
 
@@ -113,13 +113,13 @@ export default class SocialuniUserInfoImg extends Vue {
 
     imgLongPress(imgIndex: number) {
         if (this.isMine) {
-            SocialuniAppUtil.UniUtil.actionSheet(['删除']).then((index: number) => {
+            SocialuniAppUtil.NativeUtil.actionSheet(['删除']).then((index: number) => {
                 if (index === 0) {
                     this.deleteImg(imgIndex)
                 }
             })
         } else {
-            SocialuniAppUtil.UniUtil.actionSheet(['举报']).then((index: number) => {
+            SocialuniAppUtil.NativeUtil.actionSheet(['举报']).then((index: number) => {
                 if (index === 0) {
                     this.openReportDialog(imgIndex)
                 }

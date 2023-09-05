@@ -273,7 +273,7 @@ export default class SocialuniExpandView extends Vue {
   }
 
   copyContactInfo(user: CenterUserDetailRO) {
-    SocialuniAppUtil.UniUtil.textCopy(user.contactInfo)
+    SocialuniAppUtil.NativeUtil.textCopy(user.contactInfo)
   }
 
   get mineUser() {

@@ -87,7 +87,7 @@ export default class TencentCosAPI {
             // "fileid": "bba022e9313849acafeb34fd5d5a65f5avatar.jpg"
             // 通过 imageMogr2 接口使用图片缩放功能：指定图片宽度为 200，宽度等比压缩
             headers['Pic-Operations'] = `{"is_pic_info": 1, "rules":[{"fileid": "${imgFile.fileName}!avatar", "rule": "imageMogr2/thumbnail/100x/interlace/0"},{"fileid": "${imgFile.fileName}!normal", "rule": "imageMogr2/thumbnail/800x/interlace/1"},{"fileid": "${imgFile.fileName}!thumbnail", "rule": "imageMogr2/thumbnail/300x/interlace/0"}]}`;
-            const uploadImgFile = await SocialuniAppUtil.UniUtil.getFile(imgFile) as any
+            const uploadImgFile = await SocialuniAppUtil.NativeUtil.getFile(imgFile) as any
             console.log(imgFile.src)
             console.log(uploadImgFile)
             cosAuthRO.cos.putObject({

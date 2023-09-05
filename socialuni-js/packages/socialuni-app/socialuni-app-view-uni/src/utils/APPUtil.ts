@@ -17,7 +17,7 @@ export default class APPUtil {
                         plus.runtime.openURL(updateUrl)
                     })
                 } else if (AppUpdateType.hot === updateType) {
-                    SocialuniAppUtil.UniUtil.install(updateUrl).then(() => {
+                    SocialuniAppUtil.NativeUtil.install(updateUrl).then(() => {
                         SocialuniAppUtil.AlertUtil.confirm('新版本更新成功，是否现在重启清池app', '重启', '稍后').then(() => {
                             plus.runtime.restart()
                         })

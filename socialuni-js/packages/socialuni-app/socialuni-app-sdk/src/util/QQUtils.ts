@@ -20,7 +20,7 @@ export default class QQUtils {
   }
 
   static createRewardedVideoAd () {
-    return SocialuniAppUtil.UniUtil.createRewardedVideoAd(AppConfig.qq_award_ad_id)
+    return SocialuniAppUtil.NativeUtil.createRewardedVideoAd(AppConfig.qq_award_ad_id)
   }
 
   static createInterstitialAd () {

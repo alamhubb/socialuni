@@ -22,7 +22,7 @@ export default class WxUtils {
     }
 
     static createRewardedVideoAd() {
-        return SocialuniAppUtil.UniUtil.createRewardedVideoAd(AppConfig.wx_award_ad_id)
+        return SocialuniAppUtil.NativeUtil.createRewardedVideoAd(AppConfig.wx_award_ad_id)
     }
 
     static createInterstitialAd() {

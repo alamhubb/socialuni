@@ -88,13 +88,13 @@ export default class UserImgListPage extends Vue {
 
   imgLongPress(imgIndex: number) {
     if (this.isMine) {
-      SocialuniAppUtil.UniUtil.actionSheet(['删除']).then((index: number) => {
+      SocialuniAppUtil.NativeUtil.actionSheet(['删除']).then((index: number) => {
         if (index === 0) {
           this.deleteImg(imgIndex)
         }
       })
     } else {
-      SocialuniAppUtil.UniUtil.actionSheet(['举报']).then((index: number) => {
+      SocialuniAppUtil.NativeUtil.actionSheet(['举报']).then((index: number) => {
         if (index === 0) {
           this.openReportDialog(imgIndex)
         }

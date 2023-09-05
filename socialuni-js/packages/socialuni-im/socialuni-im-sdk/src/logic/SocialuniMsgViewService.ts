@@ -178,7 +178,7 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
         }
 
         //调用相册api，可选择拍照和引用相册
-        SocialuniAppUtil.UniUtil.actionSheet(itemList).then((index: number) => {
+        SocialuniAppUtil.NativeUtil.actionSheet(itemList).then((index: number) => {
             switch (itemList[index]) {
                 case '图片':
                     that.chooseImage();
@@ -222,7 +222,7 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
     }
 
     copyText() {
-        SocialuniAppUtil.UniUtil.textCopy(this.message.content)
+        SocialuniAppUtil.NativeUtil.textCopy(this.message.content)
         this.closeMessageMoreDialog()
         this.initChooseCommentData()
     }

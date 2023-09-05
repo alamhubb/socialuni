@@ -9,7 +9,7 @@ import {SocialuniToastUtilInterface} from "../interface/SocialuniToastUtilInterf
 import {SocialuniNativeUtilInterface} from "../interface/SocialuniNativeUtilInterface";
 
 export default class SocialuniAppUtil {
-    static get UniUtil(): SocialuniNativeUtilInterface {
+    static get NativeUtil(): SocialuniNativeUtilInterface {
         return SocialuniAppNativeUtil.nativeUtil
     }
 

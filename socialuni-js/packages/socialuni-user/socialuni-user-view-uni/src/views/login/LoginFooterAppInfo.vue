@@ -37,7 +37,7 @@ export default class LoginFooterAppInfo extends Vue {
   }
 
   copyServiceNum() {
-    SocialuniAppUtil.UniUtil.textCopy(this.serviceWeChat, '客服联系方式已复制')
+    SocialuniAppUtil.NativeUtil.textCopy(this.serviceWeChat, '客服联系方式已复制')
   }
 }
 </script>

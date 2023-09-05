@@ -61,7 +61,7 @@ class SocialuniUserPlugin implements SocialuniPlugin {
         // statusCode: 607
         // statusText: "request:ok"
 
-        SocialuniAppUtil.UniUtil.hideLoading()
+        SocialuniAppUtil.NativeUtil.hideLoading()
         console.log(error)
         //第一步，先判断 有没有error
         //判断data类型，如果没类型，直接走

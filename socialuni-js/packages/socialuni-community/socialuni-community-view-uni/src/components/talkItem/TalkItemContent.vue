@@ -172,7 +172,7 @@ export default class TalkItemContent extends Vue {
   }
 
   copyContent(talk:TalkVO){
-      SocialuniAppUtil.UniUtil.showCopyAction(talk.content)
+      SocialuniAppUtil.NativeUtil.showCopyAction(talk.content)
   }
 }
 </script>

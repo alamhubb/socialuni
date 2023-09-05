@@ -74,7 +74,7 @@ export default class TalkDetail extends Vue {
   }
 
   created() {
-    SocialuniAppUtil.UniUtil.showShareMenu()
+    SocialuniAppUtil.NativeUtil.showShareMenu()
     onLoad((params) => {
       const talkId = params.talkId
       SocialuniTalkAPI.queryTalkDetailAPI(talkId).then((res: any) => {
