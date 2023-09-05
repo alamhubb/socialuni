@@ -6,14 +6,15 @@
             </label-item>-->
 
 <!--            <label-item label="图片">
-                <el-upload drag class="size100 overflow-hidden bd-radius" :auto-upload="false" :on-change="avatarImgChange">
-                    <el-image v-if="peiwanInfo.avatar" class="size100" :src="peiwanInfo.avatar"
-                              fit="fill"/>
-                    <el-icon v-else class="el-icon&#45;&#45;upload size100">
-                        <Plus />
-                    </el-icon>
-                </el-upload>
+
             </label-item>-->
+            <el-upload drag class="size100 overflow-hidden bd-radius" :auto-upload="false" :on-change="avatarImgChange">
+                <el-image v-if="peiwanInfo.avatar" class="size100" :src="peiwanInfo.avatar"
+                          fit="fill"/>
+                <el-icon v-else class="el-icon&#45;&#45;upload size100">
+                    <Plus />
+                </el-icon>
+            </el-upload>
 
 <!--            <label-item label="位置和经纬度：">
                 <el-button class="mr-sm" size="small" type="primary" @click="openMapDialog">选择位置</el-button>
@@ -41,6 +42,11 @@ import SDialog from "@socialuni/socialuni-ui-h5/src/components/SDialog.vue";
 import {Plus} from '@element-plus/icons-vue'
 import FileUtilH5 from "@socialuni/socialuni-native-h5/src/util/FileUtilH5";
 import type DomFile from "@socialuni/socialuni-native-util/src/model/DomFile";
+import ImgUtilH5 from "@socialuni/socialuni-native-h5/src/util/ImgUtilH5";
+import TencentCosAPI from "@socialuni/socialuni-app-api/src/api/TencentCosAPI";
+import SocialuniMineUserAPI from "@socialuni/socialuni-user-api/src/api/SocialuniMineUserAPI";
+import ImgAddQO from "@socialuni/socialuni-api-base/src/model/user/ImgAddQO";
+import CosService from "@socialuni/socialuni-app-sdk/src/util/CosService";
 
 @Component({
     components: {LabelItem, SDialog, Plus}
@@ -73,9 +79,20 @@ export default class PeiwanManageView extends Vue {
         '大兴'
     ]
 
-    avatarImgChange(file: any) {
-        console.log(file)
-        this.peiwanInfo.avatar = FileUtilH5.fileToUrl(file.raw)
+    async avatarImgChange(file: any) {
+        const imgFile: DomFile = FileUtilH5.fileSetPath(file.raw)
+
+        this.peiwanInfo.avatar = imgFile.path
+
+        const cosAuthRO = await CosService.getCosAuthRO()
+
+        await ImgUtilH5.setImgQualityAndAspectRatio(imgFile)
+
+        imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src
+
+        console.log(imgFile)
+
+        // const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO), SocialuniMineUserAPI.addUserAvatarImgAPI(new ImgAddQO(imgFile))])
     }
 
     created() {

@@ -55,7 +55,7 @@ export default class ImgUtilH5 {
         return imgFiles
     }
 
-    private static async setImgQualityAndAspectRatio(imgFile: DomFile) {
+    public static async setImgQualityAndAspectRatio(imgFile: DomFile) {
         //设置压缩比
         this.setImgQuality(imgFile)
         //设置横宽比

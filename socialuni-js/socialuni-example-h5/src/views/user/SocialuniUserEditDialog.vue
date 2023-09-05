@@ -59,6 +59,7 @@ import ImgUtil from "@socialuni/socialuni-util/src/util/ImgUtil";
 import TencentCosAPI from "@socialuni/socialuni-app-api/src/api/TencentCosAPI";
 import ImgAddQO from "@socialuni/socialuni-api-base/src/model/user/ImgAddQO";
 import type DomFile from "@socialuni/socialuni-app-sdk/src/model/DomFile";
+import NativeUtilH5 from "@socialuni/socialuni-native-h5/src/util/NativeUtilH5";
 
 @Component({
     components: {SDialog, SButton}
@@ -153,7 +154,7 @@ export default class SocialuniUserEditDialog extends Vue {
             console.log(cosAuthRO)
             console.log(456465)
             console.log(cosAuthRO)
-            const imgFiles: DomFile[] = await SocialuniAppUtil.NativeUtil.chooseImage(1)
+            const imgFiles: DomFile[] = await NativeUtilH5.chooseImage(1)
             SocialuniAppUtil.NativeUtil.showLoading('上传中')
             const imgFile: DomFile = imgFiles[0]
             imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src

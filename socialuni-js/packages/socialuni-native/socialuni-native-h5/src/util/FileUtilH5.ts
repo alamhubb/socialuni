@@ -1,7 +1,9 @@
+import DomFile from "@socialuni/socialuni-native-util/src/model/DomFile";
+
 const hasOwnProperty = Object.prototype.hasOwnProperty
 
 export default class FileUtilH5 {
-    public static fileSetPath(file) {
+    public static fileSetPath(file: DomFile): DomFile {
         let filePath
         Object.defineProperty(file, 'path', {
             get() {
@@ -9,17 +11,19 @@ export default class FileUtilH5 {
                 return filePath
             }
         })
+        return file
     }
 
-    static hasOwn (obj, key) {
+    static hasOwn(obj, key) {
         return hasOwnProperty.call(obj, key)
     }
+
     /**
      * 从本地file或者blob对象创建url
      * @param {Blob|File} file
      * @return {string}
      */
-    static fileToUrl (file) {
+    static fileToUrl(file) {
         const files = {}
         for (const key in files) {
             if (this.hasOwn(files, key)) {

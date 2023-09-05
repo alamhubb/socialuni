@@ -10,8 +10,6 @@ export default class CosService {
         const authRes = await CosAPI.getCosAuthorizationAPI()
         const cosAuthRO = authRes.data
         cosAuthRO.cos = CosUtil.getAuthorizationCos(cosAuthRO)
-        console.log(45646545)
-        console.log(cosAuthRO)
         return cosAuthRO
     }
 
