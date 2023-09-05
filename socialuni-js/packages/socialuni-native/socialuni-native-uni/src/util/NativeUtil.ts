@@ -282,7 +282,6 @@ export default class NativeUtil {
                 fileName = imgFile.path
             }
             imgFile.src = UUIDUtil.getUUID() + ImgUtil.getFileSuffixName(fileName)
-            console.log(imgFile.src)
             imgFile.fileName = imgFile.src
         }
         return imgFiles
