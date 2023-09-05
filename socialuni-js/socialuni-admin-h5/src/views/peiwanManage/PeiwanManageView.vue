@@ -6,7 +6,7 @@
             </label-item>
 
             <label-item label="图片">
-                <el-upload drag class="pd" :auto-upload="false" :on-change="avatarImgChange">
+                <el-upload drag class="size100 overflow-hidden bd-radius" :auto-upload="false" :on-change="avatarImgChange">
                     <el-image v-if="peiwanInfo.avatar" class="size100" :src="peiwanInfo.avatar"
                               fit="fill"/>
                     <el-icon v-else class="el-icon--upload size100">
