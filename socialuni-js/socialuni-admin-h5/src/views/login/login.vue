@@ -1,7 +1,5 @@
 <template>
-  <div class="h100p row-all-center">+
-
-    7/46546
+  <div class="h100p row-all-center">
     <div class="pb-5p">
       <div class="row-center">
         <!-- <div class="system_title_2">数据创建像搭积木一样简单</div> -->

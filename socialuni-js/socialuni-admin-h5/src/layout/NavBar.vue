@@ -1,30 +1,30 @@
 <template>
   <div
-    class="row-between shadow-bottom index-sm px"
+    class="row-between shadow-bottom index-sm px color-white h50" style="background-color: #2b2f3a"
   >
     <div class="flex-none row-col-center mr-40 bg-click" @click="toHome">
 <!--      <img src="@/assets/img/logo.jpg" class="h40" alt="logo">-->
-<!--      <div class="font-19 ml-3 mt-1 font-bold color-social">社交软件联盟</div>-->
+      <div class="font-19 ml-3 mt-1 font-bold color">分布式系统管理软件</div>
     </div>
 
     <div class="flex-1 row-end">
       <div class="flex-none row-col-center mr">
         <a href="https://socialuni.cn" target="_blank" class="mr-sm md:mr bg-click">
-          <div class="row-all-center">官网文档</div>
+          <div class="row-all-center color-white">官网文档</div>
         </a>
         <el-divider direction="vertical" class="mr" />
         <a href="https://socialuni.cn/demo" target="_blank" class="mr-sm md:mr bg-click">
-          <div class="row-all-center">demo演示</div>
+          <div class="row-all-center color-white">demo演示</div>
         </a>
         <el-divider direction="vertical" class="mr" />
-        <div class="row-col-center">
+<!--        <div class="row-col-center">
           <a href="https://gitee.com/socialuni/socialuni" target="_blank" class="mr-sm md:mr">
             <div class="row-all-center"><img src="@/assets/imgs/giteelogo.png" class="use-click size31"/></div>
           </a>
           <a href="https://github.com/social-uni/socialuni" target="_blank" class="md:mr-sm">
             <div class="row-all-center"><i class="mdi mdi-github font-36 use-click color-black"/></div>
           </a>
-        </div>
+        </div>-->
       </div>
       <div class="flex-1 row-end-center">
         <div v-if="user" class="row-col-center">
