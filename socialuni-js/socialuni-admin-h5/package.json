@@ -15,6 +15,7 @@
     "@socialuni/socialuni-app-view-h5": "../packages/socialuni-app-view-h5",
     "@socialuni/socialuni-native-h5": "../packages/socialuni-native-h5",
     "@socialuni/socialuni-user-api": "../packages/socialuni-user-api",
+    "@socialuni/socialuni-peiwan-api": "../packages/socialuni-peiwan-api",
     "@socialuni/socialuni-admin-api": "../packages/socialuni-admin-api",
     "@socialuni/socialuni-user-sdk": "../packages/socialuni-user-sdk",
     "@socialuni/socialuni-user-view-h5": "../packages/socialuni-user/socialuni-user-view-h5",

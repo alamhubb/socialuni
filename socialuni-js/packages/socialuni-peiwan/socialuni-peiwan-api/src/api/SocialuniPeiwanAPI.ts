@@ -9,7 +9,7 @@ export default class SocialuniPeiwanAPI {
         return socialuniUserRequest.post<CenterUserDetailRO[]>('admin/peiwan/addPeiwanInfo', addQO)
     }
 
-    static getPeiwanInfoListAPI() {
+    static queryPeiwanInfoListAPI() {
         return socialuniUserRequest.get<ResultRO<PeiwanRO[]>>('admin/peiwan/getPeiwanInfoList')
     }
 }
