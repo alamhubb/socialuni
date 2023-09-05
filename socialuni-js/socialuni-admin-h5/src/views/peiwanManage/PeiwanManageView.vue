@@ -18,7 +18,7 @@
           </div>
         </div>
 
-        <el-icon v-else class="el-icon&#45;&#45;upload size100">
+        <el-icon v-else class="size100 font-50 color-sub">
           <Plus/>
         </el-icon>
       </el-upload>
