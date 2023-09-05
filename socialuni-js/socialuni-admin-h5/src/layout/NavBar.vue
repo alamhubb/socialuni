@@ -26,13 +26,13 @@
           </a>
         </div>-->
       </div>
-      <div class="flex-1 row-end-center">
+<!--      <div class="flex-1 row-end-center">
         <div v-if="user" class="row-col-center">
           <el-tag class="mr-10" type="warning" effect="dark">{{ user.phoneNum }}</el-tag>
           <el-dropdown>
             <div>
               <el-avatar shape="square" src="https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png" />
-              <i class="el-icon-caret-bottom el-icon--right" />
+              <i class="el-icon-caret-bottom el-icon&#45;&#45;right" />
             </div>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>{{
@@ -43,7 +43,7 @@
             </el-dropdown-menu>
           </el-dropdown>
         </div>
-      </div>
+      </div>-->
 
       <!--        <el-dropdown trigger="click" class="flex-none">
         <div class="el-dropdown-link color-white pointer row-end-center h100p pr-md">

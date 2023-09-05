@@ -1,26 +1,26 @@
 <template>
     <div class="h100p">
         <div class="flex-row">
-            <label-item label="陪玩名称">
+<!--            <label-item label="陪玩名称">
                 <el-input></el-input>
-            </label-item>
+            </label-item>-->
 
-            <label-item label="图片">
+<!--            <label-item label="图片">
                 <el-upload drag class="size100 overflow-hidden bd-radius" :auto-upload="false" :on-change="avatarImgChange">
                     <el-image v-if="peiwanInfo.avatar" class="size100" :src="peiwanInfo.avatar"
                               fit="fill"/>
-                    <el-icon v-else class="el-icon--upload size100">
+                    <el-icon v-else class="el-icon&#45;&#45;upload size100">
                         <Plus />
                     </el-icon>
                 </el-upload>
-            </label-item>
+            </label-item>-->
 
-            <label-item label="位置和经纬度：">
+<!--            <label-item label="位置和经纬度：">
                 <el-button class="mr-sm" size="small" type="primary" @click="openMapDialog">选择位置</el-button>
                 <div>
                     {{ peiwanInfo.district }}：{{ peiwanInfo.lat }}，{{ peiwanInfo.lng }}
                 </div>
-            </label-item>
+            </label-item>-->
         </div>
 
         <s-dialog title="选择位置" ref="mapDialog" width="70%" top="3vh" dialog-body-height="450px">
