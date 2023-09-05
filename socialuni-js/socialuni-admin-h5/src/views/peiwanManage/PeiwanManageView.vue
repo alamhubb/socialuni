@@ -1,27 +1,27 @@
 <template>
     <div class="h100p">
         <div class="flex-row">
-<!--            <label-item label="陪玩名称">
-                <el-input></el-input>
-            </label-item>-->
+            <!--            <label-item label="陪玩名称">
+                            <el-input></el-input>
+                        </label-item>-->
 
-<!--            <label-item label="图片">
+            <!--            <label-item label="图片">
 
-            </label-item>-->
+                        </label-item>-->
             <el-upload drag class="size100 overflow-hidden bd-radius" :auto-upload="false" :on-change="avatarImgChange">
                 <el-image v-if="peiwanInfo.avatar" class="size100" :src="peiwanInfo.avatar"
                           fit="fill"/>
                 <el-icon v-else class="el-icon&#45;&#45;upload size100">
-                    <Plus />
+                    <Plus/>
                 </el-icon>
             </el-upload>
 
-<!--            <label-item label="位置和经纬度：">
-                <el-button class="mr-sm" size="small" type="primary" @click="openMapDialog">选择位置</el-button>
-                <div>
-                    {{ peiwanInfo.district }}：{{ peiwanInfo.lat }}，{{ peiwanInfo.lng }}
-                </div>
-            </label-item>-->
+            <!--            <label-item label="位置和经纬度：">
+                            <el-button class="mr-sm" size="small" type="primary" @click="openMapDialog">选择位置</el-button>
+                            <div>
+                                {{ peiwanInfo.district }}：{{ peiwanInfo.lat }}，{{ peiwanInfo.lng }}
+                            </div>
+                        </label-item>-->
         </div>
 
         <s-dialog title="选择位置" ref="mapDialog" width="70%" top="3vh" dialog-body-height="450px">
@@ -47,6 +47,7 @@ import TencentCosAPI from "@socialuni/socialuni-app-api/src/api/TencentCosAPI";
 import SocialuniMineUserAPI from "@socialuni/socialuni-user-api/src/api/SocialuniMineUserAPI";
 import ImgAddQO from "@socialuni/socialuni-api-base/src/model/user/ImgAddQO";
 import CosService from "@socialuni/socialuni-app-sdk/src/util/CosService";
+import UUIDUtil from "@/utils/UUIDUtil";
 
 @Component({
     components: {LabelItem, SDialog, Plus}
@@ -58,6 +59,12 @@ export default class PeiwanManageView extends Vue {
 
     openMapDialog() {
         this.$refs.mapDialog.open()
+    }
+
+    peiwanUuid = UUIDUtil.getUUID()
+
+    created() {
+        this.peiwanUuid = UUIDUtil.getUUID()
     }
 
     district = null
@@ -88,11 +95,14 @@ export default class PeiwanManageView extends Vue {
 
         await ImgUtilH5.setImgQualityAndAspectRatio(imgFile)
 
-        imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src
+        imgFile.src = cosAuthRO.uploadImgPath + `manage/${this.peiwanUuid}/` + imgFile.src
 
         console.log(imgFile)
 
-        // const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO), SocialuniMineUserAPI.addUserAvatarImgAPI(new ImgAddQO(imgFile))])
+        const res = await TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO)
+
+        console.log(res)
+        // this.peiwanInfo.avatar = imgFile.src
     }
 
     created() {

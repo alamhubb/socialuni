@@ -17,7 +17,7 @@ import UUIDUtil from "@socialuni/socialuni-util/src/util/UUIDUtil";
 import ImgUtil from "@socialuni/socialuni-util/src/util/ImgUtil";
 
 
-export default class NativeUtilH5 {
+export default class NativeUtil {
     public static textCopy(copyText: string, hint: string = '已复制') {
         return new Promise((resolve, reject) => {
             uni.setClipboardData({
