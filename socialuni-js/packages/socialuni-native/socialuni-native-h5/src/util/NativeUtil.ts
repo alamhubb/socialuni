@@ -151,19 +151,7 @@ export default class NativeUtil {
 
     public static async getFile(imgFile: DomFile) {
         return new Promise<DomFile>((resolve, reject) => {
-            if (socialuniSystemModule.isMp) {
-                uni.getFileSystemManager().readFile({
-                    filePath: imgFile.path,
-                    success: res => {
-                        resolve(res.data as any)
-                    },
-                    fail: err => {
-                        reject(err)
-                    }
-                })
-            } else {
-                resolve(imgFile)
-            }
+            resolve(imgFile)
         })
     }
 
