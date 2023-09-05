@@ -3,8 +3,8 @@ import TencentCosIdInfoRO from "@socialuni/socialuni-api-base/src/model/RO/tence
 import CosAuthRO from "@socialuni/socialuni-api-base/src/model/cos/CosAuthRO";
 import CosUploadResult from "@socialuni/socialuni-api-base/src/model/cos/CosUploadResult";
 import AlertUtil from "@socialuni/socialuni-native-uni/src/util/AlertUtil";
-import DomFile from "@socialuni/socialuni-app-sdk/src/model/DomFile";
 import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import DomFile from "@socialuni/socialuni-native-util/src/model/DomFile";
 
 export default class TencentCosAPI {
     /*static async getImgTagAPI(imgUrl, imgKey, cosAuthRO: CosAuthRO) {
