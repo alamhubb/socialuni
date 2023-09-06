@@ -9,13 +9,13 @@
 
     <div class="flex-1 row-end">
       <div class="flex-none row-col-center mr">
-        <a href="https://socialuni.cn" target="_blank" class="mr-sm md:mr bg-click">
+<!--        <a href="https://socialuni.cn" target="_blank" class="mr-sm md:mr bg-click">
           <div class="row-all-center color-white">官网文档</div>
         </a>
         <el-divider direction="vertical" class="mr" />
         <a href="https://socialuni.cn/demo" target="_blank" class="mr-sm md:mr bg-click">
           <div class="row-all-center color-white">demo演示</div>
-        </a>
+        </a>-->
         <el-divider direction="vertical" class="mr" />
 <!--        <div class="row-col-center">
           <a href="https://gitee.com/socialuni/socialuni" target="_blank" class="mr-sm md:mr">
