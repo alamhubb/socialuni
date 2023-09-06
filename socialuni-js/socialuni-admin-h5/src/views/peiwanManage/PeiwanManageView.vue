@@ -43,7 +43,7 @@
         <div>
             <div>
             </div>
-            <el-table :data="peiwanList">
+            <s-table :data="peiwanList">
                 <s-table-input label="昵称" prop="username"></s-table-input>
                 <!--                <y-table-column label="头像" prop="avatar">
                                     <template #default="{row}">
@@ -93,7 +93,7 @@
                                         <img :src="row.avatar">
                                     </template>
                                 </el-table-column>-->
-            </el-table>
+            </s-table>
         </div>
 
         <s-dialog title="选择位置" ref="mapDialog" width="70%" top="3vh" dialog-body-height="450px">
@@ -289,6 +289,8 @@ export default class PeiwanManageView extends Vue {
             SocialuniPeiwanAdminAPI.deletePeiwanImgAPI(imgId)
         })
     }
+
+
 
     saveUpdatePeiwanList() {
 

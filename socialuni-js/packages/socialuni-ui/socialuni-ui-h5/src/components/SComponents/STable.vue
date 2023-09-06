@@ -96,7 +96,7 @@ export default class STable extends Vue {
     }
 
     get changeData() {
-        this.data.filter(item => {
+        return this.data.filter(item => {
             return this.copyData.some(copy => ObjectUtil.toJson(copy) === ObjectUtil.toJson(item))
         })
     }
