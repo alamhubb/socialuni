@@ -16,18 +16,18 @@
                         </div>
 
                         <div class="row-col-center row-wrap">
-                            <view class="q-tag-blue">
+                            <div class="q-tag-blue">
                                 电竞
-                            </view>
-                            <view class="q-tag-green ml-xs">
+                            </div>
+                            <div class="q-tag-green ml-xs">
                                 吃饭
-                            </view>
-                            <view class="q-tag-purple ml-xs">
+                            </div>
+                            <div class="q-tag-purple ml-xs">
                                 电影
-                            </view>
-                            <view class="q-tag-orange ml-xs">
+                            </div>
+                            <div class="q-tag-orange ml-xs">
                                 小酌
-                            </view>
+                            </div>
                         </div>
 
                         <div>
