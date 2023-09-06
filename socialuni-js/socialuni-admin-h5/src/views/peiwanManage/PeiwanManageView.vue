@@ -3,7 +3,7 @@
         <div class="flex-row">
 
             <div class="flex-1 row-end">
-                <el-button>保存</el-button>
+                <el-button @click="saveUpdatePeiwanList">保存</el-button>
             </div>
             <!--            <label-item label="陪玩名称">
                             <el-input></el-input>
@@ -43,8 +43,13 @@
         <div>
             <div>
             </div>
-            <s-table :data="peiwanList">
-                <s-table-input label="昵称" prop="username"></s-table-input>
+            <s-table ref="dataTable" :data="peiwanList">
+              <el-table-column label="昵称">
+                <template #default="{row}">
+                  <el-input v-model="row.username"></el-input>
+                </template>
+              </el-table-column>
+<!--                <s-table-input label="昵称" prop="username"></s-table-input>-->
                 <!--                <y-table-column label="头像" prop="avatar">
                                     <template #default="{row}">
                                         <img :src="row.avatar">
@@ -131,7 +136,7 @@ import AlertUtil from "@socialuni/socialuni-native-h5/src/util/AlertUtil";
 })
 export default class PeiwanManageView extends Vue {
     $refs: {
-        mapDialog: SDialog
+      dataTable: STable
     }
 
     openMapDialog() {
@@ -293,7 +298,7 @@ export default class PeiwanManageView extends Vue {
 
 
     saveUpdatePeiwanList() {
-
+      console.log(this.$refs.dataTable.changeData)
     }
 }
 </script>
