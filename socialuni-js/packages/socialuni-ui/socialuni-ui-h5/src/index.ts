@@ -4,7 +4,6 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import SocialuniScss from '@socialuni/socialuni-scss/src/index'
 import 'element-plus/dist/index.css'
 import "./styles/index.scss";
-import YComponents from "./components/YComponent";
 
 const SocialuniUiH5 = {
     async install(app: App) {
@@ -14,7 +13,6 @@ const SocialuniUiH5 = {
         app.use(ElementPlus, {
             locale: zhCn,
         })
-        app.use(YComponents)
     }
 }
 

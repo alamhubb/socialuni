@@ -21,7 +21,7 @@
                   />-->
                     <!--      :label="optionLabel|| (column.option?column.option.label:null)"-->
                     <!--      因为内不支持不输入label默认使用value-->
-                    <y-select
+                    <s-select
                             v-if="type === DataTableColumnTypeEnum.select"
                             v-model="row[prop]"
                             :disabled="readonly"
@@ -77,7 +77,7 @@
 <script lang="ts">
 import {Component, Emit, Prop, Vue} from 'vue-facing-decorator'
 import DataTableColumnTypeEnum from './DataTableColumnTypeEnum'
-
+import SSelect from "../SSelect/SSelect.vue";
 /**
  * @author 秦开远
  * @date 2021/1/21 15:25
@@ -85,7 +85,7 @@ import DataTableColumnTypeEnum from './DataTableColumnTypeEnum'
  * 在数据源业务基础上，封装基础table
  */
 @Component({
-    components: {}
+    components: {SSelect}
 })
 export default class STableColumn extends Vue {
     @Prop({default: 'label'}) readonly type: string

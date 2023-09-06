@@ -44,7 +44,7 @@
             <div>
             </div>
             <el-table :data="peiwanList">
-                <y-table-input label="昵称" prop="username"></y-table-input>
+                <s-table-input label="昵称" prop="username"></s-table-input>
                 <!--                <y-table-column label="头像" prop="avatar">
                                     <template #default="{row}">
                                         <img :src="row.avatar">
@@ -110,6 +110,8 @@ import {Component, Vue} from 'vue-facing-decorator'
 import {DialogInterface} from "@/interface/DialogInterface";
 import PeiwanRO from "@socialuni/socialuni-admin-api/src/model/peiwan/PeiwanRO";
 import SDialog from "@socialuni/socialuni-ui-h5/src/components/SComponents/SDialog.vue";
+import STableColumn from "@socialuni/socialuni-ui-h5/src/components/SComponents/STableColumn/STableColumn.vue";
+import STableInput from "@socialuni/socialuni-ui-h5/src/components/SComponents/STableInput/STableInput.vue";
 import {Plus} from '@element-plus/icons-vue'
 import FileUtilH5 from "@socialuni/socialuni-native-h5/src/util/FileUtilH5";
 import type DomFile from "@socialuni/socialuni-native-util/src/model/DomFile";
@@ -123,9 +125,8 @@ import {useMagicKeys} from '@vueuse/core'
 import {watch} from "vue";
 import AlertUtil from "@socialuni/socialuni-native-h5/src/util/AlertUtil";
 
-
 @Component({
-    components: {SDialog, Plus}
+    components: {SDialog, Plus, STableColumn, STableInput}
 })
 export default class PeiwanManageView extends Vue {
     $refs: {
@@ -288,7 +289,7 @@ export default class PeiwanManageView extends Vue {
         })
     }
 
-    saveUpdatePeiwanList(){
+    saveUpdatePeiwanList() {
 
     }
 }

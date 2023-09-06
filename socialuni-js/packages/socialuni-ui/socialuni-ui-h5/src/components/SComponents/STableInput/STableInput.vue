@@ -1,5 +1,5 @@
 <template>
-    <y-table-column
+    <s-table-column
             :label="label||prop"
     >
         <template #default="{row}">
@@ -25,11 +25,12 @@
                     v-bind="$attrs"
             />
         </template>
-    </y-table-column>
+    </s-table-column>
 </template>
 
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-facing-decorator'
+import STableColumn from "../STableColumn/STableColumn.vue";
 
 /**
  * @author 秦开远
@@ -37,7 +38,9 @@ import {Component, Prop, Vue} from 'vue-facing-decorator'
  *
  * 在数据源业务基础上，封装基础table
  */
-@Component({})
+@Component({
+    components: {STableColumn}
+})
 export default class STableInput extends Vue {
     @Prop() readonly prop: string
     @Prop() readonly tipProp: string
