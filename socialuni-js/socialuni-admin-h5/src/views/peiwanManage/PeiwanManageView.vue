@@ -110,6 +110,7 @@ import {Component, Vue} from 'vue-facing-decorator'
 import {DialogInterface} from "@/interface/DialogInterface";
 import PeiwanRO from "@socialuni/socialuni-admin-api/src/model/peiwan/PeiwanRO";
 import SDialog from "@socialuni/socialuni-ui-h5/src/components/SComponents/SDialog.vue";
+import STable from "@socialuni/socialuni-ui-h5/src/components/SComponents/STable.vue";
 import STableColumn from "@socialuni/socialuni-ui-h5/src/components/SComponents/STableColumn/STableColumn.vue";
 import STableInput from "@socialuni/socialuni-ui-h5/src/components/SComponents/STableInput/STableInput.vue";
 import {Plus} from '@element-plus/icons-vue'
@@ -126,7 +127,7 @@ import {watch} from "vue";
 import AlertUtil from "@socialuni/socialuni-native-h5/src/util/AlertUtil";
 
 @Component({
-    components: {SDialog, Plus, STableColumn, STableInput}
+    components: {SDialog, Plus, STableColumn, STableInput,STable}
 })
 export default class PeiwanManageView extends Vue {
     $refs: {

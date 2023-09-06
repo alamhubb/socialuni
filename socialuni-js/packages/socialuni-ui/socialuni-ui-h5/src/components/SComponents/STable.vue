@@ -42,8 +42,9 @@
 
 <script lang="ts">
 import {Component, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator'
-import YTableColumn from '@/components/YComponent/YTableColumn/YTableColumn.vue'
-import type {ElTable} from 'element-ui/types/table'
+import STableColumn from "./STableColumn/STableColumn.vue";
+import ObjectUtil from "@socialuni/socialuni-util/src/util/ObjectUtil";
+import JsonUtil from "@socialuni/socialuni-util/src/util/JsonUtil";
 
 /**
  * @author 秦开远
@@ -52,7 +53,7 @@ import type {ElTable} from 'element-ui/types/table'
  * 在数据源业务基础上，封装基础table
  */
 @Component({
-    components: {YTableColumn}
+    components: {STableColumn}
 })
 export default class STable extends Vue {
     @Model('change') model!: any
@@ -94,9 +95,9 @@ export default class STable extends Vue {
         this.checkedAll = this.data.length && this.data.every(item => item.checked)
     }
 
-    get changeData(){
-        this.data.filter(item=>{
-            this.copyData.some(copy=> ObjectUtil.)
+    get changeData() {
+        this.data.filter(item => {
+            return this.copyData.some(copy => ObjectUtil.toJson(copy) === ObjectUtil.toJson(item))
         })
     }
 
