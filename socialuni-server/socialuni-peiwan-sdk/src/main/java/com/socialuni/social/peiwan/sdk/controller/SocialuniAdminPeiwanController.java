@@ -1,8 +1,11 @@
 package com.socialuni.social.peiwan.sdk.controller;
 
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
 import com.socialuni.social.peiwan.sdk.logic.SocialuniAdminPeiwanService;
 import com.socialuni.social.peiwan.sdk.model.QO.SocialuniPeiwanInfoRO;
+import com.socialuni.social.peiwan.sdk.model.RO.SocialuniPeiwanInfoImgRO;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,8 +25,30 @@ public class SocialuniAdminPeiwanController {
         return socialuniAdminPeiwanService.addPeiwanInfo(socialuniPeiwanInfoAddQO);
     }
 
-    @GetMapping("getPeiwanInfoList")
-    public ResultRO<List<SocialuniPeiwanInfoRO>> getPeiwanInfoList() {
-        return socialuniAdminPeiwanService.getPeiwanInfoList();
+    @GetMapping("queryPeiwanInfoList")
+    public ResultRO<List<SocialuniPeiwanInfoRO>> queryPeiwanInfoList() {
+        return socialuniAdminPeiwanService.queryPeiwanInfoList();
+    }
+
+    @GetMapping("updatePeiwanAvatar/{userId}")
+    public ResultRO<String> updatePeiwanAvatar(@PathVariable("userId") String userId, @RequestParam String src) {
+        return socialuniAdminPeiwanService.updatePeiwanAvatar(userId, src);
+    }
+
+    @GetMapping("updatePeiwanList")
+    public ResultRO<Void> updatePeiwanList(List<SocialuniPeiwanInfoRO> peiwanInfoROS) {
+        return socialuniAdminPeiwanService.updatePeiwanList(peiwanInfoROS);
+    }
+
+
+    @GetMapping("deletePeiwanImg/{imgId}")
+    public ResultRO<Void> deletePeiwanImg(@PathVariable("imgId") Integer imgId) {
+        socialuniAdminPeiwanService.deletePeiwanImg(imgId);
+        return ResultRO.success();
+    }
+
+    @PostMapping("addPeiwanImgList/{userId}")
+    public ResultRO<List<SocialuniPeiwanInfoImgRO>> addPeiwanImgList(@PathVariable("userId") String userId, @RequestBody List<SocialuniImgAddQO> imgAddQOS) {
+        return socialuniAdminPeiwanService.addPeiwanImgList(userId, imgAddQOS);
     }
 }

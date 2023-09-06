@@ -10,7 +10,6 @@
                     placement="top-start">
                 <el-input
                         v-model="row[prop]"
-                        size="small"
                         :clearable="clearable"
                         :placeholder="placeholder"
                         @click.native.stop
@@ -20,7 +19,6 @@
             <el-input
                     v-else
                     v-model="row[prop]"
-                    size="small"
                     :clearable="clearable"
                     :placeholder="placeholder"
                     @click.native.stop

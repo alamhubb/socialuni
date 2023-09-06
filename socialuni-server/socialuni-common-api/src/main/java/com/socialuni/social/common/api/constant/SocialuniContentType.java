@@ -18,6 +18,7 @@ public class SocialuniContentType {
     public final static String message = "消息";
 
     public final static String userAvatar = "用户头像";
+    public final static String peiwanImg = "陪玩图片";
     public final static String userNickname = "用户昵称";
     public final static List<String> reportContentTypeTypes = Arrays.asList(user, userImg, userAvatar, userNickname, talk, talkImg, comment, message);
     //支持有独自实体类的

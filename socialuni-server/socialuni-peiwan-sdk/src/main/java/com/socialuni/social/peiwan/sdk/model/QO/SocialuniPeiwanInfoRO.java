@@ -1,6 +1,9 @@
 package com.socialuni.social.peiwan.sdk.model.QO;
 
+import com.socialuni.social.peiwan.sdk.model.RO.SocialuniPeiwanInfoImgRO;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class SocialuniPeiwanInfoRO {
@@ -14,4 +17,6 @@ public class SocialuniPeiwanInfoRO {
     private Double lat;
     //经度
     private Double lng;
+
+    private List<SocialuniPeiwanInfoImgRO> imgs;
 }

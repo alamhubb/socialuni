@@ -14,7 +14,7 @@
                               fit="fill"/>
                     <div
                             class="position-absolute z-index-button color-white size20 bg-grey8 bg-half-transparent row-all-center topRight bd bbl-radius"
-                            @click="deleteImg(index)">×
+                            @click="avatarImg = null">×
                     </div>
                 </div>
 
@@ -24,6 +24,7 @@
             </el-upload>
 
             <el-button @click="addPeiwanAPI">创建</el-button>
+            <el-button @click="addPeiwanAPI">更新</el-button>
 
             <!--            <label-item label="位置和经纬度：">
                             <el-button class="mr-sm" size="small" type="primary" @click="openMapDialog">选择位置</el-button>
@@ -39,10 +40,25 @@
             <div>
             </div>
             <el-table :data="peiwanList">
-                <y-table-input label="昵称" prop="username"></y-table-input>
-                <y-table-column label="头像" prop="avatar">
+                <!--                <y-table-input label="昵称" prop="username"></y-table-input>-->
+                <!--                <y-table-column label="头像" prop="avatar">
+                                    <template #default="{row}">
+                                        <img :src="row.avatar">
+                                    </template>
+                                </y-table-column>-->
+                <y-table-column label="上传" prop="avatar">
                     <template #default="{row}">
-                        <img :src="row.avatar">
+                        <el-upload drag class="size100 overflow-hidden bd-radius" :auto-upload="false"
+                                   :on-change="(file)=>tableAvatarImgChange(row,file)">
+                            <div v-if="row.avatar" class="position-relative">
+                                <el-image class="size100 overflow-hidden" :src="row.avatar"
+                                          fit="fill"/>
+                            </div>
+
+                            <el-icon v-else class="size100 font-50 color-sub">
+                                <Plus/>
+                            </el-icon>
+                        </el-upload>
                     </template>
                 </y-table-column>
                 <!--                <y-table-input label="昵称" prop="username"></y-table-input>
@@ -76,6 +92,9 @@ import TencentCosAPI from "@socialuni/socialuni-app-api/src/api/TencentCosAPI";
 import CosService from "@socialuni/socialuni-app-sdk/src/util/CosService";
 import UUIDUtil from "@/utils/UUIDUtil";
 import SocialuniPeiwanAPI from "@socialuni/socialuni-peiwan-api/src/api/SocialuniPeiwanAPI";
+import {useMagicKeys} from '@vueuse/core'
+import {watch} from "vue";
+
 
 @Component({
     components: {SDialog, Plus}
@@ -88,6 +107,7 @@ export default class PeiwanManageView extends Vue {
     openMapDialog() {
         this.$refs.mapDialog.open()
     }
+
 
     peiwanUuid = UUIDUtil.getUUID()
 
@@ -110,6 +130,7 @@ export default class PeiwanManageView extends Vue {
         this.peiwanUuid = UUIDUtil.getUUID()
 
         this.queryPeiwanListAPI()
+        this.queryCosAuthAPI()
         console.log('进入了')
         window.addEventListener('message', (event) => {
             // 接收位置信息，用户选择确认位置点后选点组件会触发该事件，回传用户的位置信息
@@ -128,11 +149,32 @@ export default class PeiwanManageView extends Vue {
                 }
             }
         }, false)
+
+        const keys = useMagicKeys({
+            passive: false,
+            onEventFired(e) {
+                e.preventDefault()
+                console.log(e)
+                console.log(1111)
+                return false
+            }
+        })
+
+        const ctrls = keys['ctrl+s']
+
+        watch(ctrls, (v) => {
+            if (v) {
+                console.log('触发了保存')
+            }
+        })
     }
 
     district = null
 
     peiwanInfo: PeiwanRO = new PeiwanRO()
+
+
+    updatePeiwanList
 
 
     beijingDistrict = [
@@ -154,17 +196,58 @@ export default class PeiwanManageView extends Vue {
 
         this.avatarImg = imgFile.path
 
-        const cosAuthRO = await CosService.getCosAuthRO()
-
         await ImgUtilH5.setImgQualityAndAspectRatio(imgFile)
 
-        imgFile.src = cosAuthRO.uploadImgPath + `manage/${this.peiwanUuid}/` + imgFile.src
+        imgFile.src = this.cosAuthRO.uploadImgPath + `manage/img/avatar/${this.peiwanUuid}/` + imgFile.src
 
         this.peiwanInfo.avatar = imgFile.src
 
         console.log(imgFile)
 
-        const res = await TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO)
+        const res = await TencentCosAPI.uploadFileAPI(imgFile, this.cosAuthRO)
+
+        console.log(res)
+        // this.peiwanInfo.avatar = imgFile.src
+    }
+
+    cosAuthRO = null
+
+    async queryCosAuthAPI() {
+        this.cosAuthRO = await CosService.getCosAuthRO()
+    }
+
+    async tableAvatarImgChange(row: PeiwanRO, file: any) {
+        const imgFile: DomFile = FileUtilH5.fileSetPath(file.raw)
+
+        row.avatar = imgFile.path
+
+        await ImgUtilH5.setImgQualityAndAspectRatio(imgFile)
+
+        imgFile.src = this.cosAuthRO.uploadImgPath + `imgs/userAvatar/` + imgFile.src
+
+
+        console.log(imgFile)
+
+        const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, this.cosAuthRO), SocialuniPeiwanAPI.updatePeiwanAvatarAPI(row.userId, imgFile.src)]);
+
+        row.avatar = res[1].data
+
+    }
+
+    async tablePeiwanImgChange(file: any) {
+        const imgFile: DomFile = FileUtilH5.fileSetPath(file.raw)
+
+        this.avatarImg = imgFile.path
+
+        await ImgUtilH5.setImgQualityAndAspectRatio(imgFile)
+
+        imgFile.src = this.cosAuthRO.uploadImgPath + `manage/${this.peiwanUuid}/` + imgFile.src
+
+        this.peiwanInfo.avatar = imgFile.src
+
+        console.log(imgFile)
+
+        const res = await TencentCosAPI.uploadFileAPI(imgFile, this.cosAuthRO)
 
         console.log(res)
         // this.peiwanInfo.avatar = imgFile.src

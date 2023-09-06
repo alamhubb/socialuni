@@ -2,22 +2,21 @@ package com.socialuni.social.common.sdk.dao.facede;
 
 import cn.hutool.extra.spring.SpringUtil;
 import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniCommonRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Example;
-import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Slf4j
 public abstract class SocialuniRepositoryFacade {
 
     private final static SocialuniCommonRepository repository = SpringUtil.getBean(SocialuniCommonRepository.class);
+
+    public static <T> List<T> saveAll(List<T> t) {
+        return getRepository().saveAll(t);
+    }
 
     public static <T> T save(T t) {
         return getRepository().save(t);
@@ -29,8 +28,8 @@ public abstract class SocialuniRepositoryFacade {
     }
 
 
-    public static <T> List<T> findByAllByIdDesc(Class<T> tClass) {
-        return getRepository().findByAllByIdDesc(tClass);
+    public static <T> List<T> findByAllByOrderByIdDesc(Class<T> tClass) {
+        return getRepository().findByAllByOrderByIdDesc(tClass);
     }
 
     public static <T extends SocialuniUnionContentBaseDO> T findByUnionId(Integer id, Class<T> tClass) {
