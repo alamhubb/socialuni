@@ -57,11 +57,11 @@
 
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-facing-decorator'
-import YScrollbar from "./YComponent/YScrollbar.vue";
-import YPageFooter from "./YComponent/YPageFooter.vue";
+import SScrollbar from "./SScrollbar.vue";
+import SPageFooter from "./SPageFooter.vue";
 
 @Component({
-  components: {YScrollbar, YPageFooter}
+  components: {SScrollbar, SPageFooter}
 })
 export default class SDialog extends Vue {
   @Prop({

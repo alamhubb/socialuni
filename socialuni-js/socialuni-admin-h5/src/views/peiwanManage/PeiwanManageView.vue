@@ -67,7 +67,7 @@
 import {Component, Vue} from 'vue-facing-decorator'
 import {DialogInterface} from "@/interface/DialogInterface";
 import PeiwanRO from "@socialuni/socialuni-admin-api/src/model/peiwan/PeiwanRO";
-import SDialog from "@socialuni/socialuni-ui-h5/src/components/SDialog.vue";
+import SDialog from "@socialuni/socialuni-ui-h5/src/components/SComponents/SDialog.vue";
 import {Plus} from '@element-plus/icons-vue'
 import FileUtilH5 from "@socialuni/socialuni-native-h5/src/util/FileUtilH5";
 import type DomFile from "@socialuni/socialuni-native-util/src/model/DomFile";
