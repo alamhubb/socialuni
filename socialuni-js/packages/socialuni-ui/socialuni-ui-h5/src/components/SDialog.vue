@@ -57,8 +57,8 @@
 
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-facing-decorator'
-import YPageFooter from "@/components/YComponent/YPageFooter.vue";
-import YScrollbar from "@/components/YComponent/YScrollbar.vue";
+import YScrollbar from "./YComponent/YScrollbar.vue";
+import YPageFooter from "./YComponent/YPageFooter.vue";
 
 @Component({
   components: {YScrollbar, YPageFooter}

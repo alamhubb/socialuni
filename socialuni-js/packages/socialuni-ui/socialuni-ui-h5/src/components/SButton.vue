@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import { Options, Emit, Prop, Vue } from 'vue-facing-decorator'
+import { Component, Emit, Prop, Vue } from 'vue-facing-decorator'
 import CommonUtil from "@socialuni/socialuni-util/src/util/CommonUtil";
 
 //想要的效果，外部可以主动disable

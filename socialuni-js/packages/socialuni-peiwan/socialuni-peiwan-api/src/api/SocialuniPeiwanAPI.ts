@@ -10,6 +10,6 @@ export default class SocialuniPeiwanAPI {
     }
 
     static queryPeiwanInfoListAPI() {
-        return socialuniUserRequest.get<ResultRO<PeiwanRO[]>>('admin/peiwan/getPeiwanInfoList')
+        return socialuniUserRequest.get<PeiwanRO[]>('admin/peiwan/getPeiwanInfoList')
     }
 }

@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { Options, Prop, Vue } from 'vue-facing-decorator'
+import { Component, Prop, Vue } from 'vue-facing-decorator'
 
 @Component({})
 export default class NavEnumLink extends Vue {

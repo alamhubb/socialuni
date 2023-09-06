@@ -28,7 +28,6 @@
             :options="options"
             :label="optionLabel"
             :value="optionValue"
-            v-on="$listeners"
             @change.native.stop
           />
           <!--      ? option.label : optionValue-->
@@ -39,7 +38,6 @@
             size="small"
             placeholder="请输入"
             @click.native.stop
-            v-on="$listeners"
           />
           <template v-else-if="type===DataTableColumnTypeEnum.label">
             <!--        这里逻辑太重了，最好优化-->

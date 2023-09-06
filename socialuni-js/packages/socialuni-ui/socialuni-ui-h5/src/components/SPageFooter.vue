@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts">
-import { Options, Emit, Prop, Vue } from 'vue-facing-decorator'
+import { Component, Emit, Prop, Vue } from 'vue-facing-decorator'
 import SButton from "./SButton.vue";
 
 @Component({

@@ -3,6 +3,7 @@ package com.socialuni.social.peiwan.sdk.factory;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.peiwan.sdk.model.DO.SocialuniPeiwanInfoDO;
 import com.socialuni.social.peiwan.sdk.model.QO.SocialuniPeiwanInfoRO;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 
 public class SocialuniPeiwanInfoDOFactory {
     public static SocialuniPeiwanInfoDO createPeiwanDO(SocialuniUserDo socialuniUserDo, SocialuniPeiwanInfoRO peiwanInfoAddQO) {
@@ -12,7 +13,7 @@ public class SocialuniPeiwanInfoDOFactory {
         socialuniPeiwanInfoDO.setLat(peiwanInfoAddQO.getLat());
         socialuniPeiwanInfoDO.setCity("北京");
         socialuniPeiwanInfoDO.setDistrict(peiwanInfoAddQO.getDistrict());
-        socialuniPeiwanInfoDO.setAvatar(peiwanInfoAddQO.getAvatar());
+        socialuniPeiwanInfoDO.setAvatar(SocialuniSystemConst.getStaticResourceUrl() + peiwanInfoAddQO.getAvatar());
 
         return socialuniPeiwanInfoDO;
     }
