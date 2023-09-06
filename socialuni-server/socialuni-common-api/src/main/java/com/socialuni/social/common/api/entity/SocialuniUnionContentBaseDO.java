@@ -42,6 +42,7 @@ public class SocialuniUnionContentBaseDO extends SocialuniContentBaseDO implemen
         this.reportNum = 0;
     }
 
+
     public SocialuniUnionContentBaseDO(Integer userId, String contentType, String content) {
         this(userId);
         this.contentType = contentType;
@@ -51,6 +52,10 @@ public class SocialuniUnionContentBaseDO extends SocialuniContentBaseDO implemen
     public SocialuniUnionContentBaseDO(Integer userId, Integer unionId, String contentType, String content) {
         this(userId, contentType, content);
         this.unionId = unionId;
+    }
+
+    public SocialuniUnionContentBaseDO(Integer userId, Integer unionId, String contentType) {
+        this(userId, unionId, contentType, contentType);
     }
 
     @Deprecated

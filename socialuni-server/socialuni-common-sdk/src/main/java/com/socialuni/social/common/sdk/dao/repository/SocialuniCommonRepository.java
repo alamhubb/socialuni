@@ -153,9 +153,6 @@ public class SocialuniCommonRepository {
     }
 
 
-
-
-
     /**
      * 通过userId获得对应的子类。
      *
@@ -256,6 +253,7 @@ public class SocialuniCommonRepository {
         }
         return null;
     }
+
     public <T> List<T> findByAllByUserIdOrderByIdDesc(Integer userId, Class<T> tClass) {
 
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
@@ -277,12 +275,14 @@ public class SocialuniCommonRepository {
         Root<T> userInfo = criteriaQuery.from(tClass);
 
         Predicate userIdPredicate = criteriaBuilder.equal(userInfo.get("userId"), userId);
-        Predicate statusPredicate = criteriaBuilder.notEqual(userInfo.get("status"), status);
+        Predicate statusPredicate = criteriaBuilder.equal(userInfo.get("status"), status);
 
-        criteriaQuery.where(userIdPredicate);
+        criteriaQuery.where(userIdPredicate, statusPredicate);
         criteriaQuery.orderBy(criteriaBuilder.desc(userInfo.get("id")));
 
-        return entityManager.createQuery(criteriaQuery).getResultList();
+        List<T> list = entityManager.createQuery(criteriaQuery).getResultList();
+
+        return list;
     }
 
     public <T> List<T> findByAllByOrderByIdDesc(Class<T> tClass) {

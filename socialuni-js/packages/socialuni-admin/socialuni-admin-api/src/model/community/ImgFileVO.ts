@@ -1,13 +1,13 @@
 export default class ImgFileVO {
-  public id: string
-  public path: string
-  public size: number
+  public id?: string
+  public path?: string
+  public size?: number
   public src: string
-  public aspectRatio: number
-  public height: number
-  public width: number
-  public quality: number
-  public reportNum: number
+  public aspectRatio?: number
+  public height?: number
+  public width?: number
+  public quality?: number
+  public reportNum?: number
 
   constructor(imgFile: ImgFileVO) {
     if (imgFile) {

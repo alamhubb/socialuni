@@ -20,4 +20,11 @@ import javax.persistence.Table;
 @Data
 public class SocialuniPeiwanInfoImgDO extends SocialuniImgBaseDo {
 
+        public SocialuniPeiwanInfoImgDO() {
+        }
+
+
+        public SocialuniPeiwanInfoImgDO(Integer userId, Integer unionId, String contentType) {
+                super(userId, unionId, contentType);
+        }
 }

@@ -36,7 +36,7 @@ public class SocialuniMessageDO extends SocialuniUnionContentBaseDO implements S
     public SocialuniMessageDO() {
     }
 
-    public SocialuniMessageDO(Integer userId, String contentType, String content) {
-        super(userId, contentType, content);
+    public SocialuniMessageDO(Integer userId, Integer unionId, String contentType, String content) {
+        super(userId, unionId, contentType, content);
     }
 }

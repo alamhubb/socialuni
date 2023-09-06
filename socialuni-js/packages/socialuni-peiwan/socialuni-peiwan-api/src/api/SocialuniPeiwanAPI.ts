@@ -18,8 +18,14 @@ export default class SocialuniPeiwanAPI {
         return socialuniUserRequest.post<void>('admin/peiwan/updatePeiwanList', peiwans)
     }
 
+
+
     static updatePeiwanAvatarAPI(userId: string, src: string) {
         return socialuniUserRequest.get<string>(`admin/peiwan/updatePeiwanAvatar/${userId}?src=${src}`)
+    }
+
+    static deletePeiwanImgAPI(imgId: number) {
+        return socialuniUserRequest.get<string>(`admin/peiwan/deletePeiwanImg/${imgId}`)
     }
 
     static addPeiwanImgListAPI(userId: string, imgs: DomFile[]) {

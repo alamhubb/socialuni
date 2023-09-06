@@ -61,6 +61,28 @@
                         </el-upload>
                     </template>
                 </y-table-column>
+                <y-table-column label="上传2">
+                    <template #default="{row}">
+                        <div class="flex-row">
+                            <el-upload drag class="size100 overflow-hidden bd-radius" :auto-upload="false"
+                                       multiple
+                                       :on-change="(file)=>tablePeiwanImgChange(row,file)">
+                                <el-icon class="size100 font-50 color-sub">
+                                    <Plus/>
+                                </el-icon>
+                            </el-upload>
+
+                            <div v-for="(item,index) in row.imgs" class="position-relative">
+                                <el-image class="size100 overflow-hidden" :src="item.src"
+                                          fit="fill"/>
+                                <div
+                                        class="position-absolute color-white size20 bg-grey8 bg-half-transparent row-all-center topRight bd bbl-radius use-click"
+                                        @click="deletePeiwanImgAPI(row,index)">×
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </y-table-column>
                 <!--                <y-table-input label="昵称" prop="username"></y-table-input>
                                 <el-table-column label="头像" prop="avatar">
                                     <template #default="{row}">
@@ -94,6 +116,7 @@ import UUIDUtil from "@/utils/UUIDUtil";
 import SocialuniPeiwanAPI from "@socialuni/socialuni-peiwan-api/src/api/SocialuniPeiwanAPI";
 import {useMagicKeys} from '@vueuse/core'
 import {watch} from "vue";
+import AlertUtil from "@socialuni/socialuni-native-h5/src/util/AlertUtil";
 
 
 @Component({
@@ -234,24 +257,30 @@ export default class PeiwanManageView extends Vue {
 
     }
 
-    async tablePeiwanImgChange(file: any) {
+    async tablePeiwanImgChange(row: PeiwanRO, file: any) {
         const imgFile: DomFile = FileUtilH5.fileSetPath(file.raw)
 
-        this.avatarImg = imgFile.path
+        row.imgs.push({src: file.path})
 
         await ImgUtilH5.setImgQualityAndAspectRatio(imgFile)
 
-        imgFile.src = this.cosAuthRO.uploadImgPath + `manage/${this.peiwanUuid}/` + imgFile.src
-
-        this.peiwanInfo.avatar = imgFile.src
+        imgFile.src = this.cosAuthRO.uploadImgPath + `imgs/useShowImg/` + imgFile.src
 
         console.log(imgFile)
 
-        const res = await TencentCosAPI.uploadFileAPI(imgFile, this.cosAuthRO)
+        const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, this.cosAuthRO), SocialuniPeiwanAPI.addPeiwanImgListAPI(row.userId, [imgFile])]);
 
-        console.log(res)
-        // this.peiwanInfo.avatar = imgFile.src
+        row.imgs.push(res[1].data)
     }
 
+
+    deletePeiwanImgAPI(row: PeiwanRO, index) {
+        console.log(row.imgs)
+        AlertUtil.confirm('是否确认删除图片').then(res => {
+            const imgId = row.imgs[index].id as number
+            row.imgs.splice(index, 1)
+            SocialuniPeiwanAPI.deletePeiwanImgAPI(imgId)
+        })
+    }
 }
 </script>

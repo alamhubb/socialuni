@@ -60,6 +60,10 @@ public class SocialuniUnionIdFacede {
         return createUnionIdByContentType(SocialuniContentType.comment);
     }
 
+    public static Integer createPeiwanImgUnionId() {
+        return createUnionIdByContentType(SocialuniContentType.peiwanImg);
+    }
+
     //自身创建
     private static Integer createUnionIdByContentType(String contentType) {
         SocialuniUnionIdModler uniContentUnionIdDO = new SocialuniUnionIdModler(contentType, UUIDUtil.getUUID(), DevAccountFacade.getDevIdNotNull());

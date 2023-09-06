@@ -1,10 +1,13 @@
 package com.socialuni.social.common.sdk.dao.facede;
 
 import com.socialuni.social.common.api.entity.SocialuniUserInfoBaseDO;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
+import com.socialuni.social.common.api.exception.exception.SocialNullUserException;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniCommonRepository;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author wulinghui
@@ -33,10 +36,19 @@ public class SocialuniUserRepositoryFacede extends SocialuniRepositoryFacade {
      * @return
      */
     public static <T extends SocialuniUserInfoBaseDO> T findByUserId(Integer userId, Class<T> tClass) {
-        return socialuniCommonRepository.findByUserId(userId, tClass);
+        return socialuniCommonRepository.findFirstByUserId(userId, tClass);
     }
 
-    public static <T extends SocialuniUserInfoBaseDO> T findFirstByUserIdNotNull(Integer userId, Class<T> tClass) {
-        return socialuniCommonRepository.findFirstByUserIdNotNull(userId, tClass);
+    public static <T extends SocialuniUserInfoBaseDO> T findByUserIdNotNull(Integer userId, Class<T> tClass) {
+        T t = socialuniCommonRepository.findFirstByUserId(userId, tClass);
+        if (t == null) {
+            throw new SocialNullUserException();
+        }
+        return t;
     }
+
+    public static <T> List<T> findByAllByUserIdAndStatusOrderByIdDesc(Integer userId, Class<T> tClass) {
+        return socialuniCommonRepository.findByAllByUserIdAndStatusOrderByIdDesc(userId, SocialuniCommonStatus.enable, tClass);
+    }
+
 }

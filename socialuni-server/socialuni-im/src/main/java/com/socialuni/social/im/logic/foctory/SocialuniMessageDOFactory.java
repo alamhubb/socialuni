@@ -10,11 +10,10 @@ import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 public class SocialuniMessageDOFactory {
 
     public static SocialuniMessageDO createMessage(Integer chatId, String content, Integer userId) {
-        SocialuniMessageDO messageDO = new SocialuniMessageDO(userId, SocialuniContentType.message, content);
-
         Integer messageId = SocialuniUnionIdFacede.createMessageUnionId();
 
-        messageDO.setUnionId(messageId);
+        SocialuniMessageDO messageDO = new SocialuniMessageDO(userId, messageId, SocialuniContentType.message, content);
+
         messageDO.setChatId(chatId);
         messageDO.setReadStatus(MessageReadStatus.sending);
         messageDO.setReadNum(0);

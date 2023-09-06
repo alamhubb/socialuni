@@ -1,20 +1,24 @@
 package com.socialuni.social.peiwan.sdk.factory;
 
+import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
 import com.socialuni.social.peiwan.sdk.model.DO.SocialuniPeiwanInfoDO;
 import com.socialuni.social.peiwan.sdk.model.DO.SocialuniPeiwanInfoImgDO;
 import com.socialuni.social.peiwan.sdk.model.QO.SocialuniPeiwanInfoRO;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import feign.form.ContentType;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SocialuniPeiwanInfoImgDOFactory {
     public static SocialuniPeiwanInfoImgDO createPeiwanImgDO(Integer userId, SocialuniImgAddQO imgAddQO) {
-        SocialuniPeiwanInfoImgDO socialuniPeiwanInfoImgDO = new SocialuniPeiwanInfoImgDO();
+        Integer unionId = SocialuniUnionIdFacede.createPeiwanImgUnionId();
 
-        socialuniPeiwanInfoImgDO.setUserId(userId);
+        SocialuniPeiwanInfoImgDO socialuniPeiwanInfoImgDO = new SocialuniPeiwanInfoImgDO(userId,unionId, SocialuniContentType.peiwanImg);
+
         socialuniPeiwanInfoImgDO.setSrc(imgAddQO.getSrc());
         socialuniPeiwanInfoImgDO.setAspectRatio(imgAddQO.getAspectRatio());
         socialuniPeiwanInfoImgDO.setQuality(imgAddQO.getQuality());
