@@ -1,6 +1,10 @@
 <template>
     <div class="h100p">
         <div class="flex-row">
+
+            <div class="flex-1 row-end">
+                <el-button>保存</el-button>
+            </div>
             <!--            <label-item label="陪玩名称">
                             <el-input></el-input>
                         </label-item>-->
@@ -8,23 +12,23 @@
             <!--            <label-item label="图片">
 
                         </label-item>-->
-            <el-upload drag class="size100 overflow-hidden bd-radius" :auto-upload="false" :on-change="avatarImgChange">
-                <div v-if="avatarImg" class=" position-relative">
-                    <el-image class="size100 overflow-hidden" :src="avatarImg"
-                              fit="fill"/>
-                    <div
-                            class="position-absolute z-index-button color-white size20 bg-grey8 bg-half-transparent row-all-center topRight bd bbl-radius"
-                            @click="avatarImg = null">×
-                    </div>
-                </div>
+            <!--            <el-upload drag class="size100 overflow-hidden bd-radius" :auto-upload="false" :on-change="avatarImgChange">
+                            <div v-if="avatarImg" class=" position-relative">
+                                <el-image class="size100 overflow-hidden" :src="avatarImg"
+                                          fit="fill"/>
+                                <div
+                                        class="position-absolute z-index-button color-white size20 bg-grey8 bg-half-transparent row-all-center topRight bd bbl-radius"
+                                        @click="avatarImg = null">×
+                                </div>
+                            </div>
 
-                <el-icon v-else class="size100 font-50 color-sub">
-                    <Plus/>
-                </el-icon>
-            </el-upload>
+                            <el-icon v-else class="size100 font-50 color-sub">
+                                <Plus/>
+                            </el-icon>
+                        </el-upload>
 
-            <el-button @click="addPeiwanAPI">创建</el-button>
-            <el-button @click="addPeiwanAPI">更新</el-button>
+                        <el-button @click="addPeiwanAPI">创建</el-button>
+                        <el-button @click="addPeiwanAPI">更新</el-button>-->
 
             <!--            <label-item label="位置和经纬度：">
                             <el-button class="mr-sm" size="small" type="primary" @click="openMapDialog">选择位置</el-button>
@@ -40,49 +44,49 @@
             <div>
             </div>
             <el-table :data="peiwanList">
-                <!--                <y-table-input label="昵称" prop="username"></y-table-input>-->
+                <y-table-input label="昵称" prop="username"></y-table-input>
                 <!--                <y-table-column label="头像" prop="avatar">
                                     <template #default="{row}">
                                         <img :src="row.avatar">
                                     </template>
                                 </y-table-column>-->
-                <y-table-column label="上传" prop="avatar">
-                    <template #default="{row}">
-                        <el-upload drag class="size100 overflow-hidden bd-radius" :auto-upload="false"
-                                   :on-change="(file)=>tableAvatarImgChange(row,file)">
-                            <div v-if="row.avatar" class="position-relative">
-                                <el-image class="size100 overflow-hidden" :src="row.avatar"
-                                          fit="fill"/>
-                            </div>
+                <!--                <y-table-column label="上传" prop="avatar">
+                                    <template #default="{row}">
+                                        <el-upload drag class="size100 overflow-hidden bd-radius" :auto-upload="false"
+                                                   :on-change="(file)=>tableAvatarImgChange(row,file)">
+                                            <div v-if="row.avatar" class="position-relative">
+                                                <el-image class="size100 overflow-hidden" :src="row.avatar"
+                                                          fit="fill"/>
+                                            </div>
 
-                            <el-icon v-else class="size100 font-50 color-sub">
-                                <Plus/>
-                            </el-icon>
-                        </el-upload>
-                    </template>
-                </y-table-column>
-                <y-table-column label="上传2">
-                    <template #default="{row}">
-                        <div class="flex-row">
-                            <el-upload drag class="size100 overflow-hidden bd-radius" :auto-upload="false"
-                                       multiple
-                                       :on-change="(file)=>tablePeiwanImgChange(row,file)">
-                                <el-icon class="size100 font-50 color-sub">
-                                    <Plus/>
-                                </el-icon>
-                            </el-upload>
+                                            <el-icon v-else class="size100 font-50 color-sub">
+                                                <Plus/>
+                                            </el-icon>
+                                        </el-upload>
+                                    </template>
+                                </y-table-column>
+                                <y-table-column label="上传2">
+                                    <template #default="{row}">
+                                        <div class="flex-row">
+                                            <el-upload drag class="size100 overflow-hidden bd-radius" :auto-upload="false"
+                                                       multiple
+                                                       :on-change="(file)=>tablePeiwanImgChange(row,file)">
+                                                <el-icon class="size100 font-50 color-sub">
+                                                    <Plus/>
+                                                </el-icon>
+                                            </el-upload>
 
-                            <div v-for="(item,index) in row.imgs" class="position-relative">
-                                <el-image class="size100 overflow-hidden" :src="item.src"
-                                          fit="fill"/>
-                                <div
-                                        class="position-absolute color-white size20 bg-grey8 bg-half-transparent row-all-center topRight bd bbl-radius use-click"
-                                        @click="deletePeiwanImgAPI(row,index)">×
-                                </div>
-                            </div>
-                        </div>
-                    </template>
-                </y-table-column>
+                                            <div v-for="(item,index) in row.imgs" class="position-relative">
+                                                <el-image class="size100 overflow-hidden" :src="item.src"
+                                                          fit="fill"/>
+                                                <div
+                                                        class="position-absolute color-white size20 bg-grey8 bg-half-transparent row-all-center topRight bd bbl-radius use-click"
+                                                        @click="deletePeiwanImgAPI(row,index)">×
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </y-table-column>-->
                 <!--                <y-table-input label="昵称" prop="username"></y-table-input>
                                 <el-table-column label="头像" prop="avatar">
                                     <template #default="{row}">
@@ -113,7 +117,8 @@ import ImgUtilH5 from "@socialuni/socialuni-native-h5/src/util/ImgUtilH5";
 import TencentCosAPI from "@socialuni/socialuni-app-api/src/api/TencentCosAPI";
 import CosService from "@socialuni/socialuni-app-sdk/src/util/CosService";
 import UUIDUtil from "@/utils/UUIDUtil";
-import SocialuniPeiwanAdminAPI from "../../../../packages/socialuni-peiwan/socialuni-peiwan-api/src/api/SocialuniPeiwanAdminAPI";
+import SocialuniPeiwanAdminAPI
+    from "../../../../packages/socialuni-peiwan/socialuni-peiwan-api/src/api/SocialuniPeiwanAdminAPI";
 import {useMagicKeys} from '@vueuse/core'
 import {watch} from "vue";
 import AlertUtil from "@socialuni/socialuni-native-h5/src/util/AlertUtil";
@@ -281,6 +286,10 @@ export default class PeiwanManageView extends Vue {
             row.imgs.splice(index, 1)
             SocialuniPeiwanAdminAPI.deletePeiwanImgAPI(imgId)
         })
+    }
+
+    saveUpdatePeiwanList(){
+
     }
 }
 </script>
