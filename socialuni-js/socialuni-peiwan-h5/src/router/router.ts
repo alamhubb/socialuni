@@ -35,13 +35,5 @@ const router = createRouter({
 
 const whiteList = ['/login'] // no redirect whitelist
 
-router.beforeEach(async(to, from, next) => {
-
-})
-
-router.afterEach(() => {
-    // finish progress bar
-})
-
 
 export default router

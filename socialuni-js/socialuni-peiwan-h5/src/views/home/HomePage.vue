@@ -1,6 +1,55 @@
 <template>
     <div class="h100p">
-        123
+        <div class="mx-sm pb-60">
+            <div v-for="i in 10" class="shadow pd-sm bd-radius-10 mt-sm bg-white">
+                <div class="flex-row">
+                    <img class="flex-none size50 bd-radius" src="./peiwan.jpg">
+                    <div class="flex-1 mx-sm flex-col">
+                        <div class="row-between-center flex-none">
+                            <div class="font-bold">Rosa</div>
+
+                            <div class="row-col-center">
+                                <div class="size4 bd-round bg-green"></div>
+                                <div class="font-12 ml-xs">北京</div>
+                                <div class="font-12 ml-xs">50km</div>
+                            </div>
+                        </div>
+
+                        <div class="row-col-center row-wrap">
+                            <view class="q-tag-blue">
+                                电竞
+                            </view>
+                            <view class="q-tag-green ml-xs">
+                                吃饭
+                            </view>
+                            <view class="q-tag-purple ml-xs">
+                                电影
+                            </view>
+                            <view class="q-tag-orange ml-xs">
+                                小酌
+                            </view>
+                        </div>
+
+                        <div>
+                            <div class="flex-1">
+
+                            </div>
+                        </div>
+
+                        <div class="row-between-center">
+                            <div class="row-col-end line-h1">
+                                <div class="color-orange font-18 font-bold">
+                                    600
+                                </div>
+                                <div class="font-12 ml-nm mb-nn">币/3小时</div>
+                            </div>
+                            <div class="row-col-end use-click font-12 line-h1">下单</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 </template>
 
@@ -8,16 +57,19 @@
 import {Component, Vue} from 'vue-facing-decorator'
 import SDialog from "@socialuni/socialuni-ui-h5/src/components/SComponents/SDialog.vue";
 import {Plus} from '@element-plus/icons-vue'
-
+import SocialuniPeiwanAPI from "@socialuni/socialuni-peiwan-api/src/api/SocialuniPeiwanAPI";
 
 @Component({
     components: {SDialog, Plus}
 })
-export default class PeiwanManageView extends Vue {
+export default class HomePage extends Vue {
     $refs: {
         mapDialog: SDialog
     }
 
+    created(){
+        SocialuniPeiwanAPI.queryPeiwanInfoListAPI()
+    }
 
 }
 </script>

@@ -113,7 +113,7 @@ import ImgUtilH5 from "@socialuni/socialuni-native-h5/src/util/ImgUtilH5";
 import TencentCosAPI from "@socialuni/socialuni-app-api/src/api/TencentCosAPI";
 import CosService from "@socialuni/socialuni-app-sdk/src/util/CosService";
 import UUIDUtil from "@/utils/UUIDUtil";
-import SocialuniPeiwanAPI from "@socialuni/socialuni-peiwan-api/src/api/SocialuniPeiwanAPI";
+import SocialuniPeiwanAdminAPI from "../../../../packages/socialuni-peiwan/socialuni-peiwan-api/src/api/SocialuniPeiwanAdminAPI";
 import {useMagicKeys} from '@vueuse/core'
 import {watch} from "vue";
 import AlertUtil from "@socialuni/socialuni-native-h5/src/util/AlertUtil";
@@ -140,12 +140,12 @@ export default class PeiwanManageView extends Vue {
 
 
     async addPeiwanAPI() {
-        await SocialuniPeiwanAPI.addPeiwanInfoAPI(this.peiwanInfo)
+        await SocialuniPeiwanAdminAPI.addPeiwanInfoAPI(this.peiwanInfo)
         this.queryPeiwanListAPI()
     }
 
     async queryPeiwanListAPI() {
-        const res = await SocialuniPeiwanAPI.queryPeiwanInfoListAPI()
+        const res = await SocialuniPeiwanAdminAPI.queryPeiwanInfoListAPI()
         this.peiwanList = res.data
     }
 
@@ -251,7 +251,7 @@ export default class PeiwanManageView extends Vue {
 
         console.log(imgFile)
 
-        const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, this.cosAuthRO), SocialuniPeiwanAPI.updatePeiwanAvatarAPI(row.userId, imgFile.src)]);
+        const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, this.cosAuthRO), SocialuniPeiwanAdminAPI.updatePeiwanAvatarAPI(row.userId, imgFile.src)]);
 
         row.avatar = res[1].data
 
@@ -268,7 +268,7 @@ export default class PeiwanManageView extends Vue {
 
         console.log(imgFile)
 
-        const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, this.cosAuthRO), SocialuniPeiwanAPI.addPeiwanImgListAPI(row.userId, [imgFile])]);
+        const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, this.cosAuthRO), SocialuniPeiwanAdminAPI.addPeiwanImgListAPI(row.userId, [imgFile])]);
 
         row.imgs.push(res[1].data)
     }
@@ -279,7 +279,7 @@ export default class PeiwanManageView extends Vue {
         AlertUtil.confirm('是否确认删除图片').then(res => {
             const imgId = row.imgs[index].id as number
             row.imgs.splice(index, 1)
-            SocialuniPeiwanAPI.deletePeiwanImgAPI(imgId)
+            SocialuniPeiwanAdminAPI.deletePeiwanImgAPI(imgId)
         })
     }
 }
