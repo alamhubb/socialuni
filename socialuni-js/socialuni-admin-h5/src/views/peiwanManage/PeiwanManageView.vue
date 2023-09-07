@@ -45,25 +45,8 @@
             <div>
             </div>
             <s-table ref="dataTable" :data="peiwanList">
-                123
                 <s-table-select label="技能" prop="skills" :options="skillTags" multiple
                                 @change="skillChange"></s-table-select>
-
-                <s-table-column>
-                    <template #default="{row}">
-                        <el-select
-                            ref="select"
-                            v-model="row.skills"
-                        @change="skillChange">
-                            <!--    不能||item,因为存在null的情况会直接把对象赋值给value-->
-                            <el-option
-                                v-for="item in skillTags"
-                                :label="item"
-                                :value="item"
-                            />
-                        </el-select>
-                    </template>
-                </s-table-column>
                 <!--                <s-table-input label="昵称" prop="username"></s-table-input>
                                 <el-table-column label="位置">
                                     <template #default="{row}">
@@ -174,8 +157,8 @@ export default class PeiwanManageView extends Vue {
         this.$refs.mapDialog.open()
     }
 
-    skillChange(...args) {
-        console.log(args)
+    skillChange(value) {
+        console.log(value)
     }
 
 

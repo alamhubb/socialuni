@@ -3,6 +3,7 @@
     :label="label||prop"
   >
     <template #default="{row,$index}">
+      {{row[prop]}}
       <s-select
         class="w100p"
         v-bind="$attrs"
@@ -11,7 +12,7 @@
         :options="options"
         :label="optionLabel"
         :value="optionValue"
-        @change="change(row[prop],$index,row)"
+        @change="change"
       >
         <slot></slot>
       </s-select>
@@ -48,7 +49,8 @@ export default class STableSelect extends Vue {
 
   @Emit()
   change(value, index, row) {
-    return { value, index, row }
+    console.log(value)
+    // return { value, index, row }
   }
 }
 </script>

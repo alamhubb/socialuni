@@ -1,16 +1,25 @@
 <template>
-  {{ model }}
-    <el-select
-            ref="select"
-            :model-value="model">
-        <!--    不能||item,因为存在null的情况会直接把对象赋值给value-->
-        <el-option
-                v-for="item in optionsGet"
-                :key="item[value]!==undefined?item[value]:item"
-                :label="optionLabel(item)"
-                :value="item[value]!==undefined?item[value]:item"
-        />
-    </el-select>
+  <el-select
+      ref="select"
+      :model-value="modelValue"
+      :placeholder="hint"
+      v-bind="$attrs"
+      @change="change"
+      @blur="blurSetValue"
+      @focus="selectFocus"
+      @input.native="inputValue"
+      filterable>
+    <slot name="prefix" slot="prefix"></slot>
+    <slot :options="optionsGet">
+      <!--    不能||item,因为存在null的情况会直接把对象赋值给value-->
+      <el-option
+          v-for="item in optionsGet"
+          :key="item[value]!==undefined?item[value]:item"
+          :label="optionLabel(item)"
+          :value="item[value]!==undefined?item[value]:item"
+      />
+    </slot>
+  </el-select>
 </template>
 
 <script lang="ts">
@@ -28,7 +37,7 @@ export default class SSelect extends Vue {
         select: any;
     }
 
-    @Model('change') readonly model!: any
+    @Model('change') readonly modelValue!: any
 
     @Prop({default: '请选择'}) readonly hint: string
 
@@ -48,8 +57,9 @@ export default class SSelect extends Vue {
         this.canBlur = false
     }
 
-    @Emit()
+    @Emit('update:modelValue')
     change(value) {
+      console.log(value)
         return value
     }
 
