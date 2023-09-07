@@ -1,7 +1,9 @@
 package com.socialuni.social.peiwan.sdk.factory;
 
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
+import com.socialuni.social.common.sdk.model.RO.SocialuniRectangleRO;
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
+import com.socialuni.social.common.sdk.utils.PositionUtil;
 import com.socialuni.social.peiwan.sdk.model.DO.SocialuniPeiwanInfoDO;
 import com.socialuni.social.peiwan.sdk.model.DO.SocialuniPeiwanInfoImgDO;
 import com.socialuni.social.peiwan.sdk.model.QO.SocialuniPeiwanInfoRO;
@@ -23,6 +25,19 @@ public class SocialuniPeiwanInfoROFactory {
         peiwanInfoRO.setCity(peiwanInfoDO.getCity());
         peiwanInfoRO.setDistrict(peiwanInfoDO.getDistrict());
         peiwanInfoRO.setAvatar(peiwanInfoDO.getAvatar());
+
+        SocialuniRectangleRO rectangleVO = PositionUtil.getRectangle();
+
+
+        Double dbLon = peiwanInfoDO.getLng();
+        Double dbLat = peiwanInfoDO.getLat();
+
+        SocialuniRectangleRO queryRO = new SocialuniRectangleRO(rectangleVO.getLon(), rectangleVO.getLat());
+        SocialuniRectangleRO dataRO = new SocialuniRectangleRO(dbLon, dbLat);
+
+        Double distance = PositionUtil.getDistance(queryRO, dataRO);
+        peiwanInfoRO.setDistance(distance);
+
 
         List<SocialuniPeiwanInfoImgDO> list = SocialuniUserRepositoryFacede.findByAllByUserIdAndStatusOrderByIdDesc(peiwanInfoDO.getUserId(), SocialuniPeiwanInfoImgDO.class);
 

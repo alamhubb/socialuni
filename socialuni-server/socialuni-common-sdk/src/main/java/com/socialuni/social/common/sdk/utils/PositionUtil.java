@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.utils;
+package com.socialuni.social.common.sdk.utils;
 
 import com.socialuni.social.common.api.utils.IpUtil;
 import com.socialuni.social.common.sdk.model.RO.LocationQueryRO;

@@ -1,8 +1,9 @@
-package com.socialuni.social.sdk.utils;
+package com.socialuni.social.common.sdk.utils;
 
 import com.socialuni.social.common.api.constant.SocialWebHeaderName;
 import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.common.sdk.model.RO.SocialuniRectangleRO;
+import com.socialuni.social.common.sdk.utils.PositionUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 

@@ -17,6 +17,7 @@ public class SocialuniPeiwanInfoRO {
     private Double lat;
     //经度
     private Double lng;
+    private Double distance;
 
     private List<SocialuniPeiwanInfoImgRO> imgs;
 }
