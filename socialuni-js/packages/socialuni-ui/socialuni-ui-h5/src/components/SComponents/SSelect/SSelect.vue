@@ -1,7 +1,7 @@
 <template>
   <el-select
       ref="select"
-      :model-value="modelValue"
+      :model-value="model"
       :placeholder="hint"
       v-bind="$attrs"
       @change="change"
@@ -37,7 +37,7 @@ export default class SSelect extends Vue {
         select: any;
     }
 
-    @Model('change') readonly modelValue!: any
+    @Model() readonly model!: any
 
     @Prop({default: '请选择'}) readonly hint: string
 
