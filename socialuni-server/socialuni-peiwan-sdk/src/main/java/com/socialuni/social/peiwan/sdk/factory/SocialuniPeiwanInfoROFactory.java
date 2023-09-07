@@ -9,7 +9,10 @@ import com.socialuni.social.peiwan.sdk.model.DO.SocialuniPeiwanInfoImgDO;
 import com.socialuni.social.peiwan.sdk.model.QO.SocialuniPeiwanInfoRO;
 import com.socialuni.social.peiwan.sdk.model.RO.SocialuniPeiwanInfoImgRO;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SocialuniPeiwanInfoROFactory {
@@ -38,6 +41,12 @@ public class SocialuniPeiwanInfoROFactory {
         Double distance = PositionUtil.getDistance(queryRO, dataRO);
         peiwanInfoRO.setDistance(distance);
 
+        String skills = peiwanInfoDO.getSkills();
+        if (StringUtils.isEmpty(skills)) {
+            peiwanInfoRO.setSkills(new ArrayList<>());
+        } else {
+            peiwanInfoRO.setSkills(Arrays.asList(skills.split(",")));
+        }
 
         List<SocialuniPeiwanInfoImgDO> list = SocialuniUserRepositoryFacede.findByAllByUserIdAndStatusOrderByIdDesc(peiwanInfoDO.getUserId(), SocialuniPeiwanInfoImgDO.class);
 

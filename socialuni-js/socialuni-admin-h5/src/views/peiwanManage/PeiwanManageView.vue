@@ -45,18 +45,36 @@
             <div>
             </div>
             <s-table ref="dataTable" :data="peiwanList">
-                <s-table-input label="昵称" prop="username"></s-table-input>
-                <el-table-column label="位置">
+                <s-table-select label="技能" prop="skills" :options="skillTags" multiple
+                                @change="skillChange"></s-table-select>
+
+                <s-table-column>
                     <template #default="{row}">
-                        <div>
-                            <el-button class="mr-sm" size="small" type="primary" @click="openMapDialog(row)">选择位置
-                            </el-button>
-                        </div>
-                        <div v-if="row.district">
-                            {{ row.district }}：{{ row.lat }}，{{ row.lng }}
-                        </div>
+                        <el-select
+                            ref="select"
+                            v-model="row.skills"
+                        @change="skillChange">
+                            <!--    不能||item,因为存在null的情况会直接把对象赋值给value-->
+                            <el-option
+                                v-for="item in skillTags"
+                                :label="item"
+                                :value="item"
+                            />
+                        </el-select>
                     </template>
-                </el-table-column>
+                </s-table-column>
+                <!--                <s-table-input label="昵称" prop="username"></s-table-input>
+                                <el-table-column label="位置">
+                                    <template #default="{row}">
+                                        <div>
+                                            <el-button class="mr-sm" size="small" type="primary" @click="openMapDialog(row)">选择位置
+                                            </el-button>
+                                        </div>
+                                        <div v-if="row.district">
+                                            {{ row.district }}：{{ row.lat }}，{{ row.lng }}
+                                        </div>
+                                    </template>
+                                </el-table-column>-->
                 <!--                <y-table-column label="头像" prop="avatar">
                                     <template #default="{row}">
                                         <img :src="row.avatar">
@@ -125,6 +143,7 @@ import SDialog from "@socialuni/socialuni-ui-h5/src/components/SComponents/SDial
 import STable from "@socialuni/socialuni-ui-h5/src/components/SComponents/STable.vue";
 import STableColumn from "@socialuni/socialuni-ui-h5/src/components/SComponents/STableColumn/STableColumn.vue";
 import STableInput from "@socialuni/socialuni-ui-h5/src/components/SComponents/STableInput/STableInput.vue";
+import STableSelect from "@socialuni/socialuni-ui-h5/src/components/SComponents/STableSelect/STableSelect.vue";
 import {Plus} from '@element-plus/icons-vue'
 import FileUtilH5 from "@socialuni/socialuni-native-h5/src/util/FileUtilH5";
 import type DomFile from "@socialuni/socialuni-native-util/src/model/DomFile";
@@ -138,9 +157,11 @@ import {useMagicKeys} from '@vueuse/core'
 import {watch} from "vue";
 import AlertUtil from "@socialuni/socialuni-native-h5/src/util/AlertUtil";
 import WindowEventListener from "@socialuni/socialuni-util/src/util/WindowEventListener";
+import AdminPeiwanAppInitData from "@socialuni/socialuni-admin-api/src/model/peiwan/AdminPeiwanAppInitData";
+import SSelect from "@socialuni/socialuni-ui-h5/src/components/SComponents/SSelect/SSelect.vue";
 
 @Component({
-    components: {SDialog, Plus, STableColumn, STableInput, STable}
+    components: {SSelect, SDialog, Plus, STableColumn, STableInput, STable, STableSelect}
 })
 export default class PeiwanManageView extends Vue {
     $refs: {
@@ -150,6 +171,10 @@ export default class PeiwanManageView extends Vue {
     openMapDialog(peiwanInfo: PeiwanRO) {
         this.curMapPeiwanInfo = peiwanInfo
         this.$refs.mapDialog.open()
+    }
+
+    skillChange(...args) {
+        console.log(args)
     }
 
 
@@ -166,6 +191,25 @@ export default class PeiwanManageView extends Vue {
 
     curMapPeiwanInfo: PeiwanRO = null
 
+    created() {
+        this.peiwanUuid = UUIDUtil.getUUID()
+
+        this.getAppInitDataAPI()
+        this.queryPeiwanListAPI()
+        this.queryCosAuthAPI()
+        console.log('进入了')
+        this.listenerMessage()
+        WindowEventListener.useKeydownListener({ctrl: true, key: 's'}, (event) => {
+            this.saveUpdatePeiwanList()
+            console.log(event)
+            // 检查是否按下了 ctrl+s
+            console.log('触发了')
+            // 阻止默认行为（保存网页）
+            event.preventDefault();
+            // 调用自定义事件
+        })
+    }
+
 
     beijingDistrict = [
         '东城',
@@ -181,6 +225,15 @@ export default class PeiwanManageView extends Vue {
         '大兴'
     ]
 
+    skillTags: string[] = []
+
+    appData: AdminPeiwanAppInitData = new AdminPeiwanAppInitData()
+
+    async getAppInitDataAPI() {
+        const res = await SocialuniPeiwanAdminAPI.getAppInitDataAPI()
+        this.appData = res.data
+        this.skillTags = this.appData.skillTags
+    }
 
     async addPeiwanAPI() {
         await SocialuniPeiwanAdminAPI.addPeiwanInfoAPI(this.peiwanInfo)
@@ -192,23 +245,6 @@ export default class PeiwanManageView extends Vue {
         this.peiwanList = res.data
     }
 
-    created() {
-        this.peiwanUuid = UUIDUtil.getUUID()
-
-        this.queryPeiwanListAPI()
-        this.queryCosAuthAPI()
-        console.log('进入了')
-        this.listenerMessage()
-        WindowEventListener.useKeydownListener({ctrl: true, key: 's'}, (event) => {
-            this.saveUpdatePeiwanList()
-            console.log(event)
-            // 检查是否按下了 ctrl+s
-            console.log('触发了')
-            // 阻止默认行为（保存网页）
-            event.preventDefault();
-            // 调用自定义事件
-        })
-    }
 
     listenerMessage() {
         window.addEventListener('message', (event) => {

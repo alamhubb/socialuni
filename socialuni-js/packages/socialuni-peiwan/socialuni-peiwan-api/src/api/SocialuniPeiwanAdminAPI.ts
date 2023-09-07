@@ -3,8 +3,14 @@ import socialuniUserRequest from "@socialuni/socialuni-user-api/src/request/soci
 import PeiwanRO from "@socialuni/socialuni-admin-api/src/model/peiwan/PeiwanRO";
 import ResultRO from "@socialuni/socialuni-api-base/src/model/social/ResultRO";
 import DomFile from "@socialuni/socialuni-native-util/src/model/DomFile";
+import AdminPeiwanAppInitData from "@socialuni/socialuni-admin-api/src/model/peiwan/AdminPeiwanAppInitData";
 
 export default class SocialuniPeiwanAdminAPI {
+
+    static getAppInitDataAPI() {
+        return socialuniUserRequest.get<AdminPeiwanAppInitData>('admin/peiwan/getAppInitData')
+    }
+
 
     static addPeiwanInfoAPI(addQO: PeiwanRO) {
         return socialuniUserRequest.post<CenterUserDetailRO[]>('admin/peiwan/addPeiwanInfo', addQO)

@@ -25,6 +25,7 @@ public class SocialuniPeiwanInfoDO extends SocialuniContentBaseDO {
 
     private String city;
     private String district;
+    private String skills;
     //纬度
     private Double lat;
     //经度

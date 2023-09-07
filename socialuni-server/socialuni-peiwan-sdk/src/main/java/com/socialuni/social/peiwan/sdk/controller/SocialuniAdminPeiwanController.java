@@ -4,6 +4,7 @@ import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
 import com.socialuni.social.peiwan.sdk.logic.SocialuniAdminPeiwanService;
 import com.socialuni.social.peiwan.sdk.model.QO.SocialuniPeiwanInfoRO;
+import com.socialuni.social.peiwan.sdk.model.RO.SocialuniPeiwanAppInitData;
 import com.socialuni.social.peiwan.sdk.model.RO.SocialuniPeiwanInfoImgRO;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +20,11 @@ public class SocialuniAdminPeiwanController {
 
     @Resource
     SocialuniAdminPeiwanService socialuniAdminPeiwanService;
+
+    @GetMapping("getAppInitData")
+    public ResultRO<SocialuniPeiwanAppInitData> getAppInitData() {
+        return ResultRO.success(new SocialuniPeiwanAppInitData());
+    }
 
     @PostMapping("addPeiwanInfo")
     public ResultRO<Void> addPeiwanInfo(@RequestBody SocialuniPeiwanInfoRO socialuniPeiwanInfoAddQO) {

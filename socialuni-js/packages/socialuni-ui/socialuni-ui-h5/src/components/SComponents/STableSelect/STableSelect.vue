@@ -1,11 +1,11 @@
 <template>
   <s-table-column
     :label="label||prop"
-    v-bind="$attrs"
   >
     <template #default="{row,$index}">
       <s-select
         class="w100p"
+        v-bind="$attrs"
         v-model="row[prop]"
         :disabled="readonly"
         :options="options"
@@ -41,7 +41,7 @@ export default class STableSelect extends Vue {
   @Prop() readonly labelClass: string
   @Prop({ default: '请选择' }) readonly hint: string
 
-  @Prop() readonly options: []
+  @Prop() readonly options: any[]
   @Prop() readonly optionLabel: string
   @Prop() readonly readonly: boolean
   @Prop() readonly optionValue: string

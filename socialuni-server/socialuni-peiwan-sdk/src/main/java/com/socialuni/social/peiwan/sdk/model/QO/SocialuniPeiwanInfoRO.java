@@ -18,6 +18,7 @@ public class SocialuniPeiwanInfoRO {
     //经度
     private Double lng;
     private Double distance;
+    private List<String> skills;
 
     private List<SocialuniPeiwanInfoImgRO> imgs;
 }
