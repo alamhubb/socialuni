@@ -17,7 +17,7 @@ import Pageable from "./Pageable";
 export default class SPagination extends Vue {
   @Model('change') pageable: Pageable
 
-  @Emit()
+  @Emit('update:modelValue')
   change(value) {
     return value
   }

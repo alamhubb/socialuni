@@ -42,7 +42,7 @@ export default class YFormInput extends Vue {
   @Prop() readonly readonly: boolean
   @Prop() readonly optionValue: string
 
-  @Emit()
+  @Emit('update:modelValue')
   change(value) {
     return value
   }

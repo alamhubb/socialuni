@@ -85,7 +85,7 @@ export default class QPopup extends Vue {
     this.close()
   }
 
-  @Emit()
+  @Emit('update:modelValue')
   input(visible) {
     return visible
   }

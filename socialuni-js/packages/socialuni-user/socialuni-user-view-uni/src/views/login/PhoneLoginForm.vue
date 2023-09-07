@@ -85,7 +85,7 @@ export default class PhoneLoginForm extends Vue {
     return socialuniConfigModule.appMoreConfig.authCodeInterval || 30
   }
 
-  @Emit()
+  @Emit('update:modelValue')
   input() {
     return this.value
   }

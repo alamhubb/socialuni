@@ -112,7 +112,7 @@ export default class QTabs extends Vue {
     }
   }
 
-  @Emit()
+  @Emit('update:modelValue')
   input(index: number) {
     return index
   }

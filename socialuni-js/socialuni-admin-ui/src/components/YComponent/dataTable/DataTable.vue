@@ -283,7 +283,7 @@ export default class DataTable extends Vue {
     this.$refs.table.clearSelection()
   }*/
 
-  @Emit()
+  @Emit('update:modelValue')
   change(currentRow) {
     return currentRow
   }

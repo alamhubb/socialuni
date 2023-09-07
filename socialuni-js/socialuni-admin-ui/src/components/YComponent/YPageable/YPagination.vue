@@ -17,7 +17,7 @@ import Pageable from '@/components/YComponent/YPageable/Pageable'
 export default class YPagination extends Vue {
   @Model('change') pageable: Pageable
 
-  @Emit()
+  @Emit('update:modelValue')
   change(value) {
     return value
   }

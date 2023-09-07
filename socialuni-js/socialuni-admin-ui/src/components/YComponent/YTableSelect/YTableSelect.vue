@@ -45,7 +45,7 @@ export default class YTableSelect extends Vue {
   @Prop() readonly readonly: boolean
   @Prop() readonly optionValue: string
 
-  @Emit()
+  @Emit('update:modelValue')
   change(value, index, row) {
     return { value, index, row }
   }

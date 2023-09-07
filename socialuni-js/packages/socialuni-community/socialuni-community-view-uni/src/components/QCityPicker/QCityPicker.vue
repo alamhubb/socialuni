@@ -90,7 +90,7 @@ export default class QCityPicker extends Vue {
   }
 
 
-  @Emit()
+  @Emit('update:modelValue')
   input() {
     return this.cityValue
   }

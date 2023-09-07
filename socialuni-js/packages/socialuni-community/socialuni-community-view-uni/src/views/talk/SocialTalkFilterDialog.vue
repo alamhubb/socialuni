@@ -190,7 +190,7 @@ export default class SocialTalkFilterDialog extends Vue {
     this.showCircleSearch = false
   }
 
-  @Emit()
+  @Emit('update:modelValue')
   change(circle: SocialCircleRO) {
     return circle
   }

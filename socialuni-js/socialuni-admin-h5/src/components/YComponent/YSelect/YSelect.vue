@@ -58,7 +58,7 @@ export default class YSelect extends Vue {
     this.canBlur = false
   }
 
-  @Emit()
+  @Emit('update:modelValue')
   change(value) {
     return value
   }

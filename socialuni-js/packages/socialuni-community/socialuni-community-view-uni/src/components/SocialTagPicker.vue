@@ -98,7 +98,7 @@ export default class SocialTagPicker extends Vue {
     this.$refs.dialog.close()
   }
 
-  @Emit()
+  @Emit('update:modelValue')
   change(tag: SocialCircleRO) {
     this.close()
     return tag

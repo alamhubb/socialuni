@@ -44,7 +44,7 @@ export default class YFormSelect extends Vue {
   @Prop({default: 'name'}) readonly optionLabel: string
   @Prop({default: 'value'}) readonly optionValue: string
 
-  @Emit()
+  @Emit('update:modelValue')
   change(value) {
     return value
   }

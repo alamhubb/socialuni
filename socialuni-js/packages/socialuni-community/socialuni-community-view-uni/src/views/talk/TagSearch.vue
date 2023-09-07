@@ -148,13 +148,13 @@ export default class TagSearch extends Vue {
     }
   }
 
-  @Emit()
+  @Emit('update:modelValue')
   input() {
     this.clearSearchContent()
     return false
   }
 
-  @Emit()
+  @Emit('update:modelValue')
   change(tag: TagVO) {
     this.input()
     const tagIndex: number = this.historyTags.findIndex(item => item.id === tag.id)

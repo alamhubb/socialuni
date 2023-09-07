@@ -101,7 +101,7 @@ export default class SocialCirclePicker extends Vue {
     this.$refs.circleChooseDialog.close()
   }
 
-  @Emit()
+  @Emit('update:modelValue')
   change(circle: SocialCircleRO) {
     this.closeDialog()
     return circle

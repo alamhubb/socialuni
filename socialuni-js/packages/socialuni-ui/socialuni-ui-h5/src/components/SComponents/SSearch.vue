@@ -121,7 +121,7 @@ export default class YSearch extends Vue {
     }
   }
 
-  @Emit()
+  @Emit('update:modelValue')
   change(value: any) {
     return value
   }

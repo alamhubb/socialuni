@@ -33,7 +33,7 @@ export default class YFormCheckbox extends Vue {
 
   @Prop() readonly readonly: boolean
 
-  @Emit()
+  @Emit('update:modelValue')
   change(value) {
     return value
   }

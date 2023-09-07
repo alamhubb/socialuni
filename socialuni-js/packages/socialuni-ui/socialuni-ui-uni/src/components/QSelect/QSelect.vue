@@ -50,7 +50,7 @@ export default class QSelect extends Vue {
     this.change({detail: {value: null}})
   }
 
-  @Emit()
+  @Emit('update:modelValue')
   change({detail}: { detail: { value: number } }) {
     const index = detail.value
     if (index === null) {

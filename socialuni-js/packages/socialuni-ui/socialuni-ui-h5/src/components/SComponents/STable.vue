@@ -127,7 +127,7 @@ export default class STable extends Vue {
         }
     }
 
-    @Emit()
+    @Emit('update:modelValue')
     change(currentRow) {
         return currentRow
     }

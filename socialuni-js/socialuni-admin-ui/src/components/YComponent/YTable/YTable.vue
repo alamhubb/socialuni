@@ -119,7 +119,7 @@ export default class YTable extends Vue {
     }
   }
 
-  @Emit()
+  @Emit('update:modelValue')
   change(currentRow) {
     return currentRow
   }
