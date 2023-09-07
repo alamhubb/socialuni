@@ -37,6 +37,7 @@ public class SocialuniPeiwanInfoROFactory {
 
         SocialuniRectangleRO queryRO = new SocialuniRectangleRO(rectangleVO.getLon(), rectangleVO.getLat());
         SocialuniRectangleRO dataRO = new SocialuniRectangleRO(dbLon, dbLat);
+        System.out.println(123);
 
         Double distance = PositionUtil.getDistance(queryRO, dataRO);
         peiwanInfoRO.setDistance(distance);
