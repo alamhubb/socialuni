@@ -37,8 +37,6 @@
                     {{ peiwanInfo.district }}：{{ peiwanInfo.lat }}，{{ peiwanInfo.lng }}
                 </div>
             </label-item>
-
-
         </div>
 
         <div>

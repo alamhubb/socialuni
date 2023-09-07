@@ -3,7 +3,6 @@
     :label="label||prop"
   >
     <template #default="{row,$index}">
-      {{row[prop]}}
       <s-select
         class="w100p"
         v-bind="$attrs"
@@ -49,8 +48,7 @@ export default class STableSelect extends Vue {
 
   @Emit()
   change(value, index, row) {
-    console.log(value)
-    // return { value, index, row }
+    return { value, index, row }
   }
 }
 </script>
