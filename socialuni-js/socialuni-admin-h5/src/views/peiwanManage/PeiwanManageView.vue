@@ -45,6 +45,7 @@
             <div>
             </div>
             <s-table ref="dataTable" :data="peiwanList">
+                123
                 <s-table-select label="技能" prop="skills" :options="skillTags" multiple
                                 @change="skillChange"></s-table-select>
 
