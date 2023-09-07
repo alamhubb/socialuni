@@ -35,8 +35,8 @@ public class SocialuniAdminPeiwanController {
         return socialuniAdminPeiwanService.updatePeiwanAvatar(userId, src);
     }
 
-    @GetMapping("updatePeiwanList")
-    public ResultRO<Void> updatePeiwanList(List<SocialuniPeiwanInfoRO> peiwanInfoROS) {
+    @PostMapping("updatePeiwanList")
+    public ResultRO<Void> updatePeiwanList(@RequestBody List<SocialuniPeiwanInfoRO> peiwanInfoROS) {
         return socialuniAdminPeiwanService.updatePeiwanList(peiwanInfoROS);
     }
 

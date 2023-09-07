@@ -30,12 +30,13 @@
                         <el-button @click="addPeiwanAPI">创建</el-button>
                         <el-button @click="addPeiwanAPI">更新</el-button>-->
 
-            <!--            <label-item label="位置和经纬度：">
-                            <el-button class="mr-sm" size="small" type="primary" @click="openMapDialog">选择位置</el-button>
-                            <div>
-                                {{ peiwanInfo.district }}：{{ peiwanInfo.lat }}，{{ peiwanInfo.lng }}
-                            </div>
-                        </label-item>-->
+            <label-item label="位置和经纬度：">
+                <el-button class="mr-sm" size="small" type="primary" @click="openMapDialog(peiwanInfo)">选择位置
+                </el-button>
+                <div>
+                    {{ peiwanInfo.district }}：{{ peiwanInfo.lat }}，{{ peiwanInfo.lng }}
+                </div>
+            </label-item>
 
 
         </div>
@@ -44,12 +45,18 @@
             <div>
             </div>
             <s-table ref="dataTable" :data="peiwanList">
-              <el-table-column label="昵称">
-                <template #default="{row}">
-                  <el-input v-model="row.username"></el-input>
-                </template>
-              </el-table-column>
-<!--                <s-table-input label="昵称" prop="username"></s-table-input>-->
+                <s-table-input label="昵称" prop="username"></s-table-input>
+                <el-table-column label="位置">
+                    <template #default="{row}">
+                        <div>
+                            <el-button class="mr-sm" size="small" type="primary" @click="openMapDialog(row)">选择位置
+                            </el-button>
+                        </div>
+                        <div v-if="row.district">
+                            {{ row.district }}：{{ row.lat }}，{{ row.lng }}
+                        </div>
+                    </template>
+                </el-table-column>
                 <!--                <y-table-column label="头像" prop="avatar">
                                     <template #default="{row}">
                                         <img :src="row.avatar">
@@ -130,16 +137,18 @@ import SocialuniPeiwanAdminAPI
 import {useMagicKeys} from '@vueuse/core'
 import {watch} from "vue";
 import AlertUtil from "@socialuni/socialuni-native-h5/src/util/AlertUtil";
+import WindowEventListener from "@socialuni/socialuni-util/src/util/WindowEventListener";
 
 @Component({
-    components: {SDialog, Plus, STableColumn, STableInput,STable}
+    components: {SDialog, Plus, STableColumn, STableInput, STable}
 })
 export default class PeiwanManageView extends Vue {
     $refs: {
-      dataTable: STable
+        dataTable: STable
     }
 
-    openMapDialog() {
+    openMapDialog(peiwanInfo: PeiwanRO) {
+        this.curMapPeiwanInfo = peiwanInfo
         this.$refs.mapDialog.open()
     }
 
@@ -149,6 +158,28 @@ export default class PeiwanManageView extends Vue {
     peiwanList: PeiwanRO[] = []
 
     avatarImg = null
+
+
+    district = null
+
+    peiwanInfo: PeiwanRO = new PeiwanRO()
+
+    curMapPeiwanInfo: PeiwanRO = null
+
+
+    beijingDistrict = [
+        '东城',
+        '西城',
+        '朝阳',
+        '丰台',
+        '石景山',
+        '海淀',
+        '房山',
+        '通州',
+        '顺义',
+        '昌平',
+        '大兴'
+    ]
 
 
     async addPeiwanAPI() {
@@ -167,64 +198,39 @@ export default class PeiwanManageView extends Vue {
         this.queryPeiwanListAPI()
         this.queryCosAuthAPI()
         console.log('进入了')
+        this.listenerMessage()
+        WindowEventListener.useKeydownListener({ctrl: true, key: 's'}, (event) => {
+            this.saveUpdatePeiwanList()
+            console.log(event)
+            // 检查是否按下了 ctrl+s
+            console.log('触发了')
+            // 阻止默认行为（保存网页）
+            event.preventDefault();
+            // 调用自定义事件
+        })
+    }
+
+    listenerMessage() {
         window.addEventListener('message', (event) => {
+            console.log(event)
             // 接收位置信息，用户选择确认位置点后选点组件会触发该事件，回传用户的位置信息
             const loc = event.data
             if (loc) {
                 if (loc.module === 'locationPicker') {
                     if (loc.latlng) {
-                        this.peiwanInfo.lat = loc.latlng.lat
-                        this.peiwanInfo.lng = loc.latlng.lng
+                        this.curMapPeiwanInfo.lat = loc.latlng.lat
+                        this.curMapPeiwanInfo.lng = loc.latlng.lng
                     }
                     for (const district of this.beijingDistrict) {
                         if (loc.poiaddress && loc.poiaddress.includes(district)) {
-                            this.peiwanInfo.district = district
+                            this.curMapPeiwanInfo.district = district
                         }
                     }
                 }
             }
         }, false)
-
-        const keys = useMagicKeys({
-            passive: false,
-            onEventFired(e) {
-                e.preventDefault()
-                console.log(e)
-                console.log(1111)
-                return false
-            }
-        })
-
-        const ctrls = keys['ctrl+s']
-
-        watch(ctrls, (v) => {
-            if (v) {
-                console.log('触发了保存')
-            }
-        })
     }
 
-    district = null
-
-    peiwanInfo: PeiwanRO = new PeiwanRO()
-
-
-    updatePeiwanList
-
-
-    beijingDistrict = [
-        '东城',
-        '西城',
-        '朝阳',
-        '丰台',
-        '石景山',
-        '海淀',
-        '房山',
-        '通州',
-        '顺义',
-        '昌平',
-        '大兴'
-    ]
 
     async avatarImgChange(file: any) {
         const imgFile: DomFile = FileUtilH5.fileSetPath(file.raw)
@@ -296,9 +302,14 @@ export default class PeiwanManageView extends Vue {
     }
 
 
-
     saveUpdatePeiwanList() {
-      console.log(this.$refs.dataTable.changeData)
+        console.log(this.$refs.dataTable.changeData)
+
+        const changeData = this.$refs.dataTable.changeData
+
+        SocialuniPeiwanAdminAPI.updatePeiwanListAPI(changeData).then(() => {
+            this.queryPeiwanListAPI()
+        })
     }
 }
 </script>

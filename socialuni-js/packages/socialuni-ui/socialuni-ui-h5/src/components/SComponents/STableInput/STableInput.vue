@@ -1,10 +1,28 @@
 <template>
     <s-table-column
-            :label="label||prop"
+        :label="label||prop"
     >
         <template #default="{row}">
-            <el-input
+            <el-tooltip
+                v-if="tipProp && row[tipProp]"
+                effect="dark"
+                :content="row[tipProp] || (propFun ? propFun(row[prop], row) : row[prop])"
+                placement="top-start">
+                <el-input
                     v-model="row[prop]"
+                    :clearable="clearable"
+                    :placeholder="placeholder"
+                    @click.native.stop
+                    v-bind="$attrs"
+                />
+            </el-tooltip>
+            <el-input
+                v-else
+                v-model="row[prop]"
+                :clearable="clearable"
+                :placeholder="placeholder"
+                @click.native.stop
+                v-bind="$attrs"
             />
         </template>
     </s-table-column>
