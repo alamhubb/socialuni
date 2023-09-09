@@ -147,6 +147,8 @@ export default class SDialog extends Vue {
     this.$emit('update:visible', this.dialogVisible)
   }
   confirmAfter() {
+      console.log('触发了关闭')
+      console.log(this.autoClose)
     if (this.autoClose) {
       this.close()
     }

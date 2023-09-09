@@ -45,66 +45,55 @@
             <s-table ref="dataTable" :data="peiwanList">
                 <s-table-select label="技能" prop="skills" :options="skillTags" multiple
                                 @change="skillChange"></s-table-select>
-                <!--                <s-table-input label="昵称" prop="username"></s-table-input>
-                                <el-table-column label="位置">
-                                    <template #default="{row}">
-                                        <div>
-                                            <el-button class="mr-sm" size="small" type="primary" @click="openMapDialog(row)">选择位置
-                                            </el-button>
-                                        </div>
-                                        <div v-if="row.district">
-                                            {{ row.district }}：{{ row.lat }}，{{ row.lng }}
-                                        </div>
-                                    </template>
-                                </el-table-column>-->
-                <!--                <y-table-column label="头像" prop="avatar">
-                                    <template #default="{row}">
-                                        <img :src="row.avatar">
-                                    </template>
-                                </y-table-column>-->
-                <!--                <y-table-column label="上传" prop="avatar">
-                                    <template #default="{row}">
-                                        <el-upload drag class="size100 overflow-hidden bd-radius" :auto-upload="false"
-                                                   :on-change="(file)=>tableAvatarImgChange(row,file)">
-                                            <div v-if="row.avatar" class="position-relative">
-                                                <el-image class="size100 overflow-hidden" :src="row.avatar"
-                                                          fit="fill"/>
-                                            </div>
+                <s-table-input label="昵称" prop="username"></s-table-input>
+                <el-table-column label="位置">
+                    <template #default="{row}">
+                        <div>
+                            <el-button class="mr-sm" size="small" type="primary" @click="openMapDialog(row)">选择位置
+                            </el-button>
+                        </div>
+                        <div v-if="row.district">
+                            {{ row.district }}：{{ row.lat }}，{{ row.lng }}
+                        </div>
+                    </template>
+                </el-table-column>
+                <s-table-column label="头像" prop="avatar">
+                    <template #default="{row}">
+                        <el-upload drag class="size100 overflow-hidden bd-radius" :auto-upload="false"
+                                   :on-change="(file)=>tableAvatarImgChange(row,file)">
+                            <div v-if="row.avatar" class="position-relative">
+                                <el-image class="size100 overflow-hidden" :src="row.avatar"
+                                          fit="fill"/>
+                            </div>
 
-                                            <el-icon v-else class="size100 font-50 color-sub">
-                                                <Plus/>
-                                            </el-icon>
-                                        </el-upload>
-                                    </template>
-                                </y-table-column>
-                                <y-table-column label="上传2">
-                                    <template #default="{row}">
-                                        <div class="flex-row">
-                                            <el-upload drag class="size100 overflow-hidden bd-radius" :auto-upload="false"
-                                                       multiple
-                                                       :on-change="(file)=>tablePeiwanImgChange(row,file)">
-                                                <el-icon class="size100 font-50 color-sub">
-                                                    <Plus/>
-                                                </el-icon>
-                                            </el-upload>
+                            <el-icon v-else class="size100 font-50 color-sub">
+                                <Plus/>
+                            </el-icon>
+                        </el-upload>
+                    </template>
+                </s-table-column>
+                <s-table-column label="上传2">
+                    <template #default="{row}">
+                        <div class="flex-row">
+                            <el-upload drag class="size100 overflow-hidden bd-radius" :auto-upload="false"
+                                       multiple
+                                       :on-change="(file)=>tablePeiwanImgChange(row,file)">
+                                <el-icon class="size100 font-50 color-sub">
+                                    <Plus/>
+                                </el-icon>
+                            </el-upload>
 
-                                            <div v-for="(item,index) in row.imgs" class="position-relative">
-                                                <el-image class="size100 overflow-hidden" :src="item.src"
-                                                          fit="fill"/>
-                                                <div
-                                                        class="position-absolute color-white size20 bg-grey8 bg-half-transparent row-all-center topRight bd bbl-radius use-click"
-                                                        @click="deletePeiwanImgAPI(row,index)">×
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </template>
-                                </y-table-column>-->
-                <!--                <y-table-input label="昵称" prop="username"></y-table-input>
-                                <el-table-column label="头像" prop="avatar">
-                                    <template #default="{row}">
-                                        <img :src="row.avatar">
-                                    </template>
-                                </el-table-column>-->
+                            <div v-for="(item,index) in row.imgs" class="position-relative">
+                                <el-image class="size100 overflow-hidden" :src="item.src"
+                                          fit="fill"/>
+                                <div
+                                        class="position-absolute color-white size20 bg-grey8 bg-half-transparent row-all-center topRight bd bbl-radius use-click"
+                                        @click="deletePeiwanImgAPI(row,index)">×
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </s-table-column>
             </s-table>
         </div>
 
@@ -296,7 +285,7 @@ export default class PeiwanManageView extends Vue {
     async tablePeiwanImgChange(row: PeiwanRO, file: any) {
         const imgFile: DomFile = FileUtilH5.fileSetPath(file.raw)
 
-        row.imgs.push({src: file.path})
+        row.imgs.push({src: imgFile.path})
 
         await ImgUtilH5.setImgQualityAndAspectRatio(imgFile)
 
@@ -306,7 +295,7 @@ export default class PeiwanManageView extends Vue {
 
         const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, this.cosAuthRO), SocialuniPeiwanAdminAPI.addPeiwanImgListAPI(row.userId, [imgFile])]);
 
-        row.imgs.push(res[1].data)
+        row.imgs.push(...res[1].data)
     }
 
 

@@ -1,9 +1,9 @@
 <template>
     <div class="h100p">
         <div class="mx-sm pb-60">
-            <div v-for="i in 10" class="shadow pd-sm bd-radius-10 mt-sm bg-white">
+            <div v-for="peiwan in peiwanList" class="shadow pd-sm bd-radius-10 mt-sm bg-white">
                 <div class="flex-row">
-                    <img class="flex-none size50 bd-radius" src="./peiwan.jpg">
+                    <img class="flex-none size50 bd-radius" :src="peiwan.avatar">
                     <div class="flex-1 mx-sm flex-col">
                         <div class="row-between-center flex-none">
                             <div class="font-bold">Rosa</div>
@@ -58,6 +58,7 @@ import {Component, Vue} from 'vue-facing-decorator'
 import SDialog from "@socialuni/socialuni-ui-h5/src/components/SComponents/SDialog.vue";
 import {Plus} from '@element-plus/icons-vue'
 import SocialuniPeiwanAPI from "@socialuni/socialuni-peiwan-api/src/api/SocialuniPeiwanAPI";
+import PeiwanRO from "@socialuni/socialuni-admin-api/src/model/peiwan/PeiwanRO";
 
 @Component({
     components: {SDialog, Plus}
@@ -67,8 +68,16 @@ export default class HomePage extends Vue {
         mapDialog: SDialog
     }
 
-    created(){
-        SocialuniPeiwanAPI.queryPeiwanInfoListAPI()
+
+    peiwanList: PeiwanRO[] = []
+
+    created() {
+        this.queryPeiwanInfoListAPI()
+    }
+
+    async queryPeiwanInfoListAPI() {
+        const res = await SocialuniPeiwanAPI.queryPeiwanInfoListAPI()
+        this.peiwanList = res.data
     }
 
 }
