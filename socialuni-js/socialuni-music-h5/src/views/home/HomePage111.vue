@@ -1,5 +1,6 @@
 <template>
     <div class="h100p">
+        <el-input v-model="uid">uid</el-input>
         <div class="mx-sm pb-60">
             <el-button @click="joinClick">join</el-button>
             <el-button @click="leaveClick">leave</el-button>
@@ -47,6 +48,7 @@ export default class HomePage extends Vue {
 
     localAudioTrack= null
     client= null
+    uid= 123456
 
     created(){
         //实现语音通话逻辑
@@ -94,7 +96,7 @@ export default class HomePage extends Vue {
 
     async joinClick(){
         // Join an RTC channel.
-        await rtc.client.join(options.appId, options.channel, options.token, options.uid);
+        await rtc.client.join(options.appId, options.channel, options.token, this.uid);
         // Create a local audio track from the audio sampled by a microphone.
         rtc.localAudioTrack = await AgoraRTC.createMicrophoneAudioTrack();
         // Publish the local audio tracks to the RTC channel.
