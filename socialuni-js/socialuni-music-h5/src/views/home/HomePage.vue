@@ -23,7 +23,9 @@ let rtc = {
     localAudioTrack: null,
     client: null
 };
+
 import heroicAdventureMp3 from "./assets/HeroicAdventure.mp3"
+import test1 from "./assets/test1.mp3"
 
 const appId = '5e681410a7434ce9bba3e268226ce537'
 const streamIp = 'https://cdxapp-1257733245.file.myqcloud.com/opentest/M800000puzgO0yRX1o.mp3'
@@ -39,6 +41,17 @@ const client = AgoraRTC.createClient({
     mode: "rtc",
     codec: "vp8"
 });
+
+let config = {
+    // Pass your App ID here.
+    appId: "5e681410a7434ce9bba3e268226ce537",
+    // Set the channel name.
+    channel: "aaa",
+    // Pass your temp token here.
+    token: "007eJxTYPDqT36nIBq1M2cWV7TQl/oK/rWeDK2yayf+PZqfwXrHl0mBwTTVzMLQxNAg0dzE2CQ51TIpKdE41cjMwsjILDnV1Nj8XvO/lIZARoa67VcZGRkgEMRnZkhMTGRgAACRXh3F",
+    // Set the user ID.
+    uid: 123456
+}
 
 @Component({
     components: {SDialog, Plus}
@@ -75,13 +88,17 @@ export default class HomePage extends Vue {
     audioMixingTrack = null
 
     async loading(file) {
+        // Join an RTC channel.
+        await client.join(config.appId, config.channel, config.token, config.uid);
+
         console.log('触发了')
         if (this.audioMixing.state === "PLAYING" || this.audioMixing.state === "LOADING") return;
-        const options = {};
+        const options = {}
         if (file) {
-            options.source = file;
+            // options.source = file;
+            options.source = test1
         } else {
-            options.source = heroicAdventureMp3
+            options.source = test1
         }
         try {
             console.log(111111)
@@ -90,6 +107,7 @@ export default class HomePage extends Vue {
                 await client.unpublish(this.audioMixingTrack);
             }
             console.log(2222)
+            console.log(options)
             // start audio mixing with local file or the preset file
             const track = await AgoraRTC.createBufferSourceAudioTrack(options);
             this.audioMixingTrack = track;

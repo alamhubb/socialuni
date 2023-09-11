@@ -16,7 +16,7 @@ export default defineConfig({
     ],
     server: {
         port: 8085,
-        host: '0.0.0.0',
+        // host: '0.0.0.0',
         proxy: {
             '/api': {
                 target: 'https://api.sd-rtn.com',
