@@ -24,6 +24,13 @@ let rtc = {
 const appId = '5e681410a7434ce9bba3e268226ce537'
 const streamIp = 'https://cdxapp-1257733245.file.myqcloud.com/opentest/M800000puzgO0yRX1o.mp3'
 
+const userId = '1a97b2fe76664ef68bfddf7256cf91d3'
+const key = '1a97b2fe76664ef68bfddf7256cf91d3'
+const secret = '999c0689cc794128b450c1d702f0e2f3'
+
+const uidHeader  = 'qqq'
+const tokenHeader  = '007eJxTYDi+2Ftdds/mXxN/+iw6/7xHWSjI6YDypDMbBSd0H7p/zr9FgcE01czC0MTQINHcxNgkOdUyKSnRONXIzMLIyCw51dTY/EXXv5SGQEYGm9KbTIwMTAyMQAjiMzMUFhYCAHfPIUU='
+
 let options = {
     // Pass your App ID here.
     appId: appId,
@@ -64,7 +71,7 @@ export default class HomePage extends Vue {
     }
 
     initAgora(){
-        openRequest.post(`https://api.sd-rtn.com/cn/v1/projects/${appId}/cloud-player/players?streamIp=${streamIp}`)
+        openRequest.get(`/api/cn/v1/projects/${appId}/cloud-player/players?streamIp=${streamIp}`)
     }
 }
 </script>

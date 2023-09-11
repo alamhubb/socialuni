@@ -15,7 +15,17 @@ export default defineConfig({
         socialuniPlatformAutoImportPlugin()
     ],
     server: {
-        port: 8085
+        port: 8085,
+        host: '0.0.0.0',
+        proxy: {
+            '/api': {
+                target: 'https://api.sd-rtn.com',
+                // 如果接口跨域，需要进行这个参数配置
+                changeOrigin: true,
+                rewrite: (path) => path.replace(/^\/api/, '')
+            }
+
+        }
     },
     resolve: {
         alias: {
@@ -27,5 +37,5 @@ export default defineConfig({
             scss: {
             }
         }
-    }
+    },
 })
