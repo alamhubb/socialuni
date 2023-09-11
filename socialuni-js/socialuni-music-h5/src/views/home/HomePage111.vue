@@ -32,6 +32,11 @@ let options = {
     uid: 123456
 }
 
+const client = AgoraRTC.createClient({
+    mode: "rtc",
+    codec: "vp8"
+});
+
 @Component({
     components: {SDialog, Plus}
 })

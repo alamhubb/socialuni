@@ -35,6 +35,17 @@ const secret = '999c0689cc794128b450c1d702f0e2f3'
 const uidHeader = 'qqq'
 const tokenHeader = '007eJxTYDi+2Ftdds/mXxN/+iw6/7xHWSjI6YDypDMbBSd0H7p/zr9FgcE01czC0MTQINHcxNgkOdUyKSnRONXIzMLIyCw51dTY/EXXv5SGQEYGm9KbTIwMTAyMQAjiMzMUFhYCAHfPIUU='
 
+let options = {
+    // Pass your App ID here.
+    appId: appId,
+    // Set the channel name.
+    channel: "aaa",
+    // Pass your temp token here.
+    token: "007eJxTYPDqT36nIBq1M2cWV7TQl/oK/rWeDK2yayf+PZqfwXrHl0mBwTTVzMLQxNAg0dzE2CQ51TIpKdE41cjMwsjILDnV1Nj8XvO/lIZARoa67VcZGRkgEMRnZkhMTGRgAACRXh3F",
+    // Set the user ID.
+    uid: 123456
+}
+
 const client = AgoraRTC.createClient({
     mode: "rtc",
     codec: "vp8"
@@ -64,6 +75,7 @@ export default class HomePage extends Vue {
         // 监听 client.on("user-published") 事件。当 SDK 触发该事件时，在这个事件回调函数的参数中你可以获取远端用户 AgoraRTCRemoteUser 对象 。
         // 调用 subscribe 方法订阅远端用户 AgoraRTCRemoteUser 对象，获取远端用户的远端音频轨道 RemoteAudioTrack 对象。
         // 调用 play 方法播放远端音频轨道。
+        this.initAgora()
     }
 
     audioMixing = {
@@ -109,6 +121,18 @@ export default class HomePage extends Vue {
             // message.error(e.message)
             this.audioMixing = {...this.audioMixing, state: "IDLE"}
         }
+    }
+
+    initAgora() {
+       /* openRequest.get(`/api/cn/v1/projects/${appId}/cloud-player/players`, {
+            params: {
+                'player': {
+                    'uid': 101,
+                    'channelName': 'class1',
+                    'streamUrl': 'https://cdxapp-1257733245.file.myqcloud.com/opentest/M800000puzgO0yRX1o.mp3'
+                }
+            }
+        })*/
     }
 }
 </script>
