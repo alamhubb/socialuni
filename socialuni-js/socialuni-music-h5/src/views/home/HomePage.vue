@@ -36,6 +36,8 @@ let options = {
     uid: 'web' + Math.floor(Math.random() * 2021428)
 }
 
+const streamIp = 'https://cdxapp-1257733245.file.myqcloud.com/opentest/M800000puzgO0yRX1o.mp3'
+
 const client = AgoraRTC.createClient({
     mode: "rtc",
     codec: "vp8"
@@ -83,7 +85,7 @@ export default class HomePage extends Vue {
 
     async publish(){
         const config = {
-            source: test1 as any
+            source: streamIp
         }
         const track = await AgoraRTC.createBufferSourceAudioTrack(config);
         track.play();
