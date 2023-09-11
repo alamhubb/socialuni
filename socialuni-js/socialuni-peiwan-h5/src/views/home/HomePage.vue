@@ -2,7 +2,7 @@
     <div class="h100p">
         <div class="mx-sm pb-60">
             <div v-for="peiwan in peiwanList" class="shadow pd-sm bd-radius-10 mt-sm bg-white">
-                <div class="flex-row">
+                <<!--div class="flex-row">
                     <img class="flex-none size50 bd-radius" :src="peiwan.avatar">
                     <div class="flex-1 mx-sm flex-col">
                         <div class="row-between-center flex-none">
@@ -46,8 +46,7 @@
                             <div class="row-col-end use-click font-12 line-h1">下单</div>
                         </div>
                     </div>
-                </div>
-
+                </div>-->
             </div>
         </div>
     </div>
