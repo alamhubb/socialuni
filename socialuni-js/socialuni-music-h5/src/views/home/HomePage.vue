@@ -4,6 +4,7 @@
         <div class="mx-sm pb-60">
             <el-button @click="joinClick">join</el-button>
             <el-button @click="leaveClick">leave</el-button>
+            <el-button @click="publish">publish</el-button>
         </div>
     </div>
 </template>
@@ -73,6 +74,7 @@ export default class HomePage extends Vue {
 
         // Listen for the "user-published" event, from which you can get an AgoraRTCRemoteUser object.
         rtc.client.on("user-published", async (user, mediaType) => {
+            console.log('触发了订阅')
             // Subscribe to the remote user when the SDK triggers the "user-published" event
             await rtc.client.subscribe(user, mediaType);
             console.log("subscribe success");
@@ -99,10 +101,13 @@ export default class HomePage extends Vue {
         await rtc.client.join(options.appId, options.channel, options.token, this.uid);
         // Create a local audio track from the audio sampled by a microphone.
         rtc.localAudioTrack = await AgoraRTC.createMicrophoneAudioTrack();
-        // Publish the local audio tracks to the RTC channel.
-        await rtc.client.publish([rtc.localAudioTrack]);
 
         console.log("publish success!");
+    }
+
+    async publish(){
+        // Publish the local audio tracks to the RTC channel.
+        await rtc.client.publish([rtc.localAudioTrack]);
     }
 
     async leaveClick(){
