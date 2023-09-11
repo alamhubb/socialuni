@@ -1,11 +1,12 @@
 <template>
     <div class="h100p">
+        <el-input v-model="uid">uid</el-input>
         <div class="mx-sm pb-60">
             <el-button @click="joinClick">join</el-button>
             <el-button @click="leaveClick">leave</el-button>
         </div>
         <div>
-            <el-button @click="loading">测试</el-button>
+            <el-button @click="play">测试</el-button>
         </div>
     </div>
 </template>
@@ -42,6 +43,28 @@ const client = AgoraRTC.createClient({
     codec: "vp8"
 });
 
+// Listen for the "user-published" event, from which you can get an AgoraRTCRemoteUser object.
+client.on("user-published", async (user, mediaType) => {
+    // Subscribe to the remote user when the SDK triggers the "user-published" event
+    await client.subscribe(user, mediaType);
+    console.log("subscribe success");
+
+    // If the remote user publishes an audio track.
+    if (mediaType === "audio") {
+        // Get the RemoteAudioTrack object in the AgoraRTCRemoteUser object.
+        const remoteAudioTrack = user.audioTrack;
+        // Play the remote audio track.
+        remoteAudioTrack.play();
+    }
+
+    // Listen for the "user-unpublished" event
+    client.on("user-unpublished", async (user) => {
+        // Unsubscribe from the tracks of the remote user.
+        await client.unsubscribe(user);
+    });
+
+});
+
 let config = {
     // Pass your App ID here.
     appId: "5e681410a7434ce9bba3e268226ce537",
@@ -61,11 +84,18 @@ export default class HomePage extends Vue {
         mapDialog: SDialog
     }
 
+    uid = 123456
+
 
     localAudioTrack = null
     client = null
 
     //https://cdxapp-1257733245.file.myqcloud.com/opentest/M800000puzgO0yRX1o.mp3
+
+    async joinClick() {
+        // Join an RTC channel.
+        await client.join(config.appId, config.channel, config.token, this.uid);
+    }
 
     created() {
         //实现语音通话逻辑
@@ -87,18 +117,25 @@ export default class HomePage extends Vue {
 
     audioMixingTrack = null
 
-    async loading(file) {
-        // Join an RTC channel.
-        await client.join(config.appId, config.channel, config.token, config.uid);
+    async play() {
+        // this.playBack()
+        this.playmp3()
+    }
 
+    async playBack() {
+        const res = await AgoraRTC.getPlaybackDevices()
+        console.log(res)
+    }
+
+    async playmp3(file) {
         console.log('触发了')
         if (this.audioMixing.state === "PLAYING" || this.audioMixing.state === "LOADING") return;
         const options = {}
         if (file) {
             // options.source = file;
-            options.source = test1
+            options.source = streamIp
         } else {
-            options.source = test1
+            options.source = streamIp
         }
         try {
             console.log(111111)
@@ -127,6 +164,11 @@ export default class HomePage extends Vue {
             // message.error(e.message)
             this.audioMixing = {...this.audioMixing, state: "IDLE"}
         }
+    }
+
+    async leaveClick() {
+        // Leave the channel.
+        await client.leave();
     }
 }
 </script>
