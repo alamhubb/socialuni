@@ -16,6 +16,7 @@ import {Plus} from '@element-plus/icons-vue'
 import SocialuniPeiwanAPI from "@socialuni/socialuni-peiwan-api/src/api/SocialuniPeiwanAPI";
 import PeiwanRO from "@socialuni/socialuni-admin-api/src/model/peiwan/PeiwanRO";
 import AgoraRTC from "agora-rtc-sdk-ng"
+import test1 from "./assets/test1.mp3"
 
 let rtc = {
     localAudioTrack: null,
@@ -100,7 +101,11 @@ export default class HomePage extends Vue {
         // Join an RTC channel.
         await rtc.client.join(options.appId, options.channel, options.token, this.uid);
         // Create a local audio track from the audio sampled by a microphone.
-        rtc.localAudioTrack = await AgoraRTC.createMicrophoneAudioTrack();
+        // rtc.localAudioTrack = await AgoraRTC.createMicrophoneAudioTrack();
+        const config = {
+            source: test1 as any
+        }
+        rtc.localAudioTrack = await AgoraRTC.createBufferSourceAudioTrack(config) as any
 
         console.log("publish success!");
     }
