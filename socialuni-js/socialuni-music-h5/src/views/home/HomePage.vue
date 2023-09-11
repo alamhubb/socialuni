@@ -1,6 +1,7 @@
 <template>
     <div class="h100p">
-        <el-input v-model="uid">uid</el-input>
+<!--        <el-input v-model="uid">uid</el-input>-->
+        {{ options.uid}}
         <div class="mx-sm pb-60">
             <el-button @click="joinClick">join</el-button>
             <el-button @click="leaveClick">leave</el-button>
@@ -32,12 +33,20 @@ let options = {
     // Pass your temp token here.
     token: "007eJxTYPDqT36nIBq1M2cWV7TQl/oK/rWeDK2yayf+PZqfwXrHl0mBwTTVzMLQxNAg0dzE2CQ51TIpKdE41cjMwsjILDnV1Nj8XvO/lIZARoa67VcZGRkgEMRnZkhMTGRgAACRXh3F",
     // Set the user ID.
-    uid: 123456
+    uid: 'web' + Math.floor(Math.random() * 2021428)
 }
 
 const client = AgoraRTC.createClient({
     mode: "rtc",
     codec: "vp8"
+});
+
+client.on("user-published", async (user, mediaType) => {
+    console.log('触发了订阅')
+    await client.subscribe(user, mediaType);
+    if (mediaType === 'audio') {
+        user.audioTrack.play();
+    }
 });
 
 @Component({
@@ -50,7 +59,10 @@ export default class HomePage extends Vue {
 
     localAudioTrack= null
     client= null
-    uid= 123456
+    options= options
+
+    init(){
+    }
 
     created(){
         //实现语音通话逻辑
@@ -62,54 +74,21 @@ export default class HomePage extends Vue {
         // 监听 client.on("user-published") 事件。当 SDK 触发该事件时，在这个事件回调函数的参数中你可以获取远端用户 AgoraRTCRemoteUser 对象 。
         // 调用 subscribe 方法订阅远端用户 AgoraRTCRemoteUser 对象，获取远端用户的远端音频轨道 RemoteAudioTrack 对象。
         // 调用 play 方法播放远端音频轨道。
-        this.startBasicCall()
     }
-
-    initAgora(){
-        this.startBasicCall()
-    }
-
-    async startBasicCall() {
-        // Create an AgoraRTCClient object.
-        rtc.client = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
-
-        // Listen for the "user-published" event, from which you can get an AgoraRTCRemoteUser object.
-        rtc.client.on("user-published", async (user, mediaType) => {
-            console.log('触发了订阅')
-            console.log(user)
-            // Subscribe to the remote user when the SDK triggers the "user-published" event
-            console.log(mediaType)
-            await rtc.client.subscribe(user, mediaType);
-            console.log("subscribe success");
-        });
-
-        // Listen for the "user-unpublished" event
-        rtc.client.on("user-unpublished", async (user) => {
-            // Unsubscribe from the tracks of the remote user.
-            await rtc.client.unsubscribe(user);
-        });
-    }
-
 
     async joinClick(){
         // Join an RTC channel.
-        await rtc.client.join(options.appId, options.channel, options.token, this.uid);
-        // Create a local audio track from the audio sampled by a microphone.
-        // rtc.localAudioTrack = await AgoraRTC.createMicrophoneAudioTrack();
-        const config = {
-            source: test1 as any
-        }
-        rtc.localAudioTrack = await AgoraRTC.createBufferSourceAudioTrack(config) as any
-        console.log("publish success!");
+        await client.join(options.appId, options.channel, options.token, options.uid);
     }
 
     async publish(){
-        rtc.localAudioTrack.play();
-        rtc.localAudioTrack.startProcessAudioBuffer({
-            loop: true
-        });
-        // Publish the local audio tracks to the RTC channel.
-        await rtc.client.publish([rtc.localAudioTrack]);
+        const config = {
+            source: test1 as any
+        }
+        const track = await AgoraRTC.createBufferSourceAudioTrack(config);
+        track.play();
+        track.startProcessAudioBuffer();
+        await client.publish(track);
     }
 
     async leaveClick(){
@@ -117,7 +96,7 @@ export default class HomePage extends Vue {
         rtc.localAudioTrack.close();
 
         // Leave the channel.
-        await rtc.client.leave();
+        await client.leave();
     }
 }
 </script>
