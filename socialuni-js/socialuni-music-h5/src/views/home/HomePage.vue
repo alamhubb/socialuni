@@ -77,13 +77,12 @@ export default class HomePage extends Vue {
                 // Play the remote audio track.
                 remoteAudioTrack.play();
             }
+        });
 
-            // Listen for the "user-unpublished" event
-            rtc.client.on("user-unpublished", async (user) => {
-                // Unsubscribe from the tracks of the remote user.
-                await rtc.client.unsubscribe(user);
-            });
-
+        // Listen for the "user-unpublished" event
+        rtc.client.on("user-unpublished", async (user) => {
+            // Unsubscribe from the tracks of the remote user.
+            await rtc.client.unsubscribe(user);
         });
     }
 
