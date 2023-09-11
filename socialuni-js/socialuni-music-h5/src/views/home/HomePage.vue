@@ -76,17 +76,11 @@ export default class HomePage extends Vue {
         // Listen for the "user-published" event, from which you can get an AgoraRTCRemoteUser object.
         rtc.client.on("user-published", async (user, mediaType) => {
             console.log('触发了订阅')
+            console.log(user)
             // Subscribe to the remote user when the SDK triggers the "user-published" event
+            console.log(mediaType)
             await rtc.client.subscribe(user, mediaType);
             console.log("subscribe success");
-
-            // If the remote user publishes an audio track.
-            if (mediaType === "audio") {
-                // Get the RemoteAudioTrack object in the AgoraRTCRemoteUser object.
-                const remoteAudioTrack = user.audioTrack;
-                // Play the remote audio track.
-                remoteAudioTrack.play();
-            }
         });
 
         // Listen for the "user-unpublished" event
@@ -106,11 +100,14 @@ export default class HomePage extends Vue {
             source: test1 as any
         }
         rtc.localAudioTrack = await AgoraRTC.createBufferSourceAudioTrack(config) as any
-
         console.log("publish success!");
     }
 
     async publish(){
+        rtc.localAudioTrack.play();
+        rtc.localAudioTrack.startProcessAudioBuffer({
+            loop: true
+        });
         // Publish the local audio tracks to the RTC channel.
         await rtc.client.publish([rtc.localAudioTrack]);
     }
