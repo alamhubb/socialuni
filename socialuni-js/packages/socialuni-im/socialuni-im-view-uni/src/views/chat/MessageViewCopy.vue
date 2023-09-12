@@ -330,7 +330,7 @@ import SocialuniMsgViewLogic from "@socialuni/socialuni-im-sdk/src/viewLogic/Soc
 import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 import QNavbar from "@socialuni/socialuni-ui-uni/src/components/QNavbar/QNavbar.vue";
 
-@Options(
+@Component(
     {
         components: {QIcon, QNavbar}
     }

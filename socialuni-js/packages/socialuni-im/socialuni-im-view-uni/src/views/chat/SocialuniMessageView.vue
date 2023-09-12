@@ -181,7 +181,7 @@ import {socialuniMsgModule} from "@socialuni/socialuni-im-sdk/src/store/SocialMe
 import {getCurrentInstance} from "vue";
 import {onLoad} from "@dcloudio/uni-app";
 
-@Options(
+@Component(
     {
       components: {QIcon, QNavbar, SocialuniReportDialog}
     }

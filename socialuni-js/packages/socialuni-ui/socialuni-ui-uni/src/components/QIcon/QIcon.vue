@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import { Emit, Options, Prop, Vue } from 'vue-facing-decorator'
+import { Emit, Component, Prop, Vue } from 'vue-facing-decorator'
 
 @Component({})
 export default class QIcon extends Vue {

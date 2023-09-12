@@ -5,7 +5,7 @@
   </view>
 </template>
 <script lang="ts">
-import {Emit, Options, Vue} from 'vue-facing-decorator'
+import {Emit, Component, Vue} from 'vue-facing-decorator'
 
 //和row-line区别，这个有上下pd那个没有
 /*

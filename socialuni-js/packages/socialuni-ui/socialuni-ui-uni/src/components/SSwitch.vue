@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import {Emit, Model, Options, Vue} from 'vue-facing-decorator'
+import {Emit, Model, Component, Vue} from 'vue-facing-decorator'
 
 @Component({})
 export default class SSwitch extends Vue {

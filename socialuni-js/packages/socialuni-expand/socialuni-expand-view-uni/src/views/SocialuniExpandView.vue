@@ -104,7 +104,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Options, Prop, Emit} from 'vue-facing-decorator'
+import {Vue, Component, Prop, Emit} from 'vue-facing-decorator'
 import SocialuniFollowType from "@socialuni/socialuni-constant/constant/user/SocialuniFollowType";
 import SocialUserContentRO from "@socialuni/socialuni-api-base/src/model/social/SocialUserContentRO";
 import {onLoad, onPullDownRefresh, onReachBottom, onShow} from "@dcloudio/uni-app";

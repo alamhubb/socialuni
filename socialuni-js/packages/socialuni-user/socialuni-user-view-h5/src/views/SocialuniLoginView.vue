@@ -87,7 +87,7 @@
 </template>
 
 <script lang="ts">
-import {Emit, Options, Vue} from 'vue-facing-decorator'
+import {Emit, Component, Vue} from 'vue-facing-decorator'
 import SocialuniLoginViewService from "@socialuni/socialuni-user-sdk/src/logic/SocialuniLoginViewService";
 import {getCurrentInstance} from "vue";
 

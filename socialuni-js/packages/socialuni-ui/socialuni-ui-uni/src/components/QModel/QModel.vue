@@ -7,7 +7,7 @@
   </view>
 </template>
 <script lang="ts">
-import {Emit, Options, Vue} from 'vue-facing-decorator'
+import {Emit, Component, Vue} from 'vue-facing-decorator'
 
 /*
 显示出来已经选了的城市，给她画上钩

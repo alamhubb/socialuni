@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Options, Prop, Emit} from 'vue-facing-decorator'
+import {Vue, Component, Prop, Emit} from 'vue-facing-decorator'
 
 @Component({
 })
