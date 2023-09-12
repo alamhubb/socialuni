@@ -1,0 +1,121 @@
+{
+    "name": "你是人间四月天",
+    "id": 1344897943,
+    "pst": 0,
+    "t": 0,
+    "ar": [
+        {
+            "id": 29392693,
+            "name": "邵帅",
+            "tns": [],
+            "alias": []
+        }
+    ],
+    "alia": [],
+    "pop": 100,
+    "st": 0,
+    "rt": null,
+    "fee": 8,
+    "v": 38,
+    "crbt": null,
+    "cf": "",
+    "al": {
+        "id": 75465355,
+        "name": "你是人间四月天",
+        "picUrl": "http://p3.music.126.net/kQJQD58WkmQneTneOYe22A==/109951164252455813.jpg",
+        "tns": [],
+        "pic_str": "109951164252455813",
+        "pic": 109951164252455800
+    },
+    "dt": 222401,
+    "h": {
+        "br": 320000,
+        "fid": 0,
+        "size": 8898395,
+        "vd": -73430
+    },
+    "m": {
+        "br": 192000,
+        "fid": 0,
+        "size": 5339054,
+        "vd": -73430
+    },
+    "l": {
+        "br": 128000,
+        "fid": 0,
+        "size": 3559384,
+        "vd": -73430
+    },
+    "a": null,
+    "cd": "01",
+    "no": 1,
+    "rtUrl": null,
+    "ftype": 0,
+    "rtUrls": [],
+    "djId": 0,
+    "copyright": 2,
+    "s_id": 0,
+    "mark": 64,
+    "originCoverType": 1,
+    "originSongSimpleData": null,
+    "single": 0,
+    "noCopyrightRcmd": null,
+    "mst": 9,
+    "cp": 0,
+    "rtype": 0,
+    "rurl": null,
+    "mv": 0,
+    "publishTime": 1550073600000,
+    "reason": "根据你可能喜欢的单曲 侧脸",
+    "privilege": {
+        "id": 1344897943,
+        "fee": 8,
+        "payed": 0,
+        "st": 0,
+        "pl": 128000,
+        "dl": 0,
+        "sp": 7,
+        "cp": 1,
+        "subp": 1,
+        "cs": false,
+        "maxbr": 999000,
+        "fl": 128000,
+        "toast": false,
+        "flag": 2,
+        "preSell": false,
+        "playMaxbr": 999000,
+        "downloadMaxbr": 999000,
+        "rscl": null,
+        "freeTrialPrivilege": {
+            "resConsumable": false,
+            "userConsumable": false
+        },
+        "chargeInfoList": [
+            {
+                "rate": 128000,
+                "chargeUrl": null,
+                "chargeMessage": null,
+                "chargeType": 0
+            },
+            {
+                "rate": 192000,
+                "chargeUrl": null,
+                "chargeMessage": null,
+                "chargeType": 1
+            },
+            {
+                "rate": 320000,
+                "chargeUrl": null,
+                "chargeMessage": null,
+                "chargeType": 1
+            },
+            {
+                "rate": 999000,
+                "chargeUrl": null,
+                "chargeMessage": null,
+                "chargeType": 1
+            }
+        ]
+    },
+    "alg": "itembased"
+}
