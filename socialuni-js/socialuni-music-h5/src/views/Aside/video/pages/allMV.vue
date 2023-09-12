@@ -58,7 +58,7 @@ let tags = [
 ]
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .tags{
   display: flex;
   justify-content: flex-start;

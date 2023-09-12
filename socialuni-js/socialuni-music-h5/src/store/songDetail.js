@@ -1,4 +1,4 @@
-const song = require('../assets/song/song.json')
+import song from '../assets/song/song.json'
 import {getSongDetail} from "@/network/song.js";
 import {getSongArray} from '@/network/recommend.js'
 import {getRecommendSongs} from "@/network/recommend.js";
@@ -122,7 +122,7 @@ const songDetail = {
 		}
 	},
 	getters:{
-	
+
 	}
 }
 

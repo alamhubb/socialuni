@@ -6,7 +6,7 @@ import eventBus from '@/utlis/eventbus.js'
 
 
 const router = createRouter({
-  history: createWebHashHistory(process.env.BASE_URL),
+  history: createWebHashHistory(),
   routes,
   scrollBehavior: () => ({ left: 0, top: 0 })
 })

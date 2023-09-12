@@ -5,7 +5,7 @@
       <el-descriptions-item>{{item.txt}}</el-descriptions-item>
     </el-descriptions>
   </template>
-  
+
   <el-empty v-else description="暂无歌手简绍"></el-empty>
 </template>
 
@@ -23,6 +23,6 @@ onMounted(async () => {
 })
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 
 </style>

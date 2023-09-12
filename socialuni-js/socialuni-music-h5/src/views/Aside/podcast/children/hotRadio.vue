@@ -17,8 +17,8 @@
         </div>
     </skeleton1>
   </section>
-  
-  
+
+
 </template>
 
 <script setup>
@@ -40,7 +40,7 @@ const goDetail = id => {
 }
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .hotRadio{
   width: 100%;
   display: flex;

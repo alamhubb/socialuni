@@ -9,7 +9,7 @@
           top="根据你的音乐口味生成每日更新"
           label="每日歌曲推荐">
       </coverPicture>
-      
+
       <template v-if="songList.length">
         <coverPicture v-for="item in songList" :key="item.id"
                       @click="songListDetail(item.id)"
@@ -66,7 +66,7 @@ const goSongMenu = () => {
 }
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .section{
   width: 100%;
   height: 600px;

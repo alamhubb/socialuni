@@ -13,7 +13,7 @@
     <el-menu-item index="/songDetail/comment">评论 ({{count}})</el-menu-item>
     <el-menu-item index="/songDetail/collect">收藏者</el-menu-item>
   </el-menu>
-  
+
   <router-view/>
 </template>
 
@@ -40,6 +40,6 @@ watch(id,newID => {
 },{immediate:true})
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 
 </style>

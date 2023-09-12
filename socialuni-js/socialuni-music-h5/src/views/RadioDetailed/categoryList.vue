@@ -36,7 +36,7 @@ export default {
   name:'categoryList'
 }
 </script>
-<style scoped lang="less">
+<style scoped lang="scss">
 .category{
   width: 100%;
   display: flex;

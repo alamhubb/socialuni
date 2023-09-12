@@ -42,7 +42,7 @@ const goDetail = id => {
 }
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .payRadio{
   display: flex;
   justify-content: space-between;

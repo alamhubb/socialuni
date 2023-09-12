@@ -36,7 +36,7 @@ const load = () => {
 }
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .box{
   overflow: hidden;
   display: grid;

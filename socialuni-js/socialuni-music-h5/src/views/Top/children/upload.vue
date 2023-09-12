@@ -14,7 +14,7 @@
     <div style="display: flex;justify-content: center;align-items: center;">
       <img v-if="src" style="width: 148px; height: 148px; margin: 0 10px;" :src="src" alt="">
       <el-upload
-          
+
           action="https://jsonplaceholder.typicode.com/posts/"
           list-type="picture-card"
           :on-progress="upload">
@@ -40,6 +40,6 @@ defineExpose({
 })
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 
 </style>

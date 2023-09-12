@@ -5,7 +5,7 @@
         <img :class="{active1:$store.state.isPlay}" :src="image.picUrl" alt="" class="c">
         <h1>{{image.name}}</h1>
     </div>
-   
+
 </template>
 
 <script setup>
@@ -18,7 +18,7 @@ let image = computed(() => store.state.songDetail.songDetail.al)
 
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
  .a{
    transition: all 1s;
    transform-origin: 20px 20px;

@@ -117,7 +117,7 @@ const detail = () => {
 }
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 footer{
   display: flex;
   justify-content: flex-start;

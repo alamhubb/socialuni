@@ -112,7 +112,7 @@ export default {
   name:'podcastContent'
 }
 </script>
-<style scoped lang="less">
+<style scoped lang="scss">
 .card-header {
   display: flex;
   justify-content: space-between;

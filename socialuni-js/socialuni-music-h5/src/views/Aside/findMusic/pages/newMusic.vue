@@ -22,7 +22,7 @@
 
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .active{
   background: silver;
   color: whitesmoke;

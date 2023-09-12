@@ -6,7 +6,7 @@
 
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 h3:hover{
   color: black;
 }

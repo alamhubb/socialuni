@@ -7,7 +7,7 @@
       <el-menu-item index="/findMusic/singer">歌手</el-menu-item>
       <el-menu-item index="/findMusic/newMusic">最新音乐</el-menu-item>
     </el-menu>
-  
+
     <router-view v-slot="{Component}">
       <keep-alive>
         <component :is="Component"></component>
@@ -22,7 +22,7 @@ export default {
   name:'findMusic'
 }
 </script>
-<style scoped lang="less">
+<style scoped lang="scss">
 .nav{
   position: fixed;
   z-index: 1000;

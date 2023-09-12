@@ -45,7 +45,7 @@ const getAllContent = () => {
 }
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .box{
   width: 100%;
   margin-bottom: -30px;

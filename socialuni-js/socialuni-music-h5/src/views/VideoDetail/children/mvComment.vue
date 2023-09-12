@@ -38,7 +38,7 @@
                    @current-change="change"
                    layout="prev, pager, next"
                    :total="1000">
-      
+
     </el-pagination>
   </div>
 </template>
@@ -58,7 +58,7 @@ const change = value => {
 }
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .pages{
   display:  flex;
   justify-content: center;

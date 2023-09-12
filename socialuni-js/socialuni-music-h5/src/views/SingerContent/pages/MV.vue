@@ -8,7 +8,7 @@
       <span class="time">{{$formatTime(item.duration).slice(-5)}}</span>
     </div>
   </main>
-  
+
   <el-empty v-else description="暂无MV"></el-empty>
 </template>
 
@@ -32,7 +32,7 @@ const toDetail = id => {
 }
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .box{
   height: 400px;
   display: flex;

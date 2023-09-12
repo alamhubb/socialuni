@@ -37,7 +37,7 @@
     </nav>
       </skeleton1>
 
-    
+
 </template>
 
 <script setup>
@@ -69,7 +69,7 @@ const change = value => {
 
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .iconfont{
   color: red;
 }

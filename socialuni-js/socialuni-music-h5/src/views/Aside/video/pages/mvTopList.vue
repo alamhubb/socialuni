@@ -60,7 +60,7 @@ const loading = () => {
 }
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .active{
   color: red;
   font-weight: 900;

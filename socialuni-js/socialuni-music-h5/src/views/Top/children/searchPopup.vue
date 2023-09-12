@@ -40,6 +40,6 @@ watch(() => props.keyword,newValue => {
 })
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 
 </style>

@@ -43,7 +43,7 @@ const toDetail = id => {
 }
 </script>
 
-<style lang="less">
+<style lang="scss">
 .coverBottom{
   width: 100%;
   position: relative;

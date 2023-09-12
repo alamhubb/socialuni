@@ -27,6 +27,6 @@ const current = ({item,index}) => {
 }
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 
 </style>

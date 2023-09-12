@@ -29,7 +29,7 @@
       <div style="width: 90%;">
         <mvComment @pageChange="pageChange" :comment="comment"/>
       </div>
-      
+
     </div>
     <div class="right" v-if="similarMv.length">
       <span style="font-weight: 900;">相关推荐</span>
@@ -114,7 +114,7 @@ export default {
   name:'videoDetail'
 }
 </script>
-<style scoped lang="less">
+<style scoped lang="scss">
 .videoDetail{
   display: flex;
   justify-content: space-between;

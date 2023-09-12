@@ -24,8 +24,8 @@
       <div class="rightTag" v-for="item in rightTags" :key="item.id" :class="{active:current === item.name}"  @click="change(item)">{{item.name}}</div>
     </div>
   </header>
-  
-  
+
+
   <skeleton :count="8" :loading="videoContent.length">
     <main class="videoContent">
       <videoCover @goDetail="goVideoDetail" :videoArray="videoContent"/>
@@ -94,7 +94,7 @@ const changePage = value => {
 }
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .bottom-pages{
   width: 100%;
   display: flex;

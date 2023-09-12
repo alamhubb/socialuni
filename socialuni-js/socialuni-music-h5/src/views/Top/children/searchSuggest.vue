@@ -56,7 +56,7 @@ const goSearch = ({id,type}) => {
 }
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .title{
   background: #f1ecec;
 }

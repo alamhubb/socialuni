@@ -42,7 +42,7 @@
             </el-dropdown-menu>
           </template>
         </el-dropdown>
-        
+
         <span v-else class="el-dropdown-link" @click="userLogin">
             <el-avatar style="vertical-align: middle;" :size="40" src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"></el-avatar>
             <span style="margin-left: 5px; font-size: 15px;">请登录</span>
@@ -50,9 +50,9 @@
       </el-col>
     </el-row>
   </header>
-  
+
   <login ref="instance"></login>
-  
+
 <!--  头像上传-->
   <upload ref="uploadElement"/>
 </template>
@@ -116,7 +116,7 @@ const upload1 = () => {
 }
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .topContent{
   overflow: hidden;
   white-space: nowrap;

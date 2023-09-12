@@ -9,7 +9,7 @@
     <el-menu-item index="/SingerContent/singerDetail">歌手详情</el-menu-item>
     <el-menu-item index="/SingerContent/similaritySinger">相似歌手</el-menu-item>
   </el-menu>
-  
+
   <Suspense>
     <template #default>
       <router-view v-slot="{Component,route}">
@@ -39,7 +39,7 @@ onMounted(async () => {
 
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 
 </style>
 <script>

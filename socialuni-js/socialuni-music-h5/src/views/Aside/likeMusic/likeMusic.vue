@@ -49,7 +49,7 @@ onMounted(async () => {
 
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 header{
   display: flex;
   justify-content: flex-start;

@@ -58,7 +58,7 @@ const playAll = throttle(() => {
 },1)
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 header{
   display: flex;
   justify-content: flex-start;
@@ -106,7 +106,7 @@ header{
         color: #656161;
       }
     }
-    
+
   }
 }
 </style>

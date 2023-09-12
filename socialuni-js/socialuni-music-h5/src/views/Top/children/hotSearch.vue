@@ -43,7 +43,7 @@ const close = index => {
 }
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .active{
   color: red;
 }

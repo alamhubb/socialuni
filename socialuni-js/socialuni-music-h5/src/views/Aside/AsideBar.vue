@@ -60,7 +60,7 @@ let params = {
 }
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .iconfont{
   margin-right: 10px;
   font-size: 20px;

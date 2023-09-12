@@ -91,7 +91,7 @@ const scrollPlay = () => {
 
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .activeLyric{
   cursor:pointer;
   background-image:-webkit-linear-gradient(bottom,red,#ff5f60,#f0c41b);

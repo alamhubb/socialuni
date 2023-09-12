@@ -68,7 +68,7 @@ const playMusic = item => {
 }
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .hover:hover{
   color: rgba(49, 48, 48, 0.8);
 }

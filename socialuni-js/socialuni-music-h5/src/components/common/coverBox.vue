@@ -47,7 +47,7 @@ defineProps({
 
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .item{
   width: 49%;
   margin-top: 10px;

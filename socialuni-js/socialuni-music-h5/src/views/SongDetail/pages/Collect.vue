@@ -50,7 +50,7 @@ const change = value => {
 }
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .collect{
   display: flex;
   justify-content: space-between;

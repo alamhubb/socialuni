@@ -78,7 +78,7 @@ const handleCurrentChange = value => {
 }
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .section{
   margin-top: 20px;
   display: grid;

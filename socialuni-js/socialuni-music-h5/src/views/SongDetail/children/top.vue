@@ -30,7 +30,7 @@ onMounted(() => {
 })
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .top{
   width: 400px;
   height: 100px;
@@ -62,6 +62,6 @@ onMounted(() => {
       color: #ec4141;
     }
   }
-  
+
 }
 </style>

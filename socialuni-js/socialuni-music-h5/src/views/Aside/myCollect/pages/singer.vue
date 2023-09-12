@@ -1,6 +1,6 @@
 <template>
   <h4>收藏的歌手({{songList.length}})</h4>
-  
+
       <skeleton1 :count="$store.state.data?.artistCount > 8 ? 8 : $store.state.data?.artistCount" :loading="songList.length" :image="{width:'80px',height:'80px'}" :row="1">
        <div v-for="item in songList" :key="item.id" style="margin-top: 10px;">
           <navContent @click="current(item.id)"
@@ -10,7 +10,7 @@
                 :album="'MV: '+item.mvSize"/>
           </div>
       </skeleton1>
-  
+
 </template>
 
 <script setup>
@@ -35,6 +35,6 @@ const current = id => {
 
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 
 </style>

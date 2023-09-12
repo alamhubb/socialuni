@@ -6,7 +6,7 @@
           <el-menu-item index="/search/video">视频</el-menu-item>
           <el-menu-item index="/search/songMenu">歌单</el-menu-item>
         </el-menu>
-  
+
         <router-view v-slot="{Component}">
           <keep-alive>
             <component :is="Component"></component>
@@ -18,6 +18,6 @@
 
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 
 </style>

@@ -35,7 +35,7 @@ const send = () => {
 }
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .h3{
   display: inline-block;
   margin-right: 10px;

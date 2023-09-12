@@ -27,7 +27,7 @@ const goDetail = id => {
 }
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .video{
   width: 24%;
   height: 200px;

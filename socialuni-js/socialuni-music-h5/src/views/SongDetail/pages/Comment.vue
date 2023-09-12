@@ -33,7 +33,7 @@
           </div>
         </el-descriptions-item>
       </template>
-      
+
       <template #extra>
         <el-button type="info" round @click="changeComment" size="mini" icon="el-icon-refresh-left">
           {{boolean ? '最新评论' : '热门评论'}}
@@ -129,7 +129,7 @@ const reply = item => {
 }
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .pages{
   display:  flex;
   justify-content: center;

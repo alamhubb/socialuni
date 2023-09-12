@@ -48,7 +48,7 @@ onMounted(() => {
 
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .cover{
   width: 220px;
   height: 270px;
@@ -126,7 +126,7 @@ onMounted(() => {
     overflow: hidden;
     border-radius: 10px;
   }
-	
+
   &:hover .top{
     display: block;
     transition: all 1s;

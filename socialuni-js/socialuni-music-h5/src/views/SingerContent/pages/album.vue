@@ -14,8 +14,8 @@
       @current-change="change"
       background layout="prev, pager, next" :total="100">
   </el-pagination>
-  
-  
+
+
 </template>
 
 <script setup>
@@ -49,7 +49,7 @@ const toDetail = id => {
 }
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .div{
   width: 100%;
   height: 100%;

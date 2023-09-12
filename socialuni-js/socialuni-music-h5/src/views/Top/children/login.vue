@@ -148,7 +148,7 @@ defineExpose ({
 	dialogVisible
 })
 </script>
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .el-button--primary{
 	width: 50%;
 }

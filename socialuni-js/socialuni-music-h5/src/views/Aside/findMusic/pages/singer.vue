@@ -99,7 +99,7 @@ const getSong = id => {
 
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 footer{
   width: 100%;
   overflow: hidden;

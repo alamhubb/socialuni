@@ -28,7 +28,7 @@ const goDetail = id => {
 
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
   .item{
     width: 100%;
     height: 60px;

@@ -9,7 +9,7 @@
 
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 section{
   position: fixed;
   top: 0;

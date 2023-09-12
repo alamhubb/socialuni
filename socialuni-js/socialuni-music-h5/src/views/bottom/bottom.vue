@@ -194,7 +194,7 @@ watch(songDetail,() => {
 },{deep:true,immediate:true})
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .svg{
   width: 30px;
   height: 30px;

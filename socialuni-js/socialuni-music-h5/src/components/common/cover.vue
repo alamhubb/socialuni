@@ -23,7 +23,7 @@ defineProps({
 })
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .cover{
   width: 220px;
   height: 260px;

@@ -46,7 +46,7 @@ const goDetail = id => {
 }
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .mv{
   width: 100%;
   height: 270px;
@@ -86,6 +86,6 @@ const goDetail = id => {
       border-radius: 10px;
     }
   }
-  
+
 }
 </style>

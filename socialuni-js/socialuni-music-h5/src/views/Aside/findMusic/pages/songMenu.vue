@@ -46,7 +46,7 @@
           :image="item.coverImgUrl">
       </coverPicture>
     </template>
-    
+
     <template v-else class="cover">
       <el-skeleton v-for="item in 15" style="width: 220px; margin-top: 10px;">
         <template #template>
@@ -136,7 +136,7 @@ const toDetail = id => {
 }
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .active{
   font-weight: 900;
   color: red!important;

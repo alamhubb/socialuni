@@ -33,7 +33,7 @@ const goDetail = id => {
 }
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .video{
   width: 100%;
   display: flex;

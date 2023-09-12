@@ -26,7 +26,7 @@ const change = value => {
 }
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 nav{
   display: flex;
   justify-content: flex-start;
