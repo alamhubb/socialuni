@@ -8,5 +8,6 @@ public class SocialuniMusicInfoRO {
     private String musicName;
     private String musicAuthor;
     private String musicImg;
+    private Boolean playing;
     private String src;
 }

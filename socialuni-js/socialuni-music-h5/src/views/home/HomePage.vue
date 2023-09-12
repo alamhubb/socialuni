@@ -2,13 +2,41 @@
     <div class="h100p">
 
         <div>
-<!--            上一首，，下一首-->
+            <!--            上一首，，下一首-->
+
+            <div v-for="music in musicList">
+                <div class="row-col-center">
+                    <div class="flex-none">
+                        <img class="size40 bd-radius" src="./assets/1663045004074.jpg">
+                    </div>
+                    <div class="flex-1">
+                        <div class="row-col-center">
+                            <div>
+
+                                {{ music.musicName }}
+                            </div>
+                            <div>
+
+                                {{ music.musicAuthor }}
+                            </div>
+                        </div>
+
+                        <div>
+                            <el-slider v-model="value1"/>
+                        </div>
+                    </div>
+                </div>
+                <div @click="isPlaying=!isPlaying" class="use-click">
+                    <VideoPause v-if="isPlaying" class="size20 use-click"></VideoPause>
+                    <VideoPlay v-else class="size20 use-click"></VideoPlay>
+                </div>
+            </div>
 
             背景乐：歌名 图片，暂停/播放
         </div>
 
-<!--        <el-input v-model="uid">uid</el-input>-->
-        {{ options.uid}}
+        <!--        <el-input v-model="uid">uid</el-input>-->
+        {{ options.uid }}
         <div class="mx-sm pb-60">
             <el-button @click="joinClick">join</el-button>
             <el-button @click="leaveClick">leave</el-button>
@@ -25,6 +53,8 @@ import SocialuniPeiwanAPI from "@socialuni/socialuni-peiwan-api/src/api/Socialun
 import PeiwanRO from "@socialuni/socialuni-admin-api/src/model/peiwan/PeiwanRO";
 import AgoraRTC from "agora-rtc-sdk-ng"
 import test1 from "./assets/test1.mp3"
+import SocialuniMusicAPI from "@/api/SocialuniMusicAPI";
+import type SocialuniMusicInfoRO from "@/model/SocialuniMusicInfoRO";
 
 let rtc = {
     localAudioTrack: null,
@@ -66,14 +96,26 @@ export default class HomePage extends Vue {
         mapDialog: SDialog
     }
 
-    localAudioTrack= null
-    client= null
-    options= options
+    musicList: SocialuniMusicInfoRO [] = []
 
-    init(){
+    isPlaying = false
+
+    localAudioTrack = null
+    client = null
+    value1 = null
+    options = options
+
+    init() {
     }
 
-    created(){
+    async queryMusicListAPI() {
+        const res = await SocialuniMusicAPI.queryMusicListAPI()
+        this.musicList = res.data
+    }
+
+
+    created() {
+        this.queryMusicListAPI()
         //实现语音通话逻辑
         //参考以下步骤实现语音通话的逻辑：
         // 调用 createClient 方法创建 AgoraRTCClient 对象。
@@ -85,12 +127,12 @@ export default class HomePage extends Vue {
         // 调用 play 方法播放远端音频轨道。
     }
 
-    async joinClick(){
+    async joinClick() {
         // Join an RTC channel.
         await client.join(options.appId, options.channel, options.token, options.uid);
     }
 
-    async publish(){
+    async publish() {
         const config = {
             source: streamIp
         }
@@ -100,7 +142,7 @@ export default class HomePage extends Vue {
         await client.publish(track);
     }
 
-    async leaveClick(){
+    async leaveClick() {
         // Destroy the local audio track.
         rtc.localAudioTrack.close();
 
