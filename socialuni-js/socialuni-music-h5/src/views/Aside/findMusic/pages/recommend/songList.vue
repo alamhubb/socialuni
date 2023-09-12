@@ -4,7 +4,7 @@
       <coverPicture
           v-if="songList.length"
           @click="everySong"
-          :image="require('../../../../../assets/image/cover.png')"
+          :image="cover"
           :time="true"
           top="根据你的音乐口味生成每日更新"
           label="每日歌曲推荐">
@@ -36,6 +36,7 @@ import {getSongList} from "@/network/recommend.js";
 import {ref,onMounted} from "vue"
 import {useRouter}  from 'vue-router'
 import {useStore} from "vuex";
+import cover from '@/assets/image/cover.png'
 
 const store = useStore()
 const router = useRouter()
