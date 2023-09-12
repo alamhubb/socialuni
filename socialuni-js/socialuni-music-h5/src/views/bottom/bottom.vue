@@ -13,11 +13,11 @@
     <el-col :span="9">
       <main class="music">
         <div class="music-button">
-          <i @click="isChangeLike" v-if="!isLike" title="收藏" class="iconfont icon-aixin"></i>
-          <i @click="isChangeLike" v-else style="color: red;font-size: 22px;" title="已收藏" class="iconfont icon-xihuan"></i>
-          <i title="上一曲" @click="next(-1)" class="iconfont icon-shangyiqu"></i>
-          <i @click="playMusic" style="font-size: 40px; color: #cc7013;" class="iconfont" :class="[is ? 'icon-bofang1' :'icon-icon-bofang']"></i>
-          <i title="下一曲" @click="next(1)" class="iconfont icon-xiayiqu"></i>
+          <i @click="isChangeLike" v-if="!isLike" title="收藏" class="mdi mdi-star-outline"></i>
+          <i @click="isChangeLike" v-else style="color: red;font-size: 22px;" title="已收藏" class="mdi mdi-star"></i>
+          <i title="上一曲" @click="next(-1)" class="mdi  mdi-skip-previous"></i>
+          <i @click="playMusic" style="font-size: 40px; color: #cc7013;" class="mdi" :class="[is ? 'mdi-play' :'mdi-pause']"></i>
+          <i title="下一曲" @click="next(1)" class="mdi mdi-skip-next"></i>
           <svg class="svg" @click="openLyric" aria-hidden="true"><use xlink:href="#icon-minganci"></use></svg>
         </div>
       </main>
