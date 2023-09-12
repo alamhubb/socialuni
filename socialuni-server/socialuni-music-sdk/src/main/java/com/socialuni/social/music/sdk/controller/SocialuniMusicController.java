@@ -1,4 +1,3 @@
-package com.socialuni.social.peiwan.sdk.controller;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.peiwan.sdk.logic.SocialuniPeiwanService;
@@ -9,15 +8,15 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.List;
 
-@RequestMapping("socialuni/peiwan")
+@RequestMapping("socialuni/music")
 @RestController
 @Slf4j
-public class SocialuniPeiwanController {
+public class SocialuniMusicController {
 
     @Resource
     SocialuniPeiwanService socialuniPeiwanService;
 
-    @GetMapping("queryPeiwanInfoList")
+    @GetMapping("queryMusicList")
     public ResultRO<List<SocialuniPeiwanInfoRO>> queryPeiwanInfoList() {
         return socialuniPeiwanService.queryPeiwanInfoList();
     }

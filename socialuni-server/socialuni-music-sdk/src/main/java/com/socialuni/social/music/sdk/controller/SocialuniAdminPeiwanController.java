@@ -1,4 +1,4 @@
-package com.socialuni.social.peiwan.sdk.controller;
+package com.socialuni.social.music.sdk.controller;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;

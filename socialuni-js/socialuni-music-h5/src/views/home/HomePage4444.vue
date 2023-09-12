@@ -1,12 +1,5 @@
 <template>
     <div class="h100p">
-
-        <div>
-<!--            上一首，，下一首-->
-
-            背景乐：歌名 图片，暂停/播放
-        </div>
-
 <!--        <el-input v-model="uid">uid</el-input>-->
         {{ options.uid}}
         <div class="mx-sm pb-60">

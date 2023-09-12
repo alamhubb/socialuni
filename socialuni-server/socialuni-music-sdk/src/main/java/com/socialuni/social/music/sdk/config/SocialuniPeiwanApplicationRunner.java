@@ -30,7 +30,7 @@ public class SocialuniPeiwanApplicationRunner implements ApplicationRunner {
     @Async
     public void run(ApplicationArguments args) {
 
-        List<String> skillTags = Arrays.asList("吃饭", "打电竞", "看电影", "小酌");
+        /*List<String> skillTags = Arrays.asList("吃饭", "打电竞", "看电影", "小酌");
 
         List<SocialuniPeiwanSkillDO> socialuniPeiwanSkillDOS = new ArrayList<>();
 
@@ -41,7 +41,7 @@ public class SocialuniPeiwanApplicationRunner implements ApplicationRunner {
                 socialuniPeiwanSkillDO.setSkillName(skillTag);
                 socialuniPeiwanSkillDOS.add(socialuniPeiwanSkillDO);
             }
-        }
+        }*/
 
     }
 }
