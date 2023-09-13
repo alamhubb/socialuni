@@ -20,7 +20,7 @@ public class SocialuniPeiwanInfoImgDOFactory {
         SocialuniPeiwanInfoImgDO socialuniPeiwanInfoImgDO = new SocialuniPeiwanInfoImgDO(userId,unionId, SocialuniContentType.peiwanImg);
 
         socialuniPeiwanInfoImgDO.setSrc(imgAddQO.getSrc());
-        socialuniPeiwanInfoImgDO.setAspectRatio(imgAddQO.getAspectRatio());
+        socialuniPeiwanInfoImgDO.setAspectRatio(1.00);
         socialuniPeiwanInfoImgDO.setQuality(imgAddQO.getQuality());
         socialuniPeiwanInfoImgDO.setSize(imgAddQO.getSize());
 

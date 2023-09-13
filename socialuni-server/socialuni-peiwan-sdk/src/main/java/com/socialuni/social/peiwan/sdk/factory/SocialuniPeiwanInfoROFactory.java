@@ -22,7 +22,7 @@ public class SocialuniPeiwanInfoROFactory {
         String userId = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(peiwanInfoDO.getUserId());
 
         peiwanInfoRO.setUserId(userId);
-        peiwanInfoRO.setUsername(peiwanInfoDO.getUsername());
+        peiwanInfoRO.setNickname(peiwanInfoDO.getUsername());
         peiwanInfoRO.setLng(peiwanInfoDO.getLng());
         peiwanInfoRO.setLat(peiwanInfoDO.getLat());
         peiwanInfoRO.setCity(peiwanInfoDO.getCity());

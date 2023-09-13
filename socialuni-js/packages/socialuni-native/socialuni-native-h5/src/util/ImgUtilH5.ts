@@ -56,6 +56,8 @@ export default class ImgUtilH5 {
     }
 
     public static async setImgQualityAndAspectRatio(imgFile: DomFile) {
+        //设置上传信息
+        this.setUploadInfo(imgFile)
         //设置压缩比
         this.setImgQuality(imgFile)
         //设置横宽比
@@ -64,7 +66,7 @@ export default class ImgUtilH5 {
 
 
     //设置图片压缩比
-    private static setImgQuality(imgFile: DomFile){
+    private static setImgQuality(imgFile: DomFile) {
         // 不能大于10m大于10m就压缩不到100k
         // 获取压缩比
         const imgSize: number = imgFile.size
@@ -83,10 +85,13 @@ export default class ImgUtilH5 {
     }
 
     //设置图片宽高比
-    private static async setImgAspectRatio(imgFile: DomFile){
+    private static async setImgAspectRatio(imgFile: DomFile) {
         const image = await this.getImageInfo(imgFile.path)
         // 获取文件名
         imgFile.aspectRatio = image.width / image.height
+    }
+
+    private static setUploadInfo(imgFile: DomFile) {
         let fileName = null
         if (socialuniSystemModule.isH5) {
             fileName = imgFile.name

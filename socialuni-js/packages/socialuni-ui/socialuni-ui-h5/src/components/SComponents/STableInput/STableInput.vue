@@ -1,6 +1,7 @@
 <template>
     <s-table-column
         :label="label||prop"
+        :width="width"
     >
         <template #default="{row}">
             <el-tooltip
@@ -46,6 +47,7 @@ export default class STableInput extends Vue {
     @Prop() readonly tipProp: string
     @Prop() readonly propFun: Function
     @Prop() readonly label: string
+    @Prop() readonly width: string
     @Prop() readonly labelClass: string
     @Prop({default: '请输入'}) readonly placeholder: string
     @Prop({default: true, type: Boolean}) readonly clearable: boolean

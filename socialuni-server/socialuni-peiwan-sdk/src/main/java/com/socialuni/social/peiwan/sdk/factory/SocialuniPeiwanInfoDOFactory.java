@@ -4,6 +4,7 @@ import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.peiwan.sdk.model.DO.SocialuniPeiwanInfoDO;
 import com.socialuni.social.peiwan.sdk.model.QO.SocialuniPeiwanInfoRO;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
+import org.apache.commons.lang3.StringUtils;
 
 public class SocialuniPeiwanInfoDOFactory {
     public static SocialuniPeiwanInfoDO createPeiwanDO(SocialuniUserDo socialuniUserDo, SocialuniPeiwanInfoRO peiwanInfoAddQO) {
@@ -19,13 +20,15 @@ public class SocialuniPeiwanInfoDOFactory {
 
     public static SocialuniPeiwanInfoDO createPeiwanDO(SocialuniPeiwanInfoDO socialuniPeiwanInfoDO, SocialuniPeiwanInfoRO peiwanInfoRO) {
 
-        socialuniPeiwanInfoDO.setUsername(peiwanInfoRO.getUsername());
+        socialuniPeiwanInfoDO.setUsername(peiwanInfoRO.getNickname());
         socialuniPeiwanInfoDO.setLng(peiwanInfoRO.getLng());
         socialuniPeiwanInfoDO.setLat(peiwanInfoRO.getLat());
         socialuniPeiwanInfoDO.setCity(peiwanInfoRO.getCity());
         socialuniPeiwanInfoDO.setDistrict(peiwanInfoRO.getDistrict());
-        if (!peiwanInfoRO.getAvatar().contains(SocialuniSystemConst.getStaticResourceUrl())) {
-            socialuniPeiwanInfoDO.setAvatar(SocialuniSystemConst.getStaticResourceUrl() + peiwanInfoRO.getAvatar());
+        if (StringUtils.isNotBlank(peiwanInfoRO.getAvatar())) {
+            if (!peiwanInfoRO.getAvatar().contains(SocialuniSystemConst.getStaticResourceUrl())) {
+                socialuniPeiwanInfoDO.setAvatar(SocialuniSystemConst.getStaticResourceUrl() + peiwanInfoRO.getAvatar());
+            }
         }
 
         return socialuniPeiwanInfoDO;
