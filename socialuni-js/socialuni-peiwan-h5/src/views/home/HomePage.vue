@@ -1,24 +1,24 @@
 <template>
   <div class="h100p">
     <s-scrollbar>
-      <div class="mx-sm pb-60">
-        <div v-for="user in peiwanList" class="shadow pd-sm bd-radius-10 mt-sm bg-white">
+      <div class="mx-sm pb-60 waterfall-container" >
+        <div v-for="user in peiwanList" class="shadow bg-white waterfall-item" >
 
-          <div class="line-height-1 elevation-4 bd-radius mb-8 pb-4 bg-white">
-            <img class="radius max-h600rpx"
+          <div>
+            <img class="bd-radius" style="max-height: 400px"
                  :src="user.imgs[0].src">
-            <div class="px-10px">
+<!--            <div class="px-10">
               <div class="row-between" @click="showUserChange(user)">
                 <div class="row-col-center" :class="{'text-red':user.vipFlag}">
                   {{ user.nickname }}
                 </div>
-                <!--                    <div class="row-col-center">
+                &lt;!&ndash;                    <div class="row-col-center">
                                       <q-icon size="32" icon="mdi-circle-medium" :class="[getOnlineColor(user)]"></q-icon>
-                                      <span v-if="user.onlineFlag" class="text-gray ml-3px text-sm">在线</span>
-                                      <span v-else class="text-gray ml-3px text-sm">{{user.lastOnlineTime|formatTime}}</span>
-                                    </div>-->
+                                      <span v-if="user.onlineFlag" class="text-gray ml-3 text-sm">在线</span>
+                                      <span v-else class="text-gray ml-3 text-sm">{{user.lastOnlineTime|formatTime}}</span>
+                                    </div>&ndash;&gt;
               </div>
-              <!--                  <div class="row-between">
+              &lt;!&ndash;                  <div class="row-between">
                                   <div>
                                     &lt;!&ndash;                展示列表和你喜欢的&ndash;&gt;
                                     &lt;!&ndash;                颜值只用来规范你能不能喜欢人家，你可以看到所有人，简单点来，先只算颜值，啥也不按 就按时间排序，在线时间&ndash;&gt;
@@ -26,7 +26,7 @@
                                     <div class="cu-tag sm radius text-sm"
                                           :class="[getGenderBgColor(user)]">
                                       {{user.age}}
-                                      <q-icon class="row-col-start ml-2px" size="24"
+                                      <q-icon class="row-col-start ml-2" size="24"
                                               :icon="getGenderIcon(user)"/>
                                     </div>
                                     <div v-if="user.vipFlag" class="cu-tag radius bg-red sm text-sm text-bold" @click="openVip">VIP
@@ -38,11 +38,10 @@
                                   <div>
                                     <q-icon addClass="mdi-rotate-90" size="24" icon="more-dot-fill" @click="openReportDialog"></q-icon>
                                   </div>
-                                </div>-->
-            </div>
+                                </div>&ndash;&gt;
+            </div>-->
 
           </div>
-          {{ peiwan }}
           <!--div class="flex-row">
               <img class="flex-none size50 bd-radius" :src="peiwan.avatar">
               <div class="flex-1 mx-sm flex-col">
@@ -124,3 +123,14 @@ export default class HomePage extends Vue {
 
 }
 </script>
+<style>
+.waterfall-container {
+  /*分几列*/
+  column-count: 3;
+}
+
+.waterfall-item {
+  /*不留白，不知道什么意思可以取消这个样式试试*/
+  break-inside: avoid;
+}
+</style>
