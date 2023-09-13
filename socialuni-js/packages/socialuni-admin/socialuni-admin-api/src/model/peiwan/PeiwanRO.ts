@@ -2,7 +2,7 @@ import ImgFileVO from "../community/ImgFileVO";
 
 export default class PeiwanRO {
     userId: string = null
-    username: string = null
+    nickname: string = null
     avatar: string = null
     imgs: ImgFileVO[] = null
 
