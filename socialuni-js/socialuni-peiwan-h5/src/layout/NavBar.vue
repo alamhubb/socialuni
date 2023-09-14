@@ -4,11 +4,13 @@
   >
     <div class="flex-none row-col-center mr-40 bg-click" @click="toHome">
 <!--      <img src="@/assets/img/logo.jpg" class="h40" alt="logo">-->
-      <div class="font-19 ml-3 mt-1 font-bold color">北京同城陪玩</div>
+      <div class="font-19 ml-3 mt-1 font-bold color">清绿北京同城陪玩 - 纯绿色陪伴</div>
     </div>
 
     <div class="flex-1 row-end">
       <div class="flex-none row-col-center mr">
+        客服微信：491369310
+
 <!--        <a href="https://socialuni.cn" target="_blank" class="mr-sm md:mr bg-click">
           <div class="row-all-center color-white">官网文档</div>
         </a>
@@ -16,7 +18,7 @@
         <a href="https://socialuni.cn/demo" target="_blank" class="mr-sm md:mr bg-click">
           <div class="row-all-center color-white">demo演示</div>
         </a>-->
-        <el-divider direction="vertical" class="mr" />
+<!--        <el-divider direction="vertical" class="mr" />-->
 <!--        <div class="row-col-center">
           <a href="https://gitee.com/socialuni/socialuni" target="_blank" class="mr-sm md:mr">
             <div class="row-all-center"><img src="@/assets/imgs/giteelogo.png" class="use-click size31"/></div>
