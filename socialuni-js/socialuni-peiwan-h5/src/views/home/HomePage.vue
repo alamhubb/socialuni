@@ -2,7 +2,7 @@
   <div class="h100p">
     <s-scrollbar>
       <div class="mx-sm pb-60" :style="{'column-count': columnNum}">
-        <div v-for="user in peiwanList" class="shadow bg-white overflow-hidden" @click="peiwanClick">
+        <div v-for="user in peiwanList" class="shadow bg-white overflow-hidden" @click="openKefu">
           <img class="bd-radius w100p" style="max-height: 400px"
                :src="user.imgs[0].src">
           <!--   <div>
@@ -103,6 +103,7 @@ import PeiwanRO from "@socialuni/socialuni-admin-api/src/model/peiwan/PeiwanRO";
 import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
 import AlertUtil from "@socialuni/socialuni-native-h5/src/util/AlertUtil";
 import apiData from "./res.json"
+import {ElMessageBox} from "element-plus";
 
 @Component({
   components: {SDialog, Plus, SScrollbar}
@@ -129,11 +130,24 @@ export default class HomePage extends Vue {
     }
   }
 
-  peiwanClick() {
+  openKefu() {
     const date = new Date().toLocaleDateString()
-    AlertUtil.info("下单请联系客服微信：491369310", `${date}日更新`)
-  }
+    ElMessageBox.alert(
+        `
+          <div>
 
+<div class="font-bold font-16 color-main">联系客服下单，客服微信：491369310</div>
+          <div class="row-all-center">
+          <img class="size300" src="https://cdxapp-1257733245.cos.ap-beijing.myqcloud.com/peiwan/wanwei/bjwanwei.jpg"/>
+</div>
+          </div>
+          `,
+        `${date}日更新`,
+        {
+          dangerouslyUseHTMLString: true,
+        }
+    )
+  }
   get windowWidth() {
     return socialuniSystemModule.windowWidth
   }
