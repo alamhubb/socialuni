@@ -109,8 +109,6 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-facing-decorator'
-import ToastUtil from '@/utils/ToastUtil'
-import NumberUtil from '@/utils/NumberUtil'
 import SocialPhoneNumQO from "@socialuni/socialuni-admin-api/src/model/base/SocialPhoneNumQO";
 import PhoneAPI from "@socialuni/socialuni-user-api/src/api/PhoneAPI";
 import {socialuniConfigModule} from "@socialuni/socialuni-app-sdk/src/store/SocialuniConfigModule";
