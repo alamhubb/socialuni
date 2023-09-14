@@ -298,4 +298,16 @@ public class SocialuniCommonRepository {
     }
 
 
+    public <T> List<T> findByAllByOrderByUpdateTimeDesc(Class<T> tClass) {
+
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
+        Root<T> userInfo = criteriaQuery.from(tClass);
+
+
+        criteriaQuery.orderBy(criteriaBuilder.desc(userInfo.get("updateTime")));
+
+        return entityManager.createQuery(criteriaQuery).getResultList();
+    }
+
 }

@@ -20,13 +20,11 @@ import com.socialuni.social.peiwan.sdk.model.QO.SocialuniPeiwanInfoRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -59,7 +57,7 @@ public class SocialuniAdminPeiwanService {
 
     public ResultRO<List<SocialuniPeiwanInfoRO>> queryPeiwanInfoList() {
 
-        List<SocialuniPeiwanInfoDO> socialuniPeiwanInfoDOS = SocialuniRepositoryFacade.findByAllByOrderByIdDesc(SocialuniPeiwanInfoDO.class);
+        List<SocialuniPeiwanInfoDO> socialuniPeiwanInfoDOS = SocialuniRepositoryFacade.findByAllByOrderByUpdateTimeDesc(SocialuniPeiwanInfoDO.class);
 
         List<SocialuniPeiwanInfoRO> socialuniPeiwanInfoROS = SocialuniPeiwanInfoROFactory.getPeiwanRoList(socialuniPeiwanInfoDOS);
         return ResultRO.success(socialuniPeiwanInfoROS);
@@ -77,15 +75,17 @@ public class SocialuniAdminPeiwanService {
             SocialuniPeiwanInfoDO socialuniPeiwanInfoDO = SocialuniUserRepositoryFacede.findByUserId(userId, SocialuniPeiwanInfoDO.class);
 
             socialuniPeiwanInfoDO = SocialuniPeiwanInfoDOFactory.createPeiwanDO(socialuniPeiwanInfoDO, peiwanInfoRO);
-
+            socialuniPeiwanInfoDO.setUpdateTime(new Date());
 
             List<SocialuniPeiwanInfoImgRO> imgs = peiwanInfoRO.getImgs();
             for (SocialuniPeiwanInfoImgRO img : imgs) {
                 Integer imgId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(img.getId());
 
+                Integer index = imgs.indexOf(img);
+
                 SocialuniPeiwanInfoImgDO imgDO = SocialuniRepositoryFacade.findByUnionId(imgId, SocialuniPeiwanInfoImgDO.class);
-                if (!imgDO.getOrder().equals(img.getOrder())) {
-                    imgDO.setOrder(img.getOrder());
+                if (!imgDO.getLevel().equals(index)) {
+                    imgDO.setLevel(index);
                     socialuniPeiwanInfoImgDOS.add(imgDO);
                 }
 
@@ -102,8 +102,10 @@ public class SocialuniAdminPeiwanService {
     }
 
     @Async
-    public ResultRO<Void> deletePeiwanImg(Integer imgId) {
-        SocialuniPeiwanInfoImgDO socialuniPeiwanInfoImgDO = SocialuniRepositoryFacade.findByUnionId(imgId, SocialuniPeiwanInfoImgDO.class);
+    public ResultRO<Void> deletePeiwanImg(String imgId) {
+        Integer unionId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(imgId);
+
+        SocialuniPeiwanInfoImgDO socialuniPeiwanInfoImgDO = SocialuniRepositoryFacade.findByUnionId(unionId, SocialuniPeiwanInfoImgDO.class);
 
         socialuniPeiwanInfoImgDO.setStatus(SocialuniCommonStatus.delete);
 

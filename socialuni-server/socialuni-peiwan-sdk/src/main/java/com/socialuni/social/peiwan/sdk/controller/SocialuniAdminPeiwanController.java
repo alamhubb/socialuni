@@ -48,7 +48,7 @@ public class SocialuniAdminPeiwanController {
 
 
     @GetMapping("deletePeiwanImg/{imgId}")
-    public ResultRO<Void> deletePeiwanImg(@PathVariable("imgId") Integer imgId) {
+    public ResultRO<Void> deletePeiwanImg(@PathVariable("imgId") String imgId) {
 //        Integer imgId = Integer.valueOf(imgIdStr);
         socialuniAdminPeiwanService.deletePeiwanImg(imgId);
         return ResultRO.success();

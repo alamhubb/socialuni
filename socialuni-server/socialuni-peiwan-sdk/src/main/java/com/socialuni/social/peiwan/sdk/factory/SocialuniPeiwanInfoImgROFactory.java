@@ -15,7 +15,7 @@ public class SocialuniPeiwanInfoImgROFactory {
         String uid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(peiwanInfoDO.getUnionId());
 
         imgRO.setId(uid);
-        imgRO.setOrder(peiwanInfoDO.getOrder());
+        imgRO.setOrder(peiwanInfoDO.getLevel());
         imgRO.setSrc(SocialuniSystemConst.getStaticResourceUrl() + peiwanInfoDO.getSrc());
         imgRO.setAspectRatio(peiwanInfoDO.getAspectRatio());
 

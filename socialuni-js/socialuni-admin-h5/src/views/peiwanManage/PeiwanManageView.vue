@@ -82,13 +82,14 @@
             <div class="flex-row row-wrap">
               <el-upload drag class="size100 overflow-hidden bd-radius" :auto-upload="false"
                          multiple
-                         :on-change="tablePeiwanImgChange">
+                         :on-change="(file)=>tablePeiwanImgChange(row,file)">
                 <el-icon class="size100 font-50 color-sub">
                   <Plus/>
                 </el-icon>
               </el-upload>
 
-              <div v-for="(item,index) in row.imgs" class="position-relative">
+              <div v-for="(item,index) in row.imgs" class="position-relative"
+                   @dblclick="dbClickImgSetLevelTop(index,row.imgs)">
                 <el-image class="size100 overflow-hidden" :src="item.src"
                           fit="fill"/>
                 <div
@@ -135,6 +136,7 @@ import AlertUtil from "@socialuni/socialuni-native-h5/src/util/AlertUtil";
 import WindowEventListener from "@socialuni/socialuni-util/src/util/WindowEventListener";
 import AdminPeiwanAppInitData from "@socialuni/socialuni-admin-api/src/model/peiwan/AdminPeiwanAppInitData";
 import SSelect from "@socialuni/socialuni-ui-h5/src/components/SComponents/SSelect/SSelect.vue";
+import ImgFileVO from "@socialuni/socialuni-admin-api/src/model/community/ImgFileVO";
 
 @Component({
   components: {SSelect, SDialog, Plus, STableColumn, STableInput, STable, STableSelect, SLabelItem}
@@ -287,9 +289,7 @@ export default class PeiwanManageView extends Vue {
 
   }
 
-  async tablePeiwanImgChange(...args) {
-    console.log(args)
-    /*
+  async tablePeiwanImgChange(row: PeiwanRO, file: any) {
     const imgFile: DomFile = FileUtilH5.fileSetPath(file.raw)
 
     console.log(imgFile)
@@ -298,11 +298,11 @@ export default class PeiwanManageView extends Vue {
     const img = {src: imgFile.path}
 
     //设置上传信息
-    ImgUtilH5.setUploadInfo(imgFile)
+    // ImgUtilH5.setUploadInfo(imgFile)
 
     row.imgs.push(img)
 
-    // await ImgUtilH5.setImgQualityAndAspectRatio(imgFile)
+    await ImgUtilH5.setImgQualityAndAspectRatio(imgFile)
 
     imgFile.src = this.cosAuthRO.uploadImgPath + `imgs/useShowImg/` + imgFile.src
 
@@ -312,14 +312,14 @@ export default class PeiwanManageView extends Vue {
 
     console.log(res)
     console.log(res[1].data)
-    Object.assign(img, res[1].data[0])*/
+    Object.assign(img, res[1].data[0])
   }
 
 
   deletePeiwanImgAPI(row: PeiwanRO, index) {
     console.log(row.imgs)
     AlertUtil.confirm('是否确认删除图片').then(res => {
-      const imgId = row.imgs[index].id as number
+      const imgId = row.imgs[index].id
       row.imgs.splice(index, 1)
       SocialuniPeiwanAdminAPI.deletePeiwanImgAPI(imgId)
     })
@@ -331,9 +331,17 @@ export default class PeiwanManageView extends Vue {
 
     const changeData = this.$refs.dataTable.changeData
 
+    console.log(changeData)
+
     SocialuniPeiwanAdminAPI.updatePeiwanListAPI(changeData).then(() => {
       this.queryPeiwanListAPI()
     })
+  }
+
+  dbClickImgSetLevelTop(index: number, imgs: ImgFileVO[]) {
+    const img = imgs[index]
+    imgs.splice(index, 1)
+    imgs.unshift(img)
   }
 }
 </script>

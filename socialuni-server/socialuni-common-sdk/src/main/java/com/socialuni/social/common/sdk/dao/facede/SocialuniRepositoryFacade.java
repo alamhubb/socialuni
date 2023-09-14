@@ -32,6 +32,10 @@ public abstract class SocialuniRepositoryFacade {
         return getRepository().findByAllByOrderByIdDesc(tClass);
     }
 
+    public static <T> List<T> findByAllByOrderByUpdateTimeDesc(Class<T> tClass) {
+        return getRepository().findByAllByOrderByUpdateTimeDesc(tClass);
+    }
+
     public static <T extends SocialuniUnionContentBaseDO> T findByUnionId(Integer id, Class<T> tClass) {
         return getRepository().findByUnionId(id, tClass);
     }
