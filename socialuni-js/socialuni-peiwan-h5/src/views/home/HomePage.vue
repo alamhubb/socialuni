@@ -2,7 +2,7 @@
   <div class="h100p">
     <s-scrollbar>
       <div class="mx-sm pb-60" :style="{'column-count': columnNum}">
-        <div v-for="user in peiwanList" class="shadow bg-white overflow-hidden" @click="openKefu">
+        <div v-for="user in peiwanList" class="shadow bg-white overflow-hidden use-click" @click="openKefu">
           <img class="bd-radius w100p" style="max-height: 400px"
                :src="user.imgs[0].src">
           <!--   <div>
