@@ -50,6 +50,8 @@ class SocialuniSystemModule {
     // 登录平台
     screenHeight = 0
     windowHeight = 0
+    screenWidth = 0
+    windowWidth = 0
     //减去状态栏和导航栏的高度
     contentHeight = 0
     statusBarHeight = 0
@@ -60,6 +62,7 @@ class SocialuniSystemModule {
 
     constructor() {
         try {
+            console.log(123123)
             if (uni) {
                 this.isUniApp = true
                 //设置平台
@@ -95,6 +98,8 @@ class SocialuniSystemModule {
                 // 判断是否为ios平台
                 const systemInfo: GetSystemInfoResult = uni.getSystemInfoSync()
                 this.systemInfo = systemInfo
+                console.log(this.systemInfo)
+                console.log('执行了')
                 //获取是否苹果平台
                 const model: string = systemInfo.model
                 //小程序开发工具时会为 devtools
@@ -125,7 +130,10 @@ class SocialuniSystemModule {
                 this.contentHeight = this.screenHeight - this.titleHeight
             }
         } catch (e) {
-
+            window.addEventListener('resize', () => {
+                this.windowWidth = window.innerWidth
+                this.windowHeight = window.innerHeight
+            })
         }
     }
 

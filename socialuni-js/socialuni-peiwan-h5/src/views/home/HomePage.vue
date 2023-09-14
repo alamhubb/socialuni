@@ -1,8 +1,8 @@
 <template>
   <div class="h100p">
     <s-scrollbar>
-      <div class="mx-sm pb-60 waterfall-container" >
-        <div v-for="user in peiwanList" class="shadow bg-white waterfall-item overflow-hidden" >
+      <div class="mx-sm pb-60" :style="{'column-count': columnNum}">
+        <div v-for="user in peiwanList" class="shadow bg-white overflow-hidden">
           <img class="bd-radius w100p" style="max-height: 400px"
                :src="user.imgs[0].src">
           <!--   <div>
@@ -100,6 +100,7 @@ import SDialog from "@socialuni/socialuni-ui-h5/src/components/SComponents/SDial
 import {Plus} from '@element-plus/icons-vue'
 import SocialuniPeiwanAPI from "@socialuni/socialuni-peiwan-api/src/api/SocialuniPeiwanAPI";
 import PeiwanRO from "@socialuni/socialuni-admin-api/src/model/peiwan/PeiwanRO";
+import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
 
 @Component({
   components: {SDialog, Plus, SScrollbar}
@@ -113,8 +114,31 @@ export default class HomePage extends Vue {
   peiwanList: PeiwanRO[] = []
 
   created() {
+
     this.queryPeiwanInfoListAPI()
   }
+
+  get columnNum() {
+    console.log(socialuniSystemModule.windowWidth)
+    if (socialuniSystemModule.windowWidth >= 768) {
+      return 3
+    } else {
+      return 3
+    }
+  }
+
+  get windowWidth(){
+    return socialuniSystemModule.windowWidth
+  }
+
+  mounted() {
+    window.addEventListener('resize', () => {
+      socialuniSystemModule.windowWidth = window.innerWidth
+      socialuniSystemModule.windowHeight = window.innerHeight
+      console.log(socialuniSystemModule.windowWidth)
+    })
+  }
+
 
   async queryPeiwanInfoListAPI() {
     const res = await SocialuniPeiwanAPI.queryPeiwanInfoListAPI()
@@ -123,14 +147,3 @@ export default class HomePage extends Vue {
 
 }
 </script>
-<style>
-.waterfall-container {
-  /*分几列*/
-  column-count: 3;
-}
-
-.waterfall-item {
-  /*不留白，不知道什么意思可以取消这个样式试试*/
-  break-inside: avoid;
-}
-</style>
