@@ -178,7 +178,11 @@ export default class PeiwanManageView extends Vue {
     console.log('进入了')
     this.listenerMessage()
     WindowEventListener.useKeydownListener({ctrl: true, key: 's'}, (event) => {
-      this.saveUpdatePeiwanList()
+      if (this.peiwanInfo.nickname) {
+        this.addPeiwanAPI()
+      } else {
+        this.saveUpdatePeiwanList()
+      }
       console.log(event)
       // 检查是否按下了 ctrl+s
       console.log('触发了')
@@ -215,6 +219,7 @@ export default class PeiwanManageView extends Vue {
 
   async addPeiwanAPI() {
     await SocialuniPeiwanAdminAPI.addPeiwanInfoAPI(this.peiwanInfo)
+    this.peiwanInfo = new PeiwanRO()
     this.queryPeiwanListAPI()
   }
 

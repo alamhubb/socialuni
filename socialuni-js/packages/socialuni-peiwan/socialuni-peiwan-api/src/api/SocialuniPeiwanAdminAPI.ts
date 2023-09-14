@@ -28,7 +28,7 @@ export default class SocialuniPeiwanAdminAPI {
         return socialuniUserRequest.get<string>(`admin/peiwan/updatePeiwanAvatar/${userId}?src=${src}`)
     }
 
-    static deletePeiwanImgAPI(imgId: number) {
+    static deletePeiwanImgAPI(imgId: string) {
         return socialuniUserRequest.get<string>(`admin/peiwan/deletePeiwanImg/${imgId}`)
     }
 

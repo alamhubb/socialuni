@@ -4,7 +4,7 @@
   >
     <div class="flex-none row-col-center mr-40 bg-click" @click="toHome">
 <!--      <img src="@/assets/img/logo.jpg" class="h40" alt="logo">-->
-      <div class="font-19 ml-3 mt-1 font-bold color">分布式系统管理软件</div>
+      <div class="font-19 ml-3 mt-1 font-bold color">北京同城陪玩</div>
     </div>
 
     <div class="flex-1 row-end">
