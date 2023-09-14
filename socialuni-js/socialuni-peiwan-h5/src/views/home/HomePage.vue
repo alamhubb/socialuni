@@ -102,6 +102,7 @@ import SocialuniPeiwanAPI from "@socialuni/socialuni-peiwan-api/src/api/Socialun
 import PeiwanRO from "@socialuni/socialuni-admin-api/src/model/peiwan/PeiwanRO";
 import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
 import AlertUtil from "@socialuni/socialuni-native-h5/src/util/AlertUtil";
+import apiData from "./res.json"
 
 @Component({
   components: {SDialog, Plus, SScrollbar}
@@ -147,7 +148,9 @@ export default class HomePage extends Vue {
 
 
   async queryPeiwanInfoListAPI() {
-    const res = await SocialuniPeiwanAPI.queryPeiwanInfoListAPI()
+    const res = apiData
+    console.log(res)
+    // const res = await SocialuniPeiwanAPI.queryPeiwanInfoListAPI()
     this.peiwanList = res.data
   }
 

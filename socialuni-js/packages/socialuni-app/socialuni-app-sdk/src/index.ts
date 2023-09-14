@@ -18,10 +18,9 @@ class SocialuniAppPlugin implements SocialuniPlugin {
 
     async initApp() {
         try {
-            await socialuniConfigModule.getAppConfigAction()
-            console.log(1111)
-            socialAppModule.getHomeSwipersAction()
-            socialuniConfigModule.getReportTypesAction()
+            // await socialuniConfigModule.getAppConfigAction()
+            // socialAppModule.getHomeSwipersAction()
+            // socialuniConfigModule.getReportTypesAction()
         } catch (e) {
 
         }
