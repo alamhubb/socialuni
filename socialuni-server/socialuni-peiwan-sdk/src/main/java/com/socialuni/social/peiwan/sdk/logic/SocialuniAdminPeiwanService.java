@@ -69,6 +69,7 @@ public class SocialuniAdminPeiwanService {
     public ResultRO<Void> updatePeiwanList(List<SocialuniPeiwanInfoRO> peiwanInfoROS) {
 
         List<SocialuniPeiwanInfoDO> socialuniPeiwanInfoDOS = new ArrayList<>();
+        List<SocialuniPeiwanInfoImgDO> socialuniPeiwanInfoImgDOS = new ArrayList<>();
 
 
         for (SocialuniPeiwanInfoRO peiwanInfoRO : peiwanInfoROS) {
@@ -77,11 +78,25 @@ public class SocialuniAdminPeiwanService {
 
             socialuniPeiwanInfoDO = SocialuniPeiwanInfoDOFactory.createPeiwanDO(socialuniPeiwanInfoDO, peiwanInfoRO);
 
+
+            List<SocialuniPeiwanInfoImgRO> imgs = peiwanInfoRO.getImgs();
+            for (SocialuniPeiwanInfoImgRO img : imgs) {
+                Integer imgId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(img.getId());
+
+                SocialuniPeiwanInfoImgDO imgDO = SocialuniRepositoryFacade.findByUnionId(imgId, SocialuniPeiwanInfoImgDO.class);
+                if (!imgDO.getOrder().equals(img.getOrder())) {
+                    imgDO.setOrder(img.getOrder());
+                    socialuniPeiwanInfoImgDOS.add(imgDO);
+                }
+
+            }
+
             socialuniPeiwanInfoDOS.add(socialuniPeiwanInfoDO);
 
         }
 
         SocialuniRepositoryFacade.saveAll(socialuniPeiwanInfoDOS);
+        SocialuniRepositoryFacade.saveAll(socialuniPeiwanInfoImgDOS);
 
         return ResultRO.success();
     }

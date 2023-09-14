@@ -19,6 +19,9 @@ import javax.persistence.Table;
 )
 @Data
 public class SocialuniPeiwanInfoImgDO extends SocialuniImgBaseDo {
+        //图片大小
+        private Integer order;
+
 
         public SocialuniPeiwanInfoImgDO() {
         }

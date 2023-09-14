@@ -14,12 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SocialuniPeiwanInfoImgDOFactory {
-    public static SocialuniPeiwanInfoImgDO createPeiwanImgDO(Integer userId, SocialuniImgAddQO imgAddQO) {
+    public static SocialuniPeiwanInfoImgDO createPeiwanImgDO(Integer userId, SocialuniImgAddQO imgAddQO, Integer order) {
         Integer unionId = SocialuniUnionIdFacede.createPeiwanImgUnionId();
 
-        SocialuniPeiwanInfoImgDO socialuniPeiwanInfoImgDO = new SocialuniPeiwanInfoImgDO(userId,unionId, SocialuniContentType.peiwanImg);
+        SocialuniPeiwanInfoImgDO socialuniPeiwanInfoImgDO = new SocialuniPeiwanInfoImgDO(userId, unionId, SocialuniContentType.peiwanImg);
 
         socialuniPeiwanInfoImgDO.setSrc(imgAddQO.getSrc());
+        socialuniPeiwanInfoImgDO.setOrder(order);
         socialuniPeiwanInfoImgDO.setAspectRatio(1.00);
         socialuniPeiwanInfoImgDO.setQuality(imgAddQO.getQuality());
         socialuniPeiwanInfoImgDO.setSize(imgAddQO.getSize());
@@ -29,8 +30,12 @@ public class SocialuniPeiwanInfoImgDOFactory {
 
     public static List<SocialuniPeiwanInfoImgDO> createPeiwanImgDOs(Integer userId, List<SocialuniImgAddQO> imgAddQOS) {
         List<SocialuniPeiwanInfoImgDO> socialuniPeiwanInfoImgDOS = new ArrayList<>();
+
+
         for (SocialuniImgAddQO imgAddQO : imgAddQOS) {
-            SocialuniPeiwanInfoImgDO socialuniPeiwanInfoImgDO = SocialuniPeiwanInfoImgDOFactory.createPeiwanImgDO(userId, imgAddQO);
+            Integer index = imgAddQOS.indexOf(imgAddQO);
+
+            SocialuniPeiwanInfoImgDO socialuniPeiwanInfoImgDO = SocialuniPeiwanInfoImgDOFactory.createPeiwanImgDO(userId, imgAddQO, index);
             socialuniPeiwanInfoImgDOS.add(socialuniPeiwanInfoImgDO);
         }
         return socialuniPeiwanInfoImgDOS;

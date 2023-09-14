@@ -82,7 +82,7 @@
             <div class="flex-row row-wrap">
               <el-upload drag class="size100 overflow-hidden bd-radius" :auto-upload="false"
                          multiple
-                         :on-change="(file)=>tablePeiwanImgChange(row,file)">
+                         :on-change="tablePeiwanImgChange">
                 <el-icon class="size100 font-50 color-sub">
                   <Plus/>
                 </el-icon>
@@ -287,10 +287,11 @@ export default class PeiwanManageView extends Vue {
 
   }
 
-  async tablePeiwanImgChange(row: PeiwanRO, file: any) {
+  async tablePeiwanImgChange(...args) {
+    console.log(args)
+    /*
     const imgFile: DomFile = FileUtilH5.fileSetPath(file.raw)
 
-    console.log(file)
     console.log(imgFile)
 
     //fileName
@@ -311,7 +312,7 @@ export default class PeiwanManageView extends Vue {
 
     console.log(res)
     console.log(res[1].data)
-    Object.assign(img, res[1].data[0])
+    Object.assign(img, res[1].data[0])*/
   }
 
 

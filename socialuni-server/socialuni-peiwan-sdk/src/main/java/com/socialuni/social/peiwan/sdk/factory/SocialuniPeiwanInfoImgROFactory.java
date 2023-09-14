@@ -4,6 +4,7 @@ import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.peiwan.sdk.model.DO.SocialuniPeiwanInfoImgDO;
 import com.socialuni.social.peiwan.sdk.model.RO.SocialuniPeiwanInfoImgRO;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 
 import java.util.List;
 
@@ -11,7 +12,10 @@ public class SocialuniPeiwanInfoImgROFactory {
     public static SocialuniPeiwanInfoImgRO getPeiwanImgRO(SocialuniPeiwanInfoImgDO peiwanInfoDO) {
         SocialuniPeiwanInfoImgRO imgRO = new SocialuniPeiwanInfoImgRO();
 
-        imgRO.setId(peiwanInfoDO.getUnionId());
+        String uid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(peiwanInfoDO.getUnionId());
+
+        imgRO.setId(uid);
+        imgRO.setOrder(peiwanInfoDO.getOrder());
         imgRO.setSrc(SocialuniSystemConst.getStaticResourceUrl() + peiwanInfoDO.getSrc());
         imgRO.setAspectRatio(peiwanInfoDO.getAspectRatio());
 

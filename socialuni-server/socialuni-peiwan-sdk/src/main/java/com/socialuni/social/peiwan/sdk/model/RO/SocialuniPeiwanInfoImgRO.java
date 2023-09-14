@@ -4,7 +4,8 @@ import lombok.Data;
 
 @Data
 public class SocialuniPeiwanInfoImgRO {
-    private Integer id;
+    private String id;
     private String src;
+    private Integer order;
     private Double aspectRatio;
 }
