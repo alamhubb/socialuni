@@ -10,8 +10,9 @@
 
     <div class="flex-1 row-end">
       <div class="flex-none row-col-center mr use-click" @click="openKefu">
-        <i class="mdi mdi-qrcode mr-sm font-16"></i>
+        <i class="mdi mdi-qrcode mr-sm font-18"></i>
         客服微信：491369310
+        <i class="mdi mdi-content-copy ml-sm font-16"></i>
 
         <!--        <a href="https://socialuni.cn" target="_blank" class="mr-sm md:mr bg-click">
                   <div class="row-all-center color-white">官网文档</div>
