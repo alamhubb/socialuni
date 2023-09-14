@@ -2,7 +2,7 @@
   <div class="h100p">
     <s-scrollbar>
       <div class="mx-sm pb-60" :style="{'column-count': columnNum}">
-        <div v-for="user in peiwanList" class="shadow bg-white overflow-hidden">
+        <div v-for="user in peiwanList" class="shadow bg-white overflow-hidden" @click="peiwanClick">
           <img class="bd-radius w100p" style="max-height: 400px"
                :src="user.imgs[0].src">
           <!--   <div>
@@ -101,6 +101,7 @@ import {Plus} from '@element-plus/icons-vue'
 import SocialuniPeiwanAPI from "@socialuni/socialuni-peiwan-api/src/api/SocialuniPeiwanAPI";
 import PeiwanRO from "@socialuni/socialuni-admin-api/src/model/peiwan/PeiwanRO";
 import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
+import AlertUtil from "@socialuni/socialuni-native-h5/src/util/AlertUtil";
 
 @Component({
   components: {SDialog, Plus, SScrollbar}
@@ -127,7 +128,12 @@ export default class HomePage extends Vue {
     }
   }
 
-  get windowWidth(){
+  peiwanClick() {
+    const date = new Date().toLocaleDateString()
+    AlertUtil.info("下单请联系客服微信：491369310", `${date}日更新`)
+  }
+
+  get windowWidth() {
     return socialuniSystemModule.windowWidth
   }
 
