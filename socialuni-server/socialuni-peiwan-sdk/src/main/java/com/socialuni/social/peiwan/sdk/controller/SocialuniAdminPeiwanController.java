@@ -31,6 +31,11 @@ public class SocialuniAdminPeiwanController {
         return socialuniAdminPeiwanService.addPeiwanInfo(socialuniPeiwanInfoAddQO);
     }
 
+    @PostMapping("addPeiwanInfoList")
+    public ResultRO<Void> addPeiwanInfoList(@RequestBody List<SocialuniPeiwanInfoRO> socialuniPeiwanInfoAddQOs) {
+        return socialuniAdminPeiwanService.addPeiwanInfoList(socialuniPeiwanInfoAddQOs);
+    }
+
     @GetMapping("queryPeiwanInfoList")
     public ResultRO<List<SocialuniPeiwanInfoRO>> queryPeiwanInfoList() {
         return socialuniAdminPeiwanService.queryPeiwanInfoList();

@@ -1,6 +1,5 @@
 package com.socialuni.social.peiwan.sdk.model.DO;
 
-import com.socialuni.social.common.api.entity.SocialuniBaseDO;
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import lombok.Data;
 
@@ -11,7 +10,7 @@ import javax.persistence.*;
         //查询条件索引
         indexes = {
                 //关联需要键索引，索引列不能为空
-                @Index(columnList = "username"),
+                @Index(columnList = "nickname"),
         },
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "userId"),
@@ -20,7 +19,7 @@ import javax.persistence.*;
 @Data
 public class SocialuniPeiwanInfoDO extends SocialuniContentBaseDO {
 
-    private String username;
+    private String nickname;
     private String avatar;
 
     private String city;

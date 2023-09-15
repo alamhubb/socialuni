@@ -27,7 +27,12 @@ public class SocialuniPeiwanInfoImgDOFactory {
         List<SocialuniPeiwanInfoImgDO> socialuniPeiwanInfoImgDOS = new ArrayList<>();
 
         for (SocialuniImgAddQO imgAddQO : imgAddQOS) {
-            SocialuniPeiwanInfoImgDO socialuniPeiwanInfoImgDO = SocialuniPeiwanInfoImgDOFactory.createPeiwanImgDO(userId, imgAddQO, 9999);
+            Integer index = imgAddQOS.indexOf(imgAddQO);
+            Integer order = 9999;
+            if (index > 0) {
+                order = index;
+            }
+            SocialuniPeiwanInfoImgDO socialuniPeiwanInfoImgDO = SocialuniPeiwanInfoImgDOFactory.createPeiwanImgDO(userId, imgAddQO, order);
             socialuniPeiwanInfoImgDOS.add(socialuniPeiwanInfoImgDO);
         }
         return socialuniPeiwanInfoImgDOS;

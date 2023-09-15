@@ -43,6 +43,25 @@ public class SocialuniAdminPeiwanService {
         return ResultRO.success();
     }
 
+
+    public ResultRO<Void> addPeiwanInfoList(@RequestBody List<SocialuniPeiwanInfoRO> socialuniPeiwanInfoAddQOs) {
+
+        List<SocialuniPeiwanInfoDO> list = new ArrayList<>();
+
+        for (SocialuniPeiwanInfoRO socialuniPeiwanInfoAddQO : socialuniPeiwanInfoAddQOs) {
+            SocialuniUserDo mineUser = socialUserManage.createUserByPhoneLogin();
+
+            SocialuniPeiwanInfoDO socialuniPeiwanInfoDO = SocialuniPeiwanInfoDOFactory.createPeiwanDO(mineUser, socialuniPeiwanInfoAddQO);
+            list.add(socialuniPeiwanInfoDO);
+        }
+
+
+        SocialuniRepositoryFacade.saveAll(list);
+
+        return ResultRO.success();
+    }
+
+
     public ResultRO<String> updatePeiwanAvatar(String userId, String src) {
 
         SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getUserByUuid(userId);
