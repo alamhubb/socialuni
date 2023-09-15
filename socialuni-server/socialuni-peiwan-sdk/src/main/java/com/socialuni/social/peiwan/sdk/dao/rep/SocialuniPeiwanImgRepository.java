@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface SocialuniPeiwanImgRepository extends JpaRepository<SocialuniPeiwanInfoImgDO, Integer> {
 
-    List<SocialuniPeiwanInfoImgDO> findAllByUserIdAndStatusOrderByLevelAscIdAsc(Integer userId, String status);
+    List<SocialuniPeiwanInfoImgDO> findAllByUserIdAndStatusOrderByIdAsc(Integer userId, String status);
 }
 

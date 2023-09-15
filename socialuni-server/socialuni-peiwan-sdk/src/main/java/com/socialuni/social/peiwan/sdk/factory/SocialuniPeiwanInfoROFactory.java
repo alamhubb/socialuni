@@ -61,7 +61,7 @@ public class SocialuniPeiwanInfoROFactory {
             peiwanInfoRO.setSkills(Arrays.asList(skills.split(",")));
         }
 
-        List<SocialuniPeiwanInfoImgDO> list = socialuniPeiwanImgRepository.findAllByUserIdAndStatusOrderByLevelAscIdAsc(peiwanInfoDO.getUserId(), SocialuniCommonStatus.enable);
+        List<SocialuniPeiwanInfoImgDO> list = socialuniPeiwanImgRepository.findAllByUserIdAndStatusOrderByIdAsc(peiwanInfoDO.getUserId(), SocialuniCommonStatus.enable);
 
         List<SocialuniPeiwanInfoImgRO> imgROES = SocialuniPeiwanInfoImgROFactory.getPeiwanImgRoList(list);
 

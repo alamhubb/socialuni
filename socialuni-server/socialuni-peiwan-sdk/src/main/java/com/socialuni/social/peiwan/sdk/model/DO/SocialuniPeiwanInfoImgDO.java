@@ -8,25 +8,25 @@ import javax.persistence.Index;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "s_peiwan_info_img",
+@Table(name = "s_peiwan_info_img123",
         //查询条件索引
         indexes = {
                 //关联需要键索引，索引列不能为空
                 @Index(columnList = "userId"),
-                @Index(columnList = "level"),
         }
 )
 @Data
 public class SocialuniPeiwanInfoImgDO extends SocialuniImgBaseDo {
-        //图片大小
-        private Integer level;
+
+    //图片大小
+    Integer level;
+    Integer fadsf;
+
+    public SocialuniPeiwanInfoImgDO() {
+    }
 
 
-        public SocialuniPeiwanInfoImgDO() {
-        }
-
-
-        public SocialuniPeiwanInfoImgDO(Integer userId, Integer unionId, String contentType) {
-                super(userId, unionId, contentType);
-        }
+    public SocialuniPeiwanInfoImgDO(Integer userId, Integer unionId, String contentType) {
+        super(userId, unionId, contentType);
+    }
 }
