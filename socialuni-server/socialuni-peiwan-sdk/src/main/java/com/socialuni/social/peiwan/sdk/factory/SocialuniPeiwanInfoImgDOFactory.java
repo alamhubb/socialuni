@@ -14,11 +14,11 @@ public class SocialuniPeiwanInfoImgDOFactory {
 
         SocialuniPeiwanInfoImgDO socialuniPeiwanInfoImgDO = new SocialuniPeiwanInfoImgDO(userId, unionId, SocialuniContentType.peiwanImg);
 
-//        socialuniPeiwanInfoImgDO.setSrc(imgAddQO.getSrc());
+        socialuniPeiwanInfoImgDO.setSrc(imgAddQO.getSrc());
         socialuniPeiwanInfoImgDO.setLevel(order);
-//        socialuniPeiwanInfoImgDO.setAspectRatio(imgAddQO.getAspectRatio());
-//        socialuniPeiwanInfoImgDO.setQuality(imgAddQO.getQuality());
-//        socialuniPeiwanInfoImgDO.setSize(imgAddQO.getSize());
+        socialuniPeiwanInfoImgDO.setAspectRatio(imgAddQO.getAspectRatio());
+        socialuniPeiwanInfoImgDO.setQuality(imgAddQO.getQuality());
+        socialuniPeiwanInfoImgDO.setSize(imgAddQO.getSize());
 
         return socialuniPeiwanInfoImgDO;
     }

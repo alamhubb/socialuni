@@ -1,7 +1,6 @@
 package com.socialuni.social.peiwan.sdk.model.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniImgBaseDo;
-import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -9,12 +8,19 @@ import javax.persistence.Index;
 import javax.persistence.Table;
 
 @Entity
+@Table(name = "s_peiwan_info_img",
+        //查询条件索引
+        indexes = {
+                //关联需要键索引，索引列不能为空
+                @Index(columnList = "userId"),
+                @Index(columnList = "level"),
+        }
+)
 @Data
-public class SocialuniPeiwanInfoImgDO extends SocialuniUnionContentBaseDO {
+public class SocialuniPeiwanInfoImgDO extends SocialuniImgBaseDo {
 
     //图片大小
     Integer level;
-    Integer fadsf;
 
     public SocialuniPeiwanInfoImgDO() {
     }

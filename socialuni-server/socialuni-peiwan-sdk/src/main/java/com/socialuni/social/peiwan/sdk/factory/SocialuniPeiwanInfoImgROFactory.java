@@ -16,8 +16,8 @@ public class SocialuniPeiwanInfoImgROFactory {
 
         imgRO.setId(uid);
         imgRO.setOrder(peiwanInfoDO.getLevel());
-//        imgRO.setSrc(SocialuniSystemConst.getStaticResourceUrl() + peiwanInfoDO.getSrc());
-//        imgRO.setAspectRatio(peiwanInfoDO.getAspectRatio());
+        imgRO.setSrc(SocialuniSystemConst.getStaticResourceUrl() + peiwanInfoDO.getSrc());
+        imgRO.setAspectRatio(peiwanInfoDO.getAspectRatio());
 
         return imgRO;
     }
