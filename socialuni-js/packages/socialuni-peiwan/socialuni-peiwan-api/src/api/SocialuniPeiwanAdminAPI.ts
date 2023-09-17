@@ -24,6 +24,10 @@ export default class SocialuniPeiwanAdminAPI {
         return socialuniUserRequest.post<void>('admin/peiwan/updatePeiwanList', peiwans)
     }
 
+    static addPeiwanInfoListAPI(peiwans: PeiwanRO[]) {
+        return socialuniUserRequest.post<void>('admin/peiwan/addPeiwanInfoList', peiwans)
+    }
+
     static updatePeiwanAvatarAPI(userId: string, src: string) {
         return socialuniUserRequest.get<string>(`admin/peiwan/updatePeiwanAvatar/${userId}?src=${src}`)
     }

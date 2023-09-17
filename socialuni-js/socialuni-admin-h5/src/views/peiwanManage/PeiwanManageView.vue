@@ -175,7 +175,13 @@ export default class PeiwanManageView extends Vue {
         this.peiwanUuid = UUIDUtil.getUUID()
 
         this.getAppInitDataAPI()
-        this.queryPeiwanListAPI()
+        // this.queryPeiwanListAPI()
+
+        this.peiwanList = []
+
+        setTimeout(() => {
+            this.peiwanList.push(...resData.data)
+        }, 100)
         this.queryCosAuthAPI()
         console.log('进入了')
         this.listenerMessage()
@@ -183,7 +189,7 @@ export default class PeiwanManageView extends Vue {
             if (this.peiwanInfo.nickname) {
                 this.addPeiwanAPI()
             } else {
-                this.saveUpdatePeiwanList()
+                this.addPeiwanInfoListAPI()
             }
             console.log(event)
             // 检查是否按下了 ctrl+s
@@ -226,15 +232,8 @@ export default class PeiwanManageView extends Vue {
     }
 
     async queryPeiwanListAPI() {
-        // const res = await SocialuniPeiwanAdminAPI.queryPeiwanInfoListAPI()
-        // this.peiwanList = res.data
-
-        this.peiwanList = []
-
-        setTimeout(() => {
-            this.peiwanList.push(...resData.data)
-        }, 100)
-
+        const res = await SocialuniPeiwanAdminAPI.queryPeiwanInfoListAPI()
+        this.peiwanList = res.data
     }
 
 
@@ -348,6 +347,12 @@ export default class PeiwanManageView extends Vue {
         console.log(changeData)
 
         SocialuniPeiwanAdminAPI.updatePeiwanListAPI(changeData).then(() => {
+            this.queryPeiwanListAPI()
+        })
+    }
+
+    addPeiwanInfoListAPI() {
+        SocialuniPeiwanAdminAPI.addPeiwanInfoListAPI(resData.data).then(() => {
             this.queryPeiwanListAPI()
         })
     }
