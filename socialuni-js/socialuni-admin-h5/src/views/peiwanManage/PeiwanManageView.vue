@@ -4,11 +4,10 @@
 
             <s-label-item label="用户名">
                 <el-input v-model="peiwanInfo.nickname"></el-input>
-                <el-button class="ml-sm" @click="addPeiwanAPI">保存</el-button>
             </s-label-item>
 
             <div class="flex-1 row-end">
-                <el-button @click="saveUpdatePeiwanList">保存</el-button>
+                <el-button @click="commonSava">保存</el-button>
             </div>
             <!--            <label-item label="陪玩名称">
                             <el-input></el-input>
@@ -175,25 +174,14 @@ export default class PeiwanManageView extends Vue {
         this.peiwanUuid = UUIDUtil.getUUID()
 
         this.getAppInitDataAPI()
-        // this.queryPeiwanListAPI()
-
-        this.peiwanList = []
-
-        setTimeout(() => {
-            this.peiwanList.push(...resData.data)
-        }, 100)
+        this.queryPeiwanListAPI()
         this.queryCosAuthAPI()
         console.log('进入了')
         this.listenerMessage()
         WindowEventListener.useKeydownListener({ctrl: true, key: 's'}, (event) => {
-            if (this.peiwanInfo.nickname) {
-                this.addPeiwanAPI()
-            } else {
-                this.addPeiwanInfoListAPI()
-            }
-            console.log(event)
             // 检查是否按下了 ctrl+s
-            console.log('触发了')
+            console.log('触发了ctrl+s')
+            this.commonSava()
             // 阻止默认行为（保存网页）
             event.preventDefault();
             // 调用自定义事件
@@ -232,6 +220,10 @@ export default class PeiwanManageView extends Vue {
     }
 
     async queryPeiwanListAPI() {
+        /*this.peiwanList = []
+        setTimeout(() => {
+            this.peiwanList.push(...resData.data)
+        }, 100)*/
         const res = await SocialuniPeiwanAdminAPI.queryPeiwanInfoListAPI()
         this.peiwanList = res.data
     }
@@ -328,6 +320,13 @@ export default class PeiwanManageView extends Vue {
         Object.assign(img, res[1].data[0])
     }
 
+    commonSava() {
+        if (this.peiwanInfo.nickname) {
+            this.addPeiwanAPI()
+        } else {
+            this.saveUpdatePeiwanList()
+        }
+    }
 
     deletePeiwanImgAPI(row: PeiwanRO, index) {
         console.log(row.imgs)
@@ -340,15 +339,16 @@ export default class PeiwanManageView extends Vue {
 
 
     saveUpdatePeiwanList() {
-        console.log(this.$refs.dataTable.changeData)
 
         const changeData = this.$refs.dataTable.changeData
-
         console.log(changeData)
 
-        SocialuniPeiwanAdminAPI.updatePeiwanListAPI(changeData).then(() => {
-            this.queryPeiwanListAPI()
-        })
+        if (changeData.length) {
+            SocialuniPeiwanAdminAPI.updatePeiwanListAPI(changeData).then(() => {
+                this.queryPeiwanListAPI()
+            })
+        }
+
     }
 
     addPeiwanInfoListAPI() {
