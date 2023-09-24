@@ -1,11 +1,12 @@
 // 1. 定义路由组件.
 // 也可以从其他文件导入
-import {createRouter,  createWebHistory} from "vue-router";
+import {createRouter, createWebHistory} from "vue-router";
 
 import Layout from '@/layout/Layout.vue'
 import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
 import SocialuniTokenUtil from "@socialuni/socialuni-user-sdk/src/util/SocialuniTokenUtil";
 import PeiwanManageView from '@/views/peiwanManage/PeiwanManageView.vue'
+import CreateUserView from "@/views/user/CreateUser.vue";
 
 export const menuRoutes = [
     /*{
@@ -61,7 +62,13 @@ export const menuRoutes = [
         path: '/peiwanManage',
         name: 'peiwanManage',
         component: PeiwanManageView,
-        meta: {title: '陪玩管理', icon: 'strengthMonitoring'}
+        meta: {title: '陪玩管理', icon: 'strengthMonitoring', isOpen: true}
+    },
+    {
+        path: '/customCreateUser',
+        name: 'customCreateUser',
+        component: CreateUserView,
+        meta: {title: '创建用户', icon: 'strengthMonitoring', isOpen: true}
     }
 ]
 
@@ -80,7 +87,7 @@ export const constantRoutes = [
         path: '/',
         component: Layout,
         redirect: '/peiwanManage',
-        children: menuRoutes
+        children: menuRoutes,
     },
     // 404 page must be placed at the end !!!
     {path: '/:pathMatch(.*)', redirect: '/404', hidden: true}
@@ -129,7 +136,7 @@ const router = createRouter({
 
 const whiteList = ['/login'] // no redirect whitelist
 
-router.beforeEach(async(to, from, next) => {
+router.beforeEach(async (to, from, next) => {
     // set page title
     let user = socialuniUserModule.mineUser
     console.log(user)
@@ -143,7 +150,7 @@ router.beforeEach(async(to, from, next) => {
     if (hasToken) {
         if (to.path === '/login') {
             // if is logged in, redirect to the home page
-            next({ path: '/' })
+            next({path: '/'})
         } else {
             console.log(to.path)
             next()
@@ -155,7 +162,7 @@ router.beforeEach(async(to, from, next) => {
             next()
         } else {
             // other pages that do not have permission to access are redirected to the login page.
-            next({ path: '/login' })
+            next({path: '/login'})
         }
     }
 })

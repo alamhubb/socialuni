@@ -14,11 +14,9 @@ import javax.transaction.Transactional;
 @Service
 public class SocialPhoneLoginEntity {
     @Resource
-    SocialUserPhoneManage socialUserPhoneManage;
-    @Resource
     SocialuniAuthenticationManage authenticationManage;
     @Resource
-    SocialUserPhoneEntity socialUserPhoneEntity;
+    SocialUserEntity socialUserEntity;
 
     //1.通过联盟应用输入手机号，登录调用
     //2.不接入联盟，自己应用手机号登录
@@ -34,14 +32,8 @@ public class SocialPhoneLoginEntity {
         //校验验证码，传null用户记录日志
         authenticationManage.checkAuthCode(phoneNum, authCode);
 
-        SocialUserPhoneDo SocialUserPhoneDo = socialUserPhoneManage.checkLoginPhoneNum(phoneNum);
+        SocialuniUserDo mineUser= socialUserEntity.getOrCreateUserByPhoneNum(phoneNum);
 
-        SocialuniUserDo mineUser;
-        if (SocialUserPhoneDo != null) {
-            mineUser = SocialuniUserUtil.getAndCheckUserNotNull(SocialUserPhoneDo.getUserId());
-        } else {
-            mineUser = socialUserPhoneEntity.createUserPhoneEntity(phoneNum);
-        }
         return mineUser;
     }
 }

@@ -9,7 +9,7 @@ import com.socialuni.social.im.logic.foctory.SocaluniNotifyROFactory;
 import com.socialuni.social.im.enumeration.NotifyType;
 import com.socialuni.social.common.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.im.dao.DO.message.SocialuniMessageReceiveDO;
-import com.socialuni.social.common.sdk.dao.DO.SocialUserAccountDO;
+import com.socialuni.social.common.sdk.dao.DO.SocialUserPlatformAccountDO;
 import com.socialuni.social.im.dao.repository.SocialuniMessageReceiveRepository;
 import com.socialuni.social.common.sdk.dao.repository.NotifyRepository;
 import com.socialuni.social.common.sdk.dao.repository.SocialUserAccountRepository;
@@ -122,7 +122,7 @@ public class NotifyDomain {
 //        UserDO receiveUser = userRepository.findById(receiveUserId).get();
         Integer receiveUserId = notify.getBeUserId();
 
-        SocialUserAccountDO receiveAccount = socialUserAccountRepository.findByUserIdOrderByUpdateTimeDesc(receiveUserId);
+        SocialUserPlatformAccountDO receiveAccount = socialUserAccountRepository.findByUserIdOrderByUpdateTimeDesc(receiveUserId);
 //        if (receiveAccount != null) {
         String notifyType = notify.getType();
 //        String provider = receiveAccount.getProvider();

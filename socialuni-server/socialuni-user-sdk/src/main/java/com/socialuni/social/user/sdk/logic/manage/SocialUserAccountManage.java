@@ -4,7 +4,7 @@ import com.socialuni.social.common.api.constant.PlatformType;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.user.sdk.constant.GenderTypeNumEnum;
-import com.socialuni.social.common.sdk.dao.DO.SocialUserAccountDO;
+import com.socialuni.social.common.sdk.dao.DO.SocialUserPlatformAccountDO;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.user.sdk.model.RO.UniUnionIdRO;
 import com.socialuni.social.common.sdk.dao.repository.SocialUserAccountRepository;
@@ -23,8 +23,8 @@ public class SocialUserAccountManage {
     @Resource
     SocialUserAccountStore socialUserAccountStore;
 
-    public SocialUserAccountDO updateSessionKey(Integer mineUserId, String provider, String sessionKey) {
-        SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUserId(provider, mineUserId);
+    public SocialUserPlatformAccountDO updateSessionKey(Integer mineUserId, String provider, String sessionKey) {
+        SocialUserPlatformAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUserId(provider, mineUserId);
         //更新数据库的key
         socialUserAccountDO.setUpdateTime(new Date());
         //再次更新下sessionkey
@@ -33,8 +33,8 @@ public class SocialUserAccountManage {
         return socialUserAccountDO;
     }
 
-    public SocialUserAccountDO checkOrCreateOrUpdate(Integer userId, SocialProviderLoginQO loginQO, UniUnionIdRO uniUnionIdRO) {
-        SocialUserAccountDO socialUserAccountDO = socialUserAccountStore.getAccountByUnionId(loginQO, uniUnionIdRO);
+    public SocialUserPlatformAccountDO checkOrCreateOrUpdate(Integer userId, SocialProviderLoginQO loginQO, UniUnionIdRO uniUnionIdRO) {
+        SocialUserPlatformAccountDO socialUserAccountDO = socialUserAccountStore.getAccountByUnionId(loginQO, uniUnionIdRO);
         if (socialUserAccountDO == null) {
             return this.create(userId, loginQO, uniUnionIdRO);
         } else {
@@ -43,8 +43,8 @@ public class SocialUserAccountManage {
     }
 
     //两个相似逻辑引用，但逻辑不相同，无法通用，所以两个地方调用
-    public SocialUserAccountDO create(Integer userId, SocialProviderLoginQO loginQO, UniUnionIdRO uniUnionIdRO) {
-        SocialUserAccountDO socialUserAccountDO = new SocialUserAccountDO();
+    public SocialUserPlatformAccountDO create(Integer userId, SocialProviderLoginQO loginQO, UniUnionIdRO uniUnionIdRO) {
+        SocialUserPlatformAccountDO socialUserAccountDO = new SocialUserPlatformAccountDO();
         socialUserAccountDO.setUserId(userId);
 //        socialUserAccountDO.setDevId(loginQO.getDevId());
         String platform = loginQO.getPlatform();

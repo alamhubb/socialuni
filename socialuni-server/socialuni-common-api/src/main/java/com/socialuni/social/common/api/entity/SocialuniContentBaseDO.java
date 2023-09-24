@@ -10,22 +10,17 @@ import java.util.Date;
 
 @Data
 @MappedSuperclass
-public class SocialuniContentBaseDO extends SocialuniUserInfoBaseDO implements Serializable {
+public class SocialuniContentBaseDO extends SocialuniUpdateTimeContentBaseDO implements Serializable {
     @Column(nullable = false)
     private String status;
     private String type;
 
-    @Column(nullable = false, columnDefinition = "timestamp default current_timestamp")
-    private Date updateTime;
-
     public SocialuniContentBaseDO() {
-        this.updateTime = super.getCreateTime();
         this.status = SocialuniCommonStatus.enable;
     }
 
     public SocialuniContentBaseDO(Integer userId) {
         super(userId);
-        this.updateTime = super.getCreateTime();
         this.status = SocialuniCommonStatus.enable;
     }
 }
