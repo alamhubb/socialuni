@@ -43,7 +43,7 @@
     </el-drawer>
 </template>
 
-<script setup>
+<script lang="ts">
 import {getLikeMusic} from "@/network/song.js";
 import {ElMessage} from 'element-plus'
 import {isLikeMusic} from "@/network/user.js";
@@ -51,22 +51,48 @@ import {debounce} from "@/utlis/debounce.js";
 import eventBus from '@/utlis/eventbus.js'
 import {defineAsyncComponent, computed, watch, ref, onMounted, nextTick} from "vue";
 
+
 const popup = defineAsyncComponent(() => import('./children/popup.vue'))
 import {useStore} from "vuex";
+import SDialog from "@socialuni/socialuni-ui-h5/src/components/SComponents/SDialog.vue";
+import {Component, Vue, Watch} from "vue-facing-decorator";
 
-let value = ref(0)
-let is = ref(false)
-let open = ref(false)
-let drawer = ref(true)
-const audio = ref()
-let isLike = ref(false)
-let currentTime = ref(0)
-let size = ref(0)
-let dom = ref()
-let color = ref('#ffffff')
+import AgoraRTC from "agora-rtc-sdk-ng"
+
+let rtc = {
+    localAudioTrack: null,
+    client: null
+};
 
 
-queueMicrotask(() => {
+let options = {
+    // Pass your App ID here.
+    appId: "5e681410a7434ce9bba3e268226ce537",
+    // Set the channel name.
+    channel: "aaa",
+    // Pass your temp token here.
+    token: "007eJxTYNj+8OP7X44R8Zx/O2v4vzybYqbxf+en/7bqJ1ZLdK7zNFuuwGCaamZhaGJokGhuYmySnGqZlJRonGpkZmFkZJacamps/u+6RmpDICND5tS3DIxQCOIzMyQmJjIwAAAcYCIB",
+    // Set the user ID.
+    uid: 'web' + Math.floor(Math.random() * 2021428)
+}
+
+const streamIp = 'https://cdxapp-1257733245.file.myqcloud.com/opentest/M800000puzgO0yRX1o.mp3'
+
+const client = AgoraRTC.createClient({
+    mode: "rtc",
+    codec: "vp8"
+});
+
+client.on("user-published", async (user, mediaType) => {
+    console.log('触发了订阅')
+    await client.subscribe(user, mediaType);
+    if (mediaType === 'audio') {
+        user.audioTrack.play();
+    }
+});
+
+
+/*queueMicrotask(() => {
     drawer.value = false
     watch(drawer, newValue => {
         const el = document.querySelector('.el-drawer__body')
@@ -80,133 +106,216 @@ queueMicrotask(() => {
             }
         }, 200)
     })
-})
-const close = () => {
-    drawer.value = false
-    console.log('关闭')
-}
-const openLyric = () => {
-    size.value = 100
-    drawer.value = true
-}
-//收藏
-const isChangeLike = debounce(() => {
-    if (store.state.login.profile) {
-        isLike.value = !isLike.value
-        isLikeMusic(songDetail.value.id, isLike.value).then(res => {
-            if (isLike.value && res.data.code === 200) {
-                ElMessage.success({
-                    type: 'success',
-                    message: '收藏成功'
-                })
-            } else {
-                ElMessage.success({
-                    type: 'success',
-                    message: '取消收藏'
-                })
-            }
-        })
-    } else {
-        ElMessage.error({
-            type: 'error',
-            message: '未登录'
-        })
-    }
-}, 1000)
-eventBus.on('playMusic', () => {
-    setTimeout(() => {
-        playMusic()
-        audio.value.play()
-    })
-})
-//播放音乐
-let timer
-const play = () => {
-    currentTime.value = parseInt(audio.value.currentTime * 1000)
-    value.value = parseInt(audio.value.currentTime / audio.value.duration * 100)
-    //自动切换
-    if (audio.value.currentTime >= audio.value.duration - 0.5) {
-        console.log('播放结束')
-        next(1)
-    }
-}
-let timer1
-const playMusic = () => {
-    nextTick(() => {
-        audio.value.addEventListener("error", function () {
-            if (timer1) clearTimeout(timer1)
-            timer1 = setTimeout(() => {
-                ElMessage.error('暂无音频已自动切换下一首')
-                next(1)
-            }, 200)
-        }, true);
-    })
-    console.log(1111111)
-    console.log(audio.value)
-    if (audio.value.paused) {
-        audio.value.play()
-        is.value = true
-        store.commit('setPlay')
-
-        console.log('播放')
-        timer = setInterval(play, 500)
-    } else {
-        console.log('暂停')
-        audio.value.pause()
-        is.value = false
-        store.commit('setPlay')
-        clearInterval(timer)
-    }
-}
+})*/
 //滑动
-const sliderChange = (value, boolean = true) => {
-    clearInterval(timer)
-    setTimeout(() => {
-        if (boolean) {
-            audio.value.currentTime = audio.value.duration * value / 100
+
+
+@Component({})
+export default class HomePage extends Vue {
+    $refs: {
+        mapDialog: SDialog
+        audio: HTMLAudioElement
+    }
+
+    store = useStore()
+
+    is = false
+    open = false
+    isLike = false
+    drawer = true
+    dom = null
+    color = '#ffffff'
+    value = 0
+    currentTime = 0
+    size = 0
+
+
+    created() {
+        console.log(this.store)
+        console.log(7879978)
+        // this.queryMusicListAPI()
+        //实现语音通话逻辑
+        //参考以下步骤实现语音通话的逻辑：
+        // 调用 createClient 方法创建 AgoraRTCClient 对象。
+        // 调用 join 方法加入一个 RTC 频道，你需要在该方法中传入 App ID 、用户 ID、Token、频道名称。
+        // 先调用 createMicrophoneAudioTrack 通过麦克风采集的音频创建本地音频轨道对象；然后调用 publish 方法，将本地音频轨道对象当作参数即可将音频发布到频道中。
+        // 当一个远端用户加入频道并发布音频轨道时：
+        // 监听 client.on("user-published") 事件。当 SDK 触发该事件时，在这个事件回调函数的参数中你可以获取远端用户 AgoraRTCRemoteUser 对象 。
+        // 调用 subscribe 方法订阅远端用户 AgoraRTCRemoteUser 对象，获取远端用户的远端音频轨道 RemoteAudioTrack 对象。
+        // 调用 play 方法播放远端音频轨道。
+        eventBus.on('login1', () => {
+            getLikeMusic(this.store.state.login.profile?.userId).then(res => {
+                if (!res) return
+                this.store.commit('setLikeMusic', res?.data.ids)
+                this.isLike = this.store.state.singer.likeMusic.includes(this.songDetail.value.id)
+            })
+        })
+        eventBus.on('playMusic', () => {
+            setTimeout(() => {
+                this.playMusic()
+                this.$refs.audio.play()
+            })
+        })
+    }
+
+    close() {
+        this.drawer = false
+        console.log('关闭')
+    }
+
+    openLyric() {
+        this.size = 100
+        this. drawer = true
+    }
+
+//收藏
+    isChangeLike() {
+        if (this.store.state.login.profile) {
+            this.isLike = !this.isLike
+            isLikeMusic(this.songDetail.id, this.isLike).then(res => {
+                if (this.isLike && res.data.code === 200) {
+                    ElMessage.success({
+                        type: 'success',
+                        message: '收藏成功'
+                    })
+                } else {
+                    ElMessage.success({
+                        type: 'success',
+                        message: '取消收藏'
+                    })
+                }
+            })
         } else {
-            audio.value.currentTime = value / 1000
+            ElMessage.error({
+                type: 'error',
+                message: '未登录'
+            })
         }
-        audio.value.play()
-        is.value = true
-        timer = setInterval(play, 500)
-    })
-}
-const scrollPlay = time => {
-    sliderChange(time, false)
-}
-//切换歌曲
-const store = useStore()
-const next = value => {
-    let musicNum = computed(() => store.state.songDetail.songArray.length)
-    if (musicNum.value > 1) {
-        store.commit('change', value)
-        is.value = true
+    }
+
+//播放音乐
+    timer = null
+
+    play() {
+        this.currentTime = parseInt(this.$refs.audio.currentTime * 1000)
+        this.value = parseInt(this.$refs.audio.currentTime / this.$refs.audio.duration * 100)
+        //自动切换
+        if (this.$refs.audio.currentTime >= this.$refs.audio.duration - 0.5) {
+            console.log('播放结束')
+            this.next(1)
+        }
+    }
+
+    timer1 = null
+
+    playMusic() {
+        nextTick(() => {
+            this.$refs.audio.addEventListener("error", function () {
+                if (this.timer1) clearTimeout(this.timer1)
+                this.timer1 = setTimeout(() => {
+                    ElMessage.error('暂无音频已自动切换下一首')
+                    this.next(1)
+                }, 200)
+            }, true);
+        })
+        console.log(1111111)
+        console.log(this.audio)
+        if (this.$refs.audio.paused) {
+            this.$refs.audio.play()
+            this.is = true
+            this.store.commit('setPlay')
+
+            console.log('播放')
+            this.timer = setInterval(this.play, 500)
+        } else {
+            console.log('暂停')
+            this.$refs.audio.pause()
+            this.is = false
+            this.store.commit('setPlay')
+            clearInterval(this.timer)
+        }
+    }
+
+    sliderChange(value, boolean = true) {
+        clearInterval(this.timer)
         setTimeout(() => {
-            playMusic()
-            audio.value.play()
+            if (boolean) {
+                this.$refs.audio.currentTime = this.$refs.audio.duration * value / 100
+            } else {
+                this.$refs.audio.currentTime = value / 1000
+            }
+            this.$refs.audio.play()
+            this.is = true
+            this.timer = setInterval(this.play, 500)
         })
-    } else {
-        ElMessage.warning({
-            message: '无可播放的歌曲列表',
-            type: 'warning',
-        })
+    }
+
+    scrollPlay(time) {
+        this.sliderChange(time, false)
+    }
+
+
+    next(value) {
+        let musicNum = computed(() => this.store.state.songDetail.songArray.length)
+        if (musicNum.value > 1) {
+            this.store.commit('change', value)
+            this.is = true
+            setTimeout(() => {
+                this.playMusic()
+                this.$refs.audio.play()
+            })
+        } else {
+            ElMessage.warning({
+                message: '无可播放的歌曲列表',
+                type: 'warning',
+            })
+        }
+    }
+
+
+    get songDetail() {
+        return this.store.state.songDetail.songDetail
+    }
+
+    @Watch('songDetail', {deep: true, immediate: true})
+    songDetailWatch() {
+        this.songDetail.id
+        this.isLike = this.store.state.singer.likeMusic.includes(this.songDetail.id)
+    }
+
+    isPlaying = false
+
+    localAudioTrack = null
+    client = null
+    value1 = null
+    options = options
+
+
+    async joinClick() {
+        // Join an RTC channel.
+        await client.join(options.appId, options.channel, options.token, options.uid);
+    }
+
+    async publish() {
+        const config = {
+            source: streamIp
+        }
+        const track = await AgoraRTC.createBufferSourceAudioTrack(config);
+        track.play();
+        track.startProcessAudioBuffer();
+        await client.publish(track);
+    }
+
+    async leaveClick() {
+        // Destroy the local audio track.
+        rtc.localAudioTrack.close();
+
+        // Leave the channel.
+        await client.leave();
     }
 }
 
-eventBus.on('login1', () => {
-    getLikeMusic(store.state.login.profile?.userId).then(res => {
-        if (!res) return
-        store.commit('setLikeMusic', res?.data.ids)
-        isLike.value = store.state.singer.likeMusic.includes(songDetail.value.id)
-    })
-})
 
-const songDetail = computed(() => store.state.songDetail.songDetail)
-watch(songDetail, () => {
-    songDetail.value.id
-    isLike.value = store.state.singer.likeMusic.includes(songDetail.value.id)
-}, {deep: true, immediate: true})
 </script>
 
 <style scoped lang="scss">
