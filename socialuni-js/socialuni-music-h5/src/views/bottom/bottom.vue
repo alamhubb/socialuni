@@ -78,7 +78,6 @@ let options = {
 }
 
 
-
 /*queueMicrotask(() => {
     drawer.value = false
     watch(drawer, newValue => {
@@ -288,7 +287,9 @@ export default class HomePage extends Vue {
         }
         const track = await AgoraRTC.createBufferSourceAudioTrack(config);
         track.play();
-        track.startProcessAudioBuffer();
+        track.startProcessAudioBuffer({
+            startPlayTime: 100
+        });
         await mucisRoomStore.client.publish(track);
     }
 
