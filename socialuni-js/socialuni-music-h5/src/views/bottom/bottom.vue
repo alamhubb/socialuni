@@ -283,8 +283,8 @@ export default class HomePage extends Vue {
 
     async publish() {
         const config = {
-            source: `https://cdxapp-1257733245.file.myqcloud.com/opentest/M800000puzgO0yRX1o.mp3`
-            // source: `music/song/media/outer/url?id=1344897943.mp3`
+            // source: `https://cdxapp-1257733245.file.myqcloud.com/opentest/M800000puzgO0yRX1o.mp3`
+            source: `music/song/media/outer/url?id=${this.songDetail.id}.mp3`
         }
         const track = await AgoraRTC.createBufferSourceAudioTrack(config);
         track.play();
@@ -297,7 +297,7 @@ export default class HomePage extends Vue {
         rtc.localAudioTrack.close();
 
         // Leave the channel.
-        await mucisRoomStore.leave();
+        await mucisRoomStore.client.leave();
     }
 }
 
