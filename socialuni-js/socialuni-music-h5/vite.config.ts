@@ -23,8 +23,13 @@ export default defineConfig({
                 // 如果接口跨域，需要进行这个参数配置
                 changeOrigin: true,
                 rewrite: (path) => path.replace(/^\/api/, '')
+            },
+            '/music': {
+                target: 'https://music.163.com',
+                // 如果接口跨域，需要进行这个参数配置
+                changeOrigin: true,
+                rewrite: (path) => path.replace(/^\/music/, '')
             }
-
         }
     },
     resolve: {

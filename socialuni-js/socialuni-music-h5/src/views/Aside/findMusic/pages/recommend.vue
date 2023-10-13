@@ -4,7 +4,7 @@
         <div>456</div>
         <el-button @click="joinClick">加入</el-button>
         <el-button @click="leaveClick">离开</el-button>
-        <el-button @click="publish">发送</el-button>
+<!--        <el-button @click="publish">发送</el-button>-->
     </div>
   <!--轮播图-->
     <banner/>
@@ -32,6 +32,7 @@ const unique = defineAsyncComponent(() => import('../children/unique.vue'))
 const newMusic = defineAsyncComponent(() => import('../children/newMusic.vue'))
 const recommendMV = defineAsyncComponent(() => import('../children/recommendMV.vue'))
 import AgoraRTC from "agora-rtc-sdk-ng"
+import {mucisRoomStore} from "@/store/MusicRoom";
 
 let rtc = {
     localAudioTrack: null,
@@ -49,8 +50,6 @@ let options = {
     // Set the user ID.
     uid: 'web' + Math.floor(Math.random() * 2021428)
 }
-
-const streamIp = 'https://cdxapp-1257733245.file.myqcloud.com/opentest/M800000puzgO0yRX1o.mp3'
 
 const client = AgoraRTC.createClient({
     mode: "rtc",
@@ -71,12 +70,12 @@ client.on("user-published", async (user, mediaType) => {
 export default class RecommendView extends Vue {
     async joinClick() {
         // Join an RTC channel.
-        await client.join(options.appId, options.channel, options.token, options.uid);
+        await mucisRoomStore.client.join(options.appId, options.channel, options.token, options.uid);
     }
 
     async publish() {
         const config = {
-            source: streamIp
+            source: ''
         }
         const track = await AgoraRTC.createBufferSourceAudioTrack(config);
         track.play();

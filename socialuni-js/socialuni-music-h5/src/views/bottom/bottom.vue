@@ -20,7 +20,7 @@
                     <i @click="isChangeLike" v-else style="color: red;font-size: 22px;" title="已收藏"
                        class="mdi mdi-star"></i>
                     <i title="上一曲" @click="next(-1)" class="mdi  mdi-skip-previous"></i>
-                    <i @click="playMusic" style="font-size: 40px; color: #cc7013;" class="mdi"
+                    <i @click="publish" style="font-size: 40px; color: #cc7013;" class="mdi"
                        :class="[is ? 'mdi-pause' :'mdi-play']"></i>
                     <i title="下一曲" @click="next(1)" class="mdi mdi-skip-next"></i>
                     <svg class="svg" @click="openLyric" aria-hidden="true">
@@ -58,6 +58,7 @@ import SDialog from "@socialuni/socialuni-ui-h5/src/components/SComponents/SDial
 import {Component, Vue, Watch} from "vue-facing-decorator";
 
 import AgoraRTC from "agora-rtc-sdk-ng"
+import {mucisRoomStore} from "@/store/MusicRoom";
 
 let rtc = {
     localAudioTrack: null,
@@ -76,20 +77,6 @@ let options = {
     uid: 'web' + Math.floor(Math.random() * 2021428)
 }
 
-const streamIp = 'https://cdxapp-1257733245.file.myqcloud.com/opentest/M800000puzgO0yRX1o.mp3'
-
-const client = AgoraRTC.createClient({
-    mode: "rtc",
-    codec: "vp8"
-});
-
-client.on("user-published", async (user, mediaType) => {
-    console.log('触发了订阅')
-    await client.subscribe(user, mediaType);
-    if (mediaType === 'audio') {
-        user.audioTrack.play();
-    }
-});
 
 
 /*queueMicrotask(() => {
@@ -165,7 +152,7 @@ export default class HomePage extends Vue {
 
     openLyric() {
         this.size = 100
-        this. drawer = true
+        this.drawer = true
     }
 
 //收藏
@@ -210,7 +197,7 @@ export default class HomePage extends Vue {
 
     playMusic() {
         nextTick(() => {
-            this.$refs.audio.addEventListener("error", function () {
+            this.$refs.audio.addEventListener("error", () => {
                 if (this.timer1) clearTimeout(this.timer1)
                 this.timer1 = setTimeout(() => {
                     ElMessage.error('暂无音频已自动切换下一首')
@@ -219,7 +206,6 @@ export default class HomePage extends Vue {
             }, true);
         })
         console.log(1111111)
-        console.log(this.audio)
         if (this.$refs.audio.paused) {
             this.$refs.audio.play()
             this.is = true
@@ -279,7 +265,6 @@ export default class HomePage extends Vue {
 
     @Watch('songDetail', {deep: true, immediate: true})
     songDetailWatch() {
-        this.songDetail.id
         this.isLike = this.store.state.singer.likeMusic.includes(this.songDetail.id)
     }
 
@@ -293,17 +278,18 @@ export default class HomePage extends Vue {
 
     async joinClick() {
         // Join an RTC channel.
-        await client.join(options.appId, options.channel, options.token, options.uid);
+        await mucisRoomStore.client.join(options.appId, options.channel, options.token, options.uid);
     }
 
     async publish() {
         const config = {
-            source: streamIp
+            source: `https://cdxapp-1257733245.file.myqcloud.com/opentest/M800000puzgO0yRX1o.mp3`
+            // source: `music/song/media/outer/url?id=1344897943.mp3`
         }
         const track = await AgoraRTC.createBufferSourceAudioTrack(config);
         track.play();
         track.startProcessAudioBuffer();
-        await client.publish(track);
+        await mucisRoomStore.client.publish(track);
     }
 
     async leaveClick() {
@@ -311,7 +297,7 @@ export default class HomePage extends Vue {
         rtc.localAudioTrack.close();
 
         // Leave the channel.
-        await client.leave();
+        await mucisRoomStore.leave();
     }
 }
 
