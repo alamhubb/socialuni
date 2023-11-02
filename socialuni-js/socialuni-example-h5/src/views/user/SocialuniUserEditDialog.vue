@@ -58,8 +58,8 @@ import UUIDUtil from "@socialuni/socialuni-util/src/util/UUIDUtil";
 import ImgUtil from "@socialuni/socialuni-util/src/util/ImgUtil";
 import TencentCosAPI from "@socialuni/socialuni-app-api/src/api/TencentCosAPI";
 import ImgAddQO from "@socialuni/socialuni-api-base/src/model/user/ImgAddQO";
-import type DomFile from "@socialuni/socialuni-app-sdk/src/model/DomFile";
-import NativeUtil from "../../../../packages/socialuni-native/socialuni-native-h5/src/util/NativeUtil";
+import type DomFile from "@socialuni/socialuni-native-util/src/model/DomFile";
+import NativeUtil from "@socialuni/socialuni-native-h5/src/util/NativeUtil";
 
 @Component({
     components: {SDialog, SButton}
