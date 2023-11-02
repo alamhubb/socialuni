@@ -42,8 +42,8 @@
 
 <script lang="ts">
 import {Emit, Component, Vue, Watch} from 'vue-facing-decorator'
-import SButton from "@socialuni/socialuni-ui-h5/src/components/SButton.vue";
-import SDialog from "@socialuni/socialuni-ui-h5/src/components/SDialog.vue";
+import SButton from "@socialuni/socialuni-ui-h5/src/components/SComponents/SButton.vue";
+import SDialog from "@socialuni/socialuni-ui-h5/src/components/SComponents/SDialog.vue";
 import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
 import type SocialuniMineUserRO from "@socialuni/socialuni-api-base/src/model/user/SocialuniMineUserRO";
 import type EnumStrVO from "@socialuni/socialuni-constant/constant/EnumStrVO";

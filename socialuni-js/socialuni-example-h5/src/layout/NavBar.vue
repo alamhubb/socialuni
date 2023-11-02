@@ -79,7 +79,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-facing-decorator'
-import SDialog from "@socialuni/socialuni-ui-h5/src/components/SDialog.vue";
+import SDialog from "@socialuni/socialuni-ui-h5/src/components/SComponents/SDialog.vue";
 import SocialuniUserEditDialog from "@/views/user/SocialuniUserEditDialog.vue";
 import SocialuniUserEventConst from "@socialuni/socialuni-user-sdk/src/constant/SocialuniUserEventConst";
 import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
