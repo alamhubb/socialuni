@@ -52,7 +52,7 @@
 </template>
 
 <script lang="ts">
-import {Components, Vue} from 'vue-facing-decorator'
+import {Component, Vue} from 'vue-facing-decorator'
 import DateUtil from "@socialuni/socialuni-util/src/util/DateUtil";
 
 @Component({components: {QNavbar}})

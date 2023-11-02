@@ -18,6 +18,7 @@
     "@socialuni/socialuni-app-view-h5": "../packages/socialuni-app-view-h5",
     "@socialuni/socialuni-im-sdk": "../packages/socialuni-im-sdk",
     "@socialuni/socialuni-native-h5": "../packages/socialuni-native-h5",
+    "@socialuni/socialuni-ui-h5": "../packages/socialuni-ui-h5",
     "@socialuni/socialuni-user-view-h5": "../packages/socialuni-user/socialuni-user-view-h5",
     "@socialuni/socialuni-im-view-h5": "../packages/socialuni-im/socialuni-im-view-h5",
     "@socialuni/socialuni-user-api": "../packages/socialuni-user-api",

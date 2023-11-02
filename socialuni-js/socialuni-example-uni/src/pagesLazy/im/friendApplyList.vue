@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import {Components, Vue} from 'vue-facing-decorator'
+import {Component, Vue} from 'vue-facing-decorator'
 import FriendApplyListView from "@socialuni/socialuni-im-view-uni/src/views/chat/FriendApplyListView.vue";
 
 @Component({components: {FriendApplyListView}})

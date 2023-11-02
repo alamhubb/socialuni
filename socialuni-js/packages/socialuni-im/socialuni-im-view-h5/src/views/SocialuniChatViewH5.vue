@@ -108,7 +108,7 @@
 </template>
 
 <script lang="ts">
-import {Components, Vue} from 'vue-facing-decorator'
+import {Component, Vue} from 'vue-facing-decorator'
 import SScrollbar from "@socialuni/socialuni-ui-h5/src/components/SScrollbar.vue";
 import SocialuniChatViewServiceH5 from "@socialuni/socialuni-im-h5-sdk/src/logic/SocialuniChatViewServiceH5";
 

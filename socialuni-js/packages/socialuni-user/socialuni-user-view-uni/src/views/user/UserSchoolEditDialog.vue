@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import {Components, Vue} from 'vue-facing-decorator'
+import {Component, Vue} from 'vue-facing-decorator'
 import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 import QPopup from "@socialuni/socialuni-ui-uni/src/components/QPopup/QPopup.vue";
 import QSearch from "@socialuni/socialuni-ui-uni/src/components/QSearch/QSearch.vue";

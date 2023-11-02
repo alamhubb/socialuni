@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import {Components, Vue} from 'vue-facing-decorator'
+import {Component, Vue} from 'vue-facing-decorator'
 import SkipType from "@socialuni/socialuni-constant/constant/SkipType";
 import {socialAppModule} from "@socialuni/socialuni-app-sdk/src/store/SocialAppModule";
 import {socialuniConfigModule} from "@socialuni/socialuni-app-sdk/src/store/SocialuniConfigModule";

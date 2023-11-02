@@ -169,7 +169,7 @@
 </template>
 
 <script lang="ts">
-import {Components, Vue} from "vue-facing-decorator";
+import {Component, Vue} from "vue-facing-decorator";
 import {
   socialuniMsgViewService
 } from "@socialuni/socialuni-im-sdk/src/logic/SocialuniMsgViewService";

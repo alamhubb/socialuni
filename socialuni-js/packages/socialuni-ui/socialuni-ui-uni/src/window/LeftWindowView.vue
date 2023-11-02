@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import {Components, Vue} from 'vue-facing-decorator'
+import {Component, Vue} from 'vue-facing-decorator'
 import PageUtil from '@socialuni/socialuni-util/src/util/PageUtil'
 import ImPageUtil from '@socialuni/socialuni-im-sdk/src/util/ImPageUtil'
 import RouterUtil from '@socialuni/socialuni-util/src/util/RouterUtil'

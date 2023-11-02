@@ -35,7 +35,7 @@
 </template>
 
 <script lang="ts">
-import {Components, Vue} from 'vue-facing-decorator'
+import {Component, Vue} from 'vue-facing-decorator'
 import TagVO from '@socialuni/socialuni-api-base/src/model/community/tag/TagVO'
 import ErrorConst from '@socialuni/socialuni-constant/constant/ErrorConst'
 import ResultRO from '@socialuni/socialuni-api-base/src/model/social/ResultRO'

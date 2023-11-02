@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import {Components, Vue} from 'vue-facing-decorator'
+import {Component, Vue} from 'vue-facing-decorator'
 import QInput from "@socialuni/socialuni-ui-uni/src/components/QInput/QInput.vue";
 import QPopup from "@socialuni/socialuni-ui-uni/src/components/QPopup/QPopup.vue";
 import SSwitch from "@socialuni/socialuni-ui-uni/src/components/SSwitch.vue";

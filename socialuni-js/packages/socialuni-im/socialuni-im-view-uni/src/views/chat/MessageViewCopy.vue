@@ -296,7 +296,7 @@
 </template>
 
 <script lang="ts">
-import {Components, Vue} from "vue-facing-decorator";
+import {Component, Vue} from "vue-facing-decorator";
 import LoadMoreType from "@socialuni/socialuni-constant/constant/LoadMoreType";
 import ReportContentType from "@socialuni/socialuni-constant/constant/ReportContentType";
 import Constants from "@socialuni/socialuni-constant/constant/Constant";

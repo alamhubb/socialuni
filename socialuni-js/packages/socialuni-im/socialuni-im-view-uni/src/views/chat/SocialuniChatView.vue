@@ -107,7 +107,7 @@
 </template>
 
 <script lang="ts">
-import {Components, Vue} from 'vue-facing-decorator'
+import {Component, Vue} from 'vue-facing-decorator'
 import SocialUserContentRO from "@socialuni/socialuni-api-base/src/model/social/SocialUserContentRO"
 import QNavbar from "@socialuni/socialuni-ui-uni/src/components/QNavbar/QNavbar.vue"
 import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue"

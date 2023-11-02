@@ -50,7 +50,7 @@
 </template>
 
 <script lang="ts">
-import {Components, Vue} from 'vue-facing-decorator'
+import {Component, Vue} from 'vue-facing-decorator'
 import QPopup from "@socialuni/socialuni-ui-uni/src/components/QPopup/QPopup.vue";
 import ReportType from "@socialuni/socialuni-constant/constant/ReportType";
 import ReportContentType from "@socialuni/socialuni-constant/constant/ReportContentType";
