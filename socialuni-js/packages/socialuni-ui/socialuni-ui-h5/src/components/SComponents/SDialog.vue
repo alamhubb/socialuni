@@ -109,7 +109,7 @@ export default class SDialog extends Vue {
 
 
   @Prop({
-    type: Function | Object | Array,
+    type: Function,
     default: null
   }) confirm: any
 
