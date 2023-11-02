@@ -63,7 +63,7 @@ async function installSocialuniPluginIns(app: App) {
     const socialuniIm = PlatformModuleLoadUtil.getFirstModule(imModules)
     console.log(socialuniIm)
     if (socialuniIm && socialuniIm.default) {
-        // app.use(socialuniIm.default)
+        app.use(socialuniIm.default)
     }
 }
 
