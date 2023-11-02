@@ -15,7 +15,7 @@ export default defineConfig({
         socialuniPlatformAutoImportPlugin()
     ],
     server: {
-        port: 8085
+        port: 8086
     },
     resolve: {
         alias: {
