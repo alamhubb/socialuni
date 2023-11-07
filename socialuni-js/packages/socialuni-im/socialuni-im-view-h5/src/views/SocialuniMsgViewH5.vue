@@ -69,8 +69,7 @@
 
         <div class="flex-col">
             <div class="flex-row">
-                123
-                <s-icon icon="emoticon-outline"></s-icon>
+                <s-icon icon="mdi-emoticon-outline" class="font-14"></s-icon>
             </div>
             <div class="flex-row flex-none">
                 <el-input
