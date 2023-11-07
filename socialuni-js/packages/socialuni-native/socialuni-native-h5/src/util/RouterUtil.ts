@@ -47,7 +47,7 @@ export default class RouterUtil {
     }
 
     static goBack(): void {
-        uni.navigateBack({delta: 1})
+        socialuniPluginsModule.router.back()
     }
 
     static getCurrentPageURI(): string {

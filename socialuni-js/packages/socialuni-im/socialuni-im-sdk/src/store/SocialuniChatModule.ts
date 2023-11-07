@@ -82,7 +82,7 @@ class SocialuniChatModule {
     }
 
 
-    setChatId(chatId: string){
+    setChatId(chatId: string) {
         console.log('chatid')
         console.log(chatId)
         this.chatId = chatId
@@ -151,7 +151,6 @@ class SocialuniChatModule {
         CommonUtil.delayTime(100).then(() => {
             console.log('滚动到底部')
             this.scrollTop = this.messages.length * 500
-
 
 
             // this.scrollTop = -1000
@@ -238,7 +237,7 @@ class SocialuniChatModule {
         this.setChat(chat)*/
 
         ImPageUtil.toMessagePageByChatId(receiveId)
-        // return receiveId
+        return receiveId
     }
 
     async queryMineImUserInfo() {

@@ -8,7 +8,10 @@ interface SocialuniChatViewServiceRefs {
 
 export default class SocialuniChatViewServiceH5 extends SocialuniChatViewService {
     toMessagePage(chat: SocialuniChatRO) {
+        console.log(chat)
         const chatId = super.toMessagePage(chat)
+        console.log(78978)
+        console.log(chatId)
         socialuniMsgModule.init({chatId: chatId})
         return chatId
     }
