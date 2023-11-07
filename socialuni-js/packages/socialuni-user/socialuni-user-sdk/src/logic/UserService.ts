@@ -3,6 +3,7 @@ import SocialuniMineUserRO from "@socialuni/socialuni-api-base/src/model/user/So
 import WebsocketUtil from "@socialuni/socialuni-api-base/src/websocket/WebsocketUtil";
 import {socialuniUserModule} from "../store/SocialuniUserModule";
 import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import SocialuniAppService from "@socialuni/socialuni-app-sdk/src/service/SocialuniAppService";
 
 export default class UserService {
     static async getAppLunchData() {
@@ -10,7 +11,7 @@ export default class UserService {
         * */
         // const imRes = await SocialuniImUserAPI.getImUserTokenAPI()
         // socialChatModule.setImToken(imRes.data)
-        WebsocketUtil.websocketConnect(false)
+        SocialuniAppService.getAppLunchData()
         // socialChatModule.initSocialuniChatModule()
         /*socialNotifyModule.queryNotifiesAction()
         */
