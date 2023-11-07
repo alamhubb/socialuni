@@ -67,15 +67,22 @@
             </div>
         </div>
 
-        <div class="flex-row flex-none">
-            <el-input
+        <div class="flex-col">
+            <div class="flex-row">
+
+            </div>
+            <div class="flex-row flex-none">
+                <el-input
+                    class="flex-1"
                     v-model="viewService.msgContent"
-                    :rows="1"
-                    :autosize="{minRows:1,maxRows:5}"
+                    :rows="5"
                     type="textarea"
                     placeholder="Please input"
-            />
-            <el-button @click="viewService.sendMsgClick()">发送</el-button>
+                />
+                <div class="flex-none row-col-end">
+                    <el-button @click="viewService.sendMsgClick()">发送</el-button>
+                </div>
+            </div>
         </div>
     </div>
 </template>
