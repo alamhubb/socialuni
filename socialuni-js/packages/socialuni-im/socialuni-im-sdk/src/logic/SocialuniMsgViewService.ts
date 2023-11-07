@@ -70,7 +70,6 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
         onUnmounted(() => {
             socialuniChatModule.scrollTop = 0
         })
-        //TODO 同一会话时，这里要改成onRead，不然需要刷新页面才会触发已读的标志。
         console.log('chufale onload')
         socialuniMsgModule.init(params)
     }

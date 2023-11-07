@@ -170,7 +170,7 @@
 
 <script lang="ts">
 import {Component, Vue} from "vue-facing-decorator";
-import {
+import SocialuniMsgViewService, {
   socialuniMsgViewService
 } from "@socialuni/socialuni-im-sdk/src/logic/SocialuniMsgViewService";
 import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue";
@@ -193,7 +193,7 @@ export default class SocialuniMessageView extends Vue {
     deleteReasonDialog: any;
   }
 
-  viewService = socialuniMsgViewService
+    viewService = new SocialuniMsgViewService()
 
   created() {
     //TODO 同一会话时，这里要改成onRead，不然需要刷新页面才会触发已读的标志。

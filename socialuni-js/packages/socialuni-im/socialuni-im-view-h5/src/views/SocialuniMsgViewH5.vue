@@ -84,6 +84,8 @@
 import {Component, Vue} from "vue-facing-decorator";
 import SScrollbar from "@socialuni/socialuni-ui-h5/src/components/SComponents/SScrollbar.vue";
 import SocialuniMsgViewService from "@socialuni/socialuni-im-sdk/src/logic/SocialuniMsgViewService";
+import MessageViewParams from "@socialuni/socialuni-im-view-uni/src/views/chat/MessageViewParams";
+import {getCurrentInstance} from "vue";
 
 @Component({
     components: {SScrollbar}
@@ -92,5 +94,8 @@ export default class SocialuniMsgView extends Vue {
 
     viewService = new SocialuniMsgViewService()
 
+    created() {
+        this.viewService.initService(getCurrentInstance(), this.$route.query)
+    }
 }
 </script>
