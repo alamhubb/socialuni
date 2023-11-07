@@ -5,7 +5,7 @@ import {socialuniUserModule} from "../store/SocialuniUserModule";
 import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
 
 export default class UserService {
-    static async getAppLunchDataByHasUser() {
+    static async getAppLunchData() {
         /* && !socialChatModule.imToken   // 修复imToken过期后，需要重新登录的才能聊天的bug。 https://gitee.com/socialuni/socialuni/issues/I6GGP7
         * */
         // const imRes = await SocialuniImUserAPI.getImUserTokenAPI()
@@ -26,8 +26,8 @@ export default class UserService {
         socialuniUserModule.setUserAndToken(loginRO)
         //登录之后重连websocket
         // WebsocketUtil.websocketClose()
-        UserService.getAppLunchDataByHasUser()
-        WebsocketUtil.websocketConnect(false)
+        // UserService.getAppLunchDataByHasUser()
+        UserService.getAppLunchData()
         // socialChatModule.getChatsAction()
         // appModule.getImgPathAction()
         return loginRO.user
@@ -43,7 +43,7 @@ export default class UserService {
     //清空用户信息的组合操作
     static clearUserInfo() {
         socialuniUserModule.removeUserAndToken()
-        UserService.getAppLunchDataByHasUser()
+        UserService.getAppLunchData()
         // socialChatModule.removeImToken()
         // socialNotifyModule.clearNotifies()
         // WebsocketUtil.websocketClose()

@@ -9,6 +9,7 @@ import SocialuniAppAPI from "@socialuni/socialuni-app-api/src/api/SocialuniAppAP
 import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
 import {InternalAxiosRequestConfig} from "axios/index";
 import {socialAppModule} from "./store/SocialAppModule";
+import SocialuniAppService from "./service/SocialuniAppService";
 
 class SocialuniAppPlugin implements SocialuniPlugin {
     onLaunch() {
@@ -21,6 +22,7 @@ class SocialuniAppPlugin implements SocialuniPlugin {
             // await socialuniConfigModule.getAppConfigAction()
             // socialAppModule.getHomeSwipersAction()
             // socialuniConfigModule.getReportTypesAction()
+            SocialuniAppService.getAppLunchData()
         } catch (e) {
 
         }
