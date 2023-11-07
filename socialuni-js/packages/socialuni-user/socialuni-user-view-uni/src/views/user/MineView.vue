@@ -200,7 +200,7 @@
 </template>
 
 <script lang="ts">
-import {Options, Prop, Vue} from 'vue-property-decorator'
+import {Component, Prop, Vue} from 'vue-facing-decorator'
 import LoginView from "../login/LoginView.vue";
 import SocialuniFollowType from '@socialuni/socialuni-constant/constant/user/SocialuniFollowType';
 import UserContactInfoEditDialog from "./UserContactInfoEditDialog.vue";
@@ -228,7 +228,7 @@ import SkipUrlConst from "@socialuni/socialuni-app-sdk/src/constant/SkipUrlConst
 import {getCurrentInstance} from "vue";
 import {onLoad} from "@dcloudio/uni-app";
 
-@Options({
+@Component({
     components: {
         UserContactInfoEditDialog,
         LoginView,
@@ -268,7 +268,7 @@ export default class MineView extends Vue {
 
     created() {
         onLoad((params) => {
-            SocialuniAppUtil.UniUtil.showShareMenu()
+            SocialuniAppUtil.NativeUtil.showShareMenu()
         })
         /*onShow(() => {
             this.showMsgInput = true
@@ -350,7 +350,7 @@ export default class MineView extends Vue {
 
     moreAction() {
         const menuList: string [] = ['查看头像', '上传头像']
-        SocialuniAppUtil.UniUtil.actionSheet(menuList).then((index: number) => {
+        SocialuniAppUtil.NativeUtil.actionSheet(menuList).then((index: number) => {
             if (index === 0) {
                 this.seeAvatarDetail()
             } else if (index === 1) {
@@ -369,8 +369,8 @@ export default class MineView extends Vue {
             CosService.getCosAuthRO().then(res => {
                 cosAuthRO = res
             })
-            const imgFiles: DomFile[] = await SocialuniAppUtil.UniUtil.chooseImage(1)
-            SocialuniAppUtil.UniUtil.showLoading('上传中')
+            const imgFiles: DomFile[] = await SocialuniAppUtil.NativeUtil.chooseImage(1)
+            SocialuniAppUtil.NativeUtil.showLoading('上传中')
             const imgFile: DomFile = imgFiles[0]
             imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src
             const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO), SocialuniMineUserAPI.addUserAvatarImgAPI(new ImgAddQO(imgFile))])
@@ -378,7 +378,7 @@ export default class MineView extends Vue {
         } catch (e) {
             console.error(e)
         } finally {
-            SocialuniAppUtil.UniUtil.hideLoading()
+            SocialuniAppUtil.NativeUtil.hideLoading()
         }
     }
 

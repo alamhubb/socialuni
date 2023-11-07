@@ -18,4 +18,23 @@ public class SocialuniImgBaseDo extends SocialuniUnionContentBaseDO {
     private Double quality;
     //图片大小
     private Integer size;
+
+    public SocialuniImgBaseDo() {
+    }
+
+    public SocialuniImgBaseDo(Integer userId) {
+        super(userId);
+    }
+
+    public SocialuniImgBaseDo(Integer userId, String contentType, String content) {
+        super(userId, contentType, content);
+    }
+
+    public SocialuniImgBaseDo(Integer userId, Integer unionId, String contentType, String content) {
+        super(userId, unionId, contentType, content);
+    }
+
+    public SocialuniImgBaseDo(Integer userId, Integer unionId, String contentType) {
+        super(userId, unionId, contentType);
+    }
 }

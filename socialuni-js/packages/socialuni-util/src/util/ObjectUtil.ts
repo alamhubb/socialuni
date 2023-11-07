@@ -1,3 +1,5 @@
+import JsonUtil from "./JsonUtil";
+
 export default class ObjectUtil {
     // 改成any类型
     static deepClone<T>(object: T): T {
@@ -5,6 +7,18 @@ export default class ObjectUtil {
             return JSON.parse(JSON.stringify(object))
         }
         return null
+    }
+
+    static toJson(object: any): string {
+        return JsonUtil.toJson(object)
+    }
+
+    static toParse(objJson: string): any {
+        return JsonUtil.toParse(objJson)
+    }
+
+    static log(object: any) {
+        console.log(JSON.stringify(object))
     }
 
     static toFormData(object: Record<string, any> | any): FormData {

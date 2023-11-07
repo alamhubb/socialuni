@@ -24,13 +24,13 @@
 </template>
 
 <script lang="ts">
-import {Options, Emit, Model, Prop, Vue, Watch} from 'vue-property-decorator'
+import {Component, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator'
 import NodesRef = UniApp.NodesRef
 import SelectorQuery = UniApp.SelectorQuery
 import CommonUtil from "@socialuni/socialuni-util/src/util/CommonUtil";
 import UUIDUtil from "@socialuni/socialuni-util/src/util/UUIDUtil";
 
-@Options({})
+@Component({})
 export default class QTabs extends Vue {
   //line、bar、card
   @Prop({
@@ -112,7 +112,7 @@ export default class QTabs extends Vue {
     }
   }
 
-  @Emit()
+  @Emit('update:modelValue')
   input(index: number) {
     return index
   }

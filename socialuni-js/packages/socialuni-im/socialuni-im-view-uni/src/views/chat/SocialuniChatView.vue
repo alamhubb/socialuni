@@ -107,7 +107,7 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue} from 'vue-property-decorator'
+import {Component, Vue} from 'vue-facing-decorator'
 import SocialUserContentRO from "@socialuni/socialuni-api-base/src/model/social/SocialUserContentRO"
 import QNavbar from "@socialuni/socialuni-ui-uni/src/components/QNavbar/QNavbar.vue"
 import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue"
@@ -118,7 +118,7 @@ import {
 } from "@socialuni/socialuni-im-sdk/src/logic/SocialuniChatViewService";
 import {getCurrentInstance} from "vue";
 
-@Options({
+@Component({
   components: {QSearch, QInput, QIcon, QNavbar}
 })
 export default class SocialuniChatView extends Vue {

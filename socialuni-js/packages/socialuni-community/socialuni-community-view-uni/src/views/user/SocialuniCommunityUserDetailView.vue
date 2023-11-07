@@ -90,7 +90,7 @@
 
 <script lang="ts">
 import QPopup from "@socialuni/socialuni-ui-uni/src/components/QPopup/QPopup.vue";
-import {Inject, Options, Vue} from 'vue-property-decorator'
+import {Inject, Component, Vue} from 'vue-facing-decorator'
 import {socialuniCommunityUserDetailViewService}
   from "@socialuni/socialuni-community-sdk/src/logic/SocialuniCommunityUserDetailViewService";
 import {getCurrentInstance} from "vue";
@@ -103,7 +103,7 @@ import SocialuniFollowTag from "../../components/SocialuniFollow/SocialuniFollow
 import TalkItem from "../../components/talkItem/TalkItem.vue";
 import TalkOperate from "../talk/talkOperate.vue";
 import MsgInput from "../../components/MsgInput.vue";
-@Options({
+@Component({
   components: {
     MsgInput,
     TalkOperate,

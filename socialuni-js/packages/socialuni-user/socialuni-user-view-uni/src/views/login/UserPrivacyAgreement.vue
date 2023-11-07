@@ -19,12 +19,12 @@
 </template>
 
 <script lang="ts">
-import {Options, Prop, Vue} from 'vue-property-decorator'
+import {Component, Prop, Vue} from 'vue-facing-decorator'
 import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
 import SkipUrlConst from "@socialuni/socialuni-app-sdk/src/constant/SkipUrlConst";
 import SocialuniUserPrivacyAgreeService from "@socialuni/socialuni-user-sdk/src/logic/SocialuniUserPrivacyAgreeService";
 
-@Options({})
+@Component({})
 export default class UserPrivacyAgreement extends Vue {
     @Prop() viewService:SocialuniUserPrivacyAgreeService
 

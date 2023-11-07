@@ -66,7 +66,7 @@
 </template>
 
 <script lang="ts">
-import {Options, Emit, Model, Prop, Vue, Watch} from 'vue-property-decorator'
+import {Component, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator'
 import PhoneNumFormData from "./PhoneNumFormData";
 import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 import CommonUtil from "@socialuni/socialuni-util/src/util/CommonUtil";
@@ -74,7 +74,7 @@ import PhoneAPI from "@socialuni/socialuni-user-api/src/api/PhoneAPI";
 import {socialuniConfigModule} from "@socialuni/socialuni-app-sdk/src/store/SocialuniConfigModule";
 import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
 
-@Options({
+@Component({
   components: {QIcon}
 })
 export default class PhoneLoginForm extends Vue {
@@ -85,7 +85,7 @@ export default class PhoneLoginForm extends Vue {
     return socialuniConfigModule.appMoreConfig.authCodeInterval || 30
   }
 
-  @Emit()
+  @Emit('update:modelValue')
   input() {
     return this.value
   }

@@ -1,4 +1,4 @@
-import DomFile from "@socialuni/socialuni-app-sdk/src/model/DomFile";
+import DomFile from "../model/DomFile";
 
 export interface SocialuniNativeUtilInterface {
     textCopy(copyText: string, hint?: string )

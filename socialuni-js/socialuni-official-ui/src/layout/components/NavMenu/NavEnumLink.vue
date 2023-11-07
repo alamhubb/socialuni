@@ -5,9 +5,9 @@
 </template>
 
 <script lang="ts">
-import { Options, Prop, Vue } from 'vue-property-decorator'
+import { Component, Prop, Vue } from 'vue-facing-decorator'
 
-@Options({})
+@Component({})
 export default class NavEnumLink extends Vue {
   @Prop() to: string
 

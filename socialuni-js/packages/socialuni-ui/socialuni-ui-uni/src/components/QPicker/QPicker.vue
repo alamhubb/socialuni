@@ -38,7 +38,7 @@
 </template>
 <script lang="ts">
 import CommonUtil from '@socialuni/socialuni-util/src/util/CommonUtil'
-import {Emit, Model, Options, Prop, Vue, Watch} from 'vue-property-decorator'
+import {Emit, Model, Component, Prop, Vue, Watch} from 'vue-facing-decorator'
 import QRowItem from '../QRowItem/QRowItem.vue'
 import SelectorQuery = UniApp.SelectorQuery;
 import NodesRef = UniApp.NodesRef;
@@ -52,7 +52,7 @@ import UUIDUtil from "@socialuni/socialuni-util/src/util/UUIDUtil";
 最后取消选择，还显示当前选择的
 
 * */
-@Options({
+@Component({
   components: {
     QRowItem
   }

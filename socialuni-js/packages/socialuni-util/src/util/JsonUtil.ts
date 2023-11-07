@@ -1,9 +1,9 @@
 export default class JsonUtil {
     static toJson(object: any): string {
-        if (object) {
+        if (object || (object === 0) || (object === false)) {
             return JSON.stringify(object)
         }
-        return ""
+        return ''
     }
 
     static toParse(objJson: string): any {

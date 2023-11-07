@@ -1,6 +1,6 @@
 <template>
   <view class="w100p">
-    <view class="w100p position-fixed nav-index bg-navbar" :class="customClass">
+    <view class="w100p position-fixed nav-index" :class="navCustomClass">
       <!--            此处为状态栏-->
       <view class="w100p" :style="{ height: statusBarHeight + 'px' }"></view>
       <!--            此处为导航栏-->
@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts">
-import {Options, Prop, Vue} from 'vue-property-decorator'
+import {Component, Prop, Vue} from 'vue-facing-decorator'
 import GetMenuButtonBoundingClientRectRes = UniApp.GetMenuButtonBoundingClientRectRes;
 import QIcon from "../QIcon/QIcon.vue";
 import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
@@ -38,11 +38,14 @@ const menuButtonInfo: GetMenuButtonBoundingClientRectRes = uni.getMenuButtonBoun
 /*
 显示出来已经选了的城市，给她画上钩
 * */
-@Options({
+@Component({
   components: {QIcon}
 })
 export default class QNavBar extends Vue {
-  @Prop() customClass: string
+  @Prop({
+    type: String,
+    default: ''
+  }) customClass: string
   @Prop({
     type: Boolean,
     default: false
@@ -61,6 +64,13 @@ export default class QNavBar extends Vue {
     type: String,
     default: ''
   }) title: string
+
+  get navCustomClass() {
+    if (this.customClass && this.customClass.includes('bg-')) {
+      return this.customClass
+    }
+    return 'bg-navbar' + ' ' + this.customClass
+  }
 
   get statusBarHeight() {
     return socialuniSystemModule.statusBarHeight

@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import {Options, Prop, Vue, Inject} from 'vue-property-decorator'
+import {Component, Prop, Vue, Inject} from 'vue-facing-decorator'
 import QButton from "@socialuni/socialuni-ui-uni/src/components/QButton/QButton.vue";
 import FollowStatus from "@socialuni/socialuni-constant/constant/FollowStatus";
 import SocialUserContentRO from "@socialuni/socialuni-api-base/src/model/social/SocialUserContentRO";
@@ -20,7 +20,7 @@ import {inject} from "vue";
 import SocialuniUserProvideKeys from "@socialuni/socialuni-user-sdk/src/constant/SocialuniUserProvideKeys";
 import CenterUserDetailRO from "@socialuni/socialuni-api-base/src/model/social/CenterUserDetailRO";
 
-@Options({
+@Component({
     components: {
         QButton
     }

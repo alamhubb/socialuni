@@ -50,7 +50,7 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue} from 'vue-property-decorator'
+import {Component, Vue} from 'vue-facing-decorator'
 import QPopup from "@socialuni/socialuni-ui-uni/src/components/QPopup/QPopup.vue";
 import ReportType from "@socialuni/socialuni-constant/constant/ReportType";
 import ReportContentType from "@socialuni/socialuni-constant/constant/ReportContentType";
@@ -66,7 +66,7 @@ import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/Socialun
 
 // todo 后台可控制是否显示轮播图
 
-@Options({
+@Component({
   components: {
     QPopup
   }
@@ -159,7 +159,7 @@ export default class TalkOperate extends Vue {
   }
 
   copyText() {
-      SocialuniAppUtil.UniUtil.textCopy(this.comment.content)
+      SocialuniAppUtil.NativeUtil.textCopy(this.comment.content)
     this.closeActionAndInitData()
   }
 

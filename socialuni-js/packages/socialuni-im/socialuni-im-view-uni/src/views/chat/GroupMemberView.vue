@@ -52,10 +52,10 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue} from 'vue-property-decorator'
+import {Component, Vue} from 'vue-facing-decorator'
 import DateUtil from "@socialuni/socialuni-util/src/util/DateUtil";
 
-@Options({components: {QNavbar}})
+@Component({components: {QNavbar}})
 export default class GroupMemberView extends Vue {
   groupMemberList: GroupMemberItem[] = []
   moreGroupMember = true;

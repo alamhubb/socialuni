@@ -1,23 +1,39 @@
 <template>
   <y-table-column
     :label="label||prop"
-    v-bind="$attrs"
   >
     <template #default="{row}">
+      <el-tooltip
+        v-if="tipProp && row[tipProp]"
+        effect="dark"
+        :content="row[tipProp] || (propFun ? propFun(row[prop], row) : row[prop])"
+        placement="top-start">
+        <el-input
+          v-model="row[prop]"
+          size="small"
+          :clearable="clearable"
+          :placeholder="placeholder"
+          @click.native.stop
+          v-on="$listeners"
+          v-bind="$attrs"
+        />
+      </el-tooltip>
       <el-input
+        v-else
         v-model="row[prop]"
-        :readonly="readonly"
         size="small"
+        :clearable="clearable"
         :placeholder="placeholder"
         @click.native.stop
         v-on="$listeners"
+        v-bind="$attrs"
       />
     </template>
   </y-table-column>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
+import { Component, Prop, Vue } from 'vue-facing-decorator'
 import YSelect from '@/components/YComponent/YSelect/YSelect.vue'
 
 /**
@@ -36,6 +52,6 @@ export default class YTableInput extends Vue {
   @Prop() readonly label: string
   @Prop() readonly labelClass: string
   @Prop({ default: '请输入' }) readonly placeholder: string
-  @Prop() readonly readonly: boolean
+  @Prop({ default: true, type: Boolean }) readonly clearable: boolean
 }
 </script>

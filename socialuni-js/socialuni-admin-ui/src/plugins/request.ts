@@ -106,7 +106,7 @@ request.interceptors.response.use(
           } else {
             MsgUtil.unLoginMessage()
           }
-          PageUtil.toHome()
+          PageUtil.toLogin()
           break
         case ErrorCode.custom:
           break

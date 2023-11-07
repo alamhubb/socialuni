@@ -14,7 +14,7 @@
   </picker>
 </template>
 <script lang="ts">
-import {Emit, Model, Options, Prop, Vue} from 'vue-property-decorator'
+import {Emit, Model, Component, Prop, Vue} from 'vue-facing-decorator'
 import QIcon from "../QIcon/QIcon.vue";
 /*
 显示出来已经选了的城市，给她画上钩
@@ -23,7 +23,7 @@ import QIcon from "../QIcon/QIcon.vue";
 /*
 显示出来已经选了的城市，给她画上钩
 * */
-@Options({
+@Component({
   components: {QIcon}
 })
 export default class QSelect extends Vue {
@@ -50,7 +50,7 @@ export default class QSelect extends Vue {
     this.change({detail: {value: null}})
   }
 
-  @Emit()
+  @Emit('update:modelValue')
   change({detail}: { detail: { value: number } }) {
     const index = detail.value
     if (index === null) {

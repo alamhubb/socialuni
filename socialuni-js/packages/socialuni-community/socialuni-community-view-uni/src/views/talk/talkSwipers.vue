@@ -1,5 +1,5 @@
 <template>
-    <view class="px-mn pb-sm" v-if="showSwipers">
+    <view v-if="showSwipers">
         <!--  <view class="bg-primary px-smm pt-xs">-->
         <swiper class="w100p" :indicator-dots="true" :autoplay="true" circular :interval="2500"
                 :style="{'height':swiperHeight+'px'}">
@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue} from 'vue-property-decorator'
+import {Component, Vue} from 'vue-facing-decorator'
 import SkipType from "@socialuni/socialuni-constant/constant/SkipType";
 import {socialAppModule} from "@socialuni/socialuni-app-sdk/src/store/SocialAppModule";
 import {socialuniConfigModule} from "@socialuni/socialuni-app-sdk/src/store/SocialuniConfigModule";
@@ -26,7 +26,7 @@ import SocialuniAppPageUtil from "@socialuni/socialuni-app-sdk/src/util/Socialun
 
 
 // todo 后台可控制是否显示轮播图
-@Options({})
+@Component({})
 export default class TalkSwipers extends Vue {
     get homeSwipers() {
         return socialAppModule.homeSwipers

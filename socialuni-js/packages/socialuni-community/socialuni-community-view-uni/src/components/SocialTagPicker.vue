@@ -48,7 +48,7 @@
 </template>
 
 <script lang="ts">
-import {Options, Emit, Vue} from 'vue-property-decorator'
+import {Component, Emit, Vue} from 'vue-facing-decorator'
 import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 import QInput from "@socialuni/socialuni-ui-uni/src/components/QInput/QInput.vue";
 import QSidebar from "@socialuni/socialuni-ui-uni/src/components/QSidebar/QSidebar.vue";
@@ -58,7 +58,7 @@ import {socialuniTagModule} from "@socialuni/socialuni-community-sdk/src/store/S
 import TagTypeVO from "@socialuni/socialuni-api-base/src/model/community/tag/TagTypeVO";
 
 
-@Options({
+@Component({
   components: {
     QIcon,
     QInput,
@@ -98,7 +98,7 @@ export default class SocialTagPicker extends Vue {
     this.$refs.dialog.close()
   }
 
-  @Emit()
+  @Emit('update:modelValue')
   change(tag: SocialCircleRO) {
     this.close()
     return tag

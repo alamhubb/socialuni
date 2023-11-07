@@ -4,7 +4,7 @@ import com.socialuni.social.common.sdk.constant.SocialuniConst;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniDistrictDO;
 import com.socialuni.social.community.sdk.utils.DistrictStoreUtils;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
-import com.socialuni.social.sdk.utils.SocialuniRequestUtil;
+import com.socialuni.social.common.sdk.utils.SocialuniRequestUtil;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserExpandDo;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserExtendFriendLogDo;

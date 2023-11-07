@@ -16,13 +16,13 @@
 </template>
 
 <script lang="ts">
-import {Options, Prop, Vue} from 'vue-property-decorator'
+import {Component, Prop, Vue} from 'vue-facing-decorator'
 import CenterUserDetailRO from "@socialuni/socialuni-api-base/src/model/social/CenterUserDetailRO";
 import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 import STag from "@socialuni/socialuni-ui-uni/src/components/STag.vue";
 import UserUtil from "@socialuni/socialuni-user-sdk/src/util/UserUtil";
 
-@Options({
+@Component({
   components: {
     QIcon, STag
   }

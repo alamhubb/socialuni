@@ -7,10 +7,10 @@
 </template>
 
 <script lang="ts">
-import {Options, Emit, Model, Prop, Vue} from 'vue-property-decorator'
+import {Component, Emit, Model, Prop, Vue} from 'vue-facing-decorator'
 import QIcon from "../QIcon/QIcon.vue";
 
-@Options({
+@Component({
   components: {QIcon}
 })
 export default class QInput extends Vue {

@@ -78,9 +78,6 @@ const Socialuni = {
         console.log(socialuniSystemModule.isDev)
         const SocialuniUiH5 = await PlatformModuleLoadUtil.dynamicImport("@socialuni/socialuni-ui")
 
-        console.log(SocialuniUiH5)
-        console.log(SocialuniUiH5.default)
-        console.log(6666666)
         app.use(SocialuniUiH5.default)
 
 

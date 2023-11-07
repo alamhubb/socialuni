@@ -89,7 +89,7 @@
 </template>
 
 <script lang="ts">
-import {Options, Prop, Vue} from 'vue-property-decorator'
+import {Component, Prop, Vue} from 'vue-facing-decorator'
 import PagePath from "@socialuni/socialuni-constant/constant/PagePath";
 import TalkVO from "@socialuni/socialuni-api-base/src/model/talk/TalkVO";
 import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue";
@@ -105,7 +105,7 @@ import CommunityPageUtil from "@socialuni/socialuni-community-sdk/src/util/Commu
 import {socialTalkModule} from "@socialuni/socialuni-community-sdk/src/store/SocialTalkModule";
 import {socialuniTagModule} from "@socialuni/socialuni-community-sdk/src/store/SocialTagModule";
 
-@Options({
+@Component({
   components: {QIcon}
 })
 export default class TalkItemContent extends Vue {
@@ -172,7 +172,7 @@ export default class TalkItemContent extends Vue {
   }
 
   copyContent(talk:TalkVO){
-      SocialuniAppUtil.UniUtil.showCopyAction(talk.content)
+      SocialuniAppUtil.NativeUtil.showCopyAction(talk.content)
   }
 }
 </script>

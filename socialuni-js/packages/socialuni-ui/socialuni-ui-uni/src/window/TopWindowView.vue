@@ -3,9 +3,9 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-facing-decorator'
 
-@Options({})
+@Component({})
 export default class TopWindowView extends Vue {
 }
 </script>

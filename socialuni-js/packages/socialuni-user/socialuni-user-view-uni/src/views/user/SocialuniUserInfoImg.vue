@@ -46,7 +46,7 @@
 
 <script lang="ts">
 import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue";
-import {Options, Prop, Vue} from "vue-property-decorator";
+import {Component, Prop, Vue} from "vue-facing-decorator";
 import CenterUserDetailRO from "@socialuni/socialuni-api-base/src/model/social/CenterUserDetailRO";
 import ImgAddQO from "@socialuni/socialuni-api-base/src/model/user/ImgAddQO";
 import ImgFileVO from "@socialuni/socialuni-api-base/src/model/ImgFileVO";
@@ -61,7 +61,7 @@ import TencentCosAPI from "@socialuni/socialuni-app-api/src/api/TencentCosAPI";
 import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
 import SocialuniImgUtil from "@socialuni/socialuni-user-sdk/src/util/SocialuniImgUtil";
 
-@Options({
+@Component({
     components: {QIcon, SocialuniReportDialog}
 })
 export default class SocialuniUserInfoImg extends Vue {
@@ -91,8 +91,8 @@ export default class SocialuniUserInfoImg extends Vue {
     async uploadUserImg() {
         try {
             const cosAuthRO = await CosService.getCosAuthRO()
-            const imgFiles: DomFile[] = await SocialuniAppUtil.UniUtil.chooseImage(1)
-            SocialuniAppUtil.UniUtil.showLoading('上传中')
+            const imgFiles: DomFile[] = await SocialuniAppUtil.NativeUtil.chooseImage(1)
+            SocialuniAppUtil.NativeUtil.showLoading('上传中')
             const imgFile: DomFile = imgFiles[0]
             imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src
             const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO), SocialuniMineUserAPI.addUserImgAPI(new ImgAddQO(imgFile))])
@@ -100,7 +100,7 @@ export default class SocialuniUserInfoImg extends Vue {
         } catch (e) {
             console.error(e)
         } finally {
-            SocialuniAppUtil.UniUtil.hideLoading()
+            SocialuniAppUtil.NativeUtil.hideLoading()
         }
     }
 
@@ -113,13 +113,13 @@ export default class SocialuniUserInfoImg extends Vue {
 
     imgLongPress(imgIndex: number) {
         if (this.isMine) {
-            SocialuniAppUtil.UniUtil.actionSheet(['删除']).then((index: number) => {
+            SocialuniAppUtil.NativeUtil.actionSheet(['删除']).then((index: number) => {
                 if (index === 0) {
                     this.deleteImg(imgIndex)
                 }
             })
         } else {
-            SocialuniAppUtil.UniUtil.actionSheet(['举报']).then((index: number) => {
+            SocialuniAppUtil.NativeUtil.actionSheet(['举报']).then((index: number) => {
                 if (index === 0) {
                     this.openReportDialog(imgIndex)
                 }

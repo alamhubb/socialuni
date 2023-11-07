@@ -7,7 +7,7 @@ import com.socialuni.social.common.api.exception.exception.SocialBusinessExcepti
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.common.api.utils.UUIDUtil;
 import com.socialuni.social.common.sdk.dao.DO.NotifyDO;
-import com.socialuni.social.common.sdk.dao.DO.SocialUserAccountDO;
+import com.socialuni.social.common.sdk.dao.DO.SocialUserPlatformAccountDO;
 import com.socialuni.social.common.sdk.dao.repository.SocialUserAccountRepository;
 import com.socialuni.social.common.sdk.platform.weixin.HttpResult;
 import com.socialuni.social.common.sdk.platform.PushMsgDTO;
@@ -232,7 +232,7 @@ public class WxUtil {
         String openId = null;
         //只有为小程序才有这行
         if (PlatformType.mp.equals(platform)) {
-            SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUserId(SocialuniSupportProviderType.wx, userId);
+            SocialUserPlatformAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUserId(SocialuniSupportProviderType.wx, userId);
             //指定微信
             openId = socialUserAccountDO.getMpOpenId();
             map.put("openid", openId);

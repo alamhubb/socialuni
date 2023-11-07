@@ -24,6 +24,8 @@ $color-girl-light: #ef799a !default;
 $color-boy: #3f93ee !default;
 $color-boy-light: #ddeefe !default;
 $color-pink1: #ffedf0 !default;
+$color-navbar-text: white !default;
+$color-navbar-bg: #282f3d !default;
 
 
 $color-primary: $color-blue;
@@ -50,7 +52,7 @@ $color-bg-base: $color-white !default;
 //$color-theme-base-light: $color-bg-default !default;
 //主题色
 //主题下字体颜色，主题背景色下，字体颜色也不一定一样，主题颜色对应的字体色
-$color-theme: #3383f6 !default;
+$color-theme: #C50F1A !default;
 //主题亮色
 $color-theme2: #A2D2FF !default;
 //背景色
@@ -58,16 +60,16 @@ $color-theme3: $color-bg-default !default;
 $color-theme4: $color-white !default;
 
 $colors-theme: (
-        girl:$color-girl,
-        boy:$color-boy,
-        white:$color-white,
-        black:$color-black,
-        theme:$color-theme,
-        primary:$color-primary,
-        error:$color-error,
-        warn:$color-warn,
-        success:$color-success,
-        info:$color-info,
+  girl:$color-girl,
+  boy:$color-boy,
+  white:$color-white,
+  black:$color-black,
+  theme:$color-theme,
+  primary:$color-primary,
+  error:$color-error,
+  warn:$color-warn,
+  success:$color-success,
+  info:$color-info,
 );
 //基础颜色
 $mergeMap1: map-merge($colors-theme, $colors-blue);
@@ -110,18 +112,19 @@ $color-border-button: #C0C6CC;
 //基础颜色直接循环拼就行
 $colors-custom-font: (
   //主题色，可自定义，默认和白色一样
-        theme: $color-theme,
-        default: $color-main,
-        special: $color-special,
-        main: $color-main,
-        th: $color-th,
-        content: $color-content,
-        sub: $color-sub,
-        tip: $color-tip,
-        link: $color-link,
-        focus: $color-focus,
-        hover: $color-hover,
-        active: $color-active
+  theme: $color-theme,
+  default: $color-main,
+  special: $color-special,
+  main: $color-main,
+  th: $color-th,
+  content: $color-content,
+  sub: $color-sub,
+  tip: $color-tip,
+  link: $color-link,
+  focus: $color-focus,
+  hover: $color-hover,
+  active: $color-active,
+  navbar:$color-navbar-text,
 );
 
 $colors-font: map-merge($colors-base, $colors-custom-font);
@@ -129,40 +132,41 @@ $colors-font: map-merge($colors-base, $colors-custom-font);
 //基础颜色直接循环拼就行
 $colors-custom-bg: (
   //主题色，可自定义，默认和白色一样
-        default: $color-bg-default,
-        base: $color-bg-base,
-        theme: $color-theme,
-        theme2: $color-theme2,
-        theme3: $color-theme3,
-        theme4: $color-theme4,
+  default: $color-bg-default,
+  base: $color-bg-base,
+  theme: $color-theme,
+  theme2: $color-theme2,
+  theme3: $color-theme3,
+  theme4: $color-theme4,
   //theme-light: $color-theme-light,
-        header-menu: $color-bg-header-menu,
-        header-menu-hover: $color-bg-header-menu-hover,
-        menu-hover: $color-bg-menu-hover,
-        filter-active: $color-bg-filter-active,
-        table-header: $color-bg-table-header,
-        table-header-hover: $color-bg-table-header-hover,
+  header-menu: $color-bg-header-menu,
+  header-menu-hover: $color-bg-header-menu-hover,
+  menu-hover: $color-bg-menu-hover,
+  filter-active: $color-bg-filter-active,
+  table-header: $color-bg-table-header,
+  table-header-hover: $color-bg-table-header-hover,
+  navbar:$color-navbar-bg,
 );
 
 $colors-bg: map-merge($colors-base, $colors-custom-bg);
 
 $colors-custom-border: (
-        theme: $color-border-default,
-        gray1: $color-border-gray1,
-        gray2: $color-border-gray2,
-        form: $color-border-form,
-        divider: $color-border-divider,
-        table: $color-border-table,
-        default: $color-border-default,
-        special: $color-special,
-        main: $color-main,
-        content: $color-content,
-        sub: $color-sub,
-        tip: $color-tip,
-        link: $color-link,
-        focus: $color-focus,
-        hover: $color-hover,
-        active: $color-active
+  theme: $color-theme,
+  gray1: $color-border-gray1,
+  gray2: $color-border-gray2,
+  form: $color-border-form,
+  divider: $color-border-divider,
+  table: $color-border-table,
+  default: $color-border-default,
+  special: $color-special,
+  main: $color-main,
+  content: $color-content,
+  sub: $color-sub,
+  tip: $color-tip,
+  link: $color-link,
+  focus: $color-focus,
+  hover: $color-hover,
+  active: $color-active
 );
 
 $colors-border: map-merge($colors-base, $colors-custom-border);

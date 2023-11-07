@@ -12,7 +12,7 @@ import com.socialuni.social.sdk.dao.utils.user.SocialuniUserExtendFriendLogDOUti
 import com.socialuni.social.sdk.logic.domain.user.SocialuniEditExpandDomain;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniUserExtendDetailROFactory;
 import com.socialuni.social.sdk.logic.service.bussiness.SocialuniGetUserContactInfoDomain;
-import com.socialuni.social.sdk.utils.SocialuniRequestUtil;
+import com.socialuni.social.common.sdk.utils.SocialuniRequestUtil;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
 import com.socialuni.social.report.sdk.enumeration.SocialuniUserStatus;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;

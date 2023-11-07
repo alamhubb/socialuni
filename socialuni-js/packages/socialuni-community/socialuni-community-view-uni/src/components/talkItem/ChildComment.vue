@@ -35,7 +35,7 @@
 </template>
 
 <script lang="ts">
-import {Options, Prop, Vue, Watch} from 'vue-property-decorator'
+import {Component, Prop, Vue, Watch} from 'vue-facing-decorator'
 import TalkVO from "@socialuni/socialuni-api-base/src/model/talk/TalkVO";
 import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 import CommentVO from "@socialuni/socialuni-api-base/src/model/comment/CommentVO";
@@ -45,7 +45,7 @@ import UserPagePath from "@socialuni/socialuni-user-sdk/src/constant/UserPagePat
 import UserPageUtil from "@socialuni/socialuni-user-sdk/src/util/UserPageUtil";
 import {socialTalkModule} from "@socialuni/socialuni-community-sdk/src/store/SocialTalkModule";
 
-@Options({
+@Component({
   components: {QIcon}
 })
 export default class ChildComment extends Vue {

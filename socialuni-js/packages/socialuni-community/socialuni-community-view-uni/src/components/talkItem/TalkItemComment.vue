@@ -76,7 +76,7 @@
 </template>
 
 <script lang="ts">
-import {Options, Prop, Vue, Watch} from 'vue-property-decorator'
+import {Component, Prop, Vue, Watch} from 'vue-facing-decorator'
 import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 import QButton from "@socialuni/socialuni-ui-uni/src/components/QButton/QButton.vue";
 import TalkVO from "@socialuni/socialuni-api-base/src/model/talk/TalkVO";
@@ -96,7 +96,7 @@ import {socialTalkModule} from "@socialuni/socialuni-community-sdk/src/store/Soc
 import CommunityPageUtil from "@socialuni/socialuni-community-sdk/src/util/CommunityPageUtil";
 import CommunityPagePath from "@socialuni/socialuni-community-sdk/src/constant/CommunityPagePath";
 
-@Options({
+@Component({
   components: {
     QIcon,
     QButton,
@@ -150,7 +150,7 @@ export default class TalkItemComment extends Vue {
   }
 
   showShareMenu() {
-    SocialuniAppUtil.UniUtil.showShareMenu()
+    SocialuniAppUtil.NativeUtil.showShareMenu()
   }
 
 

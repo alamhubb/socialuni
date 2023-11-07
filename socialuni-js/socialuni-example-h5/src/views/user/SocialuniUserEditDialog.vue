@@ -41,9 +41,9 @@
 </template>
 
 <script lang="ts">
-import {Emit, Options, Vue, Watch} from 'vue-property-decorator'
-import SButton from "@socialuni/socialuni-ui-h5/src/components/SButton.vue";
-import SDialog from "@socialuni/socialuni-ui-h5/src/components/SDialog.vue";
+import {Emit, Component, Vue, Watch} from 'vue-facing-decorator'
+import SButton from "@socialuni/socialuni-ui-h5/src/components/SComponents/SButton.vue";
+import SDialog from "@socialuni/socialuni-ui-h5/src/components/SComponents/SDialog.vue";
 import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
 import type SocialuniMineUserRO from "@socialuni/socialuni-api-base/src/model/user/SocialuniMineUserRO";
 import type EnumStrVO from "@socialuni/socialuni-constant/constant/EnumStrVO";
@@ -58,9 +58,10 @@ import UUIDUtil from "@socialuni/socialuni-util/src/util/UUIDUtil";
 import ImgUtil from "@socialuni/socialuni-util/src/util/ImgUtil";
 import TencentCosAPI from "@socialuni/socialuni-app-api/src/api/TencentCosAPI";
 import ImgAddQO from "@socialuni/socialuni-api-base/src/model/user/ImgAddQO";
-import type DomFile from "@socialuni/socialuni-app-sdk/src/model/DomFile";
+import type DomFile from "@socialuni/socialuni-native-util/src/model/DomFile";
+import NativeUtil from "@socialuni/socialuni-native-h5/src/util/NativeUtil";
 
-@Options({
+@Component({
     components: {SDialog, SButton}
 })
 export default class SocialuniUserEditDialog extends Vue {
@@ -133,7 +134,7 @@ export default class SocialuniUserEditDialog extends Vue {
         } catch (e) {
             console.error(e)
         } finally {
-            SocialuniAppUtil.UniUtil.hideLoading()
+            SocialuniAppUtil.NativeUtil.hideLoading()
         }
     }
 
@@ -153,8 +154,8 @@ export default class SocialuniUserEditDialog extends Vue {
             console.log(cosAuthRO)
             console.log(456465)
             console.log(cosAuthRO)
-            const imgFiles: DomFile[] = await SocialuniAppUtil.UniUtil.chooseImage(1)
-            SocialuniAppUtil.UniUtil.showLoading('上传中')
+            const imgFiles: DomFile[] = await NativeUtil.chooseImage(1)
+            SocialuniAppUtil.NativeUtil.showLoading('上传中')
             const imgFile: DomFile = imgFiles[0]
             imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src
             const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO), SocialuniMineUserAPI.addUserAvatarImgAPI(new ImgAddQO(imgFile))])
@@ -162,7 +163,7 @@ export default class SocialuniUserEditDialog extends Vue {
         } catch (e) {
             console.error(e)
         } finally {
-            SocialuniAppUtil.UniUtil.hideLoading()
+            SocialuniAppUtil.NativeUtil.hideLoading()
         }
     }
 

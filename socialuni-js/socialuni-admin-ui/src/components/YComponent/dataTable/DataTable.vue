@@ -36,7 +36,7 @@
     </div>
 
     <y-table
-      v-loading="loading"
+      v-loading="loading || innerLoading"
       ref="table"
       class="flex-1"
       :data="filterTableList"
@@ -77,13 +77,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-property-decorator'
+import {Component, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator'
 import YTable from '@/components/YComponent/YTable/YTable.vue'
 import ObjectUtil from '../utils/ObjectUtil'
 import YPagination from '@/components/YComponent/YPageable/YPagination.vue'
 import Pageable from '@/components/YComponent/YPageable/Pageable'
 import PinyinUtil from '@/components/YComponent/utils/PinyinUtil'
 import YSearch from '@/components/YComponent/YSearch/YSearch.vue'
+import CommonUtil from '@/components/YComponent/utils/CommonUtil'
 
 /**
  * @author 秦开远
@@ -92,7 +93,7 @@ import YSearch from '@/components/YComponent/YSearch/YSearch.vue'
  * 在数据源业务基础上，封装基础table
  */
 @Component({
-  components: { YSearch, YPagination, YTable }
+  components: {YSearch, YPagination, YTable}
 })
 export default class DataTable extends Vue {
   $refs: {
@@ -100,22 +101,24 @@ export default class DataTable extends Vue {
   }
   @Model('change') model!: any
 
-  @Prop({ default: '' }) readonly title: string
-  @Prop({ default: false, type: Boolean }) readonly showTitle: string
-  @Prop({ default: '检索' }) readonly searchTitle: string
-  @Prop({ default: false, type: Boolean }) readonly checked: boolean
-  @Prop({ default: false, type: Boolean }) readonly loading: boolean
+  @Prop({default: ''}) readonly title: string
+  @Prop({default: false, type: Boolean}) readonly showTitle: string
+  @Prop({default: '检索'}) readonly searchTitle: string
+  @Prop({default: false, type: Boolean}) readonly checked: boolean
+  @Prop({default: false, type: Boolean}) readonly loading: boolean
   @Prop() readonly tableData: any[]
 
-  @Prop({ default: false, type: Boolean }) readonly showPage: boolean
-  @Prop({ default: false, type: Boolean }) readonly showHeader: boolean
-  @Prop({ default: '', type: [Array, String] }) readonly searchField: boolean
+  @Prop({default: false, type: Boolean}) readonly showPage: boolean
+  @Prop({default: false, type: Boolean}) readonly showHeader: boolean
+  @Prop({default: '', type: [Array, String]}) readonly searchField: boolean
 
   hasHeaderSlot = false
 
   get showTableHeader() {
     return this.showHeader || this.hasHeaderSlot
   }
+
+  innerLoading = false
 
   @Prop({
     default: () => {
@@ -149,7 +152,7 @@ export default class DataTable extends Vue {
               const content = this.searchField[itemKey]
               if (
                 !this.searchForm.searchText ||
-                PinyinUtil.match(this.searchForm.searchText, content)
+                PinyinUtil.match(this.searchForm.searchText, item[content])
               ) {
                 return true
               }
@@ -181,7 +184,16 @@ export default class DataTable extends Vue {
     type: Function
   })
   readonly tableDataFilterAppend: Function
-  @Prop({ default: false, type: Boolean }) readonly showBtn: boolean
+
+  @Prop({
+    default() {
+      return null
+    },
+    type: Function
+  })
+  readonly queryDataFun: Function
+
+  @Prop({default: false, type: Boolean}) readonly showBtn: boolean
 
   pageable: Pageable = new Pageable(1, 10)
 
@@ -210,13 +222,13 @@ export default class DataTable extends Vue {
     }
   }
 
-  @Watch('searchForm', { deep: true })
+  @Watch('searchForm', {deep: true})
   searchFormWatch() {
     this.pageable = new Pageable(1, this.pageSizes[0])
     this.filterTableData()
   }
 
-  @Watch('pageable', { deep: true })
+  @Watch('pageable', {deep: true})
   pageableWatch() {
     this.filterTableData()
   }
@@ -243,12 +255,14 @@ export default class DataTable extends Vue {
     )
     if (this.showPage) {
       this.pageable.total = data.length
+      this.pageable.lastPageNum = Math.ceil(this.pageable.total / this.pageable.pageSize)
       const startIndex =
         (this.pageable.pageNum - 1) * this.pageable.pageSize
       const endIndex = this.pageable.pageNum * this.pageable.pageSize
       data = data.slice(startIndex, endIndex)
     }
-    if (ObjectUtil.toJson(data) !== ObjectUtil.toJson(this.filterTableList)) {
+    // 内容发生变化，或者对象地址发生变化
+    if (ObjectUtil.toJson(data) !== ObjectUtil.toJson(this.filterTableList) || (data.length && data[0] !== this.filterTableList[0])) {
       this.filterTableList = data
     }
   }
@@ -269,7 +283,7 @@ export default class DataTable extends Vue {
     this.$refs.table.clearSelection()
   }*/
 
-  @Emit()
+  @Emit('update:modelValue')
   change(currentRow) {
     return currentRow
   }
@@ -292,7 +306,15 @@ export default class DataTable extends Vue {
   }
 
   @Emit()
-  refresh() {
+  async refresh() {
+    if (this.queryDataFun) {
+      this.innerLoading = true
+      try {
+        await this.queryDataFun()
+      } finally {
+        this.innerLoading = false
+      }
+    }
     return
   }
 }

@@ -126,7 +126,7 @@
   </view>
 </template>
 <script lang="ts">
-import {Options, Vue, Watch} from 'vue-property-decorator'
+import {Component, Vue, Watch} from 'vue-facing-decorator'
 import AppMsg from '@socialuni/socialuni-constant/constant/AppMsg'
 import {onUnload} from "@dcloudio/uni-app";
 import QInput from "@socialuni/socialuni-ui-uni/src/components/QInput/QInput.vue";
@@ -162,7 +162,7 @@ import CosService from "@socialuni/socialuni-app-sdk/src/util/CosService";
 import SocialuniAppAPI from "@socialuni/socialuni-app-api/src/api/SocialuniAppAPI";
 import SocialCircleRO from "@socialuni/socialuni-api-base/src/model/community/circle/SocialCircleRO";
 
-@Options({
+@Component({
   components: {
     SocialCirclePicker,
     QCityInfo,
@@ -492,7 +492,7 @@ export default class TalkAddView extends Vue {
     //获取cos认证信息
     this.cosAuthRO = await CosService.getCosAuthRO()
     const count = this.imgMaxSize - this.showImgFiles.length
-    const imgFiles: DomFile[] = await SocialuniAppUtil.UniUtil.chooseImage(count)
+    const imgFiles: DomFile[] = await SocialuniAppUtil.NativeUtil.chooseImage(count)
     this.showImgFiles.push(...imgFiles)
     if (this.cosAuthRO) {
       this.uploadImgList()

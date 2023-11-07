@@ -3,9 +3,9 @@
 </template>
 
 <script lang="ts">
-import {Emit, Options, Vue} from 'vue-property-decorator'
+import {Emit, Component, Vue} from 'vue-facing-decorator'
 
-@Options({
+@Component({
     components: {}
 })
 export default class SocialuniAppLoad extends Vue {

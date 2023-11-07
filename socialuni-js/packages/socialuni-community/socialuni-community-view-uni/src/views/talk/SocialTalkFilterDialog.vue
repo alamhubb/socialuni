@@ -86,7 +86,7 @@
 </template>
 
 <script lang="ts">
-import {Emit, Options, Vue, Watch} from 'vue-property-decorator'
+import {Emit, Component, Vue, Watch} from 'vue-facing-decorator'
 import DistrictVO from "@socialuni/socialuni-api-base/src/model/DistrictVO";
 import GenderType from "@socialuni/socialuni-constant/constant/GenderType";
 import TagSearch from "./TagSearch.vue";
@@ -109,7 +109,7 @@ import SocialCircleRO from "@socialuni/socialuni-api-base/src/model/community/ci
 import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
 
 
-@Options({
+@Component({
   components: {
     SocialTagPicker,
     SocialCirclePicker,
@@ -190,7 +190,7 @@ export default class SocialTalkFilterDialog extends Vue {
     this.showCircleSearch = false
   }
 
-  @Emit()
+  @Emit('update:modelValue')
   change(circle: SocialCircleRO) {
     return circle
   }

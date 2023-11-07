@@ -169,7 +169,7 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue} from "vue-property-decorator";
+import {Component, Vue} from "vue-facing-decorator";
 import {
   socialuniMsgViewService
 } from "@socialuni/socialuni-im-sdk/src/logic/SocialuniMsgViewService";
@@ -181,7 +181,7 @@ import {socialuniMsgModule} from "@socialuni/socialuni-im-sdk/src/store/SocialMe
 import {getCurrentInstance} from "vue";
 import {onLoad} from "@dcloudio/uni-app";
 
-@Options(
+@Component(
     {
       components: {QIcon, QNavbar, SocialuniReportDialog}
     }

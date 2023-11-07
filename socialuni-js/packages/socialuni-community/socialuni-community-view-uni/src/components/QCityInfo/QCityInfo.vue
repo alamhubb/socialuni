@@ -23,12 +23,12 @@
 </template>
 
 <script lang="ts">
-import {Emit, Model, Options, Prop, Vue} from 'vue-property-decorator'
+import {Emit, Model, Component, Prop, Vue} from 'vue-facing-decorator'
 import QCityPicker from "../QCityPicker/QCityPicker.vue";
 import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 import DistrictVO from "@socialuni/socialuni-api-base/src/model/DistrictVO";
 
-@Options({
+@Component({
   components: {
     QCityPicker,
     QIcon

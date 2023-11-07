@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts">
-import {Options, Emit, Model, Vue, Prop} from 'vue-property-decorator'
+import {Component, Emit, Model, Vue, Prop} from 'vue-facing-decorator'
 import QPopup from "@socialuni/socialuni-ui-uni/src/components/QPopup/QPopup.vue";
 import QPicker from "@socialuni/socialuni-ui-uni/src/components/QPicker/QPicker.vue";
 import DistrictVO from "@socialuni/socialuni-api-base/src/model/DistrictVO";
@@ -47,7 +47,7 @@ import LocationUtil from "@socialuni/socialuni-community-sdk/src/util/LocationUt
 import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
 import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 
-@Options({
+@Component({
   components: {
     QPicker,
     QIcon,
@@ -90,7 +90,7 @@ export default class QCityPicker extends Vue {
   }
 
 
-  @Emit()
+  @Emit('update:modelValue')
   input() {
     return this.cityValue
   }

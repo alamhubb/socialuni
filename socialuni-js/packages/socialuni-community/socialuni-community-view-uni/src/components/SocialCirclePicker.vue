@@ -49,7 +49,7 @@
 </template>
 
 <script lang="ts">
-import {Options, Emit, Vue} from 'vue-property-decorator'
+import {Component, Emit, Vue} from 'vue-facing-decorator'
 import QPopup from "@socialuni/socialuni-ui-uni/src/components/QPopup/QPopup.vue";
 import SocialCircleRO from "@socialuni/socialuni-api-base/src/model/community/circle/SocialCircleRO";
 import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue";
@@ -58,7 +58,7 @@ import QSidebar from "@socialuni/socialuni-ui-uni/src/components/QSidebar/QSideb
 import {socialCircleModule} from "@socialuni/socialuni-community-sdk/src/store/SocialCircleModule";
 
 
-@Options({
+@Component({
   components: {
     QIcon,
     QInput,
@@ -101,7 +101,7 @@ export default class SocialCirclePicker extends Vue {
     this.$refs.circleChooseDialog.close()
   }
 
-  @Emit()
+  @Emit('update:modelValue')
   change(circle: SocialCircleRO) {
     this.closeDialog()
     return circle

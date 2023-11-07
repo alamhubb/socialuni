@@ -87,9 +87,8 @@
 </template>
 
 <script lang="tsx">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-facing-decorator'
 import DevAccountRO from '@/model/base/DevAccountRO'
-import { namespace } from 'vuex-class'
 import DevAccountType from '@/constant/DevAccountType'
 import { OperationType } from '@/constant/OperationType'
 import ToastUtil from '@/utils/ToastUtil'

@@ -35,14 +35,14 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue} from 'vue-property-decorator'
+import {Component, Vue} from 'vue-facing-decorator'
 import TagVO from '@socialuni/socialuni-api-base/src/model/community/tag/TagVO'
 import ErrorConst from '@socialuni/socialuni-constant/constant/ErrorConst'
 import ResultRO from '@socialuni/socialuni-api-base/src/model/social/ResultRO'
 import TagAPI from "@socialuni/socialuni-community-api/src/api/TagAPI";
 import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
 
-@Options({})
+@Component({})
 export default class SocialTagAdd extends Vue {
   // tag名称
   tagName = ''

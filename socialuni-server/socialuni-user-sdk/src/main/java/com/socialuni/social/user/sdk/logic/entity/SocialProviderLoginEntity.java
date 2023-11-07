@@ -3,7 +3,7 @@ package com.socialuni.social.user.sdk.logic.entity;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserAccountManage;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserAccountStore;
-import com.socialuni.social.common.sdk.dao.DO.SocialUserAccountDO;
+import com.socialuni.social.common.sdk.dao.DO.SocialUserPlatformAccountDO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.user.sdk.model.RO.UniUnionIdRO;
@@ -31,7 +31,7 @@ public class SocialProviderLoginEntity {
         if (uniUnionIdRO.hasError()) {
             throw new SocialParamsException("获取openId失败");
         }
-        SocialUserAccountDO socialUserAccountDO = socialUserAccountStore.getAccountByUnionId(loginQO, uniUnionIdRO);
+        SocialUserPlatformAccountDO socialUserAccountDO = socialUserAccountStore.getAccountByUnionId(loginQO, uniUnionIdRO);
         SocialuniUserDo mineUser;
         //如果已经注册过
         if (socialUserAccountDO != null) {

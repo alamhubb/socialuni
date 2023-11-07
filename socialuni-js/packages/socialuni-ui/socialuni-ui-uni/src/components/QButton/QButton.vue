@@ -30,10 +30,10 @@
 </template>
 
 <script lang="ts">
-import {Options, Emit, Prop, Vue} from 'vue-property-decorator'
+import {Component, Emit, Prop, Vue} from 'vue-facing-decorator'
 import CommonUtil from "@socialuni/socialuni-util/src/util/CommonUtil";
 
-@Options({})
+@Component({})
 export default class QButton extends Vue {
 
     @Prop() addClass: string

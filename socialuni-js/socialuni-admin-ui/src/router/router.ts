@@ -55,6 +55,12 @@ export const menuRoutes = [
     name: RouterName.userIdentityAudit,
     component: () => import('@/views/userIdentityAudit/UserIdentityAuditView.vue'),
     meta: { title: RouterName.userIdentityAudit, icon: 'strengthMonitoring' }
+  },
+  {
+    path: '/peiwanManage',
+    name: 'peiwanManage',
+    component: () => import('@/views/peiwanManage/PeiwanManageView.vue'),
+    meta: { title: '陪玩管理', icon: 'strengthMonitoring' }
   }
 ]
 

@@ -5,10 +5,10 @@
 </template>
 
 <script lang="ts">
-import {Options, Prop, Vue} from 'vue-property-decorator'
+import {Component, Prop, Vue} from 'vue-facing-decorator'
 import QIcon from "./QIcon/QIcon.vue";
 
-@Options({
+@Component({
   components: {
     QIcon
   }

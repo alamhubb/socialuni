@@ -29,14 +29,14 @@
   </div>
 </template>
 <script lang="ts">
-import {Options, Emit, Model, Prop, Vue} from 'vue-property-decorator'
+import {Component, Emit, Model, Prop, Vue} from 'vue-facing-decorator'
 import QButton from "../QButton/QButton.vue";
 import QModel from "../QModel/QModel.vue";
 
 /*
 显示出来已经选了的城市，给她画上钩
 * */
-@Options({
+@Component({
   components: {
     QButton,
     QModel
@@ -85,7 +85,7 @@ export default class QPopup extends Vue {
     this.close()
   }
 
-  @Emit()
+  @Emit('update:modelValue')
   input(visible) {
     return visible
   }

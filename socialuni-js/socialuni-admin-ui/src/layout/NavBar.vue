@@ -60,15 +60,10 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-facing-decorator'
 import NavMenu from '@/layout/NavMenu.vue'
 import NavBreadcrumb from '@/layout/NavBreadcrumb.vue'
 import DevAccountRO from '@/model/base/DevAccountRO'
-
-import { namespace } from 'vuex-class'
-import { userModule } from '@/store'
-
-const userStore = namespace('user')
 
 @Component({
   components: { NavBreadcrumb, NavMenu }

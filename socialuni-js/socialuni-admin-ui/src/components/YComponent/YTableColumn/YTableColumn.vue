@@ -3,6 +3,7 @@
     :label="label||prop"
     :prop="prop"
     :type="DataTableColumnTypeEnum.values.includes(type)?'':type"
+    show-overflow-tooltip
     v-bind="$attrs"
     :align="align"
   >
@@ -76,7 +77,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Emit, Prop, Vue } from 'vue-property-decorator'
+import { Component, Emit, Prop, Vue } from 'vue-facing-decorator'
 import YSelect from '@/components/YComponent/YSelect/YSelect.vue'
 import DataTableColumnTypeEnum from './DataTableColumnTypeEnum'
 

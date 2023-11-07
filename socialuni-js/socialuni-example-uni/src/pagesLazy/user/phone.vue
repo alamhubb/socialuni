@@ -4,10 +4,10 @@
 
 
 <script lang="ts">
-import {Options, Vue} from 'vue-property-decorator'
+import {Component, Vue} from 'vue-facing-decorator'
 
 import LoginView from "@socialuni/socialuni-user-view-uni/src/views/login/LoginView.vue";
-@Options({
+@Component({
   components: {
     LoginView
   }

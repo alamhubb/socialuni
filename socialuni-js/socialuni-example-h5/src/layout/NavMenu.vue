@@ -7,10 +7,10 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-facing-decorator'
 import { menuRoutes } from '@/router'
 
-@Options({})
+@Component({})
 export default class NavMenu extends Vue {
   // 是x(横向,水平)轴布局
   isXAxisLayout = false

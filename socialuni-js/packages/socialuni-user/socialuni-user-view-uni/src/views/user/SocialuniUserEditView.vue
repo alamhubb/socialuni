@@ -103,13 +103,13 @@ import SocialuniUserInfoImg from "./SocialuniUserInfoImg.vue"
 import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue"
 import QNavbar from "@socialuni/socialuni-ui-uni/src/components/QNavbar/QNavbar.vue"
 import SocialGenderTag from "../../components/SocialGenderTag/SocialGenderTag.vue"
-import {Options, Vue} from 'vue-property-decorator'
+import {Component, Vue} from 'vue-facing-decorator'
 import QButton from "@socialuni/socialuni-ui-uni/src/components/QButton/QButton.vue";
 import socialuniUserEditViewService from "@socialuni/socialuni-user-sdk/src/logic/SocialuniUserEditViewService";
 import {getCurrentInstance} from "vue";
 
 
-@Options({
+@Component({
   components: {
     SocialuniUserInfoImg,
     QIcon,

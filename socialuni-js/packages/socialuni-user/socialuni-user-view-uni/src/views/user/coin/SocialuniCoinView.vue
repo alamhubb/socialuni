@@ -44,7 +44,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Options} from 'vue-property-decorator'
+import {Vue, Options} from 'vue-facing-decorator'
 import ShellOrderVO from "@socialuni/socialuni-api-base/src/model/ShellOrderVO";
 import QIcon from '@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue'
 import EnumVO from "@socialuni/socialuni-constant/constant/EnumVO";
@@ -59,7 +59,7 @@ import UserPageUtil from "@socialuni/socialuni-user-sdk/src/util/UserPageUtil";
 import {getCurrentInstance} from "vue";
 import {onLoad} from "@dcloudio/uni-app";
 
-@Options({
+@Component({
   components: {QTabs, QIcon, QButton}
 })
 export default class SocialuniCoinView extends Vue {

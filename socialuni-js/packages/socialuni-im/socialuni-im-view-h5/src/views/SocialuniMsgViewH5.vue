@@ -81,11 +81,11 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue} from "vue-property-decorator";
-import SScrollbar from "@socialuni/socialuni-ui-h5/src/components/SScrollbar.vue";
+import {Component, Vue} from "vue-facing-decorator";
+import SScrollbar from "@socialuni/socialuni-ui-h5/src/components/SComponents/SScrollbar.vue";
 import SocialuniMsgViewService from "@socialuni/socialuni-im-sdk/src/logic/SocialuniMsgViewService";
 
-@Options({
+@Component({
     components: {SScrollbar}
 })
 export default class SocialuniMsgView extends Vue {

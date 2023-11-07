@@ -125,7 +125,7 @@
 
 
 <script lang="ts">
-import {Options, Vue} from 'vue-property-decorator'
+import {Component, Vue} from 'vue-facing-decorator'
 import PhoneNumFormData from "./PhoneNumFormData";
 import UserPrivacyAgreement from "./UserPrivacyAgreement.vue";
 import PhoneLoginForm from "./PhoneLoginForm.vue";
@@ -140,7 +140,7 @@ import UserPageUtil from "@socialuni/socialuni-user-sdk/src/util/UserPageUtil";
 import PhoneService from "@socialuni/socialuni-user-sdk/src/logic/PhoneService";
 import SocialuniUserPrivacyAgreeService from "@socialuni/socialuni-user-sdk/src/logic/SocialuniUserPrivacyAgreeService";
 
-@Options({
+@Component({
     components: {
         QIcon,
         QButton,

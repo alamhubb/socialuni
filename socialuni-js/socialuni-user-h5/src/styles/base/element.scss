@@ -1,0 +1,135 @@
+.striped-line .el-progress-bar__inner {
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.25) 25%, transparent 0, transparent 50%, rgba(255, 255, 255, 0.25) 0, rgba(255, 255, 255, 0.25) 75%, transparent 0, transparent);
+  background-size: 20px 20px;
+  background-repeat: repeat;
+}
+
+.striped-line {
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.25) 25%, transparent 0, transparent 50%, rgba(255, 255, 255, 0.25) 0, rgba(255, 255, 255, 0.25) 75%, transparent 0, transparent);
+  background-size: 20px 20px;
+  background-repeat: repeat;
+}
+
+.striped-line-reverse {
+  background-image: linear-gradient(
+      45deg,
+      transparent 25%,
+      rgba(255, 255, 255, 0.25) 0,
+      rgba(255, 255, 255, 0.25) 50%,
+      transparent 0,
+      transparent 75%,
+      rgba(255, 255, 255, 0.25) 0,
+      rgba(255, 255, 255, 0.25)
+  );
+  background-size: 20px 20px;
+  background-repeat: repeat;
+}
+
+.striped-line-reverse .el-progress-bar__inner {
+  background-image: linear-gradient(
+      45deg,
+      transparent 25%,
+      rgba(255, 255, 255, 0.25) 0,
+      rgba(255, 255, 255, 0.25) 50%,
+      transparent 0,
+      transparent 75%,
+      rgba(255, 255, 255, 0.25) 0,
+      rgba(255, 255, 255, 0.25)
+  );
+  background-size: 20px 20px;
+  background-repeat: repeat;
+}
+
+/*修复elm卡片内部元素无法获取外部设置高度问题的bug*/
+.el-card__body {
+  height: 100%;
+}
+
+.bg-grey.el-input .el-input__inner {
+  background-color: #F4F4F5;
+}
+
+.hidden-content .el-tabs__content {
+  display: none;
+}
+
+.hidden-content.el-tabs--border-card {
+  box-shadow: none;
+}
+
+.el-form--label-top .pb-0 > .el-form-item__label {
+  padding-bottom: 0;
+}
+
+/*
+.el-card__body .el-menu {
+    border-right: none;
+}
+*/
+/*上padding30太多了全局修改为20*/
+.el-dialog__wrapper .el-dialog__body {
+  padding: 20px 20px 30px 20px;
+}
+
+//选择数据源的地方使用
+.full-tab-content.el-tabs {
+  display: flex;
+  flex-direction: column;
+}
+
+.full-tab-content.el-tabs.el-tabs--left {
+  display: flex;
+  flex-direction: row;
+}
+
+.full-tab-content .el-tabs__content {
+  flex: 1;
+}
+
+.full-tab-content .el-tabs__content > .el-tab-pane {
+  width: 100%;
+  height: 100%;
+}
+
+.el-dialog__title {
+  font-size: 20px;
+}
+
+//默认太多了修改,其他页面显示正常的
+/*.el-dialog__header {
+  padding: 20px 20px 5px;
+}*/
+
+//抽屉，上部空白太多，调整
+.el-drawer__header {
+  margin-bottom: 0;
+  padding: 20px 20px 5px;
+
+  //抽屉title字体大小
+  & > span {
+    font-size: 18px;
+  }
+}
+
+//抽屉，如果内容过多使用滚动条展示
+.el-drawer__wrapper.overflow-hidden .el-drawer__body {
+  overflow: hidden;
+}
+
+.el-drawer__wrapper.header-none .el-drawer__header {
+  padding: 0;
+}
+
+.lasa-login .el-input__inner {
+  border-radius: 0;
+}
+
+.lasa-login .el-input input {
+  border: none;
+}
+
+.lasa-login .el-input--prefix .el-input__inner {
+  padding-left: 50px;
+}
+
+

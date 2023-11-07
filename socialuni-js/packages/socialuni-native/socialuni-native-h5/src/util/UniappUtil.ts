@@ -217,8 +217,7 @@ export default class UniUtil {
                 // sizeType: ['compressed'],
                 count: 1,
                 success(res) {
-                    const imgFiles = UniUtil.imgFilesCompressHandler(res)
-                    resolve(imgFiles)
+                    resolve([])
                 },
                 fail(err) {
                     reject(err)
@@ -227,46 +226,6 @@ export default class UniUtil {
         })
     }
 
-    private static async imgFilesCompressHandler(res: UniApp.ChooseImageSuccessCallbackResult) {
-        const imgFiles: DomFile[] = res.tempFiles as DomFile[]
-        const tempFilePaths: string[] = res.tempFilePaths as string[]
-        for (let i = 0; i < imgFiles.length; i++) {
-            const imgFile = imgFiles[i]
-            // 不能大于10m大于10m就压缩不到100k
-            // 获取压缩比
-            const imgSize: number = imgFile.size
-            if (imgSize / 1024 / 1024 > 50) {
-                SocialuniAppUtil.ToastUtil.error(AppMsg.imgSizeNotGt50MBMsg)
-            }
-            let ratio: number = 100
-            //如果大于100k 按照100k标准压缩
-            if (imgSize > 100 * 1024) {
-                //得出来100以下的压缩比
-                //(imgSize / 1024)计算kb
-                //100kb 除以 kb，再乘以百分数100
-                ratio = Math.round(10000 / (imgSize / 1024))
-            }
-            imgFile.quality = ratio
-            if (!socialuniSystemModule.isH5) {
-                const res = await UniUtil.compressImage(tempFilePaths[i], ratio)
-                imgFile.path = res
-                //计算压缩后的大小
-                imgFile.size = Math.round(imgSize * ratio / 100)
-            }
-            const image = await UniUtil.getImageInfo(imgFile.path)
-            // 获取文件名
-            imgFile.aspectRatio = image.width / image.height
-            let fileName = null
-            if (socialuniSystemModule.isH5) {
-                fileName = imgFile.name
-            } else {
-                fileName = tempFilePaths[i]
-            }
-            imgFile.src = UUIDUtil.getUUID() + ImgUtil.getFileSuffixName(fileName)
-            imgFile.fileName = imgFile.src
-        }
-        return imgFiles
-    }
 
     public static compressImage(filePath: string, quality: number): Promise<string> {
         return new Promise<string>((resolve, reject) => {

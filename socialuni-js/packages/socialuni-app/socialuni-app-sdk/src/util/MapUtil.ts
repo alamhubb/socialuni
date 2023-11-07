@@ -6,7 +6,7 @@ import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/Socialun
 
 export default class MapUtil {
     static async getLocationBySdk(): Promise<unknown> {
-        return SocialuniAppUtil.UniUtil.getLocation()
+        return SocialuniAppUtil.NativeUtil.getLocation()
     }
 
     static getLocationByWeb(): Promise<QQMapResult> {

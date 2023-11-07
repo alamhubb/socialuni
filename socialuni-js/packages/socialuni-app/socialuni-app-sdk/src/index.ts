@@ -8,12 +8,22 @@ import {socialuniPluginsModule} from "@socialuni/socialuni/src/store/SocialuniPl
 import SocialuniAppAPI from "@socialuni/socialuni-app-api/src/api/SocialuniAppAPI";
 import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
 import {InternalAxiosRequestConfig} from "axios/index";
-import {socialuniTokenModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniTokenModule";
+import {socialAppModule} from "./store/SocialAppModule";
 
 class SocialuniAppPlugin implements SocialuniPlugin {
     onLaunch() {
-        WebsocketUtil.websocketConnect(false)
-        socialuniConfigModule.getAppConfigAction()
+        // WebsocketUtil.websocketConnect(false)
+        this.initApp()
+    }
+
+    async initApp() {
+        try {
+            // await socialuniConfigModule.getAppConfigAction()
+            // socialAppModule.getHomeSwipersAction()
+            // socialuniConfigModule.getReportTypesAction()
+        } catch (e) {
+
+        }
     }
 
     onRequestInterceptors(config: InternalAxiosRequestConfig) {

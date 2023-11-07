@@ -11,7 +11,7 @@
   import {
     Vue,
     Component,
-  } from 'vue-property-decorator'
+  } from 'vue-facing-decorator'
 
   //@ts-ignore
   import QMarkdown from 'qing-markdown/src/components/q-markdown/q-markdown'

@@ -24,7 +24,6 @@ import CommonEventUtil from "@socialuni/socialuni-native-util/src/util/CommonEve
 class SocialuniUserPlugin implements SocialuniPlugin {
     onLaunch() {
         socialuniUserModule.initSocialuniUserModule()
-        socialuniConfigModule.getReportTypesAction()
         // CosAPI.getCosPathAPI().then(res => {
         //     socialAppModule.cosHttpPath = res.data
         // })
@@ -62,13 +61,13 @@ class SocialuniUserPlugin implements SocialuniPlugin {
         // statusCode: 607
         // statusText: "request:ok"
 
-        SocialuniAppUtil.UniUtil.hideLoading()
+        SocialuniAppUtil.NativeUtil.hideLoading()
         console.log(error)
         //第一步，先判断 有没有error
         //判断data类型，如果没类型，直接走
         //有内容则为本系统？也不一定，判断拿内容类型
         //然后本系统处理
-        const result: ResultRO = error.response.data
+        const result: ResultRO = error?.response?.data
         console.log(result)
         if (result) {
             const errorMsg = result.errorMsg

@@ -34,13 +34,13 @@ import SocialuniCommunityUserDetailView
 import QButton from "@socialuni/socialuni-ui-uni/src/components/QButton/QButton.vue";
 import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 import QPopup from "@socialuni/socialuni-ui-uni/src/components/QPopup/QPopup.vue";
-import {Options, Vue} from "vue-property-decorator";
+import {Component, Vue} from "vue-facing-decorator";
 import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
 import SocialuniUserDetailView from "@socialuni/socialuni-user-view-uni/src/views/user/SocialuniUserDetailView.vue";
 import {socialuniChatModule} from "@socialuni/socialuni-im-sdk/src/store/SocialuniChatModule";
 import {socialuniUserDetailViewService} from "@socialuni/socialuni-user-sdk/src/logic/SocialuniUserDetailViewService";
 
-@Options({
+@Component({
   components: {
     QPopup,
     QButton,
