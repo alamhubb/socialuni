@@ -69,7 +69,8 @@
 
         <div class="flex-col">
             <div class="flex-row">
-
+                123
+                <s-icon icon="emoticon-outline"></s-icon>
             </div>
             <div class="flex-row flex-none">
                 <el-input
@@ -90,12 +91,13 @@
 <script lang="ts">
 import {Component, Vue} from "vue-facing-decorator";
 import SScrollbar from "@socialuni/socialuni-ui-h5/src/components/SComponents/SScrollbar.vue";
+import SIcon from "@socialuni/socialuni-ui-h5/src/components/SComponents/SIcon.vue";
 import SocialuniMsgViewService from "@socialuni/socialuni-im-sdk/src/logic/SocialuniMsgViewService";
 import MessageViewParams from "@socialuni/socialuni-im-view-uni/src/views/chat/MessageViewParams";
 import {getCurrentInstance} from "vue";
 
 @Component({
-    components: {SScrollbar}
+    components: {SScrollbar,SIcon}
 })
 export default class SocialuniMsgView extends Vue {
 
