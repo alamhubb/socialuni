@@ -9,7 +9,16 @@ import socialuniPlatformAutoImportPlugin from "@socialuni/vite-plugin-socialuni-
 export default defineConfig({
     plugins: [vue(), nodeResolve(), socialuniPlatformAutoImportPlugin()],
     server: {
-        port: 8085
+        port: 8085,
+        // host: '0.0.0.0',
+        proxy: {
+            '/music': {
+                target: 'https://music.163.com',
+                // 如果接口跨域，需要进行这个参数配置
+                changeOrigin: true,
+                rewrite: (path) => path.replace(/^\/music/, '')
+            }
+        }
     },
     resolve: {
         alias: {

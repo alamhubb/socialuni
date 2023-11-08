@@ -17,7 +17,7 @@ client.on("user-published", async (user, mediaType) => {
 
 export class MusicRoom {
     client = client
-
+    localAudioTrack = null
 }
 
 export const mucisRoomStore: MusicRoom = reactive(new MusicRoom())
