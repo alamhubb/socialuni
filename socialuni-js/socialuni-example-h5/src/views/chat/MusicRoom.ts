@@ -1,5 +1,5 @@
 import {reactive} from "vue";
-import AgoraRTC, {IBufferSourceAudioTrack} from "agora-rtc-sdk-ng";
+import AgoraRTC, {IBufferSourceAudioTrack, IRemoteAudioTrack} from "agora-rtc-sdk-ng";
 
 const client = AgoraRTC.createClient({
     mode: "rtc",
@@ -21,15 +21,18 @@ await client.join(options.appId, options.channel, options.token, options.uid);
 
 client.on("user-published", async (user, mediaType) => {
     console.log('触发了订阅')
+    console.log(user)
+    console.log(mediaType)
     await client.subscribe(user, mediaType);
     if (mediaType === 'audio') {
+        mucisRoomStore.localAudioTrack = user.audioTrack
         user.audioTrack.play();
     }
 });
 
 export class MusicRoom {
     client = client
-    localAudioTrack: IBufferSourceAudioTrack = null
+    localAudioTrack: IBufferSourceAudioTrack | IRemoteAudioTrack = null
 
     async publish(songId) {
         const config = {
@@ -52,7 +55,7 @@ export class MusicRoom {
 
     async leaveClick() {
         // Destroy the local audio track.
-        mucisRoomStore.localAudioTrack.close();
+        mucisRoomStore.localAudioTrack.stop();
 
         // Leave the channel.
         // await mucisRoomStore.client.leave();
