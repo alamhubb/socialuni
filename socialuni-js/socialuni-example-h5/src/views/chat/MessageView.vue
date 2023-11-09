@@ -144,7 +144,7 @@ export default class MessageView extends Vue {
 
         zg.startPublishingStream('streamID1', localStream)
 
-        localStream.playAudio(document.querySelector("#local"));
+        // localStream.playAudio(document.querySelector("#local"));
 
 
         zg.on('publisherStateUpdate', result => {
