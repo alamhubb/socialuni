@@ -169,6 +169,7 @@ export default class MessageView extends Vue {
             const remoteStream = await zg.startPlayingStream('streamID1');
 
             console.log(remoteStream)
+            console.log(remoteStream)
             console.log(666666666)
 // 创建媒体流播放组件
             const remoteView = zg.createRemoteStreamView(remoteStream);
