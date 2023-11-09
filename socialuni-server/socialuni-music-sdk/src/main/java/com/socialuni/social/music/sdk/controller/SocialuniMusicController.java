@@ -57,15 +57,6 @@ public class SocialuniMusicController {
         String appId = "5e681410a7434ce9bba3e268226ce537";
         String channel = "aa";
         String token = "007eJxTYMgv2u0/ccF5bxWvnNKKlSdnVxwQXezfc9RBUvjEB8VPTy0VGExTzSwMTQwNEs1NjE2SUy2TkhKNU43MLIyMzJJTTY3Ne/p9UhsCGRlOJF9kYmSAQBCfiSExkYEBABSmHsY=";
-
-        Map<String, Object> hashMap = new HashMap<>();
-
-        hashMap.put("streamUrl", musicUrl);
-        hashMap.put("channelName", channel);
-        hashMap.put("token", token);
-        hashMap.put("uid", 0);
-        hashMap.put("idleTimeout", 300);
-
         AgoraPlayMusicQO agoraPlayMusicQO = new AgoraPlayMusicQO();
         AgoraPlayMusicPlayerQO agoraPlayMusicPlayerQO = new AgoraPlayMusicPlayerQO();
         agoraPlayMusicPlayerQO.setUid(0);
@@ -79,9 +70,6 @@ public class SocialuniMusicController {
         // 2、使用postForEntity请求接口
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", authorizationHeader);
-    /*    MediaType mediaType = MediaType.parseMediaType("application/json;charset=utf-8");
-        headers.setContentType(mediaType);
-        headers.add("Accept", MediaType.APPLICATION_JSON.toString());*/
 
         HttpEntity<AgoraPlayMusicQO> httpEntity = new HttpEntity<>(agoraPlayMusicQO, headers);
 
@@ -91,8 +79,12 @@ public class SocialuniMusicController {
 
         RestTemplate restTemplate = RestUtil.getDefaultRestTemplate();
 
+        log.info(fullUrl);
+//        String httpResult = restTemplate.postForEntity(fullUrl, httpEntity, String.class).getBody();
         AgoraPlayMusicRO httpResult = restTemplate.postForEntity(fullUrl, httpEntity, AgoraPlayMusicRO.class).getBody();
         if (httpResult != null) {
+            System.out.println(agoraPlayMusicQO.toString());
+            System.out.println(authorizationHeader.toString());
             System.out.println(httpResult.toString());
 //            log.info(httpResult.getErrMsg());
 //            log.info(httpResult.getErrCode().toString());

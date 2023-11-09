@@ -6,6 +6,6 @@ import lombok.Data;
 public class AgoraPlayMusicPlayerRO {
     String id;
     String status;
-    Integer uid;
-    Integer createTs;
+    Long uid;
+    Long createTs;
 }
