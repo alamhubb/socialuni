@@ -4,7 +4,7 @@ import musicRequest from "@/plugins/musicRequest";
 import {Base64} from 'js-base64';
 
 const client = AgoraRTC.createClient({
-    mode: "live",
+    mode: "rtc",
     codec: "vp8"
 });
 
@@ -16,7 +16,7 @@ const options = {
     // Pass your temp token here.
     token: "007eJxTYMgv2u0/ccF5bxWvnNKKlSdnVxwQXezfc9RBUvjEB8VPTy0VGExTzSwMTQwNEs1NjE2SUy2TkhKNU43MLIyMzJJTTY3Ne/p9UhsCGRlOJF9kYmSAQBCfiSExkYEBABSmHsY=",
     // Set the user ID.
-    uid: 121212
+    uid: Math.floor(Math.random() * 2021428)
 }
 
 console.log(879789789)
@@ -82,6 +82,8 @@ export class MusicRoom {
         // await mucisRoomStore.client.leave();
     }
 
+    yunId = null
+
     async reqquetest(streamUrl) {
         musicRequest.post(`api/cn/v1/projects/${options.appId}/cloud-player/players`, {
             "player": {
@@ -95,6 +97,11 @@ export class MusicRoom {
             headers: {
                 Authorization: authorizationField
             }
+        }).then(res => {
+            console.log(res)
+            if (res && res.player) {
+                this.yunId = res.player.id
+            }
         })
     }
 
@@ -104,11 +111,24 @@ export class MusicRoom {
                 Authorization: authorizationField
             }
         })
-       /* musicRequest.get(`api/v1/projects/${options.appId}/cloud-player/players`, {
+        /* musicRequest.get(`api/v1/projects/${options.appId}/cloud-player/players`, {
+             headers: {
+                 Authorization: authorizationField
+             }
+         })*/
+    }
+
+    async deleteYun() {
+        musicRequest.delete(`api/cn/v1/projects/${options.appId}/cloud-player/players/${this.yunId}`, {
             headers: {
                 Authorization: authorizationField
             }
-        })*/
+        })
+        /* musicRequest.get(`api/v1/projects/${options.appId}/cloud-player/players`, {
+             headers: {
+                 Authorization: authorizationField
+             }
+         })*/
     }
 }
 
