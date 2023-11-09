@@ -5,13 +5,13 @@
         </div>
 
         <div class="flex-1 overflow-hidden h100p bg-white ml-sm">
-            <div class="w100p">
+<!--            <div class="w100p">
                 <audio id="local" :src="test1" controls="controls"
                        style="height: 200px;width: 500px;"></audio>
                 <audio id="remote" style="height: 200px;width: 500px;" controls="controls"></audio>
-            </div>
+            </div>-->
 
-            <!--            <div>
+                        <div>
                             <div></div>
                             <div>
                                 <el-button @click="terstfasd">创建</el-button>
@@ -19,30 +19,30 @@
                             </div>
                         </div>
 
-                        &lt;!&ndash;            <socialuni-msg-view-h5></socialuni-msg-view-h5>&ndash;&gt;
+                        <!--            <socialuni-msg-view-h5></socialuni-msg-view-h5>-->
                         <el-table :data="tableData" stripe size="small"
                                   highlight-current-row
                                   @row-dblclick="handleCurrentChange" style="width: 100%;">
-                            &lt;!&ndash;        <el-table-column width="45">
+                            <!--        <el-table-column width="45">
                                       <template #default="scope">
                                         <svg v-if="scope.row.id === playName" style="width: 15px;height: 15px;" class="svg" aria-hidden="true">
                                           <use xlink:href="#icon-yangshengqi"></use>
                                         </svg>
                                         <span v-else>{{ scope.row.index }}</span>
                                       </template>
-                                    </el-table-column>&ndash;&gt;
+                                    </el-table-column>-->
                             <el-table-column ref="dom" width="45">
                                 <template #default="scope">
-                                    &lt;!&ndash;            <i v-if="isLike(scope.row.id)" style="color: red; font-size: 14px;" class="iconfont icon-xihuan"></i>&ndash;&gt;
-                                    &lt;!&ndash;            <i v-else title="喜欢" class="iconfont icon-aixin" style="font-size: 15px;"></i>&ndash;&gt;
+                                    <!--            <i v-if="isLike(scope.row.id)" style="color: red; font-size: 14px;" class="iconfont icon-xihuan"></i>-->
+                                    <!--            <i v-else title="喜欢" class="iconfont icon-aixin" style="font-size: 15px;"></i>-->
                                 </template>
                             </el-table-column>
                             <el-table-column width="40"><i title="下载" class="iconfont icon-xiazai" style="font-size: 15px;"></i>
                             </el-table-column>
                             <el-table-column prop="name" label="音乐标题" width="400">
                                 <template #default="scope">
-                                    &lt;!&ndash;            <span class="music-title" :class="{active:scope.row.id === playName}">{{ scope.row.name }}</span>&ndash;&gt;
-                                    &lt;!&ndash;            <el-tag @click="toDetail(scope.row.mv)" v-if="scope.row.mv" type="danger" size="mini">MV</el-tag>&ndash;&gt;
+                                    <!--            <span class="music-title" :class="{active:scope.row.id === playName}">{{ scope.row.name }}</span>-->
+                                    <!--            <el-tag @click="toDetail(scope.row.mv)" v-if="scope.row.mv" type="danger" size="mini">MV</el-tag>-->
                                 </template>
                             </el-table-column>
                             <el-table-column label="歌手" width="275">
@@ -57,10 +57,10 @@
                             </el-table-column>
                             <el-table-column prop="address" label="时长">
                                 <template #default="scope">
-                                    &lt;!&ndash;            {{ $formatTime(scope.row.dt).slice(-5) }}&ndash;&gt;
+                                    <!--            {{ $formatTime(scope.row.dt).slice(-5) }}-->
                                 </template>
                             </el-table-column>
-                        </el-table>-->
+                        </el-table>
         </div>
     </div>
 </template>
@@ -86,7 +86,7 @@ export default class MessageView extends Vue {
 
     mounted() {
         this.queryMusicList()
-        this.initZegoYun()
+        // this.initZegoYun()
         // this.initZego()
     }
 
