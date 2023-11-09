@@ -5,6 +5,9 @@ import com.socialuni.social.common.sdk.platform.qq.HttpImgCheckResult;
 import com.socialuni.social.common.sdk.platform.qq.QQConst;
 import com.socialuni.social.common.sdk.platform.weixin.WxConst;
 import com.socialuni.social.common.sdk.utils.RestUtil;
+import com.socialuni.social.music.sdk.model.QO.AgoraPlayMusicPlayerQO;
+import com.socialuni.social.music.sdk.model.QO.AgoraPlayMusicQO;
+import com.socialuni.social.music.sdk.model.RO.AgoraPlayMusicRO;
 import com.socialuni.social.music.sdk.model.RO.SocialuniMusicInfoRO;
 import com.socialuni.social.report.sdk.utils.QQUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +18,7 @@ import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 import java.text.MessageFormat;
@@ -62,22 +66,34 @@ public class SocialuniMusicController {
         hashMap.put("uid", 0);
         hashMap.put("idleTimeout", 300);
 
-        // 封装参数，千万不要替换为Map与HashMap，否则参数无法传递
-        MultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
-        paramMap.add("player", hashMap);
+        AgoraPlayMusicQO agoraPlayMusicQO = new AgoraPlayMusicQO();
+        AgoraPlayMusicPlayerQO agoraPlayMusicPlayerQO = new AgoraPlayMusicPlayerQO();
+        agoraPlayMusicPlayerQO.setUid(0);
+        agoraPlayMusicPlayerQO.setIdleTimeout(300);
+        agoraPlayMusicPlayerQO.setToken(token);
+        agoraPlayMusicPlayerQO.setChannelName(channel);
+        agoraPlayMusicPlayerQO.setStreamUrl(musicUrl);
+
+        agoraPlayMusicQO.setPlayer(agoraPlayMusicPlayerQO);
+
         // 2、使用postForEntity请求接口
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", authorizationHeader);
+    /*    MediaType mediaType = MediaType.parseMediaType("application/json;charset=utf-8");
+        headers.setContentType(mediaType);
+        headers.add("Accept", MediaType.APPLICATION_JSON.toString());*/
 
-        HttpEntity<MultiValueMap<String, Object>> httpEntity = new HttpEntity<>(paramMap, headers);
+        HttpEntity<AgoraPlayMusicQO> httpEntity = new HttpEntity<>(agoraPlayMusicQO, headers);
 
         String postUrl = "https://api.sd-rtn.com/cn/v1/projects/{0}/cloud-player/players";
 
         String fullUrl = MessageFormat.format(postUrl, appId);
 
-        String httpResult = RestUtil.getDefaultRestTemplate().postForEntity(fullUrl, httpEntity, String.class).getBody();
+        RestTemplate restTemplate = RestUtil.getDefaultRestTemplate();
+
+        AgoraPlayMusicRO httpResult = restTemplate.postForEntity(fullUrl, httpEntity, AgoraPlayMusicRO.class).getBody();
         if (httpResult != null) {
-            System.out.println(httpResult);
+            System.out.println(httpResult.toString());
 //            log.info(httpResult.getErrMsg());
 //            log.info(httpResult.getErrCode().toString());
         }
