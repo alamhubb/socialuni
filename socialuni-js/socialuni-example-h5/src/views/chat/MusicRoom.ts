@@ -4,7 +4,7 @@ import musicRequest from "@/plugins/musicRequest";
 import {Base64} from 'js-base64';
 
 const client = AgoraRTC.createClient({
-    mode: "rtc",
+    mode: "live",
     codec: "vp8"
 });
 
@@ -16,7 +16,7 @@ const options = {
     // Pass your temp token here.
     token: "007eJxTYMgv2u0/ccF5bxWvnNKKlSdnVxwQXezfc9RBUvjEB8VPTy0VGExTzSwMTQwNEs1NjE2SUy2TkhKNU43MLIyMzJJTTY3Ne/p9UhsCGRlOJF9kYmSAQBCfiSExkYEBABSmHsY=",
     // Set the user ID.
-    uid: Math.floor(Math.random() * 2021428)
+    uid: Math.floor(Math.random() * 100000)
 }
 
 console.log(879789789)
@@ -34,17 +34,48 @@ let encodedCredential = Base64.encode(plainCredential)
 let authorizationField = "Basic " + encodedCredential
 
 await client.join(options.appId, options.channel, options.token, options.uid);
+const events = ['channel-media-relay-event',
+    'channel-media-relay-state',
+    'connection-state-change',
+    'content-inspect-connection-state-change',
+    'content-inspect-error',
+    'crypt-error',
+    'exception',
+    'image-moderation-connection-state-change',
+    'is-using-cloud-proxy',
+    'join-fallback-to-proxy',
+    'live-streaming-error',
+    'live-streaming-warning',
+    'media-reconnect-end',
+    'media-reconnect-start',
+    'network-quality',
+    'published-user-list',
+    'stream-fallback',
+    'stream-type-changed',
+    'token-privilege-did-expire',
+    'token-privilege-will-expire',
+    'user-info-updated',
+    'user-joined',
+    'user-left',
+    'user-published',
+    'user-unpublished',
+    'volume-indicator',]
 
-client.on("user-published", async (user, mediaType) => {
-    console.log('触发了订阅')
-    console.log(user)
-    console.log(mediaType)
-    await client.subscribe(user, mediaType);
-    if (mediaType === 'audio') {
-        mucisRoomStore.localAudioTrack = user.audioTrack
-        user.audioTrack.play();
-    }
-});
+for (const event of events) {
+    client.on(event, async (user, mediaType) => {
+        console.log(`触发了订阅:${event}`)
+        if (event === 'user-published') {
+            console.log(user)
+            console.log(mediaType)
+            await client.subscribe(user, mediaType);
+            if (mediaType === 'audio') {
+                mucisRoomStore.localAudioTrack = user.audioTrack
+                user.audioTrack.play();
+            }
+        }
+    });
+}
+
 
 export class MusicRoom {
     client = client
@@ -85,6 +116,8 @@ export class MusicRoom {
     yunId = null
 
     async reqquetest(streamUrl) {
+        console.log(9999999)
+        console.log(streamUrl)
         musicRequest.post(`api/cn/v1/projects/${options.appId}/cloud-player/players`, {
             "player": {
                 "streamUrl": streamUrl,

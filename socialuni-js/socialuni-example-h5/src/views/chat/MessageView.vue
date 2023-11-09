@@ -14,7 +14,7 @@
             <div>
                 <div></div>
                 <div>
-                    <el-button @click="terstfasd">创建</el-button>
+                    <el-button @click="terstfasd('https://cdxapp-1257733245.file.myqcloud.com/opentest/M800000puzgO0yRX1o.mp3')">创建</el-button>
                     <el-button @click="terstfasd111">查询</el-button>
                     <el-button @click="deleteYun111">停止</el-button>
                 </div>
@@ -78,6 +78,7 @@ import UUIDUtil from "@socialuni/socialuni-util/src/util/UUIDUtil";
 import test1 from "@/assets/test1.mp3"
 import CryptoJS from "crypto-js"
 import {request} from "axios";
+import SocialuniMusicAPI from "@/api/SocialuniMusicAPI";
 
 @Component({
     components: {SocialuniChatViewH5, SocialuniMsgViewH5}
@@ -230,9 +231,10 @@ export default class MessageView extends Vue {
     handleCurrentChange(row) {
         console.log(row)
         this.songId = row.id
-        mucisRoomStore.publish(this.songId)
+        // mucisRoomStore.publish(this.songId)
 
-        const url = `https://music.163.com/music/song/media/outer/url?id=${this.songId}.mp3`
+        const url = `https://music.163.com/song/media/outer/url?id=${this.songId}.mp3`
+        console.log(url)
         this.terstfasd(url)
     }
 
@@ -240,8 +242,9 @@ export default class MessageView extends Vue {
         return mucisRoomStore;
     }
 
-    terstfasd(url = 'https://cdxapp-1257733245.file.myqcloud.com/opentest/M800000puzgO0yRX1o.mp3') {
-        mucisRoomStore.reqquetest(url)
+    terstfasd(url) {
+        SocialuniMusicAPI.playMusicAPI(url)
+        // mucisRoomStore.reqquetest(url)
     }
 
     terstfasd111() {
