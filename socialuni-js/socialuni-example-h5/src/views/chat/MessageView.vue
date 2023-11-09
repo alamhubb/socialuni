@@ -75,6 +75,7 @@ import {mucisRoomStore} from "@/views/chat/MusicRoom";
 import {ZegoExpressEngine} from "zego-express-engine-webrtc";
 import UUIDUtil from "@socialuni/socialuni-util/src/util/UUIDUtil";
 import test1 from "@/assets/test1.mp3"
+import CryptoJS from "crypto-js"
 
 @Component({
     components: {SocialuniChatViewH5, SocialuniMsgViewH5}
@@ -85,7 +86,34 @@ export default class MessageView extends Vue {
 
     mounted() {
         this.queryMusicList()
-        this.initZego()
+        this.initZegoYun()
+        // this.initZego()
+    }
+
+    async initZegoYun() {
+//Signature=md5(AppId + SignatureNonce + ServerSecret + Timestamp)
+        function GenerateUASignature(appId, signatureNonce, serverSecret, timeStamp) {
+            var str = appId + signatureNonce + serverSecret + timeStamp;
+            // const hash = crypto.createHash('md5'); //规定使用哈希算法中的MD5算法
+            // hash.update(str);
+            // return hash.digest('hex');
+            return CryptoJS.MD5(str).toString()
+        }
+
+        const random = UUIDUtil.getUUID()
+        var signatureNonce = CryptoJS.MD5(random).toString().substring(0, 8)
+//使用你的appId和serverSecret
+        var appId = mucisRoomStore.zego.appId;
+        var serverSecret = mucisRoomStore.zego.key;
+        var timeStamp = Math.round(Date.now() / 1000);
+
+        const Signature = GenerateUASignature(appId, signatureNonce, serverSecret, timeStamp)
+        const url = `api/?Action=DeletePlayer&AppId=${mucisRoomStore.zego.appId}&SignatureNonce=${signatureNonce}&Timestamp=${timeStamp}&Signature=${Signature}&SignatureVersion=2.0&IsTest=false`
+        console.log(url)
+        musicRequest.post(url, {
+            StreamUrl:'https://cdxapp-1257733245.file.myqcloud.com/opentest/M800000puzgO0yRX1o.mp3',
+            RoomId:'0001',
+        })
     }
 
     async initZego() {
@@ -111,17 +139,16 @@ export default class MessageView extends Vue {
         console.log(result)
 
         // 调用 createZegoStream 接口后，需要等待 ZEGO 服务器返回 ZegoLocalStream 实例对象才能执行后续操作
-        /*  const localStream = await zg.createZegoStream({
-              custom: {
-                  audio: {
-                      source: document.querySelector("#local"),
-                      channelCount: 2
-                  }
-              }
-          });
-          */
+        const localStream = await zg.createZegoStream({
+            custom: {
+                audio: {
+                    source: document.querySelector("#local"),
+                    channelCount: 2
+                }
+            }
+        });
 
-        const deviceInfo = await zg.enumDevices();
+        /*const deviceInfo = await zg.enumDevices();
         const audioDeviceList = deviceInfo &&
             deviceInfo.microphones.map((item, index) => {
                 if (!item.deviceName) {
@@ -140,7 +167,7 @@ export default class MessageView extends Vue {
                     input: microphoneDevicesVal
                 }
             }
-        });
+        });*/
 
         zg.startPublishingStream('streamID1', localStream)
 

@@ -50,6 +50,7 @@ export class MusicRoom {
     localAudioTrack: IBufferSourceAudioTrack | IRemoteAudioTrack = null
     zego = {
         appId: 1241473881,
+        key: '8bc8e23df6b06eaeef3530d4a0de1520',
         server: 'wss://webliveroom1241473881-api.imzego.com/ws',
     }
 

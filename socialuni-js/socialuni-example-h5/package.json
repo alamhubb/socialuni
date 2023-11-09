@@ -22,6 +22,7 @@
     "@socialuni/socialuni-user-view-h5": "../packages/socialuni-user/socialuni-user-view-h5",
     "agora-rtc-sdk-ng": "^4.19.3",
     "axios": "^1.4.0",
+    "crypto-js": "^4.2.0",
     "element-plus": "^2.3.7",
     "js-base64": "^3.7.5",
     "mitt": "^3.0.0",
