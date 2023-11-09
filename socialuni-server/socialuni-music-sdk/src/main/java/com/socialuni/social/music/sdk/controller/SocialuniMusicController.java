@@ -1,5 +1,9 @@
 package com.socialuni.social.music.sdk.controller;
 
+import cn.hutool.http.HttpRequest;
+import cn.hutool.http.HttpUtil;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.platform.qq.HttpImgCheckResult;
 import com.socialuni.social.common.sdk.platform.qq.QQConst;
@@ -29,6 +33,11 @@ import java.util.*;
 @Slf4j
 public class SocialuniMusicController {
 
+    @PostMapping("testMusic")
+    public ResultRO<String> testMusic(@RequestBody AgoraPlayMusicQO qo) {
+        log.info(qo.toString());
+        return ResultRO.success("chenggong");
+    }
 
     @GetMapping("queryMusicList")
     public ResultRO<List<SocialuniMusicInfoRO>> queryMusicList() {
@@ -54,6 +63,7 @@ public class SocialuniMusicController {
         // 创建 authorization header
         String authorizationHeader = "Basic " + base64Credentials;
 
+
         String appId = "5e681410a7434ce9bba3e268226ce537";
         String channel = "aa";
         String token = "007eJxTYMgv2u0/ccF5bxWvnNKKlSdnVxwQXezfc9RBUvjEB8VPTy0VGExTzSwMTQwNEs1NjE2SUy2TkhKNU43MLIyMzJJTTY3Ne/p9UhsCGRlOJF9kYmSAQBCfiSExkYEBABSmHsY=";
@@ -70,25 +80,46 @@ public class SocialuniMusicController {
         // 2、使用postForEntity请求接口
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", authorizationHeader);
+//        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
 
         HttpEntity<AgoraPlayMusicQO> httpEntity = new HttpEntity<>(agoraPlayMusicQO, headers);
 
         String postUrl = "https://api.sd-rtn.com/cn/v1/projects/{0}/cloud-player/players";
+//        String postUrl = "https://localpc.socialuni.cn:8091/socialuni/music/testMusic";
 
-        String fullUrl = MessageFormat.format(postUrl, appId);
+//        String fullUrl = MessageFormat.format(postUrl, appId);
+//        String fullUrl = "https://localpc.socialuni.cn:8091/socialuni/music/testMusic";
+        String fullUrl = "https://api.sd-rtn.com/cn/v1/projects/5e681410a7434ce9bba3e268226ce537/cloud-player/players";
 
-        RestTemplate restTemplate = RestUtil.getDefaultRestTemplate();
+        JSONObject param = JSONUtil.createObj();
+
+        param.put("streamUrl", "https://music.163.com/song/media/outer/url?id=1895330088.mp3");
+        param.put("channelName", "aa");
+        param.put("token", "007eJxTYMgv2u0/ccF5bxWvnNKKlSdnVxwQXezfc9RBUvjEB8VPTy0VGExTzSwMTQwNEs1NjE2SUy2TkhKNU43MLIyMzJJTTY3Ne/p9UhsCGRlOJF9kYmSAQBCfiSExkYEBABSmHsY=");
+        param.put("uid", 0);
+        param.put("idleTimeout", 300);
+
+        JSONObject param1 = JSONUtil.createObj();
+        param1.put("player", param);
+
+        String httpResult = HttpRequest.post(fullUrl)
+                .body(JSONUtil.toJsonStr(param1))
+                .header("Authorization", authorizationHeader).execute().body();
+
 
         log.info(fullUrl);
-//        String httpResult = restTemplate.postForEntity(fullUrl, httpEntity, String.class).getBody();
-        AgoraPlayMusicRO httpResult = restTemplate.postForEntity(fullUrl, httpEntity, AgoraPlayMusicRO.class).getBody();
+//        String httpResult = restTemplate.postForEntity("https://api.sd-rtn.com/cn/v1/projects/5e681410a7434ce9bba3e268226ce537/cloud-player/players", httpEntity, String.class).getBody();
+//        AgoraPlayMusicRO httpResult = restTemplate.postForEntity(fullUrl, httpEntity, AgoraPlayMusicRO.class).getBody();
         if (httpResult != null) {
             System.out.println(agoraPlayMusicQO.toString());
+            System.out.println(JSONUtil.toJsonStr(agoraPlayMusicQO));
+            System.out.println(JSONUtil.toJsonStr(param1));
             System.out.println(authorizationHeader.toString());
             System.out.println(httpResult.toString());
 //            log.info(httpResult.getErrMsg());
 //            log.info(httpResult.getErrCode().toString());
         }
+
         return ResultRO.success();
     }
 
