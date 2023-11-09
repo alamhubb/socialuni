@@ -92,6 +92,12 @@ export default class MessageView extends Vue {
         // 初始化实例
         const zg = new ZegoExpressEngine(mucisRoomStore.zego.appId, mucisRoomStore.zego.server);
         zg.setDebugVerbose(false)
+        const config = {
+            logLevel: 'error',
+        };
+
+        zg.setLogConfig(config);
+
         // 登录房间，成功则返回 true
 // userUpdate 设置为 true 会开启监听 roomUserUpdate 回调，默认情况下不会开启该监听
         const result = await zg.loginRoom(
@@ -104,23 +110,41 @@ export default class MessageView extends Vue {
         console.log(777777777)
         console.log(result)
 
-        var myAudio = new Audio("https://cdxapp-1257733245.file.myqcloud.com/opentest/M800000puzgO0yRX1o.mp3");
-        console.log(myAudio)
-        console.log(myAudio.src)
-        myAudio.addEventListener('canplaythrough', function () {
-            myAudio.play();
-        }, false);
-
         // 调用 createZegoStream 接口后，需要等待 ZEGO 服务器返回 ZegoLocalStream 实例对象才能执行后续操作
+        /*  const localStream = await zg.createZegoStream({
+              custom: {
+                  audio: {
+                      source: document.querySelector("#local"),
+                      channelCount: 2
+                  }
+              }
+          });
+          */
+
+        const deviceInfo = await zg.enumDevices();
+        const audioDeviceList = deviceInfo &&
+            deviceInfo.microphones.map((item, index) => {
+                if (!item.deviceName) {
+                    item.deviceName = 'microphone' + index;
+                }
+                console.log('microphone: ' + item.deviceName);
+                return item;
+            });
+        audioDeviceList.push({deviceID: 0, deviceName: '禁止'});
+        const microphoneDevicesVal = audioDeviceList[0].deviceID;
+
+
         const localStream = await zg.createZegoStream({
-            custom: {
+            camera: {
                 audio: {
-                    source: document.querySelector("#local"),
-                    channelCount: 2
+                    input: microphoneDevicesVal
                 }
             }
         });
-        localStream.playVideo(document.querySelector("#local"));
+
+        zg.startPublishingStream('streamID1', localStream)
+
+        localStream.playAudio(document.querySelector("#local"));
 
 
         zg.on('publisherStateUpdate', result => {
@@ -139,7 +163,7 @@ export default class MessageView extends Vue {
 //         localStream.playAudio();
         console.log(9999999999)
         console.log(localStream)
-        zg.startPublishingStream('streamID1', localStream)
+
 
         setTimeout(async () => {
             const remoteStream = await zg.startPlayingStream('streamID1');
