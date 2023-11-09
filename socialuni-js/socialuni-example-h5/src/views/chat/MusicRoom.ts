@@ -1,5 +1,7 @@
 import {reactive} from "vue";
 import AgoraRTC, {IBufferSourceAudioTrack, IRemoteAudioTrack} from "agora-rtc-sdk-ng";
+import musicRequest from "@/plugins/musicRequest";
+import {Base64} from 'js-base64';
 
 const client = AgoraRTC.createClient({
     mode: "rtc",
@@ -17,6 +19,18 @@ const options = {
     uid: 'web' + Math.floor(Math.random() * 2021428)
 }
 
+// 客户 ID
+const customerKey = "1a97b2fe76664ef68bfddf7256cf91d3"
+// 客户密钥
+const customerSecret = "999c0689cc794128b450c1d702f0e2f3"
+// 拼接客户 ID 和客户密钥
+const plainCredential = customerKey + ":" + customerSecret
+// 使用 base64 进行编码
+let encodedCredential = Base64.encode(plainCredential)
+// 创建 authorization header
+let authorizationField = "Basic " + encodedCredential
+
+/*
 await client.join(options.appId, options.channel, options.token, options.uid);
 
 client.on("user-published", async (user, mediaType) => {
@@ -29,10 +43,15 @@ client.on("user-published", async (user, mediaType) => {
         user.audioTrack.play();
     }
 });
+*/
 
 export class MusicRoom {
     client = client
     localAudioTrack: IBufferSourceAudioTrack | IRemoteAudioTrack = null
+    zego = {
+        appId: 1241473881,
+        server: 'wss://webliveroom1241473881-api.imzego.com/ws',
+    }
 
     async publish(songId) {
         const config = {
@@ -56,9 +75,33 @@ export class MusicRoom {
     async leaveClick() {
         // Destroy the local audio track.
         mucisRoomStore.localAudioTrack.stop();
-
+        // this.reqquetest()
         // Leave the channel.
         // await mucisRoomStore.client.leave();
+    }
+
+    async reqquetest(streamUrl) {
+        musicRequest.post(`api/cn/v1/projects/${options.appId}/cloud-player/players`, {
+            "player": {
+                "streamUrl": streamUrl,
+                "channelName": options.channel,
+                "token": options.token,
+                "uid": 0,
+                "idleTimeout": 300,
+            }
+        }, {
+            headers: {
+                Authorization: authorizationField
+            }
+        })
+    }
+
+    async reqquetest111() {
+        musicRequest.get(`api/v1/projects/${options.appId}/cloud-player/players`, {
+            headers: {
+                Authorization: authorizationField
+            }
+        })
     }
 }
 

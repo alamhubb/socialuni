@@ -23,9 +23,11 @@
     "agora-rtc-sdk-ng": "^4.19.3",
     "axios": "^1.4.0",
     "element-plus": "^2.3.7",
+    "js-base64": "^3.7.5",
     "mitt": "^3.0.0",
     "vue": "^3.3.2",
-    "vue-router": "^4.2.0"
+    "vue-router": "^4.2.0",
+    "zego-express-engine-webrtc": "^3.0.1"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.1.0",

@@ -2,7 +2,7 @@ import Axios from 'axios'
 
 // create an axios instance
 const musicRequest = Axios.create({
-    baseURL: import.meta.env.VITE_APP_WY_MUSIC_API,
+    baseURL: '/',
     withCredentials: true,
     timeout: 120000 // request timeout
 })
