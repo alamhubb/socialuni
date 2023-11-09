@@ -214,6 +214,7 @@ export default class MessageView extends Vue {
 
     async queryMusicList() {
         console.log('删除即构diamante')
+        console.log('删除即构diamante')
         const data = await musicRequest.get('/playlist/detail?_t=1699363992&id=3778678') as any
         console.log(data)
         console.log(data.playlist)
