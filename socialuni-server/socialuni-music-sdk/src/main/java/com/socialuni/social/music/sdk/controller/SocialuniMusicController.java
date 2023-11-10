@@ -45,6 +45,17 @@ public class SocialuniMusicController {
     String region = "cn";
     String appId = "5e681410a7434ce9bba3e268226ce537";
 
+    //支持切歌功能，怎么做呢，停止目前播放的，然后播放一个新的
+    //如果存在， 查询需要等10秒
+
+    //我现在有一个场景， 就是播放一个以后，里面播放另一个，就是迅速切歌功能。
+    //我只需要记录上一次创建成功的就可以。
+    //切歌我就把上一个删除，然后重新创建一个
+
+    //播放暂停功能，你咋知道播放完了没，通过时间和前端判断
+    //协同编辑框架
+
+
     @PostMapping("testMusic")
     public ResultRO<String> testMusic(@RequestBody AgoraPlayMusicQO qo) {
         log.info(qo.toString());
