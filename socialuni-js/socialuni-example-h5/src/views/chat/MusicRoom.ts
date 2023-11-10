@@ -14,7 +14,7 @@ const options = {
     // Set the channel name.
     channel: "aa",
     // Pass your temp token here.
-    token: "007eJxTYMgv2u0/ccF5bxWvnNKKlSdnVxwQXezfc9RBUvjEB8VPTy0VGExTzSwMTQwNEs1NjE2SUy2TkhKNU43MLIyMzJJTTY3Ne/p9UhsCGRlOJF9kYmSAQBCfiSExkYEBABSmHsY=",
+    token: "007eJxTYLjqsa6Y8fjv01aKmRpRD866m6eGNc458l1VJsW15U7uhh4FBtNUMwtDE0ODRHMTY5PkVMukpETjVCMzCyMjs+RUU2Nzo0e+qQ2BjAzSlpuYGBkgEMRnYkhMZGAAAPV5HZ4=",
     // Set the user ID.
     uid: Math.floor(Math.random() * 100000)
 }
@@ -162,6 +162,10 @@ export class MusicRoom {
                  Authorization: authorizationField
              }
          })*/
+    }
+
+    async stopPlay() {
+
     }
 }
 

@@ -14,9 +14,13 @@
             <div>
                 <div></div>
                 <div>
-                    <el-button @click="terstfasd('https://cdxapp-1257733245.file.myqcloud.com/opentest/M800000puzgO0yRX1o.mp3')">创建</el-button>
+                    <el-button
+                            @click="terstfasd('https://cdxapp-1257733245.file.myqcloud.com/opentest/M800000puzgO0yRX1o.mp3')">
+                        创建
+                    </el-button>
                     <el-button @click="terstfasd111">查询</el-button>
                     <el-button @click="deleteYun111">停止</el-button>
+                    <el-button @click="jixuYun111">继续</el-button>
                 </div>
             </div>
 
@@ -252,7 +256,15 @@ export default class MessageView extends Vue {
     }
 
     deleteYun111() {
-        mucisRoomStore.deleteYun()
+        SocialuniMusicAPI.updateMusicAPI({
+            isPause: true
+        })
+    }
+
+    jixuYun111() {
+        SocialuniMusicAPI.updateMusicAPI({
+            isPause: false
+        })
     }
 
 }
