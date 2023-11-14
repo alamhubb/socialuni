@@ -8,4 +8,8 @@ export default class SocialuniMusicAPI {
     static updateMusicAPI(updateMusicQO) {
         return socialuniUserRequest.post<any>(`socialuni/music/updateMusic`, updateMusicQO)
     }
+
+    static getMusicTokenAPI() {
+        return socialuniUserRequest.get<string>(`socialuni/music/getMusicToken`)
+    }
 }
