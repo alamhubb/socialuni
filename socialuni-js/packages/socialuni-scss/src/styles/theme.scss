@@ -124,7 +124,8 @@ $colors-custom-font: (
         link: $color-link,
         focus: $color-focus,
         hover: $color-hover,
-        active: $color-active
+        active: $color-active,
+        navbar:$color-navbar-text,
 );
 
 $colors-font: map-merge($colors-base, $colors-custom-font);
