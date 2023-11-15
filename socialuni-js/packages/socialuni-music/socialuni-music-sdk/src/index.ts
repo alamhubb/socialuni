@@ -42,12 +42,13 @@ class SocialuniMusicPlugin implements SocialuniPlugin {
         console.log('触发了音乐的')
         //用户未登录的情况下，也是可以加入频道听歌的
         //做到不绑定手机号，也可以注册用户，发消息等等
-        await socialuniMusicStore.getMusicInitDataAction()
         /*  console.log('触发了Im')
           if (socialuniTokenModule.token) {
               socialuniChatModule.queryMineImUserInfo()
           }*/
+        console.log('执行订阅')
         CommonEventUtil.on(SocialuniImEventKey.socialuniImPageInit, async (params: MessageViewParams) => {
+            await socialuniMusicStore.getMusicInitDataAction()
             socialuniMusicStore.client.leave()
             socialuniMusicStore.setChannelName(params.chatId)
             await socialuniMusicStore.getMusicTokenAction(params.chatId)

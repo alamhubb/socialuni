@@ -18,7 +18,15 @@ import RouterUtil from "@socialuni/socialuni-native-h5/src/util/RouterUtil";
 import ImPagePath from "../constant/ImPagePath";
 
 class SocialuniChatModule {
-    chatId = ''
+    private _chatId = ''
+    get chatId(): string {
+        return this._chatId;
+    }
+
+    setChatId(value: string) {
+        this._chatId = value;
+    }
+
     chats: SocialuniChatRO[] = []
     scrollTop: number = 0
 
@@ -32,7 +40,7 @@ class SocialuniChatModule {
     }
 
     get chatIndex(): number {
-        return this.chats.findIndex(item => item.id === this.chatId)
+        return this.chats.findIndex(item => item.id === this._chatId)
     }
 
     get messages(): MessageVO[] {
@@ -79,13 +87,6 @@ class SocialuniChatModule {
         console.log(chatId)
         this.setChatId(chatId)
         socialuniChatModule.scrollToMessagePageBottom()
-    }
-
-
-    setChatId(chatId: string) {
-        console.log('chatid')
-        console.log(chatId)
-        this.chatId = chatId
     }
 
 
@@ -196,7 +197,7 @@ class SocialuniChatModule {
         console.log(789789798)
         console.log(ImPagePath)
         console.log(ImPagePath.imPagePath)
-        if (SocialuniAppUtil.RouterUtil.getCurrentPageURI() === ImPagePath.imPagePath.message && this.chatId === newChat.id) {
+        if (SocialuniAppUtil.RouterUtil.getCurrentPageURI() === ImPagePath.imPagePath.message && this._chatId === newChat.id) {
             // 则直接往msg增加消息
             // 前台将消息改为已读,修改时间使用后台的就行
             this.readChatAction(newChat.messages)

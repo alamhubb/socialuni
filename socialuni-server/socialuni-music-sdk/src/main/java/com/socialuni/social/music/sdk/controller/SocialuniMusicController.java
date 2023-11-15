@@ -155,8 +155,8 @@ public class SocialuniMusicController {
         return ResultRO.success();
     }
 
-    @PostMapping("playMusic")
-    public ResultRO<Void> playMusic(@RequestBody String musicUrl) {
+    @PostMapping("playMusic/{channel}")
+    public ResultRO<Void> playMusic(@PathVariable("channel") String channel, @RequestBody String musicUrl) {
         // 客户 ID
         final String customerKey = "1a97b2fe76664ef68bfddf7256cf91d3";
         // 客户密钥
@@ -170,7 +170,6 @@ public class SocialuniMusicController {
 
 
         String appId = "5e681410a7434ce9bba3e268226ce537";
-        String channel = "aa";
         String token = "007eJxTYLjqsa6Y8fjv01aKmRpRD866m6eGNc458l1VJsW15U7uhh4FBtNUMwtDE0ODRHMTY5PkVMukpETjVCMzCyMjs+RUU2Nzo0e+qQ2BjAzSlpuYGBkgEMRnYkhMZGAAAPV5HZ4=";
 
         String postUrl = "https://api.sd-rtn.com/cn/v1/projects/{0}/cloud-player/players";

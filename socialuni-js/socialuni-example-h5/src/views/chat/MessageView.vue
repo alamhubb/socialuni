@@ -76,12 +76,24 @@ import SocialuniChatViewH5 from "@socialuni/socialuni-im-view-h5/src/views/Socia
 import SocialuniMsgViewH5 from "@socialuni/socialuni-im-view-h5/src/views/SocialuniMsgViewH5.vue"
 import musicRequest from "@/plugins/musicRequest";
 import SocialuniMusicAPI from "@socialuni/socialuni-music-sdk/src/api/SocialuniMusicAPI";
+import {socialuniChatModule} from "@socialuni/socialuni-im-sdk/src/store/SocialuniChatModule";
+import CommonEventUtil from "@socialuni/socialuni-native-util/src/util/CommonEventUtil";
+import SocialuniImEventKey from "@socialuni/socialuni-im-api/src/constant/SocialuniMusicEventConst";
+import socialuniMusicStore from "@socialuni/socialuni-music-sdk/src/store/SocialuniMusicStore";
 
 @Component({
     components: {SocialuniChatViewH5, SocialuniMsgViewH5}
 })
 export default class MessageView extends Vue {
     tableData = []
+
+    mounted() {
+        this.queryMusicList()
+
+        console.log(this.$route.query)
+        console.log('触发通知')
+        CommonEventUtil.emit(SocialuniImEventKey.socialuniImPageInit, this.$route.query)
+    }
 
     async queryMusicList() {
         console.log('删除即构diamante')
@@ -106,12 +118,12 @@ export default class MessageView extends Vue {
         this.terstfasd(url)
     }
 
-    get mucisRoomStore() {
-        return mucisRoomStore;
-    }
 
     terstfasd(url) {
-        SocialuniMusicAPI.playMusicAPI(url)
+        console.log(1111)
+        console.log(socialuniMusicStore.channelName)
+        console.log(222)
+        SocialuniMusicAPI.playMusicAPI(socialuniMusicStore.channelName, url)
         // mucisRoomStore.reqquetest(url)
     }
 

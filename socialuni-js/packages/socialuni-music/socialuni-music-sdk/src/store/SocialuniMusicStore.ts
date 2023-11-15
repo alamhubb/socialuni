@@ -1,6 +1,6 @@
 import {reactive, UnwrapNestedRefs} from "vue";
 import SocialuniMusicAPI from "../api/SocialuniMusicAPI";
-import AgoraRTC from "agora-rtc-sdk-ng"
+import AgoraRTC, {IAgoraRTCClient, IBufferSourceAudioTrack, IRemoteAudioTrack} from "agora-rtc-sdk-ng"
 
 const client = AgoraRTC.createClient({
     mode: "live",
@@ -22,6 +22,7 @@ export class SocialuniMusicStore {
     }
 
     setChannelName(value: string) {
+        console.log('设置了channel')
         this._channelName = value;
     }
 
