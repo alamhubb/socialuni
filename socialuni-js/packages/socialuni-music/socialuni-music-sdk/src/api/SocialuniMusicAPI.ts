@@ -9,7 +9,11 @@ export default class SocialuniMusicAPI {
         return socialuniUserRequest.post<any>(`socialuni/music/updateMusic`, updateMusicQO)
     }
 
-    static getMusicTokenAPI() {
-        return socialuniUserRequest.get<string>(`socialuni/music/getMusicToken`)
+    static getMusicTokenAPI(channel) {
+        return socialuniUserRequest.get<string>(`socialuni/music/getMusicToken/${channel}`)
+    }
+
+    static getMusicInitDataAPI() {
+        return socialuniUserRequest.get<any>(`socialuni/music/getMusicInitData`)
     }
 }

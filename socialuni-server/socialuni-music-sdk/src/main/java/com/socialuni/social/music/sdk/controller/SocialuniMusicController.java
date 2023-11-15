@@ -18,6 +18,7 @@ import com.socialuni.social.music.sdk.model.QO.AgoraPlayMusicQO;
 import com.socialuni.social.music.sdk.model.QO.AgoraUpdateMusicQO;
 import com.socialuni.social.music.sdk.model.RO.AgoraPlayMusicRO;
 import com.socialuni.social.music.sdk.model.RO.SocialuniMusicInfoRO;
+import com.socialuni.social.music.sdk.model.RO.SocialuniMusicInitDataRO;
 import com.socialuni.social.report.sdk.utils.QQUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import io.agora.education.EducationTokenBuilder2;
@@ -65,13 +66,19 @@ public class SocialuniMusicController {
 
     }
 
-    @GetMapping("getMusicToken")
-    public ResultRO<String> getMusicToken() {
-        String channelName = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(1);
+    @GetMapping("getMusicToken/{channel}")
+    public ResultRO<String> getMusicToken(@PathVariable("channel") String channel) {
         RtcTokenBuilder2 token = new RtcTokenBuilder2();
-        String result = token.buildTokenWithUid(appId, appCertificate, channelName, 0, RtcTokenBuilder2.Role.ROLE_PUBLISHER, DateTimeType.day.intValue(), 0);
+        String result = token.buildTokenWithUid(appId, appCertificate, channel, 0, RtcTokenBuilder2.Role.ROLE_PUBLISHER, DateTimeType.day.intValue(), 0);
         System.out.println("Token with uid: " + result);
         return ResultRO.success(result);
+    }
+
+    @GetMapping("getMusicInitData")
+    public ResultRO<SocialuniMusicInitDataRO> getMusicInitData() {
+        SocialuniMusicInitDataRO musicInitDataRO = new SocialuniMusicInitDataRO();
+        musicInitDataRO.setAppId(appId);
+        return ResultRO.success(musicInitDataRO);
     }
 
     @PostMapping("testMusic")

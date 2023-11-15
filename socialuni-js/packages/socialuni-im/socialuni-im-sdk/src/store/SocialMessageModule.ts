@@ -17,6 +17,9 @@ import SocialuniImUserAPI from "@socialuni/socialuni-im-api/src/api/SocialuniImU
 import RouterUtil from "@socialuni/socialuni-native-h5/src/util/RouterUtil";
 import MessageViewParams from "../model/MessageViewParams";
 import {socialuniChatModule} from "./SocialuniChatModule";
+import SocialuniUserEventConst from "@socialuni/socialuni-user-sdk/src/constant/SocialuniUserEventConst";
+import CommonEventUtil from "@socialuni/socialuni-native-util/src/util/CommonEventUtil";
+import SocialuniImEventKey from "@socialuni/socialuni-im-api/src/constant/SocialuniMusicEventConst";
 
 class SocialuniMsgModule {
     queryTime: Date = null
@@ -36,6 +39,8 @@ class SocialuniMsgModule {
             await this.queryMessages(true)
 
             socialuniChatModule.scrollToMessagePageBottom()
+
+            CommonEventUtil.emit(SocialuniImEventKey.socialuniImPageInit, params)
         }
         // socialuniChatModule.chatId = params.receiveId
         // socialuniChatModule.setCurChatByUserId(params.userId)

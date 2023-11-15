@@ -34,6 +34,7 @@ let encodedCredential = Base64.encode(plainCredential)
 let authorizationField = "Basic " + encodedCredential
 
 await client.join(options.appId, options.channel, options.token, options.uid);
+
 const events = ['channel-media-relay-event',
     'channel-media-relay-state',
     'connection-state-change',
