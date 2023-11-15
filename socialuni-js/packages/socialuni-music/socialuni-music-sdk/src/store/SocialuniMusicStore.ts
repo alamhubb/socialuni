@@ -7,7 +7,6 @@ const client = AgoraRTC.createClient({
     codec: "vp8"
 });
 
-
 export class SocialuniMusicStore {
 
     private _appId: string = null

@@ -5,6 +5,10 @@ export default class SocialuniMusicAPI {
         return socialuniUserRequest.post<any>(`socialuni/music/playMusic/${channelName}`, musicUrl)
     }
 
+    static queryMusicChannel(channelName) {
+        return socialuniUserRequest.get<any>(`socialuni/music/queryMusicChannel/${channelName}`)
+    }
+
     static updateMusicAPI(updateMusicQO) {
         return socialuniUserRequest.post<any>(`socialuni/music/updateMusic`, updateMusicQO)
     }

@@ -16,6 +16,7 @@ import com.socialuni.social.common.sdk.utils.RestUtil;
 import com.socialuni.social.music.sdk.model.QO.AgoraPlayMusicPlayerQO;
 import com.socialuni.social.music.sdk.model.QO.AgoraPlayMusicQO;
 import com.socialuni.social.music.sdk.model.QO.AgoraUpdateMusicQO;
+import com.socialuni.social.music.sdk.model.QO.SocialuniPlayMusicQO;
 import com.socialuni.social.music.sdk.model.RO.AgoraPlayMusicRO;
 import com.socialuni.social.music.sdk.model.RO.SocialuniMusicInfoRO;
 import com.socialuni.social.music.sdk.model.RO.SocialuniMusicInitDataRO;
@@ -26,9 +27,7 @@ import io.agora.media.RtcTokenBuilder2;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.core.io.FileSystemResource;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.ObjectUtils;
@@ -36,11 +35,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
 import java.util.*;
+
+import static com.socialuni.social.common.sdk.utils.RestUtil.*;
 
 @RequestMapping("socialuni/music")
 @RestController
@@ -51,6 +53,11 @@ public class SocialuniMusicController {
     final static String region = "cn";
     final static String appId = "5e681410a7434ce9bba3e268226ce537";
     final static String appCertificate = "dc257b04c72f4850afb2e5d949535de6";
+    final static String agoraRoot = "https://api.sd-rtn.com";
+    // 客户 ID
+    final static String customerKey = "1a97b2fe76664ef68bfddf7256cf91d3";
+    // 客户密钥
+    final static String customerSecret = "999c0689cc794128b450c1d702f0e2f3";
 
     //支持切歌功能，怎么做呢，停止目前播放的，然后播放一个新的
     //如果存在， 查询需要等10秒
@@ -72,6 +79,35 @@ public class SocialuniMusicController {
         String result = token.buildTokenWithUid(appId, appCertificate, channel, 0, RtcTokenBuilder2.Role.ROLE_PUBLISHER, DateTimeType.day.intValue(), 0);
         System.out.println("Token with uid: " + result);
         return ResultRO.success(result);
+    }
+
+    @GetMapping("queryMusicChannel/{channel}")
+    public ResultRO<Object> queryMusicChannelInfo(@PathVariable("channel") String channel) {
+
+        String url = "{0}/dev/v1/channel/user/{1}/{2}";
+
+        String fullUrl = MessageFormat.format(url, agoraRoot, appId, channel);
+
+        log.info(fullUrl);
+
+        RestTemplate restTemplate = getDefaultRestTemplate();
+
+        String authorizationHeader = this.getAuthorization();
+
+        HttpHeaders requestHeader = new HttpHeaders();
+        requestHeader.set("Authorization", authorizationHeader);
+
+        HttpEntity<String> requestEntity = new HttpEntity<>(requestHeader);
+        ResponseEntity<String> responseEntity = restTemplate.exchange(fullUrl, HttpMethod.GET, requestEntity, String.class);
+
+        String result = responseEntity.getBody();
+
+        String httpResult = HttpRequest.get(fullUrl)
+                .header("Authorization", authorizationHeader).execute().body();
+
+        log.info(result);
+        log.info(httpResult);
+        return ResultRO.success(JSONUtil.parseObj(httpResult));
     }
 
     @GetMapping("getMusicInitData")
@@ -155,39 +191,49 @@ public class SocialuniMusicController {
         return ResultRO.success();
     }
 
-    @PostMapping("playMusic/{channel}")
-    public ResultRO<Void> playMusic(@PathVariable("channel") String channel, @RequestBody String musicUrl) {
-        // 客户 ID
-        final String customerKey = "1a97b2fe76664ef68bfddf7256cf91d3";
-        // 客户密钥
-        final String customerSecret = "999c0689cc794128b450c1d702f0e2f3";
-
+    private String getAuthorization() {
         // 拼接客户 ID 和客户密钥并使用 base64 编码
         String plainCredentials = customerKey + ":" + customerSecret;
         String base64Credentials = new String(Base64.getEncoder().encode(plainCredentials.getBytes()));
         // 创建 authorization header
         String authorizationHeader = "Basic " + base64Credentials;
 
+        log.info("authorizationHeader:{}", authorizationHeader);
+        return authorizationHeader;
+    }
 
-        String appId = "5e681410a7434ce9bba3e268226ce537";
-        String token = "007eJxTYLjqsa6Y8fjv01aKmRpRD866m6eGNc458l1VJsW15U7uhh4FBtNUMwtDE0ODRHMTY5PkVMukpETjVCMzCyMjs+RUU2Nzo0e+qQ2BjAzSlpuYGBkgEMRnYkhMZGAAAPV5HZ4=";
+    @PostMapping("playMusic/{channel}")
+    public ResultRO<Void> playMusic(@PathVariable("channel") String channel, @RequestBody @Valid SocialuniPlayMusicQO playMusicQO) {
 
-        String postUrl = "https://api.sd-rtn.com/cn/v1/projects/{0}/cloud-player/players";
-        String fullUrl = MessageFormat.format(postUrl, appId);
+        String postUrl = "https://api.sd-rtn.com/{0}/v1/projects/{1}/cloud-player/players";
+        String fullUrl = MessageFormat.format(postUrl, region, appId);
 
         JSONObject param = JSONUtil.createObj();
+
+        String musicId = playMusicQO.getMusicId();
+
+        String musicUrl = "https://music.163.com/song/media/outer/url?id={0}.mp3";
+
+        if (musicId.contains("http")) {
+            musicUrl = musicId;
+        } else {
+            musicUrl = MessageFormat.format(musicUrl, musicId);
+        }
 
         String newMusicUrl = URLDecoder.decodeForPath(musicUrl, StandardCharsets.UTF_8);
         log.info(newMusicUrl);
 
         param.put("streamUrl", newMusicUrl);
         param.put("channelName", channel);
-        param.put("token", token);
+        param.put("token", playMusicQO.getMusicToken());
         param.put("uid", 0);
         param.put("idleTimeout", 300);
 
         JSONObject param1 = JSONUtil.createObj();
         param1.put("player", param);
+
+
+        String authorizationHeader = this.getAuthorization();
 
         String httpResult = HttpRequest.post(fullUrl)
                 .body(JSONUtil.toJsonStr(param1))
