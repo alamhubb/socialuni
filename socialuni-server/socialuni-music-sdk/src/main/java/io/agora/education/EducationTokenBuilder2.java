@@ -1,4 +1,4 @@
-package com.socialuni.social.music.sdk.dao.DO;
+package io.agora.education;
 
 import io.agora.media.AccessToken2;
 import io.agora.media.Utils;

@@ -9,7 +9,10 @@ export default class CommonEventUtil {
     }
 
     static on(name: string, handler: (data: any) => void): void {
-        console.log('收到通知：' + name)
-        this.event.on(name, handler)
+        console.log('订阅通知：' + name)
+        this.event.on(name, async (data: any) => {
+            console.log('触发订阅：' + name)
+            await handler(data)
+        })
     }
 }
