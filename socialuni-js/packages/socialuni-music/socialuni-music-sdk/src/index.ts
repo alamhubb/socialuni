@@ -8,6 +8,7 @@ import socialuniMusicStore from "./store/SocialuniMusicStore";
 import CommonEventUtil from "@socialuni/socialuni-native-util/src/util/CommonEventUtil";
 import SocialuniImEventKey from "@socialuni/socialuni-im-api/src/constant/SocialuniMusicEventConst";
 import MessageViewParams from "@socialuni/socialuni-im-sdk/src/model/MessageViewParams";
+import AgoraRTC from "agora-rtc-sdk-ng";
 
 const agoraEvents = ['channel-media-relay-event',
     'channel-media-relay-state',
@@ -48,7 +49,72 @@ class SocialuniMusicPlugin implements SocialuniPlugin {
           }*/
         console.log('执行订阅')
         CommonEventUtil.on(SocialuniImEventKey.socialuniImPageInit, async (params: MessageViewParams) => {
-            await socialuniMusicStore.getMusicInitDataAction()
+
+            const client = AgoraRTC.createClient({
+                mode: "live",
+                codec: "vp8"
+            });
+
+
+            await socialuniMusicStore.getMusicTokenAction('51b26fe57a9d4d148d9b7df536eeebfa')
+
+            const options = {
+                // Pass your App ID here.
+                appId: "5e681410a7434ce9bba3e268226ce537",
+                // Set the channel name.
+                channel: "51b26fe57a9d4d148d9b7df536eeebfa",
+                // Pass your temp token here.
+                token: socialuniMusicStore.musicToken,
+                // Set the user ID.
+                uid: Math.floor(Math.random() * 100000)
+            }
+
+            await client.join(options.appId, options.channel, options.token, options.uid);
+
+            const events = ['channel-media-relay-event',
+                'channel-media-relay-state',
+                'connection-state-change',
+                'content-inspect-connection-state-change',
+                'content-inspect-error',
+                'crypt-error',
+                'exception',
+                'image-moderation-connection-state-change',
+                'is-using-cloud-proxy',
+                'join-fallback-to-proxy',
+                'live-streaming-error',
+                'live-streaming-warning',
+                'media-reconnect-end',
+                'media-reconnect-start',
+                'network-quality',
+                'published-user-list',
+                'stream-fallback',
+                'stream-type-changed',
+                'token-privilege-did-expire',
+                'token-privilege-will-expire',
+                'user-info-updated',
+                'user-joined',
+                'user-left',
+                'user-published',
+                'user-unpublished',
+                'volume-indicator',]
+
+            for (const event of events) {
+                client.on(event, async (user, mediaType) => {
+                    console.log(`触发了订阅:${event}`)
+                    if (event === 'user-published') {
+                        console.log(user)
+                        console.log(mediaType)
+                        await client.subscribe(user, mediaType);
+                        if (mediaType === 'audio') {
+                            // mucisRoomStore.localAudioTrack = user.audioTrack
+                            user.audioTrack.play();
+                        }
+                    }
+                });
+            }
+
+
+            /*await socialuniMusicStore.getMusicInitDataAction()
             socialuniMusicStore.client.leave()
             socialuniMusicStore.setChannelName(params.chatId)
             await socialuniMusicStore.getMusicTokenAction(params.chatId)
@@ -68,7 +134,7 @@ class SocialuniMusicPlugin implements SocialuniPlugin {
                         }
                     }
                 });
-            }
+            }*/
         })
     }
 }

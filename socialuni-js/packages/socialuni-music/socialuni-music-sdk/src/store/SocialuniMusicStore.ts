@@ -59,9 +59,9 @@ export class SocialuniMusicStore {
     }
 
     async getMusicTokenAction(channel) {
-        // const res = await SocialuniMusicAPI.getMusicTokenAPI(channel)
-        // this.setMusicToken(res.data)
-        this.setMusicToken('007eJxTYPgnM+sqs++9rVma4kWFYpGbT0oXSRaWLrl62WNxt1Ccj5ACg2mqmYWhiaFBormJsUlyqmVSUqJxqpGZhZGRWXKqqbF5RntoakMgI8Ntn99MjAwQCOIDdRomGZmlpZqaJ1qmmKQYmlikWCaZp6SZGpulpqYmpSUyMAAAe+slxg==')
+        const res = await SocialuniMusicAPI.getMusicTokenAPI(channel)
+        this.setMusicToken(res.data)
+        // this.setMusicToken('007eJxTYPgnM+sqs++9rVma4kWFYpGbT0oXSRaWLrl62WNxt1Ccj5ACg2mqmYWhiaFBormJsUlyqmVSUqJxqpGZhZGRWXKqqbF5RntoakMgI8Ntn99MjAwQCOIDdRomGZmlpZqaJ1qmmKQYmlikWCaZp6SZGpulpqYmpSUyMAAAe+slxg==')
     }
 }
 
