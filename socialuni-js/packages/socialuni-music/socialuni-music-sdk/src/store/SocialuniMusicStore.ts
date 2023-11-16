@@ -25,10 +25,6 @@ export class SocialuniMusicStore {
         this._localAudioTrack = value;
     }
 
-    get client(): any {
-        return client;
-    }
-
     get appId(): any {
         return this._appId;
     }
