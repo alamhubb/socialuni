@@ -76,8 +76,12 @@ public class SocialuniMusicController {
     @GetMapping("getMusicToken/{channel}")
     public ResultRO<String> getMusicToken(@PathVariable("channel") String channel) {
         RtcTokenBuilder2 token = new RtcTokenBuilder2();
+
+        Integer unionId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(channel);
+
         String result = token.buildTokenWithUid(appId, appCertificate, channel, 0, RtcTokenBuilder2.Role.ROLE_PUBLISHER, DateTimeType.day.intValue(), 0);
-        System.out.println("Token with uid: " + result);
+        log.info("Token with uid: {}", unionId);
+        log.info("result: {}", result);
         return ResultRO.success(result);
     }
 
@@ -144,17 +148,7 @@ public class SocialuniMusicController {
 
         String fullUrl = MessageFormat.format(postUrl, this.region, this.appId, this.playerId, this.sequence);
 
-
-        // 客户 ID
-        final String customerKey = "1a97b2fe76664ef68bfddf7256cf91d3";
-        // 客户密钥
-        final String customerSecret = "999c0689cc794128b450c1d702f0e2f3";
-
-        // 拼接客户 ID 和客户密钥并使用 base64 编码
-        String plainCredentials = customerKey + ":" + customerSecret;
-        String base64Credentials = new String(Base64.getEncoder().encode(plainCredentials.getBytes()));
-        // 创建 authorization header
-        String authorizationHeader = "Basic " + base64Credentials;
+        String authorizationHeader = this.getAuthorization();
 
         JSONObject param = JSONUtil.createObj();
 
@@ -222,7 +216,7 @@ public class SocialuniMusicController {
 
         String newMusicUrl = URLDecoder.decodeForPath(musicUrl, StandardCharsets.UTF_8);
         log.info(newMusicUrl);
-
+        Integer unionId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(channel);
         param.put("streamUrl", newMusicUrl);
         param.put("channelName", channel);
         param.put("token", playMusicQO.getMusicToken());

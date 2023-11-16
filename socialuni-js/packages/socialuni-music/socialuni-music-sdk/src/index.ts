@@ -52,12 +52,13 @@ class SocialuniMusicPlugin implements SocialuniPlugin {
             socialuniMusicStore.client.leave()
             socialuniMusicStore.setChannelName(params.chatId)
             await socialuniMusicStore.getMusicTokenAction(params.chatId)
-            await socialuniMusicStore.client.join(socialuniMusicStore.appId, params.chatId, socialuniMusicStore.musicToken)
+            console.log('加入频道')
+            await socialuniMusicStore.client.join(socialuniMusicStore.appId, params.chatId, socialuniMusicStore.musicToken, Math.floor(Math.random() * 100000))
 
             for (const event of agoraEvents) {
                 socialuniMusicStore.client.on(event, async (user, mediaType) => {
-                    console.log(`触发了订阅:${event}`)
                     if (event === 'user-published') {
+                        console.log(`触发了订阅:${event}`)
                         console.log(user)
                         console.log(mediaType)
                         await socialuniMusicStore.client.subscribe(user, mediaType);
