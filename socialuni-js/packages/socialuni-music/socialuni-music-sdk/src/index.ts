@@ -37,6 +37,10 @@ const agoraEvents = ['channel-media-relay-event',
     'user-unpublished',
     'volume-indicator',]
 
+const client = AgoraRTC.createClient({
+    mode: "live",
+    codec: "vp8"
+});
 
 class SocialuniMusicPlugin implements SocialuniPlugin {
     async onLaunch() {
@@ -50,10 +54,7 @@ class SocialuniMusicPlugin implements SocialuniPlugin {
         console.log('执行订阅')
         CommonEventUtil.on(SocialuniImEventKey.socialuniImPageInit, async (params: MessageViewParams) => {
 
-            const client = AgoraRTC.createClient({
-                mode: "live",
-                codec: "vp8"
-            });
+
 
 
             await socialuniMusicStore.getMusicTokenAction('51b26fe57a9d4d148d9b7df536eeebfa')
