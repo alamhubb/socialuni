@@ -6,8 +6,8 @@ import com.socialuni.social.common.api.exception.exception.SocialSystemException
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.constant.ErrorMsg;
 import com.socialuni.social.user.sdk.constant.UserIdentityAuthStatus;
-import com.socialuni.social.user.sdk.model.DO.SocialUserIdentityAuthDO;
-import com.socialuni.social.user.sdk.model.DO.SocialUserIdentityAuthImgDO;
+import com.socialuni.social.user.sdk.dao.DO.SocialUserIdentityAuthDO;
+import com.socialuni.social.user.sdk.dao.DO.SocialUserIdentityAuthImgDO;
 import com.socialuni.social.user.sdk.repository.SocialUserIdentityAuthImgRepository;
 import com.socialuni.social.user.sdk.repository.SocialUserIdentityAuthRepository;
 import com.socialuni.social.sdk.logic.domain.user.SocialAddUserImgDomain;

@@ -3,7 +3,7 @@ package com.socialuni.social.user.sdk.logic.manage;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.common.api.utils.IntegerUtils;
 import com.socialuni.social.common.api.constant.DateTimeType;
-import com.socialuni.social.user.sdk.model.DO.AuthenticationDO;
+import com.socialuni.social.user.sdk.dao.DO.AuthenticationDO;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.user.sdk.repository.AuthenticationRepository;
 import lombok.extern.slf4j.Slf4j;

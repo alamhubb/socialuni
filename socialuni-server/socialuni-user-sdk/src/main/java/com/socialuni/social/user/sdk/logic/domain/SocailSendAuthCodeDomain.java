@@ -13,7 +13,7 @@ import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.tance.sdk.facade.ConfigFacade;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserPhoneManage;
-import com.socialuni.social.user.sdk.model.DO.AuthenticationDO;
+import com.socialuni.social.user.sdk.dao.DO.AuthenticationDO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.QO.phone.SocialSendAuthCodeQO;
 import com.socialuni.social.user.sdk.repository.AuthenticationRepository;

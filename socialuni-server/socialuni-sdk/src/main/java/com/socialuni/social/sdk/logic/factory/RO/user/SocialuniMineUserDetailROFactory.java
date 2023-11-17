@@ -6,10 +6,10 @@ import com.socialuni.social.sdk.im.logic.domain.SocialBindUserOpenImAccountDomai
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserExpandDOUtil;
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserSocialCoinDOUtil;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
-import com.socialuni.social.user.sdk.model.DO.SocialUserPhoneDo;
+import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserExpandDo;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserCoinDo;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniUserExpandDo;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniUserCoinDo;
 import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserDetailRO;
 import com.socialuni.social.user.sdk.logic.redis.SocialUserPhoneRedis;

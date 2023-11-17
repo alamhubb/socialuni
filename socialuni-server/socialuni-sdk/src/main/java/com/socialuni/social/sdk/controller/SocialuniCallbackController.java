@@ -9,7 +9,7 @@ import com.socialuni.social.sdk.dao.DO.bussiness.SocialuniPayCoinOrderDO;
 import com.socialuni.social.sdk.dao.factory.SocialuniCoinOrderFactory;
 import com.socialuni.social.sdk.dao.repository.bussiness.SocialuniPayOrderRepository;
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserSocialCoinDOUtil;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserCoinDo;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniUserCoinDo;
 import com.socialuni.social.common.sdk.platform.QQPayNotifyResult;
 import com.socialuni.social.common.sdk.platform.WXPayNotifyResult;
 import com.socialuni.social.common.sdk.platform.qq.QQPayResult;

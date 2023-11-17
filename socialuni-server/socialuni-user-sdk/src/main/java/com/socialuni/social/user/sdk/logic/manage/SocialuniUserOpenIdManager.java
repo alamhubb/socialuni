@@ -1,18 +1,11 @@
 package com.socialuni.social.user.sdk.logic.manage;
 
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
-import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
-import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
-import com.socialuni.social.tance.sdk.constant.AdminAppConfigConst;
-import com.socialuni.social.tance.sdk.model.DevAccountModel;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserOpenIdDO;
-import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
-import com.socialuni.social.user.sdk.model.factory.SocialUserDOFactory;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniUserOpenIdDO;
 import com.socialuni.social.user.sdk.repository.SocialuniUserOpenIdRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.*;

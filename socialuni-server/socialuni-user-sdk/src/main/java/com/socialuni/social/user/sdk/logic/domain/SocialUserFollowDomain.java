@@ -5,17 +5,14 @@ import com.socialuni.social.user.sdk.logic.manage.SocialuniUserFollowManage;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserFansDetailManage;
 import com.socialuni.social.user.sdk.logic.redis.SocialuniUserFollowRedis;
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserFollowDO;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniUserFollowDO;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.user.sdk.model.QO.follow.SocialuniUserFollowAddQO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
-import javax.validation.constraints.NotNull;
 
 @Service
 public class SocialUserFollowDomain implements SocialUserFollowDomainInterface {

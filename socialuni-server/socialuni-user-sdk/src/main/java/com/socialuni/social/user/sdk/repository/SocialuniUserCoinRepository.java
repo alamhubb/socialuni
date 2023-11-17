@@ -1,7 +1,6 @@
 package com.socialuni.social.user.sdk.repository;
 
-import cn.hutool.core.bean.BeanUtil;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserCoinDo;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniUserCoinDo;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;

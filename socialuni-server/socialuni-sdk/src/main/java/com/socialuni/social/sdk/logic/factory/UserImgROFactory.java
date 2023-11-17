@@ -4,7 +4,7 @@ package com.socialuni.social.sdk.logic.factory;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.common.api.model.user.SocialuniUserImgRO;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserImgDo;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniUserImgDo;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -8,7 +8,7 @@ import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
 import com.socialuni.social.report.sdk.utils.SocialuniImgContentUtil;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserImgDo;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniUserImgDo;
 
 import java.util.Date;
 

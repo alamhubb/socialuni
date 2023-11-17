@@ -2,7 +2,7 @@ package com.socialuni.social.user.sdk.utils;
 
 import com.socialuni.social.common.api.utils.SocialTokenFacade;
 import com.socialuni.social.common.sdk.utils.RequestLogUtil;
-import com.socialuni.social.user.sdk.model.DO.SocialuniTokenDO;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniTokenDO;
 import com.socialuni.social.user.sdk.repository.SocialuniCommonTokenRepository;
 import com.socialuni.social.common.api.utils.IntegerUtils;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;

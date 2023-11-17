@@ -2,7 +2,6 @@ package com.socialuni.social.im.dao.repository;
 
 
 import com.socialuni.social.im.dao.DO.SocialuniFriendApplyRecordDO;
-import com.socialuni.social.user.sdk.model.DO.AuthenticationDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

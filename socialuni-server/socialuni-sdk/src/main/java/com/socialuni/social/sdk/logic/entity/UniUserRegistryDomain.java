@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.entity;
 
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import com.socialuni.social.user.sdk.model.DO.SocialuniTokenDO;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniTokenDO;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.logic.entity.SocialPhoneLoginEntity;
 import com.socialuni.social.user.sdk.logic.entity.SocialUserEntity;

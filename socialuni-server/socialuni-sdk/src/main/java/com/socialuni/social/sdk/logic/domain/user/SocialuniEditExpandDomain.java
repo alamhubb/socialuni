@@ -10,7 +10,7 @@ import com.socialuni.social.user.sdk.model.QO.SocialUserContactInfoEditQO;
 import com.socialuni.social.user.sdk.model.QO.SocialUserSchoolNameEditQO;
 import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserExpandDo;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniUserExpandDo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 

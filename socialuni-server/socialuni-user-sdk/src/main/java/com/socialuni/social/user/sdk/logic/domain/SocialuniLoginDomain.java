@@ -5,7 +5,7 @@ import com.socialuni.social.common.sdk.event.ddd.EventPublisherFacade;
 import com.socialuni.social.user.sdk.logic.entity.SocialPhoneLoginEntity;
 import com.socialuni.social.user.sdk.logic.entity.SocialProviderLoginEntity;
 import com.socialuni.social.user.sdk.logic.manage.SocialuniTokenManage;
-import com.socialuni.social.user.sdk.model.DO.SocialuniTokenDO;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniTokenDO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumQO;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;

@@ -1,7 +1,7 @@
 package com.socialuni.social.user.sdk.repository;
 
 
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserHugDo;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniUserHugDo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

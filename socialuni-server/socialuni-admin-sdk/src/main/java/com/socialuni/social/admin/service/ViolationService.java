@@ -13,7 +13,7 @@ import com.socialuni.social.sdk.logic.entity.user.SocialUserViolationEntity;
 import com.socialuni.social.sdk.logic.service.ReportService;
 import com.socialuni.social.report.sdk.enumeration.SocialuniUserStatus;
 import com.socialuni.social.common.sdk.constant.UserType;
-import com.socialuni.social.user.sdk.model.DO.SocialUserViolationDo;
+import com.socialuni.social.user.sdk.dao.DO.SocialUserViolationDo;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;

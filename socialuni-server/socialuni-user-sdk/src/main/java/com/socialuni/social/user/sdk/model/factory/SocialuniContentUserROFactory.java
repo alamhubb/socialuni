@@ -4,7 +4,7 @@ import com.socialuni.social.user.sdk.constant.UserIdentityAuthStatus;
 import com.socialuni.social.user.sdk.logic.manage.SocialuniUserFollowManage;
 import com.socialuni.social.common.api.model.user.SocialuniContentUserRO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.user.sdk.model.DO.SocialUserIdentityAuthDO;
+import com.socialuni.social.user.sdk.dao.DO.SocialUserIdentityAuthDO;
 import com.socialuni.social.user.sdk.repository.SocialUserIdentityAuthRepository;
 import org.springframework.stereotype.Component;
 

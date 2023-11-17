@@ -22,7 +22,7 @@ import com.socialuni.social.im.api.model.RO.SocialMessageRO;
 import com.socialuni.social.im.enumeration.MessageStatus;
 import com.socialuni.social.im.logic.manage.SocialuniUserChatConfigManage;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserFollowDO;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniUserFollowDO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import lombok.Data;
