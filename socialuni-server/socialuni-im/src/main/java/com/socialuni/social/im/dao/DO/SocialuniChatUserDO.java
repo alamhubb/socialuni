@@ -28,6 +28,8 @@ public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {
     private Integer chatId;
     //是否拉黑了对方
     private Boolean blackUser;
+    //管理员角色
+    private Integer chatRoleId;
 
 
     //每一个用户对于这个群聊的状态

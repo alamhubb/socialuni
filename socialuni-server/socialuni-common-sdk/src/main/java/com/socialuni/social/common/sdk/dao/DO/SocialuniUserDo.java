@@ -21,6 +21,7 @@ import javax.persistence.UniqueConstraint;
                 @Index(columnList = "nickname"),
                 @Index(columnList = "age"),
                 @Index(columnList = "type"),
+                @Index(columnList = "roleId"),
         },
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "unionId"),
@@ -35,7 +36,7 @@ public class SocialuniUserDo extends SocialuniUnionContentBaseDO {
     private String birthday;
     private Integer age;
     private String city;
-    private String type;
+    private String roleId;
 
     //获取userId的正确方式为getUserId，这个id不正确
     @Deprecated

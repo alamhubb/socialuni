@@ -1,6 +1,8 @@
 package com.socialuni.social.music.sdk.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
+import com.socialuni.social.common.api.entity.SocialuniUserContactBaseDO;
+import com.socialuni.social.common.api.entity.SocialuniUserInfoBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,19 +11,21 @@ import javax.persistence.Index;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "s_music_room_player",
+@Table(name = "s_music_room_user",
         indexes = {
+                @Index(columnList = "userId"),
                 @Index(columnList = "roomId"),
                 @Index(columnList = "status")
         }
 )
 @Data
 @NoArgsConstructor
-public class SocialuniMusicRoomPlayerDO extends SocialuniContentBaseDO {
+public class SocialuniMusicRoomUserDO extends SocialuniContentBaseDO {
 
     //可以关联chatGroupId
-    Integer roomId;
+    Integer userId;
     // 云端播放器id
-    String playerId;
+    Integer roomId;
+    String roomRoleId;
 
 }
