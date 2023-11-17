@@ -16,8 +16,13 @@ public class SocialuniChatManage {
     public SocialuniChatDO getOrCreateChat(String chatName) {
         SocialuniChatDO socialuniChatDO = chatRepository.findFirstByTypeAndChatName(ChatType.system_group, chatName);
         if (socialuniChatDO == null) {
-            socialuniChatDO = SocialuniChatDOFactory.createGroupChat(chatName);
+            socialuniChatDO = this.createChat(chatName);
         }
+        return socialuniChatDO;
+    }
+
+    public SocialuniChatDO createChat(String chatName) {
+        SocialuniChatDO socialuniChatDO = SocialuniChatDOFactory.createGroupChat(chatName);
         return socialuniChatDO;
     }
 }

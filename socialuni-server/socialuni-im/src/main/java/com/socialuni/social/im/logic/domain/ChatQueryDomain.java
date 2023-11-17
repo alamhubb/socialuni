@@ -55,6 +55,7 @@ public class ChatQueryDomain {
         //启动的时候
         //修改的时候
 
+        //需要将用户加入到这些群聊中
         for (String group : groups) {
             SocialuniChatDO socialuniChatDO = socialuniChatManage.getOrCreateChat(group);
             SocialuniChatUserDO socialuniChatUserDO = socialuniChatUserManage.getOrCreateChat(socialuniChatDO, user.getUserId());

@@ -24,4 +24,13 @@ public class SocialuniChatUserManage {
         }
         return socialuniChatUserDO;
     }
+
+    public SocialuniChatUserDO createUserRoomChatUser(SocialuniChatDO chatDO, Integer userId) {
+        SocialuniChatUserDO socialuniChatUserDO = chatUserRepository.findOneByChatIdAndUserId(chatDO.getUnionId(), userId);
+
+        if (socialuniChatUserDO == null) {
+            socialuniChatUserDO = SocialuniChatUserDOFactory.createGroupChatUser(chatDO, userId);
+        }
+        return socialuniChatUserDO;
+    }
 }
