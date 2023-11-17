@@ -24,6 +24,7 @@ import com.socialuni.social.im.logic.foctory.SocialuniChatUserDOFactory;
 import com.socialuni.social.im.logic.foctory.SocialuniMessageDOFactory;
 import com.socialuni.social.im.logic.manage.SocialuniUserChatConfigManage;
 import com.socialuni.social.im.model.message.notify.NotifyVO;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniUserBlackDO;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserFollowDO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Service;
@@ -87,19 +88,18 @@ public class SocialuniMessageEntity {
         SocialuniUserUtil.getAndCheckUserNotNull(beUserId);
 
         List<SocialuniChatUserDO> chatSocialuniUserDoS = SocialuniChatUserDOFactory.getOrCreateChatUsersBySingleSendMsg(beUserId, mineUserId);
-        SocialuniChatUserDO beChatUserDO = chatSocialuniUserDoS.get(0);
 
-        //对方是否把你拉黑了
-        if (beChatUserDO != null && beChatUserDO.getBlackUser()) {
+        SocialuniUserBlackDO socialuniUserBlackDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserIdAndStatus(beUserId, mineUserId, SocialuniCommonStatus.enable, SocialuniUserBlackDO.class);
+        //如果您把对方拉黑了，重新关注后则取消拉黑
+        if (socialuniUserBlackDO != null) {
             throw new SocialBusinessException("您已被对方拉黑，无法发送消息");
         }
 
-
         if (!beUserId.equals(mineUserId)){
-            SocialuniChatUserDO chatUser = chatSocialuniUserDoS.get(1);
+            SocialuniUserBlackDO beSocialuniUserBlackDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserIdAndStatus(beUserId, mineUserId, SocialuniCommonStatus.enable, SocialuniUserBlackDO.class);
 
             //对方是否把你拉黑了
-            if (chatUser != null && chatUser.getBlackUser()) {
+            if (beSocialuniUserBlackDO != null) {
                 throw new SocialBusinessException("您已将对方拉黑，无法发送消息");
             }
         }

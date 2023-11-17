@@ -22,6 +22,7 @@ import com.socialuni.social.im.api.model.RO.SocialMessageRO;
 import com.socialuni.social.im.enumeration.MessageStatus;
 import com.socialuni.social.im.logic.manage.SocialuniUserChatConfigManage;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniUserBlackDO;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserFollowDO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
@@ -155,8 +156,15 @@ public class SocialChatROFactory {
 
             chatRO.setBlackUser(chatRO.getBlackUser());
 
-            SocialuniChatUserDO beChatUser = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(chatUserDO.getBeUserId(), chatUserDO.getUserId(), SocialuniChatUserDO.class);
-            chatRO.setBeBlackUser(beChatUser.getBlackUser());
+
+            SocialuniUserBlackDO socialuniUserBlackDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserIdAndStatus(chatUserDO.getBeUserId(), chatUserDO.getUserId(), SocialuniCommonStatus.enable, SocialuniUserBlackDO.class);
+
+            if (socialuniUserBlackDO != null) {
+                chatRO.setBeBlackUser(true);
+            } else {
+                chatRO.setBeBlackUser(false);
+            }
+
 
             SocialuniUserFollowDO beFollowDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(chatUserDO.getBeUserId(), chatUserDO.getUserId(), SocialuniUserFollowDO.class);
 
@@ -189,12 +197,12 @@ public class SocialChatROFactory {
         ChatRO chatRO = SocialChatROFactory.getChatROByUserLogin(chatUserDO);
 
         List<SocialMessageRO> messages;
-        if (chatRO.getType().equals(ChatType.single)){
+        if (chatRO.getType().equals(ChatType.single)) {
             //系统群聊读取message表
             //查询用户这个chatUser下的消息
             List<SocialuniMessageReceiveDO> messageReceiveDOS = messageReceiveRepository.findTop30ByChatUserIdAndStatusAndCreateTimeLessThanOrderByCreateTimeDesc(chatUserDO.getId(), MessageStatus.enable, new Date());
             messages = SocialMessageROFactory.messageReceiveDOToVOS(messageReceiveDOS);
-        }else {
+        } else {
             //查询用户这个chatUser下的消息
             //已经确认过chat为可用的
             List<SocialuniMessageDO> messageDOS = messageRepository.findTop31ByChatIdAndStatusAndIdNotInOrderByIdDesc(chatUserDO.getChatId(), ChatStatus.enable, SocialuniConst.emptyIds);

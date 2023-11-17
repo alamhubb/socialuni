@@ -1,5 +1,6 @@
 package com.socialuni.social.im.logic.service;
 
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserIdQO;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
@@ -10,6 +11,7 @@ import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.im.dao.DO.SocialuniUserChatConfigDO;
 import com.socialuni.social.im.logic.manage.SocialuniUserChatConfigManage;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniUserBlackDO;
 import com.socialuni.social.user.sdk.logic.manage.SocialuniUserFollowManage;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Service;
@@ -36,7 +38,9 @@ public class SocialuniImUserService {
         socialuniImUserDetailRO.setAllowStrangerMsg(socialuniUserChatConfigDO.getAllowStrangerMsg());
         if (mineUserId != null) {
             SocialuniChatUserDO chatUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(beUserId, mineUserId, SocialuniChatUserDO.class);
-            if (chatUserDO != null && chatUserDO.getBlackUser()) {
+
+            SocialuniUserBlackDO socialuniUserBlackDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserIdAndStatus(beUserId, mineUserId, SocialuniCommonStatus.enable, SocialuniUserBlackDO.class);
+            if (socialuniUserBlackDO != null) {
                 socialuniImUserDetailRO.setBlackUser(true);
             }
             //查看对方是否关注了你

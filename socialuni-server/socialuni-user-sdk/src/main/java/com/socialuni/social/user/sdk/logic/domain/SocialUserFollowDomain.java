@@ -1,6 +1,8 @@
 package com.socialuni.social.user.sdk.logic.domain;
 
+import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniUserBlackDO;
 import com.socialuni.social.user.sdk.logic.manage.SocialuniUserFollowManage;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserFansDetailManage;
 import com.socialuni.social.user.sdk.logic.redis.SocialuniUserFollowRedis;
@@ -45,6 +47,13 @@ public class SocialUserFollowDomain implements SocialUserFollowDomainInterface {
         } else {
             //已经关注
             followDO = followManage.updateFollow(followDO, SocialuniCommonStatus.enable);
+        }
+
+        SocialuniUserBlackDO socialuniUserBlackDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserIdAndStatus(mineUserId, beUserId, SocialuniCommonStatus.enable, SocialuniUserBlackDO.class);
+        //如果您把对方拉黑了，重新关注后则取消拉黑
+        if (socialuniUserBlackDO != null) {
+            socialuniUserBlackDO.setStatus(SocialuniCommonStatus.delete);
+            SocialuniUserContactRepositoryFacede.save(socialuniUserBlackDO);
         }
         return followDO;
     }

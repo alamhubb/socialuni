@@ -27,7 +27,6 @@ public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {
     //    private SocialuniChatDO chat;
     private Integer chatId;
     //是否拉黑了对方
-    private Boolean blackUser;
     //管理员角色
     private Integer chatRoleId;
 
@@ -81,7 +80,6 @@ public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {
         //为什么不设置成99，因为此版本没有阅读功能？先试试99
         this.unreadNum = 0;
         this.frontShow = true;
-        this.blackUser = false;
     }
 
     //群聊，不需要对方用户
@@ -108,7 +106,6 @@ public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {
         this.topFlag = false;
         //为什么不设置成99，因为此版本没有阅读功能？先试试99
         this.unreadNum = 0;
-        this.blackUser = false;
     }
 
     public SocialuniChatUserDO(SocialuniChatDO chat, Integer userId, Integer beUserId) {
