@@ -38,7 +38,7 @@ public class SocialuniImApplicationRunner implements ApplicationRunner {
     public void run(ApplicationArguments args) {
         List<String> groups = socialuniAppConfigInterface.getAppConfig().getDefaultChatGroups();
         for (String group : groups) {
-            socialuniChatManage.getOrCreateChat(group);
+            socialuniChatManage.getOrCreateSystemGroupChat(group);
         }
     }
 }

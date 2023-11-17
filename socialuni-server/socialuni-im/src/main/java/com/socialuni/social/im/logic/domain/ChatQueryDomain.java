@@ -34,9 +34,9 @@ public class ChatQueryDomain {
     SocialuniChatManage socialuniChatManage;
     @Resource
     SocialuniChatUserManage socialuniChatUserManage;
-
     @Resource
     SocialuniChatEntity socialuniChatEntity;
+
 
     public List<ChatRO> getChats() {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
@@ -64,8 +64,7 @@ public class ChatQueryDomain {
 
         //需要将用户加入到这些群聊中
         for (String group : groups) {
-            SocialuniChatDO socialuniChatDO = socialuniChatManage.getOrCreateChat(group);
-            SocialuniChatUserDO socialuniChatUserDO = socialuniChatUserManage.getOrCreateChat(socialuniChatDO, user.getUserId());
+            SocialuniChatDO socialuniChatDO = socialuniChatEntity.getOrCreateSystemChatUser(group, user);
         }
 
         //未登录的情况只插叙你官方的chats

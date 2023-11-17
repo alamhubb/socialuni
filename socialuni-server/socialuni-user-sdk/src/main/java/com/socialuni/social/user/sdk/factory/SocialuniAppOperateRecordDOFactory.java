@@ -9,9 +9,8 @@ import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 
 public class SocialuniAppOperateRecordDOFactory {
 
-    public static SocialuniAppOperateRecordDO createChatAppOperateRecordDO(String contentType, Integer contentId, String type, Integer roleId, String roleType, Integer userId, Integer beUserId) {
+    /*public static SocialuniAppOperateRecordDO createChatAppOperateRecordDO(String contentType, Integer contentId, String type, Integer roleId, String roleType, Integer userId, Integer beUserId) {
         SocialuniAppOperateRecordDO socialuniAppOperateRecordDO = new SocialuniAppOperateRecordDO();
-
 
         socialuniAppOperateRecordDO.setContentType(contentType);
         socialuniAppOperateRecordDO.setContentId(contentId);
@@ -26,7 +25,7 @@ public class SocialuniAppOperateRecordDOFactory {
         //角色类型，系统管理员，
         String roleType;
         String roleId;
-    }
+    }*/
 
 
     public static SocialuniAppOperateRecordDO createChatAppOperateRecordDOBySys(String contentType, Integer contentId, String type, Integer beUserId, String remark) {

@@ -1,8 +1,10 @@
 package com.socialuni.social.im.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniUserContactBaseDO;
+import com.socialuni.social.common.sdk.constant.SocialuniCommmonRoleConst;
 import com.socialuni.social.im.enumeration.ChatType;
 import com.socialuni.social.im.enumeration.ChatUserStatus;
+import com.socialuni.social.im.enumeration.SocialuniChatRoleId;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -93,6 +95,7 @@ public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {
         this.setUserId(userId);
         this.setType(chat.getType());
         this.chatId = chat.getUnionId();
+        this.chatRoleId = SocialuniChatRoleId.user;
         if (chatType.equals(ChatType.single)) {
             //私聊聊，直接是开启，创建时 只能为待开启和 不在前台显示
             this.frontShow = false;

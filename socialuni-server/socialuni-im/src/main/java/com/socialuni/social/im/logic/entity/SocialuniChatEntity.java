@@ -24,8 +24,15 @@ public class SocialuniChatEntity {
     @Resource
     SocialuniChatRepository chatRepository;
 
-    //不管官方群聊，我们就创建用户的群聊
 
+    public SocialuniChatDO getOrCreateSystemChatUser(String chatName, SocialuniUserDo user) {
+        SocialuniChatDO socialuniChatDO = socialuniChatManage.getOrCreateSystemGroupChat(chatName);
+        SocialuniChatUserDO socialuniChatUserDO = socialuniChatUserManage.getOrCreateChat(socialuniChatDO, user.getUserId());
+        return socialuniChatDO;
+    }
+
+
+    //不管官方群聊，我们就创建用户的群聊
     public SocialuniChatDO getOrCreateUserPersonalChat(SocialuniUserDo socialuniUserDo) {
         SocialuniChatDO socialuniChatDO = chatRepository.findFirstByTypeAndUserIdOrderByCreateTimeDesc(ChatType.userPersonalGroup, socialuniUserDo.getUserId());
         if (socialuniChatDO == null) {
@@ -45,5 +52,6 @@ public class SocialuniChatEntity {
                 socialuniUserDo.getUserId(),
                 "创建用户个人群组"
         );
+        return socialuniChatDO;
     }
 }
