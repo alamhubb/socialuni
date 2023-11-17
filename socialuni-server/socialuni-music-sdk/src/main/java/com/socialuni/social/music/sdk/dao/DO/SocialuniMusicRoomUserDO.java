@@ -23,9 +23,13 @@ import javax.persistence.Table;
 public class SocialuniMusicRoomUserDO extends SocialuniContentBaseDO {
 
     //可以关联chatGroupId
-    Integer userId;
     // 云端播放器id
     Integer roomId;
     String roomRoleId;
 
+    public SocialuniMusicRoomUserDO(Integer userId,  Integer roomId, String roomRoleId) {
+        super(userId);
+        this.roomId = roomId;
+        this.roomRoleId = roomRoleId;
+    }
 }

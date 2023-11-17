@@ -17,6 +17,7 @@ import com.socialuni.social.im.dao.DO.SocialuniUserChatConfigDO;
 import com.socialuni.social.im.dao.DO.message.SocialuniMessageDO;
 import com.socialuni.social.im.dao.DO.message.SocialuniMessageReceiveDO;
 import com.socialuni.social.im.enumeration.*;
+import com.socialuni.social.im.logic.check.SocialuniChatUserCheck;
 import com.socialuni.social.im.logic.domain.NotifyDomain;
 import com.socialuni.social.im.logic.foctory.SocaluniNotifyROFactory;
 import com.socialuni.social.im.logic.foctory.SocialMessageROFactory;
@@ -95,7 +96,7 @@ public class SocialuniMessageEntity {
             throw new SocialBusinessException("您已被对方拉黑，无法发送消息");
         }
 
-        if (!beUserId.equals(mineUserId)){
+        if (!beUserId.equals(mineUserId)) {
             SocialuniUserBlackDO beSocialuniUserBlackDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserIdAndStatus(beUserId, mineUserId, SocialuniCommonStatus.enable, SocialuniUserBlackDO.class);
 
             //对方是否把你拉黑了
@@ -143,20 +144,19 @@ public class SocialuniMessageEntity {
         return SocialMessageROFactory.getMessageRO(mineMessageUser);
     }
 
+    @Resource
+    SocialuniChatUserCheck socialuniChatUserCheck;
+
     public SocialMessageRO sendGroupMessage(Integer chatId, String msgContent) {
         SocialuniChatDO chat = SocialuniRepositoryFacade.findByUnionId(chatId, SocialuniChatDO.class);
+
+        SocialuniUserDo sendUser = SocialuniUserUtil.getMineUserNotNull();
 
         if (chat == null) {
             throw new SocialParamsException("不存在的群聊");
         }
 
-        SocialuniUserDo sendUser = SocialuniUserUtil.getMineUserNotNull();
-
-        SocialuniChatUserDO chatUserDO = chatUserRepository.findFirstByChatIdAndUserIdAndStatus(chatId, sendUser.getUserId(), ChatUserStatus.enable);
-
-        if (chatUserDO == null) {
-            throw new SocialParamsException("未加入群聊");
-        }
+        SocialuniChatUserDO chatUserDO = socialuniChatUserCheck.CheckUserInChat(chatId, sendUser.getUserId());
 
         List<SocialuniChatUserDO> chatSocialuniUserDoS = chatUserRepository.findByChatIdAndStatus(chatId, ChatUserStatus.enable);
 

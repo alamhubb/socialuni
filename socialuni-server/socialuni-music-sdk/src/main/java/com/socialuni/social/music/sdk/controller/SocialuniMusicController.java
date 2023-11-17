@@ -6,13 +6,23 @@ import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.socialuni.social.common.api.constant.DateTimeType;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
+import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.utils.JsonUtil;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
+import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
 import com.socialuni.social.common.sdk.platform.qq.HttpImgCheckResult;
 import com.socialuni.social.common.sdk.platform.qq.QQConst;
 import com.socialuni.social.common.sdk.platform.weixin.WxConst;
 import com.socialuni.social.common.sdk.utils.DateUtils;
 import com.socialuni.social.common.sdk.utils.RestUtil;
+import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
+import com.socialuni.social.im.dao.repository.ChatUserRepository;
+import com.socialuni.social.im.logic.check.SocialuniChatUserCheck;
+import com.socialuni.social.music.sdk.constant.SocialuniMusicRoleId;
+import com.socialuni.social.music.sdk.dao.DO.SocialuniMusicRoomUserDO;
 import com.socialuni.social.music.sdk.model.QO.AgoraPlayMusicPlayerQO;
 import com.socialuni.social.music.sdk.model.QO.AgoraPlayMusicQO;
 import com.socialuni.social.music.sdk.model.QO.AgoraUpdateMusicQO;
@@ -22,10 +32,13 @@ import com.socialuni.social.music.sdk.model.RO.SocialuniMusicInfoRO;
 import com.socialuni.social.music.sdk.model.RO.SocialuniMusicInitDataRO;
 import com.socialuni.social.report.sdk.utils.QQUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.user.sdk.dao.utils.SocialuniUserDOUtil;
+import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import io.agora.education.EducationTokenBuilder2;
 import io.agora.media.RtcTokenBuilder2;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
@@ -196,8 +209,43 @@ public class SocialuniMusicController {
         return authorizationHeader;
     }
 
+    @Resource
+    ChatUserRepository chatUserRepository;
+
+    @Resource
+    SocialuniChatUserCheck socialuniChatUserCheck;
+
     @PostMapping("playMusic/{channel}")
     public ResultRO<Void> playMusic(@PathVariable("channel") String channel, @RequestBody @Valid SocialuniPlayMusicQO playMusicQO) {
+
+        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+
+        Integer chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(channel);
+
+        //获取用户权限
+        //获取用户，如果用户为系统用户，过滤先走下面
+        //首先判断用户的权限，roomuser表
+        //如果用户为房间创建者，
+
+        SocialuniMusicRoomUserDO socialuniMusicRoomUserDO = SocialuniUserRepositoryFacede.findByUserIdAndCustomFieldAndStatus(mineUserId, "roomId", chatId, SocialuniCommonStatus.enable, SocialuniMusicRoomUserDO.class);
+
+        if (socialuniMusicRoomUserDO == null) {
+            //查询用户在房间的权限
+            SocialuniChatUserDO socialuniChatUserDO = socialuniChatUserCheck.CheckUserInChat(chatId, mineUserId);
+
+            socialuniMusicRoomUserDO = new SocialuniMusicRoomUserDO(mineUserId, chatId, socialuniChatUserDO.getChatRoleId());
+
+//            if (socialuniChatUserDO.getChatRoleId())
+
+        }
+
+        String roleId = socialuniMusicRoomUserDO.getRoomRoleId();
+
+        //为空或者没权限
+        if (StringUtils.isBlank(roleId) || !SocialuniMusicRoleId.hasOperateAuthList.contains(roleId)) {
+            throw new SocialBusinessException("用户没有操作权限");
+        }
+
 
         String postUrl = "https://api.sd-rtn.com/{0}/v1/projects/{1}/cloud-player/players";
         String fullUrl = MessageFormat.format(postUrl, region, appId);

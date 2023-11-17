@@ -1,5 +1,6 @@
 package com.socialuni.social.common.sdk.dao.facede;
 
+import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import com.socialuni.social.common.api.entity.SocialuniUserInfoBaseDO;
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialNullUserException;
@@ -26,6 +27,9 @@ public class SocialuniUserRepositoryFacede extends SocialuniRepositoryFacade {
         SocialuniUserRepositoryFacede.socialuniCommonRepository = socialuniCommonRepository;
     }
 
+    public static <T extends SocialuniContentBaseDO> T findByUserIdAndCustomFieldAndStatus(Integer userId, String filedName, Integer fieldId, String status, Class<T> tClass) {
+        return socialuniCommonRepository.findByUserIdAndCustomFieldAndStatus(userId, filedName, fieldId, status, tClass);
+    }
 
     /**
      * 通过userId获得对应的子类。
