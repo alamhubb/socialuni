@@ -34,6 +34,8 @@ public class SocialuniChatDO extends SocialuniUnionContentBaseDO implements Seri
 //    private String lastContent;
     //同为置顶时，区分级别
     private Integer topLevel;
+    //开放类型，默认是open
+    private String openType;
 
     public SocialuniChatDO(String type) {
         this.setType(type);

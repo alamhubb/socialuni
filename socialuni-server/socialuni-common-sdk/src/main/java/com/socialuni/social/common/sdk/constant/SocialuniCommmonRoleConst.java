@@ -2,9 +2,9 @@ package com.socialuni.social.common.sdk.constant;
 
 public class SocialuniCommmonRoleConst {
     //普通用户
-    public static final Integer user = 1;
+    public static final String user = "user";
     //管理员
-    public static final Integer admin = 2;
+    public static final String admin = "admin";
     //所有者
-    public static final Integer owner = 3;
+    public static final String owner = "owner";
 }

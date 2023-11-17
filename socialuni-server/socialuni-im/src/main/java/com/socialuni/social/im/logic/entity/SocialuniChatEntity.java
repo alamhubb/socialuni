@@ -1,13 +1,16 @@
 package com.socialuni.social.im.logic.entity;
 
+import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.im.dao.repository.SocialuniChatRepository;
 import com.socialuni.social.im.enumeration.ChatType;
+import com.socialuni.social.im.enumeration.SocialuniChatOperateType;
 import com.socialuni.social.im.logic.foctory.SocialuniChatDOFactory;
 import com.socialuni.social.im.logic.manage.SocialuniChatManage;
 import com.socialuni.social.im.logic.manage.SocialuniChatUserManage;
+import com.socialuni.social.user.sdk.factory.SocialuniAppOperateRecordDOFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -23,22 +26,24 @@ public class SocialuniChatEntity {
 
     //不管官方群聊，我们就创建用户的群聊
 
-    public SocialuniChatDO getOrCreateUserRoomChat(SocialuniUserDo socialuniUserDo) {
-        SocialuniChatDO socialuniChatDO = chatRepository.findFirstByTypeAndUserId(ChatType.user_room_group, socialuniUserDo.getUserId());
+    public SocialuniChatDO getOrCreateUserPersonalChat(SocialuniUserDo socialuniUserDo) {
+        SocialuniChatDO socialuniChatDO = chatRepository.findFirstByTypeAndUserIdOrderByCreateTimeDesc(ChatType.userPersonalGroup, socialuniUserDo.getUserId());
         if (socialuniChatDO == null) {
-            socialuniChatDO = SocialuniChatDOFactory.createUserRoomGroupChat(socialuniUserDo);
-
-            SocialuniChatUserDO socialuniChatUserDO = socialuniChatUserManage.getOrCreateChat(socialuniChatDO, userId);
+            socialuniChatDO = this.createUserPersonalChat(socialuniUserDo);
         }
-
-
+        return socialuniChatDO;
     }
 
-    public SocialuniChatDO createUserRoomChat(SocialuniUserDo socialuniUserDo) {
-        SocialuniChatDO socialuniChatDO = SocialuniChatDOFactory.createUserRoomGroupChat(socialuniUserDo);
+    private SocialuniChatDO createUserPersonalChat(SocialuniUserDo socialuniUserDo) {
+        SocialuniChatDO socialuniChatDO = SocialuniChatDOFactory.createUserPersonalChat(socialuniUserDo);
+        SocialuniChatUserDO socialuniChatUserDO = socialuniChatUserManage.createUserPersonalChatUser(socialuniChatDO, socialuniUserDo.getUserId());
 
-        SocialuniChatUserDO socialuniChatUserDO = socialuniChatUserManage.getOrCreateChat(socialuniChatDO, userId);
-
-
+        SocialuniAppOperateRecordDOFactory.createChatAppOperateRecordDOBySys(
+                SocialuniContentType.chat,
+                socialuniChatDO.getUnionId(),
+                SocialuniChatOperateType.createGroupChat,
+                socialuniUserDo.getUserId(),
+                "创建用户个人群组"
+        );
     }
 }

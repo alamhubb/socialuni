@@ -25,12 +25,9 @@ public class SocialuniChatUserManage {
         return socialuniChatUserDO;
     }
 
-    public SocialuniChatUserDO createUserRoomChatUser(SocialuniChatDO chatDO, Integer userId) {
-        SocialuniChatUserDO socialuniChatUserDO = chatUserRepository.findOneByChatIdAndUserId(chatDO.getUnionId(), userId);
+    public SocialuniChatUserDO createUserPersonalChatUser(SocialuniChatDO chatDO, Integer userId) {
 
-        if (socialuniChatUserDO == null) {
-            socialuniChatUserDO = SocialuniChatUserDOFactory.createGroupChatUser(chatDO, userId);
-        }
+        SocialuniChatUserDO socialuniChatUserDO = SocialuniChatUserDOFactory.createUserPersonalChatUser(chatDO, userId);
         return socialuniChatUserDO;
     }
 }

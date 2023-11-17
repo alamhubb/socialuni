@@ -2,6 +2,7 @@ package com.socialuni.social.im.logic.foctory;
 
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
+import com.socialuni.social.common.sdk.constant.SocialuniCommmonRoleConst;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
@@ -64,6 +65,16 @@ public class SocialuniChatUserDOFactory {
     public static SocialuniChatUserDO createGroupChatUser(SocialuniChatDO chatDO, Integer userId) {
         //会话不存在则创建
         SocialuniChatUserDO chatUserDO = new SocialuniChatUserDO(chatDO, userId);
+
+        chatUserDO = SocialuniRepositoryFacade.save(chatUserDO);
+        return chatUserDO;
+    }
+
+    public static SocialuniChatUserDO createUserPersonalChatUser(SocialuniChatDO chatDO, Integer userId) {
+        //会话不存在则创建
+        SocialuniChatUserDO chatUserDO = new SocialuniChatUserDO(chatDO, userId);
+        
+        chatUserDO.setChatRoleId(SocialuniCommmonRoleConst.owner);
 
         chatUserDO = SocialuniRepositoryFacade.save(chatUserDO);
         return chatUserDO;

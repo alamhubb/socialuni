@@ -28,7 +28,7 @@ public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {
     private Integer chatId;
     //是否拉黑了对方
     //管理员角色
-    private Integer chatRoleId;
+    private String chatRoleId;
 
 
     //每一个用户对于这个群聊的状态
@@ -126,7 +126,7 @@ public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {
     }
 
     //只关闭自己
-    public void closeChat() {
+    /*public void closeChat() {
         this.setUpdateTime(new Date());
         this.setFrontShow(false);
         this.setStatus(ChatUserStatus.close);
@@ -135,7 +135,7 @@ public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {
     public void frontShowFalse() {
         this.setUpdateTime(new Date());
         this.setFrontShow(false);
-    }
+    }*/
 
     /*public void changeStatusBeClose(Date date) {
         this.setUpdateTime(date);

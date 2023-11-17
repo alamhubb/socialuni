@@ -7,6 +7,7 @@ import com.socialuni.social.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.im.dao.repository.SocialuniChatRepository;
 import com.socialuni.social.im.dao.repository.ChatUserRepository;
 import com.socialuni.social.im.enumeration.ChatUserStatus;
+import com.socialuni.social.im.logic.entity.SocialuniChatEntity;
 import com.socialuni.social.im.logic.foctory.SocialChatROFactory;
 import com.socialuni.social.im.api.model.RO.ChatRO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
@@ -34,6 +35,8 @@ public class ChatQueryDomain {
     @Resource
     SocialuniChatUserManage socialuniChatUserManage;
 
+    @Resource
+    SocialuniChatEntity socialuniChatEntity;
 
     public List<ChatRO> getChats() {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
@@ -47,6 +50,10 @@ public class ChatQueryDomain {
     //登录情况下查询用户有权限的chatuser
     //初始化和查询chat列表触发的
     public List<ChatRO> getUserChats(SocialuniUserDo user) {
+
+        SocialuniChatDO ownerChat = socialuniChatEntity.getOrCreateUserPersonalChat(user);
+
+
         //判断用户是否加入了默认的聊天群
 
         List<String> groups = SocialuniAppConfig.getAppConfig().getDefaultChatGroups();
