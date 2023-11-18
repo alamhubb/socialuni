@@ -1,6 +1,8 @@
 package com.socialuni.social.common.sdk.dao.facede;
 
 import cn.hutool.extra.spring.SpringUtil;
+import com.socialuni.social.common.api.entity.SocialuniBaseDO;
+import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniCommonRepository;
@@ -38,6 +40,10 @@ public abstract class SocialuniRepositoryFacade {
 
     public static <T extends SocialuniUnionContentBaseDO> T findByUnionId(Integer id, Class<T> tClass) {
         return getRepository().findByUnionId(id, tClass);
+    }
+
+    public static <T extends SocialuniBaseDO> T findByCustomField(String field, Integer fieldId, Class<T> tClass) {
+        return getRepository().findByCustomField(field, fieldId, tClass);
     }
 
     /**

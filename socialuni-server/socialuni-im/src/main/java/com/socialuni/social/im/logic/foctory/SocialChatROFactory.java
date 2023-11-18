@@ -70,17 +70,17 @@ public class SocialChatROFactory {
 
     //chat
 
-    public static ChatRO getChatRO1(SocialuniChatDO chatDO) {
+    public static ChatRO getGroupChatRO(SocialuniChatDO chatDO) {
         ChatRO chatRO = new ChatRO();
 
         String uuid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(chatDO.getUnionId());
 
         chatRO.setType(chatDO.getType());
-        if (ChatType.systemChats.contains(chatRO.getType())) {
-            chatRO.setId(uuid);
-            chatRO.setNickname(chatDO.getChatName());
-            chatRO.setAvatar(chatDO.getAvatar());
-        }
+//        if (ChatType.systemChats.contains(chatRO.getType())) {
+        chatRO.setId(uuid);
+        chatRO.setNickname(chatDO.getChatName());
+        chatRO.setAvatar(chatDO.getAvatar());
+//        }
         chatRO.setTopFlag(false);
         chatRO.setStatus(chatDO.getStatus());
         chatRO.setUpdateTime(chatDO.getUpdateTime());
@@ -100,7 +100,7 @@ public class SocialChatROFactory {
     //初始查询的时候为99
     //用户未登录的情况，和群聊的情况会触发这里
     public static ChatRO getNoLoginChatRO(SocialuniChatDO chatDO) {
-        ChatRO chatRO = SocialChatROFactory.getChatRO1(chatDO);
+        ChatRO chatRO = SocialChatROFactory.getGroupChatRO(chatDO);
         //查询用户这个chatUser下的消息
         //已经确认过chat为可用的
         List<SocialuniMessageDO> messageDOS = messageRepository.findTop31ByChatIdAndStatusAndIdNotInOrderByIdDesc(chatDO.getUnionId(), ChatStatus.enable, SocialuniConst.emptyIds);
@@ -133,7 +133,7 @@ public class SocialChatROFactory {
     //推消息时，查列表时  的基础
     public static ChatRO getChatROByUserLogin(SocialuniChatUserDO chatUserDO) {
         SocialuniChatDO chat = SocialuniRepositoryFacade.findByUnionId(chatUserDO.getChatId(), SocialuniChatDO.class);
-        ChatRO chatRO = SocialChatROFactory.getChatRO1(chat);
+        ChatRO chatRO = SocialChatROFactory.getGroupChatRO(chat);
 
         //暂时不支持删除系统群聊
         //不使用chatUserDO的id是因为 推送message时，需要赋值chatVoId，此时获取chatUserDO的id比较麻烦。每次推送都要读一次数据库，不如在操作chatUser时读取一次好
@@ -142,7 +142,7 @@ public class SocialChatROFactory {
 //        this.id = chatUserDO.getId();
         //根据类型区分不同nick和ava
         //如果群聊则直接使用
-        if (!ChatType.system_group.contains(chatRO.getType())) {
+        if (ChatType.single.contains(chatRO.getType())) {
             SocialuniUserDo receiveUser = SocialuniUserUtil.getAndCheckUserNotNull(chatUserDO.getBeUserId());
 
             String beUserId = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(receiveUser.getUserId());

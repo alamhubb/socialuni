@@ -1,6 +1,7 @@
 package com.socialuni.social.tance.config;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
 import com.socialuni.social.tance.entity.DevAccountEntity;
 import com.socialuni.social.tance.model.DO.AppConfigDO;
 import com.socialuni.social.tance.repository.AppConfigRepository;

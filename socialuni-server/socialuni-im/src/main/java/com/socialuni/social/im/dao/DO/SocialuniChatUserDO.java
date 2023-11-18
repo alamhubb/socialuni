@@ -1,14 +1,11 @@
 package com.socialuni.social.im.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniUserContactBaseDO;
-import com.socialuni.social.common.sdk.constant.SocialuniCommmonRoleConst;
 import com.socialuni.social.im.enumeration.ChatType;
-import com.socialuni.social.im.enumeration.ChatUserStatus;
 import com.socialuni.social.im.enumeration.SocialuniChatRoleId;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Date;
 
 /**
  * @author qinkaiyuan

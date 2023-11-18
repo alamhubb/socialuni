@@ -2,6 +2,11 @@ package com.socialuni.social.im.enumeration;
 
 public class SocialuniChatOperateType {
     public final static String createGroupChat = "创建群聊";
+    public final static String switchMusic = "切歌";
+    public final static String nextMusic = "下一首";
+    public final static String autoMusic = "自动下一首";
+    public final static String pause = "暂停播放";
+    public final static String play = "播放音乐";
     //默认禁止1个月内再次加入
     public final static String kickOut = "踢出群聊";
     //禁言

@@ -29,6 +29,15 @@ public class SocialUserPhoneEntity {
         return mineUser;
     }
 
+    @Transactional
+    public SocialuniUserDo createSysUserPhoneEntity(String phoneNum) {
+        SocialuniUserDo mineUser = socialUserManage.createSysUserByPhoneLogin();
+        //创建或返回
+//        socialUserFansDetailManage.getOrCreateUserFollowDetail(mineUser);
+        socialUserPhoneManage.createUserPhoneNum(mineUser.getUnionId(), "86", phoneNum);
+        return mineUser;
+    }
+
     //绑定手机号
     public SocialuniUserDo checkPhoneNumAndCreateBind(SocialuniUserDo mineUser, String phoneCountryCode, String phoneNum) {
         //业务校验

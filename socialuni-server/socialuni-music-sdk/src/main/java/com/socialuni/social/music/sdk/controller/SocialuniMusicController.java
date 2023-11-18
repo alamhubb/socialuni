@@ -10,7 +10,9 @@ import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.utils.JsonUtil;
+import com.socialuni.social.common.sdk.constant.SocialuniSysRoleId;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
 import com.socialuni.social.common.sdk.platform.qq.HttpImgCheckResult;
@@ -20,8 +22,12 @@ import com.socialuni.social.common.sdk.utils.DateUtils;
 import com.socialuni.social.common.sdk.utils.RestUtil;
 import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.im.dao.repository.ChatUserRepository;
+import com.socialuni.social.im.enumeration.SocialuniChatOperateType;
 import com.socialuni.social.im.logic.check.SocialuniChatUserCheck;
+import com.socialuni.social.music.sdk.check.SocialuniMusicOperateCheck;
+import com.socialuni.social.music.sdk.check.SocialuniMusicOperateCheckRO;
 import com.socialuni.social.music.sdk.constant.SocialuniMusicRoleId;
+import com.socialuni.social.music.sdk.dao.DO.SocialuniMusicRoomPlayerDO;
 import com.socialuni.social.music.sdk.dao.DO.SocialuniMusicRoomUserDO;
 import com.socialuni.social.music.sdk.model.QO.AgoraPlayMusicPlayerQO;
 import com.socialuni.social.music.sdk.model.QO.AgoraPlayMusicQO;
@@ -30,6 +36,7 @@ import com.socialuni.social.music.sdk.model.QO.SocialuniPlayMusicQO;
 import com.socialuni.social.music.sdk.model.RO.AgoraPlayMusicRO;
 import com.socialuni.social.music.sdk.model.RO.SocialuniMusicInfoRO;
 import com.socialuni.social.music.sdk.model.RO.SocialuniMusicInitDataRO;
+import com.socialuni.social.music.sdk.utils.SocialuniMusicOperateRecordDOUtils;
 import com.socialuni.social.report.sdk.utils.QQUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.dao.utils.SocialuniUserDOUtil;
@@ -62,7 +69,6 @@ import static com.socialuni.social.common.sdk.utils.RestUtil.*;
 @Slf4j
 public class SocialuniMusicController {
     Integer sequence = 0;
-    static String playerId = "C5E78BCFA540BBE402EB1C938160FF5D";
     final static String region = "cn";
     final static String appId = "5e681410a7434ce9bba3e268226ce537";
     final static String appCertificate = "dc257b04c72f4850afb2e5d949535de6";
@@ -151,15 +157,52 @@ public class SocialuniMusicController {
         return ResultRO.success(Collections.singletonList(socialuniMusicInfoRO));
     }
 
-    @PostMapping("updateMusic")
-    public ResultRO<Void> updateMusic(@RequestBody AgoraUpdateMusicQO updateMusicQO) {
+    @PostMapping("updateMusic/{channel}")
+    public ResultRO<Void> updateMusic(@PathVariable("channel") String channel, @RequestBody AgoraUpdateMusicQO updateMusicQO) {
         this.sequence++;
-        SocialuniMusicInfoRO socialuniMusicInfoRO = new SocialuniMusicInfoRO();
+
+        SocialuniMusicOperateCheckRO checkResult = socialuniMusicOperateCheck.checkRoleId(channel);
+
+        Integer chatId = checkResult.getChatId();
+
+        Boolean pause = updateMusicQO.getIsPause();
+
+
+        SocialuniMusicRoomPlayerDO socialuniMusicRoomPlayerDO = SocialuniRepositoryFacade.findByCustomField("roomId", chatId, SocialuniMusicRoomPlayerDO.class);
+
+        if (socialuniMusicRoomPlayerDO == null) {
+            throw new SocialBusinessException("不存在的资源");
+        }
+        String playerId = socialuniMusicRoomPlayerDO.getPlayerId();
+
+        if (!ObjectUtils.isEmpty(updateMusicQO.getIsPause())) {
+            if (updateMusicQO.getIsPause()) {
+                SocialuniMusicOperateRecordDOUtils.createMusicRecord(
+                        checkResult.getChatId(),
+                        SocialuniChatOperateType.pause,
+                        checkResult.getMineUserId(),
+                        "歌曲名称",
+                        checkResult.getRoleId()
+                );
+            } else {
+                if (!socialuniMusicRoomPlayerDO.getPause()) {
+                    throw new SocialBusinessException("不存在可播放的资源");
+                }
+                SocialuniMusicOperateRecordDOUtils.createMusicRecord(
+                        checkResult.getChatId(),
+                        SocialuniChatOperateType.play,
+                        checkResult.getMineUserId(),
+                        "歌曲名称",
+                        checkResult.getRoleId()
+                );
+            }
+            socialuniMusicRoomPlayerDO.setPause(pause);
+        }
 
         System.out.println(updateMusicQO.toString());
         String postUrl = "https://api.sd-rtn.com/{0}/v1/projects/{1}/cloud-player/players/{2}?sequence={3}";
 
-        String fullUrl = MessageFormat.format(postUrl, this.region, this.appId, this.playerId, this.sequence);
+        String fullUrl = MessageFormat.format(postUrl, this.region, this.appId, playerId, this.sequence);
 
         String authorizationHeader = this.getAuthorization();
 
@@ -190,6 +233,7 @@ public class SocialuniMusicController {
 //        String httpResult = restTemplate.postForEntity("https://api.sd-rtn.com/cn/v1/projects/5e681410a7434ce9bba3e268226ce537/cloud-player/players", httpEntity, String.class).getBody();
 //        AgoraPlayMusicRO httpResult = restTemplate.postForEntity(fullUrl, httpEntity, AgoraPlayMusicRO.class).getBody();
         if (httpResult != null) {
+            SocialuniRepositoryFacade.save(socialuniMusicRoomPlayerDO);
             System.out.println(authorizationHeader.toString());
             System.out.println(httpResult.toString());
 //            log.info(httpResult.getErrMsg());
@@ -213,39 +257,13 @@ public class SocialuniMusicController {
     ChatUserRepository chatUserRepository;
 
     @Resource
-    SocialuniChatUserCheck socialuniChatUserCheck;
+    SocialuniMusicOperateCheck socialuniMusicOperateCheck;
+
 
     @PostMapping("playMusic/{channel}")
     public ResultRO<Void> playMusic(@PathVariable("channel") String channel, @RequestBody @Valid SocialuniPlayMusicQO playMusicQO) {
 
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
-
-        Integer chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(channel);
-
-        //获取用户权限
-        //获取用户，如果用户为系统用户，过滤先走下面
-        //首先判断用户的权限，roomuser表
-        //如果用户为房间创建者，
-
-        SocialuniMusicRoomUserDO socialuniMusicRoomUserDO = SocialuniUserRepositoryFacede.findByUserIdAndCustomFieldAndStatus(mineUserId, "roomId", chatId, SocialuniCommonStatus.enable, SocialuniMusicRoomUserDO.class);
-
-        if (socialuniMusicRoomUserDO == null) {
-            //查询用户在房间的权限
-            SocialuniChatUserDO socialuniChatUserDO = socialuniChatUserCheck.CheckUserInChat(chatId, mineUserId);
-
-            socialuniMusicRoomUserDO = new SocialuniMusicRoomUserDO(mineUserId, chatId, socialuniChatUserDO.getChatRoleId());
-
-//            if (socialuniChatUserDO.getChatRoleId())
-
-        }
-
-        String roleId = socialuniMusicRoomUserDO.getRoomRoleId();
-
-        //为空或者没权限
-        if (StringUtils.isBlank(roleId) || !SocialuniMusicRoleId.hasOperateAuthList.contains(roleId)) {
-            throw new SocialBusinessException("用户没有操作权限");
-        }
-
+        SocialuniMusicOperateCheckRO checkResult = socialuniMusicOperateCheck.checkRoleId(channel);
 
         String postUrl = "https://api.sd-rtn.com/{0}/v1/projects/{1}/cloud-player/players";
         String fullUrl = MessageFormat.format(postUrl, region, appId);
@@ -283,14 +301,34 @@ public class SocialuniMusicController {
 
         AgoraPlayMusicRO agoraPlayMusicRO = JsonUtil.parse(httpResult, AgoraPlayMusicRO.class);
 
-        this.playerId = agoraPlayMusicRO.getPlayer().getId();
+        String playerId = agoraPlayMusicRO.getPlayer().getId();
 
-        System.out.println(playerId);
+        Integer chatId = checkResult.getChatId();
+
+
+        SocialuniMusicRoomPlayerDO socialuniMusicRoomPlayerDO = SocialuniRepositoryFacade.findByCustomField("roomId", chatId, SocialuniMusicRoomPlayerDO.class);
+        if (socialuniMusicRoomPlayerDO == null) {
+            //创建一个房间和播放器的实体
+            //目前不支持进度条，只支持停止和重新播放
+            //播放，是否存在
+            socialuniMusicRoomPlayerDO = new SocialuniMusicRoomPlayerDO();
+            socialuniMusicRoomPlayerDO.setRoomId(checkResult.getChatId());
+            //保存
+        }
+        socialuniMusicRoomPlayerDO.setPlayerId(playerId);
+        SocialuniRepositoryFacade.save(socialuniMusicRoomPlayerDO);
 
         log.info(fullUrl);
 //        String httpResult = restTemplate.postForEntity("https://api.sd-rtn.com/cn/v1/projects/5e681410a7434ce9bba3e268226ce537/cloud-player/players", httpEntity, String.class).getBody();
 //        AgoraPlayMusicRO httpResult = restTemplate.postForEntity(fullUrl, httpEntity, AgoraPlayMusicRO.class).getBody();
         if (httpResult != null) {
+            SocialuniMusicOperateRecordDOUtils.createMusicRecord(
+                    checkResult.getChatId(),
+                    SocialuniChatOperateType.switchMusic,
+                    checkResult.getMineUserId(),
+                    "歌曲名称",
+                    checkResult.getRoleId()
+            );
             System.out.println(JSONUtil.toJsonStr(param1));
             System.out.println(authorizationHeader.toString());
             System.out.println(httpResult.toString());

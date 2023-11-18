@@ -25,6 +25,6 @@ public class SocialuniPayCoinOrderDO extends SocialuniContentBaseDO implements S
     private String payType;
     //使用平台
     private String provider;
-    private String system;
+    private String useSystem;
     private String platform;
 }

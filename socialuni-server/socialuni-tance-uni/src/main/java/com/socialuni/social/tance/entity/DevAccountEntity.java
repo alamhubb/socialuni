@@ -2,6 +2,8 @@ package com.socialuni.social.tance.entity;
 
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.utils.UUIDUtil;
+import com.socialuni.social.common.sdk.constant.SocialuniSysRoleId;
+import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.api.DevAccountRedisInterface;
 import com.socialuni.social.tance.sdk.constant.AdminAppConfigConst;
@@ -31,7 +33,8 @@ public class DevAccountEntity {
     private DevAccountRedisInterface devAccountRedis;
     @Resource
     private SocialUserPhoneRedis socialUserPhoneRedis;
-
+    @Resource
+    SocialuniUserRepository socialuniUserRepository;
     @Resource
     SocialUserPhoneEntity socialUserPhoneEntity;
 
@@ -73,9 +76,11 @@ public class DevAccountEntity {
         SocialuniUserDo socialuniUserDo;
         if (SocialUserPhoneDo == null) {
             //如果没注册账号，则直接注册
-            socialuniUserDo = socialUserPhoneEntity.createUserPhoneEntity(phoneNum);
+            socialuniUserDo = socialUserPhoneEntity.createSysUserPhoneEntity(phoneNum);
         } else {
             socialuniUserDo = SocialuniUserUtil.getAndCheckUserNotNull(SocialUserPhoneDo.getUserId());
+            socialuniUserDo.setRoleId(SocialuniSysRoleId.sys);
+            socialuniUserDo = socialuniUserRepository.save(socialuniUserDo);
         }
         devAccountModel.setUserId(socialuniUserDo.getUserId());
         devAccountModel = (DevAccountDo) devAccountRedis.saveDevAccount(devAccountModel);

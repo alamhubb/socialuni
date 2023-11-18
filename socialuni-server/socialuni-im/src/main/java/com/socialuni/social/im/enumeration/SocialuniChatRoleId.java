@@ -1,9 +1,6 @@
 package com.socialuni.social.im.enumeration;
 
-import com.socialuni.social.common.sdk.constant.SocialuniCommmonRoleConst;
+import com.socialuni.social.common.sdk.constant.SocialuniSysRoleId;
 
-import java.util.Arrays;
-import java.util.List;
-
-public class SocialuniChatRoleId extends SocialuniCommmonRoleConst {
+public class SocialuniChatRoleId extends SocialuniSysRoleId {
 }

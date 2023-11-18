@@ -8,9 +8,11 @@ import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.im.dao.repository.ChatUserRepository;
 import com.socialuni.social.im.enumeration.ChatUserStatus;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
+@Component
 public class SocialuniChatUserCheck {
     @Resource
     private ChatUserRepository chatUserRepository;

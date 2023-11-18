@@ -1,9 +1,6 @@
 package com.socialuni.social.common.sdk.dao.repository;
 
-import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
-import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
-import com.socialuni.social.common.api.entity.SocialuniUserContactBaseDO;
-import com.socialuni.social.common.api.entity.SocialuniUserInfoBaseDO;
+import com.socialuni.social.common.api.entity.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
@@ -153,6 +150,22 @@ public class SocialuniCommonRepository {
         return null;
     }
 
+    public <T extends SocialuniBaseDO> T findByCustomField(String field, Integer fieldId, Class<T> tClass) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
+        Root<T> userInfo = criteriaQuery.from(tClass);
+
+        Predicate userIdPredicate = criteriaBuilder.equal(userInfo.get(field), fieldId);
+        criteriaQuery.where(userIdPredicate);
+
+        List<T> list = entityManager.createQuery(criteriaQuery).setFirstResult(0).setMaxResults(1).getResultList();
+
+        if (list.size() > 0) {
+            return list.get(0);
+        }
+        return null;
+    }
+
 
     /**
      * 通过userId获得对应的子类。
@@ -232,9 +245,6 @@ public class SocialuniCommonRepository {
 
         return entityManager.createQuery(criteriaQuery).getSingleResult();
     }
-
-
-
 
 
     public <T extends SocialuniUserContactBaseDO> T findByUserIdAndBeUserIdOrderByIdDesc(Integer userId, Integer beUserId, Class<T> tClass) {

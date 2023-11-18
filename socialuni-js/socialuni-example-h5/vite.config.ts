@@ -13,10 +13,10 @@ export default defineConfig({
     server: {
         port: 8085,
         host: '0.0.0.0',
-        https: {
+        /*https: {
             key: fs.readFileSync('./test/ssl/localtest.socialuni.cn.key'),
             cert: fs.readFileSync('./test/ssl/localtest.socialuni.cn_bundle.crt'),
-        },
+        },*/
         proxy: {
             '/api': {
                 target: 'https://api.sd-rtn.com',

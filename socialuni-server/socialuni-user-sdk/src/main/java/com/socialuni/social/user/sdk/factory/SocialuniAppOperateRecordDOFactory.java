@@ -1,11 +1,12 @@
 package com.socialuni.social.user.sdk.factory;
 
-import com.socialuni.social.common.sdk.constant.SocialuniCommmonRoleConst;
+import com.socialuni.social.common.api.constant.SocialuniContentType;
+import com.socialuni.social.common.sdk.constant.SocialuniSysRoleId;
 import com.socialuni.social.common.sdk.constant.SocialuniCommmonRoleType;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniAppOperateRecordDO;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
-import com.socialuni.social.user.sdk.dao.utils.SocialuniUserDOUtil;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
+import feign.form.ContentType;
 
 public class SocialuniAppOperateRecordDOFactory {
 
@@ -28,6 +29,9 @@ public class SocialuniAppOperateRecordDOFactory {
     }*/
 
 
+    //创建播放音乐的记录
+
+
     public static SocialuniAppOperateRecordDO createChatAppOperateRecordDOBySys(String contentType, Integer contentId, String type, Integer beUserId, String remark) {
         SocialuniAppOperateRecordDO socialuniAppOperateRecordDO = new SocialuniAppOperateRecordDO();
 
@@ -37,7 +41,7 @@ public class SocialuniAppOperateRecordDOFactory {
         socialuniAppOperateRecordDO.setRemark(remark);
         socialuniAppOperateRecordDO.setUserId(SocialuniUserUtil.getSystemUserIdNotNull());
         socialuniAppOperateRecordDO.setBeUserId(beUserId);
-        socialuniAppOperateRecordDO.setRoleId(SocialuniCommmonRoleConst.admin);
+        socialuniAppOperateRecordDO.setRoleId(SocialuniSysRoleId.admin);
         socialuniAppOperateRecordDO.setRoleType(SocialuniCommmonRoleType.systemManage);
 
         socialuniAppOperateRecordDO = SocialuniRepositoryFacade.save(socialuniAppOperateRecordDO);
