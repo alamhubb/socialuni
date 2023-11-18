@@ -19,6 +19,8 @@
             创建
           </el-button>
           <el-button @click="terstfasd111">查询</el-button>
+          <el-button @click="queryAllplay">查询播放器</el-button>
+          <el-button @click="destoryPlays">销毁播放器</el-button>
           <el-button @click="deleteYun111">停止</el-button>
           <el-button @click="jixuYun111">继续</el-button>
         </div>
@@ -146,6 +148,29 @@ export default class MessageView extends Vue {
     })*/
 
     SocialuniMusicAPI.queryMusicChannel(socialuniMusicStore.channelName)
+  }
+
+  async queryAllplay() {
+    return musicRequest.get<any>(`api/v1/projects/5e681410a7434ce9bba3e268226ce537/cloud-player/players`, {
+      headers: {
+        Authorization: "Basic MWE5N2IyZmU3NjY2NGVmNjhiZmRkZjcyNTZjZjkxZDM6OTk5YzA2ODljYzc5NDEyOGI0NTBjMWQ3MDJmMGUyZjM="
+      }
+    })
+  }
+
+  async destoryPlays(){
+    const res = await this.queryAllplay()
+    const plays = res.players
+
+    if (plays && plays.length){
+      for (const play of plays) {
+         musicRequest.delete<any>(`api/cn/v1/projects/5e681410a7434ce9bba3e268226ce537/cloud-player/players/${play.id}`, {
+          headers: {
+            Authorization: "Basic MWE5N2IyZmU3NjY2NGVmNjhiZmRkZjcyNTZjZjkxZDM6OTk5YzA2ODljYzc5NDEyOGI0NTBjMWQ3MDJmMGUyZjM="
+          }
+        })
+      }
+    }
   }
 
 

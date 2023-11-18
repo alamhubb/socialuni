@@ -299,6 +299,8 @@ public class SocialuniMusicController {
                 .body(JSONUtil.toJsonStr(param1))
                 .header("Authorization", authorizationHeader).execute().body();
 
+        log.info("结果：{}", httpResult);
+
         AgoraPlayMusicRO agoraPlayMusicRO = JsonUtil.parse(httpResult, AgoraPlayMusicRO.class);
 
         String playerId = agoraPlayMusicRO.getPlayer().getId();
