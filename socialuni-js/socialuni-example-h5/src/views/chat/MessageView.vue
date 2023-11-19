@@ -154,6 +154,9 @@ export default class MessageView extends Vue {
     return musicRequest.get<any>(`api/v1/projects/5e681410a7434ce9bba3e268226ce537/cloud-player/players`, {
       headers: {
         Authorization: "Basic MWE5N2IyZmU3NjY2NGVmNjhiZmRkZjcyNTZjZjkxZDM6OTk5YzA2ODljYzc5NDEyOGI0NTBjMWQ3MDJmMGUyZjM="
+      },
+      params: {
+        filter: `channelName eq ${socialuniMusicStore.channelName}`
       }
     })
   }

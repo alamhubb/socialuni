@@ -265,6 +265,41 @@ public class SocialuniMusicController {
 
         SocialuniMusicOperateCheckRO checkResult = socialuniMusicOperateCheck.checkRoleId(channel);
 
+        String queryUrl = "v1/projects/{0}/cloud-player/players";
+
+        String fullQueryUrl = MessageFormat.format(queryUrl, appId);
+
+        String authorizationHeader = this.getAuthorization();
+        JSONObject queryFilterParam = JSONUtil.createObj();
+
+        String filterChannel = "channelName eq {0}";
+        String fullFilter = MessageFormat.format(filterChannel, channel);
+
+        queryFilterParam.put("filter", fullFilter);
+
+        //查询本渠道的所有播放器
+        //查询本渠道的所有播放器
+        String filterQueryHttpResult = HttpRequest.get(fullQueryUrl)
+                .body(JSONUtil.toJsonStr(queryFilterParam))
+                .header("Authorization", authorizationHeader).execute().body();
+
+       /* AgoraPlayMusicRO agoraPlayMusicRO = JsonUtil.parse(httpResult, AgoraPlayMusicRO.class);
+
+        log.info(filterQueryHttpResult);
+
+
+        //删除所有其他的播放器
+
+        String deleteUrl = "cn/v1/projects/{0}/cloud-player/players/{1}";
+        String fullDeleteUrl = MessageFormat.format(deleteUrl,appId,)
+
+        String deleteHttpResult = HttpRequest.delete(fullQueryUrl)
+                .body(JSONUtil.toJsonStr(queryFilterParam))
+                .header("Authorization", authorizationHeader).execute().body();*/
+
+
+
+
         String postUrl = "https://api.sd-rtn.com/{0}/v1/projects/{1}/cloud-player/players";
         String fullUrl = MessageFormat.format(postUrl, region, appId);
 
@@ -292,8 +327,6 @@ public class SocialuniMusicController {
         JSONObject param1 = JSONUtil.createObj();
         param1.put("player", param);
 
-
-        String authorizationHeader = this.getAuthorization();
 
         String httpResult = HttpRequest.post(fullUrl)
                 .body(JSONUtil.toJsonStr(param1))
