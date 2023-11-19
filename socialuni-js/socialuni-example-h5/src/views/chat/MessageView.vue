@@ -204,8 +204,11 @@ export default class MessageView extends Vue {
     WebsocketWebRtcUtil.send("哈喽啊")
   }
 
-  plymu(){
+  plymu() {
     const audio = new Audio(test1)
+    audio.onload = (ev) => {
+      console.log(ev)
+    }
 
     console.log(audio)
     console.log(audio.play())
