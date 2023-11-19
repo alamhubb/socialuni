@@ -48,7 +48,7 @@ export default class WebsocketWebRtcUtil {
             token = UUIDUtil.getUUID()
         }
 
-        const websocketUrl = SocialuniAPIConfig.socialuniWebsocketUrl + '/socket'
+        const websocketUrl = SocialuniAPIConfig.socialuniWebsocketUrl + '/webrtc'
 
 
         const onOpen = (() => {

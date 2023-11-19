@@ -20,6 +20,7 @@ public class CustomWebSocketConfig implements WebSocketConfigurer {
          * 注释websocket
          */
         registry
+                .addHandler(new SocketTextHandler(), "/webrtc")
                 .addHandler(websocketServer, "/webSocket/message")
                 .setHandshakeHandler(new CustomHandshakeHandler())
                 .setAllowedOrigins("*");

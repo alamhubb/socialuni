@@ -15,6 +15,10 @@ export default class WebsocketUtil {
     static locking: boolean = false
     static ws: WebSocket = null
 
+    static send(msg: string) {
+        this.ws.send(msg)
+    }
+
     static reConnect() {
         console.log('触发了重连未执行')
         if (this.locking) return;
@@ -67,6 +71,7 @@ export default class WebsocketUtil {
             //心跳保活
             WebsocketUtil.timer = setInterval(() => {
                 if (this.ws.readyState === this.ws.OPEN) {
+                    console.log('触发了ping')
                     this.ws.send('ping')
                 }
             }, WebsocketUtil.pingTime)

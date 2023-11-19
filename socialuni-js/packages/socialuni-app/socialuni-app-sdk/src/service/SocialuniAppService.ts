@@ -1,4 +1,5 @@
 import WebsocketUtil from "@socialuni/socialuni-api-base/src/websocket/WebsocketUtil";
+import WebsocketWebRtcUtil from "@socialuni/socialuni-api-base/src/websocket/WebsocketWebRtcUtil";
 
 export default class SocialuniAppService {
     static async getAppLunchData() {
@@ -7,6 +8,7 @@ export default class SocialuniAppService {
         // const imRes = await SocialuniImUserAPI.getImUserTokenAPI()
         // socialChatModule.setImToken(imRes.data)
         WebsocketUtil.websocketConnect(false)
+        WebsocketWebRtcUtil.websocketConnect(false)
         // socialChatModule.initSocialuniChatModule()
         /*socialNotifyModule.queryNotifiesAction()
         */
