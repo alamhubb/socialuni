@@ -19,9 +19,7 @@ import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 import org.springframework.stereotype.Service;
-import org.springframework.web.socket.CloseStatus;
-import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.socket.*;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import javax.annotation.Resource;
@@ -172,6 +170,17 @@ public class WebsocketServer extends TextWebSocketHandler {
             log.debug("handleTextMessage method error：{}", e);
         }*/
     }
+
+    @Override
+    public void handleBinaryMessage(WebSocketSession session, BinaryMessage message) {
+        log.debug("收到客户端消息：{}", message.getPayload());
+    }
+
+    @Override
+    public void handlePongMessage(WebSocketSession session, PongMessage message){
+        log.debug("收到客户端消息：{}", message.getPayload());
+    }
+
 
     @Override
     public void handleTransportError(WebSocketSession session, Throwable exception) {

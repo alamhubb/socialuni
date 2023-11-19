@@ -5,70 +5,75 @@
     </div>
 
     <div class="flex-1 overflow-hidden h100p bg-white ml-sm">
-      <!--            <div class="w100p">
-                      <audio id="local" :src="test1" controls="controls"
-                             style="height: 200px;width: 500px;"></audio>
-                      <audio id="remote" style="height: 200px;width: 500px;" controls="controls"></audio>
-                  </div>-->
-
-      <div>
-        <div></div>
-        <div>
-          <el-button
-              @click="terstfasd('https://cdxapp-1257733245.file.myqcloud.com/opentest/M800000puzgO0yRX1o.mp3')">
-            创建
-          </el-button>
-          <el-button @click="terstfasd111">查询</el-button>
-          <el-button @click="queryAllplay">查询播放器</el-button>
-          <el-button @click="destoryPlays">销毁播放器</el-button>
-          <el-button @click="deleteYun111">停止</el-button>
-          <el-button @click="jixuYun111">继续</el-button>
-        </div>
-      </div>
-
-      <!--            <socialuni-msg-view-h5></socialuni-msg-view-h5>-->
-      <el-table :data="tableData" stripe size="small"
-                highlight-current-row
-                @row-dblclick="handleCurrentChange" style="width: 100%;">
-        <!--        <el-table-column width="45">
-                  <template #default="scope">
-                    <svg v-if="scope.row.id === playName" style="width: 15px;height: 15px;" class="svg" aria-hidden="true">
-                      <use xlink:href="#icon-yangshengqi"></use>
-                    </svg>
-                    <span v-else>{{ scope.row.index }}</span>
-                  </template>
-                </el-table-column>-->
-        <el-table-column ref="dom" width="45">
-          <template #default="scope">
-            <!--            <i v-if="isLike(scope.row.id)" style="color: red; font-size: 14px;" class="iconfont icon-xihuan"></i>-->
-            <!--            <i v-else title="喜欢" class="iconfont icon-aixin" style="font-size: 15px;"></i>-->
-          </template>
-        </el-table-column>
-        <el-table-column width="40"><i title="下载" class="iconfont icon-xiazai" style="font-size: 15px;"></i>
-        </el-table-column>
-        <el-table-column prop="name" label="音乐标题" width="400">
-          <template #default="scope">
-            <!--            <span class="music-title" :class="{active:scope.row.id === playName}">{{ scope.row.name }}</span>-->
-            <!--            <el-tag @click="toDetail(scope.row.mv)" v-if="scope.row.mv" type="danger" size="mini">MV</el-tag>-->
-          </template>
-        </el-table-column>
-        <el-table-column label="歌手" width="275">
-          <template #default="scope">
-            {{ scope.row.ar?.map(item => item.name).join(' / ') }}
-          </template>
-        </el-table-column>
-        <el-table-column label="歌手专辑" width="300">
-          <template #default="scope">
-            {{ scope.row.al.name }}
-          </template>
-        </el-table-column>
-        <el-table-column prop="address" label="时长">
-          <template #default="scope">
-            <!--            {{ $formatTime(scope.row.dt).slice(-5) }}-->
-          </template>
-        </el-table-column>
-      </el-table>
+      <socialuni-msg-view-h5></socialuni-msg-view-h5>
     </div>
+
+    <!--    <div class="flex-1 overflow-hidden h100p bg-white ml-sm">
+          &lt;!&ndash;            <div class="w100p">
+                          <audio id="local" :src="test1" controls="controls"
+                                 style="height: 200px;width: 500px;"></audio>
+                          <audio id="remote" style="height: 200px;width: 500px;" controls="controls"></audio>
+                      </div>&ndash;&gt;
+
+          <div>
+            <div></div>
+            <div>
+              <el-button
+                  @click="terstfasd('https://cdxapp-1257733245.file.myqcloud.com/opentest/M800000puzgO0yRX1o.mp3')">
+                创建
+              </el-button>
+              <el-button @click="terstfasd111">查询</el-button>
+              <el-button @click="queryAllplay">查询播放器</el-button>
+              <el-button @click="destoryPlays">销毁播放器</el-button>
+              <el-button @click="sendMsg">发送消息</el-button>
+              <el-button @click="deleteYun111">停止</el-button>
+              <el-button @click="jixuYun111">继续</el-button>
+            </div>
+          </div>
+
+          &lt;!&ndash;            <socialuni-msg-view-h5></socialuni-msg-view-h5>&ndash;&gt;
+          <el-table :data="tableData" stripe size="small"
+                    highlight-current-row
+                    @row-dblclick="handleCurrentChange" style="width: 100%;">
+            &lt;!&ndash;        <el-table-column width="45">
+                      <template #default="scope">
+                        <svg v-if="scope.row.id === playName" style="width: 15px;height: 15px;" class="svg" aria-hidden="true">
+                          <use xlink:href="#icon-yangshengqi"></use>
+                        </svg>
+                        <span v-else>{{ scope.row.index }}</span>
+                      </template>
+                    </el-table-column>&ndash;&gt;
+            <el-table-column ref="dom" width="45">
+              <template #default="scope">
+                &lt;!&ndash;            <i v-if="isLike(scope.row.id)" style="color: red; font-size: 14px;" class="iconfont icon-xihuan"></i>&ndash;&gt;
+                &lt;!&ndash;            <i v-else title="喜欢" class="iconfont icon-aixin" style="font-size: 15px;"></i>&ndash;&gt;
+              </template>
+            </el-table-column>
+            <el-table-column width="40"><i title="下载" class="iconfont icon-xiazai" style="font-size: 15px;"></i>
+            </el-table-column>
+            <el-table-column prop="name" label="音乐标题" width="400">
+              <template #default="scope">
+                &lt;!&ndash;            <span class="music-title" :class="{active:scope.row.id === playName}">{{ scope.row.name }}</span>&ndash;&gt;
+                &lt;!&ndash;            <el-tag @click="toDetail(scope.row.mv)" v-if="scope.row.mv" type="danger" size="mini">MV</el-tag>&ndash;&gt;
+              </template>
+            </el-table-column>
+            <el-table-column label="歌手" width="275">
+              <template #default="scope">
+                {{ scope.row.ar?.map(item => item.name).join(' / ') }}
+              </template>
+            </el-table-column>
+            <el-table-column label="歌手专辑" width="300">
+              <template #default="scope">
+                {{ scope.row.al.name }}
+              </template>
+            </el-table-column>
+            <el-table-column prop="address" label="时长">
+              <template #default="scope">
+                &lt;!&ndash;            {{ $formatTime(scope.row.dt).slice(-5) }}&ndash;&gt;
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>-->
   </div>
 </template>
 
@@ -83,6 +88,8 @@ import SocialuniImEventKey from "@socialuni/socialuni-im-api/src/constant/Social
 import socialuniMusicStore from "@socialuni/socialuni-music-sdk/src/store/SocialuniMusicStore";
 import socialuniUserRequest from "@socialuni/socialuni-user-api/src/request/socialuniUserRequest";
 import AgoraRTC from "agora-rtc-sdk-ng";
+import WebsocketWebRtcUtil from "@socialuni/socialuni-api-base/src/websocket/WebsocketWebRtcUtil";
+import WebsocketUtil from "@socialuni/socialuni-api-base/src/websocket/WebsocketUtil";
 
 @Component({
   components: {SocialuniChatViewH5, SocialuniMsgViewH5}
@@ -161,13 +168,13 @@ export default class MessageView extends Vue {
     })
   }
 
-  async destoryPlays(){
+  async destoryPlays() {
     const res = await this.queryAllplay()
     const plays = res.players
 
-    if (plays && plays.length){
+    if (plays && plays.length) {
       for (const play of plays) {
-         musicRequest.delete<any>(`api/cn/v1/projects/5e681410a7434ce9bba3e268226ce537/cloud-player/players/${play.id}`, {
+        musicRequest.delete<any>(`api/cn/v1/projects/5e681410a7434ce9bba3e268226ce537/cloud-player/players/${play.id}`, {
           headers: {
             Authorization: "Basic MWE5N2IyZmU3NjY2NGVmNjhiZmRkZjcyNTZjZjkxZDM6OTk5YzA2ODljYzc5NDEyOGI0NTBjMWQ3MDJmMGUyZjM="
           }
@@ -187,6 +194,12 @@ export default class MessageView extends Vue {
     SocialuniMusicAPI.updateMusicAPI(socialuniMusicStore.channelName, {
       isPause: false
     })
+  }
+
+  sendMsg() {
+    console.log('触发了发送小')
+    WebsocketUtil.send("哈喽啊")
+    WebsocketWebRtcUtil.send("哈喽啊")
   }
 
 }
