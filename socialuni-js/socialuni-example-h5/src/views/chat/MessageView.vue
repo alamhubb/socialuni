@@ -204,82 +204,55 @@ export default class MessageView extends Vue {
     WebsocketWebRtcUtil.send("哈喽啊")
   }
 
-  plymu() {
-    const audio = new Audio()
-    audio.onloadeddata  = (ev) => {
-      console.log(ev)
-    }
-    audio.src = test1
-    audio.play()
-    console.log(test1)
-    console.log(audio)
-    // console.log(audio)
-    // console.log(audio.play())
-    // console.log(665656)
+  async plymu() {
+    const audio = new Audio(test1);
 
+    audio.oncanplaythrough = (() => {
+      const stream = audio.captureStream();
+      console.log(stream);
+      console.log(stream.getTracks());
+      const track = stream.getTracks()[0]
 
-    let localConnection, remoteConnection;
-    let fileReader;
-    const audioPlayer = document.getElementById('audioPlayer');
-    const startButton = document.getElementById('startButton');
-    startButton.onclick = startStreaming;
-    const CHUNK_SIZE = 16384;
+      // 创建 RTCPeerConnection
+      const configuration = {iceServers: [{urls: 'stun:stun.l.google.com:19302'}]};
+      const peerConnection = new RTCPeerConnection(configuration);
 
-// WebSocket 连接
-    const socket = new WebSocket('ws://localhost:8080');
-    socket.onmessage = handleSignalingData;
+// 获取本地音频轨道
 
-// 创建 RTCPeerConnection
-    function createPeerConnection() {
-      localConnection = new RTCPeerConnection();
-      remoteConnection = new RTCPeerConnection();
+      // 将音频轨道添加到 RTCPeerConnection
+      peerConnection.addTrack(track, stream);
 
-      // 设置远程描述和 ICE 候选
-      localConnection.onicecandidate = e => !e.candidate || remoteConnection.addIceCandidate(e.candidate).catch(handleError);
-      remoteConnection.onicecandidate = e => !e.candidate || localConnection.addIceCandidate(e.candidate).catch(handleError);
-
-      localConnection.oniceconnectionstatechange = e => console.log(localConnection.iceConnectionState);
-      remoteConnection.ontrack = e => audioPlayer.srcObject = e.streams[0];
-    }
-
-    function startStreaming() {
-      createPeerConnection();
-
-      const audioInput = document.getElementById('audioInput');
-      const file = audioInput.files[0];
-      const stream = localConnection.addTransceiver('audio').sender;
-      fileReader = new FileReader();
-      fileReader.onload = e => stream.replaceTrack(new MediaStreamTrack({ kind: "audio", data: e.target.result }));
-      fileReader.readAsArrayBuffer(file);
-
-      // 创建 offer
-      localConnection.createOffer()
-          .then(offer => localConnection.setLocalDescription(offer))
+      peerConnection.createOffer().then(offer => {
+        // 设置本地描述
+        return peerConnection.setLocalDescription(offer);
+      })
           .then(() => {
-            // 通过 WebSocket 发送 offer
-            socket.send(JSON.stringify({ 'offer': localConnection.localDescription }));
+            // 发送 Offer 到信令服务器
+            WebsocketWebRtcUtil.send({type: 'offer', offer: peerConnection.localDescription});
+          })
+          .catch(error => {
+            console.error('Error:', error);
           });
-    }
 
-    function handleSignalingData(event) {
-      const data = JSON.parse(event.data);
+// 处理 ICE 候选项
+      peerConnection.onicecandidate = (event) => {
+        if (event.candidate) {
+          // 发送 ICE 候选项到信令服务器
+          WebsocketWebRtcUtil.send({type: 'ice-candidate', candidate: event.candidate});
+        }
+      };
 
-      if (data.offer) {
-        remoteConnection.setRemoteDescription(new RTCSessionDescription(data.offer))
-            .then(() => remoteConnection.createAnswer())
-            .then(answer => remoteConnection.setLocalDescription(answer))
-            .then(() => {
-              // 通过 WebSocket 发送 answer
-              socket.send(JSON.stringify({ 'answer': remoteConnection.localDescription }));
-            });
-      } else if (data.answer) {
-        localConnection.setRemoteDescription(new RTCSessionDescription(data.answer));
-      }
-    }
+    })
 
-    function handleError(e) {
-      console.log(e);
-    }
+    audio.play();
+
+// 此处仅为演示，在实际应用中，远端需要创建 answer 并返回
+// 假设我们已经从远端接收到了 answer
+    /*const remoteAnswer = /!* 从远端获取的 Answer *!/;
+    peerConnection.setRemoteDescription(new RTCSessionDescription(remoteAnswer))
+        .then(() => {
+          console.log('Remote description set:', remoteAnswer);
+        });*/
   }
 }
 </script>
