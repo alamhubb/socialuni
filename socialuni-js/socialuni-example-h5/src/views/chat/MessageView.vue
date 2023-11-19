@@ -206,7 +206,7 @@ export default class MessageView extends Vue {
 
   plymu() {
     const audio = new Audio()
-    audio.onload = (ev) => {
+    audio.onloadeddata  = (ev) => {
       console.log(ev)
     }
     audio.src = test1
@@ -216,6 +216,70 @@ export default class MessageView extends Vue {
     // console.log(audio)
     // console.log(audio.play())
     // console.log(665656)
+
+
+    let localConnection, remoteConnection;
+    let fileReader;
+    const audioPlayer = document.getElementById('audioPlayer');
+    const startButton = document.getElementById('startButton');
+    startButton.onclick = startStreaming;
+    const CHUNK_SIZE = 16384;
+
+// WebSocket 连接
+    const socket = new WebSocket('ws://localhost:8080');
+    socket.onmessage = handleSignalingData;
+
+// 创建 RTCPeerConnection
+    function createPeerConnection() {
+      localConnection = new RTCPeerConnection();
+      remoteConnection = new RTCPeerConnection();
+
+      // 设置远程描述和 ICE 候选
+      localConnection.onicecandidate = e => !e.candidate || remoteConnection.addIceCandidate(e.candidate).catch(handleError);
+      remoteConnection.onicecandidate = e => !e.candidate || localConnection.addIceCandidate(e.candidate).catch(handleError);
+
+      localConnection.oniceconnectionstatechange = e => console.log(localConnection.iceConnectionState);
+      remoteConnection.ontrack = e => audioPlayer.srcObject = e.streams[0];
+    }
+
+    function startStreaming() {
+      createPeerConnection();
+
+      const audioInput = document.getElementById('audioInput');
+      const file = audioInput.files[0];
+      const stream = localConnection.addTransceiver('audio').sender;
+      fileReader = new FileReader();
+      fileReader.onload = e => stream.replaceTrack(new MediaStreamTrack({ kind: "audio", data: e.target.result }));
+      fileReader.readAsArrayBuffer(file);
+
+      // 创建 offer
+      localConnection.createOffer()
+          .then(offer => localConnection.setLocalDescription(offer))
+          .then(() => {
+            // 通过 WebSocket 发送 offer
+            socket.send(JSON.stringify({ 'offer': localConnection.localDescription }));
+          });
+    }
+
+    function handleSignalingData(event) {
+      const data = JSON.parse(event.data);
+
+      if (data.offer) {
+        remoteConnection.setRemoteDescription(new RTCSessionDescription(data.offer))
+            .then(() => remoteConnection.createAnswer())
+            .then(answer => remoteConnection.setLocalDescription(answer))
+            .then(() => {
+              // 通过 WebSocket 发送 answer
+              socket.send(JSON.stringify({ 'answer': remoteConnection.localDescription }));
+            });
+      } else if (data.answer) {
+        localConnection.setRemoteDescription(new RTCSessionDescription(data.answer));
+      }
+    }
+
+    function handleError(e) {
+      console.log(e);
+    }
   }
 }
 </script>
