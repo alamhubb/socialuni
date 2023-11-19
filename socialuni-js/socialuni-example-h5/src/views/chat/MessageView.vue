@@ -205,14 +205,17 @@ export default class MessageView extends Vue {
   }
 
   plymu() {
-    const audio = new Audio(test1)
+    const audio = new Audio()
     audio.onload = (ev) => {
       console.log(ev)
     }
-
+    audio.src = test1
+    audio.play()
+    console.log(test1)
     console.log(audio)
-    console.log(audio.play())
-    console.log(665656)
+    // console.log(audio)
+    // console.log(audio.play())
+    // console.log(665656)
   }
 }
 </script>
