@@ -14,8 +14,8 @@ export default class WebsocketWebRtcUtil {
     static locking: boolean = false
     static ws: WebSocket = null
 
-    static send(msg: string) {
-        this.ws.send(msg)
+    static send(msg: any) {
+        this.ws.send(JsonUtil.toJson(msg))
     }
 
     static reConnect() {

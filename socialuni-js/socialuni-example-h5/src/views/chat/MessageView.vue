@@ -5,6 +5,7 @@
     </div>
 
     <div class="flex-1 overflow-hidden h100p bg-white ml-sm">
+      <el-button @click="plymu">播放</el-button>
       <socialuni-msg-view-h5></socialuni-msg-view-h5>
     </div>
 
@@ -90,6 +91,7 @@ import socialuniUserRequest from "@socialuni/socialuni-user-api/src/request/soci
 import AgoraRTC from "agora-rtc-sdk-ng";
 import WebsocketWebRtcUtil from "@socialuni/socialuni-api-base/src/websocket/WebsocketWebRtcUtil";
 import WebsocketUtil from "@socialuni/socialuni-api-base/src/websocket/WebsocketUtil";
+import test1 from './test1.mp3'
 
 @Component({
   components: {SocialuniChatViewH5, SocialuniMsgViewH5}
@@ -202,5 +204,12 @@ export default class MessageView extends Vue {
     WebsocketWebRtcUtil.send("哈喽啊")
   }
 
+  plymu(){
+    const audio = new Audio(test1)
+
+    console.log(audio)
+    console.log(audio.play())
+    console.log(665656)
+  }
 }
 </script>

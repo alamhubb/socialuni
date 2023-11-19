@@ -53,7 +53,7 @@ class SocialuniMusicPlugin implements SocialuniPlugin {
           }*/
         console.log('执行订阅')
         CommonEventUtil.on(SocialuniImEventKey.socialuniImPageInit, async (params: MessageViewParams) => {
-            await socialuniMusicStore.getMusicInitDataAction()
+            /*await socialuniMusicStore.getMusicInitDataAction()
             client.leave()
             socialuniMusicStore.setChannelName(params.chatId)
             await socialuniMusicStore.getMusicTokenAction(params.chatId)
@@ -73,7 +73,7 @@ class SocialuniMusicPlugin implements SocialuniPlugin {
                         }
                     }
                 });
-            }
+            }*/
         })
     }
 }
