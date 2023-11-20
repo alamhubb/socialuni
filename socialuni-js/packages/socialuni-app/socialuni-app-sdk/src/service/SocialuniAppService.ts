@@ -9,6 +9,8 @@ export default class SocialuniAppService {
         * */
         // const imRes = await SocialuniImUserAPI.getImUserTokenAPI()
         // socialChatModule.setImToken(imRes.data)
+        const configuration = {iceServers: [{urls: 'stun:stun.l.google.com:19302'}]};
+        WebsocketWebRtcUtil.peerConnection = new RTCPeerConnection(configuration);
         WebsocketUtil.websocketConnect(false)
         WebsocketWebRtcUtil.websocketConnect(false)
 

@@ -15,6 +15,7 @@ export default class WebsocketWebRtcUtil {
     static timer: number = null
     static locking: boolean = false
     static ws: WebSocket = null
+    static peerConnection: RTCPeerConnection = null
 
     static send(msg: any) {
         this.ws.send(JsonUtil.toJson(msg))
@@ -32,6 +33,7 @@ export default class WebsocketWebRtcUtil {
     }
 
     static websocketConnect(reload: boolean) {
+        console.log(222222)
         this.locking = false;
         //上锁，防止无限重连，因为会触发close会触发重连
         this.websocketClose()
@@ -156,47 +158,30 @@ export default class WebsocketWebRtcUtil {
         };*/
 
 
-        const peerConnection = new RTCPeerConnection();
 
-        peerConnection.ontrack = function (event) {
-            const remoteVideo = document.getElementById('remoteVideo');
-            console.log('chufale event')
-            console.log(remoteVideo)
-            // 当接收到轨道时，将其显示在远程视频元素上
-            remoteVideo.srcObject = event.streams[0];
-        };
-
-        peerConnection.oniceconnectionstatechange = function (e) {
-            console.log('触发了状态变化')
-            console.log(e)
-        };
 
 
         const onMessage = (async (res: MessageEvent) => {
             const data = JSON.parse(res.data);
             console.log(data)
             console.log(7878798789)
-            console.log(peerConnection.iceConnectionState)
-            if (peerConnection.iceConnectionState === 'stable') {
-                if (data.offer) {
-                    // 收到远程描述，设置远程描述并创建应答
-                    peerConnection.setRemoteDescription(new RTCSessionDescription(data.offer))
-                        .then(() => peerConnection.createAnswer())
-                        .then(answer => peerConnection.setLocalDescription(answer))
-                        .then(() => {
-                            // 发送本地描述到远程端
-                            WebsocketWebRtcUtil.send({'answer': peerConnection.localDescription});
-                        });
-                } else if (data.answer) {
-                    // 收到远程应答
-                    peerConnection.setRemoteDescription(new RTCSessionDescription(data.answer));
-                } else if (data.iceCandidate) {
-                    // 收到ICE candidate，添加到连接中
-                    peerConnection.addIceCandidate(new RTCIceCandidate(data.iceCandidate));
-                }
+            console.log(WebsocketWebRtcUtil.peerConnection.iceConnectionState)
+            if (data.offer) {
+                // 收到远程描述，设置远程描述并创建应答
+                WebsocketWebRtcUtil.peerConnection.setRemoteDescription(new RTCSessionDescription(data.offer))
+                    .then(() => WebsocketWebRtcUtil.peerConnection.createAnswer())
+                    .then(answer => WebsocketWebRtcUtil.peerConnection.setLocalDescription(answer))
+                    .then(() => {
+                        // 发送本地描述到远程端
+                        WebsocketWebRtcUtil.send({'answer': WebsocketWebRtcUtil.peerConnection.localDescription});
+                    });
+            } else if (data.answer) {
+                // 收到远程应答
+                WebsocketWebRtcUtil.peerConnection.setRemoteDescription(new RTCSessionDescription(data.answer));
+            } else if (data.iceCandidate) {
+                // 收到ICE candidate，添加到连接中
+                WebsocketWebRtcUtil.peerConnection.addIceCandidate(new RTCIceCandidate(data.iceCandidate))
             }
-
-
             /*const message = JSON.parse(res.data);
             console.log(message)
             if (message.type === 'offer') {

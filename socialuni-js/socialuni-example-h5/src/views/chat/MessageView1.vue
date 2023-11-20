@@ -21,10 +21,12 @@ import WebsocketWebRtcUtil from "@socialuni/socialuni-api-base/src/websocket/Web
 let localStream
 let localVideo = null
 let remoteVideo = null
+let peerConnection = null
 @Component({
   components: {VideoCamera, SocialuniChatViewH5, SocialuniMsgViewH5}
 })
 export default class MessageView extends Vue {
+
   created() {
     console.log(11111111)
     this.initPeerConnection()
@@ -33,27 +35,24 @@ export default class MessageView extends Vue {
   mounted() {
     localVideo = document.getElementById('localVideo');
     remoteVideo = document.getElementById('remoteVideo');
+
   }
 
 // 初始化WebRTC连接
   async initPeerConnection() {
+    const configuration = {iceServers: [{urls: 'stun:stun.l.google.com:19302'}]};
+    WebsocketWebRtcUtil.peerConnection = new RTCPeerConnection(configuration);
 
     // 设置远程视频流到video元素
     WebsocketWebRtcUtil.peerConnection.ontrack = (event) => {
-      console.log(event)
       remoteVideo.srcObject = event.streams[0];
     };
 
-    WebsocketWebRtcUtil.peerConnection.oniceconnectionstatechange = (event) => {
-      console.log(event);
-      console.log('触发了状态变化')
-      console.log('ICE connection state change:', peerConnection.iceConnectionState);
-    };
-
+    // 处理ICE候选项
     WebsocketWebRtcUtil.peerConnection.onicecandidate = (event) => {
       if (event.candidate) {
-        // 发送ICE候选项到信令服务器
-        WebsocketWebRtcUtil.send({'iceCandidate': event.candidate});
+        // 发送ICE候选项到远程端
+        // 你可以使用WebSocket或其他通信方式将候选项发送给另一个客户端
       }
     };
   }
@@ -65,9 +64,11 @@ export default class MessageView extends Vue {
       localStream = await navigator.mediaDevices.getUserMedia({video: false, audio: true});
       console.log(localVideo)
       localVideo.srcObject = localStream;
+      // 添加本地音频和视频流到连接
       localStream.getTracks().forEach(track => {
         WebsocketWebRtcUtil.peerConnection.addTrack(track, localStream);
       });
+
     } catch (error) {
       console.error('Error accessing local media:', error);
     }
