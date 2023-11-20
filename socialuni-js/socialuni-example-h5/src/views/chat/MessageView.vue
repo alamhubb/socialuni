@@ -6,6 +6,9 @@
 
     <div class="flex-1 overflow-hidden h100p bg-white ml-sm">
       <el-button @click="plymu">播放</el-button>
+      <el-button @click="playAudio">播放11</el-button>
+      <audio controls id="localVideo" autoplay></audio>
+      <audio controls id="remoteVideo" autoplay></audio>
       <socialuni-msg-view-h5></socialuni-msg-view-h5>
     </div>
 
@@ -92,9 +95,10 @@ import AgoraRTC from "agora-rtc-sdk-ng";
 import WebsocketWebRtcUtil from "@socialuni/socialuni-api-base/src/websocket/WebsocketWebRtcUtil";
 import WebsocketUtil from "@socialuni/socialuni-api-base/src/websocket/WebsocketUtil";
 import test1 from './test1.mp3'
+import {VideoCamera} from "@element-plus/icons-vue";
 
 @Component({
-  components: {SocialuniChatViewH5, SocialuniMsgViewH5}
+  components: {VideoCamera, SocialuniChatViewH5, SocialuniMsgViewH5}
 })
 export default class MessageView extends Vue {
   tableData = []
@@ -253,6 +257,38 @@ export default class MessageView extends Vue {
         .then(() => {
           console.log('Remote description set:', remoteAnswer);
         });*/
+  }
+
+
+  playAudio() {
+    navigator.mediaDevices.getUserMedia({video: false, audio: true})
+        .then(function (stream) {
+          const localVideo = document.getElementById('localVideo');
+          localVideo.srcObject = stream;
+
+          const peerConnection = new RTCPeerConnection();
+
+          stream.getTracks().forEach(track => {
+            peerConnection.addTrack(track, stream);
+          });
+
+          peerConnection.createOffer()
+              .then(offer => peerConnection.setLocalDescription(offer))
+              .then(() => {
+                // 发送本地描述到远程端
+                WebsocketWebRtcUtil.send({'offer': peerConnection.localDescription});
+              });
+
+          peerConnection.onicecandidate = function (event) {
+            if (event.candidate) {
+              // 发送ICE candidate到远程端
+              WebsocketWebRtcUtil.send({'iceCandidate': event.candidate});
+            }
+          };
+        })
+        .catch(function (error) {
+          console.error('getUserMedia error:', error);
+        });
   }
 }
 </script>

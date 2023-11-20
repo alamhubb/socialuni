@@ -75,7 +75,7 @@ export default class WebsocketWebRtcUtil {
         })
 
         // 创建 RTCPeerConnection
-        const configuration = {iceServers: [{urls: 'stun:stun.l.google.com:19302'}]};
+        /*const configuration = {iceServers: [{urls: 'stun:stun.l.google.com:19302'}]};
         const peerConnection = new RTCPeerConnection(configuration);
 
         // 处理接收到的音频轨道
@@ -153,10 +153,51 @@ export default class WebsocketWebRtcUtil {
                 console.error('Stream does not contain audio tracks');
             }
 
+        };*/
+
+
+        const peerConnection = new RTCPeerConnection();
+
+        peerConnection.ontrack = function (event) {
+            const remoteVideo = document.getElementById('remoteVideo');
+            console.log('chufale event')
+            console.log(remoteVideo)
+            // 当接收到轨道时，将其显示在远程视频元素上
+            remoteVideo.srcObject = event.streams[0];
         };
 
+        peerConnection.oniceconnectionstatechange = function (e) {
+            console.log('触发了状态变化')
+            console.log(e)
+        };
+
+
         const onMessage = (async (res: MessageEvent) => {
-            const message = JSON.parse(res.data);
+            const data = JSON.parse(res.data);
+            console.log(data)
+            console.log(7878798789)
+            console.log(peerConnection.iceConnectionState)
+            if (peerConnection.iceConnectionState === 'stable') {
+                if (data.offer) {
+                    // 收到远程描述，设置远程描述并创建应答
+                    peerConnection.setRemoteDescription(new RTCSessionDescription(data.offer))
+                        .then(() => peerConnection.createAnswer())
+                        .then(answer => peerConnection.setLocalDescription(answer))
+                        .then(() => {
+                            // 发送本地描述到远程端
+                            WebsocketWebRtcUtil.send({'answer': peerConnection.localDescription});
+                        });
+                } else if (data.answer) {
+                    // 收到远程应答
+                    peerConnection.setRemoteDescription(new RTCSessionDescription(data.answer));
+                } else if (data.iceCandidate) {
+                    // 收到ICE candidate，添加到连接中
+                    peerConnection.addIceCandidate(new RTCIceCandidate(data.iceCandidate));
+                }
+            }
+
+
+            /*const message = JSON.parse(res.data);
             console.log(message)
             if (message.type === 'offer') {
                 // 设置远程描述
@@ -172,7 +213,7 @@ export default class WebsocketWebRtcUtil {
                 // 处理 ICE 候选项
                 const candidate = new RTCIceCandidate(message.candidate);
                 await peerConnection.addIceCandidate(candidate);
-            }
+            }*/
         })
 
         if (socialuniSystemModule.isUniApp) {
