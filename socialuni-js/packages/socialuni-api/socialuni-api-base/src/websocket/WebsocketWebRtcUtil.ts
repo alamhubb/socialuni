@@ -16,6 +16,7 @@ export default class WebsocketWebRtcUtil {
     static locking: boolean = false
     static ws: WebSocket = null
     static peerConnection: RTCPeerConnection = null
+    static remoteVideo: HTMLAudioElement = null
 
     static send(msg: any) {
         this.ws.send(JsonUtil.toJson(msg))

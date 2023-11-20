@@ -20,42 +20,17 @@ import WebsocketWebRtcUtil from "@socialuni/socialuni-api-base/src/websocket/Web
 
 let localStream
 let localVideo = null
-let remoteVideo = null
 @Component({
   components: {VideoCamera, SocialuniChatViewH5, SocialuniMsgViewH5}
 })
 export default class MessageView extends Vue {
   created() {
     console.log(11111111)
-    this.initPeerConnection()
   }
 
   mounted() {
     localVideo = document.getElementById('localVideo');
-    remoteVideo = document.getElementById('remoteVideo');
-  }
-
-// 初始化WebRTC连接
-  async initPeerConnection() {
-
-    // 设置远程视频流到video元素
-    WebsocketWebRtcUtil.peerConnection.ontrack = (event) => {
-      console.log(event)
-      remoteVideo.srcObject = event.streams[0];
-    };
-
-    WebsocketWebRtcUtil.peerConnection.oniceconnectionstatechange = (event) => {
-      console.log(event);
-      console.log('触发了状态变化')
-      console.log('ICE connection state change:', peerConnection.iceConnectionState);
-    };
-
-    WebsocketWebRtcUtil.peerConnection.onicecandidate = (event) => {
-      if (event.candidate) {
-        // 发送ICE候选项到信令服务器
-        WebsocketWebRtcUtil.send({'iceCandidate': event.candidate});
-      }
-    };
+    WebsocketWebRtcUtil.remoteVideo = document.getElementById('remoteVideo');
   }
 
 
@@ -68,6 +43,13 @@ export default class MessageView extends Vue {
       localStream.getTracks().forEach(track => {
         WebsocketWebRtcUtil.peerConnection.addTrack(track, localStream);
       });
+
+      WebsocketWebRtcUtil.peerConnection.createOffer()
+          .then(offer => WebsocketWebRtcUtil.peerConnection.setLocalDescription(offer))
+          .then(() => {
+            // 发送本地描述到远程端
+            WebsocketWebRtcUtil.send({ 'offer': WebsocketWebRtcUtil.peerConnection.localDescription });
+          });
     } catch (error) {
       console.error('Error accessing local media:', error);
     }
@@ -78,8 +60,8 @@ export default class MessageView extends Vue {
       track.stop();
     });
     localVideo.srcObject = null;
-    remoteVideo.srcObject = null;
-    peerConnection.close();
+    WebsocketWebRtcUtil.remoteVideo.srcObject = null;
+    WebsocketWebRtcUtil.peerConnection.close();
   }
 }
 </script>

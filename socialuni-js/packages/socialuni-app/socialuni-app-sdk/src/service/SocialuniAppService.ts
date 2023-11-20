@@ -11,6 +11,26 @@ export default class SocialuniAppService {
         // socialChatModule.setImToken(imRes.data)
         const configuration = {iceServers: [{urls: 'stun:stun.l.google.com:19302'}]};
         WebsocketWebRtcUtil.peerConnection = new RTCPeerConnection(configuration);
+// 设置远程视频流到video元素
+        WebsocketWebRtcUtil.peerConnection.ontrack = (event) => {
+            console.log(event)
+            WebsocketWebRtcUtil.remoteVideo.srcObject = event.streams[0];
+        };
+
+        WebsocketWebRtcUtil.peerConnection.oniceconnectionstatechange = (event) => {
+            console.log(event);
+            console.log('触发了状态变化')
+            console.log('ICE connection state change:', WebsocketWebRtcUtil.peerConnection.iceConnectionState);
+        };
+
+        WebsocketWebRtcUtil.peerConnection.onicecandidate = (event) => {
+            if (event.candidate) {
+                // 发送ICE候选项到信令服务器
+                WebsocketWebRtcUtil.send({'iceCandidate': event.candidate});
+            }
+        };
+
+
         WebsocketUtil.websocketConnect(false)
         WebsocketWebRtcUtil.websocketConnect(false)
 
