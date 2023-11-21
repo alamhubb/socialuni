@@ -1,5 +1,5 @@
 {
-  "name": "fast-websocket",
+  "name": "fast-ws",
   "version": "0.1.2",
   "description": "",
   "main": "index.js",
