@@ -169,13 +169,13 @@ export default class WebsocketWebRtcUtil {
             console.log(WebsocketWebRtcUtil.peerConnection.iceConnectionState)
             if (data.offer) {
                 // 收到远程描述，设置远程描述并创建应答
-                /*WebsocketWebRtcUtil.peerConnection.setRemoteDescription(new RTCSessionDescription(data.offer))
+                WebsocketWebRtcUtil.peerConnection.setRemoteDescription(new RTCSessionDescription(data.offer))
                     .then(() => WebsocketWebRtcUtil.peerConnection.createAnswer())
                     .then(answer => WebsocketWebRtcUtil.peerConnection.setLocalDescription(answer))
                     .then(() => {
                         // 发送本地描述到远程端
                         WebsocketWebRtcUtil.send({'answer': WebsocketWebRtcUtil.peerConnection.localDescription});
-                    });*/
+                    });
             } else if (data.answer) {
                 // 收到远程应答
                 WebsocketWebRtcUtil.peerConnection.setRemoteDescription(new RTCSessionDescription(data.answer));
