@@ -1,6 +1,6 @@
 {
-  "name": "socialuni-webrtc",
-  "version": "1.0.0",
+  "name": "socialuni-websocket-uni",
+  "version": "0.1.2",
   "description": "",
   "main": "index.js",
   "scripts": {

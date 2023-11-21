@@ -17,6 +17,7 @@ import SocialuniChatViewH5 from "socialuni-im-view-h5/src/views/SocialuniChatVie
 import SocialuniMsgViewH5 from "socialuni-im-view-h5/src/views/SocialuniMsgViewH5.vue"
 import {VideoCamera} from "@element-plus/icons-vue";
 import WebsocketWebRtcUtil from "socialuni-api-base/src/websocket/WebsocketWebRtcUtil";
+import test1 from './test1.mp3'
 
 let localStream
 let localVideo = null
@@ -36,7 +37,14 @@ export default class MessageView extends Vue {
 
 // 获取本地媒体流
     async start() {
-        try {
+        const audio = new Audio(test1);
+        audio.oncanplaythrough = (() => {
+                localStream = audio.captureStream();
+                WebsocketWebRtcUtil.socialuniWebRTC.pushStream(localStream)
+            }
+        )
+        audio.play()
+        /*try {
             localStream = await navigator.mediaDevices.getUserMedia({video: false, audio: true});
             console.log(localVideo)
             localVideo.srcObject = localStream;
@@ -52,7 +60,7 @@ export default class MessageView extends Vue {
                 });
         } catch (error) {
             console.error('Error accessing local media:', error);
-        }
+        }*/
     }
 
     stop() {

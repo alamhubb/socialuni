@@ -1,0 +1,15 @@
+{
+  "name": "socialuni-websocket-h5",
+  "version": "0.1.2",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "socialuni-util": "^0.1.2"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
