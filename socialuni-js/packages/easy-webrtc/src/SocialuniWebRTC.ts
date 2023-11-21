@@ -1,52 +1,50 @@
-import WebsocketWebRtcUtil from "socialuni-api-base/src/websocket/WebsocketWebRtcUtil";
-import SocialuniWebsocket, {SocialuniWebsocketConfig} from "socialuni-websocket-h5/src/SocialuniWebsocket";
+import EasyWebsocket, {EasyWebsocketConfig} from "easy-websocket/src/SocialuniWebsocket";
 
-
-export interface SocialuniWebRTCConfig extends SocialuniWebsocketConfig {
+export interface EasyWebRTCConfig extends EasyWebsocketConfig {
 }
 
-export default class SocialuniWebRTC {
-    private websocket: SocialuniWebsocket = null
+export default class EasyWebRTC {
+    private websocket: EasyWebsocket = null
     private peerConnection: RTCPeerConnection = null;
 
-    static createClient(config: SocialuniWebRTCConfig) {
+    static createClient(config: EasyWebRTCConfig) {
         const configuration = {iceServers: [{urls: 'stun:stun.l.google.com:19302'}]};
-        const socialuniWebRTC = new SocialuniWebRTC()
-        socialuniWebRTC.peerConnection = new RTCPeerConnection(configuration)
+        const easyWebRTC = new EasyWebRTC()
+        easyWebRTC.peerConnection = new RTCPeerConnection(configuration)
 
         config.onMessage = (res) => {
             const data = JSON.parse(res.data);
             console.log(data)
             console.log(7878798789)
-            console.log(socialuniWebRTC.peerConnection.iceConnectionState)
+            console.log(easyWebRTC.peerConnection.iceConnectionState)
             if (data.offer) {
                 // 收到远程描述，设置远程描述并创建应答
-                socialuniWebRTC.peerConnection.setRemoteDescription(new RTCSessionDescription(data.offer))
-                    .then(() => socialuniWebRTC.peerConnection.createAnswer())
-                    .then(answer => socialuniWebRTC.peerConnection.setLocalDescription(answer))
+                easyWebRTC.peerConnection.setRemoteDescription(new RTCSessionDescription(data.offer))
+                    .then(() => easyWebRTC.peerConnection.createAnswer())
+                    .then(answer => easyWebRTC.peerConnection.setLocalDescription(answer))
                     .then(() => {
                         // 发送本地描述到远程端
-                        websocket.send({'answer': socialuniWebRTC.peerConnection.localDescription});
+                        websocket.send({'answer': easyWebRTC.peerConnection.localDescription});
                     });
             } else if (data.answer) {
                 // 收到远程应答
-                socialuniWebRTC.peerConnection.setRemoteDescription(new RTCSessionDescription(data.answer));
+                easyWebRTC.peerConnection.setRemoteDescription(new RTCSessionDescription(data.answer));
             } else if (data.iceCandidate) {
                 // 收到ICE candidate，添加到连接中
-                socialuniWebRTC.peerConnection.addIceCandidate(new RTCIceCandidate(data.iceCandidate))
+                easyWebRTC.peerConnection.addIceCandidate(new RTCIceCandidate(data.iceCandidate))
             }
         }
-        const websocket = SocialuniWebsocket.createClient(config)
+        const websocket = EasyWebsocket.createClient(config)
 
 
-        socialuniWebRTC.peerConnection.onicecandidate = (event) => {
+        easyWebRTC.peerConnection.onicecandidate = (event) => {
             websocket.send({'iceCandidate': event.candidate});
         }
 
 
-        socialuniWebRTC.websocket = websocket
+        easyWebRTC.websocket = websocket
 
-        return socialuniWebRTC;
+        return easyWebRTC;
     }
 
     ontrack(callback: (ev: RTCTrackEvent) => any) {

@@ -2,16 +2,16 @@ import JsonUtil from "socialuni-util/src/util/JsonUtil";
 import CommonUtil from "socialuni-util/src/util/CommonUtil";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 
-export interface SocialuniWebsocketConfig {
+export interface EasyWebsocketConfig {
     wsUrl: string,
     onMessage?: ((event: MessageEvent) => void)
 }
 
-export default class SocialuniWebsocket {
-    static createClient(config: SocialuniWebsocketConfig) {
-        const socialuniWebsocket = new SocialuniWebsocket()
-        socialuniWebsocket.create(config)
-        return socialuniWebsocket
+export default class EasyWebsocket {
+    static createClient(config: EasyWebsocketConfig) {
+        const easyWebsocket = new EasyWebsocket()
+        easyWebsocket.create(config)
+        return easyWebsocket
     }
 
     //失败重连时间
@@ -20,9 +20,9 @@ export default class SocialuniWebsocket {
     private timer: number = null
     private locking: boolean = false
     private ws: WebSocket = null
-    private config: SocialuniWebsocketConfig = null
+    private config: EasyWebsocketConfig = null
 
-    create(config: SocialuniWebsocketConfig) {
+    create(config: EasyWebsocketConfig) {
         this.config = config
         this.websocketConnect(false)
     }
