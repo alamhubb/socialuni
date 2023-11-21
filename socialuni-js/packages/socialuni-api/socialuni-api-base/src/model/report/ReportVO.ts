@@ -1,4 +1,4 @@
-import CenterUserDetailRO from '@socialuni/socialuni-api-base/src/model/social/CenterUserDetailRO'
+import CenterUserDetailRO from 'socialuni-api-base/src/model/social/CenterUserDetailRO'
 
 export default class ReportVO {
   public user: CenterUserDetailRO

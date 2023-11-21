@@ -1,5 +1,5 @@
 {
-  "name": "@socialuni/socialuni",
+  "name": "socialuni",
   "version": "0.1.2",
   "description": "",
   "main": "axios.ts",
@@ -10,8 +10,8 @@
     "axios": "^1.4.0",
     "vue": "^3.3.2",
     "vue-router": "^4.2.0",
-    "@socialuni/socialuni-util": "^0.1.2",
-    "@socialuni/socialuni-native-util": "^0.1.2",
+    "socialuni-util": "^0.1.2",
+    "socialuni-native-util": "^0.1.2",
     "mitt": "^3.0.0"
   },
   "devDependencies": {

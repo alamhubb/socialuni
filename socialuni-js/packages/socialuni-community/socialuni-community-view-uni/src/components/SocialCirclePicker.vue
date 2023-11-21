@@ -50,12 +50,12 @@
 
 <script lang="ts">
 import {Component, Emit, Vue} from 'vue-facing-decorator'
-import QPopup from "@socialuni/socialuni-ui-uni/src/components/QPopup/QPopup.vue";
-import SocialCircleRO from "@socialuni/socialuni-api-base/src/model/community/circle/SocialCircleRO";
-import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue";
-import QInput from "@socialuni/socialuni-ui-uni/src/components/QInput/QInput.vue";
-import QSidebar from "@socialuni/socialuni-ui-uni/src/components/QSidebar/QSidebar.vue";
-import {socialCircleModule} from "@socialuni/socialuni-community-sdk/src/store/SocialCircleModule";
+import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue";
+import SocialCircleRO from "socialuni-api-base/src/model/community/circle/SocialCircleRO";
+import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
+import QInput from "socialuni-ui-uni/src/components/QInput/QInput.vue";
+import QSidebar from "socialuni-ui-uni/src/components/QSidebar/QSidebar.vue";
+import {socialCircleModule} from "socialuni-community-sdk/src/store/SocialCircleModule";
 
 
 @Component({

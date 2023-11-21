@@ -1,5 +1,5 @@
 {
-  "name": "@socialuni/socialuni-webrtc",
+  "name": "socialuni-webrtc",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",

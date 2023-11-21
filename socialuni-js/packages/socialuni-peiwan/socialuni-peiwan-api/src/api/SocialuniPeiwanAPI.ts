@@ -1,5 +1,5 @@
-import socialuniUserRequest from "@socialuni/socialuni-user-api/src/request/socialuniUserRequest";
-import PeiwanRO from "@socialuni/socialuni-admin-api/src/model/peiwan/PeiwanRO";
+import socialuniUserRequest from "socialuni-user-api/src/request/socialuniUserRequest";
+import PeiwanRO from "socialuni-admin-api/src/model/peiwan/PeiwanRO";
 export default class SocialuniPeiwanAPI {
 
     static queryPeiwanInfoListAPI() {

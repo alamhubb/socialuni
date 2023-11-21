@@ -1,5 +1,5 @@
 import {ElMessageBox} from 'element-plus'
-import {SocialuniAlertUtilInterface} from "@socialuni/socialuni-native-util/src/interface/SocialuniAlertUtilInterface";
+import {SocialuniAlertUtilInterface} from "socialuni-native-util/src/interface/SocialuniAlertUtilInterface";
 
 class AlertUtil implements SocialuniAlertUtilInterface {
     confirm(message: string, okLabel = '确定', cancel = '取消') {

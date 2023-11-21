@@ -25,7 +25,7 @@ import {Component, Vue} from "vue-facing-decorator";
 import {defineAsyncComponent, ref} from "vue";
 import banner from './recommend/banner.vue'
 import songList from './recommend/songList.vue'
-import SDialog from "@socialuni/socialuni-ui-h5/src/components/SComponents/SDialog.vue";
+import SDialog from "socialuni-ui-h5/src/components/SComponents/SDialog.vue";
 
 const radio = defineAsyncComponent(() => import('./recommend/radio.vue'))
 const unique = defineAsyncComponent(() => import('../children/unique.vue'))

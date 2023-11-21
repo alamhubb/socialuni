@@ -14,10 +14,10 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-facing-decorator'
-import PageUtil from '@socialuni/socialuni-util/src/util/PageUtil'
-import ImPageUtil from '@socialuni/socialuni-im-sdk/src/util/ImPageUtil'
-import RouterUtil from '@socialuni/socialuni-util/src/util/RouterUtil'
-import ImPagePath from '@socialuni/socialuni-im-sdk/src/constant/ImPagePath'
+import PageUtil from 'socialuni-util/src/util/PageUtil'
+import ImPageUtil from 'socialuni-im-sdk/src/util/ImPageUtil'
+import RouterUtil from 'socialuni-util/src/util/RouterUtil'
+import ImPagePath from 'socialuni-im-sdk/src/constant/ImPagePath'
 
 @Component({})
 export default class LeftWindowView extends Vue {

@@ -1,6 +1,6 @@
-import AppUpdateType from "@socialuni/socialuni-constant/constant/AppUpdateType";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
-import SocialuniAppAPI from "@socialuni/socialuni-app-api/src/api/SocialuniAppAPI";
+import AppUpdateType from "socialuni-constant/constant/AppUpdateType";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
 import {socialuniConfigModule} from "../store/SocialuniConfigModule";
 
 export default class APPUtil {

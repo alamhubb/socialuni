@@ -38,10 +38,10 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-facing-decorator'
-import SocialuniImgUtil from "@socialuni/socialuni-user-sdk/src/util/SocialuniImgUtil";
-import CommunityPageUtil from "@socialuni/socialuni-community-sdk/src/util/CommunityPageUtil";
-import DateUtil from "@socialuni/socialuni-util/src/util/DateUtil";
-import {socialNotifyModule} from "@socialuni/socialuni-community-sdk/src/store/SocialNotifyModule";
+import SocialuniImgUtil from "socialuni-user-sdk/src/util/SocialuniImgUtil";
+import CommunityPageUtil from "socialuni-community-sdk/src/util/CommunityPageUtil";
+import DateUtil from "socialuni-util/src/util/DateUtil";
+import {socialNotifyModule} from "socialuni-community-sdk/src/store/SocialNotifyModule";
 
 
 /**

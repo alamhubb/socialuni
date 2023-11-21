@@ -49,29 +49,29 @@
 <script lang="ts">
 import {Component, Vue, Watch} from 'vue-facing-decorator'
 
-import QButton from '@socialuni/socialuni-ui-uni/src/components/QButton/QButton.vue'
-import QNavbar from '@socialuni/socialuni-ui-uni/src/components/QNavbar/QNavbar.vue'
-import QSearch from '@socialuni/socialuni-ui-uni/src/components/QSearch/QSearch.vue'
-import QIcon from '@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue'
-import QPopup from '@socialuni/socialuni-ui-uni/src/components/QPopup/QPopup.vue'
-import QSlider from '@socialuni/socialuni-ui-uni/src/components/QSlider/QSlider.vue'
-import QTabs from "@socialuni/socialuni-ui-uni/src/components/QTabs/QTabs.vue";
+import QButton from 'socialuni-ui-uni/src/components/QButton/QButton.vue'
+import QNavbar from 'socialuni-ui-uni/src/components/QNavbar/QNavbar.vue'
+import QSearch from 'socialuni-ui-uni/src/components/QSearch/QSearch.vue'
+import QIcon from 'socialuni-ui-uni/src/components/QIcon/QIcon.vue'
+import QPopup from 'socialuni-ui-uni/src/components/QPopup/QPopup.vue'
+import QSlider from 'socialuni-ui-uni/src/components/QSlider/QSlider.vue'
+import QTabs from "socialuni-ui-uni/src/components/QTabs/QTabs.vue";
 import TagSearch from "./TagSearch.vue";
 import TabsTalk from "./tabsTalk.vue";
 import TalkSwipers from "./talkSwipers.vue";
-import TagVO from "@socialuni/socialuni-api-base/src/model/community/tag/TagVO";
-import DistrictVO from "@socialuni/socialuni-api-base/src/model/DistrictVO";
+import TagVO from "socialuni-api-base/src/model/community/tag/TagVO";
+import DistrictVO from "socialuni-api-base/src/model/DistrictVO";
 import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
-import SocialTagPicker from "@socialuni/socialuni-community-view-uni/src/components/SocialTagPicker.vue";
-import QCityPicker from "@socialuni/socialuni-community-view-uni/src/components/QCityPicker/QCityPicker.vue";
-import CommunityPageUtil from "@socialuni/socialuni-community-sdk/src/util/CommunityPageUtil";
-import {socialuniTagModule} from "@socialuni/socialuni-community-sdk/src/store/SocialTagModule";
-import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
-import {socialNotifyModule} from "@socialuni/socialuni-community-sdk/src/store/SocialNotifyModule";
-import {socialAppModule} from "@socialuni/socialuni-app-sdk/src/store/SocialAppModule";
-import {socialLocationModule} from "@socialuni/socialuni-community-sdk/src/store/SocialLocationModule";
-import {socialuniConfigModule} from "@socialuni/socialuni-app-sdk/src/store/SocialuniConfigModule";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import SocialTagPicker from "socialuni-community-view-uni/src/components/SocialTagPicker.vue";
+import QCityPicker from "socialuni-community-view-uni/src/components/QCityPicker/QCityPicker.vue";
+import CommunityPageUtil from "socialuni-community-sdk/src/util/CommunityPageUtil";
+import {socialuniTagModule} from "socialuni-community-sdk/src/store/SocialTagModule";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+import {socialNotifyModule} from "socialuni-community-sdk/src/store/SocialNotifyModule";
+import {socialAppModule} from "socialuni-app-sdk/src/store/SocialAppModule";
+import {socialLocationModule} from "socialuni-community-sdk/src/store/SocialLocationModule";
+import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 import MsgInput from "../../components/MsgInput.vue";
 import {getCurrentInstance} from "vue";
 

@@ -1,17 +1,17 @@
 {
-  "name": "@socialuni/socialuni-app-api",
+  "name": "socialuni-app-api",
   "version": "0.1.2",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@socialuni/socialuni-api-base": "^0.1.2",
-    "@socialuni/socialuni-ui-types": "^0.1.2",
-    "@socialuni/socialuni": "^0.1.2",
-    "@socialuni/socialuni-util": "^0.1.2",
-    "@socialuni/socialuni-constant": "^0.1.2",
-    "@socialuni/socialuni-native-util": "^0.1.2"
+    "socialuni-api-base": "^0.1.2",
+    "socialuni-ui-types": "^0.1.2",
+    "socialuni": "^0.1.2",
+    "socialuni-util": "^0.1.2",
+    "socialuni-constant": "^0.1.2",
+    "socialuni-native-util": "^0.1.2"
   },
   "devDependencies": {
     "typescript": "^4.7.4",

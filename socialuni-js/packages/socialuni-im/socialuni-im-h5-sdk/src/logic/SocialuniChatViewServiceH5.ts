@@ -1,6 +1,6 @@
-import SocialuniChatRO from "@socialuni/socialuni-api-base/src/model/SocialuniChatRO";
-import SocialuniChatViewService from "@socialuni/socialuni-im-sdk/src/logic/SocialuniChatViewService";
-import {socialuniMsgModule} from "@socialuni/socialuni-im-sdk/src/store/SocialMessageModule";
+import SocialuniChatRO from "socialuni-api-base/src/model/SocialuniChatRO";
+import SocialuniChatViewService from "socialuni-im-sdk/src/logic/SocialuniChatViewService";
+import {socialuniMsgModule} from "socialuni-im-sdk/src/store/SocialMessageModule";
 
 interface SocialuniChatViewServiceRefs {
     messageBox: HTMLDivElement;

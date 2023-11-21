@@ -42,7 +42,7 @@
 </template>
 
 <script lang="ts" setup>
-import socialuniUserEditViewService from "@socialuni/socialuni-user-sdk/src/logic/SocialuniUserEditViewService";
+import socialuniUserEditViewService from "socialuni-user-sdk/src/logic/SocialuniUserEditViewService";
 import {getCurrentInstance} from "vue";
 
 socialuniUserEditViewService.initService(getCurrentInstance())

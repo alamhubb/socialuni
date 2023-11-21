@@ -1,10 +1,10 @@
-import TalkVO from "@socialuni/socialuni-api-base/src/model/talk/TalkVO";
+import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
 import {ComponentInternalInstance, reactive, watch, watchEffect} from "vue";
-import {SocialuniViewServiceInterface} from "@socialuni/socialuni/src/interface/SocialuniViewServiceInterface";
-import CenterUserDetailRO from "@socialuni/socialuni-api-base/src/model/social/CenterUserDetailRO";
-import SocialuniTalkAPI from "@socialuni/socialuni-community-api/src/api/SocialuniTalkAPI";
-import {socialuniUserDetailViewService} from "@socialuni/socialuni-user-sdk/src/logic/SocialuniUserDetailViewService";
-import SocialuniViewService from "@socialuni/socialuni/src/interface/SocialuniViewService";
+import {SocialuniViewServiceInterface} from "socialuni/src/interface/SocialuniViewServiceInterface";
+import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
+import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
+import {socialuniUserDetailViewService} from "socialuni-user-sdk/src/logic/SocialuniUserDetailViewService";
+import SocialuniViewService from "socialuni/src/interface/SocialuniViewService";
 import {Vue} from "vue-class-component";
 
 export default class SocialuniCommunityUserDetailViewService extends SocialuniViewService<any> {

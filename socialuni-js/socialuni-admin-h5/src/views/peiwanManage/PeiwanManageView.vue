@@ -114,29 +114,29 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-facing-decorator'
-import PeiwanRO from "@socialuni/socialuni-admin-api/src/model/peiwan/PeiwanRO";
-import SDialog from "@socialuni/socialuni-ui-h5/src/components/SComponents/SDialog.vue";
-import SLabelItem from "@socialuni/socialuni-ui-h5/src/components/SComponents/SLabelItem.vue";
-import STable from "@socialuni/socialuni-ui-h5/src/components/SComponents/STable.vue";
-import STableColumn from "@socialuni/socialuni-ui-h5/src/components/SComponents/STableColumn/STableColumn.vue";
-import STableInput from "@socialuni/socialuni-ui-h5/src/components/SComponents/STableInput/STableInput.vue";
-import STableSelect from "@socialuni/socialuni-ui-h5/src/components/SComponents/STableSelect/STableSelect.vue";
+import PeiwanRO from "socialuni-admin-api/src/model/peiwan/PeiwanRO";
+import SDialog from "socialuni-ui-h5/src/components/SComponents/SDialog.vue";
+import SLabelItem from "socialuni-ui-h5/src/components/SComponents/SLabelItem.vue";
+import STable from "socialuni-ui-h5/src/components/SComponents/STable.vue";
+import STableColumn from "socialuni-ui-h5/src/components/SComponents/STableColumn/STableColumn.vue";
+import STableInput from "socialuni-ui-h5/src/components/SComponents/STableInput/STableInput.vue";
+import STableSelect from "socialuni-ui-h5/src/components/SComponents/STableSelect/STableSelect.vue";
 import {Plus} from '@element-plus/icons-vue'
-import FileUtilH5 from "@socialuni/socialuni-native-h5/src/util/FileUtilH5";
-import type DomFile from "@socialuni/socialuni-native-util/src/model/DomFile";
-import ImgUtilH5 from "@socialuni/socialuni-native-h5/src/util/ImgUtilH5";
-import TencentCosAPI from "@socialuni/socialuni-app-api/src/api/TencentCosAPI";
-import CosService from "@socialuni/socialuni-app-sdk/src/util/CosService";
+import FileUtilH5 from "socialuni-native-h5/src/util/FileUtilH5";
+import type DomFile from "socialuni-native-util/src/model/DomFile";
+import ImgUtilH5 from "socialuni-native-h5/src/util/ImgUtilH5";
+import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
+import CosService from "socialuni-app-sdk/src/util/CosService";
 import UUIDUtil from "@/utils/UUIDUtil";
 import SocialuniPeiwanAdminAPI
     from "../../../../packages/socialuni-peiwan/socialuni-peiwan-api/src/api/SocialuniPeiwanAdminAPI";
 import {useMagicKeys} from '@vueuse/core'
 import {watch} from "vue";
-import AlertUtil from "@socialuni/socialuni-native-h5/src/util/AlertUtil";
-import WindowEventListener from "@socialuni/socialuni-util/src/util/WindowEventListener";
-import AdminPeiwanAppInitData from "@socialuni/socialuni-admin-api/src/model/peiwan/AdminPeiwanAppInitData";
-import SSelect from "@socialuni/socialuni-ui-h5/src/components/SComponents/SSelect/SSelect.vue";
-import ImgFileVO from "@socialuni/socialuni-admin-api/src/model/community/ImgFileVO";
+import AlertUtil from "socialuni-native-h5/src/util/AlertUtil";
+import WindowEventListener from "socialuni-util/src/util/WindowEventListener";
+import AdminPeiwanAppInitData from "socialuni-admin-api/src/model/peiwan/AdminPeiwanAppInitData";
+import SSelect from "socialuni-ui-h5/src/components/SComponents/SSelect/SSelect.vue";
+import ImgFileVO from "socialuni-admin-api/src/model/community/ImgFileVO";
 import resData from "./resdata.json"
 
 @Component({

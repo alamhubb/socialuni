@@ -45,17 +45,17 @@
 
 <script lang="ts">
 import {Vue, Options} from 'vue-facing-decorator'
-import ShellOrderVO from "@socialuni/socialuni-api-base/src/model/ShellOrderVO";
-import QIcon from '@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue'
-import EnumVO from "@socialuni/socialuni-constant/constant/EnumVO";
-import QButton from "@socialuni/socialuni-ui-uni/src/components/QButton/QButton.vue";
-import SocialuniCoinPageType from "@socialuni/socialuni-constant/constant/user/SocialuniCoinPageType";
-import SocialuniProviderType from "@socialuni/socialuni-constant/constant/SocialuniProviderType";
-import PayType from "@socialuni/socialuni-constant/constant/PayType";
-import QTabs from "@socialuni/socialuni-ui-uni/src/components/QTabs/QTabs.vue";
-import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
-import PlatformUtils from "@socialuni/socialuni-user-sdk/src/util/PlatformUtils";
-import UserPageUtil from "@socialuni/socialuni-user-sdk/src/util/UserPageUtil";
+import ShellOrderVO from "socialuni-api-base/src/model/ShellOrderVO";
+import QIcon from 'socialuni-ui-uni/src/components/QIcon/QIcon.vue'
+import EnumVO from "socialuni-constant/constant/EnumVO";
+import QButton from "socialuni-ui-uni/src/components/QButton/QButton.vue";
+import SocialuniCoinPageType from "socialuni-constant/constant/user/SocialuniCoinPageType";
+import SocialuniProviderType from "socialuni-constant/constant/SocialuniProviderType";
+import PayType from "socialuni-constant/constant/PayType";
+import QTabs from "socialuni-ui-uni/src/components/QTabs/QTabs.vue";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+import PlatformUtils from "socialuni-user-sdk/src/util/PlatformUtils";
+import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import {getCurrentInstance} from "vue";
 import {onLoad} from "@dcloudio/uni-app";
 

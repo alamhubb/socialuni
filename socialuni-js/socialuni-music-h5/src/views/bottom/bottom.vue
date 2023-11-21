@@ -54,7 +54,7 @@ import {defineAsyncComponent, computed, watch, ref, onMounted, nextTick} from "v
 
 const popup = defineAsyncComponent(() => import('./children/popup.vue'))
 import {useStore} from "vuex";
-import SDialog from "@socialuni/socialuni-ui-h5/src/components/SComponents/SDialog.vue";
+import SDialog from "socialuni-ui-h5/src/components/SComponents/SDialog.vue";
 import {Component, Vue, Watch} from "vue-facing-decorator";
 
 import AgoraRTC from "agora-rtc-sdk-ng"

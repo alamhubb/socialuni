@@ -1,9 +1,9 @@
-import SocialLoginRO from "@socialuni/socialuni-api-base/src/model/social/SocialLoginRO";
-import SocialuniMineUserRO from "@socialuni/socialuni-api-base/src/model/user/SocialuniMineUserRO";
-import WebsocketUtil from "@socialuni/socialuni-api-base/src/websocket/WebsocketUtil";
+import SocialLoginRO from "socialuni-api-base/src/model/social/SocialLoginRO";
+import SocialuniMineUserRO from "socialuni-api-base/src/model/user/SocialuniMineUserRO";
+import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
 import {socialuniUserModule} from "../store/SocialuniUserModule";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
-import SocialuniAppService from "@socialuni/socialuni-app-sdk/src/service/SocialuniAppService";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import SocialuniAppService from "socialuni-app-sdk/src/service/SocialuniAppService";
 
 export default class UserService {
     static async getAppLunchData() {

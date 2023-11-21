@@ -1,8 +1,8 @@
-import AppConfig from "@socialuni/socialuni-constant/constant/AppConfig";
-import UserPayResultVO from "@socialuni/socialuni-api-base/src/model/user/UserPayResultVO";
-import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
-import PlatformType from "@socialuni/socialuni-constant/constant/PlatformType";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import AppConfig from "socialuni-constant/constant/AppConfig";
+import UserPayResultVO from "socialuni-api-base/src/model/user/UserPayResultVO";
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import PlatformType from "socialuni-constant/constant/PlatformType";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 export default class WxUtils {
     static subscribeAppMsg(tmplIds: string[]) {

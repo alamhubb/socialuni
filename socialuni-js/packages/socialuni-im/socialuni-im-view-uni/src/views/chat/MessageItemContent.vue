@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import {Component, Prop, Vue} from "vue-facing-decorator";
-import MessageVO from "@socialuni/socialuni-im-api/src/model/RO/MessageVO";
+import MessageVO from "socialuni-im-api/src/model/RO/MessageVO";
 
 @Component({})
 export default class MessageItemContent extends Vue {

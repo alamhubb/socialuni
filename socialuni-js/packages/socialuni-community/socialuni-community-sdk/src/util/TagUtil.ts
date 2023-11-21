@@ -1,6 +1,6 @@
-import TagVO from "@socialuni/socialuni-api-base/src/model/community/tag/TagVO";
-import Constants from "@socialuni/socialuni-constant/constant/Constant";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import TagVO from "socialuni-api-base/src/model/community/tag/TagVO";
+import Constants from "socialuni-constant/constant/Constant";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 const initTag = new TagVO()
 initTag.name = Constants.initTagName

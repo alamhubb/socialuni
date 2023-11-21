@@ -1,6 +1,6 @@
 import UniUserInfoRO from './UniUserInfoRO'
-import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
-import LoginProvider from "@socialuni/socialuni-constant/constant/LoginProvider";
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import LoginProvider from "socialuni-constant/constant/LoginProvider";
 
 export default class UniProviderLoginQO {
     provider = ''

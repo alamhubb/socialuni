@@ -1,6 +1,6 @@
-import SocialuniUserRO from "@socialuni/socialuni-api-base/src/model/user/SocialuniUserRO";
-import {MessageStatus, MessageType} from "@socialuni/socialuni-constant/constant/openIm/OpenImMessageType";
-import UUIDUtil from "@socialuni/socialuni-util/src/util/UUIDUtil";
+import SocialuniUserRO from "socialuni-api-base/src/model/user/SocialuniUserRO";
+import {MessageStatus, MessageType} from "socialuni-constant/constant/openIm/OpenImMessageType";
+import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
 
 export default class MessageVO {
     public id: string = null

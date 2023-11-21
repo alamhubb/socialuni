@@ -92,14 +92,14 @@
 
 <script lang="ts">
 import SocialuniUserInfoImg from "./SocialuniUserInfoImg.vue"
-import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue"
-import QButton from "@socialuni/socialuni-ui-uni/src/components/QButton/QButton.vue"
-import QNavbar from "@socialuni/socialuni-ui-uni/src/components/QNavbar/QNavbar.vue"
+import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue"
+import QButton from "socialuni-ui-uni/src/components/QButton/QButton.vue"
+import QNavbar from "socialuni-ui-uni/src/components/QNavbar/QNavbar.vue"
 import SocialGenderTag from "../../components/SocialGenderTag/SocialGenderTag.vue"
 import {getCurrentInstance, provide, reactive} from "vue";
-import SocialuniUserProvideKeys from "@socialuni/socialuni-user-sdk/src/constant/SocialuniUserProvideKeys";
+import SocialuniUserProvideKeys from "socialuni-user-sdk/src/constant/SocialuniUserProvideKeys";
 import {Inject, Component, Vue} from 'vue-facing-decorator'
-import {socialuniUserDetailViewService} from "@socialuni/socialuni-user-sdk/src/logic/SocialuniUserDetailViewService";
+import {socialuniUserDetailViewService} from "socialuni-user-sdk/src/logic/SocialuniUserDetailViewService";
 import {onLoad} from "@dcloudio/uni-app";
 
 @Component({

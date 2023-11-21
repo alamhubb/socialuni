@@ -1,15 +1,15 @@
-import {socialuniChatModule} from "@socialuni/socialuni-im-sdk/src/store/SocialuniChatModule";
-import SocialuniChatRO from "@socialuni/socialuni-api-base/src/model/SocialuniChatRO";
-import DateUtil from "@socialuni/socialuni-util/src/util/DateUtil";
+import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
+import SocialuniChatRO from "socialuni-api-base/src/model/SocialuniChatRO";
+import DateUtil from "socialuni-util/src/util/DateUtil";
 import {watch} from "vue";
 import {Vue} from "vue-class-component";
-import SocialUserContentRO from "@socialuni/socialuni-api-base/src/model/social/SocialUserContentRO";
-import ChatType from "@socialuni/socialuni-constant/constant/ChatType";
-import Constants from "@socialuni/socialuni-constant/constant/Constant";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import SocialUserContentRO from "socialuni-api-base/src/model/social/SocialUserContentRO";
+import ChatType from "socialuni-constant/constant/ChatType";
+import Constants from "socialuni-constant/constant/Constant";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 import ImPageUtil from "../util/ImPageUtil";
-import SocialuniImUserAPI from "@socialuni/socialuni-im-api/src/api/SocialuniImUserAPI";
-import SocialuniViewService from "@socialuni/socialuni/src/interface/SocialuniViewService";
+import SocialuniImUserAPI from "socialuni-im-api/src/api/SocialuniImUserAPI";
+import SocialuniViewService from "socialuni/src/interface/SocialuniViewService";
 import {ComponentInternalInstance} from "@vue/runtime-core";
 
 interface SocialuniChatViewServiceRefs {

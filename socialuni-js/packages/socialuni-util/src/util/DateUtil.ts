@@ -4,7 +4,7 @@
  * @param {string} cFormat
  * @returns {string}
  */
-import Constants from "@socialuni/socialuni-constant/constant/Constant";
+import Constants from "socialuni-constant/constant/Constant";
 
 export default class DateUtil {
 

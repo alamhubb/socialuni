@@ -60,17 +60,17 @@
 
 <script lang="ts">
 import {Vue, Component, Prop, Emit} from 'vue-facing-decorator'
-import SocialuniFollowType from "@socialuni/socialuni-constant/constant/user/SocialuniFollowType";
-import SocialUserContentRO from "@socialuni/socialuni-api-base/src/model/social/SocialUserContentRO";
-import SocialGenderTag from "@socialuni/socialuni-user-view-uni/src/components/SocialGenderTag/SocialGenderTag.vue";
+import SocialuniFollowType from "socialuni-constant/constant/user/SocialuniFollowType";
+import SocialUserContentRO from "socialuni-api-base/src/model/social/SocialUserContentRO";
+import SocialGenderTag from "socialuni-user-view-uni/src/components/SocialGenderTag/SocialGenderTag.vue";
 import {onLoad, onPullDownRefresh, onReachBottom, onShow} from "@dcloudio/uni-app";
-import QTabs from "@socialuni/socialuni-ui-uni/src/components/QTabs/QTabs.vue";
-import LoadMoreType from "@socialuni/socialuni-constant/constant/LoadMoreType";
-import SocialuniFollowTag from "@socialuni/socialuni-user-view-uni/src/components/SocialuniFollow/SocialuniFollowTag.vue";
-import SocialuniPageQueryUtil from "@socialuni/socialuni-api-base/src/model/common/SocialuniPageQueryUtil";
-import CommonUtil from "@socialuni/socialuni-util/src/util/CommonUtil";
-import SocialUserFollowDetailRO from "@socialuni/socialuni-api-base/src/model/social/SocialUserFollowDetailRO";
-import QPullRefresh from "@socialuni/socialuni-ui-uni/src/components/QPullRefresh/QPullRefresh.vue";
+import QTabs from "socialuni-ui-uni/src/components/QTabs/QTabs.vue";
+import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
+import SocialuniFollowTag from "socialuni-user-view-uni/src/components/SocialuniFollow/SocialuniFollowTag.vue";
+import SocialuniPageQueryUtil from "socialuni-api-base/src/model/common/SocialuniPageQueryUtil";
+import CommonUtil from "socialuni-util/src/util/CommonUtil";
+import SocialUserFollowDetailRO from "socialuni-api-base/src/model/social/SocialUserFollowDetailRO";
+import QPullRefresh from "socialuni-ui-uni/src/components/QPullRefresh/QPullRefresh.vue";
 
 @Component({
   components: {QPullRefresh, SocialuniFollowTag, SocialGenderTag, QTabs}

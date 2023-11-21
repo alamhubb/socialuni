@@ -38,12 +38,12 @@
 
 <script lang="ts">
 import {Component, Vue, Watch} from 'vue-facing-decorator'
-import MsgUtil from "@socialuni/socialuni-app-sdk/src/util/MsgUtil";
-import {socialTalkModule} from "@socialuni/socialuni-community-sdk/src/store/SocialTalkModule";
-import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
-import PlatformUtils from "@socialuni/socialuni-user-sdk/src/util/PlatformUtils";
-import UserMsgUtil from "@socialuni/socialuni-user-sdk/src/util/UserMsgUtil";
+import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil";
+import {socialTalkModule} from "socialuni-community-sdk/src/store/SocialTalkModule";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import PlatformUtils from "socialuni-user-sdk/src/util/PlatformUtils";
+import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
 
 @Component({})
 export default class MsgInput extends Vue {

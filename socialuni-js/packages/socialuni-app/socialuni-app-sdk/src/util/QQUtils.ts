@@ -1,6 +1,6 @@
-import AppConfig from "@socialuni/socialuni-constant/constant/AppConfig";
-import UserPayResultVO from "@socialuni/socialuni-api-base/src/model/user/UserPayResultVO";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import AppConfig from "socialuni-constant/constant/AppConfig";
+import UserPayResultVO from "socialuni-api-base/src/model/user/UserPayResultVO";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 export default class QQUtils {
   static subscribeAppMsg (tmplIds: string[]) {

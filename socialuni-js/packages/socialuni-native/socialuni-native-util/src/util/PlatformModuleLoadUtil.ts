@@ -1,5 +1,5 @@
-import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
-import {ImportModule} from "@socialuni/socialuni/src/interface/ImportModule";
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {ImportModule} from "socialuni/src/interface/ImportModule";
 
 export default class PlatformModuleLoadUtil {
     static getModuleDefault(modules) {

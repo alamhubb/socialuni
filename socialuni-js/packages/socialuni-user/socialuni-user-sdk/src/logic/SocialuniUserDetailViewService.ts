@@ -1,13 +1,13 @@
-import CenterUserDetailRO from "@socialuni/socialuni-api-base/src/model/social/CenterUserDetailRO";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
-import SocialuniUserAPI from "@socialuni/socialuni-user-api/src/api/SocialuniUserAPI";
-import {socialuniConfigModule} from "@socialuni/socialuni-app-sdk/src/store/SocialuniConfigModule";
-import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
-import TalkVO from "@socialuni/socialuni-api-base/src/model/talk/TalkVO";
+import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import SocialuniUserAPI from "socialuni-user-api/src/api/SocialuniUserAPI";
+import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
 import {socialuniUserModule} from "../store/SocialuniUserModule";
 import {watch, reactive, provide, ComponentInternalInstance, getCurrentInstance} from "vue";
 import SocialuniUserExpandService from "./SocialuniUserExpandService";
-import SocialuniViewService from "@socialuni/socialuni/src/interface/SocialuniViewService";
+import SocialuniViewService from "socialuni/src/interface/SocialuniViewService";
 
 export default class SocialuniUserDetailViewService extends SocialuniViewService<any> {
 

@@ -11,14 +11,14 @@
 
 <script lang="ts">
 import {Component, Prop, Vue, Inject} from 'vue-facing-decorator'
-import QButton from "@socialuni/socialuni-ui-uni/src/components/QButton/QButton.vue";
-import FollowStatus from "@socialuni/socialuni-constant/constant/FollowStatus";
-import SocialUserContentRO from "@socialuni/socialuni-api-base/src/model/social/SocialUserContentRO";
-import FollowAddVO from "@socialuni/socialuni-api-base/src/model/FollowAddVO";
-import FollowAPI from "@socialuni/socialuni-community-api/src/api/FollowAPI";
+import QButton from "socialuni-ui-uni/src/components/QButton/QButton.vue";
+import FollowStatus from "socialuni-constant/constant/FollowStatus";
+import SocialUserContentRO from "socialuni-api-base/src/model/social/SocialUserContentRO";
+import FollowAddVO from "socialuni-api-base/src/model/FollowAddVO";
+import FollowAPI from "socialuni-community-api/src/api/FollowAPI";
 import {inject} from "vue";
-import SocialuniUserProvideKeys from "@socialuni/socialuni-user-sdk/src/constant/SocialuniUserProvideKeys";
-import CenterUserDetailRO from "@socialuni/socialuni-api-base/src/model/social/CenterUserDetailRO";
+import SocialuniUserProvideKeys from "socialuni-user-sdk/src/constant/SocialuniUserProvideKeys";
+import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
 
 @Component({
     components: {

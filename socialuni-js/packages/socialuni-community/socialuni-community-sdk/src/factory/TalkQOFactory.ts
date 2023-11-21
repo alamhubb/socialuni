@@ -1,4 +1,4 @@
-import TalkQueryVO from "@socialuni/socialuni-api-base/src/model/talk/TalkQueryVO";
+import TalkQueryVO from "socialuni-api-base/src/model/talk/TalkQueryVO";
 import {socialLocationModule} from "../store/SocialLocationModule";
 
 export default class TalkQOFactory {

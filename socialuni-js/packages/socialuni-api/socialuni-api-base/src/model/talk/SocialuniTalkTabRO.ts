@@ -1,6 +1,6 @@
 import TalkVO from './TalkVO'
 import SocialuniTalkTabCircleRO from "../community/circle/SocialuniTalkTabCircleRO";
-import LoadMoreType from "@socialuni/socialuni-constant/constant/LoadMoreType";
+import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 
 export default class SocialuniTalkTabRO {
   name: string = null

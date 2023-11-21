@@ -1,2 +1,2 @@
-export * from '@socialuni/socialuni-util/src/util/DateUtil'
-export * from '@socialuni/socialuni-util/src/util/NumUtil'
+export * from 'socialuni-util/src/util/DateUtil'
+export * from 'socialuni-util/src/util/NumUtil'

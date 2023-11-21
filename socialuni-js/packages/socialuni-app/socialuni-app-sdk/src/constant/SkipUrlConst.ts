@@ -1,5 +1,5 @@
-import {socialuniConfigModule} from "@socialuni/socialuni-app-sdk/src/store/SocialuniConfigModule";
-import AppConfig from "@socialuni/socialuni-constant/constant/AppConfig";
+import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
+import AppConfig from "socialuni-constant/constant/AppConfig";
 import SocialuniAppPageUtil from "../util/SocialuniAppPageUtil";
 
 export default class SkipUrlConst {

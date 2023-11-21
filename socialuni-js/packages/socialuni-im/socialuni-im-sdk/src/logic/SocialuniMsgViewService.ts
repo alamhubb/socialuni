@@ -1,22 +1,22 @@
 import {ComponentInternalInstance, getCurrentInstance, onMounted, onUnmounted} from "vue";
-import SocialuniViewService from "@socialuni/socialuni/src/interface/SocialuniViewService";
-import ReportContentType from "@socialuni/socialuni-constant/constant/ReportContentType";
-import Constants from "@socialuni/socialuni-constant/constant/Constant";
+import SocialuniViewService from "socialuni/src/interface/SocialuniViewService";
+import ReportContentType from "socialuni-constant/constant/ReportContentType";
+import Constants from "socialuni-constant/constant/Constant";
 import MessageViewParams from "../model/MessageViewParams";
 import {socialuniMsgModule} from "../store/SocialMessageModule";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
-import UserCheckUtil from "@socialuni/socialuni-user-sdk/src/util/UserCheckUtil";
-import MessageVO from "@socialuni/socialuni-im-api/src/model/RO/MessageVO";
-import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
-import MessageAPI from "@socialuni/socialuni-im-api/src/api/MessageAPI";
-import {MessageStatus} from "@socialuni/socialuni-constant/constant/openIm/OpenImMessageType";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import UserCheckUtil from "socialuni-user-sdk/src/util/UserCheckUtil";
+import MessageVO from "socialuni-im-api/src/model/RO/MessageVO";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+import MessageAPI from "socialuni-im-api/src/api/MessageAPI";
+import {MessageStatus} from "socialuni-constant/constant/openIm/OpenImMessageType";
 import {socialuniChatModule} from "../store/SocialuniChatModule";
-import UserPageUtil from "@socialuni/socialuni-user-sdk/src/util/UserPageUtil";
-import ChatType from "@socialuni/socialuni-constant/constant/ChatType";
-import LoadMoreType from "@socialuni/socialuni-constant/constant/LoadMoreType";
-import DateUtil from "@socialuni/socialuni-util/src/util/DateUtil";
-import MsgUtil from "@socialuni/socialuni-app-sdk/src/util/MsgUtil";
-import UserType from "@socialuni/socialuni-constant/constant/UserType";
+import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
+import ChatType from "socialuni-constant/constant/ChatType";
+import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
+import DateUtil from "socialuni-util/src/util/DateUtil";
+import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil";
+import UserType from "socialuni-constant/constant/UserType";
 
 export default class SocialuniMsgViewService extends SocialuniViewService<any> {
     public $refs!: {

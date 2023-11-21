@@ -1,9 +1,9 @@
-import CenterUserDetailRO from "@socialuni/socialuni-api-base/src/model/social/CenterUserDetailRO";
-import socialuniUserRequest from "@socialuni/socialuni-user-api/src/request/socialuniUserRequest";
-import PeiwanRO from "@socialuni/socialuni-admin-api/src/model/peiwan/PeiwanRO";
-import ResultRO from "@socialuni/socialuni-api-base/src/model/social/ResultRO";
-import DomFile from "@socialuni/socialuni-native-util/src/model/DomFile";
-import AdminPeiwanAppInitData from "@socialuni/socialuni-admin-api/src/model/peiwan/AdminPeiwanAppInitData";
+import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
+import socialuniUserRequest from "socialuni-user-api/src/request/socialuniUserRequest";
+import PeiwanRO from "socialuni-admin-api/src/model/peiwan/PeiwanRO";
+import ResultRO from "socialuni-api-base/src/model/social/ResultRO";
+import DomFile from "socialuni-native-util/src/model/DomFile";
+import AdminPeiwanAppInitData from "socialuni-admin-api/src/model/peiwan/AdminPeiwanAppInitData";
 
 export default class SocialuniPeiwanAdminAPI {
 

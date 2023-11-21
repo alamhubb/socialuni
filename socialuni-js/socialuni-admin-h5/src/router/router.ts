@@ -3,8 +3,8 @@
 import {createRouter, createWebHistory} from "vue-router";
 
 import Layout from '@/layout/Layout.vue'
-import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
-import SocialuniTokenUtil from "@socialuni/socialuni-user-sdk/src/util/SocialuniTokenUtil";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+import SocialuniTokenUtil from "socialuni-user-sdk/src/util/SocialuniTokenUtil";
 import PeiwanManageView from '@/views/peiwanManage/PeiwanManageView.vue'
 import CreateUserView from "@/views/user/CreateUser.vue";
 

@@ -1,5 +1,5 @@
-import PlatformType from "@socialuni/socialuni-constant/constant/PlatformType";
-import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
+import PlatformType from "socialuni-constant/constant/PlatformType";
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 
 export default class FrontErrorLogVO {
     uri: string = null

@@ -1,9 +1,9 @@
-import PagePath from "@socialuni/socialuni-constant/constant/PagePath";
-import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
-import JsonUtil from "@socialuni/socialuni-util/src/util/JsonUtil";
-import Lodash from "@socialuni/socialuni-util/src/util/Lodash";
-import {socialuniPluginsModule} from "@socialuni/socialuni/src/store/SocialuniPluginsModule";
+import PagePath from "socialuni-constant/constant/PagePath";
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import JsonUtil from "socialuni-util/src/util/JsonUtil";
+import Lodash from "socialuni-util/src/util/Lodash";
+import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
 
 export default class RouterUtil {
 

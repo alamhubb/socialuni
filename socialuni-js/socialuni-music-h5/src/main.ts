@@ -6,7 +6,7 @@ import 'element-plus/dist/index.css'
 import '@/assets/style/normalize.css'
 import 'nprogress/nprogress.css'
 import {install} from '@/utlis'
-import Socialuni from "@socialuni/socialuni/src";
+import Socialuni from "socialuni/src";
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
 // 使用自定义异步插件

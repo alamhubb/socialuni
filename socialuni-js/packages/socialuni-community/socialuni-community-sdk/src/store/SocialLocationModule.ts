@@ -1,7 +1,7 @@
 import LocationUtil from "../util/LocationUtil";
-import DistrictVO from "@socialuni/socialuni-api-base/src/model/DistrictVO";
+import DistrictVO from "socialuni-api-base/src/model/DistrictVO";
 import {reactive} from "vue";
-import DistrictAPI from "@socialuni/socialuni-community-api/src/api/DistrictAPI";
+import DistrictAPI from "socialuni-community-api/src/api/DistrictAPI";
 import {socialTalkModule} from "./SocialTalkModule";
 
 class SocialLocationModule {

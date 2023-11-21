@@ -97,12 +97,12 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-facing-decorator'
-import SScrollbar from "@socialuni/socialuni-ui-h5/src/components/SComponents/SScrollbar.vue";
-import SDialog from "@socialuni/socialuni-ui-h5/src/components/SComponents/SDialog.vue";
+import SScrollbar from "socialuni-ui-h5/src/components/SComponents/SScrollbar.vue";
+import SDialog from "socialuni-ui-h5/src/components/SComponents/SDialog.vue";
 import {Plus} from '@element-plus/icons-vue'
-import SocialuniPeiwanAPI from "@socialuni/socialuni-peiwan-api/src/api/SocialuniPeiwanAPI";
-import PeiwanRO from "@socialuni/socialuni-admin-api/src/model/peiwan/PeiwanRO";
-import AlertUtil from "@socialuni/socialuni-native-h5/src/util/AlertUtil";
+import SocialuniPeiwanAPI from "socialuni-peiwan-api/src/api/SocialuniPeiwanAPI";
+import PeiwanRO from "socialuni-admin-api/src/model/peiwan/PeiwanRO";
+import AlertUtil from "socialuni-native-h5/src/util/AlertUtil";
 import apiData from "./res.json"
 import {ElMessageBox} from "element-plus";
 import {reactive} from "vue";

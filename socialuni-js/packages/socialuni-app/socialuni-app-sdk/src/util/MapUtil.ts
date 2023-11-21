@@ -1,8 +1,8 @@
-import {QQMapResult} from "@socialuni/socialuni-api-base/src/model/location/QQMapResult";
-import LocationQueryQO from "@socialuni/socialuni-api-base/src/model/location/LocationQueryQO";
-import ResultRO from "@socialuni/socialuni-api-base/src/model/social/ResultRO";
-import SocialuniLocationAPI from "@socialuni/socialuni-community-api/src/api/SocialuniLocationAPI";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import {QQMapResult} from "socialuni-api-base/src/model/location/QQMapResult";
+import LocationQueryQO from "socialuni-api-base/src/model/location/LocationQueryQO";
+import ResultRO from "socialuni-api-base/src/model/social/ResultRO";
+import SocialuniLocationAPI from "socialuni-community-api/src/api/SocialuniLocationAPI";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 export default class MapUtil {
     static async getLocationBySdk(): Promise<unknown> {

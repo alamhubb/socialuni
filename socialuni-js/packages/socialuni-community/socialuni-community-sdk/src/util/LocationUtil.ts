@@ -1,11 +1,11 @@
-import DistrictVO from "@socialuni/socialuni-api-base/src/model/DistrictVO";
-import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
-import {QQMapResult} from "@socialuni/socialuni-api-base/src/model/location/QQMapResult";
-import {socialLocationModule} from "@socialuni/socialuni-community-sdk/src/store/SocialLocationModule";
-import LocationConst from "@socialuni/socialuni-constant/constant/community/LocationConst";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
-import AppAuthUtil from "@socialuni/socialuni-user-sdk/src/util/AppAuthUtil";
-import MapUtil from "@socialuni/socialuni-app-sdk/src/util/MapUtil";
+import DistrictVO from "socialuni-api-base/src/model/DistrictVO";
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {QQMapResult} from "socialuni-api-base/src/model/location/QQMapResult";
+import {socialLocationModule} from "socialuni-community-sdk/src/store/SocialLocationModule";
+import LocationConst from "socialuni-constant/constant/community/LocationConst";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import AppAuthUtil from "socialuni-user-sdk/src/util/AppAuthUtil";
+import MapUtil from "socialuni-app-sdk/src/util/MapUtil";
 
 const chinaDistrict = new DistrictVO()
 chinaDistrict.id = 1

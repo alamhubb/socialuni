@@ -1,18 +1,18 @@
-import MsgUtil from "@socialuni/socialuni-app-sdk/src/util/MsgUtil"
-import Constants from "@socialuni/socialuni-constant/constant/Constant"
-import AppMsg from "@socialuni/socialuni-constant/constant/AppMsg"
-import ToastUtil from "@socialuni/socialuni-native-uni/src/util/ToastUtil"
-import UserPayResultVO from "@socialuni/socialuni-api-base/src/model/user/UserPayResultVO";
-import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
-import APPUtil from "@socialuni/socialuni-app-sdk/src/util/APPUtil";
-import { socialPlatformModule } from '@socialuni/socialuni-app-sdk/src/store/SocialPlatformModule'
-import SocialuniAppAPI from '@socialuni/socialuni-app-api/src/api/SocialuniAppAPI'
+import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil"
+import Constants from "socialuni-constant/constant/Constant"
+import AppMsg from "socialuni-constant/constant/AppMsg"
+import ToastUtil from "socialuni-native-uni/src/util/ToastUtil"
+import UserPayResultVO from "socialuni-api-base/src/model/user/UserPayResultVO";
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import APPUtil from "socialuni-app-sdk/src/util/APPUtil";
+import { socialPlatformModule } from 'socialuni-app-sdk/src/store/SocialPlatformModule'
+import SocialuniAppAPI from 'socialuni-app-api/src/api/SocialuniAppAPI'
 import UserMsgUtil from './UserMsgUtil'
 import { socialuniUserModule } from '../store/SocialuniUserModule'
-import QQUtils from "@socialuni/socialuni-app-sdk/src/util/QQUtils";
-import WxUtils from "@socialuni/socialuni-app-sdk/src/util/WxUtils";
-import MPUtil from "@socialuni/socialuni-app-sdk/src/util/MPUtil";
-import SocialuniCoinAPI from "@socialuni/socialuni-user-api/src/api/SocialuniCoinAPI";
+import QQUtils from "socialuni-app-sdk/src/util/QQUtils";
+import WxUtils from "socialuni-app-sdk/src/util/WxUtils";
+import MPUtil from "socialuni-app-sdk/src/util/MPUtil";
+import SocialuniCoinAPI from "socialuni-user-api/src/api/SocialuniCoinAPI";
 
 
 // 统一处理各平台的订阅

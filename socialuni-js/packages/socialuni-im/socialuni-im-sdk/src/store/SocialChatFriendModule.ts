@@ -1,6 +1,6 @@
 import { Store} from "pinia-class-component"
-import {socialChatModule} from "@socialuni/socialuni-sdk/src/store/store";
-import {AccessFriendParams, AddFriendParams} from "@socialuni/socialuni-sdk/src/plugins/open-im-sdk";
+import {socialChatModule} from "socialuni-sdk/src/store/store";
+import {AccessFriendParams, AddFriendParams} from "socialuni-sdk/src/plugins/open-im-sdk";
 
 
 class SocialChatFriendModule  {

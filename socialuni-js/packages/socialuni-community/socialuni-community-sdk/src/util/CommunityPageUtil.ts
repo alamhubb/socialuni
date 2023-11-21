@@ -1,6 +1,6 @@
 import CommunityPagePath from "../constant/CommunityPagePath";
-import UserCheckUtil from "@socialuni/socialuni-user-sdk/src/util/UserCheckUtil";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import UserCheckUtil from "socialuni-user-sdk/src/util/UserCheckUtil";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 export default class CommunityPageUtil {
     static goHome(): void {

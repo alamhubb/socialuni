@@ -1,6 +1,6 @@
-import SocialuniMineUserRO from "@socialuni/socialuni-api-base/src/model/user/SocialuniMineUserRO";
-import StorageUtil from "@socialuni/socialuni-native-uni/src/util/StorageUtil";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import SocialuniMineUserRO from "socialuni-api-base/src/model/user/SocialuniMineUserRO";
+import StorageUtil from "socialuni-native-uni/src/util/StorageUtil";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 export default class SocialuniUserStorageUtil {
     // 开发生产区分user，避免混淆，不区分的话会冲突

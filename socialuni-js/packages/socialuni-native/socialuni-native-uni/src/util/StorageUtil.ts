@@ -3,8 +3,8 @@
  * @Date 2021-03-05 20:09
  * @Version 1.0
  */
-import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
-import JsonUtil from "@socialuni/socialuni-util/src/util/JsonUtil";
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import JsonUtil from "socialuni-util/src/util/JsonUtil";
 
 export default class StorageUtil {
     private static readonly devPre: string = 'dev_'

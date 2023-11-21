@@ -1,12 +1,12 @@
 {
-  "name": "@socialuni/socialuni-admin-sdk",
+  "name": "socialuni-admin-sdk",
   "version": "0.1.2",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@socialuni/socialuni-api-base": "^0.1.2"
+    "socialuni-api-base": "^0.1.2"
   },
   "devDependencies": {
     "@dcloudio/types": "^3.0.13",

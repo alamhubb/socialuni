@@ -1,4 +1,4 @@
-import socialuniUserRequest from "@socialuni/socialuni-user-api/src/request/socialuniUserRequest";
+import socialuniUserRequest from "socialuni-user-api/src/request/socialuniUserRequest";
 import socialuniMusicStore from "../store/SocialuniMusicStore";
 
 export default class SocialuniMusicAPI {

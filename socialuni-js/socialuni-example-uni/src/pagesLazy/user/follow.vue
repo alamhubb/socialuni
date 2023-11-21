@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import {Vue, Options} from 'vue-facing-decorator'
-import SocialuniFollowView from "@socialuni/socialuni-user-view-uni/src/views/user/follow/SocialuniFollowView.vue";
+import SocialuniFollowView from "socialuni-user-view-uni/src/views/user/follow/SocialuniFollowView.vue";
 
 @Component({
   components: {SocialuniFollowView}

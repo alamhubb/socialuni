@@ -1,10 +1,10 @@
-import CenterUserDetailRO from "@socialuni/socialuni-api-base/src/model/social/CenterUserDetailRO";
+import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
 import {socialuniUserModule} from "../store/SocialuniUserModule";
-import {socialuniConfigModule} from "@socialuni/socialuni-app-sdk/src/store/SocialuniConfigModule";
+import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 import UserPageUtil from "./UserPageUtil";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 import SocialuniUserEventConst from "../constant/SocialuniUserEventConst";
-import CommonEventUtil from "@socialuni/socialuni-native-util/src/util/CommonEventUtil";
+import CommonEventUtil from "socialuni-native-util/src/util/CommonEventUtil";
 
 export default class UserMsgUtil {
     static unBindPhoneNum() {

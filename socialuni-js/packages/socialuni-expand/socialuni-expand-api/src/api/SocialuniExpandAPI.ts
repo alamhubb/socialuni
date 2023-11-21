@@ -1,6 +1,6 @@
-import SocialuniUserExtendFriendQueryQO from "@socialuni/socialuni-api-base/src/model/user/SocialuniUserExtendFriendQueryQO";
-import CenterUserDetailRO from "@socialuni/socialuni-api-base/src/model/social/CenterUserDetailRO";
-import socialuniUserRequest from "@socialuni/socialuni-user-api/src/request/socialuniUserRequest";
+import SocialuniUserExtendFriendQueryQO from "socialuni-api-base/src/model/user/SocialuniUserExtendFriendQueryQO";
+import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
+import socialuniUserRequest from "socialuni-user-api/src/request/socialuniUserRequest";
 
 export default class SocialuniExpandAPI {
 

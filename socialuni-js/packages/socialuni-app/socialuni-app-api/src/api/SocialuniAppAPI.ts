@@ -1,11 +1,11 @@
 import socialuniAppRequest from "../socialuniAppRequest";
-import AppInitDataRO from "@socialuni/socialuni-api-base/src/model/config/AppInitDataRO";
-import AppUpdateResultVO from "@socialuni/socialuni-api-base/src/model/app/AppUpdateResultVO";
-import HomeSwiperVO from "@socialuni/socialuni-api-base/src/model/HomeSwiperVO";
-import SocialuniTalkTabRO from "@socialuni/socialuni-api-base/src/model/talk/SocialuniTalkTabRO";
-import FrontErrorLogVO from "@socialuni/socialuni-api-base/src/model/FrontErrorLogVO";
-import JsonUtil from "@socialuni/socialuni-util/src/util/JsonUtil";
-import AppUpdateVO from "@socialuni/socialuni-api-base/src/model/app/AppUpdateVO";
+import AppInitDataRO from "socialuni-api-base/src/model/config/AppInitDataRO";
+import AppUpdateResultVO from "socialuni-api-base/src/model/app/AppUpdateResultVO";
+import HomeSwiperVO from "socialuni-api-base/src/model/HomeSwiperVO";
+import SocialuniTalkTabRO from "socialuni-api-base/src/model/talk/SocialuniTalkTabRO";
+import FrontErrorLogVO from "socialuni-api-base/src/model/FrontErrorLogVO";
+import JsonUtil from "socialuni-util/src/util/JsonUtil";
+import AppUpdateVO from "socialuni-api-base/src/model/app/AppUpdateVO";
 
 
 export default class SocialuniAppAPI {

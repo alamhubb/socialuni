@@ -36,11 +36,11 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-facing-decorator'
-import TagVO from '@socialuni/socialuni-api-base/src/model/community/tag/TagVO'
-import ErrorConst from '@socialuni/socialuni-constant/constant/ErrorConst'
-import ResultRO from '@socialuni/socialuni-api-base/src/model/social/ResultRO'
-import TagAPI from "@socialuni/socialuni-community-api/src/api/TagAPI";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import TagVO from 'socialuni-api-base/src/model/community/tag/TagVO'
+import ErrorConst from 'socialuni-constant/constant/ErrorConst'
+import ResultRO from 'socialuni-api-base/src/model/social/ResultRO'
+import TagAPI from "socialuni-community-api/src/api/TagAPI";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 @Component({})
 export default class SocialTagAdd extends Vue {

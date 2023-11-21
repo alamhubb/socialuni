@@ -1,5 +1,5 @@
-import request from "@socialuni/socialuni-api/src/request/request";
-import MatchQueryVO from "@socialuni/socialuni-api/src/model/match/MatchQueryVO";
+import request from "socialuni-api/src/request/request";
+import MatchQueryVO from "socialuni-api/src/model/match/MatchQueryVO";
 
 export default class MatchAPI {
     static queryMatchUsersAPI(userIds: string[], matchType: string) {

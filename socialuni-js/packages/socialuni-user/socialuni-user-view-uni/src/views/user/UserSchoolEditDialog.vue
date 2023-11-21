@@ -31,15 +31,15 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-facing-decorator'
-import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue";
-import QPopup from "@socialuni/socialuni-ui-uni/src/components/QPopup/QPopup.vue";
-import QSearch from "@socialuni/socialuni-ui-uni/src/components/QSearch/QSearch.vue";
-import QSelect from "@socialuni/socialuni-ui-uni/src/components/QSelect/QSelect.vue";
-import SocialCircleRO from "@socialuni/socialuni-api-base/src/model/community/circle/SocialCircleRO";
-import SocialuniCircleAPI from "@socialuni/socialuni-community-api/src/api/SocialuniCircleAPI";
-import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
-import SocialuniUserExpandAPI from "@socialuni/socialuni-user-api/src/api/SocialuniUserExpandAPI";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
+import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue";
+import QSearch from "socialuni-ui-uni/src/components/QSearch/QSearch.vue";
+import QSelect from "socialuni-ui-uni/src/components/QSelect/QSelect.vue";
+import SocialCircleRO from "socialuni-api-base/src/model/community/circle/SocialCircleRO";
+import SocialuniCircleAPI from "socialuni-community-api/src/api/SocialuniCircleAPI";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+import SocialuniUserExpandAPI from "socialuni-user-api/src/api/SocialuniUserExpandAPI";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 @Component({
   components: {QSelect, QIcon, QPopup, QSearch}

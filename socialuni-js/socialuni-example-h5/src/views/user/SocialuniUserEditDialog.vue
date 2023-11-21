@@ -42,24 +42,24 @@
 
 <script lang="ts">
 import {Emit, Component, Vue, Watch} from 'vue-facing-decorator'
-import SButton from "@socialuni/socialuni-ui-h5/src/components/SComponents/SButton.vue";
-import SDialog from "@socialuni/socialuni-ui-h5/src/components/SComponents/SDialog.vue";
-import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
-import type SocialuniMineUserRO from "@socialuni/socialuni-api-base/src/model/user/SocialuniMineUserRO";
-import type EnumStrVO from "@socialuni/socialuni-constant/constant/EnumStrVO";
-import GenderType from "@socialuni/socialuni-constant/constant/GenderType";
-import DateUtil from "@socialuni/socialuni-util/src/util/DateUtil";
-import ObjectUtil from "@socialuni/socialuni-util/src/util/ObjectUtil";
-import BirthAgeUtil from "@socialuni/socialuni-user-sdk/src/util/BirthAgeUtil";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
-import SocialuniMineUserAPI from "@socialuni/socialuni-user-api/src/api/SocialuniMineUserAPI";
-import CosService from "@socialuni/socialuni-app-sdk/src/util/CosService";
-import UUIDUtil from "@socialuni/socialuni-util/src/util/UUIDUtil";
-import ImgUtil from "@socialuni/socialuni-util/src/util/ImgUtil";
-import TencentCosAPI from "@socialuni/socialuni-app-api/src/api/TencentCosAPI";
-import ImgAddQO from "@socialuni/socialuni-api-base/src/model/user/ImgAddQO";
-import type DomFile from "@socialuni/socialuni-native-util/src/model/DomFile";
-import NativeUtil from "@socialuni/socialuni-native-h5/src/util/NativeUtil";
+import SButton from "socialuni-ui-h5/src/components/SComponents/SButton.vue";
+import SDialog from "socialuni-ui-h5/src/components/SComponents/SDialog.vue";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+import type SocialuniMineUserRO from "socialuni-api-base/src/model/user/SocialuniMineUserRO";
+import type EnumStrVO from "socialuni-constant/constant/EnumStrVO";
+import GenderType from "socialuni-constant/constant/GenderType";
+import DateUtil from "socialuni-util/src/util/DateUtil";
+import ObjectUtil from "socialuni-util/src/util/ObjectUtil";
+import BirthAgeUtil from "socialuni-user-sdk/src/util/BirthAgeUtil";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
+import CosService from "socialuni-app-sdk/src/util/CosService";
+import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
+import ImgUtil from "socialuni-util/src/util/ImgUtil";
+import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
+import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
+import type DomFile from "socialuni-native-util/src/model/DomFile";
+import NativeUtil from "socialuni-native-h5/src/util/NativeUtil";
 
 @Component({
     components: {SDialog, SButton}

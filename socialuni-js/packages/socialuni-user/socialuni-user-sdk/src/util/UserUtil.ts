@@ -1,6 +1,6 @@
-import SocialUserContentRO from "@socialuni/socialuni-api-base/src/model/social/SocialUserContentRO";
-import GenderType from "@socialuni/socialuni-constant/constant/GenderType";
-import FollowStatus from "@socialuni/socialuni-constant/constant/FollowStatus";
+import SocialUserContentRO from "socialuni-api-base/src/model/social/SocialUserContentRO";
+import GenderType from "socialuni-constant/constant/GenderType";
+import FollowStatus from "socialuni-constant/constant/FollowStatus";
 
 export default class UserUtil {
   static getGenderIcon (user: SocialUserContentRO): string {

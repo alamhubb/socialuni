@@ -20,9 +20,9 @@
 
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-facing-decorator'
-import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
-import SkipUrlConst from "@socialuni/socialuni-app-sdk/src/constant/SkipUrlConst";
-import SocialuniUserPrivacyAgreeService from "@socialuni/socialuni-user-sdk/src/logic/SocialuniUserPrivacyAgreeService";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+import SkipUrlConst from "socialuni-app-sdk/src/constant/SkipUrlConst";
+import SocialuniUserPrivacyAgreeService from "socialuni-user-sdk/src/logic/SocialuniUserPrivacyAgreeService";
 
 @Component({})
 export default class UserPrivacyAgreement extends Vue {

@@ -12,12 +12,12 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-facing-decorator'
-import SDialog from "@socialuni/socialuni-ui-h5/src/components/SComponents/SDialog.vue";
+import SDialog from "socialuni-ui-h5/src/components/SComponents/SDialog.vue";
 import {Plus} from '@element-plus/icons-vue'
-import SocialuniPeiwanAPI from "@socialuni/socialuni-peiwan-api/src/api/SocialuniPeiwanAPI";
-import PeiwanRO from "@socialuni/socialuni-admin-api/src/model/peiwan/PeiwanRO";
+import SocialuniPeiwanAPI from "socialuni-peiwan-api/src/api/SocialuniPeiwanAPI";
+import PeiwanRO from "socialuni-admin-api/src/model/peiwan/PeiwanRO";
 import AgoraRTC from "agora-rtc-sdk-ng"
-import openRequest from "@socialuni/socialuni-api-base/src/OpenRequest";
+import openRequest from "socialuni-api-base/src/OpenRequest";
 
 let rtc = {
     localAudioTrack: null,

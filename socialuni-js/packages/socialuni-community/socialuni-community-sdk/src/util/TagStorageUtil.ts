@@ -1,4 +1,4 @@
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 export default class TagStorageUtil {
     static getMineHistoryTagNamesKey = 'mineTagNamesKey'

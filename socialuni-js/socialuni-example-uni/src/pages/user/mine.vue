@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-facing-decorator'
-import MineView from "@socialuni/socialuni-user-view-uni/src/views/user/MineView.vue";
+import MineView from "socialuni-user-view-uni/src/views/user/MineView.vue";
 
 @Component({
   components: {

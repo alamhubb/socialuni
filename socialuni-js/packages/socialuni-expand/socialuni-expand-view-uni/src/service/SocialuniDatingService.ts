@@ -1,9 +1,9 @@
-import CenterUserDetailRO from "@socialuni/socialuni-api-base/src/model/social/CenterUserDetailRO";
-import UserMsgUtil from "@socialuni/socialuni-user-sdk/src/util/UserMsgUtil";
-import {socialuniConfigModule} from "@socialuni/socialuni-app-sdk/src/store/SocialuniConfigModule";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
-import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
-import SocialuniExpandAPI from "@socialuni/socialuni-expand-api/src/api/SocialuniExpandAPI";
+import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
+import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
+import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+import SocialuniExpandAPI from "socialuni-expand-api/src/api/SocialuniExpandAPI";
 
 export default class SocialuniUserExpandService{
     static async getOpenContactInfo(user: CenterUserDetailRO) {

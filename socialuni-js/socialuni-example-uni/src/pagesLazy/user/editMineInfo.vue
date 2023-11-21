@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import {Emit, Component, Vue, Watch} from 'vue-facing-decorator'
-import SocialuniUserEditView from "@socialuni/socialuni-user-view-uni/src/views/user/SocialuniUserEditView.vue";
+import SocialuniUserEditView from "socialuni-user-view-uni/src/views/user/SocialuniUserEditView.vue";
 
 @Component({
   components: {SocialuniUserEditView}

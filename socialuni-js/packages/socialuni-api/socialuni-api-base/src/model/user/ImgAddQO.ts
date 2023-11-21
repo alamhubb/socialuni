@@ -1,4 +1,4 @@
-import DomFile from "@socialuni/socialuni-native-util/src/model/DomFile";
+import DomFile from "socialuni-native-util/src/model/DomFile";
 
 export default class ImgAddQO {
   //自己拼出来的

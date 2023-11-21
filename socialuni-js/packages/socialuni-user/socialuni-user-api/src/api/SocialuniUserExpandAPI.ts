@@ -1,5 +1,5 @@
-import SocialuniMineUserRO from "@socialuni/socialuni-api-base/src/model/user/SocialuniMineUserRO";
-import SocialUserSchoolNameEditQO from "@socialuni/socialuni-api-base/src/model/QO/user/SocialUserSchoolNameEditQO";
+import SocialuniMineUserRO from "socialuni-api-base/src/model/user/SocialuniMineUserRO";
+import SocialUserSchoolNameEditQO from "socialuni-api-base/src/model/QO/user/SocialUserSchoolNameEditQO";
 import socialuniUserRequest from "../request/socialuniUserRequest";
 
 export default class SocialuniUserExpandAPI {

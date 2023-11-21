@@ -1,8 +1,8 @@
-import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
-import PhoneAPI from "@socialuni/socialuni-user-api/src/api/PhoneAPI";
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
 import UniLoginUtil from "../util/UniLoginUtil";
 import {socialuniUserModule} from "../store/SocialuniUserModule";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 export default class PhoneService {
     static async bindPhoneNum(phoneNum: string, authCode: string) {

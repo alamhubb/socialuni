@@ -90,20 +90,20 @@
 
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-facing-decorator'
-import PagePath from "@socialuni/socialuni-constant/constant/PagePath";
-import TalkVO from "@socialuni/socialuni-api-base/src/model/talk/TalkVO";
-import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue";
-import MsgUtil from "@socialuni/socialuni-app-sdk/src/util/MsgUtil";
-import NumUtil from "@socialuni/socialuni-util/src/util/NumUtil";
-import CommonUtil from "@socialuni/socialuni-util/src/util/CommonUtil";
-import UserPagePath from "@socialuni/socialuni-user-sdk/src/constant/UserPagePath";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
-import UserMsgUtil from "@socialuni/socialuni-user-sdk/src/util/UserMsgUtil";
-import SocialuniImgUtil from "@socialuni/socialuni-user-sdk/src/util/SocialuniImgUtil";
-import CommunityPagePath from "@socialuni/socialuni-community-sdk/src/constant/CommunityPagePath";
-import CommunityPageUtil from "@socialuni/socialuni-community-sdk/src/util/CommunityPageUtil";
-import {socialTalkModule} from "@socialuni/socialuni-community-sdk/src/store/SocialTalkModule";
-import {socialuniTagModule} from "@socialuni/socialuni-community-sdk/src/store/SocialTagModule";
+import PagePath from "socialuni-constant/constant/PagePath";
+import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
+import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
+import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil";
+import NumUtil from "socialuni-util/src/util/NumUtil";
+import CommonUtil from "socialuni-util/src/util/CommonUtil";
+import UserPagePath from "socialuni-user-sdk/src/constant/UserPagePath";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
+import SocialuniImgUtil from "socialuni-user-sdk/src/util/SocialuniImgUtil";
+import CommunityPagePath from "socialuni-community-sdk/src/constant/CommunityPagePath";
+import CommunityPageUtil from "socialuni-community-sdk/src/util/CommunityPageUtil";
+import {socialTalkModule} from "socialuni-community-sdk/src/store/SocialTalkModule";
+import {socialuniTagModule} from "socialuni-community-sdk/src/store/SocialTagModule";
 
 @Component({
   components: {QIcon}

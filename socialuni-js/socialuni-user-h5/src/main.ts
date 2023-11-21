@@ -2,7 +2,7 @@ import {createApp} from 'vue'
 
 import App from './App.vue'
 import './styles/index.scss'
-import Socialuni from "@socialuni/socialuni/src";
+import Socialuni from "socialuni/src";
 import router from "@/router/router";
 
 // 使用自定义异步插件

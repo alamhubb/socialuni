@@ -1,5 +1,5 @@
 import CenterUserDetailRO from './social/CenterUserDetailRO'
-import SocialuniChatRO from '@socialuni/socialuni-api-base/src/model/SocialuniChatRO'
+import SocialuniChatRO from 'socialuni-api-base/src/model/SocialuniChatRO'
 
 export default class NotifyVO {
   public user: CenterUserDetailRO

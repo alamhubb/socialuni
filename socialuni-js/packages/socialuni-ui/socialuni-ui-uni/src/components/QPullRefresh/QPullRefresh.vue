@@ -23,7 +23,7 @@
 
 <script lang="ts">
 import {Component, Emit, Prop, Vue} from 'vue-facing-decorator'
-import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 
 @Component({})
 export default class QPullRefresh extends Vue {

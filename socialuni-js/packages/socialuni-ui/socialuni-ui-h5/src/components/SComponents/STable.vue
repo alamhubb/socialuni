@@ -43,8 +43,8 @@
 <script lang="ts">
 import {Component, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator'
 import STableColumn from "./STableColumn/STableColumn.vue";
-import ObjectUtil from "@socialuni/socialuni-util/src/util/ObjectUtil";
-import JsonUtil from "@socialuni/socialuni-util/src/util/JsonUtil";
+import ObjectUtil from "socialuni-util/src/util/ObjectUtil";
+import JsonUtil from "socialuni-util/src/util/JsonUtil";
 
 /**
  * @author 秦开远

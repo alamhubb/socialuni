@@ -144,30 +144,30 @@ import {Component, Vue, Watch} from 'vue-facing-decorator'
 import TalkSwipers from './talkSwipers.vue'
 
 import TalkOperate from './talkOperate.vue'
-import QTab from '@socialuni/socialuni-ui-uni/src/components/QTab/QTab.vue'
-import QTabs from '@socialuni/socialuni-ui-uni/src/components/QTabs/QTabs.vue'
-import QIcon from '@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue'
+import QTab from 'socialuni-ui-uni/src/components/QTab/QTab.vue'
+import QTabs from 'socialuni-ui-uni/src/components/QTabs/QTabs.vue'
+import QIcon from 'socialuni-ui-uni/src/components/QIcon/QIcon.vue'
 import SocialTalkFilterDialog from "./SocialTalkFilterDialog.vue";
-import QPullRefresh from "@socialuni/socialuni-ui-uni/src/components/QPullRefresh/QPullRefresh.vue";
-import TalkTabVO from "@socialuni/socialuni-api-base/src/model/talk/SocialuniTalkTabRO";
-import LoadMoreType from "@socialuni/socialuni-constant/constant/LoadMoreType";
-import CommonUtil from "@socialuni/socialuni-util/src/util/CommonUtil";
-import TalkVO from "@socialuni/socialuni-api-base/src/model/talk/TalkVO";
-import Constants from "@socialuni/socialuni-constant/constant/Constant";
-import SocialuniTalkTabCircleRO from "@socialuni/socialuni-api-base/src/model/community/circle/SocialuniTalkTabCircleRO";
-import MsgUtil from "@socialuni/socialuni-app-sdk/src/util/MsgUtil";
-import SocialuniTalkAPI from "@socialuni/socialuni-community-api/src/api/SocialuniTalkAPI";
-import {socialTalkModule} from "@socialuni/socialuni-community-sdk/src/store/SocialTalkModule";
-import {socialuniTagModule} from "@socialuni/socialuni-community-sdk/src/store/SocialTagModule";
-import TalkQOFactory from "@socialuni/socialuni-community-sdk/src/factory/TalkQOFactory";
-import {socialLocationModule} from "@socialuni/socialuni-community-sdk/src/store/SocialLocationModule";
-import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
-import TalkItem from "@socialuni/socialuni-community-view-uni/src/components/talkItem/TalkItem.vue";
-import {socialuniConfigModule} from "@socialuni/socialuni-app-sdk/src/store/SocialuniConfigModule";
-import UserMsgUtil from "@socialuni/socialuni-user-sdk/src/util/UserMsgUtil";
-import UserPageUtil from "@socialuni/socialuni-user-sdk/src/util/UserPageUtil";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
-import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
+import QPullRefresh from "socialuni-ui-uni/src/components/QPullRefresh/QPullRefresh.vue";
+import TalkTabVO from "socialuni-api-base/src/model/talk/SocialuniTalkTabRO";
+import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
+import CommonUtil from "socialuni-util/src/util/CommonUtil";
+import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
+import Constants from "socialuni-constant/constant/Constant";
+import SocialuniTalkTabCircleRO from "socialuni-api-base/src/model/community/circle/SocialuniTalkTabCircleRO";
+import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil";
+import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
+import {socialTalkModule} from "socialuni-community-sdk/src/store/SocialTalkModule";
+import {socialuniTagModule} from "socialuni-community-sdk/src/store/SocialTagModule";
+import TalkQOFactory from "socialuni-community-sdk/src/factory/TalkQOFactory";
+import {socialLocationModule} from "socialuni-community-sdk/src/store/SocialLocationModule";
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import TalkItem from "socialuni-community-view-uni/src/components/talkItem/TalkItem.vue";
+import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
+import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
+import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 
 // todo 后台可控制是否显示轮播图
 @Component({

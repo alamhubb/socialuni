@@ -1,11 +1,11 @@
 import FileUtilH5 from "./FileUtilH5";
 import InputUtilH5 from "./InputUtilH5";
-import DomFile from "@socialuni/socialuni-native-util/src/model/DomFile";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
-import AppMsg from "@socialuni/socialuni-constant/constant/AppMsg";
-import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
-import UUIDUtil from "@socialuni/socialuni-util/src/util/UUIDUtil";
-import ImgUtil from "@socialuni/socialuni-util/src/util/ImgUtil";
+import DomFile from "socialuni-native-util/src/model/DomFile";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import AppMsg from "socialuni-constant/constant/AppMsg";
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
+import ImgUtil from "socialuni-util/src/util/ImgUtil";
 
 let imageInput
 

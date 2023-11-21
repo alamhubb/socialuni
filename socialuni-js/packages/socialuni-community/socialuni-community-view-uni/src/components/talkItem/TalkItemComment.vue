@@ -77,24 +77,24 @@
 
 <script lang="ts">
 import {Component, Prop, Vue, Watch} from 'vue-facing-decorator'
-import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue";
-import QButton from "@socialuni/socialuni-ui-uni/src/components/QButton/QButton.vue";
-import TalkVO from "@socialuni/socialuni-api-base/src/model/talk/TalkVO";
-import ObjectUtil from "@socialuni/socialuni-util/src/util/ObjectUtil";
-import ReportContentType from "@socialuni/socialuni-constant/constant/ReportContentType";
-import MsgUtil from "@socialuni/socialuni-app-sdk/src/util/MsgUtil";
-import CommentVO from "@socialuni/socialuni-api-base/src/model/comment/CommentVO";
-import HugAddVO from "@socialuni/socialuni-api-base/src/model/HugAddVO";
-import SocialuniTalkAPI from "@socialuni/socialuni-community-api/src/api/SocialuniTalkAPI";
+import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
+import QButton from "socialuni-ui-uni/src/components/QButton/QButton.vue";
+import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
+import ObjectUtil from "socialuni-util/src/util/ObjectUtil";
+import ReportContentType from "socialuni-constant/constant/ReportContentType";
+import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil";
+import CommentVO from "socialuni-api-base/src/model/comment/CommentVO";
+import HugAddVO from "socialuni-api-base/src/model/HugAddVO";
+import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
 import ChildComment from "./ChildComment.vue";
-import UserMsgUtil from "@socialuni/socialuni-user-sdk/src/util/UserMsgUtil";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
-import UserPageUtil from "@socialuni/socialuni-user-sdk/src/util/UserPageUtil";
-import UserPagePath from "@socialuni/socialuni-user-sdk/src/constant/UserPagePath";
-import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
-import {socialTalkModule} from "@socialuni/socialuni-community-sdk/src/store/SocialTalkModule";
-import CommunityPageUtil from "@socialuni/socialuni-community-sdk/src/util/CommunityPageUtil";
-import CommunityPagePath from "@socialuni/socialuni-community-sdk/src/constant/CommunityPagePath";
+import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
+import UserPagePath from "socialuni-user-sdk/src/constant/UserPagePath";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+import {socialTalkModule} from "socialuni-community-sdk/src/store/SocialTalkModule";
+import CommunityPageUtil from "socialuni-community-sdk/src/util/CommunityPageUtil";
+import CommunityPagePath from "socialuni-community-sdk/src/constant/CommunityPagePath";
 
 @Component({
   components: {

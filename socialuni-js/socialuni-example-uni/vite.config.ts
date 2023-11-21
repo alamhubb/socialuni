@@ -2,7 +2,7 @@ import {defineConfig} from 'vite'
 import uni from '@dcloudio/vite-plugin-uni'
 
 import {fileURLToPath, URL} from "node:url";
-import socialuniPlatformAutoImportPlugin from "@socialuni/vite-plugin-socialuni-platform-auto-import/src/index";
+import socialuniPlatformAutoImportPlugin from "vite-plugin-socialuni-platform-auto-import/src/index";
 
 const IN_PRODUCTION = process.env.NODE_ENV === 'production'
 
@@ -14,7 +14,7 @@ if (IN_PRODUCTION) {
             // rejected: true,
             // require('@fullhuman/postcss-purgecss')({
             // content: ['./public/**/*.html', './src/**/*.vue'],
-            content: ['./public/**/*.html', './node_modules/@socialuni/socialuni-*/**/*.scss', './node_modules/@dcloudio/**/*.scss', './node_modules/@dcloudio/**/*.vue', './node_modules/@socialuni/socialuni-*/**/*.vue', './src/**/*.vue', './src/**/*.scss'],
+            content: ['./public/**/*.html', './node_modules/socialuni-*/**/*.scss', './node_modules/@dcloudio/**/*.scss', './node_modules/@dcloudio/**/*.vue', './node_modules/socialuni-*/**/*.vue', './src/**/*.vue', './src/**/*.scss'],
             defaultExtractor(content) {
                 const contentWithoutStyleBlocks = content.replace(
                     /<style[^]+?<\/style>/gi,

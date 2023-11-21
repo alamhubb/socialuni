@@ -1,5 +1,5 @@
 {
-  "name": "@socialuni/socialuni-user-h5-sdk",
+  "name": "socialuni-user-h5-sdk",
   "version": "0.1.2",
   "description": "",
   "main": "index.js",
@@ -7,9 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "@socialuni/socialuni": "^0.1.2",
-    "@socialuni/socialuni-app-sdk": "^0.1.2",
-    "@socialuni/socialuni-user-api": "^0.1.2",
+    "socialuni": "^0.1.2",
+    "socialuni-app-sdk": "^0.1.2",
+    "socialuni-user-api": "^0.1.2",
     "mitt": "^3.0.0"
   },
   "keywords": [],

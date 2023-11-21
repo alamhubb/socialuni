@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Layout from '@/layout/Layout.vue'
 import RouterName from '@/constant/RouterName'
 import TokenUtil from '@/utils/TokenUtil'
-import {socialuniUserModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 
 
 export const menuRoutes = [

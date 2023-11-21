@@ -5,7 +5,7 @@ export default class SocialuniAlertUtil {
     private static nativeUtilSelf = null
 
     static async init() {
-        const modules = await PlatformModuleLoadUtil.dynamicImport('@socialuni/socialuni-native', '/src/util/AlertUtil.ts')
+        const modules = await PlatformModuleLoadUtil.dynamicImport('socialuni-native', '/src/util/AlertUtil.ts')
         this.nativeUtilSelf = modules.default
     }
 

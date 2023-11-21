@@ -108,14 +108,14 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-facing-decorator'
-import SocialUserContentRO from "@socialuni/socialuni-api-base/src/model/social/SocialUserContentRO"
-import QNavbar from "@socialuni/socialuni-ui-uni/src/components/QNavbar/QNavbar.vue"
-import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue"
-import QSearch from "@socialuni/socialuni-ui-uni/src/components/QSearch/QSearch.vue"
-import QInput from "@socialuni/socialuni-ui-uni/src/components/QInput/QInput.vue"
+import SocialUserContentRO from "socialuni-api-base/src/model/social/SocialUserContentRO"
+import QNavbar from "socialuni-ui-uni/src/components/QNavbar/QNavbar.vue"
+import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue"
+import QSearch from "socialuni-ui-uni/src/components/QSearch/QSearch.vue"
+import QInput from "socialuni-ui-uni/src/components/QInput/QInput.vue"
 import {
   socialuniChatViewService
-} from "@socialuni/socialuni-im-sdk/src/logic/SocialuniChatViewService";
+} from "socialuni-im-sdk/src/logic/SocialuniChatViewService";
 import {getCurrentInstance} from "vue";
 
 @Component({

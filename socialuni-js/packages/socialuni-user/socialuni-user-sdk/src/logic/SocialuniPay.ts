@@ -1,6 +1,6 @@
-import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 import PlatformUtils from "../util/PlatformUtils";
-import SocialuniCoinAPI from "@socialuni/socialuni-user-api/src/api/SocialuniCoinAPI";
+import SocialuniCoinAPI from "socialuni-user-api/src/api/SocialuniCoinAPI";
 
 export default class SocialuniPay{
     //所有只能直接调用这个

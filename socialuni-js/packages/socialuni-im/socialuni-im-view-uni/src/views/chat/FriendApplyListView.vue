@@ -84,17 +84,17 @@
 <script lang="ts">
 import {Component, Vue} from 'vue-facing-decorator'
 import {onLoad, onPullDownRefresh} from "@dcloudio/uni-app";
-import DateUtil from "@socialuni/socialuni-util/src/util/DateUtil";
-import FriendApplyType from "@socialuni/socialuni-constant/constant/FriendApplyType";
-import SocialuniFriendAPI from "@socialuni/socialuni-im-api/src/api/SocialuniFriendAPI";
-import SocialuniFriendApplyUserRO from "@socialuni/socialuni-im-api/src/model/RO/SocialuniFriendApplyUserRO";
-import FriendAddQO from "@socialuni/socialuni-im-api/src/model/QO/firend/FriendAddQO";
-import SocialuniAddFriendStatus from "@socialuni/socialuni-im-api/src/constant/SocialuniAddFriendStatus";
-import OpenImFriendApplyRO from "@socialuni/socialuni-api-base/src/model/openIm/OpenImFriendApplyRO";
-import QTabs from "@socialuni/socialuni-ui-uni/src/components/QTabs/QTabs.vue";
-import SocialuniAddFriendType from "@socialuni/socialuni-im-api/src/constant/SocialuniAddFriendType";
-import UserPageUtil from "@socialuni/socialuni-user-sdk/src/util/UserPageUtil";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import DateUtil from "socialuni-util/src/util/DateUtil";
+import FriendApplyType from "socialuni-constant/constant/FriendApplyType";
+import SocialuniFriendAPI from "socialuni-im-api/src/api/SocialuniFriendAPI";
+import SocialuniFriendApplyUserRO from "socialuni-im-api/src/model/RO/SocialuniFriendApplyUserRO";
+import FriendAddQO from "socialuni-im-api/src/model/QO/firend/FriendAddQO";
+import SocialuniAddFriendStatus from "socialuni-im-api/src/constant/SocialuniAddFriendStatus";
+import OpenImFriendApplyRO from "socialuni-api-base/src/model/openIm/OpenImFriendApplyRO";
+import QTabs from "socialuni-ui-uni/src/components/QTabs/QTabs.vue";
+import SocialuniAddFriendType from "socialuni-im-api/src/constant/SocialuniAddFriendType";
+import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 @Component({
     components: {

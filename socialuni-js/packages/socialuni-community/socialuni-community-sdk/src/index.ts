@@ -1,6 +1,6 @@
-import {SocialuniPlugin} from '@socialuni/socialuni/src/interface/SocialuniPlugin'
-import {SocialuniOption} from "@socialuni/socialuni/src/interface/socialuniOption";
-import {socialuniPluginsModule} from "@socialuni/socialuni/src/store/SocialuniPluginsModule";
+import {SocialuniPlugin} from 'socialuni/src/interface/SocialuniPlugin'
+import {SocialuniOption} from "socialuni/src/interface/socialuniOption";
+import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
 import {App} from "vue";
 
 class  SocialuniCommunityPlugin implements SocialuniPlugin  {

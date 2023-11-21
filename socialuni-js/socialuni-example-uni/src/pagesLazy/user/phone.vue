@@ -6,7 +6,7 @@
 <script lang="ts">
 import {Component, Vue} from 'vue-facing-decorator'
 
-import LoginView from "@socialuni/socialuni-user-view-uni/src/views/login/LoginView.vue";
+import LoginView from "socialuni-user-view-uni/src/views/login/LoginView.vue";
 @Component({
   components: {
     LoginView

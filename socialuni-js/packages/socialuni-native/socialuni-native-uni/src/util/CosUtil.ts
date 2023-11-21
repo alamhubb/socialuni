@@ -1,6 +1,6 @@
 //@ts-ignore
 import COS from 'cos-js-sdk-v5'
-import CosAuthRO from "@socialuni/socialuni-api-base/src/model/cos/CosAuthRO";
+import CosAuthRO from "socialuni-api-base/src/model/cos/CosAuthRO";
 
 export default class CosUtil {
   static getAuthorizationCos(cosAuthRO: CosAuthRO): COS {

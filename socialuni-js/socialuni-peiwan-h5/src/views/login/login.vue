@@ -109,10 +109,10 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-facing-decorator'
-import SocialPhoneNumQO from "@socialuni/socialuni-admin-api/src/model/base/SocialPhoneNumQO";
-import PhoneAPI from "@socialuni/socialuni-user-api/src/api/PhoneAPI";
-import {socialuniConfigModule} from "@socialuni/socialuni-app-sdk/src/store/SocialuniConfigModule";
-import LoginService from "@socialuni/socialuni-user-sdk/src/logic/LoginService";
+import SocialPhoneNumQO from "socialuni-admin-api/src/model/base/SocialPhoneNumQO";
+import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
+import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
+import LoginService from "socialuni-user-sdk/src/logic/LoginService";
 
 
 @Component

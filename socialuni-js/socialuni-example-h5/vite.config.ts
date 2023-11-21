@@ -3,7 +3,7 @@ import {fileURLToPath, URL} from 'node:url'
 import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
 import nodeResolve from "@rollup/plugin-node-resolve";
-import socialuniPlatformAutoImportPlugin from "@socialuni/vite-plugin-socialuni-platform-auto-import/src/index";
+import socialuniPlatformAutoImportPlugin from "vite-plugin-socialuni-platform-auto-import/src/index";
 import * as https from "https";
 import * as fs from "fs";
 

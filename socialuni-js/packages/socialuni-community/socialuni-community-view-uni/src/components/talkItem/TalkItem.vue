@@ -12,7 +12,7 @@ import {Component, Emit, Prop, Vue} from 'vue-facing-decorator'
 import TalkItemHead from './TalkItemHead.vue'
 import TalkItemContent from './TalkItemContent.vue'
 import TalkItemComment from './TalkItemComment.vue'
-import TalkVO from "@socialuni/socialuni-api-base/src/model/talk/TalkVO";
+import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
 
 @Component({
   components: {

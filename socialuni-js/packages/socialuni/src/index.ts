@@ -4,10 +4,10 @@ import {SocialuniPlugin} from "./interface/SocialuniPlugin"
 import {ImportModule} from "./interface/ImportModule"
 import {SocialuniOption} from "./interface/socialuniOption"
 import SocialuniViewService from "./interface/SocialuniViewService";
-import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
-import PlatformModuleLoadUtil from "@socialuni/socialuni-native-util/src/util/PlatformModuleLoadUtil";
-import JsonUtil from "@socialuni/socialuni-util/src/util/JsonUtil";
-import ObjectUtil from "@socialuni/socialuni-util/src/util/ObjectUtil";
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import PlatformModuleLoadUtil from "socialuni-native-util/src/util/PlatformModuleLoadUtil";
+import JsonUtil from "socialuni-util/src/util/JsonUtil";
+import ObjectUtil from "socialuni-util/src/util/ObjectUtil";
 
 const socialuniInitPlugin: SocialuniPlugin = {
     async onLaunch() {
@@ -38,7 +38,7 @@ async function installSocialuniPluginIns(app: App) {
         app.use(socialuniApp.default)
     }
 
-    const SocialuniApp = await PlatformModuleLoadUtil.dynamicImport("@socialuni/socialuni-app-view")
+    const SocialuniApp = await PlatformModuleLoadUtil.dynamicImport("socialuni-app-view")
     console.log(SocialuniApp)
     app.use(SocialuniApp.default)
 
@@ -76,7 +76,7 @@ const Socialuni = {
         // console.log(SocialuniUiUni)
 
         console.log(socialuniSystemModule.isDev)
-        const SocialuniUiH5 = await PlatformModuleLoadUtil.dynamicImport("@socialuni/socialuni-ui")
+        const SocialuniUiH5 = await PlatformModuleLoadUtil.dynamicImport("socialuni-ui")
 
         app.use(SocialuniUiH5.default)
 

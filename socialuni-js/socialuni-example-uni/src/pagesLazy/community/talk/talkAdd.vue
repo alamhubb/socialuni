@@ -127,40 +127,40 @@
 </template>
 <script lang="ts">
 import {Component, Vue, Watch} from 'vue-facing-decorator'
-import AppMsg from '@socialuni/socialuni-constant/constant/AppMsg'
+import AppMsg from 'socialuni-constant/constant/AppMsg'
 import {onUnload} from "@dcloudio/uni-app";
-import QInput from "@socialuni/socialuni-ui-uni/src/components/QInput/QInput.vue";
-import QSidebar from "@socialuni/socialuni-ui-uni/src/components/QSidebar/QSidebar.vue";
-import QPopup from "@socialuni/socialuni-ui-uni/src/components/QPopup/QPopup.vue";
-import QButton from "@socialuni/socialuni-ui-uni/src/components/QButton/QButton.vue";
-import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue";
-import QNavbar from "@socialuni/socialuni-ui-uni/src/components/QNavbar/QNavbar.vue";
-import SocialCirclePicker from "@socialuni/socialuni-community-view-uni/src/components/SocialCirclePicker.vue";
-import QCityInfo from "@socialuni/socialuni-community-view-uni/src/components/QCityInfo/QCityInfo.vue";
-import SocialTagAdd from "@socialuni/socialuni-community-view-uni/src/components/SocialTagAdd/SocialTagAdd.vue";
-import TalkAddTagSearch from "@socialuni/socialuni-community-view-uni/src/components/TalkAddTagSearch.vue";
-import QCityPicker from "@socialuni/socialuni-community-view-uni/src/components/QCityPicker/QCityPicker.vue";
-import {socialLocationModule} from "@socialuni/socialuni-community-sdk/src/store/SocialLocationModule";
-import SocialuniTalkAPI from "@socialuni/socialuni-community-api/src/api/SocialuniTalkAPI";
-import {socialTalkModule} from "@socialuni/socialuni-community-sdk/src/store/SocialTalkModule";
-import {socialCircleModule} from "@socialuni/socialuni-community-sdk/src/store/SocialCircleModule";
-import CommunityPageUtil from '@socialuni/socialuni-community-sdk/src/util/CommunityPageUtil';
-import ObjectUtil from "@socialuni/socialuni-util/src/util/ObjectUtil";
-import {socialuniTagModule} from "@socialuni/socialuni-community-sdk/src/store/SocialTagModule";
-import VisibleType from "@socialuni/socialuni-constant/constant/VisibleType";
-import GenderType from "@socialuni/socialuni-constant/constant/GenderType";
-import LocationUtil from "@socialuni/socialuni-community-sdk/src/util/LocationUtil";
-import EnumStrVO from "@socialuni/socialuni-constant/constant/EnumStrVO";
-import { socialuniUserModule } from '@socialuni/socialuni-user-sdk/src/store/SocialuniUserModule';
-import DistrictVO from "@socialuni/socialuni-api-base/src/model/DistrictVO";
-import DomFile from "@socialuni/socialuni-app-sdk/src/model/DomFile";
-import TagVO from "@socialuni/socialuni-api-base/src/model/community/tag/TagVO";
-import CosAuthRO from "@socialuni/socialuni-api-base/src/model/cos/CosAuthRO";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
-import PlatformUtils from "@socialuni/socialuni-user-sdk/src/util/PlatformUtils";
-import CosService from "@socialuni/socialuni-app-sdk/src/util/CosService";
-import SocialuniAppAPI from "@socialuni/socialuni-app-api/src/api/SocialuniAppAPI";
-import SocialCircleRO from "@socialuni/socialuni-api-base/src/model/community/circle/SocialCircleRO";
+import QInput from "socialuni-ui-uni/src/components/QInput/QInput.vue";
+import QSidebar from "socialuni-ui-uni/src/components/QSidebar/QSidebar.vue";
+import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue";
+import QButton from "socialuni-ui-uni/src/components/QButton/QButton.vue";
+import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
+import QNavbar from "socialuni-ui-uni/src/components/QNavbar/QNavbar.vue";
+import SocialCirclePicker from "socialuni-community-view-uni/src/components/SocialCirclePicker.vue";
+import QCityInfo from "socialuni-community-view-uni/src/components/QCityInfo/QCityInfo.vue";
+import SocialTagAdd from "socialuni-community-view-uni/src/components/SocialTagAdd/SocialTagAdd.vue";
+import TalkAddTagSearch from "socialuni-community-view-uni/src/components/TalkAddTagSearch.vue";
+import QCityPicker from "socialuni-community-view-uni/src/components/QCityPicker/QCityPicker.vue";
+import {socialLocationModule} from "socialuni-community-sdk/src/store/SocialLocationModule";
+import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
+import {socialTalkModule} from "socialuni-community-sdk/src/store/SocialTalkModule";
+import {socialCircleModule} from "socialuni-community-sdk/src/store/SocialCircleModule";
+import CommunityPageUtil from 'socialuni-community-sdk/src/util/CommunityPageUtil';
+import ObjectUtil from "socialuni-util/src/util/ObjectUtil";
+import {socialuniTagModule} from "socialuni-community-sdk/src/store/SocialTagModule";
+import VisibleType from "socialuni-constant/constant/VisibleType";
+import GenderType from "socialuni-constant/constant/GenderType";
+import LocationUtil from "socialuni-community-sdk/src/util/LocationUtil";
+import EnumStrVO from "socialuni-constant/constant/EnumStrVO";
+import { socialuniUserModule } from 'socialuni-user-sdk/src/store/SocialuniUserModule';
+import DistrictVO from "socialuni-api-base/src/model/DistrictVO";
+import DomFile from "socialuni-app-sdk/src/model/DomFile";
+import TagVO from "socialuni-api-base/src/model/community/tag/TagVO";
+import CosAuthRO from "socialuni-api-base/src/model/cos/CosAuthRO";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import PlatformUtils from "socialuni-user-sdk/src/util/PlatformUtils";
+import CosService from "socialuni-app-sdk/src/util/CosService";
+import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
+import SocialCircleRO from "socialuni-api-base/src/model/community/circle/SocialCircleRO";
 
 @Component({
   components: {

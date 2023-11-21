@@ -1,7 +1,7 @@
 import {createApp} from 'vue'
 
 import App from './App.vue'
-import Socialuni from "@socialuni/socialuni/src";
+import Socialuni from "socialuni/src";
 import router from "@/router/router";
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 

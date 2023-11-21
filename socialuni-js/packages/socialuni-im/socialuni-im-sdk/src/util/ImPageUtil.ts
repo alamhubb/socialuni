@@ -1,10 +1,10 @@
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
-import PlatformModuleLoadUtil from "@socialuni/socialuni-native-util/src/util/PlatformModuleLoadUtil";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import PlatformModuleLoadUtil from "socialuni-native-util/src/util/PlatformModuleLoadUtil";
 import {SocialuniImPagePathInterface} from "../constant/SocialuniImPagePathInterface";
 
 export default class ImPageUtil {
     static async getImPagePath(){
-        const module = await PlatformModuleLoadUtil.dynamicImport('@socialuni/socialuni-im-view', 'src/constant/SocialuniImPagePath.ts')
+        const module = await PlatformModuleLoadUtil.dynamicImport('socialuni-im-view', 'src/constant/SocialuniImPagePath.ts')
         let imPagePath: SocialuniImPagePathInterface = module.default
         return imPagePath
     }

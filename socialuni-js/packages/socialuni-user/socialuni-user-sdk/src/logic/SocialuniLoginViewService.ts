@@ -1,9 +1,9 @@
-import SocialPhoneNumLoginQO from "@socialuni/socialuni-api-base/src/model/phone/SocialPhoneNumLoginQO";
-import NumberUtil from "@socialuni/socialuni-util/src/util/NumberUtil";
-import PhoneAPI from "@socialuni/socialuni-user-api/src/api/PhoneAPI";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import SocialPhoneNumLoginQO from "socialuni-api-base/src/model/phone/SocialPhoneNumLoginQO";
+import NumberUtil from "socialuni-util/src/util/NumberUtil";
+import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 import SocialuniLoginService from "./SocialuniLoginService";
-import SocialuniViewService from "@socialuni/socialuni/src/interface/SocialuniViewService";
+import SocialuniViewService from "socialuni/src/interface/SocialuniViewService";
 
 interface SocialuniLoginViewServiceRefs {
     authCode: HTMLInputElement

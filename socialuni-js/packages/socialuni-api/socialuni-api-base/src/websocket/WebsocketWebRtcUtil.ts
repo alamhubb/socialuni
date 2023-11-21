@@ -1,11 +1,11 @@
-import CommonUtil from "@socialuni/socialuni-util/src/util/CommonUtil";
+import CommonUtil from "socialuni-util/src/util/CommonUtil";
 import NotifyVO from "../model/NotifyVO";
-import JsonUtil from "@socialuni/socialuni-util/src/util/JsonUtil";
-import UUIDUtil from "@socialuni/socialuni-util/src/util/UUIDUtil";
+import JsonUtil from "socialuni-util/src/util/JsonUtil";
+import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
 import SocialuniAPIConfig from "../SocialuniAPIConfig";
-import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
-import {socialuniPluginsModule} from "@socialuni/socialuni/src/store/SocialuniPluginsModule";
-import {socialuniTokenModule} from "@socialuni/socialuni-user-sdk/src/store/SocialuniTokenModule";
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
+import {socialuniTokenModule} from "socialuni-user-sdk/src/store/SocialuniTokenModule";
 
 
 export default class WebsocketWebRtcUtil {

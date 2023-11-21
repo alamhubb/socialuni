@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-facing-decorator';
-import PhoneAPI from "@socialuni/socialuni-user-api/src/api/PhoneAPI";
+import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
 
 @Component({})
 export default class IndexView extends Vue {

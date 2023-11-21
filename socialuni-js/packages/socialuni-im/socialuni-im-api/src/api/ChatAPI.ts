@@ -1,7 +1,7 @@
-import SocialuniChatRO from '@socialuni/socialuni-api-base/src/model/SocialuniChatRO'
+import SocialuniChatRO from 'socialuni-api-base/src/model/SocialuniChatRO'
 import socialuniImRequest from "./socialuniImRequest";
-import ChatReadVO from "@socialuni/socialuni-api-base/src/model/chat/ChatReadVO";
-import ChatRemoveVO from "@socialuni/socialuni-api-base/src/model/chat/ChatRemoveVO";
+import ChatReadVO from "socialuni-api-base/src/model/chat/ChatReadVO";
+import ChatRemoveVO from "socialuni-api-base/src/model/chat/ChatRemoveVO";
 import ChatQueryQO from "../model/QO/chat/ChatQueryQO";
 
 export default class ChatAPI {

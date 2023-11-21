@@ -1,6 +1,6 @@
 import {OpenImMsgRO} from "./openIm/OpenImMsgRO";
 import {OpenImChatRO} from "./openIm/OpenImChatRO";
-import MessageVO from "@socialuni/socialuni-im-api/src/model/RO/MessageVO";
+import MessageVO from "socialuni-im-api/src/model/RO/MessageVO";
 
 export default class SocialuniChatRO {
     public id: string = null

@@ -1,5 +1,5 @@
 {
-  "name": "@socialuni/socialuni-peiwan-h5",
+  "name": "socialuni-peiwan-h5",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -11,14 +11,14 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.1.0",
-    "@socialuni/socialuni": "../packages/socialuni",
-    "@socialuni/socialuni-app-view-h5": "../packages/socialuni-app-view-h5",
-    "@socialuni/socialuni-native-h5": "../packages/socialuni-native-h5",
-    "@socialuni/socialuni-user-api": "../packages/socialuni-user-api",
-    "@socialuni/socialuni-peiwan-api": "../packages/socialuni-peiwan-api",
-    "@socialuni/socialuni-admin-api": "../packages/socialuni-admin-api",
-    "@socialuni/socialuni-user-sdk": "../packages/socialuni-user-sdk",
-    "@socialuni/socialuni-user-view-h5": "../packages/socialuni-user/socialuni-user-view-h5",
+    "socialuni": "../packages/socialuni",
+    "socialuni-app-view-h5": "../packages/socialuni-app-view-h5",
+    "socialuni-native-h5": "../packages/socialuni-native-h5",
+    "socialuni-user-api": "../packages/socialuni-user-api",
+    "socialuni-peiwan-api": "../packages/socialuni-peiwan-api",
+    "socialuni-admin-api": "../packages/socialuni-admin-api",
+    "socialuni-user-sdk": "../packages/socialuni-user-sdk",
+    "socialuni-user-view-h5": "../packages/socialuni-user/socialuni-user-view-h5",
     "axios": "^1.4.0",
     "element-plus": "^2.3.7",
     "mitt": "^3.0.0",
@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.1.0",
-    "@socialuni/vite-plugin-socialuni-platform-auto-import": "../packages/vite-plugin-socialuni-platform-auto-import",
+    "vite-plugin-socialuni-platform-auto-import": "../packages/vite-plugin-socialuni-platform-auto-import",
     "@tsconfig/node18": "^2.0.1",
     "@types/node": "^18.16.8",
     "@vitejs/plugin-vue": "^4.2.3",

@@ -36,14 +36,14 @@
 
 <script lang="ts">
 import {Component, Prop, Vue, Watch} from 'vue-facing-decorator'
-import TalkVO from "@socialuni/socialuni-api-base/src/model/talk/TalkVO";
-import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue";
-import CommentVO from "@socialuni/socialuni-api-base/src/model/comment/CommentVO";
-import ObjectUtil from "@socialuni/socialuni-util/src/util/ObjectUtil";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
-import UserPagePath from "@socialuni/socialuni-user-sdk/src/constant/UserPagePath";
-import UserPageUtil from "@socialuni/socialuni-user-sdk/src/util/UserPageUtil";
-import {socialTalkModule} from "@socialuni/socialuni-community-sdk/src/store/SocialTalkModule";
+import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
+import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
+import CommentVO from "socialuni-api-base/src/model/comment/CommentVO";
+import ObjectUtil from "socialuni-util/src/util/ObjectUtil";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import UserPagePath from "socialuni-user-sdk/src/constant/UserPagePath";
+import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
+import {socialTalkModule} from "socialuni-community-sdk/src/store/SocialTalkModule";
 
 @Component({
   components: {QIcon}

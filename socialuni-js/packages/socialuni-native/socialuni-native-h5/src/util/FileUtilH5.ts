@@ -1,4 +1,4 @@
-import DomFile from "@socialuni/socialuni-native-util/src/model/DomFile";
+import DomFile from "socialuni-native-util/src/model/DomFile";
 
 const hasOwnProperty = Object.prototype.hasOwnProperty
 

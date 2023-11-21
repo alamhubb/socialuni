@@ -39,13 +39,13 @@
 
 <script lang="ts">
 import {Component, Emit, Model, Vue, Prop} from 'vue-facing-decorator'
-import QPopup from "@socialuni/socialuni-ui-uni/src/components/QPopup/QPopup.vue";
-import QPicker from "@socialuni/socialuni-ui-uni/src/components/QPicker/QPicker.vue";
-import DistrictVO from "@socialuni/socialuni-api-base/src/model/DistrictVO";
-import {socialLocationModule} from "@socialuni/socialuni-community-sdk/src/store/SocialLocationModule";
-import LocationUtil from "@socialuni/socialuni-community-sdk/src/util/LocationUtil";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
-import QIcon from "@socialuni/socialuni-ui-uni/src/components/QIcon/QIcon.vue";
+import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue";
+import QPicker from "socialuni-ui-uni/src/components/QPicker/QPicker.vue";
+import DistrictVO from "socialuni-api-base/src/model/DistrictVO";
+import {socialLocationModule} from "socialuni-community-sdk/src/store/SocialLocationModule";
+import LocationUtil from "socialuni-community-sdk/src/util/LocationUtil";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 
 @Component({
   components: {

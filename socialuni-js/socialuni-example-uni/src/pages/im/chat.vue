@@ -5,7 +5,7 @@
 <script lang="ts">
 import {Component, Vue} from 'vue-facing-decorator'
 
-import SocialuniChatView from "@socialuni/socialuni-im-view-uni/src/views/chat/SocialuniChatView.vue";
+import SocialuniChatView from "socialuni-im-view-uni/src/views/chat/SocialuniChatView.vue";
 @Component({
   components: {SocialuniChatView}
 })

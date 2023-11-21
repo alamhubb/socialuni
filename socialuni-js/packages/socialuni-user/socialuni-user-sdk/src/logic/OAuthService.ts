@@ -1,13 +1,13 @@
-import ResultRO from "@socialuni/socialuni-api-base/src/model/social/ResultRO";
-import SocialLoginRO from "@socialuni/socialuni-api-base/src/model/social/SocialLoginRO";
-import UniUserInfoRO from "@socialuni/socialuni-api-base/src/model/login/UniUserInfoRO";
+import ResultRO from "socialuni-api-base/src/model/social/ResultRO";
+import SocialLoginRO from "socialuni-api-base/src/model/social/SocialLoginRO";
+import UniUserInfoRO from "socialuni-api-base/src/model/login/UniUserInfoRO";
 import {socialuniUserModule} from "../store/SocialuniUserModule";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
-import UniProviderLoginQO from "@socialuni/socialuni-api-base/src/model/login/UniProviderLoginQO";
-import LoginProvider from "@socialuni/socialuni-constant/constant/LoginProvider";
-import LoginAPI from "@socialuni/socialuni-user-api/src/api/LoginAPI";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import UniProviderLoginQO from "socialuni-api-base/src/model/login/UniProviderLoginQO";
+import LoginProvider from "socialuni-constant/constant/LoginProvider";
+import LoginAPI from "socialuni-user-api/src/api/LoginAPI";
 import UserService from "./UserService";
-import PhoneAPI from "@socialuni/socialuni-user-api/src/api/PhoneAPI";
+import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
 
 export default class OAuthService {
   static async oAuthUserInfo (params: any) {

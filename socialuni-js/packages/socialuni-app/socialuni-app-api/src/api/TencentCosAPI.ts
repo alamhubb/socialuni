@@ -1,10 +1,10 @@
-import AppMsg from "@socialuni/socialuni-constant/constant/AppMsg";
-import TencentCosIdInfoRO from "@socialuni/socialuni-api-base/src/model/RO/tencent/cos/idImgInfo/TencentCosIdInfoRO";
-import CosAuthRO from "@socialuni/socialuni-api-base/src/model/cos/CosAuthRO";
-import CosUploadResult from "@socialuni/socialuni-api-base/src/model/cos/CosUploadResult";
-import AlertUtil from "@socialuni/socialuni-native-uni/src/util/AlertUtil";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
-import DomFile from "@socialuni/socialuni-native-util/src/model/DomFile";
+import AppMsg from "socialuni-constant/constant/AppMsg";
+import TencentCosIdInfoRO from "socialuni-api-base/src/model/RO/tencent/cos/idImgInfo/TencentCosIdInfoRO";
+import CosAuthRO from "socialuni-api-base/src/model/cos/CosAuthRO";
+import CosUploadResult from "socialuni-api-base/src/model/cos/CosUploadResult";
+import AlertUtil from "socialuni-native-uni/src/util/AlertUtil";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import DomFile from "socialuni-native-util/src/model/DomFile";
 
 export default class TencentCosAPI {
     /*static async getImgTagAPI(imgUrl, imgKey, cosAuthRO: CosAuthRO) {

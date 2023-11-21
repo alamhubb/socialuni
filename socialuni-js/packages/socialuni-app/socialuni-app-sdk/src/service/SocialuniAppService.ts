@@ -1,6 +1,6 @@
-import WebsocketUtil from "@socialuni/socialuni-api-base/src/websocket/WebsocketUtil";
-import WebsocketWebRtcUtil from "@socialuni/socialuni-api-base/src/websocket/WebsocketWebRtcUtil";
-import JsonUtil from "@socialuni/socialuni-util/src/util/JsonUtil";
+import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
+import WebsocketWebRtcUtil from "socialuni-api-base/src/websocket/WebsocketWebRtcUtil";
+import JsonUtil from "socialuni-util/src/util/JsonUtil";
 import test1 from './test1.mp3'
 
 export default class SocialuniAppService {

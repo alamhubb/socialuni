@@ -1,10 +1,10 @@
 import {reactive, UnwrapNestedRefs} from "vue";
-import SocialuniMineUserRO from "@socialuni/socialuni-api-base/src/model/user/SocialuniMineUserRO";
+import SocialuniMineUserRO from "socialuni-api-base/src/model/user/SocialuniMineUserRO";
 import SocialuniUserStorageUtil from "../util/SocialuniUserStorageUtil";
-import SocialLoginRO from "@socialuni/socialuni-api-base/src/model/social/SocialLoginRO";
-import LoginAPI from "@socialuni/socialuni-user-api/src/api/LoginAPI";
-import SocialuniMineUserAPI from "@socialuni/socialuni-user-api/src/api/SocialuniMineUserAPI";
-import SocialuniAppUtil from "@socialuni/socialuni-native-util/src/util/SocialuniAppUtil";
+import SocialLoginRO from "socialuni-api-base/src/model/social/SocialLoginRO";
+import LoginAPI from "socialuni-user-api/src/api/LoginAPI";
+import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
+import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 import {socialuniTokenModule} from "./SocialuniTokenModule";
 
 class SocialuniUserModule {

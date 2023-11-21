@@ -1,6 +1,6 @@
 import LoginRes = UniApp.LoginRes
-import {socialuniSystemModule} from "@socialuni/socialuni-util/src/store/SocialuniSystemModule";
-import UniPlatformType from "@socialuni/socialuni-constant/constant/uni/UniPlatformType";
+import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import UniPlatformType from "socialuni-constant/constant/uni/UniPlatformType";
 
 export default class UniLoginUtil {
   public static async getLoginCode (provider?: string): Promise<string> {
