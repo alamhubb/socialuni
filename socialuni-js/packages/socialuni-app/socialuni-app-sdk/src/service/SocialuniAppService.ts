@@ -1,9 +1,9 @@
 import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
 import WebsocketWebRtcUtil from "socialuni-api-base/src/websocket/WebsocketWebRtcUtil";
-import SocialuniWebRTC from "socialuni-webrtc-h5/src/SocialuniWebRTC";
 import {socialuniTokenModule} from "socialuni-user-sdk/src/store/SocialuniTokenModule";
 import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
 import SocialuniAPIConfig from "socialuni-api-base/src/SocialuniAPIConfig";
+import EasyWebRTC from "easy-webrtc/src/SocialuniWebRTC";
 
 export default class SocialuniAppService {
     static async getAppLunchData() {
@@ -14,11 +14,11 @@ export default class SocialuniAppService {
         }
         const websocketUrl = SocialuniAPIConfig.socialuniWebsocketUrl + '/webrtc?token=' + token
 
-        WebsocketWebRtcUtil.socialuniWebRTC = SocialuniWebRTC.createClient({
+        WebsocketWebRtcUtil.easyWebRTC = EasyWebRTC.createClient({
             wsUrl : websocketUrl
         })
 // 设置远程视频流到video元素
-        WebsocketWebRtcUtil.socialuniWebRTC.ontrack((event) => {
+        WebsocketWebRtcUtil.easyWebRTC.ontrack((event) => {
             console.log(event)
             WebsocketWebRtcUtil.remoteVideo.srcObject = event.streams[0];
         })

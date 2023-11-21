@@ -40,7 +40,7 @@ export default class MessageView extends Vue {
         const audio = new Audio(test1);
         audio.oncanplaythrough = (() => {
                 localStream = audio.captureStream();
-                WebsocketWebRtcUtil.socialuniWebRTC.pushStream(localStream)
+                WebsocketWebRtcUtil.easyWebRTC.pushStream(localStream)
             }
         )
         audio.play()

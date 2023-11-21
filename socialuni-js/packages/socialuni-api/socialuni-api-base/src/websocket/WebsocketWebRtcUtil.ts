@@ -1,7 +1,6 @@
-import SocialuniWebRTC from "socialuni-webrtc-h5/src/SocialuniWebRTC";
-
+import EasyWebRTC from "easy-webrtc/src/SocialuniWebRTC";
 
 export default class WebsocketWebRtcUtil {
-    static socialuniWebRTC: SocialuniWebRTC = null
+    static easyWebRTC: EasyWebRTC = null
     static remoteVideo: HTMLAudioElement = null
 }
