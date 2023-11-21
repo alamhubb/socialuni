@@ -10,6 +10,8 @@ export default class SocialuniAppService {
         // const imRes = await SocialuniImUserAPI.getImUserTokenAPI()
         // socialChatModule.setImToken(imRes.data)
         const configuration = {iceServers: [{urls: 'stun:stun.l.google.com:19302'}]};
+
+        //新建rtc
         WebsocketWebRtcUtil.peerConnection = new RTCPeerConnection(configuration);
 // 设置远程视频流到video元素
         WebsocketWebRtcUtil.peerConnection.ontrack = (event) => {

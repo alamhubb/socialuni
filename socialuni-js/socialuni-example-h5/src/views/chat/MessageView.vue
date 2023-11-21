@@ -39,7 +39,9 @@ export default class MessageView extends Vue {
     async start() {
         const audio = new Audio(test1);
         audio.oncanplaythrough = (() => {
+                console.log('执行了oncanplaythrough')
                 localStream = audio.captureStream();
+                console.log(localStream)
                 localStream.getTracks().forEach(track => {
                     WebsocketWebRtcUtil.peerConnection.addTrack(track, localStream);
                 });
