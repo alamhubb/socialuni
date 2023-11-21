@@ -2,14 +2,14 @@ import JsonUtil from "socialuni-util/src/util/JsonUtil";
 import CommonUtil from "socialuni-util/src/util/CommonUtil";
 import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
 
-export interface EasyWebsocketConfig {
+export interface FastWebsocketConfig {
     wsUrl: string,
     onMessage?: ((event: MessageEvent) => void)
 }
 
-export default class EasyWebsocket {
-    static createClient(config: EasyWebsocketConfig) {
-        const easyWebsocket = new EasyWebsocket()
+export default class FastWebsocket {
+    static createClient(config: FastWebsocketConfig) {
+        const easyWebsocket = new FastWebsocket()
         easyWebsocket.create(config)
         return easyWebsocket
     }
@@ -20,9 +20,9 @@ export default class EasyWebsocket {
     private timer: number = null
     private locking: boolean = false
     private ws: WebSocket = null
-    private config: EasyWebsocketConfig = null
+    private config: FastWebsocketConfig = null
 
-    create(config: EasyWebsocketConfig) {
+    create(config: FastWebsocketConfig) {
         this.config = config
         this.websocketConnect(false)
     }
