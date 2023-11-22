@@ -1,4 +1,4 @@
-import FastWebsocket, {FastWebsocketConfig} from "fast-websocket/src/FastWebsocket";
+import FastWebsocket, {FastWebsocketConfig} from "easy-socket/src/FastWebsocket";
 
 export interface FastWebRTCConfig extends FastWebsocketConfig {
 }
@@ -18,6 +18,7 @@ export default class FastWebRTC {
             console.log(7878798789)
             console.log(fastWebRTC.peerConnection.iceConnectionState)
             if (data.offer) {
+                console.log(data.offer)
                 // 收到远程描述，设置远程描述并创建应答
                 fastWebRTC.peerConnection.setRemoteDescription(new RTCSessionDescription(data.offer))
                     .then(() => fastWebRTC.peerConnection.createAnswer())

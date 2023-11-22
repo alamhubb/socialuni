@@ -3,7 +3,7 @@ import WebsocketWebRtcUtil from "socialuni-api-base/src/websocket/WebsocketWebRt
 import {socialuniTokenModule} from "socialuni-user-sdk/src/store/SocialuniTokenModule";
 import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
 import SocialuniAPIConfig from "socialuni-api-base/src/SocialuniAPIConfig";
-import EasyWebRTC from "easy-webrtc/src/SocialuniWebRTC";
+import EasyWebRTC from "easy-webrtc/src/FastWebRTC";
 
 export default class SocialuniAppService {
     static async getAppLunchData() {
@@ -19,7 +19,11 @@ export default class SocialuniAppService {
         })
 // 设置远程视频流到video元素
         WebsocketWebRtcUtil.easyWebRTC.ontrack((event) => {
+            console.log(45454545)
             console.log(event)
+            console.log(event.streams[0])
+            console.log(event.streams[0].getTracks())
+            console.log(event.streams[0].getTracks().length)
             WebsocketWebRtcUtil.remoteVideo.srcObject = event.streams[0];
         })
 
