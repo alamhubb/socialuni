@@ -14,6 +14,8 @@ public class SocialuniContentBaseDO extends SocialuniUpdateTimeContentBaseDO imp
     @Column(nullable = false)
     private String status;
     private String type;
+    //操作顺序id
+    private Integer sequenceNum;
 
     public SocialuniContentBaseDO() {
         this.status = SocialuniCommonStatus.enable;
@@ -21,6 +23,11 @@ public class SocialuniContentBaseDO extends SocialuniUpdateTimeContentBaseDO imp
 
     public SocialuniContentBaseDO(Integer userId) {
         super(userId);
+        this.sequenceNum = 0;
         this.status = SocialuniCommonStatus.enable;
+    }
+
+    public Integer sequencePlus(){
+        return ++this.sequenceNum;
     }
 }

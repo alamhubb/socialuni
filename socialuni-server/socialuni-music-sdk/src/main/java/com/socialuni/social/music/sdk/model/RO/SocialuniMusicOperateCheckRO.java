@@ -1,4 +1,4 @@
-package com.socialuni.social.music.sdk.check;
+package com.socialuni.social.music.sdk.model.RO;
 
 import lombok.Data;
 

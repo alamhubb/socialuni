@@ -49,6 +49,7 @@ export default class FastWebRTC {
         fastWebRTC.websocket = websocket
 
         return fastWebRTC;
+
     }
 
     ontrack(callback: (ev: RTCTrackEvent) => any) {

@@ -9,5 +9,5 @@ public class SocialuniMusicInfoRO {
     private String musicAuthor;
     private String musicImg;
     private Boolean playing;
-    private String src;
+    private String musicSrc;
 }

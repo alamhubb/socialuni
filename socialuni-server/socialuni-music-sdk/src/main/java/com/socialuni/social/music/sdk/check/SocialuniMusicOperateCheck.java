@@ -8,6 +8,7 @@ import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.im.logic.check.SocialuniChatUserCheck;
 import com.socialuni.social.music.sdk.constant.SocialuniMusicRoleId;
 import com.socialuni.social.music.sdk.dao.DO.SocialuniMusicRoomUserDO;
+import com.socialuni.social.music.sdk.model.RO.SocialuniMusicOperateCheckRO;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.apache.commons.lang3.StringUtils;

@@ -1,46 +1,51 @@
 package com.socialuni.social.music.sdk.controller;
 
+import cn.hutool.core.net.URLDecoder;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.socialuni.social.common.api.constant.DateTimeType;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.common.api.utils.JsonUtil;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.im.dao.repository.ChatUserRepository;
 import com.socialuni.social.im.enumeration.SocialuniChatOperateType;
 import com.socialuni.social.music.sdk.check.SocialuniMusicOperateCheck;
-import com.socialuni.social.music.sdk.factory.SocialuniMusicRoomPlayerDOFactory;
 import com.socialuni.social.music.sdk.model.RO.SocialuniMusicOperateCheckRO;
 import com.socialuni.social.music.sdk.dao.DO.SocialuniMusicRoomPlayerDO;
 import com.socialuni.social.music.sdk.model.QO.AgoraPlayMusicQO;
 import com.socialuni.social.music.sdk.model.QO.AgoraUpdateMusicQO;
 import com.socialuni.social.music.sdk.model.QO.SocialuniPlayMusicQO;
+import com.socialuni.social.music.sdk.model.RO.AgoraPlayMusicRO;
 import com.socialuni.social.music.sdk.model.RO.SocialuniMusicInfoRO;
 import com.socialuni.social.music.sdk.model.RO.SocialuniMusicInitDataRO;
 import com.socialuni.social.music.sdk.utils.SocialuniMusicOperateRecordDOUtils;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import io.agora.media.RtcTokenBuilder2;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
-import java.util.*;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import java.util.Base64;
+import java.util.Collections;
+import java.util.List;
 
-import static com.socialuni.social.common.sdk.utils.RestUtil.*;
+import static com.socialuni.social.common.sdk.utils.RestUtil.getDefaultRestTemplate;
 
-@RequestMapping("socialuni/music")
+@RequestMapping("socialuni/agora/music")
 @RestController
 @Slf4j
-public class SocialuniMusicController {
+public class SocialuniMusicAgoraController {
     Integer sequence = 0;
     final static String region = "cn";
     final static String appId = "5e681410a7434ce9bba3e268226ce537";
@@ -62,14 +67,8 @@ public class SocialuniMusicController {
     //协同编辑框架
 
     public static void main(String[] args) {
-        System.out.println(11 / 10);
-    }
 
-    @GetMapping("queryMusicRoomInfo/{channel}")
-    public ResultRO<String> queryMusicRoomInfo(@PathVariable("channel") String channel) {
-        return null;
     }
-
 
     @GetMapping("getMusicToken/{channel}")
     public ResultRO<String> getMusicToken(@PathVariable("channel") String channel) {
@@ -245,6 +244,77 @@ public class SocialuniMusicController {
         SocialuniMusicOperateCheckRO checkResult = socialuniMusicOperateCheck.checkRoleId(channel);
 
 
+        String queryUrl = "v1/projects/{0}/cloud-player/players";
+
+        String fullQueryUrl = MessageFormat.format(queryUrl, appId);
+
+        String authorizationHeader = this.getAuthorization();
+        JSONObject queryFilterParam = JSONUtil.createObj();
+
+        String filterChannel = "channelName eq {0}";
+        String fullFilter = MessageFormat.format(filterChannel, channel);
+
+        queryFilterParam.put("filter", fullFilter);
+
+        //查询本渠道的所有播放器
+        //查询本渠道的所有播放器
+        String filterQueryHttpResult = HttpRequest.get(fullQueryUrl)
+                .body(JSONUtil.toJsonStr(queryFilterParam))
+                .header("Authorization", authorizationHeader).execute().body();
+
+       /* AgoraPlayMusicRO agoraPlayMusicRO = JsonUtil.parse(httpResult, AgoraPlayMusicRO.class);
+
+        log.info(filterQueryHttpResult);
+
+
+        //删除所有其他的播放器
+
+        String deleteUrl = "cn/v1/projects/{0}/cloud-player/players/{1}";
+        String fullDeleteUrl = MessageFormat.format(deleteUrl,appId,)
+
+        String deleteHttpResult = HttpRequest.delete(fullQueryUrl)
+                .body(JSONUtil.toJsonStr(queryFilterParam))
+                .header("Authorization", authorizationHeader).execute().body();*/
+
+
+        String postUrl = "https://api.sd-rtn.com/{0}/v1/projects/{1}/cloud-player/players";
+        String fullUrl = MessageFormat.format(postUrl, region, appId);
+
+        JSONObject param = JSONUtil.createObj();
+
+        String musicId = playMusicQO.getMusicUrl();
+
+        String musicUrl = "https://music.163.com/song/media/outer/url?id={0}.mp3";
+
+        if (musicId.contains("http")) {
+            musicUrl = musicId;
+        } else {
+            musicUrl = MessageFormat.format(musicUrl, musicId);
+        }
+
+        String newMusicUrl = URLDecoder.decodeForPath(musicUrl, StandardCharsets.UTF_8);
+        log.info(newMusicUrl);
+        Integer unionId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(channel);
+        param.put("streamUrl", newMusicUrl);
+        param.put("channelName", channel);
+        param.put("token", playMusicQO.getMusicUrl());
+        param.put("uid", 0);
+        param.put("idleTimeout", 300);
+
+        JSONObject param1 = JSONUtil.createObj();
+        param1.put("player", param);
+
+
+        String httpResult = HttpRequest.post(fullUrl)
+                .body(JSONUtil.toJsonStr(param1))
+                .header("Authorization", authorizationHeader).execute().body();
+
+        log.info("结果：{}", httpResult);
+
+        AgoraPlayMusicRO agoraPlayMusicRO = JsonUtil.parse(httpResult, AgoraPlayMusicRO.class);
+
+        String playerId = agoraPlayMusicRO.getPlayer().getId();
+
         Integer chatId = checkResult.getChatId();
 
 
@@ -257,43 +327,10 @@ public class SocialuniMusicController {
             socialuniMusicRoomPlayerDO.setRoomId(checkResult.getChatId());
             //保存
         }
-        socialuniMusicRoomPlayerDO = SocialuniMusicRoomPlayerDOFactory.createSocialuniMusicRoomPlayerDO(playMusicQO, socialuniMusicRoomPlayerDO);
-
-
+        socialuniMusicRoomPlayerDO.setMusicUrl(playerId);
         SocialuniRepositoryFacade.save(socialuniMusicRoomPlayerDO);
 
-
-        if (socialuniMusicRoomPlayerDO.getPlaying()) {
-            Date updateTime = socialuniMusicRoomPlayerDO.getUpdateTime();
-            //获取时间戳
-            long timestamp = updateTime.getTime();
-            //获取歌曲播放节点
-            long currentTime = socialuniMusicRoomPlayerDO.getCurrentTime() * 1000;
-            //获取多少秒后修改状态为暂停
-
-            long afterTime = timestamp - currentTime;
-
-            Integer sequence = socialuniMusicRoomPlayerDO.getSequenceNum();
-
-            ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-
-            executorService.schedule(() -> {
-
-                SocialuniMusicRoomPlayerDO dbRoom = SocialuniRepositoryFacade.findByCustomField("roomId", chatId, SocialuniMusicRoomPlayerDO.class);
-                if (dbRoom.getSequenceNum().equals(sequence)){
-                    dbRoom.setPlaying(Boolean.FALSE);
-                    SocialuniRepositoryFacade.save(dbRoom);
-                }
-
-                // 这里放置你要延迟执行的代码
-                System.out.println("延迟执行的任务");
-            }, afterTime, TimeUnit.MILLISECONDS);
-
-            executorService.shutdown();
-        }
-
-
-        /*log.info(fullUrl);
+        log.info(fullUrl);
 //        String httpResult = restTemplate.postForEntity("https://api.sd-rtn.com/cn/v1/projects/5e681410a7434ce9bba3e268226ce537/cloud-player/players", httpEntity, String.class).getBody();
 //        AgoraPlayMusicRO httpResult = restTemplate.postForEntity(fullUrl, httpEntity, AgoraPlayMusicRO.class).getBody();
         if (httpResult != null) {
@@ -310,7 +347,7 @@ public class SocialuniMusicController {
 //            log.info(httpResult.getErrMsg());
 //            log.info(httpResult.getErrCode().toString());
         }
-*/
+
         return ResultRO.success();
     }
 
