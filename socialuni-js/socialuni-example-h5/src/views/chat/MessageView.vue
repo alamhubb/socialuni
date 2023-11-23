@@ -144,18 +144,29 @@ export default class MessageView extends Vue {
     }
 
     async getMusic() {
+        const audio = new Audio('https://music.163.com/song/media/outer/url?id=1456890009.mp3')
 
-        const audio = document.getElementById('audio') as HTMLAudioElement
+
+        console.log(6666)
         console.log(audio)
+
+        audio.oncanplaythrough = (async (ev) => {
+                console.log(ev)
+            }
+        )
+        console.log(77777)
+
+        audio.play()
+
         // 1398283847
-        console.log(789798798)
+        /*console.log(789798798)
         const res = await fetch(`music/song/media/outer/url?id=${1456890009}.mp3`)
         const blob = await res.blob();
         console.log(blob)
         const blobUrl = URL.createObjectURL(blob);
         console.log(blobUrl)
         audio.src = blobUrl
-        console.log(323232)
+        console.log(323232)*/
 
     }
 
