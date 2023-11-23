@@ -31,7 +31,8 @@ public class SocialuniMusicRoomPlayerDO extends SocialuniContentBaseDO {
     Boolean playing;
 
     public SocialuniMusicRoomPlayerDO() {
-        this.playing = Boolean.TRUE;
+        this.playing = Boolean.FALSE;
+        this.timestamp = new Date();
         this.currentTime = 0;
     }
 }

@@ -2,6 +2,7 @@ import {fileURLToPath, URL} from 'node:url'
 
 import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 import nodeResolve from "@rollup/plugin-node-resolve";
 import socialuniPlatformAutoImportPlugin from "vite-plugin-socialuni-platform-auto-import/src/index";
 import * as https from "https";
@@ -9,7 +10,12 @@ import * as fs from "fs";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [vue(), nodeResolve(), socialuniPlatformAutoImportPlugin()],
+    plugins: [
+        vue(),
+        vueJsx(),
+        nodeResolve(),
+        socialuniPlatformAutoImportPlugin()
+    ],
     server: {
         port: 8085,
         host: '0.0.0.0',

@@ -7,6 +7,13 @@ import com.socialuni.social.music.sdk.model.QO.SocialuniPlayMusicQO;
 import javax.validation.Valid;
 
 public class SocialuniMusicRoomPlayerDOFactory {
+    public static SocialuniMusicRoomPlayerDO createSocialuniMusicRoomPlayerDO(Integer roomId) {
+        //播放，是否存在
+        SocialuniMusicRoomPlayerDO socialuniMusicRoomPlayerDO = new SocialuniMusicRoomPlayerDO();
+        socialuniMusicRoomPlayerDO.setRoomId(roomId);
+
+        return socialuniMusicRoomPlayerDO;
+    }
 
     public static SocialuniMusicRoomPlayerDO createSocialuniMusicRoomPlayerDO(@Valid SocialuniPlayMusicQO socialuniPlayMusicQO, SocialuniMusicRoomPlayerDO socialuniMusicRoomPlayerDO) {
         socialuniMusicRoomPlayerDO.setMusicUrl(socialuniPlayMusicQO.getMusicUrl());
