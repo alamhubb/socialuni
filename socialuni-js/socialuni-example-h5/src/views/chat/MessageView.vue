@@ -13,12 +13,31 @@
 
             <div>
                 <div></div>
+
+                <div>
+                    <main class="music">
+                        <div class="music-button">
+                            <!--                            <i @click="isChangeLike" v-if="!isLike" title="收藏" class="mdi mdi-star-outline"></i>-->
+                            <!--                            <i @click="isChangeLike" v-else style="color: red;font-size: 22px;" title="已收藏"  class="mdi mdi-star"></i>-->
+                            <i title="上一曲" @click="next(-1)" class="mdi  mdi-skip-previous"></i>
+                            <i @click="publish" style="font-size: 40px; color: #cc7013;" class="mdi"
+                               :class="[is ? 'mdi-pause' :'mdi-play']"></i>
+                            <i title="下一曲" @click="next(1)" class="mdi mdi-skip-next"></i>
+                            <svg class="svg" @click="openLyric" aria-hidden="true">
+                                <use xlink:href="#icon-minganci"></use>
+                            </svg>
+                        </div>
+                    </main>
+                </div>
                 <div>
                     <el-button
                             @click="terstfasd('https://cdxapp-1257733245.file.myqcloud.com/opentest/M800000puzgO0yRX1o.mp3')">
                         创建
                     </el-button>
                     <div>
+                        <audio ref="audio"  autoplay muted controls id="audio"
+                               src="https://music.163.com/song/media/outer/url?id=1456890009.mp3"></audio>
+
                         <audio id="localVideo" autoplay muted controls></audio>
                         <audio id="remoteVideo" autoplay controls></audio>
                         <div>
@@ -91,6 +110,7 @@ import SocialuniImEventKey from "socialuni-im-api/src/constant/SocialuniMusicEve
 import socialuniMusicStore from "socialuni-music-sdk/src/store/SocialuniMusicStore";
 import WebsocketWebRtcUtil from "socialuni-api-base/src/websocket/WebsocketWebRtcUtil";
 import test1 from './test1.mp3'
+import Axios from "axios";
 
 let localStream
 let localVideo = null
@@ -115,8 +135,28 @@ export default class MessageView extends Vue {
         this.init()
     }
 
+    created() {
+        this.getMusic()
+    }
+
     async init() {
 
+    }
+
+    async getMusic() {
+        // 1398283847
+        console.log(789798798)
+        fetch(`music/song/media/outer/url?id=${1456890009}.mp3`)
+        Axios.get(`music/song/media/outer/url?id=${1456890009}.mp3`)
+
+        const aaa = Axios.create({
+            baseURL: '/music',
+        })
+
+        aaa.get(`/song/media/outer/url?id=${1456890009}.mp3`)
+        const res = await musicRequest.get(`/song/media/outer/url?id=${1456890009}.mp3`)
+        console.log(res)
+        console.log(789798798)
     }
 
     async queryMusicList() {
@@ -218,11 +258,11 @@ export default class MessageView extends Vue {
         })
     }
 
-    async destoryPlays(){
+    async destoryPlays() {
         const res = await this.queryAllplay()
         const plays = res.players
 
-        if (plays && plays.length){
+        if (plays && plays.length) {
             for (const play of plays) {
                 musicRequest.delete<any>(`api/cn/v1/projects/5e681410a7434ce9bba3e268226ce537/cloud-player/players/${play.id}`, {
                     headers: {
