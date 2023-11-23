@@ -3,7 +3,7 @@ import WebsocketWebRtcUtil from "socialuni-api-base/src/websocket/WebsocketWebRt
 import {socialuniTokenModule} from "socialuni-user-sdk/src/store/SocialuniTokenModule";
 import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
 import SocialuniAPIConfig from "socialuni-api-base/src/SocialuniAPIConfig";
-import EasyWebRTC from "fast-webrtc/src/FastWebRTC";
+import FastWebRTC from "easy-webrtc/src/FastWebRTC";
 
 export default class SocialuniAppService {
     static async getAppLunchData() {
@@ -14,7 +14,7 @@ export default class SocialuniAppService {
         }
         const websocketUrl = SocialuniAPIConfig.socialuniWebsocketUrl + '/webrtc?token=' + token
 
-        WebsocketWebRtcUtil.easyWebRTC = EasyWebRTC.createClient({
+        WebsocketWebRtcUtil.easyWebRTC = FastWebRTC.createClient({
             wsUrl : websocketUrl
         })
 // 设置远程视频流到video元素
