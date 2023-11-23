@@ -3,7 +3,6 @@ import Axios from 'axios'
 // create an axios instance
 const musicRequest = Axios.create({
     baseURL: '/music',
-    withCredentials: true,
     timeout: 120000 // request timeout
 })
 

@@ -20,7 +20,7 @@
                             <!--                            <i @click="isChangeLike" v-if="!isLike" title="收藏" class="mdi mdi-star-outline"></i>-->
                             <!--                            <i @click="isChangeLike" v-else style="color: red;font-size: 22px;" title="已收藏"  class="mdi mdi-star"></i>-->
                             <i title="上一曲" @click="next(-1)" class="mdi  mdi-skip-previous"></i>
-                            <i @click="publish" style="font-size: 40px; color: #cc7013;" class="mdi"
+                            <i @click="getMusic" style="font-size: 40px; color: #cc7013;" class="mdi"
                                :class="[is ? 'mdi-pause' :'mdi-play']"></i>
                             <i title="下一曲" @click="next(1)" class="mdi mdi-skip-next"></i>
                             <svg class="svg" @click="openLyric" aria-hidden="true">
@@ -35,8 +35,7 @@
                         创建
                     </el-button>
                     <div>
-                        <audio ref="audio"  autoplay muted controls id="audio"
-                               src="https://music.163.com/song/media/outer/url?id=1456890009.mp3"></audio>
+                        <audio ref="audio" autoplay muted controls id="audio"></audio>
 
                         <audio id="localVideo" autoplay muted controls></audio>
                         <audio id="remoteVideo" autoplay controls></audio>
@@ -133,6 +132,7 @@ export default class MessageView extends Vue {
         }
 
         this.init()
+        this.getMusic()
     }
 
     created() {
@@ -144,19 +144,19 @@ export default class MessageView extends Vue {
     }
 
     async getMusic() {
+
+        const audio = document.getElementById('audio') as HTMLAudioElement
+        console.log(audio)
         // 1398283847
         console.log(789798798)
-        fetch(`music/song/media/outer/url?id=${1456890009}.mp3`)
-        Axios.get(`music/song/media/outer/url?id=${1456890009}.mp3`)
+        const res = await fetch(`music/song/media/outer/url?id=${1456890009}.mp3`)
+        const blob = await res.blob();
+        console.log(blob)
+        const blobUrl = URL.createObjectURL(blob);
+        console.log(blobUrl)
+        audio.src = blobUrl
+        console.log(323232)
 
-        const aaa = Axios.create({
-            baseURL: '/music',
-        })
-
-        aaa.get(`/song/media/outer/url?id=${1456890009}.mp3`)
-        const res = await musicRequest.get(`/song/media/outer/url?id=${1456890009}.mp3`)
-        console.log(res)
-        console.log(789798798)
     }
 
     async queryMusicList() {
