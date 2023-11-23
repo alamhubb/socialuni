@@ -15,6 +15,9 @@
                 <div></div>
 
                 <div>
+                    <el-slider v-model="musicProcss" @change="musicChange" :max="muscMax"></el-slider>
+                </div>
+                <div>
                     <main class="music">
                         <div class="music-button">
                             <!--                            <i @click="isChangeLike" v-if="!isLike" title="收藏" class="mdi mdi-star-outline"></i>-->
@@ -35,7 +38,7 @@
                         创建
                     </el-button>
                     <div>
-                        <audio ref="audio" autoplay muted controls id="audio"></audio>
+                        <audio ref="audioPlayer" autoplay muted controls id="audio" src="https://music.163.com/song/media/outer/url?id=1456890009.mp3"></audio>
 
                         <audio id="localVideo" autoplay muted controls></audio>
                         <audio id="remoteVideo" autoplay controls></audio>
@@ -120,6 +123,9 @@ let localVideo = null
 export default class MessageView extends Vue {
     tableData = []
 
+    musicProcss = 0
+    muscMax = 0
+
     mounted() {
         localVideo = document.getElementById('localVideo');
         WebsocketWebRtcUtil.remoteVideo = document.getElementById('remoteVideo');
@@ -132,31 +138,40 @@ export default class MessageView extends Vue {
         }
 
         this.init()
-        this.getMusic()
+        // this.getMusic()
     }
 
     created() {
-        this.getMusic()
+        // this.getMusic()
     }
 
     async init() {
+        this.$refs.audioPlayer.onloadedmetadata = () => {
+            this.muscMax = Math.ceil(this.$refs.audioPlayer.duration)
+        };
 
     }
 
-    async getMusic() {
-        const audio = new Audio('https://music.163.com/song/media/outer/url?id=1456890009.mp3')
+    audioPlayer = null
 
+    async getMusic() {
+/*        this.audioPlayer = audioPlayer
 
         console.log(6666)
-        console.log(audio)
+        console.log(audioPlayer)
 
-        audio.oncanplaythrough = (async (ev) => {
-                console.log(ev)
-            }
-        )
-        console.log(77777)
 
-        audio.play()
+        this.audioPlayer.onerror = (e) => {
+            console.log(e);
+        };
+        this.audioPlayer.canplay = (e) => {
+            console.log(e);
+        };
+        this.audioPlayer.canplaythrough = (e) => {
+            console.log(e);
+        };
+
+        audioPlayer.play()*/
 
         // 1398283847
         /*console.log(789798798)
@@ -284,6 +299,13 @@ export default class MessageView extends Vue {
         }
     }
 
+    musicChange(value) {
+        console.log(value)
+        this.$refs.audioPlayer.currentTime = value
+        this.$refs.audioPlayer.play()
+        console.log(this.$refs.audioPlayer.currentTime)
+        console.log(888)
+    }
 
     deleteYun111() {
         SocialuniMusicAPI.updateMusicAPI(socialuniMusicStore.channelName, {
