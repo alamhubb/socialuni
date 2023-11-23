@@ -37,20 +37,20 @@ export default class MessageView extends Vue {
 
 // 获取本地媒体流
   async start() {
-    const audio = new Audio();
+    /*const audio = new Audio();
     localStream = await navigator.mediaDevices.getUserMedia({video: false, audio: true});
     WebsocketWebRtcUtil.easyWebRTC.pushStream(localStream)
 
     audio.srcObject = localStream
-    audio.play()
+    audio.play()*/
 
-    /*const audio = new Audio(test1);
+    const audio = new Audio(test1);
     audio.oncanplaythrough = (async () => {
           localStream = audio.captureStream();
           WebsocketWebRtcUtil.easyWebRTC.pushStream(localStream)
         }
     )
-    audio.play()*/
+    audio.play()
     /*try {
         localStream = await navigator.mediaDevices.getUserMedia({video: false, audio: true});
         console.log(localVideo)

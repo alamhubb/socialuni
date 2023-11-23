@@ -19,11 +19,6 @@ export default class SocialuniAppService {
         })
 // 设置远程视频流到video元素
         WebsocketWebRtcUtil.easyWebRTC.ontrack((event) => {
-            console.log(45454545)
-            console.log(event)
-            console.log(event.streams[0])
-            console.log(event.streams[0].getTracks())
-            console.log(event.streams[0].getTracks().length)
             WebsocketWebRtcUtil.remoteVideo.srcObject = event.streams[0];
         })
 

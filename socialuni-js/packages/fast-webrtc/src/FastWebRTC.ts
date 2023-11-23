@@ -39,6 +39,9 @@ export default class FastWebRTC {
 
 
         fastWebRTC.peerConnection.onicecandidate = (event) => {
+            console.log('等候熬了')
+            console.log(event)
+            console.log(event.candidate)
             websocket.send({'iceCandidate': event.candidate});
         }
 
