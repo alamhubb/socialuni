@@ -14,14 +14,14 @@
       <div>
         <div></div>
 
-        如果为roleid = ower或者admin，显示， 如果musicurl有值显示， 否则不显示
+        <!--        如果为roleid = ower或者admin，显示， 如果musicurl有值显示， 否则不显示-->
 
 
-        <div v-if="playerInfo && $SocialuniMusicRoleId.">
+        <div v-if="playerInfo?.musicUrl">
           <div>
             <el-slider v-model="musicProcss" @change="musicChange" :max="muscMax"></el-slider>
           </div>
-          <div>
+          <div v-if="SocialuniMusicRoleId.hasOperateAuthList(playerInfo.roleId)">
             <main class="music">
               <div class="music-button">
                 <!--                            <i @click="isChangeLike" v-if="!isLike" title="收藏" class="mdi mdi-star-outline"></i>-->

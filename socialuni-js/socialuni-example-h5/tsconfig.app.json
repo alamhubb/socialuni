@@ -5,6 +5,8 @@
   "compilerOptions": {
     "composite": true,
     "baseUrl": ".",
+    "experimentalDecorators": true,
+    "useDefineForClassFields": true,
     "strictNullChecks": false,
     "noImplicitAny": false,
     "paths": {

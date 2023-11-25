@@ -9,7 +9,7 @@ import CommonEventUtil from "socialuni-native-util/src/util/CommonEventUtil";
 import SocialuniImEventKey from "socialuni-im-api/src/constant/SocialuniMusicEventConst";
 import MessageViewParams from "socialuni-im-sdk/src/model/MessageViewParams";
 import AgoraRTC from "agora-rtc-sdk-ng";
-import {SocialuniMusicRoleId} from "./constant/SocialuniMusicRoleId";
+import SocialuniMusicRoleId from "./constant/SocialuniMusicRoleId";
 
 const agoraEvents = ['channel-media-relay-event',
     'channel-media-relay-state',
