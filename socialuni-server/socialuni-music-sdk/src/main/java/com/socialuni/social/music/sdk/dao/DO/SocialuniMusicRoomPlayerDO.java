@@ -25,14 +25,14 @@ public class SocialuniMusicRoomPlayerDO extends SocialuniContentBaseDO {
 
     String musicUrl;
     //默认0
-    Date timestamp;
-    Integer currentTime;
+    Date playingTimeStamp;
+    Integer playingTime;
     //是否暂停了, 默认false
     Boolean playing;
 
     public SocialuniMusicRoomPlayerDO() {
         this.playing = Boolean.FALSE;
-        this.timestamp = new Date();
-        this.currentTime = 0;
+        this.playingTimeStamp = new Date();
+        this.playingTime = 0;
     }
 }

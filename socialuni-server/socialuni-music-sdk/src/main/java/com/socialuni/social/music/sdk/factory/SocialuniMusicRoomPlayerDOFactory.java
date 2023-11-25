@@ -18,11 +18,11 @@ public class SocialuniMusicRoomPlayerDOFactory {
     public static SocialuniMusicRoomPlayerDO createSocialuniMusicRoomPlayerDO(@Valid SocialuniPlayMusicQO socialuniPlayMusicQO, SocialuniMusicRoomPlayerDO socialuniMusicRoomPlayerDO) {
         socialuniMusicRoomPlayerDO.setMusicUrl(socialuniPlayMusicQO.getMusicUrl());
 
-        if (ObjectUtil.isNotEmpty(socialuniPlayMusicQO.getTimestamp())) {
-            socialuniMusicRoomPlayerDO.setTimestamp(socialuniPlayMusicQO.getTimestamp());
+        if (ObjectUtil.isNotEmpty(socialuniPlayMusicQO.getPlayingTimeStamp())) {
+            socialuniMusicRoomPlayerDO.setPlayingTimeStamp(socialuniPlayMusicQO.getPlayingTimeStamp());
         }
-        if (ObjectUtil.isNotEmpty(socialuniPlayMusicQO.getCurrentTime())) {
-            socialuniMusicRoomPlayerDO.setCurrentTime(socialuniPlayMusicQO.getCurrentTime());
+        if (ObjectUtil.isNotEmpty(socialuniPlayMusicQO.getPlayingTime())) {
+            socialuniMusicRoomPlayerDO.setPlayingTime(socialuniPlayMusicQO.getPlayingTime());
         }
         if (ObjectUtil.isNotEmpty(socialuniPlayMusicQO.getPause())) {
             socialuniMusicRoomPlayerDO.setPlaying(socialuniPlayMusicQO.getPause());

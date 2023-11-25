@@ -31,6 +31,7 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import java.text.MessageFormat;
 import java.util.*;
 import java.util.concurrent.Executors;
@@ -63,7 +64,7 @@ public class SocialuniMusicController {
     //播放暂停功能，你咋知道播放完了没，通过时间和前端判断
     //协同编辑框架
     @GetMapping("queryMusicRoomPlayerInfo/{channel}")
-    public ResultRO<SocialuniMusicRoomPlayerInfoRO> queryMusicRoomInfo(@PathVariable("channel") String channel) {
+    public ResultRO<SocialuniMusicRoomPlayerInfoRO> queryMusicRoomInfo(@PathVariable("channel") @Valid @NotBlank String channel) {
 
         Integer chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(channel);
 
@@ -272,14 +273,14 @@ public class SocialuniMusicController {
 
 
         if (socialuniMusicRoomPlayerDO.getPlaying()) {
-            Date updateTime = socialuniMusicRoomPlayerDO.getUpdateTime();
+            Date playingTimeStamp = socialuniMusicRoomPlayerDO.getPlayingTimeStamp();
             //获取时间戳
-            long timestamp = updateTime.getTime();
+            long timestamp = playingTimeStamp.getTime();
             //获取歌曲播放节点
-            long currentTime = socialuniMusicRoomPlayerDO.getCurrentTime() * 1000;
+            long playingTime = socialuniMusicRoomPlayerDO.getPlayingTime() * 1000;
             //获取多少秒后修改状态为暂停
 
-            long afterTime = timestamp - currentTime;
+            long afterTime = timestamp - playingTime;
 
             Integer sequence = socialuniMusicRoomPlayerDO.getSequenceNum();
 

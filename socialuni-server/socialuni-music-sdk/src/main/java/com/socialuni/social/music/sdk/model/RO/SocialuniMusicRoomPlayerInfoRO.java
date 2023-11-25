@@ -8,8 +8,8 @@ import java.util.Date;
 public class SocialuniMusicRoomPlayerInfoRO {
     String musicUrl;
     //默认0
-    Date timestamp;
-    Integer currentTime;
+    Date playingTimestamp;
+    Integer playingTime;
     //是否暂停了, 默认false
     Boolean playing;
 }
