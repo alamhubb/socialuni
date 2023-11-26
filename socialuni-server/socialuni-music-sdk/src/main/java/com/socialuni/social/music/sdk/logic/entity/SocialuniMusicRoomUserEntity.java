@@ -30,9 +30,7 @@ public class SocialuniMusicRoomUserEntity {
     @Resource
     SocialuniMusicRoomUserManage socialuniMusicRoomUserManage;
 
-    public SocialuniMusicOperateCheckRO getOrCreateMusicRoomUser(String channel) {
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
-
+    public SocialuniMusicOperateCheckRO getOrCreateMusicRoomUser(String channel,Integer mineUserId) {
         Integer chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(channel);
 
         SocialuniChatUserDO socialuniChatUserDO = socialuniChatUserCheck.CheckUserInChat(chatId, mineUserId);

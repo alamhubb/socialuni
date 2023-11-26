@@ -25,7 +25,9 @@ public class SocialuniMusicOperateCheck {
     SocialuniMusicRoomUserEntity socialuniMusicRoomUserEntity;
 
     public SocialuniMusicOperateCheckRO checkRoleId(String channel) {
-        SocialuniMusicOperateCheckRO socialuniMusicOperateCheckRO = socialuniMusicRoomUserEntity.getOrCreateMusicRoomUser(channel);
+        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+
+        SocialuniMusicOperateCheckRO socialuniMusicOperateCheckRO = socialuniMusicRoomUserEntity.getOrCreateMusicRoomUser(channel, mineUserId);
 
         String roleId = socialuniMusicOperateCheckRO.getRoleId();
 
