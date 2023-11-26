@@ -11,7 +11,6 @@ import com.socialuni.social.common.api.utils.JsonUtil;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.im.dao.repository.ChatUserRepository;
 import com.socialuni.social.im.enumeration.SocialuniChatOperateType;
-import com.socialuni.social.music.sdk.check.SocialuniMusicOperateCheck;
 import com.socialuni.social.music.sdk.model.RO.SocialuniMusicOperateCheckRO;
 import com.socialuni.social.music.sdk.dao.DO.SocialuniMusicRoomDO;
 import com.socialuni.social.music.sdk.model.QO.AgoraPlayMusicQO;
@@ -137,7 +136,7 @@ public class SocialuniMusicAgoraController {
 
     @PostMapping("updateMusic/{channel}")
     public ResultRO<Void> updateMusic(@PathVariable("channel") String channel, @RequestBody AgoraUpdateMusicQO updateMusicQO) {
-        this.sequence++;
+        /*this.sequence++;
 
         SocialuniMusicOperateCheckRO checkResult = socialuniMusicOperateCheck.checkRoleId(channel);
 
@@ -216,7 +215,7 @@ public class SocialuniMusicAgoraController {
             System.out.println(httpResult.toString());
 //            log.info(httpResult.getErrMsg());
 //            log.info(httpResult.getErrCode().toString());
-        }
+        }*/
         return ResultRO.success();
     }
 
@@ -234,14 +233,12 @@ public class SocialuniMusicAgoraController {
     @Resource
     ChatUserRepository chatUserRepository;
 
-    @Resource
-    SocialuniMusicOperateCheck socialuniMusicOperateCheck;
 
 
     @PostMapping("playMusic/{channel}")
     public ResultRO<Void> playMusic(@PathVariable("channel") String channel, @RequestBody @Valid SocialuniPlayMusicQO playMusicQO) {
 
-        SocialuniMusicOperateCheckRO checkResult = socialuniMusicOperateCheck.checkRoleId(channel);
+        /*SocialuniMusicOperateCheckRO checkResult = socialuniMusicOperateCheck.checkRoleId(channel);
 
 
         String queryUrl = "v1/projects/{0}/cloud-player/players";
@@ -262,7 +259,7 @@ public class SocialuniMusicAgoraController {
                 .body(JSONUtil.toJsonStr(queryFilterParam))
                 .header("Authorization", authorizationHeader).execute().body();
 
-       /* AgoraPlayMusicRO agoraPlayMusicRO = JsonUtil.parse(httpResult, AgoraPlayMusicRO.class);
+       *//* AgoraPlayMusicRO agoraPlayMusicRO = JsonUtil.parse(httpResult, AgoraPlayMusicRO.class);
 
         log.info(filterQueryHttpResult);
 
@@ -274,7 +271,7 @@ public class SocialuniMusicAgoraController {
 
         String deleteHttpResult = HttpRequest.delete(fullQueryUrl)
                 .body(JSONUtil.toJsonStr(queryFilterParam))
-                .header("Authorization", authorizationHeader).execute().body();*/
+                .header("Authorization", authorizationHeader).execute().body();*//*
 
 
         String postUrl = "https://api.sd-rtn.com/{0}/v1/projects/{1}/cloud-player/players";
@@ -346,7 +343,7 @@ public class SocialuniMusicAgoraController {
             System.out.println(httpResult.toString());
 //            log.info(httpResult.getErrMsg());
 //            log.info(httpResult.getErrCode().toString());
-        }
+        }*/
 
         return ResultRO.success();
     }
