@@ -77,9 +77,9 @@ public class SocialuniMusicController {
     //协同编辑框架
     @GetMapping("queryMusicRoomPlayerInfo/{channel}")
     public ResultRO<SocialuniMusicRoomInfoRO> queryMusicRoomInfo(@PathVariable("channel") @Valid @NotBlank String channel) {
-        Integer mineUserId
+        Integer mineUserId = SocialuniUserUtil.getMineUserIdAllowNull();
 
-        SocialuniMusicOperateCheckRO checkResult = socialuniMusicRoomUserEntity.getOrCreateMusicRoomUser(channel);
+        SocialuniMusicOperateCheckRO checkResult = socialuniMusicRoomUserEntity.getOrCreateMusicRoomUser(channel, mineUserId);
 
         SocialuniMusicRoomInfoRO socialuniMusicRoomPlayerInfoRO = SocialuniMusicRoomPlayerInfoROFactory.createSocialuniMusicRoomInfoRO(checkResult.getSocialuniMusicRoomDO(), checkResult.getRoleId());
 

@@ -3,8 +3,7 @@
     <div class="w200 bd-radius shadow h100p flex-none">
       <socialuni-chat-view-h5></socialuni-chat-view-h5>
     </div>
-
-    <audio ref="audioPlayer" :src="playerInfo?.musicUrl"></audio>
+    <audio ref="audioPlayer" :src="musicRoomInfo?.musicUrl"></audio>
 
     <div class="flex-1 overflow-hidden h100p bg-white ml-sm">
       <!--            <div class="w100p">
@@ -19,11 +18,12 @@
         <!--        如果为roleid = ower或者admin，显示， 如果musicurl有值显示， 否则不显示-->
 
 
-        <div v-if="playerInfo?.musicUrl">
+        {{ realPlayingValue }}--{{ muscMax }}
+        <div v-if="musicRoomInfo?.musicUrl">
           <div>
-            <el-slider v-model="musicProcss" @change="musicChange" :max="muscMax"></el-slider>
+            <el-slider :model-value="realPlayingValue" @change="musicChange" :max="muscMax"></el-slider>
           </div>
-          <div v-if="SocialuniMusicRoleId.hasOperateAuthList(playerInfo.roleId)">
+          <div v-if="SocialuniMusicRoleId.hasOperateAuthList.includes(musicRoomInfo.roleId)">
             <main class="music">
               <div class="music-button">
                 <!--                            <i @click="isChangeLike" v-if="!isLike" title="收藏" class="mdi mdi-star-outline"></i>-->
@@ -120,25 +120,26 @@ import SocialuniImEventKey from "socialuni-im-api/src/constant/SocialuniMusicEve
 import socialuniMusicStore from "socialuni-music-sdk/src/store/SocialuniMusicStore";
 import WebsocketWebRtcUtil from "socialuni-api-base/src/websocket/WebsocketWebRtcUtil";
 import test1 from './test1.mp3'
-import type SocialuniMusicRoomPlayerInfoRO from "socialuni-music-sdk/src/model/SocialuniMusicRoomPlayerInfoRO";
 import SocialuniMusicRoleId from "socialuni-music-sdk/src/constant/SocialuniMusicRoleId";
 
 let localStream
 let localVideo = null
 
 @Component({
-  computed: {
-    SocialuniMusicRoleId() {
-      return SocialuniMusicRoleId
-    }
-  },
   components: {SocialuniChatViewH5, SocialuniMsgViewH5}
 })
 export default class MessageView extends Vue {
   tableData = []
 
-  musicProcss = 0
   muscMax = 0
+
+  get SocialuniMusicRoleId() {
+    return SocialuniMusicRoleId
+  }
+
+  get musicRoomInfo() {
+    return socialuniMusicStore.musicRoomInfo
+  }
 
   mounted() {
     localVideo = document.getElementById('localVideo');
@@ -157,8 +158,6 @@ export default class MessageView extends Vue {
   }
 
 
-  playerInfo: SocialuniMusicRoomPlayerInfoRO = null
-
   async queryMusicRoomPlayer() {
     const res = await SocialuniMusicAPI.queryMusicRoomPlayerInfoAPI(socialuniMusicStore.channelName)
   }
@@ -169,9 +168,8 @@ export default class MessageView extends Vue {
 
   async init() {
     this.$refs.audioPlayer.onloadedmetadata = () => {
-      this.muscMax = Math.ceil(this.$refs.audioPlayer.duration)
+      this.muscMax = Math.ceil(this.$refs.audioPlayer.duration * 100)
     };
-
   }
 
   audioPlayer = null
@@ -321,9 +319,18 @@ export default class MessageView extends Vue {
     }
   }
 
+  get realPlayingValue() {
+    return socialuniMusicStore.realPlayingValue
+  }
+
+  //设置当前时间和播放时间
   musicChange(value) {
+    //需要获取当前时间距离播放时间的时间点，然后设置播放进度
+
     console.log(value)
-    this.$refs.audioPlayer.currentTime = value
+    //秒，
+    //所以播放时间也要为秒
+    this.$refs.audioPlayer.currentTime = value / 100
     this.$refs.audioPlayer.play()
     console.log(this.$refs.audioPlayer.currentTime)
     console.log(888)
