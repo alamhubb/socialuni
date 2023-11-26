@@ -18,6 +18,7 @@ public class SocialuniContentBaseDO extends SocialuniUpdateTimeContentBaseDO imp
     private Integer sequenceNum;
 
     public SocialuniContentBaseDO() {
+        this.sequenceNum = 0;
         this.status = SocialuniCommonStatus.enable;
     }
 

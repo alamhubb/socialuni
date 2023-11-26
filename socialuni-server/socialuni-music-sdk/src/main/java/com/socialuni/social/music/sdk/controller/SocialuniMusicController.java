@@ -9,9 +9,12 @@ import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.im.dao.repository.ChatUserRepository;
 import com.socialuni.social.im.enumeration.SocialuniChatOperateType;
+import com.socialuni.social.im.logic.check.SocialuniChatUserCheck;
 import com.socialuni.social.music.sdk.check.SocialuniMusicOperateCheck;
+import com.socialuni.social.music.sdk.dao.DO.SocialuniMusicRoomUserDO;
 import com.socialuni.social.music.sdk.factory.SocialuniMusicRoomPlayerDOFactory;
 import com.socialuni.social.music.sdk.factory.SocialuniMusicRoomPlayerInfoROFactory;
+import com.socialuni.social.music.sdk.logic.manage.SocialuniMusicRoomUserManage;
 import com.socialuni.social.music.sdk.model.RO.SocialuniMusicOperateCheckRO;
 import com.socialuni.social.music.sdk.dao.DO.SocialuniMusicRoomPlayerDO;
 import com.socialuni.social.music.sdk.model.QO.AgoraPlayMusicQO;
@@ -22,6 +25,7 @@ import com.socialuni.social.music.sdk.model.RO.SocialuniMusicInitDataRO;
 import com.socialuni.social.music.sdk.model.RO.SocialuniMusicRoomPlayerInfoRO;
 import com.socialuni.social.music.sdk.utils.SocialuniMusicOperateRecordDOUtils;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import io.agora.media.RtcTokenBuilder2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.*;
@@ -54,6 +58,11 @@ public class SocialuniMusicController {
     // 客户密钥
     final static String customerSecret = "999c0689cc794128b450c1d702f0e2f3";
 
+    @Resource
+    SocialuniChatUserCheck socialuniChatUserCheck;
+    @Resource
+    SocialuniMusicRoomUserManage socialuniMusicRoomUserManage;
+
     //支持切歌功能，怎么做呢，停止目前播放的，然后播放一个新的
     //如果存在， 查询需要等10秒
 
@@ -66,17 +75,21 @@ public class SocialuniMusicController {
     @GetMapping("queryMusicRoomPlayerInfo/{channel}")
     public ResultRO<SocialuniMusicRoomPlayerInfoRO> queryMusicRoomInfo(@PathVariable("channel") @Valid @NotBlank String channel) {
 
-        Integer chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(channel);
+        //未加入房间，报错，
+        //加入房间没权限，显示正常东西
+        //加入房间有权限，显示播放器
+        Integer mineId = SocialuniUserUtil.getMineUserIdNotNull();
 
+        SocialuniMusicRoomUserDO socialuniMusicRoomUserDO = socialuniMusicRoomUserManage.getOrCreateMusicRoomDO(channel);
+
+        Integer chatId = socialuniMusicRoomUserDO.getRoomId();
 
         SocialuniMusicRoomPlayerDO socialuniMusicRoomPlayerDO = SocialuniRepositoryFacade.findByCustomField("roomId", chatId, SocialuniMusicRoomPlayerDO.class);
 
         SocialuniMusicRoomPlayerInfoRO socialuniMusicRoomPlayerInfoRO = new SocialuniMusicRoomPlayerInfoRO();
         if (socialuniMusicRoomPlayerDO != null) {
-            socialuniMusicRoomPlayerInfoRO = SocialuniMusicRoomPlayerInfoROFactory.createSocialuniMusicRoomPlayerInfoRO(socialuniMusicRoomPlayerDO);
+            socialuniMusicRoomPlayerInfoRO = SocialuniMusicRoomPlayerInfoROFactory.createSocialuniMusicRoomPlayerInfoRO(socialuniMusicRoomPlayerDO, mineId);
         }
-
-
         return ResultRO.success(socialuniMusicRoomPlayerInfoRO);
     }
 
@@ -250,7 +263,7 @@ public class SocialuniMusicController {
 
 
     @PostMapping("playMusic/{channel}")
-    public ResultRO<Void> playMusic(@PathVariable("channel") String channel, @RequestBody @Valid SocialuniPlayMusicQO playMusicQO) {
+    public ResultRO<SocialuniMusicRoomPlayerInfoRO> playMusic(@PathVariable("channel") String channel, @RequestBody @Valid SocialuniPlayMusicQO playMusicQO) {
 
         SocialuniMusicOperateCheckRO checkResult = socialuniMusicOperateCheck.checkRoleId(channel);
 
@@ -302,6 +315,8 @@ public class SocialuniMusicController {
         }
 
 
+        SocialuniMusicRoomPlayerInfoRO socialuniMusicRoomPlayerInfoRO = SocialuniMusicRoomPlayerInfoROFactory.createSocialuniMusicRoomPlayerInfoRO(socialuniMusicRoomPlayerDO, checkResult.getMineUserId());
+
         /*log.info(fullUrl);
 //        String httpResult = restTemplate.postForEntity("https://api.sd-rtn.com/cn/v1/projects/5e681410a7434ce9bba3e268226ce537/cloud-player/players", httpEntity, String.class).getBody();
 //        AgoraPlayMusicRO httpResult = restTemplate.postForEntity(fullUrl, httpEntity, AgoraPlayMusicRO.class).getBody();
@@ -320,7 +335,7 @@ public class SocialuniMusicController {
 //            log.info(httpResult.getErrCode().toString());
         }
 */
-        return ResultRO.success();
+        return ResultRO.success(socialuniMusicRoomPlayerInfoRO);
     }
 
 }

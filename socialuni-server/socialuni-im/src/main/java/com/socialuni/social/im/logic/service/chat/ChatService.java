@@ -15,6 +15,7 @@ import com.socialuni.social.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.im.dao.repository.SocialuniChatRepository;
 import com.socialuni.social.im.dao.repository.ChatUserRepository;
 import com.socialuni.social.im.logic.domain.ChatQueryDomain;
+import com.socialuni.social.im.logic.entity.SocialuniChatEntity;
 import com.socialuni.social.im.logic.foctory.SocialChatROFactory;
 import com.socialuni.social.im.api.model.RO.ChatRO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
@@ -22,6 +23,8 @@ import com.socialuni.social.im.logic.foctory.SocialuniChatUserDOFactory;
 import com.socialuni.social.im.api.model.QO.chat.ChatReadVO;
 import com.socialuni.social.im.api.model.QO.chat.ChatRemoveVO;
 import com.socialuni.social.im.api.model.QO.chat.OpenChatVO;
+import com.socialuni.social.im.logic.manage.SocialuniChatManage;
+import com.socialuni.social.im.logic.manage.SocialuniChatUserManage;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
@@ -141,6 +144,28 @@ public class ChatService {
         } else {
             throw new SocialParamsException("错误的会话标识");
         }
+    }
+
+    @Resource
+    SocialuniChatUserManage socialuniChatUserManage;
+
+    @Resource
+    SocialuniChatEntity socialuniChatEntity;
+
+    public ResultRO<Void> joinChat(String chatUid) {
+        Integer chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(chatUid);
+
+        Integer mineId = SocialuniUserUtil.getMineUserIdNotNull();
+
+        socialuniChatEntity.getJoinOrCreateChatUser(chatId, mineId);
+
+        SocialuniChatUserDO chatUserDO = chatUserRepository.findOneByChatIdAndUserId(chatId, mineId);
+
+        if (chatUserDO != null) {
+            throw new SocialSystemException("您已经加入了群聊");
+        }
+
+        return null;
     }
 
 

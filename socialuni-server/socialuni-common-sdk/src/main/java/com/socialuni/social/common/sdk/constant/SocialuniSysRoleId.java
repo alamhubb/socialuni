@@ -16,5 +16,4 @@ public class SocialuniSysRoleId {
     public final static List<String> hasOperateAuthList = Arrays.asList(SocialuniSysRoleId.sys, SocialuniSysRoleId.admin);
 
 
-
 }

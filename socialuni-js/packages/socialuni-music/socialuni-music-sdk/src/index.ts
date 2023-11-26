@@ -10,6 +10,7 @@ import SocialuniImEventKey from "socialuni-im-api/src/constant/SocialuniMusicEve
 import MessageViewParams from "socialuni-im-sdk/src/model/MessageViewParams";
 import AgoraRTC from "agora-rtc-sdk-ng";
 import SocialuniMusicRoleId from "./constant/SocialuniMusicRoleId";
+import SocialuniMusicAPI from "./api/SocialuniMusicAPI";
 
 const agoraEvents = ['channel-media-relay-event',
     'channel-media-relay-state',
@@ -54,9 +55,10 @@ class SocialuniMusicPlugin implements SocialuniPlugin {
           }*/
         console.log('执行订阅')
         CommonEventUtil.on(SocialuniImEventKey.socialuniImPageInit, async (params: MessageViewParams) => {
+            socialuniMusicStore.setChannelName(params.chatId)
+            SocialuniMusicAPI.queryMusicRoomPlayerInfoAPI(socialuniMusicStore.channelName)
             /*await socialuniMusicStore.getMusicInitDataAction()
             client.leave()
-            socialuniMusicStore.setChannelName(params.chatId)
             await socialuniMusicStore.getMusicTokenAction(params.chatId)
             console.log('加入频道')
             await client.join(socialuniMusicStore.appId, params.chatId, socialuniMusicStore.musicToken)

@@ -51,21 +51,8 @@ public class ChatQueryDomain {
     //初始化和查询chat列表触发的
     public List<ChatRO> getUserChats(SocialuniUserDo user) {
 
-        SocialuniChatDO ownerChat = socialuniChatEntity.getOrCreateUserPersonalChat(user);
+        socialuniChatEntity.createUserChats(user);
 
-
-        //判断用户是否加入了默认的聊天群
-
-        List<String> groups = SocialuniAppConfig.getAppConfig().getDefaultChatGroups();
-
-        //什么时候创建这个默认群呢
-        //启动的时候
-        //修改的时候
-
-        //需要将用户加入到这些群聊中
-        for (String group : groups) {
-            SocialuniChatDO socialuniChatDO = socialuniChatEntity.getOrCreateSystemChatUser(group, user);
-        }
 
         //未登录的情况只插叙你官方的chats
         List<SocialuniChatUserDO> chatUsers = chatUserRepository.findByStatusAndUserIdOrderByUpdateTimeDesc(ChatUserStatus.enable, user.getUserId());

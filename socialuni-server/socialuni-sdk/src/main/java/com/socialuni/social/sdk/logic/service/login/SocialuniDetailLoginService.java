@@ -3,6 +3,7 @@ package com.socialuni.social.sdk.logic.service.login;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
+import com.socialuni.social.im.logic.entity.SocialuniChatEntity;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.logic.service.SocialuniLoginService;
@@ -23,6 +24,9 @@ public class SocialuniDetailLoginService {
     @Resource
     SocialuniLoginService socialuniLoginService;
 
+    @Resource
+    SocialuniChatEntity socialuniChatEntity;
+
     //提供给借用社交联盟实现微信qq渠道登录的开发者， 不需要支持社交联盟登录，社交联盟登录是前台跳转登录返回信息，不走后台
     @Transactional
     public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> providerLogin(SocialProviderLoginQO loginQO) {
@@ -31,11 +35,14 @@ public class SocialuniDetailLoginService {
 
         Integer mineUserId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(socialLoginRO1.getData().getUser().getId());
 
+        SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getAndCheckUserNotNull(mineUserId);
 
-        SocialuniMineUserDetailRO socialuniMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUserId);
+        SocialuniMineUserDetailRO socialuniMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(socialuniUserDo);
 
         SocialLoginRO<SocialuniMineUserDetailRO> socialLoginRO = new SocialLoginRO(socialLoginRO1.getData().getToken(), socialuniMineUserDetailRO);
 
+        //用户加入
+        socialuniChatEntity.createUserChats(socialuniUserDo);
 
         return ResultRO.success(socialLoginRO);
     }
@@ -55,9 +62,14 @@ public class SocialuniDetailLoginService {
 
         Integer mineUserId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(socialLoginRO1.getData().getUser().getId());
 
-        SocialuniMineUserDetailRO socialuniMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUserId);
+        SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getAndCheckUserNotNull(mineUserId);
+
+        SocialuniMineUserDetailRO socialuniMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(socialuniUserDo);
 
         SocialLoginRO<SocialuniMineUserDetailRO> socialLoginRO = new SocialLoginRO(socialLoginRO1.getData().getToken(), socialuniMineUserDetailRO);
+
+        //用户加入
+        socialuniChatEntity.createUserChats(socialuniUserDo);
         return ResultRO.success(socialLoginRO);
     }
 }

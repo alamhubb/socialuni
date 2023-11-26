@@ -5,6 +5,7 @@ import com.socialuni.social.music.sdk.dao.DO.SocialuniMusicRoomPlayerDO;
 import com.socialuni.social.music.sdk.model.QO.SocialuniPlayMusicQO;
 
 import javax.validation.Valid;
+import java.util.Date;
 
 public class SocialuniMusicRoomPlayerDOFactory {
     public static SocialuniMusicRoomPlayerDO createSocialuniMusicRoomPlayerDO(Integer roomId) {
@@ -20,11 +21,19 @@ public class SocialuniMusicRoomPlayerDOFactory {
 
         if (ObjectUtil.isNotEmpty(socialuniPlayMusicQO.getPlayingTimeStamp())) {
             socialuniMusicRoomPlayerDO.setPlayingTimeStamp(socialuniPlayMusicQO.getPlayingTimeStamp());
+        } else {
+            socialuniMusicRoomPlayerDO.setPlayingTimeStamp(new Date());
         }
+
         if (ObjectUtil.isNotEmpty(socialuniPlayMusicQO.getPlayingTime())) {
             socialuniMusicRoomPlayerDO.setPlayingTime(socialuniPlayMusicQO.getPlayingTime());
+        } else {
+            socialuniMusicRoomPlayerDO.setPlayingTime(0);
         }
-        if (ObjectUtil.isNotEmpty(socialuniPlayMusicQO.getPause())) {
+        //如果为空默认为播放
+        if (ObjectUtil.isEmpty(socialuniPlayMusicQO.getPause())) {
+            socialuniMusicRoomPlayerDO.setPlaying(true);
+        } else {
             socialuniMusicRoomPlayerDO.setPlaying(socialuniPlayMusicQO.getPause());
         }
 
