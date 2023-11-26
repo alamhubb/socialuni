@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class SocialuniMusicRoomPlayerInfoRO {
+public class SocialuniMusicRoomInfoRO {
     String musicRoleId;
     String musicUrl;
     //默认0

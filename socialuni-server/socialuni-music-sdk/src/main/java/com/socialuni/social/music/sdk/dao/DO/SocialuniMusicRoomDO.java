@@ -10,7 +10,7 @@ import javax.persistence.UniqueConstraint;
 import java.util.Date;
 
 @Entity
-@Table(name = "s_music_room_player",
+@Table(name = "s_music_room",
         indexes = {
                 @Index(columnList = "status")
         },
@@ -20,7 +20,7 @@ import java.util.Date;
         }
 )
 @Data
-public class SocialuniMusicRoomPlayerDO extends SocialuniContentBaseDO {
+public class SocialuniMusicRoomDO extends SocialuniContentBaseDO {
     Integer roomId;
 
     String musicUrl;
@@ -30,7 +30,7 @@ public class SocialuniMusicRoomPlayerDO extends SocialuniContentBaseDO {
     //是否暂停了, 默认false
     Boolean playing;
 
-    public SocialuniMusicRoomPlayerDO() {
+    public SocialuniMusicRoomDO() {
         this.playing = Boolean.FALSE;
         this.playingTimeStamp = new Date();
         this.playingTime = 0;

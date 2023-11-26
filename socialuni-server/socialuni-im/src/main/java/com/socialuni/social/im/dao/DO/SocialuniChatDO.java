@@ -3,6 +3,7 @@ package com.socialuni.social.im.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
+import com.socialuni.social.im.enumeration.ChatOpenType;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -39,5 +40,6 @@ public class SocialuniChatDO extends SocialuniUnionContentBaseDO implements Seri
 
     public SocialuniChatDO(String type) {
         this.setType(type);
+        this.openType = ChatOpenType.openApply;
     }
 }
