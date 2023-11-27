@@ -1,7 +1,8 @@
-export interface SocialuniMusicRoomPlayerInfoRO {
+export interface SocialuniMusicRoomInfoRO {
     musicUrl: String
-    timestamp: Date
-    currentTime: number
+    playingTimestamp: Date
+    //单位秒
+    playingTime: number
     playing: boolean
-    roleId: string
+    musicRoleId: string
 }
