@@ -3,10 +3,11 @@
     <div class="w200 bd-radius shadow h100p flex-none">
       <socialuni-chat-view-h5></socialuni-chat-view-h5>
     </div>
-     {{ fasfsf}}-- 123
-    <audio ref="audioPlayer" :src="musicRoomInfo?.musicUrl"></audio>
+
 
     <div class="flex-1 overflow-hidden h100p bg-white ml-sm">
+      {{musicRoomInfo?.musicUrl}}
+      <audio ref="audioPlayer" :src="musicRoomInfo?.musicUrl"></audio>
       <!--            <div class="w100p">
                       <audio id="local" :src="test1" controls="controls"
                              style="height: 200px;width: 500px;"></audio>
@@ -137,10 +138,6 @@ export default class MessageView extends Vue {
   get SocialuniMusicRoleId() {
     return SocialuniMusicRoleId
   }
-    get fasfsf() {
-        return 123
-    }
-
 
   get musicRoomInfo() {
     return socialuniMusicStore.musicRoomInfo
@@ -275,14 +272,15 @@ export default class MessageView extends Vue {
   }
 
 
-  playMusicAPI(songId) {
+  async playMusicAPI(songId) {
     const musicUrl = `https://music.163.com/song/media/outer/url?id=${songId}.mp3`;
-    SocialuniMusicAPI.playMusicAPI(socialuniMusicStore.channelName, {
+    const res = await SocialuniMusicAPI.playMusicAPI(socialuniMusicStore.channelName, {
       musicUrl: musicUrl,
       playingTimeStamp: null,
       playingTime: null,
       pause: null,
     })
+    socialuniMusicStore.setMusicRoomInfo(res.data)
     // mucisRoomStore.reqquetest(url)
   }
 

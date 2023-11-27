@@ -35,11 +35,10 @@ export class SocialuniMusicStore {
     }
 
     get realPlayingValue() {
-        return this._realPlayingValue - 140000
+        return this._realPlayingValue
     }
 
     get musicRoomInfo(): SocialuniMusicRoomInfoRO {
-        console.log(6565656)
         return this._musicRoomInfo
     }
 
