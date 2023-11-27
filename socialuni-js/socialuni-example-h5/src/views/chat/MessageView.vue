@@ -6,7 +6,7 @@
 
 
     <div class="flex-1 overflow-hidden h100p bg-white ml-sm">
-      {{musicRoomInfo?.musicUrl}}
+      {{ musicRoomInfo?.musicUrl }}
       <audio ref="audioPlayer" :src="musicRoomInfo?.musicUrl"></audio>
       <!--            <div class="w100p">
                       <audio id="local" :src="test1" controls="controls"
@@ -25,13 +25,13 @@
           <div>
             <el-slider :model-value="realPlayingValue" @change="musicChange" :max="muscMax"></el-slider>
           </div>
-          <div v-if="SocialuniMusicRoleId.hasOperateAuthList.includes(musicRoomInfo.roleId)">
+          <div v-if="SocialuniMusicRoleId.hasOperateAuthList.includes(musicRoomInfo.musicRoleId)">
             <main class="music">
               <div class="music-button">
                 <!--                            <i @click="isChangeLike" v-if="!isLike" title="收藏" class="mdi mdi-star-outline"></i>-->
                 <!--                            <i @click="isChangeLike" v-else style="color: red;font-size: 22px;" title="已收藏"  class="mdi mdi-star"></i>-->
                 <i title="上一曲" @click="next(-1)" class="mdi  mdi-skip-previous"></i>
-                <i @click="getMusic" style="font-size: 40px; color: #cc7013;" class="mdi"
+                <i @click="play" style="font-size: 40px; color: #cc7013;" class="mdi"
                    :class="[is ? 'mdi-pause' :'mdi-play']"></i>
                 <i title="下一曲" @click="next(1)" class="mdi mdi-skip-next"></i>
                 <svg class="svg" @click="openLyric" aria-hidden="true">
@@ -123,6 +123,7 @@ import socialuniMusicStore from "socialuni-music-sdk/src/store/SocialuniMusicSto
 import WebsocketWebRtcUtil from "socialuni-api-base/src/websocket/WebsocketWebRtcUtil";
 import test1 from './test1.mp3'
 import SocialuniMusicRoleId from "socialuni-music-sdk/src/constant/SocialuniMusicRoleId";
+import AlertUtil from "socialuni-native-h5/src/util/AlertUtil";
 
 let localStream
 let localVideo = null
@@ -271,16 +272,58 @@ export default class MessageView extends Vue {
     this.playMusicAPI(this.songId)
   }
 
+  musicChange(value) {
+    //需要获取当前时间距离播放时间的时间点，然后设置播放进度
+
+    console.log(value)
+    //秒，
+    //所以播放时间也要为秒
+    this.$refs.audioPlayer.currentTime = value / 100
+    this.$refs.audioPlayer.play()
+    console.log(this.$refs.audioPlayer.currentTime)
+    console.log(888)
+  }
+
+  play() {
+    this.$refs.audioPlayer.play()
+  }
 
   async playMusicAPI(songId) {
+    if (!SocialuniMusicRoleId.hasOperateAuthList.includes(socialuniMusicStore.musicRoomInfo.musicRoleId)) {
+      AlertUtil.error("您没有操作权限")
+    }
     const musicUrl = `https://music.163.com/song/media/outer/url?id=${songId}.mp3`;
-    const res = await SocialuniMusicAPI.playMusicAPI(socialuniMusicStore.channelName, {
+    const playRoomInfo = {
       musicUrl: musicUrl,
-      playingTimeStamp: null,
-      playingTime: null,
-      pause: null,
-    })
-    socialuniMusicStore.setMusicRoomInfo(res.data)
+      playingTimestamp: new Date(),
+      //单位秒
+      playingTime: 0,
+      playing: true,
+      musicRoleId: socialuniMusicStore.musicRoomInfo.musicRoleId,
+    }
+    socialuniMusicStore.setMusicRoomInfo(playRoomInfo)
+
+    //更新音乐时长
+    this.$refs.audioPlayer.onloadedmetadata = () => {
+      this.muscMax = Math.ceil(this.$refs.audioPlayer.duration * 100)
+      const curTime = new Date()
+      this.$refs.audioPlayer.play()
+      const playRoomInfo = {
+        musicUrl: musicUrl,
+        playingTimestamp: curTime,
+        //单位秒
+        playingTime: 0,
+        playing: true,
+        musicRoleId: socialuniMusicStore.musicRoomInfo.musicRoleId,
+      }
+      socialuniMusicStore.setMusicRoomInfo(playRoomInfo)
+      SocialuniMusicAPI.playMusicAPI(socialuniMusicStore.channelName, playRoomInfo).then(res => {
+        socialuniMusicStore.setMusicRoomInfo(res.data)
+      })
+    };
+
+    // this.$refs.audioPlayer.currentTime = value / 100
+    // this.$refs.audioPlayer.play()
     // mucisRoomStore.reqquetest(url)
   }
 
@@ -327,17 +370,6 @@ export default class MessageView extends Vue {
   }
 
   //设置当前时间和播放时间
-  musicChange(value) {
-    //需要获取当前时间距离播放时间的时间点，然后设置播放进度
-
-    console.log(value)
-    //秒，
-    //所以播放时间也要为秒
-    this.$refs.audioPlayer.currentTime = value / 100
-    this.$refs.audioPlayer.play()
-    console.log(this.$refs.audioPlayer.currentTime)
-    console.log(888)
-  }
 
   deleteYun111() {
     SocialuniMusicAPI.updateMusicAPI(socialuniMusicStore.channelName, {
