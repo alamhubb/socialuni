@@ -3,7 +3,7 @@ import WebsocketWebRtcUtil from "socialuni-api-base/src/websocket/WebsocketWebRt
 import {socialuniTokenModule} from "socialuni-user-sdk/src/store/SocialuniTokenModule";
 import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
 import SocialuniAPIConfig from "socialuni-api-base/src/SocialuniAPIConfig";
-import FastWebRTC from "easy-webrtc/src/FastWebRTC";
+import FastWebRTC from "fast-webrtc/src/FastWebRTC";
 
 export default class SocialuniAppService {
     static async getAppLunchData() {

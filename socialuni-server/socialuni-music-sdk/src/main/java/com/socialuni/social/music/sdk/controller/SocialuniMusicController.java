@@ -31,6 +31,7 @@ import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import io.agora.media.RtcTokenBuilder2;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.*;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
@@ -260,7 +261,11 @@ public class SocialuniMusicController {
     SocialuniMusicOperateCheck socialuniMusicOperateCheck;
 
     @PostMapping("playMusic/{channel}")
-    public ResultRO<SocialuniMusicRoomInfoRO> playMusic(@PathVariable("channel") String channel, @RequestBody @Valid SocialuniPlayMusicQO playMusicQO) {
+    public ResultRO<SocialuniMusicRoomInfoRO> playMusic(@PathVariable("channel")  @Valid @NotBlank String channel, @RequestBody @Valid SocialuniPlayMusicQO playMusicQO) {
+        if (StringUtils.isEmpty(channel)){
+            throw new SocialBusinessException("房间信息为空");
+        }
+
         SocialuniMusicOperateCheckRO checkResult = socialuniMusicOperateCheck.checkRoleId(channel);
 
 

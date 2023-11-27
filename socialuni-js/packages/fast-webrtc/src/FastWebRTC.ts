@@ -1,4 +1,4 @@
-import FastWebsocket, {FastWebsocketConfig} from "easy-socket/src/FastWebsocket";
+import FastWebsocket, {FastWebsocketConfig} from "fast-socket/src/FastWebsocket";
 
 export interface FastWebRTCConfig extends FastWebsocketConfig {
 }
