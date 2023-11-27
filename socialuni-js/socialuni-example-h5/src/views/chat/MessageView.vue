@@ -3,6 +3,7 @@
     <div class="w200 bd-radius shadow h100p flex-none">
       <socialuni-chat-view-h5></socialuni-chat-view-h5>
     </div>
+     {{ fasfsf}}-- 123
     <audio ref="audioPlayer" :src="musicRoomInfo?.musicUrl"></audio>
 
     <div class="flex-1 overflow-hidden h100p bg-white ml-sm">
@@ -136,6 +137,10 @@ export default class MessageView extends Vue {
   get SocialuniMusicRoleId() {
     return SocialuniMusicRoleId
   }
+    get fasfsf() {
+        return 123
+    }
+
 
   get musicRoomInfo() {
     return socialuniMusicStore.musicRoomInfo

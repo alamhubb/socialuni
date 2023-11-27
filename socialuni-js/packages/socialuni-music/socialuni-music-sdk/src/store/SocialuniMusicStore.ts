@@ -9,7 +9,10 @@ export class SocialuniMusicStore {
     private _localAudioTrack: IBufferSourceAudioTrack | IRemoteAudioTrack = null
 
     get channelName(): string {
-        return this._channelName;
+        if (this._channelName) {
+            return this._channelName;
+        }
+        return ''
     }
 
     setChannelName(value: string) {

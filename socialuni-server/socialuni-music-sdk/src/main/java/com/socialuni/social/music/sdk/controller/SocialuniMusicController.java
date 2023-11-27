@@ -261,7 +261,7 @@ public class SocialuniMusicController {
     SocialuniMusicOperateCheck socialuniMusicOperateCheck;
 
     @PostMapping("playMusic/{channel}")
-    public ResultRO<SocialuniMusicRoomInfoRO> playMusic(@PathVariable("channel")  @Valid @NotBlank String channel, @RequestBody @Valid SocialuniPlayMusicQO playMusicQO) {
+    public ResultRO<SocialuniMusicRoomInfoRO> playMusic(@PathVariable("channel")  String channel, @RequestBody @Valid SocialuniPlayMusicQO playMusicQO) {
         if (StringUtils.isEmpty(channel)){
             throw new SocialBusinessException("房间信息为空");
         }
