@@ -1,12 +1,47 @@
 import {reactive, UnwrapNestedRefs} from "vue";
 import SocialuniMusicAPI from "../api/SocialuniMusicAPI";
 import AgoraRTC, {IAgoraRTCClient, IBufferSourceAudioTrack, IRemoteAudioTrack} from "agora-rtc-sdk-ng"
+import {SocialuniMusicRoomInfoRO} from "../model/SocialuniMusicRoomPlayerInfoRO";
 
 export class SocialuniMusicStore {
     private _appId: string = null
     private _musicToken: string = null
+    private _musicRoomInfo: SocialuniMusicRoomInfoRO = null
     private _channelName: string = null
     private _localAudioTrack: IBufferSourceAudioTrack | IRemoteAudioTrack = null
+
+    private timer = null
+    private _realPlayingValue = 0
+
+    setMusicRoomInfo(value: SocialuniMusicRoomInfoRO) {
+        this._musicRoomInfo = value;
+        this.computedRealPlayingValue()
+        if (this.timer) {
+            clearInterval(this.timer)
+            this.timer = null
+        }
+        this.timer = setInterval(() => {
+            this.computedRealPlayingValue()
+        }, 10)
+    }
+
+    computedRealPlayingValue() {
+        const curDate = new Date().getTime()
+        const playTime = new Date(this.musicRoomInfo.playingTimestamp).getTime()
+        //得到已播放时间的时间差
+        const diffTime = curDate - playTime
+        //进度为0.01秒
+        this._realPlayingValue = Math.ceil(diffTime / 10) + this.musicRoomInfo.playingTime / 100
+    }
+
+    get realPlayingValue() {
+        return this._realPlayingValue - 140000
+    }
+
+    get musicRoomInfo(): SocialuniMusicRoomInfoRO {
+        console.log(6565656)
+        return this._musicRoomInfo
+    }
 
     get channelName(): string {
         if (this._channelName) {
