@@ -21,7 +21,7 @@ export class SocialuniMusicStore {
             this.timer = null
         }
         this.timer = setInterval(() => {
-            this.computedRealPlayingValue()
+            // this.computedRealPlayingValue()
         }, 10)
     }
 
