@@ -225,48 +225,10 @@ export default class MessageView extends Vue {
         // this.queryMusicRoomPlayer()
     }
 
-
-    async queryMusicRoomPlayer() {
-        const res = await SocialuniMusicAPI.queryMusicRoomPlayerInfoAPI(socialuniMusicStore.channelName)
-    }
-
     created() {
         // this.getMusic()
     }
 
-
-    audioPlayer = null
-
-    async getMusic() {
-        /*        this.audioPlayer = audioPlayer
-
-                console.log(6666)
-                console.log(audioPlayer)
-
-
-                this.audioPlayer.onerror = (e) => {
-                    console.log(e);
-                };
-                this.audioPlayer.canplay = (e) => {
-                    console.log(e);
-                };
-                this.audioPlayer.canplaythrough = (e) => {
-                    console.log(e);
-                };
-
-                audioPlayer.play()*/
-
-        // 1398283847
-        /*console.log(789798798)
-        const res = await fetch(`music/song/media/outer/url?id=${1456890009}.mp3`)
-        const blob = await res.blob();
-        console.log(blob)
-        const blobUrl = URL.createObjectURL(blob);
-        console.log(blobUrl)
-        audio.src = blobUrl
-        console.log(323232)*/
-
-    }
 
     async queryMusicList() {
         console.log('删除即构diamante')
@@ -276,50 +238,6 @@ export default class MessageView extends Vue {
         console.log(data.playlist)
         console.log(data.playlist.tracks)
         this.tableData = data.playlist.tracks
-    }
-
-// 获取本地媒体流
-    async start() {
-        /*const audio = new Audio();
-        localStream = await navigator.mediaDevices.getUserMedia({video: false, audio: true});
-        WebsocketWebRtcUtil.easyWebRTC.pushStream(localStream)
-
-        audio.srcObject = localStream
-        audio.play()*/
-
-        const audio = new Audio(test1);
-        audio.oncanplaythrough = (async () => {
-                localStream = audio.captureStream();
-                WebsocketWebRtcUtil.easyWebRTC.pushStream(localStream)
-            }
-        )
-        audio.play()
-        /*try {
-            localStream = await navigator.mediaDevices.getUserMedia({video: false, audio: true});
-            console.log(localVideo)
-            localVideo.srcObject = localStream;
-            localStream.getTracks().forEach(track => {
-                WebsocketWebRtcUtil.peerConnection.addTrack(track, localStream);
-            });
-
-            WebsocketWebRtcUtil.peerConnection.createOffer()
-                .then(offer => WebsocketWebRtcUtil.peerConnection.setLocalDescription(offer))
-                .then(() => {
-                    // 发送本地描述到远程端
-                    WebsocketWebRtcUtil.send({ 'offer': WebsocketWebRtcUtil.peerConnection.localDescription });
-                });
-        } catch (error) {
-            console.error('Error accessing local media:', error);
-        }*/
-    }
-
-    stop() {
-        localStream.getTracks().forEach(track => {
-            track.stop();
-        });
-        localVideo.srcObject = null;
-        WebsocketWebRtcUtil.remoteVideo.srcObject = null;
-        WebsocketWebRtcUtil.peerConnection.close();
     }
 
 
@@ -454,32 +372,6 @@ export default class MessageView extends Vue {
         })*/
 
         SocialuniMusicAPI.queryMusicChannel(socialuniMusicStore.channelName)
-    }
-
-    async queryAllplay() {
-        return musicRequest.get<any>(`api/v1/projects/5e681410a7434ce9bba3e268226ce537/cloud-player/players`, {
-            headers: {
-                Authorization: "Basic MWE5N2IyZmU3NjY2NGVmNjhiZmRkZjcyNTZjZjkxZDM6OTk5YzA2ODljYzc5NDEyOGI0NTBjMWQ3MDJmMGUyZjM="
-            },
-            params: {
-                filter: `channelName eq ${socialuniMusicStore.channelName}`
-            }
-        })
-    }
-
-    async destoryPlays() {
-        const res = await this.queryAllplay()
-        const plays = res.players
-
-        if (plays && plays.length) {
-            for (const play of plays) {
-                musicRequest.delete<any>(`api/cn/v1/projects/5e681410a7434ce9bba3e268226ce537/cloud-player/players/${play.id}`, {
-                    headers: {
-                        Authorization: "Basic MWE5N2IyZmU3NjY2NGVmNjhiZmRkZjcyNTZjZjkxZDM6OTk5YzA2ODljYzc5NDEyOGI0NTBjMWQ3MDJmMGUyZjM="
-                    }
-                })
-            }
-        }
     }
 
     testvalue = 0
