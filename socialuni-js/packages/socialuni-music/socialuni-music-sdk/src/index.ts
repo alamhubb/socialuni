@@ -8,41 +8,8 @@ import socialuniMusicStore from "./store/SocialuniMusicStore";
 import CommonEventUtil from "socialuni-native-util/src/util/CommonEventUtil";
 import SocialuniImEventKey from "socialuni-im-api/src/constant/SocialuniMusicEventConst";
 import MessageViewParams from "socialuni-im-sdk/src/model/MessageViewParams";
-import AgoraRTC from "agora-rtc-sdk-ng";
 import SocialuniMusicRoleId from "./constant/SocialuniMusicRoleId";
 import SocialuniMusicAPI from "./api/SocialuniMusicAPI";
-
-const agoraEvents = ['channel-media-relay-event',
-    'channel-media-relay-state',
-    'connection-state-change',
-    'content-inspect-connection-state-change',
-    'content-inspect-error',
-    'crypt-error',
-    'exception',
-    'image-moderation-connection-state-change',
-    'is-using-cloud-proxy',
-    'join-fallback-to-proxy',
-    'live-streaming-error',
-    'live-streaming-warning',
-    'media-reconnect-end',
-    'media-reconnect-start',
-    'network-quality',
-    'published-user-list',
-    'stream-fallback',
-    'stream-type-changed',
-    'token-privilege-did-expire',
-    'token-privilege-will-expire',
-    'user-info-updated',
-    'user-joined',
-    'user-left',
-    'user-published',
-    'user-unpublished',
-    'volume-indicator',]
-
-const client = AgoraRTC.createClient({
-    mode: "live",
-    codec: "vp8"
-});
 
 class SocialuniMusicPlugin implements SocialuniPlugin {
     async onLaunch() {

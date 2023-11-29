@@ -20,7 +20,7 @@
                 <!--        如果为roleid = ower或者admin，显示， 如果musicurl有值显示， 否则不显示-->
 
 
-                {{ realPlayingValue }}--{{ musicMax }}
+                {{ realPlayingValue }}--{{ musicMax }}--{{ musicRoomInfo.playing }}
                 <div v-if="musicRoomInfo?.musicUrl">
                     <div class="row-col-center">
                         <div>{{ formatTooltip(realPlayingValue) }}</div>
@@ -36,7 +36,7 @@
                                 <!--                            <i @click="isChangeLike" v-else style="color: red;font-size: 22px;" title="已收藏"  class="mdi mdi-star"></i>-->
                                 <i title="上一曲" @click="next(-1)" class="mdi  mdi-skip-previous"></i>
                                 <i @click="continuePlay" style="font-size: 40px; color: #cc7013;" class="mdi"
-                                   :class="[is ? 'mdi-pause' :'mdi-play']"></i>
+                                   :class="[showPause ? 'mdi-pause' :'mdi-play']"></i>
                                 <i title="下一曲" @click="next(1)" class="mdi mdi-skip-next"></i>
                                 <svg class="svg" @click="openLyric" aria-hidden="true">
                                     <use xlink:href="#icon-minganci"></use>
@@ -136,8 +136,13 @@ let localVideo = null
     components: {SocialuniChatViewH5, SocialuniMsgViewH5}
 })
 export default class MessageView extends Vue {
+    $refs: {
+        audioPlayer: HTMLAudioElement
+    }
+
     async init() {
         this.$refs.audioPlayer.onloadedmetadata = () => {
+            console.log('onloadedmetadata')
             this.musicMax = Math.ceil(this.$refs.audioPlayer.duration * 100)
         };
     }
@@ -148,8 +153,13 @@ export default class MessageView extends Vue {
 
     private timer = null
 
+    get showPause() {
+        return this.musicRoomInfo && this.musicRoomInfo.playing && this.musicRoomInfo.playingTime > 0
+    }
+
     @Watch('musicRoomInfo')
     onMusicRoomInfoChange() {
+        console.log('chufale wath')
         if (this.musicRoomInfo) {
             this.computedRealPlayingValue()
             if (this.timer) {
@@ -164,6 +174,25 @@ export default class MessageView extends Vue {
         }
     }
 
+    continuePlay() {
+        //如何判断是继续播放还是重新播放
+        //根据playTime决定
+        if (this.musicRoomInfo?.musicUrl) {
+            this.$refs.audioPlayer.play()
+            const playRoomInfo = {
+                musicTime: this.musicRoomInfo.musicTime,
+                musicUrl: this.musicRoomInfo.musicUrl,
+                playingTimestamp: new Date(),
+                //单位秒
+                playingTime: 0,
+                playing: true,
+                musicRoleId: socialuniMusicStore.musicRoomInfo.musicRoleId,
+            }
+            socialuniMusicStore.setMusicRoomInfo(playRoomInfo)
+        }
+    }
+
+
     private _realPlayingValue = 0
 
     get realPlayingValue() {
@@ -175,9 +204,6 @@ export default class MessageView extends Vue {
         const playTime = new Date(this.musicRoomInfo.playingTimestamp).getTime()
         //得到已播放时间的时间差
         const diffTime = curDate - playTime
-
-        console.log(diffTime)
-        console.log(this.musicRoomInfo.playingTime)
 
         //什么情况下为0，是播放完成后
         //进度为0.01秒
@@ -249,9 +275,6 @@ export default class MessageView extends Vue {
     }
 
     formatTooltip(value) {
-        console.log(88888)
-        console.log(value)
-
         const time = Math.ceil(value / 100)
         const minute = Math.floor(time / 60)
         const second = time % 60
@@ -296,23 +319,6 @@ export default class MessageView extends Vue {
 
     play() {
         this.$refs.audioPlayer.play()
-    }
-
-    continuePlay() {
-        //如何判断是继续播放还是重新播放
-        //根据playTime决定
-        if (this.musicRoomInfo.musicUrl) {
-            const playRoomInfo = {
-                musicTime: this.musicRoomInfo.musicTime,
-                musicUrl: this.musicRoomInfo.musicUrl,
-                playingTimestamp: new Date(),
-                //单位秒
-                playingTime: 0,
-                playing: true,
-                musicRoleId: socialuniMusicStore.musicRoomInfo.musicRoleId,
-            }
-            socialuniMusicStore.setMusicRoomInfo(playRoomInfo)
-        }
     }
 
     async playMusicAPI(songId) {
