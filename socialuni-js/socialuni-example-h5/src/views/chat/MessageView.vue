@@ -20,13 +20,14 @@
                 <!--        如果为roleid = ower或者admin，显示， 如果musicurl有值显示， 否则不显示-->
 
 
-                {{ realPlayingValue }}--{{ muscMax }}
+                {{ realPlayingValue }}--{{ musicMax }}
                 <div v-if="musicRoomInfo?.musicUrl">
                     <div class="row-col-center">
                         <div>{{ formatTooltip(realPlayingValue) }}</div>
                         <el-slider v-model="realPlayingValue" @input="musicInput" @change="musicChange"
-                                   :max="muscMax"></el-slider>
-                        <div>{{ formatTooltip(muscMax) }}</div>
+                                   :show-tooltip="false"
+                                   :max="refMusicMax"></el-slider>
+                        <div>{{ formatTooltip(musicMax) }}</div>
                     </div>
                     <div v-if="SocialuniMusicRoleId.hasOperateAuthList.includes(musicRoomInfo.musicRoleId)">
                         <main class="music">
@@ -115,7 +116,7 @@
 </template>
 
 <script lang="tsx">
-import {Component, Vue} from 'vue-facing-decorator';
+import {Component, Vue, Watch} from 'vue-facing-decorator';
 import SocialuniChatViewH5 from "socialuni-im-view-h5/src/views/SocialuniChatViewH5.vue"
 import SocialuniMsgViewH5 from "socialuni-im-view-h5/src/views/SocialuniMsgViewH5.vue"
 import musicRequest from "@/plugins/musicRequest";
@@ -135,9 +136,72 @@ let localVideo = null
     components: {SocialuniChatViewH5, SocialuniMsgViewH5}
 })
 export default class MessageView extends Vue {
+    async init() {
+        this.$refs.audioPlayer.onloadedmetadata = () => {
+            this.musicMax = Math.ceil(this.$refs.audioPlayer.duration * 100)
+        };
+    }
+
     tableData = []
 
-    muscMax = 0
+    musicMax = 0
+
+    private timer = null
+
+    @Watch('musicRoomInfo')
+    onMusicRoomInfoChange() {
+        if (this.musicRoomInfo) {
+            this.computedRealPlayingValue()
+            if (this.timer) {
+                clearInterval(this.timer)
+                this.timer = null
+            }
+            if (this.musicRoomInfo.playing) {
+                this.timer = setInterval(() => {
+                    this.computedRealPlayingValue()
+                }, 10)
+            }
+        }
+    }
+
+    private _realPlayingValue = 0
+
+    get realPlayingValue() {
+        return this._realPlayingValue
+    }
+
+    computedRealPlayingValue() {
+        const curDate = new Date().getTime()
+        const playTime = new Date(this.musicRoomInfo.playingTimestamp).getTime()
+        //得到已播放时间的时间差
+        const diffTime = curDate - playTime
+
+        console.log(diffTime)
+        console.log(this.musicRoomInfo.playingTime)
+
+        //什么情况下为0，是播放完成后
+
+
+        //进度为0.01秒
+        this._realPlayingValue = Math.ceil(diffTime / 10) + this.musicRoomInfo.playingTime * 100
+
+        if (this._realPlayingValue >= this.musicMax) {
+            socialuniMusicStore.setMusicRoomInfo({
+                musicTime: this.musicMax,
+                musicUrl: this.musicRoomInfo.musicUrl,
+                playingTimestamp: this.musicRoomInfo.playingTimestamp,
+                //单位秒
+                playingTime: this.musicRoomInfo.playingTime,
+                playing: false,
+                musicRoleId: socialuniMusicStore.musicRoomInfo.musicRoleId,
+            })
+        }
+    }
+
+
+    get refMusicMax() {
+        return this.musicMax ? this.musicMax : 100000000
+    }
 
     get SocialuniMusicRoleId() {
         return SocialuniMusicRoleId
@@ -172,11 +236,6 @@ export default class MessageView extends Vue {
         // this.getMusic()
     }
 
-    async init() {
-        this.$refs.audioPlayer.onloadedmetadata = () => {
-            this.muscMax = Math.ceil(this.$refs.audioPlayer.duration * 100)
-        };
-    }
 
     audioPlayer = null
 
@@ -305,6 +364,7 @@ export default class MessageView extends Vue {
         const curTime = new Date()
 
         socialuniMusicStore.setMusicRoomInfo({
+            musicTime: 100000000,
             musicUrl: this.musicRoomInfo.musicUrl,
             playingTimestamp: curTime,
             //单位秒
@@ -330,6 +390,7 @@ export default class MessageView extends Vue {
         }
         const musicUrl = `https://music.163.com/song/media/outer/url?id=${songId}.mp3`;
         const playRoomInfo = {
+            musicTime: 100000000,
             musicUrl: musicUrl,
             playingTimestamp: new Date(),
             //单位秒
@@ -341,9 +402,10 @@ export default class MessageView extends Vue {
 
         //更新音乐时长
         this.$refs.audioPlayer.onloadedmetadata = () => {
-            this.muscMax = Math.ceil(this.$refs.audioPlayer.duration * 100)
+            this.musicMax = Math.ceil(this.$refs.audioPlayer.duration * 100)
             const curTime = new Date()
             socialuniMusicStore.setMusicRoomInfo({
+                musicTime: this.musicMax * 10,
                 musicUrl: this.musicRoomInfo.musicUrl,
                 playingTimestamp: curTime,
                 //单位秒
@@ -403,10 +465,6 @@ export default class MessageView extends Vue {
                 })
             }
         }
-    }
-
-    get realPlayingValue() {
-        return socialuniMusicStore.realPlayingValue
     }
 
     testvalue = 0
