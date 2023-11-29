@@ -7,7 +7,7 @@
 
         <div class="flex-1 overflow-hidden h100p bg-white ml-sm">
             {{ musicRoomInfo?.musicUrl }}
-<!--            <audio ref="audioPlayer" src="https://music.163.com/song/media/outer/url?id=2100329027.mp3" autoplay muted ></audio>-->
+            <!--            <audio ref="audioPlayer" src="https://music.163.com/song/media/outer/url?id=2100329027.mp3" autoplay muted ></audio>-->
             <audio ref="audioPlayer" :src="musicRoomInfo?.musicUrl" autoplay></audio>
             <!--            <div class="w100p">
                             <audio id="local" :src="test1" controls="controls"
@@ -148,8 +148,8 @@ export default class MessageView extends Vue {
 
     get musicMax() {
         if (this.musicRoomInfo) {
-            // return this.musicRoomInfo.musicTime * 100
-            return 500 * 100
+            return this.musicRoomInfo.musicTime * 100
+            // return 500 * 100
         }
         return 0
     }
@@ -157,7 +157,7 @@ export default class MessageView extends Vue {
     private timer = null
 
     get showPause() {
-        return this.musicRoomInfo && this.musicRoomInfo.playing && this.musicRoomInfo.playingTime > 0
+        return this.musicRoomInfo && (this.musicRoomInfo.playing || this.musicRoomInfo.playingTime > 0)
     }
 
     mounted() {
