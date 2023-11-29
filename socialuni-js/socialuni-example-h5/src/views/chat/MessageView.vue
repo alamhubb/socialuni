@@ -210,8 +210,6 @@ export default class MessageView extends Vue {
     }
 
     mounted() {
-        localVideo = document.getElementById('localVideo');
-        WebsocketWebRtcUtil.remoteVideo = document.getElementById('remoteVideo');
         this.queryMusicList()
 
         console.log(this.$route.query)
