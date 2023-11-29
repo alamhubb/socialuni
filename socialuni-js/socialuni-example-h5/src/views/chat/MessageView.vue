@@ -23,7 +23,7 @@
                 {{ realPlayingValue }}--{{ muscMax }}
                 <div v-if="musicRoomInfo?.musicUrl">
                     <div class="row-col-center">
-                        <div>{{ formatTooltip(realPlayingValue * 100) }}</div>
+                        <div>{{ formatTooltip(realPlayingValue) }}</div>
                         <el-slider v-model="realPlayingValue" @input="musicInput" @change="musicChange"
                                    :max="muscMax"></el-slider>
                         <div>{{ formatTooltip(muscMax) }}</div>

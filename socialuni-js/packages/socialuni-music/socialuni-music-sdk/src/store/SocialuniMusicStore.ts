@@ -35,7 +35,7 @@ export class SocialuniMusicStore {
         console.log(this.musicRoomInfo.playingTime)
 
         //进度为0.01秒
-        this._realPlayingValue = Math.ceil(diffTime / 10) + this.musicRoomInfo.playingTime
+        this._realPlayingValue = Math.ceil(diffTime / 10) + this.musicRoomInfo.playingTime * 100
     }
 
     get realPlayingValue() {
