@@ -12,8 +12,9 @@ export class SocialuniMusicStore {
 
 
     setMusicRoomInfo(value: SocialuniMusicRoomInfoRO) {
+        console.trace('gengxinle  musiroom')
+        console.log('gengxinle  musiroom')
         this._musicRoomInfo = value;
-
     }
 
     get musicRoomInfo(): SocialuniMusicRoomInfoRO {

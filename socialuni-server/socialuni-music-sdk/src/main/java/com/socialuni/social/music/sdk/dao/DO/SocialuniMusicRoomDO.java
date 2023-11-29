@@ -24,6 +24,7 @@ public class SocialuniMusicRoomDO extends SocialuniContentBaseDO {
     Integer roomId;
 
     String musicUrl;
+    Integer musicTime;
     //默认0
     Date playingTimeStamp;
     Integer playingTime;

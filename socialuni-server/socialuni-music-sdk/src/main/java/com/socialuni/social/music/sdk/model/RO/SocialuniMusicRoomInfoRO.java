@@ -11,6 +11,7 @@ public class SocialuniMusicRoomInfoRO {
     //默认0
     Date playingTimestamp;
     Integer playingTime;
+    Integer musicTime;
     //是否暂停了, 默认false
     Boolean playing;
 }

@@ -261,8 +261,8 @@ public class SocialuniMusicController {
     SocialuniMusicOperateCheck socialuniMusicOperateCheck;
 
     @PostMapping("playMusic/{channel}")
-    public ResultRO<SocialuniMusicRoomInfoRO> playMusic(@PathVariable("channel")  String channel, @RequestBody @Valid SocialuniPlayMusicQO playMusicQO) {
-        if (StringUtils.isEmpty(channel)){
+    public ResultRO<SocialuniMusicRoomInfoRO> playMusic(@PathVariable("channel") String channel, @RequestBody @Valid SocialuniPlayMusicQO playMusicQO) {
+        if (StringUtils.isEmpty(channel)) {
             throw new SocialBusinessException("房间信息为空");
         }
 
@@ -282,13 +282,17 @@ public class SocialuniMusicController {
 
         if (socialuniMusicRoomDO.getPlaying()) {
             Date playingTimeStamp = socialuniMusicRoomDO.getPlayingTimeStamp();
+            Integer musicTime = socialuniMusicRoomDO.getMusicTime();
             //获取时间戳
             long timestamp = playingTimeStamp.getTime();
+
+            long endTime = timestamp + musicTime * 1000;
+
             //获取歌曲播放节点
             long playingTime = socialuniMusicRoomDO.getPlayingTime() * 1000;
             //获取多少秒后修改状态为暂停
 
-            long afterTime = timestamp - playingTime;
+            long afterTime = endTime - playingTime;
 
             Integer sequence = socialuniMusicRoomDO.getSequenceNum();
 

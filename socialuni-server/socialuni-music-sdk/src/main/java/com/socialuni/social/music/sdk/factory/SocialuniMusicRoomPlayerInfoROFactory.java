@@ -11,6 +11,7 @@ public class SocialuniMusicRoomPlayerInfoROFactory {
 
         SocialuniMusicRoomInfoRO socialuniMusicRoomInfoRO = new SocialuniMusicRoomInfoRO();
         socialuniMusicRoomInfoRO.setMusicUrl(socialuniMusicRoomDO.getMusicUrl());
+        socialuniMusicRoomInfoRO.setMusicTime(socialuniMusicRoomDO.getMusicTime());
         socialuniMusicRoomInfoRO.setPlayingTimestamp(socialuniMusicRoomDO.getPlayingTimeStamp());
         socialuniMusicRoomInfoRO.setPlayingTime(socialuniMusicRoomDO.getPlayingTime());
         socialuniMusicRoomInfoRO.setPlaying(socialuniMusicRoomDO.getPlaying());
