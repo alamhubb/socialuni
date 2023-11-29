@@ -1,5 +1,6 @@
 package com.socialuni.social.music.sdk.controller;
 
+import cn.hutool.core.lang.Console;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
@@ -282,28 +283,34 @@ public class SocialuniMusicController {
 
         if (socialuniMusicRoomDO.getPlaying()) {
             Date playingTimeStamp = socialuniMusicRoomDO.getPlayingTimeStamp();
-            Integer musicTime = socialuniMusicRoomDO.getMusicTime();
+            long musicTime = socialuniMusicRoomDO.getMusicTime() * 1000;
+            long playingTime = socialuniMusicRoomDO.getPlayingTime() * 1000;
+
             //获取时间戳
             long timestamp = playingTimeStamp.getTime();
 
-            long endTime = timestamp + musicTime * 1000;
+            long endTime = timestamp + musicTime;
+            long startTime = timestamp + playingTime;
 
             //获取歌曲播放节点
-            long playingTime = socialuniMusicRoomDO.getPlayingTime() * 1000;
             //获取多少秒后修改状态为暂停
 
-            long afterTime = endTime - playingTime;
+            long afterTime = endTime - startTime;
 
             Integer sequence = socialuniMusicRoomDO.getSequenceNum();
 
             ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
 
+            Console.log("触发了定时器");
+            Console.log("afterTime");
+            Console.log(afterTime);
             executorService.schedule(() -> {
-
+                Console.log("触发了定时器");
                 SocialuniMusicRoomDO dbRoom = SocialuniRepositoryFacade.findByCustomField("roomId", chatId, SocialuniMusicRoomDO.class);
                 if (dbRoom.getSequenceNum().equals(sequence)) {
                     dbRoom.setPlaying(Boolean.FALSE);
                     SocialuniRepositoryFacade.save(dbRoom);
+                    Console.log("执行了保存");
                 }
 
                 // 这里放置你要延迟执行的代码
