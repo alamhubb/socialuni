@@ -35,7 +35,7 @@
                                 <!--                            <i @click="isChangeLike" v-if="!isLike" title="收藏" class="mdi mdi-star-outline"></i>-->
                                 <!--                            <i @click="isChangeLike" v-else style="color: red;font-size: 22px;" title="已收藏"  class="mdi mdi-star"></i>-->
                                 <i title="上一曲" @click="next(-1)" class="mdi  mdi-skip-previous"></i>
-                                <i @click="play" style="font-size: 40px; color: #cc7013;" class="mdi"
+                                <i @click="continuePlay" style="font-size: 40px; color: #cc7013;" class="mdi"
                                    :class="[is ? 'mdi-pause' :'mdi-play']"></i>
                                 <i title="下一曲" @click="next(1)" class="mdi mdi-skip-next"></i>
                                 <svg class="svg" @click="openLyric" aria-hidden="true">
@@ -180,8 +180,6 @@ export default class MessageView extends Vue {
         console.log(this.musicRoomInfo.playingTime)
 
         //什么情况下为0，是播放完成后
-
-
         //进度为0.01秒
         this._realPlayingValue = Math.ceil(diffTime / 10) + this.musicRoomInfo.playingTime * 100
 
@@ -189,9 +187,9 @@ export default class MessageView extends Vue {
             socialuniMusicStore.setMusicRoomInfo({
                 musicTime: this.musicMax,
                 musicUrl: this.musicRoomInfo.musicUrl,
-                playingTimestamp: this.musicRoomInfo.playingTimestamp,
+                playingTimestamp: new Date(),
                 //单位秒
-                playingTime: this.musicRoomInfo.playingTime,
+                playingTime: 0,
                 playing: false,
                 musicRoleId: socialuniMusicStore.musicRoomInfo.musicRoleId,
             })
@@ -382,6 +380,23 @@ export default class MessageView extends Vue {
 
     play() {
         this.$refs.audioPlayer.play()
+    }
+
+    continuePlay() {
+        //如何判断是继续播放还是重新播放
+        //根据playTime决定
+        if (this.musicRoomInfo.musicUrl) {
+            const playRoomInfo = {
+                musicTime: this.musicRoomInfo.musicTime,
+                musicUrl: this.musicRoomInfo.musicUrl,
+                playingTimestamp: new Date(),
+                //单位秒
+                playingTime: 0,
+                playing: true,
+                musicRoleId: socialuniMusicStore.musicRoomInfo.musicRoleId,
+            }
+            socialuniMusicStore.setMusicRoomInfo(playRoomInfo)
+        }
     }
 
     async playMusicAPI(songId) {
