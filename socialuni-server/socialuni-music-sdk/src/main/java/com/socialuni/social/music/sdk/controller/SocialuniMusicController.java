@@ -157,14 +157,17 @@ public class SocialuniMusicController {
     }
 
     @PostMapping("updateMusic/{channel}")
-    public ResultRO<Void> updateMusic(@PathVariable("channel") String channel, @RequestBody AgoraUpdateMusicQO updateMusicQO) {
+    public ResultRO<Void> updateMusic(@PathVariable("channel") String channel, @RequestBody SocialuniPlayMusicQO updateMusicQO) {
+        //暂停？切歌，都走这个
+
+
         this.sequence++;
 
         SocialuniMusicOperateCheckRO checkResult = socialuniMusicOperateCheck.checkRoleId(channel);
 
         Integer chatId = checkResult.getChatId();
 
-        Boolean pause = updateMusicQO.getIsPause();
+        Boolean pause = updateMusicQO.getPlaying();
 
 
         SocialuniMusicRoomDO socialuniMusicRoomPlayerDO = SocialuniRepositoryFacade.findByCustomField("roomId", chatId, SocialuniMusicRoomDO.class);
@@ -174,8 +177,8 @@ public class SocialuniMusicController {
         }
         String playerId = socialuniMusicRoomPlayerDO.getMusicUrl();
 
-        if (!ObjectUtils.isEmpty(updateMusicQO.getIsPause())) {
-            if (updateMusicQO.getIsPause()) {
+        if (!ObjectUtils.isEmpty(updateMusicQO.getPlaying())) {
+            if (updateMusicQO.getPlaying()) {
                 SocialuniMusicOperateRecordDOUtils.createMusicRecord(
                         checkResult.getChatId(),
                         SocialuniChatOperateType.pause,
@@ -207,14 +210,14 @@ public class SocialuniMusicController {
 
         JSONObject param = JSONUtil.createObj();
 
-        if (!ObjectUtils.isEmpty(updateMusicQO.getIsPause())) {
-            param.put("isPause", updateMusicQO.getIsPause());
+        if (!ObjectUtils.isEmpty(updateMusicQO.getPlaying())) {
+            param.put("isPause", updateMusicQO.getPlaying());
         }
-        if (!ObjectUtils.isEmpty(updateMusicQO.getStreamUrl())) {
-            param.put("streamUrl", updateMusicQO.getStreamUrl());
+        if (!ObjectUtils.isEmpty(updateMusicQO.getMusicUrl())) {
+            param.put("streamUrl", updateMusicQO.getMusicTime());
         }
-        if (!ObjectUtils.isEmpty(updateMusicQO.getSeekPosition())) {
-            param.put("seekPosition", updateMusicQO.getSeekPosition());
+        if (!ObjectUtils.isEmpty(updateMusicQO.getPlayingTime())) {
+            param.put("seekPosition", updateMusicQO.getPlayingTime());
         }
 
         JSONObject param1 = JSONUtil.createObj();

@@ -32,7 +32,8 @@
                                 <!--                            <i @click="isChangeLike" v-if="!isLike" title="收藏" class="mdi mdi-star-outline"></i>-->
                                 <!--                            <i @click="isChangeLike" v-else style="color: red;font-size: 22px;" title="已收藏"  class="mdi mdi-star"></i>-->
                                 <i title="上一曲" @click="next(-1)" class="mdi  mdi-skip-previous"></i>
-                                <i @click="continuePlay" style="font-size: 40px; color: #cc7013;" class="mdi"
+                                <i @click="continuePlay(!showPause)" style="font-size: 40px; color: #cc7013;"
+                                   class="mdi"
                                    :class="[showPause ? 'mdi-pause' :'mdi-play']"></i>
                                 <i title="下一曲" @click="next(1)" class="mdi mdi-skip-next"></i>
                                 <svg class="svg" @click="openLyric" aria-hidden="true">
@@ -231,7 +232,7 @@ export default class MessageView extends Vue {
 
     //初始化的播放怎么做
 
-    continuePlay() {
+    continuePlay(playing: boolean) {
         //如何判断是继续播放还是重新播放
         //根据playTime决定
         if (this.musicRoomInfo?.musicUrl) {
@@ -241,8 +242,8 @@ export default class MessageView extends Vue {
                 musicUrl: this.musicRoomInfo.musicUrl,
                 playingTimestamp: new Date(),
                 //单位秒
-                playingTime: this.musicRoomInfo.playingTime,
-                playing: true,
+                playingTime: this.realPlayingValue / 100,
+                playing: playing,
                 musicRoleId: socialuniMusicStore.musicRoomInfo.musicRoleId,
             }
             socialuniMusicStore.setMusicRoomInfo(playRoomInfo)
@@ -266,8 +267,11 @@ export default class MessageView extends Vue {
 
             //什么情况下为0，是播放完成后
             //进度为0.01秒
-            this._realPlayingValue = Math.floor(diffTime / 10) + this.musicRoomInfo.playingTime * 100
-
+            if (this.musicRoomInfo.playing) {
+                this._realPlayingValue = Math.floor(diffTime / 10) + this.musicRoomInfo.playingTime * 100
+            } else {
+                this._realPlayingValue = this.musicRoomInfo.playingTime * 100
+            }
             if (this._realPlayingValue >= this.musicMax) {
                 socialuniMusicStore.setMusicRoomInfo({
                     musicTime: this.musicRoomInfo.musicTime,
