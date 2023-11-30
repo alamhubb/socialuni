@@ -21,14 +21,16 @@
                 <!--        如果为roleid = ower或者admin，显示， 如果musicurl有值显示， 否则不显示-->
 
 
-                {{ realPlayingValue }}--{{ musicMax }}--{{ musicRoomInfo?.playing }}
+                <div v-if="musicRoomInfo">
+                    {{ realPlayingValue }}--{{ musicRoomInfo.musicTime }}--{{ musicRoomInfo?.playing }}
+                </div>
                 <div v-if="musicRoomInfo?.musicUrl">
                     <div class="row-col-center">
                         <div>{{ formatTooltip(realPlayingValue) }}</div>
                         <el-slider v-model="realPlayingValue" @input="musicInput" @change="musicChange"
                                    :show-tooltip="false"
                                    :max="musicMax"></el-slider>
-                        <div>{{ formatTooltip(musicMax) }}</div>
+                        <div>{{ formatTooltip(musicRoomInfo.musicTime * 100) }}</div>
                     </div>
                     <div v-if="SocialuniMusicRoleId.hasOperateAuthList.includes(musicRoomInfo.musicRoleId)">
                         <main class="music">
@@ -237,9 +239,13 @@ export default class MessageView extends Vue {
         //得到已播放时间的时间差
         const diffTime = curDate - playTime
 
+        console.log(33333333)
+        console.log(diffTime)
+        console.log(this.musicRoomInfo.playingTime)
+
         //什么情况下为0，是播放完成后
         //进度为0.01秒
-        this._realPlayingValue = Math.ceil(diffTime / 10) + this.musicRoomInfo.playingTime * 100
+        this._realPlayingValue = Math.floor(diffTime / 10) + this.musicRoomInfo.playingTime * 100
 
         console.log(1231231)
         console.log(Math.ceil(diffTime / 10))
@@ -251,7 +257,7 @@ export default class MessageView extends Vue {
         if (this._realPlayingValue >= this.musicMax) {
             console.log(666666666)
             socialuniMusicStore.setMusicRoomInfo({
-                musicTime: this.musicMax,
+                musicTime: this.musicRoomInfo.musicTime,
                 musicUrl: this.musicRoomInfo.musicUrl,
                 playingTimestamp: new Date(),
                 //单位秒
