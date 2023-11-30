@@ -22,7 +22,7 @@
 
 
                 <div v-if="musicRoomInfo">
-                    {{ realPlayingValue }}--{{ musicRoomInfo.musicTime }}--{{ musicRoomInfo?.playing }}
+                    {{ realPlayingValue }}--{{ musicRoomInfo.musicTime }}--{{ musicRoomInfo?.playing }}--{{ musicRoomInfo?.playingTime }}
                 </div>
                 <div v-if="musicRoomInfo?.musicUrl">
                     <div class="row-col-center">
@@ -30,7 +30,7 @@
                         <el-slider v-model="realPlayingValue" @input="musicInput" @change="musicChange"
                                    :show-tooltip="false"
                                    :max="musicMax"></el-slider>
-                        <div>{{ formatTooltip(musicRoomInfo.musicTime * 100) }}</div>
+                        <div>{{ formatTooltip(musicMax) }}</div>
                     </div>
                     <div v-if="SocialuniMusicRoleId.hasOperateAuthList.includes(musicRoomInfo.musicRoleId)">
                         <main class="music">
@@ -165,9 +165,7 @@ export default class MessageView extends Vue {
     mounted() {
         this.queryMusicList()
 
-        console.log(this.$route.query)
         if (this.$route.query.chatId) {
-            console.log('触发通知')
             CommonEventUtil.emit(SocialuniImEventKey.socialuniImPageInit, this.$route.query)
         }
 
@@ -185,7 +183,6 @@ export default class MessageView extends Vue {
 
     @Watch('musicRoomInfo')
     onMusicRoomInfoChange() {
-        console.log('chufale wath')
         if (this.musicRoomInfo) {
             if (this.musicRoomInfo.playing) {
                 // this.frontPlay()
@@ -195,8 +192,6 @@ export default class MessageView extends Vue {
                 clearInterval(this.timer)
                 this.timer = null
             }
-            console.log(this.musicRoomInfo.playing)
-            console.log('this.musicRoomInfo.playing')
             if (this.musicRoomInfo.playing) {
                 this.timer = setInterval(() => {
                     this.computedRealPlayingValue()
@@ -217,12 +212,12 @@ export default class MessageView extends Vue {
                 musicUrl: this.musicRoomInfo.musicUrl,
                 playingTimestamp: new Date(),
                 //单位秒
-                playingTime: 0,
+                playingTime: this.musicRoomInfo.playingTime,
                 playing: true,
                 musicRoleId: socialuniMusicStore.musicRoomInfo.musicRoleId,
             }
-            console.log(789789789)
             socialuniMusicStore.setMusicRoomInfo(playRoomInfo)
+            this.playMusicApiFun()
         }
     }
 
@@ -234,37 +229,29 @@ export default class MessageView extends Vue {
     }
 
     computedRealPlayingValue() {
-        const curDate = new Date().getTime()
-        const playTime = new Date(this.musicRoomInfo.playingTimestamp).getTime()
-        //得到已播放时间的时间差
-        const diffTime = curDate - playTime
+        if (!this.dragging){
+            const curDate = new Date().getTime()
+            const playTime = new Date(this.musicRoomInfo.playingTimestamp).getTime()
+            //得到已播放时间的时间差
+            const diffTime = curDate - playTime
 
-        console.log(33333333)
-        console.log(diffTime)
-        console.log(this.musicRoomInfo.playingTime)
+            //什么情况下为0，是播放完成后
+            //进度为0.01秒
+            this._realPlayingValue = Math.floor(diffTime / 10) + this.musicRoomInfo.playingTime * 100
 
-        //什么情况下为0，是播放完成后
-        //进度为0.01秒
-        this._realPlayingValue = Math.floor(diffTime / 10) + this.musicRoomInfo.playingTime * 100
+            console.log(`computedRealPlayingValue--:${this._realPlayingValue}`)
 
-        console.log(1231231)
-        console.log(Math.ceil(diffTime / 10))
-        console.log(curDate)
-        console.log(playTime)
-        console.log(this.musicRoomInfo.playingTime)
-        console.log(this._realPlayingValue)
-
-        if (this._realPlayingValue >= this.musicMax) {
-            console.log(666666666)
-            socialuniMusicStore.setMusicRoomInfo({
-                musicTime: this.musicRoomInfo.musicTime,
-                musicUrl: this.musicRoomInfo.musicUrl,
-                playingTimestamp: new Date(),
-                //单位秒
-                playingTime: 0,
-                playing: false,
-                musicRoleId: socialuniMusicStore.musicRoomInfo.musicRoleId,
-            })
+            if (this._realPlayingValue >= this.musicMax) {
+                socialuniMusicStore.setMusicRoomInfo({
+                    musicTime: this.musicRoomInfo.musicTime,
+                    musicUrl: this.musicRoomInfo.musicUrl,
+                    playingTimestamp: new Date(),
+                    //单位秒
+                    playingTime: 0,
+                    playing: false,
+                    musicRoleId: socialuniMusicStore.musicRoomInfo.musicRoleId,
+                })
+            }
         }
     }
 
@@ -283,12 +270,7 @@ export default class MessageView extends Vue {
 
 
     async queryMusicList() {
-        console.log('删除即构diamante')
-        console.log('删除即构diamante')
         const data = await musicRequest.get('https://music-api.heheda.top/playlist/detail?_t=1699363992&id=3778678') as any
-        console.log(data)
-        console.log(data.playlist)
-        console.log(data.playlist.tracks)
         this.tableData = data.playlist.tracks
     }
 
@@ -317,10 +299,13 @@ export default class MessageView extends Vue {
         }
     }
 
+    dragging = false
+
     musicInput(value) {
         this.checkRoleId()
 
-        console.log(value)
+        this.dragging = true
+        console.log(`input--:${value}`)
         //秒，
         const playTime = Math.ceil(value / 100)
         //所以播放时间也要为秒
@@ -328,9 +313,8 @@ export default class MessageView extends Vue {
 
         const curTime = new Date()
 
-        console.log(789789789)
         socialuniMusicStore.setMusicRoomInfo({
-            musicTime: 100000000,
+            musicTime: this.musicRoomInfo.musicTime,
             musicUrl: this.musicRoomInfo.musicUrl,
             playingTimestamp: curTime,
             //单位秒
@@ -343,12 +327,12 @@ export default class MessageView extends Vue {
 
     musicChange() {
         this.checkRoleId()
+        this.dragging = false
         this.playMusicApiFun()
     }
 
 
     async playMusicAPI(songId) {
-        console.log('chufae')
         if (!SocialuniMusicRoleId.hasOperateAuthList.includes(socialuniMusicStore.musicRoomInfo.musicRoleId)) {
             AlertUtil.error("您没有操作权限")
         }
@@ -367,7 +351,6 @@ export default class MessageView extends Vue {
 
         //更新音乐时长
         this.$refs.audioPlayer.onloadedmetadata = () => {
-            console.log('jiazaiwan')
             const curTime = new Date()
             socialuniMusicStore.setMusicRoomInfo({
                 musicTime: this.$refs.audioPlayer.duration,

@@ -160,7 +160,7 @@ public class SocialuniMusicController {
     public ResultRO<Void> updateMusic(@PathVariable("channel") String channel, @RequestBody AgoraUpdateMusicQO updateMusicQO) {
         this.sequence++;
 
-        /*SocialuniMusicOperateCheckRO checkResult = socialuniMusicOperateCheck.checkRoleId(channel);
+        SocialuniMusicOperateCheckRO checkResult = socialuniMusicOperateCheck.checkRoleId(channel);
 
         Integer chatId = checkResult.getChatId();
 
@@ -237,7 +237,7 @@ public class SocialuniMusicController {
             System.out.println(httpResult.toString());
 //            log.info(httpResult.getErrMsg());
 //            log.info(httpResult.getErrCode().toString());
-        }*/
+        }
         return ResultRO.success();
     }
 
