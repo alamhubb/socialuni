@@ -21,5 +21,5 @@ public class SocialuniPlayMusicQO {
     //默认0
     Integer playingTime;
     //是否暂停了, 默认false
-    Boolean pause;
+    Boolean playing;
 }

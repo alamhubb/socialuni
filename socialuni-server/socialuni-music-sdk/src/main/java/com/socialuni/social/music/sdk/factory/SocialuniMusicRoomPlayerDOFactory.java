@@ -33,10 +33,10 @@ public class SocialuniMusicRoomPlayerDOFactory {
             socialuniMusicRoomPlayerDO.setPlayingTime(0);
         }
         //如果为空默认为播放
-        if (ObjectUtil.isEmpty(socialuniPlayMusicQO.getPause())) {
+        if (ObjectUtil.isEmpty(socialuniPlayMusicQO.getPlaying())) {
             socialuniMusicRoomPlayerDO.setPlaying(true);
         } else {
-            socialuniMusicRoomPlayerDO.setPlaying(socialuniPlayMusicQO.getPause());
+            socialuniMusicRoomPlayerDO.setPlaying(socialuniPlayMusicQO.getPlaying());
         }
 
         socialuniMusicRoomPlayerDO.sequencePlus();

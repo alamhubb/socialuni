@@ -6,7 +6,6 @@
 
 
         <div class="flex-1 overflow-hidden h100p bg-white ml-sm">
-            {{ musicRoomInfo?.musicUrl }}
             <!--            <audio ref="audioPlayer" src="https://music.163.com/song/media/outer/url?id=2100329027.mp3" autoplay muted ></audio>-->
             <audio ref="audioPlayer" :src="musicRoomInfo?.musicUrl"></audio>
             <!--            <div class="w100p">
@@ -19,13 +18,6 @@
                 <div></div>
 
                 <!--        如果为roleid = ower或者admin，显示， 如果musicurl有值显示， 否则不显示-->
-
-
-                <div v-if="musicRoomInfo">
-                    {{ realPlayingValue }}--{{ musicRoomInfo.musicTime }}--{{
-                    musicRoomInfo?.playing
-                    }}--{{ musicRoomInfo?.playingTime }}
-                </div>
                 <div v-if="musicRoomInfo?.musicUrl">
                     <div class="row-col-center">
                         <div>{{ formatTooltip(realPlayingValue) }}</div>
@@ -134,9 +126,6 @@ import test1 from './test1.mp3'
 import SocialuniMusicRoleId from "socialuni-music-sdk/src/constant/SocialuniMusicRoleId";
 import AlertUtil from "socialuni-native-h5/src/util/AlertUtil";
 
-let localStream
-let localVideo = null
-
 @Component({
     components: {SocialuniChatViewH5, SocialuniMsgViewH5}
 })
@@ -203,6 +192,43 @@ export default class MessageView extends Vue {
         }
     }
 
+
+    dragging = false
+
+    musicInput(value) {
+        this.checkRoleId()
+
+        this.dragging = true
+        console.log(`input--:${value}`)
+        //秒，
+        const playTime = Math.floor(value / 100)
+        //所以播放时间也要为秒
+        if (this.musicRoomInfo.playing) {
+            this.$refs.audioPlayer.currentTime = playTime
+        }
+
+        const curTime = new Date()
+
+        socialuniMusicStore.setMusicRoomInfo({
+            musicTime: this.musicRoomInfo.musicTime,
+            musicUrl: this.musicRoomInfo.musicUrl,
+            playingTimestamp: curTime,
+            //单位秒
+            playingTime: playTime,
+            playing: this.musicRoomInfo.playing,
+            musicRoleId: socialuniMusicStore.musicRoomInfo.musicRoleId,
+        })
+        console.log(this.musicRoomInfo.playing)
+        this.computedRealPlayingValue(false)
+    }
+
+
+    musicChange() {
+        this.checkRoleId()
+        this.dragging = false
+        this.playMusicApiFun()
+    }
+
     //初始化的播放怎么做
 
     continuePlay() {
@@ -241,8 +267,6 @@ export default class MessageView extends Vue {
             //什么情况下为0，是播放完成后
             //进度为0.01秒
             this._realPlayingValue = Math.floor(diffTime / 10) + this.musicRoomInfo.playingTime * 100
-
-            console.log(`computedRealPlayingValue--:${this._realPlayingValue}`)
 
             if (this._realPlayingValue >= this.musicMax) {
                 socialuniMusicStore.setMusicRoomInfo({
@@ -288,7 +312,7 @@ export default class MessageView extends Vue {
     }
 
     formatTooltip(value) {
-        const time = Math.ceil(value / 100)
+        const time = Math.floor(value / 100)
         const minute = Math.floor(time / 60)
         const second = time % 60
         const minuteStr = minute > 9 ? minute : '0' + minute
@@ -300,41 +324,6 @@ export default class MessageView extends Vue {
         if (!SocialuniMusicRoleId.hasOperateAuthList.includes(socialuniMusicStore.musicRoomInfo.musicRoleId)) {
             AlertUtil.error("您没有操作权限")
         }
-    }
-
-    dragging = false
-
-    musicInput(value) {
-        this.checkRoleId()
-
-        this.dragging = true
-        console.log(`input--:${value}`)
-        //秒，
-        const playTime = Math.floor(value / 100)
-        //所以播放时间也要为秒
-        if (this.musicRoomInfo.playing) {
-            this.$refs.audioPlayer.currentTime = playTime
-        }
-
-        const curTime = new Date()
-
-        socialuniMusicStore.setMusicRoomInfo({
-            musicTime: this.musicRoomInfo.musicTime,
-            musicUrl: this.musicRoomInfo.musicUrl,
-            playingTimestamp: curTime,
-            //单位秒
-            playingTime: playTime,
-            playing: this.musicRoomInfo.playing,
-            musicRoleId: socialuniMusicStore.musicRoomInfo.musicRoleId,
-        })
-        this.computedRealPlayingValue(false)
-    }
-
-
-    musicChange() {
-        this.checkRoleId()
-        this.dragging = false
-        // this.playMusicApiFun()
     }
 
 

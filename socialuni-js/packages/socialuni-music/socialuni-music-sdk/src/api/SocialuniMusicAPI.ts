@@ -8,8 +8,9 @@ export default class SocialuniMusicAPI {
     }
 
 
-    static playMusicAPI(channelName, musicUrl) {
-        return socialuniUserRequest.post<SocialuniMusicRoomInfoRO>(`socialuni/music/playMusic/${channelName}`, musicUrl)
+    static playMusicAPI(channelName: string, musicRoomInfo: SocialuniMusicRoomInfoRO) {
+        console.trace(`chufale ${musicRoomInfo.playing}`)
+        return socialuniUserRequest.post<SocialuniMusicRoomInfoRO>(`socialuni/music/playMusic/${channelName}`, musicRoomInfo)
     }
 
     static queryMusicChannel(channelName) {
