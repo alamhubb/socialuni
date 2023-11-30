@@ -8,12 +8,10 @@ import com.socialuni.social.common.api.constant.DateTimeType;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
-import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.im.dao.repository.ChatUserRepository;
 import com.socialuni.social.im.enumeration.SocialuniChatOperateType;
 import com.socialuni.social.im.logic.check.SocialuniChatUserCheck;
 import com.socialuni.social.music.sdk.check.SocialuniMusicOperateCheck;
-import com.socialuni.social.music.sdk.dao.DO.SocialuniMusicRoomUserDO;
 import com.socialuni.social.music.sdk.factory.SocialuniMusicRoomPlayerDOFactory;
 import com.socialuni.social.music.sdk.factory.SocialuniMusicRoomPlayerInfoROFactory;
 import com.socialuni.social.music.sdk.logic.entity.SocialuniMusicRoomUserEntity;
@@ -22,7 +20,6 @@ import com.socialuni.social.music.sdk.logic.manage.SocialuniMusicRoomUserManage;
 import com.socialuni.social.music.sdk.model.RO.SocialuniMusicOperateCheckRO;
 import com.socialuni.social.music.sdk.dao.DO.SocialuniMusicRoomDO;
 import com.socialuni.social.music.sdk.model.QO.AgoraPlayMusicQO;
-import com.socialuni.social.music.sdk.model.QO.AgoraUpdateMusicQO;
 import com.socialuni.social.music.sdk.model.QO.SocialuniPlayMusicQO;
 import com.socialuni.social.music.sdk.model.RO.SocialuniMusicInfoRO;
 import com.socialuni.social.music.sdk.model.RO.SocialuniMusicInitDataRO;
@@ -285,7 +282,7 @@ public class SocialuniMusicController {
 
 
         if (socialuniMusicRoomDO.getPlaying()) {
-            Date playingTimeStamp = socialuniMusicRoomDO.getPlayingTimeStamp();
+            Date playingTimeStamp = socialuniMusicRoomDO.getPlayingTimestamp();
             long musicTime = socialuniMusicRoomDO.getMusicTime() * 1000;
             long playingTime = socialuniMusicRoomDO.getPlayingTime() * 1000;
 

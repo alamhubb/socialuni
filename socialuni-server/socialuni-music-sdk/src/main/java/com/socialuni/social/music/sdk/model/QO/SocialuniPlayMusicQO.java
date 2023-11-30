@@ -17,7 +17,7 @@ public class SocialuniPlayMusicQO {
     String playerId;
     //当前播放的时间
     //默认 new Date()
-    Date playingTimeStamp;
+    Date playingTimestamp;
     //默认0
     Integer playingTime;
     //是否暂停了, 默认false

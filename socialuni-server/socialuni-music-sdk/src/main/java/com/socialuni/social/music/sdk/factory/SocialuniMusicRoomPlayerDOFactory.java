@@ -21,10 +21,10 @@ public class SocialuniMusicRoomPlayerDOFactory {
 
         socialuniMusicRoomPlayerDO.setMusicTime(socialuniPlayMusicQO.getMusicTime());
 
-        if (ObjectUtil.isNotEmpty(socialuniPlayMusicQO.getPlayingTimeStamp())) {
-            socialuniMusicRoomPlayerDO.setPlayingTimeStamp(socialuniPlayMusicQO.getPlayingTimeStamp());
+        if (ObjectUtil.isNotEmpty(socialuniPlayMusicQO.getPlayingTimestamp())) {
+            socialuniMusicRoomPlayerDO.setPlayingTimestamp(socialuniPlayMusicQO.getPlayingTimestamp());
         } else {
-            socialuniMusicRoomPlayerDO.setPlayingTimeStamp(new Date());
+            socialuniMusicRoomPlayerDO.setPlayingTimestamp(new Date());
         }
 
         if (ObjectUtil.isNotEmpty(socialuniPlayMusicQO.getPlayingTime())) {

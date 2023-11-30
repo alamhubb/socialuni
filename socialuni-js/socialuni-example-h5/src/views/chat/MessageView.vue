@@ -20,27 +20,28 @@
                 <!--        如果为roleid = ower或者admin，显示， 如果musicurl有值显示， 否则不显示-->
                 <div v-if="musicRoomInfo?.musicUrl">
                     <div class="row-col-center">
-                        <div>{{ formatTooltip(realPlayingValue) }}</div>
+                        <div>{{ curPlayingTime }}</div>
                         <el-slider v-model="realPlayingValue" @input="musicInput" @change="musicChange"
                                    :show-tooltip="false"
                                    :max="musicMax"></el-slider>
                         <div>{{ formatTooltip(musicMax) }}</div>
                     </div>
-                    <div v-if="SocialuniMusicRoleId.hasOperateAuthList.includes(musicRoomInfo.musicRoleId)">
-                        <main class="music">
-                            <div class="music-button">
+                    <div>
+                        <div v-if="SocialuniMusicRoleId.hasOperateAuthList.includes(musicRoomInfo.musicRoleId)">
+                            <div>
                                 <!--                            <i @click="isChangeLike" v-if="!isLike" title="收藏" class="mdi mdi-star-outline"></i>-->
                                 <!--                            <i @click="isChangeLike" v-else style="color: red;font-size: 22px;" title="已收藏"  class="mdi mdi-star"></i>-->
-                                <i title="上一曲" @click="next(-1)" class="mdi  mdi-skip-previous"></i>
+                                <i title="上一曲" @click="next(-1)" class="mdi mdi-skip-previous"></i>
                                 <i @click="continuePlay(!showPause)" style="font-size: 40px; color: #cc7013;"
                                    class="mdi"
                                    :class="[showPause ? 'mdi-pause' :'mdi-play']"></i>
                                 <i title="下一曲" @click="next(1)" class="mdi mdi-skip-next"></i>
-                                <svg class="svg" @click="openLyric" aria-hidden="true">
-                                    <use xlink:href="#icon-minganci"></use>
-                                </svg>
                             </div>
-                        </main>
+                        </div>
+                        <div>
+                            <i class="mdi mdi-volume-mute" @click="openSound"></i>
+                            <i class="mdi mdi-volume-medium"></i>
+                        </div>
                     </div>
                 </div>
                 <!--        <div>
@@ -142,7 +143,7 @@ export default class MessageView extends Vue {
 
     get musicMax() {
         if (this.musicRoomInfo) {
-            return this.musicRoomInfo.musicTime * 100
+            return this.musicRoomInfo.musicTime * this.secondPlayingUnit
             // return 500 * 100
         }
         return 0
@@ -152,6 +153,15 @@ export default class MessageView extends Vue {
 
     get showPause() {
         return this.musicRoomInfo && (this.musicRoomInfo.playing)
+    }
+
+    openSound() {
+        if (this.musicRoomInfo.playing) {
+            console.log('设置播放进度')
+            console.log(Math.floor(this.realPlayingValue / this.secondPlayingUnit))
+            this.$refs.audioPlayer.currentTime = Math.floor(this.realPlayingValue / this.secondPlayingUnit)
+            this.frontPlay()
+        }
     }
 
     mounted() {
@@ -188,7 +198,7 @@ export default class MessageView extends Vue {
             if (this.musicRoomInfo.playing) {
                 this.timer = setInterval(() => {
                     this.computedRealPlayingValue()
-                }, 10)
+                }, this.playingUnit)
             }
         }
     }
@@ -202,7 +212,7 @@ export default class MessageView extends Vue {
         this.dragging = true
         console.log(`input--:${value}`)
         //秒，
-        const playTime = Math.floor(value / 100)
+        const playTime = Math.floor(value / this.secondPlayingUnit)
         //所以播放时间也要为秒
         if (this.musicRoomInfo.playing) {
             this.$refs.audioPlayer.currentTime = playTime
@@ -242,7 +252,7 @@ export default class MessageView extends Vue {
                 musicUrl: this.musicRoomInfo.musicUrl,
                 playingTimestamp: new Date(),
                 //单位秒
-                playingTime: this.realPlayingValue / 100,
+                playingTime: this.realPlayingValue / this.secondPlayingUnit,
                 playing: playing,
                 musicRoleId: socialuniMusicStore.musicRoomInfo.musicRoleId,
             }
@@ -268,11 +278,19 @@ export default class MessageView extends Vue {
             //什么情况下为0，是播放完成后
             //进度为0.01秒
             if (this.musicRoomInfo.playing) {
-                this._realPlayingValue = Math.floor(diffTime / 10) + this.musicRoomInfo.playingTime * 100
+                this._realPlayingValue = Math.floor(diffTime / this.playingUnit) + this.musicRoomInfo.playingTime * this.secondPlayingUnit
             } else {
-                this._realPlayingValue = this.musicRoomInfo.playingTime * 100
+                this._realPlayingValue = this.musicRoomInfo.playingTime * this.secondPlayingUnit
             }
+            if (this._realPlayingValue <= 20) {
+                console.log(`curDate:${curDate}`)
+                console.log(`playTime:${playTime}`)
+                console.log(`diffTime:${diffTime}`)
+            }
+
             if (this._realPlayingValue >= this.musicMax) {
+                console.log(`this._realPlayingValue:${this._realPlayingValue}`)
+                console.log(`this.musicMax:${this.musicMax}`)
                 socialuniMusicStore.setMusicRoomInfo({
                     musicTime: this.musicRoomInfo.musicTime,
                     musicUrl: this.musicRoomInfo.musicUrl,
@@ -315,8 +333,19 @@ export default class MessageView extends Vue {
         this.playMusicAPI(this.songId)
     }
 
+    get curPlayingTime() {
+        console.log(this.formatTooltip(this.realPlayingValue))
+        return this.formatTooltip(this.realPlayingValue)
+    }
+
+    playingUnit = 100;
+
+    get secondPlayingUnit(){
+        return 1000 / this.playingUnit
+    }
+
     formatTooltip(value) {
-        const time = Math.floor(value / 100)
+        const time = Math.floor(value / this.secondPlayingUnit)
         const minute = Math.floor(time / 60)
         const second = time % 60
         const minuteStr = minute > 9 ? minute : '0' + minute
@@ -332,9 +361,7 @@ export default class MessageView extends Vue {
 
 
     async playMusicAPI(songId) {
-        if (!SocialuniMusicRoleId.hasOperateAuthList.includes(socialuniMusicStore.musicRoomInfo.musicRoleId)) {
-            AlertUtil.error("您没有操作权限")
-        }
+        this.checkRoleId()
         //主要是为了设置url
         const musicUrl = `https://music.163.com/song/media/outer/url?id=${songId}.mp3`;
         const playRoomInfo = {
@@ -368,7 +395,7 @@ export default class MessageView extends Vue {
     }
 
     frontPlay() {
-        // this.$refs.audioPlayer.play()
+        this.$refs.audioPlayer.play()
     }
 
     playMusicApiFun() {
