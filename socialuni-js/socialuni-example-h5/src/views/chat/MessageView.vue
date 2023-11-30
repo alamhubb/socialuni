@@ -243,10 +243,25 @@ export default class MessageView extends Vue {
     //初始化的播放怎么做
 
     continuePlay(playing: boolean) {
-        //如何判断是继续播放还是重新播放
-        //根据playTime决定
-        if (this.musicRoomInfo?.musicUrl) {
-            this.frontPlay()
+        if (playing) {
+            //如何判断是继续播放还是重新播放
+            //根据playTime决定
+            if (this.musicRoomInfo?.musicUrl) {
+                this.frontPlay()
+                const playRoomInfo = {
+                    musicTime: this.musicRoomInfo.musicTime,
+                    musicUrl: this.musicRoomInfo.musicUrl,
+                    playingTimestamp: new Date(),
+                    //单位秒
+                    playingTime: this.realPlayingValue / this.secondPlayingUnit,
+                    playing: playing,
+                    musicRoleId: socialuniMusicStore.musicRoomInfo.musicRoleId,
+                }
+                socialuniMusicStore.setMusicRoomInfo(playRoomInfo)
+                this.playMusicApiFun()
+            }
+        } else {
+            this.$refs.audioPlayer.pause()
             const playRoomInfo = {
                 musicTime: this.musicRoomInfo.musicTime,
                 musicUrl: this.musicRoomInfo.musicUrl,
@@ -288,7 +303,7 @@ export default class MessageView extends Vue {
                 console.log(`diffTime:${diffTime}`)
             }
 
-            if (this._realPlayingValue >= this.musicMax) {
+            if (this._realPlayingValue >= this.musicMax && this.musicRoomInfo.playing) {
                 console.log(`this._realPlayingValue:${this._realPlayingValue}`)
                 console.log(`this.musicMax:${this.musicMax}`)
                 socialuniMusicStore.setMusicRoomInfo({
@@ -340,7 +355,7 @@ export default class MessageView extends Vue {
 
     playingUnit = 100;
 
-    get secondPlayingUnit(){
+    get secondPlayingUnit() {
         return 1000 / this.playingUnit
     }
 
@@ -399,8 +414,6 @@ export default class MessageView extends Vue {
     }
 
     playMusicApiFun() {
-        this.frontPlay()
-
         SocialuniMusicAPI.playMusicAPI(socialuniMusicStore.channelName, this.musicRoomInfo).then(res => {
             socialuniMusicStore.setMusicRoomInfo(res.data)
         })
