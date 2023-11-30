@@ -339,13 +339,10 @@ export default class MessageView extends Vue {
     }
 
 
-    songId = null
-
     handleCurrentChange(row) {
         console.log(row)
-        this.songId = row.id
         // mucisRoomStore.publish(this.songId)
-        this.playMusicAPI(this.songId)
+        this.playMusicAPI(row.id)
     }
 
     get curPlayingTime() {
@@ -402,6 +399,7 @@ export default class MessageView extends Vue {
                 playing: true,
                 musicRoleId: socialuniMusicStore.musicRoomInfo.musicRoleId,
             })
+            this.frontPlay()
             this.playMusicApiFun()
         };
 
