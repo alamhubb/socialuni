@@ -17,6 +17,7 @@ public class NotifyType {
     //动态
     //兼容之前的内容2个版本以后可以删除，也不一定，删了以前的通知看不了，看看过几个版本吧
     public static final String comment = "comment";
+    public static final String music = "music";
     //动态
     public static final String talk_comment = "talk_comment";
     //评论

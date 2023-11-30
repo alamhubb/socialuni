@@ -61,7 +61,7 @@ public class WebsocketServer extends TextWebSocketHandler {
     /**
      * 广播信息
      */
-    public static void sendMessageToAllUsers(NotifyVO notify) {
+    public static <T> void sendMessageToAllUsers(NotifyVO<T> notify) {
         String userIdStr = notify.getUser().getId().toString();
         if (notify.getType().equals(NotifyType.message)) {
             //发送给所有在线的群组里面的用户

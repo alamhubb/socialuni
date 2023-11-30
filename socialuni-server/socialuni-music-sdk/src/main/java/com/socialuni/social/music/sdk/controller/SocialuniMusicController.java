@@ -7,23 +7,24 @@ import cn.hutool.json.JSONUtil;
 import com.socialuni.social.common.api.constant.DateTimeType;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
+import com.socialuni.social.im.config.websocket.WebsocketServer;
 import com.socialuni.social.im.dao.repository.ChatUserRepository;
+import com.socialuni.social.im.enumeration.NotifyType;
 import com.socialuni.social.im.enumeration.SocialuniChatOperateType;
 import com.socialuni.social.im.logic.check.SocialuniChatUserCheck;
+import com.socialuni.social.im.model.message.notify.NotifyVO;
 import com.socialuni.social.music.sdk.check.SocialuniMusicOperateCheck;
 import com.socialuni.social.music.sdk.factory.SocialuniMusicRoomPlayerDOFactory;
 import com.socialuni.social.music.sdk.factory.SocialuniMusicRoomPlayerInfoROFactory;
 import com.socialuni.social.music.sdk.logic.entity.SocialuniMusicRoomUserEntity;
 import com.socialuni.social.music.sdk.logic.manage.SocialuniMusicRoomManage;
 import com.socialuni.social.music.sdk.logic.manage.SocialuniMusicRoomUserManage;
-import com.socialuni.social.music.sdk.model.RO.SocialuniMusicOperateCheckRO;
+import com.socialuni.social.music.sdk.model.RO.*;
 import com.socialuni.social.music.sdk.dao.DO.SocialuniMusicRoomDO;
 import com.socialuni.social.music.sdk.model.QO.AgoraPlayMusicQO;
 import com.socialuni.social.music.sdk.model.QO.SocialuniPlayMusicQO;
-import com.socialuni.social.music.sdk.model.RO.SocialuniMusicInfoRO;
-import com.socialuni.social.music.sdk.model.RO.SocialuniMusicInitDataRO;
-import com.socialuni.social.music.sdk.model.RO.SocialuniMusicRoomInfoRO;
 import com.socialuni.social.music.sdk.utils.SocialuniMusicOperateRecordDOUtils;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
@@ -322,6 +323,13 @@ public class SocialuniMusicController {
 
 
         SocialuniMusicRoomInfoRO socialuniMusicRoomPlayerInfoRO = SocialuniMusicRoomPlayerInfoROFactory.createSocialuniMusicRoomInfoRO(socialuniMusicRoomDO, checkResult.getRoleId());
+
+
+        SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getMineUserNotNull();
+
+        NotifyVO<SocialuniMusicRoomInfoRO> notifyRONotifyVO = new NotifyVO<>(socialuniUserDo, NotifyType.music, socialuniMusicRoomPlayerInfoRO);
+
+        WebsocketServer.sendMessageToAllUsers(notifyRONotifyVO);
 
         /*log.info(fullUrl);
 //        String httpResult = restTemplate.postForEntity("https://api.sd-rtn.com/cn/v1/projects/5e681410a7434ce9bba3e268226ce537/cloud-player/players", httpEntity, String.class).getBody();
