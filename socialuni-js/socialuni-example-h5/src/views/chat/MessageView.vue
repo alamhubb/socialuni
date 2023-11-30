@@ -8,7 +8,7 @@
         <div class="flex-1 overflow-hidden h100p bg-white ml-sm">
             {{ musicRoomInfo?.musicUrl }}
             <!--            <audio ref="audioPlayer" src="https://music.163.com/song/media/outer/url?id=2100329027.mp3" autoplay muted ></audio>-->
-            <audio ref="audioPlayer" :src="musicRoomInfo?.musicUrl" autoplay></audio>
+            <audio ref="audioPlayer" :src="musicRoomInfo?.musicUrl"></audio>
             <!--            <div class="w100p">
                             <audio id="local" :src="test1" controls="controls"
                                    style="height: 200px;width: 500px;"></audio>
@@ -22,7 +22,9 @@
 
 
                 <div v-if="musicRoomInfo">
-                    {{ realPlayingValue }}--{{ musicRoomInfo.musicTime }}--{{ musicRoomInfo?.playing }}--{{ musicRoomInfo?.playingTime }}
+                    {{ realPlayingValue }}--{{ musicRoomInfo.musicTime }}--{{
+                    musicRoomInfo?.playing
+                    }}--{{ musicRoomInfo?.playingTime }}
                 </div>
                 <div v-if="musicRoomInfo?.musicUrl">
                     <div class="row-col-center">
@@ -159,7 +161,7 @@ export default class MessageView extends Vue {
     private timer = null
 
     get showPause() {
-        return this.musicRoomInfo && (this.musicRoomInfo.playing || this.musicRoomInfo.playingTime > 0)
+        return this.musicRoomInfo && (this.musicRoomInfo.playing)
     }
 
     mounted() {
@@ -187,6 +189,7 @@ export default class MessageView extends Vue {
             if (this.musicRoomInfo.playing) {
                 // this.frontPlay()
             }
+            console.log('触发了')
             this.computedRealPlayingValue()
             if (this.timer) {
                 clearInterval(this.timer)
@@ -228,8 +231,8 @@ export default class MessageView extends Vue {
         return this._realPlayingValue
     }
 
-    computedRealPlayingValue() {
-        if (!this.dragging){
+    computedRealPlayingValue(dragging = this.dragging) {
+        if (!dragging) {
             const curDate = new Date().getTime()
             const playTime = new Date(this.musicRoomInfo.playingTimestamp).getTime()
             //得到已播放时间的时间差
@@ -307,9 +310,11 @@ export default class MessageView extends Vue {
         this.dragging = true
         console.log(`input--:${value}`)
         //秒，
-        const playTime = Math.ceil(value / 100)
+        const playTime = Math.floor(value / 100)
         //所以播放时间也要为秒
-        this.$refs.audioPlayer.currentTime = playTime
+        if (this.musicRoomInfo.playing) {
+            this.$refs.audioPlayer.currentTime = playTime
+        }
 
         const curTime = new Date()
 
@@ -319,16 +324,17 @@ export default class MessageView extends Vue {
             playingTimestamp: curTime,
             //单位秒
             playingTime: playTime,
-            playing: true,
+            playing: this.musicRoomInfo.playing,
             musicRoleId: socialuniMusicStore.musicRoomInfo.musicRoleId,
         })
+        this.computedRealPlayingValue(false)
     }
 
 
     musicChange() {
         this.checkRoleId()
         this.dragging = false
-        this.playMusicApiFun()
+        // this.playMusicApiFun()
     }
 
 
