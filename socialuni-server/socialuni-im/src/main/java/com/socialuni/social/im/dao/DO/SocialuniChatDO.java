@@ -18,7 +18,7 @@ import java.io.Serializable;
 @Entity
 @Data
 @Table(name = "s_im_chat", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"chatName", "type"}),
+//        @UniqueConstraint(columnNames = {"chatName", "type"}),
 },
         //查询条件索引
         indexes = {
