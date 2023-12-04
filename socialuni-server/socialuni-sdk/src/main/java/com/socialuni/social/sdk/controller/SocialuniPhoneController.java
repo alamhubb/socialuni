@@ -27,6 +27,7 @@ public class SocialuniPhoneController implements SocialuniPhoneAPI {
     public ResultRO<Void> sendAuthCode(SocialSendAuthCodeQO authCodeQO) {
         return socialuniPhoneService.sendAuthCode(authCodeQO);
     }
+
     @Override
     public ResultRO<SocialuniMineUserDetailRO> bindWxPhoneNum(@RequestBody @Valid SocialBindWxPhoneNumQO bindWxPhoneNumQO) {
         return socialuniPhoneBindService.bindWxPhoneNum(bindWxPhoneNumQO);
@@ -39,6 +40,6 @@ public class SocialuniPhoneController implements SocialuniPhoneAPI {
 
     @Override
     public ResultRO<Boolean> checkRegistry(String phoneNum) {
-        return null;
+        return socialuniPhoneService.checkRegistry(phoneNum);
     }
 }

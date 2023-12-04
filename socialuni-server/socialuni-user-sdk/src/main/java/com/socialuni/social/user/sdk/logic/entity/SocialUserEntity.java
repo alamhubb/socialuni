@@ -22,7 +22,7 @@ public class SocialUserEntity {
 
     public SocialuniUserDo getOrCreateUserByPhoneNum(String phoneNum) {
         //校验手机号格式
-        SocialUserPhoneDo SocialUserPhoneDo = socialUserPhoneManage.checkLoginPhoneNum(phoneNum);
+        SocialUserPhoneDo SocialUserPhoneDo = socialUserPhoneManage.checkLoginPhoneNumAllowCan(phoneNum);
 
         SocialuniUserDo mineUser;
         if (SocialUserPhoneDo != null) {

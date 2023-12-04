@@ -1,8 +1,10 @@
 package com.socialuni.social.user.sdk.logic.service;
 
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
 import com.socialuni.social.user.sdk.logic.domain.SocailSendAuthCodeDomain;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
+import com.socialuni.social.user.sdk.logic.manage.SocialUserPhoneManage;
 import com.socialuni.social.user.sdk.model.QO.phone.SocialSendAuthCodeQO;
 import com.socialuni.social.user.sdk.utils.SocialuniPhoneNumCheck;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
@@ -16,6 +18,8 @@ import javax.annotation.Resource;
 public class SocialuniPhoneService {
     @Resource
     private SocailSendAuthCodeDomain socailSendAuthCodeDomain;
+    @Resource
+    private SocialUserPhoneManage socialUserPhoneManage;
     /*@Resource
     private AuthThirdUserDomain authThirdUserDomain;
 
@@ -38,11 +42,11 @@ public class SocialuniPhoneService {
 
 
     public ResultRO<Boolean> checkRegistry(String phoneNum) {
+        SocialUserPhoneDo socialUserPhoneDo = socialUserPhoneManage.checkLoginPhoneNumAllowCan(phoneNum);
 
-        SocialuniPhoneNumCheck.checkPhoneNum(phoneNum);
-
-
-
-        return null;
+        if (socialUserPhoneDo != null) {
+            return ResultRO.success(true);
+        }
+        return ResultRO.success(false);
     }
 }

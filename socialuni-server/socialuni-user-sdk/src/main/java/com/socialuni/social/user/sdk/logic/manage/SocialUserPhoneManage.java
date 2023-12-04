@@ -48,11 +48,17 @@ public class SocialUserPhoneManage {
         }
     }
 
-    public SocialUserPhoneDo checkLoginPhoneNum(String phoneNum) {
+    public SocialUserPhoneDo checkLoginPhoneNumAndGetUser(String phoneNum) {
         //校验手机号格式
         SocialuniPhoneNumCheck.checkPhoneNum(phoneNum);
         //校验手机号状态是否可用
         SocialUserPhoneDo SocialUserPhoneDo = socialUserPhoneRedis.findByPhoneNum(phoneNum);
+        return SocialUserPhoneDo;
+    }
+
+    public SocialUserPhoneDo checkLoginPhoneNumAllowCan(String phoneNum) {
+        //校验手机号状态是否可用
+        SocialUserPhoneDo SocialUserPhoneDo = this.checkLoginPhoneNumAndGetUser(phoneNum);
         if (SocialUserPhoneDo != null) {
             SocialuniUserDo phoneUser = SocialuniUserUtil.getAndCheckUserNotNull(SocialUserPhoneDo.getUserId());
             if (!SocialuniUserSysConfig.bandAllowLogin) {

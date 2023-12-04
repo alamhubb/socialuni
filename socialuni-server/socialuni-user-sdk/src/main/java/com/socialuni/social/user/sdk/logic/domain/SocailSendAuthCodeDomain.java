@@ -51,7 +51,7 @@ public class SocailSendAuthCodeDomain {
         //user为null则是登录
         if (mineUser == null) {
             //校验手机号是否可用
-            socialUserPhoneManage.checkLoginPhoneNum(phoneNum);
+            socialUserPhoneManage.checkLoginPhoneNumAllowCan(phoneNum);
         } else {
             //校验手机号是否可用
             socialUserPhoneManage.checkBindPhoneNum(phoneNum, mineUser.getUnionId());
