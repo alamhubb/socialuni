@@ -15,14 +15,19 @@ export default class SocialuniAppService {
         const websocketUrl = SocialuniAPIConfig.socialuniWebsocketUrl + '/webrtc?token=' + token
 
         WebsocketWebRtcUtil.easyWebRTC = FastWebRTC.createClient({
-            wsUrl : websocketUrl
+            wsUrl: websocketUrl
         })
 // 设置远程视频流到video元素
         WebsocketWebRtcUtil.easyWebRTC.ontrack((event) => {
             WebsocketWebRtcUtil.remoteVideo.srcObject = event.streams[0];
         })
 
-        WebsocketUtil.websocketConnect(false)
+        const websocketUrl1 = SocialuniAPIConfig.socialuniWebsocketUrl + '/webSocket/message?token=' + token
+
+        WebsocketUtil.createWebsocket({
+            wsUrl: websocketUrl1
+        })
+
 
         // TODO: Implement WebSocket or other technology to receive messages from server
         // and call handleSignalingData when a message is received
