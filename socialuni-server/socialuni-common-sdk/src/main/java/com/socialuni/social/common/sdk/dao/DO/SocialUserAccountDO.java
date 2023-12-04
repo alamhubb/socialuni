@@ -18,7 +18,7 @@ import java.io.Serializable;
  */
 @Data
 @Entity
-@Table(name = "s_user_account1",
+@Table(name = "s_user_account",
         uniqueConstraints = {
                 //每个渠道都是唯一的
                 @UniqueConstraint(columnNames = {"userId"}),
