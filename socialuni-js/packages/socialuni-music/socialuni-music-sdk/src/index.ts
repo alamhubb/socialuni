@@ -10,6 +10,7 @@ import SocialuniImEventKey from "socialuni-im-api/src/constant/SocialuniMusicEve
 import MessageViewParams from "socialuni-im-sdk/src/model/MessageViewParams";
 import SocialuniMusicRoleId from "./constant/SocialuniMusicRoleId";
 import SocialuniMusicAPI from "./api/SocialuniMusicAPI";
+import {SocialuniMusicRoomInfoRO} from "./model/SocialuniMusicRoomPlayerInfoRO";
 
 class SocialuniMusicPlugin implements SocialuniPlugin {
     async onLaunch() {
@@ -23,7 +24,7 @@ class SocialuniMusicPlugin implements SocialuniPlugin {
         console.log('执行订阅')
         CommonEventUtil.on(SocialuniImEventKey.socialuniImPageInit, async (params: MessageViewParams) => {
             socialuniMusicStore.setChannelName(params.chatId)
-            const res  = await SocialuniMusicAPI.queryMusicRoomPlayerInfoAPI(socialuniMusicStore.channelName)
+            const res = await SocialuniMusicAPI.queryMusicRoomPlayerInfoAPI(socialuniMusicStore.channelName)
             console.log(4656465)
             console.log(res)
             socialuniMusicStore.setMusicRoomInfo(res.data)
@@ -48,6 +49,12 @@ class SocialuniMusicPlugin implements SocialuniPlugin {
                 });
             }*/
         })
+    }
+
+    onMessage(notify: NotifyVO<SocialuniMusicRoomInfoRO>) {
+        if (notify.type === NotifyType.music) {
+            socialuniMusicStore.setMusicRoomInfo(notify.data)
+        }
     }
 }
 

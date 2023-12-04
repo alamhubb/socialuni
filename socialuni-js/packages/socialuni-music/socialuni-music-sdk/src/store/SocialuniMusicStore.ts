@@ -16,9 +16,15 @@ export class SocialuniMusicStore {
 
         if (typeof value.playingTimestamp === 'string') {
             console.trace('后台返回时间')
+            console.log(value.playingTimestamp)
+            console.log(new Date(value.playingTimestamp).getTime())
+        } else if (typeof value.playingTimestamp === 'number') {
+            console.trace('websocket返回时间')
+            console.log(value.playingTimestamp)
             console.log(new Date(value.playingTimestamp).getTime())
         } else {
             console.trace('前台设置时间')
+            console.log(value.playingTimestamp)
             console.log(value.playingTimestamp.getTime())
         }
     }
