@@ -18,6 +18,10 @@ import java.io.Serializable;
         indexes = {
                 //关联需要键索引，索引列不能为空
                 @Index(columnList = "userId"),
+                @Index(columnList = "unionId"),
+                @Index(columnList = "appOpenId"),
+                @Index(columnList = "mpOpenId"),
+                @Index(columnList = "h5OpenId"),
         },
         uniqueConstraints = {
                 //每个渠道都是唯一的
