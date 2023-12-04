@@ -22,11 +22,8 @@ export default class SocialuniAppService {
             WebsocketWebRtcUtil.remoteVideo.srcObject = event.streams[0];
         })
 
-        const websocketUrl1 = SocialuniAPIConfig.socialuniWebsocketUrl + '/webSocket/message?token=' + token
 
-        WebsocketUtil.createWebsocket({
-            wsUrl: websocketUrl1
-        })
+        WebsocketUtil.createWebsocket()
 
 
         // TODO: Implement WebSocket or other technology to receive messages from server

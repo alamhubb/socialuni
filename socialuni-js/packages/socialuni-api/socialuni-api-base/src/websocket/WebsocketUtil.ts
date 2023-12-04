@@ -1,10 +1,7 @@
 import FastWebsocket, {FastWebsocketConfig} from "fast-socket/src/FastWebsocket";
 import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
-import {socialuniTokenModule} from "socialuni-user-sdk/src/store/SocialuniTokenModule";
 import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
 import SocialuniAPIConfig from "../SocialuniAPIConfig";
-import WebsocketWebRtcUtil from "./WebsocketWebRtcUtil";
-import FastWebRTC from "fast-webrtc/src/FastWebRTC";
 
 
 export default class WebsocketUtil {
@@ -39,7 +36,6 @@ export default class WebsocketUtil {
                 }
             }
         }
-
 
         this.fastWebsocket = FastWebsocket.createClient(config)
     }
