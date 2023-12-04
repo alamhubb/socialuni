@@ -24,6 +24,7 @@ public class NotifyVO<T> {
     private Integer receiveUserId;
 
     private String type;
+    private String chatId;
     private T data;
 
     public NotifyVO() {

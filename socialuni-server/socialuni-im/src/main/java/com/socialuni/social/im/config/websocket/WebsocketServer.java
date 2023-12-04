@@ -62,46 +62,47 @@ public class WebsocketServer extends TextWebSocketHandler {
      * 广播信息
      */
     public static <T> void sendMessageToAllUsers(NotifyVO<T> notify) {
-        String userIdStr = notify.getUser().getId().toString();
-        if (notify.getType().equals(NotifyType.message)) {
-            //发送给所有在线的群组里面的用户
-            for (WebSocketSession userSession : onlineUsersSessionMap.values()) {
-                if (userSession != null && userSession.isOpen()) {
-                    String sessionUserId = Objects.requireNonNull(userSession.getPrincipal()).getName();
-                    //如果发送人是自己则不发送
-                    if (userIdStr.equals(sessionUserId)) {
+        //发送给所有在线的群组里面的用户
+        for (WebSocketSession userSession : onlineUsersSessionMap.values()) {
+            String userIdStr = notify.getUser().getId().toString();
+            if (userSession != null && userSession.isOpen()) {
+                String sessionUserId = Objects.requireNonNull(userSession.getPrincipal()).getName();
+                //如果发送人是自己则不发送
+                if (userIdStr.equals(sessionUserId)) {
+                    continue;
+                }
+                Integer userId = SocialuniUnionIdFacede.getUnionIdByUuidAllowNull(sessionUserId);
+                //如果不为空，并且用户不在群组中，则不推送
+                if (userId != null) {
+                    String chatIdStr = null;
+                    if (notify.getType().equals(NotifyType.message)) {
+                        chatIdStr = notify.getChat().getId();
+                    } else if (notify.getType().equals(NotifyType.music)) {
+                        chatIdStr = notify.getChatId();
+                    }
+                    Integer chatId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(chatIdStr);
+                    SocialuniChatUserDO socialuniChatUserDO = chatUserRepository.findFirstByChatIdAndUserIdAndStatus(chatId, userId, ChatUserStatus.enable);
+                    if (socialuniChatUserDO == null) {
                         continue;
                     }
-                    Integer userId = SocialuniUnionIdFacede.getUnionIdByUuidAllowNull(sessionUserId);
-                    //如果不为空，并且用户不在群组中，则不推送
-                    if (userId != null) {
-                        String chatIdStr = notify.getChat().getId();
-                        Integer chatId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(chatIdStr);
-                        SocialuniChatUserDO socialuniChatUserDO = chatUserRepository.findFirstByChatIdAndUserIdAndStatus(chatId, userId, ChatUserStatus.enable);
-                        if (socialuniChatUserDO == null) {
-                            continue;
-                        }
-                    }
-                    //发给不是自己的
-                    log.info("消息发送用户id:{},sessionId:{}", userIdStr, sessionUserId);
-                    //如果用户在线才发送
-                    //有不为数字的代表是没登陆的用户才发送
-                    try {
-                        userSession.sendMessage(notify.toMessage());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                }
+                //发给不是自己的
+                log.info("消息发送用户id:{},sessionId:{}", userIdStr, sessionUserId);
+                //如果用户在线才发送
+                //有不为数字的代表是没登陆的用户才发送
+                try {
+                    userSession.sendMessage(notify.toMessage());
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
         }
-
-
     }
 
     public static void sendMessage(Integer userId, NotifyVO notify) {
         String uuid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(userId);
         WebSocketSession session = onlineUsersSessionMap.get(uuid);
-        if (session == null){
+        if (session == null) {
             return;
         }
         //如果用户在线才发送
@@ -177,7 +178,7 @@ public class WebsocketServer extends TextWebSocketHandler {
     }
 
     @Override
-    public void handlePongMessage(WebSocketSession session, PongMessage message){
+    public void handlePongMessage(WebSocketSession session, PongMessage message) {
         log.debug("收到客户端消息：{}", message.getPayload());
     }
 

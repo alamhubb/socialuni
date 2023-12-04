@@ -5,6 +5,9 @@ import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemMod
 export interface FastWebsocketConfig {
     wsUrl: string,
     onMessage?: ((event: MessageEvent) => void)
+    onOpen?: ((reload: boolean) => void)
+    // onError?: ((event: MessageEvent) => void)
+    // onClose?: ((event: MessageEvent) => void)
 }
 
 export default class FastWebsocket {
@@ -61,6 +64,8 @@ export default class FastWebsocket {
             if (reload) {
                 console.log('重新加载')
             }
+
+            this.config.onOpen(reload)
 
             //心跳保活
             this.timer = setInterval(() => {

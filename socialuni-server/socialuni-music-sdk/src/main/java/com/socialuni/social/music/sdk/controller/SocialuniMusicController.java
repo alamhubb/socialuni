@@ -328,7 +328,7 @@ public class SocialuniMusicController {
         SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getMineUserNotNull();
 
         NotifyVO<SocialuniMusicRoomInfoRO> notifyRONotifyVO = new NotifyVO<>(socialuniUserDo, NotifyType.music, socialuniMusicRoomPlayerInfoRO);
-
+        notifyRONotifyVO.setChatId(channel);
         WebsocketServer.sendMessageToAllUsers(notifyRONotifyVO);
 
         /*log.info(fullUrl);
