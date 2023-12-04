@@ -36,4 +36,9 @@ public class SocialuniPhoneController implements SocialuniPhoneAPI {
     public ResultRO<SocialuniMineUserDetailRO> bindPhoneNum(@RequestBody @Valid SocialPhoneNumQO phoneNumQO) {
         return socialuniPhoneBindService.bindPhoneNum(phoneNumQO);
     }
+
+    @Override
+    public ResultRO<Boolean> checkRegistry(String phoneNum) {
+        return null;
+    }
 }

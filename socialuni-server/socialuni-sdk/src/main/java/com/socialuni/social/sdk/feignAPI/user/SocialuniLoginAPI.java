@@ -26,4 +26,5 @@ public interface SocialuniLoginAPI {
 
     @PostMapping("phoneLogin")
     ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> phoneLogin(@RequestBody @Valid SocialPhoneNumQO socialPhoneNumQO);
+
 }

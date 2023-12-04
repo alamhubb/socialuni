@@ -4,11 +4,12 @@ import com.socialuni.social.common.api.exception.exception.SocialBusinessExcepti
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.report.sdk.enumeration.SocialuniUserStatus;
+import com.socialuni.social.user.sdk.config.SocialuniUserSysConfig;
 import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.logic.redis.SocialUserPhoneRedis;
 import com.socialuni.social.user.sdk.repository.SocialUserPhoneRepository;
-import com.socialuni.social.user.sdk.utils.PhoneNumUtil;
+import com.socialuni.social.user.sdk.utils.SocialuniPhoneNumCheck;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Component;
 
@@ -38,7 +39,7 @@ public class SocialUserPhoneManage {
     public void checkBindPhoneNumHasBind(String phoneNum) {
         //进入这个方法一定是已经登陆了。
         //校验手机号格式
-        PhoneNumUtil.checkPhoneNum(phoneNum);
+        SocialuniPhoneNumCheck.checkPhoneNum(phoneNum);
         //校验手机号状态是否可用
         SocialUserPhoneDo SocialUserPhoneDo = socialUserPhoneRedis.findByPhoneNum(phoneNum);
         if (SocialUserPhoneDo != null) {
@@ -49,14 +50,16 @@ public class SocialUserPhoneManage {
 
     public SocialUserPhoneDo checkLoginPhoneNum(String phoneNum) {
         //校验手机号格式
-        PhoneNumUtil.checkPhoneNum(phoneNum);
+        SocialuniPhoneNumCheck.checkPhoneNum(phoneNum);
         //校验手机号状态是否可用
         SocialUserPhoneDo SocialUserPhoneDo = socialUserPhoneRedis.findByPhoneNum(phoneNum);
         if (SocialUserPhoneDo != null) {
             SocialuniUserDo phoneUser = SocialuniUserUtil.getAndCheckUserNotNull(SocialUserPhoneDo.getUserId());
-            //如果手机号违规，则返回手机号不可用
-            if (phoneUser.getStatus().equals(SocialuniUserStatus.violation)) {
-                throw new SocialBusinessException("手机号不可用");
+            if (!SocialuniUserSysConfig.bandAllowLogin) {
+                //如果手机号违规，则返回手机号不可用
+                if (phoneUser.getStatus().equals(SocialuniUserStatus.violation)) {
+                    throw new SocialBusinessException("手机号不可用");
+                }
             }
         }
         return SocialUserPhoneDo;

@@ -4,6 +4,7 @@ import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.user.sdk.logic.domain.SocailSendAuthCodeDomain;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.QO.phone.SocialSendAuthCodeQO;
+import com.socialuni.social.user.sdk.utils.SocialuniPhoneNumCheck;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -33,5 +34,15 @@ public class SocialuniPhoneService {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
         //校验逻辑应该拿到 domain里，因为限制了只有清池可以访问，所以不再限制ip
         return socailSendAuthCodeDomain.sendAuthCode(authCodeQO, mineUser);
+    }
+
+
+    public ResultRO<Boolean> checkRegistry(String phoneNum) {
+
+        SocialuniPhoneNumCheck.checkPhoneNum(phoneNum);
+
+
+
+        return null;
     }
 }
