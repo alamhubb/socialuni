@@ -12,13 +12,53 @@ import SocialuniMusicRoleId from "socialuni-music-sdk/src/constant/SocialuniMusi
 import AlertUtil from "socialuni-native-h5/src/util/AlertUtil";
 import {audio, div} from "@/views/chat/VueRender";
 import {ElSlider} from "element-plus";
+import {elSlider} from "@/views/chat/ElementPlusRender";
 
 @Component({
     components: {SocialuniChatViewH5, SocialuniMsgViewH5},
 })
 export default class MessageView extends Vue {
     render() {
-        return [div(this.curPlayingTime)]
+        return [
+            div(
+                {
+                    class: 'flex-row h100p overflow-hidden'
+                },
+                [
+                    div({
+                            class: 'w200 bd-radius shadow h100p flex-none'
+                        },
+                        ['test']),
+
+                    div({
+                            class: 'flex-1 overflow-hidden h100p bg-white ml-sm'
+                        },
+                        [
+                            audio({
+                                ref: 'audioPlayer',
+                                src: socialuniMusicStore.musicRoomInfo?.musicUrl,
+                            }),
+                            div([
+                                socialuniMusicStore.musicRoomInfo?.musicUrl ? div(
+                                    [
+                                        div(
+                                            {
+                                                class: 'row-col-center'
+                                            },
+                                            [
+                                                div([this.curPlayingTime]),
+                                                elSlider(
+                                                    {modelValue: this.realPlayingValue, max: this.musicMax, onInput: this.musicInput, onChange: this.musicChange}
+                                                )
+                                            ]
+                                        ),
+                                    ]
+                                ) : '',
+                            ])
+                        ]),
+                ]
+            )
+        ]
     }
 
     $refs: {
@@ -27,8 +67,8 @@ export default class MessageView extends Vue {
 
     tableData = []
 
-    //创建时设置musicTime
-    //然后不需要播放
+//创建时设置musicTime
+//然后不需要播放
 
     get musicMax() {
         if (this.musicRoomInfo) {
@@ -129,9 +169,12 @@ export default class MessageView extends Vue {
         this.playMusicApiFun()
     }
 
-    //初始化的播放怎么做
+//初始化的播放怎么做
 
-    continuePlay(playing: boolean) {
+    continuePlay(playing
+                     :
+                     boolean
+    ) {
         if (playing) {
             //如何判断是继续播放还是重新播放
             //根据playTime决定
@@ -320,7 +363,7 @@ export default class MessageView extends Vue {
 
     testvalue = 0
 
-    //设置当前时间和播放时间
+//设置当前时间和播放时间
 
     deleteYun111() {
         SocialuniMusicAPI.updateMusicAPI(socialuniMusicStore.channelName, {
