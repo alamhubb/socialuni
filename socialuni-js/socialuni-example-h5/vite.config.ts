@@ -10,12 +10,6 @@ import socialuniPlatformAutoImportPlugin from "vite-plugin-socialuni-platform-au
 export default defineConfig({
     plugins: [
         vue(),
-        vueJsx({
-            babelPlugins: [
-                ['@babel/plugin-proposal-decorators', {legacy: true}],
-                ['@babel/plugin-transform-class-properties', {loose: true}]
-            ]
-        }),
         nodeResolve(),
         socialuniPlatformAutoImportPlugin()
     ],

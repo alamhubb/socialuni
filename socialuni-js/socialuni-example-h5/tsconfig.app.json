@@ -5,7 +5,6 @@
   "compilerOptions": {
     "composite": true,
     "baseUrl": ".",
-    "moduleResolution": "node",
     "experimentalDecorators": true,
     "useDefineForClassFields": true,
     "strictNullChecks": false,

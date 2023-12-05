@@ -114,7 +114,7 @@
     </div>
 </template>
 
-<script lang="tsx">
+<script lang="ts">
 import {Component, Vue, Watch} from 'vue-facing-decorator';
 import SocialuniChatViewH5 from "socialuni-im-view-h5/src/views/SocialuniChatViewH5.vue"
 import SocialuniMsgViewH5 from "socialuni-im-view-h5/src/views/SocialuniMsgViewH5.vue"

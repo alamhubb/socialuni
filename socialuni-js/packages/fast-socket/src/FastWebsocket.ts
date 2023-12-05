@@ -65,7 +65,7 @@ export default class FastWebsocket {
                 console.log('重新加载')
             }
 
-            this.config.onOpen(reload)
+            this.config.onOpen?.(reload)
 
             //心跳保活
             this.timer = setInterval(() => {
