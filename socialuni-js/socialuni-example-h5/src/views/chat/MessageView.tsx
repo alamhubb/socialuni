@@ -19,46 +19,13 @@ import {elSlider} from "@/views/chat/ElementPlusRender";
 })
 export default class MessageView extends Vue {
     render() {
-        const left = div({
-                class: 'w200 bd-radius shadow h100p flex-none'
-            },
-            ['test'])
-
-        const player = div([
-                div({
-                        class: 'row-col-center'
-                    },
-                    [
-                        div([this.curPlayingTime]),
-                        elSlider(
-                            {modelValue: this.realPlayingValue, max: this.musicMax, onInput: this.musicInput, onChange: this.musicChange}
-                        )
-                    ]
-                ),
-            ]
+        return (
+            <div class={"flex-row h100p overflow-hidden"}>
+                <div class={"w200 bd-radius shadow h100p flex-none"}>
+                    <socialuni-chat-view-h5></socialuni-chat-view-h5>
+                </div>
+            </div>
         )
-        return [
-            div(
-                {
-                    class: 'flex-row h100p overflow-hidden'
-                },
-                [
-                    left,
-                    div({
-                            class: 'flex-1 overflow-hidden h100p bg-white ml-sm'
-                        },
-                        [
-                            audio({
-                                ref: 'audioPlayer',
-                                src: socialuniMusicStore.musicRoomInfo?.musicUrl,
-                            }),
-                            div([
-                                socialuniMusicStore.musicRoomInfo?.musicUrl ? player : '',
-                            ])
-                        ]),
-                ]
-            )
-        ]
     }
 
     $refs: {
