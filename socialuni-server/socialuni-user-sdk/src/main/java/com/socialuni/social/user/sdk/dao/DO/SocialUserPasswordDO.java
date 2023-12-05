@@ -3,8 +3,10 @@ package com.socialuni.social.user.sdk.dao.DO;
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 
 @Entity
@@ -18,7 +20,7 @@ import javax.persistence.*;
         },
         uniqueConstraints = {
                 //每个渠道都是唯一的
-                @UniqueConstraint(columnNames = {"devId", "account"})
+                @UniqueConstraint(columnNames = {"devId", "userId"})
         }
 )
 @Data
@@ -32,4 +34,6 @@ public class SocialUserPasswordDO extends SocialuniContentBaseDO {
     private String account;
     @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
+    String secretKey;
 }

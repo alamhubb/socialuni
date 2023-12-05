@@ -12,7 +12,7 @@ import com.socialuni.social.tance.entity.DevAccountEntity;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.user.sdk.logic.domain.SocialuniLoginDomain;
-import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumQO;
+import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumAuthCodeQO;
 import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Service;
@@ -48,7 +48,7 @@ public class AdminLoginService {
 
 
     @Transactional
-    ResultRO<SocialLoginRO<DevAccountRO>> phoneLogin(SocialPhoneNumQO socialPhoneNumQO) {
+    ResultRO<SocialLoginRO<DevAccountRO>> phoneLogin(SocialPhoneNumAuthCodeQO socialPhoneNumQO) {
         String phoneNum = socialPhoneNumQO.getPhoneNum();
 
         ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> resultRO = centerLoginService.phoneLogin(socialPhoneNumQO);

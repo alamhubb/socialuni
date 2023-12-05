@@ -4,7 +4,7 @@ import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.report.sdk.constant.SocialuniSupportProviderType;
 import com.socialuni.social.user.sdk.logic.domain.SocialuniLoginDomain;
-import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumQO;
+import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumAuthCodeQO;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +30,7 @@ public class SocialuniLoginService {
     }
 
     @Transactional
-    public ResultRO<SocialLoginRO<SocialuniUserRO>> phoneLogin(SocialPhoneNumQO socialPhoneNumQO) {
+    public ResultRO<SocialLoginRO<SocialuniUserRO>> phoneLogin(SocialPhoneNumAuthCodeQO socialPhoneNumQO) {
         SocialLoginRO<SocialuniUserRO> socialLoginRO = socialLoginDomain.phoneLogin(socialPhoneNumQO);
 //        CompletableFuture.supplyAsync(() -> socialuniOpenImgUserFeign.userLogin(SocialuniMineUserDetailROFactory.toImUserModel(user)));
         return ResultRO.success(socialLoginRO);

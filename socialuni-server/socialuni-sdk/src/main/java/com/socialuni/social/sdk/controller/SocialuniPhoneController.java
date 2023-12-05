@@ -6,7 +6,7 @@ import com.socialuni.social.sdk.feignAPI.user.SocialuniPhoneAPI;
 import com.socialuni.social.sdk.logic.service.phone.SocialuniPhoneBindService;
 import com.socialuni.social.user.sdk.logic.service.SocialuniPhoneService;
 import com.socialuni.social.sdk.model.QO.SocialBindWxPhoneNumQO;
-import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumQO;
+import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumAuthCodeQO;
 import com.socialuni.social.user.sdk.model.QO.phone.SocialSendAuthCodeQO;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +34,7 @@ public class SocialuniPhoneController implements SocialuniPhoneAPI {
     }
 
     @Override
-    public ResultRO<SocialuniMineUserDetailRO> bindPhoneNum(@RequestBody @Valid SocialPhoneNumQO phoneNumQO) {
+    public ResultRO<SocialuniMineUserDetailRO> bindPhoneNum(@RequestBody @Valid SocialPhoneNumAuthCodeQO phoneNumQO) {
         return socialuniPhoneBindService.bindPhoneNum(phoneNumQO);
     }
 

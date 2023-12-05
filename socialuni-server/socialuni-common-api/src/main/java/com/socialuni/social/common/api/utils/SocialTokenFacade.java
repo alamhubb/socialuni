@@ -3,6 +3,7 @@ package com.socialuni.social.common.api.utils;
 import com.socialuni.social.common.api.config.SocialRequestUserConfig;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,9 +18,17 @@ public class SocialTokenFacade {
     //key 这样可以保证每次请求生成的token一致，方便测试
     private static String tokenSecretKey;
 
+    @Getter
+    private static String passwordSecretKey;
+
     @Value("${socialuni.user.token-secret-key:tokenSecretKey}")
     public void setTokenKey(String tokenKey) {
         SocialTokenFacade.tokenSecretKey = tokenKey;
+    }
+
+    @Value("${socialuni.user.password-secret-key:passwordSecretKey}")
+    public void setPasswordSecretKey(String passwordSecretKey) {
+        SocialTokenFacade.passwordSecretKey = passwordSecretKey;
     }
 
     public final static String socialuniTokenName = "socialuniToken";

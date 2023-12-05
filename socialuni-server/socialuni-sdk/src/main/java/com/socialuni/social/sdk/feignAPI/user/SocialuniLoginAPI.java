@@ -1,8 +1,9 @@
 package com.socialuni.social.sdk.feignAPI.user;
 
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.user.sdk.model.QO.SocialPhoneAuthCodePasswordQO;
 import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumPasswordQO;
-import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumQO;
+import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumAuthCodeQO;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
@@ -26,9 +27,11 @@ public interface SocialuniLoginAPI {
     ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> providerLogin(@RequestBody @Valid SocialProviderLoginQO loginData);
 
     @PostMapping("phoneLogin")
-    ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> phoneLogin(@RequestBody @Valid SocialPhoneNumQO socialPhoneNumQO);
+    ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> phoneLogin(@RequestBody @Valid SocialPhoneNumAuthCodeQO socialPhoneNumQO);
 
     @PostMapping("passwordLogin")
     ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> passwordLogin(@RequestBody @Valid SocialPhoneNumPasswordQO socialPhoneNumQO);
 
+    @PostMapping("phonePasswordLogin")
+    ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> phonePasswordLogin(@RequestBody @Valid SocialPhoneAuthCodePasswordQO socialPhoneNumQO);
 }

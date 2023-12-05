@@ -12,14 +12,14 @@ import javax.validation.constraints.NotBlank;
  */
 @Data
 @NoArgsConstructor
-public class SocialPhoneNumPasswordQO extends SocialPhoneNumQO {
+public class SocialPhoneAuthCodePasswordQO extends SocialPhoneNumAuthCodeQO {
 
     @NotBlank
     @Length(min = 8, max = 16)
     private String password;
 
-    public SocialPhoneNumPasswordQO(String phoneNum, String password) {
-        super(phoneNum);
+    public SocialPhoneAuthCodePasswordQO(String phoneNum, String authCode, String password) {
+        super(phoneNum, authCode);
         this.password = password;
     }
 }
