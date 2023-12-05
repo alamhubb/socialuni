@@ -13,6 +13,5 @@ public class SocialAppLaunchDataRO {
     private SocialuniAppMoreConfigBO appMoreConfig;
     private List<String> reportTypes;
     private Integer onlineUsersCount;
-    private String tempKey;
-    private String tempValue;
+    private String publicKey;
 }

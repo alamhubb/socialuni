@@ -49,7 +49,8 @@ public class PasswordUtil {
         return content;
     }
 
-    public static boolean check(String password) {
+    public static String check(String cryptoPassword) {
+        String password = PasswordUtil.rsaDecode(cryptoPassword);
         if (StringUtils.isEmpty(password)) {
             throw new SocialBusinessException("密码不能为空");
         } else if (password.length() < 8) {
@@ -61,7 +62,7 @@ public class PasswordUtil {
         } else if (NumberUtils.strAllNotNumber(password)) {
             throw new SocialBusinessException("密码必须包含数字");
         }
-        return true;
+        return password;
     }
 
 

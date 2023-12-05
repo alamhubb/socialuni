@@ -40,14 +40,8 @@ public class SocialuniAppService {
         appInitData.setAppMoreConfig(SocialuniAppConfig.getAppMoreConfig());
 //        appInitData.setOnlineUsersCount(WebsocketServer.getOnlineCount());
         appInitData.setReportTypes(ViolateType.frontShowReportTypes);
-        //先对秘钥进行加密，然后再对加密后的进行加密
-        String uuidKey = UUIDUtil.getUUID();
-        //秘钥
-        AES aes = SecureUtil.aes(uuidKey.getBytes());
-        String encrypted = aes.encryptHex(SocialTokenFacade.getPasswordPublicKey());
 
-        appInitData.setTempKey(uuidKey);
-        appInitData.setTempValue(encrypted);
+        appInitData.setPublicKey(SocialTokenFacade.getPasswordPublicKey());
 
         return new ResultRO<>(appInitData);
     }

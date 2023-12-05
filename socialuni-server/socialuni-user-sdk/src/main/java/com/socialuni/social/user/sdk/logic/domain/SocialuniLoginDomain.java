@@ -2,6 +2,7 @@ package com.socialuni.social.user.sdk.logic.domain;
 
 import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.symmetric.AES;
+import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.common.api.utils.SocialTokenFacade;
@@ -83,13 +84,18 @@ public class SocialuniLoginDomain {
         if (socialUserPasswordDO == null) {
             throw new SocialSystemException("未设置密码，却使用了密码登录");
         }
+        String cryptoPassword = socialPhoneNumQO.getPassword();
 
-        String password = socialUserPasswordDO.getPassword();
+        //检查密码
+        String password = PasswordUtil.check(cryptoPassword);
 
-        String secretKey = socialUserPasswordDO.getSecretKey();
+        String sha512Password = PasswordUtil.sha512Encode(password);
 
-        //aes解密 密码
-        String realPassword = null;
+        String dbPassword = socialUserPasswordDO.getPassword();
+
+        if (!sha512Password.equals(dbPassword)) {
+            throw new SocialBusinessException("密码错误");
+        }
 
 
         //给前端返回一个秘钥，和 key+向量 ，前端解密，得到key+向量，对密码加密，传给后台，后台解密，对密码进行校验，校验结束后 sha512 加密，和 加密的秘钥一起存入数据库
@@ -103,26 +109,6 @@ public class SocialuniLoginDomain {
 //        return getSocialLoginROByMineUser(mineUser);
     }
 
-    public static String toSHA512(String input) {
-        try {
-            // 创建一个 MessageDigest 实例，初始化为 SHA-512 算法
-            MessageDigest md = MessageDigest.getInstance("SHA-512");
-
-            // 对输入字符串进行加密
-            byte[] hashedBytes = md.digest(input.getBytes());
-
-            // 将字节数组转换为十六进制的字符串
-            StringBuilder sb = new StringBuilder();
-            for (byte b : hashedBytes) {
-                sb.append(String.format("%02x", b));
-            }
-
-            return sb.toString();
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     @Resource
     SocialUserPasswordManage socialUserPasswordManage;
 
@@ -130,10 +116,8 @@ public class SocialuniLoginDomain {
     public SocialLoginRO<SocialuniUserRO> phonePasswordLogin(SocialPhoneAuthCodePasswordQO socialPhoneNumQO) {
         String cryptoPassword = socialPhoneNumQO.getPassword();
 
-        String password = PasswordUtil.rsaDecode(cryptoPassword);
-
         //检查密码
-        PasswordUtil.check(password);
+        String password = PasswordUtil.check(cryptoPassword);
 
         //校验用户没有则创建
         SocialuniUserDo mineUser = socialPhoneLoginEntity.phoneLogin(socialPhoneNumQO);
