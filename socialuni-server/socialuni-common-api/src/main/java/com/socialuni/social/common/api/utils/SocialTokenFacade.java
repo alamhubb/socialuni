@@ -19,16 +19,24 @@ public class SocialTokenFacade {
     private static String tokenSecretKey;
 
     @Getter
-    private static String passwordSecretKey;
+    private static String passwordPublicKey;
+
+    @Getter
+    private static String passwordPrivateKey;
 
     @Value("${socialuni.user.token-secret-key:tokenSecretKey}")
     public void setTokenKey(String tokenKey) {
         SocialTokenFacade.tokenSecretKey = tokenKey;
     }
 
-    @Value("${socialuni.user.password-secret-key:passwordSecretKey}")
-    public void setPasswordSecretKey(String passwordSecretKey) {
-        SocialTokenFacade.passwordSecretKey = passwordSecretKey;
+    @Value("${socialuni.user.password-public-key:MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAKVzx4CQiv8DXrs/anJXTjtJo5zrZnhClU4xo5TGU00M804rPRiwmArFrljzY5f4VlhJKjMqR9BbYlkqgw4X9p/tMifZ2ONJVMVMXAk3B91pxYRLY6S1p61010Q1gVs/1WtTdQxKsZkBNxYsd6VSZGMAoke1d3J4VYusEQDje8G/AgMBAAECgYA258uibhU6WG90+zADftaO1TqvBe1s5keu+ckbw478SFprq+ysB1qFZKGdkjOQSJC63pja/uJzEgh6p6FzKV+lnFpemsx6uIFe2Uets8uIFe7T2cTRKxstKglnOk+xJ8In7IdoYK6qrBRoYORTxO2BJGExlc7xWRC2lBuk5mMnuQJBAOfv2xdIR4iBqejKcDhhfEOgd8TZN8r9qE8/ycczTVio99ro5vYJ8ZpzoxMVVffrW7z+x4G7z2P+WbArfd+PaikCQQC2nh6UqEMJMnWHZ657nPtXuZI2dItGWAVJHBScHkhLFOOv1OKnOLbyqndf1iPPS8Yzp9tAC4ZDnikU1KNYA5mnAkB9dybRhWwMz/eV0ky6cyHBg4DGn6qqyGTP2fXRKFNi7qSFaw/lcKOdpYhFvnju0AakSj6qU2pw8RqbTiudT/thAkEAncpEHCjDO4go+yWAIvkCR8tlZb4PtWlKr+AegsK7rnxPO9eTO/AKS+U1Hk7WREBx8qJAFLegfH6FeqU8ukjqEwJBAJHJFIJipcciouh0mh/h2zvzozeFljGAWDsMB0Ij2VJDq2MPhxRQgRUsDn2KZbm4pIwCK6xJiAWZC/qbfFzoK34=}")
+    public void setPasswordPublicKey(String passwordSecretKey) {
+        SocialTokenFacade.passwordPublicKey = passwordSecretKey;
+    }
+
+    @Value("${socialuni.user.password-private-key:MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQClc8eAkIr/A167P2pyV047SaOc62Z4QpVOMaOUxlNNDPNOKz0YsJgKxa5Y82OX+FZYSSozKkfQW2JZKoMOF/af7TIn2djjSVTFTFwJNwfdacWES2OktaetdNdENYFbP9VrU3UMSrGZATcWLHelUmRjAKJHtXdyeFWLrBEA43vBvwIDAQAB}")
+    public void setPasswordPrivateKey(String passwordVector) {
+        SocialTokenFacade.passwordPrivateKey = passwordVector;
     }
 
     public final static String socialuniTokenName = "socialuniToken";

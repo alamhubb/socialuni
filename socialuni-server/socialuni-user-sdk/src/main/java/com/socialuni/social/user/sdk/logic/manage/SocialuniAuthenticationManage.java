@@ -1,7 +1,7 @@
 package com.socialuni.social.user.sdk.logic.manage;
 
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
-import com.socialuni.social.common.api.utils.IntegerUtils;
+import com.socialuni.social.common.api.utils.NumberUtils;
 import com.socialuni.social.common.api.constant.DateTimeType;
 import com.socialuni.social.user.sdk.dao.DO.AuthenticationDO;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
@@ -26,7 +26,7 @@ public class SocialuniAuthenticationManage {
 
     public void checkAuthCode(String phoneNum, String authCode) {
         //1.为空 2. 包含非数字 3.不为4位 ，返回
-        if (StringUtils.isEmpty(authCode) || IntegerUtils.strHasNoNumber(authCode) || authCode.length() != 4) {
+        if (StringUtils.isEmpty(authCode) || NumberUtils.strHasNoNumber(authCode) || authCode.length() != 4) {
             log.error("有人跳过前端，直接访问后台，错误的验证码");
             throw new SocialBusinessException("请输入正确的验证码");
         }

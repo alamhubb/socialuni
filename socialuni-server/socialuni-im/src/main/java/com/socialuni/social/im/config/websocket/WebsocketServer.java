@@ -1,14 +1,9 @@
 package com.socialuni.social.im.config.websocket;
 
-import cn.hutool.core.lang.Console;
-import com.socialuni.social.common.api.exception.exception.SocialNullUserException;
-import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import com.socialuni.social.common.api.utils.IntegerUtils;
+import com.socialuni.social.common.api.utils.NumberUtils;
 import com.socialuni.social.common.sdk.utils.RedisUtil;
-import com.socialuni.social.im.api.model.RO.ChatRO;
 import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.im.dao.repository.ChatUserRepository;
-import com.socialuni.social.im.enumeration.ChatStatus;
 import com.socialuni.social.im.enumeration.ChatUserStatus;
 import com.socialuni.social.im.enumeration.NotifyType;
 import com.socialuni.social.im.model.message.notify.NotifyVO;
@@ -146,7 +141,7 @@ public class WebsocketServer extends TextWebSocketHandler {
             redisContainer.addMessageListener(messageListener, channelTopic);
             onlineUsersSessionMap.put(userId, session);
             onlineUsersChannelTopicMap.put(userId, channelTopic);
-            if (IntegerUtils.strIsAllNumber(userId)) {
+            if (NumberUtils.strIsAllNumber(userId)) {
 //                userService.setUserOnlineTrue(userId);
             }
             log.debug("用户标识：{}，Session：{}，在线数量：{}", userId, session.toString(), onlineUsersChannelTopicMap.size());
@@ -209,7 +204,7 @@ public class WebsocketServer extends TextWebSocketHandler {
                     //从set中删除
                     subOnlineCount();
                 }
-                if (IntegerUtils.strIsAllNumber(userId)) {
+                if (NumberUtils.strIsAllNumber(userId)) {
 //                    userService.setUserOnlineFalse(userId);
                 }
             }

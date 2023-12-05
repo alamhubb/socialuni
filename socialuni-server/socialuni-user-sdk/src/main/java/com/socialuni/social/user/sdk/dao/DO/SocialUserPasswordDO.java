@@ -34,6 +34,4 @@ public class SocialUserPasswordDO extends SocialuniContentBaseDO {
     private String account;
     @Column(nullable = false)
     private String password;
-    @Column(nullable = false)
-    String secretKey;
 }

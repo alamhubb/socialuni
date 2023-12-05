@@ -1,10 +1,8 @@
 package com.socialuni.social.im.config.websocket;
 
-import com.socialuni.social.common.api.utils.IntegerUtils;
 import com.socialuni.social.common.api.utils.UUIDUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;

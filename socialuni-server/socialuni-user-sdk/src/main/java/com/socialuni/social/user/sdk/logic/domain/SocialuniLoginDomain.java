@@ -1,14 +1,18 @@
 package com.socialuni.social.user.sdk.logic.domain;
 
+import cn.hutool.crypto.SecureUtil;
+import cn.hutool.crypto.symmetric.AES;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.common.api.utils.SocialTokenFacade;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
 import com.socialuni.social.common.sdk.event.ddd.EventPublisherFacade;
+import com.socialuni.social.common.sdk.utils.StringUtil;
 import com.socialuni.social.user.sdk.dao.DO.SocialUserPasswordDO;
 import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
 import com.socialuni.social.user.sdk.logic.entity.SocialPhoneLoginEntity;
 import com.socialuni.social.user.sdk.logic.entity.SocialProviderLoginEntity;
+import com.socialuni.social.user.sdk.logic.manage.SocialUserPasswordManage;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserPhoneManage;
 import com.socialuni.social.user.sdk.logic.manage.SocialuniTokenManage;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniTokenDO;
@@ -19,6 +23,7 @@ import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumAuthCodeQO;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
 import com.socialuni.social.user.sdk.model.factory.SocialuniMineUserROFactory;
+import com.socialuni.social.user.sdk.utils.PasswordUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -30,6 +35,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
+import java.util.Date;
 
 @Service
 public class SocialuniLoginDomain {
@@ -79,8 +85,15 @@ public class SocialuniLoginDomain {
         }
 
         String password = socialUserPasswordDO.getPassword();
+
+        String secretKey = socialUserPasswordDO.getSecretKey();
+
         //aes解密 密码
         String realPassword = null;
+
+
+        //给前端返回一个秘钥，和 key+向量 ，前端解密，得到key+向量，对密码加密，传给后台，后台解密，对密码进行校验，校验结束后 sha512 加密，和 加密的秘钥一起存入数据库
+        //然后将 密码 进行 512 加密，和秘钥一起存储进
 
 
 //        SocialTokenFacade.getPasswordSecretKey();
@@ -88,31 +101,6 @@ public class SocialuniLoginDomain {
 
         return null;
 //        return getSocialLoginROByMineUser(mineUser);
-    }
-
-    public static String decrypt(String encryptedData, String secretKey, String initVector) {
-        try {
-            IvParameterSpec iv = new IvParameterSpec(initVector.getBytes(StandardCharsets.UTF_8));
-            SecretKeySpec skeySpec = new SecretKeySpec(secretKey.getBytes(StandardCharsets.UTF_8), "AES");
-
-            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
-            cipher.init(Cipher.DECRYPT_MODE, skeySpec, iv);
-
-            byte[] original = cipher.doFinal(Base64.getDecoder().decode(encryptedData));
-
-            return new String(original);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
-        return null;
-    }
-
-    public static void main(String[] args) {
-        String key = "Bar12345Bar12345"; // 128 bit key
-        String initVector = "RandomInitVector"; // 16 bytes IV
-
-        System.out.println(decrypt("你的加密文本", key, initVector));
     }
 
     public static String toSHA512(String input) {
@@ -135,17 +123,28 @@ public class SocialuniLoginDomain {
         }
     }
 
+    @Resource
+    SocialUserPasswordManage socialUserPasswordManage;
+
     @Transactional
-    public SocialLoginRO<SocialuniUserRO> passwordPhoneLogin(SocialPhoneAuthCodePasswordQO socialPhoneNumQO) {
+    public SocialLoginRO<SocialuniUserRO> phonePasswordLogin(SocialPhoneAuthCodePasswordQO socialPhoneNumQO) {
+        String cryptoPassword = socialPhoneNumQO.getPassword();
+
+        String password = PasswordUtil.rsaDecode(cryptoPassword);
+
+        //检查密码
+        PasswordUtil.check(password);
+
+        //校验用户没有则创建
         SocialuniUserDo mineUser = socialPhoneLoginEntity.phoneLogin(socialPhoneNumQO);
 
-        SocialUserPasswordDO socialUserPasswordDO = SocialuniUserRepositoryFacede.findByUserId(mineUser.getUserId(), SocialUserPasswordDO.class);
-        if (socialUserPasswordDO != null) {
+        Integer userId = mineUser.getUserId();
 
-        } else {
+        SocialUserPasswordDO socialUserPasswordDO = socialUserPasswordManage.getOrCreateUserPasswordDO(userId, socialPhoneNumQO.getPhoneNum());
 
-        }
+        String sha512Password = PasswordUtil.sha512Encode(password);
 
+        socialUserPasswordDO = socialUserPasswordManage.updatePassword(sha512Password, socialUserPasswordDO);
 
         return getSocialLoginROByMineUser(mineUser);
     }

@@ -15,7 +15,7 @@ import javax.validation.constraints.NotBlank;
 public class SocialPhoneAuthCodePasswordQO extends SocialPhoneNumAuthCodeQO {
 
     @NotBlank
-    @Length(min = 8, max = 16)
+    @Length(min = 8)
     private String password;
 
     public SocialPhoneAuthCodePasswordQO(String phoneNum, String authCode, String password) {

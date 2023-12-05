@@ -4,7 +4,7 @@ import com.socialuni.social.common.api.utils.SocialTokenFacade;
 import com.socialuni.social.common.sdk.utils.RequestLogUtil;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniTokenDO;
 import com.socialuni.social.user.sdk.repository.SocialuniCommonTokenRepository;
-import com.socialuni.social.common.api.utils.IntegerUtils;
+import com.socialuni.social.common.api.utils.NumberUtils;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.common.api.exception.exception.SocialNotLoginException;
 import com.socialuni.social.common.api.exception.exception.SocialUserTokenExpireException;
@@ -48,7 +48,7 @@ public class SocialTokenDOUtil {
         }
         Integer doUserId = tokenDO.getUserId();
         Integer userId;
-        if (IntegerUtils.strIsAllNumber(userKey)) {
+        if (NumberUtils.strIsAllNumber(userKey)) {
             //解析token
             userId = Integer.valueOf(userKey);
             if (!userId.equals(doUserId)) {

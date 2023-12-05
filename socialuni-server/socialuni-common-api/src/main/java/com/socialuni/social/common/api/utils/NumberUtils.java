@@ -6,7 +6,7 @@ import java.util.Random;
  * @author qinkaiyuan
  * @date 2019-03-01 21:59
  */
-public class IntegerUtils {
+public class NumberUtils {
     public static final Random random = new Random();
 
     public static Integer isNullReturnZeroOrSelf(Integer val) {
@@ -22,6 +22,17 @@ public class IntegerUtils {
         for (char cha : val.toCharArray()) {
             //有一个不为数字
             if (!Character.isDigit(cha)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static Boolean strAllNotNumber(String val) {
+        //遍历string数组
+        for (char cha : val.toCharArray()) {
+            //有一个不为数字
+            if (Character.isDigit(cha)) {
                 return false;
             }
         }

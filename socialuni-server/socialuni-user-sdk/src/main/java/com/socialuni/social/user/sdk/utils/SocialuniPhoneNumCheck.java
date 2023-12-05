@@ -1,7 +1,7 @@
 package com.socialuni.social.user.sdk.utils;
 
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
-import com.socialuni.social.common.api.utils.IntegerUtils;
+import com.socialuni.social.common.api.utils.NumberUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -10,7 +10,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class SocialuniPhoneNumCheck {
     public static void checkPhoneNum(String phoneNum) {
-        if (StringUtils.isEmpty(phoneNum) || IntegerUtils.strHasNoNumber(phoneNum) || phoneNum.length() != 11) {
+        if (StringUtils.isEmpty(phoneNum) || NumberUtils.strHasNoNumber(phoneNum) || phoneNum.length() != 11) {
             throw new SocialBusinessException("请输入正确的手机号");
         }
     }
