@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface SocialUserAccountRepository extends JpaRepository<SocialUserPlatformAccountDO, Integer> {
+public interface SocialUserPlatformAccountRepository extends JpaRepository<SocialUserPlatformAccountDO, Integer> {
 
     //查询账号是否注册过，某一渠道
     SocialUserPlatformAccountDO findByProviderAndUnionId(String provider, String unionId);

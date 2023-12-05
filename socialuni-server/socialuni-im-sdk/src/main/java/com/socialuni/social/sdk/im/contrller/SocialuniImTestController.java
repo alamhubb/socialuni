@@ -11,7 +11,7 @@ import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.user.sdk.constant.SocialuniAccountProviderType;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.common.sdk.dao.repository.SocialUserAccountRepository;
+import com.socialuni.social.common.sdk.dao.repository.SocialUserPlatformAccountRepository;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
 import com.socialuni.social.report.sdk.utils.BirthdayAgeUtil;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
@@ -36,7 +36,7 @@ import java.util.concurrent.CompletableFuture;
 public class SocialuniImTestController {
 
     @Resource
-    SocialUserAccountRepository socialUserAccountRepository;
+    SocialUserPlatformAccountRepository socialUserPlatformAccountRepository;
     @Resource
     SocialBindUserOpenImAccountDomain socialBindUserOpenImAccountDomain;
     @Resource
@@ -64,7 +64,7 @@ public class SocialuniImTestController {
 
 //        String json = readJsonFile("data/imIds.json");
 //        List<String> imIds = (List<String>) JsonUtil.objectMapper.readValue(json, List.class);
-        List<Integer> imUserIds = socialUserAccountRepository.findAllUserIdsAllByProvider(SocialuniAccountProviderType.openIm);
+        List<Integer> imUserIds = socialUserPlatformAccountRepository.findAllUserIdsAllByProvider(SocialuniAccountProviderType.openIm);
         log.info(String.valueOf(System.currentTimeMillis() / 1000));
         //获取一个imidMap
         Map<Integer, Integer> imIdsMap = new HashMap<>();

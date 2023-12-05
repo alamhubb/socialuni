@@ -7,6 +7,7 @@ import com.socialuni.social.user.sdk.logic.entity.SocialProviderLoginEntity;
 import com.socialuni.social.user.sdk.logic.manage.SocialuniTokenManage;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniTokenDO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
+import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumPasswordQO;
 import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumQO;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
@@ -38,6 +39,16 @@ public class SocialuniLoginDomain {
     @Transactional
     public SocialLoginRO<SocialuniUserRO> phoneLogin(SocialPhoneNumQO socialPhoneNumQO) {
         SocialuniUserDo mineUser = socialPhoneLoginEntity.phoneLogin(socialPhoneNumQO);
+
+        return getSocialLoginROByMineUser(mineUser);
+    }
+
+    @Transactional
+    public SocialLoginRO<SocialuniUserRO> passwordLogin(SocialPhoneNumPasswordQO socialPhoneNumQO) {
+        SocialuniUserDo mineUser = socialPhoneLoginEntity.phoneLogin(socialPhoneNumQO);
+
+
+
 
         return getSocialLoginROByMineUser(mineUser);
     }

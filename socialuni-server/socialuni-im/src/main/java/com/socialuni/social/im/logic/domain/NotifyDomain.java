@@ -12,7 +12,7 @@ import com.socialuni.social.im.dao.DO.message.SocialuniMessageReceiveDO;
 import com.socialuni.social.common.sdk.dao.DO.SocialUserPlatformAccountDO;
 import com.socialuni.social.im.dao.repository.SocialuniMessageReceiveRepository;
 import com.socialuni.social.common.sdk.dao.repository.NotifyRepository;
-import com.socialuni.social.common.sdk.dao.repository.SocialUserAccountRepository;
+import com.socialuni.social.common.sdk.dao.repository.SocialUserPlatformAccountRepository;
 import com.socialuni.social.im.model.message.notify.NotifyVO;
 import com.socialuni.social.common.sdk.platform.PushMsgDTO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
@@ -104,7 +104,7 @@ public class NotifyDomain {
     }*/
 
     @Resource
-    private SocialUserAccountRepository socialUserAccountRepository;
+    private SocialUserPlatformAccountRepository socialUserPlatformAccountRepository;
     @Resource
     private StringRedisTemplate stringRedisTemplate;
     @Resource
@@ -122,7 +122,7 @@ public class NotifyDomain {
 //        UserDO receiveUser = userRepository.findById(receiveUserId).get();
         Integer receiveUserId = notify.getBeUserId();
 
-        SocialUserPlatformAccountDO receiveAccount = socialUserAccountRepository.findByUserIdOrderByUpdateTimeDesc(receiveUserId);
+        SocialUserPlatformAccountDO receiveAccount = socialUserPlatformAccountRepository.findByUserIdOrderByUpdateTimeDesc(receiveUserId);
 //        if (receiveAccount != null) {
         String notifyType = notify.getType();
 //        String provider = receiveAccount.getProvider();

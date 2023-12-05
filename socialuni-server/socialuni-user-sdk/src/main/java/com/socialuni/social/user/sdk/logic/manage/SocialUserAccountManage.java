@@ -7,7 +7,7 @@ import com.socialuni.social.user.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.common.sdk.dao.DO.SocialUserPlatformAccountDO;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.user.sdk.model.RO.UniUnionIdRO;
-import com.socialuni.social.common.sdk.dao.repository.SocialUserAccountRepository;
+import com.socialuni.social.common.sdk.dao.repository.SocialUserPlatformAccountRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -19,17 +19,17 @@ import java.util.Date;
 @Slf4j
 public class SocialUserAccountManage {
     @Resource
-    SocialUserAccountRepository socialUserAccountRepository;
+    SocialUserPlatformAccountRepository socialUserPlatformAccountRepository;
     @Resource
     SocialUserAccountStore socialUserAccountStore;
 
     public SocialUserPlatformAccountDO updateSessionKey(Integer mineUserId, String provider, String sessionKey) {
-        SocialUserPlatformAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUserId(provider, mineUserId);
+        SocialUserPlatformAccountDO socialUserAccountDO = socialUserPlatformAccountRepository.findByProviderAndUserId(provider, mineUserId);
         //更新数据库的key
         socialUserAccountDO.setUpdateTime(new Date());
         //再次更新下sessionkey
         socialUserAccountDO.setSessionKey(sessionKey);
-        socialUserAccountDO = socialUserAccountRepository.save(socialUserAccountDO);
+        socialUserAccountDO = socialUserPlatformAccountRepository.save(socialUserAccountDO);
         return socialUserAccountDO;
     }
 
@@ -80,7 +80,7 @@ public class SocialUserAccountManage {
             socialUserAccountDO.setUnionId(uniUnionIdRO.getUnionid());
         }
         socialUserAccountDO.setSessionKey(uniUnionIdRO.getSession_key());
-        socialUserAccountRepository.save(socialUserAccountDO);
+        socialUserPlatformAccountRepository.save(socialUserAccountDO);
         return socialUserAccountDO;
     }
 }
