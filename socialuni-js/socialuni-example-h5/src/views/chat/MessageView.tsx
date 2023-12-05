@@ -6,23 +6,52 @@ import SocialuniMusicAPI from "socialuni-music-sdk/src/api/SocialuniMusicAPI";
 import CommonEventUtil from "socialuni-native-util/src/util/CommonEventUtil";
 import SocialuniImEventKey from "socialuni-im-api/src/constant/SocialuniMusicEventConst";
 import socialuniMusicStore from "socialuni-music-sdk/src/store/SocialuniMusicStore";
-import WebsocketWebRtcUtil from "socialuni-api-base/src/websocket/WebsocketWebRtcUtil";
-import test1 from './test1.mp3'
 import SocialuniMusicRoleId from "socialuni-music-sdk/src/constant/SocialuniMusicRoleId";
 import AlertUtil from "socialuni-native-h5/src/util/AlertUtil";
 import {audio, div} from "@/views/chat/VueRender";
-import {ElSlider} from "element-plus";
-import {elSlider} from "@/views/chat/ElementPlusRender";
 
 @Component({
     components: {SocialuniChatViewH5, SocialuniMsgViewH5},
 })
 export default class MessageView extends Vue {
-    render() {
+    template() {
         return (
-            <div class={"flex-row h100p overflow-hidden"}>
-                <div class={"w200 bd-radius shadow h100p flex-none"}>
+            <div class="flex-row h100p overflow-hidden">
+                <div class="w200 bd-radius shadow h100p flex-none">
                     <socialuni-chat-view-h5></socialuni-chat-view-h5>
+                </div>
+
+                <div class="flex-1 overflow-hidden h100p bg-white ml-sm">
+                    <audio ref="audioPlayer" src={this.musicRoomInfo?.musicUrl}/>
+                    <div>
+                        {
+                            this.musicRoomInfo?.musicUrl ?
+                                (
+                                    <div>
+                                        <div class="row-col-center">
+                                            <div>{this.curPlayingTime}</div>
+                                            <el-slider v-model={this.realPlayingValue}
+                                                       onInput={this.musicInput}
+                                                       onChange={this.musicChange}
+                                                       show-tooltip={false}
+                                                       max={this.musicMax}
+                                            ></el-slider>
+                                            <div>{this.formatTooltip(this.musicMax)}</div>
+                                        </div>
+                                    </div>
+                                ) : ''
+                        }
+                    </div>
+                    <div>
+                        {
+                            SocialuniMusicRoleId.hasOperateAuthList.includes(this.musicRoomInfo?.musicRoleId) &&
+                            <div>
+                                <i style="font-size: 40px; color: #cc7013;"
+                                   class={this.showPause ? 'mdi mdi-pause' : 'mdi mdi-play'}
+                                ></i>
+                            </div>
+                        }
+                    </div>
                 </div>
             </div>
         )
