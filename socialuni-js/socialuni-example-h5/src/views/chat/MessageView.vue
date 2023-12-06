@@ -139,6 +139,8 @@ export default class MessageView extends Vue {
 
   tableData = []
 
+  hintMusicPlayingNum = 0
+
   //创建时设置musicTime
   //然后不需要播放
 
@@ -174,7 +176,6 @@ export default class MessageView extends Vue {
 
     /*if (this.musicRoomInfo) {
         if (this.musicRoomInfo.playing) {
-            // this.frontPlay()
         }
     }*/
 
@@ -208,7 +209,6 @@ export default class MessageView extends Vue {
     this.checkRoleId()
 
     this.dragging = true
-    console.log(`input--:${value}`)
     //秒，
     const playTime = Math.floor(value / this.secondPlayingUnit)
     //所以播放时间也要为秒
@@ -227,7 +227,6 @@ export default class MessageView extends Vue {
       playing: this.musicRoomInfo.playing,
       musicRoleId: socialuniMusicStore.musicRoomInfo.musicRoleId,
     })
-    console.log(this.musicRoomInfo.playing)
     this.computedRealPlayingValue(false)
   }
 
@@ -392,8 +391,17 @@ export default class MessageView extends Vue {
     };
   }
 
-  frontPlay() {
-    this.$refs.audioPlayer.play()
+  async frontPlay() {
+    try {
+      await this.$refs.audioPlayer.play()
+    } catch (e) {
+      if (this.hintMusicPlayingNum < 2) {
+        this.hintMusicPlayingNum++
+        AlertUtil.confirm('有音乐正在播放，是否打开声音').then(() => {
+          this.setPlayerCurTimeAndPlay()
+        })
+      }
+    }
   }
 
   playMusicApiFun() {

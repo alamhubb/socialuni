@@ -501,7 +501,6 @@ class SocialChatModule {
 
 
     scrollToMessagePageBottom() {
-        console.trace(123123)
         CommonUtil.delayTime(100).then(() => {
             this.scrollTop = this.messages.length * 500
             // this.scrollTop = -1000
