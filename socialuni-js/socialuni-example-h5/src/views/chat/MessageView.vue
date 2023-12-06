@@ -164,6 +164,11 @@ export default class MessageView extends Vue {
         this.$refs.audioPlayer.currentTime = Math.floor(this.realPlayingValue / this.secondPlayingUnit)
         this.frontPlay()
       })
+    } else {
+      nextTick(() => {
+        this.$refs.audioPlayer.currentTime = Math.floor(this.realPlayingValue / this.secondPlayingUnit)
+        this.frontPause()
+      })
     }
   }
 
@@ -402,6 +407,10 @@ export default class MessageView extends Vue {
         })
       }
     }
+  }
+
+  async frontPause() {
+    this.$refs.audioPlayer.pause()
   }
 
   playMusicApiFun() {
