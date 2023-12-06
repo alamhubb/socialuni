@@ -40,13 +40,14 @@ public class SocialuniLoginService {
 //        CompletableFuture.supplyAsync(() -> socialuniOpenImgUserFeign.userLogin(SocialuniMineUserDetailROFactory.toImUserModel(user)));
         return ResultRO.success(socialLoginRO);
     }
+
+
     @Transactional
     public ResultRO<SocialLoginRO<SocialuniUserRO>> phonePasswordLogin(SocialPhoneAuthCodePasswordQO socialPhoneNumQO) {
         SocialLoginRO<SocialuniUserRO> socialLoginRO = socialLoginDomain.phonePasswordLogin(socialPhoneNumQO);
         return ResultRO.success(socialLoginRO);
     }
 
-    @Transactional
     public ResultRO<SocialLoginRO<SocialuniUserRO>> passwordLogin(SocialPhoneNumPasswordQO socialPhoneNumQO) {
         SocialLoginRO<SocialuniUserRO> socialLoginRO = socialLoginDomain.passwordLogin(socialPhoneNumQO);
         return ResultRO.success(socialLoginRO);

@@ -77,10 +77,17 @@ export default class SocialuniLoginViewService extends SocialuniViewService<Soci
             PhoneAPI.checkRegistry(this.loginUser.phoneNum).then(res => {
                 this.hasPassword = res.data
                 nextTick(() => {
-                    this.$refs.password.focus()
                     setTimeout(() => {
                         this.$refs.loginForm.clearValidate()
-                    }, 100)
+                        setTimeout(() => {
+                            this.$refs.password.focus()
+                            this.$refs.loginForm.clearValidate()
+                            setTimeout(() => {
+                                this.$refs.loginForm.clearValidate()
+                            }, 100)
+                        }, 500)
+                    }, 50)
+
                 })
             })
         }

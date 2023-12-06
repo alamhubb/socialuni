@@ -25,6 +25,7 @@ import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumAuthCodeQO;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
 import com.socialuni.social.user.sdk.model.factory.SocialuniMineUserROFactory;
+import com.socialuni.social.user.sdk.repository.SocialuniUserPasswordRepository;
 import com.socialuni.social.user.sdk.utils.PasswordUtil;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Service;
@@ -68,8 +69,9 @@ public class SocialuniLoginDomain {
 
     @Resource
     SocialUserPhoneManage socialUserPhoneManage;
+    @Resource
+    SocialuniUserPasswordRepository socialuniUserPasswordRepository;
 
-    @Transactional
     public SocialLoginRO<SocialuniUserRO> passwordLogin(SocialPhoneNumPasswordQO socialPhoneNumQO) {
         String phoneNum = socialPhoneNumQO.getPhoneNum();
 
@@ -149,9 +151,9 @@ public class SocialuniLoginDomain {
 
         Integer userId = mineUser.getUserId();
 
-        SocialUserPasswordDO socialUserPasswordDO = socialUserPasswordManage.getOrCreateUserPasswordDO(userId, socialPhoneNumQO.getPhoneNum());
-
         String sha512Password = PasswordUtil.sha512Encode(password);
+
+        SocialUserPasswordDO socialUserPasswordDO = socialUserPasswordManage.getOrCreateUserPasswordDO(userId, socialPhoneNumQO.getPhoneNum(), sha512Password);
 
         socialUserPasswordDO = socialUserPasswordManage.updatePassword(sha512Password, socialUserPasswordDO);
 

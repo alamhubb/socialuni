@@ -94,7 +94,6 @@ public class SocialuniDetailLoginService {
         return ResultRO.success(socialLoginRO);
     }
 
-    @Transactional
     public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> passwordLogin(SocialPhoneNumPasswordQO socialPhoneNumQO) {
         ResultRO<SocialLoginRO<SocialuniUserRO>> socialLoginRO1 = socialuniLoginService.passwordLogin(socialPhoneNumQO);
 

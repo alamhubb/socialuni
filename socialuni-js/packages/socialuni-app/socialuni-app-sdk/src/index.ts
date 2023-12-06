@@ -19,7 +19,7 @@ class SocialuniAppPlugin implements SocialuniPlugin {
 
     async initApp() {
         try {
-            // await socialuniConfigModule.getAppConfigAction()
+            socialuniConfigModule.getAppConfigAction()
             // socialAppModule.getHomeSwipersAction()
             // socialuniConfigModule.getReportTypesAction()
             SocialuniAppService.getAppLunchData()
