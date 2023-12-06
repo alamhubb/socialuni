@@ -328,7 +328,7 @@ export default class MessageView extends Vue {
 
 
   async queryMusicList() {
-    const data = await musicRequest.get('https://music-api.heheda.top/playlist/detail?_t=1699363992&id=3778678') as any
+    const data = await musicRequest.get('http://47.93.249.129:3000/playlist/detail?_t=1699363992&id=3778678') as any
     this.tableData = data.playlist.tracks
   }
 
