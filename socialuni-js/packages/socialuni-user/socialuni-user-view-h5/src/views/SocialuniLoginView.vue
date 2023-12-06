@@ -18,6 +18,7 @@
                 :maxlength="11"
                 clearable
                 @input="viewService.phoneNumberOnInput()"
+                @blur="viewService.phoneNumberOnInput()"
             >
               <template #prepend>+86</template>
             </el-input>

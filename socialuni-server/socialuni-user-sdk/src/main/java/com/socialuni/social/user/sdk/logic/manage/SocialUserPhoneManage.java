@@ -11,12 +11,14 @@ import com.socialuni.social.user.sdk.logic.redis.SocialUserPhoneRedis;
 import com.socialuni.social.user.sdk.repository.SocialUserPhoneRepository;
 import com.socialuni.social.user.sdk.utils.SocialuniPhoneNumCheck;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
 //授权用户信息
 @Component
+@Slf4j
 public class SocialUserPhoneManage {
     @Resource
     SocialUserPhoneRepository socialUserPhoneApi;
