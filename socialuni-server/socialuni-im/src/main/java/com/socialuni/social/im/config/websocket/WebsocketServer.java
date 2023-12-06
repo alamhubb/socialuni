@@ -80,6 +80,8 @@ public class WebsocketServer extends TextWebSocketHandler {
                     if (socialuniChatUserDO == null) {
                         continue;
                     }
+                } else {
+                    notify.getData()
                 }
                 //发给不是自己的
                 log.info("消息发送用户id:{},sessionId:{}", userIdStr, sessionUserId);

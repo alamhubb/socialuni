@@ -53,6 +53,8 @@ class SocialuniMusicPlugin implements SocialuniPlugin {
 
     onMessage(notify: NotifyVO<SocialuniMusicRoomInfoRO>) {
         if (notify.type === NotifyType.music) {
+            const msgSocialuniMusicRoomInfoRO = notify.data as SocialuniMusicRoomInfoRO
+            msgSocialuniMusicRoomInfoRO.musicRoleId = socialuniMusicStore.musicRoomInfo.musicRoleId
             socialuniMusicStore.setMusicRoomInfo(notify.data)
         }
     }
