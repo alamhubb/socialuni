@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.Date;
 
 
 @Entity
@@ -34,4 +35,9 @@ public class SocialUserPasswordDO extends SocialuniContentBaseDO {
     private String account;
     @Column(nullable = false)
     private String password;
+    //3小时3次，错误三次，则3小时候再重试，如忘记密码请修改密码
+    @Column(nullable = false)
+    private Integer errorNum;
+    @Column(nullable = false)
+    private Date lastErrorTime;
 }

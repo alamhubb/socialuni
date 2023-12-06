@@ -11,6 +11,7 @@ import com.socialuni.social.common.sdk.event.ddd.EventPublisherFacade;
 import com.socialuni.social.common.sdk.utils.StringUtil;
 import com.socialuni.social.user.sdk.dao.DO.SocialUserPasswordDO;
 import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
+import com.socialuni.social.user.sdk.dao.utils.SocialuniUserDOUtil;
 import com.socialuni.social.user.sdk.logic.entity.SocialPhoneLoginEntity;
 import com.socialuni.social.user.sdk.logic.entity.SocialProviderLoginEntity;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserPasswordManage;
@@ -25,6 +26,7 @@ import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
 import com.socialuni.social.user.sdk.model.factory.SocialuniMineUserROFactory;
 import com.socialuni.social.user.sdk.utils.PasswordUtil;
+import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -84,6 +86,25 @@ public class SocialuniLoginDomain {
         if (socialUserPasswordDO == null) {
             throw new SocialSystemException("未设置密码，却使用了密码登录");
         }
+
+        Integer errorNum = socialUserPasswordDO.getErrorNum();
+
+        Date lastErrorTime = socialUserPasswordDO.getLastErrorTime();
+
+        long time = lastErrorTime.getTime();
+
+        long now = System.currentTimeMillis();
+
+        long threeHours = 3 * 60 * 60 * 1000;
+
+        boolean diffThreeHours = now - time < threeHours;
+
+        if (errorNum >= 3) {
+            if (diffThreeHours) {
+                throw new SocialBusinessException("密码错误次数过多，请三小时后再试");
+            }
+        }
+
         String cryptoPassword = socialPhoneNumQO.getPassword();
 
         //检查密码
@@ -93,20 +114,24 @@ public class SocialuniLoginDomain {
 
         String dbPassword = socialUserPasswordDO.getPassword();
 
+        socialUserPasswordDO.setLastErrorTime(new Date());
+
         if (!sha512Password.equals(dbPassword)) {
+            if (diffThreeHours) {
+                socialUserPasswordDO.setErrorNum(errorNum + 1);
+            } else {
+                socialUserPasswordDO.setErrorNum(1);
+            }
+            socialUserPasswordDO = SocialuniUserRepositoryFacede.save(socialUserPasswordDO);
             throw new SocialBusinessException("密码错误");
         }
+        //一致，则登录成功，将错误次数设为0
+        socialUserPasswordDO.setErrorNum(0);
+        socialUserPasswordDO = SocialuniUserRepositoryFacede.save(socialUserPasswordDO);
 
+        SocialuniUserDo mineUser = SocialuniUserUtil.getAndCheckUserNotNull(userId);
 
-        //给前端返回一个秘钥，和 key+向量 ，前端解密，得到key+向量，对密码加密，传给后台，后台解密，对密码进行校验，校验结束后 sha512 加密，和 加密的秘钥一起存入数据库
-        //然后将 密码 进行 512 加密，和秘钥一起存储进
-
-
-//        SocialTokenFacade.getPasswordSecretKey();
-
-
-        return null;
-//        return getSocialLoginROByMineUser(mineUser);
+        return getSocialLoginROByMineUser(mineUser);
     }
 
     @Resource
