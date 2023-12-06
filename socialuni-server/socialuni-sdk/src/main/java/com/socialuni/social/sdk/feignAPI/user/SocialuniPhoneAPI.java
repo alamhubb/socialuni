@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author qinkaiyuan
@@ -32,5 +33,5 @@ public interface SocialuniPhoneAPI {
     ResultRO<SocialuniMineUserDetailRO> bindPhoneNum(@RequestBody @Valid SocialPhoneNumAuthCodeQO phoneNumQO);
 
     @PostMapping("checkRegistry")
-    ResultRO<Boolean> checkRegistry(@RequestBody @Valid @NotBlank String phoneNum);
+    ResultRO<Boolean> checkRegistry(@RequestBody @Valid @NotNull SocialSendAuthCodeQO authCodeQO);
 }

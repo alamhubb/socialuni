@@ -9,6 +9,7 @@ class SocialuniConfigModule {
 
     appName = '测试系统'
     // 动态页展示广告,设置一些默认值，在这里设置还是去使用的地方设置
+    allConfig: AppInitDataRO = new AppInitDataRO()
     appConfig: SocialuniAppConfigRO = new SocialuniAppConfigRO()
     appMoreConfig: SocialuniAppMoreConfigRO = new SocialuniAppMoreConfigRO()
     reportTypes: string[] = []
@@ -16,6 +17,7 @@ class SocialuniConfigModule {
     async getAppConfigAction() {
         await SocialuniAppAPI.getAppConfigAPI().then(res => {
             const appInitData: AppInitDataRO = res.data
+            this.allConfig = res.data
             this.appConfig = appInitData.appConfig
             this.appMoreConfig = appInitData.appMoreConfig
         })

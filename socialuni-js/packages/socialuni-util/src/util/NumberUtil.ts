@@ -5,16 +5,20 @@
  */
 
 export default class NumberUtil {
-  static isNumber (obj) {
-    // 等于number，或者有值且不为NaN
-    return typeof obj === 'number' || (!!obj && !isNaN(obj))
-  }
+    static isNumber(obj) {
+        // 等于number，或者有值且不为NaN
+        return typeof obj === 'number' || (!!obj && !isNaN(obj))
+    }
 
-  static isAllNumber (val: string): boolean {
-    return /^\d+$/.test(val)
-  }
+    static isAllNumber(val: string): boolean {
+        return /^\d+$/.test(val)
+    }
 
-  static containNoNumber (val: string): boolean {
-    return !NumberUtil.isAllNumber(val)
-  }
+    static noHasNumber(val: string): boolean {
+        return /^\D+$/.test(val)
+    }
+
+    static containNoNumber(val: string): boolean {
+        return !NumberUtil.isAllNumber(val)
+    }
 }

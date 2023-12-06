@@ -39,7 +39,7 @@ public class SocialuniPhoneController implements SocialuniPhoneAPI {
     }
 
     @Override
-    public ResultRO<Boolean> checkRegistry(String phoneNum) {
-        return socialuniPhoneService.checkRegistry(phoneNum);
+    public ResultRO<Boolean> checkRegistry(SocialSendAuthCodeQO authCodeQO) {
+        return socialuniPhoneService.checkRegistry(authCodeQO);
     }
 }

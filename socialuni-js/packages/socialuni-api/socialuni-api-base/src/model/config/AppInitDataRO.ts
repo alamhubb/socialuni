@@ -6,5 +6,6 @@ export default class AppInitDataRO {
     appConfig: SocialuniAppConfigRO = null
     appMoreConfig: SocialuniAppMoreConfigRO = null
     reportTypes: string [] = []
+    publicKey: string = null
     onlineUsersCount: number = 0
 }

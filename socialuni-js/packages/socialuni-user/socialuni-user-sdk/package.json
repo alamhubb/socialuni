@@ -15,6 +15,7 @@
     "socialuni-app-api": "^0.1.2",
     "socialuni-app-sdk": "^0.1.2",
     "socialuni-user-api": "^0.1.2",
+    "element-plus": "^2.3.7",
     "mitt": "^3.0.0",
     "vue": "^3.3.2"
   },

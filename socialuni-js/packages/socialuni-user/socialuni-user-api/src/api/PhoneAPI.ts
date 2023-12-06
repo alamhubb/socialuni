@@ -17,6 +17,10 @@ export default class PhoneAPI {
     return socialuniUserRequest.post('socialuni/phone/sendAuthCode', new SocialSendAuthCodeQO(phoneNum))
   }
 
+  static checkRegistry (phoneNum: string) {
+    return socialuniUserRequest.post('socialuni/phone/checkRegistry', new SocialSendAuthCodeQO(phoneNum))
+  }
+
   static bindPhoneNumAPI (phoneNum: string, authCode: string) {
     const phoneNumObj: SocialPhoneNumLoginQO = new SocialPhoneNumLoginQO(phoneNum, authCode)
     return socialuniUserRequest.post<SocialuniMineUserRO>('socialuni/phone/bindPhoneNum', phoneNumObj).then(res => {
