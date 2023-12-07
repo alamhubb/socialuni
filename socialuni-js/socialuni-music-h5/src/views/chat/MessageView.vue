@@ -6,26 +6,26 @@
 
 
       <div class="flex-1 overflow-hidden h100p ml-sm row-all-center bg-grey9">
-        <div class="h600 w400 overflow-hidden phone bd-radius bg-white shadow-5">
-          <div>
+        <div class="h800 w600 overflow-hidden phone bd-radius bg-white shadow-5 pd flex-col">
+          <div class="flex-none">
             播放器
           </div>
 
-          <div>
-            <el-table :data="tableData" stripe highlight-current-row
+          <div class="flex-1 overflow-hidden">
+            <el-table height="100%" :data="tableData" stripe highlight-current-row
                       @row-dblclick="handleCurrentChange">
               <el-table-column prop="name" label="音乐标题" width="100"></el-table-column>
-              <el-table-column label="歌手" width="100">
+              <el-table-column label="歌手">
                 <template #default="scope">
                   {{ scope.row.ar?.map(item => item.name).join(' / ') }}
                 </template>
               </el-table-column>
-              <el-table-column label="歌手专辑" width="100">
+              <el-table-column label="歌手专辑">
                 <template #default="scope">
                   {{ scope.row.al.name }}
                 </template>
               </el-table-column>
-              <el-table-column label="时长">
+              <el-table-column label="时长" width="100">
                 <template #default="scope">
                     {{ $DateUtil.convertToTime(scope.row.dt) }}
                 </template>
@@ -33,10 +33,6 @@
             </el-table>
 
           </div>
-
-          //歌曲名，歌手，时长
-
-
 
           <!--            <audio ref="audioPlayer" src="https://music.163.com/song/media/outer/url?id=2100329027.mp3" autoplay muted ></audio>-->
           <audio ref="audioPlayer" :src="musicRoomInfo?.musicUrl"></audio>
