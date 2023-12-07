@@ -5,9 +5,15 @@
  * @returns {string}
  */
 import Constants from "socialuni-constant/constant/Constant";
+import moment from "moment";
 
+
+
+// 示例
 export default class DateUtil {
-
+    static convertToTime(ms) {
+        return moment.utc(ms).format("mm:ss");
+    }
 
     static parseTime(dateProp: Date, cFormat?: string) {
         const format = cFormat || '{y}-{m}-{d} {h}:{i}'
