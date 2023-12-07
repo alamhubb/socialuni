@@ -1,7 +1,7 @@
 <template>
   <div class="flex-col h100p overflow-hidden color-black row-all-center">
     <div class="h700 w500 overflow-hidden">
-      <el-table class="w100p h100p" :data="tableData" stripe size="small"
+      <el-table class="w100p h100p" :data="tableData" stripe
                 highlight-current-row
                 @row-dblclick="handleCurrentChange" style="width: 100%;">
         <!--        <el-table-column width="45">
