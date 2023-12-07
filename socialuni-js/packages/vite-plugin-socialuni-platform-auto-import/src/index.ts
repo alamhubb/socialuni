@@ -1,4 +1,4 @@
-import {transform} from '@babel/core';
+const {transform} = require('@babel/core');
 
 function transformDynamicImportCodeCompile(code) {
     const transformedCode = transform(code, {
@@ -46,7 +46,7 @@ function transformDynamicImportCodeCompile(code) {
 }
 
 //自动导入对应的包功能
-export default function socialuniPlatformAutoImportPlugin() {
+module.exports = function socialuniPlatformAutoImportPlugin() {
     return {
         name: 'transform-file',
         transform(code, id) {
