@@ -3,22 +3,22 @@
     <audio ref="audioPlayer" :src="musicRoomInfo?.musicUrl"></audio>
 
     <div class="flex-1 overflow-hidden">
-      <el-table height="100%" :data="tableData" stripe highlight-current-row
+      <el-table height="100%" :data="data" stripe highlight-current-row
                 @row-dblclick="handleCurrentChange">
-        <el-table-column prop="name" label="音乐标题" width="100" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="title" label="音乐标题" width="100" show-overflow-tooltip></el-table-column>
         <el-table-column label="歌手" show-overflow-tooltip>
           <template #default="scope">
-            {{ scope.row.ar?.map(item => item.name).join(' / ') }}
+            {{ scope.row.author.join(' / ') }}
           </template>
         </el-table-column>
         <el-table-column label="歌手专辑" show-overflow-tooltip>
           <template #default="scope">
-            {{ scope.row.al.name }}
+            {{ scope.row.album }}
           </template>
         </el-table-column>
         <el-table-column label="时长" width="100">
           <template #default="scope">
-            {{ $DateUtil.convertToTime(scope.row.dt) }}
+            {{ $DateUtil.convertToTime(scope.row.musicTime) }}
           </template>
         </el-table-column>
       </el-table>
@@ -98,27 +98,30 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue, Watch} from 'vue-facing-decorator';
+import {Component, Emit, Prop, Vue, Watch} from 'vue-facing-decorator';
 import SocialuniChatViewH5 from "socialuni-im-view-h5/src/views/SocialuniChatViewH5.vue"
 import SocialuniMsgViewH5 from "socialuni-im-view-h5/src/views/SocialuniMsgViewH5.vue"
-import SocialuniMusicAPI from "socialuni-music-sdk/src/api/SocialuniMusicAPI";
-import CommonEventUtil from "socialuni-native-util/src/util/CommonEventUtil";
-import SocialuniImEventKey from "socialuni-im-api/src/constant/SocialuniMusicEventConst";
-import socialuniMusicStore from "socialuni-music-sdk/src/store/SocialuniMusicStore";
-import SocialuniMusicRoleId from "socialuni-music-sdk/src/constant/SocialuniMusicRoleId";
-import AlertUtil from "socialuni-native-h5/src/util/AlertUtil";
+import SocialuniMusicAPI from "socialuni-music-sdk/src/api/SocialuniMusicAPI.ts";
+import CommonEventUtil from "socialuni-native-util/src/util/CommonEventUtil.ts";
+import SocialuniImEventKey from "socialuni-im-api/src/constant/SocialuniMusicEventConst.ts";
+import socialuniMusicStore from "socialuni-music-sdk/src/store/SocialuniMusicStore.ts";
+import SocialuniMusicRoleId from "socialuni-music-sdk/src/constant/SocialuniMusicRoleId.ts";
+import AlertUtil from "socialuni-native-h5/src/util/AlertUtil.ts";
 import {nextTick} from "vue";
 import musicRequest from "@/plugins/musicRequest.ts";
+import MusicPlayerSongInfoRO from "@/components/MusicPlayerSongInfoRO.ts";
 
 @Component({
   components: {}
 })
-export default class MessageView extends Vue {
+export default class MusicPlayer extends Vue {
   $refs: {
     audioPlayer: HTMLAudioElement
   }
 
-  tableData = []
+  @Prop() data: MusicPlayerSongInfoRO []
+
+
 
   hintMusicPlayingNum = 0
 
@@ -154,8 +157,6 @@ export default class MessageView extends Vue {
   }
 
   mounted() {
-    this.queryMusicList()
-
     if (this.$route.query.chatId) {
       CommonEventUtil.emit(SocialuniImEventKey.socialuniImPageInit, this.$route.query)
     }
@@ -307,13 +308,6 @@ export default class MessageView extends Vue {
     // this.getMusic()
   }
 
-
-  async queryMusicList() {
-    const data = await musicRequest.get('/playlist/detail?id=3778678') as any
-    this.tableData = data.playlist.tracks
-  }
-
-
   handleCurrentChange(row) {
     // mucisRoomStore.publish(this.songId)
     this.playMusicAPI(row.id)
@@ -428,5 +422,10 @@ export default class MessageView extends Vue {
     })
   }
 
+
+  @Emit()
+  input() {
+
+  }
 }
 </script>
