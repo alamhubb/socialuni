@@ -5,10 +5,13 @@ import {fileURLToPath} from "node:url";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [vue(), socialuniPlatformAutoImportPlugin()],
+    plugins: [
+        vue(),
+        socialuniPlatformAutoImportPlugin()
+    ],
     resolve: {
-    alias: {
-        '@': fileURLToPath(new URL('./src', import.meta.url))
+        alias: {
+            '@': fileURLToPath(new URL('./src', import.meta.url))
+        }
     }
-}
 })

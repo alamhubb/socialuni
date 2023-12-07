@@ -3,5 +3,8 @@
     "target": "esnext",
     "module": "esnext",
     "moduleResolution": "Node",
+    "experimentalDecorators": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false
   }
 }

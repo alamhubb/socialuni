@@ -2,7 +2,7 @@ import PlatformModuleLoadUtil from "socialuni-native-util/src/util/PlatformModul
 import {SocialuniImPagePathInterface} from "./SocialuniImPagePathInterface";
 
 
-const modules = import.meta.globEager('../../../socialuni-im-*-sdk/src/constant/SocialuniImPagePath.ts')
+const modules = import.meta.glob('../../../socialuni-im-*-sdk/src/constant/SocialuniImPagePath.ts',{eager:true})
 
 const imPagePath: SocialuniImPagePathInterface = PlatformModuleLoadUtil.getModuleDefault(modules)
 

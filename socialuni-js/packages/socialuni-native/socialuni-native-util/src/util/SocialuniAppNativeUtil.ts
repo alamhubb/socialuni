@@ -3,7 +3,7 @@ import {SocialuniNativeUtilInterface} from "../interface/SocialuniNativeUtilInte
 
 let nativeUtil
 
-const modules = import.meta.globEager('../../../*/src/util/NativeUtil.ts')
+const modules = import.meta.glob('../../../*/src/util/NativeUtil.ts',{eager:true})
 
 nativeUtil = PlatformModuleLoadUtil.getModuleDefault(modules)
 

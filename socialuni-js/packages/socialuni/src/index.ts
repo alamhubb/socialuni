@@ -25,14 +25,14 @@ const socialuniInitPlugin: SocialuniPlugin = {
 async function installSocialuniPluginIns(app: App) {
     socialuniPluginsModule.addPlugin(socialuniInitPlugin)
 
-    /* const moudles = import.meta.globEager('../../../../!**!/src/index.ts')
+    /* const moudles = import.meta.glob('../../../../!**!/src/index.ts',{eager:true})
      for (const moudle in moudles) {
          console.log(moudle)
      }
      console.log(moudles)*/
 
     //查询是否包含community模块，如果存在则加载
-    const appModules = import.meta.globEager('../../**/socialuni-app-sdk/src/index.ts')
+    const appModules = import.meta.glob('../../**/socialuni-app-sdk/src/index.ts',{eager:true})
     const socialuniApp = PlatformModuleLoadUtil.getFirstModule(appModules)
     if (socialuniApp && socialuniApp.default) {
         app.use(socialuniApp.default)
@@ -42,24 +42,24 @@ async function installSocialuniPluginIns(app: App) {
     console.log(SocialuniApp)
     app.use(SocialuniApp.default)
 
-    /*const appViewModules = import.meta.globEager('../../!**!/socialuni-app-view-*!/src/index.ts')
+    /*const appViewModules = import.meta.glob('../../!**!/socialuni-app-view-*!/src/index.ts',{eager:true})
     const socialuniAppView = PlatformModuleLoadUtil.getModuleDefault(appViewModules)
     if (socialuniAppView) {
         app.use(socialuniAppView)
     }*/
-    const userModules = import.meta.globEager('../../**/socialuni-user-sdk/src/index.ts')
+    const userModules = import.meta.glob('../../**/socialuni-user-sdk/src/index.ts',{eager:true})
     const socialuniUser = PlatformModuleLoadUtil.getFirstModule(userModules)
     if (socialuniUser && socialuniUser.default) {
         app.use(socialuniUser.default)
     }
     //查询是否包含community模块，如果存在则加载
-    const communityModules = import.meta.globEager('../../**/socialuni-socialuniCommunity-sdk/src/index.ts')
+    const communityModules = import.meta.glob('../../**/socialuni-socialuniCommunity-sdk/src/index.ts',{eager:true})
     const socialuniCommunity = PlatformModuleLoadUtil.getFirstModule(communityModules)
     if (socialuniCommunity && socialuniCommunity.default) {
         app.use(socialuniCommunity.default)
     }
     //查询是否包含Im模块，如果存在则加载
-    const imModules = import.meta.globEager('../../**/socialuni-im-sdk/src/index.ts')
+    const imModules = import.meta.glob('../../**/socialuni-im-sdk/src/index.ts',{eager:true})
     const socialuniIm = PlatformModuleLoadUtil.getFirstModule(imModules)
     console.log(socialuniIm)
     if (socialuniIm && socialuniIm.default) {
@@ -82,11 +82,11 @@ const Socialuni = {
 
 
         /*if (socialuniSystemModule.isUniApp) {
-            const modules = import.meta.globEager('../../socialuni-ui/socialuni-ui-uni/src/index.ts')
+            const modules = import.meta.glob('../../socialuni-ui/socialuni-ui-uni/src/index.ts',{eager:true})
             const SocialuniUiUni = PlatformModuleLoadUtil.getModuleDefault(modules)
             app.use(SocialuniUiUni)
         } else {
-            const modules = import.meta.globEager('../../socialuni-ui/socialuni-ui-h5/src/index.ts')
+            const modules = import.meta.glob('../../socialuni-ui/socialuni-ui-h5/src/index.ts',{eager:true})
             const SocialuniUiH5 = PlatformModuleLoadUtil.getModuleDefault(modules)
             app.use(SocialuniUiH5)
         }*/
