@@ -46,6 +46,10 @@ export default class MessageView extends Vue {
             type: 'component',
             componentName: 'testComponent',
             componentState: {label: 'B'}
+          },{
+            type: 'component',
+            componentName: 'testComponent',
+            componentState: {label: 'd'}
           }, {
             type: 'component',
             componentName: 'testComponent',
