@@ -2,12 +2,14 @@ import {reactive, UnwrapNestedRefs} from "vue";
 import SocialuniMusicAPI from "../api/SocialuniMusicAPI";
 import AgoraRTC, {IAgoraRTCClient, IBufferSourceAudioTrack, IRemoteAudioTrack} from "agora-rtc-sdk-ng"
 import {SocialuniMusicRoomInfoRO} from "../model/SocialuniMusicRoomPlayerInfoRO";
+import MusicPlayerSongPlayingInfoRO from "../model/MusicPlayerSongPlayingInfoRO";
 
 export class SocialuniMusicStore {
     private _appId: string = null
     private _musicToken: string = null
-    private _musicRoomInfo: SocialuniMusicRoomInfoRO = null
+    private _musicRoomInfo: MusicPlayerSongPlayingInfoRO = null
     private _channelName: string = null
+    private musicRoleId: string = null
     private _localAudioTrack: IBufferSourceAudioTrack | IRemoteAudioTrack = null
 
 
@@ -29,7 +31,7 @@ export class SocialuniMusicStore {
         }
     }
 
-    get musicRoomInfo(): SocialuniMusicRoomInfoRO {
+    get musicRoomInfo(): MusicPlayerSongPlayingInfoRO {
         return this._musicRoomInfo
     }
 

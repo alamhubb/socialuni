@@ -16,17 +16,9 @@ import {Component, Vue, Watch} from 'vue-facing-decorator';
 import SocialuniChatViewH5 from "socialuni-im-view-h5/src/views/SocialuniChatViewH5.vue"
 import SocialuniMsgViewH5 from "socialuni-im-view-h5/src/views/SocialuniMsgViewH5.vue"
 import musicRequest from "@/plugins/musicRequest";
-import SocialuniMusicAPI from "socialuni-music-sdk/src/api/SocialuniMusicAPI";
-import CommonEventUtil from "socialuni-native-util/src/util/CommonEventUtil";
-import SocialuniImEventKey from "socialuni-im-api/src/constant/SocialuniMusicEventConst";
-import socialuniMusicStore from "socialuni-music-sdk/src/store/SocialuniMusicStore";
-import WebsocketWebRtcUtil from "socialuni-api-base/src/websocket/WebsocketWebRtcUtil";
-import test1 from './test1.mp3'
-import SocialuniMusicRoleId from "socialuni-music-sdk/src/constant/SocialuniMusicRoleId";
-import AlertUtil from "socialuni-native-h5/src/util/AlertUtil";
-import {nextTick} from "vue";
 import MusicPlayer from "@/components/MusicPlayer.vue";
 import MusicPlayerSongInfoRO from "@/components/MusicPlayerSongInfoRO.ts";
+import MusicPlayerSongPlayingInfoRO from "socialuni-music-sdk/src/model/MusicPlayerSongPlayingInfoRO.ts";
 
 @Component({
   components: {MusicPlayer, SocialuniChatViewH5, SocialuniMsgViewH5}
@@ -34,6 +26,8 @@ import MusicPlayerSongInfoRO from "@/components/MusicPlayerSongInfoRO.ts";
 export default class MessageView extends Vue {
 
   songList: MusicPlayerSongInfoRO[] = []
+
+  curMusicInfo: MusicPlayerSongPlayingInfoRO = null
 
   created() {
     this.querySongList()

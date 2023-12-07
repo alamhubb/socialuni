@@ -98,7 +98,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Prop, Vue, Watch} from 'vue-facing-decorator';
+import {Component, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator';
 import SocialuniChatViewH5 from "socialuni-im-view-h5/src/views/SocialuniChatViewH5.vue"
 import SocialuniMsgViewH5 from "socialuni-im-view-h5/src/views/SocialuniMsgViewH5.vue"
 import SocialuniMusicAPI from "socialuni-music-sdk/src/api/SocialuniMusicAPI.ts";
@@ -108,8 +108,8 @@ import socialuniMusicStore from "socialuni-music-sdk/src/store/SocialuniMusicSto
 import SocialuniMusicRoleId from "socialuni-music-sdk/src/constant/SocialuniMusicRoleId.ts";
 import AlertUtil from "socialuni-native-h5/src/util/AlertUtil.ts";
 import {nextTick} from "vue";
-import musicRequest from "@/plugins/musicRequest.ts";
-import MusicPlayerSongInfoRO from "@/components/MusicPlayerSongInfoRO.ts";
+import MusicPlayerSongInfoRO from "socialuni-music-sdk/src/model/MusicPlayerSongInfoRO.ts";
+import MusicPlayerSongPlayingInfoRO from "socialuni-music-sdk/src/model/MusicPlayerSongPlayingInfoRO.ts";
 
 @Component({
   components: {}
@@ -118,9 +118,8 @@ export default class MusicPlayer extends Vue {
   $refs: {
     audioPlayer: HTMLAudioElement
   }
-
+  @Model('modelValue') modelValue: MusicPlayerSongPlayingInfoRO
   @Prop() data: MusicPlayerSongInfoRO []
-
 
 
   hintMusicPlayingNum = 0
@@ -424,7 +423,7 @@ export default class MusicPlayer extends Vue {
 
 
   @Emit()
-  input() {
+  input(): MusicPlayerSongPlayingInfoRO {
 
   }
 }

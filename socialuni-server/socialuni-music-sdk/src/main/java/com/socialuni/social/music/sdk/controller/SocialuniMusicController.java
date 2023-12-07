@@ -10,12 +10,14 @@ import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.im.config.websocket.WebsocketServer;
+import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.im.dao.repository.ChatUserRepository;
 import com.socialuni.social.im.enumeration.NotifyType;
 import com.socialuni.social.im.enumeration.SocialuniChatOperateType;
 import com.socialuni.social.im.logic.check.SocialuniChatUserCheck;
 import com.socialuni.social.im.model.message.notify.NotifyVO;
 import com.socialuni.social.music.sdk.check.SocialuniMusicOperateCheck;
+import com.socialuni.social.music.sdk.dao.DO.SocialuniMusicRoomUserDO;
 import com.socialuni.social.music.sdk.factory.SocialuniMusicRoomPlayerDOFactory;
 import com.socialuni.social.music.sdk.factory.SocialuniMusicRoomPlayerInfoROFactory;
 import com.socialuni.social.music.sdk.logic.entity.SocialuniMusicRoomUserEntity;
@@ -75,15 +77,43 @@ public class SocialuniMusicController {
 
     //播放暂停功能，你咋知道播放完了没，通过时间和前端判断
     //协同编辑框架
+
+    @Resource
+    SocialuniMusicRoomManage socialuniMusicRoomManage;
+
     @GetMapping("queryMusicRoomPlayerInfo/{channel}")
     public ResultRO<SocialuniMusicRoomInfoRO> queryMusicRoomInfo(@PathVariable("channel") @Valid @NotBlank String channel) {
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdAllowNull();
+        Integer chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(channel);
 
-        SocialuniMusicOperateCheckRO checkResult = socialuniMusicRoomUserEntity.getOrCreateMusicRoomUser(channel, mineUserId);
+        SocialuniMusicRoomDO socialuniMusicRoomDO = socialuniMusicRoomManage.getOrCreateMusicPlayerDO(chatId);
 
-        SocialuniMusicRoomInfoRO socialuniMusicRoomPlayerInfoRO = SocialuniMusicRoomPlayerInfoROFactory.createSocialuniMusicRoomInfoRO(checkResult.getSocialuniMusicRoomDO(), checkResult.getRoleId());
+        SocialuniMusicRoomInfoRO socialuniMusicRoomPlayerInfoRO = SocialuniMusicRoomPlayerInfoROFactory.createSocialuniMusicRoomInfoRO(socialuniMusicRoomDO);
 
         return ResultRO.success(socialuniMusicRoomPlayerInfoRO);
+    }
+
+    @GetMapping("queryMusicRoomUserInfo/{channel}")
+    public ResultRO<SocialuniMusicRoomUserInfoRO> queryMusicRoomUserInfo(@PathVariable("channel") @Valid @NotBlank String channel) {
+        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+        Integer chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(channel);
+
+        SocialuniChatUserDO socialuniChatUserDO = socialuniChatUserCheck.checkUserInChat(chatId, mineUserId);
+
+        //然后是查询roomUser
+        SocialuniMusicRoomUserDO socialuniMusicRoomUserDO = null;
+        if (socialuniChatUserDO != null) {
+            //然后创建room
+            SocialuniMusicRoomDO socialuniMusicRoomDO = socialuniMusicRoomManage.getOrCreateMusicPlayerDO(chatId);
+
+            socialuniMusicRoomUserDO = socialuniMusicRoomUserManage.getOrCreateMusicRoomUserDO(
+                    chatId,
+                    socialuniChatUserDO.getUserId(),
+                    socialuniChatUserDO.getChatRoleId()
+            );
+            return ResultRO.success(new SocialuniMusicRoomUserInfoRO(socialuniMusicRoomUserDO.getRoomRoleId()));
+        }
+
+        return ResultRO.success();
     }
 
     @Resource
@@ -254,12 +284,6 @@ public class SocialuniMusicController {
     }
 
     @Resource
-    ChatUserRepository chatUserRepository;
-
-    @Resource
-    SocialuniMusicRoomManage socialuniMusicRoomManage;
-
-    @Resource
     SocialuniMusicOperateCheck socialuniMusicOperateCheck;
 
     @PostMapping("playMusic/{channel}")
@@ -322,7 +346,7 @@ public class SocialuniMusicController {
         }
 
 
-        SocialuniMusicRoomInfoRO socialuniMusicRoomPlayerInfoRO = SocialuniMusicRoomPlayerInfoROFactory.createSocialuniMusicRoomInfoRO(socialuniMusicRoomDO, checkResult.getRoleId());
+        SocialuniMusicRoomInfoRO socialuniMusicRoomPlayerInfoRO = SocialuniMusicRoomPlayerInfoROFactory.createSocialuniMusicRoomInfoRO(socialuniMusicRoomDO);
 
 
         SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getMineUserNotNull();

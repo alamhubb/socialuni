@@ -4,7 +4,7 @@ import com.socialuni.social.music.sdk.dao.DO.SocialuniMusicRoomDO;
 import com.socialuni.social.music.sdk.model.RO.SocialuniMusicRoomInfoRO;
 
 public class SocialuniMusicRoomPlayerInfoROFactory {
-    public static SocialuniMusicRoomInfoRO createSocialuniMusicRoomInfoRO(SocialuniMusicRoomDO socialuniMusicRoomDO, String roleId) {
+    public static SocialuniMusicRoomInfoRO createSocialuniMusicRoomInfoRO(SocialuniMusicRoomDO socialuniMusicRoomDO) {
 
         SocialuniMusicRoomInfoRO socialuniMusicRoomInfoRO = new SocialuniMusicRoomInfoRO();
         socialuniMusicRoomInfoRO.setMusicUrl(socialuniMusicRoomDO.getMusicUrl());
@@ -12,7 +12,7 @@ public class SocialuniMusicRoomPlayerInfoROFactory {
         socialuniMusicRoomInfoRO.setPlayingTimestamp(socialuniMusicRoomDO.getPlayingTimestamp());
         socialuniMusicRoomInfoRO.setPlayingTime(socialuniMusicRoomDO.getPlayingTime());
         socialuniMusicRoomInfoRO.setPlaying(socialuniMusicRoomDO.getPlaying());
-        socialuniMusicRoomInfoRO.setMusicRoleId(roleId);
+//        socialuniMusicRoomInfoRO.setMusicRoleId(roleId);
 
         return socialuniMusicRoomInfoRO;
     }

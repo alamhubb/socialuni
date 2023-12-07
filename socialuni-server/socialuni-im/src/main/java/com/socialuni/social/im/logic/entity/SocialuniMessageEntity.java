@@ -156,7 +156,7 @@ public class SocialuniMessageEntity {
             throw new SocialParamsException("不存在的群聊");
         }
 
-        socialuniChatUserCheck.CheckUserInChat(chatId, sendUser.getUserId());
+        socialuniChatUserCheck.checkUserInChat(chatId, sendUser.getUserId());
 
         List<SocialuniChatUserDO> chatSocialuniUserDoS = chatUserRepository.findByChatIdAndStatus(chatId, ChatUserStatus.enable);
 
