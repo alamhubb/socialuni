@@ -10,13 +10,16 @@ import socialuniPlatformAutoImportPlugin from "vite-plugin-socialuni-platform-au
 export default defineConfig({
     plugins: [
         vue(),
-        vueJsx(),
         nodeResolve(),
         socialuniPlatformAutoImportPlugin()
     ],
     server: {
         port: 8085,
-        // host: '0.0.0.0',
+        host: '0.0.0.0',
+        /*https: {
+            key: fs.readFileSync('./test/ssl/localtest.socialuni.cn.key'),
+            cert: fs.readFileSync('./test/ssl/localtest.socialuni.cn_bundle.crt'),
+        },*/
         proxy: {
             '/api': {
                 target: 'https://api.sd-rtn.com',
@@ -36,11 +39,5 @@ export default defineConfig({
         alias: {
             '@': fileURLToPath(new URL('./src', import.meta.url))
         }
-    },
-    css: {
-        preprocessorOptions: {
-            scss: {
-            }
-        }
-    },
+    }
 })
