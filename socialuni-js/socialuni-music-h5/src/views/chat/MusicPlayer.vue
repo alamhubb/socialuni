@@ -1,34 +1,117 @@
 <template>
-    <div class="flex-row h100p overflow-hidden">
-      <div class="w200 bd-radius shadow h100p flex-none">
-        <socialuni-chat-view-h5></socialuni-chat-view-h5>
-      </div>
+  <div class="h800 w600 overflow-hidden phone bd-radius bg-white shadow-5 pd flex-col">
+    <audio ref="audioPlayer" :src="musicRoomInfo?.musicUrl"></audio>
 
+    <div class="flex-1 overflow-hidden">
+      <el-table height="100%" :data="tableData" stripe highlight-current-row
+                @row-dblclick="handleCurrentChange">
+        <el-table-column prop="name" label="音乐标题" width="100" show-overflow-tooltip></el-table-column>
+        <el-table-column label="歌手" show-overflow-tooltip>
+          <template #default="scope">
+            {{ scope.row.ar?.map(item => item.name).join(' / ') }}
+          </template>
+        </el-table-column>
+        <el-table-column label="歌手专辑" show-overflow-tooltip>
+          <template #default="scope">
+            {{ scope.row.al.name }}
+          </template>
+        </el-table-column>
+        <el-table-column label="时长" width="100">
+          <template #default="scope">
+            {{ $DateUtil.convertToTime(scope.row.dt) }}
+          </template>
+        </el-table-column>
+      </el-table>
 
-      <div class="flex-1 overflow-hidden h100p ml-sm row-all-center bg-grey9">
-        <music-player></music-player>
+    </div>
+
+    <div class="flex-none">
+      <div v-if="musicRoomInfo?.musicUrl">
+        <div class="row-col-center">
+          <div>{{ curPlayingTime }}</div>
+          <el-slider v-model="realPlayingValue" @input="musicInput" @change="musicChange"
+                     :show-tooltip="false"
+                     :max="musicMax"></el-slider>
+          <div>{{ formatTooltip(musicMax) }}</div>
+        </div>
+        <div>
+          <div v-if="SocialuniMusicRoleId.hasOperateAuthList.includes(musicRoomInfo.musicRoleId)">
+            <div>
+              <!--                            <i @click="isChangeLike" v-if="!isLike" title="收藏" class="mdi mdi-star-outline"></i>-->
+              <!--                            <i @click="isChangeLike" v-else style="color: red;font-size: 22px;" title="已收藏"  class="mdi mdi-star"></i>-->
+              <i title="上一曲" @click="next(-1)" class="mdi mdi-skip-previous"></i>
+              <i @click="continuePlay(!showPause)" style="font-size: 40px; color: #cc7013;"
+                 class="mdi"
+                 :class="[showPause ? 'mdi-pause' :'mdi-play']"></i>
+              <i title="下一曲" @click="next(1)" class="mdi mdi-skip-next"></i>
+            </div>
+          </div>
+          <div>
+            <i class="mdi mdi-volume-mute" @click="setPlayerCurTimeAndPlay"></i>
+            <i class="mdi mdi-volume-medium"></i>
+          </div>
+        </div>
       </div>
     </div>
+
+
+    <!--            <audio ref="audioPlayer" src="https://music.163.com/song/media/outer/url?id=2100329027.mp3" autoplay muted ></audio>-->
+
+    <!--            <div class="w100p">
+                    <audio id="local" :src="test1" controls="controls"
+                           style="height: 200px;width: 500px;"></audio>
+                    <audio id="remote" style="height: 200px;width: 500px;" controls="controls"></audio>
+                </div>-->
+
+    <div>
+      <div></div>
+
+      <!--        如果为roleid = ower或者admin，显示， 如果musicurl有值显示， 否则不显示-->
+
+      <!--        <div>
+                <el-button
+                    @click="terstfasd('https://cdxapp-1257733245.file.myqcloud.com/opentest/M800000puzgO0yRX1o.mp3')">
+                  创建
+                </el-button>
+                <div>
+                  <audio ref="audioPlayer" autoplay muted controls id="audio"
+                         src="https://music.163.com/song/media/outer/url?id=1456890009.mp3"></audio>
+
+                  <audio id="localVideo" autoplay muted controls></audio>
+                  <audio id="remoteVideo" autoplay controls></audio>
+                  <div>
+                    <el-button @click="start">播放</el-button>
+                    <el-button @click="stop">Stop</el-button>
+                  </div>
+                </div>
+                <el-button @click="terstfasd111">查询</el-button>
+                <el-button @click="queryAllplay">查询播放器</el-button>
+                <el-button @click="destoryPlays">销毁播放器</el-button>
+                <el-button @click="deleteYun111">停止</el-button>
+                <el-button @click="jixuYun111">继续</el-button>
+              </div>-->
+    </div>
+
+    <!--            <socialuni-msg-view-h5></socialuni-msg-view-h5>-->
+
+  </div>
 </template>
 
 <script lang="ts">
 import {Component, Vue, Watch} from 'vue-facing-decorator';
 import SocialuniChatViewH5 from "socialuni-im-view-h5/src/views/SocialuniChatViewH5.vue"
 import SocialuniMsgViewH5 from "socialuni-im-view-h5/src/views/SocialuniMsgViewH5.vue"
-import musicRequest from "@/plugins/musicRequest";
 import SocialuniMusicAPI from "socialuni-music-sdk/src/api/SocialuniMusicAPI";
 import CommonEventUtil from "socialuni-native-util/src/util/CommonEventUtil";
 import SocialuniImEventKey from "socialuni-im-api/src/constant/SocialuniMusicEventConst";
 import socialuniMusicStore from "socialuni-music-sdk/src/store/SocialuniMusicStore";
-import WebsocketWebRtcUtil from "socialuni-api-base/src/websocket/WebsocketWebRtcUtil";
-import test1 from './test1.mp3'
 import SocialuniMusicRoleId from "socialuni-music-sdk/src/constant/SocialuniMusicRoleId";
 import AlertUtil from "socialuni-native-h5/src/util/AlertUtil";
 import {nextTick} from "vue";
-import MusicPlayer from "@/views/chat/MusicPlayer.vue";
+import musicRequest from "@/plugins/musicRequest.ts";
 
 @Component({
-  components: {MusicPlayer, SocialuniChatViewH5, SocialuniMsgViewH5}
+  components: {}
 })
 export default class MessageView extends Vue {
   $refs: {
