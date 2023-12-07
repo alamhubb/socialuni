@@ -1,36 +1,29 @@
 <template>
-  <div class="flex-col h100p overflow-hidden pd bg-white">
-    <div class="flex-row overflow-hidden flex-none">
-      <div v-for="i in 20" class="flex-1 w200 h30" :class="[active===i?'bg-blue_light bb-2 bb-blue':'bg-default']"
-           @click="active=i"  draggable="true">
-        {{ i }}
-      </div>
-    </div>
-    <div id="wrapper">
-      <ul id="menuContainer">
-        <li id="addMenuItem">Add another component</li>
-      </ul>
-      <div id="layoutContainer"></div>
-    </div>
-<!--    <div class="flex-1 overflow-hidden bg-green_light pd" @dragover="allowDrop">
-      {{ active }}
-    </div>-->
+  <div class="flex-col h100p overflow-hidden color-black">
+    <div id="layoutContainer" style="width: 100%; height: 100%;"></div>
+    <!--    <div class="flex-row overflow-hidden flex-none">
+          <div v-for="i in 20" class="flex-1 w200 h30" :class="[active===i?'bg-blue_light bb-2 bb-blue':'bg-default']"
+               @click="active=i"  draggable="true">
+            {{ i }}
+          </div>
+        </div>-->
+    <!--    <div id="wrapper">
+          <ul id="menuContainer">
+            <li id="addMenuItem">Add another component</li>
+          </ul>
+          <div id="layoutContainer"></div>
+        </div>-->
+    <!--    <div class="flex-1 overflow-hidden bg-green_light pd" @dragover="allowDrop">
+          {{ active }}
+        </div>-->
   </div>
 </template>
 
 <script lang="ts">
 import {Component, Vue, Watch} from 'vue-facing-decorator';
 import {ComponentContainer, ComponentItemConfig, GoldenLayout, ItemType, LayoutConfig} from "golden-layout";
-
-
-class MyComponent {
-  rootElement: HTMLElement;
-
-  constructor(public container: ComponentContainer) {
-    this.rootElement = container.element;
-    this.rootElement.innerHTML = '<h2>' + 'Component Type: MyComponent' + '</h2>';
-  }
-}
+import 'golden-layout/dist/css/goldenlayout-base.css';
+import 'golden-layout/dist/css/themes/goldenlayout-dark-theme.css';
 
 @Component({
   components: {}
@@ -39,40 +32,36 @@ export default class MessageView extends Vue {
 
   active = 1
 
-  mounted(){
-    const myLayout: LayoutConfig = {
-      root: {
+  mounted() {
+    var config: LayoutConfig = {
+      content: [{
         type: 'row',
-        content: [
-          {
-            title: 'My Component 1',
+        content: [{
+          type: 'component',
+          componentName: 'testComponent',
+          componentState: {label: 'A'}
+        }, {
+          type: 'column',
+          content: [{
             type: 'component',
-            componentType: 'MyComponent',
-            width: 50,
-          },
-          {
-            title: 'My Component 2',
+            componentName: 'testComponent',
+            componentState: {label: 'B'}
+          }, {
             type: 'component',
-            componentType: 'MyComponent',
-            // componentState: { text: 'Component 2' }
-          }
-        ]
-      }
+            componentName: 'testComponent',
+            componentState: {label: 'C'}
+          }]
+        }]
+      }]
     };
 
-    const menuContainerElement = document.querySelector('#menuContainer');
-    const addMenuItemElement = document.querySelector('#addMenuItem');
-    const layoutElement = document.querySelector('#layoutContainer');
+    const myLayout = new GoldenLayout(config, document.getElementById('layoutContainer'));
 
-    addMenuItemElement.addEventListener('click', (event) => {
-      goldenLayout.addComponent('MyComponent', undefined, 'Added Component');
+    myLayout.registerComponent('testComponent', function (container: ComponentContainer, componentState) {
+      container.getElement().innerHTML = '<h2>' + componentState.label + '</h2>'
     });
 
-    const goldenLayout = new GoldenLayout(layoutElement);
-
-    goldenLayout.registerComponent( 'MyComponent', MyComponent);
-
-    goldenLayout.loadLayout(myLayout);
+    myLayout.init();
   }
 
   allowDrop(ev) {
@@ -91,34 +80,34 @@ export default class MessageView extends Vue {
 }
 </script>
 <style lang="scss">
-h2{
+h2 {
   font: 14px Arial, sans-serif;
-  color:#fff;
+  color: #fff;
   padding: 10px;
   text-align: center;
 }
 
-html, body{
+html, body {
   height: 100%;
 }
 
-*{
+* {
   margin: 0;
   padding: 0;
-  list-style-type:none;
+  list-style-type: none;
 }
 
-#wrapper{
+#wrapper {
   display: flex;
   height: 100%
 }
 
-#menuContainer{
+#menuContainer {
   flex: 0 0 auto;
   margin-right: 3px;
 }
 
-#menuContainer li{
+#menuContainer li {
   border-bottom: 1px solid #000;
   border-top: 1px solid #333;
   cursor: pointer;
@@ -128,7 +117,7 @@ html, body{
   font: 12px Arial, sans-serif;
 }
 
-#menuContainer li:hover{
+#menuContainer li:hover {
   background: #111;
   color: #CCC;
 }
