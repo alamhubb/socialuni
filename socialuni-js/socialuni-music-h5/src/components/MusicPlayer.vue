@@ -336,14 +336,15 @@ export default class MusicPlayer extends Vue {
     }
     if (!this.dragging) {
       if (this._realPlayingValue >= this.musicMax && this.modelValue.playing) {
-        this.input({
+        this.next(1)
+        /*this.input({
           musicTime: this.modelValue.musicTime,
           musicUrl: this.modelValue.musicUrl,
           playingTimestamp: new Date(),
           //单位秒
           playingTime: 0,
           playing: false,
-        })
+        })*/
       }
     }
     // }
@@ -429,6 +430,23 @@ export default class MusicPlayer extends Vue {
         }
       }
     }
+  }
+
+  next(num: number) {
+    this.checkRoleId()
+    console.log(this.modelValue.title)
+    const index = this.data.findIndex(item => `https://music.163.com/song/media/outer/url?id=${item.songId}.mp3` === this.modelValue.musicUrl)
+    const nextIndex = index + num
+    if (!this.data.length) {
+      return;
+    }
+    let nextSong
+    if (nextIndex >= 0 && nextIndex < this.data.length) {
+      nextSong = this.data[nextIndex]
+    } else {
+      nextSong = this.data[0]
+    }
+    this.playMusicAPI(nextSong.songId)
   }
 
   async frontPause() {
