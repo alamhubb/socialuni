@@ -6,7 +6,7 @@
 
 
     <div class="flex-1 overflow-hidden h100p ml-sm row-all-center bg-grey9">
-      <music-player :data="songList"></music-player>
+      <music-player :data="songList" :has-operate-auth="hasOperateAuth"></music-player>
     </div>
   </div>
 </template>
@@ -19,6 +19,9 @@ import musicRequest from "@/plugins/musicRequest";
 import MusicPlayer from "@/components/MusicPlayer.vue";
 import MusicPlayerSongInfoRO from "@/components/MusicPlayerSongInfoRO.ts";
 import MusicPlayerSongPlayingInfoRO from "socialuni-music-sdk/src/model/MusicPlayerSongPlayingInfoRO.ts";
+import socialuniMusicStore from "socialuni-music-sdk/src/store/SocialuniMusicStore.ts";
+import AlertUtil from "socialuni-native-h5/src/util/AlertUtil.ts";
+import SocialuniMusicRoleId from "socialuni-music-sdk/src/constant/SocialuniMusicRoleId.ts";
 
 @Component({
   components: {MusicPlayer, SocialuniChatViewH5, SocialuniMsgViewH5}
@@ -31,6 +34,14 @@ export default class MessageView extends Vue {
 
   created() {
     this.querySongList()
+  }
+
+  get hasOperateAuth() {
+    return SocialuniMusicRoleId.hasOperateAuthList.includes(socialuniMusicStore.musicRoleId)
+  }
+
+  async queryMusicRoomUserInfo() {
+
   }
 
   async querySongList() {

@@ -88,24 +88,30 @@ public class SocialuniMusicController {
         return ResultRO.success(socialuniMusicRoomPlayerInfoRO);
     }
 
+    /*@GetMapping("queryMusicUserInfo/{channel}")
+    public ResultRO<SocialuniMusicRoomUserInfoRO> queryMusicUserInfo() {
+        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+        Integer chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(channel);
+
+        //然后是查询roomUser
+        SocialuniMusicRoomUserDO socialuniMusicRoomUserDO = socialuniMusicRoomUserEntity.checkAndGetOrCreateMusicRoomUserInfo(chatId, mineUserId);
+
+        if (socialuniMusicRoomUserDO != null) {
+            return ResultRO.success(new SocialuniMusicRoomUserInfoRO(socialuniMusicRoomUserDO.getRoomRoleId()));
+        }
+
+        return ResultRO.success();
+    }*/
+
     @GetMapping("queryMusicRoomUserInfo/{channel}")
     public ResultRO<SocialuniMusicRoomUserInfoRO> queryMusicRoomUserInfo(@PathVariable("channel") @Valid @NotBlank String channel) {
         Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
         Integer chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(channel);
 
-        SocialuniChatUserDO socialuniChatUserDO = socialuniChatUserCheck.checkUserInChat(chatId, mineUserId);
-
         //然后是查询roomUser
-        SocialuniMusicRoomUserDO socialuniMusicRoomUserDO = null;
-        if (socialuniChatUserDO != null) {
-            //然后创建room
-            SocialuniMusicRoomDO socialuniMusicRoomDO = socialuniMusicRoomManage.getOrCreateMusicPlayerDO(chatId);
+        SocialuniMusicRoomUserDO socialuniMusicRoomUserDO = socialuniMusicRoomUserEntity.checkAndGetOrCreateMusicRoomUserInfo(chatId, mineUserId);
 
-            socialuniMusicRoomUserDO = socialuniMusicRoomUserManage.getOrCreateMusicRoomUserDO(
-                    chatId,
-                    socialuniChatUserDO.getUserId(),
-                    socialuniChatUserDO.getChatRoleId()
-            );
+        if (socialuniMusicRoomUserDO != null) {
             return ResultRO.success(new SocialuniMusicRoomUserInfoRO(socialuniMusicRoomUserDO.getRoomRoleId()));
         }
 

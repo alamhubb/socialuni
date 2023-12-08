@@ -7,8 +7,19 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class SocialuniMusicRoomUserInfoRO {
     String musicRoleId;
+    Number musicVolume;
+    Boolean soundOff;
+
+    public SocialuniMusicRoomUserInfoRO() {
+        this.musicVolume = 0;
+        this.soundOff = true;
+    }
+
+    public SocialuniMusicRoomUserInfoRO(String musicRoleId) {
+        super();
+        this.musicRoleId = musicRoleId;
+    }
 }
+

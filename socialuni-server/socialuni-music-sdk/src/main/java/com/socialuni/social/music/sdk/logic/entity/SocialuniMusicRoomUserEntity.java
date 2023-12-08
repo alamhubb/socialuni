@@ -25,55 +25,28 @@ public class SocialuniMusicRoomUserEntity {
     SocialuniMusicRoomUserManage socialuniMusicRoomUserManage;
 
     //未使用
-    public SocialuniMusicOperateCheckRO checkAndGetOrCreateMusicRoomUserInfo(String channel, Integer mineUserId) {
-        Integer chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(channel);
-
-        SocialuniChatUserDO socialuniChatUserDO = socialuniChatUserCheck.checkUserInChat(chatId, mineUserId);
-
-        //然后创建room
-
-        //获取roleId，没有就创建，然后判断musicRoleId
-
-        //然后创建room
-        SocialuniMusicRoomDO socialuniMusicRoomDO = socialuniMusicRoomManage.getOrCreateMusicPlayerDO(chatId);
-
-        //然后是查询roomUser
-        SocialuniMusicRoomUserDO socialuniMusicRoomUserDO = null;
-        if (socialuniChatUserDO != null) {
-            socialuniMusicRoomUserDO = socialuniMusicRoomUserManage.getOrCreateMusicRoomUserDO(
-                    chatId,
-                    socialuniChatUserDO.getUserId(),
-                    socialuniChatUserDO.getChatRoleId()
-            );
-        }
-
-        return new SocialuniMusicOperateCheckRO(chatId, mineUserId, socialuniMusicRoomDO, socialuniMusicRoomUserDO);
-    }
-
     public SocialuniMusicRoomUserDO checkAndGetOrCreateMusicRoomUserInfo(Integer chatId, Integer mineUserId) {
         //校验是否有会话权限
         SocialuniChatUserDO socialuniChatUserDO = socialuniChatUserCheck.checkUserInChat(chatId, mineUserId);
 
         //然后是查询roomUser
+        SocialuniMusicRoomUserDO socialuniMusicRoomUserDO = this.getOrCreateMusicRoomUserInfo(chatId, socialuniChatUserDO);
+        return socialuniMusicRoomUserDO;
+    }
+
+    private SocialuniMusicRoomUserDO getOrCreateMusicRoomUserInfo(Integer chatId, SocialuniChatUserDO socialuniChatUserDO) {
+        SocialuniMusicRoomDO socialuniMusicRoomDO = socialuniMusicRoomManage.getOrCreateMusicPlayerDO(chatId);
+
         SocialuniMusicRoomUserDO socialuniMusicRoomUserDO = null;
+
         if (socialuniChatUserDO != null) {
-            //然后创建room
             socialuniMusicRoomUserDO = socialuniMusicRoomUserManage.getOrCreateMusicRoomUserDO(
                     chatId,
                     socialuniChatUserDO.getUserId(),
                     socialuniChatUserDO.getChatRoleId()
             );
-            return socialuniMusicRoomUserDO;
         }
-        return null;
-    }
-
-    public SocialuniMusicRoomDO getOrCreateMusicRoomInfo(Integer chatId) {
-
-        //然后创建room
-        SocialuniMusicRoomDO socialuniMusicRoomDO = socialuniMusicRoomManage.getOrCreateMusicPlayerDO(chatId);
-
-        return socialuniMusicRoomDO;
+        return socialuniMusicRoomUserDO;
     }
 }
 
