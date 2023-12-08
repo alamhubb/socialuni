@@ -23,6 +23,7 @@ import socialuniMusicStore from "socialuni-music-sdk/src/store/SocialuniMusicSto
 import SocialuniMusicRoleId from "socialuni-music-sdk/src/constant/SocialuniMusicRoleId.ts";
 import MusicPlayerSongInfoRO from "socialuni-music-sdk/src/model/MusicPlayerSongInfoRO.ts";
 import SocialuniMusicAPI from "socialuni-music-sdk/src/api/SocialuniMusicAPI.ts";
+import ObjectUtil from "socialuni-util/src/util/ObjectUtil.ts";
 
 @Component({
   components: {MusicPlayer, SocialuniChatViewH5, SocialuniMsgViewH5}
@@ -76,19 +77,20 @@ export default class MessageView extends Vue {
   }
 
   musicRoomInfoInput(musicRoomInfo: MusicPlayerSongPlayingInfoRO) {
-    console.log('chufale -- input')
     socialuniMusicStore.setMusicRoomInfo(musicRoomInfo)
   }
 
   musicRoomInfoChange(musicRoomInfo: MusicPlayerSongPlayingInfoRO) {
-    this.musicRoomInfoInput(musicRoomInfo)
-    console.log('chufale----change')
+    //必须深拷贝，不这么写会导致一致，导致不播放
+    this.musicRoomInfoInput(ObjectUtil.deepClone(musicRoomInfo))
     SocialuniMusicAPI.playMusicAPI(socialuniMusicStore.channelName, musicRoomInfo).then(res => {
       const data: MusicPlayerSongPlayingInfoRO = res.data
       // 不相同才替换
-      if (data.playingTime !== musicRoomInfo.musicTime
+      if (data.playingTime !== musicRoomInfo.playingTime
           || data.playing !== musicRoomInfo.playing
       ) {
+        console.log(data.playing !== musicRoomInfo.playing)
+        console.log('queshiyou buyizhi')
         socialuniMusicStore.setMusicRoomInfo(res.data)
       }
     })

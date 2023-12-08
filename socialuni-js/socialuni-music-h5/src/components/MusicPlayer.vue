@@ -141,6 +141,7 @@ export default class MusicPlayer extends Vue {
 
   @Watch('modelValue')
   watchModelValueChange() {
+    console.log('chufale watch')
     if (this.modelValue) {
       this.computedRealPlayingValue()
       this.setPlayerCurTimeAndPlay()
@@ -186,18 +187,29 @@ export default class MusicPlayer extends Vue {
 
 
   setPlayerCurTimeAndPlay() {
-    if (this.modelValue?.playing) {
+    if (!this.dragging) {
+      console.log('chufale  kaishibofang')
+      console.log(this.modelValue?.playing)
       nextTick(() => {
-        this.$refs.audioPlayer.currentTime = Math.floor(this.realPlayingValue / this.secondPlayingUnit)
-        this.frontPlay()
-      })
-    } else {
-      nextTick(() => {
-        this.$refs.audioPlayer.currentTime = Math.floor(this.realPlayingValue / this.secondPlayingUnit)
-        this.frontPause()
+        if (this.modelValue?.playing) {
+          // console.log(this.$refs.audioPlayer.paused || this.$refs.audioPlayer.ended)
+          // if (!this.$refs.audioPlayer.paused || !this.$refs.audioPlayer.ended) {
+          console.log('shezhile  curtime')
+          this.setMusicCurTime()
+          this.frontPlay()
+          // }
+        } else {
+          this.setMusicCurTime()
+          this.frontPause()
+        }
       })
     }
   }
+
+  setMusicCurTime() {
+    this.$refs.audioPlayer.currentTime = Math.floor(this.realPlayingValue / this.secondPlayingUnit)
+  }
+
 
   mounted() {
     if (this.$route.query.chatId) {
@@ -226,9 +238,9 @@ export default class MusicPlayer extends Vue {
     const playTime = Math.floor(value / this.secondPlayingUnit)
 
     //所以播放时间也要为秒
-    if (this.modelValue.playing) {
-      this.$refs.audioPlayer.currentTime = playTime
-    }
+    // if (this.modelValue.playing) {
+    //   this.$refs.audioPlayer.currentTime = playTime
+    // }
 
     const curTime = new Date()
 
@@ -244,7 +256,7 @@ export default class MusicPlayer extends Vue {
   }
 
 
-  musicChange(value) {
+  musicChange() {
     this.checkRoleId()
     this.dragging = false
     this.change(this.modelValue)
@@ -261,7 +273,7 @@ export default class MusicPlayer extends Vue {
       //如何判断是继续播放还是重新播放
       //根据playTime决定
       if (this.modelValue?.musicUrl) {
-        this.frontPlay()
+        console.log('chufale  chognxinjiaza2222')
         const playRoomInfo = {
           musicTime: this.modelValue.musicTime,
           musicUrl: this.modelValue.musicUrl,
@@ -382,6 +394,7 @@ export default class MusicPlayer extends Vue {
 
     //更新音乐时长
     this.$refs.audioPlayer.onloadedmetadata = () => {
+      console.log('chufale  chognxinjiazai')
       const curTime = new Date()
       const musicRoomInfo = new MusicPlayerSongPlayingInfoRO({
         musicTime: this.$refs.audioPlayer.duration,
@@ -392,26 +405,34 @@ export default class MusicPlayer extends Vue {
         playing: true,
       })
       this.change(musicRoomInfo)
+      console.log('chufale  chognxinjiazai')
       this.frontPlay()
       // this.playMusicApiFun()
     };
   }
 
   async frontPlay() {
-    try {
-      await this.$refs.audioPlayer.play()
-    } catch (e) {
-      if (this.hintMusicPlayingNum < 2) {
-        this.hintMusicPlayingNum++
-        AlertUtil.confirm('有音乐正在播放，是否打开声音').then(() => {
-          this.setPlayerCurTimeAndPlay()
-        })
+    if (this.modelValue.playing) {
+      try {
+        if (this.$refs.audioPlayer.paused || this.$refs.audioPlayer.ended) {
+          console.trace('chufale bofang')
+          await this.$refs.audioPlayer.play()
+        }
+      } catch (e) {
+        if (this.hintMusicPlayingNum < 2) {
+          this.hintMusicPlayingNum++
+          AlertUtil.confirm('有音乐正在播放，是否打开声音').then(() => {
+            this.setPlayerCurTimeAndPlay()
+          })
+        }
       }
     }
   }
 
   async frontPause() {
-    this.$refs.audioPlayer.pause()
+    if (!this.$refs.audioPlayer.paused && !this.$refs.audioPlayer.ended) {
+      this.$refs.audioPlayer.pause()
+    }
   }
 
 
