@@ -360,7 +360,7 @@ export default class MusicPlayer extends Vue {
 
   handleCurrentChange(row) {
     // mucisRoomStore.publish(this.songId)
-    this.playMusicAPI(row.id)
+    this.playMusicAPI(row.songId)
   }
 
   get curPlayingTime() {
