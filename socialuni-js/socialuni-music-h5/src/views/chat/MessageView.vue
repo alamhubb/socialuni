@@ -7,7 +7,7 @@
 
     <div class="flex-1 overflow-hidden h100p ml-sm row-all-center bg-grey9">
       <music-player :model-value="musicRoomInfo" :data="songList" :has-operate-auth="hasOperateAuth"
-                    @change="musicRoomInfoChange"></music-player>
+                    @input="musicRoomInfoInput" @change="musicRoomInfoChange"></music-player>
     </div>
   </div>
 </template>
@@ -75,14 +75,17 @@ export default class MessageView extends Vue {
     }
   }
 
-  musicRoomInfoChange(musicRoomInfo: MusicPlayerSongPlayingInfoRO) {
+  musicRoomInfoInput(musicRoomInfo: MusicPlayerSongPlayingInfoRO) {
+    console.log('chufale -- input')
     socialuniMusicStore.setMusicRoomInfo(musicRoomInfo)
   }
 
-  playMusicApiFun() {
-    SocialuniMusicAPI.playMusicAPI(socialuniMusicStore.channelName, this.modelValue).then(res => {
+  musicRoomInfoChange(musicRoomInfo: MusicPlayerSongPlayingInfoRO) {
+    this.musicRoomInfoInput(musicRoomInfo)
+    console.log('chufale----change')
+    SocialuniMusicAPI.playMusicAPI(socialuniMusicStore.channelName, musicRoomInfo).then(res => {
       //不为播放结束，或者不为暂停，则代表正在播放
-      this.change(res.data)
+      // socialuniMusicStore.setMusicRoomInfo(res.data)
     })
   }
 }

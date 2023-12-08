@@ -249,7 +249,7 @@ export default class MusicPlayer extends Vue {
     console.log(value)
     this.checkRoleId()
     this.dragging = false
-    this.playMusicApiFun()
+    this.change(this.modelValue)
   }
 
   //初始化的播放怎么做
@@ -276,7 +276,7 @@ export default class MusicPlayer extends Vue {
         this.change(playRoomInfo)
         console.log(playRoomInfo.playing)
         console.log(this.modelValue.playing)
-        this.playMusicApiFun(playRoomInfo)
+        // this.playMusicApiFun()
       }
     } else {
       this.$refs.audioPlayer.pause()
@@ -289,7 +289,7 @@ export default class MusicPlayer extends Vue {
         playing: playing,
       }
       this.change(playRoomInfo)
-      this.playMusicApiFun()
+      // this.playMusicApiFun()
     }
   }
 
@@ -325,7 +325,7 @@ export default class MusicPlayer extends Vue {
         this._realPlayingValue = this.modelValue.playingTime * this.secondPlayingUnit
       }
       if (this._realPlayingValue >= this.musicMax && this.modelValue.playing) {
-        this.change({
+        this.input({
           musicTime: this.modelValue.musicTime,
           musicUrl: this.modelValue.musicUrl,
           playingTimestamp: new Date(),
@@ -381,7 +381,7 @@ export default class MusicPlayer extends Vue {
       playingTime: 0,
       playing: false,
     }
-    this.change(playRoomInfo)
+    this.input(playRoomInfo)
 
     //更新音乐时长
     this.$refs.audioPlayer.onloadedmetadata = () => {
@@ -396,7 +396,7 @@ export default class MusicPlayer extends Vue {
       })
       this.change(musicRoomInfo)
       this.frontPlay()
-      this.playMusicApiFun()
+      // this.playMusicApiFun()
     };
   }
 
@@ -417,14 +417,6 @@ export default class MusicPlayer extends Vue {
     this.$refs.audioPlayer.pause()
   }
 
-  playMusicApiFun() {
-    console.log(777777)
-    console.log(this.modelValue.playing)
-    SocialuniMusicAPI.playMusicAPI(socialuniMusicStore.channelName, this.modelValue).then(res => {
-      //不为播放结束，或者不为暂停，则代表正在播放
-      this.change(res.data)
-    })
-  }
 
   terstfasd111() {
     // socialuniUserRequest.get('https://api.sd-rtn.com/api/dev/v1/channel/user/5e681410a7434ce9bba3e268226ce537/51b26fe57a9d4d148d9b7df536eeebfa')
@@ -464,5 +456,6 @@ export default class MusicPlayer extends Vue {
   change(playingInfo: MusicPlayerSongPlayingInfoRO): MusicPlayerSongPlayingInfoRO {
     return playingInfo
   }
+
 }
 </script>
