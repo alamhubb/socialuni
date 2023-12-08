@@ -6,7 +6,8 @@
 
 
     <div class="flex-1 overflow-hidden h100p ml-sm row-all-center bg-grey9">
-      <music-player :model-value="musicRoomInfo" :data="songList" :has-operate-auth="hasOperateAuth"></music-player>
+      <music-player :model-value="musicRoomInfo" :data="songList" :has-operate-auth="hasOperateAuth"
+                    @change="musicRoomInfoChange"></music-player>
     </div>
   </div>
 </template>
@@ -71,6 +72,10 @@ export default class MessageView extends Vue {
         console.log(this.musicRoomInfo)
       }
     }
+  }
+
+  musicRoomInfoChange(musicRoomInfo: MusicPlayerSongPlayingInfoRO) {
+    socialuniMusicStore.setMusicRoomInfo(musicRoomInfo)
   }
 }
 </script>

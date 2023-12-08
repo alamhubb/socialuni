@@ -3,7 +3,7 @@
     <audio ref="audioPlayer" :src="modelValue?.musicUrl"></audio>
 
     <div class="flex-1 overflow-hidden">
-      {{modelValue}}
+      {{ modelValue }}
 
       <el-table height="100%" :data="data" stripe highlight-current-row
                 @row-dblclick="handleCurrentChange">
@@ -29,7 +29,7 @@
 
     <div class="flex-none">
       <div>
-<!--      <div v-if="musicRoomInfo?.musicUrl">-->
+        <!--      <div v-if="musicRoomInfo?.musicUrl">-->
         <div class="row-col-center">
           <div>{{ curPlayingTime }}</div>
           <el-slider v-model="realPlayingValue" @input="musicInput" @change="musicChange"
@@ -46,7 +46,7 @@
               <i title="上一曲" @click="next(-1)" class="mdi mdi-skip-previous"></i>
               <i @click="continuePlay" style="font-size: 40px; color: #cc7013;"
                  class="mdi"
-                 :class="[showPause ? 'mdi-pause' :'mdi-play']"></i>
+                 :class="[musicPlaying ? 'mdi-pause' :'mdi-play']"></i>
               <i title="下一曲" @click="next(1)" class="mdi mdi-skip-next"></i>
             </div>
 
@@ -115,12 +115,12 @@ import SocialuniMusicAPI from "socialuni-music-sdk/src/api/SocialuniMusicAPI.ts"
 import CommonEventUtil from "socialuni-native-util/src/util/CommonEventUtil.ts";
 import SocialuniImEventKey from "socialuni-im-api/src/constant/SocialuniMusicEventConst.ts";
 import socialuniMusicStore from "socialuni-music-sdk/src/store/SocialuniMusicStore.ts";
-import SocialuniMusicRoleId from "socialuni-music-sdk/src/constant/SocialuniMusicRoleId.ts";
 import AlertUtil from "socialuni-native-h5/src/util/AlertUtil.ts";
 import {nextTick} from "vue";
 import MusicPlayerSongInfoRO from "socialuni-music-sdk/src/model/MusicPlayerSongInfoRO.ts";
 import MusicPlayerSongPlayingInfoRO from "socialuni-music-sdk/src/model/MusicPlayerSongPlayingInfoRO.ts";
 import ToastUtil from "socialuni-native-h5/src/util/ToastUtil.ts";
+import DateUtil from "socialuni-util/src/util/DateUtil.ts";
 
 @Component({
   components: {}
@@ -137,6 +137,7 @@ export default class MusicPlayer extends Vue {
   @Watch('modelValue')
   watchModelValueChange() {
     if (this.modelValue) {
+      console.log('chufale gaibian')
       this.computedRealPlayingValue()
       this.setPlayerCurTimeAndPlay()
       console.log(66666)
@@ -173,7 +174,7 @@ export default class MusicPlayer extends Vue {
 
   private timer = null
 
-  get showPause() {
+  get musicPlaying() {
     return this.modelValue && (this.modelValue.playing)
   }
 
@@ -183,6 +184,9 @@ export default class MusicPlayer extends Vue {
 
 
   setPlayerCurTimeAndPlay() {
+
+    console.log(this.modelValue?.playing)
+    console.log('chufale gaibian')
     if (this.modelValue?.playing) {
       nextTick(() => {
         this.$refs.audioPlayer.currentTime = Math.floor(this.realPlayingValue / this.secondPlayingUnit)
@@ -191,6 +195,7 @@ export default class MusicPlayer extends Vue {
     } else {
       nextTick(() => {
         this.$refs.audioPlayer.currentTime = Math.floor(this.realPlayingValue / this.secondPlayingUnit)
+        console.log('chufale gaibian2222')
         this.frontPause()
       })
     }
@@ -212,8 +217,6 @@ export default class MusicPlayer extends Vue {
   }
 
 
-
-
   dragging = false
 
   musicInput(value) {
@@ -229,14 +232,13 @@ export default class MusicPlayer extends Vue {
 
     const curTime = new Date()
 
-    socialuniMusicStore.setMusicRoomInfo({
+    this.change({
       musicTime: this.modelValue.musicTime,
       musicUrl: this.modelValue.musicUrl,
       playingTimestamp: curTime,
       //单位秒
       playingTime: playTime,
       playing: this.modelValue.playing,
-      musicRoleId: socialuniMusicStore.musicRoomInfo.musicRoleId,
     })
     this.computedRealPlayingValue(false)
   }
@@ -251,7 +253,8 @@ export default class MusicPlayer extends Vue {
   //初始化的播放怎么做
 
   continuePlay() {
-    const playing: boolean = !this.showPause
+    const playing: boolean = !this.musicPlaying
+    console.log(`play:${playing}`)
     if (!this.hasOperateAuth) {
       ToastUtil.throwError('没有操作权限')
     }
@@ -267,10 +270,11 @@ export default class MusicPlayer extends Vue {
           //单位秒
           playingTime: this.realPlayingValue / this.secondPlayingUnit,
           playing: playing,
-          musicRoleId: socialuniMusicStore.musicRoomInfo.musicRoleId,
         }
-        socialuniMusicStore.setMusicRoomInfo(playRoomInfo)
-        this.playMusicApiFun()
+        this.change(playRoomInfo)
+        console.log(playRoomInfo.playing)
+        console.log(this.modelValue.playing)
+        this.playMusicApiFun(playRoomInfo)
       }
     } else {
       this.$refs.audioPlayer.pause()
@@ -281,9 +285,8 @@ export default class MusicPlayer extends Vue {
         //单位秒
         playingTime: this.realPlayingValue / this.secondPlayingUnit,
         playing: playing,
-        musicRoleId: socialuniMusicStore.musicRoomInfo.musicRoleId,
       }
-      socialuniMusicStore.setMusicRoomInfo(playRoomInfo)
+      this.change(playRoomInfo)
       this.playMusicApiFun()
     }
   }
@@ -320,21 +323,16 @@ export default class MusicPlayer extends Vue {
         this._realPlayingValue = this.modelValue.playingTime * this.secondPlayingUnit
       }
       if (this._realPlayingValue >= this.musicMax && this.modelValue.playing) {
-        socialuniMusicStore.setMusicRoomInfo({
+        this.change({
           musicTime: this.modelValue.musicTime,
           musicUrl: this.modelValue.musicUrl,
           playingTimestamp: new Date(),
           //单位秒
           playingTime: 0,
           playing: false,
-          musicRoleId: socialuniMusicStore.musicRoomInfo.musicRoleId,
         })
       }
     }
-  }
-
-  get SocialuniMusicRoleId() {
-    return SocialuniMusicRoleId
   }
 
 
@@ -351,19 +349,15 @@ export default class MusicPlayer extends Vue {
     return this.formatTooltip(this.realPlayingValue)
   }
 
-  playingUnit = 100;
+  playingUnit = 10;
 
   get secondPlayingUnit() {
     return 1000 / this.playingUnit
   }
 
   formatTooltip(value) {
-    const time = Math.floor(value / this.secondPlayingUnit)
-    const minute = Math.floor(time / 60)
-    const second = time % 60
-    const minuteStr = minute > 9 ? minute : '0' + minute
-    const secondStr = second > 9 ? second : '0' + second
-    return `${minuteStr}:${secondStr}`
+    const time = Math.floor(value / this.secondPlayingUnit) * 1000
+    return DateUtil.convertToTime(time)
   }
 
   checkRoleId() {
@@ -384,22 +378,21 @@ export default class MusicPlayer extends Vue {
       //单位秒
       playingTime: 0,
       playing: false,
-      musicRoleId: socialuniMusicStore.musicRoomInfo.musicRoleId,
     }
-    socialuniMusicStore.setMusicRoomInfo(playRoomInfo)
+    this.change(playRoomInfo)
 
     //更新音乐时长
     this.$refs.audioPlayer.onloadedmetadata = () => {
       const curTime = new Date()
-      socialuniMusicStore.setMusicRoomInfo({
+      const musicRoomInfo = new MusicPlayerSongPlayingInfoRO({
         musicTime: this.$refs.audioPlayer.duration,
         musicUrl: this.modelValue.musicUrl,
         playingTimestamp: curTime,
         //单位秒
         playingTime: 0,
         playing: true,
-        musicRoleId: socialuniMusicStore.musicRoomInfo.musicRoleId,
       })
+      this.change(musicRoomInfo)
       this.frontPlay()
       this.playMusicApiFun()
     };
@@ -423,8 +416,11 @@ export default class MusicPlayer extends Vue {
   }
 
   playMusicApiFun() {
+    console.log(777777)
+    console.log(this.modelValue.playing)
     SocialuniMusicAPI.playMusicAPI(socialuniMusicStore.channelName, this.modelValue).then(res => {
-      socialuniMusicStore.setMusicRoomInfo(res.data)
+      //不为播放结束，或者不为暂停，则代表正在播放
+      this.change(res.data)
     })
   }
 
@@ -458,8 +454,13 @@ export default class MusicPlayer extends Vue {
 
 
   @Emit()
-  input(): MusicPlayerSongPlayingInfoRO {
+  input(playingInfo: MusicPlayerSongPlayingInfoRO): MusicPlayerSongPlayingInfoRO {
+    return playingInfo
+  }
 
+  @Emit()
+  change(playingInfo: MusicPlayerSongPlayingInfoRO): MusicPlayerSongPlayingInfoRO {
+    return playingInfo
   }
 }
 </script>
