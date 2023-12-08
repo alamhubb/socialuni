@@ -46,7 +46,7 @@
                 <!--                            <i @click="isChangeLike" v-if="!isLike" title="收藏" class="mdi mdi-star-outline"></i>-->
                 <!--                            <i @click="isChangeLike" v-else style="color: red;font-size: 22px;" title="已收藏"  class="mdi mdi-star"></i>-->
                 <i title="上一曲" @click="next(-1)" class="mdi mdi-skip-previous"></i>
-                <i @click="continuePlay" style="font-size: 40px; color: #cc7013;"
+                <i @click="continuePlay" style="font-size: 30px; color: #cc7013;"
                    class="mdi"
                    :class="[musicPlaying ? 'mdi-pause' :'mdi-play']"></i>
                 <i title="下一曲" @click="next(1)" class="mdi mdi-skip-next"></i>
@@ -68,8 +68,7 @@
             </div>
           </div>
           <div class="w20p flex-none">
-            <i class="mdi mdi-volume-mute flex-none" :class="[musicMuted ? 'mdi-volume-mute' :'mdi-volume-medium']" @click="setPlayerCurTimeAndPlay"></i>
-
+            <i class="mdi flex-none" :class="[musicMuted ? 'mdi-volume-mute' :'mdi-volume-medium']" @click="setPlayerCurTimeAndPlay"></i>
 
             <el-slider class="flex-1" v-model="socialuniMusicStore.musicVolume" @input="musicVolumeInput"
                        :show-tooltip="false"></el-slider>
