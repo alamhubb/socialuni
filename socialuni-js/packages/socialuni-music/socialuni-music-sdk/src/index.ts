@@ -11,6 +11,7 @@ import MessageViewParams from "socialuni-im-sdk/src/model/MessageViewParams";
 import SocialuniMusicRoleId from "./constant/SocialuniMusicRoleId";
 import SocialuniMusicAPI from "./api/SocialuniMusicAPI";
 import {SocialuniMusicRoomInfoRO} from "./model/SocialuniMusicRoomPlayerInfoRO";
+import {socialuniTokenModule} from "socialuni-user-sdk/src/store/SocialuniTokenModule";
 
 class SocialuniMusicPlugin implements SocialuniPlugin {
     async onLaunch() {
@@ -24,6 +25,10 @@ class SocialuniMusicPlugin implements SocialuniPlugin {
         console.log('执行订阅')
         CommonEventUtil.on(SocialuniImEventKey.socialuniImPageInit, async (params: MessageViewParams) => {
             socialuniMusicStore.setChannelName(params.chatId)
+            if (socialuniTokenModule.userToken) {
+                const userRes = await SocialuniMusicAPI.queryMusicRoomUserInfoAPI(socialuniMusicStore.channelName)
+                socialuniMusicStore.setMusicRoleId(userRes.data)
+            }
             const res = await SocialuniMusicAPI.queryMusicRoomPlayerInfoAPI(socialuniMusicStore.channelName)
             console.log(4656465)
             console.log(res)

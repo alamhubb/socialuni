@@ -1,16 +1,20 @@
 import socialuniUserRequest from "socialuni-user-api/src/request/socialuniUserRequest";
 import socialuniMusicStore from "../store/SocialuniMusicStore";
 import SocialuniMusicRoomPlayerInfoRO, {SocialuniMusicRoomInfoRO} from "../model/SocialuniMusicRoomPlayerInfoRO";
+import MusicPlayerSongPlayingInfoRO from "../model/MusicPlayerSongPlayingInfoRO";
 
 export default class SocialuniMusicAPI {
     static queryMusicRoomPlayerInfoAPI(channelName: string) {
-        return socialuniUserRequest.get<SocialuniMusicRoomPlayerInfoRO>(`socialuni/music/queryMusicRoomPlayerInfo/${channelName}`)
+        return socialuniUserRequest.get<MusicPlayerSongPlayingInfoRO>(`socialuni/music/queryMusicRoomPlayerInfo/${channelName}`)
+    }
+
+    static queryMusicRoomUserInfoAPI(channelName: string) {
+        return socialuniUserRequest.get<string>(`socialuni/music/queryMusicRoomUserInfo/${channelName}`)
     }
 
 
     static playMusicAPI(channelName: string, musicRoomInfo: SocialuniMusicRoomInfoRO) {
-        console.trace(`chufale ${musicRoomInfo.playing}`)
-        return socialuniUserRequest.post<SocialuniMusicRoomInfoRO>(`socialuni/music/playMusic/${channelName}`, musicRoomInfo)
+        return socialuniUserRequest.post<MusicPlayerSongPlayingInfoRO>(`socialuni/music/playMusic/${channelName}`, musicRoomInfo)
     }
 
     static queryMusicChannel(channelName) {

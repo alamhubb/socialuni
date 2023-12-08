@@ -31,19 +31,26 @@
           <div>{{ curPlayingTime }}</div>
           <el-slider v-model="realPlayingValue" @input="musicInput" @change="musicChange"
                      :show-tooltip="false"
+                     :disabled="!hasOperateAuth"
                      :max="musicMax"></el-slider>
           <div>{{ formatTooltip(musicMax) }}</div>
         </div>
         <div>
-          <div v-if="SocialuniMusicRoleId.hasOperateAuthList.includes(musicRoomInfo.musicRoleId)">
-            <div>
+          <div>
+            <div v-if="hasOperateAuth">
               <!--                            <i @click="isChangeLike" v-if="!isLike" title="收藏" class="mdi mdi-star-outline"></i>-->
               <!--                            <i @click="isChangeLike" v-else style="color: red;font-size: 22px;" title="已收藏"  class="mdi mdi-star"></i>-->
               <i title="上一曲" @click="next(-1)" class="mdi mdi-skip-previous"></i>
-              <i @click="continuePlay(!showPause)" style="font-size: 40px; color: #cc7013;"
+              <i @click="continuePlay" style="font-size: 40px; color: #cc7013;"
                  class="mdi"
                  :class="[showPause ? 'mdi-pause' :'mdi-play']"></i>
               <i title="下一曲" @click="next(1)" class="mdi mdi-skip-next"></i>
+            </div>
+
+            <div v-else>
+              <i @click="mutedMusic" style="font-size: 40px; color: #cc7013;"
+                 class="mdi"
+                 :class="[musicMuted ? 'mdi-volume-mute' :'mdi-volume-medium']"></i>
             </div>
           </div>
           <div>
@@ -110,6 +117,7 @@ import AlertUtil from "socialuni-native-h5/src/util/AlertUtil.ts";
 import {nextTick} from "vue";
 import MusicPlayerSongInfoRO from "socialuni-music-sdk/src/model/MusicPlayerSongInfoRO.ts";
 import MusicPlayerSongPlayingInfoRO from "socialuni-music-sdk/src/model/MusicPlayerSongPlayingInfoRO.ts";
+import ToastUtil from "socialuni-native-h5/src/util/ToastUtil.ts";
 
 @Component({
   components: {}
@@ -120,6 +128,7 @@ export default class MusicPlayer extends Vue {
   }
   @Model('modelValue') modelValue: MusicPlayerSongPlayingInfoRO
   @Prop() data: MusicPlayerSongInfoRO []
+  @Prop() hasOperateAuth: boolean
 
 
   hintMusicPlayingNum = 0
@@ -140,6 +149,11 @@ export default class MusicPlayer extends Vue {
   get showPause() {
     return this.musicRoomInfo && (this.musicRoomInfo.playing)
   }
+
+  get musicMuted() {
+    return socialuniMusicStore.musicMuted
+  }
+
 
   setPlayerCurTimeAndPlay() {
     if (this.musicRoomInfo?.playing) {
@@ -176,6 +190,12 @@ export default class MusicPlayer extends Vue {
     if (this.musicRoomInfo) {
       this.computedRealPlayingValue()
       this.setPlayerCurTimeAndPlay()
+      console.log(66666)
+      const volume = this.$refs.audioPlayer.volume
+      socialuniMusicStore.musicVolume = Math.ceil(volume * 100)
+      socialuniMusicStore.musicMuted = this.$refs.audioPlayer.muted
+      console.log(socialuniMusicStore.musicVolume)
+      console.log(socialuniMusicStore.musicMuted)
       if (this.timer) {
         clearInterval(this.timer)
         this.timer = null
@@ -225,7 +245,11 @@ export default class MusicPlayer extends Vue {
 
   //初始化的播放怎么做
 
-  continuePlay(playing: boolean) {
+  continuePlay() {
+    const playing: boolean = !this.showPause
+    if (!this.hasOperateAuth) {
+      ToastUtil.throwError('没有操作权限')
+    }
     if (playing) {
       //如何判断是继续播放还是重新播放
       //根据playTime决定
@@ -256,6 +280,16 @@ export default class MusicPlayer extends Vue {
       }
       socialuniMusicStore.setMusicRoomInfo(playRoomInfo)
       this.playMusicApiFun()
+    }
+  }
+
+  mutedMusic() {
+    if (this.musicMuted) {
+      this.$refs.audioPlayer.muted = false
+      socialuniMusicStore.musicMuted = false
+    } else {
+      this.$refs.audioPlayer.muted = true
+      socialuniMusicStore.musicMuted = true
     }
   }
 
@@ -303,6 +337,7 @@ export default class MusicPlayer extends Vue {
     return socialuniMusicStore.musicRoomInfo
   }
 
+
   created() {
     // this.getMusic()
   }
@@ -332,7 +367,7 @@ export default class MusicPlayer extends Vue {
   }
 
   checkRoleId() {
-    if (!SocialuniMusicRoleId.hasOperateAuthList.includes(socialuniMusicStore.musicRoomInfo.musicRoleId)) {
+    if (!this.hasOperateAuth) {
       AlertUtil.error("您没有操作权限")
     }
   }

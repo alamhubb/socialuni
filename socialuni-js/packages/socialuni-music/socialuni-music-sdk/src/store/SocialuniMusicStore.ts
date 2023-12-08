@@ -9,11 +9,20 @@ export class SocialuniMusicStore {
     private _musicToken: string = null
     private _musicRoomInfo: MusicPlayerSongPlayingInfoRO = null
     private _channelName: string = null
-    private musicRoleId: string = null
+    private _musicRoleId: string = null
+    musicMuted: boolean = null
+    musicVolume: number = null
     private _localAudioTrack: IBufferSourceAudioTrack | IRemoteAudioTrack = null
 
+    get musicRoleId(): string {
+        return this._musicRoleId;
+    }
 
-    setMusicRoomInfo(value: SocialuniMusicRoomInfoRO) {
+    setMusicRoleId(value: string) {
+        this._musicRoleId = value;
+    }
+
+    setMusicRoomInfo(value: MusicPlayerSongPlayingInfoRO) {
         this._musicRoomInfo = value;
 
         if (typeof value.playingTimestamp === 'string') {
