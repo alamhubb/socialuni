@@ -114,9 +114,6 @@
 
 <script lang="ts">
 import {Component, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator';
-import SocialuniChatViewH5 from "socialuni-im-view-h5/src/views/SocialuniChatViewH5.vue"
-import SocialuniMsgViewH5 from "socialuni-im-view-h5/src/views/SocialuniMsgViewH5.vue"
-import SocialuniMusicAPI from "socialuni-music-sdk/src/api/SocialuniMusicAPI.ts";
 import CommonEventUtil from "socialuni-native-util/src/util/CommonEventUtil.ts";
 import SocialuniImEventKey from "socialuni-im-api/src/constant/SocialuniMusicEventConst.ts";
 import socialuniMusicStore from "socialuni-music-sdk/src/store/SocialuniMusicStore.ts";
@@ -148,7 +145,7 @@ export default class MusicPlayer extends Vue {
 
   @Watch('watchModelValueObj')
   watchModelValueChange() {
-    console.log('chufale watch')
+    console.log('111111111')
     if (this.modelValue) {
       this.computedRealPlayingValue()
       this.setPlayerCurTimeAndPlay()
@@ -195,9 +192,10 @@ export default class MusicPlayer extends Vue {
 
   setPlayerCurTimeAndPlay() {
     if (!this.dragging) {
-      console.log('chufale  kaishibofang')
+      console.log('3333333333')
       console.log(this.modelValue?.playing)
       nextTick(() => {
+        console.log('5555555555555')
         if (this.modelValue?.playing) {
           // console.log(this.$refs.audioPlayer.paused || this.$refs.audioPlayer.ended)
           // if (!this.$refs.audioPlayer.paused || !this.$refs.audioPlayer.ended) {
@@ -290,7 +288,6 @@ export default class MusicPlayer extends Vue {
           playing: playing,
         }
         this.change(playRoomInfo)
-        // this.playMusicApiFun()
       }
     } else {
       this.$refs.audioPlayer.pause()
@@ -303,7 +300,6 @@ export default class MusicPlayer extends Vue {
         playing: playing,
       }
       this.change(playRoomInfo)
-      // this.playMusicApiFun()
     }
   }
 
@@ -401,7 +397,7 @@ export default class MusicPlayer extends Vue {
 
     //更新音乐时长
     this.$refs.audioPlayer.onloadedmetadata = () => {
-      console.log('chufale  chognxinjiazai')
+      console.log('2222222222')
       const curTime = new Date()
       const musicRoomInfo = new MusicPlayerSongPlayingInfoRO({
         musicTime: this.$refs.audioPlayer.duration,
@@ -412,13 +408,12 @@ export default class MusicPlayer extends Vue {
         playing: true,
       })
       this.change(musicRoomInfo)
-      console.log('chufale  chognxinjiazai')
-      this.frontPlay()
-      // this.playMusicApiFun()
+      // this.frontPlay()
     };
   }
 
   async frontPlay() {
+    console.trace('666666666666g')
     if (this.modelValue.playing) {
       try {
         if (this.$refs.audioPlayer.paused || this.$refs.audioPlayer.ended) {
@@ -441,36 +436,6 @@ export default class MusicPlayer extends Vue {
       this.$refs.audioPlayer.pause()
     }
   }
-
-
-  terstfasd111() {
-    // socialuniUserRequest.get('https://api.sd-rtn.com/api/dev/v1/channel/user/5e681410a7434ce9bba3e268226ce537/51b26fe57a9d4d148d9b7df536eeebfa')
-
-    /*musicRequest.get(`api/dev/v1/channel/user/5e681410a7434ce9bba3e268226ce537/51b26fe57a9d4d148d9b7df536eeebfa`, {
-        headers: {
-            Authorization: "Basic MWE5N2IyZmU3NjY2NGVmNjhiZmRkZjcyNTZjZjkxZDM6OTk5YzA2ODljYzc5NDEyOGI0NTBjMWQ3MDJmMGUyZjM="
-        }
-    })*/
-
-    SocialuniMusicAPI.queryMusicChannel(socialuniMusicStore.channelName)
-  }
-
-  testvalue = 0
-
-  //设置当前时间和播放时间
-
-  deleteYun111() {
-    SocialuniMusicAPI.updateMusicAPI(socialuniMusicStore.channelName, {
-      isPause: true
-    })
-  }
-
-  jixuYun111() {
-    SocialuniMusicAPI.updateMusicAPI(socialuniMusicStore.channelName, {
-      isPause: false
-    })
-  }
-
 
   @Emit()
   input(playingInfo: MusicPlayerSongPlayingInfoRO): MusicPlayerSongPlayingInfoRO {
