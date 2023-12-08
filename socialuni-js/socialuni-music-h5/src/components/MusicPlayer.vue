@@ -336,15 +336,18 @@ export default class MusicPlayer extends Vue {
     }
     if (!this.dragging) {
       if (this._realPlayingValue >= this.musicMax && this.modelValue.playing) {
-        this.next(1)
-        /*this.input({
-          musicTime: this.modelValue.musicTime,
-          musicUrl: this.modelValue.musicUrl,
-          playingTimestamp: new Date(),
-          //单位秒
-          playingTime: 0,
-          playing: false,
-        })*/
+        if (this.hasOperateAuth) {
+          this.next(1)
+        } else {
+          this.input({
+            musicTime: this.modelValue.musicTime,
+            musicUrl: this.modelValue.musicUrl,
+            playingTimestamp: new Date(),
+            //单位秒
+            playingTime: 0,
+            playing: false,
+          })
+        }
       }
     }
     // }
