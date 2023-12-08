@@ -25,7 +25,7 @@ public class SocialuniMusicRoomUserEntity {
     SocialuniMusicRoomUserManage socialuniMusicRoomUserManage;
 
     //未使用
-    public SocialuniMusicOperateCheckRO getOrCreateMusicRoomUserInfo(String channel,Integer mineUserId) {
+    public SocialuniMusicOperateCheckRO checkAndGetOrCreateMusicRoomUserInfo(String channel, Integer mineUserId) {
         Integer chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(channel);
 
         SocialuniChatUserDO socialuniChatUserDO = socialuniChatUserCheck.checkUserInChat(chatId, mineUserId);
@@ -48,6 +48,24 @@ public class SocialuniMusicRoomUserEntity {
         }
 
         return new SocialuniMusicOperateCheckRO(chatId, mineUserId, socialuniMusicRoomDO, socialuniMusicRoomUserDO);
+    }
+
+    public SocialuniMusicRoomUserDO checkAndGetOrCreateMusicRoomUserInfo(Integer chatId, Integer mineUserId) {
+        //校验是否有会话权限
+        SocialuniChatUserDO socialuniChatUserDO = socialuniChatUserCheck.checkUserInChat(chatId, mineUserId);
+
+        //然后是查询roomUser
+        SocialuniMusicRoomUserDO socialuniMusicRoomUserDO = null;
+        if (socialuniChatUserDO != null) {
+            //然后创建room
+            socialuniMusicRoomUserDO = socialuniMusicRoomUserManage.getOrCreateMusicRoomUserDO(
+                    chatId,
+                    socialuniChatUserDO.getUserId(),
+                    socialuniChatUserDO.getChatRoleId()
+            );
+            return socialuniMusicRoomUserDO;
+        }
+        return null;
     }
 
     public SocialuniMusicRoomDO getOrCreateMusicRoomInfo(Integer chatId) {

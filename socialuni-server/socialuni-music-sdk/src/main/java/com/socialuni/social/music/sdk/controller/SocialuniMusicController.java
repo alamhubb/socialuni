@@ -2,7 +2,6 @@ package com.socialuni.social.music.sdk.controller;
 
 import cn.hutool.core.lang.Console;
 import cn.hutool.http.HttpRequest;
-import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.socialuni.social.common.api.constant.DateTimeType;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
@@ -11,12 +10,11 @@ import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.im.config.websocket.WebsocketServer;
 import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
-import com.socialuni.social.im.dao.repository.ChatUserRepository;
 import com.socialuni.social.im.enumeration.NotifyType;
-import com.socialuni.social.im.enumeration.SocialuniChatOperateType;
 import com.socialuni.social.im.logic.check.SocialuniChatUserCheck;
 import com.socialuni.social.im.model.message.notify.NotifyVO;
 import com.socialuni.social.music.sdk.check.SocialuniMusicOperateCheck;
+import com.socialuni.social.music.sdk.constant.SocialuniMusicRoleId;
 import com.socialuni.social.music.sdk.dao.DO.SocialuniMusicRoomUserDO;
 import com.socialuni.social.music.sdk.factory.SocialuniMusicRoomPlayerDOFactory;
 import com.socialuni.social.music.sdk.factory.SocialuniMusicRoomPlayerInfoROFactory;
@@ -27,14 +25,12 @@ import com.socialuni.social.music.sdk.model.RO.*;
 import com.socialuni.social.music.sdk.dao.DO.SocialuniMusicRoomDO;
 import com.socialuni.social.music.sdk.model.QO.AgoraPlayMusicQO;
 import com.socialuni.social.music.sdk.model.QO.SocialuniPlayMusicQO;
-import com.socialuni.social.music.sdk.utils.SocialuniMusicOperateRecordDOUtils;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import io.agora.media.RtcTokenBuilder2;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.*;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -191,7 +187,11 @@ public class SocialuniMusicController {
 
         this.sequence++;
 
-        SocialuniMusicOperateCheckRO checkResult = socialuniMusicOperateCheck.checkRoleId(channel);
+
+        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+
+        //校验用户有没有修改权限
+       /* SocialuniMusicOperateCheckRO checkResult = socialuniMusicOperateCheck.checkRoleId(mineUserId);
 
         Integer chatId = checkResult.getChatId();
 
@@ -268,7 +268,7 @@ public class SocialuniMusicController {
             System.out.println(httpResult.toString());
 //            log.info(httpResult.getErrMsg());
 //            log.info(httpResult.getErrCode().toString());
-        }
+        }*/
         return ResultRO.success();
     }
 
@@ -291,20 +291,13 @@ public class SocialuniMusicController {
         if (StringUtils.isEmpty(channel)) {
             throw new SocialBusinessException("房间信息为空");
         }
+        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
 
-        SocialuniMusicOperateCheckRO checkResult = socialuniMusicOperateCheck.checkRoleId(channel);
+        Integer chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(channel);
 
+        socialuniMusicOperateCheck.checkRoleId(chatId, mineUserId);
 
-        Integer chatId = checkResult.getChatId();
-
-
-        SocialuniMusicRoomDO socialuniMusicRoomDO = checkResult.getSocialuniMusicRoomDO();
-
-        SocialuniMusicRoomPlayerDOFactory.createSocialuniMusicRoomPlayerDO(playMusicQO, socialuniMusicRoomDO);
-
-
-        SocialuniRepositoryFacade.save(socialuniMusicRoomDO);
-
+        SocialuniMusicRoomDO socialuniMusicRoomDO = socialuniMusicRoomManage.updateMusicPlayerDO(chatId, playMusicQO);
 
         if (socialuniMusicRoomDO.getPlaying()) {
             Date playingTimeStamp = socialuniMusicRoomDO.getPlayingTimestamp();

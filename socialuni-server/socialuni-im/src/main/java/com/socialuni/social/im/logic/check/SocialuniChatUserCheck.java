@@ -36,6 +36,8 @@ public class SocialuniChatUserCheck {
 
         //无论如何都要查询，除非user为空
         SocialuniChatUserDO chatUserDO = chatUserRepository.findFirstByChatIdAndUserIdAndStatus(chatId, sendUserId, ChatUserStatus.enable);
+
+        //如果必须加入
         if (ChatOpenType.needApply.contains(openType)) {
             if (chatUserDO == null) {
                 throw new SocialParamsException("未加入群聊");
