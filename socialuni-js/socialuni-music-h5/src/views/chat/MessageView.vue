@@ -22,6 +22,7 @@ import MusicPlayerSongPlayingInfoRO from "socialuni-music-sdk/src/model/MusicPla
 import socialuniMusicStore from "socialuni-music-sdk/src/store/SocialuniMusicStore.ts";
 import SocialuniMusicRoleId from "socialuni-music-sdk/src/constant/SocialuniMusicRoleId.ts";
 import MusicPlayerSongInfoRO from "socialuni-music-sdk/src/model/MusicPlayerSongInfoRO.ts";
+import SocialuniMusicAPI from "socialuni-music-sdk/src/api/SocialuniMusicAPI.ts";
 
 @Component({
   components: {MusicPlayer, SocialuniChatViewH5, SocialuniMsgViewH5}
@@ -76,6 +77,13 @@ export default class MessageView extends Vue {
 
   musicRoomInfoChange(musicRoomInfo: MusicPlayerSongPlayingInfoRO) {
     socialuniMusicStore.setMusicRoomInfo(musicRoomInfo)
+  }
+
+  playMusicApiFun() {
+    SocialuniMusicAPI.playMusicAPI(socialuniMusicStore.channelName, this.modelValue).then(res => {
+      //不为播放结束，或者不为暂停，则代表正在播放
+      this.change(res.data)
+    })
   }
 }
 </script>

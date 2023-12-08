@@ -232,7 +232,7 @@ export default class MusicPlayer extends Vue {
 
     const curTime = new Date()
 
-    this.change({
+    this.input({
       musicTime: this.modelValue.musicTime,
       musicUrl: this.modelValue.musicUrl,
       playingTimestamp: curTime,
@@ -244,7 +244,9 @@ export default class MusicPlayer extends Vue {
   }
 
 
-  musicChange() {
+  musicChange(value) {
+    console.log(658989)
+    console.log(value)
     this.checkRoleId()
     this.dragging = false
     this.playMusicApiFun()
