@@ -2,6 +2,7 @@ import socialuniUserRequest from "socialuni-user-api/src/request/socialuniUserRe
 import socialuniMusicStore from "../store/SocialuniMusicStore";
 import SocialuniMusicRoomPlayerInfoRO, {SocialuniMusicRoomInfoRO} from "../model/SocialuniMusicRoomPlayerInfoRO";
 import MusicPlayerSongPlayingInfoRO from "../model/MusicPlayerSongPlayingInfoRO";
+import {SocialuniMusicRoomUserInfoRO} from "../model/SocialuniMusicRoomUserInfoRO";
 
 export default class SocialuniMusicAPI {
     static queryMusicRoomPlayerInfoAPI(channelName: string) {
@@ -9,7 +10,7 @@ export default class SocialuniMusicAPI {
     }
 
     static queryMusicRoomUserInfoAPI(channelName: string) {
-        return socialuniUserRequest.get<string>(`socialuni/music/queryMusicRoomUserInfo/${channelName}`)
+        return socialuniUserRequest.get<SocialuniMusicRoomUserInfoRO>(`socialuni/music/queryMusicRoomUserInfo/${channelName}`)
     }
 
 

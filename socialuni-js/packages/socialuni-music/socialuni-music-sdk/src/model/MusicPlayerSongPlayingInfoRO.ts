@@ -6,4 +6,11 @@ export default class MusicPlayerSongPlayingInfoRO extends MusicPlayerSongInfoRO 
     //单位秒
     playingTime: number
     playing: boolean
+
+    constructor(musicPlayerSongInfoRO?: MusicPlayerSongInfoRO) {
+        super(musicPlayerSongInfoRO);
+        this.playingTimestamp = new Date();
+        this.playingTime = 0;
+        this.playing = false;
+    }
 }

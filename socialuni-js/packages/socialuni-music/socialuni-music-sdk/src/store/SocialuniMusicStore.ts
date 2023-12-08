@@ -23,20 +23,22 @@ export class SocialuniMusicStore {
     }
 
     setMusicRoomInfo(value: MusicPlayerSongPlayingInfoRO) {
-        this._musicRoomInfo = value;
+        if (value){
+            this._musicRoomInfo = value;
 
-        if (typeof value.playingTimestamp === 'string') {
-            console.log('后台返回时间')
-            console.log(value.playingTimestamp)
-            console.log(new Date(value.playingTimestamp).getTime())
-        } else if (typeof value.playingTimestamp === 'number') {
-            console.log('websocket返回时间')
-            console.log(value.playingTimestamp)
-            console.log(new Date(value.playingTimestamp).getTime())
-        } else {
-            console.log('前台设置时间')
-            console.log(value.playingTimestamp)
-            console.log(value.playingTimestamp.getTime())
+            if (typeof value.playingTimestamp === 'string') {
+                console.log('后台返回时间')
+                console.log(value.playingTimestamp)
+                console.log(new Date(value.playingTimestamp).getTime())
+            } else if (typeof value.playingTimestamp === 'number') {
+                console.log('websocket返回时间')
+                console.log(value.playingTimestamp)
+                console.log(new Date(value.playingTimestamp).getTime())
+            } else {
+                console.log('前台设置时间')
+                console.log(value.playingTimestamp)
+                console.log(value.playingTimestamp.getTime())
+            }
         }
     }
 

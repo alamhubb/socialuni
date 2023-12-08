@@ -83,6 +83,10 @@ public class SocialuniMusicController {
 
         SocialuniMusicRoomDO socialuniMusicRoomDO = socialuniMusicRoomManage.getOrCreateMusicPlayerDO(chatId);
 
+        if (StringUtils.isEmpty(socialuniMusicRoomDO.getMusicUrl())) {
+            return ResultRO.success();
+        }
+
         SocialuniMusicRoomInfoRO socialuniMusicRoomPlayerInfoRO = SocialuniMusicRoomPlayerInfoROFactory.createSocialuniMusicRoomInfoRO(socialuniMusicRoomDO);
 
         return ResultRO.success(socialuniMusicRoomPlayerInfoRO);

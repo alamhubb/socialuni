@@ -27,7 +27,7 @@ class SocialuniMusicPlugin implements SocialuniPlugin {
             socialuniMusicStore.setChannelName(params.chatId)
             if (socialuniTokenModule.userToken) {
                 const userRes = await SocialuniMusicAPI.queryMusicRoomUserInfoAPI(socialuniMusicStore.channelName)
-                socialuniMusicStore.setMusicRoleId(userRes.data)
+                socialuniMusicStore.setMusicRoleId(userRes.data.musicRoleId)
             }
             const res = await SocialuniMusicAPI.queryMusicRoomPlayerInfoAPI(socialuniMusicStore.channelName)
             console.log(4656465)

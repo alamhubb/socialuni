@@ -6,7 +6,7 @@
 
 
     <div class="flex-1 overflow-hidden h100p ml-sm row-all-center bg-grey9">
-      <music-player :data="songList" :has-operate-auth="hasOperateAuth"></music-player>
+      <music-player :model-value="musicRoomInfo" :data="songList" :has-operate-auth="hasOperateAuth"></music-player>
     </div>
   </div>
 </template>
@@ -17,11 +17,10 @@ import SocialuniChatViewH5 from "socialuni-im-view-h5/src/views/SocialuniChatVie
 import SocialuniMsgViewH5 from "socialuni-im-view-h5/src/views/SocialuniMsgViewH5.vue"
 import musicRequest from "@/plugins/musicRequest";
 import MusicPlayer from "@/components/MusicPlayer.vue";
-import MusicPlayerSongInfoRO from "@/components/MusicPlayerSongInfoRO.ts";
 import MusicPlayerSongPlayingInfoRO from "socialuni-music-sdk/src/model/MusicPlayerSongPlayingInfoRO.ts";
 import socialuniMusicStore from "socialuni-music-sdk/src/store/SocialuniMusicStore.ts";
-import AlertUtil from "socialuni-native-h5/src/util/AlertUtil.ts";
 import SocialuniMusicRoleId from "socialuni-music-sdk/src/constant/SocialuniMusicRoleId.ts";
+import MusicPlayerSongInfoRO from "socialuni-music-sdk/src/model/MusicPlayerSongInfoRO.ts";
 
 @Component({
   components: {MusicPlayer, SocialuniChatViewH5, SocialuniMsgViewH5}
@@ -30,18 +29,18 @@ export default class MessageView extends Vue {
 
   songList: MusicPlayerSongInfoRO[] = []
 
-  curMusicInfo: MusicPlayerSongPlayingInfoRO = null
-
   created() {
     this.querySongList()
   }
 
   get hasOperateAuth() {
+    console.log(23232323)
+    console.log(socialuniMusicStore.musicRoleId)
     return SocialuniMusicRoleId.hasOperateAuthList.includes(socialuniMusicStore.musicRoleId)
   }
 
-  async queryMusicRoomUserInfo() {
-
+  get musicRoomInfo() {
+    return socialuniMusicStore.musicRoomInfo
   }
 
   async querySongList() {
@@ -58,6 +57,20 @@ export default class MessageView extends Vue {
       return songRO
     })
     this.songList = songList
+    if (this.songList.length > 0) {
+      console.log(1312312)
+      console.log(this.musicRoomInfo)
+      if (!this.musicRoomInfo) {
+        const musicRoomInfo = new MusicPlayerSongPlayingInfoRO(this.songList[0])
+        musicRoomInfo.musicTime = Math.floor(musicRoomInfo.musicTime / 1000)
+        console.log(this.songList[0])
+        console.log(musicRoomInfo)
+        console.log(this.musicRoomInfo)
+        socialuniMusicStore.setMusicRoomInfo(musicRoomInfo)
+        console.log(1312312)
+        console.log(this.musicRoomInfo)
+      }
+    }
   }
 }
 </script>
