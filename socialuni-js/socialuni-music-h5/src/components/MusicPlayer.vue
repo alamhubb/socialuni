@@ -3,7 +3,12 @@
     <audio ref="audioPlayer" :src="modelValue?.musicUrl"></audio>
 
     <div class="flex-1 overflow-hidden">
-      {{ modelValue }}
+      <div>
+        realPlayingValue：{{ realPlayingValue }}
+      </div>
+      <div>
+        {{ modelValue }}
+      </div>
 
       <el-table height="100%" :data="data" stripe highlight-current-row
                 @row-dblclick="handleCurrentChange">
@@ -137,20 +142,17 @@ export default class MusicPlayer extends Vue {
   @Watch('modelValue')
   watchModelValueChange() {
     if (this.modelValue) {
-      console.log('chufale gaibian')
       this.computedRealPlayingValue()
       this.setPlayerCurTimeAndPlay()
-      console.log(66666)
       const volume = this.$refs.audioPlayer.volume
       socialuniMusicStore.musicVolume = Math.ceil(volume * 100)
       socialuniMusicStore.musicMuted = this.$refs.audioPlayer.muted
-      console.log(socialuniMusicStore.musicVolume)
-      console.log(socialuniMusicStore.musicMuted)
       if (this.timer) {
         clearInterval(this.timer)
         this.timer = null
       }
-      if (this.modelValue.playing) {
+      //不为播放，且不为拖拽才定时增长
+      if (this.modelValue.playing && !this.dragging) {
         this.timer = setInterval(() => {
           this.computedRealPlayingValue()
         }, this.playingUnit)
@@ -184,9 +186,6 @@ export default class MusicPlayer extends Vue {
 
 
   setPlayerCurTimeAndPlay() {
-
-    console.log(this.modelValue?.playing)
-    console.log('chufale gaibian')
     if (this.modelValue?.playing) {
       nextTick(() => {
         this.$refs.audioPlayer.currentTime = Math.floor(this.realPlayingValue / this.secondPlayingUnit)
@@ -195,7 +194,6 @@ export default class MusicPlayer extends Vue {
     } else {
       nextTick(() => {
         this.$refs.audioPlayer.currentTime = Math.floor(this.realPlayingValue / this.secondPlayingUnit)
-        console.log('chufale gaibian2222')
         this.frontPause()
       })
     }
@@ -220,11 +218,13 @@ export default class MusicPlayer extends Vue {
   dragging = false
 
   musicInput(value) {
+
     this.checkRoleId()
 
     this.dragging = true
     //秒，
     const playTime = Math.floor(value / this.secondPlayingUnit)
+
     //所以播放时间也要为秒
     if (this.modelValue.playing) {
       this.$refs.audioPlayer.currentTime = playTime
@@ -240,13 +240,11 @@ export default class MusicPlayer extends Vue {
       playingTime: playTime,
       playing: this.modelValue.playing,
     })
-    this.computedRealPlayingValue(false)
+    // this.computedRealPlayingValue(false)
   }
 
 
   musicChange(value) {
-    console.log(658989)
-    console.log(value)
     this.checkRoleId()
     this.dragging = false
     this.change(this.modelValue)
@@ -256,7 +254,6 @@ export default class MusicPlayer extends Vue {
 
   continuePlay() {
     const playing: boolean = !this.musicPlaying
-    console.log(`play:${playing}`)
     if (!this.hasOperateAuth) {
       ToastUtil.throwError('没有操作权限')
     }
@@ -274,8 +271,6 @@ export default class MusicPlayer extends Vue {
           playing: playing,
         }
         this.change(playRoomInfo)
-        console.log(playRoomInfo.playing)
-        console.log(this.modelValue.playing)
         // this.playMusicApiFun()
       }
     } else {
@@ -310,20 +305,21 @@ export default class MusicPlayer extends Vue {
     return this._realPlayingValue
   }
 
-  computedRealPlayingValue(dragging = this.dragging) {
-    if (!dragging) {
-      const curDate = new Date().getTime()
-      const playTime = new Date(this.modelValue.playingTimestamp).getTime()
-      //得到已播放时间的时间差
-      const diffTime = curDate - playTime
+  computedRealPlayingValue() {
+    // if (!dragging) {
+    const curDate = new Date().getTime()
+    const playTime = new Date(this.modelValue.playingTimestamp).getTime()
+    //得到已播放时间的时间差
+    const diffTime = curDate - playTime
 
-      //什么情况下为0，是播放完成后
-      //进度为0.01秒
-      if (this.modelValue.playing) {
-        this._realPlayingValue = Math.floor(diffTime / this.playingUnit) + this.modelValue.playingTime * this.secondPlayingUnit
-      } else {
-        this._realPlayingValue = this.modelValue.playingTime * this.secondPlayingUnit
-      }
+    //什么情况下为0，是播放完成后
+    //进度为0.01秒
+    if (this.modelValue.playing) {
+      this._realPlayingValue = Math.floor(diffTime / this.playingUnit) + this.modelValue.playingTime * this.secondPlayingUnit
+    } else {
+      this._realPlayingValue = this.modelValue.playingTime * this.secondPlayingUnit
+    }
+    if (!this.dragging) {
       if (this._realPlayingValue >= this.musicMax && this.modelValue.playing) {
         this.input({
           musicTime: this.modelValue.musicTime,
@@ -335,6 +331,7 @@ export default class MusicPlayer extends Vue {
         })
       }
     }
+    // }
   }
 
 

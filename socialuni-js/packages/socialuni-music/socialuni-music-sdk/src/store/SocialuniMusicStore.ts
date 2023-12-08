@@ -29,15 +29,15 @@ export class SocialuniMusicStore {
             if (typeof value.playingTimestamp === 'string') {
                 console.log('后台返回时间')
                 console.log(value.playingTimestamp)
-                console.log(new Date(value.playingTimestamp).getTime())
+                console.log(new Date(value.playingTimestamp).toLocaleString())
             } else if (typeof value.playingTimestamp === 'number') {
                 console.log('websocket返回时间')
                 console.log(value.playingTimestamp)
-                console.log(new Date(value.playingTimestamp).getTime())
+                console.log(new Date(value.playingTimestamp).toLocaleString())
             } else {
                 console.log('前台设置时间')
                 console.log(value.playingTimestamp)
-                console.log(value.playingTimestamp.getTime())
+                console.log(value.playingTimestamp.toLocaleString())
             }
         }
     }
@@ -54,7 +54,6 @@ export class SocialuniMusicStore {
     }
 
     setChannelName(value: string) {
-        console.log('设置了channel')
         this._channelName = value;
     }
 

@@ -30,7 +30,6 @@ export default class MessageView extends Vue {
         // 编译模板
         const {code} = CompilerDOM.compile(vuesx);
 
-        console.log(code)
 
         // code：
         // const { createElementVNode: _createElementVNode, toDisplayString: _toDisplayString } = Vue
@@ -39,7 +38,6 @@ export default class MessageView extends Vue {
         // new Function有点类似于eval。最后一个参数是函数体字符串，前面是参数
         // runtime-core作为Vue，暴露createElementVNode和toDisplayString函数
         const render = new Function('Vue', code)(Vue);
-        console.log(render)
         return 123
     }
 
@@ -68,8 +66,6 @@ export default class MessageView extends Vue {
 
     openSound() {
         if (this.musicRoomInfo.playing) {
-            console.log('设置播放进度')
-            console.log(Math.floor(this.realPlayingValue / this.secondPlayingUnit))
             this.$refs.audioPlayer.currentTime = Math.floor(this.realPlayingValue / this.secondPlayingUnit)
             this.frontPlay()
         }
@@ -100,7 +96,6 @@ export default class MessageView extends Vue {
             if (this.musicRoomInfo.playing) {
                 // this.frontPlay()
             }
-            console.log('触发了')
             this.computedRealPlayingValue()
             if (this.timer) {
                 clearInterval(this.timer)
@@ -121,7 +116,6 @@ export default class MessageView extends Vue {
         this.checkRoleId()
 
         this.dragging = true
-        console.log(`input--:${value}`)
         //秒，
         const playTime = Math.floor(value / this.secondPlayingUnit)
         //所以播放时间也要为秒
@@ -140,7 +134,6 @@ export default class MessageView extends Vue {
             playing: this.musicRoomInfo.playing,
             musicRoleId: socialuniMusicStore.musicRoomInfo.musicRoleId,
         })
-        console.log(this.musicRoomInfo.playing)
         this.computedRealPlayingValue(false)
     }
 
@@ -211,15 +204,8 @@ export default class MessageView extends Vue {
             } else {
                 this._realPlayingValue = this.musicRoomInfo.playingTime * this.secondPlayingUnit
             }
-            if (this._realPlayingValue <= 20) {
-                console.log(`curDate:${curDate}`)
-                console.log(`playTime:${playTime}`)
-                console.log(`diffTime:${diffTime}`)
-            }
 
             if (this._realPlayingValue >= this.musicMax && this.musicRoomInfo.playing) {
-                console.log(`this._realPlayingValue:${this._realPlayingValue}`)
-                console.log(`this.musicMax:${this.musicMax}`)
                 socialuniMusicStore.setMusicRoomInfo({
                     musicTime: this.musicRoomInfo.musicTime,
                     musicUrl: this.musicRoomInfo.musicUrl,
@@ -250,13 +236,11 @@ export default class MessageView extends Vue {
 
 
     handleCurrentChange(row) {
-        console.log(row)
         // mucisRoomStore.publish(this.songId)
         this.playMusicAPI(row.id)
     }
 
     get curPlayingTime() {
-        console.log(this.formatTooltip(this.realPlayingValue))
         return this.formatTooltip(this.realPlayingValue)
     }
 

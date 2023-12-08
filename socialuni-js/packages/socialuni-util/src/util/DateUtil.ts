@@ -15,6 +15,10 @@ export default class DateUtil {
         return moment.utc(ms).format("mm:ss");
     }
 
+    static parseTimeSecond(dateProp: Date, cFormat?: string) {
+        return this.parseTime(dateProp,'{y}-{m}-{d} {h}:{i}:{s}')
+    }
+
     static parseTime(dateProp: Date, cFormat?: string) {
         const format = cFormat || '{y}-{m}-{d} {h}:{i}'
         const date = new Date(dateProp)
