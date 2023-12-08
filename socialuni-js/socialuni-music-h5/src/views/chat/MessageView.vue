@@ -84,8 +84,13 @@ export default class MessageView extends Vue {
     this.musicRoomInfoInput(musicRoomInfo)
     console.log('chufale----change')
     SocialuniMusicAPI.playMusicAPI(socialuniMusicStore.channelName, musicRoomInfo).then(res => {
-      // 不为播放结束，或者不为暂停，则代表正在播放
-      socialuniMusicStore.setMusicRoomInfo(res.data)
+      const data: MusicPlayerSongPlayingInfoRO = res.data
+      // 不相同才替换
+      if (data.playingTime !== musicRoomInfo.musicTime
+          || data.playing !== musicRoomInfo.playing
+      ) {
+        socialuniMusicStore.setMusicRoomInfo(res.data)
+      }
     })
   }
 }
