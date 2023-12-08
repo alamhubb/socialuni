@@ -82,7 +82,7 @@ export default class MessageView extends Vue {
 
   musicRoomInfoChange(musicRoomInfo: MusicPlayerSongPlayingInfoRO) {
     //必须深拷贝，不这么写会导致一致，导致不播放
-    this.musicRoomInfoInput(ObjectUtil.deepClone(musicRoomInfo))
+    this.musicRoomInfoInput(musicRoomInfo)
     SocialuniMusicAPI.playMusicAPI(socialuniMusicStore.channelName, musicRoomInfo).then(res => {
       const data: MusicPlayerSongPlayingInfoRO = res.data
       // 不相同才替换

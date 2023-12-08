@@ -139,7 +139,14 @@ export default class MusicPlayer extends Vue {
   @Prop() hasOperateAuth: boolean
 
 
-  @Watch('modelValue')
+  get watchModelValueObj() {
+    return {
+      modelValue: this.modelValue,
+      dragging: this.dragging,
+    }
+  }
+
+  @Watch('watchModelValueObj')
   watchModelValueChange() {
     console.log('chufale watch')
     if (this.modelValue) {
