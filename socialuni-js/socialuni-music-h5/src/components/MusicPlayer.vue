@@ -339,14 +339,14 @@ export default class MusicPlayer extends Vue {
         if (this.hasOperateAuth) {
           this.next(1)
         } else {
-          this.input({
+          /*this.input({
             musicTime: this.modelValue.musicTime,
             musicUrl: this.modelValue.musicUrl,
             playingTimestamp: new Date(),
             //单位秒
             playingTime: 0,
             playing: false,
-          })
+          })*/
         }
       }
     }
