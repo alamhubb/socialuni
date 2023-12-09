@@ -1,29 +1,12 @@
-
 <template>
-  <div class="flex-col h100p overflow-hidden color-black">
-    <div id="layoutContainer" style="width: 100%; height: 100%;"></div>
+    <div ref="goldenLayoutContainer" id="goldenLayoutContainer" style="width: 100%; height: 100%;">
 
+      <slot></slot>
     <layout>
       <g-layout-row>
 
       </g-layout-row>
     </layout>
-
-    <!--    <div class="flex-row overflow-hidden flex-none">
-          <div v-for="i in 20" class="flex-1 w200 h30" :class="[active===i?'bg-blue_light bb-2 bb-blue':'bg-default']"
-               @click="active=i"  draggable="true">
-            {{ i }}
-          </div>
-        </div>-->
-    <!--    <div id="wrapper">
-          <ul id="menuContainer">
-            <li id="addMenuItem">Add another component</li>
-          </ul>
-          <div id="layoutContainer"></div>
-        </div>-->
-    <!--    <div class="flex-1 overflow-hidden bg-green_light pd" @dragover="allowDrop">
-          {{ active }}
-        </div>-->
   </div>
 </template>
 
@@ -36,11 +19,15 @@ import 'golden-layout/dist/css/themes/goldenlayout-light-theme.css';
 @Component({
   components: {}
 })
-export default class MessageView extends Vue {
+export default class GoldenLayout extends Vue {
+
+
 
   active = 1
 
   mounted() {
+
+    console.log(this.$refs)
     var config: LayoutConfig = {
       content: [{
         type: 'row',
