@@ -1,6 +1,8 @@
 <template>
   <div ref="goldenLayoutContainer" id="goldenLayoutContainer" style="width: 100%; height: 100%;">
-    <slot ref="default"></slot>
+    <div v-show="false" ref="default">
+      <slot></slot>
+    </div>
   </div>
 </template>
 
@@ -9,44 +11,51 @@ import {Component, Vue, Watch} from 'vue-facing-decorator';
 import {ComponentContainer, ComponentItemConfig, GoldenLayout, ItemType, LayoutConfig} from "golden-layout";
 import 'golden-layout/dist/css/goldenlayout-base.css';
 import 'golden-layout/dist/css/themes/goldenlayout-light-theme.css';
-import {getCurrentInstance} from "vue";
+import {ref} from "vue";
 
 @Component({
   components: {}
 })
-export default class GoldenLayout extends Vue {
+export default class VueGoldenLayout extends Vue {
 
 
   active = 1
 
   mounted() {
+    var config: LayoutConfig = {
+      root: {
+        type: 'row',
+        content: []
+      }
+    };
 
-    const layouts = this.$slots.default()
-    // console.log(this.$refs)
-    // console.log(this.$refs.default)
-    // console.log(layouts)
+    config.root.content.push({
+      type: 'component',
+      componentName: 'vueComponent',
+      componentState: { /* 你的状态数据 */}
+    })
+    console.log(this.$refs.default.innerHTML)
+
+    const slotContent = ref(null);
 
 
-    // for (const layout of layouts) {
-      const layoutInstance = this.$slots.default()[0]
-      const layoutData = layoutInstance.type.data()
-      console.log(layoutInstance.component)
-      console.log(layoutInstance.children)
-      console.log(layoutInstance)
-      console.log(layoutData.layoutType)
-      console.log(layoutInstance.$slots())
+    const layout = new GoldenLayout(config, this.$refs.goldenLayoutContainer);
 
-      // console.log(layout)
-      // console.log(layout.type)
-      // console.log(layout.type.data())
-      // console.log(layout.ctx)
-      // console.log(layout.ctx.data)
-    // }
-    // console.log(this.$slots.default)
-    // console.log(this.$slots.default())
-    // console.log(this.)
-    // console.log(this.$refs)
-    /*var config: LayoutConfig = {
+    layout.registerComponent('vueComponent', container => {
+      container.getElement().innerHTML = this.$refs.default.innerHTML
+    });
+
+    layout.init();
+
+    // 添加一个带有Vue组件的面板
+  }
+
+  allowDrop(ev) {
+    ev.preventDefault();
+  }
+
+  drag(ev) {
+    var config: LayoutConfig = {
       content: [{
         type: 'row',
         content: [{
@@ -71,21 +80,6 @@ export default class GoldenLayout extends Vue {
         }]
       }]
     };
-
-    const myLayout = new GoldenLayout(config, document.getElementById('layoutContainer'));
-
-    myLayout.registerComponent('testComponent', function (container: ComponentContainer, componentState) {
-      container.getElement().innerHTML = '<h2>' + componentState.label + '</h2>'
-    });
-
-    myLayout.init();*/
-  }
-
-  allowDrop(ev) {
-    ev.preventDefault();
-  }
-
-  drag(ev) {
     ev.dataTransfer.setData("Text", ev.target.id);
   }
 
