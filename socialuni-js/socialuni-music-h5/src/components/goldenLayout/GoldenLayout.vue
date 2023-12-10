@@ -1,12 +1,6 @@
 <template>
-    <div ref="goldenLayoutContainer" id="goldenLayoutContainer" style="width: 100%; height: 100%;">
-
-      <slot></slot>
-    <layout>
-      <g-layout-row>
-
-      </g-layout-row>
-    </layout>
+  <div ref="goldenLayoutContainer" id="goldenLayoutContainer" style="width: 100%; height: 100%;">
+    <slot ref="default"></slot>
   </div>
 </template>
 
@@ -15,6 +9,7 @@ import {Component, Vue, Watch} from 'vue-facing-decorator';
 import {ComponentContainer, ComponentItemConfig, GoldenLayout, ItemType, LayoutConfig} from "golden-layout";
 import 'golden-layout/dist/css/goldenlayout-base.css';
 import 'golden-layout/dist/css/themes/goldenlayout-light-theme.css';
+import {getCurrentInstance} from "vue";
 
 @Component({
   components: {}
@@ -22,13 +17,36 @@ import 'golden-layout/dist/css/themes/goldenlayout-light-theme.css';
 export default class GoldenLayout extends Vue {
 
 
-
   active = 1
 
   mounted() {
 
-    console.log(this.$refs)
-    var config: LayoutConfig = {
+    const layouts = this.$slots.default()
+    // console.log(this.$refs)
+    // console.log(this.$refs.default)
+    // console.log(layouts)
+
+
+    // for (const layout of layouts) {
+      const layoutInstance = this.$slots.default()[0]
+      const layoutData = layoutInstance.type.data()
+      console.log(layoutInstance.component)
+      console.log(layoutInstance.children)
+      console.log(layoutInstance)
+      console.log(layoutData.layoutType)
+      console.log(layoutInstance.$slots())
+
+      // console.log(layout)
+      // console.log(layout.type)
+      // console.log(layout.type.data())
+      // console.log(layout.ctx)
+      // console.log(layout.ctx.data)
+    // }
+    // console.log(this.$slots.default)
+    // console.log(this.$slots.default())
+    // console.log(this.)
+    // console.log(this.$refs)
+    /*var config: LayoutConfig = {
       content: [{
         type: 'row',
         content: [{
@@ -41,7 +59,7 @@ export default class GoldenLayout extends Vue {
             type: 'component',
             componentName: 'testComponent',
             componentState: {label: 'B'}
-          },{
+          }, {
             type: 'component',
             componentName: 'testComponent',
             componentState: {label: 'd'}
@@ -60,7 +78,7 @@ export default class GoldenLayout extends Vue {
       container.getElement().innerHTML = '<h2>' + componentState.label + '</h2>'
     });
 
-    myLayout.init();
+    myLayout.init();*/
   }
 
   allowDrop(ev) {

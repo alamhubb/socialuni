@@ -1,13 +1,13 @@
-
 <template>
   <div class="flex-col h100p overflow-hidden color-black">
-    <div id="layoutContainer" style="width: 100%; height: 100%;"></div>
+    <!--    <div id="layoutContainer" style="width: 100%; height: 100%;"></div>-->
 
-    <layout>
-      <g-layout-row>
-
-      </g-layout-row>
-    </layout>
+    <golden-layout>
+      <golden-layout-row>
+        <div>123</div>
+        <div>123</div>
+      </golden-layout-row>
+    </golden-layout>
 
     <!--    <div class="flex-row overflow-hidden flex-none">
           <div v-for="i in 20" class="flex-1 w200 h30" :class="[active===i?'bg-blue_light bb-2 bb-blue':'bg-default']"
@@ -29,18 +29,20 @@
 
 <script lang="ts">
 import {Component, Vue, Watch} from 'vue-facing-decorator';
-import {ComponentContainer, ComponentItemConfig, GoldenLayout, ItemType, LayoutConfig} from "golden-layout";
 import 'golden-layout/dist/css/goldenlayout-base.css';
 import 'golden-layout/dist/css/themes/goldenlayout-light-theme.css';
+import GoldenLayout from "@/components/goldenLayout/GoldenLayout.vue";
+import GoldenLayoutRow from "@/components/goldenLayout/GoldenLayoutRow.vue";
+import GoldenLayoutColumn from "@/components/goldenLayout/GoldenLayoutColumn.vue";
 
 @Component({
-  components: {}
+  components: {GoldenLayoutColumn, GoldenLayoutRow, GoldenLayout}
 })
 export default class MessageView extends Vue {
 
   active = 1
 
-  mounted() {
+  /*mounted() {
     var config: LayoutConfig = {
       content: [{
         type: 'row',
@@ -54,7 +56,7 @@ export default class MessageView extends Vue {
             type: 'component',
             componentName: 'testComponent',
             componentState: {label: 'B'}
-          },{
+          }, {
             type: 'component',
             componentName: 'testComponent',
             componentState: {label: 'd'}
@@ -74,7 +76,7 @@ export default class MessageView extends Vue {
     });
 
     myLayout.init();
-  }
+  }*/
 
   allowDrop(ev) {
     ev.preventDefault();
