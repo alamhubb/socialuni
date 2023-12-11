@@ -4,8 +4,7 @@
 
     <vue-golden-layout>
       <vue-golden-layout-row>
-        <div>{{ active }}</div>
-        <div>123</div>
+        <music-view></music-view>
       </vue-golden-layout-row>
     </vue-golden-layout>
 
@@ -36,15 +35,16 @@
 
 <script lang="ts">
 import {Component, Vue, Watch} from 'vue-facing-decorator';
-import VueGoldenLayout from 'vue3-golden-layout/src/components/VueGoldenLayout.vue';
-import VueGoldenLayoutRow from 'vue3-golden-layout/src/components/VueGoldenLayoutRow.vue';
+import VueGoldenLayout from '@/components/vue-golden-layout/VueGoldenLayout.vue';
+import VueGoldenLayoutRow from '@/components/vue-golden-layout/VueGoldenLayoutRow.vue';
 import 'golden-layout/dist/css/goldenlayout-base.css';
 import 'golden-layout/dist/css/themes/goldenlayout-light-theme.css';
 import ChildCom from "@/views/chat/ChildCom.vue";
 import {h, render} from "vue";
+import MusicView from "@/views/chat/MusicView.vue";
 
 @Component({
-  components: {ChildCom, VueGoldenLayout, VueGoldenLayoutRow}
+  components: {MusicView, ChildCom, VueGoldenLayout, VueGoldenLayoutRow}
 })
 export default class MessageView extends Vue {
 
