@@ -138,7 +138,7 @@ function handlerChildren(item, content: any[]) {
       handlerChildren(child, newContent.content)
     }
   } else {
-    const uuid = 'uuid_' + UUIDUtil.getUUID()
+    const uuid = 'uuid_' + getUUID()
 
     console.log(item)
     const glRenderElement: VueGoldenLayoutRenderElement = {

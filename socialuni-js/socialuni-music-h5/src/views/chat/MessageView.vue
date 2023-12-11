@@ -34,8 +34,8 @@
 
 <script lang="ts">
 import {Component, Vue, Watch} from 'vue-facing-decorator';
-import VueGoldenLayout from '@/components/vue-golden-layout/VueGoldenLayout.vue';
-import VueGoldenLayoutRow from '@/components/vue-golden-layout/VueGoldenLayoutRow.vue';
+import VueGoldenLayout from 'vue3-golden-layout/src/components/VueGoldenLayout.vue';
+import VueGoldenLayoutRow from 'vue3-golden-layout/src/components/VueGoldenLayoutRow.vue';
 import 'golden-layout/dist/css/goldenlayout-base.css';
 import 'golden-layout/dist/css/themes/goldenlayout-light-theme.css';
 import ChildCom from "@/views/chat/ChildCom.vue";
