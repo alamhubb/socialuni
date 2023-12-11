@@ -3,21 +3,15 @@
 
     <!--    <div id="test1"></div>-->
     <!--    <div id="test2"></div>-->
-    <div>
-      1`2,{{
-        glRenderElements.map(item => {
-          return {hasRender: hasRender(item.data.uuid), uuid: item.data.uuid}
-        })
-      }}
-      <template v-if="glRenderElements.length">
-        <template v-for="(element, index) in this.glRenderElements">
-          <teleport :to="element.data.elmId">
-            <component :is="element.element"></component>
-            <!--            {{ element.element }}-->
-          </teleport>
-        </template>
+
+    <template v-if="glRenderElements.length">
+      <template v-for="(element, index) in this.glRenderElements">
+        <teleport :to="element.data.elmId">
+          <component :is="element.element"></component>
+          <!--            {{ element.element }}-->
+        </teleport>
       </template>
-    </div>
+    </template>
 
 
     <!--    <div v-show="false" ref="default">
@@ -85,6 +79,68 @@ export default class VueGoldenLayout extends Vue {
     }*/
 
 
+  mounted() {
+    this.glRenderElements = []
+
+
+    const config: LayoutConfig = {}
+
+    if (this.$slots.default) {
+      const defaults = this.$slots.default()
+      if (defaults.length > 1) {
+        config.root = {
+          type: 'row',
+          content: []
+        }
+        for (const defaultChild of defaults) {
+          this.handlerChildren(defaultChild, config.root.content)
+        }
+      } else {
+        const defaultChild = defaults[0]
+        if (defaultChild.type.data) {
+          const rootData = defaultChild.type.data()
+          if (rootData.layoutType === 'column') {
+            config.root = {
+              type: 'column',
+              content: []
+            }
+            const children = defaultChild?.children.default()
+            for (const child of children) {
+              this.handlerChildren(child, config.root.content)
+            }
+          } else if (rootData.layoutType === 'row') {
+            config.root = {
+              type: 'row',
+              content: []
+            }
+            const children = defaultChild?.children.default()
+            for (const child of children) {
+              this.handlerChildren(child, config.root.content)
+            }
+          } else {
+            config.root = {
+              type: 'row',
+              content: []
+            }
+            this.handlerChildren(defaultChild, config.root.content)
+          }
+        }
+      }
+
+
+      const layout = new GoldenLayout(this.$refs.goldenLayoutContainer);
+
+
+      layout.registerComponentFactoryFunction('vueComponent', (container, state) => {
+        container.element.id = state.data.uuid
+        // this.keyMap.set(state.data.uuid, true)
+      });
+
+      layout.loadLayout(config)
+    }
+  }
+
+
   handlerChildren(item, content: any[]) {
     //如果为row或者column则继续获取child
     const itemData = item.type.data()
@@ -130,110 +186,6 @@ export default class VueGoldenLayout extends Vue {
     //config
 
   }
-
-  mounted() {
-    this.glRenderElements = []
-
-
-    const config: LayoutConfig = {}
-
-    if (this.$slots.default) {
-      const root = this.$slots.default()[0]
-
-      console.log(root)
-      if (root.type.data) {
-        const rootData = root.type.data()
-        console.log(rootData.layoutType)
-        if (rootData.layoutType === 'column') {
-          config.root = {
-            type: 'column',
-            content: []
-          }
-        } else {
-          config.root = {
-            type: 'row',
-            content: []
-          }
-        }
-
-        const children = root.children.default()
-
-
-        for (const child of children) {
-          this.handlerChildren(child, config.root.content)
-        }
-
-        const layout = new GoldenLayout(this.$refs.goldenLayoutContainer);
-
-
-        layout.registerComponentFactoryFunction('vueComponent', (container, state) => {
-          console.log(66666)
-          console.log(state.data.uuid)
-          container.element.id = state.data.uuid
-          // this.keyMap.set(state.data.uuid, true)
-        });
-
-        console.log(565656)
-        console.log(config)
-
-        layout.loadLayout(config)
-      }
-    }
-
-    /*const slotElements = this.$slots.default ? this.$slots.default() : []
-
-
-
-    const slots = slotElements.map(element => {
-      console.log(element)
-      return {
-        element,
-        data: {
-          uuid: null
-        },
-      }
-    })
-    console.log(slots)
-    console.log(7787878)
-    // 获取默认插槽的所有顶级节点
-    return slots
-
-
-
-
-    var config: LayoutConfig = {
-      root: {
-        type: 'row',
-        content: []
-      }
-    };
-
-    //获取子元素
-    //有多少个就对对应多少个teleport
-
-    this.slotElements.forEach((item, index) => {
-      config.root.content.push({
-        type: 'component',
-        componentName: 'vueComponent',
-        componentState: {data: item.data}
-      })
-    })
-
-    const layout = new GoldenLayout(config, this.$refs.goldenLayoutContainer);
-
-    layout.registerComponent('vueComponent', (container, state) => {
-      console.log(66666)
-      console.log(state)
-      const uuid = 'uuid_' + UUIDUtil.getUUID()
-      state.data.uuid = '#' + uuid
-      container.element.id = state.uuid
-    });
-
-    layout.init();*/
-
-    // 添加一个带有Vue组件的面板
-  }
-
 
   allowDrop(ev) {
     ev.preventDefault();

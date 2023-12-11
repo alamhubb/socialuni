@@ -3,19 +3,8 @@
     <!--    <div id="layoutContainer" style="width: 100%; height: 100%;"></div>-->
 
     <vue-golden-layout>
-      <vue-golden-layout-row>
-        <music-view></music-view>
-        <music-view></music-view>
-        <vue-golden-layout-column>
-          <music-view></music-view>
-          <music-view></music-view>
-        </vue-golden-layout-column>
-
-        <vue-golden-layout-row>
-          <music-view></music-view>
-          <music-view></music-view>
-        </vue-golden-layout-row>
-      </vue-golden-layout-row>
+      <music-view></music-view>
+      <music-view></music-view>
     </vue-golden-layout>
 
     <el-button @click="active++">active--</el-button>
