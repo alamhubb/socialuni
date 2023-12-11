@@ -11,7 +11,7 @@ import {Component, Vue, Watch} from 'vue-facing-decorator';
 import {ComponentContainer, ComponentItemConfig, GoldenLayout, ItemType, LayoutConfig} from "golden-layout";
 import 'golden-layout/dist/css/goldenlayout-base.css';
 import 'golden-layout/dist/css/themes/goldenlayout-light-theme.css';
-import {ref} from "vue";
+import {ref, render} from "vue";
 
 @Component({
   components: {}
@@ -34,6 +34,10 @@ export default class VueGoldenLayout extends Vue {
       componentName: 'vueComponent',
       componentState: { /* 你的状态数据 */}
     })
+    console.log(12312312)
+    console.log(this.$refs)
+    console.log(this.$slots)
+    console.log(this.$slots.default()[0])
     console.log(this.$refs.default.innerHTML)
 
     const slotContent = ref(null);
@@ -42,7 +46,16 @@ export default class VueGoldenLayout extends Vue {
     const layout = new GoldenLayout(config, this.$refs.goldenLayoutContainer);
 
     layout.registerComponent('vueComponent', container => {
-      container.getElement().innerHTML = this.$refs.default.innerHTML
+
+      // $mount(container.getElement()[0]);
+
+      console.log(container)
+      console.log(container.getElement())
+      console.log(this.$slots.default()[0])
+
+      render(container.getElement(),this.$slots.default()[0])
+
+      // container.getElement().innerHTML = this.$refs.default.innerHTML
     });
 
     layout.init();

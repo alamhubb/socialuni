@@ -4,10 +4,12 @@
 
     <golden-layout>
       <golden-layout-row>
-        <div>123</div>
+        <div>{{ active }}</div>
         <div>123</div>
       </golden-layout-row>
     </golden-layout>
+
+    <el-button @click="active++">plus--{{active}}</el-button>
 
     <!--    <div class="flex-row overflow-hidden flex-none">
           <div v-for="i in 20" class="flex-1 w200 h30" :class="[active===i?'bg-blue_light bb-2 bb-blue':'bg-default']"
