@@ -20,7 +20,7 @@ import {
 } from "golden-layout";
 import 'golden-layout/dist/css/goldenlayout-base.css';
 import 'golden-layout/dist/css/themes/goldenlayout-light-theme.css';
-import {onMounted, reactive, ref, useSlots, defineExpose} from "vue";
+import {onMounted, reactive, ref, useSlots, defineExpose, getCurrentInstance} from "vue";
 import {v4} from 'uuid'
 
 class VueGoldenLayoutRenderElement {
@@ -65,13 +65,18 @@ onMounted(() => {
 */
 
 
-
 onMounted(() => {
   glRenderElements.value = []
 
   const config: LayoutConfig = reactive({})
 
   const slots = useSlots()
+
+  const instnce = getCurrentInstance()
+  console.log(454554)
+  console.log(instnce)
+  console.log(instnce.slots.default())
+  console.log(instnce.slotsProxy)
 
   if (slots.default) {
     const defaults = slots.default()
@@ -87,6 +92,7 @@ onMounted(() => {
       const defaultChild = defaults[0]
 
       console.log(6565656)
+      console.log(defaults)
       console.log(defaultChild)
       if (defaultChild.type.data) {
         const itemData = defaultChild.type.data()

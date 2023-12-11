@@ -1,13 +1,18 @@
 <template>
-  <div></div>
+  <div>
+    <slot></slot>
+  </div>
 </template>
 
-<script lang="ts" setup>
-import {defineExpose} from "vue";
+<script lang="ts">
+import {Component, Vue, Watch} from 'vue-facing-decorator';
+import 'golden-layout/dist/css/goldenlayout-base.css';
+import 'golden-layout/dist/css/themes/goldenlayout-light-theme.css';
 
-const layoutType = 'column'
-
-defineExpose({
-  layoutType
+@Component({
+  components: {}
 })
+export default class VueGoldenLayoutColumn extends Vue {
+  layoutType = 'column'
+}
 </script>
