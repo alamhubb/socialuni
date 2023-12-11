@@ -11,7 +11,7 @@
       }}
       <template v-if="glRenderElements.length">
         <template v-for="(element, index) in this.glRenderElements">
-          <teleport v-if="hasRender(element.data.uuid)" :to="element.data.elmId" :key="element.data.uuid">
+          <teleport :to="element.data.elmId">
             <component :is="element.element"></component>
             <!--            {{ element.element }}-->
           </teleport>
@@ -139,7 +139,7 @@ export default class VueGoldenLayout extends Vue {
           console.log(66666)
           console.log(state.data.uuid)
           container.element.id = state.data.uuid
-          this.keyMap.set(state.data.uuid, true)
+          // this.keyMap.set(state.data.uuid, true)
         });
 
         layout.init()
