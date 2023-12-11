@@ -84,6 +84,53 @@ export default class VueGoldenLayout extends Vue {
       return slots
     }*/
 
+
+  handlerChildren(item, content: any[]) {
+    //如果为row或者column则继续获取child
+    const itemData = item.type.data()
+    if (itemData.layoutType === 'column') {
+      const newContent = {
+        type: 'column',
+        content: []
+      }
+      content.push(newContent)
+      const children = item.children.default()
+      for (const child of children) {
+        this.handlerChildren(child, newContent.content)
+      }
+    } else if (itemData.layoutType === 'row') {
+      const newContent = {
+        type: 'row',
+        content: []
+      }
+      content.push(newContent)
+      const children = item.children.default()
+      for (const child of children) {
+        this.handlerChildren(child, newContent.content)
+      }
+    } else {
+      const uuid = 'uuid_' + UUIDUtil.getUUID()
+
+      const glRenderElement: VueGoldenLayoutRenderElement = {
+        element: item,
+        data: {
+          uuid: uuid,
+          elmId: '#' + uuid,
+        }
+      }
+      this.glRenderElements.push(glRenderElement)
+      content.push({
+        type: 'component',
+        componentType: 'vueComponent',
+        componentState: {data: glRenderElement.data}
+      })
+    }
+    //需要遍历节点
+    //然后申城render
+    //config
+
+  }
+
   mounted() {
     this.glRenderElements = []
 
@@ -113,27 +160,11 @@ export default class VueGoldenLayout extends Vue {
 
 
         for (const child of children) {
-          const uuid = 'uuid_' + UUIDUtil.getUUID()
-
-          const glRenderElement: VueGoldenLayoutRenderElement = {
-            element: child,
-            data: {
-              uuid: uuid,
-              elmId: '#' + uuid,
-            }
-          }
-          this.glRenderElements.push(glRenderElement)
-
-          this.keyMap.set(uuid, false)
-
-          config.root.content.push({
-            type: 'component',
-            componentType: 'vueComponent',
-            componentState: {data: glRenderElement.data}
-          })
+          this.handlerChildren(child, config.root.content)
         }
 
-        const layout = new GoldenLayout(config, this.$refs.goldenLayoutContainer);
+        const layout = new GoldenLayout(this.$refs.goldenLayoutContainer);
+
 
         layout.registerComponentFactoryFunction('vueComponent', (container, state) => {
           console.log(66666)
@@ -142,7 +173,10 @@ export default class VueGoldenLayout extends Vue {
           // this.keyMap.set(state.data.uuid, true)
         });
 
-        layout.init()
+        console.log(565656)
+        console.log(config)
+
+        layout.loadLayout(config)
       }
     }
 
@@ -199,6 +233,7 @@ export default class VueGoldenLayout extends Vue {
 
     // 添加一个带有Vue组件的面板
   }
+
 
   allowDrop(ev) {
     ev.preventDefault();

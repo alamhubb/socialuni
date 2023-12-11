@@ -70,7 +70,6 @@ export default class SocialuniChatViewService extends SocialuniViewService<Socia
 
 
     get chatList() {
-        console.log(socialuniChatModule.chats)
         const chats = socialuniChatModule.chats
         return chats.filter(item => !this.searchContent || item.nickname.includes(this.searchContent))
     }

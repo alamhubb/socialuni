@@ -13,8 +13,6 @@ import 'golden-layout/dist/css/themes/goldenlayout-light-theme.css';
   components: {}
 })
 export default class VueGoldenLayoutColumn extends Vue {
-
-
-
+  layoutType = 'column'
 }
 </script>

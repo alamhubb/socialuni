@@ -156,7 +156,6 @@ export default class MusicPlayer extends Vue {
 
   @Watch('watchModelValueObj')
   watchModelValueChange() {
-    console.log('111111111')
     if (this.modelValue) {
       this.computedRealPlayingValue()
       this.setPlayerCurTimeAndPlay()
@@ -203,14 +202,10 @@ export default class MusicPlayer extends Vue {
 
   setPlayerCurTimeAndPlay() {
     if (!this.dragging) {
-      console.log('3333333333')
-      console.log(this.modelValue?.playing)
       nextTick(() => {
-        console.log('5555555555555')
         if (this.modelValue?.playing) {
           // console.log(this.$refs.audioPlayer.paused || this.$refs.audioPlayer.ended)
           // if (!this.$refs.audioPlayer.paused || !this.$refs.audioPlayer.ended) {
-          console.log('shezhile  curtime')
           this.setMusicCurTime()
           this.frontPlay()
           // }
@@ -294,7 +289,6 @@ export default class MusicPlayer extends Vue {
       //如何判断是继续播放还是重新播放
       //根据playTime决定
       if (this.modelValue?.musicUrl) {
-        console.log('chufale  chognxinjiaza2222')
         const playRoomInfo = {
           musicTime: this.modelValue.musicTime,
           musicUrl: this.modelValue.musicUrl,

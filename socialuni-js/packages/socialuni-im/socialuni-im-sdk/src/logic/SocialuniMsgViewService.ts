@@ -93,10 +93,6 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
 
 
     async sendMsgClick() {
-        console.log(123456)
-        console.log(socialuniChatModule.chats)
-        console.log(socialuniChatModule.chatIndex)
-        console.log(socialuniChatModule.chatId)
         if (!socialuniChatModule.chat) {
             SocialuniAppUtil.ToastUtil.throwError('缺少会话')
         }

@@ -6,6 +6,15 @@
       <vue-golden-layout-row>
         <music-view></music-view>
         <music-view></music-view>
+        <vue-golden-layout-column>
+          <music-view></music-view>
+          <music-view></music-view>
+        </vue-golden-layout-column>
+
+        <vue-golden-layout-row>
+          <music-view></music-view>
+          <music-view></music-view>
+        </vue-golden-layout-row>
       </vue-golden-layout-row>
     </vue-golden-layout>
 
@@ -43,9 +52,10 @@ import 'golden-layout/dist/css/themes/goldenlayout-light-theme.css';
 import ChildCom from "@/views/chat/ChildCom.vue";
 import {h, render} from "vue";
 import MusicView from "@/views/chat/MusicView.vue";
+import VueGoldenLayoutColumn from "@/components/vue-golden-layout/VueGoldenLayoutColumn.vue";
 
 @Component({
-  components: {MusicView, ChildCom, VueGoldenLayout, VueGoldenLayoutRow}
+  components: {VueGoldenLayoutColumn, MusicView, ChildCom, VueGoldenLayout, VueGoldenLayoutRow}
 })
 export default class MessageView extends Vue {
 
