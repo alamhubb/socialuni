@@ -2,14 +2,21 @@
   <div class="flex-col h100p overflow-hidden color-black">
     <!--    <div id="layoutContainer" style="width: 100%; height: 100%;"></div>-->
 
-    <golden-layout>
+<!--    <golden-layout>
       <golden-layout-row>
         <div>{{ active }}</div>
         <div>123</div>
       </golden-layout-row>
     </golden-layout>
 
-    <el-button @click="active++">plus--{{active}}</el-button>
+    -->
+
+    <child-com>123</child-com>
+    <el-button @click="addc">add</el-button>
+    <el-button @click="active++">active--</el-button>
+    <div ref="container"></div>
+    <child-com ref="container2">{{active}}</child-com>
+
 
     <!--    <div class="flex-row overflow-hidden flex-none">
           <div v-for="i in 20" class="flex-1 w200 h30" :class="[active===i?'bg-blue_light bb-2 bb-blue':'bg-default']"
@@ -36,9 +43,11 @@ import 'golden-layout/dist/css/themes/goldenlayout-light-theme.css';
 import GoldenLayout from "@/components/goldenLayout/GoldenLayout.vue";
 import GoldenLayoutRow from "@/components/goldenLayout/GoldenLayoutRow.vue";
 import GoldenLayoutColumn from "@/components/goldenLayout/GoldenLayoutColumn.vue";
+import ChildCom from "@/views/chat/ChildCom.vue";
+import {h, render} from "vue";
 
 @Component({
-  components: {GoldenLayoutColumn, GoldenLayoutRow, GoldenLayout}
+  components: {ChildCom, GoldenLayoutColumn, GoldenLayoutRow, GoldenLayout}
 })
 export default class MessageView extends Vue {
 
@@ -86,6 +95,19 @@ export default class MessageView extends Vue {
 
   drag(ev) {
     ev.dataTransfer.setData("Text", ev.target.id);
+  }
+
+  addc() {
+    // 创建子组件的 VNode
+    // const childVNode = h(ChildCom, { someProp: 'value' });
+    // 获取容器的引用
+    const container = this.$refs.container;
+
+    console.log(this.$refs.container2)
+    console.log(this.$refs.container2._)
+    console.log(this.$refs.container2._.vnode)
+    // 渲染子组件到容器中
+    render(h(this.$refs.container2._.vnode), container);
   }
 
   drop(ev) {
