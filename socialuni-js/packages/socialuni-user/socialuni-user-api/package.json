@@ -1,18 +1,18 @@
 {
   "name": "socialuni-user-api",
-  "version": "0.1.2",
+  "version": "0.1.4-alpha.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "socialuni-ui-types": "^0.1.2",
-    "socialuni": "^0.1.2",
-    "socialuni-util": "^0.1.2",
-    "socialuni-constant": "^0.1.2",
-    "socialuni-api-base": "^0.1.2",
-    "socialuni-native-util": "^0.1.2"
+    "socialuni": "^0.1.4-alpha.0",
+    "socialuni-api-base": "^0.1.4-alpha.0",
+    "socialuni-constant": "^0.1.4-alpha.0",
+    "socialuni-native-util": "^0.1.4-alpha.0",
+    "socialuni-ui-types": "^0.1.4-alpha.0",
+    "socialuni-util": "^0.1.4-alpha.0"
   },
   "devDependencies": {
     "typescript": "^4.7.4",
@@ -21,5 +21,5 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "gitHead": "8b17f4a250aa54f47a17a2639efe2b511fd59358"
+  "gitHead": "f43d39640cf571ff728e602fdd76e3046c4e58ed"
 }

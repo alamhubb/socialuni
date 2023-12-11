@@ -1,6 +1,6 @@
 {
   "name": "socialuni",
-  "version": "0.1.2",
+  "version": "0.1.4-alpha.0",
   "description": "",
   "main": "axios.ts",
   "scripts": {
@@ -8,16 +8,16 @@
   },
   "dependencies": {
     "axios": "^1.4.0",
+    "mitt": "^3.0.0",
+    "socialuni-native-util": "^0.1.4-alpha.0",
+    "socialuni-util": "^0.1.4-alpha.0",
     "vue": "^3.3.2",
-    "vue-router": "^4.2.0",
-    "socialuni-util": "^0.1.2",
-    "socialuni-native-util": "^0.1.2",
-    "mitt": "^3.0.0"
+    "vue-router": "^4.2.0"
   },
   "devDependencies": {
     "typescript": "^4.7.4"
   },
   "author": "",
   "license": "ISC",
-  "gitHead": "8b17f4a250aa54f47a17a2639efe2b511fd59358"
+  "gitHead": "f43d39640cf571ff728e602fdd76e3046c4e58ed"
 }

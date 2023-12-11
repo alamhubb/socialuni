@@ -1,20 +1,20 @@
 {
   "name": "socialuni-ui-h5",
-  "version": "0.1.2",
+  "version": "0.1.4-alpha.0",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "socialuni-app-sdk": "^0.1.2",
-    "socialuni-app-api": "^0.1.2",
-    "socialuni-constant": "^0.1.2",
-    "socialuni-native-util": "^0.1.2",
-    "socialuni-util": "^0.1.2",
-    "socialuni-scss": "^0.1.2",
-    "cos-js-sdk-v5": "^1.2.18",
     "@element-plus/icons-vue": "^2.1.0",
+    "cos-js-sdk-v5": "^1.2.18",
     "element-plus": "^2.3.7",
+    "socialuni-app-api": "^0.1.4-alpha.0",
+    "socialuni-app-sdk": "^0.1.4-alpha.0",
+    "socialuni-constant": "^0.1.4-alpha.0",
+    "socialuni-native-util": "^0.1.4-alpha.0",
+    "socialuni-scss": "^0.1.4-alpha.0",
+    "socialuni-util": "^0.1.4-alpha.0",
     "vue-facing-decorator": "^3.0.2"
   },
   "devDependencies": {
@@ -23,5 +23,5 @@
   },
   "author": "",
   "license": "ISC",
-  "gitHead": "8b17f4a250aa54f47a17a2639efe2b511fd59358"
+  "gitHead": "f43d39640cf571ff728e602fdd76e3046c4e58ed"
 }

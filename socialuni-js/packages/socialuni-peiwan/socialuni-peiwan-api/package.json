@@ -1,6 +1,6 @@
 {
   "name": "socialuni-peiwan-api",
-  "version": "0.1.2",
+  "version": "0.1.4-alpha.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,12 +10,12 @@
     "@dcloudio/types": "^3.0.17",
     "@dcloudio/uni-app": "3.0.0-alpha-3070620230227001",
     "@dcloudio/uni-ui": "^1.4.23",
-    "socialuni": "^0.1.2",
-    "socialuni-native-util": "^0.1.2",
+    "socialuni": "^0.1.4-alpha.0",
+    "socialuni-native-util": "^0.1.4-alpha.0",
     "vue": "3.2.41"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "gitHead": "8b17f4a250aa54f47a17a2639efe2b511fd59358"
+  "gitHead": "f43d39640cf571ff728e602fdd76e3046c4e58ed"
 }

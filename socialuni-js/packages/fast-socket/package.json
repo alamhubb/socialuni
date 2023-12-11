@@ -1,15 +1,16 @@
 {
   "name": "fast-socket",
-  "version": "0.1.2",
+  "version": "0.1.4-alpha.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "socialuni-util": "^0.1.2"
+    "socialuni-util": "^0.1.4-alpha.0"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "gitHead": "f43d39640cf571ff728e602fdd76e3046c4e58ed"
 }

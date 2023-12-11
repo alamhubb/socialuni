@@ -1,24 +1,24 @@
 {
   "name": "socialuni-app-view-uni",
-  "version": "0.1.2",
+  "version": "0.1.4-alpha.0",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "socialuni-ui-types": "^0.1.2",
-    "socialuni": "^0.1.2",
-    "socialuni-ui-uni": "^0.1.2",
-    "socialuni-util": "^0.1.2",
-    "socialuni-constant": "^0.1.2",
-    "socialuni-native-util": "^0.1.2",
-    "socialuni-api-base": "^0.1.2",
-    "socialuni-app-api": "^0.1.2",
-    "socialuni-app-sdk": "^0.1.2",
-    "socialuni-user-api": "^0.1.2",
-    "cos-js-sdk-v5": "^1.2.18",
-    "@dcloudio/uni-ui": "^1.4.23",
     "@dcloudio/types": "^3.0.17",
+    "@dcloudio/uni-ui": "^1.4.23",
+    "cos-js-sdk-v5": "^1.2.18",
+    "socialuni": "^0.1.4-alpha.0",
+    "socialuni-api-base": "^0.1.4-alpha.0",
+    "socialuni-app-api": "^0.1.4-alpha.0",
+    "socialuni-app-sdk": "^0.1.4-alpha.0",
+    "socialuni-constant": "^0.1.4-alpha.0",
+    "socialuni-native-util": "^0.1.4-alpha.0",
+    "socialuni-ui-types": "^0.1.4-alpha.0",
+    "socialuni-ui-uni": "^0.1.4-alpha.0",
+    "socialuni-user-api": "^0.1.4-alpha.0",
+    "socialuni-util": "^0.1.4-alpha.0",
     "vue": "^3.3.2"
   },
   "devDependencies": {
@@ -27,5 +27,5 @@
   },
   "author": "",
   "license": "ISC",
-  "gitHead": "8b17f4a250aa54f47a17a2639efe2b511fd59358"
+  "gitHead": "f43d39640cf571ff728e602fdd76e3046c4e58ed"
 }
