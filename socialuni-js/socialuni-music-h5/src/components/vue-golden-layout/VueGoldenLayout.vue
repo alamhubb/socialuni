@@ -1,22 +1,11 @@
 <template>
   <div ref="goldenLayoutContainer" id="goldenLayoutContainer" style="width: 100%; height: 100%;">
-
-    <!--    <div id="test1"></div>-->
-    <!--    <div id="test2"></div>-->
-
-    <template v-if="glRenderElements.length">
-      <template v-for="(element, index) in this.glRenderElements">
-        <teleport :to="element.data.elmId">
-          <component :is="element.element"></component>
-          <!--            {{ element.element }}-->
-        </teleport>
-      </template>
+    <template v-for="(element, index) in this.glRenderElements">
+      <teleport :to="element.data.elmId">
+        <component :is="element.element"></component>
+        <!--            {{ element.element }}-->
+      </teleport>
     </template>
-
-
-    <!--    <div v-show="false" ref="default">
-          <slot></slot>
-        </div>-->
   </div>
 </template>
 
