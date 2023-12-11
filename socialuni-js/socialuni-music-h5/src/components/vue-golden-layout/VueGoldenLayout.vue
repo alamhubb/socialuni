@@ -1,9 +1,15 @@
 <template>
   <div ref="goldenLayoutContainer" id="goldenLayoutContainer" style="width: 100%; height: 100%;">
-    {{teleportId}}
+    {{ teleportId }}
+
+    <el-button @click="teleportId==='#test1'?(teleportId='#test2'):(teleportId='#test1')">swi</el-button>
+
+    <div id="test1"></div>
+    <div id="test2"></div>
+
     <div v-if="teleportId">
-<!--      <Teleport :to="htmlId">-->
-      <Teleport to="#uuid_b2ab6ccb4c614e2cb4e359614ae99c32">
+      <!--      <Teleport :to="htmlId">-->
+      <Teleport :to="teleportId">
         <slot></slot>
       </Teleport>
     </div>
@@ -35,7 +41,7 @@ export default class VueGoldenLayout extends Vue {
 
   htmlId() {
     // if (this.teleportId) {
-      return '#uuid_b2ab6ccb4c614e2cb4e359614ae99c32'
+    return '#uuid_b2ab6ccb4c614e2cb4e359614ae99c32'
     // }
     // return null
   }
@@ -73,10 +79,10 @@ export default class VueGoldenLayout extends Vue {
       // console.log(this.$slots.default()[0])
       console.log(container.element)
       console.log(container.element.id)
-      const uuid = 'uuid_b2ab6ccb4c614e2cb4e359614ae99c32'
+      const uuid = 'test1'
       // const uuid = 'uuid_' + UUIDUtil.getUUID()
       container.element.id = uuid
-      this.teleportId = uuid
+      this.teleportId = '#' + uuid
       console.log(container.element.id)
       // render(h(this.$slots.default()[0]), container.getElement())
 
