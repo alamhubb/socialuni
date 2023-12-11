@@ -11,7 +11,7 @@ import {Component, Vue, Watch} from 'vue-facing-decorator';
 import {ComponentContainer, ComponentItemConfig, GoldenLayout, ItemType, LayoutConfig} from "golden-layout";
 import 'golden-layout/dist/css/goldenlayout-base.css';
 import 'golden-layout/dist/css/themes/goldenlayout-light-theme.css';
-import {ref, render} from "vue";
+import {h, ref, render} from "vue";
 
 @Component({
   components: {}
@@ -49,11 +49,11 @@ export default class VueGoldenLayout extends Vue {
 
       // $mount(container.getElement()[0]);
 
-      console.log(container)
-      console.log(container.getElement())
-      console.log(this.$slots.default()[0])
+      // console.log(container)
+      // console.log(container.getElement())
+      // console.log(this.$slots.default()[0])
 
-      render(container.getElement(),this.$slots.default()[0])
+      render(h(this.$slots.default()[0]), container.getElement())
 
       // container.getElement().innerHTML = this.$refs.default.innerHTML
     });

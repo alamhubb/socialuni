@@ -2,20 +2,19 @@
   <div class="flex-col h100p overflow-hidden color-black">
     <!--    <div id="layoutContainer" style="width: 100%; height: 100%;"></div>-->
 
-<!--    <golden-layout>
+    <golden-layout>
       <golden-layout-row>
         <div>{{ active }}</div>
         <div>123</div>
       </golden-layout-row>
     </golden-layout>
 
-    -->
 
-    <child-com>123</child-com>
-    <el-button @click="addc">add</el-button>
     <el-button @click="active++">active--</el-button>
+<!--    <child-com>123</child-com>
+    <el-button @click="addc">add</el-button>
     <div ref="container"></div>
-    <child-com ref="container2">{{active}}</child-com>
+    <child-com ref="container2">{{active}}</child-com>-->
 
 
     <!--    <div class="flex-row overflow-hidden flex-none">
