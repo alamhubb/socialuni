@@ -3,8 +3,10 @@
     <!--    <div id="layoutContainer" style="width: 100%; height: 100%;"></div>-->
 
     <vue-golden-layout>
-      <music-view></music-view>
-      <music-view></music-view>
+      <vue-golden-layout-row>
+        <music-view></music-view>
+        <music-view></music-view>
+      </vue-golden-layout-row>
     </vue-golden-layout>
 
     <el-button @click="active++">active--</el-button>
@@ -36,12 +38,12 @@
 import {Component, Vue, Watch} from 'vue-facing-decorator';
 import VueGoldenLayout from 'vue3-golden-layout/src/components/VueGoldenLayout.vue';
 import VueGoldenLayoutRow from 'vue3-golden-layout/src/components/VueGoldenLayoutRow.vue';
+import VueGoldenLayoutColumn from 'vue3-golden-layout/src/components/VueGoldenLayoutColumn.vue';
 import 'golden-layout/dist/css/goldenlayout-base.css';
 import 'golden-layout/dist/css/themes/goldenlayout-light-theme.css';
 import ChildCom from "@/views/chat/ChildCom.vue";
 import {h, render} from "vue";
 import MusicView from "@/views/chat/MusicView.vue";
-import VueGoldenLayoutColumn from "@/components/vue-golden-layout/VueGoldenLayoutColumn.vue";
 
 @Component({
   components: {VueGoldenLayoutColumn, MusicView, ChildCom, VueGoldenLayout, VueGoldenLayoutRow}

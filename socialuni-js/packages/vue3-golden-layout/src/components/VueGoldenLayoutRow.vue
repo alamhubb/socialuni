@@ -1,18 +1,13 @@
 <template>
-  <div>
-    <slot></slot>
-  </div>
+  <div></div>
 </template>
 
-<script lang="ts">
-import {Component, Vue} from 'vue-facing-decorator';
-import 'golden-layout/dist/css/goldenlayout-base.css';
-import 'golden-layout/dist/css/themes/goldenlayout-light-theme.css';
+<script lang="ts" setup>
+import {defineExpose} from "vue";
 
-@Component({
-  components: {}
+const layoutType = 'row'
+
+defineExpose({
+  layoutType
 })
-export default class VueGoldenLayoutRow extends Vue {
-  layoutType = 'row'
-}
 </script>

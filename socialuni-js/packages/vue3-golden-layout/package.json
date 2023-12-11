@@ -11,9 +11,6 @@
     "vue": "^3.3.8",
     "uuid": "^8.3.2"
   },
-  "devDependencies": {
-    "vue-facing-decorator": "^3.0.2"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",

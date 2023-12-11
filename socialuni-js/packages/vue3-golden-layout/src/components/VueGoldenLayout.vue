@@ -20,8 +20,8 @@ import {
 } from "golden-layout";
 import 'golden-layout/dist/css/goldenlayout-base.css';
 import 'golden-layout/dist/css/themes/goldenlayout-light-theme.css';
-import {onMounted, reactive, ref, useSlots} from "vue";
-import { v4 } from 'uuid'
+import {onMounted, reactive, ref, useSlots, defineExpose} from "vue";
+import {v4} from 'uuid'
 
 class VueGoldenLayoutRenderElement {
   element: any
@@ -36,7 +36,7 @@ class VueGoldenLayoutRenderElement {
 const goldenLayoutContainer = ref(null)
 const glRenderElements = ref([])
 
-function getUUID (): string {
+function getUUID(): string {
   const randoms: number[] = []
   for (let i = 0; i < 16; i++) {
     randoms.push(Math.round(Math.random() * 255))
@@ -46,6 +46,7 @@ function getUUID (): string {
   }).replace(/-/g, '')
 }
 
+/*
 onMounted(() => {
   glRenderElements.value = []
 
@@ -53,11 +54,27 @@ onMounted(() => {
 
   const slots = useSlots()
 
-  console.log(slots)
+  if (slots.default) {
+    const defaults = slots.default()
+    const defaultChild = defaults[0]
+
+// What do I do if I want to get the defineExpose exported data in the defaultChild slot
+
+  }
+})
+*/
+
+
+
+onMounted(() => {
+  glRenderElements.value = []
+
+  const config: LayoutConfig = reactive({})
+
+  const slots = useSlots()
 
   if (slots.default) {
     const defaults = slots.default()
-    console.log(defaults)
     if (defaults.length > 1) {
       config.root = {
         type: 'row',
@@ -68,9 +85,12 @@ onMounted(() => {
       }
     } else {
       const defaultChild = defaults[0]
+
+      console.log(6565656)
+      console.log(defaultChild)
       if (defaultChild.type.data) {
-        const rootData = defaultChild.type.data()
-        if (rootData.layoutType === 'column') {
+        const itemData = defaultChild.type.data()
+        if (itemData.layoutType === 'column') {
           config.root = {
             type: 'column',
             content: []
@@ -79,7 +99,7 @@ onMounted(() => {
           for (const child of children) {
             handlerChildren(child, config.root.content)
           }
-        } else if (rootData.layoutType === 'row') {
+        } else if (itemData.layoutType === 'row') {
           config.root = {
             type: 'row',
             content: []
@@ -117,6 +137,8 @@ onMounted(() => {
 function handlerChildren(item, content: any[]) {
   //如果为row或者column则继续获取child
   const itemData = item.type.data()
+  console.log(1231231)
+  console.log(itemData)
   if (itemData.layoutType === 'column') {
     const newContent = {
       type: 'column',
