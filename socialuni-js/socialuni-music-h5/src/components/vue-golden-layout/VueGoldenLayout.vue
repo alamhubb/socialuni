@@ -12,7 +12,8 @@
       <template v-if="glRenderElements.length">
         <template v-for="(element, index) in this.glRenderElements">
           <teleport v-if="hasRender(element.data.uuid)" :to="element.data.elmId" :key="element.data.uuid">
-            {{ element.element }}
+            <component :is="element.element"></component>
+            <!--            {{ element.element }}-->
           </teleport>
         </template>
       </template>
