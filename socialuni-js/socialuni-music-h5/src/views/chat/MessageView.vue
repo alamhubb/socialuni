@@ -2,19 +2,18 @@
   <div class="flex-col h100p overflow-hidden color-black">
     <!--    <div id="layoutContainer" style="width: 100%; height: 100%;"></div>-->
 
-    <golden-layout>
-      <golden-layout-row>
+    <vue-golden-layout>
+      <vue-golden-layout-row>
         <div>{{ active }}</div>
         <div>123</div>
-      </golden-layout-row>
-    </golden-layout>
-
+      </vue-golden-layout-row>
+    </vue-golden-layout>
 
     <el-button @click="active++">active--</el-button>
-<!--    <child-com>123</child-com>
-    <el-button @click="addc">add</el-button>
-    <div ref="container"></div>
-    <child-com ref="container2">{{active}}</child-com>-->
+    <!--    <child-com>123</child-com>
+        <el-button @click="addc">add</el-button>
+        <div ref="container"></div>
+        <child-com ref="container2">{{active}}</child-com>-->
 
 
     <!--    <div class="flex-row overflow-hidden flex-none">
@@ -38,13 +37,14 @@
 <script lang="ts">
 import {Component, Vue, Watch} from 'vue-facing-decorator';
 import VueGoldenLayout from 'vue3-golden-layout/src/components/VueGoldenLayout.vue';
+import VueGoldenLayoutRow from 'vue3-golden-layout/src/components/VueGoldenLayoutRow.vue';
 import 'golden-layout/dist/css/goldenlayout-base.css';
 import 'golden-layout/dist/css/themes/goldenlayout-light-theme.css';
 import ChildCom from "@/views/chat/ChildCom.vue";
 import {h, render} from "vue";
 
 @Component({
-  components: {ChildCom, VueGoldenLayout}
+  components: {ChildCom, VueGoldenLayout, VueGoldenLayoutRow}
 })
 export default class MessageView extends Vue {
 
