@@ -36,6 +36,16 @@ class VueGoldenLayoutRenderElement {
 const goldenLayoutContainer = ref(null)
 const glRenderElements = ref([])
 
+function getUUID (): string {
+  const randoms: number[] = []
+  for (let i = 0; i < 16; i++) {
+    randoms.push(Math.round(Math.random() * 255))
+  }
+  return uuidv4({
+    random: randoms
+  }).replace(/-/g, '')
+}
+
 onMounted(() => {
   glRenderElements.value = []
 

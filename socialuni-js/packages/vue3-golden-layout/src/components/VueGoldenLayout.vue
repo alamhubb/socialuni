@@ -1,153 +1,163 @@
 <template>
   <div ref="goldenLayoutContainer" id="goldenLayoutContainer" style="width: 100%; height: 100%;">
-    <div v-show="false" ref="default">
-      <slot></slot>
-    </div>
+    <template v-for="(element, index) in glRenderElements">
+      <teleport :to="element.data.elmId">
+        <component :is="element.element"></component>
+        <!--            {{ element.element }}-->
+      </teleport>
+    </template>
   </div>
 </template>
 
-<script lang="ts">
-import {Component, Vue, Watch} from 'vue-facing-decorator';
-import {ComponentContainer, ComponentItemConfig, GoldenLayout, ItemType, LayoutConfig} from "golden-layout";
+<script lang="ts" setup>
+import {
+  ComponentContainer,
+  ComponentItemConfig,
+  GoldenLayout,
+  ItemType,
+  LayoutConfig,
+  LayoutManager
+} from "golden-layout";
 import 'golden-layout/dist/css/goldenlayout-base.css';
 import 'golden-layout/dist/css/themes/goldenlayout-light-theme.css';
-import {h, ref, render} from "vue";
+import {onMounted, reactive, ref, useSlots} from "vue";
+import { v4 } from 'uuid'
 
-@Component({
-  components: {}
-})
-export default class VueGoldenLayout extends Vue {
+class VueGoldenLayoutRenderElement {
+  element: any
+  type?: string
+  data: {
+    uuid: string,
+    elmId: string,
+  }
+}
 
 
-  active = 1
+const goldenLayoutContainer = ref(null)
+const glRenderElements = ref([])
 
-  mounted() {
-    var config: LayoutConfig = {
-      root: {
+function getUUID (): string {
+  const randoms: number[] = []
+  for (let i = 0; i < 16; i++) {
+    randoms.push(Math.round(Math.random() * 255))
+  }
+  return v4({
+    random: randoms
+  }).replace(/-/g, '')
+}
+
+onMounted(() => {
+  glRenderElements.value = []
+
+  const config: LayoutConfig = reactive({})
+
+  const slots = useSlots()
+
+  console.log(slots)
+
+  if (slots.default) {
+    const defaults = slots.default()
+    console.log(defaults)
+    if (defaults.length > 1) {
+      config.root = {
         type: 'row',
         content: []
       }
-    };
+      for (const defaultChild of defaults) {
+        handlerChildren(defaultChild, config.root.content)
+      }
+    } else {
+      const defaultChild = defaults[0]
+      if (defaultChild.type.data) {
+        const rootData = defaultChild.type.data()
+        if (rootData.layoutType === 'column') {
+          config.root = {
+            type: 'column',
+            content: []
+          }
+          const children = defaultChild?.children.default()
+          for (const child of children) {
+            handlerChildren(child, config.root.content)
+          }
+        } else if (rootData.layoutType === 'row') {
+          config.root = {
+            type: 'row',
+            content: []
+          }
+          const children = defaultChild?.children.default()
+          for (const child of children) {
+            handlerChildren(child, config.root.content)
+          }
+        } else {
+          config.root = {
+            type: 'row',
+            content: []
+          }
+          handlerChildren(defaultChild, config.root.content)
+        }
+      }
+    }
 
-    config.root.content.push({
-      type: 'component',
-      componentName: 'vueComponent',
-      componentState: { /* 你的状态数据 */}
-    })
-    console.log(12312312)
-    console.log(this.$refs)
-    console.log(this.$slots)
-    console.log(this.$slots.default()[0])
-    console.log(this.$refs.default.innerHTML)
+    const layout = new GoldenLayout(goldenLayoutContainer.value);
 
-    const slotContent = ref(null);
-
-
-    const layout = new GoldenLayout(config, this.$refs.goldenLayoutContainer);
-
-    layout.registerComponent('vueComponent', container => {
-
-      // $mount(container.getElement()[0]);
-
-      // console.log(container)
-      // console.log(container.getElement())
-      // console.log(this.$slots.default()[0])
-
-      render(h(this.$slots.default()[0]), container.getElement())
-
-      // container.getElement().innerHTML = this.$refs.default.innerHTML
+    layout.registerComponentFactoryFunction('vueComponent', (container, state) => {
+      container.element.id = state.data.uuid
+      // this.keyMap.set(state.data.uuid, true)
     });
 
-    layout.init();
+    // layout.init()
 
-    // 添加一个带有Vue组件的面板
-  }
+    layout.loadLayout(config)
 
-  allowDrop(ev) {
-    ev.preventDefault();
+    console.log(config)
   }
+})
 
-  drag(ev) {
-    var config: LayoutConfig = {
-      content: [{
-        type: 'row',
-        content: [{
-          type: 'component',
-          componentName: 'testComponent',
-          componentState: {label: 'A'}
-        }, {
-          type: 'column',
-          content: [{
-            type: 'component',
-            componentName: 'testComponent',
-            componentState: {label: 'B'}
-          }, {
-            type: 'component',
-            componentName: 'testComponent',
-            componentState: {label: 'd'}
-          }, {
-            type: 'component',
-            componentName: 'testComponent',
-            componentState: {label: 'C'}
-          }]
-        }]
-      }]
-    };
-    ev.dataTransfer.setData("Text", ev.target.id);
-  }
 
-  drop(ev) {
-    var data = ev.dataTransfer.getData("Text");
-    ev.target.appendChild(document.getElementById(data));
-    ev.preventDefault();
+function handlerChildren(item, content: any[]) {
+  //如果为row或者column则继续获取child
+  const itemData = item.type.data()
+  if (itemData.layoutType === 'column') {
+    const newContent = {
+      type: 'column',
+      content: []
+    }
+    content.push(newContent)
+    const children = item.children.default()
+    for (const child of children) {
+      handlerChildren(child, newContent.content)
+    }
+  } else if (itemData.layoutType === 'row') {
+    const newContent = {
+      type: 'row',
+      content: []
+    }
+    content.push(newContent)
+    const children = item.children.default()
+    for (const child of children) {
+      handlerChildren(child, newContent.content)
+    }
+  } else {
+    const uuid = 'uuid_' + UUIDUtil.getUUID()
+
+    console.log(item)
+    const glRenderElement: VueGoldenLayoutRenderElement = {
+      element: item,
+      data: {
+        uuid: uuid,
+        elmId: '#' + uuid,
+      }
+    }
+    glRenderElements.value.push(glRenderElement)
+    content.push({
+      type: 'component',
+      componentType: 'vueComponent',
+      componentState: {data: glRenderElement.data}
+    })
   }
+  //需要遍历节点
+  //然后申城render
+  //config
+
 }
 </script>
-<style lang="scss">
-h2 {
-  font: 14px Arial, sans-serif;
-  color: #fff;
-  padding: 10px;
-  text-align: center;
-}
-
-html, body {
-  height: 100%;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-}
-
-#wrapper {
-  display: flex;
-  height: 100%
-}
-
-#menuContainer {
-  flex: 0 0 auto;
-  margin-right: 3px;
-}
-
-#menuContainer li {
-  border-bottom: 1px solid #000;
-  border-top: 1px solid #333;
-  cursor: pointer;
-  padding: 10px 10px;
-  color: #BBB;
-  background: #1a1a1a;
-  font: 12px Arial, sans-serif;
-}
-
-#menuContainer li:hover {
-  background: #111;
-  color: #CCC;
-}
-
-#layoutContainer {
-  flex: 1 1 auto;
-  height: 100%;
-}
-</style>
