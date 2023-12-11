@@ -12,7 +12,7 @@ import 'golden-layout/dist/css/themes/goldenlayout-light-theme.css';
 @Component({
   components: {}
 })
-export default class GoldenLayoutRow extends Vue {
+export default class VueGoldenLayoutRow extends Vue {
   layoutType = 'row'
 }
 </script>

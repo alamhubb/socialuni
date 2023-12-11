@@ -39,14 +39,11 @@
 import {Component, Vue, Watch} from 'vue-facing-decorator';
 import 'golden-layout/dist/css/goldenlayout-base.css';
 import 'golden-layout/dist/css/themes/goldenlayout-light-theme.css';
-import GoldenLayout from "@/components/goldenLayout/GoldenLayout.vue";
-import GoldenLayoutRow from "@/components/goldenLayout/GoldenLayoutRow.vue";
-import GoldenLayoutColumn from "@/components/goldenLayout/GoldenLayoutColumn.vue";
 import ChildCom from "@/views/chat/ChildCom.vue";
 import {h, render} from "vue";
 
 @Component({
-  components: {ChildCom, GoldenLayoutColumn, GoldenLayoutRow, GoldenLayout}
+  components: {ChildCom, VueGoldenLayout}
 })
 export default class MessageView extends Vue {
 

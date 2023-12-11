@@ -20,6 +20,7 @@
     "mitt": "^3.0.0",
     "moment": "^2.29.4",
     "socialuni": "../packages/socialuni",
+    "vue3-golden-layout": "../packages/vue3-golden-layout",
     "socialuni-app-view-h5": "../packages/socialuni-app-view-h5",
     "socialuni-im-sdk": "../packages/socialuni-im/socialuni-im-sdk",
     "socialuni-im-view-h5": "../packages/socialuni-im/socialuni-im-view-h5",
