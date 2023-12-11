@@ -5,6 +5,7 @@
     <vue-golden-layout>
       <vue-golden-layout-row>
         <music-view></music-view>
+        <music-view></music-view>
       </vue-golden-layout-row>
     </vue-golden-layout>
 

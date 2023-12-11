@@ -2,7 +2,8 @@
   <div ref="goldenLayoutContainer" id="goldenLayoutContainer" style="width: 100%; height: 100%;">
     {{teleportId}}
     <div v-if="teleportId">
-      <Teleport to="#test">
+<!--      <Teleport :to="htmlId">-->
+      <Teleport to="#uuid_b2ab6ccb4c614e2cb4e359614ae99c32">
         <slot></slot>
       </Teleport>
     </div>
@@ -33,10 +34,10 @@ export default class VueGoldenLayout extends Vue {
   teleportId = null
 
   htmlId() {
-    if (this.teleportId) {
-      return '#' + this.teleportId
-    }
-    return null
+    // if (this.teleportId) {
+      return '#uuid_b2ab6ccb4c614e2cb4e359614ae99c32'
+    // }
+    // return null
   }
 
   mounted() {
@@ -72,7 +73,7 @@ export default class VueGoldenLayout extends Vue {
       // console.log(this.$slots.default()[0])
       console.log(container.element)
       console.log(container.element.id)
-      const uuid = 'test'
+      const uuid = 'uuid_b2ab6ccb4c614e2cb4e359614ae99c32'
       // const uuid = 'uuid_' + UUIDUtil.getUUID()
       container.element.id = uuid
       this.teleportId = uuid
