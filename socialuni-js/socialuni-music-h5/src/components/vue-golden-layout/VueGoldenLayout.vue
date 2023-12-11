@@ -1,6 +1,6 @@
 <template>
   <div ref="goldenLayoutContainer" id="goldenLayoutContainer" style="width: 100%; height: 100%;">
-    <template v-for="(element, index) in this.glRenderElements">
+    <template v-for="(element, index) in glRenderElements">
       <teleport :to="element.data.elmId">
         <component :is="element.element"></component>
         <!--            {{ element.element }}-->
@@ -34,12 +34,12 @@ class VueGoldenLayoutRenderElement {
 
 
 const goldenLayoutContainer = ref(null)
-let glRenderElements: VueGoldenLayoutRenderElement[] = reactive([])
+const glRenderElements = ref([])
 
 onMounted(() => {
-  glRenderElements = []
+  glRenderElements.value = []
 
-  const config: LayoutConfig = {}
+  const config: LayoutConfig = reactive({})
 
   const slots = useSlots()
 
@@ -47,6 +47,7 @@ onMounted(() => {
 
   if (slots.default) {
     const defaults = slots.default()
+    console.log(defaults)
     if (defaults.length > 1) {
       config.root = {
         type: 'row',
@@ -97,6 +98,8 @@ onMounted(() => {
     // layout.init()
 
     layout.loadLayout(config)
+
+    console.log(config)
   }
 })
 
@@ -127,6 +130,7 @@ function handlerChildren(item, content: any[]) {
   } else {
     const uuid = 'uuid_' + UUIDUtil.getUUID()
 
+    console.log(item)
     const glRenderElement: VueGoldenLayoutRenderElement = {
       element: item,
       data: {
@@ -134,7 +138,7 @@ function handlerChildren(item, content: any[]) {
         elmId: '#' + uuid,
       }
     }
-    glRenderElements.push(glRenderElement)
+    glRenderElements.value.push(glRenderElement)
     content.push({
       type: 'component',
       componentType: 'vueComponent',
