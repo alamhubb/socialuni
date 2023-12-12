@@ -1,23 +1,29 @@
 <template>
-  <div class="flex-col h100p overflow-hidden color-black">
+  <div class="h100p">
+    <vue-interact>
+      <div class="bg-grey8 size100">123</div>
+    </vue-interact>
+  </div>
+
+<!--  <div class="flex-col h100p overflow-hidden color-black">
     <div class="flex-row h100p overflow-hidden">
       <div class="w200 bd-radius shadow h100p flex-none">
-        <!--        <socialuni-chat-view-h5></socialuni-chat-view-h5>-->
+        &lt;!&ndash;        <socialuni-chat-view-h5></socialuni-chat-view-h5>&ndash;&gt;
       </div>
 
       <div class="h100p flex-col flex-1">
-        <div class="flex-none h50 row-end-center">
-
+        <div class="flex-none h500 row-end-center">
+&lt;!&ndash;          <div style="resize:vertical">456</div>&ndash;&gt;
           <vue-interact>
-            <div class="draggable size30 bg-grey8">123</div>
+            <div class="bg-grey8 size100">123</div>
           </vue-interact>
         </div>
 
         <div class="flex-1 overflow-hidden ml-sm col-all-center bg-grey9">
-          <!--          <music-view></music-view>-->
+          &lt;!&ndash;          <music-view></music-view>&ndash;&gt;
         </div>
       </div>
-    </div>
+    </div>-->
 
     <!--      </vue-golden-layout-row>-->
     <!--    </vue-golden-layout>-->
@@ -44,7 +50,7 @@
     <!--    <div class="flex-1 overflow-hidden bg-green_light pd" @dragover="allowDrop">
           {{ active }}
         </div>-->
-  </div>
+<!--  </div>-->
 </template>
 
 <script lang="ts">
