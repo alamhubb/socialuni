@@ -8,8 +8,9 @@
   },
   "dependencies": {
     "golden-layout": "^2.6.0",
-    "vue": "^3.3.8",
-    "uuid": "^8.3.2"
+    "interactjs": "^1.10.26",
+    "uuid": "^8.3.2",
+    "vue": "^3.3.8"
   },
   "devDependencies": {
     "vue-facing-decorator": "^3.0.2"

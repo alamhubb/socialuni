@@ -2,16 +2,19 @@
   <div class="flex-col h100p overflow-hidden color-black">
     <div class="flex-row h100p overflow-hidden">
       <div class="w200 bd-radius shadow h100p flex-none">
-<!--        <socialuni-chat-view-h5></socialuni-chat-view-h5>-->
+        <!--        <socialuni-chat-view-h5></socialuni-chat-view-h5>-->
       </div>
 
       <div class="h100p flex-col flex-1">
         <div class="flex-none h50 row-end-center">
-          <div class="size30 bg-grey8 use-click">123</div>
+
+          <vue-interact>
+            <div class="draggable size30 bg-grey8">123</div>
+          </vue-interact>
         </div>
 
         <div class="flex-1 overflow-hidden ml-sm col-all-center bg-grey9">
-<!--          <music-view></music-view>-->
+          <!--          <music-view></music-view>-->
         </div>
       </div>
     </div>
@@ -56,77 +59,38 @@ import {h, render} from "vue";
 import MusicView from "@/views/chat/MusicView.vue";
 import SocialuniChatViewH5 from "socialuni-im-view-h5/src/views/SocialuniChatViewH5.vue";
 import MusicPlayer from "@/components/MusicPlayer.vue";
+import interact from 'interactjs'
+import VueInteract from "@/components/vue-interact/VueInteract.vue";
 
 @Component({
   components: {
+    VueInteract,
     MusicPlayer,
-    SocialuniChatViewH5, VueGoldenLayoutColumn, MusicView, ChildCom, VueGoldenLayout, VueGoldenLayoutRow}
+    SocialuniChatViewH5, VueGoldenLayoutColumn, MusicView, ChildCom, VueGoldenLayout, VueGoldenLayoutRow
+  }
 })
 export default class MessageView extends Vue {
 
-  active = 1
 
-  /*mounted() {
-    var config: LayoutConfig = {
-      content: [{
-        type: 'row',
-        content: [{
-          type: 'component',
-          componentName: 'testComponent',
-          componentState: {label: 'A'}
-        }, {
-          type: 'column',
-          content: [{
-            type: 'component',
-            componentName: 'testComponent',
-            componentState: {label: 'B'}
-          }, {
-            type: 'component',
-            componentName: 'testComponent',
-            componentState: {label: 'd'}
-          }, {
-            type: 'component',
-            componentName: 'testComponent',
-            componentState: {label: 'C'}
-          }]
-        }]
-      }]
-    };
+  mounted() {
+    //随便一个元素，可把他变成可拖拽放大移动的
 
-    const myLayout = new GoldenLayout(config, document.getElementById('layoutContainer'));
+    const position = {x: 0, y: 0}
 
-    myLayout.registerComponent('testComponent', function (container: ComponentContainer, componentState) {
-      container.getElement().innerHTML = '<h2>' + componentState.label + '</h2>'
-    });
+    interact('.draggable').draggable({
+      listeners: {
+        start(event) {
+          console.log(event.type, event.target)
+        },
+        move(event) {
+          position.x += event.dx
+          position.y += event.dy
 
-    myLayout.init();
-  }*/
-
-  allowDrop(ev) {
-    ev.preventDefault();
-  }
-
-  drag(ev) {
-    ev.dataTransfer.setData("Text", ev.target.id);
-  }
-
-  addc() {
-    // 创建子组件的 VNode
-    // const childVNode = h(ChildCom, { someProp: 'value' });
-    // 获取容器的引用
-    const container = this.$refs.container;
-
-    console.log(this.$refs.container2)
-    console.log(this.$refs.container2._)
-    console.log(this.$refs.container2._.vnode)
-    // 渲染子组件到容器中
-    render(h(this.$refs.container2._.vnode), container);
-  }
-
-  drop(ev) {
-    var data = ev.dataTransfer.getData("Text");
-    ev.target.appendChild(document.getElementById(data));
-    ev.preventDefault();
+          event.target.style.transform =
+              `translate(${position.x}px, ${position.y}px)`
+        },
+      }
+    })
   }
 }
 </script>

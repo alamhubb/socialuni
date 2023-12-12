@@ -16,11 +16,11 @@
     "crypto-js": "^4.2.0",
     "element-plus": "^2.3.7",
     "golden-layout": "^2.6.0",
+    "interactjs": "^1.10.26",
     "js-base64": "^3.7.5",
     "mitt": "^3.0.0",
     "moment": "^2.29.4",
     "socialuni": "../packages/socialuni",
-    "vue3-golden-layout": "../packages/vue3-golden-layout",
     "socialuni-app-view-h5": "../packages/socialuni-app-view-h5",
     "socialuni-im-sdk": "../packages/socialuni-im/socialuni-im-sdk",
     "socialuni-im-view-h5": "../packages/socialuni-im/socialuni-im-view-h5",
@@ -32,6 +32,7 @@
     "socialuni-user-view-h5": "../packages/socialuni-user/socialuni-user-view-h5",
     "vue": "^3.3.8",
     "vue-router": "^4.2.0",
+    "vue3-golden-layout": "../packages/vue3-golden-layout",
     "zego-express-engine-webrtc": "^3.0.1"
   },
   "devDependencies": {
