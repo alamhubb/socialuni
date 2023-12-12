@@ -3,7 +3,7 @@
     <audio ref="audioPlayer" :src="modelValue?.musicUrl"></audio>
 
     <div class="flex-1 overflow-hidden">
-      音量：{{ socialuniMusicStore.musicVolume }}
+<!--      音量：{{ socialuniMusicStore.musicVolume }}-->
       <!--      <div>
               realPlayingValue：{{ realPlayingValue }}
             </div>
@@ -11,7 +11,7 @@
               {{ modelValue }}
             </div>-->
 
-      <el-table height="100%" :data="data" stripe highlight-current-row
+<!--      <el-table height="100%" :data="data" stripe highlight-current-row
                 @row-dblclick="handleCurrentChange">
         <el-table-column prop="title" label="音乐标题" width="100" show-overflow-tooltip></el-table-column>
         <el-table-column label="歌手" show-overflow-tooltip>
@@ -29,7 +29,7 @@
             {{ $DateUtil.convertToTime(scope.row.musicTime) }}
           </template>
         </el-table-column>
-      </el-table>
+      </el-table>-->
 
     </div>
 

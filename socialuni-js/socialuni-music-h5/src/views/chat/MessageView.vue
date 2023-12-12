@@ -5,8 +5,14 @@
         <socialuni-chat-view-h5></socialuni-chat-view-h5>
       </div>
 
-      <div class="flex-1 overflow-hidden h100p ml-sm row-all-center bg-grey9">
-        <music-view></music-view>
+      <div class="h100p flex-col flex-1">
+        <div class="flex-none h50 row-end-center">
+          <div class="size30 bg-grey8 use-click">123</div>
+        </div>
+
+        <div class="flex-1 overflow-hidden ml-sm col-all-center bg-grey9">
+<!--          <music-view></music-view>-->
+        </div>
       </div>
     </div>
 
