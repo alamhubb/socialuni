@@ -1,15 +1,19 @@
 <template>
   <div class="flex-col h100p overflow-hidden color-black">
-    <!--    <div id="layoutContainer" style="width: 100%; height: 100%;"></div>-->
+    <div class="flex-row h100p overflow-hidden">
+      <div class="w200 bd-radius shadow h100p flex-none">
+        <socialuni-chat-view-h5></socialuni-chat-view-h5>
+      </div>
 
-    <vue-golden-layout>
-      <vue-golden-layout-row>
+      <div class="flex-1 overflow-hidden h100p ml-sm row-all-center bg-grey9">
         <music-view></music-view>
-        <music-view></music-view>
-      </vue-golden-layout-row>
-    </vue-golden-layout>
+      </div>
+    </div>
 
-    <el-button @click="active++">active--</el-button>
+    <!--      </vue-golden-layout-row>-->
+    <!--    </vue-golden-layout>-->
+
+    <!--    <el-button @click="active++">active&#45;&#45;</el-button>-->
     <!--    <child-com>123</child-com>
         <el-button @click="addc">add</el-button>
         <div ref="container"></div>
@@ -44,9 +48,13 @@ import 'golden-layout/dist/css/themes/goldenlayout-light-theme.css';
 import ChildCom from "@/views/chat/ChildCom.vue";
 import {h, render} from "vue";
 import MusicView from "@/views/chat/MusicView.vue";
+import SocialuniChatViewH5 from "socialuni-im-view-h5/src/views/SocialuniChatViewH5.vue";
+import MusicPlayer from "@/components/MusicPlayer.vue";
 
 @Component({
-  components: {VueGoldenLayoutColumn, MusicView, ChildCom, VueGoldenLayout, VueGoldenLayoutRow}
+  components: {
+    MusicPlayer,
+    SocialuniChatViewH5, VueGoldenLayoutColumn, MusicView, ChildCom, VueGoldenLayout, VueGoldenLayoutRow}
 })
 export default class MessageView extends Vue {
 

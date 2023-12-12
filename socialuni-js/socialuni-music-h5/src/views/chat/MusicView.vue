@@ -1,12 +1,5 @@
 <template>
   <div class="flex-row h100p overflow-hidden">
-    <div class="w200 bd-radius shadow h100p flex-none">
-      <socialuni-chat-view-h5></socialuni-chat-view-h5>
-    </div>
-
-
-    <el-button>haha</el-button>
-
     <div class="flex-1 overflow-hidden h100p ml-sm row-all-center bg-grey9">
       <music-player :model-value="musicRoomInfo" :data="songList" :has-operate-auth="hasOperateAuth"
                     @input="musicRoomInfoInput" @change="musicRoomInfoChange"></music-player>
