@@ -2,7 +2,7 @@
   <div class="flex-col h100p overflow-hidden color-black">
     <div class="flex-row h100p overflow-hidden">
       <div class="w200 bd-radius shadow h100p flex-none">
-        <socialuni-chat-view-h5></socialuni-chat-view-h5>
+<!--        <socialuni-chat-view-h5></socialuni-chat-view-h5>-->
       </div>
 
       <div class="h100p flex-col flex-1">
