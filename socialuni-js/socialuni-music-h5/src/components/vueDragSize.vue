@@ -1,15 +1,11 @@
 <template>
-  <div ref="vueDragSizeContainer" class="position-absolute" :style="{
+  <div ref="vueDragSizeContainer" style="position: absolute" :style="{
     width:state.width+'px',
     height:state.height+'px',
     left:state.x+'px',
     top:state.y+'px',
   }">
     <slot></slot>
-
-    <div>
-      {{ state }}
-    </div>
 
     <div v-for="direction in directions" :key="direction"  class="resizer" :class="direction"
          @mousedown="initResize(direction,$event)"></div>
