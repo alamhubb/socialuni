@@ -1,5 +1,5 @@
 <template>
-  <div class="h800 w600 overflow-hidden phone bd-radius bg-white shadow-5 pd flex-col">
+  <div>
     <audio ref="audioPlayer" :src="modelValue?.musicUrl"></audio>
 
     <div class="flex-1 overflow-hidden">
@@ -78,47 +78,6 @@
         </div>
       </div>
     </div>
-
-
-    <!--            <audio ref="audioPlayer" src="https://music.163.com/song/media/outer/url?id=2100329027.mp3" autoplay muted ></audio>-->
-
-    <!--            <div class="w100p">
-                    <audio id="local" :src="test1" controls="controls"
-                           style="height: 200px;width: 500px;"></audio>
-                    <audio id="remote" style="height: 200px;width: 500px;" controls="controls"></audio>
-                </div>-->
-
-    <div>
-      <div></div>
-
-      <!--        如果为roleid = ower或者admin，显示， 如果musicurl有值显示， 否则不显示-->
-
-      <!--        <div>
-                <el-button
-                    @click="terstfasd('https://cdxapp-1257733245.file.myqcloud.com/opentest/M800000puzgO0yRX1o.mp3')">
-                  创建
-                </el-button>
-                <div>
-                  <audio ref="audioPlayer" autoplay muted controls id="audio"
-                         src="https://music.163.com/song/media/outer/url?id=1456890009.mp3"></audio>
-
-                  <audio id="localVideo" autoplay muted controls></audio>
-                  <audio id="remoteVideo" autoplay controls></audio>
-                  <div>
-                    <el-button @click="start">播放</el-button>
-                    <el-button @click="stop">Stop</el-button>
-                  </div>
-                </div>
-                <el-button @click="terstfasd111">查询</el-button>
-                <el-button @click="queryAllplay">查询播放器</el-button>
-                <el-button @click="destoryPlays">销毁播放器</el-button>
-                <el-button @click="deleteYun111">停止</el-button>
-                <el-button @click="jixuYun111">继续</el-button>
-              </div>-->
-    </div>
-
-    <!--            <socialuni-msg-view-h5></socialuni-msg-view-h5>-->
-
   </div>
 </template>
 

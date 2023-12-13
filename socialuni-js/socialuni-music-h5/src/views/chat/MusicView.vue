@@ -1,10 +1,6 @@
 <template>
-  <div class="flex-row h100p overflow-hidden">
-    <div class="flex-1 overflow-hidden h100p ml-sm row-all-center bg-grey9">
-      <music-player :model-value="musicRoomInfo" :data="songList" :has-operate-auth="hasOperateAuth"
-                    @input="musicRoomInfoInput" @change="musicRoomInfoChange"></music-player>
-    </div>
-  </div>
+  <music-player :model-value="musicRoomInfo" :data="songList" :has-operate-auth="hasOperateAuth"
+                @input="musicRoomInfoInput" @change="musicRoomInfoChange"></music-player>
 </template>
 
 <script lang="ts">
