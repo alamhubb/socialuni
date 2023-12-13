@@ -16,6 +16,7 @@
 
 <script lang="ts">
 import {Vue, Component} from 'vue-facing-decorator';
+import {useDraggable} from '@vueuse/core'
 
 @Component({})
 export default class vueDragSize extends Vue {
@@ -24,9 +25,18 @@ export default class vueDragSize extends Vue {
   }
 
 
+  style = null
 
   mounted() {
     const elmnt = this.$refs.vueDragSizeContainer;
+
+    useDraggable(elmnt, {
+      onMove(e) {
+        console.log(e)
+        elmnt.style.left = `${e.x}px`
+        elmnt.style.top = `${e.y}px`
+      }
+    })
 
     console.log(elmnt)
 
@@ -35,7 +45,7 @@ export default class vueDragSize extends Vue {
 
     for (var i = 0; i < resizers.length; i++) {
       currentResizer = resizers[i];
-      currentResizer.addEventListener('mousedown', function(e) {
+      currentResizer.addEventListener('mousedown', function (e) {
         e.stopPropagation();
         currentResizer = e.target;
         document.addEventListener('mousemove', resize);
@@ -112,12 +122,47 @@ export default class vueDragSize extends Vue {
   height: 10px;
 }
 
-.bottom-right { right: 0; bottom: 0; cursor: se-resize; }
-.bottom-left { left: 0; bottom: 0; cursor: sw-resize; }
-.top-right { right: 0; top: 0; cursor: ne-resize; }
-.top-left { left: 0; top: 0; cursor: nw-resize; }
-.top { top: 0; cursor: n-resize; }
-.bottom { bottom: 0; cursor: s-resize; }
-.right { right: 0; cursor: e-resize; }
-.left { left: 0; cursor: w-resize; }
+.bottom-right {
+  right: 0;
+  bottom: 0;
+  cursor: se-resize;
+}
+
+.bottom-left {
+  left: 0;
+  bottom: 0;
+  cursor: sw-resize;
+}
+
+.top-right {
+  right: 0;
+  top: 0;
+  cursor: ne-resize;
+}
+
+.top-left {
+  left: 0;
+  top: 0;
+  cursor: nw-resize;
+}
+
+.top {
+  top: 0;
+  cursor: n-resize;
+}
+
+.bottom {
+  bottom: 0;
+  cursor: s-resize;
+}
+
+.right {
+  right: 0;
+  cursor: e-resize;
+}
+
+.left {
+  left: 0;
+  cursor: w-resize;
+}
 </style>
