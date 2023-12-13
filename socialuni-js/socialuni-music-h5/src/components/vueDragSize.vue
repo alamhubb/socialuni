@@ -1,168 +1,150 @@
 <template>
-  <div ref="vueDragSizeContainer" class="position-absolute">
-    <slot></slot>
+  <div ref="draggable" class="draggable pd-lg"
+       :style="{ width: state.width + 'px', height: state.height + 'px', top: state.y + 'px', left: state.x + 'px' }">
+    {{ state.x }} x {{ state.y }}
 
-    <div class="resizer top-left"></div>
-    <div class="resizer top-right"></div>
-    <div class="resizer bottom-left"></div>
-    <div class="resizer bottom-right"></div>
-    <div class="resizer top"></div>
-    <div class="resizer bottom"></div>
-    <div class="resizer left"></div>
-    <div class="resizer right"></div>
+<!--    <div v-for="direction in directions" :key="direction" :class="'resizer ' + direction"
+         @mousedown="initResize(direction)"></div>-->
   </div>
 </template>
 
+<script setup>
+import {ref, reactive} from 'vue';
+import {useDraggable} from '@vueuse/core';
 
-<script lang="ts">
-import {Vue, Component} from 'vue-facing-decorator';
-import {useDraggable} from '@vueuse/core'
+const draggable = ref(null);
 
-@Component({})
-export default class vueDragSize extends Vue {
-  $refs: {
-    vueDragSizeContainer: HTMLElement
+const state = reactive({
+  x: 100,
+  y: 100,
+  width: 200,
+  height: 200
+});
+
+useDraggable(draggable, {
+  onMove(e) {
+    state.x = e.x
+    state.y = e.y
+    // console.log(e)
+    // console.log(draggable)
+    // console.log(draggable.style)
+    // draggable.value.style.left = `${e.x}px`
+    // draggable.value.style.top = `${e.y}px`
   }
+})
 
+/*
+const directions = ['top-left', 'top-right', 'bottom-left', 'bottom-right', 'top', 'bottom', 'left', 'right'];
 
-  style = null
-
-  mounted() {
-    const elmnt = this.$refs.vueDragSizeContainer;
-
-    useDraggable(elmnt, {
-      onMove(e) {
-        console.log(e)
-        elmnt.style.left = `${e.x}px`
-        elmnt.style.top = `${e.y}px`
-      }
-    })
-
-    console.log(elmnt)
-
-    var resizers = elmnt.querySelectorAll(".resizer");
-    var currentResizer;
-
-    for (var i = 0; i < resizers.length; i++) {
-      currentResizer = resizers[i];
-      currentResizer.addEventListener('mousedown', function (e) {
-        e.stopPropagation();
-        currentResizer = e.target;
-        document.addEventListener('mousemove', resize);
-        document.addEventListener('mouseup', stopResize);
-      });
+function initResize(direction) {
+  const onMouseMove = (e) => {
+    switch (direction) {
+      case 'top-left':
+        state.width -= e.movementX;
+        state.height -= e.movementY;
+        state.x += e.movementX;
+        state.y += e.movementY;
+        break;
+      case 'top-right':
+        state.width += e.movementX;
+        state.height -= e.movementY;
+        state.y += e.movementY;
+        break;
+      case 'bottom-left':
+        state.width -= e.movementX;
+        state.height += e.movementY;
+        state.x += e.movementX;
+        break;
+      case 'bottom-right':
+        state.width += e.movementX;
+        state.height += e.movementY;
+        break;
+      case 'top':
+        state.height -= e.movementY;
+        state.y += e.movementY;
+        break;
+      case 'bottom':
+        state.height += e.movementY;
+        break;
+      case 'left':
+        state.width -= e.movementX;
+        state.x += e.movementX;
+        break;
+      case 'right':
+        state.width += e.movementX;
+        break;
     }
+  };
 
-    function stopResize() {
-      document.removeEventListener('mousemove', resize);
-    }
+  const onMouseUp = () => {
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+  };
 
-    function resize(e) {
-      var rect = elmnt.getBoundingClientRect();
-      if (currentResizer.classList.contains("bottom-right")) {
-        elmnt.style.width = e.clientX - rect.left + "px";
-        elmnt.style.height = e.clientY - rect.top + "px";
-      } else if (currentResizer.classList.contains("bottom-left")) {
-        elmnt.style.width = rect.right - e.clientX + "px";
-        elmnt.style.height = e.clientY - rect.top + "px";
-        elmnt.style.left = e.clientX + "px";
-      } else if (currentResizer.classList.contains("top-right")) {
-        elmnt.style.width = e.clientX - rect.left + "px";
-        elmnt.style.height = rect.bottom - e.clientY + "px";
-        elmnt.style.top = e.clientY + "px";
-      } else if (currentResizer.classList.contains("top-left")) {
-        elmnt.style.width = rect.right - e.clientX + "px";
-        elmnt.style.height = rect.bottom - e.clientY + "px";
-        elmnt.style.left = e.clientX + "px";
-        elmnt.style.top = e.clientY + "px";
-      } else if (currentResizer.classList.contains("top")) {
-        elmnt.style.height = rect.bottom - e.clientY + "px";
-        elmnt.style.top = e.clientY + "px";
-      } else if (currentResizer.classList.contains("bottom")) {
-        elmnt.style.height = e.clientY - rect.top + "px";
-      } else if (currentResizer.classList.contains("right")) {
-        elmnt.style.width = e.clientX - rect.left + "px";
-      } else if (currentResizer.classList.contains("left")) {
-        elmnt.style.width = rect.right - e.clientX + "px";
-        elmnt.style.left = e.clientX + "px";
-      }
-    }
-  }
-}
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseup', onMouseUp);
+}*/
 </script>
-<style scoped>
-.resizer {
-  width: 10px;
-  height: 10px;
-  background-color: blue;
+
+<style>
+.draggable {
   position: absolute;
+  background-color: red;
+  cursor: move;
 }
 
-.resizer.top-left,
-.resizer.top-right,
-.resizer.bottom-left,
-.resizer.bottom-right {
+.resizer {
   width: 15px;
   height: 15px;
-}
-
-.resizer.top,
-.resizer.bottom {
-  left: 50%;
-  margin-left: -5px;
-  width: 10px;
-  height: 15px;
-}
-
-.resizer.right,
-.resizer.left {
-  top: 50%;
-  margin-top: -5px;
-  width: 15px;
-  height: 10px;
-}
-
-.bottom-right {
-  right: 0;
-  bottom: 0;
-  cursor: se-resize;
-}
-
-.bottom-left {
-  left: 0;
-  bottom: 0;
-  cursor: sw-resize;
-}
-
-.top-right {
-  right: 0;
-  top: 0;
-  cursor: ne-resize;
+  position: absolute;
+  background-color: blue;
 }
 
 .top-left {
-  left: 0;
   top: 0;
+  left: 0;
   cursor: nw-resize;
+}
+
+.top-right {
+  top: 0;
+  right: 0;
+  cursor: ne-resize;
+}
+
+.bottom-left {
+  bottom: 0;
+  left: 0;
+  cursor: sw-resize;
+}
+
+.bottom-right {
+  bottom: 0;
+  right: 0;
+  cursor: se-resize;
 }
 
 .top {
   top: 0;
+  left: 50%;
   cursor: n-resize;
 }
 
 .bottom {
   bottom: 0;
+  left: 50%;
   cursor: s-resize;
-}
-
-.right {
-  right: 0;
-  cursor: e-resize;
 }
 
 .left {
   left: 0;
+  top: 50%;
   cursor: w-resize;
+}
+
+.right {
+  right: 0;
+  top: 50%;
+  cursor: e-resize;
 }
 </style>
