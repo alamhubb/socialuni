@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.1.0",
+    "@vueuse/core": "^10.7.0",
     "agora-rtc-sdk-ng": "^4.19.3",
     "axios": "^1.4.0",
     "crypto-js": "^4.2.0",
