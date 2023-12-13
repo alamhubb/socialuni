@@ -67,7 +67,7 @@
       </div>
     </div>
 
-    <div class="flex-col flex-none position-relative pd-sm bg-white">
+    <div class="flex-col flex-none position-relative pd-sm bg-white shadow-top">
       <div class="flex-row">
         <s-icon icon="mdi-emoticon-outline color-content" size="28"></s-icon>
       </div>

@@ -1,15 +1,15 @@
 <template>
   <div class="flex-col h100p overflow-hidden color-black">
     <div class="flex-row h100p overflow-hidden">
-      <div class="w200 bd-radius shadow h100p flex-none">
+      <div class="w200 bd-radius shadow h100p flex-none br">
         <socialuni-chat-view-h5></socialuni-chat-view-h5>
       </div>
 
-      <div class="h100p flex-col flex-1">
+      <div class="h100p flex-col flex-1 bg-white">
         <!--          <vue-drag-resize>-->
-        <music-view></music-view>
+        <music-view class="shadow-bottom"></music-view>
         <!--          </vue-drag-resize>-->
-        <div class="flex-1 overflow-hidden ml-sm bg-grey9">
+        <div class="flex-1 overflow-hidden">
           <socialuni-msg-view-h5></socialuni-msg-view-h5>
         </div>
         <div>
