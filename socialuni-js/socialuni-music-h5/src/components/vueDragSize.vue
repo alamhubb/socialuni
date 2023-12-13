@@ -7,6 +7,10 @@
   }">
     <slot></slot>
 
+    <div>
+      {{ state }}
+    </div>
+
     <div v-for="direction in directions" :key="direction" :class="'resizer ' + direction"
          @mousedown="initResize(direction,$event)"></div>
   </div>
@@ -42,15 +46,15 @@ export default class vueDragSize extends Vue {
     }
   }
 
-  setX(width, x) {
+  setX(width, movementX) {
     if (width >= 0) {
-      this.state.x = x
+      this.state.x += movementX
     }
   }
 
-  setY(height, y) {
+  setY(height, movementY) {
     if (height >= 0) {
-      this.state.y = y
+      this.state.y += movementY
     }
   }
 
@@ -75,8 +79,9 @@ export default class vueDragSize extends Vue {
           setHeight = this.state.height - e.movementY
           this.setHeight(setHeight)
 
-          this.setX(setWidth, this.state.x + e.movementX)
-          this.setY(setHeight, this.state.y + e.movementY)
+
+          this.setX(setWidth, e.movementX)
+          this.setY(setHeight, e.movementY)
           break;
         case 'top-right':
           setWidth = this.state.width + e.movementX
@@ -85,7 +90,7 @@ export default class vueDragSize extends Vue {
           setHeight = this.state.height - e.movementY
           this.setHeight(setHeight)
 
-          this.setY(setHeight, this.state.y + e.movementY)
+          this.setY(setHeight, e.movementY)
           break;
         case 'bottom-left':
           setWidth = this.state.width - e.movementX
@@ -94,7 +99,7 @@ export default class vueDragSize extends Vue {
           setHeight = this.state.height + e.movementY
           this.setHeight(setHeight)
 
-          this.setX(setWidth, this.state.x + e.movementX)
+          this.setX(setWidth, e.movementX)
           break;
         case 'bottom-right':
           setWidth = this.state.width + e.movementX
@@ -107,7 +112,7 @@ export default class vueDragSize extends Vue {
           setHeight = this.state.height - e.movementY
           this.setHeight(setHeight)
 
-          this.setY(setHeight, this.state.y + e.movementY)
+          this.setY(setHeight, e.movementY)
           break;
         case 'bottom':
           setHeight = this.state.height + e.movementY
@@ -117,7 +122,7 @@ export default class vueDragSize extends Vue {
           setWidth = this.state.width - e.movementX
           this.setWidth(setWidth)
 
-          this.setX(setWidth, this.state.x + e.movementX)
+          this.setX(setWidth, e.movementX)
           break;
         case 'right':
           setWidth = this.state.width + e.movementX
@@ -141,7 +146,7 @@ export default class vueDragSize extends Vue {
   mounted() {
     const elmnt = this.$refs.vueDragSizeContainer;
 
-    /*useDraggable(elmnt, {
+    useDraggable(elmnt, {
       onStart: () => {
         console.log('start')
         console.log(this.allowDrag)
@@ -149,13 +154,11 @@ export default class vueDragSize extends Vue {
       },
       onMove: (e) => {
         if (this.allowDrag) {
-          console.log(e)
-          console.log(this.allowDrag)
-          this.state.x = `${e.x}`
-          this.state.y = `${e.y}`
+          this.state.x = e.x
+          this.state.y = e.y
         }
       }
-    })*/
+    })
   }
 }
 </script>
