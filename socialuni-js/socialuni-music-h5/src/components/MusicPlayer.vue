@@ -35,52 +35,51 @@
 
         </div>-->
 
-    <div class="flex-none">
-      <div>
-        <!--      <div v-if="musicRoomInfo?.musicUrl">-->
-        <div class="row-between-center px-50">
-          <div class="w20p flex-none">
-            123
+    <div class="row-between-center flex-none px">
+      <div class="w20p flex-none">
+        <div v-if="curMusicInfo">
+<!--          <img class="size50  bd-round" :class="{'rotate-animation':musicPlaying}" :src="curMusicInfo.albumImg">-->
+          <img class="size50  bd-round" :src="curMusicInfo.albumImg">
+          {{ curMusicInfo.title }}--{{ curMusicInfo.author.join(' / ') }}
+        </div>
+      </div>
+      <div class="w40p flex-none">
+        <div class="row-all-center">
+          <div v-if="hasOperateAuth" class="row-col-center">
+            <!--                            <i @click="isChangeLike" v-if="!isLike" title="收藏" class="mdi mdi-star-outline"></i>-->
+            <!--                            <i @click="isChangeLike" v-else style="color: red;font-size: 22px;" title="已收藏"  class="mdi mdi-star"></i>-->
+            <i title="上一曲" @click="next(-1)" class="mdi mdi-skip-previous font-30 color-content use-click"></i>
+            <i @click="continuePlay" style="font-size: 40px; color: #cc7013;"
+               class="mdi use-click"
+               :class="[musicPlaying ? 'mdi-pause' :'mdi-play']"></i>
+            <i title="下一曲" @click="next(1)" class="mdi mdi-skip-next font-30 color-content use-click"></i>
           </div>
-          <div class="w40p flex-none">
-            <div class="row-all-center">
-              <div v-if="hasOperateAuth" class="row-col-center">
-                <!--                            <i @click="isChangeLike" v-if="!isLike" title="收藏" class="mdi mdi-star-outline"></i>-->
-                <!--                            <i @click="isChangeLike" v-else style="color: red;font-size: 22px;" title="已收藏"  class="mdi mdi-star"></i>-->
-                <i title="上一曲" @click="next(-1)" class="mdi mdi-skip-previous"></i>
-                <i @click="continuePlay" style="font-size: 30px; color: #cc7013;"
-                   class="mdi"
-                   :class="[musicPlaying ? 'mdi-pause' :'mdi-play']"></i>
-                <i title="下一曲" @click="next(1)" class="mdi mdi-skip-next"></i>
-              </div>
 
-              <div v-else class="row-col-center">
-                <i @click="mutedMusic" style="font-size: 40px; color: #cc7013;"
-                   class="mdi"
-                   :class="[musicMuted ? 'mdi-volume-mute' :'mdi-volume-medium']"></i>
-              </div>
-            </div>
-            <div class="row-col-center">
-              <div class="flex-none">{{ curPlayingTime }}</div>
-              <el-slider class="flex-1" v-model="realPlayingValue" @input="musicInput" @change="musicChange"
-                         :show-tooltip="false"
-                         :disabled="!hasOperateAuth"
-                         :max="musicMax"></el-slider>
-              <div class="flex-none">{{ formatTooltip(musicMax) }}</div>
-            </div>
-          </div>
-          <div class="w20p flex-none row-col-center">
-            <i class="mdi mdi-playlist-play color-content font-20 use-click"></i>
-
-            <i class="ml mdi flex-none font-20 use-click"
-               :class="[computedMusicMuted ? 'mdi-volume-mute' :'mdi-volume-medium']"
-               @click="mutedMusic"></i>
-
-            <el-slider class="ml flex-1" :model-value="computedMusicMuted?0:socialuniMusicStore.musicVolume"
-                       @input="musicVolumeInput"
-                       :show-tooltip="false"></el-slider>
+          <div v-else class="row-col-center">
+            <i @click="mutedMusic" style="font-size: 40px; color: #cc7013;"
+               class="mdi"
+               :class="[musicMuted ? 'mdi-volume-mute' :'mdi-volume-medium']"></i>
           </div>
         </div>
+        <div class="row-col-center">
+          <div class="flex-none font-12 color-sub">{{ curPlayingTime }}</div>
+          <el-slider class="flex-1 mx-sm" v-model="realPlayingValue" @input="musicInput" @change="musicChange"
+                     :show-tooltip="false"
+                     :disabled="!hasOperateAuth"
+                     :max="musicMax"></el-slider>
+          <div class="flex-none font-12 color-sub">{{ formatTooltip(musicMax) }}</div>
+        </div>
+      </div>
+      <div class="w20p flex-none row-col-center">
+        <i class="mdi mdi-playlist-play color-content font-20 use-click"></i>
+
+        <i class="ml-sm mdi flex-none font-20 use-click"
+           :class="[computedMusicMuted ? 'mdi-volume-mute' :'mdi-volume-medium']"
+           @click="mutedMusic"></i>
+
+        <el-slider class="ml-sm flex-1" :model-value="computedMusicMuted?0:socialuniMusicStore.musicVolume"
+                   @input="musicVolumeInput"
+                   :show-tooltip="false"></el-slider>
       </div>
     </div>
   </div>
@@ -108,6 +107,11 @@ export default class MusicPlayer extends Vue {
   @Model('modelValue') modelValue: MusicPlayerSongPlayingInfoRO
   @Prop() data: MusicPlayerSongInfoRO []
   @Prop() hasOperateAuth: boolean
+
+  get curMusicInfo() {
+    const musicInfo = this.data.find(item => `https://music.163.com/song/media/outer/url?id=${item.songId}.mp3` === this.modelValue.musicUrl)
+    return musicInfo
+  }
 
   get socialuniMusicStore() {
     return socialuniMusicStore
