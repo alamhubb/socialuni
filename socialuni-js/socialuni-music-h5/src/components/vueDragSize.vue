@@ -42,6 +42,18 @@ export default class vueDragSize extends Vue {
     }
   }
 
+  setX(width, x) {
+    if (width >= 0) {
+      this.state.x = x
+    }
+  }
+
+  setY(height, y) {
+    if (height >= 0) {
+      this.state.y = y
+    }
+  }
+
   setHeight(height) {
     if (height >= 0) {
       this.state.height = height
@@ -53,40 +65,65 @@ export default class vueDragSize extends Vue {
     this.allowDrag = false; // 开始调整大小
     event.stopPropagation(); // 阻止事件冒泡到拖拽处理程序
     const onMouseMove = (e) => {
+      let setWidth = null
+      let setHeight = null
       switch (direction) {
         case 'top-left':
-          this.setWidth(this.state.width - e.movementX)
-          this.setHeight(this.state.height - e.movementY)
-          this.state.x += e.movementX;
-          this.state.y += e.movementY;
+          setWidth = this.state.width - e.movementX
+          this.setWidth(setWidth)
+
+          setHeight = this.state.height - e.movementY
+          this.setHeight(setHeight)
+
+          this.setX(setWidth, this.state.x + e.movementX)
+          this.setY(setHeight, this.state.y + e.movementY)
           break;
         case 'top-right':
-          this.state.width += e.movementX;
-          this.state.height -= e.movementY;
-          this.state.y += e.movementY;
+          setWidth = this.state.width + e.movementX
+          this.setWidth(setWidth)
+
+          setHeight = this.state.height - e.movementY
+          this.setHeight(setHeight)
+
+          this.setY(setHeight, this.state.y + e.movementY)
           break;
         case 'bottom-left':
-          this.setWidth(this.state.width - e.movementX)
-          this.state.height += e.movementY;
-          this.state.x += e.movementX;
+          setWidth = this.state.width - e.movementX
+          this.setWidth(setWidth)
+
+          setHeight = this.state.height + e.movementY
+          this.setHeight(setHeight)
+
+          this.setX(setWidth, this.state.x + e.movementX)
           break;
         case 'bottom-right':
-          this.state.width += e.movementX;
-          this.state.height += e.movementY;
+          setWidth = this.state.width + e.movementX
+          this.setWidth(setWidth)
+
+          setHeight = this.state.height + e.movementY
+          this.setHeight(setHeight)
           break;
         case 'top':
-          this.setHeight(this.state.height - e.movementY)
-          this.state.y += e.movementY;
+          setHeight = this.state.height - e.movementY
+          this.setHeight(setHeight)
+
+          this.setY(setHeight, this.state.y + e.movementY)
           break;
         case 'bottom':
-          this.state.height += e.movementY;
+          setHeight = this.state.height + e.movementY
+          this.setHeight(setHeight)
           break;
         case 'left':
-          this.state.width -= e.movementX;
-          this.state.x += e.movementX;
+          setWidth = this.state.width - e.movementX
+          this.setWidth(setWidth)
+
+          this.setX(setWidth, this.state.x + e.movementX)
           break;
         case 'right':
-          this.state.width += e.movementX;
+          setWidth = this.state.width + e.movementX
+          this.setWidth(setWidth)
+          break;
+        default:
           break;
       }
     };
