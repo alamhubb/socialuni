@@ -1,7 +1,7 @@
 <template>
   <div class="flex-col h100p overflow-hidden color-black">
     <div class="flex-row h100p overflow-hidden">
-      <div class="w200 bd-radius shadow h100p flex-none br">
+      <div class="w200 bd-radius shadow h100p flex-none br bg-default">
         <socialuni-chat-view-h5></socialuni-chat-view-h5>
       </div>
 

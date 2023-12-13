@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white h100p">
+  <div class="h100p">
     <s-scrollbar class="h100p">
       <div>
         <div></div>
