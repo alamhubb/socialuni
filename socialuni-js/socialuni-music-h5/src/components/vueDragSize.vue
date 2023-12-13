@@ -11,156 +11,150 @@
       {{ state }}
     </div>
 
-    <div v-for="direction in directions" :key="direction" :class="'resizer ' + direction"
+    <div v-for="direction in directions" :key="direction"  class="resizer" :class="direction"
          @mousedown="initResize(direction,$event)"></div>
   </div>
 </template>
 
 
-<script lang="ts">
-import {Vue, Component} from 'vue-facing-decorator';
+<script setup lang="ts">
 import {useDraggable} from '@vueuse/core'
+import {reactive, ref} from "vue";
 
-@Component({})
-export default class vueDragSize extends Vue {
-  $refs: {
-    vueDragSizeContainer: HTMLElement
-  }
 
-  directions = ['top-left', 'top-right', 'bottom-left', 'bottom-right', 'top', 'bottom', 'left', 'right'];
+const vueDragSizeContainer = ref(null)
 
-  style = null
-
-  allowDrag = true
-
-  state = {
-    x: 100,
-    y: 100,
-    width: 200,
-    height: 200
-  }
-
-  setWidth(width) {
-    if (width >= 0) {
-      this.state.width = width
+useDraggable(vueDragSizeContainer, {
+  onStart: () => {
+    console.log('start')
+    console.log(allowDrag)
+    return allowDrag
+  },
+  onMove: (e) => {
+    if (allowDrag) {
+      state.x = e.x
+      state.y = e.y
     }
   }
+})
 
-  setX(width, movementX) {
-    if (width >= 0) {
-      this.state.x += movementX
-    }
-  }
+const directions = ['top-left', 'top-right', 'bottom-left', 'bottom-right', 'top', 'bottom', 'left', 'right'];
 
-  setY(height, movementY) {
-    if (height >= 0) {
-      this.state.y += movementY
-    }
-  }
-
-  setHeight(height) {
-    if (height >= 0) {
-      this.state.height = height
-    }
-  }
+const state = reactive({
+  x: 100,
+  y: 100,
+  width: 200,
+  height: 200
+})
 
 
-  initResize(direction, event) {
-    this.allowDrag = false; // 开始调整大小
-    event.stopPropagation(); // 阻止事件冒泡到拖拽处理程序
-    const onMouseMove = (e) => {
-      let setWidth = null
-      let setHeight = null
-      switch (direction) {
-        case 'top-left':
-          setWidth = this.state.width - e.movementX
-          this.setWidth(setWidth)
-
-          setHeight = this.state.height - e.movementY
-          this.setHeight(setHeight)
+let allowDrag = reactive(true)
 
 
-          this.setX(setWidth, e.movementX)
-          this.setY(setHeight, e.movementY)
-          break;
-        case 'top-right':
-          setWidth = this.state.width + e.movementX
-          this.setWidth(setWidth)
-
-          setHeight = this.state.height - e.movementY
-          this.setHeight(setHeight)
-
-          this.setY(setHeight, e.movementY)
-          break;
-        case 'bottom-left':
-          setWidth = this.state.width - e.movementX
-          this.setWidth(setWidth)
-
-          setHeight = this.state.height + e.movementY
-          this.setHeight(setHeight)
-
-          this.setX(setWidth, e.movementX)
-          break;
-        case 'bottom-right':
-          setWidth = this.state.width + e.movementX
-          this.setWidth(setWidth)
-
-          setHeight = this.state.height + e.movementY
-          this.setHeight(setHeight)
-          break;
-        case 'top':
-          setHeight = this.state.height - e.movementY
-          this.setHeight(setHeight)
-
-          this.setY(setHeight, e.movementY)
-          break;
-        case 'bottom':
-          setHeight = this.state.height + e.movementY
-          this.setHeight(setHeight)
-          break;
-        case 'left':
-          setWidth = this.state.width - e.movementX
-          this.setWidth(setWidth)
-
-          this.setX(setWidth, e.movementX)
-          break;
-        case 'right':
-          setWidth = this.state.width + e.movementX
-          this.setWidth(setWidth)
-          break;
-        default:
-          break;
-      }
-    };
-
-    const onMouseUp = () => {
-      document.removeEventListener('mousemove', onMouseMove);
-      document.removeEventListener('mouseup', onMouseUp);
-      this.allowDrag = true
-    };
-
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseup', onMouseUp);
-  }
-
-  mounted() {
-    const elmnt = this.$refs.vueDragSizeContainer;
-
-    useDraggable(elmnt, {
-      onStart: () => {
-        console.log('start')
-        console.log(this.allowDrag)
-        return this.allowDrag
-      },
-      onMove: (e) => {
-        if (this.allowDrag) {
-          this.state.x = e.x
-          this.state.y = e.y
-        }
-      }
-    })
+function setWidth(width) {
+  if (width >= 0) {
+    state.width = width
   }
 }
+
+function setX(width, movementX) {
+  if (width >= 0) {
+    state.x += movementX
+  }
+}
+
+function setY(height, movementY) {
+  if (height >= 0) {
+    state.y += movementY
+  }
+}
+
+function setHeight(height) {
+  if (height >= 0) {
+    state.height = height
+  }
+}
+
+
+function initResize(direction, event) {
+  console.log(direction)
+  allowDrag = false; // 开始调整大小
+  event.stopPropagation(); // 阻止事件冒泡到拖拽处理程序
+  function onMouseMove(e) {
+    let width = null
+    let height = null
+    switch (direction) {
+      case 'top-left':
+        width = state.width - e.movementX
+        setWidth(width)
+
+        height = state.height - e.movementY
+        setHeight(height)
+
+        setX(width, e.movementX)
+        setY(height, e.movementY)
+        break;
+      case 'top-right':
+        width = state.width + e.movementX
+        setWidth(width)
+
+        height = state.height - e.movementY
+        setHeight(height)
+
+        setY(height, e.movementY)
+        break;
+      case 'bottom-left':
+        width = state.width - e.movementX
+        setWidth(width)
+
+        height = state.height + e.movementY
+        setHeight(height)
+
+        setX(width, e.movementX)
+        break;
+      case 'bottom-right':
+        width = state.width + e.movementX
+        setWidth(width)
+
+        height = state.height + e.movementY
+        setHeight(height)
+        break;
+      case 'top':
+        height = state.height - e.movementY
+        setHeight(height)
+
+        setY(height, e.movementY)
+        break;
+      case 'bottom':
+        height = state.height + e.movementY
+        setHeight(height)
+        break;
+      case 'left':
+        width = state.width - e.movementX
+        setWidth(width)
+
+        setX(width, e.movementX)
+        break;
+      case 'right':
+        width = state.width + e.movementX
+        setWidth(width)
+        break;
+      default:
+        break;
+    }
+  }
+
+  const onMouseUp = () => {
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+    allowDrag = true
+  };
+
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseup', onMouseUp);
+}
+
+
 </script>
 <style scoped>
 .resizer {
