@@ -14,7 +14,6 @@
 
 <script lang="ts">
 import {Component, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator';
-import interact from "interactjs";
 
 
 function dragElement(elmnt) {

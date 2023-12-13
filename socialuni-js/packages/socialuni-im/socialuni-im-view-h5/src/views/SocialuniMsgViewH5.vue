@@ -1,90 +1,89 @@
 <template>
-    <div class="h100p flex-col">
-        <div ref="messageBox" class="flex-1 overflow-auto">
-            <div v-if="viewService.chat">
-                <div class="w100p" v-for="msg in viewService.chat.messages" :id="'m'+msg.id" :key="msg.id">
-                    <div v-if="msg.user.isMine" class="flex-row pd-sm">
-                        <div class="flex-1 flex-col mr overflow-hidden">
-                            <div class="h44px row-end-center mb-xs">
+  <div class="h100p flex-col">
+    <div ref="messageBox" class="flex-1 overflow-auto">
+      <div v-if="viewService.chat">
+        <div class="w100p" v-for="msg in viewService.chat.messages" :id="'m'+msg.id" :key="msg.id">
+          <div v-if="msg.user.isMine" class="flex-row pd-sm">
+            <div class="flex-1 flex-col mr overflow-hidden">
+              <div class="h44px row-end-center mb-xs">
+                {{ msg.user.nickname }}
+                <!--              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
+                                    @click="toUserDetailVue(msg.user.id)">
                                 {{ msg.user.nickname }}
-                                <!--              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
-                                                    @click="toUserDetailVue(msg.user.id)">
-                                                {{ msg.user.nickname }}
-                                              </text>
-                                              <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
-                                                     src="/static/img/crown.png"
-                                                     @click="toVipVue"></image>-->
-                            </div>
+                              </text>
+                              <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
+                                     src="/static/img/crown.png"
+                                     @click="toVipVue"></image>-->
+              </div>
 
-                            <view class="row-end-center"
-                                  @longpress="viewService.openMessageMoreHandleDialog(msg)">
-                                <!--                                    <q-icon v-if="msg.status === 3" icon="mdi-alert-circle" size="25" class="mb-nm"/>-->
-                                <!--                                <message-item-content :msg="msg"></message-item-content>-->
+              <view class="row-end-center"
+                    @longpress="viewService.openMessageMoreHandleDialog(msg)">
+                <!--                                    <q-icon v-if="msg.status === 3" icon="mdi-alert-circle" size="25" class="mb-nm"/>-->
+                <!--                                <message-item-content :msg="msg"></message-item-content>-->
 
-                                <div class="pd-xs bg-white bd-radius"> {{ msg.content }}</div>
-                            </view>
+                <div class="pd-xs bg-white bd-radius"> {{ msg.content }}</div>
+              </view>
 
-                            <div class="col-all-center mt-xs">
-                                <view class="date">
-                                    {{ viewService.formatTime(msg.createTime) }}
-                                </view>
-                            </div>
-                        </div>
-                        <img class="size50 bd-radius flex-none"
-                             :src="msg.user.avatar"
-                             @click="viewService.toUserDetailVue(msg.user.id)"
-                        />
-                    </div>
-                    <div v-else class="flex-row pd-sm">
-                        <image class="size50 bd-radius flex-none"
-                               :src="msg.user.avatar"
-                               @click="viewService.toUserDetailVue(msg.user.id)"
-                        />
-                        <div class="flex-1 flex-col mr overflow-hidden">
-                            <div class="h44px row-col-center mb-xs">
+              <div class="col-all-center mt-xs">
+                <view class="date">
+                  {{ viewService.formatTime(msg.createTime) }}
+                </view>
+              </div>
+            </div>
+            <img class="size50 bd-radius flex-none"
+                 :src="msg.user.avatar"
+                 @click="viewService.toUserDetailVue(msg.user.id)"
+            />
+          </div>
+          <div v-else class="flex-row pd-sm">
+            <image class="size50 bd-radius flex-none"
+                   :src="msg.user.avatar"
+                   @click="viewService.toUserDetailVue(msg.user.id)"
+            />
+            <div class="flex-1 flex-col mr overflow-hidden">
+              <div class="h44px row-col-center mb-xs">
+                {{ msg.user.nickname }}
+                <!--              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
+                                    @click="toUserDetailVue(msg.user.id)">
                                 {{ msg.user.nickname }}
-                                <!--              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
-                                                    @click="toUserDetailVue(msg.user.id)">
-                                                {{ msg.user.nickname }}
-                                              </text>
-                                              <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
-                                                     src="/static/img/crown.png"
-                                                     @click="toVipVue"></image>-->
-                            </div>
+                              </text>
+                              <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
+                                     src="/static/img/crown.png"
+                                     @click="toVipVue"></image>-->
+              </div>
 
-                            <div class="row-start" @longpress="viewService.openMessageMoreHandleDialog(msg)">
-                                <!--                                    <message-item-content :msg="msg"></message-item-content>-->
-                                <div class="pd-xs bg-white bd-radius"> {{ msg.content }}</div>
-                            </div>
-                            <div class="col-all-center mt-xs">
-                                <div class="date">
-                                    {{ viewService.formatTime(msg.createTime) }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+              <div class="row-start" @longpress="viewService.openMessageMoreHandleDialog(msg)">
+                <!--                                    <message-item-content :msg="msg"></message-item-content>-->
+                <div class="pd-xs bg-white bd-radius"> {{ msg.content }}</div>
+              </div>
+              <div class="col-all-center mt-xs">
+                <div class="date">
+                  {{ viewService.formatTime(msg.createTime) }}
                 </div>
+              </div>
             </div>
+          </div>
         </div>
-
-        <div class="flex-col">
-            <div class="flex-row">
-                <s-icon icon="mdi-emoticon-outline" class="font-14"></s-icon>
-            </div>
-            <div class="flex-row flex-none">
-                <el-input
-                    class="flex-1"
-                    v-model="viewService.msgContent"
-                    :rows="5"
-                    type="textarea"
-                    placeholder="Please input"
-                />
-                <div class="flex-none row-col-end">
-                    <el-button @click="viewService.sendMsgClick()">发送</el-button>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+
+    <div class="flex-col flex-none position-relative">
+      <div class="flex-row bg-white">
+        <s-icon icon="mdi-emoticon-outline" class="font-14"></s-icon>
+      </div>
+      <el-input
+          class="w100p"
+          v-model="viewService.msgContent"
+          :rows="5"
+          type="textarea"
+          resize="none"
+          placeholder="Please input"
+      />
+      <div class="flex-none position-absolute bottom-0 right-0 mb-smm mr-smm">
+        <el-button type="primary" @click="viewService.sendMsgClick()">发送</el-button>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -93,17 +92,19 @@ import SScrollbar from "socialuni-ui-h5/src/components/SComponents/SScrollbar.vu
 import SIcon from "socialuni-ui-h5/src/components/SComponents/SIcon.vue";
 import SocialuniMsgViewService from "socialuni-im-sdk/src/logic/SocialuniMsgViewService";
 import MessageViewParams from "socialuni-im-view-uni/src/views/chat/MessageViewParams";
-import {getCurrentInstance} from "vue";
+import {getCurrentInstance, watch} from "vue";
 
 @Component({
-    components: {SScrollbar,SIcon}
+  components: {SScrollbar, SIcon}
 })
 export default class SocialuniMsgViewH5 extends Vue {
 
-    viewService = new SocialuniMsgViewService()
+  viewService = new SocialuniMsgViewService()
 
-    created() {
-        this.viewService.initService(getCurrentInstance(), this.$route.query)
-    }
+  created() {
+    watch(() => this.$route.query, () => {
+      this.viewService.initService(getCurrentInstance(), this.$route.query)
+    }, {immediate: true})
+  }
 }
 </script>

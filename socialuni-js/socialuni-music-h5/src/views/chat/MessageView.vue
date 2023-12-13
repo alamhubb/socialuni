@@ -79,24 +79,7 @@ export default class MessageView extends Vue {
 
 
   mounted() {
-    //随便一个元素，可把他变成可拖拽放大移动的
 
-    const position = {x: 0, y: 0}
-
-    interact('.draggable').draggable({
-      listeners: {
-        start(event) {
-          console.log(event.type, event.target)
-        },
-        move(event) {
-          position.x += event.dx
-          position.y += event.dy
-
-          event.target.style.transform =
-              `translate(${position.x}px, ${position.y}px)`
-        },
-      }
-    })
   }
 }
 </script>

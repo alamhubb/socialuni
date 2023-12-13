@@ -12,7 +12,7 @@ export default class SocialuniChatViewServiceH5 extends SocialuniChatViewService
         const chatId = super.toMessagePage(chat)
         console.log(78978)
         console.log(chatId)
-        socialuniMsgModule.init({chatId: chatId})
+        // socialuniMsgModule.init({chatId: chatId})
         return chatId
     }
 }
