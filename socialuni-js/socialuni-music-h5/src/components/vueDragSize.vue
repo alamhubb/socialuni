@@ -36,14 +36,27 @@ export default class vueDragSize extends Vue {
     height: 200
   }
 
+  setWidth(width) {
+    if (width >= 0) {
+      this.state.width = width
+    }
+  }
+
+  setHeight(height) {
+    if (height >= 0) {
+      this.state.height = height
+    }
+  }
+
+
   initResize(direction, event) {
     this.allowDrag = false; // 开始调整大小
     event.stopPropagation(); // 阻止事件冒泡到拖拽处理程序
     const onMouseMove = (e) => {
       switch (direction) {
         case 'top-left':
-          this.state.width -= e.movementX;
-          this.state.height -= e.movementY;
+          this.setWidth(this.state.width - e.movementX)
+          this.setHeight(this.state.height - e.movementY)
           this.state.x += e.movementX;
           this.state.y += e.movementY;
           break;
@@ -53,7 +66,7 @@ export default class vueDragSize extends Vue {
           this.state.y += e.movementY;
           break;
         case 'bottom-left':
-          this.state.width -= e.movementX;
+          this.setWidth(this.state.width - e.movementX)
           this.state.height += e.movementY;
           this.state.x += e.movementX;
           break;
@@ -62,7 +75,7 @@ export default class vueDragSize extends Vue {
           this.state.height += e.movementY;
           break;
         case 'top':
-          this.state.height -= e.movementY;
+          this.setHeight(this.state.height - e.movementY)
           this.state.y += e.movementY;
           break;
         case 'bottom':
@@ -89,33 +102,20 @@ export default class vueDragSize extends Vue {
   }
 
   mounted() {
-    /*const elmnt = this.$refs.vueDragSizeContainer;
+    const elmnt = this.$refs.vueDragSizeContainer;
 
-    useDraggable(elmnt, {
-      onMove: (e) => {
-        if (this.allowDrag) {
-          console.log(e)
-          this.state.x = `${e.x}`
-          this.state.y = `${e.y}`
-        }
-      }
-    })
-*/
-
-    /*const elmnt = this.$refs.vueDragSizeContainer;
-
-    useDraggable(elmnt, {
+    /*useDraggable(elmnt, {
       onStart: () => {
         console.log('start')
         console.log(this.allowDrag)
         return this.allowDrag
       },
       onMove: (e) => {
-        if (this.allowDrag){
+        if (this.allowDrag) {
           console.log(e)
           console.log(this.allowDrag)
-          elmnt.style.left = `${e.x}px`
-          elmnt.style.top = `${e.y}px`
+          this.state.x = `${e.x}`
+          this.state.y = `${e.y}`
         }
       }
     })*/
