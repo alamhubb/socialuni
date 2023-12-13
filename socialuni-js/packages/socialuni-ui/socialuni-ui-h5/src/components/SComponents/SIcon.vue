@@ -1,5 +1,5 @@
 <template>
-  <text class="use-click" :class="[
+  <text class="use-click line-h1" :class="[
       prefixClass?prefixClass:'u-iconfont',
       prefixClass?icon:'uicon-' + icon,
       addClass

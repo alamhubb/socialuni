@@ -67,17 +67,23 @@
       </div>
     </div>
 
-    <div class="flex-col flex-none position-relative">
-      <div class="flex-row bg-white">
-        <s-icon icon="mdi-emoticon-outline" class="font-14"></s-icon>
+    <div class="flex-col flex-none position-relative pd-sm bg-white">
+      <div class="flex-row">
+        <s-icon icon="mdi-emoticon-outline color-content" size="28"></s-icon>
       </div>
-      <el-input
+<!--      <el-input
           class="w100p"
           v-model="viewService.msgContent"
           :rows="5"
           type="textarea"
           resize="none"
           placeholder="Please input"
+      />-->
+      <textarea
+          class="w100p bd-none resize-none mt-sm font-16 color-content pd-xs" style="caret-color: #bfbfbf;"
+          v-model="viewService.msgContent"
+          :rows="5"
+          type="textarea"
       />
       <div class="flex-none position-absolute bottom-0 right-0 mb-smm mr-smm">
         <el-button type="primary" @click="viewService.sendMsgClick()">发送</el-button>
