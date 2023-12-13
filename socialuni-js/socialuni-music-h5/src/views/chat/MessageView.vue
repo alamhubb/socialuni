@@ -6,10 +6,13 @@
       </div>
 
       <div class="h100p flex-col flex-1">
+        <!--          <vue-drag-resize>-->
+        <music-view></music-view>
+        <!--          </vue-drag-resize>-->
         <div class="flex-1 overflow-hidden ml-sm bg-grey9">
-          <!--          <vue-drag-resize>-->
-          <music-view></music-view>
-          <!--          </vue-drag-resize>-->
+          <socialuni-msg-view-h5></socialuni-msg-view-h5>
+        </div>
+        <div>
         </div>
       </div>
     </div>
@@ -53,6 +56,7 @@ import 'golden-layout/dist/css/themes/goldenlayout-light-theme.css';
 import ChildCom from "@/views/chat/ChildCom.vue";
 import MusicView from "@/views/chat/MusicView.vue";
 import SocialuniChatViewH5 from "socialuni-im-view-h5/src/views/SocialuniChatViewH5.vue";
+import SocialuniMsgViewH5 from "socialuni-im-view-h5/src/views/SocialuniMsgViewH5.vue";
 import VueDragResize from "vue-drag-resize3/src/components/VueDragResize.vue";
 import MusicPlayer from "@/components/MusicPlayer.vue";
 import VueInteract from "@/components/vue-interact/VueInteract.vue";
@@ -62,7 +66,13 @@ import VueInteract from "@/components/vue-interact/VueInteract.vue";
     VueDragResize,
     VueInteract,
     MusicPlayer,
-    SocialuniChatViewH5, VueGoldenLayoutColumn, MusicView, ChildCom, VueGoldenLayout, VueGoldenLayoutRow
+    SocialuniChatViewH5,
+    SocialuniMsgViewH5,
+    VueGoldenLayoutColumn,
+    MusicView,
+    ChildCom,
+    VueGoldenLayout,
+    VueGoldenLayoutRow
   }
 })
 export default class MessageView extends Vue {

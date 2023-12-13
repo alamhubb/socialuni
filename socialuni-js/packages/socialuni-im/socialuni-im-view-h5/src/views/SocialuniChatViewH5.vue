@@ -120,7 +120,7 @@ import SScrollbar from "socialuni-ui-h5/src/components/SComponents/SScrollbar.vu
 import SocialuniChatViewServiceH5 from "socialuni-im-h5-sdk/src/logic/SocialuniChatViewServiceH5";
 
 @Component({components: {SScrollbar}})
-export default class SocialuniChatView extends Vue {
+export default class SocialuniChatViewH5 extends Vue {
 
   viewService: SocialuniChatViewServiceH5 = new SocialuniChatViewServiceH5()
 

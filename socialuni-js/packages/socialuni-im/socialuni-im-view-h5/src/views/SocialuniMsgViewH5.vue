@@ -98,7 +98,7 @@ import {getCurrentInstance} from "vue";
 @Component({
     components: {SScrollbar,SIcon}
 })
-export default class SocialuniMsgView extends Vue {
+export default class SocialuniMsgViewH5 extends Vue {
 
     viewService = new SocialuniMsgViewService()
 

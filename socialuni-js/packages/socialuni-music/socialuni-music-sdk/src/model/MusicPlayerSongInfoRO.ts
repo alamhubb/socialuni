@@ -1,6 +1,7 @@
 export default class MusicPlayerSongInfoRO {
     songId: number = null
     title: string = null
+    albumImg: string = null
     author: string[] = null
     album: string = null
     musicTime: number = null
@@ -14,6 +15,7 @@ export default class MusicPlayerSongInfoRO {
             this.author = musicPlayerSongInfoRO.author;
             this.album = musicPlayerSongInfoRO.album;
             this.musicTime = musicPlayerSongInfoRO.musicTime;
+            this.albumImg = musicPlayerSongInfoRO.albumImg;
             this.musicUrl = musicPlayerSongInfoRO.musicUrl;
         }
     }

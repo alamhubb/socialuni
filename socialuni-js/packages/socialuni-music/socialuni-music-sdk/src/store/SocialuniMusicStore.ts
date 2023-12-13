@@ -11,7 +11,7 @@ export class SocialuniMusicStore {
     private _channelName: string = null
     private _musicRoleId: string = null
     musicMuted: boolean = null
-    musicVolume: number = null
+    musicVolume: number = 50
     private _localAudioTrack: IBufferSourceAudioTrack | IRemoteAudioTrack = null
 
     get musicRoleId(): string {

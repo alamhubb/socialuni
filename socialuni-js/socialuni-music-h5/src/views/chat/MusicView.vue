@@ -44,6 +44,7 @@ export default class MusicView extends Vue {
         title: row.name,
         author: row.ar?.map(item => item.name),
         album: row.al.name,
+        albumImg: row.al.picUrl,
         musicTime: row.dt,
         musicUrl: `https://music.163.com/song/media/outer/url?id=${row.id}.mp3`,
       }
