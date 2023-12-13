@@ -10,9 +10,6 @@
     "@vueuse/core": "^10.7.0",
     "vue": "^3.3.8"
   },
-  "devDependencies": {
-    "vue-facing-decorator": "^3.0.2"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
