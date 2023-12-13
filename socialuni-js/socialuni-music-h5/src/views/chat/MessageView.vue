@@ -7,9 +7,9 @@
 
       <div class="h100p flex-col flex-1">
         <div class="flex-1 overflow-hidden ml-sm col-all-center bg-grey9">
-          <vue-drag-size>
+          <vue-drag-resize>
             <music-view></music-view>
-          </vue-drag-size>
+          </vue-drag-resize>
         </div>
       </div>
     </div>
@@ -51,17 +51,14 @@ import VueGoldenLayoutColumn from 'vue3-golden-layout/src/components/VueGoldenLa
 import 'golden-layout/dist/css/goldenlayout-base.css';
 import 'golden-layout/dist/css/themes/goldenlayout-light-theme.css';
 import ChildCom from "@/views/chat/ChildCom.vue";
-import {h, render} from "vue";
 import MusicView from "@/views/chat/MusicView.vue";
 import SocialuniChatViewH5 from "socialuni-im-view-h5/src/views/SocialuniChatViewH5.vue";
+import VueDragResize from "vue-drag-resize3/src/components/VueDragResize.vue";
 import MusicPlayer from "@/components/MusicPlayer.vue";
-import interact from 'interactjs'
 import VueInteract from "@/components/vue-interact/VueInteract.vue";
-import VueDragSize from "@/components/vueDragSize.vue";
-
 @Component({
   components: {
-    VueDragSize,
+    VueDragResize,
     VueInteract,
     MusicPlayer,
     SocialuniChatViewH5, VueGoldenLayoutColumn, MusicView, ChildCom, VueGoldenLayout, VueGoldenLayoutRow

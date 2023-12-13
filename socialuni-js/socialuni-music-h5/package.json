@@ -32,9 +32,9 @@
     "socialuni-user-sdk": "../packages/socialuni-user-sdk",
     "socialuni-user-view-h5": "../packages/socialuni-user/socialuni-user-view-h5",
     "vue": "^3.3.8",
-    "vue-draggable-resizable": "^2.3.0",
     "vue-router": "^4.2.0",
     "vue3-golden-layout": "../packages/vue3-golden-layout",
+    "vue-drag-resize3": "../packages/vue-drag-resize3",
     "zego-express-engine-webrtc": "^3.0.1"
   },
   "devDependencies": {
