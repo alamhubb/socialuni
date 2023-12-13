@@ -2,43 +2,43 @@
   <div class="w100p bg-white">
     <audio ref="audioPlayer" :src="modelValue?.musicUrl"></audio>
 
-<!--    <div class="flex-1 overflow-hidden">
-&lt;!&ndash;
-      音量：{{ socialuniMusicStore.musicVolume }}
-      <div>
-        realPlayingValue：{{ realPlayingValue }}
-      </div>
-      <div>
-        {{ modelValue }}
-      </div>
-&ndash;&gt;
+    <!--    <div class="flex-1 overflow-hidden">
+    &lt;!&ndash;
+          音量：{{ socialuniMusicStore.musicVolume }}
+          <div>
+            realPlayingValue：{{ realPlayingValue }}
+          </div>
+          <div>
+            {{ modelValue }}
+          </div>
+    &ndash;&gt;
 
-      <el-table height="100%" :data="data" stripe highlight-current-row
-                @row-dblclick="handleCurrentChange">
-        <el-table-column prop="title" label="音乐标题" width="100" show-overflow-tooltip></el-table-column>
-        <el-table-column label="歌手" show-overflow-tooltip>
-          <template #default="scope">
-            {{ scope.row.author.join(' / ') }}
-          </template>
-        </el-table-column>
-        <el-table-column label="歌手专辑" show-overflow-tooltip>
-          <template #default="scope">
-            {{ scope.row.album }}
-          </template>
-        </el-table-column>
-        <el-table-column label="时长" width="100">
-          <template #default="scope">
-            {{ $DateUtil.convertToTime(scope.row.musicTime) }}
-          </template>
-        </el-table-column>
-      </el-table>
+          <el-table height="100%" :data="data" stripe highlight-current-row
+                    @row-dblclick="handleCurrentChange">
+            <el-table-column prop="title" label="音乐标题" width="100" show-overflow-tooltip></el-table-column>
+            <el-table-column label="歌手" show-overflow-tooltip>
+              <template #default="scope">
+                {{ scope.row.author.join(' / ') }}
+              </template>
+            </el-table-column>
+            <el-table-column label="歌手专辑" show-overflow-tooltip>
+              <template #default="scope">
+                {{ scope.row.album }}
+              </template>
+            </el-table-column>
+            <el-table-column label="时长" width="100">
+              <template #default="scope">
+                {{ $DateUtil.convertToTime(scope.row.musicTime) }}
+              </template>
+            </el-table-column>
+          </el-table>
 
-    </div>-->
+        </div>-->
 
     <div class="flex-none">
       <div>
         <!--      <div v-if="musicRoomInfo?.musicUrl">-->
-        <div class="row-between-center">
+        <div class="row-between-center px-50">
           <div class="w20p flex-none">
             123
           </div>
@@ -69,10 +69,15 @@
               <div class="flex-none">{{ formatTooltip(musicMax) }}</div>
             </div>
           </div>
-          <div class="w20p flex-none">
-            <i class="mdi flex-none" :class="[musicMuted ? 'mdi-volume-mute' :'mdi-volume-medium']" @click="setPlayerCurTimeAndPlay"></i>
+          <div class="w20p flex-none row-col-center">
+            <i class="mdi mdi-playlist-play color-content font-20 use-click"></i>
 
-            <el-slider class="flex-1" v-model="socialuniMusicStore.musicVolume" @input="musicVolumeInput"
+            <i class="ml mdi flex-none font-20 use-click"
+               :class="[computedMusicMuted ? 'mdi-volume-mute' :'mdi-volume-medium']"
+               @click="mutedMusic"></i>
+
+            <el-slider class="ml flex-1" :model-value="computedMusicMuted?0:socialuniMusicStore.musicVolume"
+                       @input="musicVolumeInput"
                        :show-tooltip="false"></el-slider>
           </div>
         </div>
@@ -113,6 +118,15 @@ export default class MusicPlayer extends Vue {
       modelValue: this.modelValue,
       dragging: this.dragging,
     }
+  }
+
+  get computedMusicMuted() {
+    if (this.musicMuted) {
+      return true
+    } else if (socialuniMusicStore.musicVolume === 0) {
+      return true
+    }
+    return false
   }
 
   @Watch('watchModelValueObj')
@@ -187,6 +201,7 @@ export default class MusicPlayer extends Vue {
     if (this.$route.query.chatId) {
       CommonEventUtil.emit(SocialuniImEventKey.socialuniImPageInit, this.$route.query)
     }
+    this.$refs.audioPlayer.volume = socialuniMusicStore.musicVolume / 100
 
     /*if (this.musicRoomInfo) {
         if (this.musicRoomInfo.playing) {
@@ -204,6 +219,9 @@ export default class MusicPlayer extends Vue {
   musicVolumeInput(value) {
     this.$refs.audioPlayer.volume = value / 100
     socialuniMusicStore.musicVolume = value
+    if (value > 0 && socialuniMusicStore.musicMuted) {
+      this.mutedMusic()
+    }
   }
 
   musicInput(value) {
