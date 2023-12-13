@@ -1,56 +1,56 @@
 <template>
-  <div class="h100p">
-    <vue-interact>
-      <div class="bg-grey8 size100">123</div>
-    </vue-interact>
+  <div class="h100p row-all-center">
+    <vue-drag-size>
+      <div class="bg-grey8 size100p">123</div>
+    </vue-drag-size>
   </div>
 
-<!--  <div class="flex-col h100p overflow-hidden color-black">
-    <div class="flex-row h100p overflow-hidden">
-      <div class="w200 bd-radius shadow h100p flex-none">
-        &lt;!&ndash;        <socialuni-chat-view-h5></socialuni-chat-view-h5>&ndash;&gt;
-      </div>
-
-      <div class="h100p flex-col flex-1">
-        <div class="flex-none h500 row-end-center">
-&lt;!&ndash;          <div style="resize:vertical">456</div>&ndash;&gt;
-          <vue-interact>
-            <div class="bg-grey8 size100">123</div>
-          </vue-interact>
+  <!--  <div class="flex-col h100p overflow-hidden color-black">
+      <div class="flex-row h100p overflow-hidden">
+        <div class="w200 bd-radius shadow h100p flex-none">
+          &lt;!&ndash;        <socialuni-chat-view-h5></socialuni-chat-view-h5>&ndash;&gt;
         </div>
 
-        <div class="flex-1 overflow-hidden ml-sm col-all-center bg-grey9">
-          &lt;!&ndash;          <music-view></music-view>&ndash;&gt;
-        </div>
-      </div>
-    </div>-->
-
-    <!--      </vue-golden-layout-row>-->
-    <!--    </vue-golden-layout>-->
-
-    <!--    <el-button @click="active++">active&#45;&#45;</el-button>-->
-    <!--    <child-com>123</child-com>
-        <el-button @click="addc">add</el-button>
-        <div ref="container"></div>
-        <child-com ref="container2">{{active}}</child-com>-->
-
-
-    <!--    <div class="flex-row overflow-hidden flex-none">
-          <div v-for="i in 20" class="flex-1 w200 h30" :class="[active===i?'bg-blue_light bb-2 bb-blue':'bg-default']"
-               @click="active=i"  draggable="true">
-            {{ i }}
+        <div class="h100p flex-col flex-1">
+          <div class="flex-none h500 row-end-center">
+  &lt;!&ndash;          <div style="resize:vertical">456</div>&ndash;&gt;
+            <vue-interact>
+              <div class="bg-grey8 size100">123</div>
+            </vue-interact>
           </div>
-        </div>-->
-    <!--    <div id="wrapper">
-          <ul id="menuContainer">
-            <li id="addMenuItem">Add another component</li>
-          </ul>
-          <div id="layoutContainer"></div>
-        </div>-->
-    <!--    <div class="flex-1 overflow-hidden bg-green_light pd" @dragover="allowDrop">
-          {{ active }}
-        </div>-->
-<!--  </div>-->
+
+          <div class="flex-1 overflow-hidden ml-sm col-all-center bg-grey9">
+            &lt;!&ndash;          <music-view></music-view>&ndash;&gt;
+          </div>
+        </div>
+      </div>-->
+
+  <!--      </vue-golden-layout-row>-->
+  <!--    </vue-golden-layout>-->
+
+  <!--    <el-button @click="active++">active&#45;&#45;</el-button>-->
+  <!--    <child-com>123</child-com>
+      <el-button @click="addc">add</el-button>
+      <div ref="container"></div>
+      <child-com ref="container2">{{active}}</child-com>-->
+
+
+  <!--    <div class="flex-row overflow-hidden flex-none">
+        <div v-for="i in 20" class="flex-1 w200 h30" :class="[active===i?'bg-blue_light bb-2 bb-blue':'bg-default']"
+             @click="active=i"  draggable="true">
+          {{ i }}
+        </div>
+      </div>-->
+  <!--    <div id="wrapper">
+        <ul id="menuContainer">
+          <li id="addMenuItem">Add another component</li>
+        </ul>
+        <div id="layoutContainer"></div>
+      </div>-->
+  <!--    <div class="flex-1 overflow-hidden bg-green_light pd" @dragover="allowDrop">
+        {{ active }}
+      </div>-->
+  <!--  </div>-->
 </template>
 
 <script lang="ts">
@@ -67,9 +67,11 @@ import SocialuniChatViewH5 from "socialuni-im-view-h5/src/views/SocialuniChatVie
 import MusicPlayer from "@/components/MusicPlayer.vue";
 import interact from 'interactjs'
 import VueInteract from "@/components/vue-interact/VueInteract.vue";
+import VueDragSize from "@/components/vueDragSize.vue";
 
 @Component({
   components: {
+    VueDragSize,
     VueInteract,
     MusicPlayer,
     SocialuniChatViewH5, VueGoldenLayoutColumn, MusicView, ChildCom, VueGoldenLayout, VueGoldenLayoutRow

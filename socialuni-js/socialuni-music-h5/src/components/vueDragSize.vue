@@ -1,3 +1,15 @@
+<template>
+  <div ref="vueDragSizeContainer" class="position-absolute">
+    <slot></slot>
+
+    <div class="resizer bottom-right size3 bg-red position-absolute"></div>
+    <div class="resizer bottom-left size3 bg-red position-absolute"></div>
+    <div class="resizer top-right size3 bg-red position-absolute"></div>
+    <div class="resizer top-left size3 bg-red position-absolute"></div>
+  </div>
+</template>
+
+
 <script lang="ts">
 import {Vue, Component} from 'vue-facing-decorator';
 
@@ -9,6 +21,8 @@ export default class vueDragSize extends Vue {
 
   mounted() {
     const elmnt = this.$refs.vueDragSizeContainer;
+
+    console.log(elmnt)
 
     var resizers = document.querySelectorAll(".resizer");
     var currentResizer;
@@ -48,18 +62,6 @@ export default class vueDragSize extends Vue {
   }
 }
 </script>
-
-<template>
-  <div ref="vueDragSizeContainer">
-    <slot></slot>
-
-    <div class="resizer bottom-right"></div>
-    <div class="resizer bottom-left"></div>
-    <div class="resizer top-right"></div>
-    <div class="resizer top-left"></div>
-  </div>
-</template>
-
 <style scoped>
 .bottom-right {
   right: 0;
