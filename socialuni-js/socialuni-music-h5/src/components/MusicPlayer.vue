@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="w100p bg-white">
     <audio ref="audioPlayer" :src="modelValue?.musicUrl"></audio>
 
-    <div class="flex-1 overflow-hidden">
-<!--
+<!--    <div class="flex-1 overflow-hidden">
+&lt;!&ndash;
       音量：{{ socialuniMusicStore.musicVolume }}
       <div>
         realPlayingValue：{{ realPlayingValue }}
@@ -11,7 +11,7 @@
       <div>
         {{ modelValue }}
       </div>
--->
+&ndash;&gt;
 
       <el-table height="100%" :data="data" stripe highlight-current-row
                 @row-dblclick="handleCurrentChange">
@@ -33,7 +33,7 @@
         </el-table-column>
       </el-table>
 
-    </div>
+    </div>-->
 
     <div class="flex-none">
       <div>

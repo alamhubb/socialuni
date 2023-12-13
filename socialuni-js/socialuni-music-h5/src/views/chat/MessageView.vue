@@ -2,14 +2,14 @@
   <div class="flex-col h100p overflow-hidden color-black">
     <div class="flex-row h100p overflow-hidden">
       <div class="w200 bd-radius shadow h100p flex-none">
-        <!--        <socialuni-chat-view-h5></socialuni-chat-view-h5>-->
+        <socialuni-chat-view-h5></socialuni-chat-view-h5>
       </div>
 
       <div class="h100p flex-col flex-1">
-        <div class="flex-1 overflow-hidden ml-sm col-all-center bg-grey9">
-          <vue-drag-resize>
-            <music-view></music-view>
-          </vue-drag-resize>
+        <div class="flex-1 overflow-hidden ml-sm bg-grey9">
+          <!--          <vue-drag-resize>-->
+          <music-view></music-view>
+          <!--          </vue-drag-resize>-->
         </div>
       </div>
     </div>
@@ -56,6 +56,7 @@ import SocialuniChatViewH5 from "socialuni-im-view-h5/src/views/SocialuniChatVie
 import VueDragResize from "vue-drag-resize3/src/components/VueDragResize.vue";
 import MusicPlayer from "@/components/MusicPlayer.vue";
 import VueInteract from "@/components/vue-interact/VueInteract.vue";
+
 @Component({
   components: {
     VueDragResize,
