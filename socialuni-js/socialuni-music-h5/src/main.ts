@@ -14,8 +14,6 @@ declare module '@vue/runtime-core' {
 }
 
 
-
-
 // 使用自定义异步插件
 (async () => {
     const app = createApp(App);
