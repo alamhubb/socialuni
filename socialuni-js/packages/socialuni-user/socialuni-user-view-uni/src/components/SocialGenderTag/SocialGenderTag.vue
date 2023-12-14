@@ -1,17 +1,17 @@
 <template>
   <div class="row-col-center">
-    <s-tag v-if="user.gender==='girl'" type="girl" :border="border" size="nn" round>
+    <q-tag v-if="user.gender==='girl'" type="girl" :border="border" size="nn" round>
       <div class="font-xs">{{ user.age }}</div>
       <q-icon class="ml-nn" add-class="mdi-rotate-45"
               size="12"
               :icon="getGenderIcon(user)"/>
-    </s-tag>
-    <s-tag v-else type="boy" :border="border" size="nn" round>
+    </q-tag>
+    <q-tag v-else type="boy" :border="border" size="nn" round>
       <div class="font-xs">{{ user.age }}</div>
       <q-icon class="ml-nn"
               size="12"
               :icon="getGenderIcon(user)"/>
-    </s-tag>
+    </q-tag>
   </div>
 </template>
 

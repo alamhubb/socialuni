@@ -25,11 +25,11 @@
 
     <!--  自定义区域    -->
     <div>
-      <s-scrollbar class="h100p">
+      <q-scrollbar class="h100p">
         <div>
           <slot></slot>
         </div>
-      </s-scrollbar>
+      </q-scrollbar>
     </div>
 
     <div
@@ -37,7 +37,7 @@
       <!-- dialog底部自定义弹框区域 -->
       <slot name="dialogFooter"></slot>
       <!--   不显示确定的时候，取消按钮改名为关闭-->
-      <s-page-footer
+      <q-page-footer
           v-if="!hideBtn && dialogVisible"
           :hide-cancel="hideCancel"
           :hide-confirm="hideConfirm"
@@ -51,7 +51,7 @@
           @confirm="dialogConfirm"
           @confirm-after="confirmAfter"
       >
-      </s-page-footer>
+      </q-page-footer>
     </div>
   </el-dialog>
 </template>

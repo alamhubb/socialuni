@@ -2,13 +2,13 @@
   <div class="h100p">
     <div class="flex-row">
 
-      <s-label-item label="昵称">
+      <q-label-item label="昵称">
         <el-input v-model="nickname"></el-input>
-      </s-label-item>
+      </q-label-item>
 
-      <s-label-item label="手机号">
+      <q-label-item label="手机号">
         <el-input v-model="phoneNum"></el-input>
-      </s-label-item>
+      </q-label-item>
 
       <div class="flex-1 row-end">
         <el-button @click="commonSava">保存</el-button>
@@ -23,14 +23,14 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-facing-decorator'
-import SDialog from "qing-ui-h5/src/components/SComponents/SDialog.vue";
-import SLabelItem from "qing-ui-h5/src/components/SComponents/SLabelItem.vue";
-import STable from "qing-ui-h5/src/components/SComponents/STable.vue";
-import STableColumn from "qing-ui-h5/src/components/SComponents/STableColumn/STableColumn.vue";
-import STableInput from "qing-ui-h5/src/components/SComponents/STableInput/STableInput.vue";
-import STableSelect from "qing-ui-h5/src/components/SComponents/STableSelect/STableSelect.vue";
+import SDialog from "qing-ui-h5/src/components/QComponents/QDialog.vue";
+import SLabelItem from "qing-ui-h5/src/components/QComponents/QLabelItem.vue";
+import STable from "qing-ui-h5/src/components/QComponents/QTable.vue";
+import STableColumn from "qing-ui-h5/src/components/QComponents/QTableColumn/STableColumn.vue";
+import STableInput from "qing-ui-h5/src/components/QComponents/QTableInput/STableInput.vue";
+import STableSelect from "qing-ui-h5/src/components/QComponents/QTableSelect/STableSelect.vue";
 import {Plus} from '@element-plus/icons-vue'
-import SSelect from "qing-ui-h5/src/components/SComponents/SSelect/SSelect.vue";
+import SSelect from "qing-ui-h5/src/components/QComponents/QSelect/SSelect.vue";
 import ImgFileVO from "socialuni-admin-api/src/model/community/ImgFileVO";
 import SocialuniCustomUserAPI from "socialuni-peiwan-api/src/api/SocialuniCustomUserAPI";
 import ToastUtil from "@/utils/ToastUtil";

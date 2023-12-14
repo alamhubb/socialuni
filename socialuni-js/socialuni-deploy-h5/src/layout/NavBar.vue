@@ -69,9 +69,9 @@
             </template>
         </el-dialog>
 
-        <s-dialog ref="loginDialog" title="登录" width="400px" no-show-footer>
+        <q-dialog ref="loginDialog" title="登录" width="400px" no-show-footer>
             <socialuni-login-view @login-success="loginSuccess"></socialuni-login-view>
-        </s-dialog>
+        </q-dialog>
 
 
         <socialuni-user-edit-dialog ref="userEditDialog"></socialuni-user-edit-dialog>
@@ -81,7 +81,7 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-facing-decorator'
-import SDialog from "qing-ui-h5/src/components/SComponents/SDialog.vue";
+import SDialog from "qing-ui-h5/src/components/QComponents/QDialog.vue";
 import SocialuniUserEditDialog from "@/views/user/SocialuniUserEditDialog.vue";
 import SocialuniUserEventConst from "socialuni-user-sdk/src/constant/SocialuniUserEventConst";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";

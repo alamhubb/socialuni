@@ -1,6 +1,6 @@
 <template>
   <div class="h100p">
-    <s-scrollbar class="h100p">
+    <q-scrollbar class="h100p">
       <div>
         <div></div>
         <div>
@@ -60,7 +60,7 @@
           </div>
         </div>
       </div>
-    </s-scrollbar>
+    </q-scrollbar>
     <!--        <q-navbar title="消息">
                 <div class="row-end-center flex-1 pl">
                     <q-search class="w100p mx-sm bg-white">
@@ -116,7 +116,7 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-facing-decorator'
-import SScrollbar from "qing-ui-h5/src/components/SComponents/SScrollbar.vue";
+import SScrollbar from "qing-ui-h5/src/components/QComponents/QScrollbar.vue";
 import SocialuniChatViewServiceH5 from "socialuni-im-h5-sdk/src/logic/SocialuniChatViewServiceH5";
 
 @Component({components: {SScrollbar}})

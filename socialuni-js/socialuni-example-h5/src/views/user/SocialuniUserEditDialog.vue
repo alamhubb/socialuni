@@ -1,5 +1,5 @@
 <template>
-    <s-dialog ref="userEditDialog" title="编辑用户信息" width="500px" :confirm="confirmEditUser">
+    <q-dialog ref="userEditDialog" title="编辑用户信息" width="500px" :confirm="confirmEditUser">
         <div v-if="mineUser" class="row-center">
             <el-form :model="editUser" label-width="70px">
                 <el-form-item label="头像">
@@ -37,13 +37,13 @@
                 </el-form-item>
             </el-form>
         </div>
-    </s-dialog>
+    </q-dialog>
 </template>
 
 <script lang="ts">
 import {Emit, Component, Vue, Watch} from 'vue-facing-decorator'
-import SButton from "qing-ui-h5/src/components/SComponents/SButton.vue";
-import SDialog from "qing-ui-h5/src/components/SComponents/SDialog.vue";
+import SButton from "qing-ui-h5/src/components/QComponents/QButton.vue";
+import SDialog from "qing-ui-h5/src/components/QComponents/QDialog.vue";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 import type SocialuniMineUserRO from "socialuni-api-base/src/model/user/SocialuniMineUserRO";
 import type EnumStrVO from "socialuni-constant/constant/EnumStrVO";

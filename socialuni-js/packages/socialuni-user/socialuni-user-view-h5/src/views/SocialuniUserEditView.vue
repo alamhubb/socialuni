@@ -1,5 +1,5 @@
 <template>
-    <s-dialog ref="userEditDialog" title="编辑用户信息" width="500px" :confirm="socialuniUserEditViewService.saveUser()">
+    <q-dialog ref="userEditDialog" title="编辑用户信息" width="500px" :confirm="socialuniUserEditViewService.saveUser()">
         <div v-if="socialuniUserEditViewService.editUser" class="row-center">
             <el-form :model="socialuniUserEditViewService.editUser" label-width="70px">
                 <el-form-item label="头像">
@@ -38,7 +38,7 @@
                 </el-form-item>
             </el-form>
         </div>
-    </s-dialog>
+    </q-dialog>
 </template>
 
 <script lang="ts" setup>

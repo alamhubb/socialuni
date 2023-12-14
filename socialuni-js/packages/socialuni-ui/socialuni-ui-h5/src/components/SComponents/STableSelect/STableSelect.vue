@@ -1,9 +1,9 @@
 <template>
-  <s-table-column
+  <q-table-column
     :label="label||prop"
   >
     <template #default="{row,$index}">
-      <s-select
+      <q-select
         class="w100p"
         v-bind="$attrs"
         v-model="row[prop]"
@@ -14,9 +14,9 @@
         @change="change"
       >
         <slot></slot>
-      </s-select>
+      </q-select>
     </template>
-  </s-table-column>
+  </q-table-column>
 </template>
 
 <script lang="ts">

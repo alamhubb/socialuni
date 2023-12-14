@@ -92,11 +92,11 @@
             </el-table>
         </div>
 
-        <s-dialog title="选择位置" ref="mapDialog" width="70%" top="3vh" dialog-body-height="450px">
+        <q-dialog title="选择位置" ref="mapDialog" width="70%" top="3vh" dialog-body-height="450px">
             <iframe id="mapPage" width="100%" height="420px" frameborder=0
                     src="https://apis.map.qq.com/tools/locpicker?search=1&type=1&policy=1&key=FZDBZ-5XCLO-OCYW6-SRG4Y-ZFP7O-IJBSD&referer=peiwan">
             </iframe>
-        </s-dialog>
+        </q-dialog>
 
     </div>
 </template>
@@ -105,7 +105,7 @@
 import {Component, Vue} from 'vue-facing-decorator'
 import {DialogInterface} from "@/interface/DialogInterface";
 import PeiwanRO from "socialuni-admin-api/src/model/peiwan/PeiwanRO";
-import SDialog from "qing-ui-h5/src/components/SComponents/SDialog.vue";
+import SDialog from "qing-ui-h5/src/components/QComponents/QDialog.vue";
 import {Plus} from '@element-plus/icons-vue'
 import FileUtilH5 from "qingjs-h5/src/util/FileUtilH5";
 import type DomFile from "qingjs/src/model/DomFile";

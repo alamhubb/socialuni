@@ -14,7 +14,7 @@
         </el-button>
         <slot></slot>
         <!--        有防抖所以无法连续触发-->
-        <s-button
+        <q-button
           size="small"
           v-show="!hideConfirm"
           :click="confirm"
@@ -25,7 +25,7 @@
           :disabled="disabled"
           class="yy-btn">
           {{ confirmText }}
-        </s-button>
+        </q-button>
       </slot>
     </div>
   </div>

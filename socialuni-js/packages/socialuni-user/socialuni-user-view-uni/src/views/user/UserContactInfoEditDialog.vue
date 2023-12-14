@@ -12,9 +12,9 @@
         他人是否可获取您的联系方式：
       </div>
       <div class="row-col-center mt">
-        <s-switch v-model="openContactInfo">
+        <q-switch v-model="openContactInfo">
           {{ openContactInfo ? '他人可获取' : '他人不可获取' }}
-        </s-switch>
+        </q-switch>
       </div>
       <div class="mt">打开开关，他人可通过使用{{getContactExpenseCoin}}贝壳的方式获取您的联系方式</div>
       <div class="mt-sm">提示：允许使用贝壳获取联系方式功能交友效果更佳哦</div>

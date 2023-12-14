@@ -1,5 +1,5 @@
 <template>
-    <s-table-column
+    <q-table-column
         :label="label||prop"
         :width="width"
     >
@@ -26,7 +26,7 @@
                 v-bind="$attrs"
             />
         </template>
-    </s-table-column>
+    </q-table-column>
 </template>
 
 <script lang="ts">

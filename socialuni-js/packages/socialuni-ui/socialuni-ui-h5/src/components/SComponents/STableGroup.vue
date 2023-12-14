@@ -36,7 +36,7 @@
             </slot>
         </div>-->
 
-        <s-table
+        <q-table
                 v-loading="loading || innerLoading"
                 ref="table"
                 class="flex-1"
@@ -47,7 +47,7 @@
                 @selection-change="selectionChange"
         >
             <slot/>
-        </s-table>
+        </q-table>
 
         <slot name="tableFooter">
             <div
@@ -64,7 +64,7 @@
                 <div
                         v-if="showPage"
                         class="flex-1 row-end">
-                    <s-pagination
+                    <q-pagination
                             background
                             @change="filterTableData"
                             v-model="pageable"

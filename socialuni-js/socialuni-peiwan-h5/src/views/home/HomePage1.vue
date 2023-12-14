@@ -1,6 +1,6 @@
 <template>
   <div class="h100p">
-    <s-scrollbar>
+    <q-scrollbar>
       <div class="mx-sm pb-60" :style="{'column-count': columnNum}">
         <div v-for="user in peiwanList" class="shadow bg-white overflow-hidden use-click" @click="openKefu">
           <img class="bd-radius w100p" style="max-height: 400px"
@@ -89,14 +89,14 @@
           </div>-->
         </div>
       </div>
-    </s-scrollbar>
+    </q-scrollbar>
   </div>
 </template>
 
 <script lang="ts">
 import {Component, Vue} from 'vue-facing-decorator'
-import SScrollbar from "qing-ui-h5/src/components/SComponents/SScrollbar.vue";
-import SDialog from "qing-ui-h5/src/components/SComponents/SDialog.vue";
+import SScrollbar from "qing-ui-h5/src/components/QComponents/QScrollbar.vue";
+import SDialog from "qing-ui-h5/src/components/QComponents/QDialog.vue";
 import {Plus} from '@element-plus/icons-vue'
 import SocialuniPeiwanAPI from "socialuni-peiwan-api/src/api/SocialuniPeiwanAPI";
 import PeiwanRO from "socialuni-admin-api/src/model/peiwan/PeiwanRO";

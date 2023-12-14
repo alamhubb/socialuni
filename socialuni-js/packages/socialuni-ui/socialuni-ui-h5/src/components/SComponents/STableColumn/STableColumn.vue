@@ -21,7 +21,7 @@
                   />-->
                     <!--      :label="optionLabel|| (column.option?column.option.label:null)"-->
                     <!--      因为内不支持不输入label默认使用value-->
-                    <s-select
+                    <q-select
                             v-if="type === DataTableColumnTypeEnum.select"
                             v-model="row[prop]"
                             :disabled="readonly"

@@ -2,9 +2,9 @@
     <div class="h100p">
         <div class="flex-row">
 
-            <s-label-item label="用户名">
+            <q-label-item label="用户名">
                 <el-input v-model="peiwanInfo.nickname"></el-input>
-            </s-label-item>
+            </q-label-item>
 
             <div class="flex-1 row-end">
                 <el-button @click="commonSava">保存</el-button>
@@ -46,11 +46,11 @@
         <div>
             <div>
             </div>
-            <s-table ref="dataTable" :data="peiwanList">
-                <!--                <s-table-select label="技能" prop="skills" :options="skillTags" multiple
-                                                @change="skillChange"></s-table-select>-->
+            <q-table ref="dataTable" :data="peiwanList">
+                <!--                <q-table-select label="技能" prop="skills" :options="skillTags" multiple
+                                                @change="skillChange"></q-table-select>-->
                 <el-table-column type="index"></el-table-column>
-                <s-table-input label="昵称" prop="nickname" width="200px"></s-table-input>
+                <q-table-input label="昵称" prop="nickname" width="200px"></q-table-input>
                 <!--                <el-table-column label="位置">
                                     <template #default="{row}">
                                         <div>
@@ -62,7 +62,7 @@
                                         </div>
                                     </template>
                                 </el-table-column>-->
-                <!--                <s-table-column label="头像" prop="avatar">
+                <!--                <q-table-column label="头像" prop="avatar">
                                     <template #default="{row}">
                                         <el-upload drag class="size100 overflow-hidden bd-radius" :auto-upload="false"
                                                    :on-change="(file)=>tableAvatarImgChange(row,file)">
@@ -76,7 +76,7 @@
                                             </el-icon>
                                         </el-upload>
                                     </template>
-                                </s-table-column>-->
+                                </q-table-column>-->
                 <el-table-column label="上传2" width="800">
                     <template #default="{row}">
                         <div class="flex-row row-wrap">
@@ -100,14 +100,14 @@
                         </div>
                     </template>
                 </el-table-column>
-            </s-table>
+            </q-table>
         </div>
 
-        <s-dialog title="选择位置" ref="mapDialog" width="70%" top="3vh" dialog-body-height="450px">
+        <q-dialog title="选择位置" ref="mapDialog" width="70%" top="3vh" dialog-body-height="450px">
             <iframe id="mapPage" width="100%" height="420px" frameborder=0
                     src="https://apis.map.qq.com/tools/locpicker?search=1&type=1&policy=1&key=FZDBZ-5XCLO-OCYW6-SRG4Y-ZFP7O-IJBSD&referer=peiwan">
             </iframe>
-        </s-dialog>
+        </q-dialog>
 
     </div>
 </template>
@@ -115,12 +115,12 @@
 <script lang="ts">
 import {Component, Vue} from 'vue-facing-decorator'
 import PeiwanRO from "socialuni-admin-api/src/model/peiwan/PeiwanRO";
-import SDialog from "qing-ui-h5/src/components/SComponents/SDialog.vue";
-import SLabelItem from "qing-ui-h5/src/components/SComponents/SLabelItem.vue";
-import STable from "qing-ui-h5/src/components/SComponents/STable.vue";
-import STableColumn from "qing-ui-h5/src/components/SComponents/STableColumn/STableColumn.vue";
-import STableInput from "qing-ui-h5/src/components/SComponents/STableInput/STableInput.vue";
-import STableSelect from "qing-ui-h5/src/components/SComponents/STableSelect/STableSelect.vue";
+import SDialog from "qing-ui-h5/src/components/QComponents/QDialog.vue";
+import SLabelItem from "qing-ui-h5/src/components/QComponents/QLabelItem.vue";
+import STable from "qing-ui-h5/src/components/QComponents/QTable.vue";
+import STableColumn from "qing-ui-h5/src/components/QComponents/QTableColumn/STableColumn.vue";
+import STableInput from "qing-ui-h5/src/components/QComponents/QTableInput/STableInput.vue";
+import STableSelect from "qing-ui-h5/src/components/QComponents/QTableSelect/STableSelect.vue";
 import {Plus} from '@element-plus/icons-vue'
 import FileUtilH5 from "qingjs-h5/src/util/FileUtilH5";
 import type DomFile from "qingjs/src/model/DomFile";
@@ -135,7 +135,7 @@ import {watch} from "vue";
 import AlertUtil from "qingjs-h5/src/util/AlertUtil";
 import WindowEventListener from "qing-util/src/util/WindowEventListener";
 import AdminPeiwanAppInitData from "socialuni-admin-api/src/model/peiwan/AdminPeiwanAppInitData";
-import SSelect from "qing-ui-h5/src/components/SComponents/SSelect/SSelect.vue";
+import SSelect from "qing-ui-h5/src/components/QComponents/QSelect/SSelect.vue";
 import ImgFileVO from "socialuni-admin-api/src/model/community/ImgFileVO";
 import resData from "./resdata.json"
 

@@ -69,7 +69,7 @@
 
     <div class="flex-col flex-none position-relative pd-sm bg-white shadow-top">
       <div class="flex-row">
-        <s-icon icon="mdi-emoticon-outline color-content" size="28"></s-icon>
+        <q-icon icon="mdi-emoticon-outline color-content" size="28"></q-icon>
       </div>
 <!--      <el-input
           class="w100p"
@@ -94,8 +94,8 @@
 
 <script lang="ts">
 import {Component, Vue} from "vue-facing-decorator";
-import SScrollbar from "qing-ui-h5/src/components/SComponents/SScrollbar.vue";
-import SIcon from "qing-ui-h5/src/components/SComponents/SIcon.vue";
+import SScrollbar from "qing-ui-h5/src/components/QComponents/QScrollbar.vue";
+import SIcon from "qing-ui-h5/src/components/QComponents/QIcon.vue";
 import SocialuniMsgViewService from "socialuni-im-sdk/src/logic/SocialuniMsgViewService";
 import MessageViewParams from "socialuni-im-view-uni/src/views/chat/MessageViewParams";
 import {getCurrentInstance, watch} from "vue";
