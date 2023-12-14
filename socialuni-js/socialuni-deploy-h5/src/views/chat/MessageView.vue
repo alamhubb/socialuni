@@ -58,8 +58,6 @@ import MusicPlayer from "@/components/MusicPlayer.vue";
 import VueInteract from "@/components/vue-interact/VueInteract.vue";
 import QUpload from "qing-ui-h5/src/components/QComponents/QUpload/QUpload.vue";
 
-
-
 @Component({
   components: {
     VueDragResize,
