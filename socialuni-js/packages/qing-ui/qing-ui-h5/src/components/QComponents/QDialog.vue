@@ -58,8 +58,8 @@
 
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-facing-decorator'
-import SScrollbar from "./SScrollbar.vue";
-import SPageFooter from "./SPageFooter.vue";
+import SScrollbar from "./QScrollbar.vue";
+import SPageFooter from "./QPageFooter.vue";
 
 @Component({
   components: {SScrollbar, SPageFooter}

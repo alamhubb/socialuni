@@ -42,7 +42,7 @@
 
 <script lang="ts">
 import {Component, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator'
-import STableColumn from "./STableColumn/STableColumn.vue";
+import STableColumn from "./QTableColumn/STableColumn.vue";
 import ObjectUtil from "qing-util/src/util/ObjectUtil";
 import JsonUtil from "qing-util/src/util/JsonUtil";
 

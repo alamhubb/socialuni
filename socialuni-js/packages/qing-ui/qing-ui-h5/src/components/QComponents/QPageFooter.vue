@@ -33,7 +33,7 @@
 
 <script lang="ts">
 import { Component, Emit, Prop, Vue } from 'vue-facing-decorator'
-import SButton from "./SButton.vue";
+import SButton from "./QButton.vue";
 
 @Component({
   components: { SButton }
