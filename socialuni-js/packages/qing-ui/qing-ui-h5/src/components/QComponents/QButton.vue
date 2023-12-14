@@ -15,7 +15,7 @@ import CommonUtil from "qing-util/src/util/CommonUtil";
 //想要的效果，外部可以主动disable
 //可以主动loading
 @Component({})
-export default class SButton extends Vue {
+export default class QButton extends Vue {
     @Prop({ default: false, type: Boolean }) disabled: boolean
     @Prop({ default: true, type: Boolean }) useLoading: boolean
     @Prop({ default: false, type: Boolean }) showLoading: boolean

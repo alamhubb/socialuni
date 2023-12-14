@@ -91,7 +91,7 @@ import SPagination from "./QPageable/SPagination.vue";
 @Component({
     components: {STable, SPagination}
 })
-export default class STableGroup extends Vue {
+export default class QTableGroup extends Vue {
     $refs: {
         table: STable;
     }

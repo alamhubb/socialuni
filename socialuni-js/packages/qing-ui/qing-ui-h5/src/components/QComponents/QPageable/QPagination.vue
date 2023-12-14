@@ -14,7 +14,7 @@ import { Component, Emit, Model, Vue } from 'vue-facing-decorator'
 import Pageable from "./Pageable";
 
 @Component
-export default class SPagination extends Vue {
+export default class QPagination extends Vue {
   @Model('change') pageable: Pageable
 
   @Emit('update:modelValue')

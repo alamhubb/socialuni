@@ -42,7 +42,7 @@ import STableColumn from "../STableColumn/STableColumn.vue";
 @Component({
     components: {STableColumn}
 })
-export default class STableInput extends Vue {
+export default class QTableInput extends Vue {
     @Prop() readonly prop: string
     @Prop() readonly tipProp: string
     @Prop() readonly propFun: Function

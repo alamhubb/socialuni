@@ -33,7 +33,7 @@ import type {ElInput} from "element-ui/types/input";
 @Component({
   components: {YSelect}
 })
-export default class YSearch extends Vue {
+export default class QSearch extends Vue {
   $refs: {
     valueSelect: YSelect;
     searchInput: ElInput;

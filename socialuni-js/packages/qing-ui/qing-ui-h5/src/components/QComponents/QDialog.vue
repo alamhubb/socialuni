@@ -64,7 +64,7 @@ import SPageFooter from "./QPageFooter.vue";
 @Component({
   components: {SScrollbar, SPageFooter}
 })
-export default class SDialog extends Vue {
+export default class QDialog extends Vue {
   @Prop({
     type: Boolean,
     default: false

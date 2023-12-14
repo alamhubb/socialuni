@@ -55,7 +55,7 @@ import JsonUtil from "qing-util/src/util/JsonUtil";
 @Component({
     components: {STableColumn}
 })
-export default class STable extends Vue {
+export default class QTable extends Vue {
     @Model('change') model!: any
     @Prop() readonly data: any[]
     // 是否单选

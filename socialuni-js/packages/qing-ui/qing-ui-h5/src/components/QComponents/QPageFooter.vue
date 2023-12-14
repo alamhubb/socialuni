@@ -38,7 +38,7 @@ import SButton from "./QButton.vue";
 @Component({
   components: { SButton }
 })
-export default class SPageFooter extends Vue {
+export default class QPageFooter extends Vue {
   @Prop({ default: false, type: Boolean }) hideConfirm
   @Prop({ default: false, type: Boolean }) hideCancel
   @Prop({ default: '确 定' }) confirmText: string

@@ -11,7 +11,7 @@
 import {Component, Prop, Vue} from 'vue-facing-decorator'
 
 @Component
-export default class SLabelItem extends Vue {
+export default class QLabelItem extends Vue {
   @Prop() label: string
 }
 </script>

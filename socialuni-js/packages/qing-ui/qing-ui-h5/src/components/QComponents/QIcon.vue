@@ -12,7 +12,7 @@
 import { Emit, Component, Prop, Vue } from 'vue-facing-decorator'
 
 @Component({})
-export default class SIcon extends Vue {
+export default class QIcon extends Vue {
   @Prop({ type: [String, Number] }) readonly size: string | number
   @Prop({
     type: String,

@@ -87,7 +87,7 @@ import SSelect from "../SSelect/SSelect.vue";
 @Component({
     components: {SSelect}
 })
-export default class STableColumn extends Vue {
+export default class QTableColumn extends Vue {
     @Prop({default: 'label'}) readonly type: string
     // @Prop({ default: false, type: Boolean }) readonly disabled: boolean
 

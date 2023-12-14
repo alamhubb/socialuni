@@ -2,12 +2,19 @@
   <div class="flex-col h100p overflow-hidden color-black">
     <div class="flex-row h100p overflow-hidden">
       <div class="w200 h100p flex-none br bg-default ">
-<!--        <div class="size50 bg-red"></div>-->
+        <!--        <div class="size50 bg-red"></div>-->
       </div>
 
       <div class="h100p flex-col flex-1 bg-white">
         <!--          <vue-drag-resize>-->
         <div>
+          <q-label-item label="项目名：">
+            <el-input v-model="projectName" @change="checkProjectName"></el-input>
+          </q-label-item>
+          <div v-if="!projectNameCanUse" class="color-red">
+            项目名已存在，请修改
+          </div>
+
           <q-upload ref="upload" folder v-model="files" @change="upload"></q-upload>
         </div>
       </div>
@@ -57,13 +64,17 @@ import VueDragResize from "vue-drag-resize3/src/components/VueDragResize.vue";
 import MusicPlayer from "@/components/MusicPlayer.vue";
 import VueInteract from "@/components/vue-interact/VueInteract.vue";
 import QUpload from "qing-ui-h5/src/components/QComponents/QUpload/QUpload.vue";
+import QLabelItem from "qing-ui-h5/src/components/QComponents/QLabelItem.vue";
 import socialuniUserRequest from "socialuni-user-api/src/request/socialuniUserRequest.ts";
+import SocialuniDeployAPI from "@/views/chat/SocialuniDeployAPI.ts";
+
 
 @Component({
   components: {
     VueDragResize,
     VueInteract,
     QUpload,
+    QLabelItem,
     MusicPlayer,
     SocialuniChatViewH5,
     SocialuniMsgViewH5,
@@ -80,7 +91,17 @@ export default class MessageView extends Vue {
     upload: QUpload
   }
 
+  projectName = null
+  projectNameCanUse = true
+
+
   files = []
+
+  checkProjectName() {
+    SocialuniDeployAPI.checkProjectName(this.projectName).then(res => {
+      this.projectNameCanUse = res.data
+    })
+  }
 
   mounted() {
 

@@ -8,7 +8,7 @@
 import {Component, Vue} from 'vue-facing-decorator'
 
 @Component({})
-export default class SScrollbar extends Vue {
+export default class QScrollbar extends Vue {
 
 }
 
