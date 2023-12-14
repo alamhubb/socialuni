@@ -6,10 +6,12 @@ import Socialuni from "socialuni/src";
 import router from "@/router";
 import SocialuniMusic from "socialuni-music-sdk/src";
 import DateUtil from "qing-util/src/util/DateUtil.ts";
+import GlobalConst from "@/constant/GlobalConst.ts";
 
 declare module '@vue/runtime-core' {
     interface ComponentCustomProperties {
         $DateUtil: typeof DateUtil
+        $const: typeof GlobalConst
     }
 }
 
@@ -19,6 +21,7 @@ declare module '@vue/runtime-core' {
     const app = createApp(App);
 
     app.config.globalProperties.$DateUtil = DateUtil;
+    app.config.globalProperties.$const = GlobalConst;
 
     await SocialuniMusic.install(app);
     await Socialuni.install(app);

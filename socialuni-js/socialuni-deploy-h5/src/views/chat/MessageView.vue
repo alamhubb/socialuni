@@ -7,8 +7,8 @@
 
       <div class="h100p flex-col flex-1 bg-white">
         <!--          <vue-drag-resize>-->
-
         <div>
+          <q-upload></q-upload>
         </div>
       </div>
     </div>
@@ -56,11 +56,15 @@ import SocialuniMsgViewH5 from "socialuni-im-view-h5/src/views/SocialuniMsgViewH
 import VueDragResize from "vue-drag-resize3/src/components/VueDragResize.vue";
 import MusicPlayer from "@/components/MusicPlayer.vue";
 import VueInteract from "@/components/vue-interact/VueInteract.vue";
+import QUpload from "qing-ui-h5/src/components/QComponents/QUpload/QUpload.vue";
+
+
 
 @Component({
   components: {
     VueDragResize,
     VueInteract,
+    QUpload,
     MusicPlayer,
     SocialuniChatViewH5,
     SocialuniMsgViewH5,

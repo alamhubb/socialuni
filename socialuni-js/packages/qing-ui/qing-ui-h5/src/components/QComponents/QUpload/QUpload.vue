@@ -48,7 +48,7 @@
       </div>
     </div>
 
-    <div class="flex-1 overflow-scroll mt-xs pr-sm" v-if='showFileList'>
+    <div class="flex-1 overflow-auto mt-xs pr-sm" v-if='showFileList'>
       <div v-for="file in fileList" :key="file.name" class="bg-click text-ellipsis row-between-center px-xs">
         <div class="text-ellipsis">
           <template v-if="file.fileType===$const.YUploadFileType.folder">
@@ -99,8 +99,6 @@ import UploadFileVO from "./UploadFileVO";
 import YUploadFileType from "./YUploadFileType";
 import AlertUtil from "qingjs-h5/src/util/AlertUtil";
 import Arrays from "qing-util/src/util/Arrays";
-import ObjectUtil from "qing-util/src/util/ObjectUtil";
-import {Message} from "@element-plus/icons-vue";
 
 @Component({})
 export default class QUpload extends Vue {
