@@ -220,7 +220,7 @@ import {socialuniUserModule} from 'socialuni-user-sdk/src/store/SocialuniUserMod
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import UserService from "socialuni-user-sdk/src/logic/UserService";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import CosService from "socialuni-app-sdk/src/util/CosService";
 import DomFile from "socialuni-app-sdk/src/model/DomFile";
 import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
@@ -268,7 +268,7 @@ export default class MineView extends Vue {
 
     created() {
         onLoad((params) => {
-            SocialuniAppUtil.NativeUtil.showShareMenu()
+            QingAppUtil.NativeUtil.showShareMenu()
         })
         /*onShow(() => {
             this.showMsgInput = true
@@ -330,7 +330,7 @@ export default class MineView extends Vue {
     initQuery() {
         if (this.mineUser) {
             socialuniUserModule.getMineUserAction().then(() => {
-                SocialuniAppUtil.ToastUtil.toast('刷新成功')
+                QingAppUtil.ToastUtil.toast('刷新成功')
             }).finally(() => {
                 this.stopPullDownRefresh()
             })
@@ -350,7 +350,7 @@ export default class MineView extends Vue {
 
     moreAction() {
         const menuList: string [] = ['查看头像', '上传头像']
-        SocialuniAppUtil.NativeUtil.actionSheet(menuList).then((index: number) => {
+        QingAppUtil.NativeUtil.actionSheet(menuList).then((index: number) => {
             if (index === 0) {
                 this.seeAvatarDetail()
             } else if (index === 1) {
@@ -369,8 +369,8 @@ export default class MineView extends Vue {
             CosService.getCosAuthRO().then(res => {
                 cosAuthRO = res
             })
-            const imgFiles: DomFile[] = await SocialuniAppUtil.NativeUtil.chooseImage(1)
-            SocialuniAppUtil.NativeUtil.showLoading('上传中')
+            const imgFiles: DomFile[] = await QingAppUtil.NativeUtil.chooseImage(1)
+            QingAppUtil.NativeUtil.showLoading('上传中')
             const imgFile: DomFile = imgFiles[0]
             imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src
             const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO), SocialuniMineUserAPI.addUserAvatarImgAPI(new ImgAddQO(imgFile))])
@@ -378,7 +378,7 @@ export default class MineView extends Vue {
         } catch (e) {
             console.error(e)
         } finally {
-            SocialuniAppUtil.NativeUtil.hideLoading()
+            QingAppUtil.NativeUtil.hideLoading()
         }
     }
 
@@ -395,9 +395,9 @@ export default class MineView extends Vue {
     }
 
     refreshMine() {
-        SocialuniAppUtil.AlertUtil.confirm('是否刷新用户信息').then(() => {
+        QingAppUtil.AlertUtil.confirm('是否刷新用户信息').then(() => {
             socialuniUserModule.getMineUserAction().then(() => {
-                SocialuniAppUtil.ToastUtil.toast('刷新成功')
+                QingAppUtil.ToastUtil.toast('刷新成功')
             })
         })
     }

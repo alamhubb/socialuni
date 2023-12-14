@@ -2,7 +2,7 @@ import SocialLoginRO from "socialuni-api-base/src/model/social/SocialLoginRO";
 import SocialuniMineUserRO from "socialuni-api-base/src/model/user/SocialuniMineUserRO";
 import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
 import {socialuniUserModule} from "../store/SocialuniUserModule";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import SocialuniAppService from "socialuni-app-sdk/src/service/SocialuniAppService";
 
 export default class UserService {
@@ -35,9 +35,9 @@ export default class UserService {
     }
 
     static loginOut() {
-        return SocialuniAppUtil.AlertUtil.confirm('是否退出登录').then(() => {
+        return QingAppUtil.AlertUtil.confirm('是否退出登录').then(() => {
             UserService.clearUserInfo()
-            SocialuniAppUtil.ToastUtil.toast('用户退出')
+            QingAppUtil.ToastUtil.toast('用户退出')
         })
     }
 

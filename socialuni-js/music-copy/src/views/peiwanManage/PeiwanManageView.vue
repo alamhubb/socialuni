@@ -107,16 +107,16 @@ import {DialogInterface} from "@/interface/DialogInterface";
 import PeiwanRO from "socialuni-admin-api/src/model/peiwan/PeiwanRO";
 import SDialog from "socialuni-ui-h5/src/components/SComponents/SDialog.vue";
 import {Plus} from '@element-plus/icons-vue'
-import FileUtilH5 from "socialuni-native-h5/src/util/FileUtilH5";
-import type DomFile from "socialuni-native-util/src/model/DomFile";
-import ImgUtilH5 from "socialuni-native-h5/src/util/ImgUtilH5";
+import FileUtilH5 from "qingjs-h5/src/util/FileUtilH5";
+import type DomFile from "qingjs/src/model/DomFile";
+import ImgUtilH5 from "qingjs-h5/src/util/ImgUtilH5";
 import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
 import CosService from "socialuni-app-sdk/src/util/CosService";
 import UUIDUtil from "@/utils/UUIDUtil";
 import SocialuniPeiwanAdminAPI from "../../../../packages/socialuni-peiwan/socialuni-peiwan-api/src/api/SocialuniPeiwanAdminAPI";
 import {useMagicKeys} from '@vueuse/core'
 import {watch} from "vue";
-import AlertUtil from "socialuni-native-h5/src/util/AlertUtil";
+import AlertUtil from "qingjs-h5/src/util/AlertUtil";
 
 
 @Component({

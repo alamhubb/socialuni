@@ -58,7 +58,7 @@ import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import CosService from "socialuni-app-sdk/src/util/CosService";
 import DomFile from "socialuni-app-sdk/src/model/DomFile";
 import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import SocialuniImgUtil from "socialuni-user-sdk/src/util/SocialuniImgUtil";
 
 @Component({
@@ -91,8 +91,8 @@ export default class SocialuniUserInfoImg extends Vue {
     async uploadUserImg() {
         try {
             const cosAuthRO = await CosService.getCosAuthRO()
-            const imgFiles: DomFile[] = await SocialuniAppUtil.NativeUtil.chooseImage(1)
-            SocialuniAppUtil.NativeUtil.showLoading('上传中')
+            const imgFiles: DomFile[] = await QingAppUtil.NativeUtil.chooseImage(1)
+            QingAppUtil.NativeUtil.showLoading('上传中')
             const imgFile: DomFile = imgFiles[0]
             imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src
             const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO), SocialuniMineUserAPI.addUserImgAPI(new ImgAddQO(imgFile))])
@@ -100,7 +100,7 @@ export default class SocialuniUserInfoImg extends Vue {
         } catch (e) {
             console.error(e)
         } finally {
-            SocialuniAppUtil.NativeUtil.hideLoading()
+            QingAppUtil.NativeUtil.hideLoading()
         }
     }
 
@@ -113,13 +113,13 @@ export default class SocialuniUserInfoImg extends Vue {
 
     imgLongPress(imgIndex: number) {
         if (this.isMine) {
-            SocialuniAppUtil.NativeUtil.actionSheet(['删除']).then((index: number) => {
+            QingAppUtil.NativeUtil.actionSheet(['删除']).then((index: number) => {
                 if (index === 0) {
                     this.deleteImg(imgIndex)
                 }
             })
         } else {
-            SocialuniAppUtil.NativeUtil.actionSheet(['举报']).then((index: number) => {
+            QingAppUtil.NativeUtil.actionSheet(['举报']).then((index: number) => {
                 if (index === 0) {
                     this.openReportDialog(imgIndex)
                 }
@@ -128,7 +128,7 @@ export default class SocialuniUserInfoImg extends Vue {
     }
 
     deleteImg(imgIndex) {
-        SocialuniAppUtil.AlertUtil.warning('请确认是否删除照片？').then(() => {
+        QingAppUtil.AlertUtil.warning('请确认是否删除照片？').then(() => {
             const imgs: ImgFileVO[] = this.frontDeleteImg(imgIndex)
             SocialuniMineUserAPI.deleteUserImgNewAPI(imgs[0]).then((res: any) => {
                 socialuniUserModule.setUser(res.data)

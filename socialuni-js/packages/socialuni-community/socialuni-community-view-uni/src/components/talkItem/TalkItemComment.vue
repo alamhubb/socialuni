@@ -88,7 +88,7 @@ import HugAddVO from "socialuni-api-base/src/model/HugAddVO";
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
 import ChildComment from "./ChildComment.vue";
 import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import UserPagePath from "socialuni-user-sdk/src/constant/UserPagePath";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
@@ -150,7 +150,7 @@ export default class TalkItemComment extends Vue {
   }
 
   showShareMenu() {
-    SocialuniAppUtil.NativeUtil.showShareMenu()
+    QingAppUtil.NativeUtil.showShareMenu()
   }
 
 
@@ -162,7 +162,7 @@ export default class TalkItemComment extends Vue {
     // 登录才可以点赞
     if (this.user) {
       if (this.talk.hasHugged) {
-          SocialuniAppUtil.ToastUtil.toast('已抱过不能取消')
+          QingAppUtil.ToastUtil.toast('已抱过不能取消')
         return
       }
       this.talk.hasHugged = true
@@ -175,7 +175,7 @@ export default class TalkItemComment extends Vue {
   }
 
   toUserDetail(userId: string) {
-    if (SocialuniAppUtil.RouterUtil.getCurrentPageURI() !== UserPagePath.userDetail || SocialuniAppUtil.RouterUtil.getCurrentPage().options.userId !== String(userId)) {
+    if (QingAppUtil.RouterUtil.getCurrentPageURI() !== UserPagePath.userDetail || QingAppUtil.RouterUtil.getCurrentPage().options.userId !== String(userId)) {
       UserPageUtil.toUserDetail(userId)
     }
   }
@@ -183,7 +183,7 @@ export default class TalkItemComment extends Vue {
   showOtherCommentClicked = false
 
   toTalkDetailVue() {
-    if (SocialuniAppUtil.RouterUtil.getCurrentPageURI() !== CommunityPagePath.talkDetail) {
+    if (QingAppUtil.RouterUtil.getCurrentPageURI() !== CommunityPagePath.talkDetail) {
       CommunityPageUtil.toTalkDetail(this.talk.id)
     }
   }

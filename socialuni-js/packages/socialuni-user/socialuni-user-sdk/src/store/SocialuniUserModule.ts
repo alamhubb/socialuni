@@ -4,7 +4,7 @@ import SocialuniUserStorageUtil from "../util/SocialuniUserStorageUtil";
 import SocialLoginRO from "socialuni-api-base/src/model/social/SocialLoginRO";
 import LoginAPI from "socialuni-user-api/src/api/LoginAPI";
 import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import {socialuniTokenModule} from "./SocialuniTokenModule";
 
 class SocialuniUserModule {
@@ -98,7 +98,7 @@ class SocialuniUserModule {
 
 
     destroyAccount() {
-        return SocialuniAppUtil.AlertUtil.confirm('是否注销账号，7天内不再登录，账号将彻底清空无法使用').then(() => {
+        return QingAppUtil.AlertUtil.confirm('是否注销账号，7天内不再登录，账号将彻底清空无法使用').then(() => {
             /*SocialuniMineUserAPI.destroyAccountAPI().then(() => {
                 UserService.userLogout()
                 SocialuniAppUtil.ToastUtil.toast('注销成功')

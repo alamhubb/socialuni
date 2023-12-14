@@ -1,16 +1,16 @@
 import AppMsg from "socialuni-constant/constant/AppMsg";
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
-import SocialuniAppUtil from 'socialuni-native-util/src/util/SocialuniAppUtil'
+import QingAppUtil from 'qingjs/src/util/QingAppUtil'
 import { socialuniConfigModule } from '../store/SocialuniConfigModule'
 
 
 export default class MsgUtil {
     static showUploadLoading() {
-        SocialuniAppUtil.NativeUtil.showLoading('上传中')
+        QingAppUtil.NativeUtil.showLoading('上传中')
     }
 
     static systemErrorMsg() {
-        SocialuniAppUtil.AlertUtil.hint(socialuniConfigModule.appMoreConfig.errorMsg604SystemError)
+        QingAppUtil.AlertUtil.hint(socialuniConfigModule.appMoreConfig.errorMsg604SystemError)
     }
 
 
@@ -28,24 +28,24 @@ export default class MsgUtil {
     }*/
 
     static iosDisablePay() {
-        return SocialuniAppUtil.AlertUtil.hint(AppMsg.iosDisablePayMsg)
+        return QingAppUtil.AlertUtil.hint(AppMsg.iosDisablePayMsg)
     }
 
     static notMpDisablePay() {
-        return SocialuniAppUtil.AlertUtil.hint(AppMsg.notMpDisablePayMsg)
+        return QingAppUtil.AlertUtil.hint(AppMsg.notMpDisablePayMsg)
     }
 
     static notPay() {
-        return SocialuniAppUtil.AlertUtil.hint(AppMsg.notPayMsg)
+        return QingAppUtil.AlertUtil.hint(AppMsg.notPayMsg)
     }
 
     static payFailMsg() {
-        return SocialuniAppUtil.AlertUtil.hint(AppMsg.payFailMsg)
+        return QingAppUtil.AlertUtil.hint(AppMsg.payFailMsg)
     }
 
     static cantPopupPromptToast() {
         if (socialuniSystemModule.isIosOrMpQQ) {
-            SocialuniAppUtil.ToastUtil.toastLong('如遇到无法弹出输入框，请重启应用')
+            QingAppUtil.ToastUtil.toastLong('如遇到无法弹出输入框，请重启应用')
         }
     }
 }

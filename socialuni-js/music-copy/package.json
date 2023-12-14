@@ -14,7 +14,7 @@
     "socialuni": "../packages/socialuni",
     "socialuni-admin-api": "../packages/socialuni-admin-api",
     "socialuni-app-view-h5": "../packages/socialuni-app-view-h5",
-    "socialuni-native-h5": "../packages/socialuni-native-h5",
+    "qingjs-h5": "../packages/qingjs-h5",
     "socialuni-peiwan-api": "../packages/socialuni-peiwan-api",
     "socialuni-user-api": "../packages/socialuni-user-api",
     "socialuni-user-sdk": "../packages/socialuni-user-sdk",

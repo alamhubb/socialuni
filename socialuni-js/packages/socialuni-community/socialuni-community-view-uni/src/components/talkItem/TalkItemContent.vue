@@ -97,7 +97,7 @@ import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil";
 import NumUtil from "qing-util/src/util/NumUtil";
 import CommonUtil from "qing-util/src/util/CommonUtil";
 import UserPagePath from "socialuni-user-sdk/src/constant/UserPagePath";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
 import SocialuniImgUtil from "socialuni-user-sdk/src/util/SocialuniImgUtil";
 import CommunityPagePath from "socialuni-community-sdk/src/constant/CommunityPagePath";
@@ -112,7 +112,7 @@ export default class TalkItemContent extends Vue {
   @Prop() talk: TalkVO
 
   toTalkDetailVue() {
-    if (SocialuniAppUtil.RouterUtil.getCurrentPageURI() !== CommunityPagePath.talkDetail) {
+    if (QingAppUtil.RouterUtil.getCurrentPageURI() !== CommunityPagePath.talkDetail) {
         CommunityPageUtil.toTalkDetail(this.talk.id)
     }
   }
@@ -122,8 +122,8 @@ export default class TalkItemContent extends Vue {
   }
 
   chooseCircle(circleName) {
-      SocialuniAppUtil.AlertUtil.confirm(`是否进入${circleName}圈`).then(() => {
-      if (SocialuniAppUtil.RouterUtil.getCurrentPageURI() === UserPagePath.talk) {
+      QingAppUtil.AlertUtil.confirm(`是否进入${circleName}圈`).then(() => {
+      if (QingAppUtil.RouterUtil.getCurrentPageURI() === UserPagePath.talk) {
         socialTalkModule.setCircleNameUpdateCurTabIndex(circleName)
       } else {
         CommonUtil.delayTime(500).then(() => {
@@ -135,7 +135,7 @@ export default class TalkItemContent extends Vue {
   }
 
   chooseTags(tagName) {
-      SocialuniAppUtil.AlertUtil.confirm(`是否筛选${tagName}话题的内容`).then(() => {
+      QingAppUtil.AlertUtil.confirm(`是否筛选${tagName}话题的内容`).then(() => {
       socialuniTagModule.setSelectTagName(tagName)
     })
   }
@@ -164,7 +164,7 @@ export default class TalkItemContent extends Vue {
   }
 
   goToThreeAppClick(appId, path) {
-    SocialuniAppUtil.RouterUtil.navigateToMp(appId, path)
+    QingAppUtil.RouterUtil.navigateToMp(appId, path)
   }
 
   toIdentityAuth() {
@@ -172,7 +172,7 @@ export default class TalkItemContent extends Vue {
   }
 
   copyContent(talk:TalkVO){
-      SocialuniAppUtil.NativeUtil.showCopyAction(talk.content)
+      QingAppUtil.NativeUtil.showCopyAction(talk.content)
   }
 }
 </script>

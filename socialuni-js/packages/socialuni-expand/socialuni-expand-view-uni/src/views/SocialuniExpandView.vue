@@ -126,7 +126,7 @@ import SocialuniUserExtendDetailRO from "socialuni-api-base/src/model/social/Soc
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import SocialuniImgUtil from "socialuni-user-sdk/src/util/SocialuniImgUtil";
 import SocialuniExpandAPI from "socialuni-expand-api/src/api/SocialuniExpandAPI";
 import SocialuniUserExpandService from "../service/SocialuniDatingService";
@@ -273,7 +273,7 @@ export default class SocialuniExpandView extends Vue {
   }
 
   copyContactInfo(user: CenterUserDetailRO) {
-    SocialuniAppUtil.NativeUtil.textCopy(user.contactInfo)
+    QingAppUtil.NativeUtil.textCopy(user.contactInfo)
   }
 
   get mineUser() {

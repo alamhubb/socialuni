@@ -48,7 +48,7 @@ import {Component, Vue} from 'vue-facing-decorator'
 import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
 import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
 import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 import MsgInput from "socialuni-community-view-uni/src/components/MsgInput.vue";
@@ -74,7 +74,7 @@ export default class TalkDetail extends Vue {
   }
 
   created() {
-    SocialuniAppUtil.NativeUtil.showShareMenu()
+    QingAppUtil.NativeUtil.showShareMenu()
     onLoad((params) => {
       const talkId = params.talkId
       SocialuniTalkAPI.queryTalkDetailAPI(talkId).then((res: any) => {
@@ -86,15 +86,15 @@ export default class TalkDetail extends Vue {
 
 
   deleteTalk() {
-    SocialuniAppUtil.RouterUtil.goBackOrHome()
+    QingAppUtil.RouterUtil.goBackOrHome()
   }
 
   goHome() {
-      SocialuniAppUtil.RouterUtil.goHome()
+      QingAppUtil.RouterUtil.goHome()
   }
 
   goBack() {
-      SocialuniAppUtil.RouterUtil.goBackOrHome()
+      QingAppUtil.RouterUtil.goBackOrHome()
   }
 
   onShow() {

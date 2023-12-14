@@ -135,7 +135,7 @@ import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 import LoginService from "socialuni-user-sdk/src/logic/LoginService";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import PhoneService from "socialuni-user-sdk/src/logic/PhoneService";
 import SocialuniUserPrivacyAgreeService from "socialuni-user-sdk/src/logic/SocialuniUserPrivacyAgreeService";
@@ -211,7 +211,7 @@ export default class LoginView extends Vue {
          } else {
            RouterUtil.goBackOrHome()
          }*/
-        SocialuniAppUtil.RouterUtil.goBackOrHome()
+        QingAppUtil.RouterUtil.goBackOrHome()
     }
 
     switchShowPhoneNum() {
@@ -306,7 +306,7 @@ export default class LoginView extends Vue {
         if (socialuniSystemModule.isIosOrMpQQ) {
             msg += '，如遇无法弹出输入框，请重启应用'
         }
-        SocialuniAppUtil.AlertUtil.hint(msg).finally(() => {
+        QingAppUtil.AlertUtil.hint(msg).finally(() => {
             //有手机号才直接返回，没手机号继续提示绑定手机号
             if (this.hasPhoneNum) {
                 UserPageUtil.goBackOrMine()

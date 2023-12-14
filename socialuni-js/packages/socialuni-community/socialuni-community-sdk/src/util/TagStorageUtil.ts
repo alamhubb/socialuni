@@ -1,13 +1,13 @@
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 
 export default class TagStorageUtil {
     static getMineHistoryTagNamesKey = 'mineTagNamesKey'
 
     static saveTagNames(mineHistoryCircleNames: string[]) {
-        SocialuniAppUtil.StorageUtil.set(TagStorageUtil.getMineHistoryTagNamesKey, mineHistoryCircleNames)
+        QingAppUtil.StorageUtil.set(TagStorageUtil.getMineHistoryTagNamesKey, mineHistoryCircleNames)
     }
 
     static getTagNames(): string[] {
-        return SocialuniAppUtil.StorageUtil.get(TagStorageUtil.getMineHistoryTagNamesKey) || []
+        return QingAppUtil.StorageUtil.get(TagStorageUtil.getMineHistoryTagNamesKey) || []
     }
 }

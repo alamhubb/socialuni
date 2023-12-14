@@ -6,7 +6,7 @@ import {SocialuniOption} from "socialuni/src/interface/socialuniOption";
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
 import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import {InternalAxiosRequestConfig} from "axios/index";
 import {socialAppModule} from "./store/SocialAppModule";
 import SocialuniAppService from "./service/SocialuniAppService";
@@ -46,7 +46,7 @@ const SocialuniApp = {
         app.config.errorHandler = (e: Error, instance, info) => {
             console.error(e)
             // 处理错误，例如：报告给一个服务
-            SocialuniAppAPI.sendErrorLogAPI('front page error', SocialuniAppUtil.RouterUtil.getCurrentPageURI(), e.message)
+            SocialuniAppAPI.sendErrorLogAPI('front page error', QingAppUtil.RouterUtil.getCurrentPageURI(), e.message)
         }
         socialuniPluginsModule.addPlugin(socialuniAppPlugin)
     }

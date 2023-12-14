@@ -1,5 +1,5 @@
 import {SocialuniImPagePathInterface} from "../constant/SocialuniImPagePathInterface";
-import PlatformModuleLoadUtil from "socialuni-native-util/src/util/PlatformModuleLoadUtil";
+import PlatformModuleLoadUtil from "qingjs/src/util/PlatformModuleLoadUtil";
 
 export default class SocialuniImTopLevelAwaitUtil {
     private static _socialuniImPagePath: SocialuniImPagePathInterface = null

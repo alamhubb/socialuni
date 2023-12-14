@@ -102,7 +102,7 @@ import SDialog from "socialuni-ui-h5/src/components/SComponents/SDialog.vue";
 import {Plus} from '@element-plus/icons-vue'
 import SocialuniPeiwanAPI from "socialuni-peiwan-api/src/api/SocialuniPeiwanAPI";
 import PeiwanRO from "socialuni-admin-api/src/model/peiwan/PeiwanRO";
-import AlertUtil from "socialuni-native-h5/src/util/AlertUtil";
+import AlertUtil from "qingjs-h5/src/util/AlertUtil";
 import apiData from "./res.json"
 import {ElMessageBox} from "element-plus";
 import {reactive} from "vue";

@@ -25,7 +25,7 @@ import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserMod
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
 import ImgFileVO from "socialuni-api-base/src/model/ImgFileVO";
 import SocialuniImgUtil from "socialuni-user-sdk/src/util/SocialuniImgUtil";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import AppMsg from "socialuni-constant/constant/AppMsg";
 import SocialuniUserAPI from "socialuni-user-api/src/api/SocialuniUserAPI";
 import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
@@ -67,7 +67,7 @@ export default class UserImgListPage extends Vue {
       console.log(123)
       const userId = params.userId
       if (!userId) {
-        SocialuniAppUtil.ToastUtil.error('系统错误' + AppMsg.contactServiceMsg)
+        QingAppUtil.ToastUtil.error('系统错误' + AppMsg.contactServiceMsg)
       }
       // 这里有问题，有时候直接进入页面没有userId
       SocialuniUserAPI.queryUserDetailAPI(userId).then((res: any) => {
@@ -88,13 +88,13 @@ export default class UserImgListPage extends Vue {
 
   imgLongPress(imgIndex: number) {
     if (this.isMine) {
-      SocialuniAppUtil.NativeUtil.actionSheet(['删除']).then((index: number) => {
+      QingAppUtil.NativeUtil.actionSheet(['删除']).then((index: number) => {
         if (index === 0) {
           this.deleteImg(imgIndex)
         }
       })
     } else {
-      SocialuniAppUtil.NativeUtil.actionSheet(['举报']).then((index: number) => {
+      QingAppUtil.NativeUtil.actionSheet(['举报']).then((index: number) => {
         if (index === 0) {
           this.openReportDialog(imgIndex)
         }
@@ -103,7 +103,7 @@ export default class UserImgListPage extends Vue {
   }
 
   deleteImg(imgIndex) {
-    SocialuniAppUtil.AlertUtil.warning('请确认是否删除照片？').then(() => {
+    QingAppUtil.AlertUtil.warning('请确认是否删除照片？').then(() => {
       const imgs: ImgFileVO[] = this.frontDeleteImg(imgIndex)
       SocialuniMineUserAPI.deleteUserImgNewAPI(imgs[0]).then((res: any) => {
         socialuniUserModule.setUser(res.data)

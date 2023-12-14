@@ -1,6 +1,6 @@
 import SocialuniMineUserRO from "socialuni-api-base/src/model/user/SocialuniMineUserRO";
-import StorageUtil from "socialuni-native-uni/src/util/StorageUtil";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import StorageUtil from "qingjs-uni/src/util/StorageUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 
 export default class SocialuniUserStorageUtil {
     // 开发生产区分user，避免混淆，不区分的话会冲突
@@ -8,7 +8,7 @@ export default class SocialuniUserStorageUtil {
 
     static set(user: SocialuniMineUserRO) {
         if (user) {
-            SocialuniAppUtil.StorageUtil.setObj(this.user_key, user)
+            QingAppUtil.StorageUtil.setObj(this.user_key, user)
         } else {
             this.remove()
         }
@@ -16,10 +16,10 @@ export default class SocialuniUserStorageUtil {
 
     static get(): SocialuniMineUserRO {
         // 开发环境方便测试
-        return SocialuniAppUtil.StorageUtil.getObj(this.user_key)
+        return QingAppUtil.StorageUtil.getObj(this.user_key)
     }
 
     static remove() {
-        SocialuniAppUtil.StorageUtil.remove(this.user_key)
+        QingAppUtil.StorageUtil.remove(this.user_key)
     }
 }

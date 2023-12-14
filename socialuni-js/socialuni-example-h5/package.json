@@ -22,7 +22,7 @@
     "socialuni-im-sdk": "../packages/socialuni-im/socialuni-im-sdk",
     "socialuni-im-view-h5": "../packages/socialuni-im/socialuni-im-view-h5",
     "socialuni-music-sdk": "../packages/socialuni-music/socialuni-music-sdk",
-    "socialuni-native-h5": "../packages/socialuni-native/socialuni-native-h5",
+    "qingjs-h5": "../qingjs-h5",
     "socialuni-ui-h5": "../packages/socialuni-ui/socialuni-ui-h5",
     "socialuni-user-api": "../packages/socialuni-user-api",
     "socialuni-user-sdk": "../packages/socialuni-user-sdk",

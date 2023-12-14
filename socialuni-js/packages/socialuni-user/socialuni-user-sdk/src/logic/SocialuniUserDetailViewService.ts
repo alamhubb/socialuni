@@ -1,5 +1,5 @@
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import SocialuniUserAPI from "socialuni-user-api/src/api/SocialuniUserAPI";
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
@@ -16,7 +16,7 @@ export default class SocialuniUserDetailViewService extends SocialuniViewService
     async initService(instance: ComponentInternalInstance, params: any) {
         this.instance = instance
         console.log('chufale inser')
-        SocialuniAppUtil.NativeUtil.showShareMenu()
+        QingAppUtil.NativeUtil.showShareMenu()
         console.log(44444)
         console.log('chufale onload')
         console.log(55555)
@@ -50,7 +50,7 @@ export default class SocialuniUserDetailViewService extends SocialuniViewService
 
 
     copyText(textCopy: string) {
-        SocialuniAppUtil.NativeUtil.textCopy(textCopy)
+        QingAppUtil.NativeUtil.textCopy(textCopy)
     }
 
 
@@ -68,7 +68,7 @@ export default class SocialuniUserDetailViewService extends SocialuniViewService
 
 
     copyContactInfo() {
-        SocialuniAppUtil.NativeUtil.textCopy(this.user.contactInfo)
+        QingAppUtil.NativeUtil.textCopy(this.user.contactInfo)
     }
 
     showUserContactBtnDisabled: boolean = false

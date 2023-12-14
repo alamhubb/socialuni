@@ -41,7 +41,7 @@ import {Component, Vue, Watch} from 'vue-facing-decorator'
 import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil";
 import {socialTalkModule} from "socialuni-community-sdk/src/store/SocialTalkModule";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import PlatformUtils from "socialuni-user-sdk/src/util/PlatformUtils";
 import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
 
@@ -93,7 +93,7 @@ export default class MsgInput extends Vue {
                 // 申请订阅
                 PlatformUtils.requestSubscribeComment()
             } else {
-                SocialuniAppUtil.ToastUtil.toast('不能发表内容为空的评论')
+                QingAppUtil.ToastUtil.toast('不能发表内容为空的评论')
             }
         } else {
             UserMsgUtil.unBindPhoneNum()

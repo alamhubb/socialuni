@@ -40,7 +40,7 @@ import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
 import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 import CommentVO from "socialuni-api-base/src/model/comment/CommentVO";
 import ObjectUtil from "qing-util/src/util/ObjectUtil";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import UserPagePath from "socialuni-user-sdk/src/constant/UserPagePath";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import {socialTalkModule} from "socialuni-community-sdk/src/store/SocialTalkModule";
@@ -73,7 +73,7 @@ export default class ChildComment extends Vue {
   }
 
   toUserDetail(userId: string) {
-    if (SocialuniAppUtil.RouterUtil.getCurrentPageURI() !== UserPagePath.userDetail || SocialuniAppUtil.RouterUtil.getCurrentPage().options.userId !== String(userId)) {
+    if (QingAppUtil.RouterUtil.getCurrentPageURI() !== UserPagePath.userDetail || QingAppUtil.RouterUtil.getCurrentPage().options.userId !== String(userId)) {
       UserPageUtil.toUserDetail(userId)
     }
   }

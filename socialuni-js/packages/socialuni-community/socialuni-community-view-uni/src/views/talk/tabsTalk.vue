@@ -166,7 +166,7 @@ import TalkItem from "socialuni-community-view-uni/src/components/talkItem/TalkI
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 
 // todo 后台可控制是否显示轮播图
@@ -483,7 +483,7 @@ export default class TabsTalk extends Vue {
     updateShowAd() {
         // 如果展示广告
         // 获取上次展示时间
-        const lastDateStr: string = SocialuniAppUtil.StorageUtil.get(Constants.lastShowAdTime)
+        const lastDateStr: string = QingAppUtil.StorageUtil.get(Constants.lastShowAdTime)
         // 如果有上次展示时间
         if (lastDateStr) {
             const lastDateTime: number = new Date(lastDateStr).getTime()
@@ -508,7 +508,7 @@ export default class TabsTalk extends Vue {
     watchTalks() {
         // 如果已有talk数量大于系统阀值，加载出来第2页后，就重置下次看广告时间
         if (this.showAd && this.talks.length >= 50) {
-            SocialuniAppUtil.StorageUtil.set(Constants.lastShowAdTime, String(new Date()))
+            QingAppUtil.StorageUtil.set(Constants.lastShowAdTime, String(new Date()))
         }
     }
 

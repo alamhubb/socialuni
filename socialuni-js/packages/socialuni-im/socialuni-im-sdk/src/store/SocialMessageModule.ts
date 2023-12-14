@@ -8,17 +8,17 @@ import MessageAPI from "socialuni-im-api/src/api/MessageAPI";
 import CommonUtil from "qing-util/src/util/CommonUtil";
 import Arrays from "qing-util/src/util/Arrays";
 import ImPageUtil from "../util/ImPageUtil";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import UserCheckUtil from "socialuni-user-sdk/src/util/UserCheckUtil";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 import {MessageStatus} from "socialuni-constant/constant/openIm/OpenImMessageType";
 import SocialuniImMineUserDetailRO from "socialuni-im-api/src/model/RO/SocialuniImMineUserDetailRO";
 import SocialuniImUserAPI from "socialuni-im-api/src/api/SocialuniImUserAPI";
-import RouterUtil from "socialuni-native-h5/src/util/RouterUtil";
+import RouterUtil from "qingjs-h5/src/util/RouterUtil";
 import MessageViewParams from "../model/MessageViewParams";
 import {socialuniChatModule} from "./SocialuniChatModule";
 import SocialuniUserEventConst from "socialuni-user-sdk/src/constant/SocialuniUserEventConst";
-import CommonEventUtil from "socialuni-native-util/src/util/CommonEventUtil";
+import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
 import SocialuniImEventKey from "socialuni-im-api/src/constant/SocialuniMusicEventConst";
 
 class SocialuniMsgModule {

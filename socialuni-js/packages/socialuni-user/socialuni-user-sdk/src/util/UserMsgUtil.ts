@@ -2,9 +2,9 @@ import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDe
 import {socialuniUserModule} from "../store/SocialuniUserModule";
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 import UserPageUtil from "./UserPageUtil";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import SocialuniUserEventConst from "../constant/SocialuniUserEventConst";
-import CommonEventUtil from "socialuni-native-util/src/util/CommonEventUtil";
+import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
 
 export default class UserMsgUtil {
     static unBindPhoneNum() {
@@ -13,7 +13,7 @@ export default class UserMsgUtil {
             UserMsgUtil.unLoginMessage()
         } else {
             // 如果登录了仅仅没绑定手机号，则提示跳转，区分qq和微信不同
-            SocialuniAppUtil.AlertUtil.confirm('绑定手机号才能发布内容，是否前往绑定手机号页面')
+            QingAppUtil.AlertUtil.confirm('绑定手机号才能发布内容，是否前往绑定手机号页面')
                 .then(() => {
                     UserPageUtil.toPhonePage()
                 })
@@ -23,7 +23,7 @@ export default class UserMsgUtil {
     static unLoginMessage() {
         const user = socialuniUserModule.mineUser
         if (!user) {
-            SocialuniAppUtil.AlertUtil.confirm(socialuniConfigModule.appMoreConfig.errorMsg601UnLogin).then(() => {
+            QingAppUtil.AlertUtil.confirm(socialuniConfigModule.appMoreConfig.errorMsg601UnLogin).then(() => {
                 CommonEventUtil.emit(SocialuniUserEventConst.toLogin)
             })
             throw new Error('未登录')

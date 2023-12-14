@@ -61,7 +61,7 @@ import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfig
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
 import ReportAPI from "socialuni-app-api/src/api/ReportAPI";
 import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 
 
 // todo 后台可控制是否显示轮播图
@@ -126,7 +126,7 @@ export default class TalkOperate extends Vue {
       reportAdd.contentId = this.comment.id
     }
     if (ReportType.other === this.reportType && !this.reportContent) {
-      SocialuniAppUtil.AlertUtil.hint('选择其他违规时，请您补充观点')
+      QingAppUtil.AlertUtil.hint('选择其他违规时，请您补充观点')
     } else {
       ReportAPI.addReportAPI(reportAdd).then((res: any) => {
         if (this.reportContentType === ReportContentType.comment) {
@@ -145,7 +145,7 @@ export default class TalkOperate extends Vue {
         }
         // 必须最后清空因为前面还要使用做判断
         this.reportDialogClose()
-        SocialuniAppUtil.AlertUtil.hint(res.data)
+        QingAppUtil.AlertUtil.hint(res.data)
         PlatformUtils.requestSubscribeReport()
       })
     }
@@ -159,7 +159,7 @@ export default class TalkOperate extends Vue {
   }
 
   copyText() {
-      SocialuniAppUtil.NativeUtil.textCopy(this.comment.content)
+      QingAppUtil.NativeUtil.textCopy(this.comment.content)
     this.closeActionAndInitData()
   }
 
@@ -180,7 +180,7 @@ export default class TalkOperate extends Vue {
   // 用户自己删除
   userDeleteComment() {
     this.commentActionClose()
-    SocialuniAppUtil.AlertUtil.confirm('是否确定删除此条评论，此操作无法恢复').then(() => {
+    QingAppUtil.AlertUtil.confirm('是否确定删除此条评论，此操作无法恢复').then(() => {
       this.deleteComment()
     })
   }

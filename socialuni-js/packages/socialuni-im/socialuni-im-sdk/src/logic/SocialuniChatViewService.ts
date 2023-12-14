@@ -6,7 +6,7 @@ import {Vue} from "vue-class-component";
 import SocialUserContentRO from "socialuni-api-base/src/model/social/SocialUserContentRO";
 import ChatType from "socialuni-constant/constant/ChatType";
 import Constants from "socialuni-constant/constant/Constant";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import ImPageUtil from "../util/ImPageUtil";
 import SocialuniImUserAPI from "socialuni-im-api/src/api/SocialuniImUserAPI";
 import SocialuniViewService from "socialuni/src/interface/SocialuniViewService";
@@ -119,7 +119,7 @@ export default class SocialuniChatViewService extends SocialuniViewService<Socia
     showBottomMenuClick(chatId: number) {
         this.chatId = chatId
         console.log('chatId===', chatId)
-        SocialuniAppUtil.NativeUtil.actionSheet(['置顶', '删除']).then((index: number) => {
+        QingAppUtil.NativeUtil.actionSheet(['置顶', '删除']).then((index: number) => {
             if (index === 0) {
                 this.pinConversation()
             } else if (index === 1) {
@@ -150,7 +150,7 @@ export default class SocialuniChatViewService extends SocialuniViewService<Socia
     }
 
     async frontDeleteChat() {
-        SocialuniAppUtil.AlertUtil.confirm('是否确定从列表中删除会话，可从私信处再次找回').then(async () => {
+        QingAppUtil.AlertUtil.confirm('是否确定从列表中删除会话，可从私信处再次找回').then(async () => {
             (await socialuniChatModule.openIm()).deleteConversationFromLocalAndSvr(this.chatId).then(({data}) => {
                 socialuniChatModule.deleteChatAction(this.chatId)
             }).catch(err => {
@@ -248,17 +248,17 @@ export default class SocialuniChatViewService extends SocialuniViewService<Socia
         } else {
             msg = ['打开陌生人免费消息']
         }
-        SocialuniAppUtil.NativeUtil.actionSheet(msg).then(res => {
+        QingAppUtil.NativeUtil.actionSheet(msg).then(res => {
             if (res === 0) {
                 if (socialuniChatModule.imMineUserInfo.allowStrangerMsg) {
                     socialuniChatModule.imMineUserInfo.allowStrangerMsg = false
-                    SocialuniAppUtil.ToastUtil.toast('关闭陌生人免费消息成功')
+                    QingAppUtil.ToastUtil.toast('关闭陌生人免费消息成功')
                     SocialuniImUserAPI.closeStrangerMsg().then(res => {
                         socialuniChatModule.imMineUserInfo = res.data
                     })
                 } else {
                     socialuniChatModule.imMineUserInfo.allowStrangerMsg = true
-                    SocialuniAppUtil.ToastUtil.toast('打开陌生人免费消息成功')
+                    QingAppUtil.ToastUtil.toast('打开陌生人免费消息成功')
                     SocialuniImUserAPI.openStrangerMsg().then(res => {
                         socialuniChatModule.imMineUserInfo = res.data
                     })

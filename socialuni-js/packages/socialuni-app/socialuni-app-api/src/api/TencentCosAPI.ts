@@ -2,9 +2,9 @@ import AppMsg from "socialuni-constant/constant/AppMsg";
 import TencentCosIdInfoRO from "socialuni-api-base/src/model/RO/tencent/cos/idImgInfo/TencentCosIdInfoRO";
 import CosAuthRO from "socialuni-api-base/src/model/cos/CosAuthRO";
 import CosUploadResult from "socialuni-api-base/src/model/cos/CosUploadResult";
-import AlertUtil from "socialuni-native-uni/src/util/AlertUtil";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
-import DomFile from "socialuni-native-util/src/model/DomFile";
+import AlertUtil from "qingjs-uni/src/util/AlertUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import DomFile from "qingjs/src/model/DomFile";
 
 export default class TencentCosAPI {
     /*static async getImgTagAPI(imgUrl, imgKey, cosAuthRO: CosAuthRO) {
@@ -87,9 +87,9 @@ export default class TencentCosAPI {
             // "fileid": "bba022e9313849acafeb34fd5d5a65f5avatar.jpg"
             // 通过 imageMogr2 接口使用图片缩放功能：指定图片宽度为 200，宽度等比压缩
             headers['Pic-Operations'] = `{"is_pic_info": 1, "rules":[{"fileid": "${imgFile.fileName}!avatar", "rule": "imageMogr2/thumbnail/100x/interlace/0"},{"fileid": "${imgFile.fileName}!normal", "rule": "imageMogr2/thumbnail/800x/interlace/1"},{"fileid": "${imgFile.fileName}!thumbnail", "rule": "imageMogr2/thumbnail/300x/interlace/0"}]}`;
-            console.log(SocialuniAppUtil.NativeUtil)
-            console.log(SocialuniAppUtil.NativeUtil)
-            const uploadImgFile = await SocialuniAppUtil.NativeUtil.getFile(imgFile) as any
+            console.log(QingAppUtil.NativeUtil)
+            console.log(QingAppUtil.NativeUtil)
+            const uploadImgFile = await QingAppUtil.NativeUtil.getFile(imgFile) as any
             console.log(imgFile.src)
             console.log(uploadImgFile)
             cosAuthRO.cos.putObject({
@@ -104,7 +104,7 @@ export default class TencentCosAPI {
                     resolve(data)
                 } else {
                     console.log('---cosAuthRO.cos.putObject----', err);
-                    SocialuniAppUtil.AlertUtil.error(AppMsg.uploadFailMsg)
+                    QingAppUtil.AlertUtil.error(AppMsg.uploadFailMsg)
                     reject(err)
                 }
             })

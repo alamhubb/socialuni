@@ -2,7 +2,7 @@ import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
 import UniLoginUtil from "../util/UniLoginUtil";
 import {socialuniUserModule} from "../store/SocialuniUserModule";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 
 export default class PhoneService {
     static async bindPhoneNum(phoneNum: string, authCode: string) {
@@ -27,7 +27,7 @@ export default class PhoneService {
             const res = await PhoneAPI.bindWxPhoneNumAPI(wxGetPhoneInfoResult.detail)
             socialuniUserModule.setUser(res.data)
         } else {
-            SocialuniAppUtil.ToastUtil.error('您选择了不绑定')
+            QingAppUtil.ToastUtil.error('您选择了不绑定')
         }
     }
 }

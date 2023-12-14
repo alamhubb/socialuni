@@ -4,7 +4,7 @@ import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import Constants from "socialuni-constant/constant/Constant";
 import MessageViewParams from "../model/MessageViewParams";
 import {socialuniMsgModule} from "../store/SocialMessageModule";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import UserCheckUtil from "socialuni-user-sdk/src/util/UserCheckUtil";
 import MessageVO from "socialuni-im-api/src/model/RO/MessageVO";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
@@ -94,7 +94,7 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
 
     async sendMsgClick() {
         if (!socialuniChatModule.chat) {
-            SocialuniAppUtil.ToastUtil.throwError('缺少会话')
+            QingAppUtil.ToastUtil.throwError('缺少会话')
         }
         console.log(123456)
         UserCheckUtil.checkUserBindPhoneNum()
@@ -125,7 +125,7 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
                 newMsg.readStatus = MessageStatus.Failed
             }
         } else {
-            SocialuniAppUtil.ToastUtil.throwError('不能发送空白内容')
+            QingAppUtil.ToastUtil.throwError('不能发送空白内容')
         }
         // socialuniChatModule.refreshMessages()
 
@@ -173,7 +173,7 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
         }
 
         //调用相册api，可选择拍照和引用相册
-        SocialuniAppUtil.NativeUtil.actionSheet(itemList).then((index: number) => {
+        QingAppUtil.NativeUtil.actionSheet(itemList).then((index: number) => {
             switch (itemList[index]) {
                 case '图片':
                     that.chooseImage();
@@ -182,7 +182,7 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
                     that.chooseVideo();
                     break;
                 case '录音':
-                    SocialuniAppUtil.AlertUtil.error('暂不支持,开发中');
+                    QingAppUtil.AlertUtil.error('暂不支持,开发中');
                     break;
                 case '删除对方聊天记录':
                     socialuniChatModule.pushCustomMessage(socialuniUserModule.userId, "{}", "发送删除对方聊天记录");
@@ -209,7 +209,7 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
         if (this.mineUser.type === UserType.systemUser) {
             this.deleteMsgAction(this.curMsg)
         } else {
-            SocialuniAppUtil.AlertUtil.confirm('是否确定删除此条消息，此操作无法恢复').then(() => {
+            QingAppUtil.AlertUtil.confirm('是否确定删除此条消息，此操作无法恢复').then(() => {
                 this.deleteMsgAction(msg)
             })
         }
@@ -217,7 +217,7 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
     }
 
     copyText() {
-        SocialuniAppUtil.NativeUtil.textCopy(this.message.content)
+        QingAppUtil.NativeUtil.textCopy(this.message.content)
         this.closeMessageMoreDialog()
         this.initChooseCommentData()
     }
@@ -248,7 +248,7 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
     openReportDialog() {
 
         this.closeMessageMoreDialog()
-        SocialuniAppUtil.AlertUtil.error('暂不支持,开发中');
+        QingAppUtil.AlertUtil.error('暂不支持,开发中');
         console.log('-----举报--openReportDialog-------')
         // this.$refs.reportDialog.openReport()
     }

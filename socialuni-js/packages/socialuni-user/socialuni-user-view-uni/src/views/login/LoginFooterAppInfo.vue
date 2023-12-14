@@ -17,7 +17,7 @@
 import {Component, Vue} from 'vue-facing-decorator'
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import SkipUrlConst from "socialuni-app-sdk/src/constant/SkipUrlConst";
 
 @Component({
@@ -37,7 +37,7 @@ export default class LoginFooterAppInfo extends Vue {
   }
 
   copyServiceNum() {
-    SocialuniAppUtil.NativeUtil.textCopy(this.serviceWeChat, '客服联系方式已复制')
+    QingAppUtil.NativeUtil.textCopy(this.serviceWeChat, '客服联系方式已复制')
   }
 }
 </script>

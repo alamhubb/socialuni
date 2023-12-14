@@ -3,11 +3,11 @@ import SocialuniChatViewH5 from "socialuni-im-view-h5/src/views/SocialuniChatVie
 import SocialuniMsgViewH5 from "socialuni-im-view-h5/src/views/SocialuniMsgViewH5.vue"
 import musicRequest from "@/plugins/musicRequest";
 import SocialuniMusicAPI from "socialuni-music-sdk/src/api/SocialuniMusicAPI";
-import CommonEventUtil from "socialuni-native-util/src/util/CommonEventUtil";
+import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
 import SocialuniImEventKey from "socialuni-im-api/src/constant/SocialuniMusicEventConst";
 import socialuniMusicStore from "socialuni-music-sdk/src/store/SocialuniMusicStore";
 import SocialuniMusicRoleId from "socialuni-music-sdk/src/constant/SocialuniMusicRoleId";
-import AlertUtil from "socialuni-native-h5/src/util/AlertUtil";
+import AlertUtil from "qingjs-h5/src/util/AlertUtil";
 import {createApp} from "vue";
 import * as CompilerDOM from '@vue/compiler-dom'
 import {compileTemplate} from "@vue/compiler-sfc";

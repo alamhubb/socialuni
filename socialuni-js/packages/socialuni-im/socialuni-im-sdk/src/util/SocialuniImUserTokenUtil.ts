@@ -1,4 +1,4 @@
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 
 export default class SocialuniImUserTokenUtil {
     // 开发生产区分token，避免混淆，不区分的话会冲突
@@ -6,17 +6,17 @@ export default class SocialuniImUserTokenUtil {
 
     static set(token: string) {
         if (token) {
-            SocialuniAppUtil.StorageUtil.set(this.socialuniUserImTokenKey, token)
+            QingAppUtil.StorageUtil.set(this.socialuniUserImTokenKey, token)
         } else {
             this.remove()
         }
     }
 
     static get(): string {
-        return SocialuniAppUtil.StorageUtil.get(this.socialuniUserImTokenKey)
+        return QingAppUtil.StorageUtil.get(this.socialuniUserImTokenKey)
     }
 
     static remove() {
-        SocialuniAppUtil.StorageUtil.remove(this.socialuniUserImTokenKey)
+        QingAppUtil.StorageUtil.remove(this.socialuniUserImTokenKey)
     }
 }

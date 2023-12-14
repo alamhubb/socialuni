@@ -94,7 +94,7 @@ import OpenImFriendApplyRO from "socialuni-api-base/src/model/openIm/OpenImFrien
 import QTabs from "socialuni-ui-uni/src/components/QTabs/QTabs.vue";
 import SocialuniAddFriendType from "socialuni-im-api/src/constant/SocialuniAddFriendType";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 
 @Component({
     components: {
@@ -274,7 +274,7 @@ export default class FriendApplyListView extends Vue {
      */
     async acceptFriendApplication(item: SocialuniFriendApplyUserRO) {
         await SocialuniFriendAPI.addFriend(new FriendAddQO(item.id, '接受您的好友请求', SocialuniAddFriendType.accept))
-        SocialuniAppUtil.ToastUtil.toastLong('添加好友成功')
+        QingAppUtil.ToastUtil.toastLong('添加好友成功')
         this.startQuery()
     }
 

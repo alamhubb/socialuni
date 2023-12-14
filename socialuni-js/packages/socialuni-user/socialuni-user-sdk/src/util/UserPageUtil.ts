@@ -1,6 +1,6 @@
 import UserPagePath from "../constant/UserPagePath";
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil";
 import {socialuniUserModule} from "../store/SocialuniUserModule";
@@ -9,8 +9,8 @@ import PlatformUtils from "./PlatformUtils";
 
 export default class UserPageUtil {
     static toUserDetail(userId: string) {
-        if (SocialuniAppUtil.RouterUtil.getCurrentPageURI() !== UserPagePath.userDetail) {
-            SocialuniAppUtil.RouterUtil.navigateTo(UserPagePath.userDetail + '?userId=' + userId)
+        if (QingAppUtil.RouterUtil.getCurrentPageURI() !== UserPagePath.userDetail) {
+            QingAppUtil.RouterUtil.navigateTo(UserPagePath.userDetail + '?userId=' + userId)
         }
     }
 
@@ -19,7 +19,7 @@ export default class UserPageUtil {
         if (pages.length === 1) {
             UserPageUtil.toMinePage()
         } else {
-            SocialuniAppUtil.RouterUtil.goBack()
+            QingAppUtil.RouterUtil.goBack()
         }
         // uni.navigateBack({ delta: 1 })
     }
@@ -30,7 +30,7 @@ export default class UserPageUtil {
             MsgUtil.iosDisablePay()
         } else {
             if (socialuniUserModule.mineUser) {
-                SocialuniAppUtil.RouterUtil.navigateTo(UserPagePath.userCoin)
+                QingAppUtil.RouterUtil.navigateTo(UserPagePath.userCoin)
             } else {
                 UserMsgUtil.unLoginMessage()
             }
@@ -40,22 +40,22 @@ export default class UserPageUtil {
     static toCoinRecordPage(pageType: string) {
         PlatformUtils.checkPay()
         if (socialuniUserModule.mineUser) {
-            SocialuniAppUtil.RouterUtil.navigateTo(UserPagePath.coinRecord + '?pageType=' + pageType)
+            QingAppUtil.RouterUtil.navigateTo(UserPagePath.coinRecord + '?pageType=' + pageType)
         } else {
             UserMsgUtil.unLoginMessage()
         }
     }
 
     static toEditMineInfo() {
-        SocialuniAppUtil.RouterUtil.navigateTo(UserPagePath.editMineInfo)
+        QingAppUtil.RouterUtil.navigateTo(UserPagePath.editMineInfo)
     }
 
     static toUserFollowPage(followType: string) {
-        SocialuniAppUtil.RouterUtil.navigateTo(UserPagePath.userFollow + '?followType=' + followType)
+        QingAppUtil.RouterUtil.navigateTo(UserPagePath.userFollow + '?followType=' + followType)
     }
 
     static toUserImgList(userId: string) {
-        SocialuniAppUtil.RouterUtil.navigateTo(UserPagePath.userImgList + '?userId=' + userId)
+        QingAppUtil.RouterUtil.navigateTo(UserPagePath.userImgList + '?userId=' + userId)
     }
 
     static toVipPage() {
@@ -74,18 +74,18 @@ export default class UserPageUtil {
     }
 
     static toMinePage() {
-        SocialuniAppUtil.RouterUtil.switchTab(UserPagePath.userMine)
+        QingAppUtil.RouterUtil.switchTab(UserPagePath.userMine)
     }
 
 
 
     static async toPhonePage() {
-        SocialuniAppUtil.RouterUtil.navigateTo(UserPagePath.userPhone)
+        QingAppUtil.RouterUtil.navigateTo(UserPagePath.userPhone)
     }
 
 
     static toIdentityAuthPage() {
-        SocialuniAppUtil.RouterUtil.navigateTo(UserPagePath.identityAuth)
+        QingAppUtil.RouterUtil.navigateTo(UserPagePath.identityAuth)
     }
 
     static toUserMatchPage(user: CenterUserDetailRO) {
@@ -95,6 +95,6 @@ export default class UserPageUtil {
 
 
     static toUserContactInfoPage() {
-        SocialuniAppUtil.RouterUtil.navigateTo(UserPagePath.userContactInfo)
+        QingAppUtil.RouterUtil.navigateTo(UserPagePath.userContactInfo)
     }
 }

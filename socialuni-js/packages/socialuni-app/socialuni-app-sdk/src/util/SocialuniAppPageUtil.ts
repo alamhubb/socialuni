@@ -1,5 +1,5 @@
 import SkipType from "socialuni-constant/constant/SkipType";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import SocialuniAppPagePath from "../constant/SocialuniAppPagePath";
 import SkipUrlConst from "../constant/SkipUrlConst";
 
@@ -7,11 +7,11 @@ import SkipUrlConst from "../constant/SkipUrlConst";
 export default class SocialuniAppPageUtil {
     static navigateToAll(type: string, skipUrl: string, pageTitle: string) {
         if (type === SkipType.mp) {
-            SocialuniAppUtil.RouterUtil.navigateToMp(skipUrl, pageTitle)
+            QingAppUtil.RouterUtil.navigateToMp(skipUrl, pageTitle)
         } else if (type === SkipType.web) {
             SocialuniAppPageUtil.navigateToWeb(skipUrl, pageTitle)
         } else if (type === SkipType.local) {
-            SocialuniAppUtil.RouterUtil.navigateTo(skipUrl)
+            QingAppUtil.RouterUtil.navigateTo(skipUrl)
         } else {
             SocialuniAppPageUtil.toWebHome()
         }
@@ -19,11 +19,11 @@ export default class SocialuniAppPageUtil {
 
 
     static navigateToWeb(webUrl: string, pageTitle?: string): void {
-        SocialuniAppUtil.RouterUtil.navigateTo(SocialuniAppPageUtil.getWebUrl(webUrl, pageTitle))
+        QingAppUtil.RouterUtil.navigateTo(SocialuniAppPageUtil.getWebUrl(webUrl, pageTitle))
     }
 
     static toWebHome(): void {
-        SocialuniAppUtil.RouterUtil.navigateTo(SkipUrlConst.homeUrl())
+        QingAppUtil.RouterUtil.navigateTo(SkipUrlConst.homeUrl())
     }
 
     static getWebUrl(webUrl: string, pageTitle = ''): string {

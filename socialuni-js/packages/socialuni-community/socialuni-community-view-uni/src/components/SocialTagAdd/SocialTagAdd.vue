@@ -40,7 +40,7 @@ import TagVO from 'socialuni-api-base/src/model/community/tag/TagVO'
 import ErrorConst from 'socialuni-constant/constant/ErrorConst'
 import ResultRO from 'socialuni-api-base/src/model/social/ResultRO'
 import TagAPI from "socialuni-community-api/src/api/TagAPI";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 
 @Component({})
 export default class SocialTagAdd extends Vue {
@@ -64,7 +64,7 @@ export default class SocialTagAdd extends Vue {
       this.checkTag(res.data)
     }).catch((res: ResultRO<TagVO>) => {
       if (res.errorCode === ErrorConst.custom) {
-        SocialuniAppUtil.AlertUtil.confirm(res.errorMsg, '使用').then(() => {
+        QingAppUtil.AlertUtil.confirm(res.errorMsg, '使用').then(() => {
           this.checkTag(res.data)
         })
       }

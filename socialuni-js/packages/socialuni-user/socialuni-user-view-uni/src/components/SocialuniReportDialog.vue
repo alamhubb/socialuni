@@ -32,7 +32,7 @@ import ReportType from "socialuni-constant/constant/ReportType";
 import ReportAddVO from "socialuni-api-base/src/model/report/ReportAddVO";
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import ReportAPI from "socialuni-app-api/src/api/ReportAPI";
 import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
 
@@ -75,10 +75,10 @@ export default class SocialuniReportDialog extends Vue {
         const reportAdd: ReportAddVO = new ReportAddVO(this.reportContentType, this.reportType, this.reportContent)
         reportAdd.contentId = this.reportContentId
         if (ReportType.other === this.reportType && !this.reportContent) {
-            return SocialuniAppUtil.AlertUtil.hint('选择其他违规时，请您补充观点')
+            return QingAppUtil.AlertUtil.hint('选择其他违规时，请您补充观点')
         }
         await ReportAPI.addReportAPI(reportAdd)
-        SocialuniAppUtil.AlertUtil.hint('举报成功')
+        QingAppUtil.AlertUtil.hint('举报成功')
         this.closeDialog()
         this.deleteContent()
     }

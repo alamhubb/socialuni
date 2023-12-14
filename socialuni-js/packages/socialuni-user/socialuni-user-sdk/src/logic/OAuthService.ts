@@ -2,7 +2,7 @@ import ResultRO from "socialuni-api-base/src/model/social/ResultRO";
 import SocialLoginRO from "socialuni-api-base/src/model/social/SocialLoginRO";
 import UniUserInfoRO from "socialuni-api-base/src/model/login/UniUserInfoRO";
 import {socialuniUserModule} from "../store/SocialuniUserModule";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import UniProviderLoginQO from "socialuni-api-base/src/model/login/UniProviderLoginQO";
 import LoginProvider from "socialuni-constant/constant/LoginProvider";
 import LoginAPI from "socialuni-user-api/src/api/LoginAPI";
@@ -24,7 +24,7 @@ export default class OAuthService {
           } else {
             await OAuthService.oAuthUserPhoneNumLogin(authData)
           }
-          SocialuniAppUtil.ToastUtil.toastLong('授权成功')
+          QingAppUtil.ToastUtil.toastLong('授权成功')
           // PageUtil.toMinePage()
         }
       }

@@ -32,7 +32,7 @@ import {onLoad, onReady} from "@dcloudio/uni-app";
 import QNavbar from 'socialuni-ui-uni/src/components/QNavbar/QNavbar.vue'
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import PagePath from "socialuni-constant/constant/PagePath";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 
 @Component({
   components: {QNavbar}
@@ -79,7 +79,7 @@ export default class WebBrowserPage extends Vue {
 
 
   showShare() {
-    SocialuniAppUtil.RouterUtil.navigateTo(PagePath.share, {url: this.webUrl})
+    QingAppUtil.RouterUtil.navigateTo(PagePath.share, {url: this.webUrl})
   }
 }
 </script>

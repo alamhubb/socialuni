@@ -9,7 +9,7 @@ import UserService from "./logic/UserService";
 import UserMsgUtil from "./util/UserMsgUtil";
 import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
 import JsonUtil from "qing-util/src/util/JsonUtil";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil";
 import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
 import {App, defineComponent} from "vue";
@@ -18,7 +18,7 @@ import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
 import SocialuniUserEventConst from "./constant/SocialuniUserEventConst";
 import UserPageUtil from "./util/UserPageUtil";
-import CommonEventUtil from "socialuni-native-util/src/util/CommonEventUtil";
+import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
 
 
 class SocialuniUserPlugin implements SocialuniPlugin {
@@ -61,7 +61,7 @@ class SocialuniUserPlugin implements SocialuniPlugin {
         // statusCode: 607
         // statusText: "request:ok"
 
-        SocialuniAppUtil.NativeUtil.hideLoading()
+        QingAppUtil.NativeUtil.hideLoading()
         console.log(error)
         //第一步，先判断 有没有error
         //判断data类型，如果没类型，直接走
@@ -84,24 +84,24 @@ class SocialuniUserPlugin implements SocialuniPlugin {
                         // 理论上不需要，因为token不会失效，也不会错误
                         // 已知可能，切换环境导致token不同
                         UserService.clearUserInfo()
-                        SocialuniAppUtil.AlertUtil.hint(errorMsg)
+                        QingAppUtil.AlertUtil.hint(errorMsg)
                         break
                     case ErrorConst.custom:
                         break
                     default:
-                        SocialuniAppUtil.AlertUtil.hint(errorMsg)
-                        SocialuniAppAPI.sendErrorLogAPI(error.config.url, SocialuniAppUtil.RouterUtil.getCurrentPageURI(), errorMsg)
+                        QingAppUtil.AlertUtil.hint(errorMsg)
+                        SocialuniAppAPI.sendErrorLogAPI(error.config.url, QingAppUtil.RouterUtil.getCurrentPageURI(), errorMsg)
                         break
                 }
             } else {
                 MsgUtil.systemErrorMsg()
-                SocialuniAppAPI.sendErrorLogAPI(error.config.url, SocialuniAppUtil.RouterUtil.getCurrentPageURI(), result)
+                SocialuniAppAPI.sendErrorLogAPI(error.config.url, QingAppUtil.RouterUtil.getCurrentPageURI(), result)
             }
             // 返回接口返回的错误信息
             return result
         }
         MsgUtil.systemErrorMsg()
-        SocialuniAppAPI.sendErrorLogAPI(error.config.url, SocialuniAppUtil.RouterUtil.getCurrentPageURI(), JsonUtil.toJson(response))
+        SocialuniAppAPI.sendErrorLogAPI(error.config.url, QingAppUtil.RouterUtil.getCurrentPageURI(), JsonUtil.toJson(response))
         return error
     }
 }

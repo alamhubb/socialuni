@@ -8,13 +8,13 @@ import MessageAPI from "socialuni-im-api/src/api/MessageAPI";
 import CommonUtil from "qing-util/src/util/CommonUtil";
 import Arrays from "qing-util/src/util/Arrays";
 import ImPageUtil from "../util/ImPageUtil";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import UserCheckUtil from "socialuni-user-sdk/src/util/UserCheckUtil";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 import {MessageStatus} from "socialuni-constant/constant/openIm/OpenImMessageType";
 import SocialuniImMineUserDetailRO from "socialuni-im-api/src/model/RO/SocialuniImMineUserDetailRO";
 import SocialuniImUserAPI from "socialuni-im-api/src/api/SocialuniImUserAPI";
-import RouterUtil from "socialuni-native-h5/src/util/RouterUtil";
+import RouterUtil from "qingjs-h5/src/util/RouterUtil";
 import ImPagePath from "../constant/ImPagePath";
 
 class SocialuniChatModule {
@@ -201,7 +201,7 @@ class SocialuniChatModule {
         console.log(789789798)
         console.log(ImPagePath)
         console.log(ImPagePath.imPagePath)
-        if (SocialuniAppUtil.RouterUtil.getCurrentPageURI() === ImPagePath.imPagePath.message && this._chatId === newChat.id) {
+        if (QingAppUtil.RouterUtil.getCurrentPageURI() === ImPagePath.imPagePath.message && this._chatId === newChat.id) {
             // 则直接往msg增加消息
             // 前台将消息改为已读,修改时间使用后台的就行
             this.readChatAction(newChat.messages)
@@ -237,7 +237,7 @@ class SocialuniChatModule {
         // this.setChatId(chatId)
         // this.readChatAction(this.chat)
         if (!receiveId) {
-            SocialuniAppUtil.AlertUtil.error('缺少会话信息')
+            QingAppUtil.AlertUtil.error('缺少会话信息')
         }
         /*const chat = new SocialuniChatRO()
         chat.receiveId = receiveId

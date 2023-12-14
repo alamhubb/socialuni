@@ -316,7 +316,7 @@ import MessageAPI from "socialuni-im-api/src/api/MessageAPI";
 import MessageVO from "socialuni-im-api/src/model/RO/MessageVO";
 import NodeInfo = UniNamespace.NodeInfo;
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
-import SocialuniAppUtil from 'socialuni-native-util/src/util/SocialuniAppUtil'
+import QingAppUtil from 'qingjs/src/util/QingAppUtil'
 import MsgUtil from 'socialuni-app-sdk/src/util/MsgUtil'
 import UserPageUtil from 'socialuni-user-sdk/src/util/UserPageUtil'
 import DomFile from 'socialuni-app-sdk/src/model/DomFile'
@@ -500,7 +500,7 @@ export default class MessageView extends Vue {
         }
 
         //调用相册api，可选择拍照和引用相册
-        SocialuniAppUtil.NativeUtil.actionSheet(itemList).then((index: number) => {
+        QingAppUtil.NativeUtil.actionSheet(itemList).then((index: number) => {
             switch (itemList[index]) {
                 case '图片':
                     that.chooseImage();
@@ -509,7 +509,7 @@ export default class MessageView extends Vue {
                     that.chooseVideo();
                     break;
                 case '录音':
-                    SocialuniAppUtil.AlertUtil.error('暂不支持,开发中');
+                    QingAppUtil.AlertUtil.error('暂不支持,开发中');
                     break;
                 case '删除对方聊天记录':
                     socialuniChatModule.pushCustomMessage(socialuniUserModule.userId, "{}", "发送删除对方聊天记录");
@@ -526,7 +526,7 @@ export default class MessageView extends Vue {
         //获取cos认证信息
         const cosAuthRO: CosAuthRO = await CosService.getCosAuthRO()
         //获取cos认证信息
-        const imgFiles: DomFile[] = await SocialuniAppUtil.NativeUtil.chooseVideo();
+        const imgFiles: DomFile[] = await QingAppUtil.NativeUtil.chooseVideo();
 
         if (cosAuthRO) {
             imgFiles.forEach(item => {
@@ -541,7 +541,7 @@ export default class MessageView extends Vue {
             });
         } else {
             SocialuniAppAPI.sendErrorLogAPI(null, '用户发表动态失败，未获取上传图片所需要的认证信息')
-            SocialuniAppUtil.AlertUtil.error(AppMsg.uploadFailMsg)
+            QingAppUtil.AlertUtil.error(AppMsg.uploadFailMsg)
         }
     }
 
@@ -551,7 +551,7 @@ export default class MessageView extends Vue {
     async chooseImage() {
         //获取cos认证信息
         const cosAuthRO: CosAuthRO = await CosService.getCosAuthRO()
-        const imgFiles: DomFile[] = await SocialuniAppUtil.NativeUtil.chooseImage(1)
+        const imgFiles: DomFile[] = await QingAppUtil.NativeUtil.chooseImage(1)
         //  this.showImgFiles.push(...imgFiles)
         if (cosAuthRO) {
             imgFiles.forEach(item => {
@@ -570,7 +570,7 @@ export default class MessageView extends Vue {
             });
         } else {
             SocialuniAppAPI.sendErrorLogAPI(null, '用户发表动态失败，未获取上传图片所需要的认证信息')
-            SocialuniAppUtil.AlertUtil.error(AppMsg.uploadFailMsg)
+            QingAppUtil.AlertUtil.error(AppMsg.uploadFailMsg)
         }
     }
 
@@ -579,7 +579,7 @@ export default class MessageView extends Vue {
         if (this.mineUser.type === UserType.systemUser) {
             this.deleteMsgAction(this.curMsg)
         } else {
-            SocialuniAppUtil.AlertUtil.confirm('是否确定删除此条消息，此操作无法恢复').then(() => {
+            QingAppUtil.AlertUtil.confirm('是否确定删除此条消息，此操作无法恢复').then(() => {
                 this.deleteMsgAction(msg)
             })
         }
@@ -719,7 +719,7 @@ export default class MessageView extends Vue {
     }
 
     copyText() {
-        SocialuniAppUtil.NativeUtil.textCopy(this.message.content)
+        QingAppUtil.NativeUtil.textCopy(this.message.content)
         this.closeMessageMoreDialog()
         this.initChooseCommentData()
     }
@@ -748,7 +748,7 @@ export default class MessageView extends Vue {
     openReportDialog() {
 
         this.closeMessageMoreDialog()
-        SocialuniAppUtil.AlertUtil.error('暂不支持,开发中');
+        QingAppUtil.AlertUtil.error('暂不支持,开发中');
         console.log('-----举报--openReportDialog-------')
         // this.$refs.reportDialog.openReport()
     }
@@ -773,7 +773,7 @@ export default class MessageView extends Vue {
                         await this.openChatAndPrompt('会话未开启，是否消耗10个贝壳开启与 ' + this.chat.nickname + ' 的对话，并给对方发送消息：' + content, content)
                         //需要充值提示
                     } else {
-                        await SocialuniAppUtil.AlertUtil.confirm('会话未开启，您没有贝壳了，是否直接使用现金支付开启开启与 ' + this.chat.nickname + ' 的对话，并给对方发送消息：' + content, content)
+                        await QingAppUtil.AlertUtil.confirm('会话未开启，您没有贝壳了，是否直接使用现金支付开启开启与 ' + this.chat.nickname + ' 的对话，并给对方发送消息：' + content, content)
                         const provider = socialuniSystemModule.isMp ? socialuniSystemModule.provider : SocialuniProviderType.wx
                         try {
                             // await PlatformUtils.payCoin(1)
@@ -793,7 +793,7 @@ export default class MessageView extends Vue {
                 throw Error(e)
             }
         } else {
-            await SocialuniAppUtil.ToastUtil.toast('会话开启中，请稍等')
+            await QingAppUtil.ToastUtil.toast('会话开启中，请稍等')
         }
         throw Error()
     }
@@ -808,7 +808,7 @@ export default class MessageView extends Vue {
 
     //校验已通过，最后一个确认， 是否确认开启
     openChatAndPrompt(hintMsg: string, content: string) {
-        return SocialuniAppUtil.AlertUtil.confirm(hintMsg).then(() => {
+        return QingAppUtil.AlertUtil.confirm(hintMsg).then(() => {
             //校验了有用户后清空消息
             this.msgContent = ''
             return socialuniChatModule.openChatAction(content)
@@ -821,7 +821,7 @@ export default class MessageView extends Vue {
     }
 
     goBack() {
-        SocialuniAppUtil.RouterUtil.goBack()
+        QingAppUtil.RouterUtil.goBack()
     }
 }
 </script>

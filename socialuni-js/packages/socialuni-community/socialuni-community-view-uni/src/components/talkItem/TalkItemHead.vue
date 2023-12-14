@@ -97,7 +97,7 @@ import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI"
 import FollowAPI from "socialuni-community-api/src/api/FollowAPI"
 import SocialuniCommonStatus from 'socialuni-constant/constant/status/SocialuniCommonStatus'
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import UserPagePath from "socialuni-user-sdk/src/constant/UserPagePath";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
@@ -128,7 +128,7 @@ export default class TalkItemHead extends Vue {
   SocialuniCommonStatus = SocialuniCommonStatus
 
   created() {
-    if (SocialuniAppUtil.RouterUtil.getCurrentPageURI() === UserPagePath.userDetail) {
+    if (QingAppUtil.RouterUtil.getCurrentPageURI() === UserPagePath.userDetail) {
       this.isUserDetail = true
     }
     this.updateTalk()
@@ -152,7 +152,7 @@ export default class TalkItemHead extends Vue {
   }
 
   hintJusticeInfo() {
-    SocialuniAppUtil.ToastUtil.toastLong('正义值，正确举报会增加正义值')
+    QingAppUtil.ToastUtil.toastLong('正义值，正确举报会增加正义值')
   }
 
   // 自己不为null，且是自己
@@ -161,16 +161,16 @@ export default class TalkItemHead extends Vue {
   }
 
   toUserDetailVue() {
-    if (SocialuniAppUtil.RouterUtil.getCurrentPageURI() !== UserPagePath.userDetail) {
+    if (QingAppUtil.RouterUtil.getCurrentPageURI() !== UserPagePath.userDetail) {
       UserPageUtil.toUserDetail(this.talk.user.id)
     }
   }
 
   confirmDeleteTalk() {
-    SocialuniAppUtil.AlertUtil.confirm('是否确定删除此条动态，此操作无法恢复').then(() => {
+    QingAppUtil.AlertUtil.confirm('是否确定删除此条动态，此操作无法恢复').then(() => {
       this.$emit('deleteTalk', this.talk.id)
       SocialuniTalkAPI.deleteTalkAPI(this.talk.id).then(() => {
-        SocialuniAppUtil.ToastUtil.toast('删除成功')
+        QingAppUtil.ToastUtil.toast('删除成功')
       })
     })
   }
@@ -184,7 +184,7 @@ export default class TalkItemHead extends Vue {
       if (!this.followBtnDisabled) {
         const followAdd: FollowAddVO = new FollowAddVO(this.talk.user.id)
         if (this.talk.hasFollowed) {
-          SocialuniAppUtil.AlertUtil.confirm('是否取消关注用户：' + this.talk.user.nickname).then(() => {
+          QingAppUtil.AlertUtil.confirm('是否取消关注用户：' + this.talk.user.nickname).then(() => {
             this.followBtnDisabled = true
             this.talk.hasFollowed = false
             FollowAPI.cancelFollowAPI(followAdd).finally(() => {

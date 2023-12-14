@@ -1,7 +1,7 @@
 import SocialPhoneNumLoginQO from "socialuni-api-base/src/model/phone/SocialPhoneNumLoginQO";
 import NumberUtil from "qing-util/src/util/NumberUtil";
 import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import SocialuniLoginService from "./SocialuniLoginService";
 import SocialuniViewService from "socialuni/src/interface/SocialuniViewService";
 import {ComponentInternalInstance, nextTick} from "vue";
@@ -127,22 +127,22 @@ export default class SocialuniLoginViewService extends SocialuniViewService<Soci
     // 手机号登陆和手机号绑定
     async handleLogin() {
         if (this.bindBtnDisabled) {
-            return SocialuniAppUtil.ToastUtil.warning('正在登陆中，请勿重复点击')
+            return QingAppUtil.ToastUtil.warning('正在登陆中，请勿重复点击')
         }
         // 再次校验
         if (!this.phoneNumberRight) {
-            return SocialuniAppUtil.ToastUtil.error('请输入正确的手机号')
+            return QingAppUtil.ToastUtil.error('请输入正确的手机号')
         }
         const passwordError = this.passwordError
         if (!!passwordError) {
-            return SocialuniAppUtil.ToastUtil.error(passwordError)
+            return QingAppUtil.ToastUtil.error(passwordError)
         }
         //未注册
         if (!this.hasPassword && !this.authCodeRight) {
-            return SocialuniAppUtil.ToastUtil.error('请输入正确的验证码')
+            return QingAppUtil.ToastUtil.error('请输入正确的验证码')
         }
         if (!this.contractChecked) {
-            return SocialuniAppUtil.ToastUtil.warning('请仔细阅读用户协议、隐私政策等内容后勾选同意')
+            return QingAppUtil.ToastUtil.warning('请仔细阅读用户协议、隐私政策等内容后勾选同意')
         }
         this.bindBtnDisabled = true
 
@@ -167,10 +167,10 @@ export default class SocialuniLoginViewService extends SocialuniViewService<Soci
     sendCodeClick() {
         console.log(123)
         if (!this.loginUser.phoneNum) {
-            return SocialuniAppUtil.ToastUtil.error('请输入正确的手机号')
+            return QingAppUtil.ToastUtil.error('请输入正确的手机号')
         }
         if (this.countDown) {
-            return SocialuniAppUtil.ToastUtil.error('验证码发送频繁，请等待')
+            return QingAppUtil.ToastUtil.error('验证码发送频繁，请等待')
         }
 
         this.loginUser.authCode = ''
@@ -190,7 +190,7 @@ export default class SocialuniLoginViewService extends SocialuniViewService<Soci
         // 如果怕太频繁，就显示相同手机号每天只能发送几次，一小时内只能5次
         PhoneAPI.sendAuthCodeAPI(this.loginUser.phoneNum).then(() => {
             // 提示验证码发送成功
-            SocialuniAppUtil.ToastUtil.success('验证码发送成功')
+            QingAppUtil.ToastUtil.success('验证码发送成功')
         })
     }
 }

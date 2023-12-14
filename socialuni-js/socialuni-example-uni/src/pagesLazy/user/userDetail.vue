@@ -35,7 +35,7 @@ import QButton from "socialuni-ui-uni/src/components/QButton/QButton.vue";
 import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue";
 import {Component, Vue} from "vue-facing-decorator";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import SocialuniUserDetailView from "socialuni-user-view-uni/src/views/user/SocialuniUserDetailView.vue";
 import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
 import {socialuniUserDetailViewService} from "socialuni-user-sdk/src/logic/SocialuniUserDetailViewService";
@@ -63,7 +63,7 @@ export default class UserDetailPage extends Vue {
    * 从好友列表中删除用户。
    */
   async deleteFriend() {
-    SocialuniAppUtil.AlertUtil.confirm('是否确认解除好友关系').then(async () => {
+    QingAppUtil.AlertUtil.confirm('是否确认解除好友关系').then(async () => {
       /*(await socialChatModule.openIm()).deleteFriend(socialuniUserDetailViewService.user.id).then(({data}) => {
           console.log('deleteFriend', data)
           SocialuniAppUtil.ToastUtil.toast('成功解除好友关系')

@@ -2,7 +2,7 @@ import AppConfig from "socialuni-constant/constant/AppConfig";
 import UserPayResultVO from "socialuni-api-base/src/model/user/UserPayResultVO";
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import PlatformType from "socialuni-constant/constant/PlatformType";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 
 export default class WxUtils {
     static subscribeAppMsg(tmplIds: string[]) {
@@ -22,7 +22,7 @@ export default class WxUtils {
     }
 
     static createRewardedVideoAd() {
-        return SocialuniAppUtil.NativeUtil.createRewardedVideoAd(AppConfig.wx_award_ad_id)
+        return QingAppUtil.NativeUtil.createRewardedVideoAd(AppConfig.wx_award_ad_id)
     }
 
     static createInterstitialAd() {

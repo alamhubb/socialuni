@@ -15,7 +15,7 @@ import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserMod
 import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
 import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil";
 import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import TalkFilterUtil from "../util/TalkFilterUtil";
 import TalkVueUtil from "../util/TalkVueUtil";
 
@@ -257,10 +257,10 @@ this.setCircleName(null)
         //缓存记录本次推出时的默认值
         // TalkVueUtil.setTalkTabsAll(talkTabs, talkTabIndex, talkTabType)
         if (talkTabs.length) {
-           SocialuniAppUtil.StorageUtil.setObj(TalkVueUtil.TalkTabsKey, talkTabs)
+           QingAppUtil.StorageUtil.setObj(TalkVueUtil.TalkTabsKey, talkTabs)
         }
-        SocialuniAppUtil.StorageUtil.setObj(TalkVueUtil.talkTabIndexKey, talkTabIndex)
-        SocialuniAppUtil.StorageUtil.setObj(TalkVueUtil.talkTabTypeKey, talkTabType)
+        QingAppUtil.StorageUtil.setObj(TalkVueUtil.talkTabIndexKey, talkTabIndex)
+        QingAppUtil.StorageUtil.setObj(TalkVueUtil.talkTabTypeKey, talkTabType)
     }
 
     get curTab() {

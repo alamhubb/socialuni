@@ -84,7 +84,7 @@ import {Component, Vue} from 'vue-facing-decorator'
 import SDialog from "socialuni-ui-h5/src/components/SComponents/SDialog.vue";
 import SocialuniUserEditDialog from "@/views/user/SocialuniUserEditDialog.vue";
 import SocialuniUserEventConst from "socialuni-user-sdk/src/constant/SocialuniUserEventConst";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import CosService from "socialuni-app-sdk/src/util/CosService";
 import type DomFile from "socialuni-app-sdk/src/model/DomFile";
 import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
@@ -96,7 +96,7 @@ import ImgUtil from "qing-util/src/util/ImgUtil";
 import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
 import {ArrowDown, Tools} from "@element-plus/icons-vue";
 import SocialuniLoginView from "socialuni-user-view-h5/src/views/SocialuniLoginView.vue";
-import CommonEventUtil from "socialuni-native-util/src/util/CommonEventUtil";
+import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
 import UserService from "socialuni-user-sdk/src/logic/UserService";
 
 @Component({
@@ -133,7 +133,7 @@ export default class NavBar extends Vue {
     }
 
     loginSuccess() {
-        SocialuniAppUtil.ToastUtil.success('登录成功')
+        QingAppUtil.ToastUtil.success('登录成功')
         this.$refs.loginDialog.close()
     }
 
@@ -151,8 +151,8 @@ export default class NavBar extends Vue {
             console.log(cosAuthRO)
             console.log(456465)
             console.log(cosAuthRO)
-            const imgFiles: DomFile[] = await SocialuniAppUtil.NativeUtil.chooseImage(1)
-            SocialuniAppUtil.NativeUtil.showLoading('上传中')
+            const imgFiles: DomFile[] = await QingAppUtil.NativeUtil.chooseImage(1)
+            QingAppUtil.NativeUtil.showLoading('上传中')
             const imgFile: DomFile = imgFiles[0]
             imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src
             const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO), SocialuniMineUserAPI.addUserAvatarImgAPI(new ImgAddQO(imgFile))])
@@ -160,7 +160,7 @@ export default class NavBar extends Vue {
         } catch (e) {
             console.error(e)
         } finally {
-            SocialuniAppUtil.NativeUtil.hideLoading()
+            QingAppUtil.NativeUtil.hideLoading()
         }
     }
 
@@ -179,7 +179,7 @@ export default class NavBar extends Vue {
         } catch (e) {
             console.error(e)
         } finally {
-            SocialuniAppUtil.NativeUtil.hideLoading()
+            QingAppUtil.NativeUtil.hideLoading()
         }
     }
 

@@ -31,7 +31,7 @@ import SSwitch from "socialuni-ui-uni/src/components/SSwitch.vue";
 import SocialuniUserExpandAPI from "socialuni-user-api/src/api/SocialuniUserExpandAPI";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 
 @Component({
   components: {
@@ -64,7 +64,7 @@ export default class UserContactInfoEditDialog extends Vue {
 
   async confirm() {
     if (!this.contactInfoValue) {
-      SocialuniAppUtil.ToastUtil.error('联系方式不能为空')
+      QingAppUtil.ToastUtil.error('联系方式不能为空')
     }
     try {
       let msg = '是否确认将联系方式设置为' + this.contactInfoValue
@@ -73,7 +73,7 @@ export default class UserContactInfoEditDialog extends Vue {
       } else {
         msg += '，并设置为他人不可获取'
       }
-      await SocialuniAppUtil.AlertUtil.confirm(msg)
+      await QingAppUtil.AlertUtil.confirm(msg)
       this.$refs.dialog.close()
       const res = await SocialuniUserExpandAPI.editUserContactInfoAPI(this.contactInfoValue, this.openContactInfo)
       socialuniUserModule.setUser(res.data)

@@ -3,7 +3,7 @@ import Constants from "socialuni-constant/constant/Constant";
 import SocialPhoneNumLoginQO from "socialuni-api-base/src/model/phone/SocialPhoneNumLoginQO";
 import LoginAPI from "socialuni-user-api/src/api/LoginAPI";
 import UniUserUtil from "../util/UniUserUtil";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import UserService from "./UserService";
 
 export default class LoginService {
@@ -13,7 +13,7 @@ export default class LoginService {
     static async providerLogin(provider: string, result: any) {
         if (socialuniSystemModule.isMpQQ) {
             if (result.detail.errMsg !== Constants.loginSuccess) {
-                return SocialuniAppUtil.ToastUtil.toast('您取消了登录')
+                return QingAppUtil.ToastUtil.toast('您取消了登录')
             }
         }
         //一行代码就可以获取登录所需要的信息, 还可以配合后台使用，一键登录，记住用户

@@ -1,6 +1,6 @@
 import CommunityPagePath from "../constant/CommunityPagePath";
 import UserCheckUtil from "socialuni-user-sdk/src/util/UserCheckUtil";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 
 export default class CommunityPageUtil {
     static goHome(): void {
@@ -8,24 +8,24 @@ export default class CommunityPageUtil {
     }
 
     static toTalkDetail(talkId: string) {
-        SocialuniAppUtil.RouterUtil.navigateTo(CommunityPagePath.talkDetail + '?talkId=' + talkId)
+        QingAppUtil.RouterUtil.navigateTo(CommunityPagePath.talkDetail + '?talkId=' + talkId)
     }
 
     static toTalkAddPage() {
         UserCheckUtil.checkUserBindSchool()
-        SocialuniAppUtil.RouterUtil.navigateTo(CommunityPagePath.talkAdd)
+        QingAppUtil.RouterUtil.navigateTo(CommunityPagePath.talkAdd)
     }
 
     static toTalkPage() {
-        SocialuniAppUtil.RouterUtil.switchTab(CommunityPagePath.talk)
+        QingAppUtil.RouterUtil.switchTab(CommunityPagePath.talk)
     }
 
     static reLaunchTalkPage() {
-        SocialuniAppUtil.RouterUtil.reLaunch(CommunityPagePath.talk + '?load=true')
+        QingAppUtil.RouterUtil.reLaunch(CommunityPagePath.talk + '?load=true')
     }
 
 
     static toNotifyPage() {
-        SocialuniAppUtil.RouterUtil.switchTab(CommunityPagePath.notify)
+        QingAppUtil.RouterUtil.switchTab(CommunityPagePath.notify)
     }
 }

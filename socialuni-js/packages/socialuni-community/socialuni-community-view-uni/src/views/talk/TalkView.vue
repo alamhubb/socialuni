@@ -71,7 +71,7 @@ import {socialNotifyModule} from "socialuni-community-sdk/src/store/SocialNotify
 import {socialAppModule} from "socialuni-app-sdk/src/store/SocialAppModule";
 import {socialLocationModule} from "socialuni-community-sdk/src/store/SocialLocationModule";
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import MsgInput from "../../components/MsgInput.vue";
 import {getCurrentInstance} from "vue";
 
@@ -154,7 +154,7 @@ export default class TalkView extends Vue {
 
   // life
   mounted() {
-    SocialuniAppUtil.NativeUtil.showShareMenu()
+    QingAppUtil.NativeUtil.showShareMenu()
     this.initQuery()
   }
 

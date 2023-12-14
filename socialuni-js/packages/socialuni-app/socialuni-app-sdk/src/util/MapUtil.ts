@@ -2,11 +2,11 @@ import {QQMapResult} from "socialuni-api-base/src/model/location/QQMapResult";
 import LocationQueryQO from "socialuni-api-base/src/model/location/LocationQueryQO";
 import ResultRO from "socialuni-api-base/src/model/social/ResultRO";
 import SocialuniLocationAPI from "socialuni-community-api/src/api/SocialuniLocationAPI";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 
 export default class MapUtil {
     static async getLocationBySdk(): Promise<unknown> {
-        return SocialuniAppUtil.NativeUtil.getLocation()
+        return QingAppUtil.NativeUtil.getLocation()
     }
 
     static getLocationByWeb(): Promise<QQMapResult> {

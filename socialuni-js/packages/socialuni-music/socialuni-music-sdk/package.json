@@ -10,7 +10,7 @@
     "agora-rtc-sdk-ng": "^4.19.3",
     "socialuni": "^0.1.4-alpha.0",
     "socialuni-im-api": "^0.1.4-alpha.0",
-    "socialuni-native-util": "^0.1.4-alpha.0",
+    "qingjs": "^0.1.4-alpha.0",
     "socialuni-user-sdk": "^0.1.4-alpha.0",
     "vue": "3.2.41"
   },

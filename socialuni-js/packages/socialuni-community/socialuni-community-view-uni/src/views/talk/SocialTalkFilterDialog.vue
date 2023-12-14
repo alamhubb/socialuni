@@ -106,7 +106,7 @@ import TalkFilterUtil from "socialuni-community-sdk/src/util/TalkFilterUtil";
 import TagVO from "socialuni-api-base/src/model/community/tag/TagVO";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 import SocialCircleRO from "socialuni-api-base/src/model/community/circle/SocialCircleRO";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 
 
 @Component({
@@ -232,7 +232,7 @@ export default class SocialTalkFilterDialog extends Vue {
   }
 
   async clearCheckedTags() {
-    await SocialuniAppUtil.AlertUtil.confirm('是否确认清空已选择的话题？')
+    await QingAppUtil.AlertUtil.confirm('是否确认清空已选择的话题？')
     this.checkedTags = []
   }
 

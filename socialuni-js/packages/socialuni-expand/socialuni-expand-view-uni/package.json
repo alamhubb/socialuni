@@ -12,7 +12,7 @@
     "@dcloudio/uni-ui": "^1.4.23",
     "socialuni": "^0.1.4-alpha.0",
     "socialuni-expand-api": "^0.1.4-alpha.0",
-    "socialuni-native-util": "^0.1.4-alpha.0",
+    "qingjs": "^0.1.4-alpha.0",
     "vue": "3.2.41"
   },
   "keywords": [],

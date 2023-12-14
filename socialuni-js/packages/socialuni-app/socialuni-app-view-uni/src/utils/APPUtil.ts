@@ -1,5 +1,5 @@
 import AppUpdateType from "socialuni-constant/constant/AppUpdateType";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
 import {socialuniConfigModule} from "../store/SocialuniConfigModule";
 
@@ -13,16 +13,16 @@ export default class APPUtil {
                 const updateHint = res.data.updateHint
                 if (AppUpdateType.install === updateType) {
                     const hint = updateHint || '应用有新版本需要安装，点击安装即可更新'
-                    SocialuniAppUtil.AlertUtil.confirm(hint, '安装').then(() => {
+                    QingAppUtil.AlertUtil.confirm(hint, '安装').then(() => {
                         plus.runtime.openURL(updateUrl)
                     })
                 } else if (AppUpdateType.hot === updateType) {
-                    SocialuniAppUtil.NativeUtil.install(updateUrl).then(() => {
-                        SocialuniAppUtil.AlertUtil.confirm('新版本更新成功，是否现在重启清池app', '重启', '稍后').then(() => {
+                    QingAppUtil.NativeUtil.install(updateUrl).then(() => {
+                        QingAppUtil.AlertUtil.confirm('新版本更新成功，是否现在重启清池app', '重启', '稍后').then(() => {
                             plus.runtime.restart()
                         })
                     }).catch(() => {
-                        SocialuniAppUtil.AlertUtil.hint('更新失败，' + socialuniConfigModule.appMoreConfig.errorMsgContactService)
+                        QingAppUtil.AlertUtil.hint('更新失败，' + socialuniConfigModule.appMoreConfig.errorMsgContactService)
                     })
                 }
             })

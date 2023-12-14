@@ -1,14 +1,14 @@
 import {socialuniTagModule} from "socialuni-community-sdk/src/store/SocialTagModule";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 
 export default class SocialCircleStorageUtil {
     static getMineCircleNamesKeyKey = 'mineCircleNamesKey'
 
     static saveCircleNames() {
-        SocialuniAppUtil.StorageUtil.set(SocialCircleStorageUtil.getMineCircleNamesKeyKey, socialuniTagModule.mineHistoryTagNames)
+        QingAppUtil.StorageUtil.set(SocialCircleStorageUtil.getMineCircleNamesKeyKey, socialuniTagModule.mineHistoryTagNames)
     }
 
     static getCircleNames(): string[] {
-        return SocialuniAppUtil.StorageUtil.get(SocialCircleStorageUtil.getMineCircleNamesKeyKey) || []
+        return QingAppUtil.StorageUtil.get(SocialCircleStorageUtil.getMineCircleNamesKeyKey) || []
     }
 }

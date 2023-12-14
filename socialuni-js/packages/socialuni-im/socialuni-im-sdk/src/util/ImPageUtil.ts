@@ -1,5 +1,5 @@
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
-import PlatformModuleLoadUtil from "socialuni-native-util/src/util/PlatformModuleLoadUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import PlatformModuleLoadUtil from "qingjs/src/util/PlatformModuleLoadUtil";
 import {SocialuniImPagePathInterface} from "../constant/SocialuniImPagePathInterface";
 
 export default class ImPageUtil {
@@ -10,15 +10,15 @@ export default class ImPageUtil {
     }
 
     static async toMessagePageByChatId(receiveId: string) {
-        SocialuniAppUtil.RouterUtil.navigateTo((await ImPageUtil.getImPagePath()).message + '?chatId=' + receiveId)
+        QingAppUtil.RouterUtil.navigateTo((await ImPageUtil.getImPagePath()).message + '?chatId=' + receiveId)
     }
 
     static async toChatFriend() {
-        SocialuniAppUtil.RouterUtil.navigateTo((await ImPageUtil.getImPagePath()).friend)
+        QingAppUtil.RouterUtil.navigateTo((await ImPageUtil.getImPagePath()).friend)
     }
 
     static async toFriendApply() {
-        SocialuniAppUtil.RouterUtil.navigateTo((await ImPageUtil.getImPagePath()).friendApply)
+        QingAppUtil.RouterUtil.navigateTo((await ImPageUtil.getImPagePath()).friendApply)
     }
 
 }

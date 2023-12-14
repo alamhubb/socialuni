@@ -3,7 +3,7 @@ import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import {QQMapResult} from "socialuni-api-base/src/model/location/QQMapResult";
 import {socialLocationModule} from "socialuni-community-sdk/src/store/SocialLocationModule";
 import LocationConst from "socialuni-constant/constant/community/LocationConst";
-import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import AppAuthUtil from "socialuni-user-sdk/src/util/AppAuthUtil";
 import MapUtil from "socialuni-app-sdk/src/util/MapUtil";
 
@@ -28,36 +28,36 @@ export default class LocationUtil {
     static readonly chinaDistrict: DistrictVO = chinaDistrict
 
     static openLocation() {
-        SocialuniAppUtil.StorageUtil.setObj(LocationUtil.openLocationKey, '1')
+        QingAppUtil.StorageUtil.setObj(LocationUtil.openLocationKey, '1')
     }
 
     static getOpenLocation() {
-        return !!SocialuniAppUtil.StorageUtil.get(LocationUtil.openLocationKey)
+        return !!QingAppUtil.StorageUtil.get(LocationUtil.openLocationKey)
     }
 
     static getLocation(): DistrictVO {
-        return SocialuniAppUtil.StorageUtil.getObj(LocationUtil.locationKey) || LocationUtil.chinaDistrict
+        return QingAppUtil.StorageUtil.getObj(LocationUtil.locationKey) || LocationUtil.chinaDistrict
     }
 
     static getCircleLocation(): DistrictVO {
-        return SocialuniAppUtil.StorageUtil.getObj(LocationUtil.circleLocationKey) || LocationUtil.chinaDistrict
+        return QingAppUtil.StorageUtil.getObj(LocationUtil.circleLocationKey) || LocationUtil.chinaDistrict
     }
 
     static setLocation(district: DistrictVO) {
-        SocialuniAppUtil.StorageUtil.setObj(LocationUtil.locationKey, district)
+        QingAppUtil.StorageUtil.setObj(LocationUtil.locationKey, district)
     }
 
     static setCircleLocation(district: DistrictVO) {
-        SocialuniAppUtil.StorageUtil.setObj(LocationUtil.circleLocationKey, district)
+        QingAppUtil.StorageUtil.setObj(LocationUtil.circleLocationKey, district)
     }
 
 
     static setFilterLocation(district: DistrictVO) {
-        SocialuniAppUtil.StorageUtil.setObj(LocationUtil.filterLocationKey, district)
+        QingAppUtil.StorageUtil.setObj(LocationUtil.filterLocationKey, district)
     }
 
     static getFilterLocation(): DistrictVO {
-        return SocialuniAppUtil.StorageUtil.getObj(LocationUtil.filterLocationKey) || LocationUtil.chinaDistrict
+        return QingAppUtil.StorageUtil.getObj(LocationUtil.filterLocationKey) || LocationUtil.chinaDistrict
     }
 
     //查询地理位置的功能，
