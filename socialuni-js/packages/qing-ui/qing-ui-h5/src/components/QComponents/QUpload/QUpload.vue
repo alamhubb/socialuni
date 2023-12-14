@@ -2,30 +2,37 @@
   <div class="flex-col">
     <div class="flex-none row-between-center">
       <div class="row-col-center">
+        <el-button v-if="onlyFolder" type="primary" size="mini" @click="uploadFolderLabelClick"
+                   :disabled="!canOperateByProgress">
+          {{ btnText }}
+          <el-icon class="ml-sm" :size="20">
+            <UploadFilled></UploadFilled>
+          </el-icon>
+          <i
+              class="el-icon-upload el-icon--right"></i></el-button>
         <el-dropdown
-            v-if="folder"
+            v-else-if="folder"
             size="small"
-            @command="dropdownCommand"
             :show-timeout="100"
             :hide-timeout="250"
         >
           <el-button type="primary" size="mini" :disabled="!canOperateByProgress">
             <i class="el-icon-upload2"></i>
-            上传
+            {{ btnText }}
           </el-button>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item :command="YUploadFileType.file">上传文件</el-dropdown-item>
-              <el-dropdown-item :command="YUploadFileType.folder">上传文件夹
-              </el-dropdown-item>
+              <el-dropdown-item @click="uploadFileLabelClick">上传文件</el-dropdown-item>
+              <el-dropdown-item @click="uploadFolderLabelClick">上传文件夹</el-dropdown-item>
             </el-dropdown-menu>
           </template>
         </el-dropdown>
         <el-button v-else type="primary" size="mini" @click="uploadFileLabelClick" :disabled="!canOperateByProgress">
-          上传<i
-            class="el-icon-upload el-icon--right"></i></el-button>
+          {{ btnText }}
+          <i
+              class="el-icon-upload el-icon--right"></i></el-button>
 
-        <div v-if="showFileList && modelValue" class="ml">文件总数：{{ modelValue.length }}</div>
+        <div v-if="showFileList && files" class="ml">文件总数：{{ files.length }}</div>
       </div>
 
       <el-button
@@ -103,9 +110,14 @@ import Arrays from "qing-util/src/util/Arrays";
 import ToastUtil from "qingjs-h5/src/util/ToastUtil";
 import ObjectUtil from "qing-util/src/util/ObjectUtil";
 import SocialuniAxios from "socialuni-api-base/src/SocialuniAxios";
+import {UploadFilled} from "@element-plus/icons-vue";
 
-@Component
 
+@Component({
+  components: {
+    UploadFilled
+  }
+})
 export default class QUpload extends Vue {
   $refs: {
     uploadFileLabel: HTMLLabelElement;
@@ -117,7 +129,9 @@ export default class QUpload extends Vue {
 
   @Model files!: DomFile[]
   @Prop({default: false, type: Boolean}) folder: boolean
+  @Prop({default: false, type: Boolean}) onlyFolder: boolean
   @Prop({default: true, type: Boolean}) showFileList: boolean
+  @Prop({default: '上传'}) btnText: string
   // 上传进度
   uploadPercent: UploadPercentageVO = new UploadPercentageVO()
 
