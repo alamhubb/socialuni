@@ -13,7 +13,7 @@
     "socialuni-app-sdk": "^0.1.4-alpha.0",
     "socialuni-constant": "^0.1.4-alpha.0",
     "socialuni-native-util": "^0.1.4-alpha.0",
-    "socialuni-scss": "^0.1.4-alpha.0",
+    "qing-scss": "^0.1.4-alpha.0",
     "socialuni-util": "^0.1.4-alpha.0"
   },
   "devDependencies": {

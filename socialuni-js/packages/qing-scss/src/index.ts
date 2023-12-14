@@ -1,9 +1,9 @@
 import "./styles/index.scss";
 
-const SocialuniScss = {
+const QingScss = {
     install() {
 
     }
 }
 
-export default SocialuniScss
+export default QingScss
