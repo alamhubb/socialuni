@@ -27,6 +27,7 @@
         <module>socialuni-sdk</module>
         <module>socialuni-web-sdk</module>
         <module>socialuni-music-sdk</module>
+        <module>socialuni-deploy-sdk</module>
         <module>socialuni-peiwan-sdk</module>
         <module>socialuni-common-sdk</module>
         <module>socialuni-tance-uni</module>
@@ -63,6 +64,11 @@
             <dependency>
                 <groupId>com.socialuni.social</groupId>
                 <artifactId>socialuni-music-sdk</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni.social</groupId>
+                <artifactId>socialuni-deploy-sdk</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>

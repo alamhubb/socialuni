@@ -229,6 +229,42 @@ public class SocialuniCommonRepository {
         return null;
     }
 
+    public <T extends SocialuniContentBaseDO> T findByUserIdAndCustomFieldAndStatus(Integer userId, String filedName, String fieldValue, String status, Class<T> tClass) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
+        Root<T> userInfo = criteriaQuery.from(tClass);
+
+        Predicate userIdPredicate = criteriaBuilder.equal(userInfo.get("userId"), userId);
+        Predicate beUserIdPredicate = criteriaBuilder.equal(userInfo.get(filedName), fieldValue);
+        Predicate statusPredicate = criteriaBuilder.equal(userInfo.get("status"), status);
+        criteriaQuery.where(userIdPredicate, beUserIdPredicate, statusPredicate);
+
+        List<T> list = entityManager.createQuery(criteriaQuery).setFirstResult(0).setMaxResults(1).getResultList();
+
+        if (list.size() > 0) {
+            return list.get(0);
+        }
+        return null;
+    }
+
+
+    public <T extends SocialuniContentBaseDO> T findByCustomFieldAndStatus(String filedName, String fieldValue, String status, Class<T> tClass) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
+        Root<T> userInfo = criteriaQuery.from(tClass);
+
+        Predicate beUserIdPredicate = criteriaBuilder.equal(userInfo.get(filedName), fieldValue);
+        Predicate statusPredicate = criteriaBuilder.equal(userInfo.get("status"), status);
+        criteriaQuery.where(beUserIdPredicate, statusPredicate);
+
+        List<T> list = entityManager.createQuery(criteriaQuery).setFirstResult(0).setMaxResults(1).getResultList();
+
+        if (list.size() > 0) {
+            return list.get(0);
+        }
+        return null;
+    }
+
     public <T extends SocialuniUserContactBaseDO> Long countByUserIdAndBeUserIdAndStatus(Integer userId, Integer beUserId, String status, Class<T> tClass) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
