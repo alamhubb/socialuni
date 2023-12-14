@@ -11,6 +11,7 @@ export default class DomFile {
   aspectRatio: number
   // quality 自己计算出来的压缩比
   quality: number
+  root: string
 
   // h5才有文件名称
   name: string

@@ -8,18 +8,22 @@
       <div class="h100p flex-col flex-1 bg-white pd">
         <!--          <vue-drag-resize>-->
         <div>
-          <el-form :model="formData" :rules="rules" label-position="top">
-            <el-form-item prop="projectName" label="项目名">
-              <el-input class="w300" v-model="formData.projectName" @change="checkProjectName"></el-input>
-            </el-form-item>
+          <el-form ref="form" :model="formData" :rules="rules" label-position="top">
+            <div class="row-col-end">
+              <el-form-item prop="projectName" label="项目名">
+                <el-input class="w300 mb-1" v-model="formData.projectName" @change="checkProjectName"></el-input>
+              </el-form-item>
+              <q-upload ref="upload" class="ml" only-folder v-model="formData.files" btn-text="选择项目"
+                        @change="upload">
+                <el-icon class="ml-xs" :size="16">
+                  <FolderOpened></FolderOpened>
+                </el-icon>
+              </q-upload>
+            </div>
             <el-form-item prop="mainFile" label="入口文件">
               <el-input class="w300 mr-sm" v-model="formData.mainFile" @change="checkProjectName"
                         :disabled="!editable"></el-input>
               <el-button @click="editable=!editable">{{ editable ? '取消编辑' : '编辑' }}</el-button>
-            </el-form-item>
-            <el-form-item label="" prop="files">
-              <q-upload ref="upload" class="w100p h50vh" only-folder v-model="formData.files"
-                        @change="upload"></q-upload>
             </el-form-item>
           </el-form>
 
@@ -81,7 +85,8 @@ import socialuniUserRequest from "socialuni-user-api/src/request/socialuniUserRe
 import SocialuniDeployAPI from "@/views/chat/SocialuniDeployAPI.ts";
 import RegConst from "qing-util/src/constant/RegConst.ts";
 import AlertUtil from "qingjs-h5/src/util/AlertUtil.ts";
-
+import {FolderOpened, UploadFilled} from "@element-plus/icons-vue";
+import {ElForm} from "element-plus";
 
 @Component({
   components: {
@@ -96,13 +101,14 @@ import AlertUtil from "qingjs-h5/src/util/AlertUtil.ts";
     MusicView,
     ChildCom,
     VueGoldenLayout,
-    VueGoldenLayoutRow
+    VueGoldenLayoutRow,
+    UploadFilled, FolderOpened
   }
 })
 export default class MessageView extends Vue {
-
   $refs: {
     upload: QUpload
+    form:Elform
   }
 
   projectNameCanUse = true
@@ -163,6 +169,10 @@ export default class MessageView extends Vue {
   }
 
   upload() {
+    console.log(this.formData.files)
+    console.log(this.formData.files[0].root)
+    this.formData.projectName = this.formData.files[0].root
+    this.$refs.form.validate()
     // this.$refs.upload.upload(socialuniUserRequest, 'upload/uploadFiles', {files: this.files})
   }
 

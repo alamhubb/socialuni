@@ -1,4 +1,4 @@
-import DomFile from '@/components/YEchoComponent/YUpload/DomFile'
+import DomFile from "./DomFile";
 
 export default class UploadFileVO {
   fileType: string = null

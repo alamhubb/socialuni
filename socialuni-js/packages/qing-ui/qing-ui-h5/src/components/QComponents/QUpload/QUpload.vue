@@ -5,9 +5,7 @@
         <el-button v-if="onlyFolder" type="primary" size="mini" @click="uploadFolderLabelClick"
                    :disabled="!canOperateByProgress">
           {{ btnText }}
-          <el-icon class="ml-sm" :size="20">
-            <UploadFilled></UploadFilled>
-          </el-icon>
+          <slot></slot>
           <i
               class="el-icon-upload el-icon--right"></i></el-button>
         <el-dropdown
@@ -18,7 +16,7 @@
         >
           <el-button type="primary" size="mini" :disabled="!canOperateByProgress">
             <i class="el-icon-upload2"></i>
-            {{ btnText }}
+            {{ btnText }}<slot></slot>
           </el-button>
           <template #dropdown>
             <el-dropdown-menu>
@@ -28,7 +26,7 @@
           </template>
         </el-dropdown>
         <el-button v-else type="primary" size="mini" @click="uploadFileLabelClick" :disabled="!canOperateByProgress">
-          {{ btnText }}
+          {{ btnText }}<slot></slot>
           <i
               class="el-icon-upload el-icon--right"></i></el-button>
 
@@ -110,12 +108,13 @@ import Arrays from "qing-util/src/util/Arrays";
 import ToastUtil from "qingjs-h5/src/util/ToastUtil";
 import ObjectUtil from "qing-util/src/util/ObjectUtil";
 import SocialuniAxios from "socialuni-api-base/src/SocialuniAxios";
-import {UploadFilled} from "@element-plus/icons-vue";
+import {UploadFilled,FolderOpened
+} from "@element-plus/icons-vue";
 
 
 @Component({
   components: {
-    UploadFilled
+    UploadFilled,FolderOpened
   }
 })
 export default class QUpload extends Vue {
@@ -130,7 +129,7 @@ export default class QUpload extends Vue {
   @Model files!: DomFile[]
   @Prop({default: false, type: Boolean}) folder: boolean
   @Prop({default: false, type: Boolean}) onlyFolder: boolean
-  @Prop({default: true, type: Boolean}) showFileList: boolean
+  @Prop({default: false, type: Boolean}) showFileList: boolean
   @Prop({default: '上传'}) btnText: string
   // 上传进度
   uploadPercent: UploadPercentageVO = new UploadPercentageVO()
@@ -225,6 +224,7 @@ export default class QUpload extends Vue {
     for (const file of target.files) {
       files.push(file)
     }
+    console.log(target.files)
     let filePath: string
     if (files.length) {
       // 用第一个路径就行，然后遍历
@@ -245,16 +245,20 @@ export default class QUpload extends Vue {
             filePathJoinAry.push(item + '/')
           }
         })
+        console.log(filePathJoinAry)
         // 翻转数组，从最长的开始校验
         filePathJoinAry.reverse()
         // 找到每个都包含的路径
-        filePath = filePathJoinAry.find(item => files.every(file => file.webkitRelativePath.includes(item)))
+        filePath = filePathJoinAry.find(item => files.every(file => {
+          file.root = item.substring(0, item.length - 1)
+          return file.webkitRelativePath.includes(item)
+        }))
         this.fileList.push(new UploadFileVO(YUploadFileType.folder, filePath, files))
       } else {
         // 文件形式
         for (const file of files) {
           // @ts-ignore
-          this.fileList.push(new UploadFileVO(YUploadFileType.file, file.name, file))
+          this.fileList.push(new UploadFileVO(YUploadFileType.file, file.name, [file]))
         }
       }
     }
