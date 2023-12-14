@@ -7,8 +7,6 @@ import "./styles/index.scss";
 
 const SocialuniUiH5 = {
     async install(app: App) {
-        console.log(app)
-        console.log('cheng gong shi yong')
         app.use(QingScss)
         app.use(ElementPlus, {
             locale: zhCn,

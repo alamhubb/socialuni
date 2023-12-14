@@ -71,8 +71,6 @@ const socialuniMusicPlugin: SocialuniPlugin = new SocialuniMusicPlugin()
 
 const SocialuniMusic = {
     async install(app: App) {
-        console.log('执行了添加插件')
-
         app.config.globalProperties.$socialuniMusicStore = socialuniMusicStore
         app.config.globalProperties.SocialuniMusicRoleId = SocialuniMusicRoleId
 

@@ -8,7 +8,7 @@
       <div class="h100p flex-col flex-1 bg-white">
         <!--          <vue-drag-resize>-->
         <div>
-          <q-upload></q-upload>
+          <q-upload folder></q-upload>
         </div>
       </div>
     </div>

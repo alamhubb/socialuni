@@ -3,28 +3,29 @@
     <div class="flex-none row-between-center">
       <div class="row-col-center">
         <el-dropdown
-          v-if="folder"
-          size="small"
-          @command="dropdownCommand"
-          :show-timeout="100"
-          :hide-timeout="250"
+            v-if="folder"
+            size="small"
+            @command="dropdownCommand"
+            :show-timeout="100"
+            :hide-timeout="250"
         >
-          <!--        @click="uploadFileLabelClick"-->
           <el-button type="primary" size="mini" :disabled="!canOperateByProgress">
             <i class="el-icon-upload2"></i>
             上传
           </el-button>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item :command="$const.YUploadFileType.file">上传文件</el-dropdown-item>
-            <el-dropdown-item :command="$const.YUploadFileType.folder">上传文件夹
-            </el-dropdown-item>
-          </el-dropdown-menu>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item :command="YUploadFileType.file">上传文件</el-dropdown-item>
+              <el-dropdown-item :command="YUploadFileType.folder">上传文件夹
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
         </el-dropdown>
         <el-button v-else type="primary" size="mini" @click="uploadFileLabelClick" :disabled="!canOperateByProgress">
           上传<i
           class="el-icon-upload el-icon--right"></i></el-button>
 
-        <div v-if="showFileList && files" class="ml">文件总数：{{ files.length }}</div>
+        <div v-if="showFileList && modelValue" class="ml">文件总数：{{ modelValue.length }}</div>
       </div>
 
       <el-button
@@ -51,7 +52,7 @@
     <div class="flex-1 overflow-auto mt-xs pr-sm" v-if='showFileList'>
       <div v-for="file in fileList" :key="file.name" class="bg-click text-ellipsis row-between-center px-xs">
         <div class="text-ellipsis">
-          <template v-if="file.fileType===$const.YUploadFileType.folder">
+          <template v-if="file.fileType===YUploadFileType.folder">
             <i class="el-icon-folder-opened"></i>
             {{ file.name }} <span class="ml-sm">(文件数量：{{ file.files.length }})</span>
           </template>
@@ -100,7 +101,8 @@ import YUploadFileType from "./YUploadFileType";
 import AlertUtil from "qingjs-h5/src/util/AlertUtil";
 import Arrays from "qing-util/src/util/Arrays";
 
-@Component({})
+@Component({
+})
 export default class QUpload extends Vue {
   $refs: {
     uploadFileLabel: HTMLLabelElement;
@@ -109,7 +111,8 @@ export default class QUpload extends Vue {
     folderInput: HTMLInputElement;
   }
 
-  @Model('change') readonly files!: DomFile[]
+
+  @Model() readonly modelValue!: DomFile[]
   @Prop({ default: false, type: Boolean }) folder: boolean
   @Prop({ default: true, type: Boolean }) showFileList: boolean
   // 上传进度
@@ -117,7 +120,17 @@ export default class QUpload extends Vue {
 
   fileList: UploadFileVO[] = []
 
-  @Watch('files')
+
+  get YUploadFileType() {
+    return YUploadFileType
+  }
+
+  // 为null或100可操作，否则代表上传中不可操作
+  get canOperateByProgress() {
+    return this.uploadPercent.uploadPercent === null || this.uploadPercent.uploadPercent === 100
+  }
+
+  @Watch('modelValue')
   filesWatch(files: []) {
     if (!files || !files.length) {
       this.clearFileList()
@@ -147,12 +160,8 @@ export default class QUpload extends Vue {
   @Emit()
   change() {
     const files = this.fileList.map(item => item.files).flat()
+    console.log(files)
     return files
-  }
-
-  // 为null或100可操作，否则代表上传中不可操作
-  get canOperateByProgress() {
-    return this.uploadPercent.uploadPercent === null || this.uploadPercent.uploadPercent === 100
   }
 
   clearFies() {

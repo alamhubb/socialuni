@@ -62,7 +62,6 @@ class SocialuniSystemModule {
 
     constructor() {
         try {
-            console.log(123123)
             if (uni) {
                 this.isUniApp = true
                 //设置平台
