@@ -8,24 +8,30 @@
       <div class="h100p flex-col flex-1 bg-white pd">
         <!--          <vue-drag-resize>-->
         <div>
-          <el-form ref="form" :model="formData" :rules="rules" label-position="top">
-            <div class="row-col-end">
-              <el-form-item prop="projectName" label="项目名">
-                <el-input class="w300 mb-1" v-model="formData.projectName" @change="checkProjectName"></el-input>
-              </el-form-item>
-              <q-upload ref="upload" class="ml" only-folder v-model="formData.files" btn-text="选择项目"
+          <div class="flex-row">
+            <div class="flex-1">
+              <el-form ref="form" :model="formData" :rules="rules" label-position="top">
+                <div class="row-col-end">
+                  <el-form-item prop="projectName" label="项目名">
+                    <el-input class="w300 mb-1" v-model="formData.projectName" @change="checkProjectName"></el-input>
+                  </el-form-item>
+                </div>
+                <el-form-item prop="mainFile" label="入口文件">
+                  <el-input class="w300 mr-sm" v-model="formData.mainFile" @change="checkProjectName"
+                            :disabled="!editable"></el-input>
+                  <el-button @click="editable=!editable">{{ editable ? '取消编辑' : '编辑' }}</el-button>
+                </el-form-item>
+              </el-form>
+            </div>
+            <div class="flex-1">
+              <q-upload ref="upload" class="ml mt-20" only-folder v-model="formData.files" btn-text="选择项目" show-file-list
                         @change="upload">
                 <el-icon class="ml-xs" :size="16">
                   <FolderOpened></FolderOpened>
                 </el-icon>
               </q-upload>
             </div>
-            <el-form-item prop="mainFile" label="入口文件">
-              <el-input class="w300 mr-sm" v-model="formData.mainFile" @change="checkProjectName"
-                        :disabled="!editable"></el-input>
-              <el-button @click="editable=!editable">{{ editable ? '取消编辑' : '编辑' }}</el-button>
-            </el-form-item>
-          </el-form>
+          </div>
 
           <div>
             <el-button type="primary" @click="deploy">部署</el-button>
