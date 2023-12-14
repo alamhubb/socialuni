@@ -81,7 +81,7 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-facing-decorator'
-import SDialog from "qing-ui-h5/src/components/QComponents/QDialog.vue";
+import QDialog from "qing-ui-h5/src/components/QComponents/QDialog.vue";
 import SocialuniUserEditDialog from "@/views/user/SocialuniUserEditDialog.vue";
 import SocialuniUserEventConst from "socialuni-user-sdk/src/constant/SocialuniUserEventConst";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
@@ -100,11 +100,11 @@ import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
 import UserService from "socialuni-user-sdk/src/logic/UserService";
 
 @Component({
-    components: {SocialuniUserEditDialog, Tools, SocialuniLoginView, SDialog, ArrowDown}
+    components: {SocialuniUserEditDialog, Tools, SocialuniLoginView, QDialog, ArrowDown}
 })
 export default class NavBar extends Vue {
     $refs: {
-        loginDialog: SDialog
+        loginDialog: QDialog
         userEditDialog: SocialuniUserEditDialog
     }
 
