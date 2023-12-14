@@ -42,8 +42,8 @@
 
 <script lang="ts">
 import {Emit, Component, Vue, Watch} from 'vue-facing-decorator'
-import SButton from "qing-ui-h5/src/components/QComponents/QButton.vue";
-import SDialog from "qing-ui-h5/src/components/QComponents/QDialog.vue";
+import QButton from "qing-ui-h5/src/components/QComponents/QButton.vue";
+import QDialog from "qing-ui-h5/src/components/QComponents/QDialog.vue";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 import type SocialuniMineUserRO from "socialuni-api-base/src/model/user/SocialuniMineUserRO";
 import type EnumStrVO from "socialuni-constant/constant/EnumStrVO";
@@ -62,7 +62,7 @@ import type DomFile from "qingjs/src/model/DomFile";
 import NativeUtil from "qingjs-h5/src/util/NativeUtil";
 
 @Component({
-    components: {SDialog, SButton}
+    components: {QDialog, QButton}
 })
 export default class SocialuniUserEditDialog extends Vue {
     $refs: {
