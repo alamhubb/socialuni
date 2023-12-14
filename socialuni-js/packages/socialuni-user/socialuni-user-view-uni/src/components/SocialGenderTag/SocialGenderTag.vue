@@ -18,8 +18,8 @@
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-facing-decorator'
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
-import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
-import STag from "socialuni-ui-uni/src/components/STag.vue";
+import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue";
+import STag from "qing-ui-uni/src/components/STag.vue";
 import UserUtil from "socialuni-user-sdk/src/util/UserUtil";
 
 @Component({

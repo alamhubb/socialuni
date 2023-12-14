@@ -23,14 +23,14 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-facing-decorator'
-import SDialog from "socialuni-ui-h5/src/components/SComponents/SDialog.vue";
-import SLabelItem from "socialuni-ui-h5/src/components/SComponents/SLabelItem.vue";
-import STable from "socialuni-ui-h5/src/components/SComponents/STable.vue";
-import STableColumn from "socialuni-ui-h5/src/components/SComponents/STableColumn/STableColumn.vue";
-import STableInput from "socialuni-ui-h5/src/components/SComponents/STableInput/STableInput.vue";
-import STableSelect from "socialuni-ui-h5/src/components/SComponents/STableSelect/STableSelect.vue";
+import SDialog from "qing-ui-h5/src/components/SComponents/SDialog.vue";
+import SLabelItem from "qing-ui-h5/src/components/SComponents/SLabelItem.vue";
+import STable from "qing-ui-h5/src/components/SComponents/STable.vue";
+import STableColumn from "qing-ui-h5/src/components/SComponents/STableColumn/STableColumn.vue";
+import STableInput from "qing-ui-h5/src/components/SComponents/STableInput/STableInput.vue";
+import STableSelect from "qing-ui-h5/src/components/SComponents/STableSelect/STableSelect.vue";
 import {Plus} from '@element-plus/icons-vue'
-import SSelect from "socialuni-ui-h5/src/components/SComponents/SSelect/SSelect.vue";
+import SSelect from "qing-ui-h5/src/components/SComponents/SSelect/SSelect.vue";
 import ImgFileVO from "socialuni-admin-api/src/model/community/ImgFileVO";
 import SocialuniCustomUserAPI from "socialuni-peiwan-api/src/api/SocialuniCustomUserAPI";
 import ToastUtil from "@/utils/ToastUtil";

@@ -327,8 +327,8 @@ import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserMod
 import SocialuniMsgViewService from "socialuni-im-sdk/src/logic/SocialuniMsgViewService";
 import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
 import SocialuniMsgViewLogic from "socialuni-im-sdk/src/viewLogic/SocialuniMsgViewLogic";
-import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
-import QNavbar from "socialuni-ui-uni/src/components/QNavbar/QNavbar.vue";
+import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue";
+import QNavbar from "qing-ui-uni/src/components/QNavbar/QNavbar.vue";
 
 @Component(
     {

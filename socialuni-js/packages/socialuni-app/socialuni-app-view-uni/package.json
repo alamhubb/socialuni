@@ -15,8 +15,8 @@
     "socialuni-app-sdk": "^0.1.4-alpha.0",
     "socialuni-constant": "^0.1.4-alpha.0",
     "qingjs": "^0.1.4-alpha.0",
-    "socialuni-ui-types": "^0.1.4-alpha.0",
-    "socialuni-ui-uni": "^0.1.4-alpha.0",
+    "qing-ui-types": "^0.1.4-alpha.0",
+    "qing-ui-uni": "^0.1.4-alpha.0",
     "socialuni-user-api": "^0.1.4-alpha.0",
     "qing-util": "^0.1.4-alpha.0",
     "vue": "^3.3.2"

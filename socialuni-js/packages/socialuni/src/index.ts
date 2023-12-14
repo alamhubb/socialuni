@@ -70,23 +70,23 @@ async function installSocialuniPluginIns(app: App) {
 
 const Socialuni = {
     async install(app: App, socialuniOption?: SocialuniOption) {
-        // const SocialuniUiUni = await import("../../socialuni-ui/socialuni-ui")
+        // const SocialuniUiUni = await import("../../qing-ui/qing-ui")
         // console.log(SocialuniUiUni)
         // app.use(SocialuniUiUni)
         // console.log(SocialuniUiUni)
 
         console.log(socialuniSystemModule.isDev)
-        const SocialuniUiH5 = await PlatformModuleLoadUtil.dynamicImport("socialuni-ui")
+        const SocialuniUiH5 = await PlatformModuleLoadUtil.dynamicImport("qing-ui")
 
         app.use(SocialuniUiH5.default)
 
 
         /*if (socialuniSystemModule.isUniApp) {
-            const modules = import.meta.glob('../../socialuni-ui/socialuni-ui-uni/src/index.ts',{eager:true})
+            const modules = import.meta.glob('../../qing-ui/qing-ui-uni/src/index.ts',{eager:true})
             const SocialuniUiUni = PlatformModuleLoadUtil.getModuleDefault(modules)
             app.use(SocialuniUiUni)
         } else {
-            const modules = import.meta.glob('../../socialuni-ui/socialuni-ui-h5/src/index.ts',{eager:true})
+            const modules = import.meta.glob('../../qing-ui/qing-ui-h5/src/index.ts',{eager:true})
             const SocialuniUiH5 = PlatformModuleLoadUtil.getModuleDefault(modules)
             app.use(SocialuniUiH5)
         }*/

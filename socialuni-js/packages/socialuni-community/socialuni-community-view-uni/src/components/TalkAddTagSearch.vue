@@ -71,8 +71,8 @@
 <script lang="ts">
 import {Component, Emit, Prop, Vue, Watch} from 'vue-facing-decorator'
 import TagVO from 'socialuni-api-base/src/model/community/tag/TagVO'
-import QIcon from 'socialuni-ui-uni/src/components/QIcon/QIcon.vue'
-import QNavbar from 'socialuni-ui-uni/src/components/QNavbar/QNavbar.vue'
+import QIcon from 'qing-ui-uni/src/components/QIcon/QIcon.vue'
+import QNavbar from 'qing-ui-uni/src/components/QNavbar/QNavbar.vue'
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 
 @Component({

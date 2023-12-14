@@ -81,7 +81,7 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-facing-decorator'
-import SDialog from "socialuni-ui-h5/src/components/SComponents/SDialog.vue";
+import SDialog from "qing-ui-h5/src/components/SComponents/SDialog.vue";
 import SocialuniUserEditDialog from "@/views/user/SocialuniUserEditDialog.vue";
 import SocialuniUserEventConst from "socialuni-user-sdk/src/constant/SocialuniUserEventConst";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";

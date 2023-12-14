@@ -9,7 +9,7 @@
     "cos-js-sdk-v5": "^1.2.18",
     "socialuni-constant": "^0.1.4-alpha.0",
     "qingjs-h5": "^0.1.4-alpha.0",
-    "socialuni-ui-h5": "^0.1.4-alpha.0",
+    "qing-ui-h5": "^0.1.4-alpha.0",
     "socialuni-user-sdk": "^0.1.4-alpha.0",
     "qing-util": "^0.1.4-alpha.0"
   },

@@ -89,14 +89,14 @@
 </template>
 
 <script lang="ts">
-import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue";
+import QPopup from "qing-ui-uni/src/components/QPopup/QPopup.vue";
 import {Inject, Component, Vue} from 'vue-facing-decorator'
 import {socialuniCommunityUserDetailViewService}
   from "socialuni-community-sdk/src/logic/SocialuniCommunityUserDetailViewService";
 import {getCurrentInstance} from "vue";
-import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue"
-import QButton from "socialuni-ui-uni/src/components/QButton/QButton.vue"
-import QNavbar from "socialuni-ui-uni/src/components/QNavbar/QNavbar.vue"
+import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue"
+import QButton from "qing-ui-uni/src/components/QButton/QButton.vue"
+import QNavbar from "qing-ui-uni/src/components/QNavbar/QNavbar.vue"
 import {socialuniUserDetailViewService} from "socialuni-user-sdk/src/logic/SocialuniUserDetailViewService";
 import SocialuniUserDetailView from "socialuni-user-view-uni/src/views/user/SocialuniUserDetailView.vue";
 import SocialuniFollowTag from "../../components/SocialuniFollow/SocialuniFollowTag.vue";

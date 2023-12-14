@@ -97,8 +97,8 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-facing-decorator'
-import SScrollbar from "socialuni-ui-h5/src/components/SComponents/SScrollbar.vue";
-import SDialog from "socialuni-ui-h5/src/components/SComponents/SDialog.vue";
+import SScrollbar from "qing-ui-h5/src/components/SComponents/SScrollbar.vue";
+import SDialog from "qing-ui-h5/src/components/SComponents/SDialog.vue";
 import {Plus} from '@element-plus/icons-vue'
 import SocialuniPeiwanAPI from "socialuni-peiwan-api/src/api/SocialuniPeiwanAPI";
 import PeiwanRO from "socialuni-admin-api/src/model/peiwan/PeiwanRO";

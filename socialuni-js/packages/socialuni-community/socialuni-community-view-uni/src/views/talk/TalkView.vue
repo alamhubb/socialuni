@@ -49,13 +49,13 @@
 <script lang="ts">
 import {Component, Vue, Watch} from 'vue-facing-decorator'
 
-import QButton from 'socialuni-ui-uni/src/components/QButton/QButton.vue'
-import QNavbar from 'socialuni-ui-uni/src/components/QNavbar/QNavbar.vue'
-import QSearch from 'socialuni-ui-uni/src/components/QSearch/QSearch.vue'
-import QIcon from 'socialuni-ui-uni/src/components/QIcon/QIcon.vue'
-import QPopup from 'socialuni-ui-uni/src/components/QPopup/QPopup.vue'
-import QSlider from 'socialuni-ui-uni/src/components/QSlider/QSlider.vue'
-import QTabs from "socialuni-ui-uni/src/components/QTabs/QTabs.vue";
+import QButton from 'qing-ui-uni/src/components/QButton/QButton.vue'
+import QNavbar from 'qing-ui-uni/src/components/QNavbar/QNavbar.vue'
+import QSearch from 'qing-ui-uni/src/components/QSearch/QSearch.vue'
+import QIcon from 'qing-ui-uni/src/components/QIcon/QIcon.vue'
+import QPopup from 'qing-ui-uni/src/components/QPopup/QPopup.vue'
+import QSlider from 'qing-ui-uni/src/components/QSlider/QSlider.vue'
+import QTabs from "qing-ui-uni/src/components/QTabs/QTabs.vue";
 import TagSearch from "./TagSearch.vue";
 import TabsTalk from "./tabsTalk.vue";
 import TalkSwipers from "./talkSwipers.vue";

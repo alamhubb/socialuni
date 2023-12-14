@@ -31,9 +31,9 @@
 <script lang="ts">
 import SocialuniCommunityUserDetailView
   from "socialuni-community-view-uni/src/views/user/SocialuniCommunityUserDetailView.vue";
-import QButton from "socialuni-ui-uni/src/components/QButton/QButton.vue";
-import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
-import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue";
+import QButton from "qing-ui-uni/src/components/QButton/QButton.vue";
+import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue";
+import QPopup from "qing-ui-uni/src/components/QPopup/QPopup.vue";
 import {Component, Vue} from "vue-facing-decorator";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import SocialuniUserDetailView from "socialuni-user-view-uni/src/views/user/SocialuniUserDetailView.vue";

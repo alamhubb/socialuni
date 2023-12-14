@@ -90,10 +90,10 @@ import {Emit, Component, Vue, Watch} from 'vue-facing-decorator'
 import DistrictVO from "socialuni-api-base/src/model/DistrictVO";
 import GenderType from "socialuni-constant/constant/GenderType";
 import TagSearch from "./TagSearch.vue";
-import QInput from "socialuni-ui-uni/src/components/QInput/QInput.vue";
-import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
-import QSlider from "socialuni-ui-uni/src/components/QSlider/QSlider.vue";
-import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue";
+import QInput from "qing-ui-uni/src/components/QInput/QInput.vue";
+import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue";
+import QSlider from "qing-ui-uni/src/components/QSlider/QSlider.vue";
+import QPopup from "qing-ui-uni/src/components/QPopup/QPopup.vue";
 import SocialTagPicker from 'socialuni-community-view-uni/src/components/SocialTagPicker.vue';
 import SocialCirclePicker from "socialuni-community-view-uni/src/components/SocialCirclePicker.vue";
 import {socialuniTagModule} from "socialuni-community-sdk/src/store/SocialTagModule";

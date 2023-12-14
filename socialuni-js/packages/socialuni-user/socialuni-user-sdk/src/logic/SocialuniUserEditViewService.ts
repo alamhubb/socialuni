@@ -16,7 +16,7 @@ import DomFile from "socialuni-app-sdk/src/model/DomFile";
 import SocialuniViewService from "socialuni/src/interface/SocialuniViewService";
 import {ComponentInternalInstance} from "@vue/runtime-core";
 import {reactive, watch} from "vue";
-import {SDialog} from "socialuni-ui-types/src/types/SocialuniUiTypes";
+import {SDialog} from "qing-ui-types/src/types/SocialuniUiTypes";
 import UserPageUtil from "../util/UserPageUtil";
 import {Vue} from "vue-class-component";
 

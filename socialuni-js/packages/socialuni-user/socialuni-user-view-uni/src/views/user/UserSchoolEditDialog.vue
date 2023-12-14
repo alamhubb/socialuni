@@ -31,10 +31,10 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-facing-decorator'
-import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
-import QPopup from "socialuni-ui-uni/src/components/QPopup/QPopup.vue";
-import QSearch from "socialuni-ui-uni/src/components/QSearch/QSearch.vue";
-import QSelect from "socialuni-ui-uni/src/components/QSelect/QSelect.vue";
+import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue";
+import QPopup from "qing-ui-uni/src/components/QPopup/QPopup.vue";
+import QSearch from "qing-ui-uni/src/components/QSearch/QSearch.vue";
+import QSelect from "qing-ui-uni/src/components/QSelect/QSelect.vue";
 import SocialCircleRO from "socialuni-api-base/src/model/community/circle/SocialCircleRO";
 import SocialuniCircleAPI from "socialuni-community-api/src/api/SocialuniCircleAPI";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";

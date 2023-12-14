@@ -25,7 +25,7 @@
 <script lang="ts">
 import {Emit, Model, Component, Prop, Vue} from 'vue-facing-decorator'
 import QCityPicker from "../QCityPicker/QCityPicker.vue";
-import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
+import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue";
 import DistrictVO from "socialuni-api-base/src/model/DistrictVO";
 
 @Component({
