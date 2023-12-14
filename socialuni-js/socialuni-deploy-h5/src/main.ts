@@ -5,7 +5,7 @@ import './styles/index.scss'
 import Socialuni from "socialuni/src";
 import router from "@/router";
 import SocialuniMusic from "socialuni-music-sdk/src";
-import DateUtil from "socialuni-util/src/util/DateUtil.ts";
+import DateUtil from "qing-util/src/util/DateUtil.ts";
 
 declare module '@vue/runtime-core' {
     interface ComponentCustomProperties {

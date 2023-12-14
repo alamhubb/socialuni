@@ -16,7 +16,7 @@
     "socialuni-native-util": "^0.1.4-alpha.0",
     "socialuni-ui-types": "^0.1.4-alpha.0",
     "socialuni-user-api": "^0.1.4-alpha.0",
-    "socialuni-util": "^0.1.4-alpha.0",
+    "qing-util": "^0.1.4-alpha.0",
     "vue": "^3.3.2"
   },
   "devDependencies": {

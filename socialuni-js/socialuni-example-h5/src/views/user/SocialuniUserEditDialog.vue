@@ -48,14 +48,14 @@ import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserMod
 import type SocialuniMineUserRO from "socialuni-api-base/src/model/user/SocialuniMineUserRO";
 import type EnumStrVO from "socialuni-constant/constant/EnumStrVO";
 import GenderType from "socialuni-constant/constant/GenderType";
-import DateUtil from "socialuni-util/src/util/DateUtil";
-import ObjectUtil from "socialuni-util/src/util/ObjectUtil";
+import DateUtil from "qing-util/src/util/DateUtil";
+import ObjectUtil from "qing-util/src/util/ObjectUtil";
 import BirthAgeUtil from "socialuni-user-sdk/src/util/BirthAgeUtil";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
 import CosService from "socialuni-app-sdk/src/util/CosService";
-import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
-import ImgUtil from "socialuni-util/src/util/ImgUtil";
+import UUIDUtil from "qing-util/src/util/UUIDUtil";
+import ImgUtil from "qing-util/src/util/ImgUtil";
 import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
 import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
 import type DomFile from "socialuni-native-util/src/model/DomFile";

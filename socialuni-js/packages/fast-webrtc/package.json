@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "fast-socket": "^0.1.4-alpha.0",
-    "socialuni-util": "^0.1.4-alpha.0"
+    "qing-util": "^0.1.4-alpha.0"
   },
   "keywords": [],
   "author": "",

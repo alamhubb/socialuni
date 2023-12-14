@@ -1,6 +1,6 @@
 import FastWebsocket, {FastWebsocketConfig} from "fast-socket/src/FastWebsocket";
 import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
-import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
+import UUIDUtil from "qing-util/src/util/UUIDUtil";
 import SocialuniAPIConfig from "../SocialuniAPIConfig";
 
 

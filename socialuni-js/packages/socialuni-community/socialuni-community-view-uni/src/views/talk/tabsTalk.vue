@@ -151,7 +151,7 @@ import SocialTalkFilterDialog from "./SocialTalkFilterDialog.vue";
 import QPullRefresh from "socialuni-ui-uni/src/components/QPullRefresh/QPullRefresh.vue";
 import TalkTabVO from "socialuni-api-base/src/model/talk/SocialuniTalkTabRO";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
-import CommonUtil from "socialuni-util/src/util/CommonUtil";
+import CommonUtil from "qing-util/src/util/CommonUtil";
 import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
 import Constants from "socialuni-constant/constant/Constant";
 import SocialuniTalkTabCircleRO from "socialuni-api-base/src/model/community/circle/SocialuniTalkTabCircleRO";
@@ -161,7 +161,7 @@ import {socialTalkModule} from "socialuni-community-sdk/src/store/SocialTalkModu
 import {socialuniTagModule} from "socialuni-community-sdk/src/store/SocialTagModule";
 import TalkQOFactory from "socialuni-community-sdk/src/factory/TalkQOFactory";
 import {socialLocationModule} from "socialuni-community-sdk/src/store/SocialLocationModule";
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import TalkItem from "socialuni-community-view-uni/src/components/talkItem/TalkItem.vue";
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";

@@ -3,9 +3,9 @@ import InputUtilH5 from "./InputUtilH5";
 import DomFile from "socialuni-native-util/src/model/DomFile";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 import AppMsg from "socialuni-constant/constant/AppMsg";
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
-import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
-import ImgUtil from "socialuni-util/src/util/ImgUtil";
+import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
+import UUIDUtil from "qing-util/src/util/UUIDUtil";
+import ImgUtil from "qing-util/src/util/ImgUtil";
 
 let imageInput
 

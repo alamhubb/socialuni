@@ -304,7 +304,7 @@ import SocialuniCommonStatus from "socialuni-constant/constant/status/SocialuniC
 import UserType from "socialuni-constant/constant/UserType";
 import SelectorQuery = UniNamespace.SelectorQuery;
 import NodesRef = UniNamespace.NodesRef;
-import DateUtil from "socialuni-util/src/util/DateUtil";
+import DateUtil from "qing-util/src/util/DateUtil";
 import MessageViewParams from "./MessageViewParams";
 import SocialuniMessageType from "socialuni-constant/constant/mesaage/SocialuniMessageType";
 import AppMsg from "socialuni-constant/constant/AppMsg";
@@ -315,7 +315,7 @@ import {onMounted} from "vue";
 import MessageAPI from "socialuni-im-api/src/api/MessageAPI";
 import MessageVO from "socialuni-im-api/src/model/RO/MessageVO";
 import NodeInfo = UniNamespace.NodeInfo;
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import SocialuniAppUtil from 'socialuni-native-util/src/util/SocialuniAppUtil'
 import MsgUtil from 'socialuni-app-sdk/src/util/MsgUtil'
 import UserPageUtil from 'socialuni-user-sdk/src/util/UserPageUtil'

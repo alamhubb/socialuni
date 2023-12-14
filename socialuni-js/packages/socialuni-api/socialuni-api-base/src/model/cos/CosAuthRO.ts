@@ -1,6 +1,6 @@
 
 
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 
 let COS
 if (socialuniSystemModule.isUniApp) {

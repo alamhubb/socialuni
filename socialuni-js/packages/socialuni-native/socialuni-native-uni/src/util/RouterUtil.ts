@@ -1,8 +1,8 @@
 import PagePath from "socialuni-constant/constant/PagePath";
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
-import JsonUtil from "socialuni-util/src/util/JsonUtil";
-import Lodash from "socialuni-util/src/util/Lodash";
+import JsonUtil from "qing-util/src/util/JsonUtil";
+import Lodash from "qing-util/src/util/Lodash";
 import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
 
 export default class RouterUtil {

@@ -1,7 +1,7 @@
 import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
 import WebsocketWebRtcUtil from "socialuni-api-base/src/websocket/WebsocketWebRtcUtil";
 import {socialuniTokenModule} from "socialuni-user-sdk/src/store/SocialuniTokenModule";
-import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
+import UUIDUtil from "qing-util/src/util/UUIDUtil";
 import SocialuniAPIConfig from "socialuni-api-base/src/SocialuniAPIConfig";
 import FastWebRTC from "fast-webrtc/src/FastWebRTC";
 

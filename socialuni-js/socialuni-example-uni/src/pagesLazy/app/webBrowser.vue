@@ -30,7 +30,7 @@
 import {Component, Vue} from 'vue-facing-decorator'
 import {onLoad, onReady} from "@dcloudio/uni-app";
 import QNavbar from 'socialuni-ui-uni/src/components/QNavbar/QNavbar.vue'
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import PagePath from "socialuni-constant/constant/PagePath";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 

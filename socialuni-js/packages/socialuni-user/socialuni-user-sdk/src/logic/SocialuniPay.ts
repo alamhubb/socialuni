@@ -1,4 +1,4 @@
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import PlatformUtils from "../util/PlatformUtils";
 import SocialuniCoinAPI from "socialuni-user-api/src/api/SocialuniCoinAPI";
 

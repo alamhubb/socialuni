@@ -85,14 +85,14 @@
 <script lang="ts">
 import {Component, Prop, Vue, Watch} from 'vue-facing-decorator'
 import TalkVO from "socialuni-api-base/src/model/talk/TalkVO"
-import ObjectUtil from "socialuni-util/src/util/ObjectUtil"
+import ObjectUtil from "qing-util/src/util/ObjectUtil"
 import TalkTabType from "socialuni-constant/constant/TalkTabType"
 import PagePath from "socialuni-constant/constant/PagePath"
 import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil"
 import FollowAddVO from "socialuni-api-base/src/model/FollowAddVO"
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO"
 import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue"
-import DateUtil from "socialuni-util/src/util/DateUtil"
+import DateUtil from "qing-util/src/util/DateUtil"
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI"
 import FollowAPI from "socialuni-community-api/src/api/FollowAPI"
 import SocialuniCommonStatus from 'socialuni-constant/constant/status/SocialuniCommonStatus'

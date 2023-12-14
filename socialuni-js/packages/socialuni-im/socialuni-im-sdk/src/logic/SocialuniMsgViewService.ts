@@ -14,7 +14,7 @@ import {socialuniChatModule} from "../store/SocialuniChatModule";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import ChatType from "socialuni-constant/constant/ChatType";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
-import DateUtil from "socialuni-util/src/util/DateUtil";
+import DateUtil from "qing-util/src/util/DateUtil";
 import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil";
 import UserType from "socialuni-constant/constant/UserType";
 

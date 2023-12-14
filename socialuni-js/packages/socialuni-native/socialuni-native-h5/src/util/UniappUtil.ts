@@ -9,10 +9,10 @@ import LoginRes = UniApp.LoginRes;
 import GetUserInfoRes = UniApp.GetUserInfoRes;
 import GetImageInfoSuccessData = UniApp.GetImageInfoSuccessData;
 import AppMsg from "socialuni-constant/constant/AppMsg";
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule"
+import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule"
 import DomFile from "socialuni-app-sdk/src/model/DomFile";
-import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
-import ImgUtil from "socialuni-util/src/util/ImgUtil";
+import UUIDUtil from "qing-util/src/util/UUIDUtil";
+import ImgUtil from "qing-util/src/util/ImgUtil";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 
 

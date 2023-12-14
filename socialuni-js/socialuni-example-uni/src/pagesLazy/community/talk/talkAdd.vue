@@ -145,7 +145,7 @@ import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
 import {socialTalkModule} from "socialuni-community-sdk/src/store/SocialTalkModule";
 import {socialCircleModule} from "socialuni-community-sdk/src/store/SocialCircleModule";
 import CommunityPageUtil from 'socialuni-community-sdk/src/util/CommunityPageUtil';
-import ObjectUtil from "socialuni-util/src/util/ObjectUtil";
+import ObjectUtil from "qing-util/src/util/ObjectUtil";
 import {socialuniTagModule} from "socialuni-community-sdk/src/store/SocialTagModule";
 import VisibleType from "socialuni-constant/constant/VisibleType";
 import GenderType from "socialuni-constant/constant/GenderType";

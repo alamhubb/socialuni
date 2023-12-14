@@ -1,6 +1,6 @@
 import AppConfig from "socialuni-constant/constant/AppConfig";
 import UserPayResultVO from "socialuni-api-base/src/model/user/UserPayResultVO";
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import PlatformType from "socialuni-constant/constant/PlatformType";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 

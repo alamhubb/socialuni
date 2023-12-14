@@ -14,9 +14,9 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-facing-decorator'
-import PageUtil from 'socialuni-util/src/util/PageUtil'
+import PageUtil from 'qing-util/src/util/PageUtil'
 import ImPageUtil from 'socialuni-im-sdk/src/util/ImPageUtil'
-import RouterUtil from 'socialuni-util/src/util/RouterUtil'
+import RouterUtil from 'qing-util/src/util/RouterUtil'
 import ImPagePath from 'socialuni-im-sdk/src/constant/ImPagePath'
 
 @Component({})

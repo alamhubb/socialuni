@@ -1,4 +1,4 @@
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import {ImportModule} from "socialuni/src/interface/ImportModule";
 
 export default class PlatformModuleLoadUtil {

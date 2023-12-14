@@ -68,7 +68,7 @@ import QTabs from "socialuni-ui-uni/src/components/QTabs/QTabs.vue";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import SocialuniFollowTag from "socialuni-user-view-uni/src/components/SocialuniFollow/SocialuniFollowTag.vue";
 import SocialuniPageQueryUtil from "socialuni-api-base/src/model/common/SocialuniPageQueryUtil";
-import CommonUtil from "socialuni-util/src/util/CommonUtil";
+import CommonUtil from "qing-util/src/util/CommonUtil";
 import SocialUserFollowDetailRO from "socialuni-api-base/src/model/social/SocialUserFollowDetailRO";
 import QPullRefresh from "socialuni-ui-uni/src/components/QPullRefresh/QPullRefresh.vue";
 

@@ -1,5 +1,5 @@
 import UniUserInfoRO from './UniUserInfoRO'
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import LoginProvider from "socialuni-constant/constant/LoginProvider";
 
 export default class UniProviderLoginQO {

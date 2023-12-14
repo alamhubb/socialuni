@@ -1,5 +1,5 @@
 import LoginRes = UniApp.LoginRes
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import UniPlatformType from "socialuni-constant/constant/uni/UniPlatformType";
 
 export default class UniLoginUtil {

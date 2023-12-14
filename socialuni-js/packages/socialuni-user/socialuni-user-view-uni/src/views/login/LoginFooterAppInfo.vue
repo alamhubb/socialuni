@@ -15,7 +15,7 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-facing-decorator'
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 import SkipUrlConst from "socialuni-app-sdk/src/constant/SkipUrlConst";

@@ -53,7 +53,7 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-facing-decorator'
-import DateUtil from "socialuni-util/src/util/DateUtil";
+import DateUtil from "qing-util/src/util/DateUtil";
 
 @Component({components: {QNavbar}})
 export default class GroupMemberView extends Vue {

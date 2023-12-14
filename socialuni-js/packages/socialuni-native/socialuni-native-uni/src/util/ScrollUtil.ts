@@ -1,4 +1,4 @@
-import CommonUtil from 'socialuni-util/src/util/CommonUtil'
+import CommonUtil from 'qing-util/src/util/CommonUtil'
 
 export default class ScrollUtil {
   static pageBottom = 3000000

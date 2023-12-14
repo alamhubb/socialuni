@@ -3,7 +3,7 @@ import Constants from "socialuni-constant/constant/Constant"
 import AppMsg from "socialuni-constant/constant/AppMsg"
 import ToastUtil from "socialuni-native-uni/src/util/ToastUtil"
 import UserPayResultVO from "socialuni-api-base/src/model/user/UserPayResultVO";
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import APPUtil from "socialuni-app-sdk/src/util/APPUtil";
 import { socialPlatformModule } from 'socialuni-app-sdk/src/store/SocialPlatformModule'
 import SocialuniAppAPI from 'socialuni-app-api/src/api/SocialuniAppAPI'

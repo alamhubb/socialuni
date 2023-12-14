@@ -1,5 +1,5 @@
-import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
-import ImgUtil from "socialuni-util/src/util/ImgUtil";
+import UUIDUtil from "qing-util/src/util/UUIDUtil";
+import ImgUtil from "qing-util/src/util/ImgUtil";
 
 export default class SocialuniImgUtil {
     // static readonly imgUrl: string = process.env.VUE_APP_BASE + 'img/'

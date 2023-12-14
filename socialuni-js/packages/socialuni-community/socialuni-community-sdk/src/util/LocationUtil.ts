@@ -1,5 +1,5 @@
 import DistrictVO from "socialuni-api-base/src/model/DistrictVO";
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import {QQMapResult} from "socialuni-api-base/src/model/location/QQMapResult";
 import {socialLocationModule} from "socialuni-community-sdk/src/store/SocialLocationModule";
 import LocationConst from "socialuni-constant/constant/community/LocationConst";

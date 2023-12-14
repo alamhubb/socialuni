@@ -1,6 +1,6 @@
 import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
 import SocialuniChatRO from "socialuni-api-base/src/model/SocialuniChatRO";
-import DateUtil from "socialuni-util/src/util/DateUtil";
+import DateUtil from "qing-util/src/util/DateUtil";
 import {watch} from "vue";
 import {Vue} from "vue-class-component";
 import SocialUserContentRO from "socialuni-api-base/src/model/social/SocialUserContentRO";

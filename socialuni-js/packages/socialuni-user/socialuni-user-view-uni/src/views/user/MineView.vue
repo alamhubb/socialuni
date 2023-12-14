@@ -217,7 +217,7 @@ import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAP
 import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
 import SocialGenderTag from "../../components/SocialGenderTag/SocialGenderTag.vue";
 import {socialuniUserModule} from 'socialuni-user-sdk/src/store/SocialuniUserModule';
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import UserService from "socialuni-user-sdk/src/logic/UserService";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";

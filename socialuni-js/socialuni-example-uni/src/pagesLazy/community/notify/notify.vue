@@ -40,7 +40,7 @@
 import {Component, Vue} from 'vue-facing-decorator'
 import SocialuniImgUtil from "socialuni-user-sdk/src/util/SocialuniImgUtil";
 import CommunityPageUtil from "socialuni-community-sdk/src/util/CommunityPageUtil";
-import DateUtil from "socialuni-util/src/util/DateUtil";
+import DateUtil from "qing-util/src/util/DateUtil";
 import {socialNotifyModule} from "socialuni-community-sdk/src/store/SocialNotifyModule";
 
 

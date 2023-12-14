@@ -1,5 +1,5 @@
 import SocialPhoneNumLoginQO from "socialuni-api-base/src/model/phone/SocialPhoneNumLoginQO";
-import NumberUtil from "socialuni-util/src/util/NumberUtil";
+import NumberUtil from "qing-util/src/util/NumberUtil";
 import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 import SocialuniLoginService from "./SocialuniLoginService";

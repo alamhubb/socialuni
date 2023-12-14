@@ -3,7 +3,7 @@ import CosAuthRO from "socialuni-api-base/src/model/cos/CosAuthRO";
 import WxCOS from 'cos-wx-sdk-v5'
 //@ts-ignore
 import JsCOS from 'cos-js-sdk-v5'
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 
 export default class CosUtil {
     static getAuthorizationCos(cosAuthRO: CosAuthRO): JsCOS {

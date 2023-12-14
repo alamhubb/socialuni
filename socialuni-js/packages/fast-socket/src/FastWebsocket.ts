@@ -1,6 +1,6 @@
-import JsonUtil from "socialuni-util/src/util/JsonUtil";
-import CommonUtil from "socialuni-util/src/util/CommonUtil";
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import JsonUtil from "qing-util/src/util/JsonUtil";
+import CommonUtil from "qing-util/src/util/CommonUtil";
+import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 
 export interface FastWebsocketConfig {
     wsUrl: string,

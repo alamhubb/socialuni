@@ -14,7 +14,7 @@
     "socialuni-constant": "^0.1.4-alpha.0",
     "socialuni-native-util": "^0.1.4-alpha.0",
     "qing-scss": "^0.1.4-alpha.0",
-    "socialuni-util": "^0.1.4-alpha.0",
+    "qing-util": "^0.1.4-alpha.0",
     "vue-facing-decorator": "^3.0.2"
   },
   "devDependencies": {

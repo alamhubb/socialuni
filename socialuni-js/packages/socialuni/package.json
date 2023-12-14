@@ -10,7 +10,7 @@
     "axios": "^1.4.0",
     "mitt": "^3.0.0",
     "socialuni-native-util": "^0.1.4-alpha.0",
-    "socialuni-util": "^0.1.4-alpha.0",
+    "qing-util": "^0.1.4-alpha.0",
     "vue": "^3.3.2",
     "vue-router": "^4.2.0"
   },

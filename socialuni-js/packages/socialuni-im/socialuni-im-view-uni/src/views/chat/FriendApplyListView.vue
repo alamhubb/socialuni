@@ -84,7 +84,7 @@
 <script lang="ts">
 import {Component, Vue} from 'vue-facing-decorator'
 import {onLoad, onPullDownRefresh} from "@dcloudio/uni-app";
-import DateUtil from "socialuni-util/src/util/DateUtil";
+import DateUtil from "qing-util/src/util/DateUtil";
 import FriendApplyType from "socialuni-constant/constant/FriendApplyType";
 import SocialuniFriendAPI from "socialuni-im-api/src/api/SocialuniFriendAPI";
 import SocialuniFriendApplyUserRO from "socialuni-im-api/src/model/RO/SocialuniFriendApplyUserRO";

@@ -95,7 +95,7 @@ import {nextTick} from "vue";
 import MusicPlayerSongInfoRO from "socialuni-music-sdk/src/model/MusicPlayerSongInfoRO.ts";
 import MusicPlayerSongPlayingInfoRO from "socialuni-music-sdk/src/model/MusicPlayerSongPlayingInfoRO.ts";
 import ToastUtil from "socialuni-native-h5/src/util/ToastUtil.ts";
-import DateUtil from "socialuni-util/src/util/DateUtil.ts";
+import DateUtil from "qing-util/src/util/DateUtil.ts";
 
 @Component({
   components: {}

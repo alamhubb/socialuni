@@ -3,7 +3,7 @@ import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
 import {socialuniConfigModule} from "./store/SocialuniConfigModule";
 import {App, defineComponent, onErrorCaptured} from "vue";
 import {SocialuniOption} from "socialuni/src/interface/socialuniOption";
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
 import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";

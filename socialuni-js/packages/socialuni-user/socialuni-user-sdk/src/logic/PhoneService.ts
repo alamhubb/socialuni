@@ -1,4 +1,4 @@
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
 import UniLoginUtil from "../util/UniLoginUtil";
 import {socialuniUserModule} from "../store/SocialuniUserModule";

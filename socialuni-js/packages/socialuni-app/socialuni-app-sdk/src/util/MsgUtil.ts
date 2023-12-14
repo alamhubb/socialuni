@@ -1,5 +1,5 @@
 import AppMsg from "socialuni-constant/constant/AppMsg";
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import SocialuniAppUtil from 'socialuni-native-util/src/util/SocialuniAppUtil'
 import { socialuniConfigModule } from '../store/SocialuniConfigModule'
 

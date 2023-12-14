@@ -4,7 +4,7 @@
  * @Version 1.0
  */
 import JsonUtil from "./JsonUtil";
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 
 export default class UniStorageUtil {
     private static readonly devPre: string = 'dev_'

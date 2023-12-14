@@ -1,6 +1,6 @@
 import axios from "axios";
-import CommonUtil from "socialuni-util/src/util/CommonUtil";
-import UUIDUtil from "socialuni-util/src/util/UUIDUtil";
+import CommonUtil from "qing-util/src/util/CommonUtil";
+import UUIDUtil from "qing-util/src/util/UUIDUtil";
 
 
 const openRequest = axios.create({

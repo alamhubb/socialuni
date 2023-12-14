@@ -4,10 +4,10 @@ import {SocialuniPlugin} from "./interface/SocialuniPlugin"
 import {ImportModule} from "./interface/ImportModule"
 import {SocialuniOption} from "./interface/socialuniOption"
 import SocialuniViewService from "./interface/SocialuniViewService";
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import PlatformModuleLoadUtil from "socialuni-native-util/src/util/PlatformModuleLoadUtil";
-import JsonUtil from "socialuni-util/src/util/JsonUtil";
-import ObjectUtil from "socialuni-util/src/util/ObjectUtil";
+import JsonUtil from "qing-util/src/util/JsonUtil";
+import ObjectUtil from "qing-util/src/util/ObjectUtil";
 
 const socialuniInitPlugin: SocialuniPlugin = {
     async onLaunch() {

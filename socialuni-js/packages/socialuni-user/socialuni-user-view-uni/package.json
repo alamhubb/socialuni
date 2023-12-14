@@ -21,7 +21,7 @@
     "socialuni-ui-uni": "^0.1.4-alpha.0",
     "socialuni-user-api": "^0.1.4-alpha.0",
     "socialuni-user-sdk": "^0.1.4-alpha.0",
-    "socialuni-util": "^0.1.4-alpha.0"
+    "qing-util": "^0.1.4-alpha.0"
   },
   "devDependencies": {
     "typescript": "^4.7.4",

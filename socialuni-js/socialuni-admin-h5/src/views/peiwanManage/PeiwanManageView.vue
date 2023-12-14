@@ -133,7 +133,7 @@ import SocialuniPeiwanAdminAPI
 import {useMagicKeys} from '@vueuse/core'
 import {watch} from "vue";
 import AlertUtil from "socialuni-native-h5/src/util/AlertUtil";
-import WindowEventListener from "socialuni-util/src/util/WindowEventListener";
+import WindowEventListener from "qing-util/src/util/WindowEventListener";
 import AdminPeiwanAppInitData from "socialuni-admin-api/src/model/peiwan/AdminPeiwanAppInitData";
 import SSelect from "socialuni-ui-h5/src/components/SComponents/SSelect/SSelect.vue";
 import ImgFileVO from "socialuni-admin-api/src/model/community/ImgFileVO";

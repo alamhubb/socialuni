@@ -2,7 +2,7 @@ import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDe
 import SocialuniAppUtil from "socialuni-native-util/src/util/SocialuniAppUtil";
 import SocialuniUserAPI from "socialuni-user-api/src/api/SocialuniUserAPI";
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
-import {socialuniSystemModule} from "socialuni-util/src/store/SocialuniSystemModule";
+import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
 import {socialuniUserModule} from "../store/SocialuniUserModule";
 import {watch, reactive, provide, ComponentInternalInstance, getCurrentInstance} from "vue";
