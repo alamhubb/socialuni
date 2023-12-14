@@ -98,6 +98,9 @@ export default class MessageView extends Vue {
   files = []
 
   checkProjectName() {
+    if (!this.projectName){
+
+    }
     SocialuniDeployAPI.checkProjectName(this.projectName).then(res => {
       this.projectNameCanUse = res.data
     })
