@@ -1,7 +1,8 @@
 <template>
   <div class="flex-col h100p overflow-hidden color-black">
     <div class="flex-row h100p overflow-hidden">
-      <div class="w200 h100p flex-none br bg-default">
+      <div class="w200 h100p flex-none br bg-default ">
+        <div class="size50 bg-red"></div>
       </div>
 
       <div class="h100p flex-col flex-1 bg-white">
