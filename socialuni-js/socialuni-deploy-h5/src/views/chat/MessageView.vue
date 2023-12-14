@@ -2,13 +2,13 @@
   <div class="flex-col h100p overflow-hidden color-black">
     <div class="flex-row h100p overflow-hidden">
       <div class="w200 h100p flex-none br bg-default ">
-        <div class="size50 bg-red"></div>
+<!--        <div class="size50 bg-red"></div>-->
       </div>
 
       <div class="h100p flex-col flex-1 bg-white">
         <!--          <vue-drag-resize>-->
         <div>
-          <q-upload folder></q-upload>
+          <q-upload ref="upload" folder v-model="files" @change="upload"></q-upload>
         </div>
       </div>
     </div>
@@ -57,6 +57,7 @@ import VueDragResize from "vue-drag-resize3/src/components/VueDragResize.vue";
 import MusicPlayer from "@/components/MusicPlayer.vue";
 import VueInteract from "@/components/vue-interact/VueInteract.vue";
 import QUpload from "qing-ui-h5/src/components/QComponents/QUpload/QUpload.vue";
+import socialuniUserRequest from "socialuni-user-api/src/request/socialuniUserRequest.ts";
 
 @Component({
   components: {
@@ -75,9 +76,18 @@ import QUpload from "qing-ui-h5/src/components/QComponents/QUpload/QUpload.vue";
 })
 export default class MessageView extends Vue {
 
+  $refs: {
+    upload: QUpload
+  }
+
+  files = []
 
   mounted() {
 
+  }
+
+  upload() {
+    this.$refs.upload.upload(socialuniUserRequest, 'upload/uploadFiles', {files: this.files})
   }
 }
 </script>

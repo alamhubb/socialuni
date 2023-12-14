@@ -93,7 +93,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Model, Prop, Vue, Watch} from "vue-facing-decorator";
+import {Component, Emit, Model, Prop, toNative, Vue, Watch} from "vue-facing-decorator";
 import DomFile from "./DomFile";
 import UploadPercentageVO from "./UploadPercentageVO";
 import UploadFileVO from "./UploadFileVO";
@@ -104,7 +104,8 @@ import ToastUtil from "qingjs-h5/src/util/ToastUtil";
 import ObjectUtil from "qing-util/src/util/ObjectUtil";
 import SocialuniAxios from "socialuni-api-base/src/SocialuniAxios";
 
-@Component({})
+@Component
+
 export default class QUpload extends Vue {
   $refs: {
     uploadFileLabel: HTMLLabelElement;
@@ -114,7 +115,7 @@ export default class QUpload extends Vue {
   }
 
 
-  @Model() readonly modelValue!: DomFile[]
+  @Model files!: DomFile[]
   @Prop({default: false, type: Boolean}) folder: boolean
   @Prop({default: true, type: Boolean}) showFileList: boolean
   // 上传进度
@@ -159,7 +160,7 @@ export default class QUpload extends Vue {
     this.$refs.uploadFolderLabel.click()
   }
 
-  @Emit()
+  @Emit('update:modelValue')
   change() {
     const files = this.fileList.map(item => item.files).flat()
     console.log(files)
