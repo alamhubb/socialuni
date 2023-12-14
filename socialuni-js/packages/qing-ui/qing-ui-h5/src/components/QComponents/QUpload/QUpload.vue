@@ -23,18 +23,18 @@
         </el-dropdown>
         <el-button v-else type="primary" size="mini" @click="uploadFileLabelClick" :disabled="!canOperateByProgress">
           上传<i
-          class="el-icon-upload el-icon--right"></i></el-button>
+            class="el-icon-upload el-icon--right"></i></el-button>
 
         <div v-if="showFileList && modelValue" class="ml">文件总数：{{ modelValue.length }}</div>
       </div>
 
       <el-button
-        v-show="showFileList && fileList.length && canOperateByProgress"
-        size="mini"
-        class="ml"
-        type="text"
-        icon="el-icon-circle-close"
-        @click="clearFies">清空
+          v-show="showFileList && fileList.length && canOperateByProgress"
+          size="mini"
+          class="ml"
+          type="text"
+          icon="el-icon-circle-close"
+          @click="clearFies">清空
       </el-button>
     </div>
 
@@ -62,32 +62,32 @@
           </template>
         </div>
         <el-button
-          v-show="canOperateByProgress"
-          type="text"
-          icon="el-icon-circle-close"
-          @click="deleteFile(file)"></el-button>
+            v-show="canOperateByProgress"
+            type="text"
+            icon="el-icon-circle-close"
+            @click="deleteFile(file)"></el-button>
       </div>
     </div>
 
     <label class="bg-opacity position-absolute size0" ref="uploadFileLabel" for="fileUpload">
       <input
-        ref="fileInput"
-        class="bg-opacity position-absolute size0"
-        type="file"
-        id="fileUpload"
-        multiple="multiple"
-        @change="uploadChange"/>
+          ref="fileInput"
+          class="bg-opacity position-absolute size0"
+          type="file"
+          id="fileUpload"
+          multiple="multiple"
+          @change="uploadChange"/>
     </label>
 
     <label class="bg-opacity position-absolute size0" ref="uploadFolderLabel" for="folderUpload">
       <input
-        class="bg-opacity position-absolute size0"
-        type="file"
-        ref="folderInput"
-        id="folderUpload"
-        webkitdirectory
-        multiple="multiple"
-        @change="uploadChange"/>
+          class="bg-opacity position-absolute size0"
+          type="file"
+          ref="folderInput"
+          id="folderUpload"
+          webkitdirectory
+          multiple="multiple"
+          @change="uploadChange"/>
     </label>
   </div>
 </template>
@@ -100,9 +100,11 @@ import UploadFileVO from "./UploadFileVO";
 import YUploadFileType from "./YUploadFileType";
 import AlertUtil from "qingjs-h5/src/util/AlertUtil";
 import Arrays from "qing-util/src/util/Arrays";
+import ToastUtil from "qingjs-h5/src/util/ToastUtil";
+import ObjectUtil from "qing-util/src/util/ObjectUtil";
+import SocialuniAxios from "socialuni-api-base/src/SocialuniAxios";
 
-@Component({
-})
+@Component({})
 export default class QUpload extends Vue {
   $refs: {
     uploadFileLabel: HTMLLabelElement;
@@ -113,8 +115,8 @@ export default class QUpload extends Vue {
 
 
   @Model() readonly modelValue!: DomFile[]
-  @Prop({ default: false, type: Boolean }) folder: boolean
-  @Prop({ default: true, type: Boolean }) showFileList: boolean
+  @Prop({default: false, type: Boolean}) folder: boolean
+  @Prop({default: true, type: Boolean}) showFileList: boolean
   // 上传进度
   uploadPercent: UploadPercentageVO = new UploadPercentageVO()
 
@@ -189,7 +191,7 @@ export default class QUpload extends Vue {
     })
   }
 
-  /*async upload(uploadUrl: string, formData: any) {
+  async upload(request: AxiosStatic, uploadUrl: string, formData: any) {
     // 只记录当前的上传进度，考虑清空情况，清空以后uploadPercent就变了，这个改值界面上也不会变化，则正确
     const uploadPercent = this.uploadPercent
     return request.post(uploadUrl, ObjectUtil.toFormData(formData), {
@@ -199,11 +201,11 @@ export default class QUpload extends Vue {
         uploadPercent.uploadPercent = Math.floor(((progressEvent.loaded * 100 / progressEvent.total)))
       }
     }).then((res: any) => {
-      Message.success(res.msg)
+      ToastUtil.success(res.msg)
     })
-  }*/
+  }
 
-  uploadChange({ target }) {
+  uploadChange({target}) {
     const files: DomFile[] = []
     for (const file of target.files) {
       files.push(file)
