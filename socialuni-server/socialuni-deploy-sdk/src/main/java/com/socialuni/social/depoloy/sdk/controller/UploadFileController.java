@@ -70,14 +70,14 @@ public class UploadFileController {
             if (Objects.isNull(file) || file.isEmpty()) {
                 throw new SocialSystemException("文件为空，请重新上传");
             }
-            if (file.getSize() > FileSizeConst._100MB) {
+            if (file.getSize() > FileSizeConst._30MB) {
                 throw new SocialSystemException("图片大小不能超过100MB！");
             }
             System.out.println(file);
             System.out.println(file.getOriginalFilename());
             try {
                 byte[] bytes = file.getBytes();
-                Path path = Paths.get("/project/qingchi/upload/img/" + file.getOriginalFilename());
+                Path path = Paths.get("/devtools/nginx/project/" + file.getOriginalFilename());
                 System.out.println(path.getParent());
                 System.out.println(path.getFileSystem());
                 System.out.println(path.getFileName());
@@ -97,6 +97,7 @@ public class UploadFileController {
         }
         System.out.println(files);
         System.out.println(files.length);
-        return ResultRO.success("https://app.socialuni.cn/" + projectName);
+        return ResultRO.success("http://localhost:9536/" + projectName);
+//        return ResultRO.success("https://app.socialuni.cn/" + projectName);
     }
 }
