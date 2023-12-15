@@ -1,5 +1,9 @@
 package com.socialuni.social.depoloy.sdk.controller;
 
+import com.github.odiszapc.nginxparser.NgxBlock;
+import com.github.odiszapc.nginxparser.NgxConfig;
+import com.github.odiszapc.nginxparser.NgxEntry;
+import com.github.odiszapc.nginxparser.NgxParam;
 import com.socialuni.social.common.api.model.ResultRO;
 import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,11 +17,31 @@ import javax.swing.*;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 @RestController
 @RequestMapping("upload")
 public class UploadController {
+
+    public static void main(String[] args) throws IOException {
+        NgxConfig conf = NgxConfig.read("/devtools/nginx/conf/nginx.conf");
+        System.out.println(conf.toString());
+        NgxParam workers = conf.findParam("worker_processes");       // Ex.1
+        System.out.println(workers.toString());
+        workers.getValue(); // "1"
+        NgxParam listen = conf.findParam("http", "server", "listen"); // Ex.2
+        System.out.println(listen.toString());
+        listen.getValue(); // "8889"
+        List<NgxEntry> rtmpServers = conf.findAll(NgxConfig.BLOCK, "http", "server"); // Ex.3
+        for (NgxEntry entry : rtmpServers) {
+            System.out.println(entry.toString());
+            System.out.println(((NgxBlock) entry).getName());
+            System.out.println(((NgxBlock) entry).findBlock("location").getValue());
+            ((NgxBlock) entry).getName(); // "server"
+            ((NgxBlock) entry).findBlock("application", "live"); // "on" for the first iter, "off" for the second one
+        }
+    }
 
     @PostMapping("img")
     public ResultRO<Void> uploadImg(@RequestParam("file") MultipartFile file, @RequestParam(value = "type", required = false) String uploadType) throws IOException {
