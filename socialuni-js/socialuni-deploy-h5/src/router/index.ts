@@ -1,7 +1,6 @@
-import {createRouter, createWebHistory} from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import MessageView from "@/views/chat/MessageView.vue";
-// import MessageView from "@/views/chat/MessageView.tsx";
 
 export const constantRoutes = [
     {
@@ -31,18 +30,9 @@ export const constantRoutes = [
     {path: '/:pathMatch(.*)', redirect: '/404', hidden: true}
 ]
 
-console.log(78787)
-console.log(import.meta.env.BASE_URL)
-
 const router = createRouter({
-    history: createWebHistory("/deploy/"),
-    // history: createWebHistory(import.meta.env.BASE_URL),
+    history: createWebHistory(import.meta.env.BASE_URL),
     routes: constantRoutes
-})
-
-router.beforeEach((to, from, next) => {
-    console.log(to.path)
-    console.log(from.path)
 })
 
 export default router
