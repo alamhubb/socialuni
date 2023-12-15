@@ -51,7 +51,7 @@ public class UploadFileController {
 
     @PostMapping("deployProject")
     @ResponseBody
-    public ResultRO<Void> deployProject(
+    public ResultRO<String> deployProject(
             @RequestParam(value = "files") MultipartFile[] files,
             @RequestParam(value = "projectName") String projectName,
             @RequestParam(value = "mainFile") String mainFile
@@ -97,6 +97,6 @@ public class UploadFileController {
         }
         System.out.println(files);
         System.out.println(files.length);
-        return ResultRO.success();
+        return ResultRO.success("https://app.socialuni.cn/" + projectName);
     }
 }

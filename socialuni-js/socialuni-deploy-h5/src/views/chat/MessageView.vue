@@ -5,15 +5,14 @@
         <!--        <div class="size50 bg-red"></div>-->
       </div>
 
-      <div class="h100p flex-col flex-1 bg-white pd">
+      <div class="h100p flex-row flex-1 bg-white pd">
         <!--          <vue-drag-resize>-->
         <div>
           <div class="flex-row">
-            <div>
-              <el-form ref="form" :model="formData" label-position="top">
-                <div class="row-col-end">
-                  <el-form-item required label="项目名">
-                    <template #label>
+            <el-form ref="form" :model="formData" label-position="top">
+              <div class="row-col-end">
+                <el-form-item required label="项目名">
+                  <template #label>
                       <span>
                         <span class="mr-sm">项目名</span>
                         (
@@ -21,32 +20,36 @@
                         <span v-else class="color-green">项目名可以使用</span>
                         )
                       </span>
-                    </template>
-                    <el-input class="w370 mb-1" v-model="formData.projectName" @change="checkProjectName"></el-input>
-                  </el-form-item>
-                </div>
-                <el-form-item prop="mainFile" label="入口文件">
-                  <el-input class="w300 mr-sm" v-model="formData.mainFile" @change="checkProjectName"
-                            :disabled="!editable"></el-input>
-                  <el-button plain @click="editable=!editable" :type="editable ? 'warning' : 'default'">
-                    {{ editable ? '取消' : '编辑' }}
-                  </el-button>
+                  </template>
+                  <el-input class="w370 mb-1" v-model="formData.projectName" @change="checkProjectName"></el-input>
                 </el-form-item>
-              </el-form>
-            </div>
-            <div>
-              <q-upload ref="upload" class="ml mt-30" only-folder v-model="formData.files" btn-text="选择项目"
-                        show-file-list
-                        @change="upload">
-                <el-icon class="ml-xs" :size="16">
-                  <FolderOpened></FolderOpened>
-                </el-icon>
-              </q-upload>
-            </div>
-          </div>
+              </div>
+              <el-form-item prop="mainFile" label="入口文件">
+                <el-input class="w300 mr-sm" v-model="formData.mainFile"
+                          :disabled="!editable"></el-input>
+                <el-button plain @click="editable=!editable" :type="editable ? 'warning' : 'default'">
+                  {{ editable ? '取消' : '编辑' }}
+                </el-button>
+              </el-form-item>
 
-          <div>
-            <el-button type="primary" @click="deploy">部署</el-button>
+              <div class="w100p row-end-center mt">
+                <el-button type="primary" @click="deploy" :disabled="projectNameHasError">部署</el-button>
+              </div>
+
+              <div class="mt-sm" v-if="deployUrl">
+                <div class="color-green">
+                  部署成功，访问地址:
+                  <el-link :href="deployUrl" target="_blank" type="primary">{{ deployUrl }}</el-link>
+                </div>
+              </div>
+            </el-form>
+            <q-upload ref="upload" class="ml-sm mt-30" only-folder v-model="formData.files" btn-text="选择项目"
+                      show-file-list
+                      @change="upload">
+              <el-icon class="ml-xs" :size="16">
+                <FolderOpened></FolderOpened>
+              </el-icon>
+            </q-upload>
           </div>
 
 
@@ -106,6 +109,7 @@ import AlertUtil from "qingjs-h5/src/util/AlertUtil.ts";
 import {FolderOpened, UploadFilled} from "@element-plus/icons-vue";
 import {ElForm} from "element-plus";
 import PinyinUtil from "@/util/PinyinUtil.ts";
+import ToastUtil from "qingjs-h5/src/util/ToastUtil.ts";
 
 @Component({
   components: {
@@ -142,7 +146,9 @@ export default class MessageView extends Vue {
 
   get projectNameHasError() {
     const value = this.formData.projectName
-    if (!value) {
+    if (!this.formData.files) {
+      return '请选择项目'
+    } else if (!value) {
       return '请输入项目名'
     } else if (!this.projectNameCanUse) {
       return '项目名已存在，请修改'
@@ -155,31 +161,41 @@ export default class MessageView extends Vue {
     }
   }
 
+  created() {
+    this.clearDeployUrl()
+  }
+
+  clearDeployUrl() {
+    this.deployUrl = null
+  }
 
   files = []
 
   checkProjectName() {
-    if (!this.projectName) {
-
-    }
     SocialuniDeployAPI.checkProjectName(this.projectName).then(res => {
       this.projectNameCanUse = res.data
     })
   }
 
-  mounted() {
 
-  }
+  deployUrl = null
 
   upload() {
+    this.clearDeployUrl()
     if (!this.formData.projectName) {
       this.formData.projectName = PinyinUtil.convertToFirstUpperPinyin(this.formData.files[0].root)
     }
   }
 
+
   deploy() {
-    AlertUtil.confirm(`是否确认部署项目${this.formData.projectName}，部署后项目即可通过互联网访问`).then(() => {
-      this.$refs.upload.upload(socialuniUserRequest, 'upload/uploadFiles', this.formData)
+    if (this.projectNameHasError) {
+      ToastUtil.throwError(this.projectNameHasError)
+    }
+    AlertUtil.confirm(`是否确认部署项目${this.formData.projectName}，项目部署后即可通过互联网访问`).then(() => {
+      SocialuniDeployAPI.deployProject(this.formData).then((res) => {
+        this.deployUrl = res.data
+      })
     })
   }
 }

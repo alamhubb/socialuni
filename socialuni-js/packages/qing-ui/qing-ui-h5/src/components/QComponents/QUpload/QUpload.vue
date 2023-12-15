@@ -2,7 +2,7 @@
   <div class="flex-col">
     <div class="flex-none row-between-center">
       <div class="row-col-center">
-        <el-button v-if="onlyFolder" type="primary" size="mini" @click="uploadFolderLabelClick"
+        <el-button v-if="onlyFolder" plain type="primary" size="mini" @click="uploadFolderLabelClick"
         >
           {{ btnText }}
           <slot></slot>
@@ -14,7 +14,7 @@
             :show-timeout="100"
             :hide-timeout="250"
         >
-          <el-button type="primary" size="mini">
+          <el-button  plain type="primary" size="mini">
             <i class="el-icon-upload2"></i>
             {{ btnText }}
             <slot></slot>
@@ -26,7 +26,7 @@
             </el-dropdown-menu>
           </template>
         </el-dropdown>
-        <el-button v-else type="primary" size="mini" @click="uploadFileLabelClick">
+        <el-button v-else plain type="primary" size="mini" @click="uploadFileLabelClick">
           {{ btnText }}
           <slot></slot>
           <i
