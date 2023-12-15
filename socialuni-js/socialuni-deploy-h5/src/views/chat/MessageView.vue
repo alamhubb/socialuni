@@ -110,6 +110,7 @@ import {FolderOpened, UploadFilled} from "@element-plus/icons-vue";
 import {ElForm} from "element-plus";
 import PinyinUtil from "@/util/PinyinUtil.ts";
 import ToastUtil from "qingjs-h5/src/util/ToastUtil.ts";
+import WindowUtil from "@/util/WindowUtil.ts";
 
 @Component({
   components: {
@@ -195,6 +196,7 @@ export default class MessageView extends Vue {
     AlertUtil.confirm(`是否确认部署项目${this.formData.projectName}，项目部署后即可通过互联网访问`).then(() => {
       SocialuniDeployAPI.deployProject(this.formData).then((res) => {
         this.deployUrl = res.data
+        WindowUtil.open(this.deployUrl)
       })
     })
   }
