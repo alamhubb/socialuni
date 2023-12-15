@@ -1,9 +1,7 @@
 package com.socialuni.social.depoloy.sdk.controller;
 
-import com.github.odiszapc.nginxparser.NgxBlock;
-import com.github.odiszapc.nginxparser.NgxConfig;
-import com.github.odiszapc.nginxparser.NgxEntry;
-import com.github.odiszapc.nginxparser.NgxParam;
+import cn.hutool.core.io.file.FileWriter;
+import com.github.odiszapc.nginxparser.*;
 import com.socialuni.social.common.api.model.ResultRO;
 import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,7 +23,7 @@ import java.util.Objects;
 public class UploadController {
 
     public static void main(String[] args) throws IOException {
-        NgxConfig conf = NgxConfig.read("/devtools/nginx/conf/nginx.conf");
+        /*NgxConfig conf = NgxConfig.read("/devtools/nginx/conf/nginx.conf");
         System.out.println(conf.toString());
         NgxParam workers = conf.findParam("worker_processes");       // Ex.1
         System.out.println(workers.toString());
@@ -40,7 +38,18 @@ public class UploadController {
             System.out.println(((NgxBlock) entry).findBlock("location").getValue());
             ((NgxBlock) entry).getName(); // "server"
             ((NgxBlock) entry).findBlock("application", "live"); // "on" for the first iter, "off" for the second one
-        }
+        }*/
+
+        NgxConfig conf = NgxConfig.read("/devtools/nginx/conf/nginx.conf");
+        NgxParam listen = conf.findParam("http", "server", "listen");
+        listen.addValue(new NgxToken("123"));
+//        NgxToken ngxToken = new NgxToken("123");
+//        conf.addValue(ngxToken);
+        NgxDumper dumper = new NgxDumper(conf);
+        String newConfig = dumper.dump();
+
+        FileWriter writer = new FileWriter("/devtools/nginx/conf/nginx.conf");
+        writer.write(newConfig);
     }
 
     @PostMapping("img")
