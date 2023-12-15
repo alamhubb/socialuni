@@ -26,10 +26,10 @@ public class UploadFileController {
     @GetMapping("queryProjectName/{projectName}")
     @ResponseBody
     public ResultRO<Boolean> checkProjectName(@PathVariable("projectName") String projectName) {
-        return ResultRO.success(getBooleanResultRO(projectName));
+        return ResultRO.success(checkProject(projectName));
     }
 
-    private static boolean getBooleanResultRO(String projectName) {
+    private static boolean checkProject(String projectName) {
         if (StringUtils.isEmpty(projectName)) {
             throw new SocialBusinessException("项目名称不能为空");
         }
@@ -56,6 +56,13 @@ public class UploadFileController {
             @RequestParam(value = "projectName") String projectName,
             @RequestParam(value = "mainFile") String mainFile
     ) {
+        boolean nameCanUse = checkProject(projectName);
+        if (!nameCanUse) {
+            throw new SocialBusinessException("项目名称已存在");
+        }
+        if (StringUtils.isEmpty(mainFile)) {
+            mainFile = "index.html";
+        }
         if (Objects.isNull(files) || files.length < 1) {
             throw new SocialSystemException("文件为空，请重新上传");
         }

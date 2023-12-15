@@ -175,8 +175,6 @@ export default class MessageView extends Vue {
     if (!this.formData.projectName) {
       this.formData.projectName = PinyinUtil.convertToFirstUpperPinyin(this.formData.files[0].root)
     }
-    // this.$refs.form.validate()
-    // this.$refs.upload.upload(socialuniUserRequest, 'upload/uploadFiles', {files: this.files})
   }
 
   deploy() {
