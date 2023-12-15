@@ -10,21 +10,33 @@
         <div>
           <div class="flex-row">
             <div>
-              <el-form ref="form" :model="formData" :rules="rules" label-position="top">
+              <el-form ref="form" :model="formData" label-position="top">
                 <div class="row-col-end">
-                  <el-form-item prop="projectName" label="项目名">
+                  <el-form-item required label="项目名">
+                    <template #label>
+                      <span>
+                        <span class="mr-sm">项目名</span>
+                        (
+                        <span v-if="projectNameHasError" class="color-red">{{ projectNameHasError }}</span>
+                        <span v-else class="color-green">项目名可以使用</span>
+                        )
+                      </span>
+                    </template>
                     <el-input class="w370 mb-1" v-model="formData.projectName" @change="checkProjectName"></el-input>
                   </el-form-item>
                 </div>
                 <el-form-item prop="mainFile" label="入口文件">
                   <el-input class="w300 mr-sm" v-model="formData.mainFile" @change="checkProjectName"
                             :disabled="!editable"></el-input>
-                  <el-button plain @click="editable=!editable" :type="editable ? 'warning' : 'default'">{{ editable ? '取消' : '编辑' }}</el-button>
+                  <el-button plain @click="editable=!editable" :type="editable ? 'warning' : 'default'">
+                    {{ editable ? '取消' : '编辑' }}
+                  </el-button>
                 </el-form-item>
               </el-form>
             </div>
             <div>
-              <q-upload ref="upload" class="ml mt-30" only-folder v-model="formData.files" btn-text="选择项目" show-file-list
+              <q-upload ref="upload" class="ml mt-30" only-folder v-model="formData.files" btn-text="选择项目"
+                        show-file-list
                         @change="upload">
                 <el-icon class="ml-xs" :size="16">
                   <FolderOpened></FolderOpened>
@@ -93,6 +105,7 @@ import RegConst from "qing-util/src/constant/RegConst.ts";
 import AlertUtil from "qingjs-h5/src/util/AlertUtil.ts";
 import {FolderOpened, UploadFilled} from "@element-plus/icons-vue";
 import {ElForm} from "element-plus";
+import PinyinUtil from "@/util/PinyinUtil.ts";
 
 @Component({
   components: {
@@ -114,7 +127,7 @@ import {ElForm} from "element-plus";
 export default class MessageView extends Vue {
   $refs: {
     upload: QUpload
-    form:Elform
+    form: Elform
   }
 
   projectNameCanUse = true
@@ -127,24 +140,8 @@ export default class MessageView extends Vue {
     files: null
   }
 
-  rules = {
-    projectName: [
-      {
-        required: true,
-        validator: (rule, value, callback) => {
-          const error = this.projectNameHasError(value)
-          if (error) {
-            callback(new Error(error))
-          }
-          callback()
-        },
-        trigger: 'blur'
-      }
-    ]
-  }
-
-  projectNameHasError(value) {
-    console.log(value)
+  get projectNameHasError() {
+    const value = this.formData.projectName
     if (!value) {
       return '请输入项目名'
     } else if (!this.projectNameCanUse) {
@@ -175,10 +172,10 @@ export default class MessageView extends Vue {
   }
 
   upload() {
-    console.log(this.formData.files)
-    console.log(this.formData.files[0].root)
-    this.formData.projectName = this.formData.files[0].root
-    this.$refs.form.validate()
+    if (!this.formData.projectName) {
+      this.formData.projectName = PinyinUtil.convertToFirstUpperPinyin(this.formData.files[0].root)
+    }
+    // this.$refs.form.validate()
     // this.$refs.upload.upload(socialuniUserRequest, 'upload/uploadFiles', {files: this.files})
   }
 

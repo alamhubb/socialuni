@@ -22,6 +22,7 @@
     "mitt": "^3.0.0",
     "moment": "^2.29.4",
     "openai": "^4.21.0",
+    "pinyin": "^4.0.0-alpha.0",
     "qing-ui-h5": "../packages/qing-ui/qing-ui-h5",
     "qingjs-h5": "../qingjs-h5",
     "socialuni": "../packages/socialuni",

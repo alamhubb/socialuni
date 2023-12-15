@@ -3,5 +3,5 @@ export default class RegConst {
     static startWithNumberOrLetter = /^[0-9a-zA-Z]/;
     static startWithLetter = /^[a-z]/;
     static startWithNotLetter = /^[^a-z]/;
-    static isAllLetter = /^[a-zA-Z]$/;
+    static isAllLetter = /^[a-zA-Z]+$/;
 }

@@ -26,6 +26,10 @@ public class UploadFileController {
     @GetMapping("queryProjectName/{projectName}")
     @ResponseBody
     public ResultRO<Boolean> checkProjectName(@PathVariable("projectName") String projectName) {
+        return ResultRO.success(getBooleanResultRO(projectName));
+    }
+
+    private static boolean getBooleanResultRO(String projectName) {
         if (StringUtils.isEmpty(projectName)) {
             throw new SocialBusinessException("项目名称不能为空");
         }
@@ -33,24 +37,25 @@ public class UploadFileController {
         SocialuniDeployUserProjectDO socialuniDeployUserProjectDO = SocialuniUserRepositoryFacede.findByCustomFieldAndStatus("projectName", projectName, SocialuniCommonStatus.enable, SocialuniDeployUserProjectDO.class);
         //不存在可以直接使用
         if (socialuniDeployUserProjectDO == null) {
-            return ResultRO.success(true);
+            return true;
         }
         Integer userId = socialuniDeployUserProjectDO.getUserId();
         if (userId == null) {
             //无归属，可使用
-            return ResultRO.success(true);
+            return true;
         }
         Integer mineUserId = SocialuniUserUtil.getMineUserIdAllowNull();
         //不一致，则不可用
-        if (userId.equals(mineUserId)) {
-            return ResultRO.success(true);
-        }
-        return ResultRO.success(false);
+        return userId.equals(mineUserId);
     }
 
     @PostMapping("deployProject")
     @ResponseBody
-    public ResultRO<Void> deployProject(@RequestParam(value = "files") MultipartFile[] files, @RequestParam(value = "projectName") String projectName) {
+    public ResultRO<Void> deployProject(
+            @RequestParam(value = "files") MultipartFile[] files,
+            @RequestParam(value = "projectName") String projectName,
+            @RequestParam(value = "mainFile") String mainFile
+    ) {
         if (Objects.isNull(files) || files.length < 1) {
             throw new SocialSystemException("文件为空，请重新上传");
         }
