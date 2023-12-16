@@ -149,14 +149,14 @@ export default class SocialuniLoginViewService extends SocialuniViewService<Soci
         const password = await PasswordUtil.rsaEncode(socialuniConfigModule.allConfig.publicKey, this.loginUser.password)
 
         if (this.hasPassword) {
-            SocialuniLoginService.passwordLogin(this.loginUser.phoneNum, password).then(() => {
-                this.instance.emit('loginSuccess')
+            SocialuniLoginService.passwordLogin(this.loginUser.phoneNum, password).then((data) => {
+                this.instance.emit('loginSuccess', data)
             }).finally(() => {
                 this.bindBtnDisabled = false
             })
         } else {
-            SocialuniLoginService.phonePasswordLogin(this.loginUser.phoneNum, password, this.loginUser.authCode).then(() => {
-                this.instance.emit('loginSuccess')
+            SocialuniLoginService.phonePasswordLogin(this.loginUser.phoneNum, password, this.loginUser.authCode).then((data) => {
+                this.instance.emit('loginSuccess', data)
             }).finally(() => {
                 this.bindBtnDisabled = false
             })

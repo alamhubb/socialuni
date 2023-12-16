@@ -5,7 +5,7 @@ import socialuniPlatformAutoImportPlugin from "vite-plugin-socialuni-platform-au
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    base: "/user/",
+    base: "/user",
     build: {
         outDir: "user"
     },

@@ -7,4 +7,14 @@ export default class WindowEventListener {
             }
         })
     }
+
+    static useMessageListener(domain:string, eventFun: (event) => void) {
+        window.addEventListener('message', (event) => {
+            if (event.origin !== domain) {
+                return; // 检查消息的来源
+            }
+            console.log("Message received in iframe B:", event.data);
+            eventFun(event)
+        })
+    }
 }

@@ -14,13 +14,13 @@ export default class SocialuniLoginService {
         const phoneBindQO = new SocialPhoneNumLoginQO(phoneNum, password)
         const {data} = await LoginAPI.passwordLoginAPI(phoneBindQO)
         socialuniUserModule.setUserAndToken(data)
-        return data.user
+        return data
     }
 
     static async phonePasswordLogin(phoneNum: string, password: string, authCode: string) {
         const phoneBindQO = new SocialPhoneNumLoginQO(phoneNum, password, authCode)
         const {data} = await LoginAPI.phonePasswordLoginAPI(phoneBindQO)
         socialuniUserModule.setUserAndToken(data)
-        return data.user
+        return data
     }
 }
