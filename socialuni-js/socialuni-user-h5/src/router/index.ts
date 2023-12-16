@@ -1,12 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
-import MessageView from "@/views/chat/MessageView.vue";
-
+import SocialuniLoginPage from '@/views/user/SocialuniLoginPage.vue'
 export const constantRoutes = [
     {
         path: '/',
         name: 'message',
-        component: MessageView,
+        component: SocialuniLoginPage,
         meta: {title: '消息', hidden: true},
     },
     {

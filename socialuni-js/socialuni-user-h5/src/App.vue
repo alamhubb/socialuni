@@ -1,6 +1,6 @@
 <template>
     <div class="h100p overflow-hidden flex-col bg-default">
-        <nav-bar/>
+<!--        <nav-bar/>-->
         <div class="flex-1 overflow-hidden">
             <RouterView/>
         </div>
