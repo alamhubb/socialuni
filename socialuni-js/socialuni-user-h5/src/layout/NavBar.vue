@@ -1,95 +1,195 @@
 <template>
-  <div
-    class="row-between shadow-bottom index-sm px"
-  >
-    <div class="flex-none row-col-center mr-40 bg-click" @click="toHome">
-      <img src="@/assets/img/logo.jpg" class="h40" alt="logo">
-      <div class="font-19 ml-3 mt-1 font-bold color-social">社交软件联盟</div>
-    </div>
-
-    <div class="flex-1 row-end">
-      <div class="flex-none row-col-center mr">
-        <a href="https://socialuni.cn" target="_blank" class="mr-sm md:mr bg-click">
-          <div class="row-all-center">官网文档</div>
-        </a>
-        <el-divider direction="vertical" class="mr" />
-        <a href="https://socialuni.cn/demo" target="_blank" class="mr-sm md:mr bg-click">
-          <div class="row-all-center">demo演示</div>
-        </a>
-        <el-divider direction="vertical" class="mr" />
-        <div class="row-col-center">
-          <a href="https://gitee.com/socialuni/socialuni" target="_blank" class="mr-sm md:mr">
-            <div class="row-all-center"><img src="@/assets/imgs/giteelogo.png" class="use-click size31"/></div>
-          </a>
-          <a href="https://github.com/social-uni/socialuni" target="_blank" class="md:mr-sm">
-            <div class="row-all-center"><i class="mdi mdi-github font-36 use-click color-black"/></div>
-          </a>
-        </div>
-      </div>
-      <div class="flex-1 row-end-center">
-        <div v-if="user" class="row-col-center">
-          <el-tag class="mr-10" type="warning" effect="dark">{{ user.phoneNum }}</el-tag>
-          <el-dropdown>
-            <div>
-              <el-avatar shape="square" src="https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png" />
-              <i class="el-icon-caret-bottom el-icon--right" />
+    <div>
+        <div v-if="!mineUser" class="row-between-center shadow-bottom index-sm px-smm h50 bg-white flex-none">
+            <div class="flex-none row-col-center mr-40 bg-click" @click="toHome">
+                <!--      <img src="@/assets/img/logo.jpg" class="h40" alt="logo">-->
+                <div class="font-19 font-bold">演示系统</div>
             </div>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>{{
-                user ? user.username : '未登录'
-              }}
-              </el-dropdown-item>
-              <el-dropdown-item divided @click.native="longinOut">退出登陆</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-        </div>
-      </div>
 
-      <!--        <el-dropdown trigger="click" class="flex-none">
-        <div class="el-dropdown-link color-white pointer row-end-center h100p pr-md">
-          {{ user ? user.username : '18600' }}
-          <i class="el-icon-arrow-down el-icon&#45;&#45;right" />
-        </div>
-        <el-dropdown-menu slot="dropdown">
+            <div class="row-end-center">
+                <!--            <div class="flex-none row-col-center mr">
+                                <a href="https://socialuni.cn" target="_blank" class="mr-sm md:mr bg-click">
+                                    <div class="row-all-center">官网文档</div>
+                                </a>
+                                <el-divider direction="vertical" class="mr"/>
+                                <a href="https://socialuni.cn/demo" target="_blank" class="mr-sm md:mr bg-click">
+                                    <div class="row-all-center">demo演示</div>
+                                </a>
+                                <el-divider direction="vertical" class="mr"/>
+                                <div class="row-col-center">
+                                    <a href="https://gitee.com/socialuni/socialuni" target="_blank" class="mr-sm md:mr">
+                                        <div class="row-all-center"><img src="@/assets/imgs/giteelogo.png" class="use-click size31"/>
+                                        </div>
+                                    </a>
+                                    <a href="https://github.com/social-uni/socialuni" target="_blank" class="md:mr-sm">
+                                        <div class="row-all-center"><i class="mdi mdi-github font-36 use-click color-black"/></div>
+                                    </a>
+                                </div>
+                            </div>-->
+                <div class="row-col-center">
+                    <!--                <input id="fileSelector" type="file" @change="uploadData"/>-->
+                    <!--                <el-button @click="uploadUserAvatarImg">test</el-button>-->
+                    <el-avatar size="default" v-if="!mineUser" class="use-click" @click="toLogin">登录</el-avatar>
+                    <div v-else class="row-col-center">
+                        <el-tag class="mr-10" type="warning" effect="dark">{{ mineUser.nickname }}
+                        </el-tag>
+                        <el-avatar shape="square" :src="mineUser.avatar"/>
+                    </div>
+                </div>
 
-        </el-dropdown-menu>
-      </el-dropdown>-->
+
+                <el-dropdown v-if="mineUser" trigger="click">
+                    <el-icon :size="20" class="ml">
+                        <Tools/>
+                    </el-icon>
+                    <template #dropdown>
+                        <el-dropdown-menu>
+                            <el-dropdown-item @click.native="editUserInfo">编辑信息</el-dropdown-item>
+                            <el-dropdown-item divided @click.native="loginOut">退出登陆</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </template>
+                </el-dropdown>
+            </div>
+
+        </div>
+
+        <el-dialog
+                v-model="dialogVisible"
+                title="Tips"
+                width="30%"
+        >
+            <span>This is a message</span>
+            <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="dialogVisible = false">Cancel</el-button>
+        <el-button type="primary" @click="dialogVisible = false">
+          Confirm
+        </el-button>
+      </span>
+            </template>
+        </el-dialog>
+
+        <q-dialog ref="loginDialog" title="登录" width="400px" no-show-footer>
+            <socialuni-login-view @login-success="loginSuccess"></socialuni-login-view>
+        </q-dialog>
+
+
+        <socialuni-user-edit-dialog ref="userEditDialog"></socialuni-user-edit-dialog>
     </div>
-  </div>
-  <!--    <nav-breadcrumb />-->
+
 </template>
 
 <script lang="ts">
-import NavMenu from '@/layout/NavMenu.vue'
-import NavBreadcrumb from '@/layout/NavBreadcrumb.vue'
-import DevAccountRO from '@/model/base/DevAccountRO'
-import { Component, Vue } from 'vue-facing-decorator'
+import {Component, Vue} from 'vue-facing-decorator'
+import QDialog from "qing-ui-h5/src/components/QComponents/QDialog.vue";
+import SocialuniUserEditDialog from "@/views/user/SocialuniUserEditDialog.vue";
+import SocialuniUserEventConst from "socialuni-user-sdk/src/constant/SocialuniUserEventConst";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import CosService from "socialuni-app-sdk/src/util/CosService";
+import type DomFile from "socialuni-app-sdk/src/model/DomFile";
+import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
-
+import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
+import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
+import UUIDUtil from "qing-util/src/util/UUIDUtil";
+import ImgUtil from "qing-util/src/util/ImgUtil";
+import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
+import {ArrowDown, Tools} from "@element-plus/icons-vue";
+import SocialuniLoginView from "socialuni-user-view-h5/src/views/SocialuniLoginView.vue";
+import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
+import UserService from "socialuni-user-sdk/src/logic/UserService";
 
 @Component({
-  components: { NavBreadcrumb, NavMenu }
+    components: {SocialuniUserEditDialog, Tools, SocialuniLoginView, QDialog, ArrowDown}
 })
 export default class NavBar extends Vue {
+    $refs: {
+        loginDialog: QDialog
+        userEditDialog: SocialuniUserEditDialog
+    }
 
-  get user(){
-    return socialuniUserModule.mineUser
-  }
+    dialogVisible = false
 
-  longinOut() {
-    userModule.userLoginOut()
-  }
+    created() {
+        CommonEventUtil.on(SocialuniUserEventConst.toLogin, () => {
+            console.log('接收到了')
+            this.toLogin()
+        })
+    }
 
-  toDoc() {
-    window.open('https://socialuni.cn')
-  }
+    mounted() {
 
-  toGitee() {
-    window.open('https://gitee.com/socialuni/socialuni')
-  }
+    }
 
-  toHome() {
-    this.$router.push('/')
-  }
+    toHome() {
+        this.$router.push('/')
+    }
+
+    toLogin() {
+        console.log(this.$refs)
+        console.log(this.$refs.loginDialog)
+        this.$refs.loginDialog.open()
+        // this.$router.push('/login')
+    }
+
+    loginSuccess() {
+        QingAppUtil.ToastUtil.success('登录成功')
+        this.$refs.loginDialog.close()
+    }
+
+    editUserInfo() {
+        this.$refs.userEditDialog.open()
+    }
+
+    async uploadUserAvatarImg() {
+        console.log(123123)
+        try {
+            const cosAuthRO = await CosService.getCosAuthRO()
+
+            console.log(123123)
+            console.log(cosAuthRO.uploadImgPath)
+            console.log(cosAuthRO)
+            console.log(456465)
+            console.log(cosAuthRO)
+            const imgFiles: DomFile[] = await QingAppUtil.NativeUtil.chooseImage(1)
+            QingAppUtil.NativeUtil.showLoading('上传中')
+            const imgFile: DomFile = imgFiles[0]
+            imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src
+            const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO), SocialuniMineUserAPI.addUserAvatarImgAPI(new ImgAddQO(imgFile))])
+            socialuniUserModule.setUser(res[1].data)
+        } catch (e) {
+            console.error(e)
+        } finally {
+            QingAppUtil.NativeUtil.hideLoading()
+        }
+    }
+
+    async uploadData(e: any) {
+
+        const file = e.target.files[0]
+        console.log(e)
+        console.log(e.target)
+        console.log(e.target.files[0])
+        try {
+            const cosAuthRO = await CosService.getCosAuthRO()
+            console.log(cosAuthRO)
+            const imgKey = UUIDUtil.getUUID() + ImgUtil.getFileSuffixName(file.name)
+            const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgKey, file, cosAuthRO), SocialuniMineUserAPI.addUserAvatarImgAPI(new ImgAddQO(file))])
+            socialuniUserModule.setUser(res[1].data)
+        } catch (e) {
+            console.error(e)
+        } finally {
+            QingAppUtil.NativeUtil.hideLoading()
+        }
+    }
+
+
+    loginOut() {
+        UserService.loginOut()
+    }
+
+    get mineUser() {
+        return socialuniUserModule.mineUser
+    }
 }
 </script>

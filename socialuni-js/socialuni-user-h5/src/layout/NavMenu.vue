@@ -1,63 +1,24 @@
 <template>
-  <el-menu
-    :default-active="activeMenu"
-    active-text-color="#409EFF"
-    :mode="mode==='x'?'horizontal':'vertical'"
-    :class="[mode==='x'?'flex-row':'flex-col']"
-  >
-    <!--    如果router没有子节点，或者仅仅有一个展示的子节点，或者总是展示-->
-    <nav-menu-item
-      v-for="route in routes"
-      :key="route.path"
-      :route="route"
-      :base-path="route.path"
-    />
+  <el-menu>
+    <el-menu-item v-for="menu in menus" :id="menu.meta.title">
+      {{ menu.meta.title }}
+    </el-menu-item>
   </el-menu>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-facing-decorator'
-import NavMenuItem from '@/layout/components/NavMenu/NavMenuItem.vue'
+import { Component, Vue } from 'vue-facing-decorator'
+import { menuRoutes } from '@/router'
 
-@Component({
-  components: { NavMenuItem }
-})
+@Component({})
 export default class NavMenu extends Vue {
-  @Prop({ default: 'x' }) mode
+  // 是x(横向,水平)轴布局
+  isXAxisLayout = false
 
-  /*
-
-    */
-
-  created() {
-    // 初始系统中公用的数据
-    // searchModule.initQueryStaffs()
+  get menus(){
+    return menuRoutes
   }
 
-  get key() {
-    return this.$route.path
-  }
-
-  get routes() {
-    return this.$router.options.routes
-  }
-
-  get activeMenu() {
-    const route = this.$route
-    const { meta, path } = route
-    // if set path, the sidebar will highlight the path you set
-    if (meta.activeMenu) {
-      return meta.activeMenu
-    }
-    return path
-  }
-
-  get isCollapse() {
-    return false
-  }
-
-  get showHeader() {
-    return this.$route.meta.showHeader
-  }
 }
 </script>
+

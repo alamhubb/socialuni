@@ -1,70 +1,40 @@
 <template>
-  <el-menu :default-active="activeMenu">
-    <!--      mode="horizontal"-->
-    <!--    如果router没有子节点，或者仅仅有一个展示的子节点，或者总是展示-->
-    <nav-menu-item
-      v-for="route in routes"
-      v-show="route.meta.isOpen || (user&&user.devNum === 1212121212)"
-      :key="route.path"
-      :route="route"
-      :base-path="route.path"
-    />
-  </el-menu>
+  <div v-if="menus.length">
+    <div v-for="menu in menus" :id="menu.meta.title">
+      {{ menu.meta.title }}
+    </div>
+  </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from 'vue-facing-decorator'
-import NavMenuItem from '@/layout/components/NavMenu/NavMenuItem.vue'
-import { menuRoutes } from '@/router/router'
-import DevAccountRO from '@/model/base/DevAccountRO'
+<script setup lang="ts">
+import type {Ref} from 'vue'
+import {computed, ref} from "vue";
+import type {RouteRecordRaw} from "vue-router";
+import {useRoute} from "vue-router";
+import {constantRouters} from "@/router";
 
-@Component({
-  components: { NavMenuItem }
+const route = useRoute()
+console.log(route.path)
+console.log(route.name)
+
+const curRouteParentName = route.path.split('/').filter(item => !!item)[0]
+
+console.log(curRouteParentName)
+const menus: Ref<RouteRecordRaw[]> = ref([])
+console.log(menus)
+const parentRoute: RouteRecordRaw = constantRouters.find(item => item.name === curRouteParentName)
+console.log(parentRoute)
+
+if (parentRoute && parentRoute.children) {
+  menus.value = parentRoute.children
+}
+
+console.log(menus.value.length)
+const key = computed(() => {
+  return route.path
 })
-export default class NavMenu extends Vue {
 
-  get user(){
-
-  }
-
-  /*  @userStore.State('user')
-    user: UserVO
-
-    */
-
-  created() {
-    // 初始系统中公用的数据
-    // searchModule.initQueryStaffs()
-  }
-
-  get key() {
-    return this.$route.path
-  }
-
-  get routes() {
-    return menuRoutes
-  }
-
-  get activeMenu() {
-    const route = this.$route
-    const { meta, path } = route
-    // if set path, the sidebar will highlight the path you set
-    if (meta.activeMenu) {
-      return meta.activeMenu
-    }
-    return path
-  }
-
-  get isCollapse() {
-    return false
-  }
-
-  get showHeader() {
-    return this.$route.meta.showHeader
-  }
-
-  longinOut() {
-    // userModule.userLoginOut()
-  }
+function longinOut() {
+  // userModule.userLoginOut()
 }
 </script>
