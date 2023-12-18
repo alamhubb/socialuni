@@ -7,6 +7,7 @@ import com.socialuni.social.common.api.utils.SocialTokenFacade;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.api.DevAccountProviderInterface;
 import com.socialuni.social.tance.sdk.api.DevAccountRedisInterface;
+import com.socialuni.social.tance.sdk.constant.AdminAppConfigConst;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.tance.sdk.enumeration.SocialFeignHeaderName;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
@@ -175,11 +176,18 @@ public class DevAccountFacade {
         return devAccountModel;
     }
 
+    public static DevAccountModel getDevAccountAllowNull(String secretKey) {
+        if (StringUtils.isEmpty(secretKey)) {
+            return getDevAccountNotNull();
+        }
+        return getDevAccountBySecretKeyNotNull(secretKey);
+    }
+
     public static DevAccountModel getDevAccountNotNull() {
         //先从req中获取
         DevAccountModel devAccountModel = DevAccountFacade.getDevAccountAllowNull();
         if (devAccountModel == null) {
-            devAccountModel = DevAccountFacade.getDevAccount(1);
+            devAccountModel = DevAccountFacade.getDevAccount(AdminAppConfigConst.testDevId);
 //            throw new SocialBusinessException("开发者信息为空");
         }
         return devAccountModel;
