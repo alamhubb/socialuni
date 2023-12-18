@@ -12,4 +12,9 @@ public interface SocialuniDevTokenAPI {
     @GetMapping("getAuthToken/{devKey}")
     @Operation(summary = "根据秘钥获取开发者授权token")
     ResultRO<String> getAuthToken(@PathVariable("devKey") String devKey);
+
+
+//    @GetMapping("getAuthToken")
+//    @Operation(summary = "根据秘钥获取开发者授权token")
+//    ResultRO<String> getAuthToken(@PathVariable("devKey") String devKey);
 }

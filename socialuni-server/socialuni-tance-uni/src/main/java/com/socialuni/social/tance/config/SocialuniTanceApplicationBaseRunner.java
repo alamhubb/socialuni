@@ -5,6 +5,7 @@ import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
 import com.socialuni.social.tance.entity.DevAccountEntity;
 import com.socialuni.social.tance.model.DO.AppConfigDO;
 import com.socialuni.social.tance.repository.AppConfigRepository;
+import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.constant.AppConfigDOKeyConst;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfigBO;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfigInterface;
@@ -40,6 +41,9 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
     @Resource
     SocialuniAppConfigInterface socialuniAppConfigInterface;
 
+
+    @Resource
+    DevAccountInterface devAccountInterface;
 
     @Override
     @Async
@@ -97,6 +101,19 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
             if (centerDevDO == null) {
                 //手机号格式字符串瞎写就行，没有其他地方使用
                 devAccountEntity.createDevAccount("99999888667", SocialuniSystemConst.getCenterSocialuniId());
+            }
+        }
+
+        String testPhoneNum = socialuniAppConfigBO.getTestUserPhoneNum();
+
+        //如果手机号已经存在账户，则直接使用，正序获取第一个用户
+        DevAccountModel devAccountModelTest = devAccountInterface.findOneByPhoneNumOrderByIdAsc(testPhoneNum);
+
+        //如果不存在用户，则创建第一个默认的主系统开发者
+        if (devAccountModelTest == null) {
+            //copy一个default的值
+            if (StringUtils.isEmpty(SocialuniSystemConst.getAppSocialuniId())) {
+                devAccountModel = devAccountEntity.createDevAccount(testPhoneNum);
             }
         }
         //获取省，不包含子节点

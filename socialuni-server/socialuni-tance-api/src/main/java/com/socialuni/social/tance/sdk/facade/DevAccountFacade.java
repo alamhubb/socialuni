@@ -165,6 +165,9 @@ public class DevAccountFacade {
 
 
     public static DevAccountModel getDevAccountBySecretKeyNotNull(String secretKey) {
+        if (StringUtils.isEmpty(secretKey)) {
+            throw new SocialParamsException("开发者信息错误");
+        }
         DevAccountModel devAccountModel = devAccountApi.findOneBySecretKey(secretKey);
         if (devAccountModel == null) {
             throw new SocialParamsException("开发者信息错误");
