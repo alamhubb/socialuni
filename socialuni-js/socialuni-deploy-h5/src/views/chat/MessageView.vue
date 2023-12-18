@@ -111,6 +111,7 @@ import {ElForm} from "element-plus";
 import PinyinUtil from "@/util/PinyinUtil.ts";
 import ToastUtil from "qingjs-h5/src/util/ToastUtil.ts";
 import WindowUtil from "@/util/WindowUtil.ts";
+import alertUtil from "qingjs-h5/src/util/AlertUtil.ts";
 
 @Component({
   components: {
@@ -173,7 +174,7 @@ export default class MessageView extends Vue {
   files = []
 
   checkProjectName() {
-    SocialuniDeployAPI.checkProjectName(this.projectName).then(res => {
+    SocialuniDeployAPI.checkProjectName(this.formData.projectName).then(res => {
       this.projectNameCanUse = res.data
     })
   }
@@ -196,7 +197,9 @@ export default class MessageView extends Vue {
     AlertUtil.confirm(`是否确认部署项目${this.formData.projectName}，项目部署后即可通过互联网访问`).then(() => {
       SocialuniDeployAPI.deployProject(this.formData).then((res) => {
         this.deployUrl = res.data
-        WindowUtil.open(this.deployUrl)
+        AlertUtil.success('部署成功，是否立即访问？').then(() => {
+          WindowUtil.open(this.deployUrl)
+        })
       })
     })
   }

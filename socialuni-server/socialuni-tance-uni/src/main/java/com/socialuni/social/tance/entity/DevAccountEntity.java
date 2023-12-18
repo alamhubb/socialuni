@@ -16,6 +16,7 @@ import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.logic.redis.SocialUserPhoneRedis;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -27,6 +28,7 @@ import java.util.Optional;
  * @date 2019-06-25 19:59
  */
 @Service
+@Slf4j
 public class DevAccountEntity {
     @Resource
     private DevAccountInterface devAccountApi;
@@ -86,6 +88,7 @@ public class DevAccountEntity {
         devAccountModel.setUserId(socialuniUserDo.getUserId());
         devAccountModel = (DevAccountDo) devAccountRedis.saveDevAccount(devAccountModel);
 
+        log.info("创建开发者账号成功，devNum:{},phoneNum:{}", curDevNum, phoneNum);
         //创建话题，还要创建用户
        /* TagDO tagDO = SocialTagDOFactory.toTagDO(curDevNum.toString(), "开发者对应的话题", SocialAppConfig.getSystemUserId());
         tagDO = tagRepository.save(tagDO);
