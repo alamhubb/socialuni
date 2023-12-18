@@ -9,8 +9,8 @@ package com.socialuni.social.common.api.constant;
 public class DateTimeType {
     public static final Long second = (long) 1000;
     public static final Long minute = (long) 60 * second;
-    public static final Long hour = (long) 60 * minute;
     public static final Long halfHour = (long) 30 * minute;
+    public static final Long hour = (long) 60 * minute;
     public static final Long day = (long) 24 * hour;
     public static final Long week = (long) 7 * day;
     public static final Long month = (long) 31 * day;

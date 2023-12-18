@@ -160,6 +160,11 @@ public class DevAccountFacade {
             ResultRO<DevAccountDO> resultRO = socialuniDevAccountAPI.queryDevAccount(new DevAccountQueryQO(secretKey));
             devAccountDO = resultRO.getData();
         }*/
+        return getDevAccountBySecretKeyNotNull(secretKey);
+    }
+
+
+    public static DevAccountModel getDevAccountBySecretKeyNotNull(String secretKey) {
         DevAccountModel devAccountModel = devAccountApi.findOneBySecretKey(secretKey);
         if (devAccountModel == null) {
             throw new SocialParamsException("开发者信息错误");

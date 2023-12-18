@@ -72,7 +72,7 @@ public class AdminLoginService {
 //        String platform = loginVO.getPlatform();
         String devSecretKey = devAccountModel.getSecretKey();
         //生成userToken
-        String userToken = SocialTokenFacade.generateTokenByUserKey(devSecretKey);
+        String userToken = SocialTokenFacade.createTokenByUserKey(devSecretKey);
 //        userToken = devTokenApi.savePut(new DevTokenModler(userToken, devAccountModel.getId())).getTokenCode();
 
         DevAccountRO devAccountRO = new DevAccountRO(devAccountModel);

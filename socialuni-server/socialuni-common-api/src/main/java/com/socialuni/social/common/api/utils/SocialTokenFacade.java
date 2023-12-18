@@ -72,10 +72,10 @@ public class SocialTokenFacade {
     }
 
     public static String generateTokenByUserId(Integer userId) {
-        return SocialTokenFacade.generateTokenByUserKey(userId.toString());
+        return SocialTokenFacade.createTokenByUserKey(userId.toString());
     }
 
-    public static String generateTokenByUserKey(String userKey) {
+    public static String createTokenByUserKey(String userKey) {
         //生成的时候使用商户号，因为token中不存储敏感信息
         return Jwts.builder()//返回的字符串便是我们的jwt串了
                 //先用userid，以后可以改为用uid

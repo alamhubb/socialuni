@@ -2,7 +2,7 @@
 package com.socialuni.social.tance.implement;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.socialuni.social.tance.entity.DevAccountDo;
+import com.socialuni.social.tance.model.DO.DevAccountDo;
 import com.socialuni.social.tance.repository.DevAccountRepository;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;

@@ -1,4 +1,4 @@
-package com.socialuni.social.tance.entity;
+package com.socialuni.social.tance.model.DO;
 
 import com.socialuni.social.tance.sdk.enumeration.DevAccountType;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;

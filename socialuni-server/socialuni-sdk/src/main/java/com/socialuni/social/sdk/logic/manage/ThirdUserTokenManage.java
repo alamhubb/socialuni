@@ -14,7 +14,7 @@ public class ThirdUserTokenManage {
 
     public ThirdUserTokenDO create(String thirdUserId, Integer devId, Integer mineUserId) {
         //本系统的，生成userToken，有个清池token对应集美token
-        String appToken = SocialTokenFacade.generateTokenByUserKey(thirdUserId);
+        String appToken = SocialTokenFacade.createTokenByUserKey(thirdUserId);
         ThirdUserTokenDO thirdToken = new ThirdUserTokenDO(mineUserId, appToken, devId, thirdUserId);
         thirdToken = thirdUserTokenRepository.save(thirdToken);
         return thirdToken;
