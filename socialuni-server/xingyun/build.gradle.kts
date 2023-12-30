@@ -1,13 +1,13 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "2.7.4"
+    id("org.springframework.boot") version "2.7.14"
     id("io.spring.dependency-management") version "1.1.4"
     kotlin("jvm") version "1.9.21"
     kotlin("plugin.spring") version "1.9.21"
 }
 
-group = "org.example"
+group = "com.socialuni.social"
 version = "0.0.1-SNAPSHOT"
 
 java {
@@ -38,8 +38,6 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    implementation("com.socialuni.social:socialuni-common-sdk:0.3.0")
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
 }
 
 tasks.withType<KotlinCompile> {
@@ -51,8 +49,4 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
-}
-
-kotlin {
-    jvmToolchain(17)
 }

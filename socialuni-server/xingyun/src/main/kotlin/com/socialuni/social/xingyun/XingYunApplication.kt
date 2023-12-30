@@ -1,4 +1,4 @@
-package org.example
+package com.socialuni.social.xingyun
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
