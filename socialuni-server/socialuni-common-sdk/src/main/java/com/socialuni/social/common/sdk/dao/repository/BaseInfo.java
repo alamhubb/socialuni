@@ -1,6 +1,7 @@
 package com.socialuni.social.common.sdk.dao.repository;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.annotation.CreatedBy;
@@ -9,7 +10,7 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -25,6 +26,7 @@ import java.util.Date;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 @Data
+@EqualsAndHashCode(callSuper = true)
 @DynamicUpdate
 @DynamicInsert
 public abstract class BaseInfo implements Serializable,Cloneable{

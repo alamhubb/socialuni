@@ -1,12 +1,14 @@
 package com.socialuni.social.common.sdk.platform;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author qinkaiyuan
  * @date 2020-03-14 0:29
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class TokenDTO {
     public String accessToken;
 

@@ -1,12 +1,14 @@
 package com.socialuni.social.common.sdk.platform.weixin.login;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author qinkaiyuan
  * @date 2019-02-14 22:03
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class LoginResult {
     private String openid;
     private String client_id;

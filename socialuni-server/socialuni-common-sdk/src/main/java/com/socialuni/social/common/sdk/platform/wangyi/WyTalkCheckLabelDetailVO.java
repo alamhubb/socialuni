@@ -1,10 +1,12 @@
 package com.socialuni.social.common.sdk.platform.wangyi;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class WyTalkCheckLabelDetailVO {
     //线索信息，用于定位文本中有问题的部分，辅助人工审核
     private List<String> hint;

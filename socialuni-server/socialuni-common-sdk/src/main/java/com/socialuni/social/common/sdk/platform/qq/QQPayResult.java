@@ -1,12 +1,14 @@
 package com.socialuni.social.common.sdk.platform.qq;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author qinkaiyuan
  * @date 2019-10-24 16:25
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 //@JacksonXmlRootElement(localName = "xml")
 public class QQPayResult {
     private String return_code;

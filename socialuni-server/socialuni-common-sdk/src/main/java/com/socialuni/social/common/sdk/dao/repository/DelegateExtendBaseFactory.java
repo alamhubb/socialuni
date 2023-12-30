@@ -2,7 +2,7 @@ package com.socialuni.social.common.sdk.dao.repository;
 
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 
 /**
  * @author wulinghui

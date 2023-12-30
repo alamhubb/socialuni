@@ -4,6 +4,7 @@ import cn.hutool.core.util.ClassUtil;
 import com.socialuni.social.common.api.enumeration.PublishDataType;
 import com.socialuni.social.common.api.model.PublishDataModel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMethod;
 

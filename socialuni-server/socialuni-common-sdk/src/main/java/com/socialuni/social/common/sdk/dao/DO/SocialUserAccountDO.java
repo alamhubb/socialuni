@@ -2,9 +2,10 @@ package com.socialuni.social.common.sdk.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -12,6 +13,7 @@ import java.io.Serializable;
  * 自己表示字段，其他表示关联的表内字段
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "s_user_account",
         //查询条件索引

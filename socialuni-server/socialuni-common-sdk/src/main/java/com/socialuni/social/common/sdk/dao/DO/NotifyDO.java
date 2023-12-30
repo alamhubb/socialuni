@@ -3,13 +3,15 @@ package com.socialuni.social.common.sdk.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniUserContactBaseDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "s_app_notify")
 @NoArgsConstructor

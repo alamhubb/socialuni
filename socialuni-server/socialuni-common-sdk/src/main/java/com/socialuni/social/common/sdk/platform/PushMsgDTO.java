@@ -1,12 +1,14 @@
 package com.socialuni.social.common.sdk.platform;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author qinkaiyuan
  * @date 2020-03-21 23:51
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class PushMsgDTO {
     // * 会话标示
     private String access_token;

@@ -1,6 +1,7 @@
 package com.socialuni.social.common.sdk.platform.baidu;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import java.util.Map;
  * @date 2019-10-24 16:25
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class BaiduResult {
     private Integer errno;
     private String errmsg;

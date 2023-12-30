@@ -1,6 +1,7 @@
 package com.socialuni.social.common.sdk.platform.weixin.token;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
@@ -10,7 +11,8 @@ import java.util.Date;
  * @author qinkaiyuan
  * @date 2019-02-14 22:03
  */
-@Data@Component
+@Data
+@EqualsAndHashCode(callSuper = true)@Component
 public class WxTokenResult {
     private String access_token;
     private Date createTime;

@@ -2,8 +2,9 @@ package com.socialuni.social.common.sdk.dao.DO;
 
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -12,6 +13,7 @@ import java.util.Date;
  */@Entity
 @Table(name = "s_app_antispam")
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AntispamDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

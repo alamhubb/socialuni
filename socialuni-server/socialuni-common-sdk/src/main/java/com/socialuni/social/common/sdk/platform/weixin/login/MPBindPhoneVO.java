@@ -1,6 +1,7 @@
 package com.socialuni.social.common.sdk.platform.weixin.login;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -10,6 +11,7 @@ import javax.validation.constraints.NotNull;
  * @date 2019-02-14 22:03
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class MPBindPhoneVO {
     private String code;
     private String loginType;

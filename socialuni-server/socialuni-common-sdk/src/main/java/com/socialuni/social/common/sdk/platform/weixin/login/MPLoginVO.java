@@ -1,6 +1,7 @@
 package com.socialuni.social.common.sdk.platform.weixin.login;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotBlank;
@@ -11,6 +12,7 @@ import javax.validation.constraints.NotNull;
  * @date 2019-02-14 22:03
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class MPLoginVO {
     @NotBlank(message = "参数异常")
     private String code;
