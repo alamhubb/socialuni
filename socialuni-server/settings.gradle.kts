@@ -7,4 +7,9 @@ include(
     "socialuni-report-sdk",
     "socialuni-user-sdk",
     "socialuni-tance-uni",
+    "socialuni-web-sdk",
+    "socialuni-community-sdk",
+    "socialuni-im",
+    "socialuni-im-api",
+    "socialuni-im-sdk",
 )
