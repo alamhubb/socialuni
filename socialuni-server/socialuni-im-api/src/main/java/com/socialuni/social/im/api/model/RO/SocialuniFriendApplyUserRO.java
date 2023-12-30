@@ -2,9 +2,11 @@ package com.socialuni.social.im.api.model.RO;
 
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class SocialuniFriendApplyUserRO extends SocialuniUserRO {
     // 待同意

@@ -46,6 +46,9 @@ subprojects {
             implementation("org.apache.commons:commons-lang3:3.9")
             implementation("io.jsonwebtoken:jjwt:0.9.1")
             implementation("cn.hutool:hutool-all:5.8.8")
+            implementation("org.springframework.cloud:spring-cloud-starter-openfeign:3.1.4")
+            implementation("io.github.openfeign:feign-httpclient:11.8")
+            implementation("io.swagger.core.v3:swagger-core:2.2.2")
         }
     }
 }
