@@ -11,7 +11,7 @@ subprojects {
 
     dependencies{
         constraints {
-            add("implementation", "com.socialuni.social:socialuni-common-api:${rootProject.version}")
+            implementation("com.socialuni.social:socialuni-common-api:${rootProject.version}")
         }
     }
 }
