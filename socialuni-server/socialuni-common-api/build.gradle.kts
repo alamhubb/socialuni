@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.socialuni.social.common.api"
-version = "0.3.0"
+version = rootProject.version
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17

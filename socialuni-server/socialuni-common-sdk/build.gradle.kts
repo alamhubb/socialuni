@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.socialuni.social.common.sdk"
-version = "0.0.1-SNAPSHOT"
+version = rootProject.version
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
@@ -22,7 +22,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.socialuni.social:socialuni-common-api:0.3.0")
+    implementation("com.socialuni.social:socialuni-common-api")
     compileOnly("org.projectlombok:lombok")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     annotationProcessor("org.projectlombok:lombok")
