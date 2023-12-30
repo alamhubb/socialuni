@@ -9,4 +9,5 @@ dependencies {
     implementation("net.coobird:thumbnailator:0.4.8")
     implementation("com.thoughtworks.xstream:xstream:1.4.15")
     implementation("com.github.qcloudsms:qcloudsms:1.0.6")
+    runtimeOnly("mysql:mysql-connector-java")
 }

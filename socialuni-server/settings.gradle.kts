@@ -6,4 +6,5 @@ include(
     "socialuni-tance-dev",
     "socialuni-report-sdk",
     "socialuni-user-sdk",
+    "socialuni-tance-uni",
 )
