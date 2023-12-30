@@ -12,4 +12,6 @@ include(
     "socialuni-im",
     "socialuni-im-api",
     "socialuni-im-sdk",
+    "socialuni-sdk",
+    "socialuni-example-web",
 )

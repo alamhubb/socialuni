@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.socialuni.social.sdk.dao.mapper.TagMapper">
+    <select id="TagCount" resultType="int">
+        SELECT count(*) FROM tag
+    </select>
+</mapper>
