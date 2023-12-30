@@ -10,6 +10,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/socialuni-common-api" />
+            <option value="$PROJECT_DIR$/socialuni-common-sdk" />
           </set>
         </option>
       </GradleProjectSettings>
