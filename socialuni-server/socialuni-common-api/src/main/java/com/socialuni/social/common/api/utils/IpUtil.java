@@ -1,7 +1,7 @@
 package com.socialuni.social.common.api.utils;
 
 import com.socialuni.social.common.api.constant.SocialWebHeaderName;
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 

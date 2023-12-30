@@ -1,8 +1,8 @@
 package com.socialuni.social.common.api.entity;
 
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
-import jakarta.persistence.Column;
-import jakarta.persistence.MappedSuperclass;
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

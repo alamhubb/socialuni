@@ -1,7 +1,7 @@
 package com.socialuni.social.common.api.DO;
 
 import com.socialuni.social.common.api.constant.ErrorPlatformType;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

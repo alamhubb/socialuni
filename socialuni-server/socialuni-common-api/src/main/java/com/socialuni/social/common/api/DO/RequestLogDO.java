@@ -1,6 +1,6 @@
 package com.socialuni.social.common.api.DO;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Data;
 
 import java.util.Date;

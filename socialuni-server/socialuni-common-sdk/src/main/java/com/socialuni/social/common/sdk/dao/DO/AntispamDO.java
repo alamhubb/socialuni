@@ -4,7 +4,7 @@ package com.socialuni.social.common.sdk.dao.DO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
