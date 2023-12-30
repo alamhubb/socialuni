@@ -8,7 +8,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "s_app_push_message")
 public class PushMessageDO implements Serializable {

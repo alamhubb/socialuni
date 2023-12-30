@@ -9,7 +9,6 @@ import lombok.EqualsAndHashCode;
  * @date 2020-03-27 12:48
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class WxPhoneNumRO {
     private String purePhoneNumber;

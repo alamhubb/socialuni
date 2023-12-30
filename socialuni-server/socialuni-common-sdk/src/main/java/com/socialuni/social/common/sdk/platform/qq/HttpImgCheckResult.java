@@ -8,7 +8,6 @@ import lombok.EqualsAndHashCode;
  * @date 2019-10-24 16:25
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
 public class HttpImgCheckResult {
     private Integer errCode;
     private String errMsg;

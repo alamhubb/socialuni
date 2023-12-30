@@ -17,12 +17,12 @@ import javax.persistence.MappedSuperclass;
  * @date 2022/8/30 15:39
  * @since 1.0
  */
+@EqualsAndHashCode(callSuper = true)
 @MappedSuperclass
 //@EntityListeners(TanceAuditingEntityListenerConfigurable.class)
 @DynamicUpdate
 @DynamicInsert
 @Data
-@EqualsAndHashCode(callSuper = true)
 public abstract class SuperInfo extends BaseInfo {
     /**
      * tanceId对象数据库的列名。

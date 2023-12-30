@@ -10,7 +10,6 @@ import java.util.Map;
  * @date 2019-10-24 16:25
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
 public class BaiduResult {
     private Integer errno;
     private String errmsg;

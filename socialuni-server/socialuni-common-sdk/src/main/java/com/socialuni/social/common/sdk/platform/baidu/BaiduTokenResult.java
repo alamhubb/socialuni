@@ -11,8 +11,7 @@ import java.util.Date;
  * @author qinkaiyuan
  * @date 2019-02-14 22:03
  */
-@Data
-@EqualsAndHashCode(callSuper = true)@Component
+@Data@Component
 public class BaiduTokenResult {
     private String access_token;
     private Integer expires_in;

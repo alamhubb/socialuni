@@ -5,7 +5,6 @@ import lombok.EqualsAndHashCode;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
 @ConfigurationProperties(prefix = "socialuni.app")
 public class SocialuniAppProperties {
     private String staticResourceUrl;

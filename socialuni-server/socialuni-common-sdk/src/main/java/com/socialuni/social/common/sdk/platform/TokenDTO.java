@@ -8,7 +8,6 @@ import lombok.EqualsAndHashCode;
  * @date 2020-03-14 0:29
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
 public class TokenDTO {
     public String accessToken;
 

@@ -11,7 +11,6 @@ import javax.validation.constraints.NotBlank;
  * @date 2019-02-14 22:03
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
 public class AppLoginVO {
     @NotBlank(message = "参数异常")
     private String openId;

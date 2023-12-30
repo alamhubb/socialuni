@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @date 2020-02-28 14:49
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
 @XmlRootElement(name = "xml")
 public class WXPayNotifyResult {
     private String appid;

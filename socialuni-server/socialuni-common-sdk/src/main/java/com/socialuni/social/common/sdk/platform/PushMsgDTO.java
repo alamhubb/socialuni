@@ -8,7 +8,6 @@ import lombok.EqualsAndHashCode;
  * @date 2020-03-21 23:51
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
 public class PushMsgDTO {
     // * 会话标示
     private String access_token;

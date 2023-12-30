@@ -8,7 +8,6 @@ import lombok.EqualsAndHashCode;
  * @date 2019-02-14 22:03
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
 public class BaiduLoginResult {
     private String openid;
     private String session_key;

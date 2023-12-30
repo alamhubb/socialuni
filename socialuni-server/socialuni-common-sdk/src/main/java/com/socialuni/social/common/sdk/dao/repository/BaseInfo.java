@@ -26,7 +26,6 @@ import java.util.Date;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 @Data
-@EqualsAndHashCode(callSuper = true)
 @DynamicUpdate
 @DynamicInsert
 public abstract class BaseInfo implements Serializable,Cloneable{

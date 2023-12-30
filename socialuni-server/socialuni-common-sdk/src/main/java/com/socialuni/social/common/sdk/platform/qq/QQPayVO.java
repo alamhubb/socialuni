@@ -8,7 +8,6 @@ import lombok.EqualsAndHashCode;
  * @date 2020-01-02 15:47
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
 public class QQPayVO {
     //应用ID
     private  String appid;

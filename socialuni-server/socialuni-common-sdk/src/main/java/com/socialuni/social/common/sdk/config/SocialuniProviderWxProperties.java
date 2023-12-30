@@ -5,7 +5,6 @@ import lombok.EqualsAndHashCode;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
 @ConfigurationProperties(prefix = "socialuni.provider.wx")
 public class SocialuniProviderWxProperties {
     private String wxMpId;

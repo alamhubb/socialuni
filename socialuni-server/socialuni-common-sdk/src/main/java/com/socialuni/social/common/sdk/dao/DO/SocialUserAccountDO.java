@@ -12,8 +12,8 @@ import java.io.Serializable;
  * 登录相关，只有登录时才用得到的表
  * 自己表示字段，其他表示关联的表内字段
  */
-@Data
 @EqualsAndHashCode(callSuper = true)
+@Data
 @Entity
 @Table(name = "s_user_account",
         //查询条件索引

@@ -13,7 +13,6 @@ import java.util.Date;
  */@Entity
 @Table(name = "s_app_antispam")
 @Data
-@EqualsAndHashCode(callSuper = true)
 public class AntispamDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
