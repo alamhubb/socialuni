@@ -1,8 +1,10 @@
 package com.socialuni.social.im.logic.foctory;
 
 import com.socialuni.social.common.api.constant.SocialuniContentType;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.im.dao.DO.SocialuniChatDO;
+import com.socialuni.social.im.enumeration.ChatOpenType;
 import com.socialuni.social.im.enumeration.ChatType;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
@@ -20,15 +22,25 @@ public class SocialuniChatDOFactory {
         return chatDO;
     }
 
-    public static SocialuniChatDO createGroupChat(String chatName) {
+    public static SocialuniChatDO createSystemGroupChat(String chatName) {
+        return SocialuniChatDOFactory.createGroupChat(chatName, null, ChatType.system_group, SocialuniSystemConst.getTagDefaultAvatar());
+    }
+
+    public static SocialuniChatDO createUserPersonalChat(SocialuniUserDo userDo) {
+        return SocialuniChatDOFactory.createGroupChat(userDo.getNickname(), userDo.getUserId(), ChatType.userPersonalGroup, userDo.getAvatar());
+    }
+
+    private static SocialuniChatDO createGroupChat(String chatName, Integer userId, String type, String avatar) {
         SocialuniChatDO chatDO = new SocialuniChatDO();
 
         Integer uid = SocialuniUnionIdFacede.createChatUnionId();
         chatDO.setUnionId(uid);
         chatDO.setChatName(chatName);
-        chatDO.setAvatar(SocialuniSystemConst.getTagDefaultAvatar());
+        chatDO.setAvatar(avatar);
         chatDO.setContentType(SocialuniContentType.chat);
-        chatDO.setType(ChatType.system_group);
+        chatDO.setType(type);
+        chatDO.setOpenType(ChatOpenType.open);
+        chatDO.setUserId(userId);
         chatDO = SocialuniRepositoryFacade.save(chatDO);
         return chatDO;
     }

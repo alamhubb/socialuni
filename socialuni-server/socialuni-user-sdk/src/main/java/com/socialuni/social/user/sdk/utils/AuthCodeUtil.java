@@ -1,6 +1,6 @@
 package com.socialuni.social.user.sdk.utils;
 
-import com.socialuni.social.common.api.utils.IntegerUtils;
+import com.socialuni.social.common.api.utils.NumberUtils;
 
 /**
  * @author qinkaiyuan
@@ -14,7 +14,7 @@ public class AuthCodeUtil {
         int codeBound = 10;
         StringBuilder code = new StringBuilder();
         for (int i = 0; i < codeLength; i++) {
-            code.append(IntegerUtils.random.nextInt(codeBound));
+            code.append(NumberUtils.random.nextInt(codeBound));
         }
         return code.toString();
     }

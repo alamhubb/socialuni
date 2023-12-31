@@ -13,10 +13,10 @@ public class SocialuniChatManage {
     @Resource
     SocialuniChatRepository chatRepository;
 
-    public SocialuniChatDO getOrCreateChat(String chatName) {
+    public SocialuniChatDO getOrCreateSystemGroupChat(String chatName) {
         SocialuniChatDO socialuniChatDO = chatRepository.findFirstByTypeAndChatName(ChatType.system_group, chatName);
         if (socialuniChatDO == null) {
-            socialuniChatDO = SocialuniChatDOFactory.createGroupChat(chatName);
+            socialuniChatDO = SocialuniChatDOFactory.createSystemGroupChat(chatName);
         }
         return socialuniChatDO;
     }

@@ -3,6 +3,8 @@ package com.socialuni.social.common.api.utils;
 
 import cn.hutool.extra.spring.SpringUtil;
 
+import static cn.hutool.extra.spring.SpringUtil.getBeanFactory;
+
 /**
  * 封装获得bean的细节，将来可以用于扩展其他的IOC容器。
  * 将来可能spring也会被替换。

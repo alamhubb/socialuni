@@ -1,16 +1,19 @@
 package com.socialuni.social.im.logic.domain;
 
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
+import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
-import com.socialuni.social.im.enumeration.ChatType;
+import com.socialuni.social.im.dao.DO.SocialuniFriendApplyRecordDO;
 import com.socialuni.social.im.enumeration.MessageType;
+import com.socialuni.social.im.enumeration.SocialuniAddFriendStatus;
 import com.socialuni.social.im.logic.entity.SocialuniMessageEntity;
 import com.socialuni.social.im.logic.foctory.SocialuniChatUserDOFactory;
-import com.socialuni.social.im.logic.service.SocialuniMessageService;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniUserBlackDO;
 import com.socialuni.social.user.sdk.logic.domain.SocialUserFollowDomain;
 import com.socialuni.social.user.sdk.logic.manage.SocialuniUserFollowManage;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserFollowDO;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniUserFollowDO;
 import com.socialuni.social.user.sdk.model.QO.follow.SocialuniUserFollowAddQO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.context.annotation.Primary;
@@ -35,18 +38,6 @@ public class SocialuniImUserFollowDomain extends SocialUserFollowDomain {
 
         Integer mineUserId = socialuniUserFollowDO.getUserId();
         Integer beUserId = socialuniUserFollowDO.getBeUserId();
-
-        SocialuniChatUserDO socialuniChatUserDO = SocialuniChatUserDOFactory.getChatUserDO(mineUserId, beUserId);
-
-        //如果您把对方拉黑了，重新关注后则取消拉黑
-        if (socialuniChatUserDO != null) {
-            if (socialuniChatUserDO.getBlackUser()) {
-                socialuniChatUserDO.setBlackUser(false);
-                socialuniChatUserDO = SocialuniRepositoryFacade.save(socialuniChatUserDO);
-            }
-            return socialuniUserFollowDO;
-        }
-
 
         boolean beFollow = socialuniUserFollowManage.userHasFollowBeUser(beUserId, mineUserId);
         if (!beFollow) {

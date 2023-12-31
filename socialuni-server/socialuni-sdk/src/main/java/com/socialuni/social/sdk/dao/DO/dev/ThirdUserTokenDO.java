@@ -3,11 +3,9 @@ package com.socialuni.social.sdk.dao.DO.dev;
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import com.socialuni.social.common.api.constant.DateTimeType;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.util.Date;
-
 
 @Entity
 @Table(name = "s_third_user_token",
@@ -24,7 +22,6 @@ import java.util.Date;
         }
 )
 @Data
-@EqualsAndHashCode(callSuper = true)
 public class ThirdUserTokenDO extends SocialuniContentBaseDO {
     @Column(nullable = false, updatable = false)
     private Integer devId;

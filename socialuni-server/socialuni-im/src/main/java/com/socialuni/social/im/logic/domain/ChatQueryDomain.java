@@ -7,6 +7,7 @@ import com.socialuni.social.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.im.dao.repository.SocialuniChatRepository;
 import com.socialuni.social.im.dao.repository.ChatUserRepository;
 import com.socialuni.social.im.enumeration.ChatUserStatus;
+import com.socialuni.social.im.logic.entity.SocialuniChatEntity;
 import com.socialuni.social.im.logic.foctory.SocialChatROFactory;
 import com.socialuni.social.im.api.model.RO.ChatRO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
@@ -33,6 +34,8 @@ public class ChatQueryDomain {
     SocialuniChatManage socialuniChatManage;
     @Resource
     SocialuniChatUserManage socialuniChatUserManage;
+    @Resource
+    SocialuniChatEntity socialuniChatEntity;
 
 
     public List<ChatRO> getChats() {
@@ -47,18 +50,9 @@ public class ChatQueryDomain {
     //登录情况下查询用户有权限的chatuser
     //初始化和查询chat列表触发的
     public List<ChatRO> getUserChats(SocialuniUserDo user) {
-        //判断用户是否加入了默认的聊天群
 
-        List<String> groups = SocialuniAppConfig.getAppConfig().getDefaultChatGroups();
+        socialuniChatEntity.createUserChats(user);
 
-        //什么时候创建这个默认群呢
-        //启动的时候
-        //修改的时候
-
-        for (String group : groups) {
-            SocialuniChatDO socialuniChatDO = socialuniChatManage.getOrCreateChat(group);
-            SocialuniChatUserDO socialuniChatUserDO = socialuniChatUserManage.getOrCreateChat(socialuniChatDO, user.getUserId());
-        }
 
         //未登录的情况只插叙你官方的chats
         List<SocialuniChatUserDO> chatUsers = chatUserRepository.findByStatusAndUserIdOrderByUpdateTimeDesc(ChatUserStatus.enable, user.getUserId());

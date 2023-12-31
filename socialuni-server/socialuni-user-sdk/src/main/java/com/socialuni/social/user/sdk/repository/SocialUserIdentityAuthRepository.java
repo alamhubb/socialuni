@@ -1,7 +1,7 @@
 package com.socialuni.social.user.sdk.repository;
 
 
-import com.socialuni.social.user.sdk.model.DO.SocialUserIdentityAuthDO;
+import com.socialuni.social.user.sdk.dao.DO.SocialUserIdentityAuthDO;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;

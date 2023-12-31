@@ -1,7 +1,6 @@
 package com.socialuni.social.common.sdk.platform.wangyi;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.util.List;
 

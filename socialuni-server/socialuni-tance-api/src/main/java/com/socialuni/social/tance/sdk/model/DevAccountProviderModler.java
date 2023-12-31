@@ -2,12 +2,10 @@ package com.socialuni.social.tance.sdk.model;
 
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 public class DevAccountProviderModler extends SocialuniContentBaseDO implements Serializable {

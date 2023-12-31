@@ -1,7 +1,6 @@
 package com.socialuni.social.common.sdk.platform.weixin.token;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 

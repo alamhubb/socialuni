@@ -14,7 +14,7 @@ import com.socialuni.social.sdk.dao.utils.content.SocialuniUserImgDOUtil;
 import com.socialuni.social.sdk.logic.factory.SocialTalkImgROFactory;
 import com.socialuni.social.sdk.logic.factory.community.SocialTagROFactory;
 import com.socialuni.social.sdk.model.RO.community.tag.TagRO;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserImgDo;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniUserImgDo;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

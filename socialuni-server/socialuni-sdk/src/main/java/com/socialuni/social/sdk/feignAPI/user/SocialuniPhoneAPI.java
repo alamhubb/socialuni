@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.feignAPI.user;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.sdk.model.QO.SocialBindWxPhoneNumQO;
-import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumQO;
+import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumAuthCodeQO;
 import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.user.sdk.model.QO.phone.SocialSendAuthCodeQO;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author qinkaiyuan
@@ -28,5 +30,8 @@ public interface SocialuniPhoneAPI {
     ResultRO<SocialuniMineUserDetailRO> bindWxPhoneNum(@RequestBody @Valid SocialBindWxPhoneNumQO bindWxPhoneNumQO);
 
     @PostMapping("bindPhoneNum")
-    ResultRO<SocialuniMineUserDetailRO> bindPhoneNum(@RequestBody @Valid SocialPhoneNumQO phoneNumQO);
+    ResultRO<SocialuniMineUserDetailRO> bindPhoneNum(@RequestBody @Valid SocialPhoneNumAuthCodeQO phoneNumQO);
+
+    @PostMapping("checkRegistry")
+    ResultRO<Boolean> checkRegistry(@RequestBody @Valid @NotNull SocialSendAuthCodeQO authCodeQO);
 }

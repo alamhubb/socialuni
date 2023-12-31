@@ -1,7 +1,6 @@
 package com.socialuni.social.common.sdk.model.QO;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 @Data
 public class LocationQueryQO {

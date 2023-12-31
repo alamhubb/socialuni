@@ -2,7 +2,6 @@ package com.socialuni.social.tance.entity;
 
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -18,7 +17,6 @@ import javax.persistence.*;
         }
 )
 @Data
-@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 public class SocialuniUnionIdDo extends SocialuniUnionIdModler {
     @Column(nullable = false)

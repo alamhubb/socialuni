@@ -4,10 +4,10 @@ import com.socialuni.social.common.api.constant.PlatformType;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.user.sdk.constant.GenderTypeNumEnum;
-import com.socialuni.social.common.sdk.dao.DO.SocialUserAccountDO;
+import com.socialuni.social.common.sdk.dao.DO.SocialUserPlatformAccountDO;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.user.sdk.model.RO.UniUnionIdRO;
-import com.socialuni.social.common.sdk.dao.repository.SocialUserAccountRepository;
+import com.socialuni.social.common.sdk.dao.repository.SocialUserPlatformAccountRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -19,22 +19,22 @@ import java.util.Date;
 @Slf4j
 public class SocialUserAccountManage {
     @Resource
-    SocialUserAccountRepository socialUserAccountRepository;
+    SocialUserPlatformAccountRepository socialUserPlatformAccountRepository;
     @Resource
     SocialUserAccountStore socialUserAccountStore;
 
-    public SocialUserAccountDO updateSessionKey(Integer mineUserId, String provider, String sessionKey) {
-        SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUserId(provider, mineUserId);
+    public SocialUserPlatformAccountDO updateSessionKey(Integer mineUserId, String provider, String sessionKey) {
+        SocialUserPlatformAccountDO socialUserAccountDO = socialUserPlatformAccountRepository.findByProviderAndUserId(provider, mineUserId);
         //更新数据库的key
         socialUserAccountDO.setUpdateTime(new Date());
         //再次更新下sessionkey
         socialUserAccountDO.setSessionKey(sessionKey);
-        socialUserAccountDO = socialUserAccountRepository.save(socialUserAccountDO);
+        socialUserAccountDO = socialUserPlatformAccountRepository.save(socialUserAccountDO);
         return socialUserAccountDO;
     }
 
-    public SocialUserAccountDO checkOrCreateOrUpdate(Integer userId, SocialProviderLoginQO loginQO, UniUnionIdRO uniUnionIdRO) {
-        SocialUserAccountDO socialUserAccountDO = socialUserAccountStore.getAccountByUnionId(loginQO, uniUnionIdRO);
+    public SocialUserPlatformAccountDO checkOrCreateOrUpdate(Integer userId, SocialProviderLoginQO loginQO, UniUnionIdRO uniUnionIdRO) {
+        SocialUserPlatformAccountDO socialUserAccountDO = socialUserAccountStore.getAccountByUnionId(loginQO, uniUnionIdRO);
         if (socialUserAccountDO == null) {
             return this.create(userId, loginQO, uniUnionIdRO);
         } else {
@@ -43,8 +43,8 @@ public class SocialUserAccountManage {
     }
 
     //两个相似逻辑引用，但逻辑不相同，无法通用，所以两个地方调用
-    public SocialUserAccountDO create(Integer userId, SocialProviderLoginQO loginQO, UniUnionIdRO uniUnionIdRO) {
-        SocialUserAccountDO socialUserAccountDO = new SocialUserAccountDO();
+    public SocialUserPlatformAccountDO create(Integer userId, SocialProviderLoginQO loginQO, UniUnionIdRO uniUnionIdRO) {
+        SocialUserPlatformAccountDO socialUserAccountDO = new SocialUserPlatformAccountDO();
         socialUserAccountDO.setUserId(userId);
 //        socialUserAccountDO.setDevId(loginQO.getDevId());
         String platform = loginQO.getPlatform();
@@ -80,7 +80,7 @@ public class SocialUserAccountManage {
             socialUserAccountDO.setUnionId(uniUnionIdRO.getUnionid());
         }
         socialUserAccountDO.setSessionKey(uniUnionIdRO.getSession_key());
-        socialUserAccountRepository.save(socialUserAccountDO);
+        socialUserPlatformAccountRepository.save(socialUserAccountDO);
         return socialUserAccountDO;
     }
 }

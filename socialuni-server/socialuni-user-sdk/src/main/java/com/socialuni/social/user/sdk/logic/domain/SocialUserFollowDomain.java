@@ -1,21 +1,20 @@
 package com.socialuni.social.user.sdk.logic.domain;
 
+import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniUserBlackDO;
 import com.socialuni.social.user.sdk.logic.manage.SocialuniUserFollowManage;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserFansDetailManage;
 import com.socialuni.social.user.sdk.logic.redis.SocialuniUserFollowRedis;
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserFollowDO;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniUserFollowDO;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.user.sdk.model.QO.follow.SocialuniUserFollowAddQO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
-import javax.validation.constraints.NotNull;
 
 @Service
 public class SocialUserFollowDomain implements SocialUserFollowDomainInterface {
@@ -48,6 +47,13 @@ public class SocialUserFollowDomain implements SocialUserFollowDomainInterface {
         } else {
             //已经关注
             followDO = followManage.updateFollow(followDO, SocialuniCommonStatus.enable);
+        }
+
+        SocialuniUserBlackDO socialuniUserBlackDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserIdAndStatus(mineUserId, beUserId, SocialuniCommonStatus.enable, SocialuniUserBlackDO.class);
+        //如果您把对方拉黑了，重新关注后则取消拉黑
+        if (socialuniUserBlackDO != null) {
+            socialuniUserBlackDO.setStatus(SocialuniCommonStatus.delete);
+            SocialuniUserContactRepositoryFacede.save(socialuniUserBlackDO);
         }
         return followDO;
     }

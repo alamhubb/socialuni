@@ -2,7 +2,6 @@ package com.socialuni.social.sdk.dao.DO.chat;
 
 import com.socialuni.social.common.api.entity.SocialuniBaseDO;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
@@ -15,7 +14,6 @@ import java.io.Serializable;
 /**
  * 获取用户联系方式的记录，记录谁获取的谁
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
 @Table(name = "s_business_pay_order",
         uniqueConstraints = @UniqueConstraint(columnNames = {"userId", "beUserId"})

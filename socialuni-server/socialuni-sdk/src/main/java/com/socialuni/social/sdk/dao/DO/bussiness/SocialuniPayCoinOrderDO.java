@@ -2,14 +2,12 @@ package com.socialuni.social.sdk.dao.DO.bussiness;
 
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 //金币充值订单
 @Data
-@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "s_business_pay_coin_order")
 public class SocialuniPayCoinOrderDO extends SocialuniContentBaseDO implements Serializable {
@@ -27,6 +25,6 @@ public class SocialuniPayCoinOrderDO extends SocialuniContentBaseDO implements S
     private String payType;
     //使用平台
     private String provider;
-    private String system;
+    private String useSystem;
     private String platform;
 }

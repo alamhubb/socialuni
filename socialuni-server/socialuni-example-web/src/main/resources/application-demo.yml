@@ -9,7 +9,6 @@ socialuni:
     # 静态资源的url，拼接图片url使用， 可随意填写
     static-resource-url: "https://cdxapp-1257733245.file.myqcloud.com"
     # 系统管理员用户id，给用户下发通知时使用， 可随意填写
-    system-user-id: 1
   user:
     # 生成用户token时使用的秘钥， 不使用保持默认即可
     token-secret-key: "tokenSecretKey"

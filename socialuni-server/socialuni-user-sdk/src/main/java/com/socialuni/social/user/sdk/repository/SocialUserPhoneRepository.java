@@ -2,7 +2,7 @@ package com.socialuni.social.user.sdk.repository;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.socialuni.social.common.api.constant.CommonRedisKey;
-import com.socialuni.social.user.sdk.model.DO.SocialUserPhoneDo;
+import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Caching;

@@ -2,7 +2,6 @@ package com.socialuni.social.common.sdk.model;
 
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

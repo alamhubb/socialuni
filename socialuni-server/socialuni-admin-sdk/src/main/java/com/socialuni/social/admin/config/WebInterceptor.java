@@ -1,5 +1,6 @@
 package com.socialuni.social.admin.config;
 
+import com.socialuni.social.admin.facede.AdminDevAccountFacade;
 import com.socialuni.social.common.api.constant.ErrorCode;
 import com.socialuni.social.common.api.exception.exception.SocialNotLoginException;
 import com.socialuni.social.common.api.utils.RequestUtil;
@@ -39,39 +40,46 @@ public class WebInterceptor extends SocialuniWebInterceptor {
             return true;
         }
         RequestLogDO requestLogDO = RequestLogUtil.get();
-        DevAccountModel user = DevAccountFacade.getAdminDevAccountAllowNull();
+        DevAccountModel user = AdminDevAccountFacade.getAdminDevAccountAllowNull();
         if (user != null) {
             RequestUtil.setAttribute(SocialFeignHeaderName.socialuniSecretKey, user.getSecretKey());
-            requestLogDO.setUserId(user.getId());
         }
         RequestLogUtil.saveAsync(requestLogDO);
         String ipKey = requestLogDO.getIp();
         String uri = requestLogDO.getUri();
 
         Object keyCountObj = redisUtil.get(ipKey);
+
         //如果已经有了赋值
         if (keyCountObj != null) {
-            int count = (Integer) keyCountObj;
-            //限制1分钟访问50次
-            if (count > 200) {
-                //这里只提示未登录
-                res.setStatus(ErrorCode.IP_LIMIT_ERROR);
-                return false;
-            }
             long expireTime = redisUtil.getExpire(ipKey);
-            //否则访问次数加1
-            count = count + 1;
-            redisUtil.set(ipKey, count, expireTime);
+            if (expireTime > 0) {
+                int count = (Integer) keyCountObj;
+                //限制1分钟访问50次
+                if (count > 200) {
+                    //这里只提示未登录
+                    res.setStatus(ErrorCode.IP_LIMIT_ERROR);
+                    return false;
+                }
+                //否则访问次数加1
+                count = count + 1;
+                redisUtil.set(ipKey, count, expireTime);
+            } else {
+                redisUtil.set(ipKey, 1, 60);
+            }
         } else {
             redisUtil.set(ipKey, 1, 60);
         }
 
-
         if ((request.getMethod().equals(RequestMethod.OPTIONS.name())
                 || uri.contains("openService")
-                || uri.contains("user/phoneLogin")
-                || uri.contains("user/secretKeyLogin")
-                || uri.contains("phone/sendAuthCode")
+                || uri.contains("phoneLogin")
+                || uri.contains("secretKeyLogin")
+                || uri.contains("sendAuthCode")
+                || uri.contains("sendErrorLog")
+                || uri.contains("getAppLaunchData")
+                || uri.contains("queryHomeSwipers")
+                || uri.contains("queryReportTypes")
                 //这里只查询没被封禁的
                 || user != null)
         ) {

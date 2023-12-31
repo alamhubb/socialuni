@@ -1,8 +1,8 @@
 package com.socialuni.social.admin.model.RO;
 
 import com.socialuni.social.admin.model.ReportUserVO;
-import com.socialuni.social.user.sdk.model.DO.SocialUserIdentityAuthDO;
-import com.socialuni.social.user.sdk.model.DO.SocialUserIdentityAuthImgDO;
+import com.socialuni.social.user.sdk.dao.DO.SocialUserIdentityAuthDO;
+import com.socialuni.social.user.sdk.dao.DO.SocialUserIdentityAuthImgDO;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import lombok.Data;

@@ -2,7 +2,6 @@ package com.socialuni.social.sdk.dao.DO.circle;
 
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Index;
@@ -20,7 +19,6 @@ import java.io.Serializable;
         @Index(columnList = "period")
 })
 @Data
-@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 public class SocialCircleCampaignRecordDO extends SocialuniContentBaseDO implements Serializable {
     Integer circleId;

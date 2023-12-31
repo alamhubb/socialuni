@@ -2,7 +2,6 @@ package com.socialuni.social.community.sdk.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniImgBaseDo;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -21,7 +20,6 @@ import java.io.Serializable;
         }
 )
 @Data
-@EqualsAndHashCode(callSuper = true)
 public class SocialuniTalkImgDO extends SocialuniImgBaseDo implements Serializable {
     @Column(nullable = false, updatable = false)
     private Integer talkId;

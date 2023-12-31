@@ -7,7 +7,7 @@ import com.socialuni.social.common.api.utils.SocialTokenFacade;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.api.DevAccountProviderInterface;
 import com.socialuni.social.tance.sdk.api.DevAccountRedisInterface;
-import com.socialuni.social.tance.sdk.api.DevTokenInterface;
+import com.socialuni.social.tance.sdk.constant.AdminAppConfigConst;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.tance.sdk.enumeration.SocialFeignHeaderName;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
@@ -23,14 +23,12 @@ import java.util.Objects;
 @Component
 public class DevAccountFacade {
     //前端传入使用
-
 //    public static final String devAccountKey = "devAccount";
 //    public static final String appGenderTypeKey = "appGenderType";
 
     private static DevAccountInterface devAccountApi;
     private static DevAccountRedisInterface devAccountRedisInterface;
     private static DevAccountProviderInterface devAccountProviderApi;
-    private static DevTokenInterface devTokenApi;
 
     /*    private static SocialUserPhoneRedis socialUserPhoneRedis;
         private static SocialUserPhoneEntity socialUserPhoneEntity;*/
@@ -48,11 +46,6 @@ public class DevAccountFacade {
     public void setSocialUserPhoneEntity(SocialUserPhoneEntity socialUserPhoneEntity) {
         DevAccountFacade.socialUserPhoneEntity = socialUserPhoneEntity;
     }*/
-
-    @Resource
-    public void setDevTokenRepository(DevTokenInterface devTokenApi) {
-        DevAccountFacade.devTokenApi = devTokenApi;
-    }
 
     @Autowired
     public void setDevAccountRepository(DevAccountInterface devAccountApi) {
@@ -115,10 +108,7 @@ public class DevAccountFacade {
         return devAccountModel.getUserId();
     }
 
-    public static boolean isCenter() {
-        DevAccountModel devAccountModel = DevAccountFacade.getAdminDevAccountNotNull();
-        return devAccountModel.getId() == 1;
-    }
+
 
 
     /*public static Integer getDataOriginalDevIdNotNull() {
@@ -171,6 +161,14 @@ public class DevAccountFacade {
             ResultRO<DevAccountDO> resultRO = socialuniDevAccountAPI.queryDevAccount(new DevAccountQueryQO(secretKey));
             devAccountDO = resultRO.getData();
         }*/
+        return getDevAccountBySecretKeyNotNull(secretKey);
+    }
+
+
+    public static DevAccountModel getDevAccountBySecretKeyNotNull(String secretKey) {
+        if (StringUtils.isEmpty(secretKey)) {
+            throw new SocialParamsException("开发者信息错误");
+        }
         DevAccountModel devAccountModel = devAccountApi.findOneBySecretKey(secretKey);
         if (devAccountModel == null) {
             throw new SocialParamsException("开发者信息错误");
@@ -178,11 +176,18 @@ public class DevAccountFacade {
         return devAccountModel;
     }
 
+    public static DevAccountModel getDevAccountAllowNull(String secretKey) {
+        if (StringUtils.isEmpty(secretKey)) {
+            return getDevAccountNotNull();
+        }
+        return getDevAccountBySecretKeyNotNull(secretKey);
+    }
+
     public static DevAccountModel getDevAccountNotNull() {
         //先从req中获取
         DevAccountModel devAccountModel = DevAccountFacade.getDevAccountAllowNull();
         if (devAccountModel == null) {
-            devAccountModel = DevAccountFacade.getDevAccount(1);
+            devAccountModel = DevAccountFacade.getDevAccount(AdminAppConfigConst.testDevId);
 //            throw new SocialBusinessException("开发者信息为空");
         }
         return devAccountModel;
@@ -210,79 +215,8 @@ public class DevAccountFacade {
         return devId == 1;
     }
 
-    public static DevAccountModel getAdminDevAccountNotNull() {
-        DevAccountModel user = DevAccountFacade.getAdminDevAccountAllowNull();
-        if (user == null) {
-            throw new SocialNotLoginException();
-        }
-        return user;
-    }
-
-    public static DevAccountModel getAdminDevAccountAllowNull() {
-        String token = SocialTokenFacade.getToken();
-        return DevAccountFacade.getDevAccountByToken(token);
-    }
-
-    public static Integer getAdminDevAccountIdAllowNull() {
-        DevAccountModel devAccountModel = getAdminDevAccountAllowNull();
-        if (devAccountModel == null) {
-            return null;
-        }
-        return devAccountModel.getId();
-    }
-
-    //得到用户信息
-    private static DevAccountModel getDevAccountByToken(String token) {
-        //开发和生产逻辑不一样，开发从生产拿数据，生产直接从库里拿数据
-        /*if (SocialAppEnv.getContainsProdEnv()) {
-            //校验解析token
-            String devSecretKey = SocialTokenUtil.getUserKeyByToken(token);
-            if (StringUtils.isEmpty(devSecretKey)) {
-                return null;
-            }
-            DevAccountDO devAccountDO = devAccountRepository.findOneBySecretKey(devSecretKey);
-            if (devAccountDO == null) {
-                throw new SocialParamsException("token被破解");
-            }
-            //todo 这里需要校验有效期吧
-            String tokenCode = devTokenRepository.findFirstTokenCodeByUserId(devAccountDO.getId());
-            if (!token.equals(tokenCode)) {
-                return null;
-            }
-            return devAccountDO;
-        } else {
-            //校验解析token
-            String devSecretKey = SocialTokenUtil.getUserKeyByToken(token);
-            if (StringUtils.isEmpty(devSecretKey)) {
-                return null;
-            }
-            ResultRO<DevAccountDO> resultRO = socialuniDevAccountAPI.queryDevAccount(new DevAccountQueryQO(devSecretKey));
-
-            DevAccountDO devAccountDO = resultRO.getData();
-            DevTokenDO devTokenDO = devTokenRepository.findFirstByTokenCode(token);
-            if (devAccountDO == null || devTokenDO == null) {
-                return null;
-            }
-            //todo 这里需要校验有效期吧
-            if (!devTokenDO.getDevId().equals(devAccountDO.getId())) {
-                throw new SocialParamsException("token被破解");
-            }
-            return devAccountDO;
-        }*/
-        //校验解析token
-        String devSecretKey = SocialTokenFacade.getUserKeyByToken(token);
-        if (StringUtils.isEmpty(devSecretKey)) {
-            return null;
-        }
-        DevAccountModel devAccountModel = devAccountApi.findOneBySecretKey(devSecretKey);
-        if (devAccountModel == null) {
-            throw new SocialParamsException("token被破解");
-        }
-        //todo 这里需要校验有效期吧
-        String tokenCode = devTokenApi.findFirstTokenCodeByUserId(devAccountModel.getId());
-        if (!token.equals(tokenCode)) {
-            return null;
-        }
+    public static DevAccountModel getDevAccountByUserId(Integer userId) {
+        DevAccountModel devAccountModel = devAccountApi.findFirstByUserId(userId);
         return devAccountModel;
     }
 

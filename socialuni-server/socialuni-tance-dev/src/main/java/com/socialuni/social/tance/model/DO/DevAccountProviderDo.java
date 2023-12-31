@@ -2,12 +2,10 @@ package com.socialuni.social.tance.model.DO;
 
 import com.socialuni.social.tance.sdk.model.DevAccountProviderModler;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 @Table(name = "s_dev_account_provider",

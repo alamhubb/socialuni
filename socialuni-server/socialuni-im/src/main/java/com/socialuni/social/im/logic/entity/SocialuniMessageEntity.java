@@ -3,7 +3,6 @@ package com.socialuni.social.im.logic.entity;
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.common.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
@@ -14,11 +13,11 @@ import com.socialuni.social.im.config.websocket.WebsocketServer;
 import com.socialuni.social.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.im.dao.repository.*;
 import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
-import com.socialuni.social.im.dao.DO.SocialuniFriendApplyRecordDO;
 import com.socialuni.social.im.dao.DO.SocialuniUserChatConfigDO;
 import com.socialuni.social.im.dao.DO.message.SocialuniMessageDO;
 import com.socialuni.social.im.dao.DO.message.SocialuniMessageReceiveDO;
 import com.socialuni.social.im.enumeration.*;
+import com.socialuni.social.im.logic.check.SocialuniChatUserCheck;
 import com.socialuni.social.im.logic.domain.NotifyDomain;
 import com.socialuni.social.im.logic.foctory.SocaluniNotifyROFactory;
 import com.socialuni.social.im.logic.foctory.SocialMessageROFactory;
@@ -26,7 +25,8 @@ import com.socialuni.social.im.logic.foctory.SocialuniChatUserDOFactory;
 import com.socialuni.social.im.logic.foctory.SocialuniMessageDOFactory;
 import com.socialuni.social.im.logic.manage.SocialuniUserChatConfigManage;
 import com.socialuni.social.im.model.message.notify.NotifyVO;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserFollowDO;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniUserBlackDO;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniUserFollowDO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Service;
 
@@ -89,19 +89,18 @@ public class SocialuniMessageEntity {
         SocialuniUserUtil.getAndCheckUserNotNull(beUserId);
 
         List<SocialuniChatUserDO> chatSocialuniUserDoS = SocialuniChatUserDOFactory.getOrCreateChatUsersBySingleSendMsg(beUserId, mineUserId);
-        SocialuniChatUserDO beChatUserDO = chatSocialuniUserDoS.get(0);
 
-        //对方是否把你拉黑了
-        if (beChatUserDO != null && beChatUserDO.getBlackUser()) {
+        SocialuniUserBlackDO socialuniUserBlackDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserIdAndStatus(beUserId, mineUserId, SocialuniCommonStatus.enable, SocialuniUserBlackDO.class);
+        //如果您把对方拉黑了，重新关注后则取消拉黑
+        if (socialuniUserBlackDO != null) {
             throw new SocialBusinessException("您已被对方拉黑，无法发送消息");
         }
 
-
-        if (!beUserId.equals(mineUserId)){
-            SocialuniChatUserDO chatUser = chatSocialuniUserDoS.get(1);
+        if (!beUserId.equals(mineUserId)) {
+            SocialuniUserBlackDO beSocialuniUserBlackDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserIdAndStatus(beUserId, mineUserId, SocialuniCommonStatus.enable, SocialuniUserBlackDO.class);
 
             //对方是否把你拉黑了
-            if (chatUser != null && chatUser.getBlackUser()) {
+            if (beSocialuniUserBlackDO != null) {
                 throw new SocialBusinessException("您已将对方拉黑，无法发送消息");
             }
         }
@@ -145,20 +144,19 @@ public class SocialuniMessageEntity {
         return SocialMessageROFactory.getMessageRO(mineMessageUser);
     }
 
+    @Resource
+    SocialuniChatUserCheck socialuniChatUserCheck;
+
     public SocialMessageRO sendGroupMessage(Integer chatId, String msgContent) {
         SocialuniChatDO chat = SocialuniRepositoryFacade.findByUnionId(chatId, SocialuniChatDO.class);
+
+        SocialuniUserDo sendUser = SocialuniUserUtil.getMineUserNotNull();
 
         if (chat == null) {
             throw new SocialParamsException("不存在的群聊");
         }
 
-        SocialuniUserDo sendUser = SocialuniUserUtil.getMineUserNotNull();
-
-        SocialuniChatUserDO chatUserDO = chatUserRepository.findFirstByChatIdAndUserIdAndStatus(chatId, sendUser.getUserId(), ChatUserStatus.enable);
-
-        if (chatUserDO == null) {
-            throw new SocialParamsException("未加入群聊");
-        }
+        socialuniChatUserCheck.checkUserInChat(chatId, sendUser.getUserId());
 
         List<SocialuniChatUserDO> chatSocialuniUserDoS = chatUserRepository.findByChatIdAndStatus(chatId, ChatUserStatus.enable);
 

@@ -1,5 +1,6 @@
 package com.socialuni.social.common.sdk.dao.facede;
 
+import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import com.socialuni.social.common.api.entity.SocialuniUserContactBaseDO;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniCommonRepository;
 import org.springframework.stereotype.Component;

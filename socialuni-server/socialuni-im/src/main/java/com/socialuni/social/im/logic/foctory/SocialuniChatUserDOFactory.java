@@ -1,14 +1,16 @@
 package com.socialuni.social.im.logic.foctory;
 
-import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
+import com.socialuni.social.common.sdk.constant.SocialuniSysRoleId;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.im.dao.DO.SocialuniChatDO;
+import com.socialuni.social.im.enumeration.ChatType;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
+import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class SocialuniChatUserDOFactory {
@@ -64,6 +66,23 @@ public class SocialuniChatUserDOFactory {
     public static SocialuniChatUserDO createGroupChatUser(SocialuniChatDO chatDO, Integer userId) {
         //会话不存在则创建
         SocialuniChatUserDO chatUserDO = new SocialuniChatUserDO(chatDO, userId);
+
+        if (chatUserDO.getType().equals(ChatType.system_group)) {
+            Integer systemUserId = SocialuniUserUtil.getSystemUserIdNotNull();
+            if (userId.equals(systemUserId)) {
+                chatUserDO.setChatRoleId(SocialuniSysRoleId.owner);
+            }
+        }
+
+        chatUserDO = SocialuniRepositoryFacade.save(chatUserDO);
+        return chatUserDO;
+    }
+
+    public static SocialuniChatUserDO createUserPersonalChatUser(SocialuniChatDO chatDO, Integer userId) {
+        //会话不存在则创建
+        SocialuniChatUserDO chatUserDO = new SocialuniChatUserDO(chatDO, userId);
+
+        chatUserDO.setChatRoleId(SocialuniSysRoleId.owner);
 
         chatUserDO = SocialuniRepositoryFacade.save(chatUserDO);
         return chatUserDO;

@@ -1,5 +1,6 @@
 package com.socialuni.social.user.sdk.logic.manage;
 
+import com.socialuni.social.common.sdk.constant.SocialuniSysRoleId;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.user.sdk.model.factory.SocialUserDOFactory;
@@ -21,6 +22,13 @@ public class SocialUserManage {
 
     public SocialuniUserDo createUserByPhoneLogin() {
         SocialuniUserDo user = SocialUserDOFactory.newUserByPhoneLogin();
+        user = userApi.savePut(user);
+        return user;
+    }
+
+    public SocialuniUserDo createSysUserByPhoneLogin() {
+        SocialuniUserDo user = SocialUserDOFactory.newUserByPhoneLogin();
+        user.setRoleId(SocialuniSysRoleId.sys);
         user = userApi.savePut(user);
         return user;
     }

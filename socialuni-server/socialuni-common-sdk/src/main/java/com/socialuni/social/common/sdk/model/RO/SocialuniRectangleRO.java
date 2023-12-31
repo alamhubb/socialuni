@@ -1,7 +1,6 @@
 package com.socialuni.social.common.sdk.model.RO;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data

@@ -2,6 +2,7 @@ package com.socialuni.social.admin.service;
 
 import com.socialuni.social.admin.controller.DevAccountRO;
 import com.socialuni.social.admin.controller.DevAccountUpdateQO;
+import com.socialuni.social.admin.facede.AdminDevAccountFacade;
 import com.socialuni.social.common.api.constant.PlatformType;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
@@ -43,7 +44,7 @@ public class AdminAccountService {
     private SocialTagManage socialTagManage;
     @Transactional
     public ResultRO<DevAccountRO> updateDevAccount(DevAccountUpdateQO devAccountQO) {
-        DevAccountModel devAccountModel = DevAccountFacade.getAdminDevAccountNotNull();
+        DevAccountModel devAccountModel = AdminDevAccountFacade.getAdminDevAccountNotNull();
 
 
         Integer devId = devAccountModel.getId();

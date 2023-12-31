@@ -2,11 +2,16 @@ package com.socialuni.social.user.sdk.logic.service;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.report.sdk.constant.SocialuniSupportProviderType;
+import com.socialuni.social.user.sdk.dao.DO.SocialUserPasswordDO;
 import com.socialuni.social.user.sdk.logic.domain.SocialuniLoginDomain;
-import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumQO;
+import com.socialuni.social.user.sdk.model.QO.SocialPhoneAuthCodePasswordQO;
+import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumAuthCodeQO;
+import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumPasswordQO;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
+import com.socialuni.social.user.sdk.utils.PasswordUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -30,11 +35,24 @@ public class SocialuniLoginService {
     }
 
     @Transactional
-    public ResultRO<SocialLoginRO<SocialuniUserRO>> phoneLogin(SocialPhoneNumQO socialPhoneNumQO) {
+    public ResultRO<SocialLoginRO<SocialuniUserRO>> phoneLogin(SocialPhoneNumAuthCodeQO socialPhoneNumQO) {
         SocialLoginRO<SocialuniUserRO> socialLoginRO = socialLoginDomain.phoneLogin(socialPhoneNumQO);
 //        CompletableFuture.supplyAsync(() -> socialuniOpenImgUserFeign.userLogin(SocialuniMineUserDetailROFactory.toImUserModel(user)));
         return ResultRO.success(socialLoginRO);
     }
+
+
+    @Transactional
+    public ResultRO<SocialLoginRO<SocialuniUserRO>> phonePasswordLogin(SocialPhoneAuthCodePasswordQO socialPhoneNumQO) {
+        SocialLoginRO<SocialuniUserRO> socialLoginRO = socialLoginDomain.phonePasswordLogin(socialPhoneNumQO);
+        return ResultRO.success(socialLoginRO);
+    }
+
+    public ResultRO<SocialLoginRO<SocialuniUserRO>> passwordLogin(SocialPhoneNumPasswordQO socialPhoneNumQO) {
+        SocialLoginRO<SocialuniUserRO> socialLoginRO = socialLoginDomain.passwordLogin(socialPhoneNumQO);
+        return ResultRO.success(socialLoginRO);
+    }
+
 
     /*
     旧版的包含三方授权模块

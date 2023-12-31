@@ -2,13 +2,11 @@ package com.socialuni.social.community.sdk.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-
 
 @Entity
 @Table(name = "s_community_hug", uniqueConstraints = {
@@ -16,7 +14,6 @@ import javax.persistence.UniqueConstraint;
         @UniqueConstraint(columnNames = {"userId", "commentId"})
 })
 @Data
-@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 public class SocialuniHugDO extends SocialuniContentBaseDO {
     /**

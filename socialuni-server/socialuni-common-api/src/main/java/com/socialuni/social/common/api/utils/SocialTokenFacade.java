@@ -3,14 +3,14 @@ package com.socialuni.social.common.api.utils;
 import com.socialuni.social.common.api.config.SocialRequestUserConfig;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 @Component
 @Slf4j

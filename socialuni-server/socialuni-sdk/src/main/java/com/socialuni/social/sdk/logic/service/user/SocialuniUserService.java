@@ -13,7 +13,7 @@ import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.report.sdk.enumeration.SocialuniUserStatus;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserImgDo;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniUserImgDo;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;

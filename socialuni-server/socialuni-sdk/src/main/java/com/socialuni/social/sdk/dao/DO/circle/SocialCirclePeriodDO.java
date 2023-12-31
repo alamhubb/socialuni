@@ -2,7 +2,6 @@ package com.socialuni.social.sdk.dao.DO.circle;
 
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
@@ -18,7 +17,6 @@ import java.util.Date;
 @Entity
 @Table(name = "s_community_circle_period", indexes = {@Index(columnList = "circleId"), @Index(columnList = "period")})
 @Data
-@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 public class SocialCirclePeriodDO extends SocialuniContentBaseDO implements Serializable {
     //第几期

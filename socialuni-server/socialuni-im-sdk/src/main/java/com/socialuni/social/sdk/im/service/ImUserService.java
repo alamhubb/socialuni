@@ -8,10 +8,8 @@ import com.socialuni.social.sdk.im.logic.domain.SocialBindUserOpenImAccountDomai
 import com.socialuni.social.sdk.im.model.SocialuniImUserModel;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.constant.GenderTypeNumEnum;
-import com.socialuni.social.user.sdk.constant.SocialuniAccountProviderType;
-import com.socialuni.social.common.sdk.dao.DO.SocialUserAccountDO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.common.sdk.dao.repository.SocialUserAccountRepository;
+import com.socialuni.social.common.sdk.dao.repository.SocialUserPlatformAccountRepository;
 import com.socialuni.social.report.sdk.utils.BirthdayAgeUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -34,7 +32,7 @@ public class ImUserService {
     @Resource
     private ImHttpComponent imHttpComponent;
     @Resource
-    SocialUserAccountRepository socialUserAccountRepository;
+    SocialUserPlatformAccountRepository socialUserPlatformAccountRepository;
     @Resource
     SocialBindUserOpenImAccountDomain socialBindUserOpenImAccountDomain;
     @Resource

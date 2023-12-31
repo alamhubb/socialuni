@@ -5,6 +5,7 @@ import com.socialuni.social.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.im.dao.repository.SocialuniChatRepository;
 import com.socialuni.social.im.enumeration.ChatType;
 import com.socialuni.social.im.logic.foctory.SocialuniChatDOFactory;
+import com.socialuni.social.im.logic.manage.SocialuniChatManage;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfigInterface;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
@@ -29,15 +30,15 @@ public class SocialuniImApplicationRunner implements ApplicationRunner {
     @Resource
     SocialuniChatRepository chatRepository;
 
+    @Resource
+    SocialuniChatManage socialuniChatManage;
+
     @Override
     @Async
     public void run(ApplicationArguments args) {
         List<String> groups = socialuniAppConfigInterface.getAppConfig().getDefaultChatGroups();
         for (String group : groups) {
-            SocialuniChatDO socialuniChatDO = chatRepository.findFirstByTypeAndChatName(ChatType.system_group, group);
-            if (socialuniChatDO == null) {
-                SocialuniChatDOFactory.createGroupChat(group);
-            }
+            socialuniChatManage.getOrCreateSystemGroupChat(group);
         }
     }
 }

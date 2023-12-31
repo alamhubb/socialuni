@@ -16,7 +16,7 @@ import org.springframework.web.socket.TextMessage;
  * @date 2019-06-12 22:21
  */
 @Data
-public class NotifyVO {
+public class NotifyVO<T> {
     //加入一列作为外键
     private ChatRO chat;
 
@@ -24,6 +24,8 @@ public class NotifyVO {
     private Integer receiveUserId;
 
     private String type;
+    private String chatId;
+    private T data;
 
     public NotifyVO() {
     }
@@ -32,6 +34,13 @@ public class NotifyVO {
         //此处没有给content赋值是因为推送，不需要显示，推送后点击未读列表查询就行
         this.user = new NotifyUserVO(user);
         this.type = NotifyType.comment;
+    }
+
+    public NotifyVO(SocialuniUserDo user, String type, T data) {
+        //此处没有给content赋值是因为推送，不需要显示，推送后点击未读列表查询就行
+        this.user = new NotifyUserVO(user);
+        this.type = type;
+        this.data = data;
     }
 
     public NotifyVO(SocialuniChatDO chat, SocialuniUserDo user, SocialuniMessageDO message) {

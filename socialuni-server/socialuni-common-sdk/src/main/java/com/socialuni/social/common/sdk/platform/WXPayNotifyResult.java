@@ -1,7 +1,6 @@
 package com.socialuni.social.common.sdk.platform;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import javax.xml.bind.annotation.XmlRootElement;
 

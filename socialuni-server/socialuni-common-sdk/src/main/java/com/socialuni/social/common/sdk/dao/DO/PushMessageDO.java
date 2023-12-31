@@ -1,7 +1,6 @@
 package com.socialuni.social.common.sdk.dao.DO;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.io.Serializable;

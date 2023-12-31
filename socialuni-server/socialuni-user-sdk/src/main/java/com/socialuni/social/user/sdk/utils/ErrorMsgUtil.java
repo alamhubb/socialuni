@@ -7,7 +7,7 @@ import com.socialuni.social.common.sdk.constant.ErrorMsg;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.tance.sdk.facade.ConfigFacade;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
-import com.socialuni.social.user.sdk.model.DO.SocialUserViolationDo;
+import com.socialuni.social.user.sdk.dao.DO.SocialUserViolationDo;
 
 import java.text.MessageFormat;
 import java.util.Date;

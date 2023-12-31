@@ -12,6 +12,7 @@ public class SocialuniAppConfigBO {
     //配置3，应用性别
     private String appGender = GenderType.all;
     private String systemUserPhoneNum = "11111111111";
+    private String testUserPhoneNum = "12222222222";
     //首页的tab栏目
     private String followTabName = "关注";
     private String homeTabName = "首页";

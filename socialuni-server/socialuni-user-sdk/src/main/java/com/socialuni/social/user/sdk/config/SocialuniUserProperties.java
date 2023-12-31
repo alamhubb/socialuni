@@ -10,6 +10,8 @@ public class SocialuniUserProperties {
 
     private String userDefaultAvatar;
     private String tokenSecretKey;
+    private String passwordPublicKey;
+    private String passwordPrivateKey;
     private String tokenName;
     private String loginUserKey;
 

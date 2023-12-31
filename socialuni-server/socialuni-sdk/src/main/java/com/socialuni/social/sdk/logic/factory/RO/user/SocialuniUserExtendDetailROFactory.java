@@ -8,9 +8,9 @@ import com.socialuni.social.community.sdk.dao.DO.SocialuniDistrictDO;
 import com.socialuni.social.community.sdk.utils.DistrictStoreUtils;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserExtendFriendLogDo;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniUserExtendFriendLogDo;
 import com.socialuni.social.common.sdk.model.RO.SocialuniRectangleRO;
-import com.socialuni.social.sdk.utils.PositionUtil;
+import com.socialuni.social.common.sdk.utils.PositionUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
@@ -26,7 +26,7 @@ public class SocialuniUserExtendDetailROFactory {
         SocialuniUserExtendDetailRO socialuniUserExtendDetailRO = new SocialuniUserExtendDetailRO(socialuniUserDetailRO);
 
         //获取用户扩列记录
-        SocialuniUserExtendFriendLogDo socialuniUserExtendFriendLogDo = SocialuniUserRepositoryFacede.findFirstByUserIdNotNull(userDO.getUserId(), SocialuniUserExtendFriendLogDo.class);
+        SocialuniUserExtendFriendLogDo socialuniUserExtendFriendLogDo = SocialuniUserRepositoryFacede.findByUserIdNotNull(userDO.getUserId(), SocialuniUserExtendFriendLogDo.class);
 
         if (socialuniUserExtendFriendLogDo == null) {
             throw new SocialParamsException("不该为空");

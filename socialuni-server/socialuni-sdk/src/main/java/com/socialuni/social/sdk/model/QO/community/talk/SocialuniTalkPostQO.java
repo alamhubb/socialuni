@@ -3,11 +3,9 @@ package com.socialuni.social.sdk.model.QO.community.talk;
 import com.socialuni.social.sdk.model.QO.ContentAddQO;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
 public class SocialuniTalkPostQO extends ContentAddQO {
     private List<SocialuniImgAddQO> imgs;

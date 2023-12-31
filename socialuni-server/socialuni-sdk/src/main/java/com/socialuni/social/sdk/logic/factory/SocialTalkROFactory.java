@@ -17,7 +17,7 @@ import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkImgDOUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.model.factory.SocialuniContentUserROFactory;
-import com.socialuni.social.sdk.utils.PositionUtil;
+import com.socialuni.social.common.sdk.utils.PositionUtil;
 import com.socialuni.social.sdk.model.QO.community.talk.SocialHomeTabTalkQueryBO;
 import com.socialuni.social.sdk.model.RO.talk.SocialTalkDistrictRO;
 import com.socialuni.social.sdk.model.RO.talk.SocialTalkTagRO;

@@ -1,10 +1,10 @@
 package com.socialuni.social.common.api.utils;
 
 import com.socialuni.social.common.api.constant.SocialWebHeaderName;
-import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 

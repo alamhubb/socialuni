@@ -1,8 +1,8 @@
 package com.socialuni.social.common.api.entity;
 
-import javax.persistence.*;
 import lombok.Data;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 

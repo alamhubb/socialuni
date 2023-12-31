@@ -4,12 +4,10 @@ package com.socialuni.social.sdk.model.RO.talk;
 import com.socialuni.social.common.api.model.SocialuniContentIdRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
 public class SocialuniCommentRO extends SocialuniContentIdRO {
     private Integer no;

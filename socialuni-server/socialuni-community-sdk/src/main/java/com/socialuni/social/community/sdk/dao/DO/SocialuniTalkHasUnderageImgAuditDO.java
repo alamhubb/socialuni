@@ -4,7 +4,6 @@ import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.common.api.enumeration.ContentStatus;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -21,7 +20,6 @@ import java.io.Serializable;
         }
 )
 @Data
-@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 //为什么单独做一个表，因为用talk的记录不知道哪条审核过哪条没审核过
 public class SocialuniTalkHasUnderageImgAuditDO extends SocialuniUnionContentBaseDO implements Serializable {

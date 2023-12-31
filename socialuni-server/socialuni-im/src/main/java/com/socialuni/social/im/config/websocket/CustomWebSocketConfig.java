@@ -13,6 +13,8 @@ public class CustomWebSocketConfig implements WebSocketConfigurer {
 
     @Resource
     private WebsocketServer websocketServer;
+    @Resource
+    private SocketTextHandler socketTextHandler;
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
@@ -20,6 +22,8 @@ public class CustomWebSocketConfig implements WebSocketConfigurer {
          * 注释websocket
          */
         registry
+                .addHandler(socketTextHandler, "/webrtc")
+                .setHandshakeHandler(new CustomHandshakeHandler())
                 .addHandler(websocketServer, "/webSocket/message")
                 .setHandshakeHandler(new CustomHandshakeHandler())
                 .setAllowedOrigins("*");

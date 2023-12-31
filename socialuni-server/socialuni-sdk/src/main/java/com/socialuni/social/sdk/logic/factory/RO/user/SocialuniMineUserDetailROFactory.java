@@ -6,14 +6,14 @@ import com.socialuni.social.sdk.im.logic.domain.SocialBindUserOpenImAccountDomai
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserExpandDOUtil;
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserSocialCoinDOUtil;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
-import com.socialuni.social.user.sdk.model.DO.SocialUserPhoneDo;
+import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserExpandDo;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserCoinDo;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniUserExpandDo;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniUserCoinDo;
 import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserDetailRO;
 import com.socialuni.social.user.sdk.logic.redis.SocialUserPhoneRedis;
-import com.socialuni.social.common.sdk.dao.repository.SocialUserAccountRepository;
+import com.socialuni.social.common.sdk.dao.repository.SocialUserPlatformAccountRepository;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -23,7 +23,7 @@ import javax.annotation.Resource;
 @Component
 public class SocialuniMineUserDetailROFactory {
     public static SocialUserPhoneRedis socialUserPhoneRedis;
-    public final static SocialUserAccountRepository socialUserAccountRepository = SpringUtil.getBean(SocialUserAccountRepository.class);
+    public final static SocialUserPlatformAccountRepository SOCIAL_USER_PLATFORM_ACCOUNT_REPOSITORY = SpringUtil.getBean(SocialUserPlatformAccountRepository.class);
     public final static SocialBindUserOpenImAccountDomain socialBindUserOpenImAccountDomain = SpringUtil.getBean(SocialBindUserOpenImAccountDomain.class);
     public final static SocialuniOpenImUserFeign socialuniOpenImUserFeign = SpringUtil.getBean(SocialuniOpenImUserFeign.class);
 

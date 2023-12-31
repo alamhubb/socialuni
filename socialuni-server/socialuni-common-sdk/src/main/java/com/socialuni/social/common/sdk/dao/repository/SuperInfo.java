@@ -1,7 +1,6 @@
 package com.socialuni.social.common.sdk.dao.repository;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -17,7 +16,6 @@ import javax.persistence.MappedSuperclass;
  * @date 2022/8/30 15:39
  * @since 1.0
  */
-@EqualsAndHashCode(callSuper = true)
 @MappedSuperclass
 //@EntityListeners(TanceAuditingEntityListenerConfigurable.class)
 @DynamicUpdate

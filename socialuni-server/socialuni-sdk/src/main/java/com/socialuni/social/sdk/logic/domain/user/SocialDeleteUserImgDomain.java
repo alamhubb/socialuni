@@ -5,7 +5,7 @@ import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniMineUserDetailROF
 import com.socialuni.social.user.sdk.model.QO.SocialUserImgDeleteQO;
 import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserImgDo;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniUserImgDo;
 import com.socialuni.social.user.sdk.repository.SocialuniUserImgRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

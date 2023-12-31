@@ -1,8 +1,7 @@
 package com.socialuni.social.sdk.dao.utils.user;
 
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserCoinDo;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserExpandDo;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniUserExpandDo;
 import com.socialuni.social.user.sdk.repository.SocialuniUserExpandRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

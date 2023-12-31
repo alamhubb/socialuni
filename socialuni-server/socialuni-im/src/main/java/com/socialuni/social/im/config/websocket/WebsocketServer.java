@@ -1,14 +1,9 @@
 package com.socialuni.social.im.config.websocket;
 
-import cn.hutool.core.lang.Console;
-import com.socialuni.social.common.api.exception.exception.SocialNullUserException;
-import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import com.socialuni.social.common.api.utils.IntegerUtils;
+import com.socialuni.social.common.api.utils.NumberUtils;
 import com.socialuni.social.common.sdk.utils.RedisUtil;
-import com.socialuni.social.im.api.model.RO.ChatRO;
 import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.im.dao.repository.ChatUserRepository;
-import com.socialuni.social.im.enumeration.ChatStatus;
 import com.socialuni.social.im.enumeration.ChatUserStatus;
 import com.socialuni.social.im.enumeration.NotifyType;
 import com.socialuni.social.im.model.message.notify.NotifyVO;
@@ -19,9 +14,7 @@ import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 import org.springframework.stereotype.Service;
-import org.springframework.web.socket.CloseStatus;
-import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.socket.*;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import javax.annotation.Resource;
@@ -63,47 +56,48 @@ public class WebsocketServer extends TextWebSocketHandler {
     /**
      * 广播信息
      */
-    public static void sendMessageToAllUsers(NotifyVO notify) {
-        String userIdStr = notify.getUser().getId().toString();
-        if (notify.getType().equals(NotifyType.message)) {
-            //发送给所有在线的群组里面的用户
-            for (WebSocketSession userSession : onlineUsersSessionMap.values()) {
-                if (userSession != null && userSession.isOpen()) {
-                    String sessionUserId = Objects.requireNonNull(userSession.getPrincipal()).getName();
-                    //如果发送人是自己则不发送
-                    if (userIdStr.equals(sessionUserId)) {
+    public static <T> void sendMessageToAllUsers(NotifyVO<T> notify) {
+        //发送给所有在线的群组里面的用户
+        for (WebSocketSession userSession : onlineUsersSessionMap.values()) {
+            String userIdStr = notify.getUser().getId().toString();
+            if (userSession != null && userSession.isOpen()) {
+                String sessionUserId = Objects.requireNonNull(userSession.getPrincipal()).getName();
+                //如果发送人是自己则不发送
+                if (userIdStr.equals(sessionUserId)) {
+                    continue;
+                }
+                Integer userId = SocialuniUnionIdFacede.getUnionIdByUuidAllowNull(sessionUserId);
+                //如果不为空，并且用户不在群组中，则不推送
+                if (userId != null) {
+                    String chatIdStr = null;
+                    if (notify.getType().equals(NotifyType.message)) {
+                        chatIdStr = notify.getChat().getId();
+                    } else if (notify.getType().equals(NotifyType.music)) {
+                        chatIdStr = notify.getChatId();
+                    }
+                    Integer chatId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(chatIdStr);
+                    SocialuniChatUserDO socialuniChatUserDO = chatUserRepository.findFirstByChatIdAndUserIdAndStatus(chatId, userId, ChatUserStatus.enable);
+                    if (socialuniChatUserDO == null) {
                         continue;
                     }
-                    Integer userId = SocialuniUnionIdFacede.getUnionIdByUuidAllowNull(sessionUserId);
-                    //如果不为空，并且用户不在群组中，则不推送
-                    if (userId != null) {
-                        String chatIdStr = notify.getChat().getId();
-                        Integer chatId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(chatIdStr);
-                        SocialuniChatUserDO socialuniChatUserDO = chatUserRepository.findFirstByChatIdAndUserIdAndStatus(chatId, userId, ChatUserStatus.enable);
-                        if (socialuniChatUserDO == null) {
-                            continue;
-                        }
-                    }
-                    //发给不是自己的
-                    log.info("消息发送用户id:{},sessionId:{}", userIdStr, sessionUserId);
-                    //如果用户在线才发送
-                    //有不为数字的代表是没登陆的用户才发送
-                    try {
-                        userSession.sendMessage(notify.toMessage());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                }
+                //发给不是自己的
+                log.info("消息发送用户id:{},sessionId:{}", userIdStr, sessionUserId);
+                //如果用户在线才发送
+                //有不为数字的代表是没登陆的用户才发送
+                try {
+                    userSession.sendMessage(notify.toMessage());
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
         }
-
-
     }
 
     public static void sendMessage(Integer userId, NotifyVO notify) {
         String uuid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(userId);
         WebSocketSession session = onlineUsersSessionMap.get(uuid);
-        if (session == null){
+        if (session == null) {
             return;
         }
         //如果用户在线才发送
@@ -147,7 +141,7 @@ public class WebsocketServer extends TextWebSocketHandler {
             redisContainer.addMessageListener(messageListener, channelTopic);
             onlineUsersSessionMap.put(userId, session);
             onlineUsersChannelTopicMap.put(userId, channelTopic);
-            if (IntegerUtils.strIsAllNumber(userId)) {
+            if (NumberUtils.strIsAllNumber(userId)) {
 //                userService.setUserOnlineTrue(userId);
             }
             log.debug("用户标识：{}，Session：{}，在线数量：{}", userId, session.toString(), onlineUsersChannelTopicMap.size());
@@ -172,6 +166,17 @@ public class WebsocketServer extends TextWebSocketHandler {
             log.debug("handleTextMessage method error：{}", e);
         }*/
     }
+
+    @Override
+    public void handleBinaryMessage(WebSocketSession session, BinaryMessage message) {
+        log.debug("收到客户端消息：{}", message.getPayload());
+    }
+
+    @Override
+    public void handlePongMessage(WebSocketSession session, PongMessage message) {
+        log.debug("收到客户端消息：{}", message.getPayload());
+    }
+
 
     @Override
     public void handleTransportError(WebSocketSession session, Throwable exception) {
@@ -199,7 +204,7 @@ public class WebsocketServer extends TextWebSocketHandler {
                     //从set中删除
                     subOnlineCount();
                 }
-                if (IntegerUtils.strIsAllNumber(userId)) {
+                if (NumberUtils.strIsAllNumber(userId)) {
 //                    userService.setUserOnlineFalse(userId);
                 }
             }

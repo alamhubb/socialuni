@@ -1,6 +1,7 @@
 package com.socialuni.social.common.sdk.event;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
 import org.springframework.context.ApplicationEvent;
 
 /**
@@ -10,15 +11,9 @@ import org.springframework.context.ApplicationEvent;
  * @date 2022/9/23 16:26
  * @since 1.0
  */
-@Setter
-@Getter
+@Data
 public class WebControllerExceptionEvent extends ApplicationEvent {
-    String errorMsg;
-    Integer errorCode;
-    String errorType;
-    String innerMsg;
-    String innerMsgDetail;
-
+    String errorMsg; Integer errorCode; String errorType; String innerMsg; String innerMsgDetail;
     public WebControllerExceptionEvent() {
         super("");
     }

@@ -2,13 +2,11 @@ package com.socialuni.social.sdk.dao.DO.bussiness;
 
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
 @Table(name = "s_business_coin_order")
 @Entity
 public class SocialuniCoinOrderDO extends SocialuniContentBaseDO implements Serializable {

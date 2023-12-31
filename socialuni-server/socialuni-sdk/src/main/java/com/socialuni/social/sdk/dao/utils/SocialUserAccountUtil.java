@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.dao.utils;
 
 import com.socialuni.social.user.sdk.constant.SocialuniAccountProviderType;
-import com.socialuni.social.common.sdk.dao.DO.SocialUserAccountDO;
-import com.socialuni.social.common.sdk.dao.repository.SocialUserAccountRepository;
+import com.socialuni.social.common.sdk.dao.DO.SocialUserPlatformAccountDO;
+import com.socialuni.social.common.sdk.dao.repository.SocialUserPlatformAccountRepository;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -12,32 +12,32 @@ import javax.annotation.Resource;
 @Component
 @Slf4j
 public class SocialUserAccountUtil {
-    private static SocialUserAccountRepository socialUserAccountRepository;
+    private static SocialUserPlatformAccountRepository socialUserPlatformAccountRepository;
 
     @Resource
-    public void setCommonUserAccountRepository(SocialUserAccountRepository socialUserAccountRepository) {
-        SocialUserAccountUtil.socialUserAccountRepository = socialUserAccountRepository;
+    public void setCommonUserAccountRepository(SocialUserPlatformAccountRepository socialUserPlatformAccountRepository) {
+        SocialUserAccountUtil.socialUserPlatformAccountRepository = socialUserPlatformAccountRepository;
     }
 
     public static boolean mineBindSocialuniAccount() {
         return SocialUserAccountUtil.getMineAccountByProvider(SocialuniAccountProviderType.socialuni) != null;
     }
 
-    public static SocialUserAccountDO getMineSocialAccount() {
+    public static SocialUserPlatformAccountDO getMineSocialAccount() {
         return SocialUserAccountUtil.getMineAccountByProvider(SocialuniAccountProviderType.socialuni);
     }
 
-    public static SocialUserAccountDO getUserSocialAccount(Integer userId) {
+    public static SocialUserPlatformAccountDO getUserSocialAccount(Integer userId) {
         return SocialUserAccountUtil.getUserAccountByProvider(SocialuniAccountProviderType.socialuni, userId);
     }
 
-    public static SocialUserAccountDO getMineAccountByProvider(String provider) {
-        SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUserId(provider, SocialuniUserUtil.getMineUserIdNotNull());
+    public static SocialUserPlatformAccountDO getMineAccountByProvider(String provider) {
+        SocialUserPlatformAccountDO socialUserAccountDO = socialUserPlatformAccountRepository.findByProviderAndUserId(provider, SocialuniUserUtil.getMineUserIdNotNull());
         return socialUserAccountDO;
     }
 
-    public static SocialUserAccountDO getUserAccountByProvider(String provider, Integer userId) {
-        SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUserId(provider, userId);
+    public static SocialUserPlatformAccountDO getUserAccountByProvider(String provider, Integer userId) {
+        SocialUserPlatformAccountDO socialUserAccountDO = socialUserPlatformAccountRepository.findByProviderAndUserId(provider, userId);
         return socialUserAccountDO;
     }
 

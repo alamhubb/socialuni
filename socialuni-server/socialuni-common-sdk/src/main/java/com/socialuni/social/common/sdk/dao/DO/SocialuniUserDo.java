@@ -2,16 +2,13 @@ package com.socialuni.social.common.sdk.dao.DO;
 
 import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
-import javax.persistence.Entity;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-
 
 @Entity
 @Table(name = "s_user",
@@ -24,13 +21,13 @@ import javax.persistence.UniqueConstraint;
                 @Index(columnList = "nickname"),
                 @Index(columnList = "age"),
                 @Index(columnList = "type"),
+                @Index(columnList = "roleId"),
         },
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "unionId"),
         }
 )
 @Data
-@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 public class SocialuniUserDo extends SocialuniUnionContentBaseDO {
     private String nickname;
@@ -39,7 +36,7 @@ public class SocialuniUserDo extends SocialuniUnionContentBaseDO {
     private String birthday;
     private Integer age;
     private String city;
-    private String type;
+    private String roleId;
 
     //获取userId的正确方式为getUserId，这个id不正确
     @Deprecated
@@ -48,6 +45,6 @@ public class SocialuniUserDo extends SocialuniUnionContentBaseDO {
     }
 
     public SocialuniUserDo(Integer userId) {
-        super(userId, SocialuniContentType.user, null);
+        super(userId, userId, SocialuniContentType.user, null);
     }
 }

@@ -1,7 +1,6 @@
 package com.socialuni.social.common.sdk.platform.qq;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 /**
  * @author qinkaiyuan

@@ -4,7 +4,7 @@ import com.socialuni.social.common.api.constant.PlatformType;
 import com.socialuni.social.user.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.user.sdk.constant.SocialuniAccountProviderType;
 import com.socialuni.social.user.sdk.logic.entity.SocialBindUserProviderAccountEntity;
-import com.socialuni.social.common.sdk.dao.DO.SocialUserAccountDO;
+import com.socialuni.social.common.sdk.dao.DO.SocialUserPlatformAccountDO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ public class SocialBindUserOpenImAccountDomain {
     SocialBindUserProviderAccountEntity socialBindUserProviderAccountEntity;
 
     @Transactional
-    public SocialUserAccountDO bindOrUpdateUserOpenImAccount(SocialuniUserDo mineUser, String userUid, String token) {
+    public SocialUserPlatformAccountDO bindOrUpdateUserOpenImAccount(SocialuniUserDo mineUser, String userUid, String token) {
 
         SocialProviderLoginQO loginQO = new SocialProviderLoginQO();
         loginQO.setProvider(SocialuniAccountProviderType.openIm);

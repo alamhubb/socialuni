@@ -2,14 +2,12 @@ package com.socialuni.social.sdk.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "s_open_tencent_cos_audit_record")
 @Data
-@EqualsAndHashCode(callSuper = true)
 public class TencentCosAuditRecordDO extends SocialuniContentBaseDO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

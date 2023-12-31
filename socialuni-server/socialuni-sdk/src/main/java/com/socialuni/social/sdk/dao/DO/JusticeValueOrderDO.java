@@ -1,7 +1,6 @@
 package com.socialuni.social.sdk.dao.DO;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,7 +12,6 @@ import java.util.Date;
  */@Entity
 @Table(name = "s_justice_value_order")
 @Data
-@EqualsAndHashCode()
 public class JusticeValueOrderDO implements Serializable {
     /**
      * 举报正确类别，奖励20，举报错误类别奖励10，举报失败扣50，

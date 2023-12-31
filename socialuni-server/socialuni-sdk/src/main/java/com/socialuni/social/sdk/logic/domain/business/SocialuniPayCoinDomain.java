@@ -51,7 +51,7 @@ public class SocialuniPayCoinDomain {
             SocialuniPayCoinOrderDO rechargeOrder = new SocialuniPayCoinOrderDO();
 
             rechargeOrder.setPlatform(RequestUtil.getPlatform());
-            rechargeOrder.setSystem(RequestUtil.getSystem());
+            rechargeOrder.setUseSystem(RequestUtil.getSystem());
             rechargeOrder.setProvider(RequestUtil.getProvider());
             rechargeOrder.setUserId(user.getUserId());
             rechargeOrder.setStatus(SocialuniPayStatus.waitPay);
@@ -108,7 +108,7 @@ public class SocialuniPayCoinDomain {
     }
 
     public static String generateOrderNo(SocialuniPayCoinOrderDO socialuniCoinRechargeOrderDO) {
-        String system = socialuniCoinRechargeOrderDO.getSystem();
+        String system = socialuniCoinRechargeOrderDO.getUseSystem();
         String platform = socialuniCoinRechargeOrderDO.getPlatform();
         String payProvider = socialuniCoinRechargeOrderDO.getPayType();
         Date createTime = socialuniCoinRechargeOrderDO.getCreateTime();

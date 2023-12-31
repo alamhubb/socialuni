@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class ConfigService implements ConfigInterface {
+
     @Override
     public String getString( String key) {
         // 不支持devKey的。就只配置自己的配置内容。

@@ -1,8 +1,8 @@
 package com.socialuni.social.common.api.model.user;
 
-import javax.validation.constraints.NotNull;
 import lombok.Data;
 
+import javax.validation.constraints.NotNull;
 
 @Data
 public class SocialuniUserIdQO {

@@ -1,6 +1,5 @@
 package com.socialuni.social.common.api.enumeration;
 
-import com.socialuni.social.common.api.model.PublishDataModel;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.annotation.AliasFor;
 

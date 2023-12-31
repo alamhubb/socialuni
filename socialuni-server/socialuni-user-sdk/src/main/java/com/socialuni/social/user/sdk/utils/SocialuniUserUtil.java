@@ -1,5 +1,6 @@
 package com.socialuni.social.user.sdk.utils;
 
+import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialNotLoginException;
 import com.socialuni.social.common.api.exception.exception.SocialNullUserException;
 import com.socialuni.social.common.api.config.SocialRequestUserConfig;
@@ -9,10 +10,11 @@ import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
 import com.socialuni.social.report.sdk.enumeration.SocialuniUserStatus;
+import com.socialuni.social.user.sdk.config.SocialuniUserSysConfig;
 import com.socialuni.social.user.sdk.exception.SocialUserBannedException;
-import com.socialuni.social.user.sdk.model.DO.SocialuniTokenDO;
-import com.socialuni.social.user.sdk.model.DO.SocialUserPhoneDo;
-import com.socialuni.social.user.sdk.model.DO.SocialUserViolationDo;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniTokenDO;
+import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
+import com.socialuni.social.user.sdk.dao.DO.SocialUserViolationDo;
 import com.socialuni.social.user.sdk.logic.redis.SocialUserPhoneRedis;
 import com.socialuni.social.user.sdk.repository.SocialUserViolationRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -98,8 +100,11 @@ public class SocialuniUserUtil {
         }
         //返回user
         SocialuniUserDo mineUser = SocialuniUserUtil.getAndCheckUserNotNull(userId);
-        if (mineUser.getStatus().equals(SocialuniUserStatus.violation)) {
-            throw new SocialUserBannedException();
+        if (!SocialuniUserSysConfig.bandAllowLogin) {
+            //如果手机号违规，则返回手机号不可用
+            if (mineUser.getStatus().equals(SocialuniUserStatus.violation)) {
+                throw new SocialUserBannedException();
+            }
         }
         return mineUser;
     }

@@ -1,10 +1,8 @@
 package com.socialuni.social.user.sdk.logic.manage;
 
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
-import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserFollowDO;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniUserFollowDO;
 import com.socialuni.social.user.sdk.repository.SocialuniFollowRepository;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

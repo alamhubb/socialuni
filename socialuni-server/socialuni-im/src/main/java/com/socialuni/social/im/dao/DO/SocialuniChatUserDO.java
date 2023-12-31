@@ -2,11 +2,10 @@ package com.socialuni.social.im.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniUserContactBaseDO;
 import com.socialuni.social.im.enumeration.ChatType;
-import com.socialuni.social.im.enumeration.ChatUserStatus;
+import com.socialuni.social.im.enumeration.SocialuniChatRoleId;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Date;
 
 /**
  * @author qinkaiyuan
@@ -27,7 +26,8 @@ public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {
     //    private SocialuniChatDO chat;
     private Integer chatId;
     //是否拉黑了对方
-    private Boolean blackUser;
+    //管理员角色
+    private String chatRoleId;
 
 
     //每一个用户对于这个群聊的状态
@@ -79,7 +79,6 @@ public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {
         //为什么不设置成99，因为此版本没有阅读功能？先试试99
         this.unreadNum = 0;
         this.frontShow = true;
-        this.blackUser = false;
     }
 
     //群聊，不需要对方用户
@@ -93,6 +92,7 @@ public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {
         this.setUserId(userId);
         this.setType(chat.getType());
         this.chatId = chat.getUnionId();
+        this.chatRoleId = SocialuniChatRoleId.user;
         if (chatType.equals(ChatType.single)) {
             //私聊聊，直接是开启，创建时 只能为待开启和 不在前台显示
             this.frontShow = false;
@@ -106,7 +106,6 @@ public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {
         this.topFlag = false;
         //为什么不设置成99，因为此版本没有阅读功能？先试试99
         this.unreadNum = 0;
-        this.blackUser = false;
     }
 
     public SocialuniChatUserDO(SocialuniChatDO chat, Integer userId, Integer beUserId) {
@@ -127,7 +126,7 @@ public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {
     }
 
     //只关闭自己
-    public void closeChat() {
+    /*public void closeChat() {
         this.setUpdateTime(new Date());
         this.setFrontShow(false);
         this.setStatus(ChatUserStatus.close);
@@ -136,7 +135,7 @@ public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {
     public void frontShowFalse() {
         this.setUpdateTime(new Date());
         this.setFrontShow(false);
-    }
+    }*/
 
     /*public void changeStatusBeClose(Date date) {
         this.setUpdateTime(date);
