@@ -13,5 +13,10 @@ include(
     "socialuni-im-api",
     "socialuni-im-sdk",
     "socialuni-sdk",
+    "socialuni-admin-sdk",
+    "socialuni-business",
+    "socialuni-single-example-web",
     "socialuni-example-web",
+    "socialuni-official-web",
+    "socialuni-admin-web",
 )
