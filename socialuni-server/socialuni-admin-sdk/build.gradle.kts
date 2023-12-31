@@ -1,6 +1,9 @@
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("com.socialuni.social:socialuni-sdk")
+    implementation("com.socialuni.social:socialuni-tance-uni")
+    implementation("com.socialuni.social:socialuni-sdk")
+    implementation("com.socialuni.social:socialuni-user-sdk")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("jakarta.persistence:jakarta.persistence-api")

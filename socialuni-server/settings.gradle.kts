@@ -18,7 +18,7 @@ include(
     "socialuni-peiwan-sdk",
     "socialuni-music-sdk",
     "socialuni-business",
-    "socialuni-single-example-web",
+    "socialuni-example-single-web",
     "socialuni-example-web",
     "socialuni-official-web",
     "socialuni-admin-web",
