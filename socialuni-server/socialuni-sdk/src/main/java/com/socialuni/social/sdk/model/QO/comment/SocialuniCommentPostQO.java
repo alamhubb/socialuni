@@ -2,6 +2,7 @@ package com.socialuni.social.sdk.model.QO.comment;
 
 import com.socialuni.social.sdk.model.QO.ContentAddQO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.validation.constraints.NotBlank;
 
@@ -12,6 +13,7 @@ import javax.validation.constraints.NotBlank;
  * @author qinkaiyuan
  * @since TODO[起始版本号]
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class SocialuniCommentPostQO extends ContentAddQO {
     @NotBlank

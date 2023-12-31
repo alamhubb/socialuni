@@ -1,7 +1,9 @@
 dependencies {
     implementation("com.socialuni.social:socialuni-common-sdk")
+    implementation("com.socialuni.social:socialuni-im")
     implementation("com.socialuni.social:socialuni-tance-api")
     implementation("com.socialuni.social:socialuni-report-sdk")
+    implementation("com.socialuni.social:socialuni-user-sdk")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("com.tencent.cloud:cos-sts-java:3.0.6")
     implementation("com.qcloud:cos_api:5.6.89")

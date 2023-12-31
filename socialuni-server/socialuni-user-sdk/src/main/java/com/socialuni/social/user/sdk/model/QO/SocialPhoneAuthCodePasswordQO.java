@@ -1,6 +1,7 @@
 package com.socialuni.social.user.sdk.model.QO;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
@@ -12,6 +13,7 @@ import javax.validation.constraints.NotBlank;
  */
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class SocialPhoneAuthCodePasswordQO extends SocialPhoneNumAuthCodeQO {
 
     @NotBlank
