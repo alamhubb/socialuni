@@ -25,7 +25,7 @@ export default class LoginService {
     }
 
     static async phoneLogin(phoneNum: string, authCode: string) {
-        const phoneBindQO = new SocialPhoneNumLoginQO(phoneNum, authCode)
+        const phoneBindQO = new SocialPhoneNumLoginQO(phoneNum, null, authCode)
         const {data} = await LoginAPI.phoneLoginAPI(phoneBindQO)
         UserService.getMineUserInitDataActionByToken(data)
     }

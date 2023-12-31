@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "@dcloudio/types": "^3.0.17",
-    "@dcloudio/uni-app": "3.0.0-alpha-3070620230227001",
+    "@dcloudio/uni-app": "3.0.0-3090920231225001",
     "@dcloudio/uni-ui": "^1.4.23",
     "socialuni": "^0.1.4-alpha.0",
     "socialuni-im-api": "^0.1.4-alpha.0",
