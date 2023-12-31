@@ -2,6 +2,7 @@ package com.socialuni.social.community.sdk.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
@@ -15,6 +16,7 @@ import javax.persistence.UniqueConstraint;
 })
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class SocialuniHugDO extends SocialuniContentBaseDO {
     /**
      * 哪个评论的

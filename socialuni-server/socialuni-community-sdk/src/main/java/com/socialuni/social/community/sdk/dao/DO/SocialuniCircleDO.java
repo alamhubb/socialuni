@@ -3,6 +3,7 @@ package com.socialuni.social.community.sdk.dao.DO;
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -26,6 +27,7 @@ import javax.persistence.*;
 )
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class SocialuniCircleDO extends SocialuniContentBaseDO {
     private Integer tagTypeId;
 

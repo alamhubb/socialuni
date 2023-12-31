@@ -2,6 +2,7 @@ package com.socialuni.social.sdk.dao.DO.user;
 
 import com.socialuni.social.common.api.entity.SocialuniBaseDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import java.io.Serializable;
 @Table(name = "s_user_device_login_history")
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class SocialUserDeviceLoginHistoryDO extends SocialuniBaseDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -4,6 +4,7 @@ import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.constant.DateTimeType;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -23,6 +24,7 @@ import java.util.Date;
         }
 )
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AuthenticationDO extends SocialuniContentBaseDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

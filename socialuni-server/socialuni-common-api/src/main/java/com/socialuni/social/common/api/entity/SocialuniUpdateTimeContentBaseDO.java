@@ -1,6 +1,7 @@
 package com.socialuni.social.common.api.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
@@ -12,6 +13,7 @@ import java.util.Date;
  * @date 2019-08-13 23:34
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @MappedSuperclass
 public class SocialuniUpdateTimeContentBaseDO extends SocialuniUserInfoBaseDO implements Serializable {
     @Column(nullable = false, columnDefinition = "timestamp default current_timestamp")

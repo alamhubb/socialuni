@@ -4,6 +4,7 @@ import com.socialuni.social.common.api.entity.SocialuniUserContactBaseDO;
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.im.enumeration.SocialuniAddFriendStatus;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
@@ -23,6 +24,7 @@ import javax.persistence.Table;
         }
 )
 @Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 public class SocialuniFriendApplyRecordDO extends SocialuniUserContactBaseDO {
     String applyMsg;

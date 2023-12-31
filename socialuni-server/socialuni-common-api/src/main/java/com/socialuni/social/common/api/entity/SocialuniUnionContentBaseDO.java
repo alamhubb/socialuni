@@ -1,6 +1,7 @@
 package com.socialuni.social.common.api.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
@@ -11,6 +12,7 @@ import java.io.Serializable;
  * @date 2019-08-13 23:34
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @MappedSuperclass
 public class SocialuniUnionContentBaseDO extends SocialuniContentBaseDO implements Serializable {
     @Column(nullable = false)

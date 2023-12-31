@@ -4,6 +4,7 @@ import com.socialuni.social.common.api.entity.SocialuniBaseDO;
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -27,6 +28,7 @@ import javax.persistence.*;
 )
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class SocialuniCircleChatDO extends SocialuniBaseDO {
     @Column(nullable = false)
     private String circleName;

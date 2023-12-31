@@ -3,6 +3,7 @@ package com.socialuni.social.peiwan.sdk.model.DO;
 import com.socialuni.social.common.api.entity.SocialuniBaseDO;
 import com.socialuni.social.common.api.entity.SocialuniUserInfoBaseDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 import javax.persistence.Index;
@@ -21,6 +22,7 @@ import javax.persistence.UniqueConstraint;
         }
 )
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class SocialuniPeiwanFormConfigDO extends SocialuniUserInfoBaseDO {
     String configName;
     String configType;

@@ -3,6 +3,7 @@ package com.socialuni.social.common.sdk.dao.DO;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
@@ -29,6 +30,7 @@ import javax.persistence.UniqueConstraint;
 )
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class SocialuniUserDo extends SocialuniUnionContentBaseDO {
     private String nickname;
     private String avatar;

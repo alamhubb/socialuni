@@ -2,6 +2,7 @@ package com.socialuni.social.common.sdk.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniUserContactBaseDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 import javax.persistence.Index;
@@ -17,6 +18,7 @@ import java.io.Serializable;
         @Index(columnList = "contentType"),
         @Index(columnList = "contentId"),
 })
+@EqualsAndHashCode(callSuper = true)
 public class SocialuniAppOperateRecordDO extends SocialuniUserContactBaseDO implements Serializable {
     //操作主题， 群组， 动态等，
     String contentType;

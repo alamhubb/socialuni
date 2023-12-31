@@ -1,12 +1,14 @@
 package com.socialuni.social.common.api.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class SocialuniImgBaseDo extends SocialuniUnionContentBaseDO {
     @Column(nullable = false, updatable = false)
     private String src;

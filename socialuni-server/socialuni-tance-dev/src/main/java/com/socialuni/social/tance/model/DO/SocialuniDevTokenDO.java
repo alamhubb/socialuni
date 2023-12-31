@@ -3,6 +3,7 @@ package com.socialuni.social.tance.model.DO;
 import com.socialuni.social.common.api.constant.DateTimeType;
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -24,6 +25,7 @@ import java.util.Date;
 )
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class SocialuniDevTokenDO extends SocialuniContentBaseDO implements Serializable {
         @Column(nullable = false, updatable = false)
         private Integer devId;

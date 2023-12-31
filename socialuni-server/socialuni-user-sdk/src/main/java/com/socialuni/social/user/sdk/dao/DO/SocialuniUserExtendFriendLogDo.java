@@ -2,6 +2,7 @@ package com.socialuni.social.user.sdk.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -15,6 +16,7 @@ import javax.persistence.*;
                 @Index(columnList = "updateTime"),
         })
 @Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 public class SocialuniUserExtendFriendLogDo extends SocialuniContentBaseDO {
     @Column(nullable = false)

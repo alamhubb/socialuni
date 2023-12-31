@@ -2,6 +2,7 @@ package com.socialuni.social.im.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniUserInfoBaseDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
@@ -22,6 +23,7 @@ import javax.persistence.UniqueConstraint;
         }
 )
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class SocialuniUserChatConfigDO extends SocialuniUserInfoBaseDO {
 
     //是否接收陌生人消息

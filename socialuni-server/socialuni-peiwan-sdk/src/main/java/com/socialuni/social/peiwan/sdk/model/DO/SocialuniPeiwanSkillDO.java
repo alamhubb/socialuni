@@ -3,6 +3,7 @@ package com.socialuni.social.peiwan.sdk.model.DO;
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import com.socialuni.social.common.api.entity.SocialuniUserInfoBaseDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 import javax.persistence.Index;
@@ -21,6 +22,7 @@ import javax.persistence.UniqueConstraint;
         }
 )
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class SocialuniPeiwanSkillDO extends SocialuniContentBaseDO {
 
     String skillName = null;

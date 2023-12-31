@@ -2,6 +2,7 @@ package com.socialuni.social.sdk.dao.DO.circle;
 
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Index;
@@ -20,6 +21,7 @@ import java.io.Serializable;
 })
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class SocialCircleLeaderRecordDO extends SocialuniContentBaseDO implements Serializable {
     Integer circleId;
     Integer userId;

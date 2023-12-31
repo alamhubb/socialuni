@@ -3,6 +3,7 @@ package com.socialuni.social.user.sdk.dao.DO;
 import com.socialuni.social.common.api.entity.SocialuniImgBaseDo;
 import com.socialuni.social.report.sdk.dao.DO.SocialuniTextCheckDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 
@@ -27,6 +28,7 @@ import javax.persistence.*;
         }
 )
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class SocialuniUserImgDo extends SocialuniImgBaseDo implements SocialuniTextCheckDO {
     //发表商户
     @Column(nullable = false)

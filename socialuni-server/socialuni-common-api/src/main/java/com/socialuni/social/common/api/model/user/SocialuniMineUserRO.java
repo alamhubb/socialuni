@@ -1,6 +1,7 @@
 package com.socialuni.social.common.api.model.user;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
  * @date 2019-08-13 23:34
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 public class SocialuniMineUserRO extends SocialuniUserRO {
     private String phoneNum;

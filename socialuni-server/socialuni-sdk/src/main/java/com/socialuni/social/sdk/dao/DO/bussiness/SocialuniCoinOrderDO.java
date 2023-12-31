@@ -2,6 +2,7 @@ package com.socialuni.social.sdk.dao.DO.bussiness;
 
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,6 +10,7 @@ import java.io.Serializable;
 @Data
 @Table(name = "s_business_coin_order")
 @Entity
+@EqualsAndHashCode(callSuper = true)
 public class SocialuniCoinOrderDO extends SocialuniContentBaseDO implements Serializable {
     //本单贝壳数量，可能是正值，也可能是负值
     @Column(nullable = false)

@@ -2,6 +2,7 @@ package com.socialuni.social.im.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniUserContactBaseDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
@@ -25,6 +26,7 @@ import javax.persistence.UniqueConstraint;
         }
 )
 @Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 public class SocialuniFriendDO extends SocialuniUserContactBaseDO {
 

@@ -4,6 +4,7 @@ import com.socialuni.social.tance.sdk.enumeration.DevAccountType;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -26,5 +27,6 @@ import java.io.Serializable;
                 @UniqueConstraint(columnNames = {"socialuniId"}),
         }
 )
+@EqualsAndHashCode(callSuper = true)
 public class DevAccountDo extends DevAccountModel implements Serializable {
 }

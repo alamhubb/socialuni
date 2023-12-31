@@ -2,6 +2,7 @@ package com.socialuni.social.peiwan.sdk.model.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniImgBaseDo;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 import javax.persistence.Index;
@@ -17,6 +18,7 @@ import javax.persistence.Table;
         }
 )
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class SocialuniPeiwanInfoImgDO extends SocialuniImgBaseDo {
 
     //图片大小

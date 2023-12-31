@@ -2,6 +2,7 @@ package com.socialuni.social.user.sdk.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniUserContactBaseDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 import javax.persistence.Index;
@@ -22,5 +23,6 @@ import javax.persistence.UniqueConstraint;
                 @UniqueConstraint(columnNames = {"userId", "beUserId"}),
         }
 )
+@EqualsAndHashCode(callSuper = true)
 public class SocialuniUserBlackDO extends SocialuniUserContactBaseDO {
 }

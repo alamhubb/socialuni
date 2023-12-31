@@ -3,6 +3,7 @@ package com.socialuni.social.user.sdk.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -22,6 +23,7 @@ import java.util.Date;
                 @UniqueConstraint(columnNames = "userId"),
         })
 @Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 public class SocialuniUserExpandDo extends SocialuniContentBaseDO {
     private Integer userId;

@@ -2,6 +2,7 @@ package com.socialuni.social.common.sdk.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -34,6 +35,7 @@ import java.io.Serializable;
         }
 )
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class SocialUserPlatformAccountDO extends SocialuniContentBaseDO implements Serializable {
         //使用哪个平台注册的
         private String platform;

@@ -1,6 +1,7 @@
 package com.socialuni.social.common.sdk.dao.repository;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -21,6 +22,7 @@ import javax.persistence.MappedSuperclass;
 @DynamicUpdate
 @DynamicInsert
 @Data
+@EqualsAndHashCode(callSuper = true)
 public abstract class SuperInfo extends BaseInfo {
     /**
      * tanceId对象数据库的列名。

@@ -3,6 +3,7 @@ package com.socialuni.social.im.dao.DO.message;
 import com.socialuni.social.common.api.entity.SocialuniUserContactBaseDO;
 import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -18,6 +19,7 @@ import java.io.Serializable;
         @UniqueConstraint(columnNames = {"beUserId", "messageId"})
 })
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 //发送出去的消息表，接收人是谁，基于哪个chatUser
 public class SocialuniMessageReceiveDO extends SocialuniUserContactBaseDO implements Serializable {
 

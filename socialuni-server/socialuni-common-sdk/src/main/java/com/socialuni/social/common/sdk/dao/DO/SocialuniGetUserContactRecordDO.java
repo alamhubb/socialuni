@@ -3,6 +3,7 @@ package com.socialuni.social.common.sdk.dao.DO;
 import com.socialuni.social.common.api.entity.SocialuniUserContactBaseDO;
 import com.socialuni.social.common.api.entity.SocialuniUserInfoBaseDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -22,6 +23,7 @@ import java.io.Serializable;
 )
 @Entity
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class SocialuniGetUserContactRecordDO extends SocialuniUserContactBaseDO implements Serializable {
 
     @Column(nullable = false)

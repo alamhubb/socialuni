@@ -2,6 +2,7 @@ package com.socialuni.social.sdk.dao.DO.bussiness;
 
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,6 +10,7 @@ import java.io.Serializable;
 //金币充值订单
 @Data
 @Entity
+@EqualsAndHashCode(callSuper = true)
 @Table(name = "s_business_pay_coin_order")
 public class SocialuniPayCoinOrderDO extends SocialuniContentBaseDO implements Serializable {
     private String orderNo;

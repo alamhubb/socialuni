@@ -3,6 +3,7 @@ package com.socialuni.social.user.sdk.dao.DO;
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import com.socialuni.social.common.api.constant.DateTimeType;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -25,6 +26,7 @@ import java.util.Date;
 )
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class SocialuniTokenDO extends SocialuniContentBaseDO implements Serializable {
         @Column(nullable = false, updatable = false)
         private Integer userId;

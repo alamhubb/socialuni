@@ -3,6 +3,7 @@ package com.socialuni.social.sdk.model.RO.talk;
 import com.socialuni.social.common.api.model.SocialuniContentIdRO;
 import com.socialuni.social.common.api.model.user.SocialuniContentUserRO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Column;
 import java.util.Date;
@@ -12,6 +13,7 @@ import java.util.List;
  * 不需要像帖子一样，每次有回复都刷新，因为不愁看，且你评论后的，有动静你会有通知
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class SocialuniTalkRO extends SocialuniContentIdRO {
     private SocialuniContentUserRO user;
     private String content;

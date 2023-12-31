@@ -3,6 +3,7 @@ package com.socialuni.social.community.sdk.dao.DO;
 import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.report.sdk.dao.DO.SocialuniTextCheckDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -24,6 +25,7 @@ import java.io.Serializable;
         }
 )
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class SocialuniCommentDO extends SocialuniUnionContentBaseDO implements SocialuniTextCheckDO, Serializable {
     private Integer no;
 

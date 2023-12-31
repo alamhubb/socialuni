@@ -4,6 +4,7 @@ import com.socialuni.social.common.api.entity.SocialuniUserContactBaseDO;
 import com.socialuni.social.im.enumeration.ChatType;
 import com.socialuni.social.im.enumeration.SocialuniChatRoleId;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 
@@ -18,6 +19,7 @@ import javax.persistence.*;
         @UniqueConstraint(columnNames = {"chatId", "userId"}),
         @UniqueConstraint(columnNames = {"type", "userId", "beUserId"})
 })
+@EqualsAndHashCode(callSuper = true)
 public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {
 
     //置顶标识

@@ -2,6 +2,7 @@ package com.socialuni.social.community.sdk.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -21,6 +22,7 @@ import java.util.Date;
                 @UniqueConstraint(columnNames = {"name"})
         })
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class SocialuniTagTypeDO extends SocialuniContentBaseDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

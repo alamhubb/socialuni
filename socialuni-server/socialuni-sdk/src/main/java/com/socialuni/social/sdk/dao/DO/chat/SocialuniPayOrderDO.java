@@ -2,6 +2,7 @@ package com.socialuni.social.sdk.dao.DO.chat;
 
 import com.socialuni.social.common.api.entity.SocialuniBaseDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
@@ -20,6 +21,7 @@ import java.io.Serializable;
 )
 @Entity
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class SocialuniPayOrderDO extends SocialuniBaseDO implements Serializable {
     @Column(nullable = false)
     private Integer userId;

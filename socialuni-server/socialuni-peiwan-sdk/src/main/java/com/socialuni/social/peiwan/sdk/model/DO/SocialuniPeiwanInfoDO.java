@@ -2,6 +2,7 @@ package com.socialuni.social.peiwan.sdk.model.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 
@@ -17,6 +18,7 @@ import javax.persistence.*;
         }
 )
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class SocialuniPeiwanInfoDO extends SocialuniContentBaseDO {
 
     private String nickname;

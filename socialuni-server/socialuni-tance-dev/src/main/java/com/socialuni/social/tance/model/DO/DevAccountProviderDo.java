@@ -2,6 +2,7 @@ package com.socialuni.social.tance.model.DO;
 
 import com.socialuni.social.tance.sdk.model.DevAccountProviderModler;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -20,6 +21,7 @@ import javax.persistence.*;
                 @UniqueConstraint(columnNames = {"appId", "platform", "mpType"})
         })
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class DevAccountProviderDo extends DevAccountProviderModler {
     @Column(nullable = false)
     private Integer devId;

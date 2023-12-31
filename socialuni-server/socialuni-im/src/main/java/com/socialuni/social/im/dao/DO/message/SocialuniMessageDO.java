@@ -3,6 +3,7 @@ package com.socialuni.social.im.dao.DO.message;
 
 import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -24,6 +25,7 @@ import java.io.Serializable;
                 @UniqueConstraint(columnNames = "unionId"),
         }
 )
+@EqualsAndHashCode(callSuper = true)
 public class SocialuniMessageDO extends SocialuniUnionContentBaseDO implements Serializable {
     private Integer chatId;
     //官方，普通

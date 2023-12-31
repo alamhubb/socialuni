@@ -2,6 +2,7 @@ package com.socialuni.social.music.sdk.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 import javax.persistence.Index;
@@ -20,6 +21,7 @@ import java.util.Date;
         }
 )
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class SocialuniMusicRoomDO extends SocialuniContentBaseDO {
     Integer roomId;
 

@@ -2,6 +2,7 @@ package com.socialuni.social.user.sdk.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
@@ -27,6 +28,7 @@ import java.util.Date;
         }
 )
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class SocialUserViolationDo extends SocialuniContentBaseDO {
         /**
          * 被违规的次数，默认0

@@ -2,6 +2,7 @@ package com.socialuni.social.common.sdk.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniBaseDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +17,7 @@ import java.util.Date;
  * 用户详细信息，只有查看用户详情时才需要的信息
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "s_app_jpa_sql_log", indexes = {
         @Index(columnList = "requestId"),

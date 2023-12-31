@@ -1,6 +1,7 @@
 package com.socialuni.social.common.api.model.user;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
@@ -10,6 +11,7 @@ import java.util.Date;
  * @date 2019-08-13 23:34
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 public class SocialuniUserFollowDetailListRO extends SocialuniUserFollowInfoRO {
     private Date updateTime;

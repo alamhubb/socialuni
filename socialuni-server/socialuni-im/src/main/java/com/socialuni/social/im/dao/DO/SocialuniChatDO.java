@@ -6,6 +6,7 @@ import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.im.enumeration.ChatOpenType;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -26,6 +27,7 @@ import java.io.Serializable;
                 @Index(columnList = "status"),
         }
 )
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 public class SocialuniChatDO extends SocialuniUnionContentBaseDO implements Serializable {
     private String chatName;

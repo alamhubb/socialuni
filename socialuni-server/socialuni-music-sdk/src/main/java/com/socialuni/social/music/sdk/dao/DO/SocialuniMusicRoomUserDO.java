@@ -4,6 +4,7 @@ import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import com.socialuni.social.common.api.entity.SocialuniUserContactBaseDO;
 import com.socialuni.social.common.api.entity.SocialuniUserInfoBaseDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
@@ -19,6 +20,7 @@ import javax.persistence.Table;
         }
 )
 @Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 public class SocialuniMusicRoomUserDO extends SocialuniContentBaseDO {
 

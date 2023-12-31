@@ -2,6 +2,7 @@ package com.socialuni.social.sdk.dao.DO.user;
 
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -15,6 +16,7 @@ import java.io.Serializable;
 )
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class SocialUserCircleDetailDO extends SocialuniContentBaseDO implements Serializable {
     //在talk里面展示的放在user里？
     //必有
