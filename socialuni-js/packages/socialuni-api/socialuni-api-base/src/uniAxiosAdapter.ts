@@ -2,9 +2,12 @@ import RequestSuccessCallbackResult = UniNamespace.RequestSuccessCallbackResult;
 import GeneralCallbackResult = UniNamespace.GeneralCallbackResult;
 import {AxiosRequestConfig, AxiosResponse} from "axios";
 
-
 export default function uniAxiosAdapter(config: AxiosRequestConfig) {
     return new Promise<AxiosResponse>((resolve, reject) => {
+        //修复Content-Type 为空问题
+        if (!config.headers['Content-Type']){
+            config.headers['Content-Type'] = 'application/json'
+        }
         uni.request({
             ...config,
             url: config.baseURL + '/' + config.url,

@@ -3,10 +3,11 @@ import uniAxiosAdapter from "./uniAxiosAdapter";
 import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
 import SocialuniAPIHeaderName from "./SocialuniAPIHeaderName";
 import SocialuniAPIConfig from "./SocialuniAPIConfig";
+import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 
 const SocialuniAxiosCreate = (config?: AxiosRequestConfig) => {
     try {
-        if (uni) {
+        if (socialuniSystemModule.isUniApp) {
             config.adapter = uniAxiosAdapter
         }
     } catch (e) {
