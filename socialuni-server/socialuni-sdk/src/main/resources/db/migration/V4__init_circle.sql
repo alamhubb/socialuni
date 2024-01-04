@@ -29,7 +29,6 @@ CREATE TABLE `s_community_circle` (
                                       `user_id` int(11) NOT NULL,
                                       PRIMARY KEY (`id`);
                                       UNIQUE KEY `UKb8ln648ukufmpxs50n1b8u1fk` (`name`);
-                                      UNIQUE KEY `UKskibejye898ahg6ubvunql2i6` (`dev_id`);
                                       KEY `IDX5vqexjdcrxmyebs924xuanhue` (`status`);
                                       KEY `IDXohfnwy1da2p4nmcuwc8j8m54k` (`show_front`);
                                       KEY `IDXtl2dtra0f3b37qqjhnef6ckn` (`count`);
