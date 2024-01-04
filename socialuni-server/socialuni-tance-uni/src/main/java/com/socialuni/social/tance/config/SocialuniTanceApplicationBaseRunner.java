@@ -99,6 +99,7 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
 
         DevAccountModel devAccountModelTest = DevAccountFacade.getDevAccount(2);
 
+        //测试渠道的账号
         String phoneNumTest = socialuniAppConfigBO.getTestUserPhoneNum();
         //如果手机号已经存在账户，则直接使用，正序获取第一个用户
 
