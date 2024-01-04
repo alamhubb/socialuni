@@ -50,22 +50,4 @@ public class SocialuniDistrictDO implements Serializable {
 
     @Transient
     private List<SocialuniDistrictDO> childs = new ArrayList<>();
-
-    @Override
-    public String toString() {
-        return "DistrictDO{" +
-                "id=" + id +
-                ", provinceCode='" + provinceCode + '\'' +
-                ", provinceName='" + provinceName + '\'' +
-                ", cityCode='" + cityCode + '\'' +
-                ", cityName='" + cityName + '\'' +
-                ", districtCode='" + districtCode + '\'' +
-                ", districtName='" + districtName + '\'' +
-                ", adCode='" + adCode + '\'' +
-                ", adName='" + adName + '\'' +
-                ", count=" + count +
-                ", talkCount=" + talkCount +
-                ", status='" + status +
-                '}';
-    }
 }

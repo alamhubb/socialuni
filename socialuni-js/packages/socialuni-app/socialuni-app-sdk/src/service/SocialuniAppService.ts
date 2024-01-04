@@ -12,7 +12,7 @@ export default class SocialuniAppService {
         if (!token) {
             token = UUIDUtil.getUUID()
         }
-        const websocketUrl = SocialuniAPIConfig.socialuniWebsocketUrl + '/webrtc?token=' + token
+        /*const websocketUrl = SocialuniAPIConfig.socialuniWebsocketUrl + '/webrtc?token=' + token
 
         WebsocketWebRtcUtil.easyWebRTC = FastWebRTC.createClient({
             wsUrl: websocketUrl
@@ -20,7 +20,7 @@ export default class SocialuniAppService {
 // 设置远程视频流到video元素
         WebsocketWebRtcUtil.easyWebRTC.ontrack((event) => {
             WebsocketWebRtcUtil.remoteVideo.srcObject = event.streams[0];
-        })
+        })*/
 
 
         WebsocketUtil.createWebsocket()
