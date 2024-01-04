@@ -27,11 +27,11 @@ CREATE TABLE `s_community_circle` (
                                       `visible_gender` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
                                       `city_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
                                       `user_id` int(11) NOT NULL,
-                                      PRIMARY KEY (`id`);
-                                      UNIQUE KEY `UKb8ln648ukufmpxs50n1b8u1fk` (`name`);
-                                      KEY `IDX5vqexjdcrxmyebs924xuanhue` (`status`);
-                                      KEY `IDXohfnwy1da2p4nmcuwc8j8m54k` (`show_front`);
-                                      KEY `IDXtl2dtra0f3b37qqjhnef6ckn` (`count`);
+                                      PRIMARY KEY (`id`),
+                                      UNIQUE KEY `UKb8ln648ukufmpxs50n1b8u1fk` (`name`),
+                                      KEY `IDX5vqexjdcrxmyebs924xuanhue` (`status`),
+                                      KEY `IDXohfnwy1da2p4nmcuwc8j8m54k` (`show_front`),
+                                      KEY `IDXtl2dtra0f3b37qqjhnef6ckn` (`count`),
                                       KEY `IDX90q0wgie5egud3ifmgwjg66l7` (`visible_gender`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3262 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
