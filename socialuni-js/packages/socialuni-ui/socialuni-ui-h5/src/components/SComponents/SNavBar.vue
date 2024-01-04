@@ -53,7 +53,7 @@
 
     </div>
 
-    <q-dialog ref="loginDialog" title="登录" width="400px" no-show-footer>
+    <q-dialog ref="loginDialog" title="登录" width="350px" no-show-footer>
       <socialuni-login-view @login-success="loginSuccess"></socialuni-login-view>
     </q-dialog>
 

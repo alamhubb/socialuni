@@ -1,13 +1,12 @@
 <template>
   <div class="h100p">
     <q-scrollbar class="h100p">
-      <div>
+<!--      <div>
         <div></div>
         <div>
           <el-button @click="">创建</el-button>
         </div>
-      </div>
-
+      </div>-->
       <div v-for="chat in viewService.chatList" :key="chat.id" class="flex-row pd-sm bb use-click"
            @click="viewService.toMessagePage(chat)"
            @longpress="viewService.showBottomMenuClick(chat.id)">
