@@ -1,6 +1,6 @@
-V2__init_db.sql
 /*!40101 SET NAMES utf8 */;
 /*!40101 SET SQL_MODE=''*/;
+
 DROP TABLE IF EXISTS `s_community_district`;
 
 CREATE TABLE `s_community_district` (

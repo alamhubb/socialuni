@@ -1,9 +1,3 @@
-/*
-SQLyog  v12.2.6 (64 bit)
-MySQL - 5.7.18-cynos-log : Database - socialuni_dev
-*********************************************************************
-*/
-
 /*!40101 SET NAMES utf8 */;
 /*!40101 SET SQL_MODE=''*/;
 
