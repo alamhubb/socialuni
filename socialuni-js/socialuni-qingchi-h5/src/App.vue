@@ -1,18 +1,19 @@
 <template>
-    <div class="h100p overflow-hidden flex-col bg-default">
-        <nav-bar/>
-        <div class="flex-1 overflow-hidden">
-            <RouterView/>
-        </div>
+  <div class="h100p overflow-hidden flex-col bg-default">
+    <s-nav-bar title="清池社区"/>
+    <div class="flex-1 overflow-hidden">
+      <RouterView/>
     </div>
+  </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-facing-decorator';
+import {Component, Vue} from 'vue-facing-decorator';
 import NavBar from "@/layout/NavBar.vue";
+import SNavBar from "socialuni-ui-h5/src/components/SComponents/SNavBar.vue";
 
 @Component({
-    components: {NavBar}
+  components: {SNavBar}
 })
 export default class App extends Vue {
 }

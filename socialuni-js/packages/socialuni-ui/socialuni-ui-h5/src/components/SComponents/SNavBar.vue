@@ -3,7 +3,7 @@
     <div v-if="!mineUser" class="row-between-center shadow-bottom index-sm px-smm h50 bg-white flex-none">
       <div class="flex-none row-col-center mr-40 bg-click" @click="toHome">
         <!--      <img src="@/assets/img/logo.jpg" class="h40" alt="logo">-->
-        <div class="font-19 font-bold">清池</div>
+        <div class="font-19 font-bold">{{ title}}</div>
       </div>
 
       <div class="row-end-center">
@@ -64,7 +64,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-facing-decorator'
+import {Component, Prop, Vue} from 'vue-facing-decorator'
 import SDialog from "qing-ui-h5/src/components/QComponents/QDialog.vue";
 import SocialuniUserEditDialog from "@/views/user/SocialuniUserEditDialog.vue";
 import SocialuniUserEventConst from "socialuni-user-sdk/src/constant/SocialuniUserEventConst";
@@ -85,11 +85,14 @@ import QDialog from "qing-ui-h5/src/components/QComponents/QDialog.vue";
 @Component({
   components: {SocialuniUserEditDialog, Tools, SocialuniLoginView, QDialog, ArrowDown}
 })
-export default class NavBar extends Vue {
+export default class SNavBar extends Vue {
   $refs: {
-    loginDialog: SDialog
+    loginDialog: QDialog
     userEditDialog: SocialuniUserEditDialog
   }
+
+  @Prop() title: string
+
 
   dialogVisible = false
 
