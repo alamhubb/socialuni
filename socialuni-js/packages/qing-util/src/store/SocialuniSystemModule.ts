@@ -27,6 +27,11 @@ class SocialuniSystemModule {
     //初始化以后第一步加载
     // 条件编译属性
     isMp = false
+
+    get isNotMp() {
+        return !this.isMp
+    }
+
     isH5 = false
 
     isMpQQ = false
