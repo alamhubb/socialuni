@@ -6718,20 +6718,9 @@ insert  into `s_community_tag_type`(`id`,`count`,`create_time`,`description`,`na
 
                                                                                                                                                                                       (36,0,NULL,NULL,'大学',NULL,NULL,'正常',NULL,NULL,40,0);
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
-
 /*!40101 SET NAMES utf8 */;
 
 /*!40101 SET SQL_MODE=''*/;
-
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 /*Table structure for table `s_community_tag` */
 
 DROP TABLE IF EXISTS `s_community_tag`;
@@ -8033,21 +8022,11 @@ insert  into `s_community_tag`(`id`,`count`,`create_reason`,`create_time`,`creat
 
                                                                                                                                                                                                                                                                                                 (652,0,NULL,'2022-12-16 23:53:50',NULL,1,'学习搭档','正常',0,'2022-12-16 23:53:50',1994942,'',NULL,NULL,NULL,'https://cdxapp-1257733245.file.myqcloud.com/qingchi/static/qclogo.jpg!avatar',NULL,NULL,'','all');
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
-
 
 /*!40101 SET NAMES utf8 */;
 
 /*!40101 SET SQL_MODE=''*/;
 
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 /*Table structure for table `s_community_circle` */
 
 DROP TABLE IF EXISTS `s_community_circle`;
@@ -14588,9 +14567,4 @@ insert  into `s_community_circle`(`id`,`count`,`create_reason`,`create_time`,`cr
 
                                                                                                                                                                                                                                                                                                                          (3260,0,NULL,'2022-09-15 19:47:31',NULL,36,'龙岩学院','正常',0,'2022-09-15 19:48:19',NULL,NULL,NULL,NULL,NULL,'https://cdxapp-1257733245.file.myqcloud.com/qingchi/static/qclogo.jpg!avatar','全部',NULL,'','all',NULL,0),
 
-                                                                                                                                                                                                                                                                                                                         (3261,2,NULL,'2020-10-25 11:33:13',NULL,1,'按摩','正常',0,'2020-10-25 11:33:13',108,'',NULL,NULL,NULL,'https://cdxapp-1257733245.file.myqcloud.com/qingchi/static/qclogo.jpg!avatar','全部',NULL,'','all',NULL,0);
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
