@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="!mineUser" class="row-between-center shadow-bottom index-sm px-smm h50 bg-white flex-none">
+    <div class="row-between-center shadow-bottom index-sm px-smm h50 bg-white flex-none">
       <div class="flex-none row-col-center mr-40 bg-click" @click="toHome">
         <!--      <img src="@/assets/img/logo.jpg" class="h40" alt="logo">-->
         <div class="font-19 font-bold">{{ title}}</div>
@@ -65,8 +65,6 @@
 
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-facing-decorator'
-import SDialog from "qing-ui-h5/src/components/QComponents/QDialog.vue";
-import SocialuniUserEditDialog from "@/views/user/SocialuniUserEditDialog.vue";
 import SocialuniUserEventConst from "socialuni-user-sdk/src/constant/SocialuniUserEventConst";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import CosService from "socialuni-app-sdk/src/util/CosService";
@@ -77,10 +75,11 @@ import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
 import UUIDUtil from "qing-util/src/util/UUIDUtil";
 import ImgUtil from "qing-util/src/util/ImgUtil";
 import {ArrowDown, Tools} from "@element-plus/icons-vue";
-import SocialuniLoginView from "socialuni-user-view-h5/src/views/SocialuniLoginView.vue";
 import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
 import UserService from "socialuni-user-sdk/src/logic/UserService";
 import QDialog from "qing-ui-h5/src/components/QComponents/QDialog.vue";
+import SocialuniLoginView from "../views/SocialuniLoginView.vue";
+import SocialuniUserEditDialog from "../views/SocialuniUserEditDialog.vue";
 
 @Component({
   components: {SocialuniUserEditDialog, Tools, SocialuniLoginView, QDialog, ArrowDown}
