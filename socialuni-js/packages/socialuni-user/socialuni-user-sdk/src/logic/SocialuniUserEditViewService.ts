@@ -100,10 +100,6 @@ class SocialuniUserEditViewService extends SocialuniViewService {
         }
     }
 
-    closeUserEditPop() {
-        const emits = defineEmits(['close'])
-        emits('close')
-    }
 
     async saveUser() {
         if (this.editUser.birthday && this.editUser.birthday.length > 4) {
@@ -125,7 +121,6 @@ class SocialuniUserEditViewService extends SocialuniViewService {
         SocialuniMineUserAPI.editUserAPI(this.editUser).then((res: any) => {
             socialuniUserModule.setUser(res.data)
             QingAppUtil.ToastUtil.success('编辑成功')
-            this.closeUserEditPop()
         }).finally(() => {
             this.btnDisabled = false
             QingAppUtil.NativeUtil.hideLoading()
