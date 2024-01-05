@@ -244,7 +244,7 @@ class SocialuniChatModule {
         chat.nickname = chatName
         this.setChat(chat)*/
 
-        // ImPageUtil.toMessagePageByChatId(receiveId)
+        ImPageUtil.toMessagePageByChatId(receiveId)
         return receiveId
     }
 
