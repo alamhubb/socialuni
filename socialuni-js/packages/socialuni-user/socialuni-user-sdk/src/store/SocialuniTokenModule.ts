@@ -2,7 +2,7 @@ import {reactive, UnwrapNestedRefs} from "vue";
 import SocialuniTokenUtil from "../util/SocialuniTokenUtil";
 
 class SocialuniTokenModule {
-    userToken: string = SocialuniTokenUtil.get() || null
+    private userToken: string = SocialuniTokenUtil.get() || null
 
     setToken(token: string) {
         this.userToken = token

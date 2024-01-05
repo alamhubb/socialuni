@@ -32,7 +32,7 @@
                             type="date"
                     />
                 </el-form-item>
-                <el-form-item label="所在地">
+                <el-form-item label="所在地888">
                     <el-input class="w200" v-model.trim="editUser.city" clearable maxlength="10"/>
                 </el-form-item>
             </el-form>

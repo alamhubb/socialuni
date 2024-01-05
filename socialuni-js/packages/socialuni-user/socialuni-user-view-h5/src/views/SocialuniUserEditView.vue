@@ -33,7 +33,7 @@
                             type="date"
                     />
                 </el-form-item>
-                <el-form-item label="所在地">
+                <el-form-item label="所在地222">
                     <el-input class="w200" v-model.trim="socialuniUserEditViewService.editUser.city" clearable maxlength="10"/>
                 </el-form-item>
             </el-form>
@@ -42,6 +42,8 @@
 </template>
 
 <script lang="ts" setup>
+import QDialog from "qing-ui-h5/src/components/QComponents/QDialog.vue";
+
 import socialuniUserEditViewService from "socialuni-user-sdk/src/logic/SocialuniUserEditViewService";
 import {getCurrentInstance} from "vue";
 
