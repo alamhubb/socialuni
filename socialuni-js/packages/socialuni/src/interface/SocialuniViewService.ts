@@ -7,6 +7,7 @@ export default abstract class SocialuniViewService<T> implements SocialuniViewSe
     uuid: ComponentInternalInstance = UUIDUtil.getUUID()
     instance: Vue = null
     params: any = null
+    //不要使用getInstance了
 
     initService(instance: Vue, params: any = {}) {
         this.instance = instance
