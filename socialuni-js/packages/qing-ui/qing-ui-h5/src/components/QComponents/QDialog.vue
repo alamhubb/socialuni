@@ -58,11 +58,11 @@
 
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-facing-decorator'
-import SScrollbar from "./QScrollbar.vue";
-import SPageFooter from "./QPageFooter.vue";
+import QScrollbar from "./QScrollbar.vue";
+import QPageFooter from "./QPageFooter.vue";
 
 @Component({
-  components: {SScrollbar, SPageFooter}
+  components: {QScrollbar, QPageFooter}
 })
 export default class QDialog extends Vue {
   @Prop({
@@ -121,7 +121,6 @@ export default class QDialog extends Vue {
 
   // 提供给外部使用的方法
   open() {
-    console.log(12)
     // 重置按钮状态
     this.clearValidate()
     /* this.$nextTick(() => {
@@ -147,8 +146,6 @@ export default class QDialog extends Vue {
     this.$emit('update:visible', this.dialogVisible)
   }
   confirmAfter() {
-      console.log('触发了关闭')
-      console.log(this.autoClose)
     if (this.autoClose) {
       this.close()
     }

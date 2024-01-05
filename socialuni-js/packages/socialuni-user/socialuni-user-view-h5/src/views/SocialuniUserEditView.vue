@@ -36,7 +36,7 @@
             type="date"
         />
       </el-form-item>
-      <el-form-item label="所在地222">
+      <el-form-item label="所在地">
         <el-input class="w200" v-model.trim="socialuniUserEditViewService.editUser.city" clearable maxlength="10"/>
       </el-form-item>
     </el-form>

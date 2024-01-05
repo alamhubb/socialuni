@@ -33,10 +33,10 @@
 
 <script lang="ts">
 import { Component, Emit, Prop, Vue } from 'vue-facing-decorator'
-import SButton from "./QButton.vue";
+import QButton from "./QButton.vue";
 
 @Component({
-  components: { SButton }
+  components: { QButton }
 })
 export default class QPageFooter extends Vue {
   @Prop({ default: false, type: Boolean }) hideConfirm

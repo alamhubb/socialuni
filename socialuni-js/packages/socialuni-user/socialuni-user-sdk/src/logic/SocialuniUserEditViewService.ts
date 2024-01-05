@@ -16,15 +16,10 @@ import DomFile from "socialuni-app-sdk/src/model/DomFile";
 import SocialuniViewService from "socialuni/src/interface/SocialuniViewService";
 import {ComponentInternalInstance} from "@vue/runtime-core";
 import {reactive, watch} from "vue";
-import {SDialog} from "qing-ui-types/src/types/SocialuniUiTypes";
 import UserPageUtil from "../util/UserPageUtil";
-import {Vue} from "vue-class-component";
 
-interface SocialuniUserEditViewServiceRefs {
-    userEditDialog: SDialog
-}
 
-class SocialuniUserEditViewService extends SocialuniViewService<SocialuniUserEditViewServiceRefs> {
+class SocialuniUserEditViewService extends SocialuniViewService {
 
     get mineUser() {
         return socialuniUserModule.mineUser
@@ -37,19 +32,14 @@ class SocialuniUserEditViewService extends SocialuniViewService<SocialuniUserEdi
     appGenderType = GenderType.all
     GenderTypeAll = GenderType.all
 
-    initService(instance: ComponentInternalInstance) {
-        super.initService(instance);
+    initService() {
+        // super.initService(instance);
         this.initData()
         watch(() => this.mineUser, () => {
             this.initData()
         })
     }
 
-    open() {
-        this.endDate = DateUtil.parseDate(new Date())
-        this.initData()
-        this.$refs.userEditDialog.open()
-    }
 
     initData() {
         if (this.mineUser) {
