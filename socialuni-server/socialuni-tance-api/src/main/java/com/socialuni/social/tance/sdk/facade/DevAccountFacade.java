@@ -201,7 +201,7 @@ public class DevAccountFacade {
 
     //为自己向自己推送
     public static boolean pusherIsSelfServer() {
-        return DevAccountFacade.getDevIdNotNull() == 1;
+        return DevAccountFacade.getDevIdNotNull() == AdminAppConfigConst.testDevId;
     }
 
     //非中心和非自己向中心推送

@@ -15,6 +15,6 @@ export default abstract class SocialuniViewService<T> implements SocialuniViewSe
     }
 
     get $refs(): T {
-        return this.instance.$refs as T
+        return this.instance.refs as T
     }
 }
