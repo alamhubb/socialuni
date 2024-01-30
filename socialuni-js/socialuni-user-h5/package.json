@@ -38,7 +38,6 @@
     "vue-drag-resize3": "../packages/vue-drag-resize3",
     "vue-router": "^4.2.0",
     "vue3-golden-layout": "../packages/vue3-golden-layout",
-    "zego-express-engine-webrtc": "^3.0.1"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.1.0",
