@@ -24,7 +24,10 @@ for (let i = 2; i < 8; i++) {
 for (const aryElement of ary) {
     for (const ary1Element of ary1) {
         if (aryElement !== ary1Element) {
-            res.push(aryElement + ary1Element)
+            const resStr = aryElement + ary1Element
+            if (resStr.length > 2) {
+                res.push(resStr)
+            }
         }
     }
 }
@@ -34,5 +37,6 @@ console.log(res.length)
 let uniqueArray = [...new Set(res)];
 
 console.log(uniqueArray.length)
+console.log(uniqueArray)
 // console.log(JSON.stringify(res))
 
