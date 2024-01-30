@@ -30,6 +30,7 @@ export default class WebsocketUtil {
                 }
             },
             onMessage: (res) => {
+                console.log('接受了消息')
                 const data = JSON.parse(res.data);
                 for (const plugin of socialuniPluginsModule.plugins) {
                     plugin.onMessage?.(data)

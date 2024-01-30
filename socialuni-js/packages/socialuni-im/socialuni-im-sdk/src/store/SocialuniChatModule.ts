@@ -201,6 +201,9 @@ class SocialuniChatModule {
         console.log(789789798)
         console.log(ImPagePath)
         console.log(ImPagePath.imPagePath)
+
+        console.log(ImPagePath.imPagePath.message)
+        console.log(QingAppUtil.RouterUtil.getCurrentPageURI())
         if (QingAppUtil.RouterUtil.getCurrentPageURI() === ImPagePath.imPagePath.message && this._chatId === newChat.id) {
             // 则直接往msg增加消息
             // 前台将消息改为已读,修改时间使用后台的就行
