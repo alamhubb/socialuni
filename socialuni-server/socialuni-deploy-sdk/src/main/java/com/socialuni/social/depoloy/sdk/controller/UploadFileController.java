@@ -6,7 +6,7 @@ import com.socialuni.social.common.api.exception.exception.SocialSystemException
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
 import com.socialuni.social.depoloy.sdk.constant.FileSizeConst;
-import com.socialuni.social.depoloy.sdk.dao.DO.SocialuniDeployUserProjectDO;
+import com.socialuni.social.depoloy.sdk.dao.DO.SocialuniDeployProjectDO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -34,12 +34,12 @@ public class UploadFileController {
             throw new SocialBusinessException("项目名称不能为空");
         }
         //如果项目名存在
-        SocialuniDeployUserProjectDO socialuniDeployUserProjectDO = SocialuniUserRepositoryFacede.findByCustomFieldAndStatus("projectName", projectName, SocialuniCommonStatus.enable, SocialuniDeployUserProjectDO.class);
+        SocialuniDeployProjectDO socialuniDeployProjectDO = SocialuniUserRepositoryFacede.findByCustomFieldAndStatus("projectName", projectName, SocialuniCommonStatus.enable, SocialuniDeployProjectDO.class);
         //不存在可以直接使用
-        if (socialuniDeployUserProjectDO == null) {
+        if (socialuniDeployProjectDO == null) {
             return true;
         }
-        Integer userId = socialuniDeployUserProjectDO.getUserId();
+        Integer userId = socialuniDeployProjectDO.getUserId();
         if (userId == null) {
             //无归属，可使用
             return true;
