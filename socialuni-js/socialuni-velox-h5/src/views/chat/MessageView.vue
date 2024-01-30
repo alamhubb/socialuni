@@ -17,7 +17,7 @@
                 <el-form-item required label="项目名">
                   <template #label>
                       <span>
-                        <span class="mr-sm">项目名</span>
+                        <span class="mr-sm">路径</span>
                         (
                         <span v-if="projectNameHasError" class="color-red">{{ projectNameHasError }}</span>
                         <span v-else class="color-green">项目名可以使用</span>
