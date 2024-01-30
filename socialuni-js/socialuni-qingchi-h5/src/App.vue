@@ -1,6 +1,6 @@
 <template>
   <div class="h100p overflow-hidden flex-col bg-default">
-    <s-nav-bar title="清池社区"/>
+    <s-nav-bar title="清池"/>
     <div class="flex-1 overflow-hidden">
       <RouterView/>
     </div>
