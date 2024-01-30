@@ -8,6 +8,9 @@
       <div class="h100p flex-row flex-1 bg-white pd">
         <!--          <vue-drag-resize>-->
         <div>
+          <div>
+            支持文件夹和压缩包的前端文件，未来会支持图片等，不登录七天有效期，登录后永久有效
+          </div>
           <div class="flex-row">
             <el-form ref="form" :model="formData" label-position="top">
               <div class="row-col-end">
