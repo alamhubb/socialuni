@@ -9,7 +9,7 @@
         <!--          <vue-drag-resize>-->
         <div>
           <div>
-            支持文件夹和压缩包的前端文件，未来会支持图片等，不登录七天有效期，登录后永久有效
+            支持文件夹和压缩包的前端文件，未来会支持图片等，不登录七天有效期，登录后永久有效，内容大小最大100m
           </div>
           <div class="flex-row">
             <el-form ref="form" :model="formData" label-position="top">
