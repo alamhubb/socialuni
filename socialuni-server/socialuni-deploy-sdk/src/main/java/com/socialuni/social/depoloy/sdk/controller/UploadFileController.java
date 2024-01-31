@@ -53,10 +53,10 @@ public class UploadFileController {
     @ResponseBody
     public ResultRO<String> deployProject(
             @RequestParam(value = "files") MultipartFile[] files,
-            @RequestParam(value = "projectName") String projectName,
+            @RequestParam(value = "path") String path,
             @RequestParam(value = "mainFile") String mainFile
     ) {
-        boolean nameCanUse = checkProject(projectName);
+        boolean nameCanUse = checkProject(path);
         if (!nameCanUse) {
             throw new SocialBusinessException("项目名称已存在");
         }
@@ -77,27 +77,27 @@ public class UploadFileController {
             System.out.println(file.getOriginalFilename());
             try {
                 byte[] bytes = file.getBytes();
-                Path path = Paths.get("/devtools/nginx/project/" + file.getOriginalFilename());
-                System.out.println(path.getParent());
-                System.out.println(path.getFileSystem());
-                System.out.println(path.getFileName());
-                System.out.println(path.getName(0));
-                System.out.println(path.getName(1));
-                System.out.println(path.getRoot());
+                Path nginxPath = Paths.get("/devtools/nginx/project/" + file.getOriginalFilename());
+                System.out.println(nginxPath.getParent());
+                System.out.println(nginxPath.getFileSystem());
+                System.out.println(nginxPath.getFileName());
+                System.out.println(nginxPath.getName(0));
+                System.out.println(nginxPath.getName(1));
+                System.out.println(nginxPath.getRoot());
                 System.out.println(file.getOriginalFilename());
                 //如果没有files文件夹，则创建
-                if (!Files.isWritable(path.getParent())) {
-                    Files.createDirectories(path.getParent());
+                if (!Files.isWritable(nginxPath.getParent())) {
+                    Files.createDirectories(nginxPath.getParent());
                 }
                 //文件写入指定路径
-                Files.write(path, bytes);
+                Files.write(nginxPath, bytes);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
         System.out.println(files);
         System.out.println(files.length);
-        return ResultRO.success("http://localhost:9536/" + projectName);
+        return ResultRO.success("http://localhost:9536/" + path);
 //        return ResultRO.success("https://app.socialuni.cn/" + projectName);
     }
 }
