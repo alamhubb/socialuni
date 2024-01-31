@@ -23,28 +23,27 @@ import java.util.Objects;
 public class UploadController {
 
     public static void main(String[] args) throws IOException {
-        /*NgxConfig conf = NgxConfig.read("/devtools/nginx/conf/nginx.conf");
-        System.out.println(conf.toString());
-        NgxParam workers = conf.findParam("worker_processes");       // Ex.1
-        System.out.println(workers.toString());
-        workers.getValue(); // "1"
-        NgxParam listen = conf.findParam("http", "server", "listen"); // Ex.2
-        System.out.println(listen.toString());
-        listen.getValue(); // "8889"
-        List<NgxEntry> rtmpServers = conf.findAll(NgxConfig.BLOCK, "http", "server"); // Ex.3
-        for (NgxEntry entry : rtmpServers) {
-            System.out.println(entry.toString());
-            System.out.println(((NgxBlock) entry).getName());
-            System.out.println(((NgxBlock) entry).findBlock("location").getValue());
-            ((NgxBlock) entry).getName(); // "server"
-            ((NgxBlock) entry).findBlock("application", "live"); // "on" for the first iter, "off" for the second one
-        }*/
-
         NgxConfig conf = NgxConfig.read("/devtools/nginx/conf/nginx.conf");
-        NgxParam listen = conf.findParam("http", "server", "listen");
-        listen.addValue(new NgxToken("123"));
-//        NgxToken ngxToken = new NgxToken("123");
-//        conf.addValue(ngxToken);
+        NgxBlock server = conf.findBlock("http", "server");
+
+        NgxBlock newLocation = new NgxBlock();
+
+
+        newLocation.addValue("location");
+        newLocation.addValue("^~/" + "aab");
+
+        NgxParam newAlias = new NgxParam();
+        newAlias.addValue("alias");
+        newAlias.addValue("/devtools/nginx/project/deploy");
+        newLocation.addEntry(newAlias);
+
+        NgxParam newFiles = new NgxParam();
+        newFiles.addValue("try_files");
+        newFiles.addValue("$uri $uri/ /deploy/index.html");
+        newLocation.addEntry(newFiles);
+
+        server.addEntry(newLocation);
+
         NgxDumper dumper = new NgxDumper(conf);
         String newConfig = dumper.dump();
 

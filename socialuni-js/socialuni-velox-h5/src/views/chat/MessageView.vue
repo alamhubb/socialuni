@@ -46,13 +46,16 @@
                 </div>
               </div>
             </el-form>
-            <q-upload ref="upload" class="ml-sm mt-30" only-folder v-model="formData.files" btn-text="选择项目"
-                      show-file-list
-                      @change="upload">
-              <el-icon class="ml-xs" :size="16">
-                <FolderOpened></FolderOpened>
-              </el-icon>
-            </q-upload>
+            <q-row>
+              <q-upload ref="upload" class="ml-sm mt-30" only-folder v-model="formData.files" btn-text="选择项目"
+                        show-file-list
+                        @change="upload">
+                <el-icon class="ml-xs" :size="16">
+                  <FolderOpened></FolderOpened>
+                </el-icon>
+              </q-upload>
+              <el-checkbox class="ml-sm mt-30" v-model="autoCreateCanUseName">自动生成可用名称</el-checkbox>
+            </q-row>
           </div>
 
 
@@ -104,6 +107,7 @@ import VueDragResize from "vue-drag-resize3/src/components/VueDragResize.vue";
 import MusicPlayer from "@/components/MusicPlayer.vue";
 import VueInteract from "@/components/vue-interact/VueInteract.vue";
 import QUpload from "qing-ui-h5/src/components/QComponents/QUpload/QUpload.vue";
+import QRow from "qing-ui-h5/src/components/QComponents/QRow.vue";
 import QLabelItem from "qing-ui-h5/src/components/QComponents/QLabelItem.vue";
 import socialuniUserRequest from "socialuni-user-api/src/request/socialuniUserRequest.ts";
 import SocialuniDeployAPI from "@/views/chat/SocialuniDeployAPI.ts";
@@ -120,6 +124,7 @@ import alertUtil from "qingjs-h5/src/util/AlertUtil.ts";
   components: {
     VueDragResize,
     VueInteract,
+    QRow,
     QUpload,
     QLabelItem,
     MusicPlayer,
@@ -141,6 +146,7 @@ export default class MessageView extends Vue {
 
   projectNameCanUse = true
 
+  autoCreateCanUseName = true
   editable = false
 
   formData = {
@@ -150,17 +156,17 @@ export default class MessageView extends Vue {
   }
 
   get projectNameHasError() {
-    const value = this.formData.projectName
+    const value: string = this.formData.projectName
     if (!this.formData.files) {
       return '请选择项目'
     } else if (!value) {
       return '请输入项目名'
     } else if (!this.projectNameCanUse) {
       return '项目名已存在，请修改'
-    } else if (!RegConst.isAllLetter.test(value)) {
-      return '项目名需为拼音或英文'
-    } else if (value.length < 6) {
-      return '项目名需大于5个字符'
+    } else if (RegConst.startWithNumber.test(value)) {
+      return '项目名不能为数字开头'
+    } else if (value.length < 3) {
+      return '项目名需大于2个字符'
     } else if (value.length > 16) {
       return '项目名需小于16个字符'
     }
@@ -176,12 +182,19 @@ export default class MessageView extends Vue {
 
   files = []
 
-  checkProjectName() {
-    SocialuniDeployAPI.checkProjectName(this.formData.projectName).then(res => {
-      this.projectNameCanUse = res.data
-    })
+  async checkProjectName() {
+    const res = await SocialuniDeployAPI.checkProjectName(this.formData.projectName)
+    this.projectNameCanUse = res.data
   }
 
+
+  async checkAndAutoCreateCanUseProjectName() {
+    await this.checkProjectName()
+    if (!this.projectNameCanUse && this.autoCreateCanUseName) {
+      this.formData.projectName = await this.autoCreateCanUseProjectName()
+      await this.checkAndAutoCreateCanUseProjectName()
+    }
+  }
 
   deployUrl = null
 
@@ -189,7 +202,14 @@ export default class MessageView extends Vue {
     this.clearDeployUrl()
     if (!this.formData.projectName) {
       this.formData.projectName = PinyinUtil.convertToFirstUpperPinyin(this.formData.files[0].root)
+      this.checkAndAutoCreateCanUseProjectName()
     }
+  }
+
+  //自动生成可用项目名路径
+  async autoCreateCanUseProjectName() {
+    const res = await SocialuniDeployAPI.autoCreateCanUseProjectName()
+    return res.data
   }
 
 

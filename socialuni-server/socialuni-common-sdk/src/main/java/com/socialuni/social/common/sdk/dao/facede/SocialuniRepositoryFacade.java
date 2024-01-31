@@ -42,6 +42,10 @@ public abstract class SocialuniRepositoryFacade {
         return getRepository().findByUnionId(id, tClass);
     }
 
+    public static <T extends SocialuniContentBaseDO> T findByStatus(String status, Class<T> tClass) {
+        return getRepository().findFirstByStatus(status, tClass);
+    }
+
     public static <T extends SocialuniBaseDO> T findByCustomField(String field, Integer fieldId, Class<T> tClass) {
         return getRepository().findByCustomField(field, fieldId, tClass);
     }

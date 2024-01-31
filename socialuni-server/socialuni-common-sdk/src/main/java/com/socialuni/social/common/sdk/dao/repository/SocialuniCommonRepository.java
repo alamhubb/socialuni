@@ -193,6 +193,23 @@ public class SocialuniCommonRepository {
         return null;
     }
 
+    public <T extends SocialuniContentBaseDO> T findFirstByStatus(String status, Class<T> tClass) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
+        Root<T> userInfo = criteriaQuery.from(tClass);
+
+        Predicate statusPredicate = criteriaBuilder.equal(userInfo.get("status"), status);
+        criteriaQuery.where(statusPredicate);
+
+        List<T> list = entityManager.createQuery(criteriaQuery).setFirstResult(0).setMaxResults(1).getResultList();
+
+        if (list.size() > 0) {
+            return list.get(0);
+        }
+        return null;
+    }
+
+
     public <T extends SocialuniUserContactBaseDO> T findByUserIdAndBeUserIdAndStatus(Integer userId, Integer beUserId, String status, Class<T> tClass) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);

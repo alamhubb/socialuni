@@ -5,9 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "s_deploy_project_temp_name",
@@ -24,5 +22,6 @@ import javax.persistence.UniqueConstraint;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 public class SocialuniDeployProjectTempNameDO extends SocialuniContentBaseDO {
+    @Column(nullable = false)
     private String name;
 }

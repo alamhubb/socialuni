@@ -27,4 +27,7 @@ public class SocialuniDeployProjectDO extends SocialuniContentBaseDO {
     private Integer userId;
     @Column(nullable = false)
     private String path;
+    //入口文件
+    @Column(nullable = false)
+    private String mainFile;
 }

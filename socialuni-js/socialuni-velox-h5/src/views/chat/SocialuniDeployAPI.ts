@@ -7,6 +7,9 @@ export default class SocialuniDeployAPI {
         return socialuniUserRequest.get<boolean>(`socialuni/deploy/queryProjectName/${projectName}`)
     }
 
+    static autoCreateCanUseProjectName() {
+        return socialuniUserRequest.get<string>(`socialuni/deploy/autoCreateCanUseProjectName`)
+    }
 
     static deployProject(formData: any) {
         return socialuniUserRequest.post<boolean>(`socialuni/deploy/deployProject`, ObjectUtil.toFormData(formData))

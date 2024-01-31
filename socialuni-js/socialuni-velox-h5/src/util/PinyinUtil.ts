@@ -7,7 +7,6 @@ export default class PinyinUtil {
         }).map((word, index) => {
             if (index) {
                 return word[0].charAt(0).toUpperCase() + word[0].slice(1);
-
             }
             return word
         }).join("");
