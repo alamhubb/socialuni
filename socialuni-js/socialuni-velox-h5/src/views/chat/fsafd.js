@@ -39,7 +39,7 @@ let ofdsaf = []
 let objfad = {}
 for (const uniqueArrayElement of uniqueArray) {
     if (uniqueArrayElement){
-        ofdsaf.push(uniqueArrayElement)
+        ofdsaf.push(`INSERT INTO s_deploy_project_temp_name (sequence_num, status, name) VALUES (0, '正常', ${uniqueArrayElement});`)
         objfad[uniqueArrayElement] = uniqueArrayElement
     }
 }
