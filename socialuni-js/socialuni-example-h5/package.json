@@ -29,7 +29,6 @@
     "socialuni-user-view-h5": "../packages/socialuni-user/socialuni-user-view-h5",
     "vue": "^3.3.2",
     "vue-router": "^4.2.0",
-    "zego-express-engine-webrtc": "^3.0.1"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.1.0",
