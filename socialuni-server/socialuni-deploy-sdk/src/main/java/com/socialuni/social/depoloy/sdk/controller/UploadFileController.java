@@ -84,13 +84,15 @@ public class UploadFileController {
                 List<String> originalFileNames = Arrays.asList(originalFileName.split("/"));
                 List<String> newOriginalFileNames = new ArrayList<>();
                 newOriginalFileNames.add(projectName);
-                newOriginalFileNames.addAll(projectName);
-                newOriginalFileNames.add()
+                newOriginalFileNames.addAll(originalFileNames.subList(1, originalFileNames.size()));
+
+                String newOriginalFileName = String.join("/", newOriginalFileNames);
 
                 System.out.println(file);
                 System.out.println(file.getOriginalFilename());
+                System.out.println(newOriginalFileName);
                 byte[] bytes = file.getBytes();
-                Path nginxPath = Paths.get("/devtools/nginx/project/", projectName);
+                Path nginxPath = Paths.get("/devtools/nginx/project/", newOriginalFileName);
                 Path parentDir = nginxPath.getParent();
                 System.out.println(parentDir);
                 //如果没有files文件夹，则创建
@@ -104,7 +106,7 @@ public class UploadFileController {
             socialuniDeployProjectDO.setPath(projectName);
             socialuniDeployProjectDO.setMainFile(mainFile);
 
-            this.pushNginxConfig(socialuniDeployProjectDO);
+            UploadFileController.pushNginxConfig(socialuniDeployProjectDO);
 
             SocialuniRepositoryFacade.save(socialuniDeployProjectDO);
         } catch (IOException e) {
@@ -132,12 +134,61 @@ public class UploadFileController {
         return ResultRO.success(socialuniDeployProjectTempNameDO.getName());
     }
 
-    public void pushNginxConfig(SocialuniDeployProjectDO socialuniDeployProjectDO) throws IOException {
+    public static void pushNginxConfig(SocialuniDeployProjectDO socialuniDeployProjectDO) throws IOException {
+        String rootPath = socialuniDeployProjectDO.getPath();
+
         NgxConfig conf = NgxConfig.read("/devtools/nginx/conf/nginx.conf");
-        NgxBlock server = conf.findBlock("http", "server");
+        NgxBlock http = conf.findBlock("http");
+
+
+        NgxBlock new80Server = new NgxBlock();
+//        NgxBlock new443Server = new NgxBlock();
+//        new80Server.addValue("server");
+//
+//        NgxParam listen80 = new NgxParam();
+//        listen80.addValue("listen");
+//        listen80.addValue("80");
+//        new80Server.addEntry(listen80);
+//
+//
+//        NgxParam server_name80 = new NgxParam();
+//        server_name80.addValue("server_name");
+//        server_name80.addValue(rootPath + ".velox.run");
+//        new80Server.addEntry(server_name80);
+//
+//
+//
+//        NgxParam newFiles = new NgxParam();
+//        newFiles.addValue("try_files");
+//        newFiles.addValue("$uri $uri/ /" + socialuniDeployProjectDO.getPath() + "/" + socialuniDeployProjectDO.getMainFile());
+//        new80Server.addEntry(newFiles);
+//
+//
+//        NgxBlock newLocation = new NgxBlock();
+//
+//        newLocation.addValue("location");
+//        newLocation.addValue("^~/" + socialuniDeployProjectDO.getPath());
+//
+//        NgxParam newAlias = new NgxParam();
+//        newAlias.addValue("alias");
+//        newAlias.addValue("/devtools/nginx/project/" + socialuniDeployProjectDO.getPath());
+//        newLocation.addEntry(newAlias);
+//
+//        NgxParam newFiles = new NgxParam();
+//        newFiles.addValue("try_files");
+//        newFiles.addValue("$uri $uri/ /" + socialuniDeployProjectDO.getPath() + "/" + socialuniDeployProjectDO.getMainFile());
+//        newLocation.addEntry(newFiles);
+
+//        server {
+//            listen       80;
+//            server_name  admin.socialuni.cn;
+//            location / {
+//            return 301 https://admin.socialuni.cn$request_uri;
+//                    }
+//        }
+
 
         NgxBlock newLocation = new NgxBlock();
-
 
         newLocation.addValue("location");
         newLocation.addValue("^~/" + socialuniDeployProjectDO.getPath());
@@ -152,7 +203,31 @@ public class UploadFileController {
         newFiles.addValue("$uri $uri/ /" + socialuniDeployProjectDO.getPath() + "/" + socialuniDeployProjectDO.getMainFile());
         newLocation.addEntry(newFiles);
 
-        server.addEntry(newLocation);
+        new80Server.addEntry(newLocation);
+
+        http.addEntry(new80Server);
+
+//        server {
+//            listen       80;
+//            server_name  admin.socialuni.cn;
+//            location / {
+//            return 301 https://admin.socialuni.cn$request_uri;
+//                    }
+//        }
+//        server {
+//            listen 443 ssl; #SSL 访问端口号为 443
+//            server_name admin.socialuni.cn; #填写绑定证书的域名
+//            ssl_certificate admin.socialuni.cn_bundle.crt; #证书文件名称
+//            ssl_certificate_key admin.socialuni.cn.key; #私钥文件名称
+//            ssl_session_timeout 5m;
+//            ssl_protocols TLSv1 TLSv1.1 TLSv1.2; #请按照这个协议配置
+//            ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE; #请按照这个套件配置，配置加密套件，写法遵循 openssl 标准。
+//            ssl_prefer_server_ciphers on;
+//            location / {
+//                    root   project/devadmin/dist;
+//            try_files $uri $uri/ /index.html;
+//                     }
+//        }
 
         NgxDumper dumper = new NgxDumper(conf);
         String newConfig = dumper.dump();

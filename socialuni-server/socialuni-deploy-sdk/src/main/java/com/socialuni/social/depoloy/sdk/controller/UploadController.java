@@ -3,6 +3,7 @@ package com.socialuni.social.depoloy.sdk.controller;
 import cn.hutool.core.io.file.FileWriter;
 import com.github.odiszapc.nginxparser.*;
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.depoloy.sdk.dao.DO.SocialuniDeployProjectDO;
 import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,32 +24,10 @@ import java.util.Objects;
 public class UploadController {
 
     public static void main(String[] args) throws IOException {
-        NgxConfig conf = NgxConfig.read("/devtools/nginx/conf/nginx.conf");
-        NgxBlock server = conf.findBlock("http", "server");
-
-        NgxBlock newLocation = new NgxBlock();
-
-
-        newLocation.addValue("location");
-        newLocation.addValue("^~/" + "aab");
-
-        NgxParam newAlias = new NgxParam();
-        newAlias.addValue("alias");
-        newAlias.addValue("/devtools/nginx/project/deploy");
-        newLocation.addEntry(newAlias);
-
-        NgxParam newFiles = new NgxParam();
-        newFiles.addValue("try_files");
-        newFiles.addValue("$uri $uri/ /deploy/index.html");
-        newLocation.addEntry(newFiles);
-
-        server.addEntry(newLocation);
-
-        NgxDumper dumper = new NgxDumper(conf);
-        String newConfig = dumper.dump();
-
-        FileWriter writer = new FileWriter("/devtools/nginx/conf/nginx.conf");
-        writer.write(newConfig);
+        SocialuniDeployProjectDO socialuniDeployProjectDO = new SocialuniDeployProjectDO();
+        socialuniDeployProjectDO.setPath("test");
+        socialuniDeployProjectDO.setMainFile("index.html");
+        UploadFileController.pushNginxConfig(socialuniDeployProjectDO);
     }
 
     @PostMapping("img")
