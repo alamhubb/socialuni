@@ -37,7 +37,11 @@ public class UploadFileController {
     @GetMapping("queryProjectName/{projectName}")
     @ResponseBody
     public ResultRO<Boolean> checkProjectName(@PathVariable("projectName") String projectName) {
-        return ResultRO.success(checkProject(projectName));
+        try {
+            return ResultRO.success(checkProject(projectName));
+        } catch (Exception e) {
+            return ResultRO.success(false);
+        }
     }
 
     public static boolean checkProject(String projectName) {
