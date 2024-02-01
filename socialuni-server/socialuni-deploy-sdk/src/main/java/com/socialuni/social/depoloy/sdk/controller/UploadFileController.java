@@ -133,7 +133,7 @@ public class UploadFileController {
 
     public static void main(String[] args) throws IOException {
         SocialuniDeployProjectDO socialuniDeployProjectDO = new SocialuniDeployProjectDO();
-        socialuniDeployProjectDO.setProjectName("test");
+        socialuniDeployProjectDO.setProjectName("velox");
         socialuniDeployProjectDO.setMainFile("index.html");
         UploadFileController.pushNginxConfig(socialuniDeployProjectDO);
     }
@@ -144,8 +144,20 @@ public class UploadFileController {
 
         String projectName = socialuniDeployProjectDO.getProjectName();
         String mainFile = socialuniDeployProjectDO.getMainFile();
-        String commonDomain = ".velox.run";
-        String httpDomain = projectName + commonDomain;
+
+        String systemDomain = "velox";
+        String httpSplit = ".";
+        String suffix = "run";
+
+        String commonDomain = systemDomain + httpSplit + suffix;
+        String httpDomain;
+        if (systemDomain.equals(projectName)) {
+            // velox.run
+            httpDomain = commonDomain;
+        } else {
+            // [projectName].velox.run
+            httpDomain = projectName + httpSplit + commonDomain;
+        }
 
         NgxBlock newServer80 = new NgxBlock();
 
