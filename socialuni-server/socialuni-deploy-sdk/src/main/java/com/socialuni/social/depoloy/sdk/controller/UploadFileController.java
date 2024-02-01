@@ -16,7 +16,6 @@ import com.socialuni.social.depoloy.sdk.dao.DO.SocialuniDeployProjectDO;
 import com.socialuni.social.depoloy.sdk.dao.DO.SocialuniDeployProjectTempNameDO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
-import lombok.val;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -84,8 +83,8 @@ public class UploadFileController {
                 List<String> originalFileNames = Arrays.asList(originalFileName.split("/"));
                 List<String> newOriginalFileNames = new ArrayList<>();
                 newOriginalFileNames.add(projectName);
-                newOriginalFileNames.addAll(projectName);
-                newOriginalFileNames.add()
+//                newOriginalFileNames.addAll(projectName);
+//                newOriginalFileNames.add()
 
                 System.out.println(file);
                 System.out.println(file.getOriginalFilename());
@@ -101,10 +100,10 @@ public class UploadFileController {
                 Files.write(nginxPath, bytes);
             }
             SocialuniDeployProjectDO socialuniDeployProjectDO = new SocialuniDeployProjectDO();
-            socialuniDeployProjectDO.setPath(projectName);
+            socialuniDeployProjectDO.setProjectName(projectName);
             socialuniDeployProjectDO.setMainFile(mainFile);
 
-            this.pushNginxConfig(socialuniDeployProjectDO);
+            UploadFileController.pushNginxConfig(socialuniDeployProjectDO);
 
             SocialuniRepositoryFacade.save(socialuniDeployProjectDO);
         } catch (IOException e) {
@@ -132,27 +131,120 @@ public class UploadFileController {
         return ResultRO.success(socialuniDeployProjectTempNameDO.getName());
     }
 
-    public void pushNginxConfig(SocialuniDeployProjectDO socialuniDeployProjectDO) throws IOException {
+    public static void main(String[] args) throws IOException {
+        SocialuniDeployProjectDO socialuniDeployProjectDO = new SocialuniDeployProjectDO();
+        socialuniDeployProjectDO.setProjectName("test");
+        socialuniDeployProjectDO.setMainFile("index.html");
+        UploadFileController.pushNginxConfig(socialuniDeployProjectDO);
+    }
+
+    public static void pushNginxConfig(SocialuniDeployProjectDO socialuniDeployProjectDO) throws IOException {
         NgxConfig conf = NgxConfig.read("/devtools/nginx/conf/nginx.conf");
-        NgxBlock server = conf.findBlock("http", "server");
+        NgxBlock http = conf.findBlock("http");
 
-        NgxBlock newLocation = new NgxBlock();
+        String projectName = socialuniDeployProjectDO.getProjectName();
+        String mainFile = socialuniDeployProjectDO.getMainFile();
+        String commonDomain = ".velox.run";
+        String httpDomain = projectName + commonDomain;
+
+        NgxBlock newServer80 = new NgxBlock();
+
+        newServer80.addValue("server");
+
+        NgxParam newListen80 = new NgxParam();
+        newListen80.addValue("listen");
+        newListen80.addValue("80");
+        newServer80.addEntry(newListen80);
+
+        NgxParam server_name80 = new NgxParam();
+        server_name80.addValue("server_name");
+        server_name80.addValue(httpDomain);
+        newServer80.addEntry(server_name80);
+
+        NgxBlock newLocation80 = new NgxBlock();
+        newLocation80.addValue("location");
+        newLocation80.addValue("/");
+
+        NgxParam return301 = new NgxParam();
+        return301.addValue("return 301 https://" + httpDomain);
+        newLocation80.addEntry(return301);
+
+        newServer80.addEntry(newLocation80);
 
 
-        newLocation.addValue("location");
-        newLocation.addValue("^~/" + socialuniDeployProjectDO.getPath());
+        NgxBlock newServer443 = new NgxBlock();
+        newServer443.addValue("server");
 
-        NgxParam newAlias = new NgxParam();
-        newAlias.addValue("alias");
-        newAlias.addValue("/devtools/nginx/project/" + socialuniDeployProjectDO.getPath());
-        newLocation.addEntry(newAlias);
+        NgxParam newListen443 = new NgxParam();
+        newListen443.addValue("listen");
+        newListen443.addValue("443 ssl");
+        newServer443.addEntry(newListen443);
 
-        NgxParam newFiles = new NgxParam();
-        newFiles.addValue("try_files");
-        newFiles.addValue("$uri $uri/ /" + socialuniDeployProjectDO.getPath() + "/" + socialuniDeployProjectDO.getMainFile());
-        newLocation.addEntry(newFiles);
+        NgxParam server_name443 = new NgxParam();
+        server_name443.addValue("server_name");
+        server_name443.addValue(httpDomain);
+        newServer443.addEntry(server_name443);
 
-        server.addEntry(newLocation);
+        NgxParam ssl_certificate443 = new NgxParam();
+        ssl_certificate443.addValue("ssl_certificate");
+        ssl_certificate443.addValue("velox.run_bundle.crt");
+        newServer443.addEntry(ssl_certificate443);
+
+        NgxParam ssl_certificate_key443 = new NgxParam();
+        ssl_certificate_key443.addValue("ssl_certificate_key");
+        ssl_certificate_key443.addValue("velox.run.key");
+        newServer443.addEntry(ssl_certificate_key443);
+
+
+        NgxParam ssl_session_timeout443 = new NgxParam();
+        ssl_session_timeout443.addValue("ssl_session_timeout");
+        ssl_session_timeout443.addValue("5m");
+        newServer443.addEntry(ssl_session_timeout443);
+
+        NgxParam ssl_protocols443 = new NgxParam();
+        ssl_protocols443.addValue("ssl_protocols");
+        ssl_protocols443.addValue("TLSv1 TLSv1.1 TLSv1.2");
+        newServer443.addEntry(ssl_protocols443);
+
+        NgxParam ssl_ciphers443 = new NgxParam();
+        ssl_ciphers443.addValue("ssl_ciphers");
+        ssl_ciphers443.addValue("ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE");
+        newServer443.addEntry(ssl_ciphers443);
+
+        NgxParam ssl_prefer_server_ciphers443 = new NgxParam();
+        ssl_prefer_server_ciphers443.addValue("ssl_prefer_server_ciphers");
+        ssl_prefer_server_ciphers443.addValue("on");
+        newServer443.addEntry(ssl_prefer_server_ciphers443);
+
+        NgxBlock newLocation443 = new NgxBlock();
+        newLocation443.addValue("location");
+        newLocation443.addValue("/");
+
+        NgxParam root443 = new NgxParam();
+        root443.addValue("root");
+        root443.addValue("project/" + projectName);
+        newLocation443.addEntry(root443);
+
+        NgxParam try_files443 = new NgxParam();
+        try_files443.addValue("try_files");
+        try_files443.addValue("$uri $uri/ /" + mainFile);
+        newLocation443.addEntry(try_files443);
+
+        newServer443.addEntry(newLocation443);
+
+
+        http.addEntry(newServer80);
+        http.addEntry(newServer443);
+
+
+//        server {
+//            listen       80;
+//            server_name  socialuni.cn;
+//            location / {
+//            return 301 https://socialuni.cn$request_uri;
+//             }
+//        }
+
 
         NgxDumper dumper = new NgxDumper(conf);
         String newConfig = dumper.dump();

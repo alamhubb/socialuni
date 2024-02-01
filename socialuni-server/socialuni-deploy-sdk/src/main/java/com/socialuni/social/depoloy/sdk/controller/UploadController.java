@@ -1,54 +1,25 @@
 package com.socialuni.social.depoloy.sdk.controller;
 
-import cn.hutool.core.io.file.FileWriter;
-import com.github.odiszapc.nginxparser.*;
 import com.socialuni.social.common.api.model.ResultRO;
-import net.coobird.thumbnailator.Thumbnails;
-import org.springframework.beans.factory.annotation.Value;
+import com.socialuni.social.depoloy.sdk.dao.DO.SocialuniDeployProjectDO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.swing.*;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
-import java.util.List;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("upload")
 public class UploadController {
 
     public static void main(String[] args) throws IOException {
-        NgxConfig conf = NgxConfig.read("/devtools/nginx/conf/nginx.conf");
-        NgxBlock server = conf.findBlock("http", "server");
+        SocialuniDeployProjectDO socialuniDeployProjectDO = new SocialuniDeployProjectDO();
+        socialuniDeployProjectDO.setProjectName("test");
+        socialuniDeployProjectDO.setMainFile("index.html");
+        UploadFileController.pushNginxConfig(socialuniDeployProjectDO);
 
-        NgxBlock newLocation = new NgxBlock();
-
-
-        newLocation.addValue("location");
-        newLocation.addValue("^~/" + "aab");
-
-        NgxParam newAlias = new NgxParam();
-        newAlias.addValue("alias");
-        newAlias.addValue("/devtools/nginx/project/deploy");
-        newLocation.addEntry(newAlias);
-
-        NgxParam newFiles = new NgxParam();
-        newFiles.addValue("try_files");
-        newFiles.addValue("$uri $uri/ /deploy/index.html");
-        newLocation.addEntry(newFiles);
-
-        server.addEntry(newLocation);
-
-        NgxDumper dumper = new NgxDumper(conf);
-        String newConfig = dumper.dump();
-
-        FileWriter writer = new FileWriter("/devtools/nginx/conf/nginx.conf");
-        writer.write(newConfig);
     }
 
     @PostMapping("img")
