@@ -1,10 +1,8 @@
 package com.socialuni.social.depoloy.sdk.controller;
 
 import cn.hutool.core.io.file.FileWriter;
-import com.github.odiszapc.nginxparser.NgxBlock;
-import com.github.odiszapc.nginxparser.NgxConfig;
-import com.github.odiszapc.nginxparser.NgxDumper;
-import com.github.odiszapc.nginxparser.NgxParam;
+import cn.hutool.system.SystemUtil;
+import com.github.odiszapc.nginxparser.*;
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
@@ -14,9 +12,11 @@ import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
 import com.socialuni.social.depoloy.sdk.constant.FileSizeConst;
 import com.socialuni.social.depoloy.sdk.dao.DO.SocialuniDeployProjectDO;
 import com.socialuni.social.depoloy.sdk.dao.DO.SocialuniDeployProjectTempNameDO;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.SystemUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,6 +30,10 @@ import java.util.*;
 @RestController
 @Slf4j
 public class UploadFileController {
+    public static final String systemDomain = "velox";
+    public static final String winNginxPath = "/devtools/nginx";
+    public static final String linuxNginxPath = "velox";
+
     @GetMapping("queryProjectName/{projectName}")
     @ResponseBody
     public ResultRO<Boolean> checkProjectName(@PathVariable("projectName") String projectName) {
@@ -39,15 +43,26 @@ public class UploadFileController {
     public static boolean checkProject(String projectName) {
         if (StringUtils.isEmpty(projectName)) {
             throw new SocialBusinessException("项目名称不能为空");
+        } else if (projectName.length() < 3) {
+            throw new SocialBusinessException("项目名需大于2个字符");
+        } else if (projectName.length() > 16) {
+            throw new SocialBusinessException("项目名需小于17个字符");
+        }
+        Integer mineUserId = SocialuniUserUtil.getMineUserIdAllowNull();
+        if (projectName.equals(systemDomain)) {
+            Integer systemUserId = SocialuniUserUtil.getSystemUserIdNotNull();
+            if (!systemUserId.equals(mineUserId)) {
+                throw new SocialBusinessException("项目名称不可用");
+            }
+            return true;
         }
         //如果项目名存在
-        SocialuniDeployProjectDO socialuniDeployProjectDO = SocialuniUserRepositoryFacede.findByCustomFieldAndStatus("path", projectName, SocialuniCommonStatus.enable, SocialuniDeployProjectDO.class);
+        SocialuniDeployProjectDO socialuniDeployProjectDO = SocialuniUserRepositoryFacede.findByCustomFieldAndStatus("projectName", projectName, SocialuniCommonStatus.enable, SocialuniDeployProjectDO.class);
         //不存在可以直接使用
         if (socialuniDeployProjectDO == null) {
             return true;
         }
         Integer userId = socialuniDeployProjectDO.getUserId();
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdAllowNull();
         return userId != null && userId.equals(mineUserId);
     }
 
@@ -83,13 +98,14 @@ public class UploadFileController {
                 List<String> originalFileNames = Arrays.asList(originalFileName.split("/"));
                 List<String> newOriginalFileNames = new ArrayList<>();
                 newOriginalFileNames.add(projectName);
-//                newOriginalFileNames.addAll(projectName);
-//                newOriginalFileNames.add()
+                newOriginalFileNames.addAll(originalFileNames.subList(1, originalFileNames.size()));
+                String fileName = String.join("/", newOriginalFileNames);
 
                 System.out.println(file);
                 System.out.println(file.getOriginalFilename());
+                System.out.println(fileName);
                 byte[] bytes = file.getBytes();
-                Path nginxPath = Paths.get("/devtools/nginx/project/", projectName);
+                Path nginxPath = Paths.get("/devtools/nginx/project/", fileName);
                 Path parentDir = nginxPath.getParent();
                 System.out.println(parentDir);
                 //如果没有files文件夹，则创建
@@ -106,7 +122,24 @@ public class UploadFileController {
             UploadFileController.pushNginxConfig(socialuniDeployProjectDO);
 
             SocialuniRepositoryFacade.save(socialuniDeployProjectDO);
+
+            String nginxPath;
+            if (SystemUtils.IS_OS_WINDOWS) {
+                nginxPath = winNginxPath;
+            } else {
+                nginxPath = linuxNginxPath;
+            }
+
+            String command = nginxPath + "/nginx -s reload";
+
+            // 执行一个Windows命令，例如启动记事本
+            Process process = Runtime.getRuntime().exec(command);
+
+            // 等待命令执行完成
+            process.waitFor();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
         System.out.println(files);
@@ -139,13 +172,19 @@ public class UploadFileController {
     }
 
     public static void pushNginxConfig(SocialuniDeployProjectDO socialuniDeployProjectDO) throws IOException {
-        NgxConfig conf = NgxConfig.read("/devtools/nginx/conf/nginx.conf");
+        String nginxPath;
+        if (SystemUtils.IS_OS_WINDOWS) {
+            nginxPath = winNginxPath;
+        } else {
+            nginxPath = linuxNginxPath;
+        }
+        NgxConfig conf = NgxConfig.read(nginxPath + "/conf/nginx.conf");
         NgxBlock http = conf.findBlock("http");
+
 
         String projectName = socialuniDeployProjectDO.getProjectName();
         String mainFile = socialuniDeployProjectDO.getMainFile();
 
-        String systemDomain = "velox";
         String httpSplit = ".";
         String suffix = "run";
 
@@ -158,6 +197,17 @@ public class UploadFileController {
             // [projectName].velox.run
             httpDomain = projectName + httpSplit + commonDomain;
         }
+
+        List<NgxEntry> rtmpServers = conf.findAll(NgxConfig.PARAM, "http", "server", "server_name");
+        for (NgxEntry entry : rtmpServers) {
+            String hasValue = ((NgxParam) entry).getValue();
+            if (httpDomain.equals(hasValue)) {
+                log.info("已经存在，{}，直接返回", hasValue);
+                //已经存在，则直接返回
+                return;
+            }
+        }
+
 
         NgxBlock newServer80 = new NgxBlock();
 

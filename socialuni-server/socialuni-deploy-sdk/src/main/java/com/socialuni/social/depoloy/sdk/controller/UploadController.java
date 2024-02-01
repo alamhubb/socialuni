@@ -14,14 +14,6 @@ import java.io.IOException;
 @RequestMapping("upload")
 public class UploadController {
 
-    public static void main(String[] args) throws IOException {
-        SocialuniDeployProjectDO socialuniDeployProjectDO = new SocialuniDeployProjectDO();
-        socialuniDeployProjectDO.setProjectName("test");
-        socialuniDeployProjectDO.setMainFile("index.html");
-        UploadFileController.pushNginxConfig(socialuniDeployProjectDO);
-
-    }
-
     @PostMapping("img")
     public ResultRO<Void> uploadImg(@RequestParam("file") MultipartFile file, @RequestParam(value = "type", required = false) String uploadType) throws IOException {
 //        if (uploadType == null) {

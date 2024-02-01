@@ -14,4 +14,9 @@ public class SystemUtil {
     public static long getCurrentTimeSecond() {
         return System.currentTimeMillis() / 1000;
     }
+
+    public static boolean isWin() {
+        String os = System.getProperty("os.name");
+        return os.toLowerCase().startsWith("win");
+    }
 }
