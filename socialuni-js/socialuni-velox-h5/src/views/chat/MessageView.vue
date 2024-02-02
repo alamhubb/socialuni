@@ -25,7 +25,7 @@
                       </span>
                   </template>
                   <el-input class="w370 mb-1" v-model="formData.projectName" clearable
-                            @change="checkProjectName"></el-input>
+                            @change="checkProjectNameHandler" @input="checkProjectNameHandler"></el-input>
                 </el-form-item>
               </div>
               <el-form-item prop="mainFile" label="入口文件">
@@ -120,6 +120,7 @@ import PinyinUtil from "@/util/PinyinUtil.ts";
 import ToastUtil from "qingjs-h5/src/util/ToastUtil.ts";
 import WindowUtil from "@/util/WindowUtil.ts";
 import alertUtil from "qingjs-h5/src/util/AlertUtil.ts";
+import CommonUtil from "qing-util/src/util/CommonUtil.ts";
 
 @Component({
   components: {
@@ -194,6 +195,8 @@ export default class MessageView extends Vue {
       }
     }
   }
+
+  checkProjectNameHandler = CommonUtil.debounceDelay(this.checkProjectName, 300)
 
 
   async checkAndAutoCreateCanUseProjectName() {
