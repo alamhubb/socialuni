@@ -58,7 +58,7 @@ public class UploadFileController {
     }
 
     public static final String winNginxPath = "/devtools/nginx";
-    public static final String linuxNginxPath = "velox";
+    public static final String linuxNginxPath = "/www/server/nginx";
 
     @GetMapping("queryProjectName/{projectName}")
     @ResponseBody
@@ -114,6 +114,12 @@ public class UploadFileController {
             throw new SocialSystemException("文件为空，请重新上传");
         }
         try {
+            String nginxPathRoot;
+            if (SystemUtils.IS_OS_WINDOWS) {
+                nginxPathRoot = winNginxPath;
+            } else {
+                nginxPathRoot = linuxNginxPath;
+            }
             for (MultipartFile file : files) {
                 if (Objects.isNull(file) || file.isEmpty()) {
                     throw new SocialSystemException("文件为空，请重新上传");
@@ -135,7 +141,7 @@ public class UploadFileController {
                 System.out.println(file.getOriginalFilename());
                 System.out.println(fileName);
                 byte[] bytes = file.getBytes();
-                Path nginxPath = Paths.get("/devtools/nginx/project/", fileName);
+                Path nginxPath = Paths.get(nginxPathRoot + "/project/", fileName);
                 Path parentDir = nginxPath.getParent();
                 System.out.println(parentDir);
                 //如果没有files文件夹，则创建
@@ -153,15 +159,9 @@ public class UploadFileController {
 
             SocialuniRepositoryFacade.save(socialuniDeployProjectDO);
 
-            String nginxPath;
-            if (SystemUtils.IS_OS_WINDOWS) {
-                nginxPath = winNginxPath;
-            } else {
-                nginxPath = linuxNginxPath;
-            }
 
             if (SystemUtils.IS_OS_WINDOWS) {
-                String command = nginxPath + "/nginx -s reload";
+                String command = nginxPathRoot + "/nginx -s reload";
 
                 // 执行一个Windows命令，例如启动记事本
                 Process process = Runtime.getRuntime().exec(command);
@@ -169,7 +169,7 @@ public class UploadFileController {
                 // 等待命令执行完成
                 process.waitFor();
             } else {
-                String command = nginxPath + "/sbin/nginx -s reload";
+                String command = nginxPathRoot + "/sbin/nginx -s reload";
 
                 // 执行一个Windows命令，例如启动记事本
                 Process process = Runtime.getRuntime().exec(command);
