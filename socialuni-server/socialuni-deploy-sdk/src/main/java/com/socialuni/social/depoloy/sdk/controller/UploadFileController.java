@@ -169,7 +169,13 @@ public class UploadFileController {
                 // 等待命令执行完成
                 process.waitFor();
             } else {
+                String command = nginxPath + "/sbin/nginx -s reload";
 
+                // 执行一个Windows命令，例如启动记事本
+                Process process = Runtime.getRuntime().exec(command);
+
+                // 等待命令执行完成
+                process.waitFor();
             }
         } catch (IOException e) {
             e.printStackTrace();
