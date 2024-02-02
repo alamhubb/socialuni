@@ -34,21 +34,13 @@ public class UploadFileController {
     public static final String domainSuffix = "run";
 
     public static String getDomainSuffix() {
-        if (SystemUtils.IS_OS_WINDOWS) {
-            return "cn";
-        } else {
-            return domainSuffix;
-        }
+        return domainSuffix;
     }
 
     public static final String httpSplit = ".";
 
     public static String getSystemDomain() {
-        if (SystemUtils.IS_OS_WINDOWS) {
-            return "socialuni";
-        } else {
-            return systemDomain + httpSplit + getDomainSuffix();
-        }
+        return systemDomain + httpSplit + getDomainSuffix();
     }
 
     public static String getHttpDomain(String projectName) {
@@ -186,7 +178,8 @@ public class UploadFileController {
         }
         System.out.println(files);
         System.out.println(files.length);
-        return ResultRO.success(getHttpDomain(projectName));
+        String httpUrl = getHttpDomain(projectName);
+        return ResultRO.success("http://" + httpUrl);
 //        return ResultRO.success("https://app.socialuni.cn/" + projectName);
     }
 
@@ -238,128 +231,128 @@ public class UploadFileController {
                 return;
             }
         }
-        if (SystemUtils.IS_OS_WINDOWS) {
-            NgxBlock newServer80 = new NgxBlock();
+//        if (SystemUtils.IS_OS_WINDOWS) {
+//            NgxBlock newServer80 = new NgxBlock();
+//
+//            newServer80.addValue("server");
+//
+//            NgxParam newListen80 = new NgxParam();
+//            newListen80.addValue("listen");
+//            newListen80.addValue("80");
+//            newServer80.addEntry(newListen80);
+//
+//            NgxParam server_name80 = new NgxParam();
+//            server_name80.addValue("server_name");
+//            server_name80.addValue(httpDomain);
+//            newServer80.addEntry(server_name80);
+//
+//            NgxBlock newLocation80 = new NgxBlock();
+//            newLocation80.addValue("location");
+//            newLocation80.addValue("/");
+//
+//            NgxParam root443 = new NgxParam();
+//            root443.addValue("root");
+//            root443.addValue("project/" + projectName);
+//            newLocation80.addEntry(root443);
+//
+//            NgxParam try_files443 = new NgxParam();
+//            try_files443.addValue("try_files");
+//            try_files443.addValue("$uri $uri/ /" + mainFile);
+//            newLocation80.addEntry(try_files443);
+//
+//            newServer80.addEntry(newLocation80);
+//
+//            http.addEntry(newServer80);
+//        } else {
+        NgxBlock newServer80 = new NgxBlock();
 
-            newServer80.addValue("server");
+        newServer80.addValue("server");
 
-            NgxParam newListen80 = new NgxParam();
-            newListen80.addValue("listen");
-            newListen80.addValue("80");
-            newServer80.addEntry(newListen80);
+        NgxParam newListen80 = new NgxParam();
+        newListen80.addValue("listen");
+        newListen80.addValue("80");
+        newServer80.addEntry(newListen80);
 
-            NgxParam server_name80 = new NgxParam();
-            server_name80.addValue("server_name");
-            server_name80.addValue(httpDomain);
-            newServer80.addEntry(server_name80);
+        NgxParam server_name80 = new NgxParam();
+        server_name80.addValue("server_name");
+        server_name80.addValue(httpDomain);
+        newServer80.addEntry(server_name80);
 
-            NgxBlock newLocation80 = new NgxBlock();
-            newLocation80.addValue("location");
-            newLocation80.addValue("/");
+        NgxBlock newLocation80 = new NgxBlock();
+        newLocation80.addValue("location");
+        newLocation80.addValue("/");
 
-            NgxParam root443 = new NgxParam();
-            root443.addValue("root");
-            root443.addValue("project/" + projectName);
-            newLocation80.addEntry(root443);
+        NgxParam return301 = new NgxParam();
+        return301.addValue("return 301 https://" + httpDomain + "$request_uri");
+        newLocation80.addEntry(return301);
 
-            NgxParam try_files443 = new NgxParam();
-            try_files443.addValue("try_files");
-            try_files443.addValue("$uri $uri/ /" + mainFile);
-            newLocation80.addEntry(try_files443);
-
-            newServer80.addEntry(newLocation80);
-
-            http.addEntry(newServer80);
-        } else {
-            NgxBlock newServer80 = new NgxBlock();
-
-            newServer80.addValue("server");
-
-            NgxParam newListen80 = new NgxParam();
-            newListen80.addValue("listen");
-            newListen80.addValue("80");
-            newServer80.addEntry(newListen80);
-
-            NgxParam server_name80 = new NgxParam();
-            server_name80.addValue("server_name");
-            server_name80.addValue(httpDomain);
-            newServer80.addEntry(server_name80);
-
-            NgxBlock newLocation80 = new NgxBlock();
-            newLocation80.addValue("location");
-            newLocation80.addValue("/");
-
-            NgxParam return301 = new NgxParam();
-            return301.addValue("return 301 https://" + httpDomain);
-            newLocation80.addEntry(return301);
-
-            newServer80.addEntry(newLocation80);
-
-
-            NgxBlock newServer443 = new NgxBlock();
-            newServer443.addValue("server");
-
-            NgxParam newListen443 = new NgxParam();
-            newListen443.addValue("listen");
-            newListen443.addValue("443 ssl");
-            newServer443.addEntry(newListen443);
-
-            NgxParam server_name443 = new NgxParam();
-            server_name443.addValue("server_name");
-            server_name443.addValue(httpDomain);
-            newServer443.addEntry(server_name443);
-
-            NgxParam ssl_certificate443 = new NgxParam();
-            ssl_certificate443.addValue("ssl_certificate");
-            ssl_certificate443.addValue("velox.run_bundle.crt");
-            newServer443.addEntry(ssl_certificate443);
-
-            NgxParam ssl_certificate_key443 = new NgxParam();
-            ssl_certificate_key443.addValue("ssl_certificate_key");
-            ssl_certificate_key443.addValue("velox.run.key");
-            newServer443.addEntry(ssl_certificate_key443);
+        newServer80.addEntry(newLocation80);
 
 
-            NgxParam ssl_session_timeout443 = new NgxParam();
-            ssl_session_timeout443.addValue("ssl_session_timeout");
-            ssl_session_timeout443.addValue("5m");
-            newServer443.addEntry(ssl_session_timeout443);
+        NgxBlock newServer443 = new NgxBlock();
+        newServer443.addValue("server");
 
-            NgxParam ssl_protocols443 = new NgxParam();
-            ssl_protocols443.addValue("ssl_protocols");
-            ssl_protocols443.addValue("TLSv1 TLSv1.1 TLSv1.2");
-            newServer443.addEntry(ssl_protocols443);
+        NgxParam newListen443 = new NgxParam();
+        newListen443.addValue("listen");
+        newListen443.addValue("443 ssl");
+        newServer443.addEntry(newListen443);
 
-            NgxParam ssl_ciphers443 = new NgxParam();
-            ssl_ciphers443.addValue("ssl_ciphers");
-            ssl_ciphers443.addValue("ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE");
-            newServer443.addEntry(ssl_ciphers443);
+        NgxParam server_name443 = new NgxParam();
+        server_name443.addValue("server_name");
+        server_name443.addValue(httpDomain);
+        newServer443.addEntry(server_name443);
 
-            NgxParam ssl_prefer_server_ciphers443 = new NgxParam();
-            ssl_prefer_server_ciphers443.addValue("ssl_prefer_server_ciphers");
-            ssl_prefer_server_ciphers443.addValue("on");
-            newServer443.addEntry(ssl_prefer_server_ciphers443);
+        NgxParam ssl_certificate443 = new NgxParam();
+        ssl_certificate443.addValue("ssl_certificate");
+        ssl_certificate443.addValue("velox.run_bundle.crt");
+        newServer443.addEntry(ssl_certificate443);
 
-            NgxBlock newLocation443 = new NgxBlock();
-            newLocation443.addValue("location");
-            newLocation443.addValue("/");
-
-            NgxParam root443 = new NgxParam();
-            root443.addValue("root");
-            root443.addValue("project/" + projectName);
-            newLocation443.addEntry(root443);
-
-            NgxParam try_files443 = new NgxParam();
-            try_files443.addValue("try_files");
-            try_files443.addValue("$uri $uri/ /" + mainFile);
-            newLocation443.addEntry(try_files443);
-
-            newServer443.addEntry(newLocation443);
+        NgxParam ssl_certificate_key443 = new NgxParam();
+        ssl_certificate_key443.addValue("ssl_certificate_key");
+        ssl_certificate_key443.addValue("velox.run.key");
+        newServer443.addEntry(ssl_certificate_key443);
 
 
-            http.addEntry(newServer80);
-            http.addEntry(newServer443);
-        }
+        NgxParam ssl_session_timeout443 = new NgxParam();
+        ssl_session_timeout443.addValue("ssl_session_timeout");
+        ssl_session_timeout443.addValue("5m");
+        newServer443.addEntry(ssl_session_timeout443);
+
+        NgxParam ssl_protocols443 = new NgxParam();
+        ssl_protocols443.addValue("ssl_protocols");
+        ssl_protocols443.addValue("TLSv1 TLSv1.1 TLSv1.2");
+        newServer443.addEntry(ssl_protocols443);
+
+        NgxParam ssl_ciphers443 = new NgxParam();
+        ssl_ciphers443.addValue("ssl_ciphers");
+        ssl_ciphers443.addValue("ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE");
+        newServer443.addEntry(ssl_ciphers443);
+
+        NgxParam ssl_prefer_server_ciphers443 = new NgxParam();
+        ssl_prefer_server_ciphers443.addValue("ssl_prefer_server_ciphers");
+        ssl_prefer_server_ciphers443.addValue("on");
+        newServer443.addEntry(ssl_prefer_server_ciphers443);
+
+        NgxBlock newLocation443 = new NgxBlock();
+        newLocation443.addValue("location");
+        newLocation443.addValue("/");
+
+        NgxParam root443 = new NgxParam();
+        root443.addValue("root");
+        root443.addValue("project/" + projectName);
+        newLocation443.addEntry(root443);
+
+        NgxParam try_files443 = new NgxParam();
+        try_files443.addValue("try_files");
+        try_files443.addValue("$uri $uri/ /" + mainFile);
+        newLocation443.addEntry(try_files443);
+
+        newServer443.addEntry(newLocation443);
+
+
+        http.addEntry(newServer80);
+        http.addEntry(newServer443);
+//        }
 
 
 //        server {
