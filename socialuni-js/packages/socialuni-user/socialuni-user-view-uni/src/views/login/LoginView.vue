@@ -15,7 +15,7 @@
       </div>
 
       <view class="mt-xs h145">
-        <phone-login-form ref="loginForm" v-if="showPhoneLogin" v-model="phoneFormData"></phone-login-form>
+        <phone-login-form ref="loginForm" v-if="showPhoneLogin" :show="showPhoneLogin" v-model="phoneFormData"></phone-login-form>
 
         <view class="h120 row-center" v-else>
           <!--          头部-->

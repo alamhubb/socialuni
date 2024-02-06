@@ -72,26 +72,29 @@ import CommonUtil from "qing-util/src/util/CommonUtil";
 import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import SocialPhoneNumLoginQO from "socialuni-api-base/src/model/phone/SocialPhoneNumLoginQO";
+import {ComponentInternalInstance, nextTick} from "vue";
+import NumberUtil from "qing-util/src/util/NumberUtil";
+import PasswordUtil from "socialuni-user-sdk/src/util/PasswordUtil";
+import SocialuniLoginService from "socialuni-user-sdk/src/logic/SocialuniLoginService";
 
 @Component({
   components: {QIcon}
 })
 export default class PhoneLoginForm extends Vue {
-  @Prop() showPhoneView: boolean
+  @Prop() show: boolean
   @Model('modelValue') readonly value!: PhoneNumFormData
 
-  get authCodeInterval() {
-    return socialuniConfigModule.appMoreConfig.authCodeInterval || 30
-  }
+
 
   @Emit('update:modelValue')
   input() {
     return this.value
   }
 
-  @Watch('showPhoneView')
+  @Watch('show')
   showPhoneViewWatch() {
-    if (this.showPhoneView) {
+    if (this.show) {
       this.phoneNumInputFocus()
     } else {
       this.phoneNumInputBlur()
@@ -159,11 +162,13 @@ export default class PhoneLoginForm extends Vue {
 
   sendCodeClick() {
     if (PhoneNumFormData.phoneNumberError(this.value.phoneNum)) {
-      return QingAppUtil.ToastUtil.toast('请输入正确的手机号')
+      return QingAppUtil.ToastUtil.error('请输入正确的手机号')
     }
     if (this.countDown) {
-      return QingAppUtil.ToastUtil.toast('验证码发送频繁，请等待')
+      return QingAppUtil.ToastUtil.error('验证码发送频繁，请等待')
     }
+
+    this.loginUser.authCode = ''
 
     this.authCodeInputFocus()
 
@@ -179,7 +184,7 @@ export default class PhoneLoginForm extends Vue {
     // 如果怕太频繁，就显示相同手机号每天只能发送几次，一小时内只能5次
     PhoneAPI.sendAuthCodeAPI(this.value.phoneNum).then(() => {
       // 提示验证码发送成功
-        QingAppUtil.ToastUtil.toast('验证码发送成功')
+      QingAppUtil.ToastUtil.success('验证码发送成功')
     })
   }
 }
