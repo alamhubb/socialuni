@@ -26,9 +26,30 @@
         </view>
       </view>
     </view>
-    <view class="mt-xs h30 row-col-center">
-      <text v-if="loginData.phoneNumError" class="color-red">
+    <view class="h30 row-col-center">
+      <text v-if="loginData.phoneNumHasError" class="color-red">
         *请输入正确的手机号
+      </text>
+    </view>
+
+    <view class="row-col-center">
+      <view>密码</view>
+      <div class="flex-row ml-smm solid-bottom flex-1 pl-smm">
+        <!--   自动获取焦点的话app平台会有问题，打开我的页面时会弹出键盘   :focus="true"-->
+        <input class="flex-1 h35px" type="password" name="input" :focus="loginData.passwordFocus" :maxlength="20"
+               v-model.trim="loginData.password"
+               @focus="loginData.passwordInputFocus()"
+               @blur="loginData.passwordInputBlur()"
+               @input="input"
+               placeholder="请填写密码"
+        />
+        <q-icon v-if="loginData.password" class="text-gray" icon="close-circle" size="20"
+                @click="passwordClear"></q-icon>
+      </div>
+    </view>
+    <view class="h30 row-col-center">
+      <text v-if="loginData.passwordHasError" class="color-red">
+        *请输入正确的密码
       </text>
     </view>
 
@@ -56,8 +77,8 @@
         </button>
       </view>
     </view>
-    <view class="mt-xs h30 row-col-center">
-      <text v-if="loginData.authCodeError" class="color-red">
+    <view class="h30 row-col-center">
+      <text v-if="loginData.authCodeHasError" class="color-red">
         *请输入正确的验证码
       </text>
     </view>
@@ -105,10 +126,16 @@ export default class PhoneLoginForm extends Vue {
     this.input()
   }
 
+  passwordClear() {
+    this.loginData.passwordClear()
+    this.input()
+  }
+
   authCodeClear() {
     this.loginData.authCodeClear()
     this.input()
   }
+
 
   sendCodeClick() {
     this.loginData.sendAuthCodeCheck()

@@ -9,12 +9,46 @@ export default class SocialuniLoginDataVO {
     }
 
     phoneNum: string = null
+    password: string = null
     authCode: string = null
+
     countDownInner: number = null
 
+    passwordFocus = false
     authCodeFocus = false
     phoneNumFocus = false
     phoneNumFirstBlur = false
+
+
+    get phoneNumHasError() {
+        //有值，错误，才算错误
+        return this.phoneNumFirstBlur && (!this.phoneNum || this.phoneNum.length !== 11 || NumberUtil.containNoNumber(this.phoneNum))
+    }
+
+    get passwordHasError() {
+        if (!this.phoneNumFirstBlur || this.phoneNumHasError) {
+            return false
+        } else if (!this.password) {
+            return '密码不能为空'
+        } else if (this.password.length < 8) {
+            return '密码长度不能小于8个字符'
+        } else if (this.password.length > 16) {
+            return '密码长度不能大于20个字符'
+        } else if (NumberUtil.isAllNumber(this.password)) {
+            return '密码必须包含字母'
+        } else if (NumberUtil.noHasNumber(this.password)) {
+            return '密码必须包含数字'
+        }
+        return false
+    }
+
+    get authCodeHasError() {
+        return this.phoneNumFirstBlur && !this.phoneNumHasError && !this.passwordHasError && (!this.authCode || this.authCode.length !== 4 || NumberUtil.containNoNumber(this.authCode))
+    }
+
+    get sendAuthCodeBtnDisabled() {
+        return !this.phoneNumFirstBlur || this.phoneNumHasError || !!this.passwordHasError || !this.countDown
+    }
 
 
     get authCodeInterval() {
@@ -37,28 +71,16 @@ export default class SocialuniLoginDataVO {
         }, 1000)
     }
 
-    get phoneNumError() {
-        //有值，错误，才算错误
-        return this.phoneNumFirstBlur && (!this.phoneNum || this.phoneNum.length !== 11 || NumberUtil.containNoNumber(this.phoneNum))
-    }
-
 
     sendAuthCodeCheck() {
-        if (this.phoneNumError) {
+        if (this.phoneNumHasError) {
             return QingAppUtil.ToastUtil.throwError('请输入正确的手机号')
         }
-        if (this.countDown) {
+        if (!this.countDown) {
             return QingAppUtil.ToastUtil.throwError('验证码发送频繁，请等待')
         }
     }
 
-    get authCodeError() {
-        return this.phoneNumFirstBlur && !this.phoneNumError && (!this.authCode || this.authCode.length !== 4 || NumberUtil.containNoNumber(this.authCode))
-    }
-
-    get sendAuthCodeBtnDisabled() {
-        return this.phoneNumError || !!this.countDownInner
-    }
 
     phoneNumInputFocus() {
         this.phoneNumFocus = true
@@ -79,8 +101,19 @@ export default class SocialuniLoginDataVO {
         })
     }
 
+    passwordInputFocus() {
+        this.passwordFocus = true
+        CommonUtil.delayTime(100).then(() => {
+            this.passwordFocus = true
+        })
+    }
+
     authCodeInputBlur() {
         this.authCodeFocus = false
+    }
+
+    passwordInputBlur() {
+        this.passwordFocus = false
     }
 
     resetAuthCodeCountDown() {
@@ -92,8 +125,14 @@ export default class SocialuniLoginDataVO {
         this.phoneNumInputFocus()
     }
 
+    passwordClear() {
+        this.password = null
+        this.passwordInputFocus()
+    }
+
     authCodeClear() {
         this.authCode = null
         this.authCodeInputFocus()
     }
+
 }
