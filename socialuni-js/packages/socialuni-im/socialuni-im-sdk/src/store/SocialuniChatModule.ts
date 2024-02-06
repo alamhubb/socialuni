@@ -61,10 +61,11 @@ class SocialuniChatModule {
             this.chats = chats
         }*/
         this.chats = chats
-        if (this.chats.length && !this.chatId) {
-            socialuniChatModule.setChatIdToMessagePage(this.chats[0].id)
-            // this.setChatId(this.chats[0].id)
-        }
+        // if (this.chats.length && !this.chatId) {
+        //     //这逻辑有问题，为什么收到了内容就要跳转呢
+        //     socialuniChatModule.setChatIdToMessagePage(this.chats[0].id)
+        //     // this.setChatId(this.chats[0].id)
+        // }
         // this.computedChatsUnreadNumTotalAction()
     }
 
