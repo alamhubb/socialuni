@@ -19,7 +19,7 @@
     "socialuni-admin-api": "../packages/socialuni-admin-api",
     "socialuni-user-sdk": "../packages/socialuni-user-sdk",
     "socialuni-user-view-h5": "../packages/socialuni-user/socialuni-user-view-h5",
-    "axios": "^1.4.0",
+    "axios": "^1.6.7",
     "element-plus": "^2.3.7",
     "mitt": "^3.0.0",
     "pinyin-match": "^1.2.4",

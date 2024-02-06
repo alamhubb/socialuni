@@ -16,7 +16,7 @@
     "qing-scss": "^0.1.4-alpha.0",
     "qing-util": "^0.1.4-alpha.0",
     "vue-facing-decorator": "^3.0.2",
-    "axios": "^1.4.0"
+    "axios": "^1.6.7"
   },
   "devDependencies": {
     "typescript": "^4.7.4",
