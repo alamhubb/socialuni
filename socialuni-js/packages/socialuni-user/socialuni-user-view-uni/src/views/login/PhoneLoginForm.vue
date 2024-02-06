@@ -68,7 +68,6 @@
 import {Component, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator'
 import PhoneNumFormData from "./PhoneNumFormData";
 import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue";
-import CommonUtil from "qing-util/src/util/CommonUtil";
 import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import SocialuniLoginDataVO from "socialuni-user-sdk/src/model/SocialuniLoginDataVO";
