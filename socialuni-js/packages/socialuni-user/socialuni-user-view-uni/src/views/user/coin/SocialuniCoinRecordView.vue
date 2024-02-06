@@ -24,7 +24,7 @@
                             <view class="flex-1 row-between">
                                 <view class="col-between py-xs">
                                     <view class="row-col-center">
-                                        <text :class="{'text-red':user.vipFlag}">{{ user.nickname }}</text>
+                                        <text :class="{'color-red':user.vipFlag}">{{ user.nickname }}</text>
                                         <view v-if="user.vipFlag" class="ml-5px cu-tag bg-orange radius sm"
                                               @click.stop="openVip">
                                             VIP

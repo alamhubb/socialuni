@@ -27,7 +27,7 @@
       </view>
     </view>
     <view class="mt-xs h30 row-col-center px-sm">
-      <text v-if="phoneNumIsError" class="text-red">
+      <text v-if="phoneNumIsError" class="color-red">
         *请输入正确的手机号
       </text>
     </view>
@@ -44,9 +44,8 @@
                @input="input"
                placeholder="请填写验证码"
         />
-        <q-icon v-if="value.authCode" class="text-gray" icon="close-circle" size="40"
+        <q-icon v-if="value.authCode" class="text-gray" icon="close-circle" size="20"
                 @touchend.native.prevent="authCodeClear"></q-icon>
-
         <!--                <q-icon v-if="phoneNum" class="text-gray mr-lg" name="close-circle" size="40"
                                 @touchend.native.prevent="phoneNumClear"></q-icon>-->
       </div>
@@ -58,7 +57,7 @@
       </view>
     </view>
     <view class="mt-xs h30 row-col-center px">
-      <text v-if="authCodeIsError" class="text-red">
+      <text v-if="authCodeIsError" class="color-red">
         *请输入正确的验证码
       </text>
     </view>

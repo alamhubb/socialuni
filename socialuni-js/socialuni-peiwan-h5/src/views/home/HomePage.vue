@@ -11,7 +11,7 @@
 
                      <div class="px-10">
                          <div class="row-between" @click="showUserChange(user)">
-                           <div class="row-col-center" :class="{'text-red':user.vipFlag}">
+                           <div class="row-col-center" :class="{'color-red':user.vipFlag}">
                              {{ user.nickname }}
                            </div>
                            &lt;!&ndash;                    <div class="row-col-center">
