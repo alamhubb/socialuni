@@ -13,7 +13,7 @@ import QIcon from "./QIcon/QIcon.vue";
     QIcon
   }
 })
-export default class SocialuniTag extends Vue {
+export default class QTag extends Vue {
   @Prop({default: false, type: Boolean}) border: boolean
   @Prop({default: false, type: Boolean}) round: boolean
   @Prop({default: '', type: Boolean}) type: string
