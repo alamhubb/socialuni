@@ -11,6 +11,10 @@ export default class SocialuniDeployAPI {
         return socialuniUserRequest.get<string>(`socialuni/deploy/autoCreateCanUseProjectName`)
     }
 
+    static queryDomainName() {
+        return socialuniUserRequest.get<string>(`socialuni/deploy/queryDomainName`)
+    }
+
     static deployProject(formData: any) {
         return socialuniUserRequest.post<boolean>(`socialuni/deploy/deployProject`, ObjectUtil.toFormData(formData))
     }

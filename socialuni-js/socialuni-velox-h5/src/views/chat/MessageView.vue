@@ -176,6 +176,15 @@ export default class MessageView extends Vue {
 
   created() {
     this.clearDeployUrl()
+    this.querySysDomain()
+  }
+
+  domainName = null
+
+  querySysDomain() {
+    SocialuniDeployAPI.queryDomainName().then((res) => {
+      this.domainName = res.data
+    })
   }
 
   clearDeployUrl() {
@@ -213,6 +222,9 @@ export default class MessageView extends Vue {
     this.clearDeployUrl()
     if (!this.formData.projectName) {
       this.formData.projectName = PinyinUtil.convertToFirstUpperPinyin(this.formData.files[0].root)
+      if (this.formData.projectName === 'dist') {
+        this.formData.projectName = this.domainName
+      }
       this.checkAndAutoCreateCanUseProjectName()
     }
   }
