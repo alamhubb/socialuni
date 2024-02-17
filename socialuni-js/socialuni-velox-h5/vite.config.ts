@@ -8,7 +8,7 @@ export default defineConfig({
     plugins: [
         vue(),
         socialuniPlatformAutoImportPlugin(),
-        visualizer({open: true})
+        // visualizer({open: true})
     ],
     resolve: {
         alias: {
