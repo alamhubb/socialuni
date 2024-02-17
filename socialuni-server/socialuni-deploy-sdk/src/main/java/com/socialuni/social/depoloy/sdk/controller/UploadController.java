@@ -1,34 +1,18 @@
 package com.socialuni.social.depoloy.sdk.controller;
 
-import cn.hutool.core.io.file.FileWriter;
-import com.github.odiszapc.nginxparser.*;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.depoloy.sdk.dao.DO.SocialuniDeployProjectDO;
-import net.coobird.thumbnailator.Thumbnails;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.swing.*;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
-import java.util.List;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("upload")
 public class UploadController {
-
-    public static void main(String[] args) throws IOException {
-        SocialuniDeployProjectDO socialuniDeployProjectDO = new SocialuniDeployProjectDO();
-        socialuniDeployProjectDO.setPath("test");
-        socialuniDeployProjectDO.setMainFile("index.html");
-        UploadFileController.pushNginxConfig(socialuniDeployProjectDO);
-    }
 
     @PostMapping("img")
     public ResultRO<Void> uploadImg(@RequestParam("file") MultipartFile file, @RequestParam(value = "type", required = false) String uploadType) throws IOException {

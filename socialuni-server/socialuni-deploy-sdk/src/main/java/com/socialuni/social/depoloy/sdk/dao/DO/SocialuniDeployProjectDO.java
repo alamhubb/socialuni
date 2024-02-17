@@ -16,7 +16,7 @@ import javax.persistence.*;
         },
         uniqueConstraints = {
                 //每个渠道都是唯一的
-                @UniqueConstraint(columnNames = {"path"})
+                @UniqueConstraint(columnNames = {"projectName"})
         }
 )
 @Data
@@ -26,7 +26,7 @@ public class SocialuniDeployProjectDO extends SocialuniContentBaseDO {
     @Column(nullable = false, updatable = false)
     private Integer userId;
     @Column(nullable = false)
-    private String path;
+    private String projectName;
     //入口文件
     @Column(nullable = false)
     private String mainFile;

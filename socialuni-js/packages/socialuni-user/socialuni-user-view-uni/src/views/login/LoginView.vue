@@ -14,8 +14,8 @@
         </div>
       </div>
 
-      <view class="mt-xs h145">
-        <phone-login-form ref="loginForm" v-if="showPhoneLogin" v-model="phoneFormData"></phone-login-form>
+      <view class="mt-xs h165">
+        <phone-login-form ref="loginForm" v-if="showPhoneLogin" :show="showPhoneLogin" v-model="phoneFormData"></phone-login-form>
 
         <view class="h120 row-center" v-else>
           <!--          头部-->
@@ -30,7 +30,7 @@
       </view>
 
       <!--      绑定手机号可发布动态提示-->
-      <div class="row-center pb">
+      <div class="row-center">
         <!--            如果为授权手机号，则提示-->
         <view class="u-border-bottom text-gray">
           绑定手机号后可发表动态

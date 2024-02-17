@@ -31,7 +31,7 @@
               <div class="flex-1 flex-col mr-sm overflow-hidden">
                 <div class="h44px row-end-center mb-xs">
                   {{ msg.user.nickname }}
-                  <!--              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
+                  <!--              <text class="text-sm" :class="[msg.user.vipFlag?'color-red':'text-gray']"
                                       @click="toUserDetailVue(msg.user.id)">
                                   {{ msg.user.nickname }}
                                 </text>
@@ -66,7 +66,7 @@
               <div class="flex-1 flex-col ml-sm overflow-hidden">
                 <div class="h44px row-col-center mb-xs">
                   {{ msg.user.nickname }}
-                  <!--              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
+                  <!--              <text class="text-sm" :class="[msg.user.vipFlag?'color-red':'text-gray']"
                                       @click="toUserDetailVue(msg.user.id)">
                                   {{ msg.user.nickname }}
                                 </text>

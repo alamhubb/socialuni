@@ -3,7 +3,7 @@
     <block v-for="(childComment,index) in comment.childComments" :key="childComment.id">
       <view v-if="index<childCommentShowNum" class="flex-row py-mn">
         <!--            {{childComment.no}}#-->
-        <text :class="comment.user.vipFlag?'text-red':'color-blue'" class="row-col-center"
+        <text :class="comment.user.vipFlag?'color-red':'color-blue'" class="row-col-center"
               @click="toUserDetail(childComment.user.id)">{{ childComment.user.nickname }}
         </text>
         <view class="flex-sub row-col-center" @click="setReplyComment(talk,comment,childComment)">

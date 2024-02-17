@@ -24,7 +24,8 @@
                         )
                       </span>
                   </template>
-                  <el-input class="w370 mb-1" v-model="formData.projectName" @change="checkProjectName"></el-input>
+                  <el-input class="w370 mb-1" v-model="formData.projectName" clearable
+                            @change="checkProjectNameHandler" @input="checkProjectNameHandler"></el-input>
                 </el-form-item>
               </div>
               <el-form-item prop="mainFile" label="入口文件">
@@ -114,11 +115,12 @@ import SocialuniDeployAPI from "@/views/chat/SocialuniDeployAPI.ts";
 import RegConst from "qing-util/src/constant/RegConst.ts";
 import AlertUtil from "qingjs-h5/src/util/AlertUtil.ts";
 import {FolderOpened, UploadFilled} from "@element-plus/icons-vue";
-import {ElForm} from "element-plus";
+import type {ElForm} from "element-plus";
 import PinyinUtil from "@/util/PinyinUtil.ts";
 import ToastUtil from "qingjs-h5/src/util/ToastUtil.ts";
 import WindowUtil from "@/util/WindowUtil.ts";
 import alertUtil from "qingjs-h5/src/util/AlertUtil.ts";
+import CommonUtil from "qing-util/src/util/CommonUtil.ts";
 
 @Component({
   components: {
@@ -141,10 +143,10 @@ import alertUtil from "qingjs-h5/src/util/AlertUtil.ts";
 export default class MessageView extends Vue {
   $refs: {
     upload: QUpload
-    form: Elform
+    form: ElForm
   }
 
-  projectNameCanUse = true
+  projectNameCanUse = false
 
   autoCreateCanUseName = true
   editable = false
@@ -168,31 +170,52 @@ export default class MessageView extends Vue {
     } else if (value.length < 3) {
       return '项目名需大于2个字符'
     } else if (value.length > 16) {
-      return '项目名需小于16个字符'
+      return '项目名需小于17个字符'
     }
   }
 
   created() {
     this.clearDeployUrl()
+    this.querySysDomain()
+  }
+
+  domainName = null
+
+  querySysDomain() {
+    SocialuniDeployAPI.queryDomainName().then((res) => {
+      this.domainName = res.data
+    })
   }
 
   clearDeployUrl() {
     this.deployUrl = null
+    this.$nextTick(() => {
+      this.$refs.upload.clearFileList()
+    })
   }
 
   files = []
 
   async checkProjectName() {
-    const res = await SocialuniDeployAPI.checkProjectName(this.formData.projectName)
-    this.projectNameCanUse = res.data
+    this.projectNameCanUse = false
+    if (this.formData.projectName) {
+      try {
+        const res = await SocialuniDeployAPI.checkProjectName(this.formData.projectName)
+        this.projectNameCanUse = res.data
+      } catch (e) {
+        this.projectNameCanUse = false
+      }
+    }
   }
+
+  checkProjectNameHandler = CommonUtil.debounceDelay(this.checkProjectName, 300)
 
 
   async checkAndAutoCreateCanUseProjectName() {
     await this.checkProjectName()
     if (!this.projectNameCanUse && this.autoCreateCanUseName) {
       this.formData.projectName = await this.autoCreateCanUseProjectName()
-      await this.checkAndAutoCreateCanUseProjectName()
+      await this.checkProjectName()
     }
   }
 
@@ -202,6 +225,9 @@ export default class MessageView extends Vue {
     this.clearDeployUrl()
     if (!this.formData.projectName) {
       this.formData.projectName = PinyinUtil.convertToFirstUpperPinyin(this.formData.files[0].root)
+      if (this.formData.projectName === 'dist') {
+        this.formData.projectName = this.domainName
+      }
       this.checkAndAutoCreateCanUseProjectName()
     }
   }

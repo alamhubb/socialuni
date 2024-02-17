@@ -97,7 +97,7 @@ import {
     UploadFilled, FolderOpened
   }
 })
-export default class QUpload extends Vue {
+export default class  QUpload extends Vue {
   $refs: {
     uploadFileLabel: HTMLLabelElement;
     uploadFolderLabel: HTMLLabelElement;
