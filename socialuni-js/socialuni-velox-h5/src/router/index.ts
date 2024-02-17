@@ -31,8 +31,12 @@ export const constantRoutes = [
   { path: '/:pathMatch(.*)', redirect: '/404', hidden: true }
 ]
 
+const baseUrl = import.meta.env.BASE_URL
+
+console.log(baseUrl)
+
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(baseUrl),
   routes: constantRoutes
 })
 

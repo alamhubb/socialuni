@@ -161,14 +161,16 @@ public class UploadFileController {
                 //文件写入指定路径
                 Files.write(nginxPath, bytes);
             }
-            SocialuniDeployProjectDO socialuniDeployProjectDO = new SocialuniDeployProjectDO();
-            socialuniDeployProjectDO.setProjectName(projectName);
-            socialuniDeployProjectDO.setMainFile(mainFile);
+            SocialuniDeployProjectDO socialuniDeployProjectDO = SocialuniUserRepositoryFacede.findByCustomFieldAndStatus("projectName", projectName, SocialuniCommonStatus.enable, SocialuniDeployProjectDO.class);
 
             UploadFileController.pushNginxConfig(socialuniDeployProjectDO);
 
-            SocialuniRepositoryFacade.save(socialuniDeployProjectDO);
-
+            if(socialuniDeployProjectDO==null){
+                socialuniDeployProjectDO = new SocialuniDeployProjectDO();
+                socialuniDeployProjectDO.setProjectName(projectName);
+                socialuniDeployProjectDO.setMainFile(mainFile);
+                SocialuniRepositoryFacade.save(socialuniDeployProjectDO);
+            }
 
             if (SystemUtils.IS_OS_WINDOWS) {
                 String command = nginxPathRoot + "/nginx -s reload";
