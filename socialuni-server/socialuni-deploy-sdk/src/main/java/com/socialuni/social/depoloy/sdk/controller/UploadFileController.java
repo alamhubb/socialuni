@@ -40,6 +40,9 @@ public class UploadFileController {
     public static final String httpSplit = ".";
 
     public static String getSystemDomain() {
+//        if (SystemUtils.IS_OS_WINDOWS) {
+//            return "localhost";
+//        }
         return systemDomain + httpSplit + getDomainSuffix();
     }
 
