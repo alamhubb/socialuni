@@ -60,6 +60,13 @@ public class UploadFileController {
     public static final String winNginxPath = "/devtools/nginx";
     public static final String linuxNginxPath = "/www/server/nginx";
 
+
+    @GetMapping("queryDomainName")
+    @ResponseBody
+    public ResultRO<String> queryDomainName() {
+        return  ResultRO.success(UploadFileController.systemDomain);
+    }
+
     @GetMapping("queryProjectName/{projectName}")
     @ResponseBody
     public ResultRO<Boolean> checkProjectName(@PathVariable("projectName") String projectName) {

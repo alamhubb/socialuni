@@ -189,6 +189,9 @@ export default class MessageView extends Vue {
 
   clearDeployUrl() {
     this.deployUrl = null
+    this.$nextTick(() => {
+      this.$refs.upload.clearFileList()
+    })
   }
 
   files = []
@@ -212,7 +215,7 @@ export default class MessageView extends Vue {
     await this.checkProjectName()
     if (!this.projectNameCanUse && this.autoCreateCanUseName) {
       this.formData.projectName = await this.autoCreateCanUseProjectName()
-      await this.checkAndAutoCreateCanUseProjectName()
+      await this.checkProjectName()
     }
   }
 
