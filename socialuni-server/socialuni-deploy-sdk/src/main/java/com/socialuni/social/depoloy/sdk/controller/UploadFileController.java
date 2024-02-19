@@ -67,7 +67,7 @@ public class UploadFileController {
     @GetMapping("queryDomainName")
     @ResponseBody
     public ResultRO<String> queryDomainName() {
-        return  ResultRO.success(UploadFileController.systemDomain);
+        return ResultRO.success(UploadFileController.systemDomain);
     }
 
     @GetMapping("queryProjectName/{projectName}")
@@ -165,9 +165,11 @@ public class UploadFileController {
 
             UploadFileController.pushNginxConfig(socialuniDeployProjectDO);
 
-            if(socialuniDeployProjectDO==null){
+            if (socialuniDeployProjectDO == null) {
+                Integer mineUserId = SocialuniUserUtil.getMineUserIdAllowNull();
                 socialuniDeployProjectDO = new SocialuniDeployProjectDO();
                 socialuniDeployProjectDO.setProjectName(projectName);
+                socialuniDeployProjectDO.setUserId(mineUserId);
                 socialuniDeployProjectDO.setMainFile(mainFile);
                 SocialuniRepositoryFacade.save(socialuniDeployProjectDO);
             }

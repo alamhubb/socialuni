@@ -81,8 +81,8 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-facing-decorator'
-import SDialog from "qing-ui-h5/src/components/QComponents/QDialog.vue";
-import SocialuniUserEditDialog from "@/views/user/SocialuniUserEditDialog.vue";
+import QDialog from "qing-ui-h5/src/components/QComponents/QDialog.vue";
+import SocialuniUserEditDialog from "socialuni-user-view-h5/src/views/SocialuniUserEditDialog.vue";
 import SocialuniUserEventConst from "socialuni-user-sdk/src/constant/SocialuniUserEventConst";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import CosService from "socialuni-app-sdk/src/util/CosService";
@@ -93,18 +93,17 @@ import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAP
 import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
 import UUIDUtil from "qing-util/src/util/UUIDUtil";
 import ImgUtil from "qing-util/src/util/ImgUtil";
-import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
 import {ArrowDown, Tools} from "@element-plus/icons-vue";
 import SocialuniLoginView from "socialuni-user-view-h5/src/views/SocialuniLoginView.vue";
 import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
 import UserService from "socialuni-user-sdk/src/logic/UserService";
 
 @Component({
-    components: {SocialuniUserEditDialog, Tools, SocialuniLoginView, SDialog, ArrowDown}
+    components: {SocialuniUserEditDialog, Tools, SocialuniLoginView, QDialog, ArrowDown}
 })
 export default class NavBar extends Vue {
     $refs: {
-        loginDialog: SDialog
+        loginDialog: QDialog
         userEditDialog: SocialuniUserEditDialog
     }
 
