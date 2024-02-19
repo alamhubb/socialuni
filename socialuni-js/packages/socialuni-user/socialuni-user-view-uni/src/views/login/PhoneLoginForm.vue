@@ -49,7 +49,7 @@
     </view>
     <view class="h30 row-col-center">
       <text v-if="loginData.passwordHasError" class="color-red">
-        *请输入正确的密码
+        *{{loginData.passwordHasError}}
       </text>
     </view>
 
@@ -73,7 +73,7 @@
 
       <view @click="sendCodeClick" class="ml-smm">
         <button type="primary" class='cu-btn bg-green' :disabled="loginData.sendAuthCodeBtnDisabled">
-          {{ !loginData.countDown ? loginData.countDown : '发送验证码' }}
+          {{ loginData.countDownInner ? loginData.countDown : '发送验证码' }}
         </button>
       </view>
     </view>

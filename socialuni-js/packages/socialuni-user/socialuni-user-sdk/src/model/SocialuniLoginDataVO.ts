@@ -47,7 +47,7 @@ export default class SocialuniLoginDataVO {
     }
 
     get sendAuthCodeBtnDisabled() {
-        return !this.phoneNumFirstBlur || this.phoneNumHasError || !!this.passwordHasError || !this.countDown
+        return !this.phoneNumFirstBlur || this.phoneNumHasError || !!this.passwordHasError || this.countDownInner
     }
 
 
