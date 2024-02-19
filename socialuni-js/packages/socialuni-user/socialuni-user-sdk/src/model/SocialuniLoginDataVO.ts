@@ -9,16 +9,36 @@ export default class SocialuniLoginDataVO {
     }
 
     phoneNum: string = null
+    //是否已经注册
+    phoneNumRegistered: boolean = false
     password: string = null
     authCode: string = null
 
-    countDownInner: number = null
+    countDownInner: number = 0
 
     passwordFocus = false
     authCodeFocus = false
     phoneNumFocus = false
     phoneNumFirstBlur = false
 
+    checkPhoneNum() {
+        // 再次校验
+        if (this.phoneNumHasError) {
+            return QingAppUtil.ToastUtil.error('请输入正确的手机号')
+        }
+    }
+
+    checkPassword() {
+        if (this.passwordHasError) {
+            return QingAppUtil.ToastUtil.error(this.passwordHasError)
+        }
+    }
+
+    checkAuthCode() {
+        if (!this.phoneNumRegistered && this.authCodeHasError) {
+            return QingAppUtil.ToastUtil.error('请输入正确的验证码')
+        }
+    }
 
     get phoneNumHasError() {
         //有值，错误，才算错误
@@ -73,10 +93,8 @@ export default class SocialuniLoginDataVO {
 
 
     sendAuthCodeCheck() {
-        if (this.phoneNumHasError) {
-            return QingAppUtil.ToastUtil.throwError('请输入正确的手机号')
-        }
-        if (!this.countDown) {
+        this.checkPhoneNum()
+        if (this.countDownInner) {
             return QingAppUtil.ToastUtil.throwError('验证码发送频繁，请等待')
         }
     }

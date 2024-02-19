@@ -3,7 +3,7 @@
     <div class="w300">
       <el-form
           ref="loginForm"
-          :model="viewService.loginUser"
+          :model="viewService.loginData"
           :rules="viewService.loginRules"
           auto-complete="on"
           label-position="top"
@@ -12,7 +12,7 @@
           <div class="flex-row w100p">
             <el-input
                 class="flex-1"
-                v-model="viewService.loginUser.phoneNum"
+                v-model="viewService.loginData.phoneNum"
                 placeholder="请输入手机号"
                 type="text"
                 :maxlength="11"
@@ -31,7 +31,7 @@
                 ref="password"
                 class="flex-1"
                 show-password
-                v-model="viewService.loginUser.password"
+                v-model="viewService.loginData.password"
                 placeholder="请输入密码"
                 type="password"
                 :maxlength="16"
@@ -55,7 +55,7 @@
           <div class="flex-row w100p">
             <el-input
                 ref="authCode"
-                v-model="viewService.loginUser.authCode"
+                v-model="viewService.loginData.authCode"
                 class="flex-1"
                 type="text"
                 placeholder="请输入验证码"

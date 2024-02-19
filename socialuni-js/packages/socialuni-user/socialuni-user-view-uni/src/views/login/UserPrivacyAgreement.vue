@@ -22,11 +22,11 @@
 import {Component, Prop, Vue} from 'vue-facing-decorator'
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 import SkipUrlConst from "socialuni-app-sdk/src/constant/SkipUrlConst";
-import SocialuniUserPrivacyAgreeService from "socialuni-user-sdk/src/logic/SocialuniUserPrivacyAgreeService";
+import SocialuniLoginViewService from "socialuni-user-sdk/src/logic/SocialuniLoginViewService";
 
 @Component({})
 export default class UserPrivacyAgreement extends Vue {
-    @Prop() viewService:SocialuniUserPrivacyAgreeService
+    @Prop() viewService:SocialuniLoginViewService
 
     get user() {
         return socialuniUserModule.mineUser

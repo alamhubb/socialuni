@@ -139,6 +139,7 @@ import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import PhoneService from "socialuni-user-sdk/src/logic/PhoneService";
 import SocialuniUserPrivacyAgreeService from "socialuni-user-sdk/src/logic/SocialuniUserPrivacyAgreeService";
+import SocialuniLoginViewService from "socialuni-user-sdk/src/logic/SocialuniLoginViewService";
 
 @Component({
   components: {
@@ -154,7 +155,7 @@ export default class LoginView extends Vue {
     loginForm: PhoneLoginForm
   }
 
-  viewService = new SocialuniUserPrivacyAgreeService()
+  viewService = new SocialuniLoginViewService()
 
   get showProviderLogin() {
     return !this.user && socialuniSystemModule.isMp
@@ -236,7 +237,6 @@ export default class LoginView extends Vue {
     if (!this.allButtonDisabled) {
       try {
         this.openTypeBtnEnable = false
-        this.openTypeBtnEnable = false
         //一行代码就可以获取登录所需要的信息, 还可以配合后台使用，一键登录，记住用户
         await LoginService.providerLogin(socialuniSystemModule.mpPlatform, result)
         this.loginAfterHint('登录成功')
@@ -248,22 +248,11 @@ export default class LoginView extends Vue {
   }
 
   async phoneLogin() {
-    if (!this.loginButtonDisabled) {
-      try {
-        this.openTypeBtnEnable = false
-        this.resetAuthCodeCountDown()
-        await LoginService.phoneLogin(this.phoneFormData.phoneNum, this.phoneFormData.authCode)
-        this.loginAfterHint('登录成功')
-      } finally {
-        this.openTypeBtnEnable = true
-        this.goToOAuthPage()
-      }
-    }
-
+    await this.viewService.handleLogin()
   }
 
   resetAuthCodeCountDown() {
-    this.$refs.loginForm?.resetAuthCodeCountDown()
+    // this.$refs.loginForm?.resetAuthCodeCountDown()
   }
 
   goToOAuthPage() {
