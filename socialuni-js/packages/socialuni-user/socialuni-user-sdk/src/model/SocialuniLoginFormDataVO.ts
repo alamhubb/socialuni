@@ -16,10 +16,6 @@ export default class SocialuniLoginFormDataVO {
 
     countDownInner: number = 0
 
-    passwordFocus = false
-    authCodeFocus = false
-    phoneNumFocus = false
-
 
     get phoneNumHasError() {
         //有值，错误，才算错误
@@ -99,5 +95,18 @@ export default class SocialuniLoginFormDataVO {
 
     resetAuthCodeCountDown() {
         this.countDownInner = 0
+    }
+
+
+    phoneNumClear() {
+        this.phoneNum = null
+    }
+
+    passwordClear() {
+        this.password = null
+    }
+
+    authCodeClear() {
+        this.authCode = null
     }
 }
