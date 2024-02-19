@@ -51,7 +51,7 @@
             />
           </div>
         </el-form-item>-->
-        <el-form-item v-if="!viewService.hasPassword" label="验证码" prop="authCode" label-width="70px">
+        <el-form-item v-if="!viewService.loginData.phoneNumRegistered" label="验证码" prop="authCode" label-width="70px">
           <div class="flex-row w100p">
             <el-input
                 ref="authCode"
@@ -67,11 +67,11 @@
                 class="flex-none ml w130"
                 plain
                 type="primary"
-                :disabled="viewService.sendAuthCodeBtnDisabled"
+                :disabled="viewService.loginData.sendAuthCodeBtnDisabled"
                 @click="viewService.sendCodeClick()"
             >
               {{
-                viewService.countDown ? (viewService.authCodeInterval + 1 - viewService.countDown) + '秒后可重试' : '发送验证码'
+                viewService.loginData.countDownInner ? (viewService.loginData.countDown + '秒后可重试') : '发送验证码'
               }}
             </el-button>
           </div>

@@ -91,7 +91,7 @@ import PhoneNumFormData from "./PhoneNumFormData";
 import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue";
 import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
-import SocialuniLoginDataVO from "socialuni-user-sdk/src/model/SocialuniLoginDataVO";
+import SocialuniLoginDataVO from "../../../../../packages/socialuni-user/socialuni-user-sdk/src/model/SocialuniLoginFormDataVO";
 import SocialuniLoginFormService from "socialuni-user-sdk/src/logic/SocialuniLoginFormService";
 
 @Component({

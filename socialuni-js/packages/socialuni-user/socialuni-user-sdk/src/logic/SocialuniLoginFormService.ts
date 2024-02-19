@@ -1,6 +1,6 @@
 import SocialuniViewService from "socialuni/src/interface/SocialuniViewService";
 import {ComponentInternalInstance, nextTick} from "vue";
-import SocialuniLoginDataVO from "../model/SocialuniLoginDataVO";
+import SocialuniLoginFormDataVO from "../model/SocialuniLoginFormDataVO";
 import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
 
@@ -10,7 +10,7 @@ interface SocialuniLoginViewServiceRefs {
 }
 
 export default class SocialuniLoginFormService extends SocialuniViewService<SocialuniLoginViewServiceRefs> {
-    loginData = new SocialuniLoginDataVO()
+    loginData = new SocialuniLoginFormDataVO()
 
     // 同意协议
     contractChecked = true
