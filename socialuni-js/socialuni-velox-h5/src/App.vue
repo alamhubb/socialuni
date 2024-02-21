@@ -44,7 +44,7 @@
           <div class="mx-1">|</div>
           <div>
             联系邮箱：
-            <a href="mailto:qingchiapp@163.com">qingchiapp@163.com</a>
+            <a href="mailto:alamhubb@163.com">alamhubb@163.com</a>
           </div>
         </div>
       </div>
