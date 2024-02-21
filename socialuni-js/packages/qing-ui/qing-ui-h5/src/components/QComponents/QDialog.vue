@@ -24,7 +24,7 @@
     </template>
 
     <!--  自定义区域    -->
-    <div>
+    <div class="h500">
       <q-scrollbar class="h100p">
         <div>
           <slot></slot>
