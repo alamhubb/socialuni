@@ -12,55 +12,5 @@ interface SocialuniLoginViewServiceRefs {
 }
 
 export default class SocialuniLoginFormServiceUni extends SocialuniLoginFormService {
-    phoneNumInputFocus() {
-        this.phoneNumFocus = true
-        CommonUtil.delayTime(100).then(() => {
-            this.phoneNumFocus = true
-        })
-    }
 
-    phoneNumInputBlur() {
-        this.phoneNumFocus = false
-    }
-
-    authCodeInputFocus() {
-        this.authCodeFocus = true
-        CommonUtil.delayTime(100).then(() => {
-            this.authCodeFocus = true
-        })
-    }
-
-    passwordInputFocus() {
-        this.passwordFocus = true
-        CommonUtil.delayTime(100).then(() => {
-            this.passwordFocus = true
-        })
-    }
-
-    authCodeInputBlur() {
-        this.authCodeFocus = false
-    }
-
-    passwordInputBlur() {
-        this.passwordFocus = false
-    }
-
-    passwordFocus = false
-    authCodeFocus = false
-    phoneNumFocus = false
-
-    phoneNumClear() {
-        this.loginData.passwordClear()
-        this.phoneNumInputFocus()
-    }
-
-    passwordClear() {
-        this.loginData.passwordClear()
-        this.passwordInputFocus()
-    }
-
-    authCodeClear() {
-        this.loginData.authCodeClear()
-        this.authCodeInputFocus()
-    }
 }

@@ -75,13 +75,8 @@ export default class SocialuniLoginFormService extends SocialuniViewService<Soci
 
 
     sendCodeClick() {
-        this.loginData.checkPhoneNum()
-        if (this.loginData.countDownInner) {
-            return QingAppUtil.ToastUtil.error('验证码发送频繁，请等待')
-        }
-
+        this.loginData.checkSendAuthCode()
         this.loginData.authCodeClear()
-        this.$refs.authCode.focus()
 
         // 如果怕太频繁，就显示相同手机号每天只能发送几次，一小时内只能5次
         PhoneAPI.sendAuthCodeAPI(this.loginData.phoneNum).then(() => {

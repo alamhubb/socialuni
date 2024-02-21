@@ -15,7 +15,8 @@
       </div>
 
       <view class="mt-xs h165">
-        <phone-login-form ref="loginForm" v-if="showPhoneLogin" :show="showPhoneLogin" v-model="phoneFormData"></phone-login-form>
+        <phone-login-form :view-service="viewService" ref="loginForm" v-if="showPhoneLogin"
+                          :show="showPhoneLogin"></phone-login-form>
 
         <view class="h120 row-center" v-else>
           <!--          头部-->
@@ -184,8 +185,6 @@ export default class LoginView extends Vue {
   //首先需要携带threeAppId和密钥去后台查询，三方信息，如果不对提示错误。然后也无法向后台授权。
   //如果三方信息错误，上面是显示，申请授权方信息错误，不予授权
 
-  phoneFormData = new PhoneNumFormData()
-
   openTypeBtnEnable = true
 
   get allButtonDisabled() {
@@ -202,8 +201,6 @@ export default class LoginView extends Vue {
   }
 
   initData() {
-    this.phoneFormData = new PhoneNumFormData()
-    console.log(this.phoneFormData)
     //不为微信则默认为验证码方式绑定
     if (this.user) {
       this.showPhoneView = true
@@ -211,7 +208,7 @@ export default class LoginView extends Vue {
   }
 
   get loginButtonDisabled() {
-    return this.phoneFormData && (PhoneNumFormData.phoneNumberError(this.phoneFormData.phoneNum) || PhoneNumFormData.authCodeError(this.phoneFormData.authCode) || this.allButtonDisabled)
+    return this.viewService.loginData.loginDataHasError || this.allButtonDisabled
   }
 
   goBackPage() {
@@ -270,7 +267,7 @@ export default class LoginView extends Vue {
     if (this.openTypeBtnEnable) {
       try {
         this.openTypeBtnEnable = false
-        await PhoneService.bindPhoneNum(this.phoneFormData.phoneNum, this.phoneFormData.authCode)
+        await PhoneService.bindPhoneNum(this.viewService.loginData.phoneNum, this.viewService.loginData.authCode)
         this.loginAfterHint('绑定成功')
       } catch (e) {
         this.goToOAuthPage()
