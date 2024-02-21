@@ -50,11 +50,11 @@ import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 import SocialuniAppUtil from "qingjs/src/util/SocialuniAppUtil";
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
-import QIcon from "socialuni-ui-uni/src/components/QIcon/QIcon.vue";
+import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue";
 import MsgInput from "socialuni-community-view-uni/src/components/MsgInput.vue";
 import TalkItem from "socialuni-community-view-uni/src/components/talkItem/TalkItem.vue";
 import TalkOperate from "socialuni-community-view-uni/src/views/talk/talkOperate.vue";
-import QNavbar from "socialuni-ui-uni/src/components/QNavbar/QNavbar.vue";
+import QNavbar from "qing-ui-uni/src/components/QNavbar/QNavbar.vue";
 
 @Component({
   components: {
