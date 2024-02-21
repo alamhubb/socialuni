@@ -10,6 +10,8 @@
     "vue-facing-decorator": "^3.0.2",
     "socialuni": "^0.1.4-alpha.0",
     "qingjs": "^0.1.4-alpha.0",
+    "qing-ui-h5": "^0.1.4-alpha.0",
+    "qing-util": "^0.1.4-alpha.0",
     "socialuni-music-sdk": "^0.1.4-alpha.0",
     "socialuni-user-sdk": "^0.1.4-alpha.0",
     "vue": "3.2.41"
