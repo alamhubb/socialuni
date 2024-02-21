@@ -22,7 +22,7 @@ export default class SocialuniLoginViewService extends SocialuniLoginFormService
 
     checkContractChecked() {
         if (!this.contractChecked) {
-            return QingAppUtil.ToastUtil.warning('请仔细阅读用户协议、隐私政策等内容后勾选同意')
+            return QingAppUtil.ToastUtil.throwError('请仔细阅读用户协议、隐私政策等内容后勾选同意')
         }
     }
 

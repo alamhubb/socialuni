@@ -50,7 +50,6 @@ export default class SocialuniLoginFormService extends SocialuniViewService<Soci
 
     initService(instance: ComponentInternalInstance, params: any = {}) {
         super.initService(instance, params);
-
     }
 
     phoneNumberOnInput() {
@@ -89,58 +88,5 @@ export default class SocialuniLoginFormService extends SocialuniViewService<Soci
             // 提示验证码发送成功
             QingAppUtil.ToastUtil.success('验证码发送成功')
         })
-    }
-
-
-    phoneNumInputFocus() {
-        this.phoneNumFocus = true
-        CommonUtil.delayTime(100).then(() => {
-            this.phoneNumFocus = true
-        })
-    }
-
-    phoneNumInputBlur() {
-        this.phoneNumFocus = false
-    }
-
-    authCodeInputFocus() {
-        this.authCodeFocus = true
-        CommonUtil.delayTime(100).then(() => {
-            this.authCodeFocus = true
-        })
-    }
-
-    passwordInputFocus() {
-        this.passwordFocus = true
-        CommonUtil.delayTime(100).then(() => {
-            this.passwordFocus = true
-        })
-    }
-
-    authCodeInputBlur() {
-        this.authCodeFocus = false
-    }
-
-    passwordInputBlur() {
-        this.passwordFocus = false
-    }
-
-    passwordFocus = false
-    authCodeFocus = false
-    phoneNumFocus = false
-
-    phoneNumClear() {
-        this.loginData.passwordClear()
-        this.phoneNumInputFocus()
-    }
-
-    passwordClear() {
-        this.loginData.passwordClear()
-        this.passwordInputFocus()
-    }
-
-    authCodeClear() {
-        this.loginData.authCodeClear()
-        this.authCodeInputFocus()
     }
 }

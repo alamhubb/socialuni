@@ -70,19 +70,19 @@ export default class SocialuniLoginFormDataVO {
     checkPhoneNum() {
         // 再次校验
         if (this.phoneNumHasError) {
-            return QingAppUtil.ToastUtil.error('请输入正确的手机号')
+            return QingAppUtil.ToastUtil.throwError('请输入正确的手机号')
         }
     }
 
     checkPassword() {
         if (this.passwordHasError) {
-            return QingAppUtil.ToastUtil.error(this.passwordHasError)
+            return QingAppUtil.ToastUtil.throwError(this.passwordHasError)
         }
     }
 
     checkAuthCode() {
         if (!this.phoneNumRegistered && this.authCodeHasError) {
-            return QingAppUtil.ToastUtil.error('请输入正确的验证码')
+            return QingAppUtil.ToastUtil.throwError('请输入正确的验证码')
         }
     }
 
