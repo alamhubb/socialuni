@@ -72,7 +72,7 @@ import 'golden-layout/dist/css/goldenlayout-base.css';
 import 'golden-layout/dist/css/themes/goldenlayout-light-theme.css';
 import {FolderOpened, UploadFilled} from "@element-plus/icons-vue";
 import CommonUtil from "qing-util/src/util/CommonUtil.ts";
-import SocialuniDeployAPI from "@/views/chat/SocialuniDeployAPI.ts";
+import SocialuniDeployAPI from "@/views/deploy/SocialuniDeployAPI.ts";
 import QUpload from "qing-ui-h5/src/components/QComponents/QUpload/QUpload.vue";
 import QRow from "qing-ui-h5/src/components/QComponents/QRow.vue";
 
