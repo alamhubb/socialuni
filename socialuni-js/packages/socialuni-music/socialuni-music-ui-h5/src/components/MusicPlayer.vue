@@ -54,7 +54,6 @@
                :class="[musicPlaying ? 'mdi-pause' :'mdi-play']"></i>
             <i title="下一曲" @click="next(1)" class="mdi mdi-skip-next font-30 color-content use-click"></i>
           </div>
-
           <div v-else class="row-col-center">
             <i @click="mutedMusic" style="font-size: 40px; color: #cc7013;"
                class="mdi"
@@ -71,7 +70,7 @@
         </div>
       </div>
       <div class="w20p flex-none row-col-center">
-        <i class="mdi mdi-playlist-play color-content font-20 use-click"></i>
+        <i class="mdi mdi-playlist-play color-content font-20 use-click" @click="openMusicList"></i>
 
         <i class="ml-sm mdi flex-none font-20 use-click"
            :class="[computedMusicMuted ? 'mdi-volume-mute' :'mdi-volume-medium']"
@@ -459,6 +458,10 @@ export default class MusicPlayer extends Vue {
   @Emit()
   change(playingInfo: MusicPlayerSongPlayingInfoRO): MusicPlayerSongPlayingInfoRO {
     return playingInfo
+  }
+
+  openMusicList(){
+
   }
 
 }

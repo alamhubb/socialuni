@@ -8,7 +8,7 @@ import {Component, Vue, Watch} from 'vue-facing-decorator';
 import SocialuniChatViewH5 from "socialuni-im-view-h5/src/views/SocialuniChatViewH5.vue"
 import SocialuniMsgViewH5 from "socialuni-im-view-h5/src/views/SocialuniMsgViewH5.vue"
 import musicRequest from "@/plugins/musicRequest";
-import MusicPlayer from "@/components/MusicPlayer.vue";
+import MusicPlayer from "../../../../packages/socialuni-music/socialuni-music-ui-h5/src/components/MusicPlayer.vue";
 import MusicPlayerSongPlayingInfoRO from "socialuni-music-sdk/src/model/MusicPlayerSongPlayingInfoRO.ts";
 import socialuniMusicStore from "socialuni-music-sdk/src/store/SocialuniMusicStore.ts";
 import SocialuniMusicRoleId from "socialuni-music-sdk/src/constant/SocialuniMusicRoleId.ts";
