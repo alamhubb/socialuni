@@ -2,43 +2,9 @@
   <div class="w100p bg-white">
     <audio ref="audioPlayer" :src="modelValue?.musicUrl"></audio>
 
-    <!--    <div class="flex-1 overflow-hidden">
-    &lt;!&ndash;
-          音量：{{ socialuniMusicStore.musicVolume }}
-          <div>
-            realPlayingValue：{{ realPlayingValue }}
-          </div>
-          <div>
-            {{ modelValue }}
-          </div>
-    &ndash;&gt;
-
-          <el-table height="100%" :data="data" stripe highlight-current-row
-                    @row-dblclick="handleCurrentChange">
-            <el-table-column prop="title" label="音乐标题" width="100" show-overflow-tooltip></el-table-column>
-            <el-table-column label="歌手" show-overflow-tooltip>
-              <template #default="scope">
-                {{ scope.row.author.join(' / ') }}
-              </template>
-            </el-table-column>
-            <el-table-column label="歌手专辑" show-overflow-tooltip>
-              <template #default="scope">
-                {{ scope.row.album }}
-              </template>
-            </el-table-column>
-            <el-table-column label="时长" width="100">
-              <template #default="scope">
-                {{ $DateUtil.convertToTime(scope.row.musicTime) }}
-              </template>
-            </el-table-column>
-          </el-table>
-
-        </div>-->
-
     <div class="row-between-center flex-none px">
       <div class="w20p flex-none">
         <div v-if="curMusicInfo">
-<!--          <img class="size50  bd-round" :class="{'rotate-animation':musicPlaying}" :src="curMusicInfo.albumImg">-->
           <img class="size50  bd-round" :src="curMusicInfo.albumImg">
           {{ curMusicInfo.title }}--{{ curMusicInfo.author.join(' / ') }}
         </div>
@@ -81,6 +47,10 @@
                    :show-tooltip="false"></el-slider>
       </div>
     </div>
+
+    <q-dialog ref="musicListDialog" title="我的音乐">
+
+    </q-dialog>
   </div>
 </template>
 
@@ -95,13 +65,15 @@ import MusicPlayerSongInfoRO from "socialuni-music-sdk/src/model/MusicPlayerSong
 import MusicPlayerSongPlayingInfoRO from "socialuni-music-sdk/src/model/MusicPlayerSongPlayingInfoRO.ts";
 import ToastUtil from "qingjs-h5/src/util/ToastUtil.ts";
 import DateUtil from "qing-util/src/util/DateUtil.ts";
+import QDialog from "qing-ui-h5/src/components/QComponents/QDialog.vue";
 
 @Component({
-  components: {}
+  components: {QDialog}
 })
 export default class MusicPlayer extends Vue {
   $refs: {
     audioPlayer: HTMLAudioElement
+    musicListDialog: QDialog
   }
   @Model('modelValue') modelValue: MusicPlayerSongPlayingInfoRO
   @Prop() data: MusicPlayerSongInfoRO []
@@ -461,7 +433,7 @@ export default class MusicPlayer extends Vue {
   }
 
   openMusicList(){
-
+   this.$refs.musicListDialog.open()
   }
 
 }

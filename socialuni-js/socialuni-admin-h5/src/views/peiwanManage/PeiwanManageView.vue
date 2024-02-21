@@ -115,7 +115,7 @@
 <script lang="ts">
 import {Component, Vue} from 'vue-facing-decorator'
 import PeiwanRO from "socialuni-admin-api/src/model/peiwan/PeiwanRO";
-import SDialog from "qing-ui-h5/src/components/QComponents/QDialog.vue";
+import QDialog from "qing-ui-h5/src/components/QComponents/QDialog.vue";
 import SLabelItem from "qing-ui-h5/src/components/QComponents/QLabelItem.vue";
 import STable from "qing-ui-h5/src/components/QComponents/QTable.vue";
 import STableColumn from "qing-ui-h5/src/components/QComponents/QTableColumn/STableColumn.vue";
