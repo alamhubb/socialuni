@@ -41,7 +41,7 @@ export default class MusicView extends Vue {
     const songList: MusicPlayerSongInfoRO[] = data.playlist.tracks.map((row: any) => {
       const songRO: MusicPlayerSongInfoRO = {
         songId: row.id,
-        title: row.name,
+        name: row.name,
         author: row.ar?.map(item => item.name),
         album: row.al.name,
         albumImg: row.al.picUrl,

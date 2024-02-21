@@ -1,6 +1,6 @@
 export default class MusicPlayerSongInfoRO {
     songId: number = null
-    title: string = null
+    name: string = null
     albumImg: string = null
     author: string[] = null
     album: string = null
@@ -11,7 +11,7 @@ export default class MusicPlayerSongInfoRO {
     constructor(musicPlayerSongInfoRO?: MusicPlayerSongInfoRO) {
         if (musicPlayerSongInfoRO) {
             this.songId = musicPlayerSongInfoRO.songId;
-            this.title = musicPlayerSongInfoRO.title;
+            this.name = musicPlayerSongInfoRO.name;
             this.author = musicPlayerSongInfoRO.author;
             this.album = musicPlayerSongInfoRO.album;
             this.musicTime = musicPlayerSongInfoRO.musicTime;

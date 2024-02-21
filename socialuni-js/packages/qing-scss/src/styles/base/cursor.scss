@@ -23,9 +23,9 @@
   cursor: default;
 }
 
-.select-none {
-  /*禁止选中变蓝*/
-  user-select: none;
+.cursor-none {
+  /*悬浮时变手指*/
+  cursor: none;
 }
 
 .cursor-not-allowed {
@@ -43,3 +43,7 @@
   cursor: e-resize;
 }
 
+.select-none {
+  /*禁止选中变蓝*/
+  user-select: none;
+}

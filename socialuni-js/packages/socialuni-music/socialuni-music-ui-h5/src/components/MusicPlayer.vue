@@ -6,7 +6,7 @@
       <div class="w20p flex-none">
         <div v-if="curMusicInfo">
           <img class="size50  bd-round" :src="curMusicInfo.albumImg">
-          {{ curMusicInfo.title }}--{{ curMusicInfo.author.join(' / ') }}
+          {{ curMusicInfo.name }}--{{ curMusicInfo.author.join(' / ') }}
         </div>
       </div>
       <div class="w40p flex-none">
@@ -49,7 +49,7 @@
     </div>
 
     <q-dialog ref="musicListDialog" title="我的音乐">
-      <music-list></music-list>
+      <music-list :data="data"></music-list>
     </q-dialog>
   </div>
 </template>
@@ -402,7 +402,7 @@ export default class MusicPlayer extends Vue {
 
   next(num: number) {
     this.checkRoleId()
-    console.log(this.modelValue.title)
+    console.log(this.modelValue.name)
     const index = this.data.findIndex(item => `https://music.163.com/song/media/outer/url?id=${item.songId}.mp3` === this.modelValue.musicUrl)
     const nextIndex = index + num
     if (!this.data.length) {
