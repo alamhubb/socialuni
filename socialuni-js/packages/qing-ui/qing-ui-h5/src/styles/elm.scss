@@ -15,3 +15,16 @@
 .el-textarea__inner {
   box-shadow: none;
 }
+
+.el-dialog__header {
+  padding: 10px;
+}
+
+.el-dialog__header > .el-dialog__title {
+  font-size: 16px;
+}
+
+.el-dialog__headerbtn{
+  height: 32px;
+  width: 32px;
+}

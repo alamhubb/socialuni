@@ -49,7 +49,7 @@
     </div>
 
     <q-dialog ref="musicListDialog" title="我的音乐">
-
+      <music-list></music-list>
     </q-dialog>
   </div>
 </template>
@@ -66,9 +66,10 @@ import MusicPlayerSongPlayingInfoRO from "socialuni-music-sdk/src/model/MusicPla
 import ToastUtil from "qingjs-h5/src/util/ToastUtil.ts";
 import DateUtil from "qing-util/src/util/DateUtil.ts";
 import QDialog from "qing-ui-h5/src/components/QComponents/QDialog.vue";
+import MusicList from "./MusicList.vue";
 
 @Component({
-  components: {QDialog}
+  components: {MusicList, QDialog}
 })
 export default class MusicPlayer extends Vue {
   $refs: {
@@ -432,8 +433,8 @@ export default class MusicPlayer extends Vue {
     return playingInfo
   }
 
-  openMusicList(){
-   this.$refs.musicListDialog.open()
+  openMusicList() {
+    this.$refs.musicListDialog.open()
   }
 
 }
