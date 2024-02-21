@@ -15,7 +15,7 @@
 
 
 
-          <!--            <div class="mx-1">|</div>
+          <!--            <div class="mx-xs">|</div>
                       <div>公众号：<a
                           href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI3NTE5NzE3NA==&scene=124#wechat_redirect"
                           target="_blank">qingchicn</a></div>-->
@@ -25,7 +25,7 @@
                         客服微博：
                         <a href="https://weibo.com/u/2724054747" target="_blank">清池恋爱交友app</a>
                       </div>
-                      <div class="mx-1">|</div>-->
+                      <div class="mx-xs">|</div>-->
           <div>
             客服微信：
             <a target="_blank"
@@ -33,7 +33,7 @@
               alamhubb
             </a>
           </div>
-          <div class="mx-1">|</div>
+          <div class="mx-xs">|</div>
           <div>
             客服QQ：
             <a target="_blank"
@@ -41,7 +41,7 @@
               491369310
             </a>
           </div>
-          <div class="mx-1">|</div>
+          <div class="mx-xs">|</div>
           <div>
             联系邮箱：
             <a href="mailto:alamhubb@163.com">alamhubb@163.com</a>

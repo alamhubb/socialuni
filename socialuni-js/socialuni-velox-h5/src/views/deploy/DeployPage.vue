@@ -75,6 +75,11 @@ import CommonUtil from "qing-util/src/util/CommonUtil.ts";
 import SocialuniDeployAPI from "@/views/deploy/SocialuniDeployAPI.ts";
 import QUpload from "qing-ui-h5/src/components/QComponents/QUpload/QUpload.vue";
 import QRow from "qing-ui-h5/src/components/QComponents/QRow.vue";
+import PinyinUtil from "@/util/PinyinUtil.ts";
+import RegConst from "qing-util/src/constant/RegConst.ts";
+import AlertUtil from "qingjs-h5/src/util/AlertUtil.ts";
+import ToastUtil from "qingjs-h5/src/util/ToastUtil.ts";
+import WindowUtil from "@/util/WindowUtil.ts";
 
 @Component({
   components: {
