@@ -1,19 +1,20 @@
 <template>
-  <div v-if="value">
+  <div>
     <!--      手机号登录form-->
     <view class="row-col-center">
       <view>手机号</view>
       <div class="flex-row flex-1 ml-smm solid-bottom">
         <!--   自动获取焦点的话app平台会有问题，打开我的页面时会弹出键盘   :focus="true"-->
-        <input class="flex-1 h35px" type="number" name="input" :focus="loginData.phoneNumFocus" :maxlength="11"
-               v-model.trim="loginData.phoneNum"
-               @confirm="loginData.authCodeInputFocus()"
-               @blur="loginData.phoneNumInputBlur()" @focus="loginData.phoneNumInputFocus()"
+        <input class="flex-1 h35px" type="number" name="input" :focus="phoneNumFocus"
+               :maxlength="11"
+               v-model.trim="viewService.loginData.phoneNum"
+               @confirm="passwordInputFocus()"
+               @blur="phoneNumInputBlur()" @focus="phoneNumInputFocus()"
                @input="input"
                :confirm-hold="true"
                placeholder="请填写手机号"
         />
-        <q-icon v-if="loginData.phoneNum" class="text-gray" icon="close-circle" size="20"
+        <q-icon v-if="viewService.loginData.phoneNum" class="text-gray" icon="close-circle" size="20"
                 @click="phoneNumClear"></q-icon>
       </div>
 
@@ -27,7 +28,7 @@
       </view>
     </view>
     <view class="h30 row-col-center">
-      <text v-if="loginData.phoneNumHasError" class="color-red">
+      <text v-if="viewService.loginData.phoneNumHasError" class="color-red">
         *请输入正确的手机号
       </text>
     </view>
@@ -36,20 +37,21 @@
       <view>密码</view>
       <div class="flex-row ml-smm solid-bottom flex-1 pl-smm">
         <!--   自动获取焦点的话app平台会有问题，打开我的页面时会弹出键盘   :focus="true"-->
-        <input class="flex-1 h35px" type="password" name="input" :focus="loginData.passwordFocus" :maxlength="20"
-               v-model.trim="loginData.password"
-               @focus="loginData.passwordInputFocus()"
-               @blur="loginData.passwordInputBlur()"
+        <input class="flex-1 h35px" type="password" name="input" :focus="passwordFocus"
+               :maxlength="20"
+               v-model.trim="viewService.loginData.password"
+               @focus="passwordInputFocus()"
+               @blur="passwordInputBlur()"
                @input="input"
                placeholder="请填写密码"
         />
-        <q-icon v-if="loginData.password" class="text-gray" icon="close-circle" size="20"
+        <q-icon v-if="viewService.loginData.password" class="text-gray" icon="close-circle" size="20"
                 @click="passwordClear"></q-icon>
       </div>
     </view>
     <view class="h30 row-col-center">
-      <text v-if="loginData.passwordHasError" class="color-red">
-        *请输入正确的密码
+      <text v-if="!viewService.loginData.phoneNumHasError && viewService.loginData.passwordHasError" class="color-red">
+        *{{ viewService.loginData.passwordHasError }}
       </text>
     </view>
 
@@ -58,27 +60,28 @@
 
       <div class="flex-row ml-smm solid-bottom flex-1">
         <!--   自动获取焦点的话app平台会有问题，打开我的页面时会弹出键盘   :focus="true"-->
-        <input class="flex-1 h35px" type="number" name="input" :focus="loginData.authCodeFocus" :maxlength="4"
-               v-model.trim="loginData.authCode"
-               @focus="loginData.authCodeInputFocus()"
-               @blur="loginData.authCodeInputBlur()"
+        <input class="flex-1 h35px" type="number" name="input" :focus="authCodeFocus"
+               :maxlength="4"
+               v-model.trim="viewService.loginData.authCode"
+               @focus="authCodeInputFocus()"
+               @blur="authCodeInputBlur()"
                @input="input"
                placeholder="请填写验证码"
         />
-        <q-icon v-if="loginData.authCode" class="text-gray" icon="close-circle" size="20"
+        <q-icon v-if="viewService.loginData.authCode" class="text-gray" icon="close-circle" size="20"
                 @click="authCodeClear"></q-icon>
         <!--                <q-icon v-if="phoneNum" class="text-gray mr-lg" name="close-circle" size="40"
                                 @touchend.native.prevent="phoneNumClear"></q-icon>-->
       </div>
 
       <view @click="sendCodeClick" class="ml-smm">
-        <button type="primary" class='cu-btn bg-green' :disabled="loginData.sendAuthCodeBtnDisabled">
-          {{ !loginData.countDown ? loginData.countDown : '发送验证码' }}
+        <button type="primary" class='cu-btn bg-green' :disabled="viewService.loginData.sendAuthCodeBtnDisabled">
+          {{ viewService.loginData.countDownInner ? viewService.loginData.countDown : '发送验证码' }}
         </button>
       </view>
     </view>
     <view class="h30 row-col-center">
-      <text v-if="loginData.authCodeHasError" class="color-red">
+      <text v-if="viewService.loginData.authCodeHasError" class="color-red">
         *请输入正确的验证码
       </text>
     </view>
@@ -89,9 +92,8 @@
 import {Component, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator'
 import PhoneNumFormData from "./PhoneNumFormData";
 import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue";
-import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
-import SocialuniLoginDataVO from "socialuni-user-sdk/src/model/SocialuniLoginDataVO";
+import SocialuniLoginFormService from "socialuni-user-sdk/src/logic/SocialuniLoginFormService";
+import CommonUtil from "qing-util/src/util/CommonUtil";
 
 @Component({
   components: {QIcon}
@@ -100,53 +102,84 @@ export default class PhoneLoginForm extends Vue {
   @Prop() show: boolean
   @Model('modelValue') readonly value!: PhoneNumFormData
 
-  loginData = new SocialuniLoginDataVO()
+  @Prop() viewService: SocialuniLoginFormService
 
   @Emit('update:modelValue')
   input() {
-    return this.loginData
+    return this.viewService.loginData
   }
 
-  created() {
-    this.loginData = new SocialuniLoginDataVO(this.value.phoneNum)
-  }
 
   @Watch('show')
   showPhoneViewWatch() {
     if (this.show) {
-      this.loginData.phoneNumInputFocus()
+      this.phoneNumInputFocus()
     } else {
-      this.loginData.phoneNumInputBlur()
-      this.loginData.authCodeInputBlur()
+      this.phoneNumInputBlur()
+      this.authCodeInputBlur()
     }
   }
 
+  phoneNumInputBlur() {
+    this.phoneNumFocus = false
+  }
+
+
+  authCodeInputBlur() {
+    this.authCodeFocus = false
+  }
+
+  passwordInputBlur() {
+    this.passwordFocus = false
+  }
+
+  passwordFocus = false
+  authCodeFocus = false
+  phoneNumFocus = false
+
+
   phoneNumClear() {
-    this.loginData.phoneNumClear()
+    this.viewService.loginData.phoneNumClear()
+    this.phoneNumInputFocus()
     this.input()
   }
 
   passwordClear() {
-    this.loginData.passwordClear()
+    this.viewService.loginData.passwordClear()
+    this.passwordInputFocus()
     this.input()
   }
 
   authCodeClear() {
-    this.loginData.authCodeClear()
+    this.viewService.loginData.authCodeClear()
+    this.authCodeInputFocus()
     this.input()
   }
 
 
   sendCodeClick() {
-    this.loginData.sendAuthCodeCheck()
+    this.viewService.sendCodeClick()
+    this.authCodeClear()
+  }
 
-    this.loginData.authCodeClear()
+  phoneNumInputFocus() {
+    this.phoneNumFocus = true
+    CommonUtil.delayTime(100).then(() => {
+      this.phoneNumFocus = true
+    })
+  }
 
-    this.loginData.computedCountDown()
-    // 如果怕太频繁，就显示相同手机号每天只能发送几次，一小时内只能5次
-    PhoneAPI.sendAuthCodeAPI(this.loginData.phoneNum).then(() => {
-      // 提示验证码发送成功
-      QingAppUtil.ToastUtil.success('验证码发送成功')
+  authCodeInputFocus() {
+    this.authCodeFocus = true
+    CommonUtil.delayTime(100).then(() => {
+      this.authCodeFocus = true
+    })
+  }
+
+  passwordInputFocus() {
+    this.passwordFocus = true
+    CommonUtil.delayTime(100).then(() => {
+      this.passwordFocus = true
     })
   }
 }

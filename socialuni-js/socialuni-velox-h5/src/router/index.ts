@@ -1,13 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
-import MessageView from "@/views/chat/MessageView.vue";
-// import MessageView from "@/views/chat/MessageView.tsx";
+import DeployPage from '@/views/deploy/DeployPage.vue'
 
 export const constantRoutes = [
   {
     path: '/',
-    name: 'message',
-    component: MessageView,
+    name: 'deploy',
+    component: DeployPage,
     meta: {title: '消息', hidden: true},
   },
   {
@@ -31,8 +30,12 @@ export const constantRoutes = [
   { path: '/:pathMatch(.*)', redirect: '/404', hidden: true }
 ]
 
+const baseUrl = import.meta.env.BASE_URL
+
+console.log(baseUrl)
+
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(baseUrl),
   routes: constantRoutes
 })
 

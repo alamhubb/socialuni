@@ -15,7 +15,8 @@
       </div>
 
       <view class="mt-xs h165">
-        <phone-login-form ref="loginForm" v-if="showPhoneLogin" :show="showPhoneLogin" v-model="phoneFormData"></phone-login-form>
+        <phone-login-form :view-service="viewService" ref="loginForm" v-if="showPhoneLogin"
+                          :show="showPhoneLogin"></phone-login-form>
 
         <view class="h120 row-center" v-else>
           <!--          头部-->
@@ -139,6 +140,7 @@ import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import PhoneService from "socialuni-user-sdk/src/logic/PhoneService";
 import SocialuniUserPrivacyAgreeService from "socialuni-user-sdk/src/logic/SocialuniUserPrivacyAgreeService";
+import SocialuniLoginViewService from "socialuni-user-sdk/src/logic/SocialuniLoginViewService";
 
 @Component({
   components: {
@@ -154,7 +156,7 @@ export default class LoginView extends Vue {
     loginForm: PhoneLoginForm
   }
 
-  viewService = new SocialuniUserPrivacyAgreeService()
+  viewService = new SocialuniLoginViewService()
 
   get showProviderLogin() {
     return !this.user && socialuniSystemModule.isMp
@@ -183,8 +185,6 @@ export default class LoginView extends Vue {
   //首先需要携带threeAppId和密钥去后台查询，三方信息，如果不对提示错误。然后也无法向后台授权。
   //如果三方信息错误，上面是显示，申请授权方信息错误，不予授权
 
-  phoneFormData = new PhoneNumFormData()
-
   openTypeBtnEnable = true
 
   get allButtonDisabled() {
@@ -201,8 +201,6 @@ export default class LoginView extends Vue {
   }
 
   initData() {
-    this.phoneFormData = new PhoneNumFormData()
-    console.log(this.phoneFormData)
     //不为微信则默认为验证码方式绑定
     if (this.user) {
       this.showPhoneView = true
@@ -210,7 +208,7 @@ export default class LoginView extends Vue {
   }
 
   get loginButtonDisabled() {
-    return this.phoneFormData && (PhoneNumFormData.phoneNumberError(this.phoneFormData.phoneNum) || PhoneNumFormData.authCodeError(this.phoneFormData.authCode) || this.allButtonDisabled)
+    return this.viewService.loginData.loginDataHasError || this.allButtonDisabled
   }
 
   goBackPage() {
@@ -236,7 +234,6 @@ export default class LoginView extends Vue {
     if (!this.allButtonDisabled) {
       try {
         this.openTypeBtnEnable = false
-        this.openTypeBtnEnable = false
         //一行代码就可以获取登录所需要的信息, 还可以配合后台使用，一键登录，记住用户
         await LoginService.providerLogin(socialuniSystemModule.mpPlatform, result)
         this.loginAfterHint('登录成功')
@@ -248,22 +245,11 @@ export default class LoginView extends Vue {
   }
 
   async phoneLogin() {
-    if (!this.loginButtonDisabled) {
-      try {
-        this.openTypeBtnEnable = false
-        this.resetAuthCodeCountDown()
-        await LoginService.phoneLogin(this.phoneFormData.phoneNum, this.phoneFormData.authCode)
-        this.loginAfterHint('登录成功')
-      } finally {
-        this.openTypeBtnEnable = true
-        this.goToOAuthPage()
-      }
-    }
-
+    await this.viewService.handleLogin()
   }
 
   resetAuthCodeCountDown() {
-    this.$refs.loginForm?.resetAuthCodeCountDown()
+    // this.$refs.loginForm?.resetAuthCodeCountDown()
   }
 
   goToOAuthPage() {
@@ -281,7 +267,7 @@ export default class LoginView extends Vue {
     if (this.openTypeBtnEnable) {
       try {
         this.openTypeBtnEnable = false
-        await PhoneService.bindPhoneNum(this.phoneFormData.phoneNum, this.phoneFormData.authCode)
+        await PhoneService.bindPhoneNum(this.viewService.loginData.phoneNum, this.viewService.loginData.authCode)
         this.loginAfterHint('绑定成功')
       } catch (e) {
         this.goToOAuthPage()

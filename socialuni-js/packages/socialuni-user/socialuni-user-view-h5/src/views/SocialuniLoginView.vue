@@ -3,7 +3,7 @@
     <div class="w300">
       <el-form
           ref="loginForm"
-          :model="viewService.loginUser"
+          :model="viewService.loginData"
           :rules="viewService.loginRules"
           auto-complete="on"
           label-position="top"
@@ -12,7 +12,7 @@
           <div class="flex-row w100p">
             <el-input
                 class="flex-1"
-                v-model="viewService.loginUser.phoneNum"
+                v-model="viewService.loginData.phoneNum"
                 placeholder="请输入手机号"
                 type="text"
                 :maxlength="11"
@@ -31,7 +31,7 @@
                 ref="password"
                 class="flex-1"
                 show-password
-                v-model="viewService.loginUser.password"
+                v-model="viewService.loginData.password"
                 placeholder="请输入密码"
                 type="password"
                 :maxlength="16"
@@ -51,11 +51,11 @@
             />
           </div>
         </el-form-item>-->
-        <el-form-item v-if="!viewService.hasPassword" label="验证码" prop="authCode" label-width="70px">
+        <el-form-item v-if="!viewService.loginData.phoneNumRegistered" label="验证码" prop="authCode" label-width="70px">
           <div class="flex-row w100p">
             <el-input
                 ref="authCode"
-                v-model="viewService.loginUser.authCode"
+                v-model="viewService.loginData.authCode"
                 class="flex-1"
                 type="text"
                 placeholder="请输入验证码"
@@ -67,11 +67,11 @@
                 class="flex-none ml w130"
                 plain
                 type="primary"
-                :disabled="viewService.sendAuthCodeBtnDisabled"
+                :disabled="viewService.loginData.sendAuthCodeBtnDisabled"
                 @click="viewService.sendCodeClick()"
             >
               {{
-                viewService.countDown ? (viewService.authCodeInterval + 1 - viewService.countDown) + '秒后可重试' : '发送验证码'
+                viewService.loginData.countDownInner ? (viewService.loginData.countDown + '秒后可重试') : '发送验证码'
               }}
             </el-button>
           </div>

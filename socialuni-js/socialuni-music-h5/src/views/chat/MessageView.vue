@@ -58,8 +58,8 @@ import MusicView from "@/views/chat/MusicView.vue";
 import SocialuniChatViewH5 from "socialuni-im-view-h5/src/views/SocialuniChatViewH5.vue";
 import SocialuniMsgViewH5 from "socialuni-im-view-h5/src/views/SocialuniMsgViewH5.vue";
 import VueDragResize from "vue-drag-resize3/src/components/VueDragResize.vue";
-import MusicPlayer from "@/components/MusicPlayer.vue";
 import VueInteract from "@/components/vue-interact/VueInteract.vue";
+import MusicPlayer from "socialuni-music-ui-h5/src/components/MusicPlayer.vue";
 
 @Component({
   components: {

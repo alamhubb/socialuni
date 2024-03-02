@@ -12,7 +12,7 @@
   <!-- v-bind="$attrs"  将外部参数绑定到指定内部组件，详见： https://cn.vuejs.org/v2/api/#vm-attrs-->
   <!-- v-on="$listeners"  将外部事件绑定到指定内部组件，详见： https://cn.vuejs.org/v2/api/#vm-listeners-->
   <el-dialog
-          class="pd-0"
+      class="pd-0"
       v-bind="$attrs"
       v-model="dialogVisible"
       append-to-body
@@ -24,7 +24,7 @@
     </template>
 
     <!--  自定义区域    -->
-    <div>
+    <div class="h500">
       <q-scrollbar class="h100p">
         <div>
           <slot></slot>
