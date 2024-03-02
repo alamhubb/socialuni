@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-facing-decorator';
-import SNavBar from "socialuni-user-view-h5/src/components/SNavBar.vue";
+import SNavBar from "socialuni-user-view-h5/src/components/SUserNavBar.vue";
 
 @Component({
   components: {SNavBar}

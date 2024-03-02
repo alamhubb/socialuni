@@ -1,8 +1,8 @@
 import "./styles/index.scss";
 
-const SocialuniAppViewUni = {
+const SocialuniAppViewH5 = {
     install() {
     }
 }
 
-export default SocialuniAppViewUni
+export default SocialuniAppViewH5
