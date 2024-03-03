@@ -1,12 +1,12 @@
 {
   "name": "socialuni-api",
-  "version": "0.1.4-alpha.0",
+  "version": "0.1.8",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "socialuni": "^0.1.4-alpha.0"
+    "socialuni": "^0.1.8"
   },
   "devDependencies": {
     "typescript": "^4.7.4",
@@ -14,5 +14,5 @@
   },
   "author": "",
   "license": "ISC",
-  "gitHead": "f43d39640cf571ff728e602fdd76e3046c4e58ed"
+  "gitHead": "dcc7c42d0aead1acd9e5c38ae368cec680af72e6"
 }

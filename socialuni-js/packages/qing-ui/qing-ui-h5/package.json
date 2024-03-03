@@ -1,22 +1,22 @@
 {
   "name": "qing-ui-h5",
-  "version": "0.1.4-alpha.0",
+  "version": "0.1.8",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.1.0",
+    "axios": "^1.6.7",
     "cos-js-sdk-v5": "^1.2.18",
     "element-plus": "^2.3.7",
-    "socialuni-app-api": "^0.1.4-alpha.0",
-    "socialuni-app-sdk": "^0.1.4-alpha.0",
-    "socialuni-constant": "^0.1.4-alpha.0",
-    "qingjs": "^0.1.4-alpha.0",
-    "qing-scss": "^0.1.4-alpha.0",
-    "qing-util": "^0.1.4-alpha.0",
-    "vue-facing-decorator": "^3.0.2",
-    "axios": "^1.6.7"
+    "qing-scss": "^0.1.8",
+    "qing-util": "^0.1.8",
+    "qingjs": "^0.1.8",
+    "socialuni-app-api": "^0.1.8",
+    "socialuni-app-sdk": "^0.1.8",
+    "socialuni-constant": "^0.1.8",
+    "vue-facing-decorator": "^3.0.2"
   },
   "devDependencies": {
     "typescript": "^4.7.4",
@@ -24,5 +24,5 @@
   },
   "author": "",
   "license": "ISC",
-  "gitHead": "f43d39640cf571ff728e602fdd76e3046c4e58ed"
+  "gitHead": "dcc7c42d0aead1acd9e5c38ae368cec680af72e6"
 }

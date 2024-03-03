@@ -1,6 +1,6 @@
 {
   "name": "socialuni-user-view-uni",
-  "version": "0.1.4-alpha.0",
+  "version": "0.1.8",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,19 +9,19 @@
     "@dcloudio/types": "^3.0.17",
     "@dcloudio/uni-ui": "^1.4.23",
     "cos-js-sdk-v5": "^1.2.18",
-    "socialuni": "^0.1.4-alpha.0",
-    "socialuni-api-base": "^0.1.4-alpha.0",
-    "socialuni-app-api": "^0.1.4-alpha.0",
-    "socialuni-app-sdk": "^0.1.4-alpha.0",
-    "socialuni-app-view-uni": "^0.1.4-alpha.0",
-    "socialuni-community-api": "^0.1.4-alpha.0",
-    "socialuni-constant": "^0.1.4-alpha.0",
-    "qingjs-uni": "^0.1.4-alpha.0",
-    "qingjs": "^0.1.4-alpha.0",
-    "qing-ui-uni": "^0.1.4-alpha.0",
-    "socialuni-user-api": "^0.1.4-alpha.0",
-    "socialuni-user-sdk": "^0.1.4-alpha.0",
-    "qing-util": "^0.1.4-alpha.0"
+    "qing-ui-uni": "^0.1.8",
+    "qing-util": "^0.1.8",
+    "qingjs": "^0.1.8",
+    "qingjs-uni": "^0.1.8",
+    "socialuni": "^0.1.8",
+    "socialuni-api-base": "^0.1.8",
+    "socialuni-app-api": "^0.1.8",
+    "socialuni-app-sdk": "^0.1.8",
+    "socialuni-app-view-uni": "^0.1.8",
+    "socialuni-community-api": "^0.1.8",
+    "socialuni-constant": "^0.1.8",
+    "socialuni-user-api": "^0.1.8",
+    "socialuni-user-sdk": "^0.1.8"
   },
   "devDependencies": {
     "typescript": "^4.7.4",
@@ -29,5 +29,5 @@
   },
   "author": "",
   "license": "ISC",
-  "gitHead": "f43d39640cf571ff728e602fdd76e3046c4e58ed"
+  "gitHead": "dcc7c42d0aead1acd9e5c38ae368cec680af72e6"
 }

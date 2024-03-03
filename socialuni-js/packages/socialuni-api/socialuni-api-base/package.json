@@ -1,6 +1,6 @@
 {
   "name": "socialuni-api-base",
-  "version": "0.1.4-alpha.0",
+  "version": "0.1.8",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -8,10 +8,10 @@
   "dependencies": {
     "axios": "^1.6.7",
     "mitt": "^3.0.0",
-    "socialuni": "^0.1.4-alpha.0",
-    "socialuni-constant": "^0.1.4-alpha.0",
-    "qingjs": "^0.1.4-alpha.0",
-    "qing-util": "^0.1.4-alpha.0",
+    "qing-util": "^0.1.8",
+    "qingjs": "^0.1.8",
+    "socialuni": "^0.1.8",
+    "socialuni-constant": "^0.1.8",
     "vue": "^3.3.2"
   },
   "devDependencies": {
@@ -19,5 +19,5 @@
   },
   "author": "",
   "license": "ISC",
-  "gitHead": "f43d39640cf571ff728e602fdd76e3046c4e58ed"
+  "gitHead": "dcc7c42d0aead1acd9e5c38ae368cec680af72e6"
 }

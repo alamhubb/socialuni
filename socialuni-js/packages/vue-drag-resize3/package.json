@@ -1,6 +1,6 @@
 {
   "name": "vue-drag-resize3",
-  "version": "0.1.4-alpha.0",
+  "version": "0.1.8",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -13,5 +13,5 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "gitHead": "f43d39640cf571ff728e602fdd76e3046c4e58ed"
+  "gitHead": "dcc7c42d0aead1acd9e5c38ae368cec680af72e6"
 }

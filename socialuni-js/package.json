@@ -8,5 +8,6 @@
   },
   "devDependencies": {
     "lerna": "^7.1.1"
-  }
+  },
+  "repository": "https://github.com/alamhubb/socialuni/socialuni-js"
 }
