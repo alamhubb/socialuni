@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.model.RO.match;
 
 import com.socialuni.social.sdk.dao.utils.content.SocialuniUserImgDOUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.sdk.model.RO.UserImgVO;
+import com.socialuni.social.user.sdk.model.UserImgVO;
 import com.socialuni.social.community.sdk.model.SocialDistrictRO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserImgDo;

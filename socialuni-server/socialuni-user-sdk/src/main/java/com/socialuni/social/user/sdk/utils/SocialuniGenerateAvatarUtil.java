@@ -1,6 +1,6 @@
 package com.socialuni.social.user.sdk.utils;
 
-import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
+import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 
 import java.util.*;
 

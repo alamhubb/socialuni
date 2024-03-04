@@ -1,13 +1,13 @@
 package com.socialuni.social.sdk.logic.service;
 
 
-import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
-import com.socialuni.social.sdk.logic.domain.comment.SocialuniCommentDeleteDomain;
-import com.socialuni.social.sdk.logic.domain.comment.SocialuniCommentPostDomain;
+import com.socialuni.social.common.api.constant.SocialuniSystemConst;
+import com.socialuni.social.community.sdk.logic.domain.comment.SocialuniCommentDeleteDomain;
+import com.socialuni.social.community.sdk.logic.domain.comment.SocialuniCommentPostDomain;
 import com.socialuni.social.sdk.feignAPI.community.SocialuniCommentAPI;
-import com.socialuni.social.sdk.model.QO.comment.SocialuniCommentDeleteQO;
-import com.socialuni.social.sdk.model.QO.comment.SocialuniCommentPostQO;
-import com.socialuni.social.sdk.model.RO.talk.SocialuniCommentRO;
+import com.socialuni.social.community.sdk.model.QO.comment.SocialuniCommentDeleteQO;
+import com.socialuni.social.community.sdk.model.QO.comment.SocialuniCommentPostQO;
+import com.socialuni.social.community.sdk.model.RO.talk.SocialuniCommentRO;
 import com.socialuni.social.sdk.utils.UniAPIUtils;
 import com.socialuni.social.common.api.model.ResultRO;
 import lombok.extern.slf4j.Slf4j;

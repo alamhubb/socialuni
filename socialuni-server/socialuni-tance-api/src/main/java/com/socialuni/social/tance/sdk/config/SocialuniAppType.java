@@ -1,11 +1,9 @@
 package com.socialuni.social.tance.sdk.config;
 
-import com.socialuni.social.tance.sdk.enumeration.GenderType;
-import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import org.apache.commons.lang3.StringUtils;
+
+import com.socialuni.social.common.api.constant.GenderType;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class SocialuniAppType {
     public static String defaultType = "默认";

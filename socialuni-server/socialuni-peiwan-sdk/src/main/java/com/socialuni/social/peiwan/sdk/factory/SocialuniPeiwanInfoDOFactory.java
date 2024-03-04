@@ -5,7 +5,7 @@ import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
 import com.socialuni.social.peiwan.sdk.model.DO.SocialuniPeiwanInfoDO;
 import com.socialuni.social.peiwan.sdk.model.QO.SocialuniPeiwanInfoRO;
 import com.socialuni.social.peiwan.sdk.model.RO.SocialuniPeiwanInfoImgRO;
-import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
+import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;

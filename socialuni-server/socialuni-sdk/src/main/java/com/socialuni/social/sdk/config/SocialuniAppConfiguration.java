@@ -1,7 +1,6 @@
 package com.socialuni.social.sdk.config;
 
-import com.socialuni.social.sdk.logic.domain.talk.SocialuniTalkQueryGenerateQueryBOByTabDomain;
-import org.springframework.beans.factory.annotation.Configurable;
+import com.socialuni.social.community.sdk.logic.domain.talk.SocialuniTalkQueryGenerateQueryBOByTabDomain;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

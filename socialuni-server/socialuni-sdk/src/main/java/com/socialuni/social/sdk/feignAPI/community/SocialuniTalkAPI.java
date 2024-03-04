@@ -1,10 +1,10 @@
 package com.socialuni.social.sdk.feignAPI.community;
 
-import com.socialuni.social.sdk.model.QO.community.talk.SocialuniTalkPostQO;
-import com.socialuni.social.sdk.model.QO.talk.SocialuniHomeTabTalkQueryQO;
-import com.socialuni.social.sdk.model.QO.talk.SocialuniTalkIdQO;
-import com.socialuni.social.sdk.model.QO.talk.SocialuniUserTalkQueryQO;
-import com.socialuni.social.sdk.model.RO.talk.SocialuniTalkRO;
+import com.socialuni.social.community.sdk.model.QO.talk.SocialuniTalkPostQO;
+import com.socialuni.social.community.sdk.model.QO.talk.SocialuniHomeTabTalkQueryQO;
+import com.socialuni.social.community.sdk.model.QO.talk.SocialuniTalkIdQO;
+import com.socialuni.social.community.sdk.model.QO.talk.SocialuniUserTalkQueryQO;
+import com.socialuni.social.community.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.social.common.api.model.ResultRO;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;

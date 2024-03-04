@@ -9,7 +9,7 @@ import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.utils.IpUtil;
 import com.socialuni.social.common.sdk.constant.ErrorMsg;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
-import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
+import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.tance.sdk.facade.ConfigFacade;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserPhoneManage;

@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.constant;
 
-import com.socialuni.social.tance.sdk.enumeration.GenderType;
+import com.socialuni.social.common.api.constant.GenderType;
 
 import java.util.HashMap;
 

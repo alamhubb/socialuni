@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.domain.phone;
 
 import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
-import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
+import com.socialuni.social.user.sdk.factory.SocialuniMineUserDetailROFactory;
 import com.socialuni.social.user.sdk.logic.entity.SocialUserPhoneEntity;
 import com.socialuni.social.user.sdk.logic.manage.SocialuniAuthenticationManage;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;

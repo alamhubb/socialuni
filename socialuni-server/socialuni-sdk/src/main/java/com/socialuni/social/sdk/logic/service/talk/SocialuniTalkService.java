@@ -1,14 +1,15 @@
 package com.socialuni.social.sdk.logic.service.talk;
 
-import com.socialuni.social.sdk.dao.store.TalkQueryStore;
-import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
+import com.socialuni.social.community.sdk.dao.store.TalkQueryStore;
+import com.socialuni.social.community.sdk.logic.domain.talk.*;
+import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.sdk.constant.TalkTabType;
 import com.socialuni.social.sdk.feignAPI.community.SocialuniTalkAPI;
-import com.socialuni.social.sdk.model.QO.community.talk.SocialuniTalkPostQO;
-import com.socialuni.social.sdk.model.QO.talk.SocialuniHomeTabTalkQueryQO;
-import com.socialuni.social.sdk.model.QO.talk.SocialuniTalkIdQO;
-import com.socialuni.social.sdk.model.QO.talk.SocialuniUserTalkQueryQO;
-import com.socialuni.social.sdk.model.RO.talk.SocialuniTalkRO;
+import com.socialuni.social.community.sdk.model.QO.talk.SocialuniTalkPostQO;
+import com.socialuni.social.community.sdk.model.QO.talk.SocialuniHomeTabTalkQueryQO;
+import com.socialuni.social.community.sdk.model.QO.talk.SocialuniTalkIdQO;
+import com.socialuni.social.community.sdk.model.QO.talk.SocialuniUserTalkQueryQO;
+import com.socialuni.social.community.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.social.common.sdk.model.RO.SocialuniRectangleRO;
 import com.socialuni.social.common.sdk.utils.PositionUtil;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
@@ -44,7 +45,7 @@ public class SocialuniTalkService {
 
     /**
      * @return
-     * @see com.socialuni.social.sdk.logic.domain.talk.SocialuniHomeTalkQueryDomain#queryHomeTabTalks(com.socialuni.social.sdk.model.QO.talk.SocialuniHomeTabTalkQueryQO)
+     * @see SocialuniHomeTalkQueryDomain#queryHomeTabTalks(SocialuniHomeTabTalkQueryQO)
      * @deprecated
      */
     @Deprecated

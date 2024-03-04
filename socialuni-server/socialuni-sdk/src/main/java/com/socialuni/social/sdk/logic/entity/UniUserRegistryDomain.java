@@ -6,7 +6,7 @@ import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.logic.entity.SocialPhoneLoginEntity;
 import com.socialuni.social.user.sdk.logic.entity.SocialUserEntity;
 import com.socialuni.social.user.sdk.logic.entity.SocialUserPhoneEntity;
-import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
+import com.socialuni.social.user.sdk.factory.SocialuniMineUserDetailROFactory;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserFansDetailManage;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserManage;
 import com.socialuni.social.user.sdk.logic.manage.SocialuniTokenManage;

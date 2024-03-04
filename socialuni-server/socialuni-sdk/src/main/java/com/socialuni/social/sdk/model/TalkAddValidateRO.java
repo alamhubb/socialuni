@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.model;
 
 import com.socialuni.social.community.sdk.dao.DO.SocialuniDistrictDO;
-import com.socialuni.social.community.sdk.dao.DO.SocialuniCircleDO;
-import com.socialuni.social.community.sdk.dao.DO.SocialuniTagDO;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniCircleDO;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniTagDO;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -8,10 +8,10 @@ import com.socialuni.social.common.api.exception.exception.SocialBusinessExcepti
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.utils.UUIDUtil;
-import com.socialuni.social.community.sdk.dao.DO.SocialuniTagDO;
-import com.socialuni.social.community.sdk.repository.TagRepository;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniTagDO;
+import com.socialuni.social.common.sdk.dao.repository.TagRepository;
 import com.socialuni.social.common.api.constant.MpPlatformType;
-import com.socialuni.social.sdk.logic.manage.SocialTagManage;
+import com.socialuni.social.community.sdk.logic.manage.talk.SocialTagManage;
 import com.socialuni.social.sdk.model.QO.dev.SyncProdDevAccountQO;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.api.DevAccountProviderInterface;

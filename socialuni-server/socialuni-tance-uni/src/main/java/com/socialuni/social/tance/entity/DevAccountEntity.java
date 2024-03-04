@@ -9,7 +9,7 @@ import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.api.DevAccountRedisInterface;
 import com.socialuni.social.tance.sdk.constant.AdminAppConfigConst;
 import com.socialuni.social.tance.sdk.enumeration.DevAccountType;
-import com.socialuni.social.tance.sdk.enumeration.GenderType;
+import com.socialuni.social.common.api.constant.GenderType;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.user.sdk.logic.entity.SocialUserPhoneEntity;
 import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;

@@ -4,7 +4,7 @@ import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.community.sdk.config.AppData;
 import com.socialuni.social.sdk.feignAPI.openData.SocialuniDistrictAPI;
 import com.socialuni.social.community.sdk.model.SocialDistrictRO;
-import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
+import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

@@ -5,8 +5,8 @@ import cn.hutool.core.util.ObjUtil;
 import com.socialuni.social.admin.model.SocialuniAdminHomeSwiperRO;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.sdk.dao.DO.SocialuniHomeSwiperDO;
-import com.socialuni.social.sdk.dao.repository.HomeSwiperRepository;
+import com.socialuni.social.community.sdk.dao.DO.SocialuniHomeSwiperDO;
+import com.socialuni.social.community.sdk.repository.HomeSwiperRepository;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import org.springframework.web.bind.annotation.*;
 

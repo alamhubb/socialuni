@@ -9,7 +9,7 @@ import com.socialuni.social.common.sdk.constant.UserType;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.report.sdk.utils.BirthdayAgeUtil;
-import com.socialuni.social.tance.sdk.enumeration.GenderType;
+import com.socialuni.social.common.api.constant.GenderType;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.report.sdk.utils.SocialuniTextContentUtil;

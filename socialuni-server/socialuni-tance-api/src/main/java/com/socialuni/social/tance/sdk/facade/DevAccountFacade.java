@@ -1,16 +1,14 @@
 package com.socialuni.social.tance.sdk.facade;
 
-import com.socialuni.social.common.api.exception.exception.SocialNotLoginException;
+import com.socialuni.social.common.api.constant.GenderType;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.utils.RequestUtil;
-import com.socialuni.social.common.api.utils.SocialTokenFacade;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.api.DevAccountProviderInterface;
 import com.socialuni.social.tance.sdk.api.DevAccountRedisInterface;
 import com.socialuni.social.tance.sdk.constant.AdminAppConfigConst;
-import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.tance.sdk.enumeration.SocialFeignHeaderName;
-import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
+import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.tance.sdk.model.DevAccountProviderModler;
 import org.apache.commons.lang3.StringUtils;

@@ -2,10 +2,10 @@ package com.socialuni.social.sdk.feignAPI.business;
 
 
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.community.sdk.model.SocialCircleRO;
+import com.socialuni.social.common.sdk.model.RO.SocialCircleRO;
 import com.socialuni.social.sdk.model.QO.business.SocialuniCoinPayRO;
 import com.socialuni.social.sdk.model.QO.business.SocialuniPayCoinQO;
-import com.socialuni.social.sdk.model.QO.circle.SocialuniCoinOrdersQueryQO;
+import com.socialuni.social.community.sdk.model.QO.circle.SocialuniCoinOrdersQueryQO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;

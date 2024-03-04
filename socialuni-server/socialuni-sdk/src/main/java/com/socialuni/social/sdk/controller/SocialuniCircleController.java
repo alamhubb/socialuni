@@ -4,12 +4,12 @@ import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.community.sdk.model.SocialuniTalkTabCircleRO;
 import com.socialuni.social.sdk.feignAPI.community.SocialuniCircleAPI;
 import com.socialuni.social.sdk.logic.service.circle.SocialuniCircleService;
-import com.socialuni.social.sdk.model.QO.circle.SocialuniCircleQueryByTypeQO;
-import com.socialuni.social.sdk.model.QO.community.circle.CircleChatCreateQO;
-import com.socialuni.social.sdk.model.QO.community.circle.CircleCreateQO;
-import com.socialuni.social.sdk.model.QO.community.circle.CircleTalkTabInfoQO;
-import com.socialuni.social.sdk.model.RO.community.circle.CircleTypeRO;
-import com.socialuni.social.community.sdk.model.SocialCircleRO;
+import com.socialuni.social.community.sdk.model.QO.circle.SocialuniCircleQueryByTypeQO;
+import com.socialuni.social.community.sdk.model.QO.circle.CircleChatCreateQO;
+import com.socialuni.social.community.sdk.model.QO.circle.CircleCreateQO;
+import com.socialuni.social.community.sdk.model.QO.circle.CircleTalkTabInfoQO;
+import com.socialuni.social.common.sdk.model.RO.circle.CircleTypeRO;
+import com.socialuni.social.common.sdk.model.RO.SocialCircleRO;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

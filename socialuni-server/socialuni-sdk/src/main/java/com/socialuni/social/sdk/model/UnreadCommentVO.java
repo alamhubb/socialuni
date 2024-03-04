@@ -2,8 +2,8 @@ package com.socialuni.social.sdk.model;
 
 import com.socialuni.social.community.sdk.dao.DO.SocialuniCommentDO;
 import com.socialuni.social.community.sdk.repository.CommentRepository;
-import com.socialuni.social.sdk.dao.utils.content.SocialuniCommentDOUtil;
-import com.socialuni.social.sdk.model.RO.talk.SocialuniTalkRO;
+import com.socialuni.social.community.sdk.dao.SocialuniCommentDOUtil;
+import com.socialuni.social.community.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;

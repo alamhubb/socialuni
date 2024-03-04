@@ -7,8 +7,6 @@ import com.socialuni.social.music.sdk.dao.DO.SocialuniMusicRoomDO;
 import com.socialuni.social.music.sdk.dao.DO.SocialuniMusicRoomUserDO;
 import com.socialuni.social.music.sdk.logic.manage.SocialuniMusicRoomManage;
 import com.socialuni.social.music.sdk.logic.manage.SocialuniMusicRoomUserManage;
-import com.socialuni.social.music.sdk.model.RO.SocialuniMusicOperateCheckRO;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

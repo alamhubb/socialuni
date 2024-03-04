@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.feignAPI.user;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.user.sdk.model.QO.SocialUserIdentityAuthQO;
-import com.socialuni.social.sdk.model.RO.user.SocialUserIdentityAuthPreCheckRO;
+import com.socialuni.social.user.sdk.model.RO.SocialUserIdentityAuthPreCheckRO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;

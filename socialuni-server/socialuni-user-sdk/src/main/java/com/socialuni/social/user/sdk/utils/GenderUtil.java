@@ -1,6 +1,6 @@
 package com.socialuni.social.user.sdk.utils;
 
-import com.socialuni.social.tance.sdk.enumeration.GenderType;
+import com.socialuni.social.common.api.constant.GenderType;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 
 /**

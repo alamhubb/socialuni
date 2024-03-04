@@ -5,10 +5,7 @@ import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
 import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.im.logic.check.SocialuniChatUserCheck;
 import com.socialuni.social.music.sdk.dao.DO.SocialuniMusicRoomUserDO;
-import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
 
 @Component
 public class SocialuniMusicRoomUserManage {

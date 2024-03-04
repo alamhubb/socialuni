@@ -1,17 +1,15 @@
 package com.socialuni.social.tance.config;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
 import com.socialuni.social.tance.entity.DevAccountEntity;
 import com.socialuni.social.tance.model.DO.AppConfigDO;
 import com.socialuni.social.tance.repository.AppConfigRepository;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
-import com.socialuni.social.tance.sdk.constant.AdminAppConfigConst;
 import com.socialuni.social.tance.sdk.constant.AppConfigDOKeyConst;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfigBO;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfigInterface;
 import com.socialuni.social.tance.sdk.config.SocialuniAppMoreConfigBO;
-import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
+import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import lombok.extern.slf4j.Slf4j;

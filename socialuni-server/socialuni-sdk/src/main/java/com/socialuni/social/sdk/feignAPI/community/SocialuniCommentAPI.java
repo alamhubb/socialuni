@@ -1,9 +1,9 @@
 package com.socialuni.social.sdk.feignAPI.community;
 
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.sdk.model.QO.comment.SocialuniCommentDeleteQO;
-import com.socialuni.social.sdk.model.QO.comment.SocialuniCommentPostQO;
-import com.socialuni.social.sdk.model.RO.talk.SocialuniCommentRO;
+import com.socialuni.social.community.sdk.model.QO.comment.SocialuniCommentDeleteQO;
+import com.socialuni.social.community.sdk.model.QO.comment.SocialuniCommentPostQO;
+import com.socialuni.social.community.sdk.model.RO.talk.SocialuniCommentRO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;

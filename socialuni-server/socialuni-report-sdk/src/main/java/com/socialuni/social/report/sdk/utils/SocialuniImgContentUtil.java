@@ -5,7 +5,7 @@ import com.qcloud.cos.model.COSObject;
 import com.qcloud.cos.model.COSObjectInputStream;
 import com.qcloud.cos.model.GetObjectRequest;
 import com.qcloud.cos.utils.IOUtils;
-import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
+import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.report.sdk.plugins.tencent.TencentCloudAPI;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;

@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.config;
 
 import com.socialuni.social.common.api.config.SocialRequestUserConfig;
-import com.socialuni.social.sdk.dao.utils.user.SocialuniUserExpandDOUtil;
+import com.socialuni.social.user.sdk.dao.utils.SocialuniUserExpandDOUtil;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserExpandDo;
 import com.socialuni.social.web.sdk.config.SocialuniWebInterceptor;
 import lombok.extern.slf4j.Slf4j;

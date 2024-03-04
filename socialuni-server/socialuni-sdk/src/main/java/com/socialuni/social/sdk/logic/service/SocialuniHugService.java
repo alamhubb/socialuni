@@ -3,9 +3,9 @@ package com.socialuni.social.sdk.logic.service;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.sdk.logic.domain.hug.SocialAddHugDomain;
-import com.socialuni.social.sdk.model.QO.SocialuniHugAddQO;
-import com.socialuni.social.sdk.model.QO.community.SocialHugAddQO;
+import com.socialuni.social.community.sdk.logic.domain.hug.SocialAddHugDomain;
+import com.socialuni.social.community.sdk.model.QO.SocialuniHugAddQO;
+import com.socialuni.social.community.sdk.model.QO.community.SocialHugAddQO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import org.springframework.stereotype.Service;

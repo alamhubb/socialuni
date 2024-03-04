@@ -5,7 +5,7 @@ import com.socialuni.social.report.sdk.entity.ReportDetailDO;
 import com.socialuni.social.report.sdk.enumeration.ReportStatus;
 import com.socialuni.social.report.sdk.dao.repository.ReportDetailRepository;
 import com.socialuni.social.sdk.constant.ReportSourceType;
-import com.socialuni.social.sdk.dao.DO.JusticeValueOrderDO;
+import com.socialuni.social.sdk.dao.DO.match.JusticeValueOrderDO;
 import com.socialuni.social.sdk.dao.repository.JusticeValueOrderRepository;
 import com.socialuni.social.common.sdk.constant.AppConfigConst;
 import com.socialuni.social.report.sdk.dao.repository.KeywordsRepository;

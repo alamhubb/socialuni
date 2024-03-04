@@ -1,15 +1,15 @@
 package com.socialuni.social.sdk.logic.service.tag;
 
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import com.socialuni.social.community.sdk.dao.DO.SocialuniTagTypeDO;
-import com.socialuni.social.community.sdk.dao.DO.SocialuniTagDO;
-import com.socialuni.social.community.sdk.repository.SocialuniTagTypeRepository;
-import com.socialuni.social.community.sdk.repository.TagRepository;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniTagTypeDO;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniTagDO;
+import com.socialuni.social.common.sdk.dao.repository.SocialuniTagTypeRepository;
+import com.socialuni.social.common.sdk.dao.repository.TagRepository;
 import com.socialuni.social.sdk.constant.TalkOperateType;
 import com.socialuni.social.common.api.enumeration.ContentStatus;
-import com.socialuni.social.sdk.dao.store.SocialTagRedis;
-import com.socialuni.social.sdk.utils.SocialTagStore;
-import com.socialuni.social.tance.sdk.enumeration.GenderType;
+import com.socialuni.social.common.sdk.dao.redis.SocialTagRedis;
+import com.socialuni.social.common.sdk.dao.store.SocialTagStore;
+import com.socialuni.social.common.api.constant.GenderType;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

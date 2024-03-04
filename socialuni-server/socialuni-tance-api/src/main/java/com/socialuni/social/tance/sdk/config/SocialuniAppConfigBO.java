@@ -1,6 +1,6 @@
 package com.socialuni.social.tance.sdk.config;
 
-import com.socialuni.social.tance.sdk.enumeration.GenderType;
+import com.socialuni.social.common.api.constant.GenderType;
 import lombok.Data;
 
 import java.util.Arrays;

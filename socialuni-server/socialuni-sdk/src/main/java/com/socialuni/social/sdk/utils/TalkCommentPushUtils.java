@@ -7,13 +7,13 @@ import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
 import com.socialuni.social.common.sdk.constant.AppConfigConst;
 import com.socialuni.social.common.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.report.sdk.constant.SocialuniSupportProviderType;
-import com.socialuni.social.sdk.dao.utils.content.SocialuniCommentDOUtil;
-import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
+import com.socialuni.social.community.sdk.dao.SocialuniCommentDOUtil;
+import com.socialuni.social.community.sdk.dao.SocialuniTalkDOUtil;
 import com.socialuni.social.common.sdk.platform.qq.QQConst;
 import com.socialuni.social.common.sdk.platform.weixin.WxConst;
 import com.socialuni.social.common.sdk.platform.PushMsgDTO;
-import com.socialuni.social.im.model.message.notify.PushNotifyVO;
-import com.socialuni.social.im.model.message.notify.PushValue;
+import com.socialuni.social.sdk.im.notify.PushNotifyVO;
+import com.socialuni.social.sdk.im.notify.PushValue;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import org.apache.commons.lang3.StringUtils;
 

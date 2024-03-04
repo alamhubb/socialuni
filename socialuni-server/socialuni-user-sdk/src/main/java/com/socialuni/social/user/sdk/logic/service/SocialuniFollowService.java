@@ -2,14 +2,12 @@ package com.socialuni.social.user.sdk.logic.service;
 
 import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
 import com.socialuni.social.common.api.model.user.SocialuniUserFollowDetailListRO;
-import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
+import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.user.sdk.api.SocialuniFollowAPI;
 import com.socialuni.social.user.sdk.logic.domain.SocialQueryUserFollowsDomain;
-import com.socialuni.social.user.sdk.logic.domain.SocialUserFollowDomain;
 import com.socialuni.social.user.sdk.logic.domain.SocialUserFollowDomainInterface;
 import com.socialuni.social.user.sdk.model.QO.follow.SocialuniUserFollowAddQO;
 import com.socialuni.social.common.api.model.ResultRO;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

@@ -16,7 +16,7 @@ import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkImgDO;
 import com.socialuni.social.report.sdk.dao.DO.KeywordsTriggerDetailDO;
 import com.socialuni.social.report.sdk.dao.repository.KeywordsTriggerDetailRepository;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
-import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
+import com.socialuni.social.community.sdk.dao.SocialuniTalkDOUtil;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.logic.factory.ReportFactory;

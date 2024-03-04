@@ -1,7 +1,5 @@
 package com.socialuni.social.tance.model.DO;
 
-import com.socialuni.social.tance.sdk.enumeration.DevAccountType;
-import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

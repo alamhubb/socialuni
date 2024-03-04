@@ -3,11 +3,11 @@ package com.socialuni.social.sdk.controller;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.sdk.feignAPI.community.SocialuniTalkAPI;
 import com.socialuni.social.sdk.logic.service.talk.SocialuniTalkService;
-import com.socialuni.social.sdk.model.QO.community.talk.SocialuniTalkPostQO;
-import com.socialuni.social.sdk.model.QO.talk.SocialuniHomeTabTalkQueryQO;
-import com.socialuni.social.sdk.model.QO.talk.SocialuniTalkIdQO;
-import com.socialuni.social.sdk.model.QO.talk.SocialuniUserTalkQueryQO;
-import com.socialuni.social.sdk.model.RO.talk.SocialuniTalkRO;
+import com.socialuni.social.community.sdk.model.QO.talk.SocialuniTalkPostQO;
+import com.socialuni.social.community.sdk.model.QO.talk.SocialuniHomeTabTalkQueryQO;
+import com.socialuni.social.community.sdk.model.QO.talk.SocialuniTalkIdQO;
+import com.socialuni.social.community.sdk.model.QO.talk.SocialuniUserTalkQueryQO;
+import com.socialuni.social.community.sdk.model.RO.talk.SocialuniTalkRO;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

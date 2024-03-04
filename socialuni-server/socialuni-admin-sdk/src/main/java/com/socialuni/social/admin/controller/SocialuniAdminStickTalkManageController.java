@@ -6,7 +6,7 @@ import com.socialuni.social.admin.model.SocialuniAdminStickTalkRO;
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
 import com.socialuni.social.community.sdk.repository.TalkRepository;
-import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
+import com.socialuni.social.community.sdk.dao.SocialuniTalkDOUtil;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.web.bind.annotation.*;

@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.config.redis;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.socialuni.social.im.config.websocket.WebsocketServer;
-import com.socialuni.social.im.model.message.notify.NotifyVO;
+import com.socialuni.social.sdk.im.config.websocket.WebsocketServer;
+import com.socialuni.social.sdk.im.notify.NotifyVO;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.MessageListener;

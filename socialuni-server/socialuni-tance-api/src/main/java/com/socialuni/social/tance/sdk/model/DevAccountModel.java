@@ -1,9 +1,9 @@
 package com.socialuni.social.tance.sdk.model;
 
+import com.socialuni.social.common.api.constant.GenderType;
 import com.socialuni.social.common.api.entity.SocialuniBaseDO;
 import com.socialuni.social.common.api.enumeration.ConstStatus;
 import com.socialuni.social.tance.sdk.enumeration.DevAccountType;
-import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import lombok.Data;
 
 import javax.persistence.*;

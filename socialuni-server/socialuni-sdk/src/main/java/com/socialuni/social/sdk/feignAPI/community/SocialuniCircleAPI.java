@@ -2,12 +2,12 @@ package com.socialuni.social.sdk.feignAPI.community;
 
 
 import com.socialuni.social.community.sdk.model.SocialuniTalkTabCircleRO;
-import com.socialuni.social.sdk.model.QO.circle.SocialuniCircleQueryByTypeQO;
-import com.socialuni.social.sdk.model.QO.community.circle.CircleChatCreateQO;
-import com.socialuni.social.sdk.model.QO.community.circle.CircleCreateQO;
-import com.socialuni.social.sdk.model.QO.community.circle.CircleTalkTabInfoQO;
-import com.socialuni.social.sdk.model.RO.community.circle.CircleTypeRO;
-import com.socialuni.social.community.sdk.model.SocialCircleRO;
+import com.socialuni.social.community.sdk.model.QO.circle.SocialuniCircleQueryByTypeQO;
+import com.socialuni.social.community.sdk.model.QO.circle.CircleChatCreateQO;
+import com.socialuni.social.community.sdk.model.QO.circle.CircleCreateQO;
+import com.socialuni.social.community.sdk.model.QO.circle.CircleTalkTabInfoQO;
+import com.socialuni.social.common.sdk.model.RO.circle.CircleTypeRO;
+import com.socialuni.social.common.sdk.model.RO.SocialCircleRO;
 import com.socialuni.social.common.api.model.ResultRO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

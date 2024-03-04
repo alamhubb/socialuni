@@ -1,15 +1,15 @@
 package com.socialuni.social.sdk.logic.service.tag;
 
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.sdk.dao.store.SocialTagRedis;
+import com.socialuni.social.common.sdk.dao.redis.SocialTagRedis;
 import com.socialuni.social.sdk.feignAPI.community.SocialuniTagAPI;
-import com.socialuni.social.sdk.logic.domain.tag.SoicialTagAddDomain;
-import com.socialuni.social.sdk.model.QO.community.tag.TagAddQO;
-import com.socialuni.social.sdk.model.RO.community.tag.TagRO;
-import com.socialuni.social.sdk.model.RO.community.tag.TagTypeRO;
+import com.socialuni.social.community.sdk.logic.domain.tag.SoicialTagAddDomain;
+import com.socialuni.social.community.sdk.model.QO.tag.TagAddQO;
+import com.socialuni.social.common.sdk.model.RO.tag.TagRO;
+import com.socialuni.social.common.sdk.model.RO.tag.TagTypeRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.tance.sdk.enumeration.GenderType;
-import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
+import com.socialuni.social.common.api.constant.GenderType;
+import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import org.springframework.stereotype.Service;
 

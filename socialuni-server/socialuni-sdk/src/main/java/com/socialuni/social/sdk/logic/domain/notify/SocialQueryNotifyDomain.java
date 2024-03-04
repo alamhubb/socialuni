@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.domain.notify;
 
-import com.socialuni.social.im.enumeration.NotifyType;
+import com.socialuni.social.sdk.im.enumeration.NotifyType;
 import com.socialuni.social.common.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.common.sdk.dao.repository.NotifyRepository;
 import com.socialuni.social.sdk.logic.factory.SocialUnreadNotifyVOFactory;

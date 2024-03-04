@@ -1,7 +1,6 @@
 package com.socialuni.social.depoloy.sdk.controller;
 
 import cn.hutool.core.io.file.FileWriter;
-import cn.hutool.system.SystemUtil;
 import com.github.odiszapc.nginxparser.*;
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
@@ -12,7 +11,6 @@ import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
 import com.socialuni.social.depoloy.sdk.constant.FileSizeConst;
 import com.socialuni.social.depoloy.sdk.dao.DO.SocialuniDeployProjectDO;
 import com.socialuni.social.depoloy.sdk.dao.DO.SocialuniDeployProjectTempNameDO;
-import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
