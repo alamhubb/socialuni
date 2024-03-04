@@ -6,7 +6,7 @@ import com.socialuni.social.admin.factory.ReportContentROFactory;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.report.sdk.entity.ReportDO;
-import com.socialuni.social.sdk.constant.socialuni.SocialuniAuditContentType;
+import com.socialuni.social.common.sdk.constant.socialuni.SocialuniAuditContentType;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkHasUnderageImgAuditDO;
 import com.socialuni.social.report.sdk.dao.DO.KeywordsTriggerDetailDO;
 import com.socialuni.social.report.sdk.dao.repository.KeywordsTriggerDetailRepository;

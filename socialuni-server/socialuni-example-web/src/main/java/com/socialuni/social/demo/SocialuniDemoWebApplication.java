@@ -1,7 +1,7 @@
 package com.socialuni.social.demo;
 
 import cn.hutool.extra.spring.EnableSpringUtil;
-import com.socialuni.social.sdk.config.EnableSocialuni;
+import com.socialuni.social.common.sdk.config.EnableSocialuni;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
