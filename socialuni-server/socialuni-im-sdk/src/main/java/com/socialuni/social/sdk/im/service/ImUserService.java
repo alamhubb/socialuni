@@ -4,7 +4,7 @@ import cn.hutool.core.util.ReUtil;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
 import com.socialuni.social.sdk.im.feign.SocialuniOpenImUserFeign;
-import com.socialuni.social.sdk.im.logic.domain.SocialBindUserOpenImAccountDomain;
+import com.socialuni.social.user.sdk.logic.domain.SocialBindUserOpenImAccountDomain;
 import com.socialuni.social.sdk.im.model.SocialuniImUserModel;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.constant.GenderTypeNumEnum;

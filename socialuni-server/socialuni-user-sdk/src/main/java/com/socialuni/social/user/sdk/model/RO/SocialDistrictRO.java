@@ -1,4 +1,4 @@
-package com.socialuni.social.community.sdk.model;
+package com.socialuni.social.user.sdk.model.RO;
 
 import lombok.Data;
 

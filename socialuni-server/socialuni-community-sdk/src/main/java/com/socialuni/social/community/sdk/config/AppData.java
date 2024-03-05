@@ -1,7 +1,7 @@
 package com.socialuni.social.community.sdk.config;
 
 
-import com.socialuni.social.community.sdk.model.SocialDistrictRO;
+import com.socialuni.social.user.sdk.model.RO.SocialDistrictRO;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.dao.utils.user;
+package com.socialuni.social.user.sdk.utils;
 
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserCoinDo;

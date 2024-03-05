@@ -30,7 +30,7 @@ import com.socialuni.social.sdk.logic.service.tag.TagService;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
 import com.socialuni.social.community.sdk.model.QO.talk.SocialuniTalkPostQO;
 import com.socialuni.social.sdk.model.TalkAddValidateRO;
-import com.socialuni.social.user.sdk.dao.utils.DistrictStoreUtils;
+import com.socialuni.social.user.sdk.utils.DistrictStoreUtils;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.api.constant.GenderType;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;

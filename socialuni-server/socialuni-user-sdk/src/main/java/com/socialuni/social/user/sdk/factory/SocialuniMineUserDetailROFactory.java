@@ -1,10 +1,6 @@
 package com.socialuni.social.user.sdk.factory;
 
 import cn.hutool.extra.spring.SpringUtil;
-import com.socialuni.social.sdk.im.feign.SocialuniOpenImUserFeign;
-import com.socialuni.social.sdk.im.logic.domain.SocialBindUserOpenImAccountDomain;
-import com.socialuni.social.sdk.dao.utils.user.SocialuniUserExpandDOUtil;
-import com.socialuni.social.sdk.dao.utils.user.SocialuniUserSocialCoinDOUtil;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
@@ -12,6 +8,8 @@ import com.socialuni.social.user.sdk.dao.DO.SocialuniUserExpandDo;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserCoinDo;
 import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserDetailRO;
+import com.socialuni.social.user.sdk.dao.utils.SocialuniUserExpandDOUtil;
+import com.socialuni.social.user.sdk.logic.domain.SocialBindUserOpenImAccountDomain;
 import com.socialuni.social.user.sdk.logic.redis.SocialUserPhoneRedis;
 import com.socialuni.social.common.sdk.dao.repository.SocialUserPlatformAccountRepository;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
@@ -25,7 +23,7 @@ public class SocialuniMineUserDetailROFactory {
     public static SocialUserPhoneRedis socialUserPhoneRedis;
     public final static SocialUserPlatformAccountRepository SOCIAL_USER_PLATFORM_ACCOUNT_REPOSITORY = SpringUtil.getBean(SocialUserPlatformAccountRepository.class);
     public final static SocialBindUserOpenImAccountDomain socialBindUserOpenImAccountDomain = SpringUtil.getBean(SocialBindUserOpenImAccountDomain.class);
-    public final static SocialuniOpenImUserFeign socialuniOpenImUserFeign = SpringUtil.getBean(SocialuniOpenImUserFeign.class);
+//    public final static SocialuniOpenImUserFeign socialuniOpenImUserFeign = SpringUtil.getBean(SocialuniOpenImUserFeign.class);
 
     @Resource
     public void setSocialUserPhoneStore(SocialUserPhoneRedis socialUserPhoneRedis) {

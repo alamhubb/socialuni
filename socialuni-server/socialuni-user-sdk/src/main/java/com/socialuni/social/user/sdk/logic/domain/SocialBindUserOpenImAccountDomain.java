@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.im.logic.domain;
+package com.socialuni.social.user.sdk.logic.domain;
 
 import com.socialuni.social.common.api.constant.PlatformType;
 import com.socialuni.social.user.sdk.constant.GenderTypeNumEnum;

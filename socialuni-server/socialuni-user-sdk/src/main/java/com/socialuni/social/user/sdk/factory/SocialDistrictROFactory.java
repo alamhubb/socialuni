@@ -1,7 +1,8 @@
-package com.socialuni.social.community.sdk.model;
+package com.socialuni.social.user.sdk.factory;
 
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniDistrictDO;
+import com.socialuni.social.user.sdk.model.RO.SocialDistrictRO;
 import lombok.Data;
 
 import java.util.List;
