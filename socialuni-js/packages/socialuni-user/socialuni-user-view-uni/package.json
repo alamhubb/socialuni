@@ -1,6 +1,6 @@
 {
   "name": "socialuni-user-view-uni",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,25 +9,26 @@
     "@dcloudio/types": "^3.0.17",
     "@dcloudio/uni-ui": "^1.4.23",
     "cos-js-sdk-v5": "^1.2.18",
-    "qing-ui-uni": "^0.1.10",
-    "qing-util": "^0.1.10",
-    "qingjs": "^0.1.10",
-    "qingjs-uni": "^0.1.10",
-    "socialuni": "^0.1.10",
-    "socialuni-api-base": "^0.1.10",
-    "socialuni-app-api": "^0.1.10",
-    "socialuni-app-sdk": "^0.1.10",
-    "socialuni-app-view-uni": "^0.1.10",
-    "socialuni-community-api": "^0.1.10",
-    "socialuni-constant": "^0.1.10",
-    "socialuni-user-api": "^0.1.10",
-    "socialuni-user-sdk": "^0.1.10"
+    "qing-ui-uni": "^0.1.11",
+    "qing-util": "^0.1.11",
+    "qingjs": "^0.1.11",
+    "qingjs-uni": "^0.1.11",
+    "socialuni": "^0.1.11",
+    "socialuni-api-base": "^0.1.11",
+    "socialuni-app-api": "^0.1.11",
+    "socialuni-app-sdk": "^0.1.11",
+    "socialuni-app-view-uni": "^0.1.11",
+    "socialuni-community-api": "^0.1.11",
+    "socialuni-constant": "^0.1.11",
+    "socialuni-user-api": "^0.1.11",
+    "socialuni-user-sdk": "^0.1.11"
   },
   "devDependencies": {
     "typescript": "^4.7.4",
     "vue": "^3.2.41"
   },
   "author": "",
+  "repository": "https://github.com/alamhubb/socialuni/tree/master/socialuni-js/packages/socialuni-user-view-uni",
   "license": "ISC",
-  "gitHead": "b44cceccf112e55351ba2d26f0276b6d84e57c7e"
+  "gitHead": "3dd487aaf8485a7fa59a89b001153215a84c1102"
 }

@@ -1,6 +1,6 @@
 {
   "name": "vue3-golden-layout",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -17,6 +17,7 @@
   },
   "keywords": [],
   "author": "",
+  "repository": "https://github.com/alamhubb/socialuni/tree/master/socialuni-js/packages/",
   "license": "ISC",
-  "gitHead": "b44cceccf112e55351ba2d26f0276b6d84e57c7e"
+  "gitHead": "3dd487aaf8485a7fa59a89b001153215a84c1102"
 }

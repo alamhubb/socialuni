@@ -1,6 +1,6 @@
 {
   "name": "socialuni-app-sdk",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -8,15 +8,15 @@
   "dependencies": {
     "cos-js-sdk-v5": "^1.2.18",
     "cos-wx-sdk-v5": "^0.7.11",
-    "fast-webrtc": "^0.1.10",
+    "fast-webrtc": "^0.1.11",
     "jsencrypt": "^3.3.2",
-    "qing-ui-types": "^0.1.10",
-    "qing-util": "^0.1.10",
-    "qingjs": "^0.1.10",
-    "socialuni-api-base": "^0.1.10",
-    "socialuni-app-api": "^0.1.10",
-    "socialuni-constant": "^0.1.10",
-    "socialuni-user-api": "^0.1.10",
+    "qing-ui-types": "^0.1.11",
+    "qing-util": "^0.1.11",
+    "qingjs": "^0.1.11",
+    "socialuni-api-base": "^0.1.11",
+    "socialuni-app-api": "^0.1.11",
+    "socialuni-constant": "^0.1.11",
+    "socialuni-user-api": "^0.1.11",
     "vue": "^3.3.2"
   },
   "devDependencies": {
@@ -24,6 +24,7 @@
     "vue": "^3.2.41"
   },
   "author": "",
+  "repository": "https://github.com/alamhubb/socialuni/tree/master/socialuni-js/packages/socialuni-app-sdk",
   "license": "ISC",
-  "gitHead": "b44cceccf112e55351ba2d26f0276b6d84e57c7e"
+  "gitHead": "3dd487aaf8485a7fa59a89b001153215a84c1102"
 }

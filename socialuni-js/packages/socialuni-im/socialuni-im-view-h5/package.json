@@ -1,23 +1,24 @@
 {
   "name": "socialuni-im-view-h5",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "qing-ui-h5": "^0.1.10",
-    "qingjs": "^0.1.10",
-    "socialuni": "^0.1.10",
-    "socialuni-constant": "^0.1.10",
-    "socialuni-im-api": "^0.1.10",
-    "socialuni-im-h5-sdk": "^0.1.10",
-    "socialuni-im-sdk": "^0.1.10",
+    "qing-ui-h5": "^0.1.11",
+    "qingjs": "^0.1.11",
+    "socialuni": "^0.1.11",
+    "socialuni-constant": "^0.1.11",
+    "socialuni-im-api": "^0.1.11",
+    "socialuni-im-h5-sdk": "^0.1.11",
+    "socialuni-im-sdk": "^0.1.11",
     "vue": "3.2.41"
   },
   "keywords": [],
   "author": "",
+  "repository": "https://github.com/alamhubb/socialuni/tree/master/socialuni-js/packages/socialuni-im-view-h5",
   "license": "ISC",
-  "gitHead": "b44cceccf112e55351ba2d26f0276b6d84e57c7e"
+  "gitHead": "3dd487aaf8485a7fa59a89b001153215a84c1102"
 }

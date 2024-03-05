@@ -1,23 +1,24 @@
 {
   "name": "socialuni-app-api",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "qing-ui-types": "^0.1.10",
-    "qing-util": "^0.1.10",
-    "qingjs": "^0.1.10",
-    "socialuni": "^0.1.10",
-    "socialuni-api-base": "^0.1.10",
-    "socialuni-constant": "^0.1.10"
+    "qing-ui-types": "^0.1.11",
+    "qing-util": "^0.1.11",
+    "qingjs": "^0.1.11",
+    "socialuni": "^0.1.11",
+    "socialuni-api-base": "^0.1.11",
+    "socialuni-constant": "^0.1.11"
   },
   "devDependencies": {
     "typescript": "^4.7.4",
     "vue": "^3.2.41"
   },
   "author": "",
+  "repository": "https://github.com/alamhubb/socialuni/tree/master/socialuni-js/packages/socialuni-app-api",
   "license": "ISC",
-  "gitHead": "b44cceccf112e55351ba2d26f0276b6d84e57c7e"
+  "gitHead": "3dd487aaf8485a7fa59a89b001153215a84c1102"
 }

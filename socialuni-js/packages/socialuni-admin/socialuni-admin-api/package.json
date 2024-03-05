@@ -1,12 +1,12 @@
 {
   "name": "socialuni-admin-api",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "socialuni-api-base": "^0.1.10"
+    "socialuni-api-base": "^0.1.11"
   },
   "devDependencies": {
     "@dcloudio/types": "^3.0.13",
@@ -14,6 +14,7 @@
     "vue": "^3.2.41"
   },
   "author": "",
+  "repository": "https://github.com/alamhubb/socialuni/tree/master/socialuni-js/packages/socialuni-admin-api",
   "license": "ISC",
-  "gitHead": "b44cceccf112e55351ba2d26f0276b6d84e57c7e"
+  "gitHead": "3dd487aaf8485a7fa59a89b001153215a84c1102"
 }

@@ -1,6 +1,6 @@
 {
   "name": "socialuni-constant",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "",
   "main": "axios.ts",
   "scripts": {
@@ -10,6 +10,7 @@
     "typescript": "^4.7.4"
   },
   "author": "",
+  "repository": "https://github.com/alamhubb/socialuni/tree/master/socialuni-js/packages/socialuni-constant",
   "license": "ISC",
-  "gitHead": "b44cceccf112e55351ba2d26f0276b6d84e57c7e"
+  "gitHead": "3dd487aaf8485a7fa59a89b001153215a84c1102"
 }
