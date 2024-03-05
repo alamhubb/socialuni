@@ -1,6 +1,6 @@
 {
   "name": "socialuni-expand-api",
-  "version": "0.1.8",
+  "version": "0.1.10",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,12 +10,12 @@
     "@dcloudio/types": "^3.0.17",
     "@dcloudio/uni-app": "3.0.0-3090920231225001",
     "@dcloudio/uni-ui": "^1.4.23",
-    "qingjs": "^0.1.8",
-    "socialuni": "^0.1.8",
+    "qingjs": "^0.1.10",
+    "socialuni": "^0.1.10",
     "vue": "3.2.41"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "gitHead": "dcc7c42d0aead1acd9e5c38ae368cec680af72e6"
+  "gitHead": "b44cceccf112e55351ba2d26f0276b6d84e57c7e"
 }

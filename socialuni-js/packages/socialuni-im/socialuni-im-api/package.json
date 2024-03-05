@@ -1,12 +1,12 @@
 {
   "name": "socialuni-im-api",
-  "version": "0.1.8",
+  "version": "0.1.10",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "socialuni-api-base": "^0.1.8"
+    "socialuni-api-base": "^0.1.10"
   },
   "devDependencies": {
     "@dcloudio/types": "^3.0.13",
@@ -15,5 +15,5 @@
   },
   "author": "",
   "license": "ISC",
-  "gitHead": "dcc7c42d0aead1acd9e5c38ae368cec680af72e6"
+  "gitHead": "b44cceccf112e55351ba2d26f0276b6d84e57c7e"
 }

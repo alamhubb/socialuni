@@ -1,13 +1,13 @@
 {
   "name": "qing-util",
-  "version": "0.1.8",
+  "version": "0.1.10",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "moment": "^2.29.4",
-    "socialuni-constant": "^0.1.8",
+    "socialuni-constant": "^0.1.10",
     "uuid": "^7.0.3"
   },
   "devDependencies": {
@@ -17,5 +17,5 @@
   },
   "author": "",
   "license": "ISC",
-  "gitHead": "dcc7c42d0aead1acd9e5c38ae368cec680af72e6"
+  "gitHead": "b44cceccf112e55351ba2d26f0276b6d84e57c7e"
 }

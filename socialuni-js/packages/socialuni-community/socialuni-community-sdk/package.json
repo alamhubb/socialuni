@@ -1,18 +1,18 @@
 {
   "name": "socialuni-community-sdk",
-  "version": "0.1.8",
+  "version": "0.1.10",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "socialuni": "^0.1.8",
-    "socialuni-user-sdk": "^0.1.8",
+    "socialuni": "^0.1.10",
+    "socialuni-user-sdk": "^0.1.10",
     "vue": "3.2.41"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "gitHead": "dcc7c42d0aead1acd9e5c38ae368cec680af72e6"
+  "gitHead": "b44cceccf112e55351ba2d26f0276b6d84e57c7e"
 }

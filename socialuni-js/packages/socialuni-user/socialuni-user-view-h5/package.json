@@ -1,17 +1,17 @@
 {
   "name": "socialuni-user-view-h5",
-  "version": "0.1.8",
+  "version": "0.1.10",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "cos-js-sdk-v5": "^1.2.18",
-    "qing-ui-h5": "^0.1.8",
-    "qing-util": "^0.1.8",
-    "qingjs-h5": "^0.1.8",
-    "socialuni-constant": "^0.1.8",
-    "socialuni-user-sdk": "^0.1.8"
+    "qing-ui-h5": "^0.1.10",
+    "qing-util": "^0.1.10",
+    "qingjs-h5": "^0.1.10",
+    "socialuni-constant": "^0.1.10",
+    "socialuni-user-sdk": "^0.1.10"
   },
   "devDependencies": {
     "typescript": "^4.7.4",
@@ -19,5 +19,5 @@
   },
   "author": "",
   "license": "ISC",
-  "gitHead": "dcc7c42d0aead1acd9e5c38ae368cec680af72e6"
+  "gitHead": "b44cceccf112e55351ba2d26f0276b6d84e57c7e"
 }
