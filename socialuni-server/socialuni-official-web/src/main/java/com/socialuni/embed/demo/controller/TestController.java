@@ -9,7 +9,7 @@ import com.socialuni.social.common.api.model.user.SocialuniContentUserRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.common.api.utils.SocialTokenFacade;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
-import com.socialuni.social.sdk.constant.VisibleType;
+import com.socialuni.social.common.sdk.constant.VisibleType;
 import com.socialuni.social.user.sdk.model.factory.SocialuniContentUserROFactory;
 import com.socialuni.social.sdk.logic.service.SocialuniCommentService;
 import com.socialuni.social.sdk.logic.service.talk.SocialuniTalkService;
