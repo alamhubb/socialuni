@@ -2,9 +2,9 @@ package com.socialuni.social.sdk.logic.service;
 
 
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
+import com.socialuni.social.common.sdk.feignAPI.community.SocialuniCommentAPI;
 import com.socialuni.social.community.sdk.logic.domain.comment.SocialuniCommentDeleteDomain;
 import com.socialuni.social.community.sdk.logic.domain.comment.SocialuniCommentPostDomain;
-import com.socialuni.social.sdk.feignAPI.community.SocialuniCommentAPI;
 import com.socialuni.social.community.sdk.model.QO.comment.SocialuniCommentDeleteQO;
 import com.socialuni.social.community.sdk.model.QO.comment.SocialuniCommentPostQO;
 import com.socialuni.social.community.sdk.model.RO.talk.SocialuniCommentRO;

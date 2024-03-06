@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.logic.service.user;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
-import com.socialuni.social.sdk.feignAPI.user.SocialuniMineUserAPI;
+import com.socialuni.social.user.sdk.api.user.SocialuniMineUserAPI;
 import com.socialuni.social.sdk.logic.domain.user.SocialAddUserImgDomain;
 import com.socialuni.social.sdk.logic.domain.user.SocialDeleteUserImgDomain;
 import com.socialuni.social.sdk.logic.entity.UniUserRegistryDomain;

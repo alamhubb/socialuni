@@ -3,7 +3,7 @@ package com.socialuni.social.community.sdk.logic.manage.talk;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniTagDO;
 import com.socialuni.social.common.sdk.dao.repository.TagRepository;
 import com.socialuni.social.common.sdk.logic.SocialTagDOFactory;
-import com.socialuni.social.community.sdk.model.QO.tag.TagAddQO;
+import com.socialuni.social.common.sdk.model.QO.tag.TagAddQO;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import org.springframework.stereotype.Component;
 

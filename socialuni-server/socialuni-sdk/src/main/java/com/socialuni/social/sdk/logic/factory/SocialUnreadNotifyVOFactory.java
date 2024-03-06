@@ -1,5 +1,6 @@
 package com.socialuni.social.sdk.logic.factory;
 
+import com.socialuni.social.common.sdk.model.RO.app.SocialUnreadNotifyVO;
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniCommentDO;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
@@ -10,7 +11,6 @@ import com.socialuni.social.community.sdk.dao.SocialuniCommentDOUtil;
 import com.socialuni.social.community.sdk.dao.SocialuniTalkDOUtil;
 import com.socialuni.social.community.sdk.dao.SocialuniTalkImgDOUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.sdk.model.RO.app.SocialUnreadNotifyVO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import org.springframework.stereotype.Component;

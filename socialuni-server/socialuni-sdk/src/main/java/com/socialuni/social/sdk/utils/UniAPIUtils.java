@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.utils;
 
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
-import com.socialuni.social.sdk.feignAPI.user.SocialuniUserAPI;
+import com.socialuni.social.user.sdk.api.user.SocialuniUserAPI;
 import com.socialuni.social.common.sdk.model.QO.ContentAddQO;
 import com.socialuni.social.tance.sdk.api.SocialuniUnionIdInterface;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;

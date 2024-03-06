@@ -12,6 +12,7 @@ import com.socialuni.social.user.sdk.dao.utils.SocialuniUserExpandDOUtil;
 import com.socialuni.social.user.sdk.logic.domain.SocialBindUserOpenImAccountDomain;
 import com.socialuni.social.user.sdk.logic.redis.SocialUserPhoneRedis;
 import com.socialuni.social.common.sdk.dao.repository.SocialUserPlatformAccountRepository;
+import com.socialuni.social.user.sdk.utils.SocialuniUserSocialCoinDOUtil;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;

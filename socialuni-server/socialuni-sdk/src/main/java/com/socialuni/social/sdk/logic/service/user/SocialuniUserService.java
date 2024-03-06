@@ -2,8 +2,8 @@ package com.socialuni.social.sdk.logic.service.user;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.*;
-import com.socialuni.social.sdk.dao.utils.content.SocialuniUserImgDOUtil;
-import com.socialuni.social.sdk.feignAPI.user.SocialuniUserAPI;
+import com.socialuni.social.user.sdk.api.user.SocialuniUserAPI;
+import com.socialuni.social.user.sdk.dao.utils.SocialuniUserImgDOUtil;
 import com.socialuni.social.user.sdk.model.factory.SocialuniContentUserROFactory;
 import com.socialuni.social.user.sdk.factory.SocialuniMineUserDetailROFactory;
 import com.socialuni.social.user.sdk.factory.SocialuniUserDetailROFactory;

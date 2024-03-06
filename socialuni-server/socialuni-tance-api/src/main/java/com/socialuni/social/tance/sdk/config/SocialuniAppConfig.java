@@ -1,6 +1,8 @@
 package com.socialuni.social.tance.sdk.config;
 
 import cn.hutool.extra.spring.SpringUtil;
+import com.socialuni.social.common.api.model.SocialuniAppConfigBO;
+import com.socialuni.social.common.api.model.SocialuniAppMoreConfigBO;
 import com.socialuni.social.tance.sdk.api.ConfigInterface;
 import com.socialuni.social.tance.sdk.constant.AppConfigDOKeyConst;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;

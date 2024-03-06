@@ -7,7 +7,6 @@ import com.socialuni.social.common.sdk.constant.UserType;
 import com.socialuni.social.common.sdk.dao.redis.SocialTagRedis;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.logic.check.SocialuniUserCheck;
-import com.socialuni.social.sdk.logic.domain.report.SoicialuniSystemPreCheckReportDomainDOUtil;
 import com.socialuni.social.community.sdk.logic.entity.comment.SocialPostCommentEntity;
 import com.socialuni.social.community.sdk.logic.factory.SocialCommentROFactory;
 import com.socialuni.social.report.sdk.utils.SocialuniTextContentUtil;
@@ -64,7 +63,7 @@ public class SocialuniCommentPostDomain {
         SocialuniCommentDO commentDO = socialPostCommentEntity.saveComment(addQO, mineUser.getUnionId());
 
         // 校验是否触发关键词
-        SoicialuniSystemPreCheckReportDomainDOUtil.systemPreCheckReport(commentDO);
+//        SoicialuniSystemPreCheckReportDomainDOUtil.systemPreCheckReport(commentDO);
 
         //如果不为待审核，才发送通知
         //注释通知相关功能

@@ -1,10 +1,10 @@
 package com.socialuni.social.sdk.logic.service.talk;
 
+import com.socialuni.social.common.sdk.feignAPI.community.SocialuniTalkAPI;
 import com.socialuni.social.community.sdk.dao.store.TalkQueryStore;
 import com.socialuni.social.community.sdk.logic.domain.talk.*;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
-import com.socialuni.social.sdk.constant.TalkTabType;
-import com.socialuni.social.sdk.feignAPI.community.SocialuniTalkAPI;
+import com.socialuni.social.community.sdk.constant.TalkTabType;
 import com.socialuni.social.community.sdk.model.QO.talk.SocialuniTalkPostQO;
 import com.socialuni.social.community.sdk.model.QO.talk.SocialuniHomeTabTalkQueryQO;
 import com.socialuni.social.community.sdk.model.QO.talk.SocialuniTalkIdQO;
@@ -15,7 +15,6 @@ import com.socialuni.social.common.sdk.utils.PositionUtil;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.sdk.utils.UniAPIUtils;
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.sdk.logic.domain.talk.*;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

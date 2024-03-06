@@ -2,10 +2,10 @@ package com.socialuni.social.sdk.logic.service.phone;
 
 
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.common.sdk.model.QO.SocialBindWxPhoneNumQO;
 import com.socialuni.social.user.sdk.logic.domain.SocailSendAuthCodeDomain;
 import com.socialuni.social.sdk.logic.domain.phone.SocialBindPhoneNumDomain;
 import com.socialuni.social.sdk.logic.domain.phone.SocialBindWxPhoneNumDomain;
-import com.socialuni.social.sdk.model.QO.SocialBindWxPhoneNumQO;
 import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumAuthCodeQO;
 import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.user.sdk.model.QO.phone.SocialSendAuthCodeQO;

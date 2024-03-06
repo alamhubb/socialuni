@@ -2,15 +2,15 @@ package com.socialuni.social.sdk.logic.service;
 
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.sdk.constant.AuthType;
+import com.socialuni.social.common.sdk.constant.AuthType;
 import com.socialuni.social.sdk.dao.DO.dev.ThirdUserAuthDO;
 import com.socialuni.social.sdk.dao.repository.dev.ThirdUserAuthRepository;
 import com.socialuni.social.sdk.logic.domain.thirdUser.AuthThirdUserDomain;
 import com.socialuni.social.user.sdk.factory.SocialuniOAuthUserROFactory;
 import com.socialuni.social.sdk.logic.manage.DevAccountManage;
 import com.socialuni.social.user.sdk.model.QO.OAuthUserInfoQO;
-import com.socialuni.social.sdk.model.RO.OAuthGetUserPhoneNumRO;
-import com.socialuni.social.sdk.model.RO.SocialOAuthUserRO;
+import com.socialuni.social.user.sdk.model.RO.OAuthGetUserPhoneNumRO;
+import com.socialuni.social.user.sdk.model.RO.SocialOAuthUserRO;
 import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;

@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.logic.service.report;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.sdk.logic.domain.report.SoicialReportAddDomain;
 import com.socialuni.social.report.sdk.api.SocialuniReportAPI;
-import com.socialuni.social.sdk.feignAPI.user.SocialuniUserAPI;
+import com.socialuni.social.user.sdk.api.user.SocialuniUserAPI;
 import com.socialuni.social.tance.sdk.api.SocialuniUnionIdInterface;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.report.sdk.model.SocialuniReportAddQO;

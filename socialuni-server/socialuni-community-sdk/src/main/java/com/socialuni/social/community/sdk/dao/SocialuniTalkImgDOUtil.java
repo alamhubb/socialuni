@@ -2,7 +2,7 @@ package com.socialuni.social.community.sdk.dao;
 
 import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkImgDO;
 import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
-import com.socialuni.social.sdk.dao.mapper.TalkImgMapper;
+import com.socialuni.social.community.sdk.dao.mapper.TalkImgMapper;
 import com.socialuni.social.community.sdk.repository.TalkImgRepository;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;

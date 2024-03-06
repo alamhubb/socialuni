@@ -1,12 +1,12 @@
 package com.socialuni.social.music.sdk.logic.entity;
 
 
-import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
-import com.socialuni.social.im.logic.check.SocialuniChatUserCheck;
 import com.socialuni.social.music.sdk.dao.DO.SocialuniMusicRoomDO;
 import com.socialuni.social.music.sdk.dao.DO.SocialuniMusicRoomUserDO;
 import com.socialuni.social.music.sdk.logic.manage.SocialuniMusicRoomManage;
 import com.socialuni.social.music.sdk.logic.manage.SocialuniMusicRoomUserManage;
+import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
+import com.socialuni.social.sdk.im.logic.check.SocialuniChatUserCheck;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

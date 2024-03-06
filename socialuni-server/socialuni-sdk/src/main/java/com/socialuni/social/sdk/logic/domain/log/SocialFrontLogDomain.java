@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.domain.log;
 
 
-import com.socialuni.social.user.sdk.model.FrontErrorLogVO;
+import com.socialuni.social.common.sdk.model.VO.FrontErrorLogVO;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.constant.ErrorPlatformType;
 import com.socialuni.social.common.api.dao.DO.ErrorRequestLogDO;

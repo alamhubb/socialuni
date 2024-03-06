@@ -2,7 +2,7 @@ package com.socialuni.social.community.sdk.logic.factory;
 
 import com.socialuni.social.common.api.entity.SocialuniImgBaseDo;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
-import com.socialuni.social.sdk.model.RO.talk.SocialuniTalkImgRO;
+import com.socialuni.social.community.sdk.model.RO.talk.SocialuniTalkImgRO;
 import lombok.Data;
 
 import java.util.List;

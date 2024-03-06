@@ -1,13 +1,13 @@
 package com.socialuni.social.sdk.controller;
 
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.community.sdk.model.SocialuniTalkTabCircleRO;
-import com.socialuni.social.sdk.feignAPI.community.SocialuniCircleAPI;
-import com.socialuni.social.sdk.logic.service.circle.SocialuniCircleService;
-import com.socialuni.social.community.sdk.model.QO.circle.SocialuniCircleQueryByTypeQO;
-import com.socialuni.social.community.sdk.model.QO.circle.CircleChatCreateQO;
-import com.socialuni.social.community.sdk.model.QO.circle.CircleCreateQO;
-import com.socialuni.social.community.sdk.model.QO.circle.CircleTalkTabInfoQO;
+import com.socialuni.social.common.sdk.feignAPI.community.SocialuniCircleAPI;
+import com.socialuni.social.common.sdk.model.RO.SocialuniTalkTabCircleRO;
+import com.socialuni.social.sdk.logic.service.SocialuniCircleService;
+import com.socialuni.social.common.sdk.model.QO.circle.SocialuniCircleQueryByTypeQO;
+import com.socialuni.social.common.sdk.model.QO.circle.CircleChatCreateQO;
+import com.socialuni.social.common.sdk.model.QO.circle.CircleCreateQO;
+import com.socialuni.social.common.sdk.model.QO.circle.CircleTalkTabInfoQO;
 import com.socialuni.social.common.sdk.model.RO.circle.CircleTypeRO;
 import com.socialuni.social.common.sdk.model.RO.SocialCircleRO;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,9 +1,9 @@
 package com.socialuni.social.sdk.controller;
 
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.sdk.feignAPI.community.SocialuniNotifyAPI;
+import com.socialuni.social.common.sdk.model.RO.app.SocialUnreadNotifyVO;
+import com.socialuni.social.community.sdk.feignAPI.community.SocialuniNotifyAPI;
 import com.socialuni.social.sdk.logic.service.SocialuniNotifyService;
-import com.socialuni.social.sdk.model.RO.app.SocialUnreadNotifyVO;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

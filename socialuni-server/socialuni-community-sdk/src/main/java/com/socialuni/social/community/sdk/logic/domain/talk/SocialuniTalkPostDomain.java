@@ -3,14 +3,13 @@ package com.socialuni.social.community.sdk.logic.domain.talk;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
+import com.socialuni.social.community.sdk.model.TalkAddValidateRO;
 import com.socialuni.social.community.sdk.repository.TalkRepository;
 import com.socialuni.social.common.sdk.constant.UserType;
 import com.socialuni.social.common.api.constant.DateTimeType;
-import com.socialuni.social.sdk.logic.domain.report.SoicialuniSystemPreCheckReportDomainDOUtil;
 import com.socialuni.social.community.sdk.logic.factory.SocialTalkROFactory;
 import com.socialuni.social.community.sdk.model.QO.talk.SocialuniTalkPostQO;
 import com.socialuni.social.community.sdk.model.RO.talk.SocialuniTalkRO;
-import com.socialuni.social.sdk.model.TalkAddValidateRO;
 import com.socialuni.social.common.sdk.utils.DateUtils;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
@@ -88,7 +87,7 @@ public class SocialuniTalkPostDomain {
 
         SocialuniTalkDO talkDO = socialTalkPostDomain.saveEntity(mineUser, talkPostQO, talkAddValidateRO.getDistrict(), talkAddValidateRO.getTags(), talkAddValidateRO.getCircle());
 
-        SoicialuniSystemPreCheckReportDomainDOUtil.systemPreCheckReport(talkDO);
+//        SoicialuniSystemPreCheckReportDomainDOUtil.systemPreCheckReport(talkDO);
 
         SocialuniTalkRO socialTalkRO = SocialTalkROFactory.getTalkRO(talkDO, mineUser);
 

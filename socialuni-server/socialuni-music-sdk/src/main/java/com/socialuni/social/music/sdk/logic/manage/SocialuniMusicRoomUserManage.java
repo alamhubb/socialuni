@@ -2,8 +2,6 @@ package com.socialuni.social.music.sdk.logic.manage;
 
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
-import com.socialuni.social.im.dao.DO.SocialuniChatUserDO;
-import com.socialuni.social.im.logic.check.SocialuniChatUserCheck;
 import com.socialuni.social.music.sdk.dao.DO.SocialuniMusicRoomUserDO;
 import org.springframework.stereotype.Component;
 

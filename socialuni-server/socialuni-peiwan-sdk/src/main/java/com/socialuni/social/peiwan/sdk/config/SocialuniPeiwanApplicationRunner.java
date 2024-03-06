@@ -2,7 +2,6 @@ package com.socialuni.social.peiwan.sdk.config;
 
 import com.socialuni.social.peiwan.sdk.dao.rep.SocialuniPeiwanSkillRepository;
 import com.socialuni.social.peiwan.sdk.model.DO.SocialuniPeiwanSkillDO;
-import com.socialuni.social.tance.sdk.config.SocialuniAppConfigInterface;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;

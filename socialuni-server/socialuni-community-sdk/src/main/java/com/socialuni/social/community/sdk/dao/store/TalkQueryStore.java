@@ -10,7 +10,7 @@ import com.socialuni.social.community.sdk.dao.SocialuniTalkDOUtil;
 import com.socialuni.social.community.sdk.dao.mapper.TalkMapper;
 import com.socialuni.social.community.sdk.repository.TalkRepository;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
-import com.socialuni.social.tance.sdk.config.SocialuniAppConfigBO;
+import com.socialuni.social.common.api.model.SocialuniAppConfigBO;
 import com.socialuni.social.common.api.enumeration.ContentStatus;
 import com.socialuni.social.user.sdk.logic.redis.SocialuniUserFollowRedis;
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;

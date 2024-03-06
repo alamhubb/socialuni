@@ -2,18 +2,18 @@ package com.socialuni.social.sdk.controller;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
+import com.socialuni.social.community.sdk.constant.TalkTabType;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniCircleChatDO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniCircleDO;
-import com.socialuni.social.community.sdk.model.SocialuniTalkTabCircleRO;
+import com.socialuni.social.common.sdk.model.RO.SocialuniTalkTabCircleRO;
 import com.socialuni.social.community.sdk.repository.SocialuniCircleChatRepository;
-import com.socialuni.social.sdk.constant.socialuni.TalkTabType;
 import com.socialuni.social.community.sdk.dao.SocialuniCircleDOUtil;
-import com.socialuni.social.sdk.feignAPI.SocialuniAppAPI;
+import com.socialuni.social.common.sdk.feignAPI.SocialuniAppAPI;
 import com.socialuni.social.sdk.logic.service.SocialuniAppService;
-import com.socialuni.social.user.sdk.model.FrontErrorLogVO;
-import com.socialuni.social.community.sdk.model.HomeSwiperVO;
-import com.socialuni.social.community.sdk.model.SocialuniTalkTabRO;
-import com.socialuni.social.user.sdk.model.SocialAppLaunchDataRO;
+import com.socialuni.social.common.sdk.model.VO.FrontErrorLogVO;
+import com.socialuni.social.common.sdk.model.VO.HomeSwiperVO;
+import com.socialuni.social.common.sdk.model.RO.SocialuniTalkTabRO;
+import com.socialuni.social.common.sdk.model.SocialAppLaunchDataRO;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,7 +60,7 @@ public class SocialuniAppController implements SocialuniAppAPI {
                         homeTabCircleRO.setGroupChatId(socialuniCircleChatDO.getGroupChatId());
                     }
                     tabRO.setCircle(homeTabCircleRO);
-                    tabRO.setType(TalkTabType.circle);
+                    tabRO.setType(TalkTabType.circle_type);
                 }
             }
             list.add(tabRO);

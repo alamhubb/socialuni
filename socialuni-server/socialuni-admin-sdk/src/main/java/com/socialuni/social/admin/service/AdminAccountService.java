@@ -12,7 +12,7 @@ import com.socialuni.social.common.sdk.dao.DO.SocialuniTagDO;
 import com.socialuni.social.common.sdk.dao.repository.TagRepository;
 import com.socialuni.social.common.api.constant.MpPlatformType;
 import com.socialuni.social.community.sdk.logic.manage.talk.SocialTagManage;
-import com.socialuni.social.sdk.model.QO.dev.SyncProdDevAccountQO;
+import com.socialuni.social.admin.model.SyncProdDevAccountQO;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.api.DevAccountProviderInterface;
 import com.socialuni.social.tance.sdk.api.DevAccountRedisInterface;

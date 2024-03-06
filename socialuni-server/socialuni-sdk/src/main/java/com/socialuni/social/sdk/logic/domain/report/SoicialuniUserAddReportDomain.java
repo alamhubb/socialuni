@@ -2,13 +2,13 @@ package com.socialuni.social.sdk.logic.domain.report;
 
 import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.common.sdk.constant.ReportSourceType;
 import com.socialuni.social.report.sdk.entity.ReportDO;
 import com.socialuni.social.report.sdk.entity.ReportDetailDO;
 import com.socialuni.social.report.sdk.dao.repository.ReportDetailRepository;
 import com.socialuni.social.report.sdk.dao.repository.ReportRepository;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.common.sdk.constant.ErrorMsg;
-import com.socialuni.social.sdk.constant.ReportSourceType;
 import com.socialuni.social.common.sdk.constant.UserType;
 import com.socialuni.social.common.api.enumeration.ContentStatus;
 import com.socialuni.social.report.sdk.enumeration.SocialuniUserStatus;

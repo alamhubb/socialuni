@@ -2,7 +2,7 @@ package com.socialuni.social.community.sdk.logic.factory;
 
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniHomeSwiperDO;
-import com.socialuni.social.community.sdk.model.HomeSwiperVO;
+import com.socialuni.social.common.sdk.model.VO.HomeSwiperVO;
 
 import java.util.List;
 

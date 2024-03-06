@@ -1,10 +1,11 @@
 package com.socialuni.social.sdk.logic.service;
 
+import com.socialuni.social.common.sdk.constant.ReportSourceType;
 import com.socialuni.social.report.sdk.entity.ReportDO;
 import com.socialuni.social.report.sdk.entity.ReportDetailDO;
 import com.socialuni.social.report.sdk.enumeration.ReportStatus;
 import com.socialuni.social.report.sdk.dao.repository.ReportDetailRepository;
-import com.socialuni.social.sdk.constant.ReportSourceType;
+import com.socialuni.social.sdk.logic.service.report.KeywordsTriggerService;
 import com.socialuni.social.sdk.dao.DO.match.JusticeValueOrderDO;
 import com.socialuni.social.sdk.dao.repository.JusticeValueOrderRepository;
 import com.socialuni.social.common.sdk.constant.AppConfigConst;

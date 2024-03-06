@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.domain.user;
 
 import com.socialuni.social.user.sdk.utils.SocialuniGenerateAvatarUtil;
-import com.socialuni.social.sdk.logic.domain.report.SoicialuniSystemPreCheckReportDomainDOUtil;
+import com.socialuni.social.sdk.dao.utils.content.SoicialuniSystemPreCheckReportDomainDOUtil;
 import com.socialuni.social.user.sdk.factory.SocialuniMineUserDetailROFactory;
 import com.socialuni.social.user.sdk.factory.UserImgDOFactory;
 import com.socialuni.social.common.api.constant.GenderType;
