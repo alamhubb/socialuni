@@ -24,7 +24,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableAsync
 //很奇怪，需要写到具体的包名
-@MapperScan("com.socialuni.social.sdk.dao.mapper")
+@MapperScan("com.socialuni.social.**.sdk.**.mapper")
 @EnableSocialWebSDK
 //复用feignBean不注册问题
 @EnableConfigurationProperties({
