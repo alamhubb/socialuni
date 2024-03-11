@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.config;
 
-import com.socialuni.social.common.sdk.model.SocialuniAppConfigInterface;
+import com.socialuni.social.common.api.config.SocialuniAppConfigInterface;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;

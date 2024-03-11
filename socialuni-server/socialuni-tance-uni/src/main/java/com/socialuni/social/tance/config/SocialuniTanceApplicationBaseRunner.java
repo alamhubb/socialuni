@@ -7,7 +7,7 @@ import com.socialuni.social.tance.repository.AppConfigRepository;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.constant.AppConfigDOKeyConst;
 import com.socialuni.social.common.api.model.SocialuniAppConfigBO;
-import com.socialuni.social.common.sdk.model.SocialuniAppConfigInterface;
+import com.socialuni.social.common.api.config.SocialuniAppConfigInterface;
 import com.socialuni.social.common.api.model.SocialuniAppMoreConfigBO;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
@@ -40,9 +40,9 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
     @Resource
     SocialuniAppConfigInterface socialuniAppConfigInterface;
 
-
     @Resource
     DevAccountInterface devAccountInterface;
+
 
     @Override
     @Async
@@ -66,13 +66,12 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
         SocialuniAppConfigBO socialuniAppConfigBO = socialuniAppConfigInterface.getAppConfig();
 
         //每次启动，都用系统默认值，替换insert中的值
+        String phoneNum = socialuniAppConfigBO.getSystemUserPhoneNum();
 
-        DevAccountModel devAccountModel = DevAccountFacade.getDevAccount(1);
+        DevAccountModel devAccountModel = devAccountInterface.findOneByPhoneNumOrderByIdAsc(phoneNum);
 
         //如果不存在用户，则创建第一个默认的主系统开发者
         if (devAccountModel == null) {
-            String phoneNum = socialuniAppConfigBO.getSystemUserPhoneNum();
-
             //copy一个default的值
 
             if (StringUtils.isEmpty(SocialuniSystemConst.getAppSocialuniId())) {
@@ -95,10 +94,11 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
             devSocialuniIdRepository.save(devSocialuniIdDO);*/
         }
 
-        DevAccountModel devAccountModelTest = DevAccountFacade.getDevAccount(2);
-
         //测试渠道的账号
         String phoneNumTest = socialuniAppConfigBO.getTestUserPhoneNum();
+
+        DevAccountModel devAccountModelTest = devAccountInterface.findOneByPhoneNumOrderByIdAsc(phoneNumTest);
+
         //如果手机号已经存在账户，则直接使用，正序获取第一个用户
 
         log.info("phoneNumTest:{}", phoneNumTest);

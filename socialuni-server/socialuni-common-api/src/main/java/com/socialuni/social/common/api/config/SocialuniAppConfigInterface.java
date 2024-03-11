@@ -1,4 +1,4 @@
-package com.socialuni.social.common.sdk.model;
+package com.socialuni.social.common.api.config;
 
 import com.socialuni.social.common.api.model.SocialuniAppConfigBO;
 import com.socialuni.social.common.api.model.SocialuniAppMoreConfigBO;

@@ -1,7 +1,9 @@
 package com.socialuni.social.tance.sdk.facade;
 
+import com.socialuni.social.common.api.config.SocialuniAppConfigInterface;
 import com.socialuni.social.common.api.constant.GenderType;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.socialuni.social.common.api.model.SocialuniAppConfigBO;
 import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.api.DevAccountProviderInterface;
@@ -174,6 +176,13 @@ public class DevAccountFacade {
         return devAccountModel;
     }
 
+    private static SocialuniAppConfigInterface socialuniAppConfigInterface;
+
+    @Resource
+    public void setSocialuniAppConfigInterface(SocialuniAppConfigInterface socialuniAppConfigInterface) {
+        DevAccountFacade.socialuniAppConfigInterface = socialuniAppConfigInterface;
+    }
+
     public static DevAccountModel getDevAccountAllowNull(String secretKey) {
         if (StringUtils.isEmpty(secretKey)) {
             return getDevAccountNotNull();
@@ -185,7 +194,11 @@ public class DevAccountFacade {
         //先从req中获取
         DevAccountModel devAccountModel = DevAccountFacade.getDevAccountAllowNull();
         if (devAccountModel == null) {
-            devAccountModel = DevAccountFacade.getDevAccount(AdminAppConfigConst.testDevId);
+            SocialuniAppConfigBO socialuniAppConfigBO = socialuniAppConfigInterface.getAppConfig();
+
+            //每次启动，都用系统默认值，替换insert中的值
+            String phoneNum = socialuniAppConfigBO.getSystemUserPhoneNum();
+            devAccountModel = DevAccountFacade.findOneByPhoneNumOrderByIdAsc(phoneNum);
 //            throw new SocialBusinessException("开发者信息为空");
         }
         return devAccountModel;
@@ -220,6 +233,11 @@ public class DevAccountFacade {
 
     public static DevAccountModel getDevAccount(Integer devId) {
         return devAccountApi.findOneById(devId);
+    }
+
+    //不需要缓存，低频, admin登录使用
+    public static DevAccountModel findOneByPhoneNumOrderByIdAsc(String phoneNum) {
+        return devAccountApi.findOneByPhoneNumOrderByIdAsc(phoneNum);
     }
 
     public static DevAccountModel getDevAccountBySocialuniId(String socialuniId) {

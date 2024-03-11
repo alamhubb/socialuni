@@ -37,6 +37,7 @@ public interface DevAccountRepository extends JpaRepository<DevAccountDo, Intege
     //获取最新的开发者账户，用来id相加，不缓存，低频，创建时才是用
     Optional<DevAccountModel> findFirstByOrderByIdDesc();
 
+    @Cacheable(cacheNames = "findOneByPhoneNumOrderByIdAsc", key = "#phoneNum")
     //不需要缓存，低频, admin登录使用
     DevAccountModel findOneByPhoneNumOrderByIdAsc(String phoneNum);
 
