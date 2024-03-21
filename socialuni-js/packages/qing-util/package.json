@@ -1,13 +1,13 @@
 {
   "name": "qing-util",
-  "version": "0.1.11",
+  "version": "0.1.13",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "moment": "^2.29.4",
-    "socialuni-constant": "^0.1.11",
+    "socialuni-constant": "^0.1.13",
     "uuid": "^7.0.3"
   },
   "devDependencies": {
@@ -18,5 +18,5 @@
   "author": "",
   "repository": "https://github.com/alamhubb/socialuni/tree/master/socialuni-js/packages/qing-util",
   "license": "ISC",
-  "gitHead": "3dd487aaf8485a7fa59a89b001153215a84c1102"
+  "gitHead": "8bc8be05ef3d13e8c3dc57cb16f0e9fcde1cd52b"
 }

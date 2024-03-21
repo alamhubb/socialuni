@@ -1,6 +1,6 @@
 {
   "name": "socialuni-expand-view-uni",
-  "version": "0.1.11",
+  "version": "0.1.13",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,14 +10,14 @@
     "@dcloudio/types": "^3.0.17",
     "@dcloudio/uni-app": "3.0.0-3090920231225001",
     "@dcloudio/uni-ui": "^1.4.23",
-    "qingjs": "^0.1.11",
-    "socialuni": "^0.1.11",
-    "socialuni-expand-api": "^0.1.11",
+    "qingjs": "^0.1.13",
+    "socialuni": "^0.1.13",
+    "socialuni-expand-api": "^0.1.13",
     "vue": "3.2.41"
   },
   "keywords": [],
   "author": "",
   "repository": "https://github.com/alamhubb/socialuni/tree/master/socialuni-js/packages/socialuni-expand-view-uni",
   "license": "ISC",
-  "gitHead": "3dd487aaf8485a7fa59a89b001153215a84c1102"
+  "gitHead": "8bc8be05ef3d13e8c3dc57cb16f0e9fcde1cd52b"
 }
