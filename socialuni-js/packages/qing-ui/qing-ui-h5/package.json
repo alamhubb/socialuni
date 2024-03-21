@@ -23,7 +23,7 @@
     "vue": "^3.2.41"
   },
   "author": "",
-  "repository": "https://github.com/alamhubb/socialuni/tree/master/socialuni-js/packages/qing-ui-h5",
+  "repository": "https://github.com/alamhubb/socialuni/tree/master/socialuni-js/packages/qing-ui/qing-ui-h5",
   "license": "ISC",
   "gitHead": "3dd487aaf8485a7fa59a89b001153215a84c1102"
 }
