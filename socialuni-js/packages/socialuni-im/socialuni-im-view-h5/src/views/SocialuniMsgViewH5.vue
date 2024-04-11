@@ -95,7 +95,7 @@
 <script lang="ts">
 import {Component, Vue} from "vue-facing-decorator";
 import SScrollbar from "qing-ui-h5/src/components/QComponents/QScrollbar.vue";
-import SIcon from "qing-ui-h5/src/components/QComponents/QIcon.vue";
+import SIcon from "qing-ui-h5/src/components/QComponents/QIcon/QIcon.vue";
 import SocialuniMsgViewService from "socialuni-im-sdk/src/logic/SocialuniMsgViewService";
 import MessageViewParams from "socialuni-im-view-uni/src/views/chat/MessageViewParams";
 import {getCurrentInstance, watch} from "vue";
