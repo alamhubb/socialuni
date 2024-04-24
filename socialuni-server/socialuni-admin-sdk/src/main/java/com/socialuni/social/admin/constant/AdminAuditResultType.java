@@ -1,6 +1,6 @@
 package com.socialuni.social.admin.constant;
 
-import com.socialuni.social.sdk.constant.ViolateType;
+import com.socialuni.social.common.sdk.constant.ViolateType;
 
 import java.util.Arrays;
 import java.util.Collections;

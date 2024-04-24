@@ -2,10 +2,10 @@ package com.socialuni.social.admin.service;
 
 import com.socialuni.social.admin.constant.AdminAuditResultType;
 import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
+import com.socialuni.social.common.sdk.constant.ViolateLevel;
 import com.socialuni.social.report.sdk.entity.ReportDO;
 import com.socialuni.social.report.sdk.enumeration.ReportStatus;
 import com.socialuni.social.report.sdk.dao.repository.ReportRepository;
-import com.socialuni.social.sdk.constant.ViolateLevel;
 import com.socialuni.social.common.api.enumeration.ContentStatus;
 import com.socialuni.social.community.sdk.dao.store.ReportStore;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
