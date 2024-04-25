@@ -1,13 +1,17 @@
 <template>
   <div class="h100p">
     <s-scrollbar class="h100p">
+
+      <div>
+        <el-input></el-input>
+      </div>
 <!--      <div>
         <div></div>
         <div>
           <el-button @click="">创建</el-button>
         </div>
       </div>-->
-      <div v-for="chat in viewService.chatList" :key="chat.id" class="flex-row pd-sm bb use-click" :class="{'bg-white': chat.id === viewService.chat.id}"
+      <div v-for="chat in viewService.chatList" :key="chat.id" class="flex-row pd-sm bb use-click" :class="{'bg-white': chat.id === viewService?.chat?.id}"
            @click="viewService.toMessagePage(chat)"
            @contextmenu.prevent="viewService.showBottomMenuClick(chat.id)"
            @longpress="viewService.showBottomMenuClick(chat.id)"
