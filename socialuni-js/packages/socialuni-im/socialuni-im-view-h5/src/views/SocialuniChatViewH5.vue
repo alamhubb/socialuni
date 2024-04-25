@@ -4,6 +4,9 @@
 
       <div>
         <el-input></el-input>
+        <el-icon>
+          <CirclePlus />
+        </el-icon>
       </div>
 <!--      <div>
         <div></div>
