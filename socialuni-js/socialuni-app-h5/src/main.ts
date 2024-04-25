@@ -23,7 +23,6 @@ declare module '@vue/runtime-core' {
     app.config.globalProperties.$DateUtil = DateUtil;
     app.config.globalProperties.$const = GlobalConst;
 
-    await SocialuniMusic.install(app);
     await Socialuni.install(app);
     app.use(router)
     app.mount('#app');

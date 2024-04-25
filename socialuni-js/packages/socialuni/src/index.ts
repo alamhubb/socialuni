@@ -25,11 +25,6 @@ const socialuniInitPlugin: SocialuniPlugin = {
 async function installSocialuniPluginIns(app: App) {
     socialuniPluginsModule.addPlugin(socialuniInitPlugin)
 
-    /* const moudles = import.meta.glob('../../../../!**!/src/index.ts',{eager:true})
-     for (const moudle in moudles) {
-         console.log(moudle)
-     }
-     console.log(moudles)*/
 
     //查询是否包含community模块，如果存在则加载
     const appModules = import.meta.glob('../../**/socialuni-app-sdk/src/index.ts',{eager:true})

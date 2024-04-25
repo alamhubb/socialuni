@@ -10,8 +10,7 @@ import socialuniPlatformAutoImportPlugin from "vite-plugin-socialuni-platform-au
 export default defineConfig({
     plugins: [
         vue(),
-        nodeResolve(),
-        socialuniPlatformAutoImportPlugin()
+        nodeResolve()
     ],
     server: {
         port: 8085,

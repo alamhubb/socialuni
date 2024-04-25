@@ -11,8 +11,7 @@ export default defineConfig({
     plugins: [
         vue(),
         vueJsx(),
-        nodeResolve(),
-        socialuniPlatformAutoImportPlugin()
+        nodeResolve()
     ],
     server: {
         port: 8085,
