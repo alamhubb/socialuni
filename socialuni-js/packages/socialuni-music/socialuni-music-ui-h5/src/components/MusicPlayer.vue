@@ -127,6 +127,7 @@ export default class MusicPlayer extends Vue {
   }
 
 
+  //提示音乐正在播放次数
   hintMusicPlayingNum = 0
 
   //创建时设置musicTime
@@ -390,7 +391,7 @@ export default class MusicPlayer extends Vue {
           await this.$refs.audioPlayer.play()
         }
       } catch (e) {
-        if (this.hintMusicPlayingNum < 2) {
+        if (this.hintMusicPlayingNum < 1) {
           this.hintMusicPlayingNum++
           AlertUtil.confirm('有音乐正在播放，是否打开声音').then(() => {
             this.setPlayerCurTimeAndPlay()

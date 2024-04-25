@@ -1,6 +1,6 @@
 <template>
   <div class="h100p">
-    <q-scrollbar class="h100p">
+    <s-scrollbar class="h100p">
 <!--      <div>
         <div></div>
         <div>
@@ -9,7 +9,9 @@
       </div>-->
       <div v-for="chat in viewService.chatList" :key="chat.id" class="flex-row pd-sm bb use-click"
            @click="viewService.toMessagePage(chat)"
-           @longpress="viewService.showBottomMenuClick(chat.id)">
+           @contextmenu.prevent="viewService.showBottomMenuClick(chat.id)"
+           @longpress="viewService.showBottomMenuClick(chat.id)"
+      >
         <!--                <el-avatar :src="chat.avatar">测试机</el-avatar>-->
         <el-avatar>测试</el-avatar>
         <div class="ml-sm h45 col-between flex-1">
@@ -59,7 +61,7 @@
           </div>
         </div>
       </div>
-    </q-scrollbar>
+    </s-scrollbar>
     <!--        <q-navbar title="消息">
                 <div class="row-end-center flex-1 pl">
                     <q-search class="w100p mx-sm bg-white">
