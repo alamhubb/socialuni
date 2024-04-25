@@ -7,7 +7,7 @@
           <el-button @click="">创建</el-button>
         </div>
       </div>-->
-      <div v-for="chat in viewService.chatList" :key="chat.id" class="flex-row pd-sm bb use-click"
+      <div v-for="chat in viewService.chatList" :key="chat.id" class="flex-row pd-sm bb use-click" :class="{'bg-white': chat.id === viewService.chat.id}"
            @click="viewService.toMessagePage(chat)"
            @contextmenu.prevent="viewService.showBottomMenuClick(chat.id)"
            @longpress="viewService.showBottomMenuClick(chat.id)"
@@ -16,7 +16,7 @@
         <el-avatar>测试</el-avatar>
         <div class="ml-sm h45 col-between flex-1">
           <div>
-            <div class="text-cut text-df text-black" :class="{'color-red':chat.vipFlag}">{{
+            <div class="text-cut text-df color-black" :class="{'color-red':chat.vipFlag}">{{
                 chat.nickname
               }}
             </div>
