@@ -1,20 +1,16 @@
 <template>
-    <main class="h100p mt-sm row-all-center">
-        <div class="w800 h500">
-            <div>123</div>666
-        </div>
-    </main>
+  <div class="flex-row">
+    <h1>This is an about 444</h1>
+    <q-button>fasdfs</q-button>
+    <div>使用qing-scss</div>
+    <div>使用qing-ui</div>
+    <div>使用socialuni</div>
+  </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from 'vue-facing-decorator';
-import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
-
-@Component({})
-export default class IndexView extends Vue {
-
-    sendAuthCode(){
-        PhoneAPI.sendAuthCodeAPI('1111')
-    }
-}
+<style>
+</style>
+<script setup lang="ts">
+import QButton from "qing-ui-uni/src/components/QButton/QButton.vue";
 </script>
+
