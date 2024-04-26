@@ -1,6 +1,6 @@
 <template>
   <div class="flex-row">
-    <h1>This is an about 444</h1>
+    <h1>This is an about 888</h1>
     <q-button>fasdfs</q-button>
     <div>使用qing-scss</div>
     <div>使用qing-ui</div>
