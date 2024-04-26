@@ -32,7 +32,6 @@
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.1.0",
-    "vite-plugin-socialuni-platform-auto-import": "../packages/vite-plugin-socialuni-platform-auto-import",
     "@tsconfig/node18": "^2.0.1",
     "@types/node": "^18.16.8",
     "@vitejs/plugin-vue": "^4.2.3",

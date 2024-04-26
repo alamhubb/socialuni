@@ -24,14 +24,11 @@ declare module '@vue/runtime-core' {
     app.config.globalProperties.$DateUtil = DateUtil;
     app.config.globalProperties.$const = GlobalConst;
 
-    app.use(QingUiH5)
-
-    await Socialuni.install(app);
-
-
-    for (const plugin of socialuniPluginsModule.plugins) {
-        plugin && plugin.onLaunch && plugin.onLaunch()
-    }
+    // app.use(QingUiH5)
+    // await Socialuni.install(app);
+    // for (const plugin of socialuniPluginsModule.plugins) {
+    //     plugin && plugin.onLaunch && plugin.onLaunch()
+    // }
     app.use(router)
     app.mount('#app');
 })();

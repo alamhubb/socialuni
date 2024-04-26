@@ -1,7 +1,7 @@
 <template>
     <main class="h100p mt-sm row-all-center">
         <div class="w800 h500">
-            <div>123</div>4565656
+            <div>123</div>666
         </div>
     </main>
 </template>
