@@ -5,7 +5,7 @@ import QingScss from 'qing-scss/src/index'
 import 'element-plus/dist/index.css'
 import "./styles/index.scss";
 
-const SocialuniUiH5 = {
+const QingUiH5 = {
     async install(app: App) {
         app.use(QingScss)
         app.use(ElementPlus, {
@@ -14,4 +14,4 @@ const SocialuniUiH5 = {
     }
 }
 
-export default SocialuniUiH5
+export default QingUiH5

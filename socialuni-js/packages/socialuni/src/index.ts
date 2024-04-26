@@ -25,44 +25,43 @@ const socialuniInitPlugin: SocialuniPlugin = {
 async function installSocialuniPluginIns(app: App) {
     socialuniPluginsModule.addPlugin(socialuniInitPlugin)
 
-
     //查询是否包含community模块，如果存在则加载
-    const appModules = import.meta.glob('../../**/socialuni-app-sdk/src/index.ts',{eager:true})
-    const socialuniApp = PlatformModuleLoadUtil.getFirstModule(appModules)
-    console.log(111111)
-    console.log(socialuniApp)
-    console.log(socialuniApp.default)
-    if (socialuniApp && socialuniApp.default) {
-        app.use(socialuniApp.default)
-    }
-
-    const socialuniAppView = await PlatformModuleLoadUtil.dynamicImport("socialuni-app-view")
-    console.log(socialuniAppView)
-    app.use(socialuniAppView.default)
-
-    /*const appViewModules = import.meta.glob('../../!**!/socialuni-app-view-*!/src/index.ts',{eager:true})
-    const socialuniAppView = PlatformModuleLoadUtil.getModuleDefault(appViewModules)
-    if (socialuniAppView) {
-        app.use(socialuniAppView)
-    }*/
-    const userModules = import.meta.glob('../../**/socialuni-user-sdk/src/index.ts',{eager:true})
-    const socialuniUser = PlatformModuleLoadUtil.getFirstModule(userModules)
-    if (socialuniUser && socialuniUser.default) {
-        app.use(socialuniUser.default)
-    }
-    //查询是否包含community模块，如果存在则加载
-    const communityModules = import.meta.glob('../../**/socialuni-socialuniCommunity-sdk/src/index.ts',{eager:true})
-    const socialuniCommunity = PlatformModuleLoadUtil.getFirstModule(communityModules)
-    if (socialuniCommunity && socialuniCommunity.default) {
-        app.use(socialuniCommunity.default)
-    }
-    //查询是否包含Im模块，如果存在则加载
-    const imModules = import.meta.glob('../../**/socialuni-im-sdk/src/index.ts',{eager:true})
-    const socialuniIm = PlatformModuleLoadUtil.getFirstModule(imModules)
-    console.log(socialuniIm)
-    if (socialuniIm && socialuniIm.default) {
-        app.use(socialuniIm.default)
-    }
+    // const appModules = import.meta.glob('../../**/socialuni-app-sdk/src/index.ts',{eager:true})
+    // const socialuniApp = PlatformModuleLoadUtil.getFirstModule(appModules)
+    // console.log(111111)
+    // console.log(socialuniApp)
+    // console.log(socialuniApp.default)
+    // if (socialuniApp && socialuniApp.default) {
+    //     app.use(socialuniApp.default)
+    // }
+    //
+    // const socialuniAppView = await PlatformModuleLoadUtil.dynamicImport("socialuni-app-view")
+    // console.log(socialuniAppView)
+    // app.use(socialuniAppView.default)
+    //
+    // /*const appViewModules = import.meta.glob('../../!**!/socialuni-app-view-*!/src/index.ts',{eager:true})
+    // const socialuniAppView = PlatformModuleLoadUtil.getModuleDefault(appViewModules)
+    // if (socialuniAppView) {
+    //     app.use(socialuniAppView)
+    // }*/
+    // const userModules = import.meta.glob('../../**/socialuni-user-sdk/src/index.ts',{eager:true})
+    // const socialuniUser = PlatformModuleLoadUtil.getFirstModule(userModules)
+    // if (socialuniUser && socialuniUser.default) {
+    //     app.use(socialuniUser.default)
+    // }
+    // //查询是否包含community模块，如果存在则加载
+    // const communityModules = import.meta.glob('../../**/socialuni-socialuniCommunity-sdk/src/index.ts',{eager:true})
+    // const socialuniCommunity = PlatformModuleLoadUtil.getFirstModule(communityModules)
+    // if (socialuniCommunity && socialuniCommunity.default) {
+    //     app.use(socialuniCommunity.default)
+    // }
+    // //查询是否包含Im模块，如果存在则加载
+    // const imModules = import.meta.glob('../../**/socialuni-im-sdk/src/index.ts',{eager:true})
+    // const socialuniIm = PlatformModuleLoadUtil.getFirstModule(imModules)
+    // console.log(socialuniIm)
+    // if (socialuniIm && socialuniIm.default) {
+    //     app.use(socialuniIm.default)
+    // }
 }
 
 
@@ -74,20 +73,7 @@ const Socialuni = {
         // console.log(SocialuniUiUni)
 
         console.log(socialuniSystemModule.isDev)
-        const SocialuniUiH5 = await PlatformModuleLoadUtil.dynamicImport("qing-ui")
 
-        app.use(SocialuniUiH5.default)
-
-
-        /*if (socialuniSystemModule.isUniApp) {
-            const modules = import.meta.glob('../../qing-ui/qing-ui-uni/src/index.ts',{eager:true})
-            const SocialuniUiUni = PlatformModuleLoadUtil.getModuleDefault(modules)
-            app.use(SocialuniUiUni)
-        } else {
-            const modules = import.meta.glob('../../qing-ui/qing-ui-h5/src/index.ts',{eager:true})
-            const SocialuniUiH5 = PlatformModuleLoadUtil.getModuleDefault(modules)
-            app.use(SocialuniUiH5)
-        }*/
 
         const shareComponent = defineComponent({
             onShareAppMessage() {
@@ -108,17 +94,7 @@ const Socialuni = {
         app.mixin(shareComponent)
 
         // 社交联盟内置支持的插件
-        await installSocialuniPluginIns(app)
-
-        // if (socialuniOptions) {
-        if (socialuniOption && socialuniOption.plugins) {
-            socialuniPluginsModule.addPlugin(...socialuniOption.plugins)
-        }
-        // }
-
-        for (const plugin of socialuniPluginsModule.plugins) {
-            plugin && plugin.onLaunch && plugin.onLaunch()
-        }
+        socialuniPluginsModule.addPlugin(socialuniInitPlugin)
     }
 }
 

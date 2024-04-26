@@ -1,12 +1,13 @@
-import {createApp} from 'vue'
+import {createApp, defineComponent} from 'vue'
 
 import App from './App.vue'
 import './styles/index.scss'
-import Socialuni from "socialuni/src";
 import router from "@/router";
-import SocialuniMusic from "socialuni-music-sdk/src";
 import DateUtil from "qing-util/src/util/DateUtil.ts";
 import GlobalConst from "@/constant/GlobalConst.ts";
+import QingUiH5 from "qing-ui-h5/src";
+import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule.ts";
+import Socialuni from "socialuni/src";
 
 declare module '@vue/runtime-core' {
     interface ComponentCustomProperties {
@@ -23,7 +24,14 @@ declare module '@vue/runtime-core' {
     app.config.globalProperties.$DateUtil = DateUtil;
     app.config.globalProperties.$const = GlobalConst;
 
+    app.use(QingUiH5)
+
     await Socialuni.install(app);
+
+
+    for (const plugin of socialuniPluginsModule.plugins) {
+        plugin && plugin.onLaunch && plugin.onLaunch()
+    }
     app.use(router)
     app.mount('#app');
 })();
