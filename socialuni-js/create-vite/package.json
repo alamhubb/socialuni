@@ -14,7 +14,8 @@
     "vue": "^3.4.21",
     "vue-router": "^4.3.0",
     "qing-scss": "^0.1.4-alpha.0",
-    "qing-ui-h5": "^0.1.4-alpha.0"
+    "qing-ui-h5": "^0.1.4-alpha.0",
+    "socialuni-ui-h5": "^0.1.4-alpha.0"
   },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.4",

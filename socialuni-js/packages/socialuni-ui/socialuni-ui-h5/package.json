@@ -6,10 +6,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@element-plus/icons-vue": "^2.1.0",
+    "qing-ui-h5": "^0.1.4-alpha.0",
     "cos-js-sdk-v5": "^1.2.18",
-    "element-plus": "^2.3.7",
-    "qing-scss": "^0.1.13",
     "qing-util": "^0.1.13",
     "qingjs": "^0.1.13",
     "socialuni-app-api": "^0.1.13",
