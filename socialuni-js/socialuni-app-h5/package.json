@@ -11,11 +11,12 @@
     "type-check": "vue-tsc --build --force"
   },
   "dependencies": {
-    "vue": "^3.4.21",
-    "vue-router": "^4.3.0",
     "qing-scss": "../packages/qing-scss",
     "qing-ui-h5": "../packages/qing-ui/qing-ui-h5",
-    "socialuni-ui-h5": "../packages/socialuni-ui/socialuni-ui-h5"
+    "socialuni-ui-h5": "../packages/socialuni-ui/socialuni-ui-h5",
+    "vue": "^3.4.21",
+    "vue-router": "^4.3.0",
+    "vue-facing-decorator": "^3.0.4"
   },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.4",

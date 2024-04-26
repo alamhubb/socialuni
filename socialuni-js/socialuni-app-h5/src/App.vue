@@ -7,12 +7,12 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from 'vue-facing-decorator';
+<script setup lang="ts">
+import { RouterLink, RouterView } from 'vue-router'
+import {Component, Vue} from 'vue-facing-decorator';
+import QButton from "qing-ui-uni/src/components/QButton/QButton.vue";
 
-@Component({
-  components: {}
-})
-export default class App extends Vue {
-}
+console.log(456465)
+console.log(Component)
+
 </script>

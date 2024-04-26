@@ -10,7 +10,17 @@
 
 <style>
 </style>
-<script setup lang="ts">
-import QButton from "qing-ui-uni/src/components/QButton/QButton.vue";
-</script>
 
+<script lang="ts">
+import {Component, Vue} from 'vue-facing-decorator';
+import QButton from "qing-ui-uni/src/components/QButton/QButton.vue";
+
+console.log(456465)
+console.log(Component)
+
+@Component({
+  components: {QButton}
+})
+export default class App extends Vue {
+}
+</script>
