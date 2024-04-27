@@ -1,13 +1,18 @@
-<script setup lang="ts">
-import { onLaunch, onShow, onHide } from "@dcloudio/uni-app";
-onLaunch(() => {
-  console.log("App Launch");
-});
-onShow(() => {
-  console.log("App Show");
-});
-onHide(() => {
-  console.log("App Hide");
-});
+<script>
+export default {
+    async onLaunch() {
+        console.log('app launch')
+        console.log('app launch')
+        console.log('app launch')
+        // socialSystemModule.initSystemInfo()
+        //如果有跳转信息
+        //校验更新
+        // PlatformUtils.checkUpdate()
+        // await socialAppModule.appLunchAction()
+    },
+    /*onError(e) {
+        SocialuniAppAPI.sendErrorLogAPI('front page error', SocialuniAppUtil.RouterUtil.getCurrentPageURI(), e.message)
+        console.error(e)
+    },*/
+}
 </script>
-<style></style>
