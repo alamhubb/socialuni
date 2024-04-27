@@ -92,7 +92,13 @@ const Socialuni = {
             }
         })
         app.mixin(shareComponent)
+        if (socialuniOption && socialuniOption.plugins) {
+            socialuniPluginsModule.addPlugin(...socialuniOption.plugins)
+        }
 
+        for (const plugin of socialuniPluginsModule.plugins) {
+            plugin && plugin.onLaunch && plugin.onLaunch()
+        }
         // 社交联盟内置支持的插件
         socialuniPluginsModule.addPlugin(socialuniInitPlugin)
     }

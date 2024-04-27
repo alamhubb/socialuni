@@ -15,7 +15,7 @@ app.use(router)
 app.use(QingScss)
 app.use(QingUiH5)
 app.use(SocialuniUiH5)
-app.use(Socialuni)
 app.use(SocialuniApp)
+app.use(Socialuni)
 
 app.mount('#app')
