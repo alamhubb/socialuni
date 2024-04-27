@@ -7,12 +7,15 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import {Component, Vue} from 'vue-facing-decorator';
-import QButton from "qing-ui-uni/src/components/QButton/QButton.vue";
+<script lang="ts">
+import {Component, toNative, Vue} from 'vue-facing-decorator';
 
 console.log(456465)
 console.log(Component)
 
+@Component({
+})
+class App extends Vue {
+}
+export default toNative(App)
 </script>
