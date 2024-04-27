@@ -1,18 +1,15 @@
 <template>
-    <div class="h100p overflow-hidden flex-col bg-default">
-<!--        <nav-bar/>-->
-        <div class="flex-1 overflow-hidden">
-            <RouterView/>
-        </div>
-    </div>
+  <div class="flex-row">
+    <h1>This is an about 444</h1>
+  </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-facing-decorator';
+import {Component, toNative, Vue} from 'vue-facing-decorator';
 
-@Component({
-    components: {}
-})
-export default class App extends Vue {
+@Component({})
+class App extends Vue {
 }
+
+export default toNative(App)
 </script>
