@@ -48,7 +48,8 @@ if (IN_PRODUCTION) {
 export default defineConfig({
     base: '/',
     plugins: [
-        uni()
+        uni(),
+        socialuniPlatformAutoImportPlugin()
     ],
     // build: {
     //     minify: false

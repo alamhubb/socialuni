@@ -27,6 +27,7 @@
     "typescript": "~5.4.0",
     "vite": "^5.2.8",
     "vite-plugin-vue-devtools": "^7.0.25",
-    "vue-tsc": "^2.0.11"
+    "vue-tsc": "^2.0.11",
+    "vite-plugin-socialuni-platform-auto-import": "../packages/vite-plugin-socialuni-platform-auto-import"
   }
 }
