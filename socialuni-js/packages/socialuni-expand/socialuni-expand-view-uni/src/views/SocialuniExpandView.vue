@@ -18,9 +18,9 @@
               </div>
               <template v-else>
                 <div v-if="mineUser && swiperIndex === 0" class="px-sm">
-                  <div class="row-all-center color-main mt-sm chunk-default pd-xs">
-                    {{ mineUser.openContactInfo ? '下拉刷新将您的排名前置' : '开启联系方式您的信息将在此处展示' }}
-                  </div>
+<!--                  <div class="row-all-center color-main mt-sm chunk-default pd-xs">-->
+<!--                    {{ mineUser.openContactInfo ? '下拉刷新将您的排名前置' : '开启联系方式您的信息将在此处展示' }}-->
+<!--                  </div>-->
                 </div>
                 <div class="flex-col px-smm py-sm bb" v-for="user in item.queryQO.listData" :key="user.id"
                      @click="toUserDetailVue(user)">
