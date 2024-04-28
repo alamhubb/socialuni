@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>socialuni-user-sdk</artifactId>
+    <artifactId>socialuni-follow-sdk</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -27,7 +27,7 @@
         </dependency>
         <dependency>
             <groupId>com.socialuni.social</groupId>
-            <artifactId>socialuni-follow-sdk</artifactId>
+            <artifactId>socialuni-user-sdk</artifactId>
         </dependency>
         <dependency>
             <groupId>com.socialuni.social</groupId>

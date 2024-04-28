@@ -1,4 +1,4 @@
-package com.socialuni.social.user.sdk.dao.DO;
+package com.socialuni.social.friend.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import com.socialuni.social.common.api.entity.SocialuniUserContactBaseDO;

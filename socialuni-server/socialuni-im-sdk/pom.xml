@@ -35,6 +35,15 @@
             <groupId>com.socialuni.social</groupId>
             <artifactId>socialuni-user-sdk</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.socialuni.social</groupId>
+            <artifactId>socialuni-follow-sdk</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.socialuni.social</groupId>
+            <artifactId>socialuni-friend-sdk</artifactId>
+        </dependency>
+
 
         <dependency>
             <groupId>io.jsonwebtoken</groupId>

@@ -3,7 +3,7 @@ package com.socialuni.social.user.sdk.logic.redis;
 import com.socialuni.social.common.api.constant.CommonRedisKey;
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
-import com.socialuni.social.user.sdk.dao.DO.SocialuniUserFollowDO;
+import com.socialuni.social.friend.dao.DO.SocialuniUserFollowDO;
 import com.socialuni.social.user.sdk.repository.SocialuniFollowRepository;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
