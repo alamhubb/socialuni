@@ -1,11 +1,11 @@
 <template>
   <view class="h100p flex-col bg-white">
-<!--    <q-tabs :tabs="tabs" :value="currentTabIndex" type="full" @input="tabsChange"-->
-<!--            class="flex-none bd-radius flex-1 mr-sm mt-sm">-->
-<!--      <template #default="{tab,index,value}">-->
-<!--        <view class="h30 px-xs row-all-center font-md" :class="{'font-md':value===index}">{{ tab }}</view>-->
-<!--      </template>-->
-<!--    </q-tabs>-->
+    <!--    <q-tabs :tabs="tabs" :value="currentTabIndex" type="full" @input="tabsChange"-->
+    <!--            class="flex-none bd-radius flex-1 mr-sm mt-sm">-->
+    <!--      <template #default="{tab,index,value}">-->
+    <!--        <view class="h30 px-xs row-all-center font-md" :class="{'font-md':value===index}">{{ tab }}</view>-->
+    <!--      </template>-->
+    <!--    </q-tabs>-->
     <div class="flex-1 overflow-hidden">
       <q-pull-refresh ref="pullRefresh" @refresh="manualPulldownRefresh" class="h100p">
         <swiper class="h100p" :current="currentTabIndex" @change="talkSwiperChange">
@@ -18,9 +18,9 @@
               </div>
               <template v-else>
                 <div v-if="mineUser && swiperIndex === 0" class="px-sm">
-<!--                  <div class="row-all-center color-main mt-sm chunk-default pd-xs">-->
-<!--                    {{ mineUser.openContactInfo ? '下拉刷新将您的排名前置' : '开启联系方式您的信息将在此处展示' }}-->
-<!--                  </div>-->
+                  <!--                  <div class="row-all-center color-main mt-sm chunk-default pd-xs">-->
+                  <!--                    {{ mineUser.openContactInfo ? '下拉刷新将您的排名前置' : '开启联系方式您的信息将在此处展示' }}-->
+                  <!--                  </div>-->
                 </div>
                 <div class="flex-col px-smm py-sm bb" v-for="user in item.queryQO.listData" :key="user.id"
                      @click="toUserDetailVue(user)">
@@ -41,22 +41,6 @@
                             </view>
                             <social-gender-tag class="ml-xs" :user="user"></social-gender-tag>
                           </div>
-
-                          <view v-if="!isIos" class="col-center flex-none">
-                            <div v-if="user.openContactInfo" class="use-click row-col-center">
-                              <q-button light @click="copyContactInfo(user)">
-                                <div class="color-content ml-xs font-12">
-                                  已获取( 点击复制 )
-                                </div>
-                              </q-button>
-                            </div>
-                            <div v-else class="use-click row-col-center">
-                              <q-button text @click="getOpenContactInfo(user)" :disabled="showUserContactBtnDisabled">
-                                <q-icon prefix="uni-icons" icon="uniui-personadd" size="22"></q-icon>
-                              </q-button>
-                            </div>
-                            <!--                    <socialuni-follow-tag :user="user" @change="userFollowChange"></socialuni-follow-tag>-->
-                          </view>
                         </view>
                         <view class="row-col-center mt-xss font-12 color-content">
                           {{ formatTime(user.updateTime) }}
@@ -65,7 +49,7 @@
                           <text v-if="!user.cityName || !user.districtName">{{ user.provinceName }}</text>
                           <text v-if="user.cityName">
                             <text v-if="!user.districtName">-</text>
-                            {{ user.cityName.substring(0,6) }}
+                            {{ user.cityName.substring(0, 6) }}
                           </text>
                           <text v-if="user.districtName">-{{ user.districtName }}</text>
 
@@ -78,6 +62,21 @@
                           </view>
                         </view>
                       </div>
+                      <view v-if="!isIos" class="col-center flex-none">
+                        <div v-if="user.openContactInfo" class="use-click row-col-center">
+                          <q-button light @click="copyContactInfo(user)">
+                            <div class="color-content ml-xs font-12">
+                              已获取( 点击复制 )
+                            </div>
+                          </q-button>
+                        </div>
+                        <div v-else class="use-click row-col-center">
+                          <q-button text @click="getOpenContactInfo(user)" :disabled="showUserContactBtnDisabled">
+                            <q-icon prefix="uni-icons" icon="uniui-heart" size="22"></q-icon>
+                          </q-button>
+                        </div>
+                        <!--                    <socialuni-follow-tag :user="user" @change="userFollowChange"></socialuni-follow-tag>-->
+                      </view>
                     </view>
                   </div>
                   <view class="ml-60 row-col-center mt-xs">
@@ -104,7 +103,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, Prop, Emit} from 'vue-facing-decorator'
+import {Vue, Component, Prop, Emit, toNative} from 'vue-facing-decorator'
 import SocialuniFollowType from "socialuni-constant/constant/user/SocialuniFollowType";
 import SocialUserContentRO from "socialuni-api-base/src/model/social/SocialUserContentRO";
 import {onLoad, onPullDownRefresh, onReachBottom, onShow} from "@dcloudio/uni-app";
@@ -134,7 +133,7 @@ import SocialuniUserExpandService from "../service/SocialuniDatingService";
 @Component({
   components: {QPullRefresh, QButton, QIcon, SocialGenderTag, QTabs}
 })
-export default class SocialuniExpandView extends Vue {
+class SocialuniExpandView extends Vue {
   $refs: {
     pullRefresh: QPullRefresh
   }
@@ -150,7 +149,7 @@ export default class SocialuniExpandView extends Vue {
   }
   showUserContactBtnDisabled: boolean = false
 
-  get isIos(){
+  get isIos() {
     return socialuniSystemModule.isIos
   }
 
@@ -302,7 +301,7 @@ export default class SocialuniExpandView extends Vue {
       urls: this.imgUrls(user)
     })
   }
-
-
 }
+
+export default toNative(SocialuniExpandView)
 </script>
