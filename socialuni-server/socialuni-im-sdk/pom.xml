@@ -12,8 +12,8 @@
     <artifactId>socialuni-im-sdk</artifactId>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
     </properties>
     <dependencies>
         <dependency>
@@ -35,15 +35,6 @@
             <groupId>com.socialuni.social</groupId>
             <artifactId>socialuni-user-sdk</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.socialuni.social</groupId>
-            <artifactId>socialuni-follow-sdk</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.socialuni.social</groupId>
-            <artifactId>socialuni-friend-sdk</artifactId>
-        </dependency>
-
 
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
