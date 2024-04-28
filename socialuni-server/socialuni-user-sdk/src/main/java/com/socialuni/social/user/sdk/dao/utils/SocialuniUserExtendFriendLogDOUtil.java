@@ -23,14 +23,14 @@ public class SocialuniUserExtendFriendLogDOUtil {
         }
 
         //判断用户是否打开了
-        SocialuniUserExpandDo socialuniUserExpandDo = SocialuniUserExpandDOUtil.getAllowNull(mineUser.getUserId());
-        if (socialuniUserExpandDo == null) {
-            return;
-        }
-        //未开启则不记录
-        if (!socialuniUserExpandDo.getOpenContactInfo()) {
-            return;
-        }
+//        SocialuniUserExpandDo socialuniUserExpandDo = SocialuniUserExpandDOUtil.getAllowNull(mineUser.getUserId());
+//        if (socialuniUserExpandDo == null) {
+//            return;
+//        }
+//        //未开启则不记录
+//        if (!socialuniUserExpandDo.getOpenContactInfo()) {
+//            return;
+//        }
 
         SocialuniUserExtendFriendLogDo socialuniUserExtendFriendLogDo = new SocialuniUserExtendFriendLogDo();
         socialuniUserExtendFriendLogDo.setUserId(mineUser.getUserId());

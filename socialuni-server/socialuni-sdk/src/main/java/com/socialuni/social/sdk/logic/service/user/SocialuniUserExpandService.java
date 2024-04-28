@@ -120,11 +120,16 @@ public class SocialuniUserExpandService {
         //查询用户状态不为封禁的
         List<Integer> userIds = socialuniUserRepository.findUserIdsByStatus(SocialuniUserStatus.enable);
         List<Integer> queryIds;
-        if (pageTypeUserIds == null) {
-            queryIds = ListConvertUtil.intersectionMany(openContactIds, userIds);
-        } else {
-            queryIds = ListConvertUtil.intersectionMany(openContactIds, pageTypeUserIds, userIds);
-        }
+        //暂时不加最近在线，和开启联系方式等功能
+//        if (pageTypeUserIds == null) {
+//            queryIds = ListConvertUtil.intersectionMany(openContactIds, userIds);
+//        } else {
+////            pageTypeUserIds,
+////            queryIds = ListConvertUtil.intersectionMany(openContactIds,  userIds);
+////            queryIds = ListConvertUtil.intersectionMany(userIds);
+//            queryIds = userIds;
+//        }
+        queryIds = userIds;
         Integer pageSize = socialuniPageQueryQO.getPageSize();
         if (pageSize == null) {
             pageSize = 10;

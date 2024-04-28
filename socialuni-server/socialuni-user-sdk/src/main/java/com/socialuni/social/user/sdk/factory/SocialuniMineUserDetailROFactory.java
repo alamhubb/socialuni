@@ -9,6 +9,7 @@ import com.socialuni.social.user.sdk.dao.DO.SocialuniUserCoinDo;
 import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserDetailRO;
 import com.socialuni.social.user.sdk.dao.utils.SocialuniUserExpandDOUtil;
+import com.socialuni.social.user.sdk.dao.utils.SocialuniUserExtendFriendLogDOUtil;
 import com.socialuni.social.user.sdk.logic.domain.SocialBindUserOpenImAccountDomain;
 import com.socialuni.social.user.sdk.logic.redis.SocialUserPhoneRedis;
 import com.socialuni.social.common.sdk.dao.repository.SocialUserPlatformAccountRepository;
@@ -33,6 +34,8 @@ public class SocialuniMineUserDetailROFactory {
 
     public static SocialuniMineUserDetailRO getMineUserDetail() {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
+        //生成用户扩列记录
+        SocialuniUserExtendFriendLogDOUtil.createUserExtendFriendLog();
         SocialuniMineUserDetailRO mineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
         return mineUserDetailRO;
     }
