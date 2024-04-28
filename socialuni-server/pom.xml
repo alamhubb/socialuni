@@ -47,7 +47,7 @@
     </modules>
 
     <properties>
-        <kotlin.version>1.9.23</kotlin.version>
+        <kotlin.version>2.0.0-Beta3</kotlin.version>
         <socialuni.version>0.3.0</socialuni.version>
         <spring-cloud.version>2021.0.4</spring-cloud.version>
         <commons-lang3.version>3.9</commons-lang3.version>
