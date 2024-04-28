@@ -53,12 +53,12 @@
             <!-- 只要不为QQ小程序平台都可以使用微信登录-->
             <template v-if="!user">
               <q-button v-if="showPhoneLogin"
-                        :disabled="loginButtonDisabled" @click="phoneLogin"
+                        :disabled="viewService.bindBtnDisabled" @click="viewService.handleLogin()"
                         add-class="bg-gradual-phone" md class="w90p mt"
                         :class="loginButtonDisabled?'':'bg-click'"
               >
                 <q-icon color="white" icon="mdi-cellphone-android" size="21" class="mr-xs"></q-icon>
-                手机号登录
+                {{ viewService.bindBtnDisabled ? '登陆中' : viewService.loginBtnText }}
               </q-button>
               <q-button v-else-if="isMpQQ" :disabled="allButtonDisabled"
                         add-class="bg-gradual-qq" md class="w90p mt"
@@ -199,10 +199,8 @@ class LoginView extends Vue {
   // contractChecked = true
 
   created() {
-    console.log(2323)
     this.initData()
     onLoad((params) => {
-      console.log(898989)
       console.log(this)
       console.log(getCurrentInstance())
       this.viewService.initService(getCurrentInstance(), params)

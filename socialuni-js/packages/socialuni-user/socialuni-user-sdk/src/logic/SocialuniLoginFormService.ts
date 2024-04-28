@@ -53,6 +53,7 @@ export default class SocialuniLoginFormService extends SocialuniViewService<Soci
 
     async phoneNumberOnInput() {
         if (!this.loginData.phoneNumHasError) {
+            console.log(234234)
             const res = await PhoneAPI.checkRegistry(this.loginData.phoneNum)
             this.loginData.phoneNumRegistered = res.data
         }

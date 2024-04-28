@@ -9,7 +9,6 @@
                :maxlength="11"
                v-model.trim="viewService.loginData.phoneNum"
                @confirm="passwordInputFocus()"
-               @blur="phoneNumberOnInput"
                @input="phoneNumberOnInput"
                :confirm-hold="true"
                placeholder="请填写手机号"
@@ -53,7 +52,7 @@
       </text>
     </view>
 
-    <view class="row-col-center">
+    <view class="row-col-center" v-if="!viewService.loginData.phoneNumRegistered">
       <view>验证码</view>
 
       <div class="flex-row ml-smm solid-bottom flex-1">
@@ -76,7 +75,7 @@
         </button>
       </view>
     </view>
-    <view class="h30 row-col-center">
+    <view class="h30 row-col-center" v-if="!viewService.loginData.phoneNumRegistered">
       <text v-if="viewService.loginData.authCodeHasError" class="color-red">
         *请输入正确的验证码
       </text>
@@ -85,7 +84,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator'
+import {Component, Emit, Model, Prop, toNative, Vue, Watch} from 'vue-facing-decorator'
 import PhoneNumFormData from "./PhoneNumFormData";
 import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue";
 import SocialuniLoginFormService from "socialuni-user-sdk/src/logic/SocialuniLoginFormService";
@@ -95,7 +94,7 @@ import {nextTick} from "vue";
 @Component({
   components: {QIcon}
 })
-export default class PhoneLoginForm extends Vue {
+class PhoneLoginForm extends Vue {
   @Prop() show: boolean
   // @Model('modelValue') readonly value!: PhoneNumFormData
 
@@ -108,6 +107,7 @@ export default class PhoneLoginForm extends Vue {
 
 
   async phoneNumberOnInput() {
+    console.log('chufale')
     await this.viewService.phoneNumberOnInput()
     nextTick(() => {
       // this.$refs.loginForm.clearValidate()
@@ -196,4 +196,5 @@ export default class PhoneLoginForm extends Vue {
     })
   }
 }
+export default toNative(PhoneLoginForm)
 </script>
