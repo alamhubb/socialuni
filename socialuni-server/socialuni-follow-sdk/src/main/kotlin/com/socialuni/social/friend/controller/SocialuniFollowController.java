@@ -1,11 +1,11 @@
-package com.socialuni.social.user.sdk.controller;
+package com.socialuni.social.friend.controller;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
 import com.socialuni.social.common.api.model.user.SocialuniUserFollowDetailListRO;
-import com.socialuni.social.user.sdk.api.SocialuniFollowAPI;
-import com.socialuni.social.user.sdk.logic.service.SocialuniFollowService;
-import com.socialuni.social.user.sdk.model.QO.follow.SocialuniUserFollowAddQO;
+import com.socialuni.social.friend.model.qo.SocialuniUserFollowAddQO;
+import com.socialuni.social.friend.api.SocialuniFollowAPI;
+import com.socialuni.social.friend.logic.service.SocialuniFollowService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

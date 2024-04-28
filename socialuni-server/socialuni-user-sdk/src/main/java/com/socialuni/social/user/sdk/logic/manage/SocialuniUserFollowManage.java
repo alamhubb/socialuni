@@ -1,6 +1,8 @@
 package com.socialuni.social.user.sdk.logic.manage;
 
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
+import com.socialuni.social.friend.dao.DO.SocialuniUserFollowDO;
+import com.socialuni.social.friend.dao.repository.SocialuniFollowRepository;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

@@ -1,6 +1,7 @@
 package com.socialuni.social.user.sdk.logic.domain;
 
-import com.socialuni.social.user.sdk.model.QO.follow.SocialuniUserFollowAddQO;
+import com.socialuni.social.friend.dao.DO.SocialuniUserFollowDO;
+import com.socialuni.social.friend.model.qo.SocialuniUserFollowAddQO;
 
 public interface SocialUserFollowDomainInterface {
     SocialuniUserFollowDO addFlow(SocialuniUserFollowAddQO addVO);
