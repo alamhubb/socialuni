@@ -16,7 +16,6 @@ import com.socialuni.social.common.sdk.dao.repository.TagRepository;
 import com.socialuni.social.community.sdk.repository.TalkRepository;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
-import com.socialuni.social.community.sdk.dao.store.TalkQueryStore;
 import com.socialuni.social.community.sdk.logic.entity.talk.SocialFollowUserTalksQueryEntity;
 import com.socialuni.social.community.sdk.logic.factory.SocialTalkROFactory;
 import com.socialuni.social.community.sdk.model.QO.talk.SocialHomeTabTalkQueryBO;

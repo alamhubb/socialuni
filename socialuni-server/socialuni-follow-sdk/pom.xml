@@ -12,7 +12,7 @@
 
     <properties>
         <java.version>17</java.version>
-        <kotlin.version>2.0.0-RC</kotlin.version>
+        <kotlin.version>1.9.23</kotlin.version>
     </properties>
 
     <dependencies>
@@ -138,7 +138,7 @@
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-stdlib-jdk8</artifactId>
+            <artifactId>kotlin-stdlib</artifactId>
             <version>${kotlin.version}</version>
         </dependency>
         <dependency>

@@ -1,11 +1,12 @@
 package com.socialuni.social.user.sdk.logic.domain;
 
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
+import com.socialuni.social.friend.dao.DO.SocialuniUserFollowDO;
+import com.socialuni.social.friend.dao.redis.SocialuniUserFollowRedis;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserBlackDO;
 import com.socialuni.social.user.sdk.logic.manage.SocialuniUserFollowManage;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserFansDetailManage;
-import com.socialuni.social.user.sdk.logic.redis.SocialuniUserFollowRedis;
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.user.sdk.model.QO.follow.SocialuniUserFollowAddQO;

@@ -1,7 +1,6 @@
 package com.socialuni.social.community.sdk.logic.domain.talk;
 
 import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
-import com.socialuni.social.community.sdk.dao.store.TalkQueryStore;
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.community.sdk.logic.factory.SocialTalkROFactory;
 import com.socialuni.social.community.sdk.model.QO.talk.SocialUserTalkQueryQO;

@@ -1,7 +1,6 @@
 package com.socialuni.social.sdk.logic.service.talk;
 
 import com.socialuni.social.common.sdk.feignAPI.community.SocialuniTalkAPI;
-import com.socialuni.social.community.sdk.dao.store.TalkQueryStore;
 import com.socialuni.social.community.sdk.logic.domain.talk.*;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.community.sdk.constant.TalkTabType;

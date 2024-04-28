@@ -7,7 +7,6 @@ import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
 import com.socialuni.social.common.api.model.user.SocialuniUserFollowDetailListRO;
 import com.socialuni.social.user.sdk.constant.SocialuniFollowPageType;
 import com.socialuni.social.user.sdk.model.factory.SocialuniUserFollowDetailROFactory;
-import com.socialuni.social.user.sdk.repository.SocialuniFollowRepository;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import lombok.extern.slf4j.Slf4j;

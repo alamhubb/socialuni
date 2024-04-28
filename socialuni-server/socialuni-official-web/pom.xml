@@ -13,9 +13,6 @@
     <version>0.3.0</version>
     <packaging>jar</packaging>
     <description>socialuni-official-web</description>
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>com.socialuni.social</groupId>
