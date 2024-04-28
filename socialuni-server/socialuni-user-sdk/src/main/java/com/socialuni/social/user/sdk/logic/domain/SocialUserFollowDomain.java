@@ -7,7 +7,6 @@ import com.socialuni.social.user.sdk.logic.manage.SocialuniUserFollowManage;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserFansDetailManage;
 import com.socialuni.social.user.sdk.logic.redis.SocialuniUserFollowRedis;
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
-import com.socialuni.social.friend.dao.DO.SocialuniUserFollowDO;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.user.sdk.model.QO.follow.SocialuniUserFollowAddQO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;

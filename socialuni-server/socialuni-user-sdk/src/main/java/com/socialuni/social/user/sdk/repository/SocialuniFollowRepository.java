@@ -1,7 +1,6 @@
 package com.socialuni.social.user.sdk.repository;
 
 import com.socialuni.social.common.api.constant.CommonRedisKey;
-import com.socialuni.social.friend.dao.DO.SocialuniUserFollowDO;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.data.jpa.repository.JpaRepository;

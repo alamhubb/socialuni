@@ -3,7 +3,6 @@ package com.socialuni.social.user.sdk.model.factory;
 import com.socialuni.social.common.api.model.user.SocialuniUserFollowDetailListRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserFollowInfoRO;
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
-import com.socialuni.social.friend.dao.DO.SocialuniUserFollowDO;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserFansDetailManage;
 import com.socialuni.social.user.sdk.dao.DO.SocialUserFansDetailDo;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;

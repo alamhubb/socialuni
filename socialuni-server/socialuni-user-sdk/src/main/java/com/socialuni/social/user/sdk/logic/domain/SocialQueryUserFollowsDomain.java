@@ -6,7 +6,6 @@ import com.socialuni.social.common.api.exception.exception.SocialSystemException
 import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
 import com.socialuni.social.common.api.model.user.SocialuniUserFollowDetailListRO;
 import com.socialuni.social.user.sdk.constant.SocialuniFollowPageType;
-import com.socialuni.social.friend.dao.DO.SocialuniUserFollowDO;
 import com.socialuni.social.user.sdk.model.factory.SocialuniUserFollowDetailROFactory;
 import com.socialuni.social.user.sdk.repository.SocialuniFollowRepository;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
