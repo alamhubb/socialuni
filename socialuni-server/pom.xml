@@ -33,7 +33,12 @@
         <module>socialuni-tance-uni</module>
         <module>socialuni-tance-dev</module>
         <module>socialuni-tance-api</module>
+        <module>socialuni-friend-sdk</module>
         <module>socialuni-user-sdk</module>
+        <module>socialuni-app-sdk</module>
+        <module>socialuni-expand-sdk</module>
+        <module>socialuni-follow-sdk</module>
+        <module>socialuni-like-sdk</module>
         <module>socialuni-report-sdk</module>
         <module>socialuni-admin-sdk</module>
         <module>socialuni-community-sdk</module>
@@ -144,6 +149,31 @@
             <dependency>
                 <groupId>com.socialuni.social</groupId>
                 <artifactId>socialuni-user-sdk</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni.social</groupId>
+                <artifactId>socialuni-app-sdk</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni.social</groupId>
+                <artifactId>socialuni-friend-sdk</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni.social</groupId>
+                <artifactId>socialuni-follow-sdk</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni.social</groupId>
+                <artifactId>socialuni-expand-sdk</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni.social</groupId>
+                <artifactId>socialuni-like-sdk</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>
