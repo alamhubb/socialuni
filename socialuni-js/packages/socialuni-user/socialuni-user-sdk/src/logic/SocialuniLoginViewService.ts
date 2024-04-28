@@ -44,12 +44,20 @@ export default class SocialuniLoginViewService extends SocialuniLoginFormService
 
         if (this.loginData.phoneNumRegistered) {
             SocialuniLoginService.passwordLogin(this.loginData.phoneNum, password).then((data) => {
+                console.log(this)
+                console.log(1111)
+                console.log(this.instance)
+                console.log(2222)
                 this.instance.emit('loginSuccess', data)
             }).finally(() => {
                 this.bindBtnDisabled = false
             })
         } else {
             SocialuniLoginService.phonePasswordLogin(this.loginData.phoneNum, password, this.loginData.authCode).then((data) => {
+                console.log(this)
+                console.log(1111)
+                console.log(this.instance)
+                console.log(2222)
                 this.instance.emit('loginSuccess', data)
             }).finally(() => {
                 this.bindBtnDisabled = false

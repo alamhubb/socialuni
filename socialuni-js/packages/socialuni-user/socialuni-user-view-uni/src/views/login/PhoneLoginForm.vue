@@ -163,24 +163,24 @@ export default class PhoneLoginForm extends Vue {
   }
 
   phoneNumInputFocus() {
-    this.phoneNumFocus = true
-    CommonUtil.delayTime(100).then(() => {
-      this.phoneNumFocus = true
-    })
+    // this.phoneNumFocus = true
+    // CommonUtil.delayTime(100).then(() => {
+    //   this.phoneNumFocus = true
+    // })
   }
 
   authCodeInputFocus() {
-    this.authCodeFocus = true
-    CommonUtil.delayTime(100).then(() => {
-      this.authCodeFocus = true
-    })
+    // this.authCodeFocus = true
+    // CommonUtil.delayTime(100).then(() => {
+    //   this.authCodeFocus = true
+    // })
   }
 
   passwordInputFocus() {
-    this.passwordFocus = true
-    CommonUtil.delayTime(100).then(() => {
-      this.passwordFocus = true
-    })
+    // this.passwordFocus = true
+    // CommonUtil.delayTime(100).then(() => {
+    //   this.passwordFocus = true
+    // })
   }
 }
 </script>

@@ -141,6 +141,8 @@ import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import PhoneService from "socialuni-user-sdk/src/logic/PhoneService";
 import SocialuniUserPrivacyAgreeService from "socialuni-user-sdk/src/logic/SocialuniUserPrivacyAgreeService";
 import SocialuniLoginViewService from "socialuni-user-sdk/src/logic/SocialuniLoginViewService";
+import {getCurrentInstance} from "vue";
+import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
 
 @Component({
   components: {
@@ -198,6 +200,12 @@ export default class LoginView extends Vue {
 
   created() {
     this.initData()
+    onLoad((params) => {
+      console.log(898989)
+      console.log(this)
+      console.log(getCurrentInstance())
+      this.viewService.initService(this, params)
+    })
   }
 
   initData() {
