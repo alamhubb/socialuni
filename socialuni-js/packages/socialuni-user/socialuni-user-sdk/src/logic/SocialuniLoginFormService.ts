@@ -47,29 +47,14 @@ export default class SocialuniLoginFormService extends SocialuniViewService<Soci
     }
 
 
-
     initService(instance: ComponentInternalInstance, params: any = {}) {
         super.initService(instance, params);
     }
 
-    phoneNumberOnInput() {
+    async phoneNumberOnInput() {
         if (!this.loginData.phoneNumHasError) {
-            PhoneAPI.checkRegistry(this.loginData.phoneNum).then(res => {
-                this.loginData.phoneNumRegistered = res.data
-                nextTick(() => {
-                    setTimeout(() => {
-                        // this.$refs.loginForm.clearValidate()
-                        setTimeout(() => {
-                            this.$refs.password.focus()
-                            // this.$refs.loginForm.clearValidate()
-                            setTimeout(() => {
-                                // this.$refs.loginForm.clearValidate()
-                            }, 100)
-                        }, 500)
-                    }, 50)
-
-                })
-            })
+            const res = await PhoneAPI.checkRegistry(this.loginData.phoneNum)
+            this.loginData.phoneNumRegistered = res.data
         }
     }
 
@@ -77,6 +62,7 @@ export default class SocialuniLoginFormService extends SocialuniViewService<Soci
     sendCodeClick() {
         this.loginData.checkSendAuthCode()
         this.loginData.authCodeClear()
+        this.loginData.computedCountDown()
 
         // 如果怕太频繁，就显示相同手机号每天只能发送几次，一小时内只能5次
         PhoneAPI.sendAuthCodeAPI(this.loginData.phoneNum).then(() => {

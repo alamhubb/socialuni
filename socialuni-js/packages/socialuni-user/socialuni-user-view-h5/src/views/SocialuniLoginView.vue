@@ -17,8 +17,8 @@
                 type="text"
                 :maxlength="11"
                 clearable
-                @input="viewService.phoneNumberOnInput()"
-                @blur="viewService.phoneNumberOnInput()"
+                @input="phoneNumberOnInput()"
+                @blur="phoneNumberOnInput()"
             >
               <template #prepend>+86</template>
             </el-input>
@@ -51,7 +51,8 @@
             />
           </div>
         </el-form-item>-->
-        <el-form-item v-if="!viewService.loginData.phoneNumRegistered" label="验证码" prop="authCode" label-width="70px">
+        <el-form-item v-if="!viewService.loginData.phoneNumRegistered" label="验证码" prop="authCode"
+                      label-width="70px">
           <div class="flex-row w100p">
             <el-input
                 ref="authCode"
@@ -107,14 +108,29 @@
 <script lang="ts">
 import {Emit, Component, Vue} from 'vue-facing-decorator'
 import SocialuniLoginViewService from "socialuni-user-sdk/src/logic/SocialuniLoginViewService";
-import {getCurrentInstance} from "vue";
+import {getCurrentInstance, nextTick} from "vue";
 
 @Component({})
 export default class SocialuniLoginView extends Vue {
+  $refs: {
+    loginForm: any
+    password: any
+  }
+
   viewService: SocialuniLoginViewService = new SocialuniLoginViewService()
 
   created() {
     this.viewService.initService(getCurrentInstance())
+  }
+
+  phoneNumberOnInput() {
+    await this.viewService.phoneNumberOnInput()
+    nextTick(() => {
+      this.$refs.loginForm.clearValidate()
+      setTimeout(() => {
+        this.$refs.password.focus()
+      }, 100)
+    })
   }
 }
 </script>

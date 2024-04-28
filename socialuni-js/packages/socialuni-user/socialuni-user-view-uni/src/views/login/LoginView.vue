@@ -126,7 +126,7 @@
 
 
 <script lang="ts">
-import {Component, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Vue} from 'vue-facing-decorator'
 import PhoneNumFormData from "./PhoneNumFormData";
 import UserPrivacyAgreement from "./UserPrivacyAgreement.vue";
 import PhoneLoginForm from "./PhoneLoginForm.vue";
@@ -153,7 +153,7 @@ import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
     LoginFooterAppInfo
   }
 })
-export default class LoginView extends Vue {
+class LoginView extends Vue {
   $refs: {
     loginForm: PhoneLoginForm
   }
@@ -199,12 +199,13 @@ export default class LoginView extends Vue {
   // contractChecked = true
 
   created() {
+    console.log(2323)
     this.initData()
     onLoad((params) => {
       console.log(898989)
       console.log(this)
       console.log(getCurrentInstance())
-      this.viewService.initService(this, params)
+      this.viewService.initService(getCurrentInstance(), params)
     })
   }
 
@@ -332,4 +333,6 @@ export default class LoginView extends Vue {
       return Alert.hint('请仔细阅读用户协议、隐私政策等内容后勾选同意')
     }*/
 }
+
+export default toNative(LoginView)
 </script>

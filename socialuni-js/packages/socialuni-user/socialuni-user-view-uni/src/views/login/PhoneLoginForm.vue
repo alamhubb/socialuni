@@ -9,8 +9,8 @@
                :maxlength="11"
                v-model.trim="viewService.loginData.phoneNum"
                @confirm="passwordInputFocus()"
-               @blur="phoneNumInputBlur()" @focus="phoneNumInputFocus()"
-               @input="input"
+               @blur="phoneNumberOnInput"
+               @input="phoneNumberOnInput"
                :confirm-hold="true"
                placeholder="请填写手机号"
         />
@@ -40,9 +40,7 @@
         <input class="flex-1 h35px" type="password" name="input" :focus="passwordFocus"
                :maxlength="20"
                v-model.trim="viewService.loginData.password"
-               @focus="passwordInputFocus()"
                @blur="passwordInputBlur()"
-               @input="input"
                placeholder="请填写密码"
         />
         <q-icon v-if="viewService.loginData.password" class="text-gray" icon="close-circle" size="20"
@@ -63,9 +61,7 @@
         <input class="flex-1 h35px" type="number" name="input" :focus="authCodeFocus"
                :maxlength="4"
                v-model.trim="viewService.loginData.authCode"
-               @focus="authCodeInputFocus()"
                @blur="authCodeInputBlur()"
-               @input="input"
                placeholder="请填写验证码"
         />
         <q-icon v-if="viewService.loginData.authCode" class="text-gray" icon="close-circle" size="20"
@@ -94,21 +90,34 @@ import PhoneNumFormData from "./PhoneNumFormData";
 import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue";
 import SocialuniLoginFormService from "socialuni-user-sdk/src/logic/SocialuniLoginFormService";
 import CommonUtil from "qing-util/src/util/CommonUtil";
+import {nextTick} from "vue";
 
 @Component({
   components: {QIcon}
 })
 export default class PhoneLoginForm extends Vue {
   @Prop() show: boolean
-  @Model('modelValue') readonly value!: PhoneNumFormData
+  // @Model('modelValue') readonly value!: PhoneNumFormData
 
   @Prop() viewService: SocialuniLoginFormService
 
-  @Emit('update:modelValue')
-  input() {
-    return this.viewService.loginData
-  }
+  // @Emit('update:modelValue')
+  // input() {
+  //   return this.viewService.loginData
+  // }
 
+
+  async phoneNumberOnInput() {
+    await this.viewService.phoneNumberOnInput()
+    nextTick(() => {
+      // this.$refs.loginForm.clearValidate()
+      setTimeout(() => {
+        console.log(this)
+        console.log(this.$refs)
+        this.passwordInputFocus()
+      }, 50)
+    })
+  }
 
   @Watch('show')
   showPhoneViewWatch() {
@@ -141,19 +150,16 @@ export default class PhoneLoginForm extends Vue {
   phoneNumClear() {
     this.viewService.loginData.phoneNumClear()
     this.phoneNumInputFocus()
-    this.input()
   }
 
   passwordClear() {
     this.viewService.loginData.passwordClear()
     this.passwordInputFocus()
-    this.input()
   }
 
   authCodeClear() {
     this.viewService.loginData.authCodeClear()
     this.authCodeInputFocus()
-    this.input()
   }
 
 
@@ -163,24 +169,31 @@ export default class PhoneLoginForm extends Vue {
   }
 
   phoneNumInputFocus() {
-    // this.phoneNumFocus = true
-    // CommonUtil.delayTime(100).then(() => {
-    //   this.phoneNumFocus = true
-    // })
+    this.phoneNumFocus = false
+    CommonUtil.delayTime(0).then(() => {
+      this.phoneNumFocus = true
+      CommonUtil.delayTime(100).then(() => {
+        this.phoneNumFocus = true
+      })
+    })
   }
 
   authCodeInputFocus() {
-    // this.authCodeFocus = true
-    // CommonUtil.delayTime(100).then(() => {
-    //   this.authCodeFocus = true
-    // })
+    this.authCodeFocus = true
+    CommonUtil.delayTime(100).then(() => {
+      this.authCodeFocus = true
+    })
   }
 
   passwordInputFocus() {
-    // this.passwordFocus = true
-    // CommonUtil.delayTime(100).then(() => {
-    //   this.passwordFocus = true
-    // })
+    console.log(33333)
+    this.passwordFocus = false
+    CommonUtil.delayTime(0).then(() => {
+      this.passwordFocus = true
+      CommonUtil.delayTime(100).then(() => {
+        this.passwordFocus = true
+      })
+    })
   }
 }
 </script>
