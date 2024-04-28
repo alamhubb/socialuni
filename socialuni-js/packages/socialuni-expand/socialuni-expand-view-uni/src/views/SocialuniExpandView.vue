@@ -1,11 +1,11 @@
 <template>
   <view class="h100p flex-col bg-white">
-    <q-tabs :tabs="tabs" :value="currentTabIndex" type="full" @input="tabsChange"
-            class="flex-none bd-radius flex-1 mr-sm mt-sm">
-      <template #default="{tab,index,value}">
-        <view class="h30 px-xs row-all-center font-md" :class="{'font-md':value===index}">{{ tab }}</view>
-      </template>
-    </q-tabs>
+<!--    <q-tabs :tabs="tabs" :value="currentTabIndex" type="full" @input="tabsChange"-->
+<!--            class="flex-none bd-radius flex-1 mr-sm mt-sm">-->
+<!--      <template #default="{tab,index,value}">-->
+<!--        <view class="h30 px-xs row-all-center font-md" :class="{'font-md':value===index}">{{ tab }}</view>-->
+<!--      </template>-->
+<!--    </q-tabs>-->
     <div class="flex-1 overflow-hidden">
       <q-pull-refresh ref="pullRefresh" @refresh="manualPulldownRefresh" class="h100p">
         <swiper class="h100p" :current="currentTabIndex" @change="talkSwiperChange">
