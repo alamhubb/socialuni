@@ -1,9 +1,9 @@
 import {App} from "vue";
-import QingScss from 'qing-scss/src/index'
+import QingUiUni from "qing-ui-uni/src";
 
 const SocialuniUiUni = {
     async install(app: App) {
-        app.use(QingScss)
+        app.use(QingUiUni)
     }
 }
 
