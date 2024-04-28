@@ -25,6 +25,7 @@
         <module>socialuni-official-web</module>
         <module>socialuni-common-api</module>
         <module>socialuni-sdk</module>
+        <module>socialuni-app-sdk</module>
         <module>socialuni-web-sdk</module>
         <module>socialuni-music-sdk</module>
         <module>socialuni-deploy-sdk</module>
@@ -140,6 +141,11 @@
             <dependency>
                 <groupId>com.socialuni.social</groupId>
                 <artifactId>socialuni-report-sdk</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni.social</groupId>
+                <artifactId>socialuni-app-sdk</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>
