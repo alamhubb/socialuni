@@ -15,6 +15,8 @@ public class MessageAddVO {
     @NotBlank
     private String receiveId;
 
+    private String type;
+
     @NotBlank
     private String content;
     //暂时未使用

@@ -48,6 +48,10 @@
             <artifactId>socialuni-common-sdk</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.socialuni.social</groupId>
+            <artifactId>socialuni-im-sdk</artifactId>
+        </dependency>
+        <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
             <version>0.9.1</version>
@@ -78,8 +82,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
-
 
         <dependency>
             <groupId>org.springframework.cloud</groupId>

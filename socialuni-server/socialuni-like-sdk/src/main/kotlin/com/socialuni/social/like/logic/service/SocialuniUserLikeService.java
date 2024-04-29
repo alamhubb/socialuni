@@ -5,19 +5,27 @@ import com.socialuni.social.common.api.exception.exception.SocialBusinessExcepti
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.user.SocialuniUserIdQO;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
+import com.socialuni.social.im.api.model.QO.message.MessageAddVO;
 import com.socialuni.social.like.dao.DO.SocialuniUserLikeDO;
 import com.socialuni.social.like.logic.manage.SocialuniUserLikeManage;
+import com.socialuni.social.sdk.im.logic.service.SocialuniMessageService;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Date;
+import javax.transaction.Transactional;
 import java.util.Objects;
 
+@Service
 public class SocialuniUserLikeService {
     @Resource
     SocialuniUserLikeManage socialuniUserLikeManage;
 
+    @Resource
+    private SocialuniMessageService messageService;
+
+    @Transactional
     public SocialuniUserLikeDO likeUser(SocialuniUserIdQO addVO) {
         //有问题，应该关注完刷新前台用户
         Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
@@ -36,6 +44,16 @@ public class SocialuniUserLikeService {
             }
             socialuniUserLikeManage.updateLikeStatue(socialuniUserLikeDO, SocialuniCommonStatus.enable);
         }
+
+        sendLikeUserMsg(addVO.getUserId());
         return socialuniUserLikeDO;
+    }
+
+    public void sendLikeUserMsg(String receiveUserId) {
+        MessageAddVO msgAddVO = new MessageAddVO();
+        msgAddVO.setReceiveId(receiveUserId);
+        msgAddVO.setType("like");
+        //msg支持自定义的展示类型
+        messageService.sendMsg(msgAddVO);
     }
 }

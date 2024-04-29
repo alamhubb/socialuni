@@ -86,6 +86,11 @@ public class SocialuniMessageEntity {
     // 这俩级联？
     @Transactional
     public SocialMessageRO sendSingleMsg(Integer beUserId, String msgContent) {
+        return sendSingleMsg(beUserId, msgContent, MessageType.simple);
+    }
+
+    @Transactional
+    public SocialMessageRO sendSingleMsg(Integer beUserId, String msgContent, String msgType) {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
 
         Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
@@ -144,7 +149,11 @@ public class SocialuniMessageEntity {
         //查询对方对你的关系，是不是好友。那如果你把对方删除了呢，你还能给对方发消息吗。则不能。
 
 
-        SocialuniMessageReceiveDO mineMessageUser = sendMsgNotifyList(msgContent, mineUser, chatSocialuniUserDoS, MessageType.simple);
+        if (msgType == null){
+            msgType = MessageType.simple;
+        }
+
+        SocialuniMessageReceiveDO mineMessageUser = sendMsgNotifyList(msgContent, mineUser, chatSocialuniUserDoS, msgType);
         //只需要返回自己的
         return SocialMessageROFactory.getMessageRO(mineMessageUser);
     }
