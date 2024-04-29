@@ -38,7 +38,7 @@ class SocialuniUserLikeService {
             if (socialuniUserLikeDO.status == SocialuniCommonStatus.enable) {
                 throw SocialBusinessException("已经喜欢过此用户了")
             }
-            socialuniUserLikeDO.status = SocialuniCommonStatus.enable
+            socialuniUserLikeDO = socialuniUserLikeManage?.updateLikeStatue(socialuniUserLikeDO, SocialuniCommonStatus.enable);
         }
         return socialuniUserLikeDO
     }

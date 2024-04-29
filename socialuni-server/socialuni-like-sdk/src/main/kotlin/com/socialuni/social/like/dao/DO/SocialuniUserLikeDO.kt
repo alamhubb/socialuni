@@ -11,7 +11,7 @@ import javax.persistence.UniqueConstraint
 @Data
 @Entity
 @Table(
-    name = "s_user_follow",
+    name = "s_user_like",
     indexes = [Index(columnList = "userId"), Index(columnList = "beUserId"), Index(columnList = "status"), Index(
         columnList = "updateTime"
     )],
