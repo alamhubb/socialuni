@@ -13,7 +13,7 @@ import javax.validation.Valid;
 @FeignClient(name = "userLike", url = "${socialuni.central-server-url:https://api.socialuni.cn}", path = "socialuni/userLike")
 @Tag(name = "用户模块/喜欢用户")
 public interface SocialuniUserLikeAPI {
-    @PostMapping("addLikeUser")
+    @PostMapping("likeUser")
     @Operation(summary = "喜欢用户")
-    ResultRO<Void> addLikeUser(@RequestBody @Valid SocialuniUserIdQO addVO);
+    ResultRO<Void> likeUser(@RequestBody @Valid SocialuniUserIdQO addVO);
 }

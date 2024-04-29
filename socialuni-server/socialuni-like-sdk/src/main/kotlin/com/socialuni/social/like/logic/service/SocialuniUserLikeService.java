@@ -1,0 +1,41 @@
+package com.socialuni.social.like.logic.service;
+
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
+import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.socialuni.social.common.api.model.user.SocialuniUserIdQO;
+import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
+import com.socialuni.social.like.dao.DO.SocialuniUserLikeDO;
+import com.socialuni.social.like.logic.manage.SocialuniUserLikeManage;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
+
+import javax.annotation.Resource;
+import java.util.Date;
+import java.util.Objects;
+
+public class SocialuniUserLikeService {
+    @Resource
+    SocialuniUserLikeManage socialuniUserLikeManage;
+
+    public SocialuniUserLikeDO likeUser(SocialuniUserIdQO addVO) {
+        //有问题，应该关注完刷新前台用户
+        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+
+        Integer beUserId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(addVO.getUserId());
+        if (Objects.equals(beUserId, mineUserId)) {
+            throw new SocialParamsException("不能喜欢自己哦");
+        }
+        SocialuniUserLikeDO socialuniUserLikeDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(mineUserId, beUserId, SocialuniUserLikeDO.class);
+
+        if (socialuniUserLikeDO == null) {
+            socialuniUserLikeDO = socialuniUserLikeManage.createUserLike(mineUserId, beUserId);
+        } else {
+            if (socialuniUserLikeDO.getStatus().equals(SocialuniCommonStatus.enable)) {
+                throw new SocialBusinessException("已经喜欢过此用户了");
+            }
+            socialuniUserLikeManage.updateLikeStatue(socialuniUserLikeDO, SocialuniCommonStatus.enable);
+        }
+        return socialuniUserLikeDO;
+    }
+}

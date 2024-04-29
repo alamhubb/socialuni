@@ -6,6 +6,6 @@ import SocialuniUserIdQO from "socialuni-api-base/src/model/QO/user/SocialuniUse
 export default class SocialuniUserLikeAPI {
 
   static addUserLikeAPI(user: CenterUserDetailRO) {
-    return socialuniUserRequest.post<CenterUserDetailRO[]>('socialuni/userLike/addLikeUser', {userId: user.id})
+    return socialuniUserRequest.post<CenterUserDetailRO[]>('socialuni/userLike/likeUser', {userId: user.id})
   }
 }

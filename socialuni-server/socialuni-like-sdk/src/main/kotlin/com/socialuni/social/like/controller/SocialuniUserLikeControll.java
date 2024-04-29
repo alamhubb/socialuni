@@ -16,9 +16,9 @@ class SocialuniUserLikeControll implements SocialuniUserLikeAPI {
     @Resource
     SocialuniUserLikeService socialuniUserLikeService;
 
-    @PostMapping("addLikeUser")
-    public ResultRO<Void> addLikeUser(SocialuniUserIdQO addVO) {
-        socialuniUserLikeService.addLike(addVO);
+    @PostMapping("likeUser")
+    public ResultRO<Void> likeUser(SocialuniUserIdQO addVO) {
+        socialuniUserLikeService.likeUser(addVO);
         return ResultRO.success();
     }
 }
