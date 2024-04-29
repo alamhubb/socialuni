@@ -1,0 +1,62 @@
+package com.socialuni.social.user.sdk.utils;
+
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
+import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
+import com.socialuni.social.user.sdk.logic.redis.SocialUserPhoneRedis;
+import org.apache.commons.lang3.StringUtils;
+
+import javax.annotation.Resource;
+
+public class SocialuniMineUserPhoneUtil {
+    public static SocialUserPhoneRedis socialUserPhoneRedis;
+
+    @Resource
+    public void setSocialUserPhoneStore(SocialUserPhoneRedis socialUserPhoneRedis) {
+        SocialuniMineUserPhoneUtil.socialUserPhoneRedis = socialUserPhoneRedis;
+    }
+
+    public static String getMineUserPhoneNum() {
+        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
+
+        //用户关注粉丝数
+        SocialUserPhoneDo SocialUserPhoneDo = socialUserPhoneRedis.findUserPhoneByUserId(mineUser.getUserId());
+
+        //user详情信息
+        if (SocialUserPhoneDo == null) {
+            return null;
+        }
+        //只有自己的开发者才显示手机号
+        if (!DevAccountFacade.getDevIdNotNull().equals(SocialUserPhoneDo.getDevId())) {
+            return null;
+        }
+        String realPhoneNum = SocialUserPhoneDo.getPhoneNum();
+        if (StringUtils.isEmpty(realPhoneNum)) {
+            return null;
+        }
+        realPhoneNum = realPhoneNum.substring(0, 3) + "*****" + realPhoneNum.substring(8);
+        return realPhoneNum;
+    }
+
+    public static String getMineUserPhoneNumFull() {
+        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
+
+        //用户关注粉丝数
+        SocialUserPhoneDo SocialUserPhoneDo = socialUserPhoneRedis.findUserPhoneByUserId(mineUser.getUserId());
+
+        //user详情信息
+        if (SocialUserPhoneDo == null) {
+            return null;
+        }
+        //只有自己的开发者才显示手机号
+        if (!DevAccountFacade.getDevIdNotNull().equals(SocialUserPhoneDo.getDevId())) {
+            return null;
+        }
+        String realPhoneNum = SocialUserPhoneDo.getPhoneNum();
+        if (StringUtils.isEmpty(realPhoneNum)) {
+            return null;
+        }
+        return realPhoneNum;
+    }
+
+}

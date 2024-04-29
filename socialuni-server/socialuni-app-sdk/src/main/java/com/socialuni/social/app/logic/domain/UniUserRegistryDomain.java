@@ -2,17 +2,18 @@ package com.socialuni.social.app.logic.domain;
 
 import com.socialuni.social.app.factory.SocialuniMineUserDetailROFactory;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniTokenDO;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.logic.entity.SocialPhoneLoginEntity;
 import com.socialuni.social.user.sdk.logic.entity.SocialUserEntity;
 import com.socialuni.social.user.sdk.logic.entity.SocialUserPhoneEntity;
-import com.socialuni.social.user.sdk.logic.manage.SocialUserFansDetailManage;
+import com.socialuni.social.follow.logic.manage.SocialUserFansDetailManage;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserManage;
 import com.socialuni.social.user.sdk.logic.manage.SocialuniTokenManage;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserPhoneManage;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
-import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
+import com.socialuni.social.app.model.SocialuniMineUserDetailRO;
 import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
@@ -41,7 +42,7 @@ public class UniUserRegistryDomain {
 
     //根据渠道登录信息获取user，支持social比commonUserDomain
     //这个单独出来是因为区分了基础provider和社交，这个单独增加了对社交渠道的支持
-    public SocialLoginRO<SocialuniMineUserDetailRO> registryUser(SocialProviderLoginQO loginQO) {
+    public SocialLoginRO<SocialuniUserRO> registryUser(SocialProviderLoginQO loginQO) {
         SocialuniUserDo mineUser = null;
         //如果已经注册过
         String phoneNum = loginQO.getPhoneNum();

@@ -3,6 +3,7 @@ package com.socialuni.social.sdk.logic.service;
 import com.socialuni.social.app.factory.SocialuniMineUserDetailROFactory;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.userImg.logic.domain.SocialAddUserImgDomain;
 import com.socialuni.social.userImg.logic.domain.SocialDeleteUserImgDomain;
 import com.socialuni.social.tance.sdk.constant.AdminAppConfigConst;
@@ -10,7 +11,7 @@ import com.socialuni.social.user.sdk.logic.domain.SocialEditUserDomain;
 import com.socialuni.social.app.logic.domain.UniUserRegistryDomain;
 import com.socialuni.social.user.sdk.logic.manage.SocialuniTokenManage;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
-import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
+import com.socialuni.social.app.model.SocialuniMineUserDetailRO;
 import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.sdk.api.SocialuniUnionIdInterface;
@@ -38,19 +39,19 @@ public class SocialuniThirdUserService {
     @Resource
     SocialuniTokenManage tokenManage;
     @Transactional
-    public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> registryUser(SocialProviderLoginQO loginQO) {
+    public ResultRO<SocialLoginRO<SocialuniUserRO>> registryUser(SocialProviderLoginQO loginQO) {
         //注册只向三方开发，所以不能为自己
         Integer dataDevId = DevAccountFacade.getDevIdNotNull();
         if (dataDevId == AdminAppConfigConst.testDevId) {
             throw new SocialParamsException("开发者信息错误");
         }
-        SocialLoginRO<SocialuniMineUserDetailRO> socialLoginRO = socialuniUserRegistryDomain.registryUser(loginQO);
+        SocialLoginRO<SocialuniUserRO> socialLoginRO = socialuniUserRegistryDomain.registryUser(loginQO);
 
         return new ResultRO<>(socialLoginRO);
     }
 
 
-    public ResultRO<SocialuniMineUserDetailRO> queryThirdUser() {
+    public ResultRO<SocialuniUserRO> queryThirdUser() {
         SocialuniUserDo mineUserDO = SocialuniUserUtil.getMineUserAllowNull();
         if (mineUserDO == null) {
             return ResultRO.success();

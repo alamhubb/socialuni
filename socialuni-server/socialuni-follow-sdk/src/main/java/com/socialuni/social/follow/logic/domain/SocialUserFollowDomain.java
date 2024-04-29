@@ -4,7 +4,7 @@ import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepository
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserBlackDO;
 import com.socialuni.social.follow.logic.manage.SocialuniUserFollowManage;
-import com.socialuni.social.user.sdk.logic.manage.SocialUserFansDetailManage;
+import com.socialuni.social.follow.logic.manage.SocialUserFansDetailManage;
 import com.socialuni.social.follow.dao.redis.SocialuniUserFollowRedis;
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.follow.dao.DO.SocialuniUserFollowDO;

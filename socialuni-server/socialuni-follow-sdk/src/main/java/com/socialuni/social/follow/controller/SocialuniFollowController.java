@@ -5,7 +5,9 @@ import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
 import com.socialuni.social.common.api.model.user.SocialuniUserFollowDetailListRO;
 import com.socialuni.social.follow.api.SocialuniFollowAPI;
 import com.socialuni.social.follow.logic.serivce.SocialuniFollowService;
+import com.socialuni.social.follow.model.follow.SocialuniUserFansDetailRO;
 import com.socialuni.social.follow.model.follow.SocialuniUserFollowAddQO;
+import com.socialuni.social.follow.utils.SocialuniUserFollowInfoUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,5 +34,10 @@ public class SocialuniFollowController implements SocialuniFollowAPI {
     @Override
     public ResultRO<Void> cancelFollow(SocialuniUserFollowAddQO addVO) {
         return centerFollowService.cancelFollow(addVO);
+    }
+
+    @Override
+    public ResultRO<SocialuniUserFansDetailRO> getMineUserFollowDetail() {
+        return ResultRO.success(SocialuniUserFollowInfoUtil.getMineUserFollowRelationInfo());
     }
 }

@@ -8,7 +8,7 @@ import com.socialuni.social.user.sdk.logic.domain.SocailSendAuthCodeDomain;
 import com.socialuni.social.sdk.logic.domain.phone.SocialBindPhoneNumDomain;
 import com.socialuni.social.sdk.logic.domain.phone.SocialBindWxPhoneNumDomain;
 import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumAuthCodeQO;
-import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
+import com.socialuni.social.app.model.SocialuniMineUserDetailRO;
 import com.socialuni.social.user.sdk.model.QO.phone.SocialSendAuthCodeQO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;

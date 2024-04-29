@@ -26,6 +26,14 @@
         </dependency>
         <dependency>
             <groupId>com.socialuni.social</groupId>
+            <artifactId>socialuni-follow-sdk</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.socialuni.social</groupId>
+            <artifactId>socialuni-identity-sdk</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.socialuni.social</groupId>
             <artifactId>socialuni-expand-sdk</artifactId>
         </dependency>
         <dependency>

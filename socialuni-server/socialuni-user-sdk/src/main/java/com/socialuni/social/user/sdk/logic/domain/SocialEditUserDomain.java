@@ -1,8 +1,10 @@
 package com.socialuni.social.user.sdk.logic.domain;
 
+import com.socialuni.social.common.api.constant.GenderType;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
+import com.socialuni.social.common.sdk.utils.SocialuniGenerateAvatarUtil;
 import com.socialuni.social.content.utils.BirthdayAgeUtil;
 import com.socialuni.social.user.sdk.dao.utils.SocialuniUserDOUtil;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
@@ -68,6 +70,20 @@ public class SocialEditUserDomain {
     }
 
 
+    public SocialuniUserRO randomUserAvatar(SocialuniUserDo mineUser) {
+        String avatarUrl;
+        if (mineUser.getGender().equals(GenderType.boy)) {
+            avatarUrl = SocialuniGenerateAvatarUtil.getBoyAvatar();
+        } else {
+            avatarUrl = SocialuniGenerateAvatarUtil.getGirlAvatar();
+        }
+        mineUser.setAvatar(avatarUrl);
+
+        userApi.savePut(mineUser);
+
+        return SocialuniUserROFactory.getMineUserRO(mineUser);
+    }
+
     public SocialuniUserRO addUserAvatarImg(SocialuniImgAddQO socialUserImgAddQO, SocialuniUserDo mineUser) {
 
         SocialuniTextContentUtil.validateImg(socialUserImgAddQO, mineUser);
@@ -76,8 +92,6 @@ public class SocialEditUserDomain {
 
         userApi.savePut(mineUser);
 
-        SocialuniUserRO socialMineUserDetailRO = SocialuniUserROFactory.getUserRO(mineUser, mineUser);
-
-        return socialMineUserDetailRO;
+        return SocialuniUserROFactory.getMineUserRO(mineUser);
     }
 }

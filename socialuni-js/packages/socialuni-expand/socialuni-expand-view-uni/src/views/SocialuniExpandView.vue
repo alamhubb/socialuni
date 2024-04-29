@@ -71,10 +71,15 @@
                           </q-button>
                         </div>
                         <div v-else class="use-click row-col-center">
-                          <q-button text @click="getOpenContactInfo(user)" :disabled="showUserContactBtnDisabled">
+                          <q-button text @click="addLikeUser(user)" :disabled="showUserContactBtnDisabled">
                             <q-icon prefix="uni-icons" icon="uniui-heart" size="22"></q-icon>
                           </q-button>
                         </div>
+                        <!--                        <div v-else class="use-click row-col-center">-->
+                        <!--                          <q-button text @click="getOpenContactInfo(user)" :disabled="showUserContactBtnDisabled">-->
+                        <!--                            <q-icon prefix="uni-icons" icon="uniui-heart" size="22"></q-icon>-->
+                        <!--                          </q-button>-->
+                        <!--                        </div>-->
                         <!--                    <socialuni-follow-tag :user="user" @change="userFollowChange"></socialuni-follow-tag>-->
                       </view>
                     </view>
@@ -129,6 +134,7 @@ import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import SocialuniImgUtil from "socialuni-user-sdk/src/util/SocialuniImgUtil";
 import SocialuniExpandAPI from "socialuni-expand-api/src/api/SocialuniExpandAPI";
 import SocialuniUserExpandService from "../service/SocialuniDatingService";
+import SocialuniUserLikeAPI from "socialuni-expand-api/src/api/SocialuniUserLikeAPI";
 
 @Component({
   components: {QPullRefresh, QButton, QIcon, SocialGenderTag, QTabs}
@@ -300,6 +306,10 @@ class SocialuniExpandView extends Vue {
       current: current,
       urls: this.imgUrls(user)
     })
+  }
+
+  addLikeUser(user: CenterUserDetailRO) {
+    SocialuniUserLikeAPI.addUserLikeAPI(user)
   }
 }
 

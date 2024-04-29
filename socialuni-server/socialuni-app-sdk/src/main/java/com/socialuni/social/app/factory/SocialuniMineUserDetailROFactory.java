@@ -6,7 +6,7 @@ import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.expand.dao.DO.SocialuniUserExpandDo;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserCoinDo;
-import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
+import com.socialuni.social.app.model.SocialuniMineUserDetailRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserDetailRO;
 import com.socialuni.social.expand.utils.SocialuniUserExpandDOUtil;
 import com.socialuni.social.user.sdk.dao.utils.SocialuniUserExtendFriendLogDOUtil;

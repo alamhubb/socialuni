@@ -227,6 +227,7 @@ import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
 import SkipUrlConst from "socialuni-app-sdk/src/constant/SkipUrlConst";
 import {getCurrentInstance} from "vue";
 import {onLoad} from "@dcloudio/uni-app";
+import {socialuniAppUserModule} from "socialuni-user-sdk/src/store/SocialuniAppUserModule";
 
 @Component({
     components: {
@@ -328,8 +329,8 @@ export default class MineView extends Vue {
 
     // 初始查询，会清空已有talk
     initQuery() {
-        if (this.mineUser) {
-            socialuniUserModule.getMineUserAction().then(() => {
+        if (socialuniUserModule.hasToken) {
+          socialuniAppUserModule.getMineUserAction().then(() => {
                 QingAppUtil.ToastUtil.toast('刷新成功')
             }).finally(() => {
                 this.stopPullDownRefresh()
@@ -396,7 +397,7 @@ export default class MineView extends Vue {
 
     refreshMine() {
         QingAppUtil.AlertUtil.confirm('是否刷新用户信息').then(() => {
-            socialuniUserModule.getMineUserAction().then(() => {
+            socialuniAppUserModule.getMineUserAction().then(() => {
                 QingAppUtil.ToastUtil.toast('刷新成功')
             })
         })

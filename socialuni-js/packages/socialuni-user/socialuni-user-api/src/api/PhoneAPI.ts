@@ -37,4 +37,8 @@ export default class PhoneAPI {
   static refreshWxSessionKeyAPI (code: string) {
     return socialuniUserRequest.post('socialuni/phone/refreshWxSessionKey', new RefreshWxSessionKeyQO(code))
   }
+
+  static getMineUserPhoneNumAPI () {
+    return socialuniUserRequest.get('socialuni/phone/getMineUserPhoneNum')
+  }
 }

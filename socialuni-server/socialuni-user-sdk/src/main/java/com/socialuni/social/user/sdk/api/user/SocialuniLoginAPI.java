@@ -1,11 +1,11 @@
 package com.socialuni.social.user.sdk.api.user;
 
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.user.sdk.model.QO.SocialPhoneAuthCodePasswordQO;
 import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumPasswordQO;
 import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumAuthCodeQO;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
-import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -24,14 +24,14 @@ import javax.validation.Valid;
 public interface SocialuniLoginAPI {
     //三方渠道登录，qq、wx、社交联盟，兼容各平台，h5、app、mp
     @PostMapping("providerLogin")
-    ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> providerLogin(@RequestBody @Valid SocialProviderLoginQO loginData);
+    ResultRO<SocialLoginRO<SocialuniUserRO>> providerLogin(@RequestBody @Valid SocialProviderLoginQO loginData);
 
     @PostMapping("phoneLogin")
-    ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> phoneLogin(@RequestBody @Valid SocialPhoneNumAuthCodeQO socialPhoneNumQO);
+    ResultRO<SocialLoginRO<SocialuniUserRO>> phoneLogin(@RequestBody @Valid SocialPhoneNumAuthCodeQO socialPhoneNumQO);
 
     @PostMapping("passwordLogin")
-    ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> passwordLogin(@RequestBody @Valid SocialPhoneNumPasswordQO socialPhoneNumQO);
+    ResultRO<SocialLoginRO<SocialuniUserRO>> passwordLogin(@RequestBody @Valid SocialPhoneNumPasswordQO socialPhoneNumQO);
 
     @PostMapping("phonePasswordLogin")
-    ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> phonePasswordLogin(@RequestBody @Valid SocialPhoneAuthCodePasswordQO socialPhoneNumQO);
+    ResultRO<SocialLoginRO<SocialuniUserRO>> phonePasswordLogin(@RequestBody @Valid SocialPhoneAuthCodePasswordQO socialPhoneNumQO);
 }

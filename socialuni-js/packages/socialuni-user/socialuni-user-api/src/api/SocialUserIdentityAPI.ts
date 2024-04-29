@@ -9,6 +9,10 @@ export default class SocialUserIdentityAPI {
     }
 
     static userIdentityAuthAPI(authQO: SocialUserIdentityAuthQO) {
-        return socialuniUserRequest.post<string>('socialuni/socialuni/userIdentity/userIdentityAuth', authQO)
+        return socialuniUserRequest.post<string>('socialuni/userIdentity/userIdentityAuth', authQO)
+    }
+
+    static getMineUserIdentityStatusAPI() {
+        return socialuniUserRequest.get<boolean>('socialuni/userIdentity/getMineUserIdentityStatusAPI')
     }
 }

@@ -2,6 +2,7 @@ import socialuniCommunityRequest from "../request/socialuniCommunityRequest";
 import FollowAddVO from "socialuni-api-base/src/model/FollowAddVO";
 import SocialuniPageQueryQO from "socialuni-api-base/src/model/common/SocialuniPageQueryQO";
 import SocialUserFollowDetailRO from "socialuni-api-base/src/model/social/SocialUserFollowDetailRO";
+import SocialuniUserFansDetailRO from "socialuni-user-api/src/model/SocialuniUserFansDetailRO";
 
 export default class FollowAPI {
     static addFollowAPI(followAdd: FollowAddVO) {
@@ -14,5 +15,9 @@ export default class FollowAPI {
 
     static queryUserFollowsAPI(queryQO: SocialuniPageQueryQO<SocialUserFollowDetailRO, string>) {
         return socialuniCommunityRequest.post<SocialUserFollowDetailRO[]>('socialuni/follow/queryUserFollows', queryQO)
+    }
+
+    static getMineUserFollowDetailAPI() {
+        return socialuniCommunityRequest.post<SocialuniUserFansDetailRO>('socialuni/follow/getMineUserFollowDetail')
     }
 }

@@ -143,6 +143,7 @@ import SocialuniUserPrivacyAgreeService from "socialuni-user-sdk/src/logic/Socia
 import SocialuniLoginViewService from "socialuni-user-sdk/src/logic/SocialuniLoginViewService";
 import {getCurrentInstance} from "vue";
 import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
+import {socialuniAppUserModule} from "socialuni-user-sdk/src/store/SocialuniAppUserModule";
 
 @Component({
   components: {
@@ -173,7 +174,7 @@ class LoginView extends Vue {
   }
 
   get hasPhoneNum() {
-    return socialuniUserModule.hasPhoneNum
+    return socialuniAppUserModule.hasPhoneNum
   }
 
   get isMp() {

@@ -1,7 +1,8 @@
 package com.socialuni.social.sdk.config.config;
 
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
+import com.socialuni.social.app.model.SocialuniMineUserDetailRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.user.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.sdk.dao.DO.UniOutRegisterUserDO;
@@ -94,9 +95,9 @@ public class FeignInterceptor implements RequestInterceptor {
                     Map<String, Object> headerMap = new HashMap<String, Object>() {{
                         put(SocialFeignHeaderName.socialuniSecretKey, SocialuniSystemConst.getDevSecretKey());
                     }};
-                    ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> resultRO = socialuniThirdUserAPI.registryUser(socialProviderLoginQO);
-                    SocialLoginRO<SocialuniMineUserDetailRO> loginRO = resultRO.getData();
-                    SocialuniMineUserDetailRO centerMineUserDetailRO = loginRO.getUser();
+                    ResultRO<SocialLoginRO<SocialuniUserRO>> resultRO = socialuniThirdUserAPI.registryUser(socialProviderLoginQO);
+                    SocialLoginRO<SocialuniUserRO> loginRO = resultRO.getData();
+                    SocialuniUserRO centerMineUserDetailRO = loginRO.getUser();
 
                     SocialuniUnionIdFacede.updateUuidByUnionIdNotNull(mineUserUnionId, centerMineUserDetailRO.getId());
                     uniOutRegisterUserDO = new UniOutRegisterUserDO(centerDevId, mineUserUnionId);

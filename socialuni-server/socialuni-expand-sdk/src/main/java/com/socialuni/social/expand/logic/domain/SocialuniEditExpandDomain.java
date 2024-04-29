@@ -2,12 +2,13 @@ package com.socialuni.social.expand.logic.domain;
 
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.expand.logic.check.SocialuniSchoolCheck;
+import com.socialuni.social.expand.model.SocialuniUserExpandDetailRO;
 import com.socialuni.social.expand.utils.SocialuniUserExpandDOUtil;
+import com.socialuni.social.expand.utils.SocialuniUserExpandUtil;
 import com.socialuni.social.user.sdk.dao.utils.SocialuniUserExtendFriendLogDOUtil;
 import com.socialuni.social.content.utils.SocialuniTextContentUtil;
 import com.socialuni.social.user.sdk.model.QO.SocialUserContactInfoEditQO;
 import com.socialuni.social.user.sdk.model.QO.SocialUserSchoolNameEditQO;
-import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.expand.dao.DO.SocialuniUserExpandDo;
 import org.apache.commons.lang3.StringUtils;
@@ -20,7 +21,7 @@ public class SocialuniEditExpandDomain {
     @Resource
     SocialuniSchoolCheck socialuniSchoolCheck;
 
-    public String editUserSchoolName(SocialUserSchoolNameEditQO socialMineUserDetailQO) {
+    public SocialuniUserExpandDetailRO editUserSchoolName(SocialUserSchoolNameEditQO socialMineUserDetailQO) {
         String schoolName = socialMineUserDetailQO.getSchoolName();
 
         socialuniSchoolCheck.checkSchoolName(schoolName);
@@ -33,14 +34,11 @@ public class SocialuniEditExpandDomain {
 
         SocialuniUserExpandDOUtil.saveUserExpandDO(SocialuniUserExpandDo);
 
-//        SocialuniMineUserDetailRO socialuniMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUserId);
-
-//        return socialuniMineUserDetailRO;
-        return schoolName;
+        return SocialuniUserExpandUtil.getMineUserExpandDetail();
     }
 
 
-    public void editUserContactInfo(SocialUserContactInfoEditQO socialMineUserDetailQO) {
+    public SocialuniUserExpandDetailRO editUserContactInfo(SocialUserContactInfoEditQO socialMineUserDetailQO) {
         String contactInfo = socialMineUserDetailQO.getContactInfo();
 
         if (StringUtils.isEmpty(contactInfo)) {
@@ -68,6 +66,7 @@ public class SocialuniEditExpandDomain {
 //        SocialuniMineUserDetailRO socialuniMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUserId);
 
 //        return socialuniMineUserDetailRO;
+        return SocialuniUserExpandUtil.getMineUserExpandDetail();
     }
 
 }

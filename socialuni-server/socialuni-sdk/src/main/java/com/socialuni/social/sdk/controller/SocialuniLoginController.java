@@ -2,7 +2,8 @@ package com.socialuni.social.sdk.controller;
 
 import com.socialuni.social.app.logic.service.SocialuniDetailLoginService;
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
+import com.socialuni.social.app.model.SocialuniMineUserDetailRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.user.sdk.api.user.SocialuniLoginAPI;
 import com.socialuni.social.user.sdk.logic.manage.SocialuniTokenManage;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniTokenDO;
@@ -34,23 +35,23 @@ public class SocialuniLoginController implements SocialuniLoginAPI {
 
     //三方渠道登录，qq、wx、社交联盟，兼容各平台，h5、app、mp
     @Override
-    public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> providerLogin(@RequestBody @Valid SocialProviderLoginQO loginData) {
+    public ResultRO<SocialLoginRO<SocialuniUserRO>> providerLogin(@RequestBody @Valid SocialProviderLoginQO loginData) {
         return centerLoginService.providerLogin(loginData);
     }
 
     @Override
-    public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> phoneLogin(@RequestBody @Valid SocialPhoneNumAuthCodeQO socialPhoneNumQO) {
-        ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> resultRO = centerLoginService.phoneLogin(socialPhoneNumQO);
+    public ResultRO<SocialLoginRO<SocialuniUserRO>> phoneLogin(@RequestBody @Valid SocialPhoneNumAuthCodeQO socialPhoneNumQO) {
+        ResultRO<SocialLoginRO<SocialuniUserRO>> resultRO = centerLoginService.phoneLogin(socialPhoneNumQO);
         return resultRO;
     }
 
     @Override
-    public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> passwordLogin(SocialPhoneNumPasswordQO socialPhoneNumQO) {
+    public ResultRO<SocialLoginRO<SocialuniUserRO>> passwordLogin(SocialPhoneNumPasswordQO socialPhoneNumQO) {
         return centerLoginService.passwordLogin(socialPhoneNumQO);
     }
 
     @Override
-    public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> phonePasswordLogin(SocialPhoneAuthCodePasswordQO socialPhoneNumQO) {
+    public ResultRO<SocialLoginRO<SocialuniUserRO>> phonePasswordLogin(SocialPhoneAuthCodePasswordQO socialPhoneNumQO) {
         return centerLoginService.phonePasswordLogin(socialPhoneNumQO);
     }
 

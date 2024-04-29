@@ -6,21 +6,22 @@ import LoginAPI from "socialuni-user-api/src/api/LoginAPI";
 import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import {socialuniTokenModule} from "./SocialuniTokenModule";
+import SocialuniUserRO from "socialuni-api-base/src/model/user/SocialuniUserRO";
 
 class SocialuniUserModule {
     get token() {
         return socialuniTokenModule.token
     }
 
-    private userInfo: SocialuniMineUserRO = SocialuniUserStorageUtil.get() || null
+    private userInfo: SocialuniUserRO = SocialuniUserStorageUtil.get() || null
 
     get mineUser() {
         return this.userInfo
     }
 
-    get hasPhoneNum() {
-        return this.mineUser && this.mineUser.phoneNum
-    }
+    // get hasPhoneNum() {
+    //     return this.mineUser && this.mineUser.phoneNum
+    // }
 
     // private userToken: string = SocialuniTokenUtil.get() || null
 
@@ -110,11 +111,11 @@ class SocialuniUserModule {
      * 调用后台仅获取user信息
      */
 
-    getMineUserAction() {
+    /*getMineUserAction() {
         return SocialuniMineUserAPI.getMineUserInfoAPI().then((res: any) => {
             socialuniUserModule.setUser(res.data)
         })
-    }
+    }*/
 }
 
 export const socialuniUserModule: UnwrapNestedRefs<SocialuniUserModule> = reactive(new SocialuniUserModule())

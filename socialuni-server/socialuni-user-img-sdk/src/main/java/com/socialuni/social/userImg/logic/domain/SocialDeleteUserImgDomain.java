@@ -1,7 +1,6 @@
 package com.socialuni.social.userImg.logic.domain;
 
 import com.socialuni.social.common.api.enumeration.ContentStatus;
-import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.userImg.dao.DO.SocialuniUserImgDo;
 import com.socialuni.social.userImg.dao.repository.SocialuniUserImgRepository;
@@ -18,7 +17,7 @@ public class SocialDeleteUserImgDomain {
     @Resource
     SocialuniUserImgRepository userImgRepository;
 
-    public SocialuniMineUserDetailRO deleteUserImg(SocialUserImgDeleteQO img, SocialuniUserDo mineUser) {
+    public void deleteUserImg(SocialUserImgDeleteQO img, SocialuniUserDo mineUser) {
         SocialuniUserImgDo userImg = userImgRepository.getUserImgByUserIdAndUnionId(mineUser.getUnionId(), img.getUserImgId());
         userImg.setStatus(ContentStatus.delete);
         userImg.setUpdateTime(new Date());
@@ -27,6 +26,6 @@ public class SocialDeleteUserImgDomain {
 //        SocialuniMineUserDetailRO socialMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
 
 //        return socialMineUserDetailRO;
-        return null;
+//        return null;
     }
 }
