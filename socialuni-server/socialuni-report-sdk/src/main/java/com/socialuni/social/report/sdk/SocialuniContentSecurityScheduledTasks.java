@@ -1,6 +1,6 @@
 package com.socialuni.social.report.sdk;
 
-import com.socialuni.social.report.sdk.logic.service.ViolationKeywordsService;
+import com.socialuni.social.content.logic.service.ViolationKeywordsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,8 +9,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
 import javax.annotation.Resource;
-import java.util.Date;
-import java.util.List;
 
 @Slf4j
 @Configuration      //1.主要用于标记配置类，兼备Component的效果。

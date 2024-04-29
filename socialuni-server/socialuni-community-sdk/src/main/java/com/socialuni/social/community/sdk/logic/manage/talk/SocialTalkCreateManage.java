@@ -6,10 +6,10 @@ import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkHasUnderageImgAudi
 import com.socialuni.social.community.sdk.repository.TalkAdultImgAuditRepository;
 import com.socialuni.social.community.sdk.dao.SocialuniTalkDORedis;
 import com.socialuni.social.community.sdk.logic.factory.TalkDOFactory;
-import com.socialuni.social.report.sdk.utils.SocialuniTextContentUtil;
+import com.socialuni.social.content.utils.SocialuniTextContentUtil;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
 import com.socialuni.social.community.sdk.model.QO.talk.SocialuniTalkPostQO;
-import com.socialuni.social.report.sdk.utils.SocialuniImgContentUtil;
+import com.socialuni.social.content.utils.SocialuniImgContentUtil;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

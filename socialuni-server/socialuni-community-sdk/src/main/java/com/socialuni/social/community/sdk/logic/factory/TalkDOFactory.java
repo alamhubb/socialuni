@@ -5,7 +5,7 @@ import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
 import com.socialuni.social.community.sdk.model.QO.talk.SocialuniTalkPostQO;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.common.sdk.utils.PositionUtil;
-import com.socialuni.social.report.sdk.utils.SocialuniTextContentUtil;
+import com.socialuni.social.content.utils.SocialuniTextContentUtil;
 import com.socialuni.social.common.sdk.model.RO.SocialuniRectangleRO;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;

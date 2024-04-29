@@ -1,9 +1,9 @@
 package com.socialuni.social.sdk.controller;
 
+import com.socialuni.social.app.logic.service.SocialuniDetailLoginService;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.user.sdk.api.user.SocialuniLoginAPI;
-import com.socialuni.social.sdk.logic.service.login.SocialuniDetailLoginService;
 import com.socialuni.social.user.sdk.logic.manage.SocialuniTokenManage;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniTokenDO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;

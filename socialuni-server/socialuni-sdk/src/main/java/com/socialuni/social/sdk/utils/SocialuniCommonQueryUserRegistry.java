@@ -1,5 +1,6 @@
 package com.socialuni.social.sdk.utils;
 
+import com.socialuni.social.app.factory.SocialuniUserDetailROFactory;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.model.user.SocialuniContentUserRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserDetailRO;
@@ -8,7 +9,6 @@ import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.common.sdk.constant.SocialuniCommonQueryKey;
 import com.socialuni.social.common.sdk.model.QO.SocialuniKeyQueryQO;
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
-import com.socialuni.social.user.sdk.factory.SocialuniUserDetailROFactory;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.apache.commons.lang3.StringUtils;

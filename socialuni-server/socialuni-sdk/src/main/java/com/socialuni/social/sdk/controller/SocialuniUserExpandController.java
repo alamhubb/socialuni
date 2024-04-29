@@ -4,7 +4,7 @@ import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
 import com.socialuni.social.common.api.model.user.SocialuniUserExtendDetailRO;
 import com.socialuni.social.user.sdk.api.user.SocialuniUserExpandAPI;
-import com.socialuni.social.sdk.logic.service.user.SocialuniUserExpandService;
+import com.socialuni.social.app.logic.service.SocialuniUserExpandService;
 import com.socialuni.social.user.sdk.model.QO.SocialUserContactInfoEditQO;
 import com.socialuni.social.user.sdk.model.QO.SocialUserSchoolNameEditQO;
 import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;

@@ -5,7 +5,7 @@ import com.socialuni.social.community.sdk.model.QO.comment.SocialuniCommentPostQ
 import com.socialuni.social.community.sdk.repository.CommentRepository;
 import com.socialuni.social.common.api.enumeration.ContentStatus;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.report.sdk.utils.SocialuniTextContentUtil;
+import com.socialuni.social.content.utils.SocialuniTextContentUtil;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
 import org.springframework.stereotype.Component;
 

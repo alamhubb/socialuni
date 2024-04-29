@@ -1,6 +1,7 @@
 package com.socialuni.social.user.sdk.constant;
 
-import com.socialuni.social.report.sdk.constant.SocialuniSupportProviderType;
+
+import com.socialuni.social.content.constant.SocialuniSupportProviderType;
 
 import java.util.Arrays;
 import java.util.List;

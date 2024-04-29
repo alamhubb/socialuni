@@ -1,11 +1,11 @@
 package com.socialuni.social.sdk.model.match;
 
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.user.sdk.dao.utils.SocialuniUserImgDOUtil;
-import com.socialuni.social.user.sdk.model.UserImgVO;
+import com.socialuni.social.userImg.dao.DO.SocialuniUserImgDo;
+import com.socialuni.social.userImg.utils.SocialuniUserImgDOUtil;
+import com.socialuni.social.userImg.model.UserImgVO;
 import com.socialuni.social.user.sdk.model.RO.SocialDistrictRO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.user.sdk.dao.DO.SocialuniUserImgDo;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 

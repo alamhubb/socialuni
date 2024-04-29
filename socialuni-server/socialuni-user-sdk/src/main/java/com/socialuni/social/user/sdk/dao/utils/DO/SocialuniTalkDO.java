@@ -2,7 +2,7 @@ package com.socialuni.social.community.sdk.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
-import com.socialuni.social.report.sdk.dao.DO.SocialuniTextCheckDO;
+import com.socialuni.social.content.dao.DO.SocialuniTextCheckDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

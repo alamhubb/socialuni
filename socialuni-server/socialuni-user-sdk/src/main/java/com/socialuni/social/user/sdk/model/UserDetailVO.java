@@ -24,7 +24,7 @@ public class UserDetailVO {
     //显示用户颜值
     private Integer faceRatio;
     private Integer likeCount;
-    private List<UserImgVO> imgs;
+//    private List<UserImgVO> imgs;
 
     private Boolean onlineFlag;
     //用户最后在线时间，

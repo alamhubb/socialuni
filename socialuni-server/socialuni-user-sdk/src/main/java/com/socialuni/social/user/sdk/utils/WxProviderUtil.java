@@ -5,7 +5,7 @@ import com.socialuni.social.common.api.exception.exception.UniSdkException;
 import com.socialuni.social.common.api.utils.JsonUtil;
 import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.common.sdk.constant.platform.WxUrl;
-import com.socialuni.social.report.sdk.utils.WxUtil;
+import com.socialuni.social.content.utils.WxUtil;
 import com.socialuni.social.user.sdk.model.RO.UniUnionIdRO;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.common.sdk.platform.WxDecode;

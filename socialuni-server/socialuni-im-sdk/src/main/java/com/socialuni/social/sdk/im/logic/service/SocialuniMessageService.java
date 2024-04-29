@@ -10,7 +10,7 @@ import com.socialuni.social.sdk.im.dao.repository.SocialuniMessageReceiveReposit
 import com.socialuni.social.sdk.im.dao.repository.SocialuniMessageRepository;
 import com.socialuni.social.sdk.im.logic.entity.SocialuniMessageEntity;
 import com.socialuni.social.im.api.model.QO.message.MessageAddVO;
-import com.socialuni.social.report.sdk.utils.SocialuniTextContentUtil;
+import com.socialuni.social.content.utils.SocialuniTextContentUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import com.socialuni.social.user.sdk.logic.check.SocialuniUserCheck;

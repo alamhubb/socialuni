@@ -1,5 +1,6 @@
 package com.socialuni.social.sdk.logic.service.phone;
 
+import com.socialuni.social.app.factory.SocialuniMineUserDetailROFactory;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.common.sdk.model.QO.SocialBindWxPhoneNumQO;
@@ -24,16 +25,16 @@ public class SocialuniPhoneBindService {
     public ResultRO<SocialuniMineUserDetailRO> bindPhoneNum(SocialPhoneNumAuthCodeQO socialPhoneNumQO) {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
 
-        SocialuniMineUserDetailRO socialMineUserDetailRO = socialBindPhoneNumDomain.bindPhoneNum(socialPhoneNumQO, mineUser);
+        String phoneNum = socialBindPhoneNumDomain.bindPhoneNum(socialPhoneNumQO, mineUser);
 
-        return new ResultRO<>(socialMineUserDetailRO);
+        return new ResultRO<>(SocialuniMineUserDetailROFactory.getMineUserDetail());
     }
 
     public ResultRO<SocialuniMineUserDetailRO> bindWxPhoneNum(SocialBindWxPhoneNumQO socialBindWxPhoneNumQO) {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
         //微信绑定手机号方法
-        SocialuniMineUserDetailRO socialMineUserDetailRO = socialBindWxPhoneNumDomain.bindWxPhoneNum(socialBindWxPhoneNumQO, mineUser);
+        String phoneNum = socialBindWxPhoneNumDomain.bindWxPhoneNum(socialBindWxPhoneNumQO, mineUser);
 
-        return new ResultRO<>(socialMineUserDetailRO);
+        return new ResultRO<>(SocialuniMineUserDetailROFactory.getMineUserDetail());
     }
 }

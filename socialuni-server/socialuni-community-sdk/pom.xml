@@ -22,7 +22,11 @@
         </dependency>
         <dependency>
             <groupId>com.socialuni.social</groupId>
-            <artifactId>socialuni-report-sdk</artifactId>
+            <artifactId>socialuni-content-sdk</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.socialuni.social</groupId>
+            <artifactId>socialuni-expand-sdk</artifactId>
         </dependency>
         <dependency>
             <groupId>com.socialuni.social</groupId>
@@ -32,6 +36,11 @@
         <dependency>
             <groupId>com.socialuni.social</groupId>
             <artifactId>socialuni-user-sdk</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.socialuni.social</groupId>
+            <artifactId>socialuni-follow-sdk</artifactId>
             <scope>compile</scope>
         </dependency>
 

@@ -34,9 +34,13 @@
         <module>socialuni-tance-dev</module>
         <module>socialuni-tance-api</module>
         <module>socialuni-friend-sdk</module>
+        <module>socialuni-content-sdk</module>
         <module>socialuni-user-sdk</module>
+        <module>socialuni-user-img-sdk</module>
         <module>socialuni-app-sdk</module>
         <module>socialuni-expand-sdk</module>
+        <module>socialuni-recharge-sdk</module>
+        <module>socialuni-identity-sdk</module>
         <module>socialuni-follow-sdk</module>
         <module>socialuni-like-sdk</module>
         <module>socialuni-report-sdk</module>
@@ -128,12 +132,37 @@
             </dependency>
             <dependency>
                 <groupId>com.socialuni.social</groupId>
+                <artifactId>socialuni-content-sdk</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni.social</groupId>
+                <artifactId>socialuni-auth-sdk</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni.social</groupId>
                 <artifactId>socialuni-common-api</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.socialuni.social</groupId>
                 <artifactId>socialuni-common-sdk</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni.social</groupId>
+                <artifactId>socialuni-auth-sdk</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni.social</groupId>
+                <artifactId>socialuni-recharge-sdk</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni.social</groupId>
+                <artifactId>socialuni-identity-sdk</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>
@@ -154,6 +183,11 @@
             <dependency>
                 <groupId>com.socialuni.social</groupId>
                 <artifactId>socialuni-app-sdk</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni.social</groupId>
+                <artifactId>socialuni-user-img-sdk</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>

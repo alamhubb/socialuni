@@ -2,9 +2,7 @@ package com.socialuni.social.user.sdk.logic.service;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
-import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.report.sdk.constant.SocialuniSupportProviderType;
-import com.socialuni.social.user.sdk.dao.DO.SocialUserPasswordDO;
+import com.socialuni.social.content.constant.SocialuniSupportProviderType;
 import com.socialuni.social.user.sdk.logic.domain.SocialuniLoginDomain;
 import com.socialuni.social.user.sdk.model.QO.SocialPhoneAuthCodePasswordQO;
 import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumAuthCodeQO;

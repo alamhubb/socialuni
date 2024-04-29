@@ -9,7 +9,7 @@ import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.social.community.sdk.logic.entity.comment.SocialPostCommentEntity;
 import com.socialuni.social.community.sdk.logic.factory.SocialCommentROFactory;
-import com.socialuni.social.report.sdk.utils.SocialuniTextContentUtil;
+import com.socialuni.social.content.utils.SocialuniTextContentUtil;
 import com.socialuni.social.community.sdk.model.QO.comment.SocialuniCommentPostQO;
 import com.socialuni.social.community.sdk.model.RO.talk.SocialuniCommentRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;

@@ -3,14 +3,12 @@ package com.socialuni.social.sdk.logic.domain.phone;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.utils.JsonUtil;
 import com.socialuni.social.common.sdk.model.QO.SocialBindWxPhoneNumQO;
-import com.socialuni.social.report.sdk.constant.SocialuniSupportProviderType;
+import com.socialuni.social.content.constant.SocialuniSupportProviderType;
 import com.socialuni.social.user.sdk.logic.entity.SocialUserPhoneEntity;
-import com.socialuni.social.user.sdk.factory.SocialuniMineUserDetailROFactory;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserAccountManage;
 import com.socialuni.social.common.sdk.platform.WxDecode;
 import com.socialuni.social.common.sdk.platform.WxPhoneNumRO;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
-import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.user.sdk.model.RO.UniUnionIdRO;
 import com.socialuni.social.user.sdk.utils.UniProviderUtil;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
@@ -29,7 +27,7 @@ public class SocialBindWxPhoneNumDomain {
     private SocialUserAccountManage socialUserAccountManage;
 
     //微信绑定手机号方法
-    public SocialuniMineUserDetailRO bindWxPhoneNum(@Valid SocialBindWxPhoneNumQO bindPhoneQO, SocialuniUserDo mineUser) {
+    public String bindWxPhoneNum(@Valid SocialBindWxPhoneNumQO bindPhoneQO, SocialuniUserDo mineUser) {
         //校验各个参数
         SocialProviderLoginQO socialProviderLoginQO = new SocialProviderLoginQO();
         socialProviderLoginQO.setProvider(SocialuniSupportProviderType.wx);
@@ -49,9 +47,9 @@ public class SocialBindWxPhoneNumDomain {
         }
         mineUser = socialUserPhoneEntity.checkPhoneNumAndCreateBind(mineUser, phoneNumVO.getCountryCode(), phoneNumVO.getPurePhoneNumber());
         //根据用户得到返回详情
-        SocialuniMineUserDetailRO mineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
+//        SocialuniMineUserDetailRO mineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
         //返回真实手机号
-        mineUserDetailRO.setPhoneNum(phoneNumVO.getPurePhoneNumber());
-        return mineUserDetailRO;
+//        mineUserDetailRO.setPhoneNum(phoneNumVO.getPurePhoneNumber());
+        return phoneNumVO.getPurePhoneNumber();
     }
 }

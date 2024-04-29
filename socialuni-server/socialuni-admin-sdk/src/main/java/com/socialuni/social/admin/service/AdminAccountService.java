@@ -20,7 +20,7 @@ import com.socialuni.social.tance.sdk.enumeration.DevAccountType;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.tance.sdk.model.DevAccountProviderModler;
-import com.socialuni.social.report.sdk.constant.SocialuniSupportProviderType;
+import com.socialuni.social.content.constant.SocialuniSupportProviderType;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 

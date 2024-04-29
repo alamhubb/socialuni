@@ -20,11 +20,6 @@
             <groupId>com.socialuni.social</groupId>
             <artifactId>socialuni-tance-api</artifactId>
         </dependency>
-        <!-- 涉及到了注册时的关键词功能-->
-        <dependency>
-            <groupId>com.socialuni.social</groupId>
-            <artifactId>socialuni-report-sdk</artifactId>
-        </dependency>
         <dependency>
             <groupId>com.socialuni.social</groupId>
             <artifactId>socialuni-user-sdk</artifactId>

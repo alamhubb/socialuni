@@ -1,8 +1,8 @@
 package com.socialuni.social.user.sdk.factory;
 
+import com.socialuni.social.content.utils.BirthdayAgeUtil;
 import com.socialuni.social.user.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
-import com.socialuni.social.report.sdk.utils.BirthdayAgeUtil;
 import com.socialuni.social.user.sdk.model.RO.SocialOAuthUserRO;
 
 public class SocialuniOAuthUserROFactory {

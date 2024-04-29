@@ -1,8 +1,8 @@
 package com.socialuni.social.user.sdk.config;
 
-import com.socialuni.social.report.sdk.enumeration.SocialuniUserStatus;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
+import com.socialuni.social.content.constant.SocialuniUserStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -5,7 +5,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
-import com.socialuni.social.report.sdk.utils.SocialuniTextContentUtil;
+import com.socialuni.social.content.utils.SocialuniTextContentUtil;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.slf4j.Logger;

@@ -4,7 +4,7 @@ import com.socialuni.social.admin.model.ReportRO;
 import com.socialuni.social.admin.service.AdminUserService;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.report.sdk.enumeration.SocialuniUserStatus;
+import com.socialuni.social.content.constant.SocialuniUserStatus;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
 import org.springframework.web.bind.annotation.PostMapping;

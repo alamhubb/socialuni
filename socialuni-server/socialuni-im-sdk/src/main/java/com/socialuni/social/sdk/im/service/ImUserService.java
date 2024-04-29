@@ -10,7 +10,7 @@ import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.repository.SocialUserPlatformAccountRepository;
-import com.socialuni.social.report.sdk.utils.BirthdayAgeUtil;
+import com.socialuni.social.content.utils.BirthdayAgeUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

@@ -1,13 +1,13 @@
 package com.socialuni.social.sdk.logic.service;
 
+import com.socialuni.social.app.factory.SocialuniMineUserDetailROFactory;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.sdk.logic.domain.user.SocialAddUserImgDomain;
-import com.socialuni.social.sdk.logic.domain.user.SocialDeleteUserImgDomain;
+import com.socialuni.social.userImg.logic.domain.SocialAddUserImgDomain;
+import com.socialuni.social.userImg.logic.domain.SocialDeleteUserImgDomain;
 import com.socialuni.social.tance.sdk.constant.AdminAppConfigConst;
 import com.socialuni.social.user.sdk.logic.domain.SocialEditUserDomain;
-import com.socialuni.social.sdk.logic.entity.UniUserRegistryDomain;
-import com.socialuni.social.user.sdk.factory.SocialuniMineUserDetailROFactory;
+import com.socialuni.social.app.logic.domain.UniUserRegistryDomain;
 import com.socialuni.social.user.sdk.logic.manage.SocialuniTokenManage;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;

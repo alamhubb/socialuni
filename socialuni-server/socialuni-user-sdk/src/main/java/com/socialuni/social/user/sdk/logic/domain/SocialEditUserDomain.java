@@ -3,15 +3,15 @@ package com.socialuni.social.user.sdk.logic.domain;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
+import com.socialuni.social.content.utils.BirthdayAgeUtil;
 import com.socialuni.social.user.sdk.dao.utils.SocialuniUserDOUtil;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.QO.SocialUserEditQO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.user.sdk.model.factory.SocialuniUserROFactory;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
-import com.socialuni.social.report.sdk.utils.BirthdayAgeUtil;
 import com.socialuni.social.user.sdk.utils.GenderUtil;
-import com.socialuni.social.report.sdk.utils.SocialuniTextContentUtil;
+import com.socialuni.social.content.utils.SocialuniTextContentUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 

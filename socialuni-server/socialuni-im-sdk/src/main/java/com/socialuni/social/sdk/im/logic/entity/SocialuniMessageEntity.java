@@ -31,7 +31,7 @@ import com.socialuni.social.sdk.im.logic.foctory.SocialuniMessageDOFactory;
 import com.socialuni.social.sdk.im.logic.manage.SocialuniUserChatConfigManage;
 import com.socialuni.social.sdk.im.notify.NotifyVO;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserBlackDO;
-import com.socialuni.social.user.sdk.dao.DO.SocialuniUserFollowDO;
+import com.socialuni.social.follow.dao.DO.SocialuniUserFollowDO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Service;
 

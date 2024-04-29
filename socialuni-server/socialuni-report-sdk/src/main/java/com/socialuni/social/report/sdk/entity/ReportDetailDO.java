@@ -1,7 +1,7 @@
 package com.socialuni.social.report.sdk.entity;
 
 
-import com.socialuni.social.report.sdk.enumeration.ReportStatus;
+import com.socialuni.social.content.constant.ReportStatus;
 import lombok.Data;
 
 import javax.persistence.*;

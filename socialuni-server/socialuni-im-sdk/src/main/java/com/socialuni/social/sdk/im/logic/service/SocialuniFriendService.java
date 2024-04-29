@@ -14,7 +14,7 @@ import com.socialuni.social.sdk.im.logic.foctory.SocialuniChatUserDOFactory;
 import com.socialuni.social.sdk.im.logic.foctory.SocialuniFriendApplyUserROFactory;
 import com.socialuni.social.im.api.model.QO.friend.SocialuniFriendAddQO;
 import com.socialuni.social.im.api.model.RO.SocialuniFriendApplyUserRO;
-import com.socialuni.social.report.sdk.utils.SocialuniTextContentUtil;
+import com.socialuni.social.content.utils.SocialuniTextContentUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;

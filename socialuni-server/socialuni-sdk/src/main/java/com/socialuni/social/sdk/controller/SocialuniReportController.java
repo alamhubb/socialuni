@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.controller;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.constant.ViolateType;
 import com.socialuni.social.report.sdk.api.SocialuniReportAPI;
-import com.socialuni.social.sdk.logic.service.report.SocialuniReportService;
+import com.socialuni.social.report.sdk.logic.service.SocialuniReportService;
 import com.socialuni.social.report.sdk.model.SocialuniReportAddQO;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
