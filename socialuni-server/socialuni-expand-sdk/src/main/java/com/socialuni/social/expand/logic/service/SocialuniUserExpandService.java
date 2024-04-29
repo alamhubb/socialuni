@@ -7,6 +7,7 @@ import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
 import com.socialuni.social.common.api.model.user.SocialuniUserExtendDetailRO;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
 import com.socialuni.social.expand.dao.repository.SocialuniUserExpandRepository;
+import com.socialuni.social.expand.factory.SocialuniUserExtendDetailROFactory;
 import com.socialuni.social.expand.logic.domain.SocialuniEditExpandDomain;
 import com.socialuni.social.expand.logic.domain.SocialuniGetUserContactInfoDomain;
 import com.socialuni.social.expand.model.SocialuniUserExpandDetailRO;
@@ -140,9 +141,9 @@ public class SocialuniUserExpandService {
 
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
 
-//        List<SocialuniUserExtendDetailRO> socialuniUserDetailROS = SocialuniUserExtendDetailROFactory.getUserExtendDetailList(userDos, mineUser);
+        List<SocialuniUserExtendDetailRO> socialuniUserDetailROS = SocialuniUserExtendDetailROFactory.getUserExtendDetailList(userDos, mineUser);
 
-        return ResultRO.success(null);
+        return ResultRO.success(socialuniUserDetailROS);
     }
 
     //查询最近在线的用户

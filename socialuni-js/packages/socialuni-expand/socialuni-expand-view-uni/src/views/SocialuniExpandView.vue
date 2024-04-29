@@ -43,8 +43,8 @@
                           </div>
                         </view>
                         <view class="row-col-center mt-xss font-12 color-content">
-                          {{ formatTime(user.updateTime) }}
-                          <div class="px-xs row-col-center">|</div>
+<!--                          {{ formatTime(user.updateTime) }}-->
+<!--                          <div class="px-xs row-col-center">|</div>-->
                           <!--        有市区的名称就不显示省的名称-->
                           <text v-if="!user.cityName || !user.districtName">{{ user.provinceName }}</text>
                           <text v-if="user.cityName">
