@@ -52,7 +52,7 @@ public class SocialuniUserLikeService {
     public void sendLikeUserMsg(String receiveUserId) {
         MessageAddVO msgAddVO = new MessageAddVO();
         msgAddVO.setReceiveId(receiveUserId);
-        msgAddVO.setType("like");
+        msgAddVO.setType("喜欢");
         //msg支持自定义的展示类型
         messageService.sendMsg(msgAddVO);
     }

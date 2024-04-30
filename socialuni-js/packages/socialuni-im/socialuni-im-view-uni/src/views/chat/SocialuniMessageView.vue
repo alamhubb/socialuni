@@ -27,61 +27,66 @@
         <!--      <view v-if="chat.status === waitOpenStatus||chat.status === closeStatus" class="w100p h100p col-row-center">-->
         <div class="pb-60">
           <div v-for="msg in viewService.messages" :id="'m'+msg.id" :key="msg.id">
-            <div v-if="msg.user.isMine" class="flex-row pr-sm pl-70">
-              <div class="flex-1 flex-col mr-sm overflow-hidden">
-                <div class="h44px row-end-center mb-xs">
-                  {{ msg.user.nickname }}
-                  <!--              <text class="text-sm" :class="[msg.user.vipFlag?'color-red':'text-gray']"
-                                      @click="toUserDetailVue(msg.user.id)">
-                                  {{ msg.user.nickname }}
-                                </text>
-                                <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
-                                       src="/static/img/crown.png"
-                                       @click="toVipVue"></image>-->
-                </div>
+            <div v-if="msg.type === '喜欢1'">
+              喜欢
+            </div>
+            <div v-else>
+              <div v-if="msg.user.isMine" class="flex-row pr-sm pl-70">
+                <div class="flex-1 flex-col mr-sm overflow-hidden">
+                  <div class="h44px row-end-center mb-xs">
+                    {{ msg.user.nickname }}
+                    <!--              <text class="text-sm" :class="[msg.user.vipFlag?'color-red':'text-gray']"
+                                        @click="toUserDetailVue(msg.user.id)">
+                                    {{ msg.user.nickname }}
+                                  </text>
+                                  <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
+                                         src="/static/img/crown.png"
+                                         @click="toVipVue"></image>-->
+                  </div>
 
-                <div class="row-end-center" @longpress="viewService.openMessageMoreHandleDialog(msg)">
-                  <!--                                    <q-icon v-if="msg.status === 3" icon="mdi-alert-circle" size="25" class="mb-nm"/>-->
-                  <!--                                <message-item-content :msg="msg"></message-item-content>-->
+                  <div class="row-end-center" @longpress="viewService.openMessageMoreHandleDialog(msg)">
+                    <!--                                    <q-icon v-if="msg.status === 3" icon="mdi-alert-circle" size="25" class="mb-nm"/>-->
+                    <!--                                <message-item-content :msg="msg"></message-item-content>-->
 
-                  <div class="pd-xs bg-white bd-radius"> {{ msg.content }}</div>
-                </div>
+                    <div class="pd-xs bg-white bd-radius"> {{ msg.content }}</div>
+                  </div>
 
-                <div class="col-all-center mt-xs">
-                  <div class="date">
-                    {{ viewService.formatTime(msg.createTime) }}
+                  <div class="col-all-center mt-xs">
+                    <div class="date">
+                      {{ viewService.formatTime(msg.createTime) }}
+                    </div>
                   </div>
                 </div>
-              </div>
-              <img class="size50 bd-radius flex-none"
-                   :src="msg.user.avatar"
-                   @click="viewService.toUserDetailVue(msg.user.id)"
-              />
-            </div>
-            <div v-else class="flex-row pl-sm pr-70">
-              <image class="size50 bd-radius flex-none"
+                <img class="size50 bd-radius flex-none"
                      :src="msg.user.avatar"
                      @click="viewService.toUserDetailVue(msg.user.id)"
-              />
-              <div class="flex-1 flex-col ml-sm overflow-hidden">
-                <div class="h44px row-col-center mb-xs">
-                  {{ msg.user.nickname }}
-                  <!--              <text class="text-sm" :class="[msg.user.vipFlag?'color-red':'text-gray']"
-                                      @click="toUserDetailVue(msg.user.id)">
-                                  {{ msg.user.nickname }}
-                                </text>
-                                <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
-                                       src="/static/img/crown.png"
-                                       @click="toVipVue"></image>-->
-                </div>
+                />
+              </div>
+              <div v-else class="flex-row pl-sm pr-70">
+                <image class="size50 bd-radius flex-none"
+                       :src="msg.user.avatar"
+                       @click="viewService.toUserDetailVue(msg.user.id)"
+                />
+                <div class="flex-1 flex-col ml-sm overflow-hidden">
+                  <div class="h44px row-col-center mb-xs">
+                    {{ msg.user.nickname }}
+                    <!--              <text class="text-sm" :class="[msg.user.vipFlag?'color-red':'text-gray']"
+                                        @click="toUserDetailVue(msg.user.id)">
+                                    {{ msg.user.nickname }}
+                                  </text>
+                                  <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
+                                         src="/static/img/crown.png"
+                                         @click="toVipVue"></image>-->
+                  </div>
 
-                <div class="row-start" @longpress="viewService.openMessageMoreHandleDialog(msg)">
-                  <!--                                    <message-item-content :msg="msg"></message-item-content>-->
-                  <div class="pd-xs bg-white bd-radius"> {{ msg.content }}</div>
-                </div>
-                <div class="col-all-center mt-xs">
-                  <div class="date">
-                    {{ viewService.formatTime(msg.createTime) }}
+                  <div class="row-start" @longpress="viewService.openMessageMoreHandleDialog(msg)">
+                    <!--                                    <message-item-content :msg="msg"></message-item-content>-->
+                    <div class="pd-xs bg-white bd-radius"> {{ msg.content }}</div>
+                  </div>
+                  <div class="col-all-center mt-xs">
+                    <div class="date">
+                      {{ viewService.formatTime(msg.createTime) }}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -169,7 +174,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "vue-facing-decorator";
+import {Component, Vue, toNative} from "vue-facing-decorator";
 import SocialuniMsgViewService, {
   socialuniMsgViewService
 } from "socialuni-im-sdk/src/logic/SocialuniMsgViewService";
@@ -186,20 +191,22 @@ import {onLoad} from "@dcloudio/uni-app";
       components: {QIcon, QNavbar, SocialuniReportDialog}
     }
 )
-export default class SocialuniMessageView extends Vue {
+class SocialuniMessageView extends Vue {
   public $refs!: {
     // reportDialog: SocialuniReportDialog;
     messageMoreHandleDialog: any;
     deleteReasonDialog: any;
   }
 
-    viewService = new SocialuniMsgViewService()
+  viewService = new SocialuniMsgViewService()
 
   created() {
     //TODO 同一会话时，这里要改成onRead，不然需要刷新页面才会触发已读的标志。
     onLoad((params: MessageViewParams) => {
-      this.viewService.initService(getCurrentInstance(),params)
+      this.viewService.initService(getCurrentInstance(), params)
     })
   }
 }
+
+export default toNative(SocialuniMessageView)
 </script>
