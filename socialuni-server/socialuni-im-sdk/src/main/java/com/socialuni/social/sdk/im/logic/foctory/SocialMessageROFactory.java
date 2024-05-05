@@ -1,6 +1,7 @@
 package com.socialuni.social.sdk.im.logic.foctory;
 
 
+import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.sdk.im.enumeration.MessageReadStatus;
@@ -37,8 +38,14 @@ public class SocialMessageROFactory {
 
         boolean isMine = messageDO.getUserId().equals(beUserId);
 
+        if (messageDO.getMessageContentType().equals("图片")) {
+            messageRO.setContent(SocialuniSystemConst.getStaticResourceUrl() + messageDO.getContent());
+        } else {
+            messageRO.setContent(messageDO.getContent());
+        }
+
         messageRO.setId(messageDO.getUnionId());
-        messageRO.setContent(messageDO.getContent());
+
         messageRO.setCreateTime(messageDO.getCreateTime());
         messageRO.setUser(messageUser);
         messageRO.setIsMine(isMine);
@@ -46,6 +53,7 @@ public class SocialMessageROFactory {
         messageRO.setReadStatus(MessageReadStatus.sended);
         messageRO.setReadNum(messageDO.getReadNum());
         messageRO.setType(messageDO.getType());
+        messageRO.setContentType(messageDO.getMessageContentType());
         return messageRO;
     }
 
