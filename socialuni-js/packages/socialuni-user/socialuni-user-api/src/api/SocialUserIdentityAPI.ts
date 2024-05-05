@@ -13,6 +13,6 @@ export default class SocialUserIdentityAPI {
     }
 
     static getMineUserIdentityStatusAPI() {
-        return socialuniUserRequest.get<boolean>('socialuni/userIdentity/getMineUserIdentityStatusAPI')
+        return socialuniUserRequest.get<boolean>('socialuni/userIdentity/getMineUserIdentityStatus')
     }
 }

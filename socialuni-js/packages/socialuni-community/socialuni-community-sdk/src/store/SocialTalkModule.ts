@@ -18,6 +18,7 @@ import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import TalkFilterUtil from "../util/TalkFilterUtil";
 import TalkVueUtil from "../util/TalkVueUtil";
+import UserCheckUtil from "socialuni-user-sdk/src/util/UserCheckUtil";
 
 class SocialTalkModule {
     //方便操作页面动作
@@ -78,16 +79,12 @@ class SocialTalkModule {
 
 
     setTalk(talk) {
-        const user = socialuniUserModule.mineUser
-        if (user && user.phoneNum) {
-            this.talk = talk
-            this.comment = null
-            this.replyComment = null
-            this.currentContent = talk.content
-            this.inputContentFocusEvent()
-        } else {
-            UserMsgUtil.unBindPhoneNum()
-        }
+        UserCheckUtil.checkUserBindPhoneNum()
+        this.talk = talk
+        this.comment = null
+        this.replyComment = null
+        this.currentContent = talk.content
+        this.inputContentFocusEvent()
     }
 
 
@@ -257,7 +254,7 @@ this.setCircleName(null)
         //缓存记录本次推出时的默认值
         // TalkVueUtil.setTalkTabsAll(talkTabs, talkTabIndex, talkTabType)
         if (talkTabs.length) {
-           QingAppUtil.StorageUtil.setObj(TalkVueUtil.TalkTabsKey, talkTabs)
+            QingAppUtil.StorageUtil.setObj(TalkVueUtil.TalkTabsKey, talkTabs)
         }
         QingAppUtil.StorageUtil.setObj(TalkVueUtil.talkTabIndexKey, talkTabIndex)
         QingAppUtil.StorageUtil.setObj(TalkVueUtil.talkTabTypeKey, talkTabType)

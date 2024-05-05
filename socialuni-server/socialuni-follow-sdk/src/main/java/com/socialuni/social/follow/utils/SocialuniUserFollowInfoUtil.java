@@ -7,9 +7,11 @@ import com.socialuni.social.follow.logic.manage.SocialuniUserFollowManage;
 import com.socialuni.social.follow.model.follow.SocialuniUserFansDetailRO;
 import com.socialuni.social.follow.model.follow.SocialuniUserFollowRelationInfoRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
+@Component
 public class SocialuniUserFollowInfoUtil {
 
     static SocialUserFansDetailManage socialUserFansDetailManage;

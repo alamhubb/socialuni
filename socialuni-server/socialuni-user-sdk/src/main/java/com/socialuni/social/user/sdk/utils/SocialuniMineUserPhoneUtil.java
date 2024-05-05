@@ -5,14 +5,16 @@ import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
 import com.socialuni.social.user.sdk.logic.redis.SocialUserPhoneRedis;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
+@Component
 public class SocialuniMineUserPhoneUtil {
     public static SocialUserPhoneRedis socialUserPhoneRedis;
 
     @Resource
-    public void setSocialUserPhoneStore(SocialUserPhoneRedis socialUserPhoneRedis) {
+    public void setSocialUserPhoneRedis(SocialUserPhoneRedis socialUserPhoneRedis) {
         SocialuniMineUserPhoneUtil.socialUserPhoneRedis = socialUserPhoneRedis;
     }
 

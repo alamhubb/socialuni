@@ -17,6 +17,15 @@ import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import DateUtil from "qing-util/src/util/DateUtil";
 import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil";
 import UserType from "socialuni-constant/constant/UserType";
+import CosAuthRO from "socialuni-api-base/src/model/cos/CosAuthRO";
+import CosService from "socialuni-app-sdk/src/util/CosService";
+import {socialAppModule} from "socialuni-app-sdk/src/store/SocialAppModule";
+import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
+import AppMsg from "socialuni-constant/constant/AppMsg";
+import DomFile from "qingjs/src/model/DomFile";
+import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
+import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
+import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
 
 export default class SocialuniMsgViewService extends SocialuniViewService<any> {
     public $refs!: {
@@ -91,6 +100,8 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
         }
     }
 
+    msgType = null
+
 
     async sendMsgClick() {
         if (!socialuniChatModule.chat) {
@@ -100,6 +111,7 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
         UserCheckUtil.checkUserBindPhoneNum()
         console.log(123)
         const msgContent = this.msgContent
+        const msgType = this.msgType
         console.log(this.msgContent)
         console.log(msgContent)
         console.log(123456)
@@ -115,10 +127,11 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
             console.log(123)
             //启用状态可以直接发送
             this.msgContent = ''
+            this.msgType = null
             socialuniChatModule.chat.updateTime = new Date()
             console.log(123)
             try {
-                const res = await MessageAPI.sendMsgAPI(socialuniChatModule.chat.id, msgContent)
+                const res = await MessageAPI.sendMsgAPI(socialuniChatModule.chat.id, msgContent, msgType)
                 socialuniChatModule.chat.updateTime = res.data.createTime
                 socialuniChatModule.messages.splice(index, 1, res.data)
             } catch (e) {
@@ -166,20 +179,16 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
 
 
     openPhoto() {
-        const that = this;
-        const itemList: string[] = ['图片', '视频', '录音'];
-        if (this.userId) {
-            itemList.push('删除对方聊天记录');
-        }
-
+        const itemList: string[] = ['图片'];
+        // const itemList: string[] = ['图片', '视频', '录音'];
         //调用相册api，可选择拍照和引用相册
         QingAppUtil.NativeUtil.actionSheet(itemList).then((index: number) => {
             switch (itemList[index]) {
                 case '图片':
-                    that.chooseImage();
+                    this.chooseImage();
                     break;
                 case '视频':
-                    that.chooseVideo();
+                    this.chooseVideo();
                     break;
                 case '录音':
                     QingAppUtil.AlertUtil.error('暂不支持,开发中');
@@ -194,6 +203,25 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
 
         })
     }
+
+    /**
+     * 图片前台压缩，往后台传一个压缩后的可看清的图，然后后台弄出来一个压缩图，
+     */
+    async chooseImage() {
+        //获取cos认证信息
+        let cosAuthRO
+        CosService.getCosAuthRO().then(res => {
+            cosAuthRO = res
+        })
+        const imgFiles: DomFile[] = await QingAppUtil.NativeUtil.chooseImage(1)
+        const imgFile: DomFile = imgFiles[0]
+        imgFile.src = cosAuthRO.uploadImgPath + 'im/img/' + imgFile.src
+        const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO)])
+        this.msgType = '图片'
+        this.msgContent = imgFile.src
+        this.sendMsgClick()
+    }
+
 
     closeDeleteDialog() {
         this.$refs.deleteReasonDialog.close()

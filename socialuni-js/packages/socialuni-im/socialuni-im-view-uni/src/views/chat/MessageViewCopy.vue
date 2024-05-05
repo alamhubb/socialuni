@@ -494,7 +494,8 @@ export default class MessageView extends Vue {
 
     openPhoto() {
         const that = this;
-        const itemList: string[] = ['图片', '视频', '录音'];
+        const itemList: string[] = ['图片'];
+        // const itemList: string[] = ['图片', '视频', '录音'];
         if (this.userId) {
             itemList.push('删除对方聊天记录');
         }

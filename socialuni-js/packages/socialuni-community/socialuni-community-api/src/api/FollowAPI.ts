@@ -18,6 +18,6 @@ export default class FollowAPI {
     }
 
     static getMineUserFollowDetailAPI() {
-        return socialuniCommunityRequest.post<SocialuniUserFansDetailRO>('socialuni/follow/getMineUserFollowDetail')
+        return socialuniCommunityRequest.get<SocialuniUserFansDetailRO>('socialuni/follow/getMineUserFollowDetail')
     }
 }

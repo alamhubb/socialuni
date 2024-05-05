@@ -17,6 +17,6 @@ export default class SocialuniUserExpandAPI {
   }
 
   static getMineUserExpandDetailAPI () {
-    return socialuniUserRequest.post<SocialuniUserExpandDetailRO>('socialuni/userExpand/getMineUserExpandDetail')
+    return socialuniUserRequest.get<SocialuniUserExpandDetailRO>('socialuni/userExpand/getMineUserExpandDetail')
   }
 }

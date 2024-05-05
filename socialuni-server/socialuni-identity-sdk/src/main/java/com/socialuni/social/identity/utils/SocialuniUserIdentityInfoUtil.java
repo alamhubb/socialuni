@@ -7,11 +7,13 @@ import com.socialuni.social.user.sdk.constant.UserIdentityAuthStatus;
 import com.socialuni.social.user.sdk.model.factory.SocialuniUserROFactory;
 import com.socialuni.social.identity.dao.repository.SocialUserIdentityAuthRepository;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
+@Component
 public class SocialuniUserIdentityInfoUtil {
-    static SocialUserIdentityAuthRepository socialUserIdentityAuthRepository;
+    private static SocialUserIdentityAuthRepository socialUserIdentityAuthRepository;
 
     @Resource
     public void setSocialUserIdentityAuthRepository(SocialUserIdentityAuthRepository socialUserIdentityAuthRepository) {

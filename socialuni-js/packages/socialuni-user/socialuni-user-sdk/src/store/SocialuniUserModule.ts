@@ -7,6 +7,7 @@ import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAP
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import {socialuniTokenModule} from "./SocialuniTokenModule";
 import SocialuniUserRO from "socialuni-api-base/src/model/user/SocialuniUserRO";
+import {socialuniAppUserModule} from "./SocialuniAppUserModule";
 
 class SocialuniUserModule {
     get token() {
@@ -40,11 +41,10 @@ class SocialuniUserModule {
     async initSocialuniUserModule() {
         //判断是否已登录已有token,userId
         if (this.hasToken) {
-            const {data}: { data: SocialuniMineUserRO } = await SocialuniMineUserAPI.getMineUserInfoAPI();
+            await socialuniAppUserModule.getMineUserAction()
             //考虑清空缓存的情况
             //从后台根据api获取用户信息， 并且更新user。
             //并且设置
-            this.setUser(data)
             //刷新token
             const tokenRo = await LoginAPI.refreshToken();
             // 有才设置新的token.

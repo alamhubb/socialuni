@@ -27,10 +27,8 @@
         <!--      <view v-if="chat.status === waitOpenStatus||chat.status === closeStatus" class="w100p h100p col-row-center">-->
         <div class="pb-60">
           <div v-for="msg in viewService.messages" :id="'m'+msg.id" :key="msg.id">
-            <div v-if="msg.type === '喜欢1'">
-              喜欢
-            </div>
-            <div v-else>
+
+            <div>
               <div v-if="msg.user.isMine" class="flex-row pr-sm pl-70">
                 <div class="flex-1 flex-col mr-sm overflow-hidden">
                   <div class="h44px row-end-center mb-xs">
@@ -48,7 +46,14 @@
                     <!--                                    <q-icon v-if="msg.status === 3" icon="mdi-alert-circle" size="25" class="mb-nm"/>-->
                     <!--                                <message-item-content :msg="msg"></message-item-content>-->
 
-                    <div class="pd-xs bg-white bd-radius"> {{ msg.content }}</div>
+
+
+                    <div v-if="msg.contentType === '图片'">
+                      <img class="size100 bd-radius flex-none"
+                           :src="msg.content"
+                      />
+                    </div>
+                    <div v-else class="pd-xs bg-white bd-radius"> {{ msg.content }}</div>
                   </div>
 
                   <div class="col-all-center mt-xs">
@@ -81,7 +86,13 @@
 
                   <div class="row-start" @longpress="viewService.openMessageMoreHandleDialog(msg)">
                     <!--                                    <message-item-content :msg="msg"></message-item-content>-->
-                    <div class="pd-xs bg-white bd-radius"> {{ msg.content }}</div>
+
+                    <div v-if="msg.contentType === '图片'">
+                      <img class="size100 bd-radius flex-none"
+                           :src="msg.content"
+                      />
+                    </div>
+                    <div v-else class="pd-xs bg-white bd-radius"> {{ msg.content }}</div>
                   </div>
                   <div class="col-all-center mt-xs">
                     <div class="date">
@@ -120,9 +131,9 @@
         <button v-if="viewService.msgContent" class="cu-btn bg-green shadow color-white"
                 @click.prevent="viewService.sendMsgClick()">发送
         </button>
-        <!--        <view v-else class="ml-sm">
-                  <q-icon icon="plus-circle" size="28" @click="viewService.openPhoto()"></q-icon>
-                </view>-->
+        <div v-else class="ml-sm">
+          <q-icon icon="plus-circle" size="28" @click="viewService.openPhoto()"></q-icon>
+        </div>
       </view>
       <!--      <view v-show="showEmoji" class="w100vw bg-blue" :style="{height:keyboardHeight+'px'}"></view>-->
     </view>

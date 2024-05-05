@@ -16,7 +16,6 @@ class SocialuniAppUserModule {
 
     setMineUserPhoneNum(phoneNum: string) {
         this.mineUserPhoneNum = phoneNum
-
     }
 
     get hasPhoneNum() {
