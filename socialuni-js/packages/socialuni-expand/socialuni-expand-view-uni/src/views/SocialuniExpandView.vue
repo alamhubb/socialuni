@@ -62,7 +62,8 @@
                           </view>
                         </view>
                       </div>
-                      <view v-if="!isIos" class="col-center flex-none">
+                      <view class="col-center flex-none">
+<!--                      <view v-if="!isIos" class="col-center flex-none">-->
                         <div v-if="user.openContactInfo" class="use-click row-col-center">
                           <q-button light @click="copyContactInfo(user)">
                             <div class="color-content ml-xs font-12">
@@ -71,10 +72,15 @@
                           </q-button>
                         </div>
                         <div v-else class="use-click row-col-center">
-                          <q-button text @click="addLikeUser(user)" :disabled="showUserContactBtnDisabled">
+                          <q-button v-if="user.hasUserLike" @click="toMessagePage(user)" class="mr-sm">
+                            <q-icon icon="mdi-chat-outline" size="14"></q-icon>
+                            私信
+                          </q-button>
+                          <q-button v-else text @click="addLikeUser(user)">
                             <q-icon prefix="uni-icons" icon="uniui-heart" size="22"></q-icon>
                           </q-button>
                         </div>
+
                         <!--                        <div v-else class="use-click row-col-center">-->
                         <!--                          <q-button text @click="getOpenContactInfo(user)" :disabled="showUserContactBtnDisabled">-->
                         <!--                            <q-icon prefix="uni-icons" icon="uniui-heart" size="22"></q-icon>-->
@@ -135,11 +141,14 @@ import SocialuniImgUtil from "socialuni-user-sdk/src/util/SocialuniImgUtil";
 import SocialuniExpandAPI from "socialuni-expand-api/src/api/SocialuniExpandAPI";
 import SocialuniUserExpandService from "../service/SocialuniDatingService";
 import SocialuniUserLikeAPI from "socialuni-expand-api/src/api/SocialuniUserLikeAPI";
+import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
+import {socialuniUserDetailViewService} from "socialuni-user-sdk/src/logic/SocialuniUserDetailViewService";
 
+@toNative
 @Component({
   components: {QPullRefresh, QButton, QIcon, SocialGenderTag, QTabs}
 })
-class SocialuniExpandView extends Vue {
+export default  class SocialuniExpandView extends Vue {
   $refs: {
     pullRefresh: QPullRefresh
   }
@@ -311,7 +320,9 @@ class SocialuniExpandView extends Vue {
   addLikeUser(user: CenterUserDetailRO) {
     SocialuniUserLikeAPI.addUserLikeAPI(user)
   }
-}
 
-export default toNative(SocialuniExpandView)
+  async toMessagePage(user) {
+    socialuniChatModule.setChatIdToMessagePage(user.id)
+  }
+}
 </script>

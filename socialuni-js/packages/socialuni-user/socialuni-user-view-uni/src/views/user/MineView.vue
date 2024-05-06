@@ -76,8 +76,8 @@
                     <div class="row-col-center">
                         <q-icon class="color-sub mr-xs" icon="mdi-cellphone-android" size="12"/>
                         手机号：
-                        <view v-if="mineUser.phoneNum" class="row-col-center">
-                            {{ mineUser.phoneNum }}
+                        <view v-if="mineUserPhoneNum" class="row-col-center">
+                            {{ mineUserPhoneNum }}
                             <view class="ml-10 sm cu-tag bg-white bd-gray radius">
                                 已绑定
                             </view>
@@ -200,7 +200,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from 'vue-facing-decorator'
+import {Component, Prop, toNative, Vue} from 'vue-facing-decorator'
 import LoginView from "../login/LoginView.vue";
 import SocialuniFollowType from 'socialuni-constant/constant/user/SocialuniFollowType';
 import UserContactInfoEditDialog from "./UserContactInfoEditDialog.vue";
@@ -229,6 +229,7 @@ import {getCurrentInstance} from "vue";
 import {onLoad} from "@dcloudio/uni-app";
 import {socialuniAppUserModule} from "socialuni-user-sdk/src/store/SocialuniAppUserModule";
 
+@toNative
 @Component({
     components: {
         UserContactInfoEditDialog,
@@ -255,6 +256,9 @@ export default class MineView extends Vue {
     get mineUser() {
         return socialuniUserModule.mineUser
     }
+  get mineUserPhoneNum() {
+    return socialuniAppUserModule.mineUserPhoneNum
+  }
 
     get isIosAndMpQQ() {
         return socialuniSystemModule.isIosOrMpQQ

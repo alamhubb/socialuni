@@ -71,7 +71,12 @@
             <view class="color-content text-sm flex">
               <view class="text-cut text-sm">
                 <template v-if="chat.messages.length">
-                  {{ chat.messages[chat.messages.length - 1].content }}
+                  <div v-if="chat.messages[chat.messages.length - 1].contentType === '图片'">
+                    [图片]
+                  </div>
+                  <div v-else>
+                    {{ chat.messages[chat.messages.length - 1].content }}
+                  </div>
                 </template>
                 <template v-else>
                   {{ chat.lastContent }}
@@ -107,7 +112,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Vue} from 'vue-facing-decorator'
 import SocialUserContentRO from "socialuni-api-base/src/model/social/SocialUserContentRO"
 import QNavbar from "qing-ui-uni/src/components/QNavbar/QNavbar.vue"
 import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue"
@@ -118,6 +123,7 @@ import {
 } from "socialuni-im-sdk/src/logic/SocialuniChatViewService";
 import {getCurrentInstance} from "vue";
 
+@toNative
 @Component({
   components: {QSearch, QInput, QIcon, QNavbar}
 })

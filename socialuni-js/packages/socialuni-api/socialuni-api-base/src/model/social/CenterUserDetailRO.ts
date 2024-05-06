@@ -11,5 +11,7 @@ export default class CenterUserDetailRO extends SocialUserFollowDetailRO {
     hugNum: number = null
     //前端字段
     hasFriend = false
+    hasUserLike = false
     getUserContactBtnDisabled = false
+
 }

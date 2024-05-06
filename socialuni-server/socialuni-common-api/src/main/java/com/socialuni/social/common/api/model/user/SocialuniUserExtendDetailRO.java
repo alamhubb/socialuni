@@ -27,6 +27,8 @@ public class SocialuniUserExtendDetailRO extends SocialuniUserRO {
      */
     private Double distance;
 
+    private boolean hasUserLike;
+
     public SocialuniUserExtendDetailRO(SocialuniUserExtendDetailRO userRO) {
         super(userRO);
         this.provinceName = userRO.getProvinceName();

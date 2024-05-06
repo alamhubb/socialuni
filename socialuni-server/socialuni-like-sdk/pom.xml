@@ -33,10 +33,6 @@
         <!-- 涉及到了注册时的关键词功能-->
         <dependency>
             <groupId>com.socialuni.social</groupId>
-            <artifactId>socialuni-report-sdk</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.socialuni.social</groupId>
             <artifactId>socialuni-tance-dev</artifactId>
         </dependency>
         <!--<dependency>

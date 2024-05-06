@@ -34,16 +34,7 @@ public class SocialuniUserLikeService {
         if (Objects.equals(beUserId, mineUserId)) {
             throw new SocialParamsException("不能喜欢自己哦");
         }
-        SocialuniUserLikeDO socialuniUserLikeDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(mineUserId, beUserId, SocialuniUserLikeDO.class);
-
-        if (socialuniUserLikeDO == null) {
-            socialuniUserLikeDO = socialuniUserLikeManage.createUserLike(mineUserId, beUserId);
-        } else {
-            if (socialuniUserLikeDO.getStatus().equals(SocialuniCommonStatus.enable)) {
-                throw new SocialBusinessException("已经喜欢过此用户了");
-            }
-            socialuniUserLikeManage.updateLikeStatue(socialuniUserLikeDO, SocialuniCommonStatus.enable);
-        }
+        SocialuniUserLikeDO socialuniUserLikeDO = socialuniUserLikeManage.createOrUpdateLikeStatus(mineUserId, beUserId);
 
         sendLikeUserMsg(addVO.getUserId());
         return socialuniUserLikeDO;
