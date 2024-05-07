@@ -4,7 +4,9 @@
     <div class="flex-1 overflow-hidden row-center">
       <div class="w1000 overflow-hidden flex-row">
         <q-nav-menu class="w150 flex-none" :menus="menus"/>
-        <RouterView/>
+        <div class="flex-1 overflow-hidden">
+          <RouterView/>
+        </div>
       </div>
     </div>
   </div>
@@ -23,7 +25,7 @@ import {constantRoutes} from "@/router";
 export default class App extends Vue {
 
 
-  get menus(){
+  get menus() {
     return constantRoutes
   }
 }
