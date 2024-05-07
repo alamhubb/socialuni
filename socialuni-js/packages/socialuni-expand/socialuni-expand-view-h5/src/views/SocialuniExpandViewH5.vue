@@ -4,7 +4,7 @@
         v-model="tableValue"
         active-class="bg-white bb-blue-3"
         :tabs="[{value: 'tab1'},{value: 'tab2'}]"
-        class="flex-none mt bg-white"
+        class="flex-none bg-white"
     />
   </div>
 </template>
