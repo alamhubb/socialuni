@@ -5,16 +5,16 @@
 </template>
 
 <script lang="ts">
-import { isExternal } from '@/utils/validate'
 import { Component, Prop, Vue , toNative} from 'vue-facing-decorator'
+import CommonUtil from "qing-util/src/util/CommonUtil";
 
 @toNative
 @Component
-export default class NavEnumLink extends Vue {
+export default class QEnumLink extends Vue {
   @Prop() to: string
 
   get isExternal() {
-    return isExternal(this.to)
+    return CommonUtil.isExternal(this.to)
   }
 
   get type() {

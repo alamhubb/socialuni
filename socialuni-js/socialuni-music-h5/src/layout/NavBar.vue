@@ -1,5 +1,4 @@
 <template>
-  <div>
     <div class="row-between-center shadow-bottom index-sm px-smm h50 bg-white flex-none">
       <div class="flex-none row-col-center mr-40 bg-click" @click="toHome">
         <!--      <img src="@/assets/img/logo.jpg" class="h40" alt="logo">-->
@@ -59,8 +58,6 @@
 
 
     <socialuni-user-edit-dialog ref="userEditDialog"></socialuni-user-edit-dialog>
-  </div>
-
 </template>
 
 <script lang="ts">

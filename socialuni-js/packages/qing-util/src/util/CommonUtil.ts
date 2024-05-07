@@ -88,4 +88,8 @@ export default class CommonUtil {
         resolve(null)
       }, millisecond))
   }
+
+  public static isExternal(path) {
+    return /^(https?:|mailto:|tel:)/.test(path)
+  }
 }
