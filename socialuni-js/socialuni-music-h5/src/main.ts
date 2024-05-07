@@ -30,6 +30,7 @@ declare module '@vue/runtime-core' {
     app.use(SocialuniApp)
     app.use(SocialuniUser)
     app.use(SocialuniIm)
+    app.use(SocialuniMusic)
     app.use(Socialuni)
 
     app.config.globalProperties.$qing = socialuniSystemModule

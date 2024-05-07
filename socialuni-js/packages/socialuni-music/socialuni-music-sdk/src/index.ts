@@ -25,7 +25,7 @@ class SocialuniMusicPlugin implements SocialuniPlugin {
         console.log('执行订阅')
         CommonEventUtil.on(SocialuniImEventKey.socialuniImPageInit, async (params: MessageViewParams) => {
             socialuniMusicStore.setChannelName(params.chatId)
-            if (socialuniTokenModule.userToken) {
+            if (socialuniTokenModule.token) {
                 const userRes = await SocialuniMusicAPI.queryMusicRoomUserInfoAPI(socialuniMusicStore.channelName)
                 socialuniMusicStore.setMusicRoleId(userRes.data.musicRoleId)
             }
