@@ -8,11 +8,11 @@ export default class SocialuniUserAPI {
         return socialuniUserRequest.get<CenterUserDetailRO>('socialuni/user/queryUserDetail/' + userId)
     }
 
-    static getUserImgListAPI(userId: string) {
-        return socialuniUserRequest.get<ImgFileVO[]>('socialuni/user/getUserImgList/' + userId)
-    }
-
     static queryRecentlyUsersAPI() {
         return socialuniUserRequest.get<CenterUserDetailRO[]>('socialuni/user/queryRecentlyUsers')
+    }
+
+    static getUserImgListAPI(userId: string) {
+        return socialuniUserRequest.get<ImgFileVO[]>('socialuni/userImg/getUserImgList/' + userId)
     }
 }

@@ -8,6 +8,7 @@ import {socialuniUserModule} from "../store/SocialuniUserModule";
 import {watch, reactive, provide, ComponentInternalInstance, getCurrentInstance} from "vue";
 import SocialuniUserExpandService from "./SocialuniUserExpandService";
 import SocialuniViewService from "socialuni/src/interface/SocialuniViewService";
+import ImgFileVO from "socialuni-api-base/src/model/ImgFileVO";
 
 export default class SocialuniUserDetailViewService extends SocialuniViewService<any> {
 
@@ -36,6 +37,9 @@ export default class SocialuniUserDetailViewService extends SocialuniViewService
         // 这里有问题，有时候直接进入页面没有userId
         const res = await SocialuniUserAPI.queryUserDetailAPI(userId)
         this.user = res.data
+        await SocialuniUserAPI.getUserImgListAPI(userId).then(res => {
+            this.user.imgs = res.data
+        })
     }
 
     get appConfig() {
