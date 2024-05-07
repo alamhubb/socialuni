@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator'
+import {Component, Emit, Model, Prop, Vue, Watch, toNative} from 'vue-facing-decorator'
 import NodesRef = UniApp.NodesRef
 import SelectorQuery = UniApp.SelectorQuery
 import CommonUtil from "qing-util/src/util/CommonUtil";

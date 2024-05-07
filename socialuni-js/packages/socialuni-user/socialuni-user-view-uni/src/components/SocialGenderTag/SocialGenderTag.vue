@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Prop, Vue} from 'vue-facing-decorator'
+import {Component, Prop, Vue, toNative} from 'vue-facing-decorator'
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
 import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue";
 import QTag from "qing-ui-uni/src/components/QTag.vue";

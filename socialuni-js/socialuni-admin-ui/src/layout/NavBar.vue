@@ -60,7 +60,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-facing-decorator'
+import { Component, Vue , toNative} from 'vue-facing-decorator'
 import NavMenu from '@/layout/NavMenu.vue'
 import NavBreadcrumb from '@/layout/NavBreadcrumb.vue'
 import DevAccountRO from '@/model/base/DevAccountRO'

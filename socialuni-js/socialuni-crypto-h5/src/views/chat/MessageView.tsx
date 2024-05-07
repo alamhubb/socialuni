@@ -1,4 +1,4 @@
-import {Component, toNative, Vue, Watch} from 'vue-facing-decorator';
+import {Component, Vue, Watch, toNative} from 'vue-facing-decorator';
 import SocialuniChatViewH5 from "socialuni-im-view-h5/src/views/SocialuniChatViewH5.vue"
 import SocialuniMsgViewH5 from "socialuni-im-view-h5/src/views/SocialuniMsgViewH5.vue"
 import musicRequest from "@/plugins/musicRequest";

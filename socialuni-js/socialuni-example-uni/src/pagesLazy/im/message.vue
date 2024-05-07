@@ -5,11 +5,11 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Vue} from 'vue-facing-decorator'
+import {Component, Vue, toNative} from 'vue-facing-decorator'
 import SocialuniMessageView from "socialuni-im-view-uni/src/views/chat/SocialuniMessageView.vue";
 
 @toNative
-@Component({Component, toNatives: {SocialuniMessageView}})
+@Component({Components: {SocialuniMessageView}})
 export default class MessagePage extends Vue {
   $refs: {
     message: SocialuniMessageView

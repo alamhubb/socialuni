@@ -87,7 +87,7 @@
 </template>
 
 <script lang="tsx">
-import { Component, Vue } from 'vue-facing-decorator'
+import { Component, Vue , toNative} from 'vue-facing-decorator'
 import DevAccountRO from '@/model/base/DevAccountRO'
 import DevAccountType from '@/constant/DevAccountType'
 import { OperationType } from '@/constant/OperationType'

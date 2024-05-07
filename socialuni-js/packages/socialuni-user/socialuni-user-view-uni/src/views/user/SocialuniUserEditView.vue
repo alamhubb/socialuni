@@ -103,7 +103,7 @@ import SocialuniUserInfoImg from "./SocialuniUserInfoImg.vue"
 import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue"
 import QNavbar from "qing-ui-uni/src/components/QNavbar/QNavbar.vue"
 import SocialGenderTag from "../../components/SocialGenderTag/SocialGenderTag.vue"
-import {Component, toNative, Vue} from 'vue-facing-decorator'
+import {Component, Vue, toNative} from 'vue-facing-decorator'
 import QButton from "qing-ui-uni/src/components/QButton/QButton.vue";
 import socialuniUserEditViewService from "socialuni-user-sdk/src/logic/SocialuniUserEditViewService";
 import {getCurrentInstance} from "vue";

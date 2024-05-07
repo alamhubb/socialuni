@@ -83,7 +83,7 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Prop, Vue, Watch} from 'vue-facing-decorator'
+import {Component, Prop, Vue, Watch, toNative} from 'vue-facing-decorator'
 import TalkVO from "socialuni-api-base/src/model/talk/TalkVO"
 import ObjectUtil from "qing-util/src/util/ObjectUtil"
 import TalkTabType from "socialuni-constant/constant/TalkTabType"

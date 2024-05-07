@@ -123,12 +123,12 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Vue} from 'vue-facing-decorator'
+import {Component, Vue, toNative} from 'vue-facing-decorator'
 import SScrollbar from "qing-ui-h5/src/components/QComponents/QScrollbar.vue";
 import SocialuniChatViewServiceH5 from "socialuni-im-h5-sdk/src/logic/SocialuniChatViewServiceH5";
 
 @toNative
-@Component({Component, toNatives: {SScrollbar}})
+@Component({Components: {SScrollbar}})
 export default class SocialuniChatViewH5 extends Vue {
 
   viewService: SocialuniChatViewServiceH5 = new SocialuniChatViewServiceH5()

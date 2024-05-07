@@ -86,7 +86,7 @@
 </template>
 
 <script lang="ts">
-import {Emit, Component, Vue, Watch} from 'vue-facing-decorator'
+import {Emit, Component, Vue, Watch, toNative} from 'vue-facing-decorator'
 import DistrictVO from "socialuni-api-base/src/model/DistrictVO";
 import GenderType from "socialuni-constant/constant/GenderType";
 import TagSearch from "./TagSearch.vue";

@@ -47,7 +47,7 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Vue, Watch} from 'vue-facing-decorator';
+import {Component, Vue, Watch, toNative} from 'vue-facing-decorator';
 import VueGoldenLayout from 'vue3-golden-layout/src/components/VueGoldenLayout.vue';
 import VueGoldenLayoutRow from 'vue3-golden-layout/src/components/VueGoldenLayoutRow.vue';
 import VueGoldenLayoutColumn from 'vue3-golden-layout/src/components/VueGoldenLayoutColumn.vue';

@@ -126,7 +126,7 @@
   </view>
 </template>
 <script lang="ts">
-import {Component, toNative, Vue, Watch} from 'vue-facing-decorator'
+import {Component, Vue, Watch, toNative} from 'vue-facing-decorator'
 import AppMsg from 'socialuni-constant/constant/AppMsg'
 import {onUnload} from "@dcloudio/uni-app";
 import QInput from "qing-ui-uni/src/components/QInput/QInput.vue";

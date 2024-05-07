@@ -5,11 +5,11 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Vue} from 'vue-facing-decorator'
+import {Component, Vue, toNative} from 'vue-facing-decorator'
 import FriendApplyListView from "socialuni-im-view-uni/src/views/chat/FriendApplyListView.vue";
 
 @toNative
-@Component({Component, toNatives: {FriendApplyListView}})
+@Component({Components: {FriendApplyListView}})
 export default class FriendApplyListPage extends Vue {
 
 }

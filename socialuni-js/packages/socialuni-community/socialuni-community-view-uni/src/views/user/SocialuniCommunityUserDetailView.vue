@@ -90,7 +90,7 @@
 
 <script lang="ts">
 import QPopup from "qing-ui-uni/src/components/QPopup/QPopup.vue";
-import {Inject, Component, Vue} from 'vue-facing-decorator'
+import {Inject, Component, Vue, toNative} from 'vue-facing-decorator'
 import {socialuniCommunityUserDetailViewService}
   from "socialuni-community-sdk/src/logic/SocialuniCommunityUserDetailViewService";
 import {getCurrentInstance} from "vue";

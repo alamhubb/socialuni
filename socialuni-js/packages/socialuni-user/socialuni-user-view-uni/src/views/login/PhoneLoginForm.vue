@@ -84,7 +84,7 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator'
+import {Component, Emit, Model, Prop, Vue, Watch, toNative} from 'vue-facing-decorator'
 import PhoneNumFormData from "./PhoneNumFormData";
 import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue";
 import SocialuniLoginFormService from "socialuni-user-sdk/src/logic/SocialuniLoginFormService";

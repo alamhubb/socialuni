@@ -64,7 +64,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-facing-decorator'
+import { Component, Prop, Vue , toNative} from 'vue-facing-decorator'
 import TreeUtil from '@/components/YComponent/YTree/TreeUtil'
 import type {ElTree} from "element-ui/types/tree";
 

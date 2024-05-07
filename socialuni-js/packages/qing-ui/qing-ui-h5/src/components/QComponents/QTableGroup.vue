@@ -78,7 +78,7 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator'
+import {Component, Emit, Model, Prop, Vue, Watch, toNative} from 'vue-facing-decorator'
 import STable from "./QTable.vue";
 import SPagination from "./QPageable/SPagination.vue";
 

@@ -57,7 +57,7 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Prop, Vue} from 'vue-facing-decorator'
+import {Component, Prop, Vue, toNative} from 'vue-facing-decorator'
 import QScrollbar from "./QScrollbar.vue";
 import QPageFooter from "./QPageFooter.vue";
 

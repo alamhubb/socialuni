@@ -98,7 +98,7 @@ import QNavbar from "qing-ui-uni/src/components/QNavbar/QNavbar.vue"
 import SocialGenderTag from "../../components/SocialGenderTag/SocialGenderTag.vue"
 import {getCurrentInstance, provide, reactive} from "vue";
 import SocialuniUserProvideKeys from "socialuni-user-sdk/src/constant/SocialuniUserProvideKeys";
-import {Inject, Component, Vue} from 'vue-facing-decorator'
+import {Inject, Component, Vue, toNative} from 'vue-facing-decorator'
 import {socialuniUserDetailViewService} from "socialuni-user-sdk/src/logic/SocialuniUserDetailViewService";
 import {onLoad} from "@dcloudio/uni-app";
 

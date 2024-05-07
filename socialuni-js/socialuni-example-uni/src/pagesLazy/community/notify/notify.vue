@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Vue} from 'vue-facing-decorator'
+import {Component, Vue, toNative} from 'vue-facing-decorator'
 import SocialuniImgUtil from "socialuni-user-sdk/src/util/SocialuniImgUtil";
 import CommunityPageUtil from "socialuni-community-sdk/src/util/CommunityPageUtil";
 import DateUtil from "qing-util/src/util/DateUtil";

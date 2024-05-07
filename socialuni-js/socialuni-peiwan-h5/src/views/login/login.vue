@@ -108,7 +108,7 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Vue} from 'vue-facing-decorator'
+import {Component, Vue, toNative} from 'vue-facing-decorator'
 import SocialPhoneNumQO from "socialuni-admin-api/src/model/base/SocialPhoneNumQO";
 import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";

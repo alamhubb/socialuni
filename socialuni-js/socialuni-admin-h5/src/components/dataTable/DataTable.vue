@@ -60,7 +60,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-facing-decorator'
+import { Component, Emit, Model, Prop, Vue, Watch , toNative} from 'vue-facing-decorator'
 import YTable from '@/components/YComponent/YTable/YTable.vue'
 import ObjectUtil from '../../utils/ObjectUtil'
 import YPagination from '@/components/YComponent/YPageable/YPagination.vue'

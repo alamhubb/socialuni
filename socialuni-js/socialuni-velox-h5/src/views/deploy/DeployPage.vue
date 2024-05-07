@@ -67,7 +67,7 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Vue, Watch} from 'vue-facing-decorator';
+import {Component, Vue, Watch, toNative} from 'vue-facing-decorator';
 import 'golden-layout/dist/css/goldenlayout-base.css';
 import 'golden-layout/dist/css/themes/goldenlayout-light-theme.css';
 import {FolderOpened, UploadFilled} from "@element-plus/icons-vue";

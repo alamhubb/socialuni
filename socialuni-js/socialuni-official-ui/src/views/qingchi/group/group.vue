@@ -10,7 +10,7 @@
   import {
     Vue,
     Component,
-  } from 'vue-facing-decorator'
+  , toNative} from 'vue-facing-decorator'
 
   //@ts-ignore
   import QMarkdown from 'qing-markdown/src/components/q-markdown/q-markdown'

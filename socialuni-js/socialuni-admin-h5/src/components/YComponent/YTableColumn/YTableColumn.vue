@@ -75,7 +75,7 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Emit, Prop, Vue} from 'vue-facing-decorator'
+import {Component, Emit, Prop, Vue, toNative} from 'vue-facing-decorator'
 import DataTableColumnTypeEnum from './DataTableColumnTypeEnum'
 
 /**

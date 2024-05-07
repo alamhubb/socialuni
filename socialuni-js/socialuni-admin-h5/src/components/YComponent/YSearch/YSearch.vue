@@ -91,7 +91,7 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator'
+import {Component, Emit, Model, Prop, Vue, Watch, toNative} from 'vue-facing-decorator'
 import YSelect from '@/components/YComponent/YSelect/YSelect.vue'
 import TableSelect from '@/components/YComponent/TableGroup/TableSelect'
 import DataTypeStrEnum from '@/components/YComponent/constant/DataTypeStrEnum'

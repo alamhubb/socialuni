@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Vue, Watch} from 'vue-facing-decorator'
+import {Component, Vue, Watch, toNative} from 'vue-facing-decorator'
 import TalkView from "socialuni-community-view-uni/src/views/talk/TalkView.vue"
 
 @toNative

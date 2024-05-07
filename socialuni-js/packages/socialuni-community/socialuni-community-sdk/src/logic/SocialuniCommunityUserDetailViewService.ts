@@ -1,5 +1,5 @@
 import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
-import {Component, toNativeInternalInstance, reactive, watch, watchEffect} from "vue";
+import {ComponentInternalInstance, reactive, watch, watchEffect} from "vue";
 import {SocialuniViewServiceInterface} from "socialuni/src/interface/SocialuniViewServiceInterface";
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";

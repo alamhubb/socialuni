@@ -185,7 +185,7 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Vue} from "vue-facing-decorator";
+import {Component, Vue} from "vue-facing-decorator";
 import SocialuniMsgViewService, {
   socialuniMsgViewService
 } from "socialuni-im-sdk/src/logic/SocialuniMsgViewService";

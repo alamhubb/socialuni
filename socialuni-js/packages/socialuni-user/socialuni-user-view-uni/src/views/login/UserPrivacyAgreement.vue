@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Prop, Vue} from 'vue-facing-decorator'
+import {Component, Prop, Vue, toNative} from 'vue-facing-decorator'
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 import SkipUrlConst from "socialuni-app-sdk/src/constant/SkipUrlConst";
 import SocialuniLoginViewService from "socialuni-user-sdk/src/logic/SocialuniLoginViewService";

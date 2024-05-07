@@ -28,7 +28,7 @@
 </template>
 <script lang="ts">
 import CommonUtil from 'qing-util/src/util/CommonUtil';
-import {Component, toNative, Prop, Vue, Watch} from 'vue-facing-decorator'
+import {Component, Prop, Vue, Watch, toNative} from 'vue-facing-decorator'
 import SelectorQuery = UniApp.SelectorQuery;
 import NodesRef = UniApp.NodesRef;
 import UUIDUtil from "qing-util/src/util/UUIDUtil";

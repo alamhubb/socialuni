@@ -57,7 +57,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-facing-decorator'
+import { Component, Vue , toNative} from 'vue-facing-decorator'
 import request from '@/plugins/request'
 import ConfigVO from '@/model/config/ConfigVO'
 import SocialuniHomeAdminSwiperRO from '@/model/config/SocialuniHomeAdminSwiperRO'

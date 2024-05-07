@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Vue} from 'vue-facing-decorator'
+import {Component, Vue, toNative} from 'vue-facing-decorator'
 
 import SocialuniChatView from "socialuni-im-view-uni/src/views/chat/SocialuniChatView.vue";
 @toNative

@@ -69,7 +69,7 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Emit, Prop, Vue, Watch} from 'vue-facing-decorator'
+import {Component, Emit, Prop, Vue, Watch, toNative} from 'vue-facing-decorator'
 import TagVO from 'socialuni-api-base/src/model/community/tag/TagVO'
 import QIcon from 'qing-ui-uni/src/components/QIcon/QIcon.vue'
 import QNavbar from 'qing-ui-uni/src/components/QNavbar/QNavbar.vue'

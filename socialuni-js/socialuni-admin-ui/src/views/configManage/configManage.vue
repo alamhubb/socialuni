@@ -16,7 +16,7 @@
 </template>
 
 <script lang="tsx">
-import {Component, toNative, Vue} from 'vue-facing-decorator'
+import {Component, Vue, toNative} from 'vue-facing-decorator'
 import request from "@/plugins/request";
 import ConfigVO from "@/model/config/ConfigVO";
 import ReportVO from '@/model/report/ReportVO'

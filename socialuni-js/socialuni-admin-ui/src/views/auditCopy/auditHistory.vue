@@ -137,7 +137,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-facing-decorator'
+import { Vue, Component, Prop , toNative} from 'vue-facing-decorator'
 import ReportAPI from '@/api/ReportAPI'
 import ReportVO from '@/model/report/ReportVO'
 

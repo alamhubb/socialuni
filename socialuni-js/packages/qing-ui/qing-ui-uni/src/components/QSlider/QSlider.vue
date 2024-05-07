@@ -70,7 +70,7 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Prop, Vue, Watch} from 'vue-facing-decorator'
+import {Component, Prop, Vue, Watch, toNative} from 'vue-facing-decorator'
 
 @toNative
 @Component({})

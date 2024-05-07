@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Emit, Prop, Vue} from 'vue-facing-decorator'
+import {Component, Emit, Prop, Vue, toNative} from 'vue-facing-decorator'
 import TalkItemHead from './TalkItemHead.vue'
 import TalkItemContent from './TalkItemContent.vue'
 import TalkItemComment from './TalkItemComment.vue'

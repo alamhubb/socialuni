@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Vue} from 'vue-facing-decorator'
+import {Component, Vue, toNative} from 'vue-facing-decorator'
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";

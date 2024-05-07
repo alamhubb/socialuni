@@ -47,7 +47,7 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Vue, Watch} from 'vue-facing-decorator'
+import {Component, Vue, Watch, toNative} from 'vue-facing-decorator'
 
 import QButton from 'qing-ui-uni/src/components/QButton/QButton.vue'
 import QNavbar from 'qing-ui-uni/src/components/QNavbar/QNavbar.vue'

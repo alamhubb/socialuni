@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import { Emit, Component, Prop, Vue } from 'vue-facing-decorator'
+import { Emit, Component, Prop, Vue , toNative} from 'vue-facing-decorator'
 
 @toNative
 @Component({})

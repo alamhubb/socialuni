@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Emit, Prop, Vue } from 'vue-facing-decorator'
+import { Component, Emit, Prop, Vue , toNative} from 'vue-facing-decorator'
 import YSelect from '@/components/YComponent/YSelect/YSelect.vue'
 
 /**

@@ -89,7 +89,7 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Prop, Vue} from 'vue-facing-decorator'
+import {Component, Prop, Vue, toNative} from 'vue-facing-decorator'
 import PagePath from "socialuni-constant/constant/PagePath";
 import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
 import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue";

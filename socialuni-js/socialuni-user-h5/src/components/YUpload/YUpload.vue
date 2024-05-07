@@ -92,7 +92,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-facing-decorator'
+import { Component, Emit, Model, Prop, Vue, Watch , toNative} from 'vue-facing-decorator'
 import YUploadFileType from '@/components/YEchoComponent/YUpload/YUploadFileType'
 import DomFile from '@/components/YEchoComponent/YUpload/DomFile'
 import Arrays from '@/utils/Arrays'

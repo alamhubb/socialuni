@@ -46,7 +46,7 @@
 
 <script lang="ts">
 import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue";
-import {Component, toNative, Prop, Vue} from "vue-facing-decorator";
+import {Component, Prop, Vue} from "vue-facing-decorator";
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
 import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
 import ImgFileVO from "socialuni-api-base/src/model/ImgFileVO";

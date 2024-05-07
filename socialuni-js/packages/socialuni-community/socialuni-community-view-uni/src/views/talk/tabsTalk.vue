@@ -140,7 +140,7 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Vue, Watch} from 'vue-facing-decorator'
+import {Component, Vue, Watch, toNative} from 'vue-facing-decorator'
 import TalkSwipers from './talkSwipers.vue'
 
 import TalkOperate from './talkOperate.vue'

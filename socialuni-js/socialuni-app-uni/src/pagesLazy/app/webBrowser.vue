@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Vue} from 'vue-facing-decorator'
+import {Component, Vue, toNative} from 'vue-facing-decorator'
 import {onLoad, onReady} from "@dcloudio/uni-app";
 import QNavbar from 'qing-ui-uni/src/components/QNavbar/QNavbar.vue'
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";

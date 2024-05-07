@@ -44,7 +44,7 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Vue} from 'vue-facing-decorator'
+import {Component, Vue, toNative} from 'vue-facing-decorator'
 import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
 import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";

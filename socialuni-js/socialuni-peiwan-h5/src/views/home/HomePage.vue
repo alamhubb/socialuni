@@ -96,7 +96,7 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Vue} from 'vue-facing-decorator'
+import {Component, Vue, toNative} from 'vue-facing-decorator'
 import SScrollbar from "qing-ui-h5/src/components/QComponents/QScrollbar.vue";
 import QDialog from "qing-ui-h5/src/components/QComponents/QDialog.vue";
 import {Plus} from '@element-plus/icons-vue'

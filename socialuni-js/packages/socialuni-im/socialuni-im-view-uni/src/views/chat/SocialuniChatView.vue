@@ -112,7 +112,7 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Vue} from 'vue-facing-decorator'
+import {Component, Vue, toNative} from 'vue-facing-decorator'
 import SocialUserContentRO from "socialuni-api-base/src/model/social/SocialUserContentRO"
 import QNavbar from "qing-ui-uni/src/components/QNavbar/QNavbar.vue"
 import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue"

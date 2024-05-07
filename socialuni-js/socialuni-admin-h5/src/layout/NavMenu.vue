@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-facing-decorator'
+import { Component, Prop, Vue , toNative} from 'vue-facing-decorator'
 import NavMenuItem from '@/layout/components/NavMenu/NavMenuItem.vue'
 
 @toNative

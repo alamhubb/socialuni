@@ -64,7 +64,7 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Prop, Vue} from 'vue-facing-decorator'
+import {Component, Prop, Vue, toNative} from 'vue-facing-decorator'
 import SocialuniUserEventConst from "socialuni-user-sdk/src/constant/SocialuniUserEventConst";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import CosService from "socialuni-app-sdk/src/util/CosService";

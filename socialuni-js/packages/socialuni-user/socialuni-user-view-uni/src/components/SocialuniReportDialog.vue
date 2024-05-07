@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts">
-import {Emit, Component, Vue} from 'vue-facing-decorator'
+import {Emit, Component, Vue, toNative} from 'vue-facing-decorator'
 import QPopup from "qing-ui-uni/src/components/QPopup/QPopup.vue";
 import ReportType from "socialuni-constant/constant/ReportType";
 import ReportAddVO from "socialuni-api-base/src/model/report/ReportAddVO";

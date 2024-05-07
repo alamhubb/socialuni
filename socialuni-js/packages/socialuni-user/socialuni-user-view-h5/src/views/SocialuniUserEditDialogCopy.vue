@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts">
-import {Emit, Component, Vue, Watch} from 'vue-facing-decorator'
+import {Emit, Component, Vue, Watch, toNative} from 'vue-facing-decorator'
 import SButton from "qing-ui-h5/src/components/QComponents/QButton.vue";
 import QDialog from "qing-ui-h5/src/components/QComponents/QDialog.vue";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";

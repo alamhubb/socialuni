@@ -1,4 +1,4 @@
-import {Component, toNativeInternalInstance, getCurrentInstance, onMounted, onUnmounted} from "vue";
+import {ComponentInternalInstance, getCurrentInstance, onMounted, onUnmounted} from "vue";
 import SocialuniViewService from "socialuni/src/interface/SocialuniViewService";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import Constants from "socialuni-constant/constant/Constant";

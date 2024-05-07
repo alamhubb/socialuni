@@ -102,7 +102,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-facing-decorator'
+import { Component, Vue , toNative} from 'vue-facing-decorator'
 import UserIdentityAuditAPI from '@/api/UserIdentityAuditAPI'
 import UserIdentityAuditRO from '@/model/RO/user/identity/UserIdentityAuditRO'
 import DataTable from '@/components/dataTable/DataTable.vue'

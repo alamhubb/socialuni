@@ -38,7 +38,7 @@
 </template>
 <script lang="ts">
 import CommonUtil from 'qing-util/src/util/CommonUtil'
-import {Emit, Model, Component, Prop, Vue, Watch} from 'vue-facing-decorator'
+import {Emit, Model, Component, Prop, Vue, Watch, toNative} from 'vue-facing-decorator'
 import QRowItem from '../QRowItem/QRowItem.vue'
 import SelectorQuery = UniApp.SelectorQuery;
 import NodesRef = UniApp.NodesRef;

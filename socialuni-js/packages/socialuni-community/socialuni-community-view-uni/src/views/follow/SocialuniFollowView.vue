@@ -59,7 +59,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, Prop, Emit} from 'vue-facing-decorator'
+import {Vue, Component, Prop, Emit, toNative} from 'vue-facing-decorator'
 import SocialuniFollowType from "socialuni-constant/constant/user/SocialuniFollowType";
 import SocialUserContentRO from "socialuni-api-base/src/model/social/SocialUserContentRO";
 import SocialGenderTag from "socialuni-user-view-uni/src/components/SocialGenderTag/SocialGenderTag.vue";

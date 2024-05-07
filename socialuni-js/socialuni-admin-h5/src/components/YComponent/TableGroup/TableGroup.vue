@@ -113,7 +113,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Emit, Prop, Vue } from 'vue-facing-decorator'
+import { Component, Emit, Prop, Vue , toNative} from 'vue-facing-decorator'
 import YTable from '@/components/YComponent/YTable/YTable.vue'
 import TableSelect from '@/components/YComponent/TableGroup/TableSelect'
 import Pageable from '@/components/YComponent/YPageable/Pageable'

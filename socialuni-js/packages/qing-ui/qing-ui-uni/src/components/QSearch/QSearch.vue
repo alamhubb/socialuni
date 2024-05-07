@@ -4,7 +4,7 @@
   </view>
 </template>
 <script lang="ts">
-import {Component, toNative, Vue} from 'vue-facing-decorator'
+import {Component, Vue, toNative} from 'vue-facing-decorator'
 
 /*
 显示出来已经选了的城市，给她画上钩

@@ -82,7 +82,7 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Vue} from 'vue-facing-decorator'
+import {Component, Vue, toNative} from 'vue-facing-decorator'
 import {onLoad, onPullDownRefresh} from "@dcloudio/uni-app";
 import DateUtil from "qing-util/src/util/DateUtil";
 import FriendApplyType from "socialuni-constant/constant/FriendApplyType";

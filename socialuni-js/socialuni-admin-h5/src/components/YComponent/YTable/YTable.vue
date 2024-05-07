@@ -42,7 +42,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-facing-decorator'
+import { Component, Emit, Model, Prop, Vue, Watch , toNative} from 'vue-facing-decorator'
 import YTableColumn from '@/components/YComponent/YTableColumn/YTableColumn.vue'
 import ObjectUtil from '@/components/YComponent/utils/ObjectUtil'
 import type { ElTable } from 'element-ui/types/table'

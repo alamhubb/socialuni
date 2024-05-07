@@ -108,7 +108,7 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Vue} from 'vue-facing-decorator'
+import {Component, Vue, toNative} from 'vue-facing-decorator'
 import ToastUtil from '@/utils/ToastUtil'
 import NumberUtil from '@/utils/NumberUtil'
 import SocialPhoneNumQO from "socialuni-admin-api/src/model/base/SocialPhoneNumQO";

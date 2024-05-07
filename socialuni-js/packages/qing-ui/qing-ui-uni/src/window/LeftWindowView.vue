@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Vue} from 'vue-facing-decorator'
+import {Component, Vue, toNative} from 'vue-facing-decorator'
 import PageUtil from 'qing-util/src/util/PageUtil'
 import ImPageUtil from 'socialuni-im-sdk/src/util/ImPageUtil'
 import RouterUtil from 'qing-util/src/util/RouterUtil'

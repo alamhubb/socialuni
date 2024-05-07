@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Vue} from 'vue-facing-decorator'
+import {Component, Vue, toNative} from 'vue-facing-decorator'
 import QInput from "qing-ui-uni/src/components/QInput/QInput.vue";
 import QPopup from "qing-ui-uni/src/components/QPopup/QPopup.vue";
 import SSwitch from "qing-ui-uni/src/components/SSwitch.vue";

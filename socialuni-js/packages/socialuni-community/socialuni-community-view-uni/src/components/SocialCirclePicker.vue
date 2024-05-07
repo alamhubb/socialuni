@@ -49,7 +49,7 @@
 </template>
 
 <script lang="ts">
-import {Component, toNative, Emit, Vue} from 'vue-facing-decorator'
+import {Component, Emit, Vue, toNative} from 'vue-facing-decorator'
 import QPopup from "qing-ui-uni/src/components/QPopup/QPopup.vue";
 import SocialCircleRO from "socialuni-api-base/src/model/community/circle/SocialCircleRO";
 import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue";

@@ -67,7 +67,7 @@
 <script lang="ts">
 import NavMenu from '@/layout/NavMenu.vue'
 import NavBreadcrumb from '@/layout/NavBreadcrumb.vue'
-import {Component, toNative, Vue} from 'vue-facing-decorator'
+import {Component, Vue, toNative} from 'vue-facing-decorator'
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
 import SocialuniUserEventConst from "socialuni-user-sdk/src/constant/SocialuniUserEventConst";

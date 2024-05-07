@@ -106,7 +106,7 @@
 </template>
 
 <script lang="ts">
-import {Emit, Component, Vue} from 'vue-facing-decorator'
+import {Emit, Component, Vue, toNative} from 'vue-facing-decorator'
 import SocialuniLoginViewService from "socialuni-user-sdk/src/logic/SocialuniLoginViewService";
 import {getCurrentInstance, nextTick} from "vue";
 

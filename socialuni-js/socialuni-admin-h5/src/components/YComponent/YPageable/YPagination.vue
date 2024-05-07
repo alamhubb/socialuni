@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Emit, Model, Vue } from 'vue-facing-decorator'
+import { Component, Emit, Model, Vue , toNative} from 'vue-facing-decorator'
 import Pageable from '@/components/YComponent/YPageable/Pageable'
 
 @toNative
