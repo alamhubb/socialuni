@@ -33,6 +33,12 @@ public class SocialuniUserFollowInfoUtil {
         return SocialuniUserFollowInfoUtil.getUserFollowRelationInfo(mineUser);
     }
 
+
+    public static SocialuniUserFansDetailRO getUserFollowRelationInfo(String userId) {
+        SocialuniUserDo user = SocialuniUserUtil.getUserByUuid(userId);
+        return getUserFollowRelationInfo(user);
+    }
+
     public static SocialuniUserFansDetailRO getUserFollowRelationInfo(SocialuniUserDo user) {
         SocialUserFansDetailDo socialUserFansDetailDo = socialUserFansDetailManage.getOrCreateUserFollowDetail(user);
         SocialuniUserFansDetailRO userRO = new SocialuniUserFansDetailRO();

@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -36,5 +37,9 @@ public interface SocialuniFollowAPI {
     @GetMapping("getMineUserFollowDetail")
     @Operation(summary = "粉丝数量详情")
     ResultRO<SocialuniUserFansDetailRO> getMineUserFollowDetail();
+
+    @GetMapping("queryUserFansDetail/{userId}")
+    @Operation(summary = "粉丝数量详情")
+    ResultRO<SocialuniUserFansDetailRO> queryUserFansDetail(@PathVariable("userId") String userId);
 
 }

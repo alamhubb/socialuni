@@ -40,4 +40,9 @@ public class SocialuniFollowController implements SocialuniFollowAPI {
     public ResultRO<SocialuniUserFansDetailRO> getMineUserFollowDetail() {
         return ResultRO.success(SocialuniUserFollowInfoUtil.getMineUserFollowRelationInfo());
     }
+
+    @Override
+    public ResultRO<SocialuniUserFansDetailRO> queryUserFansDetail(String userId) {
+        return ResultRO.success(SocialuniUserFollowInfoUtil.getUserFollowRelationInfo(userId));
+    }
 }
