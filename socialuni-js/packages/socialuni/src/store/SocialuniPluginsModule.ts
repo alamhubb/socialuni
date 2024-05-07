@@ -6,6 +6,7 @@ import UUIDUtil from "qing-util/src/util/UUIDUtil";
 class SocialuniPluginsModule {
     private _router: Router = null
     private _route: RouteRecord = null
+    componentsMap: Map = new Map()
     uid: string = UUIDUtil.getUUID()
     private socialuniPlugins: SocialuniPlugin[] = []
 

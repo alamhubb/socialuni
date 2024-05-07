@@ -13,6 +13,7 @@ import SocialuniIm from "socialuni-im-sdk/src";
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule.ts";
 import SocialuniUiH5 from "socialuni-ui-h5/src";
 import SocialuniExpandH5 from "socialuni-extand-view-h5/src";
+import ExpandView from "@/views/expand/ExpandView.vue";
 
 declare module '@vue/runtime-core' {
     interface ComponentCustomProperties {
@@ -34,7 +35,7 @@ declare module '@vue/runtime-core' {
     app.use(SocialuniUser)
     app.use(SocialuniIm)
     app.use(SocialuniMusic)
-    app.use(SocialuniExpandH5)
+    app.use(SocialuniExpandH5,ExpandView)
 
 
     app.config.globalProperties.$qing = socialuniSystemModule

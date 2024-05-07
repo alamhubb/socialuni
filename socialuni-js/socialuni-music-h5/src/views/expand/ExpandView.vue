@@ -1,6 +1,6 @@
 <template>
     <div>
-      覆盖页面
+      覆盖页面123
     </div>
 </template>
 
@@ -11,6 +11,9 @@ import { Component, Vue , toNative} from 'vue-facing-decorator';
 @Component({})
 export default class ExpandView extends Vue {
 
+  created(){
+    console.log('chufale')
+  }
 
 }
 </script>
