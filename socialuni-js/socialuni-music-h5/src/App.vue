@@ -1,9 +1,9 @@
 <template>
   <div class="h100p overflow-hidden flex-col bg-default">
-    <nav-bar/>
+    <s-user-nav-bar></s-user-nav-bar>
     <div class="flex-1 overflow-hidden row-center">
       <div class="w1000 overflow-hidden flex-row">
-        <nav-menu class="w150 flex-none"/>
+        <q-nav-menu class="w150 flex-none" :menus="menus"/>
         <RouterView/>
       </div>
     </div>
@@ -12,13 +12,19 @@
 
 <script lang="ts">
 import {Component, Vue, toNative} from 'vue-facing-decorator';
-import NavBar from "@/layout/NavBar.vue";
-import NavMenu from '@/layout/NavMenu.vue'
+import SUserNavBar from "socialuni-user-view-h5/src/components/SUserNavBar.vue";
+import QNavMenu from "qing-ui-h5/src/components/QComponents/QNavMenu.vue";
+import {constantRoutes} from "@/router";
 
 @toNative
 @Component({
-  components: {NavBar, NavMenu}
+  components: {SUserNavBar, QNavMenu}
 })
 export default class App extends Vue {
+
+
+  get menus(){
+    return constantRoutes
+  }
 }
 </script>

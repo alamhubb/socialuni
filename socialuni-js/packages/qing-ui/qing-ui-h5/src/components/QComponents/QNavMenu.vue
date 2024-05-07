@@ -11,20 +11,13 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue , toNative} from 'vue-facing-decorator'
-import { constantRoutes } from '@/router'
+import {Component, Vue, toNative, Prop} from 'vue-facing-decorator'
 import QEnumLink from 'qing-ui-h5/src/components/QComponents/QEnumLink.vue'
 
 @toNative
 @Component({components:{QEnumLink}})
-export default class NavMenu extends Vue {
-  // 是x(横向,水平)轴布局
-  isXAxisLayout = false
-
-  get menus(){
-    return constantRoutes
-  }
-
+export default class QNavMenu extends Vue {
+  @Prop() menus: any[]
 }
 </script>
 
