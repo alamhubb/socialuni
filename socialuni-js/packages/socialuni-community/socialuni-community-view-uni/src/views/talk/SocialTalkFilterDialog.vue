@@ -109,6 +109,7 @@ import SocialCircleRO from "socialuni-api-base/src/model/community/circle/Social
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
 
 
+@toNative
 @Component({
   components: {
     SocialTagPicker,

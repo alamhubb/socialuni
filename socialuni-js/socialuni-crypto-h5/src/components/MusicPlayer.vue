@@ -86,7 +86,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator';
+import {Component, toNative, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator';
 import CommonEventUtil from "qingjs/src/util/CommonEventUtil.ts";
 import SocialuniImEventKey from "socialuni-im-api/src/constant/SocialuniMusicEventConst.ts";
 import socialuniMusicStore from "socialuni-music-sdk/src/store/SocialuniMusicStore.ts";
@@ -97,6 +97,7 @@ import MusicPlayerSongPlayingInfoRO from "socialuni-music-sdk/src/model/MusicPla
 import ToastUtil from "qingjs-h5/src/util/ToastUtil.ts";
 import DateUtil from "qing-util/src/util/DateUtil.ts";
 
+@toNative
 @Component({
   components: {}
 })

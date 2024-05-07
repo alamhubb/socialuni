@@ -28,6 +28,7 @@ import QCityPicker from "../QCityPicker/QCityPicker.vue";
 import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue";
 import DistrictVO from "socialuni-api-base/src/model/DistrictVO";
 
+@toNative
 @Component({
   components: {
     QCityPicker,

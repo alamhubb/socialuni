@@ -3,9 +3,10 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Vue} from 'vue-facing-decorator'
 import MineView from "socialuni-user-view-uni/src/views/user/MineView.vue";
 
+@toNative
 @Component({
   components: {
     MineView

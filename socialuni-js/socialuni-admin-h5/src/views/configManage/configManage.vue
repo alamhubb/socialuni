@@ -16,11 +16,12 @@
 </template>
 
 <script lang="tsx">
-import {Component, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Vue} from 'vue-facing-decorator'
 import request from "@/plugins/request";
 import ConfigVO from "@/model/config/ConfigVO";
 import ReportVO from '@/model/report/ReportVO'
 
+@toNative
 @Component
 export default class ConfigManageView extends Vue {
   configs: ConfigVO[] = []

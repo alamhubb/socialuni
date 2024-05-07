@@ -102,7 +102,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Vue} from 'vue-facing-decorator'
 import {DialogInterface} from "@/interface/DialogInterface";
 import PeiwanRO from "socialuni-admin-api/src/model/peiwan/PeiwanRO";
 import QDialog from "qing-ui-h5/src/components/QComponents/QDialog.vue";
@@ -119,6 +119,7 @@ import {watch} from "vue";
 import AlertUtil from "qingjs-h5/src/util/AlertUtil";
 
 
+@toNative
 @Component({
     components: {SDialog, Plus}
 })

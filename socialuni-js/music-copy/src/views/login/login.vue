@@ -108,7 +108,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Vue} from 'vue-facing-decorator'
 import ToastUtil from '@/utils/ToastUtil'
 import NumberUtil from '@/utils/NumberUtil'
 import SocialPhoneNumQO from "socialuni-admin-api/src/model/base/SocialPhoneNumQO";
@@ -117,6 +117,7 @@ import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfig
 import LoginService from "socialuni-user-sdk/src/logic/LoginService";
 
 
+@toNative
 @Component
 export default class AdminLoginPage extends Vue {
   $refs: {

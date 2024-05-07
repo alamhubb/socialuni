@@ -10,7 +10,7 @@ import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import ImPageUtil from "../util/ImPageUtil";
 import SocialuniImUserAPI from "socialuni-im-api/src/api/SocialuniImUserAPI";
 import SocialuniViewService from "socialuni/src/interface/SocialuniViewService";
-import {ComponentInternalInstance} from "@vue/runtime-core";
+import {Component, toNativeInternalInstance} from "@vue/runtime-core";
 
 interface SocialuniChatViewServiceRefs {
     messageBox: HTMLDivElement;

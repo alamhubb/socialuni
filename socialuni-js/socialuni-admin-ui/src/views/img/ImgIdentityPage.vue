@@ -73,6 +73,7 @@ import Identity from '@/model/user/Identity'
 import ImgIdentityAPI from '@/api/ImgIdentityAPI'
 import ViolateType from '@/constant/ViolateType'
 
+@toNative
 @Component
 export default class ImgIdentity extends Vue {
     page = 0

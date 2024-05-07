@@ -3,8 +3,9 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Vue} from 'vue-facing-decorator'
 import SocialuniExpandView from "socialuni-expand-view-uni/src/views/SocialuniExpandView.vue";
+@toNative
 @Component({
   components: {SocialuniExpandView}
 })

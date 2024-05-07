@@ -112,6 +112,7 @@ import AuditAPI from '@/api/AuditAPI'
 import YTableColumn from '@/components/YComponent/YTableColumn/YTableColumn.vue'
 import ReportAPI from '@/api/ReportAPI'
 
+@toNative
 @Component({
   components: { YTableColumn, DataTable }
 })

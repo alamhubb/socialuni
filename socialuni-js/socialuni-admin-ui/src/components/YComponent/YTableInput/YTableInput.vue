@@ -42,6 +42,7 @@ import YSelect from '@/components/YComponent/YSelect/YSelect.vue'
  *
  * 在数据源业务基础上，封装基础table
  */
+@toNative
 @Component({
   components: { YSelect }
 })

@@ -52,10 +52,11 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Vue} from 'vue-facing-decorator'
 import DateUtil from "qing-util/src/util/DateUtil";
 
-@Component({components: {QNavbar}})
+@toNative
+@Component({Component, toNatives: {QNavbar}})
 export default class GroupMemberView extends Vue {
   groupMemberList: GroupMemberItem[] = []
   moreGroupMember = true;

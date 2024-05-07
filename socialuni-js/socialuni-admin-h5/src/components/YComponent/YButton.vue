@@ -9,11 +9,12 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Prop, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Emit, Prop, Vue} from 'vue-facing-decorator'
 import CommonUtil from '@/components/YComponent/utils/CommonUtil'
 
 //想要的效果，外部可以主动disable
 //可以主动loading
+@toNative
 @Component
 export default class YButton extends Vue {
   @Prop({default: false, type: Boolean}) disabled: boolean

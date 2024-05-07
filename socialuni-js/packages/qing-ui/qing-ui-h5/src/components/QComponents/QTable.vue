@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator'
+import {Component, toNative, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator'
 import STableColumn from "./QTableColumn/STableColumn.vue";
 import ObjectUtil from "qing-util/src/util/ObjectUtil";
 import JsonUtil from "qing-util/src/util/JsonUtil";
@@ -52,6 +52,7 @@ import JsonUtil from "qing-util/src/util/JsonUtil";
  *
  * 在数据源业务基础上，封装基础table
  */
+@toNative
 @Component({
     components: {STableColumn}
 })

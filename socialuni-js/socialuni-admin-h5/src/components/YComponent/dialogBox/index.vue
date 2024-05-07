@@ -60,10 +60,11 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Prop, Vue} from 'vue-facing-decorator'
 import YPageFooter from "@/components/YComponent/YPageFooter.vue";
 import YScrollbar from "@/components/YComponent/YScrollbar.vue";
 
+@toNative
 @Component({
   components: {YScrollbar, YPageFooter}
 })

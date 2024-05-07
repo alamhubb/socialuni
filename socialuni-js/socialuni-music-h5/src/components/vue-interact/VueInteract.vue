@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator';
+import {Component, toNative, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator';
 
 
 function dragElement(elmnt) {
@@ -61,6 +61,7 @@ function dragElement(elmnt) {
   }
 }
 
+@toNative
 @Component({
   components: {}
 })

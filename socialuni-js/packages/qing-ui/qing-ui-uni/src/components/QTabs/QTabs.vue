@@ -24,12 +24,13 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator'
+import {Component, toNative, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator'
 import NodesRef = UniApp.NodesRef
 import SelectorQuery = UniApp.SelectorQuery
 import CommonUtil from "qing-util/src/util/CommonUtil";
 import UUIDUtil from "qing-util/src/util/UUIDUtil";
 
+@toNative
 @Component({})
 export default class QTabs extends Vue {
   //line、bar、card

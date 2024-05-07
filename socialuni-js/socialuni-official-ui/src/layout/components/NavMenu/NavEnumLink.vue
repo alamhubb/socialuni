@@ -7,6 +7,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-facing-decorator'
 
+@toNative
 @Component({})
 export default class NavEnumLink extends Vue {
   @Prop() to: string

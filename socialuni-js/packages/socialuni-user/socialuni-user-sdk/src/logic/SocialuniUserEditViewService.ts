@@ -14,7 +14,7 @@ import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
 import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
 import DomFile from "socialuni-app-sdk/src/model/DomFile";
 import SocialuniViewService from "socialuni/src/interface/SocialuniViewService";
-import {ComponentInternalInstance} from "@vue/runtime-core";
+import {Component, toNativeInternalInstance} from "@vue/runtime-core";
 import {reactive, watch} from "vue";
 import UserPageUtil from "../util/UserPageUtil";
 

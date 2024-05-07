@@ -4,9 +4,10 @@
 
 
 <script lang="ts">
-import {Component, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Vue} from 'vue-facing-decorator'
 
 import LoginView from "socialuni-user-view-uni/src/views/login/LoginView.vue";
+@toNative
 @Component({
   components: {
     LoginView

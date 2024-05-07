@@ -5,8 +5,9 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Vue} from 'vue-facing-decorator'
 
+@toNative
 @Component({})
 export default class QScrollbar extends Vue {
 

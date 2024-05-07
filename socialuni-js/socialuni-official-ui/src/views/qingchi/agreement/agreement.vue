@@ -20,7 +20,8 @@
   //@ts-ignore
   import agreement from './agreement.md'
 
-  @Component({
+  @toNative
+@Component({
     components: {
       QMarkdown
     }

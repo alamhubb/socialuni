@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Prop, Vue} from 'vue-facing-decorator'
 import STableColumn from "../STableColumn/STableColumn.vue";
 
 /**
@@ -39,6 +39,7 @@ import STableColumn from "../STableColumn/STableColumn.vue";
  *
  * 在数据源业务基础上，封装基础table
  */
+@toNative
 @Component({
     components: {STableColumn}
 })

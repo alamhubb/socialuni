@@ -1,4 +1,4 @@
-import {ComponentInternalInstance} from "vue";
+import {Component, toNativeInternalInstance} from "vue";
 
 export interface SocialuniViewServiceInterface {
     instance: ComponentInternalInstance

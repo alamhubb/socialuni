@@ -1,5 +1,5 @@
 import {SocialuniViewServiceInterface} from "./SocialuniViewServiceInterface";
-import {ComponentInternalInstance} from "vue";
+import {Component, toNativeInternalInstance} from "vue";
 import UUIDUtil from "qing-util/src/util/UUIDUtil";
 import {Emit, Component, Vue, Watch} from 'vue-facing-decorator'
 

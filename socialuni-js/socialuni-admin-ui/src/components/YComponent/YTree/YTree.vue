@@ -74,6 +74,7 @@ import type {ElTree} from "element-ui/types/tree";
  *
  * 在数据源业务基础上，封装基础table
  */
+@toNative
 @Component
 export default class YTree extends Vue {
   $refs: {

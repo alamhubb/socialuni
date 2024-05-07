@@ -28,7 +28,7 @@
 </template>
 <script lang="ts">
 import CommonUtil from 'qing-util/src/util/CommonUtil';
-import {Component, Prop, Vue, Watch} from 'vue-facing-decorator'
+import {Component, toNative, Prop, Vue, Watch} from 'vue-facing-decorator'
 import SelectorQuery = UniApp.SelectorQuery;
 import NodesRef = UniApp.NodesRef;
 import UUIDUtil from "qing-util/src/util/UUIDUtil";
@@ -36,6 +36,7 @@ import UUIDUtil from "qing-util/src/util/UUIDUtil";
 /*
 显示出来已经选了的城市，给她画上钩
 * */
+@toNative
 @Component({})
 export default class QSidebar extends Vue {
   multipleSlots = true

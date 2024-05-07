@@ -48,7 +48,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Emit, Vue} from 'vue-facing-decorator'
 import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue";
 import QInput from "qing-ui-uni/src/components/QInput/QInput.vue";
 import QSidebar from "qing-ui-uni/src/components/QSidebar/QSidebar.vue";
@@ -58,6 +58,7 @@ import {socialuniTagModule} from "socialuni-community-sdk/src/store/SocialTagMod
 import TagTypeVO from "socialuni-api-base/src/model/community/tag/TagTypeVO";
 
 
+@toNative
 @Component({
   components: {
     QIcon,

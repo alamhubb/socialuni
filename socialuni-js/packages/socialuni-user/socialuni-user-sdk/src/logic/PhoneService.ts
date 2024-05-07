@@ -3,12 +3,13 @@ import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
 import UniLoginUtil from "../util/UniLoginUtil";
 import {socialuniUserModule} from "../store/SocialuniUserModule";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import {socialuniAppUserModule} from "../store/SocialuniAppUserModule";
 
 export default class PhoneService {
-    static async bindPhoneNum(phoneNum: string, authCode: string) {
+    static async bindPhoneNum(phoneNum: string, password: string, authCode: string) {
         //手机号绑定
-        const user = await PhoneAPI.bindPhoneNumAPI(phoneNum, authCode)
-        socialuniUserModule.setUser(user)
+        phoneNum = await PhoneAPI.bindPhoneNumAPI(phoneNum, password, authCode)
+        socialuniAppUserModule.setMineUserPhoneNum(phoneNum)
     }
 
     static async bindWxPhoneNum(wxGetPhoneInfoResult: any) {

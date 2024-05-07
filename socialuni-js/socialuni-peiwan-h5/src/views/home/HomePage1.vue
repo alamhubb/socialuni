@@ -94,7 +94,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Vue} from 'vue-facing-decorator'
 import SScrollbar from "qing-ui-h5/src/components/QComponents/QScrollbar.vue";
 import QDialog from "qing-ui-h5/src/components/QComponents/QDialog.vue";
 import {Plus} from '@element-plus/icons-vue'
@@ -105,6 +105,7 @@ import AlertUtil from "qingjs-h5/src/util/AlertUtil";
 import apiData from "./res.json"
 import {ElMessageBox} from "element-plus";
 
+@toNative
 @Component({
   components: {SDialog, Plus, SScrollbar}
 })

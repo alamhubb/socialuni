@@ -85,6 +85,7 @@ import SocialGenderTag from "../../../components/SocialGenderTag/SocialGenderTag
 import FollowAPI from "socialuni-community-api/src/api/FollowAPI";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 
+@toNative
 @Component({
     components: {SocialGenderTag, QTabs}
 })

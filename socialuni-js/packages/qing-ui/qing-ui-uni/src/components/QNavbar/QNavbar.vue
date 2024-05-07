@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Prop, Vue} from 'vue-facing-decorator'
 import GetMenuButtonBoundingClientRectRes = UniApp.GetMenuButtonBoundingClientRectRes;
 import QIcon from "../QIcon/QIcon.vue";
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
@@ -38,6 +38,7 @@ const menuButtonInfo: GetMenuButtonBoundingClientRectRes = uni.getMenuButtonBoun
 /*
 显示出来已经选了的城市，给她画上钩
 * */
+@toNative
 @Component({
   components: {QIcon}
 })

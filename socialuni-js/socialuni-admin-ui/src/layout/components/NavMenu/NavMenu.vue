@@ -20,6 +20,7 @@ import DevAccountRO from '@/model/base/DevAccountRO'
 
 const userStore = namespace('user')
 
+@toNative
 @Component({
   components: { NavMenuItem }
 })

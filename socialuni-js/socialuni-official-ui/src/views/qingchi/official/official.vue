@@ -28,7 +28,8 @@
   //@ts-ignore
   import official from './official.md'
 
-  @Component({
+  @toNative
+@Component({
     components: {
       QMarkdown
     }

@@ -83,7 +83,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue, Watch} from 'vue-facing-decorator'
+import {Component, toNative, Prop, Vue, Watch} from 'vue-facing-decorator'
 import TalkVO from "socialuni-api-base/src/model/talk/TalkVO"
 import ObjectUtil from "qing-util/src/util/ObjectUtil"
 import TalkTabType from "socialuni-constant/constant/TalkTabType"
@@ -104,6 +104,7 @@ import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
 import UserUtil from "socialuni-user-sdk/src/util/UserUtil";
 import SocialGenderTag from "socialuni-user-view-uni/src/components/SocialGenderTag/SocialGenderTag.vue";
 
+@toNative
 @Component({
   components: {
     SocialGenderTag,

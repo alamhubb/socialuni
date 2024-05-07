@@ -44,7 +44,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Vue} from 'vue-facing-decorator'
 import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
 import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
@@ -56,6 +56,7 @@ import TalkItem from "socialuni-community-view-uni/src/components/talkItem/TalkI
 import TalkOperate from "socialuni-community-view-uni/src/views/talk/talkOperate.vue";
 import QNavbar from "qing-ui-uni/src/components/QNavbar/QNavbar.vue";
 
+@toNative
 @Component({
   components: {
     QNavbar,

@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Vue} from 'vue-facing-decorator'
 import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue";
 import QPopup from "qing-ui-uni/src/components/QPopup/QPopup.vue";
 import QSearch from "qing-ui-uni/src/components/QSearch/QSearch.vue";
@@ -41,6 +41,7 @@ import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserMod
 import SocialuniUserExpandAPI from "socialuni-user-api/src/api/SocialuniUserExpandAPI";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
 
+@toNative
 @Component({
   components: {QSelect, QIcon, QPopup, QSearch}
 })

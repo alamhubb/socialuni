@@ -4,11 +4,12 @@
   </view>
 </template>
 <script lang="ts">
-import {Component, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Vue} from 'vue-facing-decorator'
 
 /*
 显示出来已经选了的城市，给她画上钩
 * */
+@toNative
 @Component({})
 export default class QSearch extends Vue {
 

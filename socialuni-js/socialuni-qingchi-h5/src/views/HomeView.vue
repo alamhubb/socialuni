@@ -11,6 +11,7 @@
 import { Component, Vue } from 'vue-facing-decorator';
 import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
 
+@toNative
 @Component({})
 export default class IndexView extends Vue {
 

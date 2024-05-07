@@ -72,6 +72,7 @@ import CommonUtil from "qing-util/src/util/CommonUtil";
 import SocialUserFollowDetailRO from "socialuni-api-base/src/model/social/SocialUserFollowDetailRO";
 import QPullRefresh from "qing-ui-uni/src/components/QPullRefresh/QPullRefresh.vue";
 
+@toNative
 @Component({
   components: {QPullRefresh, SocialuniFollowTag, SocialGenderTag, QTabs}
 })

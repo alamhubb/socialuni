@@ -185,7 +185,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue, toNative} from "vue-facing-decorator";
+import {Component, toNative, Vue} from "vue-facing-decorator";
 import SocialuniMsgViewService, {
   socialuniMsgViewService
 } from "socialuni-im-sdk/src/logic/SocialuniMsgViewService";
@@ -197,6 +197,7 @@ import {socialuniMsgModule} from "socialuni-im-sdk/src/store/SocialMessageModule
 import {getCurrentInstance} from "vue";
 import {onLoad} from "@dcloudio/uni-app";
 
+@toNative
 @Component(
     {
       components: {QIcon, QNavbar, SocialuniReportDialog}

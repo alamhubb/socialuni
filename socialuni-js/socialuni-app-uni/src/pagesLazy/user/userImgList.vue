@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Vue} from 'vue-facing-decorator'
 import SocialuniReportDialog from "socialuni-user-view-uni/src/components/SocialuniReportDialog.vue";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
@@ -33,6 +33,7 @@ import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import {getCurrentInstance} from "vue";
 import {onLoad} from "@dcloudio/uni-app";
 
+@toNative
 @Component({
   components: {SocialuniReportDialog}
 })

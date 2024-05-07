@@ -60,6 +60,7 @@ import {getCurrentInstance} from "vue";
 import {onLoad} from "@dcloudio/uni-app";
 import {socialuniAppUserModule} from "socialuni-user-sdk/src/store/SocialuniAppUserModule";
 
+@toNative
 @Component({
   components: {QTabs, QIcon, QButton}
 })

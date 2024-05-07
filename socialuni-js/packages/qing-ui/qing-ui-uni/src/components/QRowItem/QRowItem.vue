@@ -11,6 +11,7 @@ import {Emit, Component, Vue} from 'vue-facing-decorator'
 /*
 显示出来已经选了的城市，给她画上钩
 * */
+@toNative
 @Component({})
 export default class QRowItem extends Vue {
   @Emit()

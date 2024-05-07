@@ -47,6 +47,7 @@ import MenuItem from '@/layout/components/HorizontalSidebar/Item.vue'
 // @ts-ignore
 import path from 'path-browserify'
 
+@toNative
 @Component({
   components: { MenuItem, AppLink }
 })

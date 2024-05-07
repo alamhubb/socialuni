@@ -131,6 +131,7 @@
 import { Component, Prop, Vue } from 'vue-facing-decorator'
 import keywordsVO from '@/model/violateWord/KeywordsVO'
 
+@toNative
 @Component
 export default class KeywordsDetailTable extends Vue {
   @Prop()

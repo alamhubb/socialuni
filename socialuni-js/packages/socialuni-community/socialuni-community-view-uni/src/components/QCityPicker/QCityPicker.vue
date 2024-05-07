@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Model, Vue, Prop} from 'vue-facing-decorator'
+import {Component, toNative, Emit, Model, Vue, Prop} from 'vue-facing-decorator'
 import QPopup from "qing-ui-uni/src/components/QPopup/QPopup.vue";
 import QPicker from "qing-ui-uni/src/components/QPicker/QPicker.vue";
 import DistrictVO from "socialuni-api-base/src/model/DistrictVO";
@@ -47,6 +47,7 @@ import LocationUtil from "socialuni-community-sdk/src/util/LocationUtil";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue";
 
+@toNative
 @Component({
   components: {
     QPicker,

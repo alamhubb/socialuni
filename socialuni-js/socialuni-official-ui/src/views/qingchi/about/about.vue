@@ -72,6 +72,7 @@ import QMarkdown from 'qing-markdown/src/components/q-markdown/q-markdown'
 //@ts-ignore
 import gzhInfo from './about.md'
 
+@toNative
 @Component({
   components: {
     QMarkdown

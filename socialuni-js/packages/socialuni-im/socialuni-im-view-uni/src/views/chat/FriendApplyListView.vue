@@ -82,7 +82,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Vue} from 'vue-facing-decorator'
 import {onLoad, onPullDownRefresh} from "@dcloudio/uni-app";
 import DateUtil from "qing-util/src/util/DateUtil";
 import FriendApplyType from "socialuni-constant/constant/FriendApplyType";
@@ -96,6 +96,7 @@ import SocialuniAddFriendType from "socialuni-im-api/src/constant/SocialuniAddFr
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
 
+@toNative
 @Component({
     components: {
         QTabs

@@ -65,6 +65,7 @@ import NavMenu from '@/layout/NavMenu.vue'
 import NavBreadcrumb from '@/layout/NavBreadcrumb.vue'
 import DevAccountRO from '@/model/base/DevAccountRO'
 
+@toNative
 @Component({
   components: { NavBreadcrumb, NavMenu }
 })

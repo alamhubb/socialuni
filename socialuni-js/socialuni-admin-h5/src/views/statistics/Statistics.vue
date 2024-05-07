@@ -23,6 +23,7 @@
 import { Component, Vue } from 'vue-facing-decorator'
 import TalkAPI from '@/api/TalkAPI'
 
+@toNative
 @Component
 export default class StatisticsVue extends Vue {
     talks: any[] = []

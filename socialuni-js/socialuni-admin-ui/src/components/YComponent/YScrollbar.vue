@@ -7,6 +7,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-facing-decorator'
 
+@toNative
 @Component
 export default class YScrollbar extends Vue {
 

@@ -126,7 +126,7 @@
   </view>
 </template>
 <script lang="ts">
-import {Component, Vue, Watch} from 'vue-facing-decorator'
+import {Component, toNative, Vue, Watch} from 'vue-facing-decorator'
 import AppMsg from 'socialuni-constant/constant/AppMsg'
 import {onUnload} from "@dcloudio/uni-app";
 import QInput from "qing-ui-uni/src/components/QInput/QInput.vue";
@@ -161,6 +161,7 @@ import CosService from "socialuni-app-sdk/src/util/CosService";
 import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
 import SocialCircleRO from "socialuni-api-base/src/model/community/circle/SocialCircleRO";
 
+@toNative
 @Component({
   components: {
     SocialCirclePicker,

@@ -17,7 +17,8 @@
   //@ts-ignore
   import group from './group.md'
 
-  @Component({
+  @toNative
+@Component({
     components: {
       QMarkdown
     }

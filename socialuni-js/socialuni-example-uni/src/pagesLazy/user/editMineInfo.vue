@@ -6,6 +6,7 @@
 import {Emit, Component, Vue, Watch} from 'vue-facing-decorator'
 import SocialuniUserEditView from "socialuni-user-view-uni/src/views/user/SocialuniUserEditView.vue";
 
+@toNative
 @Component({
   components: {SocialuniUserEditView}
 })

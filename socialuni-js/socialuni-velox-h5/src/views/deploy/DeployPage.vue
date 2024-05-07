@@ -67,7 +67,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue, Watch} from 'vue-facing-decorator';
+import {Component, toNative, Vue, Watch} from 'vue-facing-decorator';
 import 'golden-layout/dist/css/goldenlayout-base.css';
 import 'golden-layout/dist/css/themes/goldenlayout-light-theme.css';
 import {FolderOpened, UploadFilled} from "@element-plus/icons-vue";
@@ -81,6 +81,7 @@ import AlertUtil from "qingjs-h5/src/util/AlertUtil.ts";
 import ToastUtil from "qingjs-h5/src/util/ToastUtil.ts";
 import WindowUtil from "@/util/WindowUtil.ts";
 
+@toNative
 @Component({
   components: {
     UploadFilled, FolderOpened, QRow, QUpload

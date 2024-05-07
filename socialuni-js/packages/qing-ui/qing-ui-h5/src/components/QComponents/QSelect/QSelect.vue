@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Model, Prop, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Emit, Model, Prop, Vue} from 'vue-facing-decorator'
 
 /**
  * @author 秦开远
@@ -31,6 +31,7 @@ import {Component, Emit, Model, Prop, Vue} from 'vue-facing-decorator'
  *
  * 封装select
  */
+@toNative
 @Component
 export default class QSelect extends Vue {
     $refs: {

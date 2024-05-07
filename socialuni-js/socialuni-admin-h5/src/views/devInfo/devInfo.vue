@@ -96,6 +96,7 @@ import AlertUtil from '@/utils/AlertUtil'
 import AdminUserAPI from '@/api/AdminUserAPI'
 import { ElForm } from 'element-ui/types/form'
 
+@toNative
 @Component
 export default class DevInfoPage extends Vue {
   $refs: {

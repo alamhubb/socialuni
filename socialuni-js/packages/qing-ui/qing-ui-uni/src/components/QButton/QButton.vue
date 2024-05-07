@@ -30,9 +30,10 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Prop, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Emit, Prop, Vue} from 'vue-facing-decorator'
 import CommonUtil from "qing-util/src/util/CommonUtil";
 
+@toNative
 @Component({})
 export default class QButton extends Vue {
 

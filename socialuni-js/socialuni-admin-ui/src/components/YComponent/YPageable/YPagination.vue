@@ -13,6 +13,7 @@
 import { Component, Emit, Model, Vue } from 'vue-facing-decorator'
 import Pageable from '@/components/YComponent/YPageable/Pageable'
 
+@toNative
 @Component
 export default class YPagination extends Vue {
   @Model('change') pageable: Pageable

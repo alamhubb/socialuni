@@ -12,12 +12,13 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator'
+import {Component, toNative, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator'
 
 /**
  * 获取每一块的高度
  */
 
+@toNative
 @Component({})
 export default class YSlides extends Vue {
   $refs: {

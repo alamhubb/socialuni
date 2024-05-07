@@ -34,9 +34,9 @@ public class SocialuniUserFollowDetailROFactory {
         userRO.setFansNum(SocialUserFansDetailDo.getFansNum());
         if (mineUser != null && userRO.getIsMine()) {
 //        非自己也显示关注数量
-        userRO.setFollowNum(SocialUserFansDetailDo.getFollowNum());
+            userRO.setFollowNum(SocialUserFansDetailDo.getFollowNum());
         }
-        return null;
+        return userRO;
     }
 
     public static List<SocialuniUserFollowInfoRO> getUsers(List<SocialuniUserDo> users, SocialuniUserDo mineUser) {

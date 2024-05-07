@@ -140,7 +140,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue, Watch} from 'vue-facing-decorator'
+import {Component, toNative, Vue, Watch} from 'vue-facing-decorator'
 import TalkSwipers from './talkSwipers.vue'
 
 import TalkOperate from './talkOperate.vue'
@@ -170,6 +170,7 @@ import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 
 // todo 后台可控制是否显示轮播图
+@toNative
 @Component({
     components: {
         SocialTalkFilterDialog,

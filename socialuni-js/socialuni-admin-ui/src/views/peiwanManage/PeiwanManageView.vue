@@ -40,12 +40,13 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Vue} from 'vue-facing-decorator'
 import DataTable from '@/components/dataTable/DataTable.vue'
 import LabelItem from "@/components/LabelItem.vue";
 import {DialogInterface} from "@/interface/DialogInterface";
 import PeiwanRO from "@/model/peiwan/PeiwanRO";
 
+@toNative
 @Component({
   components: {LabelItem, DataTable}
 })

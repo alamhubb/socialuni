@@ -23,7 +23,8 @@ import UserIdCard from '@/model/UserIdCard'
 import Img from '@/model/Img'
 import UserImg from '@/model/UserImg'
 
-  @Component
+  @toNative
+@Component
 export default class Review extends Vue {
     name = ''
     employeeID = ''

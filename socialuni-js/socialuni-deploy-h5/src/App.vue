@@ -11,6 +11,7 @@
 import { Component, Vue } from 'vue-facing-decorator';
 import NavBar from "@/layout/NavBar.vue";
 
+@toNative
 @Component({
     components: {NavBar}
 })

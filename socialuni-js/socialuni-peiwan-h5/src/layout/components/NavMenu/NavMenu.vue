@@ -18,6 +18,7 @@ import NavMenuItem from '@/layout/components/NavMenu/NavMenuItem.vue'
 import { menuRoutes } from '@/router/router'
 import DevAccountRO from '@/model/base/DevAccountRO'
 
+@toNative
 @Component({
   components: { NavMenuItem }
 })

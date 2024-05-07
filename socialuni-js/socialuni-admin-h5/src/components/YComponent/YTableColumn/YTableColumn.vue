@@ -75,7 +75,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Prop, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Emit, Prop, Vue} from 'vue-facing-decorator'
 import DataTableColumnTypeEnum from './DataTableColumnTypeEnum'
 
 /**
@@ -84,6 +84,7 @@ import DataTableColumnTypeEnum from './DataTableColumnTypeEnum'
  *
  * 在数据源业务基础上，封装基础table
  */
+@toNative
 @Component({
     components: {}
 })

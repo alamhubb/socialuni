@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Vue} from 'vue-facing-decorator'
 import QInput from "qing-ui-uni/src/components/QInput/QInput.vue";
 import QPopup from "qing-ui-uni/src/components/QPopup/QPopup.vue";
 import SSwitch from "qing-ui-uni/src/components/SSwitch.vue";
@@ -33,6 +33,7 @@ import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserMod
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
 
+@toNative
 @Component({
   components: {
     SSwitch,

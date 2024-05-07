@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Model, Prop, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Emit, Model, Prop, Vue} from 'vue-facing-decorator'
 import YSelect from '@/components/YComponent/YSelect/YSelect.vue'
 
 /**
@@ -26,6 +26,7 @@ import YSelect from '@/components/YComponent/YSelect/YSelect.vue'
  *
  * 在数据源业务基础上，封装基础table
  */
+@toNative
 @Component({
   components: {YSelect}
 })

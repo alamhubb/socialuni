@@ -36,6 +36,7 @@ import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import ReportAPI from "socialuni-app-api/src/api/ReportAPI";
 import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
 
+@toNative
 @Component({
     components: {QPopup}
 })

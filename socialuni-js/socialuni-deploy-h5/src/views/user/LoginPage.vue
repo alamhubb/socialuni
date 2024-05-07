@@ -5,10 +5,11 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-facing-decorator';
+import {Component, toNative, Vue} from 'vue-facing-decorator';
 import QingAppUtil from "qingjs/src/util/QingAppUtil.ts";
 import WindowEventListener from "qing-util/src/util/WindowEventListener.ts";
 
+@toNative
 @Component({
   components: {}
 })

@@ -31,6 +31,7 @@
 import { Component, Vue } from 'vue-facing-decorator'
 import Talk from '@/model/talk/Talk'
 
+@toNative
 @Component
 export default class TestFlex extends Vue {
   content = '5'

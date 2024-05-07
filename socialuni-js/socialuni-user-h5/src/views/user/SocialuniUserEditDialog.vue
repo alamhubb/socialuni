@@ -61,6 +61,7 @@ import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
 import type DomFile from "qingjs/src/model/DomFile";
 import NativeUtil from "qingjs-h5/src/util/NativeUtil";
 
+@toNative
 @Component({
     components: {QDialog, QButton}
 })

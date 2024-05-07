@@ -15,6 +15,7 @@
 import { Component, Vue } from 'vue-facing-decorator'
 import NavMenu from '@/layout/NavMenu.vue'
 
+@toNative
 @Component({
     components: {NavMenu}
 })

@@ -22,6 +22,7 @@ import { Component, Emit, Model, Prop, Vue } from 'vue-facing-decorator'
  *
  * 在数据源业务基础上，封装基础table
  */
+@toNative
 @Component
 export default class YFormCheckbox extends Vue {
   @Model('change') readonly model!: any

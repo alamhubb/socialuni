@@ -13,6 +13,7 @@ import SocialuniUserEditView from "./SocialuniUserEditView.vue";
 import socialuniUserEditViewDialogService from "socialuni-user-sdk/src/logic/SocialuniUserEditViewDialogService";
 import {getCurrentInstance} from "vue";
 
+@toNative
 @Component({
   components: {SocialuniUserEditView, QDialog, SButton}
 })

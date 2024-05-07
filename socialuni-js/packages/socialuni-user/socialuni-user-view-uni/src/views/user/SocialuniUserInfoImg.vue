@@ -46,7 +46,7 @@
 
 <script lang="ts">
 import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue";
-import {Component, Prop, Vue} from "vue-facing-decorator";
+import {Component, toNative, Prop, Vue} from "vue-facing-decorator";
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
 import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
 import ImgFileVO from "socialuni-api-base/src/model/ImgFileVO";
@@ -61,6 +61,7 @@ import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import SocialuniImgUtil from "socialuni-user-sdk/src/util/SocialuniImgUtil";
 
+@toNative
 @Component({
     components: {QIcon, SocialuniReportDialog}
 })

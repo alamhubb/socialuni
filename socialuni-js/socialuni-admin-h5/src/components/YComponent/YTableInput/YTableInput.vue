@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Prop, Vue} from 'vue-facing-decorator'
 
 /**
  * @author 秦开远
@@ -37,6 +37,7 @@ import {Component, Prop, Vue} from 'vue-facing-decorator'
  *
  * 在数据源业务基础上，封装基础table
  */
+@toNative
 @Component({})
 export default class YTableInput extends Vue {
     @Prop() readonly prop: string

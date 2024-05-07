@@ -13,10 +13,11 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Vue} from 'vue-facing-decorator'
 import NavMenuItem from '@/layout/components/NavMenu/NavMenuItem.vue'
 import {menuRoutes} from '@/router/router'
 
+@toNative
 @Component({
   components: {NavMenuItem}
 })

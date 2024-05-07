@@ -10,6 +10,7 @@
 <script lang="ts">
 import {Emit, Model, Component, Vue} from 'vue-facing-decorator'
 
+@toNative
 @Component({})
 export default class SSwitch extends Vue {
   @Model('modelValue') modelValue

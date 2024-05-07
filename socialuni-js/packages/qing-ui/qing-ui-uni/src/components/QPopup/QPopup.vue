@@ -29,13 +29,14 @@
   </div>
 </template>
 <script lang="ts">
-import {Component, Emit, Model, Prop, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Emit, Model, Prop, Vue} from 'vue-facing-decorator'
 import QButton from "../QButton/QButton.vue";
 import QModel from "../QModel/QModel.vue";
 
 /*
 显示出来已经选了的城市，给她画上钩
 * */
+@toNative
 @Component({
   components: {
     QButton,

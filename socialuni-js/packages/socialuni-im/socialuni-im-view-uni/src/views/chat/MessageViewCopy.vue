@@ -296,7 +296,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "vue-facing-decorator";
+import {Component, toNative, Vue} from "vue-facing-decorator";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import Constants from "socialuni-constant/constant/Constant";
@@ -330,6 +330,7 @@ import SocialuniMsgViewLogic from "socialuni-im-sdk/src/viewLogic/SocialuniMsgVi
 import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue";
 import QNavbar from "qing-ui-uni/src/components/QNavbar/QNavbar.vue";
 
+@toNative
 @Component(
     {
         components: {QIcon, QNavbar}

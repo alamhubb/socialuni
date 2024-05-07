@@ -107,6 +107,7 @@ import UserIdentityAuditAPI from '@/api/UserIdentityAuditAPI'
 import UserIdentityAuditRO from '@/model/RO/user/identity/UserIdentityAuditRO'
 import DataTable from '@/components/dataTable/DataTable.vue'
 
+@toNative
 @Component({
   components: { DataTable }
 })

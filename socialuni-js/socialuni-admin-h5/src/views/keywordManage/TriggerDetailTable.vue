@@ -71,6 +71,7 @@
 import { Vue, Component, Prop } from 'vue-facing-decorator'
 import keywordsTriggerDetailVO from '@/model/violateWord/KeywordsTriggerDetailVO'
 
+@toNative
 @Component
 export default class KeywordsDetailTable extends Vue {
   @Prop()

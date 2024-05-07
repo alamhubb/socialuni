@@ -13,12 +13,13 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Vue} from 'vue-facing-decorator'
 import PageUtil from 'qing-util/src/util/PageUtil'
 import ImPageUtil from 'socialuni-im-sdk/src/util/ImPageUtil'
 import RouterUtil from 'qing-util/src/util/RouterUtil'
 import ImPagePath from 'socialuni-im-sdk/src/constant/ImPagePath'
 
+@toNative
 @Component({})
 export default class LeftWindowView extends Vue {
 

@@ -103,6 +103,7 @@ import { Message } from 'element-ui'
 import UploadPercentageVO from '@/components/YEchoComponent/YUpload/UploadPercentageVO'
 import UploadFileVO from '@/components/YEchoComponent/YUpload/UploadFileVO'
 
+@toNative
 @Component
 export default class YUpload extends Vue {
   $refs: {

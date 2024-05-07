@@ -22,9 +22,10 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Prop, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Emit, Prop, Vue} from 'vue-facing-decorator'
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 
+@toNative
 @Component({})
 export default class QPullRefresh extends Vue {
   @Prop({default: 50}) refreshNum: number

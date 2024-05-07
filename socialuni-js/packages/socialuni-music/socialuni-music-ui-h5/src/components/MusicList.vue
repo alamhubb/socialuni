@@ -62,9 +62,10 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator';
+import {Component, toNative, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator';
 import MusicPlayerSongInfoRO from "socialuni-music-sdk/src/model/MusicPlayerSongInfoRO";
 
+@toNative
 @Component({
   components: {}
 })

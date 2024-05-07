@@ -53,9 +53,10 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-facing-decorator';
+import {Component, toNative, Vue} from 'vue-facing-decorator';
 import SNavBar from "socialuni-user-view-h5/src/components/SUserNavBar.vue";
 
+@toNative
 @Component({
   components: {SNavBar}
 })

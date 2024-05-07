@@ -23,6 +23,7 @@ import QIcon from "../QIcon/QIcon.vue";
 /*
 显示出来已经选了的城市，给她画上钩
 * */
+@toNative
 @Component({
   components: {QIcon}
 })

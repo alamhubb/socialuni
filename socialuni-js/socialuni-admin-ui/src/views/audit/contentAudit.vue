@@ -273,6 +273,7 @@ import ViolateType from '@/constant/ViolateType'
 import request from '@/plugins/request'
 import AdminUserAPI from '@/api/AdminUserAPI'
 
+@toNative
 @Component
 export default class ContentAuditView extends Vue {
   reports: ReportVO[] = []

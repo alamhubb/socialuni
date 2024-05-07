@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue, Watch} from 'vue-facing-decorator'
+import {Component, toNative, Vue, Watch} from 'vue-facing-decorator'
 import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil";
 import {socialTalkModule} from "socialuni-community-sdk/src/store/SocialTalkModule";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
@@ -46,6 +46,7 @@ import PlatformUtils from "socialuni-user-sdk/src/util/PlatformUtils";
 import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
 import UserCheckUtil from "socialuni-user-sdk/src/util/UserCheckUtil";
 
+@toNative
 @Component({})
 export default class MsgInput extends Vue {
   content = ''

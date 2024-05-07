@@ -132,6 +132,7 @@ import UserIdCard from '@/model/UserIdCard'
 import CommonStatus from '@/constant/CommonStatus'
 import ObjectUtils from '@/utils/ObjectUtils'
 
+@toNative
 @Component
 export default class Review extends Vue {
     data: number [] = [1, 2, 3, 4, 5]

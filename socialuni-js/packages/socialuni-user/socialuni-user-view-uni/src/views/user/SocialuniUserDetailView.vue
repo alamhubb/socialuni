@@ -102,6 +102,7 @@ import {Inject, Component, Vue} from 'vue-facing-decorator'
 import {socialuniUserDetailViewService} from "socialuni-user-sdk/src/logic/SocialuniUserDetailViewService";
 import {onLoad} from "@dcloudio/uni-app";
 
+@toNative
 @Component({
   components: {
     SocialuniUserInfoImg,

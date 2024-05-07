@@ -47,7 +47,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue, Watch} from 'vue-facing-decorator';
+import {Component, toNative, Vue, Watch} from 'vue-facing-decorator';
 import VueGoldenLayout from 'vue3-golden-layout/src/components/VueGoldenLayout.vue';
 import VueGoldenLayoutRow from 'vue3-golden-layout/src/components/VueGoldenLayoutRow.vue';
 import VueGoldenLayoutColumn from 'vue3-golden-layout/src/components/VueGoldenLayoutColumn.vue';
@@ -61,6 +61,7 @@ import VueDragResize from "vue-drag-resize3/src/components/VueDragResize.vue";
 import VueInteract from "@/components/vue-interact/VueInteract.vue";
 import MusicPlayer from "socialuni-music-ui-h5/src/components/MusicPlayer.vue";
 
+@toNative
 @Component({
   components: {
     VueDragResize,

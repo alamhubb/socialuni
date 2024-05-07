@@ -76,7 +76,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue, Watch} from 'vue-facing-decorator'
+import {Component, toNative, Prop, Vue, Watch} from 'vue-facing-decorator'
 import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue";
 import QButton from "qing-ui-uni/src/components/QButton/QButton.vue";
 import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
@@ -96,6 +96,7 @@ import {socialTalkModule} from "socialuni-community-sdk/src/store/SocialTalkModu
 import CommunityPageUtil from "socialuni-community-sdk/src/util/CommunityPageUtil";
 import CommunityPagePath from "socialuni-community-sdk/src/constant/CommunityPagePath";
 
+@toNative
 @Component({
   components: {
     QIcon,

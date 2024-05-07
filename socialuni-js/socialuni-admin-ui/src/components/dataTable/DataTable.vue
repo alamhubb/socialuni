@@ -74,6 +74,7 @@ import YSearch from '@/components/YComponent/YSearch/YSearch.vue'
  *
  * 在数据源业务基础上，封装基础table
  */
+@toNative
 @Component({
   components: { YSearch, YPagination, YTable }
 })

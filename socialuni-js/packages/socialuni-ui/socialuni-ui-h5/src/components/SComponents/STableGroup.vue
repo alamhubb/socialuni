@@ -78,7 +78,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator'
+import {Component, toNative, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator'
 import STable from "./STable.vue";
 import SPagination from "./SPageable/SPagination.vue";
 
@@ -88,6 +88,7 @@ import SPagination from "./SPageable/SPagination.vue";
  *
  * 在数据源业务基础上，封装基础table
  */
+@toNative
 @Component({
     components: {STable, SPagination}
 })

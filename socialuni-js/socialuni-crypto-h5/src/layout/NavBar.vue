@@ -64,7 +64,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Vue} from 'vue-facing-decorator'
 import SDialog from "qing-ui-h5/src/components/QComponents/QDialog.vue";
 import SocialuniUserEditDialog from "@/views/user/SocialuniUserEditDialog.vue";
 import SocialuniUserEventConst from "socialuni-user-sdk/src/constant/SocialuniUserEventConst";
@@ -82,6 +82,7 @@ import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
 import UserService from "socialuni-user-sdk/src/logic/UserService";
 import QDialog from "qing-ui-h5/src/components/QComponents/QDialog.vue";
 
+@toNative
 @Component({
   components: {SocialuniUserEditDialog, Tools, SocialuniLoginView, QDialog, ArrowDown}
 })

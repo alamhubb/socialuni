@@ -87,7 +87,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue, Watch} from 'vue-facing-decorator';
+import {Component, toNative, Vue, Watch} from 'vue-facing-decorator';
 import VueGoldenLayout from 'vue3-golden-layout/src/components/VueGoldenLayout.vue';
 import VueGoldenLayoutRow from 'vue3-golden-layout/src/components/VueGoldenLayoutRow.vue';
 import VueGoldenLayoutColumn from 'vue3-golden-layout/src/components/VueGoldenLayoutColumn.vue';
@@ -112,6 +112,7 @@ import PinyinUtil from "@/util/PinyinUtil.ts";
 import ToastUtil from "qingjs-h5/src/util/ToastUtil.ts";
 import WindowUtil from "@/util/WindowUtil.ts";
 
+@toNative
 @Component({
   components: {
     VueDragResize,

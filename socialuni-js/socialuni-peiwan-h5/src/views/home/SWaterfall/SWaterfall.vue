@@ -3,9 +3,10 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Prop, Vue} from 'vue-facing-decorator'
 
 
+@toNative
 @Component({})
 export default class SWaterfall extends Vue {
     @Prop({default: 2}) columnNum: number

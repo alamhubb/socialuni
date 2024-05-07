@@ -32,6 +32,7 @@ import { Component, Emit, Model, Prop, Vue } from 'vue-facing-decorator'
  *
  * 封装select
  */
+@toNative
 @Component
 export default class YSelect extends Vue {
   $refs: {

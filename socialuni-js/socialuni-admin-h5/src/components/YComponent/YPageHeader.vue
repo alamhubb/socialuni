@@ -23,8 +23,9 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Prop, Vue} from 'vue-facing-decorator'
 
+@toNative
 @Component
 export default class YPageHeader extends Vue {
   @Prop() title: string

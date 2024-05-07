@@ -154,6 +154,7 @@ import keywordsVO from '@/model/violateWord/KeywordsVO'
 import { Message, MessageBox } from 'element-ui'
 import KeywordsManageAPI from '@/api/KeywordsManageAPI'
 
+@toNative
 @Component
 export default class KeywordsDetailTable extends Vue {
   @Prop()

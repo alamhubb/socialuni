@@ -5,10 +5,11 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-facing-decorator';
+import {Component, toNative, Vue} from 'vue-facing-decorator';
 import 'golden-layout/dist/css/goldenlayout-base.css';
 import 'golden-layout/dist/css/themes/goldenlayout-light-theme.css';
 
+@toNative
 @Component({
   components: {}
 })

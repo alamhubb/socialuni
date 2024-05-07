@@ -52,6 +52,7 @@ import UUIDUtil from "qing-util/src/util/UUIDUtil";
 最后取消选择，还显示当前选择的
 
 * */
+@toNative
 @Component({
   components: {
     QRowItem

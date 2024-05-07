@@ -19,6 +19,7 @@
 import { Component, Prop, Vue } from 'vue-facing-decorator'
 import NavMenuItem from '@/layout/components/NavMenu/NavMenuItem.vue'
 
+@toNative
 @Component({
   components: { NavMenuItem }
 })

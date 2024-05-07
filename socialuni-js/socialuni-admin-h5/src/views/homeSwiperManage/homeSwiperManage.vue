@@ -67,6 +67,7 @@ import YFormInput from '@/components/YComponent/YFormInput/YFormInput.vue'
 import YFormSelect from '@/components/YComponent/YFormSelect/YFormSelect.vue'
 import ToastUtil from '@/utils/ToastUtil'
 
+@toNative
 @Component({
   components: { YFormSelect, YFormInput, YTable, YTableInput }
 })

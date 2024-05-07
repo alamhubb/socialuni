@@ -78,7 +78,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Model, Prop, toNative, Vue, Watch} from "vue-facing-decorator";
+import {Component, toNative, Emit, Model, Prop, Vue, Watch} from "vue-facing-decorator";
 import DomFile from "./DomFile";
 import UploadFileVO from "./UploadFileVO";
 import YUploadFileType from "./YUploadFileType";
@@ -92,6 +92,7 @@ import {
 } from "@element-plus/icons-vue";
 
 
+@toNative
 @Component({
   components: {
     UploadFilled, FolderOpened

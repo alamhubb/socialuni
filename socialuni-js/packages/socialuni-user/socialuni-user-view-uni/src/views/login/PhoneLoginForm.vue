@@ -84,17 +84,19 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Model, Prop, toNative, Vue, Watch} from 'vue-facing-decorator'
+import {Component, toNative, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator'
 import PhoneNumFormData from "./PhoneNumFormData";
 import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue";
 import SocialuniLoginFormService from "socialuni-user-sdk/src/logic/SocialuniLoginFormService";
 import CommonUtil from "qing-util/src/util/CommonUtil";
 import {nextTick} from "vue";
+import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
 
+@toNative
 @Component({
   components: {QIcon}
 })
-class PhoneLoginForm extends Vue {
+export default class PhoneLoginForm extends Vue {
   @Prop() show: boolean
   // @Model('modelValue') readonly value!: PhoneNumFormData
 
@@ -107,16 +109,17 @@ class PhoneLoginForm extends Vue {
 
 
   async phoneNumberOnInput() {
-    console.log('chufale')
     await this.viewService.phoneNumberOnInput()
-    nextTick(() => {
-      // this.$refs.loginForm.clearValidate()
-      setTimeout(() => {
-        console.log(this)
-        console.log(this.$refs)
-        this.passwordInputFocus()
-      }, 50)
-    })
+    console.log(1111)
+    if (!this.viewService.loginData.phoneNumHasError) {
+      console.log(12222)
+      nextTick(() => {
+        // this.$refs.loginForm.clearValidate()
+        setTimeout(() => {
+          this.passwordInputFocus()
+        }, 50)
+      })
+    }
   }
 
   @Watch('show')
@@ -196,5 +199,4 @@ class PhoneLoginForm extends Vue {
     })
   }
 }
-export default toNative(PhoneLoginForm)
 </script>

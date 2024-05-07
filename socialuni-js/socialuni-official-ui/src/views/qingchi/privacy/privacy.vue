@@ -19,7 +19,8 @@
   //@ts-ignore
   import privacy from './privacy.md'
 
-  @Component({
+  @toNative
+@Component({
     components: {
       QMarkdown
     }

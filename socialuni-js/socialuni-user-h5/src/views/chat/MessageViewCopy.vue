@@ -21,11 +21,12 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue, Watch} from 'vue-facing-decorator';
-import {ComponentContainer, ComponentItemConfig, GoldenLayout, ItemType, LayoutConfig} from "golden-layout";
+import {Component, toNative, Vue, Watch} from 'vue-facing-decorator';
+import {Component, toNativeContainer, ComponentItemConfig, GoldenLayout, ItemType, LayoutConfig} from "golden-layout";
 import 'golden-layout/dist/css/goldenlayout-base.css';
 import 'golden-layout/dist/css/themes/goldenlayout-light-theme.css';
 
+@toNative
 @Component({
   components: {}
 })

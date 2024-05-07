@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Vue} from 'vue-facing-decorator'
 import QDialog from "qing-ui-h5/src/components/QComponents/QDialog.vue";
 import {Plus} from '@element-plus/icons-vue'
 import SocialuniPeiwanAPI from "socialuni-peiwan-api/src/api/SocialuniPeiwanAPI";
@@ -51,6 +51,7 @@ const client = AgoraRTC.createClient({
     codec: "vp8"
 });
 
+@toNative
 @Component({
     components: {SDialog, Plus}
 })

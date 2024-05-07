@@ -80,7 +80,7 @@
             </template>
             <!--              有用户-->
             <template v-else>
-              <q-button v-if="showPhoneView" :disabled="loginButtonDisabled" @click="bindPhoneNum"
+              <q-button v-if="showPhoneView" :disabled="loginButtonDisabled" @click="viewService.handleLogin()"
                         add-class="bg-gradual-phone"
               >
                 <q-icon prefix="mdi" color="white" icon="cellphone-android" size="21"
@@ -144,7 +144,11 @@ import SocialuniLoginViewService from "socialuni-user-sdk/src/logic/SocialuniLog
 import {getCurrentInstance} from "vue";
 import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
 import {socialuniAppUserModule} from "socialuni-user-sdk/src/store/SocialuniAppUserModule";
+import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
+import PasswordUtil from "socialuni-user-sdk/src/util/PasswordUtil";
+import SocialuniLoginService from "socialuni-user-sdk/src/logic/SocialuniLoginService";
 
+@toNative
 @Component({
   components: {
     QIcon,
@@ -154,7 +158,7 @@ import {socialuniAppUserModule} from "socialuni-user-sdk/src/store/SocialuniAppU
     LoginFooterAppInfo
   }
 })
-class LoginView extends Vue {
+export default class LoginView extends Vue {
   $refs: {
     loginForm: PhoneLoginForm
   }
@@ -332,6 +336,4 @@ class LoginView extends Vue {
       return Alert.hint('请仔细阅读用户协议、隐私政策等内容后勾选同意')
     }*/
 }
-
-export default toNative(LoginView)
 </script>

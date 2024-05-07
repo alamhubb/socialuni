@@ -4,7 +4,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue, Watch} from 'vue-facing-decorator';
+import {Component, toNative, Vue, Watch} from 'vue-facing-decorator';
 import SocialuniChatViewH5 from "socialuni-im-view-h5/src/views/SocialuniChatViewH5.vue"
 import SocialuniMsgViewH5 from "socialuni-im-view-h5/src/views/SocialuniMsgViewH5.vue"
 import MusicPlayerSongPlayingInfoRO from "socialuni-music-sdk/src/model/MusicPlayerSongPlayingInfoRO.ts";
@@ -15,6 +15,7 @@ import SocialuniMusicAPI from "socialuni-music-sdk/src/api/SocialuniMusicAPI.ts"
 import musicRequest from "socialuni-music-sdk/src/plugins/musicRequest";
 import MusicPlayer from "socialuni-music-ui-h5/src/components/MusicPlayer.vue";
 
+@toNative
 @Component({
   components: {MusicPlayer, SocialuniChatViewH5, SocialuniMsgViewH5}
 })

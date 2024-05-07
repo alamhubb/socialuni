@@ -3,6 +3,8 @@ import SocialuniLoginService from "./SocialuniLoginService";
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 import PasswordUtil from "../util/PasswordUtil";
 import SocialuniLoginFormService from "./SocialuniLoginFormService";
+import {socialuniUserModule} from "../store/SocialuniUserModule";
+import PhoneService from "./PhoneService";
 
 
 interface SocialuniLoginViewServiceRefs {
@@ -13,6 +15,7 @@ interface SocialuniLoginViewServiceRefs {
 export default class SocialuniLoginViewService extends SocialuniLoginFormService {
 
     bindBtnDisabled = false
+
     get loginBtnText() {
         if (this.loginData.phoneNumRegistered) {
             return '登 录'
@@ -37,12 +40,19 @@ export default class SocialuniLoginViewService extends SocialuniLoginFormService
         this.checkContractChecked()
         this.bindBtnDisabled = true
 
-        console.log(socialuniConfigModule.allConfig.publicKey)
-        console.log(this.loginData.password)
-
         const password = await PasswordUtil.rsaEncode(socialuniConfigModule.allConfig.publicKey, this.loginData.password)
 
-        if (this.loginData.phoneNumRegistered) {
+        if (socialuniUserModule.hasUser) {
+            SocialuniLoginService.phonePasswordLogin(this.loginData.phoneNum, password, this.loginData.authCode).then((data) => {
+                console.log(this)
+                console.log(1111)
+                console.log(this.instance)
+                console.log(2222)
+                this.instance.emit('loginSuccess', data)
+            }).finally(() => {
+                this.bindBtnDisabled = false
+            })
+        } else if (this.loginData.phoneNumRegistered) {
             SocialuniLoginService.passwordLogin(this.loginData.phoneNum, password).then((data) => {
                 console.log(this)
                 console.log(1111)
@@ -53,15 +63,23 @@ export default class SocialuniLoginViewService extends SocialuniLoginFormService
                 this.bindBtnDisabled = false
             })
         } else {
-            SocialuniLoginService.phonePasswordLogin(this.loginData.phoneNum, password, this.loginData.authCode).then((data) => {
-                console.log(this)
-                console.log(1111)
-                console.log(this.instance)
-                console.log(2222)
-                this.instance.emit('loginSuccess', data)
-            }).finally(() => {
-                this.bindBtnDisabled = false
-            })
+            try {
+                await PhoneService.bindPhoneNum(this.loginData.phoneNum, password, this.loginData.authCode)
+                this.loginAfterHint('绑定成功')
+            } catch (e) {
+                this.goToOAuthPage()
+            } finally {
+                this.bindBtnDisabled = true
+            }
         }
+    }
+    goToOAuthPage() {
+        /*if (socialOAuthModule.isThreeAuth) {
+          if (this.hasPhoneNum) {
+            PageUtil.toOAuthPage()
+          } else {
+            PageUtil.toPhonePage()
+          }
+        }*/
     }
 }

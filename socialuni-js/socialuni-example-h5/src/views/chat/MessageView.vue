@@ -115,7 +115,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue, Watch} from 'vue-facing-decorator';
+import {Component, toNative, Vue, Watch} from 'vue-facing-decorator';
 import SocialuniChatViewH5 from "socialuni-im-view-h5/src/views/SocialuniChatViewH5.vue"
 import SocialuniMsgViewH5 from "socialuni-im-view-h5/src/views/SocialuniMsgViewH5.vue"
 import musicRequest from "@/plugins/musicRequest";
@@ -129,6 +129,7 @@ import SocialuniMusicRoleId from "socialuni-music-sdk/src/constant/SocialuniMusi
 import AlertUtil from "qingjs-h5/src/util/AlertUtil";
 import {nextTick} from "vue";
 
+@toNative
 @Component({
   components: {SocialuniChatViewH5, SocialuniMsgViewH5}
 })

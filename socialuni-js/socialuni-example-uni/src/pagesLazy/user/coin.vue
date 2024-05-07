@@ -6,6 +6,7 @@
 import { Component, Vue } from 'vue-facing-decorator'
 import SocialuniCoinView from 'socialuni-user-view-uni/src/views/user/coin/SocialuniCoinView.vue'
 
+@toNative
 @Component({
   components: {
     SocialuniCoinView

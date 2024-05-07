@@ -103,6 +103,7 @@ import SocialuniFollowTag from "../../components/SocialuniFollow/SocialuniFollow
 import TalkItem from "../../components/talkItem/TalkItem.vue";
 import TalkOperate from "../talk/talkOperate.vue";
 import MsgInput from "../../components/MsgInput.vue";
+@toNative
 @Component({
   components: {
     MsgInput,

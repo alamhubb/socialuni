@@ -50,7 +50,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Vue} from 'vue-facing-decorator'
 import QPopup from "qing-ui-uni/src/components/QPopup/QPopup.vue";
 import ReportType from "socialuni-constant/constant/ReportType";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
@@ -66,6 +66,7 @@ import QingAppUtil from "qingjs/src/util/QingAppUtil";
 
 // todo 后台可控制是否显示轮播图
 
+@toNative
 @Component({
   components: {
     QPopup

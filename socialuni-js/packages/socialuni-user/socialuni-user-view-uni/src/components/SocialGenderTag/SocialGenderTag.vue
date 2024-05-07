@@ -16,12 +16,13 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Prop, Vue} from 'vue-facing-decorator'
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
 import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue";
 import QTag from "qing-ui-uni/src/components/QTag.vue";
 import UserUtil from "socialuni-user-sdk/src/util/UserUtil";
 
+@toNative
 @Component({
   components: {
     QIcon, QTag

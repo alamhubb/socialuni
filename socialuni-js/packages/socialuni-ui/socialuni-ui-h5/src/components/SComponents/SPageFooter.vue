@@ -35,6 +35,7 @@
 import { Component, Emit, Prop, Vue } from 'vue-facing-decorator'
 import SButton from "./SButton.vue";
 
+@toNative
 @Component({
   components: { SButton }
 })

@@ -254,6 +254,7 @@ import TalkAPI from '@/api/TalkAPI'
 import { Message } from 'element-ui'
 import ViolateType from '@/constant/ViolateType'
 
+@toNative
 @Component
 export default class PreAuditPage extends Vue {
   reports: ReportVO[] = []

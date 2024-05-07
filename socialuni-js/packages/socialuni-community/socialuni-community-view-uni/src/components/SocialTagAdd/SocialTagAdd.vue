@@ -35,13 +35,14 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Vue} from 'vue-facing-decorator'
 import TagVO from 'socialuni-api-base/src/model/community/tag/TagVO'
 import ErrorConst from 'socialuni-constant/constant/ErrorConst'
 import ResultRO from 'socialuni-api-base/src/model/social/ResultRO'
 import TagAPI from "socialuni-community-api/src/api/TagAPI";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
 
+@toNative
 @Component({})
 export default class SocialTagAdd extends Vue {
   // tag名称

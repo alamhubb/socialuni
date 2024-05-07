@@ -113,7 +113,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-facing-decorator'
+import {Component, toNative, Vue} from 'vue-facing-decorator'
 import PeiwanRO from "socialuni-admin-api/src/model/peiwan/PeiwanRO";
 import QDialog from "qing-ui-h5/src/components/QComponents/QDialog.vue";
 import SLabelItem from "qing-ui-h5/src/components/QComponents/QLabelItem.vue";
@@ -139,6 +139,7 @@ import SSelect from "qing-ui-h5/src/components/QComponents/QSelect/SSelect.vue";
 import ImgFileVO from "socialuni-admin-api/src/model/community/ImgFileVO";
 import resData from "./resdata.json"
 
+@toNative
 @Component({
     components: {SSelect, SDialog, Plus, STableColumn, STableInput, STable, STableSelect, SLabelItem}
 })

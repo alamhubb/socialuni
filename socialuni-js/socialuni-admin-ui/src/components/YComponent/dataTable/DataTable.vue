@@ -77,7 +77,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator'
+import {Component, toNative, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator'
 import YTable from '@/components/YComponent/YTable/YTable.vue'
 import ObjectUtil from '../utils/ObjectUtil'
 import YPagination from '@/components/YComponent/YPageable/YPagination.vue'
@@ -92,6 +92,7 @@ import CommonUtil from '@/components/YComponent/utils/CommonUtil'
  *
  * 在数据源业务基础上，封装基础table
  */
+@toNative
 @Component({
   components: {YSearch, YPagination, YTable}
 })

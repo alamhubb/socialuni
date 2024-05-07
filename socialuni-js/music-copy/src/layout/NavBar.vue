@@ -68,6 +68,7 @@ import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
 import SocialuniUserEventConst from "socialuni-user-sdk/src/constant/SocialuniUserEventConst";
 
 
+@toNative
 @Component({
   components: { NavBreadcrumb, NavMenu }
 })

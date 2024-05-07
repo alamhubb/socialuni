@@ -123,6 +123,7 @@ import PageableRO from '@/components/YComponent/model/PageableRO'
 import ResultRO from '@/components/YComponent/model/ResultRO'
 import YSelect from '@/components/YComponent/YSelect/YSelect.vue'
 
+@toNative
 @Component({
   components: { YSelect, YPagination, YTable }
 })

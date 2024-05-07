@@ -35,6 +35,7 @@
 import { Component, Emit, Prop, Vue } from 'vue-facing-decorator'
 import QButton from "./QButton.vue";
 
+@toNative
 @Component({
   components: { QButton }
 })

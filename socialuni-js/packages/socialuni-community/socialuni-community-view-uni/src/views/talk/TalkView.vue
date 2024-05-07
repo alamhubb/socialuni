@@ -47,7 +47,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue, Watch} from 'vue-facing-decorator'
+import {Component, toNative, Vue, Watch} from 'vue-facing-decorator'
 
 import QButton from 'qing-ui-uni/src/components/QButton/QButton.vue'
 import QNavbar from 'qing-ui-uni/src/components/QNavbar/QNavbar.vue'
@@ -77,6 +77,7 @@ import {getCurrentInstance} from "vue";
 
 // todo 后台可控制是否显示轮播图
 
+@toNative
 @Component({
   components: {
     SocialTagPicker,

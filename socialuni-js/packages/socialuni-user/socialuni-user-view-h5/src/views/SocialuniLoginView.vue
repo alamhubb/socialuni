@@ -110,6 +110,7 @@ import {Emit, Component, Vue} from 'vue-facing-decorator'
 import SocialuniLoginViewService from "socialuni-user-sdk/src/logic/SocialuniLoginViewService";
 import {getCurrentInstance, nextTick} from "vue";
 
+@toNative
 @Component({})
 export default class SocialuniLoginView extends Vue {
   $refs: {

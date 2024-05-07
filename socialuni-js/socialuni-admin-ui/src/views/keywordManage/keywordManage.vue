@@ -76,6 +76,7 @@ import KeywordsDetailVO from '@/model/violateWord/KeywordsDetailVO'
 // 违规率、文本违规率、拼音违规率
 
 // 不违规率、文本不违规率、拼音不违规率
+@toNative
 @Component({
   components: { TriggerDetailTable, KeywordsDetailTable }
 })

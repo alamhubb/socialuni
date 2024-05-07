@@ -1,5 +1,5 @@
 import SocialuniViewService from "socialuni/src/interface/SocialuniViewService";
-import {ComponentInternalInstance, nextTick} from "vue";
+import {Component, toNativeInternalInstance, nextTick} from "vue";
 import SocialuniLoginFormDataVO from "../model/SocialuniLoginFormDataVO";
 import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";

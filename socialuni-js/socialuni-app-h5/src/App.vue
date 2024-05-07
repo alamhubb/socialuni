@@ -10,6 +10,7 @@
 <script lang="ts">
 import {Component, toNative, Vue} from 'vue-facing-decorator';
 
+@toNative
 @Component({
 })
 class App extends Vue {

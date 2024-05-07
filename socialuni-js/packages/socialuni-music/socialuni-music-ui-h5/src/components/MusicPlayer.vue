@@ -55,7 +55,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator';
+import {Component, toNative, Emit, Model, Prop, Vue, Watch} from 'vue-facing-decorator';
 import CommonEventUtil from "qingjs/src/util/CommonEventUtil.ts";
 import SocialuniImEventKey from "socialuni-im-api/src/constant/SocialuniMusicEventConst.ts";
 import socialuniMusicStore from "socialuni-music-sdk/src/store/SocialuniMusicStore.ts";
@@ -68,6 +68,7 @@ import DateUtil from "qing-util/src/util/DateUtil.ts";
 import QDialog from "qing-ui-h5/src/components/QComponents/QDialog.vue";
 import MusicList from "./MusicList.vue";
 
+@toNative
 @Component({
   components: {MusicList, QDialog}
 })

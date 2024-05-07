@@ -8,6 +8,7 @@
 import { Component, Vue } from 'vue-facing-decorator'
 import { userModule } from '@/store'
 
+@toNative
 @Component
 export default class AppPage extends Vue {
   // routers: RouteConfig [] = routers

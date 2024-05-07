@@ -19,7 +19,8 @@
   //@ts-ignore
   import childProtect from './childProtect.md'
 
-  @Component({
+  @toNative
+@Component({
     components: {
       QMarkdown
     }
