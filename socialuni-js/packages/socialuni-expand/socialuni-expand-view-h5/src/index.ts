@@ -14,6 +14,7 @@ const socialuniExpandPlugin: SocialuniPlugin = new SocialuniExpandPlugin()
 
 socialuniPluginsModule.componentsMap.set('expandView', SocialuniExpandViewH5)
 
+
 const SocialuniExpandH5 = {
     async install(app: App, expandView: Vue, socialuniOption?: SocialuniOption) {
         console.log(66666)
@@ -22,8 +23,6 @@ const SocialuniExpandH5 = {
             path: '/expand',
             name: 'expand',
             component: () => {
-                console.log(77777)
-                console.log(expandView)
                 if (expandView) {
                     return expandView
                 } else {
