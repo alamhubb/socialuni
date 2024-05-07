@@ -1,7 +1,7 @@
 <template>
-  <div>
-    默认页面
-  </div>
+    <div>
+      覆盖页面
+    </div>
 </template>
 
 <script lang="ts">
@@ -9,7 +9,7 @@ import { Component, Vue , toNative} from 'vue-facing-decorator';
 
 @toNative
 @Component({})
-export default class SocialuniExpandViewH5 extends Vue {
+export default class ExpandView extends Vue {
 
 
 }

@@ -1,4 +1,4 @@
-import {App, defineComponent, getCurrentInstance, isReactive, onMounted, toRaw} from "vue"
+import {App, defineComponent, getCurrentInstance, isReactive, nextTick, onMounted, toRaw} from "vue"
 import {socialuniPluginsModule} from "./store/SocialuniPluginsModule"
 import {SocialuniPlugin} from "./interface/SocialuniPlugin"
 import {ImportModule} from "./interface/ImportModule"
@@ -8,6 +8,7 @@ import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import PlatformModuleLoadUtil from "qingjs/src/util/PlatformModuleLoadUtil";
 import JsonUtil from "qing-util/src/util/JsonUtil";
 import ObjectUtil from "qing-util/src/util/ObjectUtil";
+import {Router} from "vue-router";
 
 const socialuniInitPlugin: SocialuniPlugin = {
     async onLaunch() {
@@ -66,11 +67,13 @@ async function installSocialuniPluginIns(app: App) {
 
 
 const Socialuni = {
-    async install(app: App, socialuniOption?: SocialuniOption) {
+    async install(app: App, router: Router, socialuniOption?: SocialuniOption) {
         // const SocialuniUiUni = await import("../../qing-ui/qing-ui")
         // console.log(SocialuniUiUni)
         // app.use(SocialuniUiUni)
         // console.log(SocialuniUiUni)
+
+        socialuniPluginsModule.setRouter(router)
 
         console.log(socialuniSystemModule.isDev)
 
@@ -87,7 +90,6 @@ const Socialuni = {
                 }
             },
             created() {
-                socialuniPluginsModule.setRouter(this.$router)
                 socialuniPluginsModule.setRoute(this.$route)
             }
         })
@@ -96,11 +98,13 @@ const Socialuni = {
             socialuniPluginsModule.addPlugin(...socialuniOption.plugins)
         }
 
+        // 社交联盟内置支持的插件
+        socialuniPluginsModule.addPlugin(socialuniInitPlugin)
+
+        await nextTick()
         for (const plugin of socialuniPluginsModule.plugins) {
             plugin && plugin.onLaunch && plugin.onLaunch()
         }
-        // 社交联盟内置支持的插件
-        socialuniPluginsModule.addPlugin(socialuniInitPlugin)
     }
 }
 

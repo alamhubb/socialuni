@@ -12,6 +12,7 @@ import SocialuniUser from "socialuni-user-sdk/src";
 import SocialuniIm from "socialuni-im-sdk/src";
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule.ts";
 import SocialuniUiH5 from "socialuni-ui-h5/src";
+import SocialuniExpandH5 from "socialuni-extand-view-h5/src";
 
 declare module '@vue/runtime-core' {
     interface ComponentCustomProperties {
@@ -23,6 +24,8 @@ declare module '@vue/runtime-core' {
 // 使用自定义异步插件
 (async () => {
     const app = createApp(App);
+    app.use(router)
+    app.use(Socialuni, router)
 
     app.config.globalProperties.$DateUtil = DateUtil;
 
@@ -31,10 +34,10 @@ declare module '@vue/runtime-core' {
     app.use(SocialuniUser)
     app.use(SocialuniIm)
     app.use(SocialuniMusic)
-    app.use(Socialuni)
+    app.use(SocialuniExpandH5)
+
 
     app.config.globalProperties.$qing = socialuniSystemModule
-    app.use(router)
     app.mount('#app');
 })();
 
