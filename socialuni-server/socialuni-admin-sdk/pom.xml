@@ -33,6 +33,16 @@
         </dependency>
         <dependency>
             <groupId>com.socialuni.social</groupId>
+            <artifactId>socialuni-app-sdk</artifactId>
+            <version>0.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.socialuni.social</groupId>
+            <artifactId>socialuni-user-img-sdk</artifactId>
+            <version>0.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.socialuni.social</groupId>
             <artifactId>socialuni-tance-api</artifactId>
         </dependency>
         <dependency>

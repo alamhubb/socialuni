@@ -2,12 +2,12 @@ package com.socialuni.social.admin.service;
 
 
 import com.socialuni.social.admin.controller.DevAccountRO;
+import com.socialuni.social.app.logic.service.SocialuniDetailLoginService;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.app.model.SocialuniMineUserDetailRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.common.api.utils.SocialTokenFacade;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.sdk.logic.service.login.SocialuniDetailLoginService;
 import com.socialuni.social.tance.entity.DevAccountEntity;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
@@ -48,10 +48,10 @@ public class AdminLoginService {
 
 
     @Transactional
-    ResultRO<SocialLoginRO<DevAccountRO>> phoneLogin(SocialPhoneNumAuthCodeQO socialPhoneNumQO) {
+    public ResultRO<SocialLoginRO<DevAccountRO>> phoneLogin(SocialPhoneNumAuthCodeQO socialPhoneNumQO) {
         String phoneNum = socialPhoneNumQO.getPhoneNum();
 
-        ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> resultRO = centerLoginService.phoneLogin(socialPhoneNumQO);
+        ResultRO<SocialLoginRO<SocialuniUserRO>> resultRO = centerLoginService.phoneLogin(socialPhoneNumQO);
 
 
         //如果手机号已经存在账户，则直接使用，正序获取第一个用户

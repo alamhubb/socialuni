@@ -6,6 +6,7 @@ import com.socialuni.social.app.model.SocialuniMineUserDetailRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.sdk.im.logic.entity.SocialuniChatEntity;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.user.sdk.dao.utils.SocialuniUserExtendFriendLogDOUtil;
 import com.socialuni.social.user.sdk.logic.service.SocialuniLoginService;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.QO.SocialPhoneAuthCodePasswordQO;
@@ -47,6 +48,9 @@ public class SocialuniDetailLoginService {
         //用户加入
         socialuniChatEntity.createUserChats(socialuniUserDo);
 
+        //生成用户扩列记录
+        SocialuniUserExtendFriendLogDOUtil.createUserExtendFriendLog();
+
         return ResultRO.success(socialLoginRO);
     }
 
@@ -73,6 +77,9 @@ public class SocialuniDetailLoginService {
 
         //用户加入
         socialuniChatEntity.createUserChats(socialuniUserDo);
+
+        //生成用户扩列记录
+        SocialuniUserExtendFriendLogDOUtil.createUserExtendFriendLog();
         return ResultRO.success(socialLoginRO);
     }
 
@@ -90,6 +97,9 @@ public class SocialuniDetailLoginService {
 
         //用户加入
         socialuniChatEntity.createUserChats(socialuniUserDo);
+
+        //生成用户扩列记录
+        SocialuniUserExtendFriendLogDOUtil.createUserExtendFriendLog();
         return ResultRO.success(socialLoginRO);
     }
 
@@ -106,6 +116,9 @@ public class SocialuniDetailLoginService {
 
         //用户加入
         socialuniChatEntity.createUserChats(socialuniUserDo);
+
+        //生成用户扩列记录
+        SocialuniUserExtendFriendLogDOUtil.createUserExtendFriendLog();
         return ResultRO.success(socialLoginRO);
     }
 }

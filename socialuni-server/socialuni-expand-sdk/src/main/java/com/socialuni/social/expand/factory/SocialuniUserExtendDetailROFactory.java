@@ -12,6 +12,7 @@ import com.socialuni.social.like.logic.manage.SocialuniUserLikeManage;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserExtendFriendLogDo;
 import com.socialuni.social.common.sdk.model.RO.SocialuniRectangleRO;
 import com.socialuni.social.common.sdk.utils.PositionUtil;
+import com.socialuni.social.user.sdk.dao.utils.SocialuniUserExtendFriendLogDOUtil;
 import com.socialuni.social.user.sdk.model.factory.SocialuniUserROFactory;
 import com.socialuni.social.user.sdk.utils.DistrictStoreUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -37,7 +38,12 @@ public class SocialuniUserExtendDetailROFactory {
         SocialuniUserExtendDetailRO socialuniUserExtendDetailRO = new SocialuniUserExtendDetailRO(socialuniUserDetailRO);
 
         //获取用户扩列记录
-        SocialuniUserExtendFriendLogDo socialuniUserExtendFriendLogDo = SocialuniUserRepositoryFacede.findByUserIdNotNull(userDO.getUserId(), SocialuniUserExtendFriendLogDo.class);
+        SocialuniUserExtendFriendLogDo socialuniUserExtendFriendLogDo = SocialuniUserRepositoryFacede.findByUserId(userDO.getUserId(), SocialuniUserExtendFriendLogDo.class);
+
+        if (socialuniUserExtendFriendLogDo == null) {
+            //生成用户扩列记录
+            socialuniUserExtendFriendLogDo = SocialuniUserExtendFriendLogDOUtil.createUserExtendFriendLog(userDO);
+        }
 
 //        if (socialuniUserExtendFriendLogDo == null) {
 //            throw new SocialParamsException("不该为空");
@@ -65,8 +71,12 @@ public class SocialuniUserExtendDetailROFactory {
 
         socialuniUserExtendDetailRO.setDistance(getDistance);
 
-        boolean hasUserLike = socialuniUserLikeManage.hasUserLike(mineUser.getUserId(), userDO.getUserId());
-        socialuniUserExtendDetailRO.setHasUserLike(hasUserLike);
+        if (mineUser == null) {
+            socialuniUserExtendDetailRO.setHasUserLike(false);
+        } else {
+            boolean hasUserLike = socialuniUserLikeManage.hasUserLike(mineUser.getUserId(), userDO.getUserId());
+            socialuniUserExtendDetailRO.setHasUserLike(hasUserLike);
+        }
 
         return socialuniUserExtendDetailRO;
     }

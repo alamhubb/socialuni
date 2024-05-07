@@ -10,7 +10,7 @@ import SocialuniUserExpandAPI from "socialuni-user-api/src/api/SocialuniUserExpa
 import SocialuniCoinAPI from "socialuni-user-api/src/api/SocialuniCoinAPI";
 
 class SocialuniAppUserModule {
-    private mineUserPhoneNum: string = null
+    private userPhoneNum: string = null
 
     private mineUserFansDetail: SocialuniUserFansDetailRO = null
     private mineUserExpandDetail: SocialuniUserExpandDetailRO = null
@@ -21,7 +21,11 @@ class SocialuniAppUserModule {
     }
 
     setMineUserPhoneNum(phoneNum: string) {
-        this.mineUserPhoneNum = phoneNum
+        this.userPhoneNum = phoneNum
+    }
+
+    get mineUserPhoneNum(){
+        return this.userPhoneNum
     }
 
     get hasPhoneNum() {

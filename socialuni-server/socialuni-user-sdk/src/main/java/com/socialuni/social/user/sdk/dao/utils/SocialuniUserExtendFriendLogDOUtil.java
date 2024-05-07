@@ -14,23 +14,16 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class SocialuniUserExtendFriendLogDOUtil {
-    public static void createUserExtendFriendLog() {
+    public static SocialuniUserExtendFriendLogDo createUserExtendFriendLog() {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
 
         if (mineUser == null) {
-            return;
+            return null;
         }
+        return createUserExtendFriendLog(mineUser);
+    }
 
-        //判断用户是否打开了
-//        SocialuniUserExpandDo socialuniUserExpandDo = SocialuniUserExpandDOUtil.getAllowNull(mineUser.getUserId());
-//        if (socialuniUserExpandDo == null) {
-//            return;
-//        }
-//        //未开启则不记录
-//        if (!socialuniUserExpandDo.getOpenContactInfo()) {
-//            return;
-//        }
-
+    public static SocialuniUserExtendFriendLogDo createUserExtendFriendLog(SocialuniUserDo mineUser) {
         SocialuniUserExtendFriendLogDo socialuniUserExtendFriendLogDo = new SocialuniUserExtendFriendLogDo();
         socialuniUserExtendFriendLogDo.setUserId(mineUser.getUserId());
 
@@ -49,8 +42,9 @@ public class SocialuniUserExtendFriendLogDOUtil {
         }
 
 
-        SocialuniUserRepositoryFacede.save(socialuniUserExtendFriendLogDo);
+        socialuniUserExtendFriendLogDo = SocialuniUserRepositoryFacede.save(socialuniUserExtendFriendLogDo);
 
+        return socialuniUserExtendFriendLogDo;
         /*CompletableFuture.supplyAsync(() -> {
             SocialuniUserRepositoryFacede.save(socialuniUserExtendFriendLogDo);
             return null;
@@ -60,5 +54,6 @@ public class SocialuniUserExtendFriendLogDOUtil {
             return null;
         });*/
     }
+
 
 }
