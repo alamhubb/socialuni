@@ -185,7 +185,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "vue-facing-decorator";
+import {Component, Vue, toNative} from 'vue-facing-decorator';
 import SocialuniMsgViewService, {
   socialuniMsgViewService
 } from "socialuni-im-sdk/src/logic/SocialuniMsgViewService";
@@ -203,7 +203,7 @@ import {onLoad} from "@dcloudio/uni-app";
       components: {QIcon, QNavbar, SocialuniReportDialog}
     }
 )
-class SocialuniMessageView extends Vue {
+export default class SocialuniMessageView extends Vue {
   public $refs!: {
     // reportDialog: SocialuniReportDialog;
     messageMoreHandleDialog: any;
@@ -219,6 +219,4 @@ class SocialuniMessageView extends Vue {
     })
   }
 }
-
-export default toNative(SocialuniMessageView)
 </script>

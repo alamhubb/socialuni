@@ -78,7 +78,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Model, Prop, Vue, Watch} from "vue-facing-decorator";
+import {Component, Emit, Model, Prop, Vue, Watch, toNative} from 'vue-facing-decorator';
 import DomFile from "./DomFile";
 import UploadFileVO from "./UploadFileVO";
 import YUploadFileType from "./YUploadFileType";

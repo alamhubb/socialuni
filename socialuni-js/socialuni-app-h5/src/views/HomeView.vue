@@ -19,8 +19,6 @@ import QButton from "qing-ui-uni/src/components/QButton/QButton.vue";
 @Component({
   components: {QButton}
 })
-class HomeView extends Vue {
+export default class HomeView extends Vue {
 }
-
-export default toNative(HomeView)
 </script>

@@ -10,9 +10,7 @@ import SocialuniExpandView from "socialuni-expand-view-uni/src/views/SocialuniEx
 @Component({
   components: {SocialuniExpandView}
 })
-class SocialuniExpandPage extends Vue {
+export default class SocialuniExpandPage extends Vue {
 
 }
-
-export default toNative(SocialuniExpandPage)
 </script>

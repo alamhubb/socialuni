@@ -1,6 +1,6 @@
 <template>
   <scroll-view :scroll-x="true" class="tabUuid overflow-hidden" :class="[uuid]" :scroll-left="leftBoxScrollLeft">
-    <div class="row-nowrap position-relative">
+    <div class="flex-row row-nowrap position-relative">
       <div class="barUuid row-all-center"
            :class="[uuid,isBar?'fixed-index':'',(isBar||isFull)?'flex-1':'flex-none']"
            v-for="(tab,index) in tabs" @click="input(index)" :key="tab.name">

@@ -13,7 +13,6 @@ import {Component, Vue, toNative} from 'vue-facing-decorator';
 @toNative
 @Component({
 })
-class App extends Vue {
+export default class App extends Vue {
 }
-export default toNative(App)
 </script>
