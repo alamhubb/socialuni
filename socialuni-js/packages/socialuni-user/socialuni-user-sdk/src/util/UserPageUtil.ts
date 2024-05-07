@@ -25,7 +25,7 @@ export default class UserPageUtil {
     }
 
     static toCoinPage() {
-        if (socialuniSystemModule.isProd && socialuniSystemModule.isIos) {
+        if (socialuniSystemModule.isIosOrMpQQ) {
             // 由于相关规范，iOS功能暂不可用
             MsgUtil.iosDisablePay()
         } else {

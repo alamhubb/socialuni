@@ -7,12 +7,18 @@ import FollowAPI from "socialuni-community-api/src/api/FollowAPI";
 import SocialuniUserFansDetailRO from "socialuni-user-api/src/model/SocialuniUserFansDetailRO";
 import SocialuniUserExpandDetailRO from "socialuni-user-api/src/model/SocialuniUserExpandDetailRO";
 import SocialuniUserExpandAPI from "socialuni-user-api/src/api/SocialuniUserExpandAPI";
+import SocialuniCoinAPI from "socialuni-user-api/src/api/SocialuniCoinAPI";
 
 class SocialuniAppUserModule {
     private mineUserPhoneNum: string = null
 
     private mineUserFansDetail: SocialuniUserFansDetailRO = null
     private mineUserExpandDetail: SocialuniUserExpandDetailRO = null
+    private mineUserCoinInfo: { coinNum: number } = null
+
+    get userCoinNum() {
+        return this.mineUserCoinInfo.coinNum
+    }
 
     setMineUserPhoneNum(phoneNum: string) {
         this.mineUserPhoneNum = phoneNum
@@ -36,6 +42,9 @@ class SocialuniAppUserModule {
             }),
             SocialuniUserExpandAPI.getMineUserExpandDetailAPI().then(res => {
                 this.mineUserExpandDetail = res.data
+            }),
+            SocialuniCoinAPI.getUserCoinInfoAPI().then(res => {
+                this.mineUserCoinInfo = res.data
             })
         ])
     }

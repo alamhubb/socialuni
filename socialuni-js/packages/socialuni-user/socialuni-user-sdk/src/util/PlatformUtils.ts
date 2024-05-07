@@ -92,7 +92,7 @@ export default class PlatformUtils {
         console.log(`isProd:${socialuniSystemModule.isProd}`)
         if (!socialuniUserModule.mineUser) {
             return UserMsgUtil.unLoginMessage()
-        } else if (socialuniSystemModule.isIos && socialuniSystemModule.isProd) {
+        } else if (socialuniSystemModule.isIosOrMpQQ) {
             MsgUtil.iosDisablePay()
             throw '禁止支付功能'
         }

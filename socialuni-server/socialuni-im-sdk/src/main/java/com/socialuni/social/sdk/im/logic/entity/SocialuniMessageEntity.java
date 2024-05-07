@@ -9,6 +9,7 @@ import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.common.sdk.dao.repository.NotifyRepository;
 import com.socialuni.social.im.api.model.RO.SocialMessageRO;
+import com.socialuni.social.recharge.logic.domain.SocialuniPayCoinDomain;
 import com.socialuni.social.sdk.im.config.websocket.WebsocketServer;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
@@ -32,7 +33,10 @@ import com.socialuni.social.sdk.im.logic.manage.SocialuniUserChatConfigManage;
 import com.socialuni.social.sdk.im.notify.NotifyVO;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserBlackDO;
 import com.socialuni.social.follow.dao.DO.SocialuniUserFollowDO;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniUserCoinDo;
+import com.socialuni.social.user.sdk.utils.SocialuniUserSocialCoinDOUtil;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -89,11 +93,15 @@ public class SocialuniMessageEntity {
         return sendSingleMsg(beUserId, msgContent, MessageType.simple);
     }
 
+    @Resource
+    SocialuniPayCoinDomain socialuniPayCoinDomain;
+
     @Transactional
     public SocialMessageRO sendSingleMsg(Integer beUserId, String msgContent, String msgType) {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
 
         Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+
 
         //校验用户是否存在
         SocialuniUserUtil.getAndCheckUserNotNull(beUserId);
@@ -117,21 +125,21 @@ public class SocialuniMessageEntity {
 
         //先看是否已经被关注
         //如果对方不接收陌生人消息
-        SocialuniUserFollowDO beFollowDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(beUserId, mineUserId, SocialuniUserFollowDO.class);
-        //判断是否关注，关注则直接可以发送消息
-        if (beFollowDO == null || !beFollowDO.getStatus().equals(SocialuniCommonStatus.enable)) {
-            //没有关注，则校验对方是否接收陌生人消息
-            SocialuniUserChatConfigDO socialuniBeUserChatConfigDO = SocialuniUserChatConfigManage.getOrCreateUserChatConfigDO(beUserId);
-            //对方是否允许陌生人消息
-            if (!socialuniBeUserChatConfigDO.getAllowStrangerMsg()) {
-                throw new SocialBusinessException("对方不接受陌生人消息，无法发送消息");
-            }
-            //则发起发也需要开启陌生人消息才可以
-            SocialuniUserChatConfigDO mineChatConfig = SocialuniUserChatConfigManage.getOrCreateUserChatConfigDO(mineUserId);
-            if (!mineChatConfig.getAllowStrangerMsg()) {
-                throw new SocialBusinessException("您未开启陌生人消息功能，无法给陌生人发送消息");
-            }
-        }
+//        SocialuniUserFollowDO beFollowDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(beUserId, mineUserId, SocialuniUserFollowDO.class);
+//        //判断是否关注，关注则直接可以发送消息
+//        if (beFollowDO == null || !beFollowDO.getStatus().equals(SocialuniCommonStatus.enable)) {
+//            //没有关注，则校验对方是否接收陌生人消息
+//            SocialuniUserChatConfigDO socialuniBeUserChatConfigDO = SocialuniUserChatConfigManage.getOrCreateUserChatConfigDO(beUserId);
+//            //对方是否允许陌生人消息
+//            if (!socialuniBeUserChatConfigDO.getAllowStrangerMsg()) {
+//                throw new SocialBusinessException("对方不接受陌生人消息，无法发送消息");
+//            }
+//            //则发起发也需要开启陌生人消息才可以
+//            SocialuniUserChatConfigDO mineChatConfig = SocialuniUserChatConfigManage.getOrCreateUserChatConfigDO(mineUserId);
+//            if (!mineChatConfig.getAllowStrangerMsg()) {
+//                throw new SocialBusinessException("您未开启陌生人消息功能，无法给陌生人发送消息");
+//            }
+//        }
 
         //如果是官方通知和
         //如果为官方群聊，则所有人都可以发送内容
@@ -149,7 +157,7 @@ public class SocialuniMessageEntity {
         //查询对方对你的关系，是不是好友。那如果你把对方删除了呢，你还能给对方发消息吗。则不能。
 
 
-        if (msgType == null){
+        if (msgType == null) {
             msgType = MessageType.simple;
         }
 
@@ -237,6 +245,7 @@ public class SocialuniMessageEntity {
         return SocialMessageROFactory.getMessageRO(message, sendUser, true);
     }
 
+    @Transactional
     public SocialuniMessageReceiveDO sendMsgNotifyList(String msgContent, SocialuniUserDo sendUser, List<SocialuniChatUserDO> chatSocialuniUserDoS, String msgType) {
         List<NotifyDO> notifies = new ArrayList<>();
         //有权限，则给chat中的所有用户发送内容
@@ -247,6 +256,9 @@ public class SocialuniMessageEntity {
         SocialuniChatDO chat = SocialuniRepositoryFacade.findByUnionId(chatSocialuniUserDoS.get(0).getChatId(), SocialuniChatDO.class);
         //构建消息
         SocialuniMessageDO message = messageRepository.save(SocialuniMessageDOFactory.createMessage(chat.getUnionId(), msgContent, sendUser.getUserId(), msgType));
+
+        socialuniPayCoinDomain.consumCoinByType(sendUser.getUserId(), chatSocialuniUserDoS.get(0).getUserId(), "消息发送");
+
 
         Date curDate = new Date();
         chat.setUpdateTime(curDate);

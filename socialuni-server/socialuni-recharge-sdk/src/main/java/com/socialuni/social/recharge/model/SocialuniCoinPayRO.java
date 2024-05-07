@@ -1,4 +1,4 @@
-package com.socialuni.social.common.sdk.model.QO.business;
+package com.socialuni.social.recharge.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

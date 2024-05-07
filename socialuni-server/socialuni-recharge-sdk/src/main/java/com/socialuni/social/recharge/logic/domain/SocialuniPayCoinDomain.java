@@ -1,36 +1,93 @@
-package com.socialuni.social.sdk.logic.domain.business;
+package com.socialuni.social.recharge.logic.domain;
 
 import com.socialuni.social.common.api.constant.DateTimeType;
 import com.socialuni.social.common.api.constant.PlatformType;
 import com.socialuni.social.common.api.constant.SystemType;
+import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.common.api.utils.IpUtil;
 import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.common.api.utils.UUIDUtil;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniGetUserContactRecordDO;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
-import com.socialuni.social.common.sdk.model.QO.business.SocialuniCoinPayRO;
-import com.socialuni.social.common.sdk.model.QO.business.SocialuniPayCoinQO;
+import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
+import com.socialuni.social.recharge.dao.DO.SocialuniCoinConsumLogDO;
+import com.socialuni.social.recharge.dao.DO.SocialuniCoinOrderDO;
+import com.socialuni.social.recharge.factory.SocialuniCoinOrderFactory;
+import com.socialuni.social.recharge.model.SocialuniCoinInfoRO;
+import com.socialuni.social.recharge.model.SocialuniCoinPayRO;
+import com.socialuni.social.recharge.model.SocialuniPayCoinQO;
 import com.socialuni.social.content.constant.SocialuniSupportProviderType;
 import com.socialuni.social.sdk.constant.business.SocialuniAllowPayCoinAmountType;
 import com.socialuni.social.sdk.constant.business.SocialuniPayStatus;
+import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.user.sdk.constant.SocialuniPayProviderType;
 import com.socialuni.social.common.api.enumeration.ContentStatus;
 import com.socialuni.social.recharge.dao.DO.SocialuniPayCoinOrderDO;
 import com.socialuni.social.common.sdk.utils.DateUtils;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniUserCoinDo;
 import com.socialuni.social.user.sdk.utils.AuthCodeUtil;
 import com.socialuni.social.content.utils.QQUtil;
+import com.socialuni.social.user.sdk.utils.SocialuniUserSocialCoinDOUtil;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.content.utils.WxUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.Date;
 
 @Component
 @Slf4j
 public class SocialuniPayCoinDomain {
+    @Resource
+    SocialuniPayCoinDomain socialuniPayCoinDomain;
+
+    @Transactional
+    public void consumCoinByType(Integer mineUserId, Integer beUserId, String type) {
+
+        SocialuniUserCoinDo socialuniUserCoinDo = SocialuniUserSocialCoinDOUtil.getNotNull(mineUserId);
+
+        if (socialuniUserCoinDo.getCoin() < 10) {
+            throw new SocialSystemException("金币不足");
+        }
+
+        //获取用户金币
+        Integer mineUserCoin = socialuniUserCoinDo.getCoin();
+        //获取联系方式需要的金币数量
+        Integer consumNum = 10;
+
+        //保存用户
+        //用户消耗
+        socialuniUserCoinDo.setCoin(mineUserCoin - consumNum);
+        //保存用户消耗
+        socialuniUserCoinDo = SocialuniUserSocialCoinDOUtil.save(socialuniUserCoinDo);
+
+        //记录日志
+        SocialuniCoinConsumLogDO socialuniCoinConsumLogDO = new SocialuniCoinConsumLogDO(mineUserId, beUserId);
+        socialuniCoinConsumLogDO.setType(type);
+        socialuniCoinConsumLogDO = SocialuniRepositoryFacade.save(socialuniCoinConsumLogDO);
+
+        //创建金币订单
+        SocialuniCoinOrderDO shellOrderDO = SocialuniCoinOrderFactory.createCoinOrderDOByContactInfoSuccess(socialuniUserCoinDo, -consumNum, socialuniCoinConsumLogDO.getId());
+        //消费
+        //保存
+        SocialuniRepositoryFacade.save(shellOrderDO);
+    }
+
+
+    public SocialuniCoinInfoRO getUserCoinInfo() {
+        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+        SocialuniUserCoinDo socialuniUserSocialCoinDo = SocialuniUserSocialCoinDOUtil.getOrCreate(mineUserId);
+        SocialuniCoinInfoRO socialuniCoinInfoRO = new SocialuniCoinInfoRO();
+        socialuniCoinInfoRO.setCoinNum(socialuniUserSocialCoinDo.getCoin());
+        return socialuniCoinInfoRO;
+    }
+
     //充值金币
     public SocialuniCoinPayRO payCoin(SocialuniPayCoinQO socialuniRechargeCoinQO) {
         SocialuniUserDo user = SocialuniUserUtil.getMineUserNotNull();

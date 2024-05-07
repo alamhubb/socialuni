@@ -139,10 +139,8 @@ import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserMod
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import SocialuniImgUtil from "socialuni-user-sdk/src/util/SocialuniImgUtil";
 import SocialuniExpandAPI from "socialuni-expand-api/src/api/SocialuniExpandAPI";
-import SocialuniUserExpandService from "../service/SocialuniDatingService";
 import SocialuniUserLikeAPI from "socialuni-expand-api/src/api/SocialuniUserLikeAPI";
 import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
-import {socialuniUserDetailViewService} from "socialuni-user-sdk/src/logic/SocialuniUserDetailViewService";
 
 @toNative
 @Component({

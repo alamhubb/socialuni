@@ -44,7 +44,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Options} from 'vue-facing-decorator'
+import {Vue, Component} from 'vue-facing-decorator'
 import ShellOrderVO from "socialuni-api-base/src/model/ShellOrderVO";
 import QIcon from 'qing-ui-uni/src/components/QIcon/QIcon.vue'
 import EnumVO from "socialuni-constant/constant/EnumVO";
@@ -58,6 +58,7 @@ import PlatformUtils from "socialuni-user-sdk/src/util/PlatformUtils";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import {getCurrentInstance} from "vue";
 import {onLoad} from "@dcloudio/uni-app";
+import {socialuniAppUserModule} from "socialuni-user-sdk/src/store/SocialuniAppUserModule";
 
 @Component({
   components: {QTabs, QIcon, QButton}
@@ -79,9 +80,9 @@ export default class SocialuniCoinView extends Vue {
   shellOrders: ShellOrderVO[] = []
 
   created() {
-      /*SocialuniUserAPI.queryShellAPI().then(res => {
-        this.shellOrders = res.data
-      })*/
+    /*SocialuniUserAPI.queryShellAPI().then(res => {
+      this.shellOrders = res.data
+    })*/
   }
 
   async userPay() {
@@ -90,7 +91,7 @@ export default class SocialuniCoinView extends Vue {
     // const provider = socialuniSystemModule.isMp ? socialuniSystemModule.provider : SocialuniProviderType.wx
     try {
       await PlatformUtils.payCoin(this.checkedPayValue)
-      this.mineUser.socialCoin += this.checkedPayValue * 100
+      socialuniAppUserModule.userCoinNum += this.checkedPayValue * 100
     } finally {
       this.disabled = false
     }

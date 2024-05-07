@@ -48,7 +48,7 @@
         <module>socialuni-community-sdk</module>
         <module>socialuni-im-api</module>
         <module>socialuni-im-sdk</module>
-        <module>socialuni-business</module>
+        <module>socialuni-coin-sdk</module>
     </modules>
 
     <properties>
@@ -122,7 +122,7 @@
             </dependency>
             <dependency>
                 <groupId>com.socialuni.social</groupId>
-                <artifactId>socialuni-business</artifactId>
+                <artifactId>socialuni-coin-sdk</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>

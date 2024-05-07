@@ -26,6 +26,8 @@ import DomFile from "qingjs/src/model/DomFile";
 import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
 import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
 import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
+import SocialuniUserExpandService from "socialuni-user-sdk/src/logic/SocialuniUserExpandService";
+import {socialuniAppUserModule} from "socialuni-user-sdk/src/store/SocialuniAppUserModule";
 
 export default class SocialuniMsgViewService extends SocialuniViewService<any> {
     public $refs!: {
@@ -116,6 +118,7 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
         console.log(msgContent)
         console.log(123456)
         if (msgContent) {
+            await SocialuniUserExpandService.sendMsgNeedCoinCheck()
             console.log(123456)
             console.log(123)
             const newMsg = new MessageVO(msgContent, socialuniUserModule.mineUser)
@@ -134,6 +137,7 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
                 const res = await MessageAPI.sendMsgAPI(socialuniChatModule.chat.id, msgContent, msgType)
                 socialuniChatModule.chat.updateTime = res.data.createTime
                 socialuniChatModule.messages.splice(index, 1, res.data)
+                socialuniAppUserModule.userCoinNum = socialuniAppUserModule.userCoinNum - 10
             } catch (e) {
                 newMsg.readStatus = MessageStatus.Failed
             }
