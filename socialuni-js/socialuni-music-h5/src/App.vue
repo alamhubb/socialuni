@@ -1,8 +1,10 @@
 <template>
     <div class="h100p overflow-hidden flex-col bg-default">
         <nav-bar/>
-        <div class="flex-1 overflow-hidden">
-            <RouterView/>
+        <div class="flex-1 overflow-hidden row-center">
+            <div class="w1000 overflow-hidden">
+              <RouterView/>
+            </div>
         </div>
     </div>
 </template>

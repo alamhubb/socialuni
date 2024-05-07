@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -132,7 +133,7 @@ public class SocialuniUnionIdFacede {
 
     public static Integer getChatUnionIdByUuidNotNull(String uuid) {
         SocialuniUnionIdModler chatUnion = getUnionByUuidNotNull(uuid);
-        if (!chatUnion.getContentType().equals(SocialuniContentType.chat)) {
+        if (!Arrays.asList(SocialuniContentType.chat,SocialuniContentType.user).contains(chatUnion.getContentType())) {
             throw new SocialSystemException("不存在的会话");
         }
         return chatUnion.getId();
