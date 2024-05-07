@@ -3,7 +3,7 @@
     <s-user-nav-bar></s-user-nav-bar>
     <div class="flex-1 overflow-hidden row-center">
       <div class="w1000 overflow-hidden flex-row">
-        <q-nav-menu class="w150 flex-none" :menus="menus"/>
+        <q-nav-menu class="w150 flex-none br" :menus="menus"/>
         <div class="flex-1 overflow-hidden">
           <RouterView/>
         </div>
