@@ -1,4 +1,4 @@
-package com.socialuni.social.like.logic.manage;
+package com.socialuni.social.likee.logic.manage;
 
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;

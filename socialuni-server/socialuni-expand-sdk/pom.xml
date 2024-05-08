@@ -35,7 +35,7 @@
         </dependency>
         <dependency>
             <groupId>com.socialuni.social</groupId>
-            <artifactId>socialuni-like-sdk</artifactId>
+            <artifactId>socialuni-likee-sdk</artifactId>
         </dependency>
         <dependency>
             <groupId>com.socialuni.social</groupId>

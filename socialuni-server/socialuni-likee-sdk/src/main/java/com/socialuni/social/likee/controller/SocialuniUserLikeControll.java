@@ -1,4 +1,4 @@
-package com.socialuni.social.like.controller;
+package com.socialuni.social.likee.controller;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserIdQO;

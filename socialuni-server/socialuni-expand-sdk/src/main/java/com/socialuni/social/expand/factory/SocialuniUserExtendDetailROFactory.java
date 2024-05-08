@@ -7,7 +7,6 @@ import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniDistrictDO;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.like.logic.manage.SocialuniUserLikeManage;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserExtendFriendLogDo;
 import com.socialuni.social.common.sdk.model.RO.SocialuniRectangleRO;
 import com.socialuni.social.common.sdk.utils.PositionUtil;
@@ -22,10 +21,10 @@ import java.util.List;
 
 @Component
 public class SocialuniUserExtendDetailROFactory {
-    public static SocialuniUserLikeManage socialuniUserLikeManage;
+    public static SocialuniUserLikeManageHa socialuniUserLikeManage;
 
     @Resource
-    public void setSocialuniUserLikeManage(SocialuniUserLikeManage socialuniUserLikeManage) {
+    public void setSocialuniUserLikeManage(SocialuniUserLikeManageHa socialuniUserLikeManage) {
         SocialuniUserExtendDetailROFactory.socialuniUserLikeManage = socialuniUserLikeManage;
     }
 
@@ -73,8 +72,8 @@ public class SocialuniUserExtendDetailROFactory {
         if (mineUser == null) {
             socialuniUserExtendDetailRO.setHasUserLike(false);
         } else {
-            boolean hasUserLike = socialuniUserLikeManage.hasUserLike(mineUser.getUserId(), userDO.getUserId());
-            socialuniUserExtendDetailRO.setHasUserLike(hasUserLike);
+//            boolean hasUserLike = socialuniUserLikeManage.hasUserLike(mineUser.getUserId(), userDO.getUserId());
+//            socialuniUserExtendDetailRO.setHasUserLike(hasUserLike);
         }
 
         return socialuniUserExtendDetailRO;

@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>socialuni-like-sdk</artifactId>
+    <artifactId>socialuni-likee-sdk</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -32,6 +32,10 @@
         <dependency>
             <groupId>com.socialuni.social</groupId>
             <artifactId>socialuni-common-sdk</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.socialuni.social</groupId>
+            <artifactId>socialuni-im-sdk</artifactId>
         </dependency>
         <dependency>
             <groupId>com.socialuni.social</groupId>

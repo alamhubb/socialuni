@@ -1,32 +1,25 @@
-package com.socialuni.social.like.logic.service;
+package com.socialuni.social.likee.logic.domain;
 
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.user.SocialuniUserIdQO;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
-import com.socialuni.social.im.api.model.QO.message.MessageAddVO;
 import com.socialuni.social.like.dao.DO.SocialuniUserLikeDO;
 import com.socialuni.social.like.logic.manage.SocialuniUserLikeManage;
-import com.socialuni.social.sdk.im.logic.service.SocialuniMessageService;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
-import org.springframework.stereotype.Service;
+import lombok.val;
 
 import javax.annotation.Resource;
-import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.Objects;
 
-@Service
-public class SocialuniUserLikeService {
+public class SocialuniLikeDomain {
     @Resource
     SocialuniUserLikeManage socialuniUserLikeManage;
 
-    @Resource
-    private SocialuniMessageService messageService;
-
-    @Transactional
-    public SocialuniUserLikeDO likeUser(SocialuniUserIdQO addVO) {
+    public void asfaf(SocialuniUserIdQO addVO) {
         //有问题，应该关注完刷新前台用户
         Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
 
@@ -34,17 +27,24 @@ public class SocialuniUserLikeService {
         if (Objects.equals(beUserId, mineUserId)) {
             throw new SocialParamsException("不能喜欢自己哦");
         }
-        SocialuniUserLikeDO socialuniUserLikeDO = socialuniUserLikeManage.createOrUpdateLikeStatus(mineUserId, beUserId);
+        SocialuniUserLikeDO socialuniUserLikeDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(mineUserId, beUserId, SocialuniUserLikeDO.class);
 
-        sendLikeUserMsg(addVO.getUserId());
-        return socialuniUserLikeDO;
+        if (socialuniUserLikeDO == null) {
+            socialuniUserLikeDO = socialuniUserLikeManage.createUserLike(mineUserId, beUserId);
+        } else {
+            if (socialuniUserLikeDO.getStatus().equals(SocialuniCommonStatus.enable)) {
+                throw new SocialBusinessException("已经喜欢过此用户了");
+            }
+            socialuniUserLikeDO.setStatus(SocialuniCommonStatus.enable);
+        }
+
+
     }
 
-    public void sendLikeUserMsg(String receiveUserId) {
-        MessageAddVO msgAddVO = new MessageAddVO();
-        msgAddVO.setReceiveId(receiveUserId);
-        msgAddVO.setType("喜欢");
-        //msg支持自定义的展示类型
-        messageService.sendMsg(msgAddVO);
+    public SocialuniUserLikeDO updateLikeStatue(SocialuniUserLikeDO userLikeDO, String status) {
+        userLikeDO.setStatus(status);
+        userLikeDO.setUpdateTime(new Date());
+        userLikeDO = SocialuniUserContactRepositoryFacede.save(userLikeDO);
+        return userLikeDO;
     }
 }

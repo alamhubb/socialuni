@@ -42,7 +42,7 @@
         <module>socialuni-recharge-sdk</module>
         <module>socialuni-identity-sdk</module>
         <module>socialuni-follow-sdk</module>
-        <module>socialuni-like-sdk</module>
+        <module>socialuni-likee-sdk</module>
         <module>socialuni-report-sdk</module>
         <module>socialuni-admin-sdk</module>
         <module>socialuni-community-sdk</module>
@@ -207,7 +207,7 @@
             </dependency>
             <dependency>
                 <groupId>com.socialuni.social</groupId>
-                <artifactId>socialuni-like-sdk</artifactId>
+                <artifactId>socialuni-likee-sdk</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>

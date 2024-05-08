@@ -1,5 +1,4 @@
-package com.socialuni.social.like.dao.DO;
-
+package com.socialuni.social.likee.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniUserContactBaseDO;
 import lombok.Data;
