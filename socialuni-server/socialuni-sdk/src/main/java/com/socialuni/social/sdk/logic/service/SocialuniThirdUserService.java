@@ -42,12 +42,12 @@ public class SocialuniThirdUserService {
     public ResultRO<SocialLoginRO<SocialuniUserRO>> registryUser(SocialProviderLoginQO loginQO) {
         //注册只向三方开发，所以不能为自己
         Integer dataDevId = DevAccountFacade.getDevIdNotNull();
-        if (dataDevId == AdminAppConfigConst.testDevId) {
+//        if (dataDevId == AdminAppConfigConst.testDevId) {
             throw new SocialParamsException("开发者信息错误");
-        }
-        SocialLoginRO<SocialuniUserRO> socialLoginRO = socialuniUserRegistryDomain.registryUser(loginQO);
+//        }
+//        SocialLoginRO<SocialuniUserRO> socialLoginRO = socialuniUserRegistryDomain.registryUser(loginQO);
 
-        return new ResultRO<>(socialLoginRO);
+//        return new ResultRO<>(socialLoginRO);
     }
 
 

@@ -39,7 +39,7 @@ public class TencentSmsServe {
 
     public static String sendAuthCode(String phoneNum) {
         String authCode = "1111";
-        if (phoneNum.equals("11111111111") || phoneNum.equals("12222222222")) {
+        if (phoneNum.equals(SocialuniSystemConst.getSystemUserPhoneNum()) || phoneNum.equals(SocialuniSystemConst.getTestUserPhoneNum())) {
             log.info("非生产环境不发送验证码，开发环境验证码为：{}", authCode);
         } else if (SocialuniSystemConst.getIsProdEnv() && StringUtil.isNotEmpty(appKey)) {
             authCode = AuthCodeUtil.getAuthCode();

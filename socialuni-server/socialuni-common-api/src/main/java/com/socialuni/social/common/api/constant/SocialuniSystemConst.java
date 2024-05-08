@@ -1,6 +1,7 @@
 package com.socialuni.social.common.api.constant;
 
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -11,9 +12,14 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class SocialuniSystemConst {
+    @Getter
     private static String userDefaultAvatar;
     private static String tagDefaultAvatar;
-    //    private static Integer systemUserId;
+    @Getter
+    private static String systemUserPhoneNum;
+//    private static  Integer systemUserId = 1;
+    @Getter
+    public static final String testUserPhoneNum = "12222222222";
     private static String staticResourceUrl;
     private static String socialuniDevSecretKey;
     private static String socialuniServerUrl;
@@ -21,6 +27,11 @@ public class SocialuniSystemConst {
     private static String centerSocialuniId;
     public static final Integer homeTalkQueryMinAge = -500;
     public static final Integer homeTalkQueryMaxAge = 500;
+
+    @Value("${socialuni.system-user-phone-num:11111111111}")
+    public static void setSystemUserPhoneNum(String systemUserPhoneNum) {
+        SocialuniSystemConst.systemUserPhoneNum = systemUserPhoneNum;
+    }
 
     //放model合适只有创建时候才需要赋值这个
     @Value("${socialuni.user.user-default-avatar:https://cdxapp-1257733245.file.myqcloud.com/qingchi/static/uploadimgmini.png!avatar}")
@@ -57,10 +68,6 @@ public class SocialuniSystemConst {
     @Value("${socialuni.socialuni-id:#{null}}")
     public void setAppSocialuniId(String appSocialuniId) {
         SocialuniSystemConst.appSocialuniId = appSocialuniId;
-    }
-
-    public static String getUserDefaultAvatar() {
-        return userDefaultAvatar;
     }
 
 

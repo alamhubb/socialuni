@@ -92,9 +92,6 @@ public class DevAccountFacade {
 
     public static Integer getDevIdNotNull() {
         DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNotNull();
-        if (devAccountModel == null) {
-            return AdminAppConfigConst.testDevId;
-        }
         return devAccountModel.getId();
     }
 
@@ -194,13 +191,17 @@ public class DevAccountFacade {
         //先从req中获取
         DevAccountModel devAccountModel = DevAccountFacade.getDevAccountAllowNull();
         if (devAccountModel == null) {
-            SocialuniAppConfigBO socialuniAppConfigBO = socialuniAppConfigInterface.getAppConfig();
-
-            //每次启动，都用系统默认值，替换insert中的值
-            String phoneNum = socialuniAppConfigBO.getSystemUserPhoneNum();
-            devAccountModel = DevAccountFacade.findOneByPhoneNumOrderByIdAsc(phoneNum);
-//            throw new SocialBusinessException("开发者信息为空");
+            devAccountModel = getSysDevAccountNotNull();
         }
+        return devAccountModel;
+    }
+
+    public static DevAccountModel getSysDevAccountNotNull() {
+        //先从req中获取
+        //每次启动，都用系统默认值，替换insert中的值
+        String phoneNum = SocialuniSystemConst.getSystemUserPhoneNum();
+        DevAccountModel devAccountModel = DevAccountFacade.findOneByPhoneNumOrderByIdAsc(phoneNum);
+//            throw new SocialBusinessException("开发者信息为空");
         return devAccountModel;
     }
 

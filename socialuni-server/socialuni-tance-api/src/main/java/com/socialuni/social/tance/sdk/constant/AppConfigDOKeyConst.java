@@ -9,7 +9,7 @@ import java.util.List;
 @Slf4j
 public class AppConfigDOKeyConst {
     public static final String appGender = "appGender";
-    public static final String systemUserPhoneNum = "systemUserPhoneNum";
+//    public static final String systemUserPhoneNum = "systemUserPhoneNum";
 
     public static final String followTabName = "followTabName";
     public static final String homeTabName = "homeTabName";
@@ -51,7 +51,6 @@ public class AppConfigDOKeyConst {
     public static final String authCodeValidMinute = "authCodeValidMinute";
     public static final String highLimitReportCount = "highLimitReportCount";
 
-
     public static final String qq_account = "qq_account";
     public static final String wx_mp_id = "wx_mp_id";
     public static final String wx_app_id = "wx_app_id";
@@ -64,7 +63,7 @@ public class AppConfigDOKeyConst {
 
     public static final List<String> configKeys = Arrays.asList(
             appGender,
-            systemUserPhoneNum,
+//            systemUserPhoneNum,
             followTabName,
             homeTabName,
             cityTabName,
@@ -106,7 +105,6 @@ public class AppConfigDOKeyConst {
             wx_app_id,
             wx_mp_secret,
             wx_merchant_id,
-            wx_merchant_key,
             wx_merchant_key,
             mp_wx_auditing,
             mp_qq_auditing,

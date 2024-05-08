@@ -66,7 +66,7 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
         SocialuniAppConfigBO socialuniAppConfigBO = socialuniAppConfigInterface.getAppConfig();
 
         //每次启动，都用系统默认值，替换insert中的值
-        String phoneNum = socialuniAppConfigBO.getSystemUserPhoneNum();
+        String phoneNum = SocialuniSystemConst.getSystemUserPhoneNum();
 
         DevAccountModel devAccountModel = devAccountInterface.findOneByPhoneNumOrderByIdAsc(phoneNum);
 
@@ -94,8 +94,8 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
             devSocialuniIdRepository.save(devSocialuniIdDO);*/
         }
 
-        //测试渠道的账号
-        String phoneNumTest = socialuniAppConfigBO.getTestUserPhoneNum();
+        //测试渠道的账号,干嘛用的呢，方便可以往中心发帖子
+        String phoneNumTest = SocialuniSystemConst.getTestUserPhoneNum();
 
         DevAccountModel devAccountModelTest = devAccountInterface.findOneByPhoneNumOrderByIdAsc(phoneNumTest);
 
@@ -134,8 +134,6 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
 
             if (configKey.equals(AppConfigDOKeyConst.appGender)) {
                 configDO1.setValue(socialuniAppConfigBO.getAppGender());
-            } else if (configKey.equals(AppConfigDOKeyConst.systemUserPhoneNum)) {
-                configDO1.setValue(socialuniAppConfigBO.getSystemUserPhoneNum());
             } else if (configKey.equals(AppConfigDOKeyConst.followTabName)) {
                 configDO1.setValue(socialuniAppConfigBO.getFollowTabName());
             } else if (configKey.equals(AppConfigDOKeyConst.homeTabName)) {
@@ -225,6 +223,8 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
                 configDO1.setValue(socialuniAppMoreConfigBO.getMp_wx_auditing().toString());
             } else if (configKey.equals(AppConfigDOKeyConst.mp_qq_auditing)) {
                 configDO1.setValue(socialuniAppMoreConfigBO.getMp_qq_auditing().toString());
+            } else if (configKey.equals(AppConfigDOKeyConst.sysServiceReceiveRatio)) {
+                configDO1.setValue(socialuniAppMoreConfigBO.getSysServiceReceiveRatio().toString());
             }
             list.add(configDO1);
         }

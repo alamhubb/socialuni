@@ -6,6 +6,7 @@ import com.socialuni.social.tance.model.DO.AppConfigDO;
 import com.socialuni.social.tance.model.DO.AppConfigPk;
 import com.socialuni.social.tance.sdk.api.ConfigInterface;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -18,6 +19,7 @@ import java.util.Optional;
 public interface AppConfigRepository extends JpaRepository<AppConfigDO, AppConfigPk>, ConfigInterface {
     public static final Integer DEFAULT_DEV_KEY = 0;
 
+    @Cacheable(value = "getDevAppConfigs", key = "#devId")
     List<AppConfigDO> findAllByDevIdAndStatusOrderByCreateTimeDesc(Integer devId, Integer status);
 
     @Override
