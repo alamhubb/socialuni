@@ -126,12 +126,15 @@ export default class SocialuniLoginView extends Vue {
 
   async phoneNumberOnInput() {
     this.viewService.phoneNumberOnInput()
-    nextTick(() => {
-      this.$refs.loginForm.clearValidate()
-      setTimeout(() => {
-        this.$refs.password.focus()
-      }, 100)
-    })
+    if (!this.viewService.loginData.phoneNumHasError) {
+      nextTick(() => {
+        // this.$refs.loginForm.clearValidate()
+        setTimeout(() => {
+          this.$refs.password.focus()
+        }, 100)
+      })
+    }
+
   }
 }
 </script>

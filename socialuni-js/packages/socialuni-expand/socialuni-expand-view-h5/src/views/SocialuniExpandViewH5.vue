@@ -104,9 +104,9 @@
             </div>
           </template>
         </div>
-<!--        <q-scrollbar class="h100p" v-infinite-scroll="autoChooseUseLocationQueryTalks">-->
-<!--        -->
-<!--        </q-scrollbar>-->
+        <!--        <q-scrollbar class="h100p" v-infinite-scroll="autoChooseUseLocationQueryTalks">-->
+        <!--        -->
+        <!--        </q-scrollbar>-->
       </div>
     </div>
   </div>
@@ -143,14 +143,13 @@ import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
 
 @toNative
 @Component({
-  components: {QTabs,QScrollbar,SUserGenderTag,QButton,QIcon}
+  components: {QTabs, QScrollbar, SUserGenderTag, QButton, QIcon}
 })
-export default  class SocialuniExpandViewH5 extends Vue {
-  $refs: {
-  }
+export default class SocialuniExpandViewH5 extends Vue {
+  $refs: {}
 
   tabs = SocialuniUserExtendFriendsType.allTypes
-  tabsPageQueryUtil: SocialuniPageQueryUtil<SocialuniUserExtendDetailRO, SocialuniUserExtendFriendQueryQO>[] = [new SocialuniPageQueryUtil(), new SocialuniPageQueryUtil()]
+  tabsPageQueryUtil: SocialuniPageQueryUtil<SocialuniUserExtendDetailRO, SocialuniUserExtendFriendQueryQO>[] = []
   currentTabIndex = 0
 
   loadMoreText = {
@@ -172,7 +171,7 @@ export default  class SocialuniExpandViewH5 extends Vue {
   created() {
     console.log('chufale chongxinchaxun')
     console.log('chufale chongxinchaxun')
-    this.tabsPageQueryUtil = [new SocialuniPageQueryUtil(SocialuniExpandAPI.queryExtendFriendUsersAPI), new SocialuniPageQueryUtil(SocialuniExpandAPI.queryExtendFriendUsersAPI)]
+    this.tabsPageQueryUtil = this.tabs.map(() => new SocialuniPageQueryUtil(SocialuniExpandAPI.queryExtendFriendUsersAPI))
     this.initQuery()
     // onLoad((params: { followType: string }) => {
     //   if (params) {
@@ -250,7 +249,7 @@ export default  class SocialuniExpandViewH5 extends Vue {
 
 
   get curTalkTabObj() {
-    return this.tabsPageQueryUtil[this.currentTabIndex].queryQO
+    return this.tabsPageQueryUtil[this.currentTabIndex]?.queryQO
   }
 
   //同步更新粉丝和关注列表状态
