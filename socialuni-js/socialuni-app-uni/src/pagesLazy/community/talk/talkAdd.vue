@@ -129,7 +129,6 @@
 import {Component, Vue, Watch, toNative} from 'vue-facing-decorator'
 import AppMsg from 'socialuni-constant/constant/AppMsg'
 import {onUnload} from "@dcloudio/uni-app";
-import QInput from "qing-ui/src/components/QInput.vue";
 import QSidebar from "qing-ui-uni/src/components/QSidebar/QSidebar.vue";
 import QPopup from "qing-ui-uni/src/components/QPopup/QPopup.vue";
 import QButton from "qing-ui-uni/src/components/QButton/QButton.vue";
@@ -153,7 +152,6 @@ import LocationUtil from "socialuni-community-sdk/src/util/LocationUtil";
 import EnumStrVO from "socialuni-constant/constant/EnumStrVO";
 import { socialuniUserModule } from 'socialuni-user-sdk/src/store/SocialuniUserModule';
 import DistrictVO from "socialuni-api-base/src/model/DistrictVO";
-import DomFile from "socialuni-app-sdk/src/model/DomFile";
 import TagVO from "socialuni-api-base/src/model/community/tag/TagVO";
 import CosAuthRO from "socialuni-api-base/src/model/cos/CosAuthRO";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
@@ -161,13 +159,13 @@ import PlatformUtils from "socialuni-user-sdk/src/util/PlatformUtils";
 import CosService from "socialuni-app-sdk/src/util/CosService";
 import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
 import SocialCircleRO from "socialuni-api-base/src/model/community/circle/SocialCircleRO";
+import DomFile from "qingjs/src/model/DomFile";
 
 @toNative
 @Component({
   components: {
     SocialCirclePicker,
     QCityInfo,
-    QInput,
     QSidebar,
     QPopup,
     SocialTagAdd,

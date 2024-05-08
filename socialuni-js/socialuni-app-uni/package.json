@@ -65,6 +65,7 @@
     "socialuni-im-view-uni": "../packages/socialuni-im/socialuni-im-view-uni",
     "qing-scss": "../packages/qing-scss",
     "qing-ui-uni": "../packages/qing-ui/qing-ui-uni",
+    "qing-ui": "../packages/qing-ui/qing-ui",
     "axios": "^1.6.7",
     "cos-js-sdk-v5": "^1.2.18",
     "cos-wx-sdk-v5": "^0.7.11",
