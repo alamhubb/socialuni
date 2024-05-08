@@ -5,9 +5,9 @@ import com.socialuni.social.tance.entity.DevAccountEntity;
 import com.socialuni.social.tance.model.DO.AppConfigDO;
 import com.socialuni.social.tance.repository.AppConfigRepository;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
+import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.tance.sdk.constant.AppConfigDOKeyConst;
 import com.socialuni.social.common.api.model.SocialuniAppConfigBO;
-import com.socialuni.social.common.api.config.SocialuniAppConfigInterface;
 import com.socialuni.social.common.api.model.SocialuniAppMoreConfigBO;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
@@ -36,10 +36,6 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
     @Resource
     AppConfigRepository appConfigRepository;
 
-    //devId从0开始，可修改默认0的配置，开发者从1开始，0为默认值使用的
-    @Resource
-    SocialuniAppConfigInterface socialuniAppConfigInterface;
-
     @Resource
     DevAccountInterface devAccountInterface;
 
@@ -62,8 +58,6 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
             log.info(e.getMessage());
             return null;
         });
-
-        SocialuniAppConfigBO socialuniAppConfigBO = socialuniAppConfigInterface.getAppConfig();
 
         //每次启动，都用系统默认值，替换insert中的值
         String phoneNum = SocialuniSystemConst.getSystemUserPhoneNum();
@@ -124,8 +118,8 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
     private void resetDefaultAppConfigs() {
         List<AppConfigDO> list = new ArrayList<>();
 
-        SocialuniAppConfigBO socialuniAppConfigBO = socialuniAppConfigInterface.getAppConfig();
-        SocialuniAppMoreConfigBO socialuniAppMoreConfigBO = socialuniAppConfigInterface.getAppMoreConfig();
+        SocialuniAppConfigBO socialuniAppConfigBO = SocialuniAppConfig.getAppConfig();
+        SocialuniAppMoreConfigBO socialuniAppMoreConfigBO = SocialuniAppConfig.getAppMoreConfig();
 
         for (String configKey : AppConfigDOKeyConst.configKeys) {
             AppConfigDO configDO1 = new AppConfigDO();

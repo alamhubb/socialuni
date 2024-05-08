@@ -17,7 +17,7 @@ public class SocialuniSystemConst {
     private static String tagDefaultAvatar;
     @Getter
     private static String systemUserPhoneNum;
-//    private static  Integer systemUserId = 1;
+    //    private static  Integer systemUserId = 1;
     @Getter
     public static final String testUserPhoneNum = "12222222222";
     private static String staticResourceUrl;
@@ -29,7 +29,7 @@ public class SocialuniSystemConst {
     public static final Integer homeTalkQueryMaxAge = 500;
 
     @Value("${socialuni.system-user-phone-num:11111111111}")
-    public static void setSystemUserPhoneNum(String systemUserPhoneNum) {
+    public void setSystemUserPhoneNum(String systemUserPhoneNum) {
         SocialuniSystemConst.systemUserPhoneNum = systemUserPhoneNum;
     }
 

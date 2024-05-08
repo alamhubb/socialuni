@@ -1,6 +1,5 @@
 package com.socialuni.social.sdk.config;
 
-import com.socialuni.social.common.api.config.SocialuniAppConfigInterface;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -15,10 +14,10 @@ public class SocialuniTanceAppConfiguration {
         return new SocialuniAppConfig();
     }*/
 
-    @Bean
-    @ConditionalOnMissingBean(SocialuniAppConfigInterface.class)
-    public SocialuniAppConfigInterface defaultSocialuniAppConfigInterface() {
-        SocialuniAppConfigInterface socialuniAppConfigInterface = new SocialuniAppConfigInterface() {};
-        return socialuniAppConfigInterface;
-    }
+//    @Bean
+//    @ConditionalOnMissingBean(SocialuniAppConfigInterface.class)
+//    public SocialuniAppConfigInterface defaultSocialuniAppConfigInterface() {
+//        SocialuniAppConfigInterface socialuniAppConfigInterface = new SocialuniAppConfigInterface() {};
+//        return socialuniAppConfigInterface;
+//    }
 }

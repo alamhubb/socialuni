@@ -1,6 +1,5 @@
 package com.socialuni.social.tance.sdk.facade;
 
-import com.socialuni.social.common.api.config.SocialuniAppConfigInterface;
 import com.socialuni.social.common.api.constant.GenderType;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.SocialuniAppConfigBO;
@@ -171,13 +170,6 @@ public class DevAccountFacade {
             throw new SocialParamsException("开发者信息错误");
         }
         return devAccountModel;
-    }
-
-    private static SocialuniAppConfigInterface socialuniAppConfigInterface;
-
-    @Resource
-    public void setSocialuniAppConfigInterface(SocialuniAppConfigInterface socialuniAppConfigInterface) {
-        DevAccountFacade.socialuniAppConfigInterface = socialuniAppConfigInterface;
     }
 
     public static DevAccountModel getDevAccountAllowNull(String secretKey) {
