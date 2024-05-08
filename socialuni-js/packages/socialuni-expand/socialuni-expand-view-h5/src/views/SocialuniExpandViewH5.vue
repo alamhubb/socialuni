@@ -10,7 +10,7 @@
 
     <div class="flex-1 overflow-hidden">
       <div class="h100p" v-for="(item, swiperIndex) in tabsPageQueryUtil" :key="swiperIndex">
-        <q-scrollbar class="h100p" v-infinite-scroll="autoChooseUseLocationQueryTalks" :infinite-scroll-distance="400">
+        <div>
           <div v-if="!item.queryQO.listData.length" class="row-all-center h100 color-content">
             <div>暂无数据</div>
           </div>
@@ -103,9 +103,7 @@
                              :contentText="loadMoreText"></uni-load-more>
             </div>
           </template>
-
-          <div v-for="i in 100">{{i}}</div>
-        </q-scrollbar>
+        </div>
 <!--        <q-scrollbar class="h100p" v-infinite-scroll="autoChooseUseLocationQueryTalks">-->
 <!--        -->
 <!--        </q-scrollbar>-->
@@ -141,6 +139,7 @@ import SocialuniUserExpandService from "socialuni-user-sdk/src/logic/SocialuniUs
 import QScrollbar from "qing-ui-h5/src/components/QScrollbar.vue";
 import SUserGenderTag from "socialuni-user-ui/src/components/SUserGenderTag.vue";
 import QIcon from "qing-ui/src/components/QIcon.vue";
+import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
 
 @toNative
 @Component({
@@ -171,6 +170,8 @@ export default  class SocialuniExpandViewH5 extends Vue {
   }
 
   created() {
+    console.log('chufale chongxinchaxun')
+    console.log('chufale chongxinchaxun')
     this.tabsPageQueryUtil = [new SocialuniPageQueryUtil(SocialuniExpandAPI.queryExtendFriendUsersAPI), new SocialuniPageQueryUtil(SocialuniExpandAPI.queryExtendFriendUsersAPI)]
     this.initQuery()
     // onLoad((params: { followType: string }) => {
@@ -185,6 +186,9 @@ export default  class SocialuniExpandViewH5 extends Vue {
     //     this.startPulldownRefresh()
     //   })
     // })
+    CommonEventUtil.on('appScrollToLower', () => {
+      this.autoChooseUseLocationQueryTalksHandler()
+    })
   }
 
   startPulldownRefresh() {
