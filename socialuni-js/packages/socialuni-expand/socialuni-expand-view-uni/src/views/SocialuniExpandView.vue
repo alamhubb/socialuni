@@ -316,8 +316,9 @@ export default  class SocialuniExpandView extends Vue {
     })
   }
 
-  addLikeUser(user: CenterUserDetailRO) {
+  addLikeUser(user: SocialuniUserExtendDetailRO) {
     SocialuniUserLikeAPI.addUserLikeAPI(user)
+    this.toMessagePage(user)
   }
 
   async toMessagePage(user) {
