@@ -6,6 +6,7 @@ import com.socialuni.social.common.api.exception.exception.SocialParamsException
 import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
 import com.socialuni.social.common.api.model.user.SocialuniUserExtendDetailRO;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
+import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.expand.dao.repository.SocialuniUserExpandRepository;
 import com.socialuni.social.expand.factory.SocialuniUserExtendDetailROFactory;
 import com.socialuni.social.expand.logic.domain.SocialuniEditExpandDomain;
@@ -28,6 +29,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
@@ -79,10 +81,10 @@ public class SocialuniUserExpandService {
         //查询的时候更新用户的扩列信息
         SocialuniUserExtendFriendLogDOUtil.createUserExtendFriendLog();
 
-        List<Integer> pageTypeUserIds = null;
+        List<Integer> pageTypeUserIds = new ArrayList<>();
         //查询本周内上线的用户
         Date curDate = new Date();
-        long lastWeekTime = curDate.getTime() - DateTimeType.week;
+        long lastWeekTime = curDate.getTime() - DateTimeType.year;
         Date lastWeekDate = new Date(lastWeekTime);
         //赞个人主页。本周内获得赞最多的吗，就先上线一个最近的。
         if (pageType.equals(SocialuniUserExtendFriendsPageType.hot)) {
@@ -118,7 +120,7 @@ public class SocialuniUserExpandService {
 //        List<Integer> weekUserIds = socialuniUserExtendFriendLogRepository.findUserIdByUpdateTimeLessThan(lastWeekDate);
         //分页应该使用排序的表
         //查询打开了联系方式的用户
-        List<Integer> openContactIds = socialuniUserExpandRepository.findUserIdsByOpenContactInfoOrderByLastOnlineTimeDesc(queryTime);
+//        List<Integer> openContactIds = socialuniUserExpandRepository.findUserIdsByOpenContactInfoOrderByLastOnlineTimeDesc(queryTime);
         //查询用户状态不为封禁的
         List<Integer> userIds = socialuniUserRepository.findUserIdsByStatus(SocialuniUserStatus.enable);
         List<Integer> queryIds;
@@ -131,12 +133,16 @@ public class SocialuniUserExpandService {
 ////            queryIds = ListConvertUtil.intersectionMany(userIds);
 //            queryIds = userIds;
 //        }
-        queryIds = userIds;
+        queryIds = ListConvertUtil.intersection(pageTypeUserIds, userIds);
         Integer pageSize = socialuniPageQueryQO.getPageSize();
+        Integer pageNum = socialuniPageQueryQO.getPageNum();
+        if (pageNum == null || pageNum < 1) {
+            pageNum = 1;
+        }
         if (pageSize == null) {
             pageSize = 10;
         }
-        List<Integer> pageQueryIds = CollUtil.sub(queryIds, 0, pageSize);
+        List<Integer> pageQueryIds = CollUtil.sub(queryIds, (pageNum - 1) * pageSize, pageNum * pageSize);
         List<SocialuniUserDo> userDos = SocialuniUserUtil.getUsers(pageQueryIds);
 
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();

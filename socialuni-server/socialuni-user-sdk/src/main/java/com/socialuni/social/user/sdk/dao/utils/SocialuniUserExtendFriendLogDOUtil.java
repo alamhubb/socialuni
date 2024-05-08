@@ -6,14 +6,25 @@ import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
 import com.socialuni.social.common.sdk.utils.SocialuniRequestUtil;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserExtendFriendLogDo;
+import com.socialuni.social.user.sdk.repository.SocialuniUserExtendFriendLogRepository;
 import com.socialuni.social.user.sdk.utils.DistrictStoreUtils;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
+
 @Component
 @Slf4j
 public class SocialuniUserExtendFriendLogDOUtil {
+
+    private static SocialuniUserExtendFriendLogRepository socialuniUserExtendFriendLogRepository;
+
+    @Resource
+    public void setSocialuniUserExtendFriendLogRepository(SocialuniUserExtendFriendLogRepository socialuniUserExtendFriendLogRepository) {
+        SocialuniUserExtendFriendLogDOUtil.socialuniUserExtendFriendLogRepository = socialuniUserExtendFriendLogRepository;
+    }
+
     public static SocialuniUserExtendFriendLogDo createUserExtendFriendLog() {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
 
@@ -42,7 +53,7 @@ public class SocialuniUserExtendFriendLogDOUtil {
         }
 
 
-        socialuniUserExtendFriendLogDo = SocialuniUserRepositoryFacede.save(socialuniUserExtendFriendLogDo);
+        socialuniUserExtendFriendLogDo = socialuniUserExtendFriendLogRepository.save(socialuniUserExtendFriendLogDo);
 
         return socialuniUserExtendFriendLogDo;
         /*CompletableFuture.supplyAsync(() -> {

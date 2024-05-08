@@ -73,9 +73,11 @@ public class SocialuniUserExtendDetailROFactory {
         if (mineUser == null) {
             socialuniUserExtendDetailRO.setHasUserLike(false);
         } else {
-//            boolean hasUserLike = socialuniUserLikeManage.hasUserLike(mineUser.getUserId(), userDO.getUserId());
-//            socialuniUserExtendDetailRO.setHasUserLike(hasUserLike);
+            boolean hasUserLike = socialuniUserLikeManage.hasUserLike(mineUser.getUserId(), userDO.getUserId());
+            socialuniUserExtendDetailRO.setHasUserLike(hasUserLike);
         }
+
+
 
         return socialuniUserExtendDetailRO;
     }

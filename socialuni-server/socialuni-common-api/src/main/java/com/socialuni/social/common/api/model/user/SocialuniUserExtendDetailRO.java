@@ -28,6 +28,7 @@ public class SocialuniUserExtendDetailRO extends SocialuniUserRO {
     private Double distance;
 
     private boolean hasUserLike;
+    private Date updateTime;
 
     public SocialuniUserExtendDetailRO(SocialuniUserExtendDetailRO userRO) {
         super(userRO);
