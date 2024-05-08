@@ -6,12 +6,13 @@
           ref="tabs"
           :key="index"
           class="use-click flex-1"
-          @click="change(tab,index)"
+          @click="change(index)"
+          @dblclick="dbClickChange(index)"
       >
         <slot :tab="tab" :index="index">
           <div
               class="col-row-center py-sm px-sm font-14"
-              :class="[index===model?('color-blue '+activeClass):'color-gray']"> {{ tab[value] || tab}}
+              :class="[index===model?('color-blue '+activeClass):'color-gray']"> {{ tab[value] || tab }}
           </div>
         </slot>
       </div>
@@ -41,7 +42,7 @@ export default class QTabs extends Vue {
   /**
    * 当前选中的tab的索引
    */
-  @Model model: any
+  @Model() model: any
   @Prop({default: 'value'}) value: string
   @Prop() label: string
   @Prop() activeClass: string
@@ -61,13 +62,18 @@ export default class QTabs extends Vue {
    * 提前量，提前多少高度px显示到下一个
    */
 
-  @Emit('update:modelValue')
-  change(tab: any, index: number) {
-    // if (this.value) {
-    //   return tab[this.value]
-    // }
-    return index
+  change(index: number) {
+    if (index === this.model) {
+      return
+    }
+    this.$emit('update:modelValue', index)
+    this.$emit('change', index)
   }
+  dbClickChange(index: number) {
+    this.$emit('update:modelValue', index)
+    this.$emit('change', index)
+  }
+
 
   // 渲染完毕后计算高度
   mounted() {

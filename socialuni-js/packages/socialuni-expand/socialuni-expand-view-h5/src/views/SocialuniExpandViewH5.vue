@@ -1,13 +1,14 @@
 <template>
-  <div>
+  <div class="h100p flex-col">
     <q-tabs
         v-model="currentTabIndex"
         active-class="bg-white bb-blue-3"
         :tabs="tabs"
+        @change="tabsChange"
         class="flex-none bg-white"
     />
 
-    <div>
+    <div class="flex-1 overflow-hidden">
       <div class="h100p" v-for="(item, swiperIndex) in tabsPageQueryUtil" :key="swiperIndex">
         <q-scrollbar class="h100p" v-infinite-scroll="autoChooseUseLocationQueryTalks">
           <div v-if="!item.queryQO.listData.length" class="row-all-center h100 color-content">
@@ -209,6 +210,8 @@ export default  class SocialuniExpandViewH5 extends Vue {
 
   // tabs通知swiper切换
   tabsChange(index) {
+    console.log(index)
+    console.log('chufale')
     if (index === this.currentTabIndex) {
       this.startPulldownRefresh()
     } else {
