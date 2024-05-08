@@ -213,6 +213,7 @@ export default class SocialuniMessageView extends Vue {
   viewService = new SocialuniMsgViewService()
 
   created() {
+    console.log('chuale')
     //TODO 同一会话时，这里要改成onRead，不然需要刷新页面才会触发已读的标志。
     onLoad((params: MessageViewParams) => {
       this.viewService.initService(getCurrentInstance(), params)
