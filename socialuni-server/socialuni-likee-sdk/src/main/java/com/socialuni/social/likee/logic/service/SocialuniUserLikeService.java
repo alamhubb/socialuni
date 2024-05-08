@@ -1,13 +1,10 @@
 package com.socialuni.social.likee.logic.service;
 
-import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
-import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.user.SocialuniUserIdQO;
-import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.im.api.model.QO.message.MessageAddVO;
-import com.socialuni.social.like.dao.DO.SocialuniUserLikeDO;
-import com.socialuni.social.like.logic.manage.SocialuniUserLikeManage;
+import com.socialuni.social.likee.dao.DO.SocialuniUserLikeDO;
+import com.socialuni.social.likee.logic.manage.SocialuniUserLikeManageHa;
 import com.socialuni.social.sdk.im.logic.service.SocialuniMessageService;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
@@ -20,7 +17,7 @@ import java.util.Objects;
 @Service
 public class SocialuniUserLikeService {
     @Resource
-    SocialuniUserLikeManage socialuniUserLikeManage;
+    SocialuniUserLikeManageHa socialuniUserLikeManage;
 
     @Resource
     private SocialuniMessageService messageService;

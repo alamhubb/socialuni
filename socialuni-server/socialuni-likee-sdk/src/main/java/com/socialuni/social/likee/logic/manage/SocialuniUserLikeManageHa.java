@@ -3,13 +3,13 @@ package com.socialuni.social.likee.logic.manage;
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
-import com.socialuni.social.like.dao.DO.SocialuniUserLikeDO;
+import com.socialuni.social.likee.dao.DO.SocialuniUserLikeDO;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
 @Component
-public class SocialuniUserLikeManage {
+public class SocialuniUserLikeManageHa {
     public SocialuniUserLikeDO createUserLike(Integer mineUserId, Integer beUserId) {
         SocialuniUserLikeDO userLikeDO = new SocialuniUserLikeDO();
         //添加喜欢

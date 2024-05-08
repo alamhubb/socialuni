@@ -2,8 +2,8 @@ package com.socialuni.social.likee.controller;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserIdQO;
-import com.socialuni.social.like.api.SocialuniUserLikeAPI;
-import com.socialuni.social.like.logic.service.SocialuniUserLikeService;
+import com.socialuni.social.likee.api.SocialuniUserLikeAPI;
+import com.socialuni.social.likee.logic.service.SocialuniUserLikeService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

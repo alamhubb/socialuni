@@ -7,6 +7,7 @@ import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniDistrictDO;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
+import com.socialuni.social.likee.logic.manage.SocialuniUserLikeManageHa;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserExtendFriendLogDo;
 import com.socialuni.social.common.sdk.model.RO.SocialuniRectangleRO;
 import com.socialuni.social.common.sdk.utils.PositionUtil;
