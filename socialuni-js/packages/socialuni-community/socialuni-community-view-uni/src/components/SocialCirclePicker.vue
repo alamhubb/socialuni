@@ -53,7 +53,7 @@ import {Component, Emit, Vue, toNative} from 'vue-facing-decorator'
 import QPopup from "qing-ui-uni/src/components/QPopup/QPopup.vue";
 import SocialCircleRO from "socialuni-api-base/src/model/community/circle/SocialCircleRO";
 import QIcon from "qing-ui/src/components/QIcon.vue";
-import QInput from "qing-ui-uni/src/components/QInput/QInput.vue";
+import QInput from "qing-ui/src/components/QInput.vue";
 import QSidebar from "qing-ui-uni/src/components/QSidebar/QSidebar.vue";
 import {socialCircleModule} from "socialuni-community-sdk/src/store/SocialCircleModule";
 

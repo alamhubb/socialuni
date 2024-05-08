@@ -6,7 +6,7 @@ export default class SocialuniImTopLevelAwaitUtil {
 
     static async getSocialuniImPagePath(): Promise<SocialuniImPagePathInterface> {
         if (!this._socialuniImPagePath) {
-            const module = await PlatformModuleLoadUtil.dynamicImport('socialuni-im-view', 'src/constant/SocialuniImPagePath.ts')
+            const module = await PlatformModuleLoadUtil.dynamicImport('socialuni-im-view', '/src/constant/SocialuniImPagePath.ts')
             this._socialuniImPagePath = module.default
         }
         return this._socialuniImPagePath

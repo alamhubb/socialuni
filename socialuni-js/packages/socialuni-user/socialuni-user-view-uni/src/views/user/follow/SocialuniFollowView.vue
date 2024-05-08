@@ -69,7 +69,7 @@ import SocialuniPageQueryUtil from "socialuni-api-base/src/model/common/Socialun
 import CommonUtil from "qing-util/src/util/CommonUtil";
 import SocialUserFollowDetailRO from "socialuni-api-base/src/model/social/SocialUserFollowDetailRO";
 import QPullRefresh from "qing-ui-uni/src/components/QPullRefresh/QPullRefresh.vue";
-import SocialGenderTag from "../../../components/SocialGenderTag/SocialGenderTag.vue";
+import SocialGenderTag from "socialuni-user-ui/src/components/SUserGenderTag.vue";
 import FollowAPI from "socialuni-community-api/src/api/FollowAPI";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 

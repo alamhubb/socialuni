@@ -117,7 +117,7 @@ import SocialUserContentRO from "socialuni-api-base/src/model/social/SocialUserC
 import QNavbar from "qing-ui-uni/src/components/QNavbar/QNavbar.vue"
 import QIcon from "qing-ui/src/components/QIcon.vue"
 import QSearch from "qing-ui-uni/src/components/QSearch/QSearch.vue"
-import QInput from "qing-ui-uni/src/components/QInput/QInput.vue"
+import QInput from "qing-ui/src/components/QInput.vue"
 import {
   socialuniChatViewService
 } from "socialuni-im-sdk/src/logic/SocialuniChatViewService";

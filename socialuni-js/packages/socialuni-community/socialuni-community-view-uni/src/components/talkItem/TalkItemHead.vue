@@ -102,7 +102,7 @@ import UserPagePath from "socialuni-user-sdk/src/constant/UserPagePath";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
 import UserUtil from "socialuni-user-sdk/src/util/UserUtil";
-import SocialGenderTag from "socialuni-user-view-uni/src/components/SocialGenderTag/SocialGenderTag.vue";
+import SocialGenderTag from "socialuni-user-ui/src/components/SUserGenderTag.vue";
 
 @toNative
 @Component({

@@ -123,7 +123,7 @@ import QButton from "qing-ui-uni/src/components/QButton/QButton.vue";
 import QIcon from "qing-ui/src/components/QIcon.vue";
 import QPullRefresh from "qing-ui-uni/src/components/QPullRefresh/QPullRefresh.vue";
 import SocialuniFollowTag from "socialuni-community-view-uni/src/components/SocialuniFollow/SocialuniFollowTag.vue";
-import SocialGenderTag from "socialuni-user-view-uni/src/components/SocialGenderTag/SocialGenderTag.vue";
+import SocialGenderTag from "socialuni-user-ui/src/components/SUserGenderTag.vue";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import SocialuniPageQueryUtil from "socialuni-api-base/src/model/common/SocialuniPageQueryUtil";
 import CommonUtil from "qing-util/src/util/CommonUtil";
