@@ -129,7 +129,6 @@
 import {Component, Vue, Watch, toNative} from 'vue-facing-decorator'
 import AppMsg from 'socialuni-constant/constant/AppMsg'
 import {onUnload} from "@dcloudio/uni-app";
-import QInput from "qing-ui/src/components/QInput.vue";
 import QSidebar from "qing-ui-uni/src/components/QSidebar/QSidebar.vue";
 import QPopup from "qing-ui-uni/src/components/QPopup/QPopup.vue";
 import QButton from "qing-ui-uni/src/components/QButton/QButton.vue";
@@ -153,20 +152,20 @@ import LocationUtil from "socialuni-community-sdk/src/util/LocationUtil";
 import EnumStrVO from "socialuni-constant/constant/EnumStrVO";
 import { socialuniUserModule } from 'socialuni-user-sdk/src/store/SocialuniUserModule';
 import DistrictVO from "socialuni-api-base/src/model/DistrictVO";
-import DomFile from "socialuni-app-sdk/src/model/DomFile";
 import TagVO from "socialuni-api-base/src/model/community/tag/TagVO";
 import CosAuthRO from "socialuni-api-base/src/model/cos/CosAuthRO";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import PlatformUtils from "socialuni-user-sdk/src/util/PlatformUtils";
 import CosService from "socialuni-app-sdk/src/util/CosService";
 import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
 import SocialCircleRO from "socialuni-api-base/src/model/community/circle/SocialCircleRO";
+import DomFile from "qingjs/src/model/DomFile";
 
 @toNative
 @Component({
   components: {
     SocialCirclePicker,
     QCityInfo,
-    QInput,
     QSidebar,
     QPopup,
     SocialTagAdd,
@@ -337,7 +336,7 @@ export default class TalkAddView extends Vue {
   checkTag(tag: TagVO) {
     if (this.selectTags.length > 4) {
       // todo 后台还没有校验
-      SocialuniAppUtil.AlertUtil.hint('最多选择5个话题')
+      QingAppUtil.AlertUtil.hint('最多选择5个话题')
       return
     }
     let tagInTags: TagVO = this.tags.find(item => item.id === tag.id)
@@ -387,7 +386,7 @@ export default class TalkAddView extends Vue {
 
   async addTalk() {
     if (!this.user) {
-        SocialuniAppUtil.AlertUtil.error('请进行登录')
+      QingAppUtil.AlertUtil.error('请进行登录')
     }
     /*if (!this.user.school) {
       SocialuniAppUtil.AlertUtil.error('请设置您所在的学校后才可发表动态')
@@ -405,13 +404,13 @@ export default class TalkAddView extends Vue {
     this.buttonDisabled = true
     if (this.talkContent || this.showImgFiles.length) {
       if (this.talkContent && this.talkContent.length > 200) {
-        return SocialuniAppUtil.AlertUtil.hint('动态最多支持200个字，请精简动态内容')
+        return QingAppUtil.AlertUtil.hint('动态最多支持200个字，请精简动态内容')
       }
       this.addTalkHandler()
       // 申请订阅
       PlatformUtils.requestSubscribeTalk()
     } else {
-        SocialuniAppUtil.AlertUtil.hint('不能发布文字和图片均为空的动态')
+      QingAppUtil.AlertUtil.hint('不能发布文字和图片均为空的动态')
       this.buttonDisabled = false
     }
   }
@@ -492,13 +491,13 @@ export default class TalkAddView extends Vue {
     //获取cos认证信息
     this.cosAuthRO = await CosService.getCosAuthRO()
     const count = this.imgMaxSize - this.showImgFiles.length
-    const imgFiles: DomFile[] = await SocialuniAppUtil.NativeUtil.chooseImage(count)
+    const imgFiles: DomFile[] = await QingAppUtil.NativeUtil.chooseImage(count)
     this.showImgFiles.push(...imgFiles)
     if (this.cosAuthRO) {
       this.uploadImgList()
     } else {
       SocialuniAppAPI.sendErrorLogAPI(null, '用户发表动态失败，未获取上传图片所需要的认证信息')
-        SocialuniAppUtil.AlertUtil.error(AppMsg.uploadFailMsg)
+      QingAppUtil.AlertUtil.error(AppMsg.uploadFailMsg)
     }
   }
 

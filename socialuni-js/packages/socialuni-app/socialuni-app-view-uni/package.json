@@ -11,6 +11,7 @@
     "cos-js-sdk-v5": "^1.2.18",
     "qing-ui-types": "^0.1.13",
     "qing-ui-uni": "^0.1.13",
+    "qing-ui": "^0.1.13",
     "qing-util": "^0.1.13",
     "qingjs": "^0.1.13",
     "socialuni": "^0.1.13",
