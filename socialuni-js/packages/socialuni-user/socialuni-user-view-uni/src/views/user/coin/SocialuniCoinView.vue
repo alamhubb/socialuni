@@ -46,7 +46,7 @@
 <script lang="ts">
 import {Vue, Component, toNative} from 'vue-facing-decorator'
 import ShellOrderVO from "socialuni-api-base/src/model/ShellOrderVO";
-import QIcon from 'qing-ui-uni/src/components/QIcon/QIcon.vue'
+import QIcon from 'qing-ui/src/components/QIcon.vue'
 import EnumVO from "socialuni-constant/constant/EnumVO";
 import QButton from "qing-ui-uni/src/components/QButton/QButton.vue";
 import SocialuniCoinPageType from "socialuni-constant/constant/user/SocialuniCoinPageType";

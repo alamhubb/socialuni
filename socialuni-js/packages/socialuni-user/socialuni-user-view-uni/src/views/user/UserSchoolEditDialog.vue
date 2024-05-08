@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import {Component, Vue, toNative} from 'vue-facing-decorator'
-import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue";
+import QIcon from "qing-ui/src/components/QIcon.vue";
 import QPopup from "qing-ui-uni/src/components/QPopup/QPopup.vue";
 import QSearch from "qing-ui-uni/src/components/QSearch/QSearch.vue";
 import QSelect from "qing-ui-uni/src/components/QSelect/QSelect.vue";

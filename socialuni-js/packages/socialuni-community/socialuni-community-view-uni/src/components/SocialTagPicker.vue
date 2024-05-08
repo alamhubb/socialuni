@@ -49,7 +49,7 @@
 
 <script lang="ts">
 import {Component, Emit, Vue, toNative} from 'vue-facing-decorator'
-import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue";
+import QIcon from "qing-ui/src/components/QIcon.vue";
 import QInput from "qing-ui-uni/src/components/QInput/QInput.vue";
 import QSidebar from "qing-ui-uni/src/components/QSidebar/QSidebar.vue";
 import QPopup from "qing-ui-uni/src/components/QPopup/QPopup.vue";

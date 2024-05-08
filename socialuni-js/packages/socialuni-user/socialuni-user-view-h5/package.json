@@ -12,7 +12,8 @@
     "qing-util": "^0.1.13",
     "qingjs-h5": "^0.1.13",
     "socialuni-constant": "^0.1.13",
-    "socialuni-user-sdk": "^0.1.13"
+    "socialuni-user-sdk": "^0.1.13",
+    "socialuni-user-ui": "^0.1.13"
   },
   "devDependencies": {
     "typescript": "^4.7.4",

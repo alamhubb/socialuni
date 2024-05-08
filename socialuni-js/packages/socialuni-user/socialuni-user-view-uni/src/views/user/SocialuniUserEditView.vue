@@ -100,7 +100,7 @@
 
 <script lang="ts">
 import SocialuniUserInfoImg from "./SocialuniUserInfoImg.vue"
-import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue"
+import QIcon from "qing-ui/src/components/QIcon.vue"
 import QNavbar from "qing-ui-uni/src/components/QNavbar/QNavbar.vue"
 import SocialGenderTag from "../../components/SocialGenderTag/SocialGenderTag.vue"
 import {Component, Vue, toNative} from 'vue-facing-decorator'

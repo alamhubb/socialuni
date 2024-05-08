@@ -93,7 +93,7 @@
 import {Component, Emit, Model, Prop, Vue, Watch, toNative} from 'vue-facing-decorator'
 
 import QRowItem from 'qing-ui-uni/src/components/QRowItem/QRowItem.vue'
-import QIcon from 'qing-ui-uni/src/components/QIcon/QIcon.vue'
+import QIcon from 'qing-ui/src/components/QIcon.vue'
 import QNavbar from 'qing-ui-uni/src/components/QNavbar/QNavbar.vue'
 import QSearch from 'qing-ui-uni/src/components/QSearch/QSearch.vue'
 import QSidebar from 'qing-ui-uni/src/components/QSidebar/QSidebar.vue'

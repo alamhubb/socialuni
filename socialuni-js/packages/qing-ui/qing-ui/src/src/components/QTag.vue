@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import {Component, Prop, Vue, toNative} from 'vue-facing-decorator'
-import QIcon from "./QIcon/QIcon.vue";
+import QIcon from "./QIcon.vue";
 
 @toNative
 @Component({

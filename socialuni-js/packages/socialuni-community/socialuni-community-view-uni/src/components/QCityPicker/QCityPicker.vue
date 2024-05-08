@@ -45,7 +45,7 @@ import DistrictVO from "socialuni-api-base/src/model/DistrictVO";
 import {socialLocationModule} from "socialuni-community-sdk/src/store/SocialLocationModule";
 import LocationUtil from "socialuni-community-sdk/src/util/LocationUtil";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
-import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue";
+import QIcon from "qing-ui/src/components/QIcon.vue";
 
 @toNative
 @Component({

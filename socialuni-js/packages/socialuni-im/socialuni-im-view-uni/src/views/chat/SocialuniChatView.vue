@@ -115,7 +115,7 @@
 import {Component, Vue, toNative} from 'vue-facing-decorator'
 import SocialUserContentRO from "socialuni-api-base/src/model/social/SocialUserContentRO"
 import QNavbar from "qing-ui-uni/src/components/QNavbar/QNavbar.vue"
-import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue"
+import QIcon from "qing-ui/src/components/QIcon.vue"
 import QSearch from "qing-ui-uni/src/components/QSearch/QSearch.vue"
 import QInput from "qing-ui-uni/src/components/QInput/QInput.vue"
 import {

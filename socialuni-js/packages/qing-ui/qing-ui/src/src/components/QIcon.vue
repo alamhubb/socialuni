@@ -1,11 +1,11 @@
 <template>
-  <text class="use-click" :class="[
+  <span class="use-click line-h1" :class="[
       prefixClass?prefixClass:'u-iconfont',
       prefixClass?icon:'uicon-' + icon,
       addClass
       ]"
         :style="{'font-size':iconSize+'px','color':color}" @click="click">
-  </text>
+  </span>
 </template>
 
 <script lang="ts">

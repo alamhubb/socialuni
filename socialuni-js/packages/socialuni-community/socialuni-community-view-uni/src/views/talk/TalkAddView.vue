@@ -133,7 +133,7 @@ import QInput from "qing-ui-uni/src/components/QInput/QInput.vue";
 import QSidebar from "qing-ui-uni/src/components/QSidebar/QSidebar.vue";
 import QPopup from "qing-ui-uni/src/components/QPopup/QPopup.vue";
 import QButton from "qing-ui-uni/src/components/QButton/QButton.vue";
-import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue";
+import QIcon from "qing-ui/src/components/QIcon.vue";
 import QNavbar from "qing-ui-uni/src/components/QNavbar/QNavbar.vue";
 import SocialCirclePicker from "socialuni-community-view-uni/src/components/SocialCirclePicker.vue";
 import QCityInfo from "socialuni-community-view-uni/src/components/QCityInfo/QCityInfo.vue";

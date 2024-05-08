@@ -22,8 +22,8 @@
             <div class="flex-col px-smm py-sm bb" v-for="user in item.queryQO.listData" :key="user.id"
                  @click="toUserDetailVue(user)">
               <div class="row-col-center">
-                <image
-                    class="card-title-avatar bd flex-none"
+                <img
+                    class="size50 bd-radius-xs mr-10 flex-none"
                     mode="aspectFill"
                     :src="user.avatar"
                 />
@@ -36,7 +36,7 @@
                               @click.stop="openVip">
                           VIP
                         </view>
-                        <social-gender-tag class="ml-xs" :user="user"></social-gender-tag>
+                        <s-user-gender-tag  class="ml-xs" :user="user"></s-user-gender-tag>
                       </div>
                     </view>
                     <view class="row-col-center mt-xss font-12 color-content">
@@ -132,10 +132,11 @@ import SocialuniUserLikeAPI from "socialuni-expand-api/src/api/SocialuniUserLike
 import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
 import SocialuniUserExpandService from "socialuni-user-sdk/src/logic/SocialuniUserExpandService";
 import QScrollbar from "qing-ui-h5/src/components/QComponents/QScrollbar.vue";
+import SUserGenderTag from "socialuni-user-ui/src/components/SUserGenderTag.vue";
 
 @toNative
 @Component({
-  components: {QTabs,QScrollbar}
+  components: {QTabs,QScrollbar,SUserGenderTag}
 })
 export default  class SocialuniExpandViewH5 extends Vue {
   $refs: {

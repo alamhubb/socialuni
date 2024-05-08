@@ -132,7 +132,7 @@ import UserPrivacyAgreement from "./UserPrivacyAgreement.vue";
 import PhoneLoginForm from "./PhoneLoginForm.vue";
 import LoginFooterAppInfo from "./LoginFooterAppInfo.vue";
 import QButton from "qing-ui-uni/src/components/QButton/QButton.vue";
-import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue";
+import QIcon from "qing-ui/src/components/QIcon.vue";
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 import LoginService from "socialuni-user-sdk/src/logic/LoginService";

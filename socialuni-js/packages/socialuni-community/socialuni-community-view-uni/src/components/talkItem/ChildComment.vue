@@ -37,7 +37,7 @@
 <script lang="ts">
 import {Component, Prop, Vue, Watch, toNative} from 'vue-facing-decorator'
 import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
-import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue";
+import QIcon from "qing-ui/src/components/QIcon.vue";
 import CommentVO from "socialuni-api-base/src/model/comment/CommentVO";
 import ObjectUtil from "qing-util/src/util/ObjectUtil";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";

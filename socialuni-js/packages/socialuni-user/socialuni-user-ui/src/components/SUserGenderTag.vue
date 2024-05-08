@@ -18,9 +18,10 @@
 <script lang="ts">
 import {Component, Prop, Vue, toNative} from 'vue-facing-decorator'
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
-import QIcon from "qing-ui-uni/src/components/QIcon/QIcon.vue";
-import QTag from "qing-ui-uni/src/components/QTag.vue";
+import QIcon from "qing-ui/src/components/QIcon.vue";
+import QTag from "qing-ui/src/components/QTag.vue";
 import UserUtil from "socialuni-user-sdk/src/util/UserUtil";
+import SocialuniUserRO from "socialuni-api-base/src/model/user/SocialuniUserRO";
 
 @toNative
 @Component({
@@ -28,8 +29,8 @@ import UserUtil from "socialuni-user-sdk/src/util/UserUtil";
     QIcon, QTag
   }
 })
-export default class SocialGenderTag extends Vue {
-  @Prop() user: CenterUserDetailRO
+export default class SUserGenderTag extends Vue {
+  @Prop() user: SocialuniUserRO
   @Prop({default: false, type: Boolean}) border: boolean
 
   getGenderIcon(user: CenterUserDetailRO) {
