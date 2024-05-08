@@ -1,17 +1,28 @@
 <template>
-    <el-scrollbar class="overflow-x-hidden overflow-hidden">
-        <slot></slot>
-    </el-scrollbar>
+  <el-scrollbar @scroll="scrollbar" ref="scrollbar" class="overflow-x-hidden overflow-hidden">
+    <slot></slot>
+  </el-scrollbar>
 </template>
 
 <script lang="ts">
 import {Component, Vue, toNative} from 'vue-facing-decorator'
+import {ElScrollbar} from "element-plus";
 
 @toNative
 @Component({})
 export default class QScrollbar extends Vue {
+  $refs: {
+    scrollbar: ElScrollbar
+  }
 
+  scrollbar({scrollTop}) {
+    console.log(scrollTop)
+    console.log('scrollTop')
+    console.log('chufale123123')
+    console.log('chufale123123')
+  }
 }
+
 
 </script>
 <style lang="scss">

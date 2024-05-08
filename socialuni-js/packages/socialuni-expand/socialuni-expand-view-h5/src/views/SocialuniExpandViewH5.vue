@@ -10,7 +10,7 @@
 
     <div class="flex-1 overflow-hidden">
       <div class="h100p" v-for="(item, swiperIndex) in tabsPageQueryUtil" :key="swiperIndex">
-        <q-scrollbar class="h100p" v-infinite-scroll="autoChooseUseLocationQueryTalks">
+        <q-scrollbar class="h100p" v-infinite-scroll="autoChooseUseLocationQueryTalks" :infinite-scroll-distance="400">
           <div v-if="!item.queryQO.listData.length" class="row-all-center h100 color-content">
             <div>暂无数据</div>
           </div>
@@ -90,10 +90,10 @@
               </div>
               <div class="ml-60 row-col-center mt-xs">
                 <img v-for="img in imgUrls(user).slice(0,3)" class="size40 bd-radius bd mr-sm"
-                       mode="aspectFill"
-                       :data-src="img"
-                       @click.stop="previewImage(img,user)"
-                       :src="img"
+                     mode="aspectFill"
+                     :data-src="img"
+                     @click.stop="previewImage(img,user)"
+                     :src="img"
                 />
               </div>
             </div>
@@ -103,7 +103,12 @@
                              :contentText="loadMoreText"></uni-load-more>
             </div>
           </template>
+
+          <div v-for="i in 100">{{i}}</div>
         </q-scrollbar>
+<!--        <q-scrollbar class="h100p" v-infinite-scroll="autoChooseUseLocationQueryTalks">-->
+<!--        -->
+<!--        </q-scrollbar>-->
       </div>
     </div>
   </div>
@@ -228,6 +233,7 @@ export default  class SocialuniExpandViewH5 extends Vue {
   }
 
   async autoChooseUseLocationQueryTalksHandler() {
+    console.log('chufale')
     await this.tabsPageQueryUtil[this.currentTabIndex].nextPageQuery()
     for (const listDatum of this.tabsPageQueryUtil[this.currentTabIndex].queryQO.listData) {
       listDatum.getUserContactBtnDisabled = false
