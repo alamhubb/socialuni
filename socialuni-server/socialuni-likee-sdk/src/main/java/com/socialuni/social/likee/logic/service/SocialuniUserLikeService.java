@@ -33,7 +33,7 @@ public class SocialuniUserLikeService {
         }
         SocialuniUserLikeDO socialuniUserLikeDO = socialuniUserLikeManage.createOrUpdateLikeStatus(mineUserId, beUserId);
 
-        sendLikeUserMsg(addVO.getUserId());
+//        sendLikeUserMsg(addVO.getUserId());
         return socialuniUserLikeDO;
     }
 
