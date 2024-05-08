@@ -169,8 +169,6 @@ export default class SocialuniExpandViewH5 extends Vue {
   }
 
   created() {
-    console.log('chufale chongxinchaxun')
-    console.log('chufale chongxinchaxun')
     this.tabsPageQueryUtil = this.tabs.map(() => new SocialuniPageQueryUtil(SocialuniExpandAPI.queryExtendFriendUsersAPI))
     this.initQuery()
     // onLoad((params: { followType: string }) => {
@@ -185,13 +183,17 @@ export default class SocialuniExpandViewH5 extends Vue {
     //     this.startPulldownRefresh()
     //   })
     // })
-    CommonEventUtil.on('appScrollToLower', () => {
-      this.autoChooseUseLocationQueryTalksHandler()
+    CommonEventUtil.off('moneyEvent');
+    this.$nextTick(() => {
+      CommonEventUtil.on('appScrollToLower', () => {
+        console.log('触发了')
+        this.autoChooseUseLocationQueryTalks()
+      })
     })
   }
 
   startPulldownRefresh() {
-    // this.$refs.pullRefresh.startPulldownRefresh()
+    this.initQuery()
   }
 
   endPulldownRefresh() {
@@ -218,8 +220,6 @@ export default class SocialuniExpandViewH5 extends Vue {
 
   // tabs通知swiper切换
   tabsChange(index) {
-    console.log(index)
-    console.log('chufale')
     if (index === this.currentTabIndex) {
       this.startPulldownRefresh()
     } else {
@@ -236,7 +236,6 @@ export default class SocialuniExpandViewH5 extends Vue {
   }
 
   async autoChooseUseLocationQueryTalksHandler() {
-    console.log('chufale')
     await this.tabsPageQueryUtil[this.currentTabIndex].nextPageQuery()
     for (const listDatum of this.tabsPageQueryUtil[this.currentTabIndex].queryQO.listData) {
       listDatum.getUserContactBtnDisabled = false

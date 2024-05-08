@@ -52,6 +52,7 @@ export default class SocialuniPageQueryUtil<T extends SocialuniContentRO, Q> {
         try {
             const res = await this.api(this.queryQO)
             this.queryQO.listData.push(...res.data)
+            this.queryQO.pageNum++
             this.queryQO.loadMore = LoadMoreType.noMore
             if (res.data.length) {
                 this.queryQO.queryTime = res.data[res.data.length - 1].updateTime

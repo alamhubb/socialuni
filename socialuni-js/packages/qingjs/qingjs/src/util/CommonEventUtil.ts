@@ -8,6 +8,11 @@ export default class CommonEventUtil {
         this.event.emit(name, data)
     }
 
+    static off(name: string) {
+        console.log('取消监听：' + name)
+        this.event.off(name)
+    }
+
     static on(name: string, handler: (data: any) => void): void {
         console.log('订阅通知：' + name)
         this.event.on(name, async (data: any) => {
