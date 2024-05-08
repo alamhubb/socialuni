@@ -65,7 +65,7 @@ import MusicPlayerSongInfoRO from "socialuni-music-sdk/src/model/MusicPlayerSong
 import MusicPlayerSongPlayingInfoRO from "socialuni-music-sdk/src/model/MusicPlayerSongPlayingInfoRO.ts";
 import ToastUtil from "qingjs-h5/src/util/ToastUtil.ts";
 import DateUtil from "qing-util/src/util/DateUtil.ts";
-import QDialog from "qing-ui-h5/src/components/QComponents/QDialog.vue";
+import QDialog from "qing-ui-h5/src/components/QDialog.vue";
 import MusicList from "./MusicList.vue";
 
 @toNative

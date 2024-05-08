@@ -27,7 +27,7 @@
                     mode="aspectFill"
                     :src="user.avatar"
                 />
-                <view class="flex-1 row-between-center py-xs">
+                <div class="flex-1 row-between-center py-xs">
                   <div class="flex-col flex-1">
                     <view class="row-between-center">
                       <div class="row-col-center">
@@ -36,30 +36,30 @@
                               @click.stop="openVip">
                           VIP
                         </view>
-                        <s-user-gender-tag  class="ml-xs" :user="user"></s-user-gender-tag>
+                        <s-user-gender-tag class="ml-xs" :user="user"></s-user-gender-tag>
                       </div>
                     </view>
-                    <view class="row-col-center mt-xss font-12 color-content">
+                    <div class="row-col-center mt-xss font-12 color-content">
                       <!--                          {{ formatTime(user.updateTime) }}-->
                       <!--                          <div class="px-xs row-col-center">|</div>-->
                       <!--        有市区的名称就不显示省的名称-->
-                      <text v-if="!user.cityName || !user.districtName">{{ user.provinceName }}</text>
-                      <text v-if="user.cityName">
-                        <text v-if="!user.districtName">-</text>
+                      <span v-if="!user.cityName || !user.districtName">{{ user.provinceName }}</span>
+                      <span v-if="user.cityName">
+                        <span v-if="!user.districtName">-</span>
                         {{ user.cityName.substring(0, 6) }}
-                      </text>
-                      <text v-if="user.districtName">-{{ user.districtName }}</text>
+                      </span>
+                      <span v-if="user.districtName">-{{ user.districtName }}</span>
 
-                      <view class="row-col-center" v-if="user.distance|| user.distance===0">
+                      <div class="row-col-center" v-if="user.distance|| user.distance===0">
                         <div class="px-xs row-col-center">|</div>
-                        <text v-if="user.distance<0.5">{{ 0.5 }}公里</text>
-                        <text v-else-if="user.distance<1">{{ 1 }}公里</text>
-                        <text v-else-if="user.distance<5">{{ 5 }}公里</text>
-                        <text v-else>{{ numFixed1(user.distance) }}公里</text>
-                      </view>
-                    </view>
+                        <span v-if="user.distance<0.5">{{ 0.5 }}公里</span>
+                        <span v-else-if="user.distance<1">{{ 1 }}公里</span>
+                        <span v-else-if="user.distance<5">{{ 5 }}公里</span>
+                        <span v-else>{{ numFixed1(user.distance) }}公里</span>
+                      </div>
+                    </div>
                   </div>
-                  <view class="col-center flex-none">
+                  <div class="col-center flex-none">
                     <!--                      <view v-if="!isIos" class="col-center flex-none">-->
                     <div v-if="user.openContactInfo" class="use-click row-col-center">
                       <q-button light @click="copyContactInfo(user)">
@@ -84,23 +84,23 @@
                     <!--                          </q-button>-->
                     <!--                        </div>-->
                     <!--                    <socialuni-follow-tag :user="user" @change="userFollowChange"></socialuni-follow-tag>-->
-                  </view>
-                </view>
+                  </div>
+                </div>
               </div>
-              <view class="ml-60 row-col-center mt-xs">
-                <image v-for="img in imgUrls(user).slice(0,3)" class="size40 bd-radius bd mr-sm"
+              <div class="ml-60 row-col-center mt-xs">
+                <img v-for="img in imgUrls(user).slice(0,3)" class="size40 bd-radius bd mr-sm"
                        mode="aspectFill"
                        :data-src="img"
                        @click.stop="previewImage(img,user)"
                        :src="img"
-                ></image>
-              </view>
+                />
+              </div>
             </div>
-            <view class="mt-xs">
+            <div class="mt-xs">
               <uni-load-more :status="item.queryQO.loadMore"
                              @click="clickOnreachBottom"
                              :contentText="loadMoreText"></uni-load-more>
-            </view>
+            </div>
           </template>
         </q-scrollbar>
       </div>
@@ -112,7 +112,8 @@
 import {Vue, Component, Prop, Emit, toNative} from 'vue-facing-decorator'
 import SocialuniFollowType from "socialuni-constant/constant/user/SocialuniFollowType";
 import SocialUserContentRO from "socialuni-api-base/src/model/social/SocialUserContentRO";
-import QTabs from "qing-ui-h5/src/components/QComponents/QTabs/QTabs.vue";
+import QTabs from "qing-ui-h5/src/components/QTabs/QTabs.vue";
+import QButton from "qing-ui-h5/src/components/QButton.vue";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import SocialuniPageQueryUtil from "socialuni-api-base/src/model/common/SocialuniPageQueryUtil";
 import CommonUtil from "qing-util/src/util/CommonUtil";
@@ -131,12 +132,12 @@ import SocialuniExpandAPI from "socialuni-expand-api/src/api/SocialuniExpandAPI"
 import SocialuniUserLikeAPI from "socialuni-expand-api/src/api/SocialuniUserLikeAPI";
 import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
 import SocialuniUserExpandService from "socialuni-user-sdk/src/logic/SocialuniUserExpandService";
-import QScrollbar from "qing-ui-h5/src/components/QComponents/QScrollbar.vue";
+import QScrollbar from "qing-ui-h5/src/components/QScrollbar.vue";
 import SUserGenderTag from "socialuni-user-ui/src/components/SUserGenderTag.vue";
 
 @toNative
 @Component({
-  components: {QTabs,QScrollbar,SUserGenderTag}
+  components: {QTabs,QScrollbar,SUserGenderTag,QButton}
 })
 export default  class SocialuniExpandViewH5 extends Vue {
   $refs: {

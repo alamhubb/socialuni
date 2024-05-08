@@ -95,8 +95,8 @@
 
 <script lang="ts">
 import {Component, Vue, toNative} from 'vue-facing-decorator'
-import SScrollbar from "qing-ui-h5/src/components/QComponents/QScrollbar.vue";
-import QDialog from "qing-ui-h5/src/components/QComponents/QDialog.vue";
+import SScrollbar from "qing-ui-h5/src/components/QScrollbar.vue";
+import QDialog from "qing-ui-h5/src/components/QDialog.vue";
 import {Plus} from '@element-plus/icons-vue'
 import SocialuniPeiwanAPI from "socialuni-peiwan-api/src/api/SocialuniPeiwanAPI";
 import PeiwanRO from "socialuni-admin-api/src/model/peiwan/PeiwanRO";

@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import {Component, Vue, toNative, Prop} from 'vue-facing-decorator'
-import QEnumLink from 'qing-ui-h5/src/components/QComponents/QEnumLink.vue'
+import QEnumLink from 'qing-ui-h5/src/components/QEnumLink.vue'
 import CommonUtil from "qing-util/src/util/CommonUtil";
 
 @toNative

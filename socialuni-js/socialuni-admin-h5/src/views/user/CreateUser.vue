@@ -23,14 +23,14 @@
 
 <script lang="ts">
 import {Component, Vue, toNative} from 'vue-facing-decorator'
-import QDialog from "qing-ui-h5/src/components/QComponents/QDialog.vue";
-import SLabelItem from "qing-ui-h5/src/components/QComponents/QLabelItem.vue";
-import STable from "qing-ui-h5/src/components/QComponents/QTable.vue";
-import STableColumn from "qing-ui-h5/src/components/QComponents/QTableColumn/STableColumn.vue";
-import STableInput from "qing-ui-h5/src/components/QComponents/QTableInput/STableInput.vue";
-import STableSelect from "qing-ui-h5/src/components/QComponents/QTableSelect/STableSelect.vue";
+import QDialog from "qing-ui-h5/src/components/QDialog.vue";
+import SLabelItem from "qing-ui-h5/src/components/QLabelItem.vue";
+import STable from "qing-ui-h5/src/components/QTable.vue";
+import STableColumn from "qing-ui-h5/src/components/QTableColumn/STableColumn.vue";
+import STableInput from "qing-ui-h5/src/components/QTableInput/STableInput.vue";
+import STableSelect from "qing-ui-h5/src/components/QTableSelect/STableSelect.vue";
 import {Plus} from '@element-plus/icons-vue'
-import SSelect from "qing-ui-h5/src/components/QComponents/QSelect/SSelect.vue";
+import SSelect from "qing-ui-h5/src/components/QSelect/SSelect.vue";
 import ImgFileVO from "socialuni-admin-api/src/model/community/ImgFileVO";
 import SocialuniCustomUserAPI from "socialuni-peiwan-api/src/api/SocialuniCustomUserAPI";
 import ToastUtil from "@/utils/ToastUtil";

@@ -115,12 +115,12 @@
 <script lang="ts">
 import {Component, Vue, toNative} from 'vue-facing-decorator'
 import PeiwanRO from "socialuni-admin-api/src/model/peiwan/PeiwanRO";
-import QDialog from "qing-ui-h5/src/components/QComponents/QDialog.vue";
-import SLabelItem from "qing-ui-h5/src/components/QComponents/QLabelItem.vue";
-import STable from "qing-ui-h5/src/components/QComponents/QTable.vue";
-import STableColumn from "qing-ui-h5/src/components/QComponents/QTableColumn/STableColumn.vue";
-import STableInput from "qing-ui-h5/src/components/QComponents/QTableInput/STableInput.vue";
-import STableSelect from "qing-ui-h5/src/components/QComponents/QTableSelect/STableSelect.vue";
+import QDialog from "qing-ui-h5/src/components/QDialog.vue";
+import SLabelItem from "qing-ui-h5/src/components/QLabelItem.vue";
+import STable from "qing-ui-h5/src/components/QTable.vue";
+import STableColumn from "qing-ui-h5/src/components/QTableColumn/STableColumn.vue";
+import STableInput from "qing-ui-h5/src/components/QTableInput/STableInput.vue";
+import STableSelect from "qing-ui-h5/src/components/QTableSelect/STableSelect.vue";
 import {Plus} from '@element-plus/icons-vue'
 import FileUtilH5 from "qingjs-h5/src/util/FileUtilH5";
 import type DomFile from "qingjs/src/model/DomFile";
@@ -135,7 +135,7 @@ import {watch} from "vue";
 import AlertUtil from "qingjs-h5/src/util/AlertUtil";
 import WindowEventListener from "qing-util/src/util/WindowEventListener";
 import AdminPeiwanAppInitData from "socialuni-admin-api/src/model/peiwan/AdminPeiwanAppInitData";
-import SSelect from "qing-ui-h5/src/components/QComponents/QSelect/SSelect.vue";
+import SSelect from "qing-ui-h5/src/components/QSelect/SSelect.vue";
 import ImgFileVO from "socialuni-admin-api/src/model/community/ImgFileVO";
 import resData from "./resdata.json"
 

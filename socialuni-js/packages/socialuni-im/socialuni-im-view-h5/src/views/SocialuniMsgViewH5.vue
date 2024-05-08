@@ -94,7 +94,7 @@
 
 <script lang="ts">
 import {Component, Vue, toNative} from 'vue-facing-decorator';
-import SScrollbar from "qing-ui-h5/src/components/QComponents/QScrollbar.vue";
+import SScrollbar from "qing-ui-h5/src/components/QScrollbar.vue";
 import SIcon from "qing-ui/src/components/QIcon.vue";
 import SocialuniMsgViewService from "socialuni-im-sdk/src/logic/SocialuniMsgViewService";
 import MessageViewParams from "socialuni-im-view-uni/src/views/chat/MessageViewParams";
