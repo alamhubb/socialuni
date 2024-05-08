@@ -1,11 +1,11 @@
 <template>
-  <div class="h100p flex-col">
+  <div class="flex-col">
     <q-tabs
         v-model="currentTabIndex"
         active-class="bg-white bb-blue-3"
         :tabs="tabs"
         @change="tabsChange"
-        class="flex-none bg-white"
+        class="flex-none bg-white position-sticky top-0 index-xs"
     />
 
     <div class="flex-1 overflow-hidden">
