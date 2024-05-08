@@ -28,6 +28,10 @@ class SocialuniAppUserModule {
         return this.mineUserCoinInfo.coinNum
     }
 
+    set userCoinNum(value) {
+        this.mineUserCoinInfo.coinNum = value
+    }
+
     setMineUserPhoneNum(phoneNum: string) {
         this.userPhoneNum = phoneNum
     }

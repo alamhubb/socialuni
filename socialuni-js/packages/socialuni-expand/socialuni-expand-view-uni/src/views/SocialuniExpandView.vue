@@ -141,6 +141,7 @@ import SocialuniImgUtil from "socialuni-user-sdk/src/util/SocialuniImgUtil";
 import SocialuniExpandAPI from "socialuni-expand-api/src/api/SocialuniExpandAPI";
 import SocialuniUserLikeAPI from "socialuni-expand-api/src/api/SocialuniUserLikeAPI";
 import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
+import SocialuniUserExpandService from "socialuni-user-sdk/src/logic/SocialuniUserExpandService";
 
 @toNative
 @Component({

@@ -2,16 +2,16 @@
   <div class="flex-col position-relative">
     <div :class="[isXDirection?'flex-row':'flex-col']" class="overflow-auto">
       <div
-        v-for="(tab,index) in tabs"
-        ref="tabs"
-        :key="index"
-        class="use-click flex-1"
-        @click="change(tab,index)"
+          v-for="(tab,index) in tabs"
+          ref="tabs"
+          :key="index"
+          class="use-click flex-1"
+          @click="change(tab,index)"
       >
         <slot :tab="tab" :index="index">
           <div
-            class="col-row-center py-sm px-sm font-14"
-            :class="[(value?tab[value]:index)===model?('color-blue '+activeClass):'color-gray']"> {{ tab[label || value] }}
+              class="col-row-center py-sm px-sm font-14"
+              :class="[index===model?('color-blue '+activeClass):'color-gray']"> {{ tab[value] || tab}}
           </div>
         </slot>
       </div>
@@ -32,22 +32,22 @@ export default class QTabs extends Vue {
     tabs: HTMLDivElement[];
   }
 
-  @Prop({ default: TabDirection.row }) readonly direction: TabDirection
+  @Prop({default: TabDirection.row}) readonly direction: TabDirection
 
-  @Prop({ default: 100 }) readonly preShow: number
+  @Prop({default: 100}) readonly preShow: number
 
-  @Prop({ default: [] }) readonly tabs: any[]
+  @Prop({default: []}) readonly tabs: any[]
 
   /**
    * 当前选中的tab的索引
    */
   @Model model: any
-  @Prop({ default: 'value' }) value: string
+  @Prop({default: 'value'}) value: string
   @Prop() label: string
   @Prop() activeClass: string
 
-  @Prop({ default: '10' }) readonly barWidth: string
-  @Prop({ default: '10' }) readonly barHeight: string
+  @Prop({default: '10'}) readonly barWidth: string
+  @Prop({default: '10'}) readonly barHeight: string
 
   /**
    * 记录左侧每个索引对应的滚动位置
@@ -63,9 +63,9 @@ export default class QTabs extends Vue {
 
   @Emit('update:modelValue')
   change(tab: any, index: number) {
-    if (this.value) {
-      return tab[this.value]
-    }
+    // if (this.value) {
+    //   return tab[this.value]
+    // }
     return index
   }
 
