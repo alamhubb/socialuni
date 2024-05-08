@@ -1,14 +1,10 @@
 package com.socialuni.social.tance.dao.redis;
 
-import cn.hutool.extra.spring.SpringUtil;
 import com.socialuni.social.common.api.model.SocialuniAppConfigBO;
 import com.socialuni.social.common.api.model.SocialuniAppMoreConfigBO;
 import com.socialuni.social.tance.model.DO.AppConfigDO;
 import com.socialuni.social.tance.repository.AppConfigRepository;
-import com.socialuni.social.tance.sdk.api.ConfigInterface;
 import com.socialuni.social.tance.sdk.constant.AppConfigDOKeyConst;
-import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;

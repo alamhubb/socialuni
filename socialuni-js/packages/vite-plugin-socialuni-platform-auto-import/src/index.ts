@@ -30,7 +30,7 @@ function transformDynamicImportCodeCompile(code) {
                                     suffixStr = suffix.value
                                 }
                                 const src = argument.value
-                                argument.value = src + (process.env.UNI_PLATFORM ? '-uni/' : '-h5/') + suffixStr
+                                argument.value = src + (process.env.UNI_PLATFORM ? '-uni' : '-h5') + suffixStr
 
                                 path.replaceWith(
                                     types.callExpression(types.import(), [argument])
