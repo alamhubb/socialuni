@@ -77,7 +77,7 @@
                             私信
                           </q-button>
                           <q-button v-else text @click="addLikeUser(user)">
-                            <q-icon prefix="uni-icons" icon="uniui-heart" size="22"></q-icon>
+                            <q-icon icon="mdi-heart-outline" size="22"></q-icon>
                           </q-button>
                         </div>
 

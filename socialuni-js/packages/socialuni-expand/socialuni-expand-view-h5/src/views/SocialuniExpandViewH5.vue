@@ -9,7 +9,7 @@
 
     <div>
       <div class="h100p" v-for="(item, swiperIndex) in tabsPageQueryUtil" :key="swiperIndex">
-        <q-scrollbar v-infinite-scroll="autoChooseUseLocationQueryTalks">
+        <q-scrollbar class="h100p" v-infinite-scroll="autoChooseUseLocationQueryTalks">
           <div v-if="!item.queryQO.listData.length" class="row-all-center h100 color-content">
             <div>暂无数据</div>
           </div>
@@ -74,7 +74,7 @@
                         私信
                       </q-button>
                       <q-button v-else text @click="addLikeUser(user)">
-                        <q-icon prefix="uni-icons" icon="uniui-heart" size="22"></q-icon>
+                        <q-icon icon="mdi-heart-outline" size="22"></q-icon>
                       </q-button>
                     </div>
 
@@ -134,10 +134,11 @@ import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModul
 import SocialuniUserExpandService from "socialuni-user-sdk/src/logic/SocialuniUserExpandService";
 import QScrollbar from "qing-ui-h5/src/components/QScrollbar.vue";
 import SUserGenderTag from "socialuni-user-ui/src/components/SUserGenderTag.vue";
+import QIcon from "qing-ui/src/components/QIcon.vue";
 
 @toNative
 @Component({
-  components: {QTabs,QScrollbar,SUserGenderTag,QButton}
+  components: {QTabs,QScrollbar,SUserGenderTag,QButton,QIcon}
 })
 export default  class SocialuniExpandViewH5 extends Vue {
   $refs: {
