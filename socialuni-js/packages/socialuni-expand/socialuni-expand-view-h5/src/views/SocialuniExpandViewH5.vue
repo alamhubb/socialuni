@@ -126,7 +126,7 @@ import SocialuniUserExtendFriendQueryQO from "socialuni-api-base/src/model/user/
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
 import NumUtil from "qing-util/src/util/NumUtil";
 import DateUtil from "qing-util/src/util/DateUtil";
-import SocialuniUserExtendDetailRO from "socialuni-api-base/src/model/social/SocialuniUserExtendDetailRO";
+import SocialuniUserExtendDetailRO from "socialuni-expand-api/src/model/SocialuniUserExtendDetailRO";
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";

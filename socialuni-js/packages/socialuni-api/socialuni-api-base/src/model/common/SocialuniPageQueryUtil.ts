@@ -20,8 +20,10 @@ export default class SocialuniPageQueryUtil<T extends SocialuniContentRO, Q> {
             this.queryQO.queryData = queryData
         }
         this.queryQO.loadMore = LoadMoreType.loading
+        this.queryQO.pageNum = 1
         try {
             const res = await this.api(this.queryQO)
+            this.queryQO.pageNum++
             this.queryQO.firstLoad = false
             this.queryQO.listData = res.data
             this.queryQO.loadMore = LoadMoreType.noMore
@@ -35,11 +37,11 @@ export default class SocialuniPageQueryUtil<T extends SocialuniContentRO, Q> {
             this.queryQO.loadMore = LoadMoreType.more
             this.queryQO.firstLoad = true
             this.queryQO.listData = []
-            throw(e)
+            throw (e)
         }
     }
 
-    async nextPageQuery(queryData?:Q) {
+    async nextPageQuery(queryData?: Q) {
         if (this.queryQO.loadMore === LoadMoreType.loading) {
             return
         }
@@ -59,7 +61,7 @@ export default class SocialuniPageQueryUtil<T extends SocialuniContentRO, Q> {
             }
         } catch (e) {
             this.queryQO.loadMore = LoadMoreType.more
-            throw(e)
+            throw (e)
         }
     }
 }
