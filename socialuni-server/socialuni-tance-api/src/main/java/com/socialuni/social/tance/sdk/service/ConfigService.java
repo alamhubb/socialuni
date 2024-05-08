@@ -1,4 +1,4 @@
-package com.socialuni.social.tance.service;
+package com.socialuni.social.tance.sdk.service;
 
 import cn.hutool.extra.spring.SpringUtil;
 import com.socialuni.social.tance.sdk.api.ConfigInterface;

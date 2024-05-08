@@ -34,6 +34,6 @@ public class SocialuniAppConfigBO {
     private Boolean mustSetSchoolCanPost = false;
 
     //todo 相关功能未实现 用户必须实名认证
-    private Boolean mustIdentityAuthCanPost = false;
+//    private Boolean mustIdentityAuthCanPost = false;
 
 }
