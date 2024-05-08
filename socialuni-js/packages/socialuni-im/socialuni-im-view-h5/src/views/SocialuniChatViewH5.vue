@@ -128,7 +128,7 @@ import SScrollbar from "qing-ui-h5/src/components/QScrollbar.vue";
 import SocialuniChatViewServiceH5 from "socialuni-im-h5-sdk/src/logic/SocialuniChatViewServiceH5";
 
 @toNative
-@Component({Components: {SScrollbar}})
+@Component({components: {SScrollbar}})
 export default class SocialuniChatViewH5 extends Vue {
 
   viewService: SocialuniChatViewServiceH5 = new SocialuniChatViewServiceH5()

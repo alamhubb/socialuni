@@ -9,7 +9,7 @@ import {Component, Vue, toNative} from 'vue-facing-decorator'
 import SocialuniMessageView from "socialuni-im-view-uni/src/views/chat/SocialuniMessageView.vue";
 
 @toNative
-@Component({Components: {SocialuniMessageView}})
+@Component({components: {SocialuniMessageView}})
 export default class MessagePage extends Vue {
   $refs: {
     message: SocialuniMessageView

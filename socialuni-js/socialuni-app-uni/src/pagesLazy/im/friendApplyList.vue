@@ -9,7 +9,7 @@ import {Component, Vue, toNative} from 'vue-facing-decorator'
 import FriendApplyListView from "socialuni-im-view-uni/src/views/chat/FriendApplyListView.vue";
 
 @toNative
-@Component({Components: {FriendApplyListView}})
+@Component({components: {FriendApplyListView}})
 export default class FriendApplyListPage extends Vue {
 
 }
