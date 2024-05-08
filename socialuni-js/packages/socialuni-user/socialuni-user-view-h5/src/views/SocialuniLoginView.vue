@@ -35,7 +35,9 @@
                 placeholder="请输入密码"
                 type="password"
                 :maxlength="16"
+                @input="passwordInput"
                 clearable
+                @keyup.enter.native="passwordEntry"
             >
             </el-input>
           </div>
@@ -116,12 +118,27 @@ export default class SocialuniLoginView extends Vue {
   $refs: {
     loginForm: any
     password: any
+    authCode: any
   }
 
   viewService: SocialuniLoginViewService = new SocialuniLoginViewService()
 
   created() {
     this.viewService.initService(getCurrentInstance())
+  }
+
+  passwordEntry() {
+    if (this.viewService.loginData.phoneNumRegistered) {
+      this.viewService.handleLogin()
+    } else {
+      this.$refs.authCode.focus()
+    }
+  }
+
+  passwordInput() {
+    this.$nextTick(() => {
+      this.$refs.loginForm.clearValidate()
+    })
   }
 
   async phoneNumberOnInput() {
