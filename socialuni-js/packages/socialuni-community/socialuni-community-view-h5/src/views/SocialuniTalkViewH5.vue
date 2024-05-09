@@ -95,7 +95,7 @@ import {getCurrentInstance} from "vue";
     TalkSwipers
   }
 })
-export default class TalkView extends Vue {
+export default class SocialuniTalkViewH5 extends Vue {
   public $refs!: {
     tabsTalk: TabsTalk;
     cityPicker: QCityPicker
