@@ -205,7 +205,7 @@ export default class SocialuniExpandViewH5 extends Vue {
     const queryData = new SocialuniUserExtendFriendQueryQO(this.tabs[this.currentTabIndex]);
     await this.tabsPageQueryUtil[this.currentTabIndex].initQuery(queryData)
     for (const listDatum of this.tabsPageQueryUtil[this.currentTabIndex].queryQO.listData) {
-      listDatum.getUserContactBtnDisabled = false
+      // listDatum.getUserContactBtnDisabled = false
     }
     this.endPulldownRefresh()
   }
@@ -238,7 +238,7 @@ export default class SocialuniExpandViewH5 extends Vue {
   async autoChooseUseLocationQueryTalksHandler() {
     await this.tabsPageQueryUtil[this.currentTabIndex].nextPageQuery()
     for (const listDatum of this.tabsPageQueryUtil[this.currentTabIndex].queryQO.listData) {
-      listDatum.getUserContactBtnDisabled = false
+      // listDatum.getUserContactBtnDisabled = false
     }
   }
 
@@ -256,7 +256,7 @@ export default class SocialuniExpandViewH5 extends Vue {
     for (const socialuniPageQueryUtil of this.tabsPageQueryUtil) {
       for (const listDatum of socialuniPageQueryUtil.queryQO.listData) {
         if (listDatum.id === user.id) {
-          listDatum.hasFollowed = user.hasFollowed
+          // listDatum.hasFollowed = user.hasFollowed
         }
       }
     }
@@ -319,7 +319,7 @@ export default class SocialuniExpandViewH5 extends Vue {
     })
   }
 
-  addLikeUser(user: CenterUserDetailRO) {
+  addLikeUser(user: SocialuniUserExtendDetailRO) {
     SocialuniUserLikeAPI.addUserLikeAPI(user)
   }
 

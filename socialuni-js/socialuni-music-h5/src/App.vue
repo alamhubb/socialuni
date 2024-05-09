@@ -2,7 +2,7 @@
   <div class="h100p overflow-hidden flex-col bg-default">
     <s-user-nav-bar></s-user-nav-bar>
 
-    <div class="overflow-auto row-center" v-infinite-scroll="scrollToLower" :infinite-scroll-distance="100"
+    <div class="overflow-auto row-center" v-infinite-scroll="scrollToLower"
          :infinite-scroll-delay="500" :infinite-scroll-immediate="false">
       <q-nav-menu class="w150 flex-none br position-sticky top-0" :menus="menus"/>
       <div class="w1000">
