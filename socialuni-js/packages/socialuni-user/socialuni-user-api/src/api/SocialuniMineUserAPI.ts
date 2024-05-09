@@ -33,7 +33,7 @@ export default class SocialuniMineUserAPI {
   }
 
   static addUserAvatarImgAPI(userImg: ImgAddQO) {
-    return socialuniUserRequest.post<CenterUserDetailRO>('socialuni/mineUser/addUserAvatarImg', userImg)
+    return socialuniUserRequest.post<SocialuniUserRO>('socialuni/mineUser/addUserAvatarImg', userImg)
   }
 
   static deleteUserImgAPI(userImg: ImgFileVO) {

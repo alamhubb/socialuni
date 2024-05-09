@@ -44,14 +44,14 @@
             <view class="px-lg line-height-1 col-all-center use-click"
                   @click.stop="toFollowVue(SocialuniFollowType.follow)">
               <text class="text-lg font-bold color-main row-center">
-                {{ mineUserFansDetail.followNum }}
+                {{ mineUserFansDetail?.followNum }}
               </text>
               <text class="font-12 color-content mt-xs">关注</text>
             </view>
             <view class="px-lg line-height-1 col-all-center use-click"
                   @click.stop="toFollowVue(SocialuniFollowType.fans)">
               <text class="text-lg font-bold color-main row-center">
-                {{ mineUserFansDetail.fansNum }}
+                {{ mineUserFansDetail?.fansNum }}
               </text>
               <text class="font-12 color-content mt-xs">被关注</text>
             </view>
@@ -93,8 +93,8 @@
         <view class="row-col-center mb-smm">
           <q-icon class="color-sub mr-xs" icon="mdi-school" size="12"/>
           学校名称：
-          <div v-if="mineUserExpandDetail.schoolName" @click="openSetSchoolDialog">
-            {{ mineUserExpandDetail.schoolName }}
+          <div v-if="mineUserExpandDetail?.schoolName" @click="openSetSchoolDialog">
+            {{ mineUserExpandDetail?.schoolName }}
           </div>
           <div v-else class="q-tag" @click="openSetSchoolDialog">设置大学名称</div>
         </view>

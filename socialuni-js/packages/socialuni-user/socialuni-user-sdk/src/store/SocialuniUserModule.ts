@@ -80,7 +80,7 @@ class SocialuniUserModule {
         this.setUserAndToken(null)
     }
 
-    setUser(user: SocialuniMineUserRO) {
+    setUser(user: SocialuniUserRO) {
         this.userInfo = user
         console.log(this.userInfo)
         SocialuniUserStorageUtil.set(user)
