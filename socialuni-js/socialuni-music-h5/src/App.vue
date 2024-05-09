@@ -5,14 +5,26 @@
     <!--    <div class="flex-1 overflow-hidden">-->
     <!--           :infinite-scroll-delay="500" -->
     <!--      <div class="h100p overflow-auto row-center"-->
-    <div class="flex-1 overflow-auto row-center"
+    <q-scroll class="flex-1 overflow-auto" @load="scrollToLower" :distance="200" :interval="1000">
+      <div class="row-center">
+        <q-nav-menu class="h100p w150 flex-none br position-sticky top-0" :menus="menus"/>
+        <div class="w1000">
+          <RouterView/>
+        </div>
+      </div>
+    </q-scroll>
+<!--    <div class="flex-1 overflow-auto"
          v-infinite-scroll="scrollToLower" :infinite-scroll-immediate="false" :infinite-scroll-distance="200" :infinite-scroll-delay="2000"
     >
-      <q-nav-menu class="w150 flex-none br position-sticky top-0" :menus="menus"/>
-      <div class="w1000">
-        <RouterView/>
+      <div class="mg-x-auto w1500">
+        <div class="row-center">
+          <q-nav-menu class="h100p w150 flex-none br position-sticky top-0" :menus="menus"/>
+          <div class="w1000">
+            <RouterView/>
+          </div>
+        </div>
       </div>
-    </div>
+    </div>-->
     <!--  </div>-->
     <!--    <div class="row-center overflow-auto">
           <div class="w1000 flex-row overflow-hidden">

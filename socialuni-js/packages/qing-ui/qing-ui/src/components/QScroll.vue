@@ -1,5 +1,5 @@
 <template>
-  <div ref="scroll" class="h100p" v-scroll="[loadPre, { distance: distance,interval:interval }]">
+  <div ref="scroll" v-scrolle="loadPre">
     <slot></slot>
   </div>
 </template>
@@ -11,7 +11,7 @@ import {vInfiniteScroll} from '@vueuse/components'
 @toNative
 @Component({
   directives: {
-    scroll: vInfiniteScroll
+    scrolle: vInfiniteScroll
   }
 })
 export default class QScroll extends Vue {
