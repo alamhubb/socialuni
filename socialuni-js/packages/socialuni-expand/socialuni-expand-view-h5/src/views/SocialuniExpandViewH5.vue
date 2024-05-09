@@ -139,11 +139,12 @@ import SocialuniUserExpandService from "socialuni-user-sdk/src/logic/SocialuniUs
 import QScrollbar from "qing-ui-h5/src/components/QScrollbar.vue";
 import SUserGenderTag from "socialuni-user-ui/src/components/SUserGenderTag.vue";
 import QIcon from "qing-ui/src/components/QIcon.vue";
+import QScroll from "qing-ui/src/components/QScroll.vue";
 import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
 
 @toNative
 @Component({
-  components: {QTabs, QScrollbar, SUserGenderTag, QButton, QIcon}
+  components: {QTabs, QScrollbar, SUserGenderTag, QButton, QIcon, QScroll}
 })
 export default class SocialuniExpandViewH5 extends Vue {
   $refs: {}
@@ -183,7 +184,7 @@ export default class SocialuniExpandViewH5 extends Vue {
     //     this.startPulldownRefresh()
     //   })
     // })
-    CommonEventUtil.off('moneyEvent');
+    CommonEventUtil.off('appScrollToLower');
     this.$nextTick(() => {
       CommonEventUtil.on('appScrollToLower', () => {
         console.log('触发了')

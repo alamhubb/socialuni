@@ -6,6 +6,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "@vueuse/components": "^10.9.0",
+    "@vueuse/core": "^10.9.0",
     "qing-scss": "^0.1.13",
     "qing-util": "^0.1.13",
     "qingjs": "^0.1.13",

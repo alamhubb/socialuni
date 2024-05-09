@@ -1,16 +1,23 @@
 <template>
-  <div class="flex-row">
-    <h1>This is an about 111</h1>
-    <q-button>fasdfs</q-button>
-    <div>使用qing-scss</div>
-    <div>使用qing-ui</div>
-    <div>使用socialuni</div>
+  <div style="height: 500px;overflow: auto" v-infinite-scroll="scrollToLower" :infinite-scroll-immediate="false"
+       :infinite-scroll-distance="200" :infinite-scroll-delay="2000">
+    <div v-for="i in count">{{ i}}</div>
   </div>
 </template>
 
-<style>
-</style>
-<script setup lang="ts">
-import QButton from "qing-ui-uni/src/components/QButton/QButton.vue";
-</script>
+<script lang="ts">
+import {Component, Vue, toNative} from 'vue-facing-decorator'
 
+@toNative
+@Component({})
+export default class App extends Vue {
+  count = 50
+
+  scrollToLower() {
+    console.log('gundongdao dibu le ')
+    setTimeout(() => {
+      this.count += 10
+    }, 1000)
+  }
+}
+</script>
