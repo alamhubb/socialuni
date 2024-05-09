@@ -47,7 +47,7 @@ export default class App extends Vue {
   scrollToLower() {
     console.log('gundongdao dibu le ')
     console.log(new Date().getTime())
-    CommonEventUtil.emit('appScrollToLower')
+    // CommonEventUtil.emit('appScrollToLower')
   }
 }
 </script>

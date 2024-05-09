@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 500px;overflow: auto" v-infinite-scroll="scrollToLower" :infinite-scroll-immediate="false"
+  <div style="height: 500px;overflow: auto" v-infinite-scroll="scrollToLower1" :infinite-scroll-immediate="false"
        :infinite-scroll-distance="200" :infinite-scroll-delay="2000">
     <div v-for="i in count">{{ i}}</div>
   </div>
@@ -13,11 +13,11 @@ import {Component, Vue, toNative} from 'vue-facing-decorator'
 export default class App extends Vue {
   count = 50
 
-  scrollToLower() {
+  scrollToLower1() {
     console.log('gundongdao dibu le ')
-    setTimeout(() => {
-      this.count += 10
-    }, 1000)
+    // setTimeout(() => {
+    //   this.count += 10
+    // }, 1000)
   }
 }
 </script>
