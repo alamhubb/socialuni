@@ -1,9 +1,9 @@
 <template>
-  <view class="h100p flex-col bg-white">
+  <div class="h100p flex-col bg-white">
     <q-tabs :tabs="tabs" :value="currentTabIndex" type="full" @input="tabsChange"
             class="flex-none bd-radius flex-1 mr-sm mt-sm">
       <template #default="{tab,index,value}">
-        <view class="h30 px-xs row-all-center font-md" :class="{'font-md':value===index}">{{ tab }}</view>
+        <div class="h30 px-xs row-all-center font-md" :class="{'font-md':value===index}">{{ tab }}</div>
       </template>
     </q-tabs>
     <div class="flex-1 overflow-hidden">
@@ -25,37 +25,37 @@
                       mode="aspectFill"
                       :src="user.avatar"
                   />
-                  <view class="flex-1 row-between">
-                    <view class="col-between py-xs">
-                      <view class="row-col-center">
-                        <text :class="{'color-red':user.vipFlag}">{{ user.nickname }}</text>
-                        <view v-if="user.vipFlag" class="ml-5px cu-tag bg-orange radius sm"
+                  <div class="flex-1 row-between">
+                    <div class="col-between py-xs">
+                      <div class="row-col-center">
+                        <span :class="{'color-red':user.vipFlag}">{{ user.nickname }}</span>
+                        <div v-if="user.vipFlag" class="ml-5px cu-tag bg-orange radius sm"
                               @click.stop="openVip">
                           VIP
-                        </view>
+                        </div>
                         <social-gender-tag class="ml-xs" :user="user"></social-gender-tag>
-                      </view>
-                      <view class="color-content mt-xs">
+                      </div>
+                      <div class="color-content mt-xs">
                         粉丝：{{ user.fansNum }}
-                      </view>
-                    </view>
-                    <view class="col-center">
+                      </div>
+                    </div>
+                    <div class="col-center">
                       <socialuni-follow-tag :user="user" @change="userFollowChange"></socialuni-follow-tag>
-                    </view>
-                  </view>
+                    </div>
+                  </div>
                 </div>
-                <view class="mt-xs">
+                <div class="mt-xs">
                   <uni-load-more :status="item.queryQO.loadMore"
                                  @click="clickOnreachBottom"
                                  :contentText="loadMoreText"></uni-load-more>
-                </view>
+                </div>
               </template>
             </scroll-view>
           </swiper-item>
         </swiper>
       </q-pull-refresh>
     </div>
-  </view>
+  </div>
 </template>
 
 <script lang="ts">

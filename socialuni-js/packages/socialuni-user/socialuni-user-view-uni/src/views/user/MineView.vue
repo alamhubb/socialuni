@@ -1,13 +1,13 @@
 <template>
-  <view class="h100p">
-    <view v-if="mineUser" class="bg-default h100p flex-col">
+  <div class="h100p">
+    <div v-if="mineUser" class="bg-default h100p flex-col">
       <div class="bg-theme-gradual px-smm pb-smm pt-100">
         <div class="row-end-center">
           <uni-icons type="compose" size="24" class="use-click" @click="toEditUserInfo"></uni-icons>
           <q-icon class="ml" icon="setting" size="20" @click="showMoreListAction"></q-icon>
         </div>
         <slot name="baseInfo" :mine="mineUser">
-          <view class="row-between mt">
+          <div class="row-between mt">
             <slot name="baseInfoLeft" :mine="mineUser">
               <div class="row-col-center">
                 <image
@@ -16,97 +16,97 @@
                     :src="mineUser.avatar"
                     @click="moreAction"
                 />
-                <view class="flex-col">
-                  <view class="text-md font-bold" :class="{'color-red':mineUser.vipFlag}">
+                <div class="flex-col">
+                  <div class="text-md font-bold" :class="{'color-red':mineUser.vipFlag}">
                     {{ mineUser.nickname }}
-                  </view>
-                  <view class="flex-row">
+                  </div>
+                  <div class="flex-row">
                     <social-gender-tag class="mt-sm" :user="mineUser" border></social-gender-tag>
-                    <!--                <view v-if="userProp.vipFlag" class="cu-tag bg-red radius" @click="openVip">VIP</view>
-                                    <view v-else class="cu-tag bg-grey radius" @click="openVip">VIP</view>-->
-                  </view>
-                </view>
+                    <!--                <div v-if="userProp.vipFlag" class="cu-tag bg-red radius" @click="openVip">VIP</div>
+                                    <div v-else class="cu-tag bg-grey radius" @click="openVip">VIP</div>-->
+                  </div>
+                </div>
               </div>
             </slot>
             <slot name="baseInfoRight" :mine="mineUser">
-              <view class="row-col-center font-12 use-click" @click="toMineUserDetailPage">
+              <div class="row-col-center font-12 use-click" @click="toMineUserDetailPage">
                 <!--          <q-button @click="toEditUserInfo" theme light round>-->
                 <div class="mt-1">空间</div>
                 <q-icon icon="arrow-right" class="ml-nn" size="12"></q-icon>
                 <!--          </q-button>-->
-              </view>
+              </div>
             </slot>
-          </view>
+          </div>
         </slot>
 
-        <view class="row-between-center mt py-xs pr-xs">
-          <view class="flex-row flex-1 row-around">
-            <view class="px-lg line-height-1 col-all-center use-click"
+        <div class="row-between-center mt py-xs pr-xs">
+          <div class="flex-row flex-1 row-around">
+            <div class="px-lg line-height-1 col-all-center use-click"
                   @click.stop="toFollowVue(SocialuniFollowType.follow)">
-              <text class="text-lg font-bold color-main row-center">
+              <span class="text-lg font-bold color-main row-center">
                 {{ mineUserFansDetail?.followNum }}
-              </text>
-              <text class="font-12 color-content mt-xs">关注</text>
-            </view>
-            <view class="px-lg line-height-1 col-all-center use-click"
+              </span>
+              <span class="font-12 color-content mt-xs">关注</span>
+            </div>
+            <div class="px-lg line-height-1 col-all-center use-click"
                   @click.stop="toFollowVue(SocialuniFollowType.fans)">
-              <text class="text-lg font-bold color-main row-center">
+              <span class="text-lg font-bold color-main row-center">
                 {{ mineUserFansDetail?.fansNum }}
-              </text>
-              <text class="font-12 color-content mt-xs">被关注</text>
-            </view>
-          </view>
-        </view>
+              </span>
+              <span class="font-12 color-content mt-xs">被关注</span>
+            </div>
+          </div>
+        </div>
 
-        <!--      <view class="mr">
+        <!--      <div class="mr">
                 <q-icon icon="setting" size="26" @click="showMoreListAction"></q-icon>
-              </view>-->
+              </div>-->
 
 
         <!--      <div class="h200">123</div>-->
       </div>
 
       <div class="bg-white px-sm bd-radius-10 elevation-4 mx-sm">
-        <view class="row-col-center my">
+        <div class="row-col-center my">
           <q-icon icon="map-fill" class="color-sub mr-mn" size="12"/>
           地区：{{ mineUser.city || '' }}
-        </view>
+        </div>
 
-        <view class="mb">
+        <div class="mb">
           <div class="row-col-center">
             <q-icon class="color-sub mr-xs" icon="mdi-cellphone-android" size="12"/>
             手机号：
-            <view v-if="mineUserPhoneNum" class="row-col-center">
+            <div v-if="mineUserPhoneNum" class="row-col-center">
               {{ mineUserPhoneNum }}
-              <view class="ml-10 sm cu-tag bg-white bd-gray radius">
+              <div class="ml-10 sm cu-tag bg-white bd-gray radius">
                 已绑定
-              </view>
-            </view>
-            <view v-else class="row-col-center">
+              </div>
+            </div>
+            <div v-else class="row-col-center">
               <button class="ml-xs q-tag bg-click"
                       @click="toPhonePage">绑定手机号
               </button>
-            </view>
+            </div>
           </div>
-        </view>
+        </div>
 
-        <view class="row-col-center mb-smm">
+        <div class="row-col-center mb-smm">
           <q-icon class="color-sub mr-xs" icon="mdi-school" size="12"/>
           学校名称：
           <div v-if="mineUserExpandDetail?.schoolName" @click="openSetSchoolDialog">
             {{ mineUserExpandDetail?.schoolName }}
           </div>
           <div v-else class="q-tag" @click="openSetSchoolDialog">设置大学名称</div>
-        </view>
+        </div>
 
-        <!--        <view class="row-col-center mb-smm">
+        <!--        <div class="row-col-center mb-smm">
                   <q-icon class="color-sub mr-xs" prefix="uni-icons" icon="uniui-chat" size="14"/>
                   联系方式：
                   <div v-if="mineUser.contactInfo" @click="openSetSchoolDialog">
                     {{ mineUser.contactInfo }}
                   </div>
                   <div v-else class="q-tag" @click="openSetSchoolDialog">设置联系方式</div>
-                </view>-->
+                </div>-->
 
         <!--                <div class="row-col-center mb-smm">-->
         <!--                    <q-icon class="color-sub mr-xs" prefix="uni-icons" icon="uniui-chat" size="14"/>-->
@@ -137,46 +137,46 @@
       <socialuni-user-info-img class="mt-sm" :user="mineUser"></socialuni-user-info-img>
 
       <q-popup ref="moreActionList" bottom title="清池 app">
-        <view class="flex-col h100p pb-50">
+        <div class="flex-col h100p pb-50">
           <!--                    <q-row-item>
                                 <navigator :url="messageSettingUrl" class="row-col-center flex-1">
-                                  <view class="row-col-center flex-1">
+                                  <div class="row-col-center flex-1">
                                     消息设置
-                                  </view>
+                                  </div>
                                   <q-icon icon="arrow-right" class="font-md margin-right-sm"></q-icon>
                                 </navigator>
                               </q-row-item>-->
           <!--                    <navigator :url="suggestUrl" class="q-box-between bb bg-click">
-                                  <view class="row-col-center flex-1">
+                                  <div class="row-col-center flex-1">
                                       意见反馈
-                                  </view>
+                                  </div>
                                   <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
                               </navigator>
                               <navigator :url="contactUsUrl" class="q-box-between bb bg-click">
-                                  <view class="row-col-center flex-1">
+                                  <div class="row-col-center flex-1">
                                       联系我们
-                                  </view>
+                                  </div>
                                   <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
                               </navigator>
                               <navigator :url="homeUrl" class="q-box-between bb bg-click">
-                                  <view class="row-col-center flex-1">
+                                  <div class="row-col-center flex-1">
                                       关于我们
-                                  </view>
+                                  </div>
                                   <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
                               </navigator>-->
           <q-row-item @click="destroyAccount">
-            <view class="row-col-center flex-1">
+            <div class="row-col-center flex-1">
               注销账号
-            </view>
+            </div>
             <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
           </q-row-item>
           <q-row-item @click="logout">
-            <view class="row-col-center flex-1">
+            <div class="row-col-center flex-1">
               退出登录
-            </view>
+            </div>
             <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
           </q-row-item>
-          <!--                    <view class="px-smm py-sm w100p row-wrap">
+          <!--                    <div class="px-smm py-sm w100p row-wrap">
                                   <navigator :url="userAgreementUrl" class="color-blue">
                                       《用户协议》
                                   </navigator>
@@ -186,17 +186,17 @@
                                   <navigator :url="childProtectUrl" class="color-blue">
                                       《儿童个人信息保护规则及监护人须知》
                                   </navigator>
-                              </view>-->
-        </view>
+                              </div>-->
+        </div>
       </q-popup>
 
       <user-school-edit-dialog ref="schoolEditDialog"></user-school-edit-dialog>
       <user-contact-info-edit-dialog ref="contactInfoEditDialog"></user-contact-info-edit-dialog>
-    </view>
+    </div>
 
     <!--      title="欢迎登录清池app"-->
     <login-view v-else class="h100p"></login-view>
-  </view>
+  </div>
 </template>
 
 <script lang="ts">

@@ -1,21 +1,21 @@
 <template>
-  <view class="h100vh bg-default">
+  <div class="h100vh bg-default">
     <msg-input v-if="showMsgInput">
     </msg-input>
     <q-navbar>
-      <view class="flex-row w100vw px flex-1">
-        <view class="col-center bg-click color-default flex-none" @click="goBack">
+      <div class="flex-row w100vw px flex-1">
+        <div class="col-center bg-click color-default flex-none" @click="goBack">
           <q-icon icon="arrow-left"></q-icon>
-        </view>
-        <view class="col-center bg-click color-default ml-lg flex-none" @click="goHome">
+        </div>
+        <div class="col-center bg-click color-default ml-lg flex-none" @click="goHome">
           <q-icon icon="home"></q-icon>
-        </view>
-        <view class="ml-lg font-bold text-md flex-none color-default">
+        </div>
+        <div class="ml-lg font-bold text-md flex-none color-default">
           动态详情
-        </view>
-      </view>
+        </div>
+      </div>
     </q-navbar>
-    <view class="pb-155px bg-default" v-if="talk">
+    <div class="pb-155px bg-default" v-if="talk">
       <talk-item :talk="talk" showAllComment
                  @deleteTalk="deleteTalk"
       />
@@ -39,8 +39,8 @@
       <!--  #ifdef APP-PLUS -->
       <ad class="bg-white mt-10px w100vw" adpid="1890536227"></ad>
       <!--  #endif -->
-    </view>
-  </view>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -52,7 +52,7 @@ import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
 import QIcon from "qing-ui/src/components/QIcon.vue";
 import MsgInput from "socialuni-community-view-uni/src/components/MsgInput.vue";
-import TalkItem from "socialuni-community-view-uni/src/components/talkItem/TalkItem.vue";
+import TalkItem from "socialuni-community-ui/src/components/talkItem/TalkItem.vue";
 import TalkOperate from "socialuni-community-view-uni/src/views/talk/talkOperate.vue";
 import QNavbar from "qing-ui-uni/src/components/QNavbar/QNavbar.vue";
 

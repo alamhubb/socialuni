@@ -1,10 +1,10 @@
 <template>
-  <view class="w100p">
-    <view class="w100p position-fixed nav-index" :class="navCustomClass">
+  <div class="w100p">
+    <div class="w100p position-fixed nav-index" :class="navCustomClass">
       <!--            此处为状态栏-->
-      <view class="w100p" :style="{ height: statusBarHeight + 'px' }"></view>
+      <div class="w100p" :style="{ height: statusBarHeight + 'px' }"></div>
       <!--            此处为导航栏-->
-      <view class="row-col-center px-sm" :style="[navbarInnerStyle]">
+      <div class="row-col-center px-sm" :style="[navbarInnerStyle]">
         <div @click="goBack" class="flex-none">
           <slot name="back">
             <q-icon v-if="showBack" icon="arrow-left" class="color-th mr"></q-icon>
@@ -15,13 +15,13 @@
           {{ title }}
         </div>
         <slot></slot>
-      </view>
-    </view>
+      </div>
+    </div>
 
     <!-- 解决fixed定位后导航栏塌陷的问题 -->
-    <view v-if="stance" :style="{width: '100%',height: titleHeight + 'px'}">
-    </view>
-  </view>
+    <div v-if="stance" :style="{width: '100%',height: titleHeight + 'px'}">
+    </div>
+  </div>
 </template>
 
 <script lang="ts">

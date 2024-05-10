@@ -1,7 +1,7 @@
 <template>
-  <view class="flex-col h100p bg-theme-bg">
+  <div class="flex-col h100p bg-theme-bg">
     <talk-view class="h100p"></talk-view>
-  </view>
+  </div>
 </template>
 
 <script lang="ts">

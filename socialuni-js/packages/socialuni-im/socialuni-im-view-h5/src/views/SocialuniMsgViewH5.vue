@@ -7,27 +7,27 @@
             <div class="flex-1 flex-col mr overflow-hidden">
               <div class="h44px row-end-center mb-xs">
                 {{ msg.user.nickname }}
-                <!--              <text class="text-sm" :class="[msg.user.vipFlag?'color-red':'text-gray']"
+                <!--              <span class="text-sm" :class="[msg.user.vipFlag?'color-red':'text-gray']"
                                     @click="toUserDetailVue(msg.user.id)">
                                 {{ msg.user.nickname }}
-                              </text>
+                              </span>
                               <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
                                      src="/static/img/crown.png"
                                      @click="toVipVue"></image>-->
               </div>
 
-              <view class="row-end-center"
+              <div class="row-end-center"
                     @longpress="viewService.openMessageMoreHandleDialog(msg)">
                 <!--                                    <q-icon v-if="msg.status === 3" icon="mdi-alert-circle" size="25" class="mb-nm"/>-->
                 <!--                                <message-item-content :msg="msg"></message-item-content>-->
 
                 <div class="pd-xs bg-white bd-radius"> {{ msg.content }}</div>
-              </view>
+              </div>
 
               <div class="col-all-center mt-xs">
-                <view class="date">
+                <div class="date">
                   {{ viewService.formatTime(msg.createTime) }}
-                </view>
+                </div>
               </div>
             </div>
             <img class="size50 bd-radius flex-none"
@@ -43,10 +43,10 @@
             <div class="flex-1 flex-col mr overflow-hidden">
               <div class="h44px row-col-center mb-xs">
                 {{ msg.user.nickname }}
-                <!--              <text class="text-sm" :class="[msg.user.vipFlag?'color-red':'text-gray']"
+                <!--              <span class="text-sm" :class="[msg.user.vipFlag?'color-red':'text-gray']"
                                     @click="toUserDetailVue(msg.user.id)">
                                 {{ msg.user.nickname }}
-                              </text>
+                              </span>
                               <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
                                      src="/static/img/crown.png"
                                      @click="toVipVue"></image>-->

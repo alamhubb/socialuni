@@ -1,39 +1,39 @@
 <template>
-  <view>
-    <view class="card" v-for="(notify,index) in notifies" :key="index">
-      <view class="card-title row-between" @click="toTalkDetailVue(notify.talkId)">
-        <view class="flex-row flex-1">
+  <div>
+    <div class="card" v-for="(notify,index) in notifies" :key="index">
+      <div class="card-title row-between" @click="toTalkDetailVue(notify.talkId)">
+        <div class="flex-row flex-1">
           <image class="card-title-avatar flex-none" mode="aspectFill"
                  :src="notify.avatar"></image>
-          <view class="flex-1">
-            <view :class="notify.vipFlag?'color-red':'color-blue'" class="row-col-center py-mn">
-              <text>{{ notify.nickname }}</text>
-              <view v-if="notify.vipFlag" class="ml-5px cu-tag bg-red radius sm text-sm font-bold">
+          <div class="flex-1">
+            <div :class="notify.vipFlag?'color-red':'color-blue'" class="row-col-center py-mn">
+              <text>{{ notify.nickname }}</span>
+              <div v-if="notify.vipFlag" class="ml-5px cu-tag bg-red radius sm text-sm font-bold">
                 VIP
-              </view>
-            </view>
-            <view>
+              </div>
+            </div>
+            <div>
               {{ notify.content }}
-            </view>
-            <view class="mt-5px text-gray">
+            </div>
+            <div class="mt-5px text-gray">
               {{ formatTime(notify.createTime) }}
-            </view>
-          </view>
-        </view>
+            </div>
+          </div>
+        </div>
 
-        <view class="flex-none" v-if="notify.replyImg">
+        <div class="flex-none" v-if="notify.replyImg">
           <image class="card-title-avatar size65" mode="aspectFill"
                  :src="getTalkSmallImgUrl(notify.talkUserId,notify.replyImg)">
           </image>
-        </view>
-        <view v-else class="size65 bg-grey9 font-df pl-4 row-all-center flex-none">
-          <text class="font-df text-ellipsis3">
+        </div>
+        <div v-else class="size65 bg-grey9 font-df pl-4 row-all-center flex-none">
+          <span class="font-df text-ellipsis3">
             {{ notify.replyContent }}
-          </text>
-        </view>
-      </view>
-    </view>
-  </view>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">

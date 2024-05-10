@@ -1,27 +1,27 @@
 <template>
     <q-popup ref="reportDialog" title="举报" @confirm="addReport" custom-close>
-        <view class="uni-tip">
-            <view class="uni-tip-content">
+        <div class="uni-tip">
+            <div class="uni-tip-content">
                 <radio-group class="uni-list" @change="reportTypeChange">
                     <label class="uni-list-cell flex-row uni-list-cell-pd"
                            v-for="report in reportTypes" :key="report">
-                        <view>
+                        <div>
                             <radio :id="report" :value="report" :checked="report===pornInfo"></radio>
-                        </view>
-                        <view>
+                        </div>
+                        <div>
                             <label class="ml-10" :for="report">
-                                <text>{{ report }}</text>
+                                <text>{{ report }}</span>
                             </label>
-                        </view>
+                        </div>
                     </label>
                 </radio-group>
-            </view>
-            <view class="uni-textarea bd-1 bd-radius-xs">
+            </div>
+            <div class="uni-textarea bd-1 bd-radius-xs">
             <textarea placeholder="其他违规必填，其他情况选填，可详细陈述观点" v-model.trim="reportContent"
                       :show-confirm-bar="false"
             />
-            </view>
-        </view>
+            </div>
+        </div>
     </q-popup>
 </template>
 

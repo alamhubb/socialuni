@@ -1,8 +1,8 @@
 <template>
   <div>
     <!--      手机号登录form-->
-    <view class="row-col-center">
-      <view>手机号</view>
+    <div class="row-col-center">
+      <div>手机号</div>
       <div class="flex-row flex-1 ml-smm solid-bottom">
         <!--   自动获取焦点的话app平台会有问题，打开我的页面时会弹出键盘   :focus="true"-->
         <input class="flex-1 h35px" type="number" name="input" :focus="phoneNumFocus"
@@ -17,23 +17,23 @@
                 @click="phoneNumClear"></q-icon>
       </div>
 
-      <view class="ml-smm cu-capsule radius">
-        <view class='cu-tag bg-blue'>
+      <div class="ml-smm cu-capsule radius">
+        <div class='cu-tag bg-blue'>
           +86
-        </view>
-        <view class="cu-tag line-blue">
+        </div>
+        <div class="cu-tag line-blue">
           中国大陆
-        </view>
-      </view>
-    </view>
-    <view class="h30 row-col-center">
-      <text v-if="viewService.loginData.phoneNumHasError" class="color-red">
+        </div>
+      </div>
+    </div>
+    <div class="h30 row-col-center">
+      <span v-if="viewService.loginData.phoneNumHasError" class="color-red">
         *请输入正确的手机号
-      </text>
-    </view>
+      </span>
+    </div>
 
-    <view class="row-col-center">
-      <view>密码</view>
+    <div class="row-col-center">
+      <div>密码</div>
       <div class="flex-row ml-smm solid-bottom flex-1 pl-smm">
         <!--   自动获取焦点的话app平台会有问题，打开我的页面时会弹出键盘   :focus="true"-->
         <input class="flex-1 h35px" type="password" name="input" :focus="passwordFocus"
@@ -45,15 +45,15 @@
         <q-icon v-if="viewService.loginData.password" class="text-gray" icon="close-circle" size="20"
                 @click="passwordClear"></q-icon>
       </div>
-    </view>
-    <view class="h30 row-col-center">
-      <text v-if="!viewService.loginData.phoneNumHasError && viewService.loginData.passwordHasError" class="color-red">
+    </div>
+    <div class="h30 row-col-center">
+      <span v-if="!viewService.loginData.phoneNumHasError && viewService.loginData.passwordHasError" class="color-red">
         *{{ viewService.loginData.passwordHasError }}
-      </text>
-    </view>
+      </span>
+    </div>
 
-    <view class="row-col-center" v-if="!viewService.loginData.phoneNumRegistered">
-      <view>验证码</view>
+    <div class="row-col-center" v-if="!viewService.loginData.phoneNumRegistered">
+      <div>验证码</div>
 
       <div class="flex-row ml-smm solid-bottom flex-1">
         <!--   自动获取焦点的话app平台会有问题，打开我的页面时会弹出键盘   :focus="true"-->
@@ -69,17 +69,17 @@
                                 @touchend.native.prevent="phoneNumClear"></q-icon>-->
       </div>
 
-      <view @click="sendCodeClick" class="ml-smm">
+      <div @click="sendCodeClick" class="ml-smm">
         <button type="primary" class='cu-btn bg-green' :disabled="viewService.loginData.sendAuthCodeBtnDisabled">
           {{ viewService.loginData.countDownInner ? viewService.loginData.countDown : '发送验证码' }}
         </button>
-      </view>
-    </view>
-    <view class="h30 row-col-center" v-if="!viewService.loginData.phoneNumRegistered">
-      <text v-if="viewService.loginData.authCodeHasError" class="color-red">
+      </div>
+    </div>
+    <div class="h30 row-col-center" v-if="!viewService.loginData.phoneNumRegistered">
+      <span v-if="viewService.loginData.authCodeHasError" class="color-red">
         *请输入正确的验证码
-      </text>
-    </view>
+      </span>
+    </div>
   </div>
 </template>
 

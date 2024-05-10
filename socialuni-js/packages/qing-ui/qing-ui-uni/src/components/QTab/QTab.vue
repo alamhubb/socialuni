@@ -1,7 +1,7 @@
 <template>
-  <view class="h30 font-md">
+  <div class="h30 font-md">
     <slot></slot>
-  </view>
+  </div>
 </template>
 
 <script lang="ts">

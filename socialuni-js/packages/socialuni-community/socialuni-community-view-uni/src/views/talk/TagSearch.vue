@@ -1,5 +1,5 @@
 <template>
-  <view class="h100p flex-col">
+  <div class="h100p flex-col">
     <q-navbar v-if="value">
       <q-icon class="ml-smm" icon="arrow-leftward" @click="input"></q-icon>
       <q-search class="flex-1 mx-sm bg-default">
@@ -11,82 +11,82 @@
         ></q-icon>
       </q-search>
     </q-navbar>
-    <view v-if="searchContent">
-      <view v-if="searchContent&&isAdd" class="article-row solid-bottom color-blue" @click="addTag">
+    <div v-if="searchContent">
+      <div v-if="searchContent&&isAdd" class="article-row solid-bottom color-blue" @click="addTag">
         未找到相关标签，可点击
         <q-icon icon="arrow_right_alt"></q-icon>
         此处去创建
-      </view>
-      <view v-for="tag in showTags" :key="tag.id" @click="change(tag)"
+      </div>
+      <div v-for="tag in showTags" :key="tag.id" @click="change(tag)"
             class="article-row row-between solid-bottom">
         <text>
           #{{ tag.name }}
-        </text>
-        <view v-if="tag.count" class="row-col-center">
+        </span>
+        <div v-if="tag.count" class="row-col-center">
           <q-icon addClass="color-red" icon="mdi-fire"></q-icon>
           {{ tag.count }}
-        </view>
-      </view>
-    </view>
-    <view v-else class="flex-col flex-1 overflow-hidden">
+        </div>
+      </div>
+    </div>
+    <div v-else class="flex-col flex-1 overflow-hidden">
       <div class="q-box solid-bottom">
         <div class="flex-row">
-          <text class="cuIcon-title text-green"></text>
-          <text class="text-md font-bold">历史话题</text>
+          <span class="cuIcon-title text-green"></span>
+          <span class="text-md font-bold">历史话题</span>
         </div>
         <div class="row-wrap">
           <template v-if="historyTags.length">
-            <view v-for="tag in historyTags"
+            <div v-for="tag in historyTags"
                   class="ml-xs mt-sm q-tag-theme lg round"
                   :key="tag.id"
                   @click="change(tag)">
               #{{ tag.name }}
-            </view>
+            </div>
           </template>
-          <view v-else class="pl-sm mt-sm text-md text-gray">
+          <div v-else class="pl-sm mt-sm text-md text-gray">
             空
-          </view>
+          </div>
         </div>
       </div>
 
       <q-sidebar :dataList="tagTypes" class="flex-1 flex-row overflow-hidden" :right-scroll="false">
         <template #leftRow="{item,index,current}">
-          <view class="q-sidebar-item" :class="{'q-sidebar-item-active':index === current}">
-            <view class="row-all-center flex-1">
-              <text class="uni-ellipsis">{{ item.name }}</text>
-            </view>
-          </view>
+          <div class="q-sidebar-item" :class="{'q-sidebar-item-active':index === current}">
+            <div class="row-all-center flex-1">
+              <span class="uni-ellipsis">{{ item.name }}</span>
+            </div>
+          </div>
         </template>
         <template #rightRow="{item}">
-          <view class="bg-white">
-            <view class="q-box-row">
-              <text class="cuIcon-title text-green margin-right-xs"></text>
-              <text class="font-bold">{{ item.name }}</text>
-            </view>
+          <div class="bg-white">
+            <div class="q-box-row">
+              <span class="cuIcon-title text-green margin-right-xs"></span>
+              <span class="font-bold">{{ item.name }}</span>
+            </div>
 
-            <view>
+            <div>
               <q-row-item v-for="tag in item.tags" :key="tag.id" @click="change(tag)">
-                <view class="row-col-center can-click" @click.stop="change(tag)">
+                <div class="row-col-center can-click" @click.stop="change(tag)">
                   <image class="cu-avatar radius lg flex-none"
                          :src="tag.avatar"
                   />
-                  <view class="ml-sm overflow-hidden">
-                    <view>
+                  <div class="ml-sm overflow-hidden">
+                    <div>
                       {{ tag.name }}
-                    </view>
-                    <view class="text-gray text-sm text-ellipsis">
+                    </div>
+                    <div class="text-gray text-sm text-ellipsis">
                       帖子：{{ tag.count }}
-                    </view>
-                  </view>
-                </view>
+                    </div>
+                  </div>
+                </div>
                 <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
               </q-row-item>
-            </view>
-          </view>
+            </div>
+          </div>
         </template>
       </q-sidebar>
-    </view>
-  </view>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">

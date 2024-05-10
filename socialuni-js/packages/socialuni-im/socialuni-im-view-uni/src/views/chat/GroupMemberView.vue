@@ -1,5 +1,5 @@
 <template>
-  <view class="bg-default center">
+  <div class="bg-default center">
     <q-navbar show-back :title="title">
       <div class="row-end-center flex-1">
         <q-icon icon="list-dot" size="20" @click="openMoreMenu"></q-icon>
@@ -7,20 +7,20 @@
     </q-navbar>
     <uni-grid class="grid" :column="5" :show-border="false" :square="false" @change="change">
       <uni-grid-item v-for="(groupMember ,index) in groupMemberList" :index="index" :key="index">
-        <view class="grid-item-box">
+        <div class="grid-item-box">
           <image class="size100" :src="groupMember.faceURL" mode="" />
-          <text class="text">{{groupMember.nickname}}</text>
-          <view v-if="groupMember.badge" class="grid-dot">
+          <span class="text">{{groupMember.nickname}}</span>
+          <div v-if="groupMember.badge" class="grid-dot">
             <uni-badge :text="groupMember.badge" :type="groupMember.type" />
-          </view>
-        </view>
+          </div>
+        </div>
       </uni-grid-item>
 
 
     </uni-grid>
-    <view  v-show="moreGroupMember" class="row-end-center uni-loadmore" @click="getGroupMemberList">
+    <div  v-show="moreGroupMember" class="row-end-center uni-loadmore" @click="getGroupMemberList">
       查看更多用户
-    </view>
+    </div>
 <!--    <uni-load-more :status="moreGroupMember"-->
 <!--                   @click="getGroupMemberList"-->
 <!--                   :contentText="loadMoreText"></uni-load-more>-->
@@ -48,7 +48,7 @@
     </uni-list>
 -->
 
-  </view>
+  </div>
 </template>
 
 <script lang="ts">

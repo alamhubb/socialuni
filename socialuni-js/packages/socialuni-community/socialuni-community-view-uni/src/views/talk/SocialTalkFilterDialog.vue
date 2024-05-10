@@ -9,7 +9,7 @@
               <div v-for="report in visibleGenders" :key="report.value" class="mb-sm">
                 <label>
                   <radio :value="report.value" :checked="report.value===genderTypeValue"></radio>
-                  <text class="mr-sm">{{ report.label }}</text>
+                  <span class="mr-sm">{{ report.label }}</span>
                 </label>
               </div>
             </div>

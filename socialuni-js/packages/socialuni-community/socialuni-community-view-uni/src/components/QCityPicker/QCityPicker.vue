@@ -1,39 +1,39 @@
 <template>
   <q-popup ref="cityDialog" bottom @cancel="dialogClose" @confirm="input">
     <template #headerLeft>
-      <view class="flex-row ml-sm">
-        <view class="text-black text-md font-bold">城市筛选</view>
-        <view class="row-col-center text-orange font-bold px bg-click" @click="getLocation">
+      <div class="flex-row ml-sm">
+        <div class="text-black text-md font-bold">城市筛选</div>
+        <div class="row-col-center text-orange font-bold px bg-click" @click="getLocation">
           <q-icon icon="map-fill" class="mr-nm" size="16"></q-icon>
           定位
-        </view>
-      </view>
+        </div>
+      </div>
     </template>
     <div class="row-col-center px bg-white mt-sm">
-      <view class="font-bold">
+      <div class="font-bold">
         当前选择：
-      </view>
-      <view v-if="cityValue" class="row-col-center">
+      </div>
+      <div v-if="cityValue" class="row-col-center">
         <q-icon v-if="cityValue.position" class="mr-mn" icon="map-fill" size="16"/>
-        <view class="font-bold" v-if="cityValue.provinceName">
+        <div class="font-bold" v-if="cityValue.provinceName">
           {{ cityValue.provinceName }}
-        </view>
-        <view class="font-bold" v-else>
+        </div>
+        <div class="font-bold" v-else>
           {{ cityValue.adName }}
-        </view>
-        <view v-if="cityValue.cityName" class="font-bold">
+        </div>
+        <div v-if="cityValue.cityName" class="font-bold">
           - {{ cityValue.cityName }}
-        </view>
-        <view v-if="cityValue.districtName" class="font-bold">
+        </div>
+        <div v-if="cityValue.districtName" class="font-bold">
           - {{ cityValue.districtName }}
-        </view>
-      </view>
+        </div>
+      </div>
     </div>
 
-    <view class="mt-sm h360" v-if="districts && districts.length">
+    <div class="mt-sm h360" v-if="districts && districts.length">
       <q-picker ref="citySelect" class="bg-white h100p" v-model="cityValue"
                 :dataList="districts"></q-picker>
-    </view>
+    </div>
   </q-popup>
 </template>
 

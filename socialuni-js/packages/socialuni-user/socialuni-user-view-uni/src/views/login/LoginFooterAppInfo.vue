@@ -6,10 +6,10 @@
       查看官网
     </navigator>
 
-    <view v-if="serviceWeChat" @click="copyServiceNum" class="flex-row u-type-info u-border-bottom">
+    <div v-if="serviceWeChat" @click="copyServiceNum" class="flex-row u-type-info u-border-bottom">
       客服微信：{{ serviceWeChat }}
       <q-icon icon="attach" size="15" class="ml-xs"></q-icon>
-    </view>
+    </div>
   </div>
 </template>
 

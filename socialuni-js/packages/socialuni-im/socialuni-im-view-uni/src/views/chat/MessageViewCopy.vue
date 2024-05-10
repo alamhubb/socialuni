@@ -5,15 +5,15 @@
                 <q-icon icon="list-dot" size="20" @click="openMoreMenu"></q-icon>
             </div>
         </q-navbar>
-        <!--    <view v-if="showMsgHint" class="fixed-105 row-col-center bg-orange">
-              <view class="flex-1 card-text-row">
+        <!--    <div v-if="showMsgHint" class="fixed-105 row-col-center bg-orange">
+              <div class="flex-1 card-text-row">
                 长按消息可进行举报，欢迎大家积极举报不良内容获取正义值
-              </view>
-              <view class="flex-none mr-10px">
+              </div>
+              <div class="flex-none mr-10px">
                 <q-button @click="consoleMessage">{{ scrollTop }}</q-button>
                 <q-icon icon="close-circle-fill" size="36" @click="closeShowMsgHint"></q-icon>
-              </view>
-            </view>-->
+              </div>
+            </div>-->
 
         <scroll-view scroll-y="true" class="flex-col h100p pb-60"
                      @scrolltoupper="upper"
@@ -21,37 +21,37 @@
                      :show-scrollbar="true"
                      :scroll-top="scrollTop"
         >
-            <!--    <view class="cu-chat">-->
-            <view class="w100p h100p">
-                <!--      <view v-if="chat.status === waitOpenStatus||chat.status === closeStatus" class="w100p h100p col-row-center">-->
-                <view class="mt-80px">
-                    <!--          <view class="uni-tip-content text-bold">
+            <!--    <div class="cu-chat">-->
+            <div class="w100p h100p">
+                <!--      <div v-if="chat.status === waitOpenStatus||chat.status === closeStatus" class="w100p h100p col-row-center">-->
+                <div class="mt-80px">
+                    <!--          <div class="uni-tip-content text-bold">
                                 <template v-if="chat.needPayOpen">
                                   会话未开启，为避免用户被频繁恶意骚扰，只能给关注您的和给您发过消息的用户直接发送消息
                                   &lt;!&ndash;              ，给其他用户发送消息，需要支付10贝壳开启对话&ndash;&gt;
                                 </template>
-                                <view v-else-if="chat.status === closeStatus" class="row-center">
+                                <div v-else-if="chat.status === closeStatus" class="row-center">
                                   您已关闭会话，发送消息即可再次开启对话
-                                </view>
-                                <view v-else class="row-center">
+                                </div>
+                                <div v-else class="row-center">
                                   对方关注了您，发送消息即可开启对话
-                                </view>
-                              </view>-->
+                                </div>
+                              </div>-->
 
-                    <!--<view v-if="chat.needPayOpen" class="uni-tip-group-button">
+                    <!--<div v-if="chat.needPayOpen" class="uni-tip-group-button">
                       <button class="uni-tip-button w40r" type="default" :plain="true" @click="goBack">
                         返回
                       </button>
                       <button class="uni-tip-button w40r" type="primary" @click="payOpenChat">
                         开启对话
                       </button>
-                    </view>-->
-                    <!--          <view v-for="msg in messages" :id="'m'+msg.id" :key="msg.id"
+                    </div>-->
+                    <!--          <div v-for="msg in messages" :id="'m'+msg.id" :key="msg.id"
                                     :class="[msg.type === systemMsgType?'row-center':'cu-item',msg.isMine?'self':'']">
                                 <template v-if="msg.type === systemMsgType">
-                                  <view class="cu-info round">
+                                  <div class="cu-info round">
                                     {{ msg.content }}
-                                  </view>
+                                  </div>
                                 </template>
                                 <template v-else-if="msg.isMine">
 
@@ -61,32 +61,32 @@
                                          :src="msg.user.avatar"
                                          @click="toUserDetailVue(msg.user.id)"
                                   />
-                                  <view class="flex-col w100p">
-                                    <view class="ml-20 h44 row-col-center">
+                                  <div class="flex-col w100p">
+                                    <div class="ml-20 h44 row-col-center">
                                       {{ msg.user.nickname }}
-                                      &lt;!&ndash;              <text class="text-sm" :class="[msg.user.vipFlag?'color-red':'text-gray']"
+                                      &lt;!&ndash;              <span class="text-sm" :class="[msg.user.vipFlag?'color-red':'text-gray']"
                                                           @click="toUserDetailVue(msg.user.id)">
                                                       {{ msg.user.nickname }}
-                                                    </text>
+                                                    </span>
                                                     <image v-if="msg.user.vipFlag" class="ml-6 size30 mt-10"
                                                            src="/static/img/crown.png"
                                                            @click="toVipVue"></image>&ndash;&gt;
-                                    </view>
-                                    <view class="main">
-                                      <view class="content bg-white" @longpress="openMessageMoreHandleDialog(msg)">
-                                        <text v-if="msg.status === 3"> 发送失败</text>
+                                    </div>
+                                    <div class="main">
+                                      <div class="content bg-white" @longpress="openMessageMoreHandleDialog(msg)">
+                                        <span v-if="msg.status === 3"> 发送失败</span>
 
                                         <img v-if="msg.contentType === 102" class="bd-round size100" :src="msg.contentData.sourcePicture.url"/>
                                         <video v-else-if="msg.contentType === 104" class="bd-round size50" :src="msg.contentData.videoUrl"
                                                enable-danmu danmu-btn controls></video>
-                                        <text v-else-if="msg.contentType !== 3"> {{ msg.content }}</text>
+                                        <span v-else-if="msg.contentType !== 3"> {{ msg.content }}</span>
 
-                                      </view>
-                                    </view>
-                                  </view>
-                                  <view class="date">{{ formatTime(msg.createTime) }}</view>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="date">{{ formatTime(msg.createTime) }}</div>
                                 </template>
-                              </view>-->
+                              </div>-->
                     <div v-for="msg in messages" :id="'m'+msg.id" :key="msg.id">
 
 
@@ -94,10 +94,10 @@
                             <div class="flex-1 flex-col mr overflow-hidden">
                                 <div class="h44px row-end-center mb-xs">
                                     {{ msg.user.nickname }}
-                                    <!--              <text class="text-sm" :class="[msg.user.vipFlag?'color-red':'text-gray']"
+                                    <!--              <span class="text-sm" :class="[msg.user.vipFlag?'color-red':'text-gray']"
                                                         @click="toUserDetailVue(msg.user.id)">
                                                     {{ msg.user.nickname }}
-                                                  </text>
+                                                  </span>
                                                   <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
                                                          src="/static/img/crown.png"
                                                          @click="toVipVue"></image>-->
@@ -129,10 +129,10 @@
                             <div class="flex-1 flex-col mr overflow-hidden">
                                 <div class="h44px row-col-center mb-xs">
                                     {{ msg.user.nickname }}
-                                    <!--              <text class="text-sm" :class="[msg.user.vipFlag?'color-red':'text-gray']"
+                                    <!--              <span class="text-sm" :class="[msg.user.vipFlag?'color-red':'text-gray']"
                                                         @click="toUserDetailVue(msg.user.id)">
                                                     {{ msg.user.nickname }}
-                                                  </text>
+                                                  </span>
                                                   <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
                                                          src="/static/img/crown.png"
                                                          @click="toVipVue"></image>-->
@@ -151,31 +151,31 @@
                         </div>
 
                         <!--                        <div v-if="msg.type === systemMsgType">
-                                                    <view class="cu-info round row-all-center">
+                                                    <div class="cu-info round row-all-center">
                                                         {{ formatTime(msg.createTime) }} , {{ msg.content }}
-                                                    </view>
+                                                    </div>
 
                                                 </div>
                                                 <div v-else-if="msg.user.isMine" class="flex-row pd-sm">
                                                     <div class="flex-1 flex-col mr overflow-hidden">
-                                                        <view class="h44px row-end-center mb-xs">
+                                                        <div class="h44px row-end-center mb-xs">
                                                             {{ mineUser.nickname }}
-                                                            &lt;!&ndash;              <text class="text-sm" :class="[msg.user.vipFlag?'color-red':'text-gray']"
+                                                            &lt;!&ndash;              <span class="text-sm" :class="[msg.user.vipFlag?'color-red':'text-gray']"
                                                                                 @click="toUserDetailVue(msg.user.id)">
                                                                             {{ msg.user.nickname }}
-                                                                          </text>
+                                                                          </span>
                                                                           <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
                                                                                  src="/static/img/crown.png"
                                                                                  @click="toVipVue"></image>&ndash;&gt;
-                                                        </view>
+                                                        </div>
 
-                                                        <view class="row-end-center" @longpress="openMessageMoreHandleDialog(msg)">
+                                                        <div class="row-end-center" @longpress="openMessageMoreHandleDialog(msg)">
                                                             <q-icon v-if="msg.status === 3" icon="mdi-alert-circle" size="25" class="mb-nm"/>
                                                             <message-item-content :msg="msg"></message-item-content>
-                                                        </view>
+                                                        </div>
 
                                                         <div class="col-all-center mt-xs">
-                                                            <view class="date">{{ formatTime(msg.createTime) }}</view>
+                                                            <div class="date">{{ formatTime(msg.createTime) }}</div>
                                                         </div>
                                                     </div>
                                                     <image class="size50 bd-radius flex-none"
@@ -189,43 +189,43 @@
                                                            @click="toUserDetailVue(msg.user.id)"
                                                     />
                                                     <div class="flex-1 flex-col mr overflow-hidden">
-                                                        <view class="h44px row-col-center mb-xs">
+                                                        <div class="h44px row-col-center mb-xs">
                                                             {{ msg.user.nickname }}
-                                                            &lt;!&ndash;              <text class="text-sm" :class="[msg.user.vipFlag?'color-red':'text-gray']"
+                                                            &lt;!&ndash;              <span class="text-sm" :class="[msg.user.vipFlag?'color-red':'text-gray']"
                                                                                 @click="toUserDetailVue(msg.user.id)">
                                                                             {{ msg.user.nickname }}
-                                                                          </text>
+                                                                          </span>
                                                                           <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
                                                                                  src="/static/img/crown.png"
                                                                                  @click="toVipVue"></image>&ndash;&gt;
-                                                        </view>
+                                                        </div>
 
-                                                        <view class="row-start" @longpress="openMessageMoreHandleDialog(msg)">
+                                                        <div class="row-start" @longpress="openMessageMoreHandleDialog(msg)">
                                                             <message-item-content :msg="msg"></message-item-content>
-                                                        </view>
+                                                        </div>
                                                         <div class="col-all-center mt-xs">
-                                                            <view class="date">{{ formatTime(msg.createTime) }}</view>
+                                                            <div class="date">{{ formatTime(msg.createTime) }}</div>
                                                         </div>
                                                     </div>
                                                 </div>-->
                     </div>
-                </view>
-            </view>
-            <!--      <view v-else class="w100p row-center" :class="showMsgHint?'pt-70px':'pt-10px'">
-                    <view v-if="chat.loadMore === noMore || messages.length===0" class="py-xs px bg-white bd-radius mt-sm">
+                </div>
+            </div>
+            <!--      <div v-else class="w100p row-center" :class="showMsgHint?'pt-70px':'pt-10px'">
+                    <div v-if="chat.loadMore === noMore || messages.length===0" class="py-xs px bg-white bd-radius mt-sm">
                       会话已开启
-                    </view>
+                    </div>
                     &lt;!&ndash;        <uni-load-more v-else :status="chat.loadMore"></uni-load-more>&ndash;&gt;
-                  </view>-->
+                  </div>-->
 
 
         </scroll-view>
 
-        <view class="fixed-footer">
-            <view class="cu-bar footer input">
-                <!--<view class="action">
-                    <text class="cuIcon-sound text-grey"></text>
-                </view>-->
+        <div class="fixed-footer">
+            <div class="cu-bar footer input">
+                <!--<div class="action">
+                    <span class="cuIcon-sound text-grey"></span>
+                </div>-->
                 <!--                @focus="inputFocusEvent"-->
                 <input class="solid-bottom"
                        v-model.trim="viewService.msgContent"
@@ -239,43 +239,43 @@
                        :confirm-hold="true"
                        confirm-type="send"
                 >
-                <!--<view class="action" @click="showEmojiClick">
-                    <text class="cuIcon-emojifill text-grey"></text>
-                </view>-->
+                <!--<div class="action" @click="showEmojiClick">
+                    <span class="cuIcon-emojifill text-grey"></span>
+                </div>-->
                 <button v-if="viewService.msgContent" class="cu-btn bg-green shadow color-white"
                         @click.prevent="viewService.sendMsgClick()">发送
                 </button>
-                <view v-else class="ml-sm">
+                <div v-else class="ml-sm">
                     <q-icon icon="plus-circle" size="28" @click="openPhoto"></q-icon>
-                </view>
-            </view>
-            <!--      <view v-show="showEmoji" class="w100vw bg-blue" :style="{height:keyboardHeight+'px'}"></view>-->
-        </view>
+                </div>
+            </div>
+            <!--      <div v-show="showEmoji" class="w100vw bg-blue" :style="{height:keyboardHeight+'px'}"></div>-->
+        </div>
 
         <uni-popup ref="deleteReasonDialog" :show="false" :custom="true" :mask-click="false">
-            <view class="uni-tip">
-                <view class="uni-tip-title">删除原因</view>
-                <view class="uni-textarea bd-1 bd-radius">
+            <div class="uni-tip">
+                <div class="uni-tip-title">删除原因</div>
+                <div class="uni-textarea bd-1 bd-radius">
               <textarea placeholder="*必填，删除原因" v-model="deleteReason"
                         :show-confirm-bar="false"
               />
-                </view>
-                <view class="uni-common-mt">
+                </div>
+                <div class="uni-common-mt">
                     是否封禁:
                     <switch class="ml-5px" @change="banChange"/>
-                </view>
-                <view class="uni-tip-group-button">
+                </div>
+                <div class="uni-tip-group-button">
                     <button class="uni-tip-button w40r" type="default" @click="closeDeleteDialog" :plain="true">取消
                     </button>
                     <button class="uni-tip-button w40r" type="primary" @click="confirmDeleteTalk"
                             :disabled="!deleteReason">确定
                     </button>
-                </view>
-            </view>
+                </div>
+            </div>
         </uni-popup>
 
         <uni-popup ref="messageMoreHandleDialog" :custom="true" :mask-click="true">
-            <view class="uni-tip w180px">
+            <div class="uni-tip w180px">
                 <uni-list class="w100px">
                     <uni-list-item :show-arrow="true" title="复制" clickable @click="copyText"/>
                     <uni-list-item v-if="message&&message.isMine" :show-arrow="true" title="撤回消息"
@@ -283,12 +283,12 @@
                     <uni-list-item v-if="message&&!message.isMine" :show-arrow="true" title="举报"
                                    clickable @click="openReportDialog"/>
                 </uni-list>
-            </view>
+            </div>
         </uni-popup>
 
-        <!--<view v-show="showEmoji" class="emoji-model" :style="{height:emojiModelHeight+'px'}"
+        <!--<div v-show="showEmoji" class="emoji-model" :style="{height:emojiModelHeight+'px'}"
               @touchstart="inputBlur">
-        </view>-->
+        </div>-->
 
         <socialuni-report-dialog ref="reportDialog" :report-info="message"
                                  :report-info-type="reportContentType"></socialuni-report-dialog>

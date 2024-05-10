@@ -1,37 +1,37 @@
 <template>
-  <view
+  <div
       class="slider-range"
       :class="{ disabled: disabled }"
       :style="{ paddingLeft: blockSize / 2 + 'px', paddingRight: blockSize / 2 + 'px' }"
   >
-    <view class="slider-range-inner" :style="{ height: height + 'px' }">
-      <view
+    <div class="slider-range-inner" :style="{ height: height + 'px' }">
+      <div
           class="slider-bar"
           :style="{
           height: barHeight + 'px',
         }"
       >
         <!-- 背景条 -->
-        <view
+        <div
             class="slider-bar-bg"
             :style="{
             backgroundColor: backgroundColor,
           }"
-        ></view>
+        ></div>
 
         <!-- 滑块实际区间 -->
-        <view
+        <div
             class="slider-bar-inner"
             :style="{
             width: ((values[1] - values[0]) / (max - min)) * 100 + '%',
             left: lowerHandlePosition + '%',
             backgroundColor: activeColor,
           }"
-        ></view>
-      </view>
+        ></div>
+      </div>
 
       <!-- 滑动块-左 -->
-      <view
+      <div
           class="slider-handle-block"
           :class="{ decoration: decorationVisible }"
           :style="{
@@ -44,10 +44,10 @@
           @touchmove="_onBlockTouchMove"
           @touchend="_onBlockTouchEnd"
           data-tag="lowerBlock"
-      ></view>
+      ></div>
 
       <!-- 滑动块-右 -->
-      <view
+      <div
           class="slider-handle-block"
           :class="{ decoration: decorationVisible }"
           :style="{
@@ -60,13 +60,13 @@
           @touchmove="_onBlockTouchMove"
           @touchend="_onBlockTouchEnd"
           data-tag="higherBlock"
-      ></view>
+      ></div>
 
       <!-- 滑块值提示 -->
-      <view v-if="tipVisible" class="range-tip" :style="lowerTipStyle">{{ format(values[0]) }}</view>
-      <view v-if="tipVisible" class="range-tip" :style="higherTipStyle">{{ format(values[1]) }}</view>
-    </view>
-  </view>
+      <div v-if="tipVisible" class="range-tip" :style="lowerTipStyle">{{ format(values[0]) }}</div>
+      <div v-if="tipVisible" class="range-tip" :style="higherTipStyle">{{ format(values[1]) }}</div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">

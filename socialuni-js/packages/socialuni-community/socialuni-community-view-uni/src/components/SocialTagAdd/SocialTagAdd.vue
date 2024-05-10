@@ -1,37 +1,37 @@
 <template>
-  <view class="article">
+  <div class="article">
     <q-navbar>创建话题</q-navbar>
-    <view class="pd-sm pt-0 bg-white solid-bottom">
-      <view>
-        <view class="cu-form-group">
-          <view class="title">
-            <text class="color-red">*</text>
+    <div class="pd-sm pt-0 bg-white solid-bottom">
+      <div>
+        <div class="cu-form-group">
+          <div class="title">
+            <span class="color-red">*</span>
             标签：
-          </view>
+          </div>
           <input :cursor-spacing="20" maxlength="4" v-model.trim="tagName" placeholder="必填"/>
-          <view class="uni-icon uni-icon-clear" v-if="tagName" @click="clearTagName"></view>
-          <view class="color-red">最多四个字</view>
-        </view>
+          <div class="uni-icon uni-icon-clear" v-if="tagName" @click="clearTagName"></div>
+          <div class="color-red">最多四个字</div>
+        </div>
 
-        <view class="cu-form-group align-start">
-          <view class="title">
+        <div class="cu-form-group align-start">
+          <div class="title">
             描述：
-          </view>
+          </div>
           <textarea class="h150" maxlength="300" v-model.trim="tagDescription" placeholder="非必填"
                     :show-confirm-bar="false"
           ></textarea>
-        </view>
-      </view>
-    </view>
-    <view class="cu-bar bg-white">
-      <view class="action ma-0 flex-sub">
-        <view class="action ma-0 flex-sub mr" @click="closePopup">取消</view>
-        <view class="action ma-0 flex-sub text-green solid-left" :disabled="tagName" @click="addTagClick">
+        </div>
+      </div>
+    </div>
+    <div class="cu-bar bg-white">
+      <div class="action ma-0 flex-sub">
+        <div class="action ma-0 flex-sub mr" @click="closePopup">取消</div>
+        <div class="action ma-0 flex-sub text-green solid-left" :disabled="tagName" @click="addTagClick">
           创建
-        </view>
-      </view>
-    </view>
-  </view>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">

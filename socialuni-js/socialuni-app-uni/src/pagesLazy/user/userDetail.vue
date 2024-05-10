@@ -1,5 +1,5 @@
 <template>
-  <view class="bg-default">
+  <div class="bg-default">
     <!--        <socialuni-user-detail-view></socialuni-user-detail-view>-->
     <socialuni-community-user-detail-view>
       <template #navBarRight>
@@ -25,7 +25,7 @@
                        @click="removeBlack"></uni-list-item>
       </uni-list>
     </q-popup>
-  </view>
+  </div>
 </template>
 
 <script lang="ts">

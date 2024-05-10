@@ -1,10 +1,10 @@
 <template>
-  <view class="content">
+  <div class="content">
     <image class="logo" src="/static/logo.png" />
-    <view class="text-area">
-      <text class="title">{{ title }}</text>
-    </view>
-  </view>
+    <div class="text-area">
+      <span class="title">{{ title }}</span>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">

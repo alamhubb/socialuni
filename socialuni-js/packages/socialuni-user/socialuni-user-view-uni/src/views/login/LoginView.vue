@@ -14,11 +14,11 @@
         </div>
       </div>
 
-      <view class="mt-xs h165">
+      <div class="mt-xs h165">
         <phone-login-form :view-service="viewService" ref="loginForm" v-if="showPhoneLogin"
                           :show="showPhoneLogin"></phone-login-form>
 
-        <view class="h120 row-center" v-else>
+        <div class="h120 row-center" v-else>
           <!--          头部-->
 
           <!--          只有不为三方授权才显示logo-->
@@ -27,16 +27,16 @@
                  mode="aspectFit"
                  src="/static/img/logo.jpg"
           />
-        </view>
-      </view>
+        </div>
+      </div>
 
       <!--      绑定手机号可发布动态提示-->
       <div class="row-center">
         <!--            如果为授权手机号，则提示-->
-        <view class="u-border-bottom text-gray">
+        <div class="u-border-bottom text-gray">
           绑定手机号后可发表动态
           <!--          ，详情-->
-        </view>
+        </div>
         <!--        <q-icon class="ml-xs text-gray" icon="arrow-right"></q-icon>-->
       </div>
 
@@ -46,8 +46,8 @@
       <!--    返回和登录方式切换-->
       <!--      这个div是为了处理居中问题-->
       <div>
-        <view class="h150 col-row-center">
-          <view class="col-row-center w300">
+        <div class="h150 col-row-center">
+          <div class="col-row-center w300">
             <!--            微信登录界面，非手机号登录界面-->
             <!--              没登录提示登录，如果为三方授权且为授权用户信息，追加 并授权三个字-->
             <!-- 只要不为QQ小程序平台都可以使用微信登录-->
@@ -96,27 +96,27 @@
                                 绑定微信手机号
                               </button>-->
             </template>
-          </view>
-        </view>
+          </div>
+        </div>
       </div>
 
-      <view class="row-between-center w100p">
-        <view class="row-col-center" @click="goBackPage">
+      <div class="row-between-center w100p">
+        <div class="row-col-center" @click="goBackPage">
           <q-icon class="mr-xs text-gray" icon="arrow-left"></q-icon>
-          <view class="text-gray u-border-bottom">
+          <div class="text-gray u-border-bottom">
             {{ user ? '不绑定返回' : '不登录返回' }}
-          </view>
-        </view>
+          </div>
+        </div>
 
-        <view v-if="showProviderLogin" @click="switchShowPhoneNum" class="row-end-center">
-          <view class="text-gray">
+        <div v-if="showProviderLogin" @click="switchShowPhoneNum" class="row-end-center">
+          <div class="text-gray">
             {{ showPhoneView ? '其他方式登录' : '手机号登录' }}
-          </view>
+          </div>
           <!--              验证码登录、或者没用户、或者没手机号且不为授权用户、-->
           <q-icon class="ml-xs text-gray"
                   icon="arrow-right"></q-icon>
-        </view>
-      </view>
+        </div>
+      </div>
     </div>
 
     <!--      底部客服信息-->

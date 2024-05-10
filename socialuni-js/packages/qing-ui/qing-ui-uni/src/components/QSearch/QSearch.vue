@@ -1,7 +1,7 @@
 <template>
-  <view class="row-col-center bd bd-round h30 font-sm">
+  <div class="row-col-center bd bd-round h30 font-sm">
     <slot></slot>
-  </view>
+  </div>
 </template>
 <script lang="ts">
 import {Component, Vue, toNative} from 'vue-facing-decorator'

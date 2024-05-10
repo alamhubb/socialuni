@@ -1,101 +1,101 @@
 <template>
-    <view v-if="socialuniUserEditViewService.editUser" class="h100p">
-        <view class="pt-0 bg-white solid-bottom mt-10vh">
-            <view>
-                <view class="cu-form-group">
-                    <view class="title">
+    <div v-if="socialuniUserEditViewService.editUser" class="h100p">
+        <div class="pt-0 bg-white solid-bottom mt-10vh">
+            <div>
+                <div class="cu-form-group">
+                    <div class="title">
                         昵称
-                    </view>
+                    </div>
                     <uni-easyinput placeholder="昵称" maxlength="6" v-model.trim="socialuniUserEditViewService.editUser.nickname"></uni-easyinput>
 <!--                    <input :cursor-spacing="20" placeholder="昵称" maxlength="6" v-model.trim="socialuniUserEditViewService.editUser.nickname"/>-->
-<!--                    <view class="uni-icon uni-icon-clear" v-if="socialuniUserEditViewService.editUser.nickname" @click="clearNickname"></view>-->
-                </view>
+<!--                    <div class="uni-icon uni-icon-clear" v-if="socialuniUserEditViewService.editUser.nickname" @click="clearNickname"></div>-->
+                </div>
 
                 <!-- 不为单性应用，且用户没修改过性别才可修改-->
                 <!--        && !user.genderModified-->
-                <view class="cu-form-group" v-if="socialuniUserEditViewService.appGenderType === socialuniUserEditViewService.GenderTypeAll">
-                    <view class="title">性别</view>
-                    <view>
+                <div class="cu-form-group" v-if="socialuniUserEditViewService.appGenderType === socialuniUserEditViewService.GenderTypeAll">
+                    <div class="title">性别</div>
+                    <div>
                         <radio-group @change="socialuniUserEditViewService.genderChange" class="flex-1">
                             <label v-for="report in socialuniUserEditViewService.genders" :key="report.value">
                                 <radio :value="report.value" :checked="report.value===socialuniUserEditViewService.editUser.gender"></radio>
-                                <text class="mr-sm">{{ report.label }}</text>
+                                <span class="mr-sm">{{ report.label }}</span>
                             </label>
                         </radio-group>
-                    </view>
-                </view>
+                    </div>
+                </div>
 
-                <view class="cu-form-group">
-                    <view class="title">出生日期</view>
+                <div class="cu-form-group">
+                    <div class="title">出生日期</div>
                     <picker mode="date" :value="socialuniUserEditViewService.editUser.birthday" start="1900-01-01" :end="socialuniUserEditViewService.endDate" @change="socialuniUserEditViewService.dateChange">
-                        <view class="picker">
+                        <div class="picker">
                             {{ socialuniUserEditViewService.editUser.birthday }}
-                        </view>
+                        </div>
                     </picker>
-                </view>
+                </div>
 
-                <view class="cu-form-group">
-                    <view class="title">
+                <div class="cu-form-group">
+                    <div class="title">
                         所在地
-                    </view>
+                    </div>
                     <uni-easyinput placeholder="所在地333" maxlength="10" v-model.trim="socialuniUserEditViewService.editUser.city"></uni-easyinput>
-                </view>
+                </div>
 
                 <!--        todo qq不支持联系方式，改为判断qq一件加好友-->
-                <!--        <view class="cu-form-group">
-                          <view class="title">
+                <!--        <div class="cu-form-group">
+                          <div class="title">
                             联系方式
-                          </view>
+                          </div>
                           <input :cursor-spacing="20" v-model="contactAccount" maxlength="30" placeholder="例如：vx:491369310"/>
-                          <view class="uni-icon uni-icon-clear" v-if="contactAccount" @click="clearContactAccount"></view>
-                        </view>-->
-                <!--<view class="cu-form-group margin-top">
-                    <view class="title">
+                          <div class="uni-icon uni-icon-clear" v-if="contactAccount" @click="clearContactAccount"></div>
+                        </div>-->
+                <!--<div class="cu-form-group margin-top">
+                    <div class="title">
                         个人介绍
-                    </view>
+                    </div>
                     <input placeholder="两字短标题" name="input"></input>
                     &lt;!&ndash;                展开下拉，可以显示 兴趣爱好职业收入等等，可自定义&ndash;&gt;
-                </view>
+                </div>
 
-                <view class="cu-form-group margin-top">
-                    <view class="title">
+                <div class="cu-form-group margin-top">
+                    <div class="title">
                         理想型
                         &lt;!&ndash;                    同个人介绍相似&ndash;&gt;
-                    </view>
+                    </div>
                     <input placeholder="两字短标题" name="input"></input>
-                </view>
+                </div>
 
-                <view class="cu-form-group margin-top">
-                    <view class="title">
+                <div class="cu-form-group margin-top">
+                    <div class="title">
                         微信
                         <q-icon icon="mdi-wechat"></q-icon>
-                    </view>
+                    </div>
                     <input placeholder="两字短标题" name="input"></input>
-                </view>
-                <view class="cu-form-group">
-                    <view class="title">
+                </div>
+                <div class="cu-form-group">
+                    <div class="title">
                         QQ
                         <q-icon icon="mdi-qqchat"></q-icon>
-                    </view>
+                    </div>
                     <input placeholder="三字标题" name="input"></input>
-                </view>
+                </div>
 
-                <view class="cu-form-group">
-                    <view class="title">
+                <div class="cu-form-group">
+                    <div class="title">
                         微博
                         <q-icon icon="mdi-sina-weibo"></q-icon>
-                    </view>
+                    </div>
                     <input placeholder="三字标题" name="input"></input>
-                </view>
+                </div>
                 -->
-            </view>
-        </view>
-        <view class="cu-bar btn-group bg-white flex-none pt-5 pb-sm py-lg">
+            </div>
+        </div>
+        <div class="cu-bar btn-group bg-white flex-none pt-5 pb-sm py-lg">
             <!--      <button class="cu-btn bd-gray radius bg-white" @click="closeUserEditPop">取消</button>-->
             <q-button info light md @click="socialuniUserEditViewService.goBack()" :disabled="socialuniUserEditViewService.btnDisabled">返回</q-button>
             <q-button success md @click="socialuniUserEditViewService.saveUser()" :disabled="socialuniUserEditViewService.btnDisabled">保存</q-button>
-        </view>
-    </view>
+        </div>
+    </div>
 </template>
 
 <script lang="ts">

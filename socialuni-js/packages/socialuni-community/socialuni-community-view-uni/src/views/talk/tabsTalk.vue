@@ -162,7 +162,7 @@ import {socialuniTagModule} from "socialuni-community-sdk/src/store/SocialTagMod
 import TalkQOFactory from "socialuni-community-sdk/src/factory/TalkQOFactory";
 import {socialLocationModule} from "socialuni-community-sdk/src/store/SocialLocationModule";
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
-import TalkItem from "socialuni-community-view-uni/src/components/talkItem/TalkItem.vue";
+import TalkItem from "socialuni-community-ui/src/components/talkItem/TalkItem.vue";
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";

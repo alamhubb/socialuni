@@ -1,15 +1,15 @@
 <template>
-  <view class="card-title pb-10" @click="toUserDetailVue" v-if="talk">
+  <div class="card-title pb-10" @click="toUserDetailVue" v-if="talk">
     <image
         class="size40 bd-radius mr-sm"
         mode="aspectFill"
         :src="talk.user.avatar"
     />
-    <view class="row-between flex-1">
-      <view class="col-center">
-        <view class="h20 row-col-center">
-          <text class="text-df font-bold">{{ talk.user.nickname }}</text>
-          <!--          <text class="text-md" :class="{'color-red':home.user.vipFlag}">{{ home.user.nickname }}</text>-->
+    <div class="row-between flex-1">
+      <div class="col-center">
+        <div class="h20 row-col-center">
+          <span class="text-df font-bold">{{ talk.user.nickname }}</span>
+          <!--          <span class="text-md" :class="{'color-red':home.user.vipFlag}">{{ home.user.nickname }}</span>-->
           <template v-if="!talk.globalTop">
             <social-gender-tag class="ml-xs" :user="talk.user"></social-gender-tag>
             <!--            <div v-if="home.user.identityAuth" class="q-tag-success q-box-nn" @click.stop="toIdentityAuth">
@@ -18,68 +18,68 @@
             <!--              <q-icon class="color-blue" size="18" icon="level" @click.stop="toIdentityAuth"/>-->
           </template>
 
-          <!--          <view v-if="!home.globalTop" class="ml-5 cu-tag sm radius text-sm row-col-center"
+          <!--          <div v-if="!home.globalTop" class="ml-5 cu-tag sm radius text-sm row-col-center"
                           :class="[getGenderBgColor(home.user)]">
                       {{ home.user.age }}
                       <q-icon class="ml-nm"
                               size="12"
                               :icon="getGenderIcon(home.user)"/>
-                    </view>-->
-          <!--          <view v-if="home.user.vipFlag" class="ml-5 cu-tag bg-red radius sm text-sm font-bold"
+                    </div>-->
+          <!--          <div v-if="home.user.vipFlag" class="ml-5 cu-tag bg-red radius sm text-sm font-bold"
                           @click.stop="openVip">
                       VIP
-                    </view>-->
+                    </div>-->
           <!--    如果爱心值不为0，且大于正义值显示爱心值-->
-          <!--          <view v-else-if="home.user.loveValue&& home.user.loveValue>home.user.justiceValue"
+          <!--          <div v-else-if="home.user.loveValue&& home.user.loveValue>home.user.justiceValue"
                           class="ml-5 cu-capsule radius"
                           @click.stop="toLoveValuePage">
-                      <view class='cu-tag bg-red sm'>
+                      <div class='cu-tag bg-red sm'>
                         <q-icon icon="heart"/>
-                      </view>
-                      <view class="cu-tag bg-white bd-red bd-r-radius sm">
+                      </div>
+                      <div class="cu-tag bg-white bd-red bd-r-radius sm">
                         {{ home.user.loveValue }}
-                      </view>
-                    </view>-->
+                      </div>
+                    </div>-->
           <!--    如果正义值不为0，且大于等于爱心值显示正义值-->
-          <!--          <view v-else-if="home.user.justiceValue&& home.user.justiceValue >= home.user.loveValue"
+          <!--          <div v-else-if="home.user.justiceValue&& home.user.justiceValue >= home.user.loveValue"
                           class="ml-5 cu-capsule radius"
                           @click.stop="hintJusticeInfo">
-                      <view class='cu-tag bg-green sm'>
+                      <div class='cu-tag bg-green sm'>
                         <q-icon icon="mdi-sword-cross"/>
-                      </view>
-                      <view class="cu-tag bg-white bd-green bd-r-radius sm">
+                      </div>
+                      <div class="cu-tag bg-white bd-green bd-r-radius sm">
                         {{
                           home.user.justiceValue > 1000 ? Math.floor(home.user.justiceValue / 1000) + 'k' : home.user.justiceValue
                         }}
-                      </view>
-                    </view>-->
-        </view>
+                      </div>
+                    </div>-->
+        </div>
 
-        <!--        <view class="color-sub text-sm h20 row-col-end" v-if="home.user.identityAuth || home.globalTop ||isMine">-->
-        <view class="color-sub text-sm h20 row-col-end line-h1">
+        <!--        <div class="color-sub text-sm h20 row-col-end" v-if="home.user.identityAuth || home.globalTop ||isMine">-->
+        <div class="color-sub text-sm h20 row-col-end line-h1">
           {{ formatTime(talk.updateTime) }}
-          <view v-if="talk.globalTop" class="ml-sm q-tag-theme q-box-nn">
+          <div v-if="talk.globalTop" class="ml-sm q-tag-theme q-box-nn">
             官方
-          </view>
+          </div>
           <!--              自己的帖子，或者系统管理员可以删除帖子-->
-          <text v-if="isMine"
+          <span v-if="isMine"
                 class="ml-5 color-blue1 bg-click row-col-end line-h1"
                 @click.stop="confirmDeleteTalk">
             删除
-          </text>
-          <text v-if="talk.status !== SocialuniCommonStatus.enable"
+          </span>
+          <span v-if="talk.status !== SocialuniCommonStatus.enable"
                 class="ml-5 color-red bg-click row-col-end line-h1">
             审核中
-          </text>
-        </view>
-      </view>
+          </span>
+        </div>
+      </div>
       <!--                不为自己且未关注-->
-      <view v-if="talkTabType!==followType&&!isMine&&!isUserDetail" class="col-center">
+      <div v-if="talkTabType!==followType&&!isMine&&!isUserDetail" class="col-center">
         <div v-if="!talk.hasFollowed" class="color-content chunk q-box-mn bd-radius" @click.stop="addFollow">关注</div>
         <div v-else class="color-content" @click.stop="addFollow">已关注</div>
-      </view>
-    </view>
-  </view>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">

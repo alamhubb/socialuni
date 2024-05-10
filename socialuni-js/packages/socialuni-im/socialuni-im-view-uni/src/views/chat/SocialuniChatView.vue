@@ -9,19 +9,19 @@
                   @click="viewService.clearSearchContent"
           ></q-icon>
         </q-search>
-        <view @click="viewService.toAddFriend()">
+        <div @click="viewService.toAddFriend()">
           <q-icon icon="list-dot" size="20" @click="viewService.openUserChatSetting()"></q-icon>
-        </view>
+        </div>
       </div>
     </q-navbar>
-    <!--    <view v-if="showChatHint&& showChats && showChats.length" class="row-col-center bg-orange">
-          <view class="flex-1 card-text-row">
+    <!--    <div v-if="showChatHint&& showChats && showChats.length" class="row-col-center bg-orange">
+          <div class="flex-1 card-text-row">
             长按聊天框可解除匹配
-          </view>
-          <view class="flex-none mr-10px">
+          </div>
+          <div class="flex-none mr-10px">
             <q-icon icon="close-circle-fill" size="18" @click="closeUploadImgHint"></q-icon>
-          </view>
-        </view>-->
+          </div>
+        </div>-->
 
     <div>
       <uni-list>
@@ -48,28 +48,28 @@
             </div>
           </div>
         </div>-->
-    <!--    <view v-show="false">
+    <!--    <div v-show="false">
           {{ chatsUnreadNumTotal }}
-        </view>-->
-    <view class="cu-list menu-avatar pb-50px">
-      <view v-for="chat in viewService.chatList" :key="chat.id" class="cu-item" @click="viewService.toMessagePage(chat)"
+        </div>-->
+    <div class="cu-list menu-avatar pb-50px">
+      <div v-for="chat in viewService.chatList" :key="chat.id" class="cu-item" @click="viewService.toMessagePage(chat)"
             @longpress="viewService.showBottomMenuClick(chat.id)">
         <image class="cu-avatar radius lg" :src="chat.avatar"/>
-        <view class="content h45 col-between">
-          <view>
-            <view class="text-cut text-df text-black" :class="{'color-red':chat.vipFlag}">{{
+        <div class="content h45 col-between">
+          <div>
+            <div class="text-cut text-df text-black" :class="{'color-red':chat.vipFlag}">{{
                 chat.nickname
               }}
-            </view>
-            <!--            <view v-if="systemChats.indexOf(chat.type)>-1"
+            </div>
+            <!--            <div v-if="systemChats.indexOf(chat.type)>-1"
                               class="cu-tag round bg-blue sm text-sm col-center text-bold">官方
-                        </view>
-                        <view v-else-if="chat.vipFlag" class="cu-tag round bg-red sm text-sm col-center text-bold">VIP
-                        </view>-->
-          </view>
-          <view>
-            <view class="color-content text-sm flex">
-              <view class="text-cut text-sm">
+                        </div>
+                        <div v-else-if="chat.vipFlag" class="cu-tag round bg-red sm text-sm col-center text-bold">VIP
+                        </div>-->
+          </div>
+          <div>
+            <div class="color-content text-sm flex">
+              <div class="text-cut text-sm">
                 <template v-if="chat.messages.length">
                   <div v-if="chat.messages[chat.messages.length - 1].contentType === '图片'">
                     [图片]
@@ -94,20 +94,20 @@
                                   会话已开启
                                 </template>-->
 
-              </view>
-            </view>
-          </view>
-        </view>
-        <view class="action h45px col-between">
-          <view class="text-grey text-xs">{{ viewService.formatTime(chat.updateTime) }}</view>
-          <view>
-            <view v-show="chat.unreadNum>0" class="cu-tag round bg-red sm">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="action h45px col-between">
+          <div class="text-grey text-xs">{{ viewService.formatTime(chat.updateTime) }}</div>
+          <div>
+            <div v-show="chat.unreadNum>0" class="cu-tag round bg-red sm">
               {{ chat.unreadNum }}
-            </view>
-          </view>
-        </view>
-      </view>
-    </view>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 

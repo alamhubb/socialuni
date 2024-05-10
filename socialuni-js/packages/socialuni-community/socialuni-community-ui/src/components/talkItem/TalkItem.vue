@@ -1,10 +1,10 @@
 <template>
-  <view v-if="talk" class="card mb-sm elevation-4">
+  <div v-if="talk" class="card mb-sm elevation-4">
     <talk-item-head :talk-prop="talk" :talk-tab-type="talkTabType" @deleteTalk="deleteTalk"/>
     <talk-item-content :talk="talk"/>
     <talk-item-comment v-if="!talk.globalTop || talk.globalTop===1" :talk-prop="talk"
                        :showAllComment="showAllComment"/>
-  </view>
+  </div>
 </template>
 
 <script lang="ts">

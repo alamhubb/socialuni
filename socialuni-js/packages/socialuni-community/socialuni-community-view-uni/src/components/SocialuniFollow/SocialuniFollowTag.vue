@@ -1,8 +1,8 @@
 <template>
     <div v-if="followUser && !followUser.isMine" class="row-col-center mr-xs">
-        <view v-if="FollowStatus.eachFollow === userFollowStatus" class="color-content" @click.stop="addFollow">
+        <div v-if="FollowStatus.eachFollow === userFollowStatus" class="color-content" @click.stop="addFollow">
             {{ userFollowStatus }}
-        </view>
+        </div>
         <q-button v-else @click="addFollow">
             {{ userFollowStatus }}
         </q-button>

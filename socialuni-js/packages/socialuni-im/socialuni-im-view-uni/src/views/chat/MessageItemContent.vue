@@ -1,6 +1,6 @@
 <template>
   <div>
-<!--    <text v-if="msg.status === 3"> 发送失败</text>-->
+<!--    <span v-if="msg.status === 3"> 发送失败</span>-->
     <!--        <div class="bd-round size18 position-absolute mr-nn mt-nn right-0 row-all-center">
               <q-icon @click.stop="toIdentityAuth"
                       class="color-success"

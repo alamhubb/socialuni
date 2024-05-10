@@ -1,10 +1,10 @@
 <template>
-  <view class="row-col-center">
+  <div class="row-col-center">
     <switch :checked="modelValue" @change="switchChange"></switch>
-    <view class="ml-xs" @click="change(!modelValue)">
+    <div class="ml-xs" @click="change(!modelValue)">
       <slot></slot>
-    </view>
-  </view>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">

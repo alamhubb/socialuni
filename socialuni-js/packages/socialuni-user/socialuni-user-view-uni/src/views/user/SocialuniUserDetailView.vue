@@ -1,14 +1,14 @@
 <template>
-  <view class="bg-default">
+  <div class="bg-default">
     <q-navbar show-back title="用户详情">
       <slot name="navBarRight" :user="socialuniUserDetailViewService.user">
 
       </slot>
     </q-navbar>
-    <view v-if="socialuniUserDetailViewService.user" class="bg-default pb-100">
-      <view class="mb-sm pt-200 bg-no-repeat"
+    <div v-if="socialuniUserDetailViewService.user" class="bg-default pb-100">
+      <div class="mb-sm pt-200 bg-no-repeat"
             style="background-image: url('https://cdxapp-1257733245.file.myqcloud.com/socialuni/common/app/userDefaultTopImg.jpg')">
-        <view class="pd-sm bg-white bt-radius-10">
+        <div class="pd-sm bg-white bt-radius-10">
           <div class="row-between py-sm">
             <div class="flex-row">
               <image
@@ -17,18 +17,18 @@
                   :src="socialuniUserDetailViewService.user.avatar"
                   @click="socialuniUserDetailViewService.seeAvatarDetail()"
               />
-              <view class="flex-1 flex-col h65 py-xs">
+              <div class="flex-1 flex-col h65 py-xs">
                 <!--                                :class="{'color-red':socialuniUserDetailViewService.user.vipFlag}"-->
-                <view class="text-md font-bold">
+                <div class="text-md font-bold">
                   {{ socialuniUserDetailViewService.user.nickname }}
-                </view>
-                <view class="row-col-center mt-sm">
+                </div>
+                <div class="row-col-center mt-sm">
                   <social-gender-tag
                       :user="socialuniUserDetailViewService.user"></social-gender-tag>
-                  <!--                <view v-if="userProp.vipFlag" class="cu-tag bg-red radius" @click="openVip">VIP</view>
-                                  <view v-else class="cu-tag bg-grey radius" @click="openVip">VIP</view>-->
-                </view>
-              </view>
+                  <!--                <div v-if="userProp.vipFlag" class="cu-tag bg-red radius" @click="openVip">VIP</div>
+                                  <div v-else class="cu-tag bg-grey radius" @click="openVip">VIP</div>-->
+                </div>
+              </div>
             </div>
 
             <slot name="userBaseInfoRight" :user="socialuniUserDetailViewService.user">
@@ -40,17 +40,17 @@
           </slot>
 
           <div class="flex-row my-sm">
-            <view v-if="socialuniUserDetailViewService.user.city" class="row-col-center q-tag">
+            <div v-if="socialuniUserDetailViewService.user.city" class="row-col-center q-tag">
               <q-icon icon="map-fill" class="color-purple mr-mn" size="12"/>
               {{ socialuniUserDetailViewService.user.city || '' }}
-            </view>
-            <view v-if="socialuniUserDetailViewService.user.schoolName" class="row-col-center q-tag">
+            </div>
+            <div v-if="socialuniUserDetailViewService.user.schoolName" class="row-col-center q-tag">
               <q-icon class="color-blue mr-xs" icon="mdi-school" size="12"/>
               {{ socialuniUserDetailViewService.user.schoolName }}
-            </view>
+            </div>
           </div>
-        </view>
-      </view>
+        </div>
+      </div>
 
 
       <div v-if="!socialuniUserDetailViewService.isIosAndMpQQ && socialuniUserDetailViewService.user.contactInfo"
@@ -86,8 +86,8 @@
       <slot>
 
       </slot>
-    </view>
-  </view>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">

@@ -1,5 +1,5 @@
 <template>
-  <view class="bg-blue6 h100p flex-col">
+  <div class="bg-blue6 h100p flex-col">
     <div class="chunk-blue6 px-smm py-md col-all-center flex-none">
       <div class="font-12">贝壳总数</div>
       <div class="font-bold font-28 mt"> {{ mineUser.socialCoin }}</div>
@@ -14,9 +14,9 @@
             </div>-->
       <!--      <div class="bt mt pt">-->
       <div class="mt pt">
-        <text class="row-all-center font-lg font-bold">
+        <span class="row-all-center font-lg font-bold">
           充值
-        </text>
+        </span>
 
         <div class="flex-row mt">
           <div v-for="value in payValues" class="flex-1 mx-xs q-box-md"
@@ -40,7 +40,7 @@
         </div>
       </div>
     </div>
-  </view>
+  </div>
 </template>
 
 <script lang="ts">

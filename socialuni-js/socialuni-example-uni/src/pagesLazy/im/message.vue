@@ -1,7 +1,7 @@
 <template>
-  <view class="bg-default h100p">
+  <div class="bg-default h100p">
     <socialuni-message-view></socialuni-message-view>
-  </view>
+  </div>
 </template>
 
 <script lang="ts">

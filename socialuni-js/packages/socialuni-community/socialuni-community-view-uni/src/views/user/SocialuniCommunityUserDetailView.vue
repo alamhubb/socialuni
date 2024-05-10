@@ -5,17 +5,17 @@
     </template>
     <template #userBaseInfoRight>
       <div class="col-center flex-none">
-        <view class="row-end-center mr-xss">
-          <view
+        <div class="row-end-center mr-xss">
+          <div
               v-if="user.hasBeFollowed && !user.hasFollowed"
               class="px-5 py-1 bg-default">
             <div class="color-content font-12">
               对方关注了您
             </div>
-          </view>
-        </view>
+          </div>
+        </div>
         <!--              不为自己才展示-->
-        <view class="row-col-center mt-sm">
+        <div class="row-col-center mt-sm">
           <!--                不为自己且未关注-->
           <!--            不为ios，或者不为付费，则显示-->
           <!--              <q-button v-if="!isIos||!user.chat.needPayOpen" @click="toMessagePage">-->
@@ -25,26 +25,26 @@
           </slot>
           <socialuni-follow-tag></socialuni-follow-tag>
           <!--              <button v-else class="cu-btn round bd-gray bg-white" @click.stop="addFollow">已关注</button>-->
-        </view>
+        </div>
       </div>
     </template>
     <template #userBaseInfoBottom>
-      <view class="row-between-center mt-sm py-xs pr-xs">
-        <view class="flex-row flex-1 row-around">
-          <view class="px-lg line-height-1 col-all-center">
-            <text class="text-lg font-bold color-main row-center">
+      <div class="row-between-center mt-sm py-xs pr-xs">
+        <div class="flex-row flex-1 row-around">
+          <div class="px-lg line-height-1 col-all-center">
+            <span class="text-lg font-bold color-main row-center">
               {{ user.followNum }}
-            </text>
-            <text class="font-12 color-content mt-xs">关注</text>
-          </view>
-          <view class="px-lg line-height-1 col-all-center">
-            <text class="text-lg font-bold color-main row-center">
+            </span>
+            <span class="font-12 color-content mt-xs">关注</span>
+          </div>
+          <div class="px-lg line-height-1 col-all-center">
+            <span class="text-lg font-bold color-main row-center">
               {{ user.fansNum }}
-            </text>
-            <text class="font-12 color-content mt-xs">被关注</text>
-          </view>
-        </view>
-      </view>
+            </span>
+            <span class="font-12 color-content mt-xs">被关注</span>
+          </div>
+        </div>
+      </div>
     </template>
 
     <q-popup ref="applyUserFriendDialog" title="申请添加好友111"
@@ -67,10 +67,10 @@
     <!--  #endif -->
 
     <div class="px-smm mb-xs">动态</div>
-    <view v-for="talk in socialuniCommunityUserDetailViewService.talks" :key="talk.id" class="px-sm">
+    <div v-for="talk in socialuniCommunityUserDetailViewService.talks" :key="talk.id" class="px-sm">
       <talk-item :talk="talk"
                  @deleteTalk="talkId=>socialuniCommunityUserDetailViewService.deleteTalk(talkId)"></talk-item>
-    </view>
+    </div>
 
     <!--wx平台显示的广告-->
     <!--  #ifdef MP-WEIXIN -->

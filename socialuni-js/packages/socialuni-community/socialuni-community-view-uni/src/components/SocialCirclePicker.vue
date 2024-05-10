@@ -5,32 +5,32 @@
     </template>
     <div class="h80vh">
       <scroll-view class="h100p" scroll-y v-if="circleSearchText">
-        <view v-for="tag in showCircles" :key="tag.id" @click="change(tag)"
+        <div v-for="tag in showCircles" :key="tag.id" @click="change(tag)"
               class="article-row row-between solid-bottom">
           <text>
             #{{ tag.name }}
-          </text>
-          <view v-if="tag.count" class="row-col-center">
+          </span>
+          <div v-if="tag.count" class="row-col-center">
             <q-icon addClass="color-red" icon="mdi-fire"></q-icon>
             {{ tag.count }}
-          </view>
-        </view>
+          </div>
+        </div>
       </scroll-view>
       <q-sidebar v-if="circleTypes.length" :dataList="circleTypes" class="flex-1 flex-row overflow-hidden"
                  :right-scroll="false">
         <template #leftRow="{item,index,current}">
-          <view class="q-sidebar-item" :class="{'q-sidebar-item-active':index === current}">
-            <view class="row-all-center flex-1">
-              <text class="uni-ellipsis">{{ item.name }}</text>
-            </view>
-          </view>
+          <div class="q-sidebar-item" :class="{'q-sidebar-item-active':index === current}">
+            <div class="row-all-center flex-1">
+              <span class="uni-ellipsis">{{ item.name }}</span>
+            </div>
+          </div>
         </template>
         <template #rightRow="{item}">
-          <view class="mx-sm mt-sm bg-white">
-            <view class="q-box-row mb-xs">
-              <text class="cuIcon-title text-green margin-right-xs"></text>
-              <text class="font-bold font-md">{{ item.name }}</text>
-            </view>
+          <div class="mx-sm mt-sm bg-white">
+            <div class="q-box-row mb-xs">
+              <span class="cuIcon-title text-green margin-right-xs"></span>
+              <span class="font-bold font-md">{{ item.name }}</span>
+            </div>
 
             <div v-if="item.circles" class="row-wrap overflow-hidden">
               <div v-for="(circle,index) in item.circles"
@@ -40,7 +40,7 @@
                 <div class="font-cut">{{ circle.count }}</div>
               </div>
             </div>
-          </view>
+          </div>
         </template>
       </q-sidebar>
       <div v-else class="row-all-center pd">数据加载中，请稍等...</div>

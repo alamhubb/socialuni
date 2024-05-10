@@ -1,7 +1,7 @@
 <template>
-  <view class="bg-default h100p">
+  <div class="bg-default h100p">
     <friend-apply-list-view  class="h100p"></friend-apply-list-view>
-  </view>
+  </div>
 </template>
 
 <script lang="ts">

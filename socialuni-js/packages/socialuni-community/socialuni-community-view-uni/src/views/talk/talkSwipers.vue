@@ -1,6 +1,6 @@
 <template>
-    <view v-if="showSwipers">
-        <!--  <view class="bg-primary px-smm pt-xs">-->
+    <div v-if="showSwipers">
+        <!--  <div class="bg-primary px-smm pt-xs">-->
         <swiper class="w100p" :indicator-dots="true" :autoplay="true" circular :interval="2500"
                 :style="{'height':swiperHeight+'px'}">
             <swiper-item class="bd-radius" v-for="(item,index) in homeSwipers" @click="skipWebView(index)">
@@ -12,7 +12,7 @@
                 />
             </swiper-item>
         </swiper>
-    </view>
+    </div>
 </template>
 
 <script lang="ts">

@@ -1,7 +1,7 @@
 <template>
   <!--        隐私提示-->
     <div>
-        <view v-if="!user" class="row-all-center row-wrap u-type-info">
+        <div v-if="!user" class="row-all-center row-wrap u-type-info">
             <checkbox  class="mt-sm" :checked="viewService.contractChecked" @click="viewService.contractCheckedChange()">
                 <span>已阅读并同意</span>
             </checkbox>
@@ -14,7 +14,7 @@
             <navigator :url="childProtectUrl" class="color-blue mt-sm">
                 《儿童个人信息保护规则及监护人须知》
             </navigator>
-        </view>
+        </div>
     </div>
 </template>
 

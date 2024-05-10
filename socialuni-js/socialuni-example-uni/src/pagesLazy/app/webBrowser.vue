@@ -1,29 +1,29 @@
 <template>
-  <view>
+  <div>
     <!--  #ifdef MP -->
     <q-navbar show-back>
-      <view class="row-between-center w100p flex-1">
-        <view class="ml-xl font-bold text-md">
+      <div class="row-between-center w100p flex-1">
+        <div class="ml-xl font-bold text-md">
           {{ title }}
-        </view>
-      </view>
+        </div>
+      </div>
     </q-navbar>
     <!--  #endif -->
     <!--  #ifndef MP -->
     <q-navbar show-back>
-      <view class="row-between-center w100p flex-1">
-        <view class="ml-xl font-bold text-md">
+      <div class="row-between-center w100p flex-1">
+        <div class="ml-xl font-bold text-md">
           {{ title }}
-        </view>
-        <view class="pr pl-xl" @click="showShare">
+        </div>
+        <div class="pr pl-xl" @click="showShare">
           <q-icon icon="more-dot-fill" size="25"></q-icon>
-        </view>
-      </view>
+        </div>
+      </div>
     </q-navbar>
     <!--  #endif -->
 
     <web-view :src="webUrl"></web-view>
-  </view>
+  </div>
 </template>
 
 <script lang="ts">

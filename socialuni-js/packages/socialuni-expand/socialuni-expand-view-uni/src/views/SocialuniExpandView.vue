@@ -1,9 +1,9 @@
 <template>
-  <view class="h100p flex-col bg-white">
+  <div class="h100p flex-col bg-white">
     <!--    <q-tabs :tabs="tabs" :value="currentTabIndex" type="full" @input="tabsChange"-->
     <!--            class="flex-none bd-radius flex-1 mr-sm mt-sm">-->
     <!--      <template #default="{tab,index,value}">-->
-    <!--        <view class="h30 px-xs row-all-center font-md" :class="{'font-md':value===index}">{{ tab }}</view>-->
+    <!--        <div class="h30 px-xs row-all-center font-md" :class="{'font-md':value===index}">{{ tab }}</div>-->
     <!--      </template>-->
     <!--    </q-tabs>-->
     <div class="flex-1 overflow-hidden">
@@ -30,40 +30,40 @@
                         mode="aspectFill"
                         :src="user.avatar"
                     />
-                    <view class="flex-1 row-between-center py-xs">
+                    <div class="flex-1 row-between-center py-xs">
                       <div class="flex-col flex-1">
-                        <view class="row-between-center">
+                        <div class="row-between-center">
                           <div class="row-col-center">
-                            <text :class="{'color-red':user.vipFlag}">{{ user.nickname }}</text>
-                            <view v-if="user.vipFlag" class="ml-5px cu-tag bg-orange radius sm"
+                            <span :class="{'color-red':user.vipFlag}">{{ user.nickname }}</span>
+                            <div v-if="user.vipFlag" class="ml-5px cu-tag bg-orange radius sm"
                                   @click.stop="openVip">
                               VIP
-                            </view>
+                            </div>
                             <social-gender-tag class="ml-xs" :user="user"></social-gender-tag>
                           </div>
-                        </view>
-                        <view class="row-col-center mt-xss font-12 color-content">
+                        </div>
+                        <div class="row-col-center mt-xss font-12 color-content">
 <!--                          {{ formatTime(user.updateTime) }}-->
 <!--                          <div class="px-xs row-col-center">|</div>-->
                           <!--        有市区的名称就不显示省的名称-->
-                          <text v-if="!user.cityName || !user.districtName">{{ user.provinceName }}</text>
-                          <text v-if="user.cityName">
-                            <text v-if="!user.districtName">-</text>
+                          <span v-if="!user.cityName || !user.districtName">{{ user.provinceName }}</span>
+                          <span v-if="user.cityName">
+                            <span v-if="!user.districtName">-</span>
                             {{ user.cityName.substring(0, 6) }}
-                          </text>
-                          <text v-if="user.districtName">-{{ user.districtName }}</text>
+                          </span>
+                          <span v-if="user.districtName">-{{ user.districtName }}</span>
 
-                          <view class="row-col-center" v-if="user.distance|| user.distance===0">
+                          <div class="row-col-center" v-if="user.distance|| user.distance===0">
                             <div class="px-xs row-col-center">|</div>
-                            <text v-if="user.distance<0.5">{{ 0.5 }}公里</text>
-                            <text v-else-if="user.distance<1">{{ 1 }}公里</text>
-                            <text v-else-if="user.distance<5">{{ 5 }}公里</text>
-                            <text v-else>{{ numFixed1(user.distance) }}公里</text>
-                          </view>
-                        </view>
+                            <span v-if="user.distance<0.5">{{ 0.5 }}公里</span>
+                            <span v-else-if="user.distance<1">{{ 1 }}公里</span>
+                            <span v-else-if="user.distance<5">{{ 5 }}公里</span>
+                            <span v-else>{{ numFixed1(user.distance) }}公里</span>
+                          </div>
+                        </div>
                       </div>
-                      <view class="col-center flex-none">
-<!--                      <view v-if="!isIos" class="col-center flex-none">-->
+                      <div class="col-center flex-none">
+<!--                      <div v-if="!isIos" class="col-center flex-none">-->
                         <div v-if="user.openContactInfo" class="use-click row-col-center">
                           <q-button light @click="copyContactInfo(user)">
                             <div class="color-content ml-xs font-12">
@@ -87,30 +87,30 @@
                         <!--                          </q-button>-->
                         <!--                        </div>-->
                         <!--                    <socialuni-follow-tag :user="user" @change="userFollowChange"></socialuni-follow-tag>-->
-                      </view>
-                    </view>
+                      </div>
+                    </div>
                   </div>
-                  <view class="ml-60 row-col-center mt-xs">
+                  <div class="ml-60 row-col-center mt-xs">
                     <image v-for="img in imgUrls(user).slice(0,3)" class="size40 bd-radius bd mr-sm"
                            mode="aspectFill"
                            :data-src="img"
                            @click.stop="previewImage(img,user)"
                            :src="img"
                     ></image>
-                  </view>
+                  </div>
                 </div>
-                <view class="mt-xs">
+                <div class="mt-xs">
                   <uni-load-more :status="item.queryQO.loadMore"
                                  @click="clickOnreachBottom"
                                  :contentText="loadMoreText"></uni-load-more>
-                </view>
+                </div>
               </template>
             </scroll-view>
           </swiper-item>
         </swiper>
       </q-pull-refresh>
     </div>
-  </view>
+  </div>
 </template>
 
 <script lang="ts">

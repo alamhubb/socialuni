@@ -32,16 +32,16 @@
                 />
                 <div class="flex-1 row-between-center py-xs">
                   <div class="flex-col flex-1">
-                    <view class="row-between-center">
+                    <div class="row-between-center">
                       <div class="row-col-center">
-                        <text :class="{'color-red':user.vipFlag}">{{ user.nickname }}</text>
-                        <view v-if="user.vipFlag" class="ml-5px cu-tag bg-orange radius sm"
+                        <span :class="{'color-red':user.vipFlag}">{{ user.nickname }}</span>
+                        <div v-if="user.vipFlag" class="ml-5px cu-tag bg-orange radius sm"
                               @click.stop="openVip">
                           VIP
-                        </view>
+                        </div>
                         <s-user-gender-tag class="ml-xs" :user="user"></s-user-gender-tag>
                       </div>
-                    </view>
+                    </div>
                     <div class="row-col-center mt-xss font-12 color-content">
                       <!--                          {{ formatTime(user.updateTime) }}-->
                       <!--                          <div class="px-xs row-col-center">|</div>-->
@@ -63,7 +63,7 @@
                     </div>
                   </div>
                   <div class="col-center flex-none">
-                    <!--                      <view v-if="!isIos" class="col-center flex-none">-->
+                    <!--                      <div v-if="!isIos" class="col-center flex-none">-->
                     <div v-if="user.openContactInfo" class="use-click row-col-center">
                       <q-button light @click="copyContactInfo(user)">
                         <div class="color-content ml-xs font-12">

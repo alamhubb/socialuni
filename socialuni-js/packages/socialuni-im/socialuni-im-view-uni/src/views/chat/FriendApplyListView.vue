@@ -1,5 +1,5 @@
 <template>
-    <view class="bg-default h100p">
+    <div class="bg-default h100p">
         <!--    <input class="uni-input" focus placeholder="自动获得焦点" @confirm="addFriend"/>-->
         <uni-list>
             <uni-list-chat v-for="(applyData,index) in friendApplyList"
@@ -7,29 +7,29 @@
                            :note="applyData.applyMsg"
                            @click="toUserDetail(applyData.id)">
                 <template v-if="applyData.isMine">
-                    <view class="chat-custom-right">
-                        <text class="chat-custom-text">{{ formatTime(applyData.createTime) }}</text>
+                    <div class="chat-custom-right">
+                        <span class="chat-custom-text">{{ formatTime(applyData.createTime) }}</span>
 
                         <!-- 需要使用 uni-icons 请自行引入 -->
                         <!--          <uni-icons type="star-filled" color="#999" size="18"></uni-icons>-->
-                    </view>
-                    <view class="chat-custom-right">
+                    </div>
+                    <div class="chat-custom-right">
                         {{ friendRuestResult(applyData.friendApplyStatus) }}
-                    </view>
+                    </div>
                 </template>
                 <template v-else>
-                    <view class="chat-custom-right">
-                        <text class="chat-custom-text">{{ formatTime(applyData.createTime) }}</text>
-                    </view>
-                    <view class="chat-custom-right"
+                    <div class="chat-custom-right">
+                        <span class="chat-custom-text">{{ formatTime(applyData.createTime) }}</span>
+                    </div>
+                    <div class="chat-custom-right"
                           v-if="applyData.friendApplyStatus === SocialuniAddFriendStatus.init">
                         <uni-tag type="primary" class="mr-sm" text="同意"
                                  @click="acceptFriendApplication(applyData)"></uni-tag>
                         <!--            <uni-tag type="success" text="拒绝" @click="refuseFriendApplication(applyData)"></uni-tag>-->
-                    </view>
-                    <view class="chat-custom-right" v-else>
+                    </div>
+                    <div class="chat-custom-right" v-else>
                         {{ friendRuestResult(applyData.friendApplyStatus) }}
-                    </view>
+                    </div>
                 </template>
             </uni-list-chat>
         </uni-list>
@@ -37,48 +37,48 @@
               <uni-title type="h1" align="center" title="黑名单列表"></uni-title>
               <uni-list-chat v-for="(black,index) in blackList" :title="black.nickname" :avatar="black.fromFaceURL"
                              :note="black.reqMsg">
-                &lt;!&ndash;        <view class="chat-custom-right">
-                          <text class="chat-custom-text">{{  formatTime(black.createTime)   }}</text>
-                        </view>&ndash;&gt;
-                <view class="chat-custom-right">
-                  <text class="chat-custom-text" @click.stop="removeBlack(black)">从黑名单移除</text>
-                </view>
+                &lt;!&ndash;        <div class="chat-custom-right">
+                          <span class="chat-custom-text">{{  formatTime(black.createTime)   }}</span>
+                        </div>&ndash;&gt;
+                <div class="chat-custom-right">
+                  <span class="chat-custom-text" @click.stop="removeBlack(black)">从黑名单移除</span>
+                </div>
               </uni-list-chat>
             </uni-list>
 
 
             <uni-list>
               <uni-title type="h1" align="center" title="已添加的好友列表"></uni-title>
-              <view v-for="(friend,index) in friendList">
+              <div v-for="(friend,index) in friendList">
                 <uni-list-chat v-if="friend.friendInfo && !friend.blackInfo" :title="friend.friendInfo.nickname"
                                :avatar="friend.friendInfo.fromFaceURL">
-                  <view class="chat-custom-right">
-                    <text class="chat-custom-text">{{ formatTime(friend.friendInfo.createTime) }}</text>
-                  </view>
-                  <view class="chat-custom-right">
+                  <div class="chat-custom-right">
+                    <span class="chat-custom-text">{{ formatTime(friend.friendInfo.createTime) }}</span>
+                  </div>
+                  <div class="chat-custom-right">
                     <uni-tag type="warning" text="添加到黑名单" @click="addBlack(friend.friendInfo)"></uni-tag>
                     <uni-tag type="error" text="删除好友" @click="deleteFriend(friend.friendInfo)"></uni-tag>
-                  </view>
+                  </div>
                 </uni-list-chat>
                 <uni-list-chat v-if="friend.blackInfo" :title="friend.blackInfo.nickname"
                                :avatar="friend.blackInfo.fromFaceURL">
-                  <view class="chat-custom-right">
-                    <text class="chat-custom-text" @click.stop="removeBlack(friend.blackInfo)">从黑名单移除</text>
-                  </view>
+                  <div class="chat-custom-right">
+                    <span class="chat-custom-text" @click.stop="removeBlack(friend.blackInfo)">从黑名单移除</span>
+                  </div>
                 </uni-list-chat>
-              </view>
+              </div>
             </uni-list>-->
 
 
-        <!--    <view class="row-col-center" >
+        <!--    <div class="row-col-center" >
               <div class="font-xs">已添加的好友列表::::</div>
               <div v-for="(friend,index) in friendList" >
                 <div class="font-xs" v-if="friend.friendInfo"> 没拉黑的好友: {{friend.friendInfo.nickname}}</div>
                 <div class="font-xs" v-if="friend.blackInfo"> 被拉黑的好友: {{friend.blackInfo.nickname}}</div>
               </div>
-            </view>-->
+            </div>-->
 
-    </view>
+    </div>
 </template>
 
 <script lang="ts">

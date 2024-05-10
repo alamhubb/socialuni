@@ -1,129 +1,129 @@
 <template>
-  <view class="h100p bg-white">
-    <view v-if="showTagSearch">
+  <div class="h100p bg-white">
+    <div v-if="showTagSearch">
       <talk-add-tag-search :tags="tags" :is-add="true" :select-tags="selectTags" @change="changeTag"
                            @close="closeTagSearch"
                            @delete-tag="deleteTag" @add-tag="showAddTag">
       </talk-add-tag-search>
-    </view>
+    </div>
 
-    <view v-if="showTagAdd">
+    <div v-if="showTagAdd">
       <social-tag-add @change="addTagCheckTag" @close="closeTagAddVue"></social-tag-add>
-    </view>
-    <view v-show="!showCityDialog&&!showTagSearch&&!showTagAdd">
+    </div>
+    <div v-show="!showCityDialog&&!showTagSearch&&!showTagAdd">
       <q-navbar show-back>
         <div class="w100p row-col-center">
-          <view class="font-bold text-md flex-1">
+          <div class="font-bold text-md flex-1">
             发布动态
-          </view>
+          </div>
           <q-button class="text-bold" theme :disabled="buttonDisabled" @click="addTalk">发布</q-button>
         </div>
       </q-navbar>
       <q-city-picker v-model="showCityDialog" :district="district" @confirm="cityChange"></q-city-picker>
-      <view class="px-smm py-sm">
+      <div class="px-smm py-sm">
         <textarea class="h140 w100p" :maxlength="200"
                   placeholder="禁止发布未成年人、违法乱纪、涉污涉黄、暴露不雅、广告等内容，发布违规内容将会被封号处理！"
                   v-model.trim="talkContent"
                   :show-confirm-bar="false"
         />
-      </view>
+      </div>
       <!--      禁止发布违法乱纪、涉污涉黄、暴露不雅、广告内容，发布违规内容会影响用户在社交软件联盟中的信用评级-->
 
-      <view class="uni-list list-pd pb-xs">
-        <view class="uni-list-cell cell-pd">
-          <view class="uni-uploader">
-            <view class="uni-uploader-body">
-              <view class="uni-uploader__files">
+      <div class="uni-list list-pd pb-xs">
+        <div class="uni-list-cell cell-pd">
+          <div class="uni-uploader">
+            <div class="uni-uploader-body">
+              <div class="uni-uploader__files">
                 <block v-for="(image,index) in showImgUrls" :key="index">
-                  <view class="uni-uploader__file position-relative">
-                    <view
+                  <div class="uni-uploader__file position-relative">
+                    <div
                         class="close-view position-absolute z-index-button color-content size20 bg-grey8 bg-half-transparent row-all-center topRight bd-bl-radius"
                         @click="deleteImg(index)">×
-                    </view>
+                    </div>
                     <image class="uni-uploader__img" mode="aspectFill" :src="image"
                            :data-src="image" @click="previewImage"/>
-                  </view>
+                  </div>
                 </block>
-                <view class="uni-uploader__input-box" v-show="showImgFiles.length < 3">
-                  <view class="uni-uploader__input" @click="chooseImage"/>
-                </view>
-              </view>
-            </view>
-          </view>
-        </view>
-      </view>
+                <div class="uni-uploader__input-box" v-show="showImgFiles.length < 3">
+                  <div class="uni-uploader__input" @click="chooseImage"/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <view class="px-sm pt-sm mt-xs row-between">
+      <div class="px-sm pt-sm mt-xs row-between">
         <q-city-info v-model="district" picker></q-city-info>
         <div class="row-between-center bg-click" @click="openCircleSearchDialog">
           <div>{{ circleName || '选择圈子' }}</div>
           <q-icon icon="arrow-right" class="text-md margin-right-sm" size="12"></q-icon>
         </div>
-      </view>
-      <view class="px-sm pt-sm">
-        <view v-if="!selectTags.length" class="row-wrap pb-10">
-          <view class="q-tag bd-round bg-pink-plain">
-            <text @click="openTagSearchVue(false)">#添加话题</text>
-          </view>
-        </view>
-        <view v-else class="row-wrap">
-          <view v-for="tag in selectTags" :key="tag.id" class="pb-10 px-mn">
-            <view class="q-tag bd-round bg-pink-plain">
-              <text @click="openTagSearchVue(false)">#{{ tag.name }}</text>
+      </div>
+      <div class="px-sm pt-sm">
+        <div v-if="!selectTags.length" class="row-wrap pb-10">
+          <div class="q-tag bd-round bg-pink-plain">
+            <span @click="openTagSearchVue(false)">#添加话题</span>
+          </div>
+        </div>
+        <div v-else class="row-wrap">
+          <div v-for="tag in selectTags" :key="tag.id" class="pb-10 px-mn">
+            <div class="q-tag bd-round bg-pink-plain">
+              <span @click="openTagSearchVue(false)">#{{ tag.name }}</span>
               <q-icon v-if="tag.id" class="ml-5" icon="close-circle-fill" size="16"
                       @click.stop="deleteTag(tag)"/>
-            </view>
-          </view>
-        </view>
-        <view class="pb-sm">
+            </div>
+          </div>
+        </div>
+        <div class="pb-sm">
           热门话题：
-        </view>
-        <view class="row-wrap">
-          <view v-for="tag in unSelectTags" :key="tag.id" class="pb-10 px-mn">
-            <view class="q-tag bd-round bg-pink-plain" @click="checkTag(tag)">
+        </div>
+        <div class="row-wrap">
+          <div v-for="tag in unSelectTags" :key="tag.id" class="pb-10 px-mn">
+            <div class="q-tag bd-round bg-pink-plain" @click="checkTag(tag)">
               #{{ tag.name }}
-            </view>
-          </view>
-          <view class="row-all-center pb-10 px-mn">
-            <view class="q-tag bd-round bg-orange-plain" @click="openTagSearchVue(false)">
+            </div>
+          </div>
+          <div class="row-all-center pb-10 px-mn">
+            <div class="q-tag bd-round bg-orange-plain" @click="openTagSearchVue(false)">
               更多
               <q-icon icon="arrow-right" size="12" class="ml-5"/>
-            </view>
-          </view>
-        </view>
-      </view>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <view class="row-col-center pd-sm">
+      <div class="row-col-center pd-sm">
         <div class="flex-row text-md">
           可见范围：
-          <view class="text-gray row-all-center bg-grey10 w100 mr-xs px-xs" @click="showVisibleTypeSelect=true">
-            <text class="text-md text-gray mr-xs">{{ visibleType.label }}</text>
+          <div class="text-gray row-all-center bg-grey10 w100 mr-xs px-xs" @click="showVisibleTypeSelect=true">
+            <span class="text-md text-gray mr-xs">{{ visibleType.label }}</span>
             <q-icon size="14" class="text-gray" icon="arrow-down"/>
             <!--            <u-select v-model="showVisibleTypeSelect" mode="single-column" :list="visibleTypes"
                                   :default-value="visibleTypeValueIndex"
                                   @confirm="selectVisibleTypeChange"></u-select>-->
-          </view>
+          </div>
           <!--          {{GenderType.all}}&#45;&#45;{{appGenderType}}&#45;&#45;{{GenderType.all === appGenderType}}-->
           <!--          只有不为单性app才显示-->
           <template v-if="GenderTypeAll === appGenderType">
             <div>，</div>
-            <view class="text-gray row-all-center bg-grey10 w100 mx-xs px-xs" @click="showVisibleGenderSelect=true">
-              <text class="text-md text-gray mr-xs">{{ visibleGender.label }}</text>
+            <div class="text-gray row-all-center bg-grey10 w100 mx-xs px-xs" @click="showVisibleGenderSelect=true">
+              <span class="text-md text-gray mr-xs">{{ visibleGender.label }}</span>
               <q-icon size="14" class="text-gray" icon="arrow-down"/>
               <!--              <u-select v-model="showVisibleGenderSelect" mode="single-column" :list="visibleGenders"
                                       :default-value="visibleGenderValueIndex"
                                       @confirm="selectVisibleGenderChange"></u-select>
 
                             <u-picker :show="show" :columns="visibleGenders"></u-picker>-->
-            </view>
+            </div>
           </template>
           <div class="ml-xs">可见</div>
         </div>
-      </view>
+      </div>
 
       <social-circle-picker ref="circleSearch" @change="circleChange"></social-circle-picker>
-    </view>
-  </view>
+    </div>
+  </div>
 </template>
 <script lang="ts">
 import {Component, Vue, Watch, toNative} from 'vue-facing-decorator'

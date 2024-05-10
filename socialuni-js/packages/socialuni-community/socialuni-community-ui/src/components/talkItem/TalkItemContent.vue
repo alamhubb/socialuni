@@ -1,9 +1,9 @@
 <template>
-  <view>
+  <div>
     <div class="px-15" @click="toTalkDetailVue" selectable @longpress="copyContent(talk)">
       {{ talk.content }}
     </div>
-    <view v-if="talk.imgs.length" class="card-text-row mt-10">
+    <div v-if="talk.imgs.length" class="card-text-row mt-10">
       <div v-for="(img,index) in talk.imgs.slice(0,3)" :key="img.id"
            class="position-relative card-text-img flex-row overflow-hidden"
            :style="{'max-width':talk.imgs.length===1?Math.min(200*img.aspectRatio,230)+'px':'','max-height':talk.imgs.length===1?'200px':668/Math.min(talk.imgs.length,3)/2+'px'}">
@@ -21,71 +21,71 @@
                           size="16" icon="level"/>
                 </div>-->
       </div>
-    </view>
+    </div>
     <div class="px-smm row-wrap" v-if="!talk.globalTop || talk.globalTop===1">
       <template v-if="talk.tags&&talk.tags.length">
-        <view v-for="tag in talk.tags" :key="tag.id" @click.stop="chooseTags(tag.name)"
+        <div v-for="tag in talk.tags" :key="tag.id" @click.stop="chooseTags(tag.name)"
               class="mt-sm color-blue_dark mr-sm">
-          <text class="color-blue mr-nn">#</text>
+          <span class="color-blue mr-nn">#</span>
           {{ tag.name }}
-        </view>
+        </div>
       </template>
     </div>
 
-    <view v-if="!talk.globalTop || talk.globalTop===1" class="row-col-center px-sm row-wrap"
+    <div v-if="!talk.globalTop || talk.globalTop===1" class="row-col-center px-sm row-wrap"
           @click="toTalkDetailVue">
       <div v-if="talk.circles&&talk.circles.length">
-        <view v-for="circleName in talk.circles" :key="circleName" @click.stop="chooseCircle(circleName)"
+        <div v-for="circleName in talk.circles" :key="circleName" @click.stop="chooseCircle(circleName)"
               class="q-tag mr-sm mt-xss">
           <!--          <q-icon icon="moments" class="color-purple mr-mn" size="12"></q-icon>-->
           <q-icon icon="mdi-send" class="color-purple mr-mn mdi-rotate-315" size="12"></q-icon>
-          <text class="pt-nn">{{ circleName }}</text>
+          <span class="pt-nn">{{ circleName }}</span>
 <!--          圈-->
-        </view>
+        </div>
       </div>
 
-      <view class="q-tag mt-xss">
+      <div class="q-tag mt-xss">
         <q-icon icon="map-fill" class="color-purple mr-mn" size="12"></q-icon>
         <!--        有市区的名称就不显示省的名称-->
-        <text v-if="!talk.district.cityName || !talk.district.districtName">{{ talk.district.provinceName }}</text>
-        <text v-if="talk.district.cityName">
-          <text v-if="!talk.district.districtName">-</text>
+        <span v-if="!talk.district.cityName || !talk.district.districtName">{{ talk.district.provinceName }}</span>
+        <span v-if="talk.district.cityName">
+          <span v-if="!talk.district.districtName">-</span>
           {{ talk.district.cityName }}
-        </text>
-        <text v-if="talk.district.districtName">-{{ talk.district.districtName }}</text>
+        </span>
+        <span v-if="talk.district.districtName">-{{ talk.district.districtName }}</span>
 
-        <view class="row-col-center" v-if="talk.distance|| talk.distance===0">
+        <div class="row-col-center" v-if="talk.distance|| talk.distance===0">
           <div class="px-xs row-col-center">|</div>
-          <text v-if="talk.distance<0.5">{{ 0.5 }}公里</text>
-          <text v-else-if="talk.distance<1">{{ 1 }}公里</text>
-          <text v-else-if="talk.distance<5">{{ 5 }}公里</text>
-          <text v-else>{{ numFixed1(talk.distance) }}公里</text>
-        </view>
-      </view>
+          <span v-if="talk.distance<0.5">{{ 0.5 }}公里</span>
+          <span v-else-if="talk.distance<1">{{ 1 }}公里</span>
+          <span v-else-if="talk.distance<5">{{ 5 }}公里</span>
+          <span v-else>{{ numFixed1(talk.distance) }}公里</span>
+        </div>
+      </div>
       <!--        <div class="color-sub text-sm h25 row-col-center ml-smm">
                 {{ home.updateTime| formatTime }}
               </div>-->
 
-      <!--      <view class="row-col-center">
+      <!--      <div class="row-col-center">
               &lt;!&ndash;      只有非单性才需要这样显示&ndash;&gt;
               <template v-if="appGenderType === GenderTypeAll">
-                <view v-if="home.visibleGender === GenderTypeGirl" class="cu-tag round bg-pink light">
+                <div v-if="home.visibleGender === GenderTypeGirl" class="cu-tag round bg-pink light">
                   女生可见
-                </view>
-                <view v-else-if="home.visibleGender === GenderTypeBoy" class="cu-tag round bg-blue light">
+                </div>
+                <div v-else-if="home.visibleGender === GenderTypeBoy" class="cu-tag round bg-blue light">
                   男生可见
-                </view>
+                </div>
               </template>
               &lt;!&ndash; 三方数据才显示数据来源&ndash;&gt;
-              <view v-if="home.threeContent" class="ml-sm cu-tag round bg-orange light"
+              <div v-if="home.threeContent" class="ml-sm cu-tag round bg-orange light"
                     @click.stop="goToThreeAppClick(home.threeAppId,home.threeTalkPath)">
                 {{ home.threeAppName }}
                 <q-icon v-if="home.threeAppId" icon="mdi-near-me" class="ml-xs" size="14"></q-icon>
-              </view>
-            </view>-->
-    </view>
+              </div>
+            </div>-->
+    </div>
 
-  </view>
+  </div>
 </template>
 
 <script lang="ts">

@@ -1,5 +1,5 @@
 <template>
-  <view
+  <div
       v-if="inputContentFocus"
       class="bg-white row-between-center pr-sm input fixed-footer elevation-4 flex-row" style="min-height: 50px"
   >
@@ -29,11 +29,11 @@
         @blur="inputContentBlur"
         :clearable="false"
     ></u-field>-->
-    <!--<view class="action">
-        <text class="cuIcon-emojifill text-grey"></text>
-    </view>-->
+    <!--<div class="action">
+        <span class="cuIcon-emojifill text-grey"></span>
+    </div>-->
     <button class="cu-btn bg-cyan flex-none" @click="sendComment" :disabled="!content">发送</button>
-  </view>
+  </div>
 </template>
 
 <script lang="ts">

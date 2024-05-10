@@ -12,9 +12,9 @@
             -{{ value.districtName }}
           </template>
         </template>
-        <text v-else>
+        <span v-else>
           {{ value.adName }}
-        </text>
+        </span>
       </div>
       <div v-else>中国</div>
     </div>

@@ -27,11 +27,11 @@
                 chat.nickname
               }}
             </div>
-            <!--            <view v-if="systemChats.indexOf(chat.type)>-1"
+            <!--            <div v-if="systemChats.indexOf(chat.type)>-1"
                               class="cu-tag round bg-blue sm text-sm col-center text-bold">官方
-                        </view>
-                        <view v-else-if="chat.vipFlag" class="cu-tag round bg-red sm text-sm col-center text-bold">VIP
-                        </view>-->
+                        </div>
+                        <div v-else-if="chat.vipFlag" class="cu-tag round bg-red sm text-sm col-center text-bold">VIP
+                        </div>-->
           </div>
           <div>
             <div class="color-content text-sm flex">
@@ -78,19 +78,19 @@
                                 @click="clearSearchContent"
                         ></q-icon>
                     </q-search>
-                    <view @click="toAddFriend">
+                    <div @click="toAddFriend">
                         <q-icon icon="list-dot" size="20" @click="openUserChatSetting"></q-icon>
-                    </view>
+                    </div>
                 </div>
             </q-navbar>-->
-    <!--    <view v-if="showChatHint&& showChats && showChats.length" class="row-col-center bg-orange">
-          <view class="flex-1 card-text-row">
+    <!--    <div v-if="showChatHint&& showChats && showChats.length" class="row-col-center bg-orange">
+          <div class="flex-1 card-text-row">
             长按聊天框可解除匹配
-          </view>
-          <view class="flex-none mr-10px">
+          </div>
+          <div class="flex-none mr-10px">
             <q-icon icon="close-circle-fill" size="18" @click="closeUploadImgHint"></q-icon>
-          </view>
-        </view>-->
+          </div>
+        </div>-->
 
     <!--        <div>
                 <div>
@@ -116,9 +116,9 @@
             </div>
           </div>
         </div>-->
-    <!--    <view v-show="false">
+    <!--    <div v-show="false">
           {{ chatsUnreadNumTotal }}
-        </view>-->
+        </div>-->
   </div>
 </template>
 

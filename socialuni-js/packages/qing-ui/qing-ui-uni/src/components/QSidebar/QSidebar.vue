@@ -1,30 +1,30 @@
 <template>
-  <view :class="[uuid]" class="q-sidebar-box h100p overflow-hidden flex-row w100p">
+  <div :class="[uuid]" class="q-sidebar-box h100p overflow-hidden flex-row w100p">
     <scroll-view class="flex-none h100p" :scroll-top="leftBoxScrollTop" scroll-y
                  :style="{'width':leftBoxWidth/2+'px'}">
-      <view v-for="(item,index) in dataList" :class="[uuid]" class="sidebar-left-item" :key="index"
+      <div v-for="(item,index) in dataList" :class="[uuid]" class="sidebar-left-item" :key="index"
             @click="leftMenuClick(index)"
       >
         <slot name="leftRow" v-bind:item="item" v-bind:index="index" v-bind:current="chooseIndex"></slot>
-      </view>
+      </div>
     </scroll-view>
     <scroll-view v-if="rightScroll" class="flex-1 h100p bg-default" :scroll-into-view="rightBoxScrollIntoId" scroll-y
                  @scroll="rightBoxScroll">
-      <view v-for="(item,index) in dataList" :class="[uuid]" class="sidebar-right-item"
+      <div v-for="(item,index) in dataList" :class="[uuid]" class="sidebar-right-item"
             :id="'sidebar-right-'+index"
             :key="index"
             :style="{'height': index === dataList.length - 1 ? rightLastHeightPx : ''}"
       >
         <slot name="rightRow" v-bind:item="item"></slot>
-      </view>
+      </div>
     </scroll-view>
     <scroll-view v-else-if="dataList.length" class="flex-1 h100p bg-default" scroll-y>
-      <view :class="[uuid]" class="sidebar-right-item"
+      <div :class="[uuid]" class="sidebar-right-item"
       >
         <slot name="rightRow" v-bind:item="dataList[chooseIndex]"></slot>
-      </view>
+      </div>
     </scroll-view>
-  </view>
+  </div>
 </template>
 <script lang="ts">
 import CommonUtil from 'qing-util/src/util/CommonUtil';

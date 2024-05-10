@@ -74,9 +74,6 @@
 
 
                 <div v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
-                  <div>
-                    {{talk}}
-                  </div>
                   <talk-item :talk="talk"
                              :talk-tab-type="curTalkTabObj.type"
                              @delete-talk="deleteTalk"
@@ -163,6 +160,7 @@ import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+import TalkItem from "socialuni-community-ui/src/components/talkItem/TalkItem.vue";
 
 // todo 后台可控制是否显示轮播图
 @toNative
@@ -170,6 +168,7 @@ import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserMod
   components: {
     QIcon,
     QTabs,
+    TalkItem
   }
 })
 export default class SocialuniTalkViewH5 extends Vue {

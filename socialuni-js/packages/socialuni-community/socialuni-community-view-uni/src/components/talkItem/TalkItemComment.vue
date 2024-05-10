@@ -1,25 +1,25 @@
 <template>
-  <view v-if="talk">
-    <view class="px-15 pt-10 row-between-center">
-      <view class="row-around-center flex-1">
-        <view class="row-col-center" @click="showShareMenu">
+  <div v-if="talk">
+    <div class="px-15 pt-10 row-between-center">
+      <div class="row-around-center flex-1">
+        <div class="row-col-center" @click="showShareMenu">
           <q-button no-debounce text open-type="share">
             <q-icon icon="share-square" size="26" add-class="color-black">
             </q-icon>
-            <text class="ml-mn text-df">
+            <span class="ml-mn text-df">
               分享
-            </text>
+            </span>
           </q-button>
-        </view>
-        <view class="row-col-center" @click="setTalk">
+        </div>
+        <div class="row-col-center" @click="setTalk">
           <q-icon icon="mdi-comment-outline" size="22">
           </q-icon>
-          <text v-if="talk.commentNum" class="ml-5">
+          <span v-if="talk.commentNum" class="ml-5">
             {{ talk.commentNum }}
-          </text>
-        </view>
-        <view class="row-all-center">
-          <view @click="addHug" class="text-df line-height-1 row-all-center px-0 border-none">
+          </span>
+        </div>
+        <div class="row-all-center">
+          <div @click="addHug" class="text-df line-height-1 row-all-center px-0 border-none">
             <q-icon v-if="talk.hasHugged" size="24"
                     icon="heart-fill"
                     class="color-red3"
@@ -27,52 +27,52 @@
             <q-icon v-else size="24"
                     icon="heart"
             ></q-icon>
-            <text class="ml-mn">
+            <span class="ml-mn">
               抱抱
-            </text>
-            <text v-if="talk.hugNum" class="ml-5">
+            </span>
+            <span v-if="talk.hugNum" class="ml-5">
               {{ talk.hugNum }}
-            </text>
-          </view>
-        </view>
-      </view>
+            </span>
+          </div>
+        </div>
+      </div>
       <!--                hover-class="uni-list-cell-hover"-->
 
-      <view v-if="!talk.globalTop" class="ml-sm flex-none button-icon row-col-center" @click="openReportDialog">
+      <div v-if="!talk.globalTop" class="ml-sm flex-none button-icon row-col-center" @click="openReportDialog">
         <q-icon icon="more-dot-fill"></q-icon>
-      </view>
-    </view>
-    <view class="px-15 mt-xs" v-if="talk.comments">
+      </div>
+    </div>
+    <div class="px-15 mt-xs" v-if="talk.comments">
       <block v-for="(comment,index) in talk.comments" :key="comment.id">
-        <view v-if="index < commentShowNum">
+        <div v-if="index < commentShowNum">
           <!--                        {{comment.no}}#-->
-          <view class="flex-row py-mn" @click="toTalkDetailVue">
-            <view class="flex-none" :class="comment.user.vipFlag?'color-red':'color-blue'"
+          <div class="flex-row py-mn" @click="toTalkDetailVue">
+            <div class="flex-none" :class="comment.user.vipFlag?'color-red':'color-blue'"
                   @click.stop="toUserDetail(comment.user.id)">
               {{ comment.user.nickname }}
-            </view>
+            </div>
             ：
-            <view @longpress="openCommentActionDialog(comment)"
+            <div @longpress="openCommentActionDialog(comment)"
                   @click.stop="setComment(talk,comment)">
               {{ comment.content }}
-            </view>
-          </view>
+            </div>
+          </div>
           <child-comment :talk="talk" :comment-prop="comment"></child-comment>
-        </view>
+        </div>
       </block>
-      <view v-show="!showAllComment && (talk.commentNum>commentShowNum || showOtherCommentClicked)">
-        <view class="row-col-center color-orange pt-mn" @click="toTalkDetailVue">
-          <view v-show="talk.commentNum>commentShowNum">
+      <div v-show="!showAllComment && (talk.commentNum>commentShowNum || showOtherCommentClicked)">
+        <div class="row-col-center color-orange pt-mn" @click="toTalkDetailVue">
+          <div v-show="talk.commentNum>commentShowNum">
             查看其余{{ talk.commentNum - commentShowNum }}条评论
-          </view>
-          <view v-show="false">
+          </div>
+          <div v-show="false">
             收起评论
             <q-icon icon="arrow-up"></q-icon>
-          </view>
-        </view>
-      </view>
-    </view>
-  </view>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
