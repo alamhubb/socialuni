@@ -130,7 +130,7 @@ import {Component, Vue, Watch, toNative} from 'vue-facing-decorator'
 import AppMsg from 'socialuni-constant/constant/AppMsg'
 import {onUnload} from "@dcloudio/uni-app";
 import QSidebar from "qing-ui-uni/src/components/QSidebar/QSidebar.vue";
-import QPopup from "qing-ui-uni/src/components/QPopup/QPopup.vue";
+import QPopup from "qing-ui/src/components/QPopup.vue";
 import QButton from "qing-ui-uni/src/components/QButton/QButton.vue";
 import QIcon from "qing-ui/src/components/QIcon.vue";
 import QNavbar from "qing-ui-uni/src/components/QNavbar/QNavbar.vue";

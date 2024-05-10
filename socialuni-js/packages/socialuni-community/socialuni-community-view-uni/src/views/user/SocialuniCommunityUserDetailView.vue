@@ -89,7 +89,7 @@
 </template>
 
 <script lang="ts">
-import QPopup from "qing-ui-uni/src/components/QPopup/QPopup.vue";
+import QPopup from "qing-ui/src/components/QPopup.vue";
 import {Inject, Component, Vue, toNative} from 'vue-facing-decorator'
 import {socialuniCommunityUserDetailViewService}
   from "socialuni-community-sdk/src/logic/SocialuniCommunityUserDetailViewService";

@@ -93,7 +93,7 @@ import TagSearch from "./TagSearch.vue";
 import QInput from "qing-ui/src/components/QInput.vue";
 import QIcon from "qing-ui/src/components/QIcon.vue";
 import QSlider from "qing-ui-uni/src/components/QSlider/QSlider.vue";
-import QPopup from "qing-ui-uni/src/components/QPopup/QPopup.vue";
+import QPopup from "qing-ui/src/components/QPopup.vue";
 import SocialTagPicker from 'socialuni-community-view-uni/src/components/SocialTagPicker.vue';
 import SocialCirclePicker from "socialuni-community-view-uni/src/components/SocialCirclePicker.vue";
 import {socialuniTagModule} from "socialuni-community-sdk/src/store/SocialTagModule";

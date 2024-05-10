@@ -27,7 +27,7 @@
 
 <script lang="ts">
 import {Emit, Component, Vue, toNative} from 'vue-facing-decorator'
-import QPopup from "qing-ui-uni/src/components/QPopup/QPopup.vue";
+import QPopup from "qing-ui/src/components/QPopup.vue";
 import ReportType from "socialuni-constant/constant/ReportType";
 import ReportAddVO from "socialuni-api-base/src/model/report/ReportAddVO";
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";

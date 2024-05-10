@@ -53,7 +53,7 @@ import QButton from 'qing-ui-uni/src/components/QButton/QButton.vue'
 import QNavbar from 'qing-ui-uni/src/components/QNavbar/QNavbar.vue'
 import QSearch from 'qing-ui-uni/src/components/QSearch/QSearch.vue'
 import QIcon from 'qing-ui/src/components/QIcon.vue'
-import QPopup from 'qing-ui-uni/src/components/QPopup/QPopup.vue'
+import QPopup from 'qing-ui/src/components/QPopup.vue'
 import QSlider from 'qing-ui-uni/src/components/QSlider/QSlider.vue'
 import QTabs from "qing-ui-uni/src/components/QTabs/QTabs.vue";
 import TagSearch from "./TagSearch.vue";

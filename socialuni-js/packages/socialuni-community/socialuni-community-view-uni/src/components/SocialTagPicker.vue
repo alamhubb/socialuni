@@ -52,7 +52,7 @@ import {Component, Emit, Vue, toNative} from 'vue-facing-decorator'
 import QIcon from "qing-ui/src/components/QIcon.vue";
 import QInput from "qing-ui/src/components/QInput.vue";
 import QSidebar from "qing-ui-uni/src/components/QSidebar/QSidebar.vue";
-import QPopup from "qing-ui-uni/src/components/QPopup/QPopup.vue";
+import QPopup from "qing-ui/src/components/QPopup.vue";
 import SocialCircleRO from "socialuni-api-base/src/model/community/circle/SocialCircleRO";
 import {socialuniTagModule} from "socialuni-community-sdk/src/store/SocialTagModule";
 import TagTypeVO from "socialuni-api-base/src/model/community/tag/TagTypeVO";

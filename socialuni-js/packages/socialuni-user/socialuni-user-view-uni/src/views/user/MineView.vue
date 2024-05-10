@@ -204,7 +204,7 @@ import {Component, Prop, Vue, toNative} from 'vue-facing-decorator'
 import LoginView from "../login/LoginView.vue";
 import SocialuniFollowType from 'socialuni-constant/constant/user/SocialuniFollowType';
 import UserContactInfoEditDialog from "./UserContactInfoEditDialog.vue";
-import QPopup from "qing-ui-uni/src/components/QPopup/QPopup.vue";
+import QPopup from "qing-ui/src/components/QPopup.vue";
 import QIcon from "qing-ui/src/components/QIcon.vue";
 import QNavbar from "qing-ui-uni/src/components/QNavbar/QNavbar.vue";
 import QRowItem from "qing-ui/src/components/QRowItem.vue";

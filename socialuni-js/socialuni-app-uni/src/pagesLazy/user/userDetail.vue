@@ -33,7 +33,7 @@ import SocialuniCommunityUserDetailView
   from "socialuni-community-view-uni/src/views/user/SocialuniCommunityUserDetailView.vue";
 import QButton from "qing-ui-uni/src/components/QButton/QButton.vue";
 import QIcon from "qing-ui/src/components/QIcon.vue";
-import QPopup from "qing-ui-uni/src/components/QPopup/QPopup.vue";
+import QPopup from "qing-ui/src/components/QPopup.vue";
 import {Component, Vue, toNative} from 'vue-facing-decorator';
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import SocialuniUserDetailView from "socialuni-user-view-uni/src/views/user/SocialuniUserDetailView.vue";

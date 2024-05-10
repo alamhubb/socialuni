@@ -1,123 +1,147 @@
 <template>
-  <div class="flex-col">
-    <q-tabs
-        v-model="currentTabIndex"
-        active-class="bg-white bb-blue-3"
-        :tabs="tabs"
-        @change="tabsChange"
-        class="flex-none bg-white position-sticky top-0 index-xs"
-    />
-    <div @click="$refs.cityPicker.open()">dakai</div>
-    <q-city-picker ref="cityPicker" :bottom="false"></q-city-picker>
-
-    <div class="flex-1 overflow-hidden">
-      <div class="h100p" v-for="(item, swiperIndex) in tabsPageQueryUtil" :key="swiperIndex">
-        <div>
-          <div v-if="!item.queryQO.listData.length" class="row-all-center h100 color-content">
-            <div>暂无数据</div>
+  <div v-if="talkTabs.length" class="flex-col h100p">
+    <!--  <div v-if="talkTabs.length" class="flex-col h100p bg-primary">-->
+    <!--    <q-tabs :tabs="talkTabs" v-model="current" type="bar" @input="tabsChange"-->
+    <div class="flex-row px-sm mb-xss flex-none">
+      <q-tabs :tabs="talkTabs" :value="currentTabIndex" type="line" @input="tabsChange"
+              class="bd-radius flex-1 mr-sm">
+        <template #default="{tab,index,value}">
+          <div class="h30 px-xs row-all-center font-md" :class="{'font-md':value===index}">{{
+              tab.name
+            }}
           </div>
-          <template v-else>
-            <div v-if="mineUser && swiperIndex === 0" class="px-sm">
-              <!--                  <div class="row-all-center color-main mt-sm chunk-default pd-xs">-->
-              <!--                    {{ mineUser.openContactInfo ? '下拉刷新将您的排名前置' : '开启联系方式您的信息将在此处展示' }}-->
-              <!--                  </div>-->
-            </div>
-            <div class="flex-col px-smm py-sm bb" v-for="user in item.queryQO.listData" :key="user.id"
-                 @click="toUserDetailVue(user)">
-              <div class="row-col-center">
-                <img
-                    class="size50 bd-radius-xs mr-10 flex-none"
-                    mode="aspectFill"
-                    :src="user.avatar"
-                />
-                <div class="flex-1 row-between-center py-xs">
-                  <div class="flex-col flex-1">
-                    <view class="row-between-center">
-                      <div class="row-col-center">
-                        <text :class="{'color-red':user.vipFlag}">{{ user.nickname }}</text>
-                        <view v-if="user.vipFlag" class="ml-5px cu-tag bg-orange radius sm"
-                              @click.stop="openVip">
-                          VIP
-                        </view>
-                        <s-user-gender-tag class="ml-xs" :user="user"></s-user-gender-tag>
-                      </div>
-                    </view>
-                    <div class="row-col-center mt-xss font-12 color-content">
-                      <!--                          {{ formatTime(user.updateTime) }}-->
-                      <!--                          <div class="px-xs row-col-center">|</div>-->
-                      <!--        有市区的名称就不显示省的名称-->
-                      <span v-if="!user.cityName || !user.districtName">{{ user.provinceName }}</span>
-                      <span v-if="user.cityName">
-                        <span v-if="!user.districtName">-</span>
-                        {{ user.cityName.substring(0, 6) }}
-                      </span>
-                      <span v-if="user.districtName">-{{ user.districtName }}</span>
-
-                      <div class="row-col-center" v-if="user.distance|| user.distance===0">
-                        <div class="px-xs row-col-center">|</div>
-                        <span v-if="user.distance<0.5">{{ 0.5 }}公里</span>
-                        <span v-else-if="user.distance<1">{{ 1 }}公里</span>
-                        <span v-else-if="user.distance<5">{{ 5 }}公里</span>
-                        <span v-else>{{ numFixed1(user.distance) }}公里</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-center flex-none">
-                    <!--                      <view v-if="!isIos" class="col-center flex-none">-->
-                    <div v-if="user.openContactInfo" class="use-click row-col-center">
-                      <q-button light @click="copyContactInfo(user)">
-                        <div class="color-content ml-xs font-12">
-                          已获取( 点击复制 )
-                        </div>
-                      </q-button>
-                    </div>
-                    <div v-else class="use-click row-col-center">
-                      <q-button v-if="user.hasUserLike" @click="toMessagePage(user)" class="mr-sm">
-                        <q-icon icon="mdi-chat-outline" size="14"></q-icon>
-                        私信
-                      </q-button>
-                      <q-button v-else text @click="addLikeUser(user)">
-                        <q-icon icon="mdi-heart-outline" size="22"></q-icon>
-                      </q-button>
-                    </div>
-
-                    <!--                        <div v-else class="use-click row-col-center">-->
-                    <!--                          <q-button text @click="getOpenContactInfo(user)" :disabled="showUserContactBtnDisabled">-->
-                    <!--                            <q-icon prefix="uni-icons" icon="uniui-heart" size="22"></q-icon>-->
-                    <!--                          </q-button>-->
-                    <!--                        </div>-->
-                    <!--                    <socialuni-follow-tag :user="user" @change="userFollowChange"></socialuni-follow-tag>-->
-                  </div>
-                </div>
-              </div>
-              <div class="ml-60 row-col-center mt-xs">
-                <img v-for="img in imgUrls(user).slice(0,3)" class="size40 bd-radius bd mr-sm"
-                     mode="aspectFill"
-                     :data-src="img"
-                     @click.stop="previewImage(img,user)"
-                     :src="img"
-                />
-              </div>
-            </div>
-            <div class="mt-xs">
-              <uni-load-more :status="item.queryQO.loadMore"
-                             @click="clickOnreachBottom"
-                             :contentText="loadMoreText"></uni-load-more>
-            </div>
-          </template>
-        </div>
-        <!--        <q-scrollbar class="h100p" v-infinite-scroll="autoChooseUseLocationQueryTalks">-->
-        <!--        -->
-        <!--        </q-scrollbar>-->
+        </template>
+      </q-tabs>
+      <div class="flex-none row-col-center">
+        <q-icon icon="list-dot" size="20" @click="openTalkFilterDialog"></q-icon>
       </div>
     </div>
+
+    <div class="flex-1 overflow-hidden">
+      <div ref="pullRefresh" @refresh="manualPulldownRefresh" class="h100p">
+        <div :current="currentTabIndex" class="h100p"
+                @change="talkSwiperChange">
+          <div class="h100p" v-for="(item, swiperIndex) in talkTabs" :key="swiperIndex">
+            <!--
+            使用view实现的问题，没有scroll事件小程序上
+            <div class="h100p bg-default" :class="[scrollEnable?'overflow-scroll':'overflow-hidden']" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
+                  :lower-threshold="800"
+                  @scroll.native="talksScrollEvent"
+                  @scroll="talksScrollEvent"
+            >-->
+
+            <!--          首页展示区分不同类型，
+                      圈子类型、关注类型、首页类型、同城类型-->
+            <div class="h100p bd-radius-10 mx-sm overflow-hidden" style="width: calc(100% - 20px)"
+                         :scroll-y="true" @scrolltolower="autoChooseUseLocationQueryTalks"
+                         :scroll-top="talkTabs[swiperIndex].pageScrollTop"
+                         :lower-threshold="800"
+                         @scroll="talksScrollEvent">
+              <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
+              <div class="pb-60"
+                   v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].name !== followTabName">
+<!--                <talk-swipers class="px-mn pb-sm"-->
+<!--                              v-if="talkTabs[swiperIndex].name === homeTabName && configShowSwipers"></talk-swipers>-->
+
+
+                <div class="card mb-sm elevation-4 px-sm" v-if="talkTabs[swiperIndex].circle">
+                  <!--                创建自己的圈子-->
+                  <div class="row-between-center">
+                    <div>{{ talkTabs[swiperIndex].name }}圈</div>
+                    <!--                    圈主：客服-->
+                    <div class="q-tag use-click"
+                         @click="joinCircleGroupChat(talkTabs[swiperIndex].circle)">进入群聊
+                    </div>
+                    <!--                  显示圈主，如果没有圈主，则显示，此圈没有圈主，申请成为圈主-->
+                  </div>
+                  <!--                <div>处对象圈子介绍</div>-->
+                </div>
+
+                <!--              <div v-else-if="talkTabs[swiperIndex].type === 'circle'" class="card mb-sm elevation-4 px">
+                                <div class="row-between-center mb-sm">
+                                  <div>
+                                    圈主：xxxx
+                                  </div>
+                                  <div class="row-col-center">
+                                    <div class="color-sub">竞选详情</div>
+                                    <div class="color-sub ml-md">圈子管理</div>
+                                  </div>
+                                </div>
+                                <div class="row-col-center">
+                                  小圈主：胺分散法，撒飞洒地方，阿斯蒂芬阿萨德，士大夫撒地方，
+                                </div>
+                              </div>-->
+
+
+                <div v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
+                  <talk-item :talk="talk"
+                             :talk-tab-type="curTalkTabObj.type"
+                             @delete-talk="deleteTalk"
+                  />
+                  <!-- app端广告有问题-->
+                  <!--  #ifdef APP-PLUS -->
+                  <!--<div v-if="showAd&&showAdIndexList.includes(index)" class="mb-5">
+                    <ad class="bg-white" adpid="1890536227"></ad>
+                  </div>-->
+                  <!--  #endif -->
+                  <!--wx平台显示的广告-->
+                  <!--  #ifdef MP-WEIXIN -->
+                  <ad v-if="showAd&&showAdIndexList.includes(index)"
+                      class="bg-white mb-5" unit-id="adunit-65c8911d279d228f" ad-type="video"
+                      ad-theme="white"></ad>
+                  <!--  #endif -->
+
+                  <!--qq平台显示的广告-->
+                  <!--  #ifdef MP-QQ -->
+                  <ad v-if="showAd&&showAdIndexList.includes(index)"
+                      class="bg-white mb-5" unit-id="bcc21923107071ac3f8aa076c7e00229"
+                      type="card"></ad>
+                  <!--  #endif -->
+
+                  <!--头条平台显示的广告-->
+                  <!--  #ifdef MP-TOUTIAO -->
+                  <ad v-if="showAd&&showAdIndexList.includes(index)"
+                      class="bg-white mb-5" type="banner video large"
+                      unit-id="3snract0gqnc3fn16d"></ad>
+                  <!--  #endif -->
+                </div>
+
+                <!-- 下拉刷新组件 -->
+                <div class="mt-xs">
+                  <uni-load-more :status="talkTabs[swiperIndex].loadMore"
+                                 @click="clickOnreachBottom"
+                                 :contentText="loadMoreText"></uni-load-more>
+                </div>
+              </div>
+              <template v-else>
+                <div v-if="user" class="row-center h500 pt-100 font-bold text-gray text-md">
+                  您还没有关注其他人
+                </div>
+                <div v-else class="row-center h500 pt-100 font-bold text-gray text-md"
+                     @click="toLoginVue">
+                  您还没有登录，点击登录
+                </div>
+              </template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--            从附近哪里选择城市-->
+    <!--            搜索栏左边加个筛选按钮可以筛选性别年龄-->
+    <!--            除去搜索栏和导航栏的高度就是剩余高度-->
+
+    <!--        默认附近，可以切换城市，城市-->
+    <talk-operate @deleteTalk="deleteTalk"></talk-operate>
+
+    <social-talk-filter-dialog ref="talkFilterDialog"
+                               @confirm="startPullDown"></social-talk-filter-dialog>
   </div>
 </template>
 
 <script lang="ts">
 import {Component, Vue, Watch, toNative} from 'vue-facing-decorator'
-import QTab from 'qing-ui-uni/src/components/QTab/QTab.vue'
-import QTabs from 'qing-ui-uni/src/components/QTabs/QTabs.vue'
+import QTabs from 'qing-ui-h5/src/components/QTabs/QTabs.vue'
 import QIcon from 'qing-ui/src/components/QIcon.vue'
 import TalkTabVO from "socialuni-api-base/src/model/talk/SocialuniTalkTabRO";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
@@ -131,7 +155,6 @@ import {socialuniTagModule} from "socialuni-community-sdk/src/store/SocialTagMod
 import TalkQOFactory from "socialuni-community-sdk/src/factory/TalkQOFactory";
 import {socialLocationModule} from "socialuni-community-sdk/src/store/SocialLocationModule";
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
-import TalkItem from "socialuni-community-view-uni/src/components/talkItem/TalkItem.vue";
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
@@ -144,8 +167,6 @@ import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserMod
   components: {
     QIcon,
     QTabs,
-    QTab,
-    TalkItem
   }
 })
 export default class SocialuniTalkViewH5 extends Vue {
@@ -223,6 +244,15 @@ export default class SocialuniTalkViewH5 extends Vue {
 
   mounted() {
     // 获取元素高度，用来计算scroll-view高度
+    // this.$refs.tabsTalk.initQuery()
+    this.$nextTick(() => {
+      //首次打开talk页面，获取用户位置用来查询
+      // locationModule.appLunchInitDistrict().then(() => {
+      //首次打开talk页面，获取用户位置用来查询
+      socialLocationModule.appLunchInitDistrict().then(() => {
+        this.initQuery()
+      })
+    })
   }
 
   // 供父组件调用，每次隐藏把数据缓存进storage
@@ -261,7 +291,7 @@ export default class SocialuniTalkViewH5 extends Vue {
   //js触发下拉刷新效果
   startPullDown() {
     this.tabScrollToTop()
-    this.$refs.pullRefresh.startPulldownRefresh()
+    this.manualPulldownRefresh()
   }
 
   tabScrollToTop() {
@@ -298,7 +328,7 @@ export default class SocialuniTalkViewH5 extends Vue {
         //如果正在查询，则更改状态为加载更多,点击暂停加载。
         await this.autoChooseUseLocationQueryTalks()
       }
-      this.$refs.pullRefresh.endPulldownRefresh()
+      // this.$refs.pullRefresh.endPulldownRefresh()
     }
   }
 
