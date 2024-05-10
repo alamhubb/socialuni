@@ -1,223 +1,341 @@
-<template> 李采潭
-  <div class="flex-col h100p bg-theme-bg">
-    <!--    不能使用100%，h5，不包含tabbar，尺寸计算不正确，所以需要使用h100vh-->
-    <div class="flex-col h100vh">
-      <q-navbar class="flex-none">
-        <div class="row-col-center ml-xs mr-sm font-bold bg-click" @click="openCityPicker">
-          <q-icon size="14" icon="map-fill"></q-icon>
-          {{ location.adName }}
-          <q-icon icon="mdi-chevron-right"></q-icon>
-        </div>
-        <q-search class="flex-1 mr-sm" @click="openTagPicker">
-          <q-icon class="mx-5 text-gray" size="16" icon="search"></q-icon>
-          <div v-if="selectTagName" class="row-col-center flex-1" @click.stop="">
-            <div class="q-tag round bg-green-plain light row-all-center">
-              {{ selectTagName }}
-            </div>
-            <q-icon class="mr-sm text-gray row-all-center" icon="close" @click="deleteTag"></q-icon>
-          </div>
-          <div v-else class="cursor-text flex-1" @click="openTagPicker">选择话题</div>
-        </q-search>
-        <!--        <div class="mr-sm" :class="{'text-theme':useFilters}">
-                  <q-icon icon="mdi-filter-variant" size="28" @click="showFilterModel"></q-icon>
-                </div>-->
-        <!--                <div v-if="user" class="position-relative mr-sm">
-                            <q-icon icon="bell-fill" @click="toNotifyVue" size="28"></q-icon>
-                            &lt;!&ndash;          <u-badge :count="unreadNotifiesNum" size="mini"
-                                               :offset="[0, 0]" @click="toNotifyVue"></u-badge>&ndash;&gt;
-                        </div>-->
+<template>
+  <div class="flex-col">
+    <q-tabs
+        v-model="currentTabIndex"
+        active-class="bg-white bb-blue-3"
+        :tabs="tabs"
+        @change="tabsChange"
+        class="flex-none bg-white position-sticky top-0 index-xs"
+    />
+    <div @click="$refs.cityPicker.open()">dakai</div>
+    <q-city-picker ref="cityPicker" :bottom="false"></q-city-picker>
+
+    <div class="flex-1 overflow-hidden">
+      <div class="h100p" v-for="(item, swiperIndex) in tabsPageQueryUtil" :key="swiperIndex">
         <div>
-          <q-icon icon="plus-circle" size="28" @click="toTalkAdd"></q-icon>
+          <div v-if="!item.queryQO.listData.length" class="row-all-center h100 color-content">
+            <div>暂无数据</div>
+          </div>
+          <template v-else>
+            <div v-if="mineUser && swiperIndex === 0" class="px-sm">
+              <!--                  <div class="row-all-center color-main mt-sm chunk-default pd-xs">-->
+              <!--                    {{ mineUser.openContactInfo ? '下拉刷新将您的排名前置' : '开启联系方式您的信息将在此处展示' }}-->
+              <!--                  </div>-->
+            </div>
+            <div class="flex-col px-smm py-sm bb" v-for="user in item.queryQO.listData" :key="user.id"
+                 @click="toUserDetailVue(user)">
+              <div class="row-col-center">
+                <img
+                    class="size50 bd-radius-xs mr-10 flex-none"
+                    mode="aspectFill"
+                    :src="user.avatar"
+                />
+                <div class="flex-1 row-between-center py-xs">
+                  <div class="flex-col flex-1">
+                    <view class="row-between-center">
+                      <div class="row-col-center">
+                        <text :class="{'color-red':user.vipFlag}">{{ user.nickname }}</text>
+                        <view v-if="user.vipFlag" class="ml-5px cu-tag bg-orange radius sm"
+                              @click.stop="openVip">
+                          VIP
+                        </view>
+                        <s-user-gender-tag class="ml-xs" :user="user"></s-user-gender-tag>
+                      </div>
+                    </view>
+                    <div class="row-col-center mt-xss font-12 color-content">
+                      <!--                          {{ formatTime(user.updateTime) }}-->
+                      <!--                          <div class="px-xs row-col-center">|</div>-->
+                      <!--        有市区的名称就不显示省的名称-->
+                      <span v-if="!user.cityName || !user.districtName">{{ user.provinceName }}</span>
+                      <span v-if="user.cityName">
+                        <span v-if="!user.districtName">-</span>
+                        {{ user.cityName.substring(0, 6) }}
+                      </span>
+                      <span v-if="user.districtName">-{{ user.districtName }}</span>
+
+                      <div class="row-col-center" v-if="user.distance|| user.distance===0">
+                        <div class="px-xs row-col-center">|</div>
+                        <span v-if="user.distance<0.5">{{ 0.5 }}公里</span>
+                        <span v-else-if="user.distance<1">{{ 1 }}公里</span>
+                        <span v-else-if="user.distance<5">{{ 5 }}公里</span>
+                        <span v-else>{{ numFixed1(user.distance) }}公里</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-center flex-none">
+                    <!--                      <view v-if="!isIos" class="col-center flex-none">-->
+                    <div v-if="user.openContactInfo" class="use-click row-col-center">
+                      <q-button light @click="copyContactInfo(user)">
+                        <div class="color-content ml-xs font-12">
+                          已获取( 点击复制 )
+                        </div>
+                      </q-button>
+                    </div>
+                    <div v-else class="use-click row-col-center">
+                      <q-button v-if="user.hasUserLike" @click="toMessagePage(user)" class="mr-sm">
+                        <q-icon icon="mdi-chat-outline" size="14"></q-icon>
+                        私信
+                      </q-button>
+                      <q-button v-else text @click="addLikeUser(user)">
+                        <q-icon icon="mdi-heart-outline" size="22"></q-icon>
+                      </q-button>
+                    </div>
+
+                    <!--                        <div v-else class="use-click row-col-center">-->
+                    <!--                          <q-button text @click="getOpenContactInfo(user)" :disabled="showUserContactBtnDisabled">-->
+                    <!--                            <q-icon prefix="uni-icons" icon="uniui-heart" size="22"></q-icon>-->
+                    <!--                          </q-button>-->
+                    <!--                        </div>-->
+                    <!--                    <socialuni-follow-tag :user="user" @change="userFollowChange"></socialuni-follow-tag>-->
+                  </div>
+                </div>
+              </div>
+              <div class="ml-60 row-col-center mt-xs">
+                <img v-for="img in imgUrls(user).slice(0,3)" class="size40 bd-radius bd mr-sm"
+                     mode="aspectFill"
+                     :data-src="img"
+                     @click.stop="previewImage(img,user)"
+                     :src="img"
+                />
+              </div>
+            </div>
+            <div class="mt-xs">
+              <uni-load-more :status="item.queryQO.loadMore"
+                             @click="clickOnreachBottom"
+                             :contentText="loadMoreText"></uni-load-more>
+            </div>
+          </template>
         </div>
-      </q-navbar>
-
-      <!--  #ifdef APP-PLUS -->
-      <!-- <ad class="bg-white mt-10 w100vw" adpid="1890536227"></ad>-->
-      <!--  #endif -->
-
-      <tabs-talk class="flex-1" ref="tabsTalk"></tabs-talk>
+        <!--        <q-scrollbar class="h100p" v-infinite-scroll="autoChooseUseLocationQueryTalks">-->
+        <!--        -->
+        <!--        </q-scrollbar>-->
+      </div>
     </div>
-    <msg-input>
-    </msg-input>
-
-
-    <social-tag-picker ref="tagPicker" @change="changeTag"></social-tag-picker>
-    <q-city-picker ref="cityPicker" :value="location" @input="cityChange"></q-city-picker>
   </div>
 </template>
 
 <script lang="ts">
-import {Component, Vue, Watch, toNative} from 'vue-facing-decorator'
-
-import QButton from 'qing-ui-uni/src/components/QButton/QButton.vue'
-import QNavbar from 'qing-ui-uni/src/components/QNavbar/QNavbar.vue'
-import QSearch from 'qing-ui-uni/src/components/QSearch/QSearch.vue'
-import QIcon from 'qing-ui/src/components/QIcon.vue'
-import QPopup from 'qing-ui-uni/src/components/QPopup/QPopup.vue'
-import QSlider from 'qing-ui-uni/src/components/QSlider/QSlider.vue'
-import QTabs from "qing-ui-uni/src/components/QTabs/QTabs.vue";
-import TagSearch from "./TagSearch.vue";
-import TabsTalk from "./tabsTalk.vue";
-import TalkSwipers from "./talkSwipers.vue";
-import TagVO from "socialuni-api-base/src/model/community/tag/TagVO";
-import DistrictVO from "socialuni-api-base/src/model/DistrictVO";
-import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
-import SocialTagPicker from "socialuni-community-view-uni/src/components/SocialTagPicker.vue";
-import QCityPicker from "socialuni-community-view-uni/src/components/QCityPicker/QCityPicker.vue";
-import CommunityPageUtil from "socialuni-community-sdk/src/util/CommunityPageUtil";
-import {socialuniTagModule} from "socialuni-community-sdk/src/store/SocialTagModule";
+import {Vue, Component, Prop, Emit, toNative} from 'vue-facing-decorator'
+import SocialuniFollowType from "socialuni-constant/constant/user/SocialuniFollowType";
+import SocialUserContentRO from "socialuni-api-base/src/model/social/SocialUserContentRO";
+import QTabs from "qing-ui-h5/src/components/QTabs/QTabs.vue";
+import QButton from "qing-ui-h5/src/components/QButton.vue";
+import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
+import SocialuniPageQueryUtil from "socialuni-api-base/src/model/common/SocialuniPageQueryUtil";
+import CommonUtil from "qing-util/src/util/CommonUtil";
+import SocialuniUserExtendFriendsType from "socialuni-constant/constant/user/SocialuniUserExtendFriendsType";
+import SocialuniUserExtendFriendQueryQO from "socialuni-api-base/src/model/user/SocialuniUserExtendFriendQueryQO";
+import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
+import NumUtil from "qing-util/src/util/NumUtil";
+import DateUtil from "qing-util/src/util/DateUtil";
+import SocialuniUserExtendDetailRO from "socialuni-expand-api/src/model/SocialuniUserExtendDetailRO";
+import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
+import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
-import {socialNotifyModule} from "socialuni-community-sdk/src/store/SocialNotifyModule";
-import {socialAppModule} from "socialuni-app-sdk/src/store/SocialAppModule";
-import {socialLocationModule} from "socialuni-community-sdk/src/store/SocialLocationModule";
-import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
-import MsgInput from "../../components/MsgInput.vue";
-import {getCurrentInstance} from "vue";
-
-// todo 后台可控制是否显示轮播图
+import SocialuniImgUtil from "socialuni-user-sdk/src/util/SocialuniImgUtil";
+import SocialuniExpandAPI from "socialuni-expand-api/src/api/SocialuniExpandAPI";
+import SocialuniUserLikeAPI from "socialuni-expand-api/src/api/SocialuniUserLikeAPI";
+import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
+import SocialuniUserExpandService from "socialuni-user-sdk/src/logic/SocialuniUserExpandService";
+import QScrollbar from "qing-ui-h5/src/components/QScrollbar.vue";
+import SUserGenderTag from "socialuni-user-ui/src/components/SUserGenderTag.vue";
+import QIcon from "qing-ui/src/components/QIcon.vue";
+import QScroll from "qing-ui/src/components/QScroll.vue";
+import QPicker from "qing-ui/src/components/QPicker.vue";
+import QCityPicker from "socialuni-ui/src/components/QCityPicker.vue";
+import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
+import {socialLocationModule} from "socialuni-community-sdk/src/store/SocialLocationModule";
 
 @toNative
 @Component({
-  components: {
-    SocialTagPicker,
-    QCityPicker,
-    QTabs,
-    QSlider,
-    QPopup,
-    QIcon,
-    QSearch,
-    QNavbar,
-    MsgInput,
-    QButton,
-    TagSearch,
-    TabsTalk,
-    TalkSwipers
-  }
+  components: {QTabs, QScrollbar, SUserGenderTag, QButton, QIcon, QScroll, QPicker, QCityPicker}
 })
-export default class SocialuniTalkViewH5 extends Vue {
-  public $refs!: {
-    tabsTalk: TabsTalk;
-    cityPicker: QCityPicker
-    tagPicker: SocialTagPicker
+export default class SocialuniExpandViewH5 extends Vue {
+  $refs: {}
+
+  tabs = SocialuniUserExtendFriendsType.allTypes
+  tabsPageQueryUtil: SocialuniPageQueryUtil<SocialuniUserExtendDetailRO, SocialuniUserExtendFriendQueryQO>[] = []
+  currentTabIndex = 0
+
+  loadMoreText = {
+    contentdown: '点击显示更多',
+    contentrefresh: '正在加载...',
+    contentnomore: '没有更多数据了,点击刷新'
+  }
+  showUserContactBtnDisabled: boolean = false
+
+  get isIos() {
+    return socialuniSystemModule.isIos
   }
 
-  get tags() {
-    return socialuniTagModule.tags
+
+  async manualPulldownRefresh() {
+    await this.initQuery()
   }
 
-  get user() {
-    return socialuniUserModule.mineUser
-  }
-
-  get unreadNotifies() {
-    return socialNotifyModule.unreadNotifies
-  }
-
-  // 轮播图
-  get homeSwipers() {
-    return socialAppModule.homeSwipers
-  }
-
-  get selectTagName() {
-    return socialuniTagModule.selectTagName
-  }
-
-  get location() {
-    return socialLocationModule.location
-  }
-
-  current = 0
-  unreadNotifiesNum = 0
-
-  // 滚动超过轮播图隐藏轮播图，scroll-view开启滚动
-
-  get talkTabsTop() {
-    if (socialuniConfigModule.appMoreConfig.showSwipers && this.homeSwipers && this.homeSwipers.length) {
-      return socialuniConfigModule.appMoreConfig.swiperHeight + 10
-    }
-    return 0
+  get districts() {
+    return socialLocationModule.districts
   }
 
   created() {
-    onLoad((params) => {
-      if (params.load && params.load === 'true') {
-        this.initQuery()
-      }
-    })
-    onHide(() => {
-      this.$refs.tabsTalk.tabsTalkOnHide()
-    })
-    onShow(() => {
-      // socialChatModule.computedChatsUnreadNumTotalAction();
-    });
-  }
-
-  // life
-  mounted() {
-    QingAppUtil.NativeUtil.showShareMenu()
+    socialLocationModule.getDistrictsAction()
+    this.tabsPageQueryUtil = this.tabs.map(() => new SocialuniPageQueryUtil(SocialuniExpandAPI.queryExtendFriendUsersAPI))
     this.initQuery()
-  }
-
-  // 必须这么写否则不生效
-  @Watch('unreadNotifies')
-  unreadNotifiesWatch() {
-    this.unreadNotifiesNum = this.unreadNotifies.length
-  }
-
-  // 去除页面初始化的，初始化查询
-  initQuery() {
-    // this.$refs.tabsTalk.initQuery()
+    // onLoad((params: { followType: string }) => {
+    //   if (params) {
+    //     if (params.followType === SocialuniFollowType.fans) {
+    //       this.currentTabIndex = 1
+    //     } else {
+    //       this.currentTabIndex = 0
+    //     }
+    //   }
+    //   this.$nextTick(() => {
+    //     this.startPulldownRefresh()
+    //   })
+    // })
+    CommonEventUtil.off('appScrollToLower');
     this.$nextTick(() => {
-      //首次打开talk页面，获取用户位置用来查询
-      // locationModule.appLunchInitDistrict().then(() => {
-      //首次打开talk页面，获取用户位置用来查询
-      socialLocationModule.appLunchInitDistrict().then(() => {
-        this.$refs.tabsTalk.initQuery()
+      CommonEventUtil.on('appScrollToLower', () => {
+        console.log('触发了')
+        this.autoChooseUseLocationQueryTalks()
       })
     })
   }
 
-  startPullDown() {
-    this.$refs.tabsTalk.startPullDown()
+  startPulldownRefresh() {
+    this.initQuery()
   }
 
-  openTagPicker() {
-    this.$refs.tagPicker.open()
+  endPulldownRefresh() {
+    // this.$refs.pullRefresh.endPulldownRefresh()
   }
 
-  @Watch('selectTagName')
-  selectTagNameWatch() {
-    //已经watch了，所以修改tag无需重新设置查询
-    this.startPullDown()
+
+  async initQuery() {
+    const queryData = new SocialuniUserExtendFriendQueryQO(this.tabs[this.currentTabIndex]);
+    await this.tabsPageQueryUtil[this.currentTabIndex].initQuery(queryData)
+    for (const listDatum of this.tabsPageQueryUtil[this.currentTabIndex].queryQO.listData) {
+      // listDatum.getUserContactBtnDisabled = false
+    }
+    this.endPulldownRefresh()
   }
 
-  // tag
-  changeTag(tag: TagVO) {
-    socialuniTagModule.setSelectTagName(tag.name)
+  /*openVip() {
+    PageUtil.toVipPage()
+  }*/
+
+  toUserDetailVue(user: SocialUserContentRO) {
+    UserPageUtil.toUserDetail(user.id)
   }
 
-  deleteTag() {
-    socialuniTagModule.setSelectTagName(null)
+  // tabs通知swiper切换
+  tabsChange(index) {
+    if (index === this.currentTabIndex) {
+      this.startPulldownRefresh()
+    } else {
+      this.currentTabIndex = index
+      if (this.tabsPageQueryUtil[this.currentTabIndex].queryQO.firstLoad) {
+        this.startPulldownRefresh()
+      }
+    }
   }
 
-  toNotifyVue() {
-    socialNotifyModule.queryUnreadNotifiesAndUpdateHasReadAction()
-    CommunityPageUtil.toNotifyPage()
+  // talkSwipe
+  talkSwiperChange(e) {
+    this.tabsChange(e.detail.current)
   }
 
-  // 点击加号去新增talk
-  toTalkAdd() {
-    CommunityPageUtil.toTalkAddPage()
+  async autoChooseUseLocationQueryTalksHandler() {
+    await this.tabsPageQueryUtil[this.currentTabIndex].nextPageQuery()
+    for (const listDatum of this.tabsPageQueryUtil[this.currentTabIndex].queryQO.listData) {
+      // listDatum.getUserContactBtnDisabled = false
+    }
   }
 
-  openCityPicker() {
-    this.$refs.cityPicker.open()
+  autoChooseUseLocationQueryTalks = CommonUtil.debounce(() => {
+    this.autoChooseUseLocationQueryTalksHandler()
+  }, 500)
+
+
+  get curTalkTabObj() {
+    return this.tabsPageQueryUtil[this.currentTabIndex]?.queryQO
   }
 
-  cityChange(district: DistrictVO) {
-    socialLocationModule.setLocation(district)
-    this.startPullDown()
+  //同步更新粉丝和关注列表状态
+  userFollowChange(user: SocialUserContentRO) {
+    for (const socialuniPageQueryUtil of this.tabsPageQueryUtil) {
+      for (const listDatum of socialuniPageQueryUtil.queryQO.listData) {
+        if (listDatum.id === user.id) {
+          // listDatum.hasFollowed = user.hasFollowed
+        }
+      }
+    }
+  }
+
+  //点击不需要更新查询时间，查不出来就查不出来，万一是自己手动暂停了查询呢，而且如果重设时间会导致数据重复问题
+  async clickOnreachBottom() {
+    //停止查询方法
+    const talkTab = this.curTalkTabObj
+    if (talkTab) {
+      //如果正在查询，则停止查询，没办法省略因为修改和使用的是一个变量
+      if (talkTab.loadMore === LoadMoreType.loading) {
+        talkTab.loadMore = LoadMoreType.more
+      } else {
+        talkTab.loadMore = LoadMoreType.more
+        //如果正在查询，则更改状态为加载更多,点击暂停加载。
+        await this.autoChooseUseLocationQueryTalks()
+      }
+    }
+  }
+
+  async getOpenContactInfo(user: CenterUserDetailRO) {
+    //打开获取对方联系方式功能，支付贝壳
+    user.getUserContactBtnDisabled = true
+    try {
+      await SocialuniUserExpandService.getOpenContactInfo(user)
+    } finally {
+      user.getUserContactBtnDisabled = false
+    }
+  }
+
+  copyContactInfo(user: CenterUserDetailRO) {
+    QingAppUtil.NativeUtil.textCopy(user.contactInfo)
+  }
+
+  get mineUser() {
+    return socialuniUserModule.mineUser
+  }
+
+  numFixed1(num) {
+    return NumUtil.numFixed1(num)
+  }
+
+  formatTime(dateStr) {
+    return DateUtil.formatTime(dateStr)
+  }
+
+  imgUrls(user: CenterUserDetailRO) {
+    if (user && user.imgs) {
+      return user.imgs.map(item => SocialuniImgUtil.getUserLargeImgUrl(item.src))
+    } else {
+      return []
+    }
+  }
+
+  previewImage(current, user: CenterUserDetailRO) {
+    uni.previewImage({
+      current: current,
+      urls: this.imgUrls(user)
+    })
+  }
+
+  addLikeUser(user: SocialuniUserExtendDetailRO) {
+    SocialuniUserLikeAPI.addUserLikeAPI(user)
+  }
+
+  async toMessagePage(user) {
+    socialuniChatModule.setChatIdToMessagePage(user.id)
   }
 }
 </script>

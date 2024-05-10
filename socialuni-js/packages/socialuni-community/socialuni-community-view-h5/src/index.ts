@@ -3,37 +3,34 @@ import {SocialuniOption} from "socialuni/src/interface/socialuniOption";
 import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
 import {App} from "vue";
 import {Vue} from "vue-facing-decorator";
-import SocialuniExpandViewH5 from "./views/SocialuniExpandViewH5.vue";
+import SocialuniTalkViewH5 from "./views/SocialuniTalkViewH5.vue";
 
-class SocialuniExpandPlugin implements SocialuniPlugin {
+class SocialuniCommunityH5Plugin implements SocialuniPlugin {
 
 }
 
-const socialuniExpandPlugin: SocialuniPlugin = new SocialuniExpandPlugin()
+const socialuniCommunityH5Plugin: SocialuniPlugin = new SocialuniCommunityH5Plugin()
 
 
-socialuniPluginsModule.componentsMap.set('expandView', SocialuniExpandViewH5)
-
-
-const SocialuniExpandH5 = {
-    async install(app: App, expandView: Vue, socialuniOption?: SocialuniOption) {
+const SocialuniCommunityH5 = {
+    async install(app: App, view: Vue, socialuniOption?: SocialuniOption) {
         console.log(66666)
         console.log(app)
         socialuniPluginsModule.router.addRoute({
             path: '/community',
             name: 'community',
             component: () => {
-                if (expandView) {
-                    return expandView
+                if (view) {
+                    return view
                 } else {
-                    return SocialuniExpandViewH5
+                    return SocialuniTalkViewH5
                 }
             },
-            meta: {title: '扩列'},
+            meta: {title: '社区'},
         })
         console.log(socialuniPluginsModule.router.getRoutes())
-        socialuniPluginsModule.addPlugin(socialuniExpandPlugin)
+        socialuniPluginsModule.addPlugin(socialuniCommunityH5Plugin)
     }
 }
 
-export default SocialuniExpandH5
+export default SocialuniCommunityH5

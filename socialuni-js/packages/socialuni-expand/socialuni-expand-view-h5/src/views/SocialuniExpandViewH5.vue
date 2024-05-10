@@ -10,10 +10,6 @@
     <div @click="$refs.cityPicker.open()">dakai</div>
     <q-city-picker ref="cityPicker" :bottom="false"></q-city-picker>
 
-    <div class="mt-sm h200" v-if="districts && districts.length">
-      <q-picker ref="citySelect" class="bg-white h100p" v-model="cityValue"
-                :dataList="districts"></q-picker>
-    </div>
     <div class="flex-1 overflow-hidden">
       <div class="h100p" v-for="(item, swiperIndex) in tabsPageQueryUtil" :key="swiperIndex">
         <div>
