@@ -18,7 +18,7 @@
     </div>
 
     <div class="flex-1 overflow-hidden">
-      <div ref="pullRefresh" @refresh="manualPulldownRefresh" class="h100p">
+      <div>
         <div :current="currentTabIndex" class="h100p"
                 @change="talkSwiperChange">
           <div class="h100p" v-for="(item, swiperIndex) in talkTabs" :key="swiperIndex">
@@ -74,6 +74,9 @@
 
 
                 <div v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
+                  <div>
+                    {{talk}}
+                  </div>
                   <talk-item :talk="talk"
                              :talk-tab-type="curTalkTabObj.type"
                              @delete-talk="deleteTalk"
