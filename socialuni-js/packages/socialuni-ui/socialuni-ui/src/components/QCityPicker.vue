@@ -1,5 +1,5 @@
 <template>
-  <q-popup ref="cityDialog" bottom @cancel="dialogClose" @confirm="input">
+  <q-popup ref="cityDialog" bottom @cancel="dialogClose" @confirm="input" v-bind="$attrs">
     <template #headerLeft>
       <view class="flex-row ml-sm">
         <view class="text-black text-md font-bold">城市筛选</view>

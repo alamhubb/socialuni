@@ -8,7 +8,7 @@
         class="flex-none bg-white position-sticky top-0 index-xs"
     />
     <div @click="$refs.cityPicker.open()">dakai</div>
-    <q-city-picker ref="cityPicker"></q-city-picker>
+    <q-city-picker ref="cityPicker" :bottom="false"></q-city-picker>
 
     <div class="mt-sm h200" v-if="districts && districts.length">
       <q-picker ref="citySelect" class="bg-white h100p" v-model="cityValue"
