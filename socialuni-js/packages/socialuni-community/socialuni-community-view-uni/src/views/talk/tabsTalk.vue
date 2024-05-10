@@ -145,7 +145,7 @@ import TalkSwipers from './talkSwipers.vue'
 
 import TalkOperate from './talkOperate.vue'
 import QTab from 'qing-ui-uni/src/components/QTab/QTab.vue'
-import QTabs from 'qing-ui-uni/src/components/QTabs/QTabs.vue'
+import QTabs from 'qing-ui/src/components/QTabs/QTabs.vue'
 import QIcon from 'qing-ui/src/components/QIcon.vue'
 import SocialTalkFilterDialog from "./SocialTalkFilterDialog.vue";
 import QPullRefresh from "qing-ui-uni/src/components/QPullRefresh/QPullRefresh.vue";

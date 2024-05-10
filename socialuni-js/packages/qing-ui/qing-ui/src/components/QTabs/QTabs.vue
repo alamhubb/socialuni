@@ -1,17 +1,18 @@
 <template>
   <div class="flex-col position-relative">
-    <div :class="[isXDirection?'flex-row':'flex-col']" class="overflow-auto">
+    <div :class="[isXDirection?'flex-row':'flex-col']" class="overflow-auto row-nowrap position-relative">
       <div
           v-for="(tab,index) in tabs"
           ref="tabs"
           :key="index"
-          class="use-click flex-1"
+          class="use-click flex-1 row-all-center"
+          :class="[index===model?('color-blue '+activeClass):'color-content']"
           @click="change(index)"
           @dblclick="dbClickChange(index)"
       >
-        <slot :tab="tab" :index="index">
+        <slot :tab="tab" :index="index" :value="model">
           <div
-              class="col-row-center py-sm px-sm font-14"
+              class="row-all-center py-sm px-sm font-14"
               :class="[index===model?('color-blue '+activeClass):'color-gray']"> {{ tab[value] || tab }}
           </div>
         </slot>
@@ -69,6 +70,7 @@ export default class QTabs extends Vue {
     this.$emit('update:modelValue', index)
     this.$emit('change', index)
   }
+
   dbClickChange(index: number) {
     this.$emit('update:modelValue', index)
     this.$emit('change', index)

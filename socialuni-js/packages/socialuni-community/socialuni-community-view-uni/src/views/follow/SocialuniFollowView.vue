@@ -64,7 +64,7 @@ import SocialuniFollowType from "socialuni-constant/constant/user/SocialuniFollo
 import SocialUserContentRO from "socialuni-api-base/src/model/social/SocialUserContentRO";
 import SocialGenderTag from "socialuni-user-ui/src/components/SUserGenderTag.vue";
 import {onLoad, onPullDownRefresh, onReachBottom, onShow} from "@dcloudio/uni-app";
-import QTabs from "qing-ui-uni/src/components/QTabs/QTabs.vue";
+import QTabs from "qing-ui/src/components/QTabs/QTabs.vue";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import SocialuniFollowTag from "socialuni-user-view-uni/src/components/SocialuniFollow/SocialuniFollowTag.vue";
 import SocialuniPageQueryUtil from "socialuni-api-base/src/model/common/SocialuniPageQueryUtil";

@@ -3,7 +3,7 @@
     <!--  <div v-if="talkTabs.length" class="flex-col h100p bg-primary">-->
     <!--    <q-tabs :tabs="talkTabs" v-model="current" type="bar" @input="tabsChange"-->
     <div class="flex-row px-sm mb-xss flex-none">
-      <q-tabs :tabs="talkTabs" :value="currentTabIndex" type="line" @input="tabsChange"
+      <q-tabs :tabs="talkTabs" v-model="currentTabIndex" type="line" @input="tabsChange"
               class="bd-radius flex-1 mr-sm">
         <template #default="{tab,index,value}">
           <div class="h30 px-xs row-all-center font-md" :class="{'font-md':value===index}">{{
@@ -141,7 +141,7 @@
 
 <script lang="ts">
 import {Component, Vue, Watch, toNative} from 'vue-facing-decorator'
-import QTabs from 'qing-ui-h5/src/components/QTabs/QTabs.vue'
+import QTabs from 'qing-ui/src/components/QTabs/QTabs.vue'
 import QIcon from 'qing-ui/src/components/QIcon.vue'
 import TalkTabVO from "socialuni-api-base/src/model/talk/SocialuniTalkTabRO";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
