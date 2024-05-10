@@ -44,7 +44,7 @@ public class SocialuniAppConfigRedis {
                 } else if (configKey.equals(AppConfigDOKeyConst.disableUnderageContent)) {
                     socialuniAppConfigBO.setDisableUnderageContent(Boolean.valueOf(configValue));
                 } else if (configKey.equals(AppConfigDOKeyConst.disableContentHasQrCode)) {
-                    socialuniAppConfigBO.setDisableContentHasContactInfo(Boolean.valueOf(configValue));
+                    socialuniAppConfigBO.setDisableContentHasQrCode(Boolean.valueOf(configValue));
                 } else if (configKey.equals(AppConfigDOKeyConst.disableContentHasContactInfo)) {
                     socialuniAppConfigBO.setDisableContentHasContactInfo(Boolean.valueOf(configValue));
                 } else if (configKey.equals(AppConfigDOKeyConst.mustSetSchoolCanPost)) {
