@@ -207,7 +207,7 @@ import UserContactInfoEditDialog from "./UserContactInfoEditDialog.vue";
 import QPopup from "qing-ui-uni/src/components/QPopup/QPopup.vue";
 import QIcon from "qing-ui/src/components/QIcon.vue";
 import QNavbar from "qing-ui-uni/src/components/QNavbar/QNavbar.vue";
-import QRowItem from "qing-ui-uni/src/components/QRowItem/QRowItem.vue";
+import QRowItem from "qing-ui/src/components/QRowItem.vue";
 import SocialuniUserInfoImg from "./SocialuniUserInfoImg.vue";
 import UserSchoolEditDialog from "./UserSchoolEditDialog.vue";
 import QInput from "qing-ui/src/components/QInput.vue";

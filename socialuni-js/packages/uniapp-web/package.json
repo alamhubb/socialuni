@@ -1,18 +1,13 @@
 {
-  "name": "qing-ui-h5",
+  "name": "uniapp-web",
   "version": "0.1.13",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@element-plus/icons-vue": "^2.1.0",
-    "axios": "^1.6.7",
+    "qing-ui-h5": "^0.1.4-alpha.0",
     "cos-js-sdk-v5": "^1.2.18",
-    "element-plus": "^2.3.7",
-    "qing-ui": "^0.1.13",
-    "uniapp-web": "^0.1.13",
-    "qing-scss": "^0.1.13",
     "qing-util": "^0.1.13",
     "qingjs": "^0.1.13",
     "socialuni-app-api": "^0.1.13",
@@ -25,7 +20,7 @@
     "vue": "^3.2.41"
   },
   "author": "",
-  "repository": "https://github.com/alamhubb/socialuni/tree/master/socialuni-js/packages/qing-ui/qing-ui-h5",
+  "repository": "https://github.com/alamhubb/socialuni/tree/master/socialuni-js/packages/socialuni-ui-h5",
   "license": "ISC",
   "gitHead": "8bc8be05ef3d13e8c3dc57cb16f0e9fcde1cd52b"
 }

@@ -1,11 +1,11 @@
 <template>
-  <div :class="[uuid]" class="flex-row">
+  <div :class="[uuid]" class="flex-row h100p">
     <!--    样式涉及到左侧选中小蓝块，所以这么写的-->
     <scroll-view class="flex-1 h100p" scroll-y :scroll-top="oneScrollTop">
       <div v-for="(item,index) in dataList"
-            :key="index" @click="oneLevelChange(index)"
-            class="q-picker-one-level-item row-col-center"
-            :class="{uuid,'q-picker-item-active':index === checkedOne}"
+           :key="index" @click="oneLevelChange(index)"
+           class="q-picker-one-level-item row-col-center"
+           :class="{uuid,'q-picker-item-active':index === checkedOne}"
       >
         <q-row-item class="flex-1">
           {{ item.adName }}
@@ -14,9 +14,9 @@
     </scroll-view>
     <scroll-view class="flex-1 h100p" scroll-y :scroll-top="twoScrollTop">
       <div v-for="(item,index) in twoLevelData"
-            :key="index" @click="twoLevelChange(index)"
-            class="q-picker-two-level-item row-col-center"
-            :class="{uuid,'q-picker-item-active':index === checkedTwo}"
+           :key="index" @click="twoLevelChange(index)"
+           class="q-picker-two-level-item row-col-center"
+           :class="{uuid,'q-picker-item-active':index === checkedTwo}"
       >
         <q-row-item class="flex-1">
           {{ item.adName }}
@@ -25,9 +25,9 @@
     </scroll-view>
     <scroll-view class="flex-1 h100p" scroll-y :scroll-top="threeScrollTop">
       <div v-for="(item,index) in threeLevelData"
-            :key="index" @click="threeLevelChange(index)"
-            class="q-picker-three-level-item row-col-center"
-            :class="{uuid,'q-picker-item-active':index === checkedThree}"
+           :key="index" @click="threeLevelChange(index)"
+           class="q-picker-three-level-item row-col-center"
+           :class="{uuid,'q-picker-item-active':index === checkedThree}"
       >
         <q-row-item class="flex-1">
           {{ item.adName }}
@@ -37,12 +37,10 @@
   </div>
 </template>
 <script lang="ts">
-import CommonUtil from 'qing-util/src/util/CommonUtil'
 import {Emit, Model, Component, Prop, Vue, Watch, toNative} from 'vue-facing-decorator'
 import QRowItem from 'qing-ui/src/components/QRowItem.vue'
-import SelectorQuery = UniApp.SelectorQuery;
-import NodesRef = UniApp.NodesRef;
 import UUIDUtil from "qing-util/src/util/UUIDUtil";
+import ScrollView from "uniapp-web/src/components/ScrollView.vue";
 
 /*
 显示出来已经选了的城市，给她画上钩
@@ -55,7 +53,7 @@ import UUIDUtil from "qing-util/src/util/UUIDUtil";
 @toNative
 @Component({
   components: {
-    QRowItem
+    QRowItem, ScrollView
   }
 })
 export default class QPicker extends Vue {
@@ -64,118 +62,6 @@ export default class QPicker extends Vue {
   @Prop() readonly dataList: any []
 
   //这个组件有点问题，值改变的时候没有滚动到对应的位置
-
-  mounted() {
-    this.pageInit()
-  }
-
-  @Watch('dataList')
-  dataListWatch() {
-    this.pageInit()
-  }
-
-  pageInit() {
-    this.getComponentsHeight()
-    this.getOneNodeTops()
-    this.getTwoNodeTops()
-    this.getThreeNodeTops()
-  }
-
-  /**
-   * 获取整个元素高度
-   */
-  scrollBoxHeight = 0
-
-  getComponentsHeight() {
-    //获取整个元素的高度
-    const query: SelectorQuery = uni.createSelectorQuery().in(this)
-    const nodeBox: NodesRef = query.select('.' + this.uuid + '.q-picker-box')
-    nodeBox.boundingClientRect((res) => {
-      if (res) {
-        this.scrollBoxHeight = res.height
-      } else {
-        CommonUtil.delayTime(100).then(() => {
-          this.getComponentsHeight()
-        })
-      }
-    }).exec()
-  }
-
-  /**
-   * 记录右侧每个索引对应的滚动位置
-   */
-  oneTops: any[] = []
-
-  getOneNodeTops() {
-    //获取整个元素的高度
-    const query: SelectorQuery = uni.createSelectorQuery().in(this)
-    //存储左侧菜单需要滚动到的点
-    const nodeOne: NodesRef = query.selectAll('.' + this.uuid + '.q-picker-one-level-item')
-    nodeOne.boundingClientRect((res: any) => {
-      if (res.length) {
-        this.oneTops = []
-        res.forEach(item => {
-          const top = item.top + item.height / 2 - this.scrollBoxHeight / 2 - res[0].top
-          this.oneTops.push(top)
-        })
-      } else {
-        CommonUtil.delayTime(100).then(() => {
-          this.getOneNodeTops()
-        })
-      }
-    }).exec()
-  }
-
-  /**
-   * 记录左侧每个索引对应的滚动位置
-   */
-  twoTops: any[] = []
-
-  getTwoNodeTops() {
-    //获取整个元素的高度
-    const query: SelectorQuery = uni.createSelectorQuery().in(this)
-    //存储左侧菜单需要滚动到的点
-    const nodeTwo: NodesRef = query.selectAll('.' + this.uuid + '.q-picker-two-level-item')
-    nodeTwo.boundingClientRect((res: any) => {
-      if (res.length) {
-        this.twoTops = []
-        res.forEach(item => {
-          const top = item.top + item.height / 2 - this.scrollBoxHeight / 2 - res[0].top
-          this.twoTops.push(top)
-        })
-      } else {
-        CommonUtil.delayTime(100).then(() => {
-          this.getTwoNodeTops()
-        })
-      }
-    }).exec()
-  }
-
-  /**
-   * 记录左侧每个索引对应的滚动位置
-   */
-  threeTops: any[] = []
-
-  getThreeNodeTops() {
-    //获取整个元素的高度
-    const query: SelectorQuery = uni.createSelectorQuery().in(this)
-    //存储左侧菜单需要滚动到的点
-    const nodeThree: NodesRef = query.selectAll('.' + this.uuid + '.q-picker-three-level-item')
-    nodeThree.boundingClientRect((res: any) => {
-      if (res.length) {
-        this.threeTops = []
-        res.forEach(item => {
-          const top = item.top + item.height / 2 - this.scrollBoxHeight / 2 - res[0].top
-          this.threeTops.push(top)
-        })
-      } else {
-        CommonUtil.delayTime(100).then(() => {
-          this.getThreeNodeTops()
-        })
-      }
-    }).exec()
-  }
-
 
   //选中的一级
   checkedOne = 0
@@ -229,9 +115,6 @@ export default class QPicker extends Vue {
     } else {
       this.checkedOne = index
       this.oneScrollTop = this.oneTops[index]
-      this.$nextTick(() => {
-        this.getTwoNodeTops()
-      })
     }
     this.checkedTwo = null
     this.checkedThree = null
@@ -246,9 +129,6 @@ export default class QPicker extends Vue {
     } else {
       this.checkedTwo = index
       this.twoScrollTop = this.twoTops[index]
-      this.$nextTick(() => {
-        this.getThreeNodeTops()
-      })
     }
     this.checkedThree = null
     this.input()
@@ -284,6 +164,7 @@ export default class QPicker extends Vue {
   font-weight: 400;
   line-height: 1;
 }
+
 .q-picker-item-active {
   color: #000;
   font-size: 15px;

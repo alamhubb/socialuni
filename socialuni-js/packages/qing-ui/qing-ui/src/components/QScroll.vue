@@ -1,52 +1,31 @@
 <template>
-  <div ref="scroll" v-scrolle="loadPre">
+  <div ref="scroll" class="q-scroll overflow-auto">
     <slot></slot>
   </div>
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue, toNative, Emit} from 'vue-facing-decorator'
-import {vInfiniteScroll} from '@vueuse/components'
+import {Component,Vue, toNative} from 'vue-facing-decorator'
 
 @toNative
 @Component({
-  directives: {
-    scrolle: vInfiniteScroll
-  }
 })
 export default class QScroll extends Vue {
   $refs: {
     scroll: HTMLElement
   }
-  @Prop({type: Number, default: 10}) readonly distance: number
-  @Prop({type: Number, default: 100}) readonly interval: number
-
-  loadPre() {
-    console.log('chufale preload')
-    const scroll = this.$refs.scroll
-    if (scroll) {
-      const clientHeight = scroll.clientHeight
-      const scrollHeight = scroll.scrollHeight
-      if (scrollHeight > clientHeight) {
-        this.load()
-      }
-    }
-  }
-
-  @Emit()
-  load() {
-    console.log(11111)
-    console.log(this.$refs.scroll)
-    console.log(2222)
-    console.log('触发了加载')
-  }
-
-  scroll() {
-    console.log('触发了滚动')
-  }
-
-  scrollEnd() {
-    console.log('触发了滚动end')
-  }
 }
 </script>
+<style lang="scss">
+/*调整滚动条样式*/
+.q-scroll::-webkit-scrollbar {
+  width: 10px;
+  top: 2px;
+}
+
+.q-scroll::-webkit-scrollbar-thumb {
+  border-radius: 1em;
+  background-color: rgba(144, 147, 153, .3);
+}
+
+</style>

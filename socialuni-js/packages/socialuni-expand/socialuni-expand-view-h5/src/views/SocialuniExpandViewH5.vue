@@ -8,6 +8,10 @@
         class="flex-none bg-white position-sticky top-0 index-xs"
     />
 
+    <div class="mt-sm h200" v-if="districts && districts.length">
+      <q-picker ref="citySelect" class="bg-white h100p" v-model="cityValue"
+                :dataList="districts"></q-picker>
+    </div>
     <div class="flex-1 overflow-hidden">
       <div class="h100p" v-for="(item, swiperIndex) in tabsPageQueryUtil" :key="swiperIndex">
         <div>
@@ -140,11 +144,13 @@ import QScrollbar from "qing-ui-h5/src/components/QScrollbar.vue";
 import SUserGenderTag from "socialuni-user-ui/src/components/SUserGenderTag.vue";
 import QIcon from "qing-ui/src/components/QIcon.vue";
 import QScroll from "qing-ui/src/components/QScroll.vue";
+import QPicker from "qing-ui-h5/src/components/QPicker.vue";
 import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
+import {socialLocationModule} from "socialuni-community-sdk/src/store/SocialLocationModule";
 
 @toNative
 @Component({
-  components: {QTabs, QScrollbar, SUserGenderTag, QButton, QIcon, QScroll}
+  components: {QTabs, QScrollbar, SUserGenderTag, QButton, QIcon, QScroll,QPicker}
 })
 export default class SocialuniExpandViewH5 extends Vue {
   $refs: {}
@@ -169,7 +175,12 @@ export default class SocialuniExpandViewH5 extends Vue {
     await this.initQuery()
   }
 
+  get districts() {
+    return socialLocationModule.districts
+  }
+
   created() {
+    socialLocationModule.getDistrictsAction()
     this.tabsPageQueryUtil = this.tabs.map(() => new SocialuniPageQueryUtil(SocialuniExpandAPI.queryExtendFriendUsersAPI))
     this.initQuery()
     // onLoad((params: { followType: string }) => {

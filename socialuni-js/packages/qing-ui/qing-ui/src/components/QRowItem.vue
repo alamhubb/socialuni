@@ -1,8 +1,8 @@
 <template>
   <!--  可点击的行-->
-  <view class="q-box-between bb bg-click" @click="click">
+  <div class="q-box-between bb bg-click" @click="click">
     <slot></slot>
-  </view>
+  </div>
 </template>
 <script lang="ts">
 import {Emit, Component, Vue, toNative} from 'vue-facing-decorator'
