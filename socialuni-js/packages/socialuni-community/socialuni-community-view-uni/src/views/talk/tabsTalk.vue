@@ -1,15 +1,15 @@
 <template>
-    <view v-if="talkTabs.length" class="flex-col h100p">
-        <!--  <view v-if="talkTabs.length" class="flex-col h100p bg-primary">-->
+    <div v-if="talkTabs.length" class="flex-col h100p">
+        <!--  <div v-if="talkTabs.length" class="flex-col h100p bg-primary">-->
         <!--    <q-tabs :tabs="talkTabs" v-model="current" type="bar" @input="tabsChange"-->
         <div class="flex-row px-sm mb-xss flex-none">
             <q-tabs :tabs="talkTabs" :value="currentTabIndex" type="line" @input="tabsChange"
                     class="bd-radius flex-1 mr-sm">
                 <template #default="{tab,index,value}">
-                    <view class="h30 px-xs row-all-center font-md" :class="{'font-md':value===index}">{{
+                    <div class="h30 px-xs row-all-center font-md" :class="{'font-md':value===index}">{{
                         tab.name
                         }}
-                    </view>
+                    </div>
                 </template>
             </q-tabs>
             <div class="flex-none row-col-center">
@@ -24,7 +24,7 @@
                     <swiper-item class="h100p" v-for="(item, swiperIndex) in talkTabs" :key="swiperIndex">
                         <!--
                         使用view实现的问题，没有scroll事件小程序上
-                        <view class="h100p bg-default" :class="[scrollEnable?'overflow-scroll':'overflow-hidden']" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
+                        <div class="h100p bg-default" :class="[scrollEnable?'overflow-scroll':'overflow-hidden']" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
                               :lower-threshold="800"
                               @scroll.native="talksScrollEvent"
                               @scroll="talksScrollEvent"
@@ -73,16 +73,16 @@
                                               </div>-->
 
 
-                                <view v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
+                                <div v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
                                     <talk-item :talk="talk"
                                                :talk-tab-type="curTalkTabObj.type"
                                                @delete-talk="deleteTalk"
                                     />
                                     <!-- app端广告有问题-->
                                     <!--  #ifdef APP-PLUS -->
-                                    <!--<view v-if="showAd&&showAdIndexList.includes(index)" class="mb-5">
+                                    <!--<div v-if="showAd&&showAdIndexList.includes(index)" class="mb-5">
                                       <ad class="bg-white" adpid="1890536227"></ad>
-                                    </view>-->
+                                    </div>-->
                                     <!--  #endif -->
                                     <!--wx平台显示的广告-->
                                     <!--  #ifdef MP-WEIXIN -->
@@ -104,23 +104,23 @@
                                         class="bg-white mb-5" type="banner video large"
                                         unit-id="3snract0gqnc3fn16d"></ad>
                                     <!--  #endif -->
-                                </view>
+                                </div>
 
                                 <!-- 下拉刷新组件 -->
-                                <view class="mt-xs">
+                                <div class="mt-xs">
                                     <uni-load-more :status="talkTabs[swiperIndex].loadMore"
                                                    @click="clickOnreachBottom"
                                                    :contentText="loadMoreText"></uni-load-more>
-                                </view>
+                                </div>
                             </div>
                             <template v-else>
-                                <view v-if="user" class="row-center h500 pt-100 font-bold text-gray text-md">
+                                <div v-if="user" class="row-center h500 pt-100 font-bold text-gray text-md">
                                     您还没有关注其他人
-                                </view>
-                                <view v-else class="row-center h500 pt-100 font-bold text-gray text-md"
+                                </div>
+                                <div v-else class="row-center h500 pt-100 font-bold text-gray text-md"
                                       @click="toLoginVue">
                                     您还没有登录，点击登录
-                                </view>
+                                </div>
                             </template>
                         </scroll-view>
                     </swiper-item>
@@ -136,7 +136,7 @@
 
         <social-talk-filter-dialog ref="talkFilterDialog"
                                    @confirm="startPullDown"></social-talk-filter-dialog>
-    </view>
+    </div>
 </template>
 
 <script lang="ts">

@@ -44,6 +44,7 @@ import QNavMenu from "qing-ui-h5/src/components/QNavMenu.vue";
 import {constantRoutes} from "@/router";
 import CommonEventUtil from "qingjs/src/util/CommonEventUtil.ts";
 import QScroll from "qing-ui/src/components/QScroll.vue";
+import CommonUtil from "qing-util/src/util/CommonUtil.ts";
 
 @toNative
 @Component({
@@ -51,6 +52,16 @@ import QScroll from "qing-ui/src/components/QScroll.vue";
 })
 export default class App extends Vue {
 
+  mounted(){
+    console.log('chufale')
+    console.log('222')
+    CommonUtil.delayTime(100).then(() => {
+      console.log('chufale')
+      console.log('333')
+      // this.defaultActive = '/expand'
+      this.$router.push('/community')
+    })
+  }
 
   get menus() {
     return constantRoutes
