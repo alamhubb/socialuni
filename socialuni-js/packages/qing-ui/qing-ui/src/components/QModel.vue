@@ -1,10 +1,10 @@
 <template>
-  <view class="q-model modal-index bg-modal row-all-center position-fixed"
+  <div class="q-model modal-index bg-modal row-all-center position-fixed"
         @touchmove.stop.prevent
         @click="click"
   >
     <slot></slot>
-  </view>
+  </div>
 </template>
 <script lang="ts">
 import {Emit, Component, Vue, toNative} from 'vue-facing-decorator'

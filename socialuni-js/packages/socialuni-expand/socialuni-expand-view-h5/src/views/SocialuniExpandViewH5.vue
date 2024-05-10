@@ -7,6 +7,8 @@
         @change="tabsChange"
         class="flex-none bg-white position-sticky top-0 index-xs"
     />
+    <div @click="$refs.cityPicker.open()">dakai</div>
+    <q-city-picker ref="cityPicker"></q-city-picker>
 
     <div class="mt-sm h200" v-if="districts && districts.length">
       <q-picker ref="citySelect" class="bg-white h100p" v-model="cityValue"
@@ -145,12 +147,13 @@ import SUserGenderTag from "socialuni-user-ui/src/components/SUserGenderTag.vue"
 import QIcon from "qing-ui/src/components/QIcon.vue";
 import QScroll from "qing-ui/src/components/QScroll.vue";
 import QPicker from "qing-ui/src/components/QPicker.vue";
+import QCityPicker from "socialuni-ui/src/components/QCityPicker.vue";
 import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
 import {socialLocationModule} from "socialuni-community-sdk/src/store/SocialLocationModule";
 
 @toNative
 @Component({
-  components: {QTabs, QScrollbar, SUserGenderTag, QButton, QIcon, QScroll,QPicker}
+  components: {QTabs, QScrollbar, SUserGenderTag, QButton, QIcon, QScroll, QPicker, QCityPicker}
 })
 export default class SocialuniExpandViewH5 extends Vue {
   $refs: {}

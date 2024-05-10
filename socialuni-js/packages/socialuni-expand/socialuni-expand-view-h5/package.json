@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "qing-ui-h5": "^0.1.13",
+    "socialuni-ui-h5": "^0.1.13",
     "qingjs": "^0.1.13",
     "socialuni": "^0.1.13",
     "socialuni-expand-api": "^0.1.13",
