@@ -144,7 +144,7 @@ import QScrollbar from "qing-ui-h5/src/components/QScrollbar.vue";
 import SUserGenderTag from "socialuni-user-ui/src/components/SUserGenderTag.vue";
 import QIcon from "qing-ui/src/components/QIcon.vue";
 import QScroll from "qing-ui/src/components/QScroll.vue";
-import QPicker from "qing-ui-h5/src/components/QPicker.vue";
+import QPicker from "qing-ui/src/components/QPicker.vue";
 import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
 import {socialLocationModule} from "socialuni-community-sdk/src/store/SocialLocationModule";
 
