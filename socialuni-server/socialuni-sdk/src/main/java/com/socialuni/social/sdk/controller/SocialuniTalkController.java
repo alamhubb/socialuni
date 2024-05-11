@@ -1,6 +1,7 @@
 package com.socialuni.social.sdk.controller;
 
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
 import com.socialuni.social.common.sdk.feignAPI.community.SocialuniTalkAPI;
 import com.socialuni.social.sdk.logic.service.talk.SocialuniTalkService;
 import com.socialuni.social.community.sdk.model.QO.talk.SocialuniTalkPostQO;
@@ -23,6 +24,11 @@ public class SocialuniTalkController implements SocialuniTalkAPI {
     @Override
     public ResultRO<List<SocialuniTalkRO>> queryTalks() {
         return socialuniTalkService.queryTalks();
+    }
+
+    @Override
+    public ResultRO<List<SocialuniTalkRO>> queryTalksNew(SocialuniPageQueryQO<SocialuniHomeTabTalkQueryQO> socialuniPageQueryQO) {
+        return socialuniTalkService.queryTalksNew(socialuniPageQueryQO);
     }
 
     @Override

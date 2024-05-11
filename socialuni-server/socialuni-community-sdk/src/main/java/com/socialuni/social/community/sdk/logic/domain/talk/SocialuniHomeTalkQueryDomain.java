@@ -6,6 +6,7 @@ import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
+import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
 import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.common.sdk.constant.GenderTypeQueryVO;
 import com.socialuni.social.common.sdk.constant.GenderTypeVO;
@@ -55,7 +56,10 @@ public class SocialuniHomeTalkQueryDomain {
 
 
     //查询非关注tab的动态列表
-    public List<SocialuniTalkRO> queryHomeTabTalks(SocialuniHomeTabTalkQueryQO queryQO) {
+    public List<SocialuniTalkRO> queryHomeTabTalks(SocialuniPageQueryQO<SocialuniHomeTabTalkQueryQO> socialuniPageQueryQO) {
+
+        SocialuniHomeTabTalkQueryQO queryQO = socialuniPageQueryQO.getQueryData();
+
         //区分是否为自身应用，不同逻辑
         /*if (DevAccountUtils.isCenter()) {
 
@@ -75,7 +79,7 @@ public class SocialuniHomeTalkQueryDomain {
 
 
         //校验gender类型,生成BO，包含业务逻辑
-        SocialHomeTabTalkQueryBO queryBO = this.checkAndGetHomeTalkQueryBO(queryQO, mineUser);
+        SocialHomeTabTalkQueryBO queryBO = this.checkAndGetHomeTalkQueryBO(socialuniPageQueryQO, mineUser);
 
 
         //根据不同的tab区分不同的查询逻辑
@@ -119,7 +123,8 @@ public class SocialuniHomeTalkQueryDomain {
     SocialuniTalkQueryGenerateQueryBOByTabDomain socialuniTalkQueryGenerateQueryBOByTabDomain;
 
 
-    public SocialHomeTabTalkQueryBO checkAndGetHomeTalkQueryBO(SocialuniHomeTabTalkQueryQO queryQO, SocialuniUserDo mineUser) {
+    public SocialHomeTabTalkQueryBO checkAndGetHomeTalkQueryBO(SocialuniPageQueryQO<SocialuniHomeTabTalkQueryQO> socialuniPageQueryQO, SocialuniUserDo mineUser) {
+        SocialuniHomeTabTalkQueryQO queryQO = socialuniPageQueryQO.getQueryData();
         //主要逻辑区分就是这里，
         //通用逻辑
         //普通类型的逻辑
@@ -140,7 +145,7 @@ public class SocialuniHomeTalkQueryDomain {
 
         //校园社区
         SocialHomeTabTalkQueryBO socialHomeTabTalkQueryBO = socialuniTalkQueryGenerateQueryBOByTabDomain.generateQueryBOByTab(queryQO, mineUser);
-        socialHomeTabTalkQueryBO.setFirstLoad(queryQO.getFirstLoad());
+        socialHomeTabTalkQueryBO.setFirstLoad(socialuniPageQueryQO.getFirstLoad());
         //不为true，则设置为false
         if (!BooleanUtil.isTrue(socialHomeTabTalkQueryBO.getFirstLoad())) {
             socialHomeTabTalkQueryBO.setFirstLoad(false);
@@ -209,7 +214,7 @@ public class SocialuniHomeTalkQueryDomain {
             maxAge = frontMaxAge;
         }
         socialHomeTabTalkQueryBO.setMaxAge(maxAge);
-        socialHomeTabTalkQueryBO.setQueryTime(queryQO.getQueryTime());
+        socialHomeTabTalkQueryBO.setQueryTime(socialuniPageQueryQO.getQueryTime());
         socialHomeTabTalkQueryBO.setDevId(DevAccountFacade.getDevIdNotNull());
 
         String adCode = queryQO.getAdCode();

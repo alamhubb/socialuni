@@ -1,11 +1,14 @@
 package com.socialuni.social.common.sdk.feignAPI.community;
 
+import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
+import com.socialuni.social.common.api.model.user.SocialuniUserExtendDetailRO;
 import com.socialuni.social.community.sdk.model.QO.talk.SocialuniTalkPostQO;
 import com.socialuni.social.community.sdk.model.QO.talk.SocialuniHomeTabTalkQueryQO;
 import com.socialuni.social.community.sdk.model.QO.talk.SocialuniTalkIdQO;
 import com.socialuni.social.community.sdk.model.QO.talk.SocialuniUserTalkQueryQO;
 import com.socialuni.social.community.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.user.sdk.model.QO.user.SocialuniUserExtendFriendQueryQO;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.info.Info;
@@ -48,6 +51,11 @@ public interface SocialuniTalkAPI {
     @GetMapping("queryTalks")
     @Operation(summary = "查询动态列表，无需参数")
     ResultRO<List<SocialuniTalkRO>> queryTalks();
+
+
+    @PostMapping("queryTalksNew")
+    @Operation(summary = "查询动态列表")
+    ResultRO<List<SocialuniTalkRO>> queryTalksNew(@RequestBody(required = false) SocialuniPageQueryQO<SocialuniHomeTabTalkQueryQO> socialuniPageQueryQO);
 
 
     @PostMapping("queryTalks")

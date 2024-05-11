@@ -1,41 +1,18 @@
 <template>
-  <div v-if="talkTabs.length" class="flex-col h100p">
-    <!--  <div v-if="talkTabs.length" class="flex-col h100p bg-primary">-->
-    <!--    <q-tabs :tabs="talkTabs" v-model="current" type="bar" @input="tabsChange"-->
-    <div class="flex-row px-sm mb-xss flex-none">
-      <q-tabs :tabs="talkTabs" v-model="currentTabIndex" type="line" @change="tabsChange"
-              class="bd-radius flex-1 mr-sm">
-        <template #default="{tab,index,value}">
-          <div class="h30 px-xs row-all-center font-md" :class="{'font-md':value===index}">{{
-              tab.name
-            }}
-          </div>
-        </template>
-      </q-tabs>
-      <div class="flex-none row-col-center">
-        <q-icon icon="list-dot" size="20" @click="openTalkFilterDialog"></q-icon>
-      </div>
+  <div>
+    <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
+    <div v-for="(talk,index) in talksNew" :key="talk.id">
+      <talk-item :talk="talk"
+                 :talk-tab-type="curTalkTabObj.type"
+                 @delete-talk="deleteTalk"
+      />
     </div>
-
-    <div class="flex-1 overflow-hidden">
-      <div>
-        <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
-        <div class="pb-60">
-          <div v-for="(talk,index) in talksNew" :key="talk.id">
-            <talk-item :talk="talk"
-                       :talk-tab-type="curTalkTabObj.type"
-                       @delete-talk="deleteTalk"
-            />
-          </div>
-          <!-- 下拉刷新组件 -->
-<!--          <div class="mt-xs">-->
-<!--            <uni-load-more :status="talkTabs[swiperIndex].loadMore"-->
-<!--                           @click="clickOnreachBottom"-->
-<!--                           :contentText="loadMoreText"></uni-load-more>-->
-<!--          </div>-->
-        </div>
-      </div>
-    </div>
+    <!-- 下拉刷新组件 -->
+    <!--          <div class="mt-xs">-->
+    <!--            <uni-load-more :status="talkTabs[swiperIndex].loadMore"-->
+    <!--                           @click="clickOnreachBottom"-->
+    <!--                           :contentText="loadMoreText"></uni-load-more>-->
+    <!--          </div>-->
     <!--            从附近哪里选择城市-->
     <!--            搜索栏左边加个筛选按钮可以筛选性别年龄-->
     <!--            除去搜索栏和导航栏的高度就是剩余高度-->

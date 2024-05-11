@@ -1,5 +1,6 @@
 package com.socialuni.social.sdk.logic.service.talk;
 
+import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
 import com.socialuni.social.common.sdk.feignAPI.community.SocialuniTalkAPI;
 import com.socialuni.social.community.sdk.dao.store.TalkQueryStore;
 import com.socialuni.social.community.sdk.logic.domain.talk.*;
@@ -18,6 +19,7 @@ import com.socialuni.social.common.api.model.ResultRO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -76,6 +78,11 @@ public class SocialuniTalkService {
         return this.queryTalks(queryQO);
     }
 
+    public ResultRO<List<SocialuniTalkRO>> queryTalksNew(SocialuniPageQueryQO<SocialuniHomeTabTalkQueryQO> socialuniPageQueryQO) {
+        List<SocialuniTalkRO> talkROS = centerHomeTalkQueryDomain.queryHomeTabTalks(socialuniPageQueryQO);
+        return new ResultRO<>(talkROS);
+    }
+
     //查询非关注tab的动态列表
     public ResultRO<List<SocialuniTalkRO>> queryTalks(SocialuniHomeTabTalkQueryQO queryQO) {
         if (SocialuniSystemConst.serverIsChild()) {
@@ -94,7 +101,16 @@ public class SocialuniTalkService {
             }).collect(Collectors.toList());
         }*/
 
-        List<SocialuniTalkRO> talkROS = centerHomeTalkQueryDomain.queryHomeTabTalks(queryQO);
+        SocialuniPageQueryQO<SocialuniHomeTabTalkQueryQO> socialuniPageQueryQO = new SocialuniPageQueryQO<>();
+        socialuniPageQueryQO.setQueryData(queryQO);
+        socialuniPageQueryQO.setQueryTime(queryQO.getQueryTime());
+        socialuniPageQueryQO.setFirstLoad(queryQO.getFirstLoad());
+
+        if (queryQO.getFirstLoad()){
+            socialuniPageQueryQO.setPageNum(1);
+        }
+
+        List<SocialuniTalkRO> talkROS = centerHomeTalkQueryDomain.queryHomeTabTalks(socialuniPageQueryQO);
         return new ResultRO<>(talkROS);
     }
 
