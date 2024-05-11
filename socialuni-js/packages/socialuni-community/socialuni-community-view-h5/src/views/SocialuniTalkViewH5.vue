@@ -550,6 +550,6 @@ export default class SocialuniTalkViewH5 extends Vue {
 </script>
 <style>
 .socialuni-community-view-left-menu .el-menu-item{
-  font-size: 22px;
+  font-size: 20px;
 }
 </style>
