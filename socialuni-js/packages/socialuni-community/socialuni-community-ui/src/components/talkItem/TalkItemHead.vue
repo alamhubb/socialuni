@@ -8,7 +8,7 @@
     <div class="row-between flex-1">
       <div class="col-center">
         <div class="h20 row-col-center">
-          <span class="text-df font-bold">{{ talk.user.nickname }}</span>
+          <span class="font-bold">{{ talk.user.nickname }}</span>
           <!--          <span class="text-md" :class="{'color-red':home.user.vipFlag}">{{ home.user.nickname }}</span>-->
           <template v-if="!talk.globalTop">
             <social-gender-tag class="ml-xs" :user="talk.user"></social-gender-tag>
