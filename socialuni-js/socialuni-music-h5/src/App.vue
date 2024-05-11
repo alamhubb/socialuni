@@ -5,21 +5,22 @@
     <!--    <div class="flex-1 overflow-hidden">-->
     <!--           :infinite-scroll-delay="500" -->
     <!--      <div class="h100p overflow-auto row-center"-->
-<!--    <q-scroll class="flex-1 overflow-auto" @load="scrollToLower" :distance="200" :interval="1000">
-      <div class="row-center">
-        <q-nav-menu class="h100p w150 flex-none br position-sticky top-0" :menus="menus"/>
-        <div class="w1000">
-          <RouterView/>
-        </div>
-      </div>
-    </q-scroll>-->
+    <!--    <q-scroll class="flex-1 overflow-auto" @load="scrollToLower" :distance="200" :interval="1000">
+          <div class="row-center">
+            <q-nav-menu class="h100p w150 flex-none br position-sticky top-0" :menus="menus"/>
+            <div class="w1000">
+              <RouterView/>
+            </div>
+          </div>
+        </q-scroll>-->
     <div class="flex-1 overflow-auto"
-         v-infinite-scroll="scrollToLower" :infinite-scroll-immediate="false" :infinite-scroll-distance="200" :infinite-scroll-delay="2000"
+         v-infinite-scroll="scrollToLower" :infinite-scroll-immediate="false" :infinite-scroll-distance="200"
+         :infinite-scroll-delay="2000"
     >
-      <div class="mg-x-auto w1500">
+      <div class="mg-x-auto w800">
         <div class="row-center">
-          <q-nav-menu class="h100p w150 flex-none br position-sticky top-0" :menus="menus"/>
-          <div class="w1000">
+          <q-nav-menu class="h100p w200 flex-none br position-sticky top-0" :menus="menus"/>
+          <div class="flex-1 overflow-hidden">
             <RouterView/>
           </div>
         </div>
@@ -52,7 +53,7 @@ import CommonUtil from "qing-util/src/util/CommonUtil.ts";
 })
 export default class App extends Vue {
 
-  mounted(){
+  mounted() {
     console.log('chufale')
     console.log('222')
     CommonUtil.delayTime(100).then(() => {

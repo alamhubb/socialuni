@@ -22,7 +22,7 @@
                                :data-src="img"
                                @click="previewImage(img)"
                                :src="img"
-                        ></image>
+                        ></img>
 
                         <div v-else class="w100p h75 bd-radius row-all-center"
                              :style="{'background-image': 'url('+img+')'}"

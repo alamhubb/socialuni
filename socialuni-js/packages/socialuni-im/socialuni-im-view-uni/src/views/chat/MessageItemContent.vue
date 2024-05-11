@@ -12,7 +12,7 @@
            :src="msg.contentData.sourcePicture.url"
            :show-menu-by-longpress="true"
            @click.stop="previewImage(msg.contentData.sourcePicture.url)"
-    ></image>
+    ></img>
 
     <video v-else-if="msg.contentType === 104"  :src="msg.contentData.videoUrl" :style="{'max-width':'230px'}"
              controls></video>

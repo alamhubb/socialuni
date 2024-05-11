@@ -14,7 +14,7 @@
                :src="getTalkSmallImgUrl(talk.user.id,img.src)"
                :show-menu-by-longpress="true"
                @click.stop="previewImage(index)"
-        ></image>
+        />
         <!--        <div class="bd-round size18 position-absolute mr-nn mt-nn right-0 row-all-center">
                   <q-icon @click.stop="toIdentityAuth"
                           class="color-success"

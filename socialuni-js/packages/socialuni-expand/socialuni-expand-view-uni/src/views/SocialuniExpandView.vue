@@ -96,7 +96,7 @@
                            :data-src="img"
                            @click.stop="previewImage(img,user)"
                            :src="img"
-                    ></image>
+                    ></img>
                   </div>
                 </div>
                 <div class="mt-xs">
