@@ -2,7 +2,7 @@
   <div class="mg-x-auto w1200">
     <div class="row-center">
       <!--      <q-nav-menu/>-->
-      <el-menu class="w250 flex-none br position-sticky top-0 h100p">
+      <el-menu class="w200 flex-none br position-sticky top-0 h100p socialuni-community-view-left-menu mr-sm">
         <q-enum-link v-for="tab in talkTabs" :to="'/community?tab='+tab.name">
           <el-menu-item :index="tab.name">
             {{ tab.name }}
@@ -548,3 +548,8 @@ export default class SocialuniTalkViewH5 extends Vue {
   }
 }
 </script>
+<style>
+.socialuni-community-view-left-menu .el-menu-item{
+  font-size: 22px;
+}
+</style>

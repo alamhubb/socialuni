@@ -1,7 +1,7 @@
 import {createApp} from 'vue'
 
 import App from './App.vue'
-import './styles/index.scss'
+// import './styles/index.scss'
 import Socialuni from "socialuni/src";
 import router from "@/router";
 import SocialuniMusic from "socialuni-music-sdk/src";
@@ -14,6 +14,7 @@ import SocialuniUiH5 from "socialuni-ui-h5/src";
 import SocialuniExpandH5 from "socialuni-expand-view-h5/src";
 import SocialuniCommunityH5 from "socialuni-community-view-h5/src";
 import SocialuniAppViewH5 from "socialuni-app-view-h5/src";
+import SocialuniUi from "socialuni-ui/src";
 
 declare module '@vue/runtime-core' {
     interface ComponentCustomProperties {
@@ -30,6 +31,7 @@ declare module '@vue/runtime-core' {
 
     app.config.globalProperties.$DateUtil = DateUtil;
 
+    app.use(SocialuniUi)
     app.use(SocialuniUiH5)
     app.use(SocialuniAppViewH5)
     app.use(SocialuniUser)
