@@ -20,7 +20,7 @@
         <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
         <div v-for="(talk,index) in talksNew" :key="talk.id">
           <talk-item :talk="talk"
-                     :talk-tab-type="curTalkTabObj.type"
+                     :talk-tab-type="tabName"
                      @delete-talk="deleteTalk"
           />
         </div>
@@ -30,7 +30,7 @@
       <social-talk-filter-dialog ref="talkFilterDialog"
                                  @confirm="startPullDown"></social-talk-filter-dialog>
 
-      <socialuni-comment-input-dialog ref="commentDialog"></socialuni-comment-input-dialog>
+<!--      <socialuni-comment-input-dialog ref="commentDialog"></socialuni-comment-input-dialog>-->
     </div>
   </div>
 </template>
@@ -164,18 +164,20 @@ export default class SocialuniTalkViewH5 extends Vue {
   }
 
 
+  tabName = '首页'
+
   initLogic() {
     console.log('chufa11111')
-    let tabName = this.$route.query.tab as string
+    this.tabName = this.$route.query.tab as string
     if (this.$route.query.circle) {
       socialCircleModule.setCircleName(this.$route.query.circle as string)
     }
-    if (!tabName) {
+    if (!this.tabName) {
       if (!socialCircleModule.circleName) {
         this.$router.push('/community?tab=' + '首页')
         return
       }
-      tabName = '首页'
+      this.tabName = '首页'
     }
     // 获取元素高度，用来计算scroll-view高度
     // this.$refs.tabsTalk.initQuery()
@@ -186,7 +188,7 @@ export default class SocialuniTalkViewH5 extends Vue {
       //首次打开talk页面，获取用户位置用来查询
       socialLocationModule.appLunchInitDistrict().then(async () => {
         // this.initQuery()
-        const talkQO = TalkQOFactory.getTalkQueryQO(tabName, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, socialuniTagModule.selectTagNames, socialCircleModule.circleName)
+        const talkQO = TalkQOFactory.getTalkQueryQO(this.tabName, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, socialuniTagModule.selectTagNames, socialCircleModule.circleName)
         await this.pageQueryUtil.initQuery(talkQO)
         this.talksNew = this.pageQueryUtil.listData
       })

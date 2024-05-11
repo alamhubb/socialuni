@@ -1,6 +1,9 @@
 <template>
   <q-dialog ref="dialog" title="评论">
     <div>
+      <talk-item :talk="talk"
+                 talk-tab-type="首页"
+      />
       {{ msgInputPlaceholder }}
     </div>
   </q-dialog>
@@ -72,6 +75,11 @@ export default class SocialuniCommentInputDialog extends Vue {
   get currentContent() {
     return socialTalkModule.currentContent
   }
+
+  get talk() {
+    return socialTalkModule.talk
+  }
+
 
   get user() {
     return socialuniUserModule.mineUser

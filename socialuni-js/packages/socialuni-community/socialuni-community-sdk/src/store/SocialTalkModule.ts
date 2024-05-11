@@ -26,14 +26,13 @@ class SocialTalkModule {
     //方便操作页面动作
     talkVue: Vue = null
 
-    filter内容
+    // filter内容
     userMinAge: number = TalkFilterUtil.getMinAgeFilter()
     userMaxAge: number = TalkFilterUtil.getMaxAgeFilter()
     userGender: string = TalkFilterUtil.getGenderFilter()
     talkTabs: SocialuniTalkTabRO [] = TalkVueUtil.getTalkTabs()
     currentTabIndex: number = TalkVueUtil.getCurTalkTabIndex()
 
-    state
     currentContent: null
     talk: TalkVO = null
     comment: CommentVO = null
