@@ -49,7 +49,7 @@
 <script lang="ts">
 import {Component, Vue, Watch, toNative} from 'vue-facing-decorator'
 
-import QButton from 'qing-ui-uni/src/components/QButton/QButton.vue'
+import QButton from 'qing-ui/src/components/QButton.vue'
 import QNavbar from 'qing-ui-uni/src/components/QNavbar/QNavbar.vue'
 import QSearch from 'qing-ui-uni/src/components/QSearch/QSearch.vue'
 import QIcon from 'qing-ui/src/components/QIcon.vue'
@@ -72,7 +72,7 @@ import {socialAppModule} from "socialuni-app-sdk/src/store/SocialAppModule";
 import {socialLocationModule} from "socialuni-community-sdk/src/store/SocialLocationModule";
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
-import MsgInput from "../../components/MsgInput.vue";
+import MsgInput from "socialuni-ui/src/components/MsgInput.vue";
 import {getCurrentInstance} from "vue";
 
 // todo 后台可控制是否显示轮播图

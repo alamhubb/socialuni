@@ -1,12 +1,12 @@
 <template>
   <div
       v-if="inputContentFocus"
-      class="bg-white row-between-center pr-sm input fixed-footer elevation-4 flex-row" style="min-height: 50px"
+      class="bg-white row-between-center pr-sm input fixed-footer shadow-top flex-row" style="min-height: 50px"
   >
     <input
         v-model.trim="content"
         :adjust-position="true"
-        class="solid-bottom text-black flex-1 mx-10"
+        class="bd-none color-main flex-1 pd-xs mx-10"
         style="line-height: 32px;height: 32px;min-height: 32px;"
         confirm-type="send"
         :focus="inputContentFocusInput"
@@ -32,22 +32,26 @@
     <!--<div class="action">
         <span class="cuIcon-emojifill text-grey"></span>
     </div>-->
-    <button class="cu-btn bg-cyan flex-none" @click="sendComment" :disabled="!content">发送</button>
+    <q-button @click="sendComment" :disabled="!content" success light>发送</q-button>
+<!--    <button class="cu-btn bg-cyan flex-none" @click="sendComment" :disabled="!content">发送</button>-->
   </div>
 </template>
 
 <script lang="ts">
 import {Component, Vue, Watch, toNative} from 'vue-facing-decorator'
-import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil";
 import {socialTalkModule} from "socialuni-community-sdk/src/store/SocialTalkModule";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import PlatformUtils from "socialuni-user-sdk/src/util/PlatformUtils";
-import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
 import UserCheckUtil from "socialuni-user-sdk/src/util/UserCheckUtil";
+import QButton from "qing-ui/src/components/QButton.vue";
 
 @toNative
-@Component({})
+@Component({
+  components: {
+    QButton
+  }
+})
 export default class MsgInput extends Vue {
   content = ''
 

@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import {Component, Vue, toNative} from 'vue-facing-decorator';
-import QButton from "qing-ui-uni/src/components/QButton/QButton.vue";
+import QButton from "qing-ui/src/components/QButton.vue";
 
 @toNative
 @Component({

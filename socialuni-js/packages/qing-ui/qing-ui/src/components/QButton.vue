@@ -24,6 +24,7 @@
             @error="errorHandler"
             @opensetting="opensetting"
             @launchapp="launchapp"
+            @blur.prevent.stop
     >
         <slot></slot>
     </button>

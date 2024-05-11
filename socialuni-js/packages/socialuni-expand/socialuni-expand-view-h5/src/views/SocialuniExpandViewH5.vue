@@ -119,7 +119,7 @@ import {Vue, Component, Prop, Emit, toNative} from 'vue-facing-decorator'
 import SocialuniFollowType from "socialuni-constant/constant/user/SocialuniFollowType";
 import SocialUserContentRO from "socialuni-api-base/src/model/social/SocialUserContentRO";
 import QTabs from "qing-ui/src/components/QTabs/QTabs.vue";
-import QButton from "qing-ui-h5/src/components/QButton.vue";
+import QButton from "qing-ui/src/components/QButton.vue";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import SocialuniPageQueryUtil from "socialuni-api-base/src/model/common/SocialuniPageQueryUtil";
 import CommonUtil from "qing-util/src/util/CommonUtil";

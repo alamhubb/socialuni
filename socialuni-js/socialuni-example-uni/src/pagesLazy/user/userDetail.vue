@@ -31,7 +31,7 @@
 <script lang="ts">
 import SocialuniCommunityUserDetailView
   from "socialuni-community-view-uni/src/views/user/SocialuniCommunityUserDetailView.vue";
-import QButton from "qing-ui-uni/src/components/QButton/QButton.vue";
+import QButton from "qing-ui/src/components/QButton.vue";
 import QIcon from "qing-ui/src/components/QIcon.vue";
 import QPopup from "qing-ui/src/components/QPopup.vue";
 import {Component, Vue, toNative} from 'vue-facing-decorator';

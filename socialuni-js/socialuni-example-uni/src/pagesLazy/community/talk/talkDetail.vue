@@ -51,7 +51,7 @@ import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfig
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
 import QIcon from "qing-ui/src/components/QIcon.vue";
-import MsgInput from "socialuni-community-view-uni/src/components/MsgInput.vue";
+import MsgInput from "socialuni-ui/src/components/MsgInput.vue";
 import TalkItem from "socialuni-community-ui/src/components/talkItem/TalkItem.vue";
 import TalkOperate from "socialuni-community-view-uni/src/views/talk/talkOperate.vue";
 import QNavbar from "qing-ui-uni/src/components/QNavbar/QNavbar.vue";

@@ -95,14 +95,14 @@ import {socialuniCommunityUserDetailViewService}
   from "socialuni-community-sdk/src/logic/SocialuniCommunityUserDetailViewService";
 import {getCurrentInstance} from "vue";
 import QIcon from "qing-ui/src/components/QIcon.vue"
-import QButton from "qing-ui-uni/src/components/QButton/QButton.vue"
+import QButton from "qing-ui/src/components/QButton.vue"
 import QNavbar from "qing-ui-uni/src/components/QNavbar/QNavbar.vue"
 import {socialuniUserDetailViewService} from "socialuni-user-sdk/src/logic/SocialuniUserDetailViewService";
 import SocialuniUserDetailView from "socialuni-user-view-uni/src/views/user/SocialuniUserDetailView.vue";
 import SocialuniFollowTag from "../../components/SocialuniFollow/SocialuniFollowTag.vue";
 import TalkItem from "../../components/talkItem/TalkItem.vue";
 import TalkOperate from "../talk/talkOperate.vue";
-import MsgInput from "../../components/MsgInput.vue";
+import MsgInput from "socialuni-ui/src/components/MsgInput.vue";
 @toNative
 @Component({
   components: {

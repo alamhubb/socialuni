@@ -24,11 +24,15 @@
                      @delete-talk="deleteTalk"
           />
         </div>
+
+        <msg-input class="w600"></msg-input>
       </div>
       <talk-operate @deleteTalk="deleteTalk"></talk-operate>
 
       <social-talk-filter-dialog ref="talkFilterDialog"
                                  @confirm="startPullDown"></social-talk-filter-dialog>
+
+
 
 <!--      <socialuni-comment-input-dialog ref="commentDialog"></socialuni-comment-input-dialog>-->
     </div>
@@ -71,7 +75,7 @@ import JsonUtil from "qing-util/src/util/JsonUtil";
 import QNavMenu from "qing-ui-h5/src/components/QNavMenu.vue";
 import CommunityEventConst from "socialuni-community-sdk/src/constant/CommunityEventConst";
 import SocialuniCommentInputDialog from "./SocialuniCommentInputDialog.vue";
-
+import MsgInput from "socialuni-ui/src/components/MsgInput.vue";
 // todo 后台可控制是否显示轮播图
 @toNative
 @Component({
@@ -79,6 +83,7 @@ import SocialuniCommentInputDialog from "./SocialuniCommentInputDialog.vue";
     SocialuniCommentInputDialog,
     QNavMenu,
     QIcon,
+    MsgInput,
     QTabs,
     QEnumLink,
     TalkItem
@@ -87,8 +92,6 @@ import SocialuniCommentInputDialog from "./SocialuniCommentInputDialog.vue";
 export default class SocialuniTalkViewH5 extends Vue {
   $refs: {
     commentDialog: SocialuniCommentInputDialog
-    pullRefresh: QPullRefresh
-    talkFilterDialog: SocialTalkFilterDialog
   }
 
   get inputContentFocus() {
@@ -157,9 +160,6 @@ export default class SocialuniTalkViewH5 extends Vue {
 
 
   mounted() {
-    CommonEventUtil.on(CommunityEventConst.socialuniTalkComment, () => {
-      this.$refs.commentDialog.open()
-    })
     this.initLogic()
   }
 

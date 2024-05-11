@@ -211,7 +211,7 @@ import QRowItem from "qing-ui/src/components/QRowItem.vue";
 import SocialuniUserInfoImg from "./SocialuniUserInfoImg.vue";
 import UserSchoolEditDialog from "./UserSchoolEditDialog.vue";
 import QInput from "qing-ui/src/components/QInput.vue";
-import QButton from "qing-ui-uni/src/components/QButton/QButton.vue";
+import QButton from "qing-ui/src/components/QButton.vue";
 import QSearch from "qing-ui-uni/src/components/QSearch/QSearch.vue";
 import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
 import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";

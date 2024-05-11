@@ -48,7 +48,7 @@ import {Vue, Component, toNative} from 'vue-facing-decorator'
 import ShellOrderVO from "socialuni-api-base/src/model/ShellOrderVO";
 import QIcon from 'qing-ui/src/components/QIcon.vue'
 import EnumVO from "socialuni-constant/constant/EnumVO";
-import QButton from "qing-ui-uni/src/components/QButton/QButton.vue";
+import QButton from "qing-ui/src/components/QButton.vue";
 import SocialuniCoinPageType from "socialuni-constant/constant/user/SocialuniCoinPageType";
 import SocialuniProviderType from "socialuni-constant/constant/SocialuniProviderType";
 import PayType from "socialuni-constant/constant/PayType";

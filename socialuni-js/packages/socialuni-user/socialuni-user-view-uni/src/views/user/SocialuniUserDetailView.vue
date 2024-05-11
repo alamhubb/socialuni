@@ -93,7 +93,7 @@
 <script lang="ts">
 import SocialuniUserInfoImg from "./SocialuniUserInfoImg.vue"
 import QIcon from "qing-ui/src/components/QIcon.vue"
-import QButton from "qing-ui-uni/src/components/QButton/QButton.vue"
+import QButton from "qing-ui/src/components/QButton.vue"
 import QNavbar from "qing-ui-uni/src/components/QNavbar/QNavbar.vue"
 import SocialGenderTag from "socialuni-user-ui/src/components/SUserGenderTag.vue"
 import {getCurrentInstance, provide, reactive} from "vue";
