@@ -12,7 +12,7 @@
                     ></q-icon>
                 </div>
                 <div class="action" @click="closeSearch">
-                    <text>取消</span>
+                    <span>取消</span>
                 </div>
             </div>
             <div class="flex-1 overflow-auto" v-if="searchContent || showSearch">
@@ -24,7 +24,7 @@
                 </div>
                 <div v-for="tag in showTags" :key="tag.id" @click="checkTag(tag)"
                       class="article-row row-between solid-bottom">
-                    <text>
+                    <span>
                         #{{ tag.name }}
                     </span>
                     <div v-if="tag.count" class="row-col-center">

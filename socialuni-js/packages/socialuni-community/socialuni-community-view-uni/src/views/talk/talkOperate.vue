@@ -25,7 +25,7 @@
                 </div>
                 <div>
                   <label class="ml-10" :for="report">
-                    <text>{{ report }}</span>
+                    <span>{{ report }}</span>
                   </label>
                 </div>
               </label>

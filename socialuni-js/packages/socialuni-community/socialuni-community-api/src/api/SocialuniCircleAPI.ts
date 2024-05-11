@@ -5,12 +5,12 @@ import SocialuniTalkTabCircleRO from "socialuni-api-base/src/model/community/cir
 import CircleTypeRO from "socialuni-api-base/src/model/community/circle/CircleTypeRO";
 import SocialuniCircleQueryByTypeQO from "socialuni-api-base/src/model/QO/circle/SocialuniCircleQueryByTypeQO";
 import socialuniCommunityRequest from "../request/socialuniCommunityRequest";
-import ToastUtil from "qingjs-uni/src/util/ToastUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 
 export default class SocialuniCircleAPI {
   static createCircleAPI(createQO: CircleCreateQO) {
     return socialuniCommunityRequest.post<SocialCircleRO>('socialuni/circle/createCircle', createQO).then(res => {
-      SocialuniAppUtil.ToastUtil.toast('创建成功')
+      QingAppUtil.ToastUtil.toast('创建成功')
       return res
     })
   }

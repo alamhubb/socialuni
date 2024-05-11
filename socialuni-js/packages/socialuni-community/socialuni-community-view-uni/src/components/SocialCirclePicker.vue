@@ -7,7 +7,7 @@
       <scroll-view class="h100p" scroll-y v-if="circleSearchText">
         <div v-for="tag in showCircles" :key="tag.id" @click="change(tag)"
               class="article-row row-between solid-bottom">
-          <text>
+          <span>
             #{{ tag.name }}
           </span>
           <div v-if="tag.count" class="row-col-center">

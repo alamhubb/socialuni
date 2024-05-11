@@ -1,27 +1,33 @@
 <template>
-  <div>
-    <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
-    <div v-for="(talk,index) in talksNew" :key="talk.id">
-      <talk-item :talk="talk"
-                 :talk-tab-type="curTalkTabObj.type"
-                 @delete-talk="deleteTalk"
-      />
+  <div class="mg-x-auto w1200">
+    <div class="row-center">
+      <!--      <q-nav-menu/>-->
+      <el-menu class="w250 flex-none br position-sticky top-0 h100p">
+        <q-enum-link v-for="tab in talkTabs" :to="'/community?tab='+tab.name">
+          <el-menu-item :index="tab.name">
+            {{ tab.name }}
+          </el-menu-item>
+        </q-enum-link>
+        <q-enum-link v-for="circle in mineCirclesTop10" :to="'/community?circle='+circle">
+          <el-menu-item :index="circle">
+            {{ circle }}
+          </el-menu-item>
+        </q-enum-link>
+      </el-menu>
+      <div class="w600">
+        <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
+        <div v-for="(talk,index) in talksNew" :key="talk.id">
+          <talk-item :talk="talk"
+                     :talk-tab-type="curTalkTabObj.type"
+                     @delete-talk="deleteTalk"
+          />
+        </div>
+      </div>
+      <talk-operate @deleteTalk="deleteTalk"></talk-operate>
+
+      <social-talk-filter-dialog ref="talkFilterDialog"
+                                 @confirm="startPullDown"></social-talk-filter-dialog>
     </div>
-    <!-- 下拉刷新组件 -->
-    <!--          <div class="mt-xs">-->
-    <!--            <uni-load-more :status="talkTabs[swiperIndex].loadMore"-->
-    <!--                           @click="clickOnreachBottom"-->
-    <!--                           :contentText="loadMoreText"></uni-load-more>-->
-    <!--          </div>-->
-    <!--            从附近哪里选择城市-->
-    <!--            搜索栏左边加个筛选按钮可以筛选性别年龄-->
-    <!--            除去搜索栏和导航栏的高度就是剩余高度-->
-
-    <!--        默认附近，可以切换城市，城市-->
-    <talk-operate @deleteTalk="deleteTalk"></talk-operate>
-
-    <social-talk-filter-dialog ref="talkFilterDialog"
-                               @confirm="startPullDown"></social-talk-filter-dialog>
   </div>
 </template>
 
@@ -52,13 +58,22 @@ import SocialuniUserExtendDetailRO from "socialuni-expand-api/src/model/Socialun
 import SocialuniUserExtendFriendQueryQO from "socialuni-api-base/src/model/user/SocialuniUserExtendFriendQueryQO";
 import SocialuniExpandAPI from "socialuni-expand-api/src/api/SocialuniExpandAPI";
 import TalkQueryVO from "socialuni-api-base/src/model/talk/TalkQueryVO";
+import {socialCircleModule} from "socialuni-community-sdk/src/store/SocialCircleModule";
+import TalkTabType from "socialuni-constant/constant/TalkTabType";
+import QEnumLink from 'qing-ui-h5/src/components/QEnumLink.vue'
+import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
+import SocialuniImEventKey from "socialuni-im-api/src/constant/SocialuniMusicEventConst";
+import JsonUtil from "qing-util/src/util/JsonUtil";
+import QNavMenu from "qing-ui-h5/src/components/QNavMenu.vue";
 
 // todo 后台可控制是否显示轮播图
 @toNative
 @Component({
   components: {
+    QNavMenu,
     QIcon,
     QTabs,
+    QEnumLink,
     TalkItem
   }
 })
@@ -118,35 +133,55 @@ export default class SocialuniTalkViewH5 extends Vue {
 
   pageQueryUtil: SocialuniPageQueryUtil<TalkVO, TalkQueryVO> = new SocialuniPageQueryUtil(SocialuniTalkAPI.queryTalksAPI)
 
-
-  // 生命周期
-  created() {
-    // this.talkTabs = TalkAPI.queryHomeTalkTabsAPI()
-    // LocationUtil.getCityByIpWebAPI()
-    // 更新广告状态
-    // 更新广告刷新时间
-    this.updateShowAd()
-    // 根据本地存储获取之前的 homeName
-    // 有了位置才进行查询,因为查询同城需要位置信息
-    // 获取位置，查询同城talks使用
+  get mineCirclesTop10() {
+    console.log(socialCircleModule.mineCirclesTop10)
+    return socialCircleModule.mineCirclesTop10
   }
 
   talksNew: TalkVO[] = []
 
+  @Watch('$route.query')
+  routerQueryWatch(newVal, oldVal) {
+    if (JsonUtil.toJson(newVal) !== JsonUtil.toJson(oldVal)) {
+      this.initLogic()
+    }
+  }
+
+
   mounted() {
+    this.initLogic()
+  }
+
+
+  initLogic() {
+    console.log('chufa11111')
+    let tabName = this.$route.query.tab as string
+    if (this.$route.query.circle) {
+      socialCircleModule.setCircleName(this.$route.query.circle as string)
+    }
+    if (!tabName) {
+      if (!socialCircleModule.circleName) {
+        this.$router.push('/community?tab=' + '首页')
+        return
+      }
+      tabName = '首页'
+    }
     // 获取元素高度，用来计算scroll-view高度
     // this.$refs.tabsTalk.initQuery()
     this.$nextTick(() => {
+      console.log(12312)
       //首次打开talk页面，获取用户位置用来查询
       // locationModule.appLunchInitDistrict().then(() => {
       //首次打开talk页面，获取用户位置用来查询
       socialLocationModule.appLunchInitDistrict().then(async () => {
         // this.initQuery()
-        const talkQO = TalkQOFactory.getTalkQueryQO('首页', socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, socialuniTagModule.selectTagNames)
+        const talkQO = TalkQOFactory.getTalkQueryQO(tabName, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, socialuniTagModule.selectTagNames, socialCircleModule.circleName)
         await this.pageQueryUtil.initQuery(talkQO)
         this.talksNew = this.pageQueryUtil.listData
       })
     })
+    this.updateShowAd()
+    socialCircleModule.getHotCirclesAction()
   }
 
   // talkTabs: TalkTabVO [] = []

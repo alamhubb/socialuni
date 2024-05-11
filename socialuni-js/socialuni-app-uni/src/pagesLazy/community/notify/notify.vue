@@ -7,7 +7,7 @@
                  :src="notify.avatar"></img>
           <div class="flex-1">
             <div :class="notify.vipFlag?'color-red':'color-blue'" class="row-col-center py-mn">
-              <text>{{ notify.nickname }}</span>
+              <span>{{ notify.nickname }}</span>
               <div v-if="notify.vipFlag" class="ml-5px cu-tag bg-red radius sm text-sm font-bold">
                 VIP
               </div>

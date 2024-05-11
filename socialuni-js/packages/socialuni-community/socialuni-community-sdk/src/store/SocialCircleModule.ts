@@ -4,6 +4,7 @@ import {reactive} from "vue";
 import SocialuniCircleAPI from "socialuni-community-api/src/api/SocialuniCircleAPI";
 import TagStorageUtil from "../util/TagStorageUtil";
 import SocialCircleStorageUtil from "../util/SocialCircleStorageUtil";
+import JsonUtil from "qing-util/src/util/JsonUtil";
 
 
 class SocialCircleModule {
@@ -12,7 +13,7 @@ class SocialCircleModule {
     circleTypes: CircleTypeRO[] = []
     historyCircles: CircleTypeRO [] = []
     //最多存4个
-    mineHistoryCircleNames: string[] = TagStorageUtil.getTagNames()
+    mineHistoryCircleNames: string[] = SocialCircleStorageUtil.getCircleNames()
 
     setMineHistoryCircleNames(circleName: string) {
         if (circleName) {
@@ -37,7 +38,7 @@ class SocialCircleModule {
 
     //可以加一个使用过的circle列表
     get mineCirclesTop10() {
-        const showCircleNames: string[] = [null]
+        const showCircleNames: string[] = []
         if (this.circleName) {
             showCircleNames.push(this.circleName)
         }
@@ -48,6 +49,9 @@ class SocialCircleModule {
         //热门的circle
         const circleSet = new Set(showCircleNames)
         const circles = Array.from(circleSet).slice(0, 10)
+        if (!circles.length) {
+            return [null]
+        }
         return circles
     }
 

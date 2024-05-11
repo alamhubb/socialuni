@@ -13,19 +13,17 @@
             </div>
           </div>
         </q-scroll>-->
-    <div class="flex-1 overflow-auto"
-         v-infinite-scroll="scrollToLower" :infinite-scroll-immediate="false" :infinite-scroll-distance="200"
-         :infinite-scroll-delay="2000"
-    >
-      <div class="mg-x-auto w800">
-        <div class="row-center">
-          <q-nav-menu class="h100p w200 flex-none br position-sticky top-0" :menus="menus"/>
-          <div class="flex-1 overflow-hidden">
-            <RouterView/>
-          </div>
-        </div>
-      </div>
+    <!--         v-infinite-scroll="scrollToLower" :infinite-scroll-immediate="false" :infinite-scroll-distance="200"-->
+    <!--         :infinite-scroll-delay="2000"-->
+    <div class="flex-1 overflow-auto">
+      <RouterView/>
     </div>
+<!--    <div class="flex-1 overflow-auto">-->
+<!--      <div class="mg-x-auto w1200">-->
+<!--        <RouterView/>-->
+<!--      </div>-->
+      <!--          <q-nav-menu class="h100p w200 flex-none br position-sticky top-0" :menus="menus"/>-->
+<!--    </div>-->
     <!--  </div>-->
     <!--    <div class="row-center overflow-auto">
           <div class="w1000 flex-row overflow-hidden">
