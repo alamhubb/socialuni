@@ -5,11 +5,13 @@
       <el-menu class="w200 flex-none br position-sticky top-0 h100p socialuni-community-view-left-menu mr-sm">
         <q-enum-link v-for="tab in talkTabs" :to="'/community?tab='+tab.name">
           <el-menu-item :index="tab.name">
+            <q-icon icon="mdi-send" class="color-content mr-xs mdi-rotate-315" size="12"></q-icon>
             {{ tab.name }}
           </el-menu-item>
         </q-enum-link>
         <q-enum-link v-for="circle in mineCirclesTop10" :to="'/community?circle='+circle">
           <el-menu-item :index="circle">
+            <q-icon icon="mdi-send" class="color-content mr-xs mdi-rotate-315" size="12"></q-icon>
             {{ circle }}
           </el-menu-item>
         </q-enum-link>
@@ -27,6 +29,8 @@
 
       <social-talk-filter-dialog ref="talkFilterDialog"
                                  @confirm="startPullDown"></social-talk-filter-dialog>
+
+      <socialuni-comment-input-dialog ref="commentDialog"></socialuni-comment-input-dialog>
     </div>
   </div>
 </template>
@@ -65,11 +69,14 @@ import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
 import SocialuniImEventKey from "socialuni-im-api/src/constant/SocialuniMusicEventConst";
 import JsonUtil from "qing-util/src/util/JsonUtil";
 import QNavMenu from "qing-ui-h5/src/components/QNavMenu.vue";
+import CommunityEventConst from "socialuni-community-sdk/src/constant/CommunityEventConst";
+import SocialuniCommentInputDialog from "./SocialuniCommentInputDialog.vue";
 
 // todo 后台可控制是否显示轮播图
 @toNative
 @Component({
   components: {
+    SocialuniCommentInputDialog,
     QNavMenu,
     QIcon,
     QTabs,
@@ -79,6 +86,7 @@ import QNavMenu from "qing-ui-h5/src/components/QNavMenu.vue";
 })
 export default class SocialuniTalkViewH5 extends Vue {
   $refs: {
+    commentDialog: SocialuniCommentInputDialog
     pullRefresh: QPullRefresh
     talkFilterDialog: SocialTalkFilterDialog
   }
@@ -149,6 +157,9 @@ export default class SocialuniTalkViewH5 extends Vue {
 
 
   mounted() {
+    CommonEventUtil.on(CommunityEventConst.socialuniTalkComment, () => {
+      this.$refs.commentDialog.open()
+    })
     this.initLogic()
   }
 
@@ -549,7 +560,7 @@ export default class SocialuniTalkViewH5 extends Vue {
 }
 </script>
 <style>
-.socialuni-community-view-left-menu .el-menu-item{
+.socialuni-community-view-left-menu .el-menu-item {
   font-size: 20px;
 }
 </style>

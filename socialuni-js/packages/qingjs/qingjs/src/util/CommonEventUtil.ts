@@ -1,4 +1,5 @@
 import mitt from "mitt";
+import {nextTick} from "vue";
 
 export default class CommonEventUtil {
     private static event = mitt()
@@ -15,9 +16,12 @@ export default class CommonEventUtil {
 
     static on(name: string, handler: (data: any) => void): void {
         console.log('订阅通知：' + name)
-        this.event.on(name, async (data: any) => {
-            console.log('触发订阅：' + name)
-            await handler(data)
+        this.event.off(name)
+        nextTick().then(async () => {
+            this.event.on(name, async (data: any) => {
+                console.log('触发订阅：' + name)
+                await handler(data)
+            })
         })
     }
 }

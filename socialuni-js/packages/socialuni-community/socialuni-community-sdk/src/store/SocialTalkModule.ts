@@ -19,6 +19,8 @@ import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import TalkFilterUtil from "../util/TalkFilterUtil";
 import TalkVueUtil from "../util/TalkVueUtil";
 import UserCheckUtil from "socialuni-user-sdk/src/util/UserCheckUtil";
+import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
+import CommunityEventConst from "../constant/CommunityEventConst";
 
 class SocialTalkModule {
     //方便操作页面动作
@@ -122,6 +124,7 @@ class SocialTalkModule {
 
 
     inputContentFocusEvent() {
+        CommonEventUtil.emit(CommunityEventConst.socialuniTalkComment)
         MsgUtil.cantPopupPromptToast()
         // 需要有延迟，要不然无法成功切换
         CommonUtil.delayTime(200).then(() => {
