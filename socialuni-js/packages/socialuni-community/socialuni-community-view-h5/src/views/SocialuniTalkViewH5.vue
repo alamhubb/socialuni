@@ -19,111 +19,20 @@
 
     <div class="flex-1 overflow-hidden">
       <div>
-        <div :current="currentTabIndex" class="h100p"
-                @change="talkSwiperChange">
-          <div class="h100p" v-for="(item, swiperIndex) in talkTabs" :key="swiperIndex">
-            <!--
-            使用view实现的问题，没有scroll事件小程序上
-            <div class="h100p bg-default" :class="[scrollEnable?'overflow-scroll':'overflow-hidden']" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
-                  :lower-threshold="800"
-                  @scroll.native="talksScrollEvent"
-                  @scroll="talksScrollEvent"
-            >-->
-
-            <!--          首页展示区分不同类型，
-                      圈子类型、关注类型、首页类型、同城类型-->
-            <div class="h100p bd-radius-10 mx-sm overflow-hidden" style="width: calc(100% - 20px)"
-                         :scroll-y="true" @scrolltolower="autoChooseUseLocationQueryTalks"
-                         :scroll-top="talkTabs[swiperIndex].pageScrollTop"
-                         :lower-threshold="800"
-                         @scroll="talksScrollEvent">
-              <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
-              <div class="pb-60"
-                   v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].name !== followTabName">
-<!--                <talk-swipers class="px-mn pb-sm"-->
-<!--                              v-if="talkTabs[swiperIndex].name === homeTabName && configShowSwipers"></talk-swipers>-->
-
-
-                <div class="card mb-sm elevation-4 px-sm" v-if="talkTabs[swiperIndex].circle">
-                  <!--                创建自己的圈子-->
-                  <div class="row-between-center">
-                    <div>{{ talkTabs[swiperIndex].name }}圈</div>
-                    <!--                    圈主：客服-->
-                    <div class="q-tag use-click"
-                         @click="joinCircleGroupChat(talkTabs[swiperIndex].circle)">进入群聊
-                    </div>
-                    <!--                  显示圈主，如果没有圈主，则显示，此圈没有圈主，申请成为圈主-->
-                  </div>
-                  <!--                <div>处对象圈子介绍</div>-->
-                </div>
-
-                <!--              <div v-else-if="talkTabs[swiperIndex].type === 'circle'" class="card mb-sm elevation-4 px">
-                                <div class="row-between-center mb-sm">
-                                  <div>
-                                    圈主：xxxx
-                                  </div>
-                                  <div class="row-col-center">
-                                    <div class="color-sub">竞选详情</div>
-                                    <div class="color-sub ml-md">圈子管理</div>
-                                  </div>
-                                </div>
-                                <div class="row-col-center">
-                                  小圈主：胺分散法，撒飞洒地方，阿斯蒂芬阿萨德，士大夫撒地方，
-                                </div>
-                              </div>-->
-
-
-                <div v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
-                  <talk-item :talk="talk"
-                             :talk-tab-type="curTalkTabObj.type"
-                             @delete-talk="deleteTalk"
-                  />
-                  <!-- app端广告有问题-->
-                  <!--  #ifdef APP-PLUS -->
-                  <!--<div v-if="showAd&&showAdIndexList.includes(index)" class="mb-5">
-                    <ad class="bg-white" adpid="1890536227"></ad>
-                  </div>-->
-                  <!--  #endif -->
-                  <!--wx平台显示的广告-->
-                  <!--  #ifdef MP-WEIXIN -->
-                  <ad v-if="showAd&&showAdIndexList.includes(index)"
-                      class="bg-white mb-5" unit-id="adunit-65c8911d279d228f" ad-type="video"
-                      ad-theme="white"></ad>
-                  <!--  #endif -->
-
-                  <!--qq平台显示的广告-->
-                  <!--  #ifdef MP-QQ -->
-                  <ad v-if="showAd&&showAdIndexList.includes(index)"
-                      class="bg-white mb-5" unit-id="bcc21923107071ac3f8aa076c7e00229"
-                      type="card"></ad>
-                  <!--  #endif -->
-
-                  <!--头条平台显示的广告-->
-                  <!--  #ifdef MP-TOUTIAO -->
-                  <ad v-if="showAd&&showAdIndexList.includes(index)"
-                      class="bg-white mb-5" type="banner video large"
-                      unit-id="3snract0gqnc3fn16d"></ad>
-                  <!--  #endif -->
-                </div>
-
-                <!-- 下拉刷新组件 -->
-                <div class="mt-xs">
-                  <uni-load-more :status="talkTabs[swiperIndex].loadMore"
-                                 @click="clickOnreachBottom"
-                                 :contentText="loadMoreText"></uni-load-more>
-                </div>
-              </div>
-              <template v-else>
-                <div v-if="user" class="row-center h500 pt-100 font-bold text-gray text-md">
-                  您还没有关注其他人
-                </div>
-                <div v-else class="row-center h500 pt-100 font-bold text-gray text-md"
-                     @click="toLoginVue">
-                  您还没有登录，点击登录
-                </div>
-              </template>
-            </div>
+        <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
+        <div class="pb-60">
+          <div v-for="(talk,index) in talksNew" :key="talk.id">
+            <talk-item :talk="talk"
+                       :talk-tab-type="curTalkTabObj.type"
+                       @delete-talk="deleteTalk"
+            />
           </div>
+          <!-- 下拉刷新组件 -->
+<!--          <div class="mt-xs">-->
+<!--            <uni-load-more :status="talkTabs[swiperIndex].loadMore"-->
+<!--                           @click="clickOnreachBottom"-->
+<!--                           :contentText="loadMoreText"></uni-load-more>-->
+<!--          </div>-->
         </div>
       </div>
     </div>
@@ -161,6 +70,11 @@ import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 import TalkItem from "socialuni-community-ui/src/components/talkItem/TalkItem.vue";
+import SocialuniPageQueryUtil from "socialuni-api-base/src/model/common/SocialuniPageQueryUtil";
+import SocialuniUserExtendDetailRO from "socialuni-expand-api/src/model/SocialuniUserExtendDetailRO";
+import SocialuniUserExtendFriendQueryQO from "socialuni-api-base/src/model/user/SocialuniUserExtendFriendQueryQO";
+import SocialuniExpandAPI from "socialuni-expand-api/src/api/SocialuniExpandAPI";
+import TalkQueryVO from "socialuni-api-base/src/model/talk/TalkQueryVO";
 
 // todo 后台可控制是否显示轮播图
 @toNative
@@ -225,11 +139,7 @@ export default class SocialuniTalkViewH5 extends Vue {
     return socialTalkModule.talkTabs
   }
 
-  // talkTabs: TalkTabVO [] = []
-  // 页面初始化模块
-  // homeTypeObjs: HomeTypeTalkVO [] = []
-
-  readonly talkCacheNum: number = 30
+  pageQueryUtil: SocialuniPageQueryUtil<TalkVO, TalkQueryVO> = new SocialuniPageQueryUtil(SocialuniTalkAPI.queryTalksAPI)
 
 
   // 生命周期
@@ -244,6 +154,8 @@ export default class SocialuniTalkViewH5 extends Vue {
     // 获取位置，查询同城talks使用
   }
 
+  talksNew: TalkVO[] = []
+
   mounted() {
     // 获取元素高度，用来计算scroll-view高度
     // this.$refs.tabsTalk.initQuery()
@@ -251,11 +163,21 @@ export default class SocialuniTalkViewH5 extends Vue {
       //首次打开talk页面，获取用户位置用来查询
       // locationModule.appLunchInitDistrict().then(() => {
       //首次打开talk页面，获取用户位置用来查询
-      socialLocationModule.appLunchInitDistrict().then(() => {
-        this.initQuery()
+      socialLocationModule.appLunchInitDistrict().then(async () => {
+        // this.initQuery()
+        const talkQO = TalkQOFactory.getTalkQueryQO('首页', socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, socialuniTagModule.selectTagNames)
+        await this.pageQueryUtil.initQuery(talkQO)
+        this.talksNew = this.pageQueryUtil.listData
       })
     })
   }
+
+  // talkTabs: TalkTabVO [] = []
+  // 页面初始化模块
+  // homeTypeObjs: HomeTypeTalkVO [] = []
+
+  readonly talkCacheNum: number = 30
+
 
   // 供父组件调用，每次隐藏把数据缓存进storage
   tabsTalkOnHide() {
@@ -288,6 +210,57 @@ export default class SocialuniTalkViewH5 extends Vue {
     // if (this.curTalkTabObj.firstLoad) {
     this.startPullDown()
     // }
+  }
+
+  async autoChooseUseLocationQueryTalks() {
+    const talkTabObj = this.curTalkTabObj
+    //只有在传false时校验后面的
+    const firstLoad = talkTabObj.firstLoad
+    //只有不为加载中才可以加载
+    //手动刷新可以刷新，或者为
+    if (this.curTalkTabObj.loadMore === LoadMoreType.more || firstLoad) {
+      // 执行正在加载动画
+      this.curTalkTabObj.loadMore = LoadMoreType.loading
+
+      if (firstLoad) {
+        talkTabObj.firstLoad = false
+      }
+
+      const talkQO = TalkQOFactory.getTalkQueryQO(talkTabObj.name, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, talkTabObj.queryTime, socialuniTagModule.selectTagNames, firstLoad)
+
+      return SocialuniTalkAPI.queryTalksAPI(talkQO).then((res: any) => {
+        // 如果不是上拉加载，则是下拉刷新，则停止下拉刷新动画
+        if (talkTabObj.loadMore === LoadMoreType.loading) {
+          if (res.data) {
+            console.log(res.data)
+            if (firstLoad) {
+              //必须这么写，要不然存在置顶后返回的情况就有问题了，也不能直接使用talkTabObj.talks.push。那样会存在闪烁的情况那样等于分了两次push
+              //首次加载，则重新赋值重置内容
+              talkTabObj.talks = res.data
+            } else {
+              //追加新内容
+              talkTabObj.talks.push(...res.data)
+            }
+            if (res.data.length) {
+              talkTabObj.queryTime = res.data[res.data.length - 1].updateTime
+            }
+          }
+          // 如果还有大于等于10个就还可以加载
+          //scroll-view的坑，如果不这么写，同步修改的话，会立马触发下次滚动到底部事件
+          CommonUtil.delayTime(100).then(() => {
+            // 如果还有大于等于10个就还可以加载
+            if (res.data && res.data.length >= this.lazyLoadNum) {
+              talkTabObj.loadMore = LoadMoreType.more
+            } else {
+              // 否则没有了
+              talkTabObj.loadMore = LoadMoreType.noMore
+            }
+          })
+        }
+      }).catch(() => {
+        talkTabObj.loadMore = LoadMoreType.more
+      })
+    }
   }
 
   //js触发下拉刷新效果
@@ -399,13 +372,6 @@ export default class SocialuniTalkViewH5 extends Vue {
       }).catch(() => {
         talkTabObj.loadMore = LoadMoreType.more
       })
-      // }
-      //首次时加载地理位置就好了，之后就是点击定位的时候加载
-      /*if (locationModule.openLocation) {
-        this.requestUseLocationQueryTalks(firstLoad)
-      } else {
-        this.queryTalks(firstLoad)
-      }*/
     }
   }
 

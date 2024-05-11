@@ -9,12 +9,12 @@
         <div class="flex-1 overflow-hidden">
             <swiper class="h100p" :current="currentTabIndex" @change="talkSwiperChange">
                 <swiper-item v-for="(item, swiperIndex) in tabsPageQueryUtil" :key="swiperIndex">
-                    <div v-if="!item.queryQO.listData.length" class="row-all-center h100 color-content">
+                    <div v-if="!item.listData.length" class="row-all-center h100 color-content">
                         <div v-if="swiperIndex===0">您还没有关注任何人</div>
                         <div v-else>您还没有粉丝</div>
                     </div>
                     <template v-else>
-                        <div class="flex-row px-smm py-sm bb" v-for="user in item.queryQO.listData" :key="user.id"
+                        <div class="flex-row px-smm py-sm bb" v-for="user in item.listData" :key="user.id"
                              @click="toUserDetailVue(user)">
                             <img
                                     class="card-title-avatar bd"
@@ -149,7 +149,7 @@ export default class SocialuniCoinRecordView extends Vue {
     //同步更新粉丝和关注列表状态
     userFollowChange(user: SocialUserContentRO) {
         for (const socialuniPageQueryUtil of this.tabsPageQueryUtil) {
-            for (const listDatum of socialuniPageQueryUtil.queryQO.listData) {
+            for (const listDatum of socialuniPageQueryUtil.listData) {
                 if (listDatum.id === user.id) {
                     listDatum.hasFollowed = user.hasFollowed
                 }

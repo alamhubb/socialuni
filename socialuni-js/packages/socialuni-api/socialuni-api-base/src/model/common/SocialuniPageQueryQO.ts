@@ -6,7 +6,6 @@ export default class SocialuniPageQueryQO<T extends SocialuniContentRO, Q> {
     queryTime = new Date()
     pageSize = 10
     pageNum = 1
-    listData: T[] = []
     queryData: Q = null
     loadMore = LoadMoreType.more
 }

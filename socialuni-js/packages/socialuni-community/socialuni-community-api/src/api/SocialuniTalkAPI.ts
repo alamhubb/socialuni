@@ -26,7 +26,7 @@ export default class SocialuniTalkAPI {
     }
 
     static queryTalksAPI(talkQO: TalkQueryVO) {
-        return socialuniCommunityRequest.post<TalkVO>('socialuni/talk/queryTalks', talkQO)
+        return socialuniCommunityRequest.post<TalkVO>('socialuni/talk/queryTalksNew', talkQO)
     }
 
     static queryUserTalksAPI(userId: string, talkIds: string[]) {

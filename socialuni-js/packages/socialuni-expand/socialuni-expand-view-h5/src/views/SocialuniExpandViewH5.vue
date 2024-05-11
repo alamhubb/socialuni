@@ -13,7 +13,7 @@
     <div class="flex-1 overflow-hidden">
       <div class="h100p" v-for="(item, swiperIndex) in tabsPageQueryUtil" :key="swiperIndex">
         <div>
-          <div v-if="!item.queryQO.listData.length" class="row-all-center h100 color-content">
+          <div v-if="!item.listData.length" class="row-all-center h100 color-content">
             <div>暂无数据</div>
           </div>
           <template v-else>
@@ -22,7 +22,7 @@
               <!--                    {{ mineUser.openContactInfo ? '下拉刷新将您的排名前置' : '开启联系方式您的信息将在此处展示' }}-->
               <!--                  </div>-->
             </div>
-            <div class="flex-col px-smm py-sm bb" v-for="user in item.queryQO.listData" :key="user.id"
+            <div class="flex-col px-smm py-sm bb" v-for="user in item.listData" :key="user.id"
                  @click="toUserDetailVue(user)">
               <div class="row-col-center">
                 <img
@@ -215,7 +215,7 @@ export default class SocialuniExpandViewH5 extends Vue {
   async initQuery() {
     const queryData = new SocialuniUserExtendFriendQueryQO(this.tabs[this.currentTabIndex]);
     await this.tabsPageQueryUtil[this.currentTabIndex].initQuery(queryData)
-    for (const listDatum of this.tabsPageQueryUtil[this.currentTabIndex].queryQO.listData) {
+    for (const listDatum of this.tabsPageQueryUtil[this.currentTabIndex].listData) {
       // listDatum.getUserContactBtnDisabled = false
     }
     this.endPulldownRefresh()
@@ -248,7 +248,7 @@ export default class SocialuniExpandViewH5 extends Vue {
 
   async autoChooseUseLocationQueryTalksHandler() {
     await this.tabsPageQueryUtil[this.currentTabIndex].nextPageQuery()
-    for (const listDatum of this.tabsPageQueryUtil[this.currentTabIndex].queryQO.listData) {
+    for (const listDatum of this.tabsPageQueryUtil[this.currentTabIndex].listData) {
       // listDatum.getUserContactBtnDisabled = false
     }
   }
@@ -265,7 +265,7 @@ export default class SocialuniExpandViewH5 extends Vue {
   //同步更新粉丝和关注列表状态
   userFollowChange(user: SocialUserContentRO) {
     for (const socialuniPageQueryUtil of this.tabsPageQueryUtil) {
-      for (const listDatum of socialuniPageQueryUtil.queryQO.listData) {
+      for (const listDatum of socialuniPageQueryUtil.listData) {
         if (listDatum.id === user.id) {
           // listDatum.hasFollowed = user.hasFollowed
         }

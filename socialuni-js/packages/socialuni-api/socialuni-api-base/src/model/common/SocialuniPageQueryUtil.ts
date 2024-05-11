@@ -5,6 +5,7 @@ import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 export default class SocialuniPageQueryUtil<T extends SocialuniContentRO, Q> {
     queryQO: SocialuniPageQueryQO<T, Q> = new SocialuniPageQueryQO()
     api = null
+    listData: T[] = []
 
     constructor(api: Function = null, queryData?: Q) {
         this.api = api
@@ -25,7 +26,7 @@ export default class SocialuniPageQueryUtil<T extends SocialuniContentRO, Q> {
             const res = await this.api(this.queryQO)
             this.queryQO.pageNum++
             this.queryQO.firstLoad = false
-            this.queryQO.listData = res.data
+            this.listData = res.data
             this.queryQO.loadMore = LoadMoreType.noMore
             if (res.data.length) {
                 this.queryQO.queryTime = res.data[res.data.length - 1].updateTime
@@ -36,7 +37,7 @@ export default class SocialuniPageQueryUtil<T extends SocialuniContentRO, Q> {
         } catch (e) {
             this.queryQO.loadMore = LoadMoreType.more
             this.queryQO.firstLoad = true
-            this.queryQO.listData = []
+            this.listData = []
             throw (e)
         }
     }
@@ -51,7 +52,7 @@ export default class SocialuniPageQueryUtil<T extends SocialuniContentRO, Q> {
         this.queryQO.loadMore = LoadMoreType.loading
         try {
             const res = await this.api(this.queryQO)
-            this.queryQO.listData.push(...res.data)
+            this.listData.push(...res.data)
             this.queryQO.pageNum++
             this.queryQO.loadMore = LoadMoreType.noMore
             if (res.data.length) {

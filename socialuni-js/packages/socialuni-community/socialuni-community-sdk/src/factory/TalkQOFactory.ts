@@ -2,8 +2,8 @@ import TalkQueryVO from "socialuni-api-base/src/model/talk/TalkQueryVO";
 import {socialLocationModule} from "../store/SocialLocationModule";
 
 export default class TalkQOFactory {
-    static getTalkQueryQO(homeTabName: string, gender: string, minAge: number, maxAge: number, queryTime: Date, tagNames: string[], firstLoad: boolean){
-        const talkQO = new TalkQueryVO(homeTabName, gender, minAge, maxAge, queryTime, tagNames, firstLoad)
+    static getTalkQueryQO(homeTabName: string, gender: string, minAge: number, maxAge: number,tagNames: string[]){
+        const talkQO = new TalkQueryVO(homeTabName, gender, minAge, maxAge, tagNames)
         const district = socialLocationModule.location
         //查询使用当前的
         if (district) {
