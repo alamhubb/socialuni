@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <image class="logo" src="/static/logo.png" />
+    <img class="logo" src="/static/logo.png" />
     <div class="text-area">
       <span class="title">{{ title }}</span>
     </div>

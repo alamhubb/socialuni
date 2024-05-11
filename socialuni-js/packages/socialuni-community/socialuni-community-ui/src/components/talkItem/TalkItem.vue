@@ -1,5 +1,5 @@
 <template>
-  <div v-if="talk" class="card mb-sm elevation-4">
+  <div v-if="talk" class="bg-theme-light py-10 bd-radius-10 mb-sm elevation-4">
     <talk-item-head :talk-prop="talk" :talk-tab-type="talkTabType" @deleteTalk="deleteTalk"/>
     <talk-item-content :talk="talk"/>
     <talk-item-comment v-if="!talk.globalTop || talk.globalTop===1" :talk-prop="talk"

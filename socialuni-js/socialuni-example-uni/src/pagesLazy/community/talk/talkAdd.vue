@@ -40,7 +40,7 @@
                         class="close-view position-absolute z-index-button color-content size20 bg-grey8 bg-half-transparent row-all-center topRight bd-bl-radius"
                         @click="deleteImg(index)">×
                     </div>
-                    <image class="uni-uploader__img" mode="aspectFill" :src="image"
+                    <img class="uni-uploader__img" mode="aspectFill" :src="image"
                            :data-src="image" @click="previewImage"/>
                   </div>
                 </block>

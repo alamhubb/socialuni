@@ -6,7 +6,7 @@
                       class="color-success"
                       size="16" icon="level"/>
             </div>-->
-    <image v-if="msg.contentType === 102" mode="aspectFill"
+    <img v-if="msg.contentType === 102" mode="aspectFill"
            class="bd-radius bd"
            :style="{'max-width':'230px'}"
            :src="msg.contentData.sourcePicture.url"

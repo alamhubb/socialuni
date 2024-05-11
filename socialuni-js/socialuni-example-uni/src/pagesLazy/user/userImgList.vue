@@ -5,7 +5,7 @@
     <div class="bg-white py-sm px-xs row-wrap">
       <div v-for="(img,index) in imgUrls" :key="img" class="row-all-center w25p flex-none px-xs py-xs">
         <!--          src="https://cdxapp-1257733245.file.myqcloud.com/qingchi/static/uploadimgmini.png"-->
-        <image class="w100p h75 bd-radius" @longpress="imgLongPress(index)"
+        <img class="w100p h75 bd-radius" @longpress="imgLongPress(index)"
                mode="aspectFill"
                :data-src="img"
                @click="previewImage(img)"

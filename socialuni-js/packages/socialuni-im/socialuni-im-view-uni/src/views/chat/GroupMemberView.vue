@@ -8,7 +8,7 @@
     <uni-grid class="grid" :column="5" :show-border="false" :square="false" @change="change">
       <uni-grid-item v-for="(groupMember ,index) in groupMemberList" :index="index" :key="index">
         <div class="grid-item-box">
-          <image class="size100" :src="groupMember.faceURL" mode="" />
+          <img class="size100" :src="groupMember.faceURL" mode="" />
           <span class="text">{{groupMember.nickname}}</span>
           <div v-if="groupMember.badge" class="grid-dot">
             <uni-badge :text="groupMember.badge" :type="groupMember.type" />

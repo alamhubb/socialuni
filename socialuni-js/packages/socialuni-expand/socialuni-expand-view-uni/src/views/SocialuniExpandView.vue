@@ -25,7 +25,7 @@
                 <div class="flex-col px-smm py-sm bb" v-for="user in item.queryQO.listData" :key="user.id"
                      @click="toUserDetailVue(user)">
                   <div class="row-col-center">
-                    <image
+                    <img
                         class="card-title-avatar bd flex-none"
                         mode="aspectFill"
                         :src="user.avatar"
@@ -91,7 +91,7 @@
                     </div>
                   </div>
                   <div class="ml-60 row-col-center mt-xs">
-                    <image v-for="img in imgUrls(user).slice(0,3)" class="size40 bd-radius bd mr-sm"
+                    <img v-for="img in imgUrls(user).slice(0,3)" class="size40 bd-radius bd mr-sm"
                            mode="aspectFill"
                            :data-src="img"
                            @click.stop="previewImage(img,user)"

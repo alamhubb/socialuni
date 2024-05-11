@@ -23,7 +23,7 @@
 
           <!--          只有不为三方授权才显示logo-->
           <!--        登录界面，展示logo-->
-          <image class="radius flex-none h100p"
+          <img class="radius flex-none h100p"
                  mode="aspectFit"
                  src="/static/img/logo.jpg"
           />

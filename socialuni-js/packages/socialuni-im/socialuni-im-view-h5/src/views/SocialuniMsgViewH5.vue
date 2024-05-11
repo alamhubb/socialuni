@@ -11,7 +11,7 @@
                                     @click="toUserDetailVue(msg.user.id)">
                                 {{ msg.user.nickname }}
                               </span>
-                              <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
+                              <img v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
                                      src="/static/img/crown.png"
                                      @click="toVipVue"></image>-->
               </div>
@@ -36,7 +36,7 @@
             />
           </div>
           <div v-else class="flex-row pd-sm">
-            <image class="size50 bd-radius flex-none"
+            <img class="size50 bd-radius flex-none"
                    :src="msg.user.avatar"
                    @click="viewService.toUserDetailVue(msg.user.id)"
             />
@@ -47,7 +47,7 @@
                                     @click="toUserDetailVue(msg.user.id)">
                                 {{ msg.user.nickname }}
                               </span>
-                              <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
+                              <img v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
                                      src="/static/img/crown.png"
                                      @click="toVipVue"></image>-->
               </div>

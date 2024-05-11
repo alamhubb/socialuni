@@ -54,7 +54,7 @@
     <div class="cu-list menu-avatar pb-50px">
       <div v-for="chat in viewService.chatList" :key="chat.id" class="cu-item" @click="viewService.toMessagePage(chat)"
             @longpress="viewService.showBottomMenuClick(chat.id)">
-        <image class="cu-avatar radius lg" :src="chat.avatar"/>
+        <img class="cu-avatar radius lg" :src="chat.avatar"/>
         <div class="content h45 col-between">
           <div>
             <div class="text-cut text-df text-black" :class="{'color-red':chat.vipFlag}">{{

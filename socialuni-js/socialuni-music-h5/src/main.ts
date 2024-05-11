@@ -13,6 +13,7 @@ import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule.t
 import SocialuniUiH5 from "socialuni-ui-h5/src";
 import SocialuniExpandH5 from "socialuni-expand-view-h5/src";
 import SocialuniCommunityH5 from "socialuni-community-view-h5/src";
+import SocialuniAppViewH5 from "socialuni-app-view-h5/src";
 
 declare module '@vue/runtime-core' {
     interface ComponentCustomProperties {
@@ -30,7 +31,7 @@ declare module '@vue/runtime-core' {
     app.config.globalProperties.$DateUtil = DateUtil;
 
     app.use(SocialuniUiH5)
-    app.use(SocialuniApp)
+    app.use(SocialuniAppViewH5)
     app.use(SocialuniUser)
     app.use(SocialuniIm)
     app.use(SocialuniMusic)

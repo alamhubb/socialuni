@@ -1,6 +1,6 @@
 <template>
   <div class="card-title pb-10" @click="toUserDetailVue" v-if="talk">
-    <image
+    <img
         class="size40 bd-radius mr-sm"
         mode="aspectFill"
         :src="talk.user.avatar"

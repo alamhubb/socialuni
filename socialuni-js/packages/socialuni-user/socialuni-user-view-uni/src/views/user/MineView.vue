@@ -10,7 +10,7 @@
           <div class="row-between mt">
             <slot name="baseInfoLeft" :mine="mineUser">
               <div class="row-col-center">
-                <image
+                <img
                     class="size65 bd-round bd-3 bd-white mr-sm"
                     mode="aspectFill"
                     :src="mineUser.avatar"

@@ -17,7 +17,7 @@
                     <div v-for="(img,index) in imgUrls.slice(0,4)" :key="img"
                          class="row-all-center w25p flex-none px-xs">
                         <!--          src="https://cdxapp-1257733245.file.myqcloud.com/qingchi/static/uploadimgmini.png"-->
-                        <image v-if="index!==3" class="w100p h75 bd-radius" @longpress="imgLongPress(index)"
+                        <img v-if="index!==3" class="w100p h75 bd-radius" @longpress="imgLongPress(index)"
                                mode="aspectFill"
                                :data-src="img"
                                @click="previewImage(img)"

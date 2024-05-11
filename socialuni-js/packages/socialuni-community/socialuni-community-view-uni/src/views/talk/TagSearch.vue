@@ -67,7 +67,7 @@
             <div>
               <q-row-item v-for="tag in item.tags" :key="tag.id" @click="change(tag)">
                 <div class="row-col-center can-click" @click.stop="change(tag)">
-                  <image class="cu-avatar radius lg flex-none"
+                  <img class="cu-avatar radius lg flex-none"
                          :src="tag.avatar"
                   />
                   <div class="ml-sm overflow-hidden">

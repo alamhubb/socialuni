@@ -7,7 +7,7 @@
       <div v-for="(img,index) in talk.imgs.slice(0,3)" :key="img.id"
            class="position-relative card-text-img flex-row overflow-hidden"
            :style="{'max-width':talk.imgs.length===1?Math.min(200*img.aspectRatio,230)+'px':'','max-height':talk.imgs.length===1?'200px':668/Math.min(talk.imgs.length,3)/2+'px'}">
-        <image mode="aspectFill"
+        <img mode="aspectFill"
                :class="{'bl-radius':index===0,'br-radius':index===talk.imgs.length-1}"
                class="flex-1"
                :style="{'max-width':talk.imgs.length===1?Math.min(200*img.aspectRatio,230)+'px':'','max-height':talk.imgs.length===1?'200px':668/Math.min(talk.imgs.length,3)/2+'px'}"

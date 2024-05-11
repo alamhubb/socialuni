@@ -5,7 +5,7 @@
                 :style="{'height':swiperHeight+'px'}">
             <swiper-item class="bd-radius" v-for="(item,index) in homeSwipers" @click="skipWebView(index)">
                 <!--        class="radius flex-none h100p"-->
-                <image
+                <img
                         class="h100p bd-radius w100p"
                         mode="aspectFill"
                         :src="item.imgUrl"

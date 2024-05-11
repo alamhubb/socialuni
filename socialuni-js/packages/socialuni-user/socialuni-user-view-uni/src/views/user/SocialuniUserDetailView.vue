@@ -11,7 +11,7 @@
         <div class="pd-sm bg-white bt-radius-10">
           <div class="row-between py-sm">
             <div class="flex-row">
-              <image
+              <img
                   class="size65 bd-radius-xs mr-sm bd"
                   mode="aspectFill"
                   :src="socialuniUserDetailViewService.user.avatar"

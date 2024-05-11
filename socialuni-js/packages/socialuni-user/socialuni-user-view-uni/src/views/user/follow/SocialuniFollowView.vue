@@ -20,7 +20,7 @@
               <template v-else>
                 <div class="flex-row px-smm py-sm bb" v-for="user in item.queryQO.listData" :key="user.id"
                      @click="toUserDetailVue(user)">
-                  <image
+                  <img
                       class="card-title-avatar bd"
                       mode="aspectFill"
                       :src="user.avatar"

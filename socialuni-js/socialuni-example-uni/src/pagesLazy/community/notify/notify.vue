@@ -3,7 +3,7 @@
     <div class="card" v-for="(notify,index) in notifies" :key="index">
       <div class="card-title row-between" @click="toTalkDetailVue(notify.talkId)">
         <div class="flex-row flex-1">
-          <image class="card-title-avatar flex-none" mode="aspectFill"
+          <img class="card-title-avatar flex-none" mode="aspectFill"
                  :src="notify.avatar"></image>
           <div class="flex-1">
             <div :class="notify.vipFlag?'color-red':'color-blue'" class="row-col-center py-mn">
@@ -22,7 +22,7 @@
         </div>
 
         <div class="flex-none" v-if="notify.replyImg">
-          <image class="card-title-avatar size65" mode="aspectFill"
+          <img class="card-title-avatar size65" mode="aspectFill"
                  :src="getTalkSmallImgUrl(notify.talkUserId,notify.replyImg)">
           </image>
         </div>
