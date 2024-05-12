@@ -13,9 +13,9 @@
             </div>
           </div>
         </q-scroll>-->
-    <!--         v-infinite-scroll="scrollToLower" :infinite-scroll-immediate="false" :infinite-scroll-distance="200"-->
-    <!--         :infinite-scroll-delay="2000"-->
-    <div class="flex-1 overflow-auto">
+
+    <div class="flex-1 overflow-hidden" v-infinite-scroll="scrollToLower" :infinite-scroll-immediate="false" :infinite-scroll-distance="200"
+         :infinite-scroll-delay="2000">
       <RouterView/>
     </div>
 <!--    <div class="flex-1 overflow-auto">-->

@@ -1,40 +1,42 @@
 <template>
-  <div class="mg-x-auto w1200">
-    <div class="row-center">
-      <!--      <q-nav-menu/>-->
-      <el-menu class="w200 flex-none br position-sticky top-0 h100p socialuni-community-view-left-menu mr-sm">
-        <q-enum-link v-for="tab in talkTabs" :to="'/community?tab='+tab.name">
-          <el-menu-item :index="tab.name">
-            <q-icon icon="mdi-send" class="color-content mr-xs mdi-rotate-315" size="12"></q-icon>
-            {{ tab.name }}
-          </el-menu-item>
-        </q-enum-link>
-        <q-enum-link v-for="circle in mineCirclesTop10" :to="'/community?circle='+circle">
-          <el-menu-item :index="circle">
-            <q-icon icon="mdi-send" class="color-content mr-xs mdi-rotate-315" size="12"></q-icon>
-            {{ circle }}
-          </el-menu-item>
-        </q-enum-link>
-      </el-menu>
-      <div class="w600">
-        <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
-        <div v-for="(talk,index) in talksNew" :key="talk.id">
-          <talk-item :talk="talk"
-                     :talk-tab-type="tabName"
-                     @delete-talk="deleteTalk"
-          />
+  <div class="h100p overflow-auto" v-infinite-scroll="scrollToLower" :infinite-scroll-immediate="false"
+       :infinite-scroll-distance="200"
+       :infinite-scroll-delay="2000"
+  >
+    <div class="mg-x-auto w1200">
+      <div class="row-center">
+        <!--      <q-nav-menu/>-->
+        <el-menu class="w200 flex-none br position-sticky top-0 h100p socialuni-community-view-left-menu mr-sm">
+          <q-enum-link v-for="tab in talkTabs" :to="'/community?tab='+tab.name">
+            <el-menu-item :index="tab.name">
+              <q-icon icon="mdi-send" class="color-content mr-xs mdi-rotate-315" size="12"></q-icon>
+              {{ tab.name }}
+            </el-menu-item>
+          </q-enum-link>
+          <q-enum-link v-for="circle in mineCirclesTop10" :to="'/community?circle='+circle">
+            <el-menu-item :index="circle">
+              <q-icon icon="mdi-send" class="color-content mr-xs mdi-rotate-315" size="12"></q-icon>
+              {{ circle }}
+            </el-menu-item>
+          </q-enum-link>
+        </el-menu>
+        <div class="w600">
+          <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
+          <div v-for="(talk,index) in talksNew" :key="talk.id">
+            <talk-item :talk="talk"
+                       :talk-tab-type="tabName"
+                       @delete-talk="deleteTalk"
+            />
+          </div>
+
+          <msg-input class="w600"></msg-input>
         </div>
+        <talk-operate @deleteTalk="deleteTalk"></talk-operate>
 
-        <msg-input class="w600"></msg-input>
+        <social-talk-filter-dialog ref="talkFilterDialog"
+                                   @confirm="startPullDown"></social-talk-filter-dialog>
+        <!--      <socialuni-comment-input-dialog ref="commentDialog"></socialuni-comment-input-dialog>-->
       </div>
-      <talk-operate @deleteTalk="deleteTalk"></talk-operate>
-
-      <social-talk-filter-dialog ref="talkFilterDialog"
-                                 @confirm="startPullDown"></social-talk-filter-dialog>
-
-
-
-<!--      <socialuni-comment-input-dialog ref="commentDialog"></socialuni-comment-input-dialog>-->
     </div>
   </div>
 </template>
@@ -197,6 +199,11 @@ export default class SocialuniTalkViewH5 extends Vue {
     socialCircleModule.getHotCirclesAction()
   }
 
+  scrollToLower() {
+    this.pageQueryUtil.nextPageQuery()
+  }
+
+
   // talkTabs: TalkTabVO [] = []
   // 页面初始化模块
   // homeTypeObjs: HomeTypeTalkVO [] = []
@@ -236,58 +243,6 @@ export default class SocialuniTalkViewH5 extends Vue {
     this.startPullDown()
     // }
   }
-
-  async autoChooseUseLocationQueryTalks() {
-    const talkTabObj = this.curTalkTabObj
-    //只有在传false时校验后面的
-    const firstLoad = talkTabObj.firstLoad
-    //只有不为加载中才可以加载
-    //手动刷新可以刷新，或者为
-    if (this.curTalkTabObj.loadMore === LoadMoreType.more || firstLoad) {
-      // 执行正在加载动画
-      this.curTalkTabObj.loadMore = LoadMoreType.loading
-
-      if (firstLoad) {
-        talkTabObj.firstLoad = false
-      }
-
-      const talkQO = TalkQOFactory.getTalkQueryQO(talkTabObj.name, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, talkTabObj.queryTime, socialuniTagModule.selectTagNames, firstLoad)
-
-      return SocialuniTalkAPI.queryTalksAPI(talkQO).then((res: any) => {
-        // 如果不是上拉加载，则是下拉刷新，则停止下拉刷新动画
-        if (talkTabObj.loadMore === LoadMoreType.loading) {
-          if (res.data) {
-            console.log(res.data)
-            if (firstLoad) {
-              //必须这么写，要不然存在置顶后返回的情况就有问题了，也不能直接使用talkTabObj.talks.push。那样会存在闪烁的情况那样等于分了两次push
-              //首次加载，则重新赋值重置内容
-              talkTabObj.talks = res.data
-            } else {
-              //追加新内容
-              talkTabObj.talks.push(...res.data)
-            }
-            if (res.data.length) {
-              talkTabObj.queryTime = res.data[res.data.length - 1].updateTime
-            }
-          }
-          // 如果还有大于等于10个就还可以加载
-          //scroll-view的坑，如果不这么写，同步修改的话，会立马触发下次滚动到底部事件
-          CommonUtil.delayTime(100).then(() => {
-            // 如果还有大于等于10个就还可以加载
-            if (res.data && res.data.length >= this.lazyLoadNum) {
-              talkTabObj.loadMore = LoadMoreType.more
-            } else {
-              // 否则没有了
-              talkTabObj.loadMore = LoadMoreType.noMore
-            }
-          })
-        }
-      }).catch(() => {
-        talkTabObj.loadMore = LoadMoreType.more
-      })
-    }
-  }
-
   //js触发下拉刷新效果
   startPullDown() {
     this.tabScrollToTop()
