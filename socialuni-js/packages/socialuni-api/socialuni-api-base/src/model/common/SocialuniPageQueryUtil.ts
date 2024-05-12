@@ -5,6 +5,7 @@ import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 export default class SocialuniPageQueryUtil<T extends SocialuniContentRO, Q> {
     queryQO: SocialuniPageQueryQO<T, Q> = new SocialuniPageQueryQO()
     api = null
+    num = 0
     listData: T[] = []
 
     constructor(api: Function = null, queryData?: Q) {
@@ -53,6 +54,7 @@ export default class SocialuniPageQueryUtil<T extends SocialuniContentRO, Q> {
         try {
             const res = await this.api(this.queryQO)
             this.listData.push(...res.data)
+            console.log(this.listData)
             this.queryQO.pageNum++
             this.queryQO.loadMore = LoadMoreType.noMore
             if (res.data.length) {

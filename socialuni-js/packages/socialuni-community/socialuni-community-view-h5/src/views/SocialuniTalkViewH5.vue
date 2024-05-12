@@ -1,7 +1,7 @@
 <template>
   <div class="h100p overflow-auto" v-infinite-scroll="scrollToLower" :infinite-scroll-immediate="false"
        :infinite-scroll-distance="200"
-       :infinite-scroll-delay="2000"
+       :infinite-scroll-delay="200"
   >
     <div class="mg-x-auto w1200">
       <div class="row-center">
@@ -21,6 +21,10 @@
           </q-enum-link>
         </el-menu>
         <div class="w600">
+          {{ pageQueryUtil.queryQO }}
+          {{ pageQueryUtil.num }}
+          {{ talksNew.length }}
+          <el-button @click="pageQueryUtil.num++">fasdfasd</el-button>
           <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
           <div v-for="(talk,index) in talksNew" :key="talk.id">
             <talk-item :talk="talk"
@@ -151,7 +155,9 @@ export default class SocialuniTalkViewH5 extends Vue {
     return socialCircleModule.mineCirclesTop10
   }
 
-  talksNew: TalkVO[] = []
+  get talksNew() {
+    return this.pageQueryUtil.listData
+  }
 
   @Watch('$route.query')
   routerQueryWatch(newVal, oldVal) {
@@ -169,6 +175,7 @@ export default class SocialuniTalkViewH5 extends Vue {
   tabName = '首页'
 
   initLogic() {
+    this.pageQueryUtil = new SocialuniPageQueryUtil(SocialuniTalkAPI.queryTalksAPI)
     console.log('chufa11111')
     this.tabName = this.$route.query.tab as string
     if (this.$route.query.circle) {
@@ -192,15 +199,27 @@ export default class SocialuniTalkViewH5 extends Vue {
         // this.initQuery()
         const talkQO = TalkQOFactory.getTalkQueryQO(this.tabName, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, socialuniTagModule.selectTagNames, socialCircleModule.circleName)
         await this.pageQueryUtil.initQuery(talkQO)
-        this.talksNew = this.pageQueryUtil.listData
       })
     })
     this.updateShowAd()
     socialCircleModule.getHotCirclesAction()
   }
 
+  nextPageQueryDebounce = CommonUtil.debounce(() => {
+    this.nextPageQuery()
+  }, 500)
+
+  nextPageQuery() {
+    const talkQO = TalkQOFactory.getTalkQueryQO(this.tabName, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, socialuniTagModule.selectTagNames, socialCircleModule.circleName)
+    this.pageQueryUtil.nextPageQuery(talkQO)
+  }
+
+
   scrollToLower() {
-    this.pageQueryUtil.nextPageQuery()
+    // console.log('chufale')
+    this.nextPageQueryDebounce()
+    // const talkQO = TalkQOFactory.getTalkQueryQO(this.tabName, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, socialuniTagModule.selectTagNames, socialCircleModule.circleName)
+    // this.pageQueryUtil.nextPageQuery(talkQO)
   }
 
 
@@ -243,6 +262,7 @@ export default class SocialuniTalkViewH5 extends Vue {
     this.startPullDown()
     // }
   }
+
   //js触发下拉刷新效果
   startPullDown() {
     this.tabScrollToTop()
