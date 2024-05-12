@@ -2,7 +2,6 @@
   <div
       class="u-loading-icon"
   >
-    123
     <!--				'animation-timing-function': 'ease-in-out'-->
     <div
         class="u-loading-icon__spinner u-loading-icon__spinner--circle"
@@ -20,10 +19,9 @@ import { Emit, Component, Prop, Vue , toNative} from 'vue-facing-decorator'
 
 @toNative
 @Component({})
-export default class QLoadMore extends Vue {
+export default class QLoading extends Vue {
 }
 </script>
-
 <style lang="scss">
 .u-loading-icon {
   flex-direction: row;
@@ -32,27 +30,17 @@ export default class QLoadMore extends Vue {
   color: black;
 
   &__spinner {
-    width: 10px;
-    height: 10px;
+    width: 1px;
+    height: 1px;
     position: relative;
     box-sizing: border-box;
-    max-width: 10px;
-    max-height: 10px;
+    max-width: 1px;
+    max-height: 1px;
     animation: u-rotate 1s linear infinite;
   }
 
   &__spinner--circle {
     border: 1px solid black;
-  }
-}
-
-@keyframes u-rotate {
-  0% {
-    transform: rotate(0deg)
-  }
-
-  to {
-    transform: rotate(1turn)
   }
 }
 </style>

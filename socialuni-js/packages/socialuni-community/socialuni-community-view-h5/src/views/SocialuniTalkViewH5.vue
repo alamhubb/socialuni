@@ -21,8 +21,9 @@
           </q-enum-link>
         </el-menu>
         <div class="w600">
+          <q-loading></q-loading>
           <q-load-more></q-load-more>
-          <q-icon icon="mdi-loading mdi-spin"></q-icon>
+<!--          <q-icon icon="mdi-loading mdi-spin"></q-icon>-->
           <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
           <div v-for="(talk,index) in talksNew" :key="talk.id">
             <talk-item :talk="talk"
@@ -47,6 +48,7 @@
 import {Component, Vue, Watch, toNative} from 'vue-facing-decorator'
 import QTabs from 'qing-ui/src/components/QTabs/QTabs.vue'
 import QIcon from 'qing-ui/src/components/QIcon.vue'
+import QLoading from 'qing-ui/src/components/QLoading.vue'
 import QLoadMore from 'qing-ui/src/components/QLoadMore.vue'
 import TalkTabVO from "socialuni-api-base/src/model/talk/SocialuniTalkTabRO";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
@@ -87,6 +89,7 @@ import MsgInput from "socialuni-ui/src/components/MsgInput.vue";
   components: {
     SocialuniCommentInputDialog,
     QNavMenu,
+    QLoading,
     QLoadMore,
     QIcon,
     MsgInput,
