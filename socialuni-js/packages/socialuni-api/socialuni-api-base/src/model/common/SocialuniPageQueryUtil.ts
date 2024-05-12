@@ -5,7 +5,6 @@ import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 export default class SocialuniPageQueryUtil<T extends SocialuniContentRO, Q> {
     queryQO: SocialuniPageQueryQO<T, Q> = new SocialuniPageQueryQO()
     api = null
-    num = 0
     listData: T[] = []
 
     constructor(api: Function = null, queryData?: Q) {
