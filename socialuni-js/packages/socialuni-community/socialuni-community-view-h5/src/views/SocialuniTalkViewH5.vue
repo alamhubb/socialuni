@@ -85,7 +85,7 @@ import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
-import TalkItem from "socialuni-community-ui/src/components/talkItem/TalkItem.vue";
+// import TalkItem from "socialuni-community-ui/src/components/talkItem/TalkItem.vue";
 import SocialuniPageQueryUtil from "socialuni-api-base/src/model/common/SocialuniPageQueryUtil";
 import SocialuniUserExtendDetailRO from "socialuni-expand-api/src/model/SocialuniUserExtendDetailRO";
 import SocialuniUserExtendFriendQueryQO from "socialuni-api-base/src/model/user/SocialuniUserExtendFriendQueryQO";

@@ -40,7 +40,6 @@
 import {Emit, Model, Component, Prop, Vue, Watch, toNative} from 'vue-facing-decorator'
 import QRowItem from 'qing-ui/src/components/QRowItem.vue'
 import UUIDUtil from "qing-util/src/util/UUIDUtil";
-import ScrollView from "uniapp-web/src/components/ScrollView.vue";
 import QScroll from "qing-ui/src/components/QScroll.vue";
 
 /*
@@ -54,7 +53,7 @@ import QScroll from "qing-ui/src/components/QScroll.vue";
 @toNative
 @Component({
   components: {
-    QRowItem, ScrollView, QScroll
+    QRowItem,  QScroll
   }
 })
 export default class QPicker extends Vue {
