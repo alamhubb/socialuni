@@ -5,7 +5,7 @@
           v-for="(tab,index) in tabs"
           ref="tabs"
           :key="index"
-          class="use-click flex-1 row-all-center"
+          class="use-click flex-none row-all-center"
           :class="[index===model?('color-blue '+activeClass):'color-content']"
           @click="change(index)"
           @dblclick="dbClickChange(index)"

@@ -6,7 +6,7 @@
             <q-tabs :tabs="talkTabs" :value="currentTabIndex" type="line" @change="tabsChange"
                     class="bd-radius flex-1 mr-sm">
                 <template #default="{tab,index,value}">
-                    <div class="h30 px-xs row-all-center font-md" :class="{'font-md':value===index}">{{
+                    <div class="h30 px-xs row-all-center font-md" :class="{'font-md font-bold color-blue1':currentTabIndex===index}">{{
                         tab.name
                         }}
                     </div>
