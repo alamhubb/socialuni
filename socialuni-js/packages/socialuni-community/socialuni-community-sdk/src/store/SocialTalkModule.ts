@@ -5,7 +5,6 @@ import CommentAddVO from "socialuni-api-base/src/model/comment/CommentAddVO"
 import CommonUtil from "qing-util/src/util/CommonUtil"
 import TalkTabType from "socialuni-constant/constant/TalkTabType"
 import SocialuniTalkTabRO from "socialuni-api-base/src/model/talk/SocialuniTalkTabRO";
-import TalkTabVO from "socialuni-api-base/src/model/talk/SocialuniTalkTabRO";
 import {Vue} from "vue-class-component";
 import CircleCreateChatQO from "socialuni-api-base/src/model/community/circle/CircleCreateChatQO";
 import {socialCircleModule} from "./SocialCircleModule";
@@ -252,7 +251,7 @@ this.setCircleName(null)
                     circleTab.queryQO.firstLoad = false
                 }
             } else {
-                circleTab = new TalkTabVO(circleName, TalkTabType.circle_type)
+                circleTab = new SocialuniPageQueryUtil<TalkVO, TalkQueryVO, SocialuniTalkTabRO>(SocialuniTalkAPI.queryTalksAPI, null, new SocialuniTalkTabRO(circleName, TalkTabType.circle_type))
             }
             const appTas = this.talkTabs.filter(item => item.appDefaultTab)
 
@@ -265,7 +264,7 @@ this.setCircleName(null)
         return this.setCurTabIndexUpdateCircle(1)
     }
 
-    saveLastTalkTabs(talkTabs: TalkTabVO [], talkTabIndex: number, talkTabType: string) {
+    saveLastTalkTabs(talkTabs: SocialuniTalkTabRO [], talkTabIndex: number, talkTabType: string) {
         //缓存记录本次推出时的默认值
         // TalkVueUtil.setTalkTabsAll(talkTabs, talkTabIndex, talkTabType)
         if (talkTabs.length) {
