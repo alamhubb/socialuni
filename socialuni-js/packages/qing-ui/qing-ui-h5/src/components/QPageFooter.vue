@@ -7,14 +7,15 @@
     </div>
     <div class="row-col-center">
       <slot name="actionRight">
-        <el-button
+        <q-button
           size="small"
           v-show="!hideCancel"
           @click="cancel">{{ cancelText }}
-        </el-button>
+        </q-button>
         <slot></slot>
         <!--        有防抖所以无法连续触发-->
         <q-button
+            primary
           size="small"
           v-show="!hideConfirm"
           :click="confirm"
@@ -23,9 +24,10 @@
           :show-loading="showLoading"
           @click-after="confirmAfter"
           :disabled="disabled"
-          class="yy-btn">
+          class="ml-sm">
           {{ confirmText }}
-        </q-button>
+        </q-button
+            primary>
       </slot>
     </div>
   </div>

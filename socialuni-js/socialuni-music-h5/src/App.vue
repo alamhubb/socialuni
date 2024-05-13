@@ -19,11 +19,11 @@
           </div>
         </q-scroll>-->
 
-    <div class="flex-1 overflow-hidden" v-infinite-scroll="scrollToLower" :infinite-scroll-immediate="false"
+<!--    <div class="flex-1 overflow-hidden" v-infinite-scroll="scrollToLower" :infinite-scroll-immediate="false"
          :infinite-scroll-distance="200"
          :infinite-scroll-delay="2000">
       <RouterView/>
-    </div>
+    </div>-->
 
     <q-dialog ref="talkAddDialog"></q-dialog>
     <!--    <div class="flex-1 overflow-auto">-->
