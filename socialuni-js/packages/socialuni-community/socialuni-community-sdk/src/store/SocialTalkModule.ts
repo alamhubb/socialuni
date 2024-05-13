@@ -21,6 +21,8 @@ import TalkVueUtil from "../util/TalkVueUtil";
 import UserCheckUtil from "socialuni-user-sdk/src/util/UserCheckUtil";
 import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
 import CommunityEventConst from "../constant/CommunityEventConst";
+import SocialuniPageQueryUtil from "socialuni-api-base/src/model/common/SocialuniPageQueryUtil";
+import TalkQueryVO from "socialuni-api-base/src/model/talk/TalkQueryVO";
 
 class SocialTalkModule {
     //方便操作页面动作
@@ -31,6 +33,7 @@ class SocialTalkModule {
     userMaxAge: number = TalkFilterUtil.getMaxAgeFilter()
     userGender: string = TalkFilterUtil.getGenderFilter()
     talkTabs: SocialuniTalkTabRO [] = TalkVueUtil.getTalkTabs()
+    talkTabQueryUtils: SocialuniPageQueryUtil<TalkVO, TalkQueryVO, SocialuniTalkTabRO>[] = TalkVueUtil.getTalkTabQueryUtils()
     currentTabIndex: number = TalkVueUtil.getCurTalkTabIndex()
 
     curTabName: string = '首页'

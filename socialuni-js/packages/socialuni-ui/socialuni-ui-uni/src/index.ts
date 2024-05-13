@@ -5,7 +5,6 @@ import SocialuniUi from "socialuni-ui/src";
 
 const SocialuniUiUni = {
     async install(app: App) {
-        app.use(souniui)
         app.use(SocialuniUi)
         app.use(QingUiUni)
     }

@@ -10,6 +10,7 @@ import CommentAddVO from "socialuni-api-base/src/model/comment/CommentAddVO";
 import HugAddVO from "socialuni-api-base/src/model/HugAddVO";
 import TalkDeleteVO from "socialuni-api-base/src/model/talk/TalkDeleteVO";
 import CommentDeleteVO from "socialuni-api-base/src/model/comment/CommentDeleteVO";
+import SocialuniPageQueryQO from "socialuni-api-base/src/model/common/SocialuniPageQueryQO";
 
 export default class SocialuniTalkAPI {
     static queryStickTalksAPI() {
@@ -25,8 +26,8 @@ export default class SocialuniTalkAPI {
         return socialuniCommunityRequest.get<TalkVO[]>('socialuni/talk/queryTalks')
     }
 
-    static queryTalksAPI(talkQO: TalkQueryVO) {
-        return socialuniCommunityRequest.post<TalkVO>('socialuni/talk/queryTalksNew', talkQO)
+    static queryTalksAPI(queryQO: SocialuniPageQueryQO<Q>) {
+        return socialuniCommunityRequest.post<TalkVO>('socialuni/talk/queryTalksNew', queryQO)
     }
 
     static queryUserTalksAPI(userId: string, talkIds: string[]) {

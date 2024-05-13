@@ -16,6 +16,8 @@ export default class SocialuniTalkTabRO {
   pageScrollTop: number = -1
   loadMore: string = LoadMoreType.more
   queryTime: Date = new Date()
+  pageSize = 10
+  pageNum = 1
 
   constructor(name: string = null, type: string = null) {
     this.name = name

@@ -3,15 +3,17 @@ import SocialuniContentRO from "../social/SocialuniContentRO";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import CommonUtil from "qing-util/src/util/CommonUtil";
 
-export default class SocialuniPageQueryUtil<T extends SocialuniContentRO, Q> {
-    queryQO: SocialuniPageQueryQO<T, Q> = new SocialuniPageQueryQO()
+export default class SocialuniPageQueryUtil<T extends SocialuniContentRO, Q, V> {
+    queryQO: SocialuniPageQueryQO<Q> = new SocialuniPageQueryQO()
+    viewData: V = null
     api = null
     loadMore: string = LoadMoreType.more
     listData: T[] = []
     interval = 2000
 
-    constructor(api: Function = null, queryData?: Q) {
+    constructor(api: Function = null, queryData: Q = null, viewData: V = null) {
         this.api = api
+        this.viewData = viewData
         console.log(this.queryQO)
         if (queryData) {
             this.queryQO.queryData = queryData
@@ -29,14 +31,14 @@ export default class SocialuniPageQueryUtil<T extends SocialuniContentRO, Q> {
 
     async forceLoadNextPage(queryData?: Q) {
         const forceLoadNextPage = CommonUtil.debounce(async () => {
-            await this.forceLoadNextPage(queryData)
+            await this.forceLoadNextPageNoDebounce(queryData)
         }, this.interval)
         await forceLoadNextPage()
     }
 
     async loadNextPage(queryData?: Q) {
         const loadNextPage = CommonUtil.debounce(async () => {
-            await this.loadNextPage(queryData)
+            await this.loadNextPageNoDebounce(queryData)
         }, this.interval)
         await loadNextPage()
     }

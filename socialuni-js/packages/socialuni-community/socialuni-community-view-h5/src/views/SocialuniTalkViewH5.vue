@@ -310,12 +310,6 @@ export default class SocialuniTalkViewH5 extends Vue {
     // }
   }
 
-  //js触发下拉刷新效果
-  startPullDown() {
-    this.tabScrollToTop()
-    this.manualPulldownRefresh()
-  }
-
   tabScrollToTop() {
     this.curTalkTabObj.pageScrollTop = 0
     this.$nextTick(() => {
@@ -323,111 +317,6 @@ export default class SocialuniTalkViewH5 extends Vue {
     })
   }
 
-  //用户手动执行下拉刷星
-  private manualPulldownRefresh() {
-    console.log('chufale手动更新')
-    this.tabScrollToTop()
-    this.curTalkTabObj.queryTime = new Date()
-    this.curTalkTabObj.firstLoad = true
-    this.clickOnreachBottom()
-  }
-
-
-  //点击不需要更新查询时间，查不出来就查不出来，万一是自己手动暂停了查询呢，而且如果重设时间会导致数据重复问题
-  async clickOnreachBottom() {
-    //停止查询方法
-    const talkTab = this.curTalkTabObj
-    if (talkTab) {
-      if (!talkTab.talks.length) {
-        this.curTalkTabObj.queryTime = new Date()
-        this.curTalkTabObj.firstLoad = true
-      }
-      //如果正在查询，则停止查询，没办法省略因为修改和使用的是一个变量
-      if (talkTab.loadMore === LoadMoreType.loading) {
-        talkTab.loadMore = LoadMoreType.more
-      } else {
-        talkTab.loadMore = LoadMoreType.more
-        //如果正在查询，则更改状态为加载更多,点击暂停加载。
-        await this.autoChooseUseLocationQueryTalks()
-      }
-      // this.$refs.pullRefresh.endPulldownRefresh()
-    }
-  }
-
-  // scroll-view到底部加载更多
-  //如果用户开了定位，就获取经纬度去查询，如果用户没开启定位，就不使用经纬度，没必要每次都获取经纬度。
-  async autoChooseUseLocationQueryTalks() {
-    const talkTabObj = this.curTalkTabObj
-    //只有在传false时校验后面的
-    const firstLoad = talkTabObj.firstLoad
-    //只有不为加载中才可以加载
-    //手动刷新可以刷新，或者为
-    if (this.curTalkTabObj.loadMore === LoadMoreType.more || firstLoad) {
-      // 执行正在加载动画
-      this.curTalkTabObj.loadMore = LoadMoreType.loading
-
-
-      // if (firstLoad) {
-      // 默认地理位置是北京，以后可以根据ip获取当前城市
-      // 话题的话显示最热门的话题，且只查询包含话题的动态
-
-      //如果首页刷新时，查询置顶动态
-      /*if (talkTabObj.name === socialuniConfigModule.appConfig.homeTabName) {
-        //查询置顶冬天
-        SocialuniTalkAPI.queryStickTalksAPI().then(res => {
-          const stickTalks = res.data
-          if (stickTalks.length) {
-            resDataTalks.unshift(...stickTalks)
-          }
-        })
-      }*/
-      if (firstLoad) {
-        talkTabObj.firstLoad = false
-      }
-
-      const talkQO = TalkQOFactory.getTalkQueryQO(talkTabObj.name, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, talkTabObj.queryTime, socialuniTagModule.selectTagNames, firstLoad)
-
-      return SocialuniTalkAPI.queryTalksAPI(talkQO).then((res: any) => {
-        // 如果不是上拉加载，则是下拉刷新，则停止下拉刷新动画
-        if (talkTabObj.loadMore === LoadMoreType.loading) {
-          if (res.data) {
-            console.log(res.data)
-            if (firstLoad) {
-              //必须这么写，要不然存在置顶后返回的情况就有问题了，也不能直接使用talkTabObj.talks.push。那样会存在闪烁的情况那样等于分了两次push
-              //首次加载，则重新赋值重置内容
-              talkTabObj.talks = res.data
-            } else {
-              //追加新内容
-              talkTabObj.talks.push(...res.data)
-            }
-            if (res.data.length) {
-              talkTabObj.queryTime = res.data[res.data.length - 1].updateTime
-            }
-          }
-          // 如果还有大于等于10个就还可以加载
-          //scroll-view的坑，如果不这么写，同步修改的话，会立马触发下次滚动到底部事件
-          CommonUtil.delayTime(100).then(() => {
-            // 如果还有大于等于10个就还可以加载
-            if (res.data && res.data.length >= this.lazyLoadNum) {
-              talkTabObj.loadMore = LoadMoreType.more
-            } else {
-              // 否则没有了
-              talkTabObj.loadMore = LoadMoreType.noMore
-            }
-          })
-        }
-      }).catch(() => {
-        talkTabObj.loadMore = LoadMoreType.more
-      })
-    }
-  }
-
-  get talks(): TalkVO[] {
-    if (this.talkTabs && this.talkTabs.length) {
-      return this.curTalkTabObj.talks
-    }
-    return []
-  }
 
   // 被举报后前台删除talk
   deleteTalk(talkId: string) {

@@ -9,7 +9,7 @@ html {
   height: 100vh;
   width: 100vw;
   color: #303133;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.4;
   box-sizing: border-box;
   overflow-x: hidden;
@@ -18,8 +18,8 @@ html {
 
 
 body {
-  height: 100%;
-  width: 100%;
+  height: 100vh!important;
+  width: 100vw!important;
 }
 
 #app {
