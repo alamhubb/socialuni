@@ -100,9 +100,9 @@ import QNavbar from "qing-ui-uni/src/components/QNavbar/QNavbar.vue"
 import {socialuniUserDetailViewService} from "socialuni-user-sdk/src/logic/SocialuniUserDetailViewService";
 import SocialuniUserDetailView from "socialuni-user-view-uni/src/views/user/SocialuniUserDetailView.vue";
 import SocialuniFollowTag from "../../components/SocialuniFollow/SocialuniFollowTag.vue";
-import TalkItem from "../../components/talkItem/TalkItem.vue";
 import TalkOperate from "../talk/talkOperate.vue";
 import MsgInput from "socialuni-ui/src/components/MsgInput.vue";
+import TalkItem from "socialuni-community-ui/src/components/talkItem/TalkItem.vue";
 @toNative
 @Component({
   components: {
