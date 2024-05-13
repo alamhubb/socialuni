@@ -1,21 +1,46 @@
 import SocialuniPageQueryQO from './SocialuniPageQueryQO'
 import SocialuniContentRO from "../social/SocialuniContentRO";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
+import CommonUtil from "qing-util/src/util/CommonUtil";
 
 export default class SocialuniPageQueryUtil<T extends SocialuniContentRO, Q> {
     queryQO: SocialuniPageQueryQO<T, Q> = new SocialuniPageQueryQO()
     api = null
     loadMore: string = LoadMoreType.more
     listData: T[] = []
+    interval = 2000
 
     constructor(api: Function = null, queryData?: Q) {
         this.api = api
+        console.log(this.queryQO)
         if (queryData) {
             this.queryQO.queryData = queryData
+            console.log(this.queryQO)
+            console.log(565656)
         }
     }
 
     async initQuery(queryData?: Q) {
+        console.log(queryData)
+        const initQuery = await CommonUtil.debounce(this.initQueryNoDebounce, this.interval)
+        await initQuery(queryData)
+    }
+
+    async forceLoadNextPage(queryData?: Q) {
+        const forceLoadNextPage = CommonUtil.debounce(this.forceLoadNextPage, this.interval)
+        await forceLoadNextPage(queryData)
+    }
+
+    async loadNextPage(queryData?: Q) {
+        const loadNextPage = CommonUtil.debounce(this.loadNextPage, this.interval)
+        await loadNextPage(queryData)
+    }
+
+
+    private async initQueryNoDebounce(queryData?: Q) {
+        console.log(123123)
+        console.log(this.queryQO)
+        console.log(4564654)
         this.queryQO.firstLoad = true
         this.queryQO.queryTime = new Date()
         if (queryData) {
@@ -43,7 +68,7 @@ export default class SocialuniPageQueryUtil<T extends SocialuniContentRO, Q> {
         }
     }
 
-    async forceLoadNextPage(queryData?: Q) {
+    private async forceLoadNextPageNoDebounce(queryData?: Q) {
         if (this.loadMore === LoadMoreType.loading) {
             return
         }
@@ -69,7 +94,7 @@ export default class SocialuniPageQueryUtil<T extends SocialuniContentRO, Q> {
         }
     }
 
-    async loadNextPage(queryData?: Q) {
+    private async loadNextPageNoDebounce(queryData?: Q) {
         if (this.loadMore === LoadMoreType.noMore) {
             return
         }

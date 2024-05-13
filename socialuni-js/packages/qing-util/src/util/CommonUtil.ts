@@ -50,7 +50,7 @@ export default class CommonUtil {
     let timer = null
     return async (...args: any[]) => {
       if (!timer) {
-        func(...args)
+        await func(...args)
       }
       if (timer) {
         clearTimeout(timer.time)

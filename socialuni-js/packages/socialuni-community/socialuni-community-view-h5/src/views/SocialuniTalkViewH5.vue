@@ -103,6 +103,8 @@ import SocialuniCommentInputDialog from "./SocialuniCommentInputDialog.vue";
 import MsgInput from "socialuni-ui/src/components/MsgInput.vue";
 import QDialog from "qing-ui-h5/src/components/QDialog.vue";
 import TalkAddView from "./TalkAddView.vue";
+import SocialuniTalkListViewService from "socialuni-community-sdk/src/logic/service/SocialuniTalkListViewService";
+import {getCurrentInstance} from "vue";
 
 
 // todo 后台可控制是否显示轮播图
@@ -129,36 +131,8 @@ export default class SocialuniTalkViewH5 extends Vue {
     talkAddView: TalkAddView
   }
 
-  get inputContentFocus() {
-    return socialTalkModule.inputContentFocus
-  }
 
-  get location() {
-    return socialLocationModule.location
-  }
-
-  // 轮播图
-  get configShowSwipers() {
-    return socialuniConfigModule.appMoreConfig.showSwipers
-  }
-
-  loadMoreText = {
-    contentdown: '点击显示更多',
-    contentrefresh: '正在加载...',
-    contentnomore: '没有更多数据了,点击刷新'
-  }
-
-  get followTabName() {
-    return socialuniConfigModule.appConfig.followTabName
-  }
-
-  get homeTabName() {
-    return socialuniConfigModule.appConfig.homeTabName
-  }
-
-  get cityTabName() {
-    return socialuniConfigModule.appConfig.cityTabName
-  }
+  talkViewService = new SocialuniTalkListViewService()
 
   // 用户登录后重新查询
   @Watch('user')
@@ -200,10 +174,10 @@ export default class SocialuniTalkViewH5 extends Vue {
     }
   }
 
-  created() {
-    console.log('jlksajdkflasjlkfs')
-    console.log('chufale')
-    console.log('chufale jianting')
+  mounted() {
+    this.talkViewService = new SocialuniTalkListViewService()
+    this.talkViewService.initService(getCurrentInstance())
+
     CommonEventUtil.on(CommunityEventConst.socialuniTalkAddEvent, () => {
       console.log('chufale jianting')
       this.$refs.talkAddDialog.open()
@@ -216,43 +190,39 @@ export default class SocialuniTalkViewH5 extends Vue {
     this.initLogic()
   }
 
-  mounted() {
-    this.initLogic()
-  }
-
 
   tabName = '首页'
 
   initLogic() {
-    this.pageQueryUtil = new SocialuniPageQueryUtil(SocialuniTalkAPI.queryTalksAPI)
-    console.log('chufa11111')
-    this.tabName = this.$route.query.tab as string
-    if (this.$route.query.circle) {
-      socialCircleModule.setCircleName(this.$route.query.circle as string)
-    }
-    if (!this.tabName) {
-      if (!socialCircleModule.circleName) {
-        this.$router.push('/community?tab=' + '首页')
-        return
-      }
-      this.tabName = '首页'
-    }
-    // 获取元素高度，用来计算scroll-view高度
-    // this.$refs.tabsTalk.initQuery()
-    this.$nextTick(() => {
-      console.log(12312)
-      //首次打开talk页面，获取用户位置用来查询
-      // locationModule.appLunchInitDistrict().then(() => {
-      //首次打开talk页面，获取用户位置用来查询
-      socialLocationModule.appLunchInitDistrict().then(async () => {
-        // this.initQuery()
-        const talkQO = TalkQOFactory.getTalkQueryQO(this.tabName, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, socialuniTagModule.selectTagNames, socialCircleModule.circleName)
-        await this.pageQueryUtil.initQuery(talkQO)
-      })
-    })
-    this.updateShowAd()
-    socialCircleModule.getHotCirclesAction()
-    socialuniTagModule.getHotTagsAction()
+    // this.pageQueryUtil = new SocialuniPageQueryUtil(SocialuniTalkAPI.queryTalksAPI)
+    // console.log('chufa11111')
+    // this.tabName = this.$route.query.tab as string
+    // if (this.$route.query.circle) {
+    //   socialCircleModule.setCircleName(this.$route.query.circle as string)
+    // }
+    // if (!this.tabName) {
+    //   if (!socialCircleModule.circleName) {
+    //     this.$router.push('/community?tab=' + '首页')
+    //     return
+    //   }
+    //   this.tabName = '首页'
+    // }
+    // // 获取元素高度，用来计算scroll-view高度
+    // // this.$refs.tabsTalk.initQuery()
+    // this.$nextTick(() => {
+    //   console.log(12312)
+    //   //首次打开talk页面，获取用户位置用来查询
+    //   // locationModule.appLunchInitDistrict().then(() => {
+    //   //首次打开talk页面，获取用户位置用来查询
+    //   socialLocationModule.appLunchInitDistrict().then(async () => {
+    //     // this.initQuery()
+    //     const talkQO = TalkQOFactory.getTalkQueryQO(this.tabName, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, socialuniTagModule.selectTagNames, socialCircleModule.circleName)
+    //     await this.pageQueryUtil.initQuery(talkQO)
+    //   })
+    // })
+    // this.updateShowAd()
+    // socialCircleModule.getHotCirclesAction()
+    // socialuniTagModule.getHotTagsAction()
   }
 
   nextPageQueryDebounce = CommonUtil.debounce(() => {

@@ -73,6 +73,7 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
         return socialuniUserModule.mineUser
     }
 
+    //为什么使用instance而不使用this？
     initService(instance: ComponentInternalInstance, params: MessageViewParams) {
         super.initService(instance, params)
         onMounted(() => {
