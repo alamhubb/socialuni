@@ -208,7 +208,7 @@ export default class LoginView extends Vue {
     onLoad((params) => {
       console.log(this)
       console.log(getCurrentInstance())
-      this.viewService.initService(getCurrentInstance(), params)
+      this.viewService.initService(this, params)
     })
   }
 

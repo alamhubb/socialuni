@@ -104,7 +104,7 @@ import MsgInput from "socialuni-ui/src/components/MsgInput.vue";
 import QDialog from "qing-ui-h5/src/components/QDialog.vue";
 import TalkAddView from "./TalkAddView.vue";
 import SocialuniTalkListViewService from "socialuni-community-sdk/src/logic/service/SocialuniTalkListViewService";
-import {getCurrentInstance} from "vue";
+import {getCurrentInstance, watch} from "vue";
 
 
 // todo 后台可控制是否显示轮播图
@@ -174,9 +174,47 @@ export default class SocialuniTalkViewH5 extends Vue {
     }
   }
 
+  setTabName(){
+    socialTalkModule.curTabName = this.$route.query.tab as string
+    if (this.$route.query.circle) {
+      socialCircleModule.setCircleName(this.$route.query.circle as string)
+    }
+    console.log('111111')
+    if (!socialTalkModule.curTabName) {
+      if (!socialCircleModule.circleName) {
+        console.log('chufale tiaozhuan')
+        // window.open('/community?tab=首页', '_self')
+        this.$router.push('/community?tab=' + '首页')
+        return
+      }
+      socialTalkModule.curTabName = '首页'
+    }
+  }
+
   mounted() {
     this.talkViewService = new SocialuniTalkListViewService()
-    this.talkViewService.initService(getCurrentInstance())
+
+    console.log(9999)
+    console.log(this)
+    console.log(this.$route)
+    console.log(this.$route.query.tab)
+    console.log(this.$route.params.tab)
+    console.log(this.$router)
+    console.log(888)
+
+    this.talkViewService.initService(this)
+
+    watch(() => this.$route.query, (newVal, oldVal) => {
+      if (JsonUtil.toJson(newVal) !== JsonUtil.toJson(oldVal)) {
+        console.log('chufale query')
+        console.log(this)
+        console.log(this.$route)
+        console.log(this.$route.query.tab)
+        console.log(this.$router)
+        this.setTabName()
+        this.talkViewService.initQuery()
+      }
+    })
 
     CommonEventUtil.on(CommunityEventConst.socialuniTalkAddEvent, () => {
       console.log('chufale jianting')
@@ -190,8 +228,6 @@ export default class SocialuniTalkViewH5 extends Vue {
     this.initLogic()
   }
 
-
-  tabName = '首页'
 
   initLogic() {
     // this.pageQueryUtil = new SocialuniPageQueryUtil(SocialuniTalkAPI.queryTalksAPI)
@@ -225,19 +261,10 @@ export default class SocialuniTalkViewH5 extends Vue {
     // socialuniTagModule.getHotTagsAction()
   }
 
-  nextPageQueryDebounce = CommonUtil.debounce(() => {
-    this.nextPageQuery()
-  }, 500)
-
-  nextPageQuery() {
-    const talkQO = TalkQOFactory.getTalkQueryQO(this.tabName, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, socialuniTagModule.selectTagNames, socialCircleModule.circleName)
-    this.pageQueryUtil.loadNextPage(talkQO)
-  }
-
-
   scrollToLower() {
     // console.log('chufale')
-    this.nextPageQueryDebounce()
+    const talkQO = TalkQOFactory.getTalkQueryQO(this.tabName, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, socialuniTagModule.selectTagNames, socialCircleModule.circleName)
+    this.pageQueryUtil.loadNextPage(talkQO)
     // const talkQO = TalkQOFactory.getTalkQueryQO(this.tabName, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, socialuniTagModule.selectTagNames, socialCircleModule.circleName)
     // this.pageQueryUtil.nextPageQuery(talkQO)
   }

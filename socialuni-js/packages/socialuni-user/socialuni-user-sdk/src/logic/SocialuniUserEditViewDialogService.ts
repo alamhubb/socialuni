@@ -10,7 +10,7 @@ interface SocialuniUserEditViewServiceRefs {
 
 class SocialuniUserEditViewDialogService extends SocialuniViewService<SocialuniUserEditViewServiceRefs> {
 
-    initService(instance: ComponentInternalInstance) {
+    initService(instance: Vue) {
         super.initService(instance);
     }
 

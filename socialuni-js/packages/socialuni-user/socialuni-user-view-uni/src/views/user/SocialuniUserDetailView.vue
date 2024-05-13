@@ -119,7 +119,7 @@ export default class SocialuniUserDetailView extends Vue {
     provide(SocialuniUserProvideKeys.detailUser, socialuniUserDetailViewService)
 
     onLoad((params) => {
-      this.socialuniUserDetailViewService.initService(getCurrentInstance(), params)
+      this.socialuniUserDetailViewService.initService(this, params)
     })
   }
 }

@@ -47,5 +47,5 @@
 import socialuniUserEditViewService from "socialuni-user-sdk/src/logic/SocialuniUserEditViewService";
 import {getCurrentInstance} from "vue";
 
-socialuniUserEditViewService.initService(getCurrentInstance())
+socialuniUserEditViewService.initService(this)
 </script>

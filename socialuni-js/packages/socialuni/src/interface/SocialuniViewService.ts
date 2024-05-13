@@ -12,20 +12,21 @@ export default abstract class SocialuniViewService<T> implements SocialuniViewSe
 
     //不要使用getInstance了
     //为什么使用instance而不使用this？
+    // 使用vue this，是因为可以直接得到router和route
     initService(instance: Vue, params: any = {}) {
         this.instance = instance
         this.params = params
     }
 
     get $refs(): T {
-        return this.instance.refs as T
+        return this.instance.$refs as T
     }
 
-    get $route(): T {
-        return socialuniPluginsModule.route
+    get $route() {
+        return this.instance.$route as T
     }
 
     get $router(): T {
-        return socialuniPluginsModule.router
+        return this.instance.$router as T
     }
 }

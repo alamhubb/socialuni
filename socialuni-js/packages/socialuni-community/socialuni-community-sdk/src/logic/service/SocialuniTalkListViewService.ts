@@ -8,39 +8,42 @@ import {socialLocationModule} from "../../store/SocialLocationModule";
 import TalkQOFactory from "../../factory/TalkQOFactory";
 import {socialTalkModule} from "../../store/SocialTalkModule";
 import {socialuniTagModule} from "../../store/SocialTagModule";
-import {nextTick} from "vue";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
-import Constants from "socialuni-constant/constant/Constant";
-import CommonUtil from "qing-util/src/util/CommonUtil";
-import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
+import {nextTick, watch} from "vue";
 
 export default class SocialuniTalkListViewService extends SocialuniViewService<SocialuniLoginViewServiceRefs> {
 
     pageQueryUtil: SocialuniPageQueryUtil<TalkVO, TalkQueryVO> = new SocialuniPageQueryUtil(SocialuniTalkAPI.queryTalksAPI)
 
 
-    tabName = '首页'
     initService(instance: Vue, params: any = {}) {
         super.initService(instance, params);
+
+        console.log(9999)
+        console.log(instance)
+        console.log(instance.$route)
+        console.log(instance.$route.query.tab)
+        console.log(instance.$router)
+        console.log(888)
+
+
+        console.log(9999)
+        console.log(this.instance)
+        console.log(this.instance.$route)
+        console.log(this.instance.$route.query.tab)
+
+        console.log(this.instance.$router)
+        console.log(888)
+
+        console.log(9999)
+        console.log(this)
+        console.log(this.$route)
+        console.log(this.$route.query.tab)
+        console.log(this.$router)
+        console.log(888)
+
+
         console.log('chufa11111')
         this.pageQueryUtil = new SocialuniPageQueryUtil(SocialuniTalkAPI.queryTalksAPI)
-        console.log('chufa12342342311')
-        this.tabName = this.$route.query.tab as string
-        console.log('chuf666666')
-        console.log(this.$route.query)
-        console.log(this.$route.query.tab)
-        console.log(this.tabName)
-        if (this.$route.query.circle) {
-            socialCircleModule.setCircleName(this.$route.query.circle as string)
-        }
-        console.log('111111')
-        if (!this.tabName) {
-            if (!socialCircleModule.circleName) {
-                this.$router.push('/community?tab=' + '首页')
-                return
-            }
-            this.tabName = '首页'
-        }
         console.log('22232323555')
         // 获取元素高度，用来计算scroll-view高度
         // this.$refs.tabsTalk.initQuery()
@@ -60,7 +63,9 @@ export default class SocialuniTalkListViewService extends SocialuniViewService<S
     }
 
     async initQuery() {
-        const talkQO = TalkQOFactory.getTalkQueryQO(this.tabName, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, socialuniTagModule.selectTagNames, socialCircleModule.circleName)
+        console.log('fasdflkasjdlf')
+        console.log(this.tabName)
+        const talkQO = TalkQOFactory.getTalkQueryQO(socialTalkModule.curTabName, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, socialuniTagModule.selectTagNames, socialCircleModule.circleName)
         console.log(this.pageQueryUtil)
         console.log(6866868)
         console.log(this.pageQueryUtil.queryQO)
@@ -68,7 +73,7 @@ export default class SocialuniTalkListViewService extends SocialuniViewService<S
     }
 
     async queryNextPage() {
-        const talkQO = TalkQOFactory.getTalkQueryQO(this.tabName, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, socialuniTagModule.selectTagNames, socialCircleModule.circleName)
+        const talkQO = TalkQOFactory.getTalkQueryQO(socialTalkModule.curTabName, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, socialuniTagModule.selectTagNames, socialCircleModule.circleName)
         await this.pageQueryUtil.loadNextPage(talkQO)
     }
 

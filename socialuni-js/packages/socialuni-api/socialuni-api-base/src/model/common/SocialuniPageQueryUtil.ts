@@ -21,24 +21,30 @@ export default class SocialuniPageQueryUtil<T extends SocialuniContentRO, Q> {
     }
 
     async initQuery(queryData?: Q) {
-        console.log(queryData)
-        const initQuery = await CommonUtil.debounce(this.initQueryNoDebounce, this.interval)
-        await initQuery(queryData)
+        const initQuery = CommonUtil.debounce(async () => {
+            await this.initQueryNoDebounce(queryData)
+        }, this.interval)
+        await initQuery()
     }
 
     async forceLoadNextPage(queryData?: Q) {
-        const forceLoadNextPage = CommonUtil.debounce(this.forceLoadNextPage, this.interval)
-        await forceLoadNextPage(queryData)
+        const forceLoadNextPage = CommonUtil.debounce(async () => {
+            await this.forceLoadNextPage(queryData)
+        }, this.interval)
+        await forceLoadNextPage()
     }
 
     async loadNextPage(queryData?: Q) {
-        const loadNextPage = CommonUtil.debounce(this.loadNextPage, this.interval)
-        await loadNextPage(queryData)
+        const loadNextPage = CommonUtil.debounce(async () => {
+            await this.loadNextPage(queryData)
+        }, this.interval)
+        await loadNextPage()
     }
 
 
     private async initQueryNoDebounce(queryData?: Q) {
         console.log(123123)
+        console.log(this)
         console.log(this.queryQO)
         console.log(4564654)
         this.queryQO.firstLoad = true

@@ -132,7 +132,7 @@ export default class SocialuniChatView extends Vue {
   viewService = socialuniChatViewService
 
   created() {
-    this.viewService.initService(getCurrentInstance())
+    this.viewService.initService(this)
   }
 }
 </script>

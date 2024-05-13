@@ -110,7 +110,7 @@ export default class SocialuniMsgViewH5 extends Vue {
 
   created() {
     watch(() => this.$route.query, () => {
-      this.viewService.initService(getCurrentInstance(), this.$route.query)
+      this.viewService.initService(this, this.$route.query)
     }, {immediate: true})
   }
 }

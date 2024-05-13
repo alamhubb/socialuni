@@ -74,7 +74,7 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
     }
 
     //为什么使用instance而不使用this？
-    initService(instance: ComponentInternalInstance, params: MessageViewParams) {
+    initService(instance: Vue, params: MessageViewParams) {
         super.initService(instance, params)
         onMounted(() => {
             socialuniChatModule.scrollTop = 0

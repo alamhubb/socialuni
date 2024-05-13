@@ -168,14 +168,14 @@ export default class TalkView extends Vue {
   // 去除页面初始化的，初始化查询
   initQuery() {
     // this.$refs.tabsTalk.initQuery()
-    this.$nextTick(() => {
+   /* this.$nextTick(() => {
       //首次打开talk页面，获取用户位置用来查询
       // locationModule.appLunchInitDistrict().then(() => {
       //首次打开talk页面，获取用户位置用来查询
       socialLocationModule.appLunchInitDistrict().then(() => {
         this.$refs.tabsTalk.initQuery()
       })
-    })
+    })*/
   }
 
   startPullDown() {

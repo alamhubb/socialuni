@@ -33,6 +33,8 @@ class SocialTalkModule {
     talkTabs: SocialuniTalkTabRO [] = TalkVueUtil.getTalkTabs()
     currentTabIndex: number = TalkVueUtil.getCurTalkTabIndex()
 
+    curTabName: string = '首页'
+
     currentContent: null
     talk: TalkVO = null
     comment: CommentVO = null
@@ -43,6 +45,11 @@ class SocialTalkModule {
     commentActionShow = false
     reportDialogShow = false
     reportContentType = ''
+
+
+    get curTab() {
+        return this.talkTabs[this.currentTabIndex]
+    }
 
     addComment({content}) {
         // 使输入框失去焦点，隐藏
@@ -262,9 +269,6 @@ this.setCircleName(null)
         QingAppUtil.StorageUtil.setObj(TalkVueUtil.talkTabTypeKey, talkTabType)
     }
 
-    get curTab() {
-        return this.talkTabs[this.currentTabIndex]
-    }
 
     get curTabIsCircle() {
         return this.curTab.type === TalkTabType.circle_type

@@ -47,7 +47,7 @@ export default class SocialuniLoginFormService extends SocialuniViewService<Soci
     }
 
 
-    initService(instance: ComponentInternalInstance, params: any = {}) {
+    initService(instance: Vue, params: any = {}) {
         super.initService(instance, params);
     }
 

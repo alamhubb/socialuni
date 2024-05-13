@@ -1,8 +1,9 @@
 import {ComponentInternalInstance} from "vue";
+import {Vue} from "vue-facing-decorator";
 
 export interface SocialuniViewServiceInterface {
-    instance: ComponentInternalInstance
+    instance: Vue
     params: any
 
-    initService(instance: ComponentInternalInstance)
+    initService(instance: Vue)
 }

@@ -123,7 +123,7 @@ export default class SocialuniUserDetailView extends Vue {
   socialuniUserEditViewService = socialuniUserEditViewService
 
   created(){
-    this.socialuniUserEditViewService.initService(getCurrentInstance())
+    this.socialuniUserEditViewService.initService(this)
   }
 }
 </script>

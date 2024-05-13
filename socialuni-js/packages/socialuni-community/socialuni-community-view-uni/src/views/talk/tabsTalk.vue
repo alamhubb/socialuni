@@ -168,6 +168,7 @@ import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+import SocialuniTalkListViewService from "socialuni-community-sdk/src/logic/service/SocialuniTalkListViewService";
 
 // todo 后台可控制是否显示轮播图
 @toNative
@@ -220,6 +221,8 @@ export default class TabsTalk extends Vue {
         return socialuniConfigModule.appConfig.cityTabName
     }
 
+
+
     // 用户登录后重新查询
     @Watch('user')
     watchUserChange() {
@@ -256,8 +259,13 @@ export default class TabsTalk extends Vue {
         // 获取位置，查询同城talks使用
     }
 
+  talkViewService = new SocialuniTalkListViewService()
+
+
     mounted() {
         // 获取元素高度，用来计算scroll-view高度
+      this.talkViewService = new SocialuniTalkListViewService()
+      this.talkViewService.initService(this)
     }
 
     // 供父组件调用，每次隐藏把数据缓存进storage
