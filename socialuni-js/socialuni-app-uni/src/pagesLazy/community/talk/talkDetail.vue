@@ -1,6 +1,6 @@
 <template>
   <div class="h100vh bg-default">
-    <msg-input v-if="showMsgInput">
+    <msg-input class="w100p" v-if="showMsgInput">
     </msg-input>
     <q-navbar>
       <div class="flex-row w100vw px flex-1">

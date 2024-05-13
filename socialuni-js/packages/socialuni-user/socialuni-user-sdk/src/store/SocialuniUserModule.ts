@@ -103,7 +103,7 @@ class SocialuniUserModule {
         return QingAppUtil.AlertUtil.confirm('是否注销账号，7天内不再登录，账号将彻底清空无法使用').then(() => {
             /*SocialuniMineUserAPI.destroyAccountAPI().then(() => {
                 UserService.userLogout()
-                SocialuniAppUtil.ToastUtil.toast('注销成功')
+                QingAppUtil.ToastUtil.toast('注销成功')
             })*/
         })
     }

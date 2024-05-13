@@ -30,6 +30,6 @@ export default class APPUtil {
     }
 
    /* static createRewardedVideoAd() {
-        return SocialuniAppUtil.UniUtil.createRewardedVideoAd(AppConfig.app_award_ad_id)
+        return QingAppUtil.UniUtil.createRewardedVideoAd(AppConfig.app_award_ad_id)
     }*/
 }

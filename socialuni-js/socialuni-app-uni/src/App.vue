@@ -11,7 +11,7 @@ export default {
         // await socialAppModule.appLunchAction()
     },
     /*onError(e) {
-        SocialuniAppAPI.sendErrorLogAPI('front page error', SocialuniAppUtil.RouterUtil.getCurrentPageURI(), e.message)
+        SocialuniAppAPI.sendErrorLogAPI('front page error', QingAppUtil.RouterUtil.getCurrentPageURI(), e.message)
         console.error(e)
     },*/
 }

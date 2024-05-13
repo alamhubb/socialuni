@@ -1,7 +1,6 @@
 <template>
   <div
-      v-if="inputContentFocus"
-      class="bg-white row-between-center pr-sm input fixed-footer shadow-top flex-row" style="min-height: 50px"
+      class="bg-white row-col-center pr-sm input fixed-footer shadow-top flex-row" style="min-height: 50px"
   >
     <input
         v-model.trim="content"

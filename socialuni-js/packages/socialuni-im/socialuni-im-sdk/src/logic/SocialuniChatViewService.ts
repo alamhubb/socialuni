@@ -20,7 +20,7 @@ interface SocialuniChatViewServiceRefs {
 export default class SocialuniChatViewService extends SocialuniViewService<SocialuniChatViewServiceRefs> {
     created() {
         /* onLoad((params) => {
-             SocialuniAppUtil.UniUtil.showShareMenu()
+             QingAppUtil.UniUtil.showShareMenu()
          })
          onShow(() => {
              // socialuniChatModule.computedChatsUnreadNumTotalAction()

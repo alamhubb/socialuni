@@ -37,7 +37,7 @@
 
       <tabs-talk class="flex-1" ref="tabsTalk"></tabs-talk>
     </div>
-    <msg-input>
+    <msg-input class="w100p">
     </msg-input>
 
 

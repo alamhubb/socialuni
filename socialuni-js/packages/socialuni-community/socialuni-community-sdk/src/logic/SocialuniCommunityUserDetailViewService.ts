@@ -53,7 +53,7 @@ export default class SocialuniCommunityUserDetailViewService extends SocialuniVi
         console.log('123123')
         /*await SocialuniFriendAPI.addFriend(new FriendAddQO(this.user.id, this.applyUserFriendContent, SocialuniAddFriendType.apply))
         // await (await socialChatModule.openIm()).addFriend(options)
-        SocialuniAppUtil.ToastUtil.toastLong('添加好友申请发送成功，请耐心等待对方回复')*/
+        QingAppUtil.ToastUtil.toastLong('添加好友申请发送成功，请耐心等待对方回复')*/
     }
 
     deleteTalk(talkId: string) {

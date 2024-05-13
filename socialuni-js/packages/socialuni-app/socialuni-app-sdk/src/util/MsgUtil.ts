@@ -22,7 +22,7 @@ export default class MsgUtil {
         } else {
             msg = '未获得成年认证标识'
         }
-        SocialuniAppUtil.AlertUtil.confirm(msg + '，是否继续前往成年认证页面', '前往').then(() => {
+        QingAppUtil.AlertUtil.confirm(msg + '，是否继续前往成年认证页面', '前往').then(() => {
             PageUtil.toIdentityAuthPage()
         })*!/
     }*/

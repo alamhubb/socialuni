@@ -71,7 +71,7 @@ export default class PlatformUtils {
     static userPay(amount?: number) {
         return PlatformUtils.payCoin(amount).then(() => {
             /* UserStore.getMineUserAction().then(() => {
-               SocialuniAppUtil.AlertUtil.hint(HintMsg.paySuccessMsg)
+               QingAppUtil.AlertUtil.hint(HintMsg.paySuccessMsg)
                RouterUtil.reLaunch(UserPagePath.userMine)
              })*/
         })
@@ -104,7 +104,7 @@ export default class PlatformUtils {
           .catch((err) => {
               // qq的取消支付没有走着里
               if (err.errMsg === Constants.wxPayCancel || err.errMsg === Constants.qqPayCancel || err.errMsg === Constants.appWxPayCancel) {
-                  SocialuniAppUtil.ToastUtil.toast(AppMsg.payCancelMsg)
+                  QingAppUtil.ToastUtil.toast(AppMsg.payCancelMsg)
                   throw err
               } else {
                   SocialuniAppAPI.sendErrorLogAPI(null, '支付失败', res, err)

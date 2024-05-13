@@ -92,9 +92,9 @@ const user = computed(() => {
 })
 
 async function logout() {
-  await SocialuniAppUtil.AlertUtil.confirm('是否确认退出')
+  await QingAppUtil.AlertUtil.confirm('是否确认退出')
   UserStore.clearUser()
   TokenUtil.remove()
-  SocialuniAppUtil.ToastUtil.success('退出成功')
+  QingAppUtil.ToastUtil.success('退出成功')
 }
 </script>

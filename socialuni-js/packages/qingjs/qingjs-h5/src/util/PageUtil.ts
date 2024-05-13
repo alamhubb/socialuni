@@ -80,7 +80,7 @@ export default class PageUtil {
             //没设置校园，且应用类型要求必须设置
         } else if (!user.schoolName && socialuniConfigModule.appConfig.mustSetSchoolCanPost) {
             // 如果登录了仅仅没绑定手机号，则提示跳转，区分qq和微信不同
-            SocialuniAppUtil.AlertUtil.confirm('设置学校名称才能发表内容，是否前往设置学校名称页面')
+            QingAppUtil.AlertUtil.confirm('设置学校名称才能发表内容，是否前往设置学校名称页面')
                 .then(() => {
                     PageUtil.toMinePage()
                 })
@@ -119,7 +119,7 @@ export default class PageUtil {
     }
 
     static toFaceValuePage() {
-        SocialuniAppUtil.AlertUtil.confirm('是否查看颜值分介绍').then(() => {
+        QingAppUtil.AlertUtil.confirm('是否查看颜值分介绍').then(() => {
             RouterUtil.navigateTo(UserPagePath.faceValueInfo)
         })
     }

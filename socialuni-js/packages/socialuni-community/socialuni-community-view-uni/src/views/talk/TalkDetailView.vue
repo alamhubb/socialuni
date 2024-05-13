@@ -1,6 +1,6 @@
 <template>
   <div class="h100vh bg-default">
-    <msg-input v-if="showMsgInput">
+    <msg-input class="w100p" v-if="showMsgInput">
     </msg-input>
     <q-navbar>
       <div class="flex-row w100vw px flex-1">
@@ -48,7 +48,7 @@ import {Component, Vue, toNative} from 'vue-facing-decorator'
 import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
 import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
-import SocialuniAppUtil from "qingjs/src/util/SocialuniAppUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
 import QIcon from "qing-ui/src/components/QIcon.vue";
 import MsgInput from "socialuni-ui/src/components/MsgInput.vue";
@@ -75,7 +75,7 @@ export default class TalkDetail extends Vue {
   }
 
   created() {
-    SocialuniAppUtil.NativeUtil.showShareMenu()
+    QingAppUtil.NativeUtil.showShareMenu()
     onLoad((params) => {
       const talkId = params.talkId
       SocialuniTalkAPI.queryTalkDetailAPI(talkId).then((res: any) => {
@@ -87,15 +87,15 @@ export default class TalkDetail extends Vue {
 
 
   deleteTalk() {
-    SocialuniAppUtil.RouterUtil.goBackOrHome()
+    QingAppUtil.RouterUtil.goBackOrHome()
   }
 
   goHome() {
-      SocialuniAppUtil.RouterUtil.goHome()
+      QingAppUtil.RouterUtil.goHome()
   }
 
   goBack() {
-      SocialuniAppUtil.RouterUtil.goBackOrHome()
+      QingAppUtil.RouterUtil.goBackOrHome()
   }
 
   onShow() {

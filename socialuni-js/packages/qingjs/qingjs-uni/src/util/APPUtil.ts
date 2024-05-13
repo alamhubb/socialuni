@@ -3,7 +3,7 @@ import AppConfig from "socialuni-constant/constant/AppConfig";
 import AppUpdateType from "socialuni-constant/constant/AppUpdateType";
 import SocialuniAppAPI from "socialuni/src/api/socialuni/SocialuniAppAPI";
 import {socialuniConfigModule} from "socialuni/src/store/SocialuniConfigModule";
-import SocialuniAppUtil from "socialuni-app-sdk/src/util/UniUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 
 export default class APPUtil {
     static checkUpdate() {
@@ -15,16 +15,16 @@ export default class APPUtil {
                 const updateHint = res.data.updateHint
                 if (AppUpdateType.install === updateType) {
                     const hint = updateHint || '应用有新版本需要安装，点击安装即可更新'
-                    SocialuniAppUtil.AlertUtil.confirm(hint, '安装').then(() => {
+                    QingAppUtil.AlertUtil.confirm(hint, '安装').then(() => {
                         plus.runtime.openURL(updateUrl)
                     })
                 } else if (AppUpdateType.hot === updateType) {
-                    SocialuniAppUtil.UniUtil.install(updateUrl).then(() => {
-                        SocialuniAppUtil.AlertUtil.confirm('新版本更新成功，是否现在重启清池app', '重启', '稍后').then(() => {
+                    QingAppUtil.UniUtil.install(updateUrl).then(() => {
+                        QingAppUtil.AlertUtil.confirm('新版本更新成功，是否现在重启清池app', '重启', '稍后').then(() => {
                             plus.runtime.restart()
                         })
                     }).catch(() => {
-                        SocialuniAppUtil.AlertUtil.hint('更新失败，' + socialuniConfigModule.appMoreConfig.errorMsgContactService)
+                        QingAppUtil.AlertUtil.hint('更新失败，' + socialuniConfigModule.appMoreConfig.errorMsgContactService)
                     })
                 }
             })
@@ -32,6 +32,6 @@ export default class APPUtil {
     }
 
    /* static createRewardedVideoAd() {
-        return SocialuniAppUtil.UniUtil.createRewardedVideoAd(AppConfig.app_award_ad_id)
+        return QingAppUtil.UniUtil.createRewardedVideoAd(AppConfig.app_award_ad_id)
     }*/
 }

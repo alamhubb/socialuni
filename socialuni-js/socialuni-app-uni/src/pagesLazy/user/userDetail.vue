@@ -67,7 +67,7 @@ export default class UserDetailPage extends Vue {
     QingAppUtil.AlertUtil.confirm('是否确认解除好友关系').then(async () => {
       /*(await socialChatModule.openIm()).deleteFriend(socialuniUserDetailViewService.user.id).then(({data}) => {
           console.log('deleteFriend', data)
-          SocialuniAppUtil.ToastUtil.toast('成功解除好友关系')
+          QingAppUtil.ToastUtil.toast('成功解除好友关系')
           socialChatModule.checkFriend(socialuniUserDetailViewService.user)
       }).catch(err => {
       })*/
@@ -79,7 +79,7 @@ export default class UserDetailPage extends Vue {
    * 将用户添加到黑名单。
    */
   async addBlack() {
-    /* SocialuniAppUtil.AlertUtil.confirm('是否确认添加到黑名单').then(async () => {
+    /* QingAppUtil.AlertUtil.confirm('是否确认添加到黑名单').then(async () => {
          (await socialChatModule.openIm()).addBlack(this.user.id).then(({data}) => {
              socialChatModule.checkFriend(this.user)
          }).catch(err => {
@@ -93,7 +93,7 @@ export default class UserDetailPage extends Vue {
    * 将用户从黑名单移除。
    */
   async removeBlack() {
-    /*SocialuniAppUtil.AlertUtil.confirm('是否确认从黑名单移除').then(async () => {
+    /*QingAppUtil.AlertUtil.confirm('是否确认从黑名单移除').then(async () => {
         (await socialChatModule.openIm()).removeBlack(this.user.id).then(({data}) => {
             socialChatModule.checkFriend(this.user)
         }).catch(err => {

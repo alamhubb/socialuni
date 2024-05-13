@@ -454,7 +454,7 @@ export default class MessageView extends Vue {
     }
 
     /* showEmojiClick () {
-      SocialuniAppUtil.UniUtil.s.delayTime(100).then(() => {
+      QingAppUtil.UniUtil.s.delayTime(100).then(() => {
         this.showEmoji = true
       })
     }

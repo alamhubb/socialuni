@@ -167,7 +167,7 @@ class SocialuniChatModule {
 
     /*async pushMessageAction(msgContent) {
         if (!socialuniChatModule.chat) {
-            SocialuniAppUtil.ToastUtil.throwError('缺少会话')
+            QingAppUtil.ToastUtil.throwError('缺少会话')
         }
         UserCheckUtil.checkUserBindPhoneNum()
 
@@ -188,7 +188,7 @@ class SocialuniChatModule {
                 newMsg.readStatus = MessageStatus.Failed
             }
         } else {
-            SocialuniAppUtil.ToastUtil.throwError('不能发送空白内容')
+            QingAppUtil.ToastUtil.throwError('不能发送空白内容')
         }
         // socialuniChatModule.refreshMessages()
 

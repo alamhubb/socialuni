@@ -389,7 +389,7 @@ export default class TalkAddView extends Vue {
       QingAppUtil.AlertUtil.error('请进行登录')
     }
     /*if (!this.user.school) {
-      SocialuniAppUtil.AlertUtil.error('请设置您所在的学校后才可发表动态')
+      QingAppUtil.AlertUtil.error('请设置您所在的学校后才可发表动态')
     }*/
     /*if (!this.user.identityAuth) {
       ModelContentCheckUtil.hasUn18Content(this.talkContent)
@@ -470,7 +470,7 @@ export default class TalkAddView extends Vue {
         }
       }
     }*/
-    // SocialuniAppUtil.UniUtil.hideLoading()
+    // QingAppUtil.UniUtil.hideLoading()
   }
 
   deleteImg(e) {

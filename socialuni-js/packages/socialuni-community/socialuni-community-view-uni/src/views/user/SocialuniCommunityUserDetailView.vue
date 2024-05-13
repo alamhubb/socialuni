@@ -84,7 +84,7 @@
     <ad class="bg-white mt-10 w100vw" adpid="1890536227"></ad>
     <!--  #endif -->
 
-    <msg-input></msg-input>
+    <msg-input class="w100p"></msg-input>
   </socialuni-user-detail-view>
 </template>
 
