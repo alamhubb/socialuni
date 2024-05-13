@@ -93,7 +93,6 @@ import QPopup from "qing-ui/src/components/QPopup.vue";
 import {Inject, Component, Vue, toNative} from 'vue-facing-decorator'
 import {socialuniCommunityUserDetailViewService}
   from "socialuni-community-sdk/src/logic/SocialuniCommunityUserDetailViewService";
-import {getCurrentInstance} from "vue";
 import QIcon from "qing-ui/src/components/QIcon.vue"
 import QButton from "qing-ui/src/components/QButton.vue"
 import QNavbar from "qing-ui-uni/src/components/QNavbar/QNavbar.vue"
