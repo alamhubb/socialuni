@@ -194,8 +194,6 @@ export default class TabsTalk extends Vue {
     talkFilterDialog: SocialTalkFilterDialog
   }
 
-  talkListViewService: SocialuniTalkListViewService = new SocialuniTalkListViewService()
-
   get inputContentFocus() {
     return socialTalkModule.inputContentFocus
   }
