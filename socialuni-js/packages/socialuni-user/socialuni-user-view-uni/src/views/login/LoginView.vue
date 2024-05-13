@@ -24,8 +24,8 @@
           <!--          只有不为三方授权才显示logo-->
           <!--        登录界面，展示logo-->
           <img class="radius flex-none h100p"
-                 mode="aspectFit"
-                 src="/static/img/logo.jpg"
+               mode="aspectFit"
+               src="/static/img/logo.jpg"
           />
         </div>
       </div>
@@ -55,7 +55,7 @@
               <q-button v-if="showPhoneLogin"
                         :disabled="viewService.bindBtnDisabled" @click="viewService.handleLogin()"
                         add-class="bg-gradual-phone" md class="w90p mt"
-                        :class="loginButtonDisabled?'':'bg-click'"
+                        :class="loginButtonDisabled?'bg-disabled':'bg-click'"
               >
                 <q-icon color="white" icon="mdi-cellphone-android" size="21" class="mr-xs"></q-icon>
                 {{ viewService.bindBtnDisabled ? '登陆中' : viewService.loginBtnText }}
@@ -220,7 +220,7 @@ export default class LoginView extends Vue {
   }
 
   get loginButtonDisabled() {
-    return this.viewService.loginData.loginDataHasError || this.allButtonDisabled
+    return this.viewService.loginData.loginDataHasError || this.viewService.bindBtnDisabled || this.allButtonDisabled
   }
 
   goBackPage() {

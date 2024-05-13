@@ -14,7 +14,7 @@ export default class SocialuniLoginFormService extends SocialuniViewService<Soci
     loginData = new SocialuniLoginFormDataVO()
 
     // 同意协议
-    contractChecked = true
+    contractChecked = false
 
     contractCheckedChange() {
         this.contractChecked = !this.contractChecked

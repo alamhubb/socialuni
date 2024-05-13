@@ -41,7 +41,7 @@ export default class SocialuniLoginFormDataVO {
     }
 
     get authCodeHasError() {
-        return !this.phoneNumHasError && !this.passwordHasError && (!this.authCode || this.authCode.length !== 4 || NumberUtil.containNoNumber(this.authCode))
+        return !this.phoneNumHasError && !this.passwordHasError && (!this.phoneNumRegistered && (!this.authCode || this.authCode.length !== 4 || NumberUtil.containNoNumber(this.authCode)))
     }
 
     get sendAuthCodeBtnDisabled() {
@@ -71,11 +71,6 @@ export default class SocialuniLoginFormDataVO {
 
 
     checkPhoneNum() {
-        console.log(!this.phoneNum)
-        console.log(this.phoneNum)
-        console.log(this.phoneNum.length !== 11)
-        console.log(NumberUtil.containNoNumber(this.phoneNum))
-        console.log(!this.phoneNum || this.phoneNum.length !== 11 || NumberUtil.containNoNumber(this.phoneNum))
         // 再次校验
         if (this.phoneNumHasError) {
             return QingAppUtil.ToastUtil.throwError('请输入正确的手机号')
@@ -89,7 +84,7 @@ export default class SocialuniLoginFormDataVO {
     }
 
     checkAuthCode() {
-        if (!this.phoneNumRegistered && this.authCodeHasError) {
+        if (this.authCodeHasError) {
             return QingAppUtil.ToastUtil.throwError('请输入正确的验证码')
         }
     }
