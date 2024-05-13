@@ -1,9 +1,11 @@
-import "./styles/index.scss";
 import SocialuniAppUniUtil from "./utils/SocialuniAppUniUtil";
+import SocialuniApp from "socialuni-app-sdk/src";
+import {App} from "vue";
 
 const SocialuniAppViewUni = {
-    install() {
+    async install(app: App) {
         SocialuniAppUniUtil.checkUpdate()
+        app.use(SocialuniApp)
     }
 }
 

@@ -1,5 +1,6 @@
 package com.socialuni.social.community.sdk.logic.domain.talk;
 
+import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniCircleDO;
 import com.socialuni.social.community.sdk.constant.TalkTabType;
 import com.socialuni.social.community.sdk.dao.SocialuniCircleDOUtil;
@@ -58,6 +59,9 @@ public class SocialuniTalkQueryGenerateQueryBOByTabDomain {
 
     public void generateQueryBOByNotHomeCityOthers(SocialuniUserDo mineUser, SocialHomeTabTalkQueryBO socialHomeTabTalkQueryBO) {
         String homeTabName = socialHomeTabTalkQueryBO.getHomeTabName();
+        if (StringUtils.isEmpty(homeTabName)) {
+            throw new SocialBusinessException("缺少tab参数");
+        }
         if (homeTabName.equals(SocialuniAppConfig.getAppConfig().getSelfSchoolTabName())) {
             homeTabName = SocialuniUserExpandDOUtil.getUserSchoolNameNotNull(mineUser.getUnionId());
         }

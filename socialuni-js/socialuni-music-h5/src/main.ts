@@ -31,7 +31,6 @@ declare module '@vue/runtime-core' {
 
     app.config.globalProperties.$DateUtil = DateUtil;
 
-    app.use(SocialuniUi)
     app.use(SocialuniUiH5)
     app.use(SocialuniAppViewH5)
     app.use(SocialuniUser)
