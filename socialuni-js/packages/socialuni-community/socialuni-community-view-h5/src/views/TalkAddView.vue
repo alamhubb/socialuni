@@ -410,7 +410,7 @@ export default class TalkAddView extends Vue {
       if (this.talkContent && this.talkContent.length > 200) {
         return QingAppUtil.AlertUtil.hint('动态最多支持200个字，请精简动态内容')
       }
-      this.addTalkHandler()
+      await this.addTalkHandler()
       // 申请订阅
       PlatformUtils.requestSubscribeTalk()
     } else {
@@ -422,7 +422,7 @@ export default class TalkAddView extends Vue {
 
   async addTalkHandler() {
     QingAppUtil.loadingUtil.loading('发布中')
-    this.publishTalk()
+    await this.publishTalk()
   }
 
   async publishTalk() {

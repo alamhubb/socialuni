@@ -195,8 +195,10 @@ export default class SocialuniTalkViewH5 extends Vue {
     })
   }
 
-  addTalk(){
-    this.$refs.talkAddView.addTalk()
+  async addTalk() {
+    await this.$refs.talkAddView.addTalk()
+    this.$refs.talkAddDialog.close()
+    this.initLogic()
   }
 
   mounted() {
