@@ -11,17 +11,17 @@
       <social-tag-add @change="addTagCheckTag" @close="closeTagAddVue"></social-tag-add>
     </div>
     <div v-show="!showCityDialog&&!showTagSearch&&!showTagAdd">
-      <q-navbar show-back>
+<!--      <q-navbar show-back>
         <div class="w100p row-col-center">
           <div class="font-bold text-md flex-1">
             发布动态
           </div>
           <q-button class="text-bold" theme :disabled="buttonDisabled" @click="addTalk">发布</q-button>
         </div>
-      </q-navbar>
+      </q-navbar>-->
       <q-city-picker v-model="showCityDialog" :district="district" @confirm="cityChange"></q-city-picker>
       <div class="px-smm py-sm">
-        <textarea class="h140 w100p" :maxlength="200"
+        <textarea class="h140 w100p bd-radius pd-sm bd-sub resize-none" :maxlength="200"
                   placeholder="禁止发布未成年人、违法乱纪、涉污涉黄、暴露不雅、广告等内容，发布违规内容将会被封号处理！"
                   v-model.trim="talkContent"
                   :show-confirm-bar="false"
@@ -34,7 +34,7 @@
           <div class="uni-uploader">
             <div class="uni-uploader-body">
               <div class="uni-uploader__files">
-                <block v-for="(image,index) in showImgUrls" :key="index">
+                <div v-for="(image,index) in showImgUrls" :key="index">
                   <div class="uni-uploader__file position-relative">
                     <div
                         class="close-view position-absolute z-index-button color-content size20 bg-grey8 bg-half-transparent row-all-center topRight bd-bl-radius"
@@ -43,7 +43,7 @@
                     <img class="uni-uploader__img" mode="aspectFill" :src="image"
                            :data-src="image" @click="previewImage"/>
                   </div>
-                </block>
+                </div>
                 <div class="uni-uploader__input-box" v-show="showImgFiles.length < 3">
                   <div class="uni-uploader__input" @click="chooseImage"/>
                 </div>
@@ -128,12 +128,10 @@
 <script lang="ts">
 import {Component, Vue, Watch, toNative} from 'vue-facing-decorator'
 import AppMsg from 'socialuni-constant/constant/AppMsg'
-import {onUnload} from "@dcloudio/uni-app";
 import QSidebar from "qing-ui-uni/src/components/QSidebar/QSidebar.vue";
 import QPopup from "qing-ui/src/components/QPopup.vue";
 import QButton from "qing-ui/src/components/QButton.vue";
 import QIcon from "qing-ui/src/components/QIcon.vue";
-import QNavbar from "qing-ui-uni/src/components/QNavbar/QNavbar.vue";
 import SocialCirclePicker from "socialuni-community-view-uni/src/components/SocialCirclePicker.vue";
 import QCityInfo from "socialuni-community-view-uni/src/components/QCityInfo/QCityInfo.vue";
 import SocialTagAdd from "socialuni-community-view-uni/src/components/SocialTagAdd/SocialTagAdd.vue";
@@ -160,6 +158,7 @@ import CosService from "socialuni-app-sdk/src/util/CosService";
 import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
 import SocialCircleRO from "socialuni-api-base/src/model/community/circle/SocialCircleRO";
 import DomFile from "qingjs/src/model/DomFile";
+import {onMounted} from "vue";
 
 @toNative
 @Component({
@@ -170,7 +169,6 @@ import DomFile from "qingjs/src/model/DomFile";
     QPopup,
     SocialTagAdd,
     QButton,
-    QNavbar,
     TalkAddTagSearch,
     QCityPicker,
     QIcon
@@ -256,12 +254,16 @@ export default class TalkAddView extends Vue {
     return [this.visibleGenders.findIndex(item => item.value === this.visibleGender.value)]
   }
 
+
   //进入talk页面，需要加载下当前地理位置，发布时携带
   created() {
-    onUnload(() => {
+    onMounted(()=>{
       this.talkContent = ''
       this.showImgFiles = []
     })
+    // onUnload(() => {
+
+    // })
     this.cosAuthRO = null
     this.showImgFiles = []
     this.tags = ObjectUtil.deepClone(this.storeTags)

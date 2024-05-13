@@ -31,10 +31,12 @@ import QIcon from "qing-ui/src/components/QIcon.vue";
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
 
+console.trace(123)
+
 // 如果是小程序，获取右上角胶囊的尺寸信息，避免导航栏右侧内容与胶囊重叠(支付宝小程序非本API，尚未兼容)
-// #ifdef MP
-const menuButtonInfo: GetMenuButtonBoundingClientRectRes = uni.getMenuButtonBoundingClientRect()
-// #endif
+// // #ifdef MP
+// const menuButtonInfo: GetMenuButtonBoundingClientRectRes = uni.getMenuButtonBoundingClientRect()
+// // #endif
 /*
 显示出来已经选了的城市，给她画上钩
 * */

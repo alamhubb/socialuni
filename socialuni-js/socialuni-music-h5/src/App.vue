@@ -1,11 +1,17 @@
 <template>
   <div class="h100p overflow-hidden flex-col bg-default">
     <s-user-nav-bar>
-
       <div class="row-end-center h100p mr">
         <q-button primary @click="$refs.talkAddDialog.open()">发帖</q-button>
       </div>
     </s-user-nav-bar>
+
+    <!--  <div class="h100p overflow-hidden flex-col bg-default">
+        <s-user-nav-bar>
+
+          <div class="row-end-center h100p mr">
+          </div>
+        </s-user-nav-bar>-->
 
     <!--    <div class="flex-1 overflow-hidden">-->
     <!--           :infinite-scroll-delay="500" -->
@@ -19,13 +25,15 @@
           </div>
         </q-scroll>-->
 
-<!--    <div class="flex-1 overflow-hidden" v-infinite-scroll="scrollToLower" :infinite-scroll-immediate="false"
-         :infinite-scroll-distance="200"
-         :infinite-scroll-delay="2000">
-      <RouterView/>
-    </div>-->
+    <!--    <div class="flex-1 overflow-hidden" v-infinite-scroll="scrollToLower" :infinite-scroll-immediate="false"
+             :infinite-scroll-distance="200"
+             :infinite-scroll-delay="2000">
+          <RouterView/>
+        </div>-->
 
-    <q-dialog ref="talkAddDialog"></q-dialog>
+    <q-dialog ref="talkAddDialog">
+      <talk-add-view></talk-add-view>
+    </q-dialog>
     <!--    <div class="flex-1 overflow-auto">-->
     <!--      <div class="mg-x-auto w1200">-->
     <!--        <RouterView/>-->
@@ -54,10 +62,11 @@ import QScroll from "qing-ui/src/components/QScroll.vue";
 import QButton from "qing-ui/src/components/QButton.vue";
 import CommonUtil from "qing-util/src/util/CommonUtil.ts";
 import QDialog from "qing-ui-h5/src/components/QDialog.vue";
+import TalkAddView from "@/views/TalkAddView.vue";
 
 @toNative
 @Component({
-  components: {SUserNavBar, QNavMenu, QButton, QScroll, QDialog}
+  components: {SUserNavBar, QNavMenu, QButton, QScroll, QDialog, TalkAddView}
 })
 export default class App extends Vue {
 

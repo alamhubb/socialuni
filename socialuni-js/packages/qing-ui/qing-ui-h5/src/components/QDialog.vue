@@ -14,6 +14,7 @@
   <el-dialog
       class="pd-0"
       v-bind="$attrs"
+      :close-on-click-modal="false"
       v-model="dialogVisible"
       append-to-body
       @open="emitOpen"
@@ -24,7 +25,7 @@
     </template>
 
     <!--  自定义区域    -->
-    <div class="h300">
+    <div class="h500">
       <q-scrollbar class="h100p">
         <div>
           <slot></slot>
