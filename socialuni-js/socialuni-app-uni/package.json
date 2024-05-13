@@ -61,7 +61,7 @@
     "socialuni-app-view-uni": "../packages/socialuni-app/socialuni-app-view-uni",
     "socialuni-user-view-uni": "../packages/socialuni-user/socialuni-user-view-uni",
     "socialuni-community-view-uni": "../packages/socialuni-community/socialuni-community-view-uni",
-    "socialuni-community-ui": "../packages/socialuni-community/socialuni-community-view-ui",
+    "socialuni-community-ui": "../packages/socialuni-community/socialuni-community-ui",
     "socialuni-expand-view-uni": "../packages/socialuni-expand/socialuni-expand-view-uni",
     "socialuni-im-view-uni": "../packages/socialuni-im/socialuni-im-view-uni",
     "qing-scss": "../packages/qing-scss",

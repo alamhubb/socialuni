@@ -52,7 +52,7 @@ import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
 import QIcon from "qing-ui/src/components/QIcon.vue";
 import MsgInput from "socialuni-ui/src/components/MsgInput.vue";
-// import TalkItem from "socialuni-community-ui/src/components/talkItem/TalkItem.vue";
+import TalkItem from "socialuni-community-ui/src/components/talkItem/TalkItem.vue";
 import TalkOperate from "socialuni-community-view-uni/src/views/talk/talkOperate.vue";
 import QNavbar from "qing-ui-uni/src/components/QNavbar/QNavbar.vue";
 
@@ -62,7 +62,7 @@ import QNavbar from "qing-ui-uni/src/components/QNavbar/QNavbar.vue";
     QNavbar,
     QIcon,
     MsgInput,
-    // TalkItem,
+    TalkItem,
     TalkOperate
   }
 })

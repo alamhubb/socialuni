@@ -101,13 +101,14 @@ import SocialuniUserDetailView from "socialuni-user-view-uni/src/views/user/Soci
 import SocialuniFollowTag from "../../components/SocialuniFollow/SocialuniFollowTag.vue";
 import TalkOperate from "../talk/talkOperate.vue";
 import MsgInput from "socialuni-ui/src/components/MsgInput.vue";
-// import TalkItem from "socialuni-community-ui/src/components/talkItem/TalkItem.vue";
+import TalkItem from "socialuni-community-ui/src/components/talkItem/TalkItem.vue";
+
 @toNative
 @Component({
   components: {
     MsgInput,
     TalkOperate,
-    // TalkItem,
+    TalkItem,
     QIcon,
     QButton,
     QNavbar,
