@@ -10,7 +10,7 @@
                :data-src="img"
                @click="previewImage(img)"
                :src="img"
-        ></img>
+        />
       </div>
     </div>
 

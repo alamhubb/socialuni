@@ -151,7 +151,7 @@ export default class SocialuniFollowView extends Vue {
   }
 
   autoChooseUseLocationQueryTalksHandler() {
-    this.tabsPageQueryUtil[this.currentTabIndex].nextPageQuery(this.tabs[this.currentTabIndex])
+    this.tabsPageQueryUtil[this.currentTabIndex].loadNextPage(this.tabs[this.currentTabIndex])
   }
 
   autoChooseUseLocationQueryTalks = CommonUtil.debounce(() => {

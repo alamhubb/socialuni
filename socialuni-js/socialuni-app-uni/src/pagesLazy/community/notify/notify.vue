@@ -4,7 +4,7 @@
       <div class="card-title row-between" @click="toTalkDetailVue(notify.talkId)">
         <div class="flex-row flex-1">
           <img class="card-title-avatar flex-none" mode="aspectFill"
-                 :src="notify.avatar"></img>
+                 :src="notify.avatar"/>
           <div class="flex-1">
             <div :class="notify.vipFlag?'color-red':'color-blue'" class="row-col-center py-mn">
               <span>{{ notify.nickname }}</span>
@@ -23,8 +23,7 @@
 
         <div class="flex-none" v-if="notify.replyImg">
           <img class="card-title-avatar size65" mode="aspectFill"
-                 :src="getTalkSmallImgUrl(notify.talkUserId,notify.replyImg)">
-          </img>
+                 :src="getTalkSmallImgUrl(notify.talkUserId,notify.replyImg)" />
         </div>
         <div v-else class="size65 bg-grey9 font-df pl-4 row-all-center flex-none">
           <span class="font-df text-ellipsis3">

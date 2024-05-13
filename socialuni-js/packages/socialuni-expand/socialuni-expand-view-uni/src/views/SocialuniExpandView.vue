@@ -96,7 +96,7 @@
                            :data-src="img"
                            @click.stop="previewImage(img,user)"
                            :src="img"
-                    ></img>
+                    />
                   </div>
                 </div>
                 <div class="mt-xs">
@@ -233,7 +233,7 @@ export default  class SocialuniExpandView extends Vue {
   }
 
   async autoChooseUseLocationQueryTalksHandler() {
-    await this.tabsPageQueryUtil[this.currentTabIndex].nextPageQuery()
+    await this.tabsPageQueryUtil[this.currentTabIndex].loadNextPage()
     for (const listDatum of this.tabsPageQueryUtil[this.currentTabIndex].listData) {
       listDatum.getUserContactBtnDisabled = false
     }

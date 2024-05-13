@@ -5,7 +5,7 @@ import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 export default class SocialuniPageQueryUtil<T extends SocialuniContentRO, Q> {
     queryQO: SocialuniPageQueryQO<T, Q> = new SocialuniPageQueryQO()
     api = null
-    loadMore:string = LoadMoreType.more
+    loadMore: string = LoadMoreType.more
     listData: T[] = []
 
     constructor(api: Function = null, queryData?: Q) {
@@ -43,7 +43,7 @@ export default class SocialuniPageQueryUtil<T extends SocialuniContentRO, Q> {
         }
     }
 
-    async nextPageQuery(queryData?: Q) {
+    async forceLoadNextPage(queryData?: Q) {
         if (this.loadMore === LoadMoreType.loading) {
             return
         }
@@ -67,5 +67,12 @@ export default class SocialuniPageQueryUtil<T extends SocialuniContentRO, Q> {
             this.loadMore = LoadMoreType.more
             throw (e)
         }
+    }
+
+    async loadNextPage(queryData?: Q) {
+        if (this.loadMore === LoadMoreType.noMore) {
+            return
+        }
+        this.forceLoadNextPage(queryData)
     }
 }

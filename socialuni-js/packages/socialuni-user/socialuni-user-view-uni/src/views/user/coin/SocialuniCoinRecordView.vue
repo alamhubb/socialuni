@@ -102,7 +102,7 @@ export default class SocialuniCoinRecordView extends Vue {
             await this.initQuery()
         })
         onReachBottom(() => {
-            this.tabsPageQueryUtil[this.currentTabIndex].nextPageQuery(this.tabs[this.currentTabIndex])
+            this.tabsPageQueryUtil[this.currentTabIndex].loadNextPage(this.tabs[this.currentTabIndex])
         })
 
         onLoad((params: { followType: string }) => {

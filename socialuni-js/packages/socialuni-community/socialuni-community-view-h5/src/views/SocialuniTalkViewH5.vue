@@ -261,7 +261,7 @@ export default class SocialuniTalkViewH5 extends Vue {
 
   nextPageQuery() {
     const talkQO = TalkQOFactory.getTalkQueryQO(this.tabName, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, socialuniTagModule.selectTagNames, socialCircleModule.circleName)
-    this.pageQueryUtil.nextPageQuery(talkQO)
+    this.pageQueryUtil.loadNextPage(talkQO)
   }
 
 

@@ -247,7 +247,7 @@ export default class SocialuniExpandViewH5 extends Vue {
   }
 
   async autoChooseUseLocationQueryTalksHandler() {
-    await this.tabsPageQueryUtil[this.currentTabIndex].nextPageQuery()
+    await this.tabsPageQueryUtil[this.currentTabIndex].loadNextPage()
     for (const listDatum of this.tabsPageQueryUtil[this.currentTabIndex].listData) {
       // listDatum.getUserContactBtnDisabled = false
     }

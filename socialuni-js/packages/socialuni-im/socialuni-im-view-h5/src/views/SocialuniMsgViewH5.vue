@@ -13,7 +13,7 @@
                               </span>
                               <img v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
                                      src="/static/img/crown.png"
-                                     @click="toVipVue"></img>-->
+                                     @click="toVipVue"/>-->
               </div>
 
               <div class="row-end-center"
@@ -49,7 +49,7 @@
                               </span>
                               <img v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
                                      src="/static/img/crown.png"
-                                     @click="toVipVue"></img>-->
+                                     @click="toVipVue"/>-->
               </div>
 
               <div class="row-start" @longpress="viewService.openMessageMoreHandleDialog(msg)">
