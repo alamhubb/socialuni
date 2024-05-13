@@ -21,9 +21,9 @@
           </q-enum-link>
         </el-menu>
         <div class="w600">
-          <q-loading></q-loading>
-<!--          <q-load-more></q-load-more>-->
-<!--          <q-icon icon="mdi-loading mdi-spin"></q-icon>-->
+
+          <!--          <q-load-more></q-load-more>-->
+          <!--          <q-icon icon="mdi-loading mdi-spin"></q-icon>-->
           <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
           <div v-for="(talk,index) in talksNew" :key="talk.id">
             <talk-item :talk="talk"
@@ -31,6 +31,8 @@
                        @delete-talk="deleteTalk"
             />
           </div>
+
+          <q-load-more class="my-sm" :status="pageQueryUtil.loadMore"></q-load-more>
 
           <msg-input class="w600"></msg-input>
         </div>

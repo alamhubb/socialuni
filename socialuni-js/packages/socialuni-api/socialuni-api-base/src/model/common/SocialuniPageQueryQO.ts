@@ -7,5 +7,4 @@ export default class SocialuniPageQueryQO<T extends SocialuniContentRO, Q> {
     pageSize = 10
     pageNum = 1
     queryData: Q = null
-    loadMore = LoadMoreType.more
 }
