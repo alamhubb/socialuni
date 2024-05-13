@@ -6,12 +6,15 @@ import TagStorageUtil from "../util/TagStorageUtil";
 
 class SocialuniTagModule {
     tags: TagVO[] = []
+    hotTags: TagVO[] = []
     tagTypes: TagTypeVO[] = []
     checkedTags: TagVO[] = []
     selectTag: TagVO = null
     selectTagName: string = null
     //最多存4个
     mineHistoryTagNames: string[] = TagStorageUtil.getTagNames()
+
+
 
     get selectTagNames() {
         if (this.selectTagName) {
@@ -40,7 +43,7 @@ class SocialuniTagModule {
     getHotTagsAction() {
         // 查询前20条，未读优先，如果没有未读，就是按时间排序
         return TagAPI.queryHotTagsAPI().then((res: any) => {
-            this.tags = res.data
+            this.hotTags = res.data
         })
     }
 

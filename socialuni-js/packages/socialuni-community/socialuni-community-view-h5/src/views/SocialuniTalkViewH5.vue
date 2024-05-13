@@ -4,10 +4,10 @@
        :infinite-scroll-delay="200"
   >
     <div class="mg-x-auto">
-      <div class="row-center">
+      <div class="row-center-start">
         <!--      <q-nav-menu/>-->
         <el-menu
-            class="w200 bd-radius flex-none br position-sticky top-0 h100p socialuni-community-view-left-menu mr-sm">
+            class="w200 bd-radius flex-none br position-sticky top-0 h-auto socialuni-community-view-left-menu mr-sm">
           <q-enum-link v-for="tab in talkTabs" :to="'/community?tab='+tab.name">
             <el-menu-item :index="tab.name">
               <q-icon icon="mdi-send" class="color-content mr-xs mdi-rotate-315" size="12"></q-icon>
@@ -36,6 +36,16 @@
           <q-load-more class="my-sm" :status="pageQueryUtil.loadMore"></q-load-more>
 
           <msg-input class="w600"></msg-input>
+        </div>
+        <div class="w300 ml-sm bg-white bd-radius pd position-sticky top-0">
+          <div>
+            <div v-for="tag in hotTagsTop10">
+              <div class="mt-sm color-blue_dark mr-sm font-18">
+                <span class="color-blue mr-nn">#</span>
+                {{ tag.name }}
+              </div>
+            </div>
+          </div>
         </div>
 
         <q-dialog ref="talkAddDialog" confirm-text="发布" @confirm="addTalk">
@@ -174,6 +184,11 @@ export default class SocialuniTalkViewH5 extends Vue {
     return socialCircleModule.mineCirclesTop10
   }
 
+  get hotTagsTop10() {
+    return socialuniTagModule.hotTags
+  }
+
+
   get talksNew() {
     return this.pageQueryUtil.listData
   }
@@ -237,6 +252,7 @@ export default class SocialuniTalkViewH5 extends Vue {
     })
     this.updateShowAd()
     socialCircleModule.getHotCirclesAction()
+    socialuniTagModule.getHotTagsAction()
   }
 
   nextPageQueryDebounce = CommonUtil.debounce(() => {
