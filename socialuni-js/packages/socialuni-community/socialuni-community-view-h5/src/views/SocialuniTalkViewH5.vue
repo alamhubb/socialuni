@@ -1,12 +1,12 @@
 <template>
-  <div class="h100p overflow-auto" v-infinite-scroll="scrollToLower" :infinite-scroll-immediate="false"
+  <div class="h100p overflow-auto pt-sm" v-infinite-scroll="scrollToLower" :infinite-scroll-immediate="false"
        :infinite-scroll-distance="200"
        :infinite-scroll-delay="200"
   >
-    <div class="mg-x-auto w1200">
+    <div class="mg-x-auto">
       <div class="row-center">
         <!--      <q-nav-menu/>-->
-        <el-menu class="w200 flex-none br position-sticky top-0 h100p socialuni-community-view-left-menu mr-sm">
+        <el-menu class="w200 bd-radius flex-none br position-sticky top-0 h100p socialuni-community-view-left-menu mr-sm">
           <q-enum-link v-for="tab in talkTabs" :to="'/community?tab='+tab.name">
             <el-menu-item :index="tab.name">
               <q-icon icon="mdi-send" class="color-content mr-xs mdi-rotate-315" size="12"></q-icon>
@@ -543,6 +543,6 @@ export default class SocialuniTalkViewH5 extends Vue {
 </script>
 <style>
 .socialuni-community-view-left-menu .el-menu-item {
-  font-size: 20px;
+  font-size: 18px;
 }
 </style>
