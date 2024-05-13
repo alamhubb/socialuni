@@ -32,9 +32,13 @@ class SocialTalkModule {
     userMinAge: number = TalkFilterUtil.getMinAgeFilter()
     userMaxAge: number = TalkFilterUtil.getMaxAgeFilter()
     userGender: string = TalkFilterUtil.getGenderFilter()
-    talkTabs: SocialuniTalkTabRO [] = TalkVueUtil.getTalkTabs()
     talkTabQueryUtils: SocialuniPageQueryUtil<TalkVO, TalkQueryVO, SocialuniTalkTabRO>[] = TalkVueUtil.getTalkTabQueryUtils()
     currentTabIndex: number = TalkVueUtil.getCurTalkTabIndex()
+
+    get talkTabs(): SocialuniTalkTabRO[] {
+        return this.talkTabQueryUtils.map(item => item.viewData)
+    }
+
 
     curTabName: string = '首页'
 
@@ -173,15 +177,14 @@ class SocialTalkModule {
                 talkTab.appDefaultTab = true
             }
         }
-        const newTabs = []
-        console.log(talkTabs)
+        const newTabQueryUtils = []
         //遍历后端返回的tabs数据
         for (const talkTab of talkTabs) {
             //如果前端缓存的tabs数据，包含与后台返回一致的
             const oldTab = this.talkTabs.find(item => item.name === talkTab.name)
             //则将旧tabs加入到新tabs中，并设置为系统默认tab，并且将后台返回的circle覆盖
             if (oldTab) {
-                newTabs.push(oldTab)
+                newTabQueryUtils.push(new SocialuniPageQueryUtil(SocialuniTalkAPI.queryTalksAPI, null, oldTab))
                 //后台返回的则为默认
                 oldTab.appDefaultTab = true
                 if (talkTab.circle) {
@@ -194,13 +197,13 @@ class SocialTalkModule {
                 //后台返回的则为默认
                 newTab.appDefaultTab = true
                 newTab.circle = talkTab.circle
-                newTabs.push(newTab)
+                newTabQueryUtils.push(new SocialuniPageQueryUtil(SocialuniTalkAPI.queryTalksAPI, null, newTab))
             }
         }
         //获取不为用户自定义的
-        const userCustomTabs = this.talkTabs.filter(item => !item.appDefaultTab)
-        newTabs.push(...userCustomTabs)
-        this.talkTabs = newTabs
+        const userCustomTabs = this.talkTabQueryUtils.filter(item => !item.viewData.appDefaultTab)
+        newTabQueryUtils.push(...userCustomTabs)
+        this.talkTabQueryUtils = newTabQueryUtils
     }
 
     updateCircleByTabIndex() {
@@ -209,11 +212,11 @@ class SocialTalkModule {
 else {
 this.setCircleName(null)
 }*/
-        const curTab = this.talkTabs.find((item, index) => index === this.currentTabIndex)
-        if (curTab.type === TalkTabType.circle_type) {
-            socialCircleModule.setCircleName(curTab.name)
-            SocialuniCircleAPI.queryCircleTalkTabInfoAPI(new CircleCreateChatQO(curTab.name, null)).then(res => {
-                curTab.circle = res.data
+        const curTab = this.talkTabQueryUtils.find((item, index) => index === this.currentTabIndex)
+        if (curTab.viewData.type === TalkTabType.circle_type) {
+            socialCircleModule.setCircleName(curTab.viewData.name)
+            SocialuniCircleAPI.queryCircleTalkTabInfoAPI(new CircleCreateChatQO(curTab.viewData.name, null)).then(res => {
+                curTab.viewData.circle = res.data
             })
         } else {
             socialCircleModule.setCircleName(null)
@@ -237,16 +240,16 @@ this.setCircleName(null)
                 return
             }
             const circleTabIndex = this.talkTabs.findIndex(item => (item.type === TalkTabType.circle_type) && item.name === circleName)
-            let circleTab: SocialuniTalkTabRO
+            let circleTab: SocialuniPageQueryUtil<TalkVO, TalkQueryVO, SocialuniTalkTabRO>
             if (circleTabIndex > -1) {
-                circleTab = this.talkTabs[circleTabIndex]
-                if (circleTab.appDefaultTab) {
+                circleTab = this.talkTabQueryUtils[circleTabIndex]
+                if (circleTab.viewData.appDefaultTab) {
                     return this.setCurTabIndexUpdateCircle(circleTabIndex)
                 } else {
                     //从当前位置删除
-                    this.talkTabs.splice(circleTabIndex, 1)
+                    this.talkTabQueryUtils.splice(circleTabIndex, 1)
                     //注释此行，如果存在此行则存在不查询的问题
-                    circleTab.firstLoad = false
+                    circleTab.queryQO.firstLoad = false
                 }
             } else {
                 circleTab = new TalkTabVO(circleName, TalkTabType.circle_type)
@@ -254,9 +257,9 @@ this.setCircleName(null)
             const appTas = this.talkTabs.filter(item => item.appDefaultTab)
 
             //添加到第四个位置
-            this.talkTabs.splice(appTas.length, 0, circleTab)
+            this.talkTabQueryUtils.splice(appTas.length, 0, circleTab)
             //最多保存了9个
-            this.talkTabs = this.talkTabs.slice(0, 9)
+            this.talkTabQueryUtils = this.talkTabQueryUtils.slice(0, 9)
             return this.setCurTabIndexUpdateCircle(appTas.length)
         }
         return this.setCurTabIndexUpdateCircle(1)
