@@ -1,12 +1,16 @@
 <template>
   <div>
-    <div class="row-between-center shadow-bottom index-sm px-smm h50 bg-white flex-none position-relative">
+    <div class="flex-row shadow-bottom index-sm px-smm h50 bg-white flex-none position-relative">
       <div class="flex-none row-col-center mr-40 bg-click" @click="toHome">
         <!--      <img src="@/assets/img/logo.jpg" class="h40" alt="logo">-->
-        <div class="font-19 font-bold">{{ title}}</div>
+        <div class="font-19 font-bold">{{ title }}</div>
       </div>
 
-      <div class="row-end-center">
+      <div class="flex-1 overflow-hidden">
+        <slot></slot>
+      </div>
+      <div class="flex-none row-end-center">
+
         <!--            <div class="flex-none row-col-center mr">
                         <a href="https://socialuni.cn" target="_blank" class="mr-sm md:mr bg-click">
                             <div class="row-all-center">官网文档</div>
@@ -26,6 +30,7 @@
                             </a>
                         </div>
                     </div>-->
+
         <div class="row-col-center">
           <!--                <input id="fileSelector" type="file" @change="uploadData"/>-->
           <!--                <el-button @click="uploadUserAvatarImg">test</el-button>-->
@@ -36,7 +41,6 @@
             <el-avatar shape="square" :src="mineUser.avatar"/>
           </div>
         </div>
-
 
         <el-dropdown v-if="mineUser" trigger="click">
           <el-icon :size="20" class="ml">
@@ -50,6 +54,7 @@
           </template>
         </el-dropdown>
       </div>
+
 
     </div>
 

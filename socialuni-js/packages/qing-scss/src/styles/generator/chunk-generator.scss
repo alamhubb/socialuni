@@ -2,7 +2,7 @@
   background: $color-white;
   border: $border-base;
   color: $color-content;
-  @extend .bd-radius-10;
+  @extend .bd-radius;
 }
 
 @each $key, $color in $colors-bg {
@@ -12,7 +12,7 @@
     background-color: $color;
     border: $border-base;
     border-color: $color;
-    @extend .bd-radius-10;
+    @extend .bd-radius;
   }
   .chunk-#{''+$key+''}_plain {
     //朴素主题，字体白色，其他主题色
@@ -20,7 +20,7 @@
     background-color: $color-white;
     border: $border-base;
     border-color: $color;
-    @extend .bd-radius-10;
+    @extend .bd-radius;
   }
   .chunk-#{''+$key+''}_light {
     //深色主题，字体白色，其他主题色
@@ -28,7 +28,7 @@
     background-color: mix($color, $color-white, 10%);
     border: $border-base;
     border-color: mix($color, $color-white, 20%);
-    @extend .bd-radius-10;
+    @extend .bd-radius;
   }
 }
 
