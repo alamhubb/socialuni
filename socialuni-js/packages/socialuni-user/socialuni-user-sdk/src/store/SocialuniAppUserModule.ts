@@ -64,6 +64,24 @@ class SocialuniAppUserModule {
             })
         ])
     }
+
+    async getMineUserMoreInfoAction() {
+        await Promise.all([
+            PhoneAPI.getMineUserPhoneNumAPI().then((res: any) => {
+                socialuniAppUserModule.setMineUserPhoneNum(res.data)
+            }),
+            SocialUserIdentityAPI.getMineUserIdentityStatusAPI(),
+            FollowAPI.getMineUserFollowDetailAPI().then((res: any) => {
+                this._mineUserFansDetail = res.data
+            }),
+            SocialuniUserExpandAPI.getMineUserExpandDetailAPI().then(res => {
+                this._mineUserExpandDetail = res.data
+            }),
+            SocialuniCoinAPI.getUserCoinInfoAPI().then(res => {
+                this.mineUserCoinInfo = res.data
+            })
+        ])
+    }
 }
 
 export const socialuniAppUserModule: UnwrapNestedRefs<SocialuniAppUserModule> = reactive(new SocialuniAppUserModule())

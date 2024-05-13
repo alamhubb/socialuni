@@ -4,6 +4,7 @@ import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
 import {socialuniUserModule} from "../store/SocialuniUserModule";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import SocialuniAppService from "socialuni-app-sdk/src/service/SocialuniAppService";
+import {socialuniAppUserModule} from "../store/SocialuniAppUserModule";
 
 export default class UserService {
     static async getAppLunchData() {
