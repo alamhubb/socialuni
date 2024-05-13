@@ -6,7 +6,8 @@
     <div class="mg-x-auto">
       <div class="row-center">
         <!--      <q-nav-menu/>-->
-        <el-menu class="w200 bd-radius flex-none br position-sticky top-0 h100p socialuni-community-view-left-menu mr-sm">
+        <el-menu
+            class="w200 bd-radius flex-none br position-sticky top-0 h100p socialuni-community-view-left-menu mr-sm">
           <q-enum-link v-for="tab in talkTabs" :to="'/community?tab='+tab.name">
             <el-menu-item :index="tab.name">
               <q-icon icon="mdi-send" class="color-content mr-xs mdi-rotate-315" size="12"></q-icon>
@@ -36,6 +37,11 @@
 
           <msg-input class="w600"></msg-input>
         </div>
+
+        <q-dialog ref="talkAddDialog" confirm-text="发布" @confirm="addTalk">
+          <talk-add-view ref="talkAddView"></talk-add-view>
+        </q-dialog>
+
         <talk-operate @deleteTalk="deleteTalk"></talk-operate>
 
         <social-talk-filter-dialog ref="talkFilterDialog"
@@ -85,10 +91,16 @@ import QNavMenu from "qing-ui-h5/src/components/QNavMenu.vue";
 import CommunityEventConst from "socialuni-community-sdk/src/constant/CommunityEventConst";
 import SocialuniCommentInputDialog from "./SocialuniCommentInputDialog.vue";
 import MsgInput from "socialuni-ui/src/components/MsgInput.vue";
+import QDialog from "qing-ui-h5/src/components/QDialog.vue";
+import TalkAddView from "./TalkAddView.vue";
+
+
 // todo 后台可控制是否显示轮播图
 @toNative
 @Component({
   components: {
+    TalkAddView,
+    QDialog,
     SocialuniCommentInputDialog,
     QNavMenu,
     QLoading,
@@ -103,6 +115,8 @@ import MsgInput from "socialuni-ui/src/components/MsgInput.vue";
 export default class SocialuniTalkViewH5 extends Vue {
   $refs: {
     commentDialog: SocialuniCommentInputDialog
+    talkAddDialog: QDialog
+    talkAddView: TalkAddView
   }
 
   get inputContentFocus() {
@@ -171,6 +185,19 @@ export default class SocialuniTalkViewH5 extends Vue {
     }
   }
 
+  created() {
+    console.log('jlksajdkflasjlkfs')
+    console.log('chufale')
+    console.log('chufale jianting')
+    CommonEventUtil.on(CommunityEventConst.socialuniTalkAddEvent, () => {
+      console.log('chufale jianting')
+      this.$refs.talkAddDialog.open()
+    })
+  }
+
+  addTalk(){
+    this.$refs.talkAddView.addTalk()
+  }
 
   mounted() {
     this.initLogic()

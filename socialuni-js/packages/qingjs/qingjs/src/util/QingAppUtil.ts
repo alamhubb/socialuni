@@ -7,10 +7,16 @@ import {SocialuniRouterUtilInterface} from "../interface/SocialuniRouterUtilInte
 import {SocialuniAlertUtilInterface} from "../interface/SocialuniAlertUtilInterface";
 import {SocialuniToastUtilInterface} from "../interface/SocialuniToastUtilInterface";
 import {SocialuniNativeUtilInterface} from "../interface/SocialuniNativeUtilInterface";
+import {SocialuniLodingInterface} from "../interface/SocialuniLodingInterface";
+import QingLoadingUtil from "./QingLoadingUtil";
 
 export default class QingAppUtil {
     static get NativeUtil(): SocialuniNativeUtilInterface {
         return QingAppNativeUtil.nativeUtil
+    }
+
+    static get loadingUtil(): SocialuniLodingInterface {
+        return QingLoadingUtil.nativeUtil
     }
 
     static get AlertUtil(): SocialuniAlertUtilInterface {

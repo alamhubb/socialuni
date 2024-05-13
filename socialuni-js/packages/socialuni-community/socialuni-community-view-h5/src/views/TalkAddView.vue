@@ -21,7 +21,7 @@
       </q-navbar>-->
       <q-city-picker v-model="showCityDialog" :district="district" @confirm="cityChange"></q-city-picker>
       <div class="px-smm py-sm">
-        <textarea class="h140 w100p bd-radius pd-sm bd-sub resize-none" :maxlength="200"
+        <textarea class="h140 w100p bd-radius pd-sm bd-tip resize-none" :maxlength="200"
                   placeholder="禁止发布未成年人、违法乱纪、涉污涉黄、暴露不雅、广告等内容，发布违规内容将会被封号处理！"
                   v-model.trim="talkContent"
                   :show-confirm-bar="false"
@@ -122,6 +122,7 @@
       </div>
 
       <social-circle-picker ref="circleSearch" @change="circleChange"></social-circle-picker>
+
     </div>
   </div>
 </template>
@@ -159,6 +160,7 @@ import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
 import SocialCircleRO from "socialuni-api-base/src/model/community/circle/SocialCircleRO";
 import DomFile from "qingjs/src/model/DomFile";
 import {onMounted} from "vue";
+import QingLoadingUtil from "qingjs/src/util/QingLoadingUtil";
 
 @toNative
 @Component({
@@ -419,7 +421,7 @@ export default class TalkAddView extends Vue {
 
 
   async addTalkHandler() {
-    uni.showLoading({title: '发布中'})
+    QingAppUtil.loadingUtil.loading('发布中')
     this.publishTalk()
   }
 
@@ -433,11 +435,12 @@ export default class TalkAddView extends Vue {
       } else {
         socialCircleModule.setCircleName(this.circleName)
       }
-      CommunityPageUtil.reLaunchTalkPage()
+      //todo uni类型，采用其他方式
+      // CommunityPageUtil.reLaunchTalkPage()
       // RouterUtil.reLaunch(CommunityPagePath.talk + '?load=true')
     } finally {
       this.buttonDisabled = false
-      uni.hideLoading()
+      QingAppUtil.loadingUtil.hideLoading()
       this.cosAuthRO = null
     }
   }

@@ -2,10 +2,13 @@
   <div class="h100p overflow-hidden flex-col bg-default">
     <s-user-nav-bar>
       <div class="row-end-center h100p mr">
-        <q-button primary @click="$refs.talkAddDialog.open()">发帖</q-button>
+        <q-button primary @click="emitTalkAdd">发帖</q-button>
       </div>
     </s-user-nav-bar>
 
+    <div class="flex-1 overflow-hidden">
+      <RouterView/>
+    </div>
     <!--  <div class="h100p overflow-hidden flex-col bg-default">
         <s-user-nav-bar>
 
@@ -13,27 +16,12 @@
           </div>
         </s-user-nav-bar>-->
 
-    <!--    <div class="flex-1 overflow-hidden">-->
-    <!--           :infinite-scroll-delay="500" -->
-    <!--      <div class="h100p overflow-auto row-center"-->
-    <!--    <q-scroll class="flex-1 overflow-auto" @load="scrollToLower" :distance="200" :interval="1000">
-          <div class="row-center">
-            <q-nav-menu class="h100p w150 flex-none br position-sticky top-0" :menus="menus"/>
-            <div class="w1000">
-              <RouterView/>
-            </div>
-          </div>
-        </q-scroll>-->
 
     <!--    <div class="flex-1 overflow-hidden" v-infinite-scroll="scrollToLower" :infinite-scroll-immediate="false"
              :infinite-scroll-distance="200"
              :infinite-scroll-delay="2000">
           <RouterView/>
         </div>-->
-
-    <q-dialog ref="talkAddDialog">
-      <talk-add-view></talk-add-view>
-    </q-dialog>
     <!--    <div class="flex-1 overflow-auto">-->
     <!--      <div class="mg-x-auto w1200">-->
     <!--        <RouterView/>-->
@@ -62,11 +50,11 @@ import QScroll from "qing-ui/src/components/QScroll.vue";
 import QButton from "qing-ui/src/components/QButton.vue";
 import CommonUtil from "qing-util/src/util/CommonUtil.ts";
 import QDialog from "qing-ui-h5/src/components/QDialog.vue";
-import TalkAddView from "@/views/TalkAddView.vue";
+import CommunityEventConst from "socialuni-community-sdk/src/constant/CommunityEventConst.ts";
 
 @toNative
 @Component({
-  components: {SUserNavBar, QNavMenu, QButton, QScroll, QDialog, TalkAddView}
+  components: {SUserNavBar, QNavMenu, QButton, QScroll, QDialog}
 })
 export default class App extends Vue {
 
@@ -89,6 +77,10 @@ export default class App extends Vue {
     console.log('gundongdao dibu le ')
     console.log(new Date().getTime())
     CommonEventUtil.emit('appScrollToLower')
+  }
+
+  emitTalkAdd() {
+    CommonEventUtil.emit(CommunityEventConst.socialuniTalkAddEvent)
   }
 }
 </script>
