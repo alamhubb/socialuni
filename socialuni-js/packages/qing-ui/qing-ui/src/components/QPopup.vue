@@ -19,8 +19,8 @@
             </slot>
           </div>
           <div class="flex-row flex-none px-sm" v-if="!hideButton">
-            <button v-if="!hideConfirm" @click="confirm" theme text>{{ confirmText }}</button>
-            <button class="ml-sm" v-if="!hideCancel" @click="cancel" text info>{{ cancelText }}</button>
+            <q-button v-if="!hideConfirm" @click="confirm" theme text>{{ confirmText }}</q-button>
+            <q-button class="ml-sm" v-if="!hideCancel" @click="cancel" text info>{{ cancelText }}</q-button>
           </div>
         </div>
         <slot></slot>
@@ -31,6 +31,7 @@
 <script lang="ts">
 import {Component, Emit, Model, Prop, Vue, toNative} from 'vue-facing-decorator'
 import QModel from "./QModel.vue";
+import QButton from "./QButton.vue";
 
 /*
 显示出来已经选了的城市，给她画上钩
@@ -38,7 +39,7 @@ import QModel from "./QModel.vue";
 @toNative
 @Component({
   components: {
-    QModel
+    QModel, QButton
   }
 })
 export default class QPopup extends Vue {

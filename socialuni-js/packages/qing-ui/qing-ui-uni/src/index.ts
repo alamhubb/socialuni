@@ -1,10 +1,10 @@
 import {App} from "vue";
-import QingScss from 'qing-scss/src/index'
 import "./styles/index.scss";
+import QingUi from "qing-ui/src";
 
 const QingUiUni = {
     async install(app: App) {
-        app.use(QingScss)
+        app.use(QingUi)
     }
 }
 
