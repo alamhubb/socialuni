@@ -14,7 +14,7 @@ if (IN_PRODUCTION) {
             // rejected: true,
             // require('@fullhuman/postcss-purgecss')({
             // content: ['./public/**/*.html', './src/**/*.vue'],
-            content: ['./public/**/*.html', './node_modules/socialuni-*/**/*.scss', './node_modules/@dcloudio/**/*.scss', './node_modules/@dcloudio/**/*.vue', './node_modules/socialuni-*/**/*.vue', './src/**/*.vue', './src/**/*.scss'],
+            content: ['./public/**/*.html', './node_modules/socialuni-*/**/*.scss', './node_modules/@dcloudio/**/*.scss', './node_modules/@dcloudio/**/*.vue', './node_modules/socialuni-*/**/*.vue', './node_modules/qing-*/**/*.vue', './src/**/*.vue', './src/**/*.scss'],
             defaultExtractor(content) {
                 const contentWithoutStyleBlocks = content.replace(
                     /<style[^]+?<\/style>/gi,
