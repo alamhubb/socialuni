@@ -2,7 +2,10 @@ package com.socialuni.social.admin.config;
 
 import com.socialuni.social.admin.facede.AdminDevAccountFacade;
 import com.socialuni.social.common.api.constant.ErrorCode;
+import com.socialuni.social.common.api.constant.SocialuniSystemConst;
+import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialNotLoginException;
+import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.common.sdk.utils.RedisUtil;
 import com.socialuni.social.tance.sdk.enumeration.SocialFeignHeaderName;
@@ -48,27 +51,25 @@ public class WebInterceptor extends SocialuniWebInterceptor {
         String ipKey = requestLogDO.getIp();
         String uri = requestLogDO.getUri();
 
-        Object keyCountObj = redisUtil.get(ipKey);
-
-        //如果已经有了赋值
-        if (keyCountObj != null) {
+        if (SocialuniSystemConst.getIsProdEnv()) {
+            //限制3分钟访问50次
             long expireTime = redisUtil.getExpire(ipKey);
-            if (expireTime > 0) {
+            Object keyCountObj = redisUtil.get(ipKey);
+            if (keyCountObj == null || expireTime < 0) {
+                redisUtil.set(ipKey, 1, 180);
+            } else {
                 int count = (Integer) keyCountObj;
-                //限制1分钟访问50次
-                if (count > 200) {
+                if (count > 50) {
+                    //永久封禁
+                    redisUtil.set(ipKey, 100, 0);
                     //这里只提示未登录
                     res.setStatus(ErrorCode.IP_LIMIT_ERROR);
-                    return false;
+                    throw new SocialSystemException("访问频繁，请联系客服QQ:491369310");
                 }
                 //否则访问次数加1
                 count = count + 1;
                 redisUtil.set(ipKey, count, expireTime);
-            } else {
-                redisUtil.set(ipKey, 1, 60);
             }
-        } else {
-            redisUtil.set(ipKey, 1, 60);
         }
 
         if ((request.getMethod().equals(RequestMethod.OPTIONS.name())

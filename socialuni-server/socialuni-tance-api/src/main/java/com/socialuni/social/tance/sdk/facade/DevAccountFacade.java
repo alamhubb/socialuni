@@ -160,6 +160,14 @@ public class DevAccountFacade {
         return getDevAccountBySecretKeyNotNull(secretKey);
     }
 
+    public static Integer getDevIdAllowNull() {
+        DevAccountModel devAccountModel = getDevAccountAllowNull();
+        if (devAccountModel == null) {
+            return null;
+        }
+        return devAccountModel.getId();
+    }
+
 
     public static DevAccountModel getDevAccountBySecretKeyNotNull(String secretKey) {
         if (StringUtils.isEmpty(secretKey)) {
