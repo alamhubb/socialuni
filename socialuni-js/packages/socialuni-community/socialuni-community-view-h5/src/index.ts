@@ -4,6 +4,7 @@ import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule
 import {App} from "vue";
 import {Vue} from "vue-facing-decorator";
 import SocialuniTalkViewH5 from "./views/SocialuniTalkViewH5.vue";
+import CommonUtil from "qing-util/src/util/CommonUtil";
 
 class SocialuniCommunityH5Plugin implements SocialuniPlugin {
 
@@ -30,6 +31,15 @@ const SocialuniCommunityH5 = {
         })
         console.log(socialuniPluginsModule.router.getRoutes())
         socialuniPluginsModule.addPlugin(socialuniCommunityH5Plugin)
+
+        CommonUtil.delayTime(100).then(() => {
+            console.log(socialuniPluginsModule.router.getRoutes().length)
+            console.log(socialuniPluginsModule.router.getRoutes().map(item => item.path))
+            console.log('chufale')
+            console.log('333')
+            // this.defaultActive = '/expand'
+            socialuniPluginsModule.router.push('/community')
+        })
     }
 }
 

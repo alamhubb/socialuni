@@ -36,10 +36,4 @@ const router = createRouter({
     routes: constantRoutes
 })
 
-router.beforeEach((to, from, next) => {
-    console.log(44444)
-    console.log(to.path)
-    next()
-})
-
 export default router

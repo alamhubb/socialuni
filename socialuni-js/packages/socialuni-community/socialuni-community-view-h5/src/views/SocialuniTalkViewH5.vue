@@ -7,7 +7,7 @@
       <div class="row-center-start">
         <!--      <q-nav-menu/>-->
         <el-menu
-            class="w200 bd-radius flex-none br position-sticky top-0 h-auto socialuni-community-view-left-menu mr-sm">
+            class="w200 bd-none bd-radius flex-none br position-sticky top-0 h-auto socialuni-community-view-left-menu mr-sm">
           <q-enum-link v-for="tab in talkTabs" :to="'/community?tab='+tab.name">
             <el-menu-item :index="tab.name">
               <q-icon icon="mdi-send" class="color-content mr-xs mdi-rotate-315" size="12"></q-icon>
@@ -37,9 +37,8 @@
 
           <msg-input class="w600"></msg-input>
         </div>
-        <div class="w300 ml-sm">
-
-          <div class="w300 bg-white bd-radius pd position-sticky top-0">
+        <div class="w300 ml-sm position-sticky top-0">
+          <div class="w300 bg-white bd-radius pd">
             <div>
               <div v-for="tag in hotTagsTop10">
                 <div class="mt-sm color-blue_dark mr-sm font-18">
@@ -50,11 +49,11 @@
             </div>
           </div>
           <div class="pd-sm font-18 col-all-center mt">
-            <div><a href="https://beian.miit.gov.cn/" target="_blank">冀ICP备19028721号-6</a></div>
+            <div><a href="https://beian.miit.gov.cn/" target="_blank">冀ICP备19028721号-7</a></div>
             <el-divider class="my-xs"/>
 
             <div>
-              ©2023-2024 维洛斯
+              ©2023-2024 鹿森网
             </div>
 
 

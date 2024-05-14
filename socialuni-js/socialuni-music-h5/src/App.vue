@@ -61,12 +61,7 @@ export default class App extends Vue {
   mounted() {
     console.log('chufale')
     console.log('222')
-    CommonUtil.delayTime(100).then(() => {
-      console.log('chufale')
-      console.log('333')
-      // this.defaultActive = '/expand'
-      this.$router.push('/community')
-    })
+
   }
 
   get menus() {
