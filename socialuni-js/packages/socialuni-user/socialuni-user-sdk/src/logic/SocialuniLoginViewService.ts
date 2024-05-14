@@ -40,7 +40,9 @@ export default class SocialuniLoginViewService extends SocialuniLoginFormService
         this.loginData.checkPhoneNum()
         this.loginData.checkPassword()
         this.loginData.checkAuthCode()
-        this.checkContractChecked()
+        if (!socialuniUserModule.hasUser) {
+            this.checkContractChecked()
+        }
         this.bindBtnDisabled = true
 
         const password = await PasswordUtil.rsaEncode(socialuniConfigModule.allConfig.publicKey, this.loginData.password)

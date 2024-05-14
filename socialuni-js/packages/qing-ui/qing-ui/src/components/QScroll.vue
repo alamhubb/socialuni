@@ -1,5 +1,5 @@
 <template>
-  <div ref="scroll" class="q-scroll overflow-auto">
+  <div ref="scroll" class="q-scroll overflow-auto h100p">
     <slot></slot>
   </div>
 </template>

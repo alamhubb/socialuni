@@ -33,6 +33,8 @@ if (IN_PRODUCTION) {
                 /data-v-.*/,
                 /uicon-.*/,
                 /uniui-.*/,
+                /row-.*/,
+                /col-.*/,
                 /q-.*/,
                 /u-.*/,
                 /uni-.*/,

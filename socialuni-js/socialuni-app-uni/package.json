@@ -1,7 +1,6 @@
 {
   "name": "socialuni-example-uni",
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev:app": "uni -p app",
     "dev:app-android": "uni -p app-android",
