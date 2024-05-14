@@ -1,6 +1,9 @@
 <template>
     <div class="h100vh flex-col">
-        <q-navbar class="flex-none">话题筛选</q-navbar>
+      <div class="flex-none row-col-center px">
+        话题筛选
+      </div>
+<!--        <q-navbar class="flex-none">话题筛选</q-navbar>-->
         <div class="overflow-hidden flex-1 flex-col">
             <div class="cu-bar bg-white search flex-none">
                 <div class="search-form round">
@@ -72,12 +75,12 @@
 import {Component, Emit, Prop, Vue, Watch, toNative} from 'vue-facing-decorator'
 import TagVO from 'socialuni-api-base/src/model/community/tag/TagVO'
 import QIcon from 'qing-ui/src/components/QIcon.vue'
-import QNavbar from 'qing-ui-uni/src/components/QNavbar/QNavbar.vue'
+// import QNavbar from 'qing-ui-uni/src/components/QNavbar/QNavbar.vue'
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 
 @toNative
 @Component({
-    components: {QNavbar, QIcon}
+    components: {QIcon}
 })
 export default class TalkAddTagSearch extends Vue {
     searchContent = ''
