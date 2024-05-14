@@ -5,6 +5,11 @@ import socialuniPlatformAutoImportPlugin from "vite-plugin-socialuni-platform-au
 
 // https://vitejs.dev/config/
 export default defineConfig({
+    define: {
+        __DEV__: false,
+        __FEATURE_PROD_DEVTOOLS__: false,
+        __BROWSER__: true,
+    },
     plugins: [
         vue(),
         socialuniPlatformAutoImportPlugin()

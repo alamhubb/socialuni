@@ -20,13 +20,7 @@ const SocialuniCommunityH5 = {
         socialuniPluginsModule.router.addRoute({
             path: '/community',
             name: 'community',
-            component: () => {
-                if (view) {
-                    return view
-                } else {
-                    return SocialuniTalkViewH5
-                }
-            },
+            component: SocialuniTalkViewH5,
             meta: {title: '社区'},
         })
         console.log(socialuniPluginsModule.router.getRoutes())
@@ -38,6 +32,7 @@ const SocialuniCommunityH5 = {
             console.log('chufale')
             console.log('333')
             // this.defaultActive = '/expand'
+            console.log('zhixingle push')
             socialuniPluginsModule.router.push('/community')
         })
     }

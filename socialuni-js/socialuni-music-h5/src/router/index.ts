@@ -1,6 +1,6 @@
-import {createRouter, createWebHistory} from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import MessageView from "@/views/chat/MessageView.vue";
+import {createRouter, createWebHistory} from "@/plugins/router/src";
 // import MessageView from "@/views/chat/MessageView.tsx";
 
 export const constantRoutes = [
