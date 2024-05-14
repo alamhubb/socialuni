@@ -1,7 +1,7 @@
 <template>
   <div class="h100p overflow-hidden flex-col bg-default">
-    <s-user-nav-bar title="鹿森">
-<!--    <s-user-nav-bar title="鹿森" :logo="require('@/assets/logo.jpg')">-->
+    <!--        <s-user-nav-bar title="鹿森">-->
+    <s-user-nav-bar title="鹿森" :logo="$getImageUrl('logo.jpg')">
       <div class="row-end-center h100p mr">
         <q-button primary @click="emitTalkAdd">发帖</q-button>
       </div>
@@ -52,7 +52,7 @@ import QButton from "qing-ui/src/components/QButton.vue";
 import QDialog from "qing-ui-h5/src/components/QDialog.vue";
 import CommunityEventConst from "socialuni-community-sdk/src/constant/CommunityEventConst.ts";
 
-console.log(require)
+console.log(123123)
 
 @toNative
 @Component({

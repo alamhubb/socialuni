@@ -36,6 +36,8 @@
     "socialuni-user-api": "../packages/socialuni-user-api",
     "socialuni-user-sdk": "../packages/socialuni-user-sdk",
     "socialuni-user-view-h5": "../packages/socialuni-user/socialuni-user-view-h5",
+    "vite-plugin-require": "^1.1.14",
+    "vite-plugin-require-transform": "^1.0.21",
     "vue": "^3.3.8",
     "vue-drag-resize3": "../packages/vue-drag-resize3",
     "vue-router": "^4.2.0",
