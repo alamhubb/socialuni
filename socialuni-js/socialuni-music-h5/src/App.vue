@@ -1,8 +1,10 @@
 <template>
-  <div class="h100p overflow-hidden flex-col bg-default">
+  <div class="h100p overflow-hidden flex-col bg-default socialuni-app-h5">
     <!--        <s-user-nav-bar title="鹿森">-->
     <s-user-nav-bar title="鹿森" :logo="$getImageUrl('logo.jpg')">
-      <div class="row-end-center h100p mr">
+      <div class="row-between-center h100p mr">
+        <div class="w10"></div>
+        <q-nav-menu class="socialuni-navbar-h5 w700"></q-nav-menu>
         <q-button primary @click="emitTalkAdd">发帖</q-button>
       </div>
     </s-user-nav-bar>
@@ -81,3 +83,8 @@ export default class App extends Vue {
   }
 }
 </script>
+<style>
+.socialuni-navbar-h5 .el-menu-item {
+  font-size: 18px;
+}
+</style>

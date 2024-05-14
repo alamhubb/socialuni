@@ -7,7 +7,8 @@
       </div>
 
       <div class="flex-1 overflow-hidden">
-        <slot></slot>
+        <slot>
+        </slot>
       </div>
       <div class="flex-none row-end-center">
 

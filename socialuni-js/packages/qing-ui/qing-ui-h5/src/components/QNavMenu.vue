@@ -1,5 +1,5 @@
 <template>
-  <el-menu :default-active="defaultActive">
+  <el-menu :default-active="defaultActive" v-bind="$attrs" mode="horizontal">
     <template v-for="menu in menus">
       <q-enum-link v-if="!menu?.meta?.hidden" :to="menu.path">
         <el-menu-item :index="menu.path">
