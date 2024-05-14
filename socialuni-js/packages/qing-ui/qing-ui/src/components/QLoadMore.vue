@@ -1,8 +1,8 @@
 <template>
-  <div class="row-all-center">
+  <div class="row-all-center cursor-pointer">
     <q-loading v-show="status === loadMoreType.loading"></q-loading>
     <span  v-show="status === loadMoreType.more">点击加载更多</span>
-    <span  v-show="status === loadMoreType.noMore">没有更多数据了,点击刷新</span>
+    <span  v-show="status === loadMoreType.noMore">没有更多数据了,点击加载</span>
   </div>
 </template>
 
