@@ -3,25 +3,26 @@
        :infinite-scroll-distance="200"
        :infinite-scroll-delay="200"
   >
-    <div class="mg-x-auto">
-      <div class="row-center-start">
+      <div class="row-col-start">
         <!--      <q-nav-menu/>-->
-        <el-menu
-            class="w200 bd-none bd-radius flex-none br position-sticky top-0 h-auto socialuni-community-view-left-menu mr-sm">
-          <q-enum-link v-for="tab in talkTabs" :to="'/community?tab='+tab.name">
-            <el-menu-item :index="tab.name">
-              <q-icon icon="mdi-send" class="color-content mr-xs mdi-rotate-315" size="12"></q-icon>
-              {{ tab.name }}
-            </el-menu-item>
-          </q-enum-link>
-          <q-enum-link v-for="circle in mineCirclesTop10" :to="'/community?circle='+circle">
-            <el-menu-item :index="circle">
-              <q-icon icon="mdi-send" class="color-content mr-xs mdi-rotate-315" size="12"></q-icon>
-              {{ circle }}
-            </el-menu-item>
-          </q-enum-link>
-        </el-menu>
-        <div class="w600">
+        <div class="flex-1 row-end-start position-sticky top-0">
+          <el-menu
+              class="w200 bd-none bd-radius flex-none br socialuni-community-view-left-menu mr-sm">
+            <q-enum-link v-for="tab in talkTabs" :to="'/community?tab='+tab.name">
+              <el-menu-item :index="tab.name">
+                <q-icon icon="mdi-send" class="color-content mr-xs mdi-rotate-315" size="12"></q-icon>
+                {{ tab.name }}
+              </el-menu-item>
+            </q-enum-link>
+            <q-enum-link v-for="circle in mineCirclesTop10" :to="'/community?circle='+circle">
+              <el-menu-item :index="circle">
+                <q-icon icon="mdi-send" class="color-content mr-xs mdi-rotate-315" size="12"></q-icon>
+                {{ circle }}
+              </el-menu-item>
+            </q-enum-link>
+          </el-menu>
+        </div>
+        <div class="flex-none w600">
 
           <!--          <q-load-more></q-load-more>-->
           <!--          <q-icon icon="mdi-loading mdi-spin"></q-icon>-->
@@ -37,39 +38,41 @@
 
           <msg-input class="w600"></msg-input>
         </div>
-        <div class="w300 ml-sm position-sticky top-0">
-          <div class="w300 bg-white bd-radius pd">
-            <div>
-              <div v-for="tag in hotTagsTop10">
-                <div class="mt-sm color-blue_dark mr-sm font-18">
-                  <span class="color-blue mr-nn">#</span>
-                  {{ tag.name }}
+        <div class="flex-1 position-sticky top-0">
+          <div class="w300 ml-sm">
+            <div class="w300 bg-white bd-radius pd">
+              <div>
+                <div v-for="tag in hotTagsTop10">
+                  <div class="mt-sm color-blue_dark mr-sm font-18">
+                    <span class="color-blue mr-nn">#</span>
+                    {{ tag.name }}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="pd-sm font-18 col-all-center mt">
-            <div><a href="https://beian.miit.gov.cn/" target="_blank">冀ICP备19028721号-7</a></div>
-            <el-divider class="my-xs"/>
+            <div class="pd-sm font-18 col-all-center mt">
+              <div><a href="https://beian.miit.gov.cn/" target="_blank">冀ICP备19028721号-7</a></div>
+              <el-divider class="my-xs"/>
 
-            <div>
-              ©2023-2024 鹿森
-            </div>
-
-
-            <el-divider class="my-xs"/>
+              <div>
+                ©2023-2024 鹿森
+              </div>
 
 
-            <div>
-              清池科技滦州市有限公司
-            </div>
+              <el-divider class="my-xs"/>
 
 
-            <el-divider class="my-xs"/>
-            <div> 客服QQ：
-              <a target="_blank"
-                 href="https://wpa.qq.com/msgrd?v=3&amp;uin=491369310&amp;site=qq&amp;menu=yes">
-                491369310 </a>
+              <div>
+                清池科技滦州市有限公司
+              </div>
+
+
+              <el-divider class="my-xs"/>
+              <div> 客服QQ：
+                <a target="_blank"
+                   href="https://wpa.qq.com/msgrd?v=3&amp;uin=491369310&amp;site=qq&amp;menu=yes">
+                  491369310 </a>
+              </div>
             </div>
           </div>
         </div>
@@ -84,7 +87,6 @@
                                    @confirm="startPullDown"></social-talk-filter-dialog>
         <!--      <socialuni-comment-input-dialog ref="commentDialog"></socialuni-comment-input-dialog>-->
       </div>
-    </div>
   </div>
 </template>
 

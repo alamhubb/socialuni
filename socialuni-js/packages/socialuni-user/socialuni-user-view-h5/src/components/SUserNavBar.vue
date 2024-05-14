@@ -1,16 +1,19 @@
 <template>
   <div>
-    <div class="flex-row shadow-bottom index-sm px-smm h50 bg-white flex-none position-relative">
-      <div class="flex-none row-col-center mr-40 bg-click" @click="toHome">
-        <img v-if="logo" :src="logo" class="h40 mr-sm" alt="logo">
-        <div class="font-19 font-bold">{{ title }}</div>
-      </div>
+    <div class="row-between-center shadow-bottom index-sm px-smm h50 bg-white flex-none position-relative">
+      <slot name="title">
+        <div class="flex-none row-end-center mr-40 use-click" @click="toHome">
+          <img v-if="logo" :src="logo" class="h44 mr-sm" alt="logo">
+          <div class="font-22 font-bold">{{ title }}</div>
+        </div>
+      </slot>
 
-      <div class="flex-1 overflow-hidden">
-        <slot>
-        </slot>
-      </div>
-      <div class="flex-none row-end-center">
+      <slot>
+        <div class="flex-1 overflow-hidden h100p">
+        </div>
+      </slot>
+
+      <div class="flex-1 row-end-center">
 
         <!--            <div class="flex-none row-col-center mr">
                         <a href="https://socialuni.cn" target="_blank" class="mr-sm md:mr bg-click">

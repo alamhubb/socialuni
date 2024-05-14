@@ -5,23 +5,23 @@ import {createRouter, createWebHistory} from "vue-router";
 
 export const constantRoutes = [
     {
-        path: '/',
-        name: 'message',
-        component: MessageView,
-        meta: {title: '消息'},
-    },
-    {
         path: '/home',
         name: 'home',
         component: HomeView,
         meta: {title: '首页'},
     },
     {
-        path: '/mine',
-        name: 'mine',
-        component: () => import('@/views/user/mine.vue'),
-        meta: {title: '我的'},
+        path: '/',
+        name: 'message',
+        component: MessageView,
+        meta: {title: '消息'},
     },
+    // {
+    //     path: '/mine',
+    //     name: 'mine',
+    //     component: () => import('@/views/user/mine.vue'),
+    //     meta: {title: '我的'},
+    // },
     {
         path: '/404',
         component: () => import('@/views/404/404.vue'),

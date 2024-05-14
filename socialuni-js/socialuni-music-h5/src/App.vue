@@ -1,9 +1,16 @@
 <template>
   <div class="h100p overflow-hidden flex-col bg-default socialuni-app-h5">
     <!--        <s-user-nav-bar title="鹿森">-->
-    <s-user-nav-bar title="鹿森" :logo="$getImageUrl('logo.jpg')">
-      <div class="row-between-center h100p mr">
-        <div class="w10"></div>
+    <s-user-nav-bar>
+      <template #title>
+        <div class="flex-1 row-col-center">
+          <img :src="$getImageUrl('logo.jpg')" class="ml-50 h44 mr-sm cursor-pointer flex-none" alt="logo" @click="toHome">
+          <div class="font-22 font-bold cursor-pointer flex-none" @click="toHome">鹿森</div>
+          <el-input class="ml-40"></el-input>
+        </div>
+      </template>
+
+      <div class="w600 flex-none row-col-center h100p mr overflow-hidden">
         <q-nav-menu class="socialuni-navbar-h5 w700"></q-nav-menu>
         <q-button primary @click="emitTalkAdd">发帖</q-button>
       </div>
@@ -80,6 +87,10 @@ export default class App extends Vue {
 
   emitTalkAdd() {
     CommonEventUtil.emit(CommunityEventConst.socialuniTalkAddEvent)
+  }
+
+  toHome() {
+    this.$router.push('/')
   }
 }
 </script>
