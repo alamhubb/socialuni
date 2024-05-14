@@ -4,18 +4,18 @@ import {createRouter, createWebHistory} from "vue-router";
 // import MessageView from "@/views/chat/MessageView.tsx";
 
 export const constantRoutes = [
-    {
-        path: '/home',
-        name: 'home',
-        component: HomeView,
-        meta: {title: '首页'},
-    },
-    {
-        path: '/',
-        name: 'message',
-        component: MessageView,
-        meta: {title: '消息'},
-    },
+    // {
+    //     path: '/home',
+    //     name: 'home',
+    //     component: HomeView,
+    //     meta: {title: '首页'},
+    // },
+    // {
+    //     path: '/',
+    //     name: 'message',
+    //     component: MessageView,
+    //     meta: {title: '消息'},
+    // },
     // {
     //     path: '/mine',
     //     name: 'mine',

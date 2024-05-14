@@ -1,7 +1,7 @@
 <template>
   <div class="row-col-center bd bd-radius h30 px-sm">
-    <input :value="value" class="flex-1 px-xs font-df" @input="inputEvent" :placeholder="placeholder"/>
-    <q-icon v-show="(!hideClear)&&value&&value.length" icon="close" class="color-sub pd-xs" size="12"
+    <input :value="value" class="bd-none flex-1 font-df overflow-hidden" @input="inputEvent" :placeholder="placeholder"/>
+    <q-icon v-show="(!hideClear)&&value&&value.length" icon="close" class="color-sub pd-xs flex-none" size="12"
             @click="clear"></q-icon>
   </div>
 </template>

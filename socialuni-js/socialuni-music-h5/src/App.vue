@@ -3,10 +3,14 @@
     <!--        <s-user-nav-bar title="鹿森">-->
     <s-user-nav-bar>
       <template #title>
-        <div class="flex-1 row-end-center">
-          <img :src="$getImageUrl('logo.jpg')" class="ml-50 h44 mr-sm cursor-pointer flex-none" alt="logo" @click="toHome">
-          <div class="font-22 font-bold cursor-pointer flex-none mr-sm" @click="toHome">鹿森</div>
-          <el-input class="w200 mr-sm"></el-input>
+        <div class="flex-1 row-col-center overflow-x-hidden">
+          <div class="w100p row-end-center pr">
+            <img :src="$getImageUrl('logo.jpg')" class="ml-50 h44 mr-sm cursor-pointer flex-none" alt="logo"
+                 @click="toHome">
+            <div class="font-22 font-bold cursor-pointer flex-none mr" @click="toHome">鹿森</div>
+            <q-input class="flex-none w150"></q-input>
+            <!--            <div class="w200">bb</div>-->
+          </div>
         </div>
       </template>
 
@@ -58,6 +62,7 @@ import {constantRoutes} from "@/router";
 import CommonEventUtil from "qingjs/src/util/CommonEventUtil.ts";
 import QScroll from "qing-ui/src/components/QScroll.vue";
 import QButton from "qing-ui/src/components/QButton.vue";
+import QInput from "qing-ui/src/components/QInput.vue";
 import QDialog from "qing-ui-h5/src/components/QDialog.vue";
 import CommunityEventConst from "socialuni-community-sdk/src/constant/CommunityEventConst.ts";
 
@@ -65,7 +70,7 @@ console.log(123123)
 
 @toNative
 @Component({
-  components: {SUserNavBar, QNavMenu, QButton, QScroll, QDialog}
+  components: {SUserNavBar, QNavMenu, QButton, QInput, QScroll, QDialog}
 })
 export default class App extends Vue {
 

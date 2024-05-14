@@ -14,14 +14,14 @@ const socialuniCommunityH5Plugin: SocialuniPlugin = new SocialuniCommunityH5Plug
 
 
 const SocialuniCommunityH5 = {
-    async install(app: App, view: Vue, socialuniOption?: SocialuniOption) {
+    async install(app: App, page = {path: '/', name: 'community', title: '社区'}) {
         console.log(66666)
         console.log(app)
         socialuniPluginsModule.router.addRoute({
-            path: '/community',
-            name: 'community',
+            path: page.path,
+            name: page.name1,
             component: SocialuniTalkViewH5,
-            meta: {title: '社区'},
+            meta: {title: page.title},
         })
         console.log(socialuniPluginsModule.router.getRoutes())
         socialuniPluginsModule.addPlugin(socialuniCommunityH5Plugin)
@@ -33,7 +33,7 @@ const SocialuniCommunityH5 = {
             console.log('333')
             // this.defaultActive = '/expand'
             console.log('zhixingle push')
-            socialuniPluginsModule.router.push('/community')
+            socialuniPluginsModule.router.push('/')
         })
     }
 }
