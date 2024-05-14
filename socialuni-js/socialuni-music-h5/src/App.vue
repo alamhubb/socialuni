@@ -3,16 +3,16 @@
     <!--        <s-user-nav-bar title="鹿森">-->
     <s-user-nav-bar>
       <template #title>
-        <div class="flex-1 row-col-center">
+        <div class="flex-1 row-end-center">
           <img :src="$getImageUrl('logo.jpg')" class="ml-50 h44 mr-sm cursor-pointer flex-none" alt="logo" @click="toHome">
-          <div class="font-22 font-bold cursor-pointer flex-none" @click="toHome">鹿森</div>
-          <el-input class="ml-40"></el-input>
+          <div class="font-22 font-bold cursor-pointer flex-none mr-sm" @click="toHome">鹿森</div>
+          <el-input class="w200 mr-sm"></el-input>
         </div>
       </template>
 
       <div class="w600 flex-none row-col-center h100p mr overflow-hidden">
         <q-nav-menu class="socialuni-navbar-h5 w700"></q-nav-menu>
-        <q-button primary @click="emitTalkAdd">发帖</q-button>
+        <q-button class="flex-none" primary @click="emitTalkAdd">发帖</q-button>
       </div>
     </s-user-nav-bar>
 
