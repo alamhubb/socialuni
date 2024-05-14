@@ -16,9 +16,14 @@ import SocialuniCommunityH5 from "socialuni-community-view-h5/src";
 import SocialuniAppViewH5 from "socialuni-app-view-h5/src";
 import SocialuniUi from "socialuni-ui/src";
 
+export const getImageUrl = (path: string): string => {
+    return new URL(`./assets/${path}`, import.meta.url).href
+}
+
 declare module '@vue/runtime-core' {
     interface ComponentCustomProperties {
         $DateUtil: typeof DateUtil
+        $getImageUrl: (path: string) => string
     }
 }
 
@@ -30,6 +35,7 @@ declare module '@vue/runtime-core' {
     app.use(Socialuni, router)
 
     app.config.globalProperties.$DateUtil = DateUtil;
+    app.config.globalProperties.$getImageUrl = getImageUrl;
 
     app.use(SocialuniUiH5)
     app.use(SocialuniAppViewH5)

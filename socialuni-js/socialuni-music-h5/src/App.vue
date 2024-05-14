@@ -1,6 +1,7 @@
 <template>
   <div class="h100p overflow-hidden flex-col bg-default">
-    <s-user-nav-bar>
+    <s-user-nav-bar title="鹿森">
+<!--    <s-user-nav-bar title="鹿森" :logo="require('@/assets/logo.jpg')">-->
       <div class="row-end-center h100p mr">
         <q-button primary @click="emitTalkAdd">发帖</q-button>
       </div>
@@ -48,9 +49,10 @@ import {constantRoutes} from "@/router";
 import CommonEventUtil from "qingjs/src/util/CommonEventUtil.ts";
 import QScroll from "qing-ui/src/components/QScroll.vue";
 import QButton from "qing-ui/src/components/QButton.vue";
-import CommonUtil from "qing-util/src/util/CommonUtil.ts";
 import QDialog from "qing-ui-h5/src/components/QDialog.vue";
 import CommunityEventConst from "socialuni-community-sdk/src/constant/CommunityEventConst.ts";
+
+console.log(require)
 
 @toNative
 @Component({

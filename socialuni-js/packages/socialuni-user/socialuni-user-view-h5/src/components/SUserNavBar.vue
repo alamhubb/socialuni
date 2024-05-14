@@ -2,7 +2,7 @@
   <div>
     <div class="flex-row shadow-bottom index-sm px-smm h50 bg-white flex-none position-relative">
       <div class="flex-none row-col-center mr-40 bg-click" @click="toHome">
-        <!--      <img src="@/assets/img/logo.jpg" class="h40" alt="logo">-->
+        <img v-if="logo" :src="logo" class="h40" alt="logo">
         <div class="font-19 font-bold">{{ title }}</div>
       </div>
 
@@ -97,6 +97,7 @@ export default class SUserNavBar extends Vue {
   }
 
   @Prop() title: string
+  @Prop() logo: string
 
 
   dialogVisible = false
