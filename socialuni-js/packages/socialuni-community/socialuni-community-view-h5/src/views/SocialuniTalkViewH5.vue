@@ -37,13 +37,40 @@
 
           <msg-input class="w600"></msg-input>
         </div>
-        <div class="w300 ml-sm bg-white bd-radius pd position-sticky top-0">
-          <div>
-            <div v-for="tag in hotTagsTop10">
-              <div class="mt-sm color-blue_dark mr-sm font-18">
-                <span class="color-blue mr-nn">#</span>
-                {{ tag.name }}
+        <div class="w300 ml-sm">
+
+          <div class="w300 bg-white bd-radius pd position-sticky top-0">
+            <div>
+              <div v-for="tag in hotTagsTop10">
+                <div class="mt-sm color-blue_dark mr-sm font-18">
+                  <span class="color-blue mr-nn">#</span>
+                  {{ tag.name }}
+                </div>
               </div>
+            </div>
+          </div>
+          <div class="pd-sm font-18 col-all-center mt">
+            <div><a href="https://beian.miit.gov.cn/" target="_blank">冀ICP备19028721号-6</a></div>
+            <el-divider class="my-xs"/>
+
+            <div>
+              ©2023-2024 维洛斯
+            </div>
+
+
+            <el-divider class="my-xs"/>
+
+
+            <div>
+              清池科技滦州市有限公司
+            </div>
+
+
+            <el-divider class="my-xs"/>
+            <div> 客服QQ：
+              <a target="_blank"
+                 href="https://wpa.qq.com/msgrd?v=3&amp;uin=491369310&amp;site=qq&amp;menu=yes">
+                491369310 </a>
             </div>
           </div>
         </div>
@@ -188,7 +215,7 @@ export default class SocialuniTalkViewH5 extends Vue {
     }
   }
 
-  setTabName(){
+  setTabName() {
     socialTalkModule.curTabName = this.$route.query.tab as string
     if (this.$route.query.circle) {
       socialCircleModule.setCircleName(this.$route.query.circle as string)
@@ -331,7 +358,7 @@ export default class SocialuniTalkViewH5 extends Vue {
   }
 
 
-  forceLoadNextPage(){
+  forceLoadNextPage() {
     const talkQO = TalkQOFactory.getTalkQueryQO(socialTalkModule.curTabName, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, socialuniTagModule.selectTagNames, socialCircleModule.circleName)
     this.pageQueryUtil.forceLoadNextPage(talkQO)
   }
