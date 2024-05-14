@@ -13,6 +13,7 @@
   <!-- v-on="$listeners"  将外部事件绑定到指定内部组件，详见： https://cn.vuejs.org/v2/api/#vm-listeners-->
   <el-dialog
       class="pd-0"
+      top="10vh"
       v-bind="$attrs"
       :close-on-click-modal="false"
       v-model="dialogVisible"
@@ -25,7 +26,7 @@
     </template>
 
     <!--  自定义区域    -->
-    <div class="h500">
+    <div :style="{height: height}">
       <q-scrollbar class="h100p">
         <div>
           <slot></slot>
@@ -99,7 +100,10 @@ export default class QDialog extends Vue {
     type: Boolean,
     default: false
   }) customCancelClose: boolean
-
+  @Prop({
+    type: String,
+    default: '500px'
+  }) height: string
   @Prop({
     type: String,
     default: '确 定'

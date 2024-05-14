@@ -170,10 +170,7 @@ export default class SocialuniTalkViewH5 extends Vue {
     await this.pageQueryUtil.initQuery(talkQO)
   }
 
-  async queryNextPage() {
-    const talkQO = TalkQOFactory.getTalkQueryQO(socialTalkModule.curTabName, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, socialuniTagModule.selectTagNames, socialCircleModule.circleName)
-    await this.pageQueryUtil.loadNextPage(talkQO)
-  }
+
 
   // 用户登录后重新查询
   @Watch('user')
@@ -308,12 +305,9 @@ export default class SocialuniTalkViewH5 extends Vue {
     // socialuniTagModule.getHotTagsAction()
   }
 
-  scrollToLower() {
-    // console.log('chufale')
-    const talkQO = TalkQOFactory.getTalkQueryQO(this.tabName, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, socialuniTagModule.selectTagNames, socialCircleModule.circleName)
-    this.pageQueryUtil.loadNextPage(talkQO)
-    // const talkQO = TalkQOFactory.getTalkQueryQO(this.tabName, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, socialuniTagModule.selectTagNames, socialCircleModule.circleName)
-    // this.pageQueryUtil.nextPageQuery(talkQO)
+  async scrollToLower() {
+    const talkQO = TalkQOFactory.getTalkQueryQO(socialTalkModule.curTabName, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, socialuniTagModule.selectTagNames, socialCircleModule.circleName)
+    await this.pageQueryUtil.loadNextPage(talkQO)
   }
 
 

@@ -14,7 +14,6 @@
           <div><a href="https://beian.miit.gov.cn/" target="_blank">冀ICP备19028721号-6</a></div>
 
 
-
           <!--            <div class="mx-xs">|</div>
                       <div>公众号：<a
                           href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI3NTE5NzE3NA==&scene=124#wechat_redirect"
