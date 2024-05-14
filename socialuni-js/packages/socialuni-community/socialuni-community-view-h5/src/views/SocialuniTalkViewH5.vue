@@ -53,7 +53,7 @@
             <el-divider class="my-xs"/>
 
             <div>
-              ©2023-2024 鹿森网
+              ©2023-2024 鹿森
             </div>
 
 
