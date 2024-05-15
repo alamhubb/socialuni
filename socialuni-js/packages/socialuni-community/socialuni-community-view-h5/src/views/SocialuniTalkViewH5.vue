@@ -8,13 +8,13 @@
       <div class="flex-1 row-end-start position-sticky top-0">
         <el-menu
             class="w200 bd-none bd-radius flex-none br socialuni-community-view-left-menu mr-sm">
-          <q-enum-link v-for="tab in talkTabs" :to="'/community?tab='+tab.name">
+          <q-enum-link v-for="tab in talkTabs" :to="'/?tab='+tab.name">
             <el-menu-item :index="tab.name">
               <q-icon icon="mdi-send" class="color-content mr-xs mdi-rotate-315" size="12"></q-icon>
               {{ tab.name }}
             </el-menu-item>
           </q-enum-link>
-          <q-enum-link v-for="circle in mineCirclesTop10" :to="'/community?circle='+circle">
+          <q-enum-link v-for="circle in mineCirclesTop10" :to="'/?circle='+circle">
             <el-menu-item :index="circle">
               <q-icon icon="mdi-send" class="color-content mr-xs mdi-rotate-315" size="12"></q-icon>
               {{ circle }}
