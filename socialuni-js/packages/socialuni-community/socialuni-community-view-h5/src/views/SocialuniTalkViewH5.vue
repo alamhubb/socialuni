@@ -23,16 +23,20 @@
         </el-menu>
       </div>
       <div class="flex-none w600">
-        <div class="bg-grey16 bd-radius mb-sm pd-sm position-sticky index-sm" style="top:-10px">
-          <div v-if="selectTagNames.length" class="row-col-center">
+        <div v-show="selectTagNames.length" class="bg-grey16 bd-radius mb-sm pd-sm position-sticky index-sm" style="top:-10px">
+          <div v-show="selectTagNames.length" class="row-col-center">
             已选话题：
             <div v-for="tag in selectTagNames" class="color-blue mr-sm font-18 row-all-center">
-              <q-tag show-close type="white" size="16">
+              <q-tag show-close type="white" size="16" @delete="setTagName(null)">
                 {{ tag }}
               </q-tag>
             </div>
           </div>
         </div>
+
+        <q-load-more v-show="pageQueryUtil.queryQO.firstLoad" class="my-sm" :status="pageQueryUtil.loadMore"
+                     @click="forceLoadNextPage"></q-load-more>
+
         <!--          <q-load-more></q-load-more>-->
         <!--          <q-icon icon="mdi-loading mdi-spin"></q-icon>-->
         <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
@@ -43,7 +47,7 @@
           />
         </div>
 
-        <q-load-more class="my-sm" :status="pageQueryUtil.loadMore" @click="forceLoadNextPage"></q-load-more>
+        <q-load-more v-show="!pageQueryUtil.queryQO.firstLoad" class="my-sm" :status="pageQueryUtil.loadMore" @click="forceLoadNextPage"></q-load-more>
 
         <msg-input class="w600"></msg-input>
       </div>
@@ -174,12 +178,7 @@ export default class SocialuniTalkViewH5 extends Vue {
   pageQueryUtil: SocialuniPageQueryUtil<TalkVO, TalkQueryVO> = new SocialuniPageQueryUtil(SocialuniTalkAPI.queryTalksAPI)
 
   async initQuery() {
-    console.log('fasdflkasjdlf')
-    console.log(this.tabName)
     const talkQO = TalkQOFactory.getTalkQueryQO(socialTalkModule.curTabName, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, socialuniTagModule.selectTagNames, socialCircleModule.circleName)
-    console.log(this.pageQueryUtil)
-    console.log(6866868)
-    console.log(this.pageQueryUtil.queryQO)
     await this.pageQueryUtil.initQuery(talkQO)
   }
 
@@ -191,14 +190,7 @@ export default class SocialuniTalkViewH5 extends Vue {
   // 用户登录后重新查询
   @Watch('user')
   watchUserChange() {
-    //系统不为首次加载
-    //必须有this.talkTabObj 且 不为首次加载才行
-    if (this.curTalkTabObj && !this.curTalkTabObj.firstLoad) {
-      //如果当前为关注，则重新查询,否则的话将关注列设置为首次查询
-      this.startPullDown()
-      //把非当前的设置为初始
-      this.talkTabs.filter(item => item.type !== this.curTalkTabObj.type).forEach(item => (item.firstLoad = true))
-    }
+    this.initQuery()
   }
 
   get talkTabs() {
@@ -215,7 +207,6 @@ export default class SocialuniTalkViewH5 extends Vue {
     return socialuniTagModule.hotTags
   }
 
-
   get talksNew() {
     return this.pageQueryUtil.listData
   }
@@ -223,7 +214,7 @@ export default class SocialuniTalkViewH5 extends Vue {
   @Watch('$route.query')
   routerQueryWatch(newVal, oldVal) {
     if (JsonUtil.toJson(newVal) !== JsonUtil.toJson(oldVal)) {
-      this.initLogic()
+      this.initQuery()
     }
   }
 
@@ -237,7 +228,7 @@ export default class SocialuniTalkViewH5 extends Vue {
       if (!socialCircleModule.circleName) {
         console.log('chufale tiaozhuan')
         // window.open('/community?tab=首页', '_self')
-        this.$router.push('/community?tab=' + '首页')
+        this.$router.push('/?tab=' + '首页')
         return
       }
       socialTalkModule.curTabName = '首页'
@@ -285,69 +276,12 @@ export default class SocialuniTalkViewH5 extends Vue {
   async addTalk() {
     await this.$refs.talkAddView.addTalk()
     this.$refs.talkAddDialog.close()
-    this.initLogic()
-  }
-
-
-  initLogic() {
-    // this.pageQueryUtil = new SocialuniPageQueryUtil(SocialuniTalkAPI.queryTalksAPI)
-    // console.log('chufa11111')
-    // this.tabName = this.$route.query.tab as string
-    // if (this.$route.query.circle) {
-    //   socialCircleModule.setCircleName(this.$route.query.circle as string)
-    // }
-    // if (!this.tabName) {
-    //   if (!socialCircleModule.circleName) {
-    //     this.$router.push('/community?tab=' + '首页')
-    //     return
-    //   }
-    //   this.tabName = '首页'
-    // }
-    // // 获取元素高度，用来计算scroll-view高度
-    // // this.$refs.tabsTalk.initQuery()
-    // this.$nextTick(() => {
-    //   console.log(12312)
-    //   //首次打开talk页面，获取用户位置用来查询
-    //   // locationModule.appLunchInitDistrict().then(() => {
-    //   //首次打开talk页面，获取用户位置用来查询
-    //   socialLocationModule.appLunchInitDistrict().then(async () => {
-    //     // this.initQuery()
-    //     const talkQO = TalkQOFactory.getTalkQueryQO(this.tabName, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, socialuniTagModule.selectTagNames, socialCircleModule.circleName)
-    //     await this.pageQueryUtil.initQuery(talkQO)
-    //   })
-    // })
-    // this.updateShowAd()
-    // socialCircleModule.getHotCirclesAction()
-    // socialuniTagModule.getHotTagsAction()
+    this.initQuery()
   }
 
   async scrollToLower() {
     const talkQO = TalkQOFactory.getTalkQueryQO(socialTalkModule.curTabName, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, socialuniTagModule.selectTagNames, socialCircleModule.circleName)
     await this.pageQueryUtil.loadNextPage(talkQO)
-  }
-
-
-  // talkTabs: TalkTabVO [] = []
-  // 页面初始化模块
-  // homeTypeObjs: HomeTypeTalkVO [] = []
-
-  readonly talkCacheNum: number = 30
-
-
-  // 供父组件调用，每次隐藏把数据缓存进storage
-  tabsTalkOnHide() {
-    // 存入store
-    const storeTalkTabs: TalkTabVO[] = []
-    this.talkTabs.forEach(item => {
-      const storeTalkTab: TalkTabVO = new TalkTabVO(item.name, item.type)
-      storeTalkTab.firstLoad = item.firstLoad
-      storeTalkTab.scrollTop = item.scrollTop
-      storeTalkTab.pageScrollTop = item.scrollTop
-      storeTalkTab.talks = item.talks.slice(-this.talkCacheNum)
-      storeTalkTabs.push(storeTalkTab)
-    })
-    //缓存记录本次推出时的默认值
-    socialTalkModule.saveLastTalkTabs(storeTalkTabs, this.currentTabIndex, this.curTalkTabObj.type)
   }
 
 
@@ -359,14 +293,6 @@ export default class SocialuniTalkViewH5 extends Vue {
     this.$refs.talkFilterDialog.open()
   }
 
-  tabScrollToTop() {
-    this.curTalkTabObj.pageScrollTop = 0
-    this.$nextTick(() => {
-      this.curTalkTabObj.pageScrollTop = -1
-    })
-  }
-
-
   forceLoadNextPage() {
     const talkQO = TalkQOFactory.getTalkQueryQO(socialTalkModule.curTabName, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, socialuniTagModule.selectTagNames, socialCircleModule.circleName)
     this.pageQueryUtil.forceLoadNextPage(talkQO)
@@ -374,142 +300,7 @@ export default class SocialuniTalkViewH5 extends Vue {
 
   // 被举报后前台删除talk
   deleteTalk(talkId: string) {
-    this.talks.splice(this.talks.findIndex(talk => talk.id === talkId), 1)
-  }
-
-  get curTalkTabObj() {
-    if (this.talkTabs && this.talkTabs.length) {
-      return this.talkTabs[this.currentTabIndex]
-    } else {
-      return null
-    }
-  }
-
-
-  // 因为内部的滑动机制限制，请将tabs组件和swiper组件的current用不同变量赋值
-  // tabs组件的current值，表示当前活动的tab选项
-  // swiper组件的current值，表示当前那个swiper-item是活动的
-  get currentTabIndex() {
-    return socialTalkModule.currentTabIndex
-  }
-
-  // tabs通知swiper切换
-  async tabsChange(index) {
-    if (index === this.currentTabIndex) {
-      this.tabScrollToTop()
-      return
-    }
-    socialTalkModule.setCurTabIndexUpdateCircle(index)
-  }
-
-  // talkSwipe
-  async talkSwiperChange(e) {
-    const current = e.detail.current
-    //首次加载可能为空
-    if (current || current === 0) {
-      const curTab = socialTalkModule.setCurTabIndexUpdateCircle(current)
-      // 存入store
-      // 切换时截取其他的只保留后20条
-      this.talkTabs.forEach((item, index) => {
-        if (index !== current) {
-          //截取20
-          item.talks = item.talks.slice(-20)
-          item.loadMore = LoadMoreType.more
-        }
-      })
-      //如果首次加载，则需要查询
-      if (curTab.firstLoad) {
-        this.startPullDown()
-        //不理解为什么首次加载要缓存
-        // this.tabsTalkOnHide()
-      }
-    }
-  }
-
-  // 每次查询几条
-  get lazyLoadNum(): number {
-    return socialuniConfigModule.appMoreConfig[Constants.everyLoadNum] || Constants.everyLoadNum_number
-  }
-
-  showAd = false
-
-  // 广告相关
-  updateShowAd() {
-    // 如果展示广告
-    // 获取上次展示时间
-    const lastDateStr: string = QingAppUtil.StorageUtil.get(Constants.lastShowAdTime)
-    // 如果有上次展示时间
-    if (lastDateStr) {
-      const lastDateTime: number = new Date(lastDateStr).getTime()
-      const curTime: number = new Date().getTime()
-      // 如果已经过了上次展示时间间隔，则继续展示广告
-      this.showAd = curTime - lastDateTime > this.showAdMinutes * Constants.minute
-    } else {
-      this.showAd = true
-    }
-  }
-
-  // 默认30分钟展示1次
-  get showAdMinutes(): number {
-    return socialuniConfigModule.appMoreConfig[Constants.talkShowAdTimeInterval] || Constants.talkShowAdTimeIntervalDefault
-  }
-
-  get showAdIndexList(): number[] {
-    return socialuniConfigModule.appMoreConfig[Constants.talkShowAdIndexListKey] || Constants.talkShowAdIndexAryDefault
-  }
-
-  @Watch('talks')
-  watchTalks() {
-    // 如果已有talk数量大于系统阀值，加载出来第2页后，就重置下次看广告时间
-    if (this.showAd && this.talks.length >= 50) {
-      QingAppUtil.StorageUtil.set(Constants.lastShowAdTime, String(new Date()))
-    }
-  }
-
-  lastScrollTop = 0
-  scrollTop = 0
-  curScrollTop = 0
-  timeout = null
-
-  // app端兼容问题，滚动页面评论input不会失去焦点，需要手动控制
-  talksScrollEvent({detail}) {
-    // 如果处于获取焦点状态，则失去焦点
-    if (socialTalkModule.inputContentFocus) {
-      socialTalkModule.inputContentBlur()
-    }
-    // this.talkTabScroll(detail.scrollTop)
-    //只有app端处理滚动隐藏显示tabbar逻辑，小程序平台一卡一卡的
-    if (!socialuniSystemModule.isMp) {
-      //记录当前位置
-      this.curScrollTop = detail.scrollTop
-      // this.throttleScroll()
-    }
-  }
-
-  //为了每次保存后重新加载可以记录上次的位置
-  /*talkTabScroll = CommonUtil.debounce((scrollTop) => {
-      console.log('触发了滚动')
-    this.curTalkTabObj.scrollTop = scrollTop
-  }, 100)*/
-
-  /*throttleScroll = CommonUtil.throttle(() => {
-    //如果向下滚动超过50隐藏
-    if (this.curScrollTop > (this.lastScrollTop + 500)) {
-        console.log('触发了hide')
-      uni.hideTabBar()
-      //如果向上滚动超过20显示
-    } else if (this.curScrollTop < (this.lastScrollTop - 500)) {
-      uni.showTabBar()
-      //如果小于100或等于0，显示
-    } else if (this.curScrollTop < 100 || this.curScrollTop === 0) {
-      uni.showTabBar()
-    }
-    //修改上次位置为当前位置
-    this.lastScrollTop = this.curScrollTop
-  }, 300)*/
-
-  scrollHandler() {
-
+    this.pageQueryUtil.listData.splice(this.talks.findIndex(talk => talk.id === talkId), 1)
   }
 
   toLoginVue() {
@@ -527,6 +318,7 @@ export default class SocialuniTalkViewH5 extends Vue {
 
   setTagName(selectTagName) {
     socialuniTagModule.setSelectTagName(selectTagName)
+    this.initQuery()
   }
 }
 </script>

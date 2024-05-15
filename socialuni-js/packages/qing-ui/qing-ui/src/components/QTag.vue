@@ -1,7 +1,7 @@
 <template>
   <div class="row-all-center line-h1" :class="[themeClass]" :style="tagStyle">
     <slot></slot>
-    <q-icon v-if="showClose" class="row-all-center ml-xs" :size="size" icon="close" @click="delete"></q-icon>
+    <q-icon v-if="showClose" class="row-all-center ml-xs" :size="size" icon="close" @click="deleteFun"></q-icon>
   </div>
 </template>
 
@@ -46,8 +46,8 @@ export default class QTag extends Vue {
     return className
   }
 
-  @Emit()
-  delete() {
+  @Emit('delete')
+  deleteFun () {
     return
   }
 }

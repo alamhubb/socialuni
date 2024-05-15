@@ -17,6 +17,7 @@ class SocialuniTagModule {
 
 
     get selectTagNames() {
+        console.log('触发了')
         if (this.selectTagName) {
             return [this.selectTagName]
         }
