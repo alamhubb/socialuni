@@ -89,11 +89,6 @@ export default class SocialuniExpandView extends Vue {
   }
   showUserContactBtnDisabled: boolean = false
 
-  get isIos() {
-    return socialuniSystemModule.isIos
-  }
-
-
   async manualPulldownRefresh() {
     await this.initQuery()
   }
@@ -123,7 +118,6 @@ export default class SocialuniExpandView extends Vue {
     this.$refs.pullRefresh.endPulldownRefresh()
   }
 
-
   async initQuery() {
     const queryData = new SocialuniUserExtendFriendQueryQO(this.tabs[this.currentTabIndex]);
     await this.tabsPageQueryUtil[this.currentTabIndex].initQuery(queryData)
@@ -131,14 +125,6 @@ export default class SocialuniExpandView extends Vue {
     //   listDatum.getUserContactBtnDisabled = false
     // }
     this.endPulldownRefresh()
-  }
-
-  /*openVip() {
-    PageUtil.toVipPage()
-  }*/
-
-  toUserDetailVue(user: SocialUserContentRO) {
-    UserPageUtil.toUserDetail(user.id)
   }
 
   // tabs通知swiper切换
@@ -169,17 +155,6 @@ export default class SocialuniExpandView extends Vue {
     return this.tabsPageQueryUtil[this.currentTabIndex]
   }
 
-  //同步更新粉丝和关注列表状态
-  userFollowChange(user: SocialUserContentRO) {
-    for (const socialuniPageQueryUtil of this.tabsPageQueryUtil) {
-      for (const listDatum of socialuniPageQueryUtil.listData) {
-        if (listDatum.id === user.id) {
-          listDatum.hasFollowed = user.hasFollowed
-        }
-      }
-    }
-  }
-
   //点击不需要更新查询时间，查不出来就查不出来，万一是自己手动暂停了查询呢，而且如果重设时间会导致数据重复问题
   async clickOnreachBottom() {
     //停止查询方法
@@ -189,40 +164,11 @@ export default class SocialuniExpandView extends Vue {
     }
   }
 
-  async getOpenContactInfo(user: CenterUserDetailRO) {
-    //打开获取对方联系方式功能，支付贝壳
-    user.getUserContactBtnDisabled = true
-    try {
-      await SocialuniUserExpandService.getOpenContactInfo(user)
-    } finally {
-      user.getUserContactBtnDisabled = false
-    }
-  }
-
-  copyContactInfo(user: CenterUserDetailRO) {
-    QingAppUtil.NativeUtil.textCopy(user.contactInfo)
-  }
 
   get mineUser() {
     return socialuniUserModule.mineUser
   }
 
-  numFixed1(num) {
-    return NumUtil.numFixed1(num)
-  }
 
-  formatTime(dateStr) {
-    return DateUtil.formatTime(dateStr)
-  }
-
-
-  addLikeUser(user: SocialuniUserExtendDetailRO) {
-    SocialuniUserLikeAPI.addUserLikeAPI(user)
-    this.toMessagePage(user)
-  }
-
-  async toMessagePage(user) {
-    socialuniChatModule.setChatIdToMessagePage(user.id)
-  }
 }
 </script>

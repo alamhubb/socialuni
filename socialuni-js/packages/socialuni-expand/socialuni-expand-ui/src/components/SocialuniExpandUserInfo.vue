@@ -89,6 +89,13 @@ import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
 import SocialuniImgUtil from "socialuni-user-sdk/src/util/SocialuniImgUtil";
 import SocialuniUserExpandDetailRO from "socialuni-user-api/src/model/SocialuniUserExpandDetailRO";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import SocialuniUserLikeAPI from "socialuni-expand-api/src/api/SocialuniUserLikeAPI";
+import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
+import NumUtil from "qing-util/src/util/NumUtil";
+import DateUtil from "qing-util/src/util/DateUtil";
+import SocialuniUserExpandService from "socialuni-user-sdk/src/logic/SocialuniUserExpandService";
+import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 
 @toNative
 @Component({
@@ -116,5 +123,60 @@ export default  class SocialuniExpandUserInfo extends Vue {
       return []
     }
   }
+
+  copyContactInfo(user: CenterUserDetailRO) {
+    QingAppUtil.NativeUtil.textCopy(user.contactInfo)
+  }
+
+  addLikeUser(user: SocialuniUserExtendDetailRO) {
+    SocialuniUserLikeAPI.addUserLikeAPI(user).then(() => {
+      user.hasUserLike = true
+    })
+    // this.toMessagePage(user)
+  }
+
+  async toMessagePage(user) {
+    socialuniChatModule.setChatIdToMessagePage(user.id)
+  }
+
+
+  numFixed1(num) {
+    return NumUtil.numFixed1(num)
+  }
+
+  formatTime(dateStr) {
+    return DateUtil.formatTime(dateStr)
+  }
+
+  //同步更新粉丝和关注列表状态
+  userFollowChange(user: SocialUserContentRO) {
+    for (const socialuniPageQueryUtil of this.tabsPageQueryUtil) {
+      for (const listDatum of socialuniPageQueryUtil.listData) {
+        if (listDatum.id === user.id) {
+          listDatum.hasFollowed = user.hasFollowed
+        }
+      }
+    }
+  }
+
+  async getOpenContactInfo(user: CenterUserDetailRO) {
+    //打开获取对方联系方式功能，支付贝壳
+    user.getUserContactBtnDisabled = true
+    try {
+      await SocialuniUserExpandService.getOpenContactInfo(user)
+    } finally {
+      user.getUserContactBtnDisabled = false
+    }
+  }
+
+
+  /*openVip() {
+    PageUtil.toVipPage()
+  }*/
+
+  get isIos() {
+    return socialuniSystemModule.isIos
+  }
+
 }
 </script>
