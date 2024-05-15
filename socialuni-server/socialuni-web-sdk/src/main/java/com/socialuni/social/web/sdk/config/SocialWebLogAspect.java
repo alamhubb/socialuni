@@ -1,5 +1,6 @@
 package com.socialuni.social.web.sdk.config;
 
+import com.socialuni.social.common.sdk.config.SocialWebControllerAdvice;
 import com.socialuni.social.common.sdk.event.WebControllerExceptionEvent;
 import com.socialuni.social.common.api.constant.ErrorCode;
 import com.socialuni.social.common.api.constant.RequestErrorMsg;
@@ -42,7 +43,7 @@ public class SocialWebLogAspect {
     public Object requestLogHandle(ProceedingJoinPoint joinPoint) throws Throwable {
         RequestLogDO requestLogDO = RequestLogUtil.get();
         // 解决异步报错。切面记录日志的问题。
-        if(requestLogDO == null){
+        if (requestLogDO == null) {
             return joinPoint.proceed();
         }
         String params = Arrays.toString(joinPoint.getArgs());
@@ -83,9 +84,9 @@ public class SocialWebLogAspect {
     }
 
     /**
+     * @param event
      * @see SocialWebControllerAdvice#saveOperateLogDO(String, Integer, String, String, String)
      * @see WebControllerExceptionEvent
-     * @param event
      */
     @EventListener(classes = {WebControllerExceptionEvent.class})
     public void listen(WebControllerExceptionEvent event) {
@@ -126,8 +127,10 @@ public class SocialWebLogAspect {
         requestLogDO.setSpendTime(spendTime);
 
         RequestLogUtil.saveAsyncAndRemove(requestLogDO);
-        ErrorLogUtil.saveAsync(requestLogDO);
-
+        //不为限制ip次数，才保存错误信息
+        if (!ErrorCode.IP_LIMIT_ERROR.equals(requestLogDO.getErrorCode())) {
+            ErrorLogUtil.saveAsync(requestLogDO);
+        }
         log.info("[{}：{}],[{}({})][spendTimes:{}]", requestLogDO.getId(), requestLogDO.getErrorMsg(), requestLogDO.getRequestMethod(), requestLogDO.getUri(), spendTime);
 
     }

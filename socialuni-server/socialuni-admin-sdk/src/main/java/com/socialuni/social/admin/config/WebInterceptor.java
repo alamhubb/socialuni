@@ -4,10 +4,7 @@ import com.socialuni.social.admin.facede.AdminDevAccountFacade;
 import com.socialuni.social.common.api.constant.DateTimeType;
 import com.socialuni.social.common.api.constant.ErrorCode;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
-import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
-import com.socialuni.social.common.api.exception.exception.SocialNotLoginException;
-import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import com.socialuni.social.common.api.exception.exception.SocialSystemException;
+import com.socialuni.social.common.api.exception.exception.*;
 import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.common.sdk.utils.RedisUtil;
 import com.socialuni.social.tance.sdk.enumeration.SocialFeignHeaderName;
@@ -66,7 +63,7 @@ public class WebInterceptor extends SocialuniWebInterceptor {
                     redisUtil.set(ipKey, 100, DateTimeType.year / 1000);
                     //这里只提示未登录
                     res.setStatus(ErrorCode.IP_LIMIT_ERROR);
-                    throw new SocialParamsException("访问频繁，请联系客服QQ:491369310");
+                    throw new SocialIpLimitException("访问频繁，请联系客服QQ:491369310");
                 }
                 //否则访问次数加1
                 count = count + 1;

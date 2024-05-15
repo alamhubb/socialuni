@@ -16,7 +16,7 @@ public class ErrorCode {
     public static final Integer BANNED_ERROR = 605;
     //
     public static final Integer IP_LIMIT_ERROR = 606;
-    //非法访问，正常程序执行不会出现
+    //非法访问，正常程序执行不会出现,可以预料
     public static final Integer PARAMS_ERROR = 607;
     public static final Integer NULL_DEV_ERROR = 608;
 }
