@@ -19,10 +19,10 @@
               <social-gender-tag class="ml-xs" :user="user"></social-gender-tag>
             </div>
           </div>
-          <div class="row-col-center mt-xss font-12 color-content">
-            <!--                          {{ formatTime(user.updateTime) }}-->
-            <!--                          <div class="px-xs row-col-center">|</div>-->
-            <!--        有市区的名称就不显示省的名称-->
+<!--          <div class="row-col-center mt-xss font-12 color-content">
+            &lt;!&ndash;                          {{ formatTime(user.updateTime) }}&ndash;&gt;
+            &lt;!&ndash;                          <div class="px-xs row-col-center">|</div>&ndash;&gt;
+            &lt;!&ndash;        有市区的名称就不显示省的名称&ndash;&gt;
             <span v-if="!user.cityName || !user.districtName">{{ user.provinceName }}</span>
             <span v-if="user.cityName">
                             <span v-if="!user.districtName">-</span>
@@ -37,7 +37,7 @@
               <span v-else-if="user.distance<5">{{ 5 }}公里</span>
               <span v-else>{{ numFixed1(user.distance) }}公里</span>
             </div>
-          </div>
+          </div>-->
         </div>
         <div class="col-center flex-none">
           <!--                      <div v-if="!isIos" class="col-center flex-none">-->
