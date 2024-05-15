@@ -1,11 +1,12 @@
 <template>
-  <div class="row-all-center" :class="[themeClass]">
+  <div class="row-all-center line-h1" :class="[themeClass]" :style="tagStyle">
     <slot></slot>
+    <q-icon v-if="showClose" class="row-all-center ml-xs" :size="size" icon="close" @click="delete"></q-icon>
   </div>
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue, toNative} from 'vue-facing-decorator'
+import {Component, Prop, Vue, toNative, Emit} from 'vue-facing-decorator'
 import QIcon from "./QIcon.vue";
 
 @toNative
@@ -17,8 +18,16 @@ import QIcon from "./QIcon.vue";
 export default class QTag extends Vue {
   @Prop({default: false, type: Boolean}) border: boolean
   @Prop({default: false, type: Boolean}) round: boolean
-  @Prop({default: '', type: Boolean}) type: string
-  @Prop({default: 'mn', type: String}) size: string
+  @Prop({default: false, type: Boolean}) showClose: boolean
+  @Prop({default: '', type: String}) type: string
+  @Prop({default: '12', type: String}) size: string
+
+  get tagStyle(){
+    return {
+      'font-size': this.size + 'px'
+    }
+  }
+
 
   get themeClass() {
     let className = 'q-tag'
@@ -35,6 +44,11 @@ export default class QTag extends Vue {
       className += (' bd-round')
     }
     return className
+  }
+
+  @Emit()
+  delete() {
+    return
   }
 }
 </script>

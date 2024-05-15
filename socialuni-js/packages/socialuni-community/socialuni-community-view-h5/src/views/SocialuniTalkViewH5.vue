@@ -3,90 +3,99 @@
        :infinite-scroll-distance="200"
        :infinite-scroll-delay="200"
   >
-      <div class="row-col-start">
-        <!--      <q-nav-menu/>-->
-        <div class="flex-1 row-end-start position-sticky top-0">
-          <el-menu
-              class="w200 bd-none bd-radius flex-none br socialuni-community-view-left-menu mr-sm">
-            <q-enum-link v-for="tab in talkTabs" :to="'/community?tab='+tab.name">
-              <el-menu-item :index="tab.name">
-                <q-icon icon="mdi-send" class="color-content mr-xs mdi-rotate-315" size="12"></q-icon>
-                {{ tab.name }}
-              </el-menu-item>
-            </q-enum-link>
-            <q-enum-link v-for="circle in mineCirclesTop10" :to="'/community?circle='+circle">
-              <el-menu-item :index="circle">
-                <q-icon icon="mdi-send" class="color-content mr-xs mdi-rotate-315" size="12"></q-icon>
-                {{ circle }}
-              </el-menu-item>
-            </q-enum-link>
-          </el-menu>
-        </div>
-        <div class="flex-none w600">
-
-          <!--          <q-load-more></q-load-more>-->
-          <!--          <q-icon icon="mdi-loading mdi-spin"></q-icon>-->
-          <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
-          <div v-for="(talk,index) in talksNew" :key="talk.id">
-            <talk-item :talk="talk"
-                       :talk-tab-type="tabName"
-                       @delete-talk="deleteTalk"
-            />
+    <div class="row-col-start">
+      <!--      <q-nav-menu/>-->
+      <div class="flex-1 row-end-start position-sticky top-0">
+        <el-menu
+            class="w200 bd-none bd-radius flex-none br socialuni-community-view-left-menu mr-sm">
+          <q-enum-link v-for="tab in talkTabs" :to="'/community?tab='+tab.name">
+            <el-menu-item :index="tab.name">
+              <q-icon icon="mdi-send" class="color-content mr-xs mdi-rotate-315" size="12"></q-icon>
+              {{ tab.name }}
+            </el-menu-item>
+          </q-enum-link>
+          <q-enum-link v-for="circle in mineCirclesTop10" :to="'/community?circle='+circle">
+            <el-menu-item :index="circle">
+              <q-icon icon="mdi-send" class="color-content mr-xs mdi-rotate-315" size="12"></q-icon>
+              {{ circle }}
+            </el-menu-item>
+          </q-enum-link>
+        </el-menu>
+      </div>
+      <div class="flex-none w600">
+        <div class="bg-grey16 bd-radius mb-sm pd-sm position-sticky index-sm" style="top:-10px">
+          <div v-if="selectTagNames.length" class="row-col-center">
+            已选话题：
+            <div v-for="tag in selectTagNames" class="color-blue mr-sm font-18 row-all-center">
+              <q-tag show-close type="white" size="16">
+                {{ tag }}
+              </q-tag>
+            </div>
           </div>
-
-          <q-load-more class="my-sm" :status="pageQueryUtil.loadMore" @click="forceLoadNextPage"></q-load-more>
-
-          <msg-input class="w600"></msg-input>
         </div>
-        <div class="flex-1 position-sticky top-0">
-          <div class="w300 ml-sm">
-            <div class="w300 bg-white bd-radius pd">
-              <div>
-                <div v-for="tag in hotTagsTop10">
-                  <div class="mt-sm color-blue_dark mr-sm font-18">
-                    <span class="color-blue mr-nn">#</span>
-                    {{ tag.name }}
-                  </div>
+        <!--          <q-load-more></q-load-more>-->
+        <!--          <q-icon icon="mdi-loading mdi-spin"></q-icon>-->
+        <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
+        <div v-for="(talk,index) in talksNew" :key="talk.id">
+          <talk-item :talk="talk"
+                     :talk-tab-type="tabName"
+                     @delete-talk="deleteTalk"
+          />
+        </div>
+
+        <q-load-more class="my-sm" :status="pageQueryUtil.loadMore" @click="forceLoadNextPage"></q-load-more>
+
+        <msg-input class="w600"></msg-input>
+      </div>
+      <div class="flex-1 position-sticky top-0">
+        <div class="w300 ml-sm">
+          <div class="w300 bg-white bd-radius pd">
+            <div>
+              <div v-for="tag in hotTagsTop10">
+                <div class="mt-sm color-blue_dark mr-sm font-18" @click="setTagName(tag.name)">
+                  <span class="color-blue mr-nn">#</span>
+                  {{ tag.name }}
                 </div>
               </div>
             </div>
-            <div class="pd-sm font-18 col-all-center mt">
-              <div><a href="https://beian.miit.gov.cn/" target="_blank">冀ICP备19028721号-7</a></div>
-              <el-divider class="my-sm"/>
+          </div>
+          <div class="pd-sm font-18 col-all-center mt">
+            <div><a href="https://beian.miit.gov.cn/" target="_blank">冀ICP备19028721号-7</a></div>
+            <el-divider class="my-sm"/>
 
-              <div>
-                ©2023-2024 鹿森
-              </div>
-
-
-              <el-divider class="my-sm"/>
+            <div>
+              ©2023-2024 鹿森
+            </div>
 
 
-              <div>
-                清池科技滦州市有限公司
-              </div>
+            <el-divider class="my-sm"/>
 
 
-              <el-divider class="my-sm"/>
-              <div> 客服QQ：
-                <a target="_blank"
-                   href="https://wpa.qq.com/msgrd?v=3&amp;uin=491369310&amp;site=qq&amp;menu=yes">
-                  491369310 </a>
-              </div>
+            <div>
+              清池科技滦州市有限公司
+            </div>
+
+
+            <el-divider class="my-sm"/>
+            <div> 客服QQ：
+              <a target="_blank"
+                 href="https://wpa.qq.com/msgrd?v=3&amp;uin=491369310&amp;site=qq&amp;menu=yes">
+                491369310 </a>
             </div>
           </div>
         </div>
-
-        <q-dialog ref="talkAddDialog" confirm-text="发布" @confirm="addTalk">
-          <talk-add-view ref="talkAddView"></talk-add-view>
-        </q-dialog>
-
-        <talk-operate @deleteTalk="deleteTalk"></talk-operate>
-
-        <social-talk-filter-dialog ref="talkFilterDialog"
-                                   @confirm="startPullDown"></social-talk-filter-dialog>
-        <!--      <socialuni-comment-input-dialog ref="commentDialog"></socialuni-comment-input-dialog>-->
       </div>
+
+      <q-dialog ref="talkAddDialog" confirm-text="发布" @confirm="addTalk">
+        <talk-add-view ref="talkAddView"></talk-add-view>
+      </q-dialog>
+
+      <talk-operate @deleteTalk="deleteTalk"></talk-operate>
+
+      <social-talk-filter-dialog ref="talkFilterDialog"
+                                 @confirm="startPullDown"></social-talk-filter-dialog>
+      <!--      <socialuni-comment-input-dialog ref="commentDialog"></socialuni-comment-input-dialog>-->
+    </div>
   </div>
 </template>
 
@@ -133,6 +142,7 @@ import QDialog from "qing-ui-h5/src/components/QDialog.vue";
 import TalkAddView from "./TalkAddView.vue";
 import SocialuniTalkListViewService from "socialuni-community-sdk/src/logic/service/SocialuniTalkListViewService";
 import {getCurrentInstance, nextTick, watch} from "vue";
+import QTag from "qing-ui/src/components/QTag.vue";
 
 
 // todo 后台可控制是否显示轮播图
@@ -146,6 +156,7 @@ import {getCurrentInstance, nextTick, watch} from "vue";
     QLoading,
     QLoadMore,
     QIcon,
+    QTag,
     MsgInput,
     QTabs,
     QEnumLink,
@@ -172,6 +183,9 @@ export default class SocialuniTalkViewH5 extends Vue {
     await this.pageQueryUtil.initQuery(talkQO)
   }
 
+  get selectTagNames() {
+    return socialuniTagModule.selectTagNames
+  }
 
 
   // 用户登录后重新查询
@@ -509,6 +523,10 @@ export default class SocialuniTalkViewH5 extends Vue {
     } else {
       UserMsgUtil.unLoginMessage()
     }
+  }
+
+  setTagName(selectTagName) {
+    socialuniTagModule.setSelectTagName(selectTagName)
   }
 }
 </script>
