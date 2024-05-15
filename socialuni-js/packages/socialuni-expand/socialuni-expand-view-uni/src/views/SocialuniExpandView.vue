@@ -11,7 +11,7 @@
         <swiper class="h100p" :current="currentTabIndex" @change="talkSwiperChange">
           <swiper-item class="h100p" v-for="(item, swiperIndex) in tabsPageQueryUtil" :key="swiperIndex">
             <scroll-view class="h100p overflow-hidden"
-                         :scroll-y="true" @scrolltolower="autoChooseUseLocationQueryTalks"
+                         :scroll-y="true" @scrolltolower="autoChooseUseLocationQueryTalksHandler"
                          :lower-threshold="400">
               <div v-if="!item.listData.length" class="row-all-center h100 color-content">
                 <div>暂无数据</div>
@@ -22,85 +22,10 @@
                   <!--                    {{ mineUser.openContactInfo ? '下拉刷新将您的排名前置' : '开启联系方式您的信息将在此处展示' }}-->
                   <!--                  </div>-->
                 </div>
-                <div class="flex-col px-smm py-sm bb" v-for="user in item.listData" :key="user.id"
-                     @click="toUserDetailVue(user)">
-                  <div class="row-col-center">
-                    <img
-                        class="card-title-avatar bd flex-none"
-                        mode="aspectFill"
-                        :src="user.avatar"
-                    />
-                    <div class="flex-1 row-between-center py-xs">
-                      <div class="flex-col flex-1">
-                        <div class="row-between-center">
-                          <div class="row-col-center">
-                            <span :class="{'color-red':user.vipFlag}">{{ user.nickname }}</span>
-                            <div v-if="user.vipFlag" class="ml-5px cu-tag bg-orange radius sm"
-                                  @click.stop="openVip">
-                              VIP
-                            </div>
-                            <social-gender-tag class="ml-xs" :user="user"></social-gender-tag>
-                          </div>
-                        </div>
-                        <div class="row-col-center mt-xss font-12 color-content">
-<!--                          {{ formatTime(user.updateTime) }}-->
-<!--                          <div class="px-xs row-col-center">|</div>-->
-                          <!--        有市区的名称就不显示省的名称-->
-                          <span v-if="!user.cityName || !user.districtName">{{ user.provinceName }}</span>
-                          <span v-if="user.cityName">
-                            <span v-if="!user.districtName">-</span>
-                            {{ user.cityName.substring(0, 6) }}
-                          </span>
-                          <span v-if="user.districtName">-{{ user.districtName }}</span>
-
-                          <div class="row-col-center" v-if="user.distance|| user.distance===0">
-                            <div class="px-xs row-col-center">|</div>
-                            <span v-if="user.distance<0.5">{{ 0.5 }}公里</span>
-                            <span v-else-if="user.distance<1">{{ 1 }}公里</span>
-                            <span v-else-if="user.distance<5">{{ 5 }}公里</span>
-                            <span v-else>{{ numFixed1(user.distance) }}公里</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-center flex-none">
-<!--                      <div v-if="!isIos" class="col-center flex-none">-->
-                        <div v-if="user.openContactInfo" class="use-click row-col-center">
-                          <q-button light @click="copyContactInfo(user)">
-                            <div class="color-content ml-xs font-12">
-                              已获取( 点击复制 )
-                            </div>
-                          </q-button>
-                        </div>
-                        <div v-else class="use-click row-col-center">
-                          <q-button v-if="user.hasUserLike" @click="toMessagePage(user)" class="mr-sm">
-                            <q-icon icon="mdi-chat-outline" size="14"></q-icon>
-                            私信
-                          </q-button>
-                          <q-button v-else text @click="addLikeUser(user)">
-                            <q-icon icon="mdi-heart-outline" size="22"></q-icon>
-                          </q-button>
-                        </div>
-
-                        <!--                        <div v-else class="use-click row-col-center">-->
-                        <!--                          <q-button text @click="getOpenContactInfo(user)" :disabled="showUserContactBtnDisabled">-->
-                        <!--                            <q-icon prefix="uni-icons" icon="uniui-heart" size="22"></q-icon>-->
-                        <!--                          </q-button>-->
-                        <!--                        </div>-->
-                        <!--                    <socialuni-follow-tag :user="user" @change="userFollowChange"></socialuni-follow-tag>-->
-                      </div>
-                    </div>
-                  </div>
-                  <div class="ml-60 row-col-center mt-xs">
-                    <img v-for="img in imgUrls(user).slice(0,3)" class="size40 bd-radius bd mr-sm"
-                           mode="aspectFill"
-                           :data-src="img"
-                           @click.stop="previewImage(img,user)"
-                           :src="img"
-                    />
-                  </div>
-                </div>
+                <SocialuniExpandUserInfo v-for="user in item.listData" :user="user"
+                                         :key="user.id"></SocialuniExpandUserInfo>
                 <div class="mt-xs">
-                  <uni-load-more :status="item.queryQO.loadMore"
+                  <uni-load-more :status="item.loadMore"
                                  @click="clickOnreachBottom"
                                  :contentText="loadMoreText"></uni-load-more>
                 </div>
@@ -142,18 +67,19 @@ import SocialuniExpandAPI from "socialuni-expand-api/src/api/SocialuniExpandAPI"
 import SocialuniUserLikeAPI from "socialuni-expand-api/src/api/SocialuniUserLikeAPI";
 import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
 import SocialuniUserExpandService from "socialuni-user-sdk/src/logic/SocialuniUserExpandService";
+import SocialuniExpandUserInfo from "socialuni-expand-ui/src/components/SocialuniExpandUserInfo.vue";
 
 @toNative
 @Component({
-  components: {QPullRefresh, QButton, QIcon, SocialGenderTag, QTabs}
+  components: {QPullRefresh, QButton, QIcon, SocialGenderTag, QTabs, SocialuniExpandUserInfo}
 })
-export default  class SocialuniExpandView extends Vue {
+export default class SocialuniExpandView extends Vue {
   $refs: {
     pullRefresh: QPullRefresh
   }
 
   tabs = SocialuniUserExtendFriendsType.allTypes
-  tabsPageQueryUtil: SocialuniPageQueryUtil<SocialuniUserExtendDetailRO, SocialuniUserExtendFriendQueryQO>[] = [new SocialuniPageQueryUtil(), new SocialuniPageQueryUtil()]
+  tabsPageQueryUtil: SocialuniPageQueryUtil<SocialuniUserExtendDetailRO, SocialuniUserExtendFriendQueryQO>[] = [new SocialuniPageQueryUtil()]
   currentTabIndex = 0
 
   loadMoreText = {
@@ -173,7 +99,7 @@ export default  class SocialuniExpandView extends Vue {
   }
 
   created() {
-    this.tabsPageQueryUtil = [new SocialuniPageQueryUtil(SocialuniExpandAPI.queryExtendFriendUsersAPI), new SocialuniPageQueryUtil(SocialuniExpandAPI.queryExtendFriendUsersAPI)]
+    this.tabsPageQueryUtil = this.tabs.map(item => new SocialuniPageQueryUtil(SocialuniExpandAPI.queryExtendFriendUsersAPI))
 
     onLoad((params: { followType: string }) => {
       if (params) {
@@ -201,9 +127,9 @@ export default  class SocialuniExpandView extends Vue {
   async initQuery() {
     const queryData = new SocialuniUserExtendFriendQueryQO(this.tabs[this.currentTabIndex]);
     await this.tabsPageQueryUtil[this.currentTabIndex].initQuery(queryData)
-    for (const listDatum of this.tabsPageQueryUtil[this.currentTabIndex].listData) {
-      listDatum.getUserContactBtnDisabled = false
-    }
+    // for (const listDatum of this.tabsPageQueryUtil[this.currentTabIndex].listData) {
+    //   listDatum.getUserContactBtnDisabled = false
+    // }
     this.endPulldownRefresh()
   }
 
@@ -234,18 +160,13 @@ export default  class SocialuniExpandView extends Vue {
 
   async autoChooseUseLocationQueryTalksHandler() {
     await this.tabsPageQueryUtil[this.currentTabIndex].loadNextPage()
-    for (const listDatum of this.tabsPageQueryUtil[this.currentTabIndex].listData) {
-      listDatum.getUserContactBtnDisabled = false
-    }
+    // for (const listDatum of this.tabsPageQueryUtil[this.currentTabIndex].listData) {
+    //   listDatum.getUserContactBtnDisabled = false
+    // }
   }
 
-  autoChooseUseLocationQueryTalks = CommonUtil.debounce(() => {
-    this.autoChooseUseLocationQueryTalksHandler()
-  }, 500)
-
-
   get curTalkTabObj() {
-    return this.tabsPageQueryUtil[this.currentTabIndex].queryQO
+    return this.tabsPageQueryUtil[this.currentTabIndex]
   }
 
   //同步更新粉丝和关注列表状态
@@ -264,14 +185,7 @@ export default  class SocialuniExpandView extends Vue {
     //停止查询方法
     const talkTab = this.curTalkTabObj
     if (talkTab) {
-      //如果正在查询，则停止查询，没办法省略因为修改和使用的是一个变量
-      if (talkTab.loadMore === LoadMoreType.loading) {
-        talkTab.loadMore = LoadMoreType.more
-      } else {
-        talkTab.loadMore = LoadMoreType.more
-        //如果正在查询，则更改状态为加载更多,点击暂停加载。
-        await this.autoChooseUseLocationQueryTalks()
-      }
+      await this.autoChooseUseLocationQueryTalksHandler()
     }
   }
 
@@ -301,20 +215,6 @@ export default  class SocialuniExpandView extends Vue {
     return DateUtil.formatTime(dateStr)
   }
 
-  imgUrls(user: CenterUserDetailRO) {
-    if (user && user.imgs) {
-      return user.imgs.map(item => SocialuniImgUtil.getUserLargeImgUrl(item.src))
-    } else {
-      return []
-    }
-  }
-
-  previewImage(current, user: CenterUserDetailRO) {
-    uni.previewImage({
-      current: current,
-      urls: this.imgUrls(user)
-    })
-  }
 
   addLikeUser(user: SocialuniUserExtendDetailRO) {
     SocialuniUserLikeAPI.addUserLikeAPI(user)
