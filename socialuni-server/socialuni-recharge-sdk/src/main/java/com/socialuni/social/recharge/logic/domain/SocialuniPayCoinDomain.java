@@ -3,6 +3,7 @@ package com.socialuni.social.recharge.logic.domain;
 import com.socialuni.social.common.api.constant.DateTimeType;
 import com.socialuni.social.common.api.constant.PlatformType;
 import com.socialuni.social.common.api.constant.SystemType;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.common.api.utils.IpUtil;
 import com.socialuni.social.common.api.utils.RequestUtil;
@@ -170,7 +171,7 @@ public class SocialuniPayCoinDomain {
         } else if (SocialuniSupportProviderType.qq.equals(payProvider)) {
             orderNo.append("Q");
         } else {
-            throw new SocialSystemException("错误的支付渠道");
+            throw new SocialParamsException("错误的支付渠道");
         }
         //第二位，设备平台，ios，android
         if (SystemType.ios.equals(system)) {
