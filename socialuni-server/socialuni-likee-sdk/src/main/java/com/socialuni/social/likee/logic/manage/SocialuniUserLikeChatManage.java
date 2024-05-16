@@ -31,4 +31,8 @@ public class SocialuniUserLikeChatManage {
         }
         return socialuniUserLikeChatDO;
     }
+
+    public SocialuniUserLikeChatDO get(Integer chatId) {
+        return socialuniLikeUserChatRepository.findByChatId(chatId);
+    }
 }
