@@ -28,6 +28,7 @@ import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAP
 import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
 import SocialuniUserExpandService from "socialuni-user-sdk/src/logic/SocialuniUserExpandService";
 import {socialuniAppUserModule} from "socialuni-user-sdk/src/store/SocialuniAppUserModule";
+import SocialuniUserLikeAPI from "socialuni-expand-api/src/api/SocialuniUserLikeAPI";
 
 export default class SocialuniMsgViewService extends SocialuniViewService<any> {
     public $refs!: {
@@ -135,7 +136,7 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
             socialuniChatModule.chat.updateTime = new Date()
             console.log(123)
             try {
-                const res = await MessageAPI.sendMsgAPI(socialuniChatModule.chat.id, msgContent, msgType)
+                const res = await SocialuniUserLikeAPI.sendMsgAPI(socialuniChatModule.chat.id, msgContent, msgType)
                 socialuniChatModule.chat.updateTime = res.data.createTime
                 socialuniChatModule.messages.splice(index, 1, res.data)
                 socialuniAppUserModule.userCoinNum = socialuniAppUserModule.userCoinNum - 10

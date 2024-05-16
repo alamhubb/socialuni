@@ -4,6 +4,9 @@ import socialuniUserRequest from "socialuni-user-api/src/request/socialuniUserRe
 import SocialuniUserIdQO from "socialuni-api-base/src/model/QO/user/SocialuniUserIdQO";
 import SocialuniUserExtendDetailRO from "../model/SocialuniUserExtendDetailRO";
 import SocialuniLikeAllConfigBO from "../model/SocialuniLikeAllConfigBO";
+import MessageAddVO from "socialuni-im-api/src/model/QO/message/MessageAddVO";
+import socialuniImRequest from "socialuni-im-api/src/api/socialuniImRequest";
+import MessageVO from "socialuni-im-api/src/model/RO/MessageVO";
 
 export default class SocialuniUserLikeAPI {
 
@@ -13,5 +16,10 @@ export default class SocialuniUserLikeAPI {
 
   static getAllConfig() {
     return socialuniUserRequest.get<SocialuniLikeAllConfigBO>('socialuni/userLike/getLikeAllConfig')
+  }
+
+  static sendMsgAPI(chatId: string, content: string, type: string = null) {
+    const msgAdd: MessageAddVO = new MessageAddVO(chatId, content, type)
+    return socialuniImRequest.post <MessageVO>('socialuni/userLike/sendMsg', msgAdd)
   }
 }

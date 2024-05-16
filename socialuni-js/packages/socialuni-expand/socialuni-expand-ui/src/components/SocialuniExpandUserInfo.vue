@@ -137,7 +137,7 @@ export default class SocialuniExpandUserInfo extends Vue {
     await SocialuniUserLikeAPI.addUserLikeAPI(user)
     user.hasUserLike = true
     await SocialuniLikeService.checkUserCoinAndPay()
-    await MessageAPI.sendMsgAPI(socialuniChatModule.chat.id, "你好在干嘛")
+    await SocialuniUserLikeAPI.sendMsgAPI(socialuniChatModule.chat.id, "你好在干嘛")
     QingAppUtil.ToastUtil.success("打招呼成功")
     // this.toMessagePage(user)
   }

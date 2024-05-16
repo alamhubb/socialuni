@@ -30,6 +30,24 @@ public class SocialuniUserLikeService {
     @Resource
     SocialuniCreateCoinOrderEntity socialuniCreateCoinOrderEntity;
 
+
+    public ResultRO<SocialMessageRO> sendMsg(MessageAddVO msgAddVO) {
+        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+
+        //msg支持自定义的展示类型
+        ResultRO<SocialMessageRO> resultRO = messageService.sendMsg(msgAddVO);
+
+        SocialMessageRO socialMessageRO = resultRO.getData();
+
+        String msgId = socialMessageRO.getId();
+
+        Integer msgIdd = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(msgId);
+
+        socialuniCreateCoinOrderEntity.createCoinOrderByOrderType(mineUserId, SocialuniLikeAllConfig.getLikeAllConfigBO().getSendLikeMsgNeedPayCoinNum(), SocialuniCoinOrderType.consume, SocialuniOrderDetailType.msg, msgIdd);
+
+        return resultRO;
+    }
+
     @Transactional
     public SocialuniUserLikeDO likeUser(SocialuniUserIdQO addVO) {
         //有问题，应该关注完刷新前台用户
@@ -50,15 +68,6 @@ public class SocialuniUserLikeService {
         msgAddVO.setReceiveId(receiveUserId);
         //获取用户的币，获取发送需要的币
         msgAddVO.setContent("你好，在干嘛呢");
-        //msg支持自定义的展示类型
-        ResultRO<SocialMessageRO> resultRO = messageService.sendMsg(msgAddVO);
-
-        SocialMessageRO socialMessageRO = resultRO.getData();
-
-        String msgId = socialMessageRO.getId();
-
-        Integer msgIdd = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(msgId);
-
-        socialuniCreateCoinOrderEntity.createCoinOrderByOrderType(mineUserId, SocialuniLikeAllConfig.getLikeAllConfigBO().getSendLikeMsgNeedPayCoinNum(), SocialuniCoinOrderType.consume, SocialuniOrderDetailType.msg, msgIdd);
+        sendMsg(msgAddVO);
     }
 }

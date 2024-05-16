@@ -12,6 +12,7 @@ import OpenImSessionType from "socialuni-constant/constant/openIm/constant/OpenI
 import ImPageUtil from "../util/ImPageUtil";
 import ChatAPI from "socialuni-im-api/src/api/ChatAPI";
 import SocialuniImUserTokenUtil from "../util/SocialuniImUserTokenUtil";
+import SocialuniUserLikeAPI from "socialuni-expand-api/src/api/SocialuniUserLikeAPI";
 
 
 const openIM = null
@@ -598,7 +599,7 @@ class SocialChatModule {
         };*/
         // console.log('-------params-------', params);
 
-        return MessageAPI.sendMsgAPI(this.chat.id, msg.content)
+        return SocialuniUserLikeAPI.sendMsgAPI(this.chat.id, msg.content)
         //
         /*let actionMethod: Function = null;
         switch (msg.action) {

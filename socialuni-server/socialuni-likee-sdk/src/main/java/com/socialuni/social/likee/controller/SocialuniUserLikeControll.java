@@ -2,10 +2,13 @@ package com.socialuni.social.likee.controller;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserIdQO;
+import com.socialuni.social.im.api.model.QO.message.MessageAddVO;
+import com.socialuni.social.im.api.model.RO.SocialMessageRO;
 import com.socialuni.social.likee.api.SocialuniUserLikeAPI;
 import com.socialuni.social.likee.config.SocialuniLikeAllConfig;
 import com.socialuni.social.likee.logic.service.SocialuniUserLikeService;
 import com.socialuni.social.likee.model.SocialuniLikeAllConfigBO;
+import com.socialuni.social.sdk.im.logic.service.SocialuniMessageService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,6 +19,11 @@ import javax.annotation.Resource;
 class SocialuniUserLikeControll implements SocialuniUserLikeAPI {
     @Resource
     SocialuniUserLikeService socialuniUserLikeService;
+
+    @Override
+    public ResultRO<SocialMessageRO> sendMsg(MessageAddVO messageAddVO) {
+        return socialuniUserLikeService.sendMsg(messageAddVO);
+    }
 
     public ResultRO<Void> likeUser(SocialuniUserIdQO addVO) {
         socialuniUserLikeService.likeUser(addVO);

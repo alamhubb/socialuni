@@ -2,6 +2,8 @@ package com.socialuni.social.likee.api;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserIdQO;
+import com.socialuni.social.im.api.model.QO.message.MessageAddVO;
+import com.socialuni.social.im.api.model.RO.SocialMessageRO;
 import com.socialuni.social.likee.model.SocialuniLikeAllConfigBO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,4 +24,7 @@ public interface SocialuniUserLikeAPI {
     @GetMapping("getLikeAllConfig")
     @Operation(summary = "得到喜欢域的所有配置")
     ResultRO<SocialuniLikeAllConfigBO> getLikeAllConfig();
+
+    @PostMapping("sendMsg")
+    ResultRO<SocialMessageRO> sendMsg(@RequestBody @Valid MessageAddVO messageAddVO);
 }
