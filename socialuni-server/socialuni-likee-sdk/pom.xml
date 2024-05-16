@@ -35,10 +35,6 @@
         </dependency>
         <dependency>
             <groupId>com.socialuni.social</groupId>
-            <artifactId>socialuni-im-sdk</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.socialuni.social</groupId>
             <artifactId>socialuni-user-sdk</artifactId>
         </dependency>
         <dependency>

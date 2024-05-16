@@ -19,8 +19,8 @@ public class SocialuniUserLikeService {
     @Resource
     SocialuniUserLikeManageHa socialuniUserLikeManage;
 
-    @Resource
-    private SocialuniMessageService messageService;
+//    @Resource
+//    private SocialuniMessageService messageService;
 
     @Transactional
     public SocialuniUserLikeDO likeUser(SocialuniUserIdQO addVO) {
@@ -33,16 +33,16 @@ public class SocialuniUserLikeService {
         }
         SocialuniUserLikeDO socialuniUserLikeDO = socialuniUserLikeManage.createOrUpdateLikeStatus(mineUserId, beUserId);
 
-        sendLikeUserMsg(addVO.getUserId());
+//        sendLikeUserMsg(addVO.getUserId());
         return socialuniUserLikeDO;
     }
 
-    public void sendLikeUserMsg(String receiveUserId) {
-        MessageAddVO msgAddVO = new MessageAddVO();
-        msgAddVO.setReceiveId(receiveUserId);
-        msgAddVO.setType("喜欢");
-        msgAddVO.setContent("你好，在干嘛呢");
-        //msg支持自定义的展示类型
-        messageService.sendMsg(msgAddVO);
-    }
+//    public void sendLikeUserMsg(String receiveUserId) {
+//        MessageAddVO msgAddVO = new MessageAddVO();
+//        msgAddVO.setReceiveId(receiveUserId);
+//        msgAddVO.setType("喜欢");
+//        msgAddVO.setContent("你好，在干嘛呢");
+//        //msg支持自定义的展示类型
+//        messageService.sendMsg(msgAddVO);
+//    }
 }
