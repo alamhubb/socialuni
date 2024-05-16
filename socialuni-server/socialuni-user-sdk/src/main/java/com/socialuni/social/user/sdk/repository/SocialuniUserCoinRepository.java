@@ -16,6 +16,5 @@ public interface SocialuniUserCoinRepository extends JpaRepository<SocialuniUser
     default SocialuniUserCoinDo savePut(SocialuniUserCoinDo socialuniUserExpandDO){
         return this.save(socialuniUserExpandDO);
     }
-
 }
 

@@ -205,6 +205,17 @@ public class SocialuniUserUtil {
         return userApi.findOneByUnionId(userId);
     }
 
+    public static SocialuniUserDo getNotNull(Integer userId) {
+        if (userId == null) {
+            throw new SocialParamsException("用户id异常");
+        }
+        SocialuniUserDo socialuniUserDo = userApi.findOneByUnionId(userId);
+        if (socialuniUserDo == null) {
+            throw new SocialParamsException("用户id异常");
+        }
+        return socialuniUserDo;
+    }
+
     public static boolean isMine(SocialuniUserDo mineUser, Integer userId) {
         if (mineUser == null) {
             return false;

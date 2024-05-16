@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 public interface SocialuniUserRepository extends JpaRepository<SocialuniUserDo, Integer> {
+//    @Cacheable(cacheNames = CommonRedisKey.findAllUserId)
     @Query(value = "select u.userId from SocialuniUserDo u")
     List<Integer> findAllUserIds();
 
@@ -23,7 +24,10 @@ public interface SocialuniUserRepository extends JpaRepository<SocialuniUserDo, 
     SocialuniUserDo findOneByUnionId(Integer id);
 
     @Caching(
-            evict = {@CacheEvict(cacheNames = CommonRedisKey.findUserIdsByStatus, allEntries = true)},
+            evict = {
+                    @CacheEvict(cacheNames = CommonRedisKey.findUserIdsByStatus, allEntries = true),
+                    @CacheEvict(cacheNames = CommonRedisKey.findAllUserId, allEntries = true)
+            },
             put = {@CachePut(cacheNames = CommonRedisKey.userById,  key = "#user.unionId")}
     )
     default SocialuniUserDo savePut(SocialuniUserDo user){

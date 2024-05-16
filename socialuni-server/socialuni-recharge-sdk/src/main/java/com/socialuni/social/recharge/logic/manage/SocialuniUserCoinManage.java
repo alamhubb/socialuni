@@ -12,7 +12,7 @@ import java.util.Date;
 public class SocialuniUserCoinManage {
 
     public SocialuniUserCoinDo updateUserCoin(Integer userId, Integer coinNum) {
-        SocialuniUserCoinDo userCoinDo = SocialuniUserSocialCoinDOUtil.getNotNull(userId);
+        SocialuniUserCoinDo userCoinDo = SocialuniUserSocialCoinDOUtil.getOrCreate(userId);
 
         userCoinDo.setCoin(userCoinDo.getCoin() + coinNum);
 
