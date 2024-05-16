@@ -12,6 +12,7 @@
     "qingjs": "^0.1.13",
     "socialuni": "^0.1.13",
     "socialuni-expand-api": "^0.1.13",
+    "socialuni-expand-sdk": "^0.1.13",
     "socialuni-constant": "^0.1.13",
     "vue": "3.2.41"
   },

@@ -1,0 +1,22 @@
+package com.socialuni.social.recharge.logic.manage;
+
+import com.socialuni.social.user.sdk.dao.DO.SocialuniUserCoinDo;
+import com.socialuni.social.user.sdk.utils.SocialuniUserSocialCoinDOUtil;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+
+@Service
+public class SocialuniUserCoinManage {
+
+    public SocialuniUserCoinDo updateUserCoin(Integer userId, Integer coinNum) {
+        SocialuniUserCoinDo userCoinDo = SocialuniUserSocialCoinDOUtil.getOrCreate(userId);
+
+        userCoinDo.setCoin(userCoinDo.getCoin() + coinNum);
+        userCoinDo.setUpdateTime(new Date());
+
+        //更新用户的coin数量
+        userCoinDo = SocialuniUserSocialCoinDOUtil.save(userCoinDo);
+        return userCoinDo;
+    }
+}

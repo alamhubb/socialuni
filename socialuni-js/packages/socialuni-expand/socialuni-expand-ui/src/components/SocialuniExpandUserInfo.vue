@@ -19,25 +19,25 @@
               <social-gender-tag class="ml-xs" :user="user"></social-gender-tag>
             </div>
           </div>
-<!--          <div class="row-col-center mt-xss font-12 color-content">
-            &lt;!&ndash;                          {{ formatTime(user.updateTime) }}&ndash;&gt;
-            &lt;!&ndash;                          <div class="px-xs row-col-center">|</div>&ndash;&gt;
-            &lt;!&ndash;        有市区的名称就不显示省的名称&ndash;&gt;
-            <span v-if="!user.cityName || !user.districtName">{{ user.provinceName }}</span>
-            <span v-if="user.cityName">
-                            <span v-if="!user.districtName">-</span>
-                            {{ user.cityName.substring(0, 6) }}
-                          </span>
-            <span v-if="user.districtName">-{{ user.districtName }}</span>
+          <!--          <div class="row-col-center mt-xss font-12 color-content">
+                      &lt;!&ndash;                          {{ formatTime(user.updateTime) }}&ndash;&gt;
+                      &lt;!&ndash;                          <div class="px-xs row-col-center">|</div>&ndash;&gt;
+                      &lt;!&ndash;        有市区的名称就不显示省的名称&ndash;&gt;
+                      <span v-if="!user.cityName || !user.districtName">{{ user.provinceName }}</span>
+                      <span v-if="user.cityName">
+                                      <span v-if="!user.districtName">-</span>
+                                      {{ user.cityName.substring(0, 6) }}
+                                    </span>
+                      <span v-if="user.districtName">-{{ user.districtName }}</span>
 
-            <div class="row-col-center" v-if="user.distance|| user.distance===0">
-              <div class="px-xs row-col-center">|</div>
-              <span v-if="user.distance<0.5">{{ 0.5 }}公里</span>
-              <span v-else-if="user.distance<1">{{ 1 }}公里</span>
-              <span v-else-if="user.distance<5">{{ 5 }}公里</span>
-              <span v-else>{{ numFixed1(user.distance) }}公里</span>
-            </div>
-          </div>-->
+                      <div class="row-col-center" v-if="user.distance|| user.distance===0">
+                        <div class="px-xs row-col-center">|</div>
+                        <span v-if="user.distance<0.5">{{ 0.5 }}公里</span>
+                        <span v-else-if="user.distance<1">{{ 1 }}公里</span>
+                        <span v-else-if="user.distance<5">{{ 5 }}公里</span>
+                        <span v-else>{{ numFixed1(user.distance) }}公里</span>
+                      </div>
+                    </div>-->
         </div>
         <div class="col-center flex-none">
           <!--                      <div v-if="!isIos" class="col-center flex-none">-->
@@ -96,12 +96,15 @@ import NumUtil from "qing-util/src/util/NumUtil";
 import DateUtil from "qing-util/src/util/DateUtil";
 import SocialuniUserExpandService from "socialuni-user-sdk/src/logic/SocialuniUserExpandService";
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
+import MessageAPI from "socialuni-im-api/src/api/MessageAPI";
+import {socialuniAppUserModule} from "socialuni-user-sdk/src/store/SocialuniAppUserModule";
+import {socialuniLikeConfigModule} from "socialuni-expand-sdk/src/store/SocialuniLikeConfigModule";
 
 @toNative
 @Component({
   components: {QButton, QIcon, SocialGenderTag}
 })
-export default  class SocialuniExpandUserInfo extends Vue {
+export default class SocialuniExpandUserInfo extends Vue {
   @Prop() user: SocialuniUserExtendDetailRO
 
 
@@ -128,10 +131,12 @@ export default  class SocialuniExpandUserInfo extends Vue {
     QingAppUtil.NativeUtil.textCopy(user.contactInfo)
   }
 
-  addLikeUser(user: SocialuniUserExtendDetailRO) {
-    SocialuniUserLikeAPI.addUserLikeAPI(user).then(() => {
-      user.hasUserLike = true
-    })
+  async addLikeUser(user: SocialuniUserExtendDetailRO) {
+    await SocialuniUserLikeAPI.addUserLikeAPI(user)
+    user.hasUserLike = true
+    if (socialuniAppUserModule.userCoinNum > socialuniLikeConfigModule.config.sendLikeMsgNeedPayCoinNum) {
+      await MessageAPI.sendMsgAPI(socialuniChatModule.chat.id, "你好在干嘛", msgType)
+    }
     // this.toMessagePage(user)
   }
 

@@ -2,6 +2,7 @@ package com.socialuni.social.sdk.im.logic.domain;
 
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
+import com.socialuni.social.sdk.im.enumeration.MessageContentType;
 import com.socialuni.social.sdk.im.enumeration.MessageType;
 import com.socialuni.social.sdk.im.logic.entity.SocialuniMessageEntity;
 import com.socialuni.social.sdk.im.logic.foctory.SocialuniChatUserDOFactory;
@@ -43,7 +44,7 @@ public class SocialuniImUserFollowDomain extends SocialUserFollowDomain {
 
         SocialuniUserDo systemUser = SocialuniUserUtil.getSystemUserNotNull();
         String msg = "互相关注，成为好友了";
-        socialuniMessageEntity.sendMsgNotifyList(msg, systemUser, chatSocialuniUserDoS, MessageType.system);
+        socialuniMessageEntity.sendMsgNotifyList(msg, systemUser, chatSocialuniUserDoS, MessageContentType.text);
         return socialuniUserFollowDO;
     }
 

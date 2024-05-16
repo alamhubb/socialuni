@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.dao.repository.bussiness;
+package com.socialuni.social.recharge.dao.repository;
 
 import com.socialuni.social.recharge.dao.DO.SocialuniPayCoinOrderDO;
 import org.springframework.data.jpa.repository.JpaRepository;

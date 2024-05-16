@@ -8,8 +8,12 @@ import com.socialuni.social.sdk.im.enumeration.MessageType;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 
 public class SocialuniMessageDOFactory {
-
     public static SocialuniMessageDO createMessage(Integer chatId, String content, Integer userId) {
+        SocialuniMessageDO messageDO = SocialuniMessageDOFactory.createMessage(chatId, content, userId, MessageContentType.text);
+        return messageDO;
+    }
+
+    public static SocialuniMessageDO createMessage(Integer chatId, String content, Integer userId, String contentType) {
         Integer messageId = SocialuniUnionIdFacede.createMessageUnionId();
 
         SocialuniMessageDO messageDO = new SocialuniMessageDO(userId, messageId, SocialuniContentType.message, content);
@@ -18,14 +22,7 @@ public class SocialuniMessageDOFactory {
         messageDO.setReadStatus(MessageReadStatus.sending);
         messageDO.setReadNum(0);
         messageDO.setType(MessageType.simple);
-        messageDO.setMessageContentType(MessageContentType.text);
-
-        return messageDO;
-    }
-
-    public static SocialuniMessageDO createMessage(Integer chatId, String content, Integer userId, String messageType) {
-        SocialuniMessageDO messageDO = SocialuniMessageDOFactory.createMessage(chatId, content, userId);
-        messageDO.setMessageContentType(messageType);
+        messageDO.setMessageContentType(contentType);
 
         return messageDO;
     }

@@ -12,9 +12,11 @@ import com.socialuni.social.common.api.utils.UUIDUtil;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniGetUserContactRecordDO;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
+import com.socialuni.social.recharge.constant.SocialuniCoinOrderType;
 import com.socialuni.social.recharge.dao.DO.SocialuniCoinConsumLogDO;
 import com.socialuni.social.recharge.dao.DO.SocialuniCoinOrderDO;
 import com.socialuni.social.recharge.factory.SocialuniCoinOrderFactory;
+import com.socialuni.social.recharge.logic.entity.SocialuniCreateCoinOrderEneity;
 import com.socialuni.social.recharge.model.SocialuniCoinInfoRO;
 import com.socialuni.social.recharge.model.SocialuniCoinPayRO;
 import com.socialuni.social.recharge.model.SocialuniPayCoinQO;
@@ -45,7 +47,7 @@ import java.util.Date;
 @Slf4j
 public class SocialuniPayCoinDomain {
     @Resource
-    SocialuniPayCoinDomain socialuniPayCoinDomain;
+    SocialuniCreateCoinOrderEneity socialuniCreateCoinOrderEneity;
 
     @Transactional
     public void consumCoinByType(Integer mineUserId, Integer beUserId, String type) {
@@ -72,11 +74,7 @@ public class SocialuniPayCoinDomain {
         socialuniCoinConsumLogDO.setType(type);
         socialuniCoinConsumLogDO = SocialuniRepositoryFacade.save(socialuniCoinConsumLogDO);
 
-        //创建金币订单
-        SocialuniCoinOrderDO shellOrderDO = SocialuniCoinOrderFactory.createCoinOrderDOByContactInfoSuccess(socialuniUserCoinDo, -consumNum, socialuniCoinConsumLogDO.getId());
-        //消费
-        //保存
-        SocialuniRepositoryFacade.save(shellOrderDO);
+        socialuniCreateCoinOrderEneity.createCoinOrderByOrderType(mineUserId, -consumNum, SocialuniCoinOrderType.expense, socialuniCoinConsumLogDO.getId());
     }
 
 

@@ -15,7 +15,7 @@ public class SocialuniCoinOrderDO extends SocialuniContentBaseDO implements Seri
     //本单贝壳数量，可能是正值，也可能是负值
     @Column(nullable = false)
     private Integer shell;
-    //绝对值，
+    //绝对值，什么用，没想明白
     @Column(nullable = false)
     private Integer absoluteShell;
 

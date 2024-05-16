@@ -8,6 +8,7 @@ import com.socialuni.social.im.api.model.RO.SocialMessageRO;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniChatRepository;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniMessageReceiveRepository;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniMessageRepository;
+import com.socialuni.social.sdk.im.enumeration.MessageContentType;
 import com.socialuni.social.sdk.im.enumeration.MessageType;
 import com.socialuni.social.sdk.im.logic.entity.SocialuniMessageEntity;
 import com.socialuni.social.im.api.model.QO.message.MessageAddVO;
@@ -42,9 +43,9 @@ public class SocialuniMessageService {
         String msgContent = msgAddVO.getContent();
         String msgType = msgAddVO.getType();
         if (StringUtils.isEmpty(msgType)) {
-            msgType = MessageType.simple;
+            msgType = MessageContentType.text;
         }
-        if (StringUtils.isEmpty(msgContent) && msgType.equals(MessageType.simple)) {
+        if (StringUtils.isEmpty(msgContent)) {
             throw new SocialBusinessException("不能发布空内容");
         }
         SocialuniUserCheck.checkUserBindPhoneNumAndStatusEnable();
@@ -63,15 +64,13 @@ public class SocialuniMessageService {
             //为私聊相关校验
             //后端区分这个值是群聊还是私聊。
 
-            SocialMessageRO socialMessageRO = messageEntity.sendSingleMsg(unionId, msgAddVO.getContent(), msgAddVO.getType());
+            SocialMessageRO socialMessageRO = messageEntity.sendSingleMsg(unionId, msgAddVO.getContent(),msgType);
 
             return ResultRO.success(socialMessageRO);
 
         } else if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.chat)) {
             //群聊
-
-
-            SocialMessageRO socialMessageRO = messageEntity.sendGroupMessage(unionId, msgAddVO.getContent());
+            SocialMessageRO socialMessageRO = messageEntity.sendGroupMessage(unionId, msgAddVO.getContent(), msgType);
 
             return ResultRO.success(socialMessageRO);
 

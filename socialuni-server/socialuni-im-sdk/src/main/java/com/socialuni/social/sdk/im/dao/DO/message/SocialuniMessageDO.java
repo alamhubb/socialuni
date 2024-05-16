@@ -28,6 +28,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = true)
 public class SocialuniMessageDO extends SocialuniUnionContentBaseDO implements Serializable {
     private Integer chatId;
+//    private String type;
     //官方，普通
     //图文，图片，文字，视频，这种类型，内容类型
     private String messageContentType;

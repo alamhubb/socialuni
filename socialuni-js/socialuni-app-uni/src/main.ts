@@ -7,6 +7,7 @@ import SocialuniAppViewUni from "socialuni-app-view-uni/src";
 import SocialuniUiUni from "socialuni-ui-uni/src";
 import SocialuniUser from "socialuni-user-sdk/src";
 import SocialuniIm from "socialuni-im-sdk/src";
+import SocialuniExpand from "socialuni-expand-sdk/src";
 
 export function createApp() {
     const app = createSSRApp(App);
@@ -15,6 +16,7 @@ export function createApp() {
     app.use(SocialuniAppViewUni)
     app.use(SocialuniUser)
     app.use(SocialuniIm)
+    app.use(SocialuniExpand)
     app.use(Socialuni)
 
     app.config.globalProperties.$qing = socialuniSystemModule

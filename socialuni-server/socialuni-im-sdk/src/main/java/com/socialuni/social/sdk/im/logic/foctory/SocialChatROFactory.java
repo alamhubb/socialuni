@@ -5,9 +5,6 @@ import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.sdk.constant.LoadMoreType;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
-import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
-import com.socialuni.social.likee.config.SocialuniLikeSdkConfig;
-import com.socialuni.social.likee.dao.DO.SocialuniUserLikeChatDO;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniUserChatConfigDO;
@@ -156,13 +153,17 @@ public class SocialChatROFactory {
             chatRO.setReceiveUserId(beUserId);
             chatRO.setUnreadNum(chatUserDO.getUnreadNum());
             chatRO.setBlackUser(chatRO.getBlackUser());
+//            chatRO.setPayCoinNum(SocialuniLikeSdkConfig.sendLikeMsgNeedPayCoinNum);
 
-            chatRO.setPayCoinNum(0);
+            //暂时不做相关判断，所有私聊都需要金币
+//            chatRO.setPayCoinNum(0);
+//            if (SocialuniChatDomainType.like.equals(chat.getDomainType())){
+//                SocialuniUserLikeChatDO socialuniUserLikeChatDO = SocialuniUserRepositoryFacede.findByUserId(chatUserDO.getUserId(), SocialuniUserLikeChatDO.class);
+//                if (socialuniUserLikeChatDO != null) {
+//                    chatRO.setPayCoinNum(SocialuniLikeSdkConfig.sendLikeMsgNeedPayCoinNum);
+//                }
+//            }
 
-            SocialuniUserLikeChatDO socialuniUserLikeChatDO = SocialuniUserRepositoryFacede.findByUserId(chatUserDO.getUserId(), SocialuniUserLikeChatDO.class);
-            if (socialuniUserLikeChatDO != null) {
-                chatRO.setPayCoinNum(SocialuniLikeSdkConfig.sendLikeMsgNeedPayCoinNum);
-            }
 
             // 有一个配置表，你可以从配置比里面读东西
             SocialuniUserBlackDO socialuniUserBlackDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserIdAndStatus(chatUserDO.getBeUserId(), chatUserDO.getUserId(), SocialuniCommonStatus.enable, SocialuniUserBlackDO.class);

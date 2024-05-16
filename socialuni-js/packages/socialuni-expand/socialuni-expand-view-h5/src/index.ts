@@ -5,11 +5,11 @@ import {App} from "vue";
 import {Vue} from "vue-facing-decorator";
 import SocialuniExpandViewH5 from "./views/SocialuniExpandViewH5.vue";
 
-class SocialuniExpandPlugin implements SocialuniPlugin {
+class SocialuniExpandPluginH5 implements SocialuniPlugin {
 
 }
 
-const socialuniExpandPlugin: SocialuniPlugin = new SocialuniExpandPlugin()
+const socialuniExpandPlugin: SocialuniPlugin = new SocialuniExpandPluginH5()
 
 
 socialuniPluginsModule.componentsMap.set('expandView', SocialuniExpandViewH5)

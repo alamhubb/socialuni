@@ -27,7 +27,8 @@ public class SocialMessageRO {
     private Date createTime;
     //前台不需要这个时间
 //    private Date updateTIme;
-    private String type;
+    //没什么用，不需要返回暂时
+//    private String type;
 
 
 }

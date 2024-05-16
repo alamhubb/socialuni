@@ -52,7 +52,8 @@ public class SocialMessageROFactory {
 
         messageRO.setReadStatus(MessageReadStatus.sended);
         messageRO.setReadNum(messageDO.getReadNum());
-        messageRO.setType(messageDO.getType());
+        //没什么用，不需要返回暂时
+//        messageRO.setType(messageDO.getType());
         messageRO.setContentType(messageDO.getMessageContentType());
         return messageRO;
     }

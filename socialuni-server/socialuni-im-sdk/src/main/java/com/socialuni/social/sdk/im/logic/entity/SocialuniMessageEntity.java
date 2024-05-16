@@ -21,6 +21,7 @@ import com.socialuni.social.sdk.im.dao.repository.SocialuniChatRepository;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniMessageReceiveRepository;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniMessageRepository;
 import com.socialuni.social.sdk.im.enumeration.ChatUserStatus;
+import com.socialuni.social.sdk.im.enumeration.MessageContentType;
 import com.socialuni.social.sdk.im.enumeration.MessageType;
 import com.socialuni.social.sdk.im.enumeration.NotifyType;
 import com.socialuni.social.sdk.im.logic.check.SocialuniChatUserCheck;
@@ -90,14 +91,14 @@ public class SocialuniMessageEntity {
     // 这俩级联？
     @Transactional
     public SocialMessageRO sendSingleMsg(Integer beUserId, String msgContent) {
-        return sendSingleMsg(beUserId, msgContent, MessageType.simple);
+        return sendSingleMsg(beUserId, msgContent, MessageContentType.text);
     }
 
     @Resource
     SocialuniPayCoinDomain socialuniPayCoinDomain;
 
     @Transactional
-    public SocialMessageRO sendSingleMsg(Integer beUserId, String msgContent, String msgType) {
+    public SocialMessageRO sendSingleMsg(Integer beUserId, String msgContent, String contentType) {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
 
         Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
@@ -156,12 +157,7 @@ public class SocialuniMessageEntity {
         //则需要校验，chatUser 如果为好友。初始。
         //查询对方对你的关系，是不是好友。那如果你把对方删除了呢，你还能给对方发消息吗。则不能。
 
-
-        if (msgType == null) {
-            msgType = MessageType.simple;
-        }
-
-        SocialuniMessageReceiveDO mineMessageUser = sendMsgNotifyList(msgContent, mineUser, chatSocialuniUserDoS, msgType);
+        SocialuniMessageReceiveDO mineMessageUser = sendMsgNotifyList(msgContent, mineUser, chatSocialuniUserDoS, contentType);
         //只需要返回自己的
         return SocialMessageROFactory.getMessageRO(mineMessageUser);
     }
@@ -169,7 +165,7 @@ public class SocialuniMessageEntity {
     @Resource
     SocialuniChatUserCheck socialuniChatUserCheck;
 
-    public SocialMessageRO sendGroupMessage(Integer chatId, String msgContent) {
+    public SocialMessageRO sendGroupMessage(Integer chatId, String msgContent, String contentType) {
         SocialuniChatDO chat = SocialuniRepositoryFacade.findByUnionId(chatId, SocialuniChatDO.class);
 
         SocialuniUserDo sendUser = SocialuniUserUtil.getMineUserNotNull();
@@ -189,7 +185,7 @@ public class SocialuniMessageEntity {
 
 
         //构建消息
-        SocialuniMessageDO message = messageRepository.save(SocialuniMessageDOFactory.createMessage(chat.getUnionId(), msgContent, sendUser.getUserId(), MessageType.simple));
+        SocialuniMessageDO message = messageRepository.save(SocialuniMessageDOFactory.createMessage(chat.getUnionId(), msgContent, sendUser.getUserId(), contentType));
 
         Date curDate = new Date();
         chat.setUpdateTime(curDate);
@@ -246,19 +242,17 @@ public class SocialuniMessageEntity {
     }
 
     @Transactional
-    public SocialuniMessageReceiveDO sendMsgNotifyList(String msgContent, SocialuniUserDo sendUser, List<SocialuniChatUserDO> chatSocialuniUserDoS, String msgType) {
+    public SocialuniMessageReceiveDO sendMsgNotifyList(String msgContent, SocialuniUserDo sendUser, List<SocialuniChatUserDO> chatSocialuniUserDoS, String contentType) {
         List<NotifyDO> notifies = new ArrayList<>();
         //有权限，则给chat中的所有用户发送内容
 
         SocialuniMessageReceiveDO mineMessageUser = null;
 
-
         SocialuniChatDO chat = SocialuniRepositoryFacade.findByUnionId(chatSocialuniUserDoS.get(0).getChatId(), SocialuniChatDO.class);
-        //构建消息
-        SocialuniMessageDO message = messageRepository.save(SocialuniMessageDOFactory.createMessage(chat.getUnionId(), msgContent, sendUser.getUserId(), msgType));
 
         socialuniPayCoinDomain.consumCoinByType(sendUser.getUserId(), chatSocialuniUserDoS.get(0).getUserId(), "消息发送");
-
+        //构建消息
+        SocialuniMessageDO message = messageRepository.save(SocialuniMessageDOFactory.createMessage(chat.getUnionId(), msgContent, sendUser.getUserId(), contentType));
 
         Date curDate = new Date();
         chat.setUpdateTime(curDate);

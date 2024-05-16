@@ -7,6 +7,7 @@ import com.socialuni.social.recharge.dao.DO.SocialuniCoinOrderDO;
 import com.socialuni.social.recharge.factory.SocialuniCoinOrderFactory;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniGetUserContactRecordDO;
 import com.socialuni.social.expand.utils.SocialuniUserExpandDOUtil;
+import com.socialuni.social.recharge.logic.entity.SocialuniCreateCoinOrderEneity;
 import com.socialuni.social.user.sdk.utils.SocialuniUserSocialCoinDOUtil;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
@@ -17,12 +18,17 @@ import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.transaction.Transactional;
 
 //获取对方联系方式，扣减金币，和给对方添加金币的逻辑
 @Service
 @Slf4j
 public class SocialuniGetUserContactInfoDomain {
+
+    @Resource
+    SocialuniCreateCoinOrderEneity socialuniCreateCoinOrderEneity;
+
     @Transactional
     public String getUserContactInfo(String beUserId) {
         //获取对方联系方式

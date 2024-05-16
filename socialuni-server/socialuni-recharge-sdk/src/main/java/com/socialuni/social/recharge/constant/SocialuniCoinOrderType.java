@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.constant.shell;
+package com.socialuni.social.recharge.constant;
 
 /**
  * 金币订单类型
@@ -11,6 +11,7 @@ public class SocialuniCoinOrderType {
     public static final String recharge = "充值";
     //consume
     public static final String expense = "消费";
+    public static final String sysGive = "系统赠送";
     public static final String income = "收入";
 }
 

@@ -1,13 +1,15 @@
-package com.socialuni.social.sdk.controller;
+package com.socialuni.social.recharge.controller;
 
 
 import com.socialuni.social.common.api.utils.JsonUtil;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
+import com.socialuni.social.recharge.constant.SocialuniCoinOrderType;
+import com.socialuni.social.recharge.dao.repository.SocialuniPayOrderRepository;
+import com.socialuni.social.recharge.logic.entity.SocialuniCreateCoinOrderEneity;
 import com.socialuni.social.sdk.constant.business.SocialuniPayStatus;
 import com.socialuni.social.recharge.dao.DO.SocialuniCoinOrderDO;
 import com.socialuni.social.recharge.dao.DO.SocialuniPayCoinOrderDO;
 import com.socialuni.social.recharge.factory.SocialuniCoinOrderFactory;
-import com.socialuni.social.sdk.dao.repository.bussiness.SocialuniPayOrderRepository;
 import com.socialuni.social.user.sdk.utils.SocialuniUserSocialCoinDOUtil;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserCoinDo;
 import com.socialuni.social.common.sdk.platform.QQPayNotifyResult;
@@ -34,6 +36,9 @@ import java.util.Map;
 public class SocialuniCallbackController {
     @Resource
     SocialuniPayOrderRepository socialuniRechargeOrderRepository;
+
+    @Resource
+    SocialuniCreateCoinOrderEneity socialuniCreateCoinOrderEneity;
 
     @RequestMapping(value = "wxPayNotify", produces = MediaType.APPLICATION_XML_VALUE)
     public String wxPayNotify(@RequestBody String notifyResult) throws IOException {
@@ -115,24 +120,16 @@ public class SocialuniCallbackController {
         rechargeOrderDO.setAmount(total_fee);
         rechargeOrderDO.setOutSysOrderNo(transaction_id);
 
-        SocialuniUserCoinDo userCoinDo = SocialuniUserSocialCoinDOUtil.getNotNull(rechargeOrderDO.getUserId());
-        //用户现有shell
-        //增加的数量
-        Integer plusShell = total_fee;
-        userCoinDo.setCoin(userCoinDo.getCoin() + plusShell);
+        Integer userId = rechargeOrderDO.getUserId();
 
-        //创建金币订单
-        SocialuniCoinOrderDO socialuniCoinOrderDO = SocialuniCoinOrderFactory.createCoinOrderDOByRechargeSuccess(userCoinDo, plusShell, rechargeOrderDO.getId());
-        //保存coin订单
-        SocialuniRepositoryFacade.save(socialuniCoinOrderDO);
-        //更新用户的coin数量
-        SocialuniUserSocialCoinDOUtil.save(userCoinDo);
+        socialuniCreateCoinOrderEneity.createCoinOrderByOrderType(userId, total_fee, SocialuniCoinOrderType.recharge, rechargeOrderDO.getId());
+
         //更新用户充值订单信息
         SocialuniRepositoryFacade.save(rechargeOrderDO);
         //用户现有经验值
         //用户增加经验值和贝壳
         //userDO.setExperience(userDO.getExperience() + plusShell);
-        log.info("接收" + rechargeOrderDO.getPayType() + "支付成功通知，订单号：" + inside_order_no + ",用户：" + userCoinDo.getUserId());
+        log.info("接收" + rechargeOrderDO.getPayType() + "支付成功通知，订单号：" + inside_order_no + ",用户：" + userId);
 
         return getResultStrXml(qqPayResult);
     }
