@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Entity
 @EqualsAndHashCode(callSuper = true)
 public class SocialuniCoinOrderDO extends SocialuniContentBaseDO implements Serializable {
-    //本单贝壳数量，可能是正值，也可能是负值
+    //本单金币数量，可能是正值，也可能是负值
     @Column(nullable = false)
     private Integer shell;
     //绝对值，什么用，没想明白

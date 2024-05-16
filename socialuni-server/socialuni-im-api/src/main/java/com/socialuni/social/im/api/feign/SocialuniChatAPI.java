@@ -47,7 +47,7 @@ public interface SocialuniChatAPI {
     ResultRO<ChatVO> queryChat(@RequestBody @Valid UserIdVO receiveUserVO);
 
     //开启对话
-    //支付贝壳开启对话
+    //支付金币开启对话
     @PostMapping("openChat")
     ResultRO<ChatVO> openChat(@RequestBody @Valid OpenChatVO chatVO);*/
 

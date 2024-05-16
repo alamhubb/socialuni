@@ -93,7 +93,7 @@ public class TestXml {
         //更新用户充值订单信息
         SocialuniRepositoryFacade.save(rechargeOrderDO);
         //用户现有经验值
-        //用户增加经验值和贝壳
+        //用户增加经验值和金币
         //userDO.setExperience(userDO.getExperience() + plusShell);
         log.info("接收" + rechargeOrderDO.getPayType() + "支付成功通知，订单号：" + inside_order_no + ",用户：" + userCoinDo.getUserId());
 

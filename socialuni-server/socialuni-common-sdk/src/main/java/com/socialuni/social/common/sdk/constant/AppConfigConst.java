@@ -34,9 +34,9 @@ public class AppConfigConst {
     public static final String rewardedAdLimit = "每天观看激励视频限制次数";
 
 
-    //获取联系方式消费贝壳数量
+    //获取联系方式消费金币数量
     public static final String contactExpenseShellKey = "contactExpenseShell";
-    public static final String openChatExpenseShellKey = "开启会话需要支付的贝壳数量";
+    public static final String openChatExpenseShellKey = "开启会话需要支付的金币数量";
     //系统抽成比例
     public static final String sysServiceReceiveRatioKey = "sysServiceReceiveRatio";
 

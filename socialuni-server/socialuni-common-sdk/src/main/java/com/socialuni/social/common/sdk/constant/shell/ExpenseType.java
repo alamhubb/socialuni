@@ -14,6 +14,6 @@ public class ExpenseType {
 
 
     //普通
-    public static final String rechargeShell = "充值贝壳";
+    public static final String rechargeShell = "充值金币";
 }
 

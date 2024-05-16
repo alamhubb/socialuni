@@ -31,9 +31,9 @@ public class SocialuniAppMoreConfigBO {
     private Integer rewardedAdLimit = 3;
     //动态缓存数量
 //    private Integer talkCacheNum = 4;
-    //获取联系方式消耗多少贝壳, 100金币，1块钱
+    //获取联系方式消耗多少金币, 100金币，1块钱
     private Integer contactExpenseShell = 100;
-    //用户获得贝壳百分比
+    //用户获得金币百分比
     private Integer contactUserReceiveShell = 50;
     //系统抽成比例，百分比
     private Integer sysServiceReceiveRatio = 20;
