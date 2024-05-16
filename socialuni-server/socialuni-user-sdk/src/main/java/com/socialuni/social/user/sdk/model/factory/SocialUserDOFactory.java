@@ -18,6 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Arrays;
+
 @Slf4j
 public class SocialUserDOFactory {
     public static SocialuniUserDo newUserByProviderLogin(SocialProviderLoginQO loginQO) {
@@ -25,7 +27,8 @@ public class SocialUserDOFactory {
 
         String nickname = loginQO.getNickName();
 
-        if (ObjectUtils.isNotEmpty(loginQO.getGender())) {
+        //不为0 不为空，则设置性别
+        if (ObjectUtils.isNotEmpty(loginQO.getGender()) && (Arrays.asList(GenderTypeNumEnum.male.getValue(), GenderTypeNumEnum.female.getValue()).contains(loginQO.getGender()))) {
             user.setGender(GenderTypeNumEnum.getNameByValue(loginQO.getGender()));
         }
 
