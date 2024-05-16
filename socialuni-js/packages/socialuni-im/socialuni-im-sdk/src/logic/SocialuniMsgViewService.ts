@@ -29,6 +29,7 @@ import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
 import SocialuniUserExpandService from "socialuni-user-sdk/src/logic/SocialuniUserExpandService";
 import {socialuniAppUserModule} from "socialuni-user-sdk/src/store/SocialuniAppUserModule";
 import SocialuniUserLikeAPI from "socialuni-expand-api/src/api/SocialuniUserLikeAPI";
+import SocialuniLikeService from "socialuni-expand-sdk/src/service/SocialuniLikeService";
 
 export default class SocialuniMsgViewService extends SocialuniViewService<any> {
     public $refs!: {
@@ -120,7 +121,9 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
         console.log(msgContent)
         console.log(123456)
         if (msgContent) {
-            await SocialuniUserExpandService.sendMsgNeedCoinCheck()
+            if (socialuniChatModule.chat.needPayOpen) {
+                await SocialuniLikeService.checkUserCoinAndPay(socialuniChatModule.chat.sendMsgNeedCoin)
+            }
             console.log(123456)
             console.log(123)
             const newMsg = new MessageVO(msgContent, socialuniUserModule.mineUser)

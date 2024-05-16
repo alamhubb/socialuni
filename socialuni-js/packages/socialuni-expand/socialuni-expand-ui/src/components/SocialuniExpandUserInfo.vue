@@ -134,7 +134,7 @@ export default class SocialuniExpandUserInfo extends Vue {
   }
 
   async addLikeUser(user: SocialuniUserExtendDetailRO) {
-    await SocialuniLikeService.checkUserCoinAndPay()
+    await SocialuniLikeService.checkUserCoinAndPay(socialuniLikeConfigModule.config.sendLikeMsgNeedPayCoinNum)
     user.hasUserLike = true
     const copyUserCoin = socialuniAppUserModule.userCoinNum
 

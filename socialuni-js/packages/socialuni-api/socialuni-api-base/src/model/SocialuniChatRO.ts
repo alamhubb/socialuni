@@ -22,9 +22,10 @@ export default class SocialuniChatRO {
     public topFlag: boolean = null
     public lastContent: string = null
     public vipFlag: boolean = null
-    public needPayOpen: boolean = null
     public receiveUserId: string = null
     public loadMore: string = null
+    public needPayOpen: boolean = null
+    public sendMsgNeedCoin: number = null
 
     constructor(openImChat?: OpenImChatRO) {
         if (openImChat) {

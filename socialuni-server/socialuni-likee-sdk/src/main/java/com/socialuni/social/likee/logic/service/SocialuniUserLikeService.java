@@ -50,7 +50,7 @@ public class SocialuniUserLikeService {
         ChatRO chatRO = chatROResultRO.getData();
 
         SocialuniLikeChatRO socialuniLikeChatRO = BeanUtil.toBean(chatRO, SocialuniLikeChatRO.class);
-        socialuniLikeChatRO.setPayCoinNum(0);
+        socialuniLikeChatRO.setSendMsgNeedCoin(0);
         socialuniLikeChatRO.setNeedPayOpen(true);
 
         //私聊
@@ -66,7 +66,7 @@ public class SocialuniUserLikeService {
         if (socialuniUserLikeChatDO != null) {
             socialuniLikeChatRO.setNeedPayOpen(false);
             if (mineUserId.equals(socialuniUserLikeChatDO.getUserId())) {
-                socialuniLikeChatRO.setPayCoinNum(SocialuniLikeAllConfig.getLikeAllConfigBO().getSendLikeMsgNeedPayCoinNum());
+                socialuniLikeChatRO.setSendMsgNeedCoin(SocialuniLikeAllConfig.getLikeAllConfigBO().getSendLikeMsgNeedPayCoinNum());
             }
         }
 
