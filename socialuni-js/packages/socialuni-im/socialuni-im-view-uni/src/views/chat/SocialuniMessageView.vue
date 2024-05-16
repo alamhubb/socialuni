@@ -118,6 +118,7 @@
                maxlength="300"
                :cursor-spacing="8"
                :focus="viewService.inputFocus"
+               :adjust-position="false"
                @blur="viewService.inputBlur()"
                @focus="viewService.inputFocusEvent()"
                @confirm="viewService.sendMsgClick()"

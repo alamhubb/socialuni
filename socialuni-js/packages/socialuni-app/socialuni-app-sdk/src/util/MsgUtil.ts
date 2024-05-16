@@ -45,7 +45,7 @@ export default class MsgUtil {
 
     static cantPopupPromptToast() {
         if (socialuniSystemModule.isIosOrMpQQ) {
-            QingAppUtil.ToastUtil.toastLong('如遇到无法弹出输入框，请重启应用')
+            // QingAppUtil.ToastUtil.toastLong('如遇到无法弹出输入框，请重启应用')
         }
     }
 }
