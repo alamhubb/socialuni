@@ -10,8 +10,11 @@ import {SocialuniPlugin} from "socialuni/src/interface/SocialuniPlugin";
 class SocialuniImPlugin implements SocialuniPlugin {
     onLaunch() {
         console.log('触发了Im')
+
         if (socialuniTokenModule.token) {
-            socialuniChatModule.queryMineImUserInfo()
+            socialuniChatModule.queryMineImUserInfo().then(() => {
+                socialuniChatModule.getChatsAction()
+            })
         }
     }
 

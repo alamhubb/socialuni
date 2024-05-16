@@ -113,12 +113,12 @@
             <span class="cuIcon-sound text-grey"></span>
         </div>-->
         <!--                @focus="inputFocusEvent"-->
+        <!--               :adjust-position="false"-->
         <input class="solid-bottom"
                v-model.trim="viewService.msgContent"
                maxlength="300"
                :cursor-spacing="8"
                :focus="viewService.inputFocus"
-               :adjust-position="false"
                @blur="viewService.inputBlur()"
                @focus="viewService.inputFocusEvent()"
                @confirm="viewService.sendMsgClick()"
