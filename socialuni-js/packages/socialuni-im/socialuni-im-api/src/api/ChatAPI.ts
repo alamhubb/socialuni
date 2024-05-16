@@ -15,7 +15,7 @@ export default class ChatAPI {
     }
 
     static queryChatAPI(queryQO: ChatQueryQO) {
-        return socialuniImRequest.post<SocialuniChatRO>('socialuni/userLike/queryChat', queryQO)
+        return socialuniImRequest.post<SocialuniChatRO>('socialuni/chat/queryChat', queryQO)
     }
 
     static readChatAPI(chatId: string, messageIds: string[] = []) {

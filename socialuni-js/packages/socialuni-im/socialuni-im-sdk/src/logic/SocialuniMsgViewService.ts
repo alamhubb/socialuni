@@ -121,7 +121,7 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
         console.log(msgContent)
         console.log(123456)
         if (msgContent) {
-            if (socialuniChatModule.chat.needPayOpen) {
+            if (socialuniChatModule.chat.needPayOpen || socialuniChatModule.chat.sendMsgNeedCoin) {
                 await SocialuniLikeService.checkUserCoinAndPay(socialuniChatModule.chat.sendMsgNeedCoin)
             }
             console.log(123456)

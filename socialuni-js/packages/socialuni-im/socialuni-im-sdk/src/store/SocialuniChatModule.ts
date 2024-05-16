@@ -16,6 +16,7 @@ import SocialuniImMineUserDetailRO from "socialuni-im-api/src/model/RO/Socialuni
 import SocialuniImUserAPI from "socialuni-im-api/src/api/SocialuniImUserAPI";
 import RouterUtil from "qingjs-h5/src/util/RouterUtil";
 import ImPagePath from "../constant/ImPagePath";
+import SocialuniUserLikeAPI from "socialuni-expand-api/src/api/SocialuniUserLikeAPI";
 
 class SocialuniChatModule {
     private _chatId = ''
@@ -70,7 +71,7 @@ class SocialuniChatModule {
     }
 
     async getChatsAction() {
-        const res = await ChatAPI.queryChatListAPI()
+        const res = await SocialuniUserLikeAPI.queryChatListAPI()
         this.setChats(res.data)
     }
 
@@ -83,7 +84,7 @@ class SocialuniChatModule {
             chat.loadMore = LoadMoreType.more
             this.chats.unshift(chat)
 
-            ChatAPI.queryChatAPI(new ChatQueryQO(chatId)).then(res => {
+            SocialuniUserLikeAPI.queryChatAPI(new ChatQueryQO(chatId)).then(res => {
                 this.readChatAction(res.data.messages)
                 this.pushMsgReplaceChatByChat(res.data)
             })
