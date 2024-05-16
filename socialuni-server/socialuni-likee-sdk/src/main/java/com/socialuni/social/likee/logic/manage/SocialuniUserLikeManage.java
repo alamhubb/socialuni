@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 @Component
-public class SocialuniUserLikeManageHa {
+public class SocialuniUserLikeManage {
     public SocialuniUserLikeDO createUserLike(Integer mineUserId, Integer beUserId) {
         SocialuniUserLikeDO userLikeDO = new SocialuniUserLikeDO();
         //添加喜欢

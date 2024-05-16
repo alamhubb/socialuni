@@ -6,7 +6,7 @@ import com.socialuni.social.common.api.exception.exception.SocialParamsException
 import com.socialuni.social.common.api.model.user.SocialuniUserIdQO;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.likee.dao.DO.SocialuniUserLikeDO;
-import com.socialuni.social.likee.logic.manage.SocialuniUserLikeManageHa;
+import com.socialuni.social.likee.logic.manage.SocialuniUserLikeManage;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 
@@ -16,7 +16,7 @@ import java.util.Objects;
 
 public class SocialuniLikeDomain {
     @Resource
-    SocialuniUserLikeManageHa socialuniUserLikeManage;
+    SocialuniUserLikeManage socialuniUserLikeManage;
 
     public void asfaf(SocialuniUserIdQO addVO) {
         //有问题，应该关注完刷新前台用户

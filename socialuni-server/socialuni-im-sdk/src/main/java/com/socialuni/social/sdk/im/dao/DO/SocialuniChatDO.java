@@ -33,6 +33,7 @@ import java.io.Serializable;
 public class SocialuniChatDO extends SocialuniUnionContentBaseDO implements Serializable {
     private String chatName;
     private String avatar;
+
     //置顶标识
 //    private Boolean topFlag;
 //    private String lastContent;

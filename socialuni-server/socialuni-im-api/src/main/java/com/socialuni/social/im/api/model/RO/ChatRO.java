@@ -11,6 +11,7 @@ import java.util.List;
  */
 @Data//chatdo+chatUserdo
 public class ChatRO {
+    //私聊的时候这是userId，后台会自动转换
     private String id;
     private String nickname;
     private Boolean allowStrangerMsg;

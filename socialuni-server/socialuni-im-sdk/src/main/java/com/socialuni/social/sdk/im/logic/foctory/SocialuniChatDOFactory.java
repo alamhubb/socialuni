@@ -9,6 +9,7 @@ import com.socialuni.social.sdk.im.enumeration.ChatOpenType;
 import com.socialuni.social.sdk.im.enumeration.ChatType;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 
 public class SocialuniChatDOFactory {
 
@@ -20,6 +21,10 @@ public class SocialuniChatDOFactory {
         chatDO.setContentType(SocialuniContentType.chat);
         chatDO.setType(ChatType.single);
         chatDO.setDomainType(chatDomainType);
+
+        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+
+        chatDO.setUserId(mineUserId);
         chatDO = SocialuniRepositoryFacade.save(chatDO);
         return chatDO;
     }
