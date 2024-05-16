@@ -73,15 +73,19 @@ public class SocialuniUserLikeService {
         //私聊
         String chatUuid = chatRO.getId();
 
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+        Integer chatId = getChatId(chatUuid);
 
-        Integer chatId = getChatId(mineUserId, chatUuid);
+
+        if (chatId == null) {
+            return socialuniLikeChatRO;
+        }
 
         //查询是否创建了
         SocialuniUserLikeChatDO socialuniUserLikeChatDO = socialuniUserLikeChatManage.get(chatId);
 
         if (socialuniUserLikeChatDO != null) {
             socialuniLikeChatRO.setNeedPayOpen(false);
+            Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
             if (mineUserId.equals(socialuniUserLikeChatDO.getUserId())) {
                 socialuniLikeChatRO.setSendMsgNeedCoin(SocialuniLikeAllConfig.getLikeAllConfigBO().getSendLikeMsgNeedPayCoinNum());
             }
@@ -108,11 +112,13 @@ public class SocialuniUserLikeService {
         Integer msgIdd = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(msgId);
 
 
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
         String receiveIdUid = msgAddVO.getReceiveId();
 
-        Integer chatId = getChatId(mineUserId, receiveIdUid);
-
+        Integer chatId = getChatId(receiveIdUid);
+        if (chatId == null) {
+            return resultRO;
+        }
+        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
         //查询是否创建了
         SocialuniUserLikeChatDO socialuniUserLikeChatDO = socialuniUserLikeChatManage.getOrCreate(chatId);
 
@@ -122,14 +128,13 @@ public class SocialuniUserLikeService {
         return resultRO;
     }
 
-    private Integer getChatId(Integer mineUserId, String chatId) {
+    private Integer getChatId(String chatId) {
         SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidNotNull(chatId);
 
         String contentType = socialuniUnionIdModler.getContentType();
-
-
         //私聊
         if (contentType.equals(SocialuniContentType.user)) {
+            Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
             Integer beUserId = socialuniUnionIdModler.getId();
             SocialuniChatUserDO chatUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(mineUserId, beUserId, SocialuniChatUserDO.class);
 
