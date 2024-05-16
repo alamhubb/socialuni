@@ -35,6 +35,60 @@ public class SocialJpaLogAspect {
         return new StringBuffer(interfaceName).append(".").append(methodName).toString();
     }
 
+    //获取方法类全名+方法名
+    private String getClassAndMethodName(ProceedingJoinPoint joinPoint) throws NoSuchMethodException {
+        //获取目标类对象
+        Class<?> aClass = joinPoint.getTarget().getClass();
+        //获取方法签名信息,方法名和参数列表
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+        //获取目标方法对象
+        Method method = aClass.getDeclaredMethod(signature.getName(), signature.getParameterTypes());
+        //获取接口名
+        String interfaceName = aClass.getSimpleName();
+        //获取方法名
+        String methodName = method.getName();
+        return new StringBuffer(interfaceName).append(".").append(methodName).toString();
+    }
+
+
+
+    @Pointcut("execution(* com.socialuni.social..logic..*.*(..))")
+//    @Pointcut("within(org.springframework.data.jpa.repository.JpaRepository+)")
+    public void logicLog() {
+    }
+
+    @Around("logicLog()")
+    public Object logicLogHandle(ProceedingJoinPoint joinPoint) throws Throwable {
+        JpaSqlLogDO jpaSqlLogDO = new JpaSqlLogDO();
+
+        String interfaceAndMethodName = this.getClassAndMethodName(joinPoint);
+
+        Object result = joinPoint.proceed();
+
+        Date endDate = new Date();
+        long spendTime = endDate.getTime() - jpaSqlLogDO.getCreateTime().getTime();
+        //执行时间大于1秒的，才记录
+        if (spendTime > 3000) {
+            jpaSqlLogDO.setEndTime(endDate);
+            jpaSqlLogDO.setSpendTime(spendTime);
+
+            String params = Arrays.toString(joinPoint.getArgs());
+            jpaSqlLogDO.setParams(params);
+
+            jpaSqlLogDO.setInterfaceMethod(interfaceAndMethodName);
+            RequestLogDO requestLogDO = RequestLogUtil.get();
+            if (requestLogDO != null) {
+                jpaSqlLogDO.setRequestId(requestLogDO.getId());
+            }
+            log.info("[{}：{}],[spendTimes:{}]", jpaSqlLogDO.getRequestId(), interfaceAndMethodName, spendTime);
+
+            JpaSqlLogDOUtil.saveAsync(jpaSqlLogDO);
+        }
+        return result;
+    }
+
+
+    //    @Pointcut("execution(* com.socialuni.social..logic..*.*(..))")
     @Pointcut("within(org.springframework.data.jpa.repository.JpaRepository+)")
     public void sqlRepositoryLog() {
     }
