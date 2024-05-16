@@ -18,11 +18,11 @@ export default class SocialuniUserImgAPI {
   }
 
   static deleteUserImgAPI(userImg: ImgFileVO) {
-    return socialuniUserRequest.post('socialuni/mineUser/deleteImg', userImg)
+    return socialuniUserRequest.post('socialuni/userImg/deleteImg', userImg)
   }
 
   static deleteUserImgNewAPI(userImg: ImgFileVO) {
-    return socialuniUserRequest.post('socialuni/mineUser/deleteUserImg', {userImgId: userImg.id})
+    return socialuniUserRequest.post('socialuni/userImg/deleteUserImg', {userImgId: userImg.id})
   }
 
   static getUserImgListAPI(userId: string) {

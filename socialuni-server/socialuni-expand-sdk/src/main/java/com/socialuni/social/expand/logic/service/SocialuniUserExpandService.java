@@ -79,7 +79,7 @@ public class SocialuniUserExpandService {
         }
 
         //查询的时候更新用户的扩列信息
-        SocialuniUserExtendFriendLogDOUtil.createUserExtendFriendLog();
+//        SocialuniUserExtendFriendLogDOUtil.createUserExtendFriendLog();
 
         List<Integer> pageTypeUserIds = new ArrayList<>();
         //查询本周内上线的用户
