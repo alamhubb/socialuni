@@ -112,34 +112,24 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
         if (!socialuniChatModule.chat) {
             QingAppUtil.ToastUtil.throwError('缺少会话')
         }
-        console.log(123456)
         UserCheckUtil.checkUserBindPhoneNum()
-        console.log(123)
         const msgContent = this.msgContent
         const msgType = this.msgType
-        console.log(this.msgContent)
-        console.log(msgContent)
-        console.log(123456)
         if (msgContent) {
             if (socialuniChatModule.chat.needPayOpen || socialuniChatModule.chat.sendMsgNeedCoin) {
                 await SocialuniLikeService.checkUserCoinAndPay(socialuniChatModule.chat.sendMsgNeedCoin)
             }
-            console.log(123456)
-            console.log(123)
             const newMsg = new MessageVO(msgContent, socialuniUserModule.mineUser)
-            socialuniChatModule.messages.push(newMsg)
-            console.log(123)
+            const newLength = socialuniChatModule.messages.push(newMsg)
             socialuniChatModule.scrollToMessagePageBottom()
-            const index: number = socialuniChatModule.messages.length - 1
-            // 点击发送后立即push
-            console.log(123)
-            //启用状态可以直接发送
+            const index: number = newLength - 1
+            const content = this.msgContent
             this.msgContent = ''
             this.msgType = null
-            socialuniChatModule.chat.updateTime = new Date()
-            console.log(123)
             try {
                 const res = await SocialuniUserLikeAPI.sendMsgAPI(socialuniChatModule.chat.id, msgContent, msgType)
+                // 点击发送后立即push
+                //启用状态可以直接发送
                 socialuniChatModule.chat.updateTime = res.data.createTime
                 socialuniChatModule.messages.splice(index, 1, res.data)
                 socialuniAppUserModule.userCoinNum = socialuniAppUserModule.userCoinNum - 10

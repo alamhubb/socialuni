@@ -1,5 +1,6 @@
 package com.socialuni.social.recharge.logic.manage;
 
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserCoinDo;
 import com.socialuni.social.user.sdk.utils.SocialuniUserSocialCoinDOUtil;
@@ -16,7 +17,7 @@ public class SocialuniUserCoinManage {
         userCoinDo.setCoin(userCoinDo.getCoin() + coinNum);
 
         if (userCoinDo.getCoin() < 0) {
-            throw new SocialSystemException("金币不足");
+            throw new SocialParamsException("金币不足");
         }
 
         userCoinDo.setUpdateTime(new Date());

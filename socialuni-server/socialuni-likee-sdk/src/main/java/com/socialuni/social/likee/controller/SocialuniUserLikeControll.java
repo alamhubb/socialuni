@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 @RequestMapping("socialuni/userLike")
@@ -32,6 +33,11 @@ class SocialuniUserLikeControll implements SocialuniUserLikeAPI {
     @Override
     public ResultRO<SocialuniLikeChatRO> queryChat(SocialuniChatQueryQO socialuniChatQueryQO) {
         return socialuniUserLikeService.queryChat(socialuniChatQueryQO);
+    }
+
+    @Override
+    public ResultRO<List<SocialuniLikeChatRO>> queryChatList() {
+        return socialuniUserLikeService.queryChatList();
     }
 
     public ResultRO<Void> likeUser(SocialuniUserIdQO addVO) {

@@ -8,6 +8,7 @@ import com.socialuni.social.im.api.model.RO.ChatRO;
 import com.socialuni.social.im.api.model.RO.SocialMessageRO;
 import com.socialuni.social.likee.model.SocialuniLikeAllConfigBO;
 import com.socialuni.social.likee.model.SocialuniLikeChatRO;
+import com.socialuni.social.sdk.im.logic.service.chat.ChatService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @FeignClient(name = "userLike", url = "${socialuni.central-server-url:https://api.socialuni.cn}", path = "socialuni/userLike")
 @Tag(name = "用户模块/喜欢用户")
@@ -35,4 +38,6 @@ public interface SocialuniUserLikeAPI {
     @PostMapping("queryChat")
     ResultRO<SocialuniLikeChatRO> queryChat(@RequestBody @Valid @NotNull SocialuniChatQueryQO socialuniChatQueryQO);
 
+    @GetMapping("queryChatList")
+    ResultRO<List<SocialuniLikeChatRO>> queryChatList();
 }

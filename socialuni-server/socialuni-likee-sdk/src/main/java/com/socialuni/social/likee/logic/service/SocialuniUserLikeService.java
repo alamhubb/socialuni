@@ -7,6 +7,7 @@ import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserIdQO;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.im.api.model.QO.SocialuniChatQueryQO;
+import com.socialuni.social.im.api.model.QO.chat.ChatReadVO;
 import com.socialuni.social.im.api.model.QO.message.MessageAddVO;
 import com.socialuni.social.im.api.model.RO.ChatRO;
 import com.socialuni.social.im.api.model.RO.SocialMessageRO;
@@ -29,7 +30,9 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class SocialuniUserLikeService {
@@ -42,19 +45,33 @@ public class SocialuniUserLikeService {
     @Resource
     ChatService chatService;
 
+    public ResultRO<List<SocialuniLikeChatRO>> queryChatList() {
+        ResultRO<List<ChatRO>> resultRO = chatService.queryChatList();
+        List<ChatRO> data = resultRO.getData();
+
+        List<SocialuniLikeChatRO> socialuniLikeChatROList = data.stream().map(this::getSocialuniLikeChatRO).collect(Collectors.toList());
+
+        return ResultRO.success(socialuniLikeChatROList);
+    }
+
     public ResultRO<SocialuniLikeChatRO> queryChat(SocialuniChatQueryQO socialuniChatQueryQO) {
 
         //为什么要查询，因为要加一个参数，发送消息时是否需要扣除金币
         ResultRO<ChatRO> chatROResultRO = chatService.queryChat(socialuniChatQueryQO);
 
-        ChatRO chatRO = chatROResultRO.getData();
+        SocialuniLikeChatRO socialuniLikeChatRO = getSocialuniLikeChatRO(chatROResultRO.getData());
+
+        return ResultRO.success(socialuniLikeChatRO);
+    }
+
+    private SocialuniLikeChatRO getSocialuniLikeChatRO(ChatRO chatRO) {
 
         SocialuniLikeChatRO socialuniLikeChatRO = BeanUtil.toBean(chatRO, SocialuniLikeChatRO.class);
         socialuniLikeChatRO.setSendMsgNeedCoin(0);
         socialuniLikeChatRO.setNeedPayOpen(true);
 
         //私聊
-        String chatUuid = socialuniChatQueryQO.getChatId();
+        String chatUuid = chatRO.getId();
 
         Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
 
@@ -69,8 +86,7 @@ public class SocialuniUserLikeService {
                 socialuniLikeChatRO.setSendMsgNeedCoin(SocialuniLikeAllConfig.getLikeAllConfigBO().getSendLikeMsgNeedPayCoinNum());
             }
         }
-
-        return ResultRO.success(socialuniLikeChatRO);
+        return socialuniLikeChatRO;
     }
 
 
