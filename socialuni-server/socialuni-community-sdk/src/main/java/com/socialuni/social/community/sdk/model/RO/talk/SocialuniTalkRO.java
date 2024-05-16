@@ -14,6 +14,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class SocialuniTalkRO extends SocialuniContentIdRO {
+//    private String id;
     private SocialuniContentUserRO user;
     private String content;
     private List<SocialuniTalkImgRO> imgs;

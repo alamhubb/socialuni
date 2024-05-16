@@ -10,6 +10,7 @@ import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepository
 import com.socialuni.social.common.sdk.dao.repository.NotifyRepository;
 import com.socialuni.social.im.api.model.RO.SocialMessageRO;
 import com.socialuni.social.recharge.logic.domain.SocialuniPayCoinDomain;
+import com.socialuni.social.recharge.logic.entity.SocialuniCreateCoinOrderEntity;
 import com.socialuni.social.sdk.im.config.websocket.WebsocketServer;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
@@ -241,6 +242,9 @@ public class SocialuniMessageEntity {
         return SocialMessageROFactory.getMessageRO(message, sendUser, true);
     }
 
+    @Resource
+    SocialuniCreateCoinOrderEntity socialuniCreateCoinOrderEntity;
+
     @Transactional
     public SocialuniMessageReceiveDO sendMsgNotifyList(String msgContent, SocialuniUserDo sendUser, List<SocialuniChatUserDO> chatSocialuniUserDoS, String contentType) {
         List<NotifyDO> notifies = new ArrayList<>();
@@ -250,9 +254,13 @@ public class SocialuniMessageEntity {
 
         SocialuniChatDO chat = SocialuniRepositoryFacade.findByUnionId(chatSocialuniUserDoS.get(0).getChatId(), SocialuniChatDO.class);
 
-        socialuniPayCoinDomain.consumCoinByType(sendUser.getUserId(), chatSocialuniUserDoS.get(0).getUserId(), "消息发送");
         //构建消息
         SocialuniMessageDO message = messageRepository.save(SocialuniMessageDOFactory.createMessage(chat.getUnionId(), msgContent, sendUser.getUserId(), contentType));
+
+//        socialuniPayCoinDomain.consumCoinByType(sendUser.getUserId(), chatSocialuniUserDoS.get(0).getUserId(), "消息发送");
+
+
+
 
         Date curDate = new Date();
         chat.setUpdateTime(curDate);

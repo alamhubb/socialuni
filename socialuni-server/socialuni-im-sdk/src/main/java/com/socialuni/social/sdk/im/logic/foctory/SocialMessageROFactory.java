@@ -7,6 +7,7 @@ import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.sdk.im.enumeration.MessageReadStatus;
 import com.socialuni.social.sdk.im.dao.DO.message.SocialuniMessageDO;
 import com.socialuni.social.sdk.im.dao.DO.message.SocialuniMessageReceiveDO;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.model.factory.SocialuniUserROFactory;
 import com.socialuni.social.im.api.model.RO.SocialMessageRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
@@ -44,8 +45,9 @@ public class SocialMessageROFactory {
             messageRO.setContent(messageDO.getContent());
         }
 
-        messageRO.setId(messageDO.getUnionId());
+        String uid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(messageDO.getUnionId());
 
+        messageRO.setId(uid);
         messageRO.setCreateTime(messageDO.getCreateTime());
         messageRO.setUser(messageUser);
         messageRO.setIsMine(isMine);

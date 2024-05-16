@@ -2,7 +2,7 @@ package com.socialuni.social.likee.config;
 
 import com.socialuni.social.likee.model.SocialuniLikeAllConfigBO;
 
-public class SocialuniLikeSdkConfig {
+public class SocialuniLikeAllConfig {
     public static final Integer sendLikeMsgNeedPayCoinNum = 10;
 
     //需要一个BO,r

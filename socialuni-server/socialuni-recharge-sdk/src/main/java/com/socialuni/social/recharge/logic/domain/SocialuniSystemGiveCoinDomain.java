@@ -1,7 +1,8 @@
 package com.socialuni.social.recharge.logic.domain;
 
 import com.socialuni.social.recharge.constant.SocialuniCoinOrderType;
-import com.socialuni.social.recharge.logic.entity.SocialuniCreateCoinOrderEneity;
+import com.socialuni.social.recharge.constant.SocialuniOrderDetailType;
+import com.socialuni.social.recharge.logic.entity.SocialuniCreateCoinOrderEntity;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -9,9 +10,9 @@ import javax.annotation.Resource;
 @Service
 public class SocialuniSystemGiveCoinDomain {
     @Resource
-    SocialuniCreateCoinOrderEneity socialuniCreateCoinOrderEneity;
+    SocialuniCreateCoinOrderEntity socialuniCreateCoinOrderEntity;
 
     public void giveCoin(Integer userId, Integer coinNum) {
-        socialuniCreateCoinOrderEneity.createCoinOrderByOrderType(userId, coinNum, SocialuniCoinOrderType.sysGive, null);
+        socialuniCreateCoinOrderEntity.createCoinOrderByOrderType(userId, coinNum, SocialuniCoinOrderType.recharge, SocialuniOrderDetailType.sysGive, null);
     }
 }

@@ -3,27 +3,21 @@ package com.socialuni.social.recharge.logic.domain;
 import com.socialuni.social.common.api.constant.DateTimeType;
 import com.socialuni.social.common.api.constant.PlatformType;
 import com.socialuni.social.common.api.constant.SystemType;
-import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
-import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.common.api.utils.IpUtil;
 import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.common.api.utils.UUIDUtil;
-import com.socialuni.social.common.sdk.dao.DO.SocialuniGetUserContactRecordDO;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
-import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.recharge.constant.SocialuniCoinOrderType;
+import com.socialuni.social.recharge.constant.SocialuniOrderDetailType;
 import com.socialuni.social.recharge.dao.DO.SocialuniCoinConsumLogDO;
-import com.socialuni.social.recharge.dao.DO.SocialuniCoinOrderDO;
-import com.socialuni.social.recharge.factory.SocialuniCoinOrderFactory;
-import com.socialuni.social.recharge.logic.entity.SocialuniCreateCoinOrderEneity;
+import com.socialuni.social.recharge.logic.entity.SocialuniCreateCoinOrderEntity;
 import com.socialuni.social.recharge.model.SocialuniCoinInfoRO;
 import com.socialuni.social.recharge.model.SocialuniCoinPayRO;
 import com.socialuni.social.recharge.model.SocialuniPayCoinQO;
 import com.socialuni.social.content.constant.SocialuniSupportProviderType;
 import com.socialuni.social.sdk.constant.business.SocialuniAllowPayCoinAmountType;
 import com.socialuni.social.sdk.constant.business.SocialuniPayStatus;
-import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.user.sdk.constant.SocialuniPayProviderType;
 import com.socialuni.social.common.api.enumeration.ContentStatus;
 import com.socialuni.social.recharge.dao.DO.SocialuniPayCoinOrderDO;
@@ -47,7 +41,7 @@ import java.util.Date;
 @Slf4j
 public class SocialuniPayCoinDomain {
     @Resource
-    SocialuniCreateCoinOrderEneity socialuniCreateCoinOrderEneity;
+    SocialuniCreateCoinOrderEntity socialuniCreateCoinOrderEntity;
 
     @Transactional
     public void consumCoinByType(Integer mineUserId, Integer beUserId, String type) {
@@ -67,14 +61,14 @@ public class SocialuniPayCoinDomain {
         //用户消耗
         socialuniUserCoinDo.setCoin(mineUserCoin - consumNum);
         //保存用户消耗
-        socialuniUserCoinDo = SocialuniUserSocialCoinDOUtil.save(socialuniUserCoinDo);
+        socialuniUserCoinDo = SocialuniUserSocialCoinDOUtil.update(socialuniUserCoinDo);
 
         //记录日志
         SocialuniCoinConsumLogDO socialuniCoinConsumLogDO = new SocialuniCoinConsumLogDO(mineUserId, beUserId);
         socialuniCoinConsumLogDO.setType(type);
         socialuniCoinConsumLogDO = SocialuniRepositoryFacade.save(socialuniCoinConsumLogDO);
 
-        socialuniCreateCoinOrderEneity.createCoinOrderByOrderType(mineUserId, -consumNum, SocialuniCoinOrderType.expense, socialuniCoinConsumLogDO.getId());
+        socialuniCreateCoinOrderEntity.createCoinOrderByOrderType(mineUserId, -consumNum, SocialuniCoinOrderType.consume, SocialuniOrderDetailType.msg, socialuniCoinConsumLogDO.getId());
     }
 
 

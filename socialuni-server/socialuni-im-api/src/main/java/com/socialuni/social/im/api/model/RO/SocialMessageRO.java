@@ -14,7 +14,7 @@ import java.util.Date;
 public class SocialMessageRO {
 
     // 前端遍历使用
-    private Integer id;
+    private String id;
     private String content;
     private String contentType;
     private SocialuniUserRO user;

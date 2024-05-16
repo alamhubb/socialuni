@@ -4,14 +4,11 @@ package com.socialuni.social.recharge.controller;
 import com.socialuni.social.common.api.utils.JsonUtil;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.recharge.constant.SocialuniCoinOrderType;
+import com.socialuni.social.recharge.constant.SocialuniOrderDetailType;
 import com.socialuni.social.recharge.dao.repository.SocialuniPayOrderRepository;
-import com.socialuni.social.recharge.logic.entity.SocialuniCreateCoinOrderEneity;
+import com.socialuni.social.recharge.logic.entity.SocialuniCreateCoinOrderEntity;
 import com.socialuni.social.sdk.constant.business.SocialuniPayStatus;
-import com.socialuni.social.recharge.dao.DO.SocialuniCoinOrderDO;
 import com.socialuni.social.recharge.dao.DO.SocialuniPayCoinOrderDO;
-import com.socialuni.social.recharge.factory.SocialuniCoinOrderFactory;
-import com.socialuni.social.user.sdk.utils.SocialuniUserSocialCoinDOUtil;
-import com.socialuni.social.user.sdk.dao.DO.SocialuniUserCoinDo;
 import com.socialuni.social.common.sdk.platform.QQPayNotifyResult;
 import com.socialuni.social.common.sdk.platform.WXPayNotifyResult;
 import com.socialuni.social.common.sdk.platform.qq.QQPayResult;
@@ -38,7 +35,7 @@ public class SocialuniCallbackController {
     SocialuniPayOrderRepository socialuniRechargeOrderRepository;
 
     @Resource
-    SocialuniCreateCoinOrderEneity socialuniCreateCoinOrderEneity;
+    SocialuniCreateCoinOrderEntity socialuniCreateCoinOrderEntity;
 
     @RequestMapping(value = "wxPayNotify", produces = MediaType.APPLICATION_XML_VALUE)
     public String wxPayNotify(@RequestBody String notifyResult) throws IOException {
@@ -122,7 +119,7 @@ public class SocialuniCallbackController {
 
         Integer userId = rechargeOrderDO.getUserId();
 
-        socialuniCreateCoinOrderEneity.createCoinOrderByOrderType(userId, total_fee, SocialuniCoinOrderType.recharge, rechargeOrderDO.getId());
+        socialuniCreateCoinOrderEntity.createCoinOrderByOrderType(userId, total_fee, SocialuniCoinOrderType.recharge, SocialuniOrderDetailType.cash, rechargeOrderDO.getId());
 
         //更新用户充值订单信息
         SocialuniRepositoryFacade.save(rechargeOrderDO);

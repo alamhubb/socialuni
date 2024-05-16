@@ -3,11 +3,11 @@ package com.socialuni.social.expand.logic.domain;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
-import com.socialuni.social.recharge.dao.DO.SocialuniCoinOrderDO;
-import com.socialuni.social.recharge.factory.SocialuniCoinOrderFactory;
+import com.socialuni.social.recharge.constant.SocialuniOrderDetailType;
+import com.socialuni.social.recharge.constant.SocialuniCoinOrderType;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniGetUserContactRecordDO;
 import com.socialuni.social.expand.utils.SocialuniUserExpandDOUtil;
-import com.socialuni.social.recharge.logic.entity.SocialuniCreateCoinOrderEneity;
+import com.socialuni.social.recharge.logic.entity.SocialuniCreateCoinOrderEntity;
 import com.socialuni.social.user.sdk.utils.SocialuniUserSocialCoinDOUtil;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
@@ -27,7 +27,7 @@ import javax.transaction.Transactional;
 public class SocialuniGetUserContactInfoDomain {
 
     @Resource
-    SocialuniCreateCoinOrderEneity socialuniCreateCoinOrderEneity;
+    SocialuniCreateCoinOrderEntity socialuniCreateCoinOrderEntity;
 
     @Transactional
     public String getUserContactInfo(String beUserId) {
@@ -76,17 +76,9 @@ public class SocialuniGetUserContactInfoDomain {
         SocialuniGetUserContactRecordDO userContactDO = new SocialuniGetUserContactRecordDO(mineUser.getUserId(), beUser.getUserId(), socialuniUserExpandDo.getContactInfo());
         userContactDO = SocialuniRepositoryFacade.save(userContactDO);
 
-        //保存用户
-        //用户消耗
-        socialuniUserCoinDo.setCoin(mineUserCoin - expanseCoinNum);
-        //保存用户消耗
-        socialuniUserCoinDo = SocialuniUserSocialCoinDOUtil.save(socialuniUserCoinDo);
+        Integer userId = mineUser.getUserId();
 
-        //创建金币订单
-        SocialuniCoinOrderDO shellOrderDO = SocialuniCoinOrderFactory.createCoinOrderDOByContactInfoSuccess(socialuniUserCoinDo, -expanseCoinNum, userContactDO.getId());
-        //消费
-        //保存
-        shellOrderDO = SocialuniRepositoryFacade.save(shellOrderDO);
+        socialuniCreateCoinOrderEntity.createCoinOrderByOrderType(userId, -expanseCoinNum, SocialuniCoinOrderType.consume, SocialuniOrderDetailType.contact, userContactDO.getId());
 
         //关联
 //        SocialuniCoinOrderDO shellOrderGiveDO = new SocialuniCoinOrderDO(beUser.getUserId(), userGiveShell, SocialuniCoinOrderType.income, userContactDO.getId());

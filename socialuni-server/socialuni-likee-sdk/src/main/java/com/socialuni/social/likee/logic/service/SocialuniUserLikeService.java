@@ -1,10 +1,16 @@
 package com.socialuni.social.likee.logic.service;
 
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserIdQO;
 import com.socialuni.social.im.api.model.QO.message.MessageAddVO;
+import com.socialuni.social.im.api.model.RO.SocialMessageRO;
+import com.socialuni.social.likee.config.SocialuniLikeAllConfig;
 import com.socialuni.social.likee.dao.DO.SocialuniUserLikeDO;
 import com.socialuni.social.likee.logic.manage.SocialuniUserLikeManageHa;
+import com.socialuni.social.recharge.constant.SocialuniCoinOrderType;
+import com.socialuni.social.recharge.constant.SocialuniOrderDetailType;
+import com.socialuni.social.recharge.logic.entity.SocialuniCreateCoinOrderEntity;
 import com.socialuni.social.sdk.im.logic.service.SocialuniMessageService;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
@@ -21,6 +27,8 @@ public class SocialuniUserLikeService {
 
     @Resource
     private SocialuniMessageService messageService;
+    @Resource
+    SocialuniCreateCoinOrderEntity socialuniCreateCoinOrderEntity;
 
     @Transactional
     public SocialuniUserLikeDO likeUser(SocialuniUserIdQO addVO) {
@@ -33,16 +41,24 @@ public class SocialuniUserLikeService {
         }
         SocialuniUserLikeDO socialuniUserLikeDO = socialuniUserLikeManage.createOrUpdateLikeStatus(mineUserId, beUserId);
 
-        sendLikeUserMsg(addVO.getUserId());
+        sendLikeUserMsg(mineUserId, addVO.getUserId());
         return socialuniUserLikeDO;
     }
 
-    public void sendLikeUserMsg(String receiveUserId) {
+    public void sendLikeUserMsg(Integer mineUserId, String receiveUserId) {
         MessageAddVO msgAddVO = new MessageAddVO();
         msgAddVO.setReceiveId(receiveUserId);
         //获取用户的币，获取发送需要的币
         msgAddVO.setContent("你好，在干嘛呢");
         //msg支持自定义的展示类型
-        messageService.sendMsg(msgAddVO);
+        ResultRO<SocialMessageRO> resultRO = messageService.sendMsg(msgAddVO);
+
+        SocialMessageRO socialMessageRO = resultRO.getData();
+
+        String msgId = socialMessageRO.getId();
+
+        Integer msgIdd = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(msgId);
+
+        socialuniCreateCoinOrderEntity.createCoinOrderByOrderType(mineUserId, SocialuniLikeAllConfig.getLikeAllConfigBO().getSendLikeMsgNeedPayCoinNum(), SocialuniCoinOrderType.consume, SocialuniOrderDetailType.msg, msgIdd);
     }
 }

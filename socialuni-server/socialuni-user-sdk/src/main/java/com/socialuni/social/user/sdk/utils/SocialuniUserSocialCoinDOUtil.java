@@ -32,7 +32,11 @@ public class SocialuniUserSocialCoinDOUtil {
         return socialuniUserCoinDo;
     }
 
-    public static SocialuniUserCoinDo save(SocialuniUserCoinDo socialuniUserExpandDO) {
+    public static SocialuniUserCoinDo create(SocialuniUserCoinDo socialuniUserExpandDO) {
+        return socialuniUserSocialCoinApi.savePut(socialuniUserExpandDO);
+    }
+
+    public static SocialuniUserCoinDo update(SocialuniUserCoinDo socialuniUserExpandDO) {
         return socialuniUserSocialCoinApi.savePut(socialuniUserExpandDO);
     }
 
@@ -42,7 +46,7 @@ public class SocialuniUserSocialCoinDOUtil {
             socialuniUserCoinDo = new SocialuniUserCoinDo();
             socialuniUserCoinDo.setUserId(userId);
             socialuniUserCoinDo.setCoin(0);
-            socialuniUserCoinDo = save(socialuniUserCoinDo);
+            socialuniUserCoinDo = create(socialuniUserCoinDo);
         }
         return socialuniUserCoinDo;
     }

@@ -22,20 +22,24 @@ public class SocialuniCoinOrderDO extends SocialuniContentBaseDO implements Seri
     @Column(nullable = false)
     private String type;
 
-    private Integer rechargeOrderId;
+    @Column(nullable = false)
+    private String detailType;
 
-    private Integer userContactId;
+    private Integer relateId;
+
     @Column(nullable = false)
     private Integer userCoin;
 
     public SocialuniCoinOrderDO() {
     }
 
-    public SocialuniCoinOrderDO(Integer userId, Integer shell, String type, Integer userCoin) {
+    public SocialuniCoinOrderDO(Integer userId, Integer shell, String type, String detailType, Integer userCoin,Integer relateId) {
         super(userId);
         this.shell = shell;
         this.absoluteShell = Math.abs(shell);
         this.type = type;
+        this.detailType = detailType;
+        this.relateId = relateId;
         this.userCoin = userCoin;
     }
 
