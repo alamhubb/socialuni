@@ -79,7 +79,7 @@
         </div>
       </div>
 
-      <socialuni-user-info-img :user="socialuniUserDetailViewService.user"
+      <socialuni-user-info-img :user="socialuniUserDetailViewService.user" :imgs="socialuniUserDetailViewService.user.imgs"
                                v-if="socialuniUserDetailViewService.user.imgs.length"></socialuni-user-info-img>
 
 
