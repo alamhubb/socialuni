@@ -25,7 +25,20 @@ public class SocialUserDOFactory {
 
         String nickname = loginQO.getNickName();
 
-        if (StringUtils.isNotEmpty(nickname)) {
+        if (ObjectUtils.isNotEmpty(loginQO.getGender())) {
+            user.setGender(GenderTypeNumEnum.getNameByValue(loginQO.getGender()));
+        }
+
+        if (user.getGender().equals(GenderType.boy)) {
+            user.setNickname(GenerateNicknameUtil.getBoyName());
+            user.setAvatar(SocialuniGenerateAvatarUtil.getBoyAvatar());
+        } else {
+            user.setNickname(GenerateNicknameUtil.getGirlName());
+            user.setAvatar(SocialuniGenerateAvatarUtil.getGirlAvatar());
+        }
+
+
+        /*if (StringUtils.isNotEmpty(nickname)) {
             //校验是否包含违规内容，包含则不设置
             try {
                 SocialuniTextContentUtil.checkTextHasUnderageAndContactAndViolateWords(nickname);
@@ -37,13 +50,11 @@ public class SocialUserDOFactory {
             } catch (SocialException e) {
                 e.printStackTrace();
             }
-        }
-        if (StringUtils.isNotEmpty(loginQO.getAvatarUrl())) {
+        }*/
+        /*if (StringUtils.isNotEmpty(loginQO.getAvatarUrl())) {
             user.setAvatar(loginQO.getAvatarUrl());
-        }
-        if (ObjectUtils.isNotEmpty(loginQO.getGender())) {
-            user.setGender(GenderTypeNumEnum.getNameByValue(loginQO.getGender()));
-        }
+        }*/
+
         String userBirthday = loginQO.getBirthday();
         //判断生日是否为空
         if (StringUtils.isNotEmpty(userBirthday)) {
