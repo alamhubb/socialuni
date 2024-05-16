@@ -135,8 +135,16 @@ export default class SocialuniExpandUserInfo extends Vue {
 
   async addLikeUser(user: SocialuniUserExtendDetailRO) {
     await SocialuniLikeService.checkUserCoinAndPay()
-    await SocialuniUserLikeAPI.addUserLikeAPI(user)
     user.hasUserLike = true
+    const copyUserCoin = socialuniAppUserModule.userCoinNum
+
+    socialuniAppUserModule.userCoinNum = copyUserCoin - socialuniLikeConfigModule.config.sendLikeMsgNeedPayCoinNum
+    try {
+      await SocialuniUserLikeAPI.addUserLikeAPI(user)
+    } catch (e) {
+      user.hasUserLike = false
+      socialuniAppUserModule.userCoinNum = copyUserCoin
+    }
     // await SocialuniUserLikeAPI.sendMsgAPI(socialuniChatModule.chat.id, "你好在干嘛")
     QingAppUtil.ToastUtil.success("打招呼成功")
     // this.toMessagePage(user)
