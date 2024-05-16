@@ -291,7 +291,7 @@ export default class SocialuniExpandViewH5 extends Vue {
   }
 
   async getOpenContactInfo(user: CenterUserDetailRO) {
-    //打开获取对方联系方式功能，支付贝壳
+    //打开获取对方联系方式功能，支付金币
     user.getUserContactBtnDisabled = true
     try {
       await SocialuniUserExpandService.getOpenContactInfo(user)

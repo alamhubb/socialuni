@@ -99,6 +99,8 @@ import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import MessageAPI from "socialuni-im-api/src/api/MessageAPI";
 import {socialuniAppUserModule} from "socialuni-user-sdk/src/store/SocialuniAppUserModule";
 import {socialuniLikeConfigModule} from "socialuni-expand-sdk/src/store/SocialuniLikeConfigModule";
+import PlatformUtils from "socialuni-user-sdk/src/util/PlatformUtils";
+import SocialuniLikeService from "socialuni-expand-sdk/src/service/SocialuniLikeService";
 
 @toNative
 @Component({
@@ -134,9 +136,9 @@ export default class SocialuniExpandUserInfo extends Vue {
   async addLikeUser(user: SocialuniUserExtendDetailRO) {
     await SocialuniUserLikeAPI.addUserLikeAPI(user)
     user.hasUserLike = true
-    if (socialuniAppUserModule.userCoinNum > socialuniLikeConfigModule.config.sendLikeMsgNeedPayCoinNum) {
-      await MessageAPI.sendMsgAPI(socialuniChatModule.chat.id, "你好在干嘛", msgType)
-    }
+    await SocialuniLikeService.checkUserCoinAndPay()
+    await MessageAPI.sendMsgAPI(socialuniChatModule.chat.id, "你好在干嘛")
+    QingAppUtil.ToastUtil.success("打招呼成功")
     // this.toMessagePage(user)
   }
 
@@ -165,7 +167,7 @@ export default class SocialuniExpandUserInfo extends Vue {
   }
 
   async getOpenContactInfo(user: CenterUserDetailRO) {
-    //打开获取对方联系方式功能，支付贝壳
+    //打开获取对方联系方式功能，支付金币
     user.getUserContactBtnDisabled = true
     try {
       await SocialuniUserExpandService.getOpenContactInfo(user)

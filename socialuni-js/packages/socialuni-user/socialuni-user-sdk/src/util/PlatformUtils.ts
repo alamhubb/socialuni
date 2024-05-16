@@ -68,14 +68,14 @@ export default class PlatformUtils {
     }
 
     // 统一处理各平台的支付
-    static userPay(amount?: number) {
-        return PlatformUtils.payCoin(amount).then(() => {
+    // static userPay(amount?: number) {
+    //     return PlatformUtils.payCoin(amount).then(() => {
             /* UserStore.getMineUserAction().then(() => {
                QingAppUtil.AlertUtil.hint(HintMsg.paySuccessMsg)
                RouterUtil.reLaunch(UserPagePath.userMine)
              })*/
-        })
-    }
+        // })
+    // }
 
     //所有只能直接调用这个
     static async payCoin(amount: number) {

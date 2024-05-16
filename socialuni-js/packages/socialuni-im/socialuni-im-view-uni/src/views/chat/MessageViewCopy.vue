@@ -28,7 +28,7 @@
                     <!--          <div class="uni-tip-content text-bold">
                                 <template v-if="chat.needPayOpen">
                                   会话未开启，为避免用户被频繁恶意骚扰，只能给关注您的和给您发过消息的用户直接发送消息
-                                  &lt;!&ndash;              ，给其他用户发送消息，需要支付10贝壳开启对话&ndash;&gt;
+                                  &lt;!&ndash;              ，给其他用户发送消息，需要支付10金币开启对话&ndash;&gt;
                                 </template>
                                 <div v-else-if="chat.status === closeStatus" class="row-center">
                                   您已关闭会话，发送消息即可再次开启对话
@@ -772,10 +772,10 @@ export default class MessageView extends Vue {
                     const userShell = this.mineUser.shell
                     //不需要充值提示
                     if (userShell >= 10) {
-                        await this.openChatAndPrompt('会话未开启，是否消耗10个贝壳开启与 ' + this.chat.nickname + ' 的对话，并给对方发送消息：' + content, content)
+                        await this.openChatAndPrompt('会话未开启，是否消耗10个金币开启与 ' + this.chat.nickname + ' 的对话，并给对方发送消息：' + content, content)
                         //需要充值提示
                     } else {
-                        await QingAppUtil.AlertUtil.confirm('会话未开启，您没有贝壳了，是否直接使用现金支付开启开启与 ' + this.chat.nickname + ' 的对话，并给对方发送消息：' + content, content)
+                        await QingAppUtil.AlertUtil.confirm('会话未开启，您没有金币了，是否直接使用现金支付开启开启与 ' + this.chat.nickname + ' 的对话，并给对方发送消息：' + content, content)
                         const provider = socialuniSystemModule.isMp ? socialuniSystemModule.provider : SocialuniProviderType.wx
                         try {
                             // await PlatformUtils.payCoin(1)

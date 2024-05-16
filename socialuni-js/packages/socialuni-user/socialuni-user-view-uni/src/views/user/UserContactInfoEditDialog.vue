@@ -16,8 +16,8 @@
           {{ openContactInfo ? '他人可获取' : '他人不可获取' }}
         </q-switch>
       </div>
-      <div class="mt">打开开关，他人可通过使用{{getContactExpenseCoin}}贝壳的方式获取您的联系方式</div>
-      <div class="mt-sm">提示：允许使用贝壳获取联系方式功能交友效果更佳哦</div>
+      <div class="mt">打开开关，他人可通过使用{{getContactExpenseCoin}}金币的方式获取您的联系方式</div>
+      <div class="mt-sm">提示：允许使用金币获取联系方式功能交友效果更佳哦</div>
 <!--      <div class="mt-xs">未来会给您提供50%收益分成（目前不支持）</div>-->
     </div>
   </q-popup>
@@ -70,7 +70,7 @@ export default class UserContactInfoEditDialog extends Vue {
     try {
       let msg = '是否确认将联系方式设置为' + this.contactInfoValue
       if (this.openContactInfo) {
-        msg += '，并设置为他人可使用贝壳获取方式'
+        msg += '，并设置为他人可使用金币获取方式'
       } else {
         msg += '，并设置为他人不可获取'
       }

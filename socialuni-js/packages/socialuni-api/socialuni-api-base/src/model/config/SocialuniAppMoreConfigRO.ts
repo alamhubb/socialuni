@@ -18,9 +18,9 @@ export default class SocialuniAppMoreConfigRO {
   serviceWeChat: string = null
   //激励视频限制次数
   rewardedAdLimit: number = null
-  //获取联系方式消耗多少贝壳
+  //获取联系方式消耗多少金币
   contactExpenseShell: number = null
-  //用户获得贝壳百分比
+  //用户获得金币百分比
   contactUserReceiveShell: number = null
   //验证码间隔多少秒
   authCodeInterval: number = null

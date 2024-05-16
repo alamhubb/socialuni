@@ -56,5 +56,5 @@ export default class AppConfig {
     static readonly childProtectTitle: string = '儿童信息保护规则及监护人须知'
 
     // 儿童保护政策
-    static readonly shellInfoTitle: string = '贝壳介绍'
+    static readonly shellInfoTitle: string = '金币介绍'
 }

@@ -54,7 +54,7 @@
                         <div v-if="shellOrders.length">
                           <u-table>
                             <u-tr>
-                              <u-th>贝壳</u-th>
+                              <u-th>金币</u-th>
                               <u-th>类型</u-th>
                               <u-th>时间</u-th>
                             </u-tr>

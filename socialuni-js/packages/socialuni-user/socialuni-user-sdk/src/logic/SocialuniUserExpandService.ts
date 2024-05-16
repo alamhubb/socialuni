@@ -19,13 +19,13 @@ export default class SocialuniUserExpandService {
         const getUserInfoNeedCoin = socialuniConfigModule.appMoreConfig.contactExpenseShell
 
         if (userShell >= getUserInfoNeedCoin) {
-            await QingAppUtil.AlertUtil.confirm('是否消耗100个贝壳查看用户：' + user.nickname + ' 的联系方式')
+            await QingAppUtil.AlertUtil.confirm('是否消耗100个金币查看用户：' + user.nickname + ' 的联系方式')
             const res = await SocialuniExpandAPI.getUserContactInfoAPI(user.id)
             user.contactInfo = res.data
             user.openContactInfo = true
             socialuniAppUserModule.userCoinNum = userShell - getUserInfoNeedCoin
         } else {
-            await QingAppUtil.AlertUtil.confirm('您没有贝壳了，是否直接使用现金支付')
+            await QingAppUtil.AlertUtil.confirm('您没有金币了，是否直接使用现金支付')
             // await PlatformUtils.payCoin(getUserInfoNeedCoin / 100)
             socialuniAppUserModule.userCoinNum = userShell + getUserInfoNeedCoin
             //递归调用自己
@@ -36,24 +36,24 @@ export default class SocialuniUserExpandService {
     static async sendMsgNeedCoinCheck() {
         const userShell = socialuniAppUserModule.userCoinNum
         if (userShell <= 9) {
-            await QingAppUtil.AlertUtil.confirm('您没有贝壳了，是否直接充值贝壳')
+            await QingAppUtil.AlertUtil.confirm('您没有金币了，是否直接充值金币')
             await PlatformUtils.payCoin(1)
             socialuniAppUserModule.userCoinNum = userShell + 100
         }
 
 
-        // await QingAppUtil.AlertUtil.confirm('是否消耗10个贝壳查看用户：' + user.nickname + ' 的联系方式')
+        // await QingAppUtil.AlertUtil.confirm('是否消耗10个金币查看用户：' + user.nickname + ' 的联系方式')
 
         // const getUserInfoNeedCoin = socialuniConfigModule.appMoreConfig.contactExpenseShell
 
         // if (userShell >= getUserInfoNeedCoin) {
-        //     await QingAppUtil.AlertUtil.confirm('是否消耗100个贝壳查看用户：' + user.nickname + ' 的联系方式')
+        //     await QingAppUtil.AlertUtil.confirm('是否消耗100个金币查看用户：' + user.nickname + ' 的联系方式')
         //     const res = await SocialuniExpandAPI.getUserContactInfoAPI(user.id)
         //     user.contactInfo = res.data
         //     user.openContactInfo = true
         //     socialuniAppUserModule.userCoinNum = userShell - getUserInfoNeedCoin
         // } else {
-        //     await QingAppUtil.AlertUtil.confirm('您没有贝壳了，是否直接使用现金支付')
+        //     await QingAppUtil.AlertUtil.confirm('您没有金币了，是否直接使用现金支付')
         //     // await PlatformUtils.payCoin(getUserInfoNeedCoin / 100)
         //     socialuniAppUserModule.userCoinNum = userShell + getUserInfoNeedCoin
         //     //递归调用自己

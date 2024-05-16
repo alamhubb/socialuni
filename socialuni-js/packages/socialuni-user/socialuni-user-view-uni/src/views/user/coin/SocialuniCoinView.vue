@@ -1,7 +1,7 @@
 <template>
   <div class="bg-blue6 h100p flex-col">
     <div class="chunk-blue6 px-smm py-md col-all-center flex-none">
-      <div class="font-12">贝壳总数</div>
+      <div class="font-12">金币总数</div>
       <div class="font-bold font-28 mt"> {{ userCoinNum }}</div>
     </div>
 
@@ -26,7 +26,7 @@
               {{ value }}元
             </div>
             <div class="row-all-center font-12 mt-xs">
-              {{ value * 100 }}贝壳
+              {{ value * 100 }}金币
             </div>
           </div>
         </div>
@@ -78,7 +78,7 @@ export default class SocialuniCoinView extends Vue {
     return socialuniUserModule.mineUser
   }
 
-  get userCoinNum(){
+  get userCoinNum() {
     return socialuniAppUserModule.userCoinNum
   }
 
@@ -96,6 +96,7 @@ export default class SocialuniCoinView extends Vue {
     // const provider = socialuniSystemModule.isMp ? socialuniSystemModule.provider : SocialuniProviderType.wx
     try {
       await PlatformUtils.payCoin(this.checkedPayValue)
+      //改为调用接口，可能不行，因为后台为异步，有延迟
       socialuniAppUserModule.userCoinNum += this.checkedPayValue * 100
     } finally {
       this.disabled = false

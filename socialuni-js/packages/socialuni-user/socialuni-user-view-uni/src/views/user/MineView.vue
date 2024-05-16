@@ -129,7 +129,7 @@
            @click="toCoinPage">
         <div class="row-col-center">
           <q-icon prefix="uni-icons" icon="uniui-wallet-filled" class="color-orange"></q-icon>
-          <div class="ml-xs">我的贝壳</div>
+          <div class="ml-xs">我的金币</div>
         </div>
         <q-icon icon="arrow-right" class="text-md margin-right-sm color-sub"></q-icon>
       </div>

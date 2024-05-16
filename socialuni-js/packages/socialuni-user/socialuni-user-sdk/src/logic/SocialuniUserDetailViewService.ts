@@ -84,7 +84,7 @@ export default class SocialuniUserDetailViewService extends SocialuniViewService
     showUserContactBtnDisabled: boolean = false
 
     async getOpenContactInfo() {
-        //打开获取对方联系方式功能，支付贝壳
+        //打开获取对方联系方式功能，支付金币
         this.showUserContactBtnDisabled = true
         try {
             await SocialuniUserExpandService.getOpenContactInfo(this.user)

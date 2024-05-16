@@ -53,7 +53,7 @@ export default class UserVOBack {
   //展示联系方式
   showUserContact: boolean = null
   contactAccount: string = null
-  //贝壳
+  //金币
   shell: number = null
   //经验值
   experience: number = null
