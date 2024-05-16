@@ -30,6 +30,8 @@ public class SocialuniUserExtendDetailRO extends SocialuniUserRO {
     private boolean hasUserLike;
     private Date updateTime;
 
+    private List<SocialuniUserImgRO> imgs;
+
     public SocialuniUserExtendDetailRO(SocialuniUserExtendDetailRO userRO) {
         super(userRO);
         this.provinceName = userRO.getProvinceName();

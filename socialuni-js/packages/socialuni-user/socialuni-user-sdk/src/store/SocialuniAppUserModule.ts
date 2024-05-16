@@ -8,6 +8,8 @@ import SocialuniUserFansDetailRO from "socialuni-user-api/src/model/SocialuniUse
 import SocialuniUserExpandDetailRO from "socialuni-user-api/src/model/SocialuniUserExpandDetailRO";
 import SocialuniUserExpandAPI from "socialuni-user-api/src/api/SocialuniUserExpandAPI";
 import SocialuniCoinAPI from "socialuni-user-api/src/api/SocialuniCoinAPI";
+import ImgFileVO from "socialuni-api-base/src/model/ImgFileVO";
+import SocialuniUserImgAPI from "socialuni-user-api/src/api/SocialuniUserImgAPI";
 
 class SocialuniAppUserModule {
     private userPhoneNum: string = null
@@ -15,6 +17,15 @@ class SocialuniAppUserModule {
     private _mineUserFansDetail: SocialuniUserFansDetailRO = null
     private _mineUserExpandDetail: SocialuniUserExpandDetailRO = null
     private mineUserCoinInfo: { coinNum: number } = null
+    private _userImgs: ImgFileVO [] = []
+
+    setUserImgs(userImgs: ImgFileVO []) {
+        this._userImgs = userImgs
+    }
+
+    get userImgs() {
+        return this._userImgs
+    }
 
     get mineUserExpandDetail() {
         return this._mineUserExpandDetail
@@ -61,6 +72,9 @@ class SocialuniAppUserModule {
             }),
             SocialuniCoinAPI.getUserCoinInfoAPI().then(res => {
                 this.mineUserCoinInfo = res.data
+            }),
+            SocialuniUserImgAPI.getMineUserImgListAPI().then(res => {
+                this.setUserImgs(res.data)
             })
         ])
     }
@@ -79,8 +93,17 @@ class SocialuniAppUserModule {
             }),
             SocialuniCoinAPI.getUserCoinInfoAPI().then(res => {
                 this.mineUserCoinInfo = res.data
+            }),
+            SocialuniUserImgAPI.getMineUserImgListAPI().then(res => {
+                this.setUserImgs(res.data)
             })
         ])
+    }
+
+    async getMineUserImgs() {
+        await SocialuniUserImgAPI.getMineUserImgListAPI().then(res => {
+            this.setUserImgs(res.data)
+        })
     }
 }
 

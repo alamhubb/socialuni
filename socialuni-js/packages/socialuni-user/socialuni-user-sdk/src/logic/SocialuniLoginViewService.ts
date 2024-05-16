@@ -45,6 +45,9 @@ export default class SocialuniLoginViewService extends SocialuniLoginFormService
         }
         this.bindBtnDisabled = true
 
+        console.log(55555)
+        console.log(socialuniConfigModule.allConfig.publicKey)
+
         const password = await PasswordUtil.rsaEncode(socialuniConfigModule.allConfig.publicKey, this.loginData.password)
 
         console.log(6666)

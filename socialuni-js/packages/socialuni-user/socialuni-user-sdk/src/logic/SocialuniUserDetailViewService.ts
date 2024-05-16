@@ -10,9 +10,16 @@ import SocialuniUserExpandService from "./SocialuniUserExpandService";
 import SocialuniViewService from "socialuni/src/interface/SocialuniViewService";
 import ImgFileVO from "socialuni-api-base/src/model/ImgFileVO";
 import SocialuniAppUserAPI from "socialuni-app-api/src/api/SocialuniAppUserAPI";
+import {socialuniAppUserModule} from "../store/SocialuniAppUserModule";
+import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
+import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
+import SocialUserIdentityAPI from "socialuni-user-api/src/api/SocialUserIdentityAPI";
+import FollowAPI from "socialuni-community-api/src/api/FollowAPI";
+import SocialuniUserExpandAPI from "socialuni-user-api/src/api/SocialuniUserExpandAPI";
+import SocialuniCoinAPI from "socialuni-user-api/src/api/SocialuniCoinAPI";
+import SocialuniUserImgAPI from "socialuni-user-api/src/api/SocialuniUserImgAPI";
 
 export default class SocialuniUserDetailViewService extends SocialuniViewService<any> {
-
     user: CenterUserDetailRO = null
 
     async initService(instance: Vue, params: any) {
@@ -38,14 +45,15 @@ export default class SocialuniUserDetailViewService extends SocialuniViewService
         // 这里有问题，有时候直接进入页面没有userId
         const res = await SocialuniAppUserAPI.queryUserDetailAPI(userId)
         this.user = res.data
-        // await Promise.all([
-        //     SocialuniUserAPI.getUserImgListAPI(userId).then(res => {
-        //         this.user.imgs = res.data
-        //     }),
-        //     SocialuniUserAPI.getUserImgListAPI(userId).then(res => {
-        //         this.user.imgs = res.data
-        //     })
-        // ])
+
+        await Promise.all([
+            SocialuniAppUserAPI.queryUserDetailAPI(userId).then((res: any) => {
+                this.user = res.data
+            }),
+            SocialuniUserImgAPI.getUserImgListAPI(userId).then(res => {
+                this.user.imgs = res.data
+            })
+        ])
     }
 
     get appConfig() {

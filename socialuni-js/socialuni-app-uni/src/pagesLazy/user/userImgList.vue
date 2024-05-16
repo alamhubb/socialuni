@@ -32,6 +32,8 @@ import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAP
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import {getCurrentInstance} from "vue";
 import {onLoad} from "@dcloudio/uni-app";
+import SocialuniUserImgAPI from "socialuni-user-api/src/api/SocialuniUserImgAPI";
+import {socialuniAppUserModule} from "socialuni-user-sdk/src/store/SocialuniAppUserModule";
 
 @toNative
 @Component({
@@ -74,7 +76,7 @@ export default class UserImgListPage extends Vue {
       SocialuniUserAPI.queryUserDetailAPI(userId).then((res: any) => {
         this.pageUser = res.data
       })
-      SocialuniUserAPI.getUserImgListAPI(userId).then(res => {
+      SocialuniUserImgAPI.getUserImgListAPI(userId).then(res => {
         this.imgs = res.data
       })
     }, getCurrentInstance())
@@ -106,8 +108,8 @@ export default class UserImgListPage extends Vue {
   deleteImg(imgIndex) {
     QingAppUtil.AlertUtil.warning('请确认是否删除照片？').then(() => {
       const imgs: ImgFileVO[] = this.frontDeleteImg(imgIndex)
-      SocialuniMineUserAPI.deleteUserImgNewAPI(imgs[0]).then((res: any) => {
-        socialuniUserModule.setUser(res.data)
+      SocialuniUserImgAPI.deleteUserImgNewAPI(imgs[0]).then((res: any) => {
+        socialuniAppUserModule.setUserImgs(res.data)
       })
     })
   }

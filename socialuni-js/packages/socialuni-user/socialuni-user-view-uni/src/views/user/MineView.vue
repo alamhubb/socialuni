@@ -134,7 +134,7 @@
         <q-icon icon="arrow-right" class="text-md margin-right-sm color-sub"></q-icon>
       </div>
 
-      <socialuni-user-info-img class="mt-sm" :user="mineUser"></socialuni-user-info-img>
+      <socialuni-user-info-img class="mt-sm" :user="mineUser" :imgs="userImgs"></socialuni-user-info-img>
 
       <q-popup ref="moreActionList" bottom title="清池 app">
         <div class="flex-col h100p pb-50">
@@ -256,6 +256,10 @@ export default class MineView extends Vue {
   get mineUser() {
     return socialuniUserModule.mineUser
   }
+  get userImgs() {
+    return socialuniAppUserModule.userImgs
+  }
+
 
   get mineUserExpandDetail() {
     return socialuniAppUserModule.mineUserExpandDetail

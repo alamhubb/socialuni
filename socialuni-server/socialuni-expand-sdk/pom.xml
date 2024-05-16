@@ -35,6 +35,10 @@
         </dependency>
         <dependency>
             <groupId>com.socialuni.social</groupId>
+            <artifactId>socialuni-user-img-sdk</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.socialuni.social</groupId>
             <artifactId>socialuni-likee-sdk</artifactId>
         </dependency>
         <dependency>

@@ -11,8 +11,4 @@ export default class SocialuniUserAPI {
     static queryRecentlyUsersAPI() {
         return socialuniUserRequest.get<CenterUserDetailRO[]>('socialuni/user/queryRecentlyUsers')
     }
-
-    static getUserImgListAPI(userId: string) {
-        return socialuniUserRequest.get<ImgFileVO[]>('socialuni/userImg/getUserImgList/' + userId)
-    }
 }

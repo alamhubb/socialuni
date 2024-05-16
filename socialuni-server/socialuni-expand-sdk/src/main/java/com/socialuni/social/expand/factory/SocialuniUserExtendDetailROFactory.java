@@ -2,6 +2,7 @@ package com.socialuni.social.expand.factory;
 
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.user.SocialuniUserExtendDetailRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserImgRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniDistrictDO;
@@ -14,6 +15,9 @@ import com.socialuni.social.common.sdk.utils.PositionUtil;
 import com.socialuni.social.user.sdk.dao.utils.SocialuniUserExtendFriendLogDOUtil;
 import com.socialuni.social.user.sdk.model.factory.SocialuniUserROFactory;
 import com.socialuni.social.user.sdk.utils.DistrictStoreUtils;
+import com.socialuni.social.userImg.dao.DO.SocialuniUserImgDo;
+import com.socialuni.social.userImg.factory.UserImgROFactory;
+import com.socialuni.social.userImg.utils.SocialuniUserImgDOUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
@@ -31,10 +35,10 @@ public class SocialuniUserExtendDetailROFactory {
 
     public static SocialuniUserExtendDetailRO getUserExtendDetailRO(SocialuniUserDo userDO, SocialuniUserDo mineUser) {
         //user基础信息
-        SocialuniUserRO socialuniUserDetailRO = SocialuniUserROFactory.getUserRO(userDO, mineUser);
+        SocialuniUserRO socialuniUserRO = SocialuniUserROFactory.getUserRO(userDO, mineUser);
 
         //user基础信息
-        SocialuniUserExtendDetailRO socialuniUserExtendDetailRO = new SocialuniUserExtendDetailRO(socialuniUserDetailRO);
+        SocialuniUserExtendDetailRO socialuniUserExtendDetailRO = new SocialuniUserExtendDetailRO(socialuniUserRO);
 
         //获取用户扩列记录
         SocialuniUserExtendFriendLogDo socialuniUserExtendFriendLogDo = SocialuniUserRepositoryFacede.findByUserId(userDO.getUserId(), SocialuniUserExtendFriendLogDo.class);
@@ -69,6 +73,12 @@ public class SocialuniUserExtendDetailROFactory {
         Double getDistance = PositionUtil.getDistance(dataRO);
 
         socialuniUserExtendDetailRO.setDistance(getDistance);
+
+        //用户图片
+        List<SocialuniUserImgDo> imgDOS = SocialuniUserImgDOUtil.getUserImgsTop6(userDO.getUnionId());
+        List<SocialuniUserImgRO> imgVOS = UserImgROFactory.userImgDOToVOS(imgDOS);
+        socialuniUserExtendDetailRO.setImgs(imgVOS);
+
 
         if (mineUser == null) {
             socialuniUserExtendDetailRO.setHasUserLike(false);

@@ -24,24 +24,12 @@ export default class SocialuniMineUserAPI {
     return socialuniUserRequest.post<SocialuniMineUserRO>('socialuni/mineUser/editUser', user)
   }
 
-  static addUserImgAPI(userImg: ImgAddQO) {
-    return socialuniUserRequest.post<SocialuniMineUserRO>('socialuni/mineUser/addUserImg', userImg)
-  }
-
   static randomUserAvatar() {
     return socialuniUserRequest.get<SocialuniMineUserRO>('socialuni/mineUser/randomUserAvatar')
   }
 
   static addUserAvatarImgAPI(userImg: ImgAddQO) {
     return socialuniUserRequest.post<SocialuniUserRO>('socialuni/mineUser/addUserAvatarImg', userImg)
-  }
-
-  static deleteUserImgAPI(userImg: ImgFileVO) {
-    return socialuniUserRequest.post('socialuni/mineUser/deleteImg', userImg)
-  }
-
-  static deleteUserImgNewAPI(userImg: ImgFileVO) {
-    return socialuniUserRequest.post('socialuni/mineUser/deleteUserImg', {userImgId: userImg.id})
   }
 
   static updateAvatarAPI(avatar: string) {
