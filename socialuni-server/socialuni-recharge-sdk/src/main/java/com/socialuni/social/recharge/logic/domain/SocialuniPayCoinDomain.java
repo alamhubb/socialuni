@@ -12,6 +12,8 @@ import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.recharge.constant.SocialuniCoinOrderType;
 import com.socialuni.social.recharge.constant.SocialuniOrderDetailType;
 import com.socialuni.social.recharge.dao.DO.SocialuniCoinConsumLogDO;
+import com.socialuni.social.recharge.dao.DO.SocialuniCoinOrderDO;
+import com.socialuni.social.recharge.dao.repository.SocialuniCoinOrderRepository;
 import com.socialuni.social.recharge.logic.entity.SocialuniCreateCoinOrderEntity;
 import com.socialuni.social.recharge.model.SocialuniCoinInfoRO;
 import com.socialuni.social.recharge.model.SocialuniCoinPayRO;
@@ -72,9 +74,18 @@ public class SocialuniPayCoinDomain {
         socialuniCreateCoinOrderEntity.createCoinOrderByOrderType(mineUserId, -consumNum, SocialuniCoinOrderType.consume, SocialuniOrderDetailType.msg, socialuniCoinConsumLogDO.getId());
     }
 
+    @Resource
+    SocialuniCoinOrderRepository socialuniCoinOrderRepository;
 
     public SocialuniCoinInfoRO getUserCoinInfo() {
         Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+
+        SocialuniCoinOrderDO socialuniCoinOrderDO = socialuniCoinOrderRepository.findFirstByUserIdAndDetailType(mineUserId, SocialuniOrderDetailType.sysGive);
+
+        if (socialuniCoinOrderDO == null) {
+            socialuniCreateCoinOrderEntity.createCoinOrderByOrderType(mineUserId, 100, SocialuniCoinOrderType.recharge, SocialuniOrderDetailType.sysGive, null);
+        }
+
         SocialuniUserCoinDo socialuniUserSocialCoinDo = SocialuniUserSocialCoinDOUtil.getOrCreate(mineUserId);
         SocialuniCoinInfoRO socialuniCoinInfoRO = new SocialuniCoinInfoRO();
         socialuniCoinInfoRO.setCoinNum(socialuniUserSocialCoinDo.getCoin());
