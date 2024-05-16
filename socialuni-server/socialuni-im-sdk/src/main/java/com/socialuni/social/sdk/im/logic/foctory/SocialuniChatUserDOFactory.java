@@ -37,7 +37,7 @@ public class SocialuniChatUserDOFactory {
         SocialuniChatUserDO chatUserDO;
         SocialuniChatUserDO beChatUserDO;
         //会话不存在则创建
-        SocialuniChatDO chatDO = SocialuniChatDOFactory.getChatIdByCreateSingleChat();
+        SocialuniChatDO chatDO = SocialuniChatDOFactory.getChatIdByCreateByType();
         //会话不存在则创建
         chatUserDO = new SocialuniChatUserDO(chatDO, userId, beUserId);
         chatUserDO = SocialuniRepositoryFacade.save(chatUserDO);

@@ -25,7 +25,7 @@ class SocialuniAppUserModule {
     }
 
     get userCoinNum() {
-        return this.mineUserCoinInfo.coinNum
+        return this.mineUserCoinInfo?.coinNum
     }
 
     set userCoinNum(value) {

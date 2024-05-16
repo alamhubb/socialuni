@@ -41,6 +41,7 @@ public class SocialuniUserExpandDOUtil {
             socialuniUserExpandDo.setUserId(userId);
             socialuniUserExpandDo.setOpenContactInfo(false);
             socialuniUserExpandDo.setLastOnlineTime(new Date());
+            socialuniUserExpandDo = saveUserExpandDO(socialuniUserExpandDo);
         }
         return socialuniUserExpandDo;
     }

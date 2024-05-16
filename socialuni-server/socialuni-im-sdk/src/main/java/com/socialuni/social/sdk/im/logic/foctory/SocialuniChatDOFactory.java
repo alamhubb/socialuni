@@ -11,15 +11,21 @@ import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 
 public class SocialuniChatDOFactory {
 
-    public static SocialuniChatDO getChatIdByCreateSingleChat() {
+    public static SocialuniChatDO getChatIdByCreateByType(String chatType) {
         SocialuniChatDO chatDO = new SocialuniChatDO();
 
         Integer uid = SocialuniUnionIdFacede.createChatUnionId();
         chatDO.setUnionId(uid);
         chatDO.setContentType(SocialuniContentType.chat);
-        chatDO.setType(ChatType.single);
+        chatDO.setType(chatType);
         chatDO = SocialuniRepositoryFacade.save(chatDO);
         return chatDO;
+    }
+
+    public static SocialuniChatDO getChatIdByCreateByType() {
+        //先把左右都改成like
+        return getChatIdByCreateByType(ChatType.like);
+//        return getChatIdByCreateByType(ChatType.single);
     }
 
     public static SocialuniChatDO createSystemGroupChat(String chatName) {

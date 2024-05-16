@@ -19,6 +19,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 /**
  * @author qinkaiyuan
@@ -35,6 +36,7 @@ public class SocialuniMessageService {
     @Resource
     private SocialuniMessageReceiveRepository messageReceiveRepository;
 
+    @Transactional
     public ResultRO<SocialMessageRO> sendMsg(MessageAddVO msgAddVO) {
         String receiveIdUid = msgAddVO.getReceiveId();
         String msgContent = msgAddVO.getContent();

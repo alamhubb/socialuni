@@ -156,6 +156,9 @@ public class SocialChatROFactory {
 
             chatRO.setBlackUser(chatRO.getBlackUser());
 
+            // 有一个配置表，你可以从配置比里面读东西
+
+
 
             SocialuniUserBlackDO socialuniUserBlackDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserIdAndStatus(chatUserDO.getBeUserId(), chatUserDO.getUserId(), SocialuniCommonStatus.enable, SocialuniUserBlackDO.class);
 

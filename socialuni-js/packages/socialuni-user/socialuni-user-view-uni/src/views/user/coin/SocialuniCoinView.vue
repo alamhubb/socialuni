@@ -2,7 +2,7 @@
   <div class="bg-blue6 h100p flex-col">
     <div class="chunk-blue6 px-smm py-md col-all-center flex-none">
       <div class="font-12">贝壳总数</div>
-      <div class="font-bold font-28 mt"> {{ mineUser.socialCoin }}</div>
+      <div class="font-bold font-28 mt"> {{ userCoinNum }}</div>
     </div>
 
     <div class="bg-white bt-radius-30 flex-1 pb-smm px-smm">
@@ -76,6 +76,10 @@ export default class SocialuniCoinView extends Vue {
 
   get mineUser() {
     return socialuniUserModule.mineUser
+  }
+
+  get userCoinNum(){
+    return socialuniAppUserModule.userCoinNum
   }
 
   shellOrders: ShellOrderVO[] = []
