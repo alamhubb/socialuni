@@ -2,16 +2,10 @@ package com.socialuni.social.likee.logic.service;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
-import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserIdQO;
-import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
-import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
-import com.socialuni.social.common.sdk.dao.repository.SocialuniCommonRepository;
-import com.socialuni.social.content.utils.SocialuniTextContentUtil;
-import com.socialuni.social.follow.dao.DO.SocialUserFansDetailDo;
 import com.socialuni.social.im.api.model.QO.SocialuniChatQueryQO;
 import com.socialuni.social.im.api.model.QO.message.MessageAddVO;
 import com.socialuni.social.im.api.model.RO.ChatRO;
@@ -25,18 +19,12 @@ import com.socialuni.social.likee.model.SocialuniLikeChatRO;
 import com.socialuni.social.recharge.constant.SocialuniCoinOrderType;
 import com.socialuni.social.recharge.constant.SocialuniOrderDetailType;
 import com.socialuni.social.recharge.logic.entity.SocialuniCreateCoinOrderEntity;
-import com.socialuni.social.sdk.im.constant.SocialuniChatDomainType;
-import com.socialuni.social.sdk.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.sdk.im.logic.service.SocialuniMessageService;
 import com.socialuni.social.sdk.im.logic.service.chat.ChatService;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
-import com.socialuni.social.user.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -63,6 +51,7 @@ public class SocialuniUserLikeService {
 
         SocialuniLikeChatRO socialuniLikeChatRO = BeanUtil.toBean(chatRO, SocialuniLikeChatRO.class);
         socialuniLikeChatRO.setPayCoinNum(0);
+        socialuniLikeChatRO.setNeedPayOpen(true);
 
         //私聊
         String chatUuid = socialuniChatQueryQO.getChatId();
@@ -75,6 +64,7 @@ public class SocialuniUserLikeService {
         SocialuniUserLikeChatDO socialuniUserLikeChatDO = socialuniUserLikeChatManage.get(chatId);
 
         if (socialuniUserLikeChatDO != null) {
+            socialuniLikeChatRO.setNeedPayOpen(false);
             if (mineUserId.equals(socialuniUserLikeChatDO.getUserId())) {
                 socialuniLikeChatRO.setPayCoinNum(SocialuniLikeAllConfig.getLikeAllConfigBO().getSendLikeMsgNeedPayCoinNum());
             }

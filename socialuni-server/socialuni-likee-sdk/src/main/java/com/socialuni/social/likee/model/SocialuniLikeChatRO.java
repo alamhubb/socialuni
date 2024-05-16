@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class SocialuniLikeChatRO extends ChatRO {
-
     Integer payCoinNum;
+    //会话是否需要付费开启
+    boolean needPayOpen;
 }
