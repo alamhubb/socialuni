@@ -36,6 +36,10 @@
             <groupId>com.socialuni.social</groupId>
             <artifactId>socialuni-recharge-sdk</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.socialuni.social</groupId>
+            <artifactId>socialuni-likee-sdk</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.socialuni.social</groupId>

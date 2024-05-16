@@ -19,6 +19,8 @@ public class ChatType {
     public static final String notify = "通知";
     //私聊
     public static final String single = "私聊";
+    //基于喜欢类型发起的私聊
+//    public static final String like = "喜欢";
     public static final String match = "匹配";
     //群聊
 //    public static final String group = "群聊";

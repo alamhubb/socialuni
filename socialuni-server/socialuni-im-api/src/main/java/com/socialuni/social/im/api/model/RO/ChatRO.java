@@ -33,7 +33,7 @@ public class ChatRO {
     private String loadMore;
     private String lastContent;
     //需要消费的金币数量
-    private Boolean payCoinNum;
+    private Integer payCoinNum;
 
     //只有当对方未关注你，且还不是你的好友，才需要使用这个字段判断。
     //需要支付开启会话

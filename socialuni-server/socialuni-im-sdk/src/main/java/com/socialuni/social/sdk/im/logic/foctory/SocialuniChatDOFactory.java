@@ -3,6 +3,7 @@ package com.socialuni.social.sdk.im.logic.foctory;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
+import com.socialuni.social.sdk.im.constant.SocialuniChatDomainType;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.sdk.im.enumeration.ChatOpenType;
 import com.socialuni.social.sdk.im.enumeration.ChatType;
@@ -11,20 +12,21 @@ import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 
 public class SocialuniChatDOFactory {
 
-    public static SocialuniChatDO getChatIdByCreateByType(String chatType) {
+    public static SocialuniChatDO getChatIdByCreateByDomainType(String chatDomainType) {
         SocialuniChatDO chatDO = new SocialuniChatDO();
 
         Integer uid = SocialuniUnionIdFacede.createChatUnionId();
         chatDO.setUnionId(uid);
         chatDO.setContentType(SocialuniContentType.chat);
-        chatDO.setType(chatType);
+        chatDO.setType(ChatType.single);
+        chatDO.setDomainType(chatDomainType);
         chatDO = SocialuniRepositoryFacade.save(chatDO);
         return chatDO;
     }
 
-    public static SocialuniChatDO getChatIdByCreateByType() {
+    public static SocialuniChatDO getChatIdByCreateByDomainType() {
         //先把左右都改成like
-        return getChatIdByCreateByType(ChatType.like);
+        return getChatIdByCreateByDomainType(SocialuniChatDomainType.like);
 //        return getChatIdByCreateByType(ChatType.single);
     }
 

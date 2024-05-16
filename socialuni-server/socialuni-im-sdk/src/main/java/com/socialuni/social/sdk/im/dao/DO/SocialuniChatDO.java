@@ -23,6 +23,9 @@ import java.io.Serializable;
         indexes = {
                 //关联需要键索引，索引列不能为空
                 @Index(columnList = "status"),
+                @Index(columnList = "domainType"),
+                @Index(columnList = "topLevel"),
+                @Index(columnList = "type"),
         }
 )
 @EqualsAndHashCode(callSuper = true)
@@ -37,6 +40,8 @@ public class SocialuniChatDO extends SocialuniUnionContentBaseDO implements Seri
     private Integer topLevel;
     //开放类型，默认是open
     private String openType;
+    //业务类型
+    private String domainType;
 
     public SocialuniChatDO(String type) {
         this.setType(type);
