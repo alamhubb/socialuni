@@ -7,6 +7,7 @@ import com.socialuni.social.user.sdk.api.user.SocialuniMineUserAPI;
 import com.socialuni.social.tance.sdk.api.SocialuniUnionIdInterface;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.user.sdk.dao.utils.SocialuniUserExtendFriendLogDOUtil;
 import com.socialuni.social.user.sdk.logic.domain.SocialEditUserDomain;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.QO.SocialUserEditQO;
@@ -31,6 +32,8 @@ public class SocialuniMineUserService {
             ResultRO<SocialuniUserRO> resultRO = socialuniMineUserAPI.getMineUser();
             mineUserDetailRO = new SocialuniUserRO(resultRO.getData());
         } else {
+            //生成用户扩列记录
+            SocialuniUserExtendFriendLogDOUtil.createUserExtendFriendLog();
             mineUserDetailRO = SocialuniUserROFactory.getMineUserRO();
         }
         return new ResultRO<>(mineUserDetailRO);
