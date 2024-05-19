@@ -1,30 +1,31 @@
 <template>
   <div class="flex-col h100p bg-theme-bg">
-    <div class="bg-theme-gradual px-smm pb-smm pt-100">
+    <div class="bg-theme-gradual px pb-smm pt-100">
       <div class="row-col-center">
         <img
             class="card-title-avatar bd bd-round flex-none"
             mode="aspectFill"
             src="https://cdxapp-1257733245.file.myqcloud.com/socialuni/common/app/defaultAvatar/girl/8326cffc1e178a8264b5aa6cb303738da877e876.jpg!avatar"
         />
-        <div class="flex-1 row-between-center py-xs">
-          <div class="flex-col flex-1">
-            <div class="row-between-center">
-              <div class="row-col-center">
-                <span class="font-bold">明天的月光</span>
-                <social-gender-tag class="ml-xs" :user="{gender:'boy',age:20}"></social-gender-tag>
-              </div>
+        <div class="row-between-center flex-1">
+          <div class="row-col-center">
+            <span class="font-bold">明天的月光</span>
+            <social-gender-tag class="ml-xs" :user="{gender:'boy',age:20}"></social-gender-tag>
+          </div>
+          <div>
+            <div class="row-end-center">
+              <q-icon class="ml" icon="setting" size="20"></q-icon>
             </div>
           </div>
         </div>
       </div>
 
       <div class="mt">
-        <div class="flex-row px-sm">
-          <div class="flex-1 row-all-center  py-10 bd-radius-10 mb-sm elevation-4 mr-sm bg-orange3 color-white">
+        <div class="flex-row px-xs">
+          <div class="flex-1 row-all-center py-10 bd-radius-10 mb-sm elevation-4 mr-sm bg-orange3 color-white">
             余额：500元
           </div>
-          <div class="flex-1 row-all-center  py-10 bd-radius-10 mb-sm elevation-4 bg-red6 color-white">
+          <div class="flex-1 row-all-center py-10 bd-radius-10 mb-sm elevation-4 bg-red6 color-white">
             会员：200天
           </div>
         </div>
