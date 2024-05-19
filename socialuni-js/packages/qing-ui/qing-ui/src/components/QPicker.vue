@@ -7,7 +7,7 @@
            class="q-picker-one-level-item row-col-center"
            :class="{uuid,'q-picker-item-active':index === checkedOne}"
       >
-        <q-row-item class="flex-1">
+        <q-row-item :border="true" class="flex-1">
           {{ item.adName }}
         </q-row-item>
       </div>
@@ -18,7 +18,7 @@
            class="q-picker-two-level-item row-col-center"
            :class="{uuid,'q-picker-item-active':index === checkedTwo}"
       >
-        <q-row-item class="flex-1">
+        <q-row-item :border="true" class="flex-1">
           {{ item.adName }}
         </q-row-item>
       </div>
@@ -29,7 +29,7 @@
            class="q-picker-three-level-item row-col-center"
            :class="{uuid,'q-picker-item-active':index === checkedThree}"
       >
-        <q-row-item class="flex-1">
+        <q-row-item :border="true" class="flex-1">
           {{ item.adName }}
         </q-row-item>
       </div>

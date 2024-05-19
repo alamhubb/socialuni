@@ -1,0 +1,153 @@
+{
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
+    }
+  },
+  "pages": [
+    {
+      "path": "pages/home/home",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/expand/expand",
+      "style": {
+        "navigationBarTitleText": "扩列"
+      }
+    },
+    {
+      "path": "pages/im/chat",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/user/mine",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    }
+  ],
+  "subPackages": [
+    {
+      "root": "pagesLazy/app",
+      "pages": [
+        {
+          "path": "webBrowser",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        }
+      ]
+    },
+    {
+      "root": "pagesLazy/community",
+      "pages": [
+        {
+          "path": "talk/talkAdd",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "talk/talkDetail",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "notify/notify",
+          "style": {
+            "navigationBarTitleText": "通知列表",
+            "enablePullDownRefresh": true
+          }
+        }
+      ]
+    },
+    {
+      "root": "pagesLazy/im",
+      "pages": [
+        {
+          "path": "message",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "friendApplyList",
+          "style": {
+            "navigationBarTitleText": "好友申请",
+            "enablePullDownRefresh": true
+          }
+        }
+      ]
+    },
+    {
+      "root": "pagesLazy/user",
+      "pages": [
+        {
+          "path": "userDetail",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "editMineInfo",
+          "style": {
+            "navigationBarTitleText": "编辑资料"
+          }
+        },
+        {
+          "path": "userImgList",
+          "style": {
+            "navigationBarTitleText": "相册列表"
+          }
+        },
+        {
+          "path": "follow",
+          "style": {
+            "navigationBarTitleText": "关注列表"
+          }
+        },
+        {
+          "path": "coin",
+          "style": {
+            "navigationBarTitleText": "金币充值",
+            "enablePullDownRefresh": true
+          }
+        },
+        {
+          "path": "coinRecord",
+          "style": {
+            "navigationBarTitleText": "金币记录"
+          }
+        },
+        {
+          "path": "phone",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        }
+      ]
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "社区",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8",
+    "app-plus": {
+      "softinputNavBar": "none"
+    },
+    "h5": {
+      "maxWidth": 800
+    }
+  },
+  "navigateToMiniProgramAppIdList": [
+    "1109985787"
+  ]
+}
+

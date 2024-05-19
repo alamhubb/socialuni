@@ -138,7 +138,7 @@
 
       <q-popup ref="moreActionList" bottom title="清池 app">
         <div class="flex-col h100p pb-50">
-          <!--                    <q-row-item>
+          <!--                    <q-row-item :border="true">
                                 <navigator :url="messageSettingUrl" class="row-col-center flex-1">
                                   <div class="row-col-center flex-1">
                                     消息设置
@@ -164,13 +164,13 @@
                                   </div>
                                   <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
                               </navigator>-->
-          <q-row-item @click="destroyAccount">
+          <q-row-item :border="true" @click="destroyAccount">
             <div class="row-col-center flex-1">
               注销账号
             </div>
             <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
           </q-row-item>
-          <q-row-item @click="logout">
+          <q-row-item :border="true" @click="logout">
             <div class="row-col-center flex-1">
               退出登录
             </div>

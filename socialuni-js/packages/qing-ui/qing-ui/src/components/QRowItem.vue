@@ -1,11 +1,11 @@
 <template>
   <!--  可点击的行-->
-  <div class="q-box-between bb bg-click" @click="click">
+  <div class="q-box-between bg-click" :class="{'bb':border}" @click="click">
     <slot></slot>
   </div>
 </template>
 <script lang="ts">
-import {Emit, Component, Vue, toNative} from 'vue-facing-decorator'
+import {Emit, Component, Vue, toNative, Prop} from 'vue-facing-decorator'
 
 //和row-line区别，这个有上下pd那个没有
 /*
@@ -14,6 +14,8 @@ import {Emit, Component, Vue, toNative} from 'vue-facing-decorator'
 @toNative
 @Component({})
 export default class QRowItem extends Vue {
+  @Prop({default: false, type: Boolean}) border: boolean
+
   @Emit()
   click() {
     return

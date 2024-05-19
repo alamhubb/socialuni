@@ -65,7 +65,7 @@
             </div>
 
             <div>
-              <q-row-item v-for="tag in item.tags" :key="tag.id" @click="change(tag)">
+              <q-row-item :border="true" v-for="tag in item.tags" :key="tag.id" @click="change(tag)">
                 <div class="row-col-center can-click" @click.stop="change(tag)">
                   <img class="cu-avatar radius lg flex-none"
                          :src="tag.avatar"
