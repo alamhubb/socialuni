@@ -22,10 +22,11 @@
 
       <div class="mt">
         <div class="flex-row px-xs">
-          <div class="flex-1 row-all-center py-10 bd-radius-10 mb-sm elevation-4 mr-sm bg-orange3 color-white">
+<!--          bg-orange3-->
+          <div class="flex-1 row-all-center py-10 bd-radius-10 mb-sm elevation-4 mr-sm color-white" style="background-color: #ff8b36">
             余额：500元
           </div>
-          <div class="flex-1 row-all-center py-10 bd-radius-10 mb-sm elevation-4 bg-red6 color-white">
+          <div class="flex-1 row-all-center py-10 bd-radius-10 mb-sm elevation-4 bg-red5 color-white">
             会员：200天
           </div>
         </div>
@@ -43,7 +44,7 @@
       <div class="flex-col mt elevation-4 bg-white bd-radius">
         <q-row-item>
           课程预约
-          <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
+          <q-icon icon="arrow-right" size="12" class="color-sub"></q-icon>
         </q-row-item>
       </div>
     </div>
