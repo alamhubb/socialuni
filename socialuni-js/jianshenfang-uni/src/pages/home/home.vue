@@ -1,6 +1,6 @@
 <template>
-  <div class="pb-smm">
-    <div class="bg-home1 pt-100 pb-20 px">
+  <div class="pb-smm bg-home1">
+    <div class="pt-100 pb-20 px">
       <div class="flex-row">
         <img
             class="size65 bd bd-round flex-none bd-3 bd-white"
@@ -38,7 +38,7 @@
       </div>
     </div>
 
-    <div class="bg-default px">
+    <div class="px">
       <div>
         <q-row-item class="px-sm">
           <template #title>

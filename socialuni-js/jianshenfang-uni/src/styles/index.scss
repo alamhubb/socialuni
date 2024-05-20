@@ -10,6 +10,9 @@ $color-theme: #fad83d;
 }
 
 .bg-home1 {
-  background-image: linear-gradient(180deg, $color-theme, mix($color-white, $color-theme, 20%), $color-bg-default);
+  background-image: linear-gradient(180deg, $color-theme, mix($color-white, $color-theme, 20%) 10%, mix($color-white, $color-theme, 90%) 25%, $color-bg-default);
 }
 
+.bg-home2 {
+  background-image: linear-gradient(180deg, $color-theme, mix($color-white, $color-theme, 20%), $color-bg-default);
+}
