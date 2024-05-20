@@ -1,4 +1,4 @@
-$color-theme: #fad33d;
+$color-theme: #fad83d;
 //$color-theme: #fad33d;
 @import "../uni";
 @import "socialuni-ui-uni/src/styles/index";
@@ -6,5 +6,10 @@ $color-theme: #fad33d;
 
 .bg-home {
   //background-image: linear-gradient(180deg, #ffdf39,  #ffdf39 10%, #f7f7f7);
-  background-image: linear-gradient(180deg, #ffdf39, mix($color-white, #ffdf39, 90%) 20%, $color-bg-default);
+  background-image: linear-gradient(225deg, #fcf5be, #fdfcea);
 }
+
+.bg-home1 {
+  background-image: linear-gradient(180deg, $color-theme, mix($color-white, $color-theme, 20%), $color-bg-default);
+}
+

@@ -3,7 +3,7 @@
   <div class="row-between-center px-smm py-sm" :class="{'bb':border}">
     <slot name="title"></slot>
     <div class="use-click flex-1" @click="click" :class="[hasTitle?'row-end-center':'row-between-center']">
-      <div>
+      <div class="color-content">
         <slot></slot>
       </div>
       <q-icon icon="arrow-right" size="12" class="color-sub flex-none"></q-icon>

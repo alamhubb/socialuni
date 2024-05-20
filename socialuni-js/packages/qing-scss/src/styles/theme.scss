@@ -154,6 +154,7 @@ $colors-bg: map-merge($colors-base, $colors-custom-bg);
 
 $colors-custom-border: (
         theme: $color-border-default,
+        theme-bd: $color-theme,
         gray1: $color-border-gray1,
         gray2: $color-border-gray2,
         form: $color-border-form,
