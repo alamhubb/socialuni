@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-theme-gradual px pb-smm pt-100">
+  <div class="bg-home px pb-smm pt-100">
     <div class="row-col-center">
       <img
           class="card-title-avatar bd bd-round flex-none"

@@ -1,3 +1,10 @@
 $color-theme: #fad33d;
+//$color-theme: #fad33d;
 @import "../uni";
 @import "socialuni-ui-uni/src/styles/index";
+@import "./app";
+
+.bg-home {
+  //background-image: linear-gradient(180deg, #ffdf39,  #ffdf39 10%, #f7f7f7);
+  background-image: linear-gradient(180deg, #ffdf39, mix($color-white, #ffdf39, 90%) 20%, $color-bg-default);
+}
