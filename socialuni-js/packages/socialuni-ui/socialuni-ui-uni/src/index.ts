@@ -1,12 +1,12 @@
 import {App} from "vue";
-import "./styles/index.scss";
 import QingUiUni from "qing-ui-uni/src";
 import SocialuniUi from "socialuni-ui/src";
+import "./styles/index.scss";
 
 const SocialuniUiUni = {
     async install(app: App) {
-        app.use(SocialuniUi)
         app.use(QingUiUni)
+        app.use(SocialuniUi)
     }
 }
 
