@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "qing-ui-h5": "^0.1.13",
+    "socialuni-ui": "^0.1.13",
     "cos-js-sdk-v5": "^1.2.18",
     "qing-util": "^0.1.13",
     "qingjs": "^0.1.13",

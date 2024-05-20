@@ -5,8 +5,8 @@ import "./styles/index.scss";
 
 const SocialuniUiH5 = {
     async install(app: App) {
-        app.use(SocialuniUi)
         app.use(QingUiH5)
+        app.use(SocialuniUi)
     }
 }
 

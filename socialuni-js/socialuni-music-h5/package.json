@@ -23,6 +23,7 @@
     "mitt": "^3.0.0",
     "moment": "^2.29.4",
     "qing-ui": "../packages/qing-ui/qing-ui",
+    "socialuni-ui-h5": "../packages/socialuni-ui-h5/socialuni-ui-h5",
     "qing-ui-h5": "../packages/qing-ui/qing-ui-h5",
     "qingjs-h5": "../qingjs-h5",
     "socialuni": "../packages/socialuni",
