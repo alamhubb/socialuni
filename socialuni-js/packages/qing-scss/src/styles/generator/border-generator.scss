@@ -81,6 +81,10 @@
     border: $border-base;
     border-color: $color !important;
   }
+  .bd-#{''+$colorKey+''}_light {
+    border: $border-base;
+    border-color: mix($color-white, $color, 90%)!important;
+  }
   .bx-#{''+$colorKey+''} {
     border-left: $border-base;
     border-right: $border-base;

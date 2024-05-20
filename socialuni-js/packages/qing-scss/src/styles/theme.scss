@@ -58,6 +58,10 @@ $color-bg-base: $color-white !default;
 //$color-theme-light: #FDF2F8 !default;
 
 $color-theme: #3f93ee !default;
+$color-theme1: mix($color-white, $color-theme, 20%) !default;
+$color-theme2: mix($color-white, $color-theme, 40%) !default;
+$color-theme3: mix($color-white, $color-theme, 60%) !default;
+$color-theme4: mix($color-white, $color-theme, 80%) !default;
 $color-theme-sub: #A2D2FF !default;
 $color-theme-bg: $color-bg-default !default;
 $color-theme-navbar-bg: #f7f7f7 !default;
@@ -69,6 +73,10 @@ $colors-theme: (
         white:$color-white,
         black:$color-black,
         theme:$color-theme,
+        theme1:$color-theme1,
+        theme2:$color-theme2,
+        theme3:$color-theme3,
+        theme4:$color-theme4,
         primary:$color-primary,
         error:$color-error,
         warn:$color-warn,

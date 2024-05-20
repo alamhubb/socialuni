@@ -88,8 +88,10 @@
             </div>
           </div>
           <div class="w40p col-all-center">
-            <div class="bd-round bg-white bd-orange size70 row-all-center">
-              <span class="font-20 font-bold">0</span> /100分
+            <div class="bg-white bd-round pd-xs">
+              <div class="bd-round bg-white bd-theme3 bd-6 size80 row-all-center">
+                <span class="font-20 font-bold">0</span> /100分
+              </div>
             </div>
             <div class="bg-black color-white bd-radius-20 px-sm mt-xs font-12">本次训练评估</div>
           </div>
