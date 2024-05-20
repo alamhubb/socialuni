@@ -118,21 +118,44 @@
     </div>
 
 
-    <div class="flex-col mt-md elevation-4 bg-white bd-radius-20 pd-sm">
-      <div>
-        <!--          二维码-->
-      </div>
-      <div class="row-all-center">
-        <img class="size200" src="/static/img/qrcode.png"/>
+    <div>
+      <div class="font-16 font-bold px-sm">工具中心</div>
+      <div class="flex-col mt-sm elevation-4 bg-white bd-radius">
+        <q-row-item border>
+          在线客服
+
+        </q-row-item>
+        <q-row-item border>
+          企业客户
+
+        </q-row-item>
+        <q-row-item border>
+          我的定金
+
+        </q-row-item>
+        <q-row-item border>
+          定金下单
+
+        </q-row-item>
+        <q-row-item border>
+          我的合同
+
+        </q-row-item>
+        <q-row-item border>
+          自助开卡
+
+        </q-row-item>
+        <q-row-item border>
+          CEO直通车
+
+        </q-row-item>
+        <q-row-item border>
+          设置
+
+        </q-row-item>
       </div>
     </div>
 
-    <div class="flex-col mt elevation-4 bg-white bd-radius">
-      <q-row-item>
-        课程预约
-        <q-icon icon="arrow-right" size="12" class="color-sub"></q-icon>
-      </q-row-item>
-    </div>
   </div>
 </template>
 
