@@ -119,7 +119,7 @@
 
 
     <div>
-      <div class="font-16 font-bold px-sm">工具中心</div>
+      <div class="font-16 font-bold px-sm bg-theme">工具中心</div>
       <div class="flex-col mt-sm elevation-4 bg-white bd-radius">
         <q-row-item border>
           在线客服
