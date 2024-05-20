@@ -50,7 +50,7 @@ export default class QIcon extends Vue {
 
   get prefixClass () {
     if (this.isMdi) {
-      return 'mdi'
+      return 'mdi mdi-set'
     }
     return this.prefix
   }

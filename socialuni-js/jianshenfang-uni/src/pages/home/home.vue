@@ -119,39 +119,62 @@
 
 
     <div>
-      <div class="font-16 font-bold px-sm bg-theme">工具中心</div>
+      <div class="font-16 font-bold px-sm">工具中心</div>
       <div class="flex-col mt-sm elevation-4 bg-white bd-radius">
         <q-row-item border>
-          在线客服
-
+          <div class="row-col-center">
+            <q-icon icon="mdi-face-agent" size="24" add-class="color-theme"></q-icon>
+            <div class="ml-sm">在线客服</div>
+          </div>
         </q-row-item>
-        <q-row-item border>
-          企业客户
 
+        <q-row-item border>
+          <div class="row-col-center">
+            <q-icon icon="mdi-office-building" size="24" add-class="color-theme"></q-icon>
+            <div class="ml-sm">企业客户</div>
+          </div>
         </q-row-item>
-        <q-row-item border>
-          我的定金
 
+        <q-row-item border>
+          <div class="row-col-center">
+            <q-icon icon="mdi-cash-100" size="24" add-class="color-theme"></q-icon>
+            <div class="ml-sm">我的定金</div>
+          </div>
         </q-row-item>
-        <q-row-item border>
-          定金下单
 
+        <q-row-item border>
+          <div class="row-col-center">
+            <q-icon icon="mdi-gavel" size="24" add-class="color-theme"></q-icon>
+            <div class="ml-sm">定金下单</div>
+          </div>
         </q-row-item>
-        <q-row-item border>
-          我的合同
 
+        <q-row-item border>
+          <div class="row-col-center">
+            <q-icon icon="mdi-file-document-edit" size="24" add-class="color-theme"></q-icon>
+            <div class="ml-sm">我的合同</div>
+          </div>
         </q-row-item>
-        <q-row-item border>
-          自助开卡
 
+        <q-row-item border>
+          <div class="row-col-center">
+            <q-icon icon="mdi-wallet-bifold" size="24" add-class="color-theme"></q-icon>
+            <div class="ml-sm">自助开卡</div>
+          </div>
         </q-row-item>
-        <q-row-item border>
-          CEO直通车
 
+        <q-row-item border>
+          <div class="row-col-center">
+            <q-icon icon="mdi-message-text" size="24" add-class="color-theme"></q-icon>
+            <div class="ml-sm">CEO直通车</div>
+          </div>
         </q-row-item>
-        <q-row-item border>
-          设置
 
+        <q-row-item border>
+          <div class="row-col-center">
+            <q-icon icon="mdi-cog" size="24" add-class="color-theme"></q-icon>
+            <div class="ml-sm">设置</div>
+          </div>
         </q-row-item>
       </div>
     </div>
