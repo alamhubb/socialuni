@@ -8,35 +8,35 @@ import AdminPeiwanAppInitData from "socialuni-admin-api/src/model/peiwan/AdminPe
 export default class SocialuniPeiwanAdminAPI {
 
     static getAppInitDataAPI() {
-        return socialuniUserRequest.get<AdminPeiwanAppInitData>('admin/peiwan/getAppInitData')
+        return socialuniUserRequest.get<AdminPeiwanAppInitData>('socialuni/admin/peiwan/getAppInitData')
     }
 
 
     static addPeiwanInfoAPI(addQO: PeiwanRO) {
-        return socialuniUserRequest.post<CenterUserDetailRO[]>('admin/peiwan/addPeiwanInfo', addQO)
+        return socialuniUserRequest.post<CenterUserDetailRO[]>('socialuni/admin/peiwan/addPeiwanInfo', addQO)
     }
 
     static queryPeiwanInfoListAPI() {
-        return socialuniUserRequest.get<PeiwanRO[]>('admin/peiwan/queryPeiwanInfoList')
+        return socialuniUserRequest.get<PeiwanRO[]>('socialuni/admin/peiwan/queryPeiwanInfoList')
     }
 
     static updatePeiwanListAPI(peiwans: PeiwanRO[]) {
-        return socialuniUserRequest.post<void>('admin/peiwan/updatePeiwanList', peiwans)
+        return socialuniUserRequest.post<void>('socialuni/admin/peiwan/updatePeiwanList', peiwans)
     }
 
     static addPeiwanInfoListAPI(peiwans: PeiwanRO[]) {
-        return socialuniUserRequest.post<void>('admin/peiwan/addPeiwanInfoList', peiwans)
+        return socialuniUserRequest.post<void>('socialuni/admin/peiwan/addPeiwanInfoList', peiwans)
     }
 
     static updatePeiwanAvatarAPI(userId: string, src: string) {
-        return socialuniUserRequest.get<string>(`admin/peiwan/updatePeiwanAvatar/${userId}?src=${src}`)
+        return socialuniUserRequest.get<string>(`socialuni/admin/peiwan/updatePeiwanAvatar/${userId}?src=${src}`)
     }
 
     static deletePeiwanImgAPI(imgId: string) {
-        return socialuniUserRequest.get<string>(`admin/peiwan/deletePeiwanImg/${imgId}`)
+        return socialuniUserRequest.get<string>(`socialuni/admin/peiwan/deletePeiwanImg/${imgId}`)
     }
 
     static addPeiwanImgListAPI(userId: string, imgs: DomFile[]) {
-        return socialuniUserRequest.post<void>(`admin/peiwan/addPeiwanImgList/${userId}`, imgs)
+        return socialuniUserRequest.post<void>(`socialuni/admin/peiwan/addPeiwanImgList/${userId}`, imgs)
     }
 }
