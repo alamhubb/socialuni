@@ -2,7 +2,7 @@ import {createApp} from 'vue'
 
 import App from './App.vue'
 import Socialuni from "socialuni/src";
-import router from "@/router";
+import router from "@/router/router.ts";
 import SocialuniMusic from "socialuni-music-sdk/src";
 import DateUtil from "qing-util/src/util/DateUtil.ts";
 import SocialuniUser from "socialuni-user-sdk/src";

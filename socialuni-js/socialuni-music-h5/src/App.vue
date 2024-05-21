@@ -59,7 +59,7 @@
 import {Component, Vue, toNative} from 'vue-facing-decorator';
 import SUserNavBar from "socialuni-user-view-h5/src/components/SUserNavBar.vue";
 import QNavMenu from "qing-ui-h5/src/components/QNavMenu.vue";
-import {constantRoutes} from "@/router";
+import {constantRoutes} from "@/router/router.ts";
 import CommonEventUtil from "qingjs/src/util/CommonEventUtil.ts";
 import QScroll from "qing-ui/src/components/QScroll.vue";
 import QButton from "qing-ui/src/components/QButton.vue";
