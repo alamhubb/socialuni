@@ -4,6 +4,7 @@ import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.im.api.model.RO.SocialMessageRO;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniChatRepository;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniMessageReceiveRepository;
@@ -16,6 +17,7 @@ import com.socialuni.social.content.utils.SocialuniTextContentUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import com.socialuni.social.user.sdk.logic.check.SocialuniUserCheck;
+import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -64,7 +66,9 @@ public class SocialuniMessageService {
             //为私聊相关校验
             //后端区分这个值是群聊还是私聊。
 
-            SocialMessageRO socialMessageRO = messageEntity.sendSingleMsg(unionId, msgAddVO.getContent(),msgType);
+            SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
+
+            SocialMessageRO socialMessageRO = messageEntity.sendSingleMsg(mineUser, unionId, msgAddVO.getContent(), msgType);
 
             return ResultRO.success(socialMessageRO);
 

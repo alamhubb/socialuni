@@ -34,6 +34,10 @@ public interface SocialuniUserRepository extends JpaRepository<SocialuniUserDo, 
         return this.save(BeanUtil.toBean(user,SocialuniUserDo.class));
     }
 
+    @Cacheable(cacheNames = CommonRedisKey.findUserIdsByType)
+    @Query("select s.userId from SocialuniUserDo s where s.type = :type")
+    List<Integer> findUserIdsByType(String type);
+
     @Query(value = "select u from SocialuniUserDo u,SocialUserViolationDo su where u.status = :userStatus and u.id = su.userId and su.violationEndTime < :curDate")
     List<SocialuniUserDo> findCanUnfreezeViolationUser(@Param("userStatus") String userStatus, @Param("curDate") Date curDate);
 

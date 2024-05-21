@@ -9,6 +9,9 @@ public class UserType {
     public static final String notify = "notify";
     //系统用户官方工作人员账号
     public static final String system = "system";
+    //运营类型账号
+    public static final String operation = "运营";
+
     //个人用户
     public static final String personal = "personal";
     //商业用户

@@ -95,14 +95,20 @@ public class SocialuniMessageEntity {
         return sendSingleMsg(beUserId, msgContent, MessageContentType.text);
     }
 
+    @Transactional
+    public SocialMessageRO sendSingleMsg(Integer beUserId, String msgContent, String contentType) {
+        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
+        return sendSingleMsg(mineUser, beUserId, msgContent, MessageContentType.text);
+    }
+
     @Resource
     SocialuniPayCoinDomain socialuniPayCoinDomain;
 
     @Transactional
-    public SocialMessageRO sendSingleMsg(Integer beUserId, String msgContent, String contentType) {
-        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
+    public SocialMessageRO sendSingleMsg(SocialuniUserDo mineUser, Integer beUserId, String msgContent, String contentType) {
 
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+
+        Integer mineUserId = mineUser.getUserId();
 
 
         //校验用户是否存在
@@ -258,8 +264,6 @@ public class SocialuniMessageEntity {
         SocialuniMessageDO message = messageRepository.save(SocialuniMessageDOFactory.createMessage(chat.getUnionId(), msgContent, sendUser.getUserId(), contentType));
 
 //        socialuniPayCoinDomain.consumCoinByType(sendUser.getUserId(), chatSocialuniUserDoS.get(0).getUserId(), "消息发送");
-
-
 
 
         Date curDate = new Date();

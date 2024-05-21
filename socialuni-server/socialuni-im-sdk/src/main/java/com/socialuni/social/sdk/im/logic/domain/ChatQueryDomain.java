@@ -1,5 +1,7 @@
 package com.socialuni.social.sdk.im.logic.domain;
 
+import com.socialuni.social.common.sdk.constant.UserType;
+import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.sdk.im.enumeration.ChatStatus;
 import com.socialuni.social.sdk.im.enumeration.ChatType;
@@ -13,10 +15,12 @@ import com.socialuni.social.im.api.model.RO.ChatRO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.sdk.im.logic.manage.SocialuniChatManage;
 import com.socialuni.social.sdk.im.logic.manage.SocialuniChatUserManage;
+import com.socialuni.social.user.sdk.dao.utils.SocialuniUserDOUtil;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,6 +40,8 @@ public class ChatQueryDomain {
     @Resource
     SocialuniChatEntity socialuniChatEntity;
 
+    @Resource
+    SocialuniUserRepository socialuniUserRepository;
 
     public List<ChatRO> getChats() {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
@@ -52,9 +58,19 @@ public class ChatQueryDomain {
 
         socialuniChatEntity.createUserChats(user);
 
-
         //未登录的情况只插叙你官方的chats
-        List<SocialuniChatUserDO> chatUsers = chatUserRepository.findByStatusAndUserIdOrderByUpdateTimeDesc(ChatUserStatus.enable, user.getUserId());
+        List<SocialuniChatUserDO> chatUsers = new ArrayList<>();
+
+        if (UserType.system.equals(user.getType())) {
+            List<Integer> ids = socialuniUserRepository.findUserIdsByType(UserType.operation);
+            for (Integer id : ids) {
+                List<SocialuniChatUserDO> temChatUsers = chatUserRepository.findByStatusAndUserIdOrderByUpdateTimeDesc(ChatUserStatus.enable, id);
+                chatUsers.addAll(temChatUsers);
+            }
+        } else {
+            chatUsers = chatUserRepository.findByStatusAndUserIdOrderByUpdateTimeDesc(ChatUserStatus.enable, user.getUserId());
+        }
+
         //查询的时候chat列表展示不为当前用户的
         /*return chatUsers.stream().map((ChatUserDO chatUserDO) -> {
             //只有启用的才显示消息列表
