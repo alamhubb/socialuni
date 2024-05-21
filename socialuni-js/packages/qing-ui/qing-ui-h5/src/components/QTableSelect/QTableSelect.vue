@@ -21,8 +21,8 @@
 
 <script lang="ts">
 import { Component, Emit, Prop, Vue , toNative} from 'vue-facing-decorator'
-import SSelect from "../SSelect/SSelect.vue";
-import STableColumn from "../STableColumn/STableColumn.vue";
+import SSelect from "../QSelect/QSelect.vue";
+import STableColumn from "../QTableColumn/QTableColumn.vue";
 
 /**
  * @author 秦开远

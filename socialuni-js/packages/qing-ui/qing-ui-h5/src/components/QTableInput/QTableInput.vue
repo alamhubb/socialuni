@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import {Component, Prop, Vue, toNative} from 'vue-facing-decorator'
-import STableColumn from "../STableColumn/STableColumn.vue";
+import STableColumn from "../QTableColumn/QTableColumn.vue";
 
 /**
  * @author 秦开远

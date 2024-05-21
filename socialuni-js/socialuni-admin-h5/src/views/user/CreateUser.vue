@@ -24,20 +24,20 @@
 <script lang="ts">
 import {Component, Vue, toNative} from 'vue-facing-decorator'
 import QDialog from "qing-ui-h5/src/components/QDialog.vue";
-import SLabelItem from "qing-ui-h5/src/components/QLabelItem.vue";
-import STable from "qing-ui-h5/src/components/QTable.vue";
-import STableColumn from "qing-ui-h5/src/components/QTableColumn/STableColumn.vue";
-import STableInput from "qing-ui-h5/src/components/QTableInput/STableInput.vue";
-import STableSelect from "qing-ui-h5/src/components/QTableSelect/STableSelect.vue";
+import QLabelItem from "qing-ui-h5/src/components/QLabelItem.vue";
+import QTable from "qing-ui-h5/src/components/QTable.vue";
+import QTableColumn from "qing-ui-h5/src/components/QTableColumn/QTableColumn.vue";
+import QTableInput from "qing-ui-h5/src/components/QTableInput/QTableInput.vue";
+import QTableSelect from "qing-ui-h5/src/components/QTableSelect/QTableSelect.vue";
 import {Plus} from '@element-plus/icons-vue'
-import SSelect from "qing-ui-h5/src/components/QSelect/SSelect.vue";
+import QSelect from "qing-ui-h5/src/components/QSelect/QSelect.vue";
 import ImgFileVO from "socialuni-admin-api/src/model/community/ImgFileVO";
 import SocialuniCustomUserAPI from "socialuni-peiwan-api/src/api/SocialuniCustomUserAPI";
 import ToastUtil from "@/utils/ToastUtil";
 
 @toNative
 @Component({
-  components: {SSelect, SDialog, Plus, STableColumn, STableInput, STable, STableSelect, SLabelItem}
+  components: {QSelect, QDialog, Plus, QTableColumn, QTableInput, QTable, QTableSelect, QLabelItem}
 })
 export default class CreateUserView extends Vue {
 

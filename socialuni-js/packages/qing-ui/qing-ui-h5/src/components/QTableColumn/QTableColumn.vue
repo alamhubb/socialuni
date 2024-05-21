@@ -77,7 +77,7 @@
 <script lang="ts">
 import {Component, Emit, Prop, Vue, toNative} from 'vue-facing-decorator'
 import DataTableColumnTypeEnum from './DataTableColumnTypeEnum'
-import SSelect from "../SSelect/SSelect.vue";
+import SSelect from "../QSelect/QSelect.vue";
 /**
  * @author 秦开远
  * @date 2021/1/21 15:25
