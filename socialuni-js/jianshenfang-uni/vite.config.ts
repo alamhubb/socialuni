@@ -1,6 +1,6 @@
 import {defineConfig} from 'vite'
 import uni from '@dcloudio/vite-plugin-uni'
-
+import svgLoader from 'vite-svg-loader'
 import {fileURLToPath, URL} from "node:url";
 import socialuniPlatformAutoImportPlugin from "vite-plugin-socialuni-platform-auto-import/src/index";
 
@@ -50,7 +50,7 @@ if (IN_PRODUCTION) {
 export default defineConfig({
     base: '/',
     plugins: [
-        uni(),
+        uni(), svgLoader({defaultImport: 'component'}),
         socialuniPlatformAutoImportPlugin()
     ],
     // build: {
