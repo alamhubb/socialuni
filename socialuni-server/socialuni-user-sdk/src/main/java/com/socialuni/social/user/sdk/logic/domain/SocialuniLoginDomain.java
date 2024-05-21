@@ -1,17 +1,12 @@
 package com.socialuni.social.user.sdk.logic.domain;
 
-import cn.hutool.crypto.SecureUtil;
-import cn.hutool.crypto.symmetric.AES;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
-import com.socialuni.social.common.api.utils.SocialTokenFacade;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
 import com.socialuni.social.common.sdk.event.ddd.EventPublisherFacade;
-import com.socialuni.social.common.sdk.utils.StringUtil;
 import com.socialuni.social.user.sdk.dao.DO.SocialUserPasswordDO;
 import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
-import com.socialuni.social.user.sdk.dao.utils.SocialuniUserDOUtil;
 import com.socialuni.social.user.sdk.logic.entity.SocialPhoneLoginEntity;
 import com.socialuni.social.user.sdk.logic.entity.SocialProviderLoginEntity;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserPasswordManage;
@@ -31,14 +26,7 @@ import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import javax.crypto.Cipher;
-import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.SecretKeySpec;
 import javax.transaction.Transactional;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
 import java.util.Date;
 
 @Service
@@ -131,7 +119,7 @@ public class SocialuniLoginDomain {
         socialUserPasswordDO.setErrorNum(0);
         socialUserPasswordDO = SocialuniUserRepositoryFacede.save(socialUserPasswordDO);
 
-        SocialuniUserDo mineUser = SocialuniUserUtil.getAndCheckUserNotNull(userId);
+        SocialuniUserDo mineUser = SocialuniUserUtil.getUserNotNull(userId);
 
         return getSocialLoginROByMineUser(mineUser);
     }

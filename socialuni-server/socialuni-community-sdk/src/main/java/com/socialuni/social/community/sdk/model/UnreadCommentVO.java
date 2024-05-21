@@ -59,7 +59,7 @@ public class UnreadCommentVO {
         this.no = commentDO.getNo();
         this.content = commentDO.getContent();
         this.createTime = commentDO.getCreateTime();
-        this.user = new UserCommentBO(SocialuniUserUtil.getAndCheckUserNotNull(commentDO.getUserId()), sessionUser).toVO();
+        this.user = new UserCommentBO(SocialuniUserUtil.getUserNotNull(commentDO.getUserId()), sessionUser).toVO();
         //不明白下面这行的意义，未读消息不需要显示子评论吧
         //        this.childComments = UnreadCommentVO.commentDOToVOS(commentRepository.findTop3ByParentCommentOrderByUpdateTimeDescIdDesc(commentDO));
         if (!ObjectUtils.isEmpty(commentDO.getReplyCommentId())) {

@@ -62,7 +62,7 @@ public class SocialUserPhoneManage {
         //校验手机号状态是否可用
         SocialUserPhoneDo SocialUserPhoneDo = this.checkLoginPhoneNumAndGetUser(phoneNum);
         if (SocialUserPhoneDo != null) {
-            SocialuniUserDo phoneUser = SocialuniUserUtil.getAndCheckUserNotNull(SocialUserPhoneDo.getUserId());
+            SocialuniUserDo phoneUser = SocialuniUserUtil.getUserNotNull(SocialUserPhoneDo.getUserId());
             if (!SocialuniUserSysConfig.bandAllowLogin) {
                 //如果手机号违规，则返回手机号不可用
                 if (phoneUser.getStatus().equals(SocialuniUserStatus.violation)) {

@@ -26,7 +26,7 @@ public class SocialUserEntity {
 
         SocialuniUserDo mineUser;
         if (SocialUserPhoneDo != null) {
-            mineUser = SocialuniUserUtil.getAndCheckUserNotNull(SocialUserPhoneDo.getUserId());
+            mineUser = SocialuniUserUtil.getUserNotNull(SocialUserPhoneDo.getUserId());
         } else {
             mineUser = socialUserPhoneEntity.createUserPhoneEntity(phoneNum);
         }

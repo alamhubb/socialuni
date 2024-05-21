@@ -23,7 +23,7 @@ public class AdminUserService {
         if (SocialUserPhoneDo == null) {
             throw new SocialParamsException("用户不存在或开发者无权限");
         }
-        SocialuniUserDo user = SocialuniUserUtil.getAndCheckUserNotNull(SocialUserPhoneDo.getUserId());
+        SocialuniUserDo user = SocialuniUserUtil.getUserNotNull(SocialUserPhoneDo.getUserId());
         return user;
     }
 }

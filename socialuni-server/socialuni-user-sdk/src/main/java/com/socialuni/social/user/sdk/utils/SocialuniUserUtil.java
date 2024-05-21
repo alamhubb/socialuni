@@ -1,6 +1,5 @@
 package com.socialuni.social.user.sdk.utils;
 
-import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialNotLoginException;
 import com.socialuni.social.common.api.exception.exception.SocialNullUserException;
 import com.socialuni.social.common.api.config.SocialRequestUserConfig;
@@ -90,7 +89,7 @@ public class SocialuniUserUtil {
     //下面都是联盟的
     public static SocialuniUserDo getMineUserNotNull(String token) {
         SocialuniTokenDO tokenDO = SocialTokenDOUtil.getCommonTokenDONotNull(token);
-        return SocialuniUserUtil.getAndCheckUserNotNull(tokenDO.getUserId());
+        return SocialuniUserUtil.getUserNotNull(tokenDO.getUserId());
     }
 
     public static SocialuniUserDo getMineUserAllowNull() {
@@ -99,7 +98,7 @@ public class SocialuniUserUtil {
             return null;
         }
         //返回user
-        SocialuniUserDo mineUser = SocialuniUserUtil.getAndCheckUserNotNull(userId);
+        SocialuniUserDo mineUser = SocialuniUserUtil.getUserNotNull(userId);
         if (!SocialuniUserSysConfig.bandAllowLogin) {
             //如果手机号违规，则返回手机号不可用
             if (mineUser.getStatus().equals(SocialuniUserStatus.violation)) {
@@ -122,7 +121,7 @@ public class SocialuniUserUtil {
             return null;
         }
         //返回user
-        SocialuniUserDo user = SocialuniUserUtil.getAndCheckUserNotNull(tokenDO.getUserId());
+        SocialuniUserDo user = SocialuniUserUtil.getUserNotNull(tokenDO.getUserId());
         return user;
     }
 
@@ -157,7 +156,7 @@ public class SocialuniUserUtil {
         if (socialUserPhoneDo == null) {
             throw new SocialParamsException("手机号异常");
         }
-        SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getAndCheckUserNotNull(socialUserPhoneDo.getUserId());
+        SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getUserNotNull(socialUserPhoneDo.getUserId());
         return socialuniUserDo;
     }
 
@@ -173,21 +172,12 @@ public class SocialuniUserUtil {
         return UserUtils.get(Integer.valueOf(userId));
     }*/
 
-    public static SocialuniUserDo getAndCheckUserNotNull(Integer userId) {
-        if (userId == null) {
-            throw new SocialNullUserException();
-        }
-        SocialuniUserDo socialUserDO = getAllowNull(userId);
-        if (socialUserDO == null) {
-            throw new SocialNullUserException();
-        }
-        return socialUserDO;
-    }
+
 
     public static List<SocialuniUserDo> getUsers(List<Integer> ids) {
         List<SocialuniUserDo> userDos = new ArrayList<>();
         for (Integer id : ids) {
-            SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getAndCheckUserNotNull(id);
+            SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getUserNotNull(id);
             userDos.add(socialuniUserDo);
         }
         return userDos;
@@ -195,7 +185,7 @@ public class SocialuniUserUtil {
 
     public static SocialuniUserDo getUserByUuid(String uid) {
         Integer id = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(uid);
-        return SocialuniUserUtil.getAndCheckUserNotNull(id);
+        return SocialuniUserUtil.getUserNotNull(id);
     }
 
     public static SocialuniUserDo getAllowNull(Integer userId) {
@@ -205,16 +195,27 @@ public class SocialuniUserUtil {
         return userApi.findOneByUnionId(userId);
     }
 
-    public static SocialuniUserDo getNotNull(Integer userId) {
+    public static SocialuniUserDo getUserNotNull(Integer userId) {
         if (userId == null) {
-            throw new SocialParamsException("用户id异常");
+            throw new SocialNullUserException();
         }
-        SocialuniUserDo socialuniUserDo = userApi.findOneByUnionId(userId);
-        if (socialuniUserDo == null) {
-            throw new SocialParamsException("用户id异常");
+        SocialuniUserDo socialUserDO = getAllowNull(userId);
+        if (socialUserDO == null) {
+            throw new SocialNullUserException();
         }
-        return socialuniUserDo;
+        return socialUserDO;
     }
+//
+//    public static SocialuniUserDo getNotNull(Integer userId) {
+//        if (userId == null) {
+//            throw new SocialParamsException("用户id异常");
+//        }
+//        SocialuniUserDo socialuniUserDo = userApi.findOneByUnionId(userId);
+//        if (socialuniUserDo == null) {
+//            throw new SocialParamsException("用户id异常");
+//        }
+//        return socialuniUserDo;
+//    }
 
     public static boolean isMine(SocialuniUserDo mineUser, Integer userId) {
         if (mineUser == null) {

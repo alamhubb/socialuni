@@ -64,7 +64,7 @@ public class ReportRO {
 //        this.reportContentType = reportContentType;
 
 //        this.childReports = reportDO.getChildReports().stream().map(ReportDetailVO::new).collect(Collectors.toList());
-        this.user = new ReportUserVO(SocialuniUserUtil.getAndCheckUserNotNull(reportDO.getContentUserId()));
+        this.user = new ReportUserVO(SocialuniUserUtil.getUserNotNull(reportDO.getContentUserId()));
 //        this.updateTime = new Date();
 //        this.status = reportDO.getStatus();
         this.checked = true;
@@ -82,7 +82,7 @@ public class ReportRO {
 //        this.reportContentType = reportContentType;
 
 //        this.childReports = reportDO.getChildReports().stream().map(ReportDetailVO::new).collect(Collectors.toList());
-        this.user = new ReportUserVO(SocialuniUserUtil.getAndCheckUserNotNull(imgAuditDO.getUserId()));
+        this.user = new ReportUserVO(SocialuniUserUtil.getUserNotNull(imgAuditDO.getUserId()));
 //        this.updateTime = new Date();
 //        this.status = reportDO.getStatus();
         this.checked = true;
@@ -92,7 +92,7 @@ public class ReportRO {
 
     public ReportRO(SocialuniUnionContentBaseDO modelDO) {
         this.talk = ReportContentROFactory.getReportContentVO(modelDO.getContentType(), modelDO.getUnionId());
-        this.user = new ReportUserVO(SocialuniUserUtil.getAndCheckUserNotNull(modelDO.getUserId()));
+        this.user = new ReportUserVO(SocialuniUserUtil.getUserNotNull(modelDO.getUserId()));
         this.triggerKeywords = new ArrayList<>();
         this.violateType = modelDO.getViolateType();
         this.auditContentType = SocialuniAuditContentType.report;

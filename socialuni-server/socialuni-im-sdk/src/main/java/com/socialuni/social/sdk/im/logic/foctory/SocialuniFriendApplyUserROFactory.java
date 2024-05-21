@@ -12,7 +12,7 @@ public class SocialuniFriendApplyUserROFactory {
     public static SocialuniFriendApplyUserRO getSocialuniFriendApplyUserRO(SocialuniFriendApplyRecordDO socialuniFriendApplyRecordDO) {
 
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
-        SocialuniUserDo user = SocialuniUserUtil.getAndCheckUserNotNull(socialuniFriendApplyRecordDO.getUserId());
+        SocialuniUserDo user = SocialuniUserUtil.getUserNotNull(socialuniFriendApplyRecordDO.getUserId());
 
 
         SocialuniUserRO socialuniUserRO = SocialuniUserROFactory.getUserRO(user, mineUser);

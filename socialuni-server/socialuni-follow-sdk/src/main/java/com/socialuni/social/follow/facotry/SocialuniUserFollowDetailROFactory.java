@@ -45,7 +45,7 @@ public class SocialuniUserFollowDetailROFactory {
 
     public static List<SocialuniUserFollowDetailListRO> getFollowUserLists(List<SocialuniUserFollowDO> users, SocialuniUserDo mineUser) {
         return ListConvertUtil.toList((followDO, user) -> {
-            SocialuniUserDo userDo = SocialuniUserUtil.getAndCheckUserNotNull(followDO.getBeUserId());
+            SocialuniUserDo userDo = SocialuniUserUtil.getUserNotNull(followDO.getBeUserId());
             SocialuniUserFollowInfoRO socialuniUserFollowDetailRO = SocialuniUserFollowDetailROFactory.newSocialFollowUserRO(userDo, user);
             SocialuniUserFollowDetailListRO socialuniUserFollowDetailListRO = new SocialuniUserFollowDetailListRO(socialuniUserFollowDetailRO);
             socialuniUserFollowDetailListRO.setUpdateTime(followDO.getUpdateTime());
@@ -55,7 +55,7 @@ public class SocialuniUserFollowDetailROFactory {
 
     public static List<SocialuniUserFollowDetailListRO> getFansUserLists(List<SocialuniUserFollowDO> users, SocialuniUserDo mineUser) {
         return ListConvertUtil.toList((followDO) -> {
-            SocialuniUserDo userDo = SocialuniUserUtil.getAndCheckUserNotNull(followDO.getUserId());
+            SocialuniUserDo userDo = SocialuniUserUtil.getUserNotNull(followDO.getUserId());
             SocialuniUserFollowInfoRO socialuniUserFollowDetailRO = SocialuniUserFollowDetailROFactory.newSocialFollowUserRO(userDo, mineUser);
             SocialuniUserFollowDetailListRO socialuniUserFollowDetailListRO = new SocialuniUserFollowDetailListRO(socialuniUserFollowDetailRO);
             socialuniUserFollowDetailListRO.setUpdateTime(followDO.getUpdateTime());

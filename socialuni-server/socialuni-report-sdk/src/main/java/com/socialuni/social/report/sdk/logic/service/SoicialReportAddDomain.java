@@ -88,7 +88,7 @@ public class SoicialReportAddDomain {
 
         Integer receiveUserUnionId = modelDO.getUserId();
         //这里之后才能校验
-        SocialuniUserDo receiveUser = SocialuniUserUtil.getAndCheckUserNotNull(receiveUserUnionId);
+        SocialuniUserDo receiveUser = SocialuniUserUtil.getUserNotNull(receiveUserUnionId);
 
         //举报人不为系统管理员才校验
         if (!mineUser.getType().equals(UserType.system)) {

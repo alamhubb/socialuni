@@ -39,7 +39,7 @@ public class SocialuniDetailLoginService {
 
         Integer mineUserId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(socialLoginRO1.getData().getUser().getId());
 
-        SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getAndCheckUserNotNull(mineUserId);
+        SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getUserNotNull(mineUserId);
 
         SocialuniMineUserDetailRO socialuniMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(socialuniUserDo);
 
@@ -69,7 +69,7 @@ public class SocialuniDetailLoginService {
 
         Integer mineUserId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(socialLoginRO1.getData().getUser().getId());
 
-        SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getAndCheckUserNotNull(mineUserId);
+        SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getUserNotNull(mineUserId);
 
         SocialuniMineUserDetailRO socialuniMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(socialuniUserDo);
 
@@ -89,7 +89,7 @@ public class SocialuniDetailLoginService {
 
         Integer mineUserId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(socialLoginRO1.getData().getUser().getId());
 
-        SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getAndCheckUserNotNull(mineUserId);
+        SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getUserNotNull(mineUserId);
 
         SocialuniMineUserDetailRO socialuniMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(socialuniUserDo);
 
@@ -108,7 +108,7 @@ public class SocialuniDetailLoginService {
 
         Integer mineUserId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(socialLoginRO1.getData().getUser().getId());
 
-        SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getAndCheckUserNotNull(mineUserId);
+        SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getUserNotNull(mineUserId);
 
         SocialuniMineUserDetailRO socialuniMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(socialuniUserDo);
 

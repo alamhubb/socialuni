@@ -4,7 +4,6 @@ package com.socialuni.social.admin.service;
 import com.socialuni.social.admin.controller.DevAccountRO;
 import com.socialuni.social.app.logic.service.SocialuniDetailLoginService;
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.app.model.SocialuniMineUserDetailRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.common.api.utils.SocialTokenFacade;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
@@ -39,7 +38,7 @@ public class AdminLoginService {
 
         Integer userId = devAccountModel.getUserId();
 
-        SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getAndCheckUserNotNull(userId);
+        SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getUserNotNull(userId);
 
         SocialLoginRO<SocialuniUserRO> socialLoginRO = socialuniLoginDomain.getSocialLoginROByMineUser(socialuniUserDo);
 

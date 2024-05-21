@@ -29,9 +29,10 @@ public class SocialMessageROFactory {
 
     public static SocialMessageRO getMessageRO(SocialuniMessageDO messageDO, Integer beUserId) {
         SocialMessageRO messageRO = new SocialMessageRO();
-        SocialuniUserDo userDO = SocialuniUserUtil.getAndCheckUserNotNull(messageDO.getUserId());
+        SocialuniUserDo userDO = SocialuniUserUtil.getUserNotNull(messageDO.getUserId());
 
 
+        //为什么这里允许空呢，因为存在群聊，存在未登录的情况
         SocialuniUserDo beUser = SocialuniUserUtil.getAllowNull(beUserId);
 
 

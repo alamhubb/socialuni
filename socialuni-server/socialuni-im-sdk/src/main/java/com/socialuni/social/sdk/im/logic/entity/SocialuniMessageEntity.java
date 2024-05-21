@@ -14,7 +14,6 @@ import com.socialuni.social.recharge.logic.entity.SocialuniCreateCoinOrderEntity
 import com.socialuni.social.sdk.im.config.websocket.WebsocketServer;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
-import com.socialuni.social.sdk.im.dao.DO.SocialuniUserChatConfigDO;
 import com.socialuni.social.sdk.im.dao.DO.message.SocialuniMessageDO;
 import com.socialuni.social.sdk.im.dao.DO.message.SocialuniMessageReceiveDO;
 import com.socialuni.social.sdk.im.dao.repository.ChatUserRepository;
@@ -23,7 +22,6 @@ import com.socialuni.social.sdk.im.dao.repository.SocialuniMessageReceiveReposit
 import com.socialuni.social.sdk.im.dao.repository.SocialuniMessageRepository;
 import com.socialuni.social.sdk.im.enumeration.ChatUserStatus;
 import com.socialuni.social.sdk.im.enumeration.MessageContentType;
-import com.socialuni.social.sdk.im.enumeration.MessageType;
 import com.socialuni.social.sdk.im.enumeration.NotifyType;
 import com.socialuni.social.sdk.im.logic.check.SocialuniChatUserCheck;
 import com.socialuni.social.sdk.im.logic.domain.NotifyDomain;
@@ -31,14 +29,9 @@ import com.socialuni.social.sdk.im.logic.foctory.SocaluniNotifyROFactory;
 import com.socialuni.social.sdk.im.logic.foctory.SocialMessageROFactory;
 import com.socialuni.social.sdk.im.logic.foctory.SocialuniChatUserDOFactory;
 import com.socialuni.social.sdk.im.logic.foctory.SocialuniMessageDOFactory;
-import com.socialuni.social.sdk.im.logic.manage.SocialuniUserChatConfigManage;
 import com.socialuni.social.sdk.im.notify.NotifyVO;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserBlackDO;
-import com.socialuni.social.follow.dao.DO.SocialuniUserFollowDO;
-import com.socialuni.social.user.sdk.dao.DO.SocialuniUserCoinDo;
-import com.socialuni.social.user.sdk.utils.SocialuniUserSocialCoinDOUtil;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -112,7 +105,7 @@ public class SocialuniMessageEntity {
 
 
         //校验用户是否存在
-        SocialuniUserUtil.getAndCheckUserNotNull(beUserId);
+        SocialuniUserUtil.getUserNotNull(beUserId);
 
         List<SocialuniChatUserDO> chatSocialuniUserDoS = SocialuniChatUserDOFactory.getOrCreateChatUsersBySingleSendMsg(beUserId, mineUserId);
 

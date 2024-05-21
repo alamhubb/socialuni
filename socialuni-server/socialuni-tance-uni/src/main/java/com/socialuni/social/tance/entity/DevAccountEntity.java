@@ -81,7 +81,7 @@ public class DevAccountEntity {
             //如果没注册账号，则直接注册
             socialuniUserDo = socialUserPhoneEntity.createSysUserPhoneEntity(phoneNum);
         } else {
-            socialuniUserDo = SocialuniUserUtil.getAndCheckUserNotNull(SocialUserPhoneDo.getUserId());
+            socialuniUserDo = SocialuniUserUtil.getUserNotNull(SocialUserPhoneDo.getUserId());
             socialuniUserDo.setRoleId(SocialuniSysRoleId.sys);
             socialuniUserDo = socialuniUserRepository.save(socialuniUserDo);
         }

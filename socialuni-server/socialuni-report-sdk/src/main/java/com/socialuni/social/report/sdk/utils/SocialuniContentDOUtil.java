@@ -93,7 +93,7 @@ public class SocialuniContentDOUtil<T> {
         }
         SocialuniUnionContentBaseDO contentBaseDO;
         if (contentType.equals(SocialuniContentType.user)) {
-            contentBaseDO = SocialuniUserUtil.getAndCheckUserNotNull(contentId);
+            contentBaseDO = SocialuniUserUtil.getUserNotNull(contentId);
         } else if (contentType.equals(SocialuniContentType.userImg)) {
             contentBaseDO = SocialuniUserImgDOUtil.getUserImgNotNull(contentId);
         } else if (contentType.equals(SocialuniContentType.talk)) {

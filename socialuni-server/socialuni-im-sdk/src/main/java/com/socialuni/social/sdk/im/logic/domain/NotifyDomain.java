@@ -2,6 +2,7 @@ package com.socialuni.social.sdk.im.logic.domain;
 
 import com.socialuni.social.common.api.exception.base.SocialException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.socialuni.social.common.sdk.constant.UserType;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.sdk.im.config.websocket.WebsocketServer;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
@@ -16,7 +17,10 @@ import com.socialuni.social.common.sdk.dao.repository.SocialUserPlatformAccountR
 import com.socialuni.social.sdk.im.notify.NotifyVO;
 import com.socialuni.social.common.sdk.platform.PushMsgDTO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
+import com.socialuni.social.user.sdk.dao.utils.SocialuniUserDOUtil;
+import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -109,6 +113,8 @@ public class NotifyDomain {
     private StringRedisTemplate stringRedisTemplate;
     @Resource
     private SocialuniMessageReceiveRepository messageReceiveRepository;
+    @Autowired
+    private SocialuniUserUtil socialuniUserUtil;
 
     public void sendNotifies(List<NotifyDO> notifies, SocialuniUserDo mineUser) {
         for (NotifyDO notify : notifies) {
@@ -144,7 +150,19 @@ public class NotifyDomain {
             //如果群聊，直接发送给两个服务器在线的所有用户，并且查找他们未读的。
             //未登录的时候也查询群聊里面的所有内容
             NotifyVO notifyVO = SocaluniNotifyROFactory.getNotifyROBySendMsg(notify, sendUser, messageReceiveDO, chatUserDO);
-            WebsocketServer.sendMessage(receiveUserId, notifyVO);
+
+            SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getUserNotNull(receiveUserId);
+
+            if (UserType.operation.equals(socialuniUserDo.getType())) {
+                List<Integer> systemUserIds = SocialuniUserDOUtil.getUserIdsByType(UserType.system);
+                for (Integer systemUserId : systemUserIds) {
+                    WebsocketServer.sendMessage(systemUserId, notifyVO);
+                }
+            } else {
+                WebsocketServer.sendMessage(receiveUserId, notifyVO);
+            }
+
+
                 /*try {
                     stringRedisTemplate.convertAndSend(receiveUserId.toString(), JsonUtil.objectMapper.writeValueAsString(notifyVO));
                 } catch (JsonProcessingException e) {

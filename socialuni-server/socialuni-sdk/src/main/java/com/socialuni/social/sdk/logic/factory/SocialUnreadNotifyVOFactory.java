@@ -36,7 +36,7 @@ public class SocialUnreadNotifyVOFactory {
     }
 
     public static SocialUnreadNotifyVO newUnreadNotifyVO(NotifyDO notifyDO) {
-        SocialuniUserDo notifyUser = SocialuniUserUtil.getAndCheckUserNotNull(notifyDO.getUserId());
+        SocialuniUserDo notifyUser = SocialuniUserUtil.getUserNotNull(notifyDO.getUserId());
         SocialUnreadNotifyVO notifyVO = SocialUnreadNotifyVOFactory.newUnreadNotifyVO(notifyUser);
 
         Integer commentId = notifyDO.getContentId();

@@ -16,7 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 public interface SocialuniUserRepository extends JpaRepository<SocialuniUserDo, Integer> {
-//    @Cacheable(cacheNames = CommonRedisKey.findAllUserId)
+    //    @Cacheable(cacheNames = CommonRedisKey.findAllUserId)
     @Query(value = "select u.userId from SocialuniUserDo u")
     List<Integer> findAllUserIds();
 
@@ -28,13 +28,13 @@ public interface SocialuniUserRepository extends JpaRepository<SocialuniUserDo, 
                     @CacheEvict(cacheNames = CommonRedisKey.findUserIdsByStatus, allEntries = true),
                     @CacheEvict(cacheNames = CommonRedisKey.findAllUserId, allEntries = true)
             },
-            put = {@CachePut(cacheNames = CommonRedisKey.userById,  key = "#user.unionId")}
+            put = {@CachePut(cacheNames = CommonRedisKey.userById, key = "#user.unionId")}
     )
-    default SocialuniUserDo savePut(SocialuniUserDo user){
-        return this.save(BeanUtil.toBean(user,SocialuniUserDo.class));
+    default SocialuniUserDo savePut(SocialuniUserDo user) {
+        return this.save(BeanUtil.toBean(user, SocialuniUserDo.class));
     }
 
-    @Cacheable(cacheNames = CommonRedisKey.findUserIdsByType)
+    @Cacheable(cacheNames = CommonRedisKey.findUserIdsByType, key = "#type")
     @Query("select s.userId from SocialuniUserDo s where s.type = :type")
     List<Integer> findUserIdsByType(String type);
 
@@ -127,7 +127,7 @@ public interface SocialuniUserRepository extends JpaRepository<SocialuniUserDo, 
                     "FLOOR(UNIX_TIMESTAMP(u.`last_online_time`)/3600) DESC," +
                     "u.face_ratio * (FLOOR(1 + RAND()*10)) DESC LIMIT 20")
     List<SocialuniUserDo> queryMatchUsers(@Param("userId") Integer userId, @Param("genders") List<String> genders, @Param("ids") List<Integer> ids,
-                                             @Param("status") String status, @Param("statuses") List<String> statuses, @Param("userStatus") String userStatus);
+                                          @Param("status") String status, @Param("statuses") List<String> statuses, @Param("userStatus") String userStatus);
 
     @Query(nativeQuery = true,
             value = "SELECT DISTINCT u.*, m.status FROM " +

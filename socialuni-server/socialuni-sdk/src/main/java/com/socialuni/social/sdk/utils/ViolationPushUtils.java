@@ -43,7 +43,7 @@ public class ViolationPushUtils {
 
         SocialuniUnionContentBaseDO baseModelDO = SocialuniContentDOUtil.getContentDOByContentId(ReportDO.getContentId());
 
-        SocialuniUserDo vioUser = SocialuniUserUtil.getAndCheckUserNotNull(baseModelDO.getUserId());
+        SocialuniUserDo vioUser = SocialuniUserUtil.getUserNotNull(baseModelDO.getUserId());
 
         PushNotifyVO pushNotifyVO = new PushNotifyVO();
         //构建基础数据

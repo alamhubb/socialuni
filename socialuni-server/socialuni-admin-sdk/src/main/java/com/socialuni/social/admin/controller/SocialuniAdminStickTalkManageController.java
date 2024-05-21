@@ -30,7 +30,7 @@ public class SocialuniAdminStickTalkManageController {
 
         List<SocialuniAdminStickTalkRO> talkROS = talkIds.stream().map(item -> {
             SocialuniAdminStickTalkRO talkvo = SocialuniAdminStickTalkROFactory.getTalkRO(item);
-            ReportUserVO userVO = new ReportUserVO(SocialuniUserUtil.getAndCheckUserNotNull(talkvo.getUserId()));
+            ReportUserVO userVO = new ReportUserVO(SocialuniUserUtil.getUserNotNull(talkvo.getUserId()));
             talkvo.setUser(userVO);
             return talkvo;
         }).collect(Collectors.toList());

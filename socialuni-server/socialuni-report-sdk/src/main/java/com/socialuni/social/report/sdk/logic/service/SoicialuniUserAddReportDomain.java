@@ -72,7 +72,7 @@ public class SoicialuniUserAddReportDomain {
 
 
         //用户举报其他用户的逻辑
-        SocialuniUserDo receiveUser = SocialuniUserUtil.getAndCheckUserNotNull(receiveUserId);
+        SocialuniUserDo receiveUser = SocialuniUserUtil.getUserNotNull(receiveUserId);
 
 
         Integer modelReportNum = modelDO.getReportNum() + 1;

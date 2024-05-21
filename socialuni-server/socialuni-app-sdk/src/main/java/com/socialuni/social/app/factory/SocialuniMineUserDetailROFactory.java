@@ -41,7 +41,7 @@ public class SocialuniMineUserDetailROFactory {
     }
 
     public static SocialuniMineUserDetailRO getMineUserDetail(Integer mineUserId) {
-        SocialuniUserDo mineUser = SocialuniUserUtil.getAndCheckUserNotNull(mineUserId);
+        SocialuniUserDo mineUser = SocialuniUserUtil.getUserNotNull(mineUserId);
         return SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
     }
 

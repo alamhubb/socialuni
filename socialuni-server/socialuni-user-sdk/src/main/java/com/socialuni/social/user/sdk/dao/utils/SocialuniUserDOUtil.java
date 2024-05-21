@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Component
 @Slf4j
@@ -23,6 +24,11 @@ public class SocialuniUserDOUtil {
     public void setSocialuniUserRepository(SocialuniUserRepository socialuniUserRepository) {
         SocialuniUserDOUtil.socialuniUserRepository = socialuniUserRepository;
     }
+
+    public static List<Integer> getUserIdsByType(String type) {
+        return socialuniUserRepository.findUserIdsByType(type);
+    }
+
 
     public static SocialuniUserDo save(SocialuniUserDo socialuniUserDo) {
         //一个
