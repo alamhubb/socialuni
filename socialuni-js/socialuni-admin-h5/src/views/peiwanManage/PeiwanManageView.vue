@@ -136,6 +136,7 @@ import AdminPeiwanAppInitData from "socialuni-admin-api/src/model/peiwan/AdminPe
 import QSelect from "qing-ui-h5/src/components/QSelect/QSelect.vue";
 import ImgFileVO from "socialuni-admin-api/src/model/community/ImgFileVO";
 import resData from "./resdata.json"
+import SocialuniPeiwanAdminAPI from "socialuni-peiwan-api/src/api/SocialuniPeiwanAdminAPI";
 
 @toNative
 @Component({
@@ -175,6 +176,7 @@ export default class PeiwanManageView extends Vue {
         this.getAppInitDataAPI()
         this.queryPeiwanListAPI()
         this.queryCosAuthAPI()
+        console.log('666')
         console.log('进入了')
         this.listenerMessage()
         WindowEventListener.useKeydownListener({ctrl: true, key: 's'}, (event) => {
