@@ -9,7 +9,7 @@ import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.utils.IpUtil;
 import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.common.api.dao.DO.RequestLogDO;
-import com.socialuni.social.web.sdk.dao.utils.ErrorLogUtil;
+import com.socialuni.social.common.sdk.utils.ErrorLogUtil;
 import com.socialuni.social.common.sdk.utils.RequestLogUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;

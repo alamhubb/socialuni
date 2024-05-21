@@ -147,7 +147,9 @@ public class SocialChatROFactory {
 
             String beUserId = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(receiveUser.getUserId());
 
-            chatRO.setId(beUserId);
+
+
+            chatRO.setId(chatUserDO.getId().toString());
             chatRO.setNickname(receiveUser.getNickname());
             chatRO.setAvatar(receiveUser.getAvatar());
             chatRO.setReceiveUserId(beUserId);

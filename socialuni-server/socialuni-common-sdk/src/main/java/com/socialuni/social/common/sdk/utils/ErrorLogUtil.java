@@ -1,4 +1,4 @@
-package com.socialuni.social.web.sdk.dao.utils;
+package com.socialuni.social.common.sdk.utils;
 
 
 import com.socialuni.social.common.api.constant.ErrorCode;
@@ -6,7 +6,6 @@ import com.socialuni.social.common.api.constant.ErrorType;
 import com.socialuni.social.common.sdk.dao.store.ErrorRequestLogStore;
 import com.socialuni.social.common.api.dao.DO.ErrorRequestLogDO;
 import com.socialuni.social.common.api.dao.DO.RequestLogDO;
-import com.socialuni.social.common.sdk.utils.RequestLogUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

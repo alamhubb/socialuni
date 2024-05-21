@@ -31,7 +31,7 @@ public interface ChatUserRepository extends JpaRepository<SocialuniChatUserDO, I
 
 
     //只有发送消息时，才需要使用这个，校验状态，其他情况不需要
-    List<SocialuniChatUserDO> findByChatIdAndStatusAndStatus(Integer chatId, String Status, String status);
+//    List<SocialuniChatUserDO> findByChatIdAndStatusAndStatus(Integer chatId, String Status, String status);
 
     List<SocialuniChatUserDO> findByChatIdAndStatus(Integer chatId, String Status);
 

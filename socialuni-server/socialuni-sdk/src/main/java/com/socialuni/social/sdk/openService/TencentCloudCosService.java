@@ -8,7 +8,7 @@ import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.userImg.dao.DO.SocialuniUserImgDo;
 import com.socialuni.social.userImg.dao.repository.SocialuniUserImgRepository;
-import com.socialuni.social.web.sdk.dao.utils.ErrorLogUtil;
+import com.socialuni.social.common.sdk.utils.ErrorLogUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

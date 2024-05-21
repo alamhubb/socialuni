@@ -27,7 +27,7 @@ public interface SocialuniChatRepository extends JpaRepository<SocialuniChatDO, 
     SocialuniChatDO findFirstByUnionIdAndStatus(Integer id, String status);
 
     //开启时，只有私聊的才能开启
-    Optional<SocialuniChatDO> findFirstByIdAndTypeAndStatus(Integer id, String type, String status);
+//    Optional<SocialuniChatDO> findFirstByIdAndTypeAndStatus(Integer id, String type, String status);
 
     //用户注册的时候查询系统群聊，把用户加入启用的系统群聊
     List<SocialuniChatDO> findByTypeAndStatus(String type, String status);
