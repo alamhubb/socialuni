@@ -37,12 +37,8 @@ declare module '@vue/runtime-core' {
     app.config.globalProperties.$getImageUrl = getImageUrl;
 
     app.use(SocialuniUiH5)
-    app.use(SocialuniAppViewH5)
-    app.use(SocialuniUser)
-    app.use(SocialuniCommunityH5)
-    app.use(SocialuniIm)
-    app.use(SocialuniMusic)
-    app.use(SocialuniExpandH5)
+    // app.use(SocialuniAppViewH5)
+    // app.use(SocialuniUser)
 
 
     app.config.globalProperties.$qing = socialuniSystemModule
