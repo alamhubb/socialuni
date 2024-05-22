@@ -115,7 +115,7 @@ public class SocialuniMessageService {
 
                 SocialMessageRO socialMessageRO = messageEntity.sendSingleMsg(mineUser, unionId, msgAddVO.getContent(), msgType);
 
-                ErrorLogUtil.error("不应该存在用户id的会话消息");
+//                ErrorLogUtil.error("不应该存在用户id的会话消息");
 
                 return ResultRO.success(socialMessageRO);
             } else if (idContentType.equals(SocialuniContentType.chat)) {
