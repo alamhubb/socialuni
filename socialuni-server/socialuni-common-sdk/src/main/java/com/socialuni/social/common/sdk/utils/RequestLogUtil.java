@@ -1,6 +1,9 @@
 package com.socialuni.social.common.sdk.utils;
 
 
+import com.socialuni.social.common.api.constant.ErrorCode;
+import com.socialuni.social.common.api.constant.ErrorType;
+import com.socialuni.social.common.api.dao.DO.ErrorRequestLogDO;
 import com.socialuni.social.common.api.dao.DO.RequestLogDO;
 import com.socialuni.social.common.sdk.dao.store.RequestLogStore;
 import lombok.extern.slf4j.Slf4j;
@@ -9,6 +12,7 @@ import org.springframework.web.context.request.RequestAttributes;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 
 @Component
 @Slf4j
@@ -32,6 +36,18 @@ public class RequestLogUtil {
     public static void saveAsyncAndRemove(RequestLogDO requestLogDO) {
         requestLogStore.saveAsync(requestLogDO);
         RequestLogUtil.remove();
+    }
+
+    //后端直接生成的
+    public static void error(String errorMsg) {
+        RequestLogDO errorRequestLogDO = RequestLogUtil.get();
+        errorRequestLogDO = new RequestLogDO(errorRequestLogDO);
+        errorRequestLogDO.setSuccess(false);
+        errorRequestLogDO.setErrorCode(ErrorCode.BUSINESS_ERROR);
+        errorRequestLogDO.setErrorType(ErrorType.error);
+        errorRequestLogDO.setErrorMsg(errorMsg);
+        errorRequestLogDO.setEndTime(new Date());
+        requestLogStore.saveAsync(errorRequestLogDO);
     }
 
     private static final ThreadLocal<RequestLogDO> requestLog = new ThreadLocal<>();

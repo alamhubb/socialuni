@@ -1,6 +1,8 @@
 package com.socialuni.social.common.api.dao.DO;
 
+import com.socialuni.social.common.api.constant.ErrorPlatformType;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -23,6 +25,7 @@ import java.util.Date;
         @Index(columnList = "errorCode"),
         @Index(columnList = "errorType"),
 })
+@NoArgsConstructor
 public class RequestLogDO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,4 +53,25 @@ public class RequestLogDO {
     private String innerMsgDetail;
     private Date endTime;
     private Date createTime;
+
+    public RequestLogDO(RequestLogDO requestLogDO) {
+        this.devId = requestLogDO.getDevId();
+        this.userId = requestLogDO.getUserId();
+        this.ip = requestLogDO.getIp();
+        this.uri = requestLogDO.getUri();
+        this.spendTime = requestLogDO.getSpendTime();
+        this.requestMethod = requestLogDO.getRequestMethod();
+        this.success = requestLogDO.getSuccess();
+        this.errorCode = requestLogDO.getErrorCode();
+        this.errorType = requestLogDO.getErrorType();
+        this.params = requestLogDO.getParams();
+        this.errorMsg = requestLogDO.getErrorMsg();
+        this.innerMsg = requestLogDO.getInnerMsg();
+        this.innerMsgDetail = requestLogDO.getInnerMsg();
+        this.endTime = requestLogDO.getEndTime();
+        this.createTime = requestLogDO.getCreateTime();
+        this.systemInfo = requestLogDO.getSystemInfo();
+        this.provider = requestLogDO.getProvider();
+        this.platform = requestLogDO.getPlatform();
+    }
 }

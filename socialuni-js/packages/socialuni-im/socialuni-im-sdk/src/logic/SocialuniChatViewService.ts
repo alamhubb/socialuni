@@ -100,7 +100,6 @@ export default class SocialuniChatViewService extends SocialuniViewService<Socia
     }
 
 
-
     onPullDownRefresh() {
         this.initQuery()
     }
@@ -222,11 +221,11 @@ export default class SocialuniChatViewService extends SocialuniViewService<Socia
     toMessagePage(chat: SocialuniChatRO) {
         //需要先清除，再跳转页面
         //进入页面需要查询，不查询则不显示
-        if (chat.receiveUserId) {
-            return socialuniChatModule.setChatIdToMessagePage(chat.receiveUserId)
-        } else {
-            return socialuniChatModule.setChatIdToMessagePage(chat.id)
-        }
+        // if (chat.receiveUserId) {
+        //     return socialuniChatModule.setChatIdToMessagePage(chat.receiveUserId)
+        // } else {
+        return socialuniChatModule.setChatIdToMessagePage(chat.id)
+        // }
     }
 
     toAddFriend() {
