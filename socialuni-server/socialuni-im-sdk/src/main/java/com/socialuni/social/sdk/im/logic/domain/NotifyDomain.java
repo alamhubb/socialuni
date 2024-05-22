@@ -128,7 +128,7 @@ public class NotifyDomain {
 //        UserDO receiveUser = userRepository.findById(receiveUserId).get();
         Integer receiveUserId = notify.getBeUserId();
 
-        SocialUserPlatformAccountDO receiveAccount = socialUserPlatformAccountRepository.findByUserIdOrderByUpdateTimeDesc(receiveUserId);
+        SocialUserPlatformAccountDO receiveAccount = socialUserPlatformAccountRepository.findFirstByUserIdOrderByUpdateTimeDesc(receiveUserId);
 //        if (receiveAccount != null) {
         String notifyType = notify.getType();
 //        String provider = receiveAccount.getProvider();

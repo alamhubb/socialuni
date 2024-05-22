@@ -26,7 +26,15 @@ public class PositionUtil {
     public static Double getDistance(SocialuniRectangleRO dataRO) {
         String lon = SocialuniRequestUtil.getCityLon();
         String lat = SocialuniRequestUtil.getCityLat();
-        SocialuniRectangleRO socialuniRectangleRO = new SocialuniRectangleRO(Double.valueOf(lon), Double.valueOf(lat));
+        Double dbLon = null;
+        Double dbLat = null;
+        if (lon != null) {
+            dbLon = Double.valueOf(lon);
+        }
+        if (lat != null) {
+            dbLat = Double.valueOf(lat);
+        }
+        SocialuniRectangleRO socialuniRectangleRO = new SocialuniRectangleRO(dbLon, dbLat);
         return PositionUtil.getDistance(socialuniRectangleRO, dataRO);
     }
 

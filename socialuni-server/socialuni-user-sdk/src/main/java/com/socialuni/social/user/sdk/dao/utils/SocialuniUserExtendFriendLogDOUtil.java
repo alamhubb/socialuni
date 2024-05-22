@@ -10,6 +10,7 @@ import com.socialuni.social.user.sdk.repository.SocialuniUserExtendFriendLogRepo
 import com.socialuni.social.user.sdk.utils.DistrictStoreUtils;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -42,16 +43,24 @@ public class SocialuniUserExtendFriendLogDOUtil {
         String lat = SocialuniRequestUtil.getCityLat();
         String adCode = SocialuniRequestUtil.getCityAdCode();
 
+        if (lon == null){
+            lon = String.valueOf(1);
+        }
+        if (lat == null){
+            lat = String.valueOf(1);
+        }
+
         socialuniUserExtendFriendLogDo.setLat(lat);
         socialuniUserExtendFriendLogDo.setLon(lon);
-
+        if (StringUtils.isEmpty(adCode)) {
+            adCode = SocialuniConst.chinaDistrictCode;
+        }
         SocialuniDistrictDO districtDO = DistrictStoreUtils.findFirstOneByAdCode(adCode);
         if (districtDO == null) {
             socialuniUserExtendFriendLogDo.setAdCode(SocialuniConst.chinaDistrictCode);
         } else {
             socialuniUserExtendFriendLogDo.setAdCode(adCode);
         }
-
 
         socialuniUserExtendFriendLogDo = socialuniUserExtendFriendLogRepository.save(socialuniUserExtendFriendLogDo);
 

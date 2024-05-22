@@ -18,7 +18,7 @@ public interface SocialUserPlatformAccountRepository extends JpaRepository<Socia
     //根据渠道和用户id查询用户账户信息
     SocialUserPlatformAccountDO findByProviderAndUserId(String provider, Integer userId);
 
-    SocialUserPlatformAccountDO findByUserIdOrderByUpdateTimeDesc(Integer userId);
+    SocialUserPlatformAccountDO findFirstByUserIdOrderByUpdateTimeDesc(Integer userId);
 
     @Query("select s.userId from SocialUserPlatformAccountDO s where s.provider = :provider")
     List<Integer> findAllUserIdsAllByProvider(String provider);
