@@ -141,16 +141,19 @@
         "pagePath": "pages/expand/expand",
         "iconPath": "static/img/home.png",
         "selectedIconPath": "static/img/selectHome.png",
+        "text": "首页"
       },
       {
         "pagePath": "pages/im/chat",
-        "iconPath": "static/img/message.png",
-        "selectedIconPath": "static/img/selectMessage.png",
+        "iconPath": "static/img/msg.png",
+        "selectedIconPath": "static/img/selectMsg.png",
+        "text": "消息"
       },
       {
         "pagePath": "pages/user/mine",
         "iconPath": "static/img/mine.png",
         "selectedIconPath": "static/img/selectMine.png",
+        "text": "我"
       }
     ]
   },
