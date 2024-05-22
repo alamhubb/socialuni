@@ -36,6 +36,7 @@ public class SocialuniUserROFactory {
         user.setCity(userDO.getCity());
         user.setType(userDO.getType());
         user.setNickname(userDO.getNickname());
+        user.setBirthday(userDO.getBirthday());
         user.setAvatar(userDO.getAvatar());
         user.setGender(userDO.getGender());
         return user;

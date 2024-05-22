@@ -67,9 +67,11 @@ public class ChatQueryDomain {
                 List<SocialuniChatUserDO> temChatUsers = chatUserRepository.findByStatusAndUserIdOrderByUpdateTimeDesc(ChatUserStatus.enable, id);
                 chatUsers.addAll(temChatUsers);
             }
-        } else {
-            chatUsers = chatUserRepository.findByStatusAndUserIdOrderByUpdateTimeDesc(ChatUserStatus.enable, user.getUserId());
         }
+
+        List<SocialuniChatUserDO> mineChatUsers = chatUserRepository.findByStatusAndUserIdOrderByUpdateTimeDesc(ChatUserStatus.enable, user.getUserId());
+
+        chatUsers.addAll(mineChatUsers);
 
         //查询的时候chat列表展示不为当前用户的
         /*return chatUsers.stream().map((ChatUserDO chatUserDO) -> {

@@ -5,7 +5,11 @@ import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserIdQO;
+import com.socialuni.social.common.sdk.constant.UserType;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
+import com.socialuni.social.common.sdk.utils.ErrorLogUtil;
 import com.socialuni.social.im.api.model.QO.SocialuniChatQueryQO;
 import com.socialuni.social.im.api.model.QO.chat.ChatReadVO;
 import com.socialuni.social.im.api.model.QO.message.MessageAddVO;
@@ -21,6 +25,7 @@ import com.socialuni.social.recharge.constant.SocialuniCoinOrderType;
 import com.socialuni.social.recharge.constant.SocialuniOrderDetailType;
 import com.socialuni.social.recharge.logic.entity.SocialuniCreateCoinOrderEntity;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
+import com.socialuni.social.sdk.im.logic.foctory.SocialChatROFactory;
 import com.socialuni.social.sdk.im.logic.service.SocialuniMessageService;
 import com.socialuni.social.sdk.im.logic.service.chat.ChatService;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
@@ -73,7 +78,7 @@ public class SocialuniUserLikeService {
         //私聊
         String chatUuid = chatRO.getId();
 
-        Integer chatId = getChatId(chatUuid);
+        Integer chatId = SocialChatROFactory.getChatId(chatUuid);
 
 
         if (chatId == null) {
@@ -114,7 +119,7 @@ public class SocialuniUserLikeService {
 
         String receiveIdUid = msgAddVO.getReceiveId();
 
-        Integer chatId = getChatId(receiveIdUid);
+        Integer chatId = SocialChatROFactory.getChatId(receiveIdUid);
         if (chatId == null) {
             return resultRO;
         }
@@ -126,21 +131,6 @@ public class SocialuniUserLikeService {
             socialuniCreateCoinOrderEntity.createCoinOrderByOrderType(mineUserId, -SocialuniLikeAllConfig.getLikeAllConfigBO().getSendLikeMsgNeedPayCoinNum(), SocialuniCoinOrderType.consume, SocialuniOrderDetailType.msg, msgIdd);
         }
         return resultRO;
-    }
-
-    private Integer getChatId(String chatId) {
-        SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidNotNull(chatId);
-
-        String contentType = socialuniUnionIdModler.getContentType();
-        //私聊
-        if (contentType.equals(SocialuniContentType.user)) {
-            Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
-            Integer beUserId = socialuniUnionIdModler.getId();
-            SocialuniChatUserDO chatUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(mineUserId, beUserId, SocialuniChatUserDO.class);
-
-            return chatUserDO.getChatId();
-        }
-        return null;
     }
 
     @Transactional

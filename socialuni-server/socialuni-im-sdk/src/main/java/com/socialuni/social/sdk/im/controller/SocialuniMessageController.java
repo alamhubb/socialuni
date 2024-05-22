@@ -4,6 +4,8 @@ import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.common.sdk.constant.UserType;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.im.api.feign.SocialuniMessageAPI;
@@ -66,7 +68,7 @@ public class SocialuniMessageController implements SocialuniMessageAPI {
      */
     public ResultRO<List<SocialMessageRO>> queryMessages(@RequestBody @Valid MessageQueryVO queryVO) {
         List<SocialMessageRO> messageVOS = new ArrayList<>();
-        String chatUuid = queryVO.getChatId();
+        String chatIdStr = queryVO.getChatId();
         //msg id也要统一，举报的时候不知道是哪个
 //        List<Long> msgIds = queryVO.getMsgIds();
         //前台传入chatId，
@@ -102,37 +104,67 @@ public class SocialuniMessageController implements SocialuniMessageAPI {
         }*/
 
 
-        SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidNotNull(chatUuid);
+        SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidAllowNull(chatIdStr);
 
+        //创建 chatUser 的逻辑，点击进入页面，会话页加一条
+        //发送消息，还有添加好友成功
 
-        //私聊
-        if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.user)) {
-            Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
-            Integer beUserId = socialuniUnionIdModler.getId();
+        Integer unionId = null;
 
-            //如果用户存在查看会话
-            SocialuniChatUserDO chatUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(mineUserId, beUserId, SocialuniChatUserDO.class);
+        if (socialuniUnionIdModler == null) {
+            try {
+                unionId = Integer.valueOf(chatIdStr);
+            } catch (Exception e) {
+                throw new SocialParamsException("错误的会话标识");
+            }
+            SocialuniChatUserDO chatUserDO = SocialuniRepositoryFacade.findById(unionId, SocialuniChatUserDO.class);
             if (chatUserDO == null) {
-                return ResultRO.success(new ArrayList<>());
+                throw new SocialParamsException("不存在会话信息1");
+            }
+            SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
+
+            if (!mineUser.getUserId().equals(chatUserDO.getUserId())) {
+                //如果为自己或者为系统
+                //为私聊相关校验
+                //后端区分这个值是群聊还是私聊。
+                if (!UserType.system.equals(mineUser.getType())) {
+                    throw new SocialParamsException("不存在的会话信息2");
+                }
             }
             List<SocialuniMessageReceiveDO> messageDOS = messageReceiveRepository.findTop30ByChatUserIdAndStatusAndCreateTimeLessThanOrderByCreateTimeDesc(chatUserDO.getId(), MessageReceiveStatus.enable, queryVO.getQueryTime());
             messageVOS = SocialMessageROFactory.messageReceiveDOToVOS(messageDOS);
             return ResultRO.success(messageVOS);
-        } else if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.chat)) {
-            //则为chatId
-
-            Integer chatId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(chatUuid);
-
-            SocialuniChatDO chatDO = SocialuniRepositoryFacade.findByUnionId(chatId, SocialuniChatDO.class);
-            if (!chatDO.getStatus().equals(ChatStatus.enable)) {
-                throw new SocialBusinessException("会话已被删除");
-            }
-            List<SocialuniMessageDO> messageDOS = messageRepository.findTop30ByChatIdAndStatusAndCreateTimeLessThanOrderByCreateTimeDesc(chatId, MessageStatus.enable, queryVO.getQueryTime());
-            messageVOS = SocialMessageROFactory.messageDOToVOS(messageDOS, SocialuniUserUtil.getMineUserIdAllowNull());
-            return ResultRO.success(messageVOS);
         } else {
-            throw new SocialParamsException("错误的会话标识");
+            //私聊
+            if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.user)) {
+                Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+                Integer beUserId = socialuniUnionIdModler.getId();
+
+                //如果用户存在查看会话
+                SocialuniChatUserDO chatUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(mineUserId, beUserId, SocialuniChatUserDO.class);
+                if (chatUserDO == null) {
+                    return ResultRO.success(new ArrayList<>());
+                }
+                List<SocialuniMessageReceiveDO> messageDOS = messageReceiveRepository.findTop30ByChatUserIdAndStatusAndCreateTimeLessThanOrderByCreateTimeDesc(chatUserDO.getId(), MessageReceiveStatus.enable, queryVO.getQueryTime());
+                messageVOS = SocialMessageROFactory.messageReceiveDOToVOS(messageDOS);
+                return ResultRO.success(messageVOS);
+            } else if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.chat)) {
+                //则为chatId
+                Integer chatId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(chatIdStr);
+
+                SocialuniChatDO chatDO = SocialuniRepositoryFacade.findByUnionId(chatId, SocialuniChatDO.class);
+                if (!chatDO.getStatus().equals(ChatStatus.enable)) {
+                    throw new SocialBusinessException("会话已被删除");
+                }
+                List<SocialuniMessageDO> messageDOS = messageRepository.findTop30ByChatIdAndStatusAndCreateTimeLessThanOrderByCreateTimeDesc(chatId, MessageStatus.enable, queryVO.getQueryTime());
+                messageVOS = SocialMessageROFactory.messageDOToVOS(messageDOS, SocialuniUserUtil.getMineUserIdAllowNull());
+                return ResultRO.success(messageVOS);
+            } else {
+                throw new SocialParamsException("错误的会话标识");
+            }
         }
+
+
     }
     /*
 

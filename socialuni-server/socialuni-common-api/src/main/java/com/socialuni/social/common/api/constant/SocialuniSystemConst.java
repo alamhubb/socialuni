@@ -147,5 +147,7 @@ public class SocialuniSystemConst {
         return activeEnv.equals(DevEnvType.prod);
     }
 
-
+    public static Boolean getIsLoaclPreEnv() {
+        return activeEnv.equals(DevEnvType.localpre);
+    }
 }

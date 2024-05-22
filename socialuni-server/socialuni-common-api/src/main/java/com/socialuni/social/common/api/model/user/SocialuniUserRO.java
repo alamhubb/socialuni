@@ -22,6 +22,7 @@ public class SocialuniUserRO extends SocialuniContentIdRO {
     //必须为string，返回给app后是uuid无法变为int
     private Integer age;
     private String city;
+    private String birthday;
 
     public SocialuniUserRO(SocialuniUserRO userRO) {
         super(userRO);
@@ -32,5 +33,6 @@ public class SocialuniUserRO extends SocialuniContentIdRO {
         this.avatar = userRO.getAvatar();
         this.gender = userRO.getGender();
         this.type = userRO.getType();
+        this.birthday = userRO.getBirthday();
     }
 }

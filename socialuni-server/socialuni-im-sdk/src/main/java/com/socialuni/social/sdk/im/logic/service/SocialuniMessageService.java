@@ -54,7 +54,7 @@ public class SocialuniMessageService {
 
     @Transactional
     public ResultRO<SocialMessageRO> sendMsg(MessageAddVO msgAddVO) {
-        String receiveIdUid = msgAddVO.getReceiveId();
+        String chatId = msgAddVO.getReceiveId();
         String msgContent = msgAddVO.getContent();
         String msgType = msgAddVO.getType();
         if (StringUtils.isEmpty(msgType)) {
@@ -68,7 +68,7 @@ public class SocialuniMessageService {
         //校验内容是否违规
         SocialuniTextContentUtil.checkTextHasViolateWords(msgContent);
 
-        SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidAllowNull(receiveIdUid);
+        SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidAllowNull(chatId);
 
 
         //创建 chatUser 的逻辑，点击进入页面，会话页加一条
@@ -78,7 +78,7 @@ public class SocialuniMessageService {
 
         if (socialuniUnionIdModler == null) {
             try {
-                unionId = Integer.valueOf(receiveIdUid);
+                unionId = Integer.valueOf(chatId);
             } catch (Exception e) {
                 throw new SocialParamsException("错误的会话标识");
             }
@@ -98,7 +98,7 @@ public class SocialuniMessageService {
                 mineUser = SocialuniUserUtil.getUserNotNull(socialuniChatUserDO.getUserId());
             }
 
-            SocialMessageRO socialMessageRO = messageEntity.sendSingleMsg(mineUser, unionId, msgAddVO.getContent(), msgType);
+            SocialMessageRO socialMessageRO = messageEntity.sendSingleMsg(mineUser, socialuniChatUserDO.getBeUserId(), msgAddVO.getContent(), msgType);
 
             return ResultRO.success(socialMessageRO);
             //则为chatUserId

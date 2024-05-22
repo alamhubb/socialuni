@@ -1,7 +1,9 @@
 package com.socialuni.social.sdk.im.logic.foctory;
 
 
+import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.sdk.constant.LoadMoreType;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
@@ -22,6 +24,7 @@ import com.socialuni.social.im.api.model.RO.SocialMessageRO;
 import com.socialuni.social.sdk.im.enumeration.MessageStatus;
 import com.socialuni.social.sdk.im.logic.manage.SocialuniUserChatConfigManage;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserBlackDO;
 import com.socialuni.social.follow.dao.DO.SocialuniUserFollowDO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
@@ -146,7 +149,6 @@ public class SocialChatROFactory {
             SocialuniUserDo receiveUser = SocialuniUserUtil.getUserNotNull(chatUserDO.getBeUserId());
 
             String beUserId = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(receiveUser.getUserId());
-
 
 
             chatRO.setId(chatUserDO.getId().toString());
@@ -274,6 +276,42 @@ public class SocialChatROFactory {
         //todo 不能推送所有未读的，因为有些未读的可能已经推送过了，但用户没看而已，再推送就会重复，解决这个问题需要标识哪些是已经推送过了，websocket中记录，目前前台通过重连充重新查询chats解决
 //        List<MessageReceiveDO> messageReceiveDOS = messageReceiveRepository.findByChatUserAndMessageStatusAndReceiveUserAndStatusAndIsReadFalseOrderByCreateTimeDescIdDesc(messageReceiveDO.getChatUser(), CommonStatus.enable, messageReceiveDO.getReceiveUser(), CommonStatus.enable);
 //        this.messages = MessageVO.messageDOToVOS(messageReceiveDOS);
+    }
+
+
+    public static Integer getChatId(String chatId) {
+        SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidAllowNull(chatId);
+
+        //创建 chatUser 的逻辑，点击进入页面，会话页加一条
+        //发送消息，还有添加好友成功
+        if (socialuniUnionIdModler == null) {
+            int unionId;
+            try {
+                unionId = Integer.parseInt(chatId);
+            } catch (Exception e) {
+                throw new SocialParamsException("错误的会话标识10011");
+            }
+            SocialuniChatUserDO socialuniChatUserDO = SocialuniRepositoryFacade.findById(unionId, SocialuniChatUserDO.class);
+            if (socialuniChatUserDO == null) {
+                throw new SocialParamsException("不存在会话信息10012");
+            }
+            return socialuniChatUserDO.getChatId();
+            //则为chatUserId
+        } else {
+            //旧版本
+            String contentType = socialuniUnionIdModler.getContentType();
+            //私聊
+            if (contentType.equals(SocialuniContentType.user)) {
+                Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+                Integer beUserId = socialuniUnionIdModler.getId();
+                SocialuniChatUserDO chatUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(mineUserId, beUserId, SocialuniChatUserDO.class);
+
+                return chatUserDO.getChatId();
+            } else if (contentType.equals(SocialuniContentType.chat)) {
+                return socialuniUnionIdModler.getId();
+            }
+            throw new SocialParamsException("错误的会话标识10013");
+        }
     }
 
 }
