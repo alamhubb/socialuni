@@ -16,12 +16,9 @@ export default class CommonEventUtil {
 
     static on(name: string, handler: (data: any) => void): void {
         console.log('订阅通知：' + name)
-        this.event.off(name)
+        this.event.off(name, handler)
         nextTick().then(async () => {
-            this.event.on(name, async (data: any) => {
-                console.log('触发订阅：' + name)
-                await handler(data)
-            })
+            this.event.on(name, handler)
         })
     }
 }

@@ -36,7 +36,7 @@ export default class OAuthService {
 
     const { data } = await LoginAPI.socialuniPhoneLoginAPI(providerLoginQO)
 
-    UserService.getMineUserInitDataActionByToken(data)
+    // UserService.getMineUserInitDataActionByToken(data)
   }
 
   //绑定清池手机号，需要已绑定清池手机号

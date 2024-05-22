@@ -30,6 +30,7 @@ export default class SocialuniUserLikeAPI {
   }
 
   static queryChatListAPI() {
+    console.trace('sdafsadf')
     return socialuniImRequest.get<SocialuniChatRO[]>('socialuni/userLike/queryChatList')
   }
 }

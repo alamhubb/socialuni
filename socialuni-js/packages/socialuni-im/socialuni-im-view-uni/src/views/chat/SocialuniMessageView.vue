@@ -1,10 +1,10 @@
 <template>
   <div class="h100p flex-col bg-default">
     <q-navbar class="flex-none" show-back :title="viewService.pageTitle">
-      <div class="row-end-center flex-1">
-        <!--                <button @click="viewService.scrollToMessagePageBottom">滚动到底部</button>-->
+<!--      <div class="row-end-center flex-1">
+        &lt;!&ndash;                <button @click="viewService.scrollToMessagePageBottom">滚动到底部</button>&ndash;&gt;
         <q-icon icon="list-dot" size="20" @click="viewService.openMoreMenu()"></q-icon>
-      </div>
+      </div>-->
     </q-navbar>
     <!--    <div v-if="showMsgHint" class="fixed-105 row-col-center bg-orange">
           <div class="flex-1 card-text-row">
@@ -215,6 +215,7 @@ export default class SocialuniMessageView extends Vue {
 
   created() {
     console.log('chuale')
+    console.log('66666')
     //TODO 同一会话时，这里要改成onRead，不然需要刷新页面才会触发已读的标志。
     onLoad((params: MessageViewParams) => {
       this.viewService.initService(this, params)

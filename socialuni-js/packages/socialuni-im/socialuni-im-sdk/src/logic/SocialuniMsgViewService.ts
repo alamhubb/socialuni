@@ -77,6 +77,7 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
 
     //为什么使用instance而不使用this？
     initService(instance: Vue, params: MessageViewParams) {
+        console.log('zhixingle initService')
         super.initService(instance, params)
         onMounted(() => {
             socialuniChatModule.scrollTop = 0
@@ -92,7 +93,7 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
         if (this.chat.type === ChatType.single) {
             UserPageUtil.toUserDetail(this.chat.id);
         } else {
-            UserPageUtil.toIMGroupMember(this.groupId); // 权限问题，内容有问题。
+            // UserPageUtil.toIMGroupMember(this.groupId); // 权限问题，内容有问题。
         }
     }
 

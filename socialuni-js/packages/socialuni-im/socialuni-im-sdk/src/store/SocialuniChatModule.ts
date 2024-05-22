@@ -17,6 +17,7 @@ import SocialuniImUserAPI from "socialuni-im-api/src/api/SocialuniImUserAPI";
 import RouterUtil from "qingjs-h5/src/util/RouterUtil";
 import ImPagePath from "../constant/ImPagePath";
 import SocialuniUserLikeAPI from "socialuni-expand-api/src/api/SocialuniUserLikeAPI";
+import ChatType from "socialuni-constant/constant/ChatType";
 
 class SocialuniChatModule {
     private _chatId = ''
@@ -85,8 +86,11 @@ class SocialuniChatModule {
             this.chats.unshift(chat)
 
             SocialuniUserLikeAPI.queryChatAPI(new ChatQueryQO(chatId)).then(res => {
-                this.readChatAction(res.data.messages)
                 this.pushMsgReplaceChatByChat(res.data)
+                console.log(this.chat)
+                console.log(this.chat.type)
+                console.log(65656)
+                this.readChatAction(res.data.messages)
             })
         }
         console.log('chatid')
@@ -97,12 +101,19 @@ class SocialuniChatModule {
 
 
     readChatAction(messagesROs: MessageVO[]) {
+        console.log(this.chat)
+        console.log(this.chat.type)
+        console.log(65656)
         //目前不根据点击时间更新，只根据消息时间更新
         // chat.updateTime = new Date().getTime()
         // 不为自己的 且未读的
         const messages: MessageVO[] = messagesROs.filter(item => !item.isMine && !item.isRead)
         const msgIds: string[] = messages.map(msg => msg.id)
-        /*if (msgIds.length) {
+        console.log(msgIds)
+        if (msgIds.length) {
+            console.log(this.chat)
+            console.log(this.chat.type)
+            console.log(65656)
             // msgIds =
             //如果登录了，才调用后台
             // 如果登录了
@@ -115,8 +126,39 @@ class SocialuniChatModule {
             }
             this.chat.unreadNum = 0
             this.computedChatsUnreadNumTotalAction()
-        }*/
+        }
     }
+
+    chatsUnreadNumTotal = 0
+
+    async computedChatsUnreadNumTotalAction() {
+        this.chatsUnreadNumTotal = this.chats.reduce((total, chat) => {
+            total = total + chat.unreadNum
+            return total
+        }, 0)
+
+        const chatUnreadNum: number = this.chatsUnreadNumTotal
+        // 如果未读数量为0了，则隐藏红点
+        if (chatUnreadNum) {
+            this.showTabBarRedDot()
+        } else {
+            this.hideTabBarRedDot()
+        }
+    }
+
+    showTabBarRedDot() {
+        uni.showTabBarRedDot({
+            index: 2
+        })
+    }
+
+    hideTabBarRedDot() {
+        uni.hideTabBarRedDot({
+            index: 2
+        })
+    }
+
+
 
     //替换chat消息，如果不存在则添加
     pushMsgReplaceChatByChat(chat: SocialuniChatRO) {
@@ -129,6 +171,9 @@ class SocialuniChatModule {
                 this.chats.unshift(chat)
             }
         }
+        console.log(this.chat)
+        console.log(this.chat.type)
+        console.log(65656)
     }
 
 

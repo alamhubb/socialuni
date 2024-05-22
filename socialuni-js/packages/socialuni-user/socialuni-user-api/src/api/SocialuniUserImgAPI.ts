@@ -29,7 +29,7 @@ export default class SocialuniUserImgAPI {
     return socialuniUserRequest.get<ImgFileVO[]>('socialuni/userImg/getUserImgList/' + userId)
   }
 
-  static getMineUserImgListAPI(userId: string) {
+  static getMineUserImgListAPI() {
     return socialuniUserRequest.get<ImgFileVO[]>('socialuni/userImg/getMineUserImgList')
   }
 }

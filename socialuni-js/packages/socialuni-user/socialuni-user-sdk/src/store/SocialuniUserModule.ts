@@ -8,6 +8,8 @@ import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import {socialuniTokenModule} from "./SocialuniTokenModule";
 import SocialuniUserRO from "socialuni-api-base/src/model/user/SocialuniUserRO";
 import {socialuniAppUserModule} from "./SocialuniAppUserModule";
+import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
+import SocialuniUserEventConst from "../constant/SocialuniUserEventConst";
 
 class SocialuniUserModule {
     get token() {
@@ -66,9 +68,11 @@ class SocialuniUserModule {
             this.setUser(loginRO.user)
             socialuniTokenModule.setToken(loginRO.token)
             socialuniAppUserModule.getMineUserMoreInfoAction()
+            CommonEventUtil.emit(SocialuniUserEventConst.loginSucces)
         } else {
             socialuniTokenModule.setToken(null)
             this.setUser(null)
+            CommonEventUtil.emit(SocialuniUserEventConst.loginOut)
         }
     }
 

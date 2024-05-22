@@ -19,6 +19,7 @@ import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule
 import SocialuniUserEventConst from "./constant/SocialuniUserEventConst";
 import UserPageUtil from "./util/UserPageUtil";
 import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
+import {socialuniAppUserModule} from "./store/SocialuniAppUserModule";
 
 
 class SocialuniUserPlugin implements SocialuniPlugin {
@@ -28,6 +29,15 @@ class SocialuniUserPlugin implements SocialuniPlugin {
         //     socialAppModule.cosHttpPath = res.data
         // })
         // socialAppModule.getHomeSwipersAction()
+
+        CommonEventUtil.on(SocialuniUserEventConst.loginSucces, () => {
+            socialuniAppUserModule.getMineUserMoreInfoAction()
+            WebsocketUtil.createWebsocket()
+        })
+
+        CommonEventUtil.on(SocialuniUserEventConst.loginOut, () => {
+            WebsocketUtil.createWebsocket()
+        })
     }
 
     onWebsocketInterceptors(config: any) {

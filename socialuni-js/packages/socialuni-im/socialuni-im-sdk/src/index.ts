@@ -12,7 +12,7 @@ class SocialuniImPlugin implements SocialuniPlugin {
     onLaunch() {
         console.log('触发了Im')
 
-        if (socialuniTokenModule.token) {
+        /*if (socialuniTokenModule.token) {
             socialuniChatModule.queryMineImUserInfo().then(() => {
                 socialuniChatModule.getChatsAction()
             })
@@ -20,7 +20,7 @@ class SocialuniImPlugin implements SocialuniPlugin {
 
         watch(() => socialuniUserModule.mineUser, () => {
             socialuniChatModule.getChatsAction()
-        })
+        })*/
     }
 
     onMessage(notify: NotifyVO) {

@@ -52,6 +52,7 @@ class SocialuniMsgModule {
     }
 
     queryMessages(initQuery: boolean = false) {
+        console.log('zhixinle')
         // console.trace('chaxun')
         return MessageAPI.queryMessagesAPI(socialuniChatModule.chat.id, this.queryTime).then((res) => {
             const resMessages: MessageVO[] = res.data
@@ -64,6 +65,8 @@ class SocialuniMsgModule {
                 socialuniChatModule.chat.loadMore = LoadMoreType.noMore
             }
             if (resMessages.length) {
+                console.log('zhixinle43434')
+                console.log(initQuery)
                 this.queryTime = resMessages[0].createTime
                 if (initQuery) {
                     socialuniChatModule.chat.messages = resMessages

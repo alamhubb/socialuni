@@ -113,6 +113,7 @@ import SocialPhoneNumQO from "socialuni-admin-api/src/model/base/SocialPhoneNumQ
 import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 import LoginService from "socialuni-user-sdk/src/logic/LoginService";
+import SocialuniLoginService from "socialuni-user-sdk/src/logic/SocialuniLoginService";
 
 
 @toNative
@@ -174,7 +175,7 @@ export default class AdminLoginPage extends Vue {
       return ToastUtil.warning('请仔细阅读用户协议、隐私政策等内容后勾选同意')
     }
     this.bindBtnDisabled = true
-    LoginService.phoneLogin(this.loginUser.phoneNum, this.loginUser.authCode).then(() => {
+    SocialuniLoginService.phoneLogin(this.loginUser.phoneNum, this.loginUser.authCode).then(() => {
       this.$router.push({path: '/'})
     }).finally(() => {
       this.bindBtnDisabled = false
