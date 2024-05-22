@@ -7,12 +7,6 @@
   },
   "pages": [
     {
-      "path": "pages/home/home",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
       "path": "pages/expand/expand",
       "style": {
         "navigationBarTitleText": "扩列"
@@ -148,12 +142,6 @@
         "iconPath": "static/img/favorite-gray-36dp.png",
         "selectedIconPath": "static/img/favorite-blue-36dp.png",
         "text": "扩列"
-      },
-      {
-        "pagePath": "pages/home/home",
-        "iconPath": "static/img/deck-gray-36dp.png",
-        "selectedIconPath": "static/img/deck-blue-36dp.png",
-        "text": "社区"
       },
       {
         "pagePath": "pages/im/chat",

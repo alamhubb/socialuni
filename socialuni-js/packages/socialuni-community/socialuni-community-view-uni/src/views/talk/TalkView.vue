@@ -31,9 +31,6 @@
         </div>
       </q-navbar>
 
-      <!--  #ifdef APP-PLUS -->
-      <!-- <ad class="bg-white mt-10 w100vw" adpid="1890536227"></ad>-->
-      <!--  #endif -->
 
       <tabs-talk class="flex-1" ref="tabsTalk"></tabs-talk>
     </div>

@@ -79,32 +79,6 @@
                              :talk-tab-type="tabQueryUtils[swiperIndex].viewData.type"
                              @delete-talk="deleteTalk"
                   />
-                  <!-- app端广告有问题-->
-                  <!--  #ifdef APP-PLUS -->
-                  <!--<div v-if="showAd&&showAdIndexList.includes(index)" class="mb-5">
-                    <ad class="bg-white" adpid="1890536227"></ad>
-                  </div>-->
-                  <!--  #endif -->
-                  <!--wx平台显示的广告-->
-                  <!--  #ifdef MP-WEIXIN -->
-                  <ad v-if="showAd&&showAdIndexList.includes(index)"
-                      class="bg-white mb-5" unit-id="adunit-65c8911d279d228f" ad-type="video"
-                      ad-theme="white"></ad>
-                  <!--  #endif -->
-
-                  <!--qq平台显示的广告-->
-                  <!--  #ifdef MP-QQ -->
-                  <ad v-if="showAd&&showAdIndexList.includes(index)"
-                      class="bg-white mb-5" unit-id="bcc21923107071ac3f8aa076c7e00229"
-                      type="card"></ad>
-                  <!--  #endif -->
-
-                  <!--头条平台显示的广告-->
-                  <!--  #ifdef MP-TOUTIAO -->
-                  <ad v-if="showAd&&showAdIndexList.includes(index)"
-                      class="bg-white mb-5" type="banner video large"
-                      unit-id="3snract0gqnc3fn16d"></ad>
-                  <!--  #endif -->
                 </div>
 
                 <!-- 下拉刷新组件 -->

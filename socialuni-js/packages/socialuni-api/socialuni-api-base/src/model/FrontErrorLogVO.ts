@@ -15,6 +15,7 @@ export default class FrontErrorLogVO {
         this.uri = uri
         this.detail = detail
         this.params = params
+        this.frontPage = frontPage
         this.errorMsg = errorMsg
         this.platform = socialuniSystemModule.platform
         if (this.platform === PlatformType.mp) {

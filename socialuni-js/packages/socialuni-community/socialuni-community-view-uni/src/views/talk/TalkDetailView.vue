@@ -20,25 +20,6 @@
                  @deleteTalk="deleteTalk"
       />
       <talk-operate @deleteTalk="deleteTalk"></talk-operate>
-      <!--wx平台显示的广告-->
-      <!--  #ifdef MP-WEIXIN -->
-      <ad class="bg-white mt-10px w100vw" unit-id="adunit-65c8911d279d228f" ad-type="video"
-          ad-theme="white"></ad>
-      <!--  #endif -->
-      <!--qq平台显示的广告-->
-      <!--  #ifdef MP-QQ -->
-      <ad class="bg-white mt-10px w100vw" unit-id="bcc21923107071ac3f8aa076c7e00229" type="card"></ad>
-      <!--  #endif -->
-
-      <!--头条平台显示的广告-->
-      <!--  #ifdef MP-TOUTIAO -->
-      <ad class="bg-white mt-10px w100vw" type="banner video large"
-          unit-id="3snract0gqnc3fn16d"></ad>
-      <!--  #endif -->
-
-      <!--  #ifdef APP-PLUS -->
-      <ad class="bg-white mt-10px w100vw" adpid="1890536227"></ad>
-      <!--  #endif -->
     </div>
   </div>
 </template>
