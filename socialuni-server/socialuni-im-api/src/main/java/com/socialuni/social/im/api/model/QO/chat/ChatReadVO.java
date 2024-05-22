@@ -14,5 +14,5 @@ import java.util.List;
 public class ChatReadVO {
     @NotNull
     private String chatId;
-    private List<Integer> messageIds;
+    private List<String> messageIds;
 }

@@ -79,6 +79,7 @@ public class SocialChatROFactory {
         String uuid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(chatDO.getUnionId());
 
         chatRO.setType(chatDO.getType());
+
 //        if (ChatType.systemChats.contains(chatRO.getType())) {
         chatRO.setId(uuid);
         chatRO.setNickname(chatDO.getChatName());
@@ -279,7 +280,7 @@ public class SocialChatROFactory {
     }
 
 
-    public static Integer getChatId(String chatId) {
+    public static SocialuniChatUserDO getSingleChatUser(String chatId) {
         SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidAllowNull(chatId);
 
         //创建 chatUser 的逻辑，点击进入页面，会话页加一条
@@ -295,7 +296,7 @@ public class SocialChatROFactory {
             if (socialuniChatUserDO == null) {
                 throw new SocialParamsException("不存在会话信息10012");
             }
-            return socialuniChatUserDO.getChatId();
+            return socialuniChatUserDO;
             //则为chatUserId
         } else {
             //旧版本
@@ -306,12 +307,21 @@ public class SocialChatROFactory {
                 Integer beUserId = socialuniUnionIdModler.getId();
                 SocialuniChatUserDO chatUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(mineUserId, beUserId, SocialuniChatUserDO.class);
 
-                return chatUserDO.getChatId();
+                return chatUserDO;
             } else if (contentType.equals(SocialuniContentType.chat)) {
-                return socialuniUnionIdModler.getId();
+                return null;
             }
             throw new SocialParamsException("错误的会话标识10013");
         }
+    }
+
+    public static Integer getChatId(String chatId) {
+        SocialuniChatUserDO socialuniChatUserDO = getSingleChatUser(chatId);
+        if (socialuniChatUserDO == null) {
+            SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidNotNull(chatId);
+            return socialuniUnionIdModler.getId();
+        }
+        return socialuniChatUserDO.getChatId();
     }
 
 }

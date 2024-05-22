@@ -35,6 +35,7 @@ import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.util.*;
 
 /**
@@ -61,35 +62,35 @@ public class ChatService {
     //那如果后来，他又开启了非好友禁止发送消息呢。所以还是应该发送消息的时候校验。
 
 
+    @Transactional
     public ResultRO<Void> readChatMessages(ChatReadVO chatVO) {
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
         String chatUuid = chatVO.getChatId();
-        SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidNotNull(chatUuid);
 
-        //私聊
-        if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.user)) {
-            Integer beUserId = socialuniUnionIdModler.getId();
+        SocialuniChatUserDO chatUserDO = SocialuniChatUserDOFactory.getSingleChatUser(chatUuid);
 
-            //如果用户存在查看会话
-            SocialuniChatUserDO chatUserDO = SocialuniChatUserDOFactory.getOrCreateChatUsersBySingleSendMsg(mineUserId, beUserId).get(0);
-//全部已读
-            chatUserDO.setUnreadNum(0);
-            //进入chat页，列表中进入，肯定是展示的，所以不会走这里
-            chatUserDO.checkFrontShowAndSetTrue();
-            //目前不根据点击时间更新，只根据消息时间更新
-//                chatUserDb.setUpdateTime(new Date());
-            chatUserRepository.save(chatUserDO);
-            //toDO 这里需要细想怎么个逻辑
-            //需要将chatUser的未读数量更新一下
+        if (chatUserDO == null) {
+            throw new SocialParamsException("不该触发的逻辑20003");
+        }
+
+        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
+
+        if (!mineUser.getUserId().equals(chatUserDO.getUserId())) {
+            if (!mineUser.getType().equals(UserType.system)) {
+                throw new SocialParamsException("不该触发的逻辑20004");
+            }
+        }
+
+        //toDO 这里需要细想怎么个逻辑
+        //需要将chatUser的未读数量更新一下
 //            messageReceiveDORepository.updateMessageReceiveRead(chatUserDb, readVO.getMessageIds());
-            List<SocialuniMessageReceiveDO> messageReceiveDOS = messageReceiveRepository.findByChatUserIdAndStatusAndIsReadFalse(chatUserDO.getId(), MessageStatus.enable);
+        List<SocialuniMessageReceiveDO> messageReceiveDOS = messageReceiveRepository.findByChatUserIdAndStatusAndIsReadFalse(chatUserDO.getId(), MessageStatus.enable);
 //                List<MessageReceiveDO> messageReceiveDOS = new ArrayList<>();
-            //把具体的每一条改为已读
-            if (messageReceiveDOS.size() > 0) {
-                Date curDate = new Date();
-                for (SocialuniMessageReceiveDO messageReceiveDO : messageReceiveDOS) {
-                    messageReceiveDO.setUpdateTime(curDate);
-                    messageReceiveDO.setIsRead(true);
+        //把具体的每一条改为已读
+        if (messageReceiveDOS.size() > 0) {
+            Date curDate = new Date();
+            for (SocialuniMessageReceiveDO messageReceiveDO : messageReceiveDOS) {
+                messageReceiveDO.setUpdateTime(curDate);
+                messageReceiveDO.setIsRead(true);
                         /*
                         toDO 暂时不需要的逻辑，这个逻辑是把msg改为已读，并且已读次数加1
                         MessageDO messageDO = messageReceiveDO.getMessage();
@@ -97,10 +98,17 @@ public class ChatService {
                         if (ChatType.groupChats.contains(chat.getType())) {
                             messageDO.setReadNum(messageDO.getReadNum() + 1);
                         }*/
-                }
-                messageReceiveRepository.saveAll(messageReceiveDOS);
             }
+            messageReceiveRepository.saveAll(messageReceiveDOS);
         }
+
+
+        chatUserDO.setUnreadNum(0);
+        //进入chat页，列表中进入，肯定是展示的，所以不会走这里
+        chatUserDO.checkFrontShowAndSetTrue();
+        //目前不根据点击时间更新，只根据消息时间更新
+//                chatUserDb.setUpdateTime(new Date());
+        chatUserRepository.save(chatUserDO);
         return ResultRO.success();
     }
 
