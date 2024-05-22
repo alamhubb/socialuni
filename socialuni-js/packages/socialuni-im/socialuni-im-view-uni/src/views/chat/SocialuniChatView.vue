@@ -53,7 +53,7 @@
         </div>-->
     <div class="cu-list menu-avatar pb-50px">
       <div v-for="chat in viewService.chatList" :key="chat.id" class="cu-item" @click="viewService.toMessagePage(chat)"
-            @longpress="viewService.showBottomMenuClick(chat.id)">
+           @longpress="viewService.showBottomMenuClick(chat.id)">
         <img class="cu-avatar radius lg" :src="chat.avatar"/>
         <div class="content h45 col-between">
           <div>
@@ -98,12 +98,10 @@
             </div>
           </div>
         </div>
-        <div class="action h45px col-between">
-          <div class="text-grey text-xs">{{ viewService.formatTime(chat.updateTime) }}</div>
-          <div>
-            <div v-show="chat.unreadNum>0" class="cu-tag round bg-red sm">
-              {{ chat.unreadNum }}
-            </div>
+        <div class="action h45 col-between-center">
+          <div class="color-content font-12">{{ viewService.formatTime(chat.updateTime) }}</div>
+          <div v-show="chat.unreadNum>0" class="bd-round bg-red4 size16 row-all-center color-white font-12">
+            {{ chat.unreadNum }}
           </div>
         </div>
       </div>

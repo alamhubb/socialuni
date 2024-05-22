@@ -4,8 +4,9 @@ import {socialuniChatModule} from "./store/SocialuniChatModule";
 import {socialuniTokenModule} from "socialuni-user-sdk/src/store/SocialuniTokenModule";
 import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
 import {SocialuniOption} from "socialuni/src/interface/socialuniOption";
-import {App} from "vue";
+import {App, watch} from "vue";
 import {SocialuniPlugin} from "socialuni/src/interface/SocialuniPlugin";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 
 class SocialuniImPlugin implements SocialuniPlugin {
     onLaunch() {
@@ -16,6 +17,10 @@ class SocialuniImPlugin implements SocialuniPlugin {
                 socialuniChatModule.getChatsAction()
             })
         }
+
+        watch(() => socialuniUserModule.mineUser, () => {
+            socialuniChatModule.getChatsAction()
+        })
     }
 
     onMessage(notify: NotifyVO) {

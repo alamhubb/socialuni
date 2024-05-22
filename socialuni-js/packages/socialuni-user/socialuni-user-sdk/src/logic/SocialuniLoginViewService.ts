@@ -67,7 +67,7 @@ export default class SocialuniLoginViewService extends SocialuniLoginFormService
                 console.log(1111)
                 console.log(this.instance)
                 console.log(2222)
-                this.instance.emit('loginSuccess', data)
+                this.instance.$emit('loginSuccess', data)
             }).finally(() => {
                 this.bindBtnDisabled = false
             })
@@ -77,7 +77,7 @@ export default class SocialuniLoginViewService extends SocialuniLoginFormService
                 console.log(1111)
                 console.log(this.instance)
                 console.log(2222)
-                this.instance.emit('loginSuccess', data)
+                this.instance.$emit('loginSuccess', data)
             }).finally(() => {
                 this.bindBtnDisabled = false
             })
