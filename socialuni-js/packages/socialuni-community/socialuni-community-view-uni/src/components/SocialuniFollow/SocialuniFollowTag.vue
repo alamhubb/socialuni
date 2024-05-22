@@ -19,10 +19,12 @@ import FollowAPI from "socialuni-community-api/src/api/FollowAPI";
 import {inject} from "vue";
 import SocialuniUserProvideKeys from "socialuni-user-sdk/src/constant/SocialuniUserProvideKeys";
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
+import QIcon from "qing-ui/src/components/QIcon.vue";
 
 @toNative
 @Component({
     components: {
+      QIcon,
         QButton
     }
 })

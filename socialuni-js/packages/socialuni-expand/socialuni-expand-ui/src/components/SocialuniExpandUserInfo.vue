@@ -53,9 +53,14 @@
               <q-icon icon="mdi-chat-outline" size="14"></q-icon>
               私信
             </q-button>
-            <q-button v-else text @click="addLikeUser(user)">
+            <q-button v-else @click="addLikeUser(user)">
               <q-icon icon="mdi-heart-outline" size="22"></q-icon>
+              打招呼
             </q-button>
+<!--            <q-button v-else text @click="addLikeUser(user)">
+              <q-icon icon="mdi-heart-outline" size="22"></q-icon>
+              打招呼
+            </q-button>-->
           </div>
 
           <!--                        <div v-else class="use-click row-col-center">-->
