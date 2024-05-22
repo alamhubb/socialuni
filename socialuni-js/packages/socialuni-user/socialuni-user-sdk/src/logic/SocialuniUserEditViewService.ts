@@ -1,5 +1,4 @@
 import {socialuniUserModule} from "../store/SocialuniUserModule";
-import SocialuniMineUserRO from "socialuni-api-base/src/model/user/SocialuniMineUserRO";
 import EnumStrVO from "socialuni-constant/constant/EnumStrVO";
 import GenderType from "socialuni-constant/constant/GenderType";
 import DateUtil from "qing-util/src/util/DateUtil";
@@ -17,6 +16,7 @@ import SocialuniViewService from "socialuni/src/interface/SocialuniViewService";
 import {ComponentInternalInstance} from "@vue/runtime-core";
 import {reactive, watch} from "vue";
 import UserPageUtil from "../util/UserPageUtil";
+import SocialuniUserRO from "socialuni-api-base/src/model/user/SocialuniUserRO";
 
 
 class SocialuniUserEditViewService extends SocialuniViewService {
@@ -25,7 +25,7 @@ class SocialuniUserEditViewService extends SocialuniViewService {
         return socialuniUserModule.mineUser
     }
 
-    editUser: SocialuniMineUserRO = null
+    editUser: SocialuniUserRO = null
     endDate = ''
     btnDisabled = false
     genders: EnumStrVO [] = GenderType.userEditEnums
@@ -44,6 +44,8 @@ class SocialuniUserEditViewService extends SocialuniViewService {
     initData() {
         if (this.mineUser) {
             this.editUser = ObjectUtil.deepClone(socialuniUserModule.mineUser)
+            console.log('shezhile yonghu')
+            console.log(this.editUser)
             // this.contactAccount = this.user.contactAccount || ''
             // this.wxAccount = this.user.wxAccount || ''
             // this.qqAccount = this.user.qqAccount || ''
@@ -128,11 +130,17 @@ class SocialuniUserEditViewService extends SocialuniViewService {
     }
 
     dateChange({detail}) {
-        this.editUser.birthday = detail.value
+        socialuniUserEditViewService.editUser.birthday = detail.value
     }
 
     genderChange({detail}) {
-        this.editUser.gender = detail.value
+        console.log(detail)
+        console.log(detail.value)
+        console.log(this)
+        console.log(socialuniUserEditViewService.editUser)
+        console.log(socialuniUserEditViewService.editUser.gender)
+        socialuniUserEditViewService.editUser.gender = detail.value
+        console.log(socialuniUserEditViewService.editUser.gender)
     }
 
     goBack() {

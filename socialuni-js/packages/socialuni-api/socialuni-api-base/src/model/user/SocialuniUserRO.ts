@@ -7,6 +7,7 @@ export default class SocialuniUserRO extends SocialUserContentRO{
     avatar?: string = null
     age?: number = null
     gender?: string = null
+    birthday?: string = null
     city: string = null
     type: string = null
 
@@ -17,6 +18,7 @@ export default class SocialuniUserRO extends SocialUserContentRO{
             this.nickname = user.nickname;
             this.avatar = user.avatar;
             this.gender = user.gender;
+            this.birthday = user.birthday;
             this.age = user.age;
             this.city = user.city;
             this.isMine = user.isMine

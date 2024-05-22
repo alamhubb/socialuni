@@ -38,7 +38,7 @@
                     <div class="title">
                         所在地
                     </div>
-                    <uni-easyinput placeholder="所在地333" maxlength="10" v-model.trim="socialuniUserEditViewService.editUser.city"></uni-easyinput>
+                    <uni-easyinput placeholder="所在地" maxlength="10" v-model.trim="socialuniUserEditViewService.editUser.city"></uni-easyinput>
                 </div>
 
                 <!--        todo qq不支持联系方式，改为判断qq一件加好友-->

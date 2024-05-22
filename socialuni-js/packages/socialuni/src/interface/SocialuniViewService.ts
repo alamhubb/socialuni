@@ -4,7 +4,7 @@ import UUIDUtil from "qing-util/src/util/UUIDUtil";
 import {Emit, Component, Vue, Watch, toNative} from 'vue-facing-decorator'
 import {socialuniPluginsModule} from "../store/SocialuniPluginsModule";
 
-export default abstract class SocialuniViewService<T> implements SocialuniViewServiceInterface {
+export default abstract class SocialuniViewService<T = {}> implements SocialuniViewServiceInterface {
     //存储实例，因为初始时还没有$refs
     uuid: ComponentInternalInstance = UUIDUtil.getUUID()
     instance: Vue = null
