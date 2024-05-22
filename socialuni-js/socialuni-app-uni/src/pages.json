@@ -130,30 +130,27 @@
   ],
   "tabBar": {
     "color": "#9E9E9E",
-    "selectedColor": "#2196F3",
+    "selectedColor": "#f8ce3a",
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
-    "fontSize": "14px",
-    "iconWidth": "30px",
+    "fontSize": "12px",
+    "iconWidth": "24px",
     "height": "52px",
     "list": [
       {
         "pagePath": "pages/expand/expand",
-        "iconPath": "static/img/favorite-gray-36dp.png",
-        "selectedIconPath": "static/img/favorite-blue-36dp.png",
-        "text": "扩列"
+        "iconPath": "static/img/home.png",
+        "selectedIconPath": "static/img/selectHome.png",
       },
       {
         "pagePath": "pages/im/chat",
-        "iconPath": "static/img/question_answer-gray-36dp.png",
-        "selectedIconPath": "static/img/question_answer-blue-36dp.png",
-        "text": "消息"
+        "iconPath": "static/img/message.png",
+        "selectedIconPath": "static/img/selectMessage.png",
       },
       {
         "pagePath": "pages/user/mine",
-        "iconPath": "static/img/account_box-gray-36dp.png",
-        "selectedIconPath": "static/img/account_box-blue-36dp.png",
-        "text": "我的"
+        "iconPath": "static/img/mine.png",
+        "selectedIconPath": "static/img/selectMine.png",
       }
     ]
   },
