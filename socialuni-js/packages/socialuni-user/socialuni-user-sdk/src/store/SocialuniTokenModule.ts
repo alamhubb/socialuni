@@ -1,5 +1,5 @@
-import {reactive, UnwrapNestedRefs} from "vue";
 import SocialuniTokenUtil from "../util/SocialuniTokenUtil";
+import {reactive, UnwrapNestedRefs} from "vue";
 
 class SocialuniTokenModule {
     private userToken: string = SocialuniTokenUtil.get() || null

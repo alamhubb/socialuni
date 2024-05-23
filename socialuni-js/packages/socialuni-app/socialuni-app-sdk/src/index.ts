@@ -8,16 +8,13 @@ import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule
 import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import {InternalAxiosRequestConfig} from "axios/index";
-import {socialAppModule} from "./store/SocialAppModule";
-import SocialuniAppService from "./service/SocialuniAppService";
-import {socialuniTokenModule} from "socialuni-user-sdk/src/store/SocialuniTokenModule";
-import UUIDUtil from "qing-util/src/util/UUIDUtil";
 
 class SocialuniAppPlugin implements SocialuniPlugin {
     onLaunch() {
-        // WebsocketUtil.websocketConnect(false)
-        this.initApp()
-
+        socialuniConfigModule.getAppConfigAction()
+        // socialAppModule.getHomeSwipersAction()
+        // socialuniConfigModule.getReportTypesAction()
+        WebsocketUtil.createWebsocket()
 
         /*const websocketUrl = SocialuniAPIConfig.socialuniWebsocketUrl + '/webrtc?token=' + token
 
@@ -30,19 +27,6 @@ WebsocketWebRtcUtil.easyWebRTC.ontrack((event) => {
 })*/
 
 
-    }
-
-    async initApp() {
-        try {
-            socialuniConfigModule.getAppConfigAction()
-            // socialAppModule.getHomeSwipersAction()
-            // socialuniConfigModule.getReportTypesAction()
-            SocialuniAppService.getAppLunchData()
-
-            WebsocketUtil.createWebsocket()
-        } catch (e) {
-
-        }
     }
 
     onRequestInterceptors(config: InternalAxiosRequestConfig) {

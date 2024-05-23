@@ -67,7 +67,6 @@ class SocialuniUserModule {
         if (loginRO) {
             this.setUser(loginRO.user)
             socialuniTokenModule.setToken(loginRO.token)
-            socialuniAppUserModule.getMineUserMoreInfoAction()
             CommonEventUtil.emit(SocialuniUserEventConst.loginSucces)
         } else {
             socialuniTokenModule.setToken(null)
