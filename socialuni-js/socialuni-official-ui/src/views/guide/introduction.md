@@ -35,25 +35,25 @@ npm install
  ```
 npm run serve
 ```
-![img_3.png](img_3.png)
+![img_3.png](./img_3.png)
 4. 使用浏览器打开 [http://localhost:8024/](http://localhost:8024/)，出现此图，则代表项目启动成功
 
-![img_4.png](img_4.png)
+![img_4.png](./img_4.png)
 
 ### 后端模块
 
 1. 使用git clone https://gitee.com/socialuni/socialuni.git
 2. 打开socialuni项目，使用maven，install 安装socialuni-parent目录，安装后出现下图中内容则代表安装成功
 
-![img_2.png](img_2.png)
+![img_2.png](./img_2.png)
 
 3. 安装成功后，启动socialuni-web项目，控制台出现以下内容则项目启动成功
 
-![img.png](img.png)
+![img.png](./img.png)
 
 4. 在浏览器中输入 [https://localpc.socialuni.cn:8091/socialuni/talk/queryTalks](https://localpc.socialuni.cn:8091/socialuni/talk/queryTalks)
 
-![img_1.png](img_1.png)
+![img_1.png](./img_1.png)
 
 看到以下内容，则代表成功从中心获取到了动态数据
 

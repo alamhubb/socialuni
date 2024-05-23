@@ -40,10 +40,10 @@ import {
   Star,
   StarFilled
 } from '@element-plus/icons-vue'
-import UserStore from "@/store/UserStore.js";
-import AlertUtil from "@/utils/AlertUtil.js";
-import TokenUtil from "@/utils/TokenUtil.js";
-import ToastUtil from "@/utils/ToastUtil.js";
+import UserStore from "@/store/UserStore";
+import AlertUtil from "@/utils/AlertUtil";
+import TokenUtil from "@/utils/TokenUtil";
+import ToastUtil from "@/utils/ToastUtil";
 import {computed} from "vue";
 import {qingchiRouters} from "@/router/index.ts";
 

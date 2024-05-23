@@ -5,6 +5,7 @@ import ToastUtil from "@/utils/ToastUtil";
 import MsgUtil from "@/utils/MsgUtil";
 import AppConst from "@/constant/AppConst";
 import UserStore from "@/store/UserStore";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
 // create an axios instance
 
 const request = axios.create({

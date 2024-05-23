@@ -79,12 +79,12 @@ import {
   Star,
   StarFilled
 } from '@element-plus/icons-vue'
-import {constantRouters} from "@/router/index.js";
-import UserStore from "@/store/UserStore.js";
-import AlertUtil from "@/utils/AlertUtil.js";
-import TokenUtil from "@/utils/TokenUtil.js";
-import ToastUtil from "@/utils/ToastUtil.js";
-import MediaUtil from "@/styles/jsStyle/MediaUtil.js";
+import {constantRouters} from "@/router/index";
+import UserStore from "@/store/UserStore";
+import AlertUtil from "@/utils/AlertUtil";
+import TokenUtil from "@/utils/TokenUtil";
+import ToastUtil from "@/utils/ToastUtil";
+import MediaUtil from "@/styles/jsStyle/MediaUtil";
 import {computed} from "vue";
 
 const user = computed(() => {

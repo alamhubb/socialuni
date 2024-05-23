@@ -1,4 +1,3 @@
-import UserVO from "@/model/base/UserVO";
 import User from "@/model/user/User";
 import {ref} from "vue";
 import TokenUtil from "@/utils/TokenUtil";
