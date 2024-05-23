@@ -10,11 +10,26 @@ import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import {InternalAxiosRequestConfig} from "axios/index";
 import {socialAppModule} from "./store/SocialAppModule";
 import SocialuniAppService from "./service/SocialuniAppService";
+import {socialuniTokenModule} from "socialuni-user-sdk/src/store/SocialuniTokenModule";
+import UUIDUtil from "qing-util/src/util/UUIDUtil";
 
 class SocialuniAppPlugin implements SocialuniPlugin {
     onLaunch() {
         // WebsocketUtil.websocketConnect(false)
         this.initApp()
+
+
+        /*const websocketUrl = SocialuniAPIConfig.socialuniWebsocketUrl + '/webrtc?token=' + token
+
+WebsocketWebRtcUtil.easyWebRTC = FastWebRTC.createClient({
+    wsUrl: websocketUrl
+})
+// 设置远程视频流到video元素
+WebsocketWebRtcUtil.easyWebRTC.ontrack((event) => {
+    WebsocketWebRtcUtil.remoteVideo.srcObject = event.streams[0];
+})*/
+
+
     }
 
     async initApp() {
@@ -23,6 +38,8 @@ class SocialuniAppPlugin implements SocialuniPlugin {
             // socialAppModule.getHomeSwipersAction()
             // socialuniConfigModule.getReportTypesAction()
             SocialuniAppService.getAppLunchData()
+
+            WebsocketUtil.createWebsocket()
         } catch (e) {
 
         }

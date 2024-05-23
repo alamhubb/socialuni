@@ -12,6 +12,7 @@ export default class SocialuniAppService {
         if (!token) {
             token = UUIDUtil.getUUID()
         }
+        WebsocketUtil.createWebsocket()
         /*const websocketUrl = SocialuniAPIConfig.socialuniWebsocketUrl + '/webrtc?token=' + token
 
         WebsocketWebRtcUtil.easyWebRTC = FastWebRTC.createClient({
@@ -23,7 +24,7 @@ export default class SocialuniAppService {
         })*/
 
 
-        WebsocketUtil.createWebsocket()
+
 
 
         // TODO: Implement WebSocket or other technology to receive messages from server

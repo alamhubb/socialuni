@@ -63,7 +63,7 @@ class SocialuniUserModule {
         return !!socialuniTokenModule.token
     }
 
-    setUserAndToken(loginRO: SocialLoginRO<SocialuniMineUserRO>) {
+    setUserAndToken(loginRO: SocialLoginRO<SocialuniUserRO>) {
         if (loginRO) {
             this.setUser(loginRO.user)
             socialuniTokenModule.setToken(loginRO.token)

@@ -8,6 +8,11 @@ export default class WebsocketUtil {
     private static fastWebsocket: FastWebsocket = null
 
     static createWebsocket() {
+        if (this.fastWebsocket) {
+            this.fastWebsocket.websocketClose()
+            this.fastWebsocket = null
+        }
+
         const header = {} as any
         let token: string
         for (const socialuniPlugin of socialuniPluginsModule.plugins) {

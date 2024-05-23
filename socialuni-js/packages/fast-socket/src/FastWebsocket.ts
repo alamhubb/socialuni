@@ -119,7 +119,7 @@ export default class FastWebsocket {
 
     }
 
-    private websocketClose() {
+    websocketClose() {
         if (this.ws && this.ws.readyState === this.ws.OPEN) {
             this.ws?.close(null);
         }
