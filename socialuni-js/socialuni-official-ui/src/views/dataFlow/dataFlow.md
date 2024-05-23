@@ -8,4 +8,4 @@
 
 ## 数据流转图
 
-![数据流转图](socialDataFlow.jpg)
+![数据流转图](./socialDataFlow.jpg)
