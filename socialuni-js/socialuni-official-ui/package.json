@@ -55,6 +55,7 @@
     "markdown-it-prism": "^2.3.0",
     "markdown-it-shiki": "^0.5.1",
     "vite-plugin-md": "^0.20.4",
+    "unocss": "^0.45.13",
     "@tsconfig/node18": "^2.0.1",
     "@types/node": "^18.16.8",
     "@vitejs/plugin-vue": "^4.5.0",
