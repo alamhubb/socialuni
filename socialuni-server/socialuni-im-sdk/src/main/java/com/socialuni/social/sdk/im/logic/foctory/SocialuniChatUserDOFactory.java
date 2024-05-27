@@ -57,12 +57,13 @@ public class SocialuniChatUserDOFactory {
     }
 
     public static Integer getChatId(String chatId) {
-        SocialuniChatUserDO socialuniChatUserDO = getSingleChatUser(chatId);
-        if (socialuniChatUserDO == null) {
-            SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidNotNull(chatId);
-            return socialuniUnionIdModler.getId();
-        }
-        return socialuniChatUserDO.getChatId();
+//        SocialuniChatUserDO socialuniChatUserDO = getSingleChatUser(chatId);
+//        if (socialuniChatUserDO == null) {
+//            SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidNotNull(chatId);
+//            return socialuniUnionIdModler.getId();
+//        }
+//        return socialuniChatUserDO.getChatId();
+        return null;
     }
 
     public static SocialuniChatUserDO getChatUserDO(Integer userId, Integer beUserId) {

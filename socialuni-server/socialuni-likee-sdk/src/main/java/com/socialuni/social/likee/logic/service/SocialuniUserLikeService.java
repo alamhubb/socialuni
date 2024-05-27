@@ -78,15 +78,16 @@ public class SocialuniUserLikeService {
         //私聊
         String chatUuid = chatRO.getId();
 
-        Integer chatId = SocialChatROFactory.getChatId(chatUuid);
+        SocialuniChatUserDO socialuniChatUserDO = SocialChatROFactory.getSingleChatUser(chatUuid);
 
-
-        if (chatId == null) {
+        //群聊
+        if (socialuniChatUserDO == null) {
+            socialuniLikeChatRO.setNeedPayOpen(false);
             return socialuniLikeChatRO;
         }
 
         //查询是否创建了
-        SocialuniUserLikeChatDO socialuniUserLikeChatDO = socialuniUserLikeChatManage.get(chatId);
+        SocialuniUserLikeChatDO socialuniUserLikeChatDO = socialuniUserLikeChatManage.get(socialuniChatUserDO.getChatId());
 
         if (socialuniUserLikeChatDO != null) {
             socialuniLikeChatRO.setNeedPayOpen(false);
@@ -119,13 +120,13 @@ public class SocialuniUserLikeService {
 
         String receiveIdUid = msgAddVO.getReceiveId();
 
-        Integer chatId = SocialChatROFactory.getChatId(receiveIdUid);
-        if (chatId == null) {
+        SocialuniChatUserDO socialuniChatUserDO = SocialChatROFactory.getSingleChatUser(receiveIdUid);
+        if (socialuniChatUserDO == null) {
             return resultRO;
         }
         Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
         //查询是否创建了
-        SocialuniUserLikeChatDO socialuniUserLikeChatDO = socialuniUserLikeChatManage.getOrCreate(chatId);
+        SocialuniUserLikeChatDO socialuniUserLikeChatDO = socialuniUserLikeChatManage.getOrCreate(socialuniChatUserDO.getChatId());
 
         if (mineUserId.equals(socialuniUserLikeChatDO.getUserId())) {
             socialuniCreateCoinOrderEntity.createCoinOrderByOrderType(mineUserId, -SocialuniLikeAllConfig.getLikeAllConfigBO().getSendLikeMsgNeedPayCoinNum(), SocialuniCoinOrderType.consume, SocialuniOrderDetailType.msg, msgIdd);
