@@ -31,6 +31,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import javax.servlet.http.HttpServletResponse;
 import java.nio.ByteBuffer;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestControllerAdvice
@@ -76,6 +77,16 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
         return !returnType.getParameterType().isAssignableFrom(ResponseEntity.class);
     }
 
+
+    @ExceptionHandler(value = SocialException.class)
+    public ResultRO<Void> socialExceptionHandler(SocialException exception) {
+        this.saveOperateLogDO(exception.getErrorMsg(), exception.getErrorCode(), exception.getErrorType(), exception.getInnerMsg(), null);
+        if (!Objects.equals(ErrorCode.IP_LIMIT_ERROR, exception.getErrorCode())) {
+            exception.printStackTrace();
+        }
+        ResultRO<Void> resultRO = new ResultRO<>(exception.getErrorCode(), exception.getErrorMsg());
+        return resultRO;
+    }
 
     /**
      * 全局异常捕捉处理
@@ -137,16 +148,8 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
         return resultRO;
     }
 
-    @ExceptionHandler(value = SocialException.class)
-    public ResultRO<Void> socialExceptionHandler(SocialException exception) {
-        this.saveOperateLogDO(exception.getErrorMsg(), exception.getErrorCode(), exception.getErrorType(), exception.getInnerMsg(), null);
-        exception.printStackTrace();
-        ResultRO<Void> resultRO = new ResultRO<>(exception.getErrorCode(), exception.getErrorMsg());
-        return resultRO;
-    }
-
     private void saveOperateLogDO(String errorMsg, Integer errorCode, String errorType, String innerMsg, String innerMsgDetail) {
-        WebControllerExceptionEvent webControllerExceptionEvent =new WebControllerExceptionEvent();
+        WebControllerExceptionEvent webControllerExceptionEvent = new WebControllerExceptionEvent();
         webControllerExceptionEvent.setErrorMsg(errorMsg);
         webControllerExceptionEvent.setErrorCode(errorCode);
         webControllerExceptionEvent.setErrorType(errorType);
@@ -154,7 +157,7 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
         webControllerExceptionEvent.setInnerMsgDetail(innerMsgDetail);
         // 发布事件解耦。
         this.applicationEventPublisher.publishEvent(webControllerExceptionEvent);
-   }
+    }
 
     @ExceptionHandler(NoHandlerFoundException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
