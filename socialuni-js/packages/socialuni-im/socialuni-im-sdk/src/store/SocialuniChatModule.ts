@@ -64,35 +64,15 @@ class SocialuniChatModule {
     async init(params: MessageViewParams) {
         if (params && params.chatId) {
             const chatId = params.chatId
-            let chat = socialuniChatModule.chats.find(item => item.id === chatId)
-            if (!chat) {
-                chat = new SocialuniChatRO()
-                // chat.receiveId = params.chatId
-                chat.id = chatId
-                chat.loadMore = LoadMoreType.more
-                this.chats.unshift(chat)
-
-                const res = await SocialuniUserLikeAPI.queryChatAPI(new ChatQueryQO(chatId))
-                this.pushMsgReplaceChatByChat(res.data)
-            }
-            this.setChatId(chatId)
-            this.readChat(this.messages)
-            socialuniChatModule.scrollToMessagePageBottom()
+            await this.setChatIdAndQueryMsg(chatId)
             CommonEventUtil.emit(SocialuniImEventKey.socialuniImPageInit, params)
         }
-    }
-
-    async getChatsAction() {
-        const res = await SocialuniUserLikeAPI.queryChatListAPI()
-        this.chats = res.data
-        this.computedChatsUnreadNumTotalAction()
     }
 
     async setChatIdAndQueryMsg(chatId: string) {
         let chat = socialuniChatModule.chats.find(item => item.id === chatId)
         if (!chat) {
             chat = new SocialuniChatRO()
-            // chat.receiveId = params.chatId
             chat.id = chatId
             chat.loadMore = LoadMoreType.more
             this.chats.unshift(chat)
@@ -101,7 +81,15 @@ class SocialuniChatModule {
             this.pushMsgReplaceChatByChat(res.data)
         }
         this.setChatId(chatId)
+        this.readChat(this.messages)
         socialuniChatModule.scrollToMessagePageBottom()
+    }
+
+
+    async getChatsAction() {
+        const res = await SocialuniUserLikeAPI.queryChatListAPI()
+        this.chats = res.data
+        this.computedChatsUnreadNumTotalAction()
     }
 
     readChat(messageROs: MessageVO[]) {
