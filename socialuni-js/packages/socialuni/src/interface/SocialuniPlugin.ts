@@ -8,6 +8,8 @@ export interface SocialuniPlugin {
     //应用启动
     onLaunch?();
 
+    onShow?();
+
     //收到websocket消息
     onMessage?(notify: NotifyVO)
 

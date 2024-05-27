@@ -86,7 +86,7 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
             socialuniChatModule.scrollTop = 0
         })
         console.log('chufale onload')
-        socialuniMsgModule.init(params)
+        socialuniChatModule.init(params)
     }
 
     openMoreMenu() {

@@ -22,6 +22,10 @@ class SocialuniImPlugin implements SocialuniPlugin {
         })*/
     }
 
+    onShow() {
+        socialuniChatModule.computedChatsUnreadNumTotalAction()
+    }
+
     onMessage(notify: NotifyVO) {
         console.log('接受了消息')
         if (notify.type === NotifyType.message) {

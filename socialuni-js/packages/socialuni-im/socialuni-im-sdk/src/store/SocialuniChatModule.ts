@@ -18,10 +18,16 @@ import RouterUtil from "qingjs-h5/src/util/RouterUtil";
 import ImPagePath from "../constant/ImPagePath";
 import SocialuniUserLikeAPI from "socialuni-expand-api/src/api/SocialuniUserLikeAPI";
 import ChatType from "socialuni-constant/constant/ChatType";
+import MessageViewParams from "../model/MessageViewParams";
+import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
+import SocialuniImEventKey from "socialuni-im-api/src/constant/SocialuniMusicEventConst";
 
 class SocialuniChatModule {
     readonly chatPageIndex = 1
 
+
+    queryTime: Date = null
+    lazyLoadNum = 30
 
     private _chatId = ''
     get chatId(): string {
@@ -55,31 +61,34 @@ class SocialuniChatModule {
         return []
     }
 
-    setChats(chats: SocialuniChatRO[]) {
-        /*console.log(3333)
-        console.log(this.chats.length)
-        if (this.chats.length) {
-            for (const chat1 of chats) {
-                this.pushMsgReplaceChatByChat(chat1)
+    async init(params: MessageViewParams) {
+        if (params && params.chatId) {
+            const chatId = params.chatId
+            let chat = socialuniChatModule.chats.find(item => item.id === chatId)
+            if (!chat) {
+                chat = new SocialuniChatRO()
+                // chat.receiveId = params.chatId
+                chat.id = chatId
+                chat.loadMore = LoadMoreType.more
+                this.chats.unshift(chat)
+
+                const res = await SocialuniUserLikeAPI.queryChatAPI(new ChatQueryQO(chatId))
+                this.pushMsgReplaceChatByChat(res.data)
             }
-        } else {
-            this.chats = chats
-        }*/
-        this.chats = chats
-        // if (this.chats.length && !this.chatId) {
-        //     //这逻辑有问题，为什么收到了内容就要跳转呢
-        //     socialuniChatModule.setChatIdToMessagePage(this.chats[0].id)
-        //     // this.setChatId(this.chats[0].id)
-        // }
-        this.computedChatsUnreadNumTotalAction()
+            this.setChatId(chatId)
+            this.readChat(this.messages)
+            socialuniChatModule.scrollToMessagePageBottom()
+            CommonEventUtil.emit(SocialuniImEventKey.socialuniImPageInit, params)
+        }
     }
 
     async getChatsAction() {
         const res = await SocialuniUserLikeAPI.queryChatListAPI()
-        this.setChats(res.data)
+        this.chats = res.data
+        this.computedChatsUnreadNumTotalAction()
     }
 
-    setChatIdAndQueryMsg(chatId: string) {
+    async setChatIdAndQueryMsg(chatId: string) {
         let chat = socialuniChatModule.chats.find(item => item.id === chatId)
         if (!chat) {
             chat = new SocialuniChatRO()
@@ -88,57 +97,34 @@ class SocialuniChatModule {
             chat.loadMore = LoadMoreType.more
             this.chats.unshift(chat)
 
-            SocialuniUserLikeAPI.queryChatAPI(new ChatQueryQO(chatId)).then(res => {
-                this.pushMsgReplaceChatByChat(res.data)
-                console.log(this.chat)
-                console.log(this.chat.type)
-                console.log(65656)
-                this.readChatAction(res.data.messages)
-            })
+            const res = await SocialuniUserLikeAPI.queryChatAPI(new ChatQueryQO(chatId))
+            this.pushMsgReplaceChatByChat(res.data)
         }
-        console.log('chatid')
-        console.log(chatId)
         this.setChatId(chatId)
         socialuniChatModule.scrollToMessagePageBottom()
     }
 
-
-    readChatAction(messagesROs: MessageVO[]) {
-        console.log(this.chat)
-        console.log(this.chat.type)
-        console.log(65656)
-        //目前不根据点击时间更新，只根据消息时间更新
-        // chat.updateTime = new Date().getTime()
-        // 不为自己的 且未读的
-        const messages: MessageVO[] = messagesROs.filter(item => !item.isMine && !item.isRead)
-        const msgIds: string[] = messages.map(msg => msg.id)
-        console.log(msgIds)
-        if (msgIds.length) {
-            console.log(this.chat)
-            console.log(this.chat.type)
-            console.log(65656)
-            // msgIds =
-            //如果登录了，才调用后台
-            // 如果登录了
-            //目前 官方群聊没记录已读状态，读取也不管用
-            if (socialuniUserModule.hasUser && this.chat.type === ChatType.single) {
-                ChatAPI.readChatAPI(this.chatId)
-            }
-            for (const message of messages) {
-                message.isRead = true
-            }
-            this.chat.unreadNum = 0
-            this.computedChatsUnreadNumTotalAction()
+    readChat(messageROs: MessageVO[]) {
+        const messages: MessageVO[] = messageROs.filter(item => !item.isMine && !item.isRead)
+        for (const message of messages) {
+            message.isRead = true
+        }
+        this.chat.unreadNum = 0
+        this.computedChatsUnreadNumTotalAction()
+        if (socialuniUserModule.hasUser && this.chat.type === ChatType.single) {
+            ChatAPI.readChatAPI(this.chatId)
         }
     }
 
     chatsUnreadNumTotal = 0
 
-    async computedChatsUnreadNumTotalAction() {
+    computedChatsUnreadNumTotalAction() {
         this.chatsUnreadNumTotal = this.chats.reduce((total, chat) => {
             total = total + chat.unreadNum
             return total
         }, 0)
+
+        console.log(this.chatsUnreadNumTotal)
 
         const chatUnreadNum: number = this.chatsUnreadNumTotal
         // 如果未读数量为0了，则隐藏红点
@@ -162,26 +148,23 @@ class SocialuniChatModule {
     }
 
 
-
     //替换chat消息，如果不存在则添加
     pushMsgReplaceChatByChat(chat: SocialuniChatRO) {
         if (chat) {
             let chatIndex = socialuniChatModule.chats.findIndex(item => item.id === chat.id)
 
+            console.log(chatIndex)
             if (chatIndex > -1) {
                 this.pushMsgReplaceChat(chatIndex, chat)
             } else {
                 this.chats.unshift(chat)
             }
         }
-        console.log(this.chat)
-        console.log(this.chat.type)
-        console.log(65656)
     }
 
 
     //来消息后，替换已有chat
-    pushMsgReplaceChat(chatIndex, chat: SocialuniChatRO) {
+    pushMsgReplaceChat(chatIndex: number, chat: SocialuniChatRO) {
         const oldChat = this.chats[chatIndex]
         console.log(this.chats)
         console.log(chatIndex)
@@ -198,7 +181,7 @@ class SocialuniChatModule {
         this.replaceChat(chatIndex, chat)
     }
 
-    replaceChat(chatIndex, chat: SocialuniChatRO) {
+    replaceChat(chatIndex: number, chat: SocialuniChatRO) {
         this.chats.splice(chatIndex, 1, chat)
     }
 
@@ -206,43 +189,8 @@ class SocialuniChatModule {
         CommonUtil.delayTime(100).then(() => {
             console.log('滚动到底部')
             this.scrollTop = this.messages.length * 500
-
-
-            // this.scrollTop = -1000
         })
-        // ScrollUtil.scrollTo(this.messages.length * 500)
     }
-
-
-    /*async pushMessageAction(msgContent) {
-        if (!socialuniChatModule.chat) {
-            QingAppUtil.ToastUtil.throwError('缺少会话')
-        }
-        UserCheckUtil.checkUserBindPhoneNum()
-
-        if (msgContent) {
-            const newMsg = new MessageVO(msgContent, socialuniUserModule.mineUser)
-            socialuniChatModule.messages.push(newMsg)
-            socialuniChatModule.scrollToMessagePageBottom()
-            const index: number = socialuniChatModule.messages.length - 1
-            // 点击发送后立即push
-            //启用状态可以直接发送
-            this.msgContent = ''
-            this.chat.updateTime = new Date().getTime()
-            try {
-                const res = await MessageAPI.sendMsgAPI(this.chat.id, msgContent)
-                this.chat.updateTime = res.data.createTime
-                socialuniChatModule.messages.splice(index, 1, res.data)
-            } catch (e) {
-                newMsg.readStatus = MessageStatus.Failed
-            }
-        } else {
-            QingAppUtil.ToastUtil.throwError('不能发送空白内容')
-        }
-        // socialuniChatModule.refreshMessages()
-
-        // PlatformUtils.requestSubscribeChat()
-    }*/
 
 
     pushChatAndMessagesAction(newChat: SocialuniChatRO) {
@@ -256,10 +204,10 @@ class SocialuniChatModule {
         console.log(QingAppUtil.RouterUtil.getCurrentPageURI())
         if (QingAppUtil.RouterUtil.getCurrentPageURI() === ImPagePath.imPagePath.message && this._chatId === newChat.id) {
             // 则直接往msg增加消息
-            // 前台将消息改为已读,修改时间使用后台的就行
-            this.readChatAction(newChat.messages)
             //将新消息放到当前msg中并替换
             this.pushMsgReplaceChat(this.chatIndex, newChat)
+            // 前台将消息改为已读,修改时间使用后台的就行
+            this.readChat(newChat.messages)
             this.scrollToMessagePageBottom()
             // 后台改为已读
             // 向后台发送消息，将收到的消息改为已读

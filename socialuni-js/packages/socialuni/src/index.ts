@@ -91,6 +91,11 @@ const Socialuni = {
             },
             created() {
                 socialuniPluginsModule.setRoute(this.$route)
+            },
+            onShow(){
+                for (const plugin of socialuniPluginsModule.plugins) {
+                    plugin && plugin.onShow && plugin.onShow()
+                }
             }
         })
         app.mixin(shareComponent)

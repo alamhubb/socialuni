@@ -218,7 +218,6 @@ import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
 import SocialGenderTag from "socialuni-user-ui/src/components/SUserGenderTag.vue";
 import {socialuniUserModule} from 'socialuni-user-sdk/src/store/SocialuniUserModule';
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
-import SocialuniUserService from "packages/socialuni-user/socialuni-user-sdk/src/logic/SocialuniUserService";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import CosService from "socialuni-app-sdk/src/util/CosService";
@@ -228,6 +227,7 @@ import SkipUrlConst from "socialuni-app-sdk/src/constant/SkipUrlConst";
 import {getCurrentInstance} from "vue";
 import {onLoad} from "@dcloudio/uni-app";
 import {socialuniAppUserModule} from "socialuni-user-sdk/src/store/SocialuniAppUserModule";
+import SocialuniUserService from "socialuni-user-sdk/src/logic/SocialuniUserService";
 
 @toNative
 @Component({
