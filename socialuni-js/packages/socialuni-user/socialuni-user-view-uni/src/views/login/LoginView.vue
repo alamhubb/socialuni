@@ -305,7 +305,7 @@ export default class LoginView extends Vue {
   }
 
   loginAfterHint(msg: string) {
-    if (!this.user.phoneNum) {
+    if (!socialuniAppUserModule.mineUserPhoneNum) {
       msg += '，绑定手机号后才可发布内容'
     }
     //qq小程序下ios系统存在输入框冲突问题，使用了一个输入框，另一个就无法出现
