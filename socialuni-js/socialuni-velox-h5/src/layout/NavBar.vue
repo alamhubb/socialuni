@@ -79,7 +79,7 @@ import ImgUtil from "qing-util/src/util/ImgUtil";
 import {ArrowDown, Tools} from "@element-plus/icons-vue";
 import SocialuniLoginView from "socialuni-user-view-h5/src/views/SocialuniLoginView.vue";
 import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
-import UserService from "socialuni-user-sdk/src/logic/UserService";
+import SocialuniUserService from "../../../packages/socialuni-user/socialuni-user-sdk/src/logic/SocialuniUserService";
 import QDialog from "qing-ui-h5/src/components/QDialog.vue";
 
 @toNative
@@ -169,7 +169,7 @@ export default class NavBar extends Vue {
 
 
   loginOut() {
-    UserService.loginOut()
+    SocialuniUserService.loginOut()
   }
 
   get mineUser() {

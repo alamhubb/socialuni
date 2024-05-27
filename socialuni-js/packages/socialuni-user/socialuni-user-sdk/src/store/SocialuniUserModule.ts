@@ -67,11 +67,9 @@ class SocialuniUserModule {
         if (loginRO) {
             this.setUser(loginRO.user)
             socialuniTokenModule.setToken(loginRO.token)
-            CommonEventUtil.emit(SocialuniUserEventConst.loginSucces)
         } else {
             socialuniTokenModule.setToken(null)
             this.setUser(null)
-            CommonEventUtil.emit(SocialuniUserEventConst.loginOut)
         }
     }
 
@@ -86,7 +84,6 @@ class SocialuniUserModule {
 
     setUser(user: SocialuniUserRO) {
         this.userInfo = user
-        console.log(this.userInfo)
         SocialuniUserStorageUtil.set(user)
     }
 

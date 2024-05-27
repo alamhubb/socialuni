@@ -5,7 +5,7 @@ import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfig
 import {socialuniTokenModule} from "./store/SocialuniTokenModule";
 import ResultRO from "socialuni-api-base/src/model/social/ResultRO";
 import ErrorConst from "socialuni-constant/constant/ErrorConst";
-import UserService from "./logic/UserService";
+import SocialuniUserService from "./logic/SocialuniUserService";
 import UserMsgUtil from "./util/UserMsgUtil";
 import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
 import JsonUtil from "qing-util/src/util/JsonUtil";
@@ -20,6 +20,7 @@ import SocialuniUserEventConst from "./constant/SocialuniUserEventConst";
 import UserPageUtil from "./util/UserPageUtil";
 import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
 import {socialuniAppUserModule} from "./store/SocialuniAppUserModule";
+import SocialuniUserEventOn from "./event/SocialuniUserEventOn";
 
 
 class SocialuniUserPlugin implements SocialuniPlugin {
@@ -30,12 +31,12 @@ class SocialuniUserPlugin implements SocialuniPlugin {
         // })
         // socialAppModule.getHomeSwipersAction()
 
-        CommonEventUtil.on(SocialuniUserEventConst.loginSucces, () => {
+        SocialuniUserEventOn.loginSuccess(() => {
             socialuniAppUserModule.getMineUserMoreInfoAction()
             WebsocketUtil.createWebsocket()
         })
 
-        CommonEventUtil.on(SocialuniUserEventConst.loginOut, () => {
+        SocialuniUserEventOn.loginOut(() => {
             WebsocketUtil.createWebsocket()
         })
     }
@@ -87,13 +88,13 @@ class SocialuniUserPlugin implements SocialuniPlugin {
                     case ErrorConst.not_logged:
                         // 理论上不需要，因为token不会失效，也不会错误
                         // 已知可能，切换环境导致token不同
-                        UserService.clearUserInfo()
+                        SocialuniUserService.clearUserInfo()
                         UserMsgUtil.unLoginMessage()
                         break
                     case ErrorConst.banned:
                         // 理论上不需要，因为token不会失效，也不会错误
                         // 已知可能，切换环境导致token不同
-                        UserService.clearUserInfo()
+                        SocialuniUserService.clearUserInfo()
                         QingAppUtil.AlertUtil.hint(errorMsg)
                         break
                     case ErrorConst.custom:
@@ -122,7 +123,8 @@ const socialuniUserPlugin: SocialuniPlugin = new SocialuniUserPlugin()
 const SocialuniUser = {
     async install(app: App, socialuniOption: SocialuniOption) {
         socialuniPluginsModule.addPlugin(socialuniUserPlugin)
-        CommonEventUtil.on(SocialuniUserEventConst.toLogin, () => {
+
+        SocialuniUserEventOn.toLogin(() => {
             UserPageUtil.toMinePage()
         })
 

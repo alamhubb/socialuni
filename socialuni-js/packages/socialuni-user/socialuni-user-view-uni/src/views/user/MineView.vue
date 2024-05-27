@@ -218,7 +218,7 @@ import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
 import SocialGenderTag from "socialuni-user-ui/src/components/SUserGenderTag.vue";
 import {socialuniUserModule} from 'socialuni-user-sdk/src/store/SocialuniUserModule';
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
-import UserService from "socialuni-user-sdk/src/logic/UserService";
+import SocialuniUserService from "packages/socialuni-user/socialuni-user-sdk/src/logic/SocialuniUserService";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import CosService from "socialuni-app-sdk/src/util/CosService";
@@ -303,7 +303,7 @@ export default class MineView extends Vue {
 
   logout() {
     this.hideMoreList()
-    UserService.loginOut().catch(() => {
+    SocialuniUserService.loginOut().catch(() => {
       this.showMoreListAction()
     })
   }
@@ -378,7 +378,7 @@ export default class MineView extends Vue {
   }
 
   loginOut() {
-    UserService.loginOut()
+    SocialuniUserService.loginOut()
   }
 
   async uploadUserAvatarImg() {

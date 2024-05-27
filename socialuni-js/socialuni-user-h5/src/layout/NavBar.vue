@@ -97,7 +97,7 @@ import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
 import {ArrowDown, Tools} from "@element-plus/icons-vue";
 import SocialuniLoginView from "socialuni-user-view-h5/src/views/SocialuniLoginView.vue";
 import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
-import UserService from "socialuni-user-sdk/src/logic/UserService";
+import SocialuniUserService from "../../../packages/socialuni-user/socialuni-user-sdk/src/logic/SocialuniUserService";
 
 @toNative
 @Component({
@@ -186,7 +186,7 @@ export default class NavBar extends Vue {
 
 
     loginOut() {
-        UserService.loginOut()
+        SocialuniUserService.loginOut()
     }
 
     get mineUser() {

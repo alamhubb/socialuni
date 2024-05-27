@@ -6,7 +6,7 @@ import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import UniProviderLoginQO from "socialuni-api-base/src/model/login/UniProviderLoginQO";
 import LoginProvider from "socialuni-constant/constant/LoginProvider";
 import LoginAPI from "socialuni-user-api/src/api/LoginAPI";
-import UserService from "./UserService";
+import SocialuniUserService from "./SocialuniUserService";
 import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
 
 export default class OAuthService {
