@@ -20,6 +20,9 @@ import SocialuniUserLikeAPI from "socialuni-expand-api/src/api/SocialuniUserLike
 import ChatType from "socialuni-constant/constant/ChatType";
 
 class SocialuniChatModule {
+    readonly chatPageIndex = 1
+
+
     private _chatId = ''
     get chatId(): string {
         return this._chatId;
@@ -68,7 +71,7 @@ class SocialuniChatModule {
         //     socialuniChatModule.setChatIdToMessagePage(this.chats[0].id)
         //     // this.setChatId(this.chats[0].id)
         // }
-        // this.computedChatsUnreadNumTotalAction()
+        this.computedChatsUnreadNumTotalAction()
     }
 
     async getChatsAction() {
@@ -148,13 +151,13 @@ class SocialuniChatModule {
 
     showTabBarRedDot() {
         uni.showTabBarRedDot({
-            index: 2
+            index: this.chatPageIndex
         })
     }
 
     hideTabBarRedDot() {
         uni.hideTabBarRedDot({
-            index: 2
+            index: this.chatPageIndex
         })
     }
 
@@ -279,7 +282,7 @@ class SocialuniChatModule {
             // 找到需要添加内容的chat
         }
         //计算未读数量
-        // this.computedChatsUnreadNumTotalAction()
+        this.computedChatsUnreadNumTotalAction()
     }
 
     setChatIdToMessagePage(receiveId: string) {
