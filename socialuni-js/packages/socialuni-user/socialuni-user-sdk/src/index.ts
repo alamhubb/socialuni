@@ -26,11 +26,6 @@ import SocialuniUserEventOn from "./event/SocialuniUserEventOn";
 class SocialuniUserPlugin implements SocialuniPlugin {
     onLaunch() {
         socialuniUserModule.initSocialuniUserModule()
-        // CosAPI.getCosPathAPI().then(res => {
-        //     socialAppModule.cosHttpPath = res.data
-        // })
-        // socialAppModule.getHomeSwipersAction()
-
         SocialuniUserEventOn.loginSuccess(() => {
             socialuniAppUserModule.getMineUserMoreInfoAction()
             WebsocketUtil.createWebsocket()
