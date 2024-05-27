@@ -35,17 +35,12 @@ class SocialuniUserEditViewService extends SocialuniViewService {
     initService() {
         // super.initService(instance);
         this.initData()
-        watch(() => this.mineUser, () => {
-            this.initData()
-        })
     }
 
 
     initData() {
         if (this.mineUser) {
             this.editUser = ObjectUtil.deepClone(socialuniUserModule.mineUser)
-            console.log('shezhile yonghu')
-            console.log(this.editUser)
             // this.contactAccount = this.user.contactAccount || ''
             // this.wxAccount = this.user.wxAccount || ''
             // this.qqAccount = this.user.qqAccount || ''
@@ -57,15 +52,12 @@ class SocialuniUserEditViewService extends SocialuniViewService {
 
     async uploadData(e: any) {
         const file = e.target.files[0]
-        console.log(e)
-        console.log(e.target)
-        console.log(e.target.files[0])
         try {
             const cosAuthRO = await CosService.getCosAuthRO()
-            console.log(cosAuthRO)
             const imgKey = UUIDUtil.getUUID() + ImgUtil.getFileSuffixName(file.name)
             const res = await Promise.all([TencentCosAPI.uploadFileAPI(file, cosAuthRO), SocialuniMineUserAPI.addUserAvatarImgAPI(new ImgAddQO(file))])
             socialuniUserModule.setUser(res[1].data)
+            this.initData()
         } catch (e) {
             console.error(e)
         } finally {
@@ -77,24 +69,20 @@ class SocialuniUserEditViewService extends SocialuniViewService {
         await QingAppUtil.AlertUtil.confirm('是否使用随机头像，替换当前头像后无法恢复')
         const res = await SocialuniMineUserAPI.randomUserAvatar()
         socialuniUserModule.setUser(res.data)
+        this.initData()
     }
 
     async uploadUserAvatarImg() {
-        console.log(123123)
         try {
             const cosAuthRO = await CosService.getCosAuthRO()
 
-            console.log(123123)
-            console.log(cosAuthRO.uploadImgPath)
-            console.log(cosAuthRO)
-            console.log(456465)
-            console.log(cosAuthRO)
             const imgFiles: DomFile[] = await QingAppUtil.NativeUtil.chooseImage(1)
             QingAppUtil.NativeUtil.showLoading('上传中')
             const imgFile: DomFile = imgFiles[0]
             imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src
             const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO), SocialuniMineUserAPI.addUserAvatarImgAPI(new ImgAddQO(imgFile))])
             socialuniUserModule.setUser(res[1].data)
+            this.initData()
         } catch (e) {
             console.error(e)
         } finally {
@@ -122,6 +110,7 @@ class SocialuniUserEditViewService extends SocialuniViewService {
         QingAppUtil.NativeUtil.showLoading('保存中')
         SocialuniMineUserAPI.editUserAPI(this.editUser).then((res: any) => {
             socialuniUserModule.setUser(res.data)
+            this.initData()
             QingAppUtil.ToastUtil.success('编辑成功')
         }).finally(() => {
             this.btnDisabled = false
@@ -134,13 +123,7 @@ class SocialuniUserEditViewService extends SocialuniViewService {
     }
 
     genderChange({detail}) {
-        console.log(detail)
-        console.log(detail.value)
-        console.log(this)
-        console.log(socialuniUserEditViewService.editUser)
-        console.log(socialuniUserEditViewService.editUser.gender)
         socialuniUserEditViewService.editUser.gender = detail.value
-        console.log(socialuniUserEditViewService.editUser.gender)
     }
 
     goBack() {

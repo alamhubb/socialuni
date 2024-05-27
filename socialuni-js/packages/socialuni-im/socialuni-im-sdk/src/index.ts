@@ -11,7 +11,6 @@ import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserMod
 class SocialuniImPlugin implements SocialuniPlugin {
     onLaunch() {
         console.log('触发了Im')
-
         /*if (socialuniTokenModule.token) {
             socialuniChatModule.queryMineImUserInfo().then(() => {
                 socialuniChatModule.getChatsAction()
