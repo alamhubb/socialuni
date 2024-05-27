@@ -13,7 +13,7 @@ export default class SocialuniCommunityUserDetailViewService extends SocialuniVi
         this.instance = instance
 
         watch<CenterUserDetailRO>(() => socialuniUserDetailViewService.user, (value, oldValue) => {
-            if (!oldValue) {
+            if (!oldValue || value.id !== oldValue.id) {
                 this.queryUserTalks()
             }
         })
