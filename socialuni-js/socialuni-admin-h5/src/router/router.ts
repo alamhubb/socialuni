@@ -94,7 +94,7 @@ export const constantRoutes = [
     {
         path: '/',
         component: Layout,
-        redirect: '/peiwanManage',
+        redirect: '/operateUserManage',
         children: menuRoutes,
     },
     // 404 page must be placed at the end !!!
@@ -148,6 +148,7 @@ router.beforeEach(async (to, from, next) => {
     // set page title
     let user = socialuniUserModule.mineUser
     console.log(user)
+    console.log(1313131)
     const hasToken = socialuniUserModule.hasToken
     if (!user) {
         if (hasToken) {
