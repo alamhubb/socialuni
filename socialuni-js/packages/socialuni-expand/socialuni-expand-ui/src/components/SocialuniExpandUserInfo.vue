@@ -95,7 +95,7 @@ import SocialuniUserExtendDetailRO from "socialuni-expand-api/src/model/Socialun
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
 import SocialuniImgUtil from "socialuni-user-sdk/src/util/SocialuniImgUtil";
-import SocialuniUserExpandDetailRO from "socialuni-user-api/src/model/SocialuniUserExpandDetailRO";
+import SocialuniUserExpandDetailEditRO from "packages/socialuni-user/socialuni-user-api/src/model/SocialuniUserExpandDetailEditRO";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import SocialuniUserLikeAPI from "socialuni-expand-api/src/api/SocialuniUserLikeAPI";
 import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
@@ -121,14 +121,14 @@ export default class SocialuniExpandUserInfo extends Vue {
     UserPageUtil.toUserDetail(user.id)
   }
 
-  previewImage(current, user: SocialuniUserExpandDetailRO) {
+  previewImage(current, user: SocialuniUserExtendDetailRO) {
     uni.previewImage({
       current: current,
       urls: this.imgUrls(user)
     })
   }
 
-  imgUrls(user: SocialuniUserExpandDetailRO) {
+  imgUrls(user: SocialuniUserExtendDetailRO) {
     if (user && user.imgs) {
       return user.imgs.map(item => SocialuniImgUtil.getUserLargeImgUrl(item.src))
     } else {

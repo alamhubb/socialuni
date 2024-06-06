@@ -5,7 +5,7 @@ import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
 import com.socialuni.social.common.api.model.user.SocialuniUserExtendDetailRO;
 import com.socialuni.social.expand.api.SocialuniUserExpandAPI;
 import com.socialuni.social.expand.logic.service.SocialuniUserExpandService;
-import com.socialuni.social.expand.model.SocialuniUserExpandDetailRO;
+import com.socialuni.social.expand.model.SocialuniUserExpandDetailEditRO;
 import com.socialuni.social.expand.utils.SocialuniUserExpandUtil;
 import com.socialuni.social.user.sdk.model.QO.SocialUserContactInfoEditQO;
 import com.socialuni.social.user.sdk.model.QO.SocialUserSchoolNameEditQO;
@@ -23,17 +23,17 @@ public class SocialuniUserExpandController implements SocialuniUserExpandAPI {
     SocialuniUserExpandService socialuniUserExpandService;
 
     @Override
-    public ResultRO<SocialuniUserExpandDetailRO> editUserSchool(SocialUserSchoolNameEditQO socialMineUserDetailQO) {
+    public ResultRO<SocialuniUserExpandDetailEditRO> editUserSchool(SocialUserSchoolNameEditQO socialMineUserDetailQO) {
         return socialuniUserExpandService.editUserSchoolName(socialMineUserDetailQO);
     }
 
     @Override
-    public ResultRO<SocialuniUserExpandDetailRO> editUserContactInfo(SocialUserContactInfoEditQO socialMineUserDetailQO) {
+    public ResultRO<SocialuniUserExpandDetailEditRO> editUserContactInfo(SocialUserContactInfoEditQO socialMineUserDetailQO) {
         return socialuniUserExpandService.editUserContactInfo(socialMineUserDetailQO);
     }
 
     @Override
-    public ResultRO<SocialuniUserExpandDetailRO> switchOpenUserContactInfo(SocialUserContactInfoEditQO socialuniMineUserDetailRO) {
+    public ResultRO<SocialuniUserExpandDetailEditRO> switchOpenUserContactInfo(SocialUserContactInfoEditQO socialuniMineUserDetailRO) {
         //切换是否开启联系方式功能，未来可以，默认价格1元
         // 开启 是否允许别人获取自己的联系方式，默认是关闭的。 需要设置了自己的联系方式，然后才可以开启和关闭
         //如果为空，则设置后默认开启
@@ -53,7 +53,7 @@ public class SocialuniUserExpandController implements SocialuniUserExpandAPI {
     }
 
     @Override
-    public ResultRO<SocialuniUserExpandDetailRO> getMineUserExpandDetail() {
+    public ResultRO<SocialuniUserExpandDetailEditRO> getMineUserExpandDetail() {
         return ResultRO.success(SocialuniUserExpandUtil.getMineUserExpandDetail());
     }
 }

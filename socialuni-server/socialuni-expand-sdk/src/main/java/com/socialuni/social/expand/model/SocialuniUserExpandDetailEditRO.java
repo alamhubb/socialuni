@@ -7,7 +7,7 @@ import lombok.Data;
  * @date 2019-08-13 23:34
  */
 @Data
-public class SocialuniUserExpandDetailRO {
+public class SocialuniUserExpandDetailEditRO {
     private String schoolName;
     private String contactInfo;
     //为他人详情是，则意义为是否已经拥有查看用户联系方式的权限

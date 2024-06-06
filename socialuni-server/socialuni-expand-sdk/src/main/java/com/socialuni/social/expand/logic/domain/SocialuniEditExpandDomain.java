@@ -2,7 +2,7 @@ package com.socialuni.social.expand.logic.domain;
 
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.expand.logic.check.SocialuniSchoolCheck;
-import com.socialuni.social.expand.model.SocialuniUserExpandDetailRO;
+import com.socialuni.social.expand.model.SocialuniUserExpandDetailEditRO;
 import com.socialuni.social.expand.utils.SocialuniUserExpandDOUtil;
 import com.socialuni.social.expand.utils.SocialuniUserExpandUtil;
 import com.socialuni.social.user.sdk.dao.utils.SocialuniUserExtendFriendLogDOUtil;
@@ -21,7 +21,7 @@ public class SocialuniEditExpandDomain {
     @Resource
     SocialuniSchoolCheck socialuniSchoolCheck;
 
-    public SocialuniUserExpandDetailRO editUserSchoolName(SocialUserSchoolNameEditQO socialMineUserDetailQO) {
+    public SocialuniUserExpandDetailEditRO editUserSchoolName(SocialUserSchoolNameEditQO socialMineUserDetailQO) {
         String schoolName = socialMineUserDetailQO.getSchoolName();
 
         socialuniSchoolCheck.checkSchoolName(schoolName);
@@ -38,7 +38,7 @@ public class SocialuniEditExpandDomain {
     }
 
 
-    public SocialuniUserExpandDetailRO editUserContactInfo(SocialUserContactInfoEditQO socialMineUserDetailQO) {
+    public SocialuniUserExpandDetailEditRO editUserContactInfo(SocialUserContactInfoEditQO socialMineUserDetailQO) {
         String contactInfo = socialMineUserDetailQO.getContactInfo();
 
         if (StringUtils.isEmpty(contactInfo)) {

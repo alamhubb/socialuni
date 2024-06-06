@@ -5,10 +5,12 @@ import com.socialuni.social.common.api.constant.GenderType;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
+import com.socialuni.social.common.sdk.constant.UserType;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
 import com.socialuni.social.common.sdk.utils.SocialuniGenerateAvatarUtil;
 import com.socialuni.social.content.utils.BirthdayAgeUtil;
+import com.socialuni.social.user.sdk.model.factory.SocialUserDOFactory;
 import com.socialuni.social.user.sdk.utils.GenderUtil;
 import com.socialuni.social.content.utils.SocialuniTextContentUtil;
 import com.socialuni.social.user.sdk.utils.GenerateNicknameUtil;
@@ -35,8 +37,9 @@ public class SocialuniUserDOUtil {
     }
 
     public static SocialuniUserDo createUserByNickname(String nickname) {
-        SocialuniUserDo socialuniUserDo = new SocialuniUserDo();
+        SocialuniUserDo socialuniUserDo = SocialUserDOFactory.newUserByPhoneLogin();
         socialuniUserDo.setNickname(nickname);
+        socialuniUserDo.setType(UserType.operation);
         return SocialuniUserDOUtil.createUserByEmptyToDefault(socialuniUserDo);
     }
 
@@ -51,7 +54,7 @@ public class SocialuniUserDOUtil {
         }
         String avatar = socialuniUserDo.getAvatar();
         if (StringUtils.isEmpty(avatar)) {
-            socialuniUserDo.setGender(SocialuniGenerateAvatarUtil.getGirlAvatar());
+            socialuniUserDo.setAvatar(SocialuniGenerateAvatarUtil.getGirlAvatar());
         }
         //生日，年龄
         String birthday = socialuniUserDo.getBirthday();

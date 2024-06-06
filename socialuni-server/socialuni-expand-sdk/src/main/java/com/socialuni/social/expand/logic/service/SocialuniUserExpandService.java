@@ -11,9 +11,8 @@ import com.socialuni.social.expand.dao.repository.SocialuniUserExpandRepository;
 import com.socialuni.social.expand.factory.SocialuniUserExtendDetailROFactory;
 import com.socialuni.social.expand.logic.domain.SocialuniEditExpandDomain;
 import com.socialuni.social.expand.logic.domain.SocialuniGetUserContactInfoDomain;
-import com.socialuni.social.expand.model.SocialuniUserExpandDetailRO;
+import com.socialuni.social.expand.model.SocialuniUserExpandDetailEditRO;
 import com.socialuni.social.sdk.constant.user.SocialuniUserExtendFriendsPageType;
-import com.socialuni.social.user.sdk.dao.utils.SocialuniUserExtendFriendLogDOUtil;
 import com.socialuni.social.common.sdk.utils.SocialuniRequestUtil;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
 import com.socialuni.social.content.constant.SocialuniUserStatus;
@@ -32,7 +31,6 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Vector;
 
 @Service
 @Slf4j
@@ -52,9 +50,9 @@ public class SocialuniUserExpandService {
     @Resource
     SocialuniUserExtendLogRepository socialuniUserExtendLogRepository;
 
-    public ResultRO<SocialuniUserExpandDetailRO> editUserSchoolName(SocialUserSchoolNameEditQO socialMineUserDetailQO) {
+    public ResultRO<SocialuniUserExpandDetailEditRO> editUserSchoolName(SocialUserSchoolNameEditQO socialMineUserDetailQO) {
 
-        SocialuniUserExpandDetailRO socialuniMineUserDetailRO = socialuniEditExpandDomain.editUserSchoolName(socialMineUserDetailQO);
+        SocialuniUserExpandDetailEditRO socialuniMineUserDetailRO = socialuniEditExpandDomain.editUserSchoolName(socialMineUserDetailQO);
 //        SocialuniMineUserDetailRO socialuniMineUserDetailRO = socialuniEditExpandDomain.editUserSchoolName(socialMineUserDetailQO);
 
 //        SocialuniMineUserDetailRO socialuniMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(socialMineUserDetailQO);
@@ -62,7 +60,7 @@ public class SocialuniUserExpandService {
         return ResultRO.success(socialuniMineUserDetailRO);
     }
 
-    public ResultRO<SocialuniUserExpandDetailRO> editUserContactInfo(SocialUserContactInfoEditQO socialMineUserDetailQO) {
+    public ResultRO<SocialuniUserExpandDetailEditRO> editUserContactInfo(SocialUserContactInfoEditQO socialMineUserDetailQO) {
 
         return ResultRO.success(socialuniEditExpandDomain.editUserContactInfo(socialMineUserDetailQO));
     }

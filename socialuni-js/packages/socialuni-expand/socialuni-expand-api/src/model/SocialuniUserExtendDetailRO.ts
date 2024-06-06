@@ -1,4 +1,5 @@
 import SocialuniUserRO from "socialuni-api-base/src/model/user/SocialuniUserRO";
+import ImgFileVO from "socialuni-api-base/src/model/ImgFileVO";
 
 export default class SocialuniUserExtendDetailRO extends SocialuniUserRO {
     provinceName: string = null
@@ -7,4 +8,5 @@ export default class SocialuniUserExtendDetailRO extends SocialuniUserRO {
     distance: number = null
     hasUserLike: boolean = null
     updateTime: boolean = null
+    imgs: ImgFileVO[] = null
 }

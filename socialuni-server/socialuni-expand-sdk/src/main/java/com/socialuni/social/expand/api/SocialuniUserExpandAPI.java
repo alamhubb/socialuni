@@ -2,7 +2,7 @@ package com.socialuni.social.expand.api;
 
 import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
 import com.socialuni.social.common.api.model.user.SocialuniUserExtendDetailRO;
-import com.socialuni.social.expand.model.SocialuniUserExpandDetailRO;
+import com.socialuni.social.expand.model.SocialuniUserExpandDetailEditRO;
 import com.socialuni.social.user.sdk.model.QO.SocialUserContactInfoEditQO;
 import com.socialuni.social.user.sdk.model.QO.SocialUserSchoolNameEditQO;
 import com.socialuni.social.common.api.model.ResultRO;
@@ -22,15 +22,15 @@ import java.util.List;
 public interface SocialuniUserExpandAPI {
     @PostMapping("editUserSchool")
     @Operation(summary = "编辑用户学校名称")
-    ResultRO<SocialuniUserExpandDetailRO> editUserSchool(@RequestBody SocialUserSchoolNameEditQO socialMineUserDetailQO);
+    ResultRO<SocialuniUserExpandDetailEditRO> editUserSchool(@RequestBody SocialUserSchoolNameEditQO socialMineUserDetailQO);
 
     @PostMapping("editUserContactInfo")
     @Operation(summary = "编辑用户联系方式")
-    ResultRO<SocialuniUserExpandDetailRO> editUserContactInfo(@RequestBody SocialUserContactInfoEditQO socialuniMineUserDetailRO);
+    ResultRO<SocialuniUserExpandDetailEditRO> editUserContactInfo(@RequestBody SocialUserContactInfoEditQO socialuniMineUserDetailRO);
 
     @PostMapping("switchOpenUserContactInfo")
     @Operation(summary = "用户切换他人是否可获取联系方式功能")
-    ResultRO<SocialuniUserExpandDetailRO> switchOpenUserContactInfo(@RequestBody SocialUserContactInfoEditQO socialuniMineUserDetailRO);
+    ResultRO<SocialuniUserExpandDetailEditRO> switchOpenUserContactInfo(@RequestBody SocialUserContactInfoEditQO socialuniMineUserDetailRO);
 
     @PostMapping("queryExtendFriendUsers")
     @Operation(summary = "获取扩列用户列表")
@@ -42,6 +42,6 @@ public interface SocialuniUserExpandAPI {
 
     @GetMapping("getMineUserExpandDetail")
     @Operation(summary = "获取扩展信息")
-    ResultRO<SocialuniUserExpandDetailRO> getMineUserExpandDetail();
+    ResultRO<SocialuniUserExpandDetailEditRO> getMineUserExpandDetail();
 
 }

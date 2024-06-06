@@ -5,7 +5,7 @@ import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
 import SocialUserIdentityAPI from "socialuni-user-api/src/api/SocialUserIdentityAPI";
 import FollowAPI from "socialuni-community-api/src/api/FollowAPI";
 import SocialuniUserFansDetailRO from "socialuni-user-api/src/model/SocialuniUserFansDetailRO";
-import SocialuniUserExpandDetailRO from "socialuni-user-api/src/model/SocialuniUserExpandDetailRO";
+import SocialuniUserExpandDetailEditRO from "packages/socialuni-user/socialuni-user-api/src/model/SocialuniUserExpandDetailEditRO";
 import SocialuniUserExpandAPI from "socialuni-user-api/src/api/SocialuniUserExpandAPI";
 import SocialuniCoinAPI from "socialuni-user-api/src/api/SocialuniCoinAPI";
 import ImgFileVO from "socialuni-api-base/src/model/ImgFileVO";
@@ -15,7 +15,7 @@ class SocialuniAppUserModule {
     private userPhoneNum: string = null
 
     private _mineUserFansDetail: SocialuniUserFansDetailRO = null
-    private _mineUserExpandDetail: SocialuniUserExpandDetailRO = null
+    private _mineUserExpandDetail: SocialuniUserExpandDetailEditRO = null
     private mineUserCoinInfo: { coinNum: number } = null
     private _userImgs: ImgFileVO [] = []
 
