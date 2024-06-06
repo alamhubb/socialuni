@@ -7,6 +7,7 @@ import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserMod
 import SocialuniTokenUtil from "socialuni-user-sdk/src/util/SocialuniTokenUtil";
 import PeiwanManageView from '@/views/peiwanManage/PeiwanManageView.vue'
 import CreateUserView from "@/views/user/CreateUser.vue";
+import OperateUserManage from "@/views/operateUserManage/OperateUserManage.vue";
 
 export const menuRoutes = [
     /*{
@@ -59,28 +60,35 @@ export const menuRoutes = [
       meta: { title: RouterName.userIdentityAudit, icon: 'strengthMonitoring' }
     },*/
     {
-        path: '/peiwanManage',
-        name: 'peiwanManage',
-        component: PeiwanManageView,
-        meta: {title: '陪玩管理', icon: 'strengthMonitoring', isOpen: true}
+        path: '/operateUserManage',
+        name: 'operateUserManage',
+        component: OperateUserManage,
+        meta: {title: '运营用户管理', icon: 'strengthMonitoring', isOpen: true}
     },
-    {
-        path: '/customCreateUser',
-        name: 'customCreateUser',
-        component: CreateUserView,
-        meta: {title: '创建用户', icon: 'strengthMonitoring', isOpen: true}
-    }
+    // {
+    //     path: '/peiwanManage',
+    //     name: 'peiwanManage',
+    //     component: PeiwanManageView,
+    //     meta: {title: '陪玩管理', icon: 'strengthMonitoring', isOpen: true}
+    // },
+    // {
+    //     path: '/customCreateUser',
+    //     name: 'customCreateUser',
+    //     component: CreateUserView,
+    //     meta: {title: '创建用户', icon: 'strengthMonitoring', isOpen: true}
+    // }
 ]
 
 export const constantRoutes = [
     {
         path: '/404',
         component: () => import('@/views/404.vue'),
-        hidden: true
+        meta: {hidden: true},
     },
     {
         path: '/login',
         component: () => import('@/views/login/login.vue'),
+        meta: {hidden: true},
         hidden: true
     },
     {

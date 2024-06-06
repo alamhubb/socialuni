@@ -1,12 +1,17 @@
 package com.socialuni.social.user.sdk.dao.utils;
 
 import cn.hutool.core.util.ReUtil;
+import com.socialuni.social.common.api.constant.GenderType;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.socialuni.social.common.sdk.constant.SocialuniConst;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
+import com.socialuni.social.common.sdk.utils.SocialuniGenerateAvatarUtil;
 import com.socialuni.social.content.utils.BirthdayAgeUtil;
 import com.socialuni.social.user.sdk.utils.GenderUtil;
 import com.socialuni.social.content.utils.SocialuniTextContentUtil;
+import com.socialuni.social.user.sdk.utils.GenerateNicknameUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -29,8 +34,41 @@ public class SocialuniUserDOUtil {
         return socialuniUserRepository.findUserIdsByType(type);
     }
 
+    public static SocialuniUserDo createUserByNickname(String nickname) {
+        SocialuniUserDo socialuniUserDo = new SocialuniUserDo();
+        socialuniUserDo.setNickname(nickname);
+        return SocialuniUserDOUtil.createUserByEmptyToDefault(socialuniUserDo);
+    }
 
-    public static SocialuniUserDo save(SocialuniUserDo socialuniUserDo) {
+    public static SocialuniUserDo createUserByEmptyToDefault(SocialuniUserDo socialuniUserDo) {
+        String nickname = socialuniUserDo.getNickname();
+        if (StringUtils.isEmpty(nickname)) {
+            socialuniUserDo.setNickname(GenerateNicknameUtil.getGirlName());
+        }
+        String editGender = socialuniUserDo.getGender();
+        if (StringUtils.isEmpty(editGender)) {
+            socialuniUserDo.setGender(GenderType.girl);
+        }
+        String avatar = socialuniUserDo.getAvatar();
+        if (StringUtils.isEmpty(avatar)) {
+            socialuniUserDo.setGender(SocialuniGenerateAvatarUtil.getGirlAvatar());
+        }
+        //生日，年龄
+        String birthday = socialuniUserDo.getBirthday();
+        if (StringUtils.isEmpty(birthday)) {
+            socialuniUserDo.setAge(SocialuniConst.defaultAge);
+            socialuniUserDo.setBirthday(BirthdayAgeUtil.getYearBirthDateByAge(socialuniUserDo.getAge()));
+        }
+        String userCity = socialuniUserDo.getCity();
+        //保存地区名
+        if (StringUtils.isEmpty(userCity)) {
+            socialuniUserDo.setCity("中国");
+        }
+        return SocialuniUserDOUtil.checkAndSave(socialuniUserDo);
+    }
+
+
+    public static SocialuniUserDo checkAndSave(SocialuniUserDo socialuniUserDo) {
         //一个
 
         //注册时校验， 如果不符合规则，改为未命名。

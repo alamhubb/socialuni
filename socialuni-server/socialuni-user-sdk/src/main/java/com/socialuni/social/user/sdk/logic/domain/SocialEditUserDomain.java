@@ -63,7 +63,7 @@ public class SocialEditUserDomain {
         }
         mineUser.setUpdateTime(new Date());
 
-        mineUser = SocialuniUserDOUtil.save(mineUser);
+        mineUser = SocialuniUserDOUtil.checkAndSave(mineUser);
 
         SocialuniUserRO socialuniUserRO = SocialuniUserROFactory.getUserRO(mineUser, mineUser);
         return socialuniUserRO;
