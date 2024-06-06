@@ -175,7 +175,7 @@ export default class PeiwanManageView extends Vue {
 
         this.getAppInitDataAPI()
         this.queryPeiwanListAPI()
-        this.queryCosAuthAPI()
+        // this.queryCosAuthAPI()
         console.log('666')
         console.log('进入了')
         this.listenerMessage()

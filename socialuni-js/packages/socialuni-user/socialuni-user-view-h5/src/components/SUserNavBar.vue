@@ -82,7 +82,6 @@ import UUIDUtil from "qing-util/src/util/UUIDUtil";
 import ImgUtil from "qing-util/src/util/ImgUtil";
 import {ArrowDown, Tools} from "@element-plus/icons-vue";
 import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
-import SocialuniUserService from "packages/socialuni-user/socialuni-user-sdk/src/logic/SocialuniUserService";
 import QDialog from "qing-ui-h5/src/components/QDialog.vue";
 import SocialuniLoginView from "../views/SocialuniLoginView.vue";
 import SocialuniUserEditDialog from "../views/SocialuniUserEditDialog.vue";

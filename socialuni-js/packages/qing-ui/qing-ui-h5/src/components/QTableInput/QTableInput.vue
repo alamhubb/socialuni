@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import {Component, Prop, Vue, toNative} from 'vue-facing-decorator'
-import STableColumn from "../QTableColumn/QTableColumn.vue";
+import QTableColumn from "../QTableColumn/QTableColumn.vue";
 
 /**
  * @author 秦开远
@@ -41,7 +41,7 @@ import STableColumn from "../QTableColumn/QTableColumn.vue";
  */
 @toNative
 @Component({
-    components: {STableColumn}
+    components: {QTableColumn}
 })
 export default class QTableInput extends Vue {
     @Prop() readonly prop: string
