@@ -35,7 +35,7 @@ public interface SocialuniUserRepository extends JpaRepository<SocialuniUserDo, 
     }
 
     @Cacheable(cacheNames = CommonRedisKey.findUserIdsByType, key = "#type")
-    @Query("select s.userId from SocialuniUserDo s where s.type = :type")
+    @Query("select s.userId from SocialuniUserDo s where s.type = :type order by s.updateTime desc")
     List<Integer> findUserIdsByType(String type);
 
     @Query(value = "select u from SocialuniUserDo u,SocialUserViolationDo su where u.status = :userStatus and u.id = su.userId and su.violationEndTime < :curDate")

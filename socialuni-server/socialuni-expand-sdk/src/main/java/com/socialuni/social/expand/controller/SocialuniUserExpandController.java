@@ -44,7 +44,7 @@ public class SocialuniUserExpandController implements SocialuniUserExpandAPI {
 
     @Override
     public ResultRO<List<SocialuniUserExtendDetailRO>> queryExtendFriendUsers(SocialuniPageQueryQO<SocialuniUserExtendFriendQueryQO> socialuniPageQueryQO) {
-        return socialuniUserExpandService.queryExtendFriendUsers(socialuniPageQueryQO);
+        return socialuniUserExpandService.queryExtendOperateUsers(socialuniPageQueryQO);
     }
 
     @Override

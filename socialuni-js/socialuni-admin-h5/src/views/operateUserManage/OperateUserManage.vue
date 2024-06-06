@@ -62,21 +62,21 @@
                                 </div>
                             </template>
                         </el-table-column>-->
-        <!--                <q-table-column label="头像" prop="avatar">
-                            <template #default="{row}">
-                                <el-upload drag class="size100 overflow-hidden bd-radius" :auto-upload="false"
-                                           :on-change="(file)=>tableAvatarImgChange(row,file)">
-                                    <div v-if="row.avatar" class="position-relative">
-                                        <el-image class="size100 overflow-hidden" :src="row.avatar"
-                                                  fit="fill"/>
-                                    </div>
+        <q-table-column label="头像" prop="avatar">
+          <template #default="{row}">
+            <el-upload drag class="size100 overflow-hidden bd-radius" :auto-upload="false"
+                       :on-change="(file)=>tableAvatarImgChange(row,file)">
+              <div v-if="row.avatar" class="position-relative">
+                <el-image class="size100 overflow-hidden" :src="row.avatar"
+                          fit="fill"/>
+              </div>
 
-                                    <el-icon v-else class="size100 font-50 color-sub">
-                                        <Plus/>
-                                    </el-icon>
-                                </el-upload>
-                            </template>
-                        </q-table-column>-->
+              <el-icon v-else class="size100 font-50 color-sub">
+                <Plus/>
+              </el-icon>
+            </el-upload>
+          </template>
+        </q-table-column>
         <el-table-column label="上传2" width="800">
           <template #default="{row}">
             <div class="flex-row row-wrap">
@@ -138,6 +138,11 @@ import ImgFileVO from "socialuni-admin-api/src/model/community/ImgFileVO";
 import SocialuniPeiwanAdminAPI from "socialuni-peiwan-api/src/api/SocialuniPeiwanAdminAPI";
 import SocialuniOperateUserAPI from "socialuni-peiwan-api/src/api/SocialuniOperateUserAPI";
 import SocialuniUserImgComRO from "socialuni-user-api/src/model/SocialuniUserImgComRO";
+import NativeUtil from "qingjs-h5/src/util/NativeUtil";
+import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
+import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 
 @toNative
 @Component({
@@ -293,13 +298,12 @@ export default class OperateUserManage extends Vue {
 
     imgFile.src = this.cosAuthRO.uploadImgPath + `imgs/userAvatar/` + imgFile.src
 
-
     console.log(imgFile)
 
-    const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, this.cosAuthRO), SocialuniPeiwanAdminAPI.updatePeiwanAvatarAPI(row.userId, imgFile.src)]);
+    const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, this.cosAuthRO), SocialuniOperateUserAPI.addUserAvatarImg(row.id, new ImgAddQO(imgFile))]);
+    // const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, this.cosAuthRO), SocialuniOperateUserAPI.addUserAvatarImg(row.id, [imgFile])]);
 
     row.avatar = res[1].data
-
   }
 
   async tablePeiwanImgChange(row: SocialuniUserImgComRO, file: any) {
@@ -334,12 +338,12 @@ export default class OperateUserManage extends Vue {
     }
   }
 
-  deletePeiwanImgAPI(row: PeiwanRO, index) {
+  deletePeiwanImgAPI(row: SocialuniUserImgComRO, index) {
     console.log(row.imgs)
     AlertUtil.confirm('是否确认删除图片').then(res => {
       const imgId = row.imgs[index].id
       row.imgs.splice(index, 1)
-      SocialuniPeiwanAdminAPI.deletePeiwanImgAPI(imgId)
+      SocialuniOperateUserAPI.deleteUserImg(row.id, imgId)
     })
   }
 

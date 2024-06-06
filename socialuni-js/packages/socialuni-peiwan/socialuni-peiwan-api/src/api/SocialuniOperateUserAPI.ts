@@ -20,4 +20,13 @@ export default class SocialuniOperateUserAPI {
     static addUserImgList(userId: string, imgs: DomFile[]) {
         return socialuniUserRequest.post<SocialuniUserImgComRO[]>(`socialuni/admin/operateUser/addUserImgList/${userId}`, imgs)
     }
+
+
+    static addUserAvatarImg(userId: string, imgs: DomFile) {
+        return socialuniUserRequest.post<SocialuniUserImgComRO[]>(`socialuni/admin/operateUser/addUserAvatarImg/${userId}`, imgs)
+    }
+
+    static deleteUserImg(userId: string, userImgId: string) {
+        return socialuniUserRequest.post<SocialuniUserImgComRO[]>(`socialuni/admin/operateUser/deleteUserImg/${userId}`, {userImgId})
+    }
 }

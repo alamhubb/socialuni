@@ -6,12 +6,14 @@ import com.socialuni.social.common.api.exception.exception.SocialParamsException
 import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
 import com.socialuni.social.common.api.model.user.SocialuniUserExtendDetailRO;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
+import com.socialuni.social.common.sdk.constant.UserType;
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.expand.dao.repository.SocialuniUserExpandRepository;
 import com.socialuni.social.expand.factory.SocialuniUserExtendDetailROFactory;
 import com.socialuni.social.expand.logic.domain.SocialuniEditExpandDomain;
 import com.socialuni.social.expand.logic.domain.SocialuniGetUserContactInfoDomain;
 import com.socialuni.social.expand.model.SocialuniUserExpandDetailEditRO;
+import com.socialuni.social.likee.dao.repository.SocialuniLikeUseRepository;
 import com.socialuni.social.sdk.constant.user.SocialuniUserExtendFriendsPageType;
 import com.socialuni.social.common.sdk.utils.SocialuniRequestUtil;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
@@ -31,6 +33,7 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -63,6 +66,49 @@ public class SocialuniUserExpandService {
     public ResultRO<SocialuniUserExpandDetailEditRO> editUserContactInfo(SocialUserContactInfoEditQO socialMineUserDetailQO) {
 
         return ResultRO.success(socialuniEditExpandDomain.editUserContactInfo(socialMineUserDetailQO));
+    }
+
+    @Resource
+    SocialuniLikeUseRepository socialuniLikeUseRepository;
+
+    //查询最近在线的用户
+    public ResultRO<List<SocialuniUserExtendDetailRO>> queryExtendOperateUsers(SocialuniPageQueryQO<SocialuniUserExtendFriendQueryQO> socialuniPageQueryQO) {
+        SocialuniUserExtendFriendQueryQO socialuniUserExtendFriendQueryQO = socialuniPageQueryQO.getQueryData();
+
+        Date queryTime = socialuniPageQueryQO.getQueryTime();
+        String pageType = socialuniUserExtendFriendQueryQO.getPageType();
+        if (!SocialuniUserExtendFriendsPageType.allTypes.contains(pageType)) {
+            throw new SocialParamsException("错误的扩列页面类型");
+        }
+
+        //按照最近上一次被喜欢的用户顺序排序。
+        List<Integer> beLikeUserIds = socialuniLikeUseRepository.findBeLikeUserIdsOrderByUpdateTimeDesc();
+
+        //按照最近上一次被喜欢的用户顺序排序。
+        List<Integer> operateUserIds = socialuniUserRepository.findUserIdsByType(UserType.operation);
+
+        List<Integer> pageTypeUserIds = ListConvertUtil.intersection(beLikeUserIds, operateUserIds);
+
+        pageTypeUserIds.addAll(operateUserIds);
+        pageTypeUserIds = pageTypeUserIds.stream().distinct().collect(Collectors.toList());
+
+        List<Integer> queryIds = ListConvertUtil.intersection(pageTypeUserIds, operateUserIds);
+        Integer pageSize = socialuniPageQueryQO.getPageSize();
+        Integer pageNum = socialuniPageQueryQO.getPageNum();
+        if (pageNum == null || pageNum < 1) {
+            pageNum = 1;
+        }
+        if (pageSize == null) {
+            pageSize = 10;
+        }
+        List<Integer> pageQueryIds = CollUtil.sub(queryIds, (pageNum - 1) * pageSize, pageNum * pageSize);
+        List<SocialuniUserDo> userDos = SocialuniUserUtil.getUsers(pageQueryIds);
+
+        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
+
+        List<SocialuniUserExtendDetailRO> socialuniUserDetailROS = SocialuniUserExtendDetailROFactory.getUserExtendDetailList(userDos, mineUser);
+
+        return ResultRO.success(socialuniUserDetailROS);
     }
 
     //查询最近在线的用户

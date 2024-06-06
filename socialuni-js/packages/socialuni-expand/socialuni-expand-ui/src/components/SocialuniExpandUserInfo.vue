@@ -50,8 +50,10 @@
           </div>
           <div v-else class="use-click row-col-center">
             <q-button v-if="user.hasUserLike" @click="toMessagePage(user)" class="mr-sm">
-              <q-icon icon="mdi-chat-outline" size="14"></q-icon>
-              私信
+              <div class="row-all-center">
+                <q-icon icon="mdi-chat-outline mr-mn" size="16"></q-icon>
+                私信
+              </div>
             </q-button>
             <q-button v-else @click="addLikeUser(user)">
               <div class="row-all-center">
@@ -95,7 +97,8 @@ import SocialuniUserExtendDetailRO from "socialuni-expand-api/src/model/Socialun
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
 import SocialuniImgUtil from "socialuni-user-sdk/src/util/SocialuniImgUtil";
-import SocialuniUserExpandDetailEditRO from "packages/socialuni-user/socialuni-user-api/src/model/SocialuniUserExpandDetailEditRO";
+import SocialuniUserExpandDetailEditRO
+  from "packages/socialuni-user/socialuni-user-api/src/model/SocialuniUserExpandDetailEditRO";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import SocialuniUserLikeAPI from "socialuni-expand-api/src/api/SocialuniUserLikeAPI";
 import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
