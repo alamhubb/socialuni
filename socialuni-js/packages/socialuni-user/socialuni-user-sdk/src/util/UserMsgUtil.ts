@@ -5,13 +5,14 @@ import UserPageUtil from "./UserPageUtil";
 import QingAppUtil from "qingjs/src/util/QingAppUtil";
 import SocialuniUserEventConst from "../constant/SocialuniUserEventConst";
 import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
+import SocialuniUserEventEmit from "../event/SocialuniUserEventEmit";
 
 export default class UserMsgUtil {
     static unLoginMessage() {
         const user = socialuniUserModule.mineUser
         if (!user) {
             QingAppUtil.AlertUtil.confirm(socialuniConfigModule.appMoreConfig.errorMsg601UnLogin).then(() => {
-                CommonEventUtil.emit(SocialuniUserEventConst.toLogin)
+                SocialuniUserEventEmit.toLogin()
             })
             throw new Error('未登录')
         }

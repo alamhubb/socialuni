@@ -20,6 +20,7 @@ import QButton from "qing-ui/src/components/QButton.vue";
 import QInput from "qing-ui/src/components/QInput.vue";
 import QDialog from "qing-ui-h5/src/components/QDialog.vue";
 import CommunityEventConst from "socialuni-community-sdk/src/constant/CommunityEventConst.ts";
+import SocialuniUserEventOn from "socialuni-user-sdk/src/event/SocialuniUserEventOn";
 
 console.log(123123)
 
@@ -28,6 +29,19 @@ console.log(123123)
   components: {SUserNavBar, QNavMenu, QButton, QInput, QScroll, QDialog}
 })
 export default class Layout extends Vue {
+
+  created(){
+    SocialuniUserEventOn.toLogin(() => {
+      this.toLogin()
+    })
+    SocialuniUserEventOn.loginSuccess(() => {
+      this.toHome()
+    })
+  }
+
+  toLogin(){
+    this.$router.push('/login')
+  }
 
   mounted() {
     console.log('chufale')

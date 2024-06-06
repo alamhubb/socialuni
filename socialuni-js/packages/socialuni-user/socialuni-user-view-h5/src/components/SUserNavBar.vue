@@ -85,6 +85,10 @@ import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
 import QDialog from "qing-ui-h5/src/components/QDialog.vue";
 import SocialuniLoginView from "../views/SocialuniLoginView.vue";
 import SocialuniUserEditDialog from "../views/SocialuniUserEditDialog.vue";
+import SocialuniUserService from "socialuni-user-sdk/src/logic/SocialuniUserService";
+import SocialuniUserEventOn from "socialuni-user-sdk/src/event/SocialuniUserEventOn";
+import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
+import SocialuniUserEventEmit from "socialuni-user-sdk/src/event/SocialuniUserEventEmit";
 
 @toNative
 @Component({
@@ -102,26 +106,12 @@ export default class SUserNavBar extends Vue {
 
   dialogVisible = false
 
-  created() {
-    CommonEventUtil.on(SocialuniUserEventConst.toLogin, () => {
-      console.log('接收到了')
-      this.toLogin()
-    })
-  }
-
-  mounted() {
-
-  }
-
   toHome() {
     this.$router.push('/')
   }
 
   toLogin() {
-    console.log(this.$refs)
-    console.log(this.$refs.loginDialog)
-    this.$refs.loginDialog.open()
-    // this.$router.push('/login')
+    SocialuniUserEventEmit.toLogin()
   }
 
   loginSuccess() {

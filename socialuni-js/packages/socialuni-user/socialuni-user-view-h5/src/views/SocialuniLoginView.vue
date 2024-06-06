@@ -125,6 +125,7 @@ export default class SocialuniLoginView extends Vue {
 
   created() {
     this.viewService.initService(this)
+    this.viewService.contractChecked = true
   }
 
   passwordEntry() {
