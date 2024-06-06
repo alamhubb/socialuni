@@ -1,5 +1,5 @@
 <template>
-  <div class="row-all-center pd">
+  <div class="row-all-center">
     <div class="w300">
       <el-form
           ref="loginForm"

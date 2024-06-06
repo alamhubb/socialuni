@@ -33,75 +33,8 @@
               秘钥登录
             </el-button>
           </el-form-item>
-          <el-form-item label="手机号" prop="phoneNum" label-width="70px">
-            <el-input
-                v-model="loginUser.phoneNum"
-                placeholder="请输入手机号"
-                type="text"
-                :maxlength="11"
-                clearable
-            >
-              <template slot="prepend">+86</template>
-            </el-input>
-          </el-form-item>
-          <!--          <el-form-item label="密码" prop="phoneNum" label-width="70px">
-            <div class="flex-row">
-              <el-input
-                v-model="loginUser.phoneNum"
-                placeholder="请输入密码"
-                type="text"
-                :maxlength="11"
-                clearable
-              />
-            </div>
-          </el-form-item>-->
-          <el-form-item label="验证码" prop="authCode" label-width="70px">
-            <div class="flex-row w100p">
-              <el-input
-                  ref="authCode"
-                  v-model="loginUser.authCode"
-                  class="flex-1"
-                  type="text"
-                  placeholder="请输入验证码"
-                  :maxlength="4"
-                  clearable
-                  @keyup.enter.native="handleLogin"
-              />
-              <el-button
-                  class="flex-none ml w130"
-                  plain
-                  type="primary"
-                  :disabled="sendAuthCodeBtnDisabled"
-                  @click="sendCodeClick"
-              >
-                {{ countDown ? (authCodeInterval + 1 - countDown) + '秒后可重试' : '发送验证码' }}
-              </el-button>
-            </div>
-          </el-form-item>
-
-          <div class="mt-30">
-            <el-checkbox v-model="contractChecked" class="mb-5">
-              <span class="color-black">我已阅读并同意</span>
-            </el-checkbox>
-            <a href="https://www.qingchiapp.com/agreement" class="color-blue">
-              《用户协议》
-            </a>
-            <a href="https://www.qingchiapp.com/privacy" class="color-blue">
-              《隐私政策》
-            </a>
-            <a href="https://www.qingchiapp.com/childProtect" class="color-blue">
-              《儿童个人信息保护规则及监护人须知》
-            </a>
-          </div>
-
-          <el-button
-              :disabled="bindBtnDisabled"
-              type="primary"
-              class="w100p mt"
-              @click.native.prevent="handleLogin"
-          >{{ bindBtnDisabled ? '登陆中' : '注 册 并 登 录' }}
-          </el-button>
         </el-form>
+        <socialuni-login-view @login-success="loginSuccess"></socialuni-login-view>
       </div>
     </div>
   </div>
@@ -114,18 +47,17 @@ import NumberUtil from '@/utils/NumberUtil'
 import SocialPhoneNumQO from "socialuni-admin-api/src/model/base/SocialPhoneNumQO";
 import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
-import LoginService from "socialuni-user-sdk/src/logic/LoginService";
 import SocialuniLoginService from "socialuni-user-sdk/src/logic/SocialuniLoginService";
-
+import SocialuniLoginView from "socialuni-user-view-h5/src/views/SocialuniLoginView.vue";
 
 @toNative
-@Component
+@Component({components: {SocialuniLoginView}})
 export default class AdminLoginPage extends Vue {
   $refs: {
     authCode: ElInput;
   }
 
-  created(){
+  created() {
     console.log(123)
   }
 
