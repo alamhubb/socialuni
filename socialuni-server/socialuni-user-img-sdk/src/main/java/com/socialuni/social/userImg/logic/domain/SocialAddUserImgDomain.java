@@ -25,7 +25,7 @@ public class SocialAddUserImgDomain {
     @Resource
     SocialuniUserImgRepository userImgRepository;
 
-    public void addUserImg(SocialuniImgAddQO socialUserImgAddQO, SocialuniUserDo mineUser) {
+    public SocialuniUserImgDo addUserImg(SocialuniImgAddQO socialUserImgAddQO, SocialuniUserDo mineUser) {
         SocialuniTextContentUtil.validateImg(socialUserImgAddQO, mineUser);
 
         SocialuniUserImgDo userImgDO = UserImgDOFactory.toUserImgDO(socialUserImgAddQO, mineUser);
@@ -37,5 +37,6 @@ public class SocialAddUserImgDomain {
 
 //        return socialMineUserDetailRO;
 //        return null;
+        return userImgDO;
     }
 }
