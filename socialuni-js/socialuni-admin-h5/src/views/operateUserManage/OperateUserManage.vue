@@ -302,7 +302,7 @@ export default class OperateUserManage extends Vue {
 
   }
 
-  async tablePeiwanImgChange(row: PeiwanRO, file: any) {
+  async tablePeiwanImgChange(row: SocialuniUserImgComRO, file: any) {
     const imgFile: DomFile = FileUtilH5.fileSetPath(file.raw)
 
     console.log(imgFile)
@@ -317,11 +317,9 @@ export default class OperateUserManage extends Vue {
 
     await ImgUtilH5.setImgQualityAndAspectRatio(imgFile)
 
-    imgFile.src = this.cosAuthRO.uploadImgPath + `imgs/useShowImg/` + imgFile.src
+    imgFile.src = this.cosAuthRO.uploadImgPath + `img/` + imgFile.src
 
-    console.log(imgFile)
-
-    const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, this.cosAuthRO), SocialuniPeiwanAdminAPI.addPeiwanImgListAPI(row.userId, [imgFile])]);
+    const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, this.cosAuthRO), SocialuniOperateUserAPI.addUserImgList(row.id, [imgFile])]);
 
     console.log(res)
     console.log(res[1].data)

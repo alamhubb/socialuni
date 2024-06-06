@@ -16,4 +16,8 @@ export default class SocialuniOperateUserAPI {
     static queryOperateUserList() {
         return socialuniUserRequest.get<SocialuniUserImgComRO[]>('socialuni/admin/operateUser/queryOperateUserList')
     }
+
+    static addUserImgList(userId: string, imgs: DomFile[]) {
+        return socialuniUserRequest.post<SocialuniUserImgComRO[]>(`socialuni/admin/operateUser/addUserImgList/${userId}`, imgs)
+    }
 }

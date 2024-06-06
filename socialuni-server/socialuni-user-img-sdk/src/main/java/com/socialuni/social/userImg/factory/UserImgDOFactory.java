@@ -31,19 +31,19 @@ public class UserImgDOFactory {
         userImgDO.setCreateTime(new Date());
         userImgDO.setContentType(SocialuniContentType.userImg);
         userImgDO.setReportNum(0);
-        SocialuniTextContentUtil.setHasUnderageAndContactInfoByContentText(userImgDO.getContent(), userImgDO);
+//        SocialuniTextContentUtil.setHasUnderageAndContactInfoByContentText(userImgDO.getContent(), userImgDO);
         //是否成年认证通过
         userImgDO.setPeopleImgIsAdult(false);
         //是否包含人物图片
-        boolean hasPeople = SocialuniImgContentUtil.hasPeopleImg(userImgDO.getSrc());
+//        boolean hasPeople = SocialuniImgContentUtil.hasPeopleImg(userImgDO.getSrc());
         //如果用户包含人物头像,且用户未认证,
-        if (hasPeople) {
-            userImgDO.setHasPeopleImg(true);
-            // todo && !imgDO.getAdultAuth() 目前认证不严格，所以暂时认证的也需要审核
+//        if (hasPeople) {
+//            userImgDO.setHasPeopleImg(true);
+        // todo && !imgDO.getAdultAuth() 目前认证不严格，所以暂时认证的也需要审核
 //                if (!imgDO.getAdultAuth()) {
-            //则添加一条待审核的动态，qq平台只查询审核通过的动态
+        //则添加一条待审核的动态，qq平台只查询审核通过的动态
 //                }
-        }
+//        }
         return userImgDO;
     }
 }
