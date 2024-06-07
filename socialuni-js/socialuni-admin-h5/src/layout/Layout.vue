@@ -4,7 +4,9 @@
 
     <div class="flex-1 overflow-hidden flex-row">
       <q-nav-menu class="w150"></q-nav-menu>
-      <RouterView/>
+      <div class="flex-1 overflow-auto">
+        <RouterView/>
+      </div>
     </div>
   </div>
 </template>
@@ -30,19 +32,14 @@ console.log(123123)
 })
 export default class Layout extends Vue {
 
-  created(){
-    SocialuniUserEventOn.toLogin(() => {
-      this.toLogin()
-    })
-    SocialuniUserEventOn.loginSuccess(() => {
-      this.toHome()
-    })
-  }
-
   toLogin(){
     this.$router.push('/login')
   }
 
+
+  toHome() {
+    this.$router.push('/')
+  }
   mounted() {
     console.log('chufale')
     console.log('222')
@@ -61,10 +58,6 @@ export default class Layout extends Vue {
 
   emitTalkAdd() {
     CommonEventUtil.emit(CommunityEventConst.socialuniTalkAddEvent)
-  }
-
-  toHome() {
-    this.$router.push('/')
   }
 }
 </script>
