@@ -14,6 +14,7 @@ public class SocialuniTalkTabCircleRO {
     public String description;
     //群聊id
     public String groupChatId;
+    public String chatId;
     private Integer talkCount;
 
     public SocialuniTalkTabCircleRO(SocialuniCircleDO circleDO) {

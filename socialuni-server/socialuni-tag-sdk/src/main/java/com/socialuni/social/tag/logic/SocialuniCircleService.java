@@ -1,6 +1,7 @@
 package com.socialuni.social.tag.logic;
 
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.sdk.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.tag.dao.DO.SocialuniCircleDO;
 import com.socialuni.social.tag.dao.repository.SocialuniCircleRepository;
 import com.socialuni.social.tag.dao.redis.SocialuniCircleRedis;
@@ -10,17 +11,18 @@ import com.socialuni.social.common.sdk.model.QO.circle.CircleChatCreateQO;
 import com.socialuni.social.common.sdk.model.QO.circle.CircleCreateQO;
 import com.socialuni.social.common.sdk.model.QO.circle.CircleTalkTabInfoQO;
 import com.socialuni.social.common.sdk.model.QO.circle.SocialuniCircleQueryByTypeQO;
+import com.socialuni.social.tag.logic.manage.SocialuniCircleChatManage;
 import com.socialuni.social.tag.model.SocialuniTalkTabCircleRO;
 import com.socialuni.social.tag.model.CircleTypeRO;
 import com.socialuni.social.common.sdk.model.RO.SocialCircleRO;
 import com.socialuni.social.common.api.constant.GenderType;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.tag.dao.DO.SocialuniCircleChatDO;
 import com.socialuni.social.tag.util.SocialuniCircleDOUtil;
-import com.socialuni.social.tag.dao.repository.SocialuniCircleChatRepository;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -38,8 +40,8 @@ public class SocialuniCircleService {
     @Resource
     CircleQueryDomain circleQueryDomain;
 
-    @Resource
-    SocialuniCircleChatRepository socialuniCircleChatRepository;
+    @Autowired
+    private SocialuniUnionIdFacede socialuniUnionIdFacede;
 
     public ResultRO<SocialCircleRO> createCircle(CircleCreateQO circleCreateQO, SocialuniUserDo user) {
         SocialuniCircleDO circleDO = new SocialuniCircleDO(circleCreateQO.getCircleName(), circleCreateQO.getCircleDesc(), DevAccountFacade.getDevIdNotNull(), user.getUserId());
@@ -64,29 +66,37 @@ public class SocialuniCircleService {
     //创建圈子群聊
     public ResultRO<String> createCircleChat(CircleChatCreateQO circleCreateQO) {
         Integer devId = DevAccountFacade.getDevIdNotNull();
+        String tabName = circleCreateQO.getCircleName();
+        SocialuniCircleDO socialuniCircleDO = SocialuniCircleDOUtil.getCircleEnableNotNull(tabName);
+        //获取groupId
+        SocialuniChatDO socialuniChatDO = socialuniCircleChatManage.getOrCreateCircleGroupChat(tabName, socialuniCircleDO.getAvatar());
 
-        SocialuniCircleChatDO socialuniCircleChatDO = new SocialuniCircleChatDO();
-        socialuniCircleChatDO.setCircleName(circleCreateQO.getCircleName());
-        socialuniCircleChatDO.setGroupChatId(circleCreateQO.getGroupChatId());
-        socialuniCircleChatDO.setDevId(DevAccountFacade.getCenterDevIdNotNull());
-
-        SocialuniCircleChatDO socialuniCircleChatDO1 = socialuniCircleChatRepository.findFirstByDevIdAndCircleName(socialuniCircleChatDO.getDevId(), socialuniCircleChatDO.getCircleName());
+        /*SocialuniCircleChatDO socialuniCircleChatDO1 = socialuniCircleChatRepository.findFirstByDevIdAndCircleName(socialuniCircleChatDO.getDevId(), socialuniCircleChatDO.getCircleName());
         if (socialuniCircleChatDO1 == null) {
             socialuniCircleChatDO1 = socialuniCircleChatRepository.save(socialuniCircleChatDO);
+        }*/
+        if (socialuniChatDO == null) {
         }
-
-        return ResultRO.success(socialuniCircleChatDO1.getGroupChatId());
+            String chatId = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(socialuniChatDO.getUnionId());
+            return ResultRO.success(chatId);
     }
 
+    @Resource
+    SocialuniCircleChatManage socialuniCircleChatManage;
 
     public ResultRO<SocialuniTalkTabCircleRO> queryCircleTalkTabInfo(CircleTalkTabInfoQO circleTalkTabInfoQO) {
         String tabName = circleTalkTabInfoQO.getCircleName();
         SocialuniCircleDO socialuniCircleDO = SocialuniCircleDOUtil.getCircleEnableNotNull(tabName);
-            SocialuniTalkTabCircleRO homeTabCircleRO = new SocialuniTalkTabCircleRO(socialuniCircleDO);
-            SocialuniCircleChatDO socialuniCircleChatDO = socialuniCircleChatRepository.findFirstByDevIdAndCircleName(DevAccountFacade.getCenterDevIdNotNull(), tabName);
-            if (socialuniCircleChatDO != null) {
-                homeTabCircleRO.setGroupChatId(socialuniCircleChatDO.getGroupChatId());
-            }
+        SocialuniTalkTabCircleRO homeTabCircleRO = new SocialuniTalkTabCircleRO(socialuniCircleDO);
+
+        //获取groupId
+        SocialuniChatDO socialuniChatDO = socialuniCircleChatManage.getOrCreateCircleGroupChat(tabName, socialuniCircleDO.getAvatar());
+
+        if (socialuniChatDO != null) {
+            String chatId = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(socialuniChatDO.getUnionId());
+            homeTabCircleRO.setGroupChatId(chatId);
+            homeTabCircleRO.setChatId(chatId);
+        }
         return ResultRO.success(homeTabCircleRO);
     }
 

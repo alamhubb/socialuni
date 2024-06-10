@@ -8,6 +8,4 @@ import javax.validation.constraints.NotBlank;
 public class CircleChatCreateQO {
     @NotBlank
     private String circleName;
-    @NotBlank
-    private String groupChatId;
 }
