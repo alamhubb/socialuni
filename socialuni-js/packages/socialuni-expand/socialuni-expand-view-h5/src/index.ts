@@ -22,13 +22,7 @@ const SocialuniExpandH5 = {
         socialuniPluginsModule.router.addRoute({
             path: '/expand',
             name: 'expand',
-            component: () => {
-                if (expandView) {
-                    return expandView
-                } else {
-                    return SocialuniExpandViewH5
-                }
-            },
+            component: SocialuniExpandViewH5,
             meta: {title: '扩列'},
         })
         console.log(socialuniPluginsModule.router.getRoutes())

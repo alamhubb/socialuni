@@ -111,16 +111,6 @@ class SocialuniChatModule {
             total = total + chat.unreadNum
             return total
         }, 0)
-
-        console.log(this.chatsUnreadNumTotal)
-
-        const chatUnreadNum: number = this.chatsUnreadNumTotal
-        // 如果未读数量为0了，则隐藏红点
-        if (chatUnreadNum) {
-            this.showTabBarRedDot()
-        } else {
-            this.hideTabBarRedDot()
-        }
     }
 
     showTabBarRedDot() {
