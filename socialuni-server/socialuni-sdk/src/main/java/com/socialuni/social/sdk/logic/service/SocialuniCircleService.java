@@ -70,7 +70,7 @@ public class SocialuniCircleService {
         SocialuniCircleChatDO socialuniCircleChatDO = new SocialuniCircleChatDO();
         socialuniCircleChatDO.setCircleName(circleCreateQO.getCircleName());
         socialuniCircleChatDO.setGroupChatId(circleCreateQO.getGroupChatId());
-        socialuniCircleChatDO.setDevId(SocialuniConst.centerDevId);
+        socialuniCircleChatDO.setDevId(DevAccountFacade.getCenterDevIdNotNull());
 
         SocialuniCircleChatDO socialuniCircleChatDO1 = socialuniCircleChatRepository.findFirstByDevIdAndCircleName(socialuniCircleChatDO.getDevId(), socialuniCircleChatDO.getCircleName());
         if (socialuniCircleChatDO1 == null) {
@@ -85,7 +85,7 @@ public class SocialuniCircleService {
         String tabName = circleTalkTabInfoQO.getCircleName();
         SocialuniCircleDO socialuniCircleDO = SocialuniCircleDOUtil.getCircleEnableNotNull(tabName);
             SocialuniTalkTabCircleRO homeTabCircleRO = new SocialuniTalkTabCircleRO(socialuniCircleDO);
-            SocialuniCircleChatDO socialuniCircleChatDO = socialuniCircleChatRepository.findFirstByDevIdAndCircleName(SocialuniConst.centerDevId, tabName);
+            SocialuniCircleChatDO socialuniCircleChatDO = socialuniCircleChatRepository.findFirstByDevIdAndCircleName(DevAccountFacade.getCenterDevIdNotNull(), tabName);
             if (socialuniCircleChatDO != null) {
                 homeTabCircleRO.setGroupChatId(socialuniCircleChatDO.getGroupChatId());
             }

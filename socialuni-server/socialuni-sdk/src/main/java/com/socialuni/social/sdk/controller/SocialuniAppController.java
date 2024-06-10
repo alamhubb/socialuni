@@ -15,6 +15,7 @@ import com.socialuni.social.common.sdk.model.VO.HomeSwiperVO;
 import com.socialuni.social.common.sdk.model.RO.SocialuniTalkTabRO;
 import com.socialuni.social.common.sdk.model.SocialAppLaunchDataRO;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -55,7 +56,7 @@ public class SocialuniAppController implements SocialuniAppAPI {
                 SocialuniCircleDO socialuniCircleDO = SocialuniCircleDOUtil.getCircleEnableAllowNull(tabName);
                 if (socialuniCircleDO != null) {
                     SocialuniTalkTabCircleRO homeTabCircleRO = new SocialuniTalkTabCircleRO(socialuniCircleDO);
-                    SocialuniCircleChatDO socialuniCircleChatDO = socialuniCircleChatRepository.findFirstByDevIdAndCircleName(SocialuniConst.centerDevId, tabName);
+                    SocialuniCircleChatDO socialuniCircleChatDO = socialuniCircleChatRepository.findFirstByDevIdAndCircleName(DevAccountFacade.getCenterDevIdNotNull(), tabName);
                     if (socialuniCircleChatDO != null) {
                         homeTabCircleRO.setGroupChatId(socialuniCircleChatDO.getGroupChatId());
                     }

@@ -8,6 +8,7 @@ import com.socialuni.social.sdk.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.sdk.im.enumeration.ChatOpenType;
 import com.socialuni.social.sdk.im.enumeration.ChatType;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 
@@ -37,6 +38,10 @@ public class SocialuniChatDOFactory {
 
     public static SocialuniChatDO createSystemGroupChat(String chatName) {
         return SocialuniChatDOFactory.createGroupChat(chatName, null, ChatType.system_group, SocialuniSystemConst.getTagDefaultAvatar());
+    }
+
+    public static SocialuniChatDO createCircleGroupChat(String circleName, String avatar) {
+        return SocialuniChatDOFactory.createGroupChat(circleName, SocialuniUserUtil.getSystemUserIdNotNull(), ChatType.circleGroup, avatar);
     }
 
     public static SocialuniChatDO createUserPersonalChat(SocialuniUserDo userDo) {

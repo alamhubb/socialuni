@@ -60,7 +60,7 @@ public class SocialuniSystemConst {
         SocialuniSystemConst.socialuniServerUrl = socialuniServerUrl;
     }
 
-    @Value("${socialuni.central-socialuni-id:17e212a46c7b4e5ebc70a934bef4ed27}")
+    @Value("${socialuni.central-socialuni-id:a378e0b993414451a1c34b95d75398dd}")
     public void setCenterSocialuniId(String centerSocialuniId) {
         SocialuniSystemConst.centerSocialuniId = centerSocialuniId;
     }
