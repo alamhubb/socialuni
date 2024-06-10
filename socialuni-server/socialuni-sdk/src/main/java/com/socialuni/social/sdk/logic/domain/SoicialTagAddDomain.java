@@ -1,14 +1,14 @@
 package com.socialuni.social.sdk.logic.domain;
 
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
-import com.socialuni.social.common.sdk.dao.DO.SocialuniTagDO;
-import com.socialuni.social.common.sdk.dao.repository.TagRepository;
+import com.socialuni.social.tag.dao.DO.SocialuniTagDO;
+import com.socialuni.social.tag.dao.repository.TagRepository;
 import com.socialuni.social.user.sdk.logic.check.SocialuniUserCheck;
-import com.socialuni.social.common.sdk.logic.SocialTagROFactory;
+import com.socialuni.social.tag.factory.SocialTagROFactory;
 import com.socialuni.social.community.sdk.logic.manage.talk.SocialTagManage;
 import com.socialuni.social.content.utils.SocialuniTextContentUtil;
 import com.socialuni.social.common.sdk.model.QO.tag.TagAddQO;
-import com.socialuni.social.common.sdk.model.RO.tag.TagRO;
+import com.socialuni.social.tag.model.TagRO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import org.springframework.stereotype.Service;
 

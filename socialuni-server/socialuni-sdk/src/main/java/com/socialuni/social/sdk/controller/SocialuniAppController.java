@@ -1,11 +1,10 @@
 package com.socialuni.social.sdk.controller;
 
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.common.sdk.constant.SocialuniConst;
 import com.socialuni.social.community.sdk.constant.TalkTabType;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniCircleChatDO;
-import com.socialuni.social.common.sdk.dao.DO.SocialuniCircleDO;
-import com.socialuni.social.common.sdk.model.RO.SocialuniTalkTabCircleRO;
+import com.socialuni.social.tag.dao.DO.SocialuniCircleDO;
+import com.socialuni.social.tag.model.SocialuniTalkTabCircleRO;
 import com.socialuni.social.community.sdk.repository.SocialuniCircleChatRepository;
 import com.socialuni.social.community.sdk.dao.SocialuniCircleDOUtil;
 import com.socialuni.social.common.sdk.feignAPI.SocialuniAppAPI;

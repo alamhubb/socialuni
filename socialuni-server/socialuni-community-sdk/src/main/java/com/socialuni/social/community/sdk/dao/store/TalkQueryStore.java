@@ -2,7 +2,7 @@ package com.socialuni.social.community.sdk.dao.store;
 
 import cn.hutool.core.util.StrUtil;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
-import com.socialuni.social.common.sdk.dao.DO.SocialuniCircleDO;
+import com.socialuni.social.tag.dao.DO.SocialuniCircleDO;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
 import com.socialuni.social.community.sdk.dao.SocialuniCircleDOUtil;
 import com.socialuni.social.community.sdk.dao.SocialuniTalkDORedis;

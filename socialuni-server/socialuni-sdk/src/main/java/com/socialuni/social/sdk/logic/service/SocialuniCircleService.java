@@ -1,19 +1,18 @@
 package com.socialuni.social.sdk.logic.service;
 
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.common.sdk.constant.SocialuniConst;
-import com.socialuni.social.common.sdk.dao.DO.SocialuniCircleDO;
-import com.socialuni.social.common.sdk.dao.repository.SocialuniCircleRepository;
-import com.socialuni.social.common.sdk.dao.redis.SocialuniCircleRedis;
-import com.socialuni.social.common.sdk.feignAPI.community.SocialuniCircleAPI;
-import com.socialuni.social.common.sdk.logic.SocialCircleROFactory;
+import com.socialuni.social.tag.dao.DO.SocialuniCircleDO;
+import com.socialuni.social.tag.dao.repository.SocialuniCircleRepository;
+import com.socialuni.social.tag.dao.redis.SocialuniCircleRedis;
+import com.socialuni.social.tag.api.SocialuniCircleAPI;
+import com.socialuni.social.tag.factory.SocialCircleROFactory;
 import com.socialuni.social.sdk.logic.domain.CircleQueryDomain;
 import com.socialuni.social.common.sdk.model.QO.circle.CircleChatCreateQO;
 import com.socialuni.social.common.sdk.model.QO.circle.CircleCreateQO;
 import com.socialuni.social.common.sdk.model.QO.circle.CircleTalkTabInfoQO;
 import com.socialuni.social.common.sdk.model.QO.circle.SocialuniCircleQueryByTypeQO;
-import com.socialuni.social.common.sdk.model.RO.SocialuniTalkTabCircleRO;
-import com.socialuni.social.common.sdk.model.RO.circle.CircleTypeRO;
+import com.socialuni.social.tag.model.SocialuniTalkTabCircleRO;
+import com.socialuni.social.tag.model.CircleTypeRO;
 import com.socialuni.social.common.sdk.model.RO.SocialCircleRO;
 import com.socialuni.social.common.api.constant.GenderType;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;

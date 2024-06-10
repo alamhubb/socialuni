@@ -1,12 +1,12 @@
 package com.socialuni.social.sdk.logic.tag;
 
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.common.sdk.dao.redis.SocialTagRedis;
-import com.socialuni.social.common.sdk.feignAPI.community.SocialuniTagAPI;
+import com.socialuni.social.tag.dao.redis.SocialTagRedis;
+import com.socialuni.social.tag.api.SocialuniTagAPI;
 import com.socialuni.social.common.sdk.model.QO.tag.TagAddQO;
 import com.socialuni.social.sdk.logic.domain.SoicialTagAddDomain;
-import com.socialuni.social.common.sdk.model.RO.tag.TagRO;
-import com.socialuni.social.common.sdk.model.RO.tag.TagTypeRO;
+import com.socialuni.social.tag.model.TagRO;
+import com.socialuni.social.tag.model.TagTypeRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.api.constant.GenderType;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;

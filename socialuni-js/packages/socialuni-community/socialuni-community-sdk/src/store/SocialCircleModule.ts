@@ -5,6 +5,8 @@ import SocialuniCircleAPI from "socialuni-community-api/src/api/SocialuniCircleA
 import TagStorageUtil from "../util/TagStorageUtil";
 import SocialCircleStorageUtil from "../util/SocialCircleStorageUtil";
 import JsonUtil from "qing-util/src/util/JsonUtil";
+import CircleCreateChatQO from "socialuni-api-base/src/model/community/circle/CircleCreateChatQO";
+import {socialTalkModule} from "./SocialTalkModule";
 
 
 class SocialCircleModule {
@@ -26,6 +28,12 @@ class SocialCircleModule {
     setCircleName(circleName: string) {
         this.circleName = circleName
         this.setMineHistoryCircleNames(circleName)
+        if (this.circleName) {
+            console.log('执行了查询圈子')
+            SocialuniCircleAPI.queryCircleTalkTabInfoAPI(new CircleCreateChatQO(this.circleName, null)).then(res => {
+                socialTalkModule.curTab.circle = res.data
+            })
+        }
     }
 
 

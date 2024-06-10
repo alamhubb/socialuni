@@ -214,9 +214,6 @@ this.setCircleName(null)
         const curTab = this.talkTabQueryUtils.find((item, index) => index === this.currentTabIndex)
         if (curTab.viewData.type === TalkTabType.circle_type) {
             socialCircleModule.setCircleName(curTab.viewData.name)
-            SocialuniCircleAPI.queryCircleTalkTabInfoAPI(new CircleCreateChatQO(curTab.viewData.name, null)).then(res => {
-                curTab.viewData.circle = res.data
-            })
         } else {
             socialCircleModule.setCircleName(null)
         }

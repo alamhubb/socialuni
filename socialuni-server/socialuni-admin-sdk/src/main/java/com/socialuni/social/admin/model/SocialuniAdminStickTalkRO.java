@@ -1,6 +1,6 @@
 package com.socialuni.social.admin.model;
 
-import com.socialuni.social.common.sdk.model.RO.tag.TagRO;
+import com.socialuni.social.tag.model.TagRO;
 import com.socialuni.social.community.sdk.model.RO.talk.SocialuniCommentRO;
 import com.socialuni.social.community.sdk.model.RO.talk.SocialuniTalkImgRO;
 import lombok.Data;

@@ -1,11 +1,11 @@
 package com.socialuni.social.expand.logic.check;
 
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import com.socialuni.social.common.sdk.dao.DO.SocialuniCircleDO;
-import com.socialuni.social.common.sdk.dao.DO.SocialuniTagTypeDO;
-import com.socialuni.social.common.sdk.dao.repository.SocialuniTagTypeRepository;
+import com.socialuni.social.tag.dao.DO.SocialuniCircleDO;
+import com.socialuni.social.tag.dao.DO.SocialuniTagTypeDO;
+import com.socialuni.social.tag.dao.repository.SocialuniTagTypeRepository;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
-import com.socialuni.social.common.sdk.dao.redis.SocialuniCircleRedis;
+import com.socialuni.social.tag.dao.redis.SocialuniCircleRedis;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 

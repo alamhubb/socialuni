@@ -1,10 +1,10 @@
 package com.socialuni.social.community.sdk.logic.domain.comment;
 
 import com.socialuni.social.community.sdk.dao.DO.SocialuniCommentDO;
-import com.socialuni.social.common.sdk.dao.DO.SocialuniTagDO;
+import com.socialuni.social.tag.dao.DO.SocialuniTagDO;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
 import com.socialuni.social.common.sdk.constant.UserType;
-import com.socialuni.social.common.sdk.dao.redis.SocialTagRedis;
+import com.socialuni.social.tag.dao.redis.SocialTagRedis;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.social.community.sdk.logic.entity.comment.SocialPostCommentEntity;

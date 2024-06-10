@@ -1,7 +1,7 @@
 package com.socialuni.social.community.sdk.model;
 
-import com.socialuni.social.common.sdk.dao.DO.SocialuniCircleDO;
-import com.socialuni.social.common.sdk.dao.DO.SocialuniTagDO;
+import com.socialuni.social.tag.dao.DO.SocialuniCircleDO;
+import com.socialuni.social.tag.dao.DO.SocialuniTagDO;
 
 import com.socialuni.social.community.sdk.dao.DO.SocialuniDistrictDO;
 import lombok.Data;

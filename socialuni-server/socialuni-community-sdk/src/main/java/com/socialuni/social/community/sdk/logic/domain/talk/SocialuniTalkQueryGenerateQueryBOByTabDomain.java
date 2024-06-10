@@ -1,7 +1,7 @@
 package com.socialuni.social.community.sdk.logic.domain.talk;
 
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
-import com.socialuni.social.common.sdk.dao.DO.SocialuniCircleDO;
+import com.socialuni.social.tag.dao.DO.SocialuniCircleDO;
 import com.socialuni.social.community.sdk.constant.TalkTabType;
 import com.socialuni.social.community.sdk.dao.SocialuniCircleDOUtil;
 import com.socialuni.social.community.sdk.model.QO.talk.SocialHomeTabTalkQueryBO;

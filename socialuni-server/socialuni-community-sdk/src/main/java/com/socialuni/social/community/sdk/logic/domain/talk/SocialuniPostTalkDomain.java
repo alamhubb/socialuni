@@ -8,11 +8,11 @@ import com.socialuni.social.community.sdk.dao.repository.SocialTalkCircleReposit
 import com.socialuni.social.community.sdk.logic.service.tag.TagService;
 import com.socialuni.social.community.sdk.model.TalkAddValidateRO;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniDistrictDO;
-import com.socialuni.social.common.sdk.dao.DO.SocialuniCircleDO;
+import com.socialuni.social.tag.dao.DO.SocialuniCircleDO;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
-import com.socialuni.social.common.sdk.dao.DO.SocialuniTagDO;
-import com.socialuni.social.common.sdk.dao.repository.SocialuniCircleRepository;
-import com.socialuni.social.common.sdk.dao.repository.TagRepository;
+import com.socialuni.social.tag.dao.DO.SocialuniTagDO;
+import com.socialuni.social.tag.dao.repository.SocialuniCircleRepository;
+import com.socialuni.social.tag.dao.repository.TagRepository;
 import com.socialuni.social.expand.utils.SocialuniUserExpandDOUtil;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;

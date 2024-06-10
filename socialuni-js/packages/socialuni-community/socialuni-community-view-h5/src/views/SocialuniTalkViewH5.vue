@@ -23,7 +23,8 @@
         </el-menu>
       </div>
       <div class="flex-none w600">
-        <div v-show="selectTagNames.length" class="bg-grey16 bd-radius mb-sm pd-sm position-sticky index-sm" style="top:-10px">
+        <div v-show="selectTagNames.length" class="bg-grey16 bd-radius mb-sm pd-sm position-sticky index-sm"
+             style="top:-10px">
           <div v-show="selectTagNames.length" class="row-col-center">
             已选话题：
             <div v-for="tag in selectTagNames" class="color-blue mr-sm font-18 row-all-center">
@@ -40,6 +41,32 @@
         <!--          <q-load-more></q-load-more>-->
         <!--          <q-icon icon="mdi-loading mdi-spin"></q-icon>-->
         <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
+
+        <div v-if="pageQueryUtil.queryQO.queryData.circle"
+             class="bg-theme-light py-10 bd-radius-10 mb-sm elevation-4 px">
+          <div class="row-between-center mb-sm">
+
+          </div>
+          <div class="row-between-center mb-sm">
+            <div class="row-col-center">
+              <div class="font-16 font-bold">
+<!--                圈子：-->
+                {{ pageQueryUtil.queryQO.queryData.circle }}圈
+              </div>
+                <q-tag class="ml-xs use-click" type="white">
+                  <q-icon icon="mdi-chat-outline mr-mn" size="16"></q-icon>
+                  进入群聊</q-tag>
+            </div>
+            <div class="row-col-center">
+<!--              <div class="color-sub use-click">竞选详情</div>-->
+<!--              <div class="color-sub ml-md use-click">圈子管理</div>-->
+            </div>
+          </div>
+<!--          <div class="row-col-center">-->
+<!--            圈主：xxxx，胺分散法，撒飞洒地方，阿斯蒂芬阿萨德，士大夫撒地方，-->
+<!--          </div>-->
+        </div>
+
         <div v-for="(talk,index) in talksNew" :key="talk.id">
           <talk-item :talk="talk"
                      :talk-tab-type="tabName"
@@ -47,7 +74,8 @@
           />
         </div>
 
-        <q-load-more v-show="!pageQueryUtil.queryQO.firstLoad" class="my-sm" :status="pageQueryUtil.loadMore" @click="forceLoadNextPage"></q-load-more>
+        <q-load-more v-show="!pageQueryUtil.queryQO.firstLoad" class="my-sm" :status="pageQueryUtil.loadMore"
+                     @click="forceLoadNextPage"></q-load-more>
 
         <msg-input class="w600"></msg-input>
       </div>
@@ -56,7 +84,7 @@
           <div class="w300 bg-white bd-radius pd">
             <div>
               <div v-for="tag in hotTagsTop10">
-                <div class="mt-sm color-blue_dark mr-sm font-18" @click="setTagName(tag.name)">
+                <div class="mt-sm color-blue_dark mr-sm font-18 use-click" @click="setTagName(tag.name)">
                   <span class="color-blue mr-nn">#</span>
                   {{ tag.name }}
                 </div>
@@ -218,7 +246,7 @@ export default class SocialuniTalkViewH5 extends Vue {
     }
   }
 
-  setTabName() {
+  setCircleName() {
     socialTalkModule.curTabName = this.$route.query.tab as string
     if (this.$route.query.circle) {
       socialCircleModule.setCircleName(this.$route.query.circle as string)
@@ -262,7 +290,7 @@ export default class SocialuniTalkViewH5 extends Vue {
         console.log(this.$route)
         console.log(this.$route.query.tab)
         console.log(this.$router)
-        this.setTabName()
+        this.setCircleName()
         this.initQuery()
       }
     })

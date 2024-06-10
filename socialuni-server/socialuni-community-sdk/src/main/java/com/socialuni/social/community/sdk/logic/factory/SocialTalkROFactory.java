@@ -1,12 +1,12 @@
 package com.socialuni.social.community.sdk.logic.factory;
 
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
-import com.socialuni.social.common.sdk.dao.redis.SocialTagRedis;
+import com.socialuni.social.tag.dao.redis.SocialTagRedis;
 import com.socialuni.social.community.sdk.dao.CommentDao;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniHugDO;
-import com.socialuni.social.common.sdk.dao.DO.SocialuniCircleDO;
+import com.socialuni.social.tag.dao.DO.SocialuniCircleDO;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
-import com.socialuni.social.common.sdk.dao.DO.SocialuniTagDO;
+import com.socialuni.social.tag.dao.DO.SocialuniTagDO;
 import com.socialuni.social.community.sdk.dao.SocialuniTalkDOUtil;
 import com.socialuni.social.community.sdk.dao.SocialuniTalkImgDOUtil;
 import com.socialuni.social.community.sdk.dao.repository.SocialTalkCircleRepository;
@@ -16,7 +16,7 @@ import com.socialuni.social.community.sdk.model.RO.talk.SocialTalkTagRO;
 import com.socialuni.social.community.sdk.model.RO.talk.SocialuniCommentRO;
 import com.socialuni.social.community.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.social.community.sdk.repository.CommentRepository;
-import com.socialuni.social.common.sdk.dao.repository.SocialuniCircleRepository;
+import com.socialuni.social.tag.dao.repository.SocialuniCircleRepository;
 import com.socialuni.social.community.sdk.dao.DO.SocialTalkCircleDO;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkImgDO;
 import com.socialuni.social.community.sdk.redis.HugRedis;

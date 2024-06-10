@@ -1,6 +1,5 @@
 package com.socialuni.social.common.sdk.model.RO;
 
-import com.socialuni.social.common.sdk.model.RO.SocialuniTalkTabCircleRO;
 import lombok.Data;
 
 /**
@@ -10,7 +9,7 @@ import lombok.Data;
 @Data
 public class SocialuniTalkTabRO {
     private String name;
-    private SocialuniTalkTabCircleRO circle;
+    private Object circle;
     private String type;
 
 

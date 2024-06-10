@@ -1,9 +1,9 @@
 package com.socialuni.social.sdk.logic.domain;
 
-import com.socialuni.social.common.sdk.dao.DO.SocialuniCircleDO;
-import com.socialuni.social.common.sdk.dao.DO.SocialuniTagTypeDO;
-import com.socialuni.social.common.sdk.dao.repository.SocialuniTagTypeRepository;
-import com.socialuni.social.common.sdk.logic.SocialCircleROFactory;
+import com.socialuni.social.tag.dao.DO.SocialuniCircleDO;
+import com.socialuni.social.tag.dao.DO.SocialuniTagTypeDO;
+import com.socialuni.social.tag.dao.repository.SocialuniTagTypeRepository;
+import com.socialuni.social.tag.factory.SocialCircleROFactory;
 import com.socialuni.social.common.sdk.model.QO.circle.SocialuniCircleQueryByTypeQO;
 import com.socialuni.social.common.sdk.model.RO.SocialCircleRO;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class CircleQueryDomain {
     @Resource
     SocialuniTagTypeRepository tagTypeRepository;
     @Resource
-    com.socialuni.social.common.sdk.dao.redis.SocialuniCircleRedis SocialuniCircleRedis;
+    com.socialuni.social.tag.dao.redis.SocialuniCircleRedis SocialuniCircleRedis;
 
     public List<SocialCircleRO> queryCirclesByCircleType(SocialuniCircleQueryByTypeQO socialuniCircleQueryByTypeQO) {
         String circleTypeName = socialuniCircleQueryByTypeQO.getCircleTypeName();

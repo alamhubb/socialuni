@@ -26,6 +26,7 @@
         <module>socialuni-common-api</module>
         <module>socialuni-sdk</module>
         <module>socialuni-web-sdk</module>
+        <module>socialuni-tag-sdk</module>
         <module>socialuni-music-sdk</module>
         <module>socialuni-deploy-sdk</module>
         <module>socialuni-peiwan-sdk</module>
@@ -108,6 +109,11 @@
             <dependency>
                 <groupId>com.socialuni.social</groupId>
                 <artifactId>socialuni-deploy-sdk</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni.social</groupId>
+                <artifactId>socialuni-tag-sdk</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>

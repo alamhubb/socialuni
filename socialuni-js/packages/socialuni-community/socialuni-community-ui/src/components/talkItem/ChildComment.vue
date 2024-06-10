@@ -57,7 +57,6 @@ export default class ChildComment extends Vue {
   @Watch('commentProp', {deep: true})
   commentPropWatch() {
     this.comment = ObjectUtil.deepClone(this.commentProp)
-    console.log(this.comment)
   }
 
   childCommentLimitNum = 3
