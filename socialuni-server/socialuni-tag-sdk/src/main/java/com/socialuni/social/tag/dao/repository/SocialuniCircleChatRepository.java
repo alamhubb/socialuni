@@ -1,6 +1,6 @@
-package com.socialuni.social.community.sdk.repository;
+package com.socialuni.social.tag.dao.repository;
 
-import com.socialuni.social.community.sdk.dao.DO.SocialuniCircleChatDO;
+import com.socialuni.social.tag.dao.DO.SocialuniCircleChatDO;
 import com.socialuni.social.tag.dao.redis.CircleRedisKey;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;

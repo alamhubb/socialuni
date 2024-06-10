@@ -1,4 +1,4 @@
-package com.socialuni.social.community.sdk.dao;
+package com.socialuni.social.tag.util;
 
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;

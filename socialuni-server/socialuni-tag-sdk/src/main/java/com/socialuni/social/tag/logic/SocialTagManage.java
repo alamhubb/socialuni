@@ -1,4 +1,4 @@
-package com.socialuni.social.community.sdk.logic.manage.talk;
+package com.socialuni.social.tag.logic;
 
 import com.socialuni.social.tag.dao.DO.SocialuniTagDO;
 import com.socialuni.social.tag.dao.repository.TagRepository;

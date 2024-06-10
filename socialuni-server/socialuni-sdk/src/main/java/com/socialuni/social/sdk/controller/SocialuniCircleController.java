@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.controller;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.tag.api.SocialuniCircleAPI;
 import com.socialuni.social.tag.model.SocialuniTalkTabCircleRO;
-import com.socialuni.social.sdk.logic.service.SocialuniCircleService;
+import com.socialuni.social.tag.logic.SocialuniCircleService;
 import com.socialuni.social.common.sdk.model.QO.circle.SocialuniCircleQueryByTypeQO;
 import com.socialuni.social.common.sdk.model.QO.circle.CircleChatCreateQO;
 import com.socialuni.social.common.sdk.model.QO.circle.CircleCreateQO;

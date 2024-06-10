@@ -4,7 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
 import com.socialuni.social.tag.dao.DO.SocialuniCircleDO;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
-import com.socialuni.social.community.sdk.dao.SocialuniCircleDOUtil;
+import com.socialuni.social.tag.util.SocialuniCircleDOUtil;
 import com.socialuni.social.community.sdk.dao.SocialuniTalkDORedis;
 import com.socialuni.social.community.sdk.dao.SocialuniTalkDOUtil;
 import com.socialuni.social.community.sdk.dao.mapper.TalkMapper;

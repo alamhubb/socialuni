@@ -22,7 +22,7 @@ import com.socialuni.social.community.sdk.dao.DO.SocialTalkTagDO;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkImgDO;
 import com.socialuni.social.community.sdk.repository.TalkImgRepository;
 import com.socialuni.social.community.sdk.repository.TalkTagRepository;
-import com.socialuni.social.community.sdk.dao.SocialuniCircleDOUtil;
+import com.socialuni.social.tag.util.SocialuniCircleDOUtil;
 import com.socialuni.social.community.sdk.dao.SocialuniTalkDORedis;
 import com.socialuni.social.user.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.social.community.sdk.logic.factory.TalkImgDOFactory;

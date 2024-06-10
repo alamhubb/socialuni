@@ -1,11 +1,10 @@
-package com.socialuni.social.sdk.logic.domain;
+package com.socialuni.social.tag.logic;
 
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.tag.dao.DO.SocialuniTagDO;
 import com.socialuni.social.tag.dao.repository.TagRepository;
 import com.socialuni.social.user.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.social.tag.factory.SocialTagROFactory;
-import com.socialuni.social.community.sdk.logic.manage.talk.SocialTagManage;
 import com.socialuni.social.content.utils.SocialuniTextContentUtil;
 import com.socialuni.social.common.sdk.model.QO.tag.TagAddQO;
 import com.socialuni.social.tag.model.TagRO;

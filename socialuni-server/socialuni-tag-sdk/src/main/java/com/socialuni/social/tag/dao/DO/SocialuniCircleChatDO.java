@@ -1,4 +1,4 @@
-package com.socialuni.social.community.sdk.dao.DO;
+package com.socialuni.social.tag.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniBaseDO;
 import lombok.Data;

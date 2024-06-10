@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.logic.domain;
+package com.socialuni.social.tag.logic;
 
 import com.socialuni.social.tag.dao.DO.SocialuniCircleDO;
 import com.socialuni.social.tag.dao.DO.SocialuniTagTypeDO;

@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.logic.service;
+package com.socialuni.social.tag.logic;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.tag.dao.DO.SocialuniCircleDO;
@@ -6,7 +6,6 @@ import com.socialuni.social.tag.dao.repository.SocialuniCircleRepository;
 import com.socialuni.social.tag.dao.redis.SocialuniCircleRedis;
 import com.socialuni.social.tag.api.SocialuniCircleAPI;
 import com.socialuni.social.tag.factory.SocialCircleROFactory;
-import com.socialuni.social.sdk.logic.domain.CircleQueryDomain;
 import com.socialuni.social.common.sdk.model.QO.circle.CircleChatCreateQO;
 import com.socialuni.social.common.sdk.model.QO.circle.CircleCreateQO;
 import com.socialuni.social.common.sdk.model.QO.circle.CircleTalkTabInfoQO;
@@ -17,9 +16,9 @@ import com.socialuni.social.common.sdk.model.RO.SocialCircleRO;
 import com.socialuni.social.common.api.constant.GenderType;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.community.sdk.dao.DO.SocialuniCircleChatDO;
-import com.socialuni.social.community.sdk.dao.SocialuniCircleDOUtil;
-import com.socialuni.social.community.sdk.repository.SocialuniCircleChatRepository;
+import com.socialuni.social.tag.dao.DO.SocialuniCircleChatDO;
+import com.socialuni.social.tag.util.SocialuniCircleDOUtil;
+import com.socialuni.social.tag.dao.repository.SocialuniCircleChatRepository;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Service;
