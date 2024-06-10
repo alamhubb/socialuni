@@ -15,7 +15,7 @@
       </template>
 
       <div class="w600 flex-none row-col-center h100p mr overflow-hidden">
-        <div class="bg-theme">123</div>
+<!--        <div class="bg-theme">123</div>-->
         <q-nav-menu class="socialuni-navbar-h5 w700" mode="horizontal"></q-nav-menu>
         <q-button class="flex-none" primary @click="emitTalkAdd">发帖</q-button>
       </div>
