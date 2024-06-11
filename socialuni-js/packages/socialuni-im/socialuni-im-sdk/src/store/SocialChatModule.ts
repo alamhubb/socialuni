@@ -686,10 +686,10 @@ class SocialChatModule {
 
     async joinCircleGroupChat(circle: SocialuniTalkTabCircleRO) {
         //如果已经创建群聊
-        if (circle.groupChatId) {
+        if (circle.chatId) {
             QingAppUtil.UniUtil.showLoading('加载中')
             const optionsSearch: SearchGroupParams = {
-                keywordList: [circle.groupChatId],
+                keywordList: [circle.chatId],
                 isSearchGroupID: true,
                 isSearchGroupName: false
             }
@@ -698,7 +698,7 @@ class SocialChatModule {
                 const resData: any[] = JsonUtil.toParse(res.data)
                 if (!resData.length) {
                     const options: JoinGroupParams = {
-                        groupID: circle.groupChatId,
+                        groupID: circle.chatId,
                         reqMsg: "",
                         joinSource: GroupJoinSource.Search
                     }
@@ -707,7 +707,7 @@ class SocialChatModule {
             } finally {
                 QingAppUtil.UniUtil.hideLoading()
             }
-            socialChatModule.setChatIdToMessagePage(circle.groupChatId)
+            socialChatModule.setChatIdToMessagePage(circle.chatId)
         } else {
             QingAppUtil.UniUtil.showLoading('加载中')
             console.log(circle)
@@ -741,7 +741,7 @@ class SocialChatModule {
                 const cRes = await SocialuniCircleAPI.createCircleChatAPI(new CircleCreateChatQO(circle.name, resData.groupID))
                 socialTalkModule.curTab.circle.groupChatId = cRes.data
                 const optionsVerification: SetGroupVerificationParams = {
-                        groupID: circle.groupChatId,
+                        groupID: circle.chatId,
                         verification: 2,
                     }
                 ;(await this.openIm()).setGroupVerification(optionsVerification)

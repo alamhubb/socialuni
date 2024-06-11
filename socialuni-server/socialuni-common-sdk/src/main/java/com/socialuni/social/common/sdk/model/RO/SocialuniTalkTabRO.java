@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class SocialuniTalkTabRO {
     private String name;
-    private Object circle;
+//    private Object circle;
     private String type;
 
 

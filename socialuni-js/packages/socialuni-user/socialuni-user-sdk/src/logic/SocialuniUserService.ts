@@ -6,6 +6,7 @@ import SocialuniUserRO from "socialuni-api-base/src/model/user/SocialuniUserRO";
 
 export default class SocialuniUserService {
     static loginSuccess(userRO: SocialLoginRO<SocialuniUserRO>) {
+        QingAppUtil.ToastUtil.success('登录成功')
         socialuniUserModule.setUserAndToken(userRO)
         SocialuniUserEventEmit.loginSuccess()
     }

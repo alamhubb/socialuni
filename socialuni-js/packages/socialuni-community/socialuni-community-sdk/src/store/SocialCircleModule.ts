@@ -7,11 +7,13 @@ import SocialCircleStorageUtil from "../util/SocialCircleStorageUtil";
 import JsonUtil from "qing-util/src/util/JsonUtil";
 import CircleCreateChatQO from "socialuni-api-base/src/model/community/circle/CircleCreateChatQO";
 import {socialTalkModule} from "./SocialTalkModule";
+import SocialuniTalkTabCircleRO from "socialuni-api-base/src/model/community/circle/SocialuniTalkTabCircleRO";
 
 
 class SocialCircleModule {
     circleName: string = null
     circles: SocialCircleRO[] = []
+    circleInfo: SocialuniTalkTabCircleRO = null
     circleTypes: CircleTypeRO[] = []
     historyCircles: CircleTypeRO [] = []
     //最多存4个
@@ -31,7 +33,7 @@ class SocialCircleModule {
         if (this.circleName) {
             console.log('执行了查询圈子')
             SocialuniCircleAPI.queryCircleTalkTabInfoAPI(new CircleCreateChatQO(this.circleName, null)).then(res => {
-                socialTalkModule.curTab.circle = res.data
+                this.circleInfo = res.data
             })
         }
     }

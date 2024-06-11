@@ -50,21 +50,22 @@
           <div class="row-between-center mb-sm">
             <div class="row-col-center">
               <div class="font-16 font-bold">
-<!--                圈子：-->
+                <!--                圈子：-->
                 {{ pageQueryUtil.queryQO.queryData.circle }}圈
               </div>
-                <q-tag class="ml-xs use-click" type="white">
-                  <q-icon icon="mdi-chat-outline mr-mn" size="16"></q-icon>
-                  进入群聊</q-tag>
+              <q-tag class="ml-xs use-click" type="white" @click="toImPage(curCircle?.chatId)">
+                <q-icon icon="mdi-chat-outline mr-mn" size="16"></q-icon>
+                进入群聊
+              </q-tag>
             </div>
             <div class="row-col-center">
-<!--              <div class="color-sub use-click">竞选详情</div>-->
-<!--              <div class="color-sub ml-md use-click">圈子管理</div>-->
+              <!--              <div class="color-sub use-click">竞选详情</div>-->
+              <!--              <div class="color-sub ml-md use-click">圈子管理</div>-->
             </div>
           </div>
-<!--          <div class="row-col-center">-->
-<!--            圈主：xxxx，胺分散法，撒飞洒地方，阿斯蒂芬阿萨德，士大夫撒地方，-->
-<!--          </div>-->
+          <!--          <div class="row-col-center">-->
+          <!--            圈主：xxxx，胺分散法，撒飞洒地方，阿斯蒂芬阿萨德，士大夫撒地方，-->
+          <!--          </div>-->
         </div>
 
         <div v-for="(talk,index) in talksNew" :key="talk.id">
@@ -175,6 +176,8 @@ import TalkAddView from "./TalkAddView.vue";
 import SocialuniTalkListViewService from "socialuni-community-sdk/src/logic/service/SocialuniTalkListViewService";
 import {getCurrentInstance, nextTick, watch} from "vue";
 import QTag from "qing-ui/src/components/QTag.vue";
+import ImPageUtil from "socialuni-im-sdk/src/util/ImPageUtil";
+import SocialuniTalkTabRO from "socialuni-api-base/src/model/talk/SocialuniTalkTabRO";
 
 
 // todo 后台可控制是否显示轮播图
@@ -203,7 +206,7 @@ export default class SocialuniTalkViewH5 extends Vue {
   }
 
 
-  pageQueryUtil: SocialuniPageQueryUtil<TalkVO, TalkQueryVO> = new SocialuniPageQueryUtil(SocialuniTalkAPI.queryTalksAPI)
+  pageQueryUtil: SocialuniPageQueryUtil<TalkVO, TalkQueryVO, SocialuniTalkTabRO> = new SocialuniPageQueryUtil(SocialuniTalkAPI.queryTalksAPI)
 
   async initQuery() {
     const talkQO = TalkQOFactory.getTalkQueryQO(socialTalkModule.curTabName, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, socialuniTagModule.selectTagNames, socialCircleModule.circleName)
@@ -221,10 +224,17 @@ export default class SocialuniTalkViewH5 extends Vue {
     this.initQuery()
   }
 
+  get curCircle() {
+    return socialCircleModule.circleInfo
+  }
+
   get talkTabs() {
     return socialTalkModule.talkTabs
   }
 
+  toImPage(chatId) {
+    ImPageUtil.toMessagePageByChatId(chatId)
+  }
 
   get mineCirclesTop10() {
     console.log(socialCircleModule.mineCirclesTop10)

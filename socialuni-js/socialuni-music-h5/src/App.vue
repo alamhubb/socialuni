@@ -81,7 +81,7 @@ export default class App extends Vue {
 
   created() {
     SocialuniUserEventOn.toLogin(() => {
-      this.$refs.navbar.toLogin()
+      this.$refs.navbar.openLoginDialog()
     })
   }
 
