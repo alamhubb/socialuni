@@ -1,7 +1,7 @@
 <template>
   <div class="h100p overflow-hidden flex-col bg-default socialuni-app-h5">
     <!--        <s-user-nav-bar title="鹿森">-->
-    <s-user-nav-bar>
+    <s-user-nav-bar ref="navbar">
       <template #title>
         <div class="flex-1 row-col-center overflow-x-hidden">
           <div class="w100p row-end-center pr">
@@ -15,7 +15,7 @@
       </template>
 
       <div class="w600 flex-none row-col-center h100p mr overflow-hidden">
-<!--        <div class="bg-theme">123</div>-->
+        <!--        <div class="bg-theme">123</div>-->
         <q-nav-menu class="socialuni-navbar-h5 w700" mode="horizontal"></q-nav-menu>
         <q-button class="flex-none" primary @click="emitTalkAdd">发帖</q-button>
       </div>
@@ -66,6 +66,7 @@ import QButton from "qing-ui/src/components/QButton.vue";
 import QInput from "qing-ui/src/components/QInput.vue";
 import QDialog from "qing-ui-h5/src/components/QDialog.vue";
 import CommunityEventConst from "socialuni-community-sdk/src/constant/CommunityEventConst.ts";
+import SocialuniUserEventOn from "socialuni-user-sdk/src/event/SocialuniUserEventOn.ts";
 
 console.log(123123)
 
@@ -74,6 +75,15 @@ console.log(123123)
   components: {SUserNavBar, QNavMenu, QButton, QInput, QScroll, QDialog}
 })
 export default class App extends Vue {
+  $refs: {
+    navbar: SUserNavBar
+  }
+
+  created() {
+    SocialuniUserEventOn.toLogin(() => {
+      this.$refs.navbar.toLogin()
+    })
+  }
 
   mounted() {
     console.log('chufale')

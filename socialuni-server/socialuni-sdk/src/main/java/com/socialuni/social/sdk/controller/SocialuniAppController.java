@@ -55,17 +55,8 @@ public class SocialuniAppController implements SocialuniAppAPI {
             if (!SocialuniAppConfig.innerDefaultTabNames.contains(tabName)){
                 SocialuniCircleDO socialuniCircleDO = SocialuniCircleDOUtil.getCircleEnableAllowNull(tabName);
                 if (socialuniCircleDO != null) {
-
                     //获取groupId
-                    SocialuniChatDO socialuniChatDO = socialuniCircleChatManage.getOrCreateCircleGroupChat(tabName, socialuniCircleDO.getAvatar());
-
-                    SocialuniTalkTabCircleRO homeTabCircleRO = new SocialuniTalkTabCircleRO(socialuniCircleDO);
-                    if (socialuniChatDO != null) {
-                        String chatId = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(socialuniChatDO.getUnionId());
-                        homeTabCircleRO.setGroupChatId(chatId);
-                        homeTabCircleRO.setChatId(chatId);
-                    }
-                    tabRO.setCircle(homeTabCircleRO);
+//                    tabRO.setCircle(homeTabCircleRO);
                     tabRO.setType(TalkTabType.circle_type);
                 }
             }
