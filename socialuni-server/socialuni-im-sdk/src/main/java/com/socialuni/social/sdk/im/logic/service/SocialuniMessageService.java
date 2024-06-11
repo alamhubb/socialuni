@@ -52,7 +52,6 @@ public class SocialuniMessageService {
     SocialuniChatUserManage socialuniChatUserManage;
 
 
-    @Transactional
     public ResultRO<SocialMessageRO> sendMsg(MessageAddVO msgAddVO) {
         String chatId = msgAddVO.getReceiveId();
         String msgContent = msgAddVO.getContent();
@@ -126,6 +125,8 @@ public class SocialuniMessageService {
 
                 //群聊
                 SocialMessageRO socialMessageRO = messageEntity.sendGroupMessage(unionId, msgAddVO.getContent(), msgType);
+
+                System.out.println("fanhuile1111");
                 return ResultRO.success(socialMessageRO);
 
             } else {

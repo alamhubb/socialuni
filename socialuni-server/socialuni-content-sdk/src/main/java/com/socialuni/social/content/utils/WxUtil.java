@@ -18,6 +18,7 @@ import com.socialuni.social.common.sdk.platform.weixin.token.WxTokenResult;
 import com.socialuni.social.common.sdk.utils.PushMessageUtils;
 import com.socialuni.social.common.sdk.utils.RestUtil;
 import com.socialuni.social.content.constant.SocialuniSupportProviderType;
+import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.tance.sdk.facade.ConfigFacade;
 import com.thoughtworks.xstream.XStream;
 import lombok.Data;
@@ -356,7 +357,7 @@ public class WxUtil {
 
 
     public static String getWx_mp_id() {
-        String wx_mp_id = ConfigFacade.getConfigApi().getString("wx_mp_id");
+        String wx_mp_id = SocialuniAppConfig.getAppMoreConfig().getWx_mp_id();
         if (StringUtils.isBlank(wx_mp_id)) {
             return WxUtil.wx_mp_id;
         } else {
@@ -365,7 +366,7 @@ public class WxUtil {
     }
 
     public static String getWx_app_id() {
-        String wx_app_id = ConfigFacade.getConfigApi().getString("wx_app_id");
+        String wx_app_id = SocialuniAppConfig.getAppMoreConfig().getWx_app_id();
         if (StringUtils.isBlank(wx_app_id)) {
             return WxUtil.wx_app_id;
         } else {
@@ -374,7 +375,8 @@ public class WxUtil {
     }
 
     public static String getWx_mp_secret() {
-        String wx_mp_secret = ConfigFacade.getConfigApi().getString("wx_mp_secret");
+//        String wx_mp_secret = ConfigFacade.getConfigApi().getString("wx_mp_secret");
+        String wx_mp_secret = SocialuniAppConfig.getAppMoreConfig().getWx_mp_secret();
         if (StringUtils.isBlank(wx_mp_secret)) {
             return WxUtil.wx_mp_secret;
         } else {
@@ -383,7 +385,8 @@ public class WxUtil {
     }
 
     public static String getWx_merchant_id() {
-        String wx_merchant_id = ConfigFacade.getConfigApi().getString("wx_merchant_id");
+//        String wx_merchant_id = ConfigFacade.getConfigApi().getString("wx_merchant_id");
+        String wx_merchant_id = SocialuniAppConfig.getAppMoreConfig().getWx_merchant_id();
         if (StringUtils.isBlank(wx_merchant_id)) {
             log.info("微信商户号："+ WxUtil.wx_merchant_id);
             return WxUtil.wx_merchant_id;
@@ -393,7 +396,8 @@ public class WxUtil {
     }
 
     public static String getWx_merchant_key() {
-        String wx_merchant_key = ConfigFacade.getConfigApi().getString("wx_merchant_key");
+//        String wx_merchant_key = ConfigFacade.getConfigApi().getString("wx_merchant_key");
+        String wx_merchant_key = SocialuniAppConfig.getAppMoreConfig().getWx_merchant_key();
         if (StringUtils.isBlank(wx_merchant_key)) {
             return WxUtil.wx_merchant_key;
         } else {

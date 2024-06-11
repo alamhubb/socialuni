@@ -1,3 +1,4 @@
+/*
 package com.socialuni.social.tance.config;
 
 import cn.hutool.core.collection.CollectionUtil;
@@ -26,6 +27,7 @@ import javax.annotation.Resource;
 import java.lang.reflect.Method;
 import java.util.*;
 
+*/
 /**
  * 把数据同步到开发者的监听入口。
  *
@@ -36,7 +38,8 @@ import java.util.*;
  * @see <a href='https://blog.csdn.net/f641385712/article/details/91897175'>Spring事务监听机制</a>
  * @see <a href='http://www.wjhsh.net/zhimingxin-p-8182623.html'>Spring启动时获取自定义注解的属性值</a>
  * @since 1.0
- */
+ *//*
+
 @Component
 @Slf4j
 public class PublishDataTransactionalEventListener implements BeanPostProcessor {
@@ -47,9 +50,11 @@ public class PublishDataTransactionalEventListener implements BeanPostProcessor 
     @Autowired
     private ConfigInterface configApi;
 
-    /**
+    */
+/**
      * 之后再事务提交之后也就是成功执行，才去同步到开发者服务器中。
-     */
+     *//*
+
     public void publishDataToDev() {
         PublishDataTanceBaseRepository.acceptPublishDataComponent((consumer) -> {
             List<PublishDataModel> publishDataModelList = consumer.getPublishDataModelList();
@@ -83,23 +88,27 @@ public class PublishDataTransactionalEventListener implements BeanPostProcessor 
         });
     }
 
-    /**
+    */
+/**
      * 收集所有的自定义类型注解和模型。
      *
      * @param bean
      * @param beanName
      * @return
      * @throws BeansException
-     */
+     *//*
+
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         Method[] methods = ReflectionUtils.getAllDeclaredMethods(bean.getClass());
         if (methods != null) {
             for (Method method : methods) {
-                /**
+                */
+/**
                  * AnnotationUtils 解决注解别名，包括显式别名、隐式别名、传递的隐式别名，还可以查的指定注解的属性信息。
                  * AnnotationUtils 底层使用动态代理的方式处理注解别名的问题。
-                 */
+                 *//*
+
                 PublishDataCacheable cacheEvict = AnnotationUtils.findAnnotation(method, PublishDataCacheable.class);
                 if (null != cacheEvict) {
                     // 合并modelClass
@@ -138,12 +147,14 @@ public class PublishDataTransactionalEventListener implements BeanPostProcessor 
         }
     }
 
-    /**
+    */
+/**
      * 获得通过模型所有对应的redis存储的name名称。
      *
      * @param cla
      * @return
-     */
+     *//*
+
     public static Set<String> getNamesByClass(Class cla) {
         Set<String> strings = CLASS_SET_MAP.get(cla);
         return strings;
@@ -152,3 +163,4 @@ public class PublishDataTransactionalEventListener implements BeanPostProcessor 
 
 }
 
+*/

@@ -128,7 +128,9 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
             this.msgContent = ''
             this.msgType = null
             try {
+                console.log('fasfdas')
                 const res = await SocialuniUserLikeAPI.sendMsgAPI(socialuniChatModule.chat.id, msgContent, msgType)
+                console.log('fasdf6565656')
                 // 点击发送后立即push
                 //启用状态可以直接发送
                 socialuniChatModule.chat.updateTime = res.data.createTime

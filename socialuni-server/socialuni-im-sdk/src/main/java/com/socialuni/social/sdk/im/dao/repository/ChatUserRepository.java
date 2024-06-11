@@ -1,8 +1,12 @@
 package com.socialuni.social.sdk.im.dao.repository;
 
 
+import com.socialuni.social.common.api.constant.CommonRedisKey;
+import com.socialuni.social.sdk.im.constant.ChatUserRedisKey;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,6 +38,10 @@ public interface ChatUserRepository extends JpaRepository<SocialuniChatUserDO, I
 //    List<SocialuniChatUserDO> findByChatIdAndStatusAndStatus(Integer chatId, String Status, String status);
 
     List<SocialuniChatUserDO> findByChatIdAndStatus(Integer chatId, String Status);
+
+    @Cacheable(cacheNames = ChatUserRedisKey.findChatUserIdsByChatIdAndStatus, key = "#chatId + '-' + #status")
+    @Query("select s.id from SocialuniChatUserDO s where s.chatId =:chatId and s.status =:status")
+    List<Integer> findChatUserIdsByChatIdAndStatus(Integer chatId, String status);
 
     //根据chatuserId，chatUserStatus，topFlag，update，frontShow
 

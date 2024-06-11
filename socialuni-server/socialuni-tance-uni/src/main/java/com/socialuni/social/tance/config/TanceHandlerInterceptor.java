@@ -1,3 +1,4 @@
+/*
 package com.socialuni.social.tance.config;
 
 import com.socialuni.social.common.api.constant.SocialSystemConst;
@@ -13,13 +14,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
+*/
 /**
  * @author wulinghui
  * @version 1.0
  * @module api-factory
  * @date 2022/9/1 16:26
  * @since 1.0
- */
+ *//*
+
 @Component
 @ConditionalOnProperty(
         name = {"api.tance.enable"},
@@ -51,3 +54,4 @@ public class TanceHandlerInterceptor implements HandlerInterceptor {
     }
 
 }
+*/

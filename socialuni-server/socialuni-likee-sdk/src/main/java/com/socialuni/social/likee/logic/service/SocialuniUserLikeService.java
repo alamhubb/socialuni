@@ -106,12 +106,13 @@ public class SocialuniUserLikeService {
     SocialuniCreateCoinOrderEntity socialuniCreateCoinOrderEntity;
 
 
-    @Transactional
     public ResultRO<SocialMessageRO> sendMsg(MessageAddVO msgAddVO) {
         //msg支持自定义的展示类型
         ResultRO<SocialMessageRO> resultRO = messageService.sendMsg(msgAddVO);
 
-        return resultRO;
+        System.out.println("fanhuile");
+        //        return resultRO;
+        return ResultRO.success();
 
 //        SocialMessageRO socialMessageRO = resultRO.getData();
 //
@@ -136,7 +137,6 @@ public class SocialuniUserLikeService {
 //        return resultRO;
     }
 
-    @Transactional
     public SocialuniUserLikeDO likeUser(SocialuniUserIdQO addVO) {
         //有问题，应该关注完刷新前台用户
         Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
@@ -151,7 +151,6 @@ public class SocialuniUserLikeService {
         return socialuniUserLikeDO;
     }
 
-    @Transactional
     public void sendLikeUserMsg(String receiveUserId) {
         MessageAddVO msgAddVO = new MessageAddVO();
         msgAddVO.setReceiveId(receiveUserId);

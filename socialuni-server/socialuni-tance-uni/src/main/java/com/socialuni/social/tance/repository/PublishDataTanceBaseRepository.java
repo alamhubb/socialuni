@@ -1,3 +1,4 @@
+/*
 package com.socialuni.social.tance.repository;
 
 import com.socialuni.social.common.sdk.component.SocialuniPublishDataComponent;
@@ -8,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import java.util.function.Consumer;
 
+*/
 /**
  * 要求所有的增删改查都使用该类，才能实现。
  * 里面使用基类就能实现啦。
@@ -17,7 +19,8 @@ import java.util.function.Consumer;
  * @date 2022/9/28 15:07
  * @see SocialuniPublishDataComponent
  * @since 1.0
- */
+ *//*
+
 public class PublishDataTanceBaseRepository <T, ID >
         extends TanceBaseRepository<T, ID> {
     public PublishDataTanceBaseRepository(JpaEntityInformation entityInformation, EntityManager entityManager) {
@@ -46,11 +49,13 @@ public class PublishDataTanceBaseRepository <T, ID >
         return save;
     }
 
-    /**
+    */
+/**
      * 消费，调用SocialuniPublishDataComponent方法，添加数据。
      * @see SocialuniPublishDataComponent
      * @param consumer
-     */
+     *//*
+
     public static void acceptPublishDataComponent(Consumer<SocialuniPublishDataComponent> consumer){
         SocialuniPublishDataComponent publishDataComponent =
                 getSocialuniPublishDataComponentByRequestAttribute();
@@ -60,10 +65,12 @@ public class PublishDataTanceBaseRepository <T, ID >
         }
     }
 
-    /**
+    */
+/**
      * 从RequestAttribute中获得{@code SocialuniPublishDataComponent}
      * @return
-     */
+     *//*
+
     public static SocialuniPublishDataComponent getSocialuniPublishDataComponentByRequestAttribute(){
         SocialuniPublishDataComponent publishDataComponent = null;
         HttpServletRequest request = RequestUtil.getRequest();
@@ -73,10 +80,12 @@ public class PublishDataTanceBaseRepository <T, ID >
         publishDataComponent = (SocialuniPublishDataComponent) attribute;
         return publishDataComponent;
     }
-    /**
+    */
+/**
      * 初始化{@code SocialuniPublishDataComponent} 放入到request的Attribute中。
      * @param request
-     */
+     *//*
+
     public static void publishDataInitialized(HttpServletRequest request) {
         if(request == null) return;
         Object attribute = request.getAttribute(SocialuniPublishDataComponent.UUID_NAME);
@@ -85,3 +94,4 @@ public class PublishDataTanceBaseRepository <T, ID >
         }
     }
 }
+*/

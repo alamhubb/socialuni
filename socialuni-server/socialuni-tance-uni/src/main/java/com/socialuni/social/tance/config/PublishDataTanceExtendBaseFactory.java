@@ -1,3 +1,4 @@
+/*
 package com.socialuni.social.tance.config;
 
 import com.socialuni.social.common.sdk.dao.repository.DelegateExtendBaseFactory;
@@ -9,13 +10,15 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
 
+*/
 /**
  * @author wulinghui
  * @version 1.0
  * @module Socialuni
  * @date 2022/9/29 10:50
  * @since 1.0
- */
+ *//*
+
 @Primary
 @Component
 public class PublishDataTanceExtendBaseFactory implements DelegateExtendBaseFactory {
@@ -24,3 +27,4 @@ public class PublishDataTanceExtendBaseFactory implements DelegateExtendBaseFact
         return new PublishDataTanceBaseRepository(entityInformation,entityManager);
     }
 }
+*/
