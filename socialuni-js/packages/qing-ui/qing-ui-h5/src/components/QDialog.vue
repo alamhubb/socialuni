@@ -20,7 +20,6 @@
       append-to-body
       @open="emitOpen"
       @close="dialogClose">
-
     <template #title>
       <slot name="title"></slot>
     </template>

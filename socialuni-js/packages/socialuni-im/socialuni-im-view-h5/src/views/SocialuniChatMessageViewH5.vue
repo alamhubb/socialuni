@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue, Watch, toNative} from 'vue-facing-decorator';
+import {Component, Vue, toNative} from 'vue-facing-decorator';
 import SocialuniChatViewH5 from "socialuni-im-view-h5/src/views/SocialuniChatViewH5.vue";
 import SocialuniMsgViewH5 from "socialuni-im-view-h5/src/views/SocialuniMsgViewH5.vue";
 @toNative
@@ -30,7 +30,7 @@ import SocialuniMsgViewH5 from "socialuni-im-view-h5/src/views/SocialuniMsgViewH
     SocialuniMsgViewH5,
   }
 })
-export default class MessageView extends Vue {
+export default class SocialuniChatMessageViewH5 extends Vue {
 
 
   mounted() {
