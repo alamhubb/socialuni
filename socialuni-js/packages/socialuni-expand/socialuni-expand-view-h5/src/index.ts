@@ -4,6 +4,7 @@ import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule
 import {App} from "vue";
 import {Vue} from "vue-facing-decorator";
 import SocialuniExpandViewH5 from "./views/SocialuniExpandViewH5.vue";
+import SocialuniIm from "socialuni-im-sdk/src";
 
 class SocialuniExpandPluginH5 implements SocialuniPlugin {
 
@@ -17,6 +18,7 @@ socialuniPluginsModule.componentsMap.set('expandView', SocialuniExpandViewH5)
 
 const SocialuniExpandH5 = {
     async install(app: App, expandView: Vue, socialuniOption?: SocialuniOption) {
+        app.use(SocialuniIm)
         console.log(66666)
         console.log(app)
         socialuniPluginsModule.router.addRoute({

@@ -13,6 +13,7 @@ import SocialuniExpandH5 from "socialuni-expand-view-h5/src";
 import SocialuniCommunityH5 from "socialuni-community-view-h5/src";
 import SocialuniAppViewH5 from "socialuni-app-view-h5/src";
 import './styles/index.scss'
+import SocialuniImH5 from "socialuni-im-view-h5/src";
 
 
 export const getImageUrl = (path: string): string => {
@@ -40,9 +41,9 @@ declare module '@vue/runtime-core' {
     app.use(SocialuniAppViewH5)
     app.use(SocialuniUser)
     app.use(SocialuniCommunityH5)
-    app.use(SocialuniIm)
     app.use(SocialuniMusic)
     app.use(SocialuniExpandH5)
+    app.use(SocialuniImH5)
 
 
     app.config.globalProperties.$qing = socialuniSystemModule
