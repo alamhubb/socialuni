@@ -126,7 +126,6 @@ public class SocialuniMessageService {
 
                 //群聊
                 SocialMessageRO socialMessageRO = messageEntity.sendGroupMessage(unionId, msgAddVO.getContent(), msgType);
-
                 return ResultRO.success(socialMessageRO);
 
             } else {

@@ -32,6 +32,7 @@ import com.socialuni.social.sdk.im.logic.foctory.SocialuniMessageDOFactory;
 import com.socialuni.social.sdk.im.notify.NotifyVO;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserBlackDO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -41,6 +42,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
+@Slf4j
 public class SocialuniMessageEntity {
 
     @Resource
@@ -223,7 +225,11 @@ public class SocialuniMessageEntity {
 //                mineMessageUser = messageReceiveRepository.save(messageReceiveDO);
             }
         }
+        log.info("开始保存");
+        log.info(String.valueOf(new Date().getTime()));
         chatUserRepository.saveAll(chatSocialuniUserDoS);
+        log.info("保存成功");
+        log.info(String.valueOf(new Date().getTime()));
         //保存message
 
 //                Optional<ChatDO> chatDOOptional = chatRepository.findById();

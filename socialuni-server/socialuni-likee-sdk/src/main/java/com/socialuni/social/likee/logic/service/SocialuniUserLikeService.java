@@ -111,27 +111,29 @@ public class SocialuniUserLikeService {
         //msg支持自定义的展示类型
         ResultRO<SocialMessageRO> resultRO = messageService.sendMsg(msgAddVO);
 
-        SocialMessageRO socialMessageRO = resultRO.getData();
-
-        String msgId = socialMessageRO.getId();
-
-        Integer msgIdd = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(msgId);
-
-
-        String receiveIdUid = msgAddVO.getReceiveId();
-
-        SocialuniChatUserDO socialuniChatUserDO = SocialChatROFactory.getSingleChatUser(receiveIdUid);
-        if (socialuniChatUserDO == null) {
-            return resultRO;
-        }
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
-        //查询是否创建了
-        SocialuniUserLikeChatDO socialuniUserLikeChatDO = socialuniUserLikeChatManage.getOrCreate(socialuniChatUserDO.getChatId());
-
-        if (mineUserId.equals(socialuniUserLikeChatDO.getUserId())) {
-            socialuniCreateCoinOrderEntity.createCoinOrderByOrderType(mineUserId, -SocialuniLikeAllConfig.getLikeAllConfigBO().getSendLikeMsgNeedPayCoinNum(), SocialuniCoinOrderType.consume, SocialuniOrderDetailType.msg, msgIdd);
-        }
         return resultRO;
+
+//        SocialMessageRO socialMessageRO = resultRO.getData();
+//
+//        String msgId = socialMessageRO.getId();
+//
+//        Integer msgIdd = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(msgId);
+//
+//
+//        String receiveIdUid = msgAddVO.getReceiveId();
+//
+//        SocialuniChatUserDO socialuniChatUserDO = SocialChatROFactory.getSingleChatUser(receiveIdUid);
+//        if (socialuniChatUserDO == null) {
+//            return resultRO;
+//        }
+//        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+//        //查询是否创建了
+//        SocialuniUserLikeChatDO socialuniUserLikeChatDO = socialuniUserLikeChatManage.getOrCreate(socialuniChatUserDO.getChatId());
+//
+//        if (mineUserId.equals(socialuniUserLikeChatDO.getUserId())) {
+//            socialuniCreateCoinOrderEntity.createCoinOrderByOrderType(mineUserId, -SocialuniLikeAllConfig.getLikeAllConfigBO().getSendLikeMsgNeedPayCoinNum(), SocialuniCoinOrderType.consume, SocialuniOrderDetailType.msg, msgIdd);
+//        }
+//        return resultRO;
     }
 
     @Transactional
