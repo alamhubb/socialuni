@@ -33,6 +33,7 @@ import com.socialuni.social.sdk.im.notify.NotifyVO;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserBlackDO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -178,7 +179,7 @@ public class SocialuniMessageEntity {
 
         socialuniChatUserCheck.checkUserInChat(chatId, sendUser.getUserId());
 
-        List<SocialuniChatUserDO> chatSocialuniUserDoS = chatUserRepository.findByChatIdAndStatus(chatId, ChatUserStatus.enable);
+//        List<SocialuniChatUserDO> chatSocialuniUserDoS = chatUserRepository.findByChatIdAndStatus(chatId, ChatUserStatus.enable);
 
 
         //有权限，则给chat中的所有用户发送内容
@@ -192,13 +193,35 @@ public class SocialuniMessageEntity {
         Date curDate = new Date();
         chat.setUpdateTime(curDate);
 //            chat.setLastContent(content);
-        chatRepository.save(chat);
+        chatRepository.savePut(chat);
 
+        this.updateChatUsers(chatId, sendUser);
 
+        //保存message
+
+//                Optional<ChatDO> chatDOOptional = chatRepository.findById();
+        //如果群聊，直接发送给两个服务器在线的所有用户，并且查找他们未读的。
+        //未登录的时候也查询群聊里面的所有内容
+        NotifyVO notifyVO = SocaluniNotifyROFactory.getNotifyROBySendMsg(NotifyType.message, sendUser, message, chat);
+        WebsocketServer.sendMessageToAllUsers(notifyVO);
+        System.out.println("fanhuile44444");
+        //默认所有群都要加入群了，才可以发送消息
+
+        //确认是否存在chatUser且状态。
+
+        //
+        //只需要返回自己的
+        return SocialMessageROFactory.getMessageRO(message, sendUser, true);
+//        return null;
+    }
+
+    @Async
+    public void updateChatUsers(Integer chatId, SocialuniUserDo sendUser) {
+        List<Integer> chatUserIds = chatUserRepository.findChatUserIdsByChatIdAndStatus(chatId, ChatUserStatus.enable);
         //发送消息
-        for (SocialuniChatUserDO chatSocialuniUserDo : chatSocialuniUserDoS) {
-            log.info("开始保存666");
-            log.info(String.valueOf(new Date().getTime()));
+        for (Integer chatUserIdItem : chatUserIds) {
+            SocialuniChatUserDO chatSocialuniUserDo = chatUserRepository.findFirstById(chatUserIdItem);
+
 //                chatSocialuniUserDo.setLastContent(message.getContent());
 //            chatSocialuniUserDo.setUpdateTime(curDate);
 //            chatSocialuniUserDo.setLastContent(message.getContent());
@@ -226,28 +249,9 @@ public class SocialuniMessageEntity {
                 //自己的话不发送通知，自己的话也要构建消息，要不看不见，因为读是读这个表
 //                mineMessageUser = messageReceiveRepository.save(messageReceiveDO);
             }
+            chatUserRepository.savePut(chatSocialuniUserDo);
+            log.info(String.valueOf(new Date().getTime()));
         }
-        log.info("开始保存");
-        log.info(String.valueOf(new Date().getTime()));
-//        chatUserRepository.saveAll(chatSocialuniUserDoS);
-        log.info("保存成功");
-        log.info(String.valueOf(new Date().getTime()));
-        //保存message
-
-//                Optional<ChatDO> chatDOOptional = chatRepository.findById();
-        //如果群聊，直接发送给两个服务器在线的所有用户，并且查找他们未读的。
-        //未登录的时候也查询群聊里面的所有内容
-//        NotifyVO notifyVO = SocaluniNotifyROFactory.getNotifyROBySendMsg(NotifyType.message, sendUser, message, chat);
-//        WebsocketServer.sendMessageToAllUsers(notifyVO);
-        System.out.println("fanhuile44444");
-        //默认所有群都要加入群了，才可以发送消息
-
-        //确认是否存在chatUser且状态。
-
-        //
-        //只需要返回自己的
-//        return SocialMessageROFactory.getMessageRO(message, sendUser, true);
-        return null;
     }
 
     @Resource
@@ -271,7 +275,7 @@ public class SocialuniMessageEntity {
         Date curDate = new Date();
         chat.setUpdateTime(curDate);
 //            chat.setLastContent(content);
-        chatRepository.save(chat);
+        chatRepository.savePut(chat);
 
 
         //发送消息

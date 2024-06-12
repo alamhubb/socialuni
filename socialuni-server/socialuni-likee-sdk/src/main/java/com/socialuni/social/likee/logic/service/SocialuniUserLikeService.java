@@ -31,15 +31,18 @@ import com.socialuni.social.sdk.im.logic.service.chat.ChatService;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class SocialuniUserLikeService {
     @Resource
     SocialuniUserLikeManage socialuniUserLikeManage;
@@ -54,7 +57,9 @@ public class SocialuniUserLikeService {
         ResultRO<List<ChatRO>> resultRO = chatService.queryChatList();
         List<ChatRO> data = resultRO.getData();
 
-        List<SocialuniLikeChatRO> socialuniLikeChatROList = data.stream().map(this::getSocialuniLikeChatRO).collect(Collectors.toList());
+        Integer mineUserId = SocialuniUserUtil.getMineUserIdAllowNull();
+
+        List<SocialuniLikeChatRO> socialuniLikeChatROList = data.stream().map(item -> getSocialuniLikeChatRO(item, mineUserId)).collect(Collectors.toList());
 
         return ResultRO.success(socialuniLikeChatROList);
     }
@@ -64,12 +69,14 @@ public class SocialuniUserLikeService {
         //为什么要查询，因为要加一个参数，发送消息时是否需要扣除金币
         ResultRO<ChatRO> chatROResultRO = chatService.queryChat(socialuniChatQueryQO);
 
-        SocialuniLikeChatRO socialuniLikeChatRO = getSocialuniLikeChatRO(chatROResultRO.getData());
+        Integer mineUserId = SocialuniUserUtil.getMineUserIdAllowNull();
+
+        SocialuniLikeChatRO socialuniLikeChatRO = getSocialuniLikeChatRO(chatROResultRO.getData(), mineUserId);
 
         return ResultRO.success(socialuniLikeChatRO);
     }
 
-    private SocialuniLikeChatRO getSocialuniLikeChatRO(ChatRO chatRO) {
+    private SocialuniLikeChatRO getSocialuniLikeChatRO(ChatRO chatRO, Integer mineUserId) {
 
         SocialuniLikeChatRO socialuniLikeChatRO = BeanUtil.toBean(chatRO, SocialuniLikeChatRO.class);
         socialuniLikeChatRO.setSendMsgNeedCoin(0);
@@ -88,13 +95,15 @@ public class SocialuniUserLikeService {
 
         //查询是否创建了
         SocialuniUserLikeChatDO socialuniUserLikeChatDO = socialuniUserLikeChatManage.get(socialuniChatUserDO.getChatId());
-
         if (socialuniUserLikeChatDO != null) {
             socialuniLikeChatRO.setNeedPayOpen(false);
-            Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
-            if (mineUserId.equals(socialuniUserLikeChatDO.getUserId())) {
-                socialuniLikeChatRO.setSendMsgNeedCoin(SocialuniLikeAllConfig.getLikeAllConfigBO().getSendLikeMsgNeedPayCoinNum());
+
+            if (mineUserId != null) {
+                if (mineUserId.equals(socialuniUserLikeChatDO.getUserId())) {
+                    socialuniLikeChatRO.setSendMsgNeedCoin(SocialuniLikeAllConfig.getLikeAllConfigBO().getSendLikeMsgNeedPayCoinNum());
+                }
             }
+
         }
         return socialuniLikeChatRO;
     }

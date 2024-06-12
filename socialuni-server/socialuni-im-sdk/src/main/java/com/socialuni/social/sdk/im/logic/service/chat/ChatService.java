@@ -29,6 +29,7 @@ import com.socialuni.social.im.api.model.QO.chat.ChatReadVO;
 import com.socialuni.social.im.api.model.QO.chat.ChatRemoveVO;
 import com.socialuni.social.im.api.model.QO.chat.OpenChatVO;
 import com.socialuni.social.sdk.im.logic.manage.SocialuniChatUserManage;
+import com.socialuni.social.sdk.im.utils.SocialuniChatUserDOUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
@@ -144,7 +145,7 @@ public class ChatService {
             } catch (Exception e) {
                 throw new SocialParamsException("错误的会话标识");
             }
-            SocialuniChatUserDO chatUserDO = SocialuniRepositoryFacade.findById(unionId, SocialuniChatUserDO.class);
+            SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findById(unionId);
             if (chatUserDO == null) {
                 throw new SocialParamsException("不存在会话信息1");
             }
@@ -271,7 +272,7 @@ public class ChatService {
         SocialuniChatDO chat = new SocialuniChatDO(ChatType.single);
 
         //生成chat
-        chat = chatRepository.save(chat);
+        chat = chatRepository.savePut(chat);
 
         //match属于私聊，需要保存对方的内容，方便展示头像昵称
         SocialuniChatUserDO mineChatUser = new SocialuniChatUserDO(chat, user.getUnionId(), receiveUserId);

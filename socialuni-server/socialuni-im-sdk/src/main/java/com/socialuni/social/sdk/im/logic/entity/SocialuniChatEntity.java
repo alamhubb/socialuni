@@ -37,8 +37,11 @@ public class SocialuniChatEntity {
 
 
     public SocialuniChatDO getJoinOrCreateChatUser(Integer chatId, Integer userId) {
-        SocialuniChatDO socialuniChatDO = chatRepository.findFirstByUnionIdAndStatus(chatId, ChatStatus.enable);
+        SocialuniChatDO socialuniChatDO = chatRepository.findFirstByUnionId(chatId);
         if (socialuniChatDO == null) {
+            throw new SocialBusinessException("不存在的会话");
+        }
+        if (!socialuniChatDO.getStatus().equals(ChatStatus.enable)) {
             throw new SocialBusinessException("不存在的会话");
         }
         SocialuniChatUserDO socialuniChatUserDO = socialuniChatUserManage.joinOrCreateChatUser(socialuniChatDO, userId);
@@ -66,7 +69,7 @@ public class SocialuniChatEntity {
 
     //不管官方群聊，我们就创建用户的群聊
     public SocialuniChatDO getOrCreateUserPersonalChat(SocialuniUserDo socialuniUserDo) {
-        SocialuniChatDO socialuniChatDO = chatRepository.findFirstByTypeAndUserIdOrderByCreateTimeDesc(ChatType.userPersonalGroup, socialuniUserDo.getUserId());
+        SocialuniChatDO socialuniChatDO = chatRepository.findFirstByTypeAndUserId(ChatType.userPersonalGroup, socialuniUserDo.getUserId());
         if (socialuniChatDO == null) {
             socialuniChatDO = this.createUserPersonalChat(socialuniUserDo);
         }

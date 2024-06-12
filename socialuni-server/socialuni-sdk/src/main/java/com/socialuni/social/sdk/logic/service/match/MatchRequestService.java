@@ -55,7 +55,7 @@ public class MatchRequestService {
         SocialuniChatUserDO receiveChatUser = new SocialuniChatUserDO(chat, receiveUser.getUnionId(), user.getUnionId());
         List<SocialuniChatUserDO> chatUserDOS = Arrays.asList(mineChatUser, receiveChatUser);
         //生成chat
-        chat = chatRepository.save(chat);
+        chat = chatRepository.savePut(chat);
         chatUserRepository.saveAll(chatUserDOS);
 
 

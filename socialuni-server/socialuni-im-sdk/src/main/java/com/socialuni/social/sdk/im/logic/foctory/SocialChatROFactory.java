@@ -23,6 +23,7 @@ import com.socialuni.social.im.api.model.RO.ChatRO;
 import com.socialuni.social.im.api.model.RO.SocialMessageRO;
 import com.socialuni.social.sdk.im.enumeration.MessageStatus;
 import com.socialuni.social.sdk.im.logic.manage.SocialuniUserChatConfigManage;
+import com.socialuni.social.sdk.im.utils.SocialuniChatUserDOUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserBlackDO;
@@ -30,6 +31,7 @@ import com.socialuni.social.follow.dao.DO.SocialuniUserFollowDO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -45,6 +47,7 @@ import java.util.stream.Collectors;
  */
 @Component
 @Data//chatdo+chatUserdo
+@Slf4j
 public class SocialChatROFactory {
     private static SocialuniMessageReceiveRepository messageReceiveRepository;
 
@@ -94,10 +97,11 @@ public class SocialChatROFactory {
         chatRO.setLoadMore(LoadMoreType.noMore);
         chatRO.setNeedPayOpen(false);
         chatRO.setLastContent("会话已开启");
+        chatRO.setAllowStrangerMsg(true);
 
-        SocialuniUserChatConfigDO socialuniBeUserChatConfigDO = SocialuniUserChatConfigManage.getOrCreateUserChatConfigDO(chatDO.getUserId());
+//        SocialuniUserChatConfigDO socialuniBeUserChatConfigDO = SocialuniUserChatConfigManage.getOrCreateUserChatConfigDO(chatDO.getUserId());
 
-        chatRO.setAllowStrangerMsg(socialuniBeUserChatConfigDO.getAllowStrangerMsg());
+//        chatRO.setAllowStrangerMsg(socialuniBeUserChatConfigDO.getAllowStrangerMsg());
         return chatRO;
     }
 
@@ -136,7 +140,7 @@ public class SocialChatROFactory {
     //chatuser
     //推消息时，查列表时  的基础
     public static ChatRO getChatROByUserLogin(SocialuniChatUserDO chatUserDO) {
-        SocialuniChatDO chat = SocialuniRepositoryFacade.findByUnionId(chatUserDO.getChatId(), SocialuniChatDO.class);
+        SocialuniChatDO chat = chatRepository.findFirstByUnionId(chatUserDO.getChatId());
         ChatRO chatRO = SocialChatROFactory.getGroupChatRO(chat);
 
         //暂时不支持删除系统群聊
@@ -169,22 +173,22 @@ public class SocialChatROFactory {
 //                }
 //            }
 
-
+            chatRO.setBeBlackUser(false);
+            chatRO.setBeFollow(false);
             // 有一个配置表，你可以从配置比里面读东西
-            SocialuniUserBlackDO socialuniUserBlackDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserIdAndStatus(chatUserDO.getBeUserId(), chatUserDO.getUserId(), SocialuniCommonStatus.enable, SocialuniUserBlackDO.class);
+            /*SocialuniUserBlackDO socialuniUserBlackDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserIdAndStatus(chatUserDO.getBeUserId(), chatUserDO.getUserId(), SocialuniCommonStatus.enable, SocialuniUserBlackDO.class);
 
             if (socialuniUserBlackDO != null) {
                 chatRO.setBeBlackUser(true);
-            } else {
-                chatRO.setBeBlackUser(false);
             }
+
 
 
             SocialuniUserFollowDO beFollowDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(chatUserDO.getBeUserId(), chatUserDO.getUserId(), SocialuniUserFollowDO.class);
 
             if (beFollowDO != null && beFollowDO.getStatus().equals(SocialuniCommonStatus.enable)) {
                 chatRO.setBeFollow(true);
-            }
+            }*/
 
 //            this.vipFlag = receiveUser.getVipFlag();
             //不为系统群聊才有记录了未读数量，才有未读数量
@@ -210,8 +214,8 @@ public class SocialChatROFactory {
     public static ChatRO getChatROByQueryChat(SocialuniChatUserDO chatUserDO, boolean queryMsgFlag) {
         ChatRO chatRO = SocialChatROFactory.getChatROByUserLogin(chatUserDO);
 
-        List<SocialMessageRO> messages;
-        if (chatRO.getType().equals(ChatType.single)) {
+        List<SocialMessageRO> messages = new ArrayList<>();
+        /*if (chatRO.getType().equals(ChatType.single)) {
             //系统群聊读取message表
             //查询用户这个chatUser下的消息
             List<SocialuniMessageReceiveDO> messageReceiveDOS = messageReceiveRepository.findTop30ByChatUserIdAndStatusAndCreateTimeLessThanOrderByCreateTimeDesc(chatUserDO.getId(), MessageStatus.enable, new Date());
@@ -231,7 +235,7 @@ public class SocialChatROFactory {
             String lastContent = messages.get(messages.size() - 1).getContent();
             chatRO.setLastContent(lastContent);
             chatRO.setLoadMore(LoadMoreType.more);
-        }
+        }*/
         chatRO.setMessages(messages);
         return chatRO;
     }
@@ -292,7 +296,7 @@ public class SocialChatROFactory {
             } catch (Exception e) {
                 throw new SocialParamsException("错误的会话标识10011");
             }
-            SocialuniChatUserDO socialuniChatUserDO = SocialuniRepositoryFacade.findById(unionId, SocialuniChatUserDO.class);
+            SocialuniChatUserDO socialuniChatUserDO = SocialuniChatUserDOUtil.findById(unionId);
             if (socialuniChatUserDO == null) {
                 throw new SocialParamsException("不存在会话信息10012");
             }

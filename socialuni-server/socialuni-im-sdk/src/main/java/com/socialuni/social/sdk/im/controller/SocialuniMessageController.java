@@ -24,6 +24,7 @@ import com.socialuni.social.im.api.model.QO.MessageQueryVO;
 import com.socialuni.social.sdk.im.logic.service.SocialuniMessageService;
 import com.socialuni.social.sdk.im.enumeration.MessageReceiveStatus;
 import com.socialuni.social.sdk.im.enumeration.MessageStatus;
+import com.socialuni.social.sdk.im.utils.SocialuniChatUserDOUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
@@ -117,7 +118,7 @@ public class SocialuniMessageController implements SocialuniMessageAPI {
             } catch (Exception e) {
                 throw new SocialParamsException("错误的会话标识");
             }
-            SocialuniChatUserDO chatUserDO = SocialuniRepositoryFacade.findById(unionId, SocialuniChatUserDO.class);
+            SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findById(unionId);
             if (chatUserDO == null) {
                 throw new SocialParamsException("不存在会话信息1");
             }

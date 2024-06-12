@@ -20,7 +20,7 @@ public class SocialuniUserLikeChatManage {
         SocialuniUserLikeChatDO socialuniUserLikeChatDO = new SocialuniUserLikeChatDO();
         socialuniUserLikeChatDO.setChatId(chatId);
         socialuniUserLikeChatDO.setUserId(mineUserId);
-        socialuniUserLikeChatDO = SocialuniRepositoryFacade.save(socialuniUserLikeChatDO);
+        socialuniUserLikeChatDO = socialuniLikeUserChatRepository.savePut(socialuniUserLikeChatDO);
         return socialuniUserLikeChatDO;
     }
 

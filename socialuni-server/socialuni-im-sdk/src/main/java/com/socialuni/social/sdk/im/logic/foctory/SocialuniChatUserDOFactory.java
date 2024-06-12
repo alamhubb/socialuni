@@ -9,6 +9,7 @@ import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepository
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.sdk.im.enumeration.ChatType;
+import com.socialuni.social.sdk.im.utils.SocialuniChatUserDOUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
@@ -33,7 +34,7 @@ public class SocialuniChatUserDOFactory {
             } catch (Exception e) {
                 throw new SocialParamsException("错误的会话标识10011");
             }
-            SocialuniChatUserDO socialuniChatUserDO = SocialuniRepositoryFacade.findById(unionId, SocialuniChatUserDO.class);
+            SocialuniChatUserDO socialuniChatUserDO = SocialuniChatUserDOUtil.findById(unionId);
             if (socialuniChatUserDO == null) {
                 throw new SocialParamsException("不存在会话信息10012");
             }

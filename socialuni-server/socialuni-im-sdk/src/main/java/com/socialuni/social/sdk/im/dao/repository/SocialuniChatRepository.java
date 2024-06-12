@@ -1,10 +1,13 @@
 package com.socialuni.social.sdk.im.dao.repository;
 
+import com.socialuni.social.sdk.im.constant.ChatRedisKey;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatDO;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * TODO〈一句话功能简述〉
@@ -21,10 +24,21 @@ public interface SocialuniChatRepository extends JpaRepository<SocialuniChatDO, 
     SocialuniChatDO findFirstByTypeAndChatName(String type, String chatName);
 
 
-    SocialuniChatDO findFirstByTypeAndUserIdOrderByCreateTimeDesc(String type, Integer userId);
+    SocialuniChatDO findFirstByTypeAndUserId(String type, Integer userId);
 
     //查询对应的chat,读取时，任何类型的chat都可以改为已读，但是sys类型不操作
     SocialuniChatDO findFirstByUnionIdAndStatus(Integer id, String status);
+
+    @Cacheable(cacheNames = ChatRedisKey.findFirstChatById, key = "#id")
+    SocialuniChatDO findFirstByUnionId(Integer id);
+
+
+    @Caching(
+            put = {@CachePut(cacheNames = ChatRedisKey.findFirstChatById, key = "#socialuniChatDO.unionId")}
+    )
+    default SocialuniChatDO savePut(SocialuniChatDO socialuniChatDO) {
+        return this.save(socialuniChatDO);
+    }
 
     //开启时，只有私聊的才能开启
 //    Optional<SocialuniChatDO> findFirstByIdAndTypeAndStatus(Integer id, String type, String status);

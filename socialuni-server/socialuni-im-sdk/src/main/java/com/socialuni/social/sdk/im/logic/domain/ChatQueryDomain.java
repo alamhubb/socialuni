@@ -15,12 +15,14 @@ import com.socialuni.social.im.api.model.RO.ChatRO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.sdk.im.logic.manage.SocialuniChatManage;
 import com.socialuni.social.sdk.im.logic.manage.SocialuniChatUserManage;
-import com.socialuni.social.user.sdk.dao.utils.SocialuniUserDOUtil;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,6 +30,7 @@ import java.util.List;
  * @date 2019-06-16 12:39
  */
 @Component
+@Slf4j
 public class ChatQueryDomain {
     @Resource
     SocialuniChatRepository chatRepository;
@@ -55,24 +58,33 @@ public class ChatQueryDomain {
     //登录情况下查询用户有权限的chatuser
     //初始化和查询chat列表触发的
     public List<ChatRO> getUserChats(SocialuniUserDo user) {
-
         socialuniChatEntity.createUserChats(user);
 
         //未登录的情况只插叙你官方的chats
-        List<SocialuniChatUserDO> chatUsers = new ArrayList<>();
+        List<Integer> chatUserIds = new ArrayList<>();
 
         if (UserType.system.equals(user.getType())) {
             List<Integer> ids = socialuniUserRepository.findUserIdsByType(UserType.operation);
             for (Integer id : ids) {
-                List<SocialuniChatUserDO> temChatUsers = chatUserRepository.findByStatusAndUserIdOrderByUpdateTimeDesc(ChatUserStatus.enable, id);
-                chatUsers.addAll(temChatUsers);
+                List<Integer> temChatUserIds = chatUserRepository.findByUserIdAndStatusOrderByUpdateTimeDesc(id, ChatUserStatus.enable);
+
+                chatUserIds.addAll(temChatUserIds);
             }
         }
 
-        List<SocialuniChatUserDO> mineChatUsers = chatUserRepository.findByStatusAndUserIdOrderByUpdateTimeDesc(ChatUserStatus.enable, user.getUserId());
+        List<Integer> mineChatUsers = chatUserRepository.findByUserIdAndStatusOrderByUpdateTimeDesc(user.getUserId(), ChatUserStatus.enable);
 
-        chatUsers.addAll(mineChatUsers);
+        chatUserIds.addAll(mineChatUsers);
 
+        PageRequest pageRequest = PageRequest.of(0, 30);
+        chatUserIds = chatUserRepository.queryChatUserIdsByIds(chatUserIds, new Date(), pageRequest);
+
+
+        List<SocialuniChatUserDO> chatUsers = new ArrayList<>();
+        for (Integer temChatUserId : chatUserIds) {
+            SocialuniChatUserDO chatSocialuniUserDo = chatUserRepository.findFirstById(temChatUserId);
+            chatUsers.add(chatSocialuniUserDo);
+        }
         //查询的时候chat列表展示不为当前用户的
         /*return chatUsers.stream().map((ChatUserDO chatUserDO) -> {
             //只有启用的才显示消息列表
@@ -82,7 +94,9 @@ public class ChatQueryDomain {
                 return new ChatVO(chatUserDO.getChat(), chatUserDO);
             }
         }).collect(Collectors.toList());*/
-        return SocialChatROFactory.chatUserDOToVOS(chatUsers);
+        List<ChatRO> chatROS = SocialChatROFactory.chatUserDOToVOS(chatUsers);
+        return chatROS;
+
     }
 
     //未登录的情况下查询官方chat，官方群聊

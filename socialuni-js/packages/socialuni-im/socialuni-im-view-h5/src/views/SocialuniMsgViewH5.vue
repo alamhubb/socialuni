@@ -84,9 +84,11 @@
           v-model="viewService.msgContent"
           :rows="5"
           type="textarea"
+          @keyup.enter.native="viewService.sendMsgClick()"
       />
       <div class="flex-none position-absolute bottom-0 right-0 mb-smm mr-smm">
-        <el-button type="primary" @click="viewService.sendMsgClick()">发送</el-button>
+        <el-button type="primary" @click="viewService.sendMsgClick()"
+        >发送</el-button>
       </div>
     </div>
   </div>
