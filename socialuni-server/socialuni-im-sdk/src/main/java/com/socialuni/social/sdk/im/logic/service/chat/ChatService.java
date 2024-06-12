@@ -140,25 +140,7 @@ public class ChatService {
         Integer unionId = null;
 
         if (socialuniUnionIdModler == null) {
-            try {
-                unionId = Integer.valueOf(chatIdStr);
-            } catch (Exception e) {
-                throw new SocialParamsException("错误的会话标识");
-            }
-            SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findById(unionId);
-            if (chatUserDO == null) {
-                throw new SocialParamsException("不存在会话信息1");
-            }
-            SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
-
-            if (!mineUser.getUserId().equals(chatUserDO.getUserId())) {
-                //如果为自己或者为系统
-                //为私聊相关校验
-                //后端区分这个值是群聊还是私聊。
-                if (!UserType.system.equals(mineUser.getType())) {
-                    throw new SocialParamsException("不存在的会话信息2");
-                }
-            }
+            SocialuniChatUserDO chatUserDO = getSocialuniChatUserDO(chatIdStr);
             ChatRO chatRO = SocialChatROFactory.getChatROByQueryChat(chatUserDO, true);
 
             return ResultRO.success(chatRO);
@@ -187,6 +169,30 @@ public class ChatService {
                 throw new SocialParamsException("错误的会话标识");
             }
         }
+    }
+
+    public SocialuniChatUserDO getSocialuniChatUserDO(String chatIdStr) {
+        Integer unionId;
+        try {
+            unionId = Integer.valueOf(chatIdStr);
+        } catch (Exception e) {
+            throw new SocialParamsException("错误的会话标识");
+        }
+        SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findById(unionId);
+        if (chatUserDO == null) {
+            throw new SocialParamsException("不存在会话信息1");
+        }
+        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
+
+        if (!mineUser.getUserId().equals(chatUserDO.getUserId())) {
+            //如果为自己或者为系统
+            //为私聊相关校验
+            //后端区分这个值是群聊还是私聊。
+            if (!UserType.system.equals(mineUser.getType())) {
+                throw new SocialParamsException("不存在的会话信息2");
+            }
+        }
+        return chatUserDO;
     }
 
     @Resource

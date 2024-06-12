@@ -7,11 +7,15 @@ import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.constant.UserType;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
+import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniCommonRepository;
 import com.socialuni.social.common.sdk.utils.ErrorLogUtil;
+import com.socialuni.social.im.api.model.QO.MessageQueryVO;
 import com.socialuni.social.im.api.model.RO.SocialMessageRO;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
+import com.socialuni.social.sdk.im.dao.DO.message.SocialuniMessageDO;
+import com.socialuni.social.sdk.im.dao.DO.message.SocialuniMessageReceiveDO;
 import com.socialuni.social.sdk.im.dao.repository.ChatUserRepository;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniChatRepository;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniMessageReceiveRepository;
@@ -20,17 +24,24 @@ import com.socialuni.social.sdk.im.enumeration.*;
 import com.socialuni.social.sdk.im.logic.entity.SocialuniMessageEntity;
 import com.socialuni.social.im.api.model.QO.message.MessageAddVO;
 import com.socialuni.social.content.utils.SocialuniTextContentUtil;
+import com.socialuni.social.sdk.im.logic.foctory.SocialMessageROFactory;
 import com.socialuni.social.sdk.im.logic.manage.SocialuniChatUserManage;
+import com.socialuni.social.sdk.im.logic.service.chat.ChatService;
 import com.socialuni.social.sdk.im.utils.SocialuniChatUserDOUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import com.socialuni.social.user.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
+import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author qinkaiyuan
@@ -51,6 +62,8 @@ public class SocialuniMessageService {
 
     @Resource
     SocialuniChatUserManage socialuniChatUserManage;
+    @Resource
+    ChatService chatService;
 
 
     public ResultRO<SocialMessageRO> sendMsg(MessageAddVO msgAddVO) {
@@ -77,26 +90,9 @@ public class SocialuniMessageService {
         Integer unionId = null;
 
         if (socialuniUnionIdModler == null) {
-            try {
-                unionId = Integer.valueOf(chatId);
-            } catch (Exception e) {
-                throw new SocialParamsException("错误的会话标识");
-            }
-            SocialuniChatUserDO socialuniChatUserDO = SocialuniChatUserDOUtil.findById(unionId);
-            if (socialuniChatUserDO == null) {
-                throw new SocialParamsException("不存在会话信息1");
-            }
             SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
 
-            if (!mineUser.getUserId().equals(socialuniChatUserDO.getUserId())) {
-                //如果为自己或者为系统
-                //为私聊相关校验
-                //后端区分这个值是群聊还是私聊。
-                if (!UserType.system.equals(mineUser.getType())) {
-                    throw new SocialParamsException("不存在的会话信息2");
-                }
-                mineUser = SocialuniUserUtil.getUserNotNull(socialuniChatUserDO.getUserId());
-            }
+            SocialuniChatUserDO socialuniChatUserDO = chatService.getSocialuniChatUserDO(chatId);
 
             SocialMessageRO socialMessageRO = messageEntity.sendSingleMsg(mineUser, socialuniChatUserDO.getBeUserId(), msgAddVO.getContent(), msgType);
 
@@ -134,5 +130,87 @@ public class SocialuniMessageService {
                 throw new SocialParamsException("错误的会话标识");
             }
         }
+    }
+
+
+    public ResultRO<List<SocialMessageRO>> queryMessages(MessageQueryVO queryVO) {
+        List<SocialMessageRO> messageVOS = new ArrayList<>();
+        String chatIdStr = queryVO.getChatId();
+        //msg id也要统一，举报的时候不知道是哪个
+//        List<Long> msgIds = queryVO.getMsgIds();
+        //前台传入chatId，
+        //校验chatId，对应的chatDO是否存在，
+        //校验chat下是否存在此user
+
+
+        //如果穿chatId，需要获取chatUserId，根据chatUserId获取msg
+
+        //chatId操作，和user获取chatUser,判断是否存在
+
+        //chatUserid，获取，判断user是否对应
+
+        //查询所有messageReceive
+        //前台没传这个值
+        //什么状态的可以查询？chat的状态列表有哪些，各代表什么业务
+        //chatUser呢
+
+
+        //1,从chat页面进入，已有chat
+
+        //首先获取chatId
+        //无论是否登陆，都是先获取chatId
+        /*if (chatId == null) {
+            if (msgIds.size() < 1) {
+                return new ResultRO<>(messageVOS);
+            }
+            Optional<MessageDO> messageDOOptional = messageRepository.findById(msgIds.get(0));
+            if (!messageDOOptional.isPresent()) {
+                return new ResultRO<>(messageVOS);
+            }
+            chatId = messageDOOptional.get().getChatId();
+        }*/
+
+
+        SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidAllowNull(chatIdStr);
+
+        //创建 chatUser 的逻辑，点击进入页面，会话页加一条
+        //发送消息，还有添加好友成功
+
+        if (socialuniUnionIdModler == null) {
+            SocialuniChatUserDO chatUserDO = chatService.getSocialuniChatUserDO(chatIdStr);
+            List<SocialuniMessageReceiveDO> messageDOS = messageReceiveRepository.findTop30ByChatUserIdAndStatusAndCreateTimeLessThanOrderByCreateTimeDesc(chatUserDO.getId(), MessageReceiveStatus.enable, queryVO.getQueryTime());
+            messageVOS = SocialMessageROFactory.messageReceiveDOToVOS(messageDOS);
+            return ResultRO.success(messageVOS);
+        } else {
+            //私聊
+            if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.user)) {
+                Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+                Integer beUserId = socialuniUnionIdModler.getId();
+
+                //如果用户存在查看会话
+                SocialuniChatUserDO chatUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(mineUserId, beUserId, SocialuniChatUserDO.class);
+                if (chatUserDO == null) {
+                    return ResultRO.success(new ArrayList<>());
+                }
+                List<SocialuniMessageReceiveDO> messageDOS = messageReceiveRepository.findTop30ByChatUserIdAndStatusAndCreateTimeLessThanOrderByCreateTimeDesc(chatUserDO.getId(), MessageReceiveStatus.enable, queryVO.getQueryTime());
+                messageVOS = SocialMessageROFactory.messageReceiveDOToVOS(messageDOS);
+                return ResultRO.success(messageVOS);
+            } else if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.chat)) {
+                //则为chatId
+                Integer chatId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(chatIdStr);
+
+                SocialuniChatDO chatDO = SocialuniRepositoryFacade.findByUnionId(chatId, SocialuniChatDO.class);
+                if (!chatDO.getStatus().equals(ChatStatus.enable)) {
+                    throw new SocialBusinessException("会话已被删除");
+                }
+                List<SocialuniMessageDO> messageDOS = messageRepository.findTop30ByChatIdAndStatusAndCreateTimeLessThanOrderByCreateTimeDesc(chatId, MessageStatus.enable, queryVO.getQueryTime());
+                messageVOS = SocialMessageROFactory.messageDOToVOS(messageDOS, SocialuniUserUtil.getMineUserIdAllowNull());
+                return ResultRO.success(messageVOS);
+            } else {
+                throw new SocialParamsException("错误的会话标识");
+            }
+        }
+
+
     }
 }
