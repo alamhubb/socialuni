@@ -121,29 +121,40 @@ public class SocialuniUserLikeService {
 
         System.out.println("fanhuile");
         //        return resultRO;
-        return ResultRO.success();
+//        return ResultRO.success();
 
-//        SocialMessageRO socialMessageRO = resultRO.getData();
-//
-//        String msgId = socialMessageRO.getId();
-//
-//        Integer msgIdd = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(msgId);
-//
-//
-//        String receiveIdUid = msgAddVO.getReceiveId();
-//
-//        SocialuniChatUserDO socialuniChatUserDO = SocialChatROFactory.getSingleChatUser(receiveIdUid);
-//        if (socialuniChatUserDO == null) {
-//            return resultRO;
-//        }
-//        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
-//        //查询是否创建了
-//        SocialuniUserLikeChatDO socialuniUserLikeChatDO = socialuniUserLikeChatManage.getOrCreate(socialuniChatUserDO.getChatId());
-//
-//        if (mineUserId.equals(socialuniUserLikeChatDO.getUserId())) {
-//            socialuniCreateCoinOrderEntity.createCoinOrderByOrderType(mineUserId, -SocialuniLikeAllConfig.getLikeAllConfigBO().getSendLikeMsgNeedPayCoinNum(), SocialuniCoinOrderType.consume, SocialuniOrderDetailType.msg, msgIdd);
-//        }
-//        return resultRO;
+        SocialMessageRO socialMessageRO = resultRO.getData();
+
+        String msgId = socialMessageRO.getId();
+
+        Integer msgIdd = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(msgId);
+
+
+        String receiveIdUid = msgAddVO.getReceiveId();
+
+        SocialuniChatUserDO socialuniChatUserDO = SocialChatROFactory.getSingleChatUser(receiveIdUid);
+        if (socialuniChatUserDO == null) {
+            return resultRO;
+        }
+
+        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
+
+        SocialuniUserDo sendUser = mineUser;
+        if (UserType.system.equals(mineUser.getType()) || mineUser.getUserId().equals(socialuniChatUserDO.getUserId())) {
+            if (UserType.system.equals(mineUser.getType())) {
+                sendUser = SocialuniUserUtil.getUserNotNull(socialuniChatUserDO.getUserId());
+            }
+        }
+
+        Integer sendUserId = sendUser.getUserId();
+
+        //查询是否创建了
+        SocialuniUserLikeChatDO socialuniUserLikeChatDO = socialuniUserLikeChatManage.getOrCreate(socialuniChatUserDO.getChatId());
+
+        if (sendUserId.equals(socialuniUserLikeChatDO.getUserId())) {
+            socialuniCreateCoinOrderEntity.createCoinOrderByOrderType(sendUserId, -SocialuniLikeAllConfig.getLikeAllConfigBO().getSendLikeMsgNeedPayCoinNum(), SocialuniCoinOrderType.consume, SocialuniOrderDetailType.msg, msgIdd);
+        }
+        return resultRO;
     }
 
     public SocialuniUserLikeDO likeUser(SocialuniUserIdQO addVO) {

@@ -95,9 +95,20 @@ public class SocialuniMessageService {
 
             SocialuniChatUserDO socialuniChatUserDO = chatService.getSocialuniChatUserDO(chatId);
 
-            SocialMessageRO socialMessageRO = messageEntity.sendSingleMsg(mineUser, socialuniChatUserDO.getBeUserId(), msgAddVO.getContent(), msgType);
+            if (UserType.system.equals(mineUser.getType()) || mineUser.getUserId().equals(socialuniChatUserDO.getUserId())) {
 
-            return ResultRO.success(socialMessageRO);
+                SocialuniUserDo sendUser = mineUser;
+                if (UserType.system.equals(mineUser.getType())) {
+                    sendUser = SocialuniUserUtil.getUserNotNull(socialuniChatUserDO.getUserId());
+                }
+                SocialMessageRO socialMessageRO = messageEntity.sendSingleMsg(sendUser, socialuniChatUserDO.getBeUserId(), msgAddVO.getContent(), msgType);
+
+                return ResultRO.success(socialMessageRO);
+            }
+
+            throw new SocialParamsException("参数异常3260");
+
+
             //则为chatUserId
         } else {
             unionId = socialuniUnionIdModler.getId();

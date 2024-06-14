@@ -74,10 +74,7 @@ public class SocialuniMessageController implements SocialuniMessageAPI {
 
     @Override
     public ResultRO<List<SocialMessageRO>> queryNewMessages(SocialuniPageQueryQO<MessageQueryVO> queryQO) {
-        MessageQueryVO queryData = queryQO.getQueryData();
-
-        String chatIdStr = queryData.getChatId();
-        return null;
+        return messageService.queryNewMessages(queryQO);
     }
     /*
 
