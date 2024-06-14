@@ -23,6 +23,7 @@ import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
 import SocialuniImEventKey from "socialuni-im-api/src/constant/SocialuniMusicEventConst";
 import SocialuniPageQueryQO from "socialuni-api-base/src/model/common/SocialuniPageQueryQO";
 import MessageQueryVO from "socialuni-im-api/src/model/QO/message/MessageQueryVO";
+import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 
 class SocialuniChatModule {
     readonly chatPageIndex = 1
@@ -143,6 +144,15 @@ class SocialuniChatModule {
             total = total + chat.unreadNum
             return total
         }, 0)
+        if (socialuniSystemModule.isUniApp){
+            const chatUnreadNum: number = this.chatsUnreadNumTotal
+            // 如果未读数量为0了，则隐藏红点
+            if (chatUnreadNum) {
+                this.showTabBarRedDot()
+            } else {
+                this.hideTabBarRedDot()
+            }
+        }
     }
 
     showTabBarRedDot() {
