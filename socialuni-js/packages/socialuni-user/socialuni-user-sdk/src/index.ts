@@ -55,7 +55,7 @@ class SocialuniUserPlugin implements SocialuniPlugin {
         config.headers['qqe'] = 'fasdfasdf'
     }
 
-    onResponseErrorInterceptors(error: AxiosError) {
+    onResponseErrorInterceptors(error: AxiosError<ResultRO<any>>) {
         // uni
         // config: {transitional: {…}, transformRequest: Array(1), transformResponse: Array(1), timeout: 120000, adapter: ƒ, …}
         // cookies: []
@@ -73,7 +73,7 @@ class SocialuniUserPlugin implements SocialuniPlugin {
         //判断data类型，如果没类型，直接走
         //有内容则为本系统？也不一定，判断拿内容类型
         //然后本系统处理
-        const result: ResultRO = error?.response?.data
+        const result: ResultRO<any> = error?.response?.data
         console.log(result)
         if (result) {
             const errorMsg = result.errorMsg
@@ -107,7 +107,7 @@ class SocialuniUserPlugin implements SocialuniPlugin {
             return result
         }
         MsgUtil.systemErrorMsg()
-        SocialuniAppAPI.sendErrorLogAPI(error.config.url, QingAppUtil.RouterUtil.getCurrentPageURI(), JsonUtil.toJson(response))
+        SocialuniAppAPI.sendErrorLogAPI(error.config.url, QingAppUtil.RouterUtil.getCurrentPageURI(), JsonUtil.toJson(error?.response))
         return error
     }
 }
