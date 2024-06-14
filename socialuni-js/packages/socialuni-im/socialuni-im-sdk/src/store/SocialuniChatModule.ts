@@ -97,7 +97,7 @@ class SocialuniChatModule {
     setChats(chats: SocialuniChatRO[]) {
         const newChats = []
         for (const chat1 of chats) {
-            const newChat = new SocialuniChatRO(chat1)
+            const newChat = reactive(new SocialuniChatRO(chat1))
             newChats.push(newChat)
             console.log(newChat.messages)
             this.queryChatMessages(newChat)
