@@ -59,10 +59,13 @@ public class SocialuniUserLikeService {
         List<ChatRO> data = resultRO.getData();
 
         Integer mineUserId = SocialuniUserUtil.getMineUserIdAllowNull();
-        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
+        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
 
         List<SocialuniLikeChatRO> socialuniLikeChatROList = data.stream().map(item -> {
             if (item.getType().equals(ChatType.single)) {
+                if (mineUser == null) {
+                    throw new SocialParamsException("参数异常560358");
+                }
                 SocialuniChatUserDO socialuniChatUserDO = chatService.getSocialuniChatUserDO(item.getId());
                 if (UserType.system.equals(mineUser.getType()) || mineUser.getUserId().equals(socialuniChatUserDO.getUserId())) {
                     Integer sendUserId = socialuniChatUserDO.getUserId();
