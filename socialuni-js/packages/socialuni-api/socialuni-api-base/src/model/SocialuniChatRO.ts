@@ -20,6 +20,7 @@ export default class SocialuniChatRO {
     public lastMsg: MessageVO = null
     public topLevel: number = null
     public topFlag: boolean = null
+
     public lastContent: string = null
     public vipFlag: boolean = null
     public receiveUserId: string = null
@@ -27,7 +28,44 @@ export default class SocialuniChatRO {
     public needPayOpen: boolean = null
     public sendMsgNeedCoin: number = null
 
-    constructor(openImChat?: OpenImChatRO) {
+    public pageSize: number = null
+    public pageNum: number = null
+    public queryTime: Date = null
+    public firstLoad: boolean = null
+
+
+    constructor(chat?: SocialuniChatRO) {
+        if (chat) {
+            this.id = chat.id;
+            this.nickname = chat.nickname;
+            this.groupId = chat.groupId;
+            this.blackUser = chat.blackUser;
+            this.allowStrangerMsg = chat.allowStrangerMsg;
+            this.strangerUser = chat.strangerUser;
+            this.type = chat.type;
+            this.status = chat.status;
+            this.messages = chat.messages;
+            this.avatar = chat.avatar;
+            this.unreadNum = chat.unreadNum;
+            this.updateTime = chat.updateTime;
+            this.lastMsg = chat.lastMsg;
+            this.topLevel = chat.topLevel;
+            this.topFlag = chat.topFlag;
+            this.lastContent = chat.lastContent;
+            this.vipFlag = chat.vipFlag;
+            this.receiveUserId = chat.receiveUserId;
+            this.loadMore = chat.loadMore;
+            this.needPayOpen = chat.needPayOpen;
+            this.sendMsgNeedCoin = chat.sendMsgNeedCoin;
+            this.pageSize = 1;
+            this.pageNum = 30;
+            this.queryTime = new Date();
+            this.firstLoad = true;
+        }
+    }
+
+
+    /*constructor(openImChat?: OpenImChatRO) {
         if (openImChat) {
             this.id = openImChat.conversationID
             //@ts-ignore
@@ -50,7 +88,7 @@ export default class SocialuniChatRO {
             }
             // this.loadMore = chat.loadMore
         }
-    }
+    }*/
 
     /*
       static creatChat (user: UserVO): ChatVO {

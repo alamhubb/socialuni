@@ -21,6 +21,8 @@ import ChatType from "socialuni-constant/constant/ChatType";
 import MessageViewParams from "../model/MessageViewParams";
 import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
 import SocialuniImEventKey from "socialuni-im-api/src/constant/SocialuniMusicEventConst";
+import SocialuniPageQueryQO from "socialuni-api-base/src/model/common/SocialuniPageQueryQO";
+import MessageQueryVO from "socialuni-im-api/src/model/QO/message/MessageQueryVO";
 
 class SocialuniChatModule {
     readonly chatPageIndex = 1
@@ -88,9 +90,39 @@ class SocialuniChatModule {
 
     async getChatsAction() {
         const res = await SocialuniUserLikeAPI.queryChatListAPI()
-        this.chats = res.data
+        this.setChats(res.data)
+    }
+
+
+    setChats(chats: SocialuniChatRO[]) {
+        const newChats = []
+        for (const chat1 of chats) {
+            const newChat = new SocialuniChatRO(chat1)
+            newChats.push(newChat)
+            console.log(newChat.messages)
+            this.queryChatMessages(newChat)
+        }
+        // this.chats = chats
+        this.chats = newChats
         this.computedChatsUnreadNumTotalAction()
     }
+
+    async queryChatMessages(chat: SocialuniChatRO) {
+        const pageQueryQO = new SocialuniPageQueryQO<MessageQueryVO>()
+        const queryQO = new MessageQueryVO(chat.id, new Date())
+        pageQueryQO.queryData = queryQO
+        pageQueryQO.pageSize = chat.pageSize
+        pageQueryQO.pageNum = chat.pageNum
+        pageQueryQO.queryTime = queryQO.queryTime
+
+        MessageAPI.queryNewMessagesAPI(pageQueryQO).then(res => {
+            console.log(chat)
+            console.log(res.data)
+            chat.messages = res.data
+            this.computedChatsUnreadNumTotalAction()
+        })
+    }
+
 
     readChat(messageROs: MessageVO[]) {
         const messages: MessageVO[] = messageROs.filter(item => !item.isMine && !item.isRead)

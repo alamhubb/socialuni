@@ -70,14 +70,14 @@
           <div>
             <div class="color-content text-sm flex">
               <div class="text-cut text-sm">
-                <template v-if="chat.messages.length">
+                <div v-if="chat.messages.length">
                   <div v-if="chat.messages[chat.messages.length - 1].contentType === '图片'">
                     [图片]
                   </div>
                   <div v-else>
                     {{ chat.messages[chat.messages.length - 1].content }}
                   </div>
-                </template>
+                </div>
                 <template v-else>
                   {{ chat.lastContent }}
                 </template>
