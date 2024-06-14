@@ -25,6 +25,7 @@ import com.socialuni.social.recharge.constant.SocialuniCoinOrderType;
 import com.socialuni.social.recharge.constant.SocialuniOrderDetailType;
 import com.socialuni.social.recharge.logic.entity.SocialuniCreateCoinOrderEntity;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
+import com.socialuni.social.sdk.im.enumeration.ChatType;
 import com.socialuni.social.sdk.im.logic.foctory.SocialChatROFactory;
 import com.socialuni.social.sdk.im.logic.service.SocialuniMessageService;
 import com.socialuni.social.sdk.im.logic.service.chat.ChatService;
@@ -58,8 +59,20 @@ public class SocialuniUserLikeService {
         List<ChatRO> data = resultRO.getData();
 
         Integer mineUserId = SocialuniUserUtil.getMineUserIdAllowNull();
+        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
 
-        List<SocialuniLikeChatRO> socialuniLikeChatROList = data.stream().map(item -> getSocialuniLikeChatRO(item, mineUserId)).collect(Collectors.toList());
+        List<SocialuniLikeChatRO> socialuniLikeChatROList = data.stream().map(item -> {
+            if (item.getType().equals(ChatType.single)) {
+                SocialuniChatUserDO socialuniChatUserDO = chatService.getSocialuniChatUserDO(item.getId());
+                if (UserType.system.equals(mineUser.getType()) || mineUser.getUserId().equals(socialuniChatUserDO.getUserId())) {
+                    Integer sendUserId = socialuniChatUserDO.getUserId();
+                    return getSocialuniLikeChatRO(item, sendUserId);
+                }
+                throw new SocialParamsException("参数异常56035");
+            } else {
+                return getSocialuniLikeChatRO(item, mineUserId);
+            }
+        }).collect(Collectors.toList());
 
         return ResultRO.success(socialuniLikeChatROList);
     }

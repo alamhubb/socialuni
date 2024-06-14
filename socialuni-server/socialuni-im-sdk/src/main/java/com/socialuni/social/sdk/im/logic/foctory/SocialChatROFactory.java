@@ -215,7 +215,7 @@ public class SocialChatROFactory {
         ChatRO chatRO = SocialChatROFactory.getChatROByUserLogin(chatUserDO);
 
         List<SocialMessageRO> messages = new ArrayList<>();
-        /*if (chatRO.getType().equals(ChatType.single)) {
+        if (chatRO.getType().equals(ChatType.single)) {
             //系统群聊读取message表
             //查询用户这个chatUser下的消息
             List<SocialuniMessageReceiveDO> messageReceiveDOS = messageReceiveRepository.findTop30ByChatUserIdAndStatusAndCreateTimeLessThanOrderByCreateTimeDesc(chatUserDO.getId(), MessageStatus.enable, new Date());
@@ -235,7 +235,7 @@ public class SocialChatROFactory {
             String lastContent = messages.get(messages.size() - 1).getContent();
             chatRO.setLastContent(lastContent);
             chatRO.setLoadMore(LoadMoreType.more);
-        }*/
+        }
         chatRO.setMessages(messages);
         return chatRO;
     }
