@@ -40,6 +40,7 @@ public class CommonRedisKey {
     //抱抱
     public static final String findHugByTalkIdAndUserId = "findHugByTalkIdAndUserId";
     public static final String findUserPhoneByUserId = "findUserPhoneByUserId";
+    public static final String findByPhoneNumAndDevId = "findByPhoneNumAndDevId";
     public static final String findUserFansDetailByUserId = "findUserFansDetailByUserId";
     public static final String talkById = "talkById";
 
