@@ -3,7 +3,6 @@ import {fileURLToPath, URL} from 'node:url'
 import {defineConfig, loadEnv} from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import nodeResolve from "@rollup/plugin-node-resolve";
 import socialuniPlatformAutoImportPlugin from "vite-plugin-socialuni-platform-auto-import/src/index";
 
 // https://vitejs.dev/config/
@@ -15,7 +14,6 @@ export default ({mode}) => {
         plugins: [
             vue(),
             vueJsx(),
-            nodeResolve(),
             socialuniPlatformAutoImportPlugin()
         ],
         server: {

@@ -10,11 +10,6 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false"
   },
   "dependencies": {
-    "socialuni-peiwan-api": "../packages/socialuni-peiwan-api",
-    "socialuni-admin-api": "../packages/socialuni-admin-api",
-    "pinyin-match": "^1.2.4",
-    "vue-facing-decorator": "^3.0.2",
-    "path-browserify": "^1.0.1",
     "@element-plus/icons-vue": "^2.1.0",
     "@vueuse/components": "^10.9.0",
     "@vueuse/core": "^10.9.0",
@@ -27,11 +22,13 @@
     "js-base64": "^3.7.5",
     "mitt": "^3.0.0",
     "moment": "^2.29.4",
-    "qing-compat-js-ui": "../packages/qing-compat-js-ui/qing-compat-js-ui",
-    "socialuni-ui-h5": "../packages/socialuni-ui-h5/socialuni-ui-h5",
-    "qing-compat-js-ui-h5": "../packages/qing-compat-js-ui/qing-compat-js-ui-h5",
+    "path-browserify": "^1.0.1",
+    "pinyin-match": "^1.2.4",
     "qing-compat-js-h5": "../qing-compat-js-h5",
+    "qing-compat-js-ui": "../packages/qing-compat-js-ui/qing-compat-js-ui",
+    "qing-compat-js-ui-h5": "../packages/qing-compat-js-ui/qing-compat-js-ui-h5",
     "socialuni": "../packages/socialuni",
+    "socialuni-admin-api": "../packages/socialuni-admin-api",
     "socialuni-app-view-h5": "../packages/socialuni-app-view-h5",
     "socialuni-community-view-h5": "../packages/socialuni-community/socialuni-community-view-h5",
     "socialuni-expand-view-h5": "../packages/socialuni-expand/socialuni-expand-view-h5",
@@ -39,6 +36,8 @@
     "socialuni-im-view-h5": "../packages/socialuni-im/socialuni-im-view-h5",
     "socialuni-music-sdk": "../packages/socialuni-music/socialuni-music-sdk",
     "socialuni-music-ui-h5": "../packages/socialuni-music/socialuni-music-ui-h5",
+    "socialuni-peiwan-api": "../packages/socialuni-peiwan-api",
+    "socialuni-ui-h5": "../packages/socialuni-ui-h5/socialuni-ui-h5",
     "socialuni-user-api": "../packages/socialuni-user-api",
     "socialuni-user-sdk": "../packages/socialuni-user-sdk",
     "socialuni-user-view-h5": "../packages/socialuni-user/socialuni-user-view-h5",
@@ -46,13 +45,16 @@
     "vite-plugin-require-transform": "^1.0.21",
     "vue": "^3.3.8",
     "vue-drag-resize3": "../packages/vue-drag-resize3",
+    "vue-facing-decorator": "^3.0.2",
     "vue-router": "^4.2.0",
+    "vue3-clipboard": "^1.0.0",
     "vue3-golden-layout": "../packages/vue3-golden-layout"
   },
   "devDependencies": {
     "@tsconfig/node18": "^2.0.1",
     "@types/node": "^18.16.8",
     "@vitejs/plugin-vue": "^4.5.0",
+    "@vitejs/plugin-vue-jsx": "^3.0.1",
     "@vue/tsconfig": "^0.4.0",
     "npm-run-all": "^4.1.5",
     "sass": "^1.58.3",
@@ -60,7 +62,6 @@
     "vite": "^5.0.0",
     "vite-plugin-commonjs": "^0.10.1",
     "vite-plugin-socialuni-platform-auto-import": "../packages/vite-plugin-socialuni-platform-auto-import",
-    "vue-tsc": "^1.8.22",
-    "@vitejs/plugin-vue-jsx": "^3.0.1"
+    "vue-tsc": "^1.8.22"
   }
 }
