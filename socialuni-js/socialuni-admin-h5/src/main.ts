@@ -16,6 +16,8 @@ import './styles/index.scss'
 import SocialuniAppH5 from "socialuni-app-view-h5/src";
 import VueClipboard from 'vue3-clipboard'
 
+console.log(VueClipboard)
+
 export const getImageUrl = (path: string): string => {
     return new URL(`./assets/${path}`, import.meta.url).href
 }
@@ -41,7 +43,10 @@ declare module '@vue/runtime-core' {
     app.use(SocialuniAppH5)
     app.use(SocialuniUser)
 
-    app.use(VueClipboard)
+    app.use(VueClipboard, {
+        autoSetContainer: true,
+        appendToBody: true,
+    })
     app.config.globalProperties.$qing = socialuniSystemModule
     app.mount('#app');
 })();
