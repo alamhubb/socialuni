@@ -17,6 +17,7 @@ import QDialog from "qing-compat-js-ui-h5/src/components/QDialog.vue";
 import CommunityEventConst from "socialuni-community-sdk/src/constant/CommunityEventConst.ts";
 import SocialuniUserEventOn from "socialuni-user-sdk/src/event/SocialuniUserEventOn";
 import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
+import AdminUserAPI from "socialuni-admin-api/src/api/AdminUserAPI";
 
 console.log(123123)
 
@@ -29,8 +30,9 @@ export default class App extends Vue {
     SocialuniUserEventOn.toLogin(() => {
       this.toLogin()
     })
-    SocialuniUserEventOn.loginSuccess(() => {
+    SocialuniUserEventOn.loginSuccess(async () => {
       console.log('dingyuechenggong')
+
       this.toHome()
     })
     SocialuniUserEventOn.loginOut(() => {

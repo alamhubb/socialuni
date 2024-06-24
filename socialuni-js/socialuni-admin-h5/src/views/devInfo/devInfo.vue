@@ -21,7 +21,7 @@
         <el-form-item label="开发者密钥：">
           <div class="row-between-center">
             <div class="color-content">
-              {{ user.secretKey || '填写app简称后生成秘钥' }}
+              {{ user?.secretKey || '填写app简称后生成秘钥' }}
             </div>
             <div v-if="userHasSecretKey">
               <el-button
@@ -91,6 +91,10 @@ import { Emit, Component, Prop, Vue , toNative} from 'vue-facing-decorator'
 import DevAccountType from '@/constant/DevAccountType'
 import { OperationType } from '@/constant/OperationType'
 import ToastUtil from '@/utils/ToastUtil'
+import adminModule from "@/store/AdminUserModule";
+import type DevAccountRO from "socialuni-admin-api/src/model/base/DevAccountRO";
+import AdminUserAPI from "socialuni-admin-api/src/api/AdminUserAPI";
+import AlertUtil from "qing-compat-js-h5/src/util/AlertUtil";
 
 @toNative
 @Component({})
@@ -111,6 +115,10 @@ export default class DevInfoPage extends Vue {
       }],
     wxMpAppId: [{ validator: this.checkWxAndQQAppIdNotNull, trigger: 'blur' }],
     qqMpAppId: [{ validator: this.checkWxAndQQAppIdNotNull, trigger: 'blur' }]
+  }
+
+  get user(){
+    return adminModule.adminUser
   }
 
   clearValidate() {
@@ -155,7 +163,7 @@ export default class DevInfoPage extends Vue {
     await this.$refs.devForm.validate()
     AlertUtil.confirm('是否确定要修改开发者信息').then(() => {
       AdminUserAPI.updateDevAccountAPI(this.user).then(res => {
-        userModule.user = res.data
+        adminModule.adminUser = res.data
       })
     })
   }

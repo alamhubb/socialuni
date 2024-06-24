@@ -9,10 +9,11 @@ import PeiwanManageView from '@/views/peiwanManage/PeiwanManageView.vue'
 import CreateUserView from "@/views/user/CreateUser.vue";
 import OperateUserManage from "@/views/operateUserManage/OperateUserManage.vue";
 import RouterName from "@/constant/RouterName";
+import adminModule from "@/store/AdminUserModule";
 
 export const menuRoutes = [
     {
-      path: '',
+      path: '/',
       name: RouterName.devAccount,
       component: () => import('@/views/devInfo/devInfo.vue'),
       meta: { title: '开发者信息', icon: 'strengthMonitoring', isOpen: true }
@@ -147,13 +148,13 @@ const whiteList = ['/login'] // no redirect whitelist
 
 router.beforeEach(async (to, from, next) => {
     // set page title
-    let user = socialuniUserModule.mineUser
+    let user = adminModule.adminUser
     console.log(user)
     console.log(1313131)
     const hasToken = socialuniUserModule.hasToken
     if (!user) {
         if (hasToken) {
-            socialuniUserModule.getUserInfo()
+            adminModule.getAdminUserAction()
         }
     }
     console.log(hasToken)

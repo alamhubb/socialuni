@@ -44,15 +44,6 @@ class SocialuniUserModule {
         //判断是否已登录已有token,userId
         if (this.hasToken) {
             await socialuniAppUserModule.getMineUserAction()
-            //考虑清空缓存的情况
-            //从后台根据api获取用户信息， 并且更新user。
-            //并且设置
-            //刷新token
-            const tokenRo = await LoginAPI.refreshToken();
-            // 有才设置新的token.
-            if (tokenRo?.data?.token) {
-                socialuniTokenModule.setToken(tokenRo?.data?.token);
-            }
         }
     }
 

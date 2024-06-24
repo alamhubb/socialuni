@@ -5,6 +5,7 @@ import ImgFileVO from "socialuni-api-base/src/model/ImgFileVO";
 import UserEditVO from "socialuni-api-base/src/model/user/UserEditVO";
 import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
+import SocialLoginRO from "socialuni-api-base/src/model/social/SocialLoginRO";
 
 export interface SocialuniGetRandomAvatarRO{
   path:string
@@ -42,5 +43,13 @@ export default class SocialuniMineUserAPI {
 
   static destroyAccountAPI() {
     return socialuniUserRequest.post('socialuni/mineUser/destroyAccount')
+  }
+
+  /**
+   * 刷新token
+   * @param loginData
+   */
+  static refreshToken() {
+    return socialuniUserRequest.get<SocialLoginRO<SocialuniUserRO>>('socialuni/mineUser/refreshToken');
   }
 }

@@ -4,6 +4,7 @@ import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
 import com.socialuni.social.user.sdk.model.QO.SocialUserEditQO;
+import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -21,6 +22,10 @@ public interface SocialuniMineUserAPI {
     @GetMapping("getMineUser")
     @Operation(summary = "获取用户个人详情")
     ResultRO<SocialuniUserRO> getMineUser();
+
+    @GetMapping("refreshToken")
+    @Operation(summary = "刷新token")
+    ResultRO<SocialLoginRO<SocialuniUserRO>> refreshToken();
 
     @PostMapping("editUser")
     @Operation(summary = "编辑用户")

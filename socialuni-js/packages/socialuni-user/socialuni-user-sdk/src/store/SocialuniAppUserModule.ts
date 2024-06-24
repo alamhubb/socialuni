@@ -5,11 +5,11 @@ import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
 import SocialUserIdentityAPI from "socialuni-user-api/src/api/SocialUserIdentityAPI";
 import FollowAPI from "socialuni-community-api/src/api/FollowAPI";
 import SocialuniUserFansDetailRO from "socialuni-user-api/src/model/SocialuniUserFansDetailRO";
-import SocialuniUserExpandDetailEditRO from "packages/socialuni-user/socialuni-user-api/src/model/SocialuniUserExpandDetailEditRO";
 import SocialuniUserExpandAPI from "socialuni-user-api/src/api/SocialuniUserExpandAPI";
 import SocialuniCoinAPI from "socialuni-user-api/src/api/SocialuniCoinAPI";
 import ImgFileVO from "socialuni-api-base/src/model/ImgFileVO";
 import SocialuniUserImgAPI from "socialuni-user-api/src/api/SocialuniUserImgAPI";
+import SocialuniUserExpandDetailEditRO from "socialuni-user-api/src/model/SocialuniUserExpandDetailEditRO";
 
 class SocialuniAppUserModule {
     private userPhoneNum: string = null
@@ -57,8 +57,12 @@ class SocialuniAppUserModule {
 
     async getMineUserAction() {
         await Promise.all([
-            SocialuniMineUserAPI.getMineUserInfoAPI().then((res: any) => {
-                socialuniUserModule.setUser(res.data)
+            //考虑清空缓存的情况
+            //从后台根据api获取用户信息， 并且更新user。
+            //并且设置
+            //刷新token
+            SocialuniMineUserAPI.refreshToken().then((res: any) => {
+                socialuniUserModule.setUserAndToken(res.data)
             }),
             PhoneAPI.getMineUserPhoneNumAPI().then((res: any) => {
                 socialuniAppUserModule.setMineUserPhoneNum(res.data)
