@@ -262,7 +262,7 @@
 
 </template>
 
-<script lang="tsx">
+<script lang="ts">
 import { Component, Vue , toNative} from 'vue-facing-decorator'
 import ReportAPI from '@/api/ReportAPI'
 import Talk from '@/model/talk/Talk'
@@ -274,7 +274,7 @@ import request from '@/plugins/request'
 import AdminUserAPI from '@/api/AdminUserAPI'
 
 @toNative
-@Component
+@Component({})
 export default class ContentAuditView extends Vue {
   reports: ReportVO[] = []
   imgUrl: string = process.env.VUE_APP_COS_URL

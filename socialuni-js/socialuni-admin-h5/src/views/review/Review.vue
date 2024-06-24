@@ -133,7 +133,7 @@ import CommonStatus from '@/constant/CommonStatus'
 import ObjectUtils from '@/utils/ObjectUtils'
 
 @toNative
-@Component
+@Component({})
 export default class Review extends Vue {
     data: number [] = [1, 2, 3, 4, 5]
     options: number [] = [1, 2, 3, 4, 5]

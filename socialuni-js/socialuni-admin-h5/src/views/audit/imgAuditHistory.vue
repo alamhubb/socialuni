@@ -104,7 +104,7 @@
   </div>
 </template>
 
-<script lang="tsx">
+<script lang="ts">
 import { Component, Vue , toNative} from 'vue-facing-decorator'
 import DataTable from '@/components/dataTable/DataTable.vue'
 import TencentCosAuditHistoryRO from '@/model/audit/TencentCosAuditHistoryRO'

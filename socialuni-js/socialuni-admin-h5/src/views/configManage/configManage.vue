@@ -15,14 +15,14 @@
   </div>
 </template>
 
-<script lang="tsx">
+<script lang="ts">
 import {Component, Vue, toNative} from 'vue-facing-decorator'
 import request from "@/plugins/request";
 import ConfigVO from "@/model/config/ConfigVO";
 import ReportVO from '@/model/report/ReportVO'
 
 @toNative
-@Component
+@Component({})
 export default class ConfigManageView extends Vue {
   configs: ConfigVO[] = []
 

@@ -216,7 +216,7 @@ import KeywordsManageAPI from '@/api/KeywordsManageAPI'
 import keywordsTriggerDetailVO from '@/model/violateWord/KeywordsTriggerDetailVO'
 
 @toNative
-@Component
+@Component({})
 export default class ViolationHistoryPage extends Vue {
   keywords: keywordsVO[] = []
 

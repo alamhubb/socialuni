@@ -245,7 +245,7 @@
 
 </template>
 
-<script lang="tsx">
+<script lang="ts">
 import { Component, Vue , toNative} from 'vue-facing-decorator'
 import ReportAPI from '@/api/ReportAPI'
 import Talk from '@/model/talk/Talk'
@@ -255,7 +255,7 @@ import { Message } from 'element-ui'
 import ViolateType from '@/constant/ViolateType'
 
 @toNative
-@Component
+@Component({})
 export default class PreAuditPage extends Vue {
   reports: ReportVO[] = []
   imgUrl: string = process.env.VUE_APP_COS_URL

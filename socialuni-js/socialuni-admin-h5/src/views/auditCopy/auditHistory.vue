@@ -142,7 +142,7 @@ import ReportAPI from '@/api/ReportAPI'
 import ReportVO from '@/model/report/ReportVO'
 
 @toNative
-@Component
+@Component({})
 export default class ViolationHistoryPage extends Vue {
   reports: ReportVO[] = []
 

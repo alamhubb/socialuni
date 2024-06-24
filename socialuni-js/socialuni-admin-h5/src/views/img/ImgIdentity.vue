@@ -68,7 +68,7 @@ import ImgIdentityAPI from '@/api/ImgIdentityAPI'
 import ViolateType from '@/constant/ViolateType'
 
 @toNative
-@Component
+@Component({})
 export default class ImgIdentity extends Vue {
     reports: ReportVO[] = []
     imgUrl: string = process.env.VUE_APP_COS_URL
