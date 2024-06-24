@@ -1,21 +1,16 @@
 {
   "name": "vite-plugin-socialuni-platform-auto-import",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "description": "",
   "main": "axios.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@babel/core": "^7.22.8",
-    "@babel/parser": "^7.22.7",
-    "@babel/traverse": "^7.22.8"
-  },
-  "devDependencies": {
     "typescript": "^4.7.4"
   },
   "author": "",
   "repository": "https://github.com/alamhubb/socialuni/tree/master/socialuni-js/packages/",
   "license": "ISC",
-  "gitHead": "1b66a7fd7288eabfd2143269794ec963b7644be3"
+  "gitHead": "48a347611019ae3c96ba7ff2fe486dd81f144d48"
 }
