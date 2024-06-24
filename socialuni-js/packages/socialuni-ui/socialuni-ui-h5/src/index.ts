@@ -1,5 +1,5 @@
 import {App} from "vue";
-import QingUiH5 from "qing-ui-h5/src";
+import QingUiH5 from "qing-compat-js-ui-h5/src";
 import SocialuniUi from "socialuni-ui/src";
 import "./styles/index.scss";
 

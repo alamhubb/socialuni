@@ -1,6 +1,6 @@
 {
   "name": "qing-scss",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,5 +11,5 @@
   "author": "",
   "repository": "https://github.com/alamhubb/socialuni/tree/master/socialuni-js/packages/qing-scss",
   "license": "ISC",
-  "gitHead": "6419531da3fca7525662a554b07eeac3b85a7526"
+  "gitHead": "1b66a7fd7288eabfd2143269794ec963b7644be3"
 }

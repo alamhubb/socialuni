@@ -86,7 +86,7 @@
 <script lang="ts">
 import {Component, Emit, Model, Prop, Vue, Watch, toNative} from 'vue-facing-decorator'
 import PhoneNumFormData from "./PhoneNumFormData";
-import QIcon from "qing-ui/src/components/QIcon.vue";
+import QIcon from "qing-compat-js-ui/src/components/QIcon.vue";
 import SocialuniLoginFormService from "socialuni-user-sdk/src/logic/SocialuniLoginFormService";
 import CommonUtil from "qing-util/src/util/CommonUtil";
 import {nextTick} from "vue";

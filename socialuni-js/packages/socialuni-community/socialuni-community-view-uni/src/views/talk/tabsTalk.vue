@@ -119,11 +119,11 @@ import {Component, Vue, Watch, toNative} from 'vue-facing-decorator'
 import TalkSwipers from './talkSwipers.vue'
 
 import TalkOperate from './talkOperate.vue'
-import QTab from 'qing-ui-uni/src/components/QTab/QTab.vue'
-import QTabs from 'qing-ui/src/components/QTabs/QTabs.vue'
-import QIcon from 'qing-ui/src/components/QIcon.vue'
+import QTab from 'qing-compat-js-ui-uni/src/components/QTab/QTab.vue'
+import QTabs from 'qing-compat-js-ui/src/components/QTabs/QTabs.vue'
+import QIcon from 'qing-compat-js-ui/src/components/QIcon.vue'
 import SocialTalkFilterDialog from "./SocialTalkFilterDialog.vue";
-import QPullRefresh from "qing-ui-uni/src/components/QPullRefresh/QPullRefresh.vue";
+import QPullRefresh from "qing-compat-js-ui-uni/src/components/QPullRefresh/QPullRefresh.vue";
 import TalkTabVO from "socialuni-api-base/src/model/talk/SocialuniTalkTabRO";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import CommonUtil from "qing-util/src/util/CommonUtil";

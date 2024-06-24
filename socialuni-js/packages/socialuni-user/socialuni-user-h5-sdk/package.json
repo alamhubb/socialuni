@@ -1,6 +1,6 @@
 {
   "name": "socialuni-user-h5-sdk",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,13 +8,13 @@
   },
   "devDependencies": {
     "mitt": "^3.0.0",
-    "socialuni": "^0.1.15",
-    "socialuni-app-sdk": "^0.1.15",
-    "socialuni-user-api": "^0.1.15"
+    "socialuni": "^0.1.16",
+    "socialuni-app-sdk": "^0.1.16",
+    "socialuni-user-api": "^0.1.16"
   },
   "keywords": [],
   "author": "",
   "repository": "https://github.com/alamhubb/socialuni/tree/master/socialuni-js/packages/socialuni-user-h5-sdk",
   "license": "ISC",
-  "gitHead": "6419531da3fca7525662a554b07eeac3b85a7526"
+  "gitHead": "1b66a7fd7288eabfd2143269794ec963b7644be3"
 }

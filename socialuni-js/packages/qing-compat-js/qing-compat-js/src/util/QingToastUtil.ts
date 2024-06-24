@@ -5,7 +5,7 @@ export default class QingToastUtil {
     private static nativeUtilSelf = null
 
     static async init() {
-        const modules = await PlatformModuleLoadUtil.dynamicImport('qingjs', '/src/util/ToastUtil.ts')
+        const modules = await PlatformModuleLoadUtil.dynamicImport('qing-compat-js', '/src/util/ToastUtil.ts')
         this.nativeUtilSelf = modules.default
     }
 

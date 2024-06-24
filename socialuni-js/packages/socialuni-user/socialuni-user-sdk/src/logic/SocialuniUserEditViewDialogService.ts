@@ -1,7 +1,7 @@
 import {reactive} from "vue";
 import {ComponentInternalInstance} from "@vue/runtime-core";
 import SocialuniViewService from "socialuni/src/interface/SocialuniViewService";
-import {SDialog} from "qing-ui-types/src/types/SocialuniUiTypes";
+import {SDialog} from "qing-compat-js-ui-types/src/types/SocialuniUiTypes";
 import socialuniUserEditViewService from "./SocialuniUserEditViewService";
 
 interface SocialuniUserEditViewServiceRefs {

@@ -1,0 +1,16 @@
+{
+  "name": "qing-compat-js-ui-types",
+  "version": "0.1.16",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "typescript": "^4.7.4",
+    "vue": "^3.2.41"
+  },
+  "author": "",
+  "repository": "https://github.com/alamhubb/socialuni/tree/master/socialuni-js/packages/qing-compat-js-ui/qing-compat-js-ui-types",
+  "license": "ISC",
+  "gitHead": "1b66a7fd7288eabfd2143269794ec963b7644be3"
+}

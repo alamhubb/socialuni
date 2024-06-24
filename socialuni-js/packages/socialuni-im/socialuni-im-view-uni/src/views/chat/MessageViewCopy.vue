@@ -316,7 +316,7 @@ import MessageAPI from "socialuni-im-api/src/api/MessageAPI";
 import MessageVO from "socialuni-im-api/src/model/RO/MessageVO";
 import NodeInfo = UniNamespace.NodeInfo;
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
-import QingAppUtil from 'qingjs/src/util/QingAppUtil'
+import QingAppUtil from 'qing-compat-js/src/util/QingAppUtil'
 import MsgUtil from 'socialuni-app-sdk/src/util/MsgUtil'
 import UserPageUtil from 'socialuni-user-sdk/src/util/UserPageUtil'
 import DomFile from 'socialuni-app-sdk/src/model/DomFile'
@@ -327,8 +327,8 @@ import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserMod
 import SocialuniMsgViewService from "socialuni-im-sdk/src/logic/SocialuniMsgViewService";
 import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
 import SocialuniMsgViewLogic from "socialuni-im-sdk/src/viewLogic/SocialuniMsgViewLogic";
-import QIcon from "qing-ui/src/components/QIcon.vue";
-import QNavbar from "qing-ui-uni/src/components/QNavbar/QNavbar.vue";
+import QIcon from "qing-compat-js-ui/src/components/QIcon.vue";
+import QNavbar from "qing-compat-js-ui-uni/src/components/QNavbar/QNavbar.vue";
 
 @toNative
 @Component(

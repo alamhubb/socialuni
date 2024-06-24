@@ -1,6 +1,6 @@
 {
   "name": "qing-compat-js",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -8,15 +8,15 @@
   "dependencies": {
     "cos-js-sdk-v5": "^1.2.18",
     "mitt": "^3.0.0",
-    "qing-util": "^0.1.15",
-    "socialuni-constant": "^0.1.15"
+    "qing-util": "^0.1.16",
+    "socialuni-constant": "^0.1.16"
   },
   "devDependencies": {
     "typescript": "^4.7.4",
     "vue": "^3.2.41"
   },
   "author": "",
-  "repository": "https://github.com/alamhubb/socialuni/tree/master/socialuni-js/packages/qing-js",
+  "repository": "https://github.com/alamhubb/socialuni/tree/master/socialuni-js/packages/qing-compat-js",
   "license": "ISC",
-  "gitHead": "6419531da3fca7525662a554b07eeac3b85a7526"
+  "gitHead": "1b66a7fd7288eabfd2143269794ec963b7644be3"
 }

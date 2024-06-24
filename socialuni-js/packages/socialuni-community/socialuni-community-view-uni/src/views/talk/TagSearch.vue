@@ -92,11 +92,11 @@
 <script lang="ts">
 import {Component, Emit, Model, Prop, Vue, Watch, toNative} from 'vue-facing-decorator'
 
-import QRowItem from 'qing-ui/src/components/QRowItem.vue'
-import QIcon from 'qing-ui/src/components/QIcon.vue'
-import QNavbar from 'qing-ui-uni/src/components/QNavbar/QNavbar.vue'
-import QSearch from 'qing-ui-uni/src/components/QSearch/QSearch.vue'
-import QSidebar from 'qing-ui-uni/src/components/QSidebar/QSidebar.vue'
+import QRowItem from 'qing-compat-js-ui/src/components/QRowItem.vue'
+import QIcon from 'qing-compat-js-ui/src/components/QIcon.vue'
+import QNavbar from 'qing-compat-js-ui-uni/src/components/QNavbar/QNavbar.vue'
+import QSearch from 'qing-compat-js-ui-uni/src/components/QSearch/QSearch.vue'
+import QSidebar from 'qing-compat-js-ui-uni/src/components/QSidebar/QSidebar.vue'
 import TagVO from "socialuni-api-base/src/model/community/tag/TagVO";
 import {socialuniTagModule} from "socialuni-community-sdk/src/store/SocialTagModule";
 import TagUtil from "socialuni-community-sdk/src/util/TagUtil";

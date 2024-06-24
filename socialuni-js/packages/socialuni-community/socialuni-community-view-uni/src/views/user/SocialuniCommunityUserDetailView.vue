@@ -67,13 +67,13 @@
 </template>
 
 <script lang="ts">
-import QPopup from "qing-ui/src/components/QPopup.vue";
+import QPopup from "qing-compat-js-ui/src/components/QPopup.vue";
 import {Inject, Component, Vue, toNative} from 'vue-facing-decorator'
 import {socialuniCommunityUserDetailViewService}
   from "socialuni-community-sdk/src/logic/SocialuniCommunityUserDetailViewService";
-import QIcon from "qing-ui/src/components/QIcon.vue"
-import QButton from "qing-ui/src/components/QButton.vue"
-import QNavbar from "qing-ui-uni/src/components/QNavbar/QNavbar.vue"
+import QIcon from "qing-compat-js-ui/src/components/QIcon.vue"
+import QButton from "qing-compat-js-ui/src/components/QButton.vue"
+import QNavbar from "qing-compat-js-ui-uni/src/components/QNavbar/QNavbar.vue"
 import {socialuniUserDetailViewService} from "socialuni-user-sdk/src/logic/SocialuniUserDetailViewService";
 import SocialuniUserDetailView from "socialuni-user-view-uni/src/views/user/SocialuniUserDetailView.vue";
 import SocialuniFollowTag from "../../components/SocialuniFollow/SocialuniFollowTag.vue";

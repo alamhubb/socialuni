@@ -1,6 +1,6 @@
 import AppMsg from "socialuni-constant/constant/AppMsg";
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
-import QingAppUtil from 'qingjs/src/util/QingAppUtil'
+import QingAppUtil from 'qing-compat-js/src/util/QingAppUtil'
 import { socialuniConfigModule } from '../store/SocialuniConfigModule'
 
 

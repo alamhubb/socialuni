@@ -42,8 +42,8 @@
 
 <script lang="ts">
 import {Emit, Component, Vue, Watch, toNative} from 'vue-facing-decorator'
-import QButton from "qing-ui/src/components/QButton.vue";
-import QDialog from "qing-ui-h5/src/components/QDialog.vue";
+import QButton from "qing-compat-js-ui/src/components/QButton.vue";
+import QDialog from "qing-compat-js-ui-h5/src/components/QDialog.vue";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 import type SocialuniMineUserRO from "socialuni-api-base/src/model/user/SocialuniMineUserRO";
 import type EnumStrVO from "socialuni-constant/constant/EnumStrVO";

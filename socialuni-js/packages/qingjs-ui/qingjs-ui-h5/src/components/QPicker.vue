@@ -1,7 +1,7 @@
 <template>
   <div :class="[uuid]" class="flex-row h100p">
     <!--    样式涉及到左侧选中小蓝块，所以这么写的-->
-    <q-scroll class="flex-1 h100p" scroll-y :scroll-top="oneScrollTop">
+    <scroll-view class="flex-1 h100p" scroll-y :scroll-top="oneScrollTop">
       <div v-for="(item,index) in dataList"
            :key="index" @click="oneLevelChange(index)"
            class="q-picker-one-level-item row-col-center"
@@ -11,8 +11,8 @@
           {{ item.adName }}
         </q-row-item>
       </div>
-    </q-scroll>
-    <q-scroll class="flex-1 h100p" scroll-y :scroll-top="twoScrollTop">
+    </scroll-view>
+    <scroll-view class="flex-1 h100p" scroll-y :scroll-top="twoScrollTop">
       <div v-for="(item,index) in twoLevelData"
            :key="index" @click="twoLevelChange(index)"
            class="q-picker-two-level-item row-col-center"
@@ -22,8 +22,8 @@
           {{ item.adName }}
         </q-row-item>
       </div>
-    </q-scroll>
-    <q-scroll class="flex-1 h100p" scroll-y :scroll-top="threeScrollTop">
+    </scroll-view>
+    <scroll-view class="flex-1 h100p" scroll-y :scroll-top="threeScrollTop">
       <div v-for="(item,index) in threeLevelData"
            :key="index" @click="threeLevelChange(index)"
            class="q-picker-three-level-item row-col-center"
@@ -33,14 +33,14 @@
           {{ item.adName }}
         </q-row-item>
       </div>
-    </q-scroll>
+    </scroll-view>
   </div>
 </template>
 <script lang="ts">
 import {Emit, Model, Component, Prop, Vue, Watch, toNative} from 'vue-facing-decorator'
-import QRowItem from 'qing-ui/src/components/QRowItem.vue'
+import QRowItem from 'qing-compat-js-ui/src/components/QRowItem.vue'
 import UUIDUtil from "qing-util/src/util/UUIDUtil";
-import QScroll from "qing-ui/src/components/QScroll.vue";
+import ScrollView from "uniapp-web/src/components/ScrollView.vue";
 
 /*
 显示出来已经选了的城市，给她画上钩
@@ -53,7 +53,7 @@ import QScroll from "qing-ui/src/components/QScroll.vue";
 @toNative
 @Component({
   components: {
-    QRowItem,  QScroll
+    QRowItem, ScrollView
   }
 })
 export default class QPicker extends Vue {

@@ -3,7 +3,7 @@ import ElementPlus from 'element-plus'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import 'element-plus/dist/index.css'
 import "./styles/index.scss";
-import QingUi from "qing-ui/src";
+import QingUi from "qing-compat-js-ui/src";
 import UniappWeb from "uniapp-web/src";
 
 const QingUiH5 = {

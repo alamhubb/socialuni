@@ -124,7 +124,7 @@
 
 <script lang="ts">
 import {Component, Vue, toNative} from 'vue-facing-decorator'
-import SScrollbar from "qing-ui-h5/src/components/QScrollbar.vue";
+import SScrollbar from "qing-compat-js-ui-h5/src/components/QScrollbar.vue";
 import SocialuniChatViewServiceH5 from "socialuni-im-h5-sdk/src/logic/SocialuniChatViewServiceH5";
 
 @toNative

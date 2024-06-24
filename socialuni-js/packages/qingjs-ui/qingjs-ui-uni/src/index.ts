@@ -1,5 +1,5 @@
 import {App} from "vue";
-import QingUi from "qing-ui/src";
+import QingUi from "qing-compat-js-ui/src";
 import "./styles/index.scss";
 
 const QingUiUni = {

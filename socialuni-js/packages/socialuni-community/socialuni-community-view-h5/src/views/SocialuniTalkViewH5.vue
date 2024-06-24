@@ -134,10 +134,10 @@
 
 <script lang="ts">
 import {Component, Vue, Watch, toNative} from 'vue-facing-decorator'
-import QTabs from 'qing-ui/src/components/QTabs/QTabs.vue'
-import QIcon from 'qing-ui/src/components/QIcon.vue'
-import QLoading from 'qing-ui/src/components/QLoading.vue'
-import QLoadMore from 'qing-ui/src/components/QLoadMore.vue'
+import QTabs from 'qing-compat-js-ui/src/components/QTabs/QTabs.vue'
+import QIcon from 'qing-compat-js-ui/src/components/QIcon.vue'
+import QLoading from 'qing-compat-js-ui/src/components/QLoading.vue'
+import QLoadMore from 'qing-compat-js-ui/src/components/QLoadMore.vue'
 import TalkTabVO from "socialuni-api-base/src/model/talk/SocialuniTalkTabRO";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import CommonUtil from "qing-util/src/util/CommonUtil";
@@ -163,19 +163,19 @@ import SocialuniExpandAPI from "socialuni-expand-api/src/api/SocialuniExpandAPI"
 import TalkQueryVO from "socialuni-api-base/src/model/talk/TalkQueryVO";
 import {socialCircleModule} from "socialuni-community-sdk/src/store/SocialCircleModule";
 import TalkTabType from "socialuni-constant/constant/TalkTabType";
-import QEnumLink from 'qing-ui-h5/src/components/QEnumLink.vue'
+import QEnumLink from 'qing-compat-js-ui-h5/src/components/QEnumLink.vue'
 import CommonEventUtil from "qing-compat-js/src/util/CommonEventUtil";
 import SocialuniImEventKey from "socialuni-im-api/src/constant/SocialuniMusicEventConst";
 import JsonUtil from "qing-util/src/util/JsonUtil";
-import QNavMenu from "qing-ui-h5/src/components/QNavMenu.vue";
+import QNavMenu from "qing-compat-js-ui-h5/src/components/QNavMenu.vue";
 import CommunityEventConst from "socialuni-community-sdk/src/constant/CommunityEventConst";
 import SocialuniCommentInputDialog from "./SocialuniCommentInputDialog.vue";
 import MsgInput from "socialuni-ui/src/components/MsgInput.vue";
-import QDialog from "qing-ui-h5/src/components/QDialog.vue";
+import QDialog from "qing-compat-js-ui-h5/src/components/QDialog.vue";
 import TalkAddView from "./TalkAddView.vue";
 import SocialuniTalkListViewService from "socialuni-community-sdk/src/logic/service/SocialuniTalkListViewService";
 import {getCurrentInstance, nextTick, watch} from "vue";
-import QTag from "qing-ui/src/components/QTag.vue";
+import QTag from "qing-compat-js-ui/src/components/QTag.vue";
 import ImPageUtil from "socialuni-im-sdk/src/util/ImPageUtil";
 import SocialuniTalkTabRO from "socialuni-api-base/src/model/talk/SocialuniTalkTabRO";
 

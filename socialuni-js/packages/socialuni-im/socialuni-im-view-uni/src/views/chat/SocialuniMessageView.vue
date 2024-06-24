@@ -190,8 +190,8 @@ import {Component, Vue, toNative} from 'vue-facing-decorator';
 import SocialuniMsgViewService, {
   socialuniMsgViewService
 } from "socialuni-im-sdk/src/logic/SocialuniMsgViewService";
-import QIcon from "qing-ui/src/components/QIcon.vue";
-import QNavbar from "qing-ui-uni/src/components/QNavbar/QNavbar.vue";
+import QIcon from "qing-compat-js-ui/src/components/QIcon.vue";
+import QNavbar from "qing-compat-js-ui-uni/src/components/QNavbar/QNavbar.vue";
 import SocialuniReportDialog from "socialuni-user-view-uni/src/components/SocialuniReportDialog.vue"
 import MessageViewParams from "./MessageViewParams";
 import {socialuniMsgModule} from "socialuni-im-sdk/src/store/SocialMessageModule";

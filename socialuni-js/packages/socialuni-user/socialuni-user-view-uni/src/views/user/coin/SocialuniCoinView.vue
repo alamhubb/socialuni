@@ -46,13 +46,13 @@
 <script lang="ts">
 import {Vue, Component, toNative} from 'vue-facing-decorator'
 import ShellOrderVO from "socialuni-api-base/src/model/ShellOrderVO";
-import QIcon from 'qing-ui/src/components/QIcon.vue'
+import QIcon from 'qing-compat-js-ui/src/components/QIcon.vue'
 import EnumVO from "socialuni-constant/constant/EnumVO";
-import QButton from "qing-ui/src/components/QButton.vue";
+import QButton from "qing-compat-js-ui/src/components/QButton.vue";
 import SocialuniCoinPageType from "socialuni-constant/constant/user/SocialuniCoinPageType";
 import SocialuniProviderType from "socialuni-constant/constant/SocialuniProviderType";
 import PayType from "socialuni-constant/constant/PayType";
-import QTabs from "qing-ui/src/components/QTabs/QTabs.vue";
+import QTabs from "qing-compat-js-ui/src/components/QTabs/QTabs.vue";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 import PlatformUtils from "socialuni-user-sdk/src/util/PlatformUtils";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";

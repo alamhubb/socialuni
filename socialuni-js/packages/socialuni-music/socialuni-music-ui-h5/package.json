@@ -1,18 +1,18 @@
 {
   "name": "socialuni-music-ui-h5",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "qing-compat-js": "^0.1.15",
-    "qing-ui-h5": "^0.1.15",
-    "qing-util": "^0.1.15",
-    "socialuni": "^0.1.15",
-    "socialuni-music-sdk": "^0.1.15",
-    "socialuni-user-sdk": "^0.1.15",
+    "qing-compat-js": "^0.1.16",
+    "qing-util": "^0.1.16",
+    "qing-compat-js-ui-h5": "^0.1.16",
+    "socialuni": "^0.1.16",
+    "socialuni-music-sdk": "^0.1.16",
+    "socialuni-user-sdk": "^0.1.16",
     "vue": "3.2.41",
     "vue-facing-decorator": "^3.0.2"
   },
@@ -20,5 +20,5 @@
   "author": "",
   "repository": "https://github.com/alamhubb/socialuni/tree/master/socialuni-js/packages/socialuni-music-ui-h5",
   "license": "ISC",
-  "gitHead": "6419531da3fca7525662a554b07eeac3b85a7526"
+  "gitHead": "1b66a7fd7288eabfd2143269794ec963b7644be3"
 }

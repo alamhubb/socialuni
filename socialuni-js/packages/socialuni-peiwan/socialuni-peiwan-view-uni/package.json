@@ -1,6 +1,6 @@
 {
   "name": "socialuni-peiwan-view-uni",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,14 +10,14 @@
     "@dcloudio/types": "^3.0.17",
     "@dcloudio/uni-app": "3.0.0-3090920231225001",
     "@dcloudio/uni-ui": "^1.4.23",
-    "qing-compat-js": "^0.1.15",
-    "socialuni": "^0.1.15",
-    "socialuni-peiwan-api": "^0.1.15",
+    "qing-compat-js": "^0.1.16",
+    "socialuni": "^0.1.16",
+    "socialuni-peiwan-api": "^0.1.16",
     "vue": "3.2.41"
   },
   "keywords": [],
   "author": "",
   "repository": "https://github.com/alamhubb/socialuni/tree/master/socialuni-js/packages/socialuni-peiwan-view-uni",
   "license": "ISC",
-  "gitHead": "6419531da3fca7525662a554b07eeac3b85a7526"
+  "gitHead": "1b66a7fd7288eabfd2143269794ec963b7644be3"
 }

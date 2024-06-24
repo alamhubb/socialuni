@@ -7,13 +7,13 @@
 <script lang="ts">
 import {Component, Vue, toNative} from 'vue-facing-decorator';
 import SUserNavBar from "socialuni-user-view-h5/src/components/SUserNavBar.vue";
-import QNavMenu from "qing-ui-h5/src/components/QNavMenu.vue";
+import QNavMenu from "qing-compat-js-ui-h5/src/components/QNavMenu.vue";
 import {constantRoutes} from "@/router/router.ts";
 import CommonEventUtil from "qing-compat-js/src/util/CommonEventUtil.ts";
-import QScroll from "qing-ui/src/components/QScroll.vue";
-import QButton from "qing-ui/src/components/QButton.vue";
-import QInput from "qing-ui/src/components/QInput.vue";
-import QDialog from "qing-ui-h5/src/components/QDialog.vue";
+import QScroll from "qing-compat-js-ui/src/components/QScroll.vue";
+import QButton from "qing-compat-js-ui/src/components/QButton.vue";
+import QInput from "qing-compat-js-ui/src/components/QInput.vue";
+import QDialog from "qing-compat-js-ui-h5/src/components/QDialog.vue";
 import CommunityEventConst from "socialuni-community-sdk/src/constant/CommunityEventConst.ts";
 import SocialuniUserEventOn from "socialuni-user-sdk/src/event/SocialuniUserEventOn";
 

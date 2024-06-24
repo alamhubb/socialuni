@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import {Component, Prop, Vue, Inject, toNative} from 'vue-facing-decorator'
-import QButton from "qing-ui/src/components/QButton.vue";
+import QButton from "qing-compat-js-ui/src/components/QButton.vue";
 import FollowStatus from "socialuni-constant/constant/FollowStatus";
 import SocialUserContentRO from "socialuni-api-base/src/model/social/SocialUserContentRO";
 import FollowAddVO from "socialuni-api-base/src/model/FollowAddVO";
@@ -19,7 +19,7 @@ import FollowAPI from "socialuni-community-api/src/api/FollowAPI";
 import {inject} from "vue";
 import SocialuniUserProvideKeys from "socialuni-user-sdk/src/constant/SocialuniUserProvideKeys";
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
-import QIcon from "qing-ui/src/components/QIcon.vue";
+import QIcon from "qing-compat-js-ui/src/components/QIcon.vue";
 
 @toNative
 @Component({

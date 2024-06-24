@@ -100,11 +100,11 @@
 
 <script lang="ts">
 import SocialuniUserInfoImg from "./SocialuniUserInfoImg.vue"
-import QIcon from "qing-ui/src/components/QIcon.vue"
-import QNavbar from "qing-ui-uni/src/components/QNavbar/QNavbar.vue"
+import QIcon from "qing-compat-js-ui/src/components/QIcon.vue"
+import QNavbar from "qing-compat-js-ui-uni/src/components/QNavbar/QNavbar.vue"
 import SocialGenderTag from "socialuni-user-ui/src/components/SUserGenderTag.vue"
 import {Component, Vue, toNative} from 'vue-facing-decorator'
-import QButton from "qing-ui/src/components/QButton.vue";
+import QButton from "qing-compat-js-ui/src/components/QButton.vue";
 import socialuniUserEditViewService from "socialuni-user-sdk/src/logic/SocialuniUserEditViewService";
 import {getCurrentInstance} from "vue";
 

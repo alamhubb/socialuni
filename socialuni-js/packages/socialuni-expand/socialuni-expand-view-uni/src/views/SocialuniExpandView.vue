@@ -43,10 +43,10 @@ import {Vue, Component, Prop, Emit, toNative} from 'vue-facing-decorator'
 import SocialuniFollowType from "socialuni-constant/constant/user/SocialuniFollowType";
 import SocialUserContentRO from "socialuni-api-base/src/model/social/SocialUserContentRO";
 import {onLoad, onPullDownRefresh, onReachBottom, onShow} from "@dcloudio/uni-app";
-import QTabs from "qing-ui/src/components/QTabs/QTabs.vue";
-import QButton from "qing-ui/src/components/QButton.vue";
-import QIcon from "qing-ui/src/components/QIcon.vue";
-import QPullRefresh from "qing-ui-uni/src/components/QPullRefresh/QPullRefresh.vue";
+import QTabs from "qing-compat-js-ui/src/components/QTabs/QTabs.vue";
+import QButton from "qing-compat-js-ui/src/components/QButton.vue";
+import QIcon from "qing-compat-js-ui/src/components/QIcon.vue";
+import QPullRefresh from "qing-compat-js-ui-uni/src/components/QPullRefresh/QPullRefresh.vue";
 import SocialuniFollowTag from "socialuni-community-view-uni/src/components/SocialuniFollow/SocialuniFollowTag.vue";
 import SocialGenderTag from "socialuni-user-ui/src/components/SUserGenderTag.vue";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";

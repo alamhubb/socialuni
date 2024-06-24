@@ -1,6 +1,6 @@
 {
-  "name": "qing-ui",
-  "version": "0.1.15",
+  "name": "qing-compat-js-ui",
+  "version": "0.1.16",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -8,9 +8,9 @@
   "dependencies": {
     "@vueuse/components": "^10.9.0",
     "@vueuse/core": "^10.9.0",
-    "qing-compat-js": "^0.1.15",
-    "qing-scss": "^0.1.15",
-    "qing-util": "^0.1.15",
+    "qing-compat-js": "^0.1.16",
+    "qing-scss": "^0.1.16",
+    "qing-util": "^0.1.16",
     "vue-facing-decorator": "^3.0.2"
   },
   "devDependencies": {
@@ -18,7 +18,7 @@
     "vue": "^3.2.41"
   },
   "author": "",
-  "repository": "https://github.com/alamhubb/socialuni/tree/master/socialuni-js/packages/qing-ui/qing-ui-h5",
+  "repository": "https://github.com/alamhubb/socialuni/tree/master/socialuni-js/packages/qing-compat-js-ui/qing-compat-js-ui-h5",
   "license": "ISC",
-  "gitHead": "6419531da3fca7525662a554b07eeac3b85a7526"
+  "gitHead": "1b66a7fd7288eabfd2143269794ec963b7644be3"
 }

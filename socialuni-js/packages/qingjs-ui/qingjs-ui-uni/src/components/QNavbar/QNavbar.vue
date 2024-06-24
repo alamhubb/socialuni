@@ -27,7 +27,7 @@
 <script lang="ts">
 import {Component, Prop, Vue, toNative} from 'vue-facing-decorator'
 import GetMenuButtonBoundingClientRectRes = UniApp.GetMenuButtonBoundingClientRectRes;
-import QIcon from "qing-ui/src/components/QIcon.vue";
+import QIcon from "qing-compat-js-ui/src/components/QIcon.vue";
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 

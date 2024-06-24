@@ -50,7 +50,7 @@ module.exports = function socialuniPlatformAutoImportPlugin() {
     return {
         name: 'transform-file',
         transform(code, id) {
-            if (/.js$|.ts$|.vue$/.test(id) && (id.includes('qingjs/src') ||/\/socialuni-[(\w)-]*\/src/.test(id) || id.includes('socialuni/src'))) {
+            if (/.js$|.ts$|.vue$/.test(id) && (id.includes('qing-compat-js/src') ||/\/socialuni-[(\w)-]*\/src/.test(id) || id.includes('socialuni/src'))) {
                 const modifiedScriptContent = transformDynamicImportCodeCompile(code)
                 return modifiedScriptContent
             }

@@ -1,6 +1,6 @@
 {
   "name": "socialuni-ui-uni",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,14 +9,14 @@
     "@dcloudio/types": "^3.0.17",
     "@dcloudio/uni-ui": "^1.4.23",
     "cos-js-sdk-v5": "^1.2.18",
-    "qing-compat-js": "^0.1.15",
-    "qing-scss": "^0.1.15",
-    "qing-ui": "^0.1.15",
-    "qing-util": "^0.1.15",
-    "socialuni-app-api": "^0.1.15",
-    "socialuni-app-sdk": "^0.1.15",
-    "socialuni-constant": "^0.1.15",
-    "socialuni-ui": "^0.1.15",
+    "qing-compat-js": "^0.1.16",
+    "qing-scss": "^0.1.16",
+    "qing-util": "^0.1.16",
+    "qing-compat-js-ui": "^0.1.16",
+    "socialuni-app-api": "^0.1.16",
+    "socialuni-app-sdk": "^0.1.16",
+    "socialuni-constant": "^0.1.16",
+    "socialuni-ui": "^0.1.16",
     "vue-facing-decorator": "^3.0.2"
   },
   "devDependencies": {
@@ -26,5 +26,5 @@
   "author": "",
   "repository": "https://github.com/alamhubb/socialuni/tree/master/socialuni-js/packages/socialuni-ui-uni",
   "license": "ISC",
-  "gitHead": "6419531da3fca7525662a554b07eeac3b85a7526"
+  "gitHead": "1b66a7fd7288eabfd2143269794ec963b7644be3"
 }

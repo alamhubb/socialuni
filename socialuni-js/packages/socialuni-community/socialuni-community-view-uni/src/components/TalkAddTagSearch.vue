@@ -74,8 +74,8 @@
 <script lang="ts">
 import {Component, Emit, Prop, Vue, Watch, toNative} from 'vue-facing-decorator'
 import TagVO from 'socialuni-api-base/src/model/community/tag/TagVO'
-import QIcon from 'qing-ui/src/components/QIcon.vue'
-// import QNavbar from 'qing-ui-uni/src/components/QNavbar/QNavbar.vue'
+import QIcon from 'qing-compat-js-ui/src/components/QIcon.vue'
+// import QNavbar from 'qing-compat-js-ui-uni/src/components/QNavbar/QNavbar.vue'
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 
 @toNative
