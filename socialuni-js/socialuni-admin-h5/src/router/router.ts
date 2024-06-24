@@ -8,9 +8,10 @@ import SocialuniTokenUtil from "socialuni-user-sdk/src/util/SocialuniTokenUtil";
 import PeiwanManageView from '@/views/peiwanManage/PeiwanManageView.vue'
 import CreateUserView from "@/views/user/CreateUser.vue";
 import OperateUserManage from "@/views/operateUserManage/OperateUserManage.vue";
+import RouterName from "@/constant/RouterName";
 
 export const menuRoutes = [
-    /*{
+    {
       path: '',
       name: RouterName.devAccount,
       component: () => import('@/views/devInfo/devInfo.vue'),
@@ -58,7 +59,7 @@ export const menuRoutes = [
       name: RouterName.userIdentityAudit,
       component: () => import('@/views/userIdentityAudit/UserIdentityAuditView.vue'),
       meta: { title: RouterName.userIdentityAudit, icon: 'strengthMonitoring' }
-    },*/
+    },
     {
         path: '/operateUserManage',
         name: 'operateUserManage',

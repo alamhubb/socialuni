@@ -32,7 +32,7 @@ import {Component, Emit, Model, Prop, Vue, toNative} from 'vue-facing-decorator'
  * 封装select
  */
 @toNative
-@Component
+@Component({})
 export default class QSelect extends Vue {
     $refs: {
         select: any;

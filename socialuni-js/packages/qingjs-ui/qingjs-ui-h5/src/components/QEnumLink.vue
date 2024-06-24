@@ -9,7 +9,7 @@ import { Component, Prop, Vue , toNative} from 'vue-facing-decorator'
 import CommonUtil from "qing-util/src/util/CommonUtil";
 
 @toNative
-@Component
+@Component({})
 export default class QEnumLink extends Vue {
   @Prop() to: string
 

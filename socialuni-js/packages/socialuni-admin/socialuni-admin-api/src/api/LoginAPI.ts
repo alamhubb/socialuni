@@ -11,9 +11,7 @@ export default class LoginAPI {
   }
 
   static secretKeyLoginAPI(secretKey: string) {
-    return socialuniAdminRequest.post<SocialLoginRO<DevAccountRO>>('user/secretKeyLogin', { secretKey }).then(res => {
-      return res.data
-    })
+    return socialuniAdminRequest.post<SocialLoginRO<DevAccountRO>>('socialuni/admin/secretKeyLogin', { secretKey })
   }
 
   static logoutAPI() {

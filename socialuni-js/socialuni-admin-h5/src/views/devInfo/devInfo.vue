@@ -86,18 +86,14 @@
   </div>
 </template>
 
-<script lang="tsx">
-import { Component, Vue , toNative} from 'vue-facing-decorator'
-import DevAccountRO from '@/model/base/DevAccountRO'
+<script lang="ts">
+import { Emit, Component, Prop, Vue , toNative} from 'vue-facing-decorator'
 import DevAccountType from '@/constant/DevAccountType'
 import { OperationType } from '@/constant/OperationType'
 import ToastUtil from '@/utils/ToastUtil'
-import AlertUtil from '@/utils/AlertUtil'
-import AdminUserAPI from '@/api/AdminUserAPI'
-import { ElForm } from 'element-ui/types/form'
 
 @toNative
-@Component
+@Component({})
 export default class DevInfoPage extends Vue {
   $refs: {
     devForm: ElForm

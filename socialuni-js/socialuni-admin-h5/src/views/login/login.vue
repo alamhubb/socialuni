@@ -49,6 +49,9 @@ import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 import SocialuniLoginService from "socialuni-user-sdk/src/logic/SocialuniLoginService";
 import SocialuniLoginView from "socialuni-user-view-h5/src/views/SocialuniLoginView.vue";
+import LoginAPI from "socialuni-admin-api/src/api/LoginAPI";
+import SocialPhoneNumLoginQO from "socialuni-api-base/src/model/phone/SocialPhoneNumLoginQO";
+import SocialuniUserService from "socialuni-user-sdk/src/logic/SocialuniUserService";
 
 @toNative
 @Component({components: {SocialuniLoginView}})
@@ -86,14 +89,19 @@ export default class AdminLoginPage extends Vue {
       return ToastUtil.warning('正在登陆中，请勿重复点击')
     }
     this.bindBtnDisabled = true
-    userModule.userSecretKeyLogin(this.secretKey).then(() => {
+    this.userSecretKeyLogin(this.secretKey).then(() => {
       this.$router.push({path: '/'})
     }).finally(() => {
       this.bindBtnDisabled = false
     })
   }
 
-  loginSuccess(){
+  async userSecretKeyLogin(secretKey: string) {
+    const {data} = await LoginAPI.secretKeyLoginAPI(secretKey)
+    SocialuniUserService.loginSuccess(data)
+  }
+
+  loginSuccess() {
     console.log('触发了跳远')
     this.$router.push({path: '/'})
   }
