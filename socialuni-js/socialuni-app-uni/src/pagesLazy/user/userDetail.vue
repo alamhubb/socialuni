@@ -35,7 +35,7 @@ import QButton from "qing-ui/src/components/QButton.vue";
 import QIcon from "qing-ui/src/components/QIcon.vue";
 import QPopup from "qing-ui/src/components/QPopup.vue";
 import {Component, Vue, toNative} from 'vue-facing-decorator';
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import SocialuniUserDetailView from "socialuni-user-view-uni/src/views/user/SocialuniUserDetailView.vue";
 import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
 import {socialuniUserDetailViewService} from "socialuni-user-sdk/src/logic/SocialuniUserDetailViewService";

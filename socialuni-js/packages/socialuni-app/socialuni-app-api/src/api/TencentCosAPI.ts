@@ -2,9 +2,9 @@ import AppMsg from "socialuni-constant/constant/AppMsg";
 import TencentCosIdInfoRO from "socialuni-api-base/src/model/RO/tencent/cos/idImgInfo/TencentCosIdInfoRO";
 import CosAuthRO from "socialuni-api-base/src/model/cos/CosAuthRO";
 import CosUploadResult from "socialuni-api-base/src/model/cos/CosUploadResult";
-import AlertUtil from "qingjs-uni/src/util/AlertUtil";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
-import DomFile from "qingjs/src/model/DomFile";
+import AlertUtil from "qing-compat-js-uni/src/util/AlertUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
+import DomFile from "qing-compat-js/src/model/DomFile";
 
 export default class TencentCosAPI {
     /*static async getImgTagAPI(imgUrl, imgKey, cosAuthRO: CosAuthRO) {

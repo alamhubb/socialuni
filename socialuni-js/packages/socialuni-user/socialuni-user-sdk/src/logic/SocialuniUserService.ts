@@ -1,5 +1,5 @@
 import {socialuniUserModule} from "../store/SocialuniUserModule";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import SocialuniUserEventEmit from "../event/SocialuniUserEventEmit";
 import SocialLoginRO from "socialuni-api-base/src/model/social/SocialLoginRO";
 import SocialuniUserRO from "socialuni-api-base/src/model/user/SocialuniUserRO";

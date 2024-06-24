@@ -1,6 +1,6 @@
 import TagVO from "socialuni-api-base/src/model/community/tag/TagVO";
 import Constants from "socialuni-constant/constant/Constant";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 
 const initTag = new TagVO()
 initTag.name = Constants.initTagName

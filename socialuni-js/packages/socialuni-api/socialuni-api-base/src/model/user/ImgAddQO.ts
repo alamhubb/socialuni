@@ -1,4 +1,4 @@
-import DomFile from "qingjs/src/model/DomFile";
+import DomFile from "qing-compat-js/src/model/DomFile";
 
 export default class ImgAddQO {
   //自己拼出来的

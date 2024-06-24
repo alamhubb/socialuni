@@ -1,6 +1,6 @@
 import CommunityPagePath from "../constant/CommunityPagePath";
 import UserCheckUtil from "socialuni-user-sdk/src/util/UserCheckUtil";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 
 export default class CommunityPageUtil {
     static goHome(): void {

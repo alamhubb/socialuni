@@ -107,14 +107,14 @@ import {DialogInterface} from "@/interface/DialogInterface";
 import PeiwanRO from "socialuni-admin-api/src/model/peiwan/PeiwanRO";
 import QDialog from "qing-ui-h5/src/components/QDialog.vue";
 import {Plus} from '@element-plus/icons-vue'
-import FileUtilH5 from "qingjs-h5/src/util/FileUtilH5";
-import type DomFile from "qingjs/src/model/DomFile";
-import ImgUtilH5 from "qingjs-h5/src/util/ImgUtilH5";
+import FileUtilH5 from "qing-compat-js-h5/src/util/FileUtilH5";
+import type DomFile from "qing-compat-js/src/model/DomFile";
+import ImgUtilH5 from "qing-compat-js-h5/src/util/ImgUtilH5";
 import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
 import CosService from "socialuni-app-sdk/src/util/CosService";
 import {useMagicKeys} from '@vueuse/core'
 import {watch} from "vue";
-import AlertUtil from "qingjs-h5/src/util/AlertUtil";
+import AlertUtil from "qing-compat-js-h5/src/util/AlertUtil";
 import SocialuniPeiwanAdminAPI from "socialuni-peiwan-api/src/api/SocialuniPeiwanAdminAPI";
 import UUIDUtil from "qing-util/src/util/UUIDUtil";
 

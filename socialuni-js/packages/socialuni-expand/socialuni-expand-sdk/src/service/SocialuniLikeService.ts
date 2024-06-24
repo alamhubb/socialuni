@@ -1,6 +1,6 @@
 import {socialuniAppUserModule} from "socialuni-user-sdk/src/store/SocialuniAppUserModule";
 import {socialuniLikeConfigModule} from "../store/SocialuniLikeConfigModule";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import PlatformUtils from "socialuni-user-sdk/src/util/PlatformUtils";
 import SocialuniAppConfig from "socialuni-app-sdk/src/constant/SocialuniAppConfig";
 import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";

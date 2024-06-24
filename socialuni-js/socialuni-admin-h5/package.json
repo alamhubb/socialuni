@@ -30,7 +30,7 @@
     "qing-ui": "../packages/qing-ui/qing-ui",
     "socialuni-ui-h5": "../packages/socialuni-ui-h5/socialuni-ui-h5",
     "qing-ui-h5": "../packages/qing-ui/qing-ui-h5",
-    "qingjs-h5": "../qingjs-h5",
+    "qing-compat-js-h5": "../qing-js-h5",
     "socialuni": "../packages/socialuni",
     "socialuni-app-view-h5": "../packages/socialuni-app-view-h5",
     "socialuni-community-view-h5": "../packages/socialuni-community/socialuni-community-view-h5",

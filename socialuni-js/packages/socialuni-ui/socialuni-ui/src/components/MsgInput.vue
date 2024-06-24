@@ -41,7 +41,7 @@
 import {Component, Vue, Watch, toNative} from 'vue-facing-decorator'
 import {socialTalkModule} from "socialuni-community-sdk/src/store/SocialTalkModule";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import PlatformUtils from "socialuni-user-sdk/src/util/PlatformUtils";
 import UserCheckUtil from "socialuni-user-sdk/src/util/UserCheckUtil";
 import QButton from "qing-ui/src/components/QButton.vue";

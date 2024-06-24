@@ -39,7 +39,7 @@ import SocialCircleRO from "socialuni-api-base/src/model/community/circle/Social
 import SocialuniCircleAPI from "socialuni-community-api/src/api/SocialuniCircleAPI";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 import SocialuniUserExpandAPI from "socialuni-user-api/src/api/SocialuniUserExpandAPI";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 
 @toNative
 @Component({

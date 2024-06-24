@@ -1,6 +1,6 @@
 import SocialuniMineUserRO from "socialuni-api-base/src/model/user/SocialuniMineUserRO";
-import StorageUtil from "qingjs-uni/src/util/StorageUtil";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import StorageUtil from "qing-compat-js-uni/src/util/StorageUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import SocialuniUserRO from "socialuni-api-base/src/model/user/SocialuniUserRO";
 
 export default class SocialuniUserStorageUtil {

@@ -97,7 +97,7 @@ import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI"
 import FollowAPI from "socialuni-community-api/src/api/FollowAPI"
 import SocialuniCommonStatus from 'socialuni-constant/constant/status/SocialuniCommonStatus'
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import UserPagePath from "socialuni-user-sdk/src/constant/UserPagePath";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";

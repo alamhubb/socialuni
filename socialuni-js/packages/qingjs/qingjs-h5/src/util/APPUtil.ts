@@ -1,6 +1,6 @@
 import AppUpdateType from "socialuni-constant/constant/AppUpdateType";
 import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 
 export default class APPUtil {

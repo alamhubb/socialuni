@@ -1,6 +1,6 @@
 import UserPagePath from "../constant/UserPagePath";
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil";
 import {socialuniUserModule} from "../store/SocialuniUserModule";

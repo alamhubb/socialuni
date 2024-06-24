@@ -51,15 +51,15 @@ import GenderType from "socialuni-constant/constant/GenderType";
 import DateUtil from "qing-util/src/util/DateUtil";
 import ObjectUtil from "qing-util/src/util/ObjectUtil";
 import BirthAgeUtil from "socialuni-user-sdk/src/util/BirthAgeUtil";
-import QingAppUtil from "qingjs/src/util/QingAppUtil.ts";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil.ts";
 import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
 import CosService from "socialuni-app-sdk/src/util/CosService";
 import UUIDUtil from "qing-util/src/util/UUIDUtil";
 import ImgUtil from "qing-util/src/util/ImgUtil";
 import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
 import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
-import type DomFile from "qingjs/src/model/DomFile";
-import NativeUtil from "qingjs-h5/src/util/NativeUtil";
+import type DomFile from "qing-compat-js/src/model/DomFile";
+import NativeUtil from "qing-compat-js-h5/src/util/NativeUtil";
 
 @toNative
 @Component({

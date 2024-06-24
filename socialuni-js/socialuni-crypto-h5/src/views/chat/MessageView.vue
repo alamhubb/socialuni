@@ -113,13 +113,13 @@ import QLabelItem from "qing-ui-h5/src/components/QLabelItem.vue";
 import socialuniUserRequest from "socialuni-user-api/src/request/socialuniUserRequest.ts";
 import SocialuniDeployAPI from "@/views/chat/SocialuniDeployAPI.ts";
 import RegConst from "qing-util/src/constant/RegConst.ts";
-import AlertUtil from "qingjs-h5/src/util/AlertUtil.ts";
+import AlertUtil from "qing-compat-js-h5/src/util/AlertUtil.ts";
 import {FolderOpened, UploadFilled} from "@element-plus/icons-vue";
 import type {ElForm} from "element-plus";
 import PinyinUtil from "@/util/PinyinUtil.ts";
-import ToastUtil from "qingjs-h5/src/util/ToastUtil.ts";
+import ToastUtil from "qing-compat-js-h5/src/util/ToastUtil.ts";
 import WindowUtil from "@/util/WindowUtil.ts";
-import alertUtil from "qingjs-h5/src/util/AlertUtil.ts";
+import alertUtil from "qing-compat-js-h5/src/util/AlertUtil.ts";
 import CommonUtil from "qing-util/src/util/CommonUtil.ts";
 
 @toNative

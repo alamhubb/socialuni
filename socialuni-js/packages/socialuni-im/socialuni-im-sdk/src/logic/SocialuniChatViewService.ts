@@ -6,7 +6,7 @@ import {Vue} from "vue-class-component";
 import SocialUserContentRO from "socialuni-api-base/src/model/social/SocialUserContentRO";
 import ChatType from "socialuni-constant/constant/ChatType";
 import Constants from "socialuni-constant/constant/Constant";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import ImPageUtil from "../util/ImPageUtil";
 import SocialuniImUserAPI from "socialuni-im-api/src/api/SocialuniImUserAPI";
 import SocialuniViewService from "socialuni/src/interface/SocialuniViewService";

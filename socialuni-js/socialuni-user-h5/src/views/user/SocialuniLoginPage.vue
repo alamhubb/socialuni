@@ -7,7 +7,7 @@
 <script lang="ts">
 import {Component, Vue, toNative} from 'vue-facing-decorator'
 import SocialuniLoginView from "socialuni-user-view-h5/src/views/SocialuniLoginView.vue";
-import QingAppUtil from "qingjs/src/util/QingAppUtil.ts";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil.ts";
 
 @toNative
 @Component({

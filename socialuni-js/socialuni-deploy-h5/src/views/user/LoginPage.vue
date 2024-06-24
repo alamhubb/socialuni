@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import {Component, Vue, toNative} from 'vue-facing-decorator';
-import QingAppUtil from "qingjs/src/util/QingAppUtil.ts";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil.ts";
 import WindowEventListener from "qing-util/src/util/WindowEventListener.ts";
 
 @toNative

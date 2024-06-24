@@ -1,5 +1,5 @@
 import SkipType from "socialuni-constant/constant/SkipType";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import SocialuniAppPagePath from "../constant/SocialuniAppPagePath";
 import SkipUrlConst from "../constant/SkipUrlConst";
 

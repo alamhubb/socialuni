@@ -25,7 +25,7 @@
     "openai": "^4.21.0",
     "pinyin": "^4.0.0-alpha.0",
     "qing-ui-h5": "../packages/qing-ui/qing-ui-h5",
-    "qingjs-h5": "../qingjs-h5",
+    "qing-compat-js-h5": "../qing-js-h5",
     "socialuni": "../packages/socialuni",
     "socialuni-app-view-h5": "../packages/socialuni-app-view-h5",
     "socialuni-im-sdk": "../packages/socialuni-im/socialuni-im-sdk",

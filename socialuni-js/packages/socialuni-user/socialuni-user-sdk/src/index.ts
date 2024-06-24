@@ -9,7 +9,7 @@ import SocialuniUserService from "./logic/SocialuniUserService";
 import UserMsgUtil from "./util/UserMsgUtil";
 import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
 import JsonUtil from "qing-util/src/util/JsonUtil";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil";
 import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
 import {App, defineComponent} from "vue";
@@ -18,7 +18,7 @@ import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
 import SocialuniUserEventConst from "./constant/SocialuniUserEventConst";
 import UserPageUtil from "./util/UserPageUtil";
-import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
+import CommonEventUtil from "qing-compat-js/src/util/CommonEventUtil";
 import {socialuniAppUserModule} from "./store/SocialuniAppUserModule";
 import SocialuniUserEventOn from "./event/SocialuniUserEventOn";
 

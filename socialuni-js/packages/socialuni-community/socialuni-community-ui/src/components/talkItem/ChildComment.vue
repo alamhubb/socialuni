@@ -40,7 +40,7 @@ import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
 import QIcon from "qing-ui/src/components/QIcon.vue";
 import CommentVO from "socialuni-api-base/src/model/comment/CommentVO";
 import ObjectUtil from "qing-util/src/util/ObjectUtil";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import UserPagePath from "socialuni-user-sdk/src/constant/UserPagePath";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import {socialTalkModule} from "socialuni-community-sdk/src/store/SocialTalkModule";

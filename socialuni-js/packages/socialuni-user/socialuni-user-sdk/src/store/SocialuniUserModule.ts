@@ -4,11 +4,11 @@ import SocialuniUserStorageUtil from "../util/SocialuniUserStorageUtil";
 import SocialLoginRO from "socialuni-api-base/src/model/social/SocialLoginRO";
 import LoginAPI from "socialuni-user-api/src/api/LoginAPI";
 import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import {socialuniTokenModule} from "./SocialuniTokenModule";
 import SocialuniUserRO from "socialuni-api-base/src/model/user/SocialuniUserRO";
 import {socialuniAppUserModule} from "./SocialuniAppUserModule";
-import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
+import CommonEventUtil from "qing-compat-js/src/util/CommonEventUtil";
 import SocialuniUserEventConst from "../constant/SocialuniUserEventConst";
 
 class SocialuniUserModule {

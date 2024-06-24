@@ -6,7 +6,7 @@ import {SocialuniOption} from "socialuni/src/interface/socialuniOption";
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";
 import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import {InternalAxiosRequestConfig} from "axios/index";
 
 class SocialuniAppPlugin implements SocialuniPlugin {

@@ -32,7 +32,7 @@ import {onLoad, onReady} from "@dcloudio/uni-app";
 import QNavbar from 'qing-ui-uni/src/components/QNavbar/QNavbar.vue'
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import PagePath from "socialuni-constant/constant/PagePath";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 
 @toNative
 @Component({

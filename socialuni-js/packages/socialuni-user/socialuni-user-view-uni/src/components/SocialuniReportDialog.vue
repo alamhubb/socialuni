@@ -32,7 +32,7 @@ import ReportType from "socialuni-constant/constant/ReportType";
 import ReportAddVO from "socialuni-api-base/src/model/report/ReportAddVO";
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import ReportAPI from "socialuni-app-api/src/api/ReportAPI";
 import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
 

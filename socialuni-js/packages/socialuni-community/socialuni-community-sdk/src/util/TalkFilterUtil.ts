@@ -1,5 +1,5 @@
 import GenderType from "socialuni-constant/constant/GenderType";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 
 export default class TalkFilterUtil {
     static readonly minAgeFilterKey: string = 'minAgeFilter'

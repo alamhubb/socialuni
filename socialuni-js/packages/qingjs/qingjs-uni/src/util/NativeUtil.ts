@@ -13,7 +13,7 @@ import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import UUIDUtil from "qing-util/src/util/UUIDUtil";
 import ImgUtil from "qing-util/src/util/ImgUtil";
 import ToastUtil from "./ToastUtil";
-import DomFile from "qingjs/src/model/DomFile";
+import DomFile from "qing-compat-js/src/model/DomFile";
 
 
 export default class NativeUtil {

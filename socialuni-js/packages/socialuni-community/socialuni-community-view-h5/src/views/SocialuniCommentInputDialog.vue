@@ -28,7 +28,7 @@ import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 import TalkItem from "socialuni-community-ui/src/components/talkItem/TalkItem.vue";
 import SocialuniPageQueryUtil from "socialuni-api-base/src/model/common/SocialuniPageQueryUtil";
@@ -39,7 +39,7 @@ import TalkQueryVO from "socialuni-api-base/src/model/talk/TalkQueryVO";
 import {socialCircleModule} from "socialuni-community-sdk/src/store/SocialCircleModule";
 import TalkTabType from "socialuni-constant/constant/TalkTabType";
 import QEnumLink from 'qing-ui-h5/src/components/QEnumLink.vue'
-import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
+import CommonEventUtil from "qing-compat-js/src/util/CommonEventUtil";
 import SocialuniImEventKey from "socialuni-im-api/src/constant/SocialuniMusicEventConst";
 import JsonUtil from "qing-util/src/util/JsonUtil";
 import QNavMenu from "qing-ui-h5/src/components/QNavMenu.vue";

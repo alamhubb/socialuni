@@ -2,9 +2,9 @@ import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDe
 import {socialuniUserModule} from "../store/SocialuniUserModule";
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 import UserPageUtil from "./UserPageUtil";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import SocialuniUserEventConst from "../constant/SocialuniUserEventConst";
-import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
+import CommonEventUtil from "qing-compat-js/src/util/CommonEventUtil";
 import SocialuniUserEventEmit from "../event/SocialuniUserEventEmit";
 
 export default class UserMsgUtil {

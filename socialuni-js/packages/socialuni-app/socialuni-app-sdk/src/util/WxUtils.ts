@@ -2,7 +2,7 @@ import AppConfig from "socialuni-constant/constant/AppConfig";
 import UserPayResultVO from "socialuni-api-base/src/model/user/UserPayResultVO";
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import PlatformType from "socialuni-constant/constant/PlatformType";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 
 export default class WxUtils {
     static subscribeAppMsg(tmplIds: string[]) {

@@ -17,7 +17,7 @@
 import {Component, Vue, toNative} from 'vue-facing-decorator'
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import QIcon from "qing-ui/src/components/QIcon.vue";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import SkipUrlConst from "socialuni-app-sdk/src/constant/SkipUrlConst";
 
 @toNative

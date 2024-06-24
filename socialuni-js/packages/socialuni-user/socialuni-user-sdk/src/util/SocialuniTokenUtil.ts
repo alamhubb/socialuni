@@ -1,4 +1,4 @@
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 
 export default class SocialuniTokenUtil {
     // 开发生产区分token，避免混淆，不区分的话会冲突

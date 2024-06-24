@@ -122,15 +122,15 @@ import QTableColumn from "qing-ui-h5/src/components/QTableColumn/QTableColumn.vu
 import QTableInput from "qing-ui-h5/src/components/QTableInput/QTableInput.vue";
 import QTableSelect from "qing-ui-h5/src/components/QTableSelect/QTableSelect.vue";
 import {Plus} from '@element-plus/icons-vue'
-import FileUtilH5 from "qingjs-h5/src/util/FileUtilH5";
-import type DomFile from "qingjs/src/model/DomFile";
-import ImgUtilH5 from "qingjs-h5/src/util/ImgUtilH5";
+import FileUtilH5 from "qing-compat-js-h5/src/util/FileUtilH5";
+import type DomFile from "qing-compat-js/src/model/DomFile";
+import ImgUtilH5 from "qing-compat-js-h5/src/util/ImgUtilH5";
 import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
 import CosService from "socialuni-app-sdk/src/util/CosService";
 import UUIDUtil from "@/utils/UUIDUtil";
 import {useMagicKeys} from '@vueuse/core'
 import {watch} from "vue";
-import AlertUtil from "qingjs-h5/src/util/AlertUtil";
+import AlertUtil from "qing-compat-js-h5/src/util/AlertUtil";
 import WindowEventListener from "qing-util/src/util/WindowEventListener";
 import AdminPeiwanAppInitData from "socialuni-admin-api/src/model/peiwan/AdminPeiwanAppInitData";
 import QSelect from "qing-ui-h5/src/components/QSelect/QSelect.vue";
@@ -138,8 +138,8 @@ import ImgFileVO from "socialuni-admin-api/src/model/community/ImgFileVO";
 import SocialuniPeiwanAdminAPI from "socialuni-peiwan-api/src/api/SocialuniPeiwanAdminAPI";
 import SocialuniOperateUserAPI from "socialuni-peiwan-api/src/api/SocialuniOperateUserAPI";
 import SocialuniUserImgComRO from "socialuni-user-api/src/model/SocialuniUserImgComRO";
-import NativeUtil from "qingjs-h5/src/util/NativeUtil";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import NativeUtil from "qing-compat-js-h5/src/util/NativeUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
 import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";

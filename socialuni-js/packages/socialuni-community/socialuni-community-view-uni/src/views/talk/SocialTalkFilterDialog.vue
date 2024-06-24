@@ -106,7 +106,7 @@ import TalkFilterUtil from "socialuni-community-sdk/src/util/TalkFilterUtil";
 import TagVO from "socialuni-api-base/src/model/community/tag/TagVO";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 import SocialCircleRO from "socialuni-api-base/src/model/community/circle/SocialCircleRO";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 
 
 @toNative

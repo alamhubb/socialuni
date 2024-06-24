@@ -4,7 +4,7 @@ import GenderType from "socialuni-constant/constant/GenderType";
 import DateUtil from "qing-util/src/util/DateUtil";
 import ObjectUtil from "qing-util/src/util/ObjectUtil";
 import BirthAgeUtil from "../util/BirthAgeUtil";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";
 import CosService from "socialuni-app-sdk/src/util/CosService";
 import UUIDUtil from "qing-util/src/util/UUIDUtil";

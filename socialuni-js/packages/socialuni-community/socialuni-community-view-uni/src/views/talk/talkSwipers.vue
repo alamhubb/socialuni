@@ -21,7 +21,7 @@ import SkipType from "socialuni-constant/constant/SkipType";
 import {socialAppModule} from "socialuni-app-sdk/src/store/SocialAppModule";
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import SocialuniAppPageUtil from "socialuni-app-sdk/src/util/SocialuniAppPageUtil";
 
 

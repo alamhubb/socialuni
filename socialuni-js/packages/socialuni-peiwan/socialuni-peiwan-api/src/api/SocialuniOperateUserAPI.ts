@@ -2,7 +2,7 @@ import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDe
 import socialuniUserRequest from "socialuni-user-api/src/request/socialuniUserRequest";
 import PeiwanRO from "socialuni-admin-api/src/model/peiwan/PeiwanRO";
 import ResultRO from "socialuni-api-base/src/model/social/ResultRO";
-import DomFile from "qingjs/src/model/DomFile";
+import DomFile from "qing-compat-js/src/model/DomFile";
 import AdminPeiwanAppInitData from "socialuni-admin-api/src/model/peiwan/AdminPeiwanAppInitData";
 import SocialuniUserRO from "socialuni-api-base/src/model/user/SocialuniUserRO";
 import SocialuniUserImgComRO from "socialuni-user-api/src/model/SocialuniUserImgComRO";

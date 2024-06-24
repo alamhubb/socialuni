@@ -1,5 +1,5 @@
 import {ElLoading} from 'element-plus'
-import {SocialuniLodingInterface} from "qingjs/src/interface/SocialuniLodingInterface";
+import {SocialuniLodingInterface} from "qing-compat-js/src/interface/SocialuniLodingInterface";
 
 class LoadingUtil implements SocialuniLodingInterface {
 

@@ -1,5 +1,5 @@
 import {socialuniTagModule} from "socialuni-community-sdk/src/store/SocialTagModule";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 
 export default class SocialCircleStorageUtil {
     static getMineCircleNamesKeyKey = 'mineCircleNamesKey'

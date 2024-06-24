@@ -1,6 +1,6 @@
 import PagePath from "socialuni-constant/constant/PagePath";
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import JsonUtil from "qing-util/src/util/JsonUtil";
 import Lodash from "qing-util/src/util/Lodash";
 import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule";

@@ -82,9 +82,9 @@ import {Component, Emit, Model, Prop, Vue, Watch, toNative} from 'vue-facing-dec
 import DomFile from "./DomFile";
 import UploadFileVO from "./UploadFileVO";
 import YUploadFileType from "./YUploadFileType";
-import AlertUtil from "qingjs-h5/src/util/AlertUtil";
+import AlertUtil from "qing-compat-js-h5/src/util/AlertUtil";
 import Arrays from "qing-util/src/util/Arrays";
-import ToastUtil from "qingjs-h5/src/util/ToastUtil";
+import ToastUtil from "qing-compat-js-h5/src/util/ToastUtil";
 import ObjectUtil from "qing-util/src/util/ObjectUtil";
 import SocialuniAxios from "socialuni-api-base/src/SocialuniAxios";
 import {

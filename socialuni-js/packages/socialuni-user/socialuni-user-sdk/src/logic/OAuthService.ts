@@ -2,7 +2,7 @@ import ResultRO from "socialuni-api-base/src/model/social/ResultRO";
 import SocialLoginRO from "socialuni-api-base/src/model/social/SocialLoginRO";
 import UniUserInfoRO from "socialuni-api-base/src/model/login/UniUserInfoRO";
 import {socialuniUserModule} from "../store/SocialuniUserModule";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import UniProviderLoginQO from "socialuni-api-base/src/model/login/UniProviderLoginQO";
 import LoginProvider from "socialuni-constant/constant/LoginProvider";
 import LoginAPI from "socialuni-user-api/src/api/LoginAPI";

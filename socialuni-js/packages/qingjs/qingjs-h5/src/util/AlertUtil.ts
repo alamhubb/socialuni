@@ -1,5 +1,5 @@
 import {ElMessageBox} from 'element-plus'
-import {SocialuniAlertUtilInterface} from "qingjs/src/interface/SocialuniAlertUtilInterface";
+import {SocialuniAlertUtilInterface} from "qing-compat-js/src/interface/SocialuniAlertUtilInterface";
 
 class AlertUtil implements SocialuniAlertUtilInterface {
     confirm(message: string, okLabel = '确定', cancel = '取消') {

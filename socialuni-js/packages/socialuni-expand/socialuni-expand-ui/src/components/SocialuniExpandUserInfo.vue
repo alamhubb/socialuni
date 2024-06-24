@@ -99,7 +99,7 @@ import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDe
 import SocialuniImgUtil from "socialuni-user-sdk/src/util/SocialuniImgUtil";
 import SocialuniUserExpandDetailEditRO
   from "packages/socialuni-user/socialuni-user-api/src/model/SocialuniUserExpandDetailEditRO";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import SocialuniUserLikeAPI from "socialuni-expand-api/src/api/SocialuniUserLikeAPI";
 import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
 import NumUtil from "qing-util/src/util/NumUtil";

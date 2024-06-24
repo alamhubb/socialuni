@@ -94,7 +94,7 @@ import OpenImFriendApplyRO from "socialuni-api-base/src/model/openIm/OpenImFrien
 import QTabs from "qing-ui/src/components/QTabs/QTabs.vue";
 import SocialuniAddFriendType from "socialuni-im-api/src/constant/SocialuniAddFriendType";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 
 @toNative
 @Component({

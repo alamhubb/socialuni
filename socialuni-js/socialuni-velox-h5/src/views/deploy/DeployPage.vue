@@ -77,8 +77,8 @@ import QUpload from "qing-ui-h5/src/components/QUpload/QUpload.vue";
 import QRow from "qing-ui-h5/src/components/QRow.vue";
 import PinyinUtil from "@/util/PinyinUtil.ts";
 import RegConst from "qing-util/src/constant/RegConst.ts";
-import AlertUtil from "qingjs-h5/src/util/AlertUtil.ts";
-import ToastUtil from "qingjs-h5/src/util/ToastUtil.ts";
+import AlertUtil from "qing-compat-js-h5/src/util/AlertUtil.ts";
+import ToastUtil from "qing-compat-js-h5/src/util/ToastUtil.ts";
 import WindowUtil from "@/util/WindowUtil.ts";
 
 @toNative

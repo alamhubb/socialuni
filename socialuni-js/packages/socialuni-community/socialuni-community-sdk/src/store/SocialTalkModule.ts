@@ -14,11 +14,11 @@ import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserMod
 import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
 import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil";
 import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import TalkFilterUtil from "../util/TalkFilterUtil";
 import TalkVueUtil from "../util/TalkVueUtil";
 import UserCheckUtil from "socialuni-user-sdk/src/util/UserCheckUtil";
-import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
+import CommonEventUtil from "qing-compat-js/src/util/CommonEventUtil";
 import CommunityEventConst from "../constant/CommunityEventConst";
 import SocialuniPageQueryUtil from "socialuni-api-base/src/model/common/SocialuniPageQueryUtil";
 import TalkQueryVO from "socialuni-api-base/src/model/talk/TalkQueryVO";

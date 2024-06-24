@@ -1,6 +1,6 @@
 import TalkTabType from "socialuni-constant/constant/TalkTabType";
 import SocialuniTalkTabRO from "socialuni-api-base/src/model/talk/SocialuniTalkTabRO";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import SocialuniPageQueryUtil from "socialuni-api-base/src/model/common/SocialuniPageQueryUtil";
 import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
 import TalkQueryVO from "socialuni-api-base/src/model/talk/TalkQueryVO";

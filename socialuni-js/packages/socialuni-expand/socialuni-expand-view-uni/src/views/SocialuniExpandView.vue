@@ -61,7 +61,7 @@ import SocialuniUserExtendDetailRO from "socialuni-expand-api/src/model/Socialun
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import SocialuniImgUtil from "socialuni-user-sdk/src/util/SocialuniImgUtil";
 import SocialuniExpandAPI from "socialuni-expand-api/src/api/SocialuniExpandAPI";
 import SocialuniUserLikeAPI from "socialuni-expand-api/src/api/SocialuniUserLikeAPI";

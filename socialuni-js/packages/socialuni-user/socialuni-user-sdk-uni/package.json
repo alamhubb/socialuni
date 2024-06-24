@@ -1,6 +1,6 @@
 {
   "name": "socialuni-user-sdk-uni",
-  "version": "0.1.13",
+  "version": "0.1.15",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,13 +8,13 @@
   },
   "devDependencies": {
     "mitt": "^3.0.0",
-    "socialuni": "^0.1.13",
-    "socialuni-app-sdk": "^0.1.13",
-    "socialuni-user-api": "^0.1.13"
+    "socialuni": "^0.1.15",
+    "socialuni-app-sdk": "^0.1.15",
+    "socialuni-user-api": "^0.1.15"
   },
   "keywords": [],
   "author": "",
   "repository": "https://github.com/alamhubb/socialuni/tree/master/socialuni-js/packages/socialuni-user-sdk-uni",
   "license": "ISC",
-  "gitHead": "8bc8be05ef3d13e8c3dc57cb16f0e9fcde1cd52b"
+  "gitHead": "6419531da3fca7525662a554b07eeac3b85a7526"
 }

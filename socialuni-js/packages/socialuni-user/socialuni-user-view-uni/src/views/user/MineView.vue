@@ -219,7 +219,7 @@ import SocialGenderTag from "socialuni-user-ui/src/components/SUserGenderTag.vue
 import {socialuniUserModule} from 'socialuni-user-sdk/src/store/SocialuniUserModule';
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import CosService from "socialuni-app-sdk/src/util/CosService";
 import DomFile from "socialuni-app-sdk/src/model/DomFile";
 import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";

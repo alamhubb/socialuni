@@ -132,7 +132,7 @@ import SocialuniUserExtendDetailRO from "socialuni-expand-api/src/model/Socialun
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import SocialuniImgUtil from "socialuni-user-sdk/src/util/SocialuniImgUtil";
 import SocialuniExpandAPI from "socialuni-expand-api/src/api/SocialuniExpandAPI";
 import SocialuniUserLikeAPI from "socialuni-expand-api/src/api/SocialuniUserLikeAPI";
@@ -144,7 +144,7 @@ import QIcon from "qing-ui/src/components/QIcon.vue";
 import QScroll from "qing-ui/src/components/QScroll.vue";
 import QPicker from "qing-ui/src/components/QPicker.vue";
 import QCityPicker from "socialuni-ui/src/components/QCityPicker.vue";
-import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
+import CommonEventUtil from "qing-compat-js/src/util/CommonEventUtil";
 import {socialLocationModule} from "socialuni-community-sdk/src/store/SocialLocationModule";
 
 @toNative

@@ -3,7 +3,7 @@ import LoginAPI from "socialuni-user-api/src/api/LoginAPI";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import Constants from "socialuni-constant/constant/Constant";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import UniUserUtil from "../util/UniUserUtil";
 import SocialuniUserService from "./SocialuniUserService";
 import SocialLoginRO from "socialuni-api-base/src/model/social/SocialLoginRO";

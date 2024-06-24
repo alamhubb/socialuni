@@ -136,7 +136,7 @@ import QIcon from "qing-ui/src/components/QIcon.vue";
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 import LoginService from "socialuni-user-sdk/src/logic/LoginService";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import PhoneService from "socialuni-user-sdk/src/logic/PhoneService";
 import SocialuniUserPrivacyAgreeService from "socialuni-user-sdk/src/logic/SocialuniUserPrivacyAgreeService";

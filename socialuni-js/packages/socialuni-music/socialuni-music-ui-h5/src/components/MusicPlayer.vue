@@ -56,14 +56,14 @@
 
 <script lang="ts">
 import {Component, Emit, Model, Prop, Vue, Watch, toNative} from 'vue-facing-decorator';
-import CommonEventUtil from "qingjs/src/util/CommonEventUtil.ts";
+import CommonEventUtil from "qing-compat-js/src/util/CommonEventUtil.ts";
 import SocialuniImEventKey from "socialuni-im-api/src/constant/SocialuniMusicEventConst.ts";
 import socialuniMusicStore from "socialuni-music-sdk/src/store/SocialuniMusicStore.ts";
-import AlertUtil from "qingjs-h5/src/util/AlertUtil.ts";
+import AlertUtil from "qing-compat-js-h5/src/util/AlertUtil.ts";
 import {nextTick} from "vue";
 import MusicPlayerSongInfoRO from "socialuni-music-sdk/src/model/MusicPlayerSongInfoRO.ts";
 import MusicPlayerSongPlayingInfoRO from "socialuni-music-sdk/src/model/MusicPlayerSongPlayingInfoRO.ts";
-import ToastUtil from "qingjs-h5/src/util/ToastUtil.ts";
+import ToastUtil from "qing-compat-js-h5/src/util/ToastUtil.ts";
 import DateUtil from "qing-util/src/util/DateUtil.ts";
 import QDialog from "qing-ui-h5/src/components/QDialog.vue";
 import MusicList from "./MusicList.vue";

@@ -2,7 +2,7 @@ import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
 import UniLoginUtil from "../util/UniLoginUtil";
 import {socialuniUserModule} from "../store/SocialuniUserModule";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import {socialuniAppUserModule} from "../store/SocialuniAppUserModule";
 
 export default class PhoneService {

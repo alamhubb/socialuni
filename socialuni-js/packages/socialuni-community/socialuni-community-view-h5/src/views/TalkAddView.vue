@@ -153,14 +153,14 @@ import { socialuniUserModule } from 'socialuni-user-sdk/src/store/SocialuniUserM
 import DistrictVO from "socialuni-api-base/src/model/DistrictVO";
 import TagVO from "socialuni-api-base/src/model/community/tag/TagVO";
 import CosAuthRO from "socialuni-api-base/src/model/cos/CosAuthRO";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import PlatformUtils from "socialuni-user-sdk/src/util/PlatformUtils";
 import CosService from "socialuni-app-sdk/src/util/CosService";
 import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
 import SocialCircleRO from "socialuni-api-base/src/model/community/circle/SocialCircleRO";
-import DomFile from "qingjs/src/model/DomFile";
+import DomFile from "qing-compat-js/src/model/DomFile";
 import {onMounted} from "vue";
-import QingLoadingUtil from "qingjs/src/util/QingLoadingUtil";
+import QingLoadingUtil from "qing-compat-js/src/util/QingLoadingUtil";
 
 @toNative
 @Component({

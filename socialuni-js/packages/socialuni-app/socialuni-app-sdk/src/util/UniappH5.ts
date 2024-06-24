@@ -1,5 +1,5 @@
 import DomFile from "../model/DomFile";
-import ToastUtil from "qingjs-uni/src/util/ToastUtil";
+import ToastUtil from "qing-compat-js-uni/src/util/ToastUtil";
 import AppMsg from "socialuni-constant/constant/AppMsg";
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import UUIDUtil from "src/util/UUIDUtil";

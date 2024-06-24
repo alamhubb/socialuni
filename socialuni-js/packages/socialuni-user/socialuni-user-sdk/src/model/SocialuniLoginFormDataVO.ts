@@ -1,7 +1,7 @@
 import CommonUtil from "qing-util/src/util/CommonUtil";
 import NumberUtil from "qing-util/src/util/NumberUtil";
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 
 export default class SocialuniLoginFormDataVO {
     constructor(phoneNum?: string) {

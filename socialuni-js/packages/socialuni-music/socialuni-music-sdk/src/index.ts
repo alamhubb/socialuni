@@ -5,7 +5,7 @@ import {SocialuniOption} from "socialuni/src/interface/socialuniOption";
 import {App} from "vue";
 import {SocialuniPlugin} from "socialuni/src/interface/SocialuniPlugin";
 import socialuniMusicStore from "./store/SocialuniMusicStore";
-import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
+import CommonEventUtil from "qing-compat-js/src/util/CommonEventUtil";
 import SocialuniImEventKey from "socialuni-im-api/src/constant/SocialuniMusicEventConst";
 import MessageViewParams from "socialuni-im-sdk/src/model/MessageViewParams";
 import SocialuniMusicRoleId from "./constant/SocialuniMusicRoleId";

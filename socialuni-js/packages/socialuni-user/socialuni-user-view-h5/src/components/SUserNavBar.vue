@@ -72,7 +72,7 @@
 <script lang="ts">
 import {Component, Prop, Vue, toNative} from 'vue-facing-decorator'
 import SocialuniUserEventConst from "socialuni-user-sdk/src/constant/SocialuniUserEventConst";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import CosService from "socialuni-app-sdk/src/util/CosService";
 import TencentCosAPI from "socialuni-app-api/src/api/TencentCosAPI";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
@@ -81,7 +81,7 @@ import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
 import UUIDUtil from "qing-util/src/util/UUIDUtil";
 import ImgUtil from "qing-util/src/util/ImgUtil";
 import {ArrowDown, Tools} from "@element-plus/icons-vue";
-import CommonEventUtil from "qingjs/src/util/CommonEventUtil";
+import CommonEventUtil from "qing-compat-js/src/util/CommonEventUtil";
 import QDialog from "qing-ui-h5/src/components/QDialog.vue";
 import SocialuniLoginView from "../views/SocialuniLoginView.vue";
 import SocialuniUserEditDialog from "../views/SocialuniUserEditDialog.vue";

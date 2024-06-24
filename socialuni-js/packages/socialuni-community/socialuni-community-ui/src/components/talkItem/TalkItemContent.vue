@@ -97,7 +97,7 @@ import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil";
 import NumUtil from "qing-util/src/util/NumUtil";
 import CommonUtil from "qing-util/src/util/CommonUtil";
 import UserPagePath from "socialuni-user-sdk/src/constant/UserPagePath";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
 import SocialuniImgUtil from "socialuni-user-sdk/src/util/SocialuniImgUtil";
 import CommunityPagePath from "socialuni-community-sdk/src/constant/CommunityPagePath";

@@ -1,4 +1,4 @@
-import DomFile from "qingjs/src/model/DomFile";
+import DomFile from "qing-compat-js/src/model/DomFile";
 
 const hasOwnProperty = Object.prototype.hasOwnProperty
 

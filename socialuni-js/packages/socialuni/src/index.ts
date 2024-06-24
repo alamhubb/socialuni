@@ -5,7 +5,7 @@ import {ImportModule} from "./interface/ImportModule"
 import {SocialuniOption} from "./interface/socialuniOption"
 import SocialuniViewService from "./interface/SocialuniViewService";
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
-import PlatformModuleLoadUtil from "qingjs/src/util/PlatformModuleLoadUtil";
+import PlatformModuleLoadUtil from "qing-compat-js/src/util/PlatformModuleLoadUtil";
 import JsonUtil from "qing-util/src/util/JsonUtil";
 import ObjectUtil from "qing-util/src/util/ObjectUtil";
 import {Router} from "vue-router";

@@ -25,7 +25,7 @@ import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserMod
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
 import ImgFileVO from "socialuni-api-base/src/model/ImgFileVO";
 import SocialuniImgUtil from "socialuni-user-sdk/src/util/SocialuniImgUtil";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import AppMsg from "socialuni-constant/constant/AppMsg";
 import SocialuniUserAPI from "socialuni-user-api/src/api/SocialuniUserAPI";
 import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAPI";

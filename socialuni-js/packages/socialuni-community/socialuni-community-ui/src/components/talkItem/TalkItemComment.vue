@@ -88,7 +88,7 @@ import HugAddVO from "socialuni-api-base/src/model/HugAddVO";
 import SocialuniTalkAPI from "socialuni-community-api/src/api/SocialuniTalkAPI";
 import ChildComment from "./ChildComment.vue";
 import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import UserPagePath from "socialuni-user-sdk/src/constant/UserPagePath";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";

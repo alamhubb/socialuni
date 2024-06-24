@@ -1,4 +1,4 @@
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import SocialuniLoginService from "./SocialuniLoginService";
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 import PasswordUtil from "../util/PasswordUtil";

@@ -1,5 +1,5 @@
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
-import PlatformModuleLoadUtil from "qingjs/src/util/PlatformModuleLoadUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
+import PlatformModuleLoadUtil from "qing-compat-js/src/util/PlatformModuleLoadUtil";
 import {SocialuniImPagePathInterface} from "../constant/SocialuniImPagePathInterface";
 
 export default class ImPageUtil {

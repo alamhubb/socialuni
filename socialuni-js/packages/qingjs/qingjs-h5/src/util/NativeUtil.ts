@@ -8,7 +8,7 @@ import GetProviderRes = UniApp.GetProviderRes;
 import LoginRes = UniApp.LoginRes;
 import GetUserInfoRes = UniApp.GetUserInfoRes;
 import GetImageInfoSuccessData = UniApp.GetImageInfoSuccessData;
-import QingAppUtil from "qingjs/src/util/QingAppUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import DomFile from "socialuni-app-sdk/src/model/DomFile";
 import AppMsg from "socialuni-constant/constant/AppMsg";
