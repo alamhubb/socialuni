@@ -57,7 +57,6 @@ export default class TalkVueUtil {
             query.queryQO.pageSize = item.pageSize
             query.queryQO.pageNum = item.pageNum
             query.listData = item.talks
-            console.log(query.viewData)
             return query
         })
         return temps

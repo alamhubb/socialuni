@@ -37,8 +37,6 @@ async function importPublicKey(publicKeyBase64: string) {
             true,
             ['encrypt'],
         )
-        console.log(44444444)
-        console.log(res)
         return res
     } catch (e) {
         console.log(666666)

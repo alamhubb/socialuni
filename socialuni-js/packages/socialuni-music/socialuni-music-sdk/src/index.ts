@@ -15,7 +15,6 @@ import {socialuniTokenModule} from "socialuni-user-sdk/src/store/SocialuniTokenM
 
 class SocialuniMusicPlugin implements SocialuniPlugin {
     async onLaunch() {
-        console.log('触发了音乐的')
         //用户未登录的情况下，也是可以加入频道听歌的
         //做到不绑定手机号，也可以注册用户，发消息等等
         /*  console.log('触发了Im')

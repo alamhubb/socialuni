@@ -14,6 +14,8 @@ import SocialuniCommunityH5 from "socialuni-community-view-h5/src";
 import SocialuniAppViewH5 from "socialuni-app-view-h5/src";
 import './styles/index.scss'
 import SocialuniImH5 from "socialuni-im-view-h5/src";
+import CommonUtil from "qing-util/src/util/CommonUtil.ts";
+import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule.ts";
 
 
 export const getImageUrl = (path: string): string => {
@@ -44,6 +46,10 @@ declare module '@vue/runtime-core' {
     app.use(SocialuniMusic)
     app.use(SocialuniExpandH5)
     app.use(SocialuniImH5)
+
+    // CommonUtil.delayTime(100).then(() => {
+    //     socialuniPluginsModule.router.push('/')
+    // })
 
 
     app.config.globalProperties.$qing = socialuniSystemModule

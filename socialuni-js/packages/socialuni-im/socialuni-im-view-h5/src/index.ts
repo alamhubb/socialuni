@@ -5,8 +5,6 @@ import SocialuniChatMessageViewH5 from "./views/SocialuniChatMessageViewH5.vue";
 
 const SocialuniImH5 = {
     async install(app: App, expandView: Vue, socialuniOption?: SocialuniOption) {
-        console.log(66666)
-        console.log(app)
         socialuniPluginsModule.router.addRoute({
             path: '/message',
             name: 'message',

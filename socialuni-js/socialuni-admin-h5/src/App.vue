@@ -19,8 +19,6 @@ import SocialuniUserEventOn from "socialuni-user-sdk/src/event/SocialuniUserEven
 import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
 import AdminUserAPI from "socialuni-admin-api/src/api/AdminUserAPI";
 
-console.log(123123)
-
 @toNative
 @Component({
   components: {SUserNavBar, QNavMenu, QButton, QInput, QScroll, QDialog}
@@ -40,9 +38,6 @@ export default class App extends Vue {
     })
   }
   mounted() {
-    console.log('chufale')
-    console.log('222')
-
   }
   toLogin(){
     this.$router.push('/login')

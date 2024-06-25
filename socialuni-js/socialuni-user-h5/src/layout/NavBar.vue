@@ -147,11 +147,6 @@ export default class NavBar extends Vue {
         try {
             const cosAuthRO = await CosService.getCosAuthRO()
 
-            console.log(123123)
-            console.log(cosAuthRO.uploadImgPath)
-            console.log(cosAuthRO)
-            console.log(456465)
-            console.log(cosAuthRO)
             const imgFiles: DomFile[] = await QingAppUtil.NativeUtil.chooseImage(1)
             QingAppUtil.NativeUtil.showLoading('上传中')
             const imgFile: DomFile = imgFiles[0]

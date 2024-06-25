@@ -75,9 +75,6 @@ const Socialuni = {
 
         socialuniPluginsModule.setRouter(router)
 
-        console.log(socialuniSystemModule.isDev)
-
-
         const shareComponent = defineComponent({
             onShareAppMessage() {
                 const title = '年轻人生活分享社区'
@@ -107,7 +104,6 @@ const Socialuni = {
         socialuniPluginsModule.addPlugin(socialuniInitPlugin)
 
         await nextTick()
-        console.log('zhifale soci lunch')
         for (const plugin of socialuniPluginsModule.plugins) {
             plugin && plugin.onLaunch && plugin.onLaunch()
         }

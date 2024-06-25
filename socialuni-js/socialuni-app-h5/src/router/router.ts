@@ -2,6 +2,7 @@ import HomeView from '@/views/HomeView.vue'
 import MessageView from "@/views/chat/MessageView.vue";
 // import {createRouter, createWebHistory} from "@/plugins/router/src/index.ts";
 import {createRouter, createWebHistory} from "vue-router";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule.ts";
 // import MessageView from "@/views/chat/MessageView.tsx";
 
 export const constantRoutes = [
@@ -36,5 +37,14 @@ const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: constantRoutes
 })
+
+
+router.beforeEach(async (to, from, next) => {
+    console.log('fasdfasdfasdfasdf')
+    console.log(to.path)
+    console.log(from.path)
+    next()
+})
+
 
 export default router

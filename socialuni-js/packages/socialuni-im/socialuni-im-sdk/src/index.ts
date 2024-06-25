@@ -37,7 +37,6 @@ class SocialuniImPlugin implements SocialuniPlugin {
     }
 
     onWebsocketConnected(reload: boolean) {
-        console.log('chufale')
         socialuniChatModule.getChatsAction()
     }
 }

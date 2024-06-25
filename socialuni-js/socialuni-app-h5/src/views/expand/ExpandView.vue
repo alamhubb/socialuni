@@ -12,7 +12,6 @@ import { Component, Vue , toNative} from 'vue-facing-decorator';
 export default class ExpandView extends Vue {
 
   created(){
-    console.log('chufale')
   }
 
 }

@@ -42,7 +42,7 @@
         <!--          <q-icon icon="mdi-loading mdi-spin"></q-icon>-->
         <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
 
-        <div v-if="pageQueryUtil.queryQO.queryData.circle"
+        <div v-if="pageQueryUtil.queryQO?.queryData?.circle"
              class="bg-theme-light py-10 bd-radius-10 mb-sm elevation-4 px">
           <div class="row-between-center mb-sm">
 

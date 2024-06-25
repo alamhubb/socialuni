@@ -14,11 +14,8 @@ export default class SocialuniPageQueryUtil<T extends SocialuniContentRO, Q, V> 
     constructor(api: Function = null, queryData: Q = null, viewData: V = null) {
         this.api = api
         this.viewData = viewData
-        console.log(this.queryQO)
         if (queryData) {
             this.queryQO.queryData = queryData
-            console.log(this.queryQO)
-            console.log(565656)
         }
     }
 
@@ -45,10 +42,6 @@ export default class SocialuniPageQueryUtil<T extends SocialuniContentRO, Q, V> 
 
 
     private async initQueryNoDebounce(queryData?: Q) {
-        console.log(123123)
-        console.log(this)
-        console.log(this.queryQO)
-        console.log(4564654)
         this.queryQO.firstLoad = true
         this.queryQO.queryTime = new Date()
         if (queryData) {

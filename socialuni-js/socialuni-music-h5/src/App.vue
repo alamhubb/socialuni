@@ -68,8 +68,6 @@ import QDialog from "qingjs-ui-h5/src/components/QDialog.vue";
 import CommunityEventConst from "socialuni-community-sdk/src/constant/CommunityEventConst.ts";
 import SocialuniUserEventOn from "socialuni-user-sdk/src/event/SocialuniUserEventOn.ts";
 
-console.log(123123)
-
 @toNative
 @Component({
   components: {SUserNavBar, QNavMenu, QButton, QInput, QScroll, QDialog}
@@ -86,9 +84,6 @@ export default class App extends Vue {
   }
 
   mounted() {
-    console.log('chufale')
-    console.log('222')
-
   }
 
   get menus() {

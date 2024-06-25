@@ -83,7 +83,6 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
 
 
         watch(() => socialuniChatModule.scrollTop, () => {
-            console.log('chufale')
             if (instance.$refs.messageBox) {
                 instance.$refs.messageBox.scrollTop = socialuniChatModule.scrollTop
             }

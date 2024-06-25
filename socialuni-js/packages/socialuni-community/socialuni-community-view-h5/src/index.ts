@@ -15,8 +15,6 @@ const socialuniCommunityH5Plugin: SocialuniPlugin = new SocialuniCommunityH5Plug
 
 const SocialuniCommunityH5 = {
     async install(app: App, page = {path: '/', name: 'community', title: '社区'}) {
-        console.log(66666)
-        console.log(app)
         socialuniPluginsModule.router.addRoute({
             path: page.path,
             name: page.name1,
@@ -25,16 +23,6 @@ const SocialuniCommunityH5 = {
         })
         console.log(socialuniPluginsModule.router.getRoutes())
         socialuniPluginsModule.addPlugin(socialuniCommunityH5Plugin)
-
-        CommonUtil.delayTime(100).then(() => {
-            console.log(socialuniPluginsModule.router.getRoutes().length)
-            console.log(socialuniPluginsModule.router.getRoutes().map(item => item.path))
-            console.log('chufale')
-            console.log('333')
-            // this.defaultActive = '/expand'
-            console.log('zhixingle push')
-            socialuniPluginsModule.router.push('/')
-        })
     }
 }
 
