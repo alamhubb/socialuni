@@ -17,8 +17,8 @@ socialuniPluginsModule.componentsMap.set('expandView', SocialuniExpandViewH5)
 
 
 const SocialuniExpandH5 = {
-    async install(app: App, expandView: Vue, socialuniOption?: SocialuniOption) {
-        app.use(SocialuniIm)
+    install(app: App, expandView: Vue, socialuniOption?: SocialuniOption) {
+        // app.use(SocialuniIm)
         socialuniPluginsModule.router.addRoute({
             path: '/expand',
             name: 'expand',

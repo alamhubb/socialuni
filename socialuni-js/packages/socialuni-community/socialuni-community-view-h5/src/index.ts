@@ -14,14 +14,14 @@ const socialuniCommunityH5Plugin: SocialuniPlugin = new SocialuniCommunityH5Plug
 
 
 const SocialuniCommunityH5 = {
-    async install(app: App, page = {path: '/', name: 'community', title: '社区'}) {
-        socialuniPluginsModule.router.addRoute({
-            path: page.path,
-            name: page.name1,
-            component: SocialuniTalkViewH5,
-            meta: {title: page.title},
-        })
-        console.log(socialuniPluginsModule.router.getRoutes())
+    install(app: App, page = {path: '/', name: 'community', title: '社区'}) {
+        // socialuniPluginsModule.router.addRoute({
+        //     path: page.path,
+        //     name: page.name1,
+        //     component: SocialuniTalkViewH5,
+        //     meta: {title: page.title},
+        // })
+        // console.log(socialuniPluginsModule.router.getRoutes())
         socialuniPluginsModule.addPlugin(socialuniCommunityH5Plugin)
     }
 }

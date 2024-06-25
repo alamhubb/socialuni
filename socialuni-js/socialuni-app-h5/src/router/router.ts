@@ -3,9 +3,23 @@ import MessageView from "@/views/chat/MessageView.vue";
 // import {createRouter, createWebHistory} from "@/plugins/router/src/index.ts";
 import {createRouter, createWebHistory} from "vue-router";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule.ts";
+import SocialuniTalkViewH5 from "socialuni-community-view-h5/src/views/SocialuniTalkViewH5.vue";
 // import MessageView from "@/views/chat/MessageView.tsx";
+import SocialuniChatMessageViewH5 from "socialuni-im-view-h5/src/views/SocialuniChatMessageViewH5.vue";
 
 export const constantRoutes = [
+    {
+        path: '/',
+        name: '社区',
+        component: SocialuniTalkViewH5,
+        meta: {title: '社区'},
+    },
+    {
+        path: '/message',
+        name: '消息',
+        component: SocialuniChatMessageViewH5,
+        meta: {title: '消息'},
+    },
     // {
     //     path: '/home',
     //     name: 'home',
@@ -24,13 +38,6 @@ export const constantRoutes = [
     //     component: () => import('@/views/user/mine.vue'),
     //     meta: {title: '我的'},
     // },
-    {
-        path: '/404',
-        component: () => import('@/views/404/404.vue'),
-        meta: {hidden: true},
-    },
-    // 404 page must be placed at the end !!!
-    {path: '/:pathMatch(.*)', redirect: '/404', meta: {hidden: true}}
 ]
 
 const router = createRouter({

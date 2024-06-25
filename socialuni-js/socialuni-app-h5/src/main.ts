@@ -44,7 +44,7 @@ declare module '@vue/runtime-core' {
     app.use(SocialuniUser)
     app.use(SocialuniCommunityH5)
     app.use(SocialuniMusic)
-    app.use(SocialuniExpandH5)
+    // app.use(SocialuniExpandH5)
     app.use(SocialuniImH5)
 
     // CommonUtil.delayTime(100).then(() => {
