@@ -7,9 +7,9 @@
   },
   "pages": [
     {
-      "path": "pages/expand/expand",
+      "path": "pages/home/home",
       "style": {
-        "navigationBarTitleText": "扩列"
+        "navigationStyle": "custom"
       }
     },
     {
@@ -26,6 +26,17 @@
     }
   ],
   "subPackages": [
+    {
+      "root": "pagesLazy/expand",
+      "pages": [
+        {
+          "path": "expand",
+          "style": {
+            "navigationBarTitleText": "扩列"
+          }
+        }
+      ]
+    },
     {
       "root": "pagesLazy/app",
       "pages": [
@@ -138,7 +149,7 @@
     "height": "52px",
     "list": [
       {
-        "pagePath": "pages/expand/expand",
+        "pagePath": "pages/home/home",
         "iconPath": "static/img/home.png",
         "selectedIconPath": "static/img/selectHome.png",
         "text": "首页"

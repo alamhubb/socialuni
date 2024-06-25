@@ -77,8 +77,8 @@
 
 <script lang="ts">
 import {Component, Prop, Vue, Watch, toNative} from 'vue-facing-decorator'
-import QIcon from "qing-compat-js-ui/src/components/QIcon.vue";
-import QButton from "qing-compat-js-ui/src/components/QButton.vue";
+import QIcon from "qingjs-ui/src/components/QIcon.vue";
+import QButton from "qingjs-ui/src/components/QButton.vue";
 import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
 import ObjectUtil from "qing-util/src/util/ObjectUtil";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";

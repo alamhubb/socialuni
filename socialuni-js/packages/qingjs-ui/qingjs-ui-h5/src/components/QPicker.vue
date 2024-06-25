@@ -38,7 +38,7 @@
 </template>
 <script lang="ts">
 import {Emit, Model, Component, Prop, Vue, Watch, toNative} from 'vue-facing-decorator'
-import QRowItem from 'qing-compat-js-ui/src/components/QRowItem.vue'
+import QRowItem from 'qingjs-ui/src/components/QRowItem.vue'
 import UUIDUtil from "qing-util/src/util/UUIDUtil";
 import ScrollView from "uniapp-web/src/components/ScrollView.vue";
 

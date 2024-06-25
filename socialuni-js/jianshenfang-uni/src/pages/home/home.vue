@@ -70,8 +70,8 @@
 import {Component, Vue, Watch, toNative} from 'vue-facing-decorator'
 import TalkView from "socialuni-community-view-uni/src/views/talk/TalkView.vue"
 import SocialGenderTag from "socialuni-user-ui/src/components/SUserGenderTag.vue";
-import QRowItem from "qing-compat-js-ui/src/components/QRowItem.vue";
-import QIcon from "qing-compat-js-ui/src/components/QIcon.vue";
+import QRowItem from "qingjs-ui/src/components/QRowItem.vue";
+import QIcon from "qingjs-ui/src/components/QIcon.vue";
 import SkipType from "socialuni-constant/constant/SkipType";
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import SocialuniAppPageUtil from "socialuni-app-sdk/src/util/SocialuniAppPageUtil";

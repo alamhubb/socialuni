@@ -11,8 +11,8 @@
 
 <script lang="ts">
 import {Component, Vue, Watch, toNative} from 'vue-facing-decorator'
-import QTabs from 'qing-compat-js-ui/src/components/QTabs/QTabs.vue'
-import QIcon from 'qing-compat-js-ui/src/components/QIcon.vue'
+import QTabs from 'qingjs-ui/src/components/QTabs/QTabs.vue'
+import QIcon from 'qingjs-ui/src/components/QIcon.vue'
 import TalkTabVO from "socialuni-api-base/src/model/talk/SocialuniTalkTabRO";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import CommonUtil from "qing-util/src/util/CommonUtil";
@@ -38,12 +38,12 @@ import SocialuniExpandAPI from "socialuni-expand-api/src/api/SocialuniExpandAPI"
 import TalkQueryVO from "socialuni-api-base/src/model/talk/TalkQueryVO";
 import {socialCircleModule} from "socialuni-community-sdk/src/store/SocialCircleModule";
 import TalkTabType from "socialuni-constant/constant/TalkTabType";
-import QEnumLink from 'qing-compat-js-ui-h5/src/components/QEnumLink.vue'
+import QEnumLink from 'qingjs-ui-h5/src/components/QEnumLink.vue'
 import CommonEventUtil from "qing-compat-js/src/util/CommonEventUtil";
 import SocialuniImEventKey from "socialuni-im-api/src/constant/SocialuniMusicEventConst";
 import JsonUtil from "qing-util/src/util/JsonUtil";
-import QNavMenu from "qing-compat-js-ui-h5/src/components/QNavMenu.vue";
-import QDialog from "qing-compat-js-ui-h5/src/components/QDialog.vue";
+import QNavMenu from "qingjs-ui-h5/src/components/QNavMenu.vue";
+import QDialog from "qingjs-ui-h5/src/components/QDialog.vue";
 import MusicList from "socialuni-music-ui-h5/src/components/MusicList.vue";
 import UserCheckUtil from "socialuni-user-sdk/src/util/UserCheckUtil";
 import PlatformUtils from "socialuni-user-sdk/src/util/PlatformUtils";

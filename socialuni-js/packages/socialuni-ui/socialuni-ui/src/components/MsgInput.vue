@@ -44,7 +44,7 @@ import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserMod
 import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import PlatformUtils from "socialuni-user-sdk/src/util/PlatformUtils";
 import UserCheckUtil from "socialuni-user-sdk/src/util/UserCheckUtil";
-import QButton from "qing-compat-js-ui/src/components/QButton.vue";
+import QButton from "qingjs-ui/src/components/QButton.vue";
 
 @toNative
 @Component({

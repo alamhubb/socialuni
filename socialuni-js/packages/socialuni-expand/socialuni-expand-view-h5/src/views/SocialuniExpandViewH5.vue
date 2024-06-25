@@ -118,8 +118,8 @@
 import {Vue, Component, Prop, Emit, toNative} from 'vue-facing-decorator'
 import SocialuniFollowType from "socialuni-constant/constant/user/SocialuniFollowType";
 import SocialUserContentRO from "socialuni-api-base/src/model/social/SocialUserContentRO";
-import QTabs from "qing-compat-js-ui/src/components/QTabs/QTabs.vue";
-import QButton from "qing-compat-js-ui/src/components/QButton.vue";
+import QTabs from "qingjs-ui/src/components/QTabs/QTabs.vue";
+import QButton from "qingjs-ui/src/components/QButton.vue";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import SocialuniPageQueryUtil from "socialuni-api-base/src/model/common/SocialuniPageQueryUtil";
 import CommonUtil from "qing-util/src/util/CommonUtil";
@@ -138,11 +138,11 @@ import SocialuniExpandAPI from "socialuni-expand-api/src/api/SocialuniExpandAPI"
 import SocialuniUserLikeAPI from "socialuni-expand-api/src/api/SocialuniUserLikeAPI";
 import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
 import SocialuniUserExpandService from "socialuni-user-sdk/src/logic/SocialuniUserExpandService";
-import QScrollbar from "qing-compat-js-ui-h5/src/components/QScrollbar.vue";
+import QScrollbar from "qingjs-ui-h5/src/components/QScrollbar.vue";
 import SUserGenderTag from "socialuni-user-ui/src/components/SUserGenderTag.vue";
-import QIcon from "qing-compat-js-ui/src/components/QIcon.vue";
-import QScroll from "qing-compat-js-ui/src/components/QScroll.vue";
-import QPicker from "qing-compat-js-ui/src/components/QPicker.vue";
+import QIcon from "qingjs-ui/src/components/QIcon.vue";
+import QScroll from "qingjs-ui/src/components/QScroll.vue";
+import QPicker from "qingjs-ui/src/components/QPicker.vue";
 import QCityPicker from "socialuni-ui/src/components/QCityPicker.vue";
 import CommonEventUtil from "qing-compat-js/src/util/CommonEventUtil";
 import {socialLocationModule} from "socialuni-community-sdk/src/store/SocialLocationModule";

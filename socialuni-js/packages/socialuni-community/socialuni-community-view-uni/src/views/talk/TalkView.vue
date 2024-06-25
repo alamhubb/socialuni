@@ -46,13 +46,13 @@
 <script lang="ts">
 import {Component, Vue, Watch, toNative} from 'vue-facing-decorator'
 
-import QButton from 'qing-compat-js-ui/src/components/QButton.vue'
-import QNavbar from 'qing-compat-js-ui-uni/src/components/QNavbar/QNavbar.vue'
-import QSearch from 'qing-compat-js-ui-uni/src/components/QSearch/QSearch.vue'
-import QIcon from 'qing-compat-js-ui/src/components/QIcon.vue'
-import QPopup from 'qing-compat-js-ui/src/components/QPopup.vue'
-import QSlider from 'qing-compat-js-ui-uni/src/components/QSlider/QSlider.vue'
-import QTabs from "qing-compat-js-ui/src/components/QTabs/QTabs.vue";
+import QButton from 'qingjs-ui/src/components/QButton.vue'
+import QNavbar from 'qingjs-ui-uni/src/components/QNavbar/QNavbar.vue'
+import QSearch from 'qingjs-ui-uni/src/components/QSearch/QSearch.vue'
+import QIcon from 'qingjs-ui/src/components/QIcon.vue'
+import QPopup from 'qingjs-ui/src/components/QPopup.vue'
+import QSlider from 'qingjs-ui-uni/src/components/QSlider/QSlider.vue'
+import QTabs from "qingjs-ui/src/components/QTabs/QTabs.vue";
 import TagSearch from "./TagSearch.vue";
 import TabsTalk from "./tabsTalk.vue";
 import TalkSwipers from "./talkSwipers.vue";

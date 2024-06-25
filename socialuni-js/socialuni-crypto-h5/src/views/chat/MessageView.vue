@@ -107,9 +107,9 @@ import SocialuniMsgViewH5 from "socialuni-im-view-h5/src/views/SocialuniMsgViewH
 import VueDragResize from "vue-drag-resize3/src/components/VueDragResize.vue";
 import MusicPlayer from "@/components/MusicPlayer.vue";
 import VueInteract from "@/components/vue-interact/VueInteract.vue";
-import QUpload from "qing-compat-js-ui-h5/src/components/QUpload/QUpload.vue";
-import QRow from "qing-compat-js-ui-h5/src/components/QRow.vue";
-import QLabelItem from "qing-compat-js-ui-h5/src/components/QLabelItem.vue";
+import QUpload from "qingjs-ui-h5/src/components/QUpload/QUpload.vue";
+import QRow from "qingjs-ui-h5/src/components/QRow.vue";
+import QLabelItem from "qingjs-ui-h5/src/components/QLabelItem.vue";
 import socialuniUserRequest from "socialuni-user-api/src/request/socialuniUserRequest.ts";
 import SocialuniDeployAPI from "@/views/chat/SocialuniDeployAPI.ts";
 import RegConst from "qing-util/src/constant/RegConst.ts";

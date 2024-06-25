@@ -28,10 +28,10 @@
 <script lang="ts">
 import {Component, Vue, toNative} from 'vue-facing-decorator';
 import SUserNavBar from "socialuni-user-view-h5/src/components/SUserNavBar.vue";
-import QNavMenu from "qing-compat-js-ui-h5/src/components/QNavMenu.vue";
+import QNavMenu from "qingjs-ui-h5/src/components/QNavMenu.vue";
 import {constantRoutes} from "@/router/router.ts";
 import CommonEventUtil from "qing-compat-js/src/util/CommonEventUtil.ts";
-import QScroll from "qing-compat-js-ui/src/components/QScroll.vue";
+import QScroll from "qingjs-ui/src/components/QScroll.vue";
 
 @toNative
 @Component({

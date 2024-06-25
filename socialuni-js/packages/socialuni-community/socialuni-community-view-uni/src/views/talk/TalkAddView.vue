@@ -129,11 +129,11 @@
 import {Component, Vue, Watch, toNative} from 'vue-facing-decorator'
 import AppMsg from 'socialuni-constant/constant/AppMsg'
 import {onUnload} from "@dcloudio/uni-app";
-import QSidebar from "qing-compat-js-ui-uni/src/components/QSidebar/QSidebar.vue";
-import QPopup from "qing-compat-js-ui/src/components/QPopup.vue";
-import QButton from "qing-compat-js-ui/src/components/QButton.vue";
-import QIcon from "qing-compat-js-ui/src/components/QIcon.vue";
-import QNavbar from "qing-compat-js-ui-uni/src/components/QNavbar/QNavbar.vue";
+import QSidebar from "qingjs-ui-uni/src/components/QSidebar/QSidebar.vue";
+import QPopup from "qingjs-ui/src/components/QPopup.vue";
+import QButton from "qingjs-ui/src/components/QButton.vue";
+import QIcon from "qingjs-ui/src/components/QIcon.vue";
+import QNavbar from "qingjs-ui-uni/src/components/QNavbar/QNavbar.vue";
 import SocialCirclePicker from "socialuni-community-view-uni/src/components/SocialCirclePicker.vue";
 import QCityInfo from "socialuni-community-view-uni/src/components/QCityInfo/QCityInfo.vue";
 import SocialTagAdd from "socialuni-community-view-uni/src/components/SocialTagAdd/SocialTagAdd.vue";

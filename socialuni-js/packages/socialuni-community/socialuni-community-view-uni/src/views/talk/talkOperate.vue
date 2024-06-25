@@ -51,7 +51,7 @@
 
 <script lang="ts">
 import {Component, Vue, toNative} from 'vue-facing-decorator'
-import QPopup from "qing-compat-js-ui/src/components/QPopup.vue";
+import QPopup from "qingjs-ui/src/components/QPopup.vue";
 import ReportType from "socialuni-constant/constant/ReportType";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import ReportAddVO from "socialuni-api-base/src/model/report/ReportAddVO";

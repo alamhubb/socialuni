@@ -64,13 +64,13 @@ import SocialuniFollowType from "socialuni-constant/constant/user/SocialuniFollo
 import SocialUserContentRO from "socialuni-api-base/src/model/social/SocialUserContentRO";
 import SocialGenderTag from "socialuni-user-ui/src/components/SUserGenderTag.vue";
 import {onLoad, onPullDownRefresh, onReachBottom, onShow} from "@dcloudio/uni-app";
-import QTabs from "qing-compat-js-ui/src/components/QTabs/QTabs.vue";
+import QTabs from "qingjs-ui/src/components/QTabs/QTabs.vue";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import SocialuniFollowTag from "socialuni-user-view-uni/src/components/SocialuniFollow/SocialuniFollowTag.vue";
 import SocialuniPageQueryUtil from "socialuni-api-base/src/model/common/SocialuniPageQueryUtil";
 import CommonUtil from "qing-util/src/util/CommonUtil";
 import SocialUserFollowDetailRO from "socialuni-api-base/src/model/social/SocialUserFollowDetailRO";
-import QPullRefresh from "qing-compat-js-ui-uni/src/components/QPullRefresh/QPullRefresh.vue";
+import QPullRefresh from "qingjs-ui-uni/src/components/QPullRefresh/QPullRefresh.vue";
 
 @toNative
 @Component({

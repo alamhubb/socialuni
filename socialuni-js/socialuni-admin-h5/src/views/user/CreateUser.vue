@@ -23,14 +23,14 @@
 
 <script lang="ts">
 import {Component, Vue, toNative} from 'vue-facing-decorator'
-import QDialog from "qing-compat-js-ui-h5/src/components/QDialog.vue";
-import QLabelItem from "qing-compat-js-ui-h5/src/components/QLabelItem.vue";
-import QTable from "qing-compat-js-ui-h5/src/components/QTable.vue";
-import QTableColumn from "qing-compat-js-ui-h5/src/components/QTableColumn/QTableColumn.vue";
-import QTableInput from "qing-compat-js-ui-h5/src/components/QTableInput/QTableInput.vue";
-import QTableSelect from "qing-compat-js-ui-h5/src/components/QTableSelect/QTableSelect.vue";
+import QDialog from "qingjs-ui-h5/src/components/QDialog.vue";
+import QLabelItem from "qingjs-ui-h5/src/components/QLabelItem.vue";
+import QTable from "qingjs-ui-h5/src/components/QTable.vue";
+import QTableColumn from "qingjs-ui-h5/src/components/QTableColumn/QTableColumn.vue";
+import QTableInput from "qingjs-ui-h5/src/components/QTableInput/QTableInput.vue";
+import QTableSelect from "qingjs-ui-h5/src/components/QTableSelect/QTableSelect.vue";
 import {Plus} from '@element-plus/icons-vue'
-import QSelect from "qing-compat-js-ui-h5/src/components/QSelect/QSelect.vue";
+import QSelect from "qingjs-ui-h5/src/components/QSelect/QSelect.vue";
 import ImgFileVO from "socialuni-admin-api/src/model/community/ImgFileVO";
 import SocialuniCustomUserAPI from "socialuni-peiwan-api/src/api/SocialuniCustomUserAPI";
 import ToastUtil from "@/utils/ToastUtil";

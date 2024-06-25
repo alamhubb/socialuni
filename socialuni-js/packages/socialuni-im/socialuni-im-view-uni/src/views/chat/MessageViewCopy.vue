@@ -327,8 +327,8 @@ import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserMod
 import SocialuniMsgViewService from "socialuni-im-sdk/src/logic/SocialuniMsgViewService";
 import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
 import SocialuniMsgViewLogic from "socialuni-im-sdk/src/viewLogic/SocialuniMsgViewLogic";
-import QIcon from "qing-compat-js-ui/src/components/QIcon.vue";
-import QNavbar from "qing-compat-js-ui-uni/src/components/QNavbar/QNavbar.vue";
+import QIcon from "qingjs-ui/src/components/QIcon.vue";
+import QNavbar from "qingjs-ui-uni/src/components/QNavbar/QNavbar.vue";
 
 @toNative
 @Component(

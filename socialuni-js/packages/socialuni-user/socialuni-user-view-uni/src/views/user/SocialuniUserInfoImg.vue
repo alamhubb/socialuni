@@ -45,7 +45,7 @@
 </template>
 
 <script lang="ts">
-import QIcon from "qing-compat-js-ui/src/components/QIcon.vue";
+import QIcon from "qingjs-ui/src/components/QIcon.vue";
 import {Component, Prop, Vue, toNative} from 'vue-facing-decorator';
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
 import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";

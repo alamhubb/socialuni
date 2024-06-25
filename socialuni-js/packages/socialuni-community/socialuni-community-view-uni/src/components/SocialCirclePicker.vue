@@ -50,11 +50,11 @@
 
 <script lang="ts">
 import {Component, Emit, Vue, toNative} from 'vue-facing-decorator'
-import QPopup from "qing-compat-js-ui/src/components/QPopup.vue";
+import QPopup from "qingjs-ui/src/components/QPopup.vue";
 import SocialCircleRO from "socialuni-api-base/src/model/community/circle/SocialCircleRO";
-import QIcon from "qing-compat-js-ui/src/components/QIcon.vue";
-import QInput from "qing-compat-js-ui/src/components/QInput.vue";
-import QSidebar from "qing-compat-js-ui-uni/src/components/QSidebar/QSidebar.vue";
+import QIcon from "qingjs-ui/src/components/QIcon.vue";
+import QInput from "qingjs-ui/src/components/QInput.vue";
+import QSidebar from "qingjs-ui-uni/src/components/QSidebar/QSidebar.vue";
 import {socialCircleModule} from "socialuni-community-sdk/src/store/SocialCircleModule";
 
 

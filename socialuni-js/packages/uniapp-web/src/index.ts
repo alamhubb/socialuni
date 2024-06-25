@@ -1,5 +1,5 @@
 import {App} from "vue";
-import QingUi from "qing-compat-js-ui/src";
+import QingUi from "qingjs-ui/src";
 
 const UniappWeb = {
     async install(app: App) {

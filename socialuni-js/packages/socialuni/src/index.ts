@@ -68,7 +68,7 @@ async function installSocialuniPluginIns(app: App) {
 
 const Socialuni = {
     async install(app: App, router: Router, socialuniOption?: SocialuniOption) {
-        // const SocialuniUiUni = await import("../../qing-compat-js-ui/qing-compat-js-ui")
+        // const SocialuniUiUni = await import("../../qingjs-ui/qingjs-ui")
         // console.log(SocialuniUiUni)
         // app.use(SocialuniUiUni)
         // console.log(SocialuniUiUni)

@@ -15,7 +15,7 @@
 </template>
 <script lang="ts">
 import {Emit, Model, Component, Prop, Vue, toNative} from 'vue-facing-decorator'
-import QIcon from "qing-compat-js-ui/src/components/QIcon.vue";
+import QIcon from "qingjs-ui/src/components/QIcon.vue";
 /*
 显示出来已经选了的城市，给她画上钩
 * */

@@ -90,8 +90,8 @@
 <script lang="ts">
 import {Vue, Component, Prop, Emit, toNative} from 'vue-facing-decorator'
 import SocialUserContentRO from "socialuni-api-base/src/model/social/SocialUserContentRO";
-import QButton from "qing-compat-js-ui/src/components/QButton.vue";
-import QIcon from "qing-compat-js-ui/src/components/QIcon.vue";
+import QButton from "qingjs-ui/src/components/QButton.vue";
+import QIcon from "qingjs-ui/src/components/QIcon.vue";
 import SocialGenderTag from "socialuni-user-ui/src/components/SUserGenderTag.vue";
 import SocialuniUserExtendDetailRO from "socialuni-expand-api/src/model/SocialuniUserExtendDetailRO";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";

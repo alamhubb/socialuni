@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "qing-compat-js": "^0.1.17",
-    "qing-compat-js-ui-h5": "^0.1.17",
+    "qingjs-ui-h5": "^0.1.17",
     "socialuni": "^0.1.17",
     "socialuni-constant": "^0.1.17",
     "socialuni-expand-api": "^0.1.17",

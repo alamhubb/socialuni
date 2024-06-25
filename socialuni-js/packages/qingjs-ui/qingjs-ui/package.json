@@ -1,5 +1,5 @@
 {
-  "name": "qing-compat-js-ui",
+  "name": "qingjs-ui",
   "version": "0.1.17",
   "description": "",
   "scripts": {
@@ -18,7 +18,7 @@
     "vue": "^3.2.41"
   },
   "author": "",
-  "repository": "https://github.com/alamhubb/socialuni/tree/master/socialuni-js/packages/qing-compat-js-ui/qing-compat-js-ui-h5",
+  "repository": "https://github.com/alamhubb/socialuni/tree/master/socialuni-js/packages/qingjs-ui/qingjs-ui-h5",
   "license": "ISC",
   "gitHead": "48a347611019ae3c96ba7ff2fe486dd81f144d48"
 }

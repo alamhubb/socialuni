@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "qing-scss": "../packages/qing-scss",
-    "qing-compat-js-ui-h5": "../packages/qing-compat-js-ui/qing-compat-js-ui-h5",
+    "qingjs-ui-h5": "../packages/qingjs-ui/qingjs-ui-h5",
     "socialuni-ui-h5": "../packages/socialuni-ui/socialuni-ui-h5",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0",

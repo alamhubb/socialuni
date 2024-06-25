@@ -92,7 +92,7 @@
 import {Component, Prop, Vue, toNative} from 'vue-facing-decorator'
 import PagePath from "socialuni-constant/constant/PagePath";
 import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
-import QIcon from "qing-compat-js-ui/src/components/QIcon.vue";
+import QIcon from "qingjs-ui/src/components/QIcon.vue";
 import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil";
 import NumUtil from "qing-util/src/util/NumUtil";
 import CommonUtil from "qing-util/src/util/CommonUtil";

@@ -91,7 +91,7 @@ import SocialuniFriendApplyUserRO from "socialuni-im-api/src/model/RO/SocialuniF
 import FriendAddQO from "socialuni-im-api/src/model/QO/firend/FriendAddQO";
 import SocialuniAddFriendStatus from "socialuni-im-api/src/constant/SocialuniAddFriendStatus";
 import OpenImFriendApplyRO from "socialuni-api-base/src/model/openIm/OpenImFriendApplyRO";
-import QTabs from "qing-compat-js-ui/src/components/QTabs/QTabs.vue";
+import QTabs from "qingjs-ui/src/components/QTabs/QTabs.vue";
 import SocialuniAddFriendType from "socialuni-im-api/src/constant/SocialuniAddFriendType";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";

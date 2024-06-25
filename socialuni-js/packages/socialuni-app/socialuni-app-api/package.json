@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "qing-compat-js": "^0.1.17",
-    "qing-compat-js-ui-types": "^0.1.17",
+    "qingjs-ui-types": "^0.1.17",
     "qing-util": "^0.1.17",
     "socialuni": "^0.1.17",
     "socialuni-api-base": "^0.1.17",

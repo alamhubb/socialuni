@@ -4,7 +4,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import QingScss from 'qing-scss/src/index'
-import QingUiH5 from "qing-compat-js-ui-h5/src";
+import QingUiH5 from "qingjs-ui-h5/src";
 import SocialuniUiH5 from "socialuni-ui-h5/src";
 import Socialuni from "socialuni/src";
 import SocialuniApp from "socialuni-app-sdk/src";

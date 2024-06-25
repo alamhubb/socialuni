@@ -112,10 +112,10 @@
 <script lang="ts">
 import {Component, Vue, toNative} from 'vue-facing-decorator'
 import SocialUserContentRO from "socialuni-api-base/src/model/social/SocialUserContentRO"
-import QNavbar from "qing-compat-js-ui-uni/src/components/QNavbar/QNavbar.vue"
-import QIcon from "qing-compat-js-ui/src/components/QIcon.vue"
-import QSearch from "qing-compat-js-ui-uni/src/components/QSearch/QSearch.vue"
-import QInput from "qing-compat-js-ui/src/components/QInput.vue"
+import QNavbar from "qingjs-ui-uni/src/components/QNavbar/QNavbar.vue"
+import QIcon from "qingjs-ui/src/components/QIcon.vue"
+import QSearch from "qingjs-ui-uni/src/components/QSearch/QSearch.vue"
+import QInput from "qingjs-ui/src/components/QInput.vue"
 import {
   socialuniChatViewService
 } from "socialuni-im-sdk/src/logic/SocialuniChatViewService";

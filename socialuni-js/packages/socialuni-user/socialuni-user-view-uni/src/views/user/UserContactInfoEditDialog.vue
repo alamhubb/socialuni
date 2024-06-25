@@ -25,9 +25,9 @@
 
 <script lang="ts">
 import {Component, Vue, toNative} from 'vue-facing-decorator'
-import QInput from "qing-compat-js-ui/src/components/QInput.vue";
-import QPopup from "qing-compat-js-ui/src/components/QPopup.vue";
-import SSwitch from "qing-compat-js-ui-uni/src/components/SSwitch.vue";
+import QInput from "qingjs-ui/src/components/QInput.vue";
+import QPopup from "qingjs-ui/src/components/QPopup.vue";
+import SSwitch from "qingjs-ui-uni/src/components/SSwitch.vue";
 import SocialuniUserExpandAPI from "socialuni-user-api/src/api/SocialuniUserExpandAPI";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";

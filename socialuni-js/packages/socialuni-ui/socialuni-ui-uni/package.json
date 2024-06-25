@@ -10,7 +10,7 @@
     "@dcloudio/uni-ui": "^1.4.23",
     "cos-js-sdk-v5": "^1.2.18",
     "qing-compat-js": "^0.1.17",
-    "qing-compat-js-ui": "^0.1.17",
+    "qingjs-ui": "^0.1.17",
     "qing-scss": "^0.1.17",
     "qing-util": "^0.1.17",
     "socialuni-app-api": "^0.1.17",

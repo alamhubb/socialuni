@@ -105,7 +105,7 @@
 import {Component, Vue, toNative} from 'vue-facing-decorator'
 import {DialogInterface} from "@/interface/DialogInterface";
 import PeiwanRO from "socialuni-admin-api/src/model/peiwan/PeiwanRO";
-import QDialog from "qing-compat-js-ui-h5/src/components/QDialog.vue";
+import QDialog from "qingjs-ui-h5/src/components/QDialog.vue";
 import {Plus} from '@element-plus/icons-vue'
 import FileUtilH5 from "qing-compat-js-h5/src/util/FileUtilH5";
 import type DomFile from "qing-compat-js/src/model/DomFile";

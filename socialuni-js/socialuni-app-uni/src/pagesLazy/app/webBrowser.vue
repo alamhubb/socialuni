@@ -29,7 +29,7 @@
 <script lang="ts">
 import {Component, Vue, toNative} from 'vue-facing-decorator'
 import {onLoad, onReady} from "@dcloudio/uni-app";
-import QNavbar from 'qing-compat-js-ui-uni/src/components/QNavbar/QNavbar.vue'
+import QNavbar from 'qingjs-ui-uni/src/components/QNavbar/QNavbar.vue'
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import PagePath from "socialuni-constant/constant/PagePath";
 import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
