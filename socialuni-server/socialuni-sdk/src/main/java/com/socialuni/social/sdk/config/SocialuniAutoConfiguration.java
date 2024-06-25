@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableFeignClients("com.socialuni.social")
 @ComponentScan("com.socialuni.social")
 //@EnableJpaRepositories("com.socialuni.social")
-@EnableJpaRepositories(value = "com.socialuni.social",repositoryBaseClass  = DelegateExtendBaseRepository.class)
+@EnableJpaRepositories(value = "com.socialuni.social", repositoryBaseClass = DelegateExtendBaseRepository.class)
 @EntityScan("com.socialuni.social")
 @EnableTransactionManagement
 @EnableAsync
