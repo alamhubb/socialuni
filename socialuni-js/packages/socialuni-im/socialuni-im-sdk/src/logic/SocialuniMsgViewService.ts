@@ -1,4 +1,4 @@
-import {ComponentInternalInstance, getCurrentInstance, onMounted, onUnmounted} from "vue";
+import {ComponentInternalInstance, getCurrentInstance, onMounted, onUnmounted, watch} from "vue";
 import SocialuniViewService from "socialuni/src/interface/SocialuniViewService";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import Constants from "socialuni-constant/constant/Constant";
@@ -36,6 +36,7 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
         // reportDialog: SocialuniReportDialog;
         messageMoreHandleDialog: any;
         deleteReasonDialog: any;
+        messageBox: HTMLDivElement;
     }
     inputFocus = false
     upperThreshold = 300
@@ -79,6 +80,16 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
     initService(instance: Vue, params: MessageViewParams) {
         console.log('zhixingle initService')
         super.initService(instance, params)
+
+
+        watch(() => socialuniChatModule.scrollTop, () => {
+            console.log('chufale')
+            if (instance.$refs.messageBox) {
+                instance.$refs.messageBox.scrollTop = socialuniChatModule.scrollTop
+            }
+            // this.scrollTop = -1000
+        })
+
         onMounted(() => {
             socialuniChatModule.scrollTop = 0
         })

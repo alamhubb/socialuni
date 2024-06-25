@@ -101,6 +101,7 @@ import SIcon from "qingjs-ui/src/components/QIcon.vue";
 import SocialuniMsgViewService from "socialuni-im-sdk/src/logic/SocialuniMsgViewService";
 import MessageViewParams from "socialuni-im-view-uni/src/views/chat/MessageViewParams";
 import {getCurrentInstance, watch} from "vue";
+import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
 
 @toNative
 @Component({

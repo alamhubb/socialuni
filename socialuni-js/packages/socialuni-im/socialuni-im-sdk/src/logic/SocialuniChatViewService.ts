@@ -43,12 +43,6 @@ export default class SocialuniChatViewService extends SocialuniViewService<Socia
 
     initService(instance: Vue) {
         super.initService(instance)
-        watch(() => socialuniChatModule.scrollTop, () => {
-            if (this.$refs.messageBox) {
-                this.$refs.messageBox.scrollTop = socialuniChatModule.scrollTop
-            }
-            // this.scrollTop = -1000
-        })
     }
 
     scrollTop: number = 0

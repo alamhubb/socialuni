@@ -207,7 +207,6 @@ class SocialuniChatModule {
 
     scrollToMessagePageBottom() {
         CommonUtil.delayTime(100).then(() => {
-            console.log('滚动到底部')
             this.scrollTop = this.messages.length * 500
         })
     }
