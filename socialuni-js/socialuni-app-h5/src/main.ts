@@ -1,21 +1,52 @@
-import './assets/main.css'
+import {createApp} from 'vue'
 
-import { createApp } from 'vue'
 import App from './App.vue'
-import router from './router'
-import QingScss from 'qing-scss/src/index'
-import QingUiH5 from "qingjs-ui-h5/src";
-import SocialuniUiH5 from "socialuni-ui-h5/src";
 import Socialuni from "socialuni/src";
-import SocialuniApp from "socialuni-app-sdk/src";
-// import Socialuni from "socialuni/src";
-const app = createApp(App)
+import router from "@/router/router.ts";
+import SocialuniMusic from "socialuni-music-sdk/src";
+import DateUtil from "qing-util/src/util/DateUtil.ts";
+import SocialuniUser from "socialuni-user-sdk/src";
+import SocialuniIm from "socialuni-im-sdk/src";
+import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule.ts";
+import SocialuniUiH5 from "socialuni-ui-h5/src";
+import SocialuniExpandH5 from "socialuni-expand-view-h5/src";
+import SocialuniCommunityH5 from "socialuni-community-view-h5/src";
+import SocialuniAppViewH5 from "socialuni-app-view-h5/src";
+import './styles/index.scss'
+import SocialuniImH5 from "socialuni-im-view-h5/src";
 
-app.use(router)
-app.use(QingScss)
-app.use(QingUiH5)
-app.use(SocialuniUiH5)
-app.use(SocialuniApp)
-app.use(Socialuni)
 
-app.mount('#app')
+export const getImageUrl = (path: string): string => {
+    return new URL(`./assets/${path}`, import.meta.url).href
+}
+
+declare module '@vue/runtime-core' {
+    interface ComponentCustomProperties {
+        $DateUtil: typeof DateUtil
+        $getImageUrl: (path: string) => string
+    }
+}
+
+
+// 使用自定义异步插件
+(async () => {
+    const app = createApp(App);
+    app.use(router)
+    app.use(Socialuni, router)
+
+    app.config.globalProperties.$DateUtil = DateUtil;
+    app.config.globalProperties.$getImageUrl = getImageUrl;
+
+    app.use(SocialuniUiH5)
+    app.use(SocialuniAppViewH5)
+    app.use(SocialuniUser)
+    app.use(SocialuniCommunityH5)
+    app.use(SocialuniMusic)
+    app.use(SocialuniExpandH5)
+    app.use(SocialuniImH5)
+
+
+    app.config.globalProperties.$qing = socialuniSystemModule
+    app.mount('#app');
+})();
+

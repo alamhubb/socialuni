@@ -1,24 +1,22 @@
 <template>
-  <div class="flex-row">
-    <h1>This is an about 6666</h1>
-    <q-button>fasdfs</q-button>
-    <div>使用qing-scss</div>
-    <div>使用qingjs-ui</div>
-    <div>使用socialuni</div>
-  </div>
+    <main class="h100p mt-sm row-all-center">
+        <div class="w800 h500">
+            <div>123</div>456
+            <el-button @click="sendAuthCode">123</el-button>
+        </div>
+    </main>
 </template>
 
-<style>
-</style>
-
 <script lang="ts">
-import {Component, Vue, toNative} from 'vue-facing-decorator';
-import QButton from "qingjs-ui/src/components/QButton.vue";
+import { Component, Vue , toNative} from 'vue-facing-decorator';
+import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
 
 @toNative
-@Component({
-  components: {QButton}
-})
-export default class HomeView extends Vue {
+@Component({})
+export default class IndexView extends Vue {
+
+    sendAuthCode(){
+        PhoneAPI.sendAuthCodeAPI('1111')
+    }
 }
 </script>
