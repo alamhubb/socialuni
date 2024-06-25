@@ -3,6 +3,7 @@ import {SocialuniAlertUtilInterface} from "qing-compat-js/src/interface/Socialun
 
 class AlertUtil implements SocialuniAlertUtilInterface {
     confirm(message: string, okLabel = '确定', cancel = '取消') {
+        ElMessageBox.close()
         return ElMessageBox.confirm(message, {
             type: 'info',
             distinguishCancelAndClose: true,
@@ -12,24 +13,28 @@ class AlertUtil implements SocialuniAlertUtilInterface {
     }
 
     hint(msg: string, okLabel?: string) {
+        ElMessageBox.close()
         return ElMessageBox.alert(msg, okLabel, {
             type: 'info'
         })
     }
 
     info(message: string, title?: string) {
+        ElMessageBox.close()
         return ElMessageBox.alert(message, title, {
             type: 'info'
         })
     }
 
     warning(message: string, okLabel = '确定', cancel = '取消') {
+        ElMessageBox.close()
         return ElMessageBox.confirm(message, {
             type: 'warning'
         })
     }
 
     error(message: string) {
+        ElMessageBox.close()
         ElMessageBox.alert(message, {
             type: 'error'
         })
@@ -37,6 +42,7 @@ class AlertUtil implements SocialuniAlertUtilInterface {
     }
 
     success(message: string, okLabel = '确定', cancel = '取消') {
+        ElMessageBox.close()
         return ElMessageBox.confirm(message, {
             type: 'success'
         })

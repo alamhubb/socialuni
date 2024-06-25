@@ -1,12 +1,16 @@
-package com.socialuni.social.tance.controller;
+package com.socialuni.social.admin.controller;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.utils.MapUtil;
+import com.socialuni.social.tance.entity.SocialuniUnionIdDo;
 import com.socialuni.social.tance.model.DO.AppConfigDO;
 import com.socialuni.social.tance.model.DO.AppConfigPk;
 import com.socialuni.social.tance.repository.AppConfigRepository;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
+import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +34,9 @@ public class SocialuniAdminAppConfigController {
     @PostMapping("save")
     @ResponseBody
     public AppConfigDO save(@RequestBody AppConfigDO appConfigDO) {
-        Integer devId = DevAccountFacade.getDevIdNotNull();
+        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+
+        Integer devId = DevAccountFacade.getAdminDevIdNotNull(mineUserId);
         appConfigDO.setDevId(devId);
 //        if(AppConfigRepository.DEFAULT_DEV_KEY.equals(appConfigDO.getDevId()))
 //            throw new SocialParamsException("联盟默认数据不可修改");
@@ -42,7 +48,9 @@ public class SocialuniAdminAppConfigController {
     @PostMapping("deleteById")
     @ResponseBody
     public void deleteById(@RequestBody AppConfigPk appConfigPk) {
-        Integer devId = DevAccountFacade.getDevIdNotNull();
+        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+
+        Integer devId = DevAccountFacade.getAdminDevIdNotNull(mineUserId);
         appConfigPk.setDevId(devId);
 //        if(AppConfigRepository.DEFAULT_DEV_KEY.equals(appConfigPk.getDevId()))
 //            throw new SocialParamsException("联盟默认数据不可删除");
@@ -56,11 +64,16 @@ public class SocialuniAdminAppConfigController {
     @GetMapping("getAllConfigs")
     @ResponseBody
     public ResultRO<List<AppConfigDO>> getAllConfigs() {
+        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+
+        Integer devId = DevAccountFacade.getAdminDevIdNotNull(mineUserId);
+
         int status = 1;
         // 默认的内容。
         List<AppConfigDO> defaultList = appConfigRepository.findAllByDevIdAndStatusOrderByCreateTimeDesc(AppConfigRepository.DEFAULT_DEV_KEY, status);
+
         // 自己定义的
-        List<AppConfigDO> devList = appConfigRepository.findAllByDevIdAndStatusOrderByCreateTimeDesc(DevAccountFacade.getDevIdNotNull(), status);
+        List<AppConfigDO> devList = appConfigRepository.findAllByDevIdAndStatusOrderByCreateTimeDesc(devId, status);
         //
         CollectionUtil.addAll(defaultList, devList);
         // 去重

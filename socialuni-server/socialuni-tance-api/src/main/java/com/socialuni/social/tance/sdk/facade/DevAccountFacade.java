@@ -12,6 +12,7 @@ import com.socialuni.social.tance.sdk.enumeration.SocialFeignHeaderName;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.tance.sdk.model.DevAccountProviderModler;
+import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -92,6 +93,13 @@ public class DevAccountFacade {
     public static Integer getDevIdNotNull() {
         DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNotNull();
         return devAccountModel.getId();
+    }
+
+    public static Integer getAdminDevIdNotNull(Integer unionId) {
+        SocialuniUnionIdModler socialuniUnionIdDo = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(unionId);
+
+        Integer devId = socialuniUnionIdDo.getFromDevId();
+        return devId;
     }
 
     public static String getDevPhoneNumNotNull() {

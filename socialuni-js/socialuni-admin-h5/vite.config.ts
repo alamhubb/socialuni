@@ -4,16 +4,17 @@ import {defineConfig, loadEnv} from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import socialuniPlatformAutoImportPlugin from "vite-plugin-socialuni-platform-auto-import/src/index";
+import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vitejs.dev/config/
-
 export default ({mode}) => {
     const env: string = loadEnv(mode, process.cwd());
 
     return defineConfig({
         plugins: [
             vue(),
-            vueJsx(),
+            // vueJsx(),
+            // vueDevTools(),
             socialuniPlatformAutoImportPlugin()
         ],
         server: {
@@ -39,8 +40,7 @@ export default ({mode}) => {
         },
         css: {
             preprocessorOptions: {
-                scss: {
-                }
+                scss: {}
             }
         }
     })

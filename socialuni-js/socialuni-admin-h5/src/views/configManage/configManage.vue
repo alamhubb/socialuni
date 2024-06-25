@@ -17,9 +17,7 @@
 
 <script lang="ts">
 import {Component, Vue, toNative} from 'vue-facing-decorator'
-import request from "@/plugins/request";
-import ConfigVO from "@/model/config/ConfigVO";
-import ReportVO from '@/model/report/ReportVO'
+import SocialuniAdminConfigAPI from "socialuni-admin-api/src/api/SocialuniAdminConfigAPI";
 
 @toNative
 @Component({})
@@ -31,20 +29,21 @@ export default class ConfigManageView extends Vue {
   }
 
   async queryConfigs() {
-    const res = await request.get('config/getAllConfigs')
+    const res = await SocialuniAdminConfigAPI.getAllConfigsAPI()
     this.configs = res.data;
   }
   delConfigs(row:ConfigVO) {
-    request.post('config/deleteById', row).then(res => {
-        this.queryConfigs();
-    });
+    // request.post('config/deleteById', row).then(res => {
+    //     this.queryConfigs();
+    // });
 
   }
   saveConfigs(row:ConfigVO){
+    SocialuniAdminConfigAPI.saveConfig(row)
     //this.configs保存到后台
-    request.post('config/save', row).then(res => {
-        this.queryConfigs();
-    });
+    // request.post('config/save', row).then(res => {
+    //     this.queryConfigs();
+    // });
   }
 }
 </script>

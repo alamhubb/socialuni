@@ -19,6 +19,12 @@ export const menuRoutes = [
       meta: { title: '开发者信息', icon: 'strengthMonitoring', isOpen: true }
     },
     {
+        path: '/configManage',
+        name: RouterName.configManage,
+        component: () => import('@/views/configManage/configManage.vue'),
+        meta: { title: RouterName.configManage, icon: 'strengthMonitoring', isOpen: true }
+    },
+    /*{
       path: 'contentAudit',
       name: RouterName.contentAudit,
       component: () => import('@/views/audit/contentAudit.vue'),
@@ -66,7 +72,7 @@ export const menuRoutes = [
         name: 'operateUserManage',
         component: OperateUserManage,
         meta: {title: '运营用户管理', icon: 'strengthMonitoring', isOpen: true}
-    },
+    },*/
     // {
     //     path: '/peiwanManage',
     //     name: 'peiwanManage',

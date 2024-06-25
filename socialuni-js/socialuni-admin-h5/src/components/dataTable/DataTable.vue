@@ -1,5 +1,6 @@
+<!--
 <template>
-  <!--            <el-step title="数据库连接信息" />-->
+  &lt;!&ndash;            <el-step title="数据库连接信息" />&ndash;&gt;
   <div class="flex-col">
     <div v-if="showTableHeader" class="flex-none pb-sm">
       <slot name="header">
@@ -283,3 +284,4 @@ export default class DataTable extends Vue {
   }
 }
 </style>
+-->
