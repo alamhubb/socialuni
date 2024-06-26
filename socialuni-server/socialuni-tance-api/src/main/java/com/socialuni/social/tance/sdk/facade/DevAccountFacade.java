@@ -2,7 +2,6 @@ package com.socialuni.social.tance.sdk.facade;
 
 import com.socialuni.social.common.api.constant.GenderType;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import com.socialuni.social.common.api.model.SocialuniAppConfigBO;
 import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.api.DevAccountProviderInterface;
@@ -100,6 +99,14 @@ public class DevAccountFacade {
 
         Integer devId = socialuniUnionIdDo.getFromDevId();
         return devId;
+    }
+
+    public static Integer getTestDevIdAllNull() {
+        DevAccountModel devAccountModel = devAccountApi.findOneByPhoneNumOrderByIdAsc(SocialuniSystemConst.testUserPhoneNum);
+        if (devAccountModel == null) {
+            return null;
+        }
+        return devAccountModel.getId();
     }
 
     public static String getDevPhoneNumNotNull() {
@@ -215,7 +222,7 @@ public class DevAccountFacade {
 
     //为自己向自己推送
     public static boolean pusherIsSelfServer() {
-        return DevAccountFacade.getDevIdNotNull() == AdminAppConfigConst.testDevId;
+        return DevAccountFacade.getDevIdNotNull() == AdminAppConfigConst.devId;
     }
 
     //非中心和非自己向中心推送

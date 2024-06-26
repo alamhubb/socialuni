@@ -23,6 +23,7 @@ public interface TalkMapper {
 
     @Cacheable(cacheNames = CommonRedisKey.queryTalkIdsByTalkCondition, key = "#status+'-'+#adCode+'-'+#talkVisibleGender+'-'+#mineUserGender+'-'+#devId+'-'+#disableUnderageContent+'-'+#disableContentHasContactInfo+'-'+#disableContentHasQrCode")
     List<Integer> queryTalkIdsByTalkCondition(
+            @Param("testDevId") Integer testDevId,
             @Param("status") String status,
             @Param("adCode") String adCode,
             @Param("talkVisibleGender") String talkVisibleGender,

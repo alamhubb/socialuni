@@ -24,6 +24,7 @@ import com.socialuni.social.community.sdk.repository.TalkImgRepository;
 import com.socialuni.social.community.sdk.repository.TalkTagRepository;
 import com.socialuni.social.tag.util.SocialuniCircleDOUtil;
 import com.socialuni.social.community.sdk.dao.SocialuniTalkDORedis;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.user.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.social.community.sdk.logic.factory.TalkImgDOFactory;
 import com.socialuni.social.community.sdk.logic.manage.talk.SocialTalkCreateManage;
@@ -101,8 +102,10 @@ public class SocialuniPostTalkDomain {
 
         //系统管理员不校验相关内容
         if (!UserType.system.equals(mineUser.getType())) {
-            //不为开发环境，则校验内容
-            if (!tagNames.contains(SocialuniConst.devEnvTagName)) {
+            //不为开发环境，则校验内容，根据标签校验，还是根据开发环境的开发者id校验呢，为测试环境不校验手机号
+            Integer devId = DevAccountFacade.getDevIdNotNull();
+            Integer testDevId = DevAccountFacade.getTestDevIdAllNull();
+            if (!tagNames.contains(SocialuniConst.devEnvTagName) || !devId.equals(testDevId)) {
                 //校验用户
                 SocialuniUserCheck.checkUserBindPhoneNumAndStatusEnable();
             }

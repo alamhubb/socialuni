@@ -152,8 +152,13 @@ public class TalkQueryStore {
         //需要连接用户表查询，后面不需要重复筛选，因为已经基础过滤出来了这些值，后面与合并逻辑，所以不需要在过滤
         //筛选发表用户条件
         List<Integer> userTalkUnionIds = talkMapper.queryTalkIdsByAndUser(talkUserGender, queryBO.getMinAge(), queryBO.getMaxAge(), ContentStatus.enable, appConfig.getDisableUnderageContent());
+        //测试环境devId
+
+        Integer testDevId = DevAccountFacade.getTestDevIdAllNull();
+
         //筛选动态
         List<Integer> talkUnionIds = talkMapper.queryTalkIdsByTalkCondition(
+                testDevId,
                 ContentStatus.enable, queryBO.getAdCode(),
                 queryBO.getTalkVisibleGender(), mineUserGender, null,
                 disableUnderageContent,

@@ -5,7 +5,7 @@
     <nav-bar v-else/>
     <div class="row-center flex-1 overflow-hidden">
       <!--      <nav-menu class="w200 flex-none"/>-->
-      <div class="flex-1 pd-20 md:pd-30 overflow-y-auto max-w-900">
+      <div class="flex-1 pd-20 pd-30 overflow-y-auto" style="max-width: 900px">
         <transition name="fade-transform" mode="out-in">
           <router-view :key="$route.path"/>
         </transition>

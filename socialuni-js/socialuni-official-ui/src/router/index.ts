@@ -84,7 +84,7 @@ export const constantRouters: RouteRecordRaw[] = [
             }
         ]
     },
-    /*{
+    {
         path: '/guide',
         component: Layout,
         name: 'guide',
@@ -127,6 +127,9 @@ export const constantRouters: RouteRecordRaw[] = [
             }
         ]
     },
+    /*
+
+
     {
         path: '/dataFlow',
         component: Layout,

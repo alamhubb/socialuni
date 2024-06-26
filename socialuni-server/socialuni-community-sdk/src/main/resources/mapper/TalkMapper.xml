@@ -83,6 +83,9 @@
         <if test="adCode!=null">
             and t.ad_code like concat(#{adCode}, '%')
         </if>
+        <if test="testDevId!=devId">
+            and t.dev_id != #{testDevId}
+        </if>
         <choose>
             <!--    默认查全网可见的-->
             <!--    如果应用id不为空，则也差应用自己的-->
