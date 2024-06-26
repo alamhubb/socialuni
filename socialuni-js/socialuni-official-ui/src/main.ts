@@ -8,7 +8,6 @@ import JsonViewer from "vue3-json-viewer";
 import "vue3-json-viewer/dist/index.css";
 import '@mdi/font/css/materialdesignicons.min.css';
 import 'github-markdown-css/github-markdown.css'
-import 'uno.css'
 import Socialuni from "socialuni/src";
 import DateUtil from "qing-util/src/util/DateUtil.ts";
 import SocialuniUiH5 from "socialuni-ui-h5/src";
