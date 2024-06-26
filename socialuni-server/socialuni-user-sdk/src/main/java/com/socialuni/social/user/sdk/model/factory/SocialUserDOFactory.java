@@ -82,11 +82,19 @@ public class SocialUserDOFactory {
     }
 
     public static SocialuniUserDo newUserByPhoneLogin() {
+        return newUserByNickname(GenerateNicknameUtil.getGirlName());
+    }
+
+    public static SocialuniUserDo newUserByNickname(String nickname) {
+        if (StringUtils.isEmpty(nickname)) {
+            nickname = GenerateNicknameUtil.getGirlName();
+        }
+        nickname = StringUtils.substring(nickname, 0, 6);
         Integer userUnionId = SocialuniUnionIdFacede.createUserUnionId();
         SocialuniUserDo user = new SocialuniUserDo(userUnionId);
         user.setUserId(userUnionId);
         user.setUnionId(userUnionId);
-        user.setNickname(GenerateNicknameUtil.getGirlName());
+        user.setNickname(nickname);
         user.setAvatar(SocialuniGenerateAvatarUtil.getGirlAvatar());
         user.setGender(GenderType.girl);
         user.setContentType(SocialuniContentType.user);

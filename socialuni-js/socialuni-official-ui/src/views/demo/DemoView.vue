@@ -182,6 +182,10 @@ import request from "@/plugins/request";
 import QingAppUtil from "qing-compat-js/src/util/QingAppUtil.ts";
 import ObjectUtil from "qing-util/src/util/ObjectUtil.ts";
 import SocialuniTokenUtil from "socialuni-user-sdk/src/util/SocialuniTokenUtil.ts";
+import SocialuniOfficialAPI from "@/api/SocialuniOfficialAPI.ts";
+import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule.ts";
+import SocialLoginRO from "socialuni-api-base/src/model/social/SocialLoginRO.ts";
+import SocialuniUserRO from "socialuni-api-base/src/model/user/SocialuniUserRO.ts";
 
 const userName = ref('')
 
@@ -200,8 +204,8 @@ const userJson = computed(() => {
 })
 const token = SocialuniTokenUtil.get()
 if (token) {
-  request.get('/getMineUser').then((res) => {
-    UserStore.setUser(res.data)
+  SocialuniOfficialAPI.getMineUserAPI().then(res => {
+    socialuniUserModule.setUser(res.data)
   })
 }
 
@@ -209,10 +213,9 @@ async function userLogin() {
   if (!userName.value) {
     QingAppUtil.ToastUtil.throwError('请输入用户名')
   }
-  const res: any = await request.get('/login', {params: {name: userName.value}})
-  const loginRO: { user: any, token: string } = res.data
-  UserStore.setUser(loginRO.user)
-  SocialuniTokenUtil.set(loginRO.token)
+  const res: SocialLoginRO<SocialuniUserRO> = await SocialuniOfficialAPI.loginAPI(userName.value)
+  socialuniUserModule.setUserAndToken(res.data)
+
   loginAPIActive.value = 2
   QingAppUtil.ToastUtil.success('登录成功')
   userName.value = ''

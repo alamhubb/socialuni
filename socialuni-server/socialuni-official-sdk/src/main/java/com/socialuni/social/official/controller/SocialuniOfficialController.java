@@ -21,9 +21,14 @@ import com.socialuni.social.community.sdk.model.RO.talk.SocialuniCommentRO;
 import com.socialuni.social.community.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.social.common.api.constant.GenderType;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniTokenDO;
+import com.socialuni.social.user.sdk.logic.domain.SocialuniLoginDomain;
+import com.socialuni.social.user.sdk.logic.manage.SocialUserManage;
+import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -51,27 +56,25 @@ public class SocialuniOfficialController {
     TestTokenRepository testTokenRepository;
     @Resource
     TestUserService testUserService;
+    @Resource
+    SocialUserManage socialUserManage;
+    @Resource
+    SocialuniLoginDomain socialuniLoginDomain;
 
-    @GetMapping("login")
-    public ResultRO<Map<String, Object>> login(String name) {
+
+    @PostMapping("login")
+    public ResultRO<SocialLoginRO<SocialuniUserRO>> login(String name) {
         if (StringUtils.isEmpty(name)) {
             return null;
         }
-        UserDO userDO = testUserRepository.save(new UserDO(name));
 
-        TokenDO tokenDO = new TokenDO(userDO.getId(), SocialTokenFacade.generateTokenByUserId(userDO.getId()));
+        SocialuniUserDo socialuniUserDo = socialUserManage.createUserByNickname(name);
 
-        tokenDO = testTokenRepository.save(tokenDO);
+        SocialLoginRO<SocialuniUserRO> socialLoginRO = socialuniLoginDomain.getSocialLoginROByMineUser(socialuniUserDo);
 
-        TokenSocialuniTokenDO socialuniTokenDO = testUserService.getSocialuniToken(tokenDO.getToken());
+//        TokenSocialuniTokenDO socialuniTokenDO = testUserService.getSocialuniToken(tokenDO.getToken());
 
-        SocialuniUserDo socialUserDO = SocialuniUserUtil.getUserByToken(socialuniTokenDO.getSocialuniToken());
-        SocialuniContentUserRO socialContentUserRO = SocialuniContentUserROFactory.newContentUserRO(socialUserDO, socialUserDO);
-
-        Map<String, Object> map = new HashMap<>();
-        map.put("user", socialContentUserRO);
-        map.put("token", tokenDO.getToken());
-        return ResultRO.success(map);
+        return ResultRO.success(socialLoginRO);
     }
 
     @GetMapping("getMineUser")

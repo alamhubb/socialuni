@@ -52,6 +52,12 @@ public class SocialUserManage {
         return user;
     }
 
+    public SocialuniUserDo createUserByNickname(String nickname) {
+        SocialuniUserDo user = SocialUserDOFactory.newUserByNickname(nickname);
+        user = userApi.savePut(user);
+        return user;
+    }
+
     public SocialuniUserDo createSysUserByPhoneLogin() {
         SocialuniUserDo user = SocialUserDOFactory.newUserByPhoneLogin();
         user.setRoleId(SocialuniSysRoleId.sys);
