@@ -1,18 +1,18 @@
-<script setup lang="ts">
-import { RouterView } from 'vue-router'
-
-import request from "@/plugins/request";
-
-request.get('statistics')
-</script>
-
 <template>
-  <suspense>
-    <template #default>
-      <RouterView />
-    </template>
-    <template #fallback>
-      <p>Loading...</p>
-    </template>
-  </suspense>
+  <RouterView/>
 </template>
+
+<script lang="ts">
+import {Component, Vue, toNative} from 'vue-facing-decorator';
+import socialuniAppRequest from "socialuni-app-api/src/socialuniAppRequest.ts";
+
+@toNative
+@Component({
+  components: {}
+})
+export default class App extends Vue {
+  created() {
+    socialuniAppRequest.get('socialuni/official/statistics')
+  }
+}
+</script>

@@ -41,11 +41,8 @@ import {
   StarFilled
 } from '@element-plus/icons-vue'
 import UserStore from "@/store/UserStore";
-import AlertUtil from "@/utils/AlertUtil";
-import TokenUtil from "@/utils/TokenUtil";
-import ToastUtil from "@/utils/ToastUtil";
 import {computed} from "vue";
-import {qingchiRouters} from "@/router/index.ts";
+import SocialuniTokenUtil from "socialuni-user-sdk/src/util/SocialuniTokenUtil";
 
 const user = computed(() => {
   return UserStore.user
@@ -53,7 +50,7 @@ const user = computed(() => {
 async function logout() {
   await QingAppUtil.AlertUtil.confirm('是否确认退出')
   UserStore.clearUser()
-  TokenUtil.remove()
+  SocialuniTokenUtil.remove()
   QingAppUtil.ToastUtil.success('退出成功')
 }
 </script>

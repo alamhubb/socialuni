@@ -1,11 +1,11 @@
 import axios from 'axios'
-import TokenUtil from "@/utils/TokenUtil";
 import ErrorCode from "@/constant/ErrorCode";
-import ToastUtil from "@/utils/ToastUtil";
-import MsgUtil from "@/utils/MsgUtil";
 import AppConst from "@/constant/AppConst";
 import UserStore from "@/store/UserStore";
 import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
+import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil.ts";
+import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil.ts";
+import SocialuniTokenUtil from "socialuni-user-sdk/src/util/SocialuniTokenUtil.ts";
 // create an axios instance
 
 const request = axios.create({
@@ -20,7 +20,7 @@ const request = axios.create({
 // request interceptor
 request.interceptors.request.use(
     config => {
-        const token = TokenUtil.get()
+        const token = SocialuniTokenUtil.get()
         if (token) {
             config.headers.token = token
         } else {
@@ -66,7 +66,7 @@ request.interceptors.response.use(
                         if (result && result.errorMsg) {
                             QingAppUtil.ToastUtil.error(result.errorMsg)
                         } else {
-                            MsgUtil.unLoginMessage()
+                            UserMsgUtil.unLoginMessage()
                         }
                         // PageUtil.toHome()
                         break

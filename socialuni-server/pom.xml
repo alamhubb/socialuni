@@ -31,6 +31,7 @@
         <module>socialuni-deploy-sdk</module>
         <module>socialuni-peiwan-sdk</module>
         <module>socialuni-common-sdk</module>
+        <module>socialuni-official-sdk</module>
         <module>socialuni-tance-uni</module>
         <module>socialuni-tance-dev</module>
         <module>socialuni-tance-api</module>
@@ -154,6 +155,11 @@
             <dependency>
                 <groupId>com.socialuni.social</groupId>
                 <artifactId>socialuni-common-sdk</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni.social</groupId>
+                <artifactId>socialuni-official-sdk</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>

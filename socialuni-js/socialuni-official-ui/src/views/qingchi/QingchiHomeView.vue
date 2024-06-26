@@ -88,7 +88,7 @@
     </div>
     <div class="flex-none text-tip body-2 flex-col">
       <div class="row-center row-wrap">
-        <div class="text-black">@2019-2022 清池app</div>
+        <div class="text-black">©2019-2022 清池app</div>
         <div class="mx-1">|</div>
         <div>清池科技滦州市有限公司</div>
         <div class="mx-1">|</div>

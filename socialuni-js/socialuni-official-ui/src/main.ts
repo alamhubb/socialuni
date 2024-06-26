@@ -9,11 +9,32 @@ import "vue3-json-viewer/dist/index.css";
 import '@mdi/font/css/materialdesignicons.min.css';
 import 'github-markdown-css/github-markdown.css'
 import 'uno.css'
+import Socialuni from "socialuni/src";
+import DateUtil from "qing-util/src/util/DateUtil.ts";
+import SocialuniUiH5 from "socialuni-ui-h5/src";
+import SocialuniAppViewH5 from "socialuni-app-view-h5/src";
+import SocialuniUser from "socialuni-user-sdk/src";
+import SocialuniCommunityH5 from "socialuni-community-view-h5/src";
 
-const app = createApp(App)
+export const getImageUrl = (path: string): string => {
+    return new URL(`./assets/${path}`, import.meta.url).href
+}
 
-app.use(router)
-app.use(ElementPlus)
-app.use(JsonViewer);
+(async () => {
+    const app = createApp(App);
+    app.use(router)
+    app.use(Socialuni, router)
 
-app.mount('#app')
+    app.config.globalProperties.$DateUtil = DateUtil;
+    app.config.globalProperties.$getImageUrl = getImageUrl;
+
+    app.use(SocialuniUiH5)
+    app.use(SocialuniAppViewH5)
+    app.use(SocialuniUser)
+    app.use(SocialuniCommunityH5)
+
+    app.use(JsonViewer);
+
+    app.mount('#app')
+})();
+

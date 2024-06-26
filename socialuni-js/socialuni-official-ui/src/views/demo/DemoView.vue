@@ -178,10 +178,10 @@ import {
 import {computed, ref} from "vue";
 import AppConst from "@/constant/AppConst";
 import UserStore from "@/store/UserStore";
-import ToastUtil from "@/utils/ToastUtil";
 import request from "@/plugins/request";
-import TokenUtil from "@/utils/TokenUtil";
-import ObjectUtil from "@/utils/ObjectUtil";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil.ts";
+import ObjectUtil from "qing-util/src/util/ObjectUtil.ts";
+import SocialuniTokenUtil from "socialuni-user-sdk/src/util/SocialuniTokenUtil.ts";
 
 const userName = ref('')
 
@@ -198,7 +198,7 @@ const talksLoading = ref(false)
 const userJson = computed(() => {
   return ObjectUtil.toJson(UserStore.user)
 })
-const token = TokenUtil.get()
+const token = SocialuniTokenUtil.get()
 if (token) {
   request.get('/getMineUser').then((res) => {
     UserStore.setUser(res.data)
@@ -212,7 +212,7 @@ async function userLogin() {
   const res: any = await request.get('/login', {params: {name: userName.value}})
   const loginRO: { user: any, token: string } = res.data
   UserStore.setUser(loginRO.user)
-  TokenUtil.set(loginRO.token)
+  SocialuniTokenUtil.set(loginRO.token)
   loginAPIActive.value = 2
   QingAppUtil.ToastUtil.success('登录成功')
   userName.value = ''

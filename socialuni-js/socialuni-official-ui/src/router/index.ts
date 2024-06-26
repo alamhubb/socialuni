@@ -84,7 +84,7 @@ export const constantRouters: RouteRecordRaw[] = [
             }
         ]
     },
-    {
+    /*{
         path: '/guide',
         component: Layout,
         name: 'guide',
@@ -147,7 +147,7 @@ export const constantRouters: RouteRecordRaw[] = [
         meta: {title: '清池app'},
         redirect: '/qingchi',
         children: qingchiRouters
-    }
+    }*/
 ]
 
 const router = createRouter({
