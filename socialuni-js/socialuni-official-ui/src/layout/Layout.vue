@@ -1,6 +1,6 @@
 <template>
   <!--  <div :class="classObj" class="app-wrapper">-->
-  <div class="h100% flex-col color-main">
+  <div class="h100p flex-col color-main">
     <qingchi-nav-bar v-if="route.path.includes('qingchi')"></qingchi-nav-bar>
     <nav-bar v-else/>
     <div class="row-center flex-1 overflow-hidden">
