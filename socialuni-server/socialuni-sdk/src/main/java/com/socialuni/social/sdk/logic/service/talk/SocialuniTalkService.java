@@ -75,6 +75,7 @@ public class SocialuniTalkService {
         queryQO.setMinAge(SocialuniSystemConst.homeTalkQueryMinAge);
         queryQO.setMaxAge(SocialuniSystemConst.homeTalkQueryMaxAge);
         queryQO.setGender(DevAccountFacade.getAppGenderType());
+        queryQO.setFirstLoad(true);
         return this.queryTalks(queryQO);
     }
 

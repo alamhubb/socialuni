@@ -165,7 +165,9 @@
   </div>
 </template>
 
-<script setup lang="ts">
+
+<script lang="ts">
+import {Component, Vue, toNative} from 'vue-facing-decorator';
 import {
   Check,
   Delete,
@@ -175,100 +177,108 @@ import {
   Star,
   StarFilled
 } from '@element-plus/icons-vue'
-import {computed, ref} from "vue";
-import AppConst from "@/constant/AppConst";
-import UserStore from "@/store/UserStore";
 import request from "@/plugins/request";
 import QingAppUtil from "qing-compat-js/src/util/QingAppUtil.ts";
-import ObjectUtil from "qing-util/src/util/ObjectUtil.ts";
 import SocialuniTokenUtil from "socialuni-user-sdk/src/util/SocialuniTokenUtil.ts";
 import SocialuniOfficialAPI from "@/api/SocialuniOfficialAPI.ts";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule.ts";
 import SocialLoginRO from "socialuni-api-base/src/model/social/SocialLoginRO.ts";
 import SocialuniUserRO from "socialuni-api-base/src/model/user/SocialuniUserRO.ts";
+import QButton from "qingjs-ui/src/components/QButton.vue";
+import AppConst from "@/constant/AppConst.ts";
 
-const userName = ref('')
-
-const user = computed(() => {
-  return UserStore.user
+@toNative
+@Component({
+  components: {QButton}
 })
+export default class DemoView extends Vue {
+  userName = ''
+  talkContent = ''
+  commentContent = ''
+  activeName = 'talk'
+  talkActiveName = 'preview'
+  loginAPIActive = 1
+  talksLoading = false
+  token = SocialuniTokenUtil.get()
 
-const talkContent = ref('')
-const commentContent = ref('')
-const activeName = ref('talk')
-const talkActiveName = ref('preview')
-const loginAPIActive = ref(1)
-const talksLoading = ref(false)
-const userJson = computed(() => {
-  return ObjectUtil.toJson(UserStore.user)
-})
-const token = SocialuniTokenUtil.get()
-if (token) {
-  SocialuniOfficialAPI.getMineUserAPI().then(res => {
-    socialuniUserModule.setUser(res.data)
-  })
-}
 
-async function userLogin() {
-  if (!userName.value) {
-    QingAppUtil.ToastUtil.throwError('请输入用户名')
+  get AppConst() {
+    return AppConst
   }
-  const res: SocialLoginRO<SocialuniUserRO> = await SocialuniOfficialAPI.loginAPI(userName.value)
-  socialuniUserModule.setUserAndToken(res.data)
 
-  loginAPIActive.value = 2
-  QingAppUtil.ToastUtil.success('登录成功')
-  userName.value = ''
-  queryTalks()
-}
+  get user() {
+    return socialuniUserModule.mineUser
+  }
+
+  created() {
+    const token = SocialuniTokenUtil.get()
+    if (token) {
+      SocialuniOfficialAPI.getMineUserAPI().then(res => {
+        socialuniUserModule.setUser(res.data)
+      })
+    }
+  }
+
+  async userLogin() {
+    if (!this.userName) {
+      QingAppUtil.ToastUtil.throwError('请输入用户名')
+    }
+    const res: SocialLoginRO<SocialuniUserRO> = await SocialuniOfficialAPI.loginAPI(this.userName)
+    socialuniUserModule.setUserAndToken(res.data)
+
+    this.loginAPIActive = 2
+    QingAppUtil.ToastUtil.success('登录成功')
+    this.userName = ''
+    this.queryTalks()
+  }
 
 //第一块用户信息，登录不登录各一种形式
 //第二块发表动态
 //三块展示
 
-const talks: any = ref([])
-queryTalks()
+  talks: any = []
 
-async function queryTalks() {
-  talksLoading.value = true
-  const res: any = await request.get('/queryTalks') as any
-  const talkList: any[] = res.data
-  talks.value = talkList
-  talksLoading.value = false
+
+  async queryTalks() {
+    this.talksLoading = true
+    const res: any = await SocialuniOfficialAPI.queryTalksAPI()
+    const talkList: any[] = res.data
+    this.talks = talkList
+    this.talksLoading = false
+  }
+
+  async postTalk() {
+    if (!this.user) {
+      QingAppUtil.ToastUtil.throwError('请进行登录')
+    }
+    if (!this.talkContent) {
+      QingAppUtil.ToastUtil.throwError('请填写动态内容')
+    }
+    await SocialuniOfficialAPI.postTalkAPI(this.talkContent)
+    QingAppUtil.ToastUtil.success('发布动态成功')
+    this.talkContent = ''
+    await this.queryTalks()
+  }
+
+  async postComment() {
+    if (!this.user) {
+      QingAppUtil.ToastUtil.throwError('请进行登录')
+    }
+    if (!this.talks.length) {
+      QingAppUtil.ToastUtil.throwError('请先发布动态再进行评论')
+    }
+    if (!this.commentContent) {
+      QingAppUtil.ToastUtil.throwError('请填写评论内容')
+    }
+    await SocialuniOfficialAPI.postCommentAPI(this.talks[0].id, this.commentContent)
+    QingAppUtil.ToastUtil.success('评论成功')
+    this.commentContent = ''
+    await this.queryTalks()
+  }
+
 }
-
-async function postTalk() {
-  if (!user.value) {
-    QingAppUtil.ToastUtil.throwError('请进行登录')
-  }
-  if (!talkContent.value) {
-    QingAppUtil.ToastUtil.throwError('请填写动态内容')
-  }
-  await request.get('/postTalk', {params: {content: talkContent.value}})
-  QingAppUtil.ToastUtil.success('发布动态成功')
-  talkContent.value = ''
-  await queryTalks()
-}
-
-async function postComment() {
-  if (!user.value) {
-    QingAppUtil.ToastUtil.throwError('请进行登录')
-  }
-  if (!talks.value.length) {
-    QingAppUtil.ToastUtil.throwError('请先发布动态再进行评论')
-  }
-  if (!commentContent.value) {
-    QingAppUtil.ToastUtil.throwError('请填写评论内容')
-  }
-  await request.get('/postComment', {params: {talkId: talks.value[0].id, content: commentContent.value}})
-  QingAppUtil.ToastUtil.success('评论成功')
-  commentContent.value = ''
-  await queryTalks()
-}
-
-//如果未登录，可以登录不可以退出
-
 </script>
+
 
 <style lang="scss">
 .jv-container .jv-code {

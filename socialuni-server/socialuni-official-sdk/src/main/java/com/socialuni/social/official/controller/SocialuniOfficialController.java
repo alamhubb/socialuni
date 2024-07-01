@@ -27,10 +27,7 @@ import com.socialuni.social.user.sdk.logic.manage.SocialUserManage;
 import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -62,7 +59,7 @@ public class SocialuniOfficialController {
     SocialuniLoginDomain socialuniLoginDomain;
 
 
-    @PostMapping("login")
+    @GetMapping("login")
     public ResultRO<SocialLoginRO<SocialuniUserRO>> login(String name) {
         if (StringUtils.isEmpty(name)) {
             return null;
