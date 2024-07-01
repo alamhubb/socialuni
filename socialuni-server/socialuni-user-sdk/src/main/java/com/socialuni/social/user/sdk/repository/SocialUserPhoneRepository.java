@@ -24,10 +24,10 @@ public interface SocialUserPhoneRepository extends JpaRepository<SocialUserPhone
             evict = {@CacheEvict(cacheNames = CommonRedisKey.userById, key = "#phoneDO.userId")},
             put = {
                     @CachePut(cacheNames = CommonRedisKey.findUserPhoneByUserId, key = "#phoneDO.userId"),
-                    @CachePut(cacheNames = CommonRedisKey.findByPhoneNumAndDevId, key = "#phoneDO.devId+'-'+phoneDO.phoneNum")
+                    @CachePut(cacheNames = CommonRedisKey.findByPhoneNumAndDevId, key = "#phoneDO.devId + '-' + phoneDO.phoneNum")
             }
     )
     default SocialUserPhoneDo savePut(SocialUserPhoneDo phoneDO){
-        return this.save(BeanUtil.toBean(phoneDO,SocialUserPhoneDo.class));
+        return this.save(phoneDO);
     }
 }

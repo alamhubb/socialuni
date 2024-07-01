@@ -59,6 +59,16 @@ public interface ChatUserRepository extends JpaRepository<SocialuniChatUserDO, I
         return this.save(socialuniChatUserDO);
     }
 
+
+    @Caching(
+            evict = {
+                    @CacheEvict(cacheNames = ChatUserRedisKey.findChatUserIdsByChatIdAndStatus, key="#socialuniChatUserDOs[0].chatId"),
+            }
+    )
+    default List<SocialuniChatUserDO> saveAllPut(List<SocialuniChatUserDO> socialuniChatUserDOs) {
+        return this.saveAll(socialuniChatUserDOs);
+    }
+
     @Cacheable(cacheNames = ChatUserRedisKey.findFirstChatUserById, key = "#id")
     SocialuniChatUserDO findFirstById(Integer id);
 

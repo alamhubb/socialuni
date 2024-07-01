@@ -16,6 +16,7 @@ import com.socialuni.social.sdk.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.sdk.im.dao.DO.message.SocialuniMessageDO;
 import com.socialuni.social.sdk.im.dao.DO.message.SocialuniMessageReceiveDO;
+import com.socialuni.social.sdk.im.dao.redis.SocialuniChatUserRedis;
 import com.socialuni.social.sdk.im.dao.repository.ChatUserRepository;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniChatRepository;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniMessageReceiveRepository;
@@ -41,6 +42,7 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 @Slf4j
@@ -52,6 +54,8 @@ public class SocialuniMessageEntity {
     private SocialuniMessageRepository messageRepository;
     @Resource
     private ChatUserRepository chatUserRepository;
+    @Resource
+    private SocialuniChatUserRedis socialuniChatUserRedis;
     @Resource
     private SocialuniMessageReceiveRepository messageReceiveRepository;
     @Resource
@@ -195,7 +199,14 @@ public class SocialuniMessageEntity {
 //            chat.setLastContent(content);
         chatRepository.savePut(chat);
 
-        this.updateChatUsers(chatId, sendUser);
+        CompletableFuture.supplyAsync(() -> {
+            this.updateChatUsers(chatId, sendUser);
+            return null;
+        }).exceptionally(e -> {
+            e.printStackTrace();
+            log.info(e.getMessage());
+            return null;
+        });
 
         //保存message
 
@@ -218,6 +229,8 @@ public class SocialuniMessageEntity {
     @Async
     public void updateChatUsers(Integer chatId, SocialuniUserDo sendUser) {
         List<Integer> chatUserIds = chatUserRepository.findChatUserIdsByChatIdAndStatus(chatId, ChatUserStatus.enable);
+
+        List<SocialuniChatUserDO> socialuniChatUserDOS = new ArrayList<>();
         //发送消息
         for (Integer chatUserIdItem : chatUserIds) {
             SocialuniChatUserDO chatSocialuniUserDo = chatUserRepository.findFirstById(chatUserIdItem);
@@ -249,9 +262,9 @@ public class SocialuniMessageEntity {
                 //自己的话不发送通知，自己的话也要构建消息，要不看不见，因为读是读这个表
 //                mineMessageUser = messageReceiveRepository.save(messageReceiveDO);
             }
-            chatUserRepository.savePut(chatSocialuniUserDo);
-            log.info(String.valueOf(new Date().getTime()));
+            socialuniChatUserDOS.add(chatSocialuniUserDo);
         }
+        socialuniChatUserRedis.saveAllPut(socialuniChatUserDOS);
     }
 
     @Resource
