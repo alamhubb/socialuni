@@ -127,9 +127,6 @@ export const constantRouters: RouteRecordRaw[] = [
             }
         ]
     },
-    /*
-
-
     {
         path: '/dataFlow',
         component: Layout,
@@ -144,6 +141,17 @@ export const constantRouters: RouteRecordRaw[] = [
             }
         ]
     },
+    {
+        path: '/qingchi',
+        component: Layout,
+        meta: {title: '清池app'},
+        redirect: '/qingchi',
+        children: qingchiRouters
+    }
+    /*
+
+
+
     {
         path: '/qingchi',
         component: Layout,
