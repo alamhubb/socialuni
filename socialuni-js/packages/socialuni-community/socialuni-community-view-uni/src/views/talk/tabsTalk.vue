@@ -201,7 +201,7 @@ export default class TabsTalk extends Vue {
 
 
   // 用户登录后重新查询
-  @Watch('user')
+  @Watch('user', {immediate: false})
   watchUserChange() {
     //系统不为首次加载
     //必须有this.talkTabObj 且 不为首次加载才行
@@ -294,16 +294,25 @@ export default class TabsTalk extends Vue {
   private manualPulldownRefresh() {
     console.log('chufale手动更新')
     this.tabScrollToTop()
-    this.clickOnreachBottom()
+    this.refreshTalks()
   }
 
+  //点击不需要更新查询时间，查不出来就查不出来，万一是自己手动暂停了查询呢，而且如果重设时间会导致数据重复问题
+  async refreshTalks() {
+    //停止查询方法
+    if (this.curTabQueryUtil) {
+      const talkQO = TalkQOFactory.getTalkQueryQO(this.curTalkTabObj.name, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, socialuniTagModule.selectTagNames, socialCircleModule.circleName)
+      await this.curTabQueryUtil.initQuery(talkQO)
+      this.$refs.pullRefresh.endPulldownRefresh()
+    }
+  }
 
   //点击不需要更新查询时间，查不出来就查不出来，万一是自己手动暂停了查询呢，而且如果重设时间会导致数据重复问题
   async clickOnreachBottom() {
     //停止查询方法
     if (this.curTabQueryUtil) {
       const talkQO = TalkQOFactory.getTalkQueryQO(this.curTalkTabObj.name, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, socialuniTagModule.selectTagNames, socialCircleModule.circleName)
-      await this.curTabQueryUtil.initQuery(talkQO)
+      await this.curTabQueryUtil.forceLoadNextPage(talkQO)
       this.$refs.pullRefresh.endPulldownRefresh()
     }
   }

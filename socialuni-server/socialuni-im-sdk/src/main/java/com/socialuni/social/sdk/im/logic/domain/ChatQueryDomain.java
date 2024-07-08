@@ -63,14 +63,14 @@ public class ChatQueryDomain {
         //未登录的情况只插叙你官方的chats
         List<Integer> chatUserIds = new ArrayList<>();
 
-        if (UserType.system.equals(user.getType())) {
-            List<Integer> ids = socialuniUserRepository.findUserIdsByType(UserType.operation);
-            for (Integer id : ids) {
-                List<Integer> temChatUserIds = chatUserRepository.findByUserIdAndStatusOrderByUpdateTimeDesc(id, ChatUserStatus.enable);
-
-                chatUserIds.addAll(temChatUserIds);
-            }
-        }
+//        if (UserType.system.equals(user.getType())) {
+//            List<Integer> ids = socialuniUserRepository.findUserIdsByType(UserType.operation);
+//            for (Integer id : ids) {
+//                List<Integer> temChatUserIds = chatUserRepository.findByUserIdAndStatusOrderByUpdateTimeDesc(id, ChatUserStatus.enable);
+//
+//                chatUserIds.addAll(temChatUserIds);
+//            }
+//        }
 
         List<Integer> mineChatUsers = chatUserRepository.findByUserIdAndStatusOrderByUpdateTimeDesc(user.getUserId(), ChatUserStatus.enable);
 

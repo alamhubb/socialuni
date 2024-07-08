@@ -200,7 +200,7 @@ public class SocialuniMessageEntity {
         chatRepository.savePut(chat);
 
         CompletableFuture.supplyAsync(() -> {
-            this.updateChatUsers(chatId, sendUser);
+            this.updateChatUsers(chatId, sendUser, message);
             return null;
         }).exceptionally(e -> {
             e.printStackTrace();
@@ -227,16 +227,18 @@ public class SocialuniMessageEntity {
     }
 
     @Async
-    public void updateChatUsers(Integer chatId, SocialuniUserDo sendUser) {
+    public void updateChatUsers(Integer chatId, SocialuniUserDo sendUser, SocialuniMessageDO message) {
         List<Integer> chatUserIds = chatUserRepository.findChatUserIdsByChatIdAndStatus(chatId, ChatUserStatus.enable);
+
+        log.info(String.valueOf(new Date().getTime()));
 
         List<SocialuniChatUserDO> socialuniChatUserDOS = new ArrayList<>();
         //发送消息
         for (Integer chatUserIdItem : chatUserIds) {
             SocialuniChatUserDO chatSocialuniUserDo = chatUserRepository.findFirstById(chatUserIdItem);
 
-//                chatSocialuniUserDo.setLastContent(message.getContent());
-//            chatSocialuniUserDo.setUpdateTime(curDate);
+            chatSocialuniUserDo.setLastContent(message.getContent());
+            chatSocialuniUserDo.setUpdateTime(new Date());
 //            chatSocialuniUserDo.setLastContent(message.getContent());
             //如果为匹配chat，且为待匹配状态
                 /*if (ChatType.match.equals(chat.getType()) && CommonStatus.waitMatch.equals(chat.getMatchStatus())) {
@@ -259,12 +261,14 @@ public class SocialuniMessageEntity {
 //                notifyDO = notifyRepository.save(notifyDO);
 //                notifies.add(notifyDO);
             } else {
+//                chatSocialuniUserDo.setUpdateTime(new Date());
                 //自己的话不发送通知，自己的话也要构建消息，要不看不见，因为读是读这个表
 //                mineMessageUser = messageReceiveRepository.save(messageReceiveDO);
             }
             socialuniChatUserDOS.add(chatSocialuniUserDo);
         }
         socialuniChatUserRedis.saveAllPut(socialuniChatUserDOS);
+        log.info(String.valueOf(new Date().getTime()));
     }
 
     @Resource

@@ -19,8 +19,10 @@ import com.socialuni.social.music.sdk.dao.DO.SocialuniMusicRoomDO;
 import com.socialuni.social.music.sdk.model.QO.AgoraPlayMusicQO;
 import com.socialuni.social.music.sdk.model.QO.SocialuniPlayMusicQO;
 import com.socialuni.social.sdk.im.config.websocket.WebsocketServer;
+import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.sdk.im.enumeration.NotifyType;
 import com.socialuni.social.sdk.im.logic.check.SocialuniChatUserCheck;
+import com.socialuni.social.sdk.im.logic.foctory.SocialuniChatUserDOFactory;
 import com.socialuni.social.sdk.im.notify.NotifyVO;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
@@ -106,6 +108,11 @@ public class SocialuniMusicController {
 
     @GetMapping("queryMusicRoomUserInfo/{channel}")
     public ResultRO<SocialuniMusicRoomUserInfoRO> queryMusicRoomUserInfo(@PathVariable("channel") @Valid @NotBlank String channel) {
+
+        SocialuniChatUserDO socialuniChatUserDO = SocialuniChatUserDOFactory.getSingleChatUser(channel);
+        if (socialuniChatUserDO != null) {
+            return ResultRO.success();
+        }
         Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
         Integer chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(channel);
 

@@ -151,17 +151,18 @@ public class NotifyDomain {
             //未登录的时候也查询群聊里面的所有内容
             NotifyVO notifyVO = SocaluniNotifyROFactory.getNotifyROBySendMsg(notify, sendUser, messageReceiveDO, chatUserDO);
 
-            SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getUserNotNull(receiveUserId);
+//            SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getUserNotNull(receiveUserId);
 
-            if (UserType.operation.equals(socialuniUserDo.getType())) {
-                List<Integer> systemUserIds = SocialuniUserDOUtil.getUserIdsByType(UserType.system);
-                for (Integer systemUserId : systemUserIds) {
-                    WebsocketServer.sendMessage(systemUserId, notifyVO);
-                }
-            } else {
-                WebsocketServer.sendMessage(receiveUserId, notifyVO);
-            }
+//            if (UserType.operation.equals(socialuniUserDo.getType())) {
+//                List<Integer> systemUserIds = SocialuniUserDOUtil.getUserIdsByType(UserType.system);
+//                for (Integer systemUserId : systemUserIds) {
+//                    WebsocketServer.sendMessage(systemUserId, notifyVO);
+//                }
+//            } else {
+//                WebsocketServer.sendMessage(receiveUserId, notifyVO);
+//            }
 
+            WebsocketServer.sendMessage(receiveUserId, notifyVO);
 
                 /*try {
                     stringRedisTemplate.convertAndSend(receiveUserId.toString(), JsonUtil.objectMapper.writeValueAsString(notifyVO));

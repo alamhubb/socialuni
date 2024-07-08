@@ -137,8 +137,6 @@ public class ChatService {
         //创建 chatUser 的逻辑，点击进入页面，会话页加一条
         //发送消息，还有添加好友成功
 
-        Integer unionId = null;
-
         if (socialuniUnionIdModler == null) {
             SocialuniChatUserDO chatUserDO = getSocialuniChatUserDO(chatIdStr);
             ChatRO chatRO = SocialChatROFactory.getChatROByQueryChat(chatUserDO, true);
