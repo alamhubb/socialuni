@@ -1,19 +1,19 @@
 {
   "name": "socialuni-ui-h5",
-  "version": "0.1.17",
+  "version": "0.1.18",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "cos-js-sdk-v5": "^1.2.18",
-    "qing-compat-js": "^0.1.17",
-    "qingjs-ui-h5": "^0.1.17",
-    "qing-util": "^0.1.17",
-    "socialuni-app-api": "^0.1.17",
-    "socialuni-app-sdk": "^0.1.17",
-    "socialuni-constant": "^0.1.17",
-    "socialuni-ui": "^0.1.17",
+    "qing-compat-js": "^0.1.18",
+    "qing-util": "^0.1.18",
+    "qingjs-ui-h5": "^0.1.18",
+    "socialuni-app-api": "^0.1.18",
+    "socialuni-app-sdk": "^0.1.18",
+    "socialuni-constant": "^0.1.18",
+    "socialuni-ui": "^0.1.18",
     "vue-facing-decorator": "^3.0.2"
   },
   "devDependencies": {
@@ -23,5 +23,5 @@
   "author": "",
   "repository": "https://github.com/alamhubb/socialuni/tree/master/socialuni-js/packages/socialuni-ui-h5",
   "license": "ISC",
-  "gitHead": "48a347611019ae3c96ba7ff2fe486dd81f144d48"
+  "gitHead": "cb08c62d49700c3dace65ce5352cdef15da93928"
 }

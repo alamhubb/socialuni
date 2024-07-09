@@ -1,18 +1,18 @@
 {
   "name": "fast-webrtc",
-  "version": "0.1.17",
+  "version": "0.1.18",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "fast-socket": "^0.1.17",
-    "qing-util": "^0.1.17"
+    "fast-socket": "^0.1.18",
+    "qing-util": "^0.1.18"
   },
   "keywords": [],
   "author": "",
   "repository": "https://github.com/alamhubb/socialuni/tree/master/socialuni-js/packages/fast-webrtc",
   "license": "ISC",
-  "gitHead": "48a347611019ae3c96ba7ff2fe486dd81f144d48"
+  "gitHead": "cb08c62d49700c3dace65ce5352cdef15da93928"
 }

@@ -1,6 +1,6 @@
 {
   "name": "qing-compat-js-uni",
-  "version": "0.1.17",
+  "version": "0.1.18",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -8,10 +8,10 @@
   "dependencies": {
     "@dcloudio/types": "^3.0.17",
     "cos-js-sdk-v5": "^1.2.18",
-    "qing-util": "^0.1.17",
-    "socialuni-api-base": "^0.1.17",
-    "socialuni-app-api": "^0.1.17",
-    "socialuni-constant": "^0.1.17"
+    "qing-util": "^0.1.18",
+    "socialuni-api-base": "^0.1.18",
+    "socialuni-app-api": "^0.1.18",
+    "socialuni-constant": "^0.1.18"
   },
   "devDependencies": {
     "typescript": "^4.7.4",
@@ -20,5 +20,5 @@
   "author": "",
   "repository": "https://github.com/alamhubb/socialuni/tree/master/socialuni-js/packages/qing-compat-js-uni",
   "license": "ISC",
-  "gitHead": "48a347611019ae3c96ba7ff2fe486dd81f144d48"
+  "gitHead": "cb08c62d49700c3dace65ce5352cdef15da93928"
 }

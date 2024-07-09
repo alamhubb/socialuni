@@ -1,6 +1,6 @@
 {
   "name": "socialuni-user-sdk",
-  "version": "0.1.17",
+  "version": "0.1.18",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,19 +10,19 @@
     "element-plus": "^2.3.7",
     "jsencrypt": "^3.3.2",
     "mitt": "^3.0.0",
-    "qing-compat-js": "^0.1.17",
-    "qing-util": "^0.1.17",
-    "socialuni": "^0.1.17",
-    "socialuni-api-base": "^0.1.17",
-    "socialuni-app-api": "^0.1.17",
-    "socialuni-app-sdk": "^0.1.17",
-    "socialuni-constant": "^0.1.17",
-    "socialuni-user-api": "^0.1.17",
+    "qing-compat-js": "^0.1.18",
+    "qing-util": "^0.1.18",
+    "socialuni": "^0.1.18",
+    "socialuni-api-base": "^0.1.18",
+    "socialuni-app-api": "^0.1.18",
+    "socialuni-app-sdk": "^0.1.18",
+    "socialuni-constant": "^0.1.18",
+    "socialuni-user-api": "^0.1.18",
     "vue": "^3.3.2"
   },
   "keywords": [],
   "author": "",
   "repository": "https://github.com/alamhubb/socialuni/tree/master/socialuni-js/packages/socialuni-user-sdk",
   "license": "ISC",
-  "gitHead": "48a347611019ae3c96ba7ff2fe486dd81f144d48"
+  "gitHead": "cb08c62d49700c3dace65ce5352cdef15da93928"
 }
