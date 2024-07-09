@@ -217,6 +217,7 @@ export default class DemoView extends Vue {
         socialuniUserModule.setUser(res.data)
       })
     }
+    this.queryTalks()
   }
 
   async userLogin() {
