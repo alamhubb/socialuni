@@ -80,11 +80,11 @@
                              @delete-talk="deleteTalk"
                   />
                 </div>
-
                 <!-- 下拉刷新组件 -->
-                <div class="mt-xs">
+<!--                <div class="mt-xs">-->
+                <div class="mt-xs" @click="clickOnreachBottom">
                   <uni-load-more :status="tabQueryUtils[swiperIndex].loadMore"
-                                 @click="clickOnreachBottom"
+                                 @click.native="clickOnreachBottom"
                                  :contentText="loadMoreText"></uni-load-more>
                 </div>
               </div>
@@ -309,6 +309,7 @@ export default class TabsTalk extends Vue {
 
   //点击不需要更新查询时间，查不出来就查不出来，万一是自己手动暂停了查询呢，而且如果重设时间会导致数据重复问题
   async clickOnreachBottom() {
+    console.log('chufale')
     //停止查询方法
     if (this.curTabQueryUtil) {
       const talkQO = TalkQOFactory.getTalkQueryQO(this.curTalkTabObj.name, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, socialuniTagModule.selectTagNames, socialCircleModule.circleName)
