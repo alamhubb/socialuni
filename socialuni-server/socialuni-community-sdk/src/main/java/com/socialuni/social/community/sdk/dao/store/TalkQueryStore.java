@@ -155,12 +155,13 @@ public class TalkQueryStore {
         //测试环境devId
 
         Integer testDevId = DevAccountFacade.getTestDevIdAllNull();
+        Integer devId = DevAccountFacade.getDevIdNotNull();
 
         //筛选动态
         List<Integer> talkUnionIds = talkMapper.queryTalkIdsByTalkCondition(
                 testDevId,
                 ContentStatus.enable, queryBO.getAdCode(),
-                queryBO.getTalkVisibleGender(), mineUserGender, null,
+                queryBO.getTalkVisibleGender(), mineUserGender, devId,
                 disableUnderageContent,
                 disableContentHasContactInfo,
                 disableContentHasQrCode);
