@@ -19,8 +19,7 @@
            @contextmenu.prevent="viewService.showBottomMenuClick(chat.id)"
            @longpress="viewService.showBottomMenuClick(chat.id)"
       >
-        <!--                <el-avatar :src="chat.avatar">测试机</el-avatar>-->
-        <el-avatar>测试</el-avatar>
+        <el-avatar shape="square" :src="chat.avatar"></el-avatar>
         <div class="ml-sm h45 col-between flex-1">
           <div>
             <div class="text-cut text-df color-black" :class="{'color-red':chat.vipFlag}">{{
@@ -60,9 +59,16 @@
           </div>
         </div>
         <div class="h45 col-between">
-          <div class="text-grey text-xs">{{ viewService.formatTime(chat.updateTime) }}</div>
-          <div>
-            <div v-show="chat.unreadNum>0" class="cu-tag round bg-red sm">
+          <template v-if="chat.messages.length">
+
+            <div class="text-grey text-xs">    {{ viewService.formatTime(chat.messages[chat.messages.length - 1].createTime) }}</div>
+          </template>
+          <template v-else>
+            <div class="text-grey text-xs">{{ viewService.formatTime(chat.updateTime) }}</div>
+          </template>
+
+          <div class="row-col-center">
+            <div v-show="chat.unreadNum>0" class="bg-red4 size17 row-all-center font-12 bd-round mb-5 color-white">
               {{ chat.unreadNum }}
             </div>
           </div>
