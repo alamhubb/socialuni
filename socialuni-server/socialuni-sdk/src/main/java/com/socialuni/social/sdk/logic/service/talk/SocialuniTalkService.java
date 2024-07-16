@@ -63,6 +63,8 @@ public class SocialuniTalkService {
         if (SocialuniSystemConst.serverIsChild()) {
             return socialuniTalkAPI.queryTalks();
         }
+
+        SocialuniPageQueryQO<SocialuniHomeTabTalkQueryQO> socialuniPageQueryQO = new SocialuniPageQueryQO<>();
         SocialuniHomeTabTalkQueryQO queryQO = new SocialuniHomeTabTalkQueryQO();
         //获取当前用户
         queryQO.setHomeTabName(TalkTabType.home_name);
@@ -76,7 +78,14 @@ public class SocialuniTalkService {
         queryQO.setMaxAge(SocialuniSystemConst.homeTalkQueryMaxAge);
         queryQO.setGender(DevAccountFacade.getAppGenderType());
         queryQO.setFirstLoad(true);
-        return this.queryTalks(queryQO);
+
+        socialuniPageQueryQO.setQueryTime(new Date());
+        socialuniPageQueryQO.setPageNum(1);
+        socialuniPageQueryQO.setPageSize(10);
+        socialuniPageQueryQO.setFirstLoad(true);
+        socialuniPageQueryQO.setQueryData(queryQO);
+
+        return this.queryTalks(socialuniPageQueryQO);
     }
 
     public ResultRO<List<SocialuniTalkRO>> queryTalksNew(SocialuniPageQueryQO<SocialuniHomeTabTalkQueryQO> socialuniPageQueryQO) {
@@ -85,9 +94,9 @@ public class SocialuniTalkService {
     }
 
     //查询非关注tab的动态列表
-    public ResultRO<List<SocialuniTalkRO>> queryTalks(SocialuniHomeTabTalkQueryQO queryQO) {
+    public ResultRO<List<SocialuniTalkRO>> queryTalks(SocialuniPageQueryQO<SocialuniHomeTabTalkQueryQO> socialuniPageQueryQO) {
         if (SocialuniSystemConst.serverIsChild()) {
-            return socialuniTalkAPI.queryTalks(queryQO);
+            return socialuniTalkAPI.queryTalks(socialuniPageQueryQO);
         }
         //如果不为测试环境则过滤到测试环境标签的数据
         /*if (DevAccountUtils.getDevIdNotNull() != 3) {
@@ -101,15 +110,6 @@ public class SocialuniTalkService {
                 return true;
             }).collect(Collectors.toList());
         }*/
-
-        SocialuniPageQueryQO<SocialuniHomeTabTalkQueryQO> socialuniPageQueryQO = new SocialuniPageQueryQO<>();
-        socialuniPageQueryQO.setQueryData(queryQO);
-        socialuniPageQueryQO.setQueryTime(queryQO.getQueryTime());
-        socialuniPageQueryQO.setFirstLoad(queryQO.getFirstLoad());
-
-        if (queryQO.getFirstLoad()){
-            socialuniPageQueryQO.setPageNum(1);
-        }
 
         List<SocialuniTalkRO> talkROS = centerHomeTalkQueryDomain.queryHomeTabTalks(socialuniPageQueryQO);
         return new ResultRO<>(talkROS);

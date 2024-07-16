@@ -62,11 +62,6 @@ public interface SocialuniTalkAPI {
     @Operation(summary = "查询动态列表")
     ResultRO<List<SocialuniTalkRO>> queryTalksNew(@RequestBody(required = false) SocialuniPageQueryQO<SocialuniHomeTabTalkQueryQO> socialuniPageQueryQO);
 
-
-    @PostMapping("queryTalks")
-    @Operation(summary = "查询动态列表")
-    ResultRO<List<SocialuniTalkRO>> queryTalks(@RequestBody(required = false) SocialuniHomeTabTalkQueryQO queryQO);
-
     /**
      * 返回talk是因为三方需要Id
      *

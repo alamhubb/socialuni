@@ -42,11 +42,6 @@ public class SocialuniTalkController implements SocialuniTalkAPI {
     }
 
     @Override
-    public ResultRO<List<SocialuniTalkRO>> queryTalks(SocialuniHomeTabTalkQueryQO queryQO) {
-        return socialuniTalkService.queryTalks(queryQO);
-    }
-
-    @Override
     public ResultRO<SocialuniTalkRO> postTalk(SocialuniTalkPostQO talkPostQO) {
         return socialuniTalkService.postTalk(talkPostQO);
     }
