@@ -5,12 +5,11 @@ import com.socialuni.social.sdk.im.enumeration.ChatType;
 import com.socialuni.social.sdk.im.enumeration.MessageContentType;
 import com.socialuni.social.sdk.im.logic.foctory.SocialuniMessageDOFactory;
 import com.socialuni.social.sdk.constant.socialuni.MatchType;
-import com.socialuni.social.sdk.im.enumeration.MessageType;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.sdk.im.dao.DO.message.SocialuniMessageDO;
 import com.socialuni.social.sdk.im.dao.DO.message.SocialuniMessageReceiveDO;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniChatRepository;
-import com.socialuni.social.sdk.im.dao.repository.ChatUserRepository;
+import com.socialuni.social.sdk.im.dao.repository.SocialuniChatUserRepository;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniMessageReceiveRepository;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniMessageRepository;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
@@ -31,7 +30,7 @@ public class MatchRequestService {
     private SocialuniMessageRepository messageRepository;
 
     @Resource
-    private ChatUserRepository chatUserRepository;
+    private SocialuniChatUserRepository chatUserRepository;
     @Resource
     private SocialuniChatRepository chatRepository;
     @Resource

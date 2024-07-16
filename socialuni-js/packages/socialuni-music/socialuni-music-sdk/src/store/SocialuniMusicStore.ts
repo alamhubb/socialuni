@@ -8,7 +8,7 @@ export class SocialuniMusicStore {
     private _appId: string = null
     private _musicToken: string = null
     private _musicRoomInfo: MusicPlayerSongPlayingInfoRO = null
-    private _channelName: string = null
+    private _musicRoomId: string = null
     private _musicRoleId: string = null
     musicMuted: boolean = null
     musicVolume: number = 50
@@ -46,15 +46,15 @@ export class SocialuniMusicStore {
         return this._musicRoomInfo
     }
 
-    get channelName(): string {
-        if (this._channelName) {
-            return this._channelName;
+    get musicRoomId(): string {
+        if (this._musicRoomId) {
+            return this._musicRoomId;
         }
         return ''
     }
 
-    setChannelName(value: string) {
-        this._channelName = value;
+    setMusicRoomId(value: string) {
+        this._musicRoomId = value;
     }
 
     get localAudioTrack(): IBufferSourceAudioTrack | IRemoteAudioTrack {

@@ -6,7 +6,7 @@ import com.socialuni.social.common.api.exception.exception.SocialSystemException
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
-import com.socialuni.social.sdk.im.dao.repository.ChatUserRepository;
+import com.socialuni.social.sdk.im.dao.repository.SocialuniChatUserRepository;
 import com.socialuni.social.sdk.im.enumeration.ChatOpenType;
 import com.socialuni.social.sdk.im.enumeration.ChatUserStatus;
 import org.springframework.stereotype.Component;
@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 @Component
 public class SocialuniChatUserCheck {
     @Resource
-    private ChatUserRepository chatUserRepository;
+    private SocialuniChatUserRepository chatUserRepository;
 
     public SocialuniChatUserDO checkUserInChat(Integer chatId, Integer sendUserId) {
         SocialuniChatDO chat = SocialuniRepositoryFacade.findByUnionId(chatId, SocialuniChatDO.class);

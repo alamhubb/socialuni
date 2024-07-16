@@ -307,7 +307,7 @@ export default class MessageView extends Vue {
     }
 
     playMusicApiFun() {
-        SocialuniMusicAPI.playMusicAPI(socialuniMusicStore.channelName, this.musicRoomInfo).then(res => {
+        SocialuniMusicAPI.playMusicAPI(socialuniMusicStore.musicRoomId, this.musicRoomInfo).then(res => {
             socialuniMusicStore.setMusicRoomInfo(res.data)
         })
     }
@@ -321,7 +321,7 @@ export default class MessageView extends Vue {
             }
         })*/
 
-        SocialuniMusicAPI.queryMusicChannel(socialuniMusicStore.channelName)
+        SocialuniMusicAPI.queryMusicChannel(socialuniMusicStore.musicRoomId)
     }
 
     testvalue = 0
@@ -329,13 +329,13 @@ export default class MessageView extends Vue {
 //设置当前时间和播放时间
 
     deleteYun111() {
-        SocialuniMusicAPI.updateMusicAPI(socialuniMusicStore.channelName, {
+        SocialuniMusicAPI.updateMusicAPI(socialuniMusicStore.musicRoomId, {
             isPause: true
         })
     }
 
     jixuYun111() {
-        SocialuniMusicAPI.updateMusicAPI(socialuniMusicStore.channelName, {
+        SocialuniMusicAPI.updateMusicAPI(socialuniMusicStore.musicRoomId, {
             isPause: false
         })
     }

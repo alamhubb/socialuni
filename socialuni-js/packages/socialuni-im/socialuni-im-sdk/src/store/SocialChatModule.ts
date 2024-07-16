@@ -1,3 +1,4 @@
+/*
 import SocialuniChatRO from "socialuni-api-base/src/model/SocialuniChatRO";
 import {OpenImChatRO} from "socialuni-api-base/src/model/openIm/OpenImChatRO";
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
@@ -42,7 +43,7 @@ class SocialChatModule {
             } else {
                 return -1
             }
-            /*//如果置顶优先级比较高，则排前面
+            /!*!//如果置顶优先级比较高，则排前面
             if (chatAfter.topLevel > chat.topLevel) {
                 return 1
             } else if (chatAfter.topFlag != chat.topFlag) {
@@ -59,7 +60,7 @@ class SocialChatModule {
                 } else {
                     return -1
                 }
-            }*/
+            }*!/
         })
     }
 
@@ -139,7 +140,7 @@ class SocialChatModule {
         if (this.openImIsLogin === 0) {
             this.setOpenImLogging()
             //获取imToken
-            /*const config: InitConfig = {
+            /!*const config: InitConfig = {
                 userID: socialuniUserModule.userId,
                 token: socialChatModule.imToken,
                 url: SocialuniConfig.openImJsImUrl,
@@ -155,7 +156,7 @@ class SocialChatModule {
             } catch (e) {
                 this.setOpenImUnLogin()
                 await this.initSocialuniChatModule()
-            }*/
+            }*!/
         } else {
             //如果未成功则无限等待，否则，执行下一步
             await this.waitLoginSuccess()
@@ -163,7 +164,7 @@ class SocialChatModule {
     }
 
     async initOpenImListeners() {
-        /*;(await this.openIm()).on(CbEvents.ONNEWCONVERSATION, (data) => {
+        /!*;(await this.openIm()).on(CbEvents.ONNEWCONVERSATION, (data) => {
             console.log('ONNEWCONVERSATION', data)
         })
         ;(await this.openIm()).on(CbEvents.ONCONVERSATIONCHANGED, (data) => {
@@ -188,12 +189,12 @@ class SocialChatModule {
             console.log('收到新邀请时ONFRIENDAPPLICATIONADDED', data)
             this.refreshRecvFriendApplicationList();
             // this.showTabBarRedDot();
-        })*/
+        })*!/
     }
 
-    /**
+    /!**
      * 设置 底部导航栏红点
-     */
+     *!/
     showTabBarRedDot() {
         uni.showTabBarRedDot({
             index: 2
@@ -262,17 +263,17 @@ class SocialChatModule {
         })
     }
 
-    /**
+    /!**
      * 获取收到的好友请求列表
      * @param handleResult -1 拒绝   0 未处理   1 同意
-     */
+     *!/
     getRecvFriendApplicationList(handleResult: number) {
         return this.recvFriendApplicationList.filter(item => item.handleResult == handleResult);
     }
 
-    /**
+    /!**
      * 获取收到的好友请求列表
-     */
+     *!/
     async refreshRecvFriendApplicationList() {
         await (await this.openIm()).getRecvFriendApplicationList().then(({data}) => {
             console.log(data)
@@ -300,11 +301,11 @@ class SocialChatModule {
             const data = res.data
             const openImChatRO: OpenImChatRO = JsonUtil.toParse(data)
             const chat = new SocialuniChatRO(openImChatRO)
-            /*SocialuniUserAPI.queryUserDetailAPI(openImChatRO.userID).then(res => {
+            /!*SocialuniUserAPI.queryUserDetailAPI(openImChatRO.userID).then(res => {
                 const userRO: SocialuniUserRO = res.data
                 chat.nickname = userRO.nickname
                 chat.avatar = userRO.avatar
-            })*/
+            })*!/
             this.setChat(chat)
         })
         // 设置实时消息已读回执
@@ -330,11 +331,11 @@ class SocialChatModule {
             const data = res.data
             const openImChatRO: OpenImChatRO = JsonUtil.toParse(data)
             const chat = new SocialuniChatRO(openImChatRO)
-            /*SocialuniUserAPI.queryUserDetailAPI(openImChatRO.userID).then(res => {
+            /!*SocialuniUserAPI.queryUserDetailAPI(openImChatRO.userID).then(res => {
                 const userRO: SocialuniUserRO = res.data
                 chat.nickname = userRO.nickname
                 chat.avatar = userRO.avatar
-            })*/
+            })*!/
             this.setChat(chat)
         })
         // 设置实时消息已读回执
@@ -350,7 +351,7 @@ class SocialChatModule {
     }
 
 
-    /*async setChat(openImChat: SocialuniChatRO) {
+    /!*async setChat(openImChat: SocialuniChatRO) {
         this.chat = openImChat
 
         /!*const options = {
@@ -372,7 +373,7 @@ class SocialChatModule {
             this.chat = openImChat
             socialChatModule.scrollToMessagePageBottom()
         })*!/
-    }*/
+    }*!/
 
     toMessagePageFromUserDetail(userId: string) {
         // PageUtil.toMessagePageByUserId(userId)
@@ -414,7 +415,7 @@ class SocialChatModule {
             //如果本地没有则更新时间为最新，同步后台逻辑
             chat.updateTime = new Date().getTime()
             this.chats.unshift(chat)
-            /*!//修改当前chat的id
+            /!*!//修改当前chat的id
             this.setChatId(chat.id)
             //后台创建真实chat
             ChatAPI.getChatAPI(user).then(res => {
@@ -425,7 +426,7 @@ class SocialChatModule {
               this.setChatId(resultChat.id)
               //替换当前chat
               this.replaceChat(resultChat)
-            })*/
+            })*!/
         }
         this.setChatIdToMessagePage(chat.id)
     }
@@ -442,7 +443,7 @@ class SocialChatModule {
     }
 
 
-    /*get chatsUnreadNumTotal () {
+    /!*get chatsUnreadNumTotal () {
       // 应该在这里计算是否显示红点
       constant chatUnreadNum = this.queryChats.reduce((total, chat) => {
         total = total + chat.unreadNum
@@ -459,17 +460,17 @@ class SocialChatModule {
         })
       }
       return chatUnreadNum
-    }*/
+    }*!/
 
     // 四个地方使用，初始查询，推送消息，阅读清空消息，删除消息
     //为什么不使用get呢,get不行微信小程序有兼容问题
-    /**
+    /!**
      * 初始化消息总未读数。
      * 应该在这里计算是否显示红点
-     */
+     *!/
     async computedChatsUnreadNumTotalAction() {
         // 获取消息总未读。
-        /*;(await this.openIm()).getTotalUnreadMsgCount().then(({data}) => {
+        /!*;(await this.openIm()).getTotalUnreadMsgCount().then(({data}) => {
             // 获得好友申请
             let recvFriendApplicationLength = this.getRecvFriendApplicationList(0).length;
             console.log('---recvFriendApplicationLength------', recvFriendApplicationLength);
@@ -481,8 +482,8 @@ class SocialChatModule {
                 })
             }
         }).catch(err => {
-        })*/
-        /*this.chatsUnreadNumTotal = this.chats.reduce((total, chat) => {
+        })*!/
+        /!*this.chatsUnreadNumTotal = this.chats.reduce((total, chat) => {
           total = total + chat.unreadNum
           return total
         }, 0)
@@ -497,7 +498,7 @@ class SocialChatModule {
           uni.hideTabBarRedDot({
             index: 2
           })
-        }*/
+        }*!/
     }
 
 
@@ -510,12 +511,12 @@ class SocialChatModule {
     }
 
 
-    /**
+    /!**
      * 发送视频消息。
      * @param data
      * @param extension
      * @param description
-     */
+     *!/
     async pushVideoMessage(url: string) {
         const options: VideoMsgParams = {
             videoPath: "",
@@ -536,12 +537,12 @@ class SocialChatModule {
         await socialChatModule.pushMessageAction(msg)
     }
 
-    /**
+    /!**
      * 发送图片消息。
      * @param data
      * @param extension
      * @param description
-     */
+     *!/
     async pushImageMessage(url: string) {
         const baseInfo: PicBaseInfo = {
             uuid: UUIDUtil.getUUID(),
@@ -561,12 +562,12 @@ class SocialChatModule {
         await socialChatModule.pushMessageAction(msg)
     }
 
-    /**
+    /!**
      * 发送自定义消息。
      * @param data
      * @param extension
      * @param description
-     */
+     *!/
     async pushCustomMessage(data: string, extension: string, description: string) {
         const options: CustomMsgParams = {
             data,
@@ -591,17 +592,17 @@ class SocialChatModule {
         // this.chat.lastContent = msg.content
         // 滚屏到最后面
         // 不能监控变化滚动，有时候是往前面插入
-        /*const {data} = await (await socialChatModule.openIm())[msg.action](msg.contentData);
+        /!*const {data} = await (await socialChatModule.openIm())[msg.action](msg.contentData);
         const params = {
             recvID: this.chat.receiveUserId,
             groupID: this.chat.groupId,
             message: data,
-        };*/
+        };*!/
         // console.log('-------params-------', params);
 
         return SocialuniUserLikeAPI.sendMsgAPI(this.chat.id, msg.content)
         //
-        /*let actionMethod: Function = null;
+        /!*let actionMethod: Function = null;
         switch (msg.action) {
             case 'createImageMessage':
             case 'createSoundMessage':
@@ -624,7 +625,7 @@ class SocialChatModule {
             this.messages.splice(index, 1)
         }).finally(() => {
             console.log(666)
-        })*/
+        })*!/
         // socialChatModule.refreshMessages()
 
         // PlatformUtils.requestSubscribeChat()
@@ -639,7 +640,7 @@ class SocialChatModule {
         // 不为自己的 且未读的
         const messages: MessageVO[] = messagesROs.filter(item => !item.isMine && !item.isRead)
         const msgIds: string[] = messages.map(msg => msg.id)
-        /*if (msgIds.length) {
+        /!*if (msgIds.length) {
             // msgIds =
             //如果登录了，才调用后台
             // 如果登录了
@@ -652,7 +653,7 @@ class SocialChatModule {
             }
             this.chat.unreadNum = 0
             this.computedChatsUnreadNumTotalAction()
-        }*/
+        }*!/
     }
 
 
@@ -660,7 +661,7 @@ class SocialChatModule {
 
 
     setChats(chats: SocialuniChatRO[]) {
-        /*console.log(3333)
+        /!*console.log(3333)
         console.log(this.chats.length)
         if (this.chats.length) {
             for (const chat1 of chats) {
@@ -668,7 +669,7 @@ class SocialChatModule {
             }
         } else {
             this.chats = chats
-        }*/
+        }*!/
         this.chats = chats
         // this.computedChatsUnreadNumTotalAction()
     }
@@ -720,10 +721,10 @@ class SocialChatModule {
                 faceURL: circle.avatar,  //
                 ex: ""   // 扩展字段
             }
-            /**
+            /!**
              * 经过测试: 会自动添加群主。 roleLevel: 默认为2 。
              * 还有下面这个是邀请成员的 level为1 。  类似于微信的拉群聊。不需要同意就直接能拉进群聊。
-             */
+             *!/
             const memberList: Member[] = [
                 {
                     userID: socialuniConfigModule.appConfig.systemUserId,
@@ -753,14 +754,15 @@ class SocialChatModule {
     }
 }
 
-/*
+/!*
   pushMessagesAction (msgs: MessageVO[]) {
 
-  }*/
-/*
+  }*!/
+/!*
 
   pushChatAction (newChat: SocialuniChatRO) {
     this.chats.unshift(newChat)
-  }*/
+  }*!/
 
 export const socialChatModule: SocialChatModule = reactive(new SocialChatModule())
+*/

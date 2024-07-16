@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.im.config.websocket;
 import com.socialuni.social.common.api.utils.NumberUtils;
 import com.socialuni.social.common.sdk.utils.RedisUtil;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
-import com.socialuni.social.sdk.im.dao.repository.ChatUserRepository;
+import com.socialuni.social.sdk.im.dao.repository.SocialuniChatUserRepository;
 import com.socialuni.social.sdk.im.enumeration.ChatUserStatus;
 import com.socialuni.social.sdk.im.enumeration.NotifyType;
 import com.socialuni.social.sdk.im.notify.NotifyVO;
@@ -41,10 +41,10 @@ public class WebsocketServer extends TextWebSocketHandler {
 
     private static RedisUtil redisUtil;
 
-    private static ChatUserRepository chatUserRepository;
+    private static SocialuniChatUserRepository chatUserRepository;
 
     @Resource
-    public void setChatUserRepository(ChatUserRepository chatUserRepository) {
+    public void setChatUserRepository(SocialuniChatUserRepository chatUserRepository) {
         WebsocketServer.chatUserRepository = chatUserRepository;
     }
 

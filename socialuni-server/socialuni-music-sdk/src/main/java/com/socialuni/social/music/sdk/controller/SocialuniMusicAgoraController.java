@@ -9,7 +9,7 @@ import com.socialuni.social.music.sdk.model.QO.AgoraUpdateMusicQO;
 import com.socialuni.social.music.sdk.model.QO.SocialuniPlayMusicQO;
 import com.socialuni.social.music.sdk.model.RO.SocialuniMusicInfoRO;
 import com.socialuni.social.music.sdk.model.RO.SocialuniMusicInitDataRO;
-import com.socialuni.social.sdk.im.dao.repository.ChatUserRepository;
+import com.socialuni.social.sdk.im.dao.repository.SocialuniChatUserRepository;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import io.agora.media.RtcTokenBuilder2;
 import lombok.extern.slf4j.Slf4j;
@@ -219,7 +219,7 @@ public class SocialuniMusicAgoraController {
     }
 
     @Resource
-    ChatUserRepository chatUserRepository;
+    SocialuniChatUserRepository chatUserRepository;
 
 
 

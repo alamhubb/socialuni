@@ -1,45 +1,25 @@
 <template>
-  <div class="w100p bg-white px-15 cursor-none">
-    <div>
-      <div v-for="item in data">
-        {{ item }}
-      </div>
+  <!--  <div class="w100p bg-white px-15 cursor-none">-->
+  <div class="h100p overflow-auto pt-sm" v-infinite-scroll="scrollToLower" :infinite-scroll-immediate="false"
+       :infinite-scroll-distance="200"
+       :infinite-scroll-delay="200"
+  >
+    <div v-for="item in data">
+      {{ item.name }}
     </div>
-    <!--    <div class="flex-1 overflow-hidden">
-    &lt;!&ndash;
-          音量：{{ socialuniMusicStore.musicVolume }}
-          <div>
-            realPlayingValue：{{ realPlayingValue }}
-          </div>
-          <div>
-            {{ modelValue }}
-          </div>
-    &ndash;&gt;
+  </div>
+  <!--    <div class="flex-1 overflow-hidden">
+  &lt;!&ndash;
+        音量：{{ socialuniMusicStore.musicVolume }}
+        <div>
+          realPlayingValue：{{ realPlayingValue }}
+        </div>
+        <div>
+          {{ modelValue }}
+        </div>
+  &ndash;&gt;
 
-          <el-table height="100%" :data="data" stripe highlight-current-row
-                    @row-dblclick="handleCurrentChange">
-            <el-table-column prop="title" label="音乐标题" width="100" show-overflow-tooltip></el-table-column>
-            <el-table-column label="歌手" show-overflow-tooltip>
-              <template #default="scope">
-                {{ scope.row.author.join(' / ') }}
-              </template>
-            </el-table-column>
-            <el-table-column label="歌手专辑" show-overflow-tooltip>
-              <template #default="scope">
-                {{ scope.row.album }}
-              </template>
-            </el-table-column>
-            <el-table-column label="时长" width="100">
-              <template #default="scope">
-                {{ $DateUtil.convertToTime(scope.row.musicTime) }}
-              </template>
-            </el-table-column>
-          </el-table>
-
-        </div>-->
-
-    歌曲列表
-    <!--    <el-table height="100%" :data="data" stripe highlight-current-row
+        <el-table height="100%" :data="data" stripe highlight-current-row
                   @row-dblclick="handleCurrentChange">
           <el-table-column prop="title" label="音乐标题" width="100" show-overflow-tooltip></el-table-column>
           <el-table-column label="歌手" show-overflow-tooltip>
@@ -57,21 +37,55 @@
               {{ $DateUtil.convertToTime(scope.row.musicTime) }}
             </template>
           </el-table-column>
-        </el-table>-->
-  </div>
+        </el-table>
+
+      </div>-->
+
+  歌曲列表
+  <!--    <el-table height="100%" :data="data" stripe highlight-current-row
+                @row-dblclick="handleCurrentChange">
+        <el-table-column prop="title" label="音乐标题" width="100" show-overflow-tooltip></el-table-column>
+        <el-table-column label="歌手" show-overflow-tooltip>
+          <template #default="scope">
+            {{ scope.row.author.join(' / ') }}
+          </template>
+        </el-table-column>
+        <el-table-column label="歌手专辑" show-overflow-tooltip>
+          <template #default="scope">
+            {{ scope.row.album }}
+          </template>
+        </el-table-column>
+        <el-table-column label="时长" width="100">
+          <template #default="scope">
+            {{ $DateUtil.convertToTime(scope.row.musicTime) }}
+          </template>
+        </el-table-column>
+      </el-table>-->
 </template>
 
 <script lang="ts">
 import {Component, Emit, Model, Prop, Vue, Watch, toNative} from 'vue-facing-decorator';
 import MusicPlayerSongInfoRO from "socialuni-music-sdk/src/model/MusicPlayerSongInfoRO";
+import QDialog from "qingjs-ui-h5/src/components/QDialog.vue";
+import MsgInput from "socialuni-ui/src/components/MsgInput.vue";
+import TalkItem from "socialuni-community-ui/src/components/talkItem/TalkItem.vue";
+import QTag from "qingjs-ui/src/components/QTag.vue";
+import TalkAddView from "socialuni-community-view-h5/src/views/TalkAddView.vue";
+import QEnumLink from "qingjs-ui-h5/src/components/QEnumLink.vue";
+import QLoadMore from "qingjs-ui/src/components/QLoadMore.vue";
+import QIcon from "qingjs-ui/src/components/QIcon.vue";
 
 @toNative
 @Component({
-  components: {}
+  components: {QIcon, QLoadMore, QEnumLink, TalkAddView, QTag, TalkItem, MsgInput, QDialog}
 })
 export default class MusicList extends Vue {
 
   @Prop() data: MusicPlayerSongInfoRO[]
 
+
+  scrollToLower() {
+
+  }
 }
 </script>

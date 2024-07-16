@@ -7,10 +7,17 @@ import SocialuniTalkViewH5 from "socialuni-community-view-h5/src/views/Socialuni
 // import MessageView from "@/views/chat/MessageView.tsx";
 import SocialuniChatMessageViewH5 from "socialuni-im-view-h5/src/views/SocialuniChatMessageViewH5.vue";
 import SocialuniUserDetailViewH5 from "socialuni-user-view-h5/src/views/SocialuniUserDetailViewH5.vue";
+import MusicHome from "@/views/music/MusicHome.vue";
 
 export const constantRoutes = [
     {
         path: '/',
+        name: '音乐',
+        component: MusicHome,
+        meta: {title: '音乐'},
+    },
+    {
+        path: '/talk',
         name: '社区',
         component: SocialuniTalkViewH5,
         meta: {title: '社区'},

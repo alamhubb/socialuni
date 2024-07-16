@@ -1,13 +1,12 @@
 package com.socialuni.social.sdk.im.logic.domain;
 
-import com.socialuni.social.common.sdk.constant.UserType;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
+import com.socialuni.social.sdk.im.dao.repository.SocialuniChatUserRepository;
 import com.socialuni.social.sdk.im.enumeration.ChatStatus;
 import com.socialuni.social.sdk.im.enumeration.ChatType;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniChatRepository;
-import com.socialuni.social.sdk.im.dao.repository.ChatUserRepository;
 import com.socialuni.social.sdk.im.enumeration.ChatUserStatus;
 import com.socialuni.social.sdk.im.logic.entity.SocialuniChatEntity;
 import com.socialuni.social.sdk.im.logic.foctory.SocialChatROFactory;
@@ -35,7 +34,7 @@ public class ChatQueryDomain {
     @Resource
     SocialuniChatRepository chatRepository;
     @Resource
-    ChatUserRepository chatUserRepository;
+    SocialuniChatUserRepository chatUserRepository;
     @Resource
     SocialuniChatManage socialuniChatManage;
     @Resource

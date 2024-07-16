@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.im.logic.manage;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
-import com.socialuni.social.sdk.im.dao.repository.ChatUserRepository;
+import com.socialuni.social.sdk.im.dao.repository.SocialuniChatUserRepository;
 import com.socialuni.social.sdk.im.enumeration.ChatUserStatus;
 import com.socialuni.social.sdk.im.logic.foctory.SocialuniChatUserDOFactory;
 import org.springframework.stereotype.Component;
@@ -15,10 +15,10 @@ import java.util.Optional;
 @Component
 public class SocialuniChatUserManage {
     @Resource
-    ChatUserRepository chatUserRepository;
+    SocialuniChatUserRepository chatUserRepository;
 
     public SocialuniChatUserDO joinOrCreateChatUser(SocialuniChatDO chatDO, Integer userId) {
-        SocialuniChatUserDO socialuniChatUserDO = chatUserRepository.findOneByChatIdAndUserId(chatDO.getUnionId(), userId);
+        SocialuniChatUserDO socialuniChatUserDO = chatUserRepository.findFirstByChatIdAndUserId(chatDO.getUnionId(), userId);
 
         if (socialuniChatUserDO == null) {
             socialuniChatUserDO = SocialuniChatUserDOFactory.createGroupChatUser(chatDO, userId);

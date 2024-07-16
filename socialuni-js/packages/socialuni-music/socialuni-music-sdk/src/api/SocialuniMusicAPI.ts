@@ -5,6 +5,10 @@ import MusicPlayerSongPlayingInfoRO from "../model/MusicPlayerSongPlayingInfoRO"
 import {SocialuniMusicRoomUserInfoRO} from "../model/SocialuniMusicRoomUserInfoRO";
 
 export default class SocialuniMusicAPI {
+    static getPublicRoomId() {
+        return socialuniUserRequest.get<string>(`socialuni/music/getPublicRoomId`)
+    }
+
     static queryMusicRoomPlayerInfoAPI(channelName: string) {
         return socialuniUserRequest.get<MusicPlayerSongPlayingInfoRO>(`socialuni/music/queryMusicRoomPlayerInfo/${channelName}`)
     }
@@ -37,7 +41,7 @@ export default class SocialuniMusicAPI {
     static queryAllPlayers() {
         return socialuniUserRequest.get<any>(`api/v1/projects/5e681410a7434ce9bba3e268226ce537/cloud-player/players`, {
             params: {
-                filter: `channelName eq ${socialuniMusicStore.channelName}`
+                filter: `channelName eq ${socialuniMusicStore.musicRoomId}`
             }
         })
     }

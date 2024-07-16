@@ -23,7 +23,7 @@ import java.util.Optional;
  * @author qinkaiyuan
  * @since TODO[起始版本号]
  */
-public interface ChatUserRepository extends JpaRepository<SocialuniChatUserDO, Integer> {
+public interface SocialuniChatUserRepository extends JpaRepository<SocialuniChatUserDO, Integer> {
     //根据chat状态，chatuser状态，置顶倒序，置顶等级升序，时间倒序
 /*
     @Query("select ChatUserDO from ChatUserDO u,ChatDO where Chatu.chatId=ChatDO.id and ChatDO.type not in (:chatTypes) and ChatDO.status =:Status and Chatu.userId=:userId and Chatu.status =:status")
@@ -36,7 +36,7 @@ public interface ChatUserRepository extends JpaRepository<SocialuniChatUserDO, I
     Optional<SocialuniChatUserDO> findFirstByStatusAndUserIdAndBeUserId(String Status, Integer userId, Integer BeUserId);
 
 
-    SocialuniChatUserDO findOneByChatIdAndUserId(Integer chatId, Integer userId);
+    SocialuniChatUserDO findFirstByChatIdAndUserId(Integer chatId, Integer userId);
 
 
     //只有发送消息时，才需要使用这个，校验状态，其他情况不需要

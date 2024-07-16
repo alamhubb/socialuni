@@ -19,15 +19,21 @@ import com.socialuni.social.music.sdk.dao.DO.SocialuniMusicRoomDO;
 import com.socialuni.social.music.sdk.model.QO.AgoraPlayMusicQO;
 import com.socialuni.social.music.sdk.model.QO.SocialuniPlayMusicQO;
 import com.socialuni.social.sdk.im.config.websocket.WebsocketServer;
+import com.socialuni.social.sdk.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
+import com.socialuni.social.sdk.im.dao.repository.SocialuniChatUserRepository;
+import com.socialuni.social.sdk.im.dao.repository.SocialuniChatRepository;
+import com.socialuni.social.sdk.im.enumeration.ChatType;
 import com.socialuni.social.sdk.im.enumeration.NotifyType;
 import com.socialuni.social.sdk.im.logic.check.SocialuniChatUserCheck;
 import com.socialuni.social.sdk.im.logic.foctory.SocialuniChatUserDOFactory;
 import com.socialuni.social.sdk.im.notify.NotifyVO;
+import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import io.agora.media.RtcTokenBuilder2;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
@@ -76,9 +82,40 @@ public class SocialuniMusicController {
     @Resource
     SocialuniMusicRoomManage socialuniMusicRoomManage;
 
+    @Resource
+    SocialuniChatRepository chatRepository;
+    @Resource
+    SocialuniChatUserRepository socialuniChatUserRepository;
+
+    @GetMapping("getPublicRoomId")
+    public ResultRO<String> getPublicRoomId() {
+        //这个朋友如果不登录嗯
+        Integer userId = SocialuniUserUtil.getMineUserIdAllowNull();
+
+        List<String> defaultChatGroups = SocialuniAppConfig.getAppConfig().getDefaultChatGroups();
+        String groupName = defaultChatGroups.get(0);
+        SocialuniChatDO chatDO = chatRepository.findFirstByTypeAndChatName(ChatType.system_group, groupName);
+        if (ObjectUtils.isEmpty(userId)) {
+            String chatId = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(chatDO.getUnionId());
+            return ResultRO.success(chatId);
+        }
+        SocialuniChatUserDO socialuniChatUserDO = socialuniChatUserRepository.findFirstByChatIdAndUserId(chatDO.getUnionId(), userId);
+        return ResultRO.success(socialuniChatUserDO.getId().toString());
+    }
+
+
     @GetMapping("queryMusicRoomPlayerInfo/{channel}")
-    public ResultRO<SocialuniMusicRoomInfoRO> queryMusicRoomInfo(@PathVariable("channel") @Valid @NotBlank String channel) {
-        Integer chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(channel);
+    public ResultRO<SocialuniMusicRoomInfoRO> queryMusicRoomInfo(@PathVariable("channel") String channel) {
+
+        Integer chatId;
+        if (StringUtils.isEmpty(channel)) {
+
+            chatId = 1;
+        } else {
+            chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(channel);
+        }
+        //查询开放大厅Id
+        chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(channel);
 
         SocialuniMusicRoomDO socialuniMusicRoomDO = socialuniMusicRoomManage.getOrCreateMusicPlayerDO(chatId);
 

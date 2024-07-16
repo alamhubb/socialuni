@@ -17,7 +17,7 @@ import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.sdk.im.dao.DO.message.SocialuniMessageDO;
 import com.socialuni.social.sdk.im.dao.DO.message.SocialuniMessageReceiveDO;
 import com.socialuni.social.sdk.im.dao.redis.SocialuniChatUserRedis;
-import com.socialuni.social.sdk.im.dao.repository.ChatUserRepository;
+import com.socialuni.social.sdk.im.dao.repository.SocialuniChatUserRepository;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniChatRepository;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniMessageReceiveRepository;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniMessageRepository;
@@ -53,7 +53,7 @@ public class SocialuniMessageEntity {
     @Resource
     private SocialuniMessageRepository messageRepository;
     @Resource
-    private ChatUserRepository chatUserRepository;
+    private SocialuniChatUserRepository chatUserRepository;
     @Resource
     private SocialuniChatUserRedis socialuniChatUserRedis;
     @Resource

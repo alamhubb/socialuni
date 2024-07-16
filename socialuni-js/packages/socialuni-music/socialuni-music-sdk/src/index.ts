@@ -22,13 +22,15 @@ class SocialuniMusicPlugin implements SocialuniPlugin {
               socialuniChatModule.queryMineImUserInfo()
           }*/
         console.log('执行订阅')
+
+        //页面初始化的时候，设置房间号
         CommonEventUtil.on(SocialuniImEventKey.socialuniImPageInit, async (params: MessageViewParams) => {
-            socialuniMusicStore.setChannelName(params.chatId)
+            socialuniMusicStore.setMusicRoomId(params.chatId)
             if (socialuniTokenModule.token) {
-                const userRes = await SocialuniMusicAPI.queryMusicRoomUserInfoAPI(socialuniMusicStore.channelName)
+                const userRes = await SocialuniMusicAPI.queryMusicRoomUserInfoAPI(socialuniMusicStore.musicRoomId)
                 socialuniMusicStore.setMusicRoleId(userRes.data.musicRoleId)
             }
-            const res = await SocialuniMusicAPI.queryMusicRoomPlayerInfoAPI(socialuniMusicStore.channelName)
+            const res = await SocialuniMusicAPI.queryMusicRoomPlayerInfoAPI(socialuniMusicStore.musicRoomId)
             console.log(4656465)
             console.log(res)
             socialuniMusicStore.setMusicRoomInfo(res.data)

@@ -1,6 +1,9 @@
 <template>
-  <music-player :model-value="musicRoomInfo" :data="songList" :has-operate-auth="hasOperateAuth"
-                @input="musicRoomInfoInput" @change="musicRoomInfoChange"></music-player>
+  <div class="h100p">
+    <music-player :model-value="musicRoomInfo" :data="songList" :has-operate-auth="hasOperateAuth"
+                  @input="musicRoomInfoInput" @change="musicRoomInfoChange"></music-player>
+    <music-list :data="songList"></music-list>
+  </div>
 </template>
 
 <script lang="ts">
@@ -14,17 +17,31 @@ import MusicPlayerSongInfoRO from "socialuni-music-sdk/src/model/MusicPlayerSong
 import SocialuniMusicAPI from "socialuni-music-sdk/src/api/SocialuniMusicAPI.ts";
 import musicRequest from "socialuni-music-sdk/src/plugins/musicRequest";
 import MusicPlayer from "socialuni-music-ui-h5/src/components/MusicPlayer.vue";
+import MusicList from "socialuni-music-ui-h5/src/components/MusicList.vue";
+import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule.ts";
 
 @toNative
 @Component({
-  components: {MusicPlayer, SocialuniChatViewH5, SocialuniMsgViewH5}
+  components: {MusicPlayer, SocialuniChatViewH5, SocialuniMsgViewH5, MusicList}
 })
-export default class MusicView extends Vue {
+export default class MusicHome extends Vue {
 
   songList: MusicPlayerSongInfoRO[] = []
 
   created() {
+    this.initRoomId()
     this.querySongList()
+  }
+
+  async initRoomId() {
+    // 如果没有房间id，则查询默认系统开放大厅id
+    let chatId = this.$route.query.chatId
+    if (!chatId) {
+      const res = await SocialuniMusicAPI.getPublicRoomId();
+      chatId = res.data
+    }
+    await socialuniChatModule.init({chatId})
+    console.log(socialuniChatModule.chatId)
   }
 
   get hasOperateAuth() {

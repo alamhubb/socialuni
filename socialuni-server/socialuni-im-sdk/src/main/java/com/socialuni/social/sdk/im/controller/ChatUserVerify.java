@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.im.controller;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniChatRepository;
-import com.socialuni.social.sdk.im.dao.repository.ChatUserRepository;
+import com.socialuni.social.sdk.im.dao.repository.SocialuniChatUserRepository;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.sdk.im.enumeration.ChatUserStatus;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ public class ChatUserVerify {
     @Resource
     private SocialuniChatRepository chatRepository;
     @Resource
-    private ChatUserRepository chatUserRepository;
+    private SocialuniChatUserRepository chatUserRepository;
 
     //基础，不存在就是系统异常
     public ResultRO<SocialuniChatUserDO> checkChatHasUserId(Long chatId, Integer userId) {

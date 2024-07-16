@@ -75,7 +75,7 @@ export default class MusicView extends Vue {
   musicRoomInfoChange(musicRoomInfo: MusicPlayerSongPlayingInfoRO) {
     //必须深拷贝，不这么写会导致一致，导致不播放
     this.musicRoomInfoInput(musicRoomInfo)
-    SocialuniMusicAPI.playMusicAPI(socialuniMusicStore.channelName, musicRoomInfo).then(res => {
+    SocialuniMusicAPI.playMusicAPI(socialuniMusicStore.musicRoomId, musicRoomInfo).then(res => {
       const data: MusicPlayerSongPlayingInfoRO = res.data
       // 不相同才替换
       if (data.playingTime !== musicRoomInfo.playingTime

@@ -10,20 +10,18 @@ import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.im.api.model.QO.SocialuniChatQueryQO;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.sdk.im.dao.DO.message.SocialuniMessageReceiveDO;
+import com.socialuni.social.sdk.im.dao.repository.SocialuniChatUserRepository;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniMessageReceiveRepository;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniChatRepository;
-import com.socialuni.social.sdk.im.dao.repository.ChatUserRepository;
 import com.socialuni.social.sdk.im.enumeration.ChatStatus;
 import com.socialuni.social.sdk.im.enumeration.ChatType;
-import com.socialuni.social.sdk.im.enumeration.MessageReceiveStatus;
 import com.socialuni.social.sdk.im.enumeration.MessageStatus;
 import com.socialuni.social.sdk.im.logic.domain.ChatQueryDomain;
 import com.socialuni.social.sdk.im.logic.entity.SocialuniChatEntity;
 import com.socialuni.social.sdk.im.logic.foctory.SocialChatROFactory;
 import com.socialuni.social.im.api.model.RO.ChatRO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.sdk.im.logic.foctory.SocialMessageROFactory;
 import com.socialuni.social.sdk.im.logic.foctory.SocialuniChatUserDOFactory;
 import com.socialuni.social.im.api.model.QO.chat.ChatReadVO;
 import com.socialuni.social.im.api.model.QO.chat.ChatRemoveVO;
@@ -48,7 +46,7 @@ public class ChatService {
     @Resource
     SocialuniChatRepository chatRepository;
     @Resource
-    ChatUserRepository chatUserRepository;
+    SocialuniChatUserRepository chatUserRepository;
 
     @Resource
     ChatQueryDomain chatQueryDomain;
@@ -206,7 +204,7 @@ public class ChatService {
 
         socialuniChatEntity.getJoinOrCreateChatUser(chatId, mineId);
 
-        SocialuniChatUserDO chatUserDO = chatUserRepository.findOneByChatIdAndUserId(chatId, mineId);
+        SocialuniChatUserDO chatUserDO = chatUserRepository.findFirstByChatIdAndUserId(chatId, mineId);
 
         if (chatUserDO != null) {
             throw new SocialSystemException("您已经加入了群聊");
@@ -300,7 +298,7 @@ public class ChatService {
         String chatIdStr = chatVO.getChatId();
         Integer chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(chatIdStr);
 
-        SocialuniChatUserDO chatUserDO = chatUserRepository.findOneByChatIdAndUserId(chatId, mineUserId);
+        SocialuniChatUserDO chatUserDO = chatUserRepository.findFirstByChatIdAndUserId(chatId, mineUserId);
 
         if (chatUserDO == null || !chatUserDO.getStatus().equals(ChatStatus.enable)) {
             throw new SocialSystemException("未加入群聊");

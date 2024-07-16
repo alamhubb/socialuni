@@ -1,15 +1,11 @@
 package com.socialuni.social.sdk.im.dao.redis;
 
-import com.socialuni.social.common.api.constant.CommonRedisKey;
 import com.socialuni.social.common.sdk.constant.RedisKeysUtil;
 import com.socialuni.social.common.sdk.utils.RedisUtil;
 import com.socialuni.social.sdk.im.constant.ChatUserRedisKey;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
-import com.socialuni.social.sdk.im.dao.repository.ChatUserRepository;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Caching;
+import com.socialuni.social.sdk.im.dao.repository.SocialuniChatUserRepository;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.HashSet;
@@ -21,7 +17,7 @@ public class SocialuniChatUserRedis {
     @Resource
     RedisUtil redisUtil;
     @Resource
-    ChatUserRepository chatUserRepository;
+    SocialuniChatUserRepository chatUserRepository;
 
     public List<SocialuniChatUserDO> saveAllPut(List<SocialuniChatUserDO> socialuniChatUserDOs) {
         Set<String> redisKeys = new HashSet<>();
