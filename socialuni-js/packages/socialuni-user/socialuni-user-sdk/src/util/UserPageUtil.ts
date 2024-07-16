@@ -6,11 +6,17 @@ import MsgUtil from "socialuni-app-sdk/src/util/MsgUtil";
 import {socialuniUserModule} from "../store/SocialuniUserModule";
 import UserMsgUtil from "./UserMsgUtil";
 import PlatformUtils from "./PlatformUtils";
+import {socialuniIocContainerModule} from "socialuni/src/store/SocialuniIocContainerModule";
+import SocialuniUserIocKey from "../constant/SocialuniUserIocKey";
+import {SocialuniUserRouter} from "../interface/SocialuniUserRouter";
 
 export default class UserPageUtil {
     static toUserDetail(userId: string) {
         if (QingAppUtil.RouterUtil.getCurrentPageURI() !== UserPagePath.userDetail) {
-            QingAppUtil.RouterUtil.navigateTo(UserPagePath.userDetail + '?userId=' + userId)
+
+            const userRouter: SocialuniUserRouter = socialuniIocContainerModule.get(SocialuniUserIocKey.socialuniUserDetailPageKey)
+
+            userRouter.toUserDetail(userId)
         }
     }
 
@@ -76,7 +82,6 @@ export default class UserPageUtil {
     static toMinePage() {
         QingAppUtil.RouterUtil.switchTab(UserPagePath.userMine)
     }
-
 
 
     static async toPhonePage() {

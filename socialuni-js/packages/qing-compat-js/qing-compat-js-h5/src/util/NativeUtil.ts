@@ -219,8 +219,5 @@ export default class NativeUtil {
     }
 
     static showShareMenu() {
-        // #ifdef MP-QQ || MP-WEIXIN
-        uni.showShareMenu()
-        // #endif
     }
 }

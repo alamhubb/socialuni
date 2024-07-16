@@ -6,6 +6,7 @@ import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserMod
 import SocialuniTalkViewH5 from "socialuni-community-view-h5/src/views/SocialuniTalkViewH5.vue";
 // import MessageView from "@/views/chat/MessageView.tsx";
 import SocialuniChatMessageViewH5 from "socialuni-im-view-h5/src/views/SocialuniChatMessageViewH5.vue";
+import SocialuniUserDetailViewH5 from "socialuni-user-view-h5/src/views/SocialuniUserDetailViewH5.vue";
 
 export const constantRoutes = [
     {
@@ -19,6 +20,12 @@ export const constantRoutes = [
         name: '消息',
         component: SocialuniChatMessageViewH5,
         meta: {title: '消息'},
+    },
+    {
+        path: '/userDetail',
+        name: '用户详情',
+        component: SocialuniUserDetailViewH5,
+        meta: {title: '用户详情'},
     },
     // {
     //     path: '/home',
