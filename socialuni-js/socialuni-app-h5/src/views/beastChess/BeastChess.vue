@@ -1,7 +1,13 @@
 <template>
-  <div class="h100p row-all-center bg-white">
+  <div class="h100p col-all-center bg-white">
+    <div class="flex-row">
+      <div v-for="key in reversNumbers">{{ getChineseName(key) }}></div>
+      <div>{{ getChineseName(1)}}, {{ getChineseName(1)}}>{{getChineseName(reversNumbers[0])}}</div>,
+      <div>{{ getChineseName(numbers[0])}}可与任意棋子同归于尽</div>
+    </div>
+
     <div class="h600 w600 row-wrap">
-      <div v-for="i in checkerboard" class="size100 row-all-center bd">
+      <div v-for="i in checkerboard" class="size100 row-all-center bd color-white" :class="['bg-'+getColor(i)+'']">
         {{ getPieceChineseName(i) }}
       </div>
     </div>
@@ -64,7 +70,19 @@ const piece = new Map([
   components: {MusicPlayer, SocialuniChatViewH5, SocialuniMsgViewH5, MusicList}
 })
 export default class BeastChess extends Vue {
+  get numbers() {
+    const newNums = Array.from(numbers.keys())
+    return newNums.reverse()
+  }
 
+  get reversNumbers() {
+    const sliceNums = this.numbers.slice(1, this.numbers.length - 1)
+    return sliceNums
+  }
+
+  getChineseName(num) {
+    return piece.get(num)
+  }
 
   getPieceChineseName(number) {
     const num = Math.abs(number)
@@ -75,6 +93,12 @@ export default class BeastChess extends Vue {
     }
     return '隐藏'
   }
+
+  getColor(number) {
+    const redBlue = number > 0 ? 'red' : 'blue'
+    return redBlue
+  }
+
 
   pieces = []
 
