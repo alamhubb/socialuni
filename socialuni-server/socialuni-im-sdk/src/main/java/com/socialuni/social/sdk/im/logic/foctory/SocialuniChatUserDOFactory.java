@@ -20,8 +20,7 @@ import java.util.List;
 public class SocialuniChatUserDOFactory {
 
 
-
-
+    //    有用户就是chatUserId，没有就是chatId,chatId是uuid，chatUserid没有uuid
     public static SocialuniChatUserDO getSingleChatUser(String chatId) {
         SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidAllowNull(chatId);
 

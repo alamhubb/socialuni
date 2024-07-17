@@ -1,6 +1,8 @@
 <template>
   <div class="h100p">
-    <music-player :model-value="musicRoomInfo" :data="songList" :has-operate-auth="hasOperateAuth"
+    <div>{{musicRoomId}}</div>
+    <div>{{musicRoomInfo}}</div>
+    <music-player :model-value="musicRoomInfo" :data="songList" :has-operate-auth="true"
                   @input="musicRoomInfoInput" @change="musicRoomInfoChange"></music-player>
     <music-list :data="songList"></music-list>
   </div>
@@ -48,6 +50,11 @@ export default class MusicHome extends Vue {
     console.log(23232323)
     console.log(socialuniMusicStore.musicRoleId)
     return SocialuniMusicRoleId.hasOperateAuthList.includes(socialuniMusicStore.musicRoleId)
+  }
+
+
+  get musicRoomId(){
+    return socialuniMusicStore.musicRoomId
   }
 
   get musicRoomInfo() {

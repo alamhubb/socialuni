@@ -8,6 +8,7 @@ import com.socialuni.social.common.api.exception.exception.SocialBusinessExcepti
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
+import com.socialuni.social.im.api.model.RO.ChatRO;
 import com.socialuni.social.music.sdk.check.SocialuniMusicOperateCheck;
 import com.socialuni.social.music.sdk.dao.DO.SocialuniMusicRoomUserDO;
 import com.socialuni.social.music.sdk.factory.SocialuniMusicRoomPlayerInfoROFactory;
@@ -26,10 +27,13 @@ import com.socialuni.social.sdk.im.dao.repository.SocialuniChatRepository;
 import com.socialuni.social.sdk.im.enumeration.ChatType;
 import com.socialuni.social.sdk.im.enumeration.NotifyType;
 import com.socialuni.social.sdk.im.logic.check.SocialuniChatUserCheck;
+import com.socialuni.social.sdk.im.logic.foctory.SocialChatROFactory;
 import com.socialuni.social.sdk.im.logic.foctory.SocialuniChatUserDOFactory;
+import com.socialuni.social.sdk.im.logic.service.chat.ChatService;
 import com.socialuni.social.sdk.im.notify.NotifyVO;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import io.agora.media.RtcTokenBuilder2;
 import lombok.extern.slf4j.Slf4j;
@@ -106,17 +110,14 @@ public class SocialuniMusicController {
 
     @GetMapping("queryMusicRoomPlayerInfo/{channel}")
     public ResultRO<SocialuniMusicRoomInfoRO> queryMusicRoomInfo(@PathVariable("channel") String channel) {
+        Integer chatId  = SocialuniUnionIdFacede.getUnionIdByUuidAllowNull(channel);
 
-        Integer chatId;
-        if (StringUtils.isEmpty(channel)) {
-
-            chatId = 1;
-        } else {
-            chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(channel);
+        //创建 chatUser 的逻辑，点击进入页面，会话页加一条
+        //发送消息，还有添加好友成功
+        if (chatId == null) {
+            SocialuniChatUserDO chatUserDO = chatService.getSocialuniChatUserDO(channel);
+            chatId = chatUserDO.getChatId();
         }
-        //查询开放大厅Id
-        chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(channel);
-
         SocialuniMusicRoomDO socialuniMusicRoomDO = socialuniMusicRoomManage.getOrCreateMusicPlayerDO(chatId);
 
         if (StringUtils.isEmpty(socialuniMusicRoomDO.getMusicUrl())) {
@@ -145,13 +146,17 @@ public class SocialuniMusicController {
 
     @GetMapping("queryMusicRoomUserInfo/{channel}")
     public ResultRO<SocialuniMusicRoomUserInfoRO> queryMusicRoomUserInfo(@PathVariable("channel") @Valid @NotBlank String channel) {
+        Integer chatId  = SocialuniUnionIdFacede.getUnionIdByUuidAllowNull(channel);
 
-        SocialuniChatUserDO socialuniChatUserDO = SocialuniChatUserDOFactory.getSingleChatUser(channel);
-        if (socialuniChatUserDO != null) {
-            return ResultRO.success();
+        //创建 chatUser 的逻辑，点击进入页面，会话页加一条
+        //发送消息，还有添加好友成功
+
+        if (chatId == null) {
+            SocialuniChatUserDO chatUserDO = chatService.getSocialuniChatUserDO(channel);
+            chatId = chatUserDO.getChatId();
         }
+
         Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
-        Integer chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(channel);
 
         //然后是查询roomUser
         SocialuniMusicRoomUserDO socialuniMusicRoomUserDO = socialuniMusicRoomUserEntity.checkAndGetOrCreateMusicRoomUserInfo(chatId, mineUserId);
@@ -337,14 +342,25 @@ public class SocialuniMusicController {
     @Resource
     SocialuniMusicOperateCheck socialuniMusicOperateCheck;
 
+    @Resource
+    ChatService chatService;
+
     @PostMapping("playMusic/{channel}")
-    public ResultRO<SocialuniMusicRoomInfoRO> playMusic(@PathVariable("channel") String channel, @RequestBody @Valid SocialuniPlayMusicQO playMusicQO) {
+    public ResultRO<SocialuniMusicRoomInfoRO> playMusic(@PathVariable("channel") @Valid @NotBlank String channel, @RequestBody @Valid SocialuniPlayMusicQO playMusicQO) {
         if (StringUtils.isEmpty(channel)) {
             throw new SocialBusinessException("房间信息为空");
         }
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
 
-        Integer chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(channel);
+        Integer chatId  = SocialuniUnionIdFacede.getUnionIdByUuidAllowNull(channel);
+
+        //创建 chatUser 的逻辑，点击进入页面，会话页加一条
+        //发送消息，还有添加好友成功
+
+        if (chatId == null) {
+            SocialuniChatUserDO chatUserDO = chatService.getSocialuniChatUserDO(channel);
+            chatId = chatUserDO.getChatId();
+        }
+        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
 
         socialuniMusicOperateCheck.checkRoleId(chatId, mineUserId);
 
@@ -373,9 +389,10 @@ public class SocialuniMusicController {
             Console.log("触发了定时器");
             Console.log("afterTime");
             Console.log(afterTime);
+            Integer finalChatId = chatId;
             executorService.schedule(() -> {
                 Console.log("触发了定时器");
-                SocialuniMusicRoomDO dbRoom = SocialuniRepositoryFacade.findByCustomField("roomId", chatId, SocialuniMusicRoomDO.class);
+                SocialuniMusicRoomDO dbRoom = SocialuniRepositoryFacade.findByCustomField("roomId", finalChatId, SocialuniMusicRoomDO.class);
                 if (dbRoom.getSequenceNum().equals(sequence)) {
                     dbRoom.setPlaying(Boolean.FALSE);
                     SocialuniRepositoryFacade.save(dbRoom);
@@ -384,9 +401,8 @@ public class SocialuniMusicController {
 
                 // 这里放置你要延迟执行的代码
                 System.out.println("延迟执行的任务");
+                executorService.shutdown();
             }, afterTime, TimeUnit.MILLISECONDS);
-
-            executorService.shutdown();
         }
 
 

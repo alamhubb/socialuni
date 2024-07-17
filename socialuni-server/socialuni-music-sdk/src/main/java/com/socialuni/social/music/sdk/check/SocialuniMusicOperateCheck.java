@@ -33,11 +33,11 @@ public class SocialuniMusicOperateCheck {
             throw new SocialBusinessException("用户没有操作权限");
         }
 
-        String roleId = socialuniMusicRoomUserDO.getRoomRoleId();
+       /* String roleId = socialuniMusicRoomUserDO.getRoomRoleId();
 
 
         if (StringUtils.isBlank(roleId) || !SocialuniMusicRoleId.hasOperateAuthList.contains(roleId)) {
             throw new SocialBusinessException("用户没有操作权限");
-        }
+        }*/
     }
 }

@@ -18,7 +18,7 @@ public class SocialuniMusicRoomUserInfoRO {
     }
 
     public SocialuniMusicRoomUserInfoRO(String musicRoleId) {
-        super();
+        this();
         this.musicRoleId = musicRoleId;
     }
 }
