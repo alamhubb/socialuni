@@ -8,8 +8,21 @@ import SocialuniTalkViewH5 from "socialuni-community-view-h5/src/views/Socialuni
 import SocialuniChatMessageViewH5 from "socialuni-im-view-h5/src/views/SocialuniChatMessageViewH5.vue";
 import SocialuniUserDetailViewH5 from "socialuni-user-view-h5/src/views/SocialuniUserDetailViewH5.vue";
 import MusicHome from "@/views/music/MusicHome.vue";
+import BeastChess from "@/views/beastChess/BeastChess.vue";
 
 export const constantRoutes = [
+    {
+        path: '/',
+        name: '斗兽棋',
+        component: BeastChess,
+        meta: {title: '斗兽棋'},
+    },
+    {
+        path: '/1',
+        name: '音乐',
+        component: MusicHome,
+        meta: {title: '音乐'},
+    },
     {
         path: '/',
         name: '音乐',
