@@ -203,9 +203,6 @@ export default class MusicPlayer extends Vue {
 
 
   mounted() {
-    if (this.$route.query.chatId) {
-      CommonEventUtil.emit(SocialuniImEventKey.socialuniImPageInit, this.$route.query)
-    }
     this.$refs.audioPlayer.volume = socialuniMusicStore.musicVolume / 100
 
     /*if (this.musicRoomInfo) {

@@ -4,7 +4,7 @@
     <div>{{musicRoomInfo}}</div>
     <music-player :model-value="musicRoomInfo" :data="songList" :has-operate-auth="true"
                   @input="musicRoomInfoInput" @change="musicRoomInfoChange"></music-player>
-    <music-list :data="songList"></music-list>
+    <music-list :data="songList" @change="musicRoomInfoChange"></music-list>
   </div>
 </template>
 

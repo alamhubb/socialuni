@@ -4,7 +4,7 @@
        :infinite-scroll-distance="200"
        :infinite-scroll-delay="200"
   >
-    <div v-for="item in data">
+    <div v-for="item in data" @dblclick="change(item)">
       {{ item.name }}
     </div>
   </div>
@@ -74,6 +74,7 @@ import TalkAddView from "socialuni-community-view-h5/src/views/TalkAddView.vue";
 import QEnumLink from "qingjs-ui-h5/src/components/QEnumLink.vue";
 import QLoadMore from "qingjs-ui/src/components/QLoadMore.vue";
 import QIcon from "qingjs-ui/src/components/QIcon.vue";
+import MusicPlayerSongPlayingInfoRO from "socialuni-music-sdk/src/model/MusicPlayerSongPlayingInfoRO";
 
 @toNative
 @Component({
@@ -86,6 +87,11 @@ export default class MusicList extends Vue {
 
   scrollToLower() {
 
+  }
+
+  @Emit()
+  change(musicInfo: MusicPlayerSongInfoRO): MusicPlayerSongPlayingInfoRO {
+    return new MusicPlayerSongPlayingInfoRO(musicInfo)
   }
 }
 </script>
