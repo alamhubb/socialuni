@@ -1,16 +1,28 @@
 <template>
-  <div class="h100p col-all-center bg-white">
-    <div class="flex-row">
-      <div v-for="key in reversNumbers">{{ getChineseName(key) }}></div>
-      <div>{{ getChineseName(1)}}, {{ getChineseName(1)}}>{{getChineseName(reversNumbers[0])}}</div>,
-      <div>{{ getChineseName(numbers[0])}}可与任意棋子同归于尽</div>
-    </div>
+  <div class="h100p flex-row bg-white">
+    <div class="pd">
+      <div class="flex-row">
+        <div v-for="key in reversNumbers">{{ getChineseName(key) }}></div>
+        <div>{{ getChineseName(1) }}, {{ getChineseName(1) }}>{{ getChineseName(reversNumbers[0]) }}</div>
+        ,
+        <div>{{ getChineseName(numbers[0]) }}可与任意棋子同归于尽</div>
+      </div>
 
-    <div class="h600 w600 row-wrap">
-      <div v-for="i in checkerboard" class="size100 row-all-center bd color-white" :class="['bg-'+getColor(i)+'']">
-        {{ getPieceChineseName(i) }}
+      <div>
+        该红方先走,{{ countDown}}
+      </div>
+
+      <div @click="countDown.computedCountDown">fasdf</div>
+
+    </div>
+    <div class="h100p row-col-center ml">
+      <div class="h600 w600 row-wrap">
+        <div v-for="i in checkerboard" class="size100 row-all-center bd color-white" :class="['bg-'+getColor(i)+'']">
+          {{ getPieceChineseName(i) }}
+        </div>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -27,6 +39,8 @@ import musicRequest from "socialuni-music-sdk/src/plugins/musicRequest";
 import MusicPlayer from "socialuni-music-ui-h5/src/components/MusicPlayer.vue";
 import MusicList from "socialuni-music-ui-h5/src/components/MusicList.vue";
 import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule.ts";
+import CountDownUtil from "@/util/CountDownUtil.ts";
+import {reactive} from "vue";
 
 
 class PieceEnum {
@@ -67,9 +81,12 @@ const piece = new Map([
 
 @toNative
 @Component({
-  components: {MusicPlayer, SocialuniChatViewH5, SocialuniMsgViewH5, MusicList}
+  components: {}
 })
 export default class BeastChess extends Vue {
+
+  countDown = new CountDownUtil(30)
+
   get numbers() {
     const newNums = Array.from(numbers.keys())
     return newNums.reverse()

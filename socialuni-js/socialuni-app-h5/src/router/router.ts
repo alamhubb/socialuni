@@ -24,12 +24,6 @@ export const constantRoutes = [
         meta: {title: '音乐'},
     },
     {
-        path: '/',
-        name: '音乐',
-        component: MusicHome,
-        meta: {title: '音乐'},
-    },
-    {
         path: '/talk',
         name: '社区',
         component: SocialuniTalkViewH5,
