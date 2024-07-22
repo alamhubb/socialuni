@@ -7,18 +7,23 @@
         ,
         <div>{{ getChineseName(numbers[0]) }}可与任意棋子同归于尽</div>
       </div>
-
       <div>
-        该红方先走,{{ countDown}}
+        {{checkerboard}}
+      </div>
+      <div>
+        该红方先走,{{ countDown }}---{{ chooseIndex }}
       </div>
 
       <div @click="countDown.computedCountDown">fasdf</div>
 
     </div>
     <div class="h100p row-col-center ml">
-      <div class="h600 w600 row-wrap">
-        <div v-for="i in checkerboard" class="size100 row-all-center bd color-white" :class="['bg-'+getColor(i)+'']">
-          {{ getPieceChineseName(i) }}
+
+      <div class="h500 w600 row-wrap">
+        <div v-for="(level,index) in checkerboard" class="size100 row-all-center bd color-white"
+             :class="['bg-'+getColor(level)+'', chooseIndex===index?'bd-dashed bg-active':'',canItBeTarget(level,index)?'opacity':'']"
+             @click="choosePiece(index)">
+          {{ getPieceChineseName(level) }}--{{index}}
         </div>
       </div>
     </div>
@@ -85,7 +90,48 @@ const piece = new Map([
 })
 export default class BeastChess extends Vue {
 
+  choosePiece(index: number) {
+    this.chooseIndex = index
+  }
+
+  chooseIndex = null
+
   countDown = new CountDownUtil(30)
+
+  canItBeTarget(level: number, index: number) {
+    if (this.chooseIndex || this.chooseIndex === 0) {
+      const top = this.chooseIndex - 6
+      const bottom = this.chooseIndex + 6
+      const left = this.chooseIndex - 1
+      const right = this.chooseIndex + 1
+      //相乘为负数才为对方颜色
+      const topCanBeTarget = (top > -1) && ((this.checkerboard[top] * this.checkerboard[this.chooseIndex]) < 1)
+      const bottomCanBeTarget = (bottom < 30) && ((this.checkerboard[bottom] * this.checkerboard[this.chooseIndex]) < 1)
+      const leftCanBeTarget = (left > -1) && ((this.checkerboard[left] * this.checkerboard[this.chooseIndex]) < 1)
+      const rightCanBeTarget = (right < 30) && ((this.checkerboard[right] * this.checkerboard[this.chooseIndex]) < 1)
+      if (top === index){
+        console.log('return true')
+        console.log(level)
+        console.log(index)
+        console.log(top)
+        console.log(this.checkerboard[top])
+        console.log((this.checkerboard[top] > -1))
+        console.log(((this.checkerboard[top] * this.checkerboard[this.chooseIndex]) < 1))
+        console.log(topCanBeTarget)
+      }
+      if (topCanBeTarget && index === top) {
+        return true
+      }else if (bottomCanBeTarget && index === bottom) {
+        return true
+      } else if (leftCanBeTarget && index === left) {
+        return true
+      }else if (rightCanBeTarget && index === right) {
+        return true
+      }
+      console.log('return fase')
+    }
+    return false
+  }
 
   get numbers() {
     const newNums = Array.from(numbers.keys())
