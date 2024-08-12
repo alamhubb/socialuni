@@ -65,7 +65,7 @@ export default class MusicHome extends Vue {
   async querySongList() {
     const data = await musicRequest.get('/playlist/detail?id=3778678') as any
     const songList: MusicPlayerSongInfoRO[] = data.playlist.tracks.map((row: any) => {
-      const songRO: MusicPlayerSongInfoRO = {
+      const songRO: MusicPlayerSongInfoRO = new MusicPlayerSongPlayingInfoRO({
         songId: row.id,
         name: row.name,
         author: row.ar?.map(item => item.name),
@@ -73,7 +73,7 @@ export default class MusicHome extends Vue {
         albumImg: row.al.picUrl,
         musicTime: row.dt,
         musicUrl: `https://music.163.com/song/media/outer/url?id=${row.id}.mp3`,
-      }
+      })
       return songRO
     })
     this.songList = songList

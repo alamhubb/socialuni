@@ -7,7 +7,7 @@
         <div v-if="curMusicInfo">
           <img class="size50  bd-round" :src="curMusicInfo.albumImg">
           {{ curMusicInfo.name }}
-<!--          &#45;&#45;{{ curMusicInfo.author.join(' / ') }}-->
+          <!--          &#45;&#45;{{ curMusicInfo.author.join(' / ') }}-->
         </div>
       </div>
       <div class="w40p flex-none">
@@ -50,7 +50,7 @@
     </div>
 
     <q-dialog ref="musicListDialog" title="我的音乐">
-<!--      <music-list :data="data"></music-list>-->
+      <!--      <music-list :data="data"></music-list>-->
     </q-dialog>
   </div>
 </template>
@@ -143,7 +143,7 @@ export default class MusicPlayer extends Vue {
   //然后不需要播放
   get musicMax() {
     if (this.curMusicInfo) {
-      return this.curMusicInfo.musicTime * this.secondPlayingUnit
+      return this.curMusicInfo.musicTime
       // return 500 * 100
     }
     return 0
@@ -195,10 +195,8 @@ export default class MusicPlayer extends Vue {
   }
 
   setMusicCurTime() {
-    this.$refs.audioPlayer.currentTime = Math.floor(this.realPlayingValue / this.secondPlayingUnit)
+    this.$refs.audioPlayer.currentTime = Math.floor(this.realPlayingValue)
   }
-
-
 
 
   musicVolumeInput(value) {
@@ -215,7 +213,7 @@ export default class MusicPlayer extends Vue {
 
     this.dragging = true
     //秒，
-    const playTime = Math.floor(value / this.secondPlayingUnit)
+    const playTime = Math.floor(value)
 
     //所以播放时间也要为秒
     // if (this.modelValue.playing) {
@@ -224,7 +222,7 @@ export default class MusicPlayer extends Vue {
 
     const curTime = new Date()
 
-    this.input({
+    this.input(new MusicPlayerSongPlayingInfoRO({
       ...this.curMusicInfo,
       musicTime: this.curMusicInfo.musicTime,
       musicUrl: this.curMusicInfo.musicUrl,
@@ -232,7 +230,7 @@ export default class MusicPlayer extends Vue {
       //单位秒
       playingTime: playTime,
       playing: this.curMusicInfo.playing,
-    })
+    }))
     // this.computedRealPlayingValue(false)
   }
 
@@ -253,26 +251,28 @@ export default class MusicPlayer extends Vue {
       //如何判断是继续播放还是重新播放
       //根据playTime决定
       if (this.curMusicInfo?.musicUrl) {
-        const playRoomInfo = {
+        const playRoomInfo = new MusicPlayerSongPlayingInfoRO({
+          ...this.curMusicInfo,
           musicTime: this.curMusicInfo.musicTime,
           musicUrl: this.curMusicInfo.musicUrl,
           playingTimestamp: new Date(),
           //单位秒
-          playingTime: this.realPlayingValue / this.secondPlayingUnit,
+          playingTime: this.realPlayingValue,
           playing: playing,
-        }
+        })
         this.change(playRoomInfo)
       }
     } else {
       this.$refs.audioPlayer.pause()
-      const playRoomInfo = {
+      const playRoomInfo = new MusicPlayerSongPlayingInfoRO({
+        ...this.curMusicInfo,
         musicTime: this.curMusicInfo.musicTime,
         musicUrl: this.curMusicInfo.musicUrl,
         playingTimestamp: new Date(),
         //单位秒
-        playingTime: this.realPlayingValue / this.secondPlayingUnit,
+        playingTime: this.realPlayingValue,
         playing: playing,
-      }
+      })
       this.change(playRoomInfo)
     }
   }
@@ -306,9 +306,9 @@ export default class MusicPlayer extends Vue {
     //什么情况下为0，是播放完成后
     //进度为0.01秒
     if (this.curMusicInfo.playing) {
-      this._realPlayingValue = Math.floor(diffTime / this.playingUnit) + this.curMusicInfo.playingTime * this.secondPlayingUnit
+      this._realPlayingValue = Math.floor(diffTime / this.playingUnit) + this.curMusicInfo.playingTime
     } else {
-      this._realPlayingValue = this.curMusicInfo.playingTime * this.secondPlayingUnit
+      this._realPlayingValue = this.curMusicInfo.playingTime
     }
     if (!this.dragging) {
       if (this._realPlayingValue >= this.musicMax && this.curMusicInfo.playing) {
@@ -344,7 +344,7 @@ export default class MusicPlayer extends Vue {
   }
 
   //10毫秒,进度条执行粒度
-  playingUnit = 10;
+  playingUnit = 1000;
 
   //100秒
   get secondPlayingUnit() {
@@ -353,7 +353,7 @@ export default class MusicPlayer extends Vue {
 
   formatTooltip(value) {
     console.log(value)
-    const time = Math.floor(value / this.secondPlayingUnit)
+    const time = Math.floor(value) * 1000
     return DateUtil.convertToTime(time)
   }
 
@@ -368,7 +368,7 @@ export default class MusicPlayer extends Vue {
     this.checkRoleId()
     //主要是为了设置url
     const musicUrl = `https://music.163.com/song/media/outer/url?id=${songId}.mp3`;
-    const playRoomInfo = {
+    const playRoomInfo = new MusicPlayerSongPlayingInfoRO({
       ...this.curMusicInfo,
       musicTime: 0,
       musicUrl: musicUrl,
@@ -376,7 +376,7 @@ export default class MusicPlayer extends Vue {
       //单位秒
       playingTime: 0,
       playing: false,
-    }
+    })
     this.input(playRoomInfo)
 
     //更新音乐时长
