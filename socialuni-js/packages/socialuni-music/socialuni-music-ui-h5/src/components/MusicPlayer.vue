@@ -28,7 +28,9 @@
           </div>
         </div>
         <div class="row-col-center">
-          <div class="flex-none font-12 color-sub">{{ curPlayingTime }}</div>
+          {{curMusicInfo}}
+          {{realPlayingValue}}--{{_realPlayingValue}}
+          <div class="flex-none font-12 color-sub">{{ formatTooltip(realPlayingValue) }}</div>
           <el-slider class="flex-1 mx-sm" v-model="realPlayingValue" @input="musicInput" @change="musicChange"
                      :show-tooltip="false"
                      :disabled="!hasOperateAuth"
