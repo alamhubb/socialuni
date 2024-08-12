@@ -133,7 +133,7 @@ export default class MusicPlayer extends Vue {
       if (this.curMusicInfo.playing && !this.dragging) {
         this.timer = setInterval(() => {
           this.computedRealPlayingValue()
-        }, this.playingUnit)
+        }, 10)
       }
     }
   }
@@ -143,7 +143,9 @@ export default class MusicPlayer extends Vue {
   //然后不需要播放
   get musicMax() {
     if (this.curMusicInfo) {
-      return this.curMusicInfo.musicTime
+      console.log(this.curMusicInfo.musicTime)
+      console.log(Math.ceil(this.curMusicInfo.musicTime / this.playingUnit))
+      return Math.ceil(this.curMusicInfo.musicTime / this.playingUnit)
       // return 500 * 100
     }
     return 0
@@ -353,7 +355,7 @@ export default class MusicPlayer extends Vue {
 
   formatTooltip(value) {
     console.log(value)
-    const time = Math.floor(value) * 1000
+    const time = Math.floor(value) * this.playingUnit
     return DateUtil.convertToTime(time)
   }
 
