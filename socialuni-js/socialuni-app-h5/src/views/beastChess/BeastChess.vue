@@ -8,7 +8,7 @@
         <div>{{ getChineseName(numbers[0]) }}可与任意棋子同归于尽</div>
       </div>
       <div>
-        {{checkerboard}}
+        {{ checkerboard }}
       </div>
       <div>
         该红方先走,{{ countDown }}---{{ chooseIndex }}
@@ -23,7 +23,7 @@
         <div v-for="(level,index) in checkerboard" class="size100 row-all-center bd color-white"
              :class="['bg-'+getColor(level)+'', chooseIndex===index?'bd-dashed bg-active':'',canItBeTarget(level,index)?'opacity':'']"
              @click="choosePiece(index)">
-          {{ getPieceChineseName(level) }}--{{index}}
+          {{ getPieceChineseName(level) }}--{{ index }}
         </div>
       </div>
     </div>
@@ -90,8 +90,17 @@ const piece = new Map([
 })
 export default class BeastChess extends Vue {
 
+  self = 1
+
+  isSelf(index) {
+    return (this.checkerboard[index] * this.self) > -1
+  }
+
+
   choosePiece(index: number) {
-    this.chooseIndex = index
+    if (this.isSelf(index)) {
+      this.chooseIndex = index
+    }
   }
 
   chooseIndex = null
@@ -109,7 +118,7 @@ export default class BeastChess extends Vue {
       const bottomCanBeTarget = (bottom < 30) && ((this.checkerboard[bottom] * this.checkerboard[this.chooseIndex]) < 1)
       const leftCanBeTarget = (left > -1) && ((this.checkerboard[left] * this.checkerboard[this.chooseIndex]) < 1)
       const rightCanBeTarget = (right < 30) && ((this.checkerboard[right] * this.checkerboard[this.chooseIndex]) < 1)
-      if (top === index){
+      if (top === index) {
         console.log('return true')
         console.log(level)
         console.log(index)
@@ -121,11 +130,11 @@ export default class BeastChess extends Vue {
       }
       if (topCanBeTarget && index === top) {
         return true
-      }else if (bottomCanBeTarget && index === bottom) {
+      } else if (bottomCanBeTarget && index === bottom) {
         return true
       } else if (leftCanBeTarget && index === left) {
         return true
-      }else if (rightCanBeTarget && index === right) {
+      } else if (rightCanBeTarget && index === right) {
         return true
       }
       console.log('return fase')
