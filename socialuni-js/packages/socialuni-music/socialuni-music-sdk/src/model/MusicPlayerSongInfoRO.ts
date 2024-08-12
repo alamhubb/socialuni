@@ -5,6 +5,7 @@ export default class MusicPlayerSongInfoRO {
     albumImg: string = null
     author: string[] = null
     album: string = null
+    //毫秒
     musicTime: number = null
     musicUrl: String = null
 

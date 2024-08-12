@@ -343,14 +343,17 @@ export default class MusicPlayer extends Vue {
     return this.formatTooltip(this.realPlayingValue)
   }
 
+  //10毫秒,进度条执行粒度
   playingUnit = 10;
 
+  //100秒
   get secondPlayingUnit() {
     return 1000 / this.playingUnit
   }
 
   formatTooltip(value) {
-    const time = Math.floor(value / this.secondPlayingUnit) * 1000
+    console.log(value)
+    const time = Math.floor(value / this.secondPlayingUnit)
     return DateUtil.convertToTime(time)
   }
 
