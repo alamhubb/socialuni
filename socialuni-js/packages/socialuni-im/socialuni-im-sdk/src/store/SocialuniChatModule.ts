@@ -81,8 +81,10 @@ class SocialuniChatModule {
             this.chats.unshift(chat)
 
             const res = await SocialuniUserLikeAPI.queryChatAPI(new ChatQueryQO(chatId))
+            console.log(res)
             this.pushMsgReplaceChatByChat(res.data)
         }
+        console.log(chat)
         this.setChatId(chatId)
         this.readChat(this.messages)
         socialuniChatModule.scrollToMessagePageBottom()
@@ -144,7 +146,7 @@ class SocialuniChatModule {
             total = total + chat.unreadNum
             return total
         }, 0)
-        if (socialuniSystemModule.isUniApp){
+        if (socialuniSystemModule.isUniApp) {
             const chatUnreadNum: number = this.chatsUnreadNumTotal
             // 如果未读数量为0了，则隐藏红点
             if (chatUnreadNum) {

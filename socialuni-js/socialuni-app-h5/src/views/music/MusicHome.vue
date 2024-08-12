@@ -1,8 +1,9 @@
 <template>
   <div class="h100p">
-    <div>{{musicRoomId}}</div>
-    <div>{{musicRoomInfo}}</div>
-    <music-player ref="musicPlayer" :model-value="musicRoomInfo" :data="songList" :has-operate-auth="true"
+    <div>{{ musicRoomId }}</div>
+    <div>{{ musicRoomInfo }}</div>
+    <!--    <music-player ref="musicPlayer" :cur-music-info="musicRoomInfo" :data="songList" :has-operate-auth="true"-->
+    <music-player ref="musicPlayer" :cur-music-info="musicRoomInfo" :has-operate-auth="true"
                   @input="musicRoomInfoInput" @change="musicRoomInfoChange"></music-player>
     <music-list :data="songList" @change="listMusicChange"></music-list>
   </div>
@@ -53,7 +54,7 @@ export default class MusicHome extends Vue {
   }
 
 
-  get musicRoomId(){
+  get musicRoomId() {
     return socialuniMusicStore.musicRoomId
   }
 
@@ -97,8 +98,9 @@ export default class MusicHome extends Vue {
     socialuniMusicStore.setMusicRoomInfo(musicRoomInfo)
   }
 
-  listMusicChange(musicRoomInfo: MusicPlayerSongPlayingInfoRO){
-
+  listMusicChange(musicRoomInfo: MusicPlayerSongPlayingInfoRO) {
+    musicRoomInfo.playing = true
+    this.musicRoomInfoChange(musicRoomInfo)
   }
 
   //哪些操作会改变后端数据，切换会变

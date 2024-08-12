@@ -1,3 +1,4 @@
+/*
 import {Component, Vue, Watch, toNative} from 'vue-facing-decorator';
 import SocialuniChatViewH5 from "socialuni-im-view-h5/src/views/SocialuniChatViewH5.vue"
 import SocialuniMsgViewH5 from "socialuni-im-view-h5/src/views/SocialuniMsgViewH5.vue"
@@ -79,11 +80,11 @@ export default class MessageView extends Vue {
             CommonEventUtil.emit(SocialuniImEventKey.socialuniImPageInit, this.$route.query)
         }
 
-        /*if (this.musicRoomInfo) {
+        /!*if (this.musicRoomInfo) {
             if (this.musicRoomInfo.playing) {
                 // this.frontPlay()
             }
-        }*/
+        }*!/
 
         // this.init()
         // this.getMusic()
@@ -315,11 +316,11 @@ export default class MessageView extends Vue {
     terstfasd111() {
         // socialuniUserRequest.get('https://api.sd-rtn.com/api/dev/v1/channel/user/5e681410a7434ce9bba3e268226ce537/51b26fe57a9d4d148d9b7df536eeebfa')
 
-        /*musicRequest.get(`api/dev/v1/channel/user/5e681410a7434ce9bba3e268226ce537/51b26fe57a9d4d148d9b7df536eeebfa`, {
+        /!*musicRequest.get(`api/dev/v1/channel/user/5e681410a7434ce9bba3e268226ce537/51b26fe57a9d4d148d9b7df536eeebfa`, {
             headers: {
                 Authorization: "Basic MWE5N2IyZmU3NjY2NGVmNjhiZmRkZjcyNTZjZjkxZDM6OTk5YzA2ODljYzc5NDEyOGI0NTBjMWQ3MDJmMGUyZjM="
             }
-        })*/
+        })*!/
 
         SocialuniMusicAPI.queryMusicChannel(socialuniMusicStore.musicRoomId)
     }
@@ -341,3 +342,4 @@ export default class MessageView extends Vue {
     }
 
 }
+*/

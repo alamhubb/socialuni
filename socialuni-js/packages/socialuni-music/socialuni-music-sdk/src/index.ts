@@ -25,6 +25,8 @@ class SocialuniMusicPlugin implements SocialuniPlugin {
 
         //页面初始化的时候，设置房间号
         CommonEventUtil.on(SocialuniImEventKey.socialuniImPageInit, async (params: MessageViewParams) => {
+            console.log('fasldfj')
+            console.log(params)
             socialuniMusicStore.setMusicRoomId(params.chatId)
             if (socialuniTokenModule.token) {
                 const userRes = await SocialuniMusicAPI.queryMusicRoomUserInfoAPI(socialuniMusicStore.musicRoomId)

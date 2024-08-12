@@ -1,12 +1,13 @@
 <template>
   <div class="w100p bg-white">
-    <audio ref="audioPlayer" :src="modelValue?.musicUrl"></audio>
+    <audio ref="audioPlayer" :src="curMusicInfo?.musicUrl"></audio>
 
     <div class="row-between-center flex-none px">
       <div class="w20p flex-none">
         <div v-if="curMusicInfo">
           <img class="size50  bd-round" :src="curMusicInfo.albumImg">
-          {{ curMusicInfo.name }}--{{ curMusicInfo.author.join(' / ') }}
+          {{ curMusicInfo.name }}
+<!--          &#45;&#45;{{ curMusicInfo.author.join(' / ') }}-->
         </div>
       </div>
       <div class="w40p flex-none">
@@ -49,7 +50,7 @@
     </div>
 
     <q-dialog ref="musicListDialog" title="我的音乐">
-      <music-list :data="data"></music-list>
+<!--      <music-list :data="data"></music-list>-->
     </q-dialog>
   </div>
 </template>
@@ -77,14 +78,21 @@ export default class MusicPlayer extends Vue {
     audioPlayer: HTMLAudioElement
     musicListDialog: QDialog
   }
-  @Model('modelValue') modelValue: MusicPlayerSongPlayingInfoRO
-  @Prop() data: MusicPlayerSongInfoRO []
+  // @Model('modelValue')
+  @Prop() curMusicInfo: MusicPlayerSongPlayingInfoRO
+  // @Prop() data: MusicPlayerSongInfoRO []
   @Prop() hasOperateAuth: boolean
 
-  get curMusicInfo() {
-    const musicInfo = this.data.find(item => `https://music.163.com/song/media/outer/url?id=${item.songId}.mp3` === this.modelValue.musicUrl)
-    return musicInfo
-  }
+
+  //是否正在拖拽播放进度
+  dragging = false
+
+  //提示音乐正在播放次数
+  hintMusicPlayingNum = 0
+  // get curMusicInfo() {
+  //   const musicInfo = this.data.find(item => `https://music.163.com/song/media/outer/url?id=${item.songId}.mp3` === this.modelValue.musicUrl)
+  //   return musicInfo
+  // }
 
   get socialuniMusicStore() {
     return socialuniMusicStore
@@ -92,7 +100,7 @@ export default class MusicPlayer extends Vue {
 
   get watchModelValueObj() {
     return {
-      modelValue: this.modelValue,
+      modelValue: this.curMusicInfo,
       dragging: this.dragging,
     }
   }
@@ -106,9 +114,11 @@ export default class MusicPlayer extends Vue {
     return false
   }
 
+
+  //如果传入的就是正在播方的，通过播放状态就可以
   @Watch('watchModelValueObj')
   watchModelValueChange() {
-    if (this.modelValue) {
+    if (this.curMusicInfo) {
       this.computedRealPlayingValue()
       this.setPlayerCurTimeAndPlay()
       //为什么要在这里设置呢，暂时注释
@@ -120,7 +130,7 @@ export default class MusicPlayer extends Vue {
         this.timer = null
       }
       //正在播放，且不为拖拽才定时增长
-      if (this.modelValue.playing && !this.dragging) {
+      if (this.curMusicInfo.playing && !this.dragging) {
         this.timer = setInterval(() => {
           this.computedRealPlayingValue()
         }, this.playingUnit)
@@ -129,15 +139,11 @@ export default class MusicPlayer extends Vue {
   }
 
 
-  //提示音乐正在播放次数
-  hintMusicPlayingNum = 0
-
   //创建时设置musicTime
   //然后不需要播放
-
   get musicMax() {
-    if (this.modelValue) {
-      return this.modelValue.musicTime * this.secondPlayingUnit
+    if (this.curMusicInfo) {
+      return this.curMusicInfo.musicTime * this.secondPlayingUnit
       // return 500 * 100
     }
     return 0
@@ -146,7 +152,7 @@ export default class MusicPlayer extends Vue {
   private timer = null
 
   get musicPlaying() {
-    return this.modelValue && (this.modelValue.playing)
+    return this.curMusicInfo && (this.curMusicInfo.playing)
   }
 
   get musicMuted() {
@@ -154,10 +160,27 @@ export default class MusicPlayer extends Vue {
   }
 
 
+  mounted() {
+    // if (this.$route.query.chatId) {
+    //   CommonEventUtil.emit(SocialuniImEventKey.socialuniImPageInit, this.$route.query)
+    // }
+    // this.$refs.audioPlayer.volume = socialuniMusicStore.musicVolume / 100
+
+    /*if (this.musicRoomInfo) {
+        if (this.musicRoomInfo.playing) {
+        }
+    }*/
+
+    // this.init()
+    // this.getMusic()
+    // this.queryMusicRoomPlayer()
+  }
+
+
   setPlayerCurTimeAndPlay() {
     if (!this.dragging) {
       nextTick(() => {
-        if (this.modelValue?.playing) {
+        if (this.curMusicInfo?.playing) {
           // console.log(this.$refs.audioPlayer.paused || this.$refs.audioPlayer.ended)
           // if (!this.$refs.audioPlayer.paused || !this.$refs.audioPlayer.ended) {
           this.setMusicCurTime()
@@ -176,24 +199,7 @@ export default class MusicPlayer extends Vue {
   }
 
 
-  mounted() {
-    if (this.$route.query.chatId) {
-      CommonEventUtil.emit(SocialuniImEventKey.socialuniImPageInit, this.$route.query)
-    }
-    this.$refs.audioPlayer.volume = socialuniMusicStore.musicVolume / 100
 
-    /*if (this.musicRoomInfo) {
-        if (this.musicRoomInfo.playing) {
-        }
-    }*/
-
-    // this.init()
-    // this.getMusic()
-    // this.queryMusicRoomPlayer()
-  }
-
-
-  dragging = false
 
   musicVolumeInput(value) {
     this.$refs.audioPlayer.volume = value / 100
@@ -219,12 +225,13 @@ export default class MusicPlayer extends Vue {
     const curTime = new Date()
 
     this.input({
-      musicTime: this.modelValue.musicTime,
-      musicUrl: this.modelValue.musicUrl,
+      ...this.curMusicInfo,
+      musicTime: this.curMusicInfo.musicTime,
+      musicUrl: this.curMusicInfo.musicUrl,
       playingTimestamp: curTime,
       //单位秒
       playingTime: playTime,
-      playing: this.modelValue.playing,
+      playing: this.curMusicInfo.playing,
     })
     // this.computedRealPlayingValue(false)
   }
@@ -233,7 +240,7 @@ export default class MusicPlayer extends Vue {
   musicChange() {
     this.checkRoleId()
     this.dragging = false
-    this.change(this.modelValue)
+    this.change(this.curMusicInfo)
   }
 
   //初始化的播放怎么做，播放音乐必须调用这个方法。其他方法只能设置歌曲信息，只有这个才可以开启浏览器播放
@@ -245,10 +252,10 @@ export default class MusicPlayer extends Vue {
     if (playing) {
       //如何判断是继续播放还是重新播放
       //根据playTime决定
-      if (this.modelValue?.musicUrl) {
+      if (this.curMusicInfo?.musicUrl) {
         const playRoomInfo = {
-          musicTime: this.modelValue.musicTime,
-          musicUrl: this.modelValue.musicUrl,
+          musicTime: this.curMusicInfo.musicTime,
+          musicUrl: this.curMusicInfo.musicUrl,
           playingTimestamp: new Date(),
           //单位秒
           playingTime: this.realPlayingValue / this.secondPlayingUnit,
@@ -259,8 +266,8 @@ export default class MusicPlayer extends Vue {
     } else {
       this.$refs.audioPlayer.pause()
       const playRoomInfo = {
-        musicTime: this.modelValue.musicTime,
-        musicUrl: this.modelValue.musicUrl,
+        musicTime: this.curMusicInfo.musicTime,
+        musicUrl: this.curMusicInfo.musicUrl,
         playingTimestamp: new Date(),
         //单位秒
         playingTime: this.realPlayingValue / this.secondPlayingUnit,
@@ -292,19 +299,19 @@ export default class MusicPlayer extends Vue {
   computedRealPlayingValue() {
     // if (!dragging) {
     const curDate = new Date().getTime()
-    const playTime = new Date(this.modelValue.playingTimestamp).getTime()
+    const playTime = new Date(this.curMusicInfo.playingTimestamp).getTime()
     //得到已播放时间的时间差
     const diffTime = curDate - playTime
 
     //什么情况下为0，是播放完成后
     //进度为0.01秒
-    if (this.modelValue.playing) {
-      this._realPlayingValue = Math.floor(diffTime / this.playingUnit) + this.modelValue.playingTime * this.secondPlayingUnit
+    if (this.curMusicInfo.playing) {
+      this._realPlayingValue = Math.floor(diffTime / this.playingUnit) + this.curMusicInfo.playingTime * this.secondPlayingUnit
     } else {
-      this._realPlayingValue = this.modelValue.playingTime * this.secondPlayingUnit
+      this._realPlayingValue = this.curMusicInfo.playingTime * this.secondPlayingUnit
     }
     if (!this.dragging) {
-      if (this._realPlayingValue >= this.musicMax && this.modelValue.playing) {
+      if (this._realPlayingValue >= this.musicMax && this.curMusicInfo.playing) {
         if (this.hasOperateAuth) {
           this.next(1)
         } else {
@@ -359,6 +366,7 @@ export default class MusicPlayer extends Vue {
     //主要是为了设置url
     const musicUrl = `https://music.163.com/song/media/outer/url?id=${songId}.mp3`;
     const playRoomInfo = {
+      ...this.curMusicInfo,
       musicTime: 0,
       musicUrl: musicUrl,
       playingTimestamp: new Date(),
@@ -373,8 +381,9 @@ export default class MusicPlayer extends Vue {
       console.log('2222222222')
       const curTime = new Date()
       const musicRoomInfo = new MusicPlayerSongPlayingInfoRO({
+        ...this.curMusicInfo,
         musicTime: this.$refs.audioPlayer.duration,
-        musicUrl: this.modelValue.musicUrl,
+        musicUrl: this.curMusicInfo.musicUrl,
         playingTimestamp: curTime,
         //单位秒
         playingTime: 0,
@@ -387,7 +396,7 @@ export default class MusicPlayer extends Vue {
 
   async frontPlay() {
     console.log('666666666666g')
-    if (this.modelValue.playing) {
+    if (this.curMusicInfo.playing) {
       try {
         if (this.$refs.audioPlayer.paused || this.$refs.audioPlayer.ended) {
           console.log('chufale bofang')
@@ -404,22 +413,22 @@ export default class MusicPlayer extends Vue {
     }
   }
 
-  next(num: number) {
-    this.checkRoleId()
-    console.log(this.modelValue.name)
-    const index = this.data.findIndex(item => `https://music.163.com/song/media/outer/url?id=${item.songId}.mp3` === this.modelValue.musicUrl)
-    const nextIndex = index + num
-    if (!this.data.length) {
-      return;
-    }
-    let nextSong
-    if (nextIndex >= 0 && nextIndex < this.data.length) {
-      nextSong = this.data[nextIndex]
-    } else {
-      nextSong = this.data[0]
-    }
-    this.playMusicAPI(nextSong.songId)
-  }
+  // next(num: number) {
+  //   this.checkRoleId()
+  //   console.log(this.curMusicInfo.name)
+  //   const index = this.data.findIndex(item => `https://music.163.com/song/media/outer/url?id=${item.songId}.mp3` === this.curMusicInfo.musicUrl)
+  //   const nextIndex = index + num
+  //   if (!this.data.length) {
+  //     return;
+  //   }
+  //   let nextSong
+  //   if (nextIndex >= 0 && nextIndex < this.data.length) {
+  //     nextSong = this.data[nextIndex]
+  //   } else {
+  //     nextSong = this.data[0]
+  //   }
+  //   this.playMusicAPI(nextSong.songId)
+  // }
 
   async frontPause() {
     if (!this.$refs.audioPlayer.paused && !this.$refs.audioPlayer.ended) {
