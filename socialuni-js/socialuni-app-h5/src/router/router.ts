@@ -13,15 +13,15 @@ import BeastChess from "@/views/beastChess/BeastChess.vue";
 export const constantRoutes = [
     {
         path: '/',
-        name: '斗兽棋',
-        component: BeastChess,
-        meta: {title: '斗兽棋'},
-    },
-    {
-        path: '/1',
         name: '音乐',
         component: MusicHome,
         meta: {title: '音乐'},
+    },
+    {
+        path: '/123',
+        name: '斗兽棋',
+        component: BeastChess,
+        meta: {title: '斗兽棋'},
     },
     {
         path: '/talk',
