@@ -1,5 +1,6 @@
 import MusicPlayerSongInfoRO from "./MusicPlayerSongInfoRO";
 
+//音乐信息播放状态，比列表信息多播放信息
 export default class MusicPlayerSongPlayingInfoRO extends MusicPlayerSongInfoRO {
     //开始播放时间
     playingTimestamp: Date = null

@@ -80,6 +80,7 @@ export default class MusicHome extends Vue {
       console.log(1312312)
       console.log(this.musicRoomInfo)
       if (!this.musicRoomInfo) {
+        //如果没有播放信息，则设置播放信息为第一首歌曲
         const musicRoomInfo = new MusicPlayerSongPlayingInfoRO(this.songList[0])
         musicRoomInfo.musicTime = Math.floor(musicRoomInfo.musicTime / 1000)
         console.log(this.songList[0])

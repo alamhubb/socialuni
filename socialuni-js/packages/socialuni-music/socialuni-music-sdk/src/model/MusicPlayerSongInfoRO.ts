@@ -1,3 +1,4 @@
+//音乐信息基础，列表信息类
 export default class MusicPlayerSongInfoRO {
     songId: number = null
     name: string = null
