@@ -2,9 +2,9 @@
   <div class="h100p">
     <div>{{musicRoomId}}</div>
     <div>{{musicRoomInfo}}</div>
-    <music-player :model-value="musicRoomInfo" :data="songList" :has-operate-auth="true"
+    <music-player ref="musicPlayer" :model-value="musicRoomInfo" :data="songList" :has-operate-auth="true"
                   @input="musicRoomInfoInput" @change="musicRoomInfoChange"></music-player>
-    <music-list :data="songList" @change="musicRoomInfoChange"></music-list>
+    <music-list :data="songList" @change="listMusicChange"></music-list>
   </div>
 </template>
 
@@ -81,7 +81,7 @@ export default class MusicHome extends Vue {
       console.log(this.musicRoomInfo)
       if (!this.musicRoomInfo) {
         //如果没有播放信息，则设置播放信息为第一首歌曲
-        const musicRoomInfo = new MusicPlayerSongPlayingInfoRO(this.songList[0])
+        const musicRoomInfo = new MusicPlayerSongPlayingInfoRO({...this.songList[0]})
         musicRoomInfo.musicTime = Math.floor(musicRoomInfo.musicTime / 1000)
         console.log(this.songList[0])
         console.log(musicRoomInfo)
@@ -97,6 +97,11 @@ export default class MusicHome extends Vue {
     socialuniMusicStore.setMusicRoomInfo(musicRoomInfo)
   }
 
+  listMusicChange(musicRoomInfo: MusicPlayerSongPlayingInfoRO){
+
+  }
+
+  //哪些操作会改变后端数据，切换会变
   musicRoomInfoChange(musicRoomInfo: MusicPlayerSongPlayingInfoRO) {
     //必须深拷贝，不这么写会导致一致，导致不播放
     this.musicRoomInfoInput(musicRoomInfo)

@@ -91,7 +91,7 @@ export default class MusicList extends Vue {
 
   @Emit()
   change(musicInfo: MusicPlayerSongInfoRO): MusicPlayerSongPlayingInfoRO {
-    return new MusicPlayerSongPlayingInfoRO(musicInfo)
+    return new MusicPlayerSongPlayingInfoRO({...musicInfo})
   }
 }
 </script>

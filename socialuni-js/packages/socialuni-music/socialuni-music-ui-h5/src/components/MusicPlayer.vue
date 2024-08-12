@@ -111,14 +111,15 @@ export default class MusicPlayer extends Vue {
     if (this.modelValue) {
       this.computedRealPlayingValue()
       this.setPlayerCurTimeAndPlay()
-      const volume = this.$refs.audioPlayer.volume
-      socialuniMusicStore.musicVolume = Math.ceil(volume * 100)
-      socialuniMusicStore.musicMuted = this.$refs.audioPlayer.muted
+      //为什么要在这里设置呢，暂时注释
+      // const volume = this.$refs.audioPlayer.volume
+      // socialuniMusicStore.musicVolume = Math.ceil(volume * 100)
+      // socialuniMusicStore.musicMuted = this.$refs.audioPlayer.muted
       if (this.timer) {
         clearInterval(this.timer)
         this.timer = null
       }
-      //不为播放，且不为拖拽才定时增长
+      //正在播放，且不为拖拽才定时增长
       if (this.modelValue.playing && !this.dragging) {
         this.timer = setInterval(() => {
           this.computedRealPlayingValue()
@@ -235,8 +236,7 @@ export default class MusicPlayer extends Vue {
     this.change(this.modelValue)
   }
 
-  //初始化的播放怎么做
-
+  //初始化的播放怎么做，播放音乐必须调用这个方法。其他方法只能设置歌曲信息，只有这个才可以开启浏览器播放
   continuePlay() {
     const playing: boolean = !this.musicPlaying
     if (!this.hasOperateAuth) {
@@ -270,6 +270,7 @@ export default class MusicPlayer extends Vue {
     }
   }
 
+  //是否静音
   mutedMusic() {
     if (this.musicMuted) {
       this.$refs.audioPlayer.muted = false
@@ -287,6 +288,7 @@ export default class MusicPlayer extends Vue {
     return this._realPlayingValue
   }
 
+  //计算当前播放时间
   computedRealPlayingValue() {
     // if (!dragging) {
     const curDate = new Date().getTime()
