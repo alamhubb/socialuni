@@ -145,8 +145,6 @@ export default class MusicPlayer extends Vue {
   //然后不需要播放
   get musicMax() {
     if (this.curMusicInfo) {
-      console.log(this.curMusicInfo.musicTime)
-      console.log(Math.ceil(this.curMusicInfo.musicTime / this.playingUnit))
       return Math.ceil(this.curMusicInfo.musicTime / this.playingUnit)
       // return 500 * 100
     }
@@ -356,7 +354,6 @@ export default class MusicPlayer extends Vue {
   }
 
   formatTooltip(value) {
-    console.log(value)
     const time = Math.floor(value) * this.playingUnit
     return DateUtil.convertToTime(time)
   }

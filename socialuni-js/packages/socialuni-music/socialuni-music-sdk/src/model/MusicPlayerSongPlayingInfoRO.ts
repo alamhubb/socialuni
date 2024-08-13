@@ -10,6 +10,7 @@ export default class MusicPlayerSongPlayingInfoRO extends MusicPlayerSongInfoRO 
 
     constructor(musicPlayerSongInfoRO?: MusicPlayerSongPlayingInfoRO) {
         super(musicPlayerSongInfoRO);
+        console.log(musicPlayerSongInfoRO.playingTimestamp)
         if (musicPlayerSongInfoRO) {
             if (musicPlayerSongInfoRO.playingTimestamp) {
                 this.playingTimestamp = musicPlayerSongInfoRO.playingTimestamp;
@@ -21,5 +22,6 @@ export default class MusicPlayerSongPlayingInfoRO extends MusicPlayerSongInfoRO 
                 this.playing = false;
             }
         }
+        console.log(musicPlayerSongInfoRO.playingTimestamp)
     }
 }
