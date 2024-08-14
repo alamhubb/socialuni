@@ -1,13 +1,21 @@
 <template>
   <div class="w100p bg-white">
+    dragging:{{ dragging }}--{{realPlayingValue}}--{{musicMax}}
+    <el-button @click="computedRealPlayingValue">fsadfsadf</el-button>
     <audio ref="audioPlayer" :src="curMusicInfo?.musicUrl"></audio>
 
     <div class="row-between-center flex-none px">
       <div class="w20p flex-none">
-        <div v-if="curMusicInfo">
+        <div v-if="curMusicInfo" class="flex-row">
           <img class="size50  bd-round" :src="curMusicInfo.albumImg">
-          {{ curMusicInfo.name }}
-          <!--          &#45;&#45;{{ curMusicInfo.author.join(' / ') }}-->
+          <div class="flex-col ml">
+            <div>
+              {{ curMusicInfo.name }}
+            </div>
+            <div class="mt-10 color-sub">
+              {{ curMusicInfo.author }}
+            </div>
+          </div>
         </div>
       </div>
       <div class="w40p flex-none">
@@ -28,8 +36,6 @@
           </div>
         </div>
         <div class="row-col-center">
-          {{curMusicInfo}}
-          {{realPlayingValue}}--{{_realPlayingValue}}
           <div class="flex-none font-12 color-sub">{{ formatTooltip(realPlayingValue) }}</div>
           <el-slider class="flex-1 mx-sm" v-model="realPlayingValue" @input="musicInput" @change="musicChange"
                      :show-tooltip="false"
@@ -101,6 +107,7 @@ export default class MusicPlayer extends Vue {
   }
 
   get watchModelValueObj() {
+    console.log('this.dragging', this.dragging)
     return {
       modelValue: this.curMusicInfo,
       dragging: this.dragging,
@@ -121,6 +128,7 @@ export default class MusicPlayer extends Vue {
   @Watch('watchModelValueObj')
   watchModelValueChange() {
     if (this.curMusicInfo) {
+      console.log('chufale bianhuan')
       this.computedRealPlayingValue()
       this.setPlayerCurTimeAndPlay()
       //为什么要在这里设置呢，暂时注释
@@ -180,8 +188,11 @@ export default class MusicPlayer extends Vue {
 
 
   setPlayerCurTimeAndPlay() {
+    console.log('触发了播放')
+    console.log(this.dragging)
     if (!this.dragging) {
       nextTick(() => {
+        console.log(this.curMusicInfo?.playing)
         if (this.curMusicInfo?.playing) {
           // console.log(this.$refs.audioPlayer.paused || this.$refs.audioPlayer.ended)
           // if (!this.$refs.audioPlayer.paused || !this.$refs.audioPlayer.ended) {
@@ -210,10 +221,12 @@ export default class MusicPlayer extends Vue {
   }
 
   musicInput(value) {
-
     this.checkRoleId()
 
-    this.dragging = true
+    if (this.realPlayingValue < this.musicMax) {
+      this.dragging = true
+    }
+    console.log('chufale drag true')
     //秒，
     const playTime = Math.floor(value)
 
@@ -240,6 +253,7 @@ export default class MusicPlayer extends Vue {
   musicChange() {
     this.checkRoleId()
     this.dragging = false
+    console.log('chufale change gaiwei fase', this.dragging)
     this.change(this.curMusicInfo)
   }
 

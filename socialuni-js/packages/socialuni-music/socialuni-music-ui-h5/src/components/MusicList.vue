@@ -1,13 +1,31 @@
 <template>
+  <div>
+    <el-table height="100%" :data="data" @row-dblclick="rowDbClick">
+      <el-table-column prop="name" label="歌曲名" width="180" />
+      <el-table-column prop="author" label="歌手" width="180" />
+      <el-table-column prop="musicTime" label="时长" />
+    </el-table>
+  </div>
   <!--  <div class="w100p bg-white px-15 cursor-none">-->
-  <div class="h100p overflow-auto pt-sm" v-infinite-scroll="scrollToLower" :infinite-scroll-immediate="false"
+<!--  <div class="h100p overflow-auto pt-sm" v-infinite-scroll="scrollToLower" :infinite-scroll-immediate="false"
        :infinite-scroll-distance="200"
        :infinite-scroll-delay="200"
   >
-    <div v-for="item in data" @dblclick="change(item)">
-      {{ item.name }}
+    <div class="pd">
+      <div class="bt">
+        <div v-for="item in data" @dblclick="change(item)">
+          <div class="flex-row bb  py-sm">
+            <div class="br">
+              {{ item.name }}
+            </div>
+            <div>
+              {{ item.author.join(',') }}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  </div>-->
   <!--    <div class="flex-1 overflow-hidden">
   &lt;!&ndash;
         音量：{{ socialuniMusicStore.musicVolume }}
@@ -87,6 +105,10 @@ export default class MusicList extends Vue {
 
   scrollToLower() {
 
+  }
+
+  rowDbClick(a){
+    this.change(a)
   }
 
   @Emit()

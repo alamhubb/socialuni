@@ -82,10 +82,14 @@ class SocialuniChatModule {
 
             const res = await SocialuniUserLikeAPI.queryChatAPI(new ChatQueryQO(chatId))
             console.log(res)
+            console.log('返回了结果')
             this.pushMsgReplaceChatByChat(res.data)
         }
         console.log(chat)
         this.setChatId(chatId)
+        console.log(this._chatId)
+        console.log(this.chats.map(item=>item.id))
+        console.log(this.chat)
         this.readChat(this.messages)
         socialuniChatModule.scrollToMessagePageBottom()
     }

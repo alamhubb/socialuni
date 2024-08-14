@@ -7,7 +7,7 @@ import MusicPlayerSongPlayingInfoRO from "../model/MusicPlayerSongPlayingInfoRO"
 export class SocialuniMusicStore {
     private _appId: string = null
     private _musicToken: string = null
-    //为什么要放在store中，而不放在播放器中
+    //为什么要放在store中，而不放在播放器中，需要传递
     private _musicRoomInfo: MusicPlayerSongPlayingInfoRO = null
     private _musicRoomId: string = null
     private _musicRoleId: string = null
