@@ -1,7 +1,7 @@
 <template>
   <div class="h100p">
-    <div>{{ musicRoomId }}</div>
-    <div>{{ musicRoomInfo }}</div>
+<!--    <div>{{ musicRoomId }}</div>-->
+<!--    <div>{{ musicRoomInfo }}</div>-->
     <!--    <music-player ref="musicPlayer" :cur-music-info="musicRoomInfo" :data="songList" :has-operate-auth="true"-->
     <music-player ref="musicPlayer" :cur-music-info="musicRoomInfo" :has-operate-auth="true"
                   @input="musicRoomInfoInput" @change="musicRoomInfoChange" @next="next"></music-player>

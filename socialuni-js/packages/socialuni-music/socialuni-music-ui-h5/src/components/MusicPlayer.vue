@@ -1,7 +1,7 @@
 <template>
   <div class="w100p bg-white">
-    dragging:{{ dragging }}--{{ realPlayingValue }}--{{ musicMax }}
-    <el-button @click="computedRealPlayingValue">fsadfsadf</el-button>
+<!--    dragging:{{ dragging }}&#45;&#45;{{ realPlayingValue }}&#45;&#45;{{ musicMax }}-->
+<!--    <el-button @click="computedRealPlayingValue">fsadfsadf</el-button>-->
     <audio ref="audioPlayer" :src="curMusicInfo?.musicUrl" @error="audioError"></audio>
 
     <div class="row-between-center flex-none px">
