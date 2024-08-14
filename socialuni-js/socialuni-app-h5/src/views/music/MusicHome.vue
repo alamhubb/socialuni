@@ -1,7 +1,8 @@
 <template>
   <div class="h100p">
-<!--    <div>{{ musicRoomId }}</div>-->
-<!--    <div>{{ musicRoomInfo }}</div>-->
+    <q-input v-model="musicSearchText" class="w150"></q-input>
+    <!--    <div>{{ musicRoomId }}</div>-->
+    <!--    <div>{{ musicRoomInfo }}</div>-->
     <!--    <music-player ref="musicPlayer" :cur-music-info="musicRoomInfo" :data="songList" :has-operate-auth="true"-->
     <music-player ref="musicPlayer" :cur-music-info="musicRoomInfo" :has-operate-auth="true"
                   @input="musicRoomInfoInput" @change="musicRoomInfoChange" @next="next"></music-player>
@@ -22,12 +23,15 @@ import musicRequest from "socialuni-music-sdk/src/plugins/musicRequest";
 import MusicPlayer from "socialuni-music-ui-h5/src/components/MusicPlayer.vue";
 import MusicList from "socialuni-music-ui-h5/src/components/MusicList.vue";
 import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule.ts";
+import QInput from "qingjs-ui/src/components/QInput.vue";
 
 @toNative
 @Component({
-  components: {MusicPlayer, SocialuniChatViewH5, SocialuniMsgViewH5, MusicList}
+  components: {QInput, MusicPlayer, SocialuniChatViewH5, SocialuniMsgViewH5, MusicList}
 })
 export default class MusicHome extends Vue {
+
+  musicSearchText = ''
 
   songList: MusicPlayerSongInfoRO[] = []
 
@@ -128,7 +132,8 @@ export default class MusicHome extends Vue {
       }
     })
   }
-  next(num){
+
+  next(num) {
     const index = this.songList.findIndex(item => `https://music.163.com/song/media/outer/url?id=${item.songId}.mp3` === this.musicRoomInfo.musicUrl)
     const nextIndex = index + num
     if (!this.songList.length) {
