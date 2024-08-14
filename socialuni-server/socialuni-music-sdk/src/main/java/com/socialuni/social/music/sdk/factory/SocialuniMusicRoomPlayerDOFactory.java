@@ -19,7 +19,7 @@ public class SocialuniMusicRoomPlayerDOFactory {
     public static SocialuniMusicRoomDO createSocialuniMusicRoomPlayerDO(@Valid SocialuniPlayMusicQO socialuniPlayMusicQO, SocialuniMusicRoomDO socialuniMusicRoomPlayerDO) {
         socialuniMusicRoomPlayerDO.setMusicUrl(socialuniPlayMusicQO.getMusicUrl());
 
-        socialuniMusicRoomPlayerDO.setMusicTime(socialuniPlayMusicQO.getMusicTime());
+//        socialuniMusicRoomPlayerDO.setMusicTime(socialuniPlayMusicQO.getMusicTime());
 
         if (ObjectUtil.isNotEmpty(socialuniPlayMusicQO.getPlayingTimestamp())) {
             socialuniMusicRoomPlayerDO.setPlayingTimestamp(socialuniPlayMusicQO.getPlayingTimestamp());

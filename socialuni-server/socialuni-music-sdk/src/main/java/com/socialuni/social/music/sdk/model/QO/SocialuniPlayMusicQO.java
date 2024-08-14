@@ -10,8 +10,8 @@ import java.util.Date;
 public class SocialuniPlayMusicQO {
     @NotBlank
     String musicUrl;
-    @NotNull
-    Integer musicTime;
+//    @NotNull
+//    Integer musicTime;
 
     // 云端播放器id
     String playerId;

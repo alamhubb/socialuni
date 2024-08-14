@@ -366,7 +366,8 @@ public class SocialuniMusicController {
 
         SocialuniMusicRoomDO socialuniMusicRoomDO = socialuniMusicRoomManage.updateMusicPlayerDO(chatId, playMusicQO);
 
-        if (socialuniMusicRoomDO.getPlaying()) {
+        //不再需要后台自动暂停了，只有人工播放暂停
+        /*if (socialuniMusicRoomDO.getPlaying()) {
             Date playingTimeStamp = socialuniMusicRoomDO.getPlayingTimestamp();
             long musicTime = socialuniMusicRoomDO.getMusicTime() * 1000;
             long playingTime = socialuniMusicRoomDO.getPlayingTime() * 1000;
@@ -403,7 +404,7 @@ public class SocialuniMusicController {
                 System.out.println("延迟执行的任务");
                 executorService.shutdown();
             }, afterTime, TimeUnit.MILLISECONDS);
-        }
+        }*/
 
 
         SocialuniMusicRoomInfoRO socialuniMusicRoomPlayerInfoRO = SocialuniMusicRoomPlayerInfoROFactory.createSocialuniMusicRoomInfoRO(socialuniMusicRoomDO);

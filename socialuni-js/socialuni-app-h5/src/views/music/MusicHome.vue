@@ -4,7 +4,7 @@
     <div>{{ musicRoomInfo }}</div>
     <!--    <music-player ref="musicPlayer" :cur-music-info="musicRoomInfo" :data="songList" :has-operate-auth="true"-->
     <music-player ref="musicPlayer" :cur-music-info="musicRoomInfo" :has-operate-auth="true"
-                  @input="musicRoomInfoInput" @change="musicRoomInfoChange"></music-player>
+                  @input="musicRoomInfoInput" @change="musicRoomInfoChange" @next="next"></music-player>
     <music-list :data="songList" @change="listMusicChange"></music-list>
   </div>
 </template>
@@ -127,6 +127,23 @@ export default class MusicHome extends Vue {
         socialuniMusicStore.setMusicRoomInfo(res.data)
       }
     })
+  }
+  next(num){
+    const index = this.songList.findIndex(item => `https://music.163.com/song/media/outer/url?id=${item.songId}.mp3` === this.musicRoomInfo.musicUrl)
+    const nextIndex = index + num
+    if (!this.songList.length) {
+      return;
+    }
+    let nextSong
+    if (nextIndex >= 0 && nextIndex < this.songList.length) {
+      nextSong = this.songList[nextIndex]
+    } else {
+      nextSong = this.songList[0]
+    }
+    const playRoomInfo = new MusicPlayerSongPlayingInfoRO({
+      ...nextSong
+    })
+    this.listMusicChange(playRoomInfo)
   }
 }
 </script>

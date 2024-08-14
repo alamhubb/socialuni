@@ -1,6 +1,6 @@
 <template>
   <div class="w100p bg-white">
-    dragging:{{ dragging }}--{{realPlayingValue}}--{{musicMax}}
+    dragging:{{ dragging }}--{{ realPlayingValue }}--{{ musicMax }}
     <el-button @click="computedRealPlayingValue">fsadfsadf</el-button>
     <audio ref="audioPlayer" :src="curMusicInfo?.musicUrl"></audio>
 
@@ -239,12 +239,9 @@ export default class MusicPlayer extends Vue {
 
     this.input(new MusicPlayerSongPlayingInfoRO({
       ...this.curMusicInfo,
-      musicTime: this.curMusicInfo.musicTime,
-      musicUrl: this.curMusicInfo.musicUrl,
       playingTimestamp: curTime,
       //单位秒
       playingTime: playTime,
-      playing: this.curMusicInfo.playing,
     }))
     // this.computedRealPlayingValue(false)
   }
@@ -431,22 +428,6 @@ export default class MusicPlayer extends Vue {
     }
   }
 
-  // next(num: number) {
-  //   this.checkRoleId()
-  //   console.log(this.curMusicInfo.name)
-  //   const index = this.data.findIndex(item => `https://music.163.com/song/media/outer/url?id=${item.songId}.mp3` === this.curMusicInfo.musicUrl)
-  //   const nextIndex = index + num
-  //   if (!this.data.length) {
-  //     return;
-  //   }
-  //   let nextSong
-  //   if (nextIndex >= 0 && nextIndex < this.data.length) {
-  //     nextSong = this.data[nextIndex]
-  //   } else {
-  //     nextSong = this.data[0]
-  //   }
-  //   this.playMusicAPI(nextSong.songId)
-  // }
 
   async frontPause() {
     if (!this.$refs.audioPlayer.paused && !this.$refs.audioPlayer.ended) {
@@ -467,6 +448,16 @@ export default class MusicPlayer extends Vue {
   openMusicList() {
     this.$refs.musicListDialog.open()
   }
+
+  next(number: number) {
+    this.checkRoleId()
+    this.$emit('next', number)
+  }
+
+
+  // next(num: number) {
+
+  // }
 
 }
 </script>
