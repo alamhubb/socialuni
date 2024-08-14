@@ -3,7 +3,12 @@
     <el-table ref="table" height="100%" :data="data" @row-dblclick="rowDbClick" :highlight-current-row="highlight">
       <el-table-column prop="name" label="歌曲名" width="180"/>
       <el-table-column prop="author" label="歌手" width="180"/>
-      <el-table-column prop="musicTime" label="时长"/>
+      <el-table-column prop="musicTime" label="时长">
+        <template #default="{row}">
+          {{formatTooltip(row.musicTime)}}
+<!--          {{row.musicTime}}-->
+        </template>
+      </el-table-column>
     </el-table>
   </div>
   <!--  <div class="w100p bg-white px-15 cursor-none">-->
@@ -59,7 +64,6 @@
 
       </div>-->
 
-  歌曲列表
   <!--    <el-table height="100%" :data="data" stripe highlight-current-row
                 @row-dblclick="handleCurrentChange">
         <el-table-column prop="title" label="音乐标题" width="100" show-overflow-tooltip></el-table-column>
@@ -93,6 +97,7 @@ import QEnumLink from "qingjs-ui-h5/src/components/QEnumLink.vue";
 import QLoadMore from "qingjs-ui/src/components/QLoadMore.vue";
 import QIcon from "qingjs-ui/src/components/QIcon.vue";
 import MusicPlayerSongPlayingInfoRO from "socialuni-music-sdk/src/model/MusicPlayerSongPlayingInfoRO";
+import DateUtil from "qing-util/src/util/DateUtil";
 
 @toNative
 @Component({
@@ -120,6 +125,11 @@ export default class MusicList extends Vue {
 
   rowDbClick(a) {
     this.change(a)
+  }
+
+  formatTooltip(value) {
+    const time = Math.floor(value)
+    return DateUtil.convertToTime(time)
   }
 
   @Emit()
