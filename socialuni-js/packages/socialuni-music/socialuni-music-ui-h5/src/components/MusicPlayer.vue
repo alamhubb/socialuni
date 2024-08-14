@@ -2,7 +2,7 @@
   <div class="w100p bg-white">
     dragging:{{ dragging }}--{{ realPlayingValue }}--{{ musicMax }}
     <el-button @click="computedRealPlayingValue">fsadfsadf</el-button>
-    <audio ref="audioPlayer" :src="curMusicInfo?.musicUrl"></audio>
+    <audio ref="audioPlayer" :src="curMusicInfo?.musicUrl" @error="audioError"></audio>
 
     <div class="row-between-center flex-none px">
       <div class="w20p flex-none">
@@ -125,7 +125,7 @@ export default class MusicPlayer extends Vue {
 
 
   //如果传入的就是正在播方的，通过播放状态就可以
-  @Watch('watchModelValueObj')
+  @Watch('watchModelValueObj', {immediate: true})
   watchModelValueChange() {
     if (this.curMusicInfo) {
       console.log('chufale bianhuan')
@@ -184,6 +184,12 @@ export default class MusicPlayer extends Vue {
     // this.init()
     // this.getMusic()
     // this.queryMusicRoomPlayer()
+
+    //更新音乐时长
+    this.$refs.audioPlayer.onloadedmetadata = (e) => {
+      console.log('2222222222')
+      console.log(e)
+    };
   }
 
 
@@ -459,5 +465,9 @@ export default class MusicPlayer extends Vue {
 
   // }
 
+  audioError(e) {
+    ToastUtil.error('加载出错，播放下一首')
+    this.$emit('next', 1)
+  }
 }
 </script>
