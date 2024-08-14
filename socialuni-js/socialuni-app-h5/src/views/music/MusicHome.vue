@@ -5,7 +5,7 @@
     <!--    <music-player ref="musicPlayer" :cur-music-info="musicRoomInfo" :data="songList" :has-operate-auth="true"-->
     <music-player ref="musicPlayer" :cur-music-info="musicRoomInfo" :has-operate-auth="true"
                   @input="musicRoomInfoInput" @change="musicRoomInfoChange" @next="next"></music-player>
-    <music-list :data="songList" @change="listMusicChange"></music-list>
+    <music-list :data="songList" @change="listMusicChange" :cur-music="musicRoomInfo"></music-list>
   </div>
 </template>
 
