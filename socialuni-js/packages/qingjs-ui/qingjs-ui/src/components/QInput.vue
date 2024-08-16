@@ -1,7 +1,7 @@
 <template>
   <div class="row-col-center bd bd-radius h30 px-sm bg-white">
     <div class="flex-1 overflow-hidden">
-      <input :value="value" class="bd-none w100p font-df overflow-hidden" @input="inputEvent" :placeholder="placeholder"/>
+      <input :value="value" class="bd-none w100p font-df overflow-hidden" v-bind="$attrs" @input="inputEvent" :placeholder="placeholder"/>
     </div>
     <q-icon v-show="(!hideClear)&&value&&value.length" icon="close" class="color-sub pd-xs flex-none" size="12"
             @click="clear"></q-icon>

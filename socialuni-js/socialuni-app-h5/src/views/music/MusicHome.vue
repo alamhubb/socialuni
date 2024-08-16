@@ -1,11 +1,12 @@
 <template>
   <div class="h100p">
-    <q-input v-model="musicSearchText" class="w150"></q-input>
+    <q-input v-model="musicSearchText" class="w150" @keydown.enter="querySongList" @clear="clearSearch"></q-input>
     <!--    <div>{{ musicRoomId }}</div>-->
     <!--    <div>{{ musicRoomInfo }}</div>-->
     <!--    <music-player ref="musicPlayer" :cur-music-info="musicRoomInfo" :data="songList" :has-operate-auth="true"-->
     <music-player ref="musicPlayer" :cur-music-info="musicRoomInfo" :has-operate-auth="true"
                   @input="musicRoomInfoInput" @change="musicRoomInfoChange" @next="next"></music-player>
+    <music-list class="h500" :data="songList" @change="listMusicChange" :cur-music="musicRoomInfo"></music-list>
     <music-list class="h500" :data="songList" @change="listMusicChange" :cur-music="musicRoomInfo"></music-list>
   </div>
 </template>
@@ -72,6 +73,10 @@ export default class MusicHome extends Vue {
       return copyRoomInfo
     }
     return null
+  }
+
+  clearSearch(){
+
   }
 
   async querySongList() {
