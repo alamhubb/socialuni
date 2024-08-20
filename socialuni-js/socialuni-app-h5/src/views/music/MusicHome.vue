@@ -1,6 +1,7 @@
 <template>
   <div class="h100p">
-    <q-input v-model="musicSearchText" class="w150" @keydown.enter="querySongList" @clear="clearSearch"></q-input>
+    <q-input v-model="musicSearchText" class="w150" @keydown.enter="searchSongList" @clear="clearSearch"></q-input>
+    {{searchData}}
     <!--    <div>{{ musicRoomId }}</div>-->
     <!--    <div>{{ musicRoomInfo }}</div>-->
     <!--    <music-player ref="musicPlayer" :cur-music-info="musicRoomInfo" :data="songList" :has-operate-auth="true"-->
@@ -38,7 +39,8 @@ export default class MusicHome extends Vue {
 
   created() {
     this.initRoomId()
-    this.querySongList()
+    // this.querySongList()
+    this.searchSongList()
   }
 
   async initRoomId() {
@@ -75,7 +77,46 @@ export default class MusicHome extends Vue {
     return null
   }
 
-  clearSearch(){
+  searchData= []
+
+  async searchSongList() {
+    const res = await musicRequest.get('/search?offset=0&limit=30&keywords=阿普的思念')
+    console.log(res)
+    console.log(res.result)
+    console.log(res.result.songs)
+// this.searchData = res.result.songs
+    const data = res.result.songs
+    const songList: MusicPlayerSongInfoRO[] = data.map((row: any) => {
+      const songRO: MusicPlayerSongInfoRO = new MusicPlayerSongInfoRO({
+        songId: row.id,
+        name: row.name,
+        author: row.artists?.map(item => item.name),
+        album: row.album.name,
+        // albumImg: row.album.picUrl,
+        musicTime: row.duration,
+        musicUrl: `https://music.163.com/song/media/outer/url?id=${row.id}.mp3`,
+      })
+      return songRO
+    })
+    this.songList = songList
+    if (this.songList.length > 0) {
+      console.log(1312312)
+      console.log(this.musicRoomInfo)
+      if (!this.musicRoomInfo) {
+        //如果没有播放信息，则设置播放信息为第一首歌曲
+        const musicRoomInfo = new MusicPlayerSongPlayingInfoRO({...this.songList[0]})
+        musicRoomInfo.musicTime = Math.floor(musicRoomInfo.musicTime / 1000)
+        console.log(this.songList[0])
+        console.log(musicRoomInfo)
+        console.log(this.musicRoomInfo)
+        socialuniMusicStore.setMusicRoomInfo(musicRoomInfo)
+        console.log(1312312)
+        console.log(this.musicRoomInfo)
+      }
+    }
+  }
+
+  clearSearch() {
 
   }
 

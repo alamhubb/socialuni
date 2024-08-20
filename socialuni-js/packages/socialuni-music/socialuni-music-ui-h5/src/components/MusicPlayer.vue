@@ -13,7 +13,7 @@
               {{ curMusicInfo.name }}
             </div>
             <div class="mt-10 color-sub">
-              {{ curMusicInfo.author.join(',') }}
+              {{ curMusicInfo.author?.join(',') }}
             </div>
           </div>
         </div>
