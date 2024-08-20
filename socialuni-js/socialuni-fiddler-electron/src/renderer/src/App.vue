@@ -1,10 +1,15 @@
-<script setup lang="ts">
-import Versions from './components/Versions.vue'
-
-const ipcHandle = () => window.electron.ipcRenderer.send('ping')
-</script>
-
 <template>
-123
-  <Versions />
+  <div>123</div>
+  <div>456</div>
 </template>
+
+<script lang="ts">
+import {Component, Vue, toNative} from 'vue-facing-decorator';
+
+@toNative
+@Component({
+  components: {}
+})
+export default class App extends Vue {
+}
+</script>
