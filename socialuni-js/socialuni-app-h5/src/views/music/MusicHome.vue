@@ -39,8 +39,8 @@ export default class MusicHome extends Vue {
 
   created() {
     this.initRoomId()
-    // this.querySongList()
-    this.searchSongList()
+    this.querySongList()
+    // this.searchSongList()
   }
 
   async initRoomId() {

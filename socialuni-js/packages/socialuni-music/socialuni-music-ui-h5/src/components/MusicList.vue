@@ -9,6 +9,24 @@
 <!--          {{row.musicTime}}-->
         </template>
       </el-table-column>
+      <el-table-column prop="musicTime" label="切歌">
+        <template #default="{row}">
+          {{formatTooltip(row.musicTime)}}
+          <!--          {{row.musicTime}}-->
+        </template>
+      </el-table-column>
+      <el-table-column prop="musicTime" label="下一首播放">
+        <template #default="{row}">
+          {{formatTooltip(row.musicTime)}}
+          <!--          {{row.musicTime}}-->
+        </template>
+      </el-table-column>
+      <el-table-column prop="musicTime" label="加入播放列表">
+        <template #default="{row}">
+          {{formatTooltip(row.musicTime)}}
+          <!--          {{row.musicTime}}-->
+        </template>
+      </el-table-column>
     </el-table>
   </div>
   <!--  <div class="w100p bg-white px-15 cursor-none">-->
