@@ -12,7 +12,7 @@ import com.socialuni.social.common.sdk.constant.UserType;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.social.report.sdk.model.SocialuniReportAddQO;
-import com.socialuni.social.common.sdk.utils.DateUtils;
+import com.socialuni.social.common.sdk.utils.SocialuniDateUtils;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
@@ -58,7 +58,7 @@ public class SoicialReportAddDomain {
                 return new ResultRO<>(resultRO);
             }*/
 
-            Date todayZero = DateUtils.getTodayZeroDate();
+            Date todayZero = SocialuniDateUtils.getTodayZeroDate();
             Date curDate = new Date();
             /*Integer userJusticeValue = user.getJusticeValue();
             //小于-100不允许再举报

@@ -12,8 +12,9 @@ import java.util.Date;
  * @author qinkaiyuan
  * @date 2020-03-17 3:26
  */
-public class DateUtils {
+public class SocialuniDateUtils {
     public static final SimpleDateFormat simpleYearFormat = new SimpleDateFormat("yyyy");
+    public static final SimpleDateFormat simpleMonthFormat = new SimpleDateFormat("yyyy-MM");
     public static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     public static final SimpleDateFormat simpleSlashDateFormat = new SimpleDateFormat("yyyy/MM/dd");
     public static final SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -40,7 +41,7 @@ public class DateUtils {
 
     public static String getYearBirthDateByDateStr(String dateStr) {
         try {
-            return DateUtils.simpleDateFormat.format(DateUtils.simpleYearFormat.parse(dateStr));
+            return SocialuniDateUtils.simpleDateFormat.format(SocialuniDateUtils.simpleYearFormat.parse(dateStr));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -49,7 +50,7 @@ public class DateUtils {
 
     public static String getBirthDateByDateStr(String dateStr) {
         try {
-            return DateUtils.simpleDateFormat.format(DateUtils.simpleDateFormat.parse(dateStr));
+            return SocialuniDateUtils.simpleDateFormat.format(SocialuniDateUtils.simpleDateFormat.parse(dateStr));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -58,7 +59,7 @@ public class DateUtils {
 
     public static String getBirthDateBySlashDateStr(String dateStr) {
         try {
-            return DateUtils.simpleDateFormat.format(DateUtils.simpleSlashDateFormat.parse(dateStr));
+            return SocialuniDateUtils.simpleDateFormat.format(SocialuniDateUtils.simpleSlashDateFormat.parse(dateStr));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -66,6 +67,6 @@ public class DateUtils {
     }
 
     public static String getTimeStrFormat(Date date) {
-        return DateUtils.timeStrFormat.format(date);
+        return SocialuniDateUtils.timeStrFormat.format(date);
     }
 }

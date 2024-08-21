@@ -38,9 +38,25 @@ public class SocialuniUserOnlineDomain {
             }
         }
         socialuniUserOnlineDO.setUserId(userId);
+
+        int diff = getDiffMinute(socialuniUserOnlineDO);
+
+        socialuniUserOnlineDO.setOnlineMinute(diff);
+
         socialuniUserOnlineRepository.savePut(socialuniUserOnlineDO);
     }
 
+
+    public int getDiffMinute(SocialuniUserOnlineDO socialuniUserOnlineDO) {
+        long crateTime = socialuniUserOnlineDO.getCreateTime().getTime();
+        long offlineTime = socialuniUserOnlineDO.getUpdateTime().getTime();
+
+        long diffTime = offlineTime - crateTime;
+
+        long diffMinute = diffTime / DateTimeType.minute;
+
+        return (int) diffMinute;
+    }
 
     //用户离线，设置离线时间
     public void userOffline(String userIdStr) {
@@ -57,6 +73,9 @@ public class SocialuniUserOnlineDomain {
             socialuniUserOnlineDO.setUpdateTime(curTime);
         }
         socialuniUserOnlineDO.setUserId(userId);
+        int diff = getDiffMinute(socialuniUserOnlineDO);
+
+        socialuniUserOnlineDO.setOnlineMinute(diff);
         socialuniUserOnlineRepository.savePut(socialuniUserOnlineDO);
     }
 

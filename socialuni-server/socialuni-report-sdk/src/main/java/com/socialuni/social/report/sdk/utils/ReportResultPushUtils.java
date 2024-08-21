@@ -1,7 +1,7 @@
 package com.socialuni.social.report.sdk.utils;
 
 import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
-import com.socialuni.social.common.sdk.utils.DateUtils;
+import com.socialuni.social.common.sdk.utils.SocialuniDateUtils;
 import com.socialuni.social.content.constant.SocialuniSupportProviderType;
 import com.socialuni.social.report.sdk.entity.ReportDO;
 import com.socialuni.social.report.sdk.dao.repository.ReportRepository;
@@ -56,7 +56,7 @@ public class ReportResultPushUtils {
         notifyVO.setBeNickname(new PushValue(SocialuniUserUtil.getUserNotNull(baseModelDO.getUserId()).getNickname()));
         notifyVO.setCause(new PushValue(reportCause));
         notifyVO.setResult(new PushValue(reportResult));
-        notifyVO.setDate(new PushValue(DateUtils.simpleTimeFormat.format(ReportDO.getUpdateTime())));
+        notifyVO.setDate(new PushValue(SocialuniDateUtils.simpleTimeFormat.format(ReportDO.getUpdateTime())));
         notifyVO.setRemark(new PushValue(StringUtils.substring(reportRemark, 0, 20)));
 
         HashMap<String, Object> data = new HashMap<>();

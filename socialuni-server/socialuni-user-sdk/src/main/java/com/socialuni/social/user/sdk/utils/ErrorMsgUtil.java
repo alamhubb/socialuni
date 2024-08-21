@@ -2,7 +2,7 @@ package com.socialuni.social.user.sdk.utils;
 
 
 import com.socialuni.social.common.api.exception.exception.SocialNullUserException;
-import com.socialuni.social.common.sdk.utils.DateUtils;
+import com.socialuni.social.common.sdk.utils.SocialuniDateUtils;
 import com.socialuni.social.common.sdk.constant.ErrorMsg;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.tance.sdk.facade.ConfigFacade;
@@ -24,7 +24,7 @@ public class ErrorMsgUtil {
     }
 
     public static String getErrorCode605ContactServiceValue(Date date) {
-        Integer manyDay = DateUtils.HowManyDaysFromNow(date);
+        Integer manyDay = SocialuniDateUtils.HowManyDaysFromNow(date);
         return MessageFormat.format(ErrorMsg.errorCode605ContactServiceValue, manyDay) + ConfigFacade.getFormat(ErrorMsg.CONTACT_SERVICE, SocialuniAppConfig.getAppMoreConfig().getQq_account());
     }
 }

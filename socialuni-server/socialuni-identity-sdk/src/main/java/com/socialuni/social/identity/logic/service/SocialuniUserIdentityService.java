@@ -13,7 +13,7 @@ import com.socialuni.social.identity.dao.repository.SocialUserIdentityAuthReposi
 import com.socialuni.social.content.tencent.TencentCloudAPI;
 import com.socialuni.social.user.sdk.model.QO.SocialUserIdentityAuthQO;
 import com.socialuni.social.user.sdk.model.RO.SocialUserIdentityAuthPreCheckRO;
-import com.socialuni.social.common.sdk.utils.DateUtils;
+import com.socialuni.social.common.sdk.utils.SocialuniDateUtils;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.content.utils.BirthdayAgeUtil;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
@@ -103,7 +103,7 @@ public class SocialuniUserIdentityService {
             socialUserIdentityDO.setStatus(UserIdentityAuthStatus.preAudit);
         }
         socialUserIdentityDO.setUserIdentityImgId(socialUserIdentityImgDO.getId());
-        String socialBirth = DateUtils.getBirthDateBySlashDateStr(resp.getBirth());
+        String socialBirth = SocialuniDateUtils.getBirthDateBySlashDateStr(resp.getBirth());
         Integer age = BirthdayAgeUtil.getAgeByBirth(socialBirth);
         socialUserIdentityDO.setUserId(userId);
         socialUserIdentityDO.setAge(age);

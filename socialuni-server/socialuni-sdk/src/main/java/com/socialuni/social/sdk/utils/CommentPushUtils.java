@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.utils;
 
-import com.socialuni.social.common.sdk.utils.DateUtils;
+import com.socialuni.social.common.sdk.utils.SocialuniDateUtils;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniCommentDO;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
 import com.socialuni.social.common.sdk.constant.AppConfigConst;
@@ -39,7 +39,7 @@ public class CommentPushUtils {
         //构建基础数据
         pushNotifyVO.setContent(new PushValue(StringUtils.substring(comment.getContent(), 0, 20)));
         pushNotifyVO.setNickname(new PushValue(requestUser.getNickname()));
-        pushNotifyVO.setDate(new PushValue(DateUtils.simpleTimeFormat.format(comment.getCreateTime())));
+        pushNotifyVO.setDate(new PushValue(SocialuniDateUtils.simpleTimeFormat.format(comment.getCreateTime())));
         pushNotifyVO.setBeContent(new PushValue(StringUtils.substring(replyComment.getContent(), 0, 20)));
         pushNotifyVO.setBeNickname(new PushValue(SocialuniUserUtil.getUserNotNull(replyComment.getUserId()).getNickname()));
 

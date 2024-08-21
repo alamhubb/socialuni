@@ -1,12 +1,18 @@
 package com.socialuni.social.partner.config;
 
+import com.socialuni.social.partner.constant.SocialuniPartnerPointsConsumeType;
+
 import java.util.HashMap;
 import java.util.Map;
 
 
 public class SocialuniParterConfig {
     //总积分，1.1亿
-    public static final Integer allPoints = 110000000;
+    public static final Integer allPoints = 11000;
+
+    //每日销毁数
+    public static final Integer dayDestroy = 2;
+
     //使用共享分配
     public static final Integer useAssign = 70;
     //充值贡献分配
@@ -28,8 +34,13 @@ public class SocialuniParterConfig {
     // 使用贡献值计算公式， 贡献值*（1+连续使用贡献值加成(最大1) + 充值贡献值加成（最大1））
     // 充值贡献值计算公式， 充值贡献值*（1+ 充值贡献值加成（最大1））
 
+    public static final Map<String, Integer> consumeTypeAssignValueMap = new HashMap<String, Integer>() {{
+        put(SocialuniPartnerPointsConsumeType.payAssign, 30);
+        put(SocialuniPartnerPointsConsumeType.useAssign, 70);
+    }};
 
-    public static final Map<String, Integer> monthPointsConfig = new HashMap<String, Integer>() {{
+
+    public static final Map<String, Integer> monthPointsConfigMap = new HashMap<String, Integer>() {{
         //单位万
         put("2024-08", 30);
         put("2024-09", 63);

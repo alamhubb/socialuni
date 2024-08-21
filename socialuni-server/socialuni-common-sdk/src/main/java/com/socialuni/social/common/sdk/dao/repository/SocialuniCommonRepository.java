@@ -134,6 +134,25 @@ public class SocialuniCommonRepository {
         return null;
     }
 
+
+    //使用这个的问题是缓存不会被清理
+    public <T extends SocialuniBaseDO> T findFirstOrderByIdDesc(Class<T> tClass) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
+        Root<T> userInfo = criteriaQuery.from(tClass);
+
+        criteriaQuery.orderBy(criteriaBuilder.desc(userInfo.get("id")));
+
+        TypedQuery<T> query = entityManager.createQuery(criteriaQuery);
+
+        List<T> list = query.setFirstResult(0).setMaxResults(1).getResultList();
+
+        if (list.size() > 0) {
+            return list.get(0);
+        }
+        return null;
+    }
+
     public <T extends SocialuniUnionContentBaseDO> T findByUnionId(Integer unionId, Class<T> tClass) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);

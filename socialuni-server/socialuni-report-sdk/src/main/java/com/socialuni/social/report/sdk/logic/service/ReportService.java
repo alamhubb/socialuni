@@ -12,7 +12,7 @@ import com.socialuni.social.content.logic.service.KeywordsTriggerService;
 import com.socialuni.social.common.sdk.constant.AppConfigConst;
 import com.socialuni.social.content.dao.repository.KeywordsRepository;
 import com.socialuni.social.content.dao.repository.KeywordsTriggerDetailRepository;
-import com.socialuni.social.common.sdk.utils.DateUtils;
+import com.socialuni.social.common.sdk.utils.SocialuniDateUtils;
 import com.socialuni.social.report.sdk.facotry.ReportFactory;
 import com.socialuni.social.report.sdk.utils.ReportDetailUtils;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
@@ -77,7 +77,7 @@ public class ReportService {
 
                 //举报内容违规，加分
                 if (isViolation) {
-                    Date todayZero = DateUtils.getTodayZeroDate();
+                    Date todayZero = SocialuniDateUtils.getTodayZeroDate();
                     //查看用户待审核的举报数量
                     Integer reportSuccessCount = reportDetailApi.countByUserIdAndStatusNotAndCreateTimeBetween(detailUser.getUnionId(), ReportStatus.audit, todayZero, curDate);
                     //todo  缺少发送通知功能，等我精神好了在写

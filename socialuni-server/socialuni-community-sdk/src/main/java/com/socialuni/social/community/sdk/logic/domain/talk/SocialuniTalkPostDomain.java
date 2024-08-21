@@ -10,7 +10,7 @@ import com.socialuni.social.common.api.constant.DateTimeType;
 import com.socialuni.social.community.sdk.logic.factory.SocialTalkROFactory;
 import com.socialuni.social.community.sdk.model.QO.talk.SocialuniTalkPostQO;
 import com.socialuni.social.community.sdk.model.RO.talk.SocialuniTalkRO;
-import com.socialuni.social.common.sdk.utils.DateUtils;
+import com.socialuni.social.common.sdk.utils.SocialuniDateUtils;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
@@ -56,7 +56,7 @@ public class SocialuniTalkPostDomain {
             }
             //每天0点到现在不能发布超过10条
             //获取当天0点
-            Date zero = DateUtils.getTodayZeroDate();
+            Date zero = SocialuniDateUtils.getTodayZeroDate();
             //10分钟内不能发超过5条
             //1天内不能发超过10条
             Integer oneDayBeforeCount = talkApi.countByUserIdAndCreateTimeBetween(mineUser.getUnionId(), zero, curDate);

@@ -24,7 +24,7 @@ import com.socialuni.social.sdk.constant.business.SocialuniPayStatus;
 import com.socialuni.social.user.sdk.constant.SocialuniPayProviderType;
 import com.socialuni.social.common.api.enumeration.ContentStatus;
 import com.socialuni.social.recharge.dao.DO.SocialuniPayCoinOrderDO;
-import com.socialuni.social.common.sdk.utils.DateUtils;
+import com.socialuni.social.common.sdk.utils.SocialuniDateUtils;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserCoinDo;
 import com.socialuni.social.user.sdk.utils.AuthCodeUtil;
@@ -205,7 +205,7 @@ public class SocialuniPayCoinDomain {
 
         //4位随机字符串，+17位时间戳，24+8位订单id
         orderNo.append(AuthCodeUtil.getAuthCode());
-        orderNo.append(DateUtils.getTimeStrFormat(createTime));
+        orderNo.append(SocialuniDateUtils.getTimeStrFormat(createTime));
 
         String zeroFill = "0000000";
         String out_trade_no = zeroFill + orderId.toString();

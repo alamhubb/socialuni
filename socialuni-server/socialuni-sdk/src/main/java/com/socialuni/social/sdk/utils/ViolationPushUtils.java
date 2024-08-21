@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.utils;
 
 import com.socialuni.social.common.api.constant.SocialSystemConst;
 import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
-import com.socialuni.social.common.sdk.utils.DateUtils;
+import com.socialuni.social.common.sdk.utils.SocialuniDateUtils;
 import com.socialuni.social.content.constant.SocialuniSupportProviderType;
 import com.socialuni.social.report.sdk.entity.ReportDO;
 import com.socialuni.social.report.sdk.dao.repository.ReportRepository;
@@ -61,7 +61,7 @@ public class ViolationPushUtils {
         //处理结果
 //        pushNotifyVO.setResult(new PushValue(StringUtils.substring(userDetailDO.getViolationReason(), 0, 20)));
         //处理时间
-        pushNotifyVO.setDate(new PushValue(DateUtils.simpleTimeFormat.format(new Date())));
+        pushNotifyVO.setDate(new PushValue(SocialuniDateUtils.simpleTimeFormat.format(new Date())));
         //处理备注
         pushNotifyVO.setRemark(new PushValue(StringUtils.substring(ConfigFacade.getFormat(ErrorMsg.CONTACT_SERVICE, SocialSystemConst.CONFIGS_KEY_QQ_ACCOUNT), 0, 20)));
 

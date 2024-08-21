@@ -20,9 +20,10 @@ import java.util.Date;
 )
 public class SocialuniUserOnlineDO extends SocialuniUpdateTimeContentBaseDO {
 
-//    Date offLineTime;
-//
-//    public SocialuniUserOnlineDO() {
-//        this.setOffLineTime(this.getUpdateTime());
-//    }
+    //在线分钟数
+    Integer onlineMinute;
+    //    Date offLineTime;
+    public SocialuniUserOnlineDO() {
+        this.onlineMinute = 1;
+    }
 }

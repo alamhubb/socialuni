@@ -50,6 +50,10 @@ public abstract class SocialuniRepositoryFacade {
         return getRepository().findByCustomField(field, fieldId, tClass);
     }
 
+    public static <T extends SocialuniBaseDO> T findFirstOrderByIdDesc(Class<T> tClass) {
+        return getRepository().findFirstOrderByIdDesc(tClass);
+    }
+
     /**
      * @param example
      * @param <T>
