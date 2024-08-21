@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class SocialuniParterConfig {
     //总积分，1.1亿
-    public static final Integer monthPointsConfig = 110000000;
+    public static final Integer allPoints = 110000000;
     //使用共享分配
     public static final Integer useAssign = 70;
     //充值贡献分配
@@ -29,7 +29,7 @@ public class SocialuniParterConfig {
     // 充值贡献值计算公式， 充值贡献值*（1+ 充值贡献值加成（最大1））
 
 
-    public static final Map<String, Integer> monthPointsConfig = new HashMap<>() {{
+    public static final Map<String, Integer> monthPointsConfig = new HashMap<String, Integer>() {{
         //单位万
         put("2024-08", 30);
         put("2024-09", 63);

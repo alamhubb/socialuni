@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.im.config.websocket;
+package com.socialuni.social.websocket.config;
 
 import com.socialuni.social.common.api.utils.UUIDUtil;
 import lombok.extern.slf4j.Slf4j;

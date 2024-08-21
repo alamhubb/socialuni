@@ -1,5 +1,6 @@
 <template>
   <div class="h100p">
+    <div>在线人数：{{onlineUsersCount}}</div>
     <div>总积分1个亿</div>
 
     <!--    <div class="flex-row row-wrap">
@@ -47,6 +48,7 @@ import MusicPlayer from "socialuni-music-ui-h5/src/components/MusicPlayer.vue";
 import MusicList from "socialuni-music-ui-h5/src/components/MusicList.vue";
 import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule.ts";
 import QInput from "qingjs-ui/src/components/QInput.vue";
+import {socialAppModule} from "socialuni-app-sdk/src/store/SocialAppModule.ts";
 
 @toNative
 @Component({
@@ -57,6 +59,10 @@ export default class MusicHome extends Vue {
   musicSearchText = ''
 
   songList: MusicPlayerSongInfoRO[] = []
+
+  get onlineUsersCount(){
+    return socialAppModule.onlineUsersCount
+  }
 
   created() {
     this.initRoomId()

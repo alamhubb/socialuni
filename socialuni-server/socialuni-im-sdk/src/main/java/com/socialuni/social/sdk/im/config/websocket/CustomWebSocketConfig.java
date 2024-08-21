@@ -1,5 +1,7 @@
 package com.socialuni.social.sdk.im.config.websocket;
 
+import com.socialuni.social.websocket.config.CustomHandshakeHandler;
+import com.socialuni.social.websocket.config.SocketTextHandler;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;

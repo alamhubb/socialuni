@@ -53,6 +53,23 @@ public class WebsocketServer extends TextWebSocketHandler {
         WebsocketServer.redisUtil = redisUtil;
     }
 
+
+    public static <T> void sendUserCount(Integer userCount) {
+        NotifyVO<Integer> notifyVO = new NotifyVO<>();
+        notifyVO.setType(NotifyType.userCount);
+        notifyVO.setData(userCount);
+        //发送给所有在线的群组里面的用户
+        for (WebSocketSession userSession : onlineUsersSessionMap.values()) {
+            if (userSession != null && userSession.isOpen()) {
+                try {
+                    userSession.sendMessage(notifyVO.toMessage());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
     /**
      * 广播信息
      */
@@ -135,22 +152,24 @@ public class WebsocketServer extends TextWebSocketHandler {
                 //加入set中
                 addOnlineCount();
                 //在线数加1
+
             }
             //加入set中
-            ChannelTopic channelTopic = new ChannelTopic(userId);
-            redisContainer.addMessageListener(messageListener, channelTopic);
+//            ChannelTopic channelTopic = new ChannelTopic(userId);
+//            redisContainer.addMessageListener(messageListener, channelTopic);
             onlineUsersSessionMap.put(userId, session);
-            onlineUsersChannelTopicMap.put(userId, channelTopic);
+//            onlineUsersChannelTopicMap.put(userId, channelTopic);
             if (NumberUtils.strIsAllNumber(userId)) {
 //                userService.setUserOnlineTrue(userId);
             }
-            log.debug("用户标识：{}，Session：{}，在线数量：{}", userId, session.toString(), onlineUsersChannelTopicMap.size());
+            log.info("用户标识：{}，Session：{}，在线数量：{}", userId, session.toString(), onlineUsersSessionMap.size());
         }
     }
 
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) {
-        log.debug("收到客户端消息：{}", message.getPayload());
+        log.info("收到客户端消息：{}", message.getPayload());
+        System.out.println(Objects.requireNonNull(session.getPrincipal()).getName());
         /*JSONObject msgJson = JSONObject.parseObject(message.getPayload());
         String to = msgJson.getString("to");
         String msg = msgJson.getString("msg");
@@ -163,18 +182,18 @@ public class WebsocketServer extends TextWebSocketHandler {
                 sendMessageToUser(to, new TextMessage(getUserId(session) + ":" + msg));
             }
         } catch (IOException e) {
-            log.debug("handleTextMessage method error：{}", e);
+            log.info("handleTextMessage method error：{}", e);
         }*/
     }
 
     @Override
     public void handleBinaryMessage(WebSocketSession session, BinaryMessage message) {
-        log.debug("收到客户端消息：{}", message.getPayload());
+        log.info("收到客户端消息：{}", message.getPayload());
     }
 
     @Override
     public void handlePongMessage(WebSocketSession session, PongMessage message) {
-        log.debug("收到客户端消息：{}", message.getPayload());
+        log.info("收到客户端消息：{}", message.getPayload());
     }
 
 
@@ -187,20 +206,20 @@ public class WebsocketServer extends TextWebSocketHandler {
                 e.printStackTrace();
             }
         }
-        log.debug("连接出错");
+        log.info("连接出错");
     }
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
-        log.debug("连接已关闭：" + status);
+        log.info("连接已关闭：" + status);
         try {
             Principal user = session.getPrincipal();
             if (user != null && StringUtils.isNotEmpty(user.getName())) {
                 String userId = user.getName();
                 if (onlineUsersSessionMap.containsKey(userId)) {
                     onlineUsersSessionMap.remove(userId);
-                    redisContainer.removeMessageListener(messageListener, onlineUsersChannelTopicMap.get(userId));
-                    onlineUsersChannelTopicMap.remove(userId);
+//                    redisContainer.removeMessageListener(messageListener, onlineUsersChannelTopicMap.get(userId));
+//                    onlineUsersChannelTopicMap.remove(userId);
                     //从set中删除
                     subOnlineCount();
                 }
@@ -228,10 +247,10 @@ public class WebsocketServer extends TextWebSocketHandler {
                 if (session.isOpen()) {
                     session.sendMessage(message);
                 } else {
-                    log.debug("客户端:{},已断开连接，发送消息失败", userId);
+                    log.info("客户端:{},已断开连接，发送消息失败", userId);
                 }
             } catch (IOException e) {
-                log.debug("sendMessageToAllUsers method error：{}", e);
+                log.info("sendMessageToAllUsers method error：{}", e);
                 allSendSuccess = false;
             }
         }*/
@@ -250,12 +269,16 @@ public class WebsocketServer extends TextWebSocketHandler {
 
     public static synchronized void addOnlineCount() {
         int onlineUsersCount = getOnlineCount();
-        redisUtil.set(WebsocketServer.onlineUsersCountKey, onlineUsersCount + 1);
+        int newCount = onlineUsersCount + 1;
+        redisUtil.set(WebsocketServer.onlineUsersCountKey, newCount);
+        sendUserCount(newCount);
     }
 
     public static synchronized void subOnlineCount() {
         int onlineUsersCount = getOnlineCount();
-        redisUtil.set(WebsocketServer.onlineUsersCountKey, Math.max(onlineUsersCount - 1, 0));
+        int newCount = Math.max(onlineUsersCount - 1, 0);
+        redisUtil.set(WebsocketServer.onlineUsersCountKey, newCount);
+        sendUserCount(newCount);
     }
 
     public static synchronized void subOnlineCount(Integer offlineNum) {

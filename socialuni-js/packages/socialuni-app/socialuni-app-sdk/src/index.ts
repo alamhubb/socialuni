@@ -8,6 +8,10 @@ import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule
 import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
 import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import {InternalAxiosRequestConfig} from "axios/index";
+import NotifyVO from "socialuni-api-base/src/model/NotifyVO";
+import NotifyType from "socialuni-constant/constant/NotifyType";
+import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
+import {socialAppModule} from "./store/SocialAppModule";
 
 class SocialuniAppPlugin implements SocialuniPlugin {
     onLaunch() {
@@ -27,6 +31,14 @@ WebsocketWebRtcUtil.easyWebRTC.ontrack((event) => {
 })*/
 
 
+    }
+
+    onMessage(notify: NotifyVO) {
+        if (notify.type === NotifyType.userCount) {
+            console.log('接受了消息')
+            console.log(notify.data)
+            socialAppModule.onlineUsersCount = notify.data
+        }
     }
 
     onRequestInterceptors(config: InternalAxiosRequestConfig) {

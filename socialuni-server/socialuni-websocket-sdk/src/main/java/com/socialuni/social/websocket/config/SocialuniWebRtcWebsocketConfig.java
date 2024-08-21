@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.im.config.websocket;
+package com.socialuni.social.websocket.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;

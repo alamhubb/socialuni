@@ -65,6 +65,10 @@
         </dependency>
         <dependency>
             <groupId>com.socialuni.social</groupId>
+            <artifactId>socialuni-partner-sdk</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.socialuni.social</groupId>
             <artifactId>socialuni-peiwan-sdk</artifactId>
         </dependency>
         <dependency>

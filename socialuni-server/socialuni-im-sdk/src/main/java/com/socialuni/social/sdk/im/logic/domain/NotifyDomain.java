@@ -2,7 +2,6 @@ package com.socialuni.social.sdk.im.logic.domain;
 
 import com.socialuni.social.common.api.exception.base.SocialException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import com.socialuni.social.common.sdk.constant.UserType;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.sdk.im.config.websocket.WebsocketServer;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
@@ -17,7 +16,6 @@ import com.socialuni.social.common.sdk.dao.repository.SocialUserPlatformAccountR
 import com.socialuni.social.sdk.im.notify.NotifyVO;
 import com.socialuni.social.common.sdk.platform.PushMsgDTO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.user.sdk.dao.utils.SocialuniUserDOUtil;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

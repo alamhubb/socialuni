@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.im.config.websocket;
+package com.socialuni.social.websocket.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.socket.TextMessage;
