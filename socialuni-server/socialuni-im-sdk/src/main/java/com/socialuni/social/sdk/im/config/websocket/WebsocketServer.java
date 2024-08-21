@@ -273,16 +273,16 @@ public class WebsocketServer extends TextWebSocketHandler {
     }
 
     public static synchronized void addOnlineCount() {
-        int onlineUsersCount = getOnlineCount();
-        int newCount = onlineUsersCount + 1;
-        redisUtil.set(WebsocketServer.onlineUsersCountKey, newCount);
+        int newCount = getOnlineCount();
+//        int newCount = onlineUsersCount + 1;
+//        redisUtil.set(WebsocketServer.onlineUsersCountKey, newCount);
         sendUserCount(newCount);
     }
 
     public static synchronized void subOnlineCount() {
-        int onlineUsersCount = getOnlineCount();
-        int newCount = Math.max(onlineUsersCount - 1, 0);
-        redisUtil.set(WebsocketServer.onlineUsersCountKey, newCount);
+        int newCount = getOnlineCount();
+//        int newCount = Math.max(onlineUsersCount - 1, 0);
+//        redisUtil.set(WebsocketServer.onlineUsersCountKey, newCount);
         sendUserCount(newCount);
     }
 
