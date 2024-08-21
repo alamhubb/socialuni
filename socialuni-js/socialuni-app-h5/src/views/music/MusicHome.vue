@@ -1,14 +1,35 @@
 <template>
   <div class="h100p">
-    <q-input v-model="musicSearchText" class="w150" @keydown.enter="searchSongList" @clear="clearSearch"></q-input>
-    {{searchData}}
-    <!--    <div>{{ musicRoomId }}</div>-->
-    <!--    <div>{{ musicRoomInfo }}</div>-->
-    <!--    <music-player ref="musicPlayer" :cur-music-info="musicRoomInfo" :data="songList" :has-operate-auth="true"-->
-    <music-player ref="musicPlayer" :cur-music-info="musicRoomInfo" :has-operate-auth="true"
-                  @input="musicRoomInfoInput" @change="musicRoomInfoChange" @next="next"></music-player>
-    <music-list class="h500" :data="songList" @change="listMusicChange" :cur-music="musicRoomInfo"></music-list>
-    <music-list class="h500" :data="songList" @change="listMusicChange" :cur-music="musicRoomInfo"></music-list>
+    <div>总积分1个亿</div>
+
+    <!--    <div class="flex-row row-wrap">
+          <div v-for="i in 360">
+            <div class="flex-col bd">
+              <div>
+                第{{ getData(i).monthIndex + 1 }}个月
+              </div>
+              <div>
+                第{{ getData(i).dayIndex }}天
+              </div>
+              <div>
+                分配{{ getData(i).oneMonthDayConsume }}
+              </div>
+              <div>
+                奖池剩余{{ pool }}
+              </div>
+            </div>
+          </div>
+        </div>-->
+
+    <!--    <q-input v-model="musicSearchText" class="w150" @keydown.enter="searchSongList" @clear="clearSearch"></q-input>
+        {{searchData}}
+        &lt;!&ndash;    <div>{{ musicRoomId }}</div>&ndash;&gt;
+        &lt;!&ndash;    <div>{{ musicRoomInfo }}</div>&ndash;&gt;
+        &lt;!&ndash;    <music-player ref="musicPlayer" :cur-music-info="musicRoomInfo" :data="songList" :has-operate-auth="true"&ndash;&gt;
+        <music-player ref="musicPlayer" :cur-music-info="musicRoomInfo" :has-operate-auth="true"
+                      @input="musicRoomInfoInput" @change="musicRoomInfoChange" @next="next"></music-player>
+        <music-list class="h500" :data="songList" @change="listMusicChange" :cur-music="musicRoomInfo"></music-list>
+        <music-list class="h500" :data="songList" @change="listMusicChange" :cur-music="musicRoomInfo"></music-list>-->
   </div>
 </template>
 
@@ -40,8 +61,82 @@ export default class MusicHome extends Vue {
   created() {
     this.initRoomId()
     this.querySongList()
+    this.pool = 600
+    this.printPoint()
     // this.searchSongList()
   }
+
+  printPoint() {
+    const all = 18000
+
+
+    let pool = all
+
+    //总积分数 3100w
+    //每日销毁 1w，1000天销毁 1000w
+
+    const monthDay = 30
+
+    //第一个月，他将获得0.1%的股权，  0.01的收益权，真的不多了。 1.1亿积分。每日销毁1w积分。
+
+
+    const ary = [105, 75, 75, 50, 50, 50, 35, 35, 35, 30, 30, 30, 30, 30, 30, 25, 25, 25, 25, 25, 25, 20, 20, 20, 15, 15, 10, 10, 10, 10, 5, 5, 5, 5, 5, 5]
+
+    console.log(ary.reduce((accumulator, currentValue) => accumulator + currentValue))
+    console.log(1111111111111111)
+    for (let i = 0; i < 1080; i++) {
+      const monthIndex = Math.floor(i / 30)
+      const dayIndex = (i % 30) + 1
+      const monthAssign = ary[monthIndex] * all / 1000
+      const oneMonthDayConsume = monthAssign / monthDay
+      pool = pool - oneMonthDayConsume
+      if (dayIndex === 30) {
+        const curDate = new Date()
+        const nextMonth = curDate.getMonth()
+        const year = curDate.getFullYear()
+
+        const month = ((nextMonth + monthIndex + 1))
+        const monthStr = (month % 12) + 1
+
+        const yearNum = Math.floor(month / 12)
+
+
+        console.log(`${year + yearNum}年，${monthStr}月，每日分配${oneMonthDayConsume}w积分`)
+        // console.log(`${year + yearNum}年，${monthStr}月，分配${oneMonthDayConsume}，奖池剩余${pool},本月消耗${all - pool}`)
+      }
+    }
+    // const oneMonthDayConsume = oneMonth / monthDay
+    //配置每个月的积分消耗
+  }
+
+
+  pool = 6000
+
+  getData(i) {
+
+    i = i - 1
+
+    const all = 6000
+
+    //总积分数 3100w
+    //每日销毁 1w，1000天销毁 1000w
+
+    const monthDay = 30
+
+    const ary = [105, 75, 75, 50, 50, 50, 35, 35, 35, 30, 30, 30]
+
+    const monthIndex = Math.floor(i / 30)
+    const dayIndex = (i % 30) + 1
+    const monthAssign = ary[monthIndex] * all / 1000
+    const oneMonthDayConsume = monthAssign / monthDay
+    this.pool = this.pool - oneMonthDayConsume
+
+    console.log(`第${monthIndex + 1}月，第${dayIndex}天，分配${oneMonthDayConsume}，奖池剩余${this.pool}`)
+    return {
+      monthIndex, dayIndex, oneMonthDayConsume
+    }
+  }
+
 
   async initRoomId() {
     // 如果没有房间id，则查询默认系统开放大厅id
@@ -77,7 +172,7 @@ export default class MusicHome extends Vue {
     return null
   }
 
-  searchData= []
+  searchData = []
 
   async searchSongList() {
     const res = await musicRequest.get('/cloudsearch?offset=0&limit=30&keywords=阿普的思念')
