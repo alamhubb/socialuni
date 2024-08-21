@@ -5,7 +5,32 @@ import java.util.Map;
 
 
 public class SocialuniParterConfig {
+    //总积分，1.1亿
+    public static final Integer monthPointsConfig = 110000000;
+    //使用共享分配
+    public static final Integer useAssign = 70;
+    //充值贡献分配
+    public static final Integer payAssign = 30;
+
+    //    发一句消息30贡献
+    public static final Integer msgContributeValue = 30;
+    //    听歌，1分钟10贡献
+    public static final Integer musicContributeValue = 10;
+    //    每日登录一下，100积分
+    public static final Integer everyDayUseContributeValue = 1000;
+    //    连续使用贡献值倍数，每日增加倍数加成 value/100，每一天不登录，则掉相同的倍数加成
+    public static final Integer everyDayUseMultipleAdditionContributeValue = 10;
+    // 最大连续使用加成天数10天，最大贡献值翻倍
+    public static final Integer maxContinuousUseDay = 10;
+
+    // 充值的前1000名，可以获取当日贡献值加成， 第一名翻倍，前三1.6，前10，1.4，前100,1.2， 前1000,1.1
+    // 使用贡献值计算时会，乘上充值加成， 充值贡献值计算时，仅使用充值加成
+    // 使用贡献值计算公式， 贡献值*（1+连续使用贡献值加成(最大1) + 充值贡献值加成（最大1））
+    // 充值贡献值计算公式， 充值贡献值*（1+ 充值贡献值加成（最大1））
+
+
     public static final Map<String, Integer> monthPointsConfig = new HashMap<>() {{
+        //单位万
         put("2024-08", 30);
         put("2024-09", 63);
         put("2024-10", 45);
