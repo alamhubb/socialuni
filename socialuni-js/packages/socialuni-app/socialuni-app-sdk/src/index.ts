@@ -38,6 +38,7 @@ WebsocketWebRtcUtil.easyWebRTC.ontrack((event) => {
             console.log('接受了消息')
             console.log(notify.data)
             socialAppModule.onlineUsersCount = notify.data
+            console.log(socialAppModule.onlineUsersCount)
         }
     }
 

@@ -3,7 +3,7 @@ package com.socialuni.social.user.sdk.logic.manage;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserOpenIdDO;
-import com.socialuni.social.user.sdk.repository.SocialuniUserOpenIdRepository;
+import com.socialuni.social.user.sdk.dao.repository.SocialuniUserOpenIdRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

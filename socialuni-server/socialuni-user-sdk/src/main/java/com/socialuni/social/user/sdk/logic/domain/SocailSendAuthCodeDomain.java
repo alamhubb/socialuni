@@ -16,7 +16,7 @@ import com.socialuni.social.user.sdk.logic.manage.SocialUserPhoneManage;
 import com.socialuni.social.user.sdk.dao.DO.AuthenticationDO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.QO.phone.SocialSendAuthCodeQO;
-import com.socialuni.social.user.sdk.repository.AuthenticationRepository;
+import com.socialuni.social.user.sdk.dao.repository.AuthenticationRepository;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.user.sdk.utils.TencentSmsServe;
 import lombok.extern.slf4j.Slf4j;

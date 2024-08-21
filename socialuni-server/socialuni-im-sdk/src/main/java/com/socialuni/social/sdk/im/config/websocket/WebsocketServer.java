@@ -8,6 +8,8 @@ import com.socialuni.social.sdk.im.enumeration.ChatUserStatus;
 import com.socialuni.social.sdk.im.enumeration.NotifyType;
 import com.socialuni.social.sdk.im.notify.NotifyVO;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.user.sdk.dao.repository.SocialuniUserOnlineRepository;
+import com.socialuni.social.user.sdk.logic.domain.SocialuniUserOnlineDomain;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.redis.listener.ChannelTopic;
@@ -38,6 +40,8 @@ public class WebsocketServer extends TextWebSocketHandler {
 
     @Resource
     private RedisMessageListenerContainer redisContainer;
+    @Resource
+    private SocialuniUserOnlineDomain socialuniUserOnlineDomain;
 
     private static RedisUtil redisUtil;
 
@@ -145,19 +149,17 @@ public class WebsocketServer extends TextWebSocketHandler {
         if (user != null && StringUtils.isNotEmpty(user.getName())) {
             log.info("登录成功:{}", user.getName());
             String userId = user.getName();
-            if (onlineUsersSessionMap.containsKey(userId)) {
-                onlineUsersSessionMap.remove(userId);
-                //加入set中
-            } else {
-                //加入set中
-                addOnlineCount();
-                //在线数加1
-
-            }
+            //加入set中
+            onlineUsersSessionMap.remove(userId);
+            onlineUsersSessionMap.put(userId, session);
+            //在线数加1
+            socialuniUserOnlineDomain.userOnline(userId);
+            //加入set中
+            addOnlineCount();
             //加入set中
 //            ChannelTopic channelTopic = new ChannelTopic(userId);
 //            redisContainer.addMessageListener(messageListener, channelTopic);
-            onlineUsersSessionMap.put(userId, session);
+
 //            onlineUsersChannelTopicMap.put(userId, channelTopic);
             if (NumberUtils.strIsAllNumber(userId)) {
 //                userService.setUserOnlineTrue(userId);
@@ -170,6 +172,7 @@ public class WebsocketServer extends TextWebSocketHandler {
     public void handleTextMessage(WebSocketSession session, TextMessage message) {
         log.info("收到客户端消息：{}", message.getPayload());
         System.out.println(Objects.requireNonNull(session.getPrincipal()).getName());
+        socialuniUserOnlineDomain.userOnline(Objects.requireNonNull(session.getPrincipal()).getName());
         /*JSONObject msgJson = JSONObject.parseObject(message.getPayload());
         String to = msgJson.getString("to");
         String msg = msgJson.getString("msg");
@@ -218,10 +221,11 @@ public class WebsocketServer extends TextWebSocketHandler {
                 String userId = user.getName();
                 if (onlineUsersSessionMap.containsKey(userId)) {
                     onlineUsersSessionMap.remove(userId);
+                    socialuniUserOnlineDomain.userOffline(userId);
+                    subOnlineCount();
 //                    redisContainer.removeMessageListener(messageListener, onlineUsersChannelTopicMap.get(userId));
 //                    onlineUsersChannelTopicMap.remove(userId);
                     //从set中删除
-                    subOnlineCount();
                 }
                 if (NumberUtils.strIsAllNumber(userId)) {
 //                    userService.setUserOnlineFalse(userId);
@@ -259,12 +263,13 @@ public class WebsocketServer extends TextWebSocketHandler {
     }
 
     public static synchronized int getOnlineCount() {
-        Object onlineUsersCount = redisUtil.get(WebsocketServer.onlineUsersCountKey);
-        if (onlineUsersCount == null) {
-            return 0;
-        } else {
-            return (Integer) onlineUsersCount;
-        }
+//        Object onlineUsersCount = redisUtil.get(WebsocketServer.onlineUsersCountKey);
+//        if (onlineUsersCount == null) {
+//            return 0;
+//        } else {
+//            return (Integer) onlineUsersCount;
+//        }
+        return onlineUsersSessionMap.size();
     }
 
     public static synchronized void addOnlineCount() {

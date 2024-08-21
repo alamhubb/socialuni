@@ -4,13 +4,11 @@ package com.socialuni.social.user.sdk.logic.manage;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.user.sdk.dao.DO.SocialUserPasswordDO;
-import com.socialuni.social.user.sdk.model.QO.SocialPhoneAuthCodePasswordQO;
-import com.socialuni.social.user.sdk.repository.SocialuniUserPasswordRepository;
+import com.socialuni.social.user.sdk.dao.repository.SocialuniUserPasswordRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import javax.transaction.Transactional;
 import java.util.Date;
 
 @Slf4j

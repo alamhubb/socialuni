@@ -5,7 +5,7 @@ import com.socialuni.social.common.sdk.constant.SocialuniConst;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniDistrictDO;
 import com.socialuni.social.user.sdk.model.RO.SocialDistrictRO;
 import com.socialuni.social.user.sdk.factory.SocialDistrictROFactory;
-import com.socialuni.social.user.sdk.repository.DistrictRepository;
+import com.socialuni.social.user.sdk.dao.repository.DistrictRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;

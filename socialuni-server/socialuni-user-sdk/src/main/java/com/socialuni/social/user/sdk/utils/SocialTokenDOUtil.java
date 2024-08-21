@@ -3,7 +3,7 @@ package com.socialuni.social.user.sdk.utils;
 import com.socialuni.social.common.api.utils.SocialTokenFacade;
 import com.socialuni.social.common.sdk.utils.RequestLogUtil;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniTokenDO;
-import com.socialuni.social.user.sdk.repository.SocialuniCommonTokenRepository;
+import com.socialuni.social.user.sdk.dao.repository.SocialuniCommonTokenRepository;
 import com.socialuni.social.common.api.utils.NumberUtils;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.common.api.exception.exception.SocialNotLoginException;

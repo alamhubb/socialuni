@@ -2,7 +2,7 @@ package com.socialuni.social.user.sdk.logic.user;
 
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.user.sdk.dao.DO.SocialUserViolationDo;
-import com.socialuni.social.user.sdk.repository.SocialUserViolationRepository;
+import com.socialuni.social.user.sdk.dao.repository.SocialUserViolationRepository;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

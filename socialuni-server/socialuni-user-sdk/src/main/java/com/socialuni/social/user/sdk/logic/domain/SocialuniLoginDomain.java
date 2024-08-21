@@ -20,7 +20,7 @@ import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumAuthCodeQO;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
 import com.socialuni.social.user.sdk.model.factory.SocialuniMineUserROFactory;
-import com.socialuni.social.user.sdk.repository.SocialuniUserPasswordRepository;
+import com.socialuni.social.user.sdk.dao.repository.SocialuniUserPasswordRepository;
 import com.socialuni.social.user.sdk.utils.PasswordUtil;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Service;

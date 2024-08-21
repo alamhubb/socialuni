@@ -70,6 +70,7 @@ export default class FastWebsocket {
             //心跳保活
             this.timer = setInterval(() => {
                 if (this.ws.readyState === this.ws.OPEN) {
+                    console.log('cfasong ping')
                     this.ws.send('ping')
                 }
             }, this.pingTime)
