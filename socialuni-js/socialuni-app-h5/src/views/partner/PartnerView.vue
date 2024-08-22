@@ -1,7 +1,7 @@
 <template>
   <div class="h100p">
     <div>
-      {{ data}}
+      <!--      {{ data }}-->
     </div>
     <div>总积分1.1亿</div>
 
@@ -14,15 +14,19 @@
 
     积分剩余
 
-    您今日的贡献值为 1000 ， 今日贡献值排名第 xxx，名 ，按当前贡献值，您今日可获得积分，4w，
+    <div>
 
-    计算方式为， 每日登录100积分 + 在线时长 29 分钟* 10 + 发送消息数0 * 30 * (1+ 0(连续每日登录加成) + (今日充值加成))
+    </div>
+    您今日的贡献值为 {{data.contributeValue}} ， 今日贡献值排名第 {{data.contributeRank}}，名 ，按当前贡献值，您今日可获得积分，{{ data.assignPoints}}，
+
+    计算方式为， 每日登录100积分 + 在线时长 {{data.onlineMinute}} 分钟 * 10 + 发送消息数{{ data.sendMsgNum}} * 30 * (1+ {{ data.useMultiple / 10}}(连续每日登录加成) + (今日充值加成))
   </div>
 </template>
 
 <script lang="ts">
 import {Component, Vue, Watch, toNative} from 'vue-facing-decorator';
 import socialuniUserRequest from "socialuni-user-api/src/request/socialuniUserRequest.ts";
+import SocialuniPartnerUserContributeRO from "@/views/partner/model/SocialuniPartnerUserContributeRO.ts";
 
 @toNative
 @Component({
@@ -30,9 +34,10 @@ import socialuniUserRequest from "socialuni-user-api/src/request/socialuniUserRe
 })
 export default class MusicHome extends Vue {
 
-  data = null
+  data: SocialuniPartnerUserContributeRO = null
 
   created() {
+    this.queryInit()
   }
 
   async queryInit() {
