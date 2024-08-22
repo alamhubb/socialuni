@@ -20,6 +20,12 @@ public class SocialuniDateUtils {
     public static final SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     public static final SimpleDateFormat timeStrFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS");
 
+    public static  String getToday() {
+        Date curDate = new Date();
+        String today = SocialuniDateUtils.simpleDateFormat.format(curDate);
+        return today;
+    }
+
     public static Date getTodayZeroDate() {
         //每天0点到现在不能发布超过10条
         Calendar calendar = Calendar.getInstance();

@@ -1,7 +1,5 @@
 package com.socialuni.social.partner.dao.model;
 
-import com.socialuni.social.common.api.entity.SocialuniBaseDO;
-import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import com.socialuni.social.common.api.entity.SocialuniUpdateTimeContentBaseDO;
 import lombok.Data;
 
@@ -25,6 +23,8 @@ public class SocialuniPartnerPointsMainDO extends SocialuniUpdateTimeContentBase
     Integer balance;
     @Column(nullable = false)
     Integer consume;
+    @Column(nullable = false)
+    Integer tenThousandConsume;
     //销毁，分配，特殊用途，需要备注
     @Column(nullable = false)
     String consumeType;
@@ -33,4 +33,14 @@ public class SocialuniPartnerPointsMainDO extends SocialuniUpdateTimeContentBase
     String todayDate;
     String remark;
 
+    @Column(nullable = false)
+    //已分配数量
+    Integer assignNum;
+    @Column(nullable = false)
+    //销毁数量，未分配的则销魂，分配+销魂应该等于 consume
+    Integer destroyNum;
+
+    public SocialuniPartnerPointsMainDO() {
+        this.assignNum = 0;
+    }
 }

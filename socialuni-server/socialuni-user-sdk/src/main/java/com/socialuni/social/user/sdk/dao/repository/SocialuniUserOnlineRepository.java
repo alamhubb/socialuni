@@ -1,20 +1,28 @@
 package com.socialuni.social.user.sdk.dao.repository;
 
-import com.socialuni.social.user.sdk.dao.DO.SocialuniUserOnlineDO;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniPartnerUserOnlineDO;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface SocialuniUserOnlineRepository extends JpaRepository<SocialuniUserOnlineDO, Integer> {
+import java.util.Date;
+import java.util.List;
+
+public interface SocialuniUserOnlineRepository extends JpaRepository<SocialuniPartnerUserOnlineDO, Integer> {
     @Cacheable(cacheNames = "findFirstByUserIdOrderByIdDesc", key = "#userId")
-    SocialuniUserOnlineDO findFirstByUserIdOrderByIdDesc(Integer userId);
+    SocialuniPartnerUserOnlineDO findFirstByUserIdOrderByIdDesc(Integer userId);
 
     @Caching(
             put = {@CachePut(cacheNames = "findFirstByUserIdOrderByIdDesc", key = "#socialuniUserExpandDO.userId")}
     )
-    default SocialuniUserOnlineDO savePut(SocialuniUserOnlineDO socialuniUserExpandDO){
+    default SocialuniPartnerUserOnlineDO savePut(SocialuniPartnerUserOnlineDO socialuniUserExpandDO) {
         return this.save(socialuniUserExpandDO);
     }
+
+    List<SocialuniPartnerUserOnlineDO> findByTodayDate(String todayDate);
+
+
+    List<SocialuniPartnerUserOnlineDO> findByUserIdAndCreateTimeBetween(Integer userId, Date startTime, Date beginTime);
 }
 

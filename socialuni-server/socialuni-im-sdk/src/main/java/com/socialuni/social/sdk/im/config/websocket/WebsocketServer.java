@@ -8,7 +8,6 @@ import com.socialuni.social.sdk.im.enumeration.ChatUserStatus;
 import com.socialuni.social.sdk.im.enumeration.NotifyType;
 import com.socialuni.social.sdk.im.notify.NotifyVO;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.user.sdk.dao.repository.SocialuniUserOnlineRepository;
 import com.socialuni.social.user.sdk.logic.domain.SocialuniUserOnlineDomain;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

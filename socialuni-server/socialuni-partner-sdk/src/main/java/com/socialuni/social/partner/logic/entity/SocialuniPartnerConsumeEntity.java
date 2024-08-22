@@ -1,5 +1,6 @@
 package com.socialuni.social.partner.logic.entity;
 
+import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.common.sdk.utils.SocialuniDateUtils;
 import com.socialuni.social.partner.config.SocialuniParterConfig;
@@ -16,6 +17,11 @@ public class SocialuniPartnerConsumeEntity {
     @Resource
     SocialuniPartnerPointsMainRepository socialuniPartnerPointsMainRepository;
 
+    public void computedTodayPoints() {
+        this.computedTodayPointsByConsumeType(SocialuniPartnerPointsConsumeType.destroy);
+        this.computedTodayPointsByConsumeType(SocialuniPartnerPointsConsumeType.useAssign);
+        this.computedTodayPointsByConsumeType(SocialuniPartnerPointsConsumeType.payAssign);
+    }
 
     public Integer getConsumePointByConsumeType(String consumeType) {
         if (SocialuniPartnerPointsConsumeType.destroy.equals(consumeType)) {
@@ -47,7 +53,7 @@ public class SocialuniPartnerConsumeEntity {
             socialuniPartnerPointsMainDO.setConsumeType(consumeType);
         } else {
             //将balance加回去，重新计算
-            Integer consume = socialuniPartnerPointsMainDO.getConsume();
+            Integer consume = socialuniPartnerPointsMainDO.getTenThousandConsume();
             balance = balance + consume;
         }
 
@@ -59,7 +65,13 @@ public class SocialuniPartnerConsumeEntity {
         balancePoints.setUpdateTime(date);
         socialuniPartnerPointsMainRepository.save(balancePoints);
 
-        socialuniPartnerPointsMainDO.setConsume(useAssignPoints);
+        socialuniPartnerPointsMainDO.setTenThousandConsume(useAssignPoints);
+
+        Integer consumeNum = useAssignPoints * SocialuniParterConfig.pointDefaultMultiple;
+
+        socialuniPartnerPointsMainDO.setConsume(consumeNum);
+        //销魂数量等于总量减去已分配数量
+        socialuniPartnerPointsMainDO.setDestroyNum(consumeNum - socialuniPartnerPointsMainDO.getAssignNum());
         // 没有意义了，更新的时候会导致数据不正确，会拿最新的balance，而不是当时的，如果拿当时的去更新最新的也有错误，先这样，整体逻辑正确，无影响
         socialuniPartnerPointsMainDO.setBalance(balance);
         socialuniPartnerPointsMainDO.setUpdateTime(date);

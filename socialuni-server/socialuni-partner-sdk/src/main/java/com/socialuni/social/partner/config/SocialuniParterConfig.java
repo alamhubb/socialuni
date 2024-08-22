@@ -7,6 +7,9 @@ import java.util.Map;
 
 
 public class SocialuniParterConfig {
+    //积分存储默认倍数万
+    public static final Integer pointDefaultMultiple = 10000;
+
     //总积分，1.1亿
     public static final Integer allPoints = 11000;
 
@@ -23,7 +26,7 @@ public class SocialuniParterConfig {
     //    听歌，1分钟10贡献
     public static final Integer musicContributeValue = 10;
     //    每日登录一下，100积分
-    public static final Integer everyDayUseContributeValue = 1000;
+    public static final Integer everyDayUseContributeValue = 100;
     //    连续使用贡献值倍数，每日增加倍数加成 value/100，每一天不登录，则掉相同的倍数加成
     public static final Integer everyDayUseMultipleAdditionContributeValue = 10;
     // 最大连续使用加成天数10天，最大贡献值翻倍

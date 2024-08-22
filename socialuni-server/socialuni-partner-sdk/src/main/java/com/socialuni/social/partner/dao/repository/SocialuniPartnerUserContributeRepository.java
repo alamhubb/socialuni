@@ -1,12 +1,13 @@
 package com.socialuni.social.partner.dao.repository;
 
 import com.socialuni.social.partner.dao.model.SocialuniPartnerPointsMainDO;
+import com.socialuni.social.partner.dao.model.SocialuniPartnerUserContributeDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface SocialuniPartnerPointsMainRepository extends JpaRepository<SocialuniPartnerPointsMainDO, Integer> {
+public interface SocialuniPartnerUserContributeRepository extends JpaRepository<SocialuniPartnerUserContributeDO, Integer> {
 //    @Cacheable(cacheNames = "findFirstByUserIdOrderByIdDesc", key = "#userId")
 
-    SocialuniPartnerPointsMainDO findFirstByTodayDateAndConsumeType(String today,String consumeType);
+    SocialuniPartnerUserContributeDO findFirstByUserIdAndTodayDate(Integer userId, String today);
 
 
 /*
