@@ -3,13 +3,12 @@ package com.socialuni.social.music.sdk.model.QO;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data
 public class SocialuniPlayMusicQO {
     @NotBlank
-    String musicUrl;
+    Integer songId;
 //    @NotNull
 //    Integer musicTime;
 

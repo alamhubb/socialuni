@@ -111,7 +111,7 @@ public class SocialuniMusicController {
         }
         SocialuniMusicRoomDO socialuniMusicRoomDO = socialuniMusicRoomManage.getOrCreateMusicPlayerDO(chatId);
 
-        if (StringUtils.isEmpty(socialuniMusicRoomDO.getMusicUrl())) {
+        if (ObjectUtils.isEmpty(socialuniMusicRoomDO.getSongId())) {
             return ResultRO.success();
         }
 

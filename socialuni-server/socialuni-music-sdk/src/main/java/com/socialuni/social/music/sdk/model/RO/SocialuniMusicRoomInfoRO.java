@@ -7,7 +7,7 @@ import java.util.Date;
 @Data
 public class SocialuniMusicRoomInfoRO {
 //    String musicRoleId;
-    String musicUrl;
+    Integer musicId;
     //默认0
     Date playingTimestamp;
     Integer playingTime;

@@ -1,5 +1,5 @@
 export interface SocialuniMusicRoomInfoRO {
-    musicUrl: String
+    musicId: number
     playingTimestamp: Date
     //单位秒
     musicTime: number

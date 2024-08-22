@@ -1,5 +1,6 @@
 package com.socialuni.social.music.sdk.dao.DO;
 
+import com.socialuni.social.common.api.entity.SocialuniBaseDO;
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -11,7 +12,7 @@ import javax.persistence.UniqueConstraint;
 import java.util.Date;
 
 @Entity
-@Table(name = "s_music_room",
+@Table(name = "s_music_room_song_list",
         indexes = {
                 @Index(columnList = "status")
         },
@@ -22,20 +23,16 @@ import java.util.Date;
 )
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class SocialuniMusicRoomDO extends SocialuniContentBaseDO {
+public class SocialuniMusicRoomSongListDO extends SocialuniContentBaseDO {
+
+    //序号
+    Integer orderNo;
+
     Integer roomId;
 
-    Integer songId;
-//    Integer musicTime;
-    //默认0
-    Date playingTimestamp;
-    Integer playingTime;
-    //是否暂停了, 默认false
-    Boolean playing;
+    String songId;
 
-    public SocialuniMusicRoomDO() {
-        this.playing = Boolean.FALSE;
-        this.playingTimestamp = new Date();
-        this.playingTime = 0;
-    }
+    String musicName;
+    String musicSinger;
+    Integer musicTime;
 }
