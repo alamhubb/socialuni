@@ -84,7 +84,7 @@ public class SocialuniUserOnlineDomain {
         socialuniUserOnlineDO.setUserId(userId);
         int diff = getDiffMinute(socialuniUserOnlineDO);
 
-        // +10 ，因为每日计算在线时间会在23.50分时进行
+        // +10 ，因为每日计算在线时间会在23.50分时进行，所以差10分钟，所以给所有人补10分钟，但是相当于每次间隔10分钟以上的登录都补了10分钟，也无所谓了
         socialuniUserOnlineDO.setOnlineMinute(diff + 10);
         socialuniUserOnlineRepository.savePut(socialuniUserOnlineDO);
     }
