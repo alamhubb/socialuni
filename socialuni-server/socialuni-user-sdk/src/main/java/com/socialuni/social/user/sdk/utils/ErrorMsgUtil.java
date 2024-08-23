@@ -18,7 +18,7 @@ public class ErrorMsgUtil {
         if (mineUserId == null) {
             throw new SocialNullUserException();
         }
-        SocialUserViolationDo socialUserViolationDo = SocialuniUserRepositoryFacede.findByUserId(mineUserId, SocialUserViolationDo.class);
+        SocialUserViolationDo socialUserViolationDo = SocialuniUserRepositoryFacede.findFirstByUserIdOrderByIdDesc(mineUserId, SocialUserViolationDo.class);
         Date violationEndTime = socialUserViolationDo.getViolationEndTime();
         return ErrorMsgUtil.getErrorCode605ContactServiceValue(violationEndTime);
     }

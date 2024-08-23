@@ -2,14 +2,11 @@ package com.socialuni.social.sdk.im.logic.foctory;
 
 
 import com.socialuni.social.common.api.constant.SocialuniContentType;
-import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.sdk.constant.LoadMoreType;
-import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
-import com.socialuni.social.sdk.im.dao.DO.SocialuniUserChatConfigDO;
 import com.socialuni.social.sdk.im.enumeration.ChatStatus;
 import com.socialuni.social.sdk.im.enumeration.ChatType;
 import com.socialuni.social.sdk.im.enumeration.ChatUserStatus;
@@ -22,12 +19,9 @@ import com.socialuni.social.sdk.im.dao.repository.SocialuniMessageRepository;
 import com.socialuni.social.im.api.model.RO.ChatRO;
 import com.socialuni.social.im.api.model.RO.SocialMessageRO;
 import com.socialuni.social.sdk.im.enumeration.MessageStatus;
-import com.socialuni.social.sdk.im.logic.manage.SocialuniUserChatConfigManage;
 import com.socialuni.social.sdk.im.utils.SocialuniChatUserDOUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
-import com.socialuni.social.user.sdk.dao.DO.SocialuniUserBlackDO;
-import com.socialuni.social.follow.dao.DO.SocialuniUserFollowDO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import lombok.Data;
@@ -198,7 +192,7 @@ public class SocialChatROFactory {
         chatRO.setStatus(chatUserDO.getStatus());
         //chat的最后一条消息时间大家都一样，把最后一条删除也是最后一条的时间
         //只有为待开启才判断是否需要支付开启
-        if (chatRO.getStatus().equals(ChatUserStatus.waitOpen)) {
+        if (chatRO.getStatus().equals(ChatUserStatus.pending)) {
             chatRO.setLastContent("会话待开启");
             //查询对方是否关注了自己，只有未关注的情况，才能支付
             /*boolean hasFollow = followManage.userHasFollowBeUser(chatRO.getReceiveUserId(), chatUserDO.getUserId());

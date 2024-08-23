@@ -12,7 +12,7 @@ public class ConstStatus {
 //    public static final String agree = " 同意";
 
     //待开启，需要有一方发送一条消息后，才改为开启状态
-    public static final String waitOpen = "待开启";
+    public static final String pending = "待处理";
 
     public static final String close = "已关闭";
 

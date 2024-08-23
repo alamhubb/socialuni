@@ -20,7 +20,7 @@ public class SocialuniDateUtils {
     public static final SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     public static final SimpleDateFormat timeStrFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS");
 
-    public static  String getToday() {
+    public static String getToday() {
         Date curDate = new Date();
         String today = SocialuniDateUtils.simpleDateFormat.format(curDate);
         return today;
@@ -75,4 +75,27 @@ public class SocialuniDateUtils {
     public static String getTimeStrFormat(Date date) {
         return SocialuniDateUtils.timeStrFormat.format(date);
     }
+
+    public static String formatRemainingTime(long targetTime) {
+        // 获取当前时间
+        long currentTime = System.currentTimeMillis();
+
+        // 计算时间差（毫秒）
+        long diffTime = targetTime - currentTime;
+
+        // 如果时间差小于0，说明目标时间已过
+        if (diffTime <= 0) {
+            return "0分";
+        }
+
+        // 将毫秒转换为秒、分、小时、天
+        long diffSeconds = diffTime / 1000 % 60;
+        long diffMinutes = diffTime / (60 * 1000) % 60;
+        long diffHours = diffTime / (60 * 60 * 1000) % 24;
+        long diffDays = diffTime / (24 * 60 * 60 * 1000);
+
+        //格式化输出
+        return String.format("%d天%d时%d分", diffDays, diffHours, diffMinutes);
+    }
+
 }

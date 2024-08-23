@@ -18,7 +18,7 @@ public class SocialUserPasswordManage {
     SocialuniUserPasswordRepository socialuniUserPasswordRepository;
 
     public SocialUserPasswordDO getOrCreateUserPasswordDO(Integer userId, String account, String password) {
-        SocialUserPasswordDO socialUserPasswordDO = SocialuniUserRepositoryFacede.findByUserId(userId, SocialUserPasswordDO.class);
+        SocialUserPasswordDO socialUserPasswordDO = SocialuniUserRepositoryFacede.findFirstByUserIdOrderByIdDesc(userId, SocialUserPasswordDO.class);
         if (socialUserPasswordDO == null) {
             socialUserPasswordDO = new SocialUserPasswordDO();
             socialUserPasswordDO.setUserId(userId);

@@ -3,6 +3,8 @@ package com.socialuni.social.follow.facotry;
 import com.socialuni.social.common.api.model.user.SocialuniContentUserRO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.follow.logic.manage.SocialuniUserFollowManage;
+import com.socialuni.social.follow.model.follow.SocialuniUserFollowRelationInfoRO;
+import com.socialuni.social.follow.utils.SocialuniUserFollowInfoUtil;
 import com.socialuni.social.identity.dao.DO.SocialUserIdentityAuthDO;
 import com.socialuni.social.identity.dao.repository.SocialUserIdentityAuthRepository;
 import com.socialuni.social.user.sdk.constant.UserIdentityAuthStatus;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -32,8 +35,6 @@ public class SocialuniContentUserROFactory {
     public static SocialuniContentUserRO newContentUserRO(SocialuniUserDo user, SocialuniUserDo mineUser) {
         SocialuniContentUserRO userRO = new SocialuniContentUserRO(SocialuniUserROFactory.getUserRO(user, mineUser));
 
-        userRO.setHasFollowed(false);
-        userRO.setHasBeFollowed(false);
         userRO.setIdentityAuth(false);
 
         if (mineUser != null && user.getUnionId().equals(mineUser.getUnionId())) {
@@ -42,13 +43,14 @@ public class SocialuniContentUserROFactory {
             userRO.setIsMine(false);
         }
 
-        if (mineUser != null && !userRO.getIsMine()) {
-            boolean hasFollowUser = followManage.userHasFollowBeUser(mineUser.getUnionId(), user.getUnionId());
-            userRO.setHasFollowed(hasFollowUser);
+        Integer mineUserId = Optional.ofNullable(mineUser)
+                .map(SocialuniUserDo::getUserId)
+                .orElse(null);
 
-            boolean hasBeFollowed = followManage.userHasFollowBeUser(user.getUnionId(), mineUser.getUnionId());
-            userRO.setHasBeFollowed(hasBeFollowed);
-        }
+        SocialuniUserFollowRelationInfoRO socialuniUserFollowRelationInfoRO = SocialuniUserFollowInfoUtil.getUserFollowRelationInfo(user.getUserId(), mineUserId);
+        userRO.setHasBeFollowed(socialuniUserFollowRelationInfoRO.getHasBeFollowed());
+        userRO.setHasFollowed(socialuniUserFollowRelationInfoRO.getHasFollowed());
+
 
         SocialUserIdentityAuthDO socialUserIdentityAuthDO = socialUserIdentityAuthRepository.findFirstByUserId(user.getUnionId());
         if (socialUserIdentityAuthDO != null) {

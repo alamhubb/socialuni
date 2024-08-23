@@ -51,26 +51,33 @@ public class SocialuniUserFollowInfoUtil {
         return userRO;
     }
 
-    public static SocialuniUserFollowRelationInfoRO getUserFollowRelationInfo(SocialuniUserDo user, SocialuniUserDo mineUser) {
+    public static SocialuniUserFollowRelationInfoRO getUserFollowRelationInfo(Integer userId, Integer mineUserId) {
         SocialuniUserFollowRelationInfoRO userRO = new SocialuniUserFollowRelationInfoRO();
 
         userRO.setHasFollowed(false);
         userRO.setHasBeFollowed(false);
 
-        if (mineUser == null) {
+        if (mineUserId == null) {
             return userRO;
         }
 
-        if (user.getUserId().equals(mineUser.getUserId())) {
+        if (userId.equals(mineUserId)) {
             return userRO;
         }
 
-        boolean hasFollowUser = followManage.userHasFollowBeUser(mineUser.getUnionId(), user.getUnionId());
+        boolean hasFollowUser = followManage.userHasFollowBeUser(mineUserId, userId);
         userRO.setHasFollowed(hasFollowUser);
 
-        boolean hasBeFollowed = followManage.userHasFollowBeUser(user.getUnionId(), mineUser.getUnionId());
+        boolean hasBeFollowed = followManage.userHasFollowBeUser(userId, mineUserId);
         userRO.setHasBeFollowed(hasBeFollowed);
 
         return userRO;
+    }
+
+
+    public static boolean usersIsFriend(Integer userId, Integer mineUserId) {
+        SocialuniUserFollowRelationInfoRO socialuniUserFollowRelationInfoRO = SocialuniUserFollowInfoUtil.getUserFollowRelationInfo(userId, mineUserId);
+
+        return socialuniUserFollowRelationInfoRO.getHasBeFollowed() && socialuniUserFollowRelationInfoRO.getHasFollowed();
     }
 }

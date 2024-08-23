@@ -71,7 +71,7 @@ public class SocialuniLoginDomain {
 
         Integer userId = socialUserPhoneDo.getUserId();
 
-        SocialUserPasswordDO socialUserPasswordDO = SocialuniUserRepositoryFacede.findByUserId(userId, SocialUserPasswordDO.class);
+        SocialUserPasswordDO socialUserPasswordDO = SocialuniUserRepositoryFacede.findFirstByUserIdOrderByIdDesc(userId, SocialUserPasswordDO.class);
 
         if (socialUserPasswordDO == null) {
             throw new SocialSystemException("未设置密码，却使用了密码登录");

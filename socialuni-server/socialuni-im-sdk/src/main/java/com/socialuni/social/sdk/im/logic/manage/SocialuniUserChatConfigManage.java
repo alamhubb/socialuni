@@ -7,7 +7,7 @@ import com.socialuni.social.sdk.im.dao.DO.SocialuniUserChatConfigDO;
 public class SocialuniUserChatConfigManage {
 
     public static SocialuniUserChatConfigDO getOrCreateUserChatConfigDO(Integer userId) {
-        SocialuniUserChatConfigDO socialuniUserChatConfigDO = SocialuniUserRepositoryFacede.findByUserId(userId, SocialuniUserChatConfigDO.class);
+        SocialuniUserChatConfigDO socialuniUserChatConfigDO = SocialuniUserRepositoryFacede.findFirstByUserIdOrderByIdDesc(userId, SocialuniUserChatConfigDO.class);
 
         if (socialuniUserChatConfigDO == null) {
             socialuniUserChatConfigDO = new SocialuniUserChatConfigDO();

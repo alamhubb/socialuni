@@ -18,7 +18,7 @@ public class SocialuniUserOpenIdManager {
     SocialuniUserOpenIdRepository socialuniUserOpenIdRepository;
 
     public SocialuniUserOpenIdDO create(Integer userId) {
-        SocialuniUserOpenIdDO socialuniUserOpenIdDO = SocialuniUserRepositoryFacede.findByUserId(userId, SocialuniUserOpenIdDO.class);
+        SocialuniUserOpenIdDO socialuniUserOpenIdDO = SocialuniUserRepositoryFacede.findFirstByUserIdOrderByIdDesc(userId, SocialuniUserOpenIdDO.class);
         if (socialuniUserOpenIdDO != null) {
             throw new SocialSystemException("重复创建用户");
         }

@@ -15,7 +15,7 @@ public class ChatUserStatus extends SocialuniCommonStatus {
 
     //    chatuser 待开启，启用，已解除、被解除、，查所有状态的chatUser
 //    哪些状态可开启，待开启，和 自己是 已解除，你发送消息，则开启，会将自己的状态改为，启用，
-    public static final String waitOpen = ConstStatus.waitOpen;
+    public static final String pending = ConstStatus.pending;
     //自己主动关闭会话，关闭会话，删除会话
     public static final String close = ConstStatus.close;
 //    public static final String enable = ConstStatus.enable;

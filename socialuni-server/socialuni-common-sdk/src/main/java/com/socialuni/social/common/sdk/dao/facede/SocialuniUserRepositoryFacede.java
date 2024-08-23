@@ -48,12 +48,12 @@ public class SocialuniUserRepositoryFacede extends SocialuniRepositoryFacade {
      * @param <T>
      * @return
      */
-    public static <T extends SocialuniUserInfoBaseDO> T findByUserId(Integer userId, Class<T> tClass) {
-        return socialuniCommonRepository.findFirstByUserId(userId, tClass);
+    public static <T extends SocialuniUserInfoBaseDO> T findFirstByUserIdOrderByIdDesc(Integer userId, Class<T> tClass) {
+        return socialuniCommonRepository.findFirstByUserIdOrderByIdDesc(userId, tClass);
     }
 
     public static <T extends SocialuniUserInfoBaseDO> T findByUserIdNotNull(Integer userId, Class<T> tClass) {
-        T t = socialuniCommonRepository.findFirstByUserId(userId, tClass);
+        T t = socialuniCommonRepository.findFirstByUserIdOrderByIdDesc(userId, tClass);
         if (t == null) {
             throw new SocialNullUserException();
         }

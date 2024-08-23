@@ -114,7 +114,7 @@ public class SocialuniCommonRepository {
 
 
     //使用这个的问题是缓存不会被清理
-    public <T extends SocialuniUserInfoBaseDO> T findFirstByUserId(Integer userId, Class<T> tClass) {
+    public <T extends SocialuniUserInfoBaseDO> T findFirstByUserIdOrderByIdDesc(Integer userId, Class<T> tClass) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
         Root<T> userInfo = criteriaQuery.from(tClass);
@@ -133,7 +133,6 @@ public class SocialuniCommonRepository {
         }
         return null;
     }
-
 
     //使用这个的问题是缓存不会被清理
     public <T extends SocialuniBaseDO> T findFirstOrderByIdDesc(Class<T> tClass) {

@@ -41,7 +41,7 @@ public class SocialuniUserExtendDetailROFactory {
         SocialuniUserExtendDetailRO socialuniUserExtendDetailRO = new SocialuniUserExtendDetailRO(socialuniUserRO);
 
         //获取用户扩列记录
-        SocialuniUserExtendFriendLogDo socialuniUserExtendFriendLogDo = SocialuniUserRepositoryFacede.findByUserId(userDO.getUserId(), SocialuniUserExtendFriendLogDo.class);
+        SocialuniUserExtendFriendLogDo socialuniUserExtendFriendLogDo = SocialuniUserRepositoryFacede.findFirstByUserIdOrderByIdDesc(userDO.getUserId(), SocialuniUserExtendFriendLogDo.class);
 
         if (socialuniUserExtendFriendLogDo == null) {
             //生成用户扩列记录

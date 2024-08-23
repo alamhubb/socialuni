@@ -8,7 +8,6 @@ import com.socialuni.social.user.sdk.logic.domain.SocailSendAuthCodeDomain;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserPhoneManage;
 import com.socialuni.social.user.sdk.model.QO.phone.SocialSendAuthCodeQO;
-import com.socialuni.social.user.sdk.utils.SocialuniPhoneNumCheck;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -52,7 +51,7 @@ public class SocialuniPhoneService {
             return ResultRO.success(false);
         }
 
-        SocialUserPasswordDO socialUserPasswordDO = SocialuniUserRepositoryFacede.findByUserId(socialUserPhoneDo.getUserId(), SocialUserPasswordDO.class);
+        SocialUserPasswordDO socialUserPasswordDO = SocialuniUserRepositoryFacede.findFirstByUserIdOrderByIdDesc(socialUserPhoneDo.getUserId(), SocialUserPasswordDO.class);
 
         //没密码返回没密码
         if (socialUserPasswordDO == null) {

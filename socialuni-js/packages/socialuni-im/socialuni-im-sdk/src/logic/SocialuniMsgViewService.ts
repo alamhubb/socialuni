@@ -191,7 +191,7 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
 
 
     openPhoto() {
-        const itemList: string[] = ['图片'];
+        const itemList: string[] = ['图片', '申请绑定情侣'];
         // const itemList: string[] = ['图片', '视频', '录音'];
         //调用相册api，可选择拍照和引用相册
         QingAppUtil.NativeUtil.actionSheet(itemList).then((index: number) => {
@@ -204,6 +204,9 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
                     break;
                 case '录音':
                     QingAppUtil.AlertUtil.error('暂不支持,开发中');
+                    break;
+                case '申请绑定情侣':
+                    QingAppUtil.ToastUtil.info('申请绑定情侣');
                     break;
                 case '删除对方聊天记录':
                     socialuniChatModule.pushCustomMessage(socialuniUserModule.userId, "{}", "发送删除对方聊天记录");
