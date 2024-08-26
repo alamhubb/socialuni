@@ -1,10 +1,41 @@
 <template>
   <div>
-    <div class="card" v-for="(notify,index) in notifies" :key="index">
-      <div class="card-title row-between" @click="toTalkDetailVue(notify.talkId)">
+    <div class="bg-white py-10" v-for="(notify,index) in notifies" :key="index">
+      <div v-if="notify.domainType === SocialuniNotifyCpDomainType.apply_cp">
+        <div class="row-between">
+          <div class="flex-row flex-1">
+            <img class="card-title-avatar flex-none" mode="aspectFill"
+                 :src="notify.user.avatar"/>
+            <div class="flex-1">
+              <div  class="color-blue row-col-center py-mn">
+                <span>{{ notify.user.nickname }}</span>
+              </div>
+              <div>
+                {{ notify.hintMsg }}
+              </div>
+              <div class="mt-5px text-gray">
+                {{ formatTime(notify.createTime) }}
+              </div>
+            </div>
+          </div>
+
+<!--          <div class="flex-none" v-if="notify.replyImg">
+            <img class="card-title-avatar size65" mode="aspectFill"
+                 :src="getTalkSmallImgUrl(notify.talkUserId,notify.replyImg)"/>
+          </div>
+          <div v-else class="size65 bg-grey9 font-df pl-4 row-all-center flex-none">
+                <span class="font-df text-ellipsis3">
+                  {{ notify.replyContent }}
+                </span>
+          </div>-->
+        </div>
+      </div>
+
+
+<!--      <div class="card-title row-between" @click="toTalkDetailVue(notify.talkId)">
         <div class="flex-row flex-1">
           <img class="card-title-avatar flex-none" mode="aspectFill"
-                 :src="notify.avatar"/>
+               :src="notify.avatar"/>
           <div class="flex-1">
             <div :class="notify.vipFlag?'color-red':'color-blue'" class="row-col-center py-mn">
               <span>{{ notify.nickname }}</span>
@@ -23,14 +54,14 @@
 
         <div class="flex-none" v-if="notify.replyImg">
           <img class="card-title-avatar size65" mode="aspectFill"
-                 :src="getTalkSmallImgUrl(notify.talkUserId,notify.replyImg)" />
+               :src="getTalkSmallImgUrl(notify.talkUserId,notify.replyImg)"/>
         </div>
         <div v-else class="size65 bg-grey9 font-df pl-4 row-all-center flex-none">
-          <span class="font-df text-ellipsis3">
-            {{ notify.replyContent }}
-          </span>
+                <span class="font-df text-ellipsis3">
+                  {{ notify.replyContent }}
+                </span>
         </div>
-      </div>
+      </div>-->
     </div>
   </div>
 </template>
@@ -40,7 +71,9 @@ import {Component, Vue, toNative} from 'vue-facing-decorator'
 import SocialuniImgUtil from "socialuni-user-sdk/src/util/SocialuniImgUtil";
 import CommunityPageUtil from "socialuni-community-sdk/src/util/CommunityPageUtil";
 import DateUtil from "qing-util/src/util/DateUtil";
-import {socialNotifyModule} from "socialuni-community-sdk/src/store/SocialNotifyModule";
+import NotifyVO from "socialuni-api-base/src/model/NotifyVO";
+import NotifyAPI from "socialuni-app-api/src/api/NotifyAPI";
+import SocialuniNotifyCpDomainType from "socialuni-constant/constant/notify/SocialuniNotifyCpDomainType";
 
 
 /**
@@ -51,8 +84,14 @@ import {socialNotifyModule} from "socialuni-community-sdk/src/store/SocialNotify
 @toNative
 @Component({})
 export default class NotifyPage extends Vue {
-  get notifies() {
-    return socialNotifyModule.notifies
+  notifies: NotifyVO<any>[] = []
+
+  SocialuniNotifyCpDomainType = SocialuniNotifyCpDomainType
+
+  created() {
+    NotifyAPI.queryNotifiesAndUpdateHasReadAPI().then(res => {
+      this.notifies = res.data
+    })
   }
 
   formatTime(dateStr) {

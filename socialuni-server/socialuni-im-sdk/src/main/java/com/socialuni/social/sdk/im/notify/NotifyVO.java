@@ -11,6 +11,8 @@ import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import lombok.Data;
 import org.springframework.web.socket.TextMessage;
 
+import java.util.Date;
+
 /**
  * @author qinkaiyuan
  * @date 2019-06-12 22:21
@@ -31,6 +33,7 @@ public class NotifyVO<T> {
     private String hintMsg;
     //通知业务域
     private String contentType;
+    private Date createTime;
     private String chatId;
     private T data;
 

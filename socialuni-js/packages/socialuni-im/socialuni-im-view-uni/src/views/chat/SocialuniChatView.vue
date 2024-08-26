@@ -52,14 +52,14 @@
           {{ chatsUnreadNumTotal }}
         </div>-->
     <div class="cu-list menu-avatar pb-50px bt">
-      <q-row-item class="bg-white bb">
-          通知
+      <q-row-item class="bg-white bb" @click="toNotifyPage">
+        通知
         <div v-if="viewService.unreadNotifyNum">
           （{{ viewService.unreadNotifyNum }}）{{ viewService.lastUnreadNotify.hintMsg }}
         </div>
-<!--        <div v-show="true" class="ml-xs bd-round bg-red3 size10 row-all-center color-white font-12">
-          {{ viewService.unreadNotifyNum }}
-        </div>-->
+        <!--        <div v-show="true" class="ml-xs bd-round bg-red3 size10 row-all-center color-white font-12">
+                  {{ viewService.unreadNotifyNum }}
+                </div>-->
       </q-row-item>
       <div v-for="chat in viewService.chatList" :key="chat.id" class="cu-item" @click="viewService.toMessagePage(chat)"
            @longpress="viewService.showBottomMenuClick(chat.id)">
@@ -130,6 +130,7 @@ import {
   socialuniChatViewService
 } from "socialuni-im-sdk/src/logic/SocialuniChatViewService";
 import {getCurrentInstance} from "vue";
+import QingRouterUtil from "qing-compat-js/src/util/QingRouterUtil";
 
 @toNative
 @Component({
@@ -141,6 +142,10 @@ export default class SocialuniChatView extends Vue {
 
   created() {
     this.viewService.initService(this)
+  }
+
+  toNotifyPage() {
+    QingRouterUtil.nativeUtil.push('/pagesLazy/community/notify/notify')
   }
 }
 </script>
