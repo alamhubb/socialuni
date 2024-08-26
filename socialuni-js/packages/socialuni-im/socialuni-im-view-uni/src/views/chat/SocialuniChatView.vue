@@ -23,18 +23,18 @@
           </div>
         </div>-->
 
-<!--    <div>
-      <uni-list>
-        <uni-list-item title="好友申请" link @click="viewService.toUserApplyPage()"
-                       :show-badge="viewService.recvFriendApplication != 0"
-                       :badge-text="viewService.recvFriendApplication"></uni-list-item>
-        &lt;!&ndash;        <uni-list-item title="发出的好友" link to="/pages/chat/friend?type=sendFriendApplication"></uni-list-item>
-                <uni-list-item title="新朋友" link to="/pages/chat/friend?type=recvFriendApplication"></uni-list-item>
-                <uni-list-item title="黑名单" link to="/pages/chat/friend?type=black"></uni-list-item>
-                <uni-list-item title="通讯录" link to="/pages/chat/friend?type=friend"></uni-list-item>
-                <uni-list-item title="群聊" link to="/pages/chat/group?type=friend"></uni-list-item>&ndash;&gt;
-      </uni-list>
-    </div>-->
+    <!--    <div>
+          <uni-list>
+            <uni-list-item title="好友申请" link @click="viewService.toUserApplyPage()"
+                           :show-badge="viewService.recvFriendApplication != 0"
+                           :badge-text="viewService.recvFriendApplication"></uni-list-item>
+            &lt;!&ndash;        <uni-list-item title="发出的好友" link to="/pages/chat/friend?type=sendFriendApplication"></uni-list-item>
+                    <uni-list-item title="新朋友" link to="/pages/chat/friend?type=recvFriendApplication"></uni-list-item>
+                    <uni-list-item title="黑名单" link to="/pages/chat/friend?type=black"></uni-list-item>
+                    <uni-list-item title="通讯录" link to="/pages/chat/friend?type=friend"></uni-list-item>
+                    <uni-list-item title="群聊" link to="/pages/chat/group?type=friend"></uni-list-item>&ndash;&gt;
+          </uni-list>
+        </div>-->
 
     <!--    <div>
           <div v-for="item in users">
@@ -52,6 +52,15 @@
           {{ chatsUnreadNumTotal }}
         </div>-->
     <div class="cu-list menu-avatar pb-50px bt">
+      <q-row-item class="bg-white bb">
+          通知
+        <div v-if="viewService.unreadNotifyNum">
+          （{{ viewService.unreadNotifyNum }}）{{ viewService.lastUnreadNotify.content}}
+        </div>
+<!--        <div v-show="true" class="ml-xs bd-round bg-red3 size10 row-all-center color-white font-12">
+          {{ viewService.unreadNotifyNum }}
+        </div>-->
+      </q-row-item>
       <div v-for="chat in viewService.chatList" :key="chat.id" class="cu-item" @click="viewService.toMessagePage(chat)"
            @longpress="viewService.showBottomMenuClick(chat.id)">
         <img class="cu-avatar radius lg" :src="chat.avatar"/>
@@ -116,6 +125,7 @@ import QNavbar from "qingjs-ui-uni/src/components/QNavbar/QNavbar.vue"
 import QIcon from "qingjs-ui/src/components/QIcon.vue"
 import QSearch from "qingjs-ui-uni/src/components/QSearch/QSearch.vue"
 import QInput from "qingjs-ui/src/components/QInput.vue"
+import QRowItem from "qingjs-ui/src/components/QRowItem.vue"
 import {
   socialuniChatViewService
 } from "socialuni-im-sdk/src/logic/SocialuniChatViewService";
@@ -123,7 +133,7 @@ import {getCurrentInstance} from "vue";
 
 @toNative
 @Component({
-  components: {QSearch, QInput, QIcon, QNavbar}
+  components: {QSearch, QInput, QIcon, QNavbar, QRowItem}
 })
 export default class SocialuniChatView extends Vue {
 

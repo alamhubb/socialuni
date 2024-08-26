@@ -30,6 +30,7 @@ import SocialuniUserExpandService from "socialuni-user-sdk/src/logic/SocialuniUs
 import {socialuniAppUserModule} from "socialuni-user-sdk/src/store/SocialuniAppUserModule";
 import SocialuniUserLikeAPI from "socialuni-expand-api/src/api/SocialuniUserLikeAPI";
 import SocialuniLikeService from "socialuni-expand-sdk/src/service/SocialuniLikeService";
+import socialuniImRequest from "socialuni-im-api/src/api/socialuniImRequest";
 
 export default class SocialuniMsgViewService extends SocialuniViewService<any> {
     public $refs!: {
@@ -207,6 +208,7 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
                     break;
                 case '申请绑定情侣':
                     QingAppUtil.ToastUtil.info('申请绑定情侣');
+                    socialuniImRequest.post('haxun/cp/applyBindCp/' + socialuniChatModule.chat.id)
                     break;
                 case '删除对方聊天记录':
                     socialuniChatModule.pushCustomMessage(socialuniUserModule.userId, "{}", "发送删除对方聊天记录");

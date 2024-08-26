@@ -20,10 +20,17 @@ public class NotifyVO<T> {
     //加入一列作为外键
     private ChatRO chat;
 
+    //信息用来在前台展示消息内容简介
     private NotifyUserVO user;
-    private Integer receiveUserId;
+    private String receiveUserId;
 
+    //一种操作，一种消息，一种通知
     private String type;
+    private String domainType;
+    //前台展示的通知简介
+    private String hintMsg;
+    //通知业务域
+    private String contentType;
     private String chatId;
     private T data;
 
@@ -34,6 +41,14 @@ public class NotifyVO<T> {
         //此处没有给content赋值是因为推送，不需要显示，推送后点击未读列表查询就行
         this.user = new NotifyUserVO(user);
         this.type = NotifyType.comment;
+    }
+
+    public NotifyVO(SocialuniUserDo user, String type, String domain, String domainType) {
+        //此处没有给content赋值是因为推送，不需要显示，推送后点击未读列表查询就行
+        this.user = new NotifyUserVO(user);
+        this.type = type;
+        this.contentType = domain;
+        this.domainType = domainType;
     }
 
     public NotifyVO(SocialuniUserDo user, String type, T data) {

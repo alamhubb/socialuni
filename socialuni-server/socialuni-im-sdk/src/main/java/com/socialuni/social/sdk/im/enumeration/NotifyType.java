@@ -10,9 +10,18 @@ import java.util.List;
  * @date 2018-09-16 10:58
  */
 public class NotifyType {
+    //只有三种，一种通知，一种操作
+    public static final String notify = "notify";
+    public static final String operate = "operate";
+    //消息
+    public static final String message = "message";
+
+
     //系统
     public static final String system = "system";
     public static final String remove_chat = "remove_chat";
+
+
 
     //动态
     //兼容之前的内容2个版本以后可以删除，也不一定，删了以前的通知看不了，看看过几个版本吧
@@ -31,8 +40,7 @@ public class NotifyType {
     //违规
     public static final String violation = "violation_result";
 
-    //消息
-    public static final String message = "message";
+
 
     public static final List<String> comments = Arrays.asList(comment, talk_comment, comment_comment, reply_comment);
 

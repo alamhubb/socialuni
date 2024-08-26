@@ -24,10 +24,12 @@ import SocialuniImEventKey from "socialuni-im-api/src/constant/SocialuniMusicEve
 import SocialuniPageQueryQO from "socialuni-api-base/src/model/common/SocialuniPageQueryQO";
 import MessageQueryVO from "socialuni-im-api/src/model/QO/message/MessageQueryVO";
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
+import NotifyVO from "socialuni-api-base/src/model/NotifyVO";
 
 class SocialuniChatModule {
     readonly chatPageIndex = 1
 
+    unreadNotify: NotifyVO<any>[] = []
 
     queryTime: Date = null
     lazyLoadNum = 30
@@ -88,7 +90,7 @@ class SocialuniChatModule {
         console.log(chat)
         this.setChatId(chatId)
         console.log(this._chatId)
-        console.log(this.chats.map(item=>item.id))
+        console.log(this.chats.map(item => item.id))
         console.log(this.chat)
         this.readChat(this.messages)
         socialuniChatModule.scrollToMessagePageBottom()

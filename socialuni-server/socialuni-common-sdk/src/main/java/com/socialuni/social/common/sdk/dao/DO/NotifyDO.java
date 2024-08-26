@@ -14,15 +14,20 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "s_app_notify")
-@NoArgsConstructor
 public class NotifyDO extends SocialuniUserContactBaseDO implements Serializable {
     //加入一列作为外键
     private String contentType;
+    private String domainType;
+    private String content;
 
     //加入一列作为外键
     private Integer contentId;
 
     private Boolean hasRead;
+
+    public NotifyDO() {
+        this.hasRead = false;
+    }
 
     public NotifyDO(SocialuniUserContactBaseDO socialuniUserContactBaseDO) {
         super(socialuniUserContactBaseDO);

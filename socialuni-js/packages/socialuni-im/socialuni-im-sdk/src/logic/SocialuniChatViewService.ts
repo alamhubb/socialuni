@@ -62,6 +62,17 @@ export default class SocialuniChatViewService extends SocialuniViewService<Socia
         return null
     }
 
+    get unreadNotifyNum() {
+        return socialuniChatModule.unreadNotify.length
+    }
+
+    get lastUnreadNotify() {
+        if (socialuniChatModule.unreadNotify.length) {
+            return socialuniChatModule.unreadNotify[socialuniChatModule.unreadNotify.length - 1]
+        }
+        return null
+    }
+
 
     get chatList() {
         const chats = socialuniChatModule.chats
