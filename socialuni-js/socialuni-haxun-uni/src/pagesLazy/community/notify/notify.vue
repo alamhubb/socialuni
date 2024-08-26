@@ -13,15 +13,26 @@
               <div>
                 {{ notify.hintMsg }}
               </div>
-              <div class="mt-5px text-gray">
+              <div class="mt-5 text-gray">
                 {{ formatTime(notify.createTime) }}
               </div>
             </div>
           </div>
 
-          <div class="flex-none row-col-center row-nowrap">
-            <q-button type="success">同意</q-button>
-            <q-button class="ml-sm" type="error">拒绝</q-button>
+          <div class="flex-none row-col-center">
+            <div class="row-col-center row-nowrap" v-if="getCpNotifyRO(notify).status === SocialuniConstStatus.pending">
+              <q-button type="success" @click="acceptCpApply(notify.data)">同意</q-button>
+              <q-button class="ml-sm" type="error">拒绝</q-button>
+            </div>
+            <div v-else-if="getCpNotifyRO(notify).status === SocialuniConstStatus.accept">
+              已同意
+            </div>
+            <div v-else-if="getCpNotifyRO(notify).status === SocialuniConstStatus.refuse">
+              已拒绝
+            </div>
+            <div v-else-if="getCpNotifyRO(notify).status === SocialuniConstStatus.expired">
+              已过期
+            </div>
           </div>
         </div>
       </div>
@@ -70,6 +81,10 @@ import NotifyVO from "socialuni-api-base/src/model/NotifyVO";
 import NotifyAPI from "socialuni-app-api/src/api/NotifyAPI";
 import SocialuniNotifyCpDomainType from "socialuni-constant/constant/notify/SocialuniNotifyCpDomainType";
 import QButton from "qingjs-ui/src/components/QButton.vue";
+import SocialuniNotifyCpRO from "@/pagesLazy/community/notify/SocialuniNotifyCpRO";
+import SocialuniConstStatus from "socialuni-constant/constant/status/SocialuniConstStatus";
+import socialuniImRequest from "socialuni-im-api/src/api/socialuniImRequest";
+import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
 
 
 /**
@@ -82,9 +97,15 @@ import QButton from "qingjs-ui/src/components/QButton.vue";
 export default class NotifyPage extends Vue {
   notifies: NotifyVO<any>[] = []
 
+  SocialuniConstStatus = SocialuniConstStatus
+
   SocialuniNotifyCpDomainType = SocialuniNotifyCpDomainType
 
   created() {
+    this.queryNotifies()
+  }
+
+  queryNotifies() {
     NotifyAPI.queryNotifiesAndUpdateHasReadAPI().then(res => {
       this.notifies = res.data
     })
@@ -102,5 +123,16 @@ export default class NotifyPage extends Vue {
   getTalkSmallImgUrl(userId: string, src: string) {
     return SocialuniImgUtil.getTalkSmallImgUrl(userId, src)
   }
+
+  getCpNotifyRO(notify: NotifyVO<SocialuniNotifyCpRO>): SocialuniNotifyCpRO {
+    return notify.data
+  }
+
+  //接受cp申请
+  async acceptCpApply(notifyCp: SocialuniNotifyCpRO) {
+    await socialuniImRequest.post('haxun/cp/acceptCp/' + notifyCp.id)
+    this.queryNotifies()
+  }
+
 }
 </script>
