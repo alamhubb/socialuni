@@ -18,7 +18,7 @@ class SocialuniAppPlugin implements SocialuniPlugin {
         socialuniConfigModule.getAppConfigAction()
         // socialAppModule.getHomeSwipersAction()
         // socialuniConfigModule.getReportTypesAction()
-        WebsocketUtil.createWebsocket()
+        // WebsocketUtil.createWebsocket()
 
         /*const websocketUrl = SocialuniAPIConfig.socialuniWebsocketUrl + '/webrtc?token=' + token
 
@@ -35,10 +35,7 @@ WebsocketWebRtcUtil.easyWebRTC.ontrack((event) => {
 
     onMessage(notify: NotifyVO) {
         if (notify.type === NotifyType.userCount) {
-            console.log('接受了消息')
-            console.log(notify.data)
             socialAppModule.onlineUsersCount = notify.data
-            console.log(socialAppModule.onlineUsersCount)
         }
     }
 

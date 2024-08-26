@@ -17,4 +17,8 @@ export default class SocialuniUserEventEmit {
     static loginOut() {
         CommonEventUtil.emit(SocialuniUserEventConst.loginOut)
     }
+
+    static initOrUserChange() {
+        CommonEventUtil.emit(SocialuniUserEventConst.initOrUserChange)
+    }
 }

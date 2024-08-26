@@ -3,7 +3,7 @@
 import UnreadNotifyVO from "socialuni-api-base/src/model/notify/UnreadNotifyVO";
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
 import {reactive} from "vue";
-import NotifyAPI from "packages/socialuni-app/socialuni-app-api/src/api/NotifyAPI";
+import NotifyAPI from "socialuni-app-api/src/api/NotifyAPI";
 
 
 class SocialNotifyModule {
@@ -31,7 +31,7 @@ class SocialNotifyModule {
 
     queryNotifiesAction() {
         // 查询前20条，未读优先，如果没有未读，就是按时间排序
-        return NotifyAPI.queryNotifiesAPI().then((res: any) => {
+        return NotifyAPI.queryUnreadNotifiesAPI().then((res: any) => {
             this.notifies = res.data
         })
     }
@@ -42,7 +42,7 @@ class SocialNotifyModule {
             item.hasRead = true
         })
         // 通知后台和前台把消息改为已读
-        return NotifyAPI.queryUnreadNotifiesAndUpdateHasReadAPI().then((res: any) => {
+        return NotifyAPI.queryNotifiesAndUpdateHasReadAPI().then((res: any) => {
             this.notifies = res.data
         })
     }

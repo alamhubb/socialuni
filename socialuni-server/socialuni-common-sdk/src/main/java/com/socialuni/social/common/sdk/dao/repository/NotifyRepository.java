@@ -15,5 +15,7 @@ public interface NotifyRepository extends JpaRepository<NotifyDO, Integer> {
 
     List<NotifyDO> findTop20ByBeUserIdAndTypeOrderByHasReadDescIdDesc(Integer receiveUserId, String type);
 
+
     List<NotifyDO> findAllByBeUserIdAndTypeInAndHasReadFalseOrderByIdDesc(Integer receiveUserId, List<String> types);
+    List<NotifyDO> findAllByBeUserIdAndTypeAndHasReadFalseOrderByIdDesc(Integer receiveUserId, String types);
 }

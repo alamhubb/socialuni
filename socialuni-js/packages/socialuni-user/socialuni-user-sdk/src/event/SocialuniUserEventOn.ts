@@ -17,4 +17,8 @@ export default class SocialuniUserEventOn {
     static loginOut(hook: () => void) {
         CommonEventUtil.on(SocialuniUserEventConst.loginOut, hook)
     }
+
+    static initOrUserChange(hook: () => void) {
+        CommonEventUtil.on(SocialuniUserEventConst.initOrUserChange, hook)
+    }
 }

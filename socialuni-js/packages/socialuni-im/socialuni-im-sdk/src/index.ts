@@ -7,6 +7,8 @@ import {SocialuniOption} from "socialuni/src/interface/socialuniOption";
 import {App, watch} from "vue";
 import {SocialuniPlugin} from "socialuni/src/interface/SocialuniPlugin";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
+import SocialuniUserEventOn from "socialuni-user-sdk/src/event/SocialuniUserEventOn";
+import NotifyAPI from "socialuni-app-api/src/api/NotifyAPI";
 
 class SocialuniImPlugin implements SocialuniPlugin {
     onLaunch() {
@@ -30,8 +32,6 @@ class SocialuniImPlugin implements SocialuniPlugin {
         console.log('接受了消息')
         console.log(notify)
         if (notify.type === NotifyType.message) {
-            console.log('接受了消息')
-            console.log(notify.chat.messages.length)
             // 暂不支持圈子功能，推送的时候把所有未读都推送过来，还没做，匹配成功的话在talk和match页都显示匹配成功通知？，还有阅读消息后后台也要清0
             socialuniChatModule.pushChatAndMessagesAction(notify.chat)
         } else if (notify.type === NotifyType.notify) {
@@ -41,6 +41,9 @@ class SocialuniImPlugin implements SocialuniPlugin {
 
     onWebsocketConnected(reload: boolean) {
         socialuniChatModule.getChatsAction()
+        NotifyAPI.queryUnreadNotifiesAPI().then(res => {
+            socialuniChatModule.unreadNotify = res.data
+        })
     }
 }
 

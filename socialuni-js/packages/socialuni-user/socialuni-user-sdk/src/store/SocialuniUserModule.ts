@@ -10,6 +10,8 @@ import SocialuniUserRO from "socialuni-api-base/src/model/user/SocialuniUserRO";
 import {socialuniAppUserModule} from "./SocialuniAppUserModule";
 import CommonEventUtil from "qing-compat-js/src/util/CommonEventUtil";
 import SocialuniUserEventConst from "../constant/SocialuniUserEventConst";
+import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
+import SocialuniUserEventEmit from "../event/SocialuniUserEventEmit";
 
 class SocialuniUserModule {
     get token() {
@@ -42,9 +44,12 @@ class SocialuniUserModule {
     //传入user，就行了。
     async initSocialuniUserModule() {
         //判断是否已登录已有token,userId
+        SocialuniUserEventEmit.initOrUserChange()
+        console.log('chufale emit')
         if (this.hasToken) {
             await socialuniAppUserModule.getMineUserAction()
         }
+        WebsocketUtil.createWebsocket()
     }
 
     //对外开放的只有一个的登录接口

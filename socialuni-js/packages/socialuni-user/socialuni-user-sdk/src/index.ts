@@ -25,14 +25,15 @@ import SocialuniUserEventOn from "./event/SocialuniUserEventOn";
 
 class SocialuniUserPlugin implements SocialuniPlugin {
     onLaunch() {
+        //这里未考虑到用户被强制登出的情况，感觉还是应该用watch来判断，用户为空，或者用户id不一致的情况，就触发
         socialuniUserModule.initSocialuniUserModule()
         SocialuniUserEventOn.loginSuccess(() => {
-            socialuniAppUserModule.getMineUserMoreInfoAction()
-            WebsocketUtil.createWebsocket()
+            socialuniUserModule.initSocialuniUserModule()
         })
 
+        //用户被登出时，触发loginOut就好了
         SocialuniUserEventOn.loginOut(() => {
-            WebsocketUtil.createWebsocket()
+            socialuniUserModule.initSocialuniUserModule()
         })
     }
 
