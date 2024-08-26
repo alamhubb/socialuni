@@ -64,40 +64,8 @@
 
 
         <!--      <div class="h200">123</div>-->
-      </div>
 
-      <div class="bg-white px-sm bd-radius-10 elevation-4 mx-sm">
-        <div class="row-col-center my">
-          <q-icon icon="map-fill" class="color-sub mr-mn" size="12"/>
-          地区：{{ mineUser.city || '' }}
-        </div>
 
-        <div class="mb">
-          <div class="row-col-center">
-            <q-icon class="color-sub mr-xs" icon="mdi-cellphone-android" size="12"/>
-            手机号：
-            <div v-if="mineUserPhoneNum" class="row-col-center">
-              {{ mineUserPhoneNum }}
-              <div class="ml-10 sm cu-tag bg-white bd-gray radius">
-                已绑定
-              </div>
-            </div>
-            <div v-else class="row-col-center">
-              <button class="ml-xs q-tag bg-click"
-                      @click="toPhonePage">绑定手机号
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="row-col-center mb-smm">
-          <q-icon class="color-sub mr-xs" icon="mdi-school" size="12"/>
-          学校名称：
-          <div v-if="mineUserExpandDetail?.schoolName" @click="openSetSchoolDialog">
-            {{ mineUserExpandDetail?.schoolName }}
-          </div>
-          <div v-else class="q-tag" @click="openSetSchoolDialog">设置大学名称</div>
-        </div>
 
         <!--        <div class="row-col-center mb-smm">
                   <q-icon class="color-sub mr-xs" prefix="uni-icons" icon="uniui-chat" size="14"/>
@@ -124,17 +92,9 @@
                 </div>-->
       </div>
 
-      <div v-if="!isIosAndMpQQ"
-           class="row-between-center use-click bg-white px-sm py-sm bd-radius-10 elevation-4 mx-sm mt-smm"
-           @click="toCoinPage">
-        <div class="row-col-center">
-          <q-icon prefix="uni-icons" icon="uniui-wallet-filled" class="color-orange"></q-icon>
-          <div class="ml-xs">我的金币</div>
-        </div>
-        <q-icon icon="arrow-right" class="text-md margin-right-sm color-sub"></q-icon>
-      </div>
+      <slot>
 
-      <socialuni-user-info-img class="mt-sm" :user="mineUser" :imgs="userImgs"></socialuni-user-info-img>
+      </slot>
 
       <q-popup ref="moreActionList" bottom title="清池 app">
         <div class="flex-col h100p pb-50">
@@ -190,7 +150,6 @@
         </div>
       </q-popup>
 
-      <user-school-edit-dialog ref="schoolEditDialog"></user-school-edit-dialog>
       <user-contact-info-edit-dialog ref="contactInfoEditDialog"></user-contact-info-edit-dialog>
     </div>
 
@@ -241,7 +200,6 @@ import SocialuniUserService from "socialuni-user-sdk/src/logic/SocialuniUserServ
     SocialuniUserInfoImg,
     QInput,
     QButton,
-    UserSchoolEditDialog,
     QSearch,
     SocialGenderTag,
   }

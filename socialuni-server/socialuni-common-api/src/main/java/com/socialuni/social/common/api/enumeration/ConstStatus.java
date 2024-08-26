@@ -9,6 +9,8 @@ public class ConstStatus {
     public static final String enable = "正常";
     public static final String apply = "申请";
     public static final String accept = "接受";
+    public static final String refuse = "拒绝";
+    public static final String expired = "过期";
 //    public static final String agree = " 同意";
 
     //待开启，需要有一方发送一条消息后，才改为开启状态
