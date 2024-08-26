@@ -130,6 +130,22 @@ public class WebsocketServer extends TextWebSocketHandler {
         }
     }
 
+    public static void sendMessage(NotifyVO notify) {
+        String userId = notify.getReceiveUserId();
+        WebSocketSession session = onlineUsersSessionMap.get(userId);
+        if (session == null) {
+            return;
+        }
+        //如果用户在线才发送
+        if (session.isOpen()) {
+            try {
+                session.sendMessage(notify.toMessage());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public static void sendMessage(String userId, NotifyVO notify) {
         WebSocketSession session = onlineUsersSessionMap.get(userId);
         //如果用户在线才发送

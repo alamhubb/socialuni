@@ -10,6 +10,8 @@ import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkImgDO;
 import com.socialuni.social.community.sdk.dao.SocialuniCommentDOUtil;
 import com.socialuni.social.community.sdk.dao.SocialuniTalkDOUtil;
 import com.socialuni.social.community.sdk.dao.SocialuniTalkImgDOUtil;
+import com.socialuni.social.sdk.im.enumeration.SocialuniNotifyCpDomainType;
+import com.socialuni.social.sdk.im.enumeration.SocialuniNotifyDomainType;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
@@ -28,6 +30,7 @@ public class SocialUnreadNotifyVOFactory {
         SocialUnreadNotifyVO notifyVO = new SocialUnreadNotifyVO();
         if (user != null) {
             notifyVO.setNickname(user.getNickname());
+            notifyVO.setUserId(SocialuniUnionIdFacede.getUuidByUnionIdNotNull(user.getUserId()));
             notifyVO.setAvatar(user.getAvatar());
             notifyVO.setHasRead(false);
 //            this.vipFlag = user.getVipFlag();
@@ -38,7 +41,21 @@ public class SocialUnreadNotifyVOFactory {
     public static SocialUnreadNotifyVO newUnreadNotifyVO(NotifyDO notifyDO) {
         SocialuniUserDo notifyUser = SocialuniUserUtil.getUserNotNull(notifyDO.getUserId());
         SocialUnreadNotifyVO notifyVO = SocialUnreadNotifyVOFactory.newUnreadNotifyVO(notifyUser);
+        notifyVO.setHasRead(notifyDO.getHasRead());
+        notifyVO.setCreateTime(notifyDO.getCreateTime());
 
+        switch (notifyDO.getDomainType()) {
+            case SocialuniNotifyDomainType.cp:
+//                notifyVO.setContent(HaxunSendBindNotifyDomain.);
+            case SocialuniNotifyDomainType.comment:
+                return SocialUnreadNotifyVOFactory.getCommentDomainNotify(notifyVO, notifyDO);
+
+        }
+        return notifyVO;
+    }
+
+
+    public static SocialUnreadNotifyVO getCommentDomainNotify(SocialUnreadNotifyVO notifyVO, NotifyDO notifyDO) {
         Integer commentId = notifyDO.getContentId();
         SocialuniCommentDO commentDO = SocialuniCommentDOUtil.getNotCommentNull(commentId);
         SocialuniTalkDO talk = SocialuniTalkDOUtil.getTalkNotNull(commentDO.getTalkId());
@@ -46,12 +63,11 @@ public class SocialUnreadNotifyVOFactory {
         String talkUid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(talk.getUnionId());
 
         //赋值
-        notifyVO.setTalkId(talkUid);
+        notifyVO.setContentId(talkUid);
         notifyVO.setContent(commentDO.getContent());
         notifyVO.setCreateTime(commentDO.getCreateTime());
-        notifyVO.setHasRead(notifyDO.getHasRead());
 
-        switch (notifyDO.getType()) {
+        switch (notifyDO.getDomainType()) {
             case NotifyType.talk_comment:
                 List<SocialuniTalkImgDO> socialTalkImgDOS = SocialuniTalkImgDOUtil.getTalkImgsTop3(talk.getUnionId());
 //                List<TalkImgDO> talkImgDOS = talk.getImgs();

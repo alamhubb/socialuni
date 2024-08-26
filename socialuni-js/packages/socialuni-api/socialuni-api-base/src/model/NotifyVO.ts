@@ -5,6 +5,6 @@ export default class NotifyVO<T> {
     public user: CenterUserDetailRO
     public chat: SocialuniChatRO
     public type: string
-    public content: string
+    public hintMsg: string
     public data: T
 }

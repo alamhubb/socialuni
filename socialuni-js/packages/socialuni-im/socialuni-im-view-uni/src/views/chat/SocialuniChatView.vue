@@ -55,7 +55,7 @@
       <q-row-item class="bg-white bb">
           通知
         <div v-if="viewService.unreadNotifyNum">
-          （{{ viewService.unreadNotifyNum }}）{{ viewService.lastUnreadNotify.content}}
+          （{{ viewService.unreadNotifyNum }}）{{ viewService.lastUnreadNotify.hintMsg }}
         </div>
 <!--        <div v-show="true" class="ml-xs bd-round bg-red3 size10 row-all-center color-white font-12">
           {{ viewService.unreadNotifyNum }}

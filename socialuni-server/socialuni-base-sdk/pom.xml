@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>socialuni-parent</artifactId>
+        <groupId>com.socialuni.social</groupId>
+        <version>0.3.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <!--    合伙人模块，包含积分，和贡献值功能，分润计划-->
+    <artifactId>socialuni-base-sdk</artifactId>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.socialuni.social</groupId>
+            <artifactId>socialuni-common-sdk</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.socialuni.social</groupId>
+            <artifactId>socialuni-user-sdk</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>
