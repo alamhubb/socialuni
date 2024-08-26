@@ -216,13 +216,20 @@ export default class QButton extends Vue {
     type: String
   }) color: string
 
+  @Prop({
+    default: '',
+    type: String
+  }) type: string
+
   get curTheme() {
+    console.log(this.type)
     if (this.theme) return 'theme'
     if (this.primary) return 'primary'
     if (this.error) return 'error'
     if (this.warn) return 'warn'
     if (this.success) return 'success'
     if (this.info) return 'info'
+    if (this.type) return this.type
     return this.color
   }
 
