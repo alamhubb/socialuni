@@ -38,16 +38,25 @@ export default class MusicHome extends Vue {
 
   songList: MusicPlayerSongInfoRO[] = []
 
-  get onlineUsersCount(){
+  get onlineUsersCount() {
     return socialAppModule.onlineUsersCount
   }
 
   created() {
-    this.initRoomId()
-    this.querySongList()
+    this.initHandler()
+    // this.querySongList()
+    this.querySongListNew()
     // this.searchSongList()
   }
 
+  async initHandler() {
+    await this.initRoomId()
+    this.querySongListNew()
+  }
+
+  querySongListNew() {
+    SocialuniMusicAPI.querySongListAPI()
+  }
 
   async initRoomId() {
     // 如果没有房间id，则查询默认系统开放大厅id

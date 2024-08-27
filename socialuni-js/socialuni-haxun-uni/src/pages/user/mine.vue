@@ -28,6 +28,13 @@
       <socialuni-user-school-info></socialuni-user-school-info>
     </div>
 
+    <div v-if="cpInfo" class="row-between-center use-click bg-white px-sm py-sm bd-radius-10 elevation-4 mx-sm mt-smm">
+      <div class="row-col-center">
+        cp:{{ cpInfo.nickname}}
+      </div>
+      <!--      <q-icon icon="arrow-right" class="text-md margin-right-sm color-sub"></q-icon>-->
+    </div>
+
     <div v-if="!isIosAndMpQQ"
          class="row-between-center use-click bg-white px-sm py-sm bd-radius-10 elevation-4 mx-sm mt-smm"
          @click="toCoinPage">
@@ -52,15 +59,28 @@ import {socialuniAppUserModule} from "socialuni-user-sdk/src/store/SocialuniAppU
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import SocialuniUserSchoolInfo from "socialuni-user-view-uni/SocialuniUserSchoolInfo.vue";
+import socialuniImRequest from "socialuni-im-api/src/api/socialuniImRequest";
+import SocialuniUserRO from "socialuni-api-base/src/model/user/SocialuniUserRO";
 
 @toNative
 @Component({
   components: {
-    SocialuniUserInfoImg, QIcon,SocialuniUserSchoolInfo,
+    SocialuniUserInfoImg, QIcon, SocialuniUserSchoolInfo,
     MineView
   }
 })
 export default class MinePage extends Vue {
+
+  created() {
+    this.queryCpInfo()
+  }
+
+  cpInfo: SocialuniUserRO = null
+
+  async queryCpInfo() {
+    const res = await socialuniImRequest.get('haxun/cp/acceptCp/getMineCp')
+    this.cpInfo = res.data
+  }
 
   get mineUser() {
     return socialuniUserModule.mineUser

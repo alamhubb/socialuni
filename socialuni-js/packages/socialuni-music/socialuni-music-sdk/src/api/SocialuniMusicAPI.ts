@@ -45,4 +45,9 @@ export default class SocialuniMusicAPI {
             }
         })
     }
+
+
+    static querySongListAPI(roomId: string) {
+        return socialuniUserRequest.get<any>(`socialuni/music/querySongList`, roomId)
+    }
 }
