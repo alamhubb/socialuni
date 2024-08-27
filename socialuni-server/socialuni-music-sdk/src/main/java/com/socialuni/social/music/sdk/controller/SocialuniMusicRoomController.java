@@ -5,14 +5,12 @@ import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.music.sdk.dao.DO.SocialuniMusicRoomSongListDO;
 import com.socialuni.social.music.sdk.factory.SocialuniMusicSongListItemROFactory;
 import com.socialuni.social.music.sdk.model.QO.SocialuniMusicRoomPlaySongQO;
-import com.socialuni.social.music.sdk.model.RO.SocialuniMusicInfoRO;
 import com.socialuni.social.music.sdk.model.RO.SocialuniMusicSongListItemRO;
 import com.socialuni.social.sdk.im.dao.facede.SocialuniChatRepositoryFacede;
 import com.socialuni.social.sdk.im.utils.SocialuniChatDOUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping("socialuni/musicRoom")
@@ -76,7 +74,7 @@ public class SocialuniMusicRoomController {
             SocialuniMusicSongListItemRO socialuniMusicRoomSongListRO = new SocialuniMusicSongListItemRO();
             socialuniMusicRoomSongListRO.setSongId("1397345903");
             socialuniMusicRoomSongListRO.setMusicName("悬溺");
-            socialuniMusicRoomSongListRO.setMusicSinger("葛东琪");
+            socialuniMusicRoomSongListRO.setAuthor("葛东琪");
             socialuniMusicRoomSongListRO.setMusicTime(197083);
             socialuniMusicSongListItemROS.add(socialuniMusicRoomSongListRO);
         }

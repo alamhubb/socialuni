@@ -7,7 +7,7 @@ public class SocialuniMusicSongListItemRO {
     private String songId;
     private Integer no;
     private String musicName;
-    private String musicSinger;
+    private String author;
     private Integer musicTime;
 //    private String musicImg;
 //    private Boolean playing;

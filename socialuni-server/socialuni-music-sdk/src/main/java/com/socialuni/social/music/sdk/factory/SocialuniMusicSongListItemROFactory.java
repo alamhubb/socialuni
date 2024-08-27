@@ -14,7 +14,7 @@ public class SocialuniMusicSongListItemROFactory {
         socialuniMusicSongListItemRO.setNo(item.getOrderNo());
         socialuniMusicSongListItemRO.setSongId(item.getSongId());
         socialuniMusicSongListItemRO.setMusicName(item.getMusicName());
-        socialuniMusicSongListItemRO.setMusicSinger(item.getMusicSinger());
+        socialuniMusicSongListItemRO.setAuthor(item.getAuthor());
         socialuniMusicSongListItemRO.setMusicTime(item.getMusicTime());
 
         return socialuniMusicSongListItemRO;

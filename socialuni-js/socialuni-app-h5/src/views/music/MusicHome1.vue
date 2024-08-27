@@ -114,7 +114,7 @@ export default class MusicHome extends Vue {
     const songList: MusicPlayerSongInfoRO[] = data.map((row: any) => {
       const songRO: MusicPlayerSongInfoRO = new MusicPlayerSongInfoRO({
         songId: row.id,
-        name: row.name,
+        musicName: row.name,
         author: row.ar?.map(item => item.name),
         album: row.al.name,
         albumImg: row.al.picUrl,
@@ -135,7 +135,7 @@ export default class MusicHome extends Vue {
     const songList: MusicPlayerSongInfoRO[] = data.playlist.tracks.map((row: any) => {
       const songRO: MusicPlayerSongInfoRO = new MusicPlayerSongInfoRO({
         songId: row.id,
-        name: row.name,
+        musicName: row.name,
         author: row.ar?.map(item => item.name),
         album: row.al.name,
         albumImg: row.al.picUrl,

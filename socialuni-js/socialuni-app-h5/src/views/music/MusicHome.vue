@@ -51,11 +51,11 @@ export default class MusicHome extends Vue {
 
   async initHandler() {
     await this.initRoomId()
-    this.querySongListNew()
   }
 
-  querySongListNew() {
-    SocialuniMusicAPI.querySongListAPI()
+  async querySongListNew() {
+    const res = await SocialuniMusicAPI.querySongListAPI()
+    this.songList = res.data
   }
 
   async initRoomId() {
@@ -101,7 +101,7 @@ export default class MusicHome extends Vue {
     const songList: MusicPlayerSongInfoRO[] = data.map((row: any) => {
       const songRO: MusicPlayerSongInfoRO = new MusicPlayerSongInfoRO({
         songId: row.id,
-        name: row.name,
+        musicName: row.name,
         author: row.ar?.map(item => item.name),
         album: row.al.name,
         albumImg: row.al.picUrl,
@@ -122,7 +122,7 @@ export default class MusicHome extends Vue {
     const songList: MusicPlayerSongInfoRO[] = data.playlist.tracks.map((row: any) => {
       const songRO: MusicPlayerSongInfoRO = new MusicPlayerSongInfoRO({
         songId: row.id,
-        name: row.name,
+        musicName: row.name,
         author: row.ar?.map(item => item.name),
         album: row.al.name,
         albumImg: row.al.picUrl,

@@ -10,7 +10,7 @@
           <img class="size50  bd-round" :src="curMusicInfo.albumImg">
           <div class="flex-col ml">
             <div>
-              {{ curMusicInfo.name }}
+              {{ curMusicInfo.musicName }}
             </div>
             <div class="mt-10 color-sub">
               {{ curMusicInfo.author?.join(',') }}
