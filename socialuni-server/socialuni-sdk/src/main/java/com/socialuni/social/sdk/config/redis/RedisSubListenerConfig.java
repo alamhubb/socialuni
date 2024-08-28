@@ -47,7 +47,7 @@ public class RedisSubListenerConfig {
             //解析message获取中的用户信息，和消息信息
             try {
                 NotifyVO notifyVO = objectMapper.readValue(message.toString(), NotifyVO.class);
-                WebsocketServer.sendMessageToAllUsers(notifyVO);
+//                WebsocketServer.sendToGroupUsers(notifyVO);
             } catch (IOException e) {
                 e.printStackTrace();
             }

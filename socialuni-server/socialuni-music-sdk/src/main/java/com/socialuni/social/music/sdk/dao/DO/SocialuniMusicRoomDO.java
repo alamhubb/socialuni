@@ -25,7 +25,8 @@ import java.util.Date;
 public class SocialuniMusicRoomDO extends SocialuniContentBaseDO {
     Integer roomId;
 
-    Integer songId;
+    //songList表的id
+    Integer musicId;
 //    Integer musicTime;
     //默认0
     Date playingTimestamp;

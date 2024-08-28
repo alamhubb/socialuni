@@ -16,8 +16,12 @@ public class SocialuniMusicRoomPlayerDOFactory {
         return socialuniMusicRoomPlayerDO;
     }
 
-    public static SocialuniMusicRoomDO createSocialuniMusicRoomPlayerDO(@Valid SocialuniPlayMusicQO socialuniPlayMusicQO, SocialuniMusicRoomDO socialuniMusicRoomPlayerDO) {
-        socialuniMusicRoomPlayerDO.setSongId(socialuniPlayMusicQO.getSongId());
+    public static SocialuniMusicRoomDO createSocialuniMusicRoomPlayerDO(Integer musicId, SocialuniPlayMusicQO socialuniPlayMusicQO, SocialuniMusicRoomDO socialuniMusicRoomPlayerDO) {
+        socialuniMusicRoomPlayerDO.setMusicId(musicId);
+
+        if (socialuniPlayMusicQO == null) {
+            socialuniPlayMusicQO = new SocialuniPlayMusicQO();
+        }
 
 //        socialuniMusicRoomPlayerDO.setMusicTime(socialuniPlayMusicQO.getMusicTime());
 
@@ -39,7 +43,7 @@ public class SocialuniMusicRoomPlayerDOFactory {
             socialuniMusicRoomPlayerDO.setPlaying(socialuniPlayMusicQO.getPlaying());
         }
 
-        socialuniMusicRoomPlayerDO.sequencePlus();
+//        socialuniMusicRoomPlayerDO.sequencePlus();
 
         return socialuniMusicRoomPlayerDO;
     }

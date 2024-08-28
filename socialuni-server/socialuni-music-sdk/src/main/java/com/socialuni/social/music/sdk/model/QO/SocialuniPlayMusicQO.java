@@ -7,13 +7,12 @@ import java.util.Date;
 
 @Data
 public class SocialuniPlayMusicQO {
-    @NotBlank
-    Integer songId;
+    Integer musicId;
 //    @NotNull
 //    Integer musicTime;
 
     // 云端播放器id
-    String playerId;
+//    String playerId;
     //当前播放的时间
     //默认 new Date()
     Date playingTimestamp;

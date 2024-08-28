@@ -21,6 +21,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -29,6 +30,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public class WebsocketServer extends TextWebSocketHandler {
     /**
      * concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。
+     * <p>
+     * 存uid是因为notify里面的user是uid
      */
     public static final ConcurrentHashMap<String, WebSocketSession> onlineUsersSessionMap = new ConcurrentHashMap<>();
     private static final ConcurrentHashMap<String, ChannelTopic> onlineUsersChannelTopicMap = new ConcurrentHashMap<>();
@@ -61,11 +64,15 @@ public class WebsocketServer extends TextWebSocketHandler {
         NotifyVO<Integer> notifyVO = new NotifyVO<>();
         notifyVO.setType(NotifyType.userCount);
         notifyVO.setData(userCount);
+        WebsocketServer.sendToAllUsers(notifyVO);
+    }
+
+    public static <T> void sendToAllUsers(NotifyVO<T> notify) {
         //发送给所有在线的群组里面的用户
         for (WebSocketSession userSession : onlineUsersSessionMap.values()) {
             if (userSession != null && userSession.isOpen()) {
                 try {
-                    userSession.sendMessage(notifyVO.toMessage());
+                    userSession.sendMessage(notify.toMessage());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -76,30 +83,14 @@ public class WebsocketServer extends TextWebSocketHandler {
     /**
      * 广播信息
      */
-    public static <T> void sendMessageToAllUsers(NotifyVO<T> notify) {
-        //发送给所有在线的群组里面的用户
-        for (WebSocketSession userSession : onlineUsersSessionMap.values()) {
-            String userIdStr = notify.getUser().getId().toString();
+    public static <T> void sendToGroupUsers(NotifyVO<T> notify, List<String> userIds) {
+        for (String userIdStr : userIds) {
+            WebSocketSession userSession= onlineUsersSessionMap.get(userIdStr);
             if (userSession != null && userSession.isOpen()) {
                 String sessionUserId = Objects.requireNonNull(userSession.getPrincipal()).getName();
                 //如果发送人是自己则不发送
                 if (userIdStr.equals(sessionUserId)) {
                     continue;
-                }
-                Integer userId = SocialuniUnionIdFacede.getUnionIdByUuidAllowNull(sessionUserId);
-                //如果不为空，并且用户不在群组中，则不推送
-                if (userId != null) {
-                    String chatIdStr = null;
-                    if (notify.getType().equals(NotifyType.message)) {
-                        chatIdStr = notify.getChat().getId();
-                    } else if (notify.getType().equals(NotifyType.music)) {
-                        chatIdStr = notify.getChatId();
-                    }
-                    Integer chatId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(chatIdStr);
-                    SocialuniChatUserDO socialuniChatUserDO = chatUserRepository.findFirstByChatIdAndUserIdAndStatus(chatId, userId, ChatUserStatus.enable);
-                    if (socialuniChatUserDO == null) {
-                        continue;
-                    }
                 }
                 //发给不是自己的
                 log.info("消息发送用户id:{},sessionId:{}", userIdStr, sessionUserId);
@@ -252,30 +243,6 @@ public class WebsocketServer extends TextWebSocketHandler {
         }
     }
 
-
-    /**
-     * 广播信息
-     */
-    public boolean sendMessageToAllUsers(TextMessage message) {
-        boolean allSendSuccess = true;
-        /*Set<String> userIds = users.keySet();
-        WebSocketSession session = null;
-        for (String userId : userIds) {
-            try {
-                session = users.get(userId);
-                if (session.isOpen()) {
-                    session.sendMessage(message);
-                } else {
-                    log.info("客户端:{},已断开连接，发送消息失败", userId);
-                }
-            } catch (IOException e) {
-                log.info("sendMessageToAllUsers method error：{}", e);
-                allSendSuccess = false;
-            }
-        }*/
-
-        return allSendSuccess;
-    }
 
     public static synchronized int getOnlineCount() {
 //        Object onlineUsersCount = redisUtil.get(WebsocketServer.onlineUsersCountKey);

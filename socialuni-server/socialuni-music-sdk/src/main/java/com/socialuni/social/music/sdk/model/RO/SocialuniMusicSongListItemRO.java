@@ -4,6 +4,9 @@ import lombok.Data;
 
 @Data
 public class SocialuniMusicSongListItemRO {
+    //内部音乐Id
+    private Integer musicId;
+    //外部音乐Id
     private String songId;
     private Integer no;
     private String musicName;

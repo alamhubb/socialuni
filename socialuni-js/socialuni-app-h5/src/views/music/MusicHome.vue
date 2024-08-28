@@ -15,7 +15,7 @@
       </div>
       <div class="flex-1 bd overflow-hidden">
         <div>房间歌单</div>
-        <music-list class="h500" :data="songList" @change="hotSongListMusicChange"
+        <music-list class="h500" :data="songList" @change="songListPlayMusic"
                     :cur-music="musicRoomInfo"></music-list>
       </div>
     </div>
@@ -173,11 +173,30 @@ export default class MusicHome extends Vue {
   }
 
   //热门歌曲事件，追加至播放列表
-  async hotSongListMusicChange(musicRoomInfo: MusicPlayerSongInfoRO) {
+  async hotSongListMusicChange(musicRoomInfo: MusicPlayerSongPlayingInfoRO) {
+    console.log('chufale host change')
     const newSongRO = new MusicPlayerSongInfoRO(musicRoomInfo)
     newSongRO.no = this.songList.length + 1
     this.songList.push(newSongRO)
     await SocialuniMusicAPI.joinSongListAPI(socialuniMusicStore.musicRoomId, musicRoomInfo)
+    this.querySongListNew()
+  }
+
+  //歌单播放歌曲
+  async songListPlayMusic(musicRoomInfo: MusicPlayerSongPlayingInfoRO) {
+    musicRoomInfo.playing = true
+    this.musicRoomInfoInput(musicRoomInfo)
+    await SocialuniMusicAPI.playMusicAPI(socialuniMusicStore.musicRoomId, musicRoomInfo).then(res => {
+      const data: MusicPlayerSongPlayingInfoRO = res.data
+      // 不相同才替换
+      if (data.playingTime !== musicRoomInfo.playingTime
+          || data.playing !== musicRoomInfo.playing
+      ) {
+        console.log(data.playing !== musicRoomInfo.playing)
+        console.log('queshiyou buyizhi')
+        socialuniMusicStore.setMusicRoomInfo(res.data)
+      }
+    })
     this.querySongListNew()
   }
 
@@ -215,7 +234,7 @@ export default class MusicHome extends Vue {
     const playRoomInfo = new MusicPlayerSongPlayingInfoRO({
       ...nextSong
     })
-    this.hotSongListMusicChange(playRoomInfo)
+    // this.hotSongListMusicChange(playRoomInfo)
   }
 }
 </script>

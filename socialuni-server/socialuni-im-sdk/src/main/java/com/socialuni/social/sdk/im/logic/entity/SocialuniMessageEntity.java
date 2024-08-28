@@ -214,7 +214,7 @@ public class SocialuniMessageEntity {
         //如果群聊，直接发送给两个服务器在线的所有用户，并且查找他们未读的。
         //未登录的时候也查询群聊里面的所有内容
         NotifyVO notifyVO = SocaluniNotifyROFactory.getNotifyROBySendMsg(NotifyType.message, sendUser, message, chat);
-        WebsocketServer.sendMessageToAllUsers(notifyVO);
+//        WebsocketServer.sendToGroupUsers(notifyVO);
         System.out.println("fanhuile44444");
         //默认所有群都要加入群了，才可以发送消息
 

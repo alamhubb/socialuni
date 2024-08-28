@@ -11,6 +11,7 @@ public class SocialuniMusicSongListItemROFactory {
     public static SocialuniMusicSongListItemRO getSongListItemRO(SocialuniMusicRoomSongListDO item) {
         SocialuniMusicSongListItemRO socialuniMusicSongListItemRO = new SocialuniMusicSongListItemRO();
 
+        socialuniMusicSongListItemRO.setMusicId(item.getId());
         socialuniMusicSongListItemRO.setNo(item.getOrderNo());
         socialuniMusicSongListItemRO.setSongId(item.getSongId());
         socialuniMusicSongListItemRO.setMusicName(item.getMusicName());

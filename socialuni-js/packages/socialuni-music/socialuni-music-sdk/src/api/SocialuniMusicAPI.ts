@@ -47,8 +47,8 @@ export default class SocialuniMusicAPI {
         return socialuniUserRequest.get<any>(`socialuni/musicRoom/querySongList/${roomId}`)
     }
 
-    static updateRoomPlayerInfoAPI(channelName: string, musicRoomInfo: SocialuniMusicRoomInfoRO) {
-        return socialuniUserRequest.post<MusicPlayerSongPlayingInfoRO>(`socialuni/musicRoom/updateRoomPlayerInfo/${channelName}`, musicRoomInfo)
+    static playMusicAPI(roomId: string, musicRoomInfo: MusicPlayerSongPlayingInfoRO) {
+        return socialuniUserRequest.post<MusicPlayerSongPlayingInfoRO>(`socialuni/musicRoom/playMusic/${roomId}`, musicRoomInfo)
     }
 
     static joinSongListAPI(roomId: string, songQO: MusicPlayerSongInfoRO) {

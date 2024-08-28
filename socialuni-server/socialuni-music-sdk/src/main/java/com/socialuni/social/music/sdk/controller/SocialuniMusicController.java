@@ -111,7 +111,7 @@ public class SocialuniMusicController {
         }
         SocialuniMusicRoomDO socialuniMusicRoomDO = socialuniMusicRoomManage.getOrCreateMusicPlayerDO(chatId);
 
-        if (ObjectUtils.isEmpty(socialuniMusicRoomDO.getSongId())) {
+        if (ObjectUtils.isEmpty(socialuniMusicRoomDO.getMusicId())) {
             return ResultRO.success();
         }
 
@@ -405,7 +405,7 @@ public class SocialuniMusicController {
 
         NotifyVO<SocialuniMusicRoomInfoRO> notifyRONotifyVO = new NotifyVO<>(socialuniUserDo, NotifyType.music, socialuniMusicRoomPlayerInfoRO);
         notifyRONotifyVO.setChatId(channel);
-        WebsocketServer.sendMessageToAllUsers(notifyRONotifyVO);
+//        WebsocketServer.sendToGroupUsers(notifyRONotifyVO);
 
         /*log.info(fullUrl);
 //        String httpResult = restTemplate.postForEntity("https://api.sd-rtn.com/cn/v1/projects/5e681410a7434ce9bba3e268226ce537/cloud-player/players", httpEntity, String.class).getBody();

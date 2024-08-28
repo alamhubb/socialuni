@@ -2,8 +2,10 @@ package com.socialuni.social.music.sdk.controller;
 
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.utils.SocialuniListUtil;
 import com.socialuni.social.music.sdk.check.SocialuniMusicOperateCheck;
 import com.socialuni.social.music.sdk.dao.DO.SocialuniMusicRoomDO;
 import com.socialuni.social.music.sdk.dao.DO.SocialuniMusicRoomSongListDO;
@@ -23,6 +25,7 @@ import com.socialuni.social.sdk.im.utils.SocialuniChatDOUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -72,14 +75,83 @@ public class SocialuniMusicRoomController {
     }
 
 
-    //播放
-    @PostMapping("playSong/{songId}")
-    public ResultRO<Void> playSong(@PathVariable("songId") Integer songId) {
+    //切歌, no 和 songId,
+    @PostMapping("playMusic/{roomId}")
+    public ResultRO<SocialuniMusicRoomInfoRO> playMusic(@PathVariable("roomId") String roomId, @RequestBody SocialuniPlayMusicQO playMusicQO) {
+        Integer chatId = SocialuniChatDOUtil.getChatId(roomId);
+
+        //获取歌单
+        List<SocialuniMusicRoomSongListDO> socialuniMusicRoomSongListDOS = SocialuniMusicRoomRepositoryFacede.findAllByRoomIdAndStatus(chatId, SocialuniCommonStatus.enable, SocialuniMusicRoomSongListDO.class);
+
+        if (socialuniMusicRoomSongListDOS.isEmpty()) {
+            throw new SocialParamsException("歌曲信息错误30011");
+        }
+
+        Integer musicId = playMusicQO.getMusicId();
+
+        if (ObjectUtils.isEmpty(musicId)) {
+            throw new SocialParamsException("歌曲信息错误30111");
+        }
+
+        //判断歌曲是否在歌单中
+        SocialuniMusicRoomSongListDO socialuniMusicRoomSongListDO = SocialuniListUtil.findById(socialuniMusicRoomSongListDOS, musicId);
+
+        if (socialuniMusicRoomSongListDO == null) {
+            throw new SocialParamsException("歌曲信息错误30012");
+        }
+
+        //如果存在
+        SocialuniMusicRoomDO socialuniMusicRoomDO = socialuniMusicRoomManage.getOrCreateMusicPlayerDO(chatId);
+
+        Integer roomNowMusicId = socialuniMusicRoomDO.getMusicId();
+
+        if (socialuniMusicRoomDO.getPlaying()) {
+            if (musicId.equals(roomNowMusicId)) {
+                throw new SocialParamsException("歌曲正在播放中");
+            }
+
+            SocialuniMusicRoomSongListDO socialuniMusicRoomSongListDO1 = socialuniMusicRoomSongListDOS.get(0);
+
+            Integer firstMusicId = socialuniMusicRoomSongListDO1.getId();
+            //如果正在播放的不是歌单第一首，则逻辑错误报错
+            if (!firstMusicId.equals(roomNowMusicId)) {
+                throw new SocialParamsException("歌曲信息错误30013");
+            }
+        }
+
+        //删除播放的歌曲，一会再加到头部
+        socialuniMusicRoomSongListDOS.remove(socialuniMusicRoomSongListDO);
+        SocialuniMusicRoomSongListDO removeSong = null;
+        if (!socialuniMusicRoomSongListDOS.isEmpty()) {
+            //删除正在播放的歌曲
+            removeSong = socialuniMusicRoomSongListDOS.get(0);
+            removeSong.setStatus(SocialuniCommonStatus.delete);
+            socialuniMusicRoomSongListDOS.remove(0);
+        }
+
+        socialuniMusicRoomSongListDOS.add(0, socialuniMusicRoomSongListDO);
+
+        for (int i = 0; i < socialuniMusicRoomSongListDOS.size(); i++) {
+            SocialuniMusicRoomSongListDO socialuniMusicRoomSongListItem = socialuniMusicRoomSongListDOS.get(i);
+            socialuniMusicRoomSongListItem.setOrderNo(i + 1);
+        }
+
+        if (removeSong != null) {
+            socialuniMusicRoomSongListDOS.add(removeSong);
+        }
+
+        //更新序号
+        SocialuniMusicRoomRepositoryFacede.saveAll(socialuniMusicRoomSongListDOS);
+
+        //更新播放器
+        socialuniMusicRoomManage.playMusic(musicId, playMusicQO, socialuniMusicRoomDO);
 
 
-        //需要发送消息，通知其他人，加入歌单了一首歌
+        //要不要推送给自己，不推送给自己了，直接返回，暂定而已，找不到合适理由
 
-        return ResultRO.success();
+        SocialuniMusicRoomInfoRO socialuniMusicRoomPlayerInfoRO = SocialuniMusicRoomPlayerInfoROFactory.createSocialuniMusicRoomInfoRO(socialuniMusicRoomDO);
+
+        return ResultRO.success(socialuniMusicRoomPlayerInfoRO);
     }
 
     //播放
@@ -102,7 +174,7 @@ public class SocialuniMusicRoomController {
 
         List<SocialuniMusicSongListItemRO> socialuniMusicSongListItemROS = SocialuniMusicSongListItemROFactory.getSongListItemROs(socialuniMusicRoomSongListDOS);
 
-        if (socialuniMusicSongListItemROS.isEmpty()) {
+        /*if (socialuniMusicSongListItemROS.isEmpty()) {
             SocialuniMusicSongListItemRO socialuniMusicRoomSongListRO = new SocialuniMusicSongListItemRO();
             socialuniMusicRoomSongListRO.setSongId("1397345903");
             socialuniMusicRoomSongListRO.setMusicName("悬溺");
@@ -110,7 +182,7 @@ public class SocialuniMusicRoomController {
             socialuniMusicRoomSongListRO.setMusicTime(197083);
             socialuniMusicRoomSongListRO.setNo(1);
             socialuniMusicSongListItemROS.add(socialuniMusicRoomSongListRO);
-        }
+        }*/
 
         //如果处于播放状态，后台需要有计时功能
 
@@ -127,19 +199,19 @@ public class SocialuniMusicRoomController {
     SocialuniMusicRoomManage socialuniMusicRoomManage;
 
     //更新房间的播放信息
-    @PostMapping("updateRoomPlayerInfo/{channel}")
-    public ResultRO<SocialuniMusicRoomInfoRO> updateRoomPlayInfo(@PathVariable("channel") @Valid @NotBlank String channel, @RequestBody @Valid SocialuniPlayMusicQO playMusicQO) {
-        if (StringUtils.isEmpty(channel)) {
+    @PostMapping("updateRoomPlayerInfo/{roomId}")
+    public ResultRO<SocialuniMusicRoomInfoRO> updateRoomPlayInfo(@PathVariable("roomId") @Valid @NotBlank String roomId, @RequestBody @Valid SocialuniPlayMusicQO playMusicQO) {
+        if (StringUtils.isEmpty(roomId)) {
             throw new SocialBusinessException("房间信息为空");
         }
 
-        Integer chatId = SocialuniUnionIdFacede.getUnionIdByUuidAllowNull(channel);
+        Integer chatId = SocialuniUnionIdFacede.getUnionIdByUuidAllowNull(roomId);
 
         //创建 chatUser 的逻辑，点击进入页面，会话页加一条
         //发送消息，还有添加好友成功
 
         if (chatId == null) {
-            SocialuniChatUserDO chatUserDO = chatService.getSocialuniChatUserDO(channel);
+            SocialuniChatUserDO chatUserDO = chatService.getSocialuniChatUserDO(roomId);
             chatId = chatUserDO.getChatId();
         }
         Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
@@ -195,8 +267,8 @@ public class SocialuniMusicRoomController {
         SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getMineUserNotNull();
 
         NotifyVO<SocialuniMusicRoomInfoRO> notifyRONotifyVO = new NotifyVO<>(socialuniUserDo, NotifyType.music, socialuniMusicRoomPlayerInfoRO);
-        notifyRONotifyVO.setChatId(channel);
-        WebsocketServer.sendMessageToAllUsers(notifyRONotifyVO);
+        notifyRONotifyVO.setChatId(roomId);
+//        WebsocketServer.sendToGroupUsers(notifyRONotifyVO);
 
         /*log.info(fullUrl);
 //        String httpResult = restTemplate.postForEntity("https://api.sd-rtn.com/cn/v1/projects/5e681410a7434ce9bba3e268226ce537/cloud-player/players", httpEntity, String.class).getBody();

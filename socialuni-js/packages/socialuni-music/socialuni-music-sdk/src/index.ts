@@ -77,9 +77,9 @@ class SocialuniMusicPlugin implements SocialuniPlugin {
         })
     }
 
-    onMessage(notify: NotifyVO<SocialuniMusicRoomInfoRO>) {
+    onMessage(notify: NotifyVO<MusicPlayerSongPlayingInfoRO>) {
         if (notify.type === NotifyType.music) {
-            const msgSocialuniMusicRoomInfoRO = notify.data as SocialuniMusicRoomInfoRO
+            const msgSocialuniMusicRoomInfoRO = notify.data as MusicPlayerSongPlayingInfoRO
             msgSocialuniMusicRoomInfoRO.musicRoleId = socialuniMusicStore.musicRoomInfo.musicRoleId
             socialuniMusicStore.setMusicRoomInfo(msgSocialuniMusicRoomInfoRO)
         }
