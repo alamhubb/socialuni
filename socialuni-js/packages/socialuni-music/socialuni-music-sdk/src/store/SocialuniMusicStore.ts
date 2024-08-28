@@ -3,17 +3,28 @@ import SocialuniMusicAPI from "../api/SocialuniMusicAPI";
 import AgoraRTC, {IAgoraRTCClient, IBufferSourceAudioTrack, IRemoteAudioTrack} from "agora-rtc-sdk-ng"
 import {SocialuniMusicRoomInfoRO} from "../model/SocialuniMusicRoomPlayerInfoRO";
 import MusicPlayerSongPlayingInfoRO from "../model/MusicPlayerSongPlayingInfoRO";
+import MusicPlayerSongInfoRO from "../model/MusicPlayerSongInfoRO";
 
 export class SocialuniMusicStore {
     private _appId: string = null
     private _musicToken: string = null
     //为什么要放在store中，而不放在播放器中，需要传递
     private _musicRoomInfo: MusicPlayerSongPlayingInfoRO = null
+    private _songList: MusicPlayerSongInfoRO[] = []
     private _musicRoomId: string = null
     private _musicRoleId: string = null
     musicMuted: boolean = null
     musicVolume: number = 50
     private _localAudioTrack: IBufferSourceAudioTrack | IRemoteAudioTrack = null
+
+    get songList() {
+        return this._songList
+    }
+
+    setSongList(songList: MusicPlayerSongInfoRO){
+        this._songList = songList;
+    }
+
 
     get musicRoleId(): string {
         return this._musicRoleId;
@@ -24,7 +35,7 @@ export class SocialuniMusicStore {
     }
 
     setMusicRoomInfo(value: MusicPlayerSongPlayingInfoRO) {
-        if (value){
+        if (value) {
             this._musicRoomInfo = value;
 
             if (typeof value.playingTimestamp === 'string') {

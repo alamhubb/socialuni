@@ -3,6 +3,7 @@ import socialuniMusicStore from "../store/SocialuniMusicStore";
 import SocialuniMusicRoomPlayerInfoRO, {SocialuniMusicRoomInfoRO} from "../model/SocialuniMusicRoomPlayerInfoRO";
 import MusicPlayerSongPlayingInfoRO from "../model/MusicPlayerSongPlayingInfoRO";
 import {SocialuniMusicRoomUserInfoRO} from "../model/SocialuniMusicRoomUserInfoRO";
+import MusicPlayerSongInfoRO from "../model/MusicPlayerSongInfoRO";
 
 export default class SocialuniMusicAPI {
     static getPublicRoomId() {
@@ -17,10 +18,6 @@ export default class SocialuniMusicAPI {
         return socialuniUserRequest.get<SocialuniMusicRoomUserInfoRO>(`socialuni/music/queryMusicRoomUserInfo/${channelName}`)
     }
 
-
-    static playMusicAPI(channelName: string, musicRoomInfo: SocialuniMusicRoomInfoRO) {
-        return socialuniUserRequest.post<MusicPlayerSongPlayingInfoRO>(`socialuni/music/playMusic/${channelName}`, musicRoomInfo)
-    }
 
     static queryMusicChannel(channelName) {
         return socialuniUserRequest.get<any>(`socialuni/music/queryMusicChannel/${channelName}`)
@@ -46,8 +43,15 @@ export default class SocialuniMusicAPI {
         })
     }
 
-
     static querySongListAPI(roomId: string) {
-        return socialuniUserRequest.get<any>(`socialuni/music/querySongList`, roomId)
+        return socialuniUserRequest.get<any>(`socialuni/musicRoom/querySongList/${roomId}`)
+    }
+
+    static updateRoomPlayerInfoAPI(channelName: string, musicRoomInfo: SocialuniMusicRoomInfoRO) {
+        return socialuniUserRequest.post<MusicPlayerSongPlayingInfoRO>(`socialuni/musicRoom/updateRoomPlayerInfo/${channelName}`, musicRoomInfo)
+    }
+
+    static joinSongListAPI(roomId: string, songQO: MusicPlayerSongInfoRO) {
+        return socialuniUserRequest.post<MusicPlayerSongPlayingInfoRO>(`socialuni/musicRoom/joinSongList/${roomId}`, songQO)
     }
 }

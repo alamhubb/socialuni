@@ -9,6 +9,12 @@ public class SocialuniMusicSongListItemRO {
     private String musicName;
     private String author;
     private Integer musicTime;
+    private String musicUrl;
+
+    //专辑和专辑图片，前端展示需要
+    private String album;
+    private String albumImg;
+
 //    private String musicImg;
 //    private Boolean playing;
 //    private String musicSrc;

@@ -17,8 +17,31 @@ public class SocialuniMusicSongListItemROFactory {
         socialuniMusicSongListItemRO.setAuthor(item.getAuthor());
         socialuniMusicSongListItemRO.setMusicTime(item.getMusicTime());
 
+
+        socialuniMusicSongListItemRO.setMusicUrl(item.getMusicUrl());
+        socialuniMusicSongListItemRO.setAlbum(item.getAlbum());
+        socialuniMusicSongListItemRO.setAlbumImg(item.getAlbumImg());
+
         return socialuniMusicSongListItemRO;
     }
+
+
+    public static SocialuniMusicRoomSongListDO getSongDOByQO(SocialuniMusicSongListItemRO item) {
+        SocialuniMusicRoomSongListDO socialuniMusicSongListItemDO = new SocialuniMusicRoomSongListDO();
+
+        socialuniMusicSongListItemDO.setOrderNo(item.getNo());
+        socialuniMusicSongListItemDO.setSongId(item.getSongId());
+        socialuniMusicSongListItemDO.setMusicName(item.getMusicName());
+        socialuniMusicSongListItemDO.setAuthor(item.getAuthor());
+        socialuniMusicSongListItemDO.setMusicTime(item.getMusicTime());
+
+        socialuniMusicSongListItemDO.setMusicUrl(item.getMusicUrl());
+        socialuniMusicSongListItemDO.setAlbum(item.getAlbum());
+        socialuniMusicSongListItemDO.setAlbumImg(item.getAlbumImg());
+
+        return socialuniMusicSongListItemDO;
+    }
+
 
     public static List<SocialuniMusicSongListItemRO> getSongListItemROs(List<SocialuniMusicRoomSongListDO> items) {
         return items.stream().map(SocialuniMusicSongListItemROFactory::getSongListItemRO).collect(Collectors.toList());

@@ -12,11 +12,8 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(name = "s_music_room_song_list",
         indexes = {
-                @Index(columnList = "status")
-        },
-        uniqueConstraints = {
-                //每个渠道都是唯一的
-                @UniqueConstraint(columnNames = {"roomId"}),
+                @Index(columnList = "status"),
+                @Index(columnList = "roomId")
         }
 )
 @Data
@@ -33,4 +30,8 @@ public class SocialuniMusicRoomSongListDO extends SocialuniContentBaseDO {
     String musicName;
     String author;
     Integer musicTime;
+
+    String album;
+    String albumImg;
+    String musicUrl;
 }

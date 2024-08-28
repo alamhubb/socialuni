@@ -1,10 +1,11 @@
 //音乐信息基础，列表信息类
 export default class MusicPlayerSongInfoRO {
+    no: number = null
     songId: number = null
     musicName: string = null
     //毫秒
     musicTime: number = null
-    author: string[] = null
+    author: string = null
 
     albumImg: string = null
     album: string = null
@@ -13,11 +14,12 @@ export default class MusicPlayerSongInfoRO {
 
     constructor(musicPlayerSongInfoRO?: MusicPlayerSongInfoRO) {
         if (musicPlayerSongInfoRO) {
+            this.no = musicPlayerSongInfoRO.no;
             this.songId = musicPlayerSongInfoRO.songId;
             this.musicName = musicPlayerSongInfoRO.musicName;
+            this.musicTime = musicPlayerSongInfoRO.musicTime;
             this.author = musicPlayerSongInfoRO.author;
             this.album = musicPlayerSongInfoRO.album;
-            this.musicTime = musicPlayerSongInfoRO.musicTime;
             this.albumImg = musicPlayerSongInfoRO.albumImg;
             this.musicUrl = musicPlayerSongInfoRO.musicUrl;
         }

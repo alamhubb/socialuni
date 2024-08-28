@@ -7,8 +7,22 @@
     <!--    <music-player ref="musicPlayer" :cur-music-info="musicRoomInfo" :data="songList" :has-operate-auth="true"-->
     <music-player ref="musicPlayer" :cur-music-info="musicRoomInfo" :has-operate-auth="true"
                   @input="musicRoomInfoInput" @change="musicRoomInfoChange" @next="next"></music-player>
-    <music-list class="h500" :data="songList" @change="listMusicChange" :cur-music="musicRoomInfo"></music-list>
-    <music-list class="h500" :data="songList" @change="listMusicChange" :cur-music="musicRoomInfo"></music-list>
+    <div class="flex-row">
+      <div class="flex-1 bd overflow-hidden">
+        <div>热门歌曲</div>
+        <music-list class="h500" :data="hotSongList" @change="hotSongListMusicChange"
+                    :cur-music="musicRoomInfo"></music-list>
+      </div>
+      <div class="flex-1 bd overflow-hidden">
+        <div>房间歌单</div>
+        <music-list class="h500" :data="songList" @change="hotSongListMusicChange"
+                    :cur-music="musicRoomInfo"></music-list>
+      </div>
+    </div>
+
+    <!--    <music-list class="h500" :data="songList" @change="listMusicChange" :cur-music="hotSongList"></music-list>-->
+    <!--    <music-list class="h500" :data="songList" @change="listMusicChange" :cur-music="musicRoomInfo"></music-list>-->
+    <!--    <music-list class="h500" :data="songList" @change="listMusicChange" :cur-music="musicRoomInfo"></music-list>-->
   </div>
 </template>
 
@@ -38,23 +52,28 @@ export default class MusicHome extends Vue {
 
   songList: MusicPlayerSongInfoRO[] = []
 
+  hotSongList: MusicPlayerSongInfoRO[] = []
+
   get onlineUsersCount() {
     return socialAppModule.onlineUsersCount
   }
 
   created() {
     this.initHandler()
-    // this.querySongList()
-    this.querySongListNew()
+    this.querySongList()
     // this.searchSongList()
   }
 
   async initHandler() {
     await this.initRoomId()
+    this.querySongListNew()
   }
 
+  //查询房间的播放信息
+
+
   async querySongListNew() {
-    const res = await SocialuniMusicAPI.querySongListAPI()
+    const res = await SocialuniMusicAPI.querySongListAPI(socialuniMusicStore.musicRoomId)
     this.songList = res.data
   }
 
@@ -123,7 +142,7 @@ export default class MusicHome extends Vue {
       const songRO: MusicPlayerSongInfoRO = new MusicPlayerSongInfoRO({
         songId: row.id,
         musicName: row.name,
-        author: row.ar?.map(item => item.name),
+        author: row.ar?.map(item => item.name).join(','),
         album: row.al.name,
         albumImg: row.al.picUrl,
         musicTime: row.dt,
@@ -131,8 +150,8 @@ export default class MusicHome extends Vue {
       })
       return songRO
     })
-    this.songList = songList
-    if (this.songList.length > 0) {
+    this.hotSongList = songList
+    /*if (this.songList.length > 0) {
       console.log(1312312)
       console.log(this.musicRoomInfo)
       if (!this.musicRoomInfo) {
@@ -146,34 +165,39 @@ export default class MusicHome extends Vue {
         console.log(1312312)
         console.log(this.musicRoomInfo)
       }
-    }
+    }*/
   }
 
   musicRoomInfoInput(musicRoomInfo: MusicPlayerSongPlayingInfoRO) {
     socialuniMusicStore.setMusicRoomInfo(musicRoomInfo)
   }
 
-  listMusicChange(musicRoomInfo: MusicPlayerSongPlayingInfoRO) {
-    musicRoomInfo.playing = true
-    console.log(musicRoomInfo)
-    this.musicRoomInfoChange(musicRoomInfo)
+  //热门歌曲事件，追加至播放列表
+  async hotSongListMusicChange(musicRoomInfo: MusicPlayerSongInfoRO) {
+    const newSongRO = new MusicPlayerSongInfoRO(musicRoomInfo)
+    newSongRO.no = this.songList.length + 1
+    this.songList.push(newSongRO)
+    await SocialuniMusicAPI.joinSongListAPI(socialuniMusicStore.musicRoomId, musicRoomInfo)
+    this.querySongListNew()
   }
 
   //哪些操作会改变后端数据，切换会变
-  musicRoomInfoChange(musicRoomInfo: MusicPlayerSongPlayingInfoRO) {
+  async musicRoomInfoChange(musicRoomInfo: MusicPlayerSongPlayingInfoRO) {
     //必须深拷贝，不这么写会导致一致，导致不播放
-    this.musicRoomInfoInput(musicRoomInfo)
-    SocialuniMusicAPI.playMusicAPI(socialuniMusicStore.musicRoomId, musicRoomInfo).then(res => {
-      const data: MusicPlayerSongPlayingInfoRO = res.data
-      // 不相同才替换
-      if (data.playingTime !== musicRoomInfo.playingTime
-          || data.playing !== musicRoomInfo.playing
-      ) {
-        console.log(data.playing !== musicRoomInfo.playing)
-        console.log('queshiyou buyizhi')
-        socialuniMusicStore.setMusicRoomInfo(res.data)
-      }
-    })
+    // this.musicRoomInfoInput(musicRoomInfo)
+    await SocialuniMusicAPI.joinSongListAPI(socialuniMusicStore.musicRoomId, musicRoomInfo)
+    this.querySongListNew()
+    // SocialuniMusicAPI.updateRoomPlayerInfoAPI(socialuniMusicStore.musicRoomId, musicRoomInfo).then(res => {
+    //   const data: MusicPlayerSongPlayingInfoRO = res.data
+    //   // 不相同才替换
+    //   if (data.playingTime !== musicRoomInfo.playingTime
+    //       || data.playing !== musicRoomInfo.playing
+    //   ) {
+    //     console.log(data.playing !== musicRoomInfo.playing)
+    //     console.log('queshiyou buyizhi')
+    //     socialuniMusicStore.setMusicRoomInfo(res.data)
+    //   }
+    // })
   }
 
   next(num) {
@@ -191,7 +215,7 @@ export default class MusicHome extends Vue {
     const playRoomInfo = new MusicPlayerSongPlayingInfoRO({
       ...nextSong
     })
-    this.listMusicChange(playRoomInfo)
+    this.hotSongListMusicChange(playRoomInfo)
   }
 }
 </script>

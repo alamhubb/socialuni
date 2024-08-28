@@ -23,7 +23,12 @@ public class SocialuniMusicRoomRecordDO extends SocialuniContentBaseDO {
 
     //可以关联chatGroupId
     Integer roomId;
+
+    //操作类型
+    String operateType;
+
+
     // 云端播放器id
-    String playerId;
+//    String playerId;
 
 }

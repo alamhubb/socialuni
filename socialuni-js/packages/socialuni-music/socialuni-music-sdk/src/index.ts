@@ -12,6 +12,9 @@ import SocialuniMusicRoleId from "./constant/SocialuniMusicRoleId";
 import SocialuniMusicAPI from "./api/SocialuniMusicAPI";
 import {SocialuniMusicRoomInfoRO} from "./model/SocialuniMusicRoomPlayerInfoRO";
 import {socialuniTokenModule} from "socialuni-user-sdk/src/store/SocialuniTokenModule";
+import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
+import MusicPlayerSongPlayingInfoRO from "./model/MusicPlayerSongPlayingInfoRO";
+import MusicPlayerSongInfoRO from "./model/MusicPlayerSongInfoRO";
 
 class SocialuniMusicPlugin implements SocialuniPlugin {
     async onLaunch() {
@@ -32,10 +35,25 @@ class SocialuniMusicPlugin implements SocialuniPlugin {
                 const userRes = await SocialuniMusicAPI.queryMusicRoomUserInfoAPI(socialuniMusicStore.musicRoomId)
                 socialuniMusicStore.setMusicRoleId(userRes.data.musicRoleId)
             }
+            const res1 = await SocialuniMusicAPI.querySongListAPI(socialuniMusicStore.musicRoomId)
+            const songList: MusicPlayerSongInfoRO[] = res1.data
+            socialuniMusicStore.setSongList(songList)
+
             const res = await SocialuniMusicAPI.queryMusicRoomPlayerInfoAPI(socialuniMusicStore.musicRoomId)
-            console.log(4656465)
-            console.log(res)
-            socialuniMusicStore.setMusicRoomInfo(res.data)
+
+            const roomInfo: MusicPlayerSongPlayingInfoRO = res.data
+
+            if (roomInfo) {
+                const findPlayInfo = songList.find(item => item.songId === roomInfo.songId)
+                //先在播放列表中，找到这个歌曲
+                if (findPlayInfo) {
+                    socialuniMusicStore.setMusicRoomInfo(roomInfo)
+                } else {
+                    //如果找不到嘞，如果为播放状态就播放第一首，如果为暂停状态，就改为第一首的暂停状态。
+
+                }
+            }
+
             /*await socialuniMusicStore.getMusicInitDataAction()
             client.leave()
             await socialuniMusicStore.getMusicTokenAction(params.chatId)
