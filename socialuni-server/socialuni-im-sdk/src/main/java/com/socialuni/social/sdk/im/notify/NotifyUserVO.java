@@ -21,11 +21,13 @@ public class NotifyUserVO {
 
     //与其他业务不同，推送，所以是给接收方看的，为接收方id
     public NotifyUserVO(SocialuniUserDo sendUser) {
+        if (sendUser != null) {
 //        Integer devId = DevAccountUtils.getDevId();
-        this.id = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(sendUser.getUserId());
-        this.nickname = sendUser.getNickname();
-        this.avatar = sendUser.getAvatar();
+            this.id = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(sendUser.getUserId());
+            this.nickname = sendUser.getNickname();
+            this.avatar = sendUser.getAvatar();
 //        this.vipFlag = sendUser.getVipFlag();
-        this.hasRead = false;
+            this.hasRead = false;
+        }
     }
 }

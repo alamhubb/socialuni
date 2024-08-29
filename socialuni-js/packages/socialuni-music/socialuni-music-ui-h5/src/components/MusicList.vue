@@ -24,7 +24,7 @@
       </el-table-column>
       <el-table-column prop="musicTime" label="加入播放列表">
         <template #default="{row}">
-          {{formatTooltip(row.musicTime)}}
+          {{row.musicTime}}
           <!--          {{row.musicTime}}-->
         </template>
       </el-table-column>
@@ -146,8 +146,8 @@ export default class MusicList extends Vue {
     this.change(a)
   }
 
-  formatTooltip(value) {
-    const time = Math.floor(value)
+  formatTooltip(value: number) {
+    const time = Math.ceil((value / 1000)) * 1000
     return DateUtil.convertToTime(time)
   }
 

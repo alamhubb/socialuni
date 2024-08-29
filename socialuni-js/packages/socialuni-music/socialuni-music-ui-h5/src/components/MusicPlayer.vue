@@ -148,13 +148,13 @@ export default class MusicPlayer extends Vue {
     }
   }
 
+  //所有数值采用最精确的那个
 
   //创建时设置musicTime
   //然后不需要播放
   get musicMax() {
     if (this.curMusicInfo) {
       return Math.ceil(this.curMusicInfo.musicTime / this.playingUnit)
-      // return 500 * 100
     }
     return 0
   }
@@ -214,7 +214,7 @@ export default class MusicPlayer extends Vue {
   }
 
   setMusicCurTime() {
-    this.$refs.audioPlayer.currentTime = Math.floor(this.realPlayingValue)
+    this.$refs.audioPlayer.currentTime = this.realPlayingValue
   }
 
 
@@ -328,7 +328,7 @@ export default class MusicPlayer extends Vue {
     let realPlayingValue = 0
 
     if (this.curMusicInfo.playing) {
-      realPlayingValue = Math.floor(diffTime / this.playingUnit) + this.curMusicInfo.playingTime
+      realPlayingValue = Math.ceil(diffTime / this.playingUnit) + this.curMusicInfo.playingTime
     } else {
       realPlayingValue = this.curMusicInfo.playingTime
     }
@@ -367,10 +367,6 @@ export default class MusicPlayer extends Vue {
     this.playMusicAPI(row.songId)
   }
 
-  get curPlayingTime() {
-    return this.formatTooltip(this.realPlayingValue)
-  }
-
   //10毫秒,进度条执行粒度
   playingUnit = 1000;
 
@@ -379,8 +375,8 @@ export default class MusicPlayer extends Vue {
     return 1000 / this.playingUnit
   }
 
-  formatTooltip(value) {
-    const time = Math.floor(value) * this.playingUnit
+  formatTooltip(value: number) {
+    const time = value * this.playingUnit
     return DateUtil.convertToTime(time)
   }
 
