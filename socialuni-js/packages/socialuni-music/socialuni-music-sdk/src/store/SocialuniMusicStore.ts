@@ -41,6 +41,8 @@ export class SocialuniMusicStore {
     }
 
     async setMusicRoomInfo(value: MusicPlayerSongPlayingInfoRO) {
+        console.log('chufale shezhi roomInfo')
+        console.trace('chufale shezhi roomInfo')
         if (value) {
             const findData = this.songList.find(item => item.musicId === value.musicId)
             if (findData) {

@@ -96,12 +96,7 @@ export default class MusicHome extends Vue {
 
   get musicRoomInfo() {
     if (socialuniMusicStore.musicRoomInfo) {
-      const curMusicRoom = this.songList.find(item => item.musicUrl === socialuniMusicStore.musicRoomInfo.musicUrl)
-      const copyRoomInfo = new MusicPlayerSongPlayingInfoRO({
-        ...curMusicRoom,
-        ...socialuniMusicStore.musicRoomInfo
-      })
-      return copyRoomInfo
+      return socialuniMusicStore.musicRoomInfo
     }
     return null
   }
