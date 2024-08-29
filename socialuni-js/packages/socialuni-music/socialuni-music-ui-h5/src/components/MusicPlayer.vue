@@ -1,7 +1,7 @@
 <template>
   <div class="w100p bg-white">
-<!--    dragging:{{ dragging }}&#45;&#45;{{ realPlayingValue }}&#45;&#45;{{ musicMax }}-->
-<!--    <el-button @click="computedRealPlayingValue">fsadfsadf</el-button>-->
+    <!--    dragging:{{ dragging }}&#45;&#45;{{ realPlayingValue }}&#45;&#45;{{ musicMax }}-->
+    <!--    <el-button @click="computedRealPlayingValue">fsadfsadf</el-button>-->
     <audio ref="audioPlayer" :src="curMusicInfo?.musicUrl" @error="audioError"></audio>
 
     <div class="row-between-center flex-none px">
@@ -13,7 +13,7 @@
               {{ curMusicInfo.musicName }}
             </div>
             <div class="mt-10 color-sub">
-              {{ curMusicInfo.author?.join(',') }}
+              {{ curMusicInfo.author }}
             </div>
           </div>
         </div>
@@ -324,15 +324,24 @@ export default class MusicPlayer extends Vue {
 
     //什么情况下为0，是播放完成后
     //进度为0.01秒
+
+    let realPlayingValue = 0
+
     if (this.curMusicInfo.playing) {
-      this._realPlayingValue = Math.floor(diffTime / this.playingUnit) + this.curMusicInfo.playingTime
+      realPlayingValue = Math.floor(diffTime / this.playingUnit) + this.curMusicInfo.playingTime
     } else {
-      this._realPlayingValue = this.curMusicInfo.playingTime
+      realPlayingValue = this.curMusicInfo.playingTime
     }
+    this._realPlayingValue = Math.min(realPlayingValue, this.musicMax)
+
     if (!this.dragging) {
-      if (this._realPlayingValue >= this.musicMax && this.curMusicInfo.playing) {
+      if ((this._realPlayingValue >= this.musicMax) && this.curMusicInfo.playing) {
         if (this.hasOperateAuth) {
           this.next(1)
+          if (this.timer) {
+            clearInterval(this.timer)
+            this.timer = null
+          }
         } else {
           /*this.input({
             musicTime: this.modelValue.musicTime,

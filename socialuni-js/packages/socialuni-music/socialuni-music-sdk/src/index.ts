@@ -44,14 +44,10 @@ class SocialuniMusicPlugin implements SocialuniPlugin {
             const roomInfo: MusicPlayerSongPlayingInfoRO = res.data
 
             if (roomInfo) {
-                const findPlayInfo = songList.find(item => item.songId === roomInfo.songId)
+                console.log(roomInfo)
                 //先在播放列表中，找到这个歌曲
-                if (findPlayInfo) {
-                    socialuniMusicStore.setMusicRoomInfo(roomInfo)
-                } else {
-                    //如果找不到嘞，如果为播放状态就播放第一首，如果为暂停状态，就改为第一首的暂停状态。
+                socialuniMusicStore.setMusicRoomInfo(roomInfo)
 
-                }
             }
 
             /*await socialuniMusicStore.getMusicInitDataAction()
@@ -79,10 +75,19 @@ class SocialuniMusicPlugin implements SocialuniPlugin {
 
     onMessage(notify: NotifyVO<MusicPlayerSongPlayingInfoRO>) {
         if (notify.type === NotifyType.music) {
-            const msgSocialuniMusicRoomInfoRO = notify.data as MusicPlayerSongPlayingInfoRO
-            msgSocialuniMusicRoomInfoRO.musicRoleId = socialuniMusicStore.musicRoomInfo.musicRoleId
-            socialuniMusicStore.setMusicRoomInfo(msgSocialuniMusicRoomInfoRO)
+            this.receiveMusicMsg(notify)
         }
+    }
+
+
+    private async receiveMusicMsg(notify: NotifyVO<MusicPlayerSongPlayingInfoRO>) {
+        console.log('收到了消息：', notify.data)
+        const msgSocialuniMusicRoomInfoRO = notify.data as MusicPlayerSongPlayingInfoRO
+
+
+        // msgSocialuniMusicRoomInfoRO.musicRoleId = socialuniMusicStore.musicRoomInfo.musicRoleId
+        await socialuniMusicStore.setMusicRoomInfo(msgSocialuniMusicRoomInfoRO)
+        socialuniMusicStore.querySongList()
     }
 }
 

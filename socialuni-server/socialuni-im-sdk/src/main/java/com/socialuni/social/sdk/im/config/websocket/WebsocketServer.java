@@ -68,6 +68,7 @@ public class WebsocketServer extends TextWebSocketHandler {
     }
 
     public static <T> void sendToAllUsers(NotifyVO<T> notify) {
+       log.info("fasongle xiaoxi ");
         //发送给所有在线的群组里面的用户
         for (WebSocketSession userSession : onlineUsersSessionMap.values()) {
             if (userSession != null && userSession.isOpen()) {

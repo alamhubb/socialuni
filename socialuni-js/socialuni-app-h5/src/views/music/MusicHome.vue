@@ -50,8 +50,6 @@ export default class MusicHome extends Vue {
 
   musicSearchText = ''
 
-  songList: MusicPlayerSongInfoRO[] = []
-
   hotSongList: MusicPlayerSongInfoRO[] = []
 
   get onlineUsersCount() {
@@ -59,23 +57,20 @@ export default class MusicHome extends Vue {
   }
 
   created() {
-    this.initHandler()
+    this.initRoomId()
     this.querySongList()
     // this.searchSongList()
   }
 
+  get songList() {
+    return socialuniMusicStore.songList
+  }
+
   async initHandler() {
     await this.initRoomId()
-    this.querySongListNew()
   }
 
   //查询房间的播放信息
-
-
-  async querySongListNew() {
-    const res = await SocialuniMusicAPI.querySongListAPI(socialuniMusicStore.musicRoomId)
-    this.songList = res.data
-  }
 
   async initRoomId() {
     // 如果没有房间id，则查询默认系统开放大厅id
@@ -179,7 +174,8 @@ export default class MusicHome extends Vue {
     newSongRO.no = this.songList.length + 1
     this.songList.push(newSongRO)
     await SocialuniMusicAPI.joinSongListAPI(socialuniMusicStore.musicRoomId, musicRoomInfo)
-    this.querySongListNew()
+    // this.querySongListNew()
+    socialuniMusicStore.querySongList()
   }
 
   //歌单播放歌曲
@@ -197,30 +193,30 @@ export default class MusicHome extends Vue {
         socialuniMusicStore.setMusicRoomInfo(res.data)
       }
     })
-    this.querySongListNew()
+    // this.querySongListNew()
+    socialuniMusicStore.querySongList()
   }
 
   //哪些操作会改变后端数据，切换会变
   async musicRoomInfoChange(musicRoomInfo: MusicPlayerSongPlayingInfoRO) {
     //必须深拷贝，不这么写会导致一致，导致不播放
-    // this.musicRoomInfoInput(musicRoomInfo)
-    await SocialuniMusicAPI.joinSongListAPI(socialuniMusicStore.musicRoomId, musicRoomInfo)
-    this.querySongListNew()
-    // SocialuniMusicAPI.updateRoomPlayerInfoAPI(socialuniMusicStore.musicRoomId, musicRoomInfo).then(res => {
-    //   const data: MusicPlayerSongPlayingInfoRO = res.data
-    //   // 不相同才替换
-    //   if (data.playingTime !== musicRoomInfo.playingTime
-    //       || data.playing !== musicRoomInfo.playing
-    //   ) {
-    //     console.log(data.playing !== musicRoomInfo.playing)
-    //     console.log('queshiyou buyizhi')
-    //     socialuniMusicStore.setMusicRoomInfo(res.data)
-    //   }
-    // })
+    this.musicRoomInfoInput(musicRoomInfo)
+    SocialuniMusicAPI.playMusicAPI(socialuniMusicStore.musicRoomId, musicRoomInfo).then(res => {
+      const data: MusicPlayerSongPlayingInfoRO = res.data
+      // 不相同才替换
+      if (data.playingTime !== musicRoomInfo.playingTime
+          || data.playing !== musicRoomInfo.playing
+      ) {
+        console.log(data.playing !== musicRoomInfo.playing)
+        console.log('queshiyou buyizhi')
+        socialuniMusicStore.setMusicRoomInfo(res.data)
+      }
+    })
   }
 
   next(num) {
-    const index = this.songList.findIndex(item => `https://music.163.com/song/media/outer/url?id=${item.songId}.mp3` === this.musicRoomInfo.musicUrl)
+    console.log('chufale next')
+    /*const index = this.songList.findIndex(item => `https://music.163.com/song/media/outer/url?id=${item.songId}.mp3` === this.musicRoomInfo.musicUrl)
     const nextIndex = index + num
     if (!this.songList.length) {
       return;
@@ -233,7 +229,7 @@ export default class MusicHome extends Vue {
     }
     const playRoomInfo = new MusicPlayerSongPlayingInfoRO({
       ...nextSong
-    })
+    })*/
     // this.hotSongListMusicChange(playRoomInfo)
   }
 }

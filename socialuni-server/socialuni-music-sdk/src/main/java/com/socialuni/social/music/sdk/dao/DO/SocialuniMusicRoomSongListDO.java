@@ -29,6 +29,7 @@ public class SocialuniMusicRoomSongListDO extends SocialuniContentBaseDO {
 
     String musicName;
     String author;
+    //单位，毫秒
     Integer musicTime;
 
     String album;

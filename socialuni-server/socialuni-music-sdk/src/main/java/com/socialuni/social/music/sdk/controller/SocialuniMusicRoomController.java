@@ -1,14 +1,17 @@
 package com.socialuni.social.music.sdk.controller;
 
+import cn.hutool.core.lang.Console;
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
+import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.common.sdk.utils.SocialuniListUtil;
 import com.socialuni.social.music.sdk.check.SocialuniMusicOperateCheck;
 import com.socialuni.social.music.sdk.dao.DO.SocialuniMusicRoomDO;
 import com.socialuni.social.music.sdk.dao.DO.SocialuniMusicRoomSongListDO;
+import com.socialuni.social.music.sdk.dao.DO.SocialuniMusicRoomUserDO;
 import com.socialuni.social.music.sdk.factory.SocialuniMusicRoomPlayerInfoROFactory;
 import com.socialuni.social.music.sdk.factory.SocialuniMusicSongListItemROFactory;
 import com.socialuni.social.music.sdk.logic.manage.SocialuniMusicRoomManage;
@@ -32,7 +35,11 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 @RequestMapping("socialuni/musicRoom")
 @RestController
@@ -74,27 +81,24 @@ public class SocialuniMusicRoomController {
         return ResultRO.success();
     }
 
-
-    //切歌, no 和 songId,
-    @PostMapping("playMusic/{roomId}")
-    public ResultRO<SocialuniMusicRoomInfoRO> playMusic(@PathVariable("roomId") String roomId, @RequestBody SocialuniPlayMusicQO playMusicQO) {
-        Integer chatId = SocialuniChatDOUtil.getChatId(roomId);
+    public SocialuniMusicRoomInfoRO playMusic1(Integer chatId, Integer musicId, SocialuniPlayMusicQO playMusicQO) {
+        if (ObjectUtils.isEmpty(musicId)) {
+            throw new SocialParamsException("歌曲信息错误30111");
+        }
 
         //获取歌单
         List<SocialuniMusicRoomSongListDO> socialuniMusicRoomSongListDOS = SocialuniMusicRoomRepositoryFacede.findAllByRoomIdAndStatus(chatId, SocialuniCommonStatus.enable, SocialuniMusicRoomSongListDO.class);
+
 
         if (socialuniMusicRoomSongListDOS.isEmpty()) {
             throw new SocialParamsException("歌曲信息错误30011");
         }
 
-        Integer musicId = playMusicQO.getMusicId();
-
-        if (ObjectUtils.isEmpty(musicId)) {
-            throw new SocialParamsException("歌曲信息错误30111");
-        }
 
         //判断歌曲是否在歌单中
         SocialuniMusicRoomSongListDO socialuniMusicRoomSongListDO = SocialuniListUtil.findById(socialuniMusicRoomSongListDOS, musicId);
+
+        Integer playMusicIndex = socialuniMusicRoomSongListDOS.indexOf(socialuniMusicRoomSongListDO);
 
         if (socialuniMusicRoomSongListDO == null) {
             throw new SocialParamsException("歌曲信息错误30012");
@@ -103,12 +107,13 @@ public class SocialuniMusicRoomController {
         //如果存在
         SocialuniMusicRoomDO socialuniMusicRoomDO = socialuniMusicRoomManage.getOrCreateMusicPlayerDO(chatId);
 
-        Integer roomNowMusicId = socialuniMusicRoomDO.getMusicId();
 
         if (socialuniMusicRoomDO.getPlaying()) {
-            if (musicId.equals(roomNowMusicId)) {
-                throw new SocialParamsException("歌曲正在播放中");
-            }
+            Integer roomNowMusicId = socialuniMusicRoomDO.getMusicId();
+            //不需要这个判断，因为有可能播放当前歌曲的时候，点击重新播放，或者拖拽进度
+            //            if (musicId.equals(roomNowMusicId)) {
+//                throw new SocialParamsException("歌曲正在播放中");
+//            }
 
             SocialuniMusicRoomSongListDO socialuniMusicRoomSongListDO1 = socialuniMusicRoomSongListDOS.get(0);
 
@@ -119,25 +124,40 @@ public class SocialuniMusicRoomController {
             }
         }
 
-        //删除播放的歌曲，一会再加到头部
-        socialuniMusicRoomSongListDOS.remove(socialuniMusicRoomSongListDO);
-        SocialuniMusicRoomSongListDO removeSong = null;
-        if (!socialuniMusicRoomSongListDOS.isEmpty()) {
-            //删除正在播放的歌曲
-            removeSong = socialuniMusicRoomSongListDOS.get(0);
-            removeSong.setStatus(SocialuniCommonStatus.delete);
-            socialuniMusicRoomSongListDOS.remove(0);
-        }
+        //如果index = 0
 
-        socialuniMusicRoomSongListDOS.add(0, socialuniMusicRoomSongListDO);
+        log.info("下一首gequming:" + socialuniMusicRoomSongListDO.getMusicName());
+
+        if (playMusicIndex == 0) {
+
+        } else {
+            //删除播放的歌曲，一会再加到头部
+            socialuniMusicRoomSongListDOS.remove(socialuniMusicRoomSongListDO);
+            SocialuniMusicRoomSongListDO removeSong = null;
+            if (!socialuniMusicRoomSongListDOS.isEmpty()) {
+                //删除正在播放的歌曲
+                removeSong = socialuniMusicRoomSongListDOS.get(0);
+                log.info("yichugequ:{}", removeSong.getMusicName());
+                removeSong.setStatus(SocialuniCommonStatus.delete);
+                socialuniMusicRoomSongListDOS.remove(0);
+            }
+            //如果index =1
+            //如果等于其他
+            socialuniMusicRoomSongListDOS.add(0, socialuniMusicRoomSongListDO);
+
+            for (int i = 0; i < socialuniMusicRoomSongListDOS.size(); i++) {
+                SocialuniMusicRoomSongListDO socialuniMusicRoomSongListItem = socialuniMusicRoomSongListDOS.get(i);
+                socialuniMusicRoomSongListItem.setOrderNo(i + 1);
+            }
+
+            if (removeSong != null) {
+                socialuniMusicRoomSongListDOS.add(removeSong);
+            }
+        }
 
         for (int i = 0; i < socialuniMusicRoomSongListDOS.size(); i++) {
             SocialuniMusicRoomSongListDO socialuniMusicRoomSongListItem = socialuniMusicRoomSongListDOS.get(i);
             socialuniMusicRoomSongListItem.setOrderNo(i + 1);
-        }
-
-        if (removeSong != null) {
-            socialuniMusicRoomSongListDOS.add(removeSong);
         }
 
         //更新序号
@@ -146,13 +166,112 @@ public class SocialuniMusicRoomController {
         //更新播放器
         socialuniMusicRoomManage.playMusic(musicId, playMusicQO, socialuniMusicRoomDO);
 
-
-        //要不要推送给自己，不推送给自己了，直接返回，暂定而已，找不到合适理由
-
         SocialuniMusicRoomInfoRO socialuniMusicRoomPlayerInfoRO = SocialuniMusicRoomPlayerInfoROFactory.createSocialuniMusicRoomInfoRO(socialuniMusicRoomDO);
+
+        SocialuniUserDo sysUser = SocialuniUserUtil.getSystemUserNotNull();
+
+        NotifyVO<SocialuniMusicRoomInfoRO> notifyRONotifyVO = new NotifyVO<>(sysUser, NotifyType.music, socialuniMusicRoomPlayerInfoRO);
+        notifyRONotifyVO.setChatId(chatId.toString());
+
+
+        WebsocketServer.sendToAllUsers(notifyRONotifyVO);
+
+        //不再需要后台自动暂停了，只有人工播放暂停
+        if (socialuniMusicRoomDO.getPlaying()) {
+            Date playingTimeStamp = socialuniMusicRoomDO.getPlayingTimestamp();
+            long musicTime = socialuniMusicRoomSongListDO.getMusicTime();
+            long playingTime = socialuniMusicRoomDO.getPlayingTime() * 1000;
+
+            //获取时间戳
+            long timestamp = playingTimeStamp.getTime();
+
+            long endTime = timestamp + musicTime;
+            long startTime = timestamp + playingTime;
+
+            //获取歌曲播放节点
+            //获取多少秒后修改状态为暂停
+
+            long afterTime = endTime - startTime;
+
+            Integer sequence = socialuniMusicRoomDO.getSequenceNum();
+
+
+            ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+            Console.log("触发了定时器");
+            Console.log("afterTime");
+            Console.log(afterTime);
+            executorService.schedule(() -> {
+                try {
+                    Console.log("触发了定时器");
+                    SocialuniMusicRoomDO dbRoom = socialuniMusicRoomManage.getOrCreateMusicPlayerDO(chatId);
+                    if (dbRoom.getSequenceNum().equals(sequence)) {
+                        dbRoom.setPlaying(Boolean.FALSE);
+                        dbRoom.setPlayingTimestamp(new Date());
+                        int playingTimePause = (int) ((musicTime / 1000) + 1);
+                        dbRoom.setPlayingTime(playingTimePause);
+                        dbRoom.sequencePlus();
+                        SocialuniRepositoryFacade.save(dbRoom);
+                        Console.log("执行了保存");
+
+
+                        //发送暂停消息
+                        SocialuniMusicRoomInfoRO socialuniMusicRoomPlayerInfoRO1 = SocialuniMusicRoomPlayerInfoROFactory.createSocialuniMusicRoomInfoRO(dbRoom);
+                        NotifyVO<SocialuniMusicRoomInfoRO> notifyRONotifyVO1 = new NotifyVO<>(sysUser, NotifyType.music, socialuniMusicRoomPlayerInfoRO1);
+                        notifyRONotifyVO1.setChatId(chatId.toString());
+                        WebsocketServer.sendToAllUsers(notifyRONotifyVO1);
+                    }
+
+
+                    log.info(String.valueOf(1111111));
+                    List<SocialuniMusicRoomSongListDO> socialuniMusicRoomSongListDOS1 = SocialuniMusicRoomRepositoryFacede.findAllByRoomIdAndStatus(chatId, SocialuniCommonStatus.enable, SocialuniMusicRoomSongListDO.class);
+
+                    if (socialuniMusicRoomSongListDOS1.isEmpty()) {
+                        return;
+                    }
+                    log.info(String.valueOf(2222));
+                    Integer nowMusicId = socialuniMusicRoomSongListDOS1.get(0).getId();
+                    if (!nowMusicId.equals(dbRoom.getMusicId())) {
+                        throw new SocialParamsException("播放下一首音乐错误");
+                    }
+                    Integer nextMusicId;
+
+                    log.info(String.valueOf(3333));
+                    if (socialuniMusicRoomSongListDOS1.size() > 1) {
+                        nextMusicId = socialuniMusicRoomSongListDOS1.get(1).getId();
+                    } else {
+                        nextMusicId = socialuniMusicRoomSongListDOS1.get(0).getId();
+                    }
+
+                    this.playMusic1(chatId, nextMusicId, null);
+
+                    log.info(String.valueOf(4444));
+                    // 这里放置你要延迟执行的代码
+                    log.info("延迟执行的任务");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    log.error(e.getMessage());
+                }
+
+                executorService.shutdown();
+            }, afterTime, TimeUnit.MILLISECONDS);
+        }
+
+        //需要发送消息，通知其他人，加入歌单了一首歌
+        return socialuniMusicRoomPlayerInfoRO;
+    }
+
+
+    //切歌, no 和 songId,
+    @PostMapping("playMusic/{roomId}")
+    public ResultRO<SocialuniMusicRoomInfoRO> playMusic(@PathVariable("roomId") String roomId, @RequestBody SocialuniPlayMusicQO playMusicQO) {
+        Integer chatId = SocialuniChatDOUtil.getChatId(roomId);
+
+
+        SocialuniMusicRoomInfoRO socialuniMusicRoomPlayerInfoRO = this.playMusic1(chatId, playMusicQO.getMusicId(), playMusicQO);
 
         return ResultRO.success(socialuniMusicRoomPlayerInfoRO);
     }
+
 
     //播放
     @PostMapping("deleteSong/{songId}")
@@ -220,46 +339,6 @@ public class SocialuniMusicRoomController {
 
         SocialuniMusicRoomDO socialuniMusicRoomDO = socialuniMusicRoomManage.updateMusicPlayerDO(chatId, playMusicQO);
 
-        //不再需要后台自动暂停了，只有人工播放暂停
-        /*if (socialuniMusicRoomDO.getPlaying()) {
-            Date playingTimeStamp = socialuniMusicRoomDO.getPlayingTimestamp();
-            long musicTime = socialuniMusicRoomDO.getMusicTime() * 1000;
-            long playingTime = socialuniMusicRoomDO.getPlayingTime() * 1000;
-
-            //获取时间戳
-            long timestamp = playingTimeStamp.getTime();
-
-            long endTime = timestamp + musicTime;
-            long startTime = timestamp + playingTime;
-
-            //获取歌曲播放节点
-            //获取多少秒后修改状态为暂停
-
-            long afterTime = endTime - startTime;
-
-            Integer sequence = socialuniMusicRoomDO.getSequenceNum();
-
-            ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-
-            Console.log("触发了定时器");
-            Console.log("afterTime");
-            Console.log(afterTime);
-            Integer finalChatId = chatId;
-            executorService.schedule(() -> {
-                Console.log("触发了定时器");
-                SocialuniMusicRoomDO dbRoom = SocialuniRepositoryFacade.findByCustomField("roomId", finalChatId, SocialuniMusicRoomDO.class);
-                if (dbRoom.getSequenceNum().equals(sequence)) {
-                    dbRoom.setPlaying(Boolean.FALSE);
-                    SocialuniRepositoryFacade.save(dbRoom);
-                    Console.log("执行了保存");
-                }
-
-                // 这里放置你要延迟执行的代码
-                System.out.println("延迟执行的任务");
-                executorService.shutdown();
-            }, afterTime, TimeUnit.MILLISECONDS);
-        }*/
-
 
         SocialuniMusicRoomInfoRO socialuniMusicRoomPlayerInfoRO = SocialuniMusicRoomPlayerInfoROFactory.createSocialuniMusicRoomInfoRO(socialuniMusicRoomDO);
 
@@ -281,9 +360,9 @@ public class SocialuniMusicRoomController {
                     "歌曲名称",
                     checkResult.getRoleId()
             );
-            System.out.println(JSONUtil.toJsonStr(param1));
-            System.out.println(authorizationHeader.toString());
-            System.out.println(httpResult.toString());
+            log.info(JSONUtil.toJsonStr(param1));
+            log.info(authorizationHeader.toString());
+            log.info(httpResult.toString());
 //            log.info(httpResult.getErrMsg());
 //            log.info(httpResult.getErrCode().toString());
         }

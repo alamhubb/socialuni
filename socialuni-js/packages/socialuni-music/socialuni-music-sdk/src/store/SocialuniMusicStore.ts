@@ -21,8 +21,14 @@ export class SocialuniMusicStore {
         return this._songList
     }
 
-    setSongList(songList: MusicPlayerSongInfoRO){
+    setSongList(songList: MusicPlayerSongInfoRO[]) {
         this._songList = songList;
+    }
+
+    async querySongList() {
+        const res1 = await SocialuniMusicAPI.querySongListAPI(socialuniMusicStore.musicRoomId)
+        const songList: MusicPlayerSongInfoRO[] = res1.data
+        socialuniMusicStore.setSongList(songList)
     }
 
 
@@ -34,10 +40,24 @@ export class SocialuniMusicStore {
         this._musicRoleId = value;
     }
 
-    setMusicRoomInfo(value: MusicPlayerSongPlayingInfoRO) {
+    async setMusicRoomInfo(value: MusicPlayerSongPlayingInfoRO) {
         if (value) {
-            this._musicRoomInfo = value;
-
+            const findData = this.songList.find(item => item.musicId === value.musicId)
+            if (findData) {
+                this._musicRoomInfo = new MusicPlayerSongPlayingInfoRO({
+                    ...findData,
+                    ...value
+                })
+            } else {
+                await this.querySongList()
+                const findData = this.songList.find(item => item.musicId === value.musicId)
+                if (findData) {
+                    this._musicRoomInfo = new MusicPlayerSongPlayingInfoRO({
+                        ...findData,
+                        ...value
+                    })
+                }
+            }
             if (typeof value.playingTimestamp === 'string') {
                 console.log('后台返回时间')
                 console.log(value.playingTimestamp)
