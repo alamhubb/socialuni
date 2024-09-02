@@ -17,7 +17,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "s_im_chat_user", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"chatId", "userId"}),
-        @UniqueConstraint(columnNames = {"type", "userId", "beUserId"})
+        //不明白为什么有个type，没type也一样啊，一个用户和另一个用户，只能有一个私聊
+        @UniqueConstraint(columnNames = {"userId", "beUserId"})
 })
 @EqualsAndHashCode(callSuper = true)
 public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {

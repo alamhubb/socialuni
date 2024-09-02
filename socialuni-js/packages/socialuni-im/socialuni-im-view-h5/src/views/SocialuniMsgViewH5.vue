@@ -1,6 +1,7 @@
 <template>
   <div class="h100p flex-col">
     <div ref="messageBox" class="flex-1 overflow-auto">
+      {{viewService.chat}}
       <div v-if="viewService.chat">
         <div class="w100p" v-for="msg in viewService.chat.messages" :id="'m'+msg.id" :key="msg.id">
           <div v-if="msg.user.isMine" class="flex-row pd-sm">

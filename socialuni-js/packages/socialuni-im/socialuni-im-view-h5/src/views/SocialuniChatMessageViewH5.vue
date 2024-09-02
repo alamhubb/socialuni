@@ -23,6 +23,9 @@
 import {Component, Vue, toNative} from 'vue-facing-decorator';
 import SocialuniChatViewH5 from "socialuni-im-view-h5/src/views/SocialuniChatViewH5.vue";
 import SocialuniMsgViewH5 from "socialuni-im-view-h5/src/views/SocialuniMsgViewH5.vue";
+import socialuniMusicStore from "socialuni-music-sdk/src/store/SocialuniMusicStore";
+import SocialuniMusicAPI from "socialuni-music-sdk/src/api/SocialuniMusicAPI";
+import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
 @toNative
 @Component({
   components: {
@@ -32,6 +35,23 @@ import SocialuniMsgViewH5 from "socialuni-im-view-h5/src/views/SocialuniMsgViewH
 })
 export default class SocialuniChatMessageViewH5 extends Vue {
 
+  created() {
+    this.initRoomId()
+    // this.searchSongList()
+  }
+
+  //查询房间的播放信息
+
+  async initRoomId() {
+    // 如果没有房间id，则查询默认系统开放大厅id
+    let chatId = this.$route.query.chatId
+    if (!chatId) {
+      const res = await SocialuniMusicAPI.getPublicRoomId();
+      chatId = res.data
+    }
+    await socialuniChatModule.init({chatId})
+    console.log(socialuniChatModule.chatId)
+  }
 
   mounted() {
 

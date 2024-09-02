@@ -9,6 +9,7 @@ import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepository
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniChatRepository;
+import com.socialuni.social.sdk.im.dao.repository.SocialuniChatUserRepository;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
@@ -20,14 +21,16 @@ import javax.annotation.Resource;
 @Component
 public class SocialuniChatDOUtil {
     static SocialuniChatRepository socialuniChatRepository;
+    static SocialuniChatUserRepository socialuniChatUserRepository;
 
     @Resource
     public void setSocialuniChatRepository(SocialuniChatRepository socialuniChatRepository) {
         SocialuniChatDOUtil.socialuniChatRepository = socialuniChatRepository;
     }
 
-    public static SocialuniChatDO findFirstByUnionId(Integer chatId) {
-        return socialuniChatRepository.findFirstByUnionId(chatId);
+    @Resource
+    public void setSocialuniChatUserRepository(SocialuniChatUserRepository socialuniChatUserRepository) {
+        SocialuniChatDOUtil.socialuniChatUserRepository = socialuniChatUserRepository;
     }
 
 

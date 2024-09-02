@@ -170,11 +170,11 @@ public class ChatService {
 
         socialuniChatEntity.getJoinOrCreateChatUser(chatId, mineId);
 
-        SocialuniChatUserDO chatUserDO = chatUserRepository.findFirstByChatIdAndUserId(chatId, mineId);
-
-        if (chatUserDO != null) {
-            throw new SocialSystemException("您已经加入了群聊");
-        }
+//        SocialuniChatUserDO chatUserDO = chatUserRepository.findFirstByChatIdAndUserId(chatId, mineId);
+//
+//        if (chatUserDO != null) {
+//            throw new SocialSystemException("您已经加入了群聊");
+//        }
 
         return null;
     }
@@ -264,14 +264,14 @@ public class ChatService {
         String chatIdStr = chatVO.getChatId();
         Integer chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(chatIdStr);
 
-        SocialuniChatUserDO chatUserDO = chatUserRepository.findFirstByChatIdAndUserId(chatId, mineUserId);
-
-        if (chatUserDO == null || !chatUserDO.getStatus().equals(ChatStatus.enable)) {
-            throw new SocialSystemException("未加入群聊");
-        }
-        chatUserDO.setStatus(ChatStatus.delete);
-
-        SocialuniRepositoryFacade.save(chatUserDO);
+//        SocialuniChatUserDO chatUserDO = chatUserRepository.findFirstByChatIdAndUserId(chatId, mineUserId);
+//
+//        if (chatUserDO == null || !chatUserDO.getStatus().equals(ChatStatus.enable)) {
+//            throw new SocialSystemException("未加入群聊");
+//        }
+//        chatUserDO.setStatus(ChatStatus.delete);
+//
+//        SocialuniRepositoryFacade.save(chatUserDO);
 
         return ResultRO.success();
     }

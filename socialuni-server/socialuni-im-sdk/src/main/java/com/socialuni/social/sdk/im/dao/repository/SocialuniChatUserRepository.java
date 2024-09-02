@@ -30,13 +30,21 @@ public interface SocialuniChatUserRepository extends JpaRepository<SocialuniChat
     List<ChatUserDO> findByChatTypeNotInAndStatusAndUserIdAndStatusOrderByTopFlagDescChatTopLevelAscUpdateTimeDesc(List<String> chatTypes, String Status, Integer userId, String status);
 */
 
-    //只有发送消息时，才需要使用这个，校验状态，其他情况不需要
-    SocialuniChatUserDO findFirstByChatIdAndUserIdAndStatus(Integer chatId, Integer userId, String Status);
+
 
 //    SocialuniChatUserDO findFirstByStatusAndUserIdAndBeUserId(String Status, Integer userId, Integer BeUserId);
 
+//    两种，群聊是 chatId+userId是唯一标识，  私聊的话呢，是两个userId为唯一标识
+    @Cacheable(cacheNames = ChatUserRedisKey.findFirstByChatIdAndUserId, key = "#chatId+'-'+#userId")
+    @Query("select s.id from SocialuniChatUserDO s where s.chatId =:chatId and s.userId =:userId")
+    Integer findFirstByChatIdAndUserId(Integer chatId, Integer userId);
 
-    SocialuniChatUserDO findFirstByChatIdAndUserId(Integer chatId, Integer userId);
+    @Cacheable(cacheNames = ChatUserRedisKey.findFirstByUserIdAndBeUserId, key = "#userId+'-'+#beUserId")
+    @Query("select s.id from SocialuniChatUserDO s where s.userId =:userId and s.beUserId =:beUserId")
+    Integer findFirstByUserIdAndBeUserId(Integer userId, Integer beUserId);
+
+    //只有发送消息时，才需要使用这个，校验状态，其他情况不需要
+    SocialuniChatUserDO findFirstByChatIdAndUserIdAndStatus(Integer chatId, Integer userId, String Status);
 
 
     //只有发送消息时，才需要使用这个，校验状态，其他情况不需要
@@ -48,12 +56,17 @@ public interface SocialuniChatUserRepository extends JpaRepository<SocialuniChat
     @Query("select s.id from SocialuniChatUserDO s where s.chatId =:chatId and s.status =:status")
     List<Integer> findChatUserIdsByChatIdAndStatus(Integer chatId, String status);
 
+
+    @Cacheable(cacheNames = ChatUserRedisKey.findFirstChatUserById, key = "#id")
+    SocialuniChatUserDO findFirstById(Integer id);
     @Caching(
             evict = {
                     @CacheEvict(cacheNames = ChatUserRedisKey.findChatUserIdsByChatIdAndStatus, key="#socialuniChatUserDO.chatId"),
                     @CacheEvict(cacheNames = ChatUserRedisKey.findByUserIdAndStatusOrderByUpdateTimeDesc, key="#socialuniChatUserDO.userId"),
             },
-            put = {@CachePut(cacheNames = ChatUserRedisKey.findFirstChatUserById, key = "#socialuniChatUserDO.id")}
+            put = {
+                    @CachePut(cacheNames = ChatUserRedisKey.findFirstChatUserById, key = "#socialuniChatUserDO.id"),
+            }
     )
     default SocialuniChatUserDO savePut(SocialuniChatUserDO socialuniChatUserDO) {
         return this.save(socialuniChatUserDO);
@@ -69,8 +82,6 @@ public interface SocialuniChatUserRepository extends JpaRepository<SocialuniChat
         return this.saveAll(socialuniChatUserDOs);
     }
 
-    @Cacheable(cacheNames = ChatUserRedisKey.findFirstChatUserById, key = "#id")
-    SocialuniChatUserDO findFirstById(Integer id);
 
     //根据chatuserId，chatUserStatus，topFlag，update，frontShow
 

@@ -9,6 +9,7 @@ import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniChatUserRepository;
 import com.socialuni.social.sdk.im.enumeration.ChatOpenType;
 import com.socialuni.social.sdk.im.enumeration.ChatUserStatus;
+import com.socialuni.social.sdk.im.utils.SocialuniChatUserDOUtil;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -35,7 +36,8 @@ public class SocialuniChatUserCheck {
         }
 
         //无论如何都要查询，除非user为空
-        SocialuniChatUserDO chatUserDO = chatUserRepository.findFirstByChatIdAndUserIdAndStatus(chatId, sendUserId, ChatUserStatus.enable);
+        SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findFirstByChatIdAndUserIdAndStatus(chatId, sendUserId, ChatUserStatus.enable);
+        //申请加入群聊相关功能，
 
         //如果必须加入
         if (ChatOpenType.needApply.contains(openType)) {

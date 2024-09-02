@@ -6,6 +6,7 @@ import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniChatUserRepository;
 import com.socialuni.social.sdk.im.enumeration.ChatUserStatus;
 import com.socialuni.social.sdk.im.logic.foctory.SocialuniChatUserDOFactory;
+import com.socialuni.social.sdk.im.utils.SocialuniChatUserDOUtil;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -18,7 +19,7 @@ public class SocialuniChatUserManage {
     SocialuniChatUserRepository chatUserRepository;
 
     public SocialuniChatUserDO joinOrCreateChatUser(SocialuniChatDO chatDO, Integer userId) {
-        SocialuniChatUserDO socialuniChatUserDO = chatUserRepository.findFirstByChatIdAndUserId(chatDO.getUnionId(), userId);
+        SocialuniChatUserDO socialuniChatUserDO = SocialuniChatUserDOUtil.findByChatIdAndUserId(chatDO.getUnionId(), userId);
 
         if (socialuniChatUserDO == null) {
             socialuniChatUserDO = SocialuniChatUserDOFactory.createGroupChatUser(chatDO, userId);
