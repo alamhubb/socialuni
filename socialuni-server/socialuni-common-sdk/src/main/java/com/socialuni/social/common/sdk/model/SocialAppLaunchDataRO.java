@@ -14,4 +14,5 @@ public class SocialAppLaunchDataRO {
     private List<String> reportTypes;
     private Integer onlineUsersCount;
     private String publicKey;
+    private String deviceUid;
 }

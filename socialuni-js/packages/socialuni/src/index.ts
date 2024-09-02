@@ -9,6 +9,9 @@ import PlatformModuleLoadUtil from "qing-compat-js/src/util/PlatformModuleLoadUt
 import JsonUtil from "qing-util/src/util/JsonUtil";
 import ObjectUtil from "qing-util/src/util/ObjectUtil";
 import {Router} from "vue-router";
+import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
+import SocialuniAppConst from "../../socialuni-app/socialuni-app-sdk/src/constant/SocialuniAppConst";
+import socialuniAppRequest from "socialuni-app-api/src/socialuniAppRequest";
 
 const socialuniInitPlugin: SocialuniPlugin = {
     async onLaunch() {
@@ -89,7 +92,7 @@ const Socialuni = {
             created() {
                 socialuniPluginsModule.setRoute(this.$route)
             },
-            onShow(){
+            onShow() {
                 for (const plugin of socialuniPluginsModule.plugins) {
                     plugin && plugin.onShow && plugin.onShow()
                 }

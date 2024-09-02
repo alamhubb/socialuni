@@ -8,6 +8,7 @@ import {SocialuniAlertUtilInterface} from "../interface/SocialuniAlertUtilInterf
 import {SocialuniToastUtilInterface} from "../interface/SocialuniToastUtilInterface";
 import {SocialuniNativeUtilInterface} from "../interface/SocialuniNativeUtilInterface";
 import {SocialuniLodingInterface} from "../interface/SocialuniLodingInterface";
+import {SocialuniStorageUtilInterface} from "../interface/SocialuniStorageUtilInterface";
 import QingLoadingUtil from "./QingLoadingUtil";
 
 export default class QingAppUtil {
@@ -27,7 +28,7 @@ export default class QingAppUtil {
         return QingToastUtil.nativeUtil
     }
 
-    static get StorageUtil(): any {
+    static get StorageUtil(): SocialuniStorageUtilInterface {
         return QingStorageUtil.nativeUtil
     }
 

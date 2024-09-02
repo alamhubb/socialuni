@@ -1,11 +1,14 @@
 package com.socialuni.social.sdk.controller;
 
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.common.api.utils.RequestUtil;
+import com.socialuni.social.common.api.utils.UUIDUtil;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniDeviceDO;
+import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.community.sdk.constant.TalkTabType;
-import com.socialuni.social.sdk.im.dao.DO.SocialuniChatDO;
+import com.socialuni.social.common.sdk.model.SocialuniGetAppInitDataQO;
 import com.socialuni.social.tag.dao.DO.SocialuniCircleDO;
 import com.socialuni.social.tag.logic.manage.SocialuniCircleChatManage;
-import com.socialuni.social.tag.model.SocialuniTalkTabCircleRO;
 import com.socialuni.social.tag.util.SocialuniCircleDOUtil;
 import com.socialuni.social.common.sdk.feignAPI.SocialuniAppAPI;
 import com.socialuni.social.sdk.logic.service.SocialuniAppService;
@@ -14,13 +17,11 @@ import com.socialuni.social.common.sdk.model.VO.HomeSwiperVO;
 import com.socialuni.social.common.sdk.model.RO.SocialuniTalkTabRO;
 import com.socialuni.social.common.sdk.model.SocialAppLaunchDataRO;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
-import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +53,7 @@ public class SocialuniAppController implements SocialuniAppAPI {
         for (String tabName : tabNames) {
             SocialuniTalkTabRO tabRO = new SocialuniTalkTabRO(tabName);
             //不为内置tab才为圈子
-            if (!SocialuniAppConfig.innerDefaultTabNames.contains(tabName)){
+            if (!SocialuniAppConfig.innerDefaultTabNames.contains(tabName)) {
                 SocialuniCircleDO socialuniCircleDO = SocialuniCircleDOUtil.getCircleEnableAllowNull(tabName);
                 if (socialuniCircleDO != null) {
                     //获取groupId
@@ -67,5 +68,19 @@ public class SocialuniAppController implements SocialuniAppAPI {
 
     public ResultRO<Void> sendErrorLog(@RequestBody FrontErrorLogVO frontErrorLogVO) {
         return centerAppService.sendErrorLog(frontErrorLogVO);
+    }
+
+    @PostMapping("getDeviceUid")
+    public ResultRO<String> getDeviceUid(@RequestBody @NotNull SocialuniGetAppInitDataQO deviceUidQO) {
+        SocialuniDeviceDO socialuniDeviceDO = new SocialuniDeviceDO();
+
+        String uuid = UUIDUtil.getUUID();
+
+        socialuniDeviceDO.setUuid(uuid);
+        socialuniDeviceDO.setDevice(deviceUidQO.getDevice());
+        socialuniDeviceDO.setDeviceOther(RequestUtil.getUserAgent());
+
+        SocialuniRepositoryFacade.save(socialuniDeviceDO);
+        return ResultRO.success(uuid);
     }
 }

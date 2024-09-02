@@ -7,7 +7,7 @@
 
       <div class="h100p flex-col flex-1 bg-white">
         <!--          <vue-drag-resize>-->
-<!--        <music-view class="shadow-bottom"></music-view>-->
+        <!--        <music-view class="shadow-bottom"></music-view>-->
         <!--          </vue-drag-resize>-->
         <div class="flex-1 overflow-hidden">
           <socialuni-msg-view-h5></socialuni-msg-view-h5>
@@ -26,6 +26,7 @@ import SocialuniMsgViewH5 from "socialuni-im-view-h5/src/views/SocialuniMsgViewH
 import socialuniMusicStore from "socialuni-music-sdk/src/store/SocialuniMusicStore";
 import SocialuniMusicAPI from "socialuni-music-sdk/src/api/SocialuniMusicAPI";
 import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
+
 @toNative
 @Component({
   components: {
@@ -38,13 +39,14 @@ export default class SocialuniChatMessageViewH5 extends Vue {
   created() {
     this.initRoomId()
     // this.searchSongList()
+    console.log(navigator)
   }
 
   //查询房间的播放信息
 
   async initRoomId() {
     // 如果没有房间id，则查询默认系统开放大厅id
-    let chatId = this.$route.query.chatId
+    let chatId = this.$route.query.chatId as string
     if (!chatId) {
       const res = await SocialuniMusicAPI.getPublicRoomId();
       chatId = res.data

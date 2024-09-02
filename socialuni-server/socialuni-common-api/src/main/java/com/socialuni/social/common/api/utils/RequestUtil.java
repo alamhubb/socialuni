@@ -121,6 +121,18 @@ public class RequestUtil {
         return RequestUtil.getRequestValue(SocialWebHeaderName.platformHeaderName);
     }
 
+    public static String getDeviceUid() {
+        String device = RequestUtil.getRequestValue(SocialWebHeaderName.deviceUidKey);
+        return device;
+    }
+
+
+
+    public static String getUserAgent() {
+        String device = RequestUtil.getRequestValue("User-Agent");
+        return device;
+    }
+
     /*public static String getDataOriginalSocialuniId() {
         return RequestUtil.getHeader(SocialFeignHeaderName.dataOriginalSocialuniId);
     }*/

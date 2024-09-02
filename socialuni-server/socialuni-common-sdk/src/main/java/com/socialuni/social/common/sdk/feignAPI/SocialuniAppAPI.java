@@ -4,6 +4,7 @@ package com.socialuni.social.common.sdk.feignAPI;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.model.RO.SocialuniTalkTabRO;
 import com.socialuni.social.common.sdk.model.SocialAppLaunchDataRO;
+import com.socialuni.social.common.sdk.model.SocialuniGetAppInitDataQO;
 import com.socialuni.social.common.sdk.model.VO.FrontErrorLogVO;
 import com.socialuni.social.common.sdk.model.VO.HomeSwiperVO;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -17,6 +17,10 @@ export default class SocialuniAppAPI {
         return socialuniAppRequest.post<AppInitDataRO>('socialuni/app/getAppLaunchData')
     }
 
+    static getDeviceUidAPI(deviceData: { device: string }) {
+        return socialuniAppRequest.post<string>('socialuni/app/getDeviceUid', deviceData)
+    }
+
     static checkUpdateAPI(versionCode: number) {
         const appUpdate = new AppUpdateVO(versionCode)
         return socialuniAppRequest.post<AppUpdateResultVO>('socialuni/app/checkUpdate', appUpdate)

@@ -12,10 +12,16 @@ import NotifyVO from "socialuni-api-base/src/model/NotifyVO";
 import NotifyType from "socialuni-constant/constant/NotifyType";
 import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
 import {socialAppModule} from "./store/SocialAppModule";
+import socialuniAppRequest from "socialuni-app-api/src/socialuniAppRequest";
+import SocialuniAppConst from "./constant/SocialuniAppConst";
+import SocialuniDeviceUidUtil from "socialuni-user-sdk/src/util/SocialuniDeviceUidUtil";
 
 class SocialuniAppPlugin implements SocialuniPlugin {
     onLaunch() {
+        socialuniConfigModule.getDeviceUidAction()
         socialuniConfigModule.getAppConfigAction()
+
+
         // socialAppModule.getHomeSwipersAction()
         // socialuniConfigModule.getReportTypesAction()
         // WebsocketUtil.createWebsocket()
@@ -29,8 +35,6 @@ WebsocketWebRtcUtil.easyWebRTC = FastWebRTC.createClient({
 WebsocketWebRtcUtil.easyWebRTC.ontrack((event) => {
     WebsocketWebRtcUtil.remoteVideo.srcObject = event.streams[0];
 })*/
-
-
     }
 
     onMessage(notify: NotifyVO) {
@@ -44,6 +48,7 @@ WebsocketWebRtcUtil.easyWebRTC.ontrack((event) => {
         config.headers.mpPlatform = socialuniSystemModule.mpPlatform
         config.headers.platform = socialuniSystemModule.platform
         config.headers.system = socialuniSystemModule.system
+        config.headers[SocialuniAppConst.deviceUidKey] = SocialuniDeviceUidUtil.get()
     }
 
     onResponseErrorInterceptors(res) {
