@@ -9,12 +9,13 @@ import SocialuniChatMessageViewH5 from "socialuni-im-view-h5/src/views/Socialuni
 import SocialuniUserDetailViewH5 from "socialuni-user-view-h5/src/views/SocialuniUserDetailViewH5.vue";
 import MusicHome from "@/views/music/MusicHome.vue";
 import BeastChess from "@/views/beastChess/BeastChess.vue";
+import SocialuniChatPage from "@/views/chat/SocialuniChatPage.vue";
 
 export const constantRoutes = [
     {
         path: '/',
         name: '首页',
-        component: SocialuniChatMessageViewH5,
+        component: SocialuniChatPage,
         meta: {title: '音乐'},
     },
     {

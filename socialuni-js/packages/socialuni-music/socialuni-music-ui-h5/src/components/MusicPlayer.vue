@@ -57,9 +57,7 @@
       </div>
     </div>
 
-    <q-dialog ref="musicListDialog" title="我的音乐">
-      <!--      <music-list :data="data"></music-list>-->
-    </q-dialog>
+    <music-dialog ref="musicListDialog"></music-dialog>
   </div>
 </template>
 
@@ -76,15 +74,16 @@ import ToastUtil from "qing-compat-js-h5/src/util/ToastUtil.ts";
 import DateUtil from "qing-util/src/util/DateUtil.ts";
 import QDialog from "qingjs-ui-h5/src/components/QDialog.vue";
 import MusicList from "./MusicList.vue";
+import MusicDialog from "./MusicDialog.vue";
 
 @toNative
 @Component({
-  components: {MusicList, QDialog}
+  components: {MusicList, QDialog, MusicDialog}
 })
 export default class MusicPlayer extends Vue {
   $refs: {
     audioPlayer: HTMLAudioElement
-    musicListDialog: QDialog
+    musicListDialog: MusicDialog
   }
   // @Model('modelValue')
   @Prop() curMusicInfo: MusicPlayerSongPlayingInfoRO
