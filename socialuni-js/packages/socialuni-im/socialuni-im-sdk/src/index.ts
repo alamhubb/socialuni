@@ -41,9 +41,6 @@ class SocialuniImPlugin implements SocialuniPlugin {
 
     onWebsocketConnected(reload: boolean) {
         socialuniChatModule.getChatsAction()
-        NotifyAPI.queryUnreadNotifiesAPI().then(res => {
-            socialuniChatModule.unreadNotify = res.data
-        })
     }
 }
 

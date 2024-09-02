@@ -219,34 +219,33 @@ public class SocialuniMusicRoomController {
                         NotifyVO<SocialuniMusicRoomInfoRO> notifyRONotifyVO1 = new NotifyVO<>(sysUser, NotifyType.music, socialuniMusicRoomPlayerInfoRO1);
                         notifyRONotifyVO1.setChatId(chatId.toString());
                         WebsocketServer.sendToAllUsers(notifyRONotifyVO1);
+
+                        log.info(String.valueOf(1111111));
+                        List<SocialuniMusicRoomSongListDO> socialuniMusicRoomSongListDOS1 = SocialuniMusicRoomRepositoryFacede.findAllByRoomIdAndStatus(chatId, SocialuniCommonStatus.enable, SocialuniMusicRoomSongListDO.class);
+
+                        if (socialuniMusicRoomSongListDOS1.isEmpty()) {
+                            return;
+                        }
+                        log.info(String.valueOf(2222));
+                        Integer nowMusicId = socialuniMusicRoomSongListDOS1.get(0).getId();
+                        if (!nowMusicId.equals(dbRoom.getMusicId())) {
+                            throw new SocialParamsException("播放下一首音乐错误");
+                        }
+                        Integer nextMusicId;
+
+                        log.info(String.valueOf(3333));
+                        if (socialuniMusicRoomSongListDOS1.size() > 1) {
+                            nextMusicId = socialuniMusicRoomSongListDOS1.get(1).getId();
+                        } else {
+                            nextMusicId = socialuniMusicRoomSongListDOS1.get(0).getId();
+                        }
+
+                        this.playMusic1(chatId, nextMusicId, null);
+
+                        log.info(String.valueOf(4444));
+                        // 这里放置你要延迟执行的代码
+                        log.info("延迟执行的任务");
                     }
-
-
-                    log.info(String.valueOf(1111111));
-                    List<SocialuniMusicRoomSongListDO> socialuniMusicRoomSongListDOS1 = SocialuniMusicRoomRepositoryFacede.findAllByRoomIdAndStatus(chatId, SocialuniCommonStatus.enable, SocialuniMusicRoomSongListDO.class);
-
-                    if (socialuniMusicRoomSongListDOS1.isEmpty()) {
-                        return;
-                    }
-                    log.info(String.valueOf(2222));
-                    Integer nowMusicId = socialuniMusicRoomSongListDOS1.get(0).getId();
-                    if (!nowMusicId.equals(dbRoom.getMusicId())) {
-                        throw new SocialParamsException("播放下一首音乐错误");
-                    }
-                    Integer nextMusicId;
-
-                    log.info(String.valueOf(3333));
-                    if (socialuniMusicRoomSongListDOS1.size() > 1) {
-                        nextMusicId = socialuniMusicRoomSongListDOS1.get(1).getId();
-                    } else {
-                        nextMusicId = socialuniMusicRoomSongListDOS1.get(0).getId();
-                    }
-
-                    this.playMusic1(chatId, nextMusicId, null);
-
-                    log.info(String.valueOf(4444));
-                    // 这里放置你要延迟执行的代码
-                    log.info("延迟执行的任务");
                 } catch (Exception e) {
                     e.printStackTrace();
                     log.error(e.getMessage());

@@ -42,9 +42,10 @@ public class SocialuniChatDOUtil {
 
         SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidAllowNull(chatIdStr);
         if (socialuniUnionIdModler != null) {
-            if (mineUserId == null) {
-                throw new SocialParamsException("错误的会话信息1211");
-            }
+            //用户不登录也有uuid为null的
+            //            if (mineUserId == null) {
+//                throw new SocialParamsException("错误的会话信息1211");
+//            }
             Integer unionId = socialuniUnionIdModler.getId();
             if (SocialuniContentType.chat.equals(socialuniUnionIdModler.getContentType())) {
                 SocialuniChatDO socialuniChatDO = SocialuniChatDOUtil.findFirstByUnionId(unionId);

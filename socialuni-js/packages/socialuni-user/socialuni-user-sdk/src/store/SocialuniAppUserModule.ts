@@ -10,6 +10,8 @@ import SocialuniCoinAPI from "socialuni-user-api/src/api/SocialuniCoinAPI";
 import ImgFileVO from "socialuni-api-base/src/model/ImgFileVO";
 import SocialuniUserImgAPI from "socialuni-user-api/src/api/SocialuniUserImgAPI";
 import SocialuniUserExpandDetailEditRO from "socialuni-user-api/src/model/SocialuniUserExpandDetailEditRO";
+import NotifyAPI from "socialuni-app-api/src/api/NotifyAPI";
+import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
 
 class SocialuniAppUserModule {
     private userPhoneNum: string = null
@@ -79,6 +81,9 @@ class SocialuniAppUserModule {
             }),
             SocialuniUserImgAPI.getMineUserImgListAPI().then(res => {
                 this.setUserImgs(res.data)
+            }),
+            NotifyAPI.queryUnreadNotifiesAPI().then(res => {
+                socialuniChatModule.unreadNotify = res.data
             })
         ])
     }
