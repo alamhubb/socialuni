@@ -5,7 +5,7 @@ import com.socialuni.social.community.sdk.dao.DO.SocialuniCommentDO;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
 import com.socialuni.social.common.sdk.constant.AppConfigConst;
 import com.socialuni.social.common.sdk.dao.DO.NotifyDO;
-import com.socialuni.social.content.constant.SocialuniSupportProviderType;
+import com.socialuni.social.common.api.constant.SocialuniSupportProviderType;
 import com.socialuni.social.community.sdk.dao.SocialuniCommentDOUtil;
 import com.socialuni.social.community.sdk.dao.SocialuniTalkDOUtil;
 import com.socialuni.social.common.sdk.platform.qq.QQConst;

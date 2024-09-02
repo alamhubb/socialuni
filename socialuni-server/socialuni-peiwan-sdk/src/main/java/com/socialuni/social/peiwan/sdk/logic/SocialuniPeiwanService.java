@@ -33,7 +33,7 @@ public class SocialuniPeiwanService {
 
 
     public ResultRO<Void> addPeiwanInfo(@RequestBody SocialuniPeiwanInfoRO socialuniPeiwanInfoAddQO) {
-        SocialuniUserDo mineUser = socialUserManage.createUserByPhoneLogin();
+        SocialuniUserDo mineUser = socialUserManage.createUser();
 
         SocialuniPeiwanInfoDO socialuniPeiwanInfoDO = SocialuniPeiwanInfoDOFactory.createPeiwanDO(mineUser, socialuniPeiwanInfoAddQO);
 

@@ -18,7 +18,7 @@ import com.socialuni.social.recharge.logic.entity.SocialuniCreateCoinOrderEntity
 import com.socialuni.social.recharge.model.SocialuniCoinInfoRO;
 import com.socialuni.social.recharge.model.SocialuniCoinPayRO;
 import com.socialuni.social.recharge.model.SocialuniPayCoinQO;
-import com.socialuni.social.content.constant.SocialuniSupportProviderType;
+import com.socialuni.social.common.api.constant.SocialuniSupportProviderType;
 import com.socialuni.social.sdk.constant.business.SocialuniAllowPayCoinAmountType;
 import com.socialuni.social.sdk.constant.business.SocialuniPayStatus;
 import com.socialuni.social.user.sdk.constant.SocialuniPayProviderType;

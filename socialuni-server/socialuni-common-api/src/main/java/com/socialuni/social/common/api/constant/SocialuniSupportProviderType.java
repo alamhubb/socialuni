@@ -1,4 +1,4 @@
-package com.socialuni.social.content.constant;
+package com.socialuni.social.common.api.constant;
 
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 
@@ -17,9 +17,10 @@ public class SocialuniSupportProviderType {
 
     public static final String notSupportTypeErrorMsg = "社交联盟不支持的授权渠道";
 
-    public static void checkSupportType(String type) {
+    public static String checkSupportType(String type) {
         if (!supportProviderTypes.contains(type)) {
             throw new SocialParamsException(notSupportTypeErrorMsg);
         }
+        return type;
     }
 }

@@ -1,6 +1,10 @@
 package com.socialuni.social.common.api.utils;
 
+import com.socialuni.social.common.api.constant.PlatformType;
 import com.socialuni.social.common.api.constant.SocialWebHeaderName;
+import com.socialuni.social.common.api.constant.SocialuniSupportProviderType;
+import com.socialuni.social.common.api.constant.SystemType;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpInputMessage;
@@ -110,22 +114,39 @@ public class RequestUtil {
     }
 
     public static String getSystem() {
-        return RequestUtil.getHeader(SocialWebHeaderName.systemHeaderName);
+        String system = RequestUtil.getRequestValue(SocialWebHeaderName.systemHeaderName);
+        if (StringUtils.isEmpty(system)) {
+            return null;
+        }
+        if (SystemType.values.contains(system)) {
+            return system;
+        }
+        throw new SocialParamsException(SystemType.notSupportTypeErrorMsg);
     }
 
     public static String getProvider() {
-        return RequestUtil.getHeader(SocialWebHeaderName.providerHeaderName);
+        String provider = RequestUtil.getRequestValue(SocialWebHeaderName.providerHeaderName);
+        if (StringUtils.isEmpty(provider)) {
+            return null;
+        }
+        return SocialuniSupportProviderType.checkSupportType(provider);
     }
 
     public static String getPlatform() {
-        return RequestUtil.getRequestValue(SocialWebHeaderName.platformHeaderName);
+        String platform = RequestUtil.getRequestValue(SocialWebHeaderName.platformHeaderName);
+        if (StringUtils.isEmpty(platform)) {
+            return null;
+        }
+        if (PlatformType.values.contains(platform)) {
+            return platform;
+        }
+        throw new SocialParamsException(PlatformType.notSupportTypeErrorMsg);
     }
 
     public static String getDeviceUid() {
         String device = RequestUtil.getRequestValue(SocialWebHeaderName.deviceUidKey);
         return device;
     }
-
 
 
     public static String getUserAgent() {

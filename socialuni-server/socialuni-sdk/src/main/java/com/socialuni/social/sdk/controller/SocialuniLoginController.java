@@ -8,10 +8,7 @@ import com.socialuni.social.user.sdk.api.user.SocialuniLoginAPI;
 import com.socialuni.social.user.sdk.logic.manage.SocialuniTokenManage;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniTokenDO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.user.sdk.model.QO.SocialPhoneAuthCodePasswordQO;
-import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumPasswordQO;
-import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumAuthCodeQO;
-import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
+import com.socialuni.social.user.sdk.model.QO.*;
 import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -53,6 +50,12 @@ public class SocialuniLoginController implements SocialuniLoginAPI {
     @Override
     public ResultRO<SocialLoginRO<SocialuniUserRO>> phonePasswordLogin(SocialPhoneAuthCodePasswordQO socialPhoneNumQO) {
         return centerLoginService.phonePasswordLogin(socialPhoneNumQO);
+    }
+
+
+    @PostMapping("deviceUidLogin")
+    ResultRO<SocialLoginRO<SocialuniUserRO>> deviceUidLogin(@RequestBody @Valid SocialuniDeviceUidLoginQO socialuniDeviceUidLoginQO) {
+        return centerLoginService.deviceUidLogin(socialuniDeviceUidLoginQO);
     }
 
 

@@ -9,10 +9,7 @@ import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.dao.utils.SocialuniUserExtendFriendLogDOUtil;
 import com.socialuni.social.user.sdk.logic.service.SocialuniLoginService;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.user.sdk.model.QO.SocialPhoneAuthCodePasswordQO;
-import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumPasswordQO;
-import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumAuthCodeQO;
-import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
+import com.socialuni.social.user.sdk.model.QO.*;
 import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -119,6 +116,27 @@ public class SocialuniDetailLoginService {
 
         //生成用户扩列记录
         SocialuniUserExtendFriendLogDOUtil.createUserExtendFriendLog();
+        return ResultRO.success(socialLoginRO);
+    }
+
+
+    public ResultRO<SocialLoginRO<SocialuniUserRO>> deviceUidLogin(SocialuniDeviceUidLoginQO socialuniDeviceUidLoginQO) {
+        ResultRO<SocialLoginRO<SocialuniUserRO>> socialLoginRO1 = socialuniLoginService.deviceUidLogin(socialuniDeviceUidLoginQO);
+
+        Integer mineUserId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(socialLoginRO1.getData().getUser().getId());
+
+        SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getUserNotNull(mineUserId);
+
+        SocialuniMineUserDetailRO socialuniMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(socialuniUserDo);
+
+        SocialLoginRO<SocialuniUserRO> socialLoginRO = new SocialLoginRO(socialLoginRO1.getData().getToken(), socialuniMineUserDetailRO);
+
+        //用户加入
+        socialuniChatEntity.createUserChats(socialuniUserDo);
+
+        //生成用户扩列记录
+        SocialuniUserExtendFriendLogDOUtil.createUserExtendFriendLog();
+
         return ResultRO.success(socialLoginRO);
     }
 }

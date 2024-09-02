@@ -34,7 +34,7 @@ public class SocialuniAdminPeiwanService {
 
 
     public ResultRO<Void> addPeiwanInfo(@RequestBody SocialuniPeiwanInfoRO socialuniPeiwanInfoAddQO) {
-        SocialuniUserDo mineUser = socialUserManage.createUserByPhoneLogin();
+        SocialuniUserDo mineUser = socialUserManage.createUser();
 
         SocialuniPeiwanInfoDO socialuniPeiwanInfoDO = SocialuniPeiwanInfoDOFactory.createPeiwanDO(mineUser, socialuniPeiwanInfoAddQO);
 
@@ -49,7 +49,7 @@ public class SocialuniAdminPeiwanService {
         List<SocialuniPeiwanInfoDO> list = new ArrayList<>();
 
         for (SocialuniPeiwanInfoRO socialuniPeiwanInfoAddQO : socialuniPeiwanInfoAddQOs) {
-            SocialuniUserDo mineUser = socialUserManage.createUserByPhoneLogin();
+            SocialuniUserDo mineUser = socialUserManage.createUser();
 
             SocialuniPeiwanInfoDO socialuniPeiwanInfoDO = SocialuniPeiwanInfoDOFactory.createPeiwanDO(mineUser, socialuniPeiwanInfoAddQO);
             list.add(socialuniPeiwanInfoDO);

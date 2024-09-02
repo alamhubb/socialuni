@@ -3,7 +3,7 @@ package com.socialuni.social.admin.controller;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.tance.sdk.model.DevAccountProviderModler;
-import com.socialuni.social.content.constant.SocialuniSupportProviderType;
+import com.socialuni.social.common.api.constant.SocialuniSupportProviderType;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 

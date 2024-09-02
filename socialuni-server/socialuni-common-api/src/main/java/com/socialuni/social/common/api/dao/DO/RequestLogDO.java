@@ -42,6 +42,7 @@ public class RequestLogDO {
     private String errorType;
     private String provider;
     private String platform;
+    private String deviceUid;
     private String systemInfo;
 
     @Column(columnDefinition = "longtext")

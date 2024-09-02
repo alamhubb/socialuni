@@ -2,14 +2,10 @@ package com.socialuni.social.user.sdk.logic.service;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
-import com.socialuni.social.content.constant.SocialuniSupportProviderType;
+import com.socialuni.social.common.api.constant.SocialuniSupportProviderType;
 import com.socialuni.social.user.sdk.logic.domain.SocialuniLoginDomain;
-import com.socialuni.social.user.sdk.model.QO.SocialPhoneAuthCodePasswordQO;
-import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumAuthCodeQO;
-import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumPasswordQO;
-import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
+import com.socialuni.social.user.sdk.model.QO.*;
 import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
-import com.socialuni.social.user.sdk.utils.PasswordUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +17,11 @@ import javax.transaction.Transactional;
 public class SocialuniLoginService {
     @Resource
     SocialuniLoginDomain socialLoginDomain;
+
+    public ResultRO<SocialLoginRO<SocialuniUserRO>> deviceUidLogin(SocialuniDeviceUidLoginQO socialuniDeviceUidLoginQO) {
+        SocialLoginRO<SocialuniUserRO> socialLoginRO = socialLoginDomain.deviceUidLogin(socialuniDeviceUidLoginQO);
+        return ResultRO.success(socialLoginRO);
+    }
 
     //提供给借用社交联盟实现微信qq渠道登录的开发者， 不需要支持社交联盟登录，社交联盟登录是前台跳转登录返回信息，不走后台
     @Transactional

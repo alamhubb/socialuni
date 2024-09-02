@@ -47,6 +47,7 @@ public class SocialuniWebInterceptor implements HandlerInterceptor {
         requestLogDO.setSystemInfo(RequestUtil.getSystem());
         requestLogDO.setProvider(RequestUtil.getProvider());
         requestLogDO.setPlatform(RequestUtil.getPlatform());
+        requestLogDO.setDeviceUid(RequestUtil.getDeviceUid());
         requestLogDO.setUri(uri);
         RequestLogUtil.set(requestLogDO);
 

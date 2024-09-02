@@ -1,5 +1,6 @@
 package com.socialuni.social.official.controller;
 
+import com.socialuni.social.common.api.constant.SocialuniLoginType;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniContentUserRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
@@ -67,7 +68,7 @@ public class SocialuniOfficialController {
 
         SocialuniUserDo socialuniUserDo = socialUserManage.createUserByNickname(name);
 
-        SocialLoginRO<SocialuniUserRO> socialLoginRO = socialuniLoginDomain.getSocialLoginROByMineUser(socialuniUserDo);
+        SocialLoginRO<SocialuniUserRO> socialLoginRO = socialuniLoginDomain.getSocialLoginROByMineUser(socialuniUserDo, SocialuniLoginType.nickname);
 
 //        TokenSocialuniTokenDO socialuniTokenDO = testUserService.getSocialuniToken(tokenDO.getToken());
 

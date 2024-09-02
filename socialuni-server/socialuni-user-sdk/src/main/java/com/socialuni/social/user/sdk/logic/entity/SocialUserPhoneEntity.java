@@ -22,7 +22,7 @@ public class SocialUserPhoneEntity {
     //外层已经校验过了
     @Transactional
     public SocialuniUserDo createUserPhoneEntity(String phoneNum) {
-        SocialuniUserDo mineUser = socialUserManage.createUserByPhoneLogin();
+        SocialuniUserDo mineUser = socialUserManage.createUser();
         //创建或返回
 //        socialUserFansDetailManage.getOrCreateUserFollowDetail(mineUser);
         socialUserPhoneManage.createUserPhoneNum(mineUser.getUnionId(), "86", phoneNum);

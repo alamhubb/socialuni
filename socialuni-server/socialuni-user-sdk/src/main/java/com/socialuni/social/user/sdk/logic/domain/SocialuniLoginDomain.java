@@ -1,5 +1,6 @@
 package com.socialuni.social.user.sdk.logic.domain;
 
+import com.socialuni.social.common.api.constant.SocialuniLoginType;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
@@ -9,15 +10,14 @@ import com.socialuni.social.user.sdk.dao.DO.SocialUserPasswordDO;
 import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
 import com.socialuni.social.user.sdk.logic.entity.SocialPhoneLoginEntity;
 import com.socialuni.social.user.sdk.logic.entity.SocialProviderLoginEntity;
+import com.socialuni.social.user.sdk.logic.entity.SocialuniCreateLoginHisotryEntity;
+import com.socialuni.social.user.sdk.logic.manage.SocialUserManage;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserPasswordManage;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserPhoneManage;
 import com.socialuni.social.user.sdk.logic.manage.SocialuniTokenManage;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniTokenDO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.user.sdk.model.QO.SocialPhoneAuthCodePasswordQO;
-import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumPasswordQO;
-import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumAuthCodeQO;
-import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
+import com.socialuni.social.user.sdk.model.QO.*;
 import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
 import com.socialuni.social.user.sdk.model.factory.SocialuniMineUserROFactory;
 import com.socialuni.social.user.sdk.dao.repository.SocialuniUserPasswordRepository;
@@ -38,6 +38,8 @@ public class SocialuniLoginDomain {
 
     @Resource
     SocialProviderLoginEntity socialProviderLoginEntity;
+    @Resource
+    SocialUserManage socialUserManage;
 
 
     @Transactional
@@ -45,14 +47,23 @@ public class SocialuniLoginDomain {
         //创建或返回
         SocialuniUserDo mineUser = socialProviderLoginEntity.providerLogin(loginQO);
 
-        return getSocialLoginROByMineUser(mineUser);
+        return getSocialLoginROByMineUser(mineUser, SocialuniLoginType.provider);
+    }
+
+
+    public SocialLoginRO<SocialuniUserRO> deviceUidLogin(SocialuniDeviceUidLoginQO socialuniDeviceUidLoginQO) {
+        //创建或返回
+        SocialuniUserDo mineUser = socialUserManage.createUser();
+
+
+        return getSocialLoginROByMineUser(mineUser, SocialuniLoginType.device);
     }
 
     @Transactional
     public SocialLoginRO<SocialuniUserRO> phoneLogin(SocialPhoneNumAuthCodeQO socialPhoneNumQO) {
         SocialuniUserDo mineUser = socialPhoneLoginEntity.phoneLogin(socialPhoneNumQO);
 
-        return getSocialLoginROByMineUser(mineUser);
+        return getSocialLoginROByMineUser(mineUser, SocialuniLoginType.phone);
     }
 
     @Resource
@@ -121,7 +132,7 @@ public class SocialuniLoginDomain {
 
         SocialuniUserDo mineUser = SocialuniUserUtil.getUserNotNull(userId);
 
-        return getSocialLoginROByMineUser(mineUser);
+        return getSocialLoginROByMineUser(mineUser, SocialuniLoginType.password);
     }
 
     @Resource
@@ -145,14 +156,17 @@ public class SocialuniLoginDomain {
 
         socialUserPasswordDO = socialUserPasswordManage.updatePassword(sha512Password, socialUserPasswordDO);
 
-        return getSocialLoginROByMineUser(mineUser);
+        return getSocialLoginROByMineUser(mineUser, SocialuniLoginType.phonePassword);
     }
 
 
-    public SocialLoginRO<SocialuniUserRO> getSocialLoginROByMineUser(SocialuniUserDo mineUser) {
+    public SocialLoginRO<SocialuniUserRO> getSocialLoginROByMineUser(SocialuniUserDo mineUser, String loginType) {
         SocialuniUserRO userDetailRO = SocialuniMineUserROFactory.getMineUser(mineUser);
 
         SocialuniTokenDO socialUserTokenDO = tokenManage.create(mineUser.getUnionId());
+
+
+        SocialuniCreateLoginHisotryEntity.createUserLoginHistory(mineUser.getUserId(), loginType);
 
 
         EventPublisherFacade.publishEvent("userLogin", mineUser);

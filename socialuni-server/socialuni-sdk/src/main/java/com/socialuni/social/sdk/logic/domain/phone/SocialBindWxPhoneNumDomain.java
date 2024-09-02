@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.logic.domain.phone;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.utils.JsonUtil;
 import com.socialuni.social.common.sdk.model.QO.SocialBindWxPhoneNumQO;
-import com.socialuni.social.content.constant.SocialuniSupportProviderType;
+import com.socialuni.social.common.api.constant.SocialuniSupportProviderType;
 import com.socialuni.social.user.sdk.logic.entity.SocialUserPhoneEntity;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserAccountManage;
 import com.socialuni.social.common.sdk.platform.WxDecode;

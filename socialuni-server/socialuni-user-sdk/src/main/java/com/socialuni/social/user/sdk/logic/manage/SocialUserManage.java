@@ -9,7 +9,6 @@ import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.user.sdk.model.factory.SocialUserDOFactory;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
@@ -46,7 +45,7 @@ public class SocialUserManage {
         return user;
     }
 
-    public SocialuniUserDo createUserByPhoneLogin() {
+    public SocialuniUserDo createUser() {
         SocialuniUserDo user = SocialUserDOFactory.newUserByPhoneLogin();
         user = userApi.savePut(user);
         return user;

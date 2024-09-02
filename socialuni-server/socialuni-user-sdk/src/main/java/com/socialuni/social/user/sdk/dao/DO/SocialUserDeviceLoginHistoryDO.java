@@ -1,6 +1,8 @@
 package com.socialuni.social.user.sdk.dao.DO;
 
 import com.socialuni.social.common.api.entity.SocialuniBaseDO;
+import com.socialuni.social.common.api.entity.SocialuniUserInfoBaseDO;
+import com.socialuni.social.common.api.utils.RequestUtil;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -10,22 +12,22 @@ import java.io.Serializable;
 
 
 @Entity
-@Table(name = "s_user_device_login_history")
+@Table(name = "s_user_login_history")
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class SocialUserDeviceLoginHistoryDO extends SocialuniBaseDO implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false, updatable = false)
-    private Integer id;
+public class SocialUserDeviceLoginHistoryDO extends SocialuniUserInfoBaseDO implements Serializable {
+    //渠道登录，手机登录，设备登录
+    private String loginType;
 
-    @Column(nullable = false, updatable = false)
-    private Integer userId;
-    //登录设备系统
+    //登录设备系统,systemType
     private String systemInfo;
-    //登录渠道，qq，wx，phone
+
+    //登录渠道，qq，wx
     private String loginProvider;
-    //登录平台mp，app
+
+    //登录平台mp，app,h5
     private String platform;
+
+    private String deviceUid;
 }
