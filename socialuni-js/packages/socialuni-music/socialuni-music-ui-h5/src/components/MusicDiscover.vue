@@ -1,163 +1,159 @@
 <template>
   <div>
-    <el-table ref="table" height="100%" :data="data" @row-dblclick="rowDbClick" :highlight-current-row="highlight">
-      <el-table-column prop="no" label="序号" width="100"/>
-      <el-table-column prop="musicName" label="歌曲名" width="180"/>
-      <el-table-column prop="author" label="歌手" width="180"/>
-      <el-table-column prop="musicTime" label="时长">
-        <template #default="{row}">
-          {{formatTooltip(row.musicTime)}}
-<!--          {{row.musicTime}}-->
-        </template>
-      </el-table-column>
-      <el-table-column prop="musicTime" label="切歌">
-        <template #default="{row}">
-          {{formatTooltip(row.musicTime)}}
-          <!--          {{row.musicTime}}-->
-        </template>
-      </el-table-column>
-      <el-table-column prop="musicTime" label="下一首播放">
-        <template #default="{row}">
-          {{formatTooltip(row.musicTime)}}
-          <!--          {{row.musicTime}}-->
-        </template>
-      </el-table-column>
-      <el-table-column prop="musicTime" label="加入播放列表">
-        <template #default="{row}">
-          {{row.musicTime}}
-          <!--          {{row.musicTime}}-->
-        </template>
-      </el-table-column>
-    </el-table>
-  </div>
-  <!--  <div class="w100p bg-white px-15 cursor-none">-->
-  <!--  <div class="h100p overflow-auto pt-sm" v-infinite-scroll="scrollToLower" :infinite-scroll-immediate="false"
-         :infinite-scroll-distance="200"
-         :infinite-scroll-delay="200"
-    >
-      <div class="pd">
-        <div class="bt">
-          <div v-for="item in data" @dblclick="change(item)">
-            <div class="flex-row bb  py-sm">
-              <div class="br">
-                {{ item.name }}
-              </div>
-              <div>
-                {{ item.author.join(',') }}
-              </div>
-            </div>
-          </div>
+
+
+    <div class="flex-row">
+      <div class="flex-1 overflow-hidden">
+        <div class="row-between-center px-sm py-sm bb">
+          <div>热门歌曲</div>
+
+          <q-input v-model="musicSearchText" class="w150" @keydown.enter="searchSongList"
+                   @clear="clearSearch"></q-input>
         </div>
+        <music-list v-if="songList.length" class="h500" :data="songList" @change="hotSongListMusicChange"
+                    :cur-music="musicRoomInfo"></music-list>
+
+        <music-list v-else class="h500" :data="hotSongList" @change="hotSongListMusicChange"
+                    :cur-music="musicRoomInfo"></music-list>
+
+
       </div>
-    </div>-->
-  <!--    <div class="flex-1 overflow-hidden">
-  &lt;!&ndash;
-        音量：{{ socialuniMusicStore.musicVolume }}
-        <div>
-          realPlayingValue：{{ realPlayingValue }}
-        </div>
-        <div>
-          {{ modelValue }}
-        </div>
-  &ndash;&gt;
-
-        <el-table height="100%" :data="data" stripe highlight-current-row
-                  @row-dblclick="handleCurrentChange">
-          <el-table-column prop="title" label="音乐标题" width="100" show-overflow-tooltip></el-table-column>
-          <el-table-column label="歌手" show-overflow-tooltip>
-            <template #default="scope">
-              {{ scope.row.author.join(' / ') }}
-            </template>
-          </el-table-column>
-          <el-table-column label="歌手专辑" show-overflow-tooltip>
-            <template #default="scope">
-              {{ scope.row.album }}
-            </template>
-          </el-table-column>
-          <el-table-column label="时长" width="100">
-            <template #default="scope">
-              {{ $DateUtil.convertToTime(scope.row.musicTime) }}
-            </template>
-          </el-table-column>
-        </el-table>
-
-      </div>-->
-
-  <!--    <el-table height="100%" :data="data" stripe highlight-current-row
-                @row-dblclick="handleCurrentChange">
-        <el-table-column prop="title" label="音乐标题" width="100" show-overflow-tooltip></el-table-column>
-        <el-table-column label="歌手" show-overflow-tooltip>
-          <template #default="scope">
-            {{ scope.row.author.join(' / ') }}
-          </template>
-        </el-table-column>
-        <el-table-column label="歌手专辑" show-overflow-tooltip>
-          <template #default="scope">
-            {{ scope.row.album }}
-          </template>
-        </el-table-column>
-        <el-table-column label="时长" width="100">
-          <template #default="scope">
-            {{ $DateUtil.convertToTime(scope.row.musicTime) }}
-          </template>
-        </el-table-column>
-      </el-table>-->
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
-import {Component, Emit, Model, Prop, Vue, Watch, toNative} from 'vue-facing-decorator';
-import MusicPlayerSongInfoRO from "socialuni-music-sdk/src/model/MusicPlayerSongInfoRO";
+import {Component, Vue, Watch, toNative} from 'vue-facing-decorator';
+import SocialuniChatViewH5 from "socialuni-im-view-h5/src/views/SocialuniChatViewH5.vue"
+import SocialuniMsgViewH5 from "socialuni-im-view-h5/src/views/SocialuniMsgViewH5.vue"
+import MusicPlayerSongPlayingInfoRO from "socialuni-music-sdk/src/model/MusicPlayerSongPlayingInfoRO.ts";
+import socialuniMusicStore from "socialuni-music-sdk/src/store/SocialuniMusicStore.ts";
+import SocialuniMusicRoleId from "socialuni-music-sdk/src/constant/SocialuniMusicRoleId.ts";
+import MusicPlayerSongInfoRO from "socialuni-music-sdk/src/model/MusicPlayerSongInfoRO.ts";
+import SocialuniMusicAPI from "socialuni-music-sdk/src/api/SocialuniMusicAPI.ts";
+import musicRequest from "socialuni-music-sdk/src/plugins/musicRequest";
+import MusicPlayer from "socialuni-music-ui-h5/src/components/MusicPlayer.vue";
+import MusicList from "socialuni-music-ui-h5/src/components/MusicList.vue";
+import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule.ts";
+import QInput from "qingjs-ui/src/components/QInput.vue";
+import {socialAppModule} from "socialuni-app-sdk/src/store/SocialAppModule.ts";
 import QDialog from "qingjs-ui-h5/src/components/QDialog.vue";
-import MsgInput from "socialuni-ui/src/components/MsgInput.vue";
-import TalkItem from "socialuni-community-ui/src/components/talkItem/TalkItem.vue";
-import QTag from "qingjs-ui/src/components/QTag.vue";
-import TalkAddView from "socialuni-community-view-h5/src/views/TalkAddView.vue";
-import QEnumLink from "qingjs-ui-h5/src/components/QEnumLink.vue";
-import QLoadMore from "qingjs-ui/src/components/QLoadMore.vue";
-import QIcon from "qingjs-ui/src/components/QIcon.vue";
-import MusicPlayerSongPlayingInfoRO from "socialuni-music-sdk/src/model/MusicPlayerSongPlayingInfoRO";
-import DateUtil from "qing-util/src/util/DateUtil";
 
 @toNative
 @Component({
-  components: {QIcon, QLoadMore, QEnumLink, TalkAddView, QTag, TalkItem, MsgInput, QDialog}
+  components: {QDialog, QInput, SocialuniChatViewH5, SocialuniMsgViewH5, MusicList}
 })
-export default class MusicList extends Vue {
+export default class MusicDialog extends Vue {
   $refs: {
-    table: ElTable
+    musicDialog: QDialog
   }
-  @Prop() data: MusicPlayerSongInfoRO[]
-  @Prop() curMusic: MusicPlayerSongPlayingInfoRO
+
+  showSearchSongList = false
 
 
-  @Watch('curMusic')
-  curMusicWatch() {
-    if (this.data.length) {
-      const tableData = this.data.find(item => item.musicUrl === this.curMusic.musicUrl)
-      this.$refs.table?.setCurrentRow(tableData)
+  musicSearchText = ''
+
+  hotSongList: MusicPlayerSongInfoRO[] = []
+
+  songList: MusicPlayerSongInfoRO[] = []
+
+  get onlineUsersCount() {
+    return socialAppModule.onlineUsersCount
+  }
+
+  created() {
+    this.querySongList()
+    // this.searchSongList()
+  }
+
+  async initHandler() {
+    await this.initRoomId()
+  }
+
+  //查询房间的播放信息
+
+  async initRoomId() {
+    // 如果没有房间id，则查询默认系统开放大厅id
+    let chatId = this.$route.query.chatId
+    if (!chatId) {
+      const res = await SocialuniMusicAPI.getPublicRoomId();
+      chatId = res.data
     }
+    await socialuniChatModule.init({chatId})
+    console.log(socialuniChatModule.chatId)
   }
 
-  scrollToLower() {
-
+  get hasOperateAuth() {
+    console.log(23232323)
+    console.log(socialuniMusicStore.musicRoleId)
+    return SocialuniMusicRoleId.hasOperateAuthList.includes(socialuniMusicStore.musicRoleId)
   }
 
-  rowDbClick(a) {
-    this.change(a)
+
+  get musicRoomId() {
+    return socialuniMusicStore.musicRoomId
   }
 
-  formatTooltip(value: number) {
-    const time = Math.ceil((value / 1000)) * 1000
-    return DateUtil.convertToTime(time)
+  get musicRoomInfo() {
+    if (socialuniMusicStore.musicRoomInfo) {
+      return socialuniMusicStore.musicRoomInfo
+    }
+    return null
   }
 
-  @Emit()
-  change(musicInfo: MusicPlayerSongInfoRO): MusicPlayerSongPlayingInfoRO {
-    return new MusicPlayerSongPlayingInfoRO({...musicInfo})
+  async searchSongList() {
+    const res = await musicRequest.get('/cloudsearch?offset=0&limit=30&keywords=' + this.musicSearchText)
+// this.searchData = res.result.songs
+    const data = res.result.songs
+    const songList: MusicPlayerSongInfoRO[] = data.map((row: any) => {
+      const songRO: MusicPlayerSongInfoRO = new MusicPlayerSongInfoRO({
+        songId: row.id,
+        musicName: row.name,
+        author: row.ar?.map(item => item.name).join(','),
+        album: row.al.name,
+        albumImg: row.al.picUrl,
+        musicTime: row.dt,
+        musicUrl: `https://music.163.com/song/media/outer/url?id=${row.id}.mp3`,
+      })
+      return songRO
+    })
+    this.songList = songList
   }
 
-  highlight(...args) {
-    console.log(args)
+  clearSearch() {
+    this.songList = []
+  }
+
+  async querySongList() {
+    const data = await musicRequest.get('/playlist/detail?id=3778678') as any
+    const songList: MusicPlayerSongInfoRO[] = data.playlist.tracks.map((row: any) => {
+      const songRO: MusicPlayerSongInfoRO = new MusicPlayerSongInfoRO({
+        songId: row.id,
+        musicName: row.name,
+        author: row.ar?.map(item => item.name).join(','),
+        album: row.al.name,
+        albumImg: row.al.picUrl,
+        musicTime: row.dt,
+        musicUrl: `https://music.163.com/song/media/outer/url?id=${row.id}.mp3`,
+      })
+      return songRO
+    })
+    this.hotSongList = songList
+  }
+
+  musicRoomInfoInput(musicRoomInfo: MusicPlayerSongPlayingInfoRO) {
+    socialuniMusicStore.setMusicRoomInfo(musicRoomInfo)
+  }
+
+  //热门歌曲事件，追加至播放列表
+  async hotSongListMusicChange(musicRoomInfo: MusicPlayerSongPlayingInfoRO) {
+    console.log('chufale host change')
+    const newSongRO = new MusicPlayerSongInfoRO(musicRoomInfo)
+    newSongRO.no = this.songList.length + 1
+    this.songList.push(newSongRO)
+    await SocialuniMusicAPI.joinSongListAPI(socialuniMusicStore.musicRoomId, musicRoomInfo)
+    // this.querySongListNew()
+    socialuniMusicStore.querySongList()
   }
 }
 </script>

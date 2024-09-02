@@ -1,13 +1,9 @@
 <template>
   <q-dialog ref="musicDialog" title="我的音乐">
     <div class="h100p">
-      <q-input v-model="musicSearchText" class="w150" @keydown.enter="searchSongList" @clear="clearSearch"></q-input>
-
       <div class="flex-row">
         <div class="flex-1 bd overflow-hidden">
-          <div>热门歌曲</div>
-          <music-list class="h500" :data="hotSongList" @change="hotSongListMusicChange"
-                      :cur-music="musicRoomInfo"></music-list>
+          <music-discover></music-discover>
         </div>
         <div class="flex-1 bd overflow-hidden">
           <div>房间歌单</div>
@@ -38,10 +34,11 @@ import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModul
 import QInput from "qingjs-ui/src/components/QInput.vue";
 import {socialAppModule} from "socialuni-app-sdk/src/store/SocialAppModule.ts";
 import QDialog from "qingjs-ui-h5/src/components/QDialog.vue";
+import MusicDiscover from "./MusicDiscover.vue";
 
 @toNative
 @Component({
-  components: {QDialog, QInput, SocialuniChatViewH5, SocialuniMsgViewH5, MusicList}
+  components: {MusicDiscover, QDialog, QInput, SocialuniChatViewH5, SocialuniMsgViewH5, MusicList}
 })
 export default class MusicDialog extends Vue {
   $refs: {

@@ -1,8 +1,8 @@
 //音乐信息基础，列表信息类
 export default class MusicPlayerSongInfoRO {
-    no: number = null
+    no?: number = null
     songId: string = null
-    musicId: number = null
+    musicId?: number = null
     musicName: string = null
     //毫秒
     musicTime: number = null
