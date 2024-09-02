@@ -6,6 +6,7 @@ import AppInitDataRO from "socialuni-api-base/src/model/config/AppInitDataRO";
 import ReportAPI from "socialuni-app-api/src/api/ReportAPI";
 import SocialuniDeviceUidUtil from "socialuni-user-sdk/src/util/SocialuniDeviceUidUtil";
 import JsonUtil from "qing-util/src/util/JsonUtil";
+import SocialuniLoginService from "socialuni-user-sdk/src/logic/SocialuniLoginService";
 
 class SocialuniConfigModule {
 
@@ -35,6 +36,7 @@ class SocialuniConfigModule {
             const device = JsonUtil.toJson(deviceObj)
             await SocialuniAppAPI.getDeviceUidAPI({device}).then(res => {
                 SocialuniDeviceUidUtil.set(res.data)
+                SocialuniLoginService.deviceUidLogin()
             })
         }
     }

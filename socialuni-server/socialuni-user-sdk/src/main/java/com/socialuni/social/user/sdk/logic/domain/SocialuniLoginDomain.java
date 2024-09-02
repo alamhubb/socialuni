@@ -2,6 +2,7 @@ package com.socialuni.social.user.sdk.logic.domain;
 
 import com.socialuni.social.common.api.constant.SocialuniLoginType;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
@@ -23,6 +24,7 @@ import com.socialuni.social.user.sdk.model.factory.SocialuniMineUserROFactory;
 import com.socialuni.social.user.sdk.dao.repository.SocialuniUserPasswordRepository;
 import com.socialuni.social.user.sdk.utils.PasswordUtil;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -52,9 +54,12 @@ public class SocialuniLoginDomain {
 
 
     public SocialLoginRO<SocialuniUserRO> deviceUidLogin(SocialuniDeviceUidLoginQO socialuniDeviceUidLoginQO) {
+        String deviceUid = socialuniDeviceUidLoginQO.getDeviceUid();
+        if (StringUtils.isEmpty(deviceUid)) {
+           throw new SocialParamsException("临时用户登录错误");
+        }
         //创建或返回
         SocialuniUserDo mineUser = socialUserManage.createUser();
-
 
         return getSocialLoginROByMineUser(mineUser, SocialuniLoginType.device);
     }

@@ -27,8 +27,8 @@ export default class LoginAPI {
         return socialuniUserRequest.post<SocialLoginRO<SocialuniUserRO>>('socialuni/login/phonePasswordLogin', loginData)
     }
 
-    static phonePasswordLoginAPI(loginData: { deviceUid: string }) {
-        return socialuniUserRequest.post<SocialLoginRO<SocialuniUserRO>>('socialuni/login/phonePasswordLogin', loginData)
+    static deviceUidLoginAPI(deviceUid: string) {
+        return socialuniUserRequest.post<SocialLoginRO<SocialuniUserRO>>('socialuni/login/deviceUidLogin', {deviceUid})
     }
 
 
