@@ -13,8 +13,8 @@ import BeastChess from "@/views/beastChess/BeastChess.vue";
 export const constantRoutes = [
     {
         path: '/',
-        name: '音乐',
-        component: MusicHome,
+        name: '首页',
+        component: HomeView,
         meta: {title: '音乐'},
     },
     {
