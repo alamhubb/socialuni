@@ -21,7 +21,7 @@ import javax.persistence.*;
 })
 @EqualsAndHashCode(callSuper = true)
 public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {
-
+    //chatUserId，不对前端开放，仅后端使用，前端无法获取到chatUserId相关数据，修改时，给后端也是传chatId，后端根据chatId得到chatUserId
     //置顶标识
     //用户手动操作的，系统没有操作方法，暂时没用
     private Boolean topFlag;

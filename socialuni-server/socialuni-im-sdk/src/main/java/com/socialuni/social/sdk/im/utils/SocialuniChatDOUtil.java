@@ -37,45 +37,18 @@ public class SocialuniChatDOUtil {
             throw new SocialBusinessException("房间信息为空");
         }
 
-
         Integer mineUserId = SocialuniUserUtil.getMineUserIdAllowNull();
 
-        SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidAllowNull(chatIdStr);
-        if (socialuniUnionIdModler != null) {
-            //用户不登录也有uuid为null的
-            //            if (mineUserId == null) {
-//                throw new SocialParamsException("错误的会话信息1211");
-//            }
-            Integer unionId = socialuniUnionIdModler.getId();
-            if (SocialuniContentType.chat.equals(socialuniUnionIdModler.getContentType())) {
-                SocialuniChatDO socialuniChatDO = SocialuniChatDOUtil.findFirstByUnionId(unionId);
-                return socialuniChatDO.getUnionId();
-            } else if (SocialuniContentType.user.equals(socialuniUnionIdModler.getContentType())) {
-                SocialuniChatUserDO socialuniChatUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(mineUserId, unionId, SocialuniChatUserDO.class);
-                return socialuniChatUserDO.getChatId();
-            }
-            throw new SocialParamsException("错误的会话信息1212");
+        SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidNotNull(chatIdStr);
+
+        Integer unionId = socialuniUnionIdModler.getId();
+
+        if (SocialuniContentType.chat.equals(socialuniUnionIdModler.getContentType())) {
+            return unionId;
+        } else if (SocialuniContentType.user.equals(socialuniUnionIdModler.getContentType())) {
+            SocialuniChatUserDO socialuniChatUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(mineUserId, unionId, SocialuniChatUserDO.class);
+            return socialuniChatUserDO.getChatId();
         }
-        //有可能是uuid
-        Integer unionId;
-        try {
-            unionId = Integer.valueOf(chatIdStr);
-        } catch (Exception e) {
-            throw new SocialParamsException("错误的会话标识1213");
-        }
-        //如果用户为空，则为chatId
-        if (mineUserId == null) {
-            SocialuniChatDO socialuniChatDO = SocialuniChatDOUtil.findFirstByUnionId(unionId);
-            if (socialuniChatDO == null) {
-                throw new SocialParamsException("错误的会话标识1214");
-            }
-            return socialuniChatDO.getUnionId();
-        } else {
-            SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findById(unionId);
-            if (chatUserDO == null) {
-                throw new SocialParamsException("不存在会话信息1");
-            }
-            return chatUserDO.getChatId();
-        }
+        throw new SocialParamsException("错误的会话信息1212");
     }
 }

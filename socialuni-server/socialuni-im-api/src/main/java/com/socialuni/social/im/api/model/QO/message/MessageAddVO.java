@@ -3,7 +3,6 @@ package com.socialuni.social.im.api.model.QO.message;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 /**
  * @author qinkaiyuan
@@ -12,7 +11,8 @@ import javax.validation.constraints.NotNull;
 @Data
 public class MessageAddVO {
     //接收者 id
-    @NotBlank
+    private String chatId;
+
     private String receiveId;
 
     private String type;

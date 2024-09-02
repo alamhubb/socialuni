@@ -1,17 +1,12 @@
 package com.socialuni.social.likee.logic.service;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserIdQO;
 import com.socialuni.social.common.sdk.constant.UserType;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
-import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
-import com.socialuni.social.common.sdk.utils.ErrorLogUtil;
 import com.socialuni.social.im.api.model.QO.SocialuniChatQueryQO;
-import com.socialuni.social.im.api.model.QO.chat.ChatReadVO;
 import com.socialuni.social.im.api.model.QO.message.MessageAddVO;
 import com.socialuni.social.im.api.model.RO.ChatRO;
 import com.socialuni.social.im.api.model.RO.SocialMessageRO;
@@ -30,14 +25,11 @@ import com.socialuni.social.sdk.im.logic.foctory.SocialChatROFactory;
 import com.socialuni.social.sdk.im.logic.service.SocialuniMessageService;
 import com.socialuni.social.sdk.im.logic.service.chat.ChatService;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import javax.transaction.Transactional;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -62,19 +54,19 @@ public class SocialuniUserLikeService {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
 
         List<SocialuniLikeChatRO> socialuniLikeChatROList = data.stream().map(item -> {
-            if (item.getType().equals(ChatType.single)) {
-                if (mineUser == null) {
-                    throw new SocialParamsException("参数异常560358");
-                }
-                SocialuniChatUserDO socialuniChatUserDO = chatService.getSocialuniChatUserDO(item.getId());
-                if (UserType.system.equals(mineUser.getType()) || mineUser.getUserId().equals(socialuniChatUserDO.getUserId())) {
-                    Integer sendUserId = socialuniChatUserDO.getUserId();
-                    return getSocialuniLikeChatRO(item, sendUserId);
-                }
-                throw new SocialParamsException("参数异常56035");
-            } else {
+//            if (item.getType().equals(ChatType.single)) {
+//                if (mineUser == null) {
+//                    throw new SocialParamsException("参数异常560358");
+//                }
+//                SocialuniChatUserDO socialuniChatUserDO = chatService.getSocialuniChatUserDO(item.getId());
+//                if (UserType.system.equals(mineUser.getType()) || mineUser.getUserId().equals(socialuniChatUserDO.getUserId())) {
+//                    Integer sendUserId = socialuniChatUserDO.getUserId();
+//                    return getSocialuniLikeChatRO(item, sendUserId);
+//                }
+//                throw new SocialParamsException("参数异常56035");
+//            } else {
                 return getSocialuniLikeChatRO(item, mineUserId);
-            }
+//            }
         }).collect(Collectors.toList());
 
         return ResultRO.success(socialuniLikeChatROList);
@@ -146,7 +138,7 @@ public class SocialuniUserLikeService {
         Integer msgIdd = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(msgId);
 
 
-        String receiveIdUid = msgAddVO.getReceiveId();
+        String receiveIdUid = msgAddVO.getChatId();
 
         SocialuniChatUserDO socialuniChatUserDO = SocialChatROFactory.getSingleChatUser(receiveIdUid);
         if (socialuniChatUserDO == null) {
@@ -189,7 +181,7 @@ public class SocialuniUserLikeService {
 
     public void sendLikeUserMsg(String receiveUserId) {
         MessageAddVO msgAddVO = new MessageAddVO();
-        msgAddVO.setReceiveId(receiveUserId);
+        msgAddVO.setChatId(receiveUserId);
         //获取用户的币，获取发送需要的币
         msgAddVO.setContent("你好，在干嘛呢");
         sendMsg(msgAddVO);

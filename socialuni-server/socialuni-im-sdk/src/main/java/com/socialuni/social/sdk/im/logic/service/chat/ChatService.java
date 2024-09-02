@@ -130,69 +130,35 @@ public class ChatService {
     public ResultRO<ChatRO> queryChat(SocialuniChatQueryQO socialuniChatQueryQO) {
         String chatIdStr = socialuniChatQueryQO.getChatId();
 
-        SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidAllowNull(chatIdStr);
+        SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidNotNull(chatIdStr);
 
         //创建 chatUser 的逻辑，点击进入页面，会话页加一条
         //发送消息，还有添加好友成功
 
-        if (socialuniUnionIdModler == null) {
-            SocialuniChatUserDO chatUserDO = getSocialuniChatUserDO(chatIdStr);
+        //私聊
+        if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.user)) {
+            Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+            Integer beUserId = socialuniUnionIdModler.getId();
+
+            //如果用户存在查看会话
+            SocialuniChatUserDO chatUserDO = SocialuniChatUserDOFactory.getOrCreateChatUsersBySingleSendMsg(mineUserId, beUserId).get(0);
+
             ChatRO chatRO = SocialChatROFactory.getChatROByQueryChat(chatUserDO, true);
 
             return ResultRO.success(chatRO);
+        } else if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.chat)) {
+            //则为chatId
+            Integer chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(chatIdStr);
+
+            SocialuniChatDO chatDO = SocialuniRepositoryFacade.findByUnionId(chatId, SocialuniChatDO.class);
+
+            ChatRO chatRO = SocialChatROFactory.getNoLoginChatRO(chatDO);
+
+            return ResultRO.success(chatRO);
         } else {
-            //私聊
-            if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.user)) {
-                Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
-                Integer beUserId = socialuniUnionIdModler.getId();
-
-                //如果用户存在查看会话
-                SocialuniChatUserDO chatUserDO = SocialuniChatUserDOFactory.getOrCreateChatUsersBySingleSendMsg(mineUserId, beUserId).get(0);
-
-                ChatRO chatRO = SocialChatROFactory.getChatROByQueryChat(chatUserDO, true);
-
-                return ResultRO.success(chatRO);
-            } else if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.chat)) {
-                //则为chatId
-                Integer chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(chatIdStr);
-
-                SocialuniChatDO chatDO = SocialuniRepositoryFacade.findByUnionId(chatId, SocialuniChatDO.class);
-
-                ChatRO chatRO = SocialChatROFactory.getNoLoginChatRO(chatDO);
-
-                return ResultRO.success(chatRO);
-            } else {
-                throw new SocialParamsException("错误的会话标识");
-            }
-        }
-    }
-
-    public SocialuniChatUserDO getSocialuniChatUserDO(String chatIdStr) {
-        Integer unionId;
-        try {
-            unionId = Integer.valueOf(chatIdStr);
-        } catch (Exception e) {
             throw new SocialParamsException("错误的会话标识");
         }
-        SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findById(unionId);
-        if (chatUserDO == null) {
-            throw new SocialParamsException("不存在会话信息1");
-        }
-        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
-
-        if (!mineUser.getUserId().equals(chatUserDO.getUserId())) {
-            //如果为自己或者为系统
-            //为私聊相关校验
-            //后端区分这个值是群聊还是私聊。
-            if (!UserType.system.equals(mineUser.getType())) {
-                throw new SocialParamsException("不存在的会话信息2");
-            }
-        }
-        return chatUserDO;
     }
-
-    @Resource
-    SocialuniChatUserManage socialuniChatUserManage;
 
     @Resource
     SocialuniChatEntity socialuniChatEntity;

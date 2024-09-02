@@ -319,19 +319,11 @@ public class SocialuniMusicRoomController {
     //更新房间的播放信息
     @PostMapping("updateRoomPlayerInfo/{roomId}")
     public ResultRO<SocialuniMusicRoomInfoRO> updateRoomPlayInfo(@PathVariable("roomId") @Valid @NotBlank String roomId, @RequestBody @Valid SocialuniPlayMusicQO playMusicQO) {
-        if (StringUtils.isEmpty(roomId)) {
-            throw new SocialBusinessException("房间信息为空");
-        }
-
-        Integer chatId = SocialuniUnionIdFacede.getUnionIdByUuidAllowNull(roomId);
-
         //创建 chatUser 的逻辑，点击进入页面，会话页加一条
         //发送消息，还有添加好友成功
 
-        if (chatId == null) {
-            SocialuniChatUserDO chatUserDO = chatService.getSocialuniChatUserDO(roomId);
-            chatId = chatUserDO.getChatId();
-        }
+        Integer chatId = SocialuniChatDOUtil.getChatId(roomId);
+
         Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
 
         socialuniMusicOperateCheck.checkRoleId(chatId, mineUserId);

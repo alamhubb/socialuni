@@ -136,7 +136,7 @@ public class SocialChatROFactory {
     public static ChatRO getChatROByUserLogin(SocialuniChatUserDO chatUserDO) {
         SocialuniChatDO chat = chatRepository.findFirstByUnionId(chatUserDO.getChatId());
         ChatRO chatRO = SocialChatROFactory.getGroupChatRO(chat);
-        chatRO.setId(chatUserDO.getId().toString());
+//        chatRO.setId(chatUserDO.getId().toString());
         //暂时不支持删除系统群聊
         //不使用chatUserDO的id是因为 推送message时，需要赋值chatVoId，此时获取chatUserDO的id比较麻烦。每次推送都要读一次数据库，不如在操作chatUser时读取一次好
         //可以使用了是因为，解决了notifyvo获取chatUserId的问题
@@ -150,7 +150,7 @@ public class SocialChatROFactory {
             String beUserId = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(receiveUser.getUserId());
 
 
-            chatRO.setId(chatUserDO.getId().toString());
+//            chatRO.setId(chatUserDO.getId().toString());
             chatRO.setNickname(receiveUser.getNickname());
             chatRO.setAvatar(receiveUser.getAvatar());
             chatRO.setReceiveUserId(beUserId);

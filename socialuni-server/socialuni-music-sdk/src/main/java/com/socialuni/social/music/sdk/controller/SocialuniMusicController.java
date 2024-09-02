@@ -26,6 +26,7 @@ import com.socialuni.social.sdk.im.enumeration.NotifyType;
 import com.socialuni.social.sdk.im.logic.check.SocialuniChatUserCheck;
 import com.socialuni.social.sdk.im.logic.service.chat.ChatService;
 import com.socialuni.social.sdk.im.notify.NotifyVO;
+import com.socialuni.social.sdk.im.utils.SocialuniChatDOUtil;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
@@ -33,6 +34,7 @@ import io.agora.media.RtcTokenBuilder2;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -79,36 +81,21 @@ public class SocialuniMusicController {
 
     @Resource
     SocialuniChatRepository chatRepository;
-    @Resource
-    SocialuniChatUserRepository socialuniChatUserRepository;
 
     @GetMapping("getPublicRoomId")
     public ResultRO<String> getPublicRoomId() {
-        //这个朋友如果不登录嗯
-        Integer userId = SocialuniUserUtil.getMineUserIdAllowNull();
-
         List<String> defaultChatGroups = SocialuniAppConfig.getAppConfig().getDefaultChatGroups();
         String groupName = defaultChatGroups.get(0);
         SocialuniChatDO chatDO = chatRepository.findFirstByTypeAndChatName(ChatType.system_group, groupName);
-        if (ObjectUtils.isEmpty(userId)) {
-            String chatId = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(chatDO.getUnionId());
-            return ResultRO.success(chatId);
-        }
-        SocialuniChatUserDO socialuniChatUserDO = socialuniChatUserRepository.findFirstByChatIdAndUserId(chatDO.getUnionId(), userId);
-        return ResultRO.success(socialuniChatUserDO.getId().toString());
+        String chatId = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(chatDO.getUnionId());
+        return ResultRO.success(chatId);
     }
 
 
     @GetMapping("queryMusicRoomPlayerInfo/{channel}")
     public ResultRO<SocialuniMusicRoomInfoRO> queryMusicRoomInfo(@PathVariable("channel") String channel) {
-        Integer chatId  = SocialuniUnionIdFacede.getUnionIdByUuidAllowNull(channel);
+        Integer chatId = SocialuniChatDOUtil.getChatId(channel);
 
-        //创建 chatUser 的逻辑，点击进入页面，会话页加一条
-        //发送消息，还有添加好友成功
-        if (chatId == null) {
-            SocialuniChatUserDO chatUserDO = chatService.getSocialuniChatUserDO(channel);
-            chatId = chatUserDO.getChatId();
-        }
         SocialuniMusicRoomDO socialuniMusicRoomDO = socialuniMusicRoomManage.getOrCreateMusicPlayerDO(chatId);
 
         if (ObjectUtils.isEmpty(socialuniMusicRoomDO.getMusicId())) {
@@ -137,15 +124,7 @@ public class SocialuniMusicController {
 
     @GetMapping("queryMusicRoomUserInfo/{channel}")
     public ResultRO<SocialuniMusicRoomUserInfoRO> queryMusicRoomUserInfo(@PathVariable("channel") @Valid @NotBlank String channel) {
-        Integer chatId  = SocialuniUnionIdFacede.getUnionIdByUuidAllowNull(channel);
-
-        //创建 chatUser 的逻辑，点击进入页面，会话页加一条
-        //发送消息，还有添加好友成功
-
-        if (chatId == null) {
-            SocialuniChatUserDO chatUserDO = chatService.getSocialuniChatUserDO(channel);
-            chatId = chatUserDO.getChatId();
-        }
+        Integer chatId = SocialuniChatDOUtil.getChatId(channel);
 
         Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
 
@@ -342,15 +321,8 @@ public class SocialuniMusicController {
             throw new SocialBusinessException("房间信息为空");
         }
 
-        Integer chatId  = SocialuniUnionIdFacede.getUnionIdByUuidAllowNull(channel);
-
-        //创建 chatUser 的逻辑，点击进入页面，会话页加一条
-        //发送消息，还有添加好友成功
-
-        if (chatId == null) {
-            SocialuniChatUserDO chatUserDO = chatService.getSocialuniChatUserDO(channel);
-            chatId = chatUserDO.getChatId();
-        }
+        Integer chatId = SocialuniChatDOUtil.getChatId(channel);
+        
         Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
 
         socialuniMusicOperateCheck.checkRoleId(chatId, mineUserId);
