@@ -23,7 +23,7 @@ export default class SocialuniLoginService {
     static async deviceUidLogin() {
         const deviceUid = SocialuniDeviceUidUtil.get();
         const {data} = await LoginAPI.deviceUidLoginAPI(deviceUid)
-        SocialuniUserService.loginSuccess(data)
+        SocialuniUserService.loginSuccess(data, true)
         return data.user
     }
 

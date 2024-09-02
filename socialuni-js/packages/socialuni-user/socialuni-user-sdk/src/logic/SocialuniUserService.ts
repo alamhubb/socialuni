@@ -5,8 +5,12 @@ import SocialLoginRO from "socialuni-api-base/src/model/social/SocialLoginRO";
 import SocialuniUserRO from "socialuni-api-base/src/model/user/SocialuniUserRO";
 
 export default class SocialuniUserService {
-    static loginSuccess(userRO: SocialLoginRO<SocialuniUserRO>) {
-        QingAppUtil.ToastUtil.success('登录成功')
+    static loginSuccess(userRO: SocialLoginRO<SocialuniUserRO>, tempFlag = false) {
+        if (tempFlag) {
+            QingAppUtil.ToastUtil.success('临时用户登录成功')
+        } else {
+            QingAppUtil.ToastUtil.success('登录成功')
+        }
         socialuniUserModule.setUserAndToken(userRO)
         SocialuniUserEventEmit.loginSuccess()
     }
