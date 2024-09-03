@@ -303,7 +303,7 @@ public class SocialChatROFactory {
             if (contentType.equals(SocialuniContentType.user)) {
                 Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
                 Integer beUserId = socialuniUnionIdModler.getId();
-                SocialuniChatUserDO chatUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(mineUserId, beUserId, SocialuniChatUserDO.class);
+                SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findByChatIdAndUserId(mineUserId, beUserId);
 
                 return chatUserDO;
             } else if (contentType.equals(SocialuniContentType.chat)) {

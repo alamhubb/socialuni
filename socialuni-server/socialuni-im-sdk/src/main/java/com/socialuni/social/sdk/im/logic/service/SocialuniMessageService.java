@@ -26,6 +26,7 @@ import com.socialuni.social.sdk.im.logic.foctory.SocialMessageROFactory;
 import com.socialuni.social.sdk.im.logic.manage.SocialuniChatUserManage;
 import com.socialuni.social.sdk.im.logic.service.chat.ChatService;
 import com.socialuni.social.sdk.im.utils.SocialuniChatDOUtil;
+import com.socialuni.social.sdk.im.utils.SocialuniChatUserDOUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import com.socialuni.social.user.sdk.logic.check.SocialuniUserCheck;
@@ -238,7 +239,7 @@ public class SocialuniMessageService {
             Integer beUserId = socialuniUnionIdModler.getId();
 
             //如果用户存在查看会话
-            SocialuniChatUserDO chatUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(mineUserId, beUserId, SocialuniChatUserDO.class);
+            SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findByChatIdAndUserId(mineUserId, beUserId);
             if (chatUserDO == null) {
                 return ResultRO.success(new ArrayList<>());
             }
@@ -280,7 +281,8 @@ public class SocialuniMessageService {
             Integer beUserId = socialuniUnionIdModler.getId();
 
             //如果用户存在查看会话
-            SocialuniChatUserDO chatUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(mineUserId, beUserId, SocialuniChatUserDO.class);
+            SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findByChatIdAndUserId(mineUserId, beUserId);
+
             if (chatUserDO == null) {
                 return ResultRO.success(new ArrayList<>());
             }

@@ -16,6 +16,7 @@ import com.socialuni.social.common.sdk.dao.repository.SocialUserPlatformAccountR
 import com.socialuni.social.sdk.im.notify.NotifyVO;
 import com.socialuni.social.common.sdk.platform.PushMsgDTO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
+import com.socialuni.social.sdk.im.utils.SocialuniChatUserDOUtil;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -143,7 +144,7 @@ public class NotifyDomain {
 
         if (NotifyType.message.equals(notifyType)) {
             SocialuniMessageReceiveDO messageReceiveDO = messageReceiveRepository.getReferenceById(notify.getContentId());
-            SocialuniChatUserDO chatUserDO = SocialuniRepositoryFacade.findById(messageReceiveDO.getChatUserId(), SocialuniChatUserDO.class);
+            SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findById(messageReceiveDO.getChatUserId());
 //                Optional<ChatDO> chatDOOptional = chatRepository.findById();
             //如果群聊，直接发送给两个服务器在线的所有用户，并且查找他们未读的。
             //未登录的时候也查询群聊里面的所有内容

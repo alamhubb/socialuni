@@ -46,7 +46,8 @@ public class SocialuniChatUserDOFactory {
             if (contentType.equals(SocialuniContentType.user)) {
                 Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
                 Integer beUserId = socialuniUnionIdModler.getId();
-                SocialuniChatUserDO chatUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(mineUserId, beUserId, SocialuniChatUserDO.class);
+
+                SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findByChatIdAndUserId(mineUserId, beUserId);
 
                 return chatUserDO;
             } else if (contentType.equals(SocialuniContentType.chat)) {
@@ -67,12 +68,12 @@ public class SocialuniChatUserDOFactory {
     }
 
     public static SocialuniChatUserDO getChatUserDO(Integer userId, Integer beUserId) {
-        return SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(userId, beUserId, SocialuniChatUserDO.class);
+        return SocialuniChatUserDOUtil.findByChatIdAndUserId(userId, beUserId);
     }
 
     public static List<SocialuniChatUserDO> getOrCreateChatUsersBySingleSendMsg(Integer userId, Integer beUserId) {
-        SocialuniChatUserDO chatUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(userId, beUserId, SocialuniChatUserDO.class);
-        SocialuniChatUserDO beChatUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(beUserId, userId, SocialuniChatUserDO.class);
+        SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findByChatIdAndUserId(userId, beUserId);
+        SocialuniChatUserDO beChatUserDO = SocialuniChatUserDOUtil.findByChatIdAndUserId(beUserId, userId);
         if (chatUserDO == null) {
             if (beChatUserDO != null) {
                 throw new SocialSystemException("异常逻辑，非正常存在的会话");
@@ -92,7 +93,7 @@ public class SocialuniChatUserDOFactory {
         SocialuniChatDO chatDO = SocialuniChatDOFactory.getChatIdByCreateByDomainType();
         //会话不存在则创建
         chatUserDO = new SocialuniChatUserDO(chatDO, userId, beUserId);
-        chatUserDO = SocialuniRepositoryFacade.save(chatUserDO);
+        chatUserDO = SocialuniChatUserDOUtil.save(chatUserDO);
 
         //存在自己给自己发消息的情况
         if (!userId.equals(beUserId)) {
@@ -104,12 +105,12 @@ public class SocialuniChatUserDOFactory {
     }
 
     public static SocialuniChatUserDO getOrCreateChatUserBySingleReceiveMsg(SocialuniChatDO chatDO, Integer userId, Integer beUserId) {
-        SocialuniChatUserDO chatUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(userId, beUserId, SocialuniChatUserDO.class);
+        SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findByChatIdAndUserId(userId, beUserId);
         if (chatUserDO == null) {
             //会话不存在则创建
             chatUserDO = new SocialuniChatUserDO(chatDO, userId, beUserId);
 
-            chatUserDO = SocialuniRepositoryFacade.save(chatUserDO);
+            chatUserDO = SocialuniChatUserDOUtil.save(chatUserDO);
         }
         return chatUserDO;
     }
@@ -125,7 +126,7 @@ public class SocialuniChatUserDOFactory {
             }
         }
 
-        chatUserDO = SocialuniRepositoryFacade.save(chatUserDO);
+        chatUserDO = SocialuniChatUserDOUtil.save(chatUserDO);
         return chatUserDO;
     }
 
@@ -135,7 +136,7 @@ public class SocialuniChatUserDOFactory {
 
         chatUserDO.setChatRoleId(SocialuniSysRoleId.owner);
 
-        chatUserDO = SocialuniRepositoryFacade.save(chatUserDO);
+        chatUserDO = SocialuniChatUserDOUtil.save(chatUserDO);
         return chatUserDO;
     }
 }

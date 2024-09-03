@@ -202,7 +202,6 @@ public class ChatService {
     /*public ResultRO<List<ChatRO>> queryChatList() {
 
         Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
-        List<ChatUserDO> list = SocialuniUserRepositoryFacede.findAllByUserIdAndStatus(mineUserId, ChatUserStatus.init, ChatUserDO.class);
 
         List<ChatRO> list1 = list.stream().map(SocialChatROFactory::getChatRO).collect(Collectors.toList());
 
