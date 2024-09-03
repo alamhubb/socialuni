@@ -38,8 +38,9 @@ WebsocketWebRtcUtil.easyWebRTC.ontrack((event) => {
     }
 
     onMessage(notify: NotifyVO) {
-        if (notify.type === NotifyType.userCount) {
-            socialAppModule.onlineUsersCount = notify.data
+        if (notify.type === NotifyType.usersInfo) {
+            socialAppModule.setOnlineUserCount(notify.data.userCount)
+            socialAppModule.setOnlineUsers(notify.data.names)
         }
     }
 

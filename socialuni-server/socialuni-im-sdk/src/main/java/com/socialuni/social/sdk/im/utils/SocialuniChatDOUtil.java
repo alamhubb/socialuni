@@ -49,7 +49,7 @@ public class SocialuniChatDOUtil {
         if (SocialuniContentType.chat.equals(socialuniUnionIdModler.getContentType())) {
             return unionId;
         } else if (SocialuniContentType.user.equals(socialuniUnionIdModler.getContentType())) {
-            SocialuniChatUserDO socialuniChatUserDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(mineUserId, unionId, SocialuniChatUserDO.class);
+            SocialuniChatUserDO socialuniChatUserDO = SocialuniChatUserDOUtil.findByUserIdAndBeUserIdNotNull(mineUserId, unionId);
             return socialuniChatUserDO.getChatId();
         }
         throw new SocialParamsException("错误的会话信息1212");

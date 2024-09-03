@@ -95,13 +95,25 @@
           </a>
         </div>
 
-        <el-button
-            :disabled="viewService.bindBtnDisabled"
-            type="primary"
-            class="w100p mt"
-            @click.native.prevent="viewService.handleLogin()"
-        >{{ viewService.bindBtnDisabled ? '登陆中' : viewService.loginBtnText }}
-        </el-button>
+        <div>
+          <el-button
+              :disabled="viewService.bindBtnDisabled"
+              type="primary"
+              class="w100p mt"
+              @click.native.prevent="viewService.handleLogin()"
+          >{{ viewService.bindBtnDisabled ? '登陆中' : viewService.loginBtnText }}
+          </el-button>
+        </div>
+
+        <div v-if="isH5">
+          <el-button
+              :disabled="viewService.bindBtnDisabled"
+              type="primary"
+              class="w100p mt"
+              @click.native.prevent="viewService.tempUserLoginHandle()"
+          >{{ viewService.bindBtnDisabled ? '登陆中' : '临时用户登录' }}
+          </el-button>
+        </div>
       </el-form>
     </div>
   </div>
@@ -111,6 +123,7 @@
 import {Emit, Component, Vue, toNative} from 'vue-facing-decorator'
 import SocialuniLoginViewService from "socialuni-user-sdk/src/logic/SocialuniLoginViewService";
 import {getCurrentInstance, nextTick} from "vue";
+import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 
 @toNative
 @Component({})
@@ -122,6 +135,10 @@ export default class SocialuniLoginView extends Vue {
   }
 
   viewService: SocialuniLoginViewService = new SocialuniLoginViewService()
+
+  get isH5(){
+    return socialuniSystemModule.isH5
+  }
 
   created() {
     this.viewService.initService(this)

@@ -5,10 +5,27 @@ import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
 
 class SocialAppModule {
     homeSwipers: HomeSwiperVO[] = []
-    onlineUsersCount = 0
+    private _onlineUsersCount = 0
+    private _onlineUsers: string[] = []
     cosHttpPath: string = null
 
-    //app启动的方法
+    get onlineUsersCount(): number {
+        return this._onlineUsersCount;
+    }
+
+    setOnlineUserCount(onlineUsersCount: onlineUsersCount) {
+        this._onlineUsersCount = onlineUsersCount
+    }
+
+    get onlineUsers(): string[] {
+        return this._onlineUsers;
+    }
+
+    setOnlineUsers(value: string[]) {
+        this._onlineUsers = value;
+    }
+
+//app启动的方法
 
     async appLunchAction() {
 

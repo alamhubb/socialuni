@@ -77,12 +77,6 @@ export default class App extends Vue {
     navbar: SUserNavBar
   }
 
-  created() {
-    SocialuniUserEventOn.toLogin(() => {
-      this.$refs.navbar.openLoginDialog()
-    })
-  }
-
   mounted() {
 
   }

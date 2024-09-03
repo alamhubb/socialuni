@@ -63,9 +63,13 @@ public interface SocialuniChatUserRepository extends JpaRepository<SocialuniChat
             evict = {
                     @CacheEvict(cacheNames = ChatUserRedisKey.findChatUserIdsByChatIdAndStatus, key="#socialuniChatUserDO.chatId"),
                     @CacheEvict(cacheNames = ChatUserRedisKey.findByUserIdAndStatusOrderByUpdateTimeDesc, key="#socialuniChatUserDO.userId"),
+                    @CacheEvict(cacheNames = ChatUserRedisKey.findFirstByChatIdAndUserId, key = "#socialuniChatUserDO.chatId+'-'+#socialuniChatUserDO.userId"),
+                    @CacheEvict(cacheNames = ChatUserRedisKey.findFirstByUserIdAndBeUserId, key = "#socialuniChatUserDO.beUserId+'-'+#socialuniChatUserDO.userId"),
             },
             put = {
                     @CachePut(cacheNames = ChatUserRedisKey.findFirstChatUserById, key = "#socialuniChatUserDO.id"),
+                    @CachePut(cacheNames = ChatUserRedisKey.findFirstByChatIdAndUserId, key = "#socialuniChatUserDO.chatId+'-'+#socialuniChatUserDO.userId"),
+                    @CachePut(cacheNames = ChatUserRedisKey.findFirstByUserIdAndBeUserId, key = "#socialuniChatUserDO.userId+'-'+#socialuniChatUserDO.beUserId"),
             }
     )
     default SocialuniChatUserDO savePut(SocialuniChatUserDO socialuniChatUserDO) {

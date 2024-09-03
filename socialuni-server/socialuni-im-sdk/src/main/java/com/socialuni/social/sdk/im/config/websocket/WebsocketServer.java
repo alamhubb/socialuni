@@ -1,14 +1,14 @@
 package com.socialuni.social.sdk.im.config.websocket;
 
 import com.socialuni.social.common.api.utils.NumberUtils;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.utils.RedisUtil;
-import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniChatUserRepository;
-import com.socialuni.social.sdk.im.enumeration.ChatUserStatus;
 import com.socialuni.social.sdk.im.enumeration.NotifyType;
 import com.socialuni.social.sdk.im.notify.NotifyVO;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.logic.domain.SocialuniUserOnlineDomain;
+import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.redis.listener.ChannelTopic;
@@ -21,8 +21,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.security.Principal;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Service
@@ -34,6 +33,7 @@ public class WebsocketServer extends TextWebSocketHandler {
      * 存uid是因为notify里面的user是uid
      */
     public static final ConcurrentHashMap<String, WebSocketSession> onlineUsersSessionMap = new ConcurrentHashMap<>();
+    public static final ConcurrentHashMap<String, String> onlineUsersNamesMap = new ConcurrentHashMap<>();
     private static final ConcurrentHashMap<String, ChannelTopic> onlineUsersChannelTopicMap = new ConcurrentHashMap<>();
     public static final String onlineUsersCountKey = "onlineUsersCount";
 
@@ -60,15 +60,20 @@ public class WebsocketServer extends TextWebSocketHandler {
     }
 
 
-    public static <T> void sendUserCount(Integer userCount) {
-        NotifyVO<Integer> notifyVO = new NotifyVO<>();
-        notifyVO.setType(NotifyType.userCount);
-        notifyVO.setData(userCount);
+    public static <T> void sendUserCount(Integer userCount, List<String> names) {
+        NotifyVO<Map> notifyVO = new NotifyVO<>();
+
+        Map<String, Object> map = new HashMap<>();
+
+        map.put("userCount", userCount);
+        map.put("names", names);
+        notifyVO.setType(NotifyType.usersInfo);
+        notifyVO.setData(map);
         WebsocketServer.sendToAllUsers(notifyVO);
     }
 
     public static <T> void sendToAllUsers(NotifyVO<T> notify) {
-       log.info("fasongle xiaoxi ");
+        log.info("fasongle xiaoxi ");
         //发送给所有在线的群组里面的用户
         for (WebSocketSession userSession : onlineUsersSessionMap.values()) {
             if (userSession != null && userSession.isOpen()) {
@@ -86,7 +91,7 @@ public class WebsocketServer extends TextWebSocketHandler {
      */
     public static <T> void sendToGroupUsers(NotifyVO<T> notify, List<String> userIds) {
         for (String userIdStr : userIds) {
-            WebSocketSession userSession= onlineUsersSessionMap.get(userIdStr);
+            WebSocketSession userSession = onlineUsersSessionMap.get(userIdStr);
             if (userSession != null && userSession.isOpen()) {
                 String sessionUserId = Objects.requireNonNull(userSession.getPrincipal()).getName();
                 //如果发送人是自己则不发送
@@ -157,8 +162,7 @@ public class WebsocketServer extends TextWebSocketHandler {
             log.info("登录成功:{}", user.getName());
             String userId = user.getName();
             //加入set中
-            onlineUsersSessionMap.remove(userId);
-            onlineUsersSessionMap.put(userId, session);
+            this.setOnlineUser(userId, session);
             //在线数加1
             socialuniUserOnlineDomain.userOnline(userId);
             //加入set中
@@ -173,6 +177,22 @@ public class WebsocketServer extends TextWebSocketHandler {
             }
             log.info("用户标识：{}，Session：{}，在线数量：{}", userId, session.toString(), onlineUsersSessionMap.size());
         }
+    }
+
+    private void setOnlineUser(String userId, WebSocketSession session) {
+        onlineUsersSessionMap.remove(userId);
+        onlineUsersSessionMap.put(userId, session);
+
+        SocialuniUserDo mineUser = SocialuniUserUtil.getUserByUuidAllowNull(userId);
+        if (mineUser != null) {
+            onlineUsersNamesMap.remove(userId);
+            onlineUsersNamesMap.put(userId, mineUser.getNickname());
+        }
+    }
+
+    private void removeUser(String userId) {
+        onlineUsersSessionMap.remove(userId);
+        onlineUsersNamesMap.remove(userId);
     }
 
     @Override
@@ -227,7 +247,7 @@ public class WebsocketServer extends TextWebSocketHandler {
             if (user != null && StringUtils.isNotEmpty(user.getName())) {
                 String userId = user.getName();
                 if (onlineUsersSessionMap.containsKey(userId)) {
-                    onlineUsersSessionMap.remove(userId);
+                    this.removeUser(userId);
                     socialuniUserOnlineDomain.userOffline(userId);
                     subOnlineCount();
 //                    redisContainer.removeMessageListener(messageListener, onlineUsersChannelTopicMap.get(userId));
@@ -259,14 +279,18 @@ public class WebsocketServer extends TextWebSocketHandler {
         int newCount = getOnlineCount();
 //        int newCount = onlineUsersCount + 1;
 //        redisUtil.set(WebsocketServer.onlineUsersCountKey, newCount);
-        sendUserCount(newCount);
+
+        List<String> names = new ArrayList<>(onlineUsersNamesMap.values());
+
+        sendUserCount(newCount, names);
     }
 
     public static synchronized void subOnlineCount() {
         int newCount = getOnlineCount();
 //        int newCount = Math.max(onlineUsersCount - 1, 0);
 //        redisUtil.set(WebsocketServer.onlineUsersCountKey, newCount);
-        sendUserCount(newCount);
+        List<String> names = new ArrayList<>(onlineUsersNamesMap.values());
+        sendUserCount(newCount, names);
     }
 
     public static synchronized void subOnlineCount(Integer offlineNum) {

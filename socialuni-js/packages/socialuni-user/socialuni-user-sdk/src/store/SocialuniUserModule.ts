@@ -49,6 +49,7 @@ class SocialuniUserModule {
         if (this.hasToken) {
             await socialuniAppUserModule.getMineUserAction()
         }
+        console.log('chufale')
         WebsocketUtil.createWebsocket()
     }
 

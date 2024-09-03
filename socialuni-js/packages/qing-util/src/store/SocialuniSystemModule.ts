@@ -32,8 +32,6 @@ class SocialuniSystemModule {
         return !this.isMp
     }
 
-    isH5 = false
-
     isMpQQ = false
     isMpWx = false
 
@@ -64,6 +62,9 @@ class SocialuniSystemModule {
     titleHeight = 0
     appVersion = 0
 
+    get isH5(){
+        return !this.isMp && !this.isApp
+    }
 
     constructor() {
         try {
@@ -95,7 +96,6 @@ class SocialuniSystemModule {
                 // #endif
 
                 // #ifdef H5
-                this.isH5 = true
                 this.platform = SocialuniPlatformType.h5
                 // #endif
 

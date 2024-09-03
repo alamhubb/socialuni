@@ -22,12 +22,11 @@ public class NotifyType {
     public static final String remove_chat = "remove_chat";
 
 
-
     //动态
     //兼容之前的内容2个版本以后可以删除，也不一定，删了以前的通知看不了，看看过几个版本吧
     public static final String comment = "comment";
     public static final String music = "music";
-    public static final String userCount = "userCount";
+    public static final String usersInfo = "usersInfo";
     //动态
     public static final String talk_comment = "talk_comment";
     //评论
@@ -39,7 +38,6 @@ public class NotifyType {
 
     //违规
     public static final String violation = "violation_result";
-
 
 
     public static final List<String> comments = Arrays.asList(comment, talk_comment, comment_comment, reply_comment);

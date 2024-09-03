@@ -1,29 +1,29 @@
 <template>
-<!--  <div class="h100p">
-    <q-input v-model="musicSearchText" class="w150" @keydown.enter="searchSongList" @clear="clearSearch"></q-input>
-    {{ searchData }}
-    &lt;!&ndash;    <div>{{ musicRoomId }}</div>&ndash;&gt;
-    &lt;!&ndash;    <div>{{ musicRoomInfo }}</div>&ndash;&gt;
-    &lt;!&ndash;    <music-player ref="musicPlayer" :cur-music-info="musicRoomInfo" :data="songList" :has-operate-auth="true"&ndash;&gt;
-    <music-player ref="musicPlayer" :cur-music-info="musicRoomInfo" :has-operate-auth="true"
-                  @input="musicRoomInfoInput" @change="musicRoomInfoChange" @next="next"></music-player>
-    <div class="flex-row">
-      <div class="flex-1 bd overflow-hidden">
-        <div>热门歌曲</div>
-        <music-list class="h500" :data="hotSongList" @change="hotSongListMusicChange"
-                    :cur-music="musicRoomInfo"></music-list>
+  <!--  <div class="h100p">
+      <q-input v-model="musicSearchText" class="w150" @keydown.enter="searchSongList" @clear="clearSearch"></q-input>
+      {{ searchData }}
+      &lt;!&ndash;    <div>{{ musicRoomId }}</div>&ndash;&gt;
+      &lt;!&ndash;    <div>{{ musicRoomInfo }}</div>&ndash;&gt;
+      &lt;!&ndash;    <music-player ref="musicPlayer" :cur-music-info="musicRoomInfo" :data="songList" :has-operate-auth="true"&ndash;&gt;
+      <music-player ref="musicPlayer" :cur-music-info="musicRoomInfo" :has-operate-auth="true"
+                    @input="musicRoomInfoInput" @change="musicRoomInfoChange" @next="next"></music-player>
+      <div class="flex-row">
+        <div class="flex-1 bd overflow-hidden">
+          <div>热门歌曲</div>
+          <music-list class="h500" :data="hotSongList" @change="hotSongListMusicChange"
+                      :cur-music="musicRoomInfo"></music-list>
+        </div>
+        <div class="flex-1 bd overflow-hidden">
+          <div>房间歌单</div>
+          <music-list class="h500" :data="songList" @change="songListPlayMusic"
+                      :cur-music="musicRoomInfo"></music-list>
+        </div>
       </div>
-      <div class="flex-1 bd overflow-hidden">
-        <div>房间歌单</div>
-        <music-list class="h500" :data="songList" @change="songListPlayMusic"
-                    :cur-music="musicRoomInfo"></music-list>
-      </div>
-    </div>
 
-    &lt;!&ndash;    <music-list class="h500" :data="songList" @change="listMusicChange" :cur-music="hotSongList"></music-list>&ndash;&gt;
-    &lt;!&ndash;    <music-list class="h500" :data="songList" @change="listMusicChange" :cur-music="musicRoomInfo"></music-list>&ndash;&gt;
-    &lt;!&ndash;    <music-list class="h500" :data="songList" @change="listMusicChange" :cur-music="musicRoomInfo"></music-list>&ndash;&gt;
-  </div>-->
+      &lt;!&ndash;    <music-list class="h500" :data="songList" @change="listMusicChange" :cur-music="hotSongList"></music-list>&ndash;&gt;
+      &lt;!&ndash;    <music-list class="h500" :data="songList" @change="listMusicChange" :cur-music="musicRoomInfo"></music-list>&ndash;&gt;
+      &lt;!&ndash;    <music-list class="h500" :data="songList" @change="listMusicChange" :cur-music="musicRoomInfo"></music-list>&ndash;&gt;
+    </div>-->
   <div class="flex-col h100p overflow-hidden color-black">
     <div class="flex-row h100p overflow-hidden">
       <div class="w240 bd-radius shadow h100p flex-none br bg-default">
@@ -37,6 +37,7 @@
         <div class="flex-1 overflow-hidden">
           <music-player class="bb" ref="musicPlayer" :cur-music-info="musicRoomInfo" :has-operate-auth="true"
                         @input="musicRoomInfoInput" @change="musicRoomInfoChange" @next="next"></music-player>
+          <div class="bb row-col-center py-sm px-sm">在线人数（{{ onlineUsersCount }}）：{{onlineUsersNames}}</div>
           <socialuni-msg-view-h5></socialuni-msg-view-h5>
         </div>
         <div>
@@ -76,6 +77,11 @@ export default class SocialuniChatPage extends Vue {
   get onlineUsersCount() {
     return socialAppModule.onlineUsersCount
   }
+
+  get onlineUsersNames() {
+    return socialAppModule.onlineUsers.join(',')
+  }
+
 
   created() {
     this.initRoomId()

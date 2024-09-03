@@ -103,9 +103,12 @@ export default class SUserNavBar extends Vue {
   @Prop() title: string
   @Prop() logo: string
 
-  created(){
+  created() {
     SocialuniUserEventOn.loginSuccess(() => {
       this.$refs.loginDialog.close()
+    })
+    SocialuniUserEventOn.toLogin(() => {
+      this.$refs.loginDialog.open()
     })
   }
 
@@ -119,7 +122,7 @@ export default class SUserNavBar extends Vue {
     SocialuniUserEventEmit.toLogin()
   }
 
-  openLoginDialog(){
+  openLoginDialog() {
     this.$refs.loginDialog.open()
   }
 

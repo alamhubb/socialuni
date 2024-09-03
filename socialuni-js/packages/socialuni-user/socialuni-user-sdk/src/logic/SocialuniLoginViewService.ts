@@ -74,6 +74,22 @@ export default class SocialuniLoginViewService extends SocialuniLoginFormService
         }
     }
 
+    async tempUserLoginHandle() {
+        if (this.bindBtnDisabled) {
+            return QingAppUtil.ToastUtil.warning('正在登陆中，请勿重复点击')
+        }
+        if (!socialuniUserModule.hasUser) {
+            this.checkContractChecked()
+        }
+        if (socialuniUserModule.hasUser) {
+            return QingAppUtil.ToastUtil.warning('用户已登录')
+        }
+        this.bindBtnDisabled = true
+        SocialuniLoginService.deviceUidLogin().finally(() => {
+            this.bindBtnDisabled = false
+        })
+    }
+
     loginAfterHint(msg: string) {
         if (!socialuniAppUserModule.mineUserPhoneNum) {
             msg += '，绑定手机号后才可发布内容'

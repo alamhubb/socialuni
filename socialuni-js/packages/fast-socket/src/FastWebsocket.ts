@@ -84,8 +84,10 @@ export default class FastWebsocket {
             // #endif
         })
         const onClose = ((e) => {
-            console.log('触发了关闭:' + JsonUtil.log(e))
-            this.reConnect()
+            console.log('触发了websocket关闭code:' + e?.code)
+            if (e?.code !== 1000) {
+                this.reConnect()
+            }
         })
 
         const onMessage = (async (res: MessageEvent) => {
@@ -122,7 +124,7 @@ export default class FastWebsocket {
 
     websocketClose() {
         if (this.ws && this.ws.readyState === this.ws.OPEN) {
-            this.ws?.close(null);
+            this.ws?.close(1000)
         }
     }
 }

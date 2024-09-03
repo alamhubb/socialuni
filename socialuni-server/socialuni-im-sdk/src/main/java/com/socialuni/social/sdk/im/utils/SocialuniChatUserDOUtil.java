@@ -32,6 +32,9 @@ public class SocialuniChatUserDOUtil {
 
     public static SocialuniChatUserDO findByChatIdAndUserId(Integer chatId, Integer userId) {
         Integer chatUserId = chatUserRepository.findFirstByChatIdAndUserId(chatId, userId);
+        if (chatUserId == null) {
+            return null;
+        }
         return SocialuniChatUserDOUtil.findById(chatUserId);
     }
 
@@ -45,10 +48,25 @@ public class SocialuniChatUserDOUtil {
 
     public static SocialuniChatUserDO findByUserIdAndBeUserId(Integer userId, Integer beUserId) {
         Integer chatUserId = chatUserRepository.findFirstByUserIdAndBeUserId(userId, beUserId);
+        if (chatUserId == null) {
+            return null;
+        }
         return SocialuniChatUserDOUtil.findById(chatUserId);
+    }
+
+    public static SocialuniChatUserDO findByUserIdAndBeUserIdNotNull(Integer userId, Integer beUserId) {
+        SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findByUserIdAndBeUserId(userId, beUserId);
+        if (chatUserDO == null) {
+            throw new SocialParamsException("会话信息错误100323");
+        }
+        return chatUserDO;
     }
 
     public static SocialuniChatUserDO findById(Integer id) {
         return chatUserRepository.findFirstById(id);
+    }
+
+    public static SocialuniChatUserDO save(SocialuniChatUserDO socialuniChatUserDO) {
+        return chatUserRepository.savePut(socialuniChatUserDO);
     }
 }

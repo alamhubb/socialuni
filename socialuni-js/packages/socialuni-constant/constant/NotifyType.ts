@@ -7,6 +7,6 @@ export default class NotifyType {
   static readonly music: string = 'music'
   // 解除通知
   static readonly remove_chat: string = 'remove_chat'
-  static readonly userCount: string = 'userCount'
+  static readonly usersInfo: string = 'usersInfo'
   static readonly comment: string = 'comment'
 }

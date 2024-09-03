@@ -173,7 +173,6 @@ public class SocialuniUserUtil {
     }*/
 
 
-
     public static List<SocialuniUserDo> getUsers(List<Integer> ids) {
         List<SocialuniUserDo> userDos = new ArrayList<>();
         for (Integer id : ids) {
@@ -185,6 +184,14 @@ public class SocialuniUserUtil {
 
     public static SocialuniUserDo getUserByUuid(String uid) {
         Integer id = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(uid);
+        return SocialuniUserUtil.getUserNotNull(id);
+    }
+
+    public static SocialuniUserDo getUserByUuidAllowNull(String uid) {
+        Integer id = SocialuniUnionIdFacede.getUnionIdByUuidAllowNull(uid);
+        if (id == null) {
+            return null;
+        }
         return SocialuniUserUtil.getUserNotNull(id);
     }
 
