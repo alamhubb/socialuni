@@ -18,29 +18,23 @@ export const constantRoutes = [
         component: SocialuniChatPage,
         meta: {title: '音乐'},
     },
+    /*{
+        path: '/userDetail',
+        name: '用户详情',
+        component: SocialuniUserDetailViewH5,
+        meta: {title: '用户详情'},
+    },
     {
         path: '/123',
         name: '斗兽棋',
         component: BeastChess,
         meta: {title: '斗兽棋'},
-    },
+    },*/
     {
         path: '/talk',
         name: '社区',
         component: SocialuniTalkViewH5,
         meta: {title: '社区'},
-    },
-    {
-        path: '/message',
-        name: '消息',
-        component: SocialuniChatMessageViewH5,
-        meta: {title: '消息'},
-    },
-    {
-        path: '/userDetail',
-        name: '用户详情',
-        component: SocialuniUserDetailViewH5,
-        meta: {title: '用户详情'},
     },
     // {
     //     path: '/home',
