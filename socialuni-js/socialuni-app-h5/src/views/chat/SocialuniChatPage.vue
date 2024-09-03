@@ -34,10 +34,10 @@
         <!--          <vue-drag-resize>-->
         <!--        <music-view class="shadow-bottom"></music-view>-->
         <!--          </vue-drag-resize>-->
+        <music-player class="bb flex-none" ref="musicPlayer" :cur-music-info="musicRoomInfo" :has-operate-auth="true"
+                      @input="musicRoomInfoInput" @change="musicRoomInfoChange" @next="next"></music-player>
+        <div class="bb row-col-center py-sm px-sm flex-none">在线人数（{{ onlineUsersCount }}）：{{onlineUsersNames}}</div>
         <div class="flex-1 overflow-hidden">
-          <music-player class="bb" ref="musicPlayer" :cur-music-info="musicRoomInfo" :has-operate-auth="true"
-                        @input="musicRoomInfoInput" @change="musicRoomInfoChange" @next="next"></music-player>
-          <div class="bb row-col-center py-sm px-sm">在线人数（{{ onlineUsersCount }}）：{{onlineUsersNames}}</div>
           <socialuni-msg-view-h5></socialuni-msg-view-h5>
         </div>
         <div>
