@@ -7,6 +7,7 @@ import ReportAPI from "socialuni-app-api/src/api/ReportAPI";
 import SocialuniDeviceUidUtil from "socialuni-user-sdk/src/util/SocialuniDeviceUidUtil";
 import JsonUtil from "qing-util/src/util/JsonUtil";
 import SocialuniLoginService from "socialuni-user-sdk/src/logic/SocialuniLoginService";
+import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 
 class SocialuniConfigModule {
 
@@ -36,7 +37,9 @@ class SocialuniConfigModule {
             const device = JsonUtil.toJson(deviceObj)
             await SocialuniAppAPI.getDeviceUidAPI({device}).then(res => {
                 SocialuniDeviceUidUtil.set(res.data)
-                SocialuniLoginService.deviceUidLogin()
+                if (socialuniSystemModule.isH5) {
+                    SocialuniLoginService.deviceUidLogin()
+                }
             })
         }
     }
