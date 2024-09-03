@@ -1,24 +1,16 @@
 <template>
-  <div>
+  <div class="h100p flex-col overflow-hidden">
+    <div class="row-between-center px-sm bb h50 flex-none">
+      <div>热门歌曲</div>
 
-
-    <div class="flex-row">
-      <div class="flex-1 overflow-hidden">
-        <div class="row-between-center px-sm py-sm bb">
-          <div>热门歌曲</div>
-
-          <q-input v-model="musicSearchText" class="w150" @keydown.enter="searchSongList"
-                   @clear="clearSearch"></q-input>
-        </div>
-        <music-list v-if="songList.length" class="h500" :data="songList" @change="hotSongListMusicChange"
-                    :cur-music="musicRoomInfo"></music-list>
-
-        <music-list v-else class="h500" :data="hotSongList" @change="hotSongListMusicChange"
-                    :cur-music="musicRoomInfo"></music-list>
-
-
-      </div>
+      <q-input v-model="musicSearchText" class="w150" @keydown.enter="searchSongList"
+               @clear="clearSearch"></q-input>
     </div>
+    <music-list v-if="songList.length" class="flex-1 overflow-hidden" :data="songList" @change="hotSongListMusicChange"
+                :cur-music="musicRoomInfo"></music-list>
+
+    <music-list v-else class="flex-1 overflow-hidden" :data="hotSongList" @change="hotSongListMusicChange"
+                :cur-music="musicRoomInfo"></music-list>
   </div>
 </template>
 
@@ -141,16 +133,12 @@ export default class MusicDialog extends Vue {
     this.hotSongList = songList
   }
 
-  musicRoomInfoInput(musicRoomInfo: MusicPlayerSongPlayingInfoRO) {
-    socialuniMusicStore.setMusicRoomInfo(musicRoomInfo)
-  }
-
   //热门歌曲事件，追加至播放列表
   async hotSongListMusicChange(musicRoomInfo: MusicPlayerSongPlayingInfoRO) {
     console.log('chufale host change')
     const newSongRO = new MusicPlayerSongInfoRO(musicRoomInfo)
     newSongRO.no = this.songList.length + 1
-    this.songList.push(newSongRO)
+    socialuniMusicStore.songList.push(newSongRO)
     await SocialuniMusicAPI.joinSongListAPI(socialuniMusicStore.musicRoomId, musicRoomInfo)
     // this.querySongListNew()
     socialuniMusicStore.querySongList()

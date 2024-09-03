@@ -20,21 +20,23 @@
       append-to-body
       @open="emitOpen"
       @close="dialogClose">
-    <template #title>
-      <slot name="title"></slot>
-    </template>
-
     <!--  自定义区域    -->
     <div :style="{height: height}">
-      <q-scrollbar class="h100p">
-        <div>
-          <slot></slot>
+      <div v-if="!hideHeader" class="row-between-center px-sm h46 bb">
+        <div class="font-18 color-main">
+          <slot name="title">
+            {{ title }}
+          </slot>
         </div>
+        <q-icon class="row-all-center" icon="close" @click="dialogClose"></q-icon>
+      </div>
+      <q-scrollbar class="h100p">
+        <slot></slot>
       </q-scrollbar>
     </div>
 
-    <div
-        class="row-end-center shadow-top index-xs px py-10 mt-mn">
+    <div v-if="!hideFooter"
+         class="row-end-center shadow-top index-xs px py-10 mt-mn">
       <!-- dialog底部自定义弹框区域 -->
       <slot name="dialogFooter"></slot>
       <!--   不显示确定的时候，取消按钮改名为关闭-->
@@ -61,16 +63,27 @@
 import {Component, Prop, Vue, toNative} from 'vue-facing-decorator'
 import QScrollbar from "./QScrollbar.vue";
 import QPageFooter from "./QPageFooter.vue";
+import QIcon from "qingjs-ui/src/components/QIcon.vue";
 
 @toNative
 @Component({
-  components: {QScrollbar, QPageFooter}
+  components: {QScrollbar, QPageFooter, QIcon}
 })
 export default class QDialog extends Vue {
   @Prop({
     type: Boolean,
     default: false
   }) noDebounce: boolean
+
+  @Prop({
+    type: Boolean,
+    default: false
+  }) hideFooter: boolean
+
+  @Prop({
+    type: Boolean,
+    default: false
+  }) hideHeader: boolean
   @Prop({
     type: Boolean,
     default: false
@@ -107,6 +120,11 @@ export default class QDialog extends Vue {
     type: String,
     default: '确 定'
   }) confirmText: string
+
+  @Prop({
+    type: String,
+    default: ''
+  }) title: string
   @Prop({
     type: String,
     default: '取 消'
@@ -134,6 +152,7 @@ export default class QDialog extends Vue {
     this.dialogVisible = true
     this.modifyVisible()
   }
+
   clearValidate() {
     this.$nextTick(() => {
       if (this.$slots.default && this.$slots.default[0] && this.$slots.default[0].componentInstance && this.$slots.default[0].componentInstance.clearValidate) {
@@ -142,19 +161,23 @@ export default class QDialog extends Vue {
       }
     })
   }
+
   close() {
     this.isBtnClose = true
     this.dialogVisible = false
     this.modifyVisible()
   }
+
   modifyVisible() {
     this.$emit('update:visible', this.dialogVisible)
   }
+
   confirmAfter() {
     if (this.autoClose) {
       this.close()
     }
   }
+
   // 关闭弹窗并且执行取消
   // dialog取消按钮事件
   dialogCancel() {
@@ -163,6 +186,7 @@ export default class QDialog extends Vue {
     }
     this.$emit('cancel')
   }
+
   confirmMethod() {
     if (this.confirm) {
       return async () => {
@@ -195,6 +219,7 @@ export default class QDialog extends Vue {
     }
     return null
   }
+
   // dialog 确定事件
   dialogConfirm() {
     this.$emit('confirm')
@@ -202,6 +227,7 @@ export default class QDialog extends Vue {
     //   this.close()
     // }
   }
+
   // 此方法仅内部使用,仅为右上角关闭弹窗时调用，关闭弹窗时触发， 需要判断你是不是自定义按钮的触发，还是右上角关闭的触发，右上角关闭触发则触发取消事件
   dialogClose() {
     if (this.isBtnClose) {

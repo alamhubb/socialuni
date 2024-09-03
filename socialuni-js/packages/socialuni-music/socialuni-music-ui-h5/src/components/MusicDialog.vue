@@ -1,21 +1,10 @@
 <template>
-  <q-dialog ref="musicDialog" title="我的音乐">
-    <div class="h100p">
-      <div class="flex-row">
-        <div class="flex-1 bd overflow-hidden">
-          <music-discover></music-discover>
-        </div>
-        <div class="flex-1 bd overflow-hidden">
-          <div>房间歌单</div>
-          <music-list class="h500" :data="songList" @change="songListPlayMusic"
-                      :cur-music="musicRoomInfo"></music-list>
-        </div>
-      </div>
+  <q-dialog ref="musicDialog" title="鹿森音乐" width="1000px" hide-footer :show-close="false">
+    <div class="flex-row h100p overflow-hidden">
+      <music-discover class="h100p flex-1 overflow-hidden br"></music-discover>
+      <music-playing-list class="h100p flex-1 overflow-hidden"></music-playing-list>
     </div>
-
   </q-dialog>
-
-
 </template>
 
 <script lang="ts">
@@ -35,10 +24,11 @@ import QInput from "qingjs-ui/src/components/QInput.vue";
 import {socialAppModule} from "socialuni-app-sdk/src/store/SocialAppModule.ts";
 import QDialog from "qingjs-ui-h5/src/components/QDialog.vue";
 import MusicDiscover from "./MusicDiscover.vue";
+import MusicPlayingList from "./MusicPlayingList.vue";
 
 @toNative
 @Component({
-  components: {MusicDiscover, QDialog, QInput, SocialuniChatViewH5, SocialuniMsgViewH5, MusicList}
+  components: {MusicPlayingList, MusicDiscover, QDialog, QInput, SocialuniChatViewH5, SocialuniMsgViewH5, MusicList}
 })
 export default class MusicDialog extends Vue {
   $refs: {

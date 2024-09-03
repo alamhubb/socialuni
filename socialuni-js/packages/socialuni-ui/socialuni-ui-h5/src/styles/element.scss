@@ -1,3 +1,11 @@
 .el-dialog {
   margin: var(--el-dialog-margin-top, 15vh) auto 10px;
 }
+
+.el-dialog__header {
+  display: none;
+}
+
+.el-scrollbar__view {
+  height: 100%;
+}

@@ -1,7 +1,6 @@
 <template>
-  <div>
+  <div class="h100p">
     <el-table ref="table" height="100%" :data="data" @row-dblclick="rowDbClick" :highlight-current-row="highlight">
-      <el-table-column prop="no" label="序号" width="100"/>
       <el-table-column prop="musicName" label="歌曲名" width="180"/>
       <el-table-column prop="author" label="歌手" width="180"/>
       <el-table-column prop="musicTime" label="时长">
