@@ -20,7 +20,7 @@ public class SnowflakeIdComponent {
     @Value("${socialuni.app.data-center-id:1}")
     public void setSnowflake(long datacenterId) {
         // mac地址   和   设置的中心服务器。
-        this.snowflake = new Snowflake( IdUtil.getDataCenterId( -1L ^ (-1L << 5l)), datacenterId );
+        this.snowflake = new Snowflake( IdUtil.getDataCenterId(~(-1L << 5L)), datacenterId );
     }
 
     public long getWorkerId(long id) {
