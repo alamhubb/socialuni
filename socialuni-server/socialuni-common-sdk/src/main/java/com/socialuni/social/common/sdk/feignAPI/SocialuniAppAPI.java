@@ -2,6 +2,10 @@ package com.socialuni.social.common.sdk.feignAPI;
 
 
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.common.api.utils.RequestUtil;
+import com.socialuni.social.common.api.utils.UUIDUtil;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniDeviceDO;
+import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.common.sdk.model.RO.SocialuniTalkTabRO;
 import com.socialuni.social.common.sdk.model.SocialAppLaunchDataRO;
 import com.socialuni.social.common.sdk.model.SocialuniGetAppInitDataQO;
@@ -12,6 +16,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -35,5 +40,9 @@ public interface SocialuniAppAPI {
 
     @PostMapping("sendErrorLog")
     ResultRO<Void> sendErrorLog(@RequestBody FrontErrorLogVO frontErrorLogVO);
+
+
+    @PostMapping("getDeviceUid")
+    ResultRO<String> getDeviceUid(@RequestBody @NotNull SocialuniGetAppInitDataQO deviceUidQO);
 }
 

@@ -240,7 +240,7 @@ public class WxUtil {
         String bodystr = "qingchiapp";
         map.put("body", bodystr);
         map.put("mch_id", getWx_merchant_id());
-        String nonce_strstr = UUIDUtil.getUUID();
+        String nonce_strstr = UUIDUtil.getSnowflakeId();
         map.put("nonce_str", nonce_strstr);
         map.put("notify_url", WxConst.wx_pay_result_notify_url);
 

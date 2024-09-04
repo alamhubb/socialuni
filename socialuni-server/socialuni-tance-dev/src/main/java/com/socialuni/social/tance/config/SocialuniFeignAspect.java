@@ -51,7 +51,7 @@ public class SocialuniFeignAspect {
         // 获取目标类实现的接口
         Class<?>[] interfaces = targetClass.getInterfaces();
 
-        System.out.println("目标类实现的接口: " + Arrays.toString(interfaces));
+       /* System.out.println("目标类实现的接口: " + Arrays.toString(interfaces));
 
         String feignTypeName = "org.springframework.cloud.openfeign.FeignClient";
 
@@ -65,7 +65,7 @@ public class SocialuniFeignAspect {
                     System.out.println("  " + annotation.getClass().getName());
                 }
             }
-        }
+        }*/
 
         // 执行目标方法
         Object result = joinPoint.proceed();

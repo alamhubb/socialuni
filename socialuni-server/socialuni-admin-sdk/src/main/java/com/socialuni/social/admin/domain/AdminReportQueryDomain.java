@@ -49,7 +49,7 @@ public class AdminReportQueryDomain {
         }
         List<ReportRO> reportVOS = ReportDOs.stream().map(ReportRO::new).collect(Collectors.toList());
 
-        List<SocialuniTalkHasUnderageImgAuditDO> list = talkAdultImgAuditRepository.findTop20ByStatusAndDevIdOrderByIdAsc(ContentStatus.preAudit, DevAccountFacade.getDevIdNotNull());
+        List<SocialuniTalkHasUnderageImgAuditDO> list = talkAdultImgAuditRepository.findTop20ByStatusAndDevIdOrderByIdAsc(ContentStatus.preAudit, DevAccountFacade.getDevIdNullElseCenterDevId());
 
         List<ReportRO> reportVOS1 = list.stream().map(ReportRO::new).collect(Collectors.toList());
 

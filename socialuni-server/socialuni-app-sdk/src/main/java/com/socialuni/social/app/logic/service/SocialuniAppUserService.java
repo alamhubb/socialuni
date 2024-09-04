@@ -7,6 +7,7 @@ import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserDetailRO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
+import com.socialuni.social.tance.sdk.constant.SocialuniDevConfig;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class SocialuniAppUserService {
 
 
     public ResultRO<SocialuniUserDetailRO> queryUserDetail(String userId) {
-        if (SocialuniSystemConst.hasCenterServer()) {
+        if (SocialuniDevConfig.hasCenterServer()) {
             return socialuniAppUserAPI.queryUserDetail(userId);
         } else {
             SocialuniUserDetailRO userDetailRO;

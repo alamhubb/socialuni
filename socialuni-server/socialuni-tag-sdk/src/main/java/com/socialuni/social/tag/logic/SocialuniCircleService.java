@@ -19,6 +19,7 @@ import com.socialuni.social.common.api.constant.GenderType;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.tag.util.SocialuniCircleDOUtil;
+import com.socialuni.social.tance.sdk.constant.SocialuniDevConfig;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
@@ -44,20 +45,20 @@ public class SocialuniCircleService {
     private SocialuniUnionIdFacede socialuniUnionIdFacede;
 
     public ResultRO<SocialCircleRO> createCircle(CircleCreateQO circleCreateQO, SocialuniUserDo user) {
-        SocialuniCircleDO circleDO = new SocialuniCircleDO(circleCreateQO.getCircleName(), circleCreateQO.getCircleDesc(), DevAccountFacade.getDevIdNotNull(), user.getUserId());
+        SocialuniCircleDO circleDO = new SocialuniCircleDO(circleCreateQO.getCircleName(), circleCreateQO.getCircleDesc(), DevAccountFacade.getDevIdNullElseCenterDevId(), user.getUserId());
         circleDO = socialCircleApi.savePut(circleDO);
         return new ResultRO<>(SocialCircleROFactory.getCircleRO(circleDO));
     }
 
     public ResultRO<SocialCircleRO> createCircle(CircleCreateQO circleCreateQO) {
 
-        SocialuniCircleDO circleDO = new SocialuniCircleDO(circleCreateQO.getCircleName(), circleCreateQO.getCircleDesc(), DevAccountFacade.getDevIdNotNull(), SocialuniUserUtil.getMineUserNotNull().getUserId());
+        SocialuniCircleDO circleDO = new SocialuniCircleDO(circleCreateQO.getCircleName(), circleCreateQO.getCircleDesc(), DevAccountFacade.getDevIdNullElseCenterDevId(), SocialuniUserUtil.getMineUserNotNull().getUserId());
         circleDO = socialCircleApi.savePut(circleDO);
 
         ResultRO<SocialCircleRO> resultRO = new ResultRO<>(SocialCircleROFactory.getCircleRO(circleDO));
 
         //如果应用，则调用中心
-        if (SocialuniSystemConst.hasCenterServer()) {
+        if (SocialuniDevConfig.hasCenterServer()) {
             resultRO = socialuniCircleAPI.createCircle(circleCreateQO);
         }
         return resultRO;
@@ -65,7 +66,7 @@ public class SocialuniCircleService {
 
     //创建圈子群聊
     public ResultRO<String> createCircleChat(CircleChatCreateQO circleCreateQO) {
-        Integer devId = DevAccountFacade.getDevIdNotNull();
+        Integer devId = DevAccountFacade.getDevIdNullElseCenterDevId();
         String tabName = circleCreateQO.getCircleName();
         SocialuniCircleDO socialuniCircleDO = SocialuniCircleDOUtil.getCircleEnableNotNull(tabName);
         //获取groupId
@@ -103,21 +104,21 @@ public class SocialuniCircleService {
 
     public ResultRO<List<SocialCircleRO>> queryHotCircles() {
         //如果应用，则调用中心
-        if (SocialuniSystemConst.hasCenterServer()) {
+        if (SocialuniDevConfig.hasCenterServer()) {
             return socialuniCircleAPI.queryHotCircles();
         }
         return ResultRO.success(socialCircleRedis.getHotCirclesRedis(GenderType.all));
     }
 
     public ResultRO<List<CircleTypeRO>> queryCircleTypes() {
-        if (SocialuniSystemConst.hasCenterServer()) {
+        if (SocialuniDevConfig.hasCenterServer()) {
             return socialuniCircleAPI.queryCircleTypes();
         }
         return ResultRO.success(socialCircleRedis.getAllCircleTypesRedis(GenderType.all));
     }
 
     public ResultRO<List<CircleTypeRO>> queryHotCircleTypes() {
-        if (SocialuniSystemConst.hasCenterServer()) {
+        if (SocialuniDevConfig.hasCenterServer()) {
             return socialuniCircleAPI.queryHotCircleTypes();
         }
         List<CircleTypeRO> list = socialCircleRedis.getHotCircleTypesRedis(GenderType.all);

@@ -3,6 +3,7 @@ package com.socialuni.social.user.sdk.controller;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
+import com.socialuni.social.tance.sdk.constant.SocialuniDevConfig;
 import com.socialuni.social.user.sdk.api.user.SocialuniMineUserAPI;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.user.sdk.dao.utils.SocialuniUserExtendFriendLogDOUtil;
@@ -26,7 +27,7 @@ public class SocialuniMineUserService {
 
     public ResultRO<SocialuniUserRO> getMineUser() {
         SocialuniUserRO mineUserDetailRO;
-        if (SocialuniSystemConst.hasCenterServer()) {
+        if (SocialuniDevConfig.hasCenterServer()) {
             ResultRO<SocialuniUserRO> resultRO = socialuniMineUserAPI.getMineUser();
             mineUserDetailRO = new SocialuniUserRO(resultRO.getData());
         } else {
@@ -44,7 +45,7 @@ public class SocialuniMineUserService {
 
         SocialuniUserRO socialMineUserDetailRO = SocialuniUserROFactory.getMineUserRO(mineUser);
 
-        if (SocialuniSystemConst.hasCenterServer()) {
+        if (SocialuniDevConfig.hasCenterServer()) {
             return socialuniMineUserAPI.editUser(socialUserEditQO);
         }
 
@@ -58,7 +59,7 @@ public class SocialuniMineUserService {
 
         SocialuniUserRO socialMineUserDetailRO = socialEditUserDomain.randomUserAvatar(mineUser);
 
-        if (SocialuniSystemConst.hasCenterServer()) {
+        if (SocialuniDevConfig.hasCenterServer()) {
             return socialuniMineUserAPI.randomUserAvatar();
         }
 
@@ -71,7 +72,7 @@ public class SocialuniMineUserService {
 
         SocialuniUserRO socialMineUserDetailRO = socialEditUserDomain.addUserAvatarImg(socialUserImgAddQO, mineUser);
 
-        if (SocialuniSystemConst.hasCenterServer()) {
+        if (SocialuniDevConfig.hasCenterServer()) {
             return socialuniMineUserAPI.addUserAvatarImg(socialUserImgAddQO);
         }
 

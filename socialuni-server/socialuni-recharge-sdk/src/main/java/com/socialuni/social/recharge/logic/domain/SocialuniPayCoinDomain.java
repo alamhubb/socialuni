@@ -139,7 +139,7 @@ public class SocialuniPayCoinDomain {
             log.info("payTYpe:{}", payType);
             if (SocialuniPayProviderType.wx.equals(payType)) {
                 prepay_id = WxUtil.postPayUrl(platform, userIp, orderNo, total_feeStr, user.getUserId());
-                String nonceStr = UUIDUtil.getUUID();
+                String nonceStr = UUIDUtil.getSnowflakeId();
                 String dateStr = Long.toString(new Date().getTime() / DateTimeType.second);
                 if (PlatformType.mp.equals(platform)) {
                     packageStr = "prepay_id=" + prepay_id;

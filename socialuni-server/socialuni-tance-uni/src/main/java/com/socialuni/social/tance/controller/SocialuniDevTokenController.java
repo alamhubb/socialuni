@@ -1,7 +1,6 @@
 package com.socialuni.social.tance.controller;
 
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.common.api.utils.SocialTokenFacade;
 import com.socialuni.social.common.api.utils.UUIDUtil;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.tance.model.DO.SocialuniDevTokenDO;
@@ -16,7 +15,7 @@ public class SocialuniDevTokenController implements SocialuniDevTokenAPI {
     public ResultRO<String> getAuthToken(String devSecretKey) {
         DevAccountModel devAccountModel = DevAccountFacade.getDevAccountBySecretKeyNotNull(devSecretKey);
 
-        String token = UUIDUtil.getUUID();
+        String token = UUIDUtil.getSnowflakeId();
 
         SocialuniDevTokenDO socialuniDevTokenDO = new SocialuniDevTokenDO(token);
 

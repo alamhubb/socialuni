@@ -5,6 +5,7 @@ import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserImgRO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
+import com.socialuni.social.tance.sdk.constant.SocialuniDevConfig;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.userImg.api.SocialuniUserImgAPI;
@@ -33,7 +34,7 @@ public class SocialuniUserImgService {
 
         socialAddUserImgDomain.addUserImg(socialUserImgAddQO, mineUser);
 
-        if (SocialuniSystemConst.hasCenterServer()) {
+        if (SocialuniDevConfig.hasCenterServer()) {
             return socialuniUserImgAPI.addUserImg(socialUserImgAddQO);
         }
 
@@ -46,7 +47,7 @@ public class SocialuniUserImgService {
         Integer userImgId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(centerUserImgDeleteQO.getUserImgId());
 
         socialDeleteUserImgDomain.deleteUserImg(new SocialUserImgDeleteQO(userImgId), mineUser);
-        if (SocialuniSystemConst.hasCenterServer()) {
+        if (SocialuniDevConfig.hasCenterServer()) {
             return socialuniUserImgAPI.deleteUserImg(centerUserImgDeleteQO);
         }
 

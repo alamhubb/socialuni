@@ -31,4 +31,7 @@ public interface SocialuniLoginAPI {
 
     @PostMapping("phonePasswordLogin")
     ResultRO<SocialLoginRO<SocialuniUserRO>> phonePasswordLogin(@RequestBody @Valid SocialPhoneAuthCodePasswordQO socialPhoneNumQO);
+
+    @PostMapping("deviceUidLogin")
+    ResultRO<SocialLoginRO<SocialuniUserRO>> deviceUidLogin(@RequestBody @Valid SocialuniDeviceUidLoginQO socialuniDeviceUidLoginQO);
 }

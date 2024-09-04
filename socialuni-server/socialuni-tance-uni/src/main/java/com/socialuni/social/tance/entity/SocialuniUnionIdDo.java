@@ -23,6 +23,8 @@ public class SocialuniUnionIdDo extends SocialuniUnionIdModler {
     private String contentType;
     @Column(nullable = false)
     private String uuid;
+    @Column(nullable = false)
+    private Long unionIdqqq;
     //数据所属权
 //    private Integer belongDevId;
     //数据来源方
@@ -31,4 +33,8 @@ public class SocialuniUnionIdDo extends SocialuniUnionIdModler {
     //数据所有方
     //主要是不想泄露真实id，所以用的其他id
 
+
+    public Long getUnionIdqqq() {
+        return this.unionIdqqq;
+    }
 }

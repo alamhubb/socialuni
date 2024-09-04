@@ -4,7 +4,6 @@ package com.socialuni.social.sdk.im.logic.foctory;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.sdk.constant.LoadMoreType;
-import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
 import com.socialuni.social.sdk.im.enumeration.ChatStatus;
@@ -302,7 +301,7 @@ public class SocialChatROFactory {
             //私聊
             if (contentType.equals(SocialuniContentType.user)) {
                 Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
-                Integer beUserId = socialuniUnionIdModler.getId();
+                Integer beUserId = socialuniUnionIdModler.getUnionIdqqq();
                 SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findByChatIdAndUserId(mineUserId, beUserId);
 
                 return chatUserDO;
@@ -317,7 +316,7 @@ public class SocialChatROFactory {
         SocialuniChatUserDO socialuniChatUserDO = getSingleChatUser(chatId);
         if (socialuniChatUserDO == null) {
             SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidNotNull(chatId);
-            return socialuniUnionIdModler.getId();
+            return socialuniUnionIdModler.getUnionIdqqq();
         }
         return socialuniChatUserDO.getChatId();
     }

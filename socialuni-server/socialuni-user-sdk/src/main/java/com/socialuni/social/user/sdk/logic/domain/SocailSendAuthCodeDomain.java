@@ -114,7 +114,7 @@ public class SocailSendAuthCodeDomain {
         this.sendAuthCodeCheck(phoneNum, mineUser, userIp);
 
 
-        AuthenticationDO authenticationDO = new AuthenticationDO(SocialuniUserUtil.getMineUserIdAllowNull(mineUser), phoneNum, null, userIp, DevAccountFacade.getDevIdNotNull());
+        AuthenticationDO authenticationDO = new AuthenticationDO(SocialuniUserUtil.getMineUserIdAllowNull(mineUser), phoneNum, null, userIp, DevAccountFacade.getDevIdNullElseCenterDevId());
         authenticationDO.setStatus(ConstStatus.fail);
         authRepository.save(authenticationDO);
 

@@ -5,6 +5,7 @@ import com.socialuni.social.common.sdk.feignAPI.community.SocialuniHugAPI;
 import com.socialuni.social.sdk.logic.service.SocialuniHugService;
 import com.socialuni.social.community.sdk.model.QO.SocialuniHugAddQO;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
+import com.socialuni.social.tance.sdk.constant.SocialuniDevConfig;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +23,7 @@ public class SocialuniHugController implements SocialuniHugAPI {
     public ResultRO<Void> addHug(SocialuniHugAddQO socialHugAddQO) {
         centerHugAPIImpl.addHug(socialHugAddQO);
         //如果应用，则调用中心
-        if (SocialuniSystemConst.hasCenterServer()) {
+        if (SocialuniDevConfig.hasCenterServer()) {
             return socialuniHugAPI.addHug(socialHugAddQO);
         }
         return new ResultRO<>();

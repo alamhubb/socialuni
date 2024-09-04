@@ -37,7 +37,7 @@ public class SocialuniAppConfig {
      * @return
      */
     public static SocialuniAppConfigBO getAppConfig() {
-        Integer devId = DevAccountFacade.getDevIdNotNull();
+        Integer devId = DevAccountFacade.getDevIdNullElseCenterDevId();
         SocialuniAppConfigBO appConfig = socialuniAppConfigInfoInterface.getAppConfig(devId);
         return appConfig;
     }
@@ -46,7 +46,7 @@ public class SocialuniAppConfig {
      * @return
      */
     public static SocialuniAppMoreConfigBO getAppMoreConfig() {
-        Integer devId = DevAccountFacade.getDevIdNotNull();
+        Integer devId = DevAccountFacade.getDevIdNullElseCenterDevId();
         SocialuniAppMoreConfigBO appConfig = socialuniAppConfigInfoInterface.getAppMoreConfig(devId);
         return appConfig;
 //        ConfigInterface configApi = SpringUtil.getBean(ConfigInterface.class);

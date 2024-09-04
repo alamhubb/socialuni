@@ -16,7 +16,7 @@ public class SocialUserPhoneRedis {
 
     public SocialUserPhoneDo findByPhoneNum(String phoneNum) {
 //        return socialUserPhoneRepository.findByPhoneNumAndStatus(phoneNum, CommonStatus.enable);
-        return socialUserPhoneApi.findByPhoneNumAndDevId(phoneNum, DevAccountFacade.getDevIdNotNull());
+        return socialUserPhoneApi.findByPhoneNumAndDevId(phoneNum, DevAccountFacade.getDevIdNullElseCenterDevId());
     }
 
     @Cacheable(cacheNames = CommonRedisKey.findUserPhoneByUserId, key = "#userId")

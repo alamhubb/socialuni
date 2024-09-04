@@ -37,7 +37,7 @@ public class SocialuniCommentDOUtil {
         }
         SocialuniCommentDO commentDO = commentApi.findOneByUnionId(unionId);
         if (commentDO == null) {
-            if (Objects.equals(DevAccountFacade.getDevIdNotNull(), uniContentUnionIdDO.getFromDevId())) {
+            if (Objects.equals(DevAccountFacade.getDevIdNullElseCenterDevId(), uniContentUnionIdDO.getFromDevId())) {
                 throw new SocialSystemException("评论丢失了，请联系客服");
             }
         }

@@ -47,7 +47,7 @@ public class TalkQueryStore {
     private TalkRepository talkRepository;
 
     public List<SocialuniTalkDO> queryStickTalks() {
-        List<SocialuniTalkDO> list = talkRepository.findTop2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc(ContentStatus.enable, DevAccountFacade.getDevIdNotNull(), SocialuniConst.initNum);
+        List<SocialuniTalkDO> list = talkRepository.findTop2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc(ContentStatus.enable, DevAccountFacade.getDevIdNullElseCenterDevId(), SocialuniConst.initNum);
         //转换为rolist
         return list;
     }
@@ -62,7 +62,7 @@ public class TalkQueryStore {
             list = this.queryStickTalks();
         } else {
             // 如果有内容就连表查询。
-            list = talkRepository.findTop2ByStatusAndDevIdAndGlobalTopGreaterThanAndCircleIdOrderByGlobalTopDesc(ContentStatus.enable, DevAccountFacade.getDevIdNotNull(), SocialuniConst.initNum, circleEnableNotNull.getId());
+            list = talkRepository.findTop2ByStatusAndDevIdAndGlobalTopGreaterThanAndCircleIdOrderByGlobalTopDesc(ContentStatus.enable, DevAccountFacade.getDevIdNullElseCenterDevId(), SocialuniConst.initNum, circleEnableNotNull.getId());
         }
         //转换为rolist
         return list;
@@ -155,7 +155,7 @@ public class TalkQueryStore {
         //测试环境devId
 
         Integer testDevId = DevAccountFacade.getTestDevIdAllNull();
-        Integer devId = DevAccountFacade.getDevIdNotNull();
+        Integer devId = DevAccountFacade.getDevIdNullElseCenterDevId();
 
         //筛选动态
         List<Integer> talkUnionIds = talkMapper.queryTalkIdsByTalkCondition(

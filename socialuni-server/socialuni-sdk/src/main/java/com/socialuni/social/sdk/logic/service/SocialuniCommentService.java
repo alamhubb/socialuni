@@ -10,6 +10,7 @@ import com.socialuni.social.community.sdk.model.QO.comment.SocialuniCommentPostQ
 import com.socialuni.social.community.sdk.model.RO.talk.SocialuniCommentRO;
 import com.socialuni.social.sdk.utils.UniAPIUtils;
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.tance.sdk.constant.SocialuniDevConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +34,7 @@ public class SocialuniCommentService {
         //校验是否触发关键词，如果触发生成举报，修改动态为预审查，只能用户自己可见
         SocialuniCommentRO centerCommentRO = centerCommentPostDomain.postComment(centerCommentPostQO);
         //如果应用，则调用中心
-        if (SocialuniSystemConst.hasCenterServer()) {
+        if (SocialuniDevConfig.hasCenterServer()) {
 //            return null;
             return UniAPIUtils.callUniAPIAndUpdateUid(centerCommentRO, socialuniCommentAPI::postComment, centerCommentPostQO);
         }
@@ -42,7 +43,7 @@ public class SocialuniCommentService {
 
     public ResultRO<Void> deleteComment(SocialuniCommentDeleteQO commentDeleteQO) {
         centerCommentDeleteDomain.deleteComment(commentDeleteQO);
-        if (SocialuniSystemConst.hasCenterServer()) {
+        if (SocialuniDevConfig.hasCenterServer()) {
             return socialuniCommentAPI.deleteComment(commentDeleteQO);
         }
         return new ResultRO<>();

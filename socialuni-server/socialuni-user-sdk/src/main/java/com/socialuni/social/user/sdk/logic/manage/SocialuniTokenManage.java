@@ -25,7 +25,7 @@ public class SocialuniTokenManage {
         SocialuniTokenDO commonUserTokenDO = new SocialuniTokenDO();
         commonUserTokenDO.setToken(token);
         commonUserTokenDO.setUserId(userId);
-        commonUserTokenDO.setDevId(DevAccountFacade.getDevIdNotNull());
+        commonUserTokenDO.setDevId(DevAccountFacade.getDevIdNullElseCenterDevId());
         Date curDate = new Date();
         commonUserTokenDO.setExpiredTime(new Date(curDate.getTime() + DateTimeType.quarter));
 

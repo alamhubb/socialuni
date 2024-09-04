@@ -7,6 +7,7 @@ import com.socialuni.social.common.sdk.model.QO.tag.TagAddQO;
 import com.socialuni.social.tag.logic.SoicialTagAddDomain;
 import com.socialuni.social.tag.model.TagRO;
 import com.socialuni.social.tag.model.TagTypeRO;
+import com.socialuni.social.tance.sdk.constant.SocialuniDevConfig;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.api.constant.GenderType;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
@@ -32,7 +33,7 @@ public class SocialuniTagService {
         TagRO tagRO = soicialTagAddDomain.addTag(mineUser, tagAddQO);
 
         //如果应用，则调用中心
-        if (SocialuniSystemConst.hasCenterServer()) {
+        if (SocialuniDevConfig.hasCenterServer()) {
             return socialuniTagAPI.addTag(tagAddQO);
         }
 
@@ -41,7 +42,7 @@ public class SocialuniTagService {
 
     public ResultRO<List<TagRO>> queryTags() {
         //如果应用，则调用中心
-        if (SocialuniSystemConst.hasCenterServer()) {
+        if (SocialuniDevConfig.hasCenterServer()) {
             return socialuniTagAPI.queryTags();
         }
         List<TagRO> tags = socialTagRedis.getAllTagsRedis(GenderType.all);
@@ -50,7 +51,7 @@ public class SocialuniTagService {
 
     public ResultRO<List<TagRO>> queryHotTags() {
         //如果应用，则调用中心
-        if (SocialuniSystemConst.hasCenterServer()) {
+        if (SocialuniDevConfig.hasCenterServer()) {
             return socialuniTagAPI.queryHotTags();
         }
         List<TagRO> tags = socialTagRedis.getHotTagsRedis(GenderType.all);
@@ -60,7 +61,7 @@ public class SocialuniTagService {
 
     public ResultRO<List<TagTypeRO>> queryTagTypes() {
         //如果应用，则调用中心
-        if (SocialuniSystemConst.hasCenterServer()) {
+        if (SocialuniDevConfig.hasCenterServer()) {
             return socialuniTagAPI.queryTagTypes();
         }
         List<TagTypeRO> tags = socialTagRedis.getAllTageTypesRedis(GenderType.all);
@@ -70,7 +71,7 @@ public class SocialuniTagService {
 
     public ResultRO<List<TagTypeRO>> queryHotTagTypes() {
         //如果应用，则调用中心
-        if (SocialuniSystemConst.hasCenterServer()) {
+        if (SocialuniDevConfig.hasCenterServer()) {
             return socialuniTagAPI.queryHotTagTypes();
         }
         List<TagTypeRO> tags = socialTagRedis.getHotTagTypesRedis(GenderType.all);

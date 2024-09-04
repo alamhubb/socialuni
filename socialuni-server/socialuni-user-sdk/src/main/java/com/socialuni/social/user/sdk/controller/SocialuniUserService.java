@@ -2,6 +2,7 @@ package com.socialuni.social.user.sdk.controller;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.*;
+import com.socialuni.social.tance.sdk.constant.SocialuniDevConfig;
 import com.socialuni.social.user.sdk.api.user.SocialuniUserAPI;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
@@ -19,7 +20,7 @@ public class SocialuniUserService {
     SocialuniUserAPI socialuniUserAPI;
 
     public ResultRO<SocialuniUserRO> queryUserDetail(String userId) {
-        if (SocialuniSystemConst.hasCenterServer()) {
+        if (SocialuniDevConfig.hasCenterServer()) {
             return socialuniUserAPI.queryUserDetail(userId);
         } else {
             SocialuniUserRO userDetailRO;

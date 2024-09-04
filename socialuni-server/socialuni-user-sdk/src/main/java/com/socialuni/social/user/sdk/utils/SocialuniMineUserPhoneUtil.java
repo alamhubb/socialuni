@@ -29,7 +29,7 @@ public class SocialuniMineUserPhoneUtil {
             return null;
         }
         //只有自己的开发者才显示手机号
-        if (!DevAccountFacade.getDevIdNotNull().equals(SocialUserPhoneDo.getDevId())) {
+        if (!DevAccountFacade.getDevIdNullElseCenterDevId().equals(SocialUserPhoneDo.getDevId())) {
             return null;
         }
         String realPhoneNum = SocialUserPhoneDo.getPhoneNum();
@@ -51,7 +51,7 @@ public class SocialuniMineUserPhoneUtil {
             return null;
         }
         //只有自己的开发者才显示手机号
-        if (!DevAccountFacade.getDevIdNotNull().equals(SocialUserPhoneDo.getDevId())) {
+        if (!DevAccountFacade.getDevIdNullElseCenterDevId().equals(SocialUserPhoneDo.getDevId())) {
             return null;
         }
         String realPhoneNum = SocialUserPhoneDo.getPhoneNum();

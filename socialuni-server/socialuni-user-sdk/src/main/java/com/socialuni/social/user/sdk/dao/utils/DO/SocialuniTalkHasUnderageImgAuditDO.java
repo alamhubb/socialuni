@@ -37,6 +37,6 @@ public class SocialuniTalkHasUnderageImgAuditDO extends SocialuniUnionContentBas
         this.setStatus(ContentStatus.preAudit);
         this.talkId = talkId;
         this.userId = userId;
-        this.devId = DevAccountFacade.getDevIdNotNull();
+        this.devId = DevAccountFacade.getDevIdNullElseCenterDevId();
     }
 }

@@ -42,26 +42,6 @@ public class SocialWebLogAspect {
      */
     @Around("requestLog()")
     public Object requestLogHandle(ProceedingJoinPoint joinPoint) throws Throwable {
-        // 获取目标对象
-        Object target = joinPoint.getTarget();
-
-        // 获取目标对象的类
-        Class<?> targetClass = target.getClass();
-
-        // 获取目标类实现的接口
-        Class<?>[] interfaces = targetClass.getInterfaces();
-
-        System.out.println("目标类实现的接口: " + Arrays.toString(interfaces));
-
-        for (Class<?> interfaceClass : interfaces) {
-            System.out.println("接口 " + interfaceClass.getName() + " 上的注解:");
-            Annotation[] annotations = interfaceClass.getAnnotations();
-            for (Annotation annotation : annotations) {
-                System.out.println("  " + annotation);
-            }
-        }
-
-
         RequestLogDO requestLogDO = RequestLogUtil.get();
         // 解决异步报错。切面记录日志的问题。
         if (requestLogDO == null) {

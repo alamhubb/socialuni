@@ -2,6 +2,7 @@ package com.socialuni.social.sdk.logic.service;
 
 import com.socialuni.social.common.sdk.feignAPI.openData.SocialuniCosAPI;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
+import com.socialuni.social.tance.sdk.constant.SocialuniDevConfig;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.content.tencent.TencentCloudAPI;
 import com.socialuni.social.common.sdk.platform.model.SocialCosAuthRO;
@@ -19,7 +20,7 @@ public class SocialuniCosService {
 
     public ResultRO<SocialCosAuthRO> getCosAuth() {
         //如果应用，则调用中心
-        if (SocialuniSystemConst.hasCenterServer()) {
+        if (SocialuniDevConfig.hasCenterServer()) {
             return socialuniCosAPI.getCosAuth();
         }
         String userId = SocialuniUserUtil.getMineUserUuidIdNotNull();

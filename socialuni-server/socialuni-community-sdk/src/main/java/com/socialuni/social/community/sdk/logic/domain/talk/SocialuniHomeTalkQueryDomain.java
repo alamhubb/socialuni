@@ -215,7 +215,7 @@ public class SocialuniHomeTalkQueryDomain {
         }
         socialHomeTabTalkQueryBO.setMaxAge(maxAge);
         socialHomeTabTalkQueryBO.setQueryTime(socialuniPageQueryQO.getQueryTime());
-        socialHomeTabTalkQueryBO.setDevId(DevAccountFacade.getDevIdNotNull());
+        socialHomeTabTalkQueryBO.setDevId(DevAccountFacade.getDevIdNullElseCenterDevId());
 
         String adCode = queryQO.getAdCode();
         //如果首页，不筛选地理位置

@@ -96,6 +96,19 @@ public class SocialuniSystemConst {
     }
 
     public static boolean serverIsCenter() {
+
+        //前台不需要配置秘钥
+
+
+        //然后我们得到的devId,就是1.
+        //然后因为配置了秘钥，所以访问中心。
+        //访问中心时，如果包含了秘钥，如果devId不为1， 则为中心。
+
+
+        //当前服务器不为中心。
+
+
+
         //为空则异常
         return StringUtils.isEmpty(getDevSecretKey());
     }

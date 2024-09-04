@@ -5,7 +5,10 @@ import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.app.model.SocialuniMineUserDetailRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.sdk.im.logic.entity.SocialuniChatEntity;
+import com.socialuni.social.tance.sdk.constant.SocialuniDevConfig;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
+import com.socialuni.social.user.sdk.api.user.SocialuniLoginAPI;
 import com.socialuni.social.user.sdk.dao.utils.SocialuniUserExtendFriendLogDOUtil;
 import com.socialuni.social.user.sdk.logic.service.SocialuniLoginService;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
@@ -27,6 +30,8 @@ public class SocialuniDetailLoginService {
     @Resource
     SocialuniChatEntity socialuniChatEntity;
 
+    @Resource
+    SocialuniLoginAPI socialuniLoginAPI;
 
     //提供给借用社交联盟实现微信qq渠道登录的开发者， 不需要支持社交联盟登录，社交联盟登录是前台跳转登录返回信息，不走后台
     @Transactional
@@ -136,6 +141,14 @@ public class SocialuniDetailLoginService {
 
         //生成用户扩列记录
         SocialuniUserExtendFriendLogDOUtil.createUserExtendFriendLog();
+
+
+        if (SocialuniDevConfig.hasCenterServer()) {
+            ResultRO<SocialLoginRO<SocialuniUserRO>> resultRO = socialuniLoginAPI.deviceUidLogin(socialuniDeviceUidLoginQO);
+            SocialuniUserRO socialuniUserRO = resultRO.getData().getUser();
+            SocialuniUnionIdFacede.updateUuidByUnionIdNotNull(mineUserId, socialuniUserRO.getId());
+            return resultRO;
+        }
 
         return ResultRO.success(socialLoginRO);
     }

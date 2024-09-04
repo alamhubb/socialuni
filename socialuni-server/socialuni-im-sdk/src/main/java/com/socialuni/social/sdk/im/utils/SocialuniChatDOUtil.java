@@ -3,10 +3,6 @@ package com.socialuni.social.sdk.im.utils;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import com.socialuni.social.common.sdk.constant.UserType;
-import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
-import com.socialuni.social.sdk.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniChatRepository;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniChatUserRepository;
@@ -44,7 +40,7 @@ public class SocialuniChatDOUtil {
 
         SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidNotNull(chatIdStr);
 
-        Integer unionId = socialuniUnionIdModler.getId();
+        Integer unionId = socialuniUnionIdModler.getUnionIdqqq();
 
         if (SocialuniContentType.chat.equals(socialuniUnionIdModler.getContentType())) {
             return unionId;

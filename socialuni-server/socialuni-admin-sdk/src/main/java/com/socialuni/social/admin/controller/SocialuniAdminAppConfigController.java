@@ -3,13 +3,10 @@ package com.socialuni.social.admin.controller;
 import cn.hutool.core.collection.CollectionUtil;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.utils.MapUtil;
-import com.socialuni.social.tance.entity.SocialuniUnionIdDo;
 import com.socialuni.social.tance.model.DO.AppConfigDO;
 import com.socialuni.social.tance.model.DO.AppConfigPk;
 import com.socialuni.social.tance.repository.AppConfigRepository;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -92,7 +89,7 @@ public class SocialuniAdminAppConfigController {
         // 默认的内容。
         List<AppConfigDO> defaultList = appConfigRepository.findAllByDevIdAndStatusOrderByCreateTimeDesc(AppConfigRepository.DEFAULT_DEV_KEY, status);
         // 自己定义的
-        List<AppConfigDO> devList = appConfigRepository.findAllByDevIdAndStatusOrderByCreateTimeDesc(DevAccountFacade.getDevIdNotNull(), status);
+        List<AppConfigDO> devList = appConfigRepository.findAllByDevIdAndStatusOrderByCreateTimeDesc(DevAccountFacade.getDevIdNullElseCenterDevId(), status);
         //
         CollectionUtil.addAll(defaultList, devList);
         // 去重

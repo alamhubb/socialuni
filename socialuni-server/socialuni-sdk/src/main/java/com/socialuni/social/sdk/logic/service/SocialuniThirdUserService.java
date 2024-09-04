@@ -6,7 +6,6 @@ import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.userImg.logic.domain.SocialAddUserImgDomain;
 import com.socialuni.social.userImg.logic.domain.SocialDeleteUserImgDomain;
-import com.socialuni.social.tance.sdk.constant.AdminAppConfigConst;
 import com.socialuni.social.user.sdk.logic.domain.SocialEditUserDomain;
 import com.socialuni.social.app.logic.domain.UniUserRegistryDomain;
 import com.socialuni.social.user.sdk.logic.manage.SocialuniTokenManage;
@@ -41,7 +40,7 @@ public class SocialuniThirdUserService {
     @Transactional
     public ResultRO<SocialLoginRO<SocialuniUserRO>> registryUser(SocialProviderLoginQO loginQO) {
         //注册只向三方开发，所以不能为自己
-        Integer dataDevId = DevAccountFacade.getDevIdNotNull();
+        Integer dataDevId = DevAccountFacade.getDevIdNullElseCenterDevId();
 //        if (dataDevId == AdminAppConfigConst.testDevId) {
             throw new SocialParamsException("开发者信息错误");
 //        }

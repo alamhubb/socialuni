@@ -80,7 +80,7 @@ public class SocialuniMineUserDetailROFactory {
         //user详情信息
         if (SocialUserPhoneDo != null) {
             //只有自己的开发者才显示手机号
-            if (DevAccountFacade.getDevIdNotNull().equals(SocialUserPhoneDo.getDevId())) {
+            if (DevAccountFacade.getDevIdNullElseCenterDevId().equals(SocialUserPhoneDo.getDevId())) {
                 String realPhoneNum = SocialUserPhoneDo.getPhoneNum();
                 if (StringUtils.isNotEmpty(realPhoneNum)) {
                     realPhoneNum = realPhoneNum.substring(0, 3) + "*****" + realPhoneNum.substring(8);

@@ -22,7 +22,7 @@ public class SocialUserPasswordManage {
         if (socialUserPasswordDO == null) {
             socialUserPasswordDO = new SocialUserPasswordDO();
             socialUserPasswordDO.setUserId(userId);
-            socialUserPasswordDO.setDevId(DevAccountFacade.getDevIdNotNull());
+            socialUserPasswordDO.setDevId(DevAccountFacade.getDevIdNullElseCenterDevId());
             socialUserPasswordDO.setAccount(account);
             socialUserPasswordDO.setPassword(password);
             socialUserPasswordDO.setErrorNum(0);

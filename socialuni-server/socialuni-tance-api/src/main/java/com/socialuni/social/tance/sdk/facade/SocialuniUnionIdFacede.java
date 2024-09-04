@@ -67,10 +67,10 @@ public class SocialuniUnionIdFacede {
 
     //自身创建
     private static Integer createUnionIdByContentType(String contentType) {
-        SocialuniUnionIdModler uniContentUnionIdDO = new SocialuniUnionIdModler(contentType, UUIDUtil.getUUID(), DevAccountFacade.getDevIdNotNull());
+        SocialuniUnionIdModler uniContentUnionIdDO = new SocialuniUnionIdModler(contentType, UUIDUtil.getSnowflakeId(), DevAccountFacade.getDevIdNullElseCenterDevId());
         uniContentUnionIdDO = socialuniUnionIdApi.save(uniContentUnionIdDO);
         //有的话更新
-        return uniContentUnionIdDO.getId();
+        return uniContentUnionIdDO.getUnionIdqqq();
     }
 
     //空的创建的，然后更新，只有往中心推送后，可调用这里更新
@@ -128,7 +128,7 @@ public class SocialuniUnionIdFacede {
     //结果不可为空 ，为前台传入的数据,根据uid获取真实id,获取不可为空, 为前台传入的数据，防止错误，不可为空
     //根据uid获取真实id,获取不可为空, 为前台传入的数据，防止错误，不可为空
     public static Integer getUnionIdByUuidNotNull(String uuid) {
-        return getUnionByUuidNotNull(uuid).getId();
+        return getUnionByUuidNotNull(uuid).getUnionIdqqq();
     }
 
     public static Integer getChatUnionIdByUuidNotNull(String uuid) {
@@ -136,7 +136,7 @@ public class SocialuniUnionIdFacede {
         if (!Arrays.asList(SocialuniContentType.chat,SocialuniContentType.user).contains(chatUnion.getContentType())) {
             throw new SocialSystemException("不存在的会话");
         }
-        return chatUnion.getId();
+        return chatUnion.getUnionIdqqq();
     }
 
     //根据uid获取真实id,获取不可为空, 为前台传入的数据，防止错误，不可为空
@@ -161,7 +161,7 @@ public class SocialuniUnionIdFacede {
         if (socialuniUnionIdModler == null) {
             return null;
         }
-        return socialuniUnionIdModler.getId();
+        return socialuniUnionIdModler.getUnionIdqqq();
     }
 
 

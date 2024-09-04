@@ -16,8 +16,9 @@ import com.socialuni.social.common.sdk.model.VO.FrontErrorLogVO;
 import com.socialuni.social.common.sdk.model.VO.HomeSwiperVO;
 import com.socialuni.social.common.sdk.model.RO.SocialuniTalkTabRO;
 import com.socialuni.social.common.sdk.model.SocialAppLaunchDataRO;
+import com.socialuni.social.tance.sdk.api.SocialuniNoUseFeignAspect;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
-import org.apache.commons.lang3.StringUtils;
+import com.socialuni.social.tance.sdk.constant.SocialuniDevConfig;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -70,12 +71,19 @@ public class SocialuniAppController implements SocialuniAppAPI {
         return centerAppService.sendErrorLog(frontErrorLogVO);
     }
 
-    @PostMapping("getDeviceUid")
+    @Resource
+    SocialuniAppAPI socialuniAppAPI;
+
+    @SocialuniNoUseFeignAspect
     public ResultRO<String> getDeviceUid(@RequestBody @NotNull SocialuniGetAppInitDataQO deviceUidQO) {
+
+        String uuid = UUIDUtil.getSnowflakeId();
+
+        if (SocialuniDevConfig.hasCenterServer()) {
+            ResultRO<String> stringResultRO = socialuniAppAPI.getDeviceUid(deviceUidQO);
+            uuid = stringResultRO.getData();
+        }
         SocialuniDeviceDO socialuniDeviceDO = new SocialuniDeviceDO();
-
-        String uuid = UUIDUtil.getUUID();
-
         socialuniDeviceDO.setUuid(uuid);
         socialuniDeviceDO.setDevice(deviceUidQO.getDevice());
         socialuniDeviceDO.setDeviceOther(RequestUtil.getUserAgent());

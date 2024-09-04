@@ -40,7 +40,7 @@ public class TalkDOFactory {
         //使用talk本身存储,position 和 district
         talkDO.setAdCode(district.getAdCode());
         //不要删掉，根据devId查询了动态
-        talkDO.setDevId(DevAccountFacade.getDevIdNotNull());
+        talkDO.setDevId(DevAccountFacade.getDevIdNullElseCenterDevId());
         talkDO.setAdName(district.getAdName());
         talkDO.setProvinceName(district.getProvinceName());
         talkDO.setCityName(district.getCityName());

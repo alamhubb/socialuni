@@ -25,7 +25,7 @@ public class SocialuniAdminHomeSwiperManageController {
     @GetMapping("queryhomeSwipers")
     public ResultRO<List<SocialuniAdminHomeSwiperRO>> queryhomeSwipers() {
         //三方应用传的可以直接传用户id作为token
-        Integer devId = DevAccountFacade.getDevIdNotNull();
+        Integer devId = DevAccountFacade.getDevIdNullElseCenterDevId();
 
         List<SocialuniHomeSwiperDO> homeSwiperModels = homeSwiperRepository.queryHomeSwipersByDevIdOrderByStatusDescUpdateTimeDescTopLevelDesc(devId);
 
@@ -40,7 +40,7 @@ public class SocialuniAdminHomeSwiperManageController {
             if (ObjUtil.isEmpty(homeSwiperRO.getId())) {
                 SocialuniHomeSwiperDOs.add(homeSwiperRepository.save(BeanUtil.toBean(homeSwiperRO.toModel(), SocialuniHomeSwiperDO.class)));
             } else {
-                Integer devId = DevAccountFacade.getDevIdNotNull();
+                Integer devId = DevAccountFacade.getDevIdNullElseCenterDevId();
                 SocialuniHomeSwiperDO SocialuniHomeSwiperDODb = homeSwiperRepository.findByIdAndDevId(homeSwiperRO.getId(), devId)
                         .orElseThrow(() -> new SocialParamsException("不存在的轮播图配置"));
                 SocialuniHomeSwiperDOs.add(homeSwiperRepository.save(BeanUtil.toBean(homeSwiperRO.toModel(SocialuniHomeSwiperDODb), SocialuniHomeSwiperDO.class)));

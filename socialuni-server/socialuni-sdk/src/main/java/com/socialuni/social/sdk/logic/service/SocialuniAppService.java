@@ -48,7 +48,7 @@ public class SocialuniAppService {
 
     public static void main(String[] args) {
         //先对秘钥进行加密，然后再对加密后的进行加密
-        String uuidKey = UUIDUtil.getUUID();
+        String uuidKey = UUIDUtil.getSnowflakeId();
         //秘钥
         AES aes = SecureUtil.aes(uuidKey.getBytes());
         String encrypted = aes.encryptHex(SocialTokenFacade.getPasswordPublicKey());
@@ -60,7 +60,7 @@ public class SocialuniAppService {
 
     public ResultRO<List<HomeSwiperVO>> queryHomeSwipers() {
         //homeSwipers
-        List<SocialuniHomeSwiperDO> homeSwiperDOS = homeSwiperRepository.findAllByStatusAndDevIdOrderByTopLevelAscIdDesc(SocialuniCommonStatus.enable, DevAccountFacade.getDevIdNotNull());
+        List<SocialuniHomeSwiperDO> homeSwiperDOS = homeSwiperRepository.findAllByStatusAndDevIdOrderByTopLevelAscIdDesc(SocialuniCommonStatus.enable, DevAccountFacade.getDevIdNullElseCenterDevId());
         List<HomeSwiperVO> homeSwiperVOS = SocialHomeSwiperROFactory.toVOS(homeSwiperDOS);
         return new ResultRO<>(homeSwiperVOS);
     }

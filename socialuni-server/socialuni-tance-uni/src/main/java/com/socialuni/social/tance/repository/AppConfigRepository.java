@@ -33,7 +33,7 @@ public interface AppConfigRepository extends JpaRepository<AppConfigDO, AppConfi
                 return String.valueOf(cacheObj);
             }
         }
-        Integer devId = DevAccountFacade.getDevIdNotNull();
+        Integer devId = DevAccountFacade.getDevIdNullElseCenterDevId();
         Optional<AppConfigDO> appConfig = this.findById(new AppConfigPk(devId, key));
         // 没有就找默认的联盟的key。 还没有就报错啦。
         AppConfigDO appConfigDO = appConfig.orElseGet(() -> this.findById(new AppConfigPk(DEFAULT_DEV_KEY, key)).orElseThrow(() -> new NullPointerException(String.format("devKey=[%s], key=[%s]没有对应的默认内容", devId, key))));

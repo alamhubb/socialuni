@@ -5,13 +5,13 @@ import java.util.concurrent.CompletableFuture;
 
 public class UUIDUtil {
     public static void main(String[] args) {
-        System.out.println(getUUID());
-        System.out.println(getUUID());
-        System.out.println(getUUID());
-        System.out.println(getUUID());
-        System.out.println(getUUID());
-        System.out.println(getUUID());
-        System.out.println(getUUID());
+        System.out.println(getSnowflakeId());
+        System.out.println(getSnowflakeId());
+        System.out.println(getSnowflakeId());
+        System.out.println(getSnowflakeId());
+        System.out.println(getSnowflakeId());
+        System.out.println(getSnowflakeId());
+        System.out.println(getSnowflakeId());
 
         CompletableFuture.runAsync(() -> {
            throw new RuntimeException("haha");
@@ -25,8 +25,8 @@ public class UUIDUtil {
      *
      * @return
      */
-    public static String getUUID() {
-        return UUID.randomUUID().toString().replace("-", "");
+    public static long getSnowflakeId() {
+        return SnowflakeIdUtil.nextId();
     }
 
     public static String getUUIDByString(String content) {

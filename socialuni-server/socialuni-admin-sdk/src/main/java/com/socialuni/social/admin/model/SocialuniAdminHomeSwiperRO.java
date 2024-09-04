@@ -46,7 +46,7 @@ public class SocialuniAdminHomeSwiperRO {
         if (!this.enable) {
             SocialuniHomeSwiperDO.setStatus(SocialuniCommonStatus.delete);
         }
-        SocialuniHomeSwiperDO.setDevId(DevAccountFacade.getDevIdNotNull());
+        SocialuniHomeSwiperDO.setDevId(DevAccountFacade.getDevIdNullElseCenterDevId());
         return SocialuniHomeSwiperDO;
     }
 

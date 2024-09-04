@@ -56,67 +56,21 @@ public class FeignInterceptor implements RequestInterceptor {
                 Integer mineUserUnionId = mineUser.getUnionId();
                 //主要是记录有没有的
                 Integer centerDevId = DevAccountFacade.getCenterDevIdNotNull();
-                UniOutRegisterUserDO uniOutRegisterUserDO = uniOutRegisterUserRepository.findByDevIdAndUserId(centerDevId, mineUserUnionId);
-
-//                SocialUserAccountDO socialUserAccountDO = SocialUserAccountUtil.getUserSocialAccount(mineUser.getId());
-
-                //有可能存在已经查询过这个用户了，然后unionId表已经记录了，然后你登录了，发现是你，然后怎么办。把这个的，把这儿用户的unionId，变为这个unionId就行了。
-
-                //有没有可能你自己这边记录了，但是那边给你删掉了
-                //未在中心注册，则需要查询一下，未注册注册，如果直接注册呢，应该也可以，查注一体就行了。
-                if (uniOutRegisterUserDO == null) {
-                    String phoneNum = SocialuniUserUtil.getUserPhoneNum(mineUserUnionId);
-                    //生成登录类
-                    SocialProviderLoginQO socialProviderLoginQO = new SocialProviderLoginQO();
-                    socialProviderLoginQO.setNickName(mineUser.getNickname());
-                    socialProviderLoginQO.setAvatarUrl(mineUser.getAvatar());
-                    socialProviderLoginQO.setGender(GenderTypeNumEnum.getValueByName(mineUser.getGender()));
-                    socialProviderLoginQO.setBirthday(mineUser.getBirthday());
-                    socialProviderLoginQO.setCity(mineUser.getCity());
-                    socialProviderLoginQO.setProvider(RequestUtil.getProvider());
-//                    socialProviderLoginQO.setPlatform(RequestUtil.getPlatform());
-//                    socialProviderLoginQO.setSystem(RequestUtil.getSystem());
-                    socialProviderLoginQO.setUnionId(mineUserUnionId.toString());
-                    if (SocialuniSystemConst.hasCenterServer()) {
-                        socialProviderLoginQO.setPhoneNum(phoneNum);
-                    }
-//                    URI uri = URI.create(postUrl);
-//                    String absoluteUri = uri.getScheme() + "://" + uri.getAuthority();
-//                    URI determinedBasePathUri = URI.create(absoluteUri);
-
-                    String apiUrl = SocialuniSystemConst.getSocialuniServerUrl();
-                    URI determinedBasePathUri = URI.create(Objects.requireNonNull(apiUrl));
-
-//                    Collection<String> headerKeyValues = requestTemplate.headers().get(SocialFeignHeaderName.socialuniSecretKey);
-//                    String devSecretKey = headerKeyValues.iterator().next();
 
 
-
-                    Map<String, Object> headerMap = new HashMap<String, Object>() {{
-//                        put(SocialFeignHeaderName.socialuniSecretKey, devAccountModel.getApiSecretKey());
-                    }};
-                    ResultRO<SocialLoginRO<SocialuniUserRO>> resultRO = socialuniThirdUserAPI.registryUser(socialProviderLoginQO);
-                    SocialLoginRO<SocialuniUserRO> loginRO = resultRO.getData();
-                    SocialuniUserRO centerMineUserDetailRO = loginRO.getUser();
-
-                    SocialuniUnionIdFacede.updateUuidByUnionIdNotNull(mineUserUnionId, centerMineUserDetailRO.getId());
-                    uniOutRegisterUserDO = new UniOutRegisterUserDO(centerDevId, mineUserUnionId);
-                    uniOutRegisterUserRepository.save(uniOutRegisterUserDO);
-                }
-
-                String mineUserUid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(mineUserUnionId);
-
-                requestTemplate.header(SocialuniWebConfig.getTokenName(), mineUserUid);
+//                requestTemplate.header(SocialuniWebConfig.getTokenName(), mineUserUid);
 
 
                 //根据库里表有没有数据判断，是否调用，如果注册了，就在自己表里设置下，记录下。
-                DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNotNUll();
 
-                requestTemplate.header(SocialFeignHeaderName.socialuniSecretKey, devAccountModel.getApiSecretKey());
-                requestTemplate.target(devAccountModel.getApiUrl());
+
+//                requestTemplate.header(SocialFeignHeaderName.socialuniSecretKey, devAccountModel.getApiSecretKey());
+//                requestTemplate.target(devAccountModel.getApiUrl());
             }
         }
 
+//        DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNotNUll();
+        requestTemplate.header(SocialFeignHeaderName.socialuniSecretKey, "d9a53b2892a540689b4ef608bdca3d2e");
 //        }
 
 

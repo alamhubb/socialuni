@@ -6,6 +6,7 @@ import com.socialuni.social.tance.sdk.api.SocialuniUnionIdInterface;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.report.sdk.model.SocialuniReportAddQO;
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.tance.sdk.constant.SocialuniDevConfig;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -23,7 +24,7 @@ public class SocialuniReportService {
 
     public ResultRO<String> addReport(SocialuniReportAddQO centerReportAddQO) {
         //如果应用，则调用中心
-        if (SocialuniSystemConst.hasCenterServer()) {
+        if (SocialuniDevConfig.hasCenterServer()) {
             return socialuniReportAPI.addReport(centerReportAddQO);
         }
 

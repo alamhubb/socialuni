@@ -7,6 +7,7 @@ import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.common.sdk.model.QO.LocationQueryQO;
 import com.socialuni.social.common.sdk.model.RO.LocationQueryRO;
 import com.socialuni.social.common.sdk.platform.QQMapAPI;
+import com.socialuni.social.tance.sdk.constant.SocialuniDevConfig;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +22,7 @@ public class SocialuniLocationController implements SocialuniLocationAPI {
 
     public ResultRO<LocationQueryRO> queryLocation(LocationQueryQO queryQO) {
         //如果应用，则调用中心
-        if (SocialuniSystemConst.hasCenterServer()) {
+        if (SocialuniDevConfig.hasCenterServer()) {
             return socialuniLocationAPI.queryLocation(queryQO);
         }
         LocationQueryRO locationQueryRO;

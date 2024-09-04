@@ -4,6 +4,7 @@ import com.socialuni.social.app.logic.service.SocialuniDetailLoginService;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.app.model.SocialuniMineUserDetailRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
+import com.socialuni.social.tance.sdk.api.SocialuniNoUseFeignAspect;
 import com.socialuni.social.user.sdk.api.user.SocialuniLoginAPI;
 import com.socialuni.social.user.sdk.logic.manage.SocialuniTokenManage;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniTokenDO;
@@ -24,6 +25,7 @@ import javax.validation.Valid;
  */
 @RestController
 @RequestMapping("socialuni/login")
+@SocialuniNoUseFeignAspect
 public class SocialuniLoginController implements SocialuniLoginAPI {
     @Resource
     private SocialuniDetailLoginService centerLoginService;
@@ -54,7 +56,7 @@ public class SocialuniLoginController implements SocialuniLoginAPI {
 
 
     @PostMapping("deviceUidLogin")
-    ResultRO<SocialLoginRO<SocialuniUserRO>> deviceUidLogin(@RequestBody @Valid SocialuniDeviceUidLoginQO socialuniDeviceUidLoginQO) {
+    public ResultRO<SocialLoginRO<SocialuniUserRO>> deviceUidLogin(@RequestBody @Valid SocialuniDeviceUidLoginQO socialuniDeviceUidLoginQO) {
         return centerLoginService.deviceUidLogin(socialuniDeviceUidLoginQO);
     }
 

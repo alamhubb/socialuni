@@ -1,7 +1,6 @@
 package com.socialuni.social.tance.sdk.facade;
 
 import com.socialuni.social.common.api.constant.GenderType;
-import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
@@ -90,7 +89,7 @@ public class DevAccountFacade {
         return null;
     }*/
 
-    public static Integer getDevIdNotNull() {
+    public static Integer getDevIdNullElseCenterDevId() {
         DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNullElseCenterDev();
         return devAccountModel.getId();
     }
@@ -224,15 +223,25 @@ public class DevAccountFacade {
         return devAccountModel;
     }
 
+    public static DevAccountModel getSystemDevAccount() {
+        String phoneNum = SocialuniSystemConst.getSystemUserPhoneNum();
+        DevAccountModel devAccountModel = DevAccountFacade.findOneByPhoneNumOrderByIdAsc(phoneNum);
+        return devAccountModel;
+    }
+
+    public static Integer getSystemDevAccountDevId() {
+        return DevAccountFacade.getSystemDevAccount().getId();
+    }
+
 
     //为中心向服务器推送
     public static boolean pusherIsCenterServer() {
-        return Objects.equals(DevAccountFacade.getDevIdNotNull(), DevAccountFacade.getCenterDevIdNotNull());
+        return Objects.equals(DevAccountFacade.getDevIdNullElseCenterDevId(), DevAccountFacade.getCenterDevIdNotNull());
     }
 
     //为自己向自己推送
     public static boolean pusherIsSelfServer() {
-        return DevAccountFacade.getDevIdNotNull() == AdminAppConfigConst.devId;
+        return DevAccountFacade.getDevIdNullElseCenterDevId() == AdminAppConfigConst.devId;
     }
 
     //非中心和非自己向中心推送

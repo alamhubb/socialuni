@@ -146,7 +146,7 @@ public class WangYiUtil {
         params.put("signatureMethod", "MD5"); // MD5, SM3, SHA1, SHA256
 
         // 2.设置私有参数
-        params.put("dataId", UUIDUtil.getUUID());
+        params.put("dataId", UUIDUtil.getSnowflakeId());
         params.put("content", content);
         // params.put("dataType", "1");
         // params.put("ip", "123.115.77.137");
