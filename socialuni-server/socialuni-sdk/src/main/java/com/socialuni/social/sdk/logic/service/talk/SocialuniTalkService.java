@@ -51,7 +51,7 @@ public class SocialuniTalkService {
      */
     @Deprecated
     public ResultRO<List<SocialuniTalkRO>> queryStickTalks() {
-        if (SocialuniSystemConst.serverIsChild()) {
+        if (SocialuniSystemConst.hasCenterServer()) {
             return socialuniTalkAPI.queryStickTalks();
         }
         List<SocialuniTalkRO> list = socialHomeTalkQueryDomain.queryStickTalks();
@@ -60,7 +60,7 @@ public class SocialuniTalkService {
 
     //无参数get请求访问talks，主要为了方便用户体验。
     public ResultRO<List<SocialuniTalkRO>> queryTalks() {
-        if (SocialuniSystemConst.serverIsChild()) {
+        if (SocialuniSystemConst.hasCenterServer()) {
             return socialuniTalkAPI.queryTalks();
         }
 
@@ -95,7 +95,7 @@ public class SocialuniTalkService {
 
     //查询非关注tab的动态列表
     public ResultRO<List<SocialuniTalkRO>> queryTalks(SocialuniPageQueryQO<SocialuniHomeTabTalkQueryQO> socialuniPageQueryQO) {
-        if (SocialuniSystemConst.serverIsChild()) {
+        if (SocialuniSystemConst.hasCenterServer()) {
             return socialuniTalkAPI.queryTalks(socialuniPageQueryQO);
         }
         //如果不为测试环境则过滤到测试环境标签的数据
@@ -118,7 +118,7 @@ public class SocialuniTalkService {
     public ResultRO<SocialuniTalkRO> postTalk(SocialuniTalkPostQO talkPostQO) {
         SocialuniTalkRO talkRO = centerTalkPostDomain.postTalk(talkPostQO);
         //如果应用，则调用中心
-        if (SocialuniSystemConst.serverIsChild()) {
+        if (SocialuniSystemConst.hasCenterServer()) {
             return UniAPIUtils.callUniAPIAndUpdateUid(talkRO, socialuniTalkAPI::postTalk, talkPostQO);
         }
         //校验是否触发关键词，如果触发生成举报，修改动态为预审查，只能用户自己可见
@@ -129,7 +129,7 @@ public class SocialuniTalkService {
         //校验是否触发关键词，如果触发生成举报，修改动态为预审查，只能用户自己可见
         centerTalkDeleteDomain.deleteTalk(talkIdQO);
         //如果应用，则调用中心
-        if (SocialuniSystemConst.serverIsChild()) {
+        if (SocialuniSystemConst.hasCenterServer()) {
             return socialuniTalkAPI.deleteTalk(talkIdQO);
         }
         return new ResultRO<>();
@@ -138,7 +138,7 @@ public class SocialuniTalkService {
     public ResultRO<SocialuniTalkRO> queryTalkDetail(String talkId) {
         SocialuniTalkRO centerTalkRO;
         //如果应用，则调用中心
-        if (SocialuniSystemConst.serverIsChild()) {
+        if (SocialuniSystemConst.hasCenterServer()) {
             ResultRO<SocialuniTalkRO> centerTalkROResultRO = socialuniTalkAPI.queryTalkDetail(talkId);
             centerTalkRO = centerTalkROResultRO.getData();
         } else {
@@ -149,7 +149,7 @@ public class SocialuniTalkService {
 
     public ResultRO<List<SocialuniTalkRO>> queryUserTalks(SocialuniUserTalkQueryQO centerUserTalkQueryQO) {
         List<SocialuniTalkRO> talkROS;
-        if (SocialuniSystemConst.serverIsChild()) {
+        if (SocialuniSystemConst.hasCenterServer()) {
             ResultRO<List<SocialuniTalkRO>> resultRO = socialuniTalkAPI.queryUserTalks(centerUserTalkQueryQO);
             talkROS = resultRO.getData();
         } else {

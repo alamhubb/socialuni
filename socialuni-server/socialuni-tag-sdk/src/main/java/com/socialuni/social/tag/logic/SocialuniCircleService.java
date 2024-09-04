@@ -57,7 +57,7 @@ public class SocialuniCircleService {
         ResultRO<SocialCircleRO> resultRO = new ResultRO<>(SocialCircleROFactory.getCircleRO(circleDO));
 
         //如果应用，则调用中心
-        if (SocialuniSystemConst.serverIsChild()) {
+        if (SocialuniSystemConst.hasCenterServer()) {
             resultRO = socialuniCircleAPI.createCircle(circleCreateQO);
         }
         return resultRO;
@@ -103,21 +103,21 @@ public class SocialuniCircleService {
 
     public ResultRO<List<SocialCircleRO>> queryHotCircles() {
         //如果应用，则调用中心
-        if (SocialuniSystemConst.serverIsChild()) {
+        if (SocialuniSystemConst.hasCenterServer()) {
             return socialuniCircleAPI.queryHotCircles();
         }
         return ResultRO.success(socialCircleRedis.getHotCirclesRedis(GenderType.all));
     }
 
     public ResultRO<List<CircleTypeRO>> queryCircleTypes() {
-        if (SocialuniSystemConst.serverIsChild()) {
+        if (SocialuniSystemConst.hasCenterServer()) {
             return socialuniCircleAPI.queryCircleTypes();
         }
         return ResultRO.success(socialCircleRedis.getAllCircleTypesRedis(GenderType.all));
     }
 
     public ResultRO<List<CircleTypeRO>> queryHotCircleTypes() {
-        if (SocialuniSystemConst.serverIsChild()) {
+        if (SocialuniSystemConst.hasCenterServer()) {
             return socialuniCircleAPI.queryHotCircleTypes();
         }
         List<CircleTypeRO> list = socialCircleRedis.getHotCircleTypesRedis(GenderType.all);

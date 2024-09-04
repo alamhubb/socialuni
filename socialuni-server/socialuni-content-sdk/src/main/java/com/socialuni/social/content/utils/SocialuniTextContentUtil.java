@@ -153,12 +153,12 @@ public class SocialuniTextContentUtil {
             // 校验本文规则
             SocialuniTextContentUtil.checkTextHasUnderageAndContactAndViolateWords(imgTextContent);
             //是否禁止包含联系方式
-            Boolean disableContentHasQrCode = SocialuniAppConfig.getAppConfig().getDisableContentHasQrCode();
+            /*Boolean disableContentHasQrCode = SocialuniAppConfig.getAppConfig().getDisableContentHasQrCode();
             if (disableContentHasQrCode) {
                 if (hasQrCode) {
                     throw new SocialBusinessException("禁止发布包含二维码的内容，可在个人信息中填写联系方式");
                 }
-            }
+            }*/
         }
     }
 

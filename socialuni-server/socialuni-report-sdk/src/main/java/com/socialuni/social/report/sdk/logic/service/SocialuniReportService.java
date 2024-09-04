@@ -23,7 +23,7 @@ public class SocialuniReportService {
 
     public ResultRO<String> addReport(SocialuniReportAddQO centerReportAddQO) {
         //如果应用，则调用中心
-        if (SocialuniSystemConst.serverIsChild()) {
+        if (SocialuniSystemConst.hasCenterServer()) {
             return socialuniReportAPI.addReport(centerReportAddQO);
         }
 

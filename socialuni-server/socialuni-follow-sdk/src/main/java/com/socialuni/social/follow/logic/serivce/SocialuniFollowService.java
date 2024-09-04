@@ -27,7 +27,7 @@ public class SocialuniFollowService {
         //有问题，应该关注完刷新前台用户
         socialUserFollowDomainInterface.addFlow(addQO);
         //如果应用，则调用中心
-        if (SocialuniSystemConst.serverIsChild()) {
+        if (SocialuniSystemConst.hasCenterServer()) {
             return socialuniFollowAPI.addFollow(addQO);
         }
         return new ResultRO<>();
@@ -37,7 +37,7 @@ public class SocialuniFollowService {
         //有问题，应该关注完刷新前台用户
         socialUserFollowDomainInterface.cancelFollow(addQO);
         //如果应用，则调用中心
-        if (SocialuniSystemConst.serverIsChild()) {
+        if (SocialuniSystemConst.hasCenterServer()) {
             return socialuniFollowAPI.cancelFollow(addQO);
         }
         return new ResultRO<>();
@@ -45,7 +45,7 @@ public class SocialuniFollowService {
 
     public ResultRO<List<SocialuniUserFollowDetailListRO>> queryUserFollows(SocialuniPageQueryQO<String> socialuniPageQueryQO) {
         //如果应用，则调用中心
-        if (SocialuniSystemConst.serverIsChild()) {
+        if (SocialuniSystemConst.hasCenterServer()) {
             return socialuniFollowAPI.queryUserFollows(socialuniPageQueryQO);
         }
         List<SocialuniUserFollowDetailListRO> map = socialQueryUserFollowsDomain.queryUserFollows(socialuniPageQueryQO);

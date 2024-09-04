@@ -24,7 +24,7 @@ public class SocialuniDistrictController implements SocialuniDistrictAPI {
     @Override
     public ResultRO<List<SocialDistrictRO>> queryHotDistricts() {
         //如果应用，则调用中心
-        if (SocialuniSystemConst.serverIsChild()) {
+        if (SocialuniSystemConst.hasCenterServer()) {
             return socialuniDistrictAPI.queryHotDistricts();
         }
         return new ResultRO<>(AppData.getHotDistricts());
@@ -33,7 +33,7 @@ public class SocialuniDistrictController implements SocialuniDistrictAPI {
     @Override
     public ResultRO<List<SocialDistrictRO>> queryDistricts() {
         //如果应用，则调用中心
-        if (SocialuniSystemConst.serverIsChild()) {
+        if (SocialuniSystemConst.hasCenterServer()) {
             return socialuniDistrictAPI.queryDistricts();
         }
         return new ResultRO<>(AppData.getAllDistricts());

@@ -1,7 +1,6 @@
 package com.socialuni.social.sdk.config.config;
 
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.app.model.SocialuniMineUserDetailRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.user.sdk.constant.GenderTypeNumEnum;
@@ -80,7 +79,7 @@ public class FeignInterceptor implements RequestInterceptor {
 //                    socialProviderLoginQO.setPlatform(RequestUtil.getPlatform());
 //                    socialProviderLoginQO.setSystem(RequestUtil.getSystem());
                     socialProviderLoginQO.setUnionId(mineUserUnionId.toString());
-                    if (SocialuniSystemConst.serverIsChild()) {
+                    if (SocialuniSystemConst.hasCenterServer()) {
                         socialProviderLoginQO.setPhoneNum(phoneNum);
                     }
 //                    URI uri = URI.create(postUrl);

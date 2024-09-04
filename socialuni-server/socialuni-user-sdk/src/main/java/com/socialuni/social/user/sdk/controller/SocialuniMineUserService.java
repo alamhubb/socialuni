@@ -4,9 +4,7 @@ import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
 import com.socialuni.social.user.sdk.api.user.SocialuniMineUserAPI;
-import com.socialuni.social.tance.sdk.api.SocialuniUnionIdInterface;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.dao.utils.SocialuniUserExtendFriendLogDOUtil;
 import com.socialuni.social.user.sdk.logic.domain.SocialEditUserDomain;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
@@ -28,7 +26,7 @@ public class SocialuniMineUserService {
 
     public ResultRO<SocialuniUserRO> getMineUser() {
         SocialuniUserRO mineUserDetailRO;
-        if (SocialuniSystemConst.serverIsChild()) {
+        if (SocialuniSystemConst.hasCenterServer()) {
             ResultRO<SocialuniUserRO> resultRO = socialuniMineUserAPI.getMineUser();
             mineUserDetailRO = new SocialuniUserRO(resultRO.getData());
         } else {
@@ -46,7 +44,7 @@ public class SocialuniMineUserService {
 
         SocialuniUserRO socialMineUserDetailRO = SocialuniUserROFactory.getMineUserRO(mineUser);
 
-        if (SocialuniSystemConst.serverIsChild()) {
+        if (SocialuniSystemConst.hasCenterServer()) {
             return socialuniMineUserAPI.editUser(socialUserEditQO);
         }
 
@@ -60,7 +58,7 @@ public class SocialuniMineUserService {
 
         SocialuniUserRO socialMineUserDetailRO = socialEditUserDomain.randomUserAvatar(mineUser);
 
-        if (SocialuniSystemConst.serverIsChild()) {
+        if (SocialuniSystemConst.hasCenterServer()) {
             return socialuniMineUserAPI.randomUserAvatar();
         }
 
@@ -73,7 +71,7 @@ public class SocialuniMineUserService {
 
         SocialuniUserRO socialMineUserDetailRO = socialEditUserDomain.addUserAvatarImg(socialUserImgAddQO, mineUser);
 
-        if (SocialuniSystemConst.serverIsChild()) {
+        if (SocialuniSystemConst.hasCenterServer()) {
             return socialuniMineUserAPI.addUserAvatarImg(socialUserImgAddQO);
         }
 

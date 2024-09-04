@@ -105,7 +105,7 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
         }
 
         //创建中心
-        if (SocialuniSystemConst.serverIsChild()) {
+        if (SocialuniSystemConst.hasCenterServer()) {
             DevAccountModel centerDevDO = DevAccountFacade.getDevAccountBySocialuniId(SocialuniSystemConst.getCenterSocialuniId());
             if (centerDevDO == null) {
                 //手机号格式字符串瞎写就行，没有其他地方使用

@@ -21,7 +21,7 @@ public class SocialuniAppUserService {
 
 
     public ResultRO<SocialuniUserDetailRO> queryUserDetail(String userId) {
-        if (SocialuniSystemConst.serverIsChild()) {
+        if (SocialuniSystemConst.hasCenterServer()) {
             return socialuniAppUserAPI.queryUserDetail(userId);
         } else {
             SocialuniUserDetailRO userDetailRO;

@@ -21,7 +21,7 @@ public class SocialuniLocationController implements SocialuniLocationAPI {
 
     public ResultRO<LocationQueryRO> queryLocation(LocationQueryQO queryQO) {
         //如果应用，则调用中心
-        if (SocialuniSystemConst.serverIsChild()) {
+        if (SocialuniSystemConst.hasCenterServer()) {
             return socialuniLocationAPI.queryLocation(queryQO);
         }
         LocationQueryRO locationQueryRO;

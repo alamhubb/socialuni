@@ -22,7 +22,7 @@ public class SocialuniHugController implements SocialuniHugAPI {
     public ResultRO<Void> addHug(SocialuniHugAddQO socialHugAddQO) {
         centerHugAPIImpl.addHug(socialHugAddQO);
         //如果应用，则调用中心
-        if (SocialuniSystemConst.serverIsChild()) {
+        if (SocialuniSystemConst.hasCenterServer()) {
             return socialuniHugAPI.addHug(socialHugAddQO);
         }
         return new ResultRO<>();

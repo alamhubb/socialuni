@@ -14,7 +14,6 @@ import com.socialuni.social.userImg.model.SocialUserImgDeleteQO;
 import com.socialuni.social.userImg.model.SocialuniUserImgDeleteQO;
 import com.socialuni.social.userImg.utils.SocialuniUserImgDOUtil;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -34,7 +33,7 @@ public class SocialuniUserImgService {
 
         socialAddUserImgDomain.addUserImg(socialUserImgAddQO, mineUser);
 
-        if (SocialuniSystemConst.serverIsChild()) {
+        if (SocialuniSystemConst.hasCenterServer()) {
             return socialuniUserImgAPI.addUserImg(socialUserImgAddQO);
         }
 
@@ -47,7 +46,7 @@ public class SocialuniUserImgService {
         Integer userImgId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(centerUserImgDeleteQO.getUserImgId());
 
         socialDeleteUserImgDomain.deleteUserImg(new SocialUserImgDeleteQO(userImgId), mineUser);
-        if (SocialuniSystemConst.serverIsChild()) {
+        if (SocialuniSystemConst.hasCenterServer()) {
             return socialuniUserImgAPI.deleteUserImg(centerUserImgDeleteQO);
         }
 

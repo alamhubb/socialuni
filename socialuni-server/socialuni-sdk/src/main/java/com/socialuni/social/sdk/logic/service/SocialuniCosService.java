@@ -19,7 +19,7 @@ public class SocialuniCosService {
 
     public ResultRO<SocialCosAuthRO> getCosAuth() {
         //如果应用，则调用中心
-        if (SocialuniSystemConst.serverIsChild()) {
+        if (SocialuniSystemConst.hasCenterServer()) {
             return socialuniCosAPI.getCosAuth();
         }
         String userId = SocialuniUserUtil.getMineUserUuidIdNotNull();
