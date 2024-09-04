@@ -82,11 +82,11 @@ public class SoicialReportAddDomain {
         //查询动态状态是否为正常
 
         String contentUuId = SocialuniUnionIdFacede.createUnionIdByUuid(reportContentType, reportAddVO.getContentId());
-        Integer contentUnionId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(contentUuId);
+        Long  contentUnionId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(contentUuId);
 
         SocialuniUnionContentBaseDO modelDO = SocialuniContentDOUtil.getContentDOByContentId(contentUnionId);
 
-        Integer receiveUserUnionId = modelDO.getUserId();
+        Long  receiveUserUnionId = modelDO.getUserId();
         //这里之后才能校验
         SocialuniUserDo receiveUser = SocialuniUserUtil.getUserNotNull(receiveUserUnionId);
 

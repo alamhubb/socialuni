@@ -24,5 +24,5 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = true)
 public class SocialuniTalkImgDO extends SocialuniImgBaseDo implements Serializable {
     @Column(nullable = false, updatable = false)
-    private Integer talkId;
+    private Long talkId;
 }

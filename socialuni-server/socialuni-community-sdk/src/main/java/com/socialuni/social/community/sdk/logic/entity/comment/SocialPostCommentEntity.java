@@ -19,7 +19,7 @@ public class SocialPostCommentEntity {
 
 
     @Transactional
-    public SocialuniCommentDO saveComment(SocialuniCommentPostQO addVO, Integer mineUserId) {
+    public SocialuniCommentDO saveComment(SocialuniCommentPostQO addVO, Long mineUserId) {
         //创建和保存comment到db
         SocialuniCommentDO commentDO = commentStore.saveAddComment(addVO, mineUserId);
 

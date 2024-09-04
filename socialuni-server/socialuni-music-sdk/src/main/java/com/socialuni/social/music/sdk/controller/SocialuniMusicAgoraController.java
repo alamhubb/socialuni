@@ -128,7 +128,7 @@ public class SocialuniMusicAgoraController {
 
         SocialuniMusicOperateCheckRO checkResult = socialuniMusicOperateCheck.checkRoleId(channel);
 
-        Integer chatId = checkResult.getChatId();
+        Long chatId = checkResult.getChatId();
 
         Boolean pause = updateMusicQO.getIsPause();
 
@@ -300,7 +300,7 @@ public class SocialuniMusicAgoraController {
 
         String playerId = agoraPlayMusicRO.getPlayer().getId();
 
-        Integer chatId = checkResult.getChatId();
+        Long chatId = checkResult.getChatId();
 
 
         SocialuniMusicRoomDO socialuniMusicRoomPlayerDO = SocialuniRepositoryFacade.findByCustomField("roomId", chatId, SocialuniMusicRoomDO.class);

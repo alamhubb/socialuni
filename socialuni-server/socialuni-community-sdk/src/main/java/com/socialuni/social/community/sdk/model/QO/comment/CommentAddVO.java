@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 public class CommentAddVO {
     private String content;
     @NotNull
-    private Integer talkId;
-    private Integer commentId;
-    private Integer replyCommentId;
+    private Long talkId;
+    private Long commentId;
+    private Long replyCommentId;
 }

@@ -8,7 +8,7 @@ import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 public class SocialuniUserExpandUtil {
 
     public static SocialuniUserExpandDetailEditRO getMineUserExpandDetail() {
-        Integer userUnionId = SocialuniUserUtil.getMineUserIdNotNull();
+        Long userUnionId = SocialuniUserUtil.getMineUserIdNotNull();
 
         SocialuniUserExpandDo socialuniUserExpandDo = SocialuniUserExpandDOUtil.getOrCreate(userUnionId);
 
@@ -20,7 +20,7 @@ public class SocialuniUserExpandUtil {
     }
 
     public static SocialuniUserExpandDetailEditRO getUserExpandDetailRO(SocialuniUserDo userDO) {
-        Integer userUnionId = userDO.getUnionId();
+        Long userUnionId = userDO.getUnionId();
 
         SocialuniUserExpandDo socialuniUserExpandDo = SocialuniUserExpandDOUtil.getOrCreate(userUnionId);
 

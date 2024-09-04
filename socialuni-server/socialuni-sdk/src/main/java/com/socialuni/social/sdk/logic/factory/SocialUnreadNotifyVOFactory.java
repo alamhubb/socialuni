@@ -10,7 +10,6 @@ import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkImgDO;
 import com.socialuni.social.community.sdk.dao.SocialuniCommentDOUtil;
 import com.socialuni.social.community.sdk.dao.SocialuniTalkDOUtil;
 import com.socialuni.social.community.sdk.dao.SocialuniTalkImgDOUtil;
-import com.socialuni.social.sdk.im.enumeration.SocialuniNotifyCpDomainType;
 import com.socialuni.social.sdk.im.enumeration.SocialuniNotifyDomainType;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
@@ -56,7 +55,7 @@ public class SocialUnreadNotifyVOFactory {
 
 
     public static SocialUnreadNotifyVO getCommentDomainNotify(SocialUnreadNotifyVO notifyVO, NotifyDO notifyDO) {
-        Integer commentId = notifyDO.getContentId();
+        Long commentId = notifyDO.getContentId();
         SocialuniCommentDO commentDO = SocialuniCommentDOUtil.getNotCommentNull(commentId);
         SocialuniTalkDO talk = SocialuniTalkDOUtil.getTalkNotNull(commentDO.getTalkId());
 

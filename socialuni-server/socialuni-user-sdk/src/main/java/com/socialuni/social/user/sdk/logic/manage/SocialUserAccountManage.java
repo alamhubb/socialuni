@@ -23,7 +23,7 @@ public class SocialUserAccountManage {
     @Resource
     SocialUserAccountStore socialUserAccountStore;
 
-    public SocialUserPlatformAccountDO updateSessionKey(Integer mineUserId, String provider, String sessionKey) {
+    public SocialUserPlatformAccountDO updateSessionKey(Long mineUserId, String provider, String sessionKey) {
         SocialUserPlatformAccountDO socialUserAccountDO = socialUserPlatformAccountRepository.findByProviderAndUserId(provider, mineUserId);
         //更新数据库的key
         socialUserAccountDO.setUpdateTime(new Date());

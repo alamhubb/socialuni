@@ -32,7 +32,7 @@ public class SocialuniUserDOUtil {
         SocialuniUserDOUtil.socialuniUserRepository = socialuniUserRepository;
     }
 
-    public static List<Integer> getUserIdsByType(String type) {
+    public static List<Long> getUserIdsByType(String type) {
         return socialuniUserRepository.findUserIdsByType(type);
     }
 

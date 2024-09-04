@@ -31,7 +31,7 @@ public class SocialuniAdminAppConfigController {
     @PostMapping("save")
     @ResponseBody
     public AppConfigDO save(@RequestBody AppConfigDO appConfigDO) {
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+        Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
 
         Integer devId = DevAccountFacade.getAdminDevIdNotNull(mineUserId);
         appConfigDO.setDevId(devId);
@@ -45,7 +45,7 @@ public class SocialuniAdminAppConfigController {
     @PostMapping("deleteById")
     @ResponseBody
     public void deleteById(@RequestBody AppConfigPk appConfigPk) {
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+        Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
 
         Integer devId = DevAccountFacade.getAdminDevIdNotNull(mineUserId);
         appConfigPk.setDevId(devId);
@@ -61,7 +61,7 @@ public class SocialuniAdminAppConfigController {
     @GetMapping("getAllConfigs")
     @ResponseBody
     public ResultRO<List<AppConfigDO>> getAllConfigs() {
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+        Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
 
         Integer devId = DevAccountFacade.getAdminDevIdNotNull(mineUserId);
 

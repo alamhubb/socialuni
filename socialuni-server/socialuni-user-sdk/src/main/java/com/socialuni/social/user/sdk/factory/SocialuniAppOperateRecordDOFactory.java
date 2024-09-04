@@ -10,7 +10,7 @@ import feign.form.ContentType;
 
 public class SocialuniAppOperateRecordDOFactory {
 
-    /*public static SocialuniAppOperateRecordDO createChatAppOperateRecordDO(String contentType, Integer contentId, String type, Integer roleId, String roleType, Long userId, Integer beUserId) {
+    /*public static SocialuniAppOperateRecordDO createChatAppOperateRecordDO(String contentType, Long contentId, String type, Integer roleId, String roleType, Long userId, Long beUserId) {
         SocialuniAppOperateRecordDO socialuniAppOperateRecordDO = new SocialuniAppOperateRecordDO();
 
         socialuniAppOperateRecordDO.setContentType(contentType);
@@ -32,7 +32,7 @@ public class SocialuniAppOperateRecordDOFactory {
     //创建播放音乐的记录
 
 
-    public static SocialuniAppOperateRecordDO createChatAppOperateRecordDOBySys(String contentType, Integer contentId, String type, Integer beUserId, String remark) {
+    public static SocialuniAppOperateRecordDO createChatAppOperateRecordDOBySys(String contentType, Long contentId, String type, Long beUserId, String remark) {
         SocialuniAppOperateRecordDO socialuniAppOperateRecordDO = new SocialuniAppOperateRecordDO();
 
         socialuniAppOperateRecordDO.setContentType(contentType);

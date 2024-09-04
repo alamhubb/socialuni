@@ -16,7 +16,7 @@ public class WxPushDeleteMsg {
 
     public static HashMap<String, Object> getWxPushDeleteTalkContent(NotifyDO notify) {
         HashMap<String, Object> dataMap = new HashMap<>();
-        Integer talkId = notify.getTalk();
+        Long talkId = notify.getTalk();
         //审核内容
         dataMap.put("thing5", new PushValue(StringUtils.substring(talk.getContent(), 0, 20)));
         //审核结果
@@ -42,7 +42,7 @@ public class WxPushDeleteMsg {
 
     public static HashMap<String, Object> getWxPushDeleteCommentContent(NotifyDO notify) {
         HashMap<String, Object> dataMap = new HashMap<>();
-        Integer commentId = notify.getComment();
+        Long commentId = notify.getComment();
         //审核内容
         dataMap.put("thing5", new PushValue(StringUtils.substring(comment.getContent(), 0, 20)));
         //审核结果

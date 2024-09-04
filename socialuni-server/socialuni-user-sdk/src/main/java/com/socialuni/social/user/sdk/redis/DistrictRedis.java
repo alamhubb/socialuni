@@ -2,7 +2,7 @@ package com.socialuni.social.user.sdk.redis;
 
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
-import com.socialuni.social.community.sdk.dao.DO.SocialuniDistrictDO;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniDistrictDO;
 import com.socialuni.social.user.sdk.model.RO.SocialDistrictRO;
 import com.socialuni.social.user.sdk.factory.SocialDistrictROFactory;
 import com.socialuni.social.user.sdk.dao.repository.DistrictRepository;

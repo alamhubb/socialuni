@@ -11,10 +11,10 @@ import java.util.Optional;
  * @date 2018-10-17 21:59
  */
 public interface UserContactRepository extends JpaRepository<SocialuniGetUserContactRecordDO, Integer> {
-    Optional<SocialuniGetUserContactRecordDO> findFirstByUserIdAndBeUserId(Long userId, Integer beUserId);
+    Optional<SocialuniGetUserContactRecordDO> findFirstByUserIdAndBeUserId(Long userId, Long beUserId);
 
 
-    SocialuniGetUserContactRecordDO findOneByUserIdAndBeUserId(Long userId, Integer beUserId);
+    SocialuniGetUserContactRecordDO findOneByUserIdAndBeUserId(Long userId, Long beUserId);
 }
 
 

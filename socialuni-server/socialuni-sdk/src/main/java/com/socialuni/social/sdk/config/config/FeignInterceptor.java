@@ -53,7 +53,7 @@ public class FeignInterceptor implements RequestInterceptor {
 
         if (!postUrl.contains("/registryUser")) {
             if (mineUser != null) {
-                Integer mineUserUnionId = mineUser.getUnionId();
+                Long mineUserUnionId = mineUser.getUnionId();
                 //主要是记录有没有的
                 Integer centerDevId = DevAccountFacade.getCenterDevIdNotNull();
 

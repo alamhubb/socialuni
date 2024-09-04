@@ -300,8 +300,8 @@ public class SocialChatROFactory {
             String contentType = socialuniUnionIdModler.getContentType();
             //私聊
             if (contentType.equals(SocialuniContentType.user)) {
-                Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
-                Integer beUserId = socialuniUnionIdModler.getUnionIdqqq();
+                Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+                Long beUserId = socialuniUnionIdModler.getUnionIdqqq();
                 SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findByChatIdAndUserId(mineUserId, beUserId);
 
                 return chatUserDO;
@@ -312,7 +312,7 @@ public class SocialChatROFactory {
         }
     }
 
-    public static Integer getChatId(String chatId) {
+    public static Long getChatId(String chatId) {
         SocialuniChatUserDO socialuniChatUserDO = getSingleChatUser(chatId);
         if (socialuniChatUserDO == null) {
             SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidNotNull(chatId);

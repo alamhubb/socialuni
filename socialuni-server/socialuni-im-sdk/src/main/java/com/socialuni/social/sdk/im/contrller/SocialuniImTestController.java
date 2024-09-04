@@ -52,9 +52,9 @@ public class SocialuniImTestController {
         log.info(String.valueOf(System.currentTimeMillis() / 1000));
 
 
-//        List<Integer> userIds = socialuniUserRepository.findAllUserIds();
+//        List<Long> userIds = socialuniUserRepository.findAllUserIds();
         //获取所有的uuid
-        List<Integer> allUserIds = SocialuniUnionIdFacede.findAllIdsByContentType(SocialuniContentType.user);
+        List<Long> allUserIds = SocialuniUnionIdFacede.findAllIdsByContentType(SocialuniContentType.user);
         log.info(String.valueOf(System.currentTimeMillis() / 1000));
 
 
@@ -74,9 +74,9 @@ public class SocialuniImTestController {
         log.info(String.valueOf(System.currentTimeMillis() / 1000));
         log.info("imIds:{}", imUserIds.size());
 
-        List<Integer> imNotHasIds = new ArrayList<>();
+        List<Long> imNotHasIds = new ArrayList<>();
         //遍历uuid
-        for (Integer uuid : allUserIds) {
+        for (Long uuid : allUserIds) {
             //如果im里面不包含则加入一个数组中
             if (!imIdsMap.containsKey(uuid)) {
                 imNotHasIds.add(uuid);
@@ -90,7 +90,7 @@ public class SocialuniImTestController {
 
         Integer i = 0;
         //遍历未注册的id
-        for (Integer imNotHasId : imNotHasIds) {
+        for (Long imNotHasId : imNotHasIds) {
             Integer finalI = i;
             CompletableFuture.supplyAsync(() -> {
                 SocialuniUserDo mineUser = SocialuniUserUtil.getUserNotNull(imNotHasId);

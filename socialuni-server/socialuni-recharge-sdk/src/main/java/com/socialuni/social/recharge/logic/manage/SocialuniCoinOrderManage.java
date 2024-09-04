@@ -13,7 +13,7 @@ public class SocialuniCoinOrderManage {
     @Resource
     SocialuniCoinOrderRepository socialuniCoinOrderRepository;
 
-    public void createCoinOrder(SocialuniUserCoinDo socialuniUserCoinDo, Integer coinNum, String orderType, String orderDetailType, Integer relationOrderId) {
+    public void createCoinOrder(SocialuniUserCoinDo socialuniUserCoinDo, Integer coinNum, String orderType, String orderDetailType, Long relationOrderId) {
 //        SocialuniCoinOrderDO socialuniCoinOrderDO = SocialuniCoinOrderFactory.createCoinOrderDOByOrderType(socialuniUserCoinDo, coinNum, orderType, relationOrderId);
         SocialuniCoinOrderDO socialuniCoinOrderDO = new SocialuniCoinOrderDO(socialuniUserCoinDo.getUserId(), coinNum, orderType, orderDetailType, socialuniUserCoinDo.getCoin(), relationOrderId);
         //保存coin订单

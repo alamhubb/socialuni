@@ -26,7 +26,7 @@ public class SocialuniAdminStickTalkManageController {
     public List<SocialuniAdminStickTalkRO> querySystemManageTalks() {
         Long userId = DevAccountFacade.getDevUserId();
 
-        List<Integer> talkIds = talkInterface.findTop10ByUserIdAndStatusOrderByGlobalTopDescIdDesc(userId, SocialuniCommonStatus.enable);
+        List<Long> talkIds = talkInterface.findTop10ByUserIdAndStatusOrderByGlobalTopDescIdDesc(userId, SocialuniCommonStatus.enable);
 
         List<SocialuniAdminStickTalkRO> talkROS = talkIds.stream().map(item -> {
             SocialuniAdminStickTalkRO talkvo = SocialuniAdminStickTalkROFactory.getTalkRO(item);

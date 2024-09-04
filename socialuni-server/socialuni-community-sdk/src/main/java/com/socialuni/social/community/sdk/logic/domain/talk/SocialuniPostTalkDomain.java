@@ -7,7 +7,7 @@ import com.socialuni.social.common.sdk.constant.TalkOperateType;
 import com.socialuni.social.community.sdk.dao.repository.SocialTalkCircleRepository;
 import com.socialuni.social.community.sdk.logic.service.tag.TagService;
 import com.socialuni.social.community.sdk.model.TalkAddValidateRO;
-import com.socialuni.social.community.sdk.dao.DO.SocialuniDistrictDO;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniDistrictDO;
 import com.socialuni.social.tag.dao.DO.SocialuniCircleDO;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
 import com.socialuni.social.tag.dao.DO.SocialuniTagDO;

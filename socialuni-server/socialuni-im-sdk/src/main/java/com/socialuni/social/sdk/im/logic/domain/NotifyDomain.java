@@ -39,8 +39,8 @@ public class NotifyDomain {
     /*public List<NotifyDO> saveCreateCommentNotifies(SocialuniCommentDO commentDO, SocialuniTalkDO talkDO, SocialuniCommentDO parentCommentDO, SocialuniCommentDO replyCommentDO, SocialuniUserDo requestUser) {
         List<NotifyDO> notifies = new ArrayList<>();
         Integer talkUserId = talkDO.getUserId();
-        Integer commentId = commentDO.getUnionId();
-        Integer talkId = talkDO.getUnionId();
+        Long commentId = commentDO.getUnionId();
+        Long talkId = talkDO.getUnionId();
         Integer commentUserId = commentDO.getUserId();
         //如果评论的自己的动态，则给所有二级评论人发通知
         if (commentUserId.equals(talkUserId)) {
@@ -125,7 +125,7 @@ public class NotifyDomain {
     public void sendNotify(NotifyDO notify, SocialuniUserDo sendUser) throws SocialException {
         //评论动态
 //        UserDO receiveUser = userRepository.findById(receiveUserId).get();
-        Integer receiveUserId = notify.getBeUserId();
+        Long receiveUserId = notify.getBeUserId();
 
         SocialUserPlatformAccountDO receiveAccount = socialUserPlatformAccountRepository.findFirstByUserIdOrderByUpdateTimeDesc(receiveUserId);
 //        if (receiveAccount != null) {
@@ -143,25 +143,25 @@ public class NotifyDomain {
         }
 
         if (NotifyType.message.equals(notifyType)) {
-            SocialuniMessageReceiveDO messageReceiveDO = messageReceiveRepository.getReferenceById(notify.getContentId());
-            SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findById(messageReceiveDO.getChatUserId());
+//            SocialuniMessageReceiveDO messageReceiveDO = messageReceiveRepository.getReferenceById(notify.getContentId());
+//            SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findById(messageReceiveDO.getChatUserId());
 //                Optional<ChatDO> chatDOOptional = chatRepository.findById();
             //如果群聊，直接发送给两个服务器在线的所有用户，并且查找他们未读的。
             //未登录的时候也查询群聊里面的所有内容
-            NotifyVO notifyVO = SocaluniNotifyROFactory.getNotifyROBySendMsg(notify, sendUser, messageReceiveDO, chatUserDO);
+//            NotifyVO notifyVO = SocaluniNotifyROFactory.getNotifyROBySendMsg(notify, sendUser, messageReceiveDO, chatUserDO);
 
 //            SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getUserNotNull(receiveUserId);
 
 //            if (UserType.operation.equals(socialuniUserDo.getType())) {
 //                List<Integer> systemUserIds = SocialuniUserDOUtil.getUserIdsByType(UserType.system);
-//                for (Integer systemUserId : systemUserIds) {
+//                for (Long systemUserId : systemUserIds) {
 //                    WebsocketServer.sendMessage(systemUserId, notifyVO);
 //                }
 //            } else {
 //                WebsocketServer.sendMessage(receiveUserId, notifyVO);
 //            }
 
-            WebsocketServer.sendMessage(receiveUserId, notifyVO);
+//            WebsocketServer.sendMessage(receiveUserId, notifyVO);
 
                 /*try {
                     stringRedisTemplate.convertAndSend(receiveUserId.toString(), JsonUtil.objectMapper.writeValueAsString(notifyVO));

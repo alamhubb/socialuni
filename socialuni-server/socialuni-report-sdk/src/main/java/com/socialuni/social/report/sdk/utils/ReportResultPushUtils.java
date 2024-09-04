@@ -34,7 +34,8 @@ public class ReportResultPushUtils {
 
     //动态评论通知
     public static PushMsgDTO getReportResultPushDTO(String provider, NotifyDO notify) {
-        ReportDO ReportDO = reportApi.findById(notify.getContentId()).get();
+        ReportDO ReportDO = null;
+//        ReportDO ReportDO = reportApi.findById(notify.getContentId()).get();
         SocialuniUnionContentBaseDO baseModelDO = SocialuniContentDOUtil.getContentDOByContentId(ReportDO.getContentId());
 
         //举报原因

@@ -30,7 +30,7 @@ public class ReportContentROFactory {
         ReportContentROFactory.socialTagRedis = socialTagRedis;
     }
 
-    public static ReportContentVO getReportContentVO(String reportContentType, Integer contentId) {
+    public static ReportContentVO getReportContentVO(String reportContentType, Long contentId) {
         ReportContentVO reportContentVO = new ReportContentVO();
         if (reportContentType.equals(SocialuniContentType.talk)) {
             SocialuniTalkDO talkDO = SocialuniTalkDOUtil.getTalkNotNull(contentId);

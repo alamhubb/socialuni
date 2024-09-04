@@ -40,24 +40,24 @@ public class SocialuniUserContactRepositoryFacede extends SocialuniUserRepositor
      * @param <T>
      * @return
      */
-    public static <T extends SocialuniUserContactBaseDO> T findByUserIdAndBeUserId(Long userId, Integer beUserId, Class<T> tClass) {
+    public static <T extends SocialuniUserContactBaseDO> T findByUserIdAndBeUserId(Long userId, Long beUserId, Class<T> tClass) {
         return socialuniCommonRepository.findByUserIdAndBeUserId(userId, beUserId, tClass);
     }
 
-    public static <T extends SocialuniUserContactBaseDO> T findByUserIdAndBeUserIdAndStatus(Long userId, Integer beUserId, String status, Class<T> tClass) {
+    public static <T extends SocialuniUserContactBaseDO> T findByUserIdAndBeUserIdAndStatus(Long userId, Long beUserId, String status, Class<T> tClass) {
         return socialuniCommonRepository.findByUserIdAndBeUserIdAndStatus(userId, beUserId, status, tClass);
     }
 
-    public static <T extends SocialuniUserContactBaseDO> Long countByUserIdAndBeUserIdAndStatus(Long userId, Integer beUserId, String status, Class<T> tClass) {
+    public static <T extends SocialuniUserContactBaseDO> Long countByUserIdAndBeUserIdAndStatus(Long userId, Long beUserId, String status, Class<T> tClass) {
         return socialuniCommonRepository.countByUserIdAndBeUserIdAndStatus(userId, beUserId, status, tClass);
     }
 
 
-    public static <T extends SocialuniUserContactBaseDO> T findByUserIdAndBeUserIdOrderByIdDesc(Long userId, Integer beUserId, Class<T> tClass) {
+    public static <T extends SocialuniUserContactBaseDO> T findByUserIdAndBeUserIdOrderByIdDesc(Long userId, Long beUserId, Class<T> tClass) {
         return socialuniCommonRepository.findByUserIdAndBeUserIdOrderByIdDesc(userId, beUserId, tClass);
     }
 
-    public static <T extends SocialuniUserContactBaseDO> T findByUserIdAndBeUserIdAndNotStatus(Long userId, Integer beUserId, String status, Class<T> tClass) {
+    public static <T extends SocialuniUserContactBaseDO> T findByUserIdAndBeUserIdAndNotStatus(Long userId, Long beUserId, String status, Class<T> tClass) {
         return socialuniCommonRepository.findByUserIdAndBeUserIdAndNotStatus(userId, beUserId, status, tClass);
     }
 }

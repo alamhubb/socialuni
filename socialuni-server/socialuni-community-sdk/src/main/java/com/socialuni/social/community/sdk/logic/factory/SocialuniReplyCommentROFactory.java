@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SocialuniReplyCommentROFactory {
-    public static SocialuniReplyCommentRO getReplyCommentRO(Integer replyCommentId) {
+    public static SocialuniReplyCommentRO getReplyCommentRO(Long replyCommentId) {
         SocialuniCommentDO comment = SocialuniCommentDOUtil.getNotCommentNull(replyCommentId);
         SocialuniReplyCommentRO socialReplyCommentRO = new SocialuniReplyCommentRO();
         socialReplyCommentRO.setId(comment.getUnionId());

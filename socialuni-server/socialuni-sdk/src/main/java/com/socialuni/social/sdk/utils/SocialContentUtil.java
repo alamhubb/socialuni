@@ -32,15 +32,15 @@ public class SocialContentUtil {
         SocialContentUtil.talkRepository = talkRepository;
     }
 
-    public static SocialContentDO get(Integer contentId) {
+    public static SocialContentDO get(Long contentId) {
         return socialContentRepository.findOneById(contentId);
     }
 
-    public static CommentDO getComment(Integer contentId) {
+    public static CommentDO getComment(Long contentId) {
         return commentRepository.findOneById(contentId);
     }
 
-    public static TalkDO getTalk(Integer contentId) {
+    public static TalkDO getTalk(Long contentId) {
         return talkRepository.findOneById(contentId);
     }
 }

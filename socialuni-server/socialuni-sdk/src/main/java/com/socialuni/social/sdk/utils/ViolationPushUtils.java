@@ -39,7 +39,8 @@ public class ViolationPushUtils {
 
     //动态评论通知
     public static PushMsgDTO getViolationPushDTO(String platform, NotifyDO notify) {
-        ReportDO ReportDO = reportApi.findById(notify.getContentId()).get();
+        ReportDO ReportDO = null;
+//        ReportDO ReportDO = reportApi.findById(notify.getContentId()).get();
 
         SocialuniUnionContentBaseDO baseModelDO = SocialuniContentDOUtil.getContentDOByContentId(ReportDO.getContentId());
 

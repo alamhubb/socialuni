@@ -16,7 +16,7 @@ public class SocialRequestUserConfigDefaultImpl implements SocialRequestUserConf
     }
 
     @Override
-    public Integer getUserId() {
+    public Long getUserId() {
         //解析token
         SocialuniTokenDO tokenDO = SocialTokenDOUtil.getCommonTokenDOAllowNull();
         if (tokenDO == null) {

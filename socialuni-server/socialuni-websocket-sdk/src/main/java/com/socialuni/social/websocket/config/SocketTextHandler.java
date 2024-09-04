@@ -26,8 +26,7 @@ public class SocketTextHandler extends TextWebSocketHandler {
             String userId = user.getName();
             onlineUsersSessionMap.put(userId, session);
         } else {
-
-            onlineUsersSessionMap.put(UUIDUtil.getSnowflakeId(), session);
+//            onlineUsersSessionMap.put(UUIDUtil.getSnowflakeId(), session);
         }
     }
 

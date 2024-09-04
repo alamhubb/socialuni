@@ -21,7 +21,7 @@ public interface SocialuniUserRepository extends JpaRepository<SocialuniUserDo, 
     List<Integer> findAllUserIds();
 
     @Cacheable(cacheNames = CommonRedisKey.userById, key = "#id")
-    SocialuniUserDo findOneByUnionId(Integer id);
+    SocialuniUserDo findOneByUnionId(Long id);
 
     @Caching(
             evict = {
@@ -36,7 +36,7 @@ public interface SocialuniUserRepository extends JpaRepository<SocialuniUserDo, 
 
     @Cacheable(cacheNames = CommonRedisKey.findUserIdsByType, key = "#type")
     @Query("select s.userId from SocialuniUserDo s where s.type = :type order by s.updateTime desc")
-    List<Integer> findUserIdsByType(String type);
+    List<Long> findUserIdsByType(String type);
 
     @Query(value = "select u from SocialuniUserDo u,SocialUserViolationDo su where u.status = :userStatus and u.id = su.userId and su.violationEndTime < :curDate")
     List<SocialuniUserDo> findCanUnfreezeViolationUser(@Param("userStatus") String userStatus, @Param("curDate") Date curDate);
@@ -45,7 +45,7 @@ public interface SocialuniUserRepository extends JpaRepository<SocialuniUserDo, 
 
     @Cacheable(cacheNames = CommonRedisKey.findUserIdsByStatus)
     @Query("select s.userId from SocialuniUserDo s where s.status = :status")
-    List<Integer> findUserIdsByStatus(String status);
+    List<Long> findUserIdsByStatus(String status);
 
     /*@Modifying
     @Transactional

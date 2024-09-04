@@ -59,7 +59,7 @@ public class SocialCommentROFactory {
         return socialCommentRO;
     }
 
-    public static List<SocialuniCommentRO> getTalkCommentROs(SocialuniUserDo mineUser, Integer talkId, Boolean showAllComment) {
+    public static List<SocialuniCommentRO> getTalkCommentROs(SocialuniUserDo mineUser, Long talkId, Boolean showAllComment) {
         //10毫秒
         log.debug("开始查询comment" + new Date().getTime() / 1000);
         List<? extends SocialuniCommentDO> commentDOS;
@@ -73,7 +73,7 @@ public class SocialCommentROFactory {
         return commentVOS;
     }
 
-    public static List<SocialuniCommentRO> getCommentChildCommentROs(SocialuniUserDo mineUser, Integer commentId, Boolean showAllComment) {
+    public static List<SocialuniCommentRO> getCommentChildCommentROs(SocialuniUserDo mineUser, Long commentId, Boolean showAllComment) {
         //10毫秒
         log.debug("开始查询comment" + new Date().getTime() / 1000);
         List<? extends SocialuniCommentDO> commentDOS;

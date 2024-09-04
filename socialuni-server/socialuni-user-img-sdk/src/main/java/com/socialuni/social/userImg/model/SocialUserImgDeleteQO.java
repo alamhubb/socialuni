@@ -9,9 +9,9 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class SocialUserImgDeleteQO {
     @NotNull
-    private Integer userImgId;
+    private Long userImgId;
 
-    public SocialUserImgDeleteQO(Integer userImgId) {
+    public SocialUserImgDeleteQO(Long userImgId) {
         this.userImgId = userImgId;
     }
 }

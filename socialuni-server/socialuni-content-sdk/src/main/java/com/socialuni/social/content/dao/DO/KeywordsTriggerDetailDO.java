@@ -23,7 +23,7 @@ public class KeywordsTriggerDetailDO implements Serializable {
     //要显示具体的各种比例所以不是懒加载
     private Integer keywordsId;
     private String contentType;
-    private Integer contentId;
+    private Long contentId;
 
 //将所有单词的变种文本 也写在关键词上，以后每次直接读取，无需再格式化
 
@@ -56,7 +56,7 @@ public class KeywordsTriggerDetailDO implements Serializable {
 
     public KeywordsTriggerDetailDO(
             String content,
-            Integer contentId,
+            Long contentId,
             String contentType,
             Integer keywordsId,
             String keywordsText,
@@ -78,7 +78,7 @@ public class KeywordsTriggerDetailDO implements Serializable {
     //变种匹配构建
     public KeywordsTriggerDetailDO(
             String content,
-            Integer contentId,
+            Long contentId,
             String contentType,
             Integer keywordsId,
             String keywordsText,

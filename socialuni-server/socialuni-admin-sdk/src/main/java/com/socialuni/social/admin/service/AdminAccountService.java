@@ -169,7 +169,7 @@ public class AdminAccountService {
                 //不能拿到外层，因为有判断
                 devAccountModel.setAppName(appName);
                 //初始化时生成uuid
-                devAccountModel.setSecretKey(UUIDUtil.getSnowflakeId());
+                devAccountModel.setSecretKey(UUIDUtil.getUUID());
                 //初始化时需要让开发环境同步增加tag
                 //设置对应的开发者app名称
                 socialTagManage.createDevAccountTagDO(devAccountModel.getId(), appName);

@@ -14,7 +14,7 @@ import java.util.Date;
 
 public class ErrorMsgUtil {
     public static String getErrorCode605ContactServiceValue() {
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdAllowNull();
+        Long mineUserId = SocialuniUserUtil.getMineUserIdAllowNull();
         if (mineUserId == null) {
             throw new SocialNullUserException();
         }

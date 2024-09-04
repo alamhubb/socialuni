@@ -14,7 +14,7 @@ public class SocialBindUserProviderAccountEntity {
     @Resource
     SocialUserAccountManage socialUserAccountManage;
 
-    public SocialUserPlatformAccountDO bindOrUpdateProviderAccount(Integer mineUserId, SocialProviderLoginQO loginQO) {
+    public SocialUserPlatformAccountDO bindOrUpdateProviderAccount(Long mineUserId, SocialProviderLoginQO loginQO) {
         UniUnionIdRO uniUnionIdRO = SocialUniProviderUtil.getUnionIdRO(loginQO);
         return socialUserAccountManage.checkOrCreateOrUpdate(mineUserId, loginQO, uniUnionIdRO);
     }

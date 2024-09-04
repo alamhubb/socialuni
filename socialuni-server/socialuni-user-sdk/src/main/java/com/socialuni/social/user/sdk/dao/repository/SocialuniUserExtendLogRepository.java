@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface SocialuniUserExtendLogRepository extends JpaRepository<SocialuniUserExtendFriendLogDo, Integer> {
     @Query("select s.userId from SocialuniUserExtendFriendLogDo s where s.adCode like concat(:adCode, '%') group by s.userId order by s.id desc ")
-    List<Integer> findUserIdsByLickAdCode(String adCode);
+    List<Long> findUserIdsByLickAdCode(String adCode);
 
 }
 

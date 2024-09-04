@@ -15,5 +15,5 @@ import java.util.List;
 public interface SocialuniLikeUseRepository extends JpaRepository<SocialuniUserLikeDO, Integer> {
 
     @Query(nativeQuery = true, value = "select s.be_user_id from s_user_like s order by s.update_time desc limit 2000")
-    List<Integer> findBeLikeUserIdsOrderByUpdateTimeDesc();
+    List<Long> findBeLikeUserIdsOrderByUpdateTimeDesc();
 }

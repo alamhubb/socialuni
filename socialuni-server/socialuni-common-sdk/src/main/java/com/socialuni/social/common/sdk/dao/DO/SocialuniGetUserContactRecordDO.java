@@ -29,7 +29,7 @@ public class SocialuniGetUserContactRecordDO extends SocialuniUserContactBaseDO 
     @Column(nullable = false)
     String contactInfo;
 
-    public SocialuniGetUserContactRecordDO(Long userId, Integer beUserId, String contactInfo) {
+    public SocialuniGetUserContactRecordDO(Long userId, Long beUserId, String contactInfo) {
         super(userId, beUserId);
         this.contactInfo = contactInfo;
     }

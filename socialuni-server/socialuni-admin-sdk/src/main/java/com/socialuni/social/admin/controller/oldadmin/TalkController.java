@@ -23,7 +23,7 @@ public class TalkController {
 
     */
 /*@PostMapping("queryTalk")
-    public ResultVO<ReportContentVO> queryTalk(Integer talkId) {
+    public ResultVO<ReportContentVO> queryTalk(Long talkId) {
         SocialTalkDO talkDO = talkRepository.findById(talkId).get();
         return new ResultVO<>(new ReportContentVO(talkDO));
     }

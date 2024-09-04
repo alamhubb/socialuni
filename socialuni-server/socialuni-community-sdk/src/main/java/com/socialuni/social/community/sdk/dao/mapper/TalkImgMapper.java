@@ -10,6 +10,6 @@ import java.util.List;
 public interface TalkImgMapper {
     @Cacheable(cacheNames = "getTalkImgIdsByTalkId", key = "#talkId")
     List<Integer> queryTalkImgIdsTop3ByTalkIdOrderByIdAsc(
-            @Param("talkId") Integer talkId
+            @Param("talkId") Long talkId
     );
 }

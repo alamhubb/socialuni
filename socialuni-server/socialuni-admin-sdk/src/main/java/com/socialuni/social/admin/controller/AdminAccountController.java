@@ -36,7 +36,7 @@ public class AdminAccountController {
     @PostMapping("resetSecretKey")
     public ResultRO<String> resetSecretKey() {
         DevAccountModel devAccount = AdminDevAccountFacade.getAdminDevAccountNotNull();
-        String secretKey = UUIDUtil.getSnowflakeId();
+        String secretKey = UUIDUtil.getUUID();
         devAccount.setSecretKey(secretKey);
 
         //新建和修改，数量必然大于0，代表需要向开发环境同步

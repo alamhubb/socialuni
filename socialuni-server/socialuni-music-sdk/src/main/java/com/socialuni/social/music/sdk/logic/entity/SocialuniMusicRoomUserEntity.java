@@ -23,7 +23,7 @@ public class SocialuniMusicRoomUserEntity {
     SocialuniMusicRoomUserManage socialuniMusicRoomUserManage;
 
     //未使用
-    public SocialuniMusicRoomUserDO checkAndGetOrCreateMusicRoomUserInfo(Integer chatId, Integer mineUserId) {
+    public SocialuniMusicRoomUserDO checkAndGetOrCreateMusicRoomUserInfo(Long chatId, Long mineUserId) {
         //校验是否有会话权限
         SocialuniChatUserDO socialuniChatUserDO = socialuniChatUserCheck.checkUserInChat(chatId, mineUserId);
 
@@ -32,7 +32,7 @@ public class SocialuniMusicRoomUserEntity {
         return socialuniMusicRoomUserDO;
     }
 
-    private SocialuniMusicRoomUserDO getOrCreateMusicRoomUserInfo(Integer chatId, SocialuniChatUserDO socialuniChatUserDO) {
+    private SocialuniMusicRoomUserDO getOrCreateMusicRoomUserInfo(Long chatId, SocialuniChatUserDO socialuniChatUserDO) {
         SocialuniMusicRoomDO socialuniMusicRoomDO = socialuniMusicRoomManage.getOrCreateMusicPlayerDO(chatId);
 
         SocialuniMusicRoomUserDO socialuniMusicRoomUserDO = null;

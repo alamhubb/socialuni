@@ -44,7 +44,7 @@ public class SocialuniUserImgService {
     public ResultRO<List<SocialuniUserImgRO>> deleteUserImg(SocialuniUserImgDeleteQO centerUserImgDeleteQO) {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
 
-        Integer userImgId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(centerUserImgDeleteQO.getUserImgId());
+        Long userImgId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(centerUserImgDeleteQO.getUserImgId());
 
         socialDeleteUserImgDomain.deleteUserImg(new SocialUserImgDeleteQO(userImgId), mineUser);
         if (SocialuniDevConfig.hasCenterServer()) {

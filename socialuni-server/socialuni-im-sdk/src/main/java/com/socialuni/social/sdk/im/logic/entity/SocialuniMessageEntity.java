@@ -91,12 +91,12 @@ public class SocialuniMessageEntity {
     // 还有有个好友表。不需要这个表。
     // 这俩级联？
     @Transactional
-    public SocialMessageRO sendSingleMsg(Integer beUserId, String msgContent) {
+    public SocialMessageRO sendSingleMsg(Long beUserId, String msgContent) {
         return sendSingleMsg(beUserId, msgContent, MessageContentType.text);
     }
 
     @Transactional
-    public SocialMessageRO sendSingleMsg(Integer beUserId, String msgContent, String contentType) {
+    public SocialMessageRO sendSingleMsg(Long beUserId, String msgContent, String contentType) {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
         return sendSingleMsg(mineUser, beUserId, msgContent, MessageContentType.text);
     }
@@ -105,10 +105,10 @@ public class SocialuniMessageEntity {
     SocialuniPayCoinDomain socialuniPayCoinDomain;
 
     @Transactional
-    public SocialMessageRO sendSingleMsg(SocialuniUserDo mineUser, Integer beUserId, String msgContent, String contentType) {
+    public SocialMessageRO sendSingleMsg(SocialuniUserDo mineUser, Long beUserId, String msgContent, String contentType) {
 
 
-        Integer mineUserId = mineUser.getUserId();
+        Long mineUserId = mineUser.getUserId();
 
 
         //校验用户是否存在
@@ -172,7 +172,7 @@ public class SocialuniMessageEntity {
     @Resource
     SocialuniChatUserCheck socialuniChatUserCheck;
 
-    public SocialMessageRO sendGroupMessage(Integer chatId, String msgContent, String contentType) {
+    public SocialMessageRO sendGroupMessage(Long chatId, String msgContent, String contentType) {
         SocialuniChatDO chat = SocialuniRepositoryFacade.findByUnionId(chatId, SocialuniChatDO.class);
 
         SocialuniUserDo sendUser = SocialuniUserUtil.getMineUserNotNull();
@@ -227,7 +227,7 @@ public class SocialuniMessageEntity {
     }
 
     @Async
-    public void updateChatUsers(Integer chatId, SocialuniUserDo sendUser, SocialuniMessageDO message) {
+    public void updateChatUsers(Long chatId, SocialuniUserDo sendUser, SocialuniMessageDO message) {
         List<Integer> chatUserIds = chatUserRepository.findChatUserIdsByChatIdAndStatus(chatId, ChatUserStatus.enable);
 
         log.info(String.valueOf(new Date().getTime()));
@@ -246,7 +246,7 @@ public class SocialuniMessageEntity {
                     chatSocialuniUserDo.setStatus(ChatUserStatus.enable);
                 }*/
             //获取当起chatUser的userId
-            Integer chatUserId = chatSocialuniUserDo.getUserId();
+            Long chatUserId = chatSocialuniUserDo.getUserId();
 //            SocialuniMessageReceiveDO messageReceiveDO = new SocialuniMessageReceiveDO(chatSocialuniUserDo, message.getUserId(), message.getUnionId());
 
             if (!chatUserId.equals(sendUser.getUserId())) {
@@ -306,7 +306,7 @@ public class SocialuniMessageEntity {
                     chatSocialuniUserDo.setStatus(ChatUserStatus.enable);
                 }*/
             //获取当起chatUser的userId
-            Integer chatUserId = chatSocialuniUserDo.getUserId();
+            Long chatUserId = chatSocialuniUserDo.getUserId();
             SocialuniMessageReceiveDO messageReceiveDO = new SocialuniMessageReceiveDO(chatSocialuniUserDo, message.getUserId(), message.getUnionId());
 
             if (!chatUserId.equals(sendUser.getUserId())) {
@@ -317,7 +317,7 @@ public class SocialuniMessageEntity {
                 messageReceiveDO = messageReceiveRepository.save(messageReceiveDO);
                 NotifyDO notifyDO = new NotifyDO(messageReceiveDO);
                 notifyDO.setType(NotifyType.message);
-                notifyDO.setContentId(messageReceiveDO.getId());
+                notifyDO.setContentId(message.getUnionId());
                 notifyDO = notifyRepository.save(notifyDO);
                 notifies.add(notifyDO);
             } else {
@@ -335,7 +335,7 @@ public class SocialuniMessageEntity {
     //用户详情页，判断是否能发消息
 
 
-    private static List<SocialuniChatUserDO> checkUser(Integer beUserId, SocialuniUserDo mineUser) {
+    private static List<SocialuniChatUserDO> checkUser(Long beUserId, SocialuniUserDo mineUser) {
         //对方关注了你，你就能给对方发消息。
 
 //        followdo

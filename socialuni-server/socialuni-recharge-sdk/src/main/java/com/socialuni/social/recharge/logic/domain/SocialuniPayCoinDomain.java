@@ -47,7 +47,7 @@ public class SocialuniPayCoinDomain {
     SocialuniCreateCoinOrderEntity socialuniCreateCoinOrderEntity;
 
     @Transactional
-    public void consumCoinByType(Integer mineUserId, Integer beUserId, String type) {
+    public void consumCoinByType(Long mineUserId, Long beUserId, String type) {
 
         SocialuniUserCoinDo socialuniUserCoinDo = SocialuniUserSocialCoinDOUtil.getNotNull(mineUserId);
 
@@ -71,14 +71,14 @@ public class SocialuniPayCoinDomain {
         socialuniCoinConsumLogDO.setType(type);
         socialuniCoinConsumLogDO = SocialuniRepositoryFacade.save(socialuniCoinConsumLogDO);
 
-        socialuniCreateCoinOrderEntity.createCoinOrderByOrderType(mineUserId, -consumNum, SocialuniCoinOrderType.consume, SocialuniOrderDetailType.msg, socialuniCoinConsumLogDO.getId());
+        socialuniCreateCoinOrderEntity.createCoinOrderByOrderType(mineUserId, -consumNum, SocialuniCoinOrderType.consume, SocialuniOrderDetailType.msg, Long.valueOf(socialuniCoinConsumLogDO.getId()));
     }
 
     @Resource
     SocialuniCoinOrderRepository socialuniCoinOrderRepository;
 
     public SocialuniCoinInfoRO getUserCoinInfo() {
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+        Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
 
         SocialuniCoinOrderDO socialuniCoinOrderDO = socialuniCoinOrderRepository.findFirstByUserIdAndDetailType(mineUserId, SocialuniOrderDetailType.sysGive);
 
@@ -139,7 +139,7 @@ public class SocialuniPayCoinDomain {
             log.info("payTYpe:{}", payType);
             if (SocialuniPayProviderType.wx.equals(payType)) {
                 prepay_id = WxUtil.postPayUrl(platform, userIp, orderNo, total_feeStr, user.getUserId());
-                String nonceStr = UUIDUtil.getSnowflakeId();
+                String nonceStr = UUIDUtil.getUUID();
                 String dateStr = Long.toString(new Date().getTime() / DateTimeType.second);
                 if (PlatformType.mp.equals(platform)) {
                     packageStr = "prepay_id=" + prepay_id;

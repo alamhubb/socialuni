@@ -37,17 +37,17 @@ public class SocialuniCommentDO extends SocialuniUnionContentBaseDO implements S
     /**
      * 评论的说说
      */
-    private Integer talkId;
+    private Long talkId;
 
     /**
      * 2级评论
      */
-    private Integer parentCommentId;
+    private Long parentCommentId;
 
     /**
      * 回复的哪个评论
      */
-    private Integer replyCommentId;
+    private Long replyCommentId;
 
     /**
      * 需要发送的通知

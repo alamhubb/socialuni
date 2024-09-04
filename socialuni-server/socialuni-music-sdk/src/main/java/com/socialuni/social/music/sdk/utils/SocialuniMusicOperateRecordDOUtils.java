@@ -6,7 +6,7 @@ import com.socialuni.social.common.sdk.dao.DO.SocialuniAppOperateRecordDO;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 
 public class SocialuniMusicOperateRecordDOUtils {
-    public static SocialuniAppOperateRecordDO createMusicRecord(Integer contentId, String type, Long userId, String remark, String roleId) {
+    public static SocialuniAppOperateRecordDO createMusicRecord(Long contentId, String type, Long userId, String remark, String roleId) {
         SocialuniAppOperateRecordDO socialuniAppOperateRecordDO = new SocialuniAppOperateRecordDO();
 
         socialuniAppOperateRecordDO.setContentType(SocialuniContentType.chat);

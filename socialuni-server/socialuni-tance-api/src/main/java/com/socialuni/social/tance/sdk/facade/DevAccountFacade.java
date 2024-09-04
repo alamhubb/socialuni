@@ -114,7 +114,7 @@ public class DevAccountFacade {
         return devAccountModel.getPhoneNum();
     }
 
-    public static Integer getDevUserId() {
+    public static Long getDevUserId() {
         DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNullElseCenterDev();
         return devAccountModel.getUserId();
     }

@@ -40,7 +40,7 @@ public class SocialuniMineUserDetailROFactory {
         return mineUserDetailRO;
     }
 
-    public static SocialuniMineUserDetailRO getMineUserDetail(Integer mineUserId) {
+    public static SocialuniMineUserDetailRO getMineUserDetail(Long mineUserId) {
         SocialuniUserDo mineUser = SocialuniUserUtil.getUserNotNull(mineUserId);
         return SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
     }
@@ -64,7 +64,7 @@ public class SocialuniMineUserDetailROFactory {
         //user基础信息
         SocialuniMineUserDetailRO mineUserDetailRO = new SocialuniMineUserDetailRO(socialUserDetailRO);
 
-        Integer mineUserId = mineUser.getUnionId();
+        Long mineUserId = mineUser.getUnionId();
 
         SocialuniUserExpandDo socialuniUserExpandDo = SocialuniUserExpandDOUtil.getOrCreate(mineUserId);
 

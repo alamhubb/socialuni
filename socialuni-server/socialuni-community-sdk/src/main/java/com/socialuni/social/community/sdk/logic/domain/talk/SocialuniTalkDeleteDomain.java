@@ -21,7 +21,7 @@ public class SocialuniTalkDeleteDomain {
     private SocialTalkDeleteDomain socialTalkDeleteDomain;
 
     public void deleteTalk(SocialuniTalkIdQO talkIdQO) {
-        Integer talkId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(talkIdQO.getTalkId());
+        Long talkId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(talkIdQO.getTalkId());
 
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
 

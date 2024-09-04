@@ -31,24 +31,24 @@ public class ReportDO implements Serializable {
     Integer devId;
 
     //被举报的用户
-    private Integer contentUserId;
+    private Long contentUserId;
     /*
         //不能直接使用do，因为无法直接获取缓存内容，但是也没必要获取，更新缓存就行了，再说2021.1.29
         //加入一列作为外键
-        private Integer messageId;
+        private Long messageId;
 
         //加入一列作为外键
-        private Integer commentId;
+        private Long commentId;
 
         //加入一列作为外键
-        private Integer userImgId;
+        private Long userImgId;
         //加入一列作为外键
         private Integer talkImgId;
 
         //加入一列作为外键
-        private Integer talkId;*/
+        private Long talkId;*/
     @Column(nullable = false)
-    private Integer contentId;
+    private Long contentId;
 
     //可以级联保存
     // 试试不加这行能不能级联保存 , cascade = CascadeType.PERSIST

@@ -9,9 +9,9 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class SocialTalkDeleteQO {
     @NotNull(message = "动态标识不能为空")
-    private Integer talkId;
+    private Long talkId;
 
-    public SocialTalkDeleteQO(Integer talkId) {
+    public SocialTalkDeleteQO(Long talkId) {
         this.talkId = talkId;
     }
 }

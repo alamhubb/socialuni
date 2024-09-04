@@ -133,8 +133,8 @@ public class ChatService {
 
         //私聊
         if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.user)) {
-            Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
-            Integer beUserId = socialuniUnionIdModler.getUnionIdqqq();
+            Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+            Long beUserId = socialuniUnionIdModler.getUnionIdqqq();
 
             //如果用户存在查看会话
             SocialuniChatUserDO chatUserDO = SocialuniChatUserDOFactory.getOrCreateChatUsersBySingleSendMsg(mineUserId, beUserId).get(0);
@@ -144,7 +144,7 @@ public class ChatService {
             return ResultRO.success(chatRO);
         } else if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.chat)) {
             //则为chatId
-            Integer chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(chatIdStr);
+            Long chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(chatIdStr);
 
             SocialuniChatDO chatDO = SocialuniRepositoryFacade.findByUnionId(chatId, SocialuniChatDO.class);
 
@@ -160,9 +160,9 @@ public class ChatService {
     SocialuniChatEntity socialuniChatEntity;
 
     public ResultRO<Void> joinChat(String chatUid) {
-        Integer chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(chatUid);
+        Long chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(chatUid);
 
-        Integer mineId = SocialuniUserUtil.getMineUserIdNotNull();
+        Long mineId = SocialuniUserUtil.getMineUserIdNotNull();
 
         socialuniChatEntity.getJoinOrCreateChatUser(chatId, mineId);
 
@@ -197,7 +197,7 @@ public class ChatService {
 
     /*public ResultRO<List<ChatRO>> queryChatList() {
 
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+        Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
 
         List<ChatRO> list1 = list.stream().map(SocialChatROFactory::getChatRO).collect(Collectors.toList());
 
@@ -206,7 +206,7 @@ public class ChatService {
 
     //获取私聊的chat
     //查看对方主页时
-    public ChatRO seeUserDetailGetOrCreateChat(SocialuniUserDo user, Integer receiveUserId) {
+    public ChatRO seeUserDetailGetOrCreateChat(SocialuniUserDo user, Long receiveUserId) {
 //        Optional<SocialuniChatUserDO> chatUserDOOptional = chatUserRepository.findFirstByStatusAndUserIdAndBeUserId(ChatStatus.enable, user.getUnionId(), receiveUserId);
 //        SocialuniChatUserDO chatUserDO;
 //        //如果创建过，则获取。返回
@@ -231,7 +231,7 @@ public class ChatService {
     //登录情况下查询用户有权限的chatuser
     //详情页面，需要知道是否关注你了
 
-    public CreateSingleChatResult seeUserDetailCreateChat(SocialuniUserDo user, Integer receiveUserId) {
+    public CreateSingleChatResult seeUserDetailCreateChat(SocialuniUserDo user, Long receiveUserId) {
         SocialuniChatDO chat = new SocialuniChatDO(ChatType.single);
 
         //生成chat
@@ -255,9 +255,9 @@ public class ChatService {
 
     //从chatUser上控制
     public ResultRO<?> quitGroupChat(SocialuniChatQueryQO chatVO) {
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+        Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
         String chatIdStr = chatVO.getChatId();
-        Integer chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(chatIdStr);
+        Long chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(chatIdStr);
 
 //        SocialuniChatUserDO chatUserDO = chatUserRepository.findFirstByChatIdAndUserId(chatId, mineUserId);
 //

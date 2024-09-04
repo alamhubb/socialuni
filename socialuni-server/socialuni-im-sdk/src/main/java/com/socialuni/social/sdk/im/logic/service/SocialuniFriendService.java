@@ -42,8 +42,8 @@ public class SocialuniFriendService {
             throw new SocialBusinessException("错误的申请类型");
         }
 
-        Integer beUserId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(friendAddQO.getUserId());
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+        Long beUserId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(friendAddQO.getUserId());
+        Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
         //添加对方的时候只看对方的状态，不看自己的状态
 
         //判断是否已为好友, 看你是不是对方的好有
@@ -106,7 +106,7 @@ public class SocialuniFriendService {
     public ResultRO<List<SocialuniFriendApplyUserRO>> queryFriendApplyList() {
         //查询你申请的和被申请的。
 
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+        Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
 
         List<SocialuniFriendApplyRecordDO> list = socialuniFriendApplyRecordRepository.findTop30ByUserIdOrBeUserIdAndType(mineUserId, SocialuniAddFriendType.apply);
 

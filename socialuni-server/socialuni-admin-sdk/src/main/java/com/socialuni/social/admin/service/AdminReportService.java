@@ -107,7 +107,7 @@ public class AdminReportService {
         //图片类型的也支持直接审核
         String auditContentType = auditVO.getAuditContentType();
 
-        Integer contentId = auditVO.getId();
+        Long contentId = auditVO.getId();
         //如果仅仅是图片审核，则必然要修改图片审核的状态
         if (SocialuniAuditContentType.underageImg.equals(auditContentType)) {
             SocialuniTalkHasUnderageImgAuditDO socialuniTalkHasUnderageImgAuditDO = talkAdultImgAuditRepository.findOneById(contentId);
@@ -159,7 +159,7 @@ public class AdminReportService {
             }
             ReportDO = reportDOOptional.get();
         }
-//        Integer systemUserId = SocialuniSystemConst.getSystemUserId();
+//        Long systemUserId = SocialuniSystemConst.getSystemUserId();
         List<NotifyDO> notifyDOS = new ArrayList<>();
         //为待审核才继续处理
         if (ReportStatus.auditStatus.contains(ReportDO.getStatus())) {

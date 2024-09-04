@@ -13,7 +13,7 @@ public interface TalkMapper {
 
 //    @Cacheable(cacheNames = CommonRedisKey.queryTalkIdsByAndUser, key = "#talkUserGender+'-'+#status+'-'+#minAge+'-'+#maxAge+'-'+#disableUnderageContent")
     @PublishDataCacheable(cacheNames = CommonRedisKey.queryTalkIdsByAndUser, key = "#talkUserGender+'-'+#status+'-'+#minAge+'-'+#maxAge+'-'+#disableUnderageContent" , modelClassName = {"com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO"})
-    List<Integer> queryTalkIdsByAndUser(
+    List<Long> queryTalkIdsByAndUser(
             @Param("talkUserGender") String talkUserGender,
             @Param("minAge") Integer minAge,
             @Param("maxAge") Integer maxAge,
@@ -22,7 +22,7 @@ public interface TalkMapper {
     );
 
     @Cacheable(cacheNames = CommonRedisKey.queryTalkIdsByTalkCondition, key = "#status+'-'+#adCode+'-'+#talkVisibleGender+'-'+#mineUserGender+'-'+#devId+'-'+#disableUnderageContent+'-'+#disableContentHasContactInfo+'-'+#disableContentHasQrCode")
-    List<Integer> queryTalkIdsByTalkCondition(
+    List<Long> queryTalkIdsByTalkCondition(
             @Param("testDevId") Integer testDevId,
             @Param("status") String status,
             @Param("adCode") String adCode,
@@ -35,12 +35,12 @@ public interface TalkMapper {
 
     //mybatis 一个参数时自定义属性名不生效 所以使用list
     @Cacheable(cacheNames = CommonRedisKey.queryTalkIdsByAndTag, key = "#tagIds")
-    List<Integer> queryTalkIdsByAndTag(@Param("tagIds") List<Integer> tagIds);
+    List<Long> queryTalkIdsByAndTag(@Param("tagIds") List<Integer> tagIds);
     @Cacheable(cacheNames = CommonRedisKey.queryTalkIdsByAndCircle, key = "#circleId")
-    List<Integer> queryTalkIdsByAndCircle(@Param("circleId") Integer circleId);
+    List<Long> queryTalkIdsByAndCircle(@Param("circleId") Integer circleId);
 
     @Cacheable(cacheNames = CommonRedisKey.queryTalkIdsByAndUserExpand)
-    List<Integer> queryTalkIdsByAndUserExpand();
+    List<Long> queryTalkIdsByAndUserExpand();
 
 //    List<Integer> queryMineTalkIdsByCom(@Param("userId") Long userId, @Param("statusList") List<String> statusList);
 
@@ -56,7 +56,7 @@ public interface TalkMapper {
             @Param("tagIds") List<Integer> tagIds,
             @Param("devId") Integer devId,
 //            @Param("queryTime") Date queryTime,
-//            @Param("mineUserId") Integer mineUserId,
+//            @Param("mineUserId") Long mineUserId,
 //            @Param("mineTalkStatus") List<String> mineTalkStatus,
             @Param("circleId") Integer circleId,
             @Param("hasPeopleImgTalkNeedIdentity") Boolean hasPeopleImgTalkNeedIdentity

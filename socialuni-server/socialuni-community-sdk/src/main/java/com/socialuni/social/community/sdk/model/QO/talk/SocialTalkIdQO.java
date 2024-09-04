@@ -9,9 +9,9 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class SocialTalkIdQO {
     @NotNull(message = "动态标识不能为空")
-    private Integer talkId;
+    private Long talkId;
 
-    public SocialTalkIdQO(@NotNull(message = "动态标识不能为空") Integer talkId) {
+    public SocialTalkIdQO(@NotNull(message = "动态标识不能为空") Long talkId) {
         this.talkId = talkId;
     }
 }

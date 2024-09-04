@@ -84,7 +84,7 @@ public class SocialuniPeiwanService {
     }
 
     @Async
-    public ResultRO<Void> deletePeiwanImg(Integer imgId) {
+    public ResultRO<Void> deletePeiwanImg(Long imgId) {
         SocialuniPeiwanInfoImgDO socialuniPeiwanInfoImgDO = SocialuniRepositoryFacade.findByUnionId(imgId, SocialuniPeiwanInfoImgDO.class);
 
         socialuniPeiwanInfoImgDO.setStatus(SocialuniCommonStatus.delete);

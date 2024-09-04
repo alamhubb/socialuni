@@ -2,7 +2,6 @@ package com.socialuni.social.tance.repository;
 
 
 import com.socialuni.social.tance.entity.SocialuniUnionIdDo;
-import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -13,10 +12,12 @@ public interface SocialuniUnionIdRepository extends JpaRepository<SocialuniUnion
 
     SocialuniUnionIdDo findOneById(Integer id);
 
+    SocialuniUnionIdDo findFirstByUnionId(Long id);
+
     @Query(value = "select uuid from SocialuniUnionIdDo where contentType=:contentType")
     List<String> findAllUuidByContentType(String contentType);
 
     @Query(value = "select id from SocialuniUnionIdDo where contentType=:contentType")
-    List<Integer> findAllIdsByContentType(String contentType);
+    List<Long> findAllUnionIdsByContentType(String contentType);
 }
 

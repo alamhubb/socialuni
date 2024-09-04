@@ -23,7 +23,7 @@ public class SocialuniTalkDetailDomain {
     public SocialuniTalkRO queryTalkDetail(String talkId) {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
 
-        Integer talkIdInt = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(talkId);
+        Long talkIdInt = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(talkId);
 
         SocialTalkIdQO socialTalkIdQO = new SocialTalkIdQO(talkIdInt);
 

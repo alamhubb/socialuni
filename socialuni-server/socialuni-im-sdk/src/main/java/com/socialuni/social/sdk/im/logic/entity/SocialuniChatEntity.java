@@ -36,7 +36,7 @@ public class SocialuniChatEntity {
     }
 
 
-    public SocialuniChatDO getJoinOrCreateChatUser(Integer chatId, Long userId) {
+    public SocialuniChatDO getJoinOrCreateChatUser(Long chatId, Long userId) {
         SocialuniChatDO socialuniChatDO = chatRepository.findFirstByUnionId(chatId);
         if (socialuniChatDO == null) {
             throw new SocialBusinessException("不存在的会话");

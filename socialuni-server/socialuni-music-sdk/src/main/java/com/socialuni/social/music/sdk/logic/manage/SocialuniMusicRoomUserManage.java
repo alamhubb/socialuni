@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SocialuniMusicRoomUserManage {
 
-    public SocialuniMusicRoomUserDO getOrCreateMusicRoomUserDO(Integer chatId, Integer mineUserId, String roleId) {
+    public SocialuniMusicRoomUserDO getOrCreateMusicRoomUserDO(Long chatId, Long mineUserId, String roleId) {
         SocialuniMusicRoomUserDO socialuniMusicRoomUserDO = SocialuniUserRepositoryFacede.findByUserIdAndCustomFieldAndStatus(mineUserId, "roomId", chatId, SocialuniCommonStatus.enable, SocialuniMusicRoomUserDO.class);
 
         if (socialuniMusicRoomUserDO == null) {

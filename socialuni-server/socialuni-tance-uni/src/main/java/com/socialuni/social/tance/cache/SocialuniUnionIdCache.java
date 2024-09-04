@@ -36,16 +36,16 @@ public class SocialuniUnionIdCache implements SocialuniUnionIdInterface {
             evict = {
                     @CacheEvict(cacheNames = "getUnionIdByUuId", key = "#uniContentUnionIdDO.uuid"),
             },
-            put = {@CachePut(cacheNames = {"getUnionIdById"}, key = "#uniContentUnionIdDO.id", condition = "#uniContentUnionIdDO.id != null")}
+            put = {@CachePut(cacheNames = {"getUnionIdByUnionId"}, key = "#uniContentUnionIdDO.id", condition = "#uniContentUnionIdDO.id != null")}
     )
     public SocialuniUnionIdDo save(SocialuniUnionIdModler uniContentUnionIdDO) {
         return uniContentUnionIdRepository.save(BeanUtil.copyProperties(uniContentUnionIdDO, SocialuniUnionIdDo.class));
     }
 
     @Override
-    @Cacheable(cacheNames = "getUnionIdById", key = "#unionId")
-    public SocialuniUnionIdDo findById(Long unionId) {
-        return uniContentUnionIdRepository.findById(unionId).orElse(null);
+    @Cacheable(cacheNames = "getUnionIdByUnionId", key = "#unionId")
+    public SocialuniUnionIdDo findByUnionId(Long unionId) {
+        return uniContentUnionIdRepository.findFirstByUnionId(unionId);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class SocialuniUnionIdCache implements SocialuniUnionIdInterface {
     }
 
     @Override
-    public List<Integer> findAllUnionIdsByContentType(String contentTyp) {
-        return uniContentUnionIdRepository.findAllIdsByContentType(contentTyp);
+    public List<Long> findAllUnionIdsByContentType(String contentTyp) {
+        return uniContentUnionIdRepository.findAllUnionIdsByContentType(contentTyp);
     }
 }

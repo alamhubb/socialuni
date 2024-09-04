@@ -16,10 +16,10 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class SocialHugAddQO {
     @NotNull
-    private Integer talkId;
-    private Integer commentId;
+    private Long talkId;
+    private Long commentId;
 
-    public SocialHugAddQO(Integer talkId, Integer commentId) {
+    public SocialHugAddQO(Long talkId, Long commentId) {
         this.talkId = talkId;
         this.commentId = commentId;
     }

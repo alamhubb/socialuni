@@ -49,7 +49,7 @@ public class SocialuniPartnerController {
 
     @GetMapping("getMinePointsAssignDetail")
     public ResultRO<SocialuniPartnerUserContributeDO> getMinePointsAssignDetail() {
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+        Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
         String day = SocialuniDateUtils.getToday();
         SocialuniPartnerUserContributeDO socialuniPartnerUserContributeDO = socialuniPartnerUserContributeRepository.findFirstByUserIdAndTodayDate(mineUserId, day);
         return ResultRO.success(socialuniPartnerUserContributeDO);

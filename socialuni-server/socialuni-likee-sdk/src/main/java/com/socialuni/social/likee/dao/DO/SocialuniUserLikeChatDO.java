@@ -26,5 +26,5 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class SocialuniUserLikeChatDO extends SocialuniUserInfoBaseDO {
     @Column(updatable = false, nullable = false)
-    private Integer chatId;
+    private Long chatId;
 }

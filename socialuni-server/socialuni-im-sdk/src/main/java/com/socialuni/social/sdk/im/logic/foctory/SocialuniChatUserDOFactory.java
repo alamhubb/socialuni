@@ -43,8 +43,8 @@ public class SocialuniChatUserDOFactory {
             String contentType = socialuniUnionIdModler.getContentType();
             //私聊
             if (contentType.equals(SocialuniContentType.user)) {
-                Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
-                Integer beUserId = socialuniUnionIdModler.getUnionIdqqq();
+                Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+                Long beUserId = socialuniUnionIdModler.getUnionIdqqq();
 
                 SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findByChatIdAndUserId(mineUserId, beUserId);
 
@@ -66,11 +66,11 @@ public class SocialuniChatUserDOFactory {
         return null;
     }
 
-    public static SocialuniChatUserDO getChatUserDO(Long userId, Integer beUserId) {
+    public static SocialuniChatUserDO getChatUserDO(Long userId, Long beUserId) {
         return SocialuniChatUserDOUtil.findByChatIdAndUserId(userId, beUserId);
     }
 
-    public static List<SocialuniChatUserDO> getOrCreateChatUsersBySingleSendMsg(Long userId, Integer beUserId) {
+    public static List<SocialuniChatUserDO> getOrCreateChatUsersBySingleSendMsg(Long userId, Long beUserId) {
         SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findByChatIdAndUserId(userId, beUserId);
         SocialuniChatUserDO beChatUserDO = SocialuniChatUserDOUtil.findByChatIdAndUserId(beUserId, userId);
         if (chatUserDO == null) {
@@ -85,7 +85,7 @@ public class SocialuniChatUserDOFactory {
         return Arrays.asList(chatUserDO);
     }
 
-    public static List<SocialuniChatUserDO> createSocialuniChatUserDOS(Long userId, Integer beUserId) {
+    public static List<SocialuniChatUserDO> createSocialuniChatUserDOS(Long userId, Long beUserId) {
         SocialuniChatUserDO chatUserDO;
         SocialuniChatUserDO beChatUserDO;
         //会话不存在则创建
@@ -103,7 +103,7 @@ public class SocialuniChatUserDOFactory {
         return Arrays.asList(chatUserDO, chatUserDO);
     }
 
-    public static SocialuniChatUserDO getOrCreateChatUserBySingleReceiveMsg(SocialuniChatDO chatDO, Long userId, Integer beUserId) {
+    public static SocialuniChatUserDO getOrCreateChatUserBySingleReceiveMsg(SocialuniChatDO chatDO, Long userId, Long beUserId) {
         SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findByChatIdAndUserId(userId, beUserId);
         if (chatUserDO == null) {
             //会话不存在则创建
@@ -119,7 +119,7 @@ public class SocialuniChatUserDOFactory {
         SocialuniChatUserDO chatUserDO = new SocialuniChatUserDO(chatDO, userId);
 
         if (chatUserDO.getType().equals(ChatType.system_group)) {
-            Integer systemUserId = SocialuniUserUtil.getSystemUserIdNotNull();
+            Long systemUserId = SocialuniUserUtil.getSystemUserIdNotNull();
             if (userId.equals(systemUserId)) {
                 chatUserDO.setChatRoleId(SocialuniSysRoleId.owner);
             }

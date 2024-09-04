@@ -41,12 +41,12 @@ public class SocialuniTokenUtil {
     }
 
     public static Integer getDataDevId() {
-        HttpServletRequest request = RequestUtil.getRequest();
-        String dataSocialuniId = request.getHeader(SocialFeignHeaderName.dataOriginalSocialuniId);
-        if (SocialTokenFacade.isSuccess(dataSocialuniId)) {
-            Long userId = Integer.parseInt(dataSocialuniId);
-            return userId;
-        }
+//        HttpServletRequest request = RequestUtil.getRequest();
+//        String dataSocialuniId = request.getHeader(SocialFeignHeaderName.dataOriginalSocialuniId);
+//        if (SocialTokenFacade.isSuccess(dataSocialuniId)) {
+//            Long userId = Integer.parseInt(dataSocialuniId);
+//            return userId;
+//        }
 //        return SocialTokenUtil.getSocialuniToken();
         return null;
     }

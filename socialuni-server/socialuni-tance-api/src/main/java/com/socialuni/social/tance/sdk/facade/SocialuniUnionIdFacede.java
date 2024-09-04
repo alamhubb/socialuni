@@ -91,7 +91,7 @@ public class SocialuniUnionIdFacede {
         if (unionId == null) {
             throw new SocialParamsException("无效的内容标识4");
         }
-        SocialuniUnionIdModler uniContentUnionIdDO = socialuniUnionIdApi.findById(unionId);
+        SocialuniUnionIdModler uniContentUnionIdDO = socialuniUnionIdApi.findByUnionId(unionId);
         if (uniContentUnionIdDO == null) {
             throw new SocialParamsException("无效的内容标识5");
         }
@@ -102,7 +102,7 @@ public class SocialuniUnionIdFacede {
         if (unionId == null) {
             return null;
         }
-        SocialuniUnionIdModler uniContentUnionIdDO = socialuniUnionIdApi.findById(unionId);
+        SocialuniUnionIdModler uniContentUnionIdDO = socialuniUnionIdApi.findByUnionId(unionId);
         if (uniContentUnionIdDO == null) {
             return null;
         }

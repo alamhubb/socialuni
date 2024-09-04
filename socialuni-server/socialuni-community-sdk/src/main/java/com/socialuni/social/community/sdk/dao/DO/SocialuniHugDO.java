@@ -25,14 +25,14 @@ public class SocialuniHugDO extends SocialuniContentBaseDO {
     /**
      * 赞的说说
      */
-    private Integer talkId;
+    private Long talkId;
 
     /**
      * 赞的说说
      */
-    private Integer commentId;
+    private Long commentId;
 
-    public SocialuniHugDO(Long userId, Integer talkId, Integer commentId) {
+    public SocialuniHugDO(Long userId, Long talkId, Long commentId) {
         this.userId = userId;
         this.talkId = talkId;
         this.commentId = commentId;

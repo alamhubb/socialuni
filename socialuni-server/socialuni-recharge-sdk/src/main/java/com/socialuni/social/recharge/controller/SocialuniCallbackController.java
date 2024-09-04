@@ -119,7 +119,7 @@ public class SocialuniCallbackController {
 
         Long userId = rechargeOrderDO.getUserId();
 
-        socialuniCreateCoinOrderEntity.createCoinOrderByOrderType(userId, total_fee, SocialuniCoinOrderType.recharge, SocialuniOrderDetailType.cash, rechargeOrderDO.getId());
+        socialuniCreateCoinOrderEntity.createCoinOrderByOrderType(userId, total_fee, SocialuniCoinOrderType.recharge, SocialuniOrderDetailType.cash, Long.valueOf(rechargeOrderDO.getId()));
 
         //更新用户充值订单信息
         SocialuniRepositoryFacade.save(rechargeOrderDO);

@@ -17,7 +17,7 @@ public class SocialuniSystemConst {
     private static String tagDefaultAvatar;
     @Getter
     private static String systemUserPhoneNum;
-    //    private static  Integer systemUserId = 1;
+    //    private static  Long systemUserId = 1;
     @Getter
     public static final String testUserPhoneNum = "12222222222";
     private static String staticResourceUrl;
@@ -45,7 +45,7 @@ public class SocialuniSystemConst {
     }
 
 //    @Value("${socialuni.app.system-user-id}")
-//    public void setSystemUserId(Integer systemUserId) {
+//    public void setSystemUserId(Long systemUserId) {
 //        SocialuniSystemConst.systemUserId = systemUserId;
 //    }
 

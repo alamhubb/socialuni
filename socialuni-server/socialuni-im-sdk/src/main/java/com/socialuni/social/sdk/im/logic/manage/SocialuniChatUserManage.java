@@ -33,7 +33,7 @@ public class SocialuniChatUserManage {
         return socialuniChatUserDO;
     }
 
-    public SocialuniChatUserDO getMyChatUser(Integer chatId, Integer beUserId) {
+    public SocialuniChatUserDO getMyChatUser(Long chatId, Long beUserId) {
         List<SocialuniChatUserDO> list = chatUserRepository.findByChatIdAndStatus(chatId, ChatUserStatus.enable);
         Optional<SocialuniChatUserDO> socialuniChatUserDO = list.stream().filter(item -> item.getBeUserId().equals(beUserId)).findFirst();
         SocialuniChatUserDO socialuniChatUserDO1 = socialuniChatUserDO.orElseThrow(() -> new SocialParamsException("不存在会话信息"));

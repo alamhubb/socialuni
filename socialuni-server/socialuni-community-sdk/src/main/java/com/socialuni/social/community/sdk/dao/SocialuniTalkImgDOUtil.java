@@ -42,7 +42,7 @@ public class SocialuniTalkImgDOUtil {
         return socialTalkImgDO;
     }
 
-    public static List<SocialuniTalkImgDO> getTalkImgs(List<Integer> unionIds) {
+    public static List<SocialuniTalkImgDO> getTalkImgs(List<Long> unionIds) {
         List<SocialuniTalkImgDO> list = new ArrayList<>();
         for (Long unionId : unionIds) {
             list.add(SocialuniTalkImgDOUtil.getTalkImgNotNull(unionId));
@@ -54,7 +54,7 @@ public class SocialuniTalkImgDOUtil {
         return talkImgRepository.save(talkImgDO);
     }
 
-    public static List<SocialuniTalkImgDO> getTalkImgsTop3(Integer talkId) {
+    public static List<SocialuniTalkImgDO> getTalkImgsTop3(Long talkId) {
         List<SocialuniTalkImgDO> talkImgDOS = talkImgRepository.findUnionIdTop3ByTalkIdOrderByIdAsc(talkId);
         for (SocialuniTalkImgDO talkImgDO : talkImgDOS) {
             if (ObjectUtils.isEmpty(talkImgDO.getUnionId())) {
@@ -63,7 +63,7 @@ public class SocialuniTalkImgDOUtil {
                 SocialuniTalkImgDOUtil.saveTalkImgDO(talkImgDO);
             }
         }
-        List<Integer> integers = talkImgDOS.stream().map(SocialuniUnionContentBaseDO::getUnionId).collect(Collectors.toList());
+        List<Long> integers = talkImgDOS.stream().map(SocialuniUnionContentBaseDO::getUnionId).collect(Collectors.toList());
 
         return SocialuniTalkImgDOUtil.getTalkImgs(integers);
     }

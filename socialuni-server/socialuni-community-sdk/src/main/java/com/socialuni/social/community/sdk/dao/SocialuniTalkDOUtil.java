@@ -34,7 +34,7 @@ public class SocialuniTalkDOUtil {
         return socialuniTalkDORedis.save(talkDO);
     }
 
-    public static SocialuniTalkDO getTalkNotNull(Integer talkUnionId) {
+    public static SocialuniTalkDO getTalkNotNull(Long talkUnionId) {
         SocialuniTalkDO talkDO = getAllowNull(talkUnionId);
         if (talkDO == null) {
             throw new SocialParamsException("不存在的动态内容");

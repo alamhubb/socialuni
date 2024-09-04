@@ -42,7 +42,7 @@ public class DevAccountEntity {
     SocialUserPhoneEntity socialUserPhoneEntity;
 
     public DevAccountModel createDevAccount(String phoneNum) {
-        return this.createDevAccount(phoneNum, UUIDUtil.getSnowflakeId());
+        return this.createDevAccount(phoneNum, UUIDUtil.getUUID());
     }
 
     //创建开发者账号
@@ -59,11 +59,10 @@ public class DevAccountEntity {
         //加30以内随机数
         DevAccountDo devAccountModel = new DevAccountDo();
         Date curDate = new Date();
-        String secretKey = UUIDUtil.getSnowflakeId();
+        String secretKey = UUIDUtil.getUUID();
         devAccountModel.setSecretKey(secretKey);
         devAccountModel.setPhoneNum(phoneNum);
         devAccountModel.setIdentityNum(null);
-        devAccountModel.setSecretKey(UUIDUtil.getSnowflakeId());
         devAccountModel.setAppGenderType(GenderType.all);
         devAccountModel.setDevNum(curDevNum);
         devAccountModel.setType(DevAccountType.personal);

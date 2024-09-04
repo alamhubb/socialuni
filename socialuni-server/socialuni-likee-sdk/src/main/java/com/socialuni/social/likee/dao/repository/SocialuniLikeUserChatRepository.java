@@ -23,7 +23,7 @@ import java.util.Optional;
 public interface SocialuniLikeUserChatRepository extends JpaRepository<SocialuniUserLikeChatDO, Integer> {
 
     @Cacheable(cacheNames = SocialuniUserLikeRedisKey.findFirstUserLikeByChatId, key = "#chatId")
-    SocialuniUserLikeChatDO findByChatId(Integer chatId);
+    SocialuniUserLikeChatDO findByChatId(Long chatId);
 
     @Caching(
             put = {@CachePut(cacheNames = SocialuniUserLikeRedisKey.findFirstUserLikeByChatId, key = "#socialuniUserLikeChatDO.chatId")}

@@ -86,9 +86,9 @@ public class UploadFileController {
         } else if (projectName.length() > 16) {
             throw new SocialBusinessException("项目名需小于17个字符");
         }
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdAllowNull();
+        Long mineUserId = SocialuniUserUtil.getMineUserIdAllowNull();
         if (projectName.equals(systemDomain)) {
-            Integer systemUserId = SocialuniUserUtil.getSystemUserIdNotNull();
+            Long systemUserId = SocialuniUserUtil.getSystemUserIdNotNull();
             if (!systemUserId.equals(mineUserId)) {
                 throw new SocialBusinessException("项目名称不可用");
             }
@@ -164,7 +164,7 @@ public class UploadFileController {
             UploadFileController.pushNginxConfig(socialuniDeployProjectDO);
 
             if (socialuniDeployProjectDO == null) {
-                Integer mineUserId = SocialuniUserUtil.getMineUserIdAllowNull();
+                Long mineUserId = SocialuniUserUtil.getMineUserIdAllowNull();
                 socialuniDeployProjectDO = new SocialuniDeployProjectDO();
                 socialuniDeployProjectDO.setProjectName(projectName);
                 socialuniDeployProjectDO.setUserId(mineUserId);

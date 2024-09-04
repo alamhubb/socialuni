@@ -22,7 +22,7 @@ import javax.persistence.Table;
 public class SocialuniMusicRoomRecordDO extends SocialuniContentBaseDO {
 
     //可以关联chatGroupId
-    Integer roomId;
+    Long roomId;
 
     //操作类型
     String operateType;

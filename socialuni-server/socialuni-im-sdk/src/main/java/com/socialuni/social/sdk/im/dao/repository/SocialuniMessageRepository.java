@@ -20,11 +20,11 @@ import java.util.Optional;
 public interface SocialuniMessageRepository extends JpaRepository<SocialuniMessageDO, Integer> {
     SocialuniUnionContentBaseDO findOneByUnionIdAndStatus(Integer id, String status);
 
-    List<SocialuniMessageDO> findTop30ByChatIdAndStatusAndCreateTimeLessThanOrderByCreateTimeDesc(Integer chatId, String msgStatus, Date queryTime);
+    List<SocialuniMessageDO> findTop30ByChatIdAndStatusAndCreateTimeLessThanOrderByCreateTimeDesc(Long chatId, String msgStatus, Date queryTime);
 
-    List<SocialuniMessageDO> findTop30ByChatIdAndStatusAndIdNotInOrderByIdDesc(Integer chatId, String msgStatus, List<Integer> ids);
+    List<SocialuniMessageDO> findTop30ByChatIdAndStatusAndIdNotInOrderByIdDesc(Long chatId, String msgStatus, List<Integer> ids);
 
-    List<SocialuniMessageDO> findTop31ByChatIdAndStatusAndIdNotInOrderByIdDesc(Integer chatId, String msgStatus, List<Integer> ids);
+    List<SocialuniMessageDO> findTop31ByChatIdAndStatusAndIdNotInOrderByIdDesc(Long chatId, String msgStatus, List<Integer> ids);
 
 
     Optional<SocialuniMessageDO> findFirstOneByIdAndStatusIn(Integer id, List<String> msgStatus);

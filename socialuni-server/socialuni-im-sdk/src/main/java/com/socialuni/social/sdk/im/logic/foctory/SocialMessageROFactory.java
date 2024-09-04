@@ -27,7 +27,7 @@ import java.util.List;
 @Component
 public class SocialMessageROFactory {
 
-    public static SocialMessageRO getMessageRO(SocialuniMessageDO messageDO, Integer beUserId) {
+    public static SocialMessageRO getMessageRO(SocialuniMessageDO messageDO, Long beUserId) {
         SocialMessageRO messageRO = new SocialMessageRO();
         SocialuniUserDo userDO = SocialuniUserUtil.getUserNotNull(messageDO.getUserId());
 
@@ -106,7 +106,7 @@ public class SocialMessageROFactory {
     }
 
     //未登录的消息，消息发给谁的，应该是谁的id，查看消息的人的id，因为消息存在推的情况
-    public static List<SocialMessageRO> messageDOToVOS(List<SocialuniMessageDO> messageDOS, Integer lookMessageUserId) {
+    public static List<SocialMessageRO> messageDOToVOS(List<SocialuniMessageDO> messageDOS, Long lookMessageUserId) {
         //翻转数组,因为查出来的是倒序的
         List<SocialMessageRO> messageVOS = ListConvertUtil.toList(SocialMessageROFactory::getMessageRO, messageDOS, lookMessageUserId);
         Collections.reverse(messageVOS);

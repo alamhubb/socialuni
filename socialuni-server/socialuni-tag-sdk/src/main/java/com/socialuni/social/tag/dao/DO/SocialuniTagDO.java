@@ -49,7 +49,7 @@ public class SocialuniTagDO implements Serializable {
     /**
      * 申请人
      */
-    private Integer applyUserId;
+    private Long applyUserId;
 
     private Date createTime;
 

@@ -25,9 +25,9 @@ import java.util.Optional;
  * @since TODO[起始版本号]
  */
 public interface CommentRepository extends JpaRepository<SocialuniCommentDO, Integer> {
-    SocialuniCommentDO findOneByUnionIdAndStatus(Integer id, String status);
+    SocialuniCommentDO findOneByUnionIdAndStatus(Long id, String status);
 
-    SocialuniCommentDO findOneByUnionId(Integer id);
+    SocialuniCommentDO findOneByUnionId(Long id);
 
     @Caching(evict = {
             //用户的talks肯定变化了
@@ -45,34 +45,34 @@ public interface CommentRepository extends JpaRepository<SocialuniCommentDO, Int
 
     //    展示评论
     @Cacheable(cacheNames = "talkComments5", key = "{#talkId}")
-    List<?  extends SocialuniCommentDO> findTop5ByTalkIdAndStatusInAndParentCommentIdIsNullOrderByUpdateTimeDesc(Integer talkId, List<String> status);
+    List<?  extends SocialuniCommentDO> findTop5ByTalkIdAndStatusInAndParentCommentIdIsNullOrderByUpdateTimeDesc(Long talkId, List<String> status);
 
 
     List<?  extends SocialuniCommentDO> findTop10ByUserIdOrderByUpdateTimeDesc(Long userId);
 
     //    talk详情页展示评论
     @Cacheable(cacheNames = "talkComments50", key = "{#talkId}")
-    List<?  extends SocialuniCommentDO> findTop50ByTalkIdAndStatusInAndParentCommentIdIsNullOrderByUpdateTimeDesc(Integer talkId, List<String> status);
+    List<?  extends SocialuniCommentDO> findTop50ByTalkIdAndStatusInAndParentCommentIdIsNullOrderByUpdateTimeDesc(Long talkId, List<String> status);
 
     @Cacheable(cacheNames = "commentComments3", key = "{#commentId}")
-    List<?  extends SocialuniCommentDO> findTop3ByParentCommentIdAndStatusInOrderByUpdateTimeDesc(Integer commentId, List<String> status);
+    List<?  extends SocialuniCommentDO> findTop3ByParentCommentIdAndStatusInOrderByUpdateTimeDesc(Long commentId, List<String> status);
 
     //   展示子回复,避免性能问题，限制最多50条，再多不如私聊了
     @Cacheable(cacheNames = "commentComments50", key = "{#commentId}")
-    List<?  extends SocialuniCommentDO> findTop50ByParentCommentIdAndStatusInOrderByUpdateTimeDesc(Integer commentId, List<String> status);
+    List<?  extends SocialuniCommentDO> findTop50ByParentCommentIdAndStatusInOrderByUpdateTimeDesc(Long commentId, List<String> status);
 
     @Transactional
     @Modifying
     @Query("update SocialuniCommentDO t set t.status = '" + SocialuniCommonStatus.delete + "' where t.userId=:userId and t.status in (:status)")
     Integer updateUserCommentStatusIn(@Param("userId") Long userId, @Param("status") List<String> status);
 
-    Optional<?  extends SocialuniCommentDO> findOneByUnionIdAndStatusIn(Integer id, List<String> status);
+    Optional<?  extends SocialuniCommentDO> findOneByUnionIdAndStatusIn(Long id, List<String> status);
 
     //获取最新的评论
-    SocialuniCommentDO findFirstByTalkIdOrderByIdDesc(Integer talkId);
+    SocialuniCommentDO findFirstByTalkIdOrderByIdDesc(Long talkId);
 
 
-    List<?  extends SocialuniCommentDO> findByParentCommentId(Integer commentId);
+    List<?  extends SocialuniCommentDO> findByParentCommentId(Long commentId);
 
 
     //查询关键词触发次数时使用

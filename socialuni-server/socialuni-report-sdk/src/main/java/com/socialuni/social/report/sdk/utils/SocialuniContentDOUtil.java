@@ -85,7 +85,7 @@ public class SocialuniContentDOUtil<T> {
         }
     }
 
-    public static SocialuniUnionContentBaseDO getContentDOByContentId(Integer contentId) {
+    public static SocialuniUnionContentBaseDO getContentDOByContentId(Long contentId) {
         SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(contentId);
         String contentType = socialuniUnionIdModler.getContentType();
         if (!SocialuniContentType.unionIdSupportTypes.contains(contentType)) {

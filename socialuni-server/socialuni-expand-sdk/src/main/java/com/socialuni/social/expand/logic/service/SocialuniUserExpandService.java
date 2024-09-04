@@ -84,17 +84,17 @@ public class SocialuniUserExpandService {
         }
 
         //按照最近上一次被喜欢的用户顺序排序。
-        List<Integer> beLikeUserIds = socialuniLikeUseRepository.findBeLikeUserIdsOrderByUpdateTimeDesc();
+        List<Long> beLikeUserIds = socialuniLikeUseRepository.findBeLikeUserIdsOrderByUpdateTimeDesc();
 
         //按照最近上一次被喜欢的用户顺序排序。
-        List<Integer> operateUserIds = socialuniUserRepository.findUserIdsByType(UserType.operation);
+        List<Long> operateUserIds = socialuniUserRepository.findUserIdsByType(UserType.operation);
 
-        List<Integer> pageTypeUserIds = ListConvertUtil.intersection(beLikeUserIds, operateUserIds);
+        List<Long> pageTypeUserIds = ListConvertUtil.intersection(beLikeUserIds, operateUserIds);
 
         pageTypeUserIds.addAll(operateUserIds);
         pageTypeUserIds = pageTypeUserIds.stream().distinct().collect(Collectors.toList());
 
-        List<Integer> queryIds = ListConvertUtil.intersection(pageTypeUserIds, operateUserIds);
+        List<Long> queryIds = ListConvertUtil.intersection(pageTypeUserIds, operateUserIds);
         Integer pageSize = socialuniPageQueryQO.getPageSize();
         Integer pageNum = socialuniPageQueryQO.getPageNum();
         if (pageNum == null || pageNum < 1) {
@@ -103,7 +103,7 @@ public class SocialuniUserExpandService {
         if (pageSize == null) {
             pageSize = 10;
         }
-        List<Integer> pageQueryIds = CollUtil.sub(queryIds, (pageNum - 1) * pageSize, pageNum * pageSize);
+        List<Long> pageQueryIds = CollUtil.sub(queryIds, (pageNum - 1) * pageSize, pageNum * pageSize);
         List<SocialuniUserDo> userDos = SocialuniUserUtil.getUsers(pageQueryIds);
 
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
@@ -127,7 +127,7 @@ public class SocialuniUserExpandService {
         //查询的时候更新用户的扩列信息
 //        SocialuniUserExtendFriendLogDOUtil.createUserExtendFriendLog();
 
-        List<Integer> pageTypeUserIds = new ArrayList<>();
+        List<Long> pageTypeUserIds = new ArrayList<>();
         //查询本周内上线的用户
         Date curDate = new Date();
         long lastWeekTime = curDate.getTime() - DateTimeType.year;
@@ -135,7 +135,7 @@ public class SocialuniUserExpandService {
         //赞个人主页。本周内获得赞最多的吗，就先上线一个最近的。
         if (pageType.equals(SocialuniUserExtendFriendsPageType.hot)) {
             //热门id列表, 然后把他们的赞排序
-            List<Integer> hugHotUserIds = socialuniUserHugRepository.findUserIdsOrderByHugNum();
+            List<Long> hugHotUserIds = socialuniUserHugRepository.findUserIdsOrderByHugNum();
             pageTypeUserIds = hugHotUserIds;
         } else if (pageType.equals(SocialuniUserExtendFriendsPageType.city)) {
             //
@@ -168,8 +168,8 @@ public class SocialuniUserExpandService {
         //查询打开了联系方式的用户
 //        List<Integer> openContactIds = socialuniUserExpandRepository.findUserIdsByOpenContactInfoOrderByLastOnlineTimeDesc(queryTime);
         //查询用户状态不为封禁的
-        List<Integer> userIds = socialuniUserRepository.findUserIdsByStatus(SocialuniUserStatus.enable);
-        List<Integer> queryIds;
+        List<Long> userIds = socialuniUserRepository.findUserIdsByStatus(SocialuniUserStatus.enable);
+        List<Long> queryIds;
         //暂时不加最近在线，和开启联系方式等功能
 //        if (pageTypeUserIds == null) {
 //            queryIds = ListConvertUtil.intersectionMany(openContactIds, userIds);
@@ -188,7 +188,7 @@ public class SocialuniUserExpandService {
         if (pageSize == null) {
             pageSize = 10;
         }
-        List<Integer> pageQueryIds = CollUtil.sub(queryIds, (pageNum - 1) * pageSize, pageNum * pageSize);
+        List<Long> pageQueryIds = CollUtil.sub(queryIds, (pageNum - 1) * pageSize, pageNum * pageSize);
         List<SocialuniUserDo> userDos = SocialuniUserUtil.getUsers(pageQueryIds);
 
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();

@@ -24,9 +24,9 @@ public class SocialuniImUserService {
 
     public ResultRO<SocialuniImUserDetailRO> getImUserDetail(@RequestBody @Valid SocialuniUserIdQO socialuniUserIdQO) {
 
-        Integer beUserId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(socialuniUserIdQO.getUserId());
+        Long beUserId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(socialuniUserIdQO.getUserId());
 
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdAllowNull();
+        Long mineUserId = SocialuniUserUtil.getMineUserIdAllowNull();
 
         //获取对方是否接收陌生人消息
         SocialuniUserChatConfigDO socialuniUserChatConfigDO = SocialuniUserChatConfigManage.getOrCreateUserChatConfigDO(beUserId);
@@ -52,7 +52,7 @@ public class SocialuniImUserService {
     }
 
     public ResultRO<SocialuniImMineUserDetailRO> getImMineUser() {
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+        Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
 
         SocialuniUserChatConfigDO socialuniUserChatConfigDO = SocialuniUserChatConfigManage.getOrCreateUserChatConfigDO(mineUserId);
 
@@ -62,7 +62,7 @@ public class SocialuniImUserService {
     }
 
     public ResultRO<SocialuniImMineUserDetailRO> closeStrangerMsg() {
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+        Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
 
         SocialuniUserChatConfigDO socialuniUserChatConfigDO = SocialuniUserChatConfigManage.getOrCreateUserChatConfigDO(mineUserId);
 
@@ -76,7 +76,7 @@ public class SocialuniImUserService {
     }
 
     public ResultRO<SocialuniImMineUserDetailRO> openStrangerMsg() {
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+        Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
 
         SocialuniUserChatConfigDO socialuniUserChatConfigDO = SocialuniUserChatConfigManage.getOrCreateUserChatConfigDO(mineUserId);
 

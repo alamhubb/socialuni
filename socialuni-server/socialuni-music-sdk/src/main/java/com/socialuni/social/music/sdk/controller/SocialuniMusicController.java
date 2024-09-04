@@ -94,7 +94,7 @@ public class SocialuniMusicController {
 
     @GetMapping("queryMusicRoomPlayerInfo/{channel}")
     public ResultRO<SocialuniMusicRoomInfoRO> queryMusicRoomInfo(@PathVariable("channel") String channel) {
-        Integer chatId = SocialuniChatDOUtil.getChatId(channel);
+        Long chatId = SocialuniChatDOUtil.getChatId(channel);
 
         SocialuniMusicRoomDO socialuniMusicRoomDO = socialuniMusicRoomManage.getOrCreateMusicPlayerDO(chatId);
 
@@ -109,8 +109,8 @@ public class SocialuniMusicController {
 
     /*@GetMapping("queryMusicUserInfo/{channel}")
     public ResultRO<SocialuniMusicRoomUserInfoRO> queryMusicUserInfo() {
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
-        Integer chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(channel);
+        Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+        Long chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(channel);
 
         //然后是查询roomUser
         SocialuniMusicRoomUserDO socialuniMusicRoomUserDO = socialuniMusicRoomUserEntity.checkAndGetOrCreateMusicRoomUserInfo(chatId, mineUserId);
@@ -124,9 +124,9 @@ public class SocialuniMusicController {
 
     @GetMapping("queryMusicRoomUserInfo/{channel}")
     public ResultRO<SocialuniMusicRoomUserInfoRO> queryMusicRoomUserInfo(@PathVariable("channel") @Valid @NotBlank String channel) {
-        Integer chatId = SocialuniChatDOUtil.getChatId(channel);
+        Long chatId = SocialuniChatDOUtil.getChatId(channel);
 
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+        Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
 
         //然后是查询roomUser
         SocialuniMusicRoomUserDO socialuniMusicRoomUserDO = socialuniMusicRoomUserEntity.checkAndGetOrCreateMusicRoomUserInfo(chatId, mineUserId);
@@ -214,12 +214,12 @@ public class SocialuniMusicController {
         this.sequence++;
 
 
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+        Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
 
         //校验用户有没有修改权限
        /* SocialuniMusicOperateCheckRO checkResult = socialuniMusicOperateCheck.checkRoleId(mineUserId);
 
-        Integer chatId = checkResult.getChatId();
+        Long chatId = checkResult.getChatId();
 
         Boolean pause = updateMusicQO.getPlaying();
 
@@ -321,9 +321,9 @@ public class SocialuniMusicController {
             throw new SocialBusinessException("房间信息为空");
         }
 
-        Integer chatId = SocialuniChatDOUtil.getChatId(channel);
+        Long chatId = SocialuniChatDOUtil.getChatId(channel);
         
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+        Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
 
         socialuniMusicOperateCheck.checkRoleId(chatId, mineUserId);
 

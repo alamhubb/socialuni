@@ -12,7 +12,7 @@ public class SocialuniAppProperties {
 
 
     /*private String staticResourceUrl;
-    private Integer systemUserId;
+    private Long systemUserId;
 
     //核心圈子，不写默认为app绑定的圈子
     private String mainCircle;

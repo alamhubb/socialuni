@@ -21,9 +21,9 @@ public class ReportDetailDO implements Serializable {
 
     private Long userId;
     //应该就是contentId
-    private Integer contentId;
+    private Long contentId;
 
-    private Integer receiveUserId;
+    private Long receiveUserId;
 
     /**
      * 举报类型，政治敏感，暴露，暴力等
@@ -50,7 +50,7 @@ public class ReportDetailDO implements Serializable {
     }
 
     //    todo 这里有个坑 content 改为了 cause
-    public ReportDetailDO(String reportCause, String reportType, ReportDO reportDO, String content, Integer requestUserId) {
+    public ReportDetailDO(String reportCause, String reportType, ReportDO reportDO, String content, Long requestUserId) {
         this.reportCause = reportCause;
 
         this.contentId = reportDO.getContentId();

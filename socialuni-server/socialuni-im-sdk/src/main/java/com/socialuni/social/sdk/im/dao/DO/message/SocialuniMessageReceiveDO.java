@@ -35,7 +35,7 @@ public class SocialuniMessageReceiveDO extends SocialuniUserContactBaseDO implem
 
     //    @ManyToOne
 //    private MessageDO message;
-    private Integer messageId;
+    private Long messageId;
 
     /**
      * 这个用来记录chat的昵称，和头像的。只有私聊的状态下才有
@@ -46,7 +46,7 @@ public class SocialuniMessageReceiveDO extends SocialuniUserContactBaseDO implem
 
     private Integer chatUserId;
 
-    public SocialuniMessageReceiveDO(SocialuniChatUserDO chatUserDO, Integer sendUserId, Integer messageId) {
+    public SocialuniMessageReceiveDO(SocialuniChatUserDO chatUserDO, Long sendUserId, Long messageId) {
         super(sendUserId, chatUserDO.getUserId());
         this.chatUserId = chatUserDO.getId();
         this.messageId = messageId;

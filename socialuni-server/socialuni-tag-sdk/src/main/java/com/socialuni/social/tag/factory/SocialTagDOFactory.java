@@ -13,7 +13,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 public class SocialTagDOFactory implements Serializable {
-    public static SocialuniTagDO toTagDO(String tagName, String tagDesc, Integer mineUserId) {
+    public static SocialuniTagDO toTagDO(String tagName, String tagDesc, Long mineUserId) {
         SocialuniTagDO TagDO = new SocialuniTagDO();
         TagDO.setApplyUserId(mineUserId);
         //先默认为1，以后设置可以更改选择类型

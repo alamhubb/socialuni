@@ -44,7 +44,7 @@ public class SoicialuniUserAddReportDomain {
     public ResultRO<String> userReportContent(SocialuniReportAddQO socialReportAddQO, SocialuniUnionContentBaseDO modelDO) {
         //这里之后才能校验
 
-        Integer contentId = modelDO.getUnionId();
+        Long contentId = modelDO.getUnionId();
 
         SocialuniUnionIdModler uniContentUnionIdDO = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(contentId);
         // 设置model
@@ -66,7 +66,7 @@ public class SoicialuniUserAddReportDomain {
         ResultRO<String> resultRO = new ResultRO<>();
         resultRO.setData(ErrorMsg.reportSubmit);
         //只有用户举报的才修改用户状态
-        Integer receiveUserId = modelDO.getUserId();
+        Long receiveUserId = modelDO.getUserId();
 
         //系统自动审查，则只修改动态为预审查
 

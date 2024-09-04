@@ -23,7 +23,7 @@ public class SocialuniMusicRoomSongListDO extends SocialuniContentBaseDO {
     //序号
     Integer orderNo;
 
-    Integer roomId;
+    Long roomId;
 
     String songId;
 

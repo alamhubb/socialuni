@@ -6,19 +6,19 @@ import lombok.Data;
 
 @Data
 public class SocialuniMusicOperateCheckRO {
-    Integer chatId;
-    Integer mineUserId;
+    Long chatId;
+    Long mineUserId;
     String roleId;
     SocialuniMusicRoomDO socialuniMusicRoomDO;
     SocialuniMusicRoomUserDO socialuniMusicRoomUserDO;
 
-    public SocialuniMusicOperateCheckRO(Integer chatId, Integer mineUserId, String roleId) {
+    public SocialuniMusicOperateCheckRO(Long chatId, Long mineUserId, String roleId) {
         this.chatId = chatId;
         this.mineUserId = mineUserId;
         this.roleId = roleId;
     }
 
-    public SocialuniMusicOperateCheckRO(Integer chatId, Integer mineUserId, SocialuniMusicRoomDO socialuniMusicRoomDO, SocialuniMusicRoomUserDO socialuniMusicRoomUserDO) {
+    public SocialuniMusicOperateCheckRO(Long chatId, Long mineUserId, SocialuniMusicRoomDO socialuniMusicRoomDO, SocialuniMusicRoomUserDO socialuniMusicRoomUserDO) {
         this.chatId = chatId;
         this.mineUserId = mineUserId;
         if (socialuniMusicRoomUserDO != null) {

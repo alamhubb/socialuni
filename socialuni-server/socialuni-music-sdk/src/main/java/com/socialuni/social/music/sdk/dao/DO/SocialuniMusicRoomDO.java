@@ -23,7 +23,7 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class SocialuniMusicRoomDO extends SocialuniContentBaseDO {
-    Integer roomId;
+    Long roomId;
 
     //songList表的id
     Integer musicId;

@@ -27,7 +27,7 @@ public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {
     //用户手动操作的，系统没有操作方法，暂时没用
     private Boolean topFlag;
     //    private SocialuniChatDO chat;
-    private Integer chatId;
+    private Long chatId;
     //是否拉黑了对方
     //管理员角色
     private String chatRoleId;
@@ -111,7 +111,7 @@ public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {
         this.unreadNum = 0;
     }
 
-    public SocialuniChatUserDO(SocialuniChatDO chat, Long userId, Integer beUserId) {
+    public SocialuniChatUserDO(SocialuniChatDO chat, Long userId, Long beUserId) {
         this(chat, userId);
         this.setBeUserId(beUserId);
     }
@@ -146,7 +146,7 @@ public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {
     }*/
 
     //创建私聊时，需要根据chat状态决定chatUser状态，有两种情况，直接开启和待开启，msg可删除时，则无需再使用lastcontent
-    /*public ChatUserDO(ChatDO chatDO, Long userId, Integer receiveUserId) {
+    /*public ChatUserDO(ChatDO chatDO, Long userId, Long receiveUserId) {
         this(chatDO, userId, receiveUserId, chatDO.getType());
         this.status = chatDO.getStatus();
         //只有支付开启的时候，直接在对方前台显示

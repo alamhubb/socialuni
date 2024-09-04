@@ -36,7 +36,7 @@ public class SocialuniCommentDeleteDomain {
     public ResultRO<Void> deleteComment(SocialuniCommentDeleteQO commentDeleteQO) {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
 
-        Integer commentId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(commentDeleteQO.getCommentId());
+        Long commentId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(commentDeleteQO.getCommentId());
 
         Optional<?  extends SocialuniCommentDO> optionalCommentDO = commentApi.findOneByUnionIdAndStatusIn(commentId, ContentStatus.selfCanSeeContentStatus);
         if (!optionalCommentDO.isPresent()) {

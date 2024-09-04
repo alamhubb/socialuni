@@ -48,6 +48,6 @@ public class TencentCosAuditRecordDO extends SocialuniContentBaseDO {
     private String imgKey;
     //key获取
     private Long userId;
-    private Integer imgContentId;
-    private Integer imgParentContentId;
+    private Long imgContentId;
+    private Long imgParentContentId;
 }

@@ -252,7 +252,7 @@ public class QQUtil {
 
         map.put("fee_type", "CNY");
         map.put("mch_id", qq_merchant_id);
-        String nonce_strstr = UUIDUtil.getSnowflakeId();
+        String nonce_strstr = UUIDUtil.getUUID();
         map.put("nonce_str", nonce_strstr);
         map.put("notify_url", QQConst.qq_pay_result_notify_url);
         map.put("out_trade_no", orderNo);
@@ -321,7 +321,7 @@ public class QQUtil {
         String bodystr = "qingchiapp";
         map.put("body", bodystr);
         map.put("mch_id", WxUtil.getWx_merchant_id());
-        String nonce_strstr = UUIDUtil.getSnowflakeId();
+        String nonce_strstr = UUIDUtil.getUUID();
         map.put("nonce_str", nonce_strstr);
 
         String qqWxNotifyUrl = "https://api.q.qq.com/wxpay/notify";

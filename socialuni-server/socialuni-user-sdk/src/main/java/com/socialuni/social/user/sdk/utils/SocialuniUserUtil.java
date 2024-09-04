@@ -54,7 +54,7 @@ public class SocialuniUserUtil {
     }
 
 
-    public static Integer getMineUserIdAllowNull(SocialuniUserDo mineUser) {
+    public static Long getMineUserIdAllowNull(SocialuniUserDo mineUser) {
         //解析token
         if (mineUser == null) {
             return null;
@@ -63,7 +63,7 @@ public class SocialuniUserUtil {
         return userId;
     }
 
-    public static Integer getMineUserIdNotNull() {
+    public static Long getMineUserIdNotNull() {
         return getMineUserNotNull().getUnionId();
     }
 
@@ -72,7 +72,7 @@ public class SocialuniUserUtil {
     }
 
     public static String getMineUserUuidIdNotNull() {
-        Integer mineUserId = getMineUserIdNotNull();
+        Long mineUserId = getMineUserIdNotNull();
         return SocialuniUnionIdFacede.getUuidByUnionIdNotNull(mineUserId);
     }
 
@@ -108,7 +108,7 @@ public class SocialuniUserUtil {
         return mineUser;
     }
 
-    public static Integer getMineUserIdAllowNull() {
+    public static Long getMineUserIdAllowNull() {
         //解析token
         return socialRequestUserConfig.getUserId();
     }
@@ -173,9 +173,9 @@ public class SocialuniUserUtil {
     }*/
 
 
-    public static List<SocialuniUserDo> getUsers(List<Integer> ids) {
+    public static List<SocialuniUserDo> getUsers(List<Long> ids) {
         List<SocialuniUserDo> userDos = new ArrayList<>();
-        for (Integer id : ids) {
+        for (Long id : ids) {
             SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getUserNotNull(id);
             userDos.add(socialuniUserDo);
         }
@@ -183,12 +183,12 @@ public class SocialuniUserUtil {
     }
 
     public static SocialuniUserDo getUserByUuid(String uid) {
-        Integer id = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(uid);
+        Long id = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(uid);
         return SocialuniUserUtil.getUserNotNull(id);
     }
 
     public static SocialuniUserDo getUserByUuidAllowNull(String uid) {
-        Integer id = SocialuniUnionIdFacede.getUnionIdByUuidAllowNull(uid);
+        Long id = SocialuniUnionIdFacede.getUnionIdByUuidAllowNull(uid);
         if (id == null) {
             return null;
         }
@@ -239,7 +239,7 @@ public class SocialuniUserUtil {
         return systemUser;
     }
 
-    public static Integer getSystemUserIdNotNull() {
+    public static Long getSystemUserIdNotNull() {
         return getSystemUserNotNull().getUserId();
     }
 }

@@ -1,37 +1,13 @@
 package com.socialuni.social.report.sdk.utils;
 
-import com.socialuni.social.common.api.constant.MpPlatformType;
-import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
-import com.socialuni.social.common.api.utils.RequestUtil;
-import com.socialuni.social.common.sdk.constant.ReportSourceType;
-import com.socialuni.social.common.sdk.constant.ViolateType;
-import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
-import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkImgDO;
 import com.socialuni.social.content.logic.service.KeywordsTriggerService;
-import com.socialuni.social.report.sdk.entity.ReportDO;
-import com.socialuni.social.report.sdk.entity.ReportDetailDO;
 import com.socialuni.social.report.sdk.dao.repository.ReportDetailRepository;
 import com.socialuni.social.report.sdk.dao.repository.ReportRepository;
-import com.socialuni.social.content.dao.store.AppConfigStatic;
-import com.socialuni.social.common.api.enumeration.ContentStatus;
-import com.socialuni.social.content.dao.DO.KeywordsTriggerDetailDO;
 import com.socialuni.social.content.dao.repository.KeywordsTriggerDetailRepository;
-import com.socialuni.social.report.sdk.facotry.ReportFactory;
-import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.common.api.constant.SocialuniContentType;
-import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
-import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 /**
  * @author qinkaiyuan
@@ -93,7 +69,7 @@ public class SoicialuniSystemPreCheckReportDomainDOUtil {
                     return;
                 }
             }
-            Integer contentId = socialuniContentBO.getUnionId();
+            Long contentId = socialuniContentBO.getUnionId();
 
             //获取唯一标识
             SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(contentId);
@@ -140,7 +116,7 @@ public class SoicialuniSystemPreCheckReportDomainDOUtil {
             if (socialuniContentBO.getContentType().equals(SocialuniContentType.talkImg)) {
                 //同步更新talk状态
                 SocialuniTalkImgDO socialTalkImgDO = (SocialuniTalkImgDO) socialUnionContentBaseDO;
-                Integer talkId = socialTalkImgDO.getTalkId();
+                Long talkId = socialTalkImgDO.getTalkId();
                 SocialuniTalkDO talkDO = SocialuniTalkDOUtil.getTalkNotNull(talkId);
                 talkDO.setStatus(ContentStatus.preAudit);
                 talkDO.setUpdateTime(new Date());

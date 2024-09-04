@@ -38,7 +38,7 @@ public class SocialuniPartnerComputedContributeDomain {
         List<SocialuniPartnerUserOnlineDO> socialuniUserOnlineDOS = socialuniUserOnlineRepository.findByTodayDate(today);
 
 
-        Map<Integer, Integer> userOnlineMap = new HashMap<>();
+        Map<Long, Integer> userOnlineMap = new HashMap<>();
 
         for (SocialuniPartnerUserOnlineDO socialuniUserOnlineDO : socialuniUserOnlineDOS) {
             Long userId = socialuniUserOnlineDO.getUserId();

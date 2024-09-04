@@ -31,12 +31,12 @@ public class SocialuniChatDOUtil {
 
 
     //支持uuid，chatUserId,chatId, 群聊应该返回chatId, 私聊应该返回UserId
-    public static Integer getChatId(String chatIdStr) {
+    public static Long getChatId(String chatIdStr) {
         if (StringUtils.isEmpty(chatIdStr)) {
             throw new SocialBusinessException("房间信息为空");
         }
 
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdAllowNull();
+        Long mineUserId = SocialuniUserUtil.getMineUserIdAllowNull();
 
         SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidNotNull(chatIdStr);
 

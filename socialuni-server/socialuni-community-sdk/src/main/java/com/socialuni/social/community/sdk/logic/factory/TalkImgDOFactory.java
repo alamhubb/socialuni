@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class TalkImgDOFactory {
     public static SocialuniTalkImgDO newTalkImgDO(SocialuniImgAddQO talkImgVO) {
         SocialuniTalkImgDO socialTalkImgDO = new SocialuniTalkImgDO();
-        Integer talkImgUnionId = SocialuniUnionIdFacede.createTalkImgUnionId();
+        Long talkImgUnionId = SocialuniUnionIdFacede.createTalkImgUnionId();
         socialTalkImgDO.setUnionId(talkImgUnionId);
 
         socialTalkImgDO.setSrc(talkImgVO.getSrc());

@@ -18,5 +18,5 @@ public class SocialFollowAddQO {
      * 被关注的用户id
      */
     @NotNull(message = "入参为空异常")
-    private Integer beUserId;
+    private Long beUserId;
 }

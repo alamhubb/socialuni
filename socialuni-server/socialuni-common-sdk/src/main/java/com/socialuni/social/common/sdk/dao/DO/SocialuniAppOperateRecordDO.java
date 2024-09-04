@@ -22,7 +22,7 @@ import java.io.Serializable;
 public class SocialuniAppOperateRecordDO extends SocialuniUserContactBaseDO implements Serializable {
     //操作主题， 群组， 动态等，
     String contentType;
-    Integer contentId;
+    Long contentId;
     //角色类型，系统管理员，
     String roleType;
     String roleId;

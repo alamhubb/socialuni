@@ -37,7 +37,7 @@ public class ViolationKeywordsService {
                 UserDO systemUser = UserUtils.getSystemUser();
                 //删除所有违规的talk
                 List<TalkDO> talkDOS = talkRepository.findAllByContentLikeAndStatus(illegalSql, CommonStatus.enable);
-                for (Integer talkIdDO : talkDOS) {
+                for (Long talkIdDO : talkDOS) {
                     Logger.logger.info("违规内容----：" + talkDO.getContent());
                     Logger.logger.info("违规关键词----：" + illegalSql);
                     //删除talk和封禁用户处理
@@ -49,7 +49,7 @@ public class ViolationKeywordsService {
                 }
                 //删除所有违规的评论
                 List<CommentDO> commentDOS = commentRepository.findAllByContentLikeAndStatus(illegalSql, CommonStatus.enable);
-                for (Integer commentIdDO : commentDOS) {
+                for (Long commentIdDO : commentDOS) {
                     Logger.logger.info("违规内容----：" + commentDO.getContent());
                     Logger.logger.info("违规关键词----：" + illegalSql);
                     //删除talk和封禁用户处理

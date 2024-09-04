@@ -36,7 +36,7 @@ public class SocialuniCommentPostDomain {
     public SocialuniCommentRO postComment(SocialuniCommentPostQO addQO) {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
 
-        Integer talkId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(addQO.getTalkId());
+        Long talkId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(addQO.getTalkId());
 
         List<?  extends SocialuniTagDO> TagDOs = socialTagRedis.getTagsByTalkId(talkId);
         List<String> tagNames = TagDOs.stream().map(SocialuniTagDO::getName).collect(Collectors.toList());
@@ -83,7 +83,7 @@ public class SocialuniCommentPostDomain {
         //校验内容是否违规
         modelContentCheck.checkUserAndContent(addVO.getContent(), requestUser);
 
-        Integer talkId = addVO.getTalkId();
+        Long talkId = addVO.getTalkId();
         //因为与下面有关联所以拿到了上面
         SocialTalkDO talkDO = talkRepository.findOneByUnionId(talkId);
         if (talkDO == null) {

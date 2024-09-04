@@ -27,7 +27,7 @@ public class SocialUserPhoneManage {
 
     //校验用户是否已经绑定手机号，手机号是否已被绑定
     //不存在已经授权了清池用户，再来绑定手机号的情况。
-    public void checkBindPhoneNum(String phoneNum, Integer mineUserId) {
+    public void checkBindPhoneNum(String phoneNum, Long mineUserId) {
         //进入这个方法一定是已经登陆了。
         //校验手机号格式
         checkBindPhoneNumHasBind(phoneNum);
@@ -75,7 +75,7 @@ public class SocialUserPhoneManage {
 
 
     //创建手机号信息
-    public SocialUserPhoneDo createUserPhoneNum(Integer mineUserId, String phoneCountryCode, String phoneNum) {
+    public SocialUserPhoneDo createUserPhoneNum(Long mineUserId, String phoneCountryCode, String phoneNum) {
         SocialUserPhoneDo SocialUserPhoneDo = new SocialUserPhoneDo(mineUserId, phoneCountryCode, phoneNum, DevAccountFacade.getDevIdNullElseCenterDevId());
         SocialUserPhoneDo = socialUserPhoneApi.savePut(SocialUserPhoneDo);
         return SocialUserPhoneDo;

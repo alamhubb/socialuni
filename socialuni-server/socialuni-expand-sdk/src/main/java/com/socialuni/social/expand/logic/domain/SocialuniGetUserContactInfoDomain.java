@@ -78,7 +78,7 @@ public class SocialuniGetUserContactInfoDomain {
 
         Long userId = mineUser.getUserId();
 
-        socialuniCreateCoinOrderEntity.createCoinOrderByOrderType(userId, -expanseCoinNum, SocialuniCoinOrderType.consume, SocialuniOrderDetailType.contact, userContactDO.getId());
+        socialuniCreateCoinOrderEntity.createCoinOrderByOrderType(userId, -expanseCoinNum, SocialuniCoinOrderType.consume, SocialuniOrderDetailType.contact, Long.valueOf(userContactDO.getId()));
 
         //关联
 //        SocialuniCoinOrderDO shellOrderGiveDO = new SocialuniCoinOrderDO(beUser.getUserId(), userGiveShell, SocialuniCoinOrderType.income, userContactDO.getId());

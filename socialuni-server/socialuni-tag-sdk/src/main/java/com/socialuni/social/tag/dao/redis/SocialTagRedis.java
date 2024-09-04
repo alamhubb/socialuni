@@ -35,13 +35,13 @@ public class SocialTagRedis {
     }
 
     @Cacheable(cacheNames = TagRedisKey.talkTagsByTalkId, key = "#talkId")
-    public List<?  extends SocialuniTagDO> getTagsByTalkId(Integer talkId) {
+    public List<?  extends SocialuniTagDO> getTagsByTalkId(Long talkId) {
         List<Integer> tagIds = this.getTagIdsByTalkId(talkId);
         return socialTagStore.findTagsByIds(tagIds);
     }
 
     //获取talk下的
-    private List<Integer> getTagIdsByTalkId(Integer talkId) {
+    private List<Integer> getTagIdsByTalkId(Long talkId) {
         return tagApi.findTagIdsByTalkIdAndStatusAndShowFront(talkId, ContentStatus.enable, true);
     }
 

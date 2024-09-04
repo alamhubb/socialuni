@@ -26,14 +26,14 @@ import java.io.Serializable;
 //为什么单独做一个表，因为用talk的记录不知道哪条审核过哪条没审核过
 public class SocialuniTalkHasUnderageImgAuditDO extends SocialuniUnionContentBaseDO implements Serializable {
     @Column(nullable = false)
-    private Integer talkId;
+    private Long talkId;
 
     @Column(nullable = false)
     private Integer devId;
     @Column(nullable = false)
     private Long userId;
 
-    public SocialuniTalkHasUnderageImgAuditDO(Integer talkId, Long userId) {
+    public SocialuniTalkHasUnderageImgAuditDO(Long talkId, Long userId) {
         this.setStatus(ContentStatus.preAudit);
         this.talkId = talkId;
         this.userId = userId;

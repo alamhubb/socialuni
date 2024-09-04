@@ -43,7 +43,7 @@ public class SocialuniContentUserROFactory {
             userRO.setIsMine(false);
         }
 
-        Integer mineUserId = Optional.ofNullable(mineUser)
+        Long mineUserId = Optional.ofNullable(mineUser)
                 .map(SocialuniUserDo::getUserId)
                 .orElse(null);
 

@@ -13,7 +13,7 @@ public class SocialuniUserFollowManage {
     @Resource
     private SocialuniFollowRepository followRepository;
 
-    public SocialuniUserFollowDO createFollow(Integer mineUserId, Integer beUserId) {
+    public SocialuniUserFollowDO createFollow(Long mineUserId, Long beUserId) {
         SocialuniUserFollowDO followDO = new SocialuniUserFollowDO();
         //两个用户粉丝和关注各加1
         followDO.setUserId(mineUserId);
@@ -29,7 +29,7 @@ public class SocialuniUserFollowManage {
         return followDO;
     }
 
-    public boolean userHasFollowBeUser(Long userId, Integer beUserId) {
+    public boolean userHasFollowBeUser(Long userId, Long beUserId) {
         SocialuniUserFollowDO followDO = followRepository.findFirstByUserIdAndBeUserId(userId, beUserId);
         return followDO != null && SocialuniCommonStatus.enable.equals(followDO.getStatus());
     }

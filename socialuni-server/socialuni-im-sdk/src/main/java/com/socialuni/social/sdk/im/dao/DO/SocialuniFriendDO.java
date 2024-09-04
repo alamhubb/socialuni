@@ -30,7 +30,7 @@ import javax.persistence.UniqueConstraint;
 @NoArgsConstructor
 public class SocialuniFriendDO extends SocialuniUserContactBaseDO {
 
-    public SocialuniFriendDO(Long userId, Integer beUserId, String applyMsg) {
+    public SocialuniFriendDO(Long userId, Long beUserId, String applyMsg) {
         super(userId, beUserId);
     }
 }

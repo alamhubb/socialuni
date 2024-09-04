@@ -15,8 +15,8 @@ public class SocialuniUserLikeChatManage {
     @Resource
     SocialuniLikeUserChatRepository socialuniLikeUserChatRepository;
 
-    public SocialuniUserLikeChatDO create(Integer chatId) {
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+    public SocialuniUserLikeChatDO create(Long chatId) {
+        Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
         SocialuniUserLikeChatDO socialuniUserLikeChatDO = new SocialuniUserLikeChatDO();
         socialuniUserLikeChatDO.setChatId(chatId);
         socialuniUserLikeChatDO.setUserId(mineUserId);
@@ -24,7 +24,7 @@ public class SocialuniUserLikeChatManage {
         return socialuniUserLikeChatDO;
     }
 
-    public SocialuniUserLikeChatDO getOrCreate(Integer chatId) {
+    public SocialuniUserLikeChatDO getOrCreate(Long chatId) {
         SocialuniUserLikeChatDO socialuniUserLikeChatDO = socialuniLikeUserChatRepository.findByChatId(chatId);
         if (socialuniUserLikeChatDO == null) {
             return create(chatId);
@@ -32,7 +32,7 @@ public class SocialuniUserLikeChatManage {
         return socialuniUserLikeChatDO;
     }
 
-    public SocialuniUserLikeChatDO get(Integer chatId) {
+    public SocialuniUserLikeChatDO get(Long chatId) {
         return socialuniLikeUserChatRepository.findByChatId(chatId);
     }
 }

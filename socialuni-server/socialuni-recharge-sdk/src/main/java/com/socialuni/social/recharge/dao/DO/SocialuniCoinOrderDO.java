@@ -25,7 +25,7 @@ public class SocialuniCoinOrderDO extends SocialuniContentBaseDO implements Seri
     @Column(nullable = false)
     private String detailType;
 
-    private Integer relateId;
+    private Long relateId;
 
     @Column(nullable = false)
     private Integer userCoin;
@@ -33,7 +33,7 @@ public class SocialuniCoinOrderDO extends SocialuniContentBaseDO implements Seri
     public SocialuniCoinOrderDO() {
     }
 
-    public SocialuniCoinOrderDO(Long userId, Integer shell, String type, String detailType, Integer userCoin,Integer relateId) {
+    public SocialuniCoinOrderDO(Long userId, Integer shell, String type, String detailType, Integer userCoin,Long relateId) {
         super(userId);
         this.shell = shell;
         this.absoluteShell = Math.abs(shell);

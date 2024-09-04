@@ -27,6 +27,6 @@ public class SocialTalkTagDO implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Integer talkId;
+    private Long talkId;
     private Integer tagId;
 }

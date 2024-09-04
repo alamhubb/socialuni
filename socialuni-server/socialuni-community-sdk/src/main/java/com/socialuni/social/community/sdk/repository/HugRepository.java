@@ -9,5 +9,5 @@ public interface HugRepository extends JpaRepository<SocialuniHugDO, Integer> {
     default SocialuniHugDO savePut(SocialuniHugDO HugDO){
         return this.save(BeanUtil.toBean(HugDO, SocialuniHugDO.class));
     }
-    SocialuniHugDO findByTalkIdAndUserId(Integer talkId, Long userId);
+    SocialuniHugDO findByTalkIdAndUserId(Long talkId, Long userId);
 }

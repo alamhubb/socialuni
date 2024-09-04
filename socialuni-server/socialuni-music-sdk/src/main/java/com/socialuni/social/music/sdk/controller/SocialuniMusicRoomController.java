@@ -52,7 +52,7 @@ public class SocialuniMusicRoomController {
     //加入歌单，所有人都拥有权限？
     @PostMapping("joinSongList/{roomId}")
     public ResultRO<Void> joinSongList(@PathVariable("roomId") String roomId, @RequestBody SocialuniMusicSongListItemRO playSongQO) {
-        Integer chatId = SocialuniChatDOUtil.getChatId(roomId);
+        Long chatId = SocialuniChatDOUtil.getChatId(roomId);
 
         List<SocialuniMusicRoomSongListDO> socialuniMusicRoomSongListDOS = SocialuniMusicRoomRepositoryFacede.findAllByRoomIdAndStatus(chatId, SocialuniCommonStatus.enable, SocialuniMusicRoomSongListDO.class);
         Integer no = socialuniMusicRoomSongListDOS.size() + 1;
@@ -81,7 +81,7 @@ public class SocialuniMusicRoomController {
         return ResultRO.success();
     }
 
-    public SocialuniMusicRoomInfoRO playMusic1(Integer chatId, Integer musicId, SocialuniPlayMusicQO playMusicQO) {
+    public SocialuniMusicRoomInfoRO playMusic1(Long chatId, Integer musicId, SocialuniPlayMusicQO playMusicQO) {
         if (ObjectUtils.isEmpty(musicId)) {
             throw new SocialParamsException("歌曲信息错误30111");
         }
@@ -263,7 +263,7 @@ public class SocialuniMusicRoomController {
     //切歌, no 和 songId,
     @PostMapping("playMusic/{roomId}")
     public ResultRO<SocialuniMusicRoomInfoRO> playMusic(@PathVariable("roomId") String roomId, @RequestBody SocialuniPlayMusicQO playMusicQO) {
-        Integer chatId = SocialuniChatDOUtil.getChatId(roomId);
+        Long chatId = SocialuniChatDOUtil.getChatId(roomId);
 
 
         SocialuniMusicRoomInfoRO socialuniMusicRoomPlayerInfoRO = this.playMusic1(chatId, playMusicQO.getMusicId(), playMusicQO);
@@ -286,7 +286,7 @@ public class SocialuniMusicRoomController {
     public ResultRO<List<SocialuniMusicSongListItemRO>> querySongList(@PathVariable("channel") String channel) {
         //根据房间id，获取歌单
 
-        Integer chatId = SocialuniChatDOUtil.getChatId(channel);
+        Long chatId = SocialuniChatDOUtil.getChatId(channel);
 
         List<SocialuniMusicRoomSongListDO> socialuniMusicRoomSongListDOS = SocialuniMusicRoomRepositoryFacede.findAllByRoomIdAndStatus(chatId, SocialuniCommonStatus.enable, SocialuniMusicRoomSongListDO.class);
 
@@ -322,9 +322,9 @@ public class SocialuniMusicRoomController {
         //创建 chatUser 的逻辑，点击进入页面，会话页加一条
         //发送消息，还有添加好友成功
 
-        Integer chatId = SocialuniChatDOUtil.getChatId(roomId);
+        Long chatId = SocialuniChatDOUtil.getChatId(roomId);
 
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+        Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
 
         socialuniMusicOperateCheck.checkRoleId(chatId, mineUserId);
 

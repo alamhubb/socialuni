@@ -20,5 +20,5 @@ public class MessageAddVO {
     @NotBlank
     private String content;
     //暂时未使用
-//    private Integer receiveUserId;
+//    private Long receiveUserId;
 }

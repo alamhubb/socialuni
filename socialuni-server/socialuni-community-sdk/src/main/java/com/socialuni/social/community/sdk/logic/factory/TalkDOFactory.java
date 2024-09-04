@@ -1,6 +1,6 @@
 package com.socialuni.social.community.sdk.logic.factory;
 
-import com.socialuni.social.community.sdk.dao.DO.SocialuniDistrictDO;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniDistrictDO;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
 import com.socialuni.social.community.sdk.model.QO.talk.SocialuniTalkPostQO;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 public class TalkDOFactory {
     public static SocialuniTalkDO newTalkDO(SocialuniUserDo user, SocialuniTalkPostQO socialTalkPostQO, SocialuniDistrictDO district) {
         SocialuniTalkDO talkDO = new SocialuniTalkDO(user.getUnionId(), socialTalkPostQO.getContent());
-        Integer talkUnionId = SocialuniUnionIdFacede.createTalkUnionId();
+        Long talkUnionId = SocialuniUnionIdFacede.createTalkUnionId();
 
         talkDO.setUnionId(talkUnionId);
 

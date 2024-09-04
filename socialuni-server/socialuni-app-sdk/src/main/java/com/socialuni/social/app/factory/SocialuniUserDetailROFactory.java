@@ -27,7 +27,7 @@ public class SocialuniUserDetailROFactory {
         //user基础信息
         SocialuniUserDetailRO userDetailVO = new SocialuniUserDetailRO(socialUserDetailFollowRO);
 
-        Integer userUnionId = userDO.getUnionId();
+        Long userUnionId = userDO.getUnionId();
 
         SocialuniUserExpandDo socialuniUserExpandDo = SocialuniUserExpandDOUtil.getOrCreate(userUnionId);
         userDetailVO.setSchoolName(socialuniUserExpandDo.getSchoolName());

@@ -26,10 +26,10 @@ public class SocialuniMusicRoomUserDO extends SocialuniContentBaseDO {
 
     //可以关联chatGroupId
     // 云端播放器id
-    Integer roomId;
+    Long roomId;
     String roomRoleId;
 
-    public SocialuniMusicRoomUserDO(Long userId,  Integer roomId, String roomRoleId) {
+    public SocialuniMusicRoomUserDO(Long userId,  Long roomId, String roomRoleId) {
         super(userId);
         this.roomId = roomId;
         this.roomRoleId = roomRoleId;

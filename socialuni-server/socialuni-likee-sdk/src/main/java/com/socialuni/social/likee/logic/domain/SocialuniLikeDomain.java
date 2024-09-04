@@ -20,9 +20,9 @@ public class SocialuniLikeDomain {
 
     public void asfaf(SocialuniUserIdQO addVO) {
         //有问题，应该关注完刷新前台用户
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+        Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
 
-        Integer beUserId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(addVO.getUserId());
+        Long beUserId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(addVO.getUserId());
         if (Objects.equals(beUserId, mineUserId)) {
             throw new SocialParamsException("不能喜欢自己哦");
         }

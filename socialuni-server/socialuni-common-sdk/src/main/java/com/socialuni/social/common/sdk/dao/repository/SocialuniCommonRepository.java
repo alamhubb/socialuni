@@ -184,6 +184,22 @@ public class SocialuniCommonRepository {
         return null;
     }
 
+    public <T extends SocialuniBaseDO> T findByCustomField(String field, Long fieldId, Class<T> tClass) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
+        Root<T> userInfo = criteriaQuery.from(tClass);
+
+        Predicate userIdPredicate = criteriaBuilder.equal(userInfo.get(field), fieldId);
+        criteriaQuery.where(userIdPredicate);
+
+        List<T> list = entityManager.createQuery(criteriaQuery).setFirstResult(0).setMaxResults(1).getResultList();
+
+        if (list.size() > 0) {
+            return list.get(0);
+        }
+        return null;
+    }
+
 
     /**
      * 通过userId获得对应的子类。
@@ -194,7 +210,7 @@ public class SocialuniCommonRepository {
      * @return
      */
 //    @Cacheable(cacheNames = CommonRedisKey.commonFindByUserIdAndBeUserId, key = "#tClass.getSimpleName()+'-'+#userId+'-'+#beUserId")
-    public <T extends SocialuniUserContactBaseDO> T findByUserIdAndBeUserId(Long userId, Integer beUserId, Class<T> tClass) {
+    public <T extends SocialuniUserContactBaseDO> T findByUserIdAndBeUserId(Long userId, Long beUserId, Class<T> tClass) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
         Root<T> userInfo = criteriaQuery.from(tClass);
@@ -228,7 +244,7 @@ public class SocialuniCommonRepository {
     }
 
 
-    public <T extends SocialuniUserContactBaseDO> T findByUserIdAndBeUserIdAndStatus(Long userId, Integer beUserId, String status, Class<T> tClass) {
+    public <T extends SocialuniUserContactBaseDO> T findByUserIdAndBeUserIdAndStatus(Long userId, Long beUserId, String status, Class<T> tClass) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
         Root<T> userInfo = criteriaQuery.from(tClass);
@@ -247,6 +263,24 @@ public class SocialuniCommonRepository {
     }
 
     public <T extends SocialuniContentBaseDO> T findByUserIdAndCustomFieldAndStatus(Long userId, String filedName, Integer fieldId, String status, Class<T> tClass) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
+        Root<T> userInfo = criteriaQuery.from(tClass);
+
+        Predicate userIdPredicate = criteriaBuilder.equal(userInfo.get("userId"), userId);
+        Predicate beUserIdPredicate = criteriaBuilder.equal(userInfo.get(filedName), fieldId);
+        Predicate statusPredicate = criteriaBuilder.equal(userInfo.get("status"), status);
+        criteriaQuery.where(userIdPredicate, beUserIdPredicate, statusPredicate);
+
+        List<T> list = entityManager.createQuery(criteriaQuery).setFirstResult(0).setMaxResults(1).getResultList();
+
+        if (list.size() > 0) {
+            return list.get(0);
+        }
+        return null;
+    }
+
+    public <T extends SocialuniContentBaseDO> T findByUserIdAndCustomFieldAndStatus(Long userId, String filedName, Long fieldId, String status, Class<T> tClass) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
         Root<T> userInfo = criteriaQuery.from(tClass);
@@ -300,7 +334,7 @@ public class SocialuniCommonRepository {
         return null;
     }
 
-    public <T extends SocialuniUserContactBaseDO> Long countByUserIdAndBeUserIdAndStatus(Long userId, Integer beUserId, String status, Class<T> tClass) {
+    public <T extends SocialuniUserContactBaseDO> Long countByUserIdAndBeUserIdAndStatus(Long userId, Long beUserId, String status, Class<T> tClass) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
         Root<T> userInfo = criteriaQuery.from(tClass);
@@ -318,7 +352,7 @@ public class SocialuniCommonRepository {
     }
 
 
-    public <T extends SocialuniUserContactBaseDO> T findByUserIdAndBeUserIdOrderByIdDesc(Long userId, Integer beUserId, Class<T> tClass) {
+    public <T extends SocialuniUserContactBaseDO> T findByUserIdAndBeUserIdOrderByIdDesc(Long userId, Long beUserId, Class<T> tClass) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
         Root<T> userInfo = criteriaQuery.from(tClass);
@@ -337,7 +371,7 @@ public class SocialuniCommonRepository {
         return null;
     }
 
-    public <T extends SocialuniUserContactBaseDO> T findByUserIdAndBeUserIdAndNotStatus(Long userId, Integer beUserId, String status, Class<T> tClass) {
+    public <T extends SocialuniUserContactBaseDO> T findByUserIdAndBeUserIdAndNotStatus(Long userId, Long beUserId, String status, Class<T> tClass) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
         Root<T> userInfo = criteriaQuery.from(tClass);

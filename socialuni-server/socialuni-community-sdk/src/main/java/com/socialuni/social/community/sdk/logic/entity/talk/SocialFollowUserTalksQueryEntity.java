@@ -21,7 +21,7 @@ public class SocialFollowUserTalksQueryEntity {
     private TalkQueryStore talkQueryStore;
 
     //查询用户关注的动态列表
-    public List<?  extends SocialuniTalkDO>  queryUserFollowTalks(List<Integer> talkIds, SocialuniUserDo mineUser) {
+    public List<?  extends SocialuniTalkDO>  queryUserFollowTalks(List<Long> talkIds, SocialuniUserDo mineUser) {
         if (mineUser == null) {
             return new ArrayList<>();
         }

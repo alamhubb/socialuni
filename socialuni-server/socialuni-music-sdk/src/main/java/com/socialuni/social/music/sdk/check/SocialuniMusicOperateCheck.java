@@ -21,7 +21,7 @@ public class SocialuniMusicOperateCheck {
     @Resource
     SocialuniMusicRoomManage socialuniMusicRoomManage;
 
-    public void checkRoleId(Integer chatId, Integer mineUserId) {
+    public void checkRoleId(Long chatId, Long mineUserId) {
 
         //然后是查询roomUser
         SocialuniMusicRoomUserDO socialuniMusicRoomUserDO = socialuniMusicRoomUserEntity.checkAndGetOrCreateMusicRoomUserInfo(chatId, mineUserId);

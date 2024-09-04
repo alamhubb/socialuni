@@ -30,7 +30,7 @@ public class SocialuniUserImgDOUtil {
         return socialUserImgDO;
     }
 
-    public static List<SocialuniUserImgDo> getUserImgs(List<Integer> unionIds) {
+    public static List<SocialuniUserImgDo> getUserImgs(List<Long> unionIds) {
         List<SocialuniUserImgDo> list = new ArrayList<>();
         for (Long unionId : unionIds) {
             list.add(SocialuniUserImgDOUtil.getUserImgNotNull(unionId));
@@ -39,13 +39,13 @@ public class SocialuniUserImgDOUtil {
     }
 
     public static List<SocialuniUserImgDo> getUserImgsTop6(Long userId) {
-        List<Integer> integers = userImgRepository.findUnionIdTop6ByUserIdAndStatusInOrderByCreateTimeDesc(userId, ContentStatus.selfCanSeeContentStatus);
+        List<Long> integers = userImgRepository.findUnionIdTop6ByUserIdAndStatusInOrderByCreateTimeDesc(userId, ContentStatus.selfCanSeeContentStatus);
         return SocialuniUserImgDOUtil.getUserImgs(integers);
     }
 
 
     public static List<SocialuniUserImgDo> getUserImgsTop50(Long userId) {
-        List<Integer> integers = userImgRepository.findUnionIdTop50ByUserIdAndStatusInOrderByCreateTimeDesc(userId, ContentStatus.selfCanSeeContentStatus);
+        List<Long> integers = userImgRepository.findUnionIdTop50ByUserIdAndStatusInOrderByCreateTimeDesc(userId, ContentStatus.selfCanSeeContentStatus);
         return SocialuniUserImgDOUtil.getUserImgs(integers);
     }
 }

@@ -19,7 +19,7 @@ public class NotifyDO extends SocialuniUserContactBaseDO implements Serializable
     private String contentType;
     private String domainType;
     //加入一列作为外键
-    private Integer contentId;
+    private Long contentId;
 
     private Boolean hasRead;
 

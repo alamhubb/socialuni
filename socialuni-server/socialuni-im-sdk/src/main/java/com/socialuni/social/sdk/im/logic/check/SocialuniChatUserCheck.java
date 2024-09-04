@@ -19,7 +19,7 @@ public class SocialuniChatUserCheck {
     @Resource
     private SocialuniChatUserRepository chatUserRepository;
 
-    public SocialuniChatUserDO checkUserInChat(Integer chatId, Integer sendUserId) {
+    public SocialuniChatUserDO checkUserInChat(Long chatId, Long sendUserId) {
         SocialuniChatDO chat = SocialuniRepositoryFacade.findByUnionId(chatId, SocialuniChatDO.class);
 
         if (chat == null) {

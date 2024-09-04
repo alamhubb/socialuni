@@ -46,11 +46,11 @@ public class SocialTokenDOUtil {
         if (userKey == null) {
             throw new SocialNotLoginException();
         }
-        Integer doUserId = tokenDO.getUserId();
+        Long doUserId = tokenDO.getUserId();
         Long userId;
         if (NumberUtils.strIsAllNumber(userKey)) {
             //解析token
-            userId = Integer.valueOf(userKey);
+            userId = Long.valueOf(userKey);
             if (!userId.equals(doUserId)) {
                 log.error("绕过验证，错误的userId:{},{}", doUserId, userId);
                 RequestLogDO requestLogDO = RequestLogUtil.get();

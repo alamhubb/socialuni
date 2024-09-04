@@ -31,8 +31,8 @@ public class SocialuniImUserFollowDomain extends SocialUserFollowDomain {
     public SocialuniUserFollowDO addFlow(SocialuniUserFollowAddQO addVO) {
         SocialuniUserFollowDO socialuniUserFollowDO = super.addFlow(addVO);
 
-        Integer mineUserId = socialuniUserFollowDO.getUserId();
-        Integer beUserId = socialuniUserFollowDO.getBeUserId();
+        Long mineUserId = socialuniUserFollowDO.getUserId();
+        Long beUserId = socialuniUserFollowDO.getBeUserId();
 
         boolean beFollow = socialuniUserFollowManage.userHasFollowBeUser(beUserId, mineUserId);
         if (!beFollow) {

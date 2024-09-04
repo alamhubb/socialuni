@@ -33,7 +33,7 @@ public class UnionIdDOCopy implements Serializable {
     //内容类型
     private String contentType;
     //内容的唯一id
-    private Integer contentId;
+    private Long contentId;
     //开发者id
     private Integer devId;
     //用户id，分配给哪个用户的

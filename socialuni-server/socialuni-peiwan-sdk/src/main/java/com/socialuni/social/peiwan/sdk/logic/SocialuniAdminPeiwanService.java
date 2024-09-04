@@ -98,7 +98,7 @@ public class SocialuniAdminPeiwanService {
 
             List<SocialuniPeiwanInfoImgRO> imgs = peiwanInfoRO.getImgs();
             for (SocialuniPeiwanInfoImgRO img : imgs) {
-                Integer imgId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(img.getId());
+                Long imgId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(img.getId());
 
                 Integer index = imgs.indexOf(img);
 

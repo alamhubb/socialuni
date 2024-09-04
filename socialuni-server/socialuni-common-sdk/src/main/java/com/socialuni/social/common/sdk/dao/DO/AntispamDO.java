@@ -19,7 +19,7 @@ public class AntispamDO implements Serializable {
 
     private Integer reportId;
     private String contentType;
-    private Integer contentId;
+    private Long contentId;
     /**
      * 被举报的内容，用户昵称，因用户昵称可修改，所以需要记录
      */

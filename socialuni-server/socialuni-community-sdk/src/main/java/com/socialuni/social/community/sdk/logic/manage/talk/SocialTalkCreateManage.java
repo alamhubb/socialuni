@@ -1,6 +1,6 @@
 package com.socialuni.social.community.sdk.logic.manage.talk;
 
-import com.socialuni.social.community.sdk.dao.DO.SocialuniDistrictDO;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniDistrictDO;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkHasUnderageImgAuditDO;
 import com.socialuni.social.community.sdk.repository.TalkAdultImgAuditRepository;
@@ -41,7 +41,7 @@ public class SocialTalkCreateManage {
                 boolean hasPeople = SocialuniImgContentUtil.hasPeopleImg(img.getSrc());
                 if (hasPeople) {
                     talkDO.setHasPeopleImg(true);
-                    Integer talkUnionId = talkDO.getUnionId();
+                    Long talkUnionId = talkDO.getUnionId();
                     Long userId = talkDO.getUserId();
                     //如果包含人像，则需要生成一条待审核记录
                     CompletableFuture.runAsync(() -> {

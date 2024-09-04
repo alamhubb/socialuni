@@ -45,7 +45,7 @@ public class SocialuniCommentDOUtil {
     }
 
 
-    public static List<? extends SocialuniCommentDO> getAll(Integer talkId) {
+    public static List<? extends SocialuniCommentDO> getAll(Long talkId) {
         return commentApi.findTop50ByTalkIdAndStatusInAndParentCommentIdIsNullOrderByUpdateTimeDesc(talkId, ContentStatus.selfCanSeeContentStatus);
     }
 }

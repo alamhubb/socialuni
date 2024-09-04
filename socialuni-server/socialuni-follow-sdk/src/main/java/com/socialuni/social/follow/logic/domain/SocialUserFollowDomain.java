@@ -28,9 +28,9 @@ public class SocialUserFollowDomain implements SocialUserFollowDomainInterface {
     @Transactional
     public SocialuniUserFollowDO addFlow(SocialuniUserFollowAddQO addVO) {
         //有问题，应该关注完刷新前台用户
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+        Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
 
-        Integer beUserId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(addVO.getBeUserId());
+        Long beUserId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(addVO.getBeUserId());
         if (beUserId.equals(mineUserId)) {
             throw new SocialParamsException("不能自己关注自己哦");
         }
@@ -60,8 +60,8 @@ public class SocialUserFollowDomain implements SocialUserFollowDomainInterface {
 
     public void cancelFollow(SocialuniUserFollowAddQO addVO) {
         //有问题，应该关注完刷新前台用户
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
-        Integer beUserId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(addVO.getBeUserId());
+        Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+        Long beUserId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(addVO.getBeUserId());
         if (beUserId.equals(mineUserId)) {
             throw new SocialParamsException("不能自己取消关注自己哦");
         }

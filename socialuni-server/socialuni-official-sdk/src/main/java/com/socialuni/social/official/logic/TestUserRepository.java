@@ -8,5 +8,5 @@ public interface TestUserRepository extends JpaRepository<UserDO, Integer> {
 
     UserDO findByName(String name);
 
-    UserDO findOneById(Integer id);
+    UserDO findOneById(Long id);
 }

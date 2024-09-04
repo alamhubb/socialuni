@@ -1,9 +1,9 @@
 package com.socialuni.social.user.sdk.dao.utils;
 
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
-import com.socialuni.social.community.sdk.dao.DO.SocialuniDistrictDO;
 import com.socialuni.social.common.sdk.utils.SocialuniRequestUtil;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniDistrictDO;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserExtendFriendLogDo;
 import com.socialuni.social.user.sdk.dao.repository.SocialuniUserExtendFriendLogRepository;
 import com.socialuni.social.user.sdk.utils.DistrictStoreUtils;

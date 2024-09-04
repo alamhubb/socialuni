@@ -15,7 +15,7 @@ public interface SocialuniUnionIdInterface {
 
     SocialuniUnionIdModler save(SocialuniUnionIdModler uniContentUnionIdDO);
 
-    SocialuniUnionIdModler findById(Long unionId);
+    SocialuniUnionIdModler findByUnionId(Long unionId);
 
     SocialuniUnionIdModler findByUuId(String uuid);
 

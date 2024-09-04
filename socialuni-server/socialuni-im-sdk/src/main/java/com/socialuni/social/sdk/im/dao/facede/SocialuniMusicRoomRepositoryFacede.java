@@ -11,7 +11,7 @@ import java.util.List;
 
 public class SocialuniMusicRoomRepositoryFacede extends SocialuniRepositoryFacade {
 
-    public static <T> List<T> findAllByRoomIdAndStatus(Integer chatId, String status, Class<T> tClass) {
+    public static <T> List<T> findAllByRoomIdAndStatus(Long chatId, String status, Class<T> tClass) {
 
         EntityManager entityManager = getEntityManager();
 

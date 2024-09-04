@@ -18,7 +18,7 @@ public class UserImgDOFactory {
         //这里需要记录，变更历史，通过照片有效无效记录，
         SocialuniUserImgDo userImgDO = new SocialuniUserImgDo();
 
-        Integer userImgUnionId = SocialuniUnionIdFacede.createUserImgUnionId();
+        Long userImgUnionId = SocialuniUnionIdFacede.createUserImgUnionId();
         userImgDO.setUnionId(userImgUnionId);
 
         userImgDO.setSrc(socialUserImgAddQO.getSrc());

@@ -14,7 +14,7 @@ public class SocialuniCreateCoinOrderEntity {
     @Resource
     SocialuniCoinOrderManage socialuniCoinOrderManage;
 
-    public void createCoinOrderByOrderType(Long userId, Integer coinNum, String orderType, String orderDetailType, Integer relationOrderId) {
+    public void createCoinOrderByOrderType(Long userId, Integer coinNum, String orderType, String orderDetailType, Long relationOrderId) {
         SocialuniUserCoinDo socialuniUserCoinDo = socialuniUserCoinManage.updateUserCoin(userId, coinNum);
 
         socialuniCoinOrderManage.createCoinOrder(socialuniUserCoinDo, coinNum, orderType, orderDetailType, relationOrderId);

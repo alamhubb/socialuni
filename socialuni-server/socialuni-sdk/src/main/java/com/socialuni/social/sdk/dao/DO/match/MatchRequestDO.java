@@ -21,7 +21,7 @@ public class MatchRequestDO implements Serializable {
 
     private Long userId;
 
-    private Integer beUserId;
+    private Long beUserId;
 
     private String status;
 

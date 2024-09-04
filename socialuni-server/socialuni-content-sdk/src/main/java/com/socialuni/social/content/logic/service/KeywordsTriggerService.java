@@ -347,7 +347,7 @@ public class KeywordsTriggerService {
     //变种匹配构建
     private KeywordsTriggerDetailDO getKeywordsTriggerDetailDO(
             String baseModelContent,
-            Integer baseModelId,
+            Long baseModelId,
             String contentType,
             int matchContentLength,
             String contentFormat,

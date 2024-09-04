@@ -31,6 +31,10 @@ public class SocialuniUserRepositoryFacede extends SocialuniRepositoryFacade {
         return socialuniCommonRepository.findByUserIdAndCustomFieldAndStatus(userId, filedName, fieldId, status, tClass);
     }
 
+    public static <T extends SocialuniContentBaseDO> T findByUserIdAndCustomFieldAndStatus(Long userId, String filedName, Long fieldId, String status, Class<T> tClass) {
+        return socialuniCommonRepository.findByUserIdAndCustomFieldAndStatus(userId, filedName, fieldId, status, tClass);
+    }
+
     public static <T extends SocialuniContentBaseDO> T findByUserIdAndCustomFieldAndStatus(Long userId, String filedName, String fieldValue, String status, Class<T> tClass) {
         return socialuniCommonRepository.findByUserIdAndCustomFieldAndStatus(userId, filedName, fieldValue, status, tClass);
     }

@@ -27,9 +27,9 @@ public class SocialuniCoinConsumLogDO extends SocialuniContentBaseDO implements 
     private Long userId;
 
     @Column(nullable = false)
-    private Integer beUserId;
+    private Long beUserId;
 
-    public SocialuniCoinConsumLogDO(Long userId, Integer beUserId) {
+    public SocialuniCoinConsumLogDO(Long userId, Long beUserId) {
         this.userId = userId;
         this.beUserId = beUserId;
     }

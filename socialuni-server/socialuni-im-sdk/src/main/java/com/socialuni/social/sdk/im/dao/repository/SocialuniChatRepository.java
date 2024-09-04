@@ -30,7 +30,7 @@ public interface SocialuniChatRepository extends JpaRepository<SocialuniChatDO, 
     SocialuniChatDO findFirstByUnionIdAndStatus(Integer id, String status);
 
     @Cacheable(cacheNames = ChatRedisKey.findFirstChatById, key = "#id")
-    SocialuniChatDO findFirstByUnionId(Integer id);
+    SocialuniChatDO findFirstByUnionId(Long id);
 
 
     @Caching(

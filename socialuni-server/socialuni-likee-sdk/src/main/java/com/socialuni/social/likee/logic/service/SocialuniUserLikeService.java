@@ -50,7 +50,7 @@ public class SocialuniUserLikeService {
         ResultRO<List<ChatRO>> resultRO = chatService.queryChatList();
         List<ChatRO> data = resultRO.getData();
 
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdAllowNull();
+        Long mineUserId = SocialuniUserUtil.getMineUserIdAllowNull();
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
 
         List<SocialuniLikeChatRO> socialuniLikeChatROList = data.stream().map(item -> {
@@ -60,7 +60,7 @@ public class SocialuniUserLikeService {
 //                }
 //                SocialuniChatUserDO socialuniChatUserDO = chatService.getSocialuniChatUserDO(item.getId());
 //                if (UserType.system.equals(mineUser.getType()) || mineUser.getUserId().equals(socialuniChatUserDO.getUserId())) {
-//                    Integer sendUserId = socialuniChatUserDO.getUserId();
+//                    Long sendUserId = socialuniChatUserDO.getUserId();
 //                    return getSocialuniLikeChatRO(item, sendUserId);
 //                }
 //                throw new SocialParamsException("参数异常56035");
@@ -77,14 +77,14 @@ public class SocialuniUserLikeService {
         //为什么要查询，因为要加一个参数，发送消息时是否需要扣除金币
         ResultRO<ChatRO> chatROResultRO = chatService.queryChat(socialuniChatQueryQO);
 
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdAllowNull();
+        Long mineUserId = SocialuniUserUtil.getMineUserIdAllowNull();
 
         SocialuniLikeChatRO socialuniLikeChatRO = getSocialuniLikeChatRO(chatROResultRO.getData(), mineUserId);
 
         return ResultRO.success(socialuniLikeChatRO);
     }
 
-    private SocialuniLikeChatRO getSocialuniLikeChatRO(ChatRO chatRO, Integer mineUserId) {
+    private SocialuniLikeChatRO getSocialuniLikeChatRO(ChatRO chatRO, Long mineUserId) {
 
         SocialuniLikeChatRO socialuniLikeChatRO = BeanUtil.toBean(chatRO, SocialuniLikeChatRO.class);
         socialuniLikeChatRO.setSendMsgNeedCoin(0);
@@ -135,7 +135,7 @@ public class SocialuniUserLikeService {
 
         String msgId = socialMessageRO.getId();
 
-        Integer msgIdd = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(msgId);
+        Long msgIdd = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(msgId);
 
 
         String receiveIdUid = msgAddVO.getChatId();
@@ -154,7 +154,7 @@ public class SocialuniUserLikeService {
             }
         }
 
-        Integer sendUserId = sendUser.getUserId();
+        Long sendUserId = sendUser.getUserId();
 
         //查询是否创建了
         SocialuniUserLikeChatDO socialuniUserLikeChatDO = socialuniUserLikeChatManage.getOrCreate(socialuniChatUserDO.getChatId());
@@ -167,9 +167,9 @@ public class SocialuniUserLikeService {
 
     public SocialuniUserLikeDO likeUser(SocialuniUserIdQO addVO) {
         //有问题，应该关注完刷新前台用户
-        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+        Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
 
-        Integer beUserId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(addVO.getUserId());
+        Long beUserId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(addVO.getUserId());
         if (Objects.equals(beUserId, mineUserId)) {
             throw new SocialParamsException("不能喜欢自己哦");
         }

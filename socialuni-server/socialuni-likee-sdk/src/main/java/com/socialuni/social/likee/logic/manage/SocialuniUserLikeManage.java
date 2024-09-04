@@ -10,7 +10,7 @@ import java.util.Date;
 
 @Component
 public class SocialuniUserLikeManage {
-    public SocialuniUserLikeDO createUserLike(Integer mineUserId, Integer beUserId) {
+    public SocialuniUserLikeDO createUserLike(Long mineUserId, Long beUserId) {
         SocialuniUserLikeDO userLikeDO = new SocialuniUserLikeDO();
         //添加喜欢
         userLikeDO.setUserId(mineUserId);
@@ -19,13 +19,13 @@ public class SocialuniUserLikeManage {
         return userLikeDO;
     }
 
-    public SocialuniUserLikeDO hasLikeUserRecord(Integer mineUserId, Integer beUserId) {
+    public SocialuniUserLikeDO hasLikeUserRecord(Long mineUserId, Long beUserId) {
         SocialuniUserLikeDO socialuniUserLikeDO = SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(mineUserId, beUserId, SocialuniUserLikeDO.class);
 
         return socialuniUserLikeDO;
     }
 
-    public Boolean hasUserLike(Integer mineUserId, Integer beUserId) {
+    public Boolean hasUserLike(Long mineUserId, Long beUserId) {
         SocialuniUserLikeDO socialuniUserLikeDO = hasLikeUserRecord(mineUserId, beUserId);
         if (socialuniUserLikeDO == null) {
             return false;
@@ -34,7 +34,7 @@ public class SocialuniUserLikeManage {
     }
 
 
-    public SocialuniUserLikeDO createOrUpdateLikeStatus(Integer mineUserId, Integer beUserId) {
+    public SocialuniUserLikeDO createOrUpdateLikeStatus(Long mineUserId, Long beUserId) {
         SocialuniUserLikeDO socialuniUserLikeDO = hasLikeUserRecord(mineUserId, beUserId);
 
         if (socialuniUserLikeDO == null) {

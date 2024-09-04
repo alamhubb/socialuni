@@ -15,7 +15,7 @@ public class SocialuniDevTokenController implements SocialuniDevTokenAPI {
     public ResultRO<String> getAuthToken(String devSecretKey) {
         DevAccountModel devAccountModel = DevAccountFacade.getDevAccountBySecretKeyNotNull(devSecretKey);
 
-        String token = UUIDUtil.getSnowflakeId();
+        String token = UUIDUtil.getUUID();
 
         SocialuniDevTokenDO socialuniDevTokenDO = new SocialuniDevTokenDO(token);
 

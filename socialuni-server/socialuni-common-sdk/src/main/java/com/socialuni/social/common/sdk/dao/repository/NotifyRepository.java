@@ -11,11 +11,11 @@ import java.util.List;
  * @since 1.0.0
  */
 public interface NotifyRepository extends JpaRepository<NotifyDO, Integer> {
-    List<NotifyDO> findTop20ByBeUserIdAndTypeInOrderByHasReadDescIdDesc(Integer receiveUserId, List<String> types);
+    List<NotifyDO> findTop20ByBeUserIdAndTypeInOrderByHasReadDescIdDesc(Long receiveUserId, List<String> types);
 
-    List<NotifyDO> findTop20ByBeUserIdAndTypeOrderByHasReadDescIdDesc(Integer receiveUserId, String type);
+    List<NotifyDO> findTop20ByBeUserIdAndTypeOrderByHasReadDescIdDesc(Long receiveUserId, String type);
 
 
-    List<NotifyDO> findAllByBeUserIdAndTypeInAndHasReadFalseOrderByIdDesc(Integer receiveUserId, List<String> types);
-    List<NotifyDO> findAllByBeUserIdAndTypeAndHasReadFalseOrderByIdDesc(Integer receiveUserId, String types);
+    List<NotifyDO> findAllByBeUserIdAndTypeInAndHasReadFalseOrderByIdDesc(Long receiveUserId, List<String> types);
+    List<NotifyDO> findAllByBeUserIdAndTypeAndHasReadFalseOrderByIdDesc(Long receiveUserId, String types);
 }

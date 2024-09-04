@@ -20,7 +20,7 @@ public class CommentStore {
     private CommentFactory commentFactory;
 
     //保存新增的comment
-    public SocialuniCommentDO saveAddComment(SocialuniCommentPostQO addQO, Integer mineUserId) {
+    public SocialuniCommentDO saveAddComment(SocialuniCommentPostQO addQO, Long mineUserId) {
         SocialuniCommentDO commentDO = commentFactory.createCommentDO(
                 addQO,
                 mineUserId
@@ -42,7 +42,7 @@ public class CommentStore {
             return;
         }
 
-        Integer commentId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(addVO.getCommentId());
+        Long commentId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(addVO.getCommentId());
 
 
         SocialuniCommentDO parentComment = SocialuniCommentDOUtil.getAllowNull(commentId);
@@ -63,7 +63,7 @@ public class CommentStore {
         String replyIdStr = addVO.getReplyCommentId();
         if (!StringUtils.isEmpty(replyIdStr)){
 
-            Integer replyId = SocialuniUnionIdFacede.getUnionIdByUuidAllowNull(addVO.getReplyCommentId());
+            Long replyId = SocialuniUnionIdFacede.getUnionIdByUuidAllowNull(addVO.getReplyCommentId());
 
             if (replyId != null) {
                 SocialuniCommentDO replyComment = SocialuniCommentDOUtil.getAllowNull(replyId);

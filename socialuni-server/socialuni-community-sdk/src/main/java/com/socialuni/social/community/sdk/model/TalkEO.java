@@ -14,7 +14,7 @@ public class TalkEO {
     private String content;
 
 
-    private Integer talkId;
+    private Long talkId;
     /**
      * 评论数量
      */

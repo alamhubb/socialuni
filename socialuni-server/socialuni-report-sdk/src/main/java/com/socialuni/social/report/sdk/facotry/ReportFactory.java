@@ -22,9 +22,9 @@ public class ReportFactory {
 
     private static ReportDO createReportDO(
             String contentType,
-            Integer contentId,
+            Long contentId,
             String content,
-            Integer contentUserId,
+            Long contentUserId,
             String reportSourceType,
             SocialuniUnionIdModler socialuniUnionIdModler
     ) {

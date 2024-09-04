@@ -18,13 +18,13 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class SocialuniUserContactBaseDO extends SocialuniContentBaseDO implements Serializable {
     @Column
-    private Integer beUserId;
+    private Long beUserId;
 
     public SocialuniUserContactBaseDO(SocialuniUserContactBaseDO socialuniUserContactBaseDO) {
         super(socialuniUserContactBaseDO.getUserId());
         this.beUserId = socialuniUserContactBaseDO.getBeUserId();
     }
-    public SocialuniUserContactBaseDO(Long userId, Integer beUserId) {
+    public SocialuniUserContactBaseDO(Long userId, Long beUserId) {
         super(userId);
         this.beUserId = beUserId;
     }

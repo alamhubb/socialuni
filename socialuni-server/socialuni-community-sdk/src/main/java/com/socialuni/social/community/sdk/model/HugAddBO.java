@@ -13,7 +13,7 @@ import lombok.Data;
 @Data
 public class HugAddBO {
     private String talkId;
-    private Integer commentId;
+    private Long commentId;
 
     /*public HugAddBO(HugAddVO hugAddVO) {
         this.talkId = hugAddVO.getTalkId();

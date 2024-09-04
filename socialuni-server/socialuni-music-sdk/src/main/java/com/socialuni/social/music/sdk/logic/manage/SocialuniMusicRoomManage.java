@@ -12,7 +12,7 @@ import java.util.Date;
 
 @Component
 public class SocialuniMusicRoomManage {
-    public SocialuniMusicRoomDO getOrCreateMusicPlayerDO(Integer chatId) {
+    public SocialuniMusicRoomDO getOrCreateMusicPlayerDO(Long chatId) {
         SocialuniMusicRoomDO socialuniMusicRoomPlayerDO = SocialuniRepositoryFacade.findByCustomField("roomId", chatId, SocialuniMusicRoomDO.class);
 
         if (socialuniMusicRoomPlayerDO == null) {
@@ -25,7 +25,7 @@ public class SocialuniMusicRoomManage {
     }
 
 
-    public SocialuniMusicRoomDO updateMusicPlayerDO(Integer chatId, SocialuniPlayMusicQO playMusicQO) {
+    public SocialuniMusicRoomDO updateMusicPlayerDO(Long chatId, SocialuniPlayMusicQO playMusicQO) {
         SocialuniMusicRoomDO socialuniMusicRoomDO = this.getOrCreateMusicPlayerDO(chatId);
 
         //获取用户在房间的权限
@@ -41,7 +41,7 @@ public class SocialuniMusicRoomManage {
     public SocialuniMusicRoomDO updateMusicPlayerDO(SocialuniMusicRoomDO socialuniMusicRoomDO) {
         Integer newSequence = socialuniMusicRoomDO.getSequenceNum() + 1;
 
-        Integer roomId = socialuniMusicRoomDO.getRoomId();
+        Long roomId = socialuniMusicRoomDO.getRoomId();
 
         SocialuniMusicRoomDO socialuniMusicRoomPlayerDO = SocialuniRepositoryFacade.findByCustomField("roomId", roomId, SocialuniMusicRoomDO.class);
 

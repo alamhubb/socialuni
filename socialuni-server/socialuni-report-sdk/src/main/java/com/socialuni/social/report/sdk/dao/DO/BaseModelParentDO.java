@@ -3,11 +3,11 @@ package com.socialuni.social.report.sdk.dao.DO;
 
 public interface BaseModelParentDO {
 
-    void setTalkId(Integer talkId);
+    void setTalkId(Long talkId);
 
-    void setMessageId(Integer messageId);
+    void setMessageId(Long messageId);
 
-    void setCommentId(Integer commentId);
+    void setCommentId(Long commentId);
 
-    void setUserImgId(Integer userImgId);
+    void setUserImgId(Long userImgId);
 }

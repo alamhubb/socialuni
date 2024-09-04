@@ -47,7 +47,7 @@ public class SocialuniCircleDO extends SocialuniContentBaseDO {
     /**
      * 申请人
      */
-    private Integer applyUserId;
+//    private Long applyUserId;
 
     private String description;
 
@@ -64,11 +64,11 @@ public class SocialuniCircleDO extends SocialuniContentBaseDO {
     private Boolean showFront;
     private Integer devId;
 
-    public SocialuniCircleDO(String name, String description, Integer devId, Integer applyUserId) {
+    public SocialuniCircleDO(String name, String description, Integer devId, Long applyUserId) {
         super(applyUserId);
         this.name = name;
         this.description = description;
-        this.applyUserId = 1;
+//        this.applyUserId = 1;
         this.devId = devId;
         this.tagTypeId = 1;
         this.count = 0;

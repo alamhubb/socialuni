@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class SendMsgBO {
 
-    Integer receiveUserId;
+    Long receiveUserId;
     String msgContent;
     String type;
 }

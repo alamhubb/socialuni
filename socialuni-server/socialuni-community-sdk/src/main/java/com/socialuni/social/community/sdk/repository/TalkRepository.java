@@ -15,7 +15,7 @@ import java.util.List;
 
 public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> {
     @Cacheable(cacheNames = CommonRedisKey.talkById, key = "#talkUnionId")
-    SocialuniTalkDO findOneByUnionId(Integer talkUnionId);
+    SocialuniTalkDO findOneByUnionId(Long talkUnionId);
 
     SocialuniTalkDO save(SocialuniTalkDO talkUnionId);
 
@@ -54,24 +54,24 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
 
     @Cacheable(cacheNames = "stickTalkIdsByDevId", key = "#devId")
     @Query(nativeQuery = true, value = "SELECT s.union_id from s_community_talk s where s.status = :status and s.dev_id =:devId and s.global_top > :globalTop order by t.global_top desc,t.id desc limit 2)")
-    List<Integer> findTopTalkId2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc(String status, Integer devId, Integer globalTop);
+    List<Long> findTopTalkId2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc(String status, Integer devId, Integer globalTop);
 
     @Query(nativeQuery = true, value = "SELECT t.union_id FROM s_community_talk t where t.user_id = :userId and t.status = :status order by t.global_top desc,t.id desc limit 10")
-    List<Integer> findTop10ByUserIdAndStatusOrderByGlobalTopDescIdDesc(Long userId, String status);
+    List<Long> findTop10ByUserIdAndStatusOrderByGlobalTopDescIdDesc(Long userId, String status);
 
     //查询自己talk和他人详情talk
     @Query(value = "SELECT t.unionId FROM SocialuniTalkDO t where t.status in (:status) and t.userId=:userId order by t.createTime desc")
-    List<Integer> queryTalkIdsByUser(
+    List<Long> queryTalkIdsByUser(
             @Param("userId") Long userId,
             @Param("status") List<String> status,
             Pageable pageable);
 
     //查询自己关注的用户列表，包含自己的,类似朋友圈
     @Query(value = "SELECT t.unionId from SocialuniTalkDO t where ((t.userId =:userId and t.status in (:onlyUserSeeStatus)) or (t.userId in (:userIds) and t.status =:status)) order by t.createTime desc ")
-    List<Integer> queryTalkIdsByUserFollow(
+    List<Long> queryTalkIdsByUserFollow(
             @Param("userId") Long userId,
             @Param("onlyUserSeeStatus") List<String> onlyUserSeeStatus,
-            @Param("userIds") List<Integer> userIds,
+            @Param("userIds") List<Long> userIds,
             @Param("status") String status,
             Pageable pageable);
 
@@ -80,7 +80,7 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
     //只有为all才走前面，其他的都走后面逻辑
     @Cacheable(cacheNames = CommonRedisKey.queryTalkIdsByTagVisibleGender, key = "#talkVisibleGender+'-'+#mineUserGender")
     @Query(nativeQuery = true, value = "SELECT DISTINCT ttg.talk_id as talk_id FROM tag tg,talk_tag ttg WHERE ttg.tag_id = tg.id AND ((:talkVisibleGender = 'all' and tg.visible_gender = 'all') or (:mineUserGender is null or tg.visible_gender = :mineUserGender))")
-    List<Integer> queryTalkIdsByTagVisibleGender(
+    List<Long> queryTalkIdsByTagVisibleGender(
             @Param("talkVisibleGender") String talkVisibleGender,
             @Param("mineUserGender") String mineUserGender);
 
@@ -88,8 +88,8 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
     //只有为all才走前面，其他的都走后面逻辑
     @Cacheable(cacheNames = CommonRedisKey.queryTalkIdsByTagIdsAndTagVisibleGender, key = "#talkVisibleGender+'-'+#mineUserGender+'-'+#tagIds")
     @Query(nativeQuery = true, value = "SELECT DISTINCT ttg.talk_id as talk_id FROM tag tg,talk_tag ttg WHERE ttg.tag_id = tg.id AND ((:talkVisibleGender = 'all' and tg.visible_gender = 'all') or (:mineUserGender is null or tg.visible_gender = :mineUserGender)) and tg.id in (:tagIds)")
-    List<Integer> queryTalkIdsByTagIdsAndTagVisibleGender(
-            @Param("tagIds") List<Integer> tagIds);
+    List<Long> queryTalkIdsByTagIdsAndTagVisibleGender(
+            @Param("tagIds") List<Long> tagIds);
 
     //    @Cacheable(cacheNames = RedisKeysConst.queryTalkIdsByAdCodeAndGender, key = "#adCode+'-'+#talkGender+'-'+#mineUserGender+'-'+#devId")
     @Query(nativeQuery = true, value = "SELECT t.unionId FROM talk t " +
@@ -99,7 +99,7 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
             "and (t.visible_type = 'fullNetwork' or (t.visible_type = 'selfSoft' and t.dev_id = :devId)) " +
             "and (:talkVisibleGender = 'all' or (:mineUserGender is null or t.visible_gender = 'all' or t.visible_gender = :mineUserGender) or t.visible_gender = :talkVisibleGender) " +
             "order by t.update_time desc limit 1000")
-    List<Integer> queryTalkIdsByAdCodeAndGender(
+    List<Long> queryTalkIdsByAdCodeAndGender(
             @Param("status") String status,
             @Param("adCode") String adCode,
             @Param("talkVisibleGender") String talkVisibleGender,
@@ -117,7 +117,7 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
             "and (t.visible_type = 'fullNetwork' or (t.visible_type = 'selfSoft' and d.dev_id = :devId)) " +
             "and (:talkGender = 'all' or (:mineUserGender is null or t.visible_gender = 'all' or t.visible_gender = :mineUserGender) or t.visible_gender = :talkGender) " +
             "order by c.update_time desc limit 1000")
-    List<Integer> queryTalkIdsByGenderAndAgeAndAdCodeAndGender(
+     List<Long>  queryTalkIdsByGenderAndAgeAndAdCodeAndGender(
             @Param("userGender") String userGender,
             @Param("minAge") Integer minAge,
             @Param("maxAge") Integer maxAge,
@@ -146,7 +146,7 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
             "and ((:talkVisibleGender = 'all' and t.visible_gender = 'all') or (:mineUserGender is null or t.visible_gender = :mineUserGender)) " +
             "and t.id in (:talkIds) " +
             "order by t.update_time desc limit 1000")
-    List<Integer> queryTalkIdsByGenderAndAgeAndAdCodeAndGender(
+    List<Long> queryTalkIdsByGenderAndAgeAndAdCodeAndGender(
             @Param("talkUserGender") String talkUserGender,
             @Param("minAge") Integer minAge,
             @Param("maxAge") Integer maxAge,
@@ -154,7 +154,7 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
             @Param("adCode") String adCode,
             @Param("talkVisibleGender") String talkVisibleGender,
             @Param("mineUserGender") String mineUserGender,
-            @Param("talkIds") List<Integer> talkIds,
+            @Param("talkIds") List<Long> talkIds,
             @Param("devId") Integer devId);
 
 
@@ -175,7 +175,7 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
             "and ((:talkVisibleGender = 'all' and t.visible_gender = 'all') or (:mineUserGender is null or t.visible_gender = :mineUserGender)) " +
             "group by t.id " +
             "order by t.update_time desc limit 1000")
-    List<Integer> queryTalkIdsByCom(
+    List<Long> queryTalkIdsByCom(
             @Param("talkUserGender") String talkUserGender,
             @Param("minAge") Integer minAge,
             @Param("maxAge") Integer maxAge,
@@ -183,7 +183,7 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
             @Param("adCode") String adCode,
             @Param("talkVisibleGender") String talkVisibleGender,
             @Param("mineUserGender") String mineUserGender,
-            @Param("tagIds") List<Integer> tagIds,
+            @Param("tagIds") List<Long> tagIds,
             @Param("devId") Integer devId);
 
     @Query(nativeQuery = true, value = "SELECT DISTINCT t.id FROM talk t,tag tg,talk_tag ttg,user u WHERE t.id = ttg.talk_id AND ttg.tag_id = tg.id AND t.user_id = u.id " +
@@ -204,7 +204,7 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
             "order by t.update_time desc",
             countQuery = "select 10"
     )
-    List<Integer> queryTalkIdsByComPageable(
+    List<Long> queryTalkIdsByComPageable(
             @Param("talkUserGender") String talkUserGender,
             @Param("minAge") Integer minAge,
             @Param("maxAge") Integer maxAge,
@@ -212,7 +212,7 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
             @Param("adCode") String adCode,
             @Param("talkVisibleGender") String talkVisibleGender,
             @Param("mineUserGender") String mineUserGender,
-            @Param("tagIds") List<Integer> tagIds,
+            @Param("tagIds") List<Long> tagIds,
             @Param("devId") Integer devId,
             Pageable pageable);
 
@@ -232,7 +232,7 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
             "and ((t.visible_gender = 'all' and t.visible_gender = :talkVisibleGender) or (mineUserGender is null or t.visible_gender = :mineUserGender)) " +
             "and t.id in (:talkIds) " +
             "order by t.update_time desc limit 1000")
-    List<Integer> queryTalkIdsByGenderAndAgeAndAdCodeAndGender1(
+    List<Long> queryTalkIdsByGenderAndAgeAndAdCodeAndGender1(
             @Param("talkUserGender") String talkUserGender,
             @Param("minAge") Integer minAge,
             @Param("maxAge") Integer maxAge,
@@ -240,20 +240,20 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
             @Param("adCode") String adCode,
             @Param("talkVisibleGender") String talkVisibleGender,
             @Param("mineUserGender") String mineUserGender,
-            @Param("talkIds") List<Integer> talkIds,
+            @Param("talkIds") List<Long> talkIds,
             @Param("devId") Integer devId);
 
     @Query(nativeQuery = true, value = "SELECT t.unionId FROM talk t " +
             "where t.id in (:talkIds) " +
             "and t.user_id in (:userIds) " +
             "order by t.update_time desc")
-    List<Integer> queryTalkIdsTop10ByGenderAgeAndLikeAdCode(
-            @Param("talkIds") List<Integer> talkIds,
-            @Param("userIds") List<Integer> userIds);
+    List<Long> queryTalkIdsTop10ByGenderAgeAndLikeAdCode(
+            @Param("talkIds") List<Long> talkIds,
+            @Param("userIds") List<Long> userIds);
 
     @Query(value = "SELECT t.unionId FROM SocialuniTalkDO t where t.unionId in (:talkIds) and ((t.updateTime<:queryTime) or (:queryTime is null)) order by t.updateTime desc")
-    List<Integer> queryTalkIdsByIds(
-            @Param("talkIds") List<Integer> talkIds,
+    List<Long> queryTalkIdsByIds(
+            @Param("talkIds") List<Long> talkIds,
             @Param("queryTime") Date queryTime,
             Pageable pageable);
 
@@ -272,10 +272,10 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
             "and (:talkGender = 'all' or (:mineUserGender is null or t.visible_gender = 'all' or t.visible_gender = :mineUserGender) or t.visible_gender = :talkGender) " +
             "and t.global_top = 0 " +
             "order by t.update_time desc")
-    List<Integer> queryTalkIdsTop10ByGenderAgeAndLikeAdCode(
-            @Param("talkIds") List<Integer> talkIds,
-            @Param("userIds") List<Integer> userIds,
-            @Param("tagTalkIds") List<Integer> tagTalkIds,
+     List<Long>  queryTalkIdsTop10ByGenderAgeAndLikeAdCode(
+            @Param("talkIds")  List<Long>  talkIds,
+            @Param("userIds") List<Long> userIds,
+            @Param("tagTalkIds")  List<Long>  tagTalkIds,
             @Param("userId") Long userId,
             @Param("status") String status,
             @Param("onlyUserSeeStatus") String onlyUserSeeStatus,
@@ -294,9 +294,9 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
             "and (t.visible_type = 'fullNetwork' or (t.visible_type = 'selfSoft' and t.dev_id = :devId)) " +
             "and (:talkVisibleGender = 'all' or (:mineUserGender is null or t.visible_gender = 'all' or t.visible_gender = :mineUserGender) or t.visible_gender = :talkVisibleGender) " +
             "order by t.update_time desc limit 1000")
-    List<Integer> queryTalkIdsTop10ByGenderAgeAndLikeAdCode(
-            @Param("userIds") List<Integer> userIds,
-            @Param("tagTalkIds") List<Integer> tagTalkIds,
+    List<Long> queryTalkIdsTop10ByGenderAgeAndLikeAdCode(
+            @Param("userIds") List<Long> userIds,
+            @Param("tagTalkIds") List<Long> tagTalkIds,
             @Param("userId") Long userId,
             @Param("status") String status,
             @Param("onlyUserSeeStatus") String onlyUserSeeStatus,
@@ -315,7 +315,7 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
 
 
     @Query(value = "SELECT t.unionId FROM SocialuniTalkDO t where t.status in (:status) and t.userId=:userId order by t.updateTime desc")
-    List<Integer> queryTalkIdsByUserOrderByUpdateTime(
+    List<Long> queryTalkIdsByUserOrderByUpdateTime(
             @Param("userId") Long userId,
             @Param("status") List<String> status,
             Pageable pageable);
@@ -339,15 +339,15 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
     //弃用的*************************************************************************************
 
     @Query(nativeQuery = true, value = "SELECT t.* FROM talk t,position p,user u WHERE t.user_id = u.id and u.age between :minAge and :maxAge and u.gender in (:genders) and t.id not in (:talkIds) and t.status in (:status) and t.position_id = p.`id` and p.`lon` BETWEEN :lon-:distance AND :lon+:distance AND p.`lat` BETWEEN :lat-:distance AND :lat+:distance ORDER BY FLOOR(UNIX_TIMESTAMP(t.`update_time`)/3600) DESC,t.id desc LIMIT :limitNum")
-    List<TalkDO> findTalksByPosition(@Param("status") List<String> status, @Param("genders") List<String> genders, @Param("minAge") Integer minAge, @Param("maxAge") Integer maxAge, @Param("talkIds") List<Integer> talkIds, @Param("lon") Double lon, @Param("lat") Double lat, @Param("distance") Double distance, @Param("limitNum") Integer limitNum);
+    List<TalkDO> findTalksByPosition(@Param("status") List<String> status, @Param("genders") List<String> genders, @Param("minAge") Integer minAge, @Param("maxAge") Integer maxAge, @Param("talkIds")  List<Long>  talkIds, @Param("lon") Double lon, @Param("lat") Double lat, @Param("distance") Double distance, @Param("limitNum") Integer limitNum);
 
     @Query(nativeQuery = true, value = "SELECT distinct t.* FROM talk t,position p,talk_tag g,user u WHERE t.user_id = u.id and u.age between :minAge and :maxAge and u.gender in (:genders) and t.position_id = p.`id` and t.id = g.talk_id and t.id not in (:talkIds) and t.status in (:status) and g.tag_id in (:tagIds) and p.`lon` BETWEEN :lon-:distance AND :lon+:distance AND p.`lat` BETWEEN :lat-:distance AND :lat+:distance ORDER BY FLOOR(UNIX_TIMESTAMP(t.`update_time`)/3600) DESC,t.id desc LIMIT :limitNum")
-    List<TalkDO> findTalksByPositionAndTags(@Param("status") List<String> status, @Param("genders") List<String> genders, @Param("minAge") Integer minAge, @Param("maxAge") Integer maxAge, @Param("talkIds") List<Integer> talkIds, @Param("lon") Double lon, @Param("lat") Double lat, @Param("distance") Double distance, @Param("limitNum") Integer limitNum, @Param("tagIds") List<Integer> tagIds);
+    List<TalkDO> findTalksByPositionAndTags(@Param("status") List<String> status, @Param("genders") List<String> genders, @Param("minAge") Integer minAge, @Param("maxAge") Integer maxAge, @Param("talkIds")  List<Long>  talkIds, @Param("lon") Double lon, @Param("lat") Double lat, @Param("distance") Double distance, @Param("limitNum") Integer limitNum, @Param("tagIds")  List<Long>  tagIds);
 */
 
 
     //新增自己可见预审核状态动态，弃用这个
     //缓存
-//    List<TalkDO> findTop10ByStatusInAndUserGenderInAndUserAgeBetweenAndIdNotInAndDistrictAdCodeLikeAndTagsIdInOrderByUpdateTimeDesc(List<String> status, List<String> genders, Integer minAge, Integer maxAge, List<Integer> talkIds, String adCode, List<Integer> tagIds);
+//    List<TalkDO> findTop10ByStatusInAndUserGenderInAndUserAgeBetweenAndIdNotInAndDistrictAdCodeLikeAndTagsIdInOrderByUpdateTimeDesc(List<String> status, List<String> genders, Integer minAge, Integer maxAge,  List<Long>  talkIds, String adCode,  List<Long>  tagIds);
 
 }

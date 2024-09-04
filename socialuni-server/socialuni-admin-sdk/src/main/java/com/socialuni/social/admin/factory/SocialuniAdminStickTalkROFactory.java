@@ -13,7 +13,7 @@ import java.util.List;
 @Component
 public class SocialuniAdminStickTalkROFactory {
 
-    public static SocialuniAdminStickTalkRO getTalkRO(Integer contentId) {
+    public static SocialuniAdminStickTalkRO getTalkRO(Long contentId) {
         SocialuniAdminStickTalkRO reportContentVO = new SocialuniAdminStickTalkRO();
         SocialuniTalkDO talkDO = SocialuniTalkDOUtil.getTalkNotNull(contentId);
         reportContentVO.setId(contentId);

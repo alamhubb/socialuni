@@ -25,18 +25,18 @@ public interface SocialuniFollowRepository extends JpaRepository<SocialuniUserFo
     SocialuniUserFollowDO save(SocialuniUserFollowDO follow);
 
     @Query("select f.beUserId from SocialuniUserFollowDO f where f.userId = :userId and f.status=:followStatus order by f.beUserId asc")
-    List<Integer> queryUserFollowUserIds(
+    List<Long> queryUserFollowUserIds(
             @Param("userId") Long userId,
             @Param("followStatus") String followStatus
     );
 
-    SocialuniUserFollowDO findFirstByUserIdAndBeUserId(Long userId, Integer beUserId);
+    SocialuniUserFollowDO findFirstByUserIdAndBeUserId(Long userId, Long beUserId);
 
     //查询他的关注
     List<SocialuniUserFollowDO> findTop30ByUserIdAndStatusAndUpdateTimeLessThanOrderByUpdateTimeDesc(Long userId, String status, Date updateTime);
 
     //查询他的粉丝
-    List<SocialuniUserFollowDO> findTop30ByBeUserIdAndStatusAndUpdateTimeLessThanOrderByUpdateTimeDesc(Integer beUserId, String status, Date updateTime);
+    List<SocialuniUserFollowDO> findTop30ByBeUserIdAndStatusAndUpdateTimeLessThanOrderByUpdateTimeDesc(Long beUserId, String status, Date updateTime);
 
     //查询他的粉丝
     List<SocialuniUserFollowDO> findAllByBeUserIdAndStatus(Long userId, String status);

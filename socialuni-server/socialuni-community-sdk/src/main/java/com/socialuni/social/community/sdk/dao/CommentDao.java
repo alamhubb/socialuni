@@ -18,20 +18,20 @@ public class CommentDao {
     @Resource
     CommentRepository commentApi;
 
-    public List<?  extends SocialuniCommentDO> queryTalkComments(Integer talkId) {
+    public List<?  extends SocialuniCommentDO> queryTalkComments(Long talkId) {
         return commentApi.findTop5ByTalkIdAndStatusInAndParentCommentIdIsNullOrderByUpdateTimeDesc(talkId, ContentStatus.selfCanSeeContentStatus);
     }
 
-    public List<?  extends SocialuniCommentDO> queryTalkDetailComments(Integer talkId) {
+    public List<?  extends SocialuniCommentDO> queryTalkDetailComments(Long talkId) {
         return commentApi.findTop50ByTalkIdAndStatusInAndParentCommentIdIsNullOrderByUpdateTimeDesc(talkId, ContentStatus.selfCanSeeContentStatus);
     }
 
 
-    public List<?  extends SocialuniCommentDO> queryCommentChildComments(Integer commentId) {
+    public List<?  extends SocialuniCommentDO> queryCommentChildComments(Long commentId) {
         return commentApi.findTop3ByParentCommentIdAndStatusInOrderByUpdateTimeDesc(commentId, ContentStatus.selfCanSeeContentStatus);
     }
 
-    public List<?  extends SocialuniCommentDO> queryCommentDetailChildComments(Integer commentId) {
+    public List<?  extends SocialuniCommentDO> queryCommentDetailChildComments(Long commentId) {
         return commentApi.findTop50ByParentCommentIdAndStatusInOrderByUpdateTimeDesc(commentId, ContentStatus.selfCanSeeContentStatus);
     }
 }

@@ -15,9 +15,9 @@ import java.util.List;
 public class SocialUserTalkQueryQO {
     @NotNull(message = "入参为空异常")
     private Long userId;
-    private List<Integer> talkIds;
+    private List<Long> talkIds;
 
-    public SocialUserTalkQueryQO(Long userId, List<Integer> talkIds) {
+    public SocialUserTalkQueryQO(Long userId, List<Long> talkIds) {
         this.userId = userId;
         this.talkIds = talkIds;
     }

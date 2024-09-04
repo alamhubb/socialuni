@@ -107,7 +107,7 @@ public class SocialuniMessageService {
     }
 
    /* public ResultRO<SocialMessageRO> sendMsg(MessageAddVO msgAddVO) {
-        Integer chatId = SocialuniChatDOUtil.getChatId(msgAddVO.getChatId());
+        Long chatId = SocialuniChatDOUtil.getChatId(msgAddVO.getChatId());
 
         String msgContent = msgAddVO.getContent();
         String msgType = msgAddVO.getType();
@@ -232,8 +232,8 @@ public class SocialuniMessageService {
 
         //私聊
         if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.user)) {
-            Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
-            Integer beUserId = socialuniUnionIdModler.getUnionIdqqq();
+            Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+            Long beUserId = socialuniUnionIdModler.getUnionIdqqq();
 
             //如果用户存在查看会话
             SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findByChatIdAndUserId(mineUserId, beUserId);
@@ -245,7 +245,7 @@ public class SocialuniMessageService {
             return ResultRO.success(messageVOS);
         } else if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.chat)) {
             //则为chatId
-            Integer chatId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(chatIdStr);
+            Long chatId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(chatIdStr);
 
             SocialuniChatDO chatDO = SocialuniRepositoryFacade.findByUnionId(chatId, SocialuniChatDO.class);
             if (!chatDO.getStatus().equals(ChatStatus.enable)) {
@@ -274,8 +274,8 @@ public class SocialuniMessageService {
 
         //私聊
         if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.user)) {
-            Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
-            Integer beUserId = socialuniUnionIdModler.getUnionIdqqq();
+            Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+            Long beUserId = socialuniUnionIdModler.getUnionIdqqq();
 
             //如果用户存在查看会话
             SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findByChatIdAndUserId(mineUserId, beUserId);
@@ -288,7 +288,7 @@ public class SocialuniMessageService {
             return ResultRO.success(messageVOS);
         } else if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.chat)) {
             //则为chatId
-            Integer chatId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(chatIdStr);
+            Long chatId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(chatIdStr);
 
             SocialuniChatDO chatDO = SocialuniRepositoryFacade.findByUnionId(chatId, SocialuniChatDO.class);
             if (!chatDO.getStatus().equals(ChatStatus.enable)) {

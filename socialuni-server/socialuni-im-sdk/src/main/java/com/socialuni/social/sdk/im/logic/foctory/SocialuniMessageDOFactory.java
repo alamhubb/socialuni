@@ -8,13 +8,13 @@ import com.socialuni.social.sdk.im.enumeration.MessageType;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 
 public class SocialuniMessageDOFactory {
-    public static SocialuniMessageDO createMessage(Integer chatId, String content, Long userId) {
+    public static SocialuniMessageDO createMessage(Long chatId, String content, Long userId) {
         SocialuniMessageDO messageDO = SocialuniMessageDOFactory.createMessage(chatId, content, userId, MessageContentType.text);
         return messageDO;
     }
 
-    public static SocialuniMessageDO createMessage(Integer chatId, String content, Long userId, String contentType) {
-        Integer messageId = SocialuniUnionIdFacede.createMessageUnionId();
+    public static SocialuniMessageDO createMessage(Long chatId, String content, Long userId, String contentType) {
+        Long messageId = SocialuniUnionIdFacede.createMessageUnionId();
 
         SocialuniMessageDO messageDO = new SocialuniMessageDO(userId, messageId, SocialuniContentType.message, content);
 

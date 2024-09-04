@@ -90,7 +90,7 @@ public class SocialUserDOFactory {
             nickname = GenerateNicknameUtil.getGirlName();
         }
         nickname = StringUtils.substring(nickname, 0, 6);
-        Integer userUnionId = SocialuniUnionIdFacede.createUserUnionId();
+        Long userUnionId = SocialuniUnionIdFacede.createUserUnionId();
         SocialuniUserDo user = new SocialuniUserDo(userUnionId);
         user.setUserId(userUnionId);
         user.setUnionId(userUnionId);

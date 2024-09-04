@@ -43,7 +43,7 @@ public interface TagRepository extends JpaRepository<SocialuniTagDO, Integer> {
     SocialuniTagDO findFirstByDevId(Integer devId);
 
     @Query("select t.id from SocialuniTagDO t,SocialTalkTagDO tt where t.id = tt.tagId and tt.talkId =:talkId and t.status =:status and t.showFront = :showFront")
-    List<Integer> findTagIdsByTalkIdAndStatusAndShowFront(Integer talkId, String status, Boolean showFront);
+    List<Integer> findTagIdsByTalkIdAndStatusAndShowFront(Long talkId, String status, Boolean showFront);
 
     List<SocialuniTagDO> findByStatusAndVisibleGenderOrderByCountDesc(String status, String gender);
 

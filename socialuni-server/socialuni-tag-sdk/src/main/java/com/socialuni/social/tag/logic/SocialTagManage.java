@@ -14,7 +14,7 @@ public class SocialTagManage {
     @Resource
     private TagRepository tagApi;
 
-    public SocialuniTagDO createTagDO(TagAddQO tagAddQO, Integer mineUserId) {
+    public SocialuniTagDO createTagDO(TagAddQO tagAddQO, Long mineUserId) {
         SocialuniTagDO TagDO = SocialTagDOFactory.toTagDO(tagAddQO.getTagName(), tagAddQO.getDescription(), mineUserId);
         TagDO = tagApi.savePut(TagDO);
         return TagDO;

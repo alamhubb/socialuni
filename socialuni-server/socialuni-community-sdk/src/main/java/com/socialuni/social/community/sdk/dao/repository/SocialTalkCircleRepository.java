@@ -13,5 +13,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface SocialTalkCircleRepository extends JpaRepository<SocialTalkCircleDO, Integer> {
     @Cacheable(cacheNames = "getTalkCircleInfo", key = "#talkId")
-    SocialTalkCircleDO findFirstByTalkId(Integer talkId);
+    SocialTalkCircleDO findFirstByTalkId(Long talkId);
 }

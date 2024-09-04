@@ -23,7 +23,7 @@ public class TalkManage {
      * @return
      */
     public void updateTalkByAddComment(String talkUuid) {
-        Integer talkId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(talkUuid);
+        Long talkId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(talkUuid);
         SocialuniTalkDO talk = SocialuniTalkDOUtil.getTalkNotNull(talkId);
         if (talk == null) {
             return;

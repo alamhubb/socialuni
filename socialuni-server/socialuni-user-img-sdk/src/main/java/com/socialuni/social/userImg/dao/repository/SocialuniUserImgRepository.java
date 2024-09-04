@@ -16,11 +16,11 @@ public interface SocialuniUserImgRepository extends JpaRepository<SocialuniUserI
 
     @Cacheable(cacheNames = "getUserImgUnionIdsByUserIdTop6", key = "#userId")
     @Query(nativeQuery = true, value = "select t.union_id from s_user_img t where t.user_id =:userId and t.status in (:status) order by t.create_time desc limit 6")
-    List<Integer> findUnionIdTop6ByUserIdAndStatusInOrderByCreateTimeDesc(Long userId, List<String> status);
+    List<Long> findUnionIdTop6ByUserIdAndStatusInOrderByCreateTimeDesc(Long userId, List<String> status);
 
     @Cacheable(cacheNames = "getUserImgUnionIdsByUserIdTop50", key = "#userId")
     @Query(nativeQuery = true, value = "select t.union_id from s_user_img t where t.user_id =:userId and t.status in (:status) order by t.create_time desc limit 50")
-    List<Integer> findUnionIdTop50ByUserIdAndStatusInOrderByCreateTimeDesc(Long userId, List<String> status);
+    List<Long> findUnionIdTop50ByUserIdAndStatusInOrderByCreateTimeDesc(Long userId, List<String> status);
 
     @Caching(
             evict = {

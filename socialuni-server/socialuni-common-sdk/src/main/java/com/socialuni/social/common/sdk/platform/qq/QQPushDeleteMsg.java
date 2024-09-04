@@ -7,7 +7,7 @@ package com.socialuni.social.common.sdk.platform.qq;
 public class QQPushDeleteMsg {
     /*public static HashMap<String, Object> getQQPushDeleteTalkContent(NotifyDO notify) {
         HashMap<String, Object> dataMap = new HashMap<>();
-        Integer talkId = notify.getTalk();
+        Long talkId = notify.getTalk();
         //删除原因
         dataMap.put("keyword3", new PushValue(talk.getDeleteReason()));
         //删除内容
@@ -40,7 +40,7 @@ public class QQPushDeleteMsg {
 
     public static HashMap<String, Object> getQQPushDeleteCommentContent(NotifyDO notify) {
         HashMap<String, Object> dataMap = new HashMap<>();
-        Integer commentId = notify.getComment();
+        Long commentId = notify.getComment();
         //删除原因
         dataMap.put("keyword3", new PushValue(comment.getDeleteReason()));
         //删除内容

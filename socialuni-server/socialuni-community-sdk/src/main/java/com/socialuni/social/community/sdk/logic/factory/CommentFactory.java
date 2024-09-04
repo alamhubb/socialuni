@@ -23,12 +23,12 @@ public class CommentFactory {
      * @param requestUserId
      * @return
      */
-    public SocialuniCommentDO createCommentDO(SocialuniCommentPostQO addQO, Integer requestUserId) {
+    public SocialuniCommentDO createCommentDO(SocialuniCommentPostQO addQO, Long requestUserId) {
 
-        Integer talkId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(addQO.getTalkId());
+        Long talkId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(addQO.getTalkId());
 
-        Integer commentId = null;
-        Integer replyCommentId = null;
+        Long commentId = null;
+        Long replyCommentId = null;
         if (addQO.getCommentId() != null) {
             commentId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(addQO.getCommentId());
             if (addQO.getReplyCommentId() != null) {

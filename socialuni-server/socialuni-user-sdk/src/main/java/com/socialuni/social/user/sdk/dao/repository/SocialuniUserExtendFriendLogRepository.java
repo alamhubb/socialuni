@@ -15,7 +15,7 @@ public interface SocialuniUserExtendFriendLogRepository extends JpaRepository<So
 
     @Cacheable(cacheNames = "findUserIdByUpdateTimeLessThan")
     @Query(nativeQuery = true, value = "select s.user_id from s_user_extend_friend_log s where s.update_time>=:updateTime order by s.update_time desc limit 2000")
-    List<Integer> findUserIdByUpdateTimeLessThan(Date updateTime);
+    List<Long> findUserIdByUpdateTimeLessThan(Date updateTime);
 
     @Caching(
             evict = {

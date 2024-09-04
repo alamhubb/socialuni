@@ -56,13 +56,13 @@ public class SocialuniTalkDORedis {
     }
 
     @Cacheable(cacheNames = CommonRedisKey.queryUserTalkIds, key = "#userId+'-'+#pageable.pageNumber+'-'+#pageable.pageSize")
-    public List<Integer> queryUserTalkIds(Long userId, Pageable pageable) {
+    public List<Long> queryUserTalkIds(Long userId, Pageable pageable) {
         return talkApi.queryTalkIdsByUser(userId, ContentStatus.otherCanSeeContentStatus, pageable);
     }
 
     //用户发布动态后需要更新这个缓存
     @Cacheable(cacheNames = CommonRedisKey.queryMineTalkIds, key = "#userId+'-'+#pageable.pageNumber+'-'+#pageable.pageSize")
-    public List<Integer> queryMineTalkIds(Long userId, Pageable pageable) {
+    public List<Long> queryMineTalkIds(Long userId, Pageable pageable) {
         return talkApi.queryTalkIdsByUser(userId, ContentStatus.selfCanSeeContentStatus, pageable);
     }
 
@@ -74,14 +74,14 @@ public class SocialuniTalkDORedis {
 
     //这里有问题，应该清楚所有引用了当前用户的
     @Cacheable(cacheNames = CommonRedisKey.queryUserFollowsTalkIds, key = "#userId+'-'+#userIds+'-'+#pageable.pageNumber+'-'+#pageable.pageSize")
-    public List<Integer> queryUserFollowsTalkIds(Long userId, List<Integer> userIds, Pageable pageable) {
+    public List<Long> queryUserFollowsTalkIds(Long userId, List<Long> userIds, Pageable pageable) {
         return talkApi.queryTalkIdsByUserFollow(userId, ContentStatus.selfCanSeeContentStatus, userIds, ContentStatus.enable, pageable);
     }
 
-    public List<Integer> filterTalkIds(List<Integer> talkIds, List<Integer> tagTalkIds) {
-        Map<Integer, Integer> talkIdMap = new HashMap<>();
+    /*public List<Integer> filterTalkIds(List<Long> talkIds, List<Integer> tagTalkIds) {
+        Map<Long, Integer> talkIdMap = new HashMap<>();
         List<Integer> ids = new ArrayList<>();
-        for (Integer talkId : talkIds) {
+        for (Long talkId : talkIds) {
             talkIdMap.put(talkId, talkId);
         }
         for (Integer tagTalkId : tagTalkIds) {
@@ -90,6 +90,6 @@ public class SocialuniTalkDORedis {
             }
         }
         return ids;
-    }
+    }*/
 
 }

@@ -32,29 +32,29 @@ public interface SocialuniChatUserRepository extends JpaRepository<SocialuniChat
 
 
 
-//    SocialuniChatUserDO findFirstByStatusAndUserIdAndBeUserId(String Status, Long userId, Integer BeUserId);
+//    SocialuniChatUserDO findFirstByStatusAndUserIdAndBeUserId(String Status, Long userId, Long beUserId);
 
 //    两种，群聊是 chatId+userId是唯一标识，  私聊的话呢，是两个userId为唯一标识
     @Cacheable(cacheNames = ChatUserRedisKey.findFirstByChatIdAndUserId, key = "#chatId+'-'+#userId")
     @Query("select s.id from SocialuniChatUserDO s where s.chatId =:chatId and s.userId =:userId")
-    Integer findFirstByChatIdAndUserId(Integer chatId, Long userId);
+    Integer findFirstByChatIdAndUserId(Long chatId, Long userId);
 
     @Cacheable(cacheNames = ChatUserRedisKey.findFirstByUserIdAndBeUserId, key = "#userId+'-'+#beUserId")
     @Query("select s.id from SocialuniChatUserDO s where s.userId =:userId and s.beUserId =:beUserId")
-    Integer findFirstByUserIdAndBeUserId(Long userId, Integer beUserId);
+    Integer findFirstByUserIdAndBeUserId(Long userId, Long beUserId);
 
     //只有发送消息时，才需要使用这个，校验状态，其他情况不需要
-    SocialuniChatUserDO findFirstByChatIdAndUserIdAndStatus(Integer chatId, Long userId, String Status);
+    SocialuniChatUserDO findFirstByChatIdAndUserIdAndStatus(Long chatId, Long userId, String Status);
 
 
     //只有发送消息时，才需要使用这个，校验状态，其他情况不需要
-//    List<SocialuniChatUserDO> findByChatIdAndStatusAndStatus(Integer chatId, String Status, String status);
+//    List<SocialuniChatUserDO> findByChatIdAndStatusAndStatus(Long chatId, String Status, String status);
 
-    List<SocialuniChatUserDO> findByChatIdAndStatus(Integer chatId, String Status);
+    List<SocialuniChatUserDO> findByChatIdAndStatus(Long chatId, String Status);
 
     @Cacheable(cacheNames = ChatUserRedisKey.findChatUserIdsByChatIdAndStatus, key = "#chatId")
     @Query("select s.id from SocialuniChatUserDO s where s.chatId =:chatId and s.status =:status")
-    List<Integer> findChatUserIdsByChatIdAndStatus(Integer chatId, String status);
+    List<Integer> findChatUserIdsByChatIdAndStatus(Long chatId, String status);
 
 
     @Cacheable(cacheNames = ChatUserRedisKey.findFirstChatUserById, key = "#id")

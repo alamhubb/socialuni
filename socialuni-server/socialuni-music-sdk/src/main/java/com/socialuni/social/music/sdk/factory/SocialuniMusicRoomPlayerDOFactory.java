@@ -8,7 +8,7 @@ import javax.validation.Valid;
 import java.util.Date;
 
 public class SocialuniMusicRoomPlayerDOFactory {
-    public static SocialuniMusicRoomDO createSocialuniMusicRoomPlayerDO(Integer roomId) {
+    public static SocialuniMusicRoomDO createSocialuniMusicRoomPlayerDO(Long roomId) {
         //播放，是否存在
         SocialuniMusicRoomDO socialuniMusicRoomPlayerDO = new SocialuniMusicRoomDO();
         socialuniMusicRoomPlayerDO.setRoomId(roomId);

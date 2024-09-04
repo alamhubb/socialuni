@@ -38,7 +38,7 @@ public abstract class SocialuniRepositoryFacade {
         return getRepository().findByAllByOrderByUpdateTimeDesc(tClass);
     }
 
-    public static <T extends SocialuniUnionContentBaseDO> T findByUnionId(Integer id, Class<T> tClass) {
+    public static <T extends SocialuniUnionContentBaseDO> T findByUnionId(Long id, Class<T> tClass) {
         return getRepository().findByUnionId(id, tClass);
     }
 
@@ -47,6 +47,10 @@ public abstract class SocialuniRepositoryFacade {
     }
 
     public static <T extends SocialuniBaseDO> T findByCustomField(String field, Integer fieldId, Class<T> tClass) {
+        return getRepository().findByCustomField(field, fieldId, tClass);
+    }
+
+    public static <T extends SocialuniBaseDO> T findByCustomField(String field, Long fieldId, Class<T> tClass) {
         return getRepository().findByCustomField(field, fieldId, tClass);
     }
 

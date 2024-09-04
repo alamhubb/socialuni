@@ -115,7 +115,7 @@ public class SocialTalkROFactory {
 
     //需要user因为，user需要外部传入，区分center和social
     //用户详情
-    public static SocialuniTalkRO newHomeTalkRO(SocialuniUserDo mineUser, Integer talkId) {
+    public static SocialuniTalkRO newHomeTalkRO(SocialuniUserDo mineUser, Long talkId) {
         SocialuniTalkDO talkDO = SocialuniTalkDOUtil.getTalkNotNull(talkId);
         return SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, false, null);
     }
@@ -151,8 +151,8 @@ public class SocialTalkROFactory {
         SocialuniTalkRO socialTalkRO = new SocialuniTalkRO();
         socialTalkRO.setStatus(talkDO.getStatus());
         log.debug("开始每次换砖" + new Date().getTime() / 1000);
-//        Integer talkId = UnionIdDbUtil.createTalkUid(talkDO.getId(), user);
-        Integer talkId = talkDO.getUnionId();
+//        Long talkId = UnionIdDbUtil.createTalkUid(talkDO.getId(), user);
+        Long talkId = talkDO.getUnionId();
 
         String uid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(talkId);
 

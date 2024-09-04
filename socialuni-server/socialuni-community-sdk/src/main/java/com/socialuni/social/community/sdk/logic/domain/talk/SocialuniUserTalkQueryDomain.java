@@ -27,7 +27,7 @@ public class SocialuniUserTalkQueryDomain {
         //获取自己的user
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
 
-        List<Integer> talkIds = SocialuniUnionIdFacede.getContentIdsByTalkUnionIds(queryQO.getTalkIds());
+        List<Long> talkIds = SocialuniUnionIdFacede.getContentIdsByTalkUnionIds(queryQO.getTalkIds());
 
         SocialUserTalkQueryQO socialUserTalkQueryQO = new SocialUserTalkQueryQO(userId, talkIds);
 
