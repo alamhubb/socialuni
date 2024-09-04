@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @Data
 public class UserIdCardVO {
     //用户的id
-    private Integer userId;
+    private Long userId;
     private String nickname;
     private String gender;
     private List<UserImgVO> imgs;

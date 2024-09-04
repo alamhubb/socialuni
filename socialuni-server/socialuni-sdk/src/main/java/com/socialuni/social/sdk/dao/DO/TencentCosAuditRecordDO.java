@@ -47,7 +47,7 @@ public class TencentCosAuditRecordDO extends SocialuniContentBaseDO {
     @Column(columnDefinition = "text")
     private String imgKey;
     //key获取
-    private Integer userId;
+    private Long userId;
     private Integer imgContentId;
     private Integer imgParentContentId;
 }

@@ -16,7 +16,7 @@ import javax.persistence.Table;
 })
 @EqualsAndHashCode(callSuper = true)
 public class SocialUserIdentityAuthImgDO extends SocialuniContentBaseDO {
-    private Integer userId;
+    private Long userId;
     private String userIdImgSrc;
     private String userSelfieImgSrc;
     private Integer preCheckScore;

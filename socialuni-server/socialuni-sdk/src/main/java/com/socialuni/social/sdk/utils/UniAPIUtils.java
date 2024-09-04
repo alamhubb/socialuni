@@ -63,7 +63,7 @@ public class UniAPIUtils {
         }};
         //执行本系统逻辑
         //根据本系统uid获取unionId
-        Integer unionId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(uniContentIdRO.getId());
+        Long unionId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(uniContentIdRO.getId());
 
         //mark 多库同步版本
         ResultRO<RO> resultRO = callApi.apply(contentAddQO);

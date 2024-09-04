@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SocialuniUserOpenIdRepository extends JpaRepository<SocialuniUserOpenIdDO, Integer> {
     @Cacheable(cacheNames = "userOpenIdByUserId", key = "#userId")
-    SocialuniUserOpenIdDO findByUserId(Integer userId);
+    SocialuniUserOpenIdDO findByUserId(Long userId);
 
     @Cacheable(cacheNames = "userOpenIdByUserOpenId", key = "#userOpenId")
     SocialuniUserOpenIdDO findByUserOpenId(String userOpenId);

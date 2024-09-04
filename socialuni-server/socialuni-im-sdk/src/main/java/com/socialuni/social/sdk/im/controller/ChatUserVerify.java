@@ -17,7 +17,7 @@ public class ChatUserVerify {
     private SocialuniChatUserRepository chatUserRepository;
 
     //基础，不存在就是系统异常
-    public ResultRO<SocialuniChatUserDO> checkChatHasUserId(Long chatId, Integer userId) {
+    public ResultRO<SocialuniChatUserDO> checkChatHasUserId(Long chatId, Long userId) {
 //        Optional<ChatUserDO> chatUserDOOptional = chatUserRepository.findFirstByChatIdAndChatStatusAndUserId(chatId, ChatStatus.enable, userId);
 //        return chatUserDOOptional.map(ResultRO::new).orElseGet(() -> new ResultRO<>(ErrorCode.SYSTEM_ERROR));
         /*Optional<ChatDO> chatDOOptional = chatRepository.findById(chatId);
@@ -28,7 +28,7 @@ public class ChatUserVerify {
         return null;
     }
 
-    public ResultRO<SocialuniChatUserDO> checkChatHasUserIdAndEnable(Long chatId, Integer userId) {
+    public ResultRO<SocialuniChatUserDO> checkChatHasUserIdAndEnable(Long chatId, Long userId) {
         ResultRO<SocialuniChatUserDO> ResultRO = this.checkChatHasUserId(chatId, userId);
         if (ResultRO.hasError()) {
             return ResultRO;

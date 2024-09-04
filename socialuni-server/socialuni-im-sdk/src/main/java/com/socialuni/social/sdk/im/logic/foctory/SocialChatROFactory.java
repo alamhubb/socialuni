@@ -120,7 +120,7 @@ public class SocialChatROFactory {
     }
 
     //初始查询的时候为99
-    /*public ChatVO(ChatDO chatDO, Integer userId) {
+    /*public ChatVO(ChatDO chatDO, Long userId) {
         this(chatDO);
         //查询用户这个chatUser下的消息
         //已经确认过chat为可用的
@@ -245,7 +245,7 @@ public class SocialChatROFactory {
         return chats.stream().map(SocialChatROFactory::getNoLoginChatRO).collect(Collectors.toList());
     }
 
-    /*public static List<ChatVO> chatDOToVOS(List<ChatDO> chats, Integer userId) {
+    /*public static List<ChatVO> chatDOToVOS(List<ChatDO> chats, Long userId) {
         //查询的时候chat列表展示不为当前用户的
         return chats.stream().map((ChatDO chatDO) -> new ChatVO(chatDO, userId)).collect(Collectors.toList());
     }*/

@@ -13,7 +13,7 @@ public class ReportStore {
     @Resource
     ReportRepository reportApi;
 
-    public List<?  extends ReportDO> queryUserOtherWaitAuditContent(Integer userId) {
+    public List<?  extends ReportDO> queryUserOtherWaitAuditContent(Long userId) {
         return reportApi.findByContentUserIdAndStatusIn(userId, ReportStatus.auditStatus);
     }
 }

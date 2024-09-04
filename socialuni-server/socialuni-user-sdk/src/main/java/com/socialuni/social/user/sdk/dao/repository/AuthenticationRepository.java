@@ -15,7 +15,7 @@ public interface AuthenticationRepository extends JpaRepository<AuthenticationDO
 
     Integer countByIp(String ip);
 
-    Integer countByUserId(Integer userId);
+    Integer countByUserId(Long userId);
 }
 
 

@@ -10,7 +10,7 @@ import feign.form.ContentType;
 
 public class SocialuniAppOperateRecordDOFactory {
 
-    /*public static SocialuniAppOperateRecordDO createChatAppOperateRecordDO(String contentType, Integer contentId, String type, Integer roleId, String roleType, Integer userId, Integer beUserId) {
+    /*public static SocialuniAppOperateRecordDO createChatAppOperateRecordDO(String contentType, Integer contentId, String type, Integer roleId, String roleType, Long userId, Integer beUserId) {
         SocialuniAppOperateRecordDO socialuniAppOperateRecordDO = new SocialuniAppOperateRecordDO();
 
         socialuniAppOperateRecordDO.setContentType(contentType);

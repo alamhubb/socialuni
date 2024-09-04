@@ -33,7 +33,7 @@ public class SocialuniCoinOrderDO extends SocialuniContentBaseDO implements Seri
     public SocialuniCoinOrderDO() {
     }
 
-    public SocialuniCoinOrderDO(Integer userId, Integer shell, String type, String detailType, Integer userCoin,Integer relateId) {
+    public SocialuniCoinOrderDO(Long userId, Integer shell, String type, String detailType, Integer userCoin,Integer relateId) {
         super(userId);
         this.shell = shell;
         this.absoluteShell = Math.abs(shell);
@@ -44,7 +44,7 @@ public class SocialuniCoinOrderDO extends SocialuniContentBaseDO implements Seri
     }
 
 
-    /*public ShellOrderDO(Integer userId, Integer shell, Integer vipOrderId) {
+    /*public ShellOrderDO(Long userId, Integer shell, Integer vipOrderId) {
         this(userId, shell, ShellOrderType.recharge);
         this.vipOrderId = vipOrderId;
     }*/

@@ -5,7 +5,7 @@ import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.user.sdk.dao.DO.SocialUserDeviceLoginHistoryDO;
 
 public class SocialuniCreateLoginHisotryEntity {
-    public static void createUserLoginHistory(Integer userId, String loginType) {
+    public static void createUserLoginHistory(Long userId, String loginType) {
         SocialUserDeviceLoginHistoryDO socialUserDeviceLoginHistoryDO = new SocialUserDeviceLoginHistoryDO();
         socialUserDeviceLoginHistoryDO.setUserId(userId);
         socialUserDeviceLoginHistoryDO.setLoginType(loginType);

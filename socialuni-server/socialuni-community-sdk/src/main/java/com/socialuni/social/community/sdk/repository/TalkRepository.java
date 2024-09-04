@@ -57,19 +57,19 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
     List<Integer> findTopTalkId2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc(String status, Integer devId, Integer globalTop);
 
     @Query(nativeQuery = true, value = "SELECT t.union_id FROM s_community_talk t where t.user_id = :userId and t.status = :status order by t.global_top desc,t.id desc limit 10")
-    List<Integer> findTop10ByUserIdAndStatusOrderByGlobalTopDescIdDesc(Integer userId, String status);
+    List<Integer> findTop10ByUserIdAndStatusOrderByGlobalTopDescIdDesc(Long userId, String status);
 
     //查询自己talk和他人详情talk
     @Query(value = "SELECT t.unionId FROM SocialuniTalkDO t where t.status in (:status) and t.userId=:userId order by t.createTime desc")
     List<Integer> queryTalkIdsByUser(
-            @Param("userId") Integer userId,
+            @Param("userId") Long userId,
             @Param("status") List<String> status,
             Pageable pageable);
 
     //查询自己关注的用户列表，包含自己的,类似朋友圈
     @Query(value = "SELECT t.unionId from SocialuniTalkDO t where ((t.userId =:userId and t.status in (:onlyUserSeeStatus)) or (t.userId in (:userIds) and t.status =:status)) order by t.createTime desc ")
     List<Integer> queryTalkIdsByUserFollow(
-            @Param("userId") Integer userId,
+            @Param("userId") Long userId,
             @Param("onlyUserSeeStatus") List<String> onlyUserSeeStatus,
             @Param("userIds") List<Integer> userIds,
             @Param("status") String status,
@@ -276,7 +276,7 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
             @Param("talkIds") List<Integer> talkIds,
             @Param("userIds") List<Integer> userIds,
             @Param("tagTalkIds") List<Integer> tagTalkIds,
-            @Param("userId") Integer userId,
+            @Param("userId") Long userId,
             @Param("status") String status,
             @Param("onlyUserSeeStatus") String onlyUserSeeStatus,
             @Param("adCode") String adCode,
@@ -297,7 +297,7 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
     List<Integer> queryTalkIdsTop10ByGenderAgeAndLikeAdCode(
             @Param("userIds") List<Integer> userIds,
             @Param("tagTalkIds") List<Integer> tagTalkIds,
-            @Param("userId") Integer userId,
+            @Param("userId") Long userId,
             @Param("status") String status,
             @Param("onlyUserSeeStatus") String onlyUserSeeStatus,
             @Param("adCode") String adCode,
@@ -306,7 +306,7 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
             @Param("devId") Integer devId);
 
     //查询user指定时间内发帖数量的，限制发帖数量的
-    Integer countByUserIdAndCreateTimeBetween(Integer userId, Date startDate, Date endDate);
+    Integer countByUserIdAndCreateTimeBetween(Long userId, Date startDate, Date endDate);
 
     List<? extends SocialuniTalkDO> findTop2000ByStatusAndViolateTypeOrderByIdDesc(String status, String violateType);
 
@@ -316,7 +316,7 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
 
     @Query(value = "SELECT t.unionId FROM SocialuniTalkDO t where t.status in (:status) and t.userId=:userId order by t.updateTime desc")
     List<Integer> queryTalkIdsByUserOrderByUpdateTime(
-            @Param("userId") Integer userId,
+            @Param("userId") Long userId,
             @Param("status") List<String> status,
             Pageable pageable);
 
@@ -334,7 +334,7 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
 
     Page<TalkDO> findByStatusNotInAndContentLikeOrderByIdDesc(Pageable pageable, List<String> status, String content);
 
-    List<TalkDO> findTop20ByUserIdOrderByIdDesc(Integer userId);
+    List<TalkDO> findTop20ByUserIdOrderByIdDesc(Long userId);
 
     //弃用的*************************************************************************************
 

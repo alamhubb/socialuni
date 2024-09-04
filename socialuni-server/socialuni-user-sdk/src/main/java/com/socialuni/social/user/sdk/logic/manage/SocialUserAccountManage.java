@@ -33,7 +33,7 @@ public class SocialUserAccountManage {
         return socialUserAccountDO;
     }
 
-    public SocialUserPlatformAccountDO checkOrCreateOrUpdate(Integer userId, SocialProviderLoginQO loginQO, UniUnionIdRO uniUnionIdRO) {
+    public SocialUserPlatformAccountDO checkOrCreateOrUpdate(Long userId, SocialProviderLoginQO loginQO, UniUnionIdRO uniUnionIdRO) {
         SocialUserPlatformAccountDO socialUserAccountDO = socialUserAccountStore.getAccountByUnionId(loginQO, uniUnionIdRO);
         if (socialUserAccountDO == null) {
             return this.create(userId, loginQO, uniUnionIdRO);
@@ -43,7 +43,7 @@ public class SocialUserAccountManage {
     }
 
     //两个相似逻辑引用，但逻辑不相同，无法通用，所以两个地方调用
-    public SocialUserPlatformAccountDO create(Integer userId, SocialProviderLoginQO loginQO, UniUnionIdRO uniUnionIdRO) {
+    public SocialUserPlatformAccountDO create(Long userId, SocialProviderLoginQO loginQO, UniUnionIdRO uniUnionIdRO) {
         SocialUserPlatformAccountDO socialUserAccountDO = new SocialUserPlatformAccountDO();
         socialUserAccountDO.setUserId(userId);
 //        socialUserAccountDO.setDevId(loginQO.getDevId());

@@ -26,7 +26,7 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 public class SocialuniUserExpandDo extends SocialuniContentBaseDO {
-    private Integer userId;
+    private Long userId;
     private String schoolName;
     private String contactInfo;
     private Date lastOnlineTime;

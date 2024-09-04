@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface SocialuniUserExpandRepository extends JpaRepository<SocialuniUserExpandDo, Integer> {
     @Cacheable(cacheNames = "userExpandByUserId", key = "#userId")
-    SocialuniUserExpandDo findByUserId(Integer userId);
+    SocialuniUserExpandDo findByUserId(Long userId);
 
     @Caching(
             put = {@CachePut(cacheNames = "userExpandByUserId", key = "#SocialuniUserExpandDo.userId")}

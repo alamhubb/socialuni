@@ -33,7 +33,7 @@ public class SocialUserViolationDo extends SocialuniContentBaseDO {
         /**
          * 被违规的次数，默认0
          */
-        private Integer userId;
+        private Long userId;
         private Integer violationCount;
         /**
          * 违规原因
@@ -49,7 +49,7 @@ public class SocialUserViolationDo extends SocialuniContentBaseDO {
          */
         private Date violationEndTime;
 
-        public SocialUserViolationDo(Integer userId) {
+        public SocialUserViolationDo(Long userId) {
                 this.userId = userId;
                 this.violationCount = 0;
         }

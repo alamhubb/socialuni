@@ -18,9 +18,9 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class SocialuniUserInfoBaseDO extends SocialuniBaseDO implements Serializable {
     @Column(updatable = false)
-    private Integer userId;
+    private Long userId;
 
-    public SocialuniUserInfoBaseDO(Integer userId) {
+    public SocialuniUserInfoBaseDO(Long userId) {
         this.userId = userId;
     }
 }

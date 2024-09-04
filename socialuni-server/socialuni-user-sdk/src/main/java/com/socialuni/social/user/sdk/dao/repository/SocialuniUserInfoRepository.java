@@ -6,6 +6,6 @@ import org.springframework.data.repository.NoRepositoryBean;
 
 @NoRepositoryBean
 public interface SocialuniUserInfoRepository extends JpaRepository<SocialuniUserInfoBaseDO, Integer> {
-    SocialuniUserInfoBaseDO findByUserId(Integer userId);
+    SocialuniUserInfoBaseDO findByUserId(Long userId);
 }
 

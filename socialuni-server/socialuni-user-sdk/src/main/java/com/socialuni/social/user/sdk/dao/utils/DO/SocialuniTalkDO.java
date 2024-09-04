@@ -95,7 +95,7 @@ public class SocialuniTalkDO extends SocialuniUnionContentBaseDO implements Soci
     private Boolean hasQrCode;
 
     //do 只有一个构造
-    public SocialuniTalkDO(Integer userId, String content) {
+    public SocialuniTalkDO(Long userId, String content) {
         super(userId, SocialuniContentType.talk, content);
         this.commentNum = 0;
         this.hugNum = 0;

@@ -71,7 +71,7 @@ public class SocialTokenFacade {
         request.setAttribute(socialuniTokenName, token);
     }
 
-    public static String generateTokenByUserId(Integer userId) {
+    public static String generateTokenByUserId(Long userId) {
         return SocialTokenFacade.createTokenByUserKey(userId.toString());
     }
 

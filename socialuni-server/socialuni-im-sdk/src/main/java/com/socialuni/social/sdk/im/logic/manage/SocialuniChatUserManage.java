@@ -18,7 +18,7 @@ public class SocialuniChatUserManage {
     @Resource
     SocialuniChatUserRepository chatUserRepository;
 
-    public SocialuniChatUserDO joinOrCreateChatUser(SocialuniChatDO chatDO, Integer userId) {
+    public SocialuniChatUserDO joinOrCreateChatUser(SocialuniChatDO chatDO, Long userId) {
         SocialuniChatUserDO socialuniChatUserDO = SocialuniChatUserDOUtil.findByChatIdAndUserId(chatDO.getUnionId(), userId);
 
         if (socialuniChatUserDO == null) {
@@ -27,7 +27,7 @@ public class SocialuniChatUserManage {
         return socialuniChatUserDO;
     }
 
-    public SocialuniChatUserDO createUserPersonalChatUser(SocialuniChatDO chatDO, Integer userId) {
+    public SocialuniChatUserDO createUserPersonalChatUser(SocialuniChatDO chatDO, Long userId) {
 
         SocialuniChatUserDO socialuniChatUserDO = SocialuniChatUserDOFactory.createUserPersonalChatUser(chatDO, userId);
         return socialuniChatUserDO;

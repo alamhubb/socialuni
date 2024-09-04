@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface SocialuniUserOnlineRepository extends JpaRepository<SocialuniPartnerUserOnlineDO, Integer> {
     @Cacheable(cacheNames = "findFirstByUserIdOrderByIdDesc", key = "#userId")
-    SocialuniPartnerUserOnlineDO findFirstByUserIdOrderByIdDesc(Integer userId);
+    SocialuniPartnerUserOnlineDO findFirstByUserIdOrderByIdDesc(Long userId);
 
     @Caching(
             put = {@CachePut(cacheNames = "findFirstByUserIdOrderByIdDesc", key = "#socialuniUserExpandDO.userId")}
@@ -23,6 +23,6 @@ public interface SocialuniUserOnlineRepository extends JpaRepository<SocialuniPa
     List<SocialuniPartnerUserOnlineDO> findByTodayDate(String todayDate);
 
 
-    List<SocialuniPartnerUserOnlineDO> findByUserIdAndCreateTimeBetween(Integer userId, Date startTime, Date beginTime);
+    List<SocialuniPartnerUserOnlineDO> findByUserIdAndCreateTimeBetween(Long userId, Date startTime, Date beginTime);
 }
 

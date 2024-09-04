@@ -47,7 +47,7 @@ public class SocialuniUserDo extends SocialuniUnionContentBaseDO {
         return super.getId();
     }
 
-    public SocialuniUserDo(Integer userId) {
+    public SocialuniUserDo(Long userId) {
         super(userId, userId, SocialuniContentType.user, null);
     }
 }

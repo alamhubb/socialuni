@@ -31,7 +31,7 @@ public class SocialuniInterceptor extends SocialuniWebInterceptor {
             return true;
         }
 
-        Integer userId = socialRequestUserConfig.getUserId();
+        Long userId = socialRequestUserConfig.getUserId();
 
         if (userId == null) {
             return true;

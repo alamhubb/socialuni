@@ -27,14 +27,14 @@ import javax.persistence.*;
 @EqualsAndHashCode(callSuper = true)
 public class SocialUserPhoneDo extends SocialuniContentBaseDO {
     @Column(nullable = false, updatable = false)
-    private Integer userId;
+    private Long userId;
     @Column(nullable = false)
     private String phoneCountryCode;
     private String phoneNum;
     @Column(nullable = false)
     private Integer devId;
 
-    public SocialUserPhoneDo(Integer userId, String phoneCountryCode, String phoneNum, Integer devId) {
+    public SocialUserPhoneDo(Long userId, String phoneCountryCode, String phoneNum, Integer devId) {
         this.userId = userId;
         this.phoneCountryCode = phoneCountryCode;
         this.phoneNum = phoneNum;

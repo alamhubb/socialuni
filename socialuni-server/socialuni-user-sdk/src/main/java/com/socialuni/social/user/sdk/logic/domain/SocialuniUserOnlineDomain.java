@@ -20,7 +20,7 @@ public class SocialuniUserOnlineDomain {
     SocialuniUserOnlineRepository socialuniUserOnlineRepository;
 
     public void userOnline(String userIdStr) {
-        Integer userId = SocialuniUnionIdFacede.getUnionIdByUuidAllowNull(userIdStr);
+        Long userId = SocialuniUnionIdFacede.getUnionIdByUuidAllowNull(userIdStr);
         //如果不为空，并且用户不在群组中，则不推送
         if (userId == null) {
             return;
@@ -70,7 +70,7 @@ public class SocialuniUserOnlineDomain {
 
     //用户离线，设置离线时间
     public void userOffline(String userIdStr) {
-        Integer userId = SocialuniUnionIdFacede.getUnionIdByUuidAllowNull(userIdStr);
+        Long userId = SocialuniUnionIdFacede.getUnionIdByUuidAllowNull(userIdStr);
         //如果不为空，并且用户不在群组中，则不推送
         if (userId == null) {
             return;

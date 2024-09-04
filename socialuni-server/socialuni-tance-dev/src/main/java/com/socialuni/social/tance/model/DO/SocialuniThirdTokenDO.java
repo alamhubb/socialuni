@@ -29,13 +29,13 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = true)
 public class SocialuniThirdTokenDO extends SocialuniContentBaseDO implements Serializable {
     @Column(nullable = false, updatable = false)
-    private Integer userId;
+    private Long userId;
     @Column(nullable = false, updatable = false)
     private Integer devId;
     @Column(nullable = false, updatable = false)
     private String token;
 
-    public SocialuniThirdTokenDO(Integer userId, Integer devId, String token) {
+    public SocialuniThirdTokenDO(Long userId, Integer devId, String token) {
         super(userId);
         this.devId = devId;
         this.token = token;

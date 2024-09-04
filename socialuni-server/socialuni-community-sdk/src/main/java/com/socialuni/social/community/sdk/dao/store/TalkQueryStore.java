@@ -68,7 +68,7 @@ public class TalkQueryStore {
         return list;
     }
 
-    public List<? extends SocialuniTalkDO> queryTalksTop10ByUserFollow(List<Integer> talkIds, Integer userId) {
+    public List<? extends SocialuniTalkDO> queryTalksTop10ByUserFollow(List<Integer> talkIds, Long userId) {
         List<Integer> beUserIds = followRedis.queryUserFollowUserIds(userId);
         int page = talkIds.size() / 10;
         List<Integer> ids = talkRedis.queryUserFollowsTalkIds(userId, beUserIds, PageRequest.of(page, 10));
@@ -77,7 +77,7 @@ public class TalkQueryStore {
 
     public List<? extends SocialuniTalkDO> queryUserTalks(SocialUserTalkQueryQO queryQO, SocialuniUserDo mineUser) {
         List<Integer> talkIds = queryQO.getTalkIds();
-        Integer userId = queryQO.getUserId();
+        Long userId = queryQO.getUserId();
 
         if (ObjectUtils.isEmpty(talkIds)) {
             talkIds = Collections.singletonList(0);
@@ -91,14 +91,14 @@ public class TalkQueryStore {
         return talks;
     }
 
-    public List<? extends SocialuniTalkDO> queryTalksTop10ByUser(List<Integer> talkIds, Integer userId) {
+    public List<? extends SocialuniTalkDO> queryTalksTop10ByUser(List<Integer> talkIds, Long userId) {
         int page = talkIds.size() / 10;
         List<Integer> ids = talkRedis.queryUserTalkIds(userId, PageRequest.of(page, 10));
         return this.queryTalksByIds(ids);
     }
 
     //查看自己的动态，能查看到预审查状态的
-    public List<? extends SocialuniTalkDO> queryTalksTop10ByMineUserId(List<Integer> talkIds, Integer userId) {
+    public List<? extends SocialuniTalkDO> queryTalksTop10ByMineUserId(List<Integer> talkIds, Long userId) {
         int page = talkIds.size() / 10;
         List<Integer> ids = talkRedis.queryMineTalkIds(userId, PageRequest.of(page, 10));
         return this.queryTalksByIds(ids);

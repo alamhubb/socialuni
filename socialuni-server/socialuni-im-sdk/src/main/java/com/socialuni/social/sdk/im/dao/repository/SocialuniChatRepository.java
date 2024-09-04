@@ -24,7 +24,7 @@ public interface SocialuniChatRepository extends JpaRepository<SocialuniChatDO, 
     SocialuniChatDO findFirstByTypeAndChatName(String type, String chatName);
 
 
-    SocialuniChatDO findFirstByTypeAndUserId(String type, Integer userId);
+    SocialuniChatDO findFirstByTypeAndUserId(String type, Long userId);
 
     //查询对应的chat,读取时，任何类型的chat都可以改为已读，但是sys类型不操作
     SocialuniChatDO findFirstByUnionIdAndStatus(Integer id, String status);

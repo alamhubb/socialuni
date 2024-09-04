@@ -40,7 +40,7 @@ public class SocialuniChatDOUtil {
 
         SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidNotNull(chatIdStr);
 
-        Integer unionId = socialuniUnionIdModler.getUnionIdqqq();
+        Long unionId = socialuniUnionIdModler.getUnionIdqqq();
 
         if (SocialuniContentType.chat.equals(socialuniUnionIdModler.getContentType())) {
             return unionId;

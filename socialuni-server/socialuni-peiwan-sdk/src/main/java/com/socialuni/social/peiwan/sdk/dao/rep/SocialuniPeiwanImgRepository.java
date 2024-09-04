@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface SocialuniPeiwanImgRepository extends JpaRepository<SocialuniPeiwanInfoImgDO, Integer> {
-    List<SocialuniPeiwanInfoImgDO> findAllByUserIdAndStatusOrderByLevelAscIdAsc(Integer userId, String status);
+    List<SocialuniPeiwanInfoImgDO> findAllByUserIdAndStatusOrderByLevelAscIdAsc(Long userId, String status);
 }
 

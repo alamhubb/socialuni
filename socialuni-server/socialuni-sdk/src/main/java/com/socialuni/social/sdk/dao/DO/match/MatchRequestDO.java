@@ -19,7 +19,7 @@ public class MatchRequestDO implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Integer userId;
+    private Long userId;
 
     private Integer beUserId;
 

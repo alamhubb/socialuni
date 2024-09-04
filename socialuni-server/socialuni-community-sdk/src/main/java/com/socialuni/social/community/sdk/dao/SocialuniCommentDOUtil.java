@@ -22,7 +22,7 @@ public class SocialuniCommentDOUtil {
         SocialuniCommentDOUtil.commentApi = commentApi;
     }
 
-    public static SocialuniCommentDO getNotCommentNull(Integer unionId) {
+    public static SocialuniCommentDO getNotCommentNull(Long unionId) {
         SocialuniCommentDO commentDO = getAllowNull(unionId);
         if (commentDO == null) {
             throw new SocialSystemException("不存在的评论");
@@ -30,7 +30,7 @@ public class SocialuniCommentDOUtil {
         return commentDO;
     }
 
-    public static SocialuniCommentDO getAllowNull(Integer unionId) {
+    public static SocialuniCommentDO getAllowNull(Long unionId) {
         SocialuniUnionIdModler uniContentUnionIdDO = SocialuniUnionIdFacede.getUnionDOByUnionIdAllowNull(unionId);
         if (uniContentUnionIdDO == null) {
             return null;

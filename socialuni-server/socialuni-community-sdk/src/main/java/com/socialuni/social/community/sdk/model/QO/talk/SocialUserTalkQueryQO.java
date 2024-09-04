@@ -14,10 +14,10 @@ import java.util.List;
 @NoArgsConstructor
 public class SocialUserTalkQueryQO {
     @NotNull(message = "入参为空异常")
-    private Integer userId;
+    private Long userId;
     private List<Integer> talkIds;
 
-    public SocialUserTalkQueryQO(Integer userId, List<Integer> talkIds) {
+    public SocialUserTalkQueryQO(Long userId, List<Integer> talkIds) {
         this.userId = userId;
         this.talkIds = talkIds;
     }

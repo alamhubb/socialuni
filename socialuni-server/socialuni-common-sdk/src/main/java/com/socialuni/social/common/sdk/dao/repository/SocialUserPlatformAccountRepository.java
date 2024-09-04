@@ -16,9 +16,9 @@ public interface SocialUserPlatformAccountRepository extends JpaRepository<Socia
     SocialUserPlatformAccountDO findByProviderAndH5OpenId(String provider, String h5OpenId);
 
     //根据渠道和用户id查询用户账户信息
-    SocialUserPlatformAccountDO findByProviderAndUserId(String provider, Integer userId);
+    SocialUserPlatformAccountDO findByProviderAndUserId(String provider, Long userId);
 
-    SocialUserPlatformAccountDO findFirstByUserIdOrderByUpdateTimeDesc(Integer userId);
+    SocialUserPlatformAccountDO findFirstByUserIdOrderByUpdateTimeDesc(Long userId);
 
     @Query("select s.userId from SocialUserPlatformAccountDO s where s.provider = :provider")
     List<Integer> findAllUserIdsAllByProvider(String provider);
@@ -34,7 +34,7 @@ public interface SocialUserPlatformAccountRepository extends JpaRepository<Socia
 
     Optional<SocialUserAccountDO> findFirstOneByWxUnionIdOrderByIdAsc(String unionId);
 
-    Optional<SocialUserAccountDO> findOneByUserId(Integer userId);
+    Optional<SocialUserAccountDO> findOneByUserId(Long userId);
 */
 }
 

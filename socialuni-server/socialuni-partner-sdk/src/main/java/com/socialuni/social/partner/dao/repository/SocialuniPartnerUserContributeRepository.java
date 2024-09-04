@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface SocialuniPartnerUserContributeRepository extends JpaRepository<SocialuniPartnerUserContributeDO, Integer> {
 //    @Cacheable(cacheNames = "findFirstByUserIdOrderByIdDesc", key = "#userId")
 
-    SocialuniPartnerUserContributeDO findFirstByUserIdAndTodayDate(Integer userId, String today);
+    SocialuniPartnerUserContributeDO findFirstByUserIdAndTodayDate(Long userId, String today);
 
 
 /*

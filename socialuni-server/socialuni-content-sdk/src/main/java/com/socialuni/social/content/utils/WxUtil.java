@@ -215,7 +215,7 @@ public class WxUtil {
     }
 
     //发起支付
-    public static String postPayUrl(String platform, String deviceIp, String orderNo, String total_feeStr, Integer userId) throws IOException {
+    public static String postPayUrl(String platform, String deviceIp, String orderNo, String total_feeStr, Long userId) throws IOException {
 
 
         String trade_type = WxConst.mp_pay_trade_type;

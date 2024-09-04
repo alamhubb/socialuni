@@ -22,7 +22,7 @@ public class SocialuniUserTalkQueryDomain {
 
     public List<SocialuniTalkRO> queryUserTalks(SocialuniUserTalkQueryQO queryQO) {
 
-        Integer userId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(queryQO.getUserId());
+        Long userId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(queryQO.getUserId());
 
         //获取自己的user
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();

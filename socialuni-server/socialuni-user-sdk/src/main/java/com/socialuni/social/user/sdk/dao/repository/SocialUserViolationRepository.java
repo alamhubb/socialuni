@@ -6,7 +6,7 @@ import com.socialuni.social.user.sdk.dao.DO.SocialUserViolationDo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SocialUserViolationRepository extends JpaRepository<SocialUserViolationDo, Integer> {
-    SocialUserViolationDo findOneByUserId(Integer userId);
+    SocialUserViolationDo findOneByUserId(Long userId);
     default SocialUserViolationDo savePut(SocialUserViolationDo SocialUserViolationDo){
         return this.save(BeanUtil.toBean(SocialUserViolationDo,SocialUserViolationDo.class));
     }

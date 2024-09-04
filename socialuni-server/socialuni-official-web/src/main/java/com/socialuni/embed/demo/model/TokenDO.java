@@ -13,10 +13,10 @@ public class TokenDO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer userId;
+    private Long userId;
     private String token;
 
-    public TokenDO(Integer userId, String token) {
+    public TokenDO(Long userId, String token) {
         this.userId = userId;
         this.token = token;
     }

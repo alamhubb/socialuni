@@ -24,7 +24,7 @@ public class HugRedis {
     }
 
     @Cacheable(cacheNames = CommonRedisKey.findHugByTalkIdAndUserId, key = "#userId+'-'+#talkId")
-    public SocialuniHugDO findHugByTalkIdAndUserId(Integer talkId, Integer userId) {
+    public SocialuniHugDO findHugByTalkIdAndUserId(Integer talkId, Long userId) {
         return hugApi.findByTalkIdAndUserId(talkId, userId);
     }
 }

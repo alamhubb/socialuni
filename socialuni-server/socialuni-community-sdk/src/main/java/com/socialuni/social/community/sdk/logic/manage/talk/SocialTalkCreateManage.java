@@ -42,7 +42,7 @@ public class SocialTalkCreateManage {
                 if (hasPeople) {
                     talkDO.setHasPeopleImg(true);
                     Integer talkUnionId = talkDO.getUnionId();
-                    Integer userId = talkDO.getUserId();
+                    Long userId = talkDO.getUserId();
                     //如果包含人像，则需要生成一条待审核记录
                     CompletableFuture.runAsync(() -> {
                         SocialuniTalkHasUnderageImgAuditDO socialTalkAdultAuditDO = new SocialuniTalkHasUnderageImgAuditDO(talkUnionId, userId);

@@ -56,25 +56,25 @@ public class SocialuniTalkDORedis {
     }
 
     @Cacheable(cacheNames = CommonRedisKey.queryUserTalkIds, key = "#userId+'-'+#pageable.pageNumber+'-'+#pageable.pageSize")
-    public List<Integer> queryUserTalkIds(Integer userId, Pageable pageable) {
+    public List<Integer> queryUserTalkIds(Long userId, Pageable pageable) {
         return talkApi.queryTalkIdsByUser(userId, ContentStatus.otherCanSeeContentStatus, pageable);
     }
 
     //用户发布动态后需要更新这个缓存
     @Cacheable(cacheNames = CommonRedisKey.queryMineTalkIds, key = "#userId+'-'+#pageable.pageNumber+'-'+#pageable.pageSize")
-    public List<Integer> queryMineTalkIds(Integer userId, Pageable pageable) {
+    public List<Integer> queryMineTalkIds(Long userId, Pageable pageable) {
         return talkApi.queryTalkIdsByUser(userId, ContentStatus.selfCanSeeContentStatus, pageable);
     }
 
     //用户发布动态后需要更新这个缓存
     /*@Cacheable(cacheNames = RedisKeysConst.queryMineTalkIdsByCom, key = "#userId")
-    public List<Integer> queryMineTalkIdsByCom(Integer userId) {
+    public List<Integer> queryMineTalkIdsByCom(Long userId) {
         return talkMapper.queryMineTalkIdsByCom(userId, ContentStatus.selfCanSeeContentStatus);
     }*/
 
     //这里有问题，应该清楚所有引用了当前用户的
     @Cacheable(cacheNames = CommonRedisKey.queryUserFollowsTalkIds, key = "#userId+'-'+#userIds+'-'+#pageable.pageNumber+'-'+#pageable.pageSize")
-    public List<Integer> queryUserFollowsTalkIds(Integer userId, List<Integer> userIds, Pageable pageable) {
+    public List<Integer> queryUserFollowsTalkIds(Long userId, List<Integer> userIds, Pageable pageable) {
         return talkApi.queryTalkIdsByUserFollow(userId, ContentStatus.selfCanSeeContentStatus, userIds, ContentStatus.enable, pageable);
     }
 

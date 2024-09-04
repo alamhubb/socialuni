@@ -21,9 +21,9 @@ public class UniOutRegisterUserDO implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer devId;
-    private Integer userId;
+    private Long userId;
 
-    public UniOutRegisterUserDO(Integer devId, Integer userId) {
+    public UniOutRegisterUserDO(Integer devId, Long userId) {
         this.devId = devId;
         this.userId = userId;
     }

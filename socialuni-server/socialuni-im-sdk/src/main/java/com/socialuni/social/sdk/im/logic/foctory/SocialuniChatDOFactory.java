@@ -48,7 +48,7 @@ public class SocialuniChatDOFactory {
         return SocialuniChatDOFactory.createGroupChat(userDo.getNickname(), userDo.getUserId(), ChatType.userPersonalGroup, userDo.getAvatar());
     }
 
-    private static SocialuniChatDO createGroupChat(String chatName, Integer userId, String type, String avatar) {
+    private static SocialuniChatDO createGroupChat(String chatName, Long userId, String type, String avatar) {
         SocialuniChatDO chatDO = new SocialuniChatDO();
 
         Integer uid = SocialuniUnionIdFacede.createChatUnionId();

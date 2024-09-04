@@ -87,7 +87,7 @@ public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {
     //群聊，不需要对方用户
     //这个方法暂时没生效，群的时候没有使用chatUser表的数据
     //私聊群聊创建ChatUserDO的逻辑
-    public SocialuniChatUserDO(SocialuniChatDO chat, Integer userId) {
+    public SocialuniChatUserDO(SocialuniChatDO chat, Long userId) {
         this();
 //        this.chatId = chat.getId();
 //        this.userId = userId;
@@ -111,7 +111,7 @@ public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {
         this.unreadNum = 0;
     }
 
-    public SocialuniChatUserDO(SocialuniChatDO chat, Integer userId, Integer beUserId) {
+    public SocialuniChatUserDO(SocialuniChatDO chat, Long userId, Integer beUserId) {
         this(chat, userId);
         this.setBeUserId(beUserId);
     }
@@ -146,7 +146,7 @@ public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {
     }*/
 
     //创建私聊时，需要根据chat状态决定chatUser状态，有两种情况，直接开启和待开启，msg可删除时，则无需再使用lastcontent
-    /*public ChatUserDO(ChatDO chatDO, Integer userId, Integer receiveUserId) {
+    /*public ChatUserDO(ChatDO chatDO, Long userId, Integer receiveUserId) {
         this(chatDO, userId, receiveUserId, chatDO.getType());
         this.status = chatDO.getStatus();
         //只有支付开启的时候，直接在对方前台显示

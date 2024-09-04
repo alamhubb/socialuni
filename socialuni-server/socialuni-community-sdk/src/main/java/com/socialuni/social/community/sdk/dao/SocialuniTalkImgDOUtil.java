@@ -31,7 +31,7 @@ public class SocialuniTalkImgDOUtil {
         SocialuniTalkImgDOUtil.talkImgRepository = talkImgRepository;
     }
 
-    public static SocialuniTalkImgDO getTalkImgNotNull(Integer unionId) {
+    public static SocialuniTalkImgDO getTalkImgNotNull(Long unionId) {
         if (unionId == null) {
             throw new SocialParamsException("内容标识不能为空");
         }
@@ -44,7 +44,7 @@ public class SocialuniTalkImgDOUtil {
 
     public static List<SocialuniTalkImgDO> getTalkImgs(List<Integer> unionIds) {
         List<SocialuniTalkImgDO> list = new ArrayList<>();
-        for (Integer unionId : unionIds) {
+        for (Long unionId : unionIds) {
             list.add(SocialuniTalkImgDOUtil.getTalkImgNotNull(unionId));
         }
         return list;
@@ -58,7 +58,7 @@ public class SocialuniTalkImgDOUtil {
         List<SocialuniTalkImgDO> talkImgDOS = talkImgRepository.findUnionIdTop3ByTalkIdOrderByIdAsc(talkId);
         for (SocialuniTalkImgDO talkImgDO : talkImgDOS) {
             if (ObjectUtils.isEmpty(talkImgDO.getUnionId())) {
-                Integer unionId = SocialuniUnionIdFacede.createTalkImgUnionId();
+                Long unionId = SocialuniUnionIdFacede.createTalkImgUnionId();
                 talkImgDO.setUnionId(unionId);
                 SocialuniTalkImgDOUtil.saveTalkImgDO(talkImgDO);
             }

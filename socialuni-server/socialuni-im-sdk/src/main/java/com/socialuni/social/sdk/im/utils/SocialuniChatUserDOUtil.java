@@ -30,7 +30,7 @@ public class SocialuniChatUserDOUtil {
         SocialuniChatUserDOUtil.chatUserRepository = chatUserRepository;
     }
 
-    public static SocialuniChatUserDO findByChatIdAndUserId(Integer chatId, Integer userId) {
+    public static SocialuniChatUserDO findByChatIdAndUserId(Integer chatId, Long userId) {
         Integer chatUserId = chatUserRepository.findFirstByChatIdAndUserId(chatId, userId);
         if (chatUserId == null) {
             return null;
@@ -38,7 +38,7 @@ public class SocialuniChatUserDOUtil {
         return SocialuniChatUserDOUtil.findById(chatUserId);
     }
 
-    public static SocialuniChatUserDO findFirstByChatIdAndUserIdAndStatus(Integer chatId, Integer userId, String status) {
+    public static SocialuniChatUserDO findFirstByChatIdAndUserIdAndStatus(Integer chatId, Long userId, String status) {
         SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findByChatIdAndUserId(chatId, userId);
         if (status.equals(chatUserDO.getStatus())) {
             return chatUserDO;
@@ -46,7 +46,7 @@ public class SocialuniChatUserDOUtil {
         return null;
     }
 
-    public static SocialuniChatUserDO findByUserIdAndBeUserId(Integer userId, Integer beUserId) {
+    public static SocialuniChatUserDO findByUserIdAndBeUserId(Long userId, Integer beUserId) {
         Integer chatUserId = chatUserRepository.findFirstByUserIdAndBeUserId(userId, beUserId);
         if (chatUserId == null) {
             return null;
@@ -54,7 +54,7 @@ public class SocialuniChatUserDOUtil {
         return SocialuniChatUserDOUtil.findById(chatUserId);
     }
 
-    public static SocialuniChatUserDO findByUserIdAndBeUserIdNotNull(Integer userId, Integer beUserId) {
+    public static SocialuniChatUserDO findByUserIdAndBeUserIdNotNull(Long userId, Integer beUserId) {
         SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findByUserIdAndBeUserId(userId, beUserId);
         if (chatUserDO == null) {
             throw new SocialParamsException("会话信息错误100323");

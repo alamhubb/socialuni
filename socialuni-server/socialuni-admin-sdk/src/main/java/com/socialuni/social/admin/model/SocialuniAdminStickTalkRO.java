@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 public class SocialuniAdminStickTalkRO {
     private Integer id;
-    private Integer userId;
+    private Long userId;
     private String content;
     private Integer globalTop;
     private ReportUserVO user;

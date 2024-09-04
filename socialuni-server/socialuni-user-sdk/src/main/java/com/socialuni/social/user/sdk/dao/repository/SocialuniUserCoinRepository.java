@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SocialuniUserCoinRepository extends JpaRepository<SocialuniUserCoinDo, Integer> {
     @Cacheable(cacheNames = "userSocialCoinByUserId", key = "#userId")
-    SocialuniUserCoinDo findByUserId(Integer userId);
+    SocialuniUserCoinDo findByUserId(Long userId);
 
     @Caching(
             put = {@CachePut(cacheNames = "userSocialCoinByUserId", key = "#socialuniUserExpandDO.userId")}

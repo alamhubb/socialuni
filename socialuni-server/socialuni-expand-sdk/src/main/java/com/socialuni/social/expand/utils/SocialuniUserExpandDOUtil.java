@@ -21,12 +21,12 @@ public class SocialuniUserExpandDOUtil {
         SocialuniUserExpandDOUtil.socialuniUserExpandApi = socialuniUserExpandApi;
     }
 
-    public static SocialuniUserExpandDo getAllowNull(Integer userId) {
+    public static SocialuniUserExpandDo getAllowNull(Long userId) {
         SocialuniUserExpandDo SocialuniUserExpandDo = socialuniUserExpandApi.findByUserId(userId);
         return SocialuniUserExpandDo;
     }
 
-    public static SocialuniUserExpandDo getNotNull(Integer userId) {
+    public static SocialuniUserExpandDo getNotNull(Long userId) {
         SocialuniUserExpandDo SocialuniUserExpandDo = getAllowNull(userId);
         if (SocialuniUserExpandDo == null) {
             throw new SocialParamsException("未给用户扩展表数据");
@@ -34,7 +34,7 @@ public class SocialuniUserExpandDOUtil {
         return SocialuniUserExpandDo;
     }
 
-    public static SocialuniUserExpandDo getOrCreate(Integer userId) {
+    public static SocialuniUserExpandDo getOrCreate(Long userId) {
         SocialuniUserExpandDo socialuniUserExpandDo = getAllowNull(userId);
         if (socialuniUserExpandDo == null) {
             socialuniUserExpandDo = new SocialuniUserExpandDo();
@@ -46,7 +46,7 @@ public class SocialuniUserExpandDOUtil {
         return socialuniUserExpandDo;
     }
 
-    public static String getUserSchoolNameNotNull(Integer userId) {
+    public static String getUserSchoolNameNotNull(Long userId) {
         SocialuniUserExpandDo SocialuniUserExpandDo = SocialuniUserExpandDOUtil.getOrCreate(userId);
         if (StringUtils.isEmpty(SocialuniUserExpandDo.getSchoolName())) {
             throw new SocialParamsException("请设置校园名称");

@@ -12,7 +12,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface ThirdUserRepository extends JpaRepository<ThirdUserDO, Long> {
     @Cacheable(cacheNames = "findThreeUserByDevIdAndUserId", key = "#devId+'-'+#userId")
-    ThirdUserDO findByDevIdAndUserId(Integer devId, Integer userId);
+    ThirdUserDO findByDevIdAndUserId(Integer devId, Long userId);
 
 
     @Caching(

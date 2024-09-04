@@ -75,7 +75,7 @@ public class SocialMessageROFactory {
         this.isMine = true;
     }*/
 
-    /*public MessageVO(MessageDO messageDO, Integer userId, UserDO user) {
+    /*public MessageVO(MessageDO messageDO, Long userId, UserDO user) {
         this(messageDO, user.getUserId());
     }*/
 
@@ -115,7 +115,7 @@ public class SocialMessageROFactory {
 
     /*
     //根据chatUser判断了，不需要这个了
-    public static List<SocialMessageRO> messageDOToVOS(List<MessageDO> messageDOS, Integer userId) {
+    public static List<SocialMessageRO> messageDOToVOS(List<MessageDO> messageDOS, Long userId) {
         //翻转数组,因为查出来的是倒序的 (ChatUserDO chatUserDO) -> new ChatVO(chatUserDO, true)
         List<SocialMessageRO> messageVOS = messageDOS.stream().map((MessageDO msg) -> new MessageVO(msg, userId)).collect(Collectors.toList());
         Collections.reverse(messageVOS);
@@ -150,7 +150,7 @@ public class SocialMessageROFactory {
         this.isMine = true;
     }*//*
 
-    public MessageVO(MessageDO messageDO, Integer userId) {
+    public MessageVO(MessageDO messageDO, Long userId) {
         this(messageDO);
         //不为空判断
         if (!ObjectUtils.isEmpty(userId)) {
@@ -182,7 +182,7 @@ public class SocialMessageROFactory {
     }
 
     //未登录的消息
-    public static List<MessageVO> messageDOToVOS(List<MessageDO> messageDOS, Integer userId) {
+    public static List<MessageVO> messageDOToVOS(List<MessageDO> messageDOS, Long userId) {
         //翻转数组,因为查出来的是倒序的
         List<MessageVO> messageVOS = messageDOS.stream().map(messageDO -> new MessageVO(messageDO, userId)).collect(Collectors.toList());
         Collections.reverse(messageVOS);
@@ -191,7 +191,7 @@ public class SocialMessageROFactory {
 
     /*
     //根据chatUser判断了，不需要这个了
-    public static List<MessageVO> messageDOToVOS(List<MessageDO> messageDOS, Integer userId) {
+    public static List<MessageVO> messageDOToVOS(List<MessageDO> messageDOS, Long userId) {
         //翻转数组,因为查出来的是倒序的 (ChatUserDO chatUserDO) -> new ChatVO(chatUserDO, true)
         List<MessageVO> messageVOS = messageDOS.stream().map((MessageDO msg) -> new MessageVO(msg, userId)).collect(Collectors.toList());
         Collections.reverse(messageVOS);

@@ -90,7 +90,7 @@ public class SocialuniAdminPeiwanService {
 
 
         for (SocialuniPeiwanInfoRO peiwanInfoRO : peiwanInfoROS) {
-            Integer userId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(peiwanInfoRO.getUserId());
+            Long userId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(peiwanInfoRO.getUserId());
             SocialuniPeiwanInfoDO socialuniPeiwanInfoDO = SocialuniUserRepositoryFacede.findFirstByUserIdOrderByIdDesc(userId, SocialuniPeiwanInfoDO.class);
 
             socialuniPeiwanInfoDO = SocialuniPeiwanInfoDOFactory.createPeiwanDO(socialuniPeiwanInfoDO, peiwanInfoRO);
@@ -122,7 +122,7 @@ public class SocialuniAdminPeiwanService {
 
     @Async
     public ResultRO<Void> deletePeiwanImg(String imgId) {
-        Integer unionId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(imgId);
+        Long unionId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(imgId);
 
         SocialuniPeiwanInfoImgDO socialuniPeiwanInfoImgDO = SocialuniRepositoryFacade.findByUnionId(unionId, SocialuniPeiwanInfoImgDO.class);
 

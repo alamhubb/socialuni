@@ -51,7 +51,7 @@ public class SocialUserPlatformAccountDO extends SocialuniContentBaseDO implemen
         private String avatar;
         private String gender;
 
-        public SocialUserPlatformAccountDO(Integer userId) {
+        public SocialUserPlatformAccountDO(Long userId) {
                 super(userId);
         }
 }

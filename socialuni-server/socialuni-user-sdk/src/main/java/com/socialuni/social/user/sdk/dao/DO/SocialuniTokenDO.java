@@ -29,7 +29,7 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = true)
 public class SocialuniTokenDO extends SocialuniContentBaseDO implements Serializable {
         @Column(nullable = false, updatable = false)
-        private Integer userId;
+        private Long userId;
         @Column(nullable = false, updatable = false)
         private Integer devId;
 
@@ -39,7 +39,7 @@ public class SocialuniTokenDO extends SocialuniContentBaseDO implements Serializ
         @Column(nullable = false, updatable = false, columnDefinition = "timestamp default current_timestamp")
         private Date expiredTime;
 
-        public SocialuniTokenDO(Integer userId, String token) {
+        public SocialuniTokenDO(Long userId, String token) {
                 super(userId);
                 this.token = token;
                 this.expiredTime = new Date(new Date().getTime() + DateTimeType.quarter);

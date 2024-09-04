@@ -23,11 +23,11 @@ public interface ReportDetailRepository extends JpaRepository<ReportDetailDO, In
         return ReportDetailDOs;
     }
     //今天是否已经举报被审核了10个，不为待审核的有多少个今天
-    Integer countByUserIdAndStatusNotAndCreateTimeBetween(Integer userId, String status, Date startDate, Date endDate);
+    Integer countByUserIdAndStatusNotAndCreateTimeBetween(Long userId, String status, Date startDate, Date endDate);
 
-    Integer countByUserIdAndCreateTimeBetween(Integer userId, Date startDate, Date endDate);
+    Integer countByUserIdAndCreateTimeBetween(Long userId, Date startDate, Date endDate);
 
-    Integer countByUserIdAndReportId(Integer userId, ReportDO reportDO);
+    Integer countByUserIdAndReportId(Long userId, ReportDO reportDO);
 
     Integer countByReportId(Integer reportId);
 

@@ -80,7 +80,7 @@ public class SocialuniMessageService {
 
         String idContentType = socialuniUnionIdModler.getContentType();
 
-        Integer unionId = socialuniUnionIdModler.getUnionIdqqq();
+        Long unionId = socialuniUnionIdModler.getUnionIdqqq();
         //旧版本
         if (idContentType.equals(SocialuniContentType.user)) {
             //为私聊相关校验
@@ -129,7 +129,7 @@ public class SocialuniMessageService {
         //创建 chatUser 的逻辑，点击进入页面，会话页加一条
         //发送消息，还有添加好友成功
 
-        Integer unionId = null;
+        Long unionId = null;
 
         if (socialuniUnionIdModler == null) {
             SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();

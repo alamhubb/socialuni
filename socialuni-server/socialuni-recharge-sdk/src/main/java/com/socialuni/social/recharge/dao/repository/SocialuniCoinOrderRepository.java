@@ -13,7 +13,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface SocialuniCoinOrderRepository extends JpaRepository<SocialuniCoinOrderDO, Integer> {
 
     @Cacheable(cacheNames = "findFirstByUserIdAndDetailType", key = "#userId+'-'+#detailType")
-    SocialuniCoinOrderDO findFirstByUserIdAndDetailType(Integer userId, String detailType);
+    SocialuniCoinOrderDO findFirstByUserIdAndDetailType(Long userId, String detailType);
 
     //关注后用户缓存修改，一人+粉丝，一人+关注
     @Caching(

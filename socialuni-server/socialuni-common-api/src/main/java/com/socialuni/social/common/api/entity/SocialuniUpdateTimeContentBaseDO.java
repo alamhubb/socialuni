@@ -23,7 +23,7 @@ public class SocialuniUpdateTimeContentBaseDO extends SocialuniUserInfoBaseDO im
         this.updateTime = super.getCreateTime();
     }
 
-    public SocialuniUpdateTimeContentBaseDO(Integer userId) {
+    public SocialuniUpdateTimeContentBaseDO(Long userId) {
         super(userId);
         this.updateTime = super.getCreateTime();
     }

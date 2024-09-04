@@ -12,7 +12,7 @@ public class ThirdUserManage {
     @Resource
     private ThirdUserRepository thirdUserRepository;
 
-    public ThirdUserDO getOrCreate(Integer devId, Integer userId, String thirdUserId) {
+    public ThirdUserDO getOrCreate(Integer devId, Long userId, String thirdUserId) {
         //需要确认用户是否已经授权过，
         ThirdUserDO threeUserDO = thirdUserRepository.findByDevIdAndUserId(devId, userId);
         //如果已经授权过，则获取，如果没授权过则新创建，因为只生成一次threeUserId

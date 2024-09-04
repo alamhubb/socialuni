@@ -27,7 +27,7 @@ public class JusticeValueOrderDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer userId;
+    private Long userId;
     /**
      * 正义分
      */

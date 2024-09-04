@@ -9,7 +9,7 @@ public class TalkEO {
     private Integer id;
 
     private Date updateTime;
-    private Integer userId;
+    private Long userId;
 
     private String content;
 

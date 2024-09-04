@@ -24,7 +24,7 @@ public class SocialUserFansDetailDo extends SocialuniUserInfoBaseDO {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(nullable = false)
-    private Integer userId;
+    private Long userId;
     @Column(nullable = false)
     private Integer fansNum;
     @Column(nullable = false)

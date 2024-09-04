@@ -32,7 +32,7 @@ public class ThirdUserAuthDO implements Serializable {
     private Integer authDevId;
     //授权的用户id
     @Column(nullable = false)
-    private Integer userId;
+    private Long userId;
     //现在拥有的权限类型
     @Column(nullable = false)
     private String authType;

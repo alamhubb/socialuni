@@ -21,12 +21,12 @@ public class SocialuniUserFollowRedis {
     SocialuniFollowRepository followRepository;
 
     @Cacheable(cacheNames = CommonRedisKey.queryUserFollowUserIds, key = "#userId")
-    public List<Integer> queryUserFollowUserIds(Integer userId) {
+    public List<Integer> queryUserFollowUserIds(Long userId) {
         return followRepository.queryUserFollowUserIds(userId, SocialuniCommonStatus.enable);
     }
 
     //    @Cacheable(cacheNames = CommonRedisKey.queryUserAndBeUserFollow, key = "#userId+'-'+#beUserId")
-    public SocialuniUserFollowDO findFirstByUserIdAndBeUserId(Integer userId, Integer beUserId) {
+    public SocialuniUserFollowDO findFirstByUserIdAndBeUserId(Long userId, Integer beUserId) {
 //        return followRepository.findFirstByUserIdAndBeUserId(userId, beUserId);
         return SocialuniUserContactRepositoryFacede.findByUserIdAndBeUserId(userId, beUserId, SocialuniUserFollowDO.class);
     }

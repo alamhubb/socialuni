@@ -24,7 +24,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class SocialuniDeployProjectDO extends SocialuniContentBaseDO {
     @Column(nullable = false, updatable = false)
-    private Integer userId;
+    private Long userId;
     @Column(nullable = false)
     private String projectName;
     //入口文件

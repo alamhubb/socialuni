@@ -20,7 +20,7 @@ public interface DevAccountRepository extends JpaRepository<DevAccountDo, Intege
     DevAccountModel findOneById(Integer id);
 
     @Cacheable(cacheNames = "getDevAccountByUserId", key = "#userId")
-    DevAccountModel findFirstByUserId(Integer userId);
+    DevAccountModel findFirstByUserId(Long userId);
 
     //直接携带秘钥访问
     @Cacheable(cacheNames = "getDevAccountBySecretKey", key = "#secretKey")

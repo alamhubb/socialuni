@@ -59,7 +59,7 @@ public class SocialuniUserUtil {
         if (mineUser == null) {
             return null;
         }
-        Integer userId = mineUser.getUnionId();
+        Long userId = mineUser.getUnionId();
         return userId;
     }
 
@@ -93,7 +93,7 @@ public class SocialuniUserUtil {
     }
 
     public static SocialuniUserDo getMineUserAllowNull() {
-        Integer userId = getMineUserIdAllowNull();
+        Long userId = getMineUserIdAllowNull();
         if (userId == null) {
             return null;
         }
@@ -130,7 +130,7 @@ public class SocialuniUserUtil {
         return SocialuniUserUtil.getUserPhoneNum(userDO.getUnionId());
     }
 
-    public static String getUserPhoneNum(Integer userId) {
+    public static String getUserPhoneNum(Long userId) {
         SocialUserPhoneDo SocialUserPhoneDo = SocialuniUserUtil.getUserPhoneDO(userId);
         if (SocialUserPhoneDo == null) {
             return null;
@@ -138,7 +138,7 @@ public class SocialuniUserUtil {
         return SocialUserPhoneDo.getPhoneNum();
     }
 
-    public static SocialUserPhoneDo getUserPhoneNumDO(Integer userId) {
+    public static SocialUserPhoneDo getUserPhoneNumDO(Long userId) {
         SocialUserPhoneDo SocialUserPhoneDo = SocialuniUserUtil.getUserPhoneDO(userId);
         if (SocialUserPhoneDo == null) {
             return null;
@@ -146,7 +146,7 @@ public class SocialuniUserUtil {
         return SocialUserPhoneDo;
     }
 
-    public static SocialUserPhoneDo getUserPhoneDO(Integer userId) {
+    public static SocialUserPhoneDo getUserPhoneDO(Long userId) {
         SocialUserPhoneDo SocialUserPhoneDo = socialUserPhoneRedis.findUserPhoneByUserId(userId);
         return SocialUserPhoneDo;
     }
@@ -160,7 +160,7 @@ public class SocialuniUserUtil {
         return socialuniUserDo;
     }
 
-    public static SocialUserViolationDo getUserViolationDO(Integer userId) {
+    public static SocialUserViolationDo getUserViolationDO(Long userId) {
         SocialUserViolationDo SocialUserViolationDo = socialUserViolationApi.findOneByUserId(userId);
         return SocialUserViolationDo;
     }
@@ -195,14 +195,14 @@ public class SocialuniUserUtil {
         return SocialuniUserUtil.getUserNotNull(id);
     }
 
-    public static SocialuniUserDo getAllowNull(Integer userId) {
+    public static SocialuniUserDo getAllowNull(Long userId) {
         if (userId == null) {
             return null;
         }
         return userApi.findOneByUnionId(userId);
     }
 
-    public static SocialuniUserDo getUserNotNull(Integer userId) {
+    public static SocialuniUserDo getUserNotNull(Long userId) {
         if (userId == null) {
             throw new SocialNullUserException();
         }
@@ -213,7 +213,7 @@ public class SocialuniUserUtil {
         return socialUserDO;
     }
 //
-//    public static SocialuniUserDo getNotNull(Integer userId) {
+//    public static SocialuniUserDo getNotNull(Long userId) {
 //        if (userId == null) {
 //            throw new SocialParamsException("用户id异常");
 //        }
@@ -224,7 +224,7 @@ public class SocialuniUserUtil {
 //        return socialuniUserDo;
 //    }
 
-    public static boolean isMine(SocialuniUserDo mineUser, Integer userId) {
+    public static boolean isMine(SocialuniUserDo mineUser, Long userId) {
         if (mineUser == null) {
             return false;
         }

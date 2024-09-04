@@ -37,7 +37,7 @@ public class AdminLoginService {
     public ResultRO<SocialLoginRO<SocialuniUserRO>> secretKeyLogin(DevAccountInterface.DevAccountQueryQO devAccountQueryQO) {
         DevAccountModel devAccountModel = devAccountApi.findOneBySecretKey(devAccountQueryQO.getSecretKey());
 
-        Integer userId = devAccountModel.getUserId();
+        Long userId = devAccountModel.getUserId();
 
         SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getUserNotNull(userId);
 

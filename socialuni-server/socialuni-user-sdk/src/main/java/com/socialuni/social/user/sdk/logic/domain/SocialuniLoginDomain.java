@@ -85,7 +85,7 @@ public class SocialuniLoginDomain {
             throw new SocialSystemException("手机号未注册，却执行了密码登录");
         }
 
-        Integer userId = socialUserPhoneDo.getUserId();
+        Long userId = socialUserPhoneDo.getUserId();
 
         SocialUserPasswordDO socialUserPasswordDO = SocialuniUserRepositoryFacede.findFirstByUserIdOrderByIdDesc(userId, SocialUserPasswordDO.class);
 
@@ -153,7 +153,7 @@ public class SocialuniLoginDomain {
         //校验用户没有则创建
         SocialuniUserDo mineUser = socialPhoneLoginEntity.phoneLogin(socialPhoneNumQO);
 
-        Integer userId = mineUser.getUserId();
+        Long userId = mineUser.getUserId();
 
         String sha512Password = PasswordUtil.sha512Encode(password);
 

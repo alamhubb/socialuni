@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 public class ReportContentVO {
     private Integer id;
-    private Integer userId;
+    private Long userId;
     private String content;
 //    private ReportUserVO user;
 //    private String violateType;

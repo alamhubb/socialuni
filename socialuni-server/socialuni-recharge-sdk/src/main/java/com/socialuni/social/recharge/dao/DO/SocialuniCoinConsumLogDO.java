@@ -24,12 +24,12 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = true)
 public class SocialuniCoinConsumLogDO extends SocialuniContentBaseDO implements Serializable {
     @Column(nullable = false)
-    private Integer userId;
+    private Long userId;
 
     @Column(nullable = false)
     private Integer beUserId;
 
-    public SocialuniCoinConsumLogDO(Integer userId, Integer beUserId) {
+    public SocialuniCoinConsumLogDO(Long userId, Integer beUserId) {
         this.userId = userId;
         this.beUserId = beUserId;
     }

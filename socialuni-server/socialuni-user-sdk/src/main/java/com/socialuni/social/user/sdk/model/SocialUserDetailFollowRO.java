@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class SocialUserDetailFollowRO {
-    private Integer userId;
+    private Long userId;
     private Integer fansNum;
     private Integer followNum;
 }

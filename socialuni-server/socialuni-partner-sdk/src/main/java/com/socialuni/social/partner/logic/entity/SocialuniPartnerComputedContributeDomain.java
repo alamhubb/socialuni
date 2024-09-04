@@ -41,7 +41,7 @@ public class SocialuniPartnerComputedContributeDomain {
         Map<Integer, Integer> userOnlineMap = new HashMap<>();
 
         for (SocialuniPartnerUserOnlineDO socialuniUserOnlineDO : socialuniUserOnlineDOS) {
-            Integer userId = socialuniUserOnlineDO.getUserId();
+            Long userId = socialuniUserOnlineDO.getUserId();
 
             Integer userOnlineMinute = userOnlineMap.get(userId);
 
@@ -76,7 +76,7 @@ public class SocialuniPartnerComputedContributeDomain {
 
         List<SocialuniPartnerUserContributeDO> userValueList = new ArrayList<>();
 
-        for (Integer userId : userOnlineMap.keySet()) {
+        for (Long userId : userOnlineMap.keySet()) {
             Integer userOnlineMinute = userOnlineMap.get(userId);
 
             SocialuniPartnerUserContributeDO socialuniPartnerUserContributeDO = socialuniPartnerUserContributeRepository.findFirstByUserIdAndTodayDate(userId, today);

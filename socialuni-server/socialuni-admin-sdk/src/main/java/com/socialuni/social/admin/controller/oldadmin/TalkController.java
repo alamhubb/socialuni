@@ -29,7 +29,7 @@ public class TalkController {
     }
 
     @PostMapping("queryUserTalks")
-    public ResultVO<List<ReportContentVO>> queryUserTalks(Integer userId) {
+    public ResultVO<List<ReportContentVO>> queryUserTalks(Long userId) {
         SocialUserDO userDO = new SocialUserDO();
         userDO.setId(userId);
         List<SocialTalkDO> talks = talkRepository.findTop20ByUserIdOrderByIdDesc(userDO.getId());

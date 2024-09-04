@@ -24,7 +24,7 @@ public class SocialuniUserContactBaseDO extends SocialuniContentBaseDO implement
         super(socialuniUserContactBaseDO.getUserId());
         this.beUserId = socialuniUserContactBaseDO.getBeUserId();
     }
-    public SocialuniUserContactBaseDO(Integer userId, Integer beUserId) {
+    public SocialuniUserContactBaseDO(Long userId, Integer beUserId) {
         super(userId);
         this.beUserId = beUserId;
     }

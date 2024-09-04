@@ -27,7 +27,7 @@ public class MessageUserVO {
     public MessageUserVO() {
     }
 
-    /*public MessageUserVO(Integer userId) {
+    /*public MessageUserVO(Long userId) {
         this.id = userId;
         Optional<UserDO> optionalUserDO = UserUtils.getUserOpt(userId);
         if (optionalUserDO.isPresent()) {

@@ -31,9 +31,9 @@ public class SocialuniTalkHasUnderageImgAuditDO extends SocialuniUnionContentBas
     @Column(nullable = false)
     private Integer devId;
     @Column(nullable = false)
-    private Integer userId;
+    private Long userId;
 
-    public SocialuniTalkHasUnderageImgAuditDO(Integer talkId, Integer userId) {
+    public SocialuniTalkHasUnderageImgAuditDO(Integer talkId, Long userId) {
         this.setStatus(ContentStatus.preAudit);
         this.talkId = talkId;
         this.userId = userId;

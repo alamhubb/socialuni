@@ -51,7 +51,7 @@ public class SocialuniUserFollowInfoUtil {
         return userRO;
     }
 
-    public static SocialuniUserFollowRelationInfoRO getUserFollowRelationInfo(Integer userId, Integer mineUserId) {
+    public static SocialuniUserFollowRelationInfoRO getUserFollowRelationInfo(Long userId, Integer mineUserId) {
         SocialuniUserFollowRelationInfoRO userRO = new SocialuniUserFollowRelationInfoRO();
 
         userRO.setHasFollowed(false);
@@ -75,7 +75,7 @@ public class SocialuniUserFollowInfoUtil {
     }
 
 
-    public static boolean usersIsFriend(Integer userId, Integer mineUserId) {
+    public static boolean usersIsFriend(Long userId, Integer mineUserId) {
         SocialuniUserFollowRelationInfoRO socialuniUserFollowRelationInfoRO = SocialuniUserFollowInfoUtil.getUserFollowRelationInfo(userId, mineUserId);
 
         return socialuniUserFollowRelationInfoRO.getHasBeFollowed() && socialuniUserFollowRelationInfoRO.getHasFollowed();

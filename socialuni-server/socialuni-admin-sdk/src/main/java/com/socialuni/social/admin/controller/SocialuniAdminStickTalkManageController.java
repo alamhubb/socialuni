@@ -24,7 +24,7 @@ public class SocialuniAdminStickTalkManageController {
 
     @GetMapping("querySystemUserTalks")
     public List<SocialuniAdminStickTalkRO> querySystemManageTalks() {
-        Integer userId = DevAccountFacade.getDevUserId();
+        Long userId = DevAccountFacade.getDevUserId();
 
         List<Integer> talkIds = talkInterface.findTop10ByUserIdAndStatusOrderByGlobalTopDescIdDesc(userId, SocialuniCommonStatus.enable);
 
@@ -44,7 +44,7 @@ public class SocialuniAdminStickTalkManageController {
         List<DevAccountModel> devAccountModels = (List<DevAccountModel>) devAccountInterface.findAll();
 
         for (DevAccountModel devAccountModel : devAccountModels) {
-            Integer userId = devAccountModel.getUserId();
+            Long userId = devAccountModel.getUserId();
             if (userId == null) {
                 RequestUtil.setAttribute(SocialFeignHeaderName.socialuniSecretKey, devAccountModel.getSecretKey());
                 String phoneNum = devAccountModel.getPhoneNum();

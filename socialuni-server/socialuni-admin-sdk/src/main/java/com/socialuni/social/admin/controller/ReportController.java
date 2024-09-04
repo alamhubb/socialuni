@@ -80,7 +80,7 @@ public class ReportController {
     }
 
     @PostMapping("queryUserReports")
-    public ResultRO<List<ReportRO>> queryReports(Integer userId) {
+    public ResultRO<List<ReportRO>> queryReports(Long userId) {
         //展示用户的前多少条动态，评论，
 
         /*SocialuniUserDo user = new SocialuniUserDo();

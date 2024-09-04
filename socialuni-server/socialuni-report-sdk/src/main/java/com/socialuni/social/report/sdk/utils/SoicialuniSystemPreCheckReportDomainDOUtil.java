@@ -148,7 +148,7 @@ public class SoicialuniSystemPreCheckReportDomainDOUtil {
             } else if (socialuniContentBO.getContentType().equals(SocialuniContentType.userImg)) {
                 //user预审核有什么用？,缺少相关逻辑所以暂时注释掉
             *//*SocialuniUserImgDO socialUserImgDO = (SocialuniUserImgDO) socialUnionContentBaseDO;
-            Integer userId = socialUserImgDO.getUserId();
+            Long userId = socialUserImgDO.getUserId();
             SocialuniUserDo userDO = SocialuniUserUtil.getUserNotNull(userId);
             userDO.setStatus(ContentStatus.preAudit);
             userDO.setUpdateTime(new Date());

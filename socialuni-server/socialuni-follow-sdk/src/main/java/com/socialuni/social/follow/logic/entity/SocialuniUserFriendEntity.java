@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 @Service
 public class SocialuniUserFriendEntity {
 
-    public boolean checkUsersIsFriend(Integer userId, Integer beUserId) {
+    public boolean checkUsersIsFriend(Long userId, Integer beUserId) {
         return
                 false;
     }

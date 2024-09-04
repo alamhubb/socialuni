@@ -100,7 +100,7 @@ public class UploadFileController {
         if (socialuniDeployProjectDO == null) {
             return true;
         }
-        Integer userId = socialuniDeployProjectDO.getUserId();
+        Long userId = socialuniDeployProjectDO.getUserId();
         return userId != null && userId.equals(mineUserId);
     }
 

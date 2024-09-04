@@ -28,8 +28,8 @@ import java.io.Serializable;
 )
 @EqualsAndHashCode(callSuper = true)
 public class SocialUserIdentityAuthDO extends SocialuniContentBaseDO implements Serializable {
-    private Integer userId;
-    private Integer userIdentityImgId;
+    private Long userId;
+    private Long userIdentityImgId;
     private Integer age;
     private String birth;
     private String name;

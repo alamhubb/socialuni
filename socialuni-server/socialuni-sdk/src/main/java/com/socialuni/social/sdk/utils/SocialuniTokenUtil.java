@@ -44,7 +44,7 @@ public class SocialuniTokenUtil {
         HttpServletRequest request = RequestUtil.getRequest();
         String dataSocialuniId = request.getHeader(SocialFeignHeaderName.dataOriginalSocialuniId);
         if (SocialTokenFacade.isSuccess(dataSocialuniId)) {
-            Integer userId = Integer.parseInt(dataSocialuniId);
+            Long userId = Integer.parseInt(dataSocialuniId);
             return userId;
         }
 //        return SocialTokenUtil.getSocialuniToken();

@@ -36,7 +36,7 @@ public class SocialUserFansDetailManage {
     }
 
     @Async
-    public void beUserFansNumAdd(Integer userId) {
+    public void beUserFansNumAdd(Long userId) {
         SocialUserFansDetailDo userFollow = userFansDetailRedis.findUserFansDetailByUserId(userId);
         userFollow.setFansNum(userFollow.getFansNum() + 1);
         userFansDetailRedis.save(userFollow);
@@ -50,7 +50,7 @@ public class SocialUserFansDetailManage {
     }
 
     @Async
-    public void beUserFansNumSub(Integer userId) {
+    public void beUserFansNumSub(Long userId) {
         SocialUserFansDetailDo userFollow = userFansDetailRedis.findUserFansDetailByUserId(userId);
         userFollow.setFansNum(userFollow.getFansNum() - 1);
         userFansDetailRedis.save(userFollow);

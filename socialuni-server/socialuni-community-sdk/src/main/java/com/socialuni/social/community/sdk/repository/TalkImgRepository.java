@@ -28,9 +28,9 @@ public interface TalkImgRepository extends JpaRepository<SocialuniTalkImgDO, Int
     List<SocialuniTalkImgDO> findUnionIdTop3ByTalkIdOrderByIdAsc(Integer talkId);
 
     @Cacheable(cacheNames = "getTalkImgByUnionId", key = "#unionId")
-    SocialuniTalkImgDO findOneByUnionId(Integer unionId);
+    SocialuniTalkImgDO findOneByUnionId(Long unionId);
 
-    SocialuniUnionContentBaseDO findOneByUnionIdAndStatus(Integer unionId, String status);
+    SocialuniUnionContentBaseDO findOneByUnionIdAndStatus(Long unionId, String status);
 
     //获取talkImg
     SocialuniTalkImgDO findFirstBySrc(String imgUlr);

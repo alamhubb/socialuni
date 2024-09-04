@@ -20,7 +20,7 @@ public class SocialUserPhoneRedis {
     }
 
     @Cacheable(cacheNames = CommonRedisKey.findUserPhoneByUserId, key = "#userId")
-    public SocialUserPhoneDo findUserPhoneByUserId(Integer userId) {
+    public SocialUserPhoneDo findUserPhoneByUserId(Long userId) {
 //        return socialUserPhoneRepository.findByUserIdAndStatus(userId, CommonStatus.enable);
         return socialUserPhoneApi.findByUserId(userId);
     }

@@ -44,7 +44,7 @@ public class SocialuniUnionIdCache implements SocialuniUnionIdInterface {
 
     @Override
     @Cacheable(cacheNames = "getUnionIdById", key = "#unionId")
-    public SocialuniUnionIdDo findById(Integer unionId) {
+    public SocialuniUnionIdDo findById(Long unionId) {
         return uniContentUnionIdRepository.findById(unionId).orElse(null);
     }
 
@@ -60,7 +60,7 @@ public class SocialuniUnionIdCache implements SocialuniUnionIdInterface {
     }
 
     @Override
-    public List<Integer> findAllIdsByContentType(String contentTyp) {
+    public List<Integer> findAllUnionIdsByContentType(String contentTyp) {
         return uniContentUnionIdRepository.findAllIdsByContentType(contentTyp);
     }
 }

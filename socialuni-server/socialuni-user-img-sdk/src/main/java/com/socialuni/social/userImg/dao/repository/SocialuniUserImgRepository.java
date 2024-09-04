@@ -12,15 +12,15 @@ import java.util.List;
 
 public interface SocialuniUserImgRepository extends JpaRepository<SocialuniUserImgDo, Integer> {
     @Cacheable(cacheNames = "getUserImgByUnionId", key = "#unionId")
-    SocialuniUserImgDo findOneByUnionId(Integer unionId);
+    SocialuniUserImgDo findOneByUnionId(Long unionId);
 
     @Cacheable(cacheNames = "getUserImgUnionIdsByUserIdTop6", key = "#userId")
     @Query(nativeQuery = true, value = "select t.union_id from s_user_img t where t.user_id =:userId and t.status in (:status) order by t.create_time desc limit 6")
-    List<Integer> findUnionIdTop6ByUserIdAndStatusInOrderByCreateTimeDesc(Integer userId, List<String> status);
+    List<Integer> findUnionIdTop6ByUserIdAndStatusInOrderByCreateTimeDesc(Long userId, List<String> status);
 
     @Cacheable(cacheNames = "getUserImgUnionIdsByUserIdTop50", key = "#userId")
     @Query(nativeQuery = true, value = "select t.union_id from s_user_img t where t.user_id =:userId and t.status in (:status) order by t.create_time desc limit 50")
-    List<Integer> findUnionIdTop50ByUserIdAndStatusInOrderByCreateTimeDesc(Integer userId, List<String> status);
+    List<Integer> findUnionIdTop50ByUserIdAndStatusInOrderByCreateTimeDesc(Long userId, List<String> status);
 
     @Caching(
             evict = {
@@ -33,13 +33,13 @@ public interface SocialuniUserImgRepository extends JpaRepository<SocialuniUserI
         return this.save(userImgDO);
     }
 
-    SocialuniUserImgDo findOneByUnionIdAndStatus(Integer unionId, String status);
+    SocialuniUserImgDo findOneByUnionIdAndStatus(Long unionId, String status);
 
     List<SocialuniUserImgDo> findAllByUnionIdIsNull();
 
-    SocialuniUserImgDo getUserImgByUserIdAndSrc(Integer userId, String src);
+    SocialuniUserImgDo getUserImgByUserIdAndSrc(Long userId, String src);
 
-    SocialuniUserImgDo getUserImgByUserIdAndUnionId(Integer userId, Integer unionId);
+    SocialuniUserImgDo getUserImgByUserIdAndUnionId(Long userId, Long unionId);
 
     //获取talkImg
     SocialuniUserImgDo findFirstBySrc(String imgUlr);

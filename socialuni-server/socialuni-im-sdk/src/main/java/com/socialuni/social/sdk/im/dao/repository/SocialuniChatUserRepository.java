@@ -27,24 +27,24 @@ public interface SocialuniChatUserRepository extends JpaRepository<SocialuniChat
     //根据chat状态，chatuser状态，置顶倒序，置顶等级升序，时间倒序
 /*
     @Query("select ChatUserDO from ChatUserDO u,ChatDO where Chatu.chatId=ChatDO.id and ChatDO.type not in (:chatTypes) and ChatDO.status =:Status and Chatu.userId=:userId and Chatu.status =:status")
-    List<ChatUserDO> findByChatTypeNotInAndStatusAndUserIdAndStatusOrderByTopFlagDescChatTopLevelAscUpdateTimeDesc(List<String> chatTypes, String Status, Integer userId, String status);
+    List<ChatUserDO> findByChatTypeNotInAndStatusAndUserIdAndStatusOrderByTopFlagDescChatTopLevelAscUpdateTimeDesc(List<String> chatTypes, String Status, Long userId, String status);
 */
 
 
 
-//    SocialuniChatUserDO findFirstByStatusAndUserIdAndBeUserId(String Status, Integer userId, Integer BeUserId);
+//    SocialuniChatUserDO findFirstByStatusAndUserIdAndBeUserId(String Status, Long userId, Integer BeUserId);
 
 //    两种，群聊是 chatId+userId是唯一标识，  私聊的话呢，是两个userId为唯一标识
     @Cacheable(cacheNames = ChatUserRedisKey.findFirstByChatIdAndUserId, key = "#chatId+'-'+#userId")
     @Query("select s.id from SocialuniChatUserDO s where s.chatId =:chatId and s.userId =:userId")
-    Integer findFirstByChatIdAndUserId(Integer chatId, Integer userId);
+    Integer findFirstByChatIdAndUserId(Integer chatId, Long userId);
 
     @Cacheable(cacheNames = ChatUserRedisKey.findFirstByUserIdAndBeUserId, key = "#userId+'-'+#beUserId")
     @Query("select s.id from SocialuniChatUserDO s where s.userId =:userId and s.beUserId =:beUserId")
-    Integer findFirstByUserIdAndBeUserId(Integer userId, Integer beUserId);
+    Integer findFirstByUserIdAndBeUserId(Long userId, Integer beUserId);
 
     //只有发送消息时，才需要使用这个，校验状态，其他情况不需要
-    SocialuniChatUserDO findFirstByChatIdAndUserIdAndStatus(Integer chatId, Integer userId, String Status);
+    SocialuniChatUserDO findFirstByChatIdAndUserIdAndStatus(Integer chatId, Long userId, String Status);
 
 
     //只有发送消息时，才需要使用这个，校验状态，其他情况不需要
@@ -92,7 +92,7 @@ public interface SocialuniChatUserRepository extends JpaRepository<SocialuniChat
     //先不使用chat状态，查询user下的chatuser,根据topLevel倒序，topflag倒序，更新时间倒序
     @Cacheable(cacheNames = ChatUserRedisKey.findByUserIdAndStatusOrderByUpdateTimeDesc, key = "#userId")
     @Query("select s.id from SocialuniChatUserDO s where s.userId =:userId and s.status =:status order by s.updateTime desc")
-    List<Integer> findByUserIdAndStatusOrderByUpdateTimeDesc(Integer userId,String status);
+    List<Integer> findByUserIdAndStatusOrderByUpdateTimeDesc(Long userId,String status);
 
 
     @Query(value = "SELECT s.id FROM SocialuniChatUserDO s where s.id in (:chatUserIds) and ((s.updateTime<:queryTime) or (:queryTime is null)) order by s.updateTime desc")
@@ -101,5 +101,5 @@ public interface SocialuniChatUserRepository extends JpaRepository<SocialuniChat
             @Param("queryTime") Date queryTime,
             Pageable pageable);
 
-    List<SocialuniChatUserDO> findByStatusAndUserIdAndFrontShowTrueOrderByTopFlagDescTopFlagDescUpdateTimeDesc(String Status, Integer userId);
+    List<SocialuniChatUserDO> findByStatusAndUserIdAndFrontShowTrueOrderByTopFlagDescTopFlagDescUpdateTimeDesc(String Status, Long userId);
 }

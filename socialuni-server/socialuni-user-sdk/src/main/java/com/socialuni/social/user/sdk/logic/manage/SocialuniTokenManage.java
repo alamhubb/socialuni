@@ -15,13 +15,13 @@ public class SocialuniTokenManage {
     @Resource
     SocialuniCommonTokenRepository commonTokenRepository;
 
-    public SocialuniTokenDO create(Integer userId) {
+    public SocialuniTokenDO create(Long userId) {
         String token = SocialTokenFacade.generateTokenByUserId(userId);
         SocialuniTokenDO commonUserTokenDO = this.create(userId, token);
         return commonUserTokenDO;
     }
 
-    public SocialuniTokenDO create(Integer userId, String token) {
+    public SocialuniTokenDO create(Long userId, String token) {
         SocialuniTokenDO commonUserTokenDO = new SocialuniTokenDO();
         commonUserTokenDO.setToken(token);
         commonUserTokenDO.setUserId(userId);

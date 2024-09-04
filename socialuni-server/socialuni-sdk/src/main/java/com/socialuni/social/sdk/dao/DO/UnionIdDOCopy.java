@@ -37,7 +37,7 @@ public class UnionIdDOCopy implements Serializable {
     //开发者id
     private Integer devId;
     //用户id，分配给哪个用户的
-    private Integer userId;
+    private Long userId;
 
     //启用，还是失效
     private String status;

@@ -12,7 +12,7 @@ public class SocialUserViolationEntity {
     @Resource
     private SocialUserViolationRepository socialUserViolationApi;
 
-    public SocialUserViolationDo getOrCreateViolationDO(Integer userId) {
+    public SocialUserViolationDo getOrCreateViolationDO(Long userId) {
         SocialUserViolationDo SocialUserViolationDo = SocialuniUserUtil.getUserViolationDO(userId);
         if (SocialUserViolationDo == null) {
             SocialUserViolationDo = socialUserViolationApi.savePut(new SocialUserViolationDo(userId));

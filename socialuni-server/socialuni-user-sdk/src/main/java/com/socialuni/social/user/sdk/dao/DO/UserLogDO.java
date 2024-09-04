@@ -20,7 +20,7 @@ public class UserLogDO {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     //邀请你的用户
-    private Integer userId;
+    private Long userId;
     private Date createTime;
     //日志记录内容
     private String content;

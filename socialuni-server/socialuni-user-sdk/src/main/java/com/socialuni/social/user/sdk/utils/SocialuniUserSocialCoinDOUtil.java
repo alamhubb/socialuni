@@ -19,12 +19,12 @@ public class SocialuniUserSocialCoinDOUtil {
     }
 
 
-    public static SocialuniUserCoinDo getAllowNull(Integer userId) {
+    public static SocialuniUserCoinDo getAllowNull(Long userId) {
         SocialuniUserCoinDo socialuniUserCoinDo = socialuniUserSocialCoinApi.findByUserId(userId);
         return socialuniUserCoinDo;
     }
 
-    public static SocialuniUserCoinDo getNotNull(Integer userId) {
+    public static SocialuniUserCoinDo getNotNull(Long userId) {
         SocialuniUserCoinDo socialuniUserCoinDo = getAllowNull(userId);
         if (socialuniUserCoinDo == null) {
             throw new SocialParamsException("未给用户创建金币表数据");
@@ -40,7 +40,7 @@ public class SocialuniUserSocialCoinDOUtil {
         return socialuniUserSocialCoinApi.savePut(socialuniUserExpandDO);
     }
 
-    public static SocialuniUserCoinDo getOrCreate(Integer userId) {
+    public static SocialuniUserCoinDo getOrCreate(Long userId) {
         SocialuniUserCoinDo socialuniUserCoinDo = getAllowNull(userId);
         if (socialuniUserCoinDo == null) {
             socialuniUserCoinDo = new SocialuniUserCoinDo();

@@ -66,11 +66,11 @@ public class SocialuniChatUserDOFactory {
         return null;
     }
 
-    public static SocialuniChatUserDO getChatUserDO(Integer userId, Integer beUserId) {
+    public static SocialuniChatUserDO getChatUserDO(Long userId, Integer beUserId) {
         return SocialuniChatUserDOUtil.findByChatIdAndUserId(userId, beUserId);
     }
 
-    public static List<SocialuniChatUserDO> getOrCreateChatUsersBySingleSendMsg(Integer userId, Integer beUserId) {
+    public static List<SocialuniChatUserDO> getOrCreateChatUsersBySingleSendMsg(Long userId, Integer beUserId) {
         SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findByChatIdAndUserId(userId, beUserId);
         SocialuniChatUserDO beChatUserDO = SocialuniChatUserDOUtil.findByChatIdAndUserId(beUserId, userId);
         if (chatUserDO == null) {
@@ -85,7 +85,7 @@ public class SocialuniChatUserDOFactory {
         return Arrays.asList(chatUserDO);
     }
 
-    public static List<SocialuniChatUserDO> createSocialuniChatUserDOS(Integer userId, Integer beUserId) {
+    public static List<SocialuniChatUserDO> createSocialuniChatUserDOS(Long userId, Integer beUserId) {
         SocialuniChatUserDO chatUserDO;
         SocialuniChatUserDO beChatUserDO;
         //会话不存在则创建
@@ -103,7 +103,7 @@ public class SocialuniChatUserDOFactory {
         return Arrays.asList(chatUserDO, chatUserDO);
     }
 
-    public static SocialuniChatUserDO getOrCreateChatUserBySingleReceiveMsg(SocialuniChatDO chatDO, Integer userId, Integer beUserId) {
+    public static SocialuniChatUserDO getOrCreateChatUserBySingleReceiveMsg(SocialuniChatDO chatDO, Long userId, Integer beUserId) {
         SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findByChatIdAndUserId(userId, beUserId);
         if (chatUserDO == null) {
             //会话不存在则创建
@@ -114,7 +114,7 @@ public class SocialuniChatUserDOFactory {
         return chatUserDO;
     }
 
-    public static SocialuniChatUserDO createGroupChatUser(SocialuniChatDO chatDO, Integer userId) {
+    public static SocialuniChatUserDO createGroupChatUser(SocialuniChatDO chatDO, Long userId) {
         //会话不存在则创建
         SocialuniChatUserDO chatUserDO = new SocialuniChatUserDO(chatDO, userId);
 
@@ -129,7 +129,7 @@ public class SocialuniChatUserDOFactory {
         return chatUserDO;
     }
 
-    public static SocialuniChatUserDO createUserPersonalChatUser(SocialuniChatDO chatDO, Integer userId) {
+    public static SocialuniChatUserDO createUserPersonalChatUser(SocialuniChatDO chatDO, Long userId) {
         //会话不存在则创建
         SocialuniChatUserDO chatUserDO = new SocialuniChatUserDO(chatDO, userId);
 

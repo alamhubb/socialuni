@@ -17,7 +17,7 @@ public class UserFansDetailRedis {
     SocialUserFansDetailRepository socialUserFansDetailApi;
 
     @Cacheable(cacheNames = CommonRedisKey.findUserFansDetailByUserId, unless = "#result == null")
-    public SocialUserFansDetailDo findUserFansDetailByUserId(Integer userId) {
+    public SocialUserFansDetailDo findUserFansDetailByUserId(Long userId) {
         return socialUserFansDetailApi.findByUserId(userId);
     }
 

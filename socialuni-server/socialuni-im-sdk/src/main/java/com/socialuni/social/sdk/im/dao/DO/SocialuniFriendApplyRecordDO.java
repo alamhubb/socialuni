@@ -28,7 +28,7 @@ import javax.persistence.Table;
 public class SocialuniFriendApplyRecordDO extends SocialuniUserContactBaseDO {
     String applyMsg;
 
-    public SocialuniFriendApplyRecordDO(Integer userId, Integer beUserId, String applyMsg, String applyType) {
+    public SocialuniFriendApplyRecordDO(Long userId, Integer beUserId, String applyMsg, String applyType) {
         super(userId, beUserId);
         this.applyMsg = applyMsg;
         this.setStatus(SocialuniAddFriendStatus.init);

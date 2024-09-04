@@ -74,7 +74,7 @@ public class SocialuniUserIdentityService {
         if (resScore == 0) {
             ConfigFacade.throwBusinessException("认证失败，请重试，" + ErrorMsg.CONTACT_SERVICE, SocialSystemConst.CONFIGS_KEY_QQ_ACCOUNT);
         }
-        Integer userId = SocialuniUserUtil.getMineUserIdNotNull();
+        Long userId = SocialuniUserUtil.getMineUserIdNotNull();
         SocialUserIdentityAuthImgDO socialUserIdentityImgDO = new SocialUserIdentityAuthImgDO();
         socialUserIdentityImgDO.setUserId(userId);
         socialUserIdentityImgDO.setUserIdImgSrc(socialUserIdentityAuthQO.getIdImgUrl());

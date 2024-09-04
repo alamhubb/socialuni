@@ -15,9 +15,9 @@ public interface SocialUserPhoneRepository extends JpaRepository<SocialUserPhone
     @Cacheable(cacheNames = CommonRedisKey.findByPhoneNumAndDevId, key = "#devId+'-'+#phoneNum")
     SocialUserPhoneDo findByPhoneNumAndDevId(String phoneNum, Integer devId);
 
-    SocialUserPhoneDo findByUserId(Integer userId);
+    SocialUserPhoneDo findByUserId(Long userId);
 
-    SocialUserPhoneDo findByUserIdAndStatus(Integer userId, String status);
+    SocialUserPhoneDo findByUserIdAndStatus(Long userId, String status);
 
     //关注后用户缓存修改，一人+粉丝，一人+关注
     @Caching(

@@ -76,7 +76,7 @@ public class SocialuniGetUserContactInfoDomain {
         SocialuniGetUserContactRecordDO userContactDO = new SocialuniGetUserContactRecordDO(mineUser.getUserId(), beUser.getUserId(), socialuniUserExpandDo.getContactInfo());
         userContactDO = SocialuniRepositoryFacade.save(userContactDO);
 
-        Integer userId = mineUser.getUserId();
+        Long userId = mineUser.getUserId();
 
         socialuniCreateCoinOrderEntity.createCoinOrderByOrderType(userId, -expanseCoinNum, SocialuniCoinOrderType.consume, SocialuniOrderDetailType.contact, userContactDO.getId());
 

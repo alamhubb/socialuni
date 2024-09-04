@@ -11,7 +11,7 @@ import java.util.Date;
 @Service
 public class SocialuniUserCoinManage {
 
-    public SocialuniUserCoinDo updateUserCoin(Integer userId, Integer coinNum) {
+    public SocialuniUserCoinDo updateUserCoin(Long userId, Integer coinNum) {
         SocialuniUserCoinDo userCoinDo = SocialuniUserSocialCoinDOUtil.getOrCreate(userId);
 
         userCoinDo.setCoin(userCoinDo.getCoin() + coinNum);

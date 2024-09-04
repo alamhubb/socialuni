@@ -56,12 +56,12 @@ public class SocialuniUserImgService {
 
     public ResultRO<List<SocialuniUserImgRO>> getUserImgList(String userIdStr) {
 
-        Integer userId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(userIdStr);
+        Long userId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(userIdStr);
 
         return getUserImgList(userId);
     }
 
-    public ResultRO<List<SocialuniUserImgRO>> getUserImgList(Integer userId) {
+    public ResultRO<List<SocialuniUserImgRO>> getUserImgList(Long userId) {
         //用户图片
         List<SocialuniUserImgDo> imgDOS = SocialuniUserImgDOUtil.getUserImgsTop6(userId);
         List<SocialuniUserImgRO> imgVOS = UserImgROFactory.userImgDOToVOS(imgDOS);

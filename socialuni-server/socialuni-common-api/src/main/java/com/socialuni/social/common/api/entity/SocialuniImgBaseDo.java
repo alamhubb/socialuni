@@ -24,19 +24,19 @@ public class SocialuniImgBaseDo extends SocialuniUnionContentBaseDO {
     public SocialuniImgBaseDo() {
     }
 
-    public SocialuniImgBaseDo(Integer userId) {
+    public SocialuniImgBaseDo(Long userId) {
         super(userId);
     }
 
-    public SocialuniImgBaseDo(Integer userId, String contentType, String content) {
+    public SocialuniImgBaseDo(Long userId, String contentType, String content) {
         super(userId, contentType, content);
     }
 
-    public SocialuniImgBaseDo(Integer userId, Integer unionId, String contentType, String content) {
+    public SocialuniImgBaseDo(Long userId, Long unionId, String contentType, String content) {
         super(userId, unionId, contentType, content);
     }
 
-    public SocialuniImgBaseDo(Integer userId, Integer unionId, String contentType) {
+    public SocialuniImgBaseDo(Long userId, Long unionId, String contentType) {
         super(userId, unionId, contentType);
     }
 }

@@ -29,7 +29,7 @@ public class ThirdUserTokenDO extends SocialuniContentBaseDO {
     private Integer devId;
     private String thirdUserId;
     @Column(nullable = false, updatable = false)
-    private Integer userId;
+    private Long userId;
 
     @Column(nullable = false, updatable = false)
     private String token;
@@ -41,7 +41,7 @@ public class ThirdUserTokenDO extends SocialuniContentBaseDO {
         this.expiredTime = new Date(new Date().getTime() + DateTimeType.quarter);
     }
 
-    public ThirdUserTokenDO(Integer userId, String token, Integer devId,String thirdUserId) {
+    public ThirdUserTokenDO(Long userId, String token, Integer devId,String thirdUserId) {
         this.userId = userId;
         this.token = token;
         this.devId = devId;

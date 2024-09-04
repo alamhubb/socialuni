@@ -25,7 +25,7 @@ public interface SocialuniCommonTokenRepository extends JpaRepository<SocialuniT
 
     Optional<SocialUserAccountDO> findFirstOneByWxUnionIdOrderByIdAsc(String unionId);
 
-    Optional<SocialUserAccountDO> findOneByUserId(Integer userId);
+    Optional<SocialUserAccountDO> findOneByUserId(Long userId);
 */
 }
 

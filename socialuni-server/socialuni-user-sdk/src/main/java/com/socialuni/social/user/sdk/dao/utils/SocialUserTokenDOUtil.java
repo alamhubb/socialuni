@@ -13,7 +13,7 @@ public class SocialUserTokenDOUtil {
     @Resource
     SocialUserTokenRepository socialUserTokenRepository;
 
-    public UniUserTokenDO create(Integer userId) {
+    public UniUserTokenDO create(Long userId) {
         //本系统的，生成userToken，有个清池token对应集美token
         String appToken = SocialUserTokenUtils.generateTokenById(userId);
         UniUserTokenDO socialUserTokenDO = new UniUserTokenDO(userId, appToken);

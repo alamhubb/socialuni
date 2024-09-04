@@ -69,7 +69,7 @@ public class SocialuniPeiwanService {
 
 
         for (SocialuniPeiwanInfoRO peiwanInfoRO : peiwanInfoROS) {
-            Integer userId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(peiwanInfoRO.getUserId());
+            Long userId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(peiwanInfoRO.getUserId());
             SocialuniPeiwanInfoDO socialuniPeiwanInfoDO = SocialuniUserRepositoryFacede.findFirstByUserIdOrderByIdDesc(userId, SocialuniPeiwanInfoDO.class);
 
             socialuniPeiwanInfoDO = SocialuniPeiwanInfoDOFactory.createPeiwanDO(socialuniPeiwanInfoDO, peiwanInfoRO);

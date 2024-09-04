@@ -126,7 +126,7 @@ public interface SocialuniUserRepository extends JpaRepository<SocialuniUserDo, 
                     //按5分钟时段排序5*60*1000 5分钟
                     "FLOOR(UNIX_TIMESTAMP(u.`last_online_time`)/3600) DESC," +
                     "u.face_ratio * (FLOOR(1 + RAND()*10)) DESC LIMIT 20")
-    List<SocialuniUserDo> queryMatchUsers(@Param("userId") Integer userId, @Param("genders") List<String> genders, @Param("ids") List<Integer> ids,
+    List<SocialuniUserDo> queryMatchUsers(@Param("userId") Long userId, @Param("genders") List<String> genders, @Param("ids") List<Integer> ids,
                                           @Param("status") String status, @Param("statuses") List<String> statuses, @Param("userStatus") String userStatus);
 
     @Query(nativeQuery = true,
@@ -145,7 +145,7 @@ public interface SocialuniUserRepository extends JpaRepository<SocialuniUserDo, 
                     //按5分钟时段排序5*60*1000 5分钟
                     "FLOOR(UNIX_TIMESTAMP(u.`last_online_time`)/3600) DESC," +
                     "u.face_ratio * (FLOOR(1 + RAND()*10)) DESC LIMIT 20")
-    List<SocialuniUserDo> queryLikeMeMatchUsers(@Param("userId") Integer userId, @Param("ids") List<Integer> ids, @Param("status") String status, @Param("userStatus") String userStatus);
+    List<SocialuniUserDo> queryLikeMeMatchUsers(@Param("userId") Long userId, @Param("ids") List<Integer> ids, @Param("status") String status, @Param("userStatus") String userStatus);
 
     @Query(nativeQuery = true,
             value = "SELECT DISTINCT u.*, m.status FROM " +
@@ -163,7 +163,7 @@ public interface SocialuniUserRepository extends JpaRepository<SocialuniUserDo, 
                     //按5分钟时段排序5*60*1000 5分钟
                     "FLOOR(UNIX_TIMESTAMP(u.`last_online_time`)/3600) DESC," +
                     "u.face_ratio * (FLOOR(1 + RAND()*10)) DESC LIMIT 20")
-    List<SocialuniUserDo> queryILikeMatchUsers(@Param("userId") Integer userId, @Param("ids") List<Integer> ids, @Param("status") String status, @Param("userStatus") String userStatus);
+    List<SocialuniUserDo> queryILikeMatchUsers(@Param("userId") Long userId, @Param("ids") List<Integer> ids, @Param("status") String status, @Param("userStatus") String userStatus);
 
 
     //注释未登录的展示颜值限制"AND (u.`face_ratio`<=65000) " +

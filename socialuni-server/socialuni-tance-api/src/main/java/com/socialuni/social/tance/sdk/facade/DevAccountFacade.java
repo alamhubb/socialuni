@@ -94,7 +94,7 @@ public class DevAccountFacade {
         return devAccountModel.getId();
     }
 
-    public static Integer getAdminDevIdNotNull(Integer unionId) {
+    public static Integer getAdminDevIdNotNull(Long unionId) {
         SocialuniUnionIdModler socialuniUnionIdDo = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(unionId);
 
         Integer devId = socialuniUnionIdDo.getFromDevId();
@@ -255,7 +255,7 @@ public class DevAccountFacade {
         return devId == 1;
     }
 
-    public static DevAccountModel getDevAccountByUserId(Integer userId) {
+    public static DevAccountModel getDevAccountByUserId(Long userId) {
         DevAccountModel devAccountModel = devAccountApi.findFirstByUserId(userId);
         return devAccountModel;
     }

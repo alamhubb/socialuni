@@ -19,7 +19,7 @@ public class ReportDetailDO implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Integer userId;
+    private Long userId;
     //应该就是contentId
     private Integer contentId;
 

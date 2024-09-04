@@ -117,7 +117,7 @@ public class SocialuniCallbackController {
         rechargeOrderDO.setAmount(total_fee);
         rechargeOrderDO.setOutSysOrderNo(transaction_id);
 
-        Integer userId = rechargeOrderDO.getUserId();
+        Long userId = rechargeOrderDO.getUserId();
 
         socialuniCreateCoinOrderEntity.createCoinOrderByOrderType(userId, total_fee, SocialuniCoinOrderType.recharge, SocialuniOrderDetailType.cash, rechargeOrderDO.getId());
 

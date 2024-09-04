@@ -18,7 +18,7 @@ public class SocialuniUnionContentBaseDO extends SocialuniContentBaseDO implemen
     @Column(nullable = false)
     private String contentType;
     @Column(nullable = false)
-    private Integer unionId;
+    private Long unionId;
     //内容主体
     @Column(columnDefinition = "text")
     private String content;
@@ -39,24 +39,24 @@ public class SocialuniUnionContentBaseDO extends SocialuniContentBaseDO implemen
         this.reportNum = 0;
     }
 
-    public SocialuniUnionContentBaseDO(Integer userId) {
+    public SocialuniUnionContentBaseDO(Long userId) {
         super(userId);
         this.reportNum = 0;
     }
 
 
-    public SocialuniUnionContentBaseDO(Integer userId, String contentType, String content) {
+    public SocialuniUnionContentBaseDO(Long userId, String contentType, String content) {
         this(userId);
         this.contentType = contentType;
         this.content = content;
     }
 
-    public SocialuniUnionContentBaseDO(Integer userId, Integer unionId, String contentType, String content) {
+    public SocialuniUnionContentBaseDO(Long userId, Long unionId, String contentType, String content) {
         this(userId, contentType, content);
         this.unionId = unionId;
     }
 
-    public SocialuniUnionContentBaseDO(Integer userId, Integer unionId, String contentType) {
+    public SocialuniUnionContentBaseDO(Long userId, Long unionId, String contentType) {
         this(userId, unionId, contentType, contentType);
     }
 

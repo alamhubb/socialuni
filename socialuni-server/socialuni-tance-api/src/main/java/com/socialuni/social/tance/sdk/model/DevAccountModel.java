@@ -16,7 +16,7 @@ import java.util.Date;
 @Data
 @MappedSuperclass
 public class DevAccountModel extends SocialuniBaseDO implements Serializable {
-    private Integer userId;
+    private Long userId;
     //密钥
     @Column(nullable = false)
     private String secretKey;

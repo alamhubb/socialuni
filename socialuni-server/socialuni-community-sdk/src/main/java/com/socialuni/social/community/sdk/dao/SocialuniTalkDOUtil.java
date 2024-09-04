@@ -43,7 +43,7 @@ public class SocialuniTalkDOUtil {
     }
 
     //逻辑没问题，第一行是校验
-    public static SocialuniTalkDO getAllowNull(Integer unionId) {
+    public static SocialuniTalkDO getAllowNull(Long unionId) {
         SocialuniUnionIdModler uniContentUnionIdDO = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(unionId);
         SocialuniTalkDO talkDO = talkApi.findOneByUnionId(unionId);
         if (talkDO == null) {

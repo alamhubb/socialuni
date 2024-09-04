@@ -27,7 +27,7 @@ public class SocialUserAccountUtil {
         return SocialUserAccountUtil.getMineAccountByProvider(SocialuniAccountProviderType.socialuni);
     }
 
-    public static SocialUserPlatformAccountDO getUserSocialAccount(Integer userId) {
+    public static SocialUserPlatformAccountDO getUserSocialAccount(Long userId) {
         return SocialUserAccountUtil.getUserAccountByProvider(SocialuniAccountProviderType.socialuni, userId);
     }
 
@@ -36,7 +36,7 @@ public class SocialUserAccountUtil {
         return socialUserAccountDO;
     }
 
-    public static SocialUserPlatformAccountDO getUserAccountByProvider(String provider, Integer userId) {
+    public static SocialUserPlatformAccountDO getUserAccountByProvider(String provider, Long userId) {
         SocialUserPlatformAccountDO socialUserAccountDO = socialUserPlatformAccountRepository.findByProviderAndUserId(provider, userId);
         return socialUserAccountDO;
     }

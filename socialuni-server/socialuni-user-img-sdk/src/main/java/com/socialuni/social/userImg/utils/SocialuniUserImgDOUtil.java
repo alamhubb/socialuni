@@ -19,7 +19,7 @@ public class SocialuniUserImgDOUtil {
         SocialuniUserImgDOUtil.userImgRepository = userImgRepository;
     }
 
-    public static SocialuniUserImgDo getUserImgNotNull(Integer unionId) {
+    public static SocialuniUserImgDo getUserImgNotNull(Long unionId) {
         if (unionId == null) {
             throw new SocialParamsException("内容标识不能为空");
         }
@@ -32,19 +32,19 @@ public class SocialuniUserImgDOUtil {
 
     public static List<SocialuniUserImgDo> getUserImgs(List<Integer> unionIds) {
         List<SocialuniUserImgDo> list = new ArrayList<>();
-        for (Integer unionId : unionIds) {
+        for (Long unionId : unionIds) {
             list.add(SocialuniUserImgDOUtil.getUserImgNotNull(unionId));
         }
         return list;
     }
 
-    public static List<SocialuniUserImgDo> getUserImgsTop6(Integer userId) {
+    public static List<SocialuniUserImgDo> getUserImgsTop6(Long userId) {
         List<Integer> integers = userImgRepository.findUnionIdTop6ByUserIdAndStatusInOrderByCreateTimeDesc(userId, ContentStatus.selfCanSeeContentStatus);
         return SocialuniUserImgDOUtil.getUserImgs(integers);
     }
 
 
-    public static List<SocialuniUserImgDo> getUserImgsTop50(Integer userId) {
+    public static List<SocialuniUserImgDo> getUserImgsTop50(Long userId) {
         List<Integer> integers = userImgRepository.findUnionIdTop50ByUserIdAndStatusInOrderByCreateTimeDesc(userId, ContentStatus.selfCanSeeContentStatus);
         return SocialuniUserImgDOUtil.getUserImgs(integers);
     }

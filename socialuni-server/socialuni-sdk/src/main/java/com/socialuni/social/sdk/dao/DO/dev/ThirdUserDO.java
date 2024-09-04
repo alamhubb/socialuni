@@ -28,7 +28,7 @@ public class ThirdUserDO implements Serializable {
     @Column(nullable = false)
     private Integer authDevId;
     @Column(nullable = false)
-    private Integer userId;
+    private Long userId;
     //三方userid
     @Column(nullable = false)
     private String thirdUserId;
@@ -42,7 +42,7 @@ public class ThirdUserDO implements Serializable {
     public ThirdUserDO() {
     }
 
-    public ThirdUserDO(Integer devId, Integer userId, String thirdUserId) {
+    public ThirdUserDO(Integer devId, Long userId, String thirdUserId) {
         //三方商户id
         this.devId = devId;
         this.authDevId = 1;

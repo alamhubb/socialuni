@@ -39,14 +39,14 @@ public class AuthenticationDO extends SocialuniContentBaseDO implements Serializ
     private Long validTime;
     private Date expiredTime;
     private String ip;
-    private Integer userId;
+    private Long userId;
     //校验过，或者已过期，则修改状态
     private String status;
 
     public AuthenticationDO() {
     }
 
-    public AuthenticationDO(Integer userId, String phoneNum, String authCode, String ip, Integer devId) {
+    public AuthenticationDO(Long userId, String phoneNum, String authCode, String ip, Integer devId) {
         this.userId = userId;
         this.phoneNum = phoneNum;
         this.authCode = authCode;

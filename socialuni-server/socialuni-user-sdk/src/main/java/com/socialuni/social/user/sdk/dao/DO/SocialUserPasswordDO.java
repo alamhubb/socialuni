@@ -30,7 +30,7 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = true)
 public class SocialUserPasswordDO extends SocialuniContentBaseDO {
     @Column(nullable = false, updatable = false)
-    private Integer userId;
+    private Long userId;
     @Column(nullable = false)
     private Integer devId;
     @Column(nullable = false)

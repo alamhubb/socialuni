@@ -15,10 +15,12 @@ public interface SocialuniUnionIdInterface {
 
     SocialuniUnionIdModler save(SocialuniUnionIdModler uniContentUnionIdDO);
 
-    SocialuniUnionIdModler findById(Integer unionId);
+    SocialuniUnionIdModler findById(Long unionId);
 
     SocialuniUnionIdModler findByUuId(String uuid);
 
     List<String> findUuidAllByContentType(String contentTyp);
-    List<Integer> findAllIdsByContentType(String contentTyp);
+
+    List<Long> findAllUnionIdsByContentType(String contentTyp);
+
 }

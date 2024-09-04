@@ -42,7 +42,7 @@ public interface TalkMapper {
     @Cacheable(cacheNames = CommonRedisKey.queryTalkIdsByAndUserExpand)
     List<Integer> queryTalkIdsByAndUserExpand();
 
-//    List<Integer> queryMineTalkIdsByCom(@Param("userId") Integer userId, @Param("statusList") List<String> statusList);
+//    List<Integer> queryMineTalkIdsByCom(@Param("userId") Long userId, @Param("statusList") List<String> statusList);
 
 
     /*List<Integer> queryTalkIdsByCom(

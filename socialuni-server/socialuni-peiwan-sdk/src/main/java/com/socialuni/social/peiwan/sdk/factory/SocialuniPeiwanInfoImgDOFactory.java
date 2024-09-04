@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SocialuniPeiwanInfoImgDOFactory {
-    public static SocialuniPeiwanInfoImgDO createPeiwanImgDO(Integer userId, SocialuniImgAddQO imgAddQO, Integer order) {
-        Integer unionId = SocialuniUnionIdFacede.createPeiwanImgUnionId();
+    public static SocialuniPeiwanInfoImgDO createPeiwanImgDO(Long userId, SocialuniImgAddQO imgAddQO, Integer order) {
+        Long unionId = SocialuniUnionIdFacede.createPeiwanImgUnionId();
 
         SocialuniPeiwanInfoImgDO socialuniPeiwanInfoImgDO = new SocialuniPeiwanInfoImgDO(userId, unionId, SocialuniContentType.peiwanImg);
 
@@ -23,7 +23,7 @@ public class SocialuniPeiwanInfoImgDOFactory {
         return socialuniPeiwanInfoImgDO;
     }
 
-    public static List<SocialuniPeiwanInfoImgDO> createPeiwanImgDOs(Integer userId, List<SocialuniImgAddQO> imgAddQOS) {
+    public static List<SocialuniPeiwanInfoImgDO> createPeiwanImgDOs(Long userId, List<SocialuniImgAddQO> imgAddQOS) {
         List<SocialuniPeiwanInfoImgDO> socialuniPeiwanInfoImgDOS = new ArrayList<>();
 
         for (SocialuniImgAddQO imgAddQO : imgAddQOS) {

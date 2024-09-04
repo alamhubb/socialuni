@@ -47,7 +47,7 @@ public class SocialTokenDOUtil {
             throw new SocialNotLoginException();
         }
         Integer doUserId = tokenDO.getUserId();
-        Integer userId;
+        Long userId;
         if (NumberUtils.strIsAllNumber(userKey)) {
             //解析token
             userId = Integer.valueOf(userKey);

@@ -48,7 +48,7 @@ public interface CommentRepository extends JpaRepository<SocialuniCommentDO, Int
     List<?  extends SocialuniCommentDO> findTop5ByTalkIdAndStatusInAndParentCommentIdIsNullOrderByUpdateTimeDesc(Integer talkId, List<String> status);
 
 
-    List<?  extends SocialuniCommentDO> findTop10ByUserIdOrderByUpdateTimeDesc(Integer userId);
+    List<?  extends SocialuniCommentDO> findTop10ByUserIdOrderByUpdateTimeDesc(Long userId);
 
     //    talk详情页展示评论
     @Cacheable(cacheNames = "talkComments50", key = "{#talkId}")
@@ -64,7 +64,7 @@ public interface CommentRepository extends JpaRepository<SocialuniCommentDO, Int
     @Transactional
     @Modifying
     @Query("update SocialuniCommentDO t set t.status = '" + SocialuniCommonStatus.delete + "' where t.userId=:userId and t.status in (:status)")
-    Integer updateUserCommentStatusIn(@Param("userId") Integer userId, @Param("status") List<String> status);
+    Integer updateUserCommentStatusIn(@Param("userId") Long userId, @Param("status") List<String> status);
 
     Optional<?  extends SocialuniCommentDO> findOneByUnionIdAndStatusIn(Integer id, List<String> status);
 

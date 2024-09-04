@@ -29,7 +29,7 @@ public class SocialuniUserFollowManage {
         return followDO;
     }
 
-    public boolean userHasFollowBeUser(Integer userId, Integer beUserId) {
+    public boolean userHasFollowBeUser(Long userId, Integer beUserId) {
         SocialuniUserFollowDO followDO = followRepository.findFirstByUserIdAndBeUserId(userId, beUserId);
         return followDO != null && SocialuniCommonStatus.enable.equals(followDO.getStatus());
     }

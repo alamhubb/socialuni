@@ -24,7 +24,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = true)
 public class SocialCircleLeaderRecordDO extends SocialuniContentBaseDO implements Serializable {
     Integer circleId;
-    Integer userId;
+    Long userId;
     //第几期
     Integer period;
     Integer circleCampaignId;

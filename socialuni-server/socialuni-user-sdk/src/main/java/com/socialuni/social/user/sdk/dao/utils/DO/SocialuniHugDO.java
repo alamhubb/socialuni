@@ -21,7 +21,7 @@ public class SocialuniHugDO extends SocialuniContentBaseDO {
     /**
      * 哪个评论的
      */
-    private Integer userId;
+    private Long userId;
     /**
      * 赞的说说
      */
@@ -32,7 +32,7 @@ public class SocialuniHugDO extends SocialuniContentBaseDO {
      */
     private Integer commentId;
 
-    public SocialuniHugDO(Integer userId, Integer talkId, Integer commentId) {
+    public SocialuniHugDO(Long userId, Integer talkId, Integer commentId) {
         this.userId = userId;
         this.talkId = talkId;
         this.commentId = commentId;

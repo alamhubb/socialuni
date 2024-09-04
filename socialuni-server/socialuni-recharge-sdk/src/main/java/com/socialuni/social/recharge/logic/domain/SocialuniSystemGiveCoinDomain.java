@@ -12,7 +12,7 @@ public class SocialuniSystemGiveCoinDomain {
     @Resource
     SocialuniCreateCoinOrderEntity socialuniCreateCoinOrderEntity;
 
-    public void giveCoin(Integer userId, Integer coinNum) {
+    public void giveCoin(Long userId, Integer coinNum) {
         socialuniCreateCoinOrderEntity.createCoinOrderByOrderType(userId, coinNum, SocialuniCoinOrderType.recharge, SocialuniOrderDetailType.sysGive, null);
     }
 }

@@ -145,7 +145,7 @@ public class SocialuniMusicController {
     public ResultRO<String> getMusicToken(@PathVariable("channel") String channel) {
         RtcTokenBuilder2 token = new RtcTokenBuilder2();
 
-        Integer unionId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(channel);
+        Long unionId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(channel);
 
         String result = token.buildTokenWithUid(appId, appCertificate, channel, 0, RtcTokenBuilder2.Role.ROLE_PUBLISHER, DateTimeType.day.intValue(), 0);
         log.info("Token with uid: {}", unionId);
