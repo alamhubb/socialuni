@@ -23,7 +23,7 @@ public class SocialuniCosService {
             return socialuniCosAPI.getCosAuth();
         }
         String userId = SocialuniUserUtil.getMineUserUuidIdNotNull();
-        DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNotNull();
+        DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNullElseCenterDev();
 //        String devAppName = Pinyin.toPinyin(devAccountDO.getAppName(), "").toLowerCase();
 //        String uploadImgPath = devAppName + "/user/" + userId + "/";
         SocialCosAuthRO socialCosAuthRO = TencentCloudAPI.getCosAuthorization(userId);

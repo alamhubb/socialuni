@@ -3,6 +3,7 @@ package com.socialuni.social.sdk.config.config;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.common.api.utils.RequestUtil;
+import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.user.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.sdk.dao.DO.UniOutRegisterUserDO;
 import com.socialuni.social.sdk.dao.repository.UniOutRegisterUserRepository;
@@ -40,9 +41,6 @@ public class FeignInterceptor implements RequestInterceptor {
 
     @Override
     public void apply(RequestTemplate requestTemplate) {
-        //根据库里表有没有数据判断，是否调用，如果注册了，就在自己表里设置下，记录下。
-
-        requestTemplate.header(SocialFeignHeaderName.socialuniSecretKey, SocialuniSystemConst.getDevSecretKey());
 
         String postUrl = requestTemplate.path();
 
@@ -91,8 +89,11 @@ public class FeignInterceptor implements RequestInterceptor {
 
 //                    Collection<String> headerKeyValues = requestTemplate.headers().get(SocialFeignHeaderName.socialuniSecretKey);
 //                    String devSecretKey = headerKeyValues.iterator().next();
+
+
+
                     Map<String, Object> headerMap = new HashMap<String, Object>() {{
-                        put(SocialFeignHeaderName.socialuniSecretKey, SocialuniSystemConst.getDevSecretKey());
+//                        put(SocialFeignHeaderName.socialuniSecretKey, devAccountModel.getApiSecretKey());
                     }};
                     ResultRO<SocialLoginRO<SocialuniUserRO>> resultRO = socialuniThirdUserAPI.registryUser(socialProviderLoginQO);
                     SocialLoginRO<SocialuniUserRO> loginRO = resultRO.getData();
@@ -106,6 +107,13 @@ public class FeignInterceptor implements RequestInterceptor {
                 String mineUserUid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(mineUserUnionId);
 
                 requestTemplate.header(SocialuniWebConfig.getTokenName(), mineUserUid);
+
+
+                //根据库里表有没有数据判断，是否调用，如果注册了，就在自己表里设置下，记录下。
+                DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNotNUll();
+
+                requestTemplate.header(SocialFeignHeaderName.socialuniSecretKey, devAccountModel.getApiSecretKey());
+                requestTemplate.target(devAccountModel.getApiUrl());
             }
         }
 

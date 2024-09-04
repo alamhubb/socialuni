@@ -27,10 +27,12 @@ public class SocialuniTokenUtil {
         SocialuniTokenUtil.thirdUserTokenRepository = thirdUserTokenRepository;
     }
 
+/*
     public static ThirdUserTokenDO getThirdUserTokenDO() {
         String token = SocialTokenFacade.getToken();
         return SocialuniTokenUtil.getThirdUserTokenDO(token);
     }
+*/
 
 
     public static String getDataUserUnionId() {
@@ -49,7 +51,7 @@ public class SocialuniTokenUtil {
         return null;
     }
 
-    public static ThirdUserTokenDO getThirdUserTokenDO(String token) {
+/*    public static ThirdUserTokenDO getThirdUserTokenDO(String token) {
         //解析token
         String userThirdId = SocialTokenFacade.getUserKeyByToken(token);
         if (StringUtils.isEmpty(userThirdId)) {
@@ -81,5 +83,5 @@ public class SocialuniTokenUtil {
         }
         //返回user
         return tokenDO;
-    }
+    }*/
 }

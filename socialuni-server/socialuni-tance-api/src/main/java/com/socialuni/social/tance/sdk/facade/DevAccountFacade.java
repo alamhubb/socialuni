@@ -1,6 +1,7 @@
 package com.socialuni.social.tance.sdk.facade;
 
 import com.socialuni.social.common.api.constant.GenderType;
+import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
@@ -57,13 +58,13 @@ public class DevAccountFacade {
     }
 
     public static String getDevSocialSecretKey() {
-        DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNotNull();
+        DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNullElseCenterDev();
         return devAccountModel.getSecretKey();
     }
 
 
     public static String getAppSocialuniId() {
-        DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNotNull();
+        DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNullElseCenterDev();
         return devAccountModel.getSocialuniId();
     }
 
@@ -77,7 +78,7 @@ public class DevAccountFacade {
     }
 
     public static Long getDevNum() {
-        DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNotNull();
+        DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNullElseCenterDev();
         return devAccountModel.getDevNum();
     }
 
@@ -90,7 +91,7 @@ public class DevAccountFacade {
     }*/
 
     public static Integer getDevIdNotNull() {
-        DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNotNull();
+        DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNullElseCenterDev();
         return devAccountModel.getId();
     }
 
@@ -110,12 +111,12 @@ public class DevAccountFacade {
     }
 
     public static String getDevPhoneNumNotNull() {
-        DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNotNull();
+        DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNullElseCenterDev();
         return devAccountModel.getPhoneNum();
     }
 
     public static Integer getDevUserId() {
-        DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNotNull();
+        DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNullElseCenterDev();
         return devAccountModel.getUserId();
     }
 
@@ -197,12 +198,21 @@ public class DevAccountFacade {
 
     public static DevAccountModel getDevAccountAllowNull(String secretKey) {
         if (StringUtils.isEmpty(secretKey)) {
-            return getDevAccountNotNull();
+            return getDevAccountNullElseCenterDev();
         }
         return getDevAccountBySecretKeyNotNull(secretKey);
     }
 
-    public static DevAccountModel getDevAccountNotNull() {
+    public static DevAccountModel getDevAccountNotNUll() {
+        //先从req中获取
+        DevAccountModel devAccountModel = DevAccountFacade.getDevAccountAllowNull();
+        if (devAccountModel == null) {
+            throw new SocialParamsException("开发者信息为空");
+        }
+        return devAccountModel;
+    }
+
+    public static DevAccountModel getDevAccountNullElseCenterDev() {
         //先从req中获取
         DevAccountModel devAccountModel = DevAccountFacade.getDevAccountAllowNull();
         if (devAccountModel == null) {
@@ -231,7 +241,7 @@ public class DevAccountFacade {
     }
 
     public static boolean pushServer() {
-        DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNotNull();
+        DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNullElseCenterDev();
         Integer devId = devAccountModel.getId();
         return devId == 1;
     }

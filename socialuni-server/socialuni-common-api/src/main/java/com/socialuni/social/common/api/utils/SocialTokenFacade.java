@@ -100,10 +100,10 @@ public class SocialTokenFacade {
         return null;
     }
 
-    public static String getUserKeyByToken() {
+/*    public static String getUserKeyByToken() {
         String token = SocialTokenFacade.getToken();
         return SocialTokenFacade.getUserKeyByToken(token);
-    }
+    }*/
 
     //判断是否有效token
     public static boolean isSuccess(String token) {
