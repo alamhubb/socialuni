@@ -76,7 +76,12 @@ public class SocialUserPhoneManage {
 
     //创建手机号信息
     public SocialUserPhoneDo createUserPhoneNum(Long mineUserId, String phoneCountryCode, String phoneNum) {
-        SocialUserPhoneDo SocialUserPhoneDo = new SocialUserPhoneDo(mineUserId, phoneCountryCode, phoneNum, DevAccountFacade.getDevIdNullElseCenterDevId());
+        return createUserPhoneNum(mineUserId, phoneCountryCode, phoneNum, DevAccountFacade.getDevIdNullElseCenterDevId());
+    }
+
+
+    public SocialUserPhoneDo createUserPhoneNum(Long mineUserId, String phoneCountryCode, String phoneNum, Integer devId) {
+        SocialUserPhoneDo SocialUserPhoneDo = new SocialUserPhoneDo(mineUserId, phoneCountryCode, phoneNum, devId);
         SocialUserPhoneDo = socialUserPhoneApi.savePut(SocialUserPhoneDo);
         return SocialUserPhoneDo;
     }

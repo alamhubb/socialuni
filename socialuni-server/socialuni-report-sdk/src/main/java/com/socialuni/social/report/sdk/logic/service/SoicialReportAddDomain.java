@@ -81,7 +81,7 @@ public class SoicialReportAddDomain {
         //理论上来说这些状态应该都是不能被举报的，因为看不见，所以这个逻辑现在也没啥问题，没了不违规状态了
         //查询动态状态是否为正常
 
-        String contentUuId = SocialuniUnionIdFacede.createUnionIdByUuid(reportContentType, reportAddVO.getContentId());
+        Long contentUuId = SocialuniUnionIdFacede.createUnionIdByUuid(reportContentType, Long.valueOf(reportAddVO.getContentId()));
         Long  contentUnionId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(contentUuId);
 
         SocialuniUnionContentBaseDO modelDO = SocialuniContentDOUtil.getContentDOByContentId(contentUnionId);

@@ -27,7 +27,6 @@ class SocialuniConfigModule {
         })
     }
 
-
     async getDeviceUidAction() {
         const deviceUid = SocialuniDeviceUidUtil.get()
         if (!deviceUid) {
@@ -35,12 +34,15 @@ class SocialuniConfigModule {
                 appVersion: navigator.userAgent,
             };
             const device = JsonUtil.toJson(deviceObj)
-            await SocialuniAppAPI.getDeviceUidAPI({device}).then(res => {
-                SocialuniDeviceUidUtil.set(res.data)
-                if (socialuniSystemModule.isH5) {
-                    SocialuniLoginService.deviceUidLogin()
-                }
-            })
+            const res = await SocialuniAppAPI.getDeviceUidAPI({device})
+            SocialuniDeviceUidUtil.set(res.data)
+        }
+    }
+
+    async getDeviceUidAndDeviceLoginAction() {
+        await this.getDeviceUidAction()
+        if (socialuniSystemModule.isH5) {
+            SocialuniLoginService.deviceUidLogin()
         }
     }
 

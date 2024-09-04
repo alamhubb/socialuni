@@ -17,7 +17,7 @@ import java.util.Optional;
 public interface DevAccountRepository extends JpaRepository<DevAccountDo, Integer>, DevAccountInterface {
     DevAccountDo save(DevAccountDo devAccountDo);
     @Cacheable(cacheNames = "getDevAccountById", key = "#id")
-    DevAccountModel findOneById(Integer id);
+    DevAccountModel findFirstById(Integer id);
 
     @Cacheable(cacheNames = "getDevAccountByUserId", key = "#userId")
     DevAccountModel findFirstByUserId(Long userId);

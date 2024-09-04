@@ -10,6 +10,7 @@ import SocialLoginRO from "socialuni-api-base/src/model/social/SocialLoginRO";
 import SocialuniUserRO from "socialuni-api-base/src/model/user/SocialuniUserRO";
 import SocialuniUserEventEmit from "../event/SocialuniUserEventEmit";
 import SocialuniDeviceUidUtil from "../util/SocialuniDeviceUidUtil";
+import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 
 export default class SocialuniLoginService {
     static async phoneLogin(phoneNum: string, authCode?: string) {
@@ -22,9 +23,14 @@ export default class SocialuniLoginService {
 
     static async deviceUidLogin() {
         const deviceUid = SocialuniDeviceUidUtil.get();
-        const {data} = await LoginAPI.deviceUidLoginAPI(deviceUid)
-        SocialuniUserService.loginSuccess(data, true)
-        return data.user
+        try {
+            const {data} = await LoginAPI.deviceUidLoginAPI(deviceUid)
+            SocialuniUserService.loginSuccess(data, true)
+            return data.user
+        } catch (e) {
+            SocialuniDeviceUidUtil.remove()
+            await socialuniConfigModule.getDeviceUidAction()
+        }
     }
 
 

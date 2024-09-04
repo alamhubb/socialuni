@@ -30,11 +30,11 @@ public class SocialUserPhoneEntity {
     }
 
     @Transactional
-    public SocialuniUserDo createSysUserPhoneEntity(String phoneNum) {
+    public SocialuniUserDo createSysUserPhoneEntity(String phoneNum, Integer devId) {
         SocialuniUserDo mineUser = socialUserManage.createSysUserByPhoneLogin();
         //创建或返回
 //        socialUserFansDetailManage.getOrCreateUserFollowDetail(mineUser);
-        socialUserPhoneManage.createUserPhoneNum(mineUser.getUnionId(), "86", phoneNum);
+        socialUserPhoneManage.createUserPhoneNum(mineUser.getUnionId(), "86", phoneNum, devId);
         return mineUser;
     }
 

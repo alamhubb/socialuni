@@ -1,11 +1,10 @@
 package com.socialuni.social.userImg.logic.domain;
 
-import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserImgRO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
-import com.socialuni.social.tance.sdk.constant.SocialuniDevConfig;
+import com.socialuni.social.tance.sdk.config.SocialuniDevConfig;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.userImg.api.SocialuniUserImgAPI;

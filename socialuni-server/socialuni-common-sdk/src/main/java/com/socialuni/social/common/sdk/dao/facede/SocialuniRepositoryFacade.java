@@ -50,6 +50,10 @@ public abstract class SocialuniRepositoryFacade {
         return getRepository().findByCustomField(field, fieldId, tClass);
     }
 
+    public static <T extends SocialuniBaseDO> T findByCustomField(String field, String fieldId, Class<T> tClass) {
+        return getRepository().findByCustomField(field, fieldId, tClass);
+    }
+
     public static <T extends SocialuniBaseDO> T findByCustomField(String field, Long fieldId, Class<T> tClass) {
         return getRepository().findByCustomField(field, fieldId, tClass);
     }

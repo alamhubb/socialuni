@@ -5,6 +5,8 @@ import com.socialuni.social.common.api.exception.exception.SocialBusinessExcepti
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniDeviceDO;
+import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
 import com.socialuni.social.common.sdk.event.ddd.EventPublisherFacade;
 import com.socialuni.social.user.sdk.dao.DO.SocialUserPasswordDO;
@@ -55,9 +57,16 @@ public class SocialuniLoginDomain {
 
     public SocialLoginRO<SocialuniUserRO> deviceUidLogin(SocialuniDeviceUidLoginQO socialuniDeviceUidLoginQO) {
         String deviceUid = socialuniDeviceUidLoginQO.getDeviceUid();
+
         if (StringUtils.isEmpty(deviceUid)) {
-           throw new SocialParamsException("临时用户登录错误");
+            throw new SocialParamsException("临时用户登录错误");
         }
+        SocialuniDeviceDO socialuniDeviceDO = SocialuniRepositoryFacade.findByCustomField("uuid", deviceUid, SocialuniDeviceDO.class);
+
+        if (socialuniDeviceDO == null) {
+            throw new SocialParamsException("临时用户登录错误103256");
+        }
+
         //创建或返回
         SocialuniUserDo mineUser = socialUserManage.createUser();
 

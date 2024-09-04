@@ -15,11 +15,7 @@ public class SocialuniSystemConst {
     @Getter
     private static String userDefaultAvatar;
     private static String tagDefaultAvatar;
-    @Getter
-    private static String systemUserPhoneNum;
     //    private static  Long systemUserId = 1;
-    @Getter
-    public static final String testUserPhoneNum = "12222222222";
     private static String staticResourceUrl;
     private static String socialuniDevSecretKey;
     private static String socialuniServerUrl;
@@ -27,11 +23,6 @@ public class SocialuniSystemConst {
     private static String centerSocialuniId;
     public static final Integer homeTalkQueryMinAge = -500;
     public static final Integer homeTalkQueryMaxAge = 500;
-
-    @Value("${socialuni.system-user-phone-num:11111111111}")
-    public void setSystemUserPhoneNum(String systemUserPhoneNum) {
-        SocialuniSystemConst.systemUserPhoneNum = systemUserPhoneNum;
-    }
 
     //放model合适只有创建时候才需要赋值这个
     @Value("${socialuni.user.user-default-avatar:https://cdxapp-1257733245.file.myqcloud.com/qingchi/static/uploadimgmini.png!avatar}")
@@ -87,30 +78,6 @@ public class SocialuniSystemConst {
             throw new SocialParamsException("图片路径错误异常");
         }
         return staticResourceUrl + "/";
-    }
-
-    //是否配置了中心服务器
-    public static boolean hasCenterServer() {
-        //为空则异常
-        return !serverIsCenter();
-    }
-
-    public static boolean serverIsCenter() {
-
-        //前台不需要配置秘钥
-
-
-        //然后我们得到的devId,就是1.
-        //然后因为配置了秘钥，所以访问中心。
-        //访问中心时，如果包含了秘钥，如果devId不为1， 则为中心。
-
-
-        //当前服务器不为中心。
-
-
-
-        //为空则异常
-        return StringUtils.isEmpty(getDevSecretKey());
     }
 
     //是否配置了中心服务器

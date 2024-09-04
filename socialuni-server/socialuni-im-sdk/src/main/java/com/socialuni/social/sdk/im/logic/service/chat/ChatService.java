@@ -5,7 +5,6 @@ import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.constant.UserType;
-import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.im.api.model.QO.SocialuniChatQueryQO;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.sdk.im.dao.DO.message.SocialuniMessageReceiveDO;
@@ -24,6 +23,7 @@ import com.socialuni.social.sdk.im.logic.foctory.SocialuniChatUserDOFactory;
 import com.socialuni.social.im.api.model.QO.chat.ChatReadVO;
 import com.socialuni.social.im.api.model.QO.chat.ChatRemoveVO;
 import com.socialuni.social.im.api.model.QO.chat.OpenChatVO;
+import com.socialuni.social.sdk.im.utils.SocialuniChatDOUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
@@ -134,7 +134,7 @@ public class ChatService {
         //私聊
         if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.user)) {
             Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
-            Long beUserId = socialuniUnionIdModler.getUnionIdqqq();
+            Long beUserId = socialuniUnionIdModler.getUnionId();
 
             //如果用户存在查看会话
             SocialuniChatUserDO chatUserDO = SocialuniChatUserDOFactory.getOrCreateChatUsersBySingleSendMsg(mineUserId, beUserId).get(0);
@@ -146,7 +146,7 @@ public class ChatService {
             //则为chatId
             Long chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(chatIdStr);
 
-            SocialuniChatDO chatDO = SocialuniRepositoryFacade.findByUnionId(chatId, SocialuniChatDO.class);
+            SocialuniChatDO chatDO = SocialuniChatDOUtil.findByUnionId(chatId);
 
             ChatRO chatRO = SocialChatROFactory.getNoLoginChatRO(chatDO);
 

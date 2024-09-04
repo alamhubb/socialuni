@@ -6,7 +6,6 @@ import com.socialuni.social.common.api.exception.exception.SocialParamsException
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.im.api.model.QO.MessageQueryVO;
 import com.socialuni.social.im.api.model.RO.SocialMessageRO;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatDO;
@@ -23,6 +22,7 @@ import com.socialuni.social.content.utils.SocialuniTextContentUtil;
 import com.socialuni.social.sdk.im.logic.foctory.SocialMessageROFactory;
 import com.socialuni.social.sdk.im.logic.manage.SocialuniChatUserManage;
 import com.socialuni.social.sdk.im.logic.service.chat.ChatService;
+import com.socialuni.social.sdk.im.utils.SocialuniChatDOUtil;
 import com.socialuni.social.sdk.im.utils.SocialuniChatUserDOUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
@@ -80,7 +80,7 @@ public class SocialuniMessageService {
 
         String idContentType = socialuniUnionIdModler.getContentType();
 
-        Long unionId = socialuniUnionIdModler.getUnionIdqqq();
+        Long unionId = socialuniUnionIdModler.getUnionId();
         //旧版本
         if (idContentType.equals(SocialuniContentType.user)) {
             //为私聊相关校验
@@ -233,7 +233,7 @@ public class SocialuniMessageService {
         //私聊
         if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.user)) {
             Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
-            Long beUserId = socialuniUnionIdModler.getUnionIdqqq();
+            Long beUserId = socialuniUnionIdModler.getUnionId();
 
             //如果用户存在查看会话
             SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findByChatIdAndUserId(mineUserId, beUserId);
@@ -247,7 +247,7 @@ public class SocialuniMessageService {
             //则为chatId
             Long chatId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(chatIdStr);
 
-            SocialuniChatDO chatDO = SocialuniRepositoryFacade.findByUnionId(chatId, SocialuniChatDO.class);
+            SocialuniChatDO chatDO = SocialuniChatDOUtil.findByUnionId(chatId);
             if (!chatDO.getStatus().equals(ChatStatus.enable)) {
                 throw new SocialBusinessException("会话已被删除");
             }
@@ -275,7 +275,7 @@ public class SocialuniMessageService {
         //私聊
         if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.user)) {
             Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
-            Long beUserId = socialuniUnionIdModler.getUnionIdqqq();
+            Long beUserId = socialuniUnionIdModler.getUnionId();
 
             //如果用户存在查看会话
             SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findByChatIdAndUserId(mineUserId, beUserId);
@@ -290,7 +290,7 @@ public class SocialuniMessageService {
             //则为chatId
             Long chatId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(chatIdStr);
 
-            SocialuniChatDO chatDO = SocialuniRepositoryFacade.findByUnionId(chatId, SocialuniChatDO.class);
+            SocialuniChatDO chatDO = SocialuniChatDOUtil.findByUnionId(chatId);
             if (!chatDO.getStatus().equals(ChatStatus.enable)) {
                 throw new SocialBusinessException("会话已被删除");
             }

@@ -44,7 +44,7 @@ public class SocialuniChatUserDOFactory {
             //私聊
             if (contentType.equals(SocialuniContentType.user)) {
                 Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
-                Long beUserId = socialuniUnionIdModler.getUnionIdqqq();
+                Long beUserId = socialuniUnionIdModler.getUnionId();
 
                 SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findByChatIdAndUserId(mineUserId, beUserId);
 

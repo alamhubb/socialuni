@@ -10,7 +10,7 @@ import com.socialuni.social.tance.sdk.constant.AppConfigDOKeyConst;
 import com.socialuni.social.common.api.model.SocialuniAppConfigBO;
 import com.socialuni.social.common.api.model.SocialuniAppMoreConfigBO;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
-import com.socialuni.social.tance.sdk.constant.SocialuniDevConfig;
+import com.socialuni.social.tance.sdk.config.SocialuniDevConfig;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import lombok.extern.slf4j.Slf4j;
@@ -61,9 +61,9 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
         });
 
         //每次启动，都用系统默认值，替换insert中的值
-        String phoneNum = SocialuniSystemConst.getSystemUserPhoneNum();
+        String phoneNum = SocialuniDevConfig.getSystemUserPhoneNum();
 
-        DevAccountModel devAccountModel = devAccountInterface.findOneByPhoneNumOrderByIdAsc(phoneNum);
+        DevAccountModel devAccountModel = devAccountInterface.findFirstById(1);
 
         //如果不存在用户，则创建第一个默认的主系统开发者
         if (devAccountModel == null) {
@@ -90,7 +90,7 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
         }
 
         //测试渠道的账号,干嘛用的呢，方便可以往中心发帖子
-        String phoneNumTest = SocialuniSystemConst.getTestUserPhoneNum();
+        String phoneNumTest = SocialuniDevConfig.getTestUserPhoneNum();
 
         DevAccountModel devAccountModelTest = devAccountInterface.findOneByPhoneNumOrderByIdAsc(phoneNumTest);
 

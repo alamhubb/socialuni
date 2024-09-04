@@ -2,10 +2,12 @@ package com.socialuni.social.tance.sdk.facade;
 
 import com.socialuni.social.common.api.constant.GenderType;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.api.DevAccountProviderInterface;
 import com.socialuni.social.tance.sdk.api.DevAccountRedisInterface;
+import com.socialuni.social.tance.sdk.config.SocialuniDevConfig;
 import com.socialuni.social.tance.sdk.constant.AdminAppConfigConst;
 import com.socialuni.social.tance.sdk.enumeration.SocialFeignHeaderName;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
@@ -26,6 +28,7 @@ public class DevAccountFacade {
 //    public static final String appGenderTypeKey = "appGenderType";
 
     private static DevAccountInterface devAccountApi;
+    private final static Integer systemDevId = 1;
     private static DevAccountRedisInterface devAccountRedisInterface;
     private static DevAccountProviderInterface devAccountProviderApi;
 
@@ -102,7 +105,7 @@ public class DevAccountFacade {
     }
 
     public static Integer getTestDevIdAllNull() {
-        DevAccountModel devAccountModel = devAccountApi.findOneByPhoneNumOrderByIdAsc(SocialuniSystemConst.testUserPhoneNum);
+        DevAccountModel devAccountModel = devAccountApi.findOneByPhoneNumOrderByIdAsc(SocialuniDevConfig.testUserPhoneNum);
         if (devAccountModel == null) {
             return null;
         }
@@ -216,16 +219,23 @@ public class DevAccountFacade {
         DevAccountModel devAccountModel = DevAccountFacade.getDevAccountAllowNull();
         if (devAccountModel == null) {
             //每次启动，都用系统默认值，替换insert中的值
-            String phoneNum = SocialuniSystemConst.getSystemUserPhoneNum();
-            devAccountModel = DevAccountFacade.findOneByPhoneNumOrderByIdAsc(phoneNum);
+//            String phoneNum = SocialuniDevConfig.getSystemUserPhoneNum();
+            devAccountModel = getSystemDevAccount();
 //            throw new SocialBusinessException("开发者信息为空");
         }
         return devAccountModel;
     }
 
+    public static String getSystemUserPhoneNum() {
+        return getSystemDevAccount().getPhoneNum();
+    }
+
     public static DevAccountModel getSystemDevAccount() {
-        String phoneNum = SocialuniSystemConst.getSystemUserPhoneNum();
-        DevAccountModel devAccountModel = DevAccountFacade.findOneByPhoneNumOrderByIdAsc(phoneNum);
+//        String phoneNum = SocialuniDevConfig.getSystemUserPhoneNum();
+        DevAccountModel devAccountModel = devAccountApi.findFirstById(1);
+        if (devAccountModel == null) {
+            throw new SocialSystemException("开发者信息为空");
+        }
         return devAccountModel;
     }
 
@@ -261,7 +271,7 @@ public class DevAccountFacade {
     }
 
     public static DevAccountModel getDevAccount(Integer devId) {
-        return devAccountApi.findOneById(devId);
+        return devAccountApi.findFirstById(devId);
     }
 
     //不需要缓存，低频, admin登录使用

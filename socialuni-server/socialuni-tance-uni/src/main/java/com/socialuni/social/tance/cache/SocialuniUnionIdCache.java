@@ -38,7 +38,7 @@ public class SocialuniUnionIdCache implements SocialuniUnionIdInterface {
             },
             put = {@CachePut(cacheNames = {"getUnionIdByUnionId"}, key = "#uniContentUnionIdDO.id", condition = "#uniContentUnionIdDO.id != null")}
     )
-    public SocialuniUnionIdDo save(SocialuniUnionIdModler uniContentUnionIdDO) {
+    public SocialuniUnionIdDo savePut(SocialuniUnionIdModler uniContentUnionIdDO) {
         return uniContentUnionIdRepository.save(BeanUtil.copyProperties(uniContentUnionIdDO, SocialuniUnionIdDo.class));
     }
 

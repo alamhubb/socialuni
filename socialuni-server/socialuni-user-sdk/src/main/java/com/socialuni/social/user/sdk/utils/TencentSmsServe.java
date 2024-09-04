@@ -5,6 +5,8 @@ import com.github.qcloudsms.SmsSingleSenderResult;
 import com.socialuni.social.common.sdk.utils.StringUtil;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
+import com.socialuni.social.tance.sdk.config.SocialuniDevConfig;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -39,7 +41,7 @@ public class TencentSmsServe {
 
     public static String sendAuthCode(String phoneNum) {
         String authCode = "1111";
-        if (phoneNum.equals(SocialuniSystemConst.getSystemUserPhoneNum()) || phoneNum.equals(SocialuniSystemConst.getTestUserPhoneNum())) {
+        if (phoneNum.equals(DevAccountFacade.getSystemUserPhoneNum()) || phoneNum.equals(SocialuniDevConfig.getTestUserPhoneNum())) {
             log.info("非生产环境不发送验证码，开发环境验证码为：{}", authCode);
         } else if (SocialuniSystemConst.getIsProdEnv() && StringUtil.isNotEmpty(appKey)) {
             authCode = AuthCodeUtil.getAuthCode();

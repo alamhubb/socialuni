@@ -1,5 +1,6 @@
-package com.socialuni.social.tance.sdk.constant;
+package com.socialuni.social.tance.sdk.config;
 
+import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
@@ -9,11 +10,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class SocialuniDevConfig {
     @Getter
+    private static String systemUserPhoneNum;
+    @Getter
     public static final String testUserPhoneNum = "12222222222";
     private static String socialuniDevSecretKey;
     private static String socialuniServerUrl;
     private static String appSocialuniId;
     private static String centerSocialuniId;
+
+    @Value("${socialuni.system-user-phone-num:11111111111}")
+    public void setSystemUserPhoneNum(String systemUserPhoneNum) {
+        SocialuniDevConfig.systemUserPhoneNum = systemUserPhoneNum;
+    }
 
     @Value("${socialuni.secret-key:#{null}}")
     public void setSocialuniDevSecretKey(String socialuniDevSecretKey) {

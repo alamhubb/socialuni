@@ -3,6 +3,7 @@ package com.socialuni.social.sdk.im.utils;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.socialuni.social.sdk.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniChatRepository;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniChatUserRepository;
@@ -29,6 +30,9 @@ public class SocialuniChatDOUtil {
         SocialuniChatDOUtil.socialuniChatUserRepository = socialuniChatUserRepository;
     }
 
+    public static SocialuniChatDO findByUnionId(Long chatId) {
+        return socialuniChatRepository.findFirstByUnionId(chatId);
+    }
 
     //支持uuid，chatUserId,chatId, 群聊应该返回chatId, 私聊应该返回UserId
     public static Long getChatId(String chatIdStr) {
@@ -40,7 +44,7 @@ public class SocialuniChatDOUtil {
 
         SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidNotNull(chatIdStr);
 
-        Long unionId = socialuniUnionIdModler.getUnionIdqqq();
+        Long unionId = socialuniUnionIdModler.getUnionId();
 
         if (SocialuniContentType.chat.equals(socialuniUnionIdModler.getContentType())) {
             return unionId;

@@ -184,6 +184,22 @@ public class SocialuniCommonRepository {
         return null;
     }
 
+    public <T extends SocialuniBaseDO> T findByCustomField(String field, String  fieldId, Class<T> tClass) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
+        Root<T> userInfo = criteriaQuery.from(tClass);
+
+        Predicate userIdPredicate = criteriaBuilder.equal(userInfo.get(field), fieldId);
+        criteriaQuery.where(userIdPredicate);
+
+        List<T> list = entityManager.createQuery(criteriaQuery).setFirstResult(0).setMaxResults(1).getResultList();
+
+        if (list.size() > 0) {
+            return list.get(0);
+        }
+        return null;
+    }
+
     public <T extends SocialuniBaseDO> T findByCustomField(String field, Long fieldId, Class<T> tClass) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);

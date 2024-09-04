@@ -78,7 +78,7 @@ public class DevAccountEntity {
         SocialuniUserDo socialuniUserDo;
         if (SocialUserPhoneDo == null) {
             //如果没注册账号，则直接注册
-            socialuniUserDo = socialUserPhoneEntity.createSysUserPhoneEntity(phoneNum);
+            socialuniUserDo = socialUserPhoneEntity.createSysUserPhoneEntity(phoneNum, devAccountModel.getId());
         } else {
             socialuniUserDo = SocialuniUserUtil.getUserNotNull(SocialUserPhoneDo.getUserId());
             socialuniUserDo.setRoleId(SocialuniSysRoleId.sys);

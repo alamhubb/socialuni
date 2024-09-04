@@ -17,7 +17,7 @@ public interface DevAccountInterface {
 //    DevAccountModel savePut(DevAccountModel devAccountModel);
     DevAccountModel save(DevAccountModel devAccountModel);
     //    @Cacheable(cacheNames = "getDevAccountById", key = "#id")
-    DevAccountModel findOneById(Integer id);
+    DevAccountModel findFirstById(Integer id);
     DevAccountModel findFirstByUserId(Long id);
 
     //直接携带秘钥访问

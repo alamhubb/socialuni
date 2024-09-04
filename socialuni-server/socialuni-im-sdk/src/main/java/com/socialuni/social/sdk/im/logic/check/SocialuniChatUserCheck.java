@@ -9,6 +9,7 @@ import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniChatUserRepository;
 import com.socialuni.social.sdk.im.enumeration.ChatOpenType;
 import com.socialuni.social.sdk.im.enumeration.ChatUserStatus;
+import com.socialuni.social.sdk.im.utils.SocialuniChatDOUtil;
 import com.socialuni.social.sdk.im.utils.SocialuniChatUserDOUtil;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +21,7 @@ public class SocialuniChatUserCheck {
     private SocialuniChatUserRepository chatUserRepository;
 
     public SocialuniChatUserDO checkUserInChat(Long chatId, Long sendUserId) {
-        SocialuniChatDO chat = SocialuniRepositoryFacade.findByUnionId(chatId, SocialuniChatDO.class);
+        SocialuniChatDO chat = SocialuniChatDOUtil.findByUnionId(chatId);
 
         if (chat == null) {
             throw new SocialParamsException("不存在的群聊");

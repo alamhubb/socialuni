@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface SocialuniUnionIdInterface {
 
-    SocialuniUnionIdModler save(SocialuniUnionIdModler uniContentUnionIdDO);
+    SocialuniUnionIdModler savePut(SocialuniUnionIdModler uniContentUnionIdDO);
 
     SocialuniUnionIdModler findByUnionId(Long unionId);
 

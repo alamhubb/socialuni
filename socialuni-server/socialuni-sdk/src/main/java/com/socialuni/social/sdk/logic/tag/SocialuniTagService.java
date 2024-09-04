@@ -7,10 +7,9 @@ import com.socialuni.social.common.sdk.model.QO.tag.TagAddQO;
 import com.socialuni.social.tag.logic.SoicialTagAddDomain;
 import com.socialuni.social.tag.model.TagRO;
 import com.socialuni.social.tag.model.TagTypeRO;
-import com.socialuni.social.tance.sdk.constant.SocialuniDevConfig;
+import com.socialuni.social.tance.sdk.config.SocialuniDevConfig;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.api.constant.GenderType;
-import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import org.springframework.stereotype.Service;
 

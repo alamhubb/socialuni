@@ -18,7 +18,7 @@ import SocialuniDeviceUidUtil from "socialuni-user-sdk/src/util/SocialuniDeviceU
 
 class SocialuniAppPlugin implements SocialuniPlugin {
     onLaunch() {
-        socialuniConfigModule.getDeviceUidAction()
+        socialuniConfigModule.getDeviceUidAndDeviceLoginAction()
         socialuniConfigModule.getAppConfigAction()
 
 

@@ -19,7 +19,7 @@ public class SocialuniUnionIdModler extends SocialuniBaseDO implements Serializa
     private Integer fromDevId;
     //数据所有方
     //主要是不想泄露真实id，所以用的其他id
-    private Long unionIdqqq;
+    private Long unionId;
 
     //三方的用户，来注册的时候，好好想想各种情况， 应该都会有dataunionid
     public SocialuniUnionIdModler(String contentType, String uuid, Integer fromDevId) {
@@ -34,12 +34,9 @@ public class SocialuniUnionIdModler extends SocialuniBaseDO implements Serializa
     public SocialuniUnionIdModler(String contentType, Long unionId, Integer fromDevId) {
         //这俩字段应该用不到，只是方便统计有用，也不是读出来的数据有用，评论时需要根据这个通知到对方，
         this.contentType = contentType;
-        this.unionIdqqq = unionId;
+        this.unionId = unionId;
+        this.uuid = String.valueOf(unionId);
 //        this.belongDevId = belongDevId;
         this.fromDevId = fromDevId;
-    }
-
-    public Long getUnionIdqqq() {
-        return this.unionIdqqq;
     }
 }

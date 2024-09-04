@@ -31,6 +31,7 @@ import com.socialuni.social.sdk.im.logic.foctory.SocialMessageROFactory;
 import com.socialuni.social.sdk.im.logic.foctory.SocialuniChatUserDOFactory;
 import com.socialuni.social.sdk.im.logic.foctory.SocialuniMessageDOFactory;
 import com.socialuni.social.sdk.im.notify.NotifyVO;
+import com.socialuni.social.sdk.im.utils.SocialuniChatDOUtil;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserBlackDO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -173,7 +174,7 @@ public class SocialuniMessageEntity {
     SocialuniChatUserCheck socialuniChatUserCheck;
 
     public SocialMessageRO sendGroupMessage(Long chatId, String msgContent, String contentType) {
-        SocialuniChatDO chat = SocialuniRepositoryFacade.findByUnionId(chatId, SocialuniChatDO.class);
+        SocialuniChatDO chat = SocialuniChatDOUtil.findByUnionId(chatId);
 
         SocialuniUserDo sendUser = SocialuniUserUtil.getMineUserNotNull();
 

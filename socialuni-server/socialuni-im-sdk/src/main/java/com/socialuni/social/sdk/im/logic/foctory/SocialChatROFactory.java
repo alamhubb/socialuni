@@ -301,7 +301,7 @@ public class SocialChatROFactory {
             //私聊
             if (contentType.equals(SocialuniContentType.user)) {
                 Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
-                Long beUserId = socialuniUnionIdModler.getUnionIdqqq();
+                Long beUserId = socialuniUnionIdModler.getUnionId();
                 SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findByChatIdAndUserId(mineUserId, beUserId);
 
                 return chatUserDO;
@@ -316,7 +316,7 @@ public class SocialChatROFactory {
         SocialuniChatUserDO socialuniChatUserDO = getSingleChatUser(chatId);
         if (socialuniChatUserDO == null) {
             SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidNotNull(chatId);
-            return socialuniUnionIdModler.getUnionIdqqq();
+            return socialuniUnionIdModler.getUnionId();
         }
         return socialuniChatUserDO.getChatId();
     }

@@ -14,6 +14,7 @@ import javax.persistence.*;
         uniqueConstraints = {
                 //不允许不同应用重复写入一条内容
                 @UniqueConstraint(columnNames = {"uuid"}),
+                @UniqueConstraint(columnNames = {"unionId"}),
         }
 )
 @Data
@@ -23,7 +24,7 @@ public class SocialuniUnionIdDo extends SocialuniUnionIdModler {
     private String contentType;
     @Column(nullable = false)
     private String uuid;
-    @Column(nullable = false)
+    @Column
     private Long unionId;
     //数据所属权
 //    private Integer belongDevId;
