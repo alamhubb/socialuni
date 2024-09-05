@@ -70,6 +70,7 @@ public class FeignInterceptor implements RequestInterceptor {
             if (mineUser != null) {
                 Integer serverDevId = DevAccountFacade.getCenterDevIdNotNull();
                 SocialuniThirdTokenDO socialuniThirdTokenDO = SocialuniThirdTokenUtil.getThirdUserToken(serverDevId, mineUser.getUserId());
+
                 if (socialuniThirdTokenDO == null) {
                     SocialProviderLoginQO socialProviderLoginQO = createRegistryQO(mineUser);
                     ResultRO<SocialLoginRO<SocialuniUserRO>> resultRO = socialuniThirdUserAPI.registryUser(socialProviderLoginQO);

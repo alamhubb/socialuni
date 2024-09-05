@@ -22,14 +22,13 @@ export default class SocialuniLoginService {
 
 
     static async deviceUidLogin() {
-        const deviceUid = SocialuniDeviceUidUtil.get();
+        const deviceUid = await socialuniConfigModule.getDeviceUidAction();
         try {
             const {data} = await LoginAPI.deviceUidLoginAPI(deviceUid)
             SocialuniUserService.loginSuccess(data, true)
             return data.user
         } catch (e) {
             SocialuniDeviceUidUtil.remove()
-            await socialuniConfigModule.getDeviceUidAction()
         }
     }
 

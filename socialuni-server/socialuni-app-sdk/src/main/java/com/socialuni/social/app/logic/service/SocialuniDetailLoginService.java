@@ -127,20 +127,7 @@ public class SocialuniDetailLoginService {
 
 
     public ResultRO<SocialLoginRO<SocialuniUserRO>> deviceUidLogin(SocialuniDeviceUidLoginQO socialuniDeviceUidLoginQO) {
-        ResultRO<SocialLoginRO<SocialuniUserRO>> resultRO = null;
-        Long unionId;
-        if (SocialuniDevConfig.hasCenterServer()) {
-            resultRO = socialuniLoginAPI.deviceUidLogin(socialuniDeviceUidLoginQO);
-            SocialuniUserRO socialuniUserRO = resultRO.getData().getUser();
-            unionId = SocialuniUnionIdFacede.createUserUnionIdOrGet(socialuniUserRO.getId());
-
-            //保存三方token
-            SocialuniThirdTokenUtil.createdThirdTokenOrGet(unionId, resultRO.getData().getToken(), DevAccountFacade.getCenterDevIdNotNull());
-        } else {
-            unionId = SocialuniUnionIdFacede.createUserUnionId();
-        }
-
-        ResultRO<SocialLoginRO<SocialuniUserRO>> socialLoginRO1 = socialuniLoginService.deviceUidLogin(socialuniDeviceUidLoginQO, unionId);
+        ResultRO<SocialLoginRO<SocialuniUserRO>> socialLoginRO1 = socialuniLoginService.deviceUidLogin(socialuniDeviceUidLoginQO, SocialuniUnionIdFacede.createUserUnionId());
 
         Long mineUserId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(socialLoginRO1.getData().getUser().getId());
 
@@ -156,10 +143,6 @@ public class SocialuniDetailLoginService {
         //生成用户扩列记录
         SocialuniUserExtendFriendLogDOUtil.createUserExtendFriendLog();
 
-        if (SocialuniDevConfig.hasCenterServer()) {
-            return resultRO;
-        } else {
-            return ResultRO.success(socialLoginRO);
-        }
+        return ResultRO.success(socialLoginRO);
     }
 }
