@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class SocialuniContentIdRO {
-    private Long id;
+    private String id;
 
     public SocialuniContentIdRO(SocialuniContentIdRO contentIdRO) {
         this.id = contentIdRO.getId();

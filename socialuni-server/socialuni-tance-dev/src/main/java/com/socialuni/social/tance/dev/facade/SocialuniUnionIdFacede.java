@@ -76,7 +76,6 @@ public class SocialuniUnionIdFacede {
     //byUUid，是进入都是str
 
 
-
     private static Long createUnionIdByContentType(String contentType, Long unionId) {
         SocialuniUnionIdDo uniContentUnionIdDO = new SocialuniUnionIdDo(contentType, unionId, DevAccountFacade.getDevIdNullElseCenterDevId());
         uniContentUnionIdDO = socialuniUnionIdApi.savePut(uniContentUnionIdDO);
@@ -92,10 +91,19 @@ public class SocialuniUnionIdFacede {
         socialuniUnionIdApi.savePut(uniContentUnionIdDO);
     }
 
+
+    /*public static String getUuidByUnionIdNotNull(String uuid) {
+        if (NumberUtils.strHasNoNumber(uuid)) {
+            return null;
+        }
+        return getUuidByUnionIdNotNull(Long.valueOf(uuid));
+    }*/
+
     //social层，根据unionId获取uid，不可为空
-    public static Long getUuidByUnionIdNotNull(Long unionId) {
-        return getUnionDOByUnionIdNotNull(unionId).getUnionId();
+    public static String getUuidByUnionIdNotNull(Long unionId) {
+        return String.valueOf(getUnionDOByUnionIdNotNull(unionId).getUnionId());
     }
+
 
     //空的创建的，然后更新，只有往中心推送后，可调用这里更新
     public static SocialuniUnionIdDo getUnionDOByUnionIdNotNull(Long unionId) {
@@ -185,6 +193,7 @@ public class SocialuniUnionIdFacede {
         Long unionId = Long.valueOf(uuid);
         return getUnionByUuidNotNull(unionId);
     }
+
     //外部使用可能查询不存在的
     public static SocialuniUnionIdDo getUnionByUuidAllowNull(String uuid) {
         if (NumberUtils.strHasNoNumber(uuid)) {

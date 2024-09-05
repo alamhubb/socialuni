@@ -12,7 +12,7 @@ import lombok.Data;
  */
 @Data
 public class UserCommentBO {
-    private Long id;
+    private String id;
     private String nickname;
     private String avatar;
     private String gender;

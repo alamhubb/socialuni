@@ -25,7 +25,7 @@ public class SocialuniUserROFactory {
     public static SocialuniUserRO getUserRO(SocialuniUserDo userDO, SocialuniUserDo lookUser) {
         //user基础信息
         SocialuniUserRO user = new SocialuniUserRO();
-        Long userUid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(userDO.getUnionId());
+        String userUid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(userDO.getUnionId());
         if (lookUser == null) {
             user.setIsMine(false);
         } else {
