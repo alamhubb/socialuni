@@ -11,7 +11,7 @@ import java.util.List;
 
 public class SocialuniPeiwanInfoImgDOFactory {
     public static SocialuniPeiwanInfoImgDO createPeiwanImgDO(Long userId, SocialuniImgAddQO imgAddQO, Integer order) {
-        Long unionId = SocialuniUnionIdFacede.createPeiwanImgUnionId(SnowflakeIdUtil.nextId());
+        Long unionId = SocialuniUnionIdFacede.createPeiwanImgUnionId(SnowflakeIdUtil.nextIdStr());
 
         SocialuniPeiwanInfoImgDO socialuniPeiwanInfoImgDO = new SocialuniPeiwanInfoImgDO(userId, unionId, SocialuniContentType.peiwanImg);
 

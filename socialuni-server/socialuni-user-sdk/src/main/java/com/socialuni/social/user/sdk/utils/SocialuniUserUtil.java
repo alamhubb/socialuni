@@ -71,7 +71,7 @@ public class SocialuniUserUtil {
         return getMineUserAllowNull() != null;
     }
 
-    public static Long getMineUserUuidIdNotNull() {
+    public static String getMineUserUuidIdNotNull() {
         Long mineUserId = getMineUserIdNotNull();
         return SocialuniUnionIdFacede.getUuidByUnionIdNotNull(mineUserId);
     }

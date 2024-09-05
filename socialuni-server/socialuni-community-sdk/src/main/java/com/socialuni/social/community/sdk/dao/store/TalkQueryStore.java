@@ -15,7 +15,7 @@ import com.socialuni.social.common.api.model.SocialuniAppConfigBO;
 import com.socialuni.social.common.api.enumeration.ContentStatus;
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.community.sdk.model.QO.talk.SocialHomeTabTalkQueryBO;
-import com.socialuni.social.community.sdk.model.QO.talk.SocialUserTalkQueryQO;
+import com.socialuni.social.community.sdk.model.QO.talk.SocialUserTalkQueryBO;
 import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.api.constant.GenderType;
@@ -75,7 +75,7 @@ public class TalkQueryStore {
         return this.queryTalksByIds(ids);
     }
 
-    public List<? extends SocialuniTalkDO> queryUserTalks(SocialUserTalkQueryQO queryQO, SocialuniUserDo mineUser) {
+    public List<? extends SocialuniTalkDO> queryUserTalks(SocialUserTalkQueryBO queryQO, SocialuniUserDo mineUser) {
         List<Long> talkIds = queryQO.getTalkIds();
         Long userId = queryQO.getUserId();
 

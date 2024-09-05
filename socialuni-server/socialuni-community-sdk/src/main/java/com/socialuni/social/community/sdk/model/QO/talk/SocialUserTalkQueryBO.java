@@ -12,12 +12,12 @@ import java.util.List;
  */
 @Data
 @NoArgsConstructor
-public class SocialUserTalkQueryQO {
+public class SocialUserTalkQueryBO {
     @NotNull(message = "入参为空异常")
     private Long userId;
     private List<Long> talkIds;
 
-    public SocialUserTalkQueryQO(Long userId, List<Long> talkIds) {
+    public SocialUserTalkQueryBO(Long userId, List<Long> talkIds) {
         this.userId = userId;
         this.talkIds = talkIds;
     }

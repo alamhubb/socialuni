@@ -79,7 +79,7 @@ public class SocialTokenFacade {
         //生成的时候使用商户号，因为token中不存储敏感信息
         return Jwts.builder()//返回的字符串便是我们的jwt串了
                 //先用userid，以后可以改为用uid
-                .setSubject(userKey + "_" + UUIDUtil.getSnowflakeId())//设置主题
+                .setSubject(userKey + "_" + UUIDUtil.getUUID())//设置主题
                 .signWith(SignatureAlgorithm.HS256, tokenSecretKey)//设置算法（必须）
                 .compact();//这个是全部设置完成后拼成jwt串的方法
     }

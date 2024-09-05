@@ -35,7 +35,7 @@ public class SocialuniAdminPeiwanService {
 
 
     public ResultRO<Void> addPeiwanInfo(@RequestBody SocialuniPeiwanInfoRO socialuniPeiwanInfoAddQO) {
-        SocialuniUserDo mineUser = socialUserManage.createUser(SnowflakeIdUtil.nextId());
+        SocialuniUserDo mineUser = socialUserManage.createUser(SocialuniUnionIdFacede.createUserUnionId());
 
         SocialuniPeiwanInfoDO socialuniPeiwanInfoDO = SocialuniPeiwanInfoDOFactory.createPeiwanDO(mineUser, socialuniPeiwanInfoAddQO);
 
@@ -50,7 +50,7 @@ public class SocialuniAdminPeiwanService {
         List<SocialuniPeiwanInfoDO> list = new ArrayList<>();
 
         for (SocialuniPeiwanInfoRO socialuniPeiwanInfoAddQO : socialuniPeiwanInfoAddQOs) {
-            SocialuniUserDo mineUser = socialUserManage.createUser(SnowflakeIdUtil.nextId());
+            SocialuniUserDo mineUser = socialUserManage.createUser(SocialuniUnionIdFacede.createUserUnionId());
 
             SocialuniPeiwanInfoDO socialuniPeiwanInfoDO = SocialuniPeiwanInfoDOFactory.createPeiwanDO(mineUser, socialuniPeiwanInfoAddQO);
             list.add(socialuniPeiwanInfoDO);

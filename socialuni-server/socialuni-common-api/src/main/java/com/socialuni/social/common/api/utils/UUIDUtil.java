@@ -26,8 +26,8 @@ public class UUIDUtil {
      *
      * @return
      */
-    public static long getSnowflakeId() {
-        return SnowflakeIdUtil.nextId();
+    public static String getSnowflakeId() {
+        return SnowflakeIdUtil.nextIdStr();
     }
 
     public static String getUUID() {

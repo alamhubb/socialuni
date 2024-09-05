@@ -12,6 +12,7 @@ import com.socialuni.social.common.api.model.SocialuniAppConfigBO;
 import com.socialuni.social.common.api.model.SocialuniAppMoreConfigBO;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.tance.dev.facade.DevAccountFacade;
+import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.tance.dev.model.DevAccountModel;
 import com.socialuni.social.tance.entity.DevAccountEntity;
 import lombok.extern.slf4j.Slf4j;
@@ -71,10 +72,10 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
             //copy一个default的值
 
             if (StringUtils.isEmpty(SocialuniSystemConst.getAppSocialuniId())) {
-                devAccountModel = devAccountEntity.createDevAccount(phoneNum, SnowflakeIdUtil.nextId());
+                devAccountModel = devAccountEntity.createDevAccount(phoneNum, SocialuniUnionIdFacede.createUserUnionId());
 
             } else {
-                devAccountModel = devAccountEntity.createDevAccount(phoneNum, SocialuniSystemConst.getAppSocialuniId(), SnowflakeIdUtil.nextId());
+                devAccountModel = devAccountEntity.createDevAccount(phoneNum, SocialuniSystemConst.getAppSocialuniId(), SocialuniUnionIdFacede.createUserUnionId());
             }
 
 
@@ -103,7 +104,7 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
         //如果不存在用户，则创建第一个默认的主系统开发者
         if (devAccountModelTest == null) {
             //copy一个default的值
-            devAccountModelTest = devAccountEntity.createDevAccount(phoneNumTest, SnowflakeIdUtil.nextId());
+            devAccountModelTest = devAccountEntity.createDevAccount(phoneNumTest, SocialuniUnionIdFacede.createUserUnionId());
         }
 
         //创建中心
@@ -111,7 +112,7 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
             DevAccountModel centerDevDO = DevAccountFacade.getDevAccountBySocialuniId(SocialuniSystemConst.getCenterSocialuniId());
             if (centerDevDO == null) {
                 //手机号格式字符串瞎写就行，没有其他地方使用
-                devAccountEntity.createDevAccount("99999888667", SocialuniSystemConst.getCenterSocialuniId(), SnowflakeIdUtil.nextId());
+                devAccountEntity.createDevAccount("99999888667", SocialuniSystemConst.getCenterSocialuniId(), SocialuniUnionIdFacede.createUserUnionId());
             }
         }
         //获取省，不包含子节点

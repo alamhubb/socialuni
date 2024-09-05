@@ -48,7 +48,7 @@ public class SocialuniAppService {
 
     public static void main(String[] args) {
         //先对秘钥进行加密，然后再对加密后的进行加密
-        Long uuidKey = UUIDUtil.getUUID();
+        String uuidKey = UUIDUtil.getUUID();
         //秘钥
         AES aes = SecureUtil.aes(uuidKey.getBytes());
         String encrypted = aes.encryptHex(SocialTokenFacade.getPasswordPublicKey());

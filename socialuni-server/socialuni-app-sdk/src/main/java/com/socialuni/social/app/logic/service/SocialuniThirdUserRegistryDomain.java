@@ -3,6 +3,7 @@ package com.socialuni.social.app.logic.service;
 import com.socialuni.social.app.factory.SocialuniMineUserDetailROFactory;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.common.api.utils.SnowflakeIdUtil;
+import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniTokenDO;
 import com.socialuni.social.user.sdk.logic.entity.SocialUserEntity;
@@ -35,7 +36,7 @@ public class SocialuniThirdUserRegistryDomain {
         //如果已经注册过
         String phoneNum = loginQO.getPhoneNum();
         SocialuniUserDo mineUser = null;
-        long unionId = SnowflakeIdUtil.nextId();
+        long unionId = SocialuniUnionIdFacede.createUserUnionId();
 
         if (StringUtils.isEmpty(phoneNum)) {
             mineUser = socialUserEntity.createUserAndDetail(loginQO, unionId);

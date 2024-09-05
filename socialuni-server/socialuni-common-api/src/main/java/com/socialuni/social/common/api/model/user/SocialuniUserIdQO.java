@@ -8,5 +8,5 @@ import javax.validation.constraints.NotNull;
 @Data
 public class SocialuniUserIdQO {
     @NotBlank(message = "入参为空异常")
-    Long userId;
+    String userId;
 }

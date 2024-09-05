@@ -17,7 +17,7 @@ public class UserImgDOFactory {
         //这里需要记录，变更历史，通过照片有效无效记录，
         SocialuniUserImgDo userImgDO = new SocialuniUserImgDo();
 
-        Long userImgUnionId = SocialuniUnionIdFacede.createUserImgUnionId(SnowflakeIdUtil.nextId());
+        Long userImgUnionId = SocialuniUnionIdFacede.createUserImgUnionId(SnowflakeIdUtil.nextIdStr());
         userImgDO.setUnionId(userImgUnionId);
 
         userImgDO.setSrc(socialUserImgAddQO.getSrc());

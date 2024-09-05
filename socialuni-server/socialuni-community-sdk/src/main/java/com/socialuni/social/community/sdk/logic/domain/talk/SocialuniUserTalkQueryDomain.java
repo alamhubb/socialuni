@@ -1,7 +1,7 @@
 package com.socialuni.social.community.sdk.logic.domain.talk;
 
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.community.sdk.model.QO.talk.SocialUserTalkQueryQO;
+import com.socialuni.social.community.sdk.model.QO.talk.SocialUserTalkQueryBO;
 import com.socialuni.social.community.sdk.model.QO.talk.SocialuniUserTalkQueryQO;
 import com.socialuni.social.community.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
@@ -29,7 +29,7 @@ public class SocialuniUserTalkQueryDomain {
 
         List<Long> talkIds = SocialuniUnionIdFacede.getContentIdsByTalkUnionIds(queryQO.getTalkIds());
 
-        SocialUserTalkQueryQO socialUserTalkQueryQO = new SocialUserTalkQueryQO(userId, talkIds);
+        SocialUserTalkQueryBO socialUserTalkQueryQO = new SocialUserTalkQueryBO(userId, talkIds);
 
         List<SocialuniTalkRO> socialTalkROS = socialUserTalkQueryDomain.queryUserTalks(socialUserTalkQueryQO, mineUser);
 

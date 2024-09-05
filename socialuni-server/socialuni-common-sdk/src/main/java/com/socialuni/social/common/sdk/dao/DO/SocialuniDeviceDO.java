@@ -23,5 +23,5 @@ import javax.persistence.Table;
 public class SocialuniDeviceDO extends SocialuniBaseDO {
     private String device;
     private String deviceOther;
-    private Long uuid;
+    private String uuid;
 }

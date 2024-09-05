@@ -15,7 +15,7 @@ public class SocialuniMessageDOFactory {
     }
 
     public static SocialuniMessageDO createMessage(Long chatId, String content, Long userId, String contentType) {
-        Long messageId = SocialuniUnionIdFacede.createMessageUnionId(SnowflakeIdUtil.nextId());
+        Long messageId = SocialuniUnionIdFacede.createMessageUnionId(SnowflakeIdUtil.nextIdStr());
 
         SocialuniMessageDO messageDO = new SocialuniMessageDO(userId, messageId, SocialuniContentType.message, content);
 

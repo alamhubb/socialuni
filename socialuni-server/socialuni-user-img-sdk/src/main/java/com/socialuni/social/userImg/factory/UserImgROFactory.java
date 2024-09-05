@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class UserImgROFactory {
     public static SocialuniUserImgRO DOtoRO(SocialuniUserImgDo userImg) {
         SocialuniUserImgRO imgVO = new SocialuniUserImgRO();
-        Long uid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(userImg.getUnionId());
+        String uid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(userImg.getUnionId());
         imgVO.setId(uid);
         imgVO.setSrc(SocialuniSystemConst.getStaticResourceUrl() + userImg.getSrc());
         imgVO.setAspectRatio(userImg.getAspectRatio());

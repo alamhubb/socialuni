@@ -112,7 +112,7 @@ public class WebsocketServer extends TextWebSocketHandler {
     }
 
     public static void sendMessage(Long userId, NotifyVO notify) {
-        Long uuid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(userId);
+        String uuid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(userId);
         WebSocketSession session = onlineUsersSessionMap.get(uuid);
         if (session == null) {
             return;

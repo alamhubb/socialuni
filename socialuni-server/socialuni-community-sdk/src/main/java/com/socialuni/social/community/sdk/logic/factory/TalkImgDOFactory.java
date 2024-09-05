@@ -1,6 +1,7 @@
 package com.socialuni.social.community.sdk.logic.factory;
 
 import com.socialuni.social.common.api.constant.SocialuniContentType;
+import com.socialuni.social.common.api.utils.SnowflakeIdUtil;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkImgDO;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
 public class TalkImgDOFactory {
     public static SocialuniTalkImgDO newTalkImgDO(SocialuniImgAddQO talkImgVO) {
         SocialuniTalkImgDO socialTalkImgDO = new SocialuniTalkImgDO();
-        Long talkImgUnionId = SocialuniUnionIdFacede.createTalkImgUnionId();
+        Long talkImgUnionId = SocialuniUnionIdFacede.createTalkImgUnionId(SnowflakeIdUtil.nextIdStr());
         socialTalkImgDO.setUnionId(talkImgUnionId);
 
         socialTalkImgDO.setSrc(talkImgVO.getSrc());

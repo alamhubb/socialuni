@@ -77,7 +77,7 @@ public class SocialuniAppController implements SocialuniAppAPI {
     @SocialuniNoUseFeignAspect
     public ResultRO<String> getDeviceUid(@RequestBody @NotNull SocialuniGetAppInitDataQO deviceUidQO) {
 
-        Long uuid = UUIDUtil.getUUID();
+        String uuid = UUIDUtil.getUUID();
 
         if (SocialuniDevConfig.hasCenterServer()) {
             ResultRO<String> stringResultRO = socialuniAppAPI.getDeviceUid(deviceUidQO);

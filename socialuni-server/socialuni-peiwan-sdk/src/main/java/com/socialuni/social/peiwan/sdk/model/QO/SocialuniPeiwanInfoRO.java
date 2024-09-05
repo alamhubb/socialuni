@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 public class SocialuniPeiwanInfoRO  {
-    private Long userId;
+    private String userId;
     private String nickname;
     private String avatar;
 

@@ -37,6 +37,10 @@ public class SocialuniUnionIdDo extends SocialuniBaseDO implements Serializable 
     //数据所有方
     //主要是不想泄露真实id，所以用的其他id
 
+    public long getUnionId() {
+        return this.unionId;
+    }
+
 
     @Deprecated
     public String getUuid() {

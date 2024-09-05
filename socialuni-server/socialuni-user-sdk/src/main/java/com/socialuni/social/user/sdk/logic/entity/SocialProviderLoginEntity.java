@@ -2,6 +2,7 @@ package com.socialuni.social.user.sdk.logic.entity;
 
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.utils.SnowflakeIdUtil;
+import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserAccountManage;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserAccountStore;
 import com.socialuni.social.common.sdk.dao.DO.SocialUserPlatformAccountDO;
@@ -38,7 +39,7 @@ public class SocialProviderLoginEntity {
         if (socialUserAccountDO != null) {
             mineUser = SocialuniUserUtil.getUserNotNull(socialUserAccountDO.getUserId());
         } else {
-            mineUser = socialUserEntity.createUserAndDetail(loginQO, SnowflakeIdUtil.nextId());
+            mineUser = socialUserEntity.createUserAndDetail(loginQO, SocialuniUnionIdFacede.createUserUnionId());
         }
         socialUserAccountManage.checkOrCreateOrUpdate(mineUser.getUserId(), loginQO, uniUnionIdRO);
 

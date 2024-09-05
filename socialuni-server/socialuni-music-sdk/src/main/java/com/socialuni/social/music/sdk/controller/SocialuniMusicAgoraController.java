@@ -11,7 +11,6 @@ import com.socialuni.social.music.sdk.model.RO.SocialuniMusicInfoRO;
 import com.socialuni.social.music.sdk.model.RO.SocialuniMusicInitDataRO;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniChatUserRepository;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
-import io.agora.media.RtcTokenBuilder2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -57,7 +56,7 @@ public class SocialuniMusicAgoraController {
 
     }
 
-    @GetMapping("getMusicToken/{channel}")
+  /*  @GetMapping("getMusicToken/{channel}")
     public ResultRO<String> getMusicToken(@PathVariable("channel") String channel) {
         RtcTokenBuilder2 token = new RtcTokenBuilder2();
 
@@ -120,7 +119,7 @@ public class SocialuniMusicAgoraController {
         socialuniMusicInfoRO.setMusicAuthor("江南");
 
         return ResultRO.success(Collections.singletonList(socialuniMusicInfoRO));
-    }
+    }*/
 
     @PostMapping("updateMusic/{channel}")
     public ResultRO<Void> updateMusic(@PathVariable("channel") String channel, @RequestBody AgoraUpdateMusicQO updateMusicQO) {

@@ -72,7 +72,7 @@ public class SocialChatROFactory {
     public static ChatRO getGroupChatRO(SocialuniChatDO chatDO) {
         ChatRO chatRO = new ChatRO();
 
-        Long uuid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(chatDO.getUnionId());
+        String uuid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(chatDO.getUnionId());
 
         chatRO.setType(chatDO.getType());
 
@@ -146,7 +146,7 @@ public class SocialChatROFactory {
         if (ChatType.single.contains(chatRO.getType())) {
             SocialuniUserDo receiveUser = SocialuniUserUtil.getUserNotNull(chatUserDO.getBeUserId());
 
-            Long beUserId = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(receiveUser.getUserId());
+            String beUserId = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(receiveUser.getUserId());
 
 
 //            chatRO.setId(chatUserDO.getId().toString());
@@ -277,19 +277,19 @@ public class SocialChatROFactory {
     }
 
 
-    public static SocialuniChatUserDO getSingleChatUser(Long chatId) {
+    public static SocialuniChatUserDO getSingleChatUser(String chatId) {
         SocialuniUnionIdDo socialuniUnionIdDo = SocialuniUnionIdFacede.getUnionByUuidAllowNull(chatId);
 
         //创建 chatUser 的逻辑，点击进入页面，会话页加一条
         //发送消息，还有添加好友成功
         if (socialuniUnionIdDo == null) {
-            Long unionId;
+            String unionId;
             try {
                 unionId = chatId;
             } catch (Exception e) {
                 throw new SocialParamsException("错误的会话标识10011");
             }
-            SocialuniChatUserDO socialuniChatUserDO = SocialuniChatUserDOUtil.findById(Math.toIntExact(unionId));
+            SocialuniChatUserDO socialuniChatUserDO = SocialuniChatUserDOUtil.findById(socialuniUnionIdDo.getId());
             if (socialuniChatUserDO == null) {
                 throw new SocialParamsException("不存在会话信息10012");
             }
@@ -313,12 +313,13 @@ public class SocialChatROFactory {
     }
 
     public static Long getChatId(String chatId) {
-        SocialuniChatUserDO socialuniChatUserDO = getSingleChatUser(Long.valueOf(chatId));
-        if (socialuniChatUserDO == null) {
-            SocialuniUnionIdDo socialuniUnionIdDo = SocialuniUnionIdFacede.getUnionByUuidNotNull(Long.valueOf(chatId));
-            return socialuniUnionIdDo.getSelfSysId();
-        }
-        return socialuniChatUserDO.getChatId();
+//        SocialuniChatUserDO socialuniChatUserDO = getSingleChatUser(Long.valueOf(chatId));
+//        if (socialuniChatUserDO == null) {
+//            SocialuniUnionIdDo socialuniUnionIdDo = SocialuniUnionIdFacede.getUnionByUuidNotNull(Long.valueOf(chatId));
+//            return socialuniUnionIdDo.getSelfSysId();
+//        }
+//        return socialuniChatUserDO.getChatId();
+        return null;
     }
 
 }

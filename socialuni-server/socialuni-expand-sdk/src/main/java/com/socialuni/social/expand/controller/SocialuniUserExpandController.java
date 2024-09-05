@@ -48,7 +48,7 @@ public class SocialuniUserExpandController implements SocialuniUserExpandAPI {
     }
 
     @Override
-    public ResultRO<String> getUserContactInfo(Long userId) {
+    public ResultRO<String> getUserContactInfo(String userId) {
         return socialuniUserExpandService.getUserContactInfo(userId);
     }
 

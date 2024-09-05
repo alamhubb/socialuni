@@ -1,6 +1,7 @@
 package com.socialuni.social.user.sdk.logic.entity;
 
 import com.socialuni.social.common.api.utils.SnowflakeIdUtil;
+import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.logic.manage.SocialuniAuthenticationManage;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumAuthCodeQO;
@@ -30,7 +31,7 @@ public class SocialPhoneLoginEntity {
         //校验验证码，传null用户记录日志
         authenticationManage.checkAuthCode(phoneNum, authCode);
 
-        SocialuniUserDo mineUser = socialUserEntity.getOrCreateUserByPhoneNum(phoneNum, SnowflakeIdUtil.nextId());
+        SocialuniUserDo mineUser = socialUserEntity.getOrCreateUserByPhoneNum(phoneNum, SocialuniUnionIdFacede.createUserUnionId());
 
         return mineUser;
     }

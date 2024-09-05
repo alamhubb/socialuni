@@ -1,5 +1,6 @@
 package com.socialuni.social.community.sdk.dao;
 
+import com.socialuni.social.common.api.utils.SnowflakeIdUtil;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkImgDO;
 import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.community.sdk.dao.mapper.TalkImgMapper;
@@ -58,7 +59,7 @@ public class SocialuniTalkImgDOUtil {
         List<SocialuniTalkImgDO> talkImgDOS = talkImgRepository.findUnionIdTop3ByTalkIdOrderByIdAsc(talkId);
         for (SocialuniTalkImgDO talkImgDO : talkImgDOS) {
             if (ObjectUtils.isEmpty(talkImgDO.getUnionId())) {
-                Long unionId = SocialuniUnionIdFacede.createTalkImgUnionId();
+                Long unionId = SocialuniUnionIdFacede.createTalkImgUnionId(SnowflakeIdUtil.nextIdStr());
                 talkImgDO.setUnionId(unionId);
                 SocialuniTalkImgDOUtil.saveTalkImgDO(talkImgDO);
             }

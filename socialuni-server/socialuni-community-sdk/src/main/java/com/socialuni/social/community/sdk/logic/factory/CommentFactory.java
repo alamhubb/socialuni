@@ -1,5 +1,6 @@
 package com.socialuni.social.community.sdk.logic.factory;
 
+import com.socialuni.social.common.api.utils.SnowflakeIdUtil;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniCommentDO;
 import com.socialuni.social.community.sdk.model.QO.comment.SocialuniCommentPostQO;
 import com.socialuni.social.community.sdk.repository.CommentRepository;
@@ -63,7 +64,7 @@ public class CommentFactory {
         SocialuniTextContentUtil.setHasUnderageAndContactInfoByContentText(comment.getContent(), comment);
 //        comment.setSocialuniUid(addVO.getSocialuniUid());
 
-        Long unionId = SocialuniUnionIdFacede.createCommentUnionId();
+        Long unionId = SocialuniUnionIdFacede.createCommentUnionId(SnowflakeIdUtil.nextIdStr());
         comment.setUnionId(unionId);
 
 //        comment.setDevId(DevAccountUtils.getDevId());

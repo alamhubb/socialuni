@@ -22,6 +22,7 @@ import com.socialuni.social.community.sdk.model.RO.talk.SocialuniCommentRO;
 import com.socialuni.social.community.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.social.common.api.constant.GenderType;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
+import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniTokenDO;
 import com.socialuni.social.user.sdk.logic.domain.SocialuniLoginDomain;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserManage;
@@ -66,7 +67,7 @@ public class SocialuniOfficialController {
             return null;
         }
 
-        SocialuniUserDo socialuniUserDo = socialUserManage.createUserByNickname(name);
+        SocialuniUserDo socialuniUserDo = socialUserManage.createUserByNickname(name, SocialuniUnionIdFacede.createUserUnionId());
 
         SocialLoginRO<SocialuniUserRO> socialLoginRO = socialuniLoginDomain.getSocialLoginROByMineUser(socialuniUserDo, SocialuniLoginType.nickname);
 

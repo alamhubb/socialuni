@@ -17,7 +17,7 @@ public class SocialuniChatDOFactory {
     public static SocialuniChatDO getChatIdByCreateByDomainType(String chatDomainType) {
         SocialuniChatDO chatDO = new SocialuniChatDO();
 
-        Long uid = SocialuniUnionIdFacede.createChatUnionId(SnowflakeIdUtil.nextId());
+        Long uid = SocialuniUnionIdFacede.createChatUnionId(SnowflakeIdUtil.nextIdStr());
         chatDO.setUnionId(uid);
         chatDO.setContentType(SocialuniContentType.chat);
         chatDO.setType(ChatType.single);
@@ -51,7 +51,7 @@ public class SocialuniChatDOFactory {
     private static SocialuniChatDO createGroupChat(String chatName, Long userId, String type, String avatar) {
         SocialuniChatDO chatDO = new SocialuniChatDO();
 
-        Long uid = SocialuniUnionIdFacede.createChatUnionId(SnowflakeIdUtil.nextId());
+        Long uid = SocialuniUnionIdFacede.createChatUnionId(SnowflakeIdUtil.nextIdStr());
         chatDO.setUnionId(uid);
         chatDO.setChatName(chatName);
         chatDO.setAvatar(avatar);

@@ -100,7 +100,7 @@ public class SocialuniImTestController {
                 // 注册到Im
                 SocialuniImUserModel imUserModel = new SocialuniImUserModel();
 
-                Long mineUserUid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(mineUser.getUserId());
+                String mineUserUid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(mineUser.getUserId());
 
 //                imUserModel.setUserID(mineUserUid);
                 imUserModel.setNickname("名称被重置");

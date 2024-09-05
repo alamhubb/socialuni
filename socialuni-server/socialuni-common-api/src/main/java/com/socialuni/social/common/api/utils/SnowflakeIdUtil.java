@@ -14,7 +14,7 @@ import cn.hutool.core.lang.Snowflake;
 public class SnowflakeIdUtil {
     private final static Snowflake snowflake = new Snowflake(1, 1);
 
-    public static long nextId() {
+    public static Long nextId() {
         return snowflake.nextId();
     }
 

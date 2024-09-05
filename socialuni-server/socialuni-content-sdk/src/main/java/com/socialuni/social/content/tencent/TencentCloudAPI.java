@@ -69,7 +69,7 @@ public class TencentCloudAPI {
         TencentCloudAPI.bucketName = bucketName;
     }
 
-    public static SocialCosAuthRO getCosAuthorization(Long userId) {
+    public static SocialCosAuthRO getCosAuthorization(String userId) {
         if (ObjectUtils.isEmpty(userId)) {
             throw new SocialParamsException("不存在的用户");
         }

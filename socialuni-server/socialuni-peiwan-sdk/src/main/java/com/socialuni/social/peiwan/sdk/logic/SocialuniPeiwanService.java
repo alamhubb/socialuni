@@ -34,7 +34,7 @@ public class SocialuniPeiwanService {
 
 
     public ResultRO<Void> addPeiwanInfo(@RequestBody SocialuniPeiwanInfoRO socialuniPeiwanInfoAddQO) {
-        SocialuniUserDo mineUser = socialUserManage.createUser(SnowflakeIdUtil.nextId());
+        SocialuniUserDo mineUser = socialUserManage.createUser(SocialuniUnionIdFacede.createUserUnionId());
 
         SocialuniPeiwanInfoDO socialuniPeiwanInfoDO = SocialuniPeiwanInfoDOFactory.createPeiwanDO(mineUser, socialuniPeiwanInfoAddQO);
 

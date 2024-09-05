@@ -30,7 +30,7 @@ public class SocialuniCommonQueryUserRegistry implements SocialuniCommonQueryReg
     @Override
     public void checked(SocialuniKeyQueryQO queryQO) {
         List<String> keys = ListConvertUtil.objectListToStringList(JavaReflectUtil.getClassStaticFinalFieldValues(SocialuniCommonQueryKey.class));
-        Long userId = queryQO.getUserId();
+        String userId = queryQO.getUserId();
         if (StringUtils.isEmpty(userId)) {
             throw new SocialBusinessException(MessageFormat.format("查询结果：{}，需要查询参数：{}", keys.toString(), "userId"));
         }

@@ -7,6 +7,7 @@ import com.socialuni.social.common.api.exception.exception.SocialNotLoginExcepti
 import com.socialuni.social.official.model.TokenDO;
 import com.socialuni.social.official.model.TokenSocialuniTokenDO;
 import com.socialuni.social.official.model.UserDO;
+import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.logic.entity.SocialUserEntity;
 import com.socialuni.social.user.sdk.logic.manage.SocialuniTokenManage;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniTokenDO;
@@ -40,7 +41,7 @@ public class TestUserService {
             UserDO userDO = testUserRepository.findOneById(tokenDO.getUserId());
 
             SocialProviderLoginQO loginQO = new SocialProviderLoginQO(userDO.getName());
-            SocialuniUserDo socialUserDO = socialUserEntity.createUserAndDetail(loginQO);
+            SocialuniUserDo socialUserDO = socialUserEntity.createUserAndDetail(loginQO, SocialuniUnionIdFacede.createUserUnionId());
             //创建联盟token
             SocialuniTokenDO socialUserTokenDO = tokenManage.create(socialUserDO.getUnionId());
             //关联本系统和联盟的token

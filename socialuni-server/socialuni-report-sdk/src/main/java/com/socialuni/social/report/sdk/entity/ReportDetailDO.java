@@ -55,7 +55,7 @@ public class ReportDetailDO implements Serializable {
 
         this.contentId = reportDO.getContentId();
         this.content = content;
-        this.reportId = reportDO.getId();
+        this.reportId = Long.valueOf(reportDO.getId());
         this.reportType = reportType;
         this.userId = requestUserId;
 

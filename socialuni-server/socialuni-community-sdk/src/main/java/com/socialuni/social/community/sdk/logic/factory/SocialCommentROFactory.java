@@ -33,7 +33,7 @@ public class SocialCommentROFactory {
     public static SocialuniCommentRO newTalkCommentRO(SocialuniUserDo mineUser, SocialuniCommentDO comment, boolean showAll) {
         SocialuniCommentRO socialCommentRO = new SocialuniCommentRO();
 
-        Long uid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(comment.getUnionId());
+        String uid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(comment.getUnionId());
 
         socialCommentRO.setId(uid);
         socialCommentRO.setNo(comment.getNo());

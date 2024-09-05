@@ -15,7 +15,7 @@ public class SocialUnreadNotifyVO {
     //前台获取图片路径时使用的
 //    private String talkUserId;
     private String avatar;
-    private Long userId;
+    private String userId;
     private String nickname;
     private String content;
     private String replyContent;

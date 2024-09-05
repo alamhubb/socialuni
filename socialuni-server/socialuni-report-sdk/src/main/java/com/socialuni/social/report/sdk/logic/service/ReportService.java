@@ -66,7 +66,7 @@ public class ReportService {
 
             Date curDate = new Date();
             //审核通过不再接受举报，前台点击举报时，提示已官方审核通过
-            List<?  extends ReportDetailDO> ReportDetailDOs = ReportDetailUtils.getAll(ReportDO.getId());
+            List<?  extends ReportDetailDO> ReportDetailDOs = ReportDetailUtils.getAll(Long.valueOf(ReportDO.getId()));
 
             //变更detail
             for (ReportDetailDO ReportDetailDO : ReportDetailDOs) {

@@ -27,7 +27,6 @@ import com.socialuni.social.sdk.im.utils.SocialuniChatDOUtil;
 import com.socialuni.social.tance.dev.config.SocialuniAppConfig;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
-import io.agora.media.RtcTokenBuilder2;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -137,7 +136,7 @@ public class SocialuniMusicController {
     @Resource
     SocialuniMusicRoomUserEntity socialuniMusicRoomUserEntity;
 
-    @GetMapping("getMusicToken/{channel}")
+/*    @GetMapping("getMusicToken/{channel}")
     public ResultRO<String> getMusicToken(@PathVariable("channel") String channel) {
         RtcTokenBuilder2 token = new RtcTokenBuilder2();
 
@@ -147,7 +146,7 @@ public class SocialuniMusicController {
         log.info("Token with uid: {}", unionId);
         log.info("result: {}", result);
         return ResultRO.success(result);
-    }
+    }*/
 
     @GetMapping("queryMusicChannel/{channel}")
     public ResultRO<Object> queryMusicChannelInfo(@PathVariable("channel") String channel) {

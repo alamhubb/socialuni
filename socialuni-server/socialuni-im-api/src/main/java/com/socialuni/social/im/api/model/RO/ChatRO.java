@@ -20,7 +20,7 @@ public class ChatRO extends SocialuniContentIdRO {
     private Boolean blackUser;
     private Boolean beBlackUser;
     //暂时未用，未来有用的，参考微信私聊右上角，会从那里可以进入用户的详情
-    private Long receiveUserId;
+    private String receiveUserId;
     private String avatar;
     private String type;
     //为chatUser的status

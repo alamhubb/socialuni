@@ -16,7 +16,7 @@ public class ReportDetailUtils {
         ReportDetailUtils.reportDetailApi = reportDetailApi;
     }
 
-    public static List<?  extends ReportDetailDO> getAll(Integer reportId) {
+    public static List<?  extends ReportDetailDO> getAll(Long reportId) {
         return reportDetailApi.findAllByReportId(reportId);
     }
 
@@ -24,7 +24,7 @@ public class ReportDetailUtils {
         return reportDetailApi.savePutAll(ReportDetailDOs);
     }
 
-    public static Integer count(Integer reportId) {
+    public static Integer count(Long reportId) {
         return reportDetailApi.countByReportId(reportId);
     }
 }

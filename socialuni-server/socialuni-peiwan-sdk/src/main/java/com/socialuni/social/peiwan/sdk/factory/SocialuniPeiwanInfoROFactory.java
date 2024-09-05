@@ -31,7 +31,7 @@ public class SocialuniPeiwanInfoROFactory {
     public static SocialuniPeiwanInfoRO getPeiwanRO(SocialuniPeiwanInfoDO peiwanInfoDO) {
         SocialuniPeiwanInfoRO peiwanInfoRO = new SocialuniPeiwanInfoRO();
 
-        Long userId = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(peiwanInfoDO.getUserId());
+        String userId = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(peiwanInfoDO.getUserId());
 
         peiwanInfoRO.setUserId(userId);
         peiwanInfoRO.setNickname(peiwanInfoDO.getNickname());
