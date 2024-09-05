@@ -8,7 +8,7 @@ import com.socialuni.social.content.logic.service.IllegalWordService;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
 import com.socialuni.social.content.dao.DO.SocialuniTextCheckDO;
 import com.socialuni.social.common.sdk.platform.weixin.HttpResult;
-import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
+import com.socialuni.social.tance.dev.config.SocialuniAppConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;

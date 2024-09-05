@@ -1,39 +1,19 @@
 package com.socialuni.social.sdk.im.controller;
 
-import com.socialuni.social.common.api.constant.SocialuniContentType;
-import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
-import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
-import com.socialuni.social.common.sdk.constant.UserType;
-import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
-import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.im.api.feign.SocialuniMessageAPI;
 import com.socialuni.social.im.api.model.QO.message.MessageAddVO;
 import com.socialuni.social.im.api.model.RO.SocialMessageRO;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniChatRepository;
-import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
-import com.socialuni.social.sdk.im.dao.DO.SocialuniChatDO;
-import com.socialuni.social.sdk.im.dao.DO.message.SocialuniMessageDO;
-import com.socialuni.social.sdk.im.dao.DO.message.SocialuniMessageReceiveDO;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniMessageReceiveRepository;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniMessageRepository;
-import com.socialuni.social.sdk.im.enumeration.ChatStatus;
-import com.socialuni.social.sdk.im.logic.foctory.SocialMessageROFactory;
 import com.socialuni.social.im.api.model.QO.MessageQueryVO;
 import com.socialuni.social.sdk.im.logic.service.SocialuniMessageService;
-import com.socialuni.social.sdk.im.enumeration.MessageReceiveStatus;
-import com.socialuni.social.sdk.im.enumeration.MessageStatus;
-import com.socialuni.social.sdk.im.utils.SocialuniChatUserDOUtil;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
-import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

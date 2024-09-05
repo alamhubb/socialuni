@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.im.config;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniChatRepository;
 import com.socialuni.social.sdk.im.logic.manage.SocialuniChatManage;
 //import com.socialuni.social.common.api.config.SocialuniAppConfigInterface;
-import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
+import com.socialuni.social.tance.dev.config.SocialuniAppConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;

@@ -16,9 +16,9 @@ import com.socialuni.social.common.sdk.model.VO.FrontErrorLogVO;
 import com.socialuni.social.common.sdk.model.VO.HomeSwiperVO;
 import com.socialuni.social.common.sdk.model.RO.SocialuniTalkTabRO;
 import com.socialuni.social.common.sdk.model.SocialAppLaunchDataRO;
-import com.socialuni.social.tance.sdk.api.SocialuniNoUseFeignAspect;
-import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
-import com.socialuni.social.tance.sdk.config.SocialuniDevConfig;
+import com.socialuni.social.tance.dev.api.SocialuniNoUseFeignAspect;
+import com.socialuni.social.tance.dev.config.SocialuniAppConfig;
+import com.socialuni.social.tance.dev.config.SocialuniDevConfig;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

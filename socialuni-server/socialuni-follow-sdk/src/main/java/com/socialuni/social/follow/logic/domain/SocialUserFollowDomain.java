@@ -1,7 +1,7 @@
 package com.socialuni.social.follow.logic.domain;
 
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserBlackDO;
 import com.socialuni.social.follow.logic.manage.SocialuniUserFollowManage;
 import com.socialuni.social.follow.logic.manage.SocialUserFansDetailManage;

@@ -3,7 +3,7 @@ package com.socialuni.social.community.sdk.dao.store;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniCommentDO;
 import com.socialuni.social.community.sdk.dao.SocialuniCommentDOUtil;
 import com.socialuni.social.community.sdk.repository.CommentRepository;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.community.sdk.logic.factory.CommentFactory;
 import com.socialuni.social.community.sdk.model.QO.comment.SocialuniCommentPostQO;
 import org.apache.commons.lang3.StringUtils;

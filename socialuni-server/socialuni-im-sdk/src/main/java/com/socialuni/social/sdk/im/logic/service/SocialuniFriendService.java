@@ -15,7 +15,7 @@ import com.socialuni.social.sdk.im.logic.foctory.SocialuniFriendApplyUserROFacto
 import com.socialuni.social.im.api.model.QO.friend.SocialuniFriendAddQO;
 import com.socialuni.social.im.api.model.RO.SocialuniFriendApplyUserRO;
 import com.socialuni.social.content.utils.SocialuniTextContentUtil;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Service;

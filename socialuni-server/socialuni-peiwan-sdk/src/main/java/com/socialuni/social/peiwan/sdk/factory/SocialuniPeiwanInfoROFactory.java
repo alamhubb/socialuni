@@ -9,7 +9,7 @@ import com.socialuni.social.peiwan.sdk.model.DO.SocialuniPeiwanInfoDO;
 import com.socialuni.social.peiwan.sdk.model.DO.SocialuniPeiwanInfoImgDO;
 import com.socialuni.social.peiwan.sdk.model.QO.SocialuniPeiwanInfoRO;
 import com.socialuni.social.peiwan.sdk.model.RO.SocialuniPeiwanInfoImgRO;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 

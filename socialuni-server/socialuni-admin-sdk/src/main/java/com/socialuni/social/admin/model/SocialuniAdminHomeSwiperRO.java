@@ -2,7 +2,7 @@ package com.socialuni.social.admin.model;
 
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniHomeSwiperDO;
-import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
+import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

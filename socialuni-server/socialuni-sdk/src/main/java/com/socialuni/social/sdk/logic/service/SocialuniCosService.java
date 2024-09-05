@@ -1,11 +1,11 @@
 package com.socialuni.social.sdk.logic.service;
 
 import com.socialuni.social.common.sdk.feignAPI.openData.SocialuniCosAPI;
-import com.socialuni.social.tance.sdk.config.SocialuniDevConfig;
-import com.socialuni.social.tance.sdk.model.DevAccountModel;
+import com.socialuni.social.tance.dev.config.SocialuniDevConfig;
+import com.socialuni.social.tance.dev.model.DevAccountModel;
 import com.socialuni.social.content.tencent.TencentCloudAPI;
 import com.socialuni.social.common.sdk.platform.model.SocialCosAuthRO;
-import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
+import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.api.model.ResultRO;
 import org.springframework.stereotype.Service;

@@ -24,8 +24,8 @@ import com.socialuni.social.im.api.model.QO.chat.ChatReadVO;
 import com.socialuni.social.im.api.model.QO.chat.ChatRemoveVO;
 import com.socialuni.social.im.api.model.QO.chat.OpenChatVO;
 import com.socialuni.social.sdk.im.utils.SocialuniChatDOUtil;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
+import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.dev.model.SocialuniUnionIdModler;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Service;
 

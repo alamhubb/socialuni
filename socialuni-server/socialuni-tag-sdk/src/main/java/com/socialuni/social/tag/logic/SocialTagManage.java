@@ -4,7 +4,7 @@ import com.socialuni.social.tag.dao.DO.SocialuniTagDO;
 import com.socialuni.social.tag.dao.repository.TagRepository;
 import com.socialuni.social.tag.factory.SocialTagDOFactory;
 import com.socialuni.social.common.sdk.model.QO.tag.TagAddQO;
-import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
+import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

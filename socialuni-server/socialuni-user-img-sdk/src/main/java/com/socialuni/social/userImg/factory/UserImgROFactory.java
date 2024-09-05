@@ -1,7 +1,7 @@
 package com.socialuni.social.userImg.factory;
 
 
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.common.api.model.user.SocialuniUserImgRO;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.userImg.dao.DO.SocialuniUserImgDo;

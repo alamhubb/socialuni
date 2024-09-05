@@ -3,7 +3,7 @@ package com.socialuni.social.community.sdk.config;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.social.user.sdk.model.RO.SocialDistrictRO;
 import com.socialuni.social.user.sdk.redis.DistrictRedis;
-import com.socialuni.social.tance.sdk.api.DevAccountRedisInterface;
+import com.socialuni.social.tance.dev.api.DevAccountRedisInterface;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;

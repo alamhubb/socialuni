@@ -13,8 +13,8 @@ import com.socialuni.social.community.sdk.model.QO.talk.SocialuniUserTalkQueryQO
 import com.socialuni.social.community.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.social.common.sdk.model.RO.SocialuniRectangleRO;
 import com.socialuni.social.common.sdk.utils.PositionUtil;
-import com.socialuni.social.tance.sdk.config.SocialuniDevConfig;
-import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
+import com.socialuni.social.tance.dev.config.SocialuniDevConfig;
+import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.socialuni.social.sdk.utils.UniAPIUtils;
 import com.socialuni.social.common.api.model.ResultRO;
 import org.springframework.stereotype.Service;

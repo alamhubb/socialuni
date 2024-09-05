@@ -4,9 +4,12 @@ import com.socialuni.social.app.factory.SocialuniMineUserDetailROFactory;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.app.model.SocialuniMineUserDetailRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
+import com.socialuni.social.common.api.utils.SnowflakeIdUtil;
 import com.socialuni.social.sdk.im.logic.entity.SocialuniChatEntity;
-import com.socialuni.social.tance.sdk.config.SocialuniDevConfig;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.dev.config.SocialuniDevConfig;
+import com.socialuni.social.tance.dev.facade.DevAccountFacade;
+import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.dev.util.SocialuniThirdTokenUtil;
 import com.socialuni.social.user.sdk.api.user.SocialuniLoginAPI;
 import com.socialuni.social.user.sdk.dao.utils.SocialuniUserExtendFriendLogDOUtil;
 import com.socialuni.social.user.sdk.logic.service.SocialuniLoginService;
@@ -125,7 +128,25 @@ public class SocialuniDetailLoginService {
 
 
     public ResultRO<SocialLoginRO<SocialuniUserRO>> deviceUidLogin(SocialuniDeviceUidLoginQO socialuniDeviceUidLoginQO) {
-        ResultRO<SocialLoginRO<SocialuniUserRO>> socialLoginRO1 = socialuniLoginService.deviceUidLogin(socialuniDeviceUidLoginQO);
+
+
+        ResultRO<SocialLoginRO<SocialuniUserRO>> resultRO;
+        Long unionId;
+        if (SocialuniDevConfig.hasCenterServer()) {
+            resultRO = socialuniLoginAPI.deviceUidLogin(socialuniDeviceUidLoginQO);
+            SocialuniUserRO socialuniUserRO = resultRO.getData().getUser();
+            unionId = SocialuniUnionIdFacede.createUserUnionId(socialuniUserRO.getId());
+
+
+            //保存三方token
+            SocialuniThirdTokenUtil.createdThirdToken(unionId, resultRO.getData().getToken(), DevAccountFacade.getCenterDevIdNotNull());
+
+
+            return resultRO;
+        } else {
+            unionId = SnowflakeIdUtil.nextId();
+        }
+        ResultRO<SocialLoginRO<SocialuniUserRO>> socialLoginRO1 = socialuniLoginService.deviceUidLogin(socialuniDeviceUidLoginQO, unionId);
 
         Long mineUserId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(socialLoginRO1.getData().getUser().getId());
 
@@ -141,13 +162,6 @@ public class SocialuniDetailLoginService {
         //生成用户扩列记录
         SocialuniUserExtendFriendLogDOUtil.createUserExtendFriendLog();
 
-
-        if (SocialuniDevConfig.hasCenterServer()) {
-            ResultRO<SocialLoginRO<SocialuniUserRO>> resultRO = socialuniLoginAPI.deviceUidLogin(socialuniDeviceUidLoginQO);
-            SocialuniUserRO socialuniUserRO = resultRO.getData().getUser();
-            SocialuniUnionIdFacede.updateUuidByUnionIdNotNull(mineUserId, socialuniUserRO.getId());
-            return resultRO;
-        }
 
         return ResultRO.success(socialLoginRO);
     }

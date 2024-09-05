@@ -6,7 +6,7 @@ import com.socialuni.social.app.factory.SocialuniUserDetailROFactory;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserDetailRO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.tance.sdk.config.SocialuniDevConfig;
+import com.socialuni.social.tance.dev.config.SocialuniDevConfig;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

@@ -4,9 +4,9 @@ import com.socialuni.social.common.api.exception.exception.SocialSystemException
 import com.socialuni.social.community.sdk.dao.DO.SocialuniCommentDO;
 import com.socialuni.social.community.sdk.repository.CommentRepository;
 import com.socialuni.social.common.api.enumeration.ContentStatus;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
-import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
+import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.dev.facade.DevAccountFacade;
+import com.socialuni.social.tance.dev.model.SocialuniUnionIdModler;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

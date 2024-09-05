@@ -8,10 +8,10 @@ import com.socialuni.social.common.api.exception.exception.SocialParamsException
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.utils.IpUtil;
 import com.socialuni.social.common.sdk.constant.ErrorMsg;
-import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
+import com.socialuni.social.tance.dev.config.SocialuniAppConfig;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
-import com.socialuni.social.tance.sdk.facade.ConfigFacade;
-import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
+import com.socialuni.social.tance.dev.facade.ConfigFacade;
+import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserPhoneManage;
 import com.socialuni.social.user.sdk.dao.DO.AuthenticationDO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;

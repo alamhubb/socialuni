@@ -7,7 +7,7 @@ import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
 import com.socialuni.social.community.sdk.repository.CommentRepository;
 import com.socialuni.social.common.api.enumeration.ContentStatus;
 import com.socialuni.social.community.sdk.dao.SocialuniTalkDOUtil;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.community.sdk.model.QO.comment.SocialuniCommentDeleteQO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;

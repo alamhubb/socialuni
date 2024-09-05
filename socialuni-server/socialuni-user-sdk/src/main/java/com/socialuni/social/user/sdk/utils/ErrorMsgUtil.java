@@ -4,8 +4,8 @@ package com.socialuni.social.user.sdk.utils;
 import com.socialuni.social.common.api.exception.exception.SocialNullUserException;
 import com.socialuni.social.common.sdk.utils.SocialuniDateUtils;
 import com.socialuni.social.common.sdk.constant.ErrorMsg;
-import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
-import com.socialuni.social.tance.sdk.facade.ConfigFacade;
+import com.socialuni.social.tance.dev.config.SocialuniAppConfig;
+import com.socialuni.social.tance.dev.facade.ConfigFacade;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
 import com.socialuni.social.user.sdk.dao.DO.SocialUserViolationDo;
 

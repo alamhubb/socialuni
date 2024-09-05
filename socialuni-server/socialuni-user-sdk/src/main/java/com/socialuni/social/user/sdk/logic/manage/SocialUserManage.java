@@ -25,8 +25,8 @@ public class SocialUserManage {
                     @CacheEvict(cacheNames = CommonRedisKey.findUserIdsByType, key = UserType.operation),
             }
     )
-    public SocialuniUserDo createOperateUser(String nickname) {
-        SocialuniUserDo user = SocialUserDOFactory.newUserByPhoneLogin();
+    public SocialuniUserDo createOperateUser(String nickname, Long unionId) {
+        SocialuniUserDo user = SocialUserDOFactory.newUserByPhoneLogin(unionId);
         user.setNickname(nickname);
         user.setType(UserType.operation);
 
@@ -39,26 +39,26 @@ public class SocialUserManage {
         return user;
     }
 
-    public SocialuniUserDo createUserByProviderLogin(SocialProviderLoginQO loginQO) {
-        SocialuniUserDo user = SocialUserDOFactory.newUserByProviderLogin(loginQO);
+    public SocialuniUserDo createUserByProviderLogin(SocialProviderLoginQO loginQO, Long unionId) {
+        SocialuniUserDo user = SocialUserDOFactory.newUserByProviderLogin(loginQO, unionId);
         user = userApi.savePut(user);
         return user;
     }
 
-    public SocialuniUserDo createUser() {
-        SocialuniUserDo user = SocialUserDOFactory.newUserByPhoneLogin();
+    public SocialuniUserDo createUser(Long unionId) {
+        SocialuniUserDo user = SocialUserDOFactory.newUserByPhoneLogin(unionId);
         user = userApi.savePut(user);
         return user;
     }
 
-    public SocialuniUserDo createUserByNickname(String nickname) {
-        SocialuniUserDo user = SocialUserDOFactory.newUserByNickname(nickname);
+    public SocialuniUserDo createUserByNickname(String nickname, Long unionId) {
+        SocialuniUserDo user = SocialUserDOFactory.newUserByNickname(nickname, unionId);
         user = userApi.savePut(user);
         return user;
     }
 
-    public SocialuniUserDo createSysUserByPhoneLogin() {
-        SocialuniUserDo user = SocialUserDOFactory.newUserByPhoneLogin();
+    public SocialuniUserDo createSysUserByPhoneLogin(Long unionId) {
+        SocialuniUserDo user = SocialUserDOFactory.newUserByPhoneLogin(unionId);
         user.setRoleId(SocialuniSysRoleId.sys);
         user = userApi.savePut(user);
         return user;

@@ -55,7 +55,7 @@ public class SocialuniLoginDomain {
     }
 
 
-    public SocialLoginRO<SocialuniUserRO> deviceUidLogin(SocialuniDeviceUidLoginQO socialuniDeviceUidLoginQO) {
+    public SocialLoginRO<SocialuniUserRO> deviceUidLogin(SocialuniDeviceUidLoginQO socialuniDeviceUidLoginQO, Long unionId) {
         String deviceUid = socialuniDeviceUidLoginQO.getDeviceUid();
 
         if (StringUtils.isEmpty(deviceUid)) {
@@ -68,7 +68,7 @@ public class SocialuniLoginDomain {
         }
 
         //创建或返回
-        SocialuniUserDo mineUser = socialUserManage.createUser();
+        SocialuniUserDo mineUser = socialUserManage.createUser(unionId);
 
         return getSocialLoginROByMineUser(mineUser, SocialuniLoginType.device);
     }

@@ -8,8 +8,8 @@ import com.socialuni.social.report.sdk.dao.repository.ReportRepository;
 import com.socialuni.social.common.api.enumeration.ContentStatus;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkHasUnderageImgAuditDO;
 import com.socialuni.social.community.sdk.repository.TalkAdultImgAuditRepository;
-import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
-import com.socialuni.social.tance.sdk.model.DevAccountModel;
+import com.socialuni.social.tance.dev.facade.DevAccountFacade;
+import com.socialuni.social.tance.dev.model.DevAccountModel;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

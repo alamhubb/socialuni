@@ -4,7 +4,7 @@ import com.socialuni.social.app.logic.service.SocialuniDetailLoginService;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.app.model.SocialuniMineUserDetailRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
-import com.socialuni.social.tance.sdk.api.SocialuniNoUseFeignAspect;
+import com.socialuni.social.tance.dev.api.SocialuniNoUseFeignAspect;
 import com.socialuni.social.user.sdk.api.user.SocialuniLoginAPI;
 import com.socialuni.social.user.sdk.logic.manage.SocialuniTokenManage;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniTokenDO;

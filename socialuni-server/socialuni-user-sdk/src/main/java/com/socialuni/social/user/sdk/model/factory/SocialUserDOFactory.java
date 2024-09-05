@@ -1,13 +1,11 @@
 package com.socialuni.social.user.sdk.model.factory;
 
-import cn.hutool.core.util.ReUtil;
 import com.socialuni.social.common.api.exception.base.SocialException;
 import com.socialuni.social.common.sdk.utils.SocialuniGenerateAvatarUtil;
 import com.socialuni.social.content.utils.BirthdayAgeUtil;
 import com.socialuni.social.user.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
 import com.socialuni.social.common.sdk.constant.UserType;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.common.api.constant.GenderType;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
@@ -22,8 +20,8 @@ import java.util.Arrays;
 
 @Slf4j
 public class SocialUserDOFactory {
-    public static SocialuniUserDo newUserByProviderLogin(SocialProviderLoginQO loginQO) {
-        SocialuniUserDo user = newUserByPhoneLogin();
+    public static SocialuniUserDo newUserByProviderLogin(SocialProviderLoginQO loginQO, Long unionId) {
+        SocialuniUserDo user = newUserByPhoneLogin(unionId);
 
         String nickname = loginQO.getNickName();
 
@@ -81,19 +79,16 @@ public class SocialUserDOFactory {
         return user;
     }
 
-    public static SocialuniUserDo newUserByPhoneLogin() {
-        return newUserByNickname(GenerateNicknameUtil.getGirlName());
+    public static SocialuniUserDo newUserByPhoneLogin(Long unionId) {
+        return newUserByNickname(GenerateNicknameUtil.getGirlName(), unionId);
     }
 
-    public static SocialuniUserDo newUserByNickname(String nickname) {
+    public static SocialuniUserDo newUserByNickname(String nickname, Long unionId) {
         if (StringUtils.isEmpty(nickname)) {
             nickname = GenerateNicknameUtil.getGirlName();
         }
         nickname = StringUtils.substring(nickname, 0, 6);
-        Long userUnionId = SocialuniUnionIdFacede.createUserUnionId();
-        SocialuniUserDo user = new SocialuniUserDo(userUnionId);
-        user.setUserId(userUnionId);
-        user.setUnionId(userUnionId);
+        SocialuniUserDo user = new SocialuniUserDo(unionId);
         user.setNickname(nickname);
         user.setAvatar(SocialuniGenerateAvatarUtil.getGirlAvatar());
         user.setGender(GenderType.girl);

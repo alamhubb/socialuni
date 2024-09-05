@@ -18,7 +18,7 @@ import com.socialuni.social.common.sdk.platform.weixin.token.WxTokenResult;
 import com.socialuni.social.common.sdk.utils.PushMessageUtils;
 import com.socialuni.social.common.sdk.utils.RestUtil;
 import com.socialuni.social.common.api.constant.SocialuniSupportProviderType;
-import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
+import com.socialuni.social.tance.dev.config.SocialuniAppConfig;
 import com.thoughtworks.xstream.XStream;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;

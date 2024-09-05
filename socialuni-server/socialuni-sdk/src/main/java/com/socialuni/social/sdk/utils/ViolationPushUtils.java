@@ -14,7 +14,7 @@ import com.socialuni.social.common.sdk.platform.weixin.WxConst;
 import com.socialuni.social.common.sdk.platform.PushMsgDTO;
 import com.socialuni.social.sdk.im.notify.PushNotifyVO;
 import com.socialuni.social.sdk.im.notify.PushValue;
-import com.socialuni.social.tance.sdk.facade.ConfigFacade;
+import com.socialuni.social.tance.dev.facade.ConfigFacade;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.apache.commons.lang3.StringUtils;

@@ -5,7 +5,7 @@ import com.socialuni.social.sdk.im.dao.DO.message.SocialuniMessageDO;
 import com.socialuni.social.sdk.im.enumeration.MessageContentType;
 import com.socialuni.social.sdk.im.enumeration.MessageReadStatus;
 import com.socialuni.social.sdk.im.enumeration.MessageType;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 
 public class SocialuniMessageDOFactory {
     public static SocialuniMessageDO createMessage(Long chatId, String content, Long userId) {

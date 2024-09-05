@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.logic.service;
 
 
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.community.sdk.logic.domain.hug.SocialAddHugDomain;
 import com.socialuni.social.community.sdk.model.QO.SocialuniHugAddQO;
 import com.socialuni.social.community.sdk.model.QO.community.SocialHugAddQO;

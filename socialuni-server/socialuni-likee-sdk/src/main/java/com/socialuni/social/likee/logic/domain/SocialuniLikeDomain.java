@@ -7,7 +7,7 @@ import com.socialuni.social.common.api.model.user.SocialuniUserIdQO;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.likee.dao.DO.SocialuniUserLikeDO;
 import com.socialuni.social.likee.logic.manage.SocialuniUserLikeManage;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 
 import javax.annotation.Resource;

@@ -12,7 +12,7 @@ import com.socialuni.social.peiwan.sdk.factory.SocialuniPeiwanInfoImgROFactory;
 import com.socialuni.social.peiwan.sdk.model.DO.SocialuniPeiwanInfoImgDO;
 import com.socialuni.social.peiwan.sdk.model.RO.SocialuniPeiwanInfoImgRO;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserManage;
 import com.socialuni.social.peiwan.sdk.factory.SocialuniPeiwanInfoROFactory;
 import com.socialuni.social.peiwan.sdk.model.DO.SocialuniPeiwanInfoDO;

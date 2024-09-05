@@ -3,7 +3,7 @@ package com.socialuni.social.peiwan.sdk.factory;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
 import com.socialuni.social.peiwan.sdk.model.DO.SocialuniPeiwanInfoImgDO;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 
 import java.util.ArrayList;
 import java.util.List;

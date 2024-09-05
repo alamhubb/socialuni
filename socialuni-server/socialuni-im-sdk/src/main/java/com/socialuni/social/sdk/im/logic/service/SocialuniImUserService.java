@@ -11,7 +11,7 @@ import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniUserChatConfigDO;
 import com.socialuni.social.sdk.im.logic.manage.SocialuniUserChatConfigManage;
 import com.socialuni.social.sdk.im.utils.SocialuniChatUserDOUtil;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserBlackDO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Service;

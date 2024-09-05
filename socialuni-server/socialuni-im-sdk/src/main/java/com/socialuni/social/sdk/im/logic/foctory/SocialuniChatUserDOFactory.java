@@ -9,8 +9,8 @@ import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.sdk.im.enumeration.ChatType;
 import com.socialuni.social.sdk.im.utils.SocialuniChatUserDOUtil;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
+import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.dev.model.SocialuniUnionIdModler;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 
 import java.util.Arrays;

@@ -1,10 +1,10 @@
 package com.socialuni.social.sdk.logic.manage;
 
 
-import com.socialuni.social.tance.sdk.api.DevAccountProviderInterface;
-import com.socialuni.social.tance.sdk.api.DevAccountInterface;
-import com.socialuni.social.tance.sdk.model.DevAccountModel;
-import com.socialuni.social.tance.sdk.model.DevAccountProviderModler;
+import com.socialuni.social.tance.dev.api.DevAccountProviderInterface;
+import com.socialuni.social.tance.dev.api.DevAccountInterface;
+import com.socialuni.social.tance.dev.model.DevAccountModel;
+import com.socialuni.social.tance.dev.model.DevAccountProviderModler;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.user.sdk.model.QO.OAuthUserInfoQO;
 import org.springframework.stereotype.Service;

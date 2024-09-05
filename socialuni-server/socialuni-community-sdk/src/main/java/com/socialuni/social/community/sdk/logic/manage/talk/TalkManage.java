@@ -3,7 +3,7 @@ package com.socialuni.social.community.sdk.logic.manage.talk;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
 import com.socialuni.social.community.sdk.dao.SocialuniTalkDORedis;
 import com.socialuni.social.community.sdk.dao.SocialuniTalkDOUtil;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

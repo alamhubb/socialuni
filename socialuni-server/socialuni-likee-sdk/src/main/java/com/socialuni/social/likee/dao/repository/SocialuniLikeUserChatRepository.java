@@ -2,18 +2,10 @@ package com.socialuni.social.likee.dao.repository;
 
 import com.socialuni.social.likee.constant.SocialuniUserLikeRedisKey;
 import com.socialuni.social.likee.dao.DO.SocialuniUserLikeChatDO;
-import com.socialuni.social.sdk.im.constant.ChatRedisKey;
-import com.socialuni.social.sdk.im.dao.DO.SocialuniChatDO;
-import com.socialuni.social.tance.model.DO.DevAccountDo;
-import com.socialuni.social.tance.sdk.api.DevAccountInterface;
-import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.List;
-import java.util.Optional;
 
 
 /**

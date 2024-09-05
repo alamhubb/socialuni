@@ -1,22 +1,11 @@
 package com.socialuni.social.sdk.config.config;
 
-import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.common.api.model.user.SocialuniUserRO;
-import com.socialuni.social.common.api.utils.RequestUtil;
-import com.socialuni.social.tance.sdk.model.DevAccountModel;
-import com.socialuni.social.user.sdk.constant.GenderTypeNumEnum;
-import com.socialuni.social.sdk.dao.DO.UniOutRegisterUserDO;
 import com.socialuni.social.sdk.dao.repository.UniOutRegisterUserRepository;
 import com.socialuni.social.user.sdk.api.SocialuniThirdUserAPI;
-import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
-import com.socialuni.social.tance.sdk.enumeration.SocialFeignHeaderName;
-import com.socialuni.social.common.api.constant.SocialuniSystemConst;
-import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.dev.enumeration.SocialFeignHeaderName;
+import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.web.sdk.config.SocialuniWebConfig;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import lombok.extern.slf4j.Slf4j;
@@ -24,10 +13,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.net.URI;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 
 //开发环境访问线上环境需要
 @Slf4j

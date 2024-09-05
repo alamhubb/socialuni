@@ -1,7 +1,7 @@
 package com.socialuni.social.user.sdk.utils;
 
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
+import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
 import com.socialuni.social.user.sdk.logic.redis.SocialUserPhoneRedis;
 import org.apache.commons.lang3.StringUtils;

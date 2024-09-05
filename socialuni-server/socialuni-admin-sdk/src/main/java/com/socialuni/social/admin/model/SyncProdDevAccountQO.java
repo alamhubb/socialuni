@@ -1,7 +1,7 @@
 package com.socialuni.social.admin.model;
 
-import com.socialuni.social.tance.sdk.model.DevAccountModel;
-import com.socialuni.social.tance.sdk.model.DevAccountProviderModler;
+import com.socialuni.social.tance.dev.model.DevAccountModel;
+import com.socialuni.social.tance.dev.model.DevAccountProviderModler;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;

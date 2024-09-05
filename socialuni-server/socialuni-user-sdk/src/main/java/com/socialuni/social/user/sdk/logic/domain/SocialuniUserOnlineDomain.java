@@ -4,7 +4,7 @@ import com.socialuni.social.common.api.constant.DateTimeType;
 import com.socialuni.social.common.sdk.utils.SocialuniDateUtils;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniPartnerUserOnlineDO;
 import com.socialuni.social.user.sdk.dao.repository.SocialuniUserOnlineRepository;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

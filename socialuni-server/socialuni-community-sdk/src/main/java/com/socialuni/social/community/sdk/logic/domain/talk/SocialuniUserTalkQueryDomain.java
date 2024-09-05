@@ -1,6 +1,6 @@
 package com.socialuni.social.community.sdk.logic.domain.talk;
 
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.community.sdk.model.QO.talk.SocialUserTalkQueryQO;
 import com.socialuni.social.community.sdk.model.QO.talk.SocialuniUserTalkQueryQO;
 import com.socialuni.social.community.sdk.model.RO.talk.SocialuniTalkRO;

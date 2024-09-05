@@ -4,8 +4,8 @@ import com.socialuni.social.common.api.exception.exception.SocialNotLoginExcepti
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.utils.SocialTokenFacade;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
-import com.socialuni.social.tance.sdk.model.DevAccountModel;
+import com.socialuni.social.tance.dev.facade.DevAccountFacade;
+import com.socialuni.social.tance.dev.model.DevAccountModel;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 
 public class AdminDevAccountFacade {

@@ -4,7 +4,7 @@ import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.common.sdk.constant.ReportSourceType;
 import com.socialuni.social.report.sdk.entity.ReportDO;
 import com.socialuni.social.content.constant.ReportStatus;
-import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
+import com.socialuni.social.tance.dev.model.SocialuniUnionIdModler;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;

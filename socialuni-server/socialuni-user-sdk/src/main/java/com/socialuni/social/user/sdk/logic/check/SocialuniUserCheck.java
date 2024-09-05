@@ -5,7 +5,7 @@ import com.socialuni.social.common.api.exception.exception.SocialParamsException
 import com.socialuni.social.common.sdk.constant.ErrorMsg;
 import com.socialuni.social.content.constant.SocialuniUserStatus;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.tance.sdk.facade.ConfigFacade;
+import com.socialuni.social.tance.dev.facade.ConfigFacade;
 import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import org.springframework.stereotype.Service;

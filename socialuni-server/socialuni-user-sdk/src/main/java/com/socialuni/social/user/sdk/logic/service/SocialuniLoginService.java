@@ -18,8 +18,8 @@ public class SocialuniLoginService {
     @Resource
     SocialuniLoginDomain socialLoginDomain;
 
-    public ResultRO<SocialLoginRO<SocialuniUserRO>> deviceUidLogin(SocialuniDeviceUidLoginQO socialuniDeviceUidLoginQO) {
-        SocialLoginRO<SocialuniUserRO> socialLoginRO = socialLoginDomain.deviceUidLogin(socialuniDeviceUidLoginQO);
+    public ResultRO<SocialLoginRO<SocialuniUserRO>> deviceUidLogin(SocialuniDeviceUidLoginQO socialuniDeviceUidLoginQO, Long unionId) {
+        SocialLoginRO<SocialuniUserRO> socialLoginRO = socialLoginDomain.deviceUidLogin(socialuniDeviceUidLoginQO, unionId);
         return ResultRO.success(socialLoginRO);
     }
 

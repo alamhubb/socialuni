@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.im.notify;
 
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import lombok.Data;
 
 /**

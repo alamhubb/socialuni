@@ -7,7 +7,7 @@ import com.socialuni.social.common.api.exception.exception.SocialParamsException
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniHomeSwiperDO;
 import com.socialuni.social.community.sdk.repository.HomeSwiperRepository;
-import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
+import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

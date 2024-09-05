@@ -3,7 +3,7 @@ package com.socialuni.social.user.sdk.controller;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
-import com.socialuni.social.tance.sdk.config.SocialuniDevConfig;
+import com.socialuni.social.tance.dev.config.SocialuniDevConfig;
 import com.socialuni.social.user.sdk.api.user.SocialuniMineUserAPI;
 import com.socialuni.social.user.sdk.dao.utils.SocialuniUserExtendFriendLogDOUtil;
 import com.socialuni.social.user.sdk.logic.domain.SocialEditUserDomain;

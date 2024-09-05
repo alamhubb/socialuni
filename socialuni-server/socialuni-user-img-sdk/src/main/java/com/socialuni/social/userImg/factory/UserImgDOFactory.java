@@ -2,10 +2,8 @@ package com.socialuni.social.userImg.factory;
 
 
 import com.socialuni.social.common.api.enumeration.ContentStatus;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.content.utils.SocialuniTextContentUtil;
+import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
-import com.socialuni.social.content.utils.SocialuniImgContentUtil;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.userImg.dao.DO.SocialuniUserImgDo;

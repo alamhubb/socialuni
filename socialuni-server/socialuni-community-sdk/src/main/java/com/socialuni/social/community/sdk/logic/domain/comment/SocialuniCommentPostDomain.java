@@ -5,7 +5,7 @@ import com.socialuni.social.tag.dao.DO.SocialuniTagDO;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
 import com.socialuni.social.common.sdk.constant.UserType;
 import com.socialuni.social.tag.dao.redis.SocialTagRedis;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.social.community.sdk.logic.entity.comment.SocialPostCommentEntity;
 import com.socialuni.social.community.sdk.logic.factory.SocialCommentROFactory;

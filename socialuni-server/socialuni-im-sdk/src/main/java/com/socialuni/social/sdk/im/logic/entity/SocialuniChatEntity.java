@@ -12,7 +12,7 @@ import com.socialuni.social.sdk.im.enumeration.SocialuniChatOperateType;
 import com.socialuni.social.sdk.im.logic.foctory.SocialuniChatDOFactory;
 import com.socialuni.social.sdk.im.logic.manage.SocialuniChatManage;
 import com.socialuni.social.sdk.im.logic.manage.SocialuniChatUserManage;
-import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
+import com.socialuni.social.tance.dev.config.SocialuniAppConfig;
 import com.socialuni.social.user.sdk.factory.SocialuniAppOperateRecordDOFactory;
 import org.springframework.stereotype.Service;
 

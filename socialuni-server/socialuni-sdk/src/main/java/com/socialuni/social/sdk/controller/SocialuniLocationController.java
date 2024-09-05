@@ -6,7 +6,7 @@ import com.socialuni.social.common.sdk.feignAPI.openData.SocialuniLocationAPI;
 import com.socialuni.social.common.sdk.model.QO.LocationQueryQO;
 import com.socialuni.social.common.sdk.model.RO.LocationQueryRO;
 import com.socialuni.social.common.sdk.platform.QQMapAPI;
-import com.socialuni.social.tance.sdk.config.SocialuniDevConfig;
+import com.socialuni.social.tance.dev.config.SocialuniDevConfig;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

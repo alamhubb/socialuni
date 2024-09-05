@@ -7,7 +7,7 @@ import com.socialuni.social.follow.logic.domain.SocialQueryUserFollowsDomain;
 import com.socialuni.social.follow.logic.domain.SocialUserFollowDomainInterface;
 import com.socialuni.social.follow.model.follow.SocialuniUserFollowAddQO;
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.tance.sdk.config.SocialuniDevConfig;
+import com.socialuni.social.tance.dev.config.SocialuniDevConfig;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

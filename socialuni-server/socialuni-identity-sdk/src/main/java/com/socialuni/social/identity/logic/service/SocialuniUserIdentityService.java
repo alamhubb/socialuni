@@ -17,7 +17,7 @@ import com.socialuni.social.common.sdk.utils.SocialuniDateUtils;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.content.utils.BirthdayAgeUtil;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
-import com.socialuni.social.tance.sdk.facade.ConfigFacade;
+import com.socialuni.social.tance.dev.facade.ConfigFacade;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 import com.tencentcloudapi.ocr.v20181119.OcrClient;
 import com.tencentcloudapi.ocr.v20181119.models.IDCardOCRRequest;

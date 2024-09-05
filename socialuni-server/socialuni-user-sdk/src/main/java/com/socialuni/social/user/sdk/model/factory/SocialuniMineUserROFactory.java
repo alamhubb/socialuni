@@ -3,7 +3,7 @@ package com.socialuni.social.user.sdk.model.factory;
 import cn.hutool.extra.spring.SpringUtil;
 import com.socialuni.social.common.api.model.user.SocialuniMineUserRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
-import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
+import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.logic.redis.SocialUserPhoneRedis;

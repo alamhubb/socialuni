@@ -3,7 +3,7 @@ package com.socialuni.social.community.sdk.logic.factory;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkImgDO;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import lombok.Data;
 
 import java.util.List;

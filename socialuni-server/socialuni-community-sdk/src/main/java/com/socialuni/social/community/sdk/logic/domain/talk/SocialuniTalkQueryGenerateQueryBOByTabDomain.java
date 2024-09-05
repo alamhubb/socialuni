@@ -7,7 +7,7 @@ import com.socialuni.social.tag.util.SocialuniCircleDOUtil;
 import com.socialuni.social.community.sdk.model.QO.talk.SocialHomeTabTalkQueryBO;
 import com.socialuni.social.community.sdk.model.QO.talk.SocialuniHomeTabTalkQueryQO;
 import com.socialuni.social.expand.utils.SocialuniUserExpandDOUtil;
-import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
+import com.socialuni.social.tance.dev.config.SocialuniAppConfig;
 import com.socialuni.social.common.api.model.SocialuniAppConfigBO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import lombok.extern.slf4j.Slf4j;

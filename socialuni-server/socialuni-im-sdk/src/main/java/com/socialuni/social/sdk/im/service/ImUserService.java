@@ -6,7 +6,7 @@ import com.socialuni.social.common.sdk.constant.SocialuniConst;
 import com.socialuni.social.sdk.im.feign.SocialuniOpenImUserFeign;
 import com.socialuni.social.user.sdk.logic.domain.SocialBindUserOpenImAccountDomain;
 import com.socialuni.social.sdk.im.model.SocialuniImUserModel;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.repository.SocialUserPlatformAccountRepository;

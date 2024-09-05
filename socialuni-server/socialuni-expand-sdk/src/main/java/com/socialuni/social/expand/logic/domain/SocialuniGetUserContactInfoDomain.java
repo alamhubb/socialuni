@@ -10,7 +10,7 @@ import com.socialuni.social.expand.utils.SocialuniUserExpandDOUtil;
 import com.socialuni.social.recharge.logic.entity.SocialuniCreateCoinOrderEntity;
 import com.socialuni.social.user.sdk.utils.SocialuniUserSocialCoinDOUtil;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
-import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
+import com.socialuni.social.tance.dev.config.SocialuniAppConfig;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserCoinDo;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.expand.dao.DO.SocialuniUserExpandDo;

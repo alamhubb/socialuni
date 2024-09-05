@@ -5,8 +5,8 @@ import com.socialuni.social.common.api.exception.exception.SocialNullUserExcepti
 import com.socialuni.social.common.api.config.SocialRequestUserConfig;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.content.constant.SocialuniUserStatus;
-import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.dev.facade.DevAccountFacade;
+import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
 import com.socialuni.social.user.sdk.config.SocialuniUserSysConfig;

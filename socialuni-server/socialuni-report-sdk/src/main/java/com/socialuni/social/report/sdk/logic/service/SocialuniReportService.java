@@ -1,11 +1,11 @@
 package com.socialuni.social.report.sdk.logic.service;
 
 import com.socialuni.social.report.sdk.api.SocialuniReportAPI;
-import com.socialuni.social.tance.sdk.api.SocialuniUnionIdInterface;
-import com.socialuni.social.tance.sdk.api.DevAccountInterface;
+import com.socialuni.social.tance.dev.api.SocialuniUnionIdInterface;
+import com.socialuni.social.tance.dev.api.DevAccountInterface;
 import com.socialuni.social.report.sdk.model.SocialuniReportAddQO;
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.tance.sdk.config.SocialuniDevConfig;
+import com.socialuni.social.tance.dev.config.SocialuniDevConfig;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

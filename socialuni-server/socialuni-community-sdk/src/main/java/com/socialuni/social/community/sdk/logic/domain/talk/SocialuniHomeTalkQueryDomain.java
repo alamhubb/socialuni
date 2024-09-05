@@ -15,7 +15,7 @@ import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
 import com.socialuni.social.tag.dao.DO.SocialuniTagDO;
 import com.socialuni.social.tag.dao.repository.TagRepository;
 import com.socialuni.social.community.sdk.repository.TalkRepository;
-import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
+import com.socialuni.social.tance.dev.config.SocialuniAppConfig;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
 import com.socialuni.social.community.sdk.dao.store.TalkQueryStore;
 import com.socialuni.social.community.sdk.logic.entity.talk.SocialFollowUserTalksQueryEntity;
@@ -25,7 +25,7 @@ import com.socialuni.social.community.sdk.model.QO.talk.SocialuniHomeTabTalkQuer
 import com.socialuni.social.community.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.api.constant.GenderType;
-import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
+import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
