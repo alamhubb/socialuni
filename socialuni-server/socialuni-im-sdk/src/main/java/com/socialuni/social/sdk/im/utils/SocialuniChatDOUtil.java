@@ -31,6 +31,10 @@ public class SocialuniChatDOUtil {
         SocialuniChatDOUtil.socialuniChatUserRepository = socialuniChatUserRepository;
     }
 
+    public static SocialuniChatDO save(SocialuniChatDO chatDO) {
+        return socialuniChatRepository.savePut(chatDO);
+    }
+
     public static SocialuniChatDO findByUnionId(Long chatId) {
         return socialuniChatRepository.findFirstByUnionId(chatId);
     }

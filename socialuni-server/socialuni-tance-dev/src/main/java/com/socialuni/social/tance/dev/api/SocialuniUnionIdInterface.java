@@ -15,7 +15,8 @@ public interface SocialuniUnionIdInterface {
 
     SocialuniUnionIdDo savePut(SocialuniUnionIdDo uniContentUnionIdDO);
 
-    SocialuniUnionIdDo findById(Long unionId);
+    SocialuniUnionIdDo findById(Integer unionId);
+    SocialuniUnionIdDo findByUnionId(Long unionId);
 
     SocialuniUnionIdDo findByUuId(Long uuid);
 

@@ -1,10 +1,8 @@
 package com.socialuni.social.sdk.config.config;
 
-import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.common.api.utils.RequestUtil;
-import com.socialuni.social.sdk.dao.DO.UniOutRegisterUserDO;
 import com.socialuni.social.sdk.dao.repository.UniOutRegisterUserRepository;
 import com.socialuni.social.tance.dev.config.SocialuniDevConfig;
 import com.socialuni.social.tance.dev.dao.DO.SocialuniThirdTokenDO;
@@ -27,10 +25,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.net.URI;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 
 //开发环境访问线上环境需要
 @Slf4j
@@ -74,7 +68,8 @@ public class FeignInterceptor implements RequestInterceptor {
 
         if (!postUrl.contains("/registryUser")) {
             if (mineUser != null) {
-                SocialuniThirdTokenDO socialuniThirdTokenDO = SocialuniThirdTokenUtil.getThirdUserToken(mineUser.getUserId());
+                Integer serverDevId = DevAccountFacade.getCenterDevIdNotNull();
+                SocialuniThirdTokenDO socialuniThirdTokenDO = SocialuniThirdTokenUtil.getThirdUserToken(serverDevId, mineUser.getUserId());
                 if (socialuniThirdTokenDO == null) {
                     SocialProviderLoginQO socialProviderLoginQO = createRegistryQO(mineUser);
                     ResultRO<SocialLoginRO<SocialuniUserRO>> resultRO = socialuniThirdUserAPI.registryUser(socialProviderLoginQO);
@@ -84,7 +79,7 @@ public class FeignInterceptor implements RequestInterceptor {
                     Long mineUserUnionId = mineUser.getUnionId();
 
                     //保存三方token
-                    socialuniThirdTokenDO = SocialuniThirdTokenUtil.createdThirdToken(mineUserUnionId, resultRO.getData().getToken(), DevAccountFacade.getCenterDevIdNotNull());
+                    socialuniThirdTokenDO = SocialuniThirdTokenUtil.createdThirdTokenOrGet(mineUserUnionId, resultRO.getData().getToken(), serverDevId);
 
                     SocialuniUnionIdFacede.updateUuidByUnionIdNotNull(mineUserUnionId, socialuniUserRO.getId());
                 }

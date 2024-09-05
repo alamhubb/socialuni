@@ -34,7 +34,7 @@ public class SocialuniUnionIdFacede {
     }
 
     //根据空的创建， 本系统写入数据时，需要先创建，然后写入内容表unionId，然后再根据返回内容更新uid
-    public static Long createUserUnionId(String unionId) {
+    public static Long createUserUnionIdOrGet(String unionId) {
         return createUnionIdByContentType(SocialuniContentType.user, unionId);
     }
 
@@ -45,6 +45,11 @@ public class SocialuniUnionIdFacede {
     public static Long createChatUnionId(String unionId) {
         return createUnionIdByContentType(SocialuniContentType.chat, unionId);
     }
+
+    public static Long createChatUnionId() {
+        return createUnionIdByContentType(SocialuniContentType.chat, SnowflakeIdUtil.nextId());
+    }
+
 
     public static Long createMessageUnionId(String unionId) {
         return createUnionIdByContentType(SocialuniContentType.message, unionId);
@@ -79,19 +84,44 @@ public class SocialuniUnionIdFacede {
     }*/
     //byUUid，是进入都是str
     private static Long createUnionIdByContentType(String contentType, Long unionId) {
-        SocialuniUnionIdDo uniContentUnionIdDO = new SocialuniUnionIdDo(contentType, unionId, DevAccountFacade.getDevIdNullElseCenterDevId());
-        uniContentUnionIdDO = socialuniUnionIdApi.savePut(uniContentUnionIdDO);
+        if (ObjectUtils.isEmpty(unionId)) {
+            throw new SocialParamsException("参数错误202326");
+        }
+        SocialuniUnionIdDo uniContentUnionIdDO = getUnionByUuidAllowNull(unionId);
+        //没有写入
+        if (uniContentUnionIdDO == null) {
+            uniContentUnionIdDO = new SocialuniUnionIdDo(contentType, unionId, DevAccountFacade.getDevIdNullElseCenterDevId());
+            uniContentUnionIdDO = socialuniUnionIdApi.savePut(uniContentUnionIdDO);
+            //有的话更新
+        }
         //有的话更新
         return uniContentUnionIdDO.getSelfSysId();
     }
 
+
+    public static Long createUnionIdByUuid(String contentType, Long uuid) {
+        if (ObjectUtils.isEmpty(uuid)) {
+            throw new SocialParamsException("无效的内容标识3");
+        }
+
+        SocialuniUnionIdDo uniContentUnionIdDO = getUnionByUuidAllowNull(uuid);
+        //没有写入
+        if (uniContentUnionIdDO == null) {
+            uniContentUnionIdDO = new SocialuniUnionIdDo(contentType, uuid, DevAccountFacade.getCenterDevIdNotNull());
+            socialuniUnionIdApi.savePut(uniContentUnionIdDO);
+            //有的话更新
+        }
+        return uuid;
+    }
+
     private static Long createUnionIdByContentType(String contentType, String uuid) {
+        if (ObjectUtils.isEmpty(uuid)) {
+            throw new SocialParamsException("无效的内容标识3");
+        }
         if (NumberUtils.strHasNoNumber(uuid)) {
             throw new SocialParamsException("uuid错误1000320");
         }
         Long unionId = Long.valueOf(uuid);
-        SocialuniUnionIdDo uniContentUnionIdDO = new SocialuniUnionIdDo(contentType, unionId, DevAccountFacade.getDevIdNullElseCenterDevId());
-        uniContentUnionIdDO = socialuniUnionIdApi.savePut(uniContentUnionIdDO);
         //有的话更新
         return createUnionIdByContentType(contentType, unionId);
     }
@@ -126,7 +156,7 @@ public class SocialuniUnionIdFacede {
         if (unionId == null) {
             throw new SocialParamsException("无效的内容标识4");
         }
-        SocialuniUnionIdDo uniContentUnionIdDO = socialuniUnionIdApi.findById(unionId);
+        SocialuniUnionIdDo uniContentUnionIdDO = socialuniUnionIdApi.findById(Math.toIntExact(unionId));
         if (uniContentUnionIdDO == null) {
             throw new SocialParamsException("无效的内容标识5");
         }
@@ -137,27 +167,11 @@ public class SocialuniUnionIdFacede {
         if (unionId == null) {
             return null;
         }
-        SocialuniUnionIdDo uniContentUnionIdDO = socialuniUnionIdApi.findById(unionId);
+        SocialuniUnionIdDo uniContentUnionIdDO = socialuniUnionIdApi.findById(Math.toIntExact(unionId));
         if (uniContentUnionIdDO == null) {
             return null;
         }
         return uniContentUnionIdDO;
-    }
-
-
-    public static Long createUnionIdByUuid(String contentType, Long uuid) {
-        if (ObjectUtils.isEmpty(uuid)) {
-            throw new SocialParamsException("无效的内容标识3");
-        }
-
-        SocialuniUnionIdDo uniContentUnionIdDO = getUnionByUuidAllowNull(uuid);
-        //没有写入
-        if (uniContentUnionIdDO == null) {
-            uniContentUnionIdDO = new SocialuniUnionIdDo(contentType, uuid, DevAccountFacade.getCenterDevIdNotNull());
-            socialuniUnionIdApi.savePut(uniContentUnionIdDO);
-            //有的话更新
-        }
-        return uuid;
     }
 
 

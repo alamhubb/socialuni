@@ -22,6 +22,7 @@ import java.util.Date;
         //手机号唯一
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "token"),
+                @UniqueConstraint(columnNames = {"devId", "userId"}),
         }
 )
 @Data

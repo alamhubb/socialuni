@@ -20,15 +20,12 @@ import java.util.Optional;
  * @since 1.0.0
  */
 public interface SocialuniThirdTokenRepository extends JpaRepository<SocialuniThirdTokenDO, Integer> {
-    @Cacheable(cacheNames = "findSocialuniThirdTokenByUserId", key = "#userId")
-    SocialuniThirdTokenDO findFirstByUserId(Long userId);
+    @Cacheable(cacheNames = "findSocialuniThirdTokenByUserId", key = "#devId+'-'+#userId")
+    SocialuniThirdTokenDO findFirstByDevIdAndUserId(Integer devId, Long userId);
 
     @Caching(
-            evict = {
-                    @CacheEvict(cacheNames = "findSocialuniThirdTokenByUserId", key = "#thirdTokenDO.userId")
-            },
             put = {
-                    @CachePut(cacheNames ="findSocialuniThirdTokenByUserId", key = "#thirdTokenDO.userId")
+                    @CachePut(cacheNames = "findSocialuniThirdTokenByUserId", key = "#thirdTokenDO.devId+'-'+#thirdTokenDO.userId")
             }
     )
     default SocialuniThirdTokenDO savePut(SocialuniThirdTokenDO thirdTokenDO) {

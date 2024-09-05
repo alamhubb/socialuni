@@ -41,8 +41,14 @@ public class SocialuniUnionIdCache implements SocialuniUnionIdInterface {
     }
 
     @Override
+    @Cacheable(cacheNames = "getUnionIdById", key = "#unionId")
+    public SocialuniUnionIdDo findById(Integer unionId) {
+        return uniContentUnionIdRepository.findFirstById(unionId);
+    }
+
+    @Override
     @Cacheable(cacheNames = "getUnionIdByUnionId", key = "#unionId")
-    public SocialuniUnionIdDo findById(Long unionId) {
+    public SocialuniUnionIdDo findByUnionId(Long unionId) {
         return uniContentUnionIdRepository.findFirstByUnionId(unionId);
     }
 

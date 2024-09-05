@@ -31,6 +31,10 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 public class SocialuniChatDO extends SocialuniUnionContentBaseDO implements Serializable {
+//    public void setUnionId(Long id){
+//
+//    }
+
     private String chatName;
     private String avatar;
 

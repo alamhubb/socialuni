@@ -13,6 +13,7 @@ public interface SocialuniUnionIdRepository extends JpaRepository<SocialuniUnion
     SocialuniUnionIdDo findOneById(Integer id);
 
     SocialuniUnionIdDo findFirstByUnionId(Long id);
+    SocialuniUnionIdDo findFirstById(Integer id);
 
     @Query(value = "select unionId from SocialuniUnionIdDo where contentType=:contentType")
     List<Long> findAllUnionIdByContentType(String contentType);
