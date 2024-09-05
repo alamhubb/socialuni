@@ -100,9 +100,9 @@ public class SocialuniImTestController {
                 // 注册到Im
                 SocialuniImUserModel imUserModel = new SocialuniImUserModel();
 
-                String mineUserUid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(mineUser.getUserId());
+                Long mineUserUid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(mineUser.getUserId());
 
-                imUserModel.setUserID(mineUserUid);
+//                imUserModel.setUserID(mineUserUid);
                 imUserModel.setNickname("名称被重置");
                 imUserModel.setFaceURL(mineUser.getAvatar());
                 imUserModel.setGender(GenderTypeNumEnum.getValueByName(mineUser.getGender()));
@@ -203,7 +203,7 @@ public class SocialuniImTestController {
         // 注册到Im
         SocialuniImUserModel imUserModel = new SocialuniImUserModel();
 
-        String mineUserUid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(mineUser.getUserId());
+       /* String mineUserUid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(mineUser.getUserId());
 
         imUserModel.setUserID(mineUserUid);
         imUserModel.setNickname(mineUser.getNickname());
@@ -211,7 +211,7 @@ public class SocialuniImTestController {
         imUserModel.setGender(GenderTypeNumEnum.getValueByName(mineUser.getGender()));
 //        imUserModel.setPhoneNumber(mineUser.getPhoneNum());
         imUserModel.setBirth((int) (BirthdayAgeUtil.getBirthDayByBirthString(mineUser.getBirthday()).getTime() / 1000));
-        imUserModel.setCreateTime(new Date());
+        imUserModel.setCreateTime(new Date());*/
         return imUserModel;
     }
 

@@ -1,6 +1,7 @@
 package com.socialuni.social.sdk.im.logic.foctory;
 
 import com.socialuni.social.common.api.constant.SocialuniContentType;
+import com.socialuni.social.common.api.utils.SnowflakeIdUtil;
 import com.socialuni.social.sdk.im.dao.DO.message.SocialuniMessageDO;
 import com.socialuni.social.sdk.im.enumeration.MessageContentType;
 import com.socialuni.social.sdk.im.enumeration.MessageReadStatus;
@@ -14,7 +15,7 @@ public class SocialuniMessageDOFactory {
     }
 
     public static SocialuniMessageDO createMessage(Long chatId, String content, Long userId, String contentType) {
-        Long messageId = SocialuniUnionIdFacede.createMessageUnionId();
+        Long messageId = SocialuniUnionIdFacede.createMessageUnionId(SnowflakeIdUtil.nextId());
 
         SocialuniMessageDO messageDO = new SocialuniMessageDO(userId, messageId, SocialuniContentType.message, content);
 

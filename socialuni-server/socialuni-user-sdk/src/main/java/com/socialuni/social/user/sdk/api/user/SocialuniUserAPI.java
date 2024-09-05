@@ -22,7 +22,7 @@ import java.util.List;
 public interface SocialuniUserAPI {
     @GetMapping("queryUserDetail/{userId}")
     @Operation(summary = "获取他人用户详情")
-    ResultRO<SocialuniUserRO> queryUserDetail(@PathVariable("userId") String userId);
+    ResultRO<SocialuniUserRO> queryUserDetail(@PathVariable("userId") Long userId);
 //    @GetMapping("queryRecentlyUsers")
 //    @Operation(summary = "获取最近在线用户")
 //    ResultRO<List<SocialuniContentUserRO>> queryRecentlyUsers();

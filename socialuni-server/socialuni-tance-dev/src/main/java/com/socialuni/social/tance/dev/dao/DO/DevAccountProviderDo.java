@@ -1,4 +1,4 @@
-package com.socialuni.social.tance.dev.model.DO;
+package com.socialuni.social.tance.dev.dao.DO;
 
 import com.socialuni.social.tance.dev.model.DevAccountProviderModler;
 import lombok.Data;

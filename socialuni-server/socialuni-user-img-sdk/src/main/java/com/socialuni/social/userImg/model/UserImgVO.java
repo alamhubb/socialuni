@@ -1,14 +1,14 @@
 package com.socialuni.social.userImg.model;
 
 
+import com.socialuni.social.common.api.model.SocialuniContentIdRO;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Data
-public class UserImgVO {
-    private String id;
+public class UserImgVO extends SocialuniContentIdRO {
     @NotBlank
     private String src;
     @NotNull

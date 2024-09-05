@@ -17,7 +17,7 @@ public class ChatTokenBuilder2 {
      *                        Agora Service within 10 minutes after the token is generated, set expireTimestamp as 600(seconds).
      * @return The RTC token.
      */
-    public String buildUserToken(String appId, String appCertificate, String userId, int expire) {
+    public String buildUserToken(String appId, String appCertificate, Long userId, int expire) {
         AccessToken2 accessToken = new AccessToken2(appId, appCertificate, expire);
         AccessToken2.Service serviceChat = new AccessToken2.ServiceChat(userId);
 

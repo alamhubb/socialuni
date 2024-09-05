@@ -12,7 +12,7 @@ public class SocialuniPeiwanInfoImgROFactory {
     public static SocialuniPeiwanInfoImgRO getPeiwanImgRO(SocialuniPeiwanInfoImgDO peiwanInfoDO) {
         SocialuniPeiwanInfoImgRO imgRO = new SocialuniPeiwanInfoImgRO();
 
-        String uid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(peiwanInfoDO.getUnionId());
+        Long uid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(peiwanInfoDO.getUnionId());
 
         imgRO.setId(uid);
         imgRO.setOrder(peiwanInfoDO.getLevel());

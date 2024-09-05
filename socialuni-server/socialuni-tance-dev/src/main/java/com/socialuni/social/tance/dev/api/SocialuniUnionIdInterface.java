@@ -15,11 +15,11 @@ public interface SocialuniUnionIdInterface {
 
     SocialuniUnionIdDo savePut(SocialuniUnionIdDo uniContentUnionIdDO);
 
-    SocialuniUnionIdDo findByUnionId(Long unionId);
+    SocialuniUnionIdDo findById(Long unionId);
 
-    SocialuniUnionIdDo findByUuId(String uuid);
+    SocialuniUnionIdDo findByUuId(Long uuid);
 
-    List<String> findUuidAllByContentType(String contentTyp);
+    List<Long> findUuidAllByContentType(String contentTyp);
 
     List<Long> findAllUnionIdsByContentType(String contentTyp);
 

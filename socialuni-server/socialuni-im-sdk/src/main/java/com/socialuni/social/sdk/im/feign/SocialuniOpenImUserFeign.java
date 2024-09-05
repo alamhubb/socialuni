@@ -21,7 +21,7 @@ public class SocialuniOpenImUserFeign implements SocialuniOpenImUserInterface {
     }
 
     @Override
-    public String getAndRefreshToken(String userId) {
-        return imAuthService.getToken(userId);
+    public String getAndRefreshToken(Long userId) {
+        return imAuthService.getToken(String.valueOf(userId));
     }
 }

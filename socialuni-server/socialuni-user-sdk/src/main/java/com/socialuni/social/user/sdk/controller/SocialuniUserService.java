@@ -18,7 +18,7 @@ public class SocialuniUserService {
     @Resource
     SocialuniUserAPI socialuniUserAPI;
 
-    public ResultRO<SocialuniUserRO> queryUserDetail(String userId) {
+    public ResultRO<SocialuniUserRO> queryUserDetail(Long userId) {
         if (SocialuniDevConfig.hasCenterServer()) {
             return socialuniUserAPI.queryUserDetail(userId);
         } else {

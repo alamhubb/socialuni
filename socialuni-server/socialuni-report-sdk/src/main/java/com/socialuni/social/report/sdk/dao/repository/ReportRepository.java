@@ -12,7 +12,7 @@ import java.util.List;
  * @author qinkaiyuan
  * @date 2019-09-27 23:21
  */
-public interface ReportRepository extends JpaRepository<ReportDO, Integer> {
+public interface ReportRepository extends JpaRepository<ReportDO, Long> {
     ReportDO findOneByContentId(Long contentId);
     default ReportDO savePut(ReportDO ReportDO){
         return this.save(BeanUtil.toBean(ReportDO,ReportDO.class));

@@ -40,6 +40,6 @@ public interface SocialuniFollowAPI {
 
     @GetMapping("queryUserFansDetail/{userId}")
     @Operation(summary = "粉丝数量详情")
-    ResultRO<SocialuniUserFansDetailRO> queryUserFansDetail(@PathVariable("userId") String userId);
+    ResultRO<SocialuniUserFansDetailRO> queryUserFansDetail(@PathVariable("userId") Long userId);
 
 }

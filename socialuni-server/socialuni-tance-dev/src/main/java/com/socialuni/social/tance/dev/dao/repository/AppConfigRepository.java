@@ -1,9 +1,9 @@
-package com.socialuni.social.tance.dev.repository;
+package com.socialuni.social.tance.dev.dao.repository;
 
 import com.socialuni.social.common.api.constant.SocialSystemConst;
 import com.socialuni.social.common.api.utils.RequestUtil;
-import com.socialuni.social.tance.dev.model.DO.AppConfigDO;
-import com.socialuni.social.tance.dev.model.DO.AppConfigPk;
+import com.socialuni.social.tance.dev.dao.DO.AppConfigDO;
+import com.socialuni.social.tance.dev.dao.DO.AppConfigPk;
 import com.socialuni.social.tance.dev.api.ConfigInterface;
 import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import org.springframework.cache.annotation.Cacheable;

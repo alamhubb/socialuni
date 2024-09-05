@@ -8,7 +8,7 @@ import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.common.api.utils.SocialTokenFacade;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.tance.dev.entity.DevAccountEntity;
+import com.socialuni.social.tance.entity.DevAccountEntity;
 import com.socialuni.social.tance.dev.api.DevAccountInterface;
 import com.socialuni.social.tance.dev.model.DevAccountModel;
 import com.socialuni.social.user.sdk.logic.domain.SocialuniLoginDomain;

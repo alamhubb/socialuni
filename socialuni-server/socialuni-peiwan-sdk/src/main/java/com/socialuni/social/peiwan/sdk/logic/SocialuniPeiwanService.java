@@ -2,6 +2,7 @@ package com.socialuni.social.peiwan.sdk.logic;
 
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.common.api.utils.SnowflakeIdUtil;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
@@ -33,7 +34,7 @@ public class SocialuniPeiwanService {
 
 
     public ResultRO<Void> addPeiwanInfo(@RequestBody SocialuniPeiwanInfoRO socialuniPeiwanInfoAddQO) {
-        SocialuniUserDo mineUser = socialUserManage.createUser();
+        SocialuniUserDo mineUser = socialUserManage.createUser(SnowflakeIdUtil.nextId());
 
         SocialuniPeiwanInfoDO socialuniPeiwanInfoDO = SocialuniPeiwanInfoDOFactory.createPeiwanDO(mineUser, socialuniPeiwanInfoAddQO);
 
@@ -42,7 +43,7 @@ public class SocialuniPeiwanService {
         return ResultRO.success();
     }
 
-    public ResultRO<String> updatePeiwanAvatar(String userId, String src) {
+    public ResultRO<String> updatePeiwanAvatar(Long userId, String src) {
 
         SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getUserByUuid(userId);
 
@@ -94,7 +95,7 @@ public class SocialuniPeiwanService {
         return ResultRO.success();
     }
 
-    public ResultRO<List<SocialuniPeiwanInfoImgRO>> addPeiwanImgList(String userId, List<SocialuniImgAddQO> imgAddQOS) {
+    public ResultRO<List<SocialuniPeiwanInfoImgRO>> addPeiwanImgList(Long userId, List<SocialuniImgAddQO> imgAddQOS) {
 
         SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getUserByUuid(userId);
 

@@ -64,6 +64,11 @@ public class SocialuniUserRepositoryFacede extends SocialuniRepositoryFacade {
         return t;
     }
 
+    public static <T extends SocialuniUserInfoBaseDO> T findByUserIdAllNull(Long userId, Class<T> tClass) {
+        T t = socialuniCommonRepository.findFirstByUserIdOrderByIdDesc(userId, tClass);
+        return t;
+    }
+
     public static <T> List<T> findByAllByUserIdAndStatusOrderByIdDesc(Long userId, Class<T> tClass) {
         return socialuniCommonRepository.findByAllByUserIdAndStatusOrderByIdDesc(userId, SocialuniCommonStatus.enable, tClass);
     }

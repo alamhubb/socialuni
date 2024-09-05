@@ -69,7 +69,7 @@ public class Utils {
         return new SecureRandom().nextInt();
     }
 
-    public static boolean isUUID(String uuid) {
+    public static boolean isUUID(Long uuid) {
         if (uuid.length() != 32) {
             return false;
         }

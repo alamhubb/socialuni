@@ -20,7 +20,7 @@ public class SocialuniAppUserService {
     SocialuniAppUserAPI socialuniAppUserAPI;
 
 
-    public ResultRO<SocialuniUserDetailRO> queryUserDetail(String userId) {
+    public ResultRO<SocialuniUserDetailRO> queryUserDetail(Long userId) {
         if (SocialuniDevConfig.hasCenterServer()) {
             return socialuniAppUserAPI.queryUserDetail(userId);
         } else {

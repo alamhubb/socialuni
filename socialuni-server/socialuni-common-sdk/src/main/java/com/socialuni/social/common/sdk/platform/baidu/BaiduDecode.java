@@ -81,7 +81,7 @@ public class BaiduDecode {
         //连接本地的 Redis 服务
     }
 //        String token = TokenUtils.getUUID();
-//        String userId = TokenUtils.getIdByToken(token);
+//        Long userId = TokenUtils.getIdByToken(token);
         /*Jwts.parser().setSigningKey("1234").parseClaimsJws(token);
         try {
             Jwts.parser().setSigningKey("1234").parseClaimsJws(token);

@@ -46,7 +46,7 @@ public class SocialMessageROFactory {
             messageRO.setContent(messageDO.getContent());
         }
 
-        String uid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(messageDO.getUnionId());
+        Long uid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(messageDO.getUnionId());
 
         messageRO.setId(uid);
         messageRO.setCreateTime(messageDO.getCreateTime());

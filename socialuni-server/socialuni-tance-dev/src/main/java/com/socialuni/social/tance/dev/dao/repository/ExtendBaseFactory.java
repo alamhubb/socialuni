@@ -1,4 +1,4 @@
-package com.socialuni.social.tance.dev.repository;
+package com.socialuni.social.tance.dev.dao.repository;
 
 import com.socialuni.social.common.sdk.dao.repository.DelegateExtendBaseFactory;
 import com.socialuni.social.common.sdk.dao.repository.ExtendBaseRepository;

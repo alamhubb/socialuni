@@ -59,7 +59,7 @@ public class SocialTokenDOUtil {
                 throw new SocialNotLoginException();
             }
         } else {
-            String uid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(doUserId);
+            Long uid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(doUserId);
 
             if (!userKey.equals(uid)) {
                 log.error("绕过验证，错误的userId:{},{}", uid, userKey);

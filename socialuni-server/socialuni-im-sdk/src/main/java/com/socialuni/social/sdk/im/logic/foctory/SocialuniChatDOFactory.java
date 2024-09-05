@@ -1,6 +1,7 @@
 package com.socialuni.social.sdk.im.logic.foctory;
 
 import com.socialuni.social.common.api.constant.SocialuniContentType;
+import com.socialuni.social.common.api.utils.SnowflakeIdUtil;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.sdk.im.constant.SocialuniChatDomainType;
@@ -16,7 +17,7 @@ public class SocialuniChatDOFactory {
     public static SocialuniChatDO getChatIdByCreateByDomainType(String chatDomainType) {
         SocialuniChatDO chatDO = new SocialuniChatDO();
 
-        Long uid = SocialuniUnionIdFacede.createChatUnionId();
+        Long uid = SocialuniUnionIdFacede.createChatUnionId(SnowflakeIdUtil.nextId());
         chatDO.setUnionId(uid);
         chatDO.setContentType(SocialuniContentType.chat);
         chatDO.setType(ChatType.single);
@@ -50,7 +51,7 @@ public class SocialuniChatDOFactory {
     private static SocialuniChatDO createGroupChat(String chatName, Long userId, String type, String avatar) {
         SocialuniChatDO chatDO = new SocialuniChatDO();
 
-        Long uid = SocialuniUnionIdFacede.createChatUnionId();
+        Long uid = SocialuniUnionIdFacede.createChatUnionId(SnowflakeIdUtil.nextId());
         chatDO.setUnionId(uid);
         chatDO.setChatName(chatName);
         chatDO.setAvatar(avatar);

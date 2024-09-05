@@ -20,7 +20,7 @@ public class SocialUserEntity {
     @Resource
     SocialUserPhoneEntity socialUserPhoneEntity;
 
-    public SocialuniUserDo getOrCreateUserByPhoneNum(String phoneNum) {
+    public SocialuniUserDo getOrCreateUserByPhoneNum(String phoneNum, Long unionId) {
         //校验手机号格式
         SocialUserPhoneDo SocialUserPhoneDo = socialUserPhoneManage.checkLoginPhoneNumAllowCan(phoneNum);
 
@@ -28,15 +28,20 @@ public class SocialUserEntity {
         if (SocialUserPhoneDo != null) {
             mineUser = SocialuniUserUtil.getUserNotNull(SocialUserPhoneDo.getUserId());
         } else {
-            mineUser = socialUserPhoneEntity.createUserPhoneEntity(phoneNum);
+            mineUser = socialUserPhoneEntity.createUserPhoneEntity(phoneNum, unionId);
         }
         return mineUser;
     }
 
     //根据渠道登录信息获取user，支持social比commonUserDomain
     //这个单独出来是因为区分了基础provider和社交，这个单独增加了对社交渠道的支持
-    public SocialuniUserDo createUserAndDetail(SocialProviderLoginQO loginQO) {
-        SocialuniUserDo mineUser = socialUserManage.createUserByProviderLogin(loginQO);
+    public SocialuniUserDo createUserAndDetail(SocialProviderLoginQO loginQO, Long unionId) {
+        SocialuniUserDo mineUser = socialUserManage.createUserByProviderLogin(loginQO, unionId);
+        return mineUser;
+    }
+
+    public SocialuniUserDo createUserAndDetailByThird(SocialProviderLoginQO loginQO, String type, Long unionId) {
+        SocialuniUserDo mineUser = socialUserManage.createUserByThirdProviderLogin(loginQO, type, unionId);
         return mineUser;
     }
 }

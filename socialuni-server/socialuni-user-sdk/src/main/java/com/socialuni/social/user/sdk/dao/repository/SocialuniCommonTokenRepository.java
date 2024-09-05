@@ -3,15 +3,24 @@ package com.socialuni.social.user.sdk.dao.repository;
 
 import com.socialuni.social.common.api.constant.CommonRedisKey;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniTokenDO;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SocialuniCommonTokenRepository extends JpaRepository<SocialuniTokenDO, Integer> {
     @Cacheable(cacheNames = CommonRedisKey.tokenByToken, key = "#token")
     SocialuniTokenDO findOneByToken(String token);
 
-    @CachePut(cacheNames = CommonRedisKey.tokenByToken, key = "#tokenDO.token")
+    @Caching(
+            evict = {
+                    @CacheEvict(cacheNames = CommonRedisKey.tokenByToken, key = "#tokenDO.token")
+            },
+            put = {
+                    @CachePut(cacheNames = CommonRedisKey.tokenByToken, key = "#tokenDO.token")
+            }
+    )
     SocialuniTokenDO save(SocialuniTokenDO tokenDO);
 
 

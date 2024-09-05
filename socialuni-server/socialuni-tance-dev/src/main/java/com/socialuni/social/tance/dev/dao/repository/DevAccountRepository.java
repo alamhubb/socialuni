@@ -1,7 +1,7 @@
-package com.socialuni.social.tance.dev.repository;
+package com.socialuni.social.tance.dev.dao.repository;
 
 import com.socialuni.social.tance.dev.api.DevAccountInterface;
-import com.socialuni.social.tance.dev.model.DO.DevAccountDo;
+import com.socialuni.social.tance.dev.dao.DO.DevAccountDo;
 import com.socialuni.social.tance.dev.model.DevAccountModel;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;

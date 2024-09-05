@@ -42,7 +42,7 @@ public class SocialuniAdminPeiwanController {
     }
 
     @GetMapping("updatePeiwanAvatar/{userId}")
-    public ResultRO<String> updatePeiwanAvatar(@PathVariable("userId") String userId, @RequestParam String src) {
+    public ResultRO<String> updatePeiwanAvatar(@PathVariable("userId") Long userId, @RequestParam String src) {
         return socialuniAdminPeiwanService.updatePeiwanAvatar(userId, src);
     }
 
@@ -60,7 +60,7 @@ public class SocialuniAdminPeiwanController {
     }
 
     @PostMapping("addPeiwanImgList/{userId}")
-    public ResultRO<List<SocialuniPeiwanInfoImgRO>> addPeiwanImgList(@PathVariable("userId") String userId, @RequestBody List<SocialuniImgAddQO> imgAddQOS) {
+    public ResultRO<List<SocialuniPeiwanInfoImgRO>> addPeiwanImgList(@PathVariable("userId") Long userId, @RequestBody List<SocialuniImgAddQO> imgAddQOS) {
         return socialuniAdminPeiwanService.addPeiwanImgList(userId, imgAddQOS);
     }
 }

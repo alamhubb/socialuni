@@ -1,7 +1,6 @@
 package com.socialuni.social.tance.dev.cache;
 
-import cn.hutool.core.bean.BeanUtil;
-import com.socialuni.social.tance.dev.repository.SocialuniUnionIdRepository;
+import com.socialuni.social.tance.dev.dao.repository.SocialuniUnionIdRepository;
 import com.socialuni.social.tance.dev.api.SocialuniUnionIdInterface;
 import com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo;
 import lombok.extern.slf4j.Slf4j;
@@ -37,25 +36,25 @@ public class SocialuniUnionIdCache implements SocialuniUnionIdInterface {
             },
             put = {@CachePut(cacheNames = {"getUnionIdByUnionId"}, key = "#uniContentUnionIdDO.id", condition = "#uniContentUnionIdDO.id != null")}
     )
-    public com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo savePut(SocialuniUnionIdDo uniContentUnionIdDO) {
-        return uniContentUnionIdRepository.save(BeanUtil.copyProperties(uniContentUnionIdDO, com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo.class));
+    public SocialuniUnionIdDo savePut(SocialuniUnionIdDo uniContentUnionIdDO) {
+        return uniContentUnionIdRepository.save(uniContentUnionIdDO);
     }
 
     @Override
     @Cacheable(cacheNames = "getUnionIdByUnionId", key = "#unionId")
-    public com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo findByUnionId(Long unionId) {
+    public SocialuniUnionIdDo findById(Long unionId) {
         return uniContentUnionIdRepository.findFirstByUnionId(unionId);
     }
 
     @Override
     @Cacheable(cacheNames = "getUnionIdByUuId", key = "#uuid")
-    public com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo findByUuId(String uuid) {
-        return uniContentUnionIdRepository.findByUuid(uuid);
+    public SocialuniUnionIdDo findByUuId(Long uuid) {
+        return uniContentUnionIdRepository.findFirstByUnionId(uuid);
     }
 
     @Override
-    public List<String> findUuidAllByContentType(String contentTyp){
-        return uniContentUnionIdRepository.findAllUuidByContentType(contentTyp);
+    public List<Long> findUuidAllByContentType(String contentTyp){
+        return uniContentUnionIdRepository.findAllUnionIdByContentType(contentTyp);
     }
 
     @Override

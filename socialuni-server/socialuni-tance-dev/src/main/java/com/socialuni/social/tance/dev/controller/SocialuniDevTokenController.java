@@ -3,7 +3,7 @@ package com.socialuni.social.tance.dev.controller;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.utils.UUIDUtil;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
-import com.socialuni.social.tance.dev.model.DO.SocialuniDevTokenDO;
+import com.socialuni.social.tance.dev.dao.DO.SocialuniDevTokenDO;
 import com.socialuni.social.tance.dev.api.SocialuniDevTokenAPI;
 import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.socialuni.social.tance.dev.model.DevAccountModel;

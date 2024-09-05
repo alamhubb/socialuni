@@ -27,7 +27,7 @@ public class SocialuniUserController implements SocialuniUserAPI {
     private SocialuniUserService socialuniUserService;
 
     @Override
-    public ResultRO<SocialuniUserRO> queryUserDetail(String userId) {
+    public ResultRO<SocialuniUserRO> queryUserDetail(Long userId) {
         return socialuniUserService.queryUserDetail(userId);
     }
 }

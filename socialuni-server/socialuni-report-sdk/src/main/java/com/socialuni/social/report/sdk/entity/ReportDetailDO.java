@@ -33,7 +33,7 @@ public class ReportDetailDO implements Serializable {
     private Date createTime;
     private Date updateTime;
 
-    private Integer reportId;
+    private Long reportId;
 
     /**
      * 举报时的备注信息

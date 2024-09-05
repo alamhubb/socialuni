@@ -1,18 +1,36 @@
 package com.socialuni.social.sdk.config.config;
 
+import com.socialuni.social.common.api.constant.SocialuniSystemConst;
+import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserRO;
+import com.socialuni.social.common.api.utils.RequestUtil;
+import com.socialuni.social.sdk.dao.DO.UniOutRegisterUserDO;
 import com.socialuni.social.sdk.dao.repository.UniOutRegisterUserRepository;
+import com.socialuni.social.tance.dev.config.SocialuniDevConfig;
+import com.socialuni.social.tance.dev.dao.DO.SocialuniThirdTokenDO;
+import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.dev.util.SocialuniThirdTokenUtil;
 import com.socialuni.social.user.sdk.api.SocialuniThirdUserAPI;
 import com.socialuni.social.tance.dev.enumeration.SocialFeignHeaderName;
 import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
+import com.socialuni.social.user.sdk.constant.GenderTypeNumEnum;
+import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
+import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
+import com.socialuni.social.web.sdk.config.SocialuniWebConfig;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 //开发环境访问线上环境需要
 @Slf4j
@@ -23,6 +41,27 @@ public class FeignInterceptor implements RequestInterceptor {
     UniOutRegisterUserRepository uniOutRegisterUserRepository;
     @Resource
     SocialuniThirdUserAPI socialuniThirdUserAPI;
+    @Autowired
+    private SocialuniThirdTokenUtil socialuniThirdTokenUtil;
+    @Autowired
+    private SocialuniDevConfig socialuniDevConfig;
+
+    public SocialProviderLoginQO createRegistryQO(SocialuniUserDo mineUser) {
+        String phoneNum = SocialuniUserUtil.getUserPhoneNum(mineUser.getUserId());
+
+        SocialProviderLoginQO socialProviderLoginQO = new SocialProviderLoginQO();
+        socialProviderLoginQO.setNickName(mineUser.getNickname());
+        socialProviderLoginQO.setAvatarUrl(mineUser.getAvatar());
+        socialProviderLoginQO.setGender(GenderTypeNumEnum.getValueByName(mineUser.getGender()));
+        socialProviderLoginQO.setBirthday(mineUser.getBirthday());
+        socialProviderLoginQO.setCity(mineUser.getCity());
+        socialProviderLoginQO.setUserType(mineUser.getType());
+        socialProviderLoginQO.setProvider(RequestUtil.getProvider());
+//                    socialProviderLoginQO.setPlatform(RequestUtil.getPlatform());
+//                    socialProviderLoginQO.setSystem(RequestUtil.getSystem());
+        socialProviderLoginQO.setPhoneNum(phoneNum);
+        return socialProviderLoginQO;
+    }
 
     @Override
     public void apply(RequestTemplate requestTemplate) {
@@ -33,31 +72,26 @@ public class FeignInterceptor implements RequestInterceptor {
 
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
 
-        System.out.println(postUrl);
-        System.out.println(mineUser != null);
-
         if (!postUrl.contains("/registryUser")) {
             if (mineUser != null) {
-                Long mineUserUnionId = mineUser.getUnionId();
-                //主要是记录有没有的
-                Integer centerDevId = DevAccountFacade.getCenterDevIdNotNull();
+                SocialuniThirdTokenDO socialuniThirdTokenDO = SocialuniThirdTokenUtil.getThirdUserToken(mineUser.getUserId());
+                if (socialuniThirdTokenDO == null) {
+                    SocialProviderLoginQO socialProviderLoginQO = createRegistryQO(mineUser);
+                    ResultRO<SocialLoginRO<SocialuniUserRO>> resultRO = socialuniThirdUserAPI.registryUser(socialProviderLoginQO);
 
+                    SocialuniUserRO socialuniUserRO = resultRO.getData().getUser();
 
-//                requestTemplate.header(SocialuniWebConfig.getTokenName(), mineUserUid);
+                    Long mineUserUnionId = mineUser.getUnionId();
 
+                    //保存三方token
+                    socialuniThirdTokenDO = SocialuniThirdTokenUtil.createdThirdToken(mineUserUnionId, resultRO.getData().getToken(), DevAccountFacade.getCenterDevIdNotNull());
 
-                //根据库里表有没有数据判断，是否调用，如果注册了，就在自己表里设置下，记录下。
-
-
-//                requestTemplate.header(SocialFeignHeaderName.socialuniSecretKey, devAccountModel.getApiSecretKey());
-//                requestTemplate.target(devAccountModel.getApiUrl());
+                    SocialuniUnionIdFacede.updateUuidByUnionIdNotNull(mineUserUnionId, socialuniUserRO.getId());
+                }
+                requestTemplate.header(SocialuniWebConfig.getTokenName(), socialuniThirdTokenDO.getToken());
             }
         }
-
-//        DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNotNUll();
         requestTemplate.header(SocialFeignHeaderName.socialuniSecretKey, "d9a53b2892a540689b4ef608bdca3d2e");
-//        }
-
 
         //理论上不可能存在下列情况，没有dataSocialuniId只能是自有数据和无后台，无后台也应该在request设置dataSocialuniId
         /*if (StringUtils.isEmpty(dataSocialuniId)) {

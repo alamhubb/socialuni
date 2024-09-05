@@ -11,5 +11,5 @@ import javax.validation.constraints.NotNull;
 @Data
 public class UserQueryVO {
     @NotNull(message = "入参为空异常")
-    private String userId;
+    private Long userId;
 }

@@ -273,13 +273,13 @@ public class AccessToken2 {
     }
 
     public static class ServiceRtm extends Service {
-        public String userId;
+        public Long userId;
 
         public ServiceRtm() {
             this.type = SERVICE_TYPE_RTM;
         }
 
-        public ServiceRtm(String userId) {
+        public ServiceRtm(Long userId) {
             this.type = SERVICE_TYPE_RTM;
             this.userId = userId;
         }
@@ -313,14 +313,14 @@ public class AccessToken2 {
     }
 
     public static class ServiceChat extends Service {
-        public String userId;
+        public Long userId;
 
         public ServiceChat() {
             this.type = SERVICE_TYPE_CHAT;
             this.userId = "";
         }
 
-        public ServiceChat(String userId) {
+        public ServiceChat(Long userId) {
             this.type = SERVICE_TYPE_CHAT;
             this.userId = userId;
         }

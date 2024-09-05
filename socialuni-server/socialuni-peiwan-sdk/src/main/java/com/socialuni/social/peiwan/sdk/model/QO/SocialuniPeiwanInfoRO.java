@@ -6,8 +6,8 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class SocialuniPeiwanInfoRO {
-    private String userId;
+public class SocialuniPeiwanInfoRO  {
+    private Long userId;
     private String nickname;
     private String avatar;
 

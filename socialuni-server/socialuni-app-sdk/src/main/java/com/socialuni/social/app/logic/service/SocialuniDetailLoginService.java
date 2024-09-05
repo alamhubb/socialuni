@@ -128,8 +128,6 @@ public class SocialuniDetailLoginService {
 
 
     public ResultRO<SocialLoginRO<SocialuniUserRO>> deviceUidLogin(SocialuniDeviceUidLoginQO socialuniDeviceUidLoginQO) {
-
-
         ResultRO<SocialLoginRO<SocialuniUserRO>> resultRO;
         Long unionId;
         if (SocialuniDevConfig.hasCenterServer()) {
@@ -137,10 +135,8 @@ public class SocialuniDetailLoginService {
             SocialuniUserRO socialuniUserRO = resultRO.getData().getUser();
             unionId = SocialuniUnionIdFacede.createUserUnionId(socialuniUserRO.getId());
 
-
             //保存三方token
             SocialuniThirdTokenUtil.createdThirdToken(unionId, resultRO.getData().getToken(), DevAccountFacade.getCenterDevIdNotNull());
-
 
             return resultRO;
         } else {

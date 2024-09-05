@@ -27,6 +27,7 @@ import com.tencentcloudapi.iai.v20180301.models.CompareFaceResponse;
 import com.tencentcloudapi.ocr.v20181119.OcrClient;
 import com.tencentcloudapi.tiia.v20190529.TiiaClient;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
@@ -68,8 +69,8 @@ public class TencentCloudAPI {
         TencentCloudAPI.bucketName = bucketName;
     }
 
-    public static SocialCosAuthRO getCosAuthorization(String userId) {
-        if (StringUtils.isEmpty(userId)) {
+    public static SocialCosAuthRO getCosAuthorization(Long userId) {
+        if (ObjectUtils.isEmpty(userId)) {
             throw new SocialParamsException("不存在的用户");
         }
         String uploadImgPath = "user/" + userId + "/";

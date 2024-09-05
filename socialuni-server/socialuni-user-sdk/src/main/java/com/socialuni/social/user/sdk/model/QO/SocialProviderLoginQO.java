@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class SocialProviderLoginQO {
     //wx qq两种渠道
     private String provider;
+    private String userType;
     //h5、mp、app//先判断平台，然后判断provider
     private String platform;
 //    private String system;

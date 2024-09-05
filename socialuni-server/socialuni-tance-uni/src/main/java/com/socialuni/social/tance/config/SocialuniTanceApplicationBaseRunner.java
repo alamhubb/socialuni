@@ -1,9 +1,11 @@
-package com.socialuni.social.tance.dev.config;
+package com.socialuni.social.tance.config;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.socialuni.social.tance.dev.entity.DevAccountEntity;
-import com.socialuni.social.tance.dev.model.DO.AppConfigDO;
-import com.socialuni.social.tance.dev.repository.AppConfigRepository;
+import com.socialuni.social.common.api.utils.SnowflakeIdUtil;
+import com.socialuni.social.tance.dev.config.SocialuniAppConfig;
+import com.socialuni.social.tance.dev.config.SocialuniDevConfig;
+import com.socialuni.social.tance.dev.dao.DO.AppConfigDO;
+import com.socialuni.social.tance.dev.dao.repository.AppConfigRepository;
 import com.socialuni.social.tance.dev.api.DevAccountInterface;
 import com.socialuni.social.tance.dev.constant.AppConfigDOKeyConst;
 import com.socialuni.social.common.api.model.SocialuniAppConfigBO;
@@ -11,6 +13,7 @@ import com.socialuni.social.common.api.model.SocialuniAppMoreConfigBO;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.socialuni.social.tance.dev.model.DevAccountModel;
+import com.socialuni.social.tance.entity.DevAccountEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.ApplicationArguments;
@@ -68,10 +71,10 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
             //copy一个default的值
 
             if (StringUtils.isEmpty(SocialuniSystemConst.getAppSocialuniId())) {
-                devAccountModel = devAccountEntity.createDevAccount(phoneNum);
+                devAccountModel = devAccountEntity.createDevAccount(phoneNum, SnowflakeIdUtil.nextId());
 
             } else {
-                devAccountModel = devAccountEntity.createDevAccount(phoneNum, SocialuniSystemConst.getAppSocialuniId());
+                devAccountModel = devAccountEntity.createDevAccount(phoneNum, SocialuniSystemConst.getAppSocialuniId(), SnowflakeIdUtil.nextId());
             }
 
 
@@ -100,7 +103,7 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
         //如果不存在用户，则创建第一个默认的主系统开发者
         if (devAccountModelTest == null) {
             //copy一个default的值
-            devAccountModelTest = devAccountEntity.createDevAccount(phoneNumTest);
+            devAccountModelTest = devAccountEntity.createDevAccount(phoneNumTest, SnowflakeIdUtil.nextId());
         }
 
         //创建中心
@@ -108,7 +111,7 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
             DevAccountModel centerDevDO = DevAccountFacade.getDevAccountBySocialuniId(SocialuniSystemConst.getCenterSocialuniId());
             if (centerDevDO == null) {
                 //手机号格式字符串瞎写就行，没有其他地方使用
-                devAccountEntity.createDevAccount("99999888667", SocialuniSystemConst.getCenterSocialuniId());
+                devAccountEntity.createDevAccount("99999888667", SocialuniSystemConst.getCenterSocialuniId(), SnowflakeIdUtil.nextId());
             }
         }
         //获取省，不包含子节点

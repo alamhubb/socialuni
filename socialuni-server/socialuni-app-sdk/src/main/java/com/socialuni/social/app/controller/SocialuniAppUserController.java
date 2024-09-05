@@ -19,7 +19,7 @@ public class SocialuniAppUserController implements SocialuniAppUserAPI {
 
     @Override
     @GetMapping("queryUserDetail/{userId}")
-    public ResultRO<SocialuniUserDetailRO> queryUserDetail(@PathVariable("userId") String userId){
+    public ResultRO<SocialuniUserDetailRO> queryUserDetail(@PathVariable("userId") Long userId){
         return socialuniAppUserService.queryUserDetail(userId);
     }
 }

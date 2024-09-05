@@ -1,8 +1,8 @@
-package com.socialuni.social.tance.dev.repository;
+package com.socialuni.social.tance.dev.dao.repository;
 
 
 import cn.hutool.core.bean.BeanUtil;
-import com.socialuni.social.tance.dev.model.DO.DevAccountProviderDo;
+import com.socialuni.social.tance.dev.dao.DO.DevAccountProviderDo;
 import com.socialuni.social.tance.dev.api.DevAccountProviderInterface;
 import com.socialuni.social.tance.dev.model.DevAccountProviderModler;
 import org.springframework.cache.annotation.CachePut;

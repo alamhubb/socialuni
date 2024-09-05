@@ -15,7 +15,7 @@ public class UserIdentityAuditRO {
     Integer id;
 
     ReportUserVO user;
-    String userIdImgSrc;
+    Long userIdImgSrc;
     String userSelfieImgSrc;
     Integer preCheckScore;
 

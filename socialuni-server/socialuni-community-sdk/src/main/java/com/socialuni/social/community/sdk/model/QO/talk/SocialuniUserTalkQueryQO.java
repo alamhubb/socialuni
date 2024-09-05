@@ -14,6 +14,6 @@ import java.util.List;
 @Data
 public class SocialuniUserTalkQueryQO {
     @NotBlank(message = "入参为空异常")
-    private String userId;
+    private Long userId;
     private List<String> talkIds;
 }

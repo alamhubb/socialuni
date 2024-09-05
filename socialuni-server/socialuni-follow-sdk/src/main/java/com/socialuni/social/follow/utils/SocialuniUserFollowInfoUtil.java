@@ -34,7 +34,7 @@ public class SocialuniUserFollowInfoUtil {
     }
 
 
-    public static SocialuniUserFansDetailRO getUserFollowRelationInfo(String userId) {
+    public static SocialuniUserFansDetailRO getUserFollowRelationInfo(Long userId) {
         SocialuniUserDo user = SocialuniUserUtil.getUserByUuid(userId);
         return getUserFollowRelationInfo(user);
     }

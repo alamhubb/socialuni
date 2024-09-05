@@ -22,11 +22,11 @@ public class SocialuniCosService {
         if (SocialuniDevConfig.hasCenterServer()) {
             return socialuniCosAPI.getCosAuth();
         }
-        String userId = SocialuniUserUtil.getMineUserUuidIdNotNull();
+        Long userId = SocialuniUserUtil.getMineUserUuidIdNotNull();
         DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNullElseCenterDev();
 //        String devAppName = Pinyin.toPinyin(devAccountDO.getAppName(), "").toLowerCase();
 //        String uploadImgPath = devAppName + "/user/" + userId + "/";
-        SocialCosAuthRO socialCosAuthRO = TencentCloudAPI.getCosAuthorization(userId);
+        SocialCosAuthRO socialCosAuthRO = TencentCloudAPI.getCosAuthorization(String.valueOf(userId));
         return new ResultRO<>(socialCosAuthRO);
     }
 }

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface SocialuniAppUserAPI {
     @GetMapping("queryUserDetail/{userId}")
     @Operation(summary = "获取他人用户详情")
-    ResultRO<SocialuniUserDetailRO> queryUserDetail(@PathVariable("userId") String userId);
+    ResultRO<SocialuniUserDetailRO> queryUserDetail(@PathVariable("userId") Long userId);
 }
 
 

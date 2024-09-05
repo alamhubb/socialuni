@@ -1,6 +1,7 @@
 package com.socialuni.social.userImg.model;
 
 import com.socialuni.social.common.api.enumeration.ContentStatus;
+import com.socialuni.social.common.api.model.SocialuniContentIdRO;
 import com.socialuni.social.common.sdk.constant.AppConfigConst;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
@@ -17,8 +18,7 @@ import java.util.stream.Collectors;
 
 @Data
 @Component
-public class UserImgBO {
-    private String id;
+public class UserImgBO extends SocialuniContentIdRO {
     @NotBlank
     private String src;
     @NotNull
@@ -34,7 +34,7 @@ public class UserImgBO {
     }
 
     public UserImgBO(UserImgVO img) {
-        this.id = img.getId();
+        this.setId(img.getId());
         this.src = img.getSrc();
         this.aspectRatio = img.getAspectRatio();
         this.width = img.getWidth();
@@ -43,7 +43,7 @@ public class UserImgBO {
     }
 
     public UserImgBO(SocialuniUserImgDo img, SocialuniUserDo user) {
-        this.id = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(img.getUnionId());
+        this.setId(SocialuniUnionIdFacede.getUuidByUnionIdNotNull(img.getUnionId()));
         this.src = img.getSrc();
         this.aspectRatio = img.getAspectRatio();
         this.setWidth((double) 360);
@@ -82,7 +82,7 @@ public class UserImgBO {
 
     public UserImgVO toVO() {
         UserImgVO imgVO = new UserImgVO();
-        imgVO.setId(this.id);
+        imgVO.setId(this.getId());
         imgVO.setSrc(this.src);
         imgVO.setAspectRatio(this.aspectRatio);
         imgVO.setHeight(this.height);

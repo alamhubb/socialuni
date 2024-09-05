@@ -101,13 +101,13 @@ public class AdminReportService {
     @Transactional
     public ResultRO<String> getStringResultVO(ReportRO auditVO) {
         //区分类型
-        //成年未成年的，则直接更改审核记录表，和修改动态的属性
+       /* //成年未成年的，则直接更改审核记录表，和修改动态的属性
 
         String auditType = auditVO.getViolateType();
         //图片类型的也支持直接审核
         String auditContentType = auditVO.getAuditContentType();
 
-        Long contentId = auditVO.getId();
+        Integer contentId = auditVO.getId();
         //如果仅仅是图片审核，则必然要修改图片审核的状态
         if (SocialuniAuditContentType.underageImg.equals(auditContentType)) {
             SocialuniTalkHasUnderageImgAuditDO socialuniTalkHasUnderageImgAuditDO = talkAdultImgAuditRepository.findOneById(contentId);
@@ -218,7 +218,7 @@ public class AdminReportService {
 
             notifyRepository.saveAll(notifyDOS);
 //                notifyService.sendNotifies(notifyDOS, systemUser);
-        }
+        }*/
         return null;
     }
 

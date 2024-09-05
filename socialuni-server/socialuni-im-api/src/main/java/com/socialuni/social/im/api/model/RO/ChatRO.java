@@ -1,5 +1,6 @@
 package com.socialuni.social.im.api.model.RO;
 
+import com.socialuni.social.common.api.model.SocialuniContentIdRO;
 import lombok.Data;
 
 import java.util.Date;
@@ -10,9 +11,8 @@ import java.util.List;
  * @date 2018-11-18 20:48
  */
 @Data//chatdo+chatUserdo
-public class ChatRO {
+public class ChatRO extends SocialuniContentIdRO {
     //私聊的时候这是userId，后台会自动转换
-    private String id;
     private String nickname;
     private Boolean allowStrangerMsg;
     private Boolean beFollow;
@@ -20,7 +20,7 @@ public class ChatRO {
     private Boolean blackUser;
     private Boolean beBlackUser;
     //暂时未用，未来有用的，参考微信私聊右上角，会从那里可以进入用户的详情
-    private String receiveUserId;
+    private Long receiveUserId;
     private String avatar;
     private String type;
     //为chatUser的status

@@ -1,6 +1,7 @@
 package com.socialuni.social.im.api.model.RO;
 
 
+import com.socialuni.social.common.api.model.SocialuniContentIdRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import lombok.Data;
 
@@ -11,10 +12,9 @@ import java.util.Date;
  * @date 2019-08-14 17:24
  */
 @Data
-public class SocialMessageRO {
+public class SocialMessageRO extends SocialuniContentIdRO {
 
     // 前端遍历使用
-    private String id;
     private String content;
     private String contentType;
     private SocialuniUserRO user;

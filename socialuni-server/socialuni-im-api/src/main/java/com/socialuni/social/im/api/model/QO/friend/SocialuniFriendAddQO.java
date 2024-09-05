@@ -7,7 +7,7 @@ import javax.validation.constraints.NotBlank;
 @Data
 public class SocialuniFriendAddQO {
     @NotBlank
-    private String userId;
+    private Long userId;
     private String applyMsg;
     @NotBlank
     private String reqType;

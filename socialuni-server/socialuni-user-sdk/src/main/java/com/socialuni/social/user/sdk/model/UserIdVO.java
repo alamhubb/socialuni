@@ -11,5 +11,5 @@ import javax.validation.constraints.NotBlank;
 @Data
 public class UserIdVO {
     @NotBlank(message = "入参为空异常")
-    private String userId;
+    private Long userId;
 }

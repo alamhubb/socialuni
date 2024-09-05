@@ -21,8 +21,8 @@ public class SocialUserPhoneEntity {
 
     //外层已经校验过了
     @Transactional
-    public SocialuniUserDo createUserPhoneEntity(String phoneNum) {
-        SocialuniUserDo mineUser = socialUserManage.createUser();
+    public SocialuniUserDo createUserPhoneEntity(String phoneNum, Long unionId) {
+        SocialuniUserDo mineUser = socialUserManage.createUser(unionId);
         //创建或返回
 //        socialUserFansDetailManage.getOrCreateUserFollowDetail(mineUser);
         socialUserPhoneManage.createUserPhoneNum(mineUser.getUnionId(), "86", phoneNum);
@@ -30,8 +30,8 @@ public class SocialUserPhoneEntity {
     }
 
     @Transactional
-    public SocialuniUserDo createSysUserPhoneEntity(String phoneNum, Integer devId) {
-        SocialuniUserDo mineUser = socialUserManage.createSysUserByPhoneLogin();
+    public SocialuniUserDo createSysUserPhoneEntity(String phoneNum, Integer devId, Long unionId) {
+        SocialuniUserDo mineUser = socialUserManage.createSysUserByPhoneLogin(unionId);
         //创建或返回
 //        socialUserFansDetailManage.getOrCreateUserFollowDetail(mineUser);
         socialUserPhoneManage.createUserPhoneNum(mineUser.getUnionId(), "86", phoneNum, devId);

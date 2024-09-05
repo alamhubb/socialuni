@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class SocialuniKeyQueryQO {
-    String userId;
+    Long userId;
 
 }

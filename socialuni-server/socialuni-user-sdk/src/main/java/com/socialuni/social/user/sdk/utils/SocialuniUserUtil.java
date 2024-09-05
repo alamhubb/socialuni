@@ -71,7 +71,7 @@ public class SocialuniUserUtil {
         return getMineUserAllowNull() != null;
     }
 
-    public static String getMineUserUuidIdNotNull() {
+    public static Long getMineUserUuidIdNotNull() {
         Long mineUserId = getMineUserIdNotNull();
         return SocialuniUnionIdFacede.getUuidByUnionIdNotNull(mineUserId);
     }
@@ -165,7 +165,7 @@ public class SocialuniUserUtil {
         return SocialUserViolationDo;
     }
 
-    /*public static UserDO get(String userId) {
+    /*public static UserDO get(Long userId) {
         if (StringUtils.isEmpty(userId)) {
             throw new SocialNullUserException();
         }
@@ -183,6 +183,11 @@ public class SocialuniUserUtil {
     }
 
     public static SocialuniUserDo getUserByUuid(String uid) {
+        Long id = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(uid);
+        return SocialuniUserUtil.getUserNotNull(id);
+    }
+
+    public static SocialuniUserDo getUserByUuid(Long uid) {
         Long id = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(uid);
         return SocialuniUserUtil.getUserNotNull(id);
     }

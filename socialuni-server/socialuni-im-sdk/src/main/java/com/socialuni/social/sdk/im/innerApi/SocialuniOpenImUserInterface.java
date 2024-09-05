@@ -16,5 +16,5 @@ public interface SocialuniOpenImUserInterface {
     String userLogin(@RequestBody SocialuniImUserModel imUserModel);
 
     @PostMapping("getToken")
-    String getAndRefreshToken(String userId);
+    String getAndRefreshToken(Long userId);
 }

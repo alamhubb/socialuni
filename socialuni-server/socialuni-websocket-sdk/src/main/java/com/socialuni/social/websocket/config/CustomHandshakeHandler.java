@@ -27,7 +27,7 @@ public class CustomHandshakeHandler extends DefaultHandshakeHandler {
         }
         SocialuniUserDo user = SocialuniUserUtil.getUserByToken(token);
         if (user != null) {
-            String userUid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(user.getUserId());
+            String userUid = String.valueOf(SocialuniUnionIdFacede.getUuidByUnionIdNotNull(user.getUserId()));
             //使用string，如果int to string 则还需要判断转换
             return new WebSocketUser(userUid);
 //            return new WebSocketUser(user.getUnionId().toString());

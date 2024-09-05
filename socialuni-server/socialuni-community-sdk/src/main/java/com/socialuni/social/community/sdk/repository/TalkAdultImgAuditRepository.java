@@ -9,5 +9,5 @@ public interface TalkAdultImgAuditRepository extends JpaRepository<SocialuniTalk
 
     List<SocialuniTalkHasUnderageImgAuditDO> findTop20ByStatusAndDevIdOrderByIdAsc(String status, Integer devId);
 
-    SocialuniTalkHasUnderageImgAuditDO findOneById(Integer id);
+    SocialuniTalkHasUnderageImgAuditDO findOneById(Long id);
 }

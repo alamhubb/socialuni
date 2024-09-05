@@ -1,19 +1,19 @@
-package com.socialuni.social.tance.dev.entity;
+package com.socialuni.social.tance.entity;
 
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.utils.UUIDUtil;
 import com.socialuni.social.common.sdk.constant.SocialuniSysRoleId;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
-import com.socialuni.social.tance.dev.model.DO.DevAccountDo;
+import com.socialuni.social.tance.dev.dao.DO.DevAccountDo;
 import com.socialuni.social.tance.dev.api.DevAccountInterface;
 import com.socialuni.social.tance.dev.api.DevAccountRedisInterface;
 import com.socialuni.social.tance.dev.constant.AdminAppConfigConst;
 import com.socialuni.social.tance.dev.enumeration.DevAccountType;
 import com.socialuni.social.common.api.constant.GenderType;
 import com.socialuni.social.tance.dev.model.DevAccountModel;
-import com.socialuni.social.user.sdk.logic.entity.SocialUserPhoneEntity;
-import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
+import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
+import com.socialuni.social.user.sdk.logic.entity.SocialUserPhoneEntity;
 import com.socialuni.social.user.sdk.logic.redis.SocialUserPhoneRedis;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -41,12 +41,12 @@ public class DevAccountEntity {
     @Resource
     SocialUserPhoneEntity socialUserPhoneEntity;
 
-    public DevAccountModel createDevAccount(String phoneNum) {
-        return this.createDevAccount(phoneNum, UUIDUtil.getUUID());
+    public DevAccountModel createDevAccount(String phoneNum, Long unionId) {
+        return this.createDevAccount(phoneNum, UUIDUtil.getUUID(), unionId);
     }
 
     //创建开发者账号
-    public DevAccountModel createDevAccount(String phoneNum, String socialuniId) {
+    public DevAccountModel createDevAccount(String phoneNum, String socialuniId, Long unionId) {
         Optional<? extends DevAccountModel> devAccountDOOptional = devAccountApi.findFirstByOrderByIdDesc();
         //加30以内随机数
         Long curDevNum;
@@ -78,7 +78,7 @@ public class DevAccountEntity {
         SocialuniUserDo socialuniUserDo;
         if (SocialUserPhoneDo == null) {
             //如果没注册账号，则直接注册
-            socialuniUserDo = socialUserPhoneEntity.createSysUserPhoneEntity(phoneNum, devAccountModel.getId());
+            socialuniUserDo = socialUserPhoneEntity.createSysUserPhoneEntity(phoneNum, devAccountModel.getId(), unionId);
         } else {
             socialuniUserDo = SocialuniUserUtil.getUserNotNull(SocialUserPhoneDo.getUserId());
             socialuniUserDo.setRoleId(SocialuniSysRoleId.sys);

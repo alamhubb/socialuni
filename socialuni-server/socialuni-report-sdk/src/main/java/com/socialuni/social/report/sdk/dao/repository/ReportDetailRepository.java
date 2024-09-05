@@ -29,7 +29,7 @@ public interface ReportDetailRepository extends JpaRepository<ReportDetailDO, In
 
     Integer countByUserIdAndReportId(Long userId, ReportDO reportDO);
 
-    Integer countByReportId(Integer reportId);
+    Integer countByReportId(Long reportId);
 
-    List<ReportDetailDO> findAllByReportId(Integer reportId);
+    List<ReportDetailDO> findAllByReportId(Long reportId);
 }

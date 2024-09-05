@@ -10,7 +10,7 @@ import lombok.Data;
  */
 @Data
 public class NotifyUserVO {
-    private String id;
+    private Long id;
     private String nickname;
     private String avatar;
     private Boolean vipFlag;

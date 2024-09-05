@@ -74,7 +74,7 @@ public class ImUserService {
         // 注册到Im
         SocialuniImUserModel imUserModel = new SocialuniImUserModel();
 
-        String mineUserUid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(mineUser.getUserId());
+       /* Long mineUserUid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(mineUser.getUserId());
 
         imUserModel.setUserID(mineUserUid);
 
@@ -100,7 +100,7 @@ public class ImUserService {
 
 //        imUserModel.setPhoneNumber(mineUser.getPhoneNum());
 
-        imUserModel.setCreateTime(new Date());
+        imUserModel.setCreateTime(new Date());*/
         return imUserModel;
     }
 

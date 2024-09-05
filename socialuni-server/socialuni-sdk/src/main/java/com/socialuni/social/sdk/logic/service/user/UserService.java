@@ -68,7 +68,7 @@ public class UserService {
     @Resource
     private ChatUserRepository chatUserRepository;
 
-    public void setUserOnlineTrue(String userId) {
+    public void setUserOnlineTrue(Long userId) {
         Optional<UniUserDO> optionalUserDO = UserUtils.getUserOpt(Integer.parseInt(userId));
         if (optionalUserDO.isPresent()) {
             UniUserDO user = optionalUserDO.get();
@@ -78,7 +78,7 @@ public class UserService {
         }
     }
 
-    public void setUserOnlineFalse(String userId) {
+    public void setUserOnlineFalse(Long userId) {
         Optional<UniUserDO> optionalUserDO = UserUtils.getUserOpt(Integer.parseInt(userId));
         if (optionalUserDO.isPresent()) {
             UniUserDO user = optionalUserDO.get();

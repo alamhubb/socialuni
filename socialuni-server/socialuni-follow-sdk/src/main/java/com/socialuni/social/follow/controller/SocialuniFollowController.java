@@ -42,7 +42,7 @@ public class SocialuniFollowController implements SocialuniFollowAPI {
     }
 
     @Override
-    public ResultRO<SocialuniUserFansDetailRO> queryUserFansDetail(String userId) {
+    public ResultRO<SocialuniUserFansDetailRO> queryUserFansDetail(Long userId) {
         return ResultRO.success(SocialuniUserFollowInfoUtil.getUserFollowRelationInfo(userId));
     }
 }

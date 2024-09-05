@@ -2,8 +2,8 @@ package com.socialuni.social.tance.dev.redis;
 
 import com.socialuni.social.common.api.model.SocialuniAppConfigBO;
 import com.socialuni.social.common.api.model.SocialuniAppMoreConfigBO;
-import com.socialuni.social.tance.dev.model.DO.AppConfigDO;
-import com.socialuni.social.tance.dev.repository.AppConfigRepository;
+import com.socialuni.social.tance.dev.dao.DO.AppConfigDO;
+import com.socialuni.social.tance.dev.dao.repository.AppConfigRepository;
 import com.socialuni.social.tance.dev.constant.AppConfigDOKeyConst;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.cache.annotation.Cacheable;

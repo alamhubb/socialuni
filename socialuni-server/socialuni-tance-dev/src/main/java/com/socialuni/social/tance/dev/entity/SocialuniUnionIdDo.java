@@ -37,17 +37,14 @@ public class SocialuniUnionIdDo extends SocialuniBaseDO implements Serializable 
     //数据所有方
     //主要是不想泄露真实id，所以用的其他id
 
-    public Long getSelfSysId() {
-        return Long.valueOf(this.getId());
+
+    @Deprecated
+    public String getUuid() {
+        return uuid;
     }
 
-    //三方的用户，来注册的时候，好好想想各种情况， 应该都会有dataunionid
-    public SocialuniUnionIdDo(String contentType, String uuid, Integer fromDevId) {
-        //这俩字段应该用不到，只是方便统计有用，也不是读出来的数据有用，评论时需要根据这个通知到对方，
-        this.contentType = contentType;
-        this.uuid = uuid;
-//        this.belongDevId = belongDevId;
-        this.fromDevId = fromDevId;
+    public Long getSelfSysId() {
+        return Long.valueOf(this.getId());
     }
 
     //三方的用户，来注册的时候，好好想想各种情况， 应该都会有dataunionid

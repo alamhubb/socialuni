@@ -38,7 +38,7 @@ public interface SocialuniUserExpandAPI {
 
     @GetMapping("getUserContactInfo/{userId}")
     @Operation(summary = "获取用户的联系方式")
-    ResultRO<String> getUserContactInfo(@PathVariable("userId") String userId);
+    ResultRO<String> getUserContactInfo(@PathVariable("userId") Long userId);
 
     @GetMapping("getMineUserExpandDetail")
     @Operation(summary = "获取扩展信息")

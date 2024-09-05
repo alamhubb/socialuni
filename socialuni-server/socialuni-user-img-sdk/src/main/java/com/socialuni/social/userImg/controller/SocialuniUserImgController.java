@@ -29,7 +29,7 @@ public class SocialuniUserImgController implements SocialuniUserImgAPI {
     }
 
     @Override
-    public ResultRO<List<SocialuniUserImgRO>> getUserImgList(String userId) {
+    public ResultRO<List<SocialuniUserImgRO>> getUserImgList(Long userId) {
         return socialuniUserImgService.getUserImgList(userId);
     }
 

@@ -30,7 +30,7 @@ public interface SocialuniUserImgAPI {
 
     @GetMapping("getUserImgList/{userId}")
     @Operation(summary = "获取用户图片列表")
-    ResultRO<List<SocialuniUserImgRO>> getUserImgList(@PathVariable("userId") String userId);
+    ResultRO<List<SocialuniUserImgRO>> getUserImgList(@PathVariable("userId") Long userId);
 
 
     @GetMapping("getMineUserImgList")

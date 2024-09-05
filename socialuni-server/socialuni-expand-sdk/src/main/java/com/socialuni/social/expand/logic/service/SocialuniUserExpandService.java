@@ -199,7 +199,7 @@ public class SocialuniUserExpandService {
     }
 
     //查询最近在线的用户
-    public ResultRO<String> getUserContactInfo(String userId) {
+    public ResultRO<String> getUserContactInfo(Long userId) {
         String userContactInfo = socialuniGetUserContactInfoDomain.getUserContactInfo(userId);
         return ResultRO.success(userContactInfo);
     }

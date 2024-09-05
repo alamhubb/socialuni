@@ -8,6 +8,7 @@ import com.socialuni.social.content.utils.BirthdayAgeUtil;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.user.sdk.model.factory.SocialUserDOFactory;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,16 @@ public class SocialUserManage {
 
     public SocialuniUserDo createUserByProviderLogin(SocialProviderLoginQO loginQO, Long unionId) {
         SocialuniUserDo user = SocialUserDOFactory.newUserByProviderLogin(loginQO, unionId);
+        user = userApi.savePut(user);
+        return user;
+    }
+
+    public SocialuniUserDo createUserByThirdProviderLogin(SocialProviderLoginQO loginQO, String type, Long unionId) {
+        SocialuniUserDo user = SocialUserDOFactory.newUserByProviderLogin(loginQO, unionId);
+        if (!StringUtils.isEmpty(type)) {
+            //有可能为系统用户
+            user.setType(type);
+        }
         user = userApi.savePut(user);
         return user;
     }

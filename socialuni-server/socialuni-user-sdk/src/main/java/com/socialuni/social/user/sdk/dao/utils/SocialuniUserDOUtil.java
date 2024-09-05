@@ -36,8 +36,8 @@ public class SocialuniUserDOUtil {
         return socialuniUserRepository.findUserIdsByType(type);
     }
 
-    public static SocialuniUserDo createUserByNickname(String nickname) {
-        SocialuniUserDo socialuniUserDo = SocialUserDOFactory.newUserByPhoneLogin();
+    public static SocialuniUserDo createUserByNickname(String nickname,Long unionId) {
+        SocialuniUserDo socialuniUserDo = SocialUserDOFactory.newUserByPhoneLogin(unionId);
         socialuniUserDo.setNickname(nickname);
         socialuniUserDo.setType(UserType.operation);
         return SocialuniUserDOUtil.createUserByEmptyToDefault(socialuniUserDo);
