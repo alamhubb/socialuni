@@ -4,7 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.tance.dev.api.SocialuniUnionIdInterface;
-import com.socialuni.social.tance.dev.model.SocialuniUnionIdModler;
+import com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
@@ -74,15 +74,15 @@ public class SocialuniUnionIdFacede {
     }*/
 
     private static Long createUnionIdByContentType(String contentType, Long unionId) {
-        SocialuniUnionIdModler uniContentUnionIdDO = new SocialuniUnionIdModler(contentType, unionId, DevAccountFacade.getDevIdNullElseCenterDevId());
+        SocialuniUnionIdDo uniContentUnionIdDO = new SocialuniUnionIdDo(contentType, unionId, DevAccountFacade.getDevIdNullElseCenterDevId());
         uniContentUnionIdDO = socialuniUnionIdApi.savePut(uniContentUnionIdDO);
         //有的话更新
-        return uniContentUnionIdDO.getUnionId();
+        return uniContentUnionIdDO.getSelfSysId();
     }
 
     //空的创建的，然后更新，只有往中心推送后，可调用这里更新
     public static void updateUuidByUnionIdNotNull(Long unionId, String uuid) {
-        SocialuniUnionIdModler uniContentUnionIdDO = getUnionDOByUnionIdNotNull(unionId);
+        SocialuniUnionIdDo uniContentUnionIdDO = getUnionDOByUnionIdNotNull(unionId);
         //没有写入
         uniContentUnionIdDO.setUuid(uuid);
         socialuniUnionIdApi.savePut(uniContentUnionIdDO);
@@ -94,22 +94,22 @@ public class SocialuniUnionIdFacede {
     }
 
     //空的创建的，然后更新，只有往中心推送后，可调用这里更新
-    public static SocialuniUnionIdModler getUnionDOByUnionIdNotNull(Long unionId) {
+    public static SocialuniUnionIdDo getUnionDOByUnionIdNotNull(Long unionId) {
         if (unionId == null) {
             throw new SocialParamsException("无效的内容标识4");
         }
-        SocialuniUnionIdModler uniContentUnionIdDO = socialuniUnionIdApi.findByUnionId(unionId);
+        SocialuniUnionIdDo uniContentUnionIdDO = socialuniUnionIdApi.findByUnionId(unionId);
         if (uniContentUnionIdDO == null) {
             throw new SocialParamsException("无效的内容标识5");
         }
         return uniContentUnionIdDO;
     }
 
-    public static SocialuniUnionIdModler getUnionDOByUnionIdAllowNull(Long unionId) {
+    public static SocialuniUnionIdDo getUnionDOByUnionIdAllowNull(Long unionId) {
         if (unionId == null) {
             return null;
         }
-        SocialuniUnionIdModler uniContentUnionIdDO = socialuniUnionIdApi.findByUnionId(unionId);
+        SocialuniUnionIdDo uniContentUnionIdDO = socialuniUnionIdApi.findByUnionId(unionId);
         if (uniContentUnionIdDO == null) {
             return null;
         }
@@ -122,10 +122,10 @@ public class SocialuniUnionIdFacede {
             throw new SocialParamsException("无效的内容标识3");
         }
 
-        SocialuniUnionIdModler uniContentUnionIdDO = getUnionByUuidAllowNull(uuid);
+        SocialuniUnionIdDo uniContentUnionIdDO = getUnionByUuidAllowNull(uuid);
         //没有写入
         if (uniContentUnionIdDO == null) {
-            uniContentUnionIdDO = new SocialuniUnionIdModler(contentType, uuid, DevAccountFacade.getCenterDevIdNotNull());
+            uniContentUnionIdDO = new SocialuniUnionIdDo(contentType, uuid, DevAccountFacade.getCenterDevIdNotNull());
             socialuniUnionIdApi.savePut(uniContentUnionIdDO);
             //有的话更新
         }
@@ -136,32 +136,32 @@ public class SocialuniUnionIdFacede {
     //结果不可为空 ，为前台传入的数据,根据uid获取真实id,获取不可为空, 为前台传入的数据，防止错误，不可为空
     //根据uid获取真实id,获取不可为空, 为前台传入的数据，防止错误，不可为空
     public static Long getUnionIdByUuidNotNull(String uuid) {
-        return getUnionByUuidNotNull(uuid).getUnionId();
+        return getUnionByUuidNotNull(uuid).getSelfSysId();
     }
 
     public static Long getUnionIdByUuidNotNull(Long uuid) {
-        return getUnionByUuidNotNull(uuid).getUnionId();
+        return getUnionByUuidNotNull(uuid).getSelfSysId();
     }
 
     public static Long getChatUnionIdByUuidNotNull(String uuid) {
-        SocialuniUnionIdModler chatUnion = getUnionByUuidNotNull(uuid);
+        SocialuniUnionIdDo chatUnion = getUnionByUuidNotNull(uuid);
         if (!Arrays.asList(SocialuniContentType.chat, SocialuniContentType.user).contains(chatUnion.getContentType())) {
             throw new SocialSystemException("不存在的会话");
         }
-        return chatUnion.getUnionId();
+        return chatUnion.getSelfSysId();
     }
 
     //根据uid获取真实id,获取不可为空, 为前台传入的数据，防止错误，不可为空
-    public static SocialuniUnionIdModler getUnionByUuidNotNull(String uuid) {
-        SocialuniUnionIdModler uniContentUnionIdDO = getUnionByUuidAllowNull(uuid);
+    public static SocialuniUnionIdDo getUnionByUuidNotNull(String uuid) {
+        SocialuniUnionIdDo uniContentUnionIdDO = getUnionByUuidAllowNull(uuid);
         if (uniContentUnionIdDO == null) {
             throw new SocialParamsException("错误的内容标识2：" + uuid);
         }
         return uniContentUnionIdDO;
     }
 
-    public static SocialuniUnionIdModler getUnionByUuidNotNull(Long uuid) {
-        SocialuniUnionIdModler uniContentUnionIdDO = getUnionByUuidAllowNull(uuid);
+    public static SocialuniUnionIdDo getUnionByUuidNotNull(Long uuid) {
+        SocialuniUnionIdDo uniContentUnionIdDO = getUnionByUuidAllowNull(uuid);
         if (uniContentUnionIdDO == null) {
             throw new SocialParamsException("错误的内容标识2：" + uuid);
         }
@@ -169,14 +169,14 @@ public class SocialuniUnionIdFacede {
     }
 
     //外部使用可能查询不存在的
-    public static SocialuniUnionIdModler getUnionByUuidAllowNull(String uuid) {
+    public static SocialuniUnionIdDo getUnionByUuidAllowNull(String uuid) {
         if (StringUtils.isEmpty(uuid)) {
             throw new SocialParamsException("无效的内容标识1:" + uuid);
         }
         return socialuniUnionIdApi.findByUuId(uuid);
     }
 
-    public static SocialuniUnionIdModler getUnionByUuidAllowNull(Long uuid) {
+    public static SocialuniUnionIdDo getUnionByUuidAllowNull(Long uuid) {
         if (ObjectUtils.isEmpty(uuid)) {
             throw new SocialParamsException("无效的内容标识1:" + uuid);
         }
@@ -184,11 +184,11 @@ public class SocialuniUnionIdFacede {
     }
 
     public static Long getUnionIdByUuidAllowNull(String uuid) {
-        SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidAllowNull(uuid);
-        if (socialuniUnionIdModler == null) {
+        SocialuniUnionIdDo socialuniUnionIdDo = SocialuniUnionIdFacede.getUnionByUuidAllowNull(uuid);
+        if (socialuniUnionIdDo == null) {
             return null;
         }
-        return socialuniUnionIdModler.getUnionId();
+        return socialuniUnionIdDo.getSelfSysId();
     }
 
 

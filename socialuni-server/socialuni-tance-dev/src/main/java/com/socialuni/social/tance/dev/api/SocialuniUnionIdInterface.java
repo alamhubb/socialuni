@@ -1,6 +1,6 @@
 package com.socialuni.social.tance.dev.api;
 
-import com.socialuni.social.tance.dev.model.SocialuniUnionIdModler;
+import com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo;
 
 import java.util.List;
 
@@ -13,11 +13,11 @@ import java.util.List;
  */
 public interface SocialuniUnionIdInterface {
 
-    SocialuniUnionIdModler savePut(SocialuniUnionIdModler uniContentUnionIdDO);
+    SocialuniUnionIdDo savePut(SocialuniUnionIdDo uniContentUnionIdDO);
 
-    SocialuniUnionIdModler findByUnionId(Long unionId);
+    SocialuniUnionIdDo findByUnionId(Long unionId);
 
-    SocialuniUnionIdModler findByUuId(String uuid);
+    SocialuniUnionIdDo findByUuId(String uuid);
 
     List<String> findUuidAllByContentType(String contentTyp);
 

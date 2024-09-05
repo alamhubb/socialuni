@@ -20,7 +20,7 @@ import com.socialuni.social.im.api.model.RO.SocialMessageRO;
 import com.socialuni.social.sdk.im.enumeration.MessageStatus;
 import com.socialuni.social.sdk.im.utils.SocialuniChatUserDOUtil;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.tance.dev.model.SocialuniUnionIdModler;
+import com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import lombok.Data;
@@ -278,11 +278,11 @@ public class SocialChatROFactory {
 
 
     public static SocialuniChatUserDO getSingleChatUser(String chatId) {
-        SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidAllowNull(chatId);
+        SocialuniUnionIdDo socialuniUnionIdDo = SocialuniUnionIdFacede.getUnionByUuidAllowNull(chatId);
 
         //创建 chatUser 的逻辑，点击进入页面，会话页加一条
         //发送消息，还有添加好友成功
-        if (socialuniUnionIdModler == null) {
+        if (socialuniUnionIdDo == null) {
             int unionId;
             try {
                 unionId = Integer.parseInt(chatId);
@@ -297,11 +297,11 @@ public class SocialChatROFactory {
             //则为chatUserId
         } else {
             //旧版本
-            String contentType = socialuniUnionIdModler.getContentType();
+            String contentType = socialuniUnionIdDo.getContentType();
             //私聊
             if (contentType.equals(SocialuniContentType.user)) {
                 Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
-                Long beUserId = socialuniUnionIdModler.getUnionId();
+                Long beUserId = socialuniUnionIdDo.getSelfSysId();
                 SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findByChatIdAndUserId(mineUserId, beUserId);
 
                 return chatUserDO;
@@ -315,8 +315,8 @@ public class SocialChatROFactory {
     public static Long getChatId(String chatId) {
         SocialuniChatUserDO socialuniChatUserDO = getSingleChatUser(chatId);
         if (socialuniChatUserDO == null) {
-            SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidNotNull(chatId);
-            return socialuniUnionIdModler.getUnionId();
+            SocialuniUnionIdDo socialuniUnionIdDo = SocialuniUnionIdFacede.getUnionByUuidNotNull(chatId);
+            return socialuniUnionIdDo.getSelfSysId();
         }
         return socialuniChatUserDO.getChatId();
     }

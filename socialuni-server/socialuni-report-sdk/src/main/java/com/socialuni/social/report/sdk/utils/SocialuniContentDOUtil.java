@@ -20,7 +20,7 @@ import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.userImg.utils.SocialuniUserImgDOUtil;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
-import com.socialuni.social.tance.dev.model.SocialuniUnionIdModler;
+import com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo;
 import com.socialuni.social.userImg.dao.DO.SocialuniUserImgDo;
 import com.socialuni.social.userImg.dao.repository.SocialuniUserImgRepository;
 import org.springframework.stereotype.Component;
@@ -86,8 +86,8 @@ public class SocialuniContentDOUtil<T> {
     }
 
     public static SocialuniUnionContentBaseDO getContentDOByContentId(Long contentId) {
-        SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(contentId);
-        String contentType = socialuniUnionIdModler.getContentType();
+        SocialuniUnionIdDo socialuniUnionIdDo = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(contentId);
+        String contentType = socialuniUnionIdDo.getContentType();
         if (!SocialuniContentType.unionIdSupportTypes.contains(contentType)) {
             throw new SocialParamsException("错误的内容类型");
         }

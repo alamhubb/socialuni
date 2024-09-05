@@ -25,7 +25,7 @@ import com.socialuni.social.im.api.model.QO.chat.ChatRemoveVO;
 import com.socialuni.social.im.api.model.QO.chat.OpenChatVO;
 import com.socialuni.social.sdk.im.utils.SocialuniChatDOUtil;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.tance.dev.model.SocialuniUnionIdModler;
+import com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Service;
 
@@ -126,15 +126,15 @@ public class ChatService {
     public ResultRO<ChatRO> queryChat(SocialuniChatQueryQO socialuniChatQueryQO) {
         String chatIdStr = socialuniChatQueryQO.getChatId();
 
-        SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidNotNull(chatIdStr);
+        SocialuniUnionIdDo socialuniUnionIdDo = SocialuniUnionIdFacede.getUnionByUuidNotNull(chatIdStr);
 
         //创建 chatUser 的逻辑，点击进入页面，会话页加一条
         //发送消息，还有添加好友成功
 
         //私聊
-        if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.user)) {
+        if (socialuniUnionIdDo.getContentType().equals(SocialuniContentType.user)) {
             Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
-            Long beUserId = socialuniUnionIdModler.getUnionId();
+            Long beUserId = socialuniUnionIdDo.getSelfSysId();
 
             //如果用户存在查看会话
             SocialuniChatUserDO chatUserDO = SocialuniChatUserDOFactory.getOrCreateChatUsersBySingleSendMsg(mineUserId, beUserId).get(0);
@@ -142,7 +142,7 @@ public class ChatService {
             ChatRO chatRO = SocialChatROFactory.getChatROByQueryChat(chatUserDO, true);
 
             return ResultRO.success(chatRO);
-        } else if (socialuniUnionIdModler.getContentType().equals(SocialuniContentType.chat)) {
+        } else if (socialuniUnionIdDo.getContentType().equals(SocialuniContentType.chat)) {
             //则为chatId
             Long chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(chatIdStr);
 

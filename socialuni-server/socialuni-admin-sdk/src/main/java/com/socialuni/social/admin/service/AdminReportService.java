@@ -23,7 +23,7 @@ import com.socialuni.social.community.sdk.dao.SocialuniTalkDOUtil;
 import com.socialuni.social.report.sdk.facotry.ReportFactory;
 import com.socialuni.social.content.logic.service.KeywordsService;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.tance.dev.model.SocialuniUnionIdModler;
+import com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo;
 import com.socialuni.social.common.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.content.dao.DO.KeywordsDO;
 import com.socialuni.social.content.dao.DO.KeywordsTriggerDetailDO;
@@ -141,7 +141,7 @@ public class AdminReportService {
             ReportDO = reportApi.findOneByContentId(contentId);
             if (ReportDO == null) {
                 SocialuniTalkDO talkDO = SocialuniTalkDOUtil.getTalkNotNull(contentId);
-                SocialuniUnionIdModler uniContentUnionIdDO = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(contentId);
+                SocialuniUnionIdDo uniContentUnionIdDO = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(contentId);
                 ReportDO = ReportFactory.createReportDO(ReportSourceType.systemAutoCheck, talkDO, uniContentUnionIdDO);
             }
             ReportDO.setReportNum(ReportDO.getReportNum() + 1);

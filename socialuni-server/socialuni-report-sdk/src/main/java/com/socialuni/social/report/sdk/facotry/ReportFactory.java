@@ -4,7 +4,7 @@ import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.common.sdk.constant.ReportSourceType;
 import com.socialuni.social.report.sdk.entity.ReportDO;
 import com.socialuni.social.content.constant.ReportStatus;
-import com.socialuni.social.tance.dev.model.SocialuniUnionIdModler;
+import com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -14,9 +14,9 @@ public class ReportFactory {
     public static ReportDO createReportDO(
             String reportSourceType,
             SocialuniUnionContentBaseDO socialuniContentBO,
-            SocialuniUnionIdModler socialuniUnionIdModler
+            SocialuniUnionIdDo socialuniUnionIdDo
     ) {
-        return ReportFactory.createReportDO(socialuniContentBO.getContentType(), socialuniContentBO.getUnionId(), socialuniContentBO.getContent(), socialuniContentBO.getUserId(), reportSourceType, socialuniUnionIdModler);
+        return ReportFactory.createReportDO(socialuniContentBO.getContentType(), socialuniContentBO.getUnionId(), socialuniContentBO.getContent(), socialuniContentBO.getUserId(), reportSourceType, socialuniUnionIdDo);
     }
 
 
@@ -26,7 +26,7 @@ public class ReportFactory {
             String content,
             Long contentUserId,
             String reportSourceType,
-            SocialuniUnionIdModler socialuniUnionIdModler
+            SocialuniUnionIdDo socialuniUnionIdDo
     ) {
         // 设置model
         ReportDO ReportDO = new ReportDO();
@@ -55,7 +55,7 @@ public class ReportFactory {
 
         ReportDO.setContentId(contentId);
         //用来记录有哪些内容的审核权限，所以是内容归属的开发者
-        ReportDO.setDevId(socialuniUnionIdModler.getFromDevId());
+        ReportDO.setDevId(socialuniUnionIdDo.getFromDevId());
         return ReportDO;
     }
 

@@ -16,7 +16,7 @@ import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.app.model.SocialuniMineUserDetailRO;
 import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.tance.dev.model.SocialuniUnionIdModler;
+import com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -52,7 +52,7 @@ public class UniUserRegistryDomain {
             throw new SocialParamsException("用户唯一标识不能为空");
         }
 
-        SocialuniUnionIdModler uniContentUnionIdDO = SocialuniUnionIdFacede.getUnionByUuidAllowNull(userUid);
+        SocialuniUnionIdDo uniContentUnionIdDO = SocialuniUnionIdFacede.getUnionByUuidAllowNull(userUid);
         //新注册
         if (uniContentUnionIdDO == null) {
             //为空，则只注册
@@ -66,7 +66,7 @@ public class UniUserRegistryDomain {
             }
         } else {
             //已注册，更新token
-            mineUser = SocialuniUserUtil.getUserNotNull(uniContentUnionIdDO.getUnionId());
+            mineUser = SocialuniUserUtil.getUserNotNull(uniContentUnionIdDO.getSelfSysId());
         }
         SocialuniTokenDO socialUserTokenDO = tokenManage.create(mineUser.getUnionId());
 

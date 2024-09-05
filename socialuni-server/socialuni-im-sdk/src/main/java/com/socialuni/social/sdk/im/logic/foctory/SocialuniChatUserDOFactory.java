@@ -10,7 +10,7 @@ import com.socialuni.social.sdk.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.sdk.im.enumeration.ChatType;
 import com.socialuni.social.sdk.im.utils.SocialuniChatUserDOUtil;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.tance.dev.model.SocialuniUnionIdModler;
+import com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 
 import java.util.Arrays;
@@ -21,11 +21,11 @@ public class SocialuniChatUserDOFactory {
 
     //    有用户就是chatUserId，没有就是chatId,chatId是uuid，chatUserid没有uuid
     public static SocialuniChatUserDO getSingleChatUser(String chatId) {
-        SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidAllowNull(chatId);
+        SocialuniUnionIdDo socialuniUnionIdDo = SocialuniUnionIdFacede.getUnionByUuidAllowNull(chatId);
 
         //创建 chatUser 的逻辑，点击进入页面，会话页加一条
         //发送消息，还有添加好友成功
-        if (socialuniUnionIdModler == null) {
+        if (socialuniUnionIdDo == null) {
             int unionId;
             try {
                 unionId = Integer.parseInt(chatId);
@@ -40,11 +40,11 @@ public class SocialuniChatUserDOFactory {
             //则为chatUserId
         } else {
             //旧版本
-            String contentType = socialuniUnionIdModler.getContentType();
+            String contentType = socialuniUnionIdDo.getContentType();
             //私聊
             if (contentType.equals(SocialuniContentType.user)) {
                 Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
-                Long beUserId = socialuniUnionIdModler.getUnionId();
+                Long beUserId = socialuniUnionIdDo.getSelfSysId();
 
                 SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findByChatIdAndUserId(mineUserId, beUserId);
 

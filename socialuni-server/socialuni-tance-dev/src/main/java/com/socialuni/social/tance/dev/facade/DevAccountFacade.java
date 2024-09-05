@@ -11,7 +11,7 @@ import com.socialuni.social.tance.dev.constant.AdminAppConfigConst;
 import com.socialuni.social.tance.dev.enumeration.SocialFeignHeaderName;
 import com.socialuni.social.tance.dev.model.DevAccountModel;
 import com.socialuni.social.tance.dev.model.DevAccountProviderModler;
-import com.socialuni.social.tance.dev.model.SocialuniUnionIdModler;
+import com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo;
 import com.socialuni.social.tance.dev.config.SocialuniDevConfig;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import org.apache.commons.lang3.StringUtils;
@@ -98,7 +98,7 @@ public class DevAccountFacade {
     }
 
     public static Integer getAdminDevIdNotNull(Long unionId) {
-        SocialuniUnionIdModler socialuniUnionIdDo = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(unionId);
+        SocialuniUnionIdDo socialuniUnionIdDo = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(unionId);
 
         Integer devId = socialuniUnionIdDo.getFromDevId();
         return devId;

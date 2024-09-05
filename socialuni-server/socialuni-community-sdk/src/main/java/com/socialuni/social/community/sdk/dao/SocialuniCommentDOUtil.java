@@ -6,7 +6,7 @@ import com.socialuni.social.community.sdk.repository.CommentRepository;
 import com.socialuni.social.common.api.enumeration.ContentStatus;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.tance.dev.facade.DevAccountFacade;
-import com.socialuni.social.tance.dev.model.SocialuniUnionIdModler;
+import com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -31,7 +31,7 @@ public class SocialuniCommentDOUtil {
     }
 
     public static SocialuniCommentDO getAllowNull(Long unionId) {
-        SocialuniUnionIdModler uniContentUnionIdDO = SocialuniUnionIdFacede.getUnionDOByUnionIdAllowNull(unionId);
+        SocialuniUnionIdDo uniContentUnionIdDO = SocialuniUnionIdFacede.getUnionDOByUnionIdAllowNull(unionId);
         if (uniContentUnionIdDO == null) {
             return null;
         }

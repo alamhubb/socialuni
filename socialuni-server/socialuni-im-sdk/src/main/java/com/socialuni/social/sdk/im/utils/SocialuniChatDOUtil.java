@@ -8,7 +8,7 @@ import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniChatRepository;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniChatUserRepository;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.tance.dev.model.SocialuniUnionIdModler;
+import com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -42,13 +42,13 @@ public class SocialuniChatDOUtil {
 
         Long mineUserId = SocialuniUserUtil.getMineUserIdAllowNull();
 
-        SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionByUuidNotNull(chatIdStr);
+        SocialuniUnionIdDo socialuniUnionIdDo = SocialuniUnionIdFacede.getUnionByUuidNotNull(chatIdStr);
 
-        Long unionId = socialuniUnionIdModler.getUnionId();
+        Long unionId = socialuniUnionIdDo.getSelfSysId();
 
-        if (SocialuniContentType.chat.equals(socialuniUnionIdModler.getContentType())) {
+        if (SocialuniContentType.chat.equals(socialuniUnionIdDo.getContentType())) {
             return unionId;
-        } else if (SocialuniContentType.user.equals(socialuniUnionIdModler.getContentType())) {
+        } else if (SocialuniContentType.user.equals(socialuniUnionIdDo.getContentType())) {
             SocialuniChatUserDO socialuniChatUserDO = SocialuniChatUserDOUtil.findByUserIdAndBeUserIdNotNull(mineUserId, unionId);
             return socialuniChatUserDO.getChatId();
         }

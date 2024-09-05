@@ -6,7 +6,7 @@ import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
 import com.socialuni.social.community.sdk.repository.TalkRepository;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.tance.dev.facade.DevAccountFacade;
-import com.socialuni.social.tance.dev.model.SocialuniUnionIdModler;
+import com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -44,7 +44,7 @@ public class SocialuniTalkDOUtil {
 
     //逻辑没问题，第一行是校验
     public static SocialuniTalkDO getAllowNull(Long unionId) {
-        SocialuniUnionIdModler uniContentUnionIdDO = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(unionId);
+        SocialuniUnionIdDo uniContentUnionIdDO = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(unionId);
         SocialuniTalkDO talkDO = talkApi.findOneByUnionId(unionId);
         if (talkDO == null) {
             //只有开发者相等才进入， 用户写入的数据，不该出现不存在的情况

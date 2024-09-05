@@ -2,9 +2,8 @@ package com.socialuni.social.tance.dev.cache;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.socialuni.social.tance.dev.repository.SocialuniUnionIdRepository;
-import com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo;
 import com.socialuni.social.tance.dev.api.SocialuniUnionIdInterface;
-import com.socialuni.social.tance.dev.model.SocialuniUnionIdModler;
+import com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -38,19 +37,19 @@ public class SocialuniUnionIdCache implements SocialuniUnionIdInterface {
             },
             put = {@CachePut(cacheNames = {"getUnionIdByUnionId"}, key = "#uniContentUnionIdDO.id", condition = "#uniContentUnionIdDO.id != null")}
     )
-    public SocialuniUnionIdDo savePut(SocialuniUnionIdModler uniContentUnionIdDO) {
-        return uniContentUnionIdRepository.save(BeanUtil.copyProperties(uniContentUnionIdDO, SocialuniUnionIdDo.class));
+    public com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo savePut(SocialuniUnionIdDo uniContentUnionIdDO) {
+        return uniContentUnionIdRepository.save(BeanUtil.copyProperties(uniContentUnionIdDO, com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo.class));
     }
 
     @Override
     @Cacheable(cacheNames = "getUnionIdByUnionId", key = "#unionId")
-    public SocialuniUnionIdDo findByUnionId(Long unionId) {
+    public com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo findByUnionId(Long unionId) {
         return uniContentUnionIdRepository.findFirstByUnionId(unionId);
     }
 
     @Override
     @Cacheable(cacheNames = "getUnionIdByUuId", key = "#uuid")
-    public SocialuniUnionIdDo findByUuId(String uuid) {
+    public com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo findByUuId(String uuid) {
         return uniContentUnionIdRepository.findByUuid(uuid);
     }
 
