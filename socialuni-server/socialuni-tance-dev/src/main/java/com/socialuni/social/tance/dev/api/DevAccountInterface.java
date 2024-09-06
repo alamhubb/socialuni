@@ -1,6 +1,6 @@
 package com.socialuni.social.tance.dev.api;
 
-import com.socialuni.social.tance.dev.model.DevAccountModel;
+import com.socialuni.social.tance.dev.dao.DO.DevAccountDo;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,29 +15,29 @@ import java.util.Optional;
  */
 public interface DevAccountInterface {
 //    DevAccountModel savePut(DevAccountModel devAccountModel);
-    DevAccountModel save(DevAccountModel devAccountModel);
+    DevAccountDo save(DevAccountDo devAccountDo);
     //    @Cacheable(cacheNames = "getDevAccountById", key = "#id")
-    DevAccountModel findFirstById(Integer id);
-    DevAccountModel findFirstByUserId(Long id);
+    DevAccountDo findFirstById(Integer id);
+    DevAccountDo findFirstByUserId(Long id);
 
     //直接携带秘钥访问
 //    @Cacheable(cacheNames = "getDevAccountBySecretKey", key = "#secretKey")
-    DevAccountModel findOneBySecretKey(String secretKey);
+    DevAccountDo findOneBySecretKey(String secretKey);
 
     //    @Cacheable(cacheNames = "getDevAccountBySocialuniId", key = "#socialuniId")
-    DevAccountModel findOneBySocialuniId(String socialuniId);
+    DevAccountDo findOneBySocialuniId(String socialuniId);
 
-    DevAccountModel findOneByAppName(String appName);
+    DevAccountDo findOneByAppName(String appName);
 
-    DevAccountModel findOneByDevNum(Long devNum);
+    DevAccountDo findOneByDevNum(Long devNum);
 
     //获取最新的开发者账户，用来id相加，不缓存，低频，创建时才是用
-    Optional<? extends DevAccountModel> findFirstByOrderByIdDesc();
+    Optional<? extends DevAccountDo> findFirstByOrderByIdDesc();
 
     //不需要缓存，低频, admin登录使用
-    DevAccountModel findOneByPhoneNumOrderByIdAsc(String phoneNum);
+    DevAccountDo findOneByPhoneNumOrderByIdAsc(String phoneNum);
 
-    List<? extends DevAccountModel> findAll();
+    List<? extends DevAccountDo> findAll();
 
 
     //同步创建生产环境的开发者账号

@@ -9,7 +9,7 @@ import com.socialuni.social.sdk.logic.manage.ThirdUserAuthManage;
 import com.socialuni.social.sdk.logic.manage.ThirdUserManage;
 import com.socialuni.social.sdk.logic.manage.ThirdUserTokenManage;
 import com.socialuni.social.app.model.SocialuniMineUserDetailRO;
-import com.socialuni.social.tance.dev.model.DevAccountModel;
+import com.socialuni.social.tance.dev.dao.DO.DevAccountDo;
 import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import org.springframework.stereotype.Service;
@@ -41,9 +41,9 @@ public class AuthThirdUserEntity {
     }*/
 
     //登录和 绑定手机号和微信手机号三个地方使用
-    public SocialuniMineUserDetailRO authThirdUser(SocialuniUserDo mineUser, String authType, DevAccountModel devAccountModel, SocialuniMineUserDetailRO socialMineUserDetailRO) {
+    public SocialuniMineUserDetailRO authThirdUser(SocialuniUserDo mineUser, String authType, DevAccountDo devAccountDo, SocialuniMineUserDetailRO socialMineUserDetailRO) {
         //只是记录一个授权记录
-        ThirdUserDO threeUserDO = thirdUserManage.getOrCreate(devAccountModel.getId(), mineUser.getUnionId(), socialMineUserDetailRO.getId());
+        ThirdUserDO threeUserDO = thirdUserManage.getOrCreate(devAccountDo.getId(), mineUser.getUnionId(), socialMineUserDetailRO.getId());
 
         if (AuthType.phone.equals(authType)) {
             thirdUserAuthManage.getOrCreate(threeUserDO, AuthType.user);

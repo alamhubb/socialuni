@@ -2,7 +2,6 @@ package com.socialuni.social.tance.dev.dao.repository;
 
 import com.socialuni.social.tance.dev.api.DevAccountInterface;
 import com.socialuni.social.tance.dev.dao.DO.DevAccountDo;
-import com.socialuni.social.tance.dev.model.DevAccountModel;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -17,29 +16,29 @@ import java.util.Optional;
 public interface DevAccountRepository extends JpaRepository<DevAccountDo, Integer>, DevAccountInterface {
     DevAccountDo save(DevAccountDo devAccountDo);
     @Cacheable(cacheNames = "getDevAccountById", key = "#id")
-    DevAccountModel findFirstById(Integer id);
+    DevAccountDo findFirstById(Integer id);
 
     @Cacheable(cacheNames = "getDevAccountByUserId", key = "#userId")
-    DevAccountModel findFirstByUserId(Long userId);
+    DevAccountDo findFirstByUserId(Long userId);
 
     //直接携带秘钥访问
     @Cacheable(cacheNames = "getDevAccountBySecretKey", key = "#secretKey")
-    DevAccountModel findOneBySecretKey(String secretKey);
+    DevAccountDo findOneBySecretKey(String secretKey);
 
 
     @Cacheable(cacheNames = "getDevAccountBySocialuniId", key = "#socialuniId")
-    DevAccountModel findOneBySocialuniId(String socialuniId);
+    DevAccountDo findOneBySocialuniId(String socialuniId);
 
-    DevAccountModel findOneByAppName(String appName);
+    DevAccountDo findOneByAppName(String appName);
 
-    DevAccountModel findOneByDevNum(Long devNum);
+    DevAccountDo findOneByDevNum(Long devNum);
 
     //获取最新的开发者账户，用来id相加，不缓存，低频，创建时才是用
-    Optional<DevAccountModel> findFirstByOrderByIdDesc();
+    Optional<DevAccountDo> findFirstByOrderByIdDesc();
 
     @Cacheable(cacheNames = "findOneByPhoneNumOrderByIdAsc", key = "#phoneNum")
     //不需要缓存，低频, admin登录使用
-    DevAccountModel findOneByPhoneNumOrderByIdAsc(String phoneNum);
+    DevAccountDo findOneByPhoneNumOrderByIdAsc(String phoneNum);
 
     List<DevAccountDo> findAll();
 }

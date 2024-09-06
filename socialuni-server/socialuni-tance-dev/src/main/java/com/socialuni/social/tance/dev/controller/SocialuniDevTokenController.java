@@ -6,14 +6,14 @@ import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.tance.dev.dao.DO.SocialuniDevTokenDO;
 import com.socialuni.social.tance.dev.api.SocialuniDevTokenAPI;
 import com.socialuni.social.tance.dev.facade.DevAccountFacade;
-import com.socialuni.social.tance.dev.model.DevAccountModel;
+import com.socialuni.social.tance.dev.dao.DO.DevAccountDo;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping
 public class SocialuniDevTokenController implements SocialuniDevTokenAPI {
 
     public ResultRO<String> getAuthToken(String devSecretKey) {
-        DevAccountModel devAccountModel = DevAccountFacade.getDevAccountBySecretKeyNotNull(devSecretKey);
+        DevAccountDo devAccountDo = DevAccountFacade.getDevAccountBySecretKeyNotNull(devSecretKey);
 
         String token = UUIDUtil.getUUID();
 

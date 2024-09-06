@@ -4,7 +4,7 @@ import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.logic.redis.SocialUserPhoneRedis;
 import com.socialuni.social.user.sdk.logic.entity.SocialUserPhoneEntity;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.tance.dev.model.DevAccountModel;
+import com.socialuni.social.tance.dev.dao.DO.DevAccountDo;
 import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import org.springframework.stereotype.Component;
@@ -19,8 +19,8 @@ public class SocialuniDevAccountEntity {
     @Resource
     private SocialUserPhoneEntity socialUserPhoneEntity;
 
-    public SocialuniUserDo getOrCreateDevAccountUserDO(DevAccountModel devAccountModel) {
-        String phoneNum = devAccountModel.getPhoneNum();
+    public SocialuniUserDo getOrCreateDevAccountUserDO(DevAccountDo devAccountDo) {
+        String phoneNum = devAccountDo.getPhoneNum();
 
         SocialUserPhoneDo SocialUserPhoneDo = socialUserPhoneRedis.findByPhoneNum(phoneNum);
 

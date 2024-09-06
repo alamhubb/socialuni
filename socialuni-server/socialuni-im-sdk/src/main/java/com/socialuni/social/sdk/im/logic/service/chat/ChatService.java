@@ -25,6 +25,8 @@ import com.socialuni.social.im.api.model.QO.chat.ChatReadVO;
 import com.socialuni.social.im.api.model.QO.chat.ChatRemoveVO;
 import com.socialuni.social.im.api.model.QO.chat.OpenChatVO;
 import com.socialuni.social.sdk.im.utils.SocialuniChatDOUtil;
+import com.socialuni.social.sdk.im.utils.SocialuniChatUserDOUtil;
+import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
@@ -316,27 +318,33 @@ public class ChatService {
 
 
     //创建自己和自己的私聊，用来传输东西
-    ResultRO<?> createMineSingleChat() {
+    public ResultRO<?> createMineSingleChat() {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
         return ResultRO.success();
     }
 
     //创建自己的群聊，自己的专属房间
-    ResultRO<?> createMineGroupChat() {
+    public ResultRO<?> createMineGroupChat() {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
         return ResultRO.success();
     }
 
     //加入系统的群聊
-    ResultRO<ChatRO> joinAppDefaultOpenGroups(SocialuniChatCreateQO socialuniChatCreateQO) {
-        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
+    public ResultRO<ChatRO> joinOrCreateGroupChat(SocialuniChatCreateQO socialuniChatCreateQO) {
+        long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+        long sysUserId = DevAccountFacade.getDevUserId();
+        String chatName = socialuniChatCreateQO.getChatName();
+        String chatType = socialuniChatCreateQO.getType();
 
         //查找是否存在此chat，根据devId查找。
 
+        SocialuniChatDO socialuniChatDO = socialuniChatEntity.getJoinOrCreateChatUser(sysUserId, chatType, mineUserId, chatName);
+
+
+        ChatRO chatRO = SocialChatROFactory.getChatROByUserLogin(socialuniChatDO, mineUserId);
+
         //不存在则创建
-
-
-        return ResultRO.success();
+        return ResultRO.success(chatRO);
     }
 
 }

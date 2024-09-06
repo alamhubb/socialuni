@@ -1,10 +1,10 @@
 package com.socialuni.social.tance.config;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.socialuni.social.common.api.utils.SnowflakeIdUtil;
 import com.socialuni.social.tance.dev.config.SocialuniAppConfig;
 import com.socialuni.social.tance.dev.config.SocialuniDevConfig;
 import com.socialuni.social.tance.dev.dao.DO.AppConfigDO;
+import com.socialuni.social.tance.dev.dao.DO.DevAccountDo;
 import com.socialuni.social.tance.dev.dao.repository.AppConfigRepository;
 import com.socialuni.social.tance.dev.api.DevAccountInterface;
 import com.socialuni.social.tance.dev.constant.AppConfigDOKeyConst;
@@ -13,7 +13,6 @@ import com.socialuni.social.common.api.model.SocialuniAppMoreConfigBO;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.tance.dev.model.DevAccountModel;
 import com.socialuni.social.tance.entity.DevAccountEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -65,17 +64,17 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
         //每次启动，都用系统默认值，替换insert中的值
         String phoneNum = SocialuniDevConfig.getSystemUserPhoneNum();
 
-        DevAccountModel devAccountModel = devAccountInterface.findFirstById(1);
+        DevAccountDo devAccountDo = devAccountInterface.findFirstById(1);
 
         //如果不存在用户，则创建第一个默认的主系统开发者
-        if (devAccountModel == null) {
+        if (devAccountDo == null) {
             //copy一个default的值
 
             if (StringUtils.isEmpty(SocialuniSystemConst.getAppSocialuniId())) {
-                devAccountModel = devAccountEntity.createDevAccount(phoneNum, SocialuniUnionIdFacede.createUserUnionId());
+                devAccountDo = devAccountEntity.createDevAccount(phoneNum, SocialuniUnionIdFacede.createUserUnionId());
 
             } else {
-                devAccountModel = devAccountEntity.createDevAccount(phoneNum, SocialuniSystemConst.getAppSocialuniId(), SocialuniUnionIdFacede.createUserUnionId());
+                devAccountDo = devAccountEntity.createDevAccount(phoneNum, SocialuniSystemConst.getAppSocialuniId(), SocialuniUnionIdFacede.createUserUnionId());
             }
 
 
@@ -94,22 +93,22 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
         //测试渠道的账号,干嘛用的呢，方便可以往中心发帖子
         String phoneNumTest = SocialuniDevConfig.getTestUserPhoneNum();
 
-        DevAccountModel devAccountModelTest = devAccountInterface.findOneByPhoneNumOrderByIdAsc(phoneNumTest);
+        DevAccountDo devAccountDoTest = devAccountInterface.findOneByPhoneNumOrderByIdAsc(phoneNumTest);
 
         //如果手机号已经存在账户，则直接使用，正序获取第一个用户
 
         log.info("phoneNumTest:{}", phoneNumTest);
-        log.info("devAccountModelTest:{}", devAccountModelTest);
+        log.info("devAccountModelTest:{}", devAccountDoTest);
 
         //如果不存在用户，则创建第一个默认的主系统开发者
-        if (devAccountModelTest == null) {
+        if (devAccountDoTest == null) {
             //copy一个default的值
-            devAccountModelTest = devAccountEntity.createDevAccount(phoneNumTest, SocialuniUnionIdFacede.createUserUnionId());
+            devAccountDoTest = devAccountEntity.createDevAccount(phoneNumTest, SocialuniUnionIdFacede.createUserUnionId());
         }
 
         //创建中心
         if (SocialuniDevConfig.hasCenterServer()) {
-            DevAccountModel centerDevDO = DevAccountFacade.getDevAccountBySocialuniId(SocialuniSystemConst.getCenterSocialuniId());
+            DevAccountDo centerDevDO = DevAccountFacade.getDevAccountBySocialuniId(SocialuniSystemConst.getCenterSocialuniId());
             if (centerDevDO == null) {
                 //手机号格式字符串瞎写就行，没有其他地方使用
                 devAccountEntity.createDevAccount("99999888667", SocialuniSystemConst.getCenterSocialuniId(), SocialuniUnionIdFacede.createUserUnionId());

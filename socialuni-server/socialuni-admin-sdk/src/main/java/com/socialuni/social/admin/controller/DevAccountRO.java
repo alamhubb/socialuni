@@ -1,7 +1,7 @@
 package com.socialuni.social.admin.controller;
 
+import com.socialuni.social.tance.dev.dao.DO.DevAccountDo;
 import com.socialuni.social.tance.dev.facade.DevAccountFacade;
-import com.socialuni.social.tance.dev.model.DevAccountModel;
 import com.socialuni.social.tance.dev.model.DevAccountProviderModler;
 import com.socialuni.social.common.api.constant.SocialuniSupportProviderType;
 import lombok.Data;
@@ -33,24 +33,24 @@ public class DevAccountRO {
     private String qqMpAppId;
 
 
-    public DevAccountRO(DevAccountModel devAccountModel) {
-        this.devNum = devAccountModel.getDevNum();
+    public DevAccountRO(DevAccountDo devAccountDo) {
+        this.devNum = devAccountDo.getDevNum();
 
-        this.type = devAccountModel.getType();
-        this.appName = devAccountModel.getAppName();
-        this.realName = devAccountModel.getRealName();
+        this.type = devAccountDo.getType();
+        this.appName = devAccountDo.getAppName();
+        this.realName = devAccountDo.getRealName();
 
-        String phoneNum = devAccountModel.getPhoneNum();
+        String phoneNum = devAccountDo.getPhoneNum();
         if (StringUtils.isNotEmpty(phoneNum)) {
             this.phoneNum = phoneNum.substring(0, 3) + "*****" + phoneNum.substring(8);
         }
 
-        if (StringUtils.isNotEmpty(devAccountModel.getSecretKey())) {
-            this.secretKey = devAccountModel.getSecretKey().substring(0, 5) + "*****************";
+        if (StringUtils.isNotEmpty(devAccountDo.getSecretKey())) {
+            this.secretKey = devAccountDo.getSecretKey().substring(0, 5) + "*****************";
         }
 
         for (String supportProviderType : SocialuniSupportProviderType.supportProviderTypes) {
-            DevAccountProviderModler wxDevAccountProviderModler = DevAccountFacade.getDevAccountProviderDOByDevAndMpType(devAccountModel.getId(), supportProviderType);
+            DevAccountProviderModler wxDevAccountProviderModler = DevAccountFacade.getDevAccountProviderDOByDevAndMpType(devAccountDo.getId(), supportProviderType);
             if (wxDevAccountProviderModler != null) {
                 if (SocialuniSupportProviderType.wx.equals(supportProviderType)) {
                     this.wxMpAppId = wxDevAccountProviderModler.getAppId();

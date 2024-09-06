@@ -2,7 +2,7 @@ package com.socialuni.social.tance.dev.cache;
 
 import com.socialuni.social.tance.dev.api.DevAccountInterface;
 import com.socialuni.social.tance.dev.api.DevAccountRedisInterface;
-import com.socialuni.social.tance.dev.model.DevAccountModel;
+import com.socialuni.social.tance.dev.dao.DO.DevAccountDo;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Component;
@@ -21,7 +21,7 @@ public class DevAccountRedis implements DevAccountRedisInterface {
                     @CachePut(cacheNames = "getDevAccountBySocialuniId", key = "#devAccount.socialuniId")
             }
     )
-    public DevAccountModel saveDevAccount(DevAccountModel devAccount) {
+    public DevAccountDo saveDevAccount(DevAccountDo devAccount) {
         return devAccountApi.save(devAccount);
     }
 }

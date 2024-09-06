@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.logic.service;
 
 import com.socialuni.social.common.sdk.feignAPI.openData.SocialuniCosAPI;
 import com.socialuni.social.tance.dev.config.SocialuniDevConfig;
-import com.socialuni.social.tance.dev.model.DevAccountModel;
+import com.socialuni.social.tance.dev.dao.DO.DevAccountDo;
 import com.socialuni.social.content.tencent.TencentCloudAPI;
 import com.socialuni.social.common.sdk.platform.model.SocialCosAuthRO;
 import com.socialuni.social.tance.dev.facade.DevAccountFacade;
@@ -23,7 +23,7 @@ public class SocialuniCosService {
             return socialuniCosAPI.getCosAuth();
         }
         String userId = SocialuniUserUtil.getMineUserUuidIdNotNull();
-        DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNullElseCenterDev();
+        DevAccountDo devAccountDo = DevAccountFacade.getDevAccountNullElseCenterDev();
 //        String devAppName = Pinyin.toPinyin(devAccountDO.getAppName(), "").toLowerCase();
 //        String uploadImgPath = devAppName + "/user/" + userId + "/";
         SocialCosAuthRO socialCosAuthRO = TencentCloudAPI.getCosAuthorization(userId);

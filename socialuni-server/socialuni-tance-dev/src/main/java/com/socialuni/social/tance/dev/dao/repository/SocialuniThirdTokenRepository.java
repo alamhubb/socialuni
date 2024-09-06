@@ -1,18 +1,10 @@
 package com.socialuni.social.tance.dev.dao.repository;
 
-import com.socialuni.social.common.api.constant.CommonRedisKey;
-import com.socialuni.social.tance.dev.api.DevAccountInterface;
-import com.socialuni.social.tance.dev.dao.DO.DevAccountDo;
 import com.socialuni.social.tance.dev.dao.DO.SocialuniThirdTokenDO;
-import com.socialuni.social.tance.dev.model.DevAccountModel;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.List;
-import java.util.Optional;
 
 
 /**

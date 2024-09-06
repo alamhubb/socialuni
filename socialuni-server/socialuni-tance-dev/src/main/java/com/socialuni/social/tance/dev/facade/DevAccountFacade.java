@@ -8,8 +8,8 @@ import com.socialuni.social.tance.dev.api.DevAccountInterface;
 import com.socialuni.social.tance.dev.api.DevAccountProviderInterface;
 import com.socialuni.social.tance.dev.api.DevAccountRedisInterface;
 import com.socialuni.social.tance.dev.constant.AdminAppConfigConst;
+import com.socialuni.social.tance.dev.dao.DO.DevAccountDo;
 import com.socialuni.social.tance.dev.enumeration.SocialFeignHeaderName;
-import com.socialuni.social.tance.dev.model.DevAccountModel;
 import com.socialuni.social.tance.dev.model.DevAccountProviderModler;
 import com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo;
 import com.socialuni.social.tance.dev.config.SocialuniDevConfig;
@@ -60,28 +60,28 @@ public class DevAccountFacade {
     }
 
     public static String getDevSocialSecretKey() {
-        DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNullElseCenterDev();
-        return devAccountModel.getSecretKey();
+        DevAccountDo devAccountDo = DevAccountFacade.getDevAccountNullElseCenterDev();
+        return devAccountDo.getSecretKey();
     }
 
 
     public static String getAppSocialuniId() {
-        DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNullElseCenterDev();
-        return devAccountModel.getSocialuniId();
+        DevAccountDo devAccountDo = DevAccountFacade.getDevAccountNullElseCenterDev();
+        return devAccountDo.getSocialuniId();
     }
 
 
     public static String getAppGenderType() {
-        DevAccountModel devAccountModel = DevAccountFacade.getDevAccountAllowNull();
-        if (devAccountModel != null) {
-            return devAccountModel.getAppGenderType();
+        DevAccountDo devAccountDo = DevAccountFacade.getDevAccountAllowNull();
+        if (devAccountDo != null) {
+            return devAccountDo.getAppGenderType();
         }
         return GenderType.all;
     }
 
     public static Long getDevNum() {
-        DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNullElseCenterDev();
-        return devAccountModel.getDevNum();
+        DevAccountDo devAccountDo = DevAccountFacade.getDevAccountNullElseCenterDev();
+        return devAccountDo.getDevNum();
     }
 
     /*public static Integer getDevIdAllowNull() {
@@ -93,8 +93,8 @@ public class DevAccountFacade {
     }*/
 
     public static Integer getDevIdNullElseCenterDevId() {
-        DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNullElseCenterDev();
-        return devAccountModel.getId();
+        DevAccountDo devAccountDo = DevAccountFacade.getDevAccountNullElseCenterDev();
+        return devAccountDo.getId();
     }
 
     public static Integer getAdminDevIdNotNull(Long unionId) {
@@ -105,21 +105,21 @@ public class DevAccountFacade {
     }
 
     public static Integer getTestDevIdAllNull() {
-        DevAccountModel devAccountModel = devAccountApi.findOneByPhoneNumOrderByIdAsc(SocialuniDevConfig.testUserPhoneNum);
-        if (devAccountModel == null) {
+        DevAccountDo devAccountDo = devAccountApi.findOneByPhoneNumOrderByIdAsc(SocialuniDevConfig.testUserPhoneNum);
+        if (devAccountDo == null) {
             return null;
         }
-        return devAccountModel.getId();
+        return devAccountDo.getId();
     }
 
     public static String getDevPhoneNumNotNull() {
-        DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNullElseCenterDev();
-        return devAccountModel.getPhoneNum();
+        DevAccountDo devAccountDo = DevAccountFacade.getDevAccountNullElseCenterDev();
+        return devAccountDo.getPhoneNum();
     }
 
     public static Long getDevUserId() {
-        DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNullElseCenterDev();
-        return devAccountModel.getUserId();
+        DevAccountDo devAccountDo = DevAccountFacade.getDevAccountNullElseCenterDev();
+        return devAccountDo.getUserId();
     }
 
 
@@ -143,7 +143,7 @@ public class DevAccountFacade {
         if (StringUtils.isEmpty(socialuniId)) {
             return null;
         }
-        DevAccountModel centerDevAccount = DevAccountFacade.getDevAccountBySocialuniId(socialuniId);
+        DevAccountDo centerDevAccount = DevAccountFacade.getDevAccountBySocialuniId(socialuniId);
         if (centerDevAccount == null) {
             throw new SocialParamsException("不存在的联盟开发者ID");
         }
@@ -162,7 +162,7 @@ public class DevAccountFacade {
         return devAccountProviderModler;
     }
 
-    public static DevAccountModel getDevAccountAllowNull() {
+    public static DevAccountDo getDevAccountAllowNull() {
         //先从req中获取
         String secretKey = RequestUtil.getRequestValue(SocialFeignHeaderName.socialuniSecretKey);
         if (StringUtils.isEmpty(secretKey)) {
@@ -179,64 +179,64 @@ public class DevAccountFacade {
     }
 
     public static Integer getDevIdAllowNull() {
-        DevAccountModel devAccountModel = getDevAccountAllowNull();
-        if (devAccountModel == null) {
+        DevAccountDo devAccountDo = getDevAccountAllowNull();
+        if (devAccountDo == null) {
             return null;
         }
-        return devAccountModel.getId();
+        return devAccountDo.getId();
     }
 
 
-    public static DevAccountModel getDevAccountBySecretKeyNotNull(String secretKey) {
+    public static DevAccountDo getDevAccountBySecretKeyNotNull(String secretKey) {
         if (StringUtils.isEmpty(secretKey)) {
             throw new SocialParamsException("开发者信息错误");
         }
-        DevAccountModel devAccountModel = devAccountApi.findOneBySecretKey(secretKey);
-        if (devAccountModel == null) {
+        DevAccountDo devAccountDo = devAccountApi.findOneBySecretKey(secretKey);
+        if (devAccountDo == null) {
             throw new SocialParamsException("开发者信息错误");
         }
-        return devAccountModel;
+        return devAccountDo;
     }
 
-    public static DevAccountModel getDevAccountAllowNull(String secretKey) {
+    public static DevAccountDo getDevAccountAllowNull(String secretKey) {
         if (StringUtils.isEmpty(secretKey)) {
             return getDevAccountNullElseCenterDev();
         }
         return getDevAccountBySecretKeyNotNull(secretKey);
     }
 
-    public static DevAccountModel getDevAccountNotNUll() {
+    public static DevAccountDo getDevAccountNotNUll() {
         //先从req中获取
-        DevAccountModel devAccountModel = DevAccountFacade.getDevAccountAllowNull();
-        if (devAccountModel == null) {
+        DevAccountDo devAccountDo = DevAccountFacade.getDevAccountAllowNull();
+        if (devAccountDo == null) {
             throw new SocialParamsException("开发者信息为空");
         }
-        return devAccountModel;
+        return devAccountDo;
     }
 
-    public static DevAccountModel getDevAccountNullElseCenterDev() {
+    public static DevAccountDo getDevAccountNullElseCenterDev() {
         //先从req中获取
-        DevAccountModel devAccountModel = DevAccountFacade.getDevAccountAllowNull();
-        if (devAccountModel == null) {
+        DevAccountDo devAccountDo = DevAccountFacade.getDevAccountAllowNull();
+        if (devAccountDo == null) {
             //每次启动，都用系统默认值，替换insert中的值
 //            String phoneNum = SocialuniDevConfig.getSystemUserPhoneNum();
-            devAccountModel = getSystemDevAccount();
+            devAccountDo = getSystemDevAccount();
 //            throw new SocialBusinessException("开发者信息为空");
         }
-        return devAccountModel;
+        return devAccountDo;
     }
 
     public static String getSystemUserPhoneNum() {
         return getSystemDevAccount().getPhoneNum();
     }
 
-    public static DevAccountModel getSystemDevAccount() {
+    public static DevAccountDo getSystemDevAccount() {
 //        String phoneNum = SocialuniDevConfig.getSystemUserPhoneNum();
-        DevAccountModel devAccountModel = devAccountApi.findFirstById(1);
-        if (devAccountModel == null) {
+        DevAccountDo devAccountDo = devAccountApi.findFirstById(1);
+        if (devAccountDo == null) {
             throw new SocialSystemException("开发者信息为空");
         }
-        return devAccountModel;
+        return devAccountDo;
     }
 
     public static Integer getSystemDevAccountDevId() {
@@ -260,31 +260,26 @@ public class DevAccountFacade {
     }
 
     public static boolean pushServer() {
-        DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNullElseCenterDev();
-        Integer devId = devAccountModel.getId();
+        DevAccountDo devAccountDo = DevAccountFacade.getDevAccountNullElseCenterDev();
+        Integer devId = devAccountDo.getId();
         return devId == 1;
     }
 
-    public static DevAccountModel getDevAccountByUserId(Long userId) {
-        DevAccountModel devAccountModel = devAccountApi.findFirstByUserId(userId);
-        return devAccountModel;
+    public static DevAccountDo getDevAccountByUserId(Long userId) {
+        DevAccountDo devAccountDo = devAccountApi.findFirstByUserId(userId);
+        return devAccountDo;
     }
 
-    public static DevAccountModel getDevAccount(Integer devId) {
+    public static DevAccountDo getDevAccount(Integer devId) {
         return devAccountApi.findFirstById(devId);
     }
 
     //不需要缓存，低频, admin登录使用
-    public static DevAccountModel findOneByPhoneNumOrderByIdAsc(String phoneNum) {
+    public static DevAccountDo findOneByPhoneNumOrderByIdAsc(String phoneNum) {
         return devAccountApi.findOneByPhoneNumOrderByIdAsc(phoneNum);
     }
 
-    public static DevAccountModel getDevAccountBySocialuniId(String socialuniId) {
+    public static DevAccountDo getDevAccountBySocialuniId(String socialuniId) {
         return devAccountApi.findOneBySocialuniId(socialuniId);
-    }
-
-
-    public static Long getDevSysUserId() {
-        DevAccountModel
     }
 }

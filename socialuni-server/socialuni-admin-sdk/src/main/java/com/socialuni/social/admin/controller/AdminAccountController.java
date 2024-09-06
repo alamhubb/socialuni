@@ -7,7 +7,7 @@ import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.utils.UUIDUtil;
 import com.socialuni.social.admin.model.SyncProdDevAccountQO;
 import com.socialuni.social.tance.dev.api.DevAccountRedisInterface;
-import com.socialuni.social.tance.dev.model.DevAccountModel;
+import com.socialuni.social.tance.dev.dao.DO.DevAccountDo;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +27,7 @@ public class AdminAccountController {
 
     @PostMapping("getUser")
     public ResultRO<DevAccountRO> getUser() {
-        DevAccountModel user = AdminDevAccountFacade.getAdminDevAccountNotNull();
+        DevAccountDo user = AdminDevAccountFacade.getAdminDevAccountNotNull();
         DevAccountRO devAccountRO = new DevAccountRO(user);
         //则更新用户手机号
         return new ResultRO<>(devAccountRO);
@@ -35,7 +35,7 @@ public class AdminAccountController {
 
     @PostMapping("resetSecretKey")
     public ResultRO<String> resetSecretKey() {
-        DevAccountModel devAccount = AdminDevAccountFacade.getAdminDevAccountNotNull();
+        DevAccountDo devAccount = AdminDevAccountFacade.getAdminDevAccountNotNull();
         String secretKey = UUIDUtil.getUUID();
         devAccount.setSecretKey(secretKey);
 

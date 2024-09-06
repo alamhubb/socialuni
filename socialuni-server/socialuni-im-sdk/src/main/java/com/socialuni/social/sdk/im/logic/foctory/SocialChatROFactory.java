@@ -129,6 +129,10 @@ public class SocialChatROFactory {
         this.messages = MessageVO.messageDOToVOS(messageDOS, userId);
     }*/
 
+    public static ChatRO getChatROByUserLogin(SocialuniChatDO chatDO, Long mineUserId) {
+        SocialuniChatUserDO socialuniChatUserDO = SocialuniChatUserDOUtil.findByChatIdAndUserId(chatDO.getUnionId(), mineUserId);
+        return getChatROByUserLogin(socialuniChatUserDO);
+    }
 
     //chatuser
     //推消息时，查列表时  的基础

@@ -19,16 +19,10 @@ import javax.annotation.Resource;
 @Component
 public class SocialuniChatDOUtil {
     static SocialuniChatRepository socialuniChatRepository;
-    static SocialuniChatUserRepository socialuniChatUserRepository;
 
     @Resource
     public void setSocialuniChatRepository(SocialuniChatRepository socialuniChatRepository) {
         SocialuniChatDOUtil.socialuniChatRepository = socialuniChatRepository;
-    }
-
-    @Resource
-    public void setSocialuniChatUserRepository(SocialuniChatUserRepository socialuniChatUserRepository) {
-        SocialuniChatDOUtil.socialuniChatUserRepository = socialuniChatUserRepository;
     }
 
     public static SocialuniChatDO save(SocialuniChatDO chatDO) {

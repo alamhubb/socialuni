@@ -2,6 +2,7 @@ package com.socialuni.social.sdk.im.controller;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.im.api.feign.SocialuniChatAPI;
+import com.socialuni.social.im.api.model.QO.SocialuniChatCreateQO;
 import com.socialuni.social.im.api.model.QO.SocialuniChatQueryQO;
 import com.socialuni.social.im.api.model.RO.SocialuniImUserDetailRO;
 import com.socialuni.social.sdk.im.logic.service.chat.ChatService;
@@ -74,5 +75,20 @@ public class SocialuniChatController implements SocialuniChatAPI {
     @Override
     public ResultRO<?> quitGroupChat(SocialuniChatQueryQO chatVO) {
         return chatService.quitGroupChat(chatVO);
+    }
+
+    @Override
+    public ResultRO<?> createMineSingleChat() {
+        return null;
+    }
+
+    @Override
+    public ResultRO<?> createMineGroupChat() {
+        return null;
+    }
+
+    @Override
+    public ResultRO<ChatRO> joinOrCreateGroupChat(SocialuniChatCreateQO socialuniChatCreateQO) {
+        return chatService.joinOrCreateGroupChat(socialuniChatCreateQO);
     }
 }

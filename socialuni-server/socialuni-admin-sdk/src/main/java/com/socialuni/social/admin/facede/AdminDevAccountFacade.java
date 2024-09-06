@@ -4,35 +4,35 @@ import com.socialuni.social.common.api.exception.exception.SocialNotLoginExcepti
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.utils.SocialTokenFacade;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
+import com.socialuni.social.tance.dev.dao.DO.DevAccountDo;
 import com.socialuni.social.tance.dev.facade.DevAccountFacade;
-import com.socialuni.social.tance.dev.model.DevAccountModel;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 
 public class AdminDevAccountFacade {
 
-    public static DevAccountModel getAdminDevAccountNotNull() {
-        DevAccountModel user = AdminDevAccountFacade.getAdminDevAccountAllowNull();
+    public static DevAccountDo getAdminDevAccountNotNull() {
+        DevAccountDo user = AdminDevAccountFacade.getAdminDevAccountAllowNull();
         if (user == null) {
             throw new SocialNotLoginException();
         }
         return user;
     }
 
-    public static DevAccountModel getAdminDevAccountAllowNull() {
+    public static DevAccountDo getAdminDevAccountAllowNull() {
         String token = SocialTokenFacade.getToken();
         return AdminDevAccountFacade.getDevAccountByToken(token);
     }
 
     public static Integer getAdminDevAccountIdAllowNull() {
-        DevAccountModel devAccountModel = getAdminDevAccountAllowNull();
-        if (devAccountModel == null) {
+        DevAccountDo devAccountDo = getAdminDevAccountAllowNull();
+        if (devAccountDo == null) {
             return null;
         }
-        return devAccountModel.getId();
+        return devAccountDo.getId();
     }
 
     //得到用户信息
-    private static DevAccountModel getDevAccountByToken(String token) {
+    private static DevAccountDo getDevAccountByToken(String token) {
         if (token == null) {
             return null;
         }
@@ -40,13 +40,13 @@ public class AdminDevAccountFacade {
         if (socialuniUserDo == null) {
             throw new SocialParamsException("token被破解");
         }
-        DevAccountModel devAccountModel = DevAccountFacade.getDevAccountByUserId(socialuniUserDo.getUserId());
-        return devAccountModel;
+        DevAccountDo devAccountDo = DevAccountFacade.getDevAccountByUserId(socialuniUserDo.getUserId());
+        return devAccountDo;
     }
 
 
     public static boolean isCenter() {
-        DevAccountModel devAccountModel = AdminDevAccountFacade.getAdminDevAccountNotNull();
-        return devAccountModel.getId() == 1;
+        DevAccountDo devAccountDo = AdminDevAccountFacade.getAdminDevAccountNotNull();
+        return devAccountDo.getId() == 1;
     }
 }

@@ -8,9 +8,9 @@ import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.common.api.utils.SocialTokenFacade;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
+import com.socialuni.social.tance.dev.dao.DO.DevAccountDo;
 import com.socialuni.social.tance.entity.DevAccountEntity;
 import com.socialuni.social.tance.dev.api.DevAccountInterface;
-import com.socialuni.social.tance.dev.model.DevAccountModel;
 import com.socialuni.social.user.sdk.logic.domain.SocialuniLoginDomain;
 import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumAuthCodeQO;
 import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
@@ -35,9 +35,9 @@ public class AdminLoginService {
     //秘钥登录
     @Transactional
     public ResultRO<SocialLoginRO<SocialuniUserRO>> secretKeyLogin(DevAccountInterface.DevAccountQueryQO devAccountQueryQO) {
-        DevAccountModel devAccountModel = devAccountApi.findOneBySecretKey(devAccountQueryQO.getSecretKey());
+        DevAccountDo devAccountDo = devAccountApi.findOneBySecretKey(devAccountQueryQO.getSecretKey());
 
-        Long userId = devAccountModel.getUserId();
+        Long userId = devAccountDo.getUserId();
 
         SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getUserNotNull(userId);
 
@@ -55,29 +55,29 @@ public class AdminLoginService {
 
 
         //如果手机号已经存在账户，则直接使用，正序获取第一个用户
-        DevAccountModel devAccountModel = devAccountApi.findOneByPhoneNumOrderByIdAsc(phoneNum);
+        DevAccountDo devAccountDo = devAccountApi.findOneByPhoneNumOrderByIdAsc(phoneNum);
 
         Boolean flag = false;
         //判断开发者账户是否拥有c端用户
-        if (devAccountModel == null) {
-            devAccountModel = devAccountEntity.createDevAccount(phoneNum);
+        if (devAccountDo == null) {
+            devAccountDo = devAccountEntity.createDevAccount(phoneNum);
             flag = true;
         }
 
-        return getSocialLoginROResultRO(devAccountModel, flag);
+        return getSocialLoginROResultRO(devAccountDo, flag);
     }
 
-    private ResultRO<SocialLoginRO<DevAccountRO>> getSocialLoginROResultRO(DevAccountModel devAccountModel, boolean isNewAccount) {
+    private ResultRO<SocialLoginRO<DevAccountRO>> getSocialLoginROResultRO(DevAccountDo devAccountDo, boolean isNewAccount) {
         //有用户返回，没有创建
 //        String platform = loginVO.getPlatform();
-        String devSecretKey = devAccountModel.getSecretKey();
+        String devSecretKey = devAccountDo.getSecretKey();
         //生成userToken
         String userToken = SocialTokenFacade.createTokenByUserKey(devSecretKey);
 //        userToken = devTokenApi.savePut(new DevTokenModler(userToken, devAccountModel.getId())).getTokenCode();
 
-        DevAccountRO devAccountRO = new DevAccountRO(devAccountModel);
+        DevAccountRO devAccountRO = new DevAccountRO(devAccountDo);
         if (isNewAccount) {
-            devAccountRO.setSecretKey(devAccountModel.getSecretKey());
+            devAccountRO.setSecretKey(devAccountDo.getSecretKey());
         }
 //        devAccountRO.setSecretKey(devAccountDO.getSecretKey());
 

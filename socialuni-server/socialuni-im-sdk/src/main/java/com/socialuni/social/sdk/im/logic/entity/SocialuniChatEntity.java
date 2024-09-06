@@ -15,6 +15,7 @@ import com.socialuni.social.sdk.im.logic.foctory.SocialuniChatDOFactory;
 import com.socialuni.social.sdk.im.logic.manage.SocialuniChatManage;
 import com.socialuni.social.sdk.im.logic.manage.SocialuniChatUserManage;
 import com.socialuni.social.tance.dev.config.SocialuniAppConfig;
+import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.socialuni.social.user.sdk.factory.SocialuniAppOperateRecordDOFactory;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +32,7 @@ public class SocialuniChatEntity {
     SocialuniChatRepository chatRepository;
 
 
-    public SocialuniChatDO getJoinOrCreateChatUser(Long createUserId, Long joinUserId, String chatName, String chatType) {
+    public SocialuniChatDO getJoinOrCreateChatUser(Long createUserId, String chatType, Long joinUserId, String chatName) {
         SocialuniChatDO socialuniChatDO = socialuniChatManage.getOrCreateGroupChat(createUserId, chatName, chatType);
         SocialuniChatUserDO socialuniChatUserDO = socialuniChatUserManage.joinOrCreateChatUser(socialuniChatDO, joinUserId);
         return socialuniChatDO;
@@ -68,16 +69,15 @@ public class SocialuniChatEntity {
 
         //需要将用户加入到这些群聊中
         for (String group : groups) {
-            Long createUserId = 
+            Long sysUserId = DevAccountFacade.getDevUserId();
 
-
-            SocialuniChatDO socialuniChatDO = this.getJoinOrCreateChatUser(group, user);
+            SocialuniChatDO socialuniChatDO = this.getJoinOrCreateChatUser(sysUserId, ChatType.system_group, user.getUserId(), group);
 
             SocialuniChatCreateQO socialuniChatCreateQO = new SocialuniChatCreateQO();
             socialuniChatCreateQO.setChatName(socialuniChatDO.getChatName());
             socialuniChatCreateQO.setType(socialuniChatDO.getType());
 
-            socialuniChatAPI.joinOrCreateGroupChat(socialuniChatDO.getChatName(), socialuniChatDO.getType());
+            socialuniChatAPI.joinOrCreateGroupChat(socialuniChatCreateQO);
         }
     }
 

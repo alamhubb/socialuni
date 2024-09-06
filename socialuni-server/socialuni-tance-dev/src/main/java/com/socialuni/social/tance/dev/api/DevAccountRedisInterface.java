@@ -1,6 +1,6 @@
 package com.socialuni.social.tance.dev.api;
 
-import com.socialuni.social.tance.dev.model.DevAccountModel;
+import com.socialuni.social.tance.dev.dao.DO.DevAccountDo;
 
 
 /**
@@ -8,5 +8,5 @@ import com.socialuni.social.tance.dev.model.DevAccountModel;
  * @since 1.0.0
  */
 public interface DevAccountRedisInterface {
-    DevAccountModel saveDevAccount(DevAccountModel devAccount);
+    DevAccountDo saveDevAccount(DevAccountDo devAccount);
 }
