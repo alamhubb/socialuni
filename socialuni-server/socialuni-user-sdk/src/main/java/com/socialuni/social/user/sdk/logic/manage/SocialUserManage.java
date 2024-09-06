@@ -71,6 +71,7 @@ public class SocialUserManage {
     public SocialuniUserDo createSysUserByPhoneLogin(Long unionId) {
         SocialuniUserDo user = SocialUserDOFactory.newUserByPhoneLogin(unionId);
         user.setRoleId(SocialuniSysRoleId.sys);
+        user.setType(UserType.system);
         user = userApi.savePut(user);
         return user;
     }

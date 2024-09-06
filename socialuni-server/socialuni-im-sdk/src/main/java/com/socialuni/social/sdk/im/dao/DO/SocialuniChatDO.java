@@ -48,8 +48,9 @@ public class SocialuniChatDO extends SocialuniUnionContentBaseDO implements Seri
     //业务类型
     private String domainType;
 
-    public SocialuniChatDO(String type) {
+    public SocialuniChatDO(String type, Integer devId) {
         this.setType(type);
+        this.setDevId(devId);
         this.openType = ChatOpenType.openApply;
     }
 }

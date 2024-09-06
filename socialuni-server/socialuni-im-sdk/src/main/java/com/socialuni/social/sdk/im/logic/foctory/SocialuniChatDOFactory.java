@@ -9,18 +9,18 @@ import com.socialuni.social.sdk.im.enumeration.ChatOpenType;
 import com.socialuni.social.sdk.im.enumeration.ChatType;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.sdk.im.utils.SocialuniChatDOUtil;
+import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 
 public class SocialuniChatDOFactory {
 
     public static SocialuniChatDO getChatIdByCreateByDomainType(String chatDomainType) {
-        SocialuniChatDO chatDO = new SocialuniChatDO();
+        SocialuniChatDO chatDO = new SocialuniChatDO(ChatType.single, DevAccountFacade.getDevIdNullElseCenterDevId());
 
         Long uid = SocialuniUnionIdFacede.createChatUnionId();
         chatDO.setUnionId(uid);
         chatDO.setContentType(SocialuniContentType.chat);
-        chatDO.setType(ChatType.single);
         chatDO.setDomainType(chatDomainType);
 
         Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
@@ -53,14 +53,13 @@ public class SocialuniChatDOFactory {
     }
 
     private static SocialuniChatDO createGroupChat(String chatName, Long userId, String type, String avatar) {
-        SocialuniChatDO chatDO = new SocialuniChatDO();
+        SocialuniChatDO chatDO = new SocialuniChatDO(type, DevAccountFacade.getDevIdNullElseCenterDevId());
 
         Long uid = SocialuniUnionIdFacede.createChatUnionId();
         chatDO.setUnionId(uid);
         chatDO.setChatName(chatName);
         chatDO.setAvatar(avatar);
         chatDO.setContentType(SocialuniContentType.chat);
-        chatDO.setType(type);
         chatDO.setOpenType(ChatOpenType.open);
         chatDO.setUserId(userId);
         chatDO = SocialuniChatDOUtil.save(chatDO);

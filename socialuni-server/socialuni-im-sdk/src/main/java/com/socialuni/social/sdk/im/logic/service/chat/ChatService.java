@@ -236,7 +236,7 @@ public class ChatService {
     //详情页面，需要知道是否关注你了
 
     public CreateSingleChatResult seeUserDetailCreateChat(SocialuniUserDo user, Long receiveUserId) {
-        SocialuniChatDO chat = new SocialuniChatDO(ChatType.single);
+        SocialuniChatDO chat = new SocialuniChatDO(ChatType.single, DevAccountFacade.getDevIdNullElseCenterDevId());
 
         //生成chat
         chat = chatRepository.savePut(chat);

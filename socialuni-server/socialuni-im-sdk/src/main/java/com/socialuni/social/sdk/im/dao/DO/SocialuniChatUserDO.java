@@ -28,6 +28,7 @@ public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {
     private Boolean topFlag;
     //    private SocialuniChatDO chat;
     private Long chatId;
+    private Integer devId;
     //是否拉黑了对方
     //管理员角色
     private String chatRoleId;
@@ -95,6 +96,7 @@ public class SocialuniChatUserDO extends SocialuniUserContactBaseDO {
         this.setUserId(userId);
         this.setType(chat.getType());
         this.chatId = chat.getUnionId();
+        this.devId = chat.getDevId();
         this.chatRoleId = SocialuniChatRoleId.user;
         if (chatType.equals(ChatType.single)) {
             //私聊聊，直接是开启，创建时 只能为待开启和 不在前台显示

@@ -10,6 +10,7 @@ import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
 import com.socialuni.social.user.sdk.config.SocialuniUserSysConfig;
+import com.socialuni.social.user.sdk.dao.utils.SocialuniUserDOUtil;
 import com.socialuni.social.user.sdk.exception.SocialUserBannedException;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniTokenDO;
 import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
@@ -237,9 +238,9 @@ public class SocialuniUserUtil {
     }
 
     public static SocialuniUserDo getSystemUserNotNull() {
-        String phoneNum = DevAccountFacade.getDevPhoneNumNotNull();
+        Long userId = DevAccountFacade.getSystemDevAccount().getUserId();
 
-        SocialuniUserDo systemUser = getUserByPhoneNumNotNull(phoneNum);
+        SocialuniUserDo systemUser = SocialuniUserUtil.getUserNotNull(userId);
 
         return systemUser;
     }

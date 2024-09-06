@@ -150,6 +150,10 @@ public class DevAccountFacade {
         return centerDevAccount.getId();
     }
 
+    public static Long getSysDevUserId(){
+        return DevAccountFacade.getSystemDevAccount().getUserId();
+    }
+
 
     //mock登录时使用
     public static DevAccountProviderModler getDevAccountProviderDOByDevAndMpType(Integer devId, String mpType) {

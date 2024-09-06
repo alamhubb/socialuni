@@ -13,6 +13,7 @@ import com.socialuni.social.sdk.im.dao.repository.SocialuniChatUserRepository;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniMessageReceiveRepository;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniMessageRepository;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
+import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -46,7 +47,7 @@ public class MatchRequestService {
         //一个自己
         //一个对方
         //上来系统给对方发一个匹配成功;然后对方回复
-        SocialuniChatDO chat = new SocialuniChatDO(ChatType.match);
+        SocialuniChatDO chat = new SocialuniChatDO(ChatType.match, DevAccountFacade.getDevIdNullElseCenterDevId());
         //match属于私聊，需要保存对方的内容，方便展示头像昵称
         SocialuniChatUserDO mineChatUser = new SocialuniChatUserDO(chat, user.getUnionId(), receiveUser.getUnionId());
         //自己的设置为待匹配状态，需要等对方回复后才能改为正常
