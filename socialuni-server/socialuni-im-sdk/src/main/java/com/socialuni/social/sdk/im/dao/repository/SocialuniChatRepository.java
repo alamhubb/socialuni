@@ -23,6 +23,8 @@ public interface SocialuniChatRepository extends JpaRepository<SocialuniChatDO, 
 
     SocialuniChatDO findFirstByTypeAndChatName(String type, String chatName);
 
+    SocialuniChatDO findFirstByDevIdAndTypeAndChatName(Integer devid, String type, String chatName);
+
 
     SocialuniChatDO findFirstByTypeAndUserId(String type, Long userId);
 

@@ -3,6 +3,8 @@ package com.socialuni.social.sdk.im.logic.entity;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
+import com.socialuni.social.im.api.feign.SocialuniChatAPI;
+import com.socialuni.social.im.api.model.QO.SocialuniChatCreateQO;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniChatRepository;
@@ -29,9 +31,9 @@ public class SocialuniChatEntity {
     SocialuniChatRepository chatRepository;
 
 
-    public SocialuniChatDO getJoinOrCreateSystemChatUser(String chatName, SocialuniUserDo user) {
-        SocialuniChatDO socialuniChatDO = socialuniChatManage.getOrCreateSystemGroupChat(chatName);
-        SocialuniChatUserDO socialuniChatUserDO = socialuniChatUserManage.joinOrCreateChatUser(socialuniChatDO, user.getUserId());
+    public SocialuniChatDO getJoinOrCreateChatUser(Long createUserId, Long joinUserId, String chatName, String chatType) {
+        SocialuniChatDO socialuniChatDO = socialuniChatManage.getOrCreateGroupChat(createUserId, chatName, chatType);
+        SocialuniChatUserDO socialuniChatUserDO = socialuniChatUserManage.joinOrCreateChatUser(socialuniChatDO, joinUserId);
         return socialuniChatDO;
     }
 
@@ -48,6 +50,10 @@ public class SocialuniChatEntity {
         return socialuniChatDO;
     }
 
+    @Resource
+    SocialuniChatAPI socialuniChatAPI;
+
+
     public void createUserChats(SocialuniUserDo user) {
         SocialuniChatDO ownerChat = this.getOrCreateUserPersonalChat(user);
 
@@ -62,7 +68,16 @@ public class SocialuniChatEntity {
 
         //需要将用户加入到这些群聊中
         for (String group : groups) {
-            SocialuniChatDO socialuniChatDO = this.getJoinOrCreateSystemChatUser(group, user);
+            Long createUserId = 
+
+
+            SocialuniChatDO socialuniChatDO = this.getJoinOrCreateChatUser(group, user);
+
+            SocialuniChatCreateQO socialuniChatCreateQO = new SocialuniChatCreateQO();
+            socialuniChatCreateQO.setChatName(socialuniChatDO.getChatName());
+            socialuniChatCreateQO.setType(socialuniChatDO.getType());
+
+            socialuniChatAPI.joinOrCreateGroupChat(socialuniChatDO.getChatName(), socialuniChatDO.getType());
         }
     }
 

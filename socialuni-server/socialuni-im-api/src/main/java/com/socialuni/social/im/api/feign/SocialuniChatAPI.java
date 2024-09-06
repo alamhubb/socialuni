@@ -2,13 +2,11 @@ package com.socialuni.social.im.api.feign;
 
 
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.common.api.model.user.SocialuniUserIdQO;
+import com.socialuni.social.im.api.model.QO.SocialuniChatCreateQO;
 import com.socialuni.social.im.api.model.QO.SocialuniChatQueryQO;
 import com.socialuni.social.im.api.model.QO.chat.ChatReadVO;
-import com.socialuni.social.im.api.model.QO.chat.ChatRemoveVO;
 import com.socialuni.social.im.api.model.QO.chat.OpenChatVO;
 import com.socialuni.social.im.api.model.RO.ChatRO;
-import com.socialuni.social.im.api.model.RO.SocialuniImUserDetailRO;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +24,7 @@ import java.util.List;
 
 //@RequestMapping("socialuni/chat")
 @FeignClient(name = "chat", url = "${socialuni.central-server-url:https://api.socialuni.cn}", path = "socialuni/chat")
-@Tag(name = "消息模块/会话模块",description = "暂未支持")
+@Tag(name = "消息模块/会话模块", description = "暂未支持")
 public interface SocialuniChatAPI {
     @PostMapping("readChat")
     ResultRO<?> readChatMessages(@RequestBody @Valid ChatReadVO chatVO);
@@ -59,5 +57,14 @@ public interface SocialuniChatAPI {
 
     @PostMapping("quitGroupChat")
     ResultRO<?> quitGroupChat(@RequestBody @Valid SocialuniChatQueryQO chatVO);
+
+    @PostMapping("createMineSingleChat")
+    ResultRO<?> createMineSingleChat();
+
+    @PostMapping("createMineGroupChat")
+    ResultRO<?> createMineGroupChat();
+
+    @PostMapping("joinOrCreateGroupChat")
+    ResultRO<ChatRO> joinOrCreateGroupChat(@RequestBody SocialuniChatCreateQO socialuniChatCreateQO);
 }
 

@@ -282,4 +282,9 @@ public class DevAccountFacade {
     public static DevAccountModel getDevAccountBySocialuniId(String socialuniId) {
         return devAccountApi.findOneBySocialuniId(socialuniId);
     }
+
+
+    public static Long getDevSysUserId() {
+        DevAccountModel
+    }
 }

@@ -5,6 +5,7 @@ import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.constant.UserType;
+import com.socialuni.social.im.api.model.QO.SocialuniChatCreateQO;
 import com.socialuni.social.im.api.model.QO.SocialuniChatQueryQO;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.sdk.im.dao.DO.message.SocialuniMessageReceiveDO;
@@ -28,6 +29,7 @@ import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
@@ -312,5 +314,29 @@ public class ChatService {
         return new CreateSingleChatResult(chat, mineChatUser, receiveChatUser);
     }*/
 
+
+    //创建自己和自己的私聊，用来传输东西
+    ResultRO<?> createMineSingleChat() {
+        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
+        return ResultRO.success();
+    }
+
+    //创建自己的群聊，自己的专属房间
+    ResultRO<?> createMineGroupChat() {
+        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
+        return ResultRO.success();
+    }
+
+    //加入系统的群聊
+    ResultRO<ChatRO> joinAppDefaultOpenGroups(SocialuniChatCreateQO socialuniChatCreateQO) {
+        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
+
+        //查找是否存在此chat，根据devId查找。
+
+        //不存在则创建
+
+
+        return ResultRO.success();
+    }
 
 }

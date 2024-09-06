@@ -42,14 +42,14 @@ public class SocialuniDetailLoginService {
 
         Long mineUserId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(socialLoginRO1.getData().getUser().getId());
 
-        SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getUserNotNull(mineUserId);
+        SocialuniUserDo mineUser = SocialuniUserUtil.getUserNotNull(mineUserId);
 
-        SocialuniMineUserDetailRO socialuniMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(socialuniUserDo);
+        SocialuniMineUserDetailRO socialuniMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
 
         SocialLoginRO<SocialuniUserRO> socialLoginRO = new SocialLoginRO(socialLoginRO1.getData().getToken(), socialuniMineUserDetailRO);
 
         //用户加入
-        socialuniChatEntity.createUserChats(socialuniUserDo);
+        socialuniChatEntity.createUserChats(mineUser);
 
         //生成用户扩列记录
         SocialuniUserExtendFriendLogDOUtil.createUserExtendFriendLog();

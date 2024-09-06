@@ -2,8 +2,8 @@ package com.socialuni.social.sdk.im.logic.manage;
 
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniChatRepository;
-import com.socialuni.social.sdk.im.enumeration.ChatType;
 import com.socialuni.social.sdk.im.logic.foctory.SocialuniChatDOFactory;
+import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -13,10 +13,12 @@ public class SocialuniChatManage {
     @Resource
     SocialuniChatRepository chatRepository;
 
-    public SocialuniChatDO getOrCreateSystemGroupChat(String chatName) {
-        SocialuniChatDO socialuniChatDO = chatRepository.findFirstByTypeAndChatName(ChatType.system_group, chatName);
+    public SocialuniChatDO getOrCreateGroupChat(Long userId, String chatName, String chatType) {
+        Integer devId = DevAccountFacade.getDevIdNullElseCenterDevId();
+
+        SocialuniChatDO socialuniChatDO = chatRepository.findFirstByDevIdAndTypeAndChatName(devId, chatType, chatName);
         if (socialuniChatDO == null) {
-            socialuniChatDO = SocialuniChatDOFactory.createSystemGroupChat(chatName);
+            socialuniChatDO = SocialuniChatDOFactory.createGroupChatByNameAndType(userId, chatName, chatType);
         }
         return socialuniChatDO;
     }

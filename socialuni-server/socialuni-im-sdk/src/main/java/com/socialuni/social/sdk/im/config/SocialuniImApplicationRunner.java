@@ -1,6 +1,7 @@
 package com.socialuni.social.sdk.im.config;
 
 import com.socialuni.social.sdk.im.dao.repository.SocialuniChatRepository;
+import com.socialuni.social.sdk.im.enumeration.ChatType;
 import com.socialuni.social.sdk.im.logic.manage.SocialuniChatManage;
 //import com.socialuni.social.common.api.config.SocialuniAppConfigInterface;
 import com.socialuni.social.tance.dev.config.SocialuniAppConfig;
@@ -35,7 +36,7 @@ public class SocialuniImApplicationRunner implements ApplicationRunner {
     public void run(ApplicationArguments args) {
         List<String> groups = SocialuniAppConfig.getAppConfig().getDefaultChatGroups();
         for (String group : groups) {
-            socialuniChatManage.getOrCreateSystemGroupChat(group);
+            socialuniChatManage.getOrCreateGroupChat(group, ChatType.system_group);
         }
     }
 }

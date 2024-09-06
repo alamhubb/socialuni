@@ -18,6 +18,8 @@ public class SocialuniUnionContentBaseDO extends SocialuniContentBaseDO implemen
     @Column(nullable = false)
     private String contentType;
     @Column(nullable = false)
+    private Integer devId;
+    @Column(nullable = false)
     private Long unionId;
     //内容主体
     @Column(columnDefinition = "text")
