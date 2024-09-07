@@ -13,6 +13,7 @@ import com.socialuni.social.common.api.model.SocialuniAppMoreConfigBO;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.dev.logic.manage.SocialuniAppConfigManage;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.ApplicationArguments;
@@ -43,6 +44,9 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
 
     @Resource
     DevAccountEntity devAccountEntity;
+
+    @Resource
+    SocialuniAppConfigManage socialuniAppConfigManage;
 
     @Override
     public void run(ApplicationArguments args) throws NoSuchFieldException, IllegalAccessException, JsonProcessingException {
@@ -119,112 +123,55 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
     }
 
     private void resetDefaultAppConfigs() {
-        List<AppConfigDO> list = new ArrayList<>();
-
         SocialuniAppConfigBO socialuniAppConfigBO = SocialuniAppConfig.getAppConfig();
         SocialuniAppMoreConfigBO socialuniAppMoreConfigBO = SocialuniAppConfig.getAppMoreConfig();
 
-        for (String configKey : AppConfigDOKeyConst.configKeys) {
-            AppConfigDO configDO1 = new AppConfigDO();
-            configDO1.setDevId(0);
-            configDO1.setConfigKey(configKey);
-
-            if (configKey.equals(AppConfigDOKeyConst.appGender)) {
-                configDO1.setValue(socialuniAppConfigBO.getAppGender());
-            } else if (configKey.equals(AppConfigDOKeyConst.followTabName)) {
-                configDO1.setValue(socialuniAppConfigBO.getFollowTabName());
-            } else if (configKey.equals(AppConfigDOKeyConst.homeTabName)) {
-                configDO1.setValue(socialuniAppConfigBO.getHomeTabName());
-            } else if (configKey.equals(AppConfigDOKeyConst.cityTabName)) {
-                configDO1.setValue(socialuniAppConfigBO.getCityTabName());
-            } else if (configKey.equals(AppConfigDOKeyConst.tabNames)) {
-                configDO1.setValue(StringUtils.join(socialuniAppConfigBO.getTabNames(), ","));
-            } else if (configKey.equals(AppConfigDOKeyConst.defaultChatGroups)) {
-                configDO1.setValue(StringUtils.join(socialuniAppConfigBO.getDefaultChatGroups(), ","));
-            } else if (configKey.equals(AppConfigDOKeyConst.disableUnderageContent)) {
-                configDO1.setValue(socialuniAppConfigBO.getDisableUnderageContent().toString());
-            } else if (configKey.equals(AppConfigDOKeyConst.disableContentHasQrCode)) {
-                configDO1.setValue(socialuniAppConfigBO.getDisableContentHasQrCode().toString());
-            } else if (configKey.equals(AppConfigDOKeyConst.disableContentHasContactInfo)) {
-                configDO1.setValue(socialuniAppConfigBO.getDisableContentHasContactInfo().toString());
-            } else if (configKey.equals(AppConfigDOKeyConst.mustSetSchoolCanPost)) {
-                configDO1.setValue(socialuniAppConfigBO.getMustSetSchoolCanPost().toString());
-            } else if (configKey.equals(AppConfigDOKeyConst.serviceWeChat)) {
-                //moreConfig
-                configDO1.setValue(socialuniAppMoreConfigBO.getServiceWeChat());
-            } else if (configKey.equals(AppConfigDOKeyConst.vipPrice)) {
-                configDO1.setValue(socialuniAppMoreConfigBO.getVipPrice().toString());
-            } else if (configKey.equals(AppConfigDOKeyConst.swiperHeight)) {
-                configDO1.setValue(socialuniAppMoreConfigBO.getSwiperHeight().toString());
-            } else if (configKey.equals(AppConfigDOKeyConst.homeUrl)) {
-                configDO1.setValue(socialuniAppMoreConfigBO.getHomeUrl());
-            } else if (configKey.equals(AppConfigDOKeyConst.suggestUrl)) {
-                configDO1.setValue(socialuniAppMoreConfigBO.getSuggestUrl());
-            } else if (configKey.equals(AppConfigDOKeyConst.contactUsUrl)) {
-                configDO1.setValue(socialuniAppMoreConfigBO.getContactUsUrl());
-            } else if (configKey.equals(AppConfigDOKeyConst.userAgreementUrl)) {
-                configDO1.setValue(socialuniAppMoreConfigBO.getUserAgreementUrl());
-            } else if (configKey.equals(AppConfigDOKeyConst.userPrivacyUrl)) {
-                configDO1.setValue(socialuniAppMoreConfigBO.getUserPrivacyUrl());
-            } else if (configKey.equals(AppConfigDOKeyConst.childProtectUrl)) {
-                configDO1.setValue(socialuniAppMoreConfigBO.getChildProtectUrl());
-            } else if (configKey.equals(AppConfigDOKeyConst.rewardedAdLimit)) {
-                configDO1.setValue(socialuniAppMoreConfigBO.getRewardedAdLimit().toString());
-            } else if (configKey.equals(AppConfigDOKeyConst.contactExpenseShell)) {
-                configDO1.setValue(socialuniAppMoreConfigBO.getContactExpenseShell().toString());
-            } else if (configKey.equals(AppConfigDOKeyConst.contactUserReceiveShell)) {
-                configDO1.setValue(socialuniAppMoreConfigBO.getContactUserReceiveShell().toString());
-            } else if (configKey.equals(AppConfigDOKeyConst.errorMsgContactService)) {
-                configDO1.setValue(socialuniAppMoreConfigBO.getErrorMsgContactService());
-            } else if (configKey.equals(AppConfigDOKeyConst.errorMsg601UnLogin)) {
-                configDO1.setValue(socialuniAppMoreConfigBO.getErrorMsg601UnLogin());
-            } else if (configKey.equals(AppConfigDOKeyConst.errorMsg604SystemError)) {
-                configDO1.setValue(socialuniAppMoreConfigBO.getErrorMsg604SystemError());
-            } else if (configKey.equals(AppConfigDOKeyConst.authCodeInterval)) {
-                configDO1.setValue(socialuniAppMoreConfigBO.getAuthCodeInterval().toString());
-            } else if (configKey.equals(AppConfigDOKeyConst.reportCountHide)) {
-                configDO1.setValue(socialuniAppMoreConfigBO.getReportCountHide().toString());
-            } else if (configKey.equals(AppConfigDOKeyConst.showSwipers)) {
-                configDO1.setValue(socialuniAppMoreConfigBO.getShowSwipers().toString());
-            } else if (configKey.equals(AppConfigDOKeyConst.talkShowAdInterval)) {
-                configDO1.setValue(socialuniAppMoreConfigBO.getTalkShowAdInterval().toString());
-            } else if (configKey.equals(AppConfigDOKeyConst.talkShowAdCount)) {
-                configDO1.setValue(socialuniAppMoreConfigBO.getTalkShowAdCount().toString());
-            } else if (configKey.equals(AppConfigDOKeyConst.authCodeCount)) {
-                configDO1.setValue(socialuniAppMoreConfigBO.getAuthCodeCount().toString());
-            } else if (configKey.equals(AppConfigDOKeyConst.authCodeIpCount)) {
-                configDO1.setValue(socialuniAppMoreConfigBO.getAuthCodeIpCount().toString());
-            } else if (configKey.equals(AppConfigDOKeyConst.talkShowAdIndexList)) {
-                configDO1.setValue(StringUtils.join(socialuniAppMoreConfigBO.getTalkShowAdIndexList(), ","));
-            } else if (configKey.equals(AppConfigDOKeyConst.authCodePhoneCount)) {
-                configDO1.setValue(socialuniAppMoreConfigBO.getAuthCodePhoneCount().toString());
-            } else if (configKey.equals(AppConfigDOKeyConst.authCodeValidMinute)) {
-                configDO1.setValue(socialuniAppMoreConfigBO.getAuthCodeValidMinute().toString());
-            } else if (configKey.equals(AppConfigDOKeyConst.highLimitReportCount)) {
-                configDO1.setValue(socialuniAppMoreConfigBO.getHighLimitReportCount().toString());
-            } else if (configKey.equals(AppConfigDOKeyConst.qq_account)) {
-                configDO1.setValue(socialuniAppMoreConfigBO.getQq_account());
-            } else if (configKey.equals(AppConfigDOKeyConst.wx_mp_id)) {
-                configDO1.setValue(socialuniAppMoreConfigBO.getWx_mp_id());
-            } else if (configKey.equals(AppConfigDOKeyConst.wx_app_id)) {
-                configDO1.setValue(socialuniAppMoreConfigBO.getWx_app_id());
-            } else if (configKey.equals(AppConfigDOKeyConst.wx_mp_secret)) {
-                configDO1.setValue(socialuniAppMoreConfigBO.getWx_mp_secret());
-            } else if (configKey.equals(AppConfigDOKeyConst.wx_merchant_id)) {
-                configDO1.setValue(socialuniAppMoreConfigBO.getWx_merchant_id());
-            } else if (configKey.equals(AppConfigDOKeyConst.wx_merchant_key)) {
-                configDO1.setValue(socialuniAppMoreConfigBO.getWx_merchant_key());
-            } else if (configKey.equals(AppConfigDOKeyConst.devPublishDataApiUrl)) {
-                configDO1.setValue(socialuniAppMoreConfigBO.getDevPublishDataApiUrl());
-            } else if (configKey.equals(AppConfigDOKeyConst.mp_wx_auditing)) {
-                configDO1.setValue(socialuniAppMoreConfigBO.getMp_wx_auditing().toString());
-            } else if (configKey.equals(AppConfigDOKeyConst.mp_qq_auditing)) {
-                configDO1.setValue(socialuniAppMoreConfigBO.getMp_qq_auditing().toString());
-            } else if (configKey.equals(AppConfigDOKeyConst.sysServiceReceiveRatio)) {
-                configDO1.setValue(socialuniAppMoreConfigBO.getSysServiceReceiveRatio().toString());
-            }
-            list.add(configDO1);
-        }
-        appConfigRepository.saveAll(list);
+        Integer devId = 0;
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.appGender, socialuniAppConfigBO.getAppGender());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.followTabName, socialuniAppConfigBO.getFollowTabName());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.homeTabName, socialuniAppConfigBO.getHomeTabName());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.cityTabName, socialuniAppConfigBO.getCityTabName());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.tabNames, StringUtils.join(socialuniAppConfigBO.getTabNames()));
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.defaultChatGroups, StringUtils.join(socialuniAppConfigBO.getDefaultChatGroups()));
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.disableUnderageContent, socialuniAppConfigBO.getDisableUnderageContent());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.disableContentHasQrCode, socialuniAppConfigBO.getDisableContentHasQrCode());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.disableContentHasContactInfo, socialuniAppConfigBO.getDisableContentHasContactInfo());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.mustSetSchoolCanPost, socialuniAppConfigBO.getMustSetSchoolCanPost());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.serviceWeChat, socialuniAppMoreConfigBO.getServiceWeChat());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.vipPrice, socialuniAppMoreConfigBO.getVipPrice());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.swiperHeight, socialuniAppMoreConfigBO.getSwiperHeight());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.homeUrl, socialuniAppMoreConfigBO.getHomeUrl());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.suggestUrl, socialuniAppMoreConfigBO.getSuggestUrl());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.contactUsUrl, socialuniAppMoreConfigBO.getContactUsUrl());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.userAgreementUrl, socialuniAppMoreConfigBO.getUserAgreementUrl());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.userPrivacyUrl, socialuniAppMoreConfigBO.getUserPrivacyUrl());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.childProtectUrl, socialuniAppMoreConfigBO.getChildProtectUrl());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.rewardedAdLimit, socialuniAppMoreConfigBO.getRewardedAdLimit());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.contactExpenseShell, socialuniAppMoreConfigBO.getContactExpenseShell());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.contactUserReceiveShell, socialuniAppMoreConfigBO.getContactUserReceiveShell());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.errorMsgContactService, socialuniAppMoreConfigBO.getErrorMsgContactService());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.errorMsg601UnLogin, socialuniAppMoreConfigBO.getErrorMsg601UnLogin());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.errorMsg604SystemError, socialuniAppMoreConfigBO.getErrorMsg604SystemError());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.authCodeInterval, socialuniAppMoreConfigBO.getAuthCodeInterval());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.reportCountHide, socialuniAppMoreConfigBO.getReportCountHide());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.showSwipers, socialuniAppMoreConfigBO.getShowSwipers());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.talkShowAdInterval, socialuniAppMoreConfigBO.getTalkShowAdInterval());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.talkShowAdCount, socialuniAppMoreConfigBO.getTalkShowAdCount());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.authCodeCount, socialuniAppMoreConfigBO.getAuthCodeCount());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.authCodeIpCount, socialuniAppMoreConfigBO.getAuthCodeIpCount());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.talkShowAdIndexList, socialuniAppMoreConfigBO.getTalkShowAdIndexList());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.authCodePhoneCount, socialuniAppMoreConfigBO.getAuthCodePhoneCount());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.authCodeValidMinute, socialuniAppMoreConfigBO.getAuthCodeValidMinute());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.highLimitReportCount, socialuniAppMoreConfigBO.getHighLimitReportCount());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.qq_account, socialuniAppMoreConfigBO.getQq_account());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.wx_mp_id, socialuniAppMoreConfigBO.getWx_mp_id());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.wx_app_id, socialuniAppMoreConfigBO.getWx_app_id());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.wx_mp_secret, socialuniAppMoreConfigBO.getWx_mp_secret());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.wx_merchant_id, socialuniAppMoreConfigBO.getWx_merchant_id());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.wx_merchant_key, socialuniAppMoreConfigBO.getWx_merchant_key());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.devPublishDataApiUrl, socialuniAppMoreConfigBO.getDevPublishDataApiUrl());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.mp_wx_auditing, socialuniAppMoreConfigBO.getMp_wx_auditing());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.mp_qq_auditing, socialuniAppMoreConfigBO.getMp_qq_auditing());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.sysServiceReceiveRatio, socialuniAppMoreConfigBO.getSysServiceReceiveRatio());
     }
 }

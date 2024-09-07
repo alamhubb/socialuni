@@ -17,6 +17,7 @@ import com.socialuni.social.sdk.im.logic.foctory.SocialuniChatDOFactory;
 import com.socialuni.social.sdk.im.logic.manage.SocialuniChatManage;
 import com.socialuni.social.sdk.im.logic.manage.SocialuniChatUserManage;
 import com.socialuni.social.tance.dev.config.SocialuniAppConfig;
+import com.socialuni.social.tance.dev.config.SocialuniDevConfig;
 import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.factory.SocialuniAppOperateRecordDOFactory;
@@ -77,14 +78,16 @@ public class SocialuniChatEntity {
 
             SocialuniChatDO socialuniChatDO = this.getJoinOrCreateChatUser(sysUserId, ChatType.system_group, user.getUserId(), group);
 
-            SocialuniChatCreateQO socialuniChatCreateQO = new SocialuniChatCreateQO();
-            socialuniChatCreateQO.setChatName(socialuniChatDO.getChatName());
-            socialuniChatCreateQO.setType(socialuniChatDO.getType());
 
-            ResultRO<ChatRO> resultRO = socialuniChatAPI.joinOrCreateGroupChat(socialuniChatCreateQO);
-            ChatRO chatRO = resultRO.getData();
+            if (SocialuniDevConfig.hasCenterServer()) {
+                SocialuniChatCreateQO socialuniChatCreateQO = new SocialuniChatCreateQO();
+                socialuniChatCreateQO.setChatName(socialuniChatDO.getChatName());
+                socialuniChatCreateQO.setType(socialuniChatDO.getType());
+                ResultRO<ChatRO> resultRO = socialuniChatAPI.joinOrCreateGroupChat(socialuniChatCreateQO);
+                ChatRO chatRO = resultRO.getData();
+                SocialuniUnionIdFacede.updateUuidByUnionIdNotNull(socialuniChatDO.getUnionId(), chatRO.getId());
+            }
 
-            SocialuniUnionIdFacede.updateUuidByUnionIdNotNull(socialuniChatDO.getUnionId(), chatRO.getId());
         }
     }
 

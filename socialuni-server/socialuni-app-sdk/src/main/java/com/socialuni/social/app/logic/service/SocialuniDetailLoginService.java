@@ -159,25 +159,4 @@ public class SocialuniDetailLoginService {
 
         return ResultRO.success(socialLoginRO);
     }
-
-    public ResultRO<SocialLoginRO<SocialuniUserRO>> refreshToken() {
-        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
-        Long mineUserId = mineUser.getUserId();
-        SocialuniTokenDO socialUserTokenDO = tokenManage.create(mineUser.getUnionId());
-        if (SocialuniDevConfig.hasCenterServer()) {
-            ResultRO<SocialLoginRO<SocialuniUserRO>> resultRO = socialuniLoginAPI.refreshToken();
-            SocialuniUserRO socialuniUserRO = resultRO.getData().getUser();
-            String token = resultRO.getData().getToken();
-            Integer serverDevId = DevAccountFacade.getCenterDevIdNotNull();
-            SocialuniThirdTokenUtil.updateUserToken(mineUserId, token, serverDevId, socialuniUserRO.getId());
-        }
-
-        SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getUserNotNull(mineUserId);
-
-        SocialuniMineUserDetailRO socialuniMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(socialuniUserDo);
-
-        SocialLoginRO<SocialuniUserRO> socialLoginRO = new SocialLoginRO(socialUserTokenDO.getToken(), socialuniMineUserDetailRO);
-
-        return ResultRO.success(socialLoginRO);
-    }
 }

@@ -1,5 +1,6 @@
 package com.socialuni.social.tance.dev.dao.DO;
 
+import com.socialuni.social.common.api.entity.SocialuniBaseDO;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -22,16 +23,20 @@ import java.util.Date;
                 @Index(columnList = "status"),
                 @Index(columnList = "configKey"),
                 @Index(columnList = "createTime")
+        },
+        uniqueConstraints = {
+                //每个渠道都是唯一的
+                @UniqueConstraint(columnNames = {"devId", "configKey"})
         }
 )
-@IdClass(value = AppConfigPk.class)
-public class AppConfigDO implements Serializable {
-    @Id
+//@IdClass(value = AppConfigPk.class)
+public class AppConfigDO extends SocialuniBaseDO implements Serializable {
+    @Column(nullable = false)
     private Integer devId;
     /**
      * key值
      */
-    @Id
+    @Column(nullable = false)
     private String configKey;
     private String value;
     private String label;
@@ -41,5 +46,12 @@ public class AppConfigDO implements Serializable {
 
     public AppConfigDO() {
         this.status = 1;
+    }
+
+    public AppConfigDO(Integer devId, String configKey, String value) {
+        this();
+        this.devId = devId;
+        this.configKey = configKey;
+        this.value = value;
     }
 }

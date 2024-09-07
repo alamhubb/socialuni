@@ -1,5 +1,6 @@
 package com.socialuni.social.sdk.config.config;
 
+import com.socialuni.social.common.api.config.SocialRequestUserConfig;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.common.api.utils.RequestUtil;
@@ -57,13 +58,17 @@ public class FeignInterceptor implements RequestInterceptor {
         return socialProviderLoginQO;
     }
 
+    @Resource
+    SocialRequestUserConfig socialRequestUserConfig;
     @Override
     public void apply(RequestTemplate requestTemplate) {
 
         String postUrl = requestTemplate.path();
 
         //还是要加一个联盟账户渠道
-
+        String token = RequestUtil.getRequestValue(SocialuniWebConfig.getTokenName());
+        String token1 = socialRequestUserConfig.getToken();
+        Long userId = socialRequestUserConfig.getUserId();
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
 
         if (!postUrl.contains("/registryUser")) {

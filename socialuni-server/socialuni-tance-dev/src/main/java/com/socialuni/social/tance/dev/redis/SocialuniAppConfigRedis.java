@@ -22,11 +22,15 @@ public class SocialuniAppConfigRedis {
     public SocialuniAppConfigBO getAppConfig(Integer devId) {
         SocialuniAppConfigBO socialuniAppConfigBO = new SocialuniAppConfigBO();
 
-        List<AppConfigDO> configDOS = appConfigRepository.findAllByDevIdAndStatusOrderByCreateTimeDesc(devId, 1);
+        List<Integer> configDOS = appConfigRepository.findAllByDevIdAndStatusOrderByCreateTimeDesc(devId, 1);
 
-        for (AppConfigDO configDO : configDOS) {
+        for (Integer configId : configDOS) {
+            AppConfigDO configDO = appConfigRepository.findFirstById(configId);
+
             String configKey = configDO.getConfigKey();
             String configValue = configDO.getValue();
+
+
             if (StringUtils.isNotEmpty(configKey) && StringUtils.isNotEmpty(configValue)) {
                 if (configKey.equals(AppConfigDOKeyConst.appGender)) {
                     socialuniAppConfigBO.setAppGender(configValue);
@@ -60,11 +64,15 @@ public class SocialuniAppConfigRedis {
         //未使用数据库的，先这样，到时候再改参考上面
         SocialuniAppMoreConfigBO socialuniAppConfigBO = new SocialuniAppMoreConfigBO();
 
-        List<AppConfigDO> configDOS = appConfigRepository.findAllByDevIdAndStatusOrderByCreateTimeDesc(devId, 1);
+        List<Integer> configDOS = appConfigRepository.findAllByDevIdAndStatusOrderByCreateTimeDesc(devId, 1);
 
-        for (AppConfigDO configDO : configDOS) {
+
+        for (Integer configId : configDOS) {
+            AppConfigDO configDO = appConfigRepository.findFirstById(configId);
+
             String configKey = configDO.getConfigKey();
             String configValue = configDO.getValue();
+
             if (StringUtils.isNotEmpty(configKey) && StringUtils.isNotEmpty(configValue)) {
                 if (configKey.equals(AppConfigDOKeyConst.wx_mp_id)) {
                     socialuniAppConfigBO.setWx_mp_id(configValue);

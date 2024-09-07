@@ -4,6 +4,7 @@ import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
+import com.socialuni.social.tance.dev.api.SocialuniNoUseFeignAspect;
 import com.socialuni.social.user.sdk.api.user.SocialuniMineUserAPI;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniTokenDO;
 import com.socialuni.social.user.sdk.logic.manage.SocialuniTokenManage;
@@ -28,21 +29,15 @@ public class SocialuniMineUserController implements SocialuniMineUserAPI {
         return socialuniMineUserService.getMineUser();
     }
 
-    @Resource
-    SocialuniTokenManage tokenManage;
     /**
      * 刷新token
      *
      * @return
      */
     @GetMapping("refreshToken")
+    @SocialuniNoUseFeignAspect
     public ResultRO<SocialLoginRO<SocialuniUserRO>> refreshToken() {
-        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
-
-        ResultRO<SocialuniUserRO> resultRO = socialuniMineUserService.getMineUser();
-
-        SocialuniTokenDO socialUserTokenDO = tokenManage.create(mineUser.getUnionId());
-        return ResultRO.success(new SocialLoginRO<>(socialUserTokenDO.getToken(), resultRO.getData()));
+        return socialuniMineUserService.refreshToken();
     }
 
     @Override

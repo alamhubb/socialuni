@@ -51,22 +51,8 @@ public class SocialuniLoginController implements SocialuniLoginAPI {
         return centerLoginService.phonePasswordLogin(socialPhoneNumQO);
     }
 
-
-    @PostMapping("deviceUidLogin")
-    public ResultRO<SocialLoginRO<SocialuniUserRO>> deviceUidLogin(@RequestBody @Valid SocialuniDeviceUidLoginQO socialuniDeviceUidLoginQO) {
+    @Override
+    public ResultRO<SocialLoginRO<SocialuniUserRO>> deviceUidLogin(SocialuniDeviceUidLoginQO socialuniDeviceUidLoginQO) {
         return centerLoginService.deviceUidLogin(socialuniDeviceUidLoginQO);
     }
-
-
-    /**
-     * 刷新token
-     *
-     * @return
-     */
-    @PostMapping("refreshToken")
-    @SocialuniNoUseFeignAspect
-    public ResultRO<SocialLoginRO<SocialuniUserRO>> refreshToken() {
-        return centerLoginService.refreshToken();
-    }
-
 }

@@ -5,6 +5,7 @@ import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.constant.UserType;
+import com.socialuni.social.im.api.feign.SocialuniChatAPI;
 import com.socialuni.social.im.api.model.QO.SocialuniChatCreateQO;
 import com.socialuni.social.im.api.model.QO.SocialuniChatQueryQO;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
@@ -26,6 +27,7 @@ import com.socialuni.social.im.api.model.QO.chat.ChatRemoveVO;
 import com.socialuni.social.im.api.model.QO.chat.OpenChatVO;
 import com.socialuni.social.sdk.im.utils.SocialuniChatDOUtil;
 import com.socialuni.social.sdk.im.utils.SocialuniChatUserDOUtil;
+import com.socialuni.social.tance.dev.config.SocialuniDevConfig;
 import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo;
@@ -115,12 +117,21 @@ public class ChatService {
         return null;
     }
 
+    @Resource
+    SocialuniChatAPI socialuniChatAPI;
 
     public ResultRO<List<ChatRO>> queryChatList() {
         //未登录的情况需要查询 chat，未登录的情况没有 chatUser
         //已登录的情况，查 chatUser?
 
         //怎么排序呢。 没登录查 chats, 登录了查 chatUsers.
+        if (SocialuniDevConfig.hasCenterServer()) {
+            SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
+            if (mineUser != null) {
+                socialuniChatEntity.createUserChats(mineUser);
+            }
+            return socialuniChatAPI.queryChatList();
+        }
 
         List<ChatRO> list = chatQueryDomain.getChats();
         return new ResultRO<>(list);

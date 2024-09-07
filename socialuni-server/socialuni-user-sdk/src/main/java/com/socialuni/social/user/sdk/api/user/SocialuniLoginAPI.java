@@ -37,7 +37,4 @@ public interface SocialuniLoginAPI {
 
     @PostMapping("deviceUidLogin")
     ResultRO<SocialLoginRO<SocialuniUserRO>> deviceUidLogin(@RequestBody @Valid SocialuniDeviceUidLoginQO socialuniDeviceUidLoginQO);
-
-    @PostMapping("refreshToken")
-    ResultRO<SocialLoginRO<SocialuniUserRO>> refreshToken();
 }

@@ -10,6 +10,7 @@ import com.socialuni.social.im.api.model.QO.chat.OpenChatVO;
 import com.socialuni.social.im.api.model.RO.ChatRO;
 import com.socialuni.social.im.api.model.QO.chat.ChatReadVO;
 import com.socialuni.social.im.api.model.QO.chat.ChatRemoveVO;
+import com.socialuni.social.tance.dev.api.SocialuniNoUseFeignAspect;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,6 +39,7 @@ public class SocialuniChatController implements SocialuniChatAPI {
     }
 
     @Override
+    @SocialuniNoUseFeignAspect
     public ResultRO<List<ChatRO>> queryChatList() {
         return chatService.queryChatList();
     }

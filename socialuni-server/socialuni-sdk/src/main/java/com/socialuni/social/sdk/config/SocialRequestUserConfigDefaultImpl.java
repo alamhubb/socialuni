@@ -12,7 +12,8 @@ import org.apache.commons.lang3.StringUtils;
 public class SocialRequestUserConfigDefaultImpl implements SocialRequestUserConfig {
     @Override
     public String getToken() {
-        return RequestUtil.getRequestValue(SocialuniWebConfig.getTokenName());
+        String token = RequestUtil.getRequestValue(SocialuniWebConfig.getTokenName());
+        return token;
     }
 
     @Override

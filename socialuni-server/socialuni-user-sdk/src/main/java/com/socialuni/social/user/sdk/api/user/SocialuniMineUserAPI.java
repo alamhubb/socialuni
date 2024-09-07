@@ -3,6 +3,7 @@ package com.socialuni.social.user.sdk.api.user;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
+import com.socialuni.social.tance.dev.api.SocialuniNoUseFeignAspect;
 import com.socialuni.social.user.sdk.model.QO.SocialUserEditQO;
 import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
 import io.swagger.v3.oas.annotations.Operation;
