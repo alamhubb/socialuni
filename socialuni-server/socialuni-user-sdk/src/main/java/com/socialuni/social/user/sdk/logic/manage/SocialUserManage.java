@@ -48,6 +48,8 @@ public class SocialUserManage {
 
     public SocialuniUserDo createUserByThirdProviderLogin(SocialProviderLoginQO loginQO, String type, Long unionId) {
         SocialuniUserDo user = SocialUserDOFactory.newUserByProviderLogin(loginQO, unionId);
+        user.setNickname(loginQO.getNickName());
+        user.setAvatar(loginQO.getAvatarUrl());
         if (!StringUtils.isEmpty(type)) {
             //有可能为系统用户
             user.setType(type);

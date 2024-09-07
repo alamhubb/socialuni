@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "s_third_user_token",
+@Table(name = "s_third_user_token_old",
         //查询条件索引
         indexes = {
                 //关联需要键索引，索引列不能为空

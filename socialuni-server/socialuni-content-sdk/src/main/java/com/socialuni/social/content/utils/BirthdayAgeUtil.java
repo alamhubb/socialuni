@@ -17,11 +17,6 @@ import java.util.Date;
  */
 @Slf4j
 public class BirthdayAgeUtil {
-
-    public static void main(String[] args) {
-        System.out.println(String.valueOf(BirthdayAgeUtil.getBirthDayByBirthString("2000-01-01").getTime()/1000));
-    }
-
     public static final SimpleDateFormat birthdayYearFormat = new SimpleDateFormat("yyyy");
     public static final SimpleDateFormat birthdayDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -49,8 +44,9 @@ public class BirthdayAgeUtil {
         if (cal.before(birthDay)) { //出生日期晚于当前时间，无法计算
             return age;
         }
-        //+1,采用虚岁规则
-        int yearNow = cal.get(Calendar.YEAR) + 1; //当前年份
+        //+1,采用周岁规则
+        int yearNow = cal.get(Calendar.YEAR); //当前年份
+//        int yearNow = cal.get(Calendar.YEAR) + 1; //当前年份
         int monthNow = cal.get(Calendar.MONTH);  //当前月份
         int dayOfMonthNow = cal.get(Calendar.DAY_OF_MONTH); //当前日期
         cal.setTime(birthDay);
@@ -82,6 +78,10 @@ public class BirthdayAgeUtil {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getAgeByBirth("2005-01-01"));
     }
 
     public static String getYearBirthDateByAge(Integer age) {

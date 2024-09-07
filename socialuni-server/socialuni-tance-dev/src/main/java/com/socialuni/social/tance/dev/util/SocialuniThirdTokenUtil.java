@@ -1,5 +1,7 @@
 package com.socialuni.social.tance.dev.util;
 
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.socialuni.social.common.api.utils.NumberUtils;
 import com.socialuni.social.tance.dev.dao.repository.SocialuniThirdTokenRepository;
 import com.socialuni.social.tance.dev.dao.DO.SocialuniThirdTokenDO;
 import org.springframework.stereotype.Component;
@@ -15,12 +17,17 @@ public class SocialuniThirdTokenUtil {
         SocialuniThirdTokenUtil.socialuniThirdTokenRepository = socialuniThirdTokenRepository;
     }
 
-    public static SocialuniThirdTokenDO createdThirdTokenOrGet(Long userId, String token, Integer devId) {
+    public static SocialuniThirdTokenDO createdThirdTokenOrGet(Long userId, String token, Integer devId, String uuid) {
         SocialuniThirdTokenDO socialuniThirdTokenDO = getThirdUserToken(devId, userId);
         if (socialuniThirdTokenDO == null) {
             socialuniThirdTokenDO = new SocialuniThirdTokenDO();
             socialuniThirdTokenDO.setUserId(userId);
             socialuniThirdTokenDO.setDevId(devId);
+            if (NumberUtils.strIsAllNumber(uuid)) {
+                socialuniThirdTokenDO.setUserUuid(Long.valueOf(uuid));
+            } else {
+                throw new SocialParamsException("参数异常134226");
+            }
         }
         socialuniThirdTokenDO.setToken(token);
         socialuniThirdTokenRepository.savePut(socialuniThirdTokenDO);

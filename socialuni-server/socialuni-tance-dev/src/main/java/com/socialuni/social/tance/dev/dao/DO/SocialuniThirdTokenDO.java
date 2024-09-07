@@ -12,7 +12,7 @@ import java.util.Date;
 
 //为什么使用s_token
 @Entity
-@Table(name = "s_uni_user_token",
+@Table(name = "s_third_user_token",
         //查询条件索引
         indexes = {
                 //关联需要键索引，索引列不能为空
@@ -31,6 +31,8 @@ import java.util.Date;
 public class SocialuniThirdTokenDO extends SocialuniContentBaseDO implements Serializable {
     @Column(nullable = false, updatable = false)
     private Long userId;
+    @Column(nullable = false, updatable = false)
+    private Long userUuid;
     @Column(nullable = false, updatable = false)
     private Integer devId;
     @Column(nullable = false, updatable = false)

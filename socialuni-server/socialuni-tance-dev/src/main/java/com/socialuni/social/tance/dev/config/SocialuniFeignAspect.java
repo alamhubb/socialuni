@@ -1,5 +1,6 @@
 package com.socialuni.social.tance.dev.config;
 
+import cn.hutool.extra.spring.SpringUtil;
 import com.socialuni.social.common.sdk.config.SocialWebControllerAdvice;
 import com.socialuni.social.common.sdk.event.WebControllerExceptionEvent;
 import com.socialuni.social.common.api.constant.ErrorCode;
@@ -46,42 +47,66 @@ public class SocialuniFeignAspect {
      */
     @Around("requestLog()")
     public Object requestLogHandle(ProceedingJoinPoint joinPoint) throws Throwable {
-        // 获取目标对象
-        Object target = joinPoint.getTarget();
 
-        // 获取目标对象的类
-        Class<?> targetClass = target.getClass();
+        if (SocialuniDevConfig.hasCenterServer()){
 
-        Boolean hasFlag = false;
 
-        SocialuniNoUseFeignAspect feignAspect = targetClass.getAnnotation(SocialuniNoUseFeignAspect.class);
+            // 获取目标对象
+            Object target = joinPoint.getTarget();
 
-        if (feignAspect != null) {
-            hasFlag = true;
-        }
-        if (!hasFlag) {
-            // 获取方法签名
-            MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
-            Method method = methodSignature.getMethod();
-            feignAspect = method.getAnnotation(SocialuniNoUseFeignAspect.class);
+            // 获取目标对象的类
+            Class<?> targetClass = target.getClass();
+
+            Boolean hasFlag = false;
+
+            SocialuniNoUseFeignAspect feignAspect = targetClass.getAnnotation(SocialuniNoUseFeignAspect.class);
 
             if (feignAspect != null) {
                 hasFlag = true;
             }
-        }
 
-        // 获取目标类实现的接口
-        Class<?>[] interfaces = targetClass.getInterfaces();
+            MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
+            Method method = methodSignature.getMethod();
 
-        for (Class<?> interfaceClass : interfaces) {
-            FeignClient feignClient = interfaceClass.getAnnotation(FeignClient.class);
-            if (feignClient != null) {
-                if (hasFlag) {
-                    log.info("chufale you zidongchulide ");
+
+            if (!hasFlag) {
+                // 获取方法签名
+                feignAspect = method.getAnnotation(SocialuniNoUseFeignAspect.class);
+
+                if (feignAspect != null) {
+                    hasFlag = true;
+                }
+            }
+
+            // 获取目标类实现的接口
+            Class<?>[] interfaces = targetClass.getInterfaces();
+
+            for (Class<?> interfaceClass : interfaces) {
+
+
+//            Method method = bean.getClass().getMethod(methodName, parameterTypes);
+
+                FeignClient feignClient = interfaceClass.getAnnotation(FeignClient.class);
+                if (feignClient != null) {
+                    if (!hasFlag) {
+                        String methodName = method.getName();
+                        Class<?>[] parameterTypes = method.getParameterTypes();
+                        Object[] args = joinPoint.getArgs();
+                        Object bean = SpringUtil.getBean(interfaceClass);
+
+                        //且不为手动实现，则统一调用
+                        log.info(interfaceClass.getName());
+                        log.info(interfaceClass.getSimpleName());
+                        log.info(methodName);
+                        log.info("chufale you zidongchulide ");
+
+                        Method invokeMethod = bean.getClass().getMethod(methodName, parameterTypes);
+                        Object result = invokeMethod.invoke(bean, args);
+                        return result;
+                    }
                 }
             }
         }
-
         // 执行目标方法
         Object result = joinPoint.proceed();
 

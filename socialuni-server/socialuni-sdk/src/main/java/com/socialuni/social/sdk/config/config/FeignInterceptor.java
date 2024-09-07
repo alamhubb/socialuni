@@ -77,10 +77,12 @@ public class FeignInterceptor implements RequestInterceptor {
 
                     SocialuniUserRO socialuniUserRO = resultRO.getData().getUser();
 
+                    String uuid = socialuniUserRO.getId();
+
                     Long mineUserUnionId = mineUser.getUnionId();
 
                     //保存三方token
-                    socialuniThirdTokenDO = SocialuniThirdTokenUtil.createdThirdTokenOrGet(mineUserUnionId, resultRO.getData().getToken(), serverDevId);
+                    socialuniThirdTokenDO = SocialuniThirdTokenUtil.createdThirdTokenOrGet(mineUserUnionId, resultRO.getData().getToken(), serverDevId, uuid);
 
                     SocialuniUnionIdFacede.updateUuidByUnionIdNotNull(mineUserUnionId, socialuniUserRO.getId());
                 }

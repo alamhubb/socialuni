@@ -39,7 +39,7 @@ public class SocialuniThirdUserRegistryDomain {
         long unionId = SocialuniUnionIdFacede.createUserUnionId();
 
         if (StringUtils.isEmpty(phoneNum)) {
-            mineUser = socialUserEntity.createUserAndDetail(loginQO, unionId);
+            mineUser = socialUserEntity.createUserAndDetailByThird(loginQO, loginQO.getUserType(), unionId);
         } else {
             SocialUserPhoneDo socialUserPhoneDo = socialUserPhoneManage.checkLoginPhoneNumAndGetUser(phoneNum);
             if (socialUserPhoneDo == null) {
