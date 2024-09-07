@@ -28,7 +28,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = true)
 public class SocialuniMessageDO extends SocialuniUnionContentBaseDO implements Serializable {
     private Long chatId;
-//    private String type;
+    //    private String type;
     //官方，普通
     //图文，图片，文字，视频，这种类型，内容类型
     private String messageContentType;
@@ -39,7 +39,7 @@ public class SocialuniMessageDO extends SocialuniUnionContentBaseDO implements S
     public SocialuniMessageDO() {
     }
 
-    public SocialuniMessageDO(Long userId, Long unionId, String contentType, String content) {
-        super(userId, unionId, contentType, content);
+    public SocialuniMessageDO(Integer devId, Long userId, Long unionId, String contentType, String content) {
+        super(devId, userId, unionId, contentType, content);
     }
 }

@@ -28,7 +28,7 @@ public class DevAccountFacade {
 //    public static final String appGenderTypeKey = "appGenderType";
 
     private static DevAccountInterface devAccountApi;
-    private final static Integer systemDevId = 1;
+    public final static Integer systemDevId = 1;
     private static DevAccountRedisInterface devAccountRedisInterface;
     private static DevAccountProviderInterface devAccountProviderApi;
 
@@ -236,7 +236,7 @@ public class DevAccountFacade {
 
     public static DevAccountDo getSystemDevAccount() {
 //        String phoneNum = SocialuniDevConfig.getSystemUserPhoneNum();
-        DevAccountDo devAccountDo = devAccountApi.findFirstById(1);
+        DevAccountDo devAccountDo = devAccountApi.findFirstById(DevAccountFacade.systemDevId);
         if (devAccountDo == null) {
             throw new SocialSystemException("开发者信息为空");
         }

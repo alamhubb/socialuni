@@ -10,6 +10,7 @@ import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +23,7 @@ import java.util.List;
  */
 @Component
 @Slf4j
+@Order(11001)
 public class SocialuniImApplicationRunner implements ApplicationRunner {
 
     //devId从0开始，可修改默认0的配置，开发者从1开始，0为默认值使用的

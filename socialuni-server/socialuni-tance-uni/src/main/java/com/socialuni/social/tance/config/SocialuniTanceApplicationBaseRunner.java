@@ -13,11 +13,11 @@ import com.socialuni.social.common.api.model.SocialuniAppMoreConfigBO;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.tance.entity.DevAccountEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
@@ -32,18 +32,19 @@ import java.util.concurrent.CompletableFuture;
  */
 @Component
 @Slf4j
+@Order(10001)
 public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
-    @Resource
-    DevAccountEntity devAccountEntity;
+
     @Resource
     AppConfigRepository appConfigRepository;
 
     @Resource
     DevAccountInterface devAccountInterface;
 
+    @Resource
+    DevAccountEntity devAccountEntity;
 
     @Override
-    @Async
     public void run(ApplicationArguments args) throws NoSuchFieldException, IllegalAccessException, JsonProcessingException {
         //如果为null，则为default类型
         //初始化默认值
@@ -71,10 +72,10 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
             //copy一个default的值
 
             if (StringUtils.isEmpty(SocialuniSystemConst.getAppSocialuniId())) {
-                devAccountDo = devAccountEntity.createDevAccount(phoneNum, SocialuniUnionIdFacede.createUserUnionId());
+                devAccountDo = devAccountEntity.createDevAccount(phoneNum);
 
             } else {
-                devAccountDo = devAccountEntity.createDevAccount(phoneNum, SocialuniSystemConst.getAppSocialuniId(), SocialuniUnionIdFacede.createUserUnionId());
+                devAccountDo = devAccountEntity.createDevAccount(phoneNum, SocialuniSystemConst.getAppSocialuniId());
             }
 
 
@@ -103,7 +104,7 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
         //如果不存在用户，则创建第一个默认的主系统开发者
         if (devAccountDoTest == null) {
             //copy一个default的值
-            devAccountDoTest = devAccountEntity.createDevAccount(phoneNumTest, SocialuniUnionIdFacede.createUserUnionId());
+            devAccountDoTest = devAccountEntity.createDevAccount(phoneNumTest);
         }
 
         //创建中心
@@ -111,7 +112,7 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
             DevAccountDo centerDevDO = DevAccountFacade.getDevAccountBySocialuniId(SocialuniSystemConst.getCenterSocialuniId());
             if (centerDevDO == null) {
                 //手机号格式字符串瞎写就行，没有其他地方使用
-                devAccountEntity.createDevAccount("99999888667", SocialuniSystemConst.getCenterSocialuniId(), SocialuniUnionIdFacede.createUserUnionId());
+                devAccountEntity.createDevAccount("99999888667", SocialuniSystemConst.getCenterSocialuniId());
             }
         }
         //获取省，不包含子节点

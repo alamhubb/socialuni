@@ -4,6 +4,7 @@ import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.api.utils.SnowflakeIdUtil;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
 import com.socialuni.social.peiwan.sdk.model.DO.SocialuniPeiwanInfoImgDO;
+import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public class SocialuniPeiwanInfoImgDOFactory {
     public static SocialuniPeiwanInfoImgDO createPeiwanImgDO(Long userId, SocialuniImgAddQO imgAddQO, Integer order) {
         Long unionId = SocialuniUnionIdFacede.createPeiwanImgUnionId(SnowflakeIdUtil.nextIdStr());
 
-        SocialuniPeiwanInfoImgDO socialuniPeiwanInfoImgDO = new SocialuniPeiwanInfoImgDO(userId, unionId, SocialuniContentType.peiwanImg);
+        SocialuniPeiwanInfoImgDO socialuniPeiwanInfoImgDO = new SocialuniPeiwanInfoImgDO(DevAccountFacade.getDevIdNullElseCenterDevId(), userId, unionId, SocialuniContentType.peiwanImg);
 
         socialuniPeiwanInfoImgDO.setSrc(imgAddQO.getSrc());
         socialuniPeiwanInfoImgDO.setLevel(order);

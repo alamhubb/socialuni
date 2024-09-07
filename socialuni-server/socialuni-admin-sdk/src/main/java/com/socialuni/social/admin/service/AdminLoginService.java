@@ -9,7 +9,7 @@ import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.common.api.utils.SocialTokenFacade;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.tance.dev.dao.DO.DevAccountDo;
-import com.socialuni.social.tance.entity.DevAccountEntity;
+import com.socialuni.social.tance.config.DevAccountEntity;
 import com.socialuni.social.tance.dev.api.DevAccountInterface;
 import com.socialuni.social.user.sdk.logic.domain.SocialuniLoginDomain;
 import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumAuthCodeQO;

@@ -1,4 +1,4 @@
-package com.socialuni.social.tance.entity;
+package com.socialuni.social.tance.config;
 
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.utils.UUIDUtil;
@@ -11,6 +11,8 @@ import com.socialuni.social.tance.dev.dao.DO.DevAccountDo;
 import com.socialuni.social.tance.dev.enumeration.DevAccountType;
 import com.socialuni.social.common.api.constant.GenderType;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
+import com.socialuni.social.tance.dev.facade.DevAccountFacade;
+import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
 import com.socialuni.social.user.sdk.logic.entity.SocialUserPhoneEntity;
 import com.socialuni.social.user.sdk.logic.redis.SocialUserPhoneRedis;
@@ -40,12 +42,12 @@ public class DevAccountEntity {
     @Resource
     SocialUserPhoneEntity socialUserPhoneEntity;
 
-    public DevAccountDo createDevAccount(String phoneNum, Long unionId) {
-        return this.createDevAccount(phoneNum, UUIDUtil.getUUID(), unionId);
+    public DevAccountDo createDevAccount(String phoneNum) {
+        return this.createDevAccount(phoneNum, UUIDUtil.getUUID());
     }
 
     //创建开发者账号
-    public DevAccountDo createDevAccount(String phoneNum, String socialuniId, Long unionId) {
+    public DevAccountDo createDevAccount(String phoneNum, String socialuniId) {
         Optional<? extends DevAccountDo> devAccountDOOptional = devAccountApi.findFirstByOrderByIdDesc();
         //加30以内随机数
         Long curDevNum;
@@ -70,7 +72,9 @@ public class DevAccountEntity {
         devAccountModel.setCallApiCount(0);
         devAccountModel.setUpdateTime(curDate);
         devAccountModel.setSocialuniId(socialuniId);
-        devAccountModel = (DevAccountDo) devAccountRedis.saveDevAccount(devAccountModel);
+        devAccountModel = devAccountRedis.saveDevAccount(devAccountModel);
+
+        Long unionId = SocialuniUnionIdFacede.createUserUnionId(devAccountModel.getId());
 
         SocialUserPhoneDo SocialUserPhoneDo = socialUserPhoneRedis.findByPhoneNum(phoneNum);
         //如果没注册账号，则直接注册

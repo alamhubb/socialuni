@@ -3,6 +3,9 @@ package com.socialuni.social.user.sdk.model.factory;
 import com.socialuni.social.common.api.exception.base.SocialException;
 import com.socialuni.social.common.sdk.utils.SocialuniGenerateAvatarUtil;
 import com.socialuni.social.content.utils.BirthdayAgeUtil;
+import com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo;
+import com.socialuni.social.tance.dev.facade.DevAccountFacade;
+import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
 import com.socialuni.social.common.sdk.constant.UserType;
@@ -88,7 +91,13 @@ public class SocialUserDOFactory {
             nickname = GenerateNicknameUtil.getGirlName();
         }
         nickname = StringUtils.substring(nickname, 0, 6);
-        SocialuniUserDo user = new SocialuniUserDo(unionId);
+
+
+        SocialuniUnionIdDo socialuniUnionIdDo = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(unionId);
+
+        Integer devId = socialuniUnionIdDo.getFromDevId();
+
+        SocialuniUserDo user = new SocialuniUserDo(devId, unionId);
         user.setNickname(nickname);
         user.setAvatar(SocialuniGenerateAvatarUtil.getGirlAvatar());
         user.setGender(GenderType.girl);

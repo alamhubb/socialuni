@@ -32,11 +32,11 @@ public class SocialuniImgBaseDo extends SocialuniUnionContentBaseDO {
         super(userId, contentType, content);
     }
 
-    public SocialuniImgBaseDo(Long userId, Long unionId, String contentType, String content) {
-        super(userId, unionId, contentType, content);
+    public SocialuniImgBaseDo(Integer devId, Long userId, Long unionId, String contentType, String content) {
+        super(devId, userId, unionId, contentType, content);
     }
 
-    public SocialuniImgBaseDo(Long userId, Long unionId, String contentType) {
-        super(userId, unionId, contentType);
+    public SocialuniImgBaseDo(Integer devId, Long userId, Long unionId, String contentType) {
+        super(devId, userId, unionId, contentType);
     }
 }

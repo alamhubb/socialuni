@@ -53,13 +53,14 @@ public class SocialuniUnionContentBaseDO extends SocialuniContentBaseDO implemen
         this.content = content;
     }
 
-    public SocialuniUnionContentBaseDO(Long userId, Long unionId, String contentType, String content) {
+    public SocialuniUnionContentBaseDO(Integer devId, Long userId, Long unionId, String contentType, String content) {
         this(userId, contentType, content);
         this.unionId = unionId;
+        this.devId = devId;
     }
 
-    public SocialuniUnionContentBaseDO(Long userId, Long unionId, String contentType) {
-        this(userId, unionId, contentType, contentType);
+    public SocialuniUnionContentBaseDO(Integer devId, Long userId, Long unionId, String contentType) {
+        this(devId, userId, unionId, contentType, null);
     }
 
     @Deprecated

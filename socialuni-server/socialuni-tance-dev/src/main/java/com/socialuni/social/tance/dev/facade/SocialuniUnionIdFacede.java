@@ -34,45 +34,59 @@ public class SocialuniUnionIdFacede {
     }
 
     //根据空的创建， 本系统写入数据时，需要先创建，然后写入内容表unionId，然后再根据返回内容更新uid
-    public static Long createUserUnionIdOrGet(String unionId) {
-        return createUnionIdByContentType(SocialuniContentType.user, unionId);
+    public static Long createUserUnionIdOrGet(String unionId, Integer devId) {
+        return createUnionIdByContentType(SocialuniContentType.user, unionId, devId);
     }
 
     public static Long createUserUnionId() {
-        return createUnionIdByContentType(SocialuniContentType.user, SnowflakeIdUtil.nextId());
+        Integer devId = DevAccountFacade.getDevIdNullElseCenterDevId();
+
+        return createUnionIdByContentType(SocialuniContentType.user, SnowflakeIdUtil.nextId(), devId);
+    }
+
+    public static Long createUserUnionId(Integer devId) {
+        return createUnionIdByContentType(SocialuniContentType.user, SnowflakeIdUtil.nextId(), devId);
     }
 
     public static Long createChatUnionId(String unionId) {
-        return createUnionIdByContentType(SocialuniContentType.chat, unionId);
+        Integer devId = DevAccountFacade.getDevIdNullElseCenterDevId();
+        return createUnionIdByContentType(SocialuniContentType.chat, unionId, devId);
     }
 
     public static Long createChatUnionId() {
-        return createUnionIdByContentType(SocialuniContentType.chat, SnowflakeIdUtil.nextId());
+        Integer devId = DevAccountFacade.getDevIdNullElseCenterDevId();
+        return createUnionIdByContentType(SocialuniContentType.chat, SnowflakeIdUtil.nextId(), devId);
     }
 
 
     public static Long createMessageUnionId(String unionId) {
-        return createUnionIdByContentType(SocialuniContentType.message, unionId);
+        Integer devId = DevAccountFacade.getDevIdNullElseCenterDevId();
+        return createUnionIdByContentType(SocialuniContentType.message, unionId, devId);
     }
 
     public static Long createUserImgUnionId(String unionId) {
-        return createUnionIdByContentType(SocialuniContentType.userImg, unionId);
+        Integer devId = DevAccountFacade.getDevIdNullElseCenterDevId();
+        return createUnionIdByContentType(SocialuniContentType.userImg, unionId, devId);
     }
 
     public static Long createTalkImgUnionId(String unionId) {
-        return createUnionIdByContentType(SocialuniContentType.talkImg, unionId);
+        Integer devId = DevAccountFacade.getDevIdNullElseCenterDevId();
+        return createUnionIdByContentType(SocialuniContentType.talkImg, unionId, devId);
     }
 
     public static Long createTalkUnionId(String unionId) {
-        return createUnionIdByContentType(SocialuniContentType.talk, unionId);
+        Integer devId = DevAccountFacade.getDevIdNullElseCenterDevId();
+        return createUnionIdByContentType(SocialuniContentType.talk, unionId, devId);
     }
 
     public static Long createCommentUnionId(String unionId) {
-        return createUnionIdByContentType(SocialuniContentType.comment, unionId);
+        Integer devId = DevAccountFacade.getDevIdNullElseCenterDevId();
+        return createUnionIdByContentType(SocialuniContentType.comment, unionId, devId);
     }
 
     public static Long createPeiwanImgUnionId(String unionId) {
-        return createUnionIdByContentType(SocialuniContentType.peiwanImg, unionId);
+        Integer devId = DevAccountFacade.getDevIdNullElseCenterDevId();
+        return createUnionIdByContentType(SocialuniContentType.peiwanImg, unionId, devId);
     }
 
     //自身创建
@@ -83,14 +97,14 @@ public class SocialuniUnionIdFacede {
         return uniContentUnionIdDO.getUnionId();
     }*/
     //byUUid，是进入都是str
-    private static Long createUnionIdByContentType(String contentType, Long unionId) {
+    private static Long createUnionIdByContentType(String contentType, Long unionId, Integer devId) {
         if (ObjectUtils.isEmpty(unionId)) {
             throw new SocialParamsException("参数错误202326");
         }
         SocialuniUnionIdDo uniContentUnionIdDO = getUnionByUuidAllowNull(unionId);
         //没有写入
         if (uniContentUnionIdDO == null) {
-            uniContentUnionIdDO = new SocialuniUnionIdDo(contentType, unionId, DevAccountFacade.getDevIdNullElseCenterDevId());
+            uniContentUnionIdDO = new SocialuniUnionIdDo(contentType, unionId, devId);
             uniContentUnionIdDO = socialuniUnionIdApi.savePut(uniContentUnionIdDO);
             //有的话更新
         }
@@ -114,7 +128,7 @@ public class SocialuniUnionIdFacede {
         return uuid;
     }
 
-    private static Long createUnionIdByContentType(String contentType, String uuid) {
+    private static Long createUnionIdByContentType(String contentType, String uuid, Integer devId) {
         if (ObjectUtils.isEmpty(uuid)) {
             throw new SocialParamsException("无效的内容标识3");
         }
@@ -123,7 +137,7 @@ public class SocialuniUnionIdFacede {
         }
         Long unionId = Long.valueOf(uuid);
         //有的话更新
-        return createUnionIdByContentType(contentType, unionId);
+        return createUnionIdByContentType(contentType, unionId, devId);
     }
 
     //空的创建的，然后更新，只有往中心推送后，可调用这里更新

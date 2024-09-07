@@ -28,7 +28,7 @@ public class SocialuniPeiwanInfoImgDO extends SocialuniImgBaseDo {
     }
 
 
-    public SocialuniPeiwanInfoImgDO(Long userId, Long unionId, String contentType) {
-        super(userId, unionId, contentType);
+    public SocialuniPeiwanInfoImgDO(Integer devId, Long userId, Long unionId, String contentType) {
+        super(devId, userId, unionId, contentType);
     }
 }

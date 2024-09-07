@@ -4,6 +4,7 @@ import com.socialuni.social.app.factory.SocialuniMineUserDetailROFactory;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.app.model.SocialuniMineUserDetailRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
+import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.sdk.im.logic.entity.SocialuniChatEntity;
 import com.socialuni.social.tance.dev.config.SocialuniDevConfig;
 import com.socialuni.social.tance.dev.facade.DevAccountFacade;
@@ -16,6 +17,7 @@ import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.QO.*;
 import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
+import com.socialuni.social.web.sdk.config.SocialuniWebConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -48,6 +50,7 @@ public class SocialuniDetailLoginService {
 
         SocialLoginRO<SocialuniUserRO> socialLoginRO = new SocialLoginRO(socialLoginRO1.getData().getToken(), socialuniMineUserDetailRO);
 
+        RequestUtil.setAttribute(SocialuniWebConfig.getTokenName(), socialLoginRO1.getData().getToken());
         //用户加入
         socialuniChatEntity.createUserChats(mineUser);
 
@@ -78,6 +81,7 @@ public class SocialuniDetailLoginService {
 
         SocialLoginRO<SocialuniUserRO> socialLoginRO = new SocialLoginRO(socialLoginRO1.getData().getToken(), socialuniMineUserDetailRO);
 
+        RequestUtil.setAttribute(SocialuniWebConfig.getTokenName(), socialLoginRO1.getData().getToken());
         //用户加入
         socialuniChatEntity.createUserChats(socialuniUserDo);
 
@@ -98,6 +102,7 @@ public class SocialuniDetailLoginService {
 
         SocialLoginRO<SocialuniUserRO> socialLoginRO = new SocialLoginRO(socialLoginRO1.getData().getToken(), socialuniMineUserDetailRO);
 
+        RequestUtil.setAttribute(SocialuniWebConfig.getTokenName(), socialLoginRO1.getData().getToken());
         //用户加入
         socialuniChatEntity.createUserChats(socialuniUserDo);
 
@@ -117,6 +122,7 @@ public class SocialuniDetailLoginService {
 
         SocialLoginRO<SocialuniUserRO> socialLoginRO = new SocialLoginRO(socialLoginRO1.getData().getToken(), socialuniMineUserDetailRO);
 
+        RequestUtil.setAttribute(SocialuniWebConfig.getTokenName(), socialLoginRO1.getData().getToken());
         //用户加入
         socialuniChatEntity.createUserChats(socialuniUserDo);
 
@@ -136,6 +142,8 @@ public class SocialuniDetailLoginService {
         SocialuniMineUserDetailRO socialuniMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(socialuniUserDo);
 
         SocialLoginRO<SocialuniUserRO> socialLoginRO = new SocialLoginRO(socialLoginRO1.getData().getToken(), socialuniMineUserDetailRO);
+
+        RequestUtil.setAttribute(SocialuniWebConfig.getTokenName(), socialLoginRO1.getData().getToken());
 
         //用户加入
         socialuniChatEntity.createUserChats(socialuniUserDo);
