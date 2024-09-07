@@ -39,6 +39,14 @@ public class SocialuniThirdTokenUtil {
         SocialuniThirdTokenDO socialuniThirdTokenDO = socialuniThirdTokenRepository.findFirstByDevIdAndUserId(devId, userId);
         return socialuniThirdTokenDO;
     }
+
+
+    public static SocialuniThirdTokenDO updateUserToken(Long userId, String token, Integer devId, String uuid) {
+        SocialuniThirdTokenDO socialuniThirdTokenDO = createdThirdTokenOrGet(userId, token, devId, uuid);
+        socialuniThirdTokenDO.setToken(token);
+        socialuniThirdTokenRepository.savePut(socialuniThirdTokenDO);
+        return socialuniThirdTokenDO;
+    }
     //如果不存在则注册用户
 
 }

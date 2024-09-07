@@ -11,7 +11,9 @@ import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.tance.dev.util.SocialuniThirdTokenUtil;
 import com.socialuni.social.user.sdk.api.user.SocialuniLoginAPI;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniTokenDO;
 import com.socialuni.social.user.sdk.dao.utils.SocialuniUserExtendFriendLogDOUtil;
+import com.socialuni.social.user.sdk.logic.manage.SocialuniTokenManage;
 import com.socialuni.social.user.sdk.logic.service.SocialuniLoginService;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.QO.*;
@@ -27,6 +29,10 @@ import javax.transaction.Transactional;
 @Service
 @Slf4j
 public class SocialuniDetailLoginService {
+
+    @Resource
+    SocialuniTokenManage tokenManage;
+
     @Resource
     SocialuniLoginService socialuniLoginService;
 
@@ -150,6 +156,27 @@ public class SocialuniDetailLoginService {
 
         //生成用户扩列记录
         SocialuniUserExtendFriendLogDOUtil.createUserExtendFriendLog();
+
+        return ResultRO.success(socialLoginRO);
+    }
+
+    public ResultRO<SocialLoginRO<SocialuniUserRO>> refreshToken() {
+        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
+        Long mineUserId = mineUser.getUserId();
+        SocialuniTokenDO socialUserTokenDO = tokenManage.create(mineUser.getUnionId());
+        if (SocialuniDevConfig.hasCenterServer()) {
+            ResultRO<SocialLoginRO<SocialuniUserRO>> resultRO = socialuniLoginAPI.refreshToken();
+            SocialuniUserRO socialuniUserRO = resultRO.getData().getUser();
+            String token = resultRO.getData().getToken();
+            Integer serverDevId = DevAccountFacade.getCenterDevIdNotNull();
+            SocialuniThirdTokenUtil.updateUserToken(mineUserId, token, serverDevId, socialuniUserRO.getId());
+        }
+
+        SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getUserNotNull(mineUserId);
+
+        SocialuniMineUserDetailRO socialuniMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(socialuniUserDo);
+
+        SocialLoginRO<SocialuniUserRO> socialLoginRO = new SocialLoginRO(socialUserTokenDO.getToken(), socialuniMineUserDetailRO);
 
         return ResultRO.success(socialLoginRO);
     }

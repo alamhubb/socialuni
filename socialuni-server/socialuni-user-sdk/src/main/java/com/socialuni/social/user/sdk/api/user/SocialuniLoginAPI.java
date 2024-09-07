@@ -2,8 +2,11 @@ package com.socialuni.social.user.sdk.api.user;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
+import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
+import com.socialuni.social.user.sdk.dao.DO.SocialuniTokenDO;
 import com.socialuni.social.user.sdk.model.QO.*;
 import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
+import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,4 +37,7 @@ public interface SocialuniLoginAPI {
 
     @PostMapping("deviceUidLogin")
     ResultRO<SocialLoginRO<SocialuniUserRO>> deviceUidLogin(@RequestBody @Valid SocialuniDeviceUidLoginQO socialuniDeviceUidLoginQO);
+
+    @PostMapping("refreshToken")
+    ResultRO<SocialLoginRO<SocialuniUserRO>> refreshToken();
 }

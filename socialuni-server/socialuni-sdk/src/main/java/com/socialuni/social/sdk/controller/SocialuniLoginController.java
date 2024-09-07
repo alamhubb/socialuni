@@ -2,9 +2,9 @@ package com.socialuni.social.sdk.controller;
 
 import com.socialuni.social.app.logic.service.SocialuniDetailLoginService;
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.app.model.SocialuniMineUserDetailRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.tance.dev.api.SocialuniNoUseFeignAspect;
+import com.socialuni.social.tance.dev.config.SocialuniDevConfig;
 import com.socialuni.social.user.sdk.api.user.SocialuniLoginAPI;
 import com.socialuni.social.user.sdk.logic.manage.SocialuniTokenManage;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniTokenDO;
@@ -29,9 +29,6 @@ import javax.validation.Valid;
 public class SocialuniLoginController implements SocialuniLoginAPI {
     @Resource
     private SocialuniDetailLoginService centerLoginService;
-    @Resource
-    SocialuniTokenManage tokenManage;
-
     //三方渠道登录，qq、wx、社交联盟，兼容各平台，h5、app、mp
     @Override
     public ResultRO<SocialLoginRO<SocialuniUserRO>> providerLogin(@RequestBody @Valid SocialProviderLoginQO loginData) {
@@ -67,10 +64,9 @@ public class SocialuniLoginController implements SocialuniLoginAPI {
      * @return
      */
     @PostMapping("refreshToken")
-    public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> refreshToken() {
-        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
-        SocialuniTokenDO socialUserTokenDO = tokenManage.create(mineUser.getUnionId());
-        return ResultRO.success(new SocialLoginRO(socialUserTokenDO.getToken(), null));
+    @SocialuniNoUseFeignAspect
+    public ResultRO<SocialLoginRO<SocialuniUserRO>> refreshToken() {
+        return centerLoginService.refreshToken();
     }
 
 }
