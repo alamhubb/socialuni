@@ -30,13 +30,4 @@ export default class LoginAPI {
     static deviceUidLoginAPI(deviceUid: string) {
         return socialuniUserRequest.post<SocialLoginRO<SocialuniUserRO>>('socialuni/login/deviceUidLogin', {deviceUid})
     }
-
-
-    /**
-     * 刷新token
-     * @param loginData
-     */
-    static refreshToken() {
-        return socialuniUserRequest.post<SocialLoginRO<SocialuniUserRO>>('socialuni/login/refreshToken', {});
-    }
 }

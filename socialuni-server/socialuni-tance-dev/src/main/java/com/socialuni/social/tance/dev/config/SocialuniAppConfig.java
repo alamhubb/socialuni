@@ -2,6 +2,7 @@ package com.socialuni.social.tance.dev.config;
 
 import com.socialuni.social.common.api.model.SocialuniAppConfigBO;
 import com.socialuni.social.common.api.model.SocialuniAppMoreConfigBO;
+import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.socialuni.social.tance.dev.service.SocialuniAppConfigInfoInterface;
 import org.springframework.stereotype.Component;
 
@@ -36,7 +37,8 @@ public class SocialuniAppConfig {
      * @return
      */
     public static SocialuniAppConfigBO getAppConfig() {
-        SocialuniAppConfigBO appConfig = socialuniAppConfigInfoInterface.getAppConfig();
+        Integer devId = DevAccountFacade.getDevIdNullElseCenterDevId();
+        SocialuniAppConfigBO appConfig = socialuniAppConfigInfoInterface.getAppConfig(devId);
         return appConfig;
     }
 
@@ -44,7 +46,8 @@ public class SocialuniAppConfig {
      * @return
      */
     public static SocialuniAppMoreConfigBO getAppMoreConfig() {
-        SocialuniAppMoreConfigBO appConfig = socialuniAppConfigInfoInterface.getAppMoreConfig();
+        Integer devId = DevAccountFacade.getDevIdNullElseCenterDevId();
+        SocialuniAppMoreConfigBO appConfig = socialuniAppConfigInfoInterface.getAppMoreConfig(devId);
         return appConfig;
 //        ConfigInterface configApi = SpringUtil.getBean(ConfigInterface.class);
 //

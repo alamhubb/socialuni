@@ -1,12 +1,15 @@
 package com.socialuni.social.tance.dev.config;
 
+import com.socialuni.social.tance.dev.dao.DO.DevAccountDo;
 import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
+@Slf4j
 public class SocialuniDevConfig {
     @Getter
     private static String systemUserPhoneNum;
@@ -44,12 +47,26 @@ public class SocialuniDevConfig {
 
     //是否配置了中心服务器
     public static boolean hasCenterServer() {
-        Integer devId = DevAccountFacade.getDevIdNullElseCenterDevId();
-
-        Integer systemDevId = DevAccountFacade.getSystemDevAccountDevId();
         //秘钥不为空
         //且devid为系统id，才可以起调用中心，后面注释掉这个规则，其实就应该是判断秘钥是否为空
-        return StringUtils.isNotBlank(getDevSecretKey());
+        if (StringUtils.isEmpty(getDevSecretKey())) {
+            return false;
+        }
+        Integer devId = DevAccountFacade.getDevIdNullElseCenterDevId();
+        Integer systemDevId = DevAccountFacade.systemDevId;
+        Boolean hasCenter = devId.equals(systemDevId);
+        if (!hasCenter) {
+            String curKey = DataSourceContext.getCurrentDataSource();
+            DevAccountDo systemDev = DevAccountFacade.getDevAccount(1);
+            log.info("curKey center:{}", curKey);
+            log.info("xitong key:{}", systemDev.getSecretKey());
+        } else {
+            String curKey = DataSourceContext.getCurrentDataSource();
+            DevAccountDo systemDev = DevAccountFacade.getDevAccount(1);
+            log.info("curKey dev:{}", curKey);
+            log.info("xitong key:{}", systemDev.getSecretKey());
+        }
+        return devId.equals(systemDevId);
     }
 
     public static boolean serverIsCenter() {

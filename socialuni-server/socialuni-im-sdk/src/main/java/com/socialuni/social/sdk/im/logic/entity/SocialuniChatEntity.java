@@ -3,6 +3,7 @@ package com.socialuni.social.sdk.im.logic.entity;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.common.api.model.SocialuniAppConfigBO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.im.api.feign.SocialuniChatAPI;
 import com.socialuni.social.im.api.model.QO.SocialuniChatCreateQO;
@@ -66,7 +67,8 @@ public class SocialuniChatEntity {
 
         //判断用户是否加入了默认的聊天群
 
-        List<String> groups = SocialuniAppConfig.getAppConfig().getDefaultChatGroups();
+        SocialuniAppConfigBO socialuniAppConfigBO = SocialuniAppConfig.getAppConfig();
+        List<String> groups = socialuniAppConfigBO.getDefaultChatGroups();
 
         //什么时候创建这个默认群呢
         //启动的时候

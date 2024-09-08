@@ -5,11 +5,7 @@ import com.socialuni.social.common.api.model.SocialuniAppConfigBO;
 import com.socialuni.social.common.api.model.SocialuniAppMoreConfigBO;
 
 public interface SocialuniAppConfigInfoInterface {
-    default SocialuniAppConfigBO getAppConfig() {
-        return new SocialuniAppConfigBO();
-    }
+    SocialuniAppConfigBO getAppConfig(Integer devId);
 
-    default SocialuniAppMoreConfigBO getAppMoreConfig() {
-        return new SocialuniAppMoreConfigBO();
-    }
+    SocialuniAppMoreConfigBO getAppMoreConfig(Integer devId);
 }

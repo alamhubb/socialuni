@@ -15,10 +15,12 @@ public class SocialuniAppConfigInfoServiceImpl implements SocialuniAppConfigInfo
     @Resource
     private SocialuniAppConfigRedis socialuniAppConfigRedis;
 
+    @Override
     public SocialuniAppConfigBO getAppConfig(Integer devId) {
         return socialuniAppConfigRedis.getAppConfig(devId);
     }
 
+    @Override
     public SocialuniAppMoreConfigBO getAppMoreConfig(Integer devId) {
         return socialuniAppConfigRedis.getAppConfigMore(devId);
     }

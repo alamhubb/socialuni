@@ -66,7 +66,7 @@ class SocialuniAppUserModule {
             SocialuniMineUserAPI.refreshToken().then((res: any) => {
                 socialuniUserModule.setUserAndToken(res.data)
             }),
-            PhoneAPI.getMineUserPhoneNumAPI().then((res: any) => {
+            /*PhoneAPI.getMineUserPhoneNumAPI().then((res: any) => {
                 socialuniAppUserModule.setMineUserPhoneNum(res.data)
             }),
             SocialUserIdentityAPI.getMineUserIdentityStatusAPI(),
@@ -84,7 +84,7 @@ class SocialuniAppUserModule {
             }),
             NotifyAPI.queryUnreadNotifiesAPI().then(res => {
                 socialuniChatModule.unreadNotify = res.data
-            })
+            })*/
         ])
     }
 

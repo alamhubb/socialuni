@@ -7,6 +7,7 @@ import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.tance.dev.api.DevAccountInterface;
 import com.socialuni.social.tance.dev.api.DevAccountProviderInterface;
 import com.socialuni.social.tance.dev.api.DevAccountRedisInterface;
+import com.socialuni.social.tance.dev.config.DataSourceContext;
 import com.socialuni.social.tance.dev.constant.AdminAppConfigConst;
 import com.socialuni.social.tance.dev.dao.DO.DevAccountDo;
 import com.socialuni.social.tance.dev.enumeration.SocialFeignHeaderName;
@@ -14,6 +15,7 @@ import com.socialuni.social.tance.dev.model.DevAccountProviderModler;
 import com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo;
 import com.socialuni.social.tance.dev.config.SocialuniDevConfig;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,6 +24,7 @@ import javax.annotation.Resource;
 import java.util.Objects;
 
 @Component
+@Slf4j
 public class DevAccountFacade {
     //前端传入使用
 //    public static final String devAccountKey = "devAccount";
@@ -150,7 +153,7 @@ public class DevAccountFacade {
         return centerDevAccount.getId();
     }
 
-    public static Long getSysDevUserId(){
+    public static Long getSysDevUserId() {
         return DevAccountFacade.getSystemDevAccount().getUserId();
     }
 
@@ -166,9 +169,15 @@ public class DevAccountFacade {
         return devAccountProviderModler;
     }
 
+    public static String getSocialuniSecretKey() {
+        String secretKey = RequestUtil.getRequestValue(SocialFeignHeaderName.socialuniSecretKey);
+        log.info("miyaokey:{}", secretKey);
+        return secretKey;
+    }
+
     public static DevAccountDo getDevAccountAllowNull() {
         //先从req中获取
-        String secretKey = RequestUtil.getRequestValue(SocialFeignHeaderName.socialuniSecretKey);
+        String secretKey = getSocialuniSecretKey();
         if (StringUtils.isEmpty(secretKey)) {
             return null;
         }

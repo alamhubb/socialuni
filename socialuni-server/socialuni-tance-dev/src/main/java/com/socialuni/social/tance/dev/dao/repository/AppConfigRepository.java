@@ -21,6 +21,7 @@ public interface AppConfigRepository extends JpaRepository<AppConfigDO, Integer>
     public static final Integer DEFAULT_DEV_KEY = 0;
 
     @Cacheable(value = "getDevAppConfigs", key = "#devId")
+    @Query("select s.id from AppConfigDO s where s.devId = :devId and s.status =:status")
     List<Integer> findAllByDevIdAndStatusOrderByCreateTimeDesc(Integer devId, Integer status);
 
 
