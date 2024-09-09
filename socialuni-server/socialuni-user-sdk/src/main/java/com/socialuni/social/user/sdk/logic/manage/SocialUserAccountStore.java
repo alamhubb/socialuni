@@ -1,8 +1,7 @@
 package com.socialuni.social.user.sdk.logic.manage;
 
 import com.socialuni.social.common.api.constant.PlatformType;
-import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import com.socialuni.social.common.api.utils.RequestUtil;
+import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
 import com.socialuni.social.user.sdk.constant.SocialuniAccountProviderType;
 import com.socialuni.social.common.sdk.dao.DO.SocialUserPlatformAccountDO;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
@@ -25,7 +24,7 @@ public class SocialUserAccountStore {
         String unionId = uniUnionIdRO.getUnionid();
         String platform = loginQO.getPlatform();
         if (platform == null) {
-            platform = RequestUtil.getPlatform();
+            platform = SocialuniRequestUtil.getPlatform();
         }
         SocialUserPlatformAccountDO socialUserAccountDO = null;
         //unionId不为null才查询

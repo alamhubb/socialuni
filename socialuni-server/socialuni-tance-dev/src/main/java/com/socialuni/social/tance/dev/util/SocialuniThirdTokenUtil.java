@@ -1,6 +1,6 @@
 package com.socialuni.social.tance.dev.util;
 
-import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
 import com.socialuni.social.common.api.utils.NumberUtils;
 import com.socialuni.social.tance.dev.dao.repository.SocialuniThirdTokenRepository;
 import com.socialuni.social.tance.dev.dao.DO.SocialuniThirdTokenDO;

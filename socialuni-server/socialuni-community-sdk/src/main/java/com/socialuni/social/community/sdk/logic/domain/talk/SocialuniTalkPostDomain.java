@@ -1,7 +1,7 @@
 package com.socialuni.social.community.sdk.logic.domain.talk;
 
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
-import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
 import com.socialuni.social.community.sdk.model.TalkAddValidateRO;
 import com.socialuni.social.community.sdk.repository.TalkRepository;

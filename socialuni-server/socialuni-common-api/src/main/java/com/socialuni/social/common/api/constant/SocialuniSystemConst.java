@@ -1,6 +1,6 @@
 package com.socialuni.social.common.api.constant;
 
-import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;

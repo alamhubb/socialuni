@@ -2,7 +2,7 @@ package com.socialuni.social.community.sdk.logic.domain.talk;
 
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
-import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
 import com.socialuni.social.common.sdk.constant.TalkOperateType;
 import com.socialuni.social.community.sdk.dao.repository.SocialTalkCircleRepository;
 import com.socialuni.social.community.sdk.logic.service.tag.TagService;

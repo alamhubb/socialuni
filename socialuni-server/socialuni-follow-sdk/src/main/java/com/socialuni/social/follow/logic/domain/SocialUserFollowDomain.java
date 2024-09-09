@@ -8,7 +8,7 @@ import com.socialuni.social.follow.logic.manage.SocialUserFansDetailManage;
 import com.socialuni.social.follow.dao.redis.SocialuniUserFollowRedis;
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.follow.dao.DO.SocialuniUserFollowDO;
-import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
 import com.socialuni.social.follow.model.follow.SocialuniUserFollowAddQO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Service;

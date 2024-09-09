@@ -1,6 +1,6 @@
 package com.socialuni.social.common.api.utils;
 
-import com.socialuni.social.common.api.constant.SocialWebHeaderName;
+import com.qingchi.qing.constant.SocialWebHeaderName;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -10,7 +10,7 @@ import java.net.UnknownHostException;
 
 public class IpUtil {
     public static String getIpAddr() {
-        HttpServletRequest request = RequestUtil.getRequest();
+        HttpServletRequest request = SocialuniRequestUtil.getRequest();
         return IpUtil.getIpAddr(request);
     }
 
@@ -20,7 +20,7 @@ public class IpUtil {
         if (os.toLowerCase().startsWith("win")) {  //如果是Windows系统
             ipAddress = "123.119.137.133";
         } else {
-            ipAddress = RequestUtil.getHeader(SocialWebHeaderName.requestIpHeaderName);
+            ipAddress = SocialuniRequestUtil.getHeader(SocialWebHeaderName.requestIpHeaderName);
             if (StringUtils.isEmpty(ipAddress)) {
                 try {
                     ipAddress = request.getHeader("x-forwarded-for");

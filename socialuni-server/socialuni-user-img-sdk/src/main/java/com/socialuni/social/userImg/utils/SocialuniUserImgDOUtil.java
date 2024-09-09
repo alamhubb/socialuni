@@ -1,6 +1,6 @@
 package com.socialuni.social.userImg.utils;
 
-import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
 import com.socialuni.social.common.api.enumeration.ContentStatus;
 import com.socialuni.social.userImg.dao.DO.SocialuniUserImgDo;
 import com.socialuni.social.userImg.dao.repository.SocialuniUserImgRepository;

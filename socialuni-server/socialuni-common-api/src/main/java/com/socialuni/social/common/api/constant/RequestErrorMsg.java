@@ -2,7 +2,7 @@ package com.socialuni.social.common.api.constant;
 
 
 
-import com.socialuni.social.common.api.utils.RequestUtil;
+import com.socialuni.social.common.api.utils.SocialuniRequestUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -17,7 +17,7 @@ public class RequestErrorMsg {
     }
 
     public static String getAccount(String errMsg) {
-        HttpServletRequest request = RequestUtil.getRequest();
+        HttpServletRequest request = SocialuniRequestUtil.getRequest();
         if(request != null){
             Map<String, Object> allConfigsOfMap = (Map<String, Object>) request.getAttribute(SocialSystemConst.CONFIGS_REQUEST_NAME);
             if(allConfigsOfMap == null) return  null;

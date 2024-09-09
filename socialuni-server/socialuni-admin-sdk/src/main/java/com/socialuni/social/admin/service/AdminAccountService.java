@@ -5,7 +5,7 @@ import com.socialuni.social.admin.controller.DevAccountUpdateQO;
 import com.socialuni.social.admin.facede.AdminDevAccountFacade;
 import com.socialuni.social.common.api.constant.PlatformType;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
-import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.utils.UUIDUtil;
 import com.socialuni.social.tag.dao.DO.SocialuniTagDO;

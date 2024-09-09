@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.im.constant;
 
 import com.socialuni.social.common.api.constant.PlatformType;
 import com.socialuni.social.common.api.constant.SystemType;
-import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
 
 /**
  * @author qinkaiyuan

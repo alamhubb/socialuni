@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.im.utils;
 
-import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniChatUserRepository;
 import org.springframework.stereotype.Component;

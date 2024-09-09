@@ -1,7 +1,7 @@
 package com.socialuni.social.common.api.exception.exception;
 
-import com.socialuni.social.common.api.constant.ErrorCode;
-import com.socialuni.social.common.api.exception.base.SocialWarnException;
+import com.qingchi.qing.common.exception.base.ErrorCode;
+import com.qingchi.qing.common.exception.base.SocialWarnException;
 
 //逻辑可能有问题，或者被突破，预见了但不应该
 public class SocialIpLimitException extends SocialWarnException {

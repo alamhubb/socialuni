@@ -2,7 +2,7 @@ package com.socialuni.social.likee.logic.domain;
 
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
-import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.user.SocialuniUserIdQO;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.likee.dao.DO.SocialuniUserLikeDO;

@@ -1,43 +1,19 @@
 package com.socialuni.social.admin.service;
 
-import com.socialuni.social.admin.constant.AdminAuditResultType;
 import com.socialuni.social.admin.model.ReportRO;
-import com.socialuni.social.common.api.constant.SocialuniContentType;
-import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
-import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.common.sdk.constant.ReportSourceType;
-import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
-import com.socialuni.social.report.sdk.entity.ReportDO;
-import com.socialuni.social.report.sdk.entity.ReportDetailDO;
-import com.socialuni.social.content.constant.ReportStatus;
 import com.socialuni.social.report.sdk.dao.repository.ReportDetailRepository;
 import com.socialuni.social.report.sdk.dao.repository.ReportRepository;
-import com.socialuni.social.common.api.enumeration.ContentStatus;
-import com.socialuni.social.sdk.constant.socialuni.SocialuniAuditContentType;
-import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkHasUnderageImgAuditDO;
 import com.socialuni.social.common.sdk.dao.repository.NotifyRepository;
 import com.socialuni.social.community.sdk.repository.TalkAdultImgAuditRepository;
-import com.socialuni.social.report.sdk.utils.SocialuniContentDOUtil;
-import com.socialuni.social.community.sdk.dao.SocialuniTalkDOUtil;
-import com.socialuni.social.report.sdk.facotry.ReportFactory;
 import com.socialuni.social.content.logic.service.KeywordsService;
-import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo;
-import com.socialuni.social.common.sdk.dao.DO.NotifyDO;
-import com.socialuni.social.content.dao.DO.KeywordsDO;
-import com.socialuni.social.content.dao.DO.KeywordsTriggerDetailDO;
 import com.socialuni.social.content.dao.repository.KeywordsRepository;
 import com.socialuni.social.content.dao.repository.KeywordsTriggerDetailRepository;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AdminReportService {

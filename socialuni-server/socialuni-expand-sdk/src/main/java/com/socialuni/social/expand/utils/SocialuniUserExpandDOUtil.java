@@ -1,6 +1,6 @@
 package com.socialuni.social.expand.utils;
 
-import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
 import com.socialuni.social.expand.dao.DO.SocialuniUserExpandDo;
 import com.socialuni.social.expand.dao.repository.SocialuniUserExpandRepository;
 import lombok.extern.slf4j.Slf4j;

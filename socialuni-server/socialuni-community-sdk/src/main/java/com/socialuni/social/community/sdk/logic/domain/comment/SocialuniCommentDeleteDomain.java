@@ -1,6 +1,6 @@
 package com.socialuni.social.community.sdk.logic.domain.comment;
 
-import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniCommentDO;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;

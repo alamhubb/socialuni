@@ -3,10 +3,9 @@ package com.socialuni.social.recharge.logic.domain;
 import com.socialuni.social.common.api.constant.DateTimeType;
 import com.socialuni.social.common.api.constant.PlatformType;
 import com.socialuni.social.common.api.constant.SystemType;
-import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.common.api.utils.IpUtil;
-import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.common.api.utils.UUIDUtil;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.recharge.constant.SocialuniCoinOrderType;
@@ -111,9 +110,9 @@ public class SocialuniPayCoinDomain {
 
             SocialuniPayCoinOrderDO rechargeOrder = new SocialuniPayCoinOrderDO();
 
-            rechargeOrder.setPlatform(RequestUtil.getPlatform());
-            rechargeOrder.setUseSystem(RequestUtil.getSystem());
-            rechargeOrder.setProvider(RequestUtil.getProvider());
+            rechargeOrder.setPlatform(SocialuniRequestUtil.getPlatform());
+            rechargeOrder.setUseSystem(SocialuniRequestUtil.getSystem());
+            rechargeOrder.setProvider(SocialuniRequestUtil.getProvider());
             rechargeOrder.setUserId(user.getUserId());
             rechargeOrder.setStatus(SocialuniPayStatus.waitPay);
             rechargeOrder.setPayType(payType);

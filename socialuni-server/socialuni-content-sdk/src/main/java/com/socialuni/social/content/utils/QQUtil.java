@@ -16,7 +16,7 @@ import com.socialuni.social.common.sdk.platform.weixin.token.WxTokenResult;
 import com.socialuni.social.common.api.constant.DateTimeType;
 import com.socialuni.social.common.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
-import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
 import com.thoughtworks.xstream.XStream;
 import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnails;

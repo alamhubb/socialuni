@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.im.logic.service;
 
 import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
-import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;

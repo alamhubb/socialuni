@@ -1,8 +1,8 @@
 package com.socialuni.social.common.api.exception.exception;
 
-import com.socialuni.social.common.api.constant.ErrorCode;
+import com.qingchi.qing.common.exception.base.ErrorCode;
 import com.socialuni.social.common.api.constant.RequestErrorMsg;
-import com.socialuni.social.common.api.exception.base.SocialErrorException;
+import com.qingchi.qing.common.exception.base.SocialErrorException;
 
 //正常逻辑不会出现，想不到什么情况会出现，就是系统异常, 必须要解决，解决不了就是被攻击的问题。
 public class SocialSystemException extends SocialErrorException {

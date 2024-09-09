@@ -3,7 +3,6 @@ package com.socialuni.social.sdk.config.config;
 import com.socialuni.social.common.api.config.SocialRequestUserConfig;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
-import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.sdk.dao.repository.UniOutRegisterUserRepository;
 import com.socialuni.social.tance.dev.config.SocialuniDevConfig;
 import com.socialuni.social.tance.dev.dao.DO.SocialuniThirdTokenDO;
@@ -51,7 +50,7 @@ public class FeignInterceptor implements RequestInterceptor {
         socialProviderLoginQO.setBirthday(mineUser.getBirthday());
         socialProviderLoginQO.setCity(mineUser.getCity());
         socialProviderLoginQO.setUserType(mineUser.getType());
-        socialProviderLoginQO.setProvider(RequestUtil.getProvider());
+        socialProviderLoginQO.setProvider(SocialuniRequestUtil.getProvider());
 //                    socialProviderLoginQO.setPlatform(RequestUtil.getPlatform());
 //                    socialProviderLoginQO.setSystem(RequestUtil.getSystem());
         socialProviderLoginQO.setPhoneNum(phoneNum);
@@ -66,7 +65,7 @@ public class FeignInterceptor implements RequestInterceptor {
         String postUrl = requestTemplate.path();
 
         //还是要加一个联盟账户渠道
-        String token = RequestUtil.getRequestValue(SocialuniWebConfig.getTokenName());
+        String token = SocialuniRequestUtil.getRequestValue(SocialuniWebConfig.getTokenName());
         String token1 = socialRequestUserConfig.getToken();
         Long userId = socialRequestUserConfig.getUserId();
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();

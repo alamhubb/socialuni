@@ -1,7 +1,7 @@
 package com.socialuni.social.likee.logic.service;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserIdQO;
 import com.socialuni.social.common.sdk.constant.UserType;

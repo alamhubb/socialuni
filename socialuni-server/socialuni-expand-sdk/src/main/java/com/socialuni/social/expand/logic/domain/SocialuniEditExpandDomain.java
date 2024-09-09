@@ -1,6 +1,6 @@
 package com.socialuni.social.expand.logic.domain;
 
-import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
 import com.socialuni.social.expand.logic.check.SocialuniSchoolCheck;
 import com.socialuni.social.expand.model.SocialuniUserExpandDetailEditRO;
 import com.socialuni.social.expand.utils.SocialuniUserExpandDOUtil;

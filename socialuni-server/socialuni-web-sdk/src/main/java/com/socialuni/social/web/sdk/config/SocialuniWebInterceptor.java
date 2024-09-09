@@ -2,10 +2,10 @@ package com.socialuni.social.web.sdk.config;
 
 
 import com.socialuni.social.common.api.config.SocialRequestUserConfig;
-import com.socialuni.social.common.api.constant.ErrorType;
+import com.qingchi.qing.common.exception.base.QingExceptionErrorType;
 import com.socialuni.social.common.api.utils.IpUtil;
-import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.common.api.dao.DO.RequestLogDO;
+import com.socialuni.social.common.api.utils.SocialuniRequestUtil;
 import com.socialuni.social.common.sdk.utils.RequestLogUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -42,12 +42,12 @@ public class SocialuniWebInterceptor implements HandlerInterceptor {
         requestLogDO.setIp(userIp);
         requestLogDO.setCreateTime(startTime);
         requestLogDO.setSuccess(true);
-        requestLogDO.setErrorType(ErrorType.success);
+        requestLogDO.setErrorType(QingExceptionErrorType.success);
         requestLogDO.setRequestMethod(requestMethod);
-        requestLogDO.setSystemInfo(RequestUtil.getSystem());
-        requestLogDO.setProvider(RequestUtil.getProvider());
-        requestLogDO.setPlatform(RequestUtil.getPlatform());
-        requestLogDO.setDeviceUid(RequestUtil.getDeviceUid());
+        requestLogDO.setSystemInfo(SocialuniRequestUtil.getSystem());
+        requestLogDO.setProvider(SocialuniRequestUtil.getProvider());
+        requestLogDO.setPlatform(SocialuniRequestUtil.getPlatform());
+        requestLogDO.setDeviceUid(SocialuniRequestUtil.getDeviceUid());
         requestLogDO.setUri(uri);
         RequestLogUtil.set(requestLogDO);
 

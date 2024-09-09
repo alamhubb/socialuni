@@ -5,7 +5,6 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.sdk.im.constant.OpenImPlatformType;
 import com.socialuni.social.sdk.im.model.ImInterface;
 import lombok.extern.slf4j.Slf4j;
@@ -108,7 +107,7 @@ public class ImHttpComponent {
      */
     public void fillRequestBody(JSONObject jsonObject) {
         // 请求的平台。
-        jsonObject.set("platform", OpenImPlatformType.getOpenImPlatformType(RequestUtil.getPlatform(), RequestUtil.getSystem()));
+        jsonObject.set("platform", OpenImPlatformType.getOpenImPlatformType(SocialuniRequestUtil.getPlatform(), SocialuniRequestUtil.getSystem()));
         // 秘钥。
         jsonObject.set("secret", secret);
         // 操作码。

@@ -1,6 +1,5 @@
 package com.socialuni.social.sdk.utils;
 
-import com.socialuni.social.common.api.utils.RequestUtil;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,9 +19,9 @@ public class SocialHeaderUtil {
         if (platform != null) {
             return platform;
         }
-        platform = RequestUtil.getHeader(SocialHeaderUtil.platformKey);
+        platform = SocialuniRequestUtil.getHeader(SocialHeaderUtil.platformKey);
         if (platform != null) {
-            HttpServletRequest request = RequestUtil.getRequest();
+            HttpServletRequest request = SocialuniRequestUtil.getRequest();
             request.setAttribute(SocialHeaderUtil.platformKey, platform);
             return platform;
         }
@@ -31,7 +30,7 @@ public class SocialHeaderUtil {
 
     public static String getPlatformByReq() {
         //先从req中获取
-        HttpServletRequest request = RequestUtil.getRequest();
+        HttpServletRequest request = SocialuniRequestUtil.getRequest();
         return (String) request.getAttribute(SocialHeaderUtil.platformKey);
     }
 
@@ -40,9 +39,9 @@ public class SocialHeaderUtil {
         if (provider != null) {
             return provider;
         }
-        provider = RequestUtil.getHeader(SocialHeaderUtil.providerKey);
+        provider = SocialuniRequestUtil.getHeader(SocialHeaderUtil.providerKey);
         if (provider != null) {
-            HttpServletRequest request = RequestUtil.getRequest();
+            HttpServletRequest request = SocialuniRequestUtil.getRequest();
             request.setAttribute(SocialHeaderUtil.providerKey, provider);
             return provider;
         }
@@ -51,7 +50,7 @@ public class SocialHeaderUtil {
 
     public static String getProviderByReq() {
         //先从req中获取
-        HttpServletRequest request = RequestUtil.getRequest();
+        HttpServletRequest request = SocialuniRequestUtil.getRequest();
         return (String) request.getAttribute(SocialHeaderUtil.providerKey);
     }
 }

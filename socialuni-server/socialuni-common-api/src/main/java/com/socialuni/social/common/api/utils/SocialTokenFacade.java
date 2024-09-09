@@ -58,7 +58,7 @@ public class SocialTokenFacade {
     }
 
     public static String getSocialuniToken() {
-        HttpServletRequest request = RequestUtil.getRequest();
+        HttpServletRequest request = SocialuniRequestUtil.getRequest();
         String token = (String) request.getAttribute(socialuniTokenName);
         if (SocialTokenFacade.isSuccess(token)) {
             return token;
@@ -67,7 +67,7 @@ public class SocialTokenFacade {
     }
 
     public static void setSocialuniToken(String token) {
-        HttpServletRequest request = RequestUtil.getRequest();
+        HttpServletRequest request = SocialuniRequestUtil.getRequest();
         request.setAttribute(socialuniTokenName, token);
     }
 
@@ -112,6 +112,6 @@ public class SocialTokenFacade {
 
     public static Boolean isError(String token) {
         return StringUtils.isEmpty(token)
-                || RequestUtil.headerIsEmpty(token);
+                || SocialuniRequestUtil.headerIsEmpty(token);
     }
 }

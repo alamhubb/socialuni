@@ -1,7 +1,7 @@
 package com.socialuni.social.common.api.exception.exception;
 
-import com.socialuni.social.common.api.constant.ErrorCode;
-import com.socialuni.social.common.api.exception.base.SocialWarnException;
+import com.qingchi.qing.common.exception.base.ErrorCode;
+import com.qingchi.qing.common.exception.base.SocialWarnException;
 
 public class SocialNotLoginException extends SocialWarnException {
     //用户未登录访问了需要登录的接口

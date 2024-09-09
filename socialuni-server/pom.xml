@@ -87,6 +87,21 @@
         <dependencies>
             <dependency>
                 <groupId>com.qingchi.qing</groupId>
+                <artifactId>qing-base</artifactId>
+                <version>${qing.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.qingchi.qing</groupId>
+                <artifactId>qing-common</artifactId>
+                <version>${qing.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.qingchi.qing</groupId>
+                <artifactId>qing-util</artifactId>
+                <version>${qing.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.qingchi.qing</groupId>
                 <artifactId>qing-user</artifactId>
                 <version>${qing.version}</version>
             </dependency>

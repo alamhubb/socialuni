@@ -1,6 +1,6 @@
 package com.socialuni.social.community.sdk.logic.service.tag;
 
-import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
 import com.socialuni.social.common.sdk.constant.TalkOperateType;
 import com.socialuni.social.tag.dao.DO.SocialuniTagTypeDO;
 import com.socialuni.social.tag.dao.DO.SocialuniTagDO;

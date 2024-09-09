@@ -2,10 +2,6 @@ package com.socialuni.social.common.sdk.feignAPI;
 
 
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.common.api.utils.RequestUtil;
-import com.socialuni.social.common.api.utils.UUIDUtil;
-import com.socialuni.social.common.sdk.dao.DO.SocialuniDeviceDO;
-import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.common.sdk.model.RO.SocialuniTalkTabRO;
 import com.socialuni.social.common.sdk.model.SocialAppLaunchDataRO;
 import com.socialuni.social.common.sdk.model.SocialuniGetAppInitDataQO;

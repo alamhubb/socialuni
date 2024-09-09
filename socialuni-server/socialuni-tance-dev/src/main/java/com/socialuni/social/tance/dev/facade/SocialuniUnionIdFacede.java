@@ -1,7 +1,7 @@
 package com.socialuni.social.tance.dev.facade;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.common.api.utils.NumberUtils;
 import com.socialuni.social.common.api.utils.SnowflakeIdUtil;

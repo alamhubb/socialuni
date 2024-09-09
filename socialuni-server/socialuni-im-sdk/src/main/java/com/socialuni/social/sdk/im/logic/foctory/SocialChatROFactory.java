@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.im.logic.foctory;
 
 
 import com.socialuni.social.common.api.constant.SocialuniContentType;
-import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
 import com.socialuni.social.common.sdk.constant.LoadMoreType;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;

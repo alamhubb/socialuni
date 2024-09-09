@@ -1,8 +1,8 @@
 package com.socialuni.social.common.sdk.utils;
 
 
-import com.socialuni.social.common.api.constant.ErrorCode;
-import com.socialuni.social.common.api.constant.ErrorType;
+import com.qingchi.qing.common.exception.base.ErrorCode;
+import com.qingchi.qing.common.exception.base.QingExceptionErrorType;
 import com.socialuni.social.common.sdk.dao.store.ErrorRequestLogStore;
 import com.socialuni.social.common.api.dao.DO.ErrorRequestLogDO;
 import com.socialuni.social.common.api.dao.DO.RequestLogDO;
@@ -26,7 +26,7 @@ public class ErrorLogUtil {
     public static void save(ErrorRequestLogDO errorRequestLogDO) {
         errorRequestLogDO.setSuccess(false);
         errorRequestLogDO.setErrorCode(ErrorCode.SYSTEM_ERROR);
-        errorRequestLogDO.setErrorType(ErrorType.error);
+        errorRequestLogDO.setErrorType(QingExceptionErrorType.error);
         errorRequestLogDO.setEndTime(new Date());
         errorRequestLogStore.save(errorRequestLogDO);
     }
@@ -44,7 +44,7 @@ public class ErrorLogUtil {
 
         errorRequestLogDO.setSuccess(false);
         errorRequestLogDO.setErrorCode(ErrorCode.BUSINESS_ERROR);
-        errorRequestLogDO.setErrorType(ErrorType.error);
+        errorRequestLogDO.setErrorType(QingExceptionErrorType.error);
         errorRequestLogDO.setErrorMsg(errorMsg);
         errorRequestLogDO.setEndTime(new Date());
         errorRequestLogStore.saveAsync(errorRequestLogDO);

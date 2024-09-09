@@ -4,7 +4,7 @@ import com.socialuni.social.common.api.constant.DateTimeType;
 import com.socialuni.social.common.api.constant.SocialSystemConst;
 import com.socialuni.social.common.api.enumeration.ConstStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
-import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.utils.IpUtil;
 import com.socialuni.social.common.sdk.constant.ErrorMsg;

@@ -2,12 +2,11 @@ package com.socialuni.social.web.sdk.config;
 
 import com.socialuni.social.common.sdk.config.SocialWebControllerAdvice;
 import com.socialuni.social.common.sdk.event.WebControllerExceptionEvent;
-import com.socialuni.social.common.api.constant.ErrorCode;
+import com.qingchi.qing.common.exception.base.ErrorCode;
 import com.socialuni.social.common.api.constant.RequestErrorMsg;
-import com.socialuni.social.common.api.constant.ErrorType;
+import com.qingchi.qing.common.exception.base.QingExceptionErrorType;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.utils.IpUtil;
-import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.common.api.dao.DO.RequestLogDO;
 import com.socialuni.social.common.sdk.utils.ErrorLogUtil;
 import com.socialuni.social.common.sdk.utils.RequestLogUtil;
@@ -20,7 +19,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
 
 import javax.servlet.http.HttpServletRequest;
-import java.lang.annotation.Annotation;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -69,7 +67,7 @@ public class SocialWebLogAspect {
                     sb.append(", instanceof ResultRO ");
                 } else {
                     requestLogDO.setErrorCode(ErrorCode.SYSTEM_ERROR);
-                    requestLogDO.setErrorType(ErrorType.error);
+                    requestLogDO.setErrorType(QingExceptionErrorType.error);
                     requestLogDO.setErrorMsg(RequestErrorMsg.getSystemErrorMsg());
                     requestLogDO.setSuccess(false);
                     requestLogDO.setInnerMsg(RequestErrorMsg.getSystemErrorMsg());
@@ -101,7 +99,7 @@ public class SocialWebLogAspect {
 
         RequestLogDO requestLogDO = RequestLogUtil.get();
         if (requestLogDO == null) {
-            HttpServletRequest request = RequestUtil.getRequest();
+            HttpServletRequest request = SocialuniRequestUtil.getRequest();
             Date startTime = new Date();
             String uri = request.getRequestURI();
             String userIp = IpUtil.getIpAddr(request);
@@ -109,11 +107,11 @@ public class SocialWebLogAspect {
             requestLogDO.setIp(userIp);
             requestLogDO.setCreateTime(startTime);
             requestLogDO.setSuccess(true);
-            requestLogDO.setErrorType(ErrorType.success);
+            requestLogDO.setErrorType(QingExceptionErrorType.success);
             requestLogDO.setRequestMethod(request.getMethod());
-            requestLogDO.setSystemInfo(RequestUtil.getSystem());
-            requestLogDO.setProvider(RequestUtil.getProvider());
-            requestLogDO.setPlatform(RequestUtil.getPlatform());
+            requestLogDO.setSystemInfo(SocialuniRequestUtil.getSystem());
+            requestLogDO.setProvider(SocialuniRequestUtil.getProvider());
+            requestLogDO.setPlatform(SocialuniRequestUtil.getPlatform());
             requestLogDO.setUri(uri);
         }
         Date endDate = new Date();

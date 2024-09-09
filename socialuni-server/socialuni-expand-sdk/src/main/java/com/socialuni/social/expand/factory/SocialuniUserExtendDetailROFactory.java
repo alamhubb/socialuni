@@ -1,6 +1,6 @@
 package com.socialuni.social.expand.factory;
 
-import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.user.SocialuniUserExtendDetailRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserImgRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;

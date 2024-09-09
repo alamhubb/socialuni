@@ -1,7 +1,7 @@
 package com.socialuni.social.user.sdk.exception;
 
-import com.socialuni.social.common.api.constant.ErrorCode;
-import com.socialuni.social.common.api.exception.base.SocialInfoException;
+import com.qingchi.qing.common.exception.base.ErrorCode;
+import com.qingchi.qing.common.exception.base.SocialInfoException;
 import com.socialuni.social.user.sdk.utils.ErrorMsgUtil;
 
 public class SocialUserBannedException extends SocialInfoException {
