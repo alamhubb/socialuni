@@ -2,6 +2,7 @@ package com.socialuni.social.common.sdk.config;
 
 import cn.hutool.core.util.ClassUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.common.sdk.event.WebControllerExceptionEvent;
 import com.socialuni.social.common.api.constant.ErrorCode;
 import com.socialuni.social.common.api.constant.ErrorType;

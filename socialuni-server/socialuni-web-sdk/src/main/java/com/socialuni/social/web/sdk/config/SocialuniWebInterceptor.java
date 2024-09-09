@@ -5,6 +5,7 @@ import com.socialuni.social.common.api.config.SocialRequestUserConfig;
 import com.socialuni.social.common.api.constant.ErrorType;
 import com.socialuni.social.common.api.utils.IpUtil;
 import com.socialuni.social.common.api.dao.DO.RequestLogDO;
+import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.common.sdk.utils.RequestLogUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMethod;

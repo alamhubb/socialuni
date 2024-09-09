@@ -12,26 +12,18 @@ import lombok.NoArgsConstructor;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-public class SocialuniUserRO extends SocialuniContentIdRO {
-    private String nickname;
+public class SocialuniUserRO extends SocialuniUserConciseRO {
     //是否为当前用户
     private Boolean isMine;
-    private String avatar;
-    private String gender;
     private String type;
     //必须为string，返回给app后是uuid无法变为int
-    private Integer age;
     private String city;
     private String birthday;
 
     public SocialuniUserRO(SocialuniUserRO userRO) {
         super(userRO);
         this.isMine = userRO.getIsMine();
-        this.age = userRO.getAge();
         this.city = userRO.getCity();
-        this.nickname = userRO.getNickname();
-        this.avatar = userRO.getAvatar();
-        this.gender = userRO.getGender();
         this.type = userRO.getType();
         this.birthday = userRO.getBirthday();
     }

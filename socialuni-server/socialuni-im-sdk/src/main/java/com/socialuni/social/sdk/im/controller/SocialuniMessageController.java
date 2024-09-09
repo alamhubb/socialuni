@@ -10,6 +10,7 @@ import com.socialuni.social.sdk.im.dao.repository.SocialuniMessageReceiveReposit
 import com.socialuni.social.sdk.im.dao.repository.SocialuniMessageRepository;
 import com.socialuni.social.im.api.model.QO.MessageQueryVO;
 import com.socialuni.social.sdk.im.logic.service.SocialuniMessageService;
+import com.socialuni.social.tance.dev.api.SocialuniNoUseFeignAspect;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -35,6 +36,7 @@ public class SocialuniMessageController implements SocialuniMessageAPI {
     @Resource
     private SocialuniMessageService messageService;
 
+    @SocialuniNoUseFeignAspect
     @Override
     public ResultRO<SocialMessageRO> sendMsg(MessageAddVO messageAddVO) {
         return messageService.sendMsg(messageAddVO);

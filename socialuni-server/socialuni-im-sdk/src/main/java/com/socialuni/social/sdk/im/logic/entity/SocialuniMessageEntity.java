@@ -8,6 +8,7 @@ import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.common.sdk.dao.repository.NotifyRepository;
+import com.socialuni.social.im.api.feign.SocialuniCallbackAPI;
 import com.socialuni.social.im.api.model.RO.SocialMessageRO;
 import com.socialuni.social.recharge.logic.domain.SocialuniPayCoinDomain;
 import com.socialuni.social.recharge.logic.entity.SocialuniCreateCoinOrderEntity;
@@ -32,6 +33,7 @@ import com.socialuni.social.sdk.im.logic.foctory.SocialuniChatUserDOFactory;
 import com.socialuni.social.sdk.im.logic.foctory.SocialuniMessageDOFactory;
 import com.socialuni.social.sdk.im.notify.NotifyVO;
 import com.socialuni.social.sdk.im.utils.SocialuniChatDOUtil;
+import com.socialuni.social.tance.dev.config.SocialuniDevConfig;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserBlackDO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -227,6 +229,9 @@ public class SocialuniMessageEntity {
 //        return null;
     }
 
+    @Resource
+    SocialuniCallbackAPI socialuniCallbackAPI;
+
     @Async
     public void updateChatUsers(Long chatId, SocialuniUserDo sendUser, SocialuniMessageDO message) {
         List<Integer> chatUserIds = chatUserRepository.findChatUserIdsByChatIdAndStatus(chatId, ChatUserStatus.enable);
@@ -269,6 +274,13 @@ public class SocialuniMessageEntity {
             socialuniChatUserDOS.add(chatSocialuniUserDo);
         }
         socialuniChatUserRedis.saveAllPut(socialuniChatUserDOS);
+
+        if (SocialuniDevConfig.hasCenterServer()) {
+
+        } else {
+
+        }
+
         log.info(String.valueOf(new Date().getTime()));
     }
 

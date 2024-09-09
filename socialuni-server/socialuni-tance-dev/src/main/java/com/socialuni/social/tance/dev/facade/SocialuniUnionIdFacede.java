@@ -151,6 +151,19 @@ public class SocialuniUnionIdFacede {
         socialuniUnionIdApi.savePut(uniContentUnionIdDO);
     }
 
+    public static void updateUuidByUuidNotNull(String uid, String uuid) {
+        if (NumberUtils.strHasNoNumber(uid)) {
+            throw new SocialParamsException("唯一标识异常100357");
+        }
+        if (NumberUtils.strHasNoNumber(uuid)) {
+            throw new SocialParamsException("唯一标识异常100358");
+        }
+        SocialuniUnionIdDo uniContentUnionIdDO = getUnionByUuidNotNull(uid);
+        //没有写入
+        uniContentUnionIdDO.setUnionId(Long.valueOf(uuid));
+        socialuniUnionIdApi.savePut(uniContentUnionIdDO);
+    }
+
 
     /*public static String getUuidByUnionIdNotNull(String uuid) {
         if (NumberUtils.strHasNoNumber(uuid)) {
