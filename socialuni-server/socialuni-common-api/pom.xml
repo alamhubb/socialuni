@@ -21,6 +21,10 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.qingchi.qing</groupId>
+            <artifactId>qing-jpa</artifactId>
+        </dependency>
+        <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
             <version>0.9.1</version>
