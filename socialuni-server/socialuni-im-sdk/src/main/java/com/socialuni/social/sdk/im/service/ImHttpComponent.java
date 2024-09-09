@@ -5,7 +5,6 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.sdk.im.constant.OpenImPlatformType;
 import com.socialuni.social.sdk.im.model.ImInterface;
 import lombok.extern.slf4j.Slf4j;

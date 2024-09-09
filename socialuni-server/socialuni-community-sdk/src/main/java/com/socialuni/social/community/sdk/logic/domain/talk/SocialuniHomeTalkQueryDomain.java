@@ -7,7 +7,6 @@ import com.socialuni.social.common.api.exception.exception.SocialBusinessExcepti
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
-import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.common.sdk.constant.GenderTypeQueryVO;
 import com.socialuni.social.common.sdk.constant.GenderTypeVO;
 import com.socialuni.social.community.sdk.constant.TalkTabType;

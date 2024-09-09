@@ -2,7 +2,6 @@ package com.socialuni.social.common.api.constant;
 
 
 
-import com.socialuni.social.common.api.utils.RequestUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;

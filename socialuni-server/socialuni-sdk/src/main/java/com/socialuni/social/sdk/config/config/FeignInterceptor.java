@@ -3,7 +3,6 @@ package com.socialuni.social.sdk.config.config;
 import com.socialuni.social.common.api.config.SocialRequestUserConfig;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
-import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.sdk.dao.repository.UniOutRegisterUserRepository;
 import com.socialuni.social.tance.dev.config.SocialuniDevConfig;
 import com.socialuni.social.tance.dev.dao.DO.SocialuniThirdTokenDO;

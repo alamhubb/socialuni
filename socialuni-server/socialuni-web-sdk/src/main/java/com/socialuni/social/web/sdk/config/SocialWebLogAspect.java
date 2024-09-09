@@ -7,7 +7,6 @@ import com.socialuni.social.common.api.constant.RequestErrorMsg;
 import com.socialuni.social.common.api.constant.ErrorType;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.utils.IpUtil;
-import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.common.api.dao.DO.RequestLogDO;
 import com.socialuni.social.common.sdk.utils.ErrorLogUtil;
 import com.socialuni.social.common.sdk.utils.RequestLogUtil;
@@ -20,7 +19,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
 
 import javax.servlet.http.HttpServletRequest;
-import java.lang.annotation.Annotation;
 import java.util.Arrays;
 import java.util.Date;
 

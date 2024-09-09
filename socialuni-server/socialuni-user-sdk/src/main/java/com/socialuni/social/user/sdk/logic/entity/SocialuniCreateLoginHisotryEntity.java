@@ -1,6 +1,5 @@
 package com.socialuni.social.user.sdk.logic.entity;
 
-import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.user.sdk.dao.DO.SocialUserDeviceLoginHistoryDO;
 

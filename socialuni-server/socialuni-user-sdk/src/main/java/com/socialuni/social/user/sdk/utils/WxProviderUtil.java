@@ -3,7 +3,6 @@ package com.socialuni.social.user.sdk.utils;
 import com.socialuni.social.common.api.constant.PlatformType;
 import com.socialuni.social.common.api.exception.exception.UniSdkException;
 import com.socialuni.social.common.api.utils.JsonUtil;
-import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.common.sdk.constant.platform.WxUrl;
 import com.socialuni.social.content.utils.WxUtil;
 import com.socialuni.social.user.sdk.model.RO.UniUnionIdRO;
