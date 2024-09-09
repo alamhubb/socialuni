@@ -33,15 +33,9 @@ public class SocialuniContentUserROFactory {
     }
 
     public static SocialuniContentUserRO newContentUserRO(SocialuniUserDo user, SocialuniUserDo mineUser) {
-        SocialuniContentUserRO userRO = new SocialuniContentUserRO(SocialuniUserShowROFactory.getUserRO(user, mineUser));
+        SocialuniContentUserRO userRO = new SocialuniContentUserRO(SocialuniUserShowROFactory.getUserRO(user, mineUser.getUserId()));
 
         userRO.setIdentityAuth(false);
-
-        if (mineUser != null && user.getUnionId().equals(mineUser.getUnionId())) {
-            userRO.setIsMine(true);
-        } else {
-            userRO.setIsMine(false);
-        }
 
         Long mineUserId = Optional.ofNullable(mineUser)
                 .map(SocialuniUserDo::getUserId)

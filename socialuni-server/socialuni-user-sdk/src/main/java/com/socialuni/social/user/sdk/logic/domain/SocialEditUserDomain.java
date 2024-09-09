@@ -65,7 +65,7 @@ public class SocialEditUserDomain {
 
         mineUser = SocialuniUserDOUtil.checkAndSave(mineUser);
 
-        SocialuniUserShowRO socialuniUserRO = SocialuniUserShowROFactory.getUserRO(mineUser, mineUser);
+        SocialuniUserShowRO socialuniUserRO = SocialuniUserShowROFactory.getMineUserRO(mineUser);
         return socialuniUserRO;
     }
 

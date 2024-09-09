@@ -4,6 +4,8 @@ import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.SocialuniNotifyRO;
+import com.socialuni.social.common.api.utils.RequestUtil;
+import com.socialuni.social.common.api.utils.SocialTokenFacade;
 import com.socialuni.social.common.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
@@ -34,6 +36,7 @@ import com.socialuni.social.sdk.im.logic.foctory.SocialuniChatUserDOFactory;
 import com.socialuni.social.sdk.im.logic.foctory.SocialuniMessageDOFactory;
 import com.socialuni.social.sdk.im.utils.SocialuniChatDOUtil;
 import com.socialuni.social.sdk.im.utils.SocialuniChatUserDOUtil;
+import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserBlackDO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -45,6 +48,7 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
@@ -203,7 +207,21 @@ public class SocialuniMessageEntity {
 //            chat.setLastContent(content);
         chatRepository.savePut(chat);
 
+        log.info("sensafsafsdfdsmsg");
+        log.info("token:{}", SocialTokenFacade.getToken());
+        log.info("userId:{}", sendUser.getUserId());
+        log.info("kaishizhixing  gengxin chatusere22222");
+        log.info("token:{}", SocialTokenFacade.getToken());
+        log.info("getRequestValue:{}", RequestUtil.getRequestValue("token"));
+        log.info("uri:{}", Objects.requireNonNull(RequestUtil.getRequest()).getRequestURI());
+        log.info("getSocialuniSecretKey:{}", DevAccountFacade.getSocialuniSecretKey());
+        log.info("userId:{}", sendUser.getUserId());
+
         CompletableFuture.supplyAsync(() -> {
+            log.info("kaishizhixing  gengxin chatusere11111");
+            log.info("getSocialuniSecretKey:{}", DevAccountFacade.getSocialuniSecretKey());
+            //在于异步中 秘钥key已经丢失
+            log.info("userId:{}", sendUser.getUserId());
             this.updateChatUsers(chat, sendUser, message);
             return null;
         }).exceptionally(e -> {

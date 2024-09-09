@@ -52,6 +52,8 @@ public class SocialuniAppConfigRedis {
                     socialuniAppConfigBO.setDisableContentHasContactInfo(Boolean.valueOf(configValue));
                 } else if (configKey.equals(AppConfigDOKeyConst.mustSetSchoolCanPost)) {
                     socialuniAppConfigBO.setMustSetSchoolCanPost(Boolean.valueOf(configValue));
+                } else if (configKey.equals(AppConfigDOKeyConst.mustSetPhoneCanPost)) {
+                    socialuniAppConfigBO.setMustSetPhoneCanPost(Boolean.valueOf(configValue));
                 }
             }
         }

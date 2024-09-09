@@ -35,7 +35,7 @@ public class SocialuniUserExtendDetailROFactory {
 
     public static SocialuniUserExtendDetailRO getUserExtendDetailRO(SocialuniUserDo userDO, SocialuniUserDo mineUser) {
         //user基础信息
-        SocialuniUserShowRO socialuniUserRO = SocialuniUserShowROFactory.getUserRO(userDO, mineUser);
+        SocialuniUserShowRO socialuniUserRO = SocialuniUserShowROFactory.getUserRO(userDO, mineUser.getUserId());
 
         //user基础信息
         SocialuniUserExtendDetailRO socialuniUserExtendDetailRO = new SocialuniUserExtendDetailRO(socialuniUserRO);

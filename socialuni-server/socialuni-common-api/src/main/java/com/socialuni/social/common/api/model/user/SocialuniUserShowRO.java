@@ -12,7 +12,10 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 public class SocialuniUserShowRO extends SocialuniUserRO {
-    //是否为当前用户, 仅在后台使用，前台不该使用，因为后台返回时如果正确设置需要遍历，麻烦且没有必要。
+    //是否为当前用户, 仅在后台使用，
+    // 前台不该使用，因为后台返回时如果正确设置需要遍历，麻烦且没有必要。
+    //感觉没什么用，看看后端有什么使用场景，观察下，后台不使用则没用
+    @Deprecated
     private Boolean isMine;
     private String type;
     //必须为string，返回给app后是uuid无法变为int

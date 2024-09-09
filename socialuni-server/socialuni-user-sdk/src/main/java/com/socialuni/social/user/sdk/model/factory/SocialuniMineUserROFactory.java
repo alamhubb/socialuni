@@ -28,7 +28,7 @@ public class SocialuniMineUserROFactory {
 
 
     public static SocialuniMineUserRO getMineUser(SocialuniUserDo mineUser, SocialUserPhoneDo SocialUserPhoneDo) {
-        SocialuniUserShowRO socialuniUserRO = SocialuniUserShowROFactory.getUserRO(mineUser, mineUser);
+        SocialuniUserShowRO socialuniUserRO = SocialuniUserShowROFactory.getMineUserRO(mineUser);
         SocialuniMineUserRO socialuniMineUserRO = new SocialuniMineUserRO(socialuniUserRO);
         //user详情信息
         if (SocialUserPhoneDo != null) {

@@ -27,6 +27,9 @@ public class SocialuniAppConfigBO {
     //是否禁止内容中包含联系方式
     private Boolean disableContentHasContactInfo = false;
 
+    //是否禁止内容中包含联系方式
+    private Boolean mustSetPhoneCanPost = false;
+
     //是否禁止内容中包含二维码
     private Boolean disableContentHasQrCode = false;
 

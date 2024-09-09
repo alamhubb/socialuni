@@ -4,6 +4,7 @@ import com.socialuni.social.common.api.constant.SocialSystemConst;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.sdk.constant.ErrorMsg;
 import com.socialuni.social.content.constant.SocialuniUserStatus;
+import com.socialuni.social.tance.dev.config.SocialuniAppConfig;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.dev.facade.ConfigFacade;
 import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
@@ -17,10 +18,12 @@ public class SocialuniUserCheck {
     public static void checkUserBindPhoneNumAndStatusEnable() {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
         SocialUserPhoneDo userPhoneNum = SocialuniUserUtil.getUserPhoneNumDO(mineUser.getUnionId());
-        //如果不为系统管理员，只有管理员才能评论置顶内容
-        //未绑定手机号，不能发表动态，正常用户应该无法访问，应为突破了内容，或者逻辑有问题
-        if (userPhoneNum == null) {
-            throw new SocialParamsException(ErrorMsg.bindPhoneNumCan);
+        if (SocialuniAppConfig.getAppConfig().getMustSetPhoneCanPost()){
+            //如果不为系统管理员，只有管理员才能评论置顶内容
+            //未绑定手机号，不能发表动态，正常用户应该无法访问，应为突破了内容，或者逻辑有问题
+            if (userPhoneNum == null) {
+                throw new SocialParamsException(ErrorMsg.bindPhoneNumCan);
+            }
         }
         SocialuniUserCheck.checkUserStatusEnable();
     }

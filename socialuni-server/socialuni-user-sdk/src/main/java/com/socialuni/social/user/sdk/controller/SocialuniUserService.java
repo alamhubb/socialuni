@@ -28,7 +28,7 @@ public class SocialuniUserService {
             if (mineUser != null && detailUserDO.getUnionId().equals(mineUser.getUnionId())) {
                 userDetailRO = SocialuniUserShowROFactory.getMineUserRO(mineUser);
             } else {
-                userDetailRO = SocialuniUserShowROFactory.getUserRO(detailUserDO, mineUser);
+                userDetailRO = SocialuniUserShowROFactory.getUserRO(detailUserDO);
             }
             return new ResultRO<>(userDetailRO);
         }

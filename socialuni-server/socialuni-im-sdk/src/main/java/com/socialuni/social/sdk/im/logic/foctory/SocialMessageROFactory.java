@@ -14,6 +14,7 @@ import com.socialuni.social.common.api.model.user.SocialuniUserShowRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import lombok.Data;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
@@ -39,11 +40,7 @@ public class SocialMessageROFactory {
     public static SocialMessageRO getMessageRO(SocialuniUserDo sendUser, SocialuniMessageDO messageDO, Long beUserId) {
         SocialMessageRO messageRO = new SocialMessageRO();
 
-
-        //为什么这里允许空呢，因为存在群聊，存在未登录的情况
-        SocialuniUserDo beUser = SocialuniUserUtil.getUserNotNull(beUserId);
-
-        SocialuniUserShowRO messageUser = SocialuniUserShowROFactory.getUserRO(sendUser, beUser);
+        SocialuniUserShowRO messageUser = SocialuniUserShowROFactory.getUserRO(sendUser, beUserId);
 
         if (messageDO.getMessageContentType().equals("图片")) {
             messageRO.setContent(SocialuniSystemConst.getStaticResourceUrl() + messageDO.getContent());

@@ -15,7 +15,7 @@ public class SocialuniFriendApplyUserROFactory {
         SocialuniUserDo user = SocialuniUserUtil.getUserNotNull(socialuniFriendApplyRecordDO.getUserId());
 
 
-        SocialuniUserShowRO socialuniUserRO = SocialuniUserShowROFactory.getUserRO(user, mineUser);
+        SocialuniUserShowRO socialuniUserRO = SocialuniUserShowROFactory.getUserRO(user, mineUser.getUserId());
         SocialuniFriendApplyUserRO socialuniFriendApplyUserRO = new SocialuniFriendApplyUserRO(socialuniUserRO);
 
         socialuniFriendApplyUserRO.setApplyMsg(socialuniFriendApplyRecordDO.getApplyMsg());

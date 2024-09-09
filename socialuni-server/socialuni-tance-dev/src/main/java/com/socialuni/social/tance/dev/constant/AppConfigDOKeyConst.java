@@ -21,6 +21,7 @@ public class AppConfigDOKeyConst {
     public static final String disableContentHasQrCode = "disableContentHasQrCode";
     public static final String disableContentHasContactInfo = "disableContentHasContactInfo";
     public static final String mustSetSchoolCanPost = "mustSetSchoolCanPost";
+    public static final String mustSetPhoneCanPost = "mustSetPhoneCanPost";
 
     public static final String serviceWeChat = "serviceWeChat";
     public static final String vipPrice = "vipPrice";
@@ -73,6 +74,7 @@ public class AppConfigDOKeyConst {
             disableContentHasQrCode,
             disableContentHasContactInfo,
             mustSetSchoolCanPost,
+            mustSetPhoneCanPost,
             serviceWeChat,
             vipPrice,
             swiperHeight,

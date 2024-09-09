@@ -5,6 +5,7 @@ import com.socialuni.social.common.api.exception.exception.SocialParamsException
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.common.api.utils.NumberUtils;
 import com.socialuni.social.common.api.utils.SnowflakeIdUtil;
+import com.socialuni.social.common.api.utils.SocialTokenFacade;
 import com.socialuni.social.tance.dev.api.SocialuniUnionIdInterface;
 import com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
@@ -174,6 +175,9 @@ public class SocialuniUnionIdFacede {
 
     //social层，根据unionId获取uid，不可为空
     public static String getUuidByUnionIdNotNull(Long unionId) {
+        log.info("sensafsafsdf123123dsmsg");
+        log.info("token:{}", SocialTokenFacade.getToken());
+        log.info("userId:{}", unionId);
         return String.valueOf(getUnionDOByUnionIdNotNull(unionId).getUnionId());
     }
 
@@ -183,7 +187,11 @@ public class SocialuniUnionIdFacede {
         if (unionId == null) {
             throw new SocialParamsException("无效的内容标识4");
         }
-        SocialuniUnionIdDo uniContentUnionIdDO = socialuniUnionIdApi.findById(Math.toIntExact(unionId));
+        Integer id = Math.toIntExact(unionId);
+        log.info(DevAccountFacade.getDevAccountNullElseCenterDev().getSecretKey());
+        log.info(String.valueOf(DevAccountFacade.getDevAccountNullElseCenterDev().getId()));
+        log.info(String.valueOf(id));
+        SocialuniUnionIdDo uniContentUnionIdDO = socialuniUnionIdApi.findById(id);
         if (uniContentUnionIdDO == null) {
             throw new SocialParamsException("无效的内容标识5");
         }

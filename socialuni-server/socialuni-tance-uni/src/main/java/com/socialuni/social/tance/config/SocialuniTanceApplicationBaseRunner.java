@@ -137,6 +137,7 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
         socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.disableContentHasQrCode, socialuniAppConfigBO.getDisableContentHasQrCode());
         socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.disableContentHasContactInfo, socialuniAppConfigBO.getDisableContentHasContactInfo());
         socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.mustSetSchoolCanPost, socialuniAppConfigBO.getMustSetSchoolCanPost());
+        socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.mustSetPhoneCanPost, socialuniAppConfigBO.getMustSetPhoneCanPost());
         socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.serviceWeChat, socialuniAppMoreConfigBO.getServiceWeChat());
         socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.vipPrice, socialuniAppMoreConfigBO.getVipPrice());
         socialuniAppConfigManage.updateAppConfig(devId, AppConfigDOKeyConst.swiperHeight, socialuniAppMoreConfigBO.getSwiperHeight());
