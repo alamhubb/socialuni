@@ -6,6 +6,7 @@ import com.socialuni.social.common.api.constant.SocialuniSupportProviderType;
 import com.socialuni.social.common.api.constant.SystemType;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.MediaType;
@@ -30,11 +31,18 @@ public class RequestUtil {
 
     //获取到当前线程绑定的请求对象
     public static HttpServletRequest getRequest() {
-//        return RequestLogUtil.getRequest();
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
-        if (requestAttributes == null) return null;
-        ServletRequestAttributes servletRequestAttributes = ((ServletRequestAttributes) requestAttributes);
-        HttpServletRequest request = servletRequestAttributes.getRequest();
+        if (requestAttributes != null) {
+            ServletRequestAttributes servletRequestAttributes = ((ServletRequestAttributes) requestAttributes);
+            HttpServletRequest request = servletRequestAttributes.getRequest();
+            if (!ObjectUtils.isEmpty(request)) {
+                return request;
+            }
+        }
+        HttpServletRequest request = RequestStoreUtil.getRequest();
+        if (ObjectUtils.isEmpty(request)) {
+            log.info("request 还是 空的");
+        }
         return request;
     }
 

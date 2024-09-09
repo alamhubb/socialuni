@@ -4,6 +4,7 @@ import com.socialuni.social.common.api.config.SocialRequestUserConfig;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserShowRO;
 import com.socialuni.social.common.api.utils.RequestUtil;
+import com.socialuni.social.common.api.utils.SocialTokenFacade;
 import com.socialuni.social.sdk.dao.repository.UniOutRegisterUserRepository;
 import com.socialuni.social.tance.dev.config.SocialuniDevConfig;
 import com.socialuni.social.tance.dev.dao.DO.SocialuniThirdTokenDO;
@@ -60,6 +61,7 @@ public class FeignInterceptor implements RequestInterceptor {
 
     @Resource
     SocialRequestUserConfig socialRequestUserConfig;
+
     @Override
     public void apply(RequestTemplate requestTemplate) {
 
@@ -89,6 +91,11 @@ public class FeignInterceptor implements RequestInterceptor {
                     //保存三方token
                     socialuniThirdTokenDO = SocialuniThirdTokenUtil.createdThirdTokenOrGet(mineUserUnionId, resultRO.getData().getToken(), serverDevId, uuid);
 
+
+                    log.info("DevAccountFacade.hasDevKey():{}", DevAccountFacade.hasDevKey());
+                    log.info("getDevIdNullElseCenterDevId:{}", DevAccountFacade.getDevIdNullElseCenterDevId());
+                    log.info("mineUserUnionId:{}", mineUserUnionId);
+                    log.info("socialuniUserRO.getId():{}", socialuniUserRO.getId());
                     SocialuniUnionIdFacede.updateUuidByUnionIdNotNull(mineUserUnionId, socialuniUserRO.getId());
                 }
                 requestTemplate.header(SocialuniWebConfig.getTokenName(), socialuniThirdTokenDO.getToken());

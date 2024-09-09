@@ -53,15 +53,6 @@ public class RequestLogUtil {
     private static final ThreadLocal<RequestLogDO> requestLog = new ThreadLocal<>();
 
     private static final ThreadLocal<RequestAttributes> requestAttributes = new ThreadLocal<>();
-    private static final ThreadLocal<HttpServletRequest> request = new ThreadLocal<>();
-
-    public static void setRequest(HttpServletRequest request) {
-        RequestLogUtil.request.set(request);
-    }
-
-    public static HttpServletRequest getRequest() {
-        return RequestLogUtil.request.get();
-    }
 
     public static void setRequestAttributes(RequestAttributes requestAttributes) {
         RequestLogUtil.requestAttributes.set(requestAttributes);

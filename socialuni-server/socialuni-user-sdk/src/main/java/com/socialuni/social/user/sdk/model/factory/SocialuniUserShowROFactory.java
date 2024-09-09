@@ -39,10 +39,6 @@ public class SocialuniUserShowROFactory {
 
         SocialuniUserRO socialuniUserRO = SocialuniUserROFactory.getUserRO(userDO);
 
-
-        log.info("sensafsafsdf123123dsmsg");
-        log.info("token:{}", SocialTokenFacade.getToken());
-        log.info("userId:{}", userDO.getUserId());
         //user基础信息
         SocialuniUserShowRO user = new SocialuniUserShowRO(socialuniUserRO);
         if (ObjectUtils.isEmpty(lookUserId)) {

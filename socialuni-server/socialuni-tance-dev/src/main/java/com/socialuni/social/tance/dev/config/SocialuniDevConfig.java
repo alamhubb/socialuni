@@ -55,18 +55,7 @@ public class SocialuniDevConfig {
         Integer devId = DevAccountFacade.getDevIdNullElseCenterDevId();
         Integer systemDevId = DevAccountFacade.systemDevId;
         Boolean hasCenter = devId.equals(systemDevId);
-        if (!hasCenter) {
-            String curKey = DataSourceContextHolder.getDataSourceType();
-            DevAccountDo systemDev = DevAccountFacade.getDevAccount(1);
-            log.info("curKey center:{}", curKey);
-            log.info("xitong key:{}", systemDev.getSecretKey());
-        } else {
-            String curKey = DataSourceContextHolder.getDataSourceType();
-            DevAccountDo systemDev = DevAccountFacade.getDevAccount(1);
-            log.info("curKey dev:{}", curKey);
-            log.info("xitong key:{}", systemDev.getSecretKey());
-        }
-        return devId.equals(systemDevId);
+        return hasCenter;
     }
 
     public static boolean serverIsCenter() {
@@ -93,6 +82,7 @@ public class SocialuniDevConfig {
         //为空则异常
         return socialuniDevSecretKey;
     }
+
 
     public static String getSocialuniServerUrl() {
         if (StringUtils.isEmpty(socialuniServerUrl)) {

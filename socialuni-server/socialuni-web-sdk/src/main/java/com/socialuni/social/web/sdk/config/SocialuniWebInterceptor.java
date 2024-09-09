@@ -5,6 +5,7 @@ import com.socialuni.social.common.api.config.SocialRequestUserConfig;
 import com.socialuni.social.common.api.constant.ErrorType;
 import com.socialuni.social.common.api.utils.IpUtil;
 import com.socialuni.social.common.api.dao.DO.RequestLogDO;
+import com.socialuni.social.common.api.utils.RequestStoreUtil;
 import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.common.sdk.utils.RequestLogUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -33,7 +34,7 @@ public class SocialuniWebInterceptor implements HandlerInterceptor {
             return true;
         }
         //保存下当前的request，防止异步无法处理request问题
-        RequestLogUtil.setRequest(request);
+        RequestStoreUtil.setRequest(request);
         Date startTime = new Date();
         String uri = request.getRequestURI();
         String userIp = IpUtil.getIpAddr(request);

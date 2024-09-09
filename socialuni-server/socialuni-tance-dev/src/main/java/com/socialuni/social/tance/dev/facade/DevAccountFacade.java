@@ -4,9 +4,11 @@ import com.socialuni.social.common.api.constant.GenderType;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.common.api.utils.RequestUtil;
+import com.socialuni.social.common.api.utils.SocialTokenFacade;
 import com.socialuni.social.tance.dev.api.DevAccountInterface;
 import com.socialuni.social.tance.dev.api.DevAccountProviderInterface;
 import com.socialuni.social.tance.dev.api.DevAccountRedisInterface;
+import com.socialuni.social.tance.dev.config.DataSourceContextHolder;
 import com.socialuni.social.tance.dev.constant.AdminAppConfigConst;
 import com.socialuni.social.tance.dev.dao.DO.DevAccountDo;
 import com.socialuni.social.tance.dev.enumeration.SocialFeignHeaderName;
@@ -170,9 +172,13 @@ public class DevAccountFacade {
 
     public static String getSocialuniSecretKey() {
         String secretKey = RequestUtil.getRequestValue(SocialFeignHeaderName.socialuniSecretKey);
-        log.info("miyaokey:{}", secretKey);
         return secretKey;
     }
+
+    public static boolean hasDevKey() {
+        return StringUtils.isNotBlank(getSocialuniSecretKey());
+    }
+
 
     public static DevAccountDo getDevAccountAllowNull() {
         //先从req中获取

@@ -57,15 +57,12 @@ public class SocialWebLogAspect {
             long spendTime = endDate.getTime() - requestLogDO.getCreateTime().getTime();
             requestLogDO.setEndTime(endDate);
             requestLogDO.setSpendTime(spendTime);
-            StringBuilder sb = new StringBuilder();
             if (result != null) {
-                sb.append("result is not null");
                 if (result instanceof ResultRO) {
                     ResultRO resultRO = (ResultRO) result;
                     requestLogDO.setErrorCode(resultRO.getCode());
                     requestLogDO.setErrorMsg(resultRO.getErrorMsg());
                     requestLogDO.setSuccess(resultRO.getSuccess());
-                    sb.append(", instanceof ResultRO ");
                 } else {
                     requestLogDO.setErrorCode(ErrorCode.SYSTEM_ERROR);
                     requestLogDO.setErrorType(ErrorType.error);
@@ -73,11 +70,9 @@ public class SocialWebLogAspect {
                     requestLogDO.setSuccess(false);
                     requestLogDO.setInnerMsg(RequestErrorMsg.getSystemErrorMsg());
                     requestLogDO.setInnerMsgDetail(result.toString());
-                    sb.append(",not of instanceof ResultRO ");
                     ErrorLogUtil.saveAsync(requestLogDO);
                 }
             }
-            log.info(sb.toString()); // 添加日志。
             RequestLogUtil.saveAsyncAndRemove(requestLogDO);
         }
         return result;

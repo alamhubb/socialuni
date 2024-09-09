@@ -9,6 +9,7 @@ import com.socialuni.social.common.api.model.SocialuniNotifyRO;
 import com.socialuni.social.tance.dev.config.SocialuniDevConfig;
 import com.socialuni.social.tance.dev.dao.DO.DevAccountDo;
 import com.socialuni.social.tance.dev.dao.repository.DevAccountRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import java.net.URI;
 import java.util.List;
 
 @Service
+@Slf4j
 public class SocialuniWebcoketSendDomain {
 
     //负责给所有用户推送消息，但不负责存库。
@@ -41,6 +43,7 @@ public class SocialuniWebcoketSendDomain {
             String apiKey = devAccountDo.getApiSecretKey();
             if (StringUtils.isNotBlank(apiUrl) && StringUtils.isNotBlank(apiKey)) {
                 URI uri = URI.create(apiUrl);
+                log.info("触发了回调：{}", apiUrl);
                 socialuniCallbackAPI.receiveNotify(uri, socialuniNotifyRO);
             }
         }

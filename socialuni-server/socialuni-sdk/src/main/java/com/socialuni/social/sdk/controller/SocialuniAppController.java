@@ -67,6 +67,7 @@ public class SocialuniAppController implements SocialuniAppAPI {
         return ResultRO.success(list);
     }
 
+    @SocialuniNoUseFeignAspect
     public ResultRO<Void> sendErrorLog(@RequestBody FrontErrorLogVO frontErrorLogVO) {
         return centerAppService.sendErrorLog(frontErrorLogVO);
     }

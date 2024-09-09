@@ -20,6 +20,8 @@ export default class SocialuniAppConfigRO {
   //是否必须填写校园才允许发帖
   mustSetSchoolCanPost: boolean = null;
 
+  mustSetPhoneCanPost: boolean = null;
+
   //todo 相关功能未实现 用户必须实名认证
   userMustIdentityAuth: boolean = null;
 

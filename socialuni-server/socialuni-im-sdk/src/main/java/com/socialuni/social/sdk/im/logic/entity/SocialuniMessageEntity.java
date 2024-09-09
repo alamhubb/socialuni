@@ -36,6 +36,7 @@ import com.socialuni.social.sdk.im.logic.foctory.SocialuniChatUserDOFactory;
 import com.socialuni.social.sdk.im.logic.foctory.SocialuniMessageDOFactory;
 import com.socialuni.social.sdk.im.utils.SocialuniChatDOUtil;
 import com.socialuni.social.sdk.im.utils.SocialuniChatUserDOUtil;
+import com.socialuni.social.tance.dev.config.DataSourceContextHolder;
 import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserBlackDO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
@@ -214,6 +215,10 @@ public class SocialuniMessageEntity {
         log.info("token:{}", SocialTokenFacade.getToken());
         log.info("getRequestValue:{}", RequestUtil.getRequestValue("token"));
         log.info("uri:{}", Objects.requireNonNull(RequestUtil.getRequest()).getRequestURI());
+        log.info("getDataSourceType:{}", DataSourceContextHolder.getDataSourceType());
+        log.info("getId:{}", DevAccountFacade.getDevAccountNullElseCenterDev().getId());
+        log.info("getDevAccountNullElseCenterDev:{}", DevAccountFacade.getDevAccountNullElseCenterDev().getSecretKey());
+        log.info("getSecretKey:{}", DevAccountFacade.getSystemDevAccount().getSecretKey());
         log.info("getSocialuniSecretKey:{}", DevAccountFacade.getSocialuniSecretKey());
         log.info("userId:{}", sendUser.getUserId());
 

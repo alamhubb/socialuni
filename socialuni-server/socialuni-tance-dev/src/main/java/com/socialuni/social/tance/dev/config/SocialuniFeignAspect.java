@@ -80,13 +80,6 @@ public class SocialuniFeignAspect {
                         Class<?>[] parameterTypes = method.getParameterTypes();
                         Object[] args = joinPoint.getArgs();
                         Object bean = SpringUtil.getBean(interfaceClass);
-
-                        //且不为手动实现，则统一调用
-                        log.info(interfaceClass.getName());
-                        log.info(interfaceClass.getSimpleName());
-                        log.info(methodName);
-                        log.info("chufale you zidongchulide ");
-
                         Method invokeMethod = bean.getClass().getMethod(methodName, parameterTypes);
                         Object result = invokeMethod.invoke(bean, args);
                         return result;

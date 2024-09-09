@@ -4,9 +4,11 @@ import cn.hutool.core.util.ObjectUtil;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.common.api.utils.NumberUtils;
+import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.common.api.utils.SnowflakeIdUtil;
 import com.socialuni.social.common.api.utils.SocialTokenFacade;
 import com.socialuni.social.tance.dev.api.SocialuniUnionIdInterface;
+import com.socialuni.social.tance.dev.config.DataSourceContextHolder;
 import com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +19,7 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 
@@ -175,9 +178,6 @@ public class SocialuniUnionIdFacede {
 
     //social层，根据unionId获取uid，不可为空
     public static String getUuidByUnionIdNotNull(Long unionId) {
-        log.info("sensafsafsdf123123dsmsg");
-        log.info("token:{}", SocialTokenFacade.getToken());
-        log.info("userId:{}", unionId);
         return String.valueOf(getUnionDOByUnionIdNotNull(unionId).getUnionId());
     }
 
@@ -188,11 +188,21 @@ public class SocialuniUnionIdFacede {
             throw new SocialParamsException("无效的内容标识4");
         }
         Integer id = Math.toIntExact(unionId);
-        log.info(DevAccountFacade.getDevAccountNullElseCenterDev().getSecretKey());
-        log.info(String.valueOf(DevAccountFacade.getDevAccountNullElseCenterDev().getId()));
-        log.info(String.valueOf(id));
         SocialuniUnionIdDo uniContentUnionIdDO = socialuniUnionIdApi.findById(id);
         if (uniContentUnionIdDO == null) {
+            log.info("sensafsafsdfdsmsg");
+            log.info("token:{}", SocialTokenFacade.getToken());
+            log.info("userId:{}", unionId);
+            log.info("kaishizhixing  gengxin chatusere22222");
+            log.info("token:{}", SocialTokenFacade.getToken());
+            log.info("getRequestValue:{}", RequestUtil.getRequestValue("token"));
+            log.info("uri:{}", Objects.requireNonNull(RequestUtil.getRequest()).getRequestURI());
+            log.info("getDataSourceType:{}", DataSourceContextHolder.getDataSourceType());
+            log.info("getId:{}", DevAccountFacade.getDevAccountNullElseCenterDev().getId());
+            log.info("getDevAccountNullElseCenterDev:{}", DevAccountFacade.getDevAccountNullElseCenterDev().getSecretKey());
+            log.info("getSecretKey:{}", DevAccountFacade.getSystemDevAccount().getSecretKey());
+            log.info("getSocialuniSecretKey:{}", DevAccountFacade.getSocialuniSecretKey());
+            log.info("userId:{}", unionId);
             throw new SocialParamsException("无效的内容标识5");
         }
         return uniContentUnionIdDO;
@@ -320,7 +330,6 @@ public class SocialuniUnionIdFacede {
         List<Long> ids = new ArrayList<>();
         if (ObjectUtil.isNotEmpty(contentUnionIds)) {
             for (String uuid : contentUnionIds) {
-//                log.info("查询单个id：" + System.currentTimeMillis());
                 Long id = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(uuid);
                 ids.add(id);
             }
@@ -338,7 +347,6 @@ public class SocialuniUnionIdFacede {
         List<String> ids = new ArrayList<>();
         if (ObjectUtil.isNotEmpty(innerIds)) {
             for (Long innerId : innerIds) {
-//                log.info("查询单个id：" + System.currentTimeMillis());
                 String id = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(innerId);
                 ids.add(id);
             }
