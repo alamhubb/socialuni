@@ -1,6 +1,6 @@
 package com.socialuni.social.tance.dev.model;
 
-import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
+import com.qingchi.qing.jpa.SocialuniContentBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

@@ -1,8 +1,7 @@
 package com.socialuni.social.user.sdk.dao.repository;
 
-import cn.hutool.core.bean.BeanUtil;
 import com.socialuni.social.common.api.constant.CommonRedisKey;
-import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
+import com.qingchi.qing.user.dao.model.SocialUserPhoneDo;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;

@@ -2,11 +2,11 @@ package com.socialuni.social.user.sdk.logic.domain;
 
 import com.socialuni.social.common.api.constant.DateTimeType;
 import com.socialuni.social.common.api.constant.SocialSystemConst;
-import com.socialuni.social.common.api.enumeration.ConstStatus;
+import com.qingchi.qing.constant.ConstStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.common.api.utils.IpUtil;
+import com.qingchi.qing.utils.IpUtil;
 import com.socialuni.social.common.sdk.constant.ErrorMsg;
 import com.socialuni.social.tance.dev.config.SocialuniAppConfig;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;

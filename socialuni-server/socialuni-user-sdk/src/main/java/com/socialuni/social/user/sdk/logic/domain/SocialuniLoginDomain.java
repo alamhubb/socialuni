@@ -10,7 +10,7 @@ import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
 import com.socialuni.social.common.sdk.event.ddd.EventPublisherFacade;
 import com.socialuni.social.user.sdk.dao.DO.SocialUserPasswordDO;
-import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
+import com.qingchi.qing.user.dao.model.SocialUserPhoneDo;
 import com.socialuni.social.user.sdk.logic.entity.SocialPhoneLoginEntity;
 import com.socialuni.social.user.sdk.logic.entity.SocialProviderLoginEntity;
 import com.socialuni.social.user.sdk.logic.entity.SocialuniCreateLoginHisotryEntity;

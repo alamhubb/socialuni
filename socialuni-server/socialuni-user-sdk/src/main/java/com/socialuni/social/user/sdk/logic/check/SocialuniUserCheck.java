@@ -6,7 +6,7 @@ import com.socialuni.social.common.sdk.constant.ErrorMsg;
 import com.socialuni.social.content.constant.SocialuniUserStatus;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.dev.facade.ConfigFacade;
-import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
+import com.qingchi.qing.user.dao.model.SocialUserPhoneDo;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import org.springframework.stereotype.Service;
 

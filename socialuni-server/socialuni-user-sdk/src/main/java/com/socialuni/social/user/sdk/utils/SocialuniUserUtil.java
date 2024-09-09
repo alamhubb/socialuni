@@ -12,7 +12,7 @@ import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
 import com.socialuni.social.user.sdk.config.SocialuniUserSysConfig;
 import com.socialuni.social.user.sdk.exception.SocialUserBannedException;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniTokenDO;
-import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
+import com.qingchi.qing.user.dao.model.SocialUserPhoneDo;
 import com.socialuni.social.user.sdk.dao.DO.SocialUserViolationDo;
 import com.socialuni.social.user.sdk.logic.redis.SocialUserPhoneRedis;
 import com.socialuni.social.user.sdk.dao.repository.SocialUserViolationRepository;

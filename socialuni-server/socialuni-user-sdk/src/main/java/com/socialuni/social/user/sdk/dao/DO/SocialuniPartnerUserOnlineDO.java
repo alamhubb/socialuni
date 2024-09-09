@@ -1,6 +1,6 @@
 package com.socialuni.social.user.sdk.dao.DO;
 
-import com.socialuni.social.common.api.entity.SocialuniUpdateTimeContentBaseDO;
+import com.qingchi.qing.jpa.SocialuniUpdateTimeContentBaseDO;
 import com.socialuni.social.common.sdk.utils.SocialuniDateUtils;
 import lombok.Data;
 

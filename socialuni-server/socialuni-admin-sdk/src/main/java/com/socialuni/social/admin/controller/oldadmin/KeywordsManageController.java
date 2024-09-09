@@ -2,7 +2,7 @@ package com.socialuni.social.admin.controller.oldadmin;
 
 
 import com.socialuni.social.admin.utils.CheckIsAdminUtil;
-import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
+import com.qingchi.qing.constant.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.sdk.constant.status.ConstBoolean;

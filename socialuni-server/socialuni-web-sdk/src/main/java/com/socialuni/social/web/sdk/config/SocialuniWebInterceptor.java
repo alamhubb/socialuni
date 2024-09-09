@@ -3,7 +3,7 @@ package com.socialuni.social.web.sdk.config;
 
 import com.socialuni.social.common.api.config.SocialRequestUserConfig;
 import com.qingchi.qing.common.exception.base.QingExceptionErrorType;
-import com.socialuni.social.common.api.utils.IpUtil;
+import com.qingchi.qing.utils.IpUtil;
 import com.socialuni.social.common.api.dao.DO.RequestLogDO;
 import com.socialuni.social.common.api.utils.SocialuniRequestUtil;
 import com.socialuni.social.common.sdk.utils.RequestLogUtil;

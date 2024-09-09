@@ -1,18 +1,10 @@
 package com.socialuni.social.common.sdk.dao.facede;
 
-import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import com.socialuni.social.common.api.entity.SocialuniUserContactBaseDO;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniCommonRepository;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import javax.persistence.EntityManager;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.lang.reflect.InvocationTargetException;
-import java.util.List;
 
 /**
  * @author wulinghui

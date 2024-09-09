@@ -1,6 +1,6 @@
 package com.socialuni.social.common.sdk.dao.DO;
 
-import com.socialuni.social.common.api.entity.SocialuniBaseDO;
+import com.qingchi.qing.jpa.QingJpaBaseDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class SocialuniDeviceDO extends SocialuniBaseDO {
+public class SocialuniDeviceDO extends QingJpaBaseDO {
     private String device;
     private String deviceOther;
     private String uuid;

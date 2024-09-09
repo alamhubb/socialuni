@@ -3,7 +3,7 @@ package com.socialuni.social.user.sdk.logic.service;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
 import com.socialuni.social.user.sdk.dao.DO.SocialUserPasswordDO;
-import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
+import com.qingchi.qing.user.dao.model.SocialUserPhoneDo;
 import com.socialuni.social.user.sdk.logic.domain.SocailSendAuthCodeDomain;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserPhoneManage;

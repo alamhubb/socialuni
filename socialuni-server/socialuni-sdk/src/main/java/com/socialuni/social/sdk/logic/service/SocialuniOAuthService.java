@@ -1,6 +1,6 @@
 //package com.socialuni.social.sdk.logic.service;
 //
-//import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
+//import com.qingchi.qing.constant.SocialuniCommonStatus;
 //import com.socialuni.social.common.api.model.ResultRO;
 //import com.socialuni.social.common.sdk.constant.AuthType;
 //import com.socialuni.social.sdk.dao.DO.dev.ThirdUserAuthDO;

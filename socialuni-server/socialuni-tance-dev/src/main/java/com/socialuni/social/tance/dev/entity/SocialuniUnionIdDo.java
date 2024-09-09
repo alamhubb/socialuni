@@ -1,6 +1,6 @@
 package com.socialuni.social.tance.dev.entity;
 
-import com.socialuni.social.common.api.entity.SocialuniBaseDO;
+import com.qingchi.qing.jpa.QingJpaBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,7 +20,7 @@ import java.io.Serializable;
 )
 @Data
 @NoArgsConstructor
-public class SocialuniUnionIdDo extends SocialuniBaseDO implements Serializable {
+public class SocialuniUnionIdDo extends QingJpaBaseDO implements Serializable {
     //为什么使用id，方便，可以拆分为id+类型
     @Column(nullable = false)
     private String contentType;

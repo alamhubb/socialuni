@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.im.event;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.http.HttpUtil;
-import com.socialuni.social.common.api.entity.SocialuniUserInfoBaseDO;
+import com.qingchi.qing.jpa.SocialuniUserInfoBaseDO;
 import com.socialuni.social.common.api.model.PublishDataModel;
 import com.socialuni.social.common.sdk.event.ddd.AbstractPublishDataModelConsum;
 import com.socialuni.social.sdk.im.model.SocialuniImUserModel;

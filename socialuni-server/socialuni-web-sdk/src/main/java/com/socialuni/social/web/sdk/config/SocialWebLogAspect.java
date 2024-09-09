@@ -6,7 +6,7 @@ import com.qingchi.qing.common.exception.base.ErrorCode;
 import com.socialuni.social.common.api.constant.RequestErrorMsg;
 import com.qingchi.qing.common.exception.base.QingExceptionErrorType;
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.common.api.utils.IpUtil;
+import com.qingchi.qing.utils.IpUtil;
 import com.socialuni.social.common.api.dao.DO.RequestLogDO;
 import com.socialuni.social.common.sdk.utils.ErrorLogUtil;
 import com.socialuni.social.common.sdk.utils.RequestLogUtil;

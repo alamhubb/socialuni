@@ -1,5 +1,8 @@
 package com.socialuni.social.common.sdk.dao.repository;
 
+import com.qingchi.qing.jpa.QingJpaBaseDO;
+import com.qingchi.qing.jpa.SocialuniContentBaseDO;
+import com.qingchi.qing.jpa.SocialuniUserInfoBaseDO;
 import com.socialuni.social.common.api.entity.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.*;
@@ -135,7 +138,7 @@ public class SocialuniCommonRepository {
     }
 
     //使用这个的问题是缓存不会被清理
-    public <T extends SocialuniBaseDO> T findFirstOrderByIdDesc(Class<T> tClass) {
+    public <T extends QingJpaBaseDO> T findFirstOrderByIdDesc(Class<T> tClass) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
         Root<T> userInfo = criteriaQuery.from(tClass);
@@ -168,7 +171,7 @@ public class SocialuniCommonRepository {
         return null;
     }
 
-    public <T extends SocialuniBaseDO> T findByCustomField(String field, Integer fieldId, Class<T> tClass) {
+    public <T extends QingJpaBaseDO> T findByCustomField(String field, Integer fieldId, Class<T> tClass) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
         Root<T> userInfo = criteriaQuery.from(tClass);
@@ -184,7 +187,7 @@ public class SocialuniCommonRepository {
         return null;
     }
 
-    public <T extends SocialuniBaseDO> T findByCustomField(String field, String  fieldId, Class<T> tClass) {
+    public <T extends QingJpaBaseDO> T findByCustomField(String field, String  fieldId, Class<T> tClass) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
         Root<T> userInfo = criteriaQuery.from(tClass);
@@ -200,7 +203,7 @@ public class SocialuniCommonRepository {
         return null;
     }
 
-    public <T extends SocialuniBaseDO> T findByCustomField(String field, Long fieldId, Class<T> tClass) {
+    public <T extends QingJpaBaseDO> T findByCustomField(String field, Long fieldId, Class<T> tClass) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(tClass);
         Root<T> userInfo = criteriaQuery.from(tClass);

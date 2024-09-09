@@ -1,7 +1,6 @@
 package com.socialuni.social.recharge.dao.DO;
 
-import com.socialuni.social.common.api.entity.SocialuniBaseDO;
-import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
+import com.qingchi.qing.jpa.SocialuniContentBaseDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

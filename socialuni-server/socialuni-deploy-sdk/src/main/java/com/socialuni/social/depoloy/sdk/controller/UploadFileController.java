@@ -2,7 +2,7 @@ package com.socialuni.social.depoloy.sdk.controller;
 
 import cn.hutool.core.io.file.FileWriter;
 import com.github.odiszapc.nginxparser.*;
-import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
+import com.qingchi.qing.constant.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.common.api.model.ResultRO;

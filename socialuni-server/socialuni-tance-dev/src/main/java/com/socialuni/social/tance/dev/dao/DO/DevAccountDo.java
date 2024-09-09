@@ -1,8 +1,8 @@
 package com.socialuni.social.tance.dev.dao.DO;
 
 import com.socialuni.social.common.api.constant.GenderType;
-import com.socialuni.social.common.api.entity.SocialuniBaseDO;
-import com.socialuni.social.common.api.enumeration.ConstStatus;
+import com.qingchi.qing.jpa.QingJpaBaseDO;
+import com.qingchi.qing.constant.ConstStatus;
 import com.socialuni.social.tance.dev.enumeration.DevAccountType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -30,7 +30,7 @@ import java.util.Date;
         }
 )
 @EqualsAndHashCode(callSuper = true)
-public class DevAccountDo extends SocialuniBaseDO implements Serializable {
+public class DevAccountDo extends QingJpaBaseDO implements Serializable {
     private Long userId;
     //密钥
     @Column(nullable = false)

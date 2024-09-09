@@ -1,6 +1,6 @@
 package com.socialuni.social.tance.config;
 
-import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
+import com.qingchi.qing.constant.SocialuniCommonStatus;
 import com.socialuni.social.common.api.utils.UUIDUtil;
 import com.socialuni.social.common.sdk.constant.SocialuniSysRoleId;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
@@ -11,9 +11,8 @@ import com.socialuni.social.tance.dev.dao.DO.DevAccountDo;
 import com.socialuni.social.tance.dev.enumeration.DevAccountType;
 import com.socialuni.social.common.api.constant.GenderType;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
+import com.qingchi.qing.user.dao.model.SocialUserPhoneDo;
 import com.socialuni.social.user.sdk.logic.entity.SocialUserPhoneEntity;
 import com.socialuni.social.user.sdk.logic.redis.SocialUserPhoneRedis;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;

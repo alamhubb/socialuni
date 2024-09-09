@@ -1,14 +1,12 @@
 package com.socialuni.social.user.sdk.dao.DO;
 
 
-import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
-import com.socialuni.social.common.api.entity.SocialuniUserInfoBaseDO;
+import com.qingchi.qing.jpa.SocialuniUserInfoBaseDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
 
 //用户扩展类
 @Entity

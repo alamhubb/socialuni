@@ -2,7 +2,7 @@ package com.socialuni.social.community.sdk.logic.domain.talk;
 
 import cn.hutool.core.util.BooleanUtil;
 import com.socialuni.social.common.api.constant.MpPlatformType;
-import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
+import com.qingchi.qing.constant.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;

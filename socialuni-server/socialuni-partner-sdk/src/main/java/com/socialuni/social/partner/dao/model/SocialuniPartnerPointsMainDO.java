@@ -1,6 +1,6 @@
 package com.socialuni.social.partner.dao.model;
 
-import com.socialuni.social.common.api.entity.SocialuniUpdateTimeContentBaseDO;
+import com.qingchi.qing.jpa.SocialuniUpdateTimeContentBaseDO;
 import lombok.Data;
 
 import javax.persistence.*;

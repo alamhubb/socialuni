@@ -6,7 +6,7 @@ import com.socialuni.social.admin.model.RO.TencentCosAuditRecordRO;
 import com.socialuni.social.admin.service.ViolationService;
 import com.socialuni.social.admin.utils.CheckIsAdminUtil;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
-import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
+import com.qingchi.qing.constant.SocialuniCommonStatus;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;

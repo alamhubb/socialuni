@@ -2,7 +2,7 @@ package com.socialuni.social.app.factory;
 
 import cn.hutool.extra.spring.SpringUtil;
 import com.socialuni.social.tance.dev.facade.DevAccountFacade;
-import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
+import com.qingchi.qing.user.dao.model.SocialUserPhoneDo;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.expand.dao.DO.SocialuniUserExpandDo;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserCoinDo;

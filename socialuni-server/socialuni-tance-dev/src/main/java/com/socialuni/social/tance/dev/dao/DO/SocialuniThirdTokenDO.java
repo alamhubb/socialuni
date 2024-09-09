@@ -1,14 +1,12 @@
 package com.socialuni.social.tance.dev.dao.DO;
 
-import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
-import com.socialuni.social.common.api.constant.DateTimeType;
+import com.qingchi.qing.jpa.SocialuniContentBaseDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 //为什么使用s_token
 @Entity
