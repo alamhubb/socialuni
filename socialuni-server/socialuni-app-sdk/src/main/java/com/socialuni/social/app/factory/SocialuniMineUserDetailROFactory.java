@@ -11,7 +11,7 @@ import com.socialuni.social.common.api.model.user.SocialuniUserDetailRO;
 import com.socialuni.social.expand.utils.SocialuniUserExpandDOUtil;
 import com.socialuni.social.user.sdk.dao.utils.SocialuniUserExtendFriendLogDOUtil;
 import com.socialuni.social.user.sdk.logic.domain.SocialBindUserOpenImAccountDomain;
-import com.socialuni.social.user.sdk.logic.redis.SocialUserPhoneRedis;
+import com.qingchi.qing.user.dao.redis.SocialUserPhoneRedis;
 import com.socialuni.social.common.sdk.dao.repository.SocialUserPlatformAccountRepository;
 import com.socialuni.social.user.sdk.utils.SocialuniUserSocialCoinDOUtil;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;

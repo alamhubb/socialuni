@@ -1,6 +1,6 @@
 package com.socialuni.social.common.sdk.dao.DO;
 
-import com.qingchi.qing.jpa.QingJpaBaseDO;
+import com.qingchi.qing.jpa.dao.model.QingJpaBaseDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

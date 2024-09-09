@@ -1,8 +1,8 @@
 package com.socialuni.social.common.sdk.dao.repository;
 
-import com.qingchi.qing.jpa.QingJpaBaseDO;
-import com.qingchi.qing.jpa.SocialuniContentBaseDO;
-import com.qingchi.qing.jpa.SocialuniUserInfoBaseDO;
+import com.qingchi.qing.jpa.dao.model.QingJpaBaseDO;
+import com.qingchi.qing.jpa.dao.model.SocialuniContentBaseDO;
+import com.qingchi.qing.jpa.dao.model.SocialuniUserInfoBaseDO;
 import com.socialuni.social.common.api.entity.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.*;

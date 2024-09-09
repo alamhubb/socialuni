@@ -3,7 +3,7 @@ package com.socialuni.social.user.sdk.utils;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.qingchi.qing.user.dao.model.SocialUserPhoneDo;
-import com.socialuni.social.user.sdk.logic.redis.SocialUserPhoneRedis;
+import com.qingchi.qing.user.dao.redis.SocialUserPhoneRedis;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 

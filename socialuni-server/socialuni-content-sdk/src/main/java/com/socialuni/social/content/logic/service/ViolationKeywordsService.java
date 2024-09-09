@@ -1,6 +1,5 @@
 package com.socialuni.social.content.logic.service;
 
-import com.qingchi.qing.constant.SocialuniCommonStatus;
 import com.socialuni.social.content.dao.store.AppConfigStatic;
 import com.socialuni.social.content.dao.DO.IllegalWordDO;
 import com.socialuni.social.content.dao.DO.KeywordsDO;

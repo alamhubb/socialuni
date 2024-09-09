@@ -1,6 +1,6 @@
 package com.socialuni.social.recharge.logic.domain;
 
-import com.socialuni.social.common.api.constant.DateTimeType;
+import com.qingchi.qing.constant.DateTimeType;
 import com.socialuni.social.common.api.constant.PlatformType;
 import com.socialuni.social.common.api.constant.SystemType;
 import com.qingchi.qing.common.exception.base.exception.SocialParamsException;

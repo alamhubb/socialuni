@@ -1,8 +1,5 @@
 package com.socialuni.social.common.sdk.dao.facede;
 
-import com.qingchi.qing.jpa.SocialuniContentBaseDO;
-import com.qingchi.qing.jpa.SocialuniUserInfoBaseDO;
-import com.qingchi.qing.constant.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialNullUserException;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniCommonRepository;
 import org.springframework.stereotype.Component;

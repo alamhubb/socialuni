@@ -1,7 +1,5 @@
 package com.socialuni.social.sdk.im.enumeration;
 
-import com.qingchi.qing.constant.ConstStatus;
-
 import java.util.Arrays;
 import java.util.List;
 

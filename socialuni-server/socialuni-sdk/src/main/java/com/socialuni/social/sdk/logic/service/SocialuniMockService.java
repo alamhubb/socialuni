@@ -2,7 +2,7 @@
 //
 //import com.socialuni.social.common.api.model.ResultRO;
 //import com.socialuni.social.common.sdk.constant.AuthType;
-//import com.socialuni.social.user.sdk.logic.redis.SocialUserPhoneRedis;
+//import com.qingchi.qing.user.dao.redis.SocialUserPhoneRedis;
 //import com.socialuni.social.sdk.logic.entity.SocialuniDevAccountEntity;
 //import com.socialuni.social.user.sdk.model.RO.SocialOAuthUserRO;
 //import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;

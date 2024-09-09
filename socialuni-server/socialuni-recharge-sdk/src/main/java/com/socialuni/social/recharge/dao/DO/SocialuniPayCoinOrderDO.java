@@ -1,6 +1,5 @@
 package com.socialuni.social.recharge.dao.DO;
 
-import com.qingchi.qing.jpa.SocialuniContentBaseDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

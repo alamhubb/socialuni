@@ -1,7 +1,7 @@
 package com.socialuni.social.user.sdk.dao.repository;
 
 
-import com.socialuni.social.common.api.constant.CommonRedisKey;
+import com.qingchi.qing.constant.CommonRedisKey;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniTokenDO;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;

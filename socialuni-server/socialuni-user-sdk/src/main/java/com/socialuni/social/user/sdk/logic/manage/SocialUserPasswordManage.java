@@ -3,8 +3,8 @@ package com.socialuni.social.user.sdk.logic.manage;
 
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
 import com.socialuni.social.tance.dev.facade.DevAccountFacade;
-import com.socialuni.social.user.sdk.dao.DO.SocialUserPasswordDO;
-import com.socialuni.social.user.sdk.dao.repository.SocialuniUserPasswordRepository;
+import com.qingchi.qing.user.dao.model.SocialUserPasswordDO;
+import com.qingchi.qing.user.dao.repository.SocialuniUserPasswordRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

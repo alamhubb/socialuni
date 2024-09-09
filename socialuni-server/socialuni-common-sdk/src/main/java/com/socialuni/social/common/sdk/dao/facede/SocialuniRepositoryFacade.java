@@ -1,8 +1,7 @@
 package com.socialuni.social.common.sdk.dao.facede;
 
 import cn.hutool.extra.spring.SpringUtil;
-import com.qingchi.qing.jpa.QingJpaBaseDO;
-import com.qingchi.qing.jpa.SocialuniContentBaseDO;
+import com.qingchi.qing.jpa.dao.model.QingJpaBaseDO;
 import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniCommonRepository;
 import lombok.extern.slf4j.Slf4j;

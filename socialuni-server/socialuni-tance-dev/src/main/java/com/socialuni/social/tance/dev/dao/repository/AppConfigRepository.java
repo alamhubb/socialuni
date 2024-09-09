@@ -1,8 +1,6 @@
 package com.socialuni.social.tance.dev.dao.repository;
 
-import com.socialuni.social.common.api.constant.CommonRedisKey;
 import com.socialuni.social.tance.dev.dao.DO.AppConfigDO;
-import org.hibernate.annotations.Cache;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -11,10 +9,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 @Primary
 public interface AppConfigRepository extends JpaRepository<AppConfigDO, Integer> {

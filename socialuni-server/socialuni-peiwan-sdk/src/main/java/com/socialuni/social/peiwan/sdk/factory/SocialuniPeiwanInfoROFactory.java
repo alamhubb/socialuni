@@ -1,6 +1,5 @@
 package com.socialuni.social.peiwan.sdk.factory;
 
-import com.qingchi.qing.constant.SocialuniCommonStatus;
 import com.socialuni.social.common.sdk.model.RO.SocialuniRectangleRO;
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.common.sdk.utils.PositionUtil;

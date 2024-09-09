@@ -6,7 +6,6 @@ import com.socialuni.social.user.sdk.dao.DO.SocialuniUserBlackDO;
 import com.socialuni.social.follow.logic.manage.SocialuniUserFollowManage;
 import com.socialuni.social.follow.logic.manage.SocialUserFansDetailManage;
 import com.socialuni.social.follow.dao.redis.SocialuniUserFollowRedis;
-import com.qingchi.qing.constant.SocialuniCommonStatus;
 import com.socialuni.social.follow.dao.DO.SocialuniUserFollowDO;
 import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
 import com.socialuni.social.follow.model.follow.SocialuniUserFollowAddQO;

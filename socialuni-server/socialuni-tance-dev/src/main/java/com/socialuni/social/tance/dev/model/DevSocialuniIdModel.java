@@ -2,7 +2,7 @@ package com.socialuni.social.tance.dev.model;
 
 
 
-import com.qingchi.qing.jpa.QingJpaBaseDO;
+import com.qingchi.qing.jpa.dao.model.QingJpaBaseDO;
 
 import java.io.Serializable;
 

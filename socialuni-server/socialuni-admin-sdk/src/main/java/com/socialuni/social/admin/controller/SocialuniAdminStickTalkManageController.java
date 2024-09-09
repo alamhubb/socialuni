@@ -3,7 +3,6 @@ package com.socialuni.social.admin.controller;
 import com.socialuni.social.admin.factory.SocialuniAdminStickTalkROFactory;
 import com.socialuni.social.admin.model.ReportUserVO;
 import com.socialuni.social.admin.model.SocialuniAdminStickTalkRO;
-import com.qingchi.qing.constant.SocialuniCommonStatus;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
 import com.socialuni.social.community.sdk.repository.TalkRepository;
 import com.socialuni.social.community.sdk.dao.SocialuniTalkDOUtil;

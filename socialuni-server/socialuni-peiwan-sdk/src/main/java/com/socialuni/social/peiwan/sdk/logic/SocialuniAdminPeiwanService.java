@@ -1,6 +1,5 @@
 package com.socialuni.social.peiwan.sdk.logic;
 
-import com.qingchi.qing.constant.SocialuniCommonStatus;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;

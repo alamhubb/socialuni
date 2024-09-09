@@ -4,7 +4,7 @@ import com.socialuni.social.common.api.utils.SocialTokenFacade;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniTokenDO;
 import com.socialuni.social.user.sdk.dao.repository.SocialuniCommonTokenRepository;
 import com.socialuni.social.tance.dev.facade.DevAccountFacade;
-import com.socialuni.social.common.api.constant.DateTimeType;
+import com.qingchi.qing.constant.DateTimeType;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

@@ -4,7 +4,7 @@ package com.socialuni.social.sdk.logic.entity;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.sdk.constant.AuthType;
 import com.socialuni.social.sdk.dao.DO.dev.ThirdUserDO;
-import com.socialuni.social.user.sdk.logic.redis.SocialUserPhoneRedis;
+import com.qingchi.qing.user.dao.redis.SocialUserPhoneRedis;
 import com.socialuni.social.sdk.logic.manage.ThirdUserAuthManage;
 import com.socialuni.social.sdk.logic.manage.ThirdUserManage;
 import com.socialuni.social.sdk.logic.manage.ThirdUserTokenManage;

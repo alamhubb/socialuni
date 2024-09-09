@@ -1,6 +1,6 @@
 package com.socialuni.social.common.api.entity;
 
-import com.qingchi.qing.jpa.SocialuniContentBaseDO;
+import com.qingchi.qing.jpa.dao.model.SocialuniContentBaseDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

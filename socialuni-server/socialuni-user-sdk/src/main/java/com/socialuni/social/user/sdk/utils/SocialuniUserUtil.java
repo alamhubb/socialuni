@@ -14,7 +14,7 @@ import com.socialuni.social.user.sdk.exception.SocialUserBannedException;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniTokenDO;
 import com.qingchi.qing.user.dao.model.SocialUserPhoneDo;
 import com.socialuni.social.user.sdk.dao.DO.SocialUserViolationDo;
-import com.socialuni.social.user.sdk.logic.redis.SocialUserPhoneRedis;
+import com.qingchi.qing.user.dao.redis.SocialUserPhoneRedis;
 import com.socialuni.social.user.sdk.dao.repository.SocialUserViolationRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

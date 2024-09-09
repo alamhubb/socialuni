@@ -1,7 +1,7 @@
 package com.socialuni.social.community.sdk.repository;
 
 
-import com.socialuni.social.common.api.constant.CommonRedisKey;
+import com.qingchi.qing.constant.CommonRedisKey;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;

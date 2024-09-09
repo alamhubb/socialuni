@@ -1,8 +1,7 @@
 package com.socialuni.social.tance.dev.dao.DO;
 
 import com.socialuni.social.common.api.constant.GenderType;
-import com.qingchi.qing.jpa.QingJpaBaseDO;
-import com.qingchi.qing.constant.ConstStatus;
+import com.qingchi.qing.jpa.dao.model.QingJpaBaseDO;
 import com.socialuni.social.tance.dev.enumeration.DevAccountType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

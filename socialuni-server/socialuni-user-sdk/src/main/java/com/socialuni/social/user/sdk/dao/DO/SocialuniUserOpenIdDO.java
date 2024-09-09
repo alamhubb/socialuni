@@ -1,7 +1,6 @@
 package com.socialuni.social.user.sdk.dao.DO;
 
 
-import com.qingchi.qing.jpa.SocialuniUserInfoBaseDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

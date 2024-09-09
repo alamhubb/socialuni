@@ -1,7 +1,6 @@
 package com.socialuni.social.follow.logic.domain;
 
 
-import com.qingchi.qing.constant.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
 import com.socialuni.social.common.api.model.user.SocialuniUserFollowDetailListRO;

@@ -1,5 +1,6 @@
 package com.socialuni.social.common.api.utils;
 
+import com.qingchi.qing.utils.QingRequestUtil;
 import com.socialuni.social.common.api.config.SocialRequestUserConfig;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -58,7 +59,7 @@ public class SocialTokenFacade {
     }
 
     public static String getSocialuniToken() {
-        HttpServletRequest request = SocialuniRequestUtil.getRequest();
+        HttpServletRequest request = QingRequestUtil.getRequest();
         String token = (String) request.getAttribute(socialuniTokenName);
         if (SocialTokenFacade.isSuccess(token)) {
             return token;
@@ -67,7 +68,7 @@ public class SocialTokenFacade {
     }
 
     public static void setSocialuniToken(String token) {
-        HttpServletRequest request = SocialuniRequestUtil.getRequest();
+        HttpServletRequest request = QingRequestUtil.getRequest();
         request.setAttribute(socialuniTokenName, token);
     }
 
@@ -112,6 +113,6 @@ public class SocialTokenFacade {
 
     public static Boolean isError(String token) {
         return StringUtils.isEmpty(token)
-                || SocialuniRequestUtil.headerIsEmpty(token);
+                || QingRequestUtil.headerIsEmpty(token);
     }
 }

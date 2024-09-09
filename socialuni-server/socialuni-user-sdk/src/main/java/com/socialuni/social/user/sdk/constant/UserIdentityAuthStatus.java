@@ -1,8 +1,5 @@
 package com.socialuni.social.user.sdk.constant;
 
-import com.qingchi.qing.constant.SocialuniCommonStatus;
-import com.qingchi.qing.constant.ConstStatus;
-
 import java.util.Arrays;
 import java.util.List;
 

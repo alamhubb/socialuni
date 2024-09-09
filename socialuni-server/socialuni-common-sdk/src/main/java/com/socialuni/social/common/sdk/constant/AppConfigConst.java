@@ -1,13 +1,7 @@
 package com.socialuni.social.common.sdk.constant;
 
 
-import com.socialuni.social.common.api.constant.DateTimeType;
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Slf4j
 public class AppConfigConst {

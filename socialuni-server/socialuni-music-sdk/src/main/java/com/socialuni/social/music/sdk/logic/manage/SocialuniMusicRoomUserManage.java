@@ -1,6 +1,5 @@
 package com.socialuni.social.music.sdk.logic.manage;
 
-import com.qingchi.qing.constant.SocialuniCommonStatus;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
 import com.socialuni.social.music.sdk.dao.DO.SocialuniMusicRoomUserDO;
 import org.springframework.stereotype.Component;

@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.entity;
 
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.user.sdk.logic.redis.SocialUserPhoneRedis;
+import com.qingchi.qing.user.dao.redis.SocialUserPhoneRedis;
 import com.socialuni.social.user.sdk.logic.entity.SocialUserPhoneEntity;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.dev.dao.DO.DevAccountDo;

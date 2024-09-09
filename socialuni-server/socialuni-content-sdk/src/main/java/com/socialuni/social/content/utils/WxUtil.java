@@ -1,7 +1,7 @@
 package com.socialuni.social.content.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.socialuni.social.common.api.constant.DateTimeType;
+import com.qingchi.qing.constant.DateTimeType;
 import com.socialuni.social.common.api.constant.PlatformType;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;

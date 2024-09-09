@@ -1,7 +1,6 @@
 package com.socialuni.social.content.dao.DO;
 
 import com.github.promeg.pinyinhelper.Pinyin;
-import com.qingchi.qing.constant.SocialuniCommonStatus;
 import lombok.Data;
 
 import javax.persistence.*;

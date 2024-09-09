@@ -1,6 +1,5 @@
 package com.socialuni.social.follow.dao.DO;
 
-import com.qingchi.qing.jpa.SocialuniUserInfoBaseDO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

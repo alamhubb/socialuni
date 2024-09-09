@@ -1,6 +1,6 @@
 package com.socialuni.social.user.sdk.logic.manage;
 
-import com.socialuni.social.common.api.constant.CommonRedisKey;
+import com.qingchi.qing.constant.CommonRedisKey;
 import com.socialuni.social.common.sdk.constant.SocialuniSysRoleId;
 import com.socialuni.social.common.sdk.constant.UserType;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;

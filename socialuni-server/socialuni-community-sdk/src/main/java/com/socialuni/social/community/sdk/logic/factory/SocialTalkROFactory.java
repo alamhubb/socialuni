@@ -1,6 +1,5 @@
 package com.socialuni.social.community.sdk.logic.factory;
 
-import com.qingchi.qing.constant.SocialuniCommonStatus;
 import com.socialuni.social.tag.dao.redis.SocialTagRedis;
 import com.socialuni.social.community.sdk.dao.CommentDao;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniHugDO;

@@ -1,8 +1,8 @@
 package com.socialuni.social.user.sdk.logic.domain;
 
-import com.socialuni.social.common.api.constant.DateTimeType;
-import com.socialuni.social.common.api.constant.SocialSystemConst;
 import com.qingchi.qing.constant.ConstStatus;
+import com.qingchi.qing.constant.DateTimeType;
+import com.socialuni.social.common.api.constant.SocialSystemConst;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
@@ -13,10 +13,10 @@ import com.socialuni.social.common.api.constant.SocialuniSystemConst;
 import com.socialuni.social.tance.dev.facade.ConfigFacade;
 import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserPhoneManage;
-import com.socialuni.social.user.sdk.dao.DO.AuthenticationDO;
+import com.qingchi.qing.user.dao.model.AuthenticationDO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.qingchi.qing.user.model.qo.QingSendAuthCodeQO;
-import com.socialuni.social.user.sdk.dao.repository.AuthenticationRepository;
+import com.qingchi.qing.user.dao.repository.AuthenticationRepository;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.user.sdk.utils.TencentSmsServe;
 import lombok.extern.slf4j.Slf4j;

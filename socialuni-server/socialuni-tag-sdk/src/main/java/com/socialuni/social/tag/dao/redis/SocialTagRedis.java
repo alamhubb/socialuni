@@ -1,6 +1,5 @@
 package com.socialuni.social.tag.dao.redis;
 
-import com.qingchi.qing.constant.SocialuniCommonStatus;
 import com.socialuni.social.tag.dao.DO.SocialuniTagTypeDO;
 import com.socialuni.social.tag.dao.DO.SocialuniTagDO;
 import com.socialuni.social.tag.dao.repository.SocialuniTagTypeRepository;

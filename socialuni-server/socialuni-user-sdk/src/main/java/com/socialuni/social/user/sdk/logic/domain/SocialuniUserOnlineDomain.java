@@ -1,6 +1,6 @@
 package com.socialuni.social.user.sdk.logic.domain;
 
-import com.socialuni.social.common.api.constant.DateTimeType;
+import com.qingchi.qing.constant.DateTimeType;
 import com.socialuni.social.common.sdk.utils.SocialuniDateUtils;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniPartnerUserOnlineDO;
 import com.socialuni.social.user.sdk.dao.repository.SocialuniUserOnlineRepository;

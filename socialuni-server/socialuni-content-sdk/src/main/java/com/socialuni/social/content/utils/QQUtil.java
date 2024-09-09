@@ -13,7 +13,7 @@ import com.socialuni.social.common.sdk.utils.PushMessageUtils;
 import com.socialuni.social.common.sdk.utils.RestUtil;
 import com.socialuni.social.common.sdk.platform.weixin.WxConst;
 import com.socialuni.social.common.sdk.platform.weixin.token.WxTokenResult;
-import com.socialuni.social.common.api.constant.DateTimeType;
+import com.qingchi.qing.constant.DateTimeType;
 import com.socialuni.social.common.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.qingchi.qing.common.exception.base.exception.SocialParamsException;

@@ -6,7 +6,7 @@ import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.qingchi.qing.user.dao.model.SocialUserPhoneDo;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.user.sdk.logic.redis.SocialUserPhoneRedis;
+import com.qingchi.qing.user.dao.redis.SocialUserPhoneRedis;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.apache.commons.lang3.StringUtils;
 

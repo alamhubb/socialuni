@@ -1,6 +1,6 @@
 package com.socialuni.social.community.sdk.dao;
 
-import com.socialuni.social.common.api.constant.CommonRedisKey;
+import com.qingchi.qing.constant.CommonRedisKey;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
 import com.socialuni.social.community.sdk.dao.mapper.TalkMapper;
 import com.socialuni.social.community.sdk.repository.TalkRepository;

@@ -1,6 +1,6 @@
 package com.socialuni.social.tance.dev.entity;
 
-import com.qingchi.qing.jpa.QingJpaBaseDO;
+import com.qingchi.qing.jpa.dao.model.QingJpaBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

@@ -6,7 +6,7 @@ import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkDO;
 import com.socialuni.social.community.sdk.model.TalkAddValidateRO;
 import com.socialuni.social.community.sdk.repository.TalkRepository;
 import com.socialuni.social.common.sdk.constant.UserType;
-import com.socialuni.social.common.api.constant.DateTimeType;
+import com.qingchi.qing.constant.DateTimeType;
 import com.socialuni.social.community.sdk.logic.factory.SocialTalkROFactory;
 import com.socialuni.social.community.sdk.model.QO.talk.SocialuniTalkPostQO;
 import com.socialuni.social.community.sdk.model.RO.talk.SocialuniTalkRO;

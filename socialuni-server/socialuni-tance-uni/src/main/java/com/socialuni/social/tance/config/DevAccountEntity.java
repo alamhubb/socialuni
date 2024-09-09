@@ -1,6 +1,5 @@
 package com.socialuni.social.tance.config;
 
-import com.qingchi.qing.constant.SocialuniCommonStatus;
 import com.socialuni.social.common.api.utils.UUIDUtil;
 import com.socialuni.social.common.sdk.constant.SocialuniSysRoleId;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
@@ -14,7 +13,7 @@ import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.qingchi.qing.user.dao.model.SocialUserPhoneDo;
 import com.socialuni.social.user.sdk.logic.entity.SocialUserPhoneEntity;
-import com.socialuni.social.user.sdk.logic.redis.SocialUserPhoneRedis;
+import com.qingchi.qing.user.dao.redis.SocialUserPhoneRedis;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
