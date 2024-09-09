@@ -9,7 +9,7 @@ import com.socialuni.social.sdk.logic.domain.phone.SocialBindPhoneNumDomain;
 import com.socialuni.social.sdk.logic.domain.phone.SocialBindWxPhoneNumDomain;
 import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumAuthCodeQO;
 import com.socialuni.social.app.model.SocialuniMineUserDetailRO;
-import com.socialuni.social.user.sdk.model.QO.phone.SocialSendAuthCodeQO;
+import com.qingchi.qing.user.model.qo.QingSendAuthCodeQO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,7 @@ public class SocialPhoneService {
     @Resource
     SocailSendAuthCodeDomain socailSendAuthCodeDomain;
 
-    public ResultRO<Void> sendAuthCode(SocialSendAuthCodeQO authCodeQO) {
+    public ResultRO<Void> sendAuthCode(QingSendAuthCodeQO authCodeQO) {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
         return socailSendAuthCodeDomain.sendAuthCode(authCodeQO, mineUser);
     }

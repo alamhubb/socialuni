@@ -15,7 +15,7 @@ import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserPhoneManage;
 import com.socialuni.social.user.sdk.dao.DO.AuthenticationDO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
-import com.socialuni.social.user.sdk.model.QO.phone.SocialSendAuthCodeQO;
+import com.qingchi.qing.user.model.qo.QingSendAuthCodeQO;
 import com.socialuni.social.user.sdk.dao.repository.AuthenticationRepository;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.user.sdk.utils.TencentSmsServe;
@@ -102,7 +102,7 @@ public class SocailSendAuthCodeDomain {
         }
     }
 
-    public ResultRO<Void> sendAuthCode(SocialSendAuthCodeQO authCodeQO, SocialuniUserDo mineUser) {
+    public ResultRO<Void> sendAuthCode(QingSendAuthCodeQO authCodeQO, SocialuniUserDo mineUser) {
         //要防的是同1个ip无线刷验证码
         //发送验证码时要记录ip，记录用户id，记录请求内容
         //限制手机号，同1手机号做多2条，

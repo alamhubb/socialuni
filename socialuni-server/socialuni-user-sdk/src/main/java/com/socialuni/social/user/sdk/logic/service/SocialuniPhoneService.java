@@ -7,7 +7,7 @@ import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
 import com.socialuni.social.user.sdk.logic.domain.SocailSendAuthCodeDomain;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserPhoneManage;
-import com.socialuni.social.user.sdk.model.QO.phone.SocialSendAuthCodeQO;
+import com.qingchi.qing.user.model.qo.QingSendAuthCodeQO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -35,14 +35,14 @@ public class SocialuniPhoneService {
         return ResultRO.success(centerLoginRO);
     }*/
 
-    public ResultRO<Void> sendAuthCode(SocialSendAuthCodeQO authCodeQO) {
+    public ResultRO<Void> sendAuthCode(QingSendAuthCodeQO authCodeQO) {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
         //校验逻辑应该拿到 domain里，因为限制了只有清池可以访问，所以不再限制ip
         return socailSendAuthCodeDomain.sendAuthCode(authCodeQO, mineUser);
     }
 
 
-    public ResultRO<Boolean> checkRegistry(SocialSendAuthCodeQO authCodeQO) {
+    public ResultRO<Boolean> checkRegistry(QingSendAuthCodeQO authCodeQO) {
         String phoneNum = authCodeQO.getPhoneNum();
         SocialUserPhoneDo socialUserPhoneDo = socialUserPhoneManage.checkLoginPhoneNumAllowCan(phoneNum);
 

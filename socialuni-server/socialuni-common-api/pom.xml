@@ -22,6 +22,10 @@
     <dependencies>
         <dependency>
             <groupId>com.qingchi.qing</groupId>
+            <artifactId>qing-utils</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.qingchi.qing</groupId>
             <artifactId>qing-jpa</artifactId>
         </dependency>
         <dependency>
