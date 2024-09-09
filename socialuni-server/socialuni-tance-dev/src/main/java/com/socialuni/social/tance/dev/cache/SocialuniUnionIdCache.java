@@ -37,6 +37,12 @@ public class SocialuniUnionIdCache implements SocialuniUnionIdInterface {
             put = {@CachePut(cacheNames = {"getUnionIdByUnionId"}, key = "#uniContentUnionIdDO.id", condition = "#uniContentUnionIdDO.id != null")}
     )
     public SocialuniUnionIdDo savePut(SocialuniUnionIdDo uniContentUnionIdDO) {
+        log.info("hasdfkasjdflasdjlf");
+        log.info(String.valueOf(uniContentUnionIdDO.getContentType()));
+        log.info(String.valueOf(uniContentUnionIdDO.getContentType()));
+        log.info(String.valueOf(uniContentUnionIdDO.getFromDevId()));
+        log.info(String.valueOf(uniContentUnionIdDO.getId()));
+        log.info(String.valueOf(uniContentUnionIdDO.getUnionId()));
         return uniContentUnionIdRepository.save(uniContentUnionIdDO);
     }
 
@@ -59,7 +65,7 @@ public class SocialuniUnionIdCache implements SocialuniUnionIdInterface {
     }
 
     @Override
-    public List<Long> findUuidAllByContentType(String contentTyp){
+    public List<Long> findUuidAllByContentType(String contentTyp) {
         return uniContentUnionIdRepository.findAllUnionIdByContentType(contentTyp);
     }
 

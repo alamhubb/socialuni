@@ -56,12 +56,12 @@ public class SocialuniDevConfig {
         Integer systemDevId = DevAccountFacade.systemDevId;
         Boolean hasCenter = devId.equals(systemDevId);
         if (!hasCenter) {
-            String curKey = DataSourceContext.getCurrentDataSource();
+            String curKey = DataSourceContextHolder.getDataSourceType();
             DevAccountDo systemDev = DevAccountFacade.getDevAccount(1);
             log.info("curKey center:{}", curKey);
             log.info("xitong key:{}", systemDev.getSecretKey());
         } else {
-            String curKey = DataSourceContext.getCurrentDataSource();
+            String curKey = DataSourceContextHolder.getDataSourceType();
             DevAccountDo systemDev = DevAccountFacade.getDevAccount(1);
             log.info("curKey dev:{}", curKey);
             log.info("xitong key:{}", systemDev.getSecretKey());

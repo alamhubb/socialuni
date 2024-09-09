@@ -7,7 +7,6 @@ import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.tance.dev.api.DevAccountInterface;
 import com.socialuni.social.tance.dev.api.DevAccountProviderInterface;
 import com.socialuni.social.tance.dev.api.DevAccountRedisInterface;
-import com.socialuni.social.tance.dev.config.DataSourceContext;
 import com.socialuni.social.tance.dev.constant.AdminAppConfigConst;
 import com.socialuni.social.tance.dev.dao.DO.DevAccountDo;
 import com.socialuni.social.tance.dev.enumeration.SocialFeignHeaderName;

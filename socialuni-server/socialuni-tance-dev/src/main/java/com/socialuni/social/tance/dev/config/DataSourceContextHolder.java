@@ -3,20 +3,20 @@ package com.socialuni.social.tance.dev.config;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class DataSourceContext {
+public class DataSourceContextHolder {
     private static final ThreadLocal<String> contextHolder = new ThreadLocal<>();
 
-    public static void setCurrentDataSource(String dataSourceType) {
+    public static void setDataSourceType(String dataSourceType) {
         log.info("设置当前数据库：{}", dataSourceType);
         contextHolder.set(dataSourceType);
     }
 
-    public static String getCurrentDataSource() {
+    public static String getDataSourceType() {
         log.info("获取：{}", contextHolder.get());
         return contextHolder.get();
     }
 
-    public static void clearDataSource() {
+    public static void clearDataSourceType() {
         contextHolder.remove();
     }
 }
