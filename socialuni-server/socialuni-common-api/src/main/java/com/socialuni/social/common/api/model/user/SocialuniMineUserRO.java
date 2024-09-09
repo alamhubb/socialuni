@@ -11,10 +11,10 @@ import lombok.NoArgsConstructor;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-public class SocialuniMineUserRO extends SocialuniUserRO {
+public class SocialuniMineUserRO extends SocialuniUserShowRO {
     private String phoneNum;
 
-    public SocialuniMineUserRO(SocialuniUserRO userRO) {
+    public SocialuniMineUserRO(SocialuniUserShowRO userRO) {
         super(userRO);
     }
 

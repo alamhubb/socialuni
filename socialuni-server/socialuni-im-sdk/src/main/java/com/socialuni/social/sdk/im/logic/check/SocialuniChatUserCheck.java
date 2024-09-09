@@ -3,7 +3,6 @@ package com.socialuni.social.sdk.im.logic.check;
 import cn.hutool.core.util.StrUtil;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
-import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniChatUserRepository;
@@ -21,7 +20,7 @@ public class SocialuniChatUserCheck {
     private SocialuniChatUserRepository chatUserRepository;
 
     public SocialuniChatUserDO checkUserInChat(Long chatId, Long sendUserId) {
-        SocialuniChatDO chat = SocialuniChatDOUtil.findByUnionId(chatId);
+        SocialuniChatDO chat = SocialuniChatDOUtil.getChat(chatId);
 
         if (chat == null) {
             throw new SocialParamsException("不存在的群聊");

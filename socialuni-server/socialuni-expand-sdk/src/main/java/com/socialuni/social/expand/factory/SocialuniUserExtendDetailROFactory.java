@@ -3,7 +3,7 @@ package com.socialuni.social.expand.factory;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.user.SocialuniUserExtendDetailRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserImgRO;
-import com.socialuni.social.common.api.model.user.SocialuniUserRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserShowRO;
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
@@ -13,7 +13,7 @@ import com.socialuni.social.user.sdk.dao.DO.SocialuniUserExtendFriendLogDo;
 import com.socialuni.social.common.sdk.model.RO.SocialuniRectangleRO;
 import com.socialuni.social.common.sdk.utils.PositionUtil;
 import com.socialuni.social.user.sdk.dao.utils.SocialuniUserExtendFriendLogDOUtil;
-import com.socialuni.social.user.sdk.model.factory.SocialuniUserROFactory;
+import com.socialuni.social.user.sdk.model.factory.SocialuniUserShowROFactory;
 import com.socialuni.social.user.sdk.utils.DistrictStoreUtils;
 import com.socialuni.social.userImg.dao.DO.SocialuniUserImgDo;
 import com.socialuni.social.userImg.factory.UserImgROFactory;
@@ -35,7 +35,7 @@ public class SocialuniUserExtendDetailROFactory {
 
     public static SocialuniUserExtendDetailRO getUserExtendDetailRO(SocialuniUserDo userDO, SocialuniUserDo mineUser) {
         //user基础信息
-        SocialuniUserRO socialuniUserRO = SocialuniUserROFactory.getUserRO(userDO, mineUser);
+        SocialuniUserShowRO socialuniUserRO = SocialuniUserShowROFactory.getUserRO(userDO, mineUser);
 
         //user基础信息
         SocialuniUserExtendDetailRO socialuniUserExtendDetailRO = new SocialuniUserExtendDetailRO(socialuniUserRO);

@@ -14,7 +14,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-public class SocialuniUserExtendDetailRO extends SocialuniUserRO {
+public class SocialuniUserExtendDetailRO extends SocialuniUserShowRO {
     //省
     private String provinceName;
     //市
@@ -40,7 +40,7 @@ public class SocialuniUserExtendDetailRO extends SocialuniUserRO {
         this.distance = userRO.getDistance();
     }
 
-    public SocialuniUserExtendDetailRO(SocialuniUserRO socialuniUserDetailRO) {
+    public SocialuniUserExtendDetailRO(SocialuniUserShowRO socialuniUserDetailRO) {
         super(socialuniUserDetailRO);
     }
 }

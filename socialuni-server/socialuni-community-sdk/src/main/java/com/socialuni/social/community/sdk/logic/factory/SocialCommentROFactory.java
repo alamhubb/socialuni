@@ -6,8 +6,8 @@ import com.socialuni.social.community.sdk.dao.DO.SocialuniCommentDO;
 import com.socialuni.social.common.api.enumeration.ContentStatus;
 import com.socialuni.social.community.sdk.model.RO.talk.SocialuniCommentRO;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.user.sdk.model.factory.SocialuniUserROFactory;
-import com.socialuni.social.common.api.model.user.SocialuniUserRO;
+import com.socialuni.social.user.sdk.model.factory.SocialuniUserShowROFactory;
+import com.socialuni.social.common.api.model.user.SocialuniUserShowRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import lombok.extern.slf4j.Slf4j;
@@ -39,7 +39,7 @@ public class SocialCommentROFactory {
         socialCommentRO.setNo(comment.getNo());
 
         SocialuniUserDo commentUser = SocialuniUserUtil.getUserNotNull(comment.getUserId());
-        SocialuniUserRO commentUserRO = SocialuniUserROFactory.getUserRO(commentUser, mineUser);
+        SocialuniUserShowRO commentUserRO = SocialuniUserShowROFactory.getUserRO(commentUser, mineUser);
         socialCommentRO.setUser(commentUserRO);
 
         socialCommentRO.setContent(comment.getContent());

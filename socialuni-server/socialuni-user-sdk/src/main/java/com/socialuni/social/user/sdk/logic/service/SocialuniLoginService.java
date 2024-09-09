@@ -1,7 +1,7 @@
 package com.socialuni.social.user.sdk.logic.service;
 
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.common.api.model.user.SocialuniUserRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserShowRO;
 import com.socialuni.social.common.api.constant.SocialuniSupportProviderType;
 import com.socialuni.social.user.sdk.logic.domain.SocialuniLoginDomain;
 import com.socialuni.social.user.sdk.model.QO.*;
@@ -18,37 +18,37 @@ public class SocialuniLoginService {
     @Resource
     SocialuniLoginDomain socialLoginDomain;
 
-    public ResultRO<SocialLoginRO<SocialuniUserRO>> deviceUidLogin(SocialuniDeviceUidLoginQO socialuniDeviceUidLoginQO, Long unionId) {
-        SocialLoginRO<SocialuniUserRO> socialLoginRO = socialLoginDomain.deviceUidLogin(socialuniDeviceUidLoginQO, unionId);
+    public ResultRO<SocialLoginRO<SocialuniUserShowRO>> deviceUidLogin(SocialuniDeviceUidLoginQO socialuniDeviceUidLoginQO, Long unionId) {
+        SocialLoginRO<SocialuniUserShowRO> socialLoginRO = socialLoginDomain.deviceUidLogin(socialuniDeviceUidLoginQO, unionId);
         return ResultRO.success(socialLoginRO);
     }
 
     //提供给借用社交联盟实现微信qq渠道登录的开发者， 不需要支持社交联盟登录，社交联盟登录是前台跳转登录返回信息，不走后台
     @Transactional
-    public ResultRO<SocialLoginRO<SocialuniUserRO>> providerLogin(SocialProviderLoginQO loginQO) {
+    public ResultRO<SocialLoginRO<SocialuniUserShowRO>> providerLogin(SocialProviderLoginQO loginQO) {
         // 只有清池支持渠道登录
         // 其他的只支持社交联盟登陆
         SocialuniSupportProviderType.checkSupportType(loginQO.getProvider());
-        SocialLoginRO<SocialuniUserRO> socialLoginRO = socialLoginDomain.providerLogin(loginQO);
+        SocialLoginRO<SocialuniUserShowRO> socialLoginRO = socialLoginDomain.providerLogin(loginQO);
         return ResultRO.success(socialLoginRO);
     }
 
     @Transactional
-    public ResultRO<SocialLoginRO<SocialuniUserRO>> phoneLogin(SocialPhoneNumAuthCodeQO socialPhoneNumQO) {
-        SocialLoginRO<SocialuniUserRO> socialLoginRO = socialLoginDomain.phoneLogin(socialPhoneNumQO);
+    public ResultRO<SocialLoginRO<SocialuniUserShowRO>> phoneLogin(SocialPhoneNumAuthCodeQO socialPhoneNumQO) {
+        SocialLoginRO<SocialuniUserShowRO> socialLoginRO = socialLoginDomain.phoneLogin(socialPhoneNumQO);
 //        CompletableFuture.supplyAsync(() -> socialuniOpenImgUserFeign.userLogin(SocialuniMineUserDetailROFactory.toImUserModel(user)));
         return ResultRO.success(socialLoginRO);
     }
 
 
     @Transactional
-    public ResultRO<SocialLoginRO<SocialuniUserRO>> phonePasswordLogin(SocialPhoneAuthCodePasswordQO socialPhoneNumQO) {
-        SocialLoginRO<SocialuniUserRO> socialLoginRO = socialLoginDomain.phonePasswordLogin(socialPhoneNumQO);
+    public ResultRO<SocialLoginRO<SocialuniUserShowRO>> phonePasswordLogin(SocialPhoneAuthCodePasswordQO socialPhoneNumQO) {
+        SocialLoginRO<SocialuniUserShowRO> socialLoginRO = socialLoginDomain.phonePasswordLogin(socialPhoneNumQO);
         return ResultRO.success(socialLoginRO);
     }
 
-    public ResultRO<SocialLoginRO<SocialuniUserRO>> passwordLogin(SocialPhoneNumPasswordQO socialPhoneNumQO) {
-        SocialLoginRO<SocialuniUserRO> socialLoginRO = socialLoginDomain.passwordLogin(socialPhoneNumQO);
+    public ResultRO<SocialLoginRO<SocialuniUserShowRO>> passwordLogin(SocialPhoneNumPasswordQO socialPhoneNumQO) {
+        SocialLoginRO<SocialuniUserShowRO> socialLoginRO = socialLoginDomain.passwordLogin(socialPhoneNumQO);
         return ResultRO.success(socialLoginRO);
     }
 

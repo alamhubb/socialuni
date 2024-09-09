@@ -1,8 +1,7 @@
 package com.socialuni.social.app.logic.service;
 
 import com.socialuni.social.app.factory.SocialuniMineUserDetailROFactory;
-import com.socialuni.social.common.api.model.user.SocialuniUserRO;
-import com.socialuni.social.common.api.utils.SnowflakeIdUtil;
+import com.socialuni.social.common.api.model.user.SocialuniUserShowRO;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniTokenDO;
@@ -31,7 +30,7 @@ public class SocialuniThirdUserRegistryDomain {
     //中心注册user
     //根据渠道登录信息获取user，支持social比commonUserDomain
     //这个单独出来是因为区分了基础provider和社交，这个单独增加了对社交渠道的支持
-    public SocialLoginRO<SocialuniUserRO> registryUser(SocialProviderLoginQO loginQO) {
+    public SocialLoginRO<SocialuniUserShowRO> registryUser(SocialProviderLoginQO loginQO) {
         //1. 根据手机号+devId查找
         //如果已经注册过
         String phoneNum = loginQO.getPhoneNum();

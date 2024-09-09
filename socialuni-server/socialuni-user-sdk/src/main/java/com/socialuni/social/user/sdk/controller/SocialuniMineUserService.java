@@ -1,7 +1,7 @@
 package com.socialuni.social.user.sdk.controller;
 
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.common.api.model.user.SocialuniUserRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserShowRO;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
 import com.socialuni.social.tance.dev.config.SocialuniDevConfig;
 import com.socialuni.social.tance.dev.facade.DevAccountFacade;
@@ -14,11 +14,10 @@ import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.logic.manage.SocialuniTokenManage;
 import com.socialuni.social.user.sdk.model.QO.SocialUserEditQO;
 import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
-import com.socialuni.social.user.sdk.model.factory.SocialuniUserROFactory;
+import com.socialuni.social.user.sdk.model.factory.SocialuniUserShowROFactory;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.annotation.Resource;
 
@@ -30,25 +29,25 @@ public class SocialuniMineUserService {
     @Resource
     SocialuniMineUserAPI socialuniMineUserAPI;
 
-    public ResultRO<SocialuniUserRO> getMineUser() {
-        SocialuniUserRO mineUserDetailRO;
+    public ResultRO<SocialuniUserShowRO> getMineUser() {
+        SocialuniUserShowRO mineUserDetailRO;
         if (SocialuniDevConfig.hasCenterServer()) {
-            ResultRO<SocialuniUserRO> resultRO = socialuniMineUserAPI.getMineUser();
-            mineUserDetailRO = new SocialuniUserRO(resultRO.getData());
+            ResultRO<SocialuniUserShowRO> resultRO = socialuniMineUserAPI.getMineUser();
+            mineUserDetailRO = new SocialuniUserShowRO(resultRO.getData());
         } else {
             //生成用户扩列记录
             SocialuniUserExtendFriendLogDOUtil.createUserExtendFriendLog();
-            mineUserDetailRO = SocialuniUserROFactory.getMineUserRO();
+            mineUserDetailRO = SocialuniUserShowROFactory.getMineUserRO();
         }
         return new ResultRO<>(mineUserDetailRO);
     }
 
 
-    public ResultRO<SocialuniUserRO> editUser(SocialUserEditQO socialUserEditQO) {
+    public ResultRO<SocialuniUserShowRO> editUser(SocialUserEditQO socialUserEditQO) {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
         socialEditUserDomain.editUser(socialUserEditQO, mineUser);
 
-        SocialuniUserRO socialMineUserDetailRO = SocialuniUserROFactory.getMineUserRO(mineUser);
+        SocialuniUserShowRO socialMineUserDetailRO = SocialuniUserShowROFactory.getMineUserRO(mineUser);
 
         if (SocialuniDevConfig.hasCenterServer()) {
             return socialuniMineUserAPI.editUser(socialUserEditQO);
@@ -60,13 +59,13 @@ public class SocialuniMineUserService {
     @Resource
     SocialuniTokenManage tokenManage;
 
-    public ResultRO<SocialLoginRO<SocialuniUserRO>> refreshToken() {
+    public ResultRO<SocialLoginRO<SocialuniUserShowRO>> refreshToken() {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
         Long mineUserId = mineUser.getUserId();
         SocialuniTokenDO socialUserTokenDO = tokenManage.create(mineUser.getUnionId());
         if (SocialuniDevConfig.hasCenterServer()) {
-            ResultRO<SocialLoginRO<SocialuniUserRO>> resultRO = socialuniMineUserAPI.refreshToken();
-            SocialuniUserRO socialuniUserRO = resultRO.getData().getUser();
+            ResultRO<SocialLoginRO<SocialuniUserShowRO>> resultRO = socialuniMineUserAPI.refreshToken();
+            SocialuniUserShowRO socialuniUserRO = resultRO.getData().getUser();
             String token = resultRO.getData().getToken();
             Integer serverDevId = DevAccountFacade.getCenterDevIdNotNull();
             SocialuniThirdTokenUtil.updateUserToken(mineUserId, token, serverDevId, socialuniUserRO.getId());
@@ -74,19 +73,19 @@ public class SocialuniMineUserService {
 
         SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getUserNotNull(mineUserId);
 
-        SocialuniUserRO socialuniMineUserRO = SocialuniUserROFactory.getMineUserRO(socialuniUserDo);
+        SocialuniUserShowRO socialuniMineUserRO = SocialuniUserShowROFactory.getMineUserRO(socialuniUserDo);
 
-        SocialLoginRO<SocialuniUserRO> socialLoginRO = new SocialLoginRO(socialUserTokenDO.getToken(), socialuniMineUserRO);
+        SocialLoginRO<SocialuniUserShowRO> socialLoginRO = new SocialLoginRO(socialUserTokenDO.getToken(), socialuniMineUserRO);
 
         return ResultRO.success(socialLoginRO);
     }
 
 
 
-    public ResultRO<SocialuniUserRO> randomUserAvatar() {
+    public ResultRO<SocialuniUserShowRO> randomUserAvatar() {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
 
-        SocialuniUserRO socialMineUserDetailRO = socialEditUserDomain.randomUserAvatar(mineUser);
+        SocialuniUserShowRO socialMineUserDetailRO = socialEditUserDomain.randomUserAvatar(mineUser);
 
         if (SocialuniDevConfig.hasCenterServer()) {
             return socialuniMineUserAPI.randomUserAvatar();
@@ -95,11 +94,11 @@ public class SocialuniMineUserService {
         return ResultRO.success(socialMineUserDetailRO);
     }
 
-    public ResultRO<SocialuniUserRO> addUserAvatarImg(SocialuniImgAddQO socialUserImgAddQO) {
+    public ResultRO<SocialuniUserShowRO> addUserAvatarImg(SocialuniImgAddQO socialUserImgAddQO) {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
 
 
-        SocialuniUserRO socialMineUserDetailRO = socialEditUserDomain.addUserAvatarImg(socialUserImgAddQO, mineUser);
+        SocialuniUserShowRO socialMineUserDetailRO = socialEditUserDomain.addUserAvatarImg(socialUserImgAddQO, mineUser);
 
         if (SocialuniDevConfig.hasCenterServer()) {
             return socialuniMineUserAPI.addUserAvatarImg(socialUserImgAddQO);

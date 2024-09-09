@@ -1,6 +1,6 @@
 package com.socialuni.social.community.sdk.model;
 
-import com.socialuni.social.common.api.model.user.SocialuniUserRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserShowRO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.model.UserCommentBO;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniCommentDO;
@@ -42,7 +42,7 @@ public class UnreadCommentVO {
     private SocialuniTalkRO talk;
 
 
-    private SocialuniUserRO user;
+    private SocialuniUserShowRO user;
 
     private List<UnreadCommentVO> childComments;
 

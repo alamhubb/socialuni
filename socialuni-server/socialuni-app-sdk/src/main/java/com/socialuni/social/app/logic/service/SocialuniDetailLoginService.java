@@ -3,7 +3,7 @@ package com.socialuni.social.app.logic.service;
 import com.socialuni.social.app.factory.SocialuniMineUserDetailROFactory;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.app.model.SocialuniMineUserDetailRO;
-import com.socialuni.social.common.api.model.user.SocialuniUserRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserShowRO;
 import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.sdk.im.logic.entity.SocialuniChatEntity;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
@@ -40,9 +40,9 @@ public class SocialuniDetailLoginService {
 
     //提供给借用社交联盟实现微信qq渠道登录的开发者， 不需要支持社交联盟登录，社交联盟登录是前台跳转登录返回信息，不走后台
     @Transactional
-    public ResultRO<SocialLoginRO<SocialuniUserRO>> providerLogin(SocialProviderLoginQO loginQO) {
+    public ResultRO<SocialLoginRO<SocialuniUserShowRO>> providerLogin(SocialProviderLoginQO loginQO) {
 
-        ResultRO<SocialLoginRO<SocialuniUserRO>> socialLoginRO1 = socialuniLoginService.providerLogin(loginQO);
+        ResultRO<SocialLoginRO<SocialuniUserShowRO>> socialLoginRO1 = socialuniLoginService.providerLogin(loginQO);
 
         Long mineUserId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(socialLoginRO1.getData().getUser().getId());
 
@@ -50,7 +50,7 @@ public class SocialuniDetailLoginService {
 
         SocialuniMineUserDetailRO socialuniMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
 
-        SocialLoginRO<SocialuniUserRO> socialLoginRO = new SocialLoginRO(socialLoginRO1.getData().getToken(), socialuniMineUserDetailRO);
+        SocialLoginRO<SocialuniUserShowRO> socialLoginRO = new SocialLoginRO(socialLoginRO1.getData().getToken(), socialuniMineUserDetailRO);
 
         RequestUtil.setAttribute(SocialuniWebConfig.getTokenName(), socialLoginRO1.getData().getToken());
         //用户加入
@@ -72,8 +72,8 @@ public class SocialuniDetailLoginService {
     }
 
     @Transactional
-    public ResultRO<SocialLoginRO<SocialuniUserRO>> phoneLogin(SocialPhoneNumAuthCodeQO socialPhoneNumQO) {
-        ResultRO<SocialLoginRO<SocialuniUserRO>> socialLoginRO1 = socialuniLoginService.phoneLogin(socialPhoneNumQO);
+    public ResultRO<SocialLoginRO<SocialuniUserShowRO>> phoneLogin(SocialPhoneNumAuthCodeQO socialPhoneNumQO) {
+        ResultRO<SocialLoginRO<SocialuniUserShowRO>> socialLoginRO1 = socialuniLoginService.phoneLogin(socialPhoneNumQO);
 
         Long mineUserId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(socialLoginRO1.getData().getUser().getId());
 
@@ -81,7 +81,7 @@ public class SocialuniDetailLoginService {
 
         SocialuniMineUserDetailRO socialuniMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(socialuniUserDo);
 
-        SocialLoginRO<SocialuniUserRO> socialLoginRO = new SocialLoginRO(socialLoginRO1.getData().getToken(), socialuniMineUserDetailRO);
+        SocialLoginRO<SocialuniUserShowRO> socialLoginRO = new SocialLoginRO(socialLoginRO1.getData().getToken(), socialuniMineUserDetailRO);
 
         RequestUtil.setAttribute(SocialuniWebConfig.getTokenName(), socialLoginRO1.getData().getToken());
         //用户加入
@@ -93,8 +93,8 @@ public class SocialuniDetailLoginService {
     }
 
     @Transactional
-    public ResultRO<SocialLoginRO<SocialuniUserRO>> phonePasswordLogin(SocialPhoneAuthCodePasswordQO socialPhoneNumQO) {
-        ResultRO<SocialLoginRO<SocialuniUserRO>> socialLoginRO1 = socialuniLoginService.phonePasswordLogin(socialPhoneNumQO);
+    public ResultRO<SocialLoginRO<SocialuniUserShowRO>> phonePasswordLogin(SocialPhoneAuthCodePasswordQO socialPhoneNumQO) {
+        ResultRO<SocialLoginRO<SocialuniUserShowRO>> socialLoginRO1 = socialuniLoginService.phonePasswordLogin(socialPhoneNumQO);
 
         Long mineUserId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(socialLoginRO1.getData().getUser().getId());
 
@@ -102,7 +102,7 @@ public class SocialuniDetailLoginService {
 
         SocialuniMineUserDetailRO socialuniMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(socialuniUserDo);
 
-        SocialLoginRO<SocialuniUserRO> socialLoginRO = new SocialLoginRO(socialLoginRO1.getData().getToken(), socialuniMineUserDetailRO);
+        SocialLoginRO<SocialuniUserShowRO> socialLoginRO = new SocialLoginRO(socialLoginRO1.getData().getToken(), socialuniMineUserDetailRO);
 
         RequestUtil.setAttribute(SocialuniWebConfig.getTokenName(), socialLoginRO1.getData().getToken());
         //用户加入
@@ -113,8 +113,8 @@ public class SocialuniDetailLoginService {
         return ResultRO.success(socialLoginRO);
     }
 
-    public ResultRO<SocialLoginRO<SocialuniUserRO>> passwordLogin(SocialPhoneNumPasswordQO socialPhoneNumQO) {
-        ResultRO<SocialLoginRO<SocialuniUserRO>> socialLoginRO1 = socialuniLoginService.passwordLogin(socialPhoneNumQO);
+    public ResultRO<SocialLoginRO<SocialuniUserShowRO>> passwordLogin(SocialPhoneNumPasswordQO socialPhoneNumQO) {
+        ResultRO<SocialLoginRO<SocialuniUserShowRO>> socialLoginRO1 = socialuniLoginService.passwordLogin(socialPhoneNumQO);
 
         Long mineUserId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(socialLoginRO1.getData().getUser().getId());
 
@@ -122,7 +122,7 @@ public class SocialuniDetailLoginService {
 
         SocialuniMineUserDetailRO socialuniMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(socialuniUserDo);
 
-        SocialLoginRO<SocialuniUserRO> socialLoginRO = new SocialLoginRO(socialLoginRO1.getData().getToken(), socialuniMineUserDetailRO);
+        SocialLoginRO<SocialuniUserShowRO> socialLoginRO = new SocialLoginRO(socialLoginRO1.getData().getToken(), socialuniMineUserDetailRO);
 
         RequestUtil.setAttribute(SocialuniWebConfig.getTokenName(), socialLoginRO1.getData().getToken());
         //用户加入
@@ -134,8 +134,8 @@ public class SocialuniDetailLoginService {
     }
 
 
-    public ResultRO<SocialLoginRO<SocialuniUserRO>> deviceUidLogin(SocialuniDeviceUidLoginQO socialuniDeviceUidLoginQO) {
-        ResultRO<SocialLoginRO<SocialuniUserRO>> socialLoginRO1 = socialuniLoginService.deviceUidLogin(socialuniDeviceUidLoginQO, SocialuniUnionIdFacede.createUserUnionId());
+    public ResultRO<SocialLoginRO<SocialuniUserShowRO>> deviceUidLogin(SocialuniDeviceUidLoginQO socialuniDeviceUidLoginQO) {
+        ResultRO<SocialLoginRO<SocialuniUserShowRO>> socialLoginRO1 = socialuniLoginService.deviceUidLogin(socialuniDeviceUidLoginQO, SocialuniUnionIdFacede.createUserUnionId());
 
         Long mineUserId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(socialLoginRO1.getData().getUser().getId());
 
@@ -143,7 +143,7 @@ public class SocialuniDetailLoginService {
 
         SocialuniMineUserDetailRO socialuniMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(socialuniUserDo);
 
-        SocialLoginRO<SocialuniUserRO> socialLoginRO = new SocialLoginRO(socialLoginRO1.getData().getToken(), socialuniMineUserDetailRO);
+        SocialLoginRO<SocialuniUserShowRO> socialLoginRO = new SocialLoginRO(socialLoginRO1.getData().getToken(), socialuniMineUserDetailRO);
 
         RequestUtil.setAttribute(SocialuniWebConfig.getTokenName(), socialLoginRO1.getData().getToken());
 

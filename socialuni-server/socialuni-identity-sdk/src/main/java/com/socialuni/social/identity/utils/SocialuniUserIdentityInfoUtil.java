@@ -1,10 +1,8 @@
 package com.socialuni.social.identity.utils;
 
-import com.socialuni.social.common.api.model.user.SocialuniContentUserRO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.identity.dao.DO.SocialUserIdentityAuthDO;
 import com.socialuni.social.user.sdk.constant.UserIdentityAuthStatus;
-import com.socialuni.social.user.sdk.model.factory.SocialuniUserROFactory;
 import com.socialuni.social.identity.dao.repository.SocialUserIdentityAuthRepository;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Component;

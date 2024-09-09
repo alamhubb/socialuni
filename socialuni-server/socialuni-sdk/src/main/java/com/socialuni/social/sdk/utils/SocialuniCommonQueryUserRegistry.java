@@ -5,7 +5,7 @@ import com.socialuni.social.common.api.exception.exception.SocialBusinessExcepti
 import com.socialuni.social.common.api.model.user.SocialuniContentUserRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserDetailRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserFollowInfoRO;
-import com.socialuni.social.common.api.model.user.SocialuniUserRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserShowRO;
 import com.socialuni.social.common.sdk.constant.SocialuniCommonQueryKey;
 import com.socialuni.social.common.sdk.model.QO.SocialuniKeyQueryQO;
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
@@ -51,7 +51,7 @@ public class SocialuniCommonQueryUserRegistry implements SocialuniCommonQueryReg
         for (String key : keys) {
             Object value = null;
             if (SocialuniCommonQueryKey.SocialuniUserRO.equals(key)) {
-                value = new SocialuniUserRO(socialuniUserDetailRO);
+                value = new SocialuniUserShowRO(socialuniUserDetailRO);
             } else if (SocialuniCommonQueryKey.SocialuniContentUserRO.equals(key)) {
                 value = new SocialuniContentUserRO(socialuniUserDetailRO);
             } else if (SocialuniCommonQueryKey.SocialuniUserFollowInfoRO.equals(key)) {

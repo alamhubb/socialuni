@@ -70,7 +70,10 @@ public class SocialuniDevConfig {
     }
 
     public static boolean serverIsCenter() {
-        return !SocialuniDevConfig.hasCenterServer();
+        Integer devId = DevAccountFacade.getDevIdNullElseCenterDevId();
+        Integer systemDevId = DevAccountFacade.systemDevId;
+        Boolean hasCenter = devId.equals(systemDevId);
+        return !SocialuniDevConfig.hasCenterServer() && hasCenter;
 
     }
 

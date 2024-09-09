@@ -1,5 +1,6 @@
 package com.socialuni.social.common.api.model;
 
+import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -9,12 +10,9 @@ import lombok.experimental.SuperBuilder;
  * @date 2019-08-13 23:34
  */
 @Data
-@NoArgsConstructor
 @SuperBuilder
-public class SocialuniContentIdRO {
-    private String id;
+@NoArgsConstructor
+public class SocialuniNotifyUserRO extends SocialuniUserRO {
 
-    public SocialuniContentIdRO(SocialuniContentIdRO contentIdRO) {
-        this.id = contentIdRO.getId();
-    }
+
 }

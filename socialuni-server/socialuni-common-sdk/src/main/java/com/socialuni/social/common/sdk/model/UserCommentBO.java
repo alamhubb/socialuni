@@ -2,7 +2,7 @@ package com.socialuni.social.common.sdk.model;
 
 //import com.socialuni.sdk.utils.UnionIdDbUtil;
 
-import com.socialuni.social.common.api.model.user.SocialuniUserRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserShowRO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import lombok.Data;
 
@@ -31,8 +31,8 @@ public class UserCommentBO {
         }
     }
 
-    public SocialuniUserRO toVO() {
-        SocialuniUserRO userCommentVO = new SocialuniUserRO();
+    public SocialuniUserShowRO toVO() {
+        SocialuniUserShowRO userCommentVO = new SocialuniUserShowRO();
         userCommentVO.setId(this.id);
         userCommentVO.setNickname(this.nickname);
         userCommentVO.setAvatar(this.avatar);

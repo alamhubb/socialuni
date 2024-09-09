@@ -1,3 +1,4 @@
+/*
 package com.socialuni.social.sdk.im.utils;
 
 import com.socialuni.social.common.api.model.ResultRO;
@@ -38,3 +39,4 @@ public class SocialuniFeignClientUtil {
         }
     }
 }
+*/

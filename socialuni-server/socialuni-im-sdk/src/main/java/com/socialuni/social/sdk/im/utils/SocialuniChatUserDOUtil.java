@@ -21,7 +21,7 @@ public class SocialuniChatUserDOUtil {
         if (chatUserId == null) {
             return null;
         }
-        return SocialuniChatUserDOUtil.findById(chatUserId);
+        return SocialuniChatUserDOUtil.get(chatUserId);
     }
 
     public static SocialuniChatUserDO findFirstByChatIdAndUserIdAndStatus(Long chatId, Long userId, String status) {
@@ -37,7 +37,7 @@ public class SocialuniChatUserDOUtil {
         if (chatUserId == null) {
             return null;
         }
-        return SocialuniChatUserDOUtil.findById(chatUserId);
+        return SocialuniChatUserDOUtil.get(chatUserId);
     }
 
     public static SocialuniChatUserDO findByUserIdAndBeUserIdNotNull(Long userId, Long beUserId) {
@@ -48,7 +48,7 @@ public class SocialuniChatUserDOUtil {
         return chatUserDO;
     }
 
-    public static SocialuniChatUserDO findById(Integer id) {
+    public static SocialuniChatUserDO get(Integer id) {
         return chatUserRepository.findFirstById(id);
     }
 

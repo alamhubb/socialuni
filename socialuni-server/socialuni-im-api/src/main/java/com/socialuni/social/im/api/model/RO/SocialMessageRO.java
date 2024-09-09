@@ -2,7 +2,7 @@ package com.socialuni.social.im.api.model.RO;
 
 
 import com.socialuni.social.common.api.model.SocialuniContentIdRO;
-import com.socialuni.social.common.api.model.user.SocialuniUserRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserShowRO;
 import lombok.Data;
 
 import java.util.Date;
@@ -17,10 +17,10 @@ public class SocialMessageRO extends SocialuniContentIdRO {
     // 前端遍历使用
     private String content;
     private String contentType;
-    private SocialuniUserRO user;
+    private SocialuniUserShowRO user;
     // 前端对比是否为当前用户使用，聊天页面
     //用来帮助前端判断是否为自己发送的
-    private Boolean isMine;
+//    private Boolean isMine;
     private String readStatus;
     private Boolean isRead;
     private Integer readNum;

@@ -1,11 +1,15 @@
 package com.socialuni.social.sdk.im.config.websocket;
 
+import cn.hutool.core.collection.CollectionUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.socialuni.social.common.api.utils.JsonUtil;
 import com.socialuni.social.common.api.utils.NumberUtils;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.utils.RedisUtil;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniChatUserRepository;
 import com.socialuni.social.sdk.im.enumeration.NotifyType;
 import com.socialuni.social.sdk.im.notify.NotifyVO;
+import com.socialuni.social.common.api.model.SocialuniNotifyRO;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.logic.domain.SocialuniUserOnlineDomain;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
@@ -61,7 +65,7 @@ public class WebsocketServer extends TextWebSocketHandler {
 
 
     public static <T> void sendUserCount(Integer userCount, List<String> names) {
-        NotifyVO<Map> notifyVO = new NotifyVO<>();
+        SocialuniNotifyRO notifyVO = new SocialuniNotifyRO();
 
         Map<String, Object> map = new HashMap<>();
 
@@ -72,13 +76,24 @@ public class WebsocketServer extends TextWebSocketHandler {
         WebsocketServer.sendToAllUsers(notifyVO);
     }
 
-    public static <T> void sendToAllUsers(NotifyVO<T> notify) {
+
+    public static TextMessage toMessage(SocialuniNotifyRO socialuniNotifyRO) {
+
+        try {
+            return new TextMessage(JsonUtil.objectMapper.writeValueAsString(socialuniNotifyRO));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static <T> void sendToAllUsers(SocialuniNotifyRO notify) {
         log.info("fasongle xiaoxi ");
         //发送给所有在线的群组里面的用户
         for (WebSocketSession userSession : onlineUsersSessionMap.values()) {
             if (userSession != null && userSession.isOpen()) {
                 try {
-                    userSession.sendMessage(notify.toMessage());
+                    userSession.sendMessage(Objects.requireNonNull(toMessage(notify)));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -86,26 +101,32 @@ public class WebsocketServer extends TextWebSocketHandler {
         }
     }
 
+
     /**
      * 广播信息
      */
-    public static <T> void sendToGroupUsers(NotifyVO<T> notify, List<String> userIds) {
-        for (String userIdStr : userIds) {
-            WebSocketSession userSession = onlineUsersSessionMap.get(userIdStr);
-            if (userSession != null && userSession.isOpen()) {
-                String sessionUserId = Objects.requireNonNull(userSession.getPrincipal()).getName();
-                //如果发送人是自己则不发送
-                if (userIdStr.equals(sessionUserId)) {
-                    continue;
-                }
-                //发给不是自己的
-                log.info("消息发送用户id:{},sessionId:{}", userIdStr, sessionUserId);
-                //如果用户在线才发送
-                //有不为数字的代表是没登陆的用户才发送
-                try {
-                    userSession.sendMessage(notify.toMessage());
-                } catch (IOException e) {
-                    e.printStackTrace();
+    public static <T> void sendToGroupUsers(SocialuniNotifyRO notify) {
+        List<String> userIds = notify.getUserIds();
+        if (CollectionUtil.isEmpty(userIds)) {
+            sendToAllUsers(notify);
+        } else {
+            for (String userIdStr : userIds) {
+                WebSocketSession userSession = onlineUsersSessionMap.get(userIdStr);
+                if (userSession != null && userSession.isOpen()) {
+                    String sessionUserId = Objects.requireNonNull(userSession.getPrincipal()).getName();
+                    //如果发送人是自己则不发送
+                    if (userIdStr.equals(sessionUserId)) {
+                        continue;
+                    }
+                    //发给不是自己的
+                    log.info("消息发送用户id:{},sessionId:{}", userIdStr, sessionUserId);
+                    //如果用户在线才发送
+                    //有不为数字的代表是没登陆的用户才发送
+                    try {
+                        userSession.sendMessage(Objects.requireNonNull(toMessage(notify)));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }

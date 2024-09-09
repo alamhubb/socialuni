@@ -326,6 +326,19 @@ public class SocialuniUnionIdFacede {
         return ids;
     }
 
+    public static List<String> getUuIdsByInnerIds(List<Long> innerIds) {
+        List<String> ids = new ArrayList<>();
+        if (ObjectUtil.isNotEmpty(innerIds)) {
+            for (Long innerId : innerIds) {
+//                log.info("查询单个id：" + System.currentTimeMillis());
+                String id = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(innerId);
+                ids.add(id);
+            }
+        }
+        return ids;
+    }
+
+
 
     public static boolean isInteger(String str) {
         Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");

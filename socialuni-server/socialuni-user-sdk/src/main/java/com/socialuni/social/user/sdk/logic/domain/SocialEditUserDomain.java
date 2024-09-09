@@ -9,8 +9,8 @@ import com.socialuni.social.content.utils.BirthdayAgeUtil;
 import com.socialuni.social.user.sdk.dao.utils.SocialuniUserDOUtil;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.QO.SocialUserEditQO;
-import com.socialuni.social.common.api.model.user.SocialuniUserRO;
-import com.socialuni.social.user.sdk.model.factory.SocialuniUserROFactory;
+import com.socialuni.social.common.api.model.user.SocialuniUserShowRO;
+import com.socialuni.social.user.sdk.model.factory.SocialuniUserShowROFactory;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniUserRepository;
 import com.socialuni.social.user.sdk.utils.GenderUtil;
 import com.socialuni.social.content.utils.SocialuniTextContentUtil;
@@ -25,7 +25,7 @@ public class SocialEditUserDomain {
     @Resource
     SocialuniUserRepository userApi;
 
-    public SocialuniUserRO editUser(SocialUserEditQO socialUserEditQO, SocialuniUserDo mineUser) {
+    public SocialuniUserShowRO editUser(SocialUserEditQO socialUserEditQO, SocialuniUserDo mineUser) {
         //昵称
         String nickname = socialUserEditQO.getNickname();
         if (StringUtils.isEmpty(nickname)) {
@@ -65,12 +65,12 @@ public class SocialEditUserDomain {
 
         mineUser = SocialuniUserDOUtil.checkAndSave(mineUser);
 
-        SocialuniUserRO socialuniUserRO = SocialuniUserROFactory.getUserRO(mineUser, mineUser);
+        SocialuniUserShowRO socialuniUserRO = SocialuniUserShowROFactory.getUserRO(mineUser, mineUser);
         return socialuniUserRO;
     }
 
 
-    public SocialuniUserRO randomUserAvatar(SocialuniUserDo mineUser) {
+    public SocialuniUserShowRO randomUserAvatar(SocialuniUserDo mineUser) {
         String avatarUrl;
         if (mineUser.getGender().equals(GenderType.boy)) {
             avatarUrl = SocialuniGenerateAvatarUtil.getBoyAvatar();
@@ -81,10 +81,10 @@ public class SocialEditUserDomain {
 
         userApi.savePut(mineUser);
 
-        return SocialuniUserROFactory.getMineUserRO(mineUser);
+        return SocialuniUserShowROFactory.getMineUserRO(mineUser);
     }
 
-    public SocialuniUserRO addUserAvatarImg(SocialuniImgAddQO socialUserImgAddQO, SocialuniUserDo mineUser) {
+    public SocialuniUserShowRO addUserAvatarImg(SocialuniImgAddQO socialUserImgAddQO, SocialuniUserDo mineUser) {
 
         SocialuniTextContentUtil.validateImg(socialUserImgAddQO, mineUser);
 
@@ -92,6 +92,6 @@ public class SocialEditUserDomain {
 
         userApi.savePut(mineUser);
 
-        return SocialuniUserROFactory.getMineUserRO(mineUser);
+        return SocialuniUserShowROFactory.getMineUserRO(mineUser);
     }
 }

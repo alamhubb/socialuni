@@ -169,7 +169,7 @@ public class SocialuniMusicRoomController {
         notifyRONotifyVO.setChatId(chatId.toString());
 
 
-        WebsocketServer.sendToAllUsers(notifyRONotifyVO);
+//        WebsocketServer.sendToAllUsers(notifyRONotifyVO);
 
         //不再需要后台自动暂停了，只有人工播放暂停
         if (socialuniMusicRoomDO.getPlaying()) {
@@ -213,7 +213,7 @@ public class SocialuniMusicRoomController {
                         SocialuniMusicRoomInfoRO socialuniMusicRoomPlayerInfoRO1 = SocialuniMusicRoomPlayerInfoROFactory.createSocialuniMusicRoomInfoRO(dbRoom);
                         NotifyVO<SocialuniMusicRoomInfoRO> notifyRONotifyVO1 = new NotifyVO<>(sysUser, NotifyType.music, socialuniMusicRoomPlayerInfoRO1);
                         notifyRONotifyVO1.setChatId(chatId.toString());
-                        WebsocketServer.sendToAllUsers(notifyRONotifyVO1);
+//                        WebsocketServer.sendToAllUsers(notifyRONotifyVO1);
 
                         log.info(String.valueOf(1111111));
                         List<SocialuniMusicRoomSongListDO> socialuniMusicRoomSongListDOS1 = SocialuniMusicRoomRepositoryFacede.findAllByRoomIdAndStatus(chatId, SocialuniCommonStatus.enable, SocialuniMusicRoomSongListDO.class);

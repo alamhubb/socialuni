@@ -2,7 +2,6 @@ package com.socialuni.social.userImg.api;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserImgRO;
-import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
 import com.socialuni.social.userImg.model.SocialuniUserImgDeleteQO;
 import io.swagger.v3.oas.annotations.Operation;

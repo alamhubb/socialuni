@@ -32,7 +32,7 @@ public class SocialuniChatUserDOFactory {
             } catch (Exception e) {
                 throw new SocialParamsException("错误的会话标识10011");
             }
-            SocialuniChatUserDO socialuniChatUserDO = SocialuniChatUserDOUtil.findById(unionId);
+            SocialuniChatUserDO socialuniChatUserDO = SocialuniChatUserDOUtil.get(unionId);
             if (socialuniChatUserDO == null) {
                 throw new SocialParamsException("不存在会话信息10012");
             }

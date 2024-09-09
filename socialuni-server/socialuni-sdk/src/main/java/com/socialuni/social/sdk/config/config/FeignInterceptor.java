@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.config.config;
 
 import com.socialuni.social.common.api.config.SocialRequestUserConfig;
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.common.api.model.user.SocialuniUserRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserShowRO;
 import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.sdk.dao.repository.UniOutRegisterUserRepository;
 import com.socialuni.social.tance.dev.config.SocialuniDevConfig;
@@ -78,9 +78,9 @@ public class FeignInterceptor implements RequestInterceptor {
 
                 if (socialuniThirdTokenDO == null) {
                     SocialProviderLoginQO socialProviderLoginQO = createRegistryQO(mineUser);
-                    ResultRO<SocialLoginRO<SocialuniUserRO>> resultRO = socialuniThirdUserAPI.registryUser(socialProviderLoginQO);
+                    ResultRO<SocialLoginRO<SocialuniUserShowRO>> resultRO = socialuniThirdUserAPI.registryUser(socialProviderLoginQO);
 
-                    SocialuniUserRO socialuniUserRO = resultRO.getData().getUser();
+                    SocialuniUserShowRO socialuniUserRO = resultRO.getData().getUser();
 
                     String uuid = socialuniUserRO.getId();
 

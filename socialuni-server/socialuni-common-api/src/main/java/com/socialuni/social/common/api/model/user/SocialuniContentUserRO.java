@@ -4,8 +4,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 /**
  * @author qinkaiyuan 查询结果可以没有set和空构造，前台传值可以没有get
  * @date 2019-08-13 23:34
@@ -13,7 +11,7 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-public class SocialuniContentUserRO extends SocialuniUserRO {
+public class SocialuniContentUserRO extends SocialuniUserShowRO {
     private Boolean hasFollowed;
     //是否被对方关注
     private Boolean hasBeFollowed;
@@ -26,7 +24,7 @@ public class SocialuniContentUserRO extends SocialuniUserRO {
         this.identityAuth = centerContentUserRO.getIdentityAuth();
     }
 
-    public SocialuniContentUserRO(SocialuniUserRO socialuniUserRO) {
+    public SocialuniContentUserRO(SocialuniUserShowRO socialuniUserRO) {
         super(socialuniUserRO);
     }
 }

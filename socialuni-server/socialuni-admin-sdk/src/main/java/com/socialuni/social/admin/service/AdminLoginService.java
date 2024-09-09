@@ -5,7 +5,7 @@ import com.socialuni.social.admin.controller.DevAccountRO;
 import com.socialuni.social.app.logic.service.SocialuniDetailLoginService;
 import com.socialuni.social.common.api.constant.SocialuniLoginType;
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.common.api.model.user.SocialuniUserRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserShowRO;
 import com.socialuni.social.common.api.utils.SocialTokenFacade;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.tance.dev.dao.DO.DevAccountDo;
@@ -34,14 +34,14 @@ public class AdminLoginService {
 
     //秘钥登录
     @Transactional
-    public ResultRO<SocialLoginRO<SocialuniUserRO>> secretKeyLogin(DevAccountInterface.DevAccountQueryQO devAccountQueryQO) {
+    public ResultRO<SocialLoginRO<SocialuniUserShowRO>> secretKeyLogin(DevAccountInterface.DevAccountQueryQO devAccountQueryQO) {
         DevAccountDo devAccountDo = devAccountApi.findOneBySecretKey(devAccountQueryQO.getSecretKey());
 
         Long userId = devAccountDo.getUserId();
 
         SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getUserNotNull(userId);
 
-        SocialLoginRO<SocialuniUserRO> socialLoginRO = socialuniLoginDomain.getSocialLoginROByMineUser(socialuniUserDo, SocialuniLoginType.secretKey);
+        SocialLoginRO<SocialuniUserShowRO> socialLoginRO = socialuniLoginDomain.getSocialLoginROByMineUser(socialuniUserDo, SocialuniLoginType.secretKey);
 
         return ResultRO.success(socialLoginRO);
     }
@@ -51,7 +51,7 @@ public class AdminLoginService {
     public ResultRO<SocialLoginRO<DevAccountRO>> phoneLogin(SocialPhoneNumAuthCodeQO socialPhoneNumQO) {
         String phoneNum = socialPhoneNumQO.getPhoneNum();
 
-        ResultRO<SocialLoginRO<SocialuniUserRO>> resultRO = centerLoginService.phoneLogin(socialPhoneNumQO);
+        ResultRO<SocialLoginRO<SocialuniUserShowRO>> resultRO = centerLoginService.phoneLogin(socialPhoneNumQO);
 
 
         //如果手机号已经存在账户，则直接使用，正序获取第一个用户

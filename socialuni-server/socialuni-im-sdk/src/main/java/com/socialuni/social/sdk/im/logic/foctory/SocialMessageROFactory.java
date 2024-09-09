@@ -8,9 +8,9 @@ import com.socialuni.social.sdk.im.enumeration.MessageReadStatus;
 import com.socialuni.social.sdk.im.dao.DO.message.SocialuniMessageDO;
 import com.socialuni.social.sdk.im.dao.DO.message.SocialuniMessageReceiveDO;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.user.sdk.model.factory.SocialuniUserROFactory;
+import com.socialuni.social.user.sdk.model.factory.SocialuniUserShowROFactory;
 import com.socialuni.social.im.api.model.RO.SocialMessageRO;
-import com.socialuni.social.common.api.model.user.SocialuniUserRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserShowRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import lombok.Data;
@@ -27,18 +27,23 @@ import java.util.List;
 @Component
 public class SocialMessageROFactory {
 
+    public static SocialMessageRO getMessageRO(SocialuniUserDo sendUser, SocialuniMessageDO messageDO) {
+        return getMessageRO(sendUser, messageDO, null);
+    }
+
     public static SocialMessageRO getMessageRO(SocialuniMessageDO messageDO, Long beUserId) {
-        SocialMessageRO messageRO = new SocialMessageRO();
         SocialuniUserDo userDO = SocialuniUserUtil.getUserNotNull(messageDO.getUserId());
+        return getMessageRO(userDO, messageDO, null);
+    }
+
+    public static SocialMessageRO getMessageRO(SocialuniUserDo sendUser, SocialuniMessageDO messageDO, Long beUserId) {
+        SocialMessageRO messageRO = new SocialMessageRO();
 
 
         //为什么这里允许空呢，因为存在群聊，存在未登录的情况
-        SocialuniUserDo beUser = SocialuniUserUtil.getAllowNull(beUserId);
+        SocialuniUserDo beUser = SocialuniUserUtil.getUserNotNull(beUserId);
 
-
-        SocialuniUserRO messageUser = SocialuniUserROFactory.getUserRO(userDO, beUser);
-
-        boolean isMine = messageDO.getUserId().equals(beUserId);
+        SocialuniUserShowRO messageUser = SocialuniUserShowROFactory.getUserRO(sendUser, beUser);
 
         if (messageDO.getMessageContentType().equals("图片")) {
             messageRO.setContent(SocialuniSystemConst.getStaticResourceUrl() + messageDO.getContent());
@@ -51,7 +56,7 @@ public class SocialMessageROFactory {
         messageRO.setId(uid);
         messageRO.setCreateTime(messageDO.getCreateTime());
         messageRO.setUser(messageUser);
-        messageRO.setIsMine(isMine);
+//        messageRO.setIsMine(isMine);
 
         messageRO.setReadStatus(MessageReadStatus.sended);
         messageRO.setReadNum(messageDO.getReadNum());

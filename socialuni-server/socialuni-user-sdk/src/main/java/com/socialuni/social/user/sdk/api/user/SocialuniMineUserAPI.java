@@ -1,9 +1,8 @@
 package com.socialuni.social.user.sdk.api.user;
 
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.common.api.model.user.SocialuniUserRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserShowRO;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
-import com.socialuni.social.tance.dev.api.SocialuniNoUseFeignAspect;
 import com.socialuni.social.user.sdk.model.QO.SocialUserEditQO;
 import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,21 +21,21 @@ import javax.validation.Valid;
 public interface SocialuniMineUserAPI {
     @GetMapping("getMineUser")
     @Operation(summary = "获取用户个人详情")
-    ResultRO<SocialuniUserRO> getMineUser();
+    ResultRO<SocialuniUserShowRO> getMineUser();
 
     @GetMapping("refreshToken")
     @Operation(summary = "刷新token")
-    ResultRO<SocialLoginRO<SocialuniUserRO>> refreshToken();
+    ResultRO<SocialLoginRO<SocialuniUserShowRO>> refreshToken();
 
     @PostMapping("editUser")
     @Operation(summary = "编辑用户")
-    ResultRO<SocialuniUserRO> editUser(@RequestBody @Valid SocialUserEditQO socialUserEditQO);
+    ResultRO<SocialuniUserShowRO> editUser(@RequestBody @Valid SocialUserEditQO socialUserEditQO);
 
     @GetMapping("randomUserAvatar")
     @Operation(summary = "添加用户图片")
-    ResultRO<SocialuniUserRO> randomUserAvatar();
+    ResultRO<SocialuniUserShowRO> randomUserAvatar();
 
     @PostMapping("addUserAvatarImg")
     @Operation(summary = "添加用户图片")
-    ResultRO<SocialuniUserRO> addUserAvatarImg(@RequestBody @Valid SocialuniImgAddQO socialUserImgAddQO);
+    ResultRO<SocialuniUserShowRO> addUserAvatarImg(@RequestBody @Valid SocialuniImgAddQO socialUserImgAddQO);
 }

@@ -4,7 +4,7 @@ import com.socialuni.social.common.api.constant.SocialuniLoginType;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
-import com.socialuni.social.common.api.model.user.SocialuniUserRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserShowRO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniDeviceDO;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserRepositoryFacede;
@@ -47,7 +47,7 @@ public class SocialuniLoginDomain {
 
 
     @Transactional
-    public SocialLoginRO<SocialuniUserRO> providerLogin(SocialProviderLoginQO loginQO) {
+    public SocialLoginRO<SocialuniUserShowRO> providerLogin(SocialProviderLoginQO loginQO) {
         //创建或返回
         SocialuniUserDo mineUser = socialProviderLoginEntity.providerLogin(loginQO);
 
@@ -55,7 +55,7 @@ public class SocialuniLoginDomain {
     }
 
 
-    public SocialLoginRO<SocialuniUserRO> deviceUidLogin(SocialuniDeviceUidLoginQO socialuniDeviceUidLoginQO, Long unionId) {
+    public SocialLoginRO<SocialuniUserShowRO> deviceUidLogin(SocialuniDeviceUidLoginQO socialuniDeviceUidLoginQO, Long unionId) {
         String deviceUid = socialuniDeviceUidLoginQO.getDeviceUid();
 
         if (StringUtils.isEmpty(deviceUid)) {
@@ -74,7 +74,7 @@ public class SocialuniLoginDomain {
     }
 
     @Transactional
-    public SocialLoginRO<SocialuniUserRO> phoneLogin(SocialPhoneNumAuthCodeQO socialPhoneNumQO) {
+    public SocialLoginRO<SocialuniUserShowRO> phoneLogin(SocialPhoneNumAuthCodeQO socialPhoneNumQO) {
         SocialuniUserDo mineUser = socialPhoneLoginEntity.phoneLogin(socialPhoneNumQO);
 
         return getSocialLoginROByMineUser(mineUser, SocialuniLoginType.phone);
@@ -85,7 +85,7 @@ public class SocialuniLoginDomain {
     @Resource
     SocialuniUserPasswordRepository socialuniUserPasswordRepository;
 
-    public SocialLoginRO<SocialuniUserRO> passwordLogin(SocialPhoneNumPasswordQO socialPhoneNumQO) {
+    public SocialLoginRO<SocialuniUserShowRO> passwordLogin(SocialPhoneNumPasswordQO socialPhoneNumQO) {
         String phoneNum = socialPhoneNumQO.getPhoneNum();
 
         SocialUserPhoneDo socialUserPhoneDo = socialUserPhoneManage.checkLoginPhoneNumAndGetUser(phoneNum);
@@ -153,7 +153,7 @@ public class SocialuniLoginDomain {
     SocialUserPasswordManage socialUserPasswordManage;
 
     @Transactional
-    public SocialLoginRO<SocialuniUserRO> phonePasswordLogin(SocialPhoneAuthCodePasswordQO socialPhoneNumQO) {
+    public SocialLoginRO<SocialuniUserShowRO> phonePasswordLogin(SocialPhoneAuthCodePasswordQO socialPhoneNumQO) {
         String cryptoPassword = socialPhoneNumQO.getPassword();
 
         //检查密码
@@ -174,8 +174,8 @@ public class SocialuniLoginDomain {
     }
 
 
-    public SocialLoginRO<SocialuniUserRO> getSocialLoginROByMineUser(SocialuniUserDo mineUser, String loginType) {
-        SocialuniUserRO userDetailRO = SocialuniMineUserROFactory.getMineUser(mineUser);
+    public SocialLoginRO<SocialuniUserShowRO> getSocialLoginROByMineUser(SocialuniUserDo mineUser, String loginType) {
+        SocialuniUserShowRO userDetailRO = SocialuniMineUserROFactory.getMineUser(mineUser);
 
         SocialuniTokenDO socialUserTokenDO = tokenManage.create(mineUser.getUnionId());
 

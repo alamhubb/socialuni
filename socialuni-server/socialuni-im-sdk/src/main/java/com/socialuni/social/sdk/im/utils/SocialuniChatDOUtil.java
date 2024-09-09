@@ -3,11 +3,9 @@ package com.socialuni.social.sdk.im.utils;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import com.socialuni.social.common.api.utils.SnowflakeIdUtil;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniChatRepository;
-import com.socialuni.social.sdk.im.dao.repository.SocialuniChatUserRepository;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
@@ -29,7 +27,7 @@ public class SocialuniChatDOUtil {
         return socialuniChatRepository.savePut(chatDO);
     }
 
-    public static SocialuniChatDO findByUnionId(Long chatId) {
+    public static SocialuniChatDO getChat(Long chatId) {
         return socialuniChatRepository.findFirstByUnionId(chatId);
     }
 

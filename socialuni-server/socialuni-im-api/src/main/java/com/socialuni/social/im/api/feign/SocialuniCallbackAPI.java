@@ -1,11 +1,16 @@
 package com.socialuni.social.im.api.feign;
 
 
+import com.socialuni.social.common.api.model.SocialuniNotifyRO;
 import com.socialuni.social.im.api.model.DTO.SocialuniNotifyDTO;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.net.URI;
 
 /**
  * @author qinkaiyuan
@@ -13,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 
 //@RequestMapping("socialuni/chat")
-@FeignClient(name = "callback", url = "${socialuni.central-server-url:https://api.socialuni.cn}", path = "socialuni/callback")
+@FeignClient(name = "notifyCallback", url = "${socialuni.central-server-url:https://api.socialuni.cn}", path = "socialuni/notifyCallback")
 @Tag(name = "消息模块/会话模块", description = "暂未支持")
 public interface SocialuniCallbackAPI {
     //发送消息本系统写完
@@ -25,7 +30,7 @@ public interface SocialuniCallbackAPI {
     //子应用接到数据
     //调用websocket，发送信息。
     @RequestMapping("receiveNotify")
-    @GetMapping
-    <T> void receiveNotify(SocialuniNotifyDTO<T> notifyDTO);
+    @PostMapping
+    void receiveNotify(URI host, @RequestBody SocialuniNotifyRO notifyDTO);
 }
 

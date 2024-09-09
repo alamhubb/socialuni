@@ -2,7 +2,7 @@ package com.socialuni.social.user.sdk.model.factory;
 
 import cn.hutool.extra.spring.SpringUtil;
 import com.socialuni.social.common.api.model.user.SocialuniMineUserRO;
-import com.socialuni.social.common.api.model.user.SocialuniUserRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserShowRO;
 import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
@@ -28,7 +28,7 @@ public class SocialuniMineUserROFactory {
 
 
     public static SocialuniMineUserRO getMineUser(SocialuniUserDo mineUser, SocialUserPhoneDo SocialUserPhoneDo) {
-        SocialuniUserRO socialuniUserRO = SocialuniUserROFactory.getUserRO(mineUser, mineUser);
+        SocialuniUserShowRO socialuniUserRO = SocialuniUserShowROFactory.getUserRO(mineUser, mineUser);
         SocialuniMineUserRO socialuniMineUserRO = new SocialuniMineUserRO(socialuniUserRO);
         //user详情信息
         if (SocialUserPhoneDo != null) {

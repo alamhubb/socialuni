@@ -3,7 +3,7 @@ package com.socialuni.social.app.logic.service;
 import com.socialuni.social.app.factory.SocialuniMineUserDetailROFactory;
 import com.socialuni.social.app.model.SocialuniMineUserDetailRO;
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.common.api.model.user.SocialuniUserRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserShowRO;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
@@ -22,7 +22,7 @@ public class SocialuniThirdUserService {
     SocialuniThirdUserRegistryDomain socialuniUserRegistryDomain;
 
     @Transactional
-    public ResultRO<SocialLoginRO<SocialuniUserRO>> registryUser(SocialProviderLoginQO loginQO) {
+    public ResultRO<SocialLoginRO<SocialuniUserShowRO>> registryUser(SocialProviderLoginQO loginQO) {
         //注册只向三方开发，所以不能为自己
         Integer dataDevId = DevAccountFacade.getDevIdNullElseCenterDevId();
 //        if (dataDevId == AdminAppConfigConst.testDevId) {
@@ -31,12 +31,12 @@ public class SocialuniThirdUserService {
 //        SocialLoginRO<SocialuniUserRO> socialLoginRO = socialuniUserRegistryDomain.registryUser(loginQO);
 
 //        return new ResultRO<>(socialLoginRO);
-        SocialLoginRO<SocialuniUserRO> socialLoginRO = socialuniUserRegistryDomain.registryUser(loginQO);
+        SocialLoginRO<SocialuniUserShowRO> socialLoginRO = socialuniUserRegistryDomain.registryUser(loginQO);
         return ResultRO.success(socialLoginRO);
     }
 
 
-    public ResultRO<SocialuniUserRO> queryThirdUser() {
+    public ResultRO<SocialuniUserShowRO> queryThirdUser() {
         SocialuniUserDo mineUserDO = SocialuniUserUtil.getMineUserAllowNull();
         if (mineUserDO == null) {
             return ResultRO.success();

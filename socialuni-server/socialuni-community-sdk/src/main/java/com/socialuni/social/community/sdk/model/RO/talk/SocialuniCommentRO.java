@@ -2,7 +2,7 @@ package com.socialuni.social.community.sdk.model.RO.talk;
 
 
 import com.socialuni.social.common.api.model.SocialuniContentIdRO;
-import com.socialuni.social.common.api.model.user.SocialuniUserRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserShowRO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -24,7 +24,7 @@ public class SocialuniCommentRO extends SocialuniContentIdRO {
      */
     private Date createTime;
 
-    private SocialuniUserRO user;
+    private SocialuniUserShowRO user;
 
     private List<SocialuniCommentRO> childComments;
 

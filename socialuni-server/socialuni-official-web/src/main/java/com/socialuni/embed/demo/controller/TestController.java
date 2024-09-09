@@ -6,7 +6,7 @@ import com.socialuni.embed.demo.model.UserDO;
 import com.socialuni.embed.demo.service.TestUserService;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniContentUserRO;
-import com.socialuni.social.common.api.model.user.SocialuniUserRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserShowRO;
 import com.socialuni.social.common.api.utils.SocialTokenFacade;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
 import com.socialuni.social.common.sdk.constant.VisibleType;
@@ -71,7 +71,7 @@ public class TestController {
     }
 
     @GetMapping("getMineUser")
-    public ResultRO<SocialuniUserRO> getMineUser() {
+    public ResultRO<SocialuniUserShowRO> getMineUser() {
         SocialuniUserDo socialUserDO = SocialuniUserUtil.getMineUserNotNull();
         SocialuniContentUserRO socialUserRO = SocialuniContentUserROFactory.newContentUserRO(socialUserDO, socialUserDO);
         return ResultRO.success(socialUserRO);

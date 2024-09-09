@@ -5,7 +5,6 @@ import com.socialuni.social.common.api.exception.exception.SocialBusinessExcepti
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
-import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.im.api.feign.SocialuniMessageAPI;
 import com.socialuni.social.im.api.model.QO.MessageQueryVO;
 import com.socialuni.social.im.api.model.RO.SocialMessageRO;
@@ -20,7 +19,6 @@ import com.socialuni.social.sdk.im.enumeration.*;
 import com.socialuni.social.sdk.im.logic.domain.SocialuniMsgDomain;
 import com.socialuni.social.sdk.im.logic.entity.SocialuniMessageEntity;
 import com.socialuni.social.im.api.model.QO.message.MessageAddVO;
-import com.socialuni.social.content.utils.SocialuniTextContentUtil;
 import com.socialuni.social.sdk.im.logic.foctory.SocialMessageROFactory;
 import com.socialuni.social.sdk.im.logic.manage.SocialuniChatUserManage;
 import com.socialuni.social.sdk.im.logic.service.chat.ChatService;
@@ -29,9 +27,7 @@ import com.socialuni.social.sdk.im.utils.SocialuniChatUserDOUtil;
 import com.socialuni.social.tance.dev.config.SocialuniDevConfig;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo;
-import com.socialuni.social.user.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -222,7 +218,7 @@ public class SocialuniMessageService {
             //则为chatId
             Long chatId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(chatIdStr);
 
-            SocialuniChatDO chatDO = SocialuniChatDOUtil.findByUnionId(chatId);
+            SocialuniChatDO chatDO = SocialuniChatDOUtil.getChat(chatId);
             if (!chatDO.getStatus().equals(ChatStatus.enable)) {
                 throw new SocialBusinessException("会话已被删除");
             }
@@ -265,7 +261,7 @@ public class SocialuniMessageService {
             //则为chatId
             Long chatId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(chatIdStr);
 
-            SocialuniChatDO chatDO = SocialuniChatDOUtil.findByUnionId(chatId);
+            SocialuniChatDO chatDO = SocialuniChatDOUtil.getChat(chatId);
             if (!chatDO.getStatus().equals(ChatStatus.enable)) {
                 throw new SocialBusinessException("会话已被删除");
             }

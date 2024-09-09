@@ -1,7 +1,6 @@
 package com.socialuni.social.user.sdk.api.user;
 
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.common.sdk.model.QO.SocialBindWxPhoneNumQO;
 import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumAuthCodeQO;
 import com.socialuni.social.user.sdk.model.QO.phone.SocialSendAuthCodeQO;

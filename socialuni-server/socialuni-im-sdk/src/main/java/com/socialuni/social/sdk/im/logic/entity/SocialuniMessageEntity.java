@@ -3,16 +3,15 @@ package com.socialuni.social.sdk.im.logic.entity;
 import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.socialuni.social.common.api.model.SocialuniNotifyRO;
 import com.socialuni.social.common.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.common.sdk.dao.repository.NotifyRepository;
-import com.socialuni.social.im.api.feign.SocialuniCallbackAPI;
 import com.socialuni.social.im.api.model.RO.SocialMessageRO;
 import com.socialuni.social.recharge.logic.domain.SocialuniPayCoinDomain;
 import com.socialuni.social.recharge.logic.entity.SocialuniCreateCoinOrderEntity;
-import com.socialuni.social.sdk.im.config.websocket.WebsocketServer;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.sdk.im.dao.DO.message.SocialuniMessageDO;
@@ -22,18 +21,19 @@ import com.socialuni.social.sdk.im.dao.repository.SocialuniChatUserRepository;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniChatRepository;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniMessageReceiveRepository;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniMessageRepository;
+import com.socialuni.social.sdk.im.enumeration.ChatType;
 import com.socialuni.social.sdk.im.enumeration.ChatUserStatus;
 import com.socialuni.social.sdk.im.enumeration.MessageContentType;
 import com.socialuni.social.sdk.im.enumeration.NotifyType;
+import com.socialuni.social.sdk.im.factory.SocialuniNotifyROFactory;
 import com.socialuni.social.sdk.im.logic.check.SocialuniChatUserCheck;
 import com.socialuni.social.sdk.im.logic.domain.NotifyDomain;
-import com.socialuni.social.sdk.im.logic.foctory.SocaluniNotifyROFactory;
+import com.socialuni.social.sdk.im.logic.domain.SocialuniWebcoketSendDomain;
 import com.socialuni.social.sdk.im.logic.foctory.SocialMessageROFactory;
 import com.socialuni.social.sdk.im.logic.foctory.SocialuniChatUserDOFactory;
 import com.socialuni.social.sdk.im.logic.foctory.SocialuniMessageDOFactory;
-import com.socialuni.social.sdk.im.notify.NotifyVO;
 import com.socialuni.social.sdk.im.utils.SocialuniChatDOUtil;
-import com.socialuni.social.tance.dev.config.SocialuniDevConfig;
+import com.socialuni.social.sdk.im.utils.SocialuniChatUserDOUtil;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserBlackDO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -46,6 +46,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -176,7 +177,7 @@ public class SocialuniMessageEntity {
     SocialuniChatUserCheck socialuniChatUserCheck;
 
     public SocialMessageRO sendGroupMessage(Long chatId, String msgContent, String contentType) {
-        SocialuniChatDO chat = SocialuniChatDOUtil.findByUnionId(chatId);
+        SocialuniChatDO chat = SocialuniChatDOUtil.getChat(chatId);
 
         SocialuniUserDo sendUser = SocialuniUserUtil.getMineUserNotNull();
 
@@ -203,7 +204,7 @@ public class SocialuniMessageEntity {
         chatRepository.savePut(chat);
 
         CompletableFuture.supplyAsync(() -> {
-            this.updateChatUsers(chatId, sendUser, message);
+            this.updateChatUsers(chat, sendUser, message);
             return null;
         }).exceptionally(e -> {
             e.printStackTrace();
@@ -216,7 +217,6 @@ public class SocialuniMessageEntity {
 //                Optional<ChatDO> chatDOOptional = chatRepository.findById();
         //如果群聊，直接发送给两个服务器在线的所有用户，并且查找他们未读的。
         //未登录的时候也查询群聊里面的所有内容
-        NotifyVO notifyVO = SocaluniNotifyROFactory.getNotifyROBySendMsg(NotifyType.message, sendUser, message, chat);
 //        WebsocketServer.sendToGroupUsers(notifyVO);
         System.out.println("fanhuile44444");
         //默认所有群都要加入群了，才可以发送消息
@@ -229,19 +229,19 @@ public class SocialuniMessageEntity {
 //        return null;
     }
 
-    @Resource
-    SocialuniCallbackAPI socialuniCallbackAPI;
-
     @Async
-    public void updateChatUsers(Long chatId, SocialuniUserDo sendUser, SocialuniMessageDO message) {
+    public void updateChatUsers(SocialuniChatDO chatDO, SocialuniUserDo sendUser, SocialuniMessageDO message) {
+        Long chatId = chatDO.getUnionId();
         List<Integer> chatUserIds = chatUserRepository.findChatUserIdsByChatIdAndStatus(chatId, ChatUserStatus.enable);
 
         log.info(String.valueOf(new Date().getTime()));
 
         List<SocialuniChatUserDO> socialuniChatUserDOS = new ArrayList<>();
+
         //发送消息
         for (Integer chatUserIdItem : chatUserIds) {
-            SocialuniChatUserDO chatSocialuniUserDo = chatUserRepository.findFirstById(chatUserIdItem);
+            SocialuniChatUserDO chatSocialuniUserDo = SocialuniChatUserDOUtil.get(chatUserIdItem);
+
 
             chatSocialuniUserDo.setLastContent(message.getContent());
             chatSocialuniUserDo.setUpdateTime(new Date());
@@ -272,17 +272,31 @@ public class SocialuniMessageEntity {
 //                mineMessageUser = messageReceiveRepository.save(messageReceiveDO);
             }
             socialuniChatUserDOS.add(chatSocialuniUserDo);
+
         }
         socialuniChatUserRedis.saveAllPut(socialuniChatUserDOS);
 
-        if (SocialuniDevConfig.hasCenterServer()) {
+        SocialMessageRO socialMessageRO = SocialMessageROFactory.getMessageRO(sendUser, message);
 
+        if (chatDO.getType().equals(ChatType.system_group)) {
+
+            SocialuniNotifyRO socialuniNotifyRO = SocialuniNotifyROFactory.getNotifyGroupMessageRO(socialMessageRO, null);
+
+            socialuniWebcoketSendDomain.sengGroupMsg(socialuniNotifyRO);
         } else {
 
+            List<String> beUserIds = socialuniChatUserDOS.stream().map(item -> item.getUserId().toString()).collect(Collectors.toList());
+
+            SocialuniNotifyRO socialuniNotifyRO = SocialuniNotifyROFactory.getNotifyGroupMessageRO(socialMessageRO, beUserIds);
+
+            socialuniWebcoketSendDomain.sengGroupMsg(socialuniNotifyRO);
         }
 
         log.info(String.valueOf(new Date().getTime()));
     }
+
+    @Resource
+    SocialuniWebcoketSendDomain socialuniWebcoketSendDomain;
 
     @Resource
     SocialuniCreateCoinOrderEntity socialuniCreateCoinOrderEntity;

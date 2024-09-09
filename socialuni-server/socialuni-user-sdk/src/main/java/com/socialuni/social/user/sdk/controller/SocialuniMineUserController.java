@@ -1,18 +1,13 @@
 package com.socialuni.social.user.sdk.controller;
 
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.common.api.model.user.SocialuniUserRO;
-import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
+import com.socialuni.social.common.api.model.user.SocialuniUserShowRO;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
 import com.socialuni.social.tance.dev.api.SocialuniNoUseFeignAspect;
 import com.socialuni.social.user.sdk.api.user.SocialuniMineUserAPI;
-import com.socialuni.social.user.sdk.dao.DO.SocialuniTokenDO;
-import com.socialuni.social.user.sdk.logic.manage.SocialuniTokenManage;
 import com.socialuni.social.user.sdk.model.QO.SocialUserEditQO;
 import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
-import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,7 +20,7 @@ public class SocialuniMineUserController implements SocialuniMineUserAPI {
     private SocialuniMineUserService socialuniMineUserService;
 
     @Override
-    public ResultRO<SocialuniUserRO> getMineUser() {
+    public ResultRO<SocialuniUserShowRO> getMineUser() {
         return socialuniMineUserService.getMineUser();
     }
 
@@ -36,22 +31,22 @@ public class SocialuniMineUserController implements SocialuniMineUserAPI {
      */
     @GetMapping("refreshToken")
     @SocialuniNoUseFeignAspect
-    public ResultRO<SocialLoginRO<SocialuniUserRO>> refreshToken() {
+    public ResultRO<SocialLoginRO<SocialuniUserShowRO>> refreshToken() {
         return socialuniMineUserService.refreshToken();
     }
 
     @Override
-    public ResultRO<SocialuniUserRO> editUser(SocialUserEditQO socialUserEditQO) {
+    public ResultRO<SocialuniUserShowRO> editUser(SocialUserEditQO socialUserEditQO) {
         return socialuniMineUserService.editUser(socialUserEditQO);
     }
 
     @Override
-    public ResultRO<SocialuniUserRO> randomUserAvatar() {
+    public ResultRO<SocialuniUserShowRO> randomUserAvatar() {
         return socialuniMineUserService.randomUserAvatar();
     }
 
     @Override
-    public ResultRO<SocialuniUserRO> addUserAvatarImg(SocialuniImgAddQO socialUserImgAddQO) {
+    public ResultRO<SocialuniUserShowRO> addUserAvatarImg(SocialuniImgAddQO socialUserImgAddQO) {
         return socialuniMineUserService.addUserAvatarImg(socialUserImgAddQO);
     }
 }

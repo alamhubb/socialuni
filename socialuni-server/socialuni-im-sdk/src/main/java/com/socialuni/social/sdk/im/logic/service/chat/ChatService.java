@@ -26,14 +26,12 @@ import com.socialuni.social.im.api.model.QO.chat.ChatReadVO;
 import com.socialuni.social.im.api.model.QO.chat.ChatRemoveVO;
 import com.socialuni.social.im.api.model.QO.chat.OpenChatVO;
 import com.socialuni.social.sdk.im.utils.SocialuniChatDOUtil;
-import com.socialuni.social.sdk.im.utils.SocialuniChatUserDOUtil;
 import com.socialuni.social.tance.dev.config.SocialuniDevConfig;
 import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
@@ -161,7 +159,7 @@ public class ChatService {
             //则为chatId
             Long chatId = SocialuniUnionIdFacede.getChatUnionIdByUuidNotNull(chatIdStr);
 
-            SocialuniChatDO chatDO = SocialuniChatDOUtil.findByUnionId(chatId);
+            SocialuniChatDO chatDO = SocialuniChatDOUtil.getChat(chatId);
 
             ChatRO chatRO = SocialChatROFactory.getNoLoginChatRO(chatDO);
 

@@ -8,7 +8,7 @@ import com.socialuni.social.follow.utils.SocialuniUserFollowInfoUtil;
 import com.socialuni.social.identity.dao.DO.SocialUserIdentityAuthDO;
 import com.socialuni.social.identity.dao.repository.SocialUserIdentityAuthRepository;
 import com.socialuni.social.user.sdk.constant.UserIdentityAuthStatus;
-import com.socialuni.social.user.sdk.model.factory.SocialuniUserROFactory;
+import com.socialuni.social.user.sdk.model.factory.SocialuniUserShowROFactory;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -33,7 +33,7 @@ public class SocialuniContentUserROFactory {
     }
 
     public static SocialuniContentUserRO newContentUserRO(SocialuniUserDo user, SocialuniUserDo mineUser) {
-        SocialuniContentUserRO userRO = new SocialuniContentUserRO(SocialuniUserROFactory.getUserRO(user, mineUser));
+        SocialuniContentUserRO userRO = new SocialuniContentUserRO(SocialuniUserShowROFactory.getUserRO(user, mineUser));
 
         userRO.setIdentityAuth(false);
 

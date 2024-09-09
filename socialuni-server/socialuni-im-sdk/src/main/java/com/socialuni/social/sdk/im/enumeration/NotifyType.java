@@ -12,6 +12,7 @@ import java.util.List;
 public class NotifyType {
     //只有三种，一种通知，一种操作
     public static final String notify = "notify";
+    //音乐类型的会触发操作
     public static final String operate = "operate";
     //消息
     public static final String message = "message";
