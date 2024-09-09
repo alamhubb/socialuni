@@ -1,7 +1,7 @@
 package com.socialuni.social.expand.logic.domain;
 
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
-import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.recharge.constant.SocialuniOrderDetailType;
 import com.socialuni.social.recharge.constant.SocialuniCoinOrderType;

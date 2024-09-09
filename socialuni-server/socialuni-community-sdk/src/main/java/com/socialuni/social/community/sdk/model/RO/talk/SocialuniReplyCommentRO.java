@@ -1,7 +1,9 @@
 package com.socialuni.social.community.sdk.model.RO.talk;
 
+import com.socialuni.social.common.api.entity.SocialuniBaseDO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 public class SocialuniReplyCommentRO {

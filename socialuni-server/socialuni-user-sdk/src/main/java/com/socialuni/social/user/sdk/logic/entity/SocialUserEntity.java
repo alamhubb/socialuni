@@ -3,7 +3,7 @@ package com.socialuni.social.user.sdk.logic.entity;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserManage;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserPhoneManage;
-import com.qingchi.qing.user.dao.model.SocialUserPhoneDo;
+import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Service;

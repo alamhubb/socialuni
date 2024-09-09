@@ -1,15 +1,22 @@
 package com.socialuni.social.sdk.im.logic.domain;
 
-import com.qingchi.qing.common.exception.base.QingException;
-import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
+import com.socialuni.social.common.api.exception.base.SocialException;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
+import com.socialuni.social.sdk.im.config.websocket.WebsocketServer;
+import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
+import com.socialuni.social.sdk.im.logic.foctory.SocaluniNotifyROFactory;
 import com.socialuni.social.sdk.im.enumeration.NotifyType;
 import com.socialuni.social.common.sdk.dao.DO.NotifyDO;
+import com.socialuni.social.sdk.im.dao.DO.message.SocialuniMessageReceiveDO;
 import com.socialuni.social.common.sdk.dao.DO.SocialUserPlatformAccountDO;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniMessageReceiveRepository;
 import com.socialuni.social.common.sdk.dao.repository.NotifyRepository;
 import com.socialuni.social.common.sdk.dao.repository.SocialUserPlatformAccountRepository;
+import com.socialuni.social.sdk.im.notify.NotifyVO;
 import com.socialuni.social.common.sdk.platform.PushMsgDTO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
+import com.socialuni.social.sdk.im.utils.SocialuniChatUserDOUtil;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -115,7 +122,7 @@ public class NotifyDomain {
     }
 
     //发送通知
-    public void sendNotify(NotifyDO notify, SocialuniUserDo sendUser) throws QingException {
+    public void sendNotify(NotifyDO notify, SocialuniUserDo sendUser) throws SocialException {
         //评论动态
 //        UserDO receiveUser = userRepository.findById(receiveUserId).get();
         Long receiveUserId = notify.getBeUserId();

@@ -1,6 +1,6 @@
 package com.socialuni.social.common.sdk.platform;
 
-import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.sdk.utils.StringUtil;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;

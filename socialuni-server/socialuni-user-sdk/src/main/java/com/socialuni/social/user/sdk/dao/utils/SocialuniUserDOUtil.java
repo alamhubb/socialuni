@@ -3,6 +3,7 @@ package com.socialuni.social.user.sdk.dao.utils;
 import cn.hutool.core.util.ReUtil;
 import com.socialuni.social.common.api.constant.GenderType;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
 import com.socialuni.social.common.sdk.constant.UserType;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;

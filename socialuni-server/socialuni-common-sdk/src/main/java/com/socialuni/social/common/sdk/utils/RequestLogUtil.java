@@ -1,8 +1,9 @@
 package com.socialuni.social.common.sdk.utils;
 
 
-import com.qingchi.qing.common.exception.base.ErrorCode;
-import com.qingchi.qing.common.exception.base.QingExceptionErrorType;
+import com.socialuni.social.common.api.constant.ErrorCode;
+import com.socialuni.social.common.api.constant.ErrorType;
+import com.socialuni.social.common.api.dao.DO.ErrorRequestLogDO;
 import com.socialuni.social.common.api.dao.DO.RequestLogDO;
 import com.socialuni.social.common.sdk.dao.store.RequestLogStore;
 import lombok.extern.slf4j.Slf4j;
@@ -43,7 +44,7 @@ public class RequestLogUtil {
         errorRequestLogDO = new RequestLogDO(errorRequestLogDO);
         errorRequestLogDO.setSuccess(false);
         errorRequestLogDO.setErrorCode(ErrorCode.BUSINESS_ERROR);
-        errorRequestLogDO.setErrorType(QingExceptionErrorType.error);
+        errorRequestLogDO.setErrorType(ErrorType.error);
         errorRequestLogDO.setErrorMsg(errorMsg);
         errorRequestLogDO.setEndTime(new Date());
         requestLogStore.saveAsync(errorRequestLogDO);

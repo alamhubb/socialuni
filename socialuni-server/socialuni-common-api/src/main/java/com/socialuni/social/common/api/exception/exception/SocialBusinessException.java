@@ -1,8 +1,8 @@
 package com.socialuni.social.common.api.exception.exception;
 
 
-import com.qingchi.qing.common.exception.base.ErrorCode;
-import com.qingchi.qing.common.exception.base.SocialInfoException;
+import com.socialuni.social.common.api.constant.ErrorCode;
+import com.socialuni.social.common.api.exception.base.SocialInfoException;
 
 public class SocialBusinessException extends SocialInfoException {
     public SocialBusinessException(String message) {

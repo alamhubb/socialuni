@@ -1,6 +1,8 @@
 package com.socialuni.social.music.sdk.dao.DO;
 
-import com.qingchi.qing.jpa.SocialuniContentBaseDO;
+import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
+import com.socialuni.social.common.api.entity.SocialuniUserContactBaseDO;
+import com.socialuni.social.common.api.entity.SocialuniUserInfoBaseDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

@@ -1,6 +1,6 @@
 package com.socialuni.social.follow.logic.manage;
 
-import com.qingchi.qing.constant.SocialuniCommonStatus;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.follow.dao.DO.SocialuniUserFollowDO;
 import com.socialuni.social.follow.dao.repositroy.SocialuniFollowRepository;
 import org.springframework.stereotype.Component;

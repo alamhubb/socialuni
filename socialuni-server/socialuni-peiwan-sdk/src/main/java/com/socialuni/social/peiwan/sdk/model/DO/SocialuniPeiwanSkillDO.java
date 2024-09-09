@@ -1,6 +1,7 @@
 package com.socialuni.social.peiwan.sdk.model.DO;
 
-import com.qingchi.qing.jpa.SocialuniContentBaseDO;
+import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
+import com.socialuni.social.common.api.entity.SocialuniUserInfoBaseDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

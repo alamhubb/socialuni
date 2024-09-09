@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.controller;
 
 import com.socialuni.social.common.api.model.ResultRO;
-import com.qingchi.qing.utils.IpUtil;
+import com.socialuni.social.common.api.utils.IpUtil;
 import com.socialuni.social.common.sdk.feignAPI.openData.SocialuniLocationAPI;
 import com.socialuni.social.common.sdk.model.QO.LocationQueryQO;
 import com.socialuni.social.common.sdk.model.RO.LocationQueryRO;

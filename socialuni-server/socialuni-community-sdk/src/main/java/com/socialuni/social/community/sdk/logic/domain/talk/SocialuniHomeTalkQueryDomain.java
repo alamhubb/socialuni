@@ -2,11 +2,12 @@ package com.socialuni.social.community.sdk.logic.domain.talk;
 
 import cn.hutool.core.util.BooleanUtil;
 import com.socialuni.social.common.api.constant.MpPlatformType;
-import com.qingchi.qing.constant.SocialuniCommonStatus;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
-import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
+import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.common.sdk.constant.GenderTypeQueryVO;
 import com.socialuni.social.common.sdk.constant.GenderTypeVO;
 import com.socialuni.social.community.sdk.constant.TalkTabType;
@@ -91,8 +92,8 @@ public class SocialuniHomeTalkQueryDomain {
             talkDOS = socialFollowUserTalksQueryEntity.queryUserFollowTalks(new ArrayList<>(), mineUser);
         } else {
 
-            String platform = SocialuniRequestUtil.getPlatform();
-            String provider = SocialuniRequestUtil.getProvider();
+            String platform = RequestUtil.getPlatform();
+            String provider = RequestUtil.getProvider();
             //如果系统处于审核中，则只返回自己发布的内容和系统置顶的内容
             if (SocialuniAppConfig.getAppMoreConfig().getMp_wx_auditing() && MpPlatformType.isMpWx(platform, provider)) {
                 //支持你修改bo

@@ -2,6 +2,7 @@ package com.socialuni.social.sdk.utils;
 
 import com.socialuni.social.sdk.dao.repository.dev.ThirdUserTokenRepository;
 import com.socialuni.social.tance.dev.enumeration.SocialFeignHeaderName;
+import com.socialuni.social.common.api.utils.RequestUtil;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -27,7 +28,7 @@ public class SocialuniTokenUtil {
 
 
     public static String getDataUserUnionId() {
-        String thirdUserId = SocialuniRequestUtil.getHeader(SocialFeignHeaderName.dataUserUnionId);
+        String thirdUserId = RequestUtil.getHeader(SocialFeignHeaderName.dataUserUnionId);
         return thirdUserId;
     }
 

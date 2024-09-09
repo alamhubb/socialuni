@@ -1,12 +1,14 @@
 package com.socialuni.social.sdk.controller;
 
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.app.model.SocialuniMineUserDetailRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.common.sdk.model.QO.SocialBindWxPhoneNumQO;
 import com.socialuni.social.user.sdk.api.user.SocialuniPhoneAPI;
 import com.socialuni.social.sdk.logic.service.phone.SocialuniPhoneBindService;
 import com.socialuni.social.user.sdk.logic.service.SocialuniPhoneService;
 import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumAuthCodeQO;
-import com.qingchi.qing.user.model.qo.QingSendAuthCodeQO;
+import com.socialuni.social.user.sdk.model.QO.phone.SocialSendAuthCodeQO;
 import com.socialuni.social.user.sdk.utils.SocialuniMineUserPhoneUtil;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +26,7 @@ public class SocialuniPhoneController implements SocialuniPhoneAPI {
     SocialuniPhoneBindService socialuniPhoneBindService;
 
     @Override
-    public ResultRO<Void> sendAuthCode(QingSendAuthCodeQO authCodeQO) {
+    public ResultRO<Void> sendAuthCode(SocialSendAuthCodeQO authCodeQO) {
         return socialuniPhoneService.sendAuthCode(authCodeQO);
     }
 
@@ -39,7 +41,7 @@ public class SocialuniPhoneController implements SocialuniPhoneAPI {
     }
 
     @Override
-    public ResultRO<Boolean> checkRegistry(QingSendAuthCodeQO authCodeQO) {
+    public ResultRO<Boolean> checkRegistry(SocialSendAuthCodeQO authCodeQO) {
         return socialuniPhoneService.checkRegistry(authCodeQO);
     }
 

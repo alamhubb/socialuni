@@ -1,7 +1,7 @@
 package com.socialuni.social.tag.dao.DO;
 
 import com.socialuni.social.common.api.constant.GenderType;
-import com.qingchi.qing.jpa.SocialuniContentBaseDO;
+import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

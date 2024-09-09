@@ -1,9 +1,10 @@
 package com.socialuni.social.user.sdk.model.factory;
 
-import com.qingchi.qing.common.exception.base.QingException;
+import com.socialuni.social.common.api.exception.base.SocialException;
 import com.socialuni.social.common.sdk.utils.SocialuniGenerateAvatarUtil;
 import com.socialuni.social.content.utils.BirthdayAgeUtil;
 import com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo;
+import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
@@ -74,7 +75,7 @@ public class SocialUserDOFactory {
             try {
                 SocialuniTextContentUtil.checkTextHasUnderageAndContactAndViolateWords(loginQO.getCity());
                 user.setCity(StringUtils.substring(loginQO.getCity(), 0, 10));
-            } catch (QingException e) {
+            } catch (SocialException e) {
                 e.printStackTrace();
             }
         }

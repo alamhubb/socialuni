@@ -1,6 +1,6 @@
 package com.socialuni.social.user.sdk.dao.DO;
 
-import com.qingchi.qing.utils.IpUtil;
+import com.socialuni.social.common.api.utils.IpUtil;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import lombok.Data;
 

@@ -1,7 +1,8 @@
 package com.socialuni.social.user.sdk.logic.manage;
 
 import com.socialuni.social.common.api.constant.PlatformType;
-import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.user.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.common.sdk.dao.DO.SocialUserPlatformAccountDO;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
@@ -48,7 +49,7 @@ public class SocialUserAccountManage {
 //        socialUserAccountDO.setDevId(loginQO.getDevId());
         String platform = loginQO.getPlatform();
         if (platform == null) {
-            platform = SocialuniRequestUtil.getPlatform();
+            platform = RequestUtil.getPlatform();
         }
 
         socialUserAccountDO.setPlatform(platform);

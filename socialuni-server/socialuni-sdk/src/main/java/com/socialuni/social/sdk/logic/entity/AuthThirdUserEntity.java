@@ -10,7 +10,7 @@ import com.socialuni.social.sdk.logic.manage.ThirdUserManage;
 import com.socialuni.social.sdk.logic.manage.ThirdUserTokenManage;
 import com.socialuni.social.app.model.SocialuniMineUserDetailRO;
 import com.socialuni.social.tance.dev.dao.DO.DevAccountDo;
-import com.qingchi.qing.user.dao.model.SocialUserPhoneDo;
+import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import org.springframework.stereotype.Service;
 

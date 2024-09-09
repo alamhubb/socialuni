@@ -1,6 +1,6 @@
 package com.socialuni.social.common.sdk.dao.DO;
 
-import com.qingchi.qing.jpa.QingJpaBaseDO;
+import com.socialuni.social.common.api.entity.SocialuniBaseDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -24,7 +24,7 @@ import java.util.Date;
         @Index(columnList = "interfaceMethod"),
         @Index(columnList = "spendTime"),
 })
-public class JpaSqlLogDO extends QingJpaBaseDO implements Serializable {
+public class JpaSqlLogDO extends SocialuniBaseDO implements Serializable {
     //邀请你的用户
     private Long requestId;
     private String interfaceMethod;

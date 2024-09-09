@@ -1,7 +1,7 @@
 package com.socialuni.social.common.sdk.constant;
 
 
-import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import lombok.Data;
 
 import java.util.Map;

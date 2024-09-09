@@ -1,8 +1,8 @@
 package com.socialuni.social.music.sdk.controller;
 
 import cn.hutool.core.lang.Console;
-import com.qingchi.qing.constant.SocialuniCommonStatus;
-import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;

@@ -1,6 +1,7 @@
 package com.socialuni.social.user.sdk.logic.entity;
 
-import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.socialuni.social.common.api.utils.SnowflakeIdUtil;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserAccountManage;
 import com.socialuni.social.user.sdk.logic.manage.SocialUserAccountStore;

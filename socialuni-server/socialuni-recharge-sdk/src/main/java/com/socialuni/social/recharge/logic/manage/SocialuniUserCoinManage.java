@@ -1,6 +1,7 @@
 package com.socialuni.social.recharge.logic.manage;
 
-import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserCoinDo;
 import com.socialuni.social.user.sdk.utils.SocialuniUserSocialCoinDOUtil;
 import org.springframework.stereotype.Service;

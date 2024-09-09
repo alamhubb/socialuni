@@ -1,7 +1,7 @@
 package com.socialuni.social.tag.util;
 
-import com.qingchi.qing.constant.SocialuniCommonStatus;
-import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.tag.dao.DO.SocialuniCircleDO;
 import com.socialuni.social.tag.dao.repository.SocialuniCircleRepository;
 import org.springframework.stereotype.Component;

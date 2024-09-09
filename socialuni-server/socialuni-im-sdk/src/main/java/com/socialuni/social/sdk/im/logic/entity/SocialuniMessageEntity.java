@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.im.logic.entity;
 
-import com.qingchi.qing.constant.SocialuniCommonStatus;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
-import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
@@ -11,6 +11,7 @@ import com.socialuni.social.common.sdk.dao.repository.NotifyRepository;
 import com.socialuni.social.im.api.model.RO.SocialMessageRO;
 import com.socialuni.social.recharge.logic.domain.SocialuniPayCoinDomain;
 import com.socialuni.social.recharge.logic.entity.SocialuniCreateCoinOrderEntity;
+import com.socialuni.social.sdk.im.config.websocket.WebsocketServer;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.sdk.im.dao.DO.message.SocialuniMessageDO;

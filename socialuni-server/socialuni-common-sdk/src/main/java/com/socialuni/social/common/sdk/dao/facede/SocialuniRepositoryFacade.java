@@ -1,9 +1,10 @@
 package com.socialuni.social.common.sdk.dao.facede;
 
 import cn.hutool.extra.spring.SpringUtil;
-import com.qingchi.qing.jpa.QingJpaBaseDO;
-import com.qingchi.qing.jpa.SocialuniContentBaseDO;
+import com.socialuni.social.common.api.entity.SocialuniBaseDO;
+import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.sdk.dao.repository.SocialuniCommonRepository;
 import lombok.extern.slf4j.Slf4j;
 
@@ -45,19 +46,19 @@ public abstract class SocialuniRepositoryFacade {
         return getRepository().findFirstByStatus(status, tClass);
     }
 
-    public static <T extends QingJpaBaseDO> T findByCustomField(String field, Integer fieldId, Class<T> tClass) {
+    public static <T extends SocialuniBaseDO> T findByCustomField(String field, Integer fieldId, Class<T> tClass) {
         return getRepository().findByCustomField(field, fieldId, tClass);
     }
 
-    public static <T extends QingJpaBaseDO> T findByCustomField(String field, String fieldId, Class<T> tClass) {
+    public static <T extends SocialuniBaseDO> T findByCustomField(String field, String fieldId, Class<T> tClass) {
         return getRepository().findByCustomField(field, fieldId, tClass);
     }
 
-    public static <T extends QingJpaBaseDO> T findByCustomField(String field, Long fieldId, Class<T> tClass) {
+    public static <T extends SocialuniBaseDO> T findByCustomField(String field, Long fieldId, Class<T> tClass) {
         return getRepository().findByCustomField(field, fieldId, tClass);
     }
 
-    public static <T extends QingJpaBaseDO> T findFirstOrderByIdDesc(Class<T> tClass) {
+    public static <T extends SocialuniBaseDO> T findFirstOrderByIdDesc(Class<T> tClass) {
         return getRepository().findFirstOrderByIdDesc(tClass);
     }
 

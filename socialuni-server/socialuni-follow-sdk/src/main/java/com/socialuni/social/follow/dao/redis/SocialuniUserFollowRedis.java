@@ -1,7 +1,7 @@
 package com.socialuni.social.follow.dao.redis;
 
 import com.socialuni.social.common.api.constant.CommonRedisKey;
-import com.qingchi.qing.constant.SocialuniCommonStatus;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniUserContactRepositoryFacede;
 import com.socialuni.social.follow.dao.DO.SocialuniUserFollowDO;
 import com.socialuni.social.follow.dao.repositroy.SocialuniFollowRepository;

@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.openService;
 
-import com.qingchi.qing.constant.SocialuniCommonStatus;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.sdk.dao.DO.TencentCosAuditRecordDO;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniTalkImgDO;
 import com.socialuni.social.community.sdk.repository.TalkImgRepository;

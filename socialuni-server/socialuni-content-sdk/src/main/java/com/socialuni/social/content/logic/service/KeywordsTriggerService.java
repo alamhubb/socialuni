@@ -8,7 +8,7 @@ import com.socialuni.social.content.dao.repository.CustomKeywordsRepository;
 import com.socialuni.social.content.dao.repository.WhiteKeywordsRepository;
 import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.content.utils.TextContentUtil;
-import com.qingchi.qing.constant.SocialuniCommonStatus;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 

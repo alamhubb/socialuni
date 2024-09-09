@@ -1,7 +1,7 @@
 package com.socialuni.social.content.constant;
 
-import com.qingchi.qing.constant.SocialuniCommonStatus;
-import com.qingchi.qing.constant.ConstStatus;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
+import com.socialuni.social.common.api.enumeration.ConstStatus;
 
 import java.util.Arrays;
 import java.util.List;

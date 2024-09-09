@@ -2,7 +2,7 @@ package com.socialuni.social.user.sdk.logic.redis;
 
 import com.socialuni.social.common.api.constant.CommonRedisKey;
 import com.socialuni.social.tance.dev.facade.DevAccountFacade;
-import com.qingchi.qing.user.dao.model.SocialUserPhoneDo;
+import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
 import com.socialuni.social.user.sdk.dao.repository.SocialUserPhoneRepository;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;

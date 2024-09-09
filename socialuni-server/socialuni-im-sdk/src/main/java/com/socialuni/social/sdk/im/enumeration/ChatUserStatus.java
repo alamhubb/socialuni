@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.im.enumeration;
 
-import com.qingchi.qing.constant.SocialuniCommonStatus;
-import com.qingchi.qing.constant.ConstStatus;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
+import com.socialuni.social.common.api.enumeration.ConstStatus;
 
 /**
  * 会话聊天的状态，暂不使用，全局使用一样的，全局统一，避免出现文字不一致问题

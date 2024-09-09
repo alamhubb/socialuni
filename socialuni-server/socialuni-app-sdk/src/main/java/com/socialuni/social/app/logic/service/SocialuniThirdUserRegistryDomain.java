@@ -2,8 +2,9 @@ package com.socialuni.social.app.logic.service;
 
 import com.socialuni.social.app.factory.SocialuniMineUserDetailROFactory;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
+import com.socialuni.social.common.api.utils.SnowflakeIdUtil;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
-import com.qingchi.qing.user.dao.model.SocialUserPhoneDo;
+import com.socialuni.social.user.sdk.dao.DO.SocialUserPhoneDo;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniTokenDO;
 import com.socialuni.social.user.sdk.logic.entity.SocialUserEntity;
 import com.socialuni.social.user.sdk.logic.manage.SocialuniTokenManage;

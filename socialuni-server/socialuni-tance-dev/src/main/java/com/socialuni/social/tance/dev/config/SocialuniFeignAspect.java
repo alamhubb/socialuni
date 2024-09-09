@@ -1,6 +1,17 @@
 package com.socialuni.social.tance.dev.config;
 
 import cn.hutool.extra.spring.SpringUtil;
+import com.socialuni.social.common.sdk.config.SocialWebControllerAdvice;
+import com.socialuni.social.common.sdk.event.WebControllerExceptionEvent;
+import com.socialuni.social.common.api.constant.ErrorCode;
+import com.socialuni.social.common.api.constant.RequestErrorMsg;
+import com.socialuni.social.common.api.constant.ErrorType;
+import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.common.api.utils.IpUtil;
+import com.socialuni.social.common.api.utils.RequestUtil;
+import com.socialuni.social.common.api.dao.DO.RequestLogDO;
+import com.socialuni.social.common.sdk.utils.ErrorLogUtil;
+import com.socialuni.social.common.sdk.utils.RequestLogUtil;
 import com.socialuni.social.tance.dev.api.SocialuniNoUseFeignAspect;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -10,8 +21,13 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.event.EventListener;
 
+import javax.servlet.http.HttpServletRequest;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.Date;
 
 @Aspect
 @Configuration

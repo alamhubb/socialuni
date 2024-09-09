@@ -1,7 +1,7 @@
 package com.socialuni.social.tance.dev.enumeration;
 
 
-import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 
 import java.util.Arrays;
 import java.util.List;

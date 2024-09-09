@@ -1,6 +1,6 @@
 package com.socialuni.social.tance.dev.dao.DO;
 
-import com.qingchi.qing.jpa.QingJpaBaseDO;
+import com.socialuni.social.common.api.entity.SocialuniBaseDO;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -30,7 +30,7 @@ import java.util.Date;
         }
 )
 //@IdClass(value = AppConfigPk.class)
-public class AppConfigDO extends QingJpaBaseDO implements Serializable {
+public class AppConfigDO extends SocialuniBaseDO implements Serializable {
     @Column(nullable = false)
     private Integer devId;
     /**

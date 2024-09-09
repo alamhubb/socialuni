@@ -1,8 +1,9 @@
 package com.socialuni.social.tance.dev.facade;
 
 import com.socialuni.social.common.api.constant.GenderType;
-import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
+import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.tance.dev.api.DevAccountInterface;
 import com.socialuni.social.tance.dev.api.DevAccountProviderInterface;
 import com.socialuni.social.tance.dev.api.DevAccountRedisInterface;
@@ -168,7 +169,7 @@ public class DevAccountFacade {
     }
 
     public static String getSocialuniSecretKey() {
-        String secretKey = SocialuniRequestUtil.getRequestValue(SocialFeignHeaderName.socialuniSecretKey);
+        String secretKey = RequestUtil.getRequestValue(SocialFeignHeaderName.socialuniSecretKey);
         log.info("miyaokey:{}", secretKey);
         return secretKey;
     }

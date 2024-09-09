@@ -1,6 +1,6 @@
 package com.socialuni.social.admin.model;
 
-import com.qingchi.qing.constant.SocialuniCommonStatus;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.community.sdk.dao.DO.SocialuniHomeSwiperDO;
 import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import lombok.Data;

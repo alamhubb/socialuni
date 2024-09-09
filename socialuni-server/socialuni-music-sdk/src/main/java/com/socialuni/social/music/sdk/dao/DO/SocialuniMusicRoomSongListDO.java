@@ -1,12 +1,13 @@
 package com.socialuni.social.music.sdk.dao.DO;
 
-import com.qingchi.qing.jpa.SocialuniContentBaseDO;
+import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "s_music_room_song_list",

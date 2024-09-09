@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.DO.dev;
 
-import com.qingchi.qing.jpa.SocialuniContentBaseDO;
+import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import com.socialuni.social.common.api.constant.DateTimeType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

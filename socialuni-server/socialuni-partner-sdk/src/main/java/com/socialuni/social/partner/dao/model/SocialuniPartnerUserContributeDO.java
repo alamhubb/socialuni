@@ -1,6 +1,6 @@
 package com.socialuni.social.partner.dao.model;
 
-import com.qingchi.qing.jpa.SocialuniUserInfoBaseDO;
+import com.socialuni.social.common.api.entity.SocialuniUserInfoBaseDO;
 import lombok.Data;
 
 import javax.persistence.*;

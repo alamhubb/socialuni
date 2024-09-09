@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.im.enumeration;
 
-import com.qingchi.qing.constant.SocialuniCommonStatus;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 
 import java.util.Arrays;
 import java.util.List;

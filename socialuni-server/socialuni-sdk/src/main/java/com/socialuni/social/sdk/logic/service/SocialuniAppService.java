@@ -16,7 +16,7 @@ import com.socialuni.social.community.sdk.repository.HomeSwiperRepository;
 import com.socialuni.social.tance.dev.config.SocialuniAppConfig;
 import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.socialuni.social.common.api.model.ResultRO;
-import com.qingchi.qing.constant.SocialuniCommonStatus;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

@@ -1,11 +1,13 @@
 package com.socialuni.social.music.sdk.logic.manage;
 
-import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
 import com.socialuni.social.music.sdk.dao.DO.SocialuniMusicRoomDO;
 import com.socialuni.social.music.sdk.factory.SocialuniMusicRoomPlayerDOFactory;
 import com.socialuni.social.music.sdk.model.QO.SocialuniPlayMusicQO;
 import org.springframework.stereotype.Component;
+
+import java.util.Date;
 
 
 @Component

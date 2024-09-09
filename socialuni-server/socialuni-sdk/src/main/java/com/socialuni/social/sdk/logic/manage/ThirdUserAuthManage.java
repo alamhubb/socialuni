@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.logic.manage;
 import com.socialuni.social.sdk.dao.DO.dev.ThirdUserAuthDO;
 import com.socialuni.social.sdk.dao.DO.dev.ThirdUserDO;
 import com.socialuni.social.sdk.dao.repository.dev.ThirdUserAuthRepository;
-import com.qingchi.qing.constant.SocialuniCommonStatus;
+import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

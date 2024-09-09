@@ -7,7 +7,7 @@ import com.qcloud.cos.model.COSObjectInputStream;
 import com.qcloud.cos.model.GetObjectRequest;
 import com.qcloud.cos.utils.IOUtils;
 import com.socialuni.social.common.api.constant.SocialuniSystemConst;
-import com.qingchi.qing.common.exception.base.exception.SocialParamsException;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.content.tencent.TencentCloudAPI;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 import com.tencentcloudapi.ocr.v20181119.OcrClient;

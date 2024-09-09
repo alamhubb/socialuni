@@ -1,8 +1,9 @@
 package com.socialuni.social.sdk.im.dao.DO;
 
-import com.qingchi.qing.jpa.SocialuniUserInfoBaseDO;
+import com.socialuni.social.common.api.entity.SocialuniUserInfoBaseDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Index;
