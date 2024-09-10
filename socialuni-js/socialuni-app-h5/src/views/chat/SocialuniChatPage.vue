@@ -105,6 +105,8 @@ export default class SocialuniChatPage extends Vue {
     if (!chatId) {
       const res = await SocialuniMusicAPI.getPublicRoomId();
       chatId = res.data
+      socialuniChatModule.setChatIdToMessagePage(chatId)
+      return
     }
     await socialuniChatModule.init({chatId})
     console.log(socialuniChatModule.chatId)

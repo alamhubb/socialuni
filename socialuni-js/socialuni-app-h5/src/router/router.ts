@@ -18,6 +18,12 @@ export const constantRoutes = [
         component: SocialuniChatPage,
         meta: {title: '音乐'},
     },
+    {
+        path: '/message',
+        name: '消息',
+        component: SocialuniChatPage,
+        meta: {title: '音乐'},
+    },
     /*{
         path: '/userDetail',
         name: '用户详情',
