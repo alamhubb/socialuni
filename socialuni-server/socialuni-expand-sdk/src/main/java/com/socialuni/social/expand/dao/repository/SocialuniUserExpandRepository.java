@@ -19,7 +19,7 @@ public interface SocialuniUserExpandRepository extends JpaRepository<SocialuniUs
             put = {@CachePut(cacheNames = "userExpandByUserId", key = "#SocialuniUserExpandDo.userId")}
     )
     default SocialuniUserExpandDo savePut(SocialuniUserExpandDo SocialuniUserExpandDo){
-        return this.save(BeanUtil.toBean(SocialuniUserExpandDo,SocialuniUserExpandDo.class));
+        return this.save(SocialuniUserExpandDo);
     }
 
 

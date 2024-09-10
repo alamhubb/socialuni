@@ -37,10 +37,10 @@ public class SocialuniInterceptor extends SocialuniWebInterceptor {
             return true;
         }
 
-        SocialuniUserExpandDo socialuniUserExpandDo = SocialuniUserExpandDOUtil.getOrCreate(socialRequestUserConfig.getUserId());
-        socialuniUserExpandDo.setLastOnlineTime(new Date());
-
         CompletableFuture.supplyAsync(() -> {
+            SocialuniUserExpandDo socialuniUserExpandDo = SocialuniUserExpandDOUtil.getOrCreate(userId);
+            socialuniUserExpandDo.setLastOnlineTime(new Date());
+            log.info("创建 111111用户记录：{}", userId);
             SocialuniUserExpandDOUtil.saveUserExpandDO(socialuniUserExpandDo);
             return null;
         });
