@@ -21,6 +21,7 @@ import UserPageUtil from "./util/UserPageUtil";
 import CommonEventUtil from "qing-compat-js/src/util/CommonEventUtil";
 import {socialuniAppUserModule} from "./store/SocialuniAppUserModule";
 import SocialuniUserEventOn from "./event/SocialuniUserEventOn";
+import SocialuniUserUtil from "./util/SocialuniUserUtil";
 
 
 class SocialuniUserPlugin implements SocialuniPlugin {
@@ -118,6 +119,9 @@ const socialuniUserPlugin: SocialuniPlugin = new SocialuniUserPlugin()
 
 const SocialuniUser = {
     async install(app: App, socialuniOption: SocialuniOption) {
+        app.config.globalProperties.$userUtil = SocialuniUserUtil;
+        app.config.globalProperties.$isMine = SocialuniUserUtil.isMine;
+
         socialuniPluginsModule.addPlugin(socialuniUserPlugin)
 
         SocialuniUserEventOn.toLogin(() => {

@@ -33,9 +33,9 @@ class SocialuniImPlugin implements SocialuniPlugin {
         console.log(notify)
         if (notify.type === NotifyType.message) {
             // 暂不支持圈子功能，推送的时候把所有未读都推送过来，还没做，匹配成功的话在talk和match页都显示匹配成功通知？，还有阅读消息后后台也要清0
-            socialuniChatModule.pushChatAndMessagesAction(notify.chat)
+            socialuniChatModule.pushChatAndMessagesAction(notify.data)
         } else if (notify.type === NotifyType.notify) {
-            socialuniChatModule.unreadNotify.push(notify)
+            socialuniChatModule.unreadNotify.push(notify.data)
         }
     }
 

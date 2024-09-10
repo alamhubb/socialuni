@@ -3,7 +3,7 @@
     <div ref="messageBox" class="flex-1 overflow-auto">
       <div v-if="viewService.chat">
         <div class="w100p" v-for="msg in viewService.chat.messages" :id="'m'+msg.id" :key="msg.id">
-          <div v-if="msg.user.isMine" class="flex-row pd-sm">
+          <div v-if="$isMine(user)" class="flex-row pd-sm">
             <div class="flex-1 flex-col mr overflow-hidden">
               <div class="h44px row-end-center mb-xs">
                 {{ msg.user.nickname }}
