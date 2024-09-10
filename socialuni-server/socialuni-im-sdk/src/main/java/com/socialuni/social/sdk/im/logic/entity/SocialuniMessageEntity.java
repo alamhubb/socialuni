@@ -4,8 +4,10 @@ import com.socialuni.social.common.api.enumeration.SocialuniCommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.SocialuniNotifyRO;
+import com.socialuni.social.common.api.utils.RequestStoreUtil;
 import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.common.api.utils.SocialTokenFacade;
+import com.socialuni.social.common.api.utils.SocialuniRequestAsyncUtil;
 import com.socialuni.social.common.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.common.sdk.dao.facede.SocialuniRepositoryFacade;
@@ -41,10 +43,16 @@ import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.socialuni.social.user.sdk.dao.DO.SocialuniUserBlackDO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
+import javax.servlet.AsyncContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
@@ -221,20 +229,38 @@ public class SocialuniMessageEntity {
         log.info("getSecretKey:{}", DevAccountFacade.getSystemDevAccount().getSecretKey());
         log.info("getSocialuniSecretKey:{}", DevAccountFacade.getSocialuniSecretKey());
         log.info("userId:{}", sendUser.getUserId());
-
-        CompletableFuture.supplyAsync(() -> {
-            log.info("kaishizhixing  gengxin chatusere11111");
-            log.info("getSocialuniSecretKey:{}", DevAccountFacade.getSocialuniSecretKey());
-            //在于异步中 秘钥key已经丢失
-            log.info("userId:{}", sendUser.getUserId());
-            this.updateChatUsers(chat, sendUser, message);
-            return null;
-        }).exceptionally(e -> {
-            e.printStackTrace();
-            log.info(e.getMessage());
-            return null;
+        RequestContextHolder.setRequestAttributes(RequestContextHolder.getRequestAttributes(),true);
+        HttpServletRequest request11 = RequestUtil.getRequest();
+        // 开启异步处理
+        AsyncContext asyncContext = request11.startAsync();
+        // 异步处理逻辑
+        asyncContext.start(() -> {
+            //保存下当前的request，防止异步无法处理request问题
+            RequestStoreUtil.setRequest(request11);
+            try {
+                HttpServletRequest request = RequestStoreUtil.getRequest();
+                RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+                if (requestAttributes != null) {
+                    ServletRequestAttributes servletRequestAttributes = ((ServletRequestAttributes) requestAttributes);
+                    request = servletRequestAttributes.getRequest();
+                    log.info(request.getRequestURI());
+                }
+                log.info("kaishizhixing  gengxin chatusere11111");
+                log.info("getSocialuniSecretKey:{}", DevAccountFacade.getSocialuniSecretKey());
+                //在于异步中 秘钥key已经丢失
+                log.info("userId:{}", sendUser.getUserId());
+                this.updateChatUsers(chat, sendUser, message);
+            } catch (Exception e) {
+                e.printStackTrace();
+                log.info(e.getMessage());
+            } finally {
+                // 任务完成后，调用 complete() 来结束异步处理
+                asyncContext.complete();
+            }
         });
+       /* SocialuniRequestAsyncUtil.runAsync(() -> {
 
+        });*/
         //保存message
 
 //                Optional<ChatDO> chatDOOptional = chatRepository.findById();

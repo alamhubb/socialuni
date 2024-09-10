@@ -33,8 +33,6 @@ public class SocialuniWebInterceptor implements HandlerInterceptor {
         if (requestMethod.equals(RequestMethod.OPTIONS.name())) {
             return true;
         }
-        //保存下当前的request，防止异步无法处理request问题
-        RequestStoreUtil.setRequest(request);
         Date startTime = new Date();
         String uri = request.getRequestURI();
         String userIp = IpUtil.getIpAddr(request);

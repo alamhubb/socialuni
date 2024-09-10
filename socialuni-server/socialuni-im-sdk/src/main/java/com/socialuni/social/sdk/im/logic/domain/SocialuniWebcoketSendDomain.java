@@ -12,6 +12,7 @@ import com.socialuni.social.tance.dev.dao.repository.DevAccountRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
 import java.net.URI;
@@ -42,8 +43,9 @@ public class SocialuniWebcoketSendDomain {
             String apiUrl = devAccountDo.getApiUrl();
             String apiKey = devAccountDo.getApiSecretKey();
             if (StringUtils.isNotBlank(apiUrl) && StringUtils.isNotBlank(apiKey)) {
-                URI uri = URI.create(apiUrl);
-                log.info("触发了回调：{}", apiUrl);
+                String fullUrl = apiUrl+ "/socialuni/notifyCallback/receiveNotify";
+                URI uri = URI.create(fullUrl);
+                log.info("触发了回调：{}", fullUrl);
                 socialuniCallbackAPI.receiveNotify(uri, socialuniNotifyRO);
             }
         }

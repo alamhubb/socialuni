@@ -39,7 +39,6 @@ public class SocialuniUnionIdCache implements SocialuniUnionIdInterface {
     public SocialuniUnionIdDo savePut(SocialuniUnionIdDo uniContentUnionIdDO) {
         log.info("hasdfkasjdflasdjlf");
         log.info(String.valueOf(uniContentUnionIdDO.getContentType()));
-        log.info(String.valueOf(uniContentUnionIdDO.getContentType()));
         log.info(String.valueOf(uniContentUnionIdDO.getFromDevId()));
         log.info(String.valueOf(uniContentUnionIdDO.getId()));
         log.info(String.valueOf(uniContentUnionIdDO.getUnionId()));

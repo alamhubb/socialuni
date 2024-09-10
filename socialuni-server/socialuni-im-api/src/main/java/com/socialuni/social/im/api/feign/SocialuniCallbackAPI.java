@@ -29,7 +29,6 @@ public interface SocialuniCallbackAPI {
     //调用发送接口
     //子应用接到数据
     //调用websocket，发送信息。
-    @RequestMapping("receiveNotify")
     @PostMapping
     void receiveNotify(URI host, @RequestBody SocialuniNotifyRO notifyDTO);
 }

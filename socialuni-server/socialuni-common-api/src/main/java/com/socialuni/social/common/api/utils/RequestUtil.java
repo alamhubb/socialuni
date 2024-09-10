@@ -31,15 +31,17 @@ public class RequestUtil {
 
     //获取到当前线程绑定的请求对象
     public static HttpServletRequest getRequest() {
+        HttpServletRequest request = null;
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+
         if (requestAttributes != null) {
             ServletRequestAttributes servletRequestAttributes = ((ServletRequestAttributes) requestAttributes);
-            HttpServletRequest request = servletRequestAttributes.getRequest();
+            request = servletRequestAttributes.getRequest();
             if (!ObjectUtils.isEmpty(request)) {
                 return request;
             }
         }
-        HttpServletRequest request = RequestStoreUtil.getRequest();
+        request = RequestStoreUtil.getRequest();
         if (ObjectUtils.isEmpty(request)) {
             log.info("request 还是 空的");
         }
