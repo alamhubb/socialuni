@@ -22,7 +22,6 @@ import com.socialuni.social.tance.dev.config.SocialuniDevConfig;
 import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.factory.SocialuniAppOperateRecordDOFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -38,8 +37,8 @@ public class SocialuniChatEntity {
     SocialuniChatRepository chatRepository;
 
 
-    public SocialuniChatDO getJoinOrCreateChatUser(Long createUserId, String chatType, Long joinUserId, String chatName) {
-        SocialuniChatDO socialuniChatDO = socialuniChatManage.getOrCreateGroupChat(createUserId, chatName, chatType);
+    public SocialuniChatDO getJoinOrCreateChatUser(Integer devId, Long createUserId, String chatType, Long joinUserId, String chatName) {
+        SocialuniChatDO socialuniChatDO = socialuniChatManage.getOrCreateGroupChat(devId, createUserId, chatName, chatType);
         SocialuniChatUserDO socialuniChatUserDO = socialuniChatUserManage.joinOrCreateChatUser(socialuniChatDO, joinUserId);
         return socialuniChatDO;
     }
@@ -60,6 +59,8 @@ public class SocialuniChatEntity {
     @Resource
     SocialuniChatAPI socialuniChatAPI;
 
+    @Resource
+    SocialuniChatRepository socialuniChatRepository;
 
     public void createUserChats(SocialuniUserDo user) {
         //暂时不需要用户私人群
@@ -69,28 +70,38 @@ public class SocialuniChatEntity {
         //判断用户是否加入了默认的聊天群
 
         SocialuniAppConfigBO socialuniAppConfigBO = SocialuniAppConfig.getAppConfig();
+
+        List<SocialuniChatDO> chats = socialuniChatRepository.findByTypeAndStatus(ChatType.system_group, ChatStatus.enable);
+
+        //需要将用户加入到这些群聊中
+        for (SocialuniChatDO chat : chats) {
+            createdOrJoinSystemGroup(chat.getDevId(), user, chat.getChatName());
+        }
+
         List<String> groups = socialuniAppConfigBO.getDefaultChatGroups();
+
+        //需要将用户加入到这些群聊中
+        for (String group : groups) {
+            createdOrJoinSystemGroup(DevAccountFacade.getSystemDevAccountDevId(), user, group);
+        }
 
         //什么时候创建这个默认群呢
         //启动的时候
         //修改的时候
+    }
 
-        //需要将用户加入到这些群聊中
-        for (String group : groups) {
-            Long sysUserId = DevAccountFacade.getDevUserId();
+    private void createdOrJoinSystemGroup(Integer chat, SocialuniUserDo user, String chatName) {
+        Long sysUserId = DevAccountFacade.getDevUserId();
 
-            SocialuniChatDO socialuniChatDO = this.getJoinOrCreateChatUser(sysUserId, ChatType.system_group, user.getUserId(), group);
+        SocialuniChatDO socialuniChatDO = this.getJoinOrCreateChatUser(chat, sysUserId, ChatType.system_group, user.getUserId(), chatName);
 
-
-            if (SocialuniDevConfig.hasCenterServer()) {
-                SocialuniChatCreateQO socialuniChatCreateQO = new SocialuniChatCreateQO();
-                socialuniChatCreateQO.setChatName(socialuniChatDO.getChatName());
-                socialuniChatCreateQO.setType(socialuniChatDO.getType());
-                ResultRO<ChatRO> resultRO = socialuniChatAPI.joinOrCreateGroupChat(socialuniChatCreateQO);
-                ChatRO chatRO = resultRO.getData();
-                SocialuniUnionIdFacede.updateUuidByUnionIdNotNull(socialuniChatDO.getUnionId(), chatRO.getId());
-            }
-
+        if (SocialuniDevConfig.hasCenterServer()) {
+            SocialuniChatCreateQO socialuniChatCreateQO = new SocialuniChatCreateQO();
+            socialuniChatCreateQO.setChatName(socialuniChatDO.getChatName());
+            socialuniChatCreateQO.setType(socialuniChatDO.getType());
+            ResultRO<ChatRO> resultRO = socialuniChatAPI.joinOrCreateGroupChat(socialuniChatCreateQO);
+            ChatRO chatRO = resultRO.getData();
+            SocialuniUnionIdFacede.updateUuidByUnionIdNotNull(socialuniChatDO.getUnionId(), chatRO.getId());
         }
     }
 

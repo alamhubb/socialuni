@@ -1,8 +1,6 @@
 package com.socialuni.social.sdk.im.logic.foctory;
 
 
-import com.socialuni.social.common.api.constant.SocialuniContentType;
-import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.sdk.constant.LoadMoreType;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
@@ -18,10 +16,8 @@ import com.socialuni.social.sdk.im.dao.repository.SocialuniMessageRepository;
 import com.socialuni.social.im.api.model.RO.ChatRO;
 import com.socialuni.social.im.api.model.RO.SocialMessageRO;
 import com.socialuni.social.sdk.im.enumeration.MessageStatus;
-import com.socialuni.social.sdk.im.utils.SocialuniChatDOUtil;
 import com.socialuni.social.sdk.im.utils.SocialuniChatUserDOUtil;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import lombok.Data;
@@ -216,7 +212,7 @@ public class SocialChatROFactory {
         if (chatRO.getType().equals(ChatType.single)) {
             //系统群聊读取message表
             //查询用户这个chatUser下的消息
-            List<SocialuniMessageReceiveDO> messageReceiveDOS = messageReceiveRepository.findTop30ByChatUserIdAndStatusAndCreateTimeLessThanOrderByCreateTimeDesc(chatUserDO.getId(), MessageStatus.enable, new Date());
+            List<SocialuniMessageReceiveDO> messageReceiveDOS = messageReceiveRepository.findTop30ByChatIdAndUserIdAndStatusAndCreateTimeLessThanOrderByCreateTimeDesc(chatUserDO.getChatId(), chatUserDO.getUserId(), MessageStatus.enable, new Date());
             messages = SocialMessageROFactory.messageReceiveDOToVOS(messageReceiveDOS);
         } else {
             //查询用户这个chatUser下的消息

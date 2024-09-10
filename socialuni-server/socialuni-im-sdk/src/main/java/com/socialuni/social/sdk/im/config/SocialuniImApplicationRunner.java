@@ -6,6 +6,7 @@ import com.socialuni.social.sdk.im.enumeration.ChatType;
 import com.socialuni.social.sdk.im.logic.manage.SocialuniChatManage;
 //import com.socialuni.social.common.api.config.SocialuniAppConfigInterface;
 import com.socialuni.social.tance.dev.config.SocialuniAppConfig;
+import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
@@ -41,7 +42,7 @@ public class SocialuniImApplicationRunner implements ApplicationRunner {
         List<String> groups = SocialuniAppConfig.getAppConfig().getDefaultChatGroups();
         for (String group : groups) {
             Long sysUserId = SocialuniUserUtil.getSystemUserIdNotNull();
-            socialuniChatManage.getOrCreateGroupChat(sysUserId, group, ChatType.system_group);
+            socialuniChatManage.getOrCreateGroupChat(DevAccountFacade.systemDevId, sysUserId, group, ChatType.system_group);
         }
     }
 }

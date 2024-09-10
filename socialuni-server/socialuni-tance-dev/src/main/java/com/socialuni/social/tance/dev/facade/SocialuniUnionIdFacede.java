@@ -9,6 +9,7 @@ import com.socialuni.social.common.api.utils.SnowflakeIdUtil;
 import com.socialuni.social.common.api.utils.SocialTokenFacade;
 import com.socialuni.social.tance.dev.api.SocialuniUnionIdInterface;
 import com.socialuni.social.tance.dev.config.DataSourceContextHolder;
+import com.socialuni.social.tance.dev.config.SocialuniDevConfig;
 import com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
 import lombok.extern.slf4j.Slf4j;
@@ -261,18 +262,41 @@ public class SocialuniUnionIdFacede {
         return uniContentUnionIdDO;
     }
 
+    public static Boolean hasCenterId(String uuid) {
+        if (!SocialuniDevConfig.hasCenterServer()) {
+            return false;
+        }
+        if (NumberUtils.strHasNoNumber(uuid)) {
+            return false;
+        }
+        return true;
+    }
+
     public static SocialuniUnionIdDo getUnionByUuidNotNull(String uuid) {
         if (NumberUtils.strHasNoNumber(uuid)) {
-            return null;
+            throw new SocialParamsException("错误的内容标识1023：" + uuid);
         }
         Long unionId = Long.valueOf(uuid);
         return getUnionByUuidNotNull(unionId);
     }
 
+    public static SocialuniUnionIdDo getUnionByCenterUuidAllNull(String uuid) {
+        SocialuniUnionIdDo socialuniUnionIdDo = getUnionByUuidAllowNull(uuid);
+        if (socialuniUnionIdDo != null) {
+            return socialuniUnionIdDo;
+        }
+        Boolean flag = hasCenterId(uuid);
+        if (!flag) {
+            throw new SocialParamsException("错误的内容标识1024：" + uuid);
+        }
+        return null;
+    }
+
+
     //外部使用可能查询不存在的
     public static SocialuniUnionIdDo getUnionByUuidAllowNull(String uuid) {
         if (NumberUtils.strHasNoNumber(uuid)) {
-            return null;
+            throw new SocialParamsException("错误的内容标识1023：" + uuid);
         }
         Long unionId = Long.valueOf(uuid);
         return getUnionByUuidAllowNull(unionId);
@@ -353,7 +377,6 @@ public class SocialuniUnionIdFacede {
         }
         return ids;
     }
-
 
 
     public static boolean isInteger(String str) {

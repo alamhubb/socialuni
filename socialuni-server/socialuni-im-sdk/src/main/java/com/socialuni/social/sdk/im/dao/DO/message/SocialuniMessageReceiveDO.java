@@ -1,5 +1,6 @@
 package com.socialuni.social.sdk.im.dao.DO.message;
 
+import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import com.socialuni.social.common.api.entity.SocialuniUserContactBaseDO;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import lombok.Data;
@@ -15,13 +16,20 @@ import java.io.Serializable;
  */
 @Data
 @Entity
-@Table(name = "s_im_message_receive", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"beUserId", "messageId"})
-})
+@Table(name = "s_im_message_receive",
+        indexes = {
+                @Index(columnList = "chatId"),
+                @Index(columnList = "messageId"),
+                @Index(columnList = "sendUserId"),
+                @Index(columnList = "userId"),
+        },
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"userId", "messageId"})
+        })
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 //发送出去的消息表，接收人是谁，基于哪个chatUser
-public class SocialuniMessageReceiveDO extends SocialuniUserContactBaseDO implements Serializable {
+public class SocialuniMessageReceiveDO extends SocialuniContentBaseDO implements Serializable {
 
     //msg上存储了是否已撤回状态，以及发送的消息的状态，撤回和已删除冲突，有可能已删除，但是已撤回，一个字段记录不了两个状态
     private String msgStatus;
@@ -36,6 +44,8 @@ public class SocialuniMessageReceiveDO extends SocialuniUserContactBaseDO implem
     //    @ManyToOne
 //    private MessageDO message;
     private Long messageId;
+    private Long chatId;
+    private Long sendUserId;
 
     /**
      * 这个用来记录chat的昵称，和头像的。只有私聊的状态下才有
@@ -44,13 +54,14 @@ public class SocialuniMessageReceiveDO extends SocialuniUserContactBaseDO implem
 //    private
 //    ChatUserDO chatUser;
 
-    private Integer chatUserId;
-
-    public SocialuniMessageReceiveDO(SocialuniChatUserDO chatUserDO, Long sendUserId, Long messageId) {
-        super(sendUserId, chatUserDO.getUserId());
-        this.chatUserId = chatUserDO.getId();
+//    private Integer chatUserId;
+    public SocialuniMessageReceiveDO(Long chatId, Long userId, Long sendUserId, Long messageId) {
+        super(userId);
+        this.chatId = chatId;
+        this.sendUserId = sendUserId;
+//        this.chatUserId = chatUserDO.getId();
         this.messageId = messageId;
-        this.isMine = sendUserId.equals(chatUserDO.getUserId());
+        this.isMine = sendUserId.equals(userId);
         //接受消息的人看的,自己的默认已读
         this.isRead = this.isMine;
     }

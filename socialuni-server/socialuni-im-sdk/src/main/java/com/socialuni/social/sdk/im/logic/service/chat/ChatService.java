@@ -79,7 +79,7 @@ public class ChatService {
         //toDO 这里需要细想怎么个逻辑
         //需要将chatUser的未读数量更新一下
 //            messageReceiveDORepository.updateMessageReceiveRead(chatUserDb, readVO.getMessageIds());
-        List<SocialuniMessageReceiveDO> messageReceiveDOS = messageReceiveRepository.findByChatUserIdAndStatusAndIsReadFalse(chatUserDO.getId(), MessageStatus.enable);
+        List<SocialuniMessageReceiveDO> messageReceiveDOS = messageReceiveRepository.findByChatIdAndUserIdAndStatusAndIsReadFalse(chatUserDO.getChatId(), chatUserDO.getUserId(), MessageStatus.enable);
 //                List<MessageReceiveDO> messageReceiveDOS = new ArrayList<>();
         //把具体的每一条改为已读
         if (messageReceiveDOS.size() > 0) {
@@ -342,9 +342,10 @@ public class ChatService {
         String chatName = socialuniChatCreateQO.getChatName();
         String chatType = socialuniChatCreateQO.getType();
 
+        Integer devId = DevAccountFacade.getDevIdNullElseCenterDevId();
         //查找是否存在此chat，根据devId查找。
 
-        SocialuniChatDO socialuniChatDO = socialuniChatEntity.getJoinOrCreateChatUser(sysUserId, chatType, mineUserId, chatName);
+        SocialuniChatDO socialuniChatDO = socialuniChatEntity.getJoinOrCreateChatUser(devId, sysUserId, chatType, mineUserId, chatName);
 
 
         ChatRO chatRO = SocialChatROFactory.getChatROByUserLogin(socialuniChatDO, mineUserId);

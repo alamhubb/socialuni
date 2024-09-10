@@ -189,19 +189,13 @@ public class SocialuniMessageEntity {
         return SocialMessageROFactory.getMessageRO(mineMessageUser);
     }
 
-    @Resource
-    SocialuniChatUserCheck socialuniChatUserCheck;
 
     public SocialMessageRO sendGroupMessage(Long chatId, String msgContent, String contentType) {
         SocialuniChatDO chat = SocialuniChatDOUtil.getChat(chatId);
 
         SocialuniUserDo sendUser = SocialuniUserUtil.getMineUserNotNull();
 
-        if (chat == null) {
-            throw new SocialParamsException("不存在的群聊");
-        }
-
-        socialuniChatUserCheck.checkUserInChat(chatId, sendUser.getUserId());
+        SocialuniChatUserCheck.checkUserCanSeeChat(chat, sendUser.getUserId());
 
 //        List<SocialuniChatUserDO> chatSocialuniUserDoS = chatUserRepository.findByChatIdAndStatus(chatId, ChatUserStatus.enable);
 
@@ -374,7 +368,7 @@ public class SocialuniMessageEntity {
                 }*/
             //获取当起chatUser的userId
             Long chatUserId = chatSocialuniUserDo.getUserId();
-            SocialuniMessageReceiveDO messageReceiveDO = new SocialuniMessageReceiveDO(chatSocialuniUserDo, message.getUserId(), message.getUnionId());
+            SocialuniMessageReceiveDO messageReceiveDO = new SocialuniMessageReceiveDO(chatSocialuniUserDo.getChatId(), chatUserId, message.getUserId(), message.getUnionId());
 
             if (!chatUserId.equals(sendUser.getUserId())) {
                 //别人的chatUser，要增加未读，自己刚发的消息，别人肯定还没看
@@ -382,11 +376,11 @@ public class SocialuniMessageEntity {
                 //接收方，更改前端显示为显示
                 chatSocialuniUserDo.checkFrontShowAndSetTrue();
                 messageReceiveDO = messageReceiveRepository.save(messageReceiveDO);
-                NotifyDO notifyDO = new NotifyDO(messageReceiveDO);
+                /*NotifyDO notifyDO = new NotifyDO(messageReceiveDO);
                 notifyDO.setType(NotifyType.message);
                 notifyDO.setContentId(message.getUnionId());
                 notifyDO = notifyRepository.save(notifyDO);
-                notifies.add(notifyDO);
+                notifies.add(notifyDO);*/
             } else {
                 //自己的话不发送通知，自己的话也要构建消息，要不看不见，因为读是读这个表
                 mineMessageUser = messageReceiveRepository.save(messageReceiveDO);

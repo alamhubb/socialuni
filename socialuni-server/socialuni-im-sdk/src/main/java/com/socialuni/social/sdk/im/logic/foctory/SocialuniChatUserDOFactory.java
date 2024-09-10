@@ -12,6 +12,7 @@ import com.socialuni.social.sdk.im.utils.SocialuniChatUserDOUtil;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
+import org.apache.commons.lang3.ObjectUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -64,6 +65,9 @@ public class SocialuniChatUserDOFactory {
     }
 
     public static SocialuniChatUserDO createGroupChatUser(SocialuniChatDO chatDO, Long userId) {
+        if (ObjectUtils.isEmpty(userId)){
+            throw new SocialParamsException("获取会话异常2034301");
+        }
         //会话不存在则创建
         SocialuniChatUserDO chatUserDO = new SocialuniChatUserDO(chatDO, userId);
 

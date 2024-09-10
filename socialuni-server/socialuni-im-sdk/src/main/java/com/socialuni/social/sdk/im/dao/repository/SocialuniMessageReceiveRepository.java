@@ -17,10 +17,11 @@ public interface SocialuniMessageReceiveRepository extends JpaRepository<Socialu
 
     //chatId下所有未读变为已读，查询出来更改
 //    List<MessageReceiveDO> findByChatUserIdAndMessageStatusInAndStatusAndIsReadFalseAndIdInOrderByCreateTimeDescIdDesc(Integer chatUserId, List<String> msgStatus, String status, List<Long> ids);
-    List<SocialuniMessageReceiveDO> findByChatUserIdAndStatusAndIsReadFalse(Integer chatUserId, String status);
-//
+    List<SocialuniMessageReceiveDO> findByChatIdAndUserIdAndStatusAndIsReadFalse(Long chatId, Long userId, String status);
+
+    //
 //    //查询消息列表，根据chatUserId、msgReceiveStatus、msgIds 按照msgReceiveStatus 倒序排序
 //    //调用这两个之前必须先判断 chat 为enable
-    List<SocialuniMessageReceiveDO> findTop30ByChatUserIdAndStatusAndCreateTimeLessThanOrderByCreateTimeDesc(Integer chatUserId, String status, Date createTime);
+    List<SocialuniMessageReceiveDO> findTop30ByChatIdAndUserIdAndStatusAndCreateTimeLessThanOrderByCreateTimeDesc(Long chatId, Long userId, String status, Date createTime);
 
 }

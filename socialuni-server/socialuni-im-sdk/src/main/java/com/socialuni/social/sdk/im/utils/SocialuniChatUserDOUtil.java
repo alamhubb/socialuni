@@ -1,8 +1,10 @@
 package com.socialuni.social.sdk.im.utils;
 
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.socialuni.social.sdk.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniChatUserRepository;
+import com.socialuni.social.sdk.im.logic.manage.SocialuniChatUserManage;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Component;
@@ -57,7 +59,7 @@ public class SocialuniChatUserDOUtil {
 
     public static SocialuniChatUserDO getChatUserNotNull(String chatIdStr) {
         SocialuniChatUserDO socialuniChatUserDO = getChatUserAllowNull(chatIdStr);
-        if (socialuniChatUserDO == null){
+        if (socialuniChatUserDO == null) {
             throw new SocialParamsException("会话信息为空异常326002");
         }
 
@@ -69,7 +71,10 @@ public class SocialuniChatUserDOUtil {
         if (ObjectUtils.isEmpty(mineUserId)) {
             return null;
         }
-        Long chatId = SocialuniChatDOUtil.getChatId(chatIdStr);
+        Long chatId = SocialuniChatDOUtil.getChatIdAllowNull(chatIdStr);
+        if (chatId == null) {
+            return null;
+        }
 
         SocialuniChatUserDO socialuniChatUserDO = SocialuniChatUserDOUtil.findByChatIdAndUserId(chatId, mineUserId);
 
@@ -84,8 +89,23 @@ public class SocialuniChatUserDOUtil {
         return SocialuniChatUserDOUtil.get(chatUserId);
     }
 
-    public static SocialuniChatUserDO findFirstByChatIdAndUserIdAndStatus(Long chatId, Long userId, String status) {
+    public static SocialuniChatUserManage socialuniChatUserManage;
+
+    @Resource
+    public void setSocialuniChatUserManage(SocialuniChatUserManage socialuniChatUserManage) {
+        SocialuniChatUserDOUtil.socialuniChatUserManage = socialuniChatUserManage;
+    }
+
+
+    public static SocialuniChatUserDO getOrCreate(SocialuniChatDO chatDO, Long userId) {
+        return socialuniChatUserManage.joinOrCreateChatUser(chatDO, userId);
+    }
+
+    public static SocialuniChatUserDO findFirstByChatIdAndUserIdAndStatusNotNull(Long chatId, Long userId, String status) {
         SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findByChatIdAndUserId(chatId, userId);
+        if (chatUserDO == null) {
+            return null;
+        }
         if (status.equals(chatUserDO.getStatus())) {
             return chatUserDO;
         }

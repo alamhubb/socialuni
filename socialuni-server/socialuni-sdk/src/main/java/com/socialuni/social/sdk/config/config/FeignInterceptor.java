@@ -27,6 +27,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
+import java.util.List;
 
 //开发环境访问线上环境需要
 @Slf4j
@@ -73,7 +75,18 @@ public class FeignInterceptor implements RequestInterceptor {
         Long userId = socialRequestUserConfig.getUserId();
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
 
-        if (!postUrl.contains("/registryUser")) {
+        List<String> noPostUrl = Arrays.asList("/registryUser", "/notifyCallback");
+
+        Boolean flag = false;
+        for (String s : noPostUrl) {
+            log.info(s);
+            flag = postUrl.contains(s);
+            log.info(String.valueOf(flag));
+            if (flag) {
+                break;
+            }
+        }
+        if (!flag) {
             if (mineUser != null) {
                 Integer serverDevId = DevAccountFacade.getCenterDevIdNotNull();
                 SocialuniThirdTokenDO socialuniThirdTokenDO = SocialuniThirdTokenUtil.getThirdUserToken(serverDevId, mineUser.getUserId());

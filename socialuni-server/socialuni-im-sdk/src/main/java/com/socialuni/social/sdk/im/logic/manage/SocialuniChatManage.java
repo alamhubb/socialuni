@@ -13,9 +13,7 @@ public class SocialuniChatManage {
     @Resource
     SocialuniChatRepository chatRepository;
 
-    public SocialuniChatDO getOrCreateGroupChat(Long userId, String chatName, String chatType) {
-        Integer devId = DevAccountFacade.getDevIdNullElseCenterDevId();
-
+    public SocialuniChatDO getOrCreateGroupChat(Integer devId, Long userId, String chatName, String chatType) {
         SocialuniChatDO socialuniChatDO = chatRepository.findFirstByDevIdAndTypeAndChatName(devId, chatType, chatName);
         if (socialuniChatDO == null) {
             socialuniChatDO = SocialuniChatDOFactory.createGroupChatByNameAndType(userId, chatName, chatType);
