@@ -263,6 +263,7 @@ public class SocialuniUnionIdFacede {
     }
 
     public static Boolean hasCenterId(String uuid) {
+        //后期向中心服务器发送请求，获取id是否存在
         if (!SocialuniDevConfig.hasCenterServer()) {
             return false;
         }
