@@ -1,12 +1,10 @@
 package com.socialuni.social.sdk.im.utils;
 
-import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniChatUserRepository;
-import com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo;
-import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -57,9 +55,20 @@ public class SocialuniChatUserDOUtil {
         }
     }*/
 
-    public static SocialuniChatUserDO getChatUser(String chatIdStr) {
-        Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+    public static SocialuniChatUserDO getChatUserNotNull(String chatIdStr) {
+        SocialuniChatUserDO socialuniChatUserDO = getChatUserAllowNull(chatIdStr);
+        if (socialuniChatUserDO == null){
+            throw new SocialParamsException("会话信息为空异常326002");
+        }
 
+        return socialuniChatUserDO;
+    }
+
+    public static SocialuniChatUserDO getChatUserAllowNull(String chatIdStr) {
+        Long mineUserId = SocialuniUserUtil.getMineUserIdAllowNull();
+        if (ObjectUtils.isEmpty(mineUserId)) {
+            return null;
+        }
         Long chatId = SocialuniChatDOUtil.getChatId(chatIdStr);
 
         SocialuniChatUserDO socialuniChatUserDO = SocialuniChatUserDOUtil.findByChatIdAndUserId(chatId, mineUserId);

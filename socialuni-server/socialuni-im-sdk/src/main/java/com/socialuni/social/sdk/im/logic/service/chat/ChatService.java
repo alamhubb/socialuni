@@ -66,11 +66,7 @@ public class ChatService {
     public ResultRO<Void> readChatMessages(ChatReadVO chatVO) {
         String chatUuid = chatVO.getChatId();
 
-        SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.getChatUser(chatUuid);
-
-        if (chatUserDO == null) {
-            throw new SocialParamsException("不该触发的逻辑20003");
-        }
+        SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.getChatUserNotNull(chatUuid);
 
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
 

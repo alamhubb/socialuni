@@ -20,7 +20,6 @@ import com.socialuni.social.recharge.constant.SocialuniCoinOrderType;
 import com.socialuni.social.recharge.constant.SocialuniOrderDetailType;
 import com.socialuni.social.recharge.logic.entity.SocialuniCreateCoinOrderEntity;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
-import com.socialuni.social.sdk.im.logic.foctory.SocialChatROFactory;
 import com.socialuni.social.sdk.im.logic.service.SocialuniMessageService;
 import com.socialuni.social.sdk.im.logic.service.chat.ChatService;
 import com.socialuni.social.sdk.im.utils.SocialuniChatUserDOUtil;
@@ -93,7 +92,8 @@ public class SocialuniUserLikeService {
         //私聊
         String chatUuid = chatRO.getId();
 
-        SocialuniChatUserDO socialuniChatUserDO = SocialuniChatUserDOUtil.getChatUser(chatUuid);
+        //查询是否有记录
+        SocialuniChatUserDO socialuniChatUserDO = SocialuniChatUserDOUtil.getChatUserAllowNull(chatUuid);
 
         //群聊
         if (socialuniChatUserDO == null) {
@@ -140,12 +140,12 @@ public class SocialuniUserLikeService {
 
         String receiveIdUid = msgAddVO.getChatId();
 
-        SocialuniChatUserDO socialuniChatUserDO = SocialuniChatUserDOUtil.getChatUser(receiveIdUid);
+        SocialuniChatUserDO socialuniChatUserDO = SocialuniChatUserDOUtil.getChatUserAllowNull(receiveIdUid);
         if (socialuniChatUserDO == null) {
             return resultRO;
         }
 
-        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
+        /*SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
 
         SocialuniUserDo sendUser = mineUser;
         if (UserType.system.equals(mineUser.getType()) || mineUser.getUserId().equals(socialuniChatUserDO.getUserId())) {
@@ -161,7 +161,7 @@ public class SocialuniUserLikeService {
 
         if (sendUserId.equals(socialuniUserLikeChatDO.getUserId())) {
             socialuniCreateCoinOrderEntity.createCoinOrderByOrderType(sendUserId, -SocialuniLikeAllConfig.getLikeAllConfigBO().getSendLikeMsgNeedPayCoinNum(), SocialuniCoinOrderType.consume, SocialuniOrderDetailType.msg, msgIdd);
-        }
+        }*/
         return resultRO;
     }
 

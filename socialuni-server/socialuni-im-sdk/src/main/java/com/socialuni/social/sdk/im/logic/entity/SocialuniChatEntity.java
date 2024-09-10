@@ -62,7 +62,8 @@ public class SocialuniChatEntity {
 
 
     public void createUserChats(SocialuniUserDo user) {
-        SocialuniChatDO ownerChat = this.getOrCreateUserPersonalChat(user);
+        //暂时不需要用户私人群
+//        SocialuniChatDO ownerChat = this.getOrCreateUserPersonalChat(user);
 
 
         //判断用户是否加入了默认的聊天群
