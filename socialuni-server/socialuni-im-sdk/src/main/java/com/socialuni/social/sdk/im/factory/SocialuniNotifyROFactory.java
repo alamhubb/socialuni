@@ -2,6 +2,7 @@ package com.socialuni.social.sdk.im.factory;
 
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.im.api.model.RO.ChatRO;
+import com.socialuni.social.im.api.model.RO.SocialMessageRO;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatDO;
 import com.socialuni.social.sdk.im.dao.DO.message.SocialuniMessageDO;
 import com.socialuni.social.sdk.im.enumeration.NotifyType;
@@ -24,7 +25,7 @@ public class SocialuniNotifyROFactory {
         return notifyVO;
     }
 
-    public static SocialuniNotifyRO getNotifyGroupMessageRO(Object data, List<String> userIds) {
+    public static SocialuniNotifyRO getNotifyGroupMessageRO(ChatRO data, List<String> userIds) {
         return getNotifyRO(NotifyType.message, data, userIds);
     }
 
