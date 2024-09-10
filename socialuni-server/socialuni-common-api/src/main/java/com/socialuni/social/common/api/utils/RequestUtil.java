@@ -42,9 +42,6 @@ public class RequestUtil {
             }
         }
         request = RequestStoreUtil.getRequest();
-        if (ObjectUtils.isEmpty(request)) {
-            log.info("request 还是 空的");
-        }
         return request;
     }
 

@@ -1,8 +1,12 @@
 package com.socialuni.social.sdk.im.utils;
 
+import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.sdk.im.dao.repository.SocialuniChatUserRepository;
+import com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo;
+import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -14,6 +18,53 @@ public class SocialuniChatUserDOUtil {
     @Resource
     public void setChatUserRepository(SocialuniChatUserRepository chatUserRepository) {
         SocialuniChatUserDOUtil.chatUserRepository = chatUserRepository;
+    }
+
+    //    有用户就是chatUserId，没有就是chatId,chatId是uuid，chatUserid没有uuid
+   /* public static SocialuniChatUserDO getSingleChatUser(String chatId) {
+        SocialuniUnionIdDo socialuniUnionIdDo = SocialuniUnionIdFacede.getUnionByUuidAllowNull(chatId);
+
+        //创建 chatUser 的逻辑，点击进入页面，会话页加一条
+        //发送消息，还有添加好友成功
+        if (socialuniUnionIdDo == null) {
+            int unionId;
+            try {
+                unionId = Integer.parseInt(chatId);
+            } catch (Exception e) {
+                throw new SocialParamsException("错误的会话标识10011");
+            }
+            SocialuniChatUserDO socialuniChatUserDO = SocialuniChatUserDOUtil.get(unionId);
+            if (socialuniChatUserDO == null) {
+                throw new SocialParamsException("不存在会话信息10012");
+            }
+            return socialuniChatUserDO;
+            //则为chatUserId
+        } else {
+            //旧版本
+            String contentType = socialuniUnionIdDo.getContentType();
+            //私聊
+            if (contentType.equals(SocialuniContentType.user)) {
+                Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+                Long beUserId = socialuniUnionIdDo.getSelfSysId();
+
+                SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findByChatIdAndUserId(mineUserId, beUserId);
+
+                return chatUserDO;
+            } else if (contentType.equals(SocialuniContentType.chat)) {
+                return null;
+            }
+            throw new SocialParamsException("错误的会话标识10013");
+        }
+    }*/
+
+    public static SocialuniChatUserDO getChatUser(String chatIdStr) {
+        Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
+
+        Long chatId = SocialuniChatDOUtil.getChatId(chatIdStr);
+
+        SocialuniChatUserDO socialuniChatUserDO = SocialuniChatUserDOUtil.findByChatIdAndUserId(chatId, mineUserId);
+
+        return socialuniChatUserDO;
     }
 
     public static SocialuniChatUserDO findByChatIdAndUserId(Long chatId, Long userId) {

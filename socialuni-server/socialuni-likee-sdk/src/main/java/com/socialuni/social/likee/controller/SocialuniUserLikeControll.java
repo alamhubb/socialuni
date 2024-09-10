@@ -13,6 +13,7 @@ import com.socialuni.social.likee.model.SocialuniLikeAllConfigBO;
 import com.socialuni.social.likee.model.SocialuniLikeChatRO;
 import com.socialuni.social.sdk.im.logic.service.SocialuniMessageService;
 import com.socialuni.social.sdk.im.logic.service.chat.ChatService;
+import com.socialuni.social.tance.dev.api.SocialuniNoUseFeignAspect;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +22,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("socialuni/userLike")
+@SocialuniNoUseFeignAspect
 class SocialuniUserLikeControll implements SocialuniUserLikeAPI {
     @Resource
     SocialuniUserLikeService socialuniUserLikeService;

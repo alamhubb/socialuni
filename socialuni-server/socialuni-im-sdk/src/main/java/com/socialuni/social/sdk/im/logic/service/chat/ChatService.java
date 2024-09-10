@@ -26,6 +26,7 @@ import com.socialuni.social.im.api.model.QO.chat.ChatReadVO;
 import com.socialuni.social.im.api.model.QO.chat.ChatRemoveVO;
 import com.socialuni.social.im.api.model.QO.chat.OpenChatVO;
 import com.socialuni.social.sdk.im.utils.SocialuniChatDOUtil;
+import com.socialuni.social.sdk.im.utils.SocialuniChatUserDOUtil;
 import com.socialuni.social.tance.dev.config.SocialuniDevConfig;
 import com.socialuni.social.tance.dev.facade.DevAccountFacade;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
@@ -65,7 +66,7 @@ public class ChatService {
     public ResultRO<Void> readChatMessages(ChatReadVO chatVO) {
         String chatUuid = chatVO.getChatId();
 
-        SocialuniChatUserDO chatUserDO = SocialuniChatUserDOFactory.getSingleChatUser(chatUuid);
+        SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.getChatUser(chatUuid);
 
         if (chatUserDO == null) {
             throw new SocialParamsException("不该触发的逻辑20003");

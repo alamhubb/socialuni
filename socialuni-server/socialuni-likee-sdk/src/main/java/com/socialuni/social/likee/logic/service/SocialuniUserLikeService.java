@@ -23,6 +23,7 @@ import com.socialuni.social.sdk.im.dao.DO.SocialuniChatUserDO;
 import com.socialuni.social.sdk.im.logic.foctory.SocialChatROFactory;
 import com.socialuni.social.sdk.im.logic.service.SocialuniMessageService;
 import com.socialuni.social.sdk.im.logic.service.chat.ChatService;
+import com.socialuni.social.sdk.im.utils.SocialuniChatUserDOUtil;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -92,7 +93,7 @@ public class SocialuniUserLikeService {
         //私聊
         String chatUuid = chatRO.getId();
 
-        SocialuniChatUserDO socialuniChatUserDO = SocialChatROFactory.getSingleChatUser(chatUuid);
+        SocialuniChatUserDO socialuniChatUserDO = SocialuniChatUserDOUtil.getChatUser(chatUuid);
 
         //群聊
         if (socialuniChatUserDO == null) {
@@ -139,7 +140,7 @@ public class SocialuniUserLikeService {
 
         String receiveIdUid = msgAddVO.getChatId();
 
-        SocialuniChatUserDO socialuniChatUserDO = SocialChatROFactory.getSingleChatUser(receiveIdUid);
+        SocialuniChatUserDO socialuniChatUserDO = SocialuniChatUserDOUtil.getChatUser(receiveIdUid);
         if (socialuniChatUserDO == null) {
             return resultRO;
         }

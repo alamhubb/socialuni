@@ -37,8 +37,6 @@ public class SocialuniChatDOUtil {
             throw new SocialBusinessException("房间信息为空");
         }
 
-        Long mineUserId = SocialuniUserUtil.getMineUserIdAllowNull();
-
         SocialuniUnionIdDo socialuniUnionIdDo = SocialuniUnionIdFacede.getUnionByUuidNotNull(chatIdStr);
 
         Long unionId = socialuniUnionIdDo.getSelfSysId();
@@ -46,6 +44,7 @@ public class SocialuniChatDOUtil {
         if (SocialuniContentType.chat.equals(socialuniUnionIdDo.getContentType())) {
             return unionId;
         } else if (SocialuniContentType.user.equals(socialuniUnionIdDo.getContentType())) {
+            Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
             SocialuniChatUserDO socialuniChatUserDO = SocialuniChatUserDOUtil.findByUserIdAndBeUserIdNotNull(mineUserId, unionId);
             return socialuniChatUserDO.getChatId();
         }
