@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 public class SocialuniRequestAsyncUtil {
     public static void runAsync(Runnable runnable) {
-        RequestContextHolder.setRequestAttributes(RequestContextHolder.getRequestAttributes(), true);
+//        RequestContextHolder.setRequestAttributes(RequestContextHolder.getRequestAttributes(), true);
         HttpServletRequest request = RequestUtil.getRequest();
         // 开启异步处理
         AsyncContext asyncContext = request.startAsync();
