@@ -229,23 +229,13 @@ public class SocialuniMessageEntity {
         log.info("getSecretKey:{}", DevAccountFacade.getSystemDevAccount().getSecretKey());
         log.info("getSocialuniSecretKey:{}", DevAccountFacade.getSocialuniSecretKey());
         log.info("userId:{}", sendUser.getUserId());
-        RequestContextHolder.setRequestAttributes(RequestContextHolder.getRequestAttributes(),true);
-        HttpServletRequest request11 = RequestUtil.getRequest();
-        // 开启异步处理
-        AsyncContext asyncContext = request11.startAsync();
+
         // 异步处理逻辑
-        asyncContext.start(() -> {
-            //保存下当前的request，防止异步无法处理request问题
-            RequestStoreUtil.setRequest(request11);
+        SocialuniRequestAsyncUtil.runAsync(() -> {
             try {
                 HttpServletRequest request = RequestStoreUtil.getRequest();
-                RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
-                if (requestAttributes != null) {
-                    ServletRequestAttributes servletRequestAttributes = ((ServletRequestAttributes) requestAttributes);
-                    request = servletRequestAttributes.getRequest();
-                    log.info(request.getRequestURI());
-                }
                 log.info("kaishizhixing  gengxin chatusere11111");
+                log.info(request.getRequestURI());
                 log.info("getSocialuniSecretKey:{}", DevAccountFacade.getSocialuniSecretKey());
                 //在于异步中 秘钥key已经丢失
                 log.info("userId:{}", sendUser.getUserId());
@@ -253,9 +243,6 @@ public class SocialuniMessageEntity {
             } catch (Exception e) {
                 e.printStackTrace();
                 log.info(e.getMessage());
-            } finally {
-                // 任务完成后，调用 complete() 来结束异步处理
-                asyncContext.complete();
             }
         });
        /* SocialuniRequestAsyncUtil.runAsync(() -> {
