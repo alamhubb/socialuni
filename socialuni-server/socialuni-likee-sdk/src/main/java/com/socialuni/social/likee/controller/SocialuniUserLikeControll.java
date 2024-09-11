@@ -22,11 +22,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("socialuni/userLike")
-@SocialuniNoUseFeignAspect
 class SocialuniUserLikeControll implements SocialuniUserLikeAPI {
     @Resource
     SocialuniUserLikeService socialuniUserLikeService;
 
+
+    @SocialuniNoUseFeignAspect
     @Override
     public ResultRO<SocialMessageRO> sendMsg(MessageAddVO messageAddVO) {
         return socialuniUserLikeService.sendMsg(messageAddVO);
@@ -37,6 +38,8 @@ class SocialuniUserLikeControll implements SocialuniUserLikeAPI {
         return socialuniUserLikeService.queryChat(socialuniChatQueryQO);
     }
 
+
+    @SocialuniNoUseFeignAspect
     @Override
     public ResultRO<List<SocialuniLikeChatRO>> queryChatList() {
         return socialuniUserLikeService.queryChatList();
