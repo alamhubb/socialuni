@@ -1,28 +1,19 @@
 <template>
   <main class="h100p mt-sm row-all-center">
-    <div class="w800 h500">
-      <div>123</div>
-      456
-      <el-button @click="sendAuthCode">123</el-button>
-    </div>
+
   </main>
 </template>
 
 <script lang="ts">
 import {Component, Vue, toNative} from 'vue-facing-decorator';
-import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
 
 @toNative
 @Component({})
-export default class IndexView extends Vue {
+export default class HomeView extends Vue {
 
   created() {
-    console.log(666666)
-    console.log(123)
   }
 
-  sendAuthCode() {
-    PhoneAPI.sendAuthCodeAPI('1111')
-  }
+
 }
 </script>
