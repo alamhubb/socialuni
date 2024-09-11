@@ -44,15 +44,14 @@ public class SocialuniAdminAppConfigController {
 
     @PostMapping("deleteById")
     @ResponseBody
-    public void deleteById(@RequestBody AppConfigPk appConfigPk) {
+    public void deleteById() {
         Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
 
         Integer devId = DevAccountFacade.getAdminDevIdNotNull(mineUserId);
-        appConfigPk.setDevId(devId);
 //        if(AppConfigRepository.DEFAULT_DEV_KEY.equals(appConfigPk.getDevId()))
 //            throw new SocialParamsException("联盟默认数据不可删除");
 
-        appConfigRepository.deleteById(appConfigPk);
+//        appConfigRepository.deleteById(devId);
     }
 
     /**
@@ -66,17 +65,18 @@ public class SocialuniAdminAppConfigController {
         Integer devId = DevAccountFacade.getAdminDevIdNotNull(mineUserId);
 
         int status = 1;
-        // 默认的内容。
-        List<AppConfigDO> defaultList = appConfigRepository.findAllByDevIdAndStatusOrderByCreateTimeDesc(AppConfigRepository.DEFAULT_DEV_KEY, status);
+//        // 默认的内容。
+//        List<AppConfigDO> defaultList = appConfigRepository.findAllByDevIdAndStatusOrderByCreateTimeDesc(AppConfigRepository.DEFAULT_DEV_KEY, status);
+//
+//        // 自己定义的
+//        List<AppConfigDO> devList = appConfigRepository.findAllByDevIdAndStatusOrderByCreateTimeDesc(devId, status);
+//        //
+//        CollectionUtil.addAll(defaultList, devList);
+//        // 去重
+//        List<AppConfigDO> distinct = CollectionUtil.distinct(defaultList, AppConfigDO::getConfigKey, true);
 
-        // 自己定义的
-        List<AppConfigDO> devList = appConfigRepository.findAllByDevIdAndStatusOrderByCreateTimeDesc(devId, status);
-        //
-        CollectionUtil.addAll(defaultList, devList);
-        // 去重
-        List<AppConfigDO> distinct = CollectionUtil.distinct(defaultList, AppConfigDO::getConfigKey, true);
-
-        return ResultRO.success(distinct);
+//        return ResultRO.success(distinct);
+        return ResultRO.success();
     }
 
     /**
@@ -85,16 +85,17 @@ public class SocialuniAdminAppConfigController {
     @GetMapping("getAllConfigsOfMap")
     @ResponseBody
     public ResultRO<Map<String, Object>> getAllConfigsOfMap() {
-        int status = 1;
-        // 默认的内容。
-        List<AppConfigDO> defaultList = appConfigRepository.findAllByDevIdAndStatusOrderByCreateTimeDesc(AppConfigRepository.DEFAULT_DEV_KEY, status);
-        // 自己定义的
-        List<AppConfigDO> devList = appConfigRepository.findAllByDevIdAndStatusOrderByCreateTimeDesc(DevAccountFacade.getDevIdNullElseCenterDevId(), status);
+//        int status = 1;
+//        // 默认的内容。
+//        List<AppConfigDO> defaultList = appConfigRepository.findAllByDevIdAndStatusOrderByCreateTimeDesc(AppConfigRepository.DEFAULT_DEV_KEY, status);
+//        // 自己定义的
+//        List<AppConfigDO> devList = appConfigRepository.findAllByDevIdAndStatusOrderByCreateTimeDesc(DevAccountFacade.getDevIdNullElseCenterDevId(), status);
+//        //
+//        CollectionUtil.addAll(defaultList, devList);
+//        // 去重
+//        List<AppConfigDO> distinct = CollectionUtil.distinct(defaultList, AppConfigDO::getConfigKey, true);
         //
-        CollectionUtil.addAll(defaultList, devList);
-        // 去重
-        List<AppConfigDO> distinct = CollectionUtil.distinct(defaultList, AppConfigDO::getConfigKey, true);
-        //
-        return ResultRO.success(MapUtil.pivot(distinct, "configKey", "value"));
+//        return ResultRO.success(MapUtil.pivot(distinct, "configKey", "value"));
+        return ResultRO.success();
     }
 }

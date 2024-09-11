@@ -28,8 +28,10 @@ import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @Slf4j
@@ -208,10 +210,9 @@ public class TalkQueryStore {
         }
 
         userTalkUnionIds = talkApi.queryTalkIdsByIds(userTalkUnionIds, queryBO.getQueryTime(), pageRequest);
-        /*if (userTalkUnionIds.size() > 10) {
-            userTalkUnionIds = userTalkUnionIds.subList(0, 10);
-        }*/
-        return this.queryTalksByIds(userTalkUnionIds);
+
+        List<SocialuniTalkDO> talkDOS = this.queryTalksByIds(userTalkUnionIds);
+        return talkDOS;
     }
 
     //根据id列表从缓存中读取talk列表

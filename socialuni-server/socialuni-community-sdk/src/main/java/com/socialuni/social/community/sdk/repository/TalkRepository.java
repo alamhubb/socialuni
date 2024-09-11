@@ -258,6 +258,12 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
             Pageable pageable);
 
 
+    @Query(value = "SELECT t.unionId FROM SocialuniTalkDO t where t.unionId in (:talkIds) order by t.updateTime desc")
+    List<Long> queryTalkIdsByIds(
+            @Param("talkIds") List<Long> talkIds,
+            Pageable pageable);
+
+
     //根据性别年龄和同城
     //tag的性别等于app性别，或者用户性别等于tag性别
     /*@Cacheable(cacheNames = "queryTalkIdsTop10ByGenderAgeAndLikeAdCode", key = "#talkIds+'-'+#userIds+'-'+#tagTalkIds+'-'+#userId+'-'+#status+'-'+#adCode+'-'+#talkGender+'-'+#mineUserGender+'-'+#devId+'-'+#pageable.pageSize+'-'+#pageable.pageNumber")

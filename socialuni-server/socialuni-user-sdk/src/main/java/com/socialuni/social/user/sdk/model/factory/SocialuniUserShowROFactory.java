@@ -32,6 +32,9 @@ public class SocialuniUserShowROFactory {
     }
 
     public static SocialuniUserShowRO getUserROLook(SocialuniUserDo userDO, SocialuniUserDo lookUser) {
+        if (lookUser == null) {
+            return getUserRO(userDO, null);
+        }
         return getUserRO(userDO, lookUser.getUserId());
     }
 

@@ -33,13 +33,14 @@ public class SocialuniContentUserROFactory {
     }
 
     public static SocialuniContentUserRO newContentUserRO(SocialuniUserDo user, SocialuniUserDo mineUser) {
-        SocialuniContentUserRO userRO = new SocialuniContentUserRO(SocialuniUserShowROFactory.getUserRO(user, mineUser.getUserId()));
-
-        userRO.setIdentityAuth(false);
 
         Long mineUserId = Optional.ofNullable(mineUser)
                 .map(SocialuniUserDo::getUserId)
                 .orElse(null);
+
+        SocialuniContentUserRO userRO = new SocialuniContentUserRO(SocialuniUserShowROFactory.getUserRO(user, mineUserId));
+
+        userRO.setIdentityAuth(false);
 
         SocialuniUserFollowRelationInfoRO socialuniUserFollowRelationInfoRO = SocialuniUserFollowInfoUtil.getUserFollowRelationInfo(user.getUserId(), mineUserId);
         userRO.setHasBeFollowed(socialuniUserFollowRelationInfoRO.getHasBeFollowed());

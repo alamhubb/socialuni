@@ -10,7 +10,7 @@ import java.util.List;
 
 @Data
 public class SocialuniAdminStickTalkRO {
-    private Integer id;
+    private Long id;
     private Long userId;
     private String content;
     private Integer globalTop;

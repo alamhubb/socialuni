@@ -9,7 +9,7 @@ public class ReportUserVO {
     private String avatar;
     private String nickname;
     private String status;
-    private Integer id;
+    private Long id;
 
     public ReportUserVO() {
     }

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.socialuni.social.community.sdk.dao.mapper.TalkMapper">
     <!--        mybatis 一个参数时自定义属性名不生效 所以使用list-->
-    <select id="queryTalkIdsByAndTag" resultType="java.lang.Integer">
+    <select id="queryTalkIdsByAndTag" resultType="java.lang.Long">
         SELECT t.union_id FROM s_community_talk t,s_community_talk_tag tt WHERE t.union_id = tt.talk_id
         AND tt.tag_id in
         <foreach item="item" index="index" collection="list"
@@ -12,7 +12,7 @@
         order by t.update_time desc
     </select>
 
-    <select id="queryTalkIdsByAndCircle" resultType="java.lang.Integer">
+    <select id="queryTalkIdsByAndCircle" resultType="java.lang.Long">
         SELECT t.union_id
         FROM s_community_talk t,
              s_community_talk_circle tc
@@ -20,7 +20,7 @@
         order by t.update_time desc
     </select>
 
-    <select id="queryTalkIdsByAndUserExpand" resultType="java.lang.Integer">
+    <select id="queryTalkIdsByAndUserExpand" resultType="java.lang.Long">
         SELECT t.union_id
         FROM s_community_talk t,
              s_user_expand ue
@@ -39,7 +39,7 @@
         order by t.update_time desc
     </select>-->
 
-    <select id="queryTalkIdsByAndUser" resultType="java.lang.Integer">
+    <select id="queryTalkIdsByAndUser" resultType="java.lang.Long">
         SELECT t.union_id
         FROM
         s_community_talk t,`s_user` u
@@ -62,7 +62,7 @@
         order by t.update_time desc
     </select>
 
-    <select id="queryTalkIdsByTalkCondition" resultType="java.lang.Integer">
+    <select id="queryTalkIdsByTalkCondition" resultType="java.lang.Long">
         SELECT t.union_id
         FROM
         s_community_talk t

@@ -33,8 +33,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class SocialuniTalkDO extends SocialuniUnionContentBaseDO implements SocialuniTextCheckDO, Serializable {
-    @Column(nullable = false)
-    Integer devId;
     //为什么不存thirdUserId，因为根据userId+devId可以确认thirdUserId
     /**
      * 评论数量

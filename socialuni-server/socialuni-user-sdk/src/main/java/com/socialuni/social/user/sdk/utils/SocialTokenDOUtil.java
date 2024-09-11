@@ -42,7 +42,7 @@ public class SocialTokenDOUtil {
         if (tokenDO == null) {
             return null;
         }
-        String userKey = SocialTokenFacade.getUserKeyByToken(token);
+        /*String userKey = SocialTokenFacade.getUserKeyByToken(token);
         if (userKey == null) {
             throw new SocialNotLoginException();
         }
@@ -70,7 +70,7 @@ public class SocialTokenDOUtil {
                 }
                 throw new SocialNotLoginException();
             }
-        }
+        }*/
         Date date = new Date();
         //如果当前时间大于时效时间，则时效了
         if (date.getTime() > tokenDO.getExpiredTime().getTime()) {

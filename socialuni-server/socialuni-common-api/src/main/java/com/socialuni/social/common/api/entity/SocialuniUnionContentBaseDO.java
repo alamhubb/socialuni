@@ -17,7 +17,8 @@ import java.io.Serializable;
 public class SocialuniUnionContentBaseDO extends SocialuniContentBaseDO implements Serializable {
     @Column(nullable = false)
     private String contentType;
-    @Column(nullable = false)
+//    @Column(nullable = false)
+    @Column
     private Integer devId;
     @Column(nullable = false)
     private Long unionId;

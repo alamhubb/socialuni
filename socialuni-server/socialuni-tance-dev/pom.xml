@@ -30,10 +30,6 @@
         </dependency>
         <dependency>
             <groupId>com.socialuni.social</groupId>
-            <artifactId>socialuni-tance-dev</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.socialuni.social</groupId>
             <artifactId>socialuni-common-sdk</artifactId>
         </dependency>
         <dependency>
