@@ -67,7 +67,7 @@ public class SocialuniChatDOUtil {
             return null;
         }
 
-        Long unionId = socialuniUnionIdDo.getSelfSysId();
+        Long unionId = socialuniUnionIdDo.getId();
 
         if (SocialuniContentType.chat.equals(socialuniUnionIdDo.getContentType())) {
             return unionId;
@@ -87,7 +87,7 @@ public class SocialuniChatDOUtil {
 
         SocialuniUnionIdDo socialuniUnionIdDo = SocialuniUnionIdFacede.getUnionByUuidNotNull(chatIdStr);
 
-        Long unionId = socialuniUnionIdDo.getSelfSysId();
+        Long unionId = socialuniUnionIdDo.getId();
 
         if (SocialuniContentType.chat.equals(socialuniUnionIdDo.getContentType())) {
             return unionId;

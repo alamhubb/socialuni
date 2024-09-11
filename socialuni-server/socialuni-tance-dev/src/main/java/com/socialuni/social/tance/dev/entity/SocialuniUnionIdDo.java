@@ -1,11 +1,11 @@
 package com.socialuni.social.tance.dev.entity;
 
-import com.socialuni.social.common.api.entity.SocialuniBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "s_dev_content_union_id",
@@ -19,8 +19,15 @@ import java.io.Serializable;
         }
 )
 @Data
-@NoArgsConstructor
-public class SocialuniUnionIdDo extends SocialuniBaseDO implements Serializable {
+public class SocialuniUnionIdDo implements Serializable {
+    @Id
+    @Column(nullable = false, updatable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, updatable = false, columnDefinition = "timestamp default current_timestamp")
+    private Date createTime;
+
     //为什么使用id，方便，可以拆分为id+类型
     @Column(nullable = false)
     private String contentType;
@@ -41,18 +48,19 @@ public class SocialuniUnionIdDo extends SocialuniBaseDO implements Serializable 
         return this.unionId;
     }
 
-
     @Deprecated
     public String getUuid() {
         return uuid;
     }
 
-    public Long getSelfSysId() {
-        return Long.valueOf(this.getId());
+    public SocialuniUnionIdDo() {
+        Date curDate = new Date();
+        this.createTime = curDate;
     }
 
     //三方的用户，来注册的时候，好好想想各种情况， 应该都会有dataunionid
     public SocialuniUnionIdDo(String contentType, Long unionId, Integer fromDevId) {
+        this();
         //这俩字段应该用不到，只是方便统计有用，也不是读出来的数据有用，评论时需要根据这个通知到对方，
         this.contentType = contentType;
         this.unionId = unionId;

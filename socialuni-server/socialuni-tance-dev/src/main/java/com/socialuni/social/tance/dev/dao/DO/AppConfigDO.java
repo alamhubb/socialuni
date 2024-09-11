@@ -29,7 +29,6 @@ import java.util.Date;
                 @UniqueConstraint(columnNames = {"devId", "configKey"})
         }
 )
-//@IdClass(value = AppConfigPk.class)
 public class AppConfigDO extends SocialuniBaseDO implements Serializable {
     @Column(nullable = false)
     private Integer devId;

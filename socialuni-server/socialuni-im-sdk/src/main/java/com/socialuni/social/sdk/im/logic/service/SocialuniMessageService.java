@@ -29,7 +29,6 @@ import com.socialuni.social.tance.dev.config.SocialuniDevConfig;
 import com.socialuni.social.tance.dev.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.tance.dev.entity.SocialuniUnionIdDo;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
-import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -206,7 +205,7 @@ public class SocialuniMessageService {
         //私聊
         if (socialuniUnionIdDo.getContentType().equals(SocialuniContentType.user)) {
             Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
-            Long beUserId = socialuniUnionIdDo.getSelfSysId();
+            Long beUserId = socialuniUnionIdDo.getId();
 
             //如果用户存在查看会话
             SocialuniChatUserDO chatUserDO = SocialuniChatUserDOUtil.findByChatIdAndUserId(mineUserId, beUserId);

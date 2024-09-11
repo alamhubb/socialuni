@@ -3,7 +3,6 @@ package com.socialuni.social.sdk.im.logic.domain;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.dao.DO.SocialuniUserDo;
 import com.socialuni.social.content.utils.SocialuniTextContentUtil;
 import com.socialuni.social.im.api.model.QO.message.MessageAddVO;
@@ -48,7 +47,7 @@ public class SocialuniMsgDomain {
         String idContentType = socialuniUnionIdDo.getContentType();
 
 
-        Long unionId = socialuniUnionIdDo.getSelfSysId();
+        Long unionId = socialuniUnionIdDo.getId();
 
 
         //旧版本

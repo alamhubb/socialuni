@@ -29,21 +29,21 @@ public interface AppConfigRepository extends JpaRepository<AppConfigDO, Integer>
     @Query("select s.id from AppConfigDO s where s.devId = :devId and s.configKey =:configKey")
     Integer findIdByDevIdAndConfigKey(Integer devId, String configKey);
 
-//    @Cacheable(value = "findAppConfigDOFirstById", key = "#id")
+    @Cacheable(value = "findAppConfigDOFirstById", key = "#id")
     AppConfigDO findFirstById(Integer id);
 
-    /*@Caching(
+    @Caching(
             evict = {
                     //用户的talks肯定变化了
                     //新增一条数据肯定所有数据清空，数据的显示数据变了
                     @CacheEvict(cacheNames = "getDevAppConfigs", allEntries = true),
                     //新增一条数据肯定所有数据清空，数据的显示数据变了
-                    @CacheEvict(cacheNames = "findIdByDevIdAndConfigKey", key = "#appConfigDO.devId+'-'+appConfigDO.configKey")
+                    @CacheEvict(cacheNames = "findIdByDevIdAndConfigKey", key = "#appConfigDO.devId+'-'+#appConfigDO.configKey")
             },
             put = {
                     @CachePut(cacheNames = "findAppConfigDOFirstById", key = "#appConfigDO.id")
             }
-    )*/
+    )
     default AppConfigDO savePut(AppConfigDO appConfigDO) {
         return this.save(appConfigDO);
     }

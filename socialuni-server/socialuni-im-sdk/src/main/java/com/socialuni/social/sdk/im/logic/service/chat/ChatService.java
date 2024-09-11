@@ -144,7 +144,7 @@ public class ChatService {
         //私聊
         if (socialuniUnionIdDo.getContentType().equals(SocialuniContentType.user)) {
             Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
-            Long beUserId = socialuniUnionIdDo.getSelfSysId();
+            Long beUserId = socialuniUnionIdDo.getId();
 
             //如果用户存在查看会话
             SocialuniChatUserDO chatUserDO = SocialuniChatUserDOFactory.getOrCreateChatUsersBySingleSendMsg(mineUserId, beUserId).get(0);

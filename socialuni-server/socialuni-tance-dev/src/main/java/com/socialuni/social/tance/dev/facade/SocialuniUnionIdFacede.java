@@ -114,7 +114,7 @@ public class SocialuniUnionIdFacede {
             //有的话更新
         }
         //有的话更新
-        return uniContentUnionIdDO.getSelfSysId();
+        return uniContentUnionIdDO.getId();
     }
 
 
@@ -188,22 +188,8 @@ public class SocialuniUnionIdFacede {
         if (unionId == null) {
             throw new SocialParamsException("无效的内容标识4");
         }
-        Integer id = Math.toIntExact(unionId);
-        SocialuniUnionIdDo uniContentUnionIdDO = socialuniUnionIdApi.findById(id);
+        SocialuniUnionIdDo uniContentUnionIdDO = socialuniUnionIdApi.findById(unionId);
         if (uniContentUnionIdDO == null) {
-            log.info("sensafsafsdfdsmsg");
-            log.info("token:{}", SocialTokenFacade.getToken());
-            log.info("userId:{}", unionId);
-            log.info("kaishizhixing  gengxin chatusere22222");
-            log.info("token:{}", SocialTokenFacade.getToken());
-            log.info("getRequestValue:{}", RequestUtil.getRequestValue("token"));
-            log.info("uri:{}", Objects.requireNonNull(RequestUtil.getRequest()).getRequestURI());
-            log.info("getDataSourceType:{}", DataSourceContextHolder.getDataSourceType());
-            log.info("getId:{}", DevAccountFacade.getDevAccountNullElseCenterDev().getId());
-            log.info("getDevAccountNullElseCenterDev:{}", DevAccountFacade.getDevAccountNullElseCenterDev().getSecretKey());
-            log.info("getSecretKey:{}", DevAccountFacade.getSystemDevAccount().getSecretKey());
-            log.info("getSocialuniSecretKey:{}", DevAccountFacade.getSocialuniSecretKey());
-            log.info("userId:{}", unionId);
             throw new SocialParamsException("无效的内容标识5");
         }
         return uniContentUnionIdDO;
@@ -213,7 +199,7 @@ public class SocialuniUnionIdFacede {
         if (unionId == null) {
             return null;
         }
-        SocialuniUnionIdDo uniContentUnionIdDO = socialuniUnionIdApi.findById(Math.toIntExact(unionId));
+        SocialuniUnionIdDo uniContentUnionIdDO = socialuniUnionIdApi.findById(unionId);
         if (uniContentUnionIdDO == null) {
             return null;
         }
@@ -224,7 +210,7 @@ public class SocialuniUnionIdFacede {
     //结果不可为空 ，为前台传入的数据,根据uid获取真实id,获取不可为空, 为前台传入的数据，防止错误，不可为空
     //根据uid获取真实id,获取不可为空, 为前台传入的数据，防止错误，不可为空
     public static Long getUnionIdByUuidNotNull(Long uuid) {
-        return getUnionByUuidNotNull(uuid).getSelfSysId();
+        return getUnionByUuidNotNull(uuid).getId();
     }
 
     public static Long getUnionIdByUuidNotNull(String uuid) {
@@ -232,7 +218,7 @@ public class SocialuniUnionIdFacede {
             return null;
         }
         Long unionId = Long.valueOf(uuid);
-        return getUnionByUuidNotNull(unionId).getSelfSysId();
+        return getUnionByUuidNotNull(unionId).getId();
     }
 
 
@@ -250,7 +236,7 @@ public class SocialuniUnionIdFacede {
         if (!Arrays.asList(SocialuniContentType.chat, SocialuniContentType.user).contains(chatUnion.getContentType())) {
             throw new SocialSystemException("不存在的会话");
         }
-        return chatUnion.getSelfSysId();
+        return chatUnion.getId();
     }
 
     //根据uid获取真实id,获取不可为空, 为前台传入的数据，防止错误，不可为空
@@ -327,7 +313,7 @@ public class SocialuniUnionIdFacede {
         if (socialuniUnionIdDo == null) {
             return null;
         }
-        return socialuniUnionIdDo.getSelfSysId();
+        return socialuniUnionIdDo.getId();
     }
 
 

@@ -2,6 +2,7 @@ package com.socialuni.social.tance.dev.logic.manage;
 
 import com.socialuni.social.tance.dev.dao.DO.AppConfigDO;
 import com.socialuni.social.tance.dev.dao.repository.AppConfigRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Service
+@Slf4j
 public class SocialuniAppConfigManage {
 
     @Resource
@@ -34,6 +36,7 @@ public class SocialuniAppConfigManage {
     public void updateAppConfig(Integer devId, String configKey, List<?> value) {
         updateAppConfig(devId, configKey, StringUtils.join(value));
     }
+
     public void updateAppConfig(Integer devId, String configKey, Integer value) {
         updateAppConfig(devId, configKey, String.valueOf(value));
     }

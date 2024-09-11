@@ -7,13 +7,13 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface SocialuniUnionIdRepository extends JpaRepository<SocialuniUnionIdDo, Integer> {
+public interface SocialuniUnionIdRepository extends JpaRepository<SocialuniUnionIdDo, Long> {
     SocialuniUnionIdDo findByUuid(String unionId);
 
-    SocialuniUnionIdDo findOneById(Integer id);
+    SocialuniUnionIdDo findOneById(Long id);
 
     SocialuniUnionIdDo findFirstByUnionId(Long id);
-    SocialuniUnionIdDo findFirstById(Integer id);
+    SocialuniUnionIdDo findFirstById(Long id);
 
     @Query(value = "select unionId from SocialuniUnionIdDo where contentType=:contentType")
     List<Long> findAllUnionIdByContentType(String contentType);
