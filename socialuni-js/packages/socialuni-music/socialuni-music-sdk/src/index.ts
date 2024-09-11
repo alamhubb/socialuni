@@ -41,11 +41,8 @@ class SocialuniMusicPlugin implements SocialuniPlugin {
 
             const roomInfo: MusicPlayerSongPlayingInfoRO = res.data
 
-            if (roomInfo) {
-                //先在播放列表中，找到这个歌曲
-                socialuniMusicStore.setMusicRoomInfo(roomInfo)
-
-            }
+            //先在播放列表中，找到这个歌曲
+            socialuniMusicStore.setMusicRoomInfo(roomInfo)
 
             /*await socialuniMusicStore.getMusicInitDataAction()
             client.leave()

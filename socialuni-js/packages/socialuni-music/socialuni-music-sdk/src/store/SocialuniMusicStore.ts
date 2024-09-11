@@ -65,6 +65,8 @@ export class SocialuniMusicStore {
             } else {
                 console.log(value.playingTimestamp.toLocaleString())
             }
+        } else {
+            this._musicRoomInfo = null
         }
     }
 
