@@ -56,7 +56,6 @@ public class SocialuniUserExpandDOUtil {
     }
 
     public static SocialuniUserExpandDo saveUserExpandDO(SocialuniUserExpandDo SocialuniUserExpandDo) {
-        log.info("创建 111111用户记录：{}", SocialuniUserExpandDo.getUserId());
         return socialuniUserExpandApi.savePut(SocialuniUserExpandDo);
     }
 }

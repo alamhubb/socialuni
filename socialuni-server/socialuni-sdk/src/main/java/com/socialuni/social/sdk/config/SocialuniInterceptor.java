@@ -40,7 +40,6 @@ public class SocialuniInterceptor extends SocialuniWebInterceptor {
         CompletableFuture.supplyAsync(() -> {
             SocialuniUserExpandDo socialuniUserExpandDo = SocialuniUserExpandDOUtil.getOrCreate(userId);
             socialuniUserExpandDo.setLastOnlineTime(new Date());
-            log.info("创建 111111用户记录：{}", userId);
             SocialuniUserExpandDOUtil.saveUserExpandDO(socialuniUserExpandDo);
             return null;
         });

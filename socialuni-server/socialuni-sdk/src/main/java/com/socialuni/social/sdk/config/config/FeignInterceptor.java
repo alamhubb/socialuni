@@ -79,9 +79,7 @@ public class FeignInterceptor implements RequestInterceptor {
 
         Boolean flag = false;
         for (String s : noPostUrl) {
-            log.info(s);
             flag = postUrl.contains(s);
-            log.info(String.valueOf(flag));
             if (flag) {
                 break;
             }
@@ -104,11 +102,6 @@ public class FeignInterceptor implements RequestInterceptor {
                     //保存三方token
                     socialuniThirdTokenDO = SocialuniThirdTokenUtil.createdThirdTokenOrGet(mineUserUnionId, resultRO.getData().getToken(), serverDevId, uuid);
 
-
-                    log.info("DevAccountFacade.hasDevKey():{}", DevAccountFacade.hasDevKey());
-                    log.info("getDevIdNullElseCenterDevId:{}", DevAccountFacade.getDevIdNullElseCenterDevId());
-                    log.info("mineUserUnionId:{}", mineUserUnionId);
-                    log.info("socialuniUserRO.getId():{}", socialuniUserRO.getId());
                     SocialuniUnionIdFacede.updateUuidByUnionIdNotNull(mineUserUnionId, socialuniUserRO.getId());
                 }
                 requestTemplate.header(SocialuniWebConfig.getTokenName(), socialuniThirdTokenDO.getToken());
