@@ -41,8 +41,6 @@ export class SocialuniMusicStore {
     }
 
     async setMusicRoomInfo(value: MusicPlayerSongPlayingInfoRO) {
-        console.log('chufale shezhi roomInfo')
-        console.trace('chufale shezhi roomInfo')
         if (value) {
             const findData = this.songList.find(item => item.musicId === value.musicId)
             if (findData) {
@@ -61,16 +59,10 @@ export class SocialuniMusicStore {
                 }
             }
             if (typeof value.playingTimestamp === 'string') {
-                console.log('后台返回时间')
-                console.log(value.playingTimestamp)
                 console.log(new Date(value.playingTimestamp).toLocaleString())
             } else if (typeof value.playingTimestamp === 'number') {
-                console.log('websocket返回时间')
-                console.log(value.playingTimestamp)
                 console.log(new Date(value.playingTimestamp).toLocaleString())
             } else {
-                console.log('前台设置时间')
-                console.log(value.playingTimestamp)
                 console.log(value.playingTimestamp.toLocaleString())
             }
         }

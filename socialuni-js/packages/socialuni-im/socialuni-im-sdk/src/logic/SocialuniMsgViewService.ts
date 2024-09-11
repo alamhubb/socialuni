@@ -79,9 +79,7 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
 
     //为什么使用instance而不使用this？
     initService(instance: Vue, params: MessageViewParams) {
-        console.log('zhixingle initService')
         super.initService(instance, params)
-
 
         watch(() => socialuniChatModule.scrollTop, () => {
             if (instance.$refs.messageBox) {
@@ -96,7 +94,6 @@ export default class SocialuniMsgViewService extends SocialuniViewService<any> {
         onUnmounted(() => {
             socialuniChatModule.scrollTop = 0
         })
-        console.log('chufale onload')
         socialuniChatModule.init(params)
     }
 

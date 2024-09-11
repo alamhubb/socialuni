@@ -83,15 +83,9 @@ class SocialuniChatModule {
             this.chats.unshift(chat)
 
             const res = await SocialuniUserLikeAPI.queryChatAPI(new ChatQueryQO(chatId))
-            console.log(res)
-            console.log('返回了结果')
             this.pushMsgReplaceChatByChat(res.data)
         }
-        console.log(chat)
         this.setChatId(chatId)
-        console.log(this._chatId)
-        console.log(this.chats.map(item => item.id))
-        console.log(this.chat)
         this.readChat(this.messages)
         socialuniChatModule.scrollToMessagePageBottom()
     }
@@ -108,7 +102,6 @@ class SocialuniChatModule {
         for (const chat1 of chats) {
             const newChat = reactive(new SocialuniChatRO(chat1))
             newChats.push(newChat)
-            console.log(newChat.messages)
             this.queryChatMessages(newChat)
         }
         // this.chats = chats
@@ -125,8 +118,6 @@ class SocialuniChatModule {
         pageQueryQO.queryTime = queryQO.queryTime
 
         MessageAPI.queryNewMessagesAPI(pageQueryQO).then(res => {
-            console.log(chat)
-            console.log(res.data)
             chat.messages = res.data
             this.computedChatsUnreadNumTotalAction()
         })
@@ -181,7 +172,6 @@ class SocialuniChatModule {
         if (chat) {
             let chatIndex = socialuniChatModule.chats.findIndex(item => item.id === chat.id)
 
-            console.log(chatIndex)
             if (chatIndex > -1) {
                 this.pushMsgReplaceChat(chatIndex, chat)
             } else {
@@ -194,9 +184,6 @@ class SocialuniChatModule {
     //来消息后，替换已有chat
     pushMsgReplaceChat(chatIndex: number, chat: SocialuniChatRO) {
         const oldChat = this.chats[chatIndex]
-        console.log(this.chats)
-        console.log(chatIndex)
-        console.log(oldChat)
         let messages: MessageVO[] = oldChat.messages
         //将新消息放到当前msg中
         messages.push(...chat.messages)
@@ -221,14 +208,7 @@ class SocialuniChatModule {
 
 
     pushChatAndMessagesAction(newChat: SocialuniChatRO) {
-        // console.log('出发了pushchat')
         // 如果正在这个chat聊天
-        console.log(789789798)
-        console.log(ImPagePath)
-        console.log(ImPagePath.imPagePath)
-
-        console.log(ImPagePath.imPagePath.message)
-        console.log(QingAppUtil.RouterUtil.getCurrentPageURI())
         if (QingAppUtil.RouterUtil.getCurrentPageURI() === ImPagePath.imPagePath.message && this._chatId === newChat.id) {
             // 则直接往msg增加消息
             //将新消息放到当前msg中并替换
@@ -261,7 +241,6 @@ class SocialuniChatModule {
     }
 
     setChatIdToMessagePage(receiveId: string) {
-        console.log(receiveId)
         // this.setChatId(chatId)
         // this.readChatAction(this.chat)
         if (!receiveId) {

@@ -3,7 +3,6 @@ import {socialLocationModule} from "../store/SocialLocationModule";
 
 export default class TalkQOFactory {
     static getTalkQueryQO(homeTabName: string, gender: string, minAge: number, maxAge: number,tagNames: string[], circle: string){
-        console.trace(123)
         const talkQO = new TalkQueryVO(homeTabName, gender, minAge, maxAge, tagNames, circle)
         const district = socialLocationModule.location
         //查询使用当前的

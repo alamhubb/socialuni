@@ -106,7 +106,6 @@ export default class MusicPlayer extends Vue {
   }
 
   get watchModelValueObj() {
-    console.log('this.dragging', this.dragging)
     return {
       modelValue: this.curMusicInfo,
       dragging: this.dragging,
@@ -127,7 +126,6 @@ export default class MusicPlayer extends Vue {
   @Watch('watchModelValueObj', {immediate: true})
   watchModelValueChange() {
     if (this.curMusicInfo) {
-      console.log('chufale bianhuan')
       this.computedRealPlayingValue()
       this.setPlayerCurTimeAndPlay()
       //为什么要在这里设置呢，暂时注释
@@ -186,20 +184,14 @@ export default class MusicPlayer extends Vue {
 
     //更新音乐时长
     this.$refs.audioPlayer.onloadedmetadata = (e) => {
-      console.log('2222222222')
-      console.log(e)
     };
   }
 
 
   setPlayerCurTimeAndPlay() {
-    console.log('触发了播放')
-    console.log(this.dragging)
     if (!this.dragging) {
       nextTick(() => {
-        console.log(this.curMusicInfo?.playing)
         if (this.curMusicInfo?.playing) {
-          // console.log(this.$refs.audioPlayer.paused || this.$refs.audioPlayer.ended)
           // if (!this.$refs.audioPlayer.paused || !this.$refs.audioPlayer.ended) {
           this.setMusicCurTime()
           this.frontPlay()
@@ -231,7 +223,6 @@ export default class MusicPlayer extends Vue {
     if (this.realPlayingValue < this.musicMax) {
       this.dragging = true
     }
-    console.log('chufale drag true')
     //秒，
     const playTime = Math.floor(value)
 
@@ -255,7 +246,6 @@ export default class MusicPlayer extends Vue {
   musicChange() {
     this.checkRoleId()
     this.dragging = false
-    console.log('chufale change gaiwei fase', this.dragging)
     this.change(this.curMusicInfo)
   }
 
@@ -403,7 +393,6 @@ export default class MusicPlayer extends Vue {
 
     //更新音乐时长
     this.$refs.audioPlayer.onloadedmetadata = () => {
-      console.log('2222222222')
       const curTime = new Date()
       const musicRoomInfo = new MusicPlayerSongPlayingInfoRO({
         ...this.curMusicInfo,
@@ -420,11 +409,9 @@ export default class MusicPlayer extends Vue {
   }
 
   async frontPlay() {
-    console.log('666666666666g')
     if (this.curMusicInfo.playing) {
       try {
         if (this.$refs.audioPlayer.paused || this.$refs.audioPlayer.ended) {
-          console.log('chufale bofang')
           await this.$refs.audioPlayer.play()
         }
       } catch (e) {

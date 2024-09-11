@@ -649,7 +649,6 @@ export default class MessageView extends Vue {
     }
 
     queryMessages(initQuery: boolean = false) {
-        // console.trace('chaxun')
         return MessageAPI.queryMessagesAPI(this.chat.id, this.queryTime).then((res) => {
             const resMessages: MessageVO[] = res.data
             //获取拼接消息之前，顶部消息的位置

@@ -222,7 +222,6 @@ export default class QButton extends Vue {
   }) type: string
 
   get curTheme() {
-    console.log(this.type)
     if (this.theme) return 'theme'
     if (this.primary) return 'primary'
     if (this.error) return 'error'

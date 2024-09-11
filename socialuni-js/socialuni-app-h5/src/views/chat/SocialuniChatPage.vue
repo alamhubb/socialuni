@@ -109,12 +109,9 @@ export default class SocialuniChatPage extends Vue {
       return
     }
     await socialuniChatModule.init({chatId})
-    console.log(socialuniChatModule.chatId)
   }
 
   get hasOperateAuth() {
-    console.log(23232323)
-    console.log(socialuniMusicStore.musicRoleId)
     return SocialuniMusicRoleId.hasOperateAuthList.includes(socialuniMusicStore.musicRoleId)
   }
 
@@ -171,18 +168,11 @@ export default class SocialuniChatPage extends Vue {
     })
     this.hotSongList = songList
     /*if (this.songList.length > 0) {
-      console.log(1312312)
-      console.log(this.musicRoomInfo)
       if (!this.musicRoomInfo) {
         //如果没有播放信息，则设置播放信息为第一首歌曲
         const musicRoomInfo = new MusicPlayerSongPlayingInfoRO({...this.songList[0]})
         musicRoomInfo.musicTime = Math.floor(musicRoomInfo.musicTime / 1000)
-        console.log(this.songList[0])
-        console.log(musicRoomInfo)
-        console.log(this.musicRoomInfo)
         socialuniMusicStore.setMusicRoomInfo(musicRoomInfo)
-        console.log(1312312)
-        console.log(this.musicRoomInfo)
       }
     }*/
   }
@@ -193,7 +183,6 @@ export default class SocialuniChatPage extends Vue {
 
   //热门歌曲事件，追加至播放列表
   async hotSongListMusicChange(musicRoomInfo: MusicPlayerSongPlayingInfoRO) {
-    console.log('chufale host change')
     const newSongRO = new MusicPlayerSongInfoRO(musicRoomInfo)
     newSongRO.no = this.songList.length + 1
     this.songList.push(newSongRO)
@@ -212,8 +201,6 @@ export default class SocialuniChatPage extends Vue {
       if (data.playingTime !== musicRoomInfo.playingTime
           || data.playing !== musicRoomInfo.playing
       ) {
-        console.log(data.playing !== musicRoomInfo.playing)
-        console.log('queshiyou buyizhi')
         socialuniMusicStore.setMusicRoomInfo(res.data)
       }
     })
@@ -231,15 +218,12 @@ export default class SocialuniChatPage extends Vue {
       if (data.playingTime !== musicRoomInfo.playingTime
           || data.playing !== musicRoomInfo.playing
       ) {
-        console.log(data.playing !== musicRoomInfo.playing)
-        console.log('queshiyou buyizhi')
         socialuniMusicStore.setMusicRoomInfo(res.data)
       }
     })
   }
 
   next(num) {
-    console.log('chufale next')
     /*const index = this.songList.findIndex(item => `https://music.163.com/song/media/outer/url?id=${item.songId}.mp3` === this.musicRoomInfo.musicUrl)
     const nextIndex = index + num
     if (!this.songList.length) {

@@ -208,7 +208,6 @@ export default class MusicDialog extends Vue {
   }
 
   next(num) {
-    console.log('chufale next')
     /*const index = this.songList.findIndex(item => `https://music.163.com/song/media/outer/url?id=${item.songId}.mp3` === this.musicRoomInfo.musicUrl)
     const nextIndex = index + num
     if (!this.songList.length) {

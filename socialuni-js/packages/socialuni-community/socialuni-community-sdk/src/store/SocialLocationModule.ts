@@ -80,8 +80,6 @@ class SocialLocationModule {
         // 查询所有城市
         DistrictAPI.queryDistrictsAPI().then((res: any) => {
             this.districts = res.data
-            console.log(res.data)
-            console.log(this.districts)
         })
     }
 

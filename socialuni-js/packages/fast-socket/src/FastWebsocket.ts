@@ -46,7 +46,6 @@ export default class FastWebsocket {
     }
 
     private websocketConnect(reload: boolean) {
-        console.log(222222)
         this.locking = false;
         //上锁，防止无限重连，因为会触发close会触发重连
         this.websocketClose()
@@ -70,7 +69,6 @@ export default class FastWebsocket {
             //心跳保活
             this.timer = setInterval(() => {
                 if (this.ws.readyState === this.ws.OPEN) {
-                    console.log('cfasong ping')
                     this.ws.send('ping')
                 }
             }, this.pingTime)

@@ -24,12 +24,7 @@ export default class SocialuniUserDetailViewService extends SocialuniViewService
 
     async initService(instance: Vue, params: any) {
         this.instance = instance
-        console.log('chufale inser')
         QingAppUtil.NativeUtil.showShareMenu()
-        console.log(44444)
-        console.log('chufale onload')
-        console.log(55555)
-        console.log(params.userId)
         this.queryUserInfo(params.userId)
 
         /*onShow(() => {

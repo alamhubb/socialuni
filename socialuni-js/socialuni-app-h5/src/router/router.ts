@@ -69,9 +69,6 @@ const router = createRouter({
 
 
 router.beforeEach(async (to, from, next) => {
-    console.log('fasdfasdfasdfasdf')
-    console.log(to.path)
-    console.log(from.path)
     next()
 })
 

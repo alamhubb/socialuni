@@ -54,9 +54,6 @@ export default class SocialuniChatViewService extends SocialuniViewService<Socia
 
     get chat(): SocialuniChatRO {
         if (socialuniChatModule.chat) {
-            console.log(socialuniChatModule.chat.messages)
-            console.log(socialuniChatModule.chat.messages.length)
-
             return socialuniChatModule.chat
         }
         return null

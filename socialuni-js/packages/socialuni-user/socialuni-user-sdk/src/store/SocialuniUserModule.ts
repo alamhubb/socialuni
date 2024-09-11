@@ -45,11 +45,9 @@ class SocialuniUserModule {
     async initSocialuniUserModule() {
         //判断是否已登录已有token,userId
         SocialuniUserEventEmit.initOrUserChange()
-        console.log('chufale emit')
         if (this.hasToken) {
             await socialuniAppUserModule.getMineUserAction()
         }
-        console.log('chufale')
         WebsocketUtil.createWebsocket()
     }
 
