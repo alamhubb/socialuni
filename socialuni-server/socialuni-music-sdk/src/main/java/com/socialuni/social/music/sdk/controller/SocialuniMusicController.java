@@ -119,7 +119,11 @@ public class SocialuniMusicController {
 
     @GetMapping("queryMusicRoomUserInfo/{channel}")
     public ResultRO<SocialuniMusicRoomUserInfoRO> queryMusicRoomUserInfo(@PathVariable("channel") @Valid @NotBlank String channel) {
-        Long chatId = SocialuniChatDOUtil.getChatId(channel);
+        Long chatId = SocialuniChatDOUtil.getChatIdAllowNull(channel);
+
+        if (chatId == null) {
+            return ResultRO.success();
+        }
 
         Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
 
@@ -317,7 +321,7 @@ public class SocialuniMusicController {
         }
 
         Long chatId = SocialuniChatDOUtil.getChatId(channel);
-        
+
         Long mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
 
         socialuniMusicOperateCheck.checkRoleId(chatId, mineUserId);
