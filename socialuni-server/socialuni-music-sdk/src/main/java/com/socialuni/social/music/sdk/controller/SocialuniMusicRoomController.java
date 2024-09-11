@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -281,7 +282,10 @@ public class SocialuniMusicRoomController {
     public ResultRO<List<SocialuniMusicSongListItemRO>> querySongList(@PathVariable("channel") String channel) {
         //根据房间id，获取歌单
 
-        Long chatId = SocialuniChatDOUtil.getChatId(channel);
+        Long chatId = SocialuniChatDOUtil.getChatIdAllowNull(channel);
+        if (chatId == null) {
+            return ResultRO.success(new ArrayList<>());
+        }
 
         List<SocialuniMusicRoomSongListDO> socialuniMusicRoomSongListDOS = SocialuniMusicRoomRepositoryFacede.findAllByRoomIdAndStatus(chatId, SocialuniCommonStatus.enable, SocialuniMusicRoomSongListDO.class);
 
