@@ -5,7 +5,7 @@ import type {TTTTAaaa} from "@/plugins/TypeIoc/Testaa";
 export default class TestSerivce {
 
     @Resource(22)
-    testA: TTTTAaaa
+    testA: TTTTAaaa = 20
 
     test() {
         console.log(11111)
