@@ -1,57 +1,134 @@
 import type {Plugin} from 'vite';
-import {transformSync} from '@babel/core';
-import babelPresetEnv from '@babel/preset-env';
-import babelPresetTypescript from '@babel/preset-typescript';
-import babelPluginProposalDecorators from '@babel/plugin-proposal-decorators';
-import babelPluginTransformTypescript from '@babel/plugin-transform-typescript';
-import * as ts from 'typescript';
+import ts from "typescript";
 
-// 工具函数：生成 @Reflect.metadata 装饰器的代码
-function transformDynamicImportCodeCompile(code, id) {
-    const transformedCode = transformSync(code, {
-        filename: id,
-        presets: [babelPresetEnv, babelPresetTypescript],
-        plugins: [
-            babelPluginTransformTypescript,
-            [
-                babelPluginProposalDecorators,
-                {legacy: true} // Use legacy decorators syntax
-            ],
-            function ({types}) {
-                return {
-                    visitor: {
-                        ClassDeclaration(path) {
-                            const heritage = path.node.implements;
-                            const className = path.node.id.name
-                            // const {code: classCode} = generate(path.node);
+function transformSourceFile(sourceFile: ts.SourceFile, sourceText: string): string {
+    const transformer = (context: ts.TransformationContext) => (rootNode: ts.Node) => {
+        function visit(node: ts.Node): ts.Node {
+            if (ts.isClassDeclaration(node)) {
+                const className = node.name?.text;
+                const implementedInterfaces: string[] = [];
 
-                            // 输出类的名称和代码
-                            console.log(path.node);
-                            console.log('Class Name:', className);
-                            console.log('heritage Name:', heritage);
-                            // console.log('Class Code:\n', classCode);
-                            if (heritage && heritage.length > 0) {
-                                const interfaceNames = heritage.map(h => h.expression.name);
-                                console.log('interfaceNames Name:', interfaceNames);
-                                /*// 使用 Reflect.metadata 插入元数据装饰器
-                                const decorator = t.decorator(
-                                    t.callExpression(
-                                        t.memberExpression(t.identifier('Reflect'), t.identifier('metadata')),
-                                        [t.stringLiteral('a9360b695cff4e40aa417121d9b004a7'), t.arrayExpression(interfaceNames.map(name => t.stringLiteral(name)))]
-                                    )
-                                );
-
-                                // 将装饰器添加到类上
-                                path.node.decorators = path.node.decorators || [];
-                                path.node.decorators.push(decorator);*/
-                            }
-                        }
+                node.heritages.forEach(heritage => {
+                    if (ts.isExpressionWithTypeArguments(heritage.expression)) {
+                        const typeName = heritage.expression.getText(sourceFile);
+                        implementedInterfaces.push(typeName);
                     }
-                };
-            },
-        ],
-    })
-    return transformedCode.code
+                });
+
+            }
+        }
+
+        return ts.visitEachChild(node, visit, context);
+    }
+
+    return ts.transform(rootNode, [visit]).transformed[0];
+}
+
+function transformDynamicImportCodeCompile(code) {
+    /*const printer: ts.Printer = ts.createPrinter();
+
+    const source: string = `var x = 1 + 2 + 3;`;
+
+    const transformer = <T extends ts.Node>(context: ts.TransformationContext) => (rootNode: T) => {
+        function visit(node: ts.Node): ts.Node {
+            console.log("Visiting " + ts.SyntaxKind[node.kind]);
+            node = ts.visitEachChild(node, visit, context);
+            if (node.kind === ts.SyntaxKind.BinaryExpression) {
+                const binary = node as ts.BinaryExpression;
+                if (binary.left.kind === ts.SyntaxKind.NumericLiteral && binary.right.kind === ts.SyntaxKind.NumericLiteral) {
+                    const left = binary.left as ts.NumericLiteral;
+                    const leftVal = parseFloat(left.text);
+                    const right = binary.right as ts.NumericLiteral;
+                    const rightVal = parseFloat(right.text);
+                    switch (binary.operatorToken.kind) {
+                        case ts.SyntaxKind.PlusToken:
+                            return ts.createLiteral(leftVal + rightVal);
+                        case ts.SyntaxKind.AsteriskToken:
+                            return ts.createLiteral(leftVal * rightVal);
+                        case ts.SyntaxKind.MinusToken:
+                            return ts.createLiteral(leftVal - rightVal);
+                    }
+                }
+            }
+            return node;
+        }
+        return ts.visitNode(rootNode, visit);
+    };
+
+    const sourceFile: ts.SourceFile = ts.createSourceFile(
+        'test.ts', source, ts.ScriptTarget.ES2015, true, ts.ScriptKind.TS
+    );
+
+    console.log(printer.printFile(sourceFile));
+
+// Options may be passed to transform
+    const result: ts.TransformationResult<ts.SourceFile> = ts.transform<ts.SourceFile>(
+        sourceFile, [ transformer ]
+    );
+
+    const transformedSourceFile: ts.SourceFile = result.transformed[0];
+
+
+    console.log(printer.printFile(transformedSourceFile));
+
+
+
+    ts.transform()
+    const source = "let x: string  = 'string'";
+    const sourceFile = ts.createSourceFile(id, src, ts.ScriptTarget.Latest, true);
+
+    let result = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.ES2015 }});
+
+    console.log(JSON.stringify(result));*/
+}
+
+function addMetadataTransformer(context: ts.TransformationContext) {
+    function visit(node: ts.Node): ts.Node {
+        if (ts.isClassDeclaration(node)) {
+            const className = node.name?.text;
+            console.log(className)
+            /*const className = node.name?.text;
+            const implementedInterfaces: string[] = [];
+
+            // 查找实现的接口
+            node.heritages.forEach(heritage => {
+                if (ts.isExpressionWithTypeArguments(heritage.expression)) {
+                    const typeName = heritage.expression.getText();
+                    implementedInterfaces.push(typeName);
+                }
+            });
+
+            // 如果实现了接口，添加 Reflect.metadata 装饰器
+            if (implementedInterfaces.length > 0) {
+                const decorator = ts.factory.createDecorator(
+                    ts.factory.createCallExpression(
+                        ts.factory.createIdentifier('Reflect.metadata'),
+                        undefined,
+                        [
+                            ts.factory.createStringLiteral('a9360b695cff4e40aa417121d9b004a7'),
+                            ts.factory.createArrayLiteralExpression(
+                                implementedInterfaces.map(iface => ts.factory.createStringLiteral(iface))
+                            ),
+                        ]
+                    )
+                );
+
+                return ts.factory.updateClassDeclaration(
+                    node,
+                    node.decorators ? [decorator, ...node.decorators] : [decorator],
+                    node.modifiers,
+                    node.name,
+                    node.typeParameters,
+                    node.heritages,
+                    node.members
+                );
+            }*/
+        }
+
+        return ts.visitEachChild(node, visit, context);
+    }
+
+    return (node: ts.Node) => ts.visitNode(node, visit);
 }
 
 // Vite 插件
@@ -63,23 +140,14 @@ export default function addReflectMetadataPlugin(): Plugin {
             if (/.ts$|.tsx$|.vue$/.test(id)) {
                 // 创建 TypeScript 代码转换器
                 if (id.includes('Testaa')) {
-                    transformDynamicImportCodeCompile(code, id)
+                    // console.log(ts.version)
+                    const printer: ts.Printer = ts.createPrinter();
+                    const sourceFile = ts.createSourceFile(id, code, ts.ScriptTarget.Latest);
+                    ts.transform(sourceFile, addMetadataTransformer)
+                    // console.log(printer.printFile(sourceFile));
                     console.log(123123)
                 }
             }
-            // 添加 reflect-metadata 引入
-            /*let code = src;
-            if (!src.includes("import 'reflect-metadata';")) {
-                code = "import 'reflect-metadata';\n" + src;
-            }
-
-            // 创建 TypeScript 代码转换器
-            const sourceFile = ts.createSourceFile(id, code, ts.ScriptTarget.Latest, true);
-            const result = ts.transform(sourceFile, [transformer]);
-
-            // 获取转换后的代码
-            const printer = ts.createPrinter();
-            const transformedCode = printer.printFile(result.transformed[0] as ts.SourceFile);*/
         }
     };
 }
