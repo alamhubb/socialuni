@@ -3,6 +3,7 @@
     123
     {{ typeIocContainer }}
     {{ b }}
+    <button @click="printa"> click</button>
   </div>
 </template>
 
@@ -22,10 +23,18 @@ export default class App extends Vue {
 
 
   b: TTTTAaaa = new B()
+  d: TTTTAaaa = new TestSerivce()
 
   created() {
-    const test = new TestSerivce()
-    // test.test()
+    const test = typeIocContainer.get('TestSerivce')
+    console.log(test)
+    test.test()
+  }
+
+  printa() {
+    const test: TestSerivce = typeIocContainer.get('TestSerivce')
+    console.log(test)
+    test.test()
   }
 
 

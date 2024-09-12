@@ -8,6 +8,7 @@ export default class TestSerivce {
     testA: TTTTAaaa
 
     test() {
+        console.log(this.testA)
         this.testA.eat()
     }
 }

@@ -29,7 +29,7 @@ function addMetadataTransformer(context: ts.TransformationContext) {
             if (hasDecorator(node, Service.name)) {
                 let members = []
                 let modifiers = node.modifiers
-                //更新属性相关
+                //设置属性信息
                 node.members.forEach((member) => {
                     let newMember = member
                     if (ts.isPropertyDeclaration(member)) {
@@ -41,7 +41,7 @@ function addMetadataTransformer(context: ts.TransformationContext) {
                                         ts.factory.createIdentifier('Reflect.metadata'),
                                         undefined,
                                         [
-                                            ts.factory.createStringLiteral(TypeIocContainer.propertyInterfaceKey),
+                                            ts.factory.createStringLiteral(TypeIocContainer.propertyResourceKey),
                                             ts.factory.createStringLiteral(member.type?.typeName?.text)
                                         ]
                                     )
@@ -60,6 +60,8 @@ function addMetadataTransformer(context: ts.TransformationContext) {
                     }
                     members.push(newMember)
                 })
+
+                //有实现接口，则设置接口信息
                 if (node.heritageClauses) {
                     const implementedInterfaces: string = []
                     // 访问类的继承
@@ -78,15 +80,32 @@ function addMetadataTransformer(context: ts.TransformationContext) {
                                 ts.factory.createIdentifier('Reflect.metadata'),
                                 undefined,
                                 [
-                                    ts.factory.createStringLiteral(TypeIocContainer.classInterfaceKey),
+                                    ts.factory.createStringLiteral(TypeIocContainer.interfaceResourceKey),
                                     ts.factory.createStringLiteral(implementedInterface)
                                 ]
                             )
                         );
-                        modifiers = node.modifiers ? [...decorators, decorator, ...notDecorators] : [decorator]
+                        const decorators = modifiers.filter(item => item.kind === ts.SyntaxKind.Decorator)
+                        const notDecorators = modifiers.filter(item => item.kind !== ts.SyntaxKind.Decorator)
+                        modifiers = modifiers ? [...decorators, decorator, ...notDecorators] : [decorator]
                     }
-
                 }
+                //设置类型信息
+                const className = node.name.text
+                const decorator = ts.factory.createDecorator(
+                    ts.factory.createCallExpression(
+                        ts.factory.createIdentifier('Reflect.metadata'),
+                        undefined,
+                        [
+                            ts.factory.createStringLiteral(TypeIocContainer.classResourceKey),
+                            ts.factory.createStringLiteral(className)
+                        ]
+                    )
+                );
+                const decorators = modifiers.filter(item => item.kind === ts.SyntaxKind.Decorator)
+                const notDecorators = modifiers.filter(item => item.kind !== ts.SyntaxKind.Decorator)
+                modifiers = modifiers ? [...decorators, decorator, ...notDecorators] : [decorator]
+
                 return ts.factory.updateClassDeclaration(
                     node,
                     modifiers, // 修饰符，添加新的装饰器
