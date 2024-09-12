@@ -20,7 +20,6 @@ export default class TestView extends Vue {
   b: TTTTAaaa = new B()
 
 
-  @Resource
   obj: TTTTAaaa
 
 }
