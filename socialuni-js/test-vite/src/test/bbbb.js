@@ -4,18 +4,12 @@ const getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
 
 // `applyDecorators` 函数：应用装饰器到对象属性
 function applyDecorators(decorators, target, propertyKey, condition) {
-    let descriptor = null
-    if (condition > 1) {
-        descriptor = undefined
-    } else {
-        console.log(1111)
-        console.log(getOwnPropertyDescriptor(target, propertyKey))
-        descriptor = (condition ? getOwnPropertyDescriptor(target, propertyKey) : target)
-    }
+    let descriptor = condition > 1 ? undefined : (condition ? getOwnPropertyDescriptor(target, propertyKey) : undefined);
+
     for (let i = decorators.length - 1; i >= 0; i--) {
         const decorator = decorators[i];
         if (decorator) {
-            descriptor = (condition ? decorator(target, propertyKey, descriptor) : decorator(descriptor)) || descriptor;
+            descriptor = decorator(target, propertyKey, descriptor) || descriptor;
         }
     }
 
@@ -35,10 +29,15 @@ function definePropertyIfAbsent(object, key, value) {
     }
 }
 
+// `definePropertyForKey` 函数：确保对象的属性值
+function definePropertyForKey(object, key, value) {
+    definePropertyIfAbsent(object, typeof key !== "symbol" ? key + "" : key, value);
+}
+
 // 类定义
 class MyClass {
     constructor() {
-        definePropertyIfAbsent(this, "testA"); // 初始化属性 `testA`
+        definePropertyForKey(this, "testA"); // 初始化属性 `testA`
     }
 
     test() {
@@ -46,7 +45,7 @@ class MyClass {
     }
 }
 
-// 装饰器函数：简单打印和设置值
+// 修改后的装饰器函数：返回一个属性描述符
 function decoratorFunction(value) {
     return function (target, propertyKey, descriptor) {
         if (!descriptor) {
@@ -57,19 +56,15 @@ function decoratorFunction(value) {
                 value: value
             };
         } else {
-            descriptor.value = value;
+            descriptor.value = value; // 设置属性值
         }
         return descriptor;
     };
 }
 
-console.log(MyClass.prototype)
+// 应用装饰器到 `MyClass` 的 `testA` 属性
 applyDecorators([decoratorFunction(22)], MyClass.prototype, "testA", 2);
 
-defineProperty(MyClass.prototype, 'testA', {enumerable: true, configurable: true, writable: true, value: '666'});
+const myInstance = new MyClass();
 
-// 应用装饰器到 `MyClass` 的 `testA` 属性
-
-const mycl = new MyClass()
-
-console.log(mycl['testA'])
+console.log(myInstance['testA']); // 输出 22

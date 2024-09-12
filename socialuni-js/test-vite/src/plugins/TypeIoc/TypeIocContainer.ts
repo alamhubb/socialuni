@@ -7,16 +7,24 @@ export function Service(target) {
     serviceSetHandler(target)
 }
 
-
-export function Resource(age: number) {
-    return function(target, key) {
-        console.log(66666)
-        console.log(age)
+export function Resource(value) {
+    return function(target, propertyKey, descriptor) {
+        console.log(value)
         console.log(target)
-        console.log(key)
-        target[key] = age
-        return target
-    }
+        console.log(propertyKey)
+        console.log(descriptor)
+        if (!descriptor) {
+            descriptor = {
+                enumerable: true,
+                configurable: true,
+                writable: true,
+                value: value
+            };
+        } else {
+            descriptor.value = value;
+        }
+        return descriptor;
+    };
 }
 
 export class TypeIocContainer {

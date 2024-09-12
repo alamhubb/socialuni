@@ -27,7 +27,7 @@ export default class App extends Vue {
   created() {
     console.log(324653)
     const test = new TestSerivce()
-    console.log(test)
+    console.log(test.testA)
     test.test()
   }
 
