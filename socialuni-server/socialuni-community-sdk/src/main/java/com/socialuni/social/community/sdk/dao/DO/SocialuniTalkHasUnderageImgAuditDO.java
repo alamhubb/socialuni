@@ -27,16 +27,13 @@ import java.io.Serializable;
 public class SocialuniTalkHasUnderageImgAuditDO extends SocialuniUnionContentBaseDO implements Serializable {
     @Column(nullable = false)
     private Long talkId;
-
-    @Column(nullable = false)
-    private Integer devId;
     @Column(nullable = false)
     private Long userId;
 
     public SocialuniTalkHasUnderageImgAuditDO(Long talkId, Long userId) {
         this.setStatus(ContentStatus.preAudit);
+        this.setDevId(DevAccountFacade.getDevIdNullElseCenterDevId());
         this.talkId = talkId;
         this.userId = userId;
-        this.devId = DevAccountFacade.getDevIdNullElseCenterDevId();
     }
 }

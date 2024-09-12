@@ -5,13 +5,8 @@ import java.util.concurrent.CompletableFuture;
 
 public class UUIDUtil {
     public static void main(String[] args) {
-        System.out.println(getSnowflakeId());
-        System.out.println(getSnowflakeId());
-        System.out.println(getSnowflakeId());
-        System.out.println(getSnowflakeId());
-        System.out.println(getSnowflakeId());
-        System.out.println(getSnowflakeId());
-        System.out.println(getSnowflakeId());
+        System.out.println(getUUID());
+        System.out.println(getUUID());
 
         CompletableFuture.runAsync(() -> {
             throw new RuntimeException("haha");

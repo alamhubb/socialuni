@@ -19,6 +19,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
+    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "strictNullChecks": false,
     "noImplicitAny": false,

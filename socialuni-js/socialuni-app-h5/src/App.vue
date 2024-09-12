@@ -67,6 +67,7 @@ import QInput from "qingjs-ui/src/components/QInput.vue";
 import QDialog from "qingjs-ui-h5/src/components/QDialog.vue";
 import CommunityEventConst from "socialuni-community-sdk/src/constant/CommunityEventConst.ts";
 import SocialuniUserEventOn from "socialuni-user-sdk/src/event/SocialuniUserEventOn.ts";
+import B from "@/plugins/TypeIoc/Testaa.ts";
 
 @toNative
 @Component({
@@ -78,7 +79,7 @@ export default class App extends Vue {
   }
 
   mounted() {
-
+    console.log(B.name)
   }
 
   get menus() {
