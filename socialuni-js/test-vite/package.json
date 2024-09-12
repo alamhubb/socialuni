@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "reflect-metadata": "^0.2.2",
+    "vue-facing-decorator": "^3.0.2",
     "vue": "^3.4.29"
   },
   "devDependencies": {

@@ -2,5 +2,10 @@ import './assets/main.css'
 
 import { createApp } from 'vue'
 import App from './App.vue'
+import TypeIoc from "@/plugins/TypeIoc";
 
-createApp(App).mount('#app')
+const app = createApp(App)
+
+app.use(TypeIoc)
+
+app.mount('#app')
