@@ -1,12 +1,18 @@
 <template>
   <div class="h100p overflow-hidden flex-col bg-default socialuni-app-h5">
     123
+    {{ typeIocContainer }}
+    {{ b }}
   </div>
 </template>
 
 <script lang="ts">
 import {Component, Vue, toNative} from 'vue-facing-decorator';
-import B from "@/plugins/TypeIoc/Testaa.ts";
+import B, {type TTTTAaaa} from "@/plugins/TypeIoc/Testaa.ts";
+import typeIocContainer, {Resource, Service} from "@/plugins/TypeIoc/TypeIocContainer";
+import TestView from "@/components/Test.vue";
+import TestSerivce from "@/plugins/TestSerivce";
+
 
 @toNative
 @Component({
@@ -15,8 +21,16 @@ import B from "@/plugins/TypeIoc/Testaa.ts";
 export default class App extends Vue {
 
 
-  mounted() {
-    console.log(B.name)
+  b: TTTTAaaa = new B()
+
+  created() {
+    const test = new TestSerivce()
+    // test.test()
+  }
+
+
+  get typeIocContainer() {
+    return typeIocContainer
   }
 }
 </script>

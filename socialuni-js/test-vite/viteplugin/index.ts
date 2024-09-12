@@ -1,9 +1,15 @@
 import type {Plugin} from 'vite';
-import ts from "typescript";
-import TypeIocContainer from '../src/plugins/TypeIoc/TypeIocContainer'
-
+import ts, {
+    ExclamationToken, Expression,
+    ModifierLike,
+    PropertyDeclaration,
+    PropertyName,
+    QuestionToken,
+    SyntaxKind, TypeNode
+} from "typescript";
+import {Resource, Service, TypeIocContainer} from '../src/plugins/TypeIoc/TypeIocContainer'
+import {parse as parseSfc, SFCBlock} from '@vue/compiler-sfc';
 // 自定义装饰器名称
-const DECORATOR_NAME = 'Service';
 
 // 检查节点是否是带有指定装饰器的类
 function hasDecorator(node: ts.ClassDeclaration, decoratorName: string): boolean {
@@ -20,41 +26,75 @@ function hasDecorator(node: ts.ClassDeclaration, decoratorName: string): boolean
 function addMetadataTransformer(context: ts.TransformationContext) {
     function visit(node: ts.Node): ts.Node {
         if (ts.isClassDeclaration(node)) {
-            if (hasDecorator(node, DECORATOR_NAME)) {
-                const implementedInterfaces: string = []
-                // 访问类的继承
-                node.heritageClauses.forEach(heritageClause => {
-                    // console.log(heritageClause);
-                    // console.log(`Heritage Clause Token: ${ts.SyntaxKind[heritageClause.token]}`);
-                    heritageClause.types.forEach(type => {
-                        if (ts.isExpressionWithTypeArguments(type)) {
-                            const typeName = type.expression.text;
-                            implementedInterfaces.push(typeName);
+            if (hasDecorator(node, Service.name)) {
+                let members = []
+                let modifiers = node.modifiers
+                //更新属性相关
+                node.members.forEach((member) => {
+                    let newMember = member
+                    if (ts.isPropertyDeclaration(member)) {
+                        if (hasDecorator(member, Resource.name)) {
+                            if (member.type?.typeName?.text) {
+                                console.log(member.type.typeName.text);
+                                const decorator = ts.factory.createDecorator(
+                                    ts.factory.createCallExpression(
+                                        ts.factory.createIdentifier('Reflect.metadata'),
+                                        undefined,
+                                        [
+                                            ts.factory.createStringLiteral(TypeIocContainer.propertyInterfaceKey),
+                                            ts.factory.createStringLiteral(member.type?.typeName?.text)
+                                        ]
+                                    )
+                                );
+                                const newModifiers = member.modifiers ? [...member.modifiers, decorator] : [decorator]
+                                newMember = ts.factory.updatePropertyDeclaration(
+                                    member,
+                                    newModifiers, // 修饰符，添加新的装饰器
+                                    member.name,
+                                    member.questionToken,
+                                    member.type,
+                                    member.initializer
+                                );
+                            }
                         }
+                    }
+                    members.push(newMember)
+                })
+                if (node.heritageClauses) {
+                    const implementedInterfaces: string = []
+                    // 访问类的继承
+                    node.heritageClauses.forEach(heritageClause => {
+                        heritageClause.types.forEach(type => {
+                            if (ts.isExpressionWithTypeArguments(type)) {
+                                const typeName = type.expression.text;
+                                implementedInterfaces.push(typeName);
+                            }
+                        });
                     });
-                });
-                console.log(implementedInterfaces)
-                if (implementedInterfaces.length) {
-                    const implementedInterface = implementedInterfaces[0]
-                    const decorator = ts.factory.createDecorator(
-                        ts.factory.createCallExpression(
-                            ts.factory.createIdentifier('Reflect.metadata'),
-                            undefined,
-                            [
-                                ts.factory.createStringLiteral(TypeIocContainer.classInterfaceKey),
-                                ts.factory.createStringLiteral(implementedInterface)
-                            ]
-                        )
-                    );
-                    return ts.factory.updateClassDeclaration(
-                        node,
-                        node.modifiers ? [decorator, ...node.modifiers] : [decorator], // 修饰符，添加新的装饰器
-                        node.name,                     // 类名
-                        node.typeParameters,           // 类型参数
-                        node.heritageClauses,          // 继承子句
-                        node.members                   // 类成员
-                    )
+                    if (implementedInterfaces.length) {
+                        const implementedInterface = implementedInterfaces[0]
+                        const decorator = ts.factory.createDecorator(
+                            ts.factory.createCallExpression(
+                                ts.factory.createIdentifier('Reflect.metadata'),
+                                undefined,
+                                [
+                                    ts.factory.createStringLiteral(TypeIocContainer.classInterfaceKey),
+                                    ts.factory.createStringLiteral(implementedInterface)
+                                ]
+                            )
+                        );
+                        modifiers = node.modifiers ? [...decorators, decorator, ...notDecorators] : [decorator]
+                    }
+
                 }
+                return ts.factory.updateClassDeclaration(
+                    node,
+                    modifiers, // 修饰符，添加新的装饰器
+                    node.name,                     // 类名
+                    node.typeParameters,           // 类型参数
+                    node.heritageClauses,          // 继承子句
+                    members                   // 类成员
+                )
             }
         }
         // 递归访问子节点
@@ -70,27 +110,32 @@ export default function addReflectMetadataPlugin(): Plugin {
         name: 'vite-plugin-add-reflect-metadata',
         enforce: 'pre',
         transform(code, id) {
+            // if (!id.includes('TestSerivce')) return
             if (/.ts$|.tsx$|.vue$/.test(id)) {
-                // 创建 TypeScript 代码转换器
-                if (id.includes('Testaa')) {
-                    console.log(id)
-                    // console.log(ts.version)
-                    const printer: ts.Printer = ts.createPrinter();
-                    const sourceFile = ts.createSourceFile(id, code, ts.ScriptTarget.Latest);
-
-                    const result = ts.transform(sourceFile, [addMetadataTransformer])
-
-                    const transformedSourceFile: ts.SourceFile = result.transformed[0];
-
-                    let str = printer.printFile(transformedSourceFile)
-                    if (!str.includes('reflect-metadata')) {
-                        str = "import 'reflect-metadata';\n" + str
-                    }
-
-                    console.log(str);
-                    console.log(123123)
-                    return str
+                console.log(id)
+                let content
+                if (/.ts$|.tsx$/.test(id)) {
+                    content = code
+                } else if (/.vue$/.test(id)) {
+                    const sfcDescriptor = parseSfc(code);
+                    content = sfcDescriptor.descriptor.script.content
                 }
+                const printer: ts.Printer = ts.createPrinter();
+                const sourceFile = ts.createSourceFile(id, content, ts.ScriptTarget.Latest);
+
+                const result = ts.transform(sourceFile, [addMetadataTransformer])
+
+                const transformedSourceFile: ts.SourceFile = result.transformed[0];
+
+                let str = printer.printFile(transformedSourceFile)
+                if (!str.includes('reflect-metadata')) {
+                    str = "\nimport 'reflect-metadata';\n" + str
+                }
+
+                const newCode = code.replace(content, str)
+
+                // console.log(newCode)
+                return newCode
             }
         }
     };

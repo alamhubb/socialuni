@@ -1,10 +1,12 @@
 import {App} from "vue";
-import TypeIocContainer from "@/plugins/TypeIoc/TypeIocContainer";
+import 'reflect-metadata'
 
 
 const TypeIoc = {
     async install(app: App) {
-        TypeIocContainer.set
+        console.log('chufale shiyong')
+        // const b: TTTTAaaa = new B()
+        // typeIocContainer.set(b)
     }
 }
 export default TypeIoc
