@@ -4,11 +4,12 @@ import type {TTTTAaaa} from "@/plugins/TypeIoc/Testaa";
 @Service
 export default class TestSerivce {
 
-    @Resource
+    @Resource(22)
     testA: TTTTAaaa
 
     test() {
+        console.log(11111)
         console.log(this.testA)
-        this.testA.eat()
+        // this.testA.eat()
     }
 }

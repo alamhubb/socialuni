@@ -8,18 +8,15 @@ export function Service(target) {
 }
 
 
-export function Resource(target) {
-    console.log(44444)
-    for (const key in target) {
+export function Resource(age: number) {
+    return function(target, key) {
+        console.log(66666)
+        console.log(age)
+        console.log(target)
         console.log(key)
+        target[key] = age
+        return target
     }
-    console.log(typeof target)
-    console.log(target)
-    console.log(target.b)
-    console.log(target.$data)
-    console.log(target.obj)
-    console.log(target.typeIocContainer)
-    console.log(5555)
 }
 
 export class TypeIocContainer {

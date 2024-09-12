@@ -48,7 +48,7 @@ export function serviceSetHandler(target) {
                 if (propData) {
                     console.log("获取结果存在:")
                     console.log(propData)
-                    obj[key] = propData
+                    // obj[key] = propData
                     console.log(obj)
                     console.log(key)
                 }
@@ -59,7 +59,7 @@ export function serviceSetHandler(target) {
             const array = typeIocContainer.subscribeGet(interfaceResult)
             if (array) {
                 for (const never of array) {
-                    never.value[never.key] = obj
+                    // never.value[never.key] = obj
                 }
             }
             typeIocContainer.containerSet(interfaceResult, obj)
@@ -71,7 +71,7 @@ export function serviceSetHandler(target) {
             const array = typeIocContainer.subscribeGet(classResult)
             if (array) {
                 for (const never of array) {
-                    never.value[never.key] = obj
+                    // never.value[never.key] = obj
                 }
             }
             typeIocContainer.containerSet(classResult, obj)

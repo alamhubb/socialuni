@@ -10,8 +10,7 @@
 <script lang="ts">
 import {Component, Vue, toNative} from 'vue-facing-decorator';
 import B, {type TTTTAaaa} from "@/plugins/TypeIoc/Testaa.ts";
-import typeIocContainer, {Resource, Service} from "@/plugins/TypeIoc/TypeIocContainer";
-import TestView from "@/components/Test.vue";
+import typeIocContainer from "@/plugins/TypeIoc/TypeIocContainer";
 import TestSerivce from "@/plugins/TestSerivce";
 
 
@@ -26,7 +25,8 @@ export default class App extends Vue {
   d: TTTTAaaa = new TestSerivce()
 
   created() {
-    const test = typeIocContainer.containerGet('TestSerivce')
+    console.log(324653)
+    const test = new TestSerivce()
     console.log(test)
     test.test()
   }
