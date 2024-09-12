@@ -12,8 +12,8 @@ export default defineConfig({
         __BROWSER__: true,
     },
     plugins: [
-        vue(),
         transformIoc(),
+        vue(),
         socialuniPlatformAutoImportPlugin()
     ],
     resolve: {

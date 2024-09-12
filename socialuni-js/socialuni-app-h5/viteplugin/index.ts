@@ -1,69 +1,44 @@
 import type { Plugin } from 'vite';
-import * as ts from 'typescript';
+const {transform} = require('@babel/core');
+import generate from '@babel/generator'
 
 // 工具函数：生成 @Reflect.metadata 装饰器的代码
-function generateMetadataDecorator(interfaceNames: string[]): string {
-    const metadataKey = 'a9360b695cff4e40aa417121d9b004a7';
-    const metadataValue = `'${interfaceNames.join(', ')}'`;
-    return `@Reflect.metadata('${metadataKey}', ${metadataValue})`;
-}
+function transformDynamicImportCodeCompile(code) {
+    const transformedCode = transform(code, {
+        plugins: [
+            function ({types}) {
+                return {
+                    visitor: {
+                        ClassDeclaration(path) {
+                            const heritage = path.node.implements;
+                            const className = path.node.id.name
+                            const { code: classCode } = generate(path.node);
 
-// TypeScript 转换器
-function transformer(context: ts.TransformationContext) {
-    return (rootNode: ts.SourceFile) => {
-        function visitor(node: ts.Node): ts.Node {
-            console.log(ts.isClassDeclaration(node))
-            if (ts.isClassDeclaration(node)) {
-                const className = node.name?.text;
-                if (ts.isClassDeclaration(node)) {
-                    for (const nodeKey in node) {
-                        console.log(nodeKey)
-                        console.log(node[nodeKey])
+                            // 输出类的名称和代码
+                            console.log('Class Name:', className);
+                            console.log('Class Code:\n', classCode);
+                            if (heritage && heritage.length > 0) {
+                                const interfaceNames = heritage.map(h => h.expression.name);
+
+                                /*// 使用 Reflect.metadata 插入元数据装饰器
+                                const decorator = t.decorator(
+                                    t.callExpression(
+                                        t.memberExpression(t.identifier('Reflect'), t.identifier('metadata')),
+                                        [t.stringLiteral('a9360b695cff4e40aa417121d9b004a7'), t.arrayExpression(interfaceNames.map(name => t.stringLiteral(name)))]
+                                    )
+                                );
+
+                                // 将装饰器添加到类上
+                                path.node.decorators = path.node.decorators || [];
+                                path.node.decorators.push(decorator);*/
+                            }
+                        }
                     }
-
-                    // 打印每个成员的详细信息
-                    node.members.forEach(member => {
-                        console.log('Member:', member);
-                    });
-                }
-                console.log(className)
-                console.log(node.heritageClauses)
-                const implementsInterfaces = node.heritageClauses?.flatMap(clause =>
-                    clause.types.map(type => type.getText())
-                );
-
-                console.log(implementsInterfaces)
-                // if (implementsInterfaces && implementsInterfaces.length > 0) {
-                    // console.log(implementsInterfaces[0])
-                    // 生成 @Reflect.metadata 装饰器
-                    /*const decorator = generateMetadataDecorator(implementsInterfaces);
-                    const decorators = ts.createDecorator(
-                        ts.createCall(ts.createIdentifier('Reflect.metadata'), undefined, [
-                            ts.createStringLiteral('a9360b695cff4e40aa417121d9b004a7'),
-                            ts.createArrayLiteral(implementsInterfaces.map(name => ts.createStringLiteral(name)))
-                        ])
-                    );
-
-                    // 在类声明的开头添加装饰器
-                    const classWithDecorator = ts.updateClassDeclaration(
-                        node,
-                        [decorators],
-                        node.modifiers,
-                        node.name,
-                        node.typeParameters,
-                        node.heritageClauses,
-                        node.members
-                    );
-
-                    return classWithDecorator;*/
-                }
-            // }
-
-            return ts.visitEachChild(node, visitor, context);
-        }
-
-        return ts.visitNode(rootNode, visitor);
-    };
+                };
+            },
+        ],
+    })
+    return transformedCode.code
 }
 
 // Vite 插件
@@ -71,13 +46,13 @@ export default function addReflectMetadataPlugin(): Plugin {
     return {
         name: 'vite-plugin-add-reflect-metadata',
 
-        transform(src, id) {
+        transform(code, id) {
             if (/.ts$|.tsx$|.vue$/.test(id)) {
                 // 创建 TypeScript 代码转换器
                 if (id.includes('Testaa')){
-                    const sourceFile = ts.createSourceFile(id, src, ts.ScriptTarget.Latest, true);
-                    ts.transform(sourceFile, [transformer]);
+                    // transformDynamicImportCodeCompile(code)
                     console.log(123123)
+                    console.log(code)
                 }
             }
             // 添加 reflect-metadata 引入
