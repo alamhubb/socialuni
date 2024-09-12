@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import {reactive} from "vue";
 import KeyValueObj from "./KeyValueObj";
-import {serviceSetHandler} from "@/plugins/TypeIoc/TypeIocServiceHandler";
+import {serviceSetHandler} from "./TypeIocServiceHandler";
 
 export function Service(target) {
     serviceSetHandler(target)
@@ -30,14 +30,19 @@ export class TypeIocContainer {
     private readonly container: Map<string, Object> = new Map()
     private readonly subscribe: Map<string, Set<KeyValueObj<Object>>> = new Map()
 
+    subscribeSet(key: string, value: Object) {
+        this.subscribe.set(key, value)
+    }
 
-    set(key: string, value: Object) {
+    subscribeGet(key: string) {
+        this.subscribe.get(key)
+    }
+
+    containerSet(key: string, value: Object) {
         this.container.set(key, value)
     }
 
-    get(key: string) {
-        console.log(key)
-        console.log(888888)
+    containerGet(key: string) {
         return this.container.get(key)
         // let result = Reflect.getMetadata(TypeIocContainer.propertyResourceKey, prop);
         // const propObj = this.container.get(result)

@@ -1,5 +1,5 @@
-import KeyValueObj from "@/plugins/TypeIoc/KeyValueObj";
-import typeIocContainer, {TypeIocContainer} from "@/plugins/TypeIoc/TypeIocContainer";
+import KeyValueObj from "./KeyValueObj";
+import typeIocContainer, {TypeIocContainer} from "./TypeIocContainer";
 
 export function serviceSetHandler(target) {
     console.log(target)
@@ -9,7 +9,7 @@ export function serviceSetHandler(target) {
     //逻辑校验，不可重复注册，同名
     if (interfaceResult) {
         console.log(interfaceResult)
-        const propObj = typeIocContainer.get(interfaceResult)
+        const propObj = typeIocContainer.containerGet(interfaceResult)
         if (propObj !== undefined) {
             throw new Error(`${target}:重复注册${target.constructor.name},已存在：${propObj.constructor.name}`)
         }
@@ -18,7 +18,7 @@ export function serviceSetHandler(target) {
     }
     if (classResult) {
         console.log(classResult)
-        const propObj = typeIocContainer.get(classResult)
+        const propObj = typeIocContainer.containerGet(classResult)
         if (propObj !== undefined) {
             throw new Error(`${target}:重复注册${target.constructor.name},已存在：${propObj.constructor.name}`)
         }
@@ -34,16 +34,16 @@ export function serviceSetHandler(target) {
             //如果属性上存在注解
             if (keyRes) {
                 //则判断是否已存在相关订阅，有订阅，把当前对象加入，没有则新建订阅，后续变化通知联动变化
-                const keySet = this.subscribe.get(keyRes)
+                const keySet = typeIocContainer.subscribeGet(keyRes)
                 const keyValueObj = new KeyValueObj(key, obj)
                 if (keySet) {
                     keySet.add(keyValueObj)
                 } else {
                     const set = new Set<KeyValueObj<Object>>
                     set.add(keyValueObj)
-                    this.subscribe.set(keyRes, set)
+                    typeIocContainer.subscribeSet(keyRes, set)
                 }
-                const propData = typeIocContainer.get(keyRes)
+                const propData = typeIocContainer.containerGet(keyRes)
                 console.log("congmaiphuoqu:", keyRes)
                 if (propData) {
                     console.log("获取结果存在:")
@@ -56,25 +56,25 @@ export function serviceSetHandler(target) {
         }
         if (interfaceResult) {
             //找到相关订阅，设置值
-            const array = this.subscribe.get(interfaceResult)
+            const array = typeIocContainer.subscribeGet(interfaceResult)
             if (array) {
                 for (const never of array) {
                     never.value[never.key] = obj
                 }
             }
-            typeIocContainer.set(interfaceResult, obj)
+            typeIocContainer.containerSet(interfaceResult, obj)
 
             console.log('chenggognzhuce :', interfaceResult)
         }
         if (classResult) {
             //找到相关订阅，设置值
-            const array = this.subscribe.get(classResult)
+            const array = typeIocContainer.subscribeGet(classResult)
             if (array) {
                 for (const never of array) {
                     never.value[never.key] = obj
                 }
             }
-            typeIocContainer.set(classResult, obj)
+            typeIocContainer.containerSet(classResult, obj)
         }
     } catch (e) {
         console.error(e)

@@ -26,13 +26,13 @@ export default class App extends Vue {
   d: TTTTAaaa = new TestSerivce()
 
   created() {
-    const test = typeIocContainer.get('TestSerivce')
+    const test = typeIocContainer.containerGet('TestSerivce')
     console.log(test)
     test.test()
   }
 
   printa() {
-    const test: TestSerivce = typeIocContainer.get('TestSerivce')
+    const test: TestSerivce = typeIocContainer.containerGet('TestSerivce')
     console.log(test)
     test.test()
   }
