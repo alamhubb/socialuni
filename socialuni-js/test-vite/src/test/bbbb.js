@@ -4,12 +4,21 @@ const getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
 
 // `applyDecorators` 函数：应用装饰器到对象属性
 function applyDecorators(decorators, target, propertyKey, condition) {
+    console.log(decorators)
     let descriptor = condition > 1 ? undefined : (condition ? getOwnPropertyDescriptor(target, propertyKey) : undefined);
 
+    console.log(descriptor)
     for (let i = decorators.length - 1; i >= 0; i--) {
         const decorator = decorators[i];
+        console.log(decorators)
+        console.log(3333)
+        console.log(decorator)
         if (decorator) {
-            descriptor = decorator(target, propertyKey, descriptor) || descriptor;
+            console.log(444)
+            console.log(decorator)
+            const res = decorator(target, propertyKey, descriptor)
+            console.log(res)
+            descriptor = res || descriptor;
         }
     }
 
