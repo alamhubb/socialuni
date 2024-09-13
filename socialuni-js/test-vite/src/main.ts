@@ -4,7 +4,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import TypeIoc from "@/plugins/TypeIoc";
 
-const app = createApp(App)
+var app = createApp(App)
 
 app.use(TypeIoc)
 

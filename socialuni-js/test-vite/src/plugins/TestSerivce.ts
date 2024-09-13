@@ -1,7 +1,6 @@
-import {Resource, Service} from "@/plugins/TypeIoc/TypeIocContainer";
+import {Resource} from "@/plugins/TypeIoc/TypeIocContainer";
 import type {TTTTAaaa} from "@/plugins/TypeIoc/Testaa";
 
-@Service
 export default class TestSerivce {
 
     @Resource(22)
