@@ -8,7 +8,6 @@ function Resource(target, {kind, name}) {
     };
 }
 
-
 class TestSerivce {
     @Resource
     testA;

@@ -1,5 +1,3 @@
-import ts from 'typescript'
-
 function logged(target, {kind, name}) {
     return function (initialValue) {
         console.log(target)   //undefined
