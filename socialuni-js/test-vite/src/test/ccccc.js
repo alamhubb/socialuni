@@ -42,10 +42,6 @@ import "reflect-metadata";
 
 function Resource(value) {
     return function (target, propertyKey, descriptor) {
-        console.log(value)
-        console.log(target)
-        console.log(propertyKey)
-        console.log(descriptor)
         if (!descriptor) {
             descriptor = {
                 enumerable: true,
