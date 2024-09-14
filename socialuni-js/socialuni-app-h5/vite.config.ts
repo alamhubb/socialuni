@@ -12,7 +12,7 @@ export default defineConfig({
         __BROWSER__: true,
     },
     plugins: [
-        transformIoc(),
+        // transformIoc(),
         vue(),
         socialuniPlatformAutoImportPlugin()
     ],

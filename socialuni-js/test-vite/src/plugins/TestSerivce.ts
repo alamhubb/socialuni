@@ -1,39 +1,24 @@
-import type {TTTTAaaa} from "@/plugins/TypeIoc/Testaa";
-import {serviceSetHandler} from "@/plugins/TypeIoc/TypeIocServiceHandler";
-
-function Resource(value) {
-    return function(target, propertyKey, descriptor) {
-        console.log(value)
-        console.log(target)
-        console.log(propertyKey)
-        console.log(descriptor)
-        console.log(descriptor)
-        if (!descriptor) {
-            descriptor = {
-                enumerable: true,
-                configurable: true,
-                writable: true,
-                value: value
-            };
-        } else {
-            descriptor.value = value;
-        }
-        return descriptor;
-    };
+function Service(){
+    return
 }
 
-export function Service(target) {
+
+function Resource(target, {kind, name}) {
+    console.log('3333')
+    return function (initialValue) {
+        console.log(222222) //1
+        return 666;
+    };
 }
 
 @Service
 export default class TestSerivce {
-
-    @Resource(22)
-    testA: TTTTAaaa
+    @Resource
+    testA;
 
     test() {
-        console.log(11111)
-        console.log(this.testA)
-        // this.testA.eat()
+        console.log(11111);
+        console.log(44444);
+        console.log(this.testA);
     }
 }
