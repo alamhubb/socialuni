@@ -1,9 +1,8 @@
 import {fileURLToPath, URL} from 'node:url'
 import {defineConfig} from 'vite'
-import vue from '@vitejs/plugin-vue'
 import transformIoc from "./viteplugin/index";
 import Inspect from 'vite-plugin-inspect'
-
+import vuePlugin from "../plugin-vue/src/index";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -16,11 +15,11 @@ export default defineConfig({
         }
     },
     build: {
-        sourcemap: false,
+        // sourcemap: false,
     },
     plugins: [
         Inspect(),
-        vue(),
+        vuePlugin(),
         // inspectPlugin(),
         transformIoc(),
     ],
