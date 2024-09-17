@@ -1,7 +1,7 @@
-import type { Identity } from './identity'
-import { compatibleMemberDecorator, compatibleClassDecorator } from './deco3/utils';
-import { type VueCons, Base } from './class';
-import { getSlot, type Slot, type SlotMapNames } from './slot'
+import type {Identity} from './identity'
+import {compatibleMemberDecorator, compatibleClassDecorator} from './deco3/utils';
+import {type VueCons, Base} from './class';
+import {getSlot, type Slot, type SlotMapNames} from './slot'
 
 export function getPrototypeOf(proto: Identity): Identity | null {
     const p = Object.getPrototypeOf(proto)
@@ -80,7 +80,9 @@ export function getValidOwnPropertyNames(obj: any, filter: (des: PropertyDescrip
  */
 export function getProviderFunction(provide: any): () => {} {
     if (typeof provide === 'function') return provide
-    return function () { return provide || {} }
+    return function () {
+        return provide || {}
+    }
 }
 
 export function optionNullableMemberDecorator<T>(handler: { (proto: any, name: string, option?: T): any }) {
@@ -94,8 +96,7 @@ export function optionNullableMemberDecorator<T>(handler: { (proto: any, name: s
             compatibleMemberDecorator(function (proto: any, name: any) {
                 handler(proto, name)
             })(protoOrValue, nameOrCtx)
-        }
-        else {//with option
+        } else {//with option
             const option = optionOrProtoOrValue as T
             return compatibleMemberDecorator(function (proto: any, name: any) {
                 handler(proto, name, option as T | undefined)

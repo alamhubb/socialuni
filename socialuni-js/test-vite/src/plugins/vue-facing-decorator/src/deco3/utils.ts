@@ -9,6 +9,8 @@ export const Compatible: {
 export function compatibleClassDecorator(deco: Function) {
     return function (cons: VueCons, ctx?: ClassDecoratorContext) {
         if (ctx) {//stage 3 arg is constructor, ctx is ClassDecoratorContext
+            console.log('zhiixngle xtc')
+            console.log(ctx.kind)
             if (ctx.kind !== 'class') {
                 throw 'deco stage 3 class'
             }
@@ -17,12 +19,28 @@ export function compatibleClassDecorator(deco: Function) {
             delete Compatible.fakePrototype
 
             obtainSlot(cons.prototype, slot)
+
+            console.log('zhixing ret')
+            console.log(deco)
+            console.log(cons)
             const ret = deco(cons)
+            console.log('get ret')
+            console.log(ret)
 
             return ret
         }
         else {//stage 2 arg is constructor
-            return deco(cons)
+
+
+            console.log('zhixing ret')
+            console.log(deco)
+            console.log(cons)
+            console.log('get ret')
+            const ret = deco(cons)
+            console.log('get ret')
+            console.log(ret)
+
+            return ret
         }
     }
 }

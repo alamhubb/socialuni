@@ -13,8 +13,15 @@
   "dependencies": {
     "@babel/core": "^7.25.2",
     "@babel/preset-env": "^7.25.4",
+    "@jridgewell/gen-mapping": "^0.3.5",
+    "@jridgewell/trace-mapping": "^0.3.25",
     "@vitejs/plugin-legacy": "^5.4.2",
+    "debug": "^4.3.6",
+    "facing-metadata": "^2.0.1",
     "reflect-metadata": "^0.2.2",
+    "rollup": "^4.21.1",
+    "slash": "^5.1.0",
+    "source-map-js": "^1.2.0",
     "vite-plugin-babel": "^1.2.0",
     "vite-plugin-legacy": "^2.1.0",
     "vue": "^3.4.29"

@@ -8,10 +8,10 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue, toNative} from 'vue-facing-decorator';
 import B, {type TTTTAaaa} from "@/plugins/TypeIoc/Testaa.ts";
 import typeIocContainer from "@/plugins/TypeIoc/TypeIocContainer";
 import TestSerivce from "@/plugins/TestSerivce";
+import {Component, toNative, Vue} from "./plugins/vue-facing-decorator/src";
 
 
 @toNative
@@ -25,16 +25,19 @@ export default class App extends Vue {
   d: TTTTAaaa = new TestSerivce()
 
   created() {
-    console.log(324653)
+    console.log(77777)
     const test = new TestSerivce()
     console.log(test.testA)
     test.test()
+    console.log(8888)
+    test.test('dad')
   }
 
   printa() {
     const test: TestSerivce = typeIocContainer.containerGet('TestSerivce')
     console.log(test)
     test.test()
+    test.test('dad')
   }
 
 

@@ -7,7 +7,8 @@ import vuePlugin from "../plugin-vue/src/index";
 // https://vitejs.dev/config/
 export default defineConfig({
     esbuild: {
-        target: 'es2022'
+        target: 'es2022',
+        sourcemap: true
     },
     build: {
         // sourcemap: false,

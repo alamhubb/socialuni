@@ -1,24 +1,26 @@
-import { defineComponent, type ComponentCustomOptions, type MethodOptions } from 'vue';
-import { obtainSlot } from './slot'
-import { getSuperSlot, getProviderFunction, optionNullableClassDecorator } from './utils'
-import { build as optionSetup } from './option/setup'
-import { build as optionComputed } from './option/computed'
-import { build as optionData } from './option/data'
-import { build as optionMethodsAndHooks } from './option/methodsAndHooks'
-import { build as optionRef } from './option/ref'
-import { build as optionWatch } from './option/watch'
-import { build as optionProps } from './option/props'
-import { build as optionInject } from './option/inject'
-import { build as optionProvide } from './option/provide'
-import { build as optionEmit } from './option/emit'
-import { build as optionVModel } from './option/vmodel'
-import { build as optionAccessor } from './option/accessor'
-import type { SetupContext } from 'vue';
-import type { OptionBuilder } from './optionBuilder'
-import type { VueCons } from './class'
+import {defineComponent, type ComponentCustomOptions, type MethodOptions} from 'vue';
+import {obtainSlot} from './slot'
+import {getSuperSlot, getProviderFunction, optionNullableClassDecorator} from './utils'
+import {build as optionSetup} from './option/setup'
+import {build as optionComputed} from './option/computed'
+import {build as optionData} from './option/data'
+import {build as optionMethodsAndHooks} from './option/methodsAndHooks'
+import {build as optionRef} from './option/ref'
+import {build as optionWatch} from './option/watch'
+import {build as optionProps} from './option/props'
+import {build as optionInject} from './option/inject'
+import {build as optionProvide} from './option/provide'
+import {build as optionEmit} from './option/emit'
+import {build as optionVModel} from './option/vmodel'
+import {build as optionAccessor} from './option/accessor'
+import type {SetupContext} from 'vue';
+import type {OptionBuilder} from './optionBuilder'
+import type {VueCons} from './class'
+
 type SetupFunction<T> = (this: void, props: Readonly<any>, ctx: SetupContext<any>) => T | Promise<T>
 export type OptionSetupFunction = SetupFunction<any>
 export type ComponentSetupFunction = SetupFunction<Record<string, any>>
+
 function componentOptionFactory(cons: VueCons, extend?: any) {
     const optionBuilder: OptionBuilder = {}
     optionSetup(cons, optionBuilder)
@@ -100,7 +102,9 @@ function buildComponent(cons: VueCons, arg: ComponentOption, extend?: any): any 
         option.setup = arg.setup
     } else {
         const oldSetup: OptionSetupFunction = option.setup
-        const newSetup: ComponentSetupFunction = arg.setup ?? function () { return {} }
+        const newSetup: ComponentSetupFunction = arg.setup ?? function () {
+            return {}
+        }
 
         const setup: ComponentSetupFunction = function (props, ctx) {
             const newRet = newSetup(props, ctx)
@@ -144,9 +148,13 @@ function buildComponent(cons: VueCons, arg: ComponentOption, extend?: any): any 
 
     return defineComponent(option)
 }
+
 function build(cons: VueCons, option: ComponentOption) {
+    console.log(6666)
+    console.log(cons)
     const slot = obtainSlot(cons.prototype)
     slot.inComponent = true
+    console.log(7777)
     const superSlot = getSuperSlot(cons.prototype)
     if (superSlot) {
         if (!superSlot.inComponent) {
@@ -156,10 +164,16 @@ function build(cons: VueCons, option: ComponentOption) {
             throw 'Component decorator 1'
         }
     }
+    console.log(8888)
     const component = buildComponent(cons, option, superSlot === null ? undefined : superSlot.cachedVueComponent)
+    console.log(component)
+
     component.__vfdConstructor = cons
+    console.log(11111)
     slot.cachedVueComponent = component;
+    console.log(22222);
     (cons as any).__vccOpts = component
+    console.log(3333)
 }
 
 export const ComponentBase = optionNullableClassDecorator((cons: VueCons, option?: ComponentOption) => {
@@ -167,13 +181,21 @@ export const ComponentBase = optionNullableClassDecorator((cons: VueCons, option
 })
 
 export function toNative<T extends VueCons>(cons: T): T {
+    // return (...args) => {
+    console.log(333)
+    console.log(cons)
+    // console.log(args)
     const slot = obtainSlot(cons.prototype)
     if (!slot.inComponent) {
         throw 'to native 1'
     }
+    console.log(44444)
     const cached = slot.cachedVueComponent
     if (!cached) {
         throw 'to native 2'
     }
+    console.log(5555)
+    console.log(cached)
     return cached
+    // }
 }

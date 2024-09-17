@@ -1,5 +1,11 @@
-function Service() {
-    return
+import {TTTTAaaa} from "./TypeIoc/Testaa.ts";
+
+function Service(number) {
+    return (haha,dada)=>{
+        console.log(typeof haha)
+        console.log(haha)
+        console.log(dada)
+    }
 }
 
 
@@ -14,8 +20,8 @@ function Resource(target, {kind, name}) {
     };
 }
 
-@Service
-export default class TestSerivce {
+@Service(3)
+export default class TestSerivce implements TTTTAaaa {
     @Resource
     testA;
 
@@ -24,8 +30,18 @@ export default class TestSerivce {
         console.log(44444);
         console.log(this.testA);
     }
+
+    test(ha: number) {
+        console.log(2222);
+        console.log(55555);
+        console.log(this.testA);
+    }
 }
 
 
 const tttt = new TestSerivce()
 tttt.test()
+tttt.test('dada')
+
+
+
