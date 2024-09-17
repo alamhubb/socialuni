@@ -7,12 +7,7 @@ import vuePlugin from "../plugin-vue/src/index";
 // https://vitejs.dev/config/
 export default defineConfig({
     esbuild: {
-        target: 'es2022',
-        tsconfigRaw: {
-            compilerOptions: {
-                useDefineForClassFields: true,
-            }
-        }
+        target: 'es2022'
     },
     build: {
         // sourcemap: false,
@@ -21,7 +16,7 @@ export default defineConfig({
         Inspect(),
         vuePlugin(),
         // inspectPlugin(),
-        transformIoc(),
+        // transformIoc(),
     ],
     resolve: {
         alias: {

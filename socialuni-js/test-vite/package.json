@@ -17,8 +17,7 @@
     "reflect-metadata": "^0.2.2",
     "vite-plugin-babel": "^1.2.0",
     "vite-plugin-legacy": "^2.1.0",
-    "vue": "^3.4.29",
-    "vue-facing-decorator": "^3.0.2"
+    "vue": "^3.4.29"
   },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.4",
