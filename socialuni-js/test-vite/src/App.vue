@@ -14,13 +14,10 @@ import TestSerivce from "@/plugins/TestSerivce";
 import {Component, toNative, Vue} from "./plugins/vue-facing-decorator/src";
 
 
-@toNative
 @Component({
   components: {}
 })
 export default class App extends Vue {
-
-
   b: TTTTAaaa = new B()
   d: TTTTAaaa = new TestSerivce()
 
