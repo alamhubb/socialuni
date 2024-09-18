@@ -42,6 +42,7 @@ export default class App extends Vue {
     return typeIocContainer
   }
 }
+
 </script>
 <style>
 .socialuni-navbar-h5 .el-menu-item {
