@@ -3,6 +3,17 @@ import {reactive} from "vue";
 import KeyValueObj from "./KeyValueObj";
 import {serviceSetHandler} from "./TypeIocServiceHandler";
 
+export function ServiceMetadata(name: string) {
+    console.log(target)
+    console.log(ctx)
+    // serviceSetHandler(target)
+}
+export function ResourceMetadata(name: string) {
+    console.log(target)
+    console.log(ctx)
+    // serviceSetHandler(target)
+}
+
 export function Service(target, ctx) {
     console.log(target)
     console.log(ctx)

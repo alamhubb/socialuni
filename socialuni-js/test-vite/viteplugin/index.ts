@@ -7,7 +7,7 @@ import ts, {
     QuestionToken,
     SyntaxKind, TypeNode
 } from "typescript";
-import {Resource, Service, TypeIocContainer} from '../src/plugins/TypeIoc/TypeIocContainer'
+import {ServiceMetadata, Resource, Service, TypeIocContainer} from '../src/plugins/TypeIoc/TypeIocContainer'
 import {parse as parseSfc, SFCBlock} from '@vue/compiler-sfc';
 // 自定义装饰器名称
 
@@ -28,6 +28,7 @@ function addMetadataTransformer(context: ts.TransformationContext) {
         if (ts.isClassDeclaration(node)) {
             if (hasDecorator(node, Service.name)) {
                 let members = []
+                //获取装饰器信息
                 let modifiers = node.modifiers
                 //设置属性信息
                 node.members.forEach((member) => {
@@ -61,7 +62,26 @@ function addMetadataTransformer(context: ts.TransformationContext) {
                     members.push(newMember)
                 })
 
+
+
+                //查看类的信息
                 //有实现接口，则设置接口信息
+                //设置类型信息
+                const className = node.name.text
+                const decoratorAry = [className]
+
+                /*const decorator = ts.factory.createDecorator(
+                    ts.factory.createCallExpression(
+                        ts.factory.createIdentifier(ServiceMetadata.name),
+                        undefined,
+                        [
+                            ts.factory.createStringLiteral(TypeIocContainer.classResourceKey),
+                            ts.factory.createStringLiteral([className])
+                        ]
+                    )
+                );
+*/
+
                 if (node.heritageClauses) {
                     const implementedInterfaces: string = []
                     // 访问类的继承
@@ -75,30 +95,20 @@ function addMetadataTransformer(context: ts.TransformationContext) {
                     });
                     if (implementedInterfaces.length) {
                         const implementedInterface = implementedInterfaces[0]
-                        const decorator = ts.factory.createDecorator(
-                            ts.factory.createCallExpression(
-                                ts.factory.createIdentifier('Reflect.metadata'),
-                                undefined,
-                                [
-                                    ts.factory.createStringLiteral(TypeIocContainer.interfaceResourceKey),
-                                    ts.factory.createStringLiteral(implementedInterface)
-                                ]
-                            )
-                        );
-                        const decorators = modifiers.filter(item => item.kind === ts.SyntaxKind.Decorator)
-                        const notDecorators = modifiers.filter(item => item.kind !== ts.SyntaxKind.Decorator)
-                        modifiers = modifiers ? [...decorators, decorator, ...notDecorators] : [decorator]
+
+
+                        decoratorAry.push(implementedInterface)
+
                     }
                 }
-                //设置类型信息
-                const className = node.name.text
+
                 const decorator = ts.factory.createDecorator(
                     ts.factory.createCallExpression(
-                        ts.factory.createIdentifier('Reflect.metadata'),
+                        ts.factory.createIdentifier(ServiceMetadata.name),
                         undefined,
                         [
-                            ts.factory.createStringLiteral(TypeIocContainer.classResourceKey),
-                            ts.factory.createStringLiteral(className)
+                            ts.factory.createStringLiteral(TypeIocContainer.interfaceResourceKey),
+                            ts.factory.createStringLiteral(decoratorAry)
                         ]
                     )
                 );

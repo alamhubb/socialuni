@@ -17,7 +17,6 @@
     "@jridgewell/trace-mapping": "^0.3.25",
     "@vitejs/plugin-legacy": "^5.4.2",
     "debug": "^4.3.6",
-    "reflect-metadata": "^0.2.2",
     "rollup": "^4.21.1",
     "slash": "^5.1.0",
     "source-map-js": "^1.2.0",
