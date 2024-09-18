@@ -1,12 +1,6 @@
-import 'reflect-metadata'
-import {reactive} from "vue";
 import KeyValueObj from "./KeyValueObj";
 
 export class TypeIocContainer {
-    static readonly interfaceResourceKey = 'a9360b695cff4e40aa417121d9b004a7'
-    static readonly classResourceKey = '29044b301990480eb6fbf0f50891e0de'
-    static readonly propertyResourceKey = '3a7b023a771d4e87a6caa1bef82cefdc'
-
     private readonly container: Map<string, Object> = new Map()
     private readonly subscribe: Map<string, Set<KeyValueObj<Object>>> = new Map()
 
@@ -57,5 +51,5 @@ export class TypeIocContainer {
     }
 }
 
-const typeIocContainer = reactive(new TypeIocContainer())
+const typeIocContainer = new TypeIocContainer()
 export default typeIocContainer

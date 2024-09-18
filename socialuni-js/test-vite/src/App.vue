@@ -8,7 +8,7 @@
 <script lang="ts">
 import B, {type TTTTAaaa} from "@/plugins/TypeIoc/Testaa.ts";
 import typeIocContainer from "@/plugins/TypeIoc/TypeIocContainer";
-import TestSerivce from "@/plugins/TestSerivce";
+import TestSerivce from "@/TestSerivce.ts";
 import {Component, toNative, Vue} from "./plugins/vue-facing-decorator/src";
 
 

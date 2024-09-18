@@ -1,10 +1,10 @@
-import typeIocContainer from "./TypeIocContainer.ts";
+import typeIocContainer from "./TypeIocContainer"
 
 const fieldNameMetadataKey = '68f3275e05804ff4b8baec697b0ad1b5'
 
 
 export function Service(serviceNames: string | string[]) {
-    function extracted(serviceName: string, target, obj, ctx) {
+    function extracted(serviceName: string, target: any, obj: any, ctx: any) {
         //逻辑校验，不可重复注册，同名
         if (!serviceName) {
             throw Error(`注册失败，不存在：${target.name}`)
@@ -25,7 +25,7 @@ export function Service(serviceNames: string | string[]) {
                 if (iocServiceName === serviceName) {
                     // obj[fieldName] = obj
                 } else {
-                    const iocService =  typeIocContainer.subAndGet(iocServiceName, fieldName, obj)
+                    const iocService = typeIocContainer.subAndGet(iocServiceName, fieldName, obj)
                     if (iocService) {
                         obj[fieldName] = iocService
                     }
@@ -36,7 +36,7 @@ export function Service(serviceNames: string | string[]) {
         }
     }
 
-    return (target, ctx) => {
+    return (target: any, ctx: any) => {
         //创建注入对象
         const obj = new target()
         if (Array.isArray(serviceNames)) {
@@ -51,7 +51,7 @@ export function Service(serviceNames: string | string[]) {
 
 export function Resource(serviceName: string) {
     console.log('执行了11111')
-    return (target, ctx) => {
+    return (_target: any, ctx: any) => {
         ctx.metadata[fieldNameMetadataKey] = serviceName
     }
 }

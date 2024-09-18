@@ -1,7 +1,7 @@
 import type {Plugin} from 'vite';
 import ts from "typescript";
-import {Resource, Service} from '../src/plugins/TypeIoc/TypeIocDecorator'
 import {parse as parseSfc, SFCBlock} from '@vue/compiler-sfc';
+import {Resource, Service} from "typeiocjs/src/TypeIocDecorator";
 // 自定义装饰器名称
 
 // 检查节点是否是带有指定装饰器的类
