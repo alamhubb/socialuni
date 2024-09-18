@@ -131,7 +131,7 @@ export default function addReflectMetadataPlugin(): Plugin {
         transform(code, id) {
             // if (!id.includes('TestSerivce')) return
             if (/.ts$|.tsx$|.vue$/.test(id)) {
-                console.log(id)
+                // console.log(id)
                 let content
                 if (/.ts$|.tsx$/.test(id)) {
                     content = code
@@ -154,7 +154,7 @@ export default function addReflectMetadataPlugin(): Plugin {
                 const newCode = code.replace(content, str)
 
                 // console.log(newCode)
-                return newCode
+                // return newCode
             }
         }
     };

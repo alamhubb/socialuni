@@ -17,7 +17,6 @@
     "@jridgewell/trace-mapping": "^0.3.25",
     "@vitejs/plugin-legacy": "^5.4.2",
     "debug": "^4.3.6",
-    "facing-metadata": "^2.0.1",
     "reflect-metadata": "^0.2.2",
     "rollup": "^4.21.1",
     "slash": "^5.1.0",
@@ -29,7 +28,7 @@
   "devDependencies": {
     "@tsconfig/node20": "^20.1.4",
     "@types/node": "^20.14.5",
-    "@vitejs/plugin-vue": "^5.1.3",
+    "@vitejs/plugin-vue": "^5.1.4",
     "@vue/tsconfig": "^0.5.1",
     "npm-run-all2": "^6.2.0",
     "typescript": "~5.4.0",

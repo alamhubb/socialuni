@@ -12,6 +12,7 @@
     "isolatedModules": true,
     "moduleDetection": "force",
     "experimentalDecorators": false,
+    "emitDecoratorMetadata": true,
     "noEmit": true,
     "jsx": "preserve",
 

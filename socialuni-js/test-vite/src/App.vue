@@ -25,16 +25,14 @@ class App extends Vue {
     console.log(77777)
     const test = new TestSerivce()
     console.log(test.testA)
-    test.test()
-    console.log(8888)
-    test.test('dad')
+    // test.test()
   }
 
   printa() {
     // const test: TestSerivce = typeIocContainer.containerGet('TestSerivce')
-    console.log(test)
-    test.test()
-    test.test('dad')
+    // console.log(test)
+    // test.test()
+    // test.test('dad')
   }
 
 

@@ -2,7 +2,7 @@ import {fileURLToPath, URL} from 'node:url'
 import {defineConfig} from 'vite'
 import transformIoc from "./viteplugin/index";
 import Inspect from 'vite-plugin-inspect'
-import vuePlugin from "../plugin-vue/src/index";
+import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -14,14 +14,15 @@ export default defineConfig({
         // sourcemap: false,
     },
     plugins: [
+        vue(),
         Inspect(),
-        vuePlugin(),
         // inspectPlugin(),
-        // transformIoc(),
+        transformIoc(),
     ],
     resolve: {
         alias: {
-            '@': fileURLToPath(new URL('./src', import.meta.url))
+            '@':
+                fileURLToPath(new URL('./src', import.meta.url))
         }
     }
 })

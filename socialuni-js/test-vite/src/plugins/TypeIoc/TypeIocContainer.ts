@@ -3,27 +3,20 @@ import {reactive} from "vue";
 import KeyValueObj from "./KeyValueObj";
 import {serviceSetHandler} from "./TypeIocServiceHandler";
 
-export function Service(target) {
-    serviceSetHandler(target)
+export function Service(target, ctx) {
+    console.log(target)
+    console.log(ctx)
+    // serviceSetHandler(target)
 }
 
-export function Resource(value) {
-    return function(target, propertyKey, descriptor) {
-        console.log(value)
-        console.log(target)
-        console.log(propertyKey)
-        console.log(descriptor)
-        if (!descriptor) {
-            descriptor = {
-                enumerable: true,
-                configurable: true,
-                writable: true,
-                value: value
-            };
-        } else {
-            descriptor.value = value;
-        }
-        return descriptor;
+export function Resource(target, {kind, name}) {
+    console.log('3333')
+    console.log(target)
+    console.log(kind)
+    console.log(name)
+    return function (initialValue) {
+        console.log(222222) //1
+        return 666;
     };
 }
 
