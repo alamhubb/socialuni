@@ -17,7 +17,7 @@ import {Component, toNative, Vue} from "./plugins/vue-facing-decorator/src";
 @Component({
   components: {}
 })
-export default class App extends Vue {
+class App extends Vue {
   b: TTTTAaaa = new B()
   d: TTTTAaaa = new TestSerivce()
 
@@ -31,7 +31,7 @@ export default class App extends Vue {
   }
 
   printa() {
-    const test: TestSerivce = typeIocContainer.containerGet('TestSerivce')
+    // const test: TestSerivce = typeIocContainer.containerGet('TestSerivce')
     console.log(test)
     test.test()
     test.test('dad')
@@ -42,6 +42,8 @@ export default class App extends Vue {
     return typeIocContainer
   }
 }
+
+export default toNative(App)
 </script>
 <style>
 .socialuni-navbar-h5 .el-menu-item {
