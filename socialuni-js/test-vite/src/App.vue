@@ -1,8 +1,6 @@
 <template>
   <div class="h100p overflow-hidden flex-col bg-default socialuni-app-h5">
     123
-    {{ typeIocContainer }}
-    {{ b }}
     <button @click="printa"> click</button>
   </div>
 </template>
@@ -21,18 +19,18 @@ class App extends Vue {
   b: TTTTAaaa = new B()
   d: TTTTAaaa = new TestSerivce()
 
+  get test(): TestSerivce {
+    return typeIocContainer.containerGet(TestSerivce.name)
+  }
+
   created() {
     console.log(77777)
-    const test = new TestSerivce()
-    console.log(test.testA)
+    console.log(this.test.testA)
     // test.test()
   }
 
   printa() {
-    // const test: TestSerivce = typeIocContainer.containerGet('TestSerivce')
-    // console.log(test)
-    // test.test()
-    // test.test('dad')
+    this.test.test()
   }
 
 
@@ -40,6 +38,7 @@ class App extends Vue {
     return typeIocContainer
   }
 }
+
 export default toNative(App)
 </script>
 <style>

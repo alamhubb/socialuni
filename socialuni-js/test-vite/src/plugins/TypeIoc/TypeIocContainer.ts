@@ -1,35 +1,6 @@
 import 'reflect-metadata'
 import {reactive} from "vue";
 import KeyValueObj from "./KeyValueObj";
-import {serviceSetHandler} from "./TypeIocServiceHandler";
-
-export function ServiceMetadata(name: string) {
-    console.log(target)
-    console.log(ctx)
-    // serviceSetHandler(target)
-}
-export function ResourceMetadata(name: string) {
-    console.log(target)
-    console.log(ctx)
-    // serviceSetHandler(target)
-}
-
-export function Service(target, ctx) {
-    console.log(target)
-    console.log(ctx)
-    // serviceSetHandler(target)
-}
-
-export function Resource(target, {kind, name}) {
-    console.log('3333')
-    console.log(target)
-    console.log(kind)
-    console.log(name)
-    return function (initialValue) {
-        console.log(222222) //1
-        return 666;
-    };
-}
 
 export class TypeIocContainer {
     static readonly interfaceResourceKey = 'a9360b695cff4e40aa417121d9b004a7'
@@ -39,15 +10,39 @@ export class TypeIocContainer {
     private readonly container: Map<string, Object> = new Map()
     private readonly subscribe: Map<string, Set<KeyValueObj<Object>>> = new Map()
 
-    subscribeSet(key: string, value: Object) {
+    private subscribeSet(key: string, value: Object) {
         this.subscribe.set(key, value)
     }
 
-    subscribeGet(key: string) {
+    private subscribeGet(key: string): Set<KeyValueObj<Object>> {
         this.subscribe.get(key)
     }
 
-    containerSet(key: string, value: Object) {
+    publish(serviceName: string, obj: object) {
+        this.containerSet(serviceName, obj)
+        const keySet: Set<KeyValueObj<Object>> = this.subscribeGet(serviceName)
+        if (keySet) {
+            for (const keyItem of keySet) {
+                const subObj = keyItem.value
+                subObj[keyItem.key] = obj
+            }
+        }
+    }
+
+    subAndGet(serviceName: string, fieldName: string, obj: object) {
+        const keySet = this.subscribeGet(serviceName)
+        const keyValueObj = new KeyValueObj(fieldName, obj)
+        if (keySet) {
+            keySet.add(keyValueObj)
+        } else {
+            const set = new Set<KeyValueObj<Object>>
+            set.add(keyValueObj)
+            this.subscribeSet(serviceName, set)
+        }
+        return this.containerGet(serviceName)
+    }
+
+    private containerSet(key: string, value: Object) {
         this.container.set(key, value)
     }
 

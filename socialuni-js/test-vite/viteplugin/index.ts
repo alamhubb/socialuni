@@ -1,24 +1,20 @@
 import type {Plugin} from 'vite';
-import ts, {
-    ExclamationToken, Expression,
-    ModifierLike,
-    PropertyDeclaration,
-    PropertyName,
-    QuestionToken,
-    SyntaxKind, TypeNode
-} from "typescript";
-import {ServiceMetadata, Resource, Service, TypeIocContainer} from '../src/plugins/TypeIoc/TypeIocContainer'
+import ts from "typescript";
+import {Resource, Service} from '../src/plugins/TypeIoc/TypeIocDecorator'
 import {parse as parseSfc, SFCBlock} from '@vue/compiler-sfc';
 // 自定义装饰器名称
 
 // 检查节点是否是带有指定装饰器的类
-function hasDecorator(node: ts.ClassDeclaration, decoratorName: string): boolean {
-    return node.modifiers
-        ? node.modifiers.some(decorator => {
-            const decoratorExpression = decorator.expression as ts.CallExpression;
-            return decoratorExpression?.text === decoratorName;
-        })
-        : false;
+function getDecoratorIndex(node: ts.ClassDeclaration, decoratorName: string): boolean {
+    if (!node.modifiers) {
+        return -1
+    }
+    const modifiers = node.modifiers
+    const decoratorIndex = modifiers.findIndex(decorator => {
+        const decoratorExpression = decorator.expression as ts.CallExpression;
+        return decoratorExpression?.text === decoratorName;
+    })
+    return decoratorIndex
 }
 
 
@@ -26,105 +22,123 @@ function hasDecorator(node: ts.ClassDeclaration, decoratorName: string): boolean
 function addMetadataTransformer(context: ts.TransformationContext) {
     function visit(node: ts.Node): ts.Node {
         if (ts.isClassDeclaration(node)) {
-            if (hasDecorator(node, Service.name)) {
-                let members = []
-                //获取装饰器信息
-                let modifiers = node.modifiers
-                //设置属性信息
-                node.members.forEach((member) => {
-                    let newMember = member
-                    if (ts.isPropertyDeclaration(member)) {
-                        if (hasDecorator(member, Resource.name)) {
-                            if (member.type?.typeName?.text) {
-                                console.log(member.type.typeName.text);
-                                const decorator = ts.factory.createDecorator(
-                                    ts.factory.createCallExpression(
-                                        ts.factory.createIdentifier('Reflect.metadata'),
-                                        undefined,
-                                        [
-                                            ts.factory.createStringLiteral(TypeIocContainer.propertyResourceKey),
-                                            ts.factory.createStringLiteral(member.type?.typeName?.text)
-                                        ]
-                                    )
-                                );
-                                const newModifiers = member.modifiers ? [...member.modifiers, decorator] : [decorator]
-                                newMember = ts.factory.updatePropertyDeclaration(
-                                    member,
-                                    newModifiers, // 修饰符，添加新的装饰器
-                                    member.name,
-                                    member.questionToken,
-                                    member.type,
-                                    member.initializer
-                                );
-                            }
+            let decoratorIndex = getDecoratorIndex(node, Service.name)
+            if (decoratorIndex < 0) {
+                return node
+            }
+            let members = []
+            //设置属性信息
+            node.members.forEach((member) => {
+                let newMember = member
+                if (ts.isPropertyDeclaration(member)) {
+                    let resourceDecoratorIndex = getDecoratorIndex(member, Resource.name)
+                    if (resourceDecoratorIndex > -1) {
+                        if (member.type?.typeName?.text) {
+                            const newResourceDecorator = ts.factory.createDecorator(
+                                ts.factory.createCallExpression(
+                                    ts.factory.createIdentifier(Resource.name),
+                                    undefined,
+                                    [
+                                        ts.factory.createStringLiteral(member.type?.typeName?.text)
+                                    ]
+                                )
+                            );
+                            let resourceModifiers = member.modifiers
+                            //没有splice方法，
+                            const filterModifiers = resourceModifiers.filter((item, index) => index !== resourceDecoratorIndex)
+                            const newModifiers = member.modifiers ? [...filterModifiers, newResourceDecorator] : [newResourceDecorator]
+                            newMember = ts.factory.updatePropertyDeclaration(
+                                member,
+                                newModifiers, // 修饰符，添加新的装饰器
+                                member.name,
+                                member.questionToken,
+                                member.type,
+                                member.initializer
+                            );
                         }
                     }
-                    members.push(newMember)
-                })
+                }
+                members.push(newMember)
+            })
 
 
+            //查看类的信息
+            //有实现接口，则设置接口信息
+            //设置类型信息
+            const className = node.name.text
+            const decoratorAry = [className]
 
-                //查看类的信息
-                //有实现接口，则设置接口信息
-                //设置类型信息
-                const className = node.name.text
-                const decoratorAry = [className]
-
-                /*const decorator = ts.factory.createDecorator(
-                    ts.factory.createCallExpression(
-                        ts.factory.createIdentifier(ServiceMetadata.name),
-                        undefined,
-                        [
-                            ts.factory.createStringLiteral(TypeIocContainer.classResourceKey),
-                            ts.factory.createStringLiteral([className])
-                        ]
-                    )
-                );
+            /*const decorator = ts.factory.createDecorator(
+                ts.factory.createCallExpression(
+                    ts.factory.createIdentifier(ServiceMetadata.name),
+                    undefined,
+                    [
+                        ts.factory.createStringLiteral(TypeIocContainer.classResourceKey),
+                        ts.factory.createStringLiteral([className])
+                    ]
+                )
+            );
 */
 
-                if (node.heritageClauses) {
-                    const implementedInterfaces: string = []
-                    // 访问类的继承
-                    node.heritageClauses.forEach(heritageClause => {
-                        heritageClause.types.forEach(type => {
-                            if (ts.isExpressionWithTypeArguments(type)) {
-                                const typeName = type.expression.text;
-                                implementedInterfaces.push(typeName);
-                            }
-                        });
+            if (node.heritageClauses) {
+                const implementedInterfaces: string = []
+                // 访问类的继承
+                node.heritageClauses.forEach(heritageClause => {
+                    heritageClause.types.forEach(type => {
+                        if (ts.isExpressionWithTypeArguments(type)) {
+                            const typeName = type.expression.text;
+                            implementedInterfaces.push(typeName);
+                        }
                     });
-                    if (implementedInterfaces.length) {
-                        const implementedInterface = implementedInterfaces[0]
+                });
+                if (implementedInterfaces.length) {
+                    const implementedInterface = implementedInterfaces[0]
 
-
-                        decoratorAry.push(implementedInterface)
-
-                    }
+                    decoratorAry.push(implementedInterface)
                 }
+            }
 
-                const decorator = ts.factory.createDecorator(
+            console.log(decoratorAry)
+
+            let newServiceDecorator
+            if (decoratorAry.length > 1) {
+                newServiceDecorator = ts.factory.createDecorator(
                     ts.factory.createCallExpression(
-                        ts.factory.createIdentifier(ServiceMetadata.name),
+                        ts.factory.createIdentifier(Service.name),
                         undefined,
                         [
-                            ts.factory.createStringLiteral(TypeIocContainer.interfaceResourceKey),
-                            ts.factory.createStringLiteral(decoratorAry)
+                            ts.factory.createArrayLiteralExpression(decoratorAry.map(name => ts.factory.createStringLiteral(name)))
                         ]
                     )
                 );
-                const decorators = modifiers.filter(item => item.kind === ts.SyntaxKind.Decorator)
-                const notDecorators = modifiers.filter(item => item.kind !== ts.SyntaxKind.Decorator)
-                modifiers = modifiers ? [...decorators, decorator, ...notDecorators] : [decorator]
-
-                return ts.factory.updateClassDeclaration(
-                    node,
-                    modifiers, // 修饰符，添加新的装饰器
-                    node.name,                     // 类名
-                    node.typeParameters,           // 类型参数
-                    node.heritageClauses,          // 继承子句
-                    members                   // 类成员
-                )
+            } else {
+                newServiceDecorator = ts.factory.createDecorator(
+                    ts.factory.createCallExpression(
+                        ts.factory.createIdentifier(Service.name),
+                        undefined,
+                        [
+                            ts.factory.createStringLiteral(decoratorAry[0])
+                        ]
+                    )
+                );
             }
+
+            let modifiers = node.modifiers
+            //没有splice方法，
+            const filterModifiers = modifiers.filter((item, index) => index !== decoratorIndex)
+            const decorators = filterModifiers.filter(item => item.kind === ts.SyntaxKind.Decorator)
+            const notDecorators = filterModifiers.filter(item => item.kind !== ts.SyntaxKind.Decorator)
+            modifiers = modifiers ? [...decorators, newServiceDecorator, ...notDecorators] : [newServiceDecorator]
+
+            // console.log(decorators)
+            return ts.factory.updateClassDeclaration(
+                node,
+                modifiers, // 修饰符，添加新的装饰器
+                node.name,                     // 类名
+                node.typeParameters,           // 类型参数
+                node.heritageClauses,          // 继承子句
+                members                   // 类成员
+            )
         }
         // 递归访问子节点
         return ts.visitEachChild(node, visit, context);
@@ -157,14 +171,14 @@ export default function addReflectMetadataPlugin(): Plugin {
                 const transformedSourceFile: ts.SourceFile = result.transformed[0];
 
                 let str = printer.printFile(transformedSourceFile)
-                if (!str.includes('reflect-metadata')) {
-                    str = "\nimport 'reflect-metadata';\n" + str
-                }
+                /* if (!str.includes('reflect-metadata')) {
+                     str = "\nimport 'reflect-metadata';\n" + str
+                 }*/
 
                 const newCode = code.replace(content, str)
 
                 // console.log(newCode)
-                // return newCode
+                return newCode
             }
         }
     };
