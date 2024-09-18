@@ -38,11 +38,11 @@ const menuButtonInfo: GetMenuButtonBoundingClientRectRes = uni.getMenuButtonBoun
 /*
 显示出来已经选了的城市，给她画上钩
 * */
-@toNative
+
 @Component({
   components: {QIcon}
 })
-export default class QNavBar extends Vue {
+class QNavBar extends Vue {
   @Prop({
     type: String,
     default: ''
@@ -110,4 +110,5 @@ export default class QNavBar extends Vue {
     QingAppUtil.RouterUtil.goHome()
   }
 }
+export default toNative(QNavBar)
 </script>

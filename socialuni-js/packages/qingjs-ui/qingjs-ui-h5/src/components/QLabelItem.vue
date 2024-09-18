@@ -10,11 +10,12 @@
 <script lang="ts">
 import {Component, Prop, Vue, toNative} from 'vue-facing-decorator'
 
-@toNative
+
 @Component({})
-export default class QLabelItem extends Vue {
+class QLabelItem extends Vue {
   @Prop() label: string
 }
+export default toNative(QLabelItem)
 </script>
 
 <style scoped>

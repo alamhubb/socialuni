@@ -18,11 +18,11 @@ import NavMenuItem from '@/layout/components/NavMenu/NavMenuItem.vue'
 import { menuRoutes } from '@/router/router'
 import DevAccountRO from '@/model/base/DevAccountRO'
 
-@toNative
+
 @Component({
   components: { NavMenuItem }
 })
-export default class NavMenu extends Vue {
+class NavMenu extends Vue {
 
   get user(){
 
@@ -68,4 +68,5 @@ export default class NavMenu extends Vue {
     // userModule.userLoginOut()
   }
 }
+export default toNative(NavMenu)
 </script>

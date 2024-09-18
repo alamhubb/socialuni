@@ -61,11 +61,11 @@ function dragElement(elmnt) {
   }
 }
 
-@toNative
+
 @Component({
   components: {}
 })
-export default class VueInteract extends Vue {
+class VueInteract extends Vue {
   $refs: {
     interactContainer: HTMLDivElement
   }
@@ -85,4 +85,5 @@ export default class VueInteract extends Vue {
     dragElement(box)
   }
 }
+export default toNative(VueInteract)
 </script>

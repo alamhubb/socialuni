@@ -19,13 +19,13 @@
   //@ts-ignore
   import childProtect from './childProtect.md'
 
-  @toNative
+
 @Component({
     components: {
       QMarkdown
     }
   })
-  export default class ChildProtectVue extends Vue {
+  class ChildProtectVue extends Vue {
     markdown = childProtect
 
     /*created() {
@@ -34,6 +34,7 @@
       })
     }*/
   }
+export default toNative(ChildProtectVue)
 </script>
 <style>
     .markdown-body {

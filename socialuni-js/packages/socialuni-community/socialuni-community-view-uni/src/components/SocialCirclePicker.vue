@@ -58,7 +58,7 @@ import QSidebar from "qingjs-ui-uni/src/components/QSidebar/QSidebar.vue";
 import {socialCircleModule} from "socialuni-community-sdk/src/store/SocialCircleModule";
 
 
-@toNative
+
 @Component({
   components: {
     QIcon,
@@ -67,7 +67,7 @@ import {socialCircleModule} from "socialuni-community-sdk/src/store/SocialCircle
     QPopup
   }
 })
-export default class SocialCirclePicker extends Vue {
+class SocialCirclePicker extends Vue {
   $refs: {
     circleChooseDialog: QPopup
   }
@@ -108,4 +108,5 @@ export default class SocialCirclePicker extends Vue {
     return circle
   }
 }
+export default toNative(SocialCirclePicker)
 </script>

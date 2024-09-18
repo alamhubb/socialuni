@@ -85,11 +85,11 @@ import SocialGenderTag from "socialuni-user-ui/src/components/SUserGenderTag.vue
 import FollowAPI from "socialuni-community-api/src/api/FollowAPI";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 
-@toNative
+
 @Component({
     components: {SocialGenderTag, QTabs}
 })
-export default class SocialuniCoinRecordView extends Vue {
+class SocialuniCoinRecordView extends Vue {
     tabs = ['收入', '消费', '充值']
     currentTabIndex = 0
 
@@ -157,4 +157,5 @@ export default class SocialuniCoinRecordView extends Vue {
         }
     }
 }
+export default toNative(SocialuniCoinRecordView)
 </script>

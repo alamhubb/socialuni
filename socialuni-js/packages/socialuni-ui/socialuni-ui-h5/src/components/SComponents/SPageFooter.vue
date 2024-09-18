@@ -35,11 +35,11 @@
 import { Component, Emit, Prop, Vue , toNative} from 'vue-facing-decorator'
 import SButton from "./SButton.vue";
 
-@toNative
+
 @Component({
   components: { SButton }
 })
-export default class SPageFooter extends Vue {
+class SPageFooter extends Vue {
   @Prop({ default: false, type: Boolean }) hideConfirm
   @Prop({ default: false, type: Boolean }) hideCancel
   @Prop({ default: '确 定' }) confirmText: string
@@ -68,5 +68,5 @@ export default class SPageFooter extends Vue {
     return
   }
 }
-
+export default toNative(SPageFooter)
 </script>

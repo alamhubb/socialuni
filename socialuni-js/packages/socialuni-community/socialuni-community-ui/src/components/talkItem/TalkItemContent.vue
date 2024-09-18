@@ -105,11 +105,11 @@ import CommunityPageUtil from "socialuni-community-sdk/src/util/CommunityPageUti
 import {socialTalkModule} from "socialuni-community-sdk/src/store/SocialTalkModule";
 import {socialuniTagModule} from "socialuni-community-sdk/src/store/SocialTagModule";
 
-@toNative
+
 @Component({
   components: {QIcon}
 })
-export default class TalkItemContent extends Vue {
+class TalkItemContent extends Vue {
   @Prop() talk: TalkVO
 
   toTalkDetailVue() {
@@ -176,4 +176,5 @@ export default class TalkItemContent extends Vue {
       QingAppUtil.NativeUtil.showCopyAction(talk.content)
   }
 }
+export default toNative(TalkItemContent)
 </script>

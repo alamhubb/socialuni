@@ -76,11 +76,11 @@ import QDialog from "qingjs-ui-h5/src/components/QDialog.vue";
 import MusicList from "./MusicList.vue";
 import MusicDialog from "./MusicDialog.vue";
 
-@toNative
+
 @Component({
   components: {MusicList, QDialog, MusicDialog}
 })
-export default class MusicPlayer extends Vue {
+class MusicPlayer extends Vue {
   $refs: {
     audioPlayer: HTMLAudioElement
     musicListDialog: MusicDialog
@@ -461,4 +461,5 @@ export default class MusicPlayer extends Vue {
     this.$emit('next', 1)
   }
 }
+export default toNative(MusicPlayer)
 </script>

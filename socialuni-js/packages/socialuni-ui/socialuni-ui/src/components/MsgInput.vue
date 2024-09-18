@@ -46,13 +46,13 @@ import PlatformUtils from "socialuni-user-sdk/src/util/PlatformUtils";
 import UserCheckUtil from "socialuni-user-sdk/src/util/UserCheckUtil";
 import QButton from "qingjs-ui/src/components/QButton.vue";
 
-@toNative
+
 @Component({
   components: {
     QButton
   }
 })
-export default class MsgInput extends Vue {
+class MsgInput extends Vue {
   content = ''
 
   get currentContent() {
@@ -107,4 +107,5 @@ export default class MsgInput extends Vue {
     socialTalkModule.inputContentBlur()
   }
 }
+export default toNative(MsgInput)
 </script>

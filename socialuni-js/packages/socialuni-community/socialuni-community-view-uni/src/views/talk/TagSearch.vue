@@ -102,7 +102,7 @@ import {socialuniTagModule} from "socialuni-community-sdk/src/store/SocialTagMod
 import TagUtil from "socialuni-community-sdk/src/util/TagUtil";
 
 
-@toNative
+
 @Component({
   components: {
     QSidebar,
@@ -112,7 +112,7 @@ import TagUtil from "socialuni-community-sdk/src/util/TagUtil";
     QIcon
   }
 })
-export default class TagSearch extends Vue {
+class TagSearch extends Vue {
   // 只有从新增talk界面进入时才可新增标签
   @Model('input') readonly value: boolean
 
@@ -196,4 +196,5 @@ export default class TagSearch extends Vue {
   // 取消仅仅关闭页面
   // 选择关闭页面，并且回传tag
 }
+export default toNative(TagSearch)
 </script>

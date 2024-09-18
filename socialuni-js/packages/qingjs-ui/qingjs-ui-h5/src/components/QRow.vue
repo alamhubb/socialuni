@@ -7,8 +7,9 @@
 <script lang="ts">
 import { Component, Emit, Prop, Vue , toNative} from 'vue-facing-decorator'
 
-@toNative
+
 @Component({})
-export default class QRow extends Vue {
+class QRow extends Vue {
 }
+export default toNative(QRow)
 </script>

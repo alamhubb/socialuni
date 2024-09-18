@@ -46,11 +46,11 @@ import LabelItem from "@/components/LabelItem.vue";
 import {DialogInterface} from "@/interface/DialogInterface";
 import PeiwanRO from "@/model/peiwan/PeiwanRO";
 
-@toNative
+
 @Component({
   components: {LabelItem, DataTable}
 })
-export default class PeiwanManageView extends Vue {
+class PeiwanManageView extends Vue {
   $refs: {
     mapDialog: DialogInterface
   }
@@ -97,6 +97,7 @@ export default class PeiwanManageView extends Vue {
     }, false)
   }
 }
+export default toNative(PeiwanManageView)
 </script>
 
 <style scoped>

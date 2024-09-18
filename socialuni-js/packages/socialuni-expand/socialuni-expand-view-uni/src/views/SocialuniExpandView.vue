@@ -69,11 +69,11 @@ import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModul
 import SocialuniUserExpandService from "socialuni-user-sdk/src/logic/SocialuniUserExpandService";
 import SocialuniExpandUserInfo from "socialuni-expand-ui/src/components/SocialuniExpandUserInfo.vue";
 
-@toNative
+
 @Component({
   components: {QPullRefresh, QButton, QIcon, SocialGenderTag, QTabs, SocialuniExpandUserInfo}
 })
-export default class SocialuniExpandView extends Vue {
+class SocialuniExpandView extends Vue {
   $refs: {
     pullRefresh: QPullRefresh
   }
@@ -171,4 +171,5 @@ export default class SocialuniExpandView extends Vue {
 
 
 }
+export default toNative(SocialuniExpandView)
 </script>

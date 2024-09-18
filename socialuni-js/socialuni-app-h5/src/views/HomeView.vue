@@ -41,9 +41,9 @@ class Boy implements People {
 }
 
 
-@toNative
+
 @Component({})
-export default class HomeView extends Vue {
+class HomeView extends Vue {
 
   @sealed
   people: People = null
@@ -53,4 +53,5 @@ export default class HomeView extends Vue {
 
 
 }
+export default toNative(HomeView)
 </script>

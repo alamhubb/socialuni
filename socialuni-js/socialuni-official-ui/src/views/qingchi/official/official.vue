@@ -28,15 +28,16 @@
   //@ts-ignore
   import official from './official.md'
 
-  @toNative
+
 @Component({
     components: {
       QMarkdown
     }
   })
-  export default class AgreementVue extends Vue {
+  class AgreementVue extends Vue {
     markdown = official
   }
+export default toNative(AgreementVue)
 </script>
 <style>
   .markdown-body {

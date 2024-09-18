@@ -78,11 +78,11 @@ import QIcon from 'qingjs-ui/src/components/QIcon.vue'
 // import QNavbar from 'qingjs-ui-uni/src/components/QNavbar/QNavbar.vue'
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 
-@toNative
+
 @Component({
     components: {QIcon}
 })
-export default class TalkAddTagSearch extends Vue {
+class TalkAddTagSearch extends Vue {
     searchContent = ''
     showSearch = false
 
@@ -140,4 +140,5 @@ export default class TalkAddTagSearch extends Vue {
         this.searchContent = ''
     }
 }
+export default toNative(TalkAddTagSearch)
 </script>

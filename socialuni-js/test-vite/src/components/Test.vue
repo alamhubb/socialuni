@@ -12,7 +12,7 @@ import typeIocContainer, {Resource, Service} from "@/plugins/TypeIoc/TypeIocCont
 @Component({
   components: {}
 })
-export default class TestView extends Vue {
+class TestView extends Vue {
 
 
   b: TTTTAaaa = new B()
@@ -21,4 +21,5 @@ export default class TestView extends Vue {
   obj: TTTTAaaa
 
 }
+export default toNative(TestView)
 </script>

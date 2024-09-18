@@ -6,10 +6,11 @@
 import {Emit, Component, Vue, Watch, toNative} from 'vue-facing-decorator'
 import SocialuniUserEditView from "socialuni-user-view-uni/src/views/user/SocialuniUserEditView.vue";
 
-@toNative
+
 @Component({
   components: {SocialuniUserEditView}
 })
-export default class EditMineInfo extends Vue {
+class EditMineInfo extends Vue {
 }
+export default toNative(EditMineInfo)
 </script>

@@ -26,9 +26,9 @@ import SocialuniAppPageUtil from "socialuni-app-sdk/src/util/SocialuniAppPageUti
 
 
 // todo 后台可控制是否显示轮播图
-@toNative
+
 @Component({})
-export default class TalkSwipers extends Vue {
+class TalkSwipers extends Vue {
     get homeSwipers() {
         return socialAppModule.homeSwipers
     }
@@ -60,4 +60,5 @@ export default class TalkSwipers extends Vue {
         }
     }
 }
+export default toNative(TalkSwipers)
 </script>

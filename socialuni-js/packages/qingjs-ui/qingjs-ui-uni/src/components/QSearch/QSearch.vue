@@ -9,9 +9,10 @@ import {Component, Vue, toNative} from 'vue-facing-decorator'
 /*
 显示出来已经选了的城市，给她画上钩
 * */
-@toNative
+
 @Component({})
-export default class QSearch extends Vue {
+class QSearch extends Vue {
 
 }
+export default toNative(QSearch)
 </script>

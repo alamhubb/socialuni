@@ -96,13 +96,13 @@ import SocialuniAddFriendType from "socialuni-im-api/src/constant/SocialuniAddFr
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 
-@toNative
+
 @Component({
     components: {
         QTabs
     }
 })
-export default class FriendApplyListView extends Vue {
+class FriendApplyListView extends Vue {
     sendFriendApplicationList: OpenImFriendApplyRO[] = []
     FriendApplyType = FriendApplyType
     recvFriendApplicationList: OpenImFriendApplyRO[] = []
@@ -305,4 +305,5 @@ export default class FriendApplyListView extends Vue {
         }
     }
 }
+export default toNative(FriendApplyListView)
 </script>

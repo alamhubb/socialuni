@@ -23,11 +23,11 @@ import QIcon from "qingjs-ui/src/components/QIcon.vue";
 /*
 显示出来已经选了的城市，给她画上钩
 * */
-@toNative
+
 @Component({
   components: {QIcon}
 })
-export default class QSelect extends Vue {
+class QSelect extends Vue {
   @Model('change') readonly value!: any
   @Prop() list: any[]
   @Prop() valueName: any[]
@@ -61,4 +61,5 @@ export default class QSelect extends Vue {
     return this.list[index][this.valueName]
   }
 }
+export default toNative(QSelect)
 </script>

@@ -101,7 +101,7 @@ import SocialuniUserProvideKeys from "socialuni-user-sdk/src/constant/SocialuniU
 import {Inject, Component, Vue, toNative} from 'vue-facing-decorator'
 import {socialuniUserDetailViewService} from "socialuni-user-sdk/src/logic/SocialuniUserDetailViewService";
 
-@toNative
+
 @Component({
   components: {
     SocialuniUserInfoImg,
@@ -110,7 +110,7 @@ import {socialuniUserDetailViewService} from "socialuni-user-sdk/src/logic/Socia
     SocialGenderTag,
   }
 })
-export default class SocialuniUserDetailViewH5 extends Vue {
+class SocialuniUserDetailViewH5 extends Vue {
   socialuniUserDetailViewService = socialuniUserDetailViewService
 
   created() {
@@ -119,4 +119,5 @@ export default class SocialuniUserDetailViewH5 extends Vue {
     this.socialuniUserDetailViewService.initService(this, this.$route.query)
   }
 }
+export default toNative(SocialuniUserDetailViewH5)
 </script>

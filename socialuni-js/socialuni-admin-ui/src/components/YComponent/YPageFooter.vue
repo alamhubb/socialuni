@@ -35,11 +35,11 @@
 import { Component, Emit, Prop, Vue , toNative} from 'vue-facing-decorator'
 import YButton from '@/components/YComponent/YButton.vue'
 
-@toNative
+
 @Component({
   components: { YButton }
 })
-export default class YPageFooter extends Vue {
+class YPageFooter extends Vue {
   @Prop({ default: false, type: Boolean }) hideConfirm
   @Prop({ default: false, type: Boolean }) hideCancel
   @Prop({ default: '确 定' }) confirmText: string
@@ -68,5 +68,5 @@ export default class YPageFooter extends Vue {
     return
   }
 }
-
+export default toNative(YPageFooter)
 </script>

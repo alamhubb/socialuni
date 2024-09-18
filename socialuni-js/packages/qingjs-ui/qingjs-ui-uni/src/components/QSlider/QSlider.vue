@@ -72,9 +72,9 @@
 <script lang="ts">
 import {Component, Prop, Vue, Watch, toNative} from 'vue-facing-decorator'
 
-@toNative
+
 @Component({})
-export default class QSlider extends Vue {
+class QSlider extends Vue {
   //滑块区间当前取值
   @Prop({
     type: Array,
@@ -292,6 +292,7 @@ export default class QSlider extends Vue {
     return Array.isArray(values) && values.length === 2
   }
 }
+export default toNative(QSlider)
 </script>
 
 <style scoped>

@@ -198,13 +198,13 @@ import {socialuniMsgModule} from "socialuni-im-sdk/src/store/SocialMessageModule
 import {getCurrentInstance} from "vue";
 import {onLoad} from "@dcloudio/uni-app";
 
-@toNative
+
 @Component(
     {
       components: {QIcon, QNavbar, SocialuniReportDialog}
     }
 )
-export default class SocialuniMessageView extends Vue {
+class SocialuniMessageView extends Vue {
   public $refs!: {
     // reportDialog: SocialuniReportDialog;
     messageMoreHandleDialog: any;
@@ -222,4 +222,5 @@ export default class SocialuniMessageView extends Vue {
     })
   }
 }
+export default toNative(SocialuniMessageView)
 </script>

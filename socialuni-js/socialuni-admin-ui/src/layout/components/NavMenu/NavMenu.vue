@@ -20,11 +20,11 @@ import DevAccountRO from '@/model/base/DevAccountRO'
 
 const userStore = namespace('user')
 
-@toNative
+
 @Component({
   components: { NavMenuItem }
 })
-export default class NavMenu extends Vue {
+class NavMenu extends Vue {
   @userStore.State('user') user: DevAccountRO
 
   /*  @userStore.State('user')
@@ -67,4 +67,5 @@ export default class NavMenu extends Vue {
     // userModule.userLoginOut()
   }
 }
+export default toNative(NavMenu)
 </script>

@@ -33,11 +33,11 @@ import {constantRoutes} from "@/router/router.ts";
 import CommonEventUtil from "qing-compat-js/src/util/CommonEventUtil.ts";
 import QScroll from "qingjs-ui/src/components/QScroll.vue";
 
-@toNative
+
 @Component({
   components: {SUserNavBar, QNavMenu, QScroll}
 })
-export default class App extends Vue {
+class App extends Vue {
 
 
   get menus() {
@@ -50,4 +50,5 @@ export default class App extends Vue {
     // CommonEventUtil.emit('appScrollToLower')
   }
 }
+export default toNative(App)
 </script>

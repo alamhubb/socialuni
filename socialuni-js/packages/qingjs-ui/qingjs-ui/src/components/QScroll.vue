@@ -7,14 +7,15 @@
 <script lang="ts">
 import {Component,Vue, toNative} from 'vue-facing-decorator'
 
-@toNative
+
 @Component({
 })
-export default class QScroll extends Vue {
+class QScroll extends Vue {
   $refs: {
     scroll: HTMLElement
   }
 }
+export default toNative(QScroll)
 </script>
 <style lang="scss">
 /*调整滚动条样式*/

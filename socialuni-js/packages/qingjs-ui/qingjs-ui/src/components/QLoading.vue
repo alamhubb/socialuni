@@ -17,10 +17,11 @@
 <script lang="ts">
 import { Emit, Component, Prop, Vue , toNative} from 'vue-facing-decorator'
 
-@toNative
+
 @Component({})
-export default class QLoading extends Vue {
+class QLoading extends Vue {
 }
+export default toNative(QLoading)
 </script>
 <style lang="scss">
 .u-loading-icon {

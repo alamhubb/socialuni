@@ -28,7 +28,7 @@ import SocialuniMusicAPI from "socialuni-music-sdk/src/api/SocialuniMusicAPI";
 import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
 import MusicPlayer from "socialuni-music-ui-h5/src/components/MusicPlayer.vue";
 
-@toNative
+
 @Component({
   components: {
     MusicPlayer,
@@ -36,7 +36,7 @@ import MusicPlayer from "socialuni-music-ui-h5/src/components/MusicPlayer.vue";
     SocialuniMsgViewH5,
   }
 })
-export default class SocialuniChatPage extends Vue {
+class SocialuniChatPage extends Vue {
 
   created() {
     this.initRoomId()
@@ -61,4 +61,5 @@ export default class SocialuniChatPage extends Vue {
 
   }
 }
+export default toNative(SocialuniChatPage)
 </script>

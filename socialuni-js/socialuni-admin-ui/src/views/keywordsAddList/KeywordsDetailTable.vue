@@ -131,9 +131,9 @@
 import { Component, Prop, Vue , toNative} from 'vue-facing-decorator'
 import keywordsVO from '@/model/violateWord/KeywordsVO'
 
-@toNative
+
 @Component
-export default class KeywordsDetailTable extends Vue {
+class KeywordsDetailTable extends Vue {
   @Prop()
   keywords: keywordsVO[]
 
@@ -185,6 +185,7 @@ export default class KeywordsDetailTable extends Vue {
     })*/
   }
 }
+export default toNative(KeywordsDetailTable)
 </script>
 
 <style scoped>

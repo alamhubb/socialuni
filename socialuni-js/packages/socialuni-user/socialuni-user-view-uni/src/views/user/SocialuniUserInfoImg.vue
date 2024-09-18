@@ -64,11 +64,11 @@ import SocialuniUserRO from "socialuni-api-base/src/model/user/SocialuniUserRO";
 import {socialuniAppUserModule} from "socialuni-user-sdk/src/store/SocialuniAppUserModule";
 import SocialuniUserImgAPI from "socialuni-user-api/src/api/SocialuniUserImgAPI";
 
-@toNative
+
 @Component({
   components: {QIcon, SocialuniReportDialog}
 })
-export default class SocialuniUserInfoImg extends Vue {
+class SocialuniUserInfoImg extends Vue {
   $refs!: {
     reportDialog: SocialuniReportDialog;
   }
@@ -159,4 +159,5 @@ export default class SocialuniUserInfoImg extends Vue {
     UserPageUtil.toUserImgList(this.user.id)
   }
 }
+export default toNative(SocialuniUserInfoImg)
 </script>

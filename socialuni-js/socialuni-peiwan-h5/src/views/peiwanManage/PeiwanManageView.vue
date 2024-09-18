@@ -119,11 +119,11 @@ import SocialuniPeiwanAdminAPI from "socialuni-peiwan-api/src/api/SocialuniPeiwa
 import UUIDUtil from "qing-util/src/util/UUIDUtil";
 
 
-@toNative
+
 @Component({
   components: {SDialog, Plus}
 })
-export default class PeiwanManageView extends Vue {
+class PeiwanManageView extends Vue {
   $refs: {
     mapDialog: SDialog
   }
@@ -287,4 +287,5 @@ export default class PeiwanManageView extends Vue {
     })
   }
 }
+export default toNative(PeiwanManageView)
 </script>

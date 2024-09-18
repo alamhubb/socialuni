@@ -105,11 +105,11 @@ import QIcon from "qingjs-ui/src/components/QIcon.vue";
 import MusicPlayerSongPlayingInfoRO from "socialuni-music-sdk/src/model/MusicPlayerSongPlayingInfoRO";
 import DateUtil from "qing-util/src/util/DateUtil";
 
-@toNative
+
 @Component({
   components: {QIcon, QLoadMore, QEnumLink, TalkAddView, QTag, TalkItem, MsgInput, QDialog}
 })
-export default class MusicList extends Vue {
+class MusicList extends Vue {
   $refs: {
     table: ElTable
   }
@@ -147,4 +147,5 @@ export default class MusicList extends Vue {
     console.log(args)
   }
 }
+export default toNative(MusicList)
 </script>

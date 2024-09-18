@@ -40,7 +40,7 @@ import SocialuniUserDetailView from "socialuni-user-view-uni/src/views/user/Soci
 import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
 import {socialuniUserDetailViewService} from "socialuni-user-sdk/src/logic/SocialuniUserDetailViewService";
 
-@toNative
+
 @Component({
   components: {
     QPopup,
@@ -50,7 +50,7 @@ import {socialuniUserDetailViewService} from "socialuni-user-sdk/src/logic/Socia
     SocialuniCommunityUserDetailView
   }
 })
-export default class UserDetailPage extends Vue {
+class UserDetailPage extends Vue {
   $refs: {
     moreActionMenu: QPopup
   }
@@ -106,4 +106,5 @@ export default class UserDetailPage extends Vue {
   }
 
 }
+export default toNative(UserDetailPage)
 </script>

@@ -98,9 +98,9 @@ import { ElForm } from 'element-ui/types/form'
 import { userModule } from '@/store'
 
 const userStore = namespace('user')
-@toNative
+
 @Component
-export default class DevInfoPage extends Vue {
+class DevInfoPage extends Vue {
   $refs: {
     devForm: ElForm
   }
@@ -172,4 +172,5 @@ export default class DevInfoPage extends Vue {
     return !!this.user.secretKey
   }
 }
+export default toNative(DevInfoPage)
 </script>

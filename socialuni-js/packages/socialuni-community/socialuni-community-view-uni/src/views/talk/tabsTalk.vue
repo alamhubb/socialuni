@@ -149,7 +149,7 @@ import {socialCircleModule} from "socialuni-community-sdk/src/store/SocialCircle
 import SocialuniPageQueryUtil from "socialuni-api-base/src/model/common/SocialuniPageQueryUtil";
 
 // todo 后台可控制是否显示轮播图
-@toNative
+
 @Component({
   components: {
     SocialTalkFilterDialog,
@@ -162,7 +162,7 @@ import SocialuniPageQueryUtil from "socialuni-api-base/src/model/common/Socialun
     TalkItem
   }
 })
-export default class TabsTalk extends Vue {
+class TabsTalk extends Vue {
   $refs: {
     pullRefresh: QPullRefresh
     talkFilterDialog: SocialTalkFilterDialog
@@ -496,4 +496,5 @@ export default class TabsTalk extends Vue {
     }
   }
 }
+export default toNative(TabsTalk)
 </script>

@@ -138,11 +138,11 @@ import ImgFileVO from "socialuni-admin-api/src/model/community/ImgFileVO";
 import resData from "./resdata.json"
 import SocialuniPeiwanAdminAPI from "socialuni-peiwan-api/src/api/SocialuniPeiwanAdminAPI";
 
-@toNative
+
 @Component({
     components: {QSelect, QDialog, Plus, QTableColumn, QTableInput, QTable, QTableSelect, QLabelItem}
 })
-export default class PeiwanManageView extends Vue {
+class PeiwanManageView extends Vue {
     $refs: {
         dataTable: QTable
     }
@@ -364,4 +364,5 @@ export default class PeiwanManageView extends Vue {
         imgs.unshift(img)
     }
 }
+export default toNative(PeiwanManageView)
 </script>

@@ -74,9 +74,9 @@ import type {ElTree} from "element-ui/types/tree";
  *
  * 在数据源业务基础上，封装基础table
  */
-@toNative
+
 @Component
-export default class YTree extends Vue {
+class YTree extends Vue {
   $refs: {
     tree: ElTree<any, any>
   }
@@ -101,4 +101,5 @@ export default class YTree extends Vue {
     this.$refs.tree.filter(value)
   }
 }
+export default toNative(YTree)
 </script>

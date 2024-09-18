@@ -37,13 +37,13 @@ import QButton from "./QButton.vue";
 /*
 显示出来已经选了的城市，给她画上钩
 * */
-@toNative
+
 @Component({
   components: {
     QModel, QButton
   }
 })
-export default class QPopup extends Vue {
+class QPopup extends Vue {
   //如果是头顶或者底部则不为width100
   @Prop({default: ''}) readonly position: string
   @Prop({default: ''}) readonly title: string
@@ -94,6 +94,7 @@ export default class QPopup extends Vue {
   //下的话宽度100，中的话宽度90
   //下的话col-end 中的话 row-all-center
 }
+export default toNative(QPopup)
 </script>
 <style lang="scss">
 //model index 以100开始

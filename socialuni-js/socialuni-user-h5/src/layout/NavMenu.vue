@@ -10,9 +10,9 @@
 import { Component, Vue , toNative} from 'vue-facing-decorator'
 import { menuRoutes } from '@/router'
 
-@toNative
+
 @Component({})
-export default class NavMenu extends Vue {
+class NavMenu extends Vue {
   // 是x(横向,水平)轴布局
   isXAxisLayout = false
 
@@ -21,5 +21,6 @@ export default class NavMenu extends Vue {
   }
 
 }
+export default toNative(NavMenu)
 </script>
 

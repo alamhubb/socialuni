@@ -24,9 +24,9 @@
 import {Component, Prop, Vue, toNative} from 'vue-facing-decorator';
 import MessageVO from "socialuni-im-api/src/model/RO/MessageVO";
 
-@toNative
+
 @Component({})
-export default class MessageItemContent extends Vue {
+class MessageItemContent extends Vue {
   @Prop() msg: MessageVO
 
   previewImage(url) {
@@ -36,4 +36,5 @@ export default class MessageItemContent extends Vue {
     })
   }
 }
+export default toNative(MessageItemContent)
 </script>

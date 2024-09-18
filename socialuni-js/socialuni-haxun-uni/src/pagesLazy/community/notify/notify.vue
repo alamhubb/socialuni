@@ -92,9 +92,9 @@ import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModul
  * 取消身份认证功能
  * todo 需要支持发表情,数据库字段，img字段img改为了src, 所有被封禁的用户允许登录查看，但是不允许操作，提示账号已被封禁
  */
-@toNative
+
 @Component({components: {QButton}})
-export default class NotifyPage extends Vue {
+class NotifyPage extends Vue {
   notifies: NotifyVO<any>[] = []
 
   SocialuniConstStatus = SocialuniConstStatus
@@ -135,4 +135,5 @@ export default class NotifyPage extends Vue {
   }
 
 }
+export default toNative(NotifyPage)
 </script>

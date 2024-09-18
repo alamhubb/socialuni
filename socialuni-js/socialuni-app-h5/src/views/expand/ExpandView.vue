@@ -7,12 +7,13 @@
 <script lang="ts">
 import { Component, Vue , toNative} from 'vue-facing-decorator';
 
-@toNative
+
 @Component({})
-export default class ExpandView extends Vue {
+class ExpandView extends Vue {
 
   created(){
   }
 
 }
+export default toNative(ExpandView)
 </script>

@@ -30,9 +30,9 @@ import SelectorQuery = UniApp.SelectorQuery
 import CommonUtil from "qing-util/src/util/CommonUtil";
 import UUIDUtil from "qing-util/src/util/UUIDUtil";
 
-@toNative
+
 @Component({})
-export default class QTabs extends Vue {
+class QTabs extends Vue {
   //line、bar、card
   @Prop({
     default: 'line',
@@ -194,4 +194,5 @@ export default class QTabs extends Vue {
     query.exec()
   }
 }
+export default toNative(QTabs)
 </script>

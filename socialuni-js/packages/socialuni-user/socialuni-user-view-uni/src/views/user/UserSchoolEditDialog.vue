@@ -41,11 +41,11 @@ import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserMod
 import SocialuniUserExpandAPI from "socialuni-user-api/src/api/SocialuniUserExpandAPI";
 import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 
-@toNative
+
 @Component({
   components: {QSelect, QIcon, QPopup, QSearch}
 })
-export default class UserSchoolEditDialog extends Vue {
+class UserSchoolEditDialog extends Vue {
   $refs!: {
     reportDialog: any;
     editPopup: any;
@@ -96,4 +96,5 @@ export default class UserSchoolEditDialog extends Vue {
     }
   }
 }
+export default toNative(UserSchoolEditDialog)
 </script>

@@ -112,7 +112,7 @@ import PinyinUtil from "@/util/PinyinUtil.ts";
 import ToastUtil from "qing-compat-js-h5/src/util/ToastUtil.ts";
 import WindowUtil from "@/util/WindowUtil.ts";
 
-@toNative
+
 @Component({
   components: {
     VueDragResize,
@@ -130,7 +130,7 @@ import WindowUtil from "@/util/WindowUtil.ts";
     UploadFilled, FolderOpened
   }
 })
-export default class MessageView extends Vue {
+class MessageView extends Vue {
   $refs: {
     upload: QUpload
     form: Elform
@@ -202,6 +202,7 @@ export default class MessageView extends Vue {
     })
   }
 }
+export default toNative(MessageView)
 </script>
 <style lang="scss">
 h2 {

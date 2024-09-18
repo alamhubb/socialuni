@@ -42,9 +42,9 @@ import ResultRO from 'socialuni-api-base/src/model/social/ResultRO'
 import TagAPI from "socialuni-community-api/src/api/TagAPI";
 import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 
-@toNative
+
 @Component({})
-export default class SocialTagAdd extends Vue {
+class SocialTagAdd extends Vue {
   // tag名称
   tagName = ''
   // tag描述
@@ -76,4 +76,5 @@ export default class SocialTagAdd extends Vue {
     this.tagName = ''
   }
 }
+export default toNative(SocialTagAdd)
 </script>

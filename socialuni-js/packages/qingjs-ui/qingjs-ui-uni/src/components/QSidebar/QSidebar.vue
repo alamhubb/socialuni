@@ -36,9 +36,9 @@ import UUIDUtil from "qing-util/src/util/UUIDUtil";
 /*
 显示出来已经选了的城市，给她画上钩
 * */
-@toNative
+
 @Component({})
-export default class QSidebar extends Vue {
+class QSidebar extends Vue {
   multipleSlots = true
   /**
    * 避免组件重复，设置uuid
@@ -213,4 +213,5 @@ export default class QSidebar extends Vue {
     return this.componentHeight + 'px'
   }
 }
+export default toNative(QSidebar)
 </script>

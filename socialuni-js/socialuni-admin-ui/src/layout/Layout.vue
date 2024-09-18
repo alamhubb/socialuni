@@ -19,12 +19,13 @@ import NavMenu from '@/layout/components/NavMenu/NavMenu.vue'
 import NavBreadcrumb from '@/layout/components/NavBreadcrumb.vue'
 import NavBar from '@/layout/NavBar.vue'
 
-@toNative
+
 @Component({
   components: { NavBar, NavBreadcrumb, NavMenu }
 })
-export default class Layout extends Vue {
+class Layout extends Vue {
   // 是x(横向,水平)轴布局
   isXAxisLayout = false
 }
+export default toNative(Layout)
 </script>

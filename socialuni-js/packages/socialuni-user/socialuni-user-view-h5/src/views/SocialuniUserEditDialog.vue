@@ -13,11 +13,11 @@ import SocialuniUserEditView from "./SocialuniUserEditView.vue";
 import socialuniUserEditViewDialogService from "socialuni-user-sdk/src/logic/SocialuniUserEditViewDialogService";
 import {getCurrentInstance} from "vue";
 
-@toNative
+
 @Component({
   components: {SocialuniUserEditView, QDialog, SButton}
 })
-export default class SocialuniUserEditDialog extends Vue {
+class SocialuniUserEditDialog extends Vue {
   created() {
     socialuniUserEditViewDialogService.initService(this)
   }
@@ -30,4 +30,5 @@ export default class SocialuniUserEditDialog extends Vue {
     return socialuniUserEditViewDialogService
   }
 }
+export default toNative(SocialuniUserEditDialog)
 </script>

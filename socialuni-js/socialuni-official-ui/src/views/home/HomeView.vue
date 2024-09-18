@@ -90,10 +90,11 @@ import {Component, Vue, toNative} from 'vue-facing-decorator';
 import socialuniAppRequest from "socialuni-app-api/src/socialuniAppRequest.ts";
 import QButton from "qingjs-ui/src/components/QButton.vue";
 
-@toNative
+
 @Component({
   components: {QButton}
 })
-export default class HomeView extends Vue {
+class HomeView extends Vue {
 }
+export default toNative(HomeView)
 </script>

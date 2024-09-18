@@ -62,14 +62,14 @@ import SocialuniUserSchoolInfo from "socialuni-user-view-uni/SocialuniUserSchool
 import socialuniImRequest from "socialuni-im-api/src/api/socialuniImRequest";
 import SocialuniUserRO from "socialuni-api-base/src/model/user/SocialuniUserRO";
 
-@toNative
+
 @Component({
   components: {
     SocialuniUserInfoImg, QIcon, SocialuniUserSchoolInfo,
     MineView
   }
 })
-export default class MinePage extends Vue {
+class MinePage extends Vue {
 
   created() {
     this.queryCpInfo()
@@ -107,4 +107,5 @@ export default class MinePage extends Vue {
   }
 
 }
+export default toNative(MinePage)
 </script>

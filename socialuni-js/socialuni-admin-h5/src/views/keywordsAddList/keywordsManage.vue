@@ -37,11 +37,11 @@ import TriggerDetailTable from '@/views/keywordManage/TriggerDetailTable.vue'
 // 违规率、文本违规率、拼音违规率
 
 // 不违规率、文本不违规率、拼音不违规率
-@toNative
+
 @Component({
   components: { TriggerDetailTable, KeywordsDetailTable }
 })
-export default class ViolationHistoryPage extends Vue {
+class ViolationHistoryPage extends Vue {
   tempKeywords: keywordsVO[] = []
   keywords: keywordsVO[] = []
 
@@ -711,6 +711,7 @@ export default class ViolationHistoryPage extends Vue {
     KeywordsManageAPI.testKeywordsAPI()
   }
 }
+export default toNative(ViolationHistoryPage)
 </script>
 
 <style scoped>

@@ -6,12 +6,13 @@
 import { Component, Vue , toNative} from 'vue-facing-decorator'
 import SocialuniCoinRecordView from 'socialuni-user-view-uni/src/views/user/coin/SocialuniCoinRecordView.vue'
 
-@toNative
+
 @Component({
   components: {
     SocialuniCoinRecordView
   }
 })
-export default class SocialuniCoinRecordPage extends Vue {
+class SocialuniCoinRecordPage extends Vue {
 }
+export default toNative(SocialuniCoinRecordPage)
 </script>

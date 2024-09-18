@@ -36,11 +36,11 @@ import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import ReportAPI from "socialuni-app-api/src/api/ReportAPI";
 import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
 
-@toNative
+
 @Component({
     components: {QPopup}
 })
-export default class SocialuniReportDialog extends Vue {
+class SocialuniReportDialog extends Vue {
     $refs!: {
         reportDialog: QPopup;
     }
@@ -93,6 +93,5 @@ export default class SocialuniReportDialog extends Vue {
         return this.reportContentId
     }
 }
-
-
+export default toNative(SocialuniReportDialog)
 </script>

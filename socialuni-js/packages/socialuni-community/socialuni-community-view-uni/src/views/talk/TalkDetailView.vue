@@ -37,7 +37,7 @@ import TalkItem from "socialuni-community-ui/src/components/talkItem/TalkItem.vu
 import TalkOperate from "socialuni-community-view-uni/src/views/talk/talkOperate.vue";
 import QNavbar from "qingjs-ui-uni/src/components/QNavbar/QNavbar.vue";
 
-@toNative
+
 @Component({
   components: {
     QNavbar,
@@ -47,7 +47,7 @@ import QNavbar from "qingjs-ui-uni/src/components/QNavbar/QNavbar.vue";
     TalkOperate
   }
 })
-export default class TalkDetail extends Vue {
+class TalkDetail extends Vue {
   talk: TalkVO = null
   showMsgInput = false
 
@@ -87,5 +87,6 @@ export default class TalkDetail extends Vue {
     this.showMsgInput = false
   }
 }
+export default toNative(TalkDetail)
 </script>
 

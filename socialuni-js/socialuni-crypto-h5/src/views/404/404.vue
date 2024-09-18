@@ -7,8 +7,9 @@
 <script lang="ts">
 import { Component, Vue , toNative} from 'vue-facing-decorator'
 
-@toNative
+
 @Component({})
-export default class Page404 extends Vue {
+class Page404 extends Vue {
 }
+export default toNative(Page404)
 </script>

@@ -9,11 +9,11 @@ import {Component, Vue, toNative} from 'vue-facing-decorator'
 import SocialuniLoginView from "socialuni-user-view-h5/src/views/SocialuniLoginView.vue";
 import QingAppUtil from "qing-compat-js/src/util/QingAppUtil.ts";
 
-@toNative
+
 @Component({
   components: {SocialuniLoginView}
 })
-export default class SocialuniLoginPage extends Vue {
+class SocialuniLoginPage extends Vue {
   loginSuccess(res) {
     console.log(res)
     window.parent.postMessage(res, '*')
@@ -23,4 +23,5 @@ export default class SocialuniLoginPage extends Vue {
     this.$refs.loginDialog.close()
   }
 }
+export default toNative(SocialuniLoginPage)
 </script>

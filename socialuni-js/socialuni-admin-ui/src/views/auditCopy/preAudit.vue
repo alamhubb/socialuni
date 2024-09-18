@@ -256,9 +256,9 @@ import TalkAPI from '@/api/TalkAPI'
 import { Message } from 'element-ui'
 import ViolateType from '@/constant/ViolateType'
 
-@toNative
+
 @Component
-export default class PreAuditPage extends Vue {
+class PreAuditPage extends Vue {
   reports: ReportVO[] = []
   imgUrl: string = process.env.VUE_APP_COS_URL
   violateType: typeof ViolateType = ViolateType
@@ -412,6 +412,7 @@ export default class PreAuditPage extends Vue {
     )
   }
 }
+export default toNative(PreAuditPage)
 </script>
 
 <style scoped>

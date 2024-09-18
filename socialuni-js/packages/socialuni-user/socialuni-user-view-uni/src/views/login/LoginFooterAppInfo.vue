@@ -20,11 +20,11 @@ import QIcon from "qingjs-ui/src/components/QIcon.vue";
 import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import SkipUrlConst from "socialuni-app-sdk/src/constant/SkipUrlConst";
 
-@toNative
+
 @Component({
   components: {QIcon}
 })
-export default class LoginFooterAppInfo extends Vue {
+class LoginFooterAppInfo extends Vue {
   get isMpQQ() {
     return socialuniSystemModule.isMpQQ
   }
@@ -41,4 +41,5 @@ export default class LoginFooterAppInfo extends Vue {
     QingAppUtil.NativeUtil.textCopy(this.serviceWeChat, '客服联系方式已复制')
   }
 }
+export default toNative(LoginFooterAppInfo)
 </script>

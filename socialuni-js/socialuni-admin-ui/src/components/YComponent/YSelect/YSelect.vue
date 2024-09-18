@@ -32,9 +32,9 @@ import { Component, Emit, Model, Prop, Vue , toNative} from 'vue-facing-decorato
  *
  * 封装select
  */
-@toNative
+
 @Component
-export default class YSelect extends Vue {
+class YSelect extends Vue {
   $refs: {
     select: ElSelect;
   }
@@ -99,4 +99,5 @@ export default class YSelect extends Vue {
     this.$emit('focus')
   }
 }
+export default toNative(YSelect)
 </script>

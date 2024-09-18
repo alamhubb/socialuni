@@ -7,12 +7,13 @@
 <script lang="ts">
 import { Component, Vue , toNative} from 'vue-facing-decorator';
 
-@toNative
+
 @Component({
     components: {}
 })
-export default class MinePage extends Vue {
+class MinePage extends Vue {
 
 
 }
+export default toNative(MinePage)
 </script>

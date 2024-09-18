@@ -132,9 +132,9 @@ import UserIdCard from '@/model/UserIdCard'
 import CommonStatus from '@/constant/CommonStatus'
 import ObjectUtils from '@/utils/ObjectUtils'
 
-@toNative
+
 @Component({})
-export default class Review extends Vue {
+class Review extends Vue {
     data: number [] = [1, 2, 3, 4, 5]
     options: number [] = [1, 2, 3, 4, 5]
     value = 1
@@ -223,4 +223,5 @@ export default class Review extends Vue {
       this.previewImgs = nextAry.concat(preAry)
     }
 }
+export default toNative(Review)
 </script>

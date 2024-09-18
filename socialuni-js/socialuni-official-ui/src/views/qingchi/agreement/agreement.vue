@@ -20,13 +20,13 @@
   //@ts-ignore
   import agreement from './agreement.md'
 
-  @toNative
+
 @Component({
     components: {
       QMarkdown
     }
   })
-  export default class AgreementVue extends Vue {
+  class AgreementVue extends Vue {
     markdown = agreement
 
     /*created() {
@@ -35,6 +35,7 @@
       })
     }*/
   }
+export default toNative(AgreementVue)
 </script>
 <style>
     .markdown-body {

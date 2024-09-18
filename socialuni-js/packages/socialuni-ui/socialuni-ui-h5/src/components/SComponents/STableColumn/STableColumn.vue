@@ -84,11 +84,11 @@ import SSelect from "../SSelect/SSelect.vue";
  *
  * 在数据源业务基础上，封装基础table
  */
-@toNative
+
 @Component({
     components: {SSelect}
 })
-export default class STableColumn extends Vue {
+class STableColumn extends Vue {
     @Prop({default: 'label'}) readonly type: string
     // @Prop({ default: false, type: Boolean }) readonly disabled: boolean
 
@@ -120,4 +120,5 @@ export default class STableColumn extends Vue {
         return index
     }
 }
+export default toNative(STableColumn)
 </script>

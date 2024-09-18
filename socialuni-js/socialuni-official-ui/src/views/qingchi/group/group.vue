@@ -17,13 +17,13 @@
   //@ts-ignore
   import group from './group.md'
 
-  @toNative
+
 @Component({
     components: {
       QMarkdown
     }
   })
-  export default class GroupVue extends Vue {
+  class GroupVue extends Vue {
     markdown = group
 
     /*created() {
@@ -32,6 +32,7 @@
       })
     }*/
   }
+export default toNative(GroupVue)
 </script>
 <style>
     .markdown-body {

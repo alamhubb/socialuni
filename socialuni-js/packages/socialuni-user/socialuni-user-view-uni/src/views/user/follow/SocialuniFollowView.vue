@@ -73,11 +73,11 @@ import SocialGenderTag from "socialuni-user-ui/src/components/SUserGenderTag.vue
 import FollowAPI from "socialuni-community-api/src/api/FollowAPI";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 
-@toNative
+
 @Component({
   components: {QPullRefresh, SocialGenderTag, QTabs}
 })
-export default class SocialuniFollowView extends Vue {
+class SocialuniFollowView extends Vue {
   $refs: {
     pullRefresh: QPullRefresh
   }
@@ -191,4 +191,5 @@ export default class SocialuniFollowView extends Vue {
   }
 
 }
+export default toNative(SocialuniFollowView)
 </script>

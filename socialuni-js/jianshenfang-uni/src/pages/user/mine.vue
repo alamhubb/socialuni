@@ -198,7 +198,7 @@ import SocialGenderTag from "socialuni-user-ui/src/components/SUserGenderTag.vue
 import QRowItem from "qingjs-ui/src/components/QRowItem.vue";
 import QIcon from "qingjs-ui/src/components/QIcon.vue";
 
-@toNative
+
 @Component({
   components: {
     SocialGenderTag,
@@ -207,6 +207,7 @@ import QIcon from "qingjs-ui/src/components/QIcon.vue";
     TalkView
   }
 })
-export default class MinePage extends Vue {
+class MinePage extends Vue {
 }
+export default toNative(MinePage)
 </script>

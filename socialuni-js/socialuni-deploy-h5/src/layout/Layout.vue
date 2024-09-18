@@ -15,12 +15,13 @@
 import { Component, Vue , toNative} from 'vue-facing-decorator'
 import NavMenu from '@/layout/NavMenu.vue'
 
-@toNative
+
 @Component({
     components: {NavMenu}
 })
-export default class Layout extends Vue {
+class Layout extends Vue {
     // 是x(横向,水平)轴布局
     isXAxisLayout = false
 }
+export default toNative(Layout)
 </script>

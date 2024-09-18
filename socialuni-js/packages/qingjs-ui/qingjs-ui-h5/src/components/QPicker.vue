@@ -50,13 +50,13 @@ import ScrollView from "uniapp-web/src/components/ScrollView.vue";
 最后取消选择，还显示当前选择的
 
 * */
-@toNative
+
 @Component({
   components: {
     QRowItem, ScrollView
   }
 })
-export default class QPicker extends Vue {
+class QPicker extends Vue {
   readonly uuid: string = 'u' + UUIDUtil.getUUID()
   @Model('modelValue') readonly value!: any
   @Prop() readonly dataList: any []
@@ -146,6 +146,7 @@ export default class QPicker extends Vue {
     this.input()
   }
 }
+export default toNative(QPicker)
 </script>
 <style lang="scss">
 .q-picker-box {

@@ -9,11 +9,12 @@ import {Component, Vue, toNative} from 'vue-facing-decorator';
 import 'golden-layout/dist/css/goldenlayout-base.css';
 import 'golden-layout/dist/css/themes/goldenlayout-light-theme.css';
 
-@toNative
+
 @Component({
   components: {}
 })
-export default class ChildCom extends Vue {
+class ChildCom extends Vue {
   layoutType = 'row'
 }
+export default toNative(ChildCom)
 </script>

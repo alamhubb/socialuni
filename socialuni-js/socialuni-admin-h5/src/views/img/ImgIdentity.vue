@@ -67,9 +67,9 @@ import Identity from '@/model/user/Identity'
 import ImgIdentityAPI from '@/api/ImgIdentityAPI'
 import ViolateType from '@/constant/ViolateType'
 
-@toNative
+
 @Component({})
-export default class ImgIdentity extends Vue {
+class ImgIdentity extends Vue {
     reports: ReportVO[] = []
     imgUrl: string = process.env.VUE_APP_COS_URL
     reportType: string = ViolateType.pornInfo
@@ -109,6 +109,7 @@ export default class ImgIdentity extends Vue {
       return imgUrl
     }
 }
+export default toNative(ImgIdentity)
 </script>
 
 <style scoped>

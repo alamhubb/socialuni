@@ -8,9 +8,9 @@
 import { isExternal } from '@/utils/validate'
 import { Component, Prop, Vue , toNative} from 'vue-facing-decorator'
 
-@toNative
+
 @Component
-export default class NavEnumLink extends Vue {
+class NavEnumLink extends Vue {
   @Prop() to: string
 
   get isExternal() {
@@ -36,4 +36,5 @@ export default class NavEnumLink extends Vue {
     }
   }
 }
+export default toNative(NavEnumLink)
 </script>

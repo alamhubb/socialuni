@@ -35,11 +35,11 @@ import {onLoad} from "@dcloudio/uni-app";
 import SocialuniUserImgAPI from "socialuni-user-api/src/api/SocialuniUserImgAPI";
 import {socialuniAppUserModule} from "socialuni-user-sdk/src/store/SocialuniAppUserModule";
 
-@toNative
+
 @Component({
   components: {SocialuniReportDialog}
 })
-export default class UserImgListPage extends Vue {
+class UserImgListPage extends Vue {
   $refs!: {
     reportDialog: SocialuniReportDialog;
   }
@@ -128,4 +128,5 @@ export default class UserImgListPage extends Vue {
     this.frontDeleteImg(imgIndex)
   }
 }
+export default toNative(UserImgListPage)
 </script>

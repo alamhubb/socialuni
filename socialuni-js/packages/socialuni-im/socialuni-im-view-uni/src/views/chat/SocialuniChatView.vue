@@ -132,11 +132,11 @@ import {
 import {getCurrentInstance} from "vue";
 import QingRouterUtil from "qing-compat-js/src/util/QingRouterUtil";
 
-@toNative
+
 @Component({
   components: {QSearch, QInput, QIcon, QNavbar, QRowItem}
 })
-export default class SocialuniChatView extends Vue {
+class SocialuniChatView extends Vue {
 
   viewService = socialuniChatViewService
 
@@ -148,4 +148,5 @@ export default class SocialuniChatView extends Vue {
     QingRouterUtil.nativeUtil.push('/pagesLazy/community/notify/notify')
   }
 }
+export default toNative(SocialuniChatView)
 </script>

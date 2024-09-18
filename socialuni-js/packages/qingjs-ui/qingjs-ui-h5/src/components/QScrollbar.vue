@@ -8,9 +8,9 @@
 import {Component, Vue, toNative} from 'vue-facing-decorator'
 import {ElScrollbar} from "element-plus";
 
-@toNative
+
 @Component({})
-export default class QScrollbar extends Vue {
+class QScrollbar extends Vue {
   $refs: {
     scrollbar: ElScrollbar
   }
@@ -22,8 +22,7 @@ export default class QScrollbar extends Vue {
     console.log('chufale123123')
   }
 }
-
-
+export default toNative(QScrollbar)
 </script>
 <style lang="scss">
 .overflow-x-hidden > .el-scrollbar__wrap {

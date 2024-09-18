@@ -107,11 +107,11 @@ import UserIdentityAuditAPI from '@/api/UserIdentityAuditAPI'
 import UserIdentityAuditRO from '@/model/RO/user/identity/UserIdentityAuditRO'
 import DataTable from '@/components/dataTable/DataTable.vue'
 
-@toNative
+
 @Component({
   components: { DataTable }
 })
-export default class UserIdentityAuditView extends Vue {
+class UserIdentityAuditView extends Vue {
   userIdentities: UserIdentityAuditRO[] = []
 
   created() {
@@ -132,6 +132,7 @@ export default class UserIdentityAuditView extends Vue {
     this.queryTableData()
   }
 }
+export default toNative(UserIdentityAuditView)
 </script>
 
 <style scoped>

@@ -5,12 +5,11 @@
 <script lang="ts">
 import {Emit, Component, Vue, toNative} from 'vue-facing-decorator'
 
-@toNative
+
 @Component({
     components: {}
 })
-export default class SocialuniAppLoad extends Vue {
+class SocialuniAppLoad extends Vue {
 }
-
-
+export default toNative(SocialuniAppLoad)
 </script>

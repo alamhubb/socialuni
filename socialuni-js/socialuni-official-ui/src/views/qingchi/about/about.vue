@@ -72,15 +72,16 @@ import QMarkdown from 'qing-markdown/src/components/q-markdown/q-markdown'
 //@ts-ignore
 import gzhInfo from './about.md'
 
-@toNative
+
 @Component({
   components: {
     QMarkdown
   }
 })
-export default class AboutVue extends Vue {
+class AboutVue extends Vue {
   markdown = gzhInfo
 }
+export default toNative(AboutVue)
 </script>
 <style>
 .markdown-body {

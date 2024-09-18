@@ -123,11 +123,11 @@ import PageableRO from '@/components/YComponent/model/PageableRO'
 import ResultRO from '@/components/YComponent/model/ResultRO'
 import YSelect from '@/components/YComponent/YSelect/YSelect.vue'
 
-@toNative
+
 @Component({
   components: { YSelect, YPagination, YTable }
 })
-export default class TableGroup extends Vue {
+class TableGroup extends Vue {
   $refs: {
     table: any
     yTable: YTable
@@ -330,4 +330,5 @@ export default class TableGroup extends Vue {
     return null
   }
 }
+export default toNative(TableGroup)
 </script>

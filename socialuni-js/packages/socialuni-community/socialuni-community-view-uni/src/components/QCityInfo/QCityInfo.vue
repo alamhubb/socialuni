@@ -28,14 +28,14 @@ import QCityPicker from "../QCityPicker/QCityPicker.vue";
 import QIcon from "qingjs-ui/src/components/QIcon.vue";
 import DistrictVO from "socialuni-api-base/src/model/DistrictVO";
 
-@toNative
+
 @Component({
   components: {
     QCityPicker,
     QIcon
   }
 })
-export default class QCityInfo extends Vue {
+class QCityInfo extends Vue {
   $refs: {
     cityPicker: QCityPicker
   }
@@ -57,4 +57,5 @@ export default class QCityInfo extends Vue {
     return value
   }
 }
+export default toNative(QCityInfo)
 </script>

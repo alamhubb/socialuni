@@ -49,7 +49,7 @@ import UserCheckUtil from "socialuni-user-sdk/src/util/UserCheckUtil";
 import PlatformUtils from "socialuni-user-sdk/src/util/PlatformUtils";
 
 // todo 后台可控制是否显示轮播图
-@toNative
+
 @Component({
   components: {
     MusicList,
@@ -61,7 +61,7 @@ import PlatformUtils from "socialuni-user-sdk/src/util/PlatformUtils";
     TalkItem
   }
 })
-export default class SocialuniCommentInputDialog extends Vue {
+class SocialuniCommentInputDialog extends Vue {
   $refs: {
     dialog: QDialog
   }
@@ -129,4 +129,5 @@ export default class SocialuniCommentInputDialog extends Vue {
     socialTalkModule.inputContentBlur()
   }
 }
+export default toNative(SocialuniCommentInputDialog)
 </script>

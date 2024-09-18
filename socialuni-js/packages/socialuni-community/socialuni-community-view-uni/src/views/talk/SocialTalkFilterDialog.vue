@@ -109,7 +109,7 @@ import SocialCircleRO from "socialuni-api-base/src/model/community/circle/Social
 import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 
 
-@toNative
+
 @Component({
   components: {
     SocialTagPicker,
@@ -123,7 +123,7 @@ import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
     QSlider
   }
 })
-export default class SocialTalkFilterDialog extends Vue {
+class SocialTalkFilterDialog extends Vue {
   $refs: {
     filterDialog: QPopup;
     circleDialog: SocialCirclePicker;
@@ -270,4 +270,5 @@ export default class SocialTalkFilterDialog extends Vue {
     this.$refs.circleDialog.openDialog()
   }
 }
+export default toNative(SocialTalkFilterDialog)
 </script>

@@ -11,14 +11,15 @@ import {Emit, Component, Prop, Vue, toNative} from 'vue-facing-decorator'
 import QLoading from "./QLoading.vue";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 
-@toNative
+
 @Component({
   components: {QLoading}
 })
-export default class QLoadMore extends Vue {
+class QLoadMore extends Vue {
 
   @Prop({default: 'more', type: String}) status: string
 
   loadMoreType: LoadMoreType = LoadMoreType
 }
+export default toNative(QLoadMore)
 </script>

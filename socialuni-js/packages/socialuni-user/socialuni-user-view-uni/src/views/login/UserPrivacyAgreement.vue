@@ -24,9 +24,9 @@ import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserMod
 import SkipUrlConst from "socialuni-app-sdk/src/constant/SkipUrlConst";
 import SocialuniLoginViewService from "socialuni-user-sdk/src/logic/SocialuniLoginViewService";
 
-@toNative
+
 @Component({})
-export default class UserPrivacyAgreement extends Vue {
+class UserPrivacyAgreement extends Vue {
     @Prop() viewService:SocialuniLoginViewService
 
     get user() {
@@ -45,4 +45,5 @@ export default class UserPrivacyAgreement extends Vue {
         return SkipUrlConst.childProtectUrl()
     }
 }
+export default toNative(UserPrivacyAgreement)
 </script>

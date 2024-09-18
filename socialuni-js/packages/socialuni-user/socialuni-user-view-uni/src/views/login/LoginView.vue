@@ -148,7 +148,7 @@ import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfig
 import PasswordUtil from "socialuni-user-sdk/src/util/PasswordUtil";
 import SocialuniLoginService from "socialuni-user-sdk/src/logic/SocialuniLoginService";
 
-@toNative
+
 @Component({
   components: {
     QIcon,
@@ -158,7 +158,7 @@ import SocialuniLoginService from "socialuni-user-sdk/src/logic/SocialuniLoginSe
     LoginFooterAppInfo
   }
 })
-export default class LoginView extends Vue {
+class LoginView extends Vue {
   $refs: {
     loginForm: PhoneLoginForm
   }
@@ -336,4 +336,5 @@ export default class LoginView extends Vue {
       return Alert.hint('请仔细阅读用户协议、隐私政策等内容后勾选同意')
     }*/
 }
+export default toNative(LoginView)
 </script>

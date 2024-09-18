@@ -12,11 +12,11 @@
 import {Component, Emit, Model, Prop, Vue, toNative} from 'vue-facing-decorator'
 import QIcon from "./QIcon.vue";
 
-@toNative
+
 @Component({
   components: {QIcon}
 })
-export default class QInput extends Vue {
+class QInput extends Vue {
   @Model('modelValue') readonly value: string
 
   @Prop({default: false, type: Boolean}) readonly hideClear: boolean
@@ -40,4 +40,5 @@ export default class QInput extends Vue {
     this.input('')
   }
 }
+export default toNative(QInput)
 </script>

@@ -7,10 +7,11 @@
 <script lang="ts">
 import { Component, Vue , toNative} from 'vue-facing-decorator'
 
-@toNative
+
 @Component
-export default class YDiv extends Vue {
+class YDiv extends Vue {
 
 }
+export default toNative(YDiv)
 </script>
 

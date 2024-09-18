@@ -53,9 +53,9 @@ import LoginAPI from "socialuni-admin-api/src/api/LoginAPI";
 import SocialPhoneNumLoginQO from "socialuni-api-base/src/model/phone/SocialPhoneNumLoginQO";
 import SocialuniUserService from "socialuni-user-sdk/src/logic/SocialuniUserService";
 
-@toNative
+
 @Component({components: {SocialuniLoginView}})
-export default class AdminLoginPage extends Vue {
+class AdminLoginPage extends Vue {
   $refs: {
     authCode: ElInput;
   }
@@ -106,4 +106,5 @@ export default class AdminLoginPage extends Vue {
     this.$router.push({path: '/'})
   }
 }
+export default toNative(AdminLoginPage)
 </script>

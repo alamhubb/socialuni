@@ -273,9 +273,9 @@ import ViolateType from '@/constant/ViolateType'
 import request from '@/plugins/request'
 import AdminUserAPI from '@/api/AdminUserAPI'
 
-@toNative
+
 @Component
-export default class ContentAuditView extends Vue {
+class ContentAuditView extends Vue {
   reports: ReportVO[] = []
   imgUrl: string = process.env.VUE_APP_COS_URL
   violateType: typeof ViolateType = ViolateType
@@ -474,6 +474,7 @@ export default class ContentAuditView extends Vue {
     )
   }
 }
+export default toNative(ContentAuditView)
 </script>
 
 <style scoped>

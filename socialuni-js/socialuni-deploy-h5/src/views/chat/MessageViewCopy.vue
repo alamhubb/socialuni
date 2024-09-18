@@ -26,11 +26,11 @@ import {ComponentContainer, ComponentItemConfig, GoldenLayout, ItemType, LayoutC
 import 'golden-layout/dist/css/goldenlayout-base.css';
 import 'golden-layout/dist/css/themes/goldenlayout-light-theme.css';
 
-@toNative
+
 @Component({
   components: {}
 })
-export default class MessageView extends Vue {
+class MessageView extends Vue {
 
   active = 1
 
@@ -84,6 +84,7 @@ export default class MessageView extends Vue {
     ev.preventDefault();
   }
 }
+export default toNative(MessageView)
 </script>
 <style lang="scss">
 h2 {

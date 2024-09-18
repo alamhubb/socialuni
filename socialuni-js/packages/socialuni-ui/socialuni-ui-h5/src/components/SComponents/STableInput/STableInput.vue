@@ -39,11 +39,11 @@ import STableColumn from "../STableColumn/STableColumn.vue";
  *
  * 在数据源业务基础上，封装基础table
  */
-@toNative
+
 @Component({
     components: {STableColumn}
 })
-export default class STableInput extends Vue {
+class STableInput extends Vue {
     @Prop() readonly prop: string
     @Prop() readonly tipProp: string
     @Prop() readonly propFun: Function
@@ -53,4 +53,5 @@ export default class STableInput extends Vue {
     @Prop({default: '请输入'}) readonly placeholder: string
     @Prop({default: true, type: Boolean}) readonly clearable: boolean
 }
+export default toNative(STableInput)
 </script>

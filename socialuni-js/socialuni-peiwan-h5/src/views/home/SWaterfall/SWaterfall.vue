@@ -6,9 +6,9 @@
 import {Component, Prop, Vue, toNative} from 'vue-facing-decorator'
 
 
-@toNative
+
 @Component({})
-export default class SWaterfall extends Vue {
+class SWaterfall extends Vue {
     @Prop({default: 2}) columnNum: number
     @Prop({default: 2}) data: any[]
 
@@ -34,4 +34,5 @@ export default class SWaterfall extends Vue {
     }
 
 }
+export default toNative(SWaterfall)
 </script>

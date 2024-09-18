@@ -110,11 +110,11 @@ import {socialuniSystem} from "@/views/home/SocialuniSystemModule";
 
 export const testm = reactive({window: 0})
 
-@toNative
+
 @Component({
     components: {SDialog, Plus, SScrollbar}
 })
-export default class HomePage extends Vue {
+class HomePage extends Vue {
     $refs: {
         mapDialog: SDialog
     }
@@ -184,4 +184,5 @@ export default class HomePage extends Vue {
     }
 
 }
+export default toNative(HomePage)
 </script>

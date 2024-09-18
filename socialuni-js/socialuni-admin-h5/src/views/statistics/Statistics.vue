@@ -23,9 +23,9 @@
 import { Component, Vue , toNative} from 'vue-facing-decorator'
 import TalkAPI from '@/api/TalkAPI'
 
-@toNative
+
 @Component({})
-export default class StatisticsVue extends Vue {
+class StatisticsVue extends Vue {
     talks: any[] = []
     num = 30
 
@@ -46,6 +46,7 @@ export default class StatisticsVue extends Vue {
       return this.talks.map(item => item[0])
     }
 }
+export default toNative(StatisticsVue)
 </script>
 
 <style scoped>

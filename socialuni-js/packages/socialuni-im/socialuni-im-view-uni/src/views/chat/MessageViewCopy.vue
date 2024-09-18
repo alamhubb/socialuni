@@ -330,13 +330,13 @@ import SocialuniMsgViewLogic from "socialuni-im-sdk/src/viewLogic/SocialuniMsgVi
 import QIcon from "qingjs-ui/src/components/QIcon.vue";
 import QNavbar from "qingjs-ui-uni/src/components/QNavbar/QNavbar.vue";
 
-@toNative
+
 @Component(
     {
         components: {QIcon, QNavbar}
     }
 )
-export default class MessageView extends Vue {
+class MessageView extends Vue {
     public $refs!: {
         // reportDialog: SocialuniReportDialog;
         messageMoreHandleDialog: any;
@@ -825,4 +825,5 @@ export default class MessageView extends Vue {
         QingAppUtil.RouterUtil.goBack()
     }
 }
+export default toNative(MessageView)
 </script>

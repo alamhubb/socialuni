@@ -9,11 +9,11 @@ import {Component, Vue, toNative} from 'vue-facing-decorator';
 import QingAppUtil from "qing-compat-js/src/util/QingAppUtil.ts";
 import WindowEventListener from "qing-util/src/util/WindowEventListener.ts";
 
-@toNative
+
 @Component({
   components: {}
 })
-export default class LoginPage extends Vue {
+class LoginPage extends Vue {
   loginSuccess() {
     // QingAppUtil.ToastUtil.success('登录成功')
     // this.$refs.loginDialog.close()
@@ -28,4 +28,5 @@ export default class LoginPage extends Vue {
     })
   }
 }
+export default toNative(LoginPage)
 </script>

@@ -18,11 +18,11 @@ import QIcon from "qingjs-ui/src/components/QIcon.vue";
 import {socialuniAppUserModule} from "socialuni-user-sdk/src/store/SocialuniAppUserModule";
 import UserSchoolEditDialog from "./src/views/user/UserSchoolEditDialog.vue";
 
-@toNative
+
 @Component({
   components: {QIcon, UserSchoolEditDialog}
 })
-export default class SocialuniUserSchoolInfo extends Vue {
+class SocialuniUserSchoolInfo extends Vue {
   $refs: {
     schoolEditDialog: UserSchoolEditDialog
   }
@@ -35,6 +35,7 @@ export default class SocialuniUserSchoolInfo extends Vue {
     this.$refs.schoolEditDialog.open()
   }
 }
+export default toNative(SocialuniUserSchoolInfo)
 </script>
 
 

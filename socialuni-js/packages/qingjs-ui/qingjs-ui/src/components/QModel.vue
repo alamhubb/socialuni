@@ -12,14 +12,15 @@ import {Emit, Component, Vue, toNative} from 'vue-facing-decorator'
 /*
 显示出来已经选了的城市，给她画上钩
 * */
-@toNative
+
 @Component({})
-export default class QModel extends Vue {
+class QModel extends Vue {
   @Emit()
   click() {
     return
   }
 }
+export default toNative(QModel)
 </script>
 <style lang="scss">
 //model index 以100开始

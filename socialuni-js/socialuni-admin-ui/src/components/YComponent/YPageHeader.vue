@@ -25,11 +25,11 @@
 <script lang="ts">
 import {Component, Prop, Vue, toNative} from 'vue-facing-decorator'
 
-@toNative
+
 @Component
-export default class YPageHeader extends Vue {
+class YPageHeader extends Vue {
   @Prop() title: string
   @Prop({default: false, type: Boolean}) showPiece: boolean
 }
-
+export default toNative(YPageHeader)
 </script>

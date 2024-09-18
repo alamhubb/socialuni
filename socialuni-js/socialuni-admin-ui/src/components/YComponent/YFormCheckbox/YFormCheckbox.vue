@@ -22,9 +22,9 @@ import { Component, Emit, Model, Prop, Vue , toNative} from 'vue-facing-decorato
  *
  * 在数据源业务基础上，封装基础table
  */
-@toNative
+
 @Component
-export default class YFormCheckbox extends Vue {
+class YFormCheckbox extends Vue {
   @Model('change') readonly model!: any
 
   @Prop() readonly label: string
@@ -39,4 +39,5 @@ export default class YFormCheckbox extends Vue {
     return value
   }
 }
+export default toNative(YFormCheckbox)
 </script>

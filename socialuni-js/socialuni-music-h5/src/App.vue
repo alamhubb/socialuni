@@ -68,11 +68,11 @@ import QDialog from "qingjs-ui-h5/src/components/QDialog.vue";
 import CommunityEventConst from "socialuni-community-sdk/src/constant/CommunityEventConst.ts";
 import SocialuniUserEventOn from "socialuni-user-sdk/src/event/SocialuniUserEventOn.ts";
 
-@toNative
+
 @Component({
   components: {SUserNavBar, QNavMenu, QButton, QInput, QScroll, QDialog}
 })
-export default class App extends Vue {
+class App extends Vue {
   $refs: {
     navbar: SUserNavBar
   }
@@ -104,6 +104,7 @@ export default class App extends Vue {
     this.$router.push('/')
   }
 }
+export default toNative(App)
 </script>
 <style>
 .socialuni-navbar-h5 .el-menu-item {

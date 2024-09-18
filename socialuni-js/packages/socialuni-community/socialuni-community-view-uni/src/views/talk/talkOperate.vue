@@ -66,13 +66,13 @@ import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 
 // todo 后台可控制是否显示轮播图
 
-@toNative
+
 @Component({
   components: {
     QPopup
   }
 })
-export default class TalkOperate extends Vue {
+class TalkOperate extends Vue {
   get appConfig() {
     return socialuniConfigModule.appConfig
   }
@@ -210,4 +210,5 @@ export default class TalkOperate extends Vue {
     })
   }
 }
+export default toNative(TalkOperate)
 </script>

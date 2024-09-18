@@ -65,11 +65,11 @@ import QScrollbar from "./QScrollbar.vue";
 import QPageFooter from "./QPageFooter.vue";
 import QIcon from "qingjs-ui/src/components/QIcon.vue";
 
-@toNative
+
 @Component({
   components: {QScrollbar, QPageFooter, QIcon}
 })
-export default class QDialog extends Vue {
+class QDialog extends Vue {
   @Prop({
     type: Boolean,
     default: false
@@ -244,4 +244,5 @@ export default class QDialog extends Vue {
     this.$emit('open')
   }
 }
+export default toNative(QDialog)
 </script>

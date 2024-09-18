@@ -118,9 +118,9 @@ import NumberUtil from '@/utils/NumberUtil'
 import { ElInput } from 'element-ui/types/input'
 import PhoneAPI from '@/api/PhoneAPI'
 
-@toNative
+
 @Component
-export default class LoginPage extends Vue {
+class LoginPage extends Vue {
   $refs: {
     authCode: ElInput;
   }
@@ -217,4 +217,5 @@ export default class LoginPage extends Vue {
     })
   }
 }
+export default toNative(LoginPage)
 </script>

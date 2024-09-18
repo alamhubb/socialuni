@@ -144,11 +144,11 @@ import SocialuniMineUserAPI from "socialuni-user-api/src/api/SocialuniMineUserAP
 import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
 import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserModule";
 
-@toNative
+
 @Component({
   components: {QSelect, QDialog, Plus, QTableColumn, QTableInput, QTable, QTableSelect, QLabelItem}
 })
-export default class OperateUserManage extends Vue {
+class OperateUserManage extends Vue {
   $refs: {
     dataTable: QTable
   }
@@ -373,4 +373,5 @@ export default class OperateUserManage extends Vue {
     imgs.unshift(img)
   }
 }
+export default toNative(OperateUserManage)
 </script>

@@ -8,12 +8,13 @@
 import {Component, Vue, Watch, toNative} from 'vue-facing-decorator'
 import TalkView from "socialuni-community-view-uni/src/views/talk/TalkView.vue"
 
-@toNative
+
 @Component({
   components: {
    TalkView
   }
 })
-export default class TalkPage extends Vue {
+class TalkPage extends Vue {
 }
+export default toNative(TalkPage)
 </script>

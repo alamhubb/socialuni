@@ -7,12 +7,12 @@
 <script lang="ts">
 import { Component, Vue , toNative} from 'vue-facing-decorator'
 
-@toNative
+
 @Component
-export default class YScrollbar extends Vue {
+class YScrollbar extends Vue {
 
 }
-
+export default toNative(YScrollbar)
 </script>
 <style lang="scss">
 .overflow-x-hidden > .el-scrollbar__wrap {

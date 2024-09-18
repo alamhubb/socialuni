@@ -19,9 +19,9 @@ import ImPageUtil from 'socialuni-im-sdk/src/util/ImPageUtil'
 import RouterUtil from 'qing-util/src/util/RouterUtil'
 import ImPagePath from 'socialuni-im-sdk/src/constant/ImPagePath'
 
-@toNative
+
 @Component({})
-export default class LeftWindowView extends Vue {
+class LeftWindowView extends Vue {
 
   menus = ['首页','聊天室','晒自拍']
 
@@ -35,4 +35,5 @@ export default class LeftWindowView extends Vue {
   }
 
 }
+export default toNative(LeftWindowView)
 </script>

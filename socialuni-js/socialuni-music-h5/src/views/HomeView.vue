@@ -11,12 +11,13 @@
 import { Component, Vue , toNative} from 'vue-facing-decorator';
 import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
 
-@toNative
+
 @Component({})
-export default class IndexView extends Vue {
+class IndexView extends Vue {
 
     sendAuthCode(){
         PhoneAPI.sendAuthCodeAPI('1111')
     }
 }
+export default toNative(IndexView)
 </script>

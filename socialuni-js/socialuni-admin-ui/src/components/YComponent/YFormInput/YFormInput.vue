@@ -24,11 +24,11 @@ import YSelect from '@/components/YComponent/YSelect/YSelect.vue'
  *
  * 在数据源业务基础上，封装基础table
  */
-@toNative
+
 @Component({
   components: { YSelect }
 })
-export default class YFormInput extends Vue {
+class YFormInput extends Vue {
   @Model('change') readonly model!: any
 
   @Prop() readonly label: string
@@ -48,4 +48,5 @@ export default class YFormInput extends Vue {
     return value
   }
 }
+export default toNative(YFormInput)
 </script>

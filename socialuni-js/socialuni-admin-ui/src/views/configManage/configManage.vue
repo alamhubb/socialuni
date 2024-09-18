@@ -21,9 +21,9 @@ import request from "@/plugins/request";
 import ConfigVO from "@/model/config/ConfigVO";
 import ReportVO from '@/model/report/ReportVO'
 
-@toNative
+
 @Component
-export default class ConfigManageView extends Vue {
+class ConfigManageView extends Vue {
   configs: ConfigVO[] = []
 
   created() {
@@ -47,6 +47,7 @@ export default class ConfigManageView extends Vue {
     });
   }
 }
+export default toNative(ConfigManageView)
 </script>
 
 <style scoped>

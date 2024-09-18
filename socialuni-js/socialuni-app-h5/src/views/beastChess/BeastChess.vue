@@ -84,11 +84,11 @@ const piece = new Map([
   [PieceEnum.diGouYou, '地沟油'],
 ]);
 
-@toNative
+
 @Component({
   components: {}
 })
-export default class BeastChess extends Vue {
+class BeastChess extends Vue {
 
   self = 1
 
@@ -203,4 +203,5 @@ export default class BeastChess extends Vue {
   }
 
 }
+export default toNative(BeastChess)
 </script>

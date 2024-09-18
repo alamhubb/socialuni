@@ -60,11 +60,11 @@ import {getCurrentInstance} from "vue";
 import {onLoad} from "@dcloudio/uni-app";
 import {socialuniAppUserModule} from "socialuni-user-sdk/src/store/SocialuniAppUserModule";
 
-@toNative
+
 @Component({
   components: {QTabs, QIcon, QButton}
 })
-export default class SocialuniCoinView extends Vue {
+class SocialuniCoinView extends Vue {
   coinPageTypes = SocialuniCoinPageType.allCoinTypes
   currentTabIndex = 0
 
@@ -111,4 +111,5 @@ export default class SocialuniCoinView extends Vue {
     this.checkedPayValue = payValue
   }
 }
+export default toNative(SocialuniCoinView)
 </script>

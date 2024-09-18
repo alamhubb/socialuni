@@ -18,9 +18,9 @@ import {Component, Emit, Model, Prop, Vue, Watch, toNative} from 'vue-facing-dec
  * 获取每一块的高度
  */
 
-@toNative
+
 @Component({})
-export default class YSlides extends Vue {
+class YSlides extends Vue {
   $refs: {
     slides: HTMLDivElement[];
     rightBox: HTMLDivElement;
@@ -186,4 +186,5 @@ export default class YSlides extends Vue {
     this.updateInnerValueAndOutModel(value)
   }
 }
+export default toNative(YSlides)
 </script>

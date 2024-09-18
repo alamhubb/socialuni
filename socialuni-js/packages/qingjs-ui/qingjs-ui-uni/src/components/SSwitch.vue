@@ -10,9 +10,9 @@
 <script lang="ts">
 import {Emit, Model, Component, Vue, toNative} from 'vue-facing-decorator'
 
-@toNative
+
 @Component({})
-export default class SSwitch extends Vue {
+class SSwitch extends Vue {
   @Model('modelValue') modelValue
 
   switchChange({detail}: any) {
@@ -24,4 +24,5 @@ export default class SSwitch extends Vue {
     return value
   }
 }
+export default toNative(SSwitch)
 </script>

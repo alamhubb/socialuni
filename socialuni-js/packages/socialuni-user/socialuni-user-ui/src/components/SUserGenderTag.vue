@@ -23,13 +23,13 @@ import QTag from "qingjs-ui/src/components/QTag.vue";
 import UserUtil from "socialuni-user-sdk/src/util/UserUtil";
 import SocialuniUserRO from "socialuni-api-base/src/model/user/SocialuniUserRO";
 
-@toNative
+
 @Component({
   components: {
     QIcon, QTag
   }
 })
-export default class SUserGenderTag extends Vue {
+class SUserGenderTag extends Vue {
   @Prop() user: SocialuniUserRO
   @Prop({default: false, type: Boolean}) border: boolean
 
@@ -37,4 +37,5 @@ export default class SUserGenderTag extends Vue {
     return UserUtil.getGenderIcon(user)
   }
 }
+export default toNative(SUserGenderTag)
 </script>

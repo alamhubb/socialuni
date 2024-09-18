@@ -30,11 +30,11 @@ import STableColumn from "../QTableColumn/QTableColumn.vue";
  *
  * 在数据源业务基础上，封装基础table
  */
-@toNative
+
 @Component({
   components: {STableColumn, SSelect }
 })
-export default class QTableSelect extends Vue {
+class QTableSelect extends Vue {
   @Prop() readonly prop: string
   @Prop() readonly tipProp: string
   @Prop() readonly propFun: Function
@@ -52,4 +52,5 @@ export default class QTableSelect extends Vue {
     return { value, index, row }
   }
 }
+export default toNative(QTableSelect)
 </script>

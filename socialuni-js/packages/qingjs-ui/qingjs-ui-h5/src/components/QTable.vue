@@ -52,11 +52,11 @@ import JsonUtil from "qing-util/src/util/JsonUtil";
  *
  * 在数据源业务基础上，封装基础table
  */
-@toNative
+
 @Component({
     components: {STableColumn}
 })
-export default class QTable extends Vue {
+class QTable extends Vue {
     @Model('change') model!: any
     @Prop() readonly data: any[]
     // 是否单选
@@ -176,4 +176,5 @@ export default class QTable extends Vue {
 
 
 }
+export default toNative(QTable)
 </script>

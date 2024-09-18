@@ -7,9 +7,10 @@
 <script lang="ts">
 import {Component, Vue, toNative} from 'vue-facing-decorator'
 
-@toNative
+
 @Component({})
-export default class QTab extends Vue {
+class QTab extends Vue {
 
 }
+export default toNative(QTab)
 </script>

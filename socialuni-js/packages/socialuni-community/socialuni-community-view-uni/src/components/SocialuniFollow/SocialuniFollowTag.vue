@@ -21,14 +21,14 @@ import SocialuniUserProvideKeys from "socialuni-user-sdk/src/constant/SocialuniU
 import CenterUserDetailRO from "socialuni-api-base/src/model/social/CenterUserDetailRO";
 import QIcon from "qingjs-ui/src/components/QIcon.vue";
 
-@toNative
+
 @Component({
     components: {
       QIcon,
         QButton
     }
 })
-export default class SocialuniFollowTag extends Vue {
+class SocialuniFollowTag extends Vue {
     @Prop() user: CenterUserDetailRO
 
     FollowStatus = FollowStatus
@@ -92,4 +92,5 @@ export default class SocialuniFollowTag extends Vue {
         }
     }
 }
+export default toNative(SocialuniFollowTag)
 </script>

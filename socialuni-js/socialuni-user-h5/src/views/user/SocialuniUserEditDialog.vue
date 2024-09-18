@@ -61,11 +61,11 @@ import ImgAddQO from "socialuni-api-base/src/model/user/ImgAddQO";
 import type DomFile from "qing-compat-js/src/model/DomFile";
 import NativeUtil from "qing-compat-js-h5/src/util/NativeUtil";
 
-@toNative
+
 @Component({
     components: {QDialog, QButton}
 })
-export default class SocialuniUserEditDialog extends Vue {
+class SocialuniUserEditDialog extends Vue {
     $refs: {
         userEditDialog: SDialog
     }
@@ -173,4 +173,5 @@ export default class SocialuniUserEditDialog extends Vue {
         // PageUtil.goBackOrMine()
     }
 }
+export default toNative(SocialuniUserEditDialog)
 </script>

@@ -7,8 +7,9 @@
 <script lang="ts">
 import {Component, Vue, toNative} from 'vue-facing-decorator'
 
-@toNative
+
 @Component({})
-export default class QPcModel extends Vue {
+class QPcModel extends Vue {
 }
+export default toNative(QPcModel)
 </script>

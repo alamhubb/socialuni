@@ -30,11 +30,11 @@ import STableColumn from "../STableColumn/STableColumn.vue";
  *
  * 在数据源业务基础上，封装基础table
  */
-@toNative
+
 @Component({
   components: {STableColumn, SSelect }
 })
-export default class STableSelect extends Vue {
+class STableSelect extends Vue {
   @Prop() readonly prop: string
   @Prop() readonly tipProp: string
   @Prop() readonly propFun: Function
@@ -52,4 +52,5 @@ export default class STableSelect extends Vue {
     return { value, index, row }
   }
 }
+export default toNative(STableSelect)
 </script>

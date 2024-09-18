@@ -82,11 +82,11 @@ import CommonEventUtil from "qing-compat-js/src/util/CommonEventUtil";
 import SocialuniUserService from "../../../packages/socialuni-user/socialuni-user-sdk/src/logic/SocialuniUserService";
 import QDialog from "qingjs-ui-h5/src/components/QDialog.vue";
 
-@toNative
+
 @Component({
   components: {SocialuniUserEditDialog, Tools, SocialuniLoginView, QDialog, ArrowDown}
 })
-export default class NavBar extends Vue {
+class NavBar extends Vue {
   $refs: {
     loginDialog: SDialog
     userEditDialog: SocialuniUserEditDialog
@@ -169,4 +169,5 @@ export default class NavBar extends Vue {
     return socialuniUserModule.mineUser
   }
 }
+export default toNative(NavBar)
 </script>

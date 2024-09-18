@@ -14,9 +14,9 @@ import CommonUtil from '@/components/YComponent/utils/CommonUtil'
 
 //想要的效果，外部可以主动disable
 //可以主动loading
-@toNative
+
 @Component
-export default class YButton extends Vue {
+class YButton extends Vue {
   @Prop({default: false, type: Boolean}) disabled: boolean
   @Prop({default: true, type: Boolean}) useLoading: boolean
   @Prop({default: false, type: Boolean}) showLoading: boolean
@@ -89,5 +89,5 @@ export default class YButton extends Vue {
     return null
   }
 }
-
+export default toNative(YButton)
 </script>

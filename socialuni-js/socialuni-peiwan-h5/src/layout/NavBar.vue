@@ -74,11 +74,11 @@ import SocialuniUserEventConst from "socialuni-user-sdk/src/constant/SocialuniUs
 import {ElMessageBox} from "element-plus";
 
 
-@toNative
+
 @Component({
   components: {NavBreadcrumb, NavMenu}
 })
-export default class NavBar extends Vue {
+class NavBar extends Vue {
 
   created() {
     CommonEventUtil.on(SocialuniUserEventConst.toLogin, () => {
@@ -136,4 +136,5 @@ export default class NavBar extends Vue {
   }
 
 }
+export default toNative(NavBar)
 </script>

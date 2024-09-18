@@ -88,11 +88,11 @@ import SPagination from "./SPageable/SPagination.vue";
  *
  * 在数据源业务基础上，封装基础table
  */
-@toNative
+
 @Component({
     components: {STable, SPagination}
 })
-export default class STableGroup extends Vue {
+class STableGroup extends Vue {
     $refs: {
         table: STable;
     }
@@ -316,6 +316,7 @@ export default class STableGroup extends Vue {
         return
     }
 }
+export default toNative(STableGroup)
 </script>
 <style lang="scss" scoped>
 #table_layout_control {

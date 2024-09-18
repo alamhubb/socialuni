@@ -34,11 +34,11 @@ import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 import PagePath from "socialuni-constant/constant/PagePath";
 import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 
-@toNative
+
 @Component({
   components: {QNavbar}
 })
-export default class WebBrowserPage extends Vue {
+class WebBrowserPage extends Vue {
   get titleHeight() {
     return socialuniSystemModule.titleHeight
   }
@@ -83,4 +83,5 @@ export default class WebBrowserPage extends Vue {
     QingAppUtil.RouterUtil.navigateTo(PagePath.share, {url: this.webUrl})
   }
 }
+export default toNative(WebBrowserPage)
 </script>

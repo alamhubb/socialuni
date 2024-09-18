@@ -53,11 +53,11 @@ import type { ElTable } from 'element-ui/types/table'
  *
  * 在数据源业务基础上，封装基础table
  */
-@toNative
+
 @Component({
   components: { YTableColumn }
 })
-export default class YTable extends Vue {
+class YTable extends Vue {
   @Model('change') model!: any
   @Prop() readonly data: any[]
   // 是否单选
@@ -166,4 +166,5 @@ export default class YTable extends Vue {
     this.checkedAllClick(false)
   }
 }
+export default toNative(YTable)
 </script>

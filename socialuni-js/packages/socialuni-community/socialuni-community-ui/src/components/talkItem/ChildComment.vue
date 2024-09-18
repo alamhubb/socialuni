@@ -45,11 +45,11 @@ import UserPagePath from "socialuni-user-sdk/src/constant/UserPagePath";
 import UserPageUtil from "socialuni-user-sdk/src/util/UserPageUtil";
 import {socialTalkModule} from "socialuni-community-sdk/src/store/SocialTalkModule";
 
-@toNative
+
 @Component({
   components: {QIcon}
 })
-export default class ChildComment extends Vue {
+class ChildComment extends Vue {
   @Prop() readonly talk: TalkVO
   @Prop() readonly commentProp!: CommentVO
   comment: CommentVO = ObjectUtil.deepClone(this.commentProp)
@@ -96,4 +96,5 @@ export default class ChildComment extends Vue {
     } */
   }
 }
+export default toNative(ChildComment)
 </script>

@@ -19,11 +19,11 @@ import SocialuniUserEventOn from "socialuni-user-sdk/src/event/SocialuniUserEven
 import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
 import AdminUserAPI from "socialuni-admin-api/src/api/AdminUserAPI";
 
-@toNative
+
 @Component({
   components: {SUserNavBar, QNavMenu, QButton, QInput, QScroll, QDialog}
 })
-export default class App extends Vue {
+class App extends Vue {
   created(){
     SocialuniUserEventOn.toLogin(() => {
       this.toLogin()
@@ -52,6 +52,7 @@ export default class App extends Vue {
     return constantRoutes
   }
 }
+export default toNative(App)
 </script>
 <style>
 .socialuni-navbar-h5 .el-menu-item {

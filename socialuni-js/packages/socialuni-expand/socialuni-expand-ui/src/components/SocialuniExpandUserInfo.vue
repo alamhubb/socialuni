@@ -112,11 +112,11 @@ import {socialuniLikeConfigModule} from "socialuni-expand-sdk/src/store/Socialun
 import PlatformUtils from "socialuni-user-sdk/src/util/PlatformUtils";
 import SocialuniLikeService from "socialuni-expand-sdk/src/service/SocialuniLikeService";
 
-@toNative
+
 @Component({
   components: {QButton, QIcon, SocialGenderTag}
 })
-export default class SocialuniExpandUserInfo extends Vue {
+class SocialuniExpandUserInfo extends Vue {
   @Prop() user: SocialuniUserExtendDetailRO
 
 
@@ -204,4 +204,5 @@ export default class SocialuniExpandUserInfo extends Vue {
   }
 
 }
+export default toNative(SocialuniExpandUserInfo)
 </script>

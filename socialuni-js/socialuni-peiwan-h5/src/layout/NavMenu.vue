@@ -19,11 +19,11 @@
 import { Component, Prop, Vue , toNative} from 'vue-facing-decorator'
 import NavMenuItem from '@/layout/components/NavMenu/NavMenuItem.vue'
 
-@toNative
+
 @Component({
   components: { NavMenuItem }
 })
-export default class NavMenu extends Vue {
+class NavMenu extends Vue {
   @Prop({ default: 'x' }) mode
 
   /*
@@ -61,4 +61,5 @@ export default class NavMenu extends Vue {
     return this.$route.meta.showHeader
   }
 }
+export default toNative(NavMenu)
 </script>

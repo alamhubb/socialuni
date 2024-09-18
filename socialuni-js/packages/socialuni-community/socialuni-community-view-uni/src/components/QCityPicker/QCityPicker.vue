@@ -47,7 +47,7 @@ import LocationUtil from "socialuni-community-sdk/src/util/LocationUtil";
 import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 import QIcon from "qingjs-ui/src/components/QIcon.vue";
 
-@toNative
+
 @Component({
   components: {
     QPicker,
@@ -55,7 +55,7 @@ import QIcon from "qingjs-ui/src/components/QIcon.vue";
     QPopup
   }
 })
-export default class QCityPicker extends Vue {
+class QCityPicker extends Vue {
   public $refs!: {
     cityDialog: QPopup;
     citySelect: QPicker;
@@ -113,4 +113,5 @@ export default class QCityPicker extends Vue {
     })
   }
 }
+export default toNative(QCityPicker)
 </script>

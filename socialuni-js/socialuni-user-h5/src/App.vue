@@ -11,10 +11,11 @@
 import { Component, Vue , toNative} from 'vue-facing-decorator';
 import NavBar from "@/layout/NavBar.vue";
 
-@toNative
+
 @Component({
     components: {NavBar}
 })
-export default class App extends Vue {
+class App extends Vue {
 }
+export default toNative(App)
 </script>

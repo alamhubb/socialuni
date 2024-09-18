@@ -31,9 +31,9 @@
 import { Component, Vue , toNative} from 'vue-facing-decorator'
 import Talk from '@/model/talk/Talk'
 
-@toNative
+
 @Component
-export default class TestFlex extends Vue {
+class TestFlex extends Vue {
   content = '5'
   talks: Talk[] = []
 
@@ -43,6 +43,7 @@ export default class TestFlex extends Vue {
     })*/
   }
 }
+export default toNative(TestFlex)
 </script>
 
 <style scoped>

@@ -61,7 +61,7 @@ import VueDragResize from "vue-drag-resize3/src/components/VueDragResize.vue";
 import VueInteract from "@/components/vue-interact/VueInteract.vue";
 import MusicPlayer from "socialuni-music-ui-h5/src/components/MusicPlayer.vue";
 
-@toNative
+
 @Component({
   components: {
     VueDragResize,
@@ -76,13 +76,14 @@ import MusicPlayer from "socialuni-music-ui-h5/src/components/MusicPlayer.vue";
     VueGoldenLayoutRow
   }
 })
-export default class MessageView extends Vue {
+class MessageView extends Vue {
 
 
   mounted() {
 
   }
 }
+export default toNative(MessageView)
 </script>
 <style lang="scss">
 h2 {

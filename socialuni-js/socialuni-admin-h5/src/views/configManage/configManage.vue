@@ -19,9 +19,9 @@
 import {Component, Vue, toNative} from 'vue-facing-decorator'
 import SocialuniAdminConfigAPI from "socialuni-admin-api/src/api/SocialuniAdminConfigAPI";
 
-@toNative
+
 @Component({})
-export default class ConfigManageView extends Vue {
+class ConfigManageView extends Vue {
   configs: ConfigVO[] = []
 
   created() {
@@ -46,6 +46,7 @@ export default class ConfigManageView extends Vue {
     // });
   }
 }
+export default toNative(ConfigManageView)
 </script>
 
 <style scoped>

@@ -81,7 +81,7 @@ import TalkOperate from "../talk/talkOperate.vue";
 import MsgInput from "socialuni-ui/src/components/MsgInput.vue";
 import TalkItem from "socialuni-community-ui/src/components/talkItem/TalkItem.vue";
 
-@toNative
+
 @Component({
   components: {
     MsgInput,
@@ -95,7 +95,7 @@ import TalkItem from "socialuni-community-ui/src/components/talkItem/TalkItem.vu
     SocialuniUserDetailView
   }
 })
-export default class SocialuniCommunityUserDetailView extends Vue {
+class SocialuniCommunityUserDetailView extends Vue {
   get user() {
     return socialuniUserDetailViewService.user
   }
@@ -106,4 +106,5 @@ export default class SocialuniCommunityUserDetailView extends Vue {
     this.socialuniCommunityUserDetailViewService.initService(this)
   }
 }
+export default toNative(SocialuniCommunityUserDetailView)
 </script>

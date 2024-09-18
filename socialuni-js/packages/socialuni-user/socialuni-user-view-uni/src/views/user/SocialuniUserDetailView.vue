@@ -102,7 +102,7 @@ import {Inject, Component, Vue, toNative} from 'vue-facing-decorator'
 import {socialuniUserDetailViewService} from "socialuni-user-sdk/src/logic/SocialuniUserDetailViewService";
 import {onLoad} from "@dcloudio/uni-app";
 
-@toNative
+
 @Component({
   components: {
     SocialuniUserInfoImg,
@@ -112,7 +112,7 @@ import {onLoad} from "@dcloudio/uni-app";
     SocialGenderTag,
   }
 })
-export default class SocialuniUserDetailView extends Vue {
+class SocialuniUserDetailView extends Vue {
   socialuniUserDetailViewService = socialuniUserDetailViewService
 
   created() {
@@ -123,4 +123,5 @@ export default class SocialuniUserDetailView extends Vue {
     })
   }
 }
+export default toNative(SocialuniUserDetailView)
 </script>

@@ -45,11 +45,11 @@ import YFormSelect from '@/components/YComponent/YFormSelect/YFormSelect.vue'
 import ToastUtil from '@/utils/ToastUtil'
 import TalkVO from '@/model/community/TalkVO'
 
-@toNative
+
 @Component({
   components: { YFormSelect, YFormInput, YTable, YTableInput }
 })
-export default class StickTalkManageView extends Vue {
+class StickTalkManageView extends Vue {
   tableData: TalkVO[] = []
 
   get talkDataCom() {
@@ -74,6 +74,7 @@ export default class StickTalkManageView extends Vue {
     })
   }
 }
+export default toNative(StickTalkManageView)
 </script>
 
 <style scoped>

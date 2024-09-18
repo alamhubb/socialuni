@@ -33,7 +33,7 @@ import {socialuniUserModule} from "socialuni-user-sdk/src/store/SocialuniUserMod
 import {socialuniConfigModule} from "socialuni-app-sdk/src/store/SocialuniConfigModule";
 import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
 
-@toNative
+
 @Component({
   components: {
     SSwitch,
@@ -41,7 +41,7 @@ import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
     QPopup
   }
 })
-export default class UserContactInfoEditDialog extends Vue {
+class UserContactInfoEditDialog extends Vue {
   $refs!: {
     dialog: QPopup;
   }
@@ -83,4 +83,5 @@ export default class UserContactInfoEditDialog extends Vue {
     }
   }
 }
+export default toNative(UserContactInfoEditDialog)
 </script>

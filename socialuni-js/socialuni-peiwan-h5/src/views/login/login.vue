@@ -116,9 +116,9 @@ import LoginService from "socialuni-user-sdk/src/logic/LoginService";
 import SocialuniLoginService from "socialuni-user-sdk/src/logic/SocialuniLoginService";
 
 
-@toNative
+
 @Component
-export default class AdminLoginPage extends Vue {
+class AdminLoginPage extends Vue {
   $refs: {
     authCode: ElInput;
   }
@@ -221,4 +221,5 @@ export default class AdminLoginPage extends Vue {
     })
   }
 }
+export default toNative(AdminLoginPage)
 </script>

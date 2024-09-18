@@ -74,7 +74,7 @@ import {getCurrentInstance} from "vue";
 
 // todo 后台可控制是否显示轮播图
 
-@toNative
+
 @Component({
   components: {
     SocialTagPicker,
@@ -92,7 +92,7 @@ import {getCurrentInstance} from "vue";
     TalkSwipers
   }
 })
-export default class TalkView extends Vue {
+class TalkView extends Vue {
   public $refs!: {
     tabsTalk: TabsTalk;
     cityPicker: QCityPicker
@@ -217,4 +217,5 @@ export default class TalkView extends Vue {
     this.startPullDown()
   }
 }
+export default toNative(TalkView)
 </script>

@@ -92,11 +92,11 @@ import CommonUtil from "qing-util/src/util/CommonUtil";
 import {nextTick} from "vue";
 import PhoneAPI from "socialuni-user-api/src/api/PhoneAPI";
 
-@toNative
+
 @Component({
   components: {QIcon}
 })
-export default class PhoneLoginForm extends Vue {
+class PhoneLoginForm extends Vue {
   @Prop() show: boolean
   // @Model('modelValue') readonly value!: PhoneNumFormData
 
@@ -199,4 +199,5 @@ export default class PhoneLoginForm extends Vue {
     })
   }
 }
+export default toNative(PhoneLoginForm)
 </script>

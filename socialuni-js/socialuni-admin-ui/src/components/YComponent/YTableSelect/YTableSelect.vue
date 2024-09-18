@@ -29,11 +29,11 @@ import YSelect from '@/components/YComponent/YSelect/YSelect.vue'
  *
  * 在数据源业务基础上，封装基础table
  */
-@toNative
+
 @Component({
   components: { YSelect }
 })
-export default class YTableSelect extends Vue {
+class YTableSelect extends Vue {
   @Prop() readonly prop: string
   @Prop() readonly tipProp: string
   @Prop() readonly propFun: Function
@@ -51,4 +51,5 @@ export default class YTableSelect extends Vue {
     return { value, index, row }
   }
 }
+export default toNative(YTableSelect)
 </script>

@@ -26,11 +26,11 @@ import QDialog from "qingjs-ui-h5/src/components/QDialog.vue";
 import MusicDiscover from "./MusicDiscover.vue";
 import MusicPlayingList from "./MusicPlayingList.vue";
 
-@toNative
+
 @Component({
   components: {MusicPlayingList, MusicDiscover, QDialog, QInput, SocialuniChatViewH5, SocialuniMsgViewH5, MusicList}
 })
-export default class MusicDialog extends Vue {
+class MusicDialog extends Vue {
   $refs: {
     musicDialog: QDialog
   }
@@ -219,4 +219,5 @@ export default class MusicDialog extends Vue {
     // this.hotSongListMusicChange(playRoomInfo)
   }
 }
+export default toNative(MusicDialog)
 </script>

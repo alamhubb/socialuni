@@ -30,11 +30,11 @@ import type {ElInput} from "element-ui/types/input";
  *
  * 在数据源业务基础上，封装基础table
  */
-@toNative
+
 @Component({
   components: {YSelect}
 })
-export default class QSearch extends Vue {
+class QSearch extends Vue {
   $refs: {
     valueSelect: YSelect;
     searchInput: ElInput;
@@ -242,4 +242,5 @@ export default class QSearch extends Vue {
     this.searchBoxBorder = '1px solid #e6e6e6'
   }
 }
+export default toNative(QSearch)
 </script>

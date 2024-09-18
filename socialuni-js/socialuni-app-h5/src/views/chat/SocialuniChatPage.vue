@@ -64,11 +64,11 @@ import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModul
 import QInput from "qingjs-ui/src/components/QInput.vue";
 import {socialAppModule} from "socialuni-app-sdk/src/store/SocialAppModule.ts";
 
-@toNative
+
 @Component({
   components: {QInput, MusicPlayer, SocialuniChatViewH5, SocialuniMsgViewH5, MusicList}
 })
-export default class SocialuniChatPage extends Vue {
+class SocialuniChatPage extends Vue {
 
   musicSearchText = ''
 
@@ -241,4 +241,5 @@ export default class SocialuniChatPage extends Vue {
     // this.hotSongListMusicChange(playRoomInfo)
   }
 }
+export default toNative(SocialuniChatPage)
 </script>

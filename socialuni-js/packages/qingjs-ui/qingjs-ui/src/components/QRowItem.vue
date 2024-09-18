@@ -18,11 +18,11 @@ import QIcon from "./QIcon.vue";
 /*
 显示出来已经选了的城市，给她画上钩
 * */
-@toNative
+
 @Component({
   components: {QIcon}
 })
-export default class QRowItem extends Vue {
+class QRowItem extends Vue {
   @Prop({default: false, type: Boolean}) border: boolean
 
   hasTitle = false
@@ -36,5 +36,6 @@ export default class QRowItem extends Vue {
     return
   }
 }
+export default toNative(QRowItem)
 </script>
 

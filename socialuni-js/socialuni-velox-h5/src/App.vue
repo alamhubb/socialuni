@@ -55,10 +55,11 @@
 import {Component, Vue, toNative} from 'vue-facing-decorator';
 import SNavBar from "socialuni-user-view-h5/src/components/SUserNavBar.vue";
 
-@toNative
+
 @Component({
   components: {SNavBar}
 })
-export default class App extends Vue {
+class App extends Vue {
 }
+export default toNative(App)
 </script>

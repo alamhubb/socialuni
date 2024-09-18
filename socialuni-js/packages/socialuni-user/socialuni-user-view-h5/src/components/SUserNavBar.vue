@@ -90,11 +90,11 @@ import SocialuniUserEventOn from "socialuni-user-sdk/src/event/SocialuniUserEven
 import WebsocketUtil from "socialuni-api-base/src/websocket/WebsocketUtil";
 import SocialuniUserEventEmit from "socialuni-user-sdk/src/event/SocialuniUserEventEmit";
 
-@toNative
+
 @Component({
   components: {SocialuniUserEditDialog, Tools, SocialuniLoginView, QDialog, ArrowDown}
 })
-export default class SUserNavBar extends Vue {
+class SUserNavBar extends Vue {
   $refs: {
     loginDialog: QDialog
     userEditDialog: SocialuniUserEditDialog
@@ -175,4 +175,5 @@ export default class SUserNavBar extends Vue {
     return socialuniUserModule.mineUser
   }
 }
+export default toNative(SUserNavBar)
 </script>

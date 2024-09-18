@@ -81,7 +81,7 @@ import shopping from '@/static/svg/shopping.svg'
 import courseIcon from '@/static/svg/courseIcon.svg'
 
 
-@toNative
+
 @Component({
   components: {
     SocialGenderTag,
@@ -94,7 +94,7 @@ import courseIcon from '@/static/svg/courseIcon.svg'
     TalkView
   }
 })
-export default class TalkPage extends Vue {
+class TalkPage extends Vue {
 
 
   get homeSwipers() {
@@ -123,4 +123,5 @@ export default class TalkPage extends Vue {
     }
   }
 }
+export default toNative(TalkPage)
 </script>

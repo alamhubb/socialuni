@@ -162,7 +162,7 @@ import DomFile from "qing-compat-js/src/model/DomFile";
 import {onMounted} from "vue";
 import QingLoadingUtil from "qing-compat-js/src/util/QingLoadingUtil";
 
-@toNative
+
 @Component({
   components: {
     SocialCirclePicker,
@@ -176,7 +176,7 @@ import QingLoadingUtil from "qing-compat-js/src/util/QingLoadingUtil";
     QIcon
   }
 })
-export default class TalkAddView extends Vue {
+class TalkAddView extends Vue {
   $refs: {
     circleSearch: SocialCirclePicker
   }
@@ -548,4 +548,5 @@ export default class TalkAddView extends Vue {
     this.circleName = circle.name
   }
 }
+export default toNative(TalkAddView)
 </script>

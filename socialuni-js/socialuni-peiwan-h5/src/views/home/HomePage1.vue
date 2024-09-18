@@ -105,11 +105,11 @@ import AlertUtil from "qing-compat-js-h5/src/util/AlertUtil";
 import apiData from "./res.json"
 import {ElMessageBox} from "element-plus";
 
-@toNative
+
 @Component({
   components: {SDialog, Plus, SScrollbar}
 })
-export default class HomePage extends Vue {
+class HomePage extends Vue {
   $refs: {
     mapDialog: SDialog
   }
@@ -170,4 +170,5 @@ export default class HomePage extends Vue {
   }
 
 }
+export default toNative(HomePage)
 </script>

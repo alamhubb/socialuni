@@ -6,11 +6,12 @@
 import {Vue, Component, toNative} from 'vue-facing-decorator'
 import SocialuniFollowView from "socialuni-user-view-uni/src/views/user/follow/SocialuniFollowView.vue";
 
-@toNative
+
 @Component({
   components: {SocialuniFollowView}
 })
-export default class FollowPage extends Vue {
+class FollowPage extends Vue {
 
 }
+export default toNative(FollowPage)
 </script>

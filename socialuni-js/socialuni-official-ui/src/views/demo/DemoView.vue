@@ -187,11 +187,11 @@ import SocialuniUserRO from "socialuni-api-base/src/model/user/SocialuniUserRO.t
 import QButton from "qingjs-ui/src/components/QButton.vue";
 import AppConst from "@/constant/AppConst.ts";
 
-@toNative
+
 @Component({
   components: {QButton}
 })
-export default class DemoView extends Vue {
+class DemoView extends Vue {
   userName = ''
   talkContent = ''
   commentContent = ''
@@ -278,6 +278,7 @@ export default class DemoView extends Vue {
   }
 
 }
+export default toNative(DemoView)
 </script>
 
 

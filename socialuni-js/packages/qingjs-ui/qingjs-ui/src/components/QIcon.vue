@@ -11,9 +11,9 @@
 <script lang="ts">
 import { Emit, Component, Prop, Vue , toNative} from 'vue-facing-decorator'
 
-@toNative
+
 @Component({})
-export default class QIcon extends Vue {
+class QIcon extends Vue {
   @Prop({ type: [String, Number] }) readonly size: string | number
   @Prop({
     type: String,
@@ -60,4 +60,5 @@ export default class QIcon extends Vue {
     return
   }
 }
+export default toNative(QIcon)
 </script>

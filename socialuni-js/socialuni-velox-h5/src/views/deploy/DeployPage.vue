@@ -81,13 +81,13 @@ import AlertUtil from "qing-compat-js-h5/src/util/AlertUtil.ts";
 import ToastUtil from "qing-compat-js-h5/src/util/ToastUtil.ts";
 import WindowUtil from "@/util/WindowUtil.ts";
 
-@toNative
+
 @Component({
   components: {
     UploadFilled, FolderOpened, QRow, QUpload
   }
 })
-export default class MessageView extends Vue {
+class MessageView extends Vue {
   $refs: {
     upload: QUpload
     form: ElForm
@@ -200,6 +200,7 @@ export default class MessageView extends Vue {
     })
   }
 }
+export default toNative(MessageView)
 </script>
 <style lang="scss">
 h2 {

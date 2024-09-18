@@ -96,7 +96,7 @@ import {socialTalkModule} from "socialuni-community-sdk/src/store/SocialTalkModu
 import CommunityPageUtil from "socialuni-community-sdk/src/util/CommunityPageUtil";
 import CommunityPagePath from "socialuni-community-sdk/src/constant/CommunityPagePath";
 
-@toNative
+
 @Component({
   components: {
     QIcon,
@@ -104,7 +104,7 @@ import CommunityPagePath from "socialuni-community-sdk/src/constant/CommunityPag
     ChildComment
   }
 })
-export default class TalkItemComment extends Vue {
+class TalkItemComment extends Vue {
   get user() {
     return socialuniUserModule.mineUser
   }
@@ -216,4 +216,5 @@ export default class TalkItemComment extends Vue {
     // return TalkUtil.getHugColor(hasHugged)
   }
 }
+export default toNative(TalkItemComment)
 </script>

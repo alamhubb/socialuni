@@ -125,9 +125,9 @@ import SocialuniLoginViewService from "socialuni-user-sdk/src/logic/SocialuniLog
 import {getCurrentInstance, nextTick} from "vue";
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 
-@toNative
+
 @Component({})
-export default class SocialuniLoginView extends Vue {
+class SocialuniLoginView extends Vue {
   $refs: {
     loginForm: any
     password: any
@@ -172,4 +172,5 @@ export default class SocialuniLoginView extends Vue {
 
   }
 }
+export default toNative(SocialuniLoginView)
 </script>

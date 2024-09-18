@@ -58,7 +58,7 @@ import {socialuniTagModule} from "socialuni-community-sdk/src/store/SocialTagMod
 import TagTypeVO from "socialuni-api-base/src/model/community/tag/TagTypeVO";
 
 
-@toNative
+
 @Component({
   components: {
     QIcon,
@@ -67,7 +67,7 @@ import TagTypeVO from "socialuni-api-base/src/model/community/tag/TagTypeVO";
     QPopup
   }
 })
-export default class SocialTagPicker extends Vue {
+class SocialTagPicker extends Vue {
   $refs: {
     dialog: QPopup
   }
@@ -105,4 +105,5 @@ export default class SocialTagPicker extends Vue {
     return tag
   }
 }
+export default toNative(SocialTagPicker)
 </script>

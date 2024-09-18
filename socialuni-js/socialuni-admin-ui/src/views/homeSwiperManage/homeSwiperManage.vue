@@ -67,11 +67,11 @@ import YFormInput from '@/components/YComponent/YFormInput/YFormInput.vue'
 import YFormSelect from '@/components/YComponent/YFormSelect/YFormSelect.vue'
 import ToastUtil from '@/utils/ToastUtil'
 
-@toNative
+
 @Component({
   components: { YFormSelect, YFormInput, YTable, YTableInput }
 })
-export default class HomeSwiperManageView extends Vue {
+class HomeSwiperManageView extends Vue {
   homeSwipers: SocialuniHomeAdminSwiperRO[] = [new SocialuniHomeAdminSwiperRO()]
 
   created() {
@@ -102,6 +102,7 @@ export default class HomeSwiperManageView extends Vue {
     this.homeSwipers[index].enable = false
   }
 }
+export default toNative(HomeSwiperManageView)
 </script>
 
 <style scoped>

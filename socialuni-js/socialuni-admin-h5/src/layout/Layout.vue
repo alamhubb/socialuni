@@ -26,11 +26,11 @@ import SocialuniUserEventOn from "socialuni-user-sdk/src/event/SocialuniUserEven
 
 console.log(123123)
 
-@toNative
+
 @Component({
   components: {SUserNavBar, QNavMenu, QButton, QInput, QScroll, QDialog}
 })
-export default class Layout extends Vue {
+class Layout extends Vue {
 
   toLogin(){
     this.$router.push('/login')
@@ -60,6 +60,7 @@ export default class Layout extends Vue {
     CommonEventUtil.emit(CommunityEventConst.socialuniTalkAddEvent)
   }
 }
+export default toNative(Layout)
 </script>
 <style>
 .socialuni-navbar-h5 .el-menu-item {

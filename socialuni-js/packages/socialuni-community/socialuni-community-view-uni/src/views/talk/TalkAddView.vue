@@ -161,7 +161,7 @@ import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
 import SocialCircleRO from "socialuni-api-base/src/model/community/circle/SocialCircleRO";
 import DomFile from "qing-compat-js/src/model/DomFile";
 
-@toNative
+
 @Component({
   components: {
     SocialCirclePicker,
@@ -176,7 +176,7 @@ import DomFile from "qing-compat-js/src/model/DomFile";
     QIcon
   }
 })
-export default class TalkAddView extends Vue {
+class TalkAddView extends Vue {
   $refs: {
     circleSearch: SocialCirclePicker
   }
@@ -543,4 +543,5 @@ export default class TalkAddView extends Vue {
     this.circleName = circle.name
   }
 }
+export default toNative(TalkAddView)
 </script>

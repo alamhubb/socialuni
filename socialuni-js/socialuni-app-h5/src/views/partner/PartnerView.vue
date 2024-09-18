@@ -28,11 +28,11 @@ import {Component, Vue, Watch, toNative} from 'vue-facing-decorator';
 import socialuniUserRequest from "socialuni-user-api/src/request/socialuniUserRequest.ts";
 import SocialuniPartnerUserContributeRO from "@/views/partner/model/SocialuniPartnerUserContributeRO.ts";
 
-@toNative
+
 @Component({
   components: {}
 })
-export default class MusicHome extends Vue {
+class MusicHome extends Vue {
 
   data: SocialuniPartnerUserContributeRO = null
 
@@ -46,4 +46,5 @@ export default class MusicHome extends Vue {
     this.data = res.data
   }
 }
+export default toNative(MusicHome)
 </script>

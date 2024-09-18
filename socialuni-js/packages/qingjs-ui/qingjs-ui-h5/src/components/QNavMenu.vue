@@ -14,9 +14,9 @@
 import {Component, Vue, toNative, Prop} from 'vue-facing-decorator'
 import QEnumLink from 'qingjs-ui-h5/src/components/QEnumLink.vue'
 
-@toNative
+
 @Component({components: {QEnumLink}})
-export default class QNavMenu extends Vue {
+class QNavMenu extends Vue {
   get defaultActive() {
     return this.$route.path
   }
@@ -29,5 +29,6 @@ export default class QNavMenu extends Vue {
     return this.$router.getRoutes()
   }
 }
+export default toNative(QNavMenu)
 </script>
 

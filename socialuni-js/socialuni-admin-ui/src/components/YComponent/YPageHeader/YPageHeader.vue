@@ -11,8 +11,9 @@
 <script lang="ts">
 import { Component, Vue , toNative} from 'vue-facing-decorator'
 
-@toNative
+
 @Component
-export default class YPageHeader extends Vue {
+class YPageHeader extends Vue {
 }
+export default toNative(YPageHeader)
 </script>

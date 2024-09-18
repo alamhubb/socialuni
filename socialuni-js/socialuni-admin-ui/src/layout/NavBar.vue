@@ -65,11 +65,11 @@ import NavMenu from '@/layout/NavMenu.vue'
 import NavBreadcrumb from '@/layout/NavBreadcrumb.vue'
 import DevAccountRO from '@/model/base/DevAccountRO'
 
-@toNative
+
 @Component({
   components: { NavBreadcrumb, NavMenu }
 })
-export default class NavBar extends Vue {
+class NavBar extends Vue {
   @userStore.State('user') user: DevAccountRO
 
   longinOut() {
@@ -88,4 +88,5 @@ export default class NavBar extends Vue {
     this.$router.push('/')
   }
 }
+export default toNative(NavBar)
 </script>

@@ -27,14 +27,14 @@ import socialuniMusicStore from "socialuni-music-sdk/src/store/SocialuniMusicSto
 import SocialuniMusicAPI from "socialuni-music-sdk/src/api/SocialuniMusicAPI";
 import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
 
-@toNative
+
 @Component({
   components: {
     SocialuniChatViewH5,
     SocialuniMsgViewH5,
   }
 })
-export default class SocialuniChatMessageViewH5 extends Vue {
+class SocialuniChatMessageViewH5 extends Vue {
 
   created() {
     this.initRoomId()
@@ -59,4 +59,5 @@ export default class SocialuniChatMessageViewH5 extends Vue {
 
   }
 }
+export default toNative(SocialuniChatMessageViewH5)
 </script>

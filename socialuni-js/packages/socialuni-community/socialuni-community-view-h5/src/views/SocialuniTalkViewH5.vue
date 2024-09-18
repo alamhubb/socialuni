@@ -181,7 +181,7 @@ import SocialuniTalkTabRO from "socialuni-api-base/src/model/talk/SocialuniTalkT
 
 
 // todo 后台可控制是否显示轮播图
-@toNative
+
 @Component({
   components: {
     TalkAddView,
@@ -198,7 +198,7 @@ import SocialuniTalkTabRO from "socialuni-api-base/src/model/talk/SocialuniTalkT
     TalkItem
   }
 })
-export default class SocialuniTalkViewH5 extends Vue {
+class SocialuniTalkViewH5 extends Vue {
   $refs: {
     commentDialog: SocialuniCommentInputDialog
     talkAddDialog: QDialog
@@ -359,6 +359,7 @@ export default class SocialuniTalkViewH5 extends Vue {
     this.initQuery()
   }
 }
+export default toNative(SocialuniTalkViewH5)
 </script>
 <style>
 .socialuni-community-view-left-menu .el-menu-item {

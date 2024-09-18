@@ -24,9 +24,9 @@
 import {Component, Emit, Prop, Vue, toNative} from 'vue-facing-decorator'
 import {socialuniSystemModule} from "qing-util/src/store/SocialuniSystemModule";
 
-@toNative
+
 @Component({})
-export default class QPullRefresh extends Vue {
+class QPullRefresh extends Vue {
   @Prop({default: 50}) refreshNum: number
   //下偏移量
   pageDeviation = 0
@@ -111,6 +111,7 @@ export default class QPullRefresh extends Vue {
     //this.$emit('setEnableScroll', true);
   }
 }
+export default toNative(QPullRefresh)
 </script>
 
 <style>

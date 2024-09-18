@@ -188,7 +188,7 @@ import {onLoad} from "@dcloudio/uni-app";
 import {socialuniAppUserModule} from "socialuni-user-sdk/src/store/SocialuniAppUserModule";
 import SocialuniUserService from "socialuni-user-sdk/src/logic/SocialuniUserService";
 
-@toNative
+
 @Component({
   components: {
     UserContactInfoEditDialog,
@@ -204,7 +204,7 @@ import SocialuniUserService from "socialuni-user-sdk/src/logic/SocialuniUserServ
     SocialGenderTag,
   }
 })
-export default class MineView extends Vue {
+class MineView extends Vue {
   $refs: {
     moreActionList: QPopup
     schoolEditDialog: UserSchoolEditDialog
@@ -406,4 +406,5 @@ export default class MineView extends Vue {
     this.$refs.contactInfoEditDialog.open()
   }
 }
+export default toNative(MineView)
 </script>

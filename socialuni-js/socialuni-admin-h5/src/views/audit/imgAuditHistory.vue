@@ -112,11 +112,11 @@ import AuditAPI from '@/api/AuditAPI'
 import YTableColumn from '@/components/YComponent/YTableColumn/YTableColumn.vue'
 import ReportAPI from '@/api/ReportAPI'
 
-@toNative
+
 @Component({
   components: { YTableColumn, DataTable }
 })
-export default class ImgAuditHistoryPage extends Vue {
+class ImgAuditHistoryPage extends Vue {
   imgAuditList: TencentCosAuditHistoryRO[] = []
   reportTypes: string[] = []
   imgScore = 10
@@ -146,4 +146,5 @@ export default class ImgAuditHistoryPage extends Vue {
     })
   }
 }
+export default toNative(ImgAuditHistoryPage)
 </script>

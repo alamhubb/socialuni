@@ -7,11 +7,12 @@
 <script lang="ts">
 import {Vue, Component, Prop, Emit, toNative} from 'vue-facing-decorator'
 
-@toNative
+
 @Component({
 })
-export default class SocialuniPeiwanView extends Vue {
+class SocialuniPeiwanView extends Vue {
 
 
 }
+export default toNative(SocialuniPeiwanView)
 </script>

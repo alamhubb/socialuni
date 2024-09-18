@@ -215,9 +215,9 @@ import keywordsTriggerVO from '@/model/violateWord/KeywordsTriggerVO'
 import KeywordsManageAPI from '@/api/KeywordsManageAPI'
 import keywordsTriggerDetailVO from '@/model/violateWord/KeywordsTriggerDetailVO'
 
-@toNative
+
 @Component
-export default class ViolationHistoryPage extends Vue {
+class ViolationHistoryPage extends Vue {
   keywords: keywordsVO[] = []
 
   inputKeyword = ''
@@ -341,6 +341,7 @@ export default class ViolationHistoryPage extends Vue {
     })*/
   }
 }
+export default toNative(ViolationHistoryPage)
 </script>
 
 <style scoped>

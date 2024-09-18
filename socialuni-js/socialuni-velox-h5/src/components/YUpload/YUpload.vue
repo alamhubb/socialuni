@@ -103,9 +103,9 @@ import { Message } from 'element-ui'
 import UploadPercentageVO from '@/components/YEchoComponent/YUpload/UploadPercentageVO'
 import UploadFileVO from '@/components/YEchoComponent/YUpload/UploadFileVO'
 
-@toNative
+
 @Component
-export default class YUpload extends Vue {
+class YUpload extends Vue {
   $refs: {
     uploadFileLabel: HTMLLabelElement;
     uploadFolderLabel: HTMLLabelElement;
@@ -242,4 +242,5 @@ export default class YUpload extends Vue {
     this.change()
   }
 }
+export default toNative(YUpload)
 </script>

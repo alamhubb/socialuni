@@ -39,11 +39,11 @@ import QTableColumn from "../QTableColumn/QTableColumn.vue";
  *
  * 在数据源业务基础上，封装基础table
  */
-@toNative
+
 @Component({
     components: {QTableColumn}
 })
-export default class QTableInput extends Vue {
+class QTableInput extends Vue {
     @Prop() readonly prop: string
     @Prop() readonly tipProp: string
     @Prop() readonly propFun: Function
@@ -53,4 +53,5 @@ export default class QTableInput extends Vue {
     @Prop({default: '请输入'}) readonly placeholder: string
     @Prop({default: true, type: Boolean}) readonly clearable: boolean
 }
+export default toNative(QTableInput)
 </script>

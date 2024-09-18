@@ -19,13 +19,13 @@
   //@ts-ignore
   import privacy from './privacy.md'
 
-  @toNative
+
 @Component({
     components: {
       QMarkdown
     }
   })
-  export default class PrivacyVue extends Vue {
+  class PrivacyVue extends Vue {
     markdown = privacy
 
     /*created() {
@@ -34,6 +34,7 @@
       })
     }*/
   }
+export default toNative(PrivacyVue)
 </script>
 <style>
     .markdown-body {

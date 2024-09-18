@@ -34,9 +34,9 @@
 import {Component, Emit, Prop, Vue, toNative} from 'vue-facing-decorator'
 import CommonUtil from "qing-util/src/util/CommonUtil";
 
-@toNative
+
 @Component({})
-export default class QButton extends Vue {
+class QButton extends Vue {
 
   @Prop() addClass: string
   @Prop({
@@ -354,6 +354,7 @@ export default class QButton extends Vue {
     return null
   }
 }
+export default toNative(QButton)
 </script>
 <style lang="scss">
 .chunk + .chunk {

@@ -92,13 +92,13 @@ import {
 } from "@element-plus/icons-vue";
 
 
-@toNative
+
 @Component({
   components: {
     UploadFilled, FolderOpened
   }
 })
-export default class  QUpload extends Vue {
+class QUpload extends Vue {
   $refs: {
     uploadFileLabel: HTMLLabelElement;
     uploadFolderLabel: HTMLLabelElement;
@@ -215,4 +215,5 @@ export default class  QUpload extends Vue {
     this.change()
   }
 }
+export default toNative(QUpload)
 </script>

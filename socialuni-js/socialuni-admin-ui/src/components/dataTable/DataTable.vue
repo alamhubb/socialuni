@@ -74,11 +74,11 @@ import YSearch from '@/components/YComponent/YSearch/YSearch.vue'
  *
  * 在数据源业务基础上，封装基础table
  */
-@toNative
+
 @Component({
   components: { YSearch, YPagination, YTable }
 })
-export default class DataTable extends Vue {
+class DataTable extends Vue {
   $refs: {
     table: YTable;
   }
@@ -273,6 +273,7 @@ export default class DataTable extends Vue {
     }
   }
 }
+export default toNative(DataTable)
 </script>
 <style lang="scss">
 #table_layout_control {

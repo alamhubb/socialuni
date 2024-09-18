@@ -16,10 +16,11 @@
 <script lang="ts">
 import {Component, Prop, Vue, toNative} from 'vue-facing-decorator'
 
-@toNative
+
 @Component({
 })
-export default class SNavBar extends Vue {
+class SNavBar extends Vue {
   @Prop() title: string
 }
+export default toNative(SNavBar)
 </script>

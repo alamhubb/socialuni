@@ -147,11 +147,11 @@ import QCityPicker from "socialuni-ui/src/components/QCityPicker.vue";
 import CommonEventUtil from "qing-compat-js/src/util/CommonEventUtil";
 import {socialLocationModule} from "socialuni-community-sdk/src/store/SocialLocationModule";
 
-@toNative
+
 @Component({
   components: {QTabs, QScrollbar, SUserGenderTag, QButton, QIcon, QScroll, QPicker, QCityPicker}
 })
-export default class SocialuniExpandViewH5 extends Vue {
+class SocialuniExpandViewH5 extends Vue {
   $refs: {}
 
   tabs = SocialuniUserExtendFriendsType.allTypes
@@ -339,4 +339,5 @@ export default class SocialuniExpandViewH5 extends Vue {
     socialuniChatModule.setChatIdToMessagePage(user.id)
   }
 }
+export default toNative(SocialuniExpandViewH5)
 </script>

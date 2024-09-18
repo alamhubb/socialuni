@@ -103,11 +103,11 @@ import MessageViewParams from "socialuni-im-view-uni/src/views/chat/MessageViewP
 import {getCurrentInstance, watch} from "vue";
 import {socialuniChatModule} from "socialuni-im-sdk/src/store/SocialuniChatModule";
 
-@toNative
+
 @Component({
   components: {SScrollbar, SIcon}
 })
-export default class SocialuniMsgViewH5 extends Vue {
+class SocialuniMsgViewH5 extends Vue {
 
   viewService = new SocialuniMsgViewService()
 
@@ -117,4 +117,5 @@ export default class SocialuniMsgViewH5 extends Vue {
     }, {immediate: true})
   }
 }
+export default toNative(SocialuniMsgViewH5)
 </script>

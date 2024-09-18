@@ -7,11 +7,11 @@
 <script lang="ts">
 import {Component, Prop, Vue, toNative, Emit, Watch} from 'vue-facing-decorator'
 
-@toNative
+
 @Component({
   directives: {}
 })
-export default class ScrollView extends Vue {
+class ScrollView extends Vue {
   $refs: {
     scroll: HTMLElement
   }
@@ -24,6 +24,7 @@ export default class ScrollView extends Vue {
   }
 
 }
+export default toNative(ScrollView)
 </script>
 <style lang="scss">
 /*调整滚动条样式*/

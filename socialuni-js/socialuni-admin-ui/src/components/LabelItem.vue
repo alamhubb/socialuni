@@ -10,11 +10,12 @@
 <script lang="ts">
 import {Component, Prop, Vue, toNative} from 'vue-facing-decorator'
 
-@toNative
+
 @Component
-export default class LabelItem extends Vue {
+class LabelItem extends Vue {
   @Prop() label: string
 }
+export default toNative(LabelItem)
 </script>
 
 <style scoped>

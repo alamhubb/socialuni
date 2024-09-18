@@ -27,9 +27,9 @@ import {Component, Emit, Model, Prop, toNative, Vue, Watch} from 'vue-facing-dec
 import {TabDirection} from "./TabDirection";
 
 // 组件需求，支持x轴，y轴滚动，x轴和y轴可自定义设置tab高度和宽度
-@toNative
+
 @Component({})
-export default class QTabs extends Vue {
+class QTabs extends Vue {
   $refs: {
     tabs: HTMLDivElement[];
   }
@@ -146,4 +146,5 @@ export default class QTabs extends Vue {
     return styleObj
   }
 }
+export default toNative(QTabs)
 </script>

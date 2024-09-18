@@ -109,7 +109,7 @@ import socialuniUserEditViewService from "socialuni-user-sdk/src/logic/Socialuni
 import {getCurrentInstance} from "vue";
 
 
-@toNative
+
 @Component({
   components: {
     SocialuniUserInfoImg,
@@ -119,11 +119,12 @@ import {getCurrentInstance} from "vue";
     SocialGenderTag,
   }
 })
-export default class SocialuniUserDetailView extends Vue {
+class SocialuniUserDetailView extends Vue {
   socialuniUserEditViewService = socialuniUserEditViewService
 
   created(){
     this.socialuniUserEditViewService.initService(this)
   }
 }
+export default toNative(SocialuniUserDetailView)
 </script>

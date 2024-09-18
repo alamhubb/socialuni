@@ -9,13 +9,13 @@
 import {Component, Prop, Vue, toNative, Emit} from 'vue-facing-decorator'
 import QIcon from "./QIcon.vue";
 
-@toNative
+
 @Component({
   components: {
     QIcon
   }
 })
-export default class QTag extends Vue {
+class QTag extends Vue {
   @Prop({default: false, type: Boolean}) border: boolean
   @Prop({default: false, type: Boolean}) round: boolean
   @Prop({default: false, type: Boolean}) showClose: boolean
@@ -51,4 +51,5 @@ export default class QTag extends Vue {
     return
   }
 }
+export default toNative(QTag)
 </script>

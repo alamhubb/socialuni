@@ -37,11 +37,11 @@
 import { Component, Emit, Prop, Vue , toNative} from 'vue-facing-decorator'
 import QButton from "qingjs-ui/src/components/QButton.vue";
 
-@toNative
+
 @Component({
   components: { QButton }
 })
-export default class QPageFooter extends Vue {
+class QPageFooter extends Vue {
   @Prop({ default: false, type: Boolean }) hideConfirm
   @Prop({ default: false, type: Boolean }) hideCancel
   @Prop({ default: '确 定' }) confirmText: string
@@ -70,5 +70,5 @@ export default class QPageFooter extends Vue {
     return
   }
 }
-
+export default toNative(QPageFooter)
 </script>

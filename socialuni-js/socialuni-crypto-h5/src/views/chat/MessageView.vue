@@ -122,7 +122,7 @@ import WindowUtil from "@/util/WindowUtil.ts";
 import alertUtil from "qing-compat-js-h5/src/util/AlertUtil.ts";
 import CommonUtil from "qing-util/src/util/CommonUtil.ts";
 
-@toNative
+
 @Component({
   components: {
     VueDragResize,
@@ -141,7 +141,7 @@ import CommonUtil from "qing-util/src/util/CommonUtil.ts";
     UploadFilled, FolderOpened
   }
 })
-export default class MessageView extends Vue {
+class MessageView extends Vue {
   $refs: {
     upload: QUpload
     form: ElForm
@@ -254,6 +254,7 @@ export default class MessageView extends Vue {
     })
   }
 }
+export default toNative(MessageView)
 </script>
 <style lang="scss">
 h2 {

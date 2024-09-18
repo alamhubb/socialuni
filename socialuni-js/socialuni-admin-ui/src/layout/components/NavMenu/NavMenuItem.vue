@@ -47,11 +47,11 @@ import MenuItem from '@/layout/components/HorizontalSidebar/Item.vue'
 // @ts-ignore
 import path from 'path'
 
-@toNative
+
 @Component({
   components: { MenuItem, AppLink }
 })
-export default class NavMenuItem extends Vue {
+class NavMenuItem extends Vue {
   @Prop() route
   @Prop() isNest
   @Prop() basePath
@@ -95,4 +95,5 @@ export default class NavMenuItem extends Vue {
     return /^(https?:|mailto:|tel:)/.test(path)
   }
 }
+export default toNative(NavMenuItem)
 </script>

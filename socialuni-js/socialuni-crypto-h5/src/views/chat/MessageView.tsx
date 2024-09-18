@@ -13,7 +13,7 @@ import {createApp} from "vue";
 import * as CompilerDOM from '@vue/compiler-dom'
 import {compileTemplate} from "@vue/compiler-sfc";
 
-@toNative
+
 @Component({
     components: {SocialuniChatViewH5, SocialuniMsgViewH5},
 })

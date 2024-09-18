@@ -104,14 +104,14 @@ import UserMsgUtil from "socialuni-user-sdk/src/util/UserMsgUtil";
 import UserUtil from "socialuni-user-sdk/src/util/UserUtil";
 import SocialGenderTag from "socialuni-user-ui/src/components/SUserGenderTag.vue";
 
-@toNative
+
 @Component({
   components: {
     SocialGenderTag,
     QIcon
   }
 })
-export default class TalkItemHead extends Vue {
+class TalkItemHead extends Vue {
   @Prop() talkProp!: TalkVO
   @Prop() talkTabType: string
 
@@ -219,4 +219,5 @@ export default class TalkItemHead extends Vue {
     return UserUtil.getGenderBgColor(user)
   }
 }
+export default toNative(TalkItemHead)
 </script>

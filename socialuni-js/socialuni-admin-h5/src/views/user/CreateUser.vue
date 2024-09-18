@@ -35,11 +35,11 @@ import ImgFileVO from "socialuni-admin-api/src/model/community/ImgFileVO";
 import SocialuniCustomUserAPI from "socialuni-peiwan-api/src/api/SocialuniCustomUserAPI";
 import ToastUtil from "@/utils/ToastUtil";
 
-@toNative
+
 @Component({
   components: {QSelect, QDialog, Plus, QTableColumn, QTableInput, QTable, QTableSelect, QLabelItem}
 })
-export default class CreateUserView extends Vue {
+class CreateUserView extends Vue {
 
   nickname = null
   phoneNum = null
@@ -55,4 +55,5 @@ export default class CreateUserView extends Vue {
   }
 
 }
+export default toNative(CreateUserView)
 </script>

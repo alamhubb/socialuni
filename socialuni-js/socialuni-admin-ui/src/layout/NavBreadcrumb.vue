@@ -39,12 +39,13 @@
 <script lang="ts">
 import { Component, Vue , toNative} from 'vue-facing-decorator'
 
-@toNative
+
 @Component
-export default class NavBreadcrumb extends Vue {
+class NavBreadcrumb extends Vue {
   get currentRoutes() {
     const matched = this.$route.matched.filter(item => item.meta && item.meta.title)
     return matched.filter(item => item.meta && item.meta.title && item.meta.breadcrumb !== false)
   }
 }
+export default toNative(NavBreadcrumb)
 </script>

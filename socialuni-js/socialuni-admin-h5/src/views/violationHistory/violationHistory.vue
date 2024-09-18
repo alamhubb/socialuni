@@ -94,9 +94,9 @@ import { Vue, Component, Prop , toNative} from 'vue-facing-decorator'
 import ReportAPI from '@/api/ReportAPI'
 import ReportVO from '@/model/report/ReportVO'
 
-@toNative
+
 @Component({})
-export default class ViolationHistoryPage extends Vue {
+class ViolationHistoryPage extends Vue {
   reports: ReportVO[] = []
 
   // 查询 违规的历史，然后是否被关键词匹配，被关键词匹配了哪个，然后看正常的会不会被匹配
@@ -144,6 +144,7 @@ export default class ViolationHistoryPage extends Vue {
 
   // 发帖时间控制
 }
+export default toNative(ViolationHistoryPage)
 </script>
 
 <style scoped>

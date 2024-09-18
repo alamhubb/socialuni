@@ -31,9 +31,9 @@ import {Component, Emit, Model, Prop, Vue, toNative} from 'vue-facing-decorator'
  *
  * 封装select
  */
-@toNative
+
 @Component({})
-export default class QSelect extends Vue {
+class QSelect extends Vue {
     $refs: {
         select: any;
     }
@@ -99,4 +99,5 @@ export default class QSelect extends Vue {
         this.$emit('focus')
     }
 }
+export default toNative(QSelect)
 </script>

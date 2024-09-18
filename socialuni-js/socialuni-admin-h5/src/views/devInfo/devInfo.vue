@@ -96,9 +96,9 @@ import type DevAccountRO from "socialuni-admin-api/src/model/base/DevAccountRO";
 import AdminUserAPI from "socialuni-admin-api/src/api/AdminUserAPI";
 import AlertUtil from "qing-compat-js-h5/src/util/AlertUtil";
 
-@toNative
+
 @Component({})
-export default class DevInfoPage extends Vue {
+class DevInfoPage extends Vue {
   $refs: {
     devForm: ElForm
   }
@@ -172,4 +172,5 @@ export default class DevInfoPage extends Vue {
     return !!this.user.secretKey
   }
 }
+export default toNative(DevInfoPage)
 </script>

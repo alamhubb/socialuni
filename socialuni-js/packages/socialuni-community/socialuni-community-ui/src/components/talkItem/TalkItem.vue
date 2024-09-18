@@ -14,7 +14,7 @@ import TalkItemContent from './TalkItemContent.vue'
 import TalkItemComment from './TalkItemComment.vue'
 import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
 
-@toNative
+
 @Component({
   components: {
     TalkItemComment,
@@ -22,7 +22,7 @@ import TalkVO from "socialuni-api-base/src/model/talk/TalkVO";
     TalkItemHead
   }
 })
-export default class TalkItem extends Vue {
+class TalkItem extends Vue {
   @Prop() talk: TalkVO
   @Prop() talkTabType: string
   @Prop({
@@ -35,4 +35,5 @@ export default class TalkItem extends Vue {
     return talkId
   }
 }
+export default toNative(TalkItem)
 </script>
