@@ -4,16 +4,10 @@ import 'reflect-metadata'
 import {defineMetadata} from "reflect-metadata";
 
 // @Service
-@Reflect.metadata("a9360b695cff4e40aa417121d9b004a7", "TTTTAaaa")
-export default class TestSerivce {
-    // @Resource
-    // testA;
+// @Reflect.metadata("a9360b695cff4e40aa417121d9b004a7", "TTTTAaaa")
 
-    // test() {
-    //     console.log(11111);
-    //     console.log(44444);
-    //     // console.log(this.testA);
-    // }
+@Reflect.metadata('dd', 'aa')
+export default class TestSerivce {
 }
 
 
