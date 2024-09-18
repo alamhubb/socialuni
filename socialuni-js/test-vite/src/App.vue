@@ -13,11 +13,11 @@ import typeIocContainer from "@/plugins/TypeIoc/TypeIocContainer";
 import TestSerivce from "@/plugins/TestSerivce";
 import {Component, toNative, Vue} from "./plugins/vue-facing-decorator/src";
 
-
+@toNative
 @Component({
   components: {}
 })
-class App extends Vue {
+export default class App extends Vue {
   b: TTTTAaaa = new B()
   d: TTTTAaaa = new TestSerivce()
 
@@ -42,8 +42,6 @@ class App extends Vue {
     return typeIocContainer
   }
 }
-
-export default toNative(App)
 </script>
 <style>
 .socialuni-navbar-h5 .el-menu-item {
