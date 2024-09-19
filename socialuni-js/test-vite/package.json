@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "npx tsx ./node_modules/vite/bin/vite.js",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
@@ -17,13 +17,15 @@
     "@jridgewell/trace-mapping": "^0.3.25",
     "@vitejs/plugin-legacy": "^5.4.2",
     "debug": "^4.3.6",
-    "typeiocjs": "../typeiocjs",
     "rollup": "^4.21.1",
     "slash": "^5.1.0",
     "source-map-js": "^1.2.0",
+    "tsx": "^4.19.1",
+    "typeiocjs": "../typeiocjs",
     "vite-plugin-babel": "^1.2.0",
     "vite-plugin-legacy": "^2.1.0",
-    "vue": "^3.4.29"
+    "vue": "^3.4.29",
+    "vue-facing-decorator": "^3.0.4"
   },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.4",

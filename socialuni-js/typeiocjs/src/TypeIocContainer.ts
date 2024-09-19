@@ -4,12 +4,12 @@ export class TypeIocContainer {
     private readonly container: Map<string, Object> = new Map()
     private readonly subscribe: Map<string, Set<KeyValueObj<Object>>> = new Map()
 
-    private subscribeSet(key: string, value: Object) {
+    private subscribeSet(key: string, value: Set<KeyValueObj<Object>>) {
         this.subscribe.set(key, value)
     }
 
     private subscribeGet(key: string): Set<KeyValueObj<Object>> {
-        this.subscribe.get(key)
+        return this.subscribe.get(key);
     }
 
     publish(serviceName: string, obj: object) {

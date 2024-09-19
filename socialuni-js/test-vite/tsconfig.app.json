@@ -24,16 +24,10 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "paths": {
-      "typeiocjs/*": [
-        "../typeioc/src/*"
-      ]
-    }
   },
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
-    "src/**/*.vue",
-    "../typeiocjs/src/**/*"
+    "src/**/*.vue"
   ]
 }

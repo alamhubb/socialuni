@@ -1,5 +1,4 @@
-import {TTTTAaaa} from "./plugins/TypeIoc/Testaa.ts";
-import {Service, Resource} from "./plugins/TypeIoc/TypeIocDecorator.ts";
+import {Resource, Service} from "typeiocjs/src/TypeIocDecorator.ts";
 
 @Service
 export default class TestSerivce {
