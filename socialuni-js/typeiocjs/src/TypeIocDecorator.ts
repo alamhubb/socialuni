@@ -2,7 +2,6 @@ import typeIocContainer from "./TypeIocContainer"
 
 const fieldNameMetadataKey = '68f3275e05804ff4b8baec697b0ad1b5'
 
-
 export function Service(serviceNames: string | string[]) {
     function extracted(serviceName: string, target: any, obj: any, ctx: any) {
         //逻辑校验，不可重复注册，同名
@@ -55,3 +54,4 @@ export function Resource(serviceName: string) {
         ctx.metadata[fieldNameMetadataKey] = serviceName
     }
 }
+
