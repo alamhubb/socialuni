@@ -8,9 +8,11 @@
 <script lang="ts">
 import {Component, Vue, toNative} from 'vue-facing-decorator';
 import TestSerivce from "./TestSerivce.ts";
-import B from "./Testaa.ts";
+import B, {TTTTAaaa} from "./Testaa.ts";
 import typeIocContainer from "typeiocjs/src/TypeIocContainer.ts";
+import {Service} from "typeiocjs/src/TypeIocDecorator.ts";
 
+@Service
 @Component({
   components: {}
 })
