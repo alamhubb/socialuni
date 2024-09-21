@@ -36,14 +36,18 @@ export function Service(serviceNames: string | string[]) {
     }
 
     return (target: any, ctx: any) => {
-        //创建注入对象
-        const obj = new target()
-        if (Array.isArray(serviceNames)) {
-            for (const serviceName of serviceNames) {
-                extracted(serviceName, target, obj, ctx);
+        try {
+            //创建注入对象
+            const obj = new target()
+            if (Array.isArray(serviceNames)) {
+                for (const serviceName of serviceNames) {
+                    extracted(serviceName, target, obj, ctx);
+                }
+            } else {
+                extracted(serviceNames, target, obj, ctx);
             }
-        } else {
-            extracted(serviceNames, target, obj, ctx);
+        } catch (e) {
+            console.error('注入失败：', target.name)
         }
     }
 }

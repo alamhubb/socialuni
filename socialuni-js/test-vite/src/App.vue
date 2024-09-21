@@ -21,7 +21,7 @@ class App extends Vue {
   d: TTTTAaaa = new TestSerivce()
 
   get test(): TestSerivce {
-    return typeIocContainer.containerGet(TestSerivce.name)
+    return typeIocContainer.containerGet("D:/project/socialuni-all/socialuni_vip/socialuni-js/test-vite/src/TestSerivce.ts$TestSerivce")
   }
 
   created() {
