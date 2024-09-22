@@ -10,7 +10,7 @@ import {Component, Vue, toNative} from 'vue-facing-decorator';
 import TestSerivce from "./TestSerivce.ts";
 import B, {TTTTAaaa} from "./Testaa.ts";
 import typeIocContainer from "typeiocjs/src/TypeIocContainer.ts";
-import {Service} from "typeiocjs/src/TypeIocDecorator.ts";
+import {Resource, Service} from "typeiocjs/src/TypeIocDecorator.ts";
 
 @Service
 @Component({
@@ -18,7 +18,8 @@ import {Service} from "typeiocjs/src/TypeIocDecorator.ts";
 })
 class App extends Vue {
   b: TTTTAaaa = new B()
-  d: TTTTAaaa = new TestSerivce()
+  e: TestSerivce = new TestSerivce()
+  d: TestSerivce = null
 
   get test(): TestSerivce {
     return typeIocContainer.containerGet("D:/project/socialuni-all/socialuni_vip/socialuni-js/test-vite/src/TestSerivce.ts$TestSerivce")
@@ -26,12 +27,17 @@ class App extends Vue {
 
   created() {
     console.log(77777)
-    console.log(this.test.testA)
+    console.log(this.d)
+    this.d = typeIocContainer.containerGet("D:/project/socialuni-all/socialuni_vip/socialuni-js/test-vite/src/TestSerivce.ts$TestSerivce")
+    // this.d.eat()
     // test.test()
   }
 
   printa() {
-    this.test.test()
+    // this.d.eat()
+    console.log(typeIocContainer)
+    this.d = typeIocContainer.containerGet("D:/project/socialuni-all/socialuni_vip/socialuni-js/test-vite/src/TestSerivce.ts$TestSerivce")
+    console.log(this.d)
   }
 
 
