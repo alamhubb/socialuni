@@ -24,6 +24,32 @@
     <div class="flex-1 overflow-hidden">
       <RouterView/>
     </div>
+
+
+    <div class="pd-sm font-18 col-all-center mt">
+      <div><a href="https://beian.miit.gov.cn/" target="_blank">冀ICP备19028721号-7</a></div>
+      <el-divider class="my-sm"/>
+
+      <div>
+        ©2023-2024 鹿森
+      </div>
+
+
+      <el-divider class="my-sm"/>
+
+
+      <div>
+        清池科技滦州市有限公司
+      </div>
+
+
+      <el-divider class="my-sm"/>
+      <div> 客服QQ：
+        <a target="_blank"
+           href="https://wpa.qq.com/msgrd?v=3&amp;uin=491369310&amp;site=qq&amp;menu=yes">
+          491369310 </a>
+      </div>
+    </div>
     <!--  <div class="h100p overflow-hidden flex-col bg-default">
         <s-user-nav-bar>
 
