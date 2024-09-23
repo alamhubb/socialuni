@@ -1,9 +1,6 @@
-import AlertUtil from 'src/util/AlertUtil'
-import AppConfig from "socialuni-constant/constant/AppConfig";
 import AppUpdateType from "socialuni-constant/constant/AppUpdateType";
-import SocialuniAppAPI from "socialuni/src/api/socialuni/SocialuniAppAPI";
-import {socialuniConfigModule} from "socialuni/src/store/SocialuniConfigModule";
 import QingAppUtil from "qing-compat-js/src/util/QingAppUtil";
+import SocialuniAppAPI from "socialuni-app-api/src/api/SocialuniAppAPI";
 
 export default class APPUtil {
     static checkUpdate() {
@@ -19,7 +16,7 @@ export default class APPUtil {
                         plus.runtime.openURL(updateUrl)
                     })
                 } else if (AppUpdateType.hot === updateType) {
-                    QingAppUtil.UniUtil.install(updateUrl).then(() => {
+                    QingAppUtil.NativeUtil.install(updateUrl).then(() => {
                         QingAppUtil.AlertUtil.confirm('新版本更新成功，是否现在重启清池app', '重启', '稍后').then(() => {
                             plus.runtime.restart()
                         })
