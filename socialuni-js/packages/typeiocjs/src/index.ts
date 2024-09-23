@@ -4,7 +4,16 @@ import {parse as parseSfc, SFCBlock} from '@vue/compiler-sfc';
 import {TypeIocBean, TypeIocResource, TypeIocService} from "./TypeIocDecorator";
 import path from 'node:path';
 import {tryNodeResolve} from "./node/plugins/resolve";
-import {DEFAULT_EXTENSIONS} from "./node/constants";
+
+export const DEFAULT_EXTENSIONS = [
+    '.mjs',
+    '.js',
+    '.mts',
+    '.ts',
+    '.jsx',
+    '.tsx',
+    '.json',
+];
 
 function toPosixPath(inputPath) {
     // 使用 path.normalize 将路径标准化（处理 . 和 .. 等）

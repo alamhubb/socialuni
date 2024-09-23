@@ -8,6 +8,7 @@
     "strict": false,
     "skipLibCheck": true,
     "noUnusedLocals": false,
+    "sourceMap": true,
     "noUnusedParameters": false
   },
   "include": [
