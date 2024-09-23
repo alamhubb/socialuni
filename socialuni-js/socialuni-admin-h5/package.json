@@ -63,7 +63,6 @@
     "@vitejs/plugin-vue-jsx": "^3.0.1",
     "npm-run-all": "^4.1.5",
     "sass": "^1.58.3",
-    "vite-plugin-commonjs": "^0.10.1",
-    "vite-plugin-socialuni-platform-auto-import": "../packages/vite-plugin-socialuni-platform-auto-import"
+    "vite-plugin-commonjs": "^0.10.1"
   }
 }

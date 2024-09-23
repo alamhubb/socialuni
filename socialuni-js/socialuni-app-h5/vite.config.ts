@@ -1,27 +1,33 @@
+import {fileURLToPath, URL} from 'node:url'
 import {defineConfig} from 'vite'
+import Inspect from 'vite-plugin-inspect'
 import vue from '@vitejs/plugin-vue'
-import {fileURLToPath} from "node:url";
-import socialuniPlatformAutoImportPlugin from "vite-plugin-socialuni-platform-auto-import/src";
-import transformIoc from "./viteplugin/index";
+import typeIocJsPlugin from "typeiocjs/src";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    define: {
-        __DEV__: false,
-        __FEATURE_PROD_DEVTOOLS__: false,
-        __BROWSER__: true,
-    },
     esbuild: {
-        target: 'es2022'
+        target: 'es2022',
+        sourcemap: true,
+        tsconfigRaw: {
+            compilerOptions: {
+                useDefineForClassFields: true
+            }
+        }
+    },
+    build: {
+        // sourcemap: false,
     },
     plugins: [
-        // transformIoc(),
         vue(),
-        socialuniPlatformAutoImportPlugin()
+        // Inspect(),
+        // inspectPlugin(),
+        // typeIocJsPlugin(),
     ],
     resolve: {
         alias: {
-            '@': fileURLToPath(new URL('./src', import.meta.url))
+            '@':
+                fileURLToPath(new URL('./src', import.meta.url))
         }
     }
 })

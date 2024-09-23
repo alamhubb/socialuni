@@ -3,9 +3,9 @@
 
 
 //用户使用的是 qingRouter
-
 import {TypeIocResource, TypeIocService} from "typeiocjs/src/TypeIocDecorator";
-import {QingRouterInterface} from "../interface/QingRouterInterface";
+import typeIocContainer from "typeiocjs/src/TypeIocContainer.ts";
+import {QingRouterInterface} from "qing-compat-js/src/interface/QingRouterInterface.ts";
 
 @TypeIocService
 export class QingRouterUtilNew {
@@ -13,5 +13,9 @@ export class QingRouterUtilNew {
     static qingRouter: QingRouterInterface
 }
 
+export let qingRouter:QingRouterInterface = null
 
-export const qingRouter = QingRouterUtilNew.qingRouter
+setTimeout(() => {
+    qingRouter = typeIocContainer.containerGet('QingRouterInterface')
+})
+

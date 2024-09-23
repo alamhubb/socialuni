@@ -43,7 +43,6 @@
     "sass": "^1.58.3",
     "typescript": "^5.2.2",
     "vite": "^5.0.0",
-    "vite-plugin-socialuni-platform-auto-import": "../packages/vite-plugin-socialuni-platform-auto-import",
     "vue-tsc": "^1.8.22"
   }
 }
