@@ -8,9 +8,9 @@ import {TypeIocResource, TypeIocService} from "typeiocjs/src/TypeIocDecorator";
 import {QingRouterInterface} from "../interface/QingRouterInterface";
 
 @TypeIocService
-class QingRouterUtilNew {
-    @TypeIocResource('dada')
-    readonly static qingRouter: QingRouterInterface
+export class QingRouterUtilNew {
+    @TypeIocResource
+    static qingRouter: QingRouterInterface
 }
 
 

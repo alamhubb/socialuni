@@ -9,7 +9,8 @@
     "cos-js-sdk-v5": "^1.2.18",
     "qing-util": "^0.1.18",
     "socialuni-constant": "^0.1.18",
-    "vue-router": "^4.2.0"
+    "vue-router": "^4.2.0",
+    "element-plus": "^2.3.7"
   },
   "devDependencies": {
     "typescript": "^4.7.4",

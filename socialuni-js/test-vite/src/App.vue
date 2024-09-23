@@ -9,8 +9,11 @@
 import {Component, Vue, toNative} from 'vue-facing-decorator';
 import TestSerivce from "./ioc/TestSerivce.ts";
 import B, {TTTTAaaa} from "./ioc/Testaa.ts";
+
 import typeIocContainer from "typeiocjs/src/TypeIocContainer.ts";
+
 import {TypeIocResource, TypeIocService} from "typeiocjs/src/TypeIocDecorator.ts";
+import {qingRouter, QingRouterUtilNew} from "qing-compat-js/src/util/QingRouterUtilNew.ts";
 
 @TypeIocService
 @Component({
@@ -35,6 +38,8 @@ class App extends Vue {
   printa() {
     // this.d.eat()
     console.log(typeIocContainer)
+    console.log(QingRouterUtilNew.qingRouter)
+    console.log(qingRouter)
     this.d = typeIocContainer.containerGet("E:/qkyproject/socialuni/socialuni-js/test-vite/src/code/test/fasdf/fasdfas/TestSerivce.ts$TestSerivce")
     console.log(this.d?.test())
   }

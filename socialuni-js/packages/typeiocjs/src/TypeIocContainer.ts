@@ -9,6 +9,7 @@ export class TypeIocContainer {
         return this.subscribe.get(key);
     }
     publish(serviceName: string, obj: object) {
+        console.log(serviceName)
         this.containerSet(serviceName, obj);
         const keySet: Set<KeyValueObj<Object>> = this.subscribeGet(serviceName);
         if (keySet) {

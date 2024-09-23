@@ -1,7 +1,7 @@
 {
   "files": [],
   "compilerOptions": {
-    "experimentalDecorators": true,
+    "experimentalDecorators": false,
   },
   "references": [
     {

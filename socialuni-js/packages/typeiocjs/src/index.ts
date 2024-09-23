@@ -1,8 +1,10 @@
 import type {Plugin} from 'vite';
-import ts, {SyntaxKind} from "typescript";
+import ts, {isMethodDeclaration, SyntaxKind} from "typescript";
 import {parse as parseSfc, SFCBlock} from '@vue/compiler-sfc';
-import {TypeIocResource, TypeIocService} from "./TypeIocDecorator";
+import {TypeIocBean, TypeIocResource, TypeIocService} from "./TypeIocDecorator";
 import path from 'node:path';
+import {tryNodeResolve} from "./node/plugins/resolve";
+import {DEFAULT_EXTENSIONS} from "./node/constants";
 
 function toPosixPath(inputPath) {
     // 使用 path.normalize 将路径标准化（处理 . 和 .. 等）
@@ -25,7 +27,7 @@ function getDecoratorIndex(node: ts.ClassDeclaration, decoratorName: string): bo
     return decoratorIndex;
 }
 
-function addMetadataTransformer(sourceFile, id) {
+function addMetadataTransformer(sourceFile, id, packageCache) {
     // 自定义转换器，用于在所有类上添加 @Reflect.metadata
     return (context: ts.TransformationContext) => {
         function visit(node: ts.Node): ts.Node {
@@ -64,11 +66,35 @@ function addMetadataTransformer(sourceFile, id) {
                             //判断是否 ./开始 ，判断
                             let fileFullPath;
                             //为相对路径
+                            const directoryPath = path.dirname(id);
+
+                            console.log('zhixingle')
+                            const filsadf = tryNodeResolve(
+                                filePath,
+                                id,
+                                {
+                                    root: directoryPath,
+                                    isBuild: false,
+                                    isProduction: false,
+                                    preferRelative: false,
+                                    tryIndex: true,
+                                    mainFields: [],
+                                    conditions: [],
+                                    overrideConditions: ['node'],
+                                    dedupe: [],
+                                    extensions: DEFAULT_EXTENSIONS,
+                                    preserveSymlinks: false,
+                                    packageCache,
+                                    isRequire: false,
+                                },
+                                false,
+                            )
+
+                            console.log(filsadf?.id)
                             if (filePath.startsWith('\.')) {
-                                const directoryPath = path.dirname(id);
                                 fileFullPath = path.resolve(directoryPath, filePath);
                             } else {
-                                fileFullPath = filePath;
+                                fileFullPath = path.resolve(directoryPath, filePath);
                             }
                             const importClause = statement.importClause;
                             if (!importClause) {
@@ -92,6 +118,7 @@ function addMetadataTransformer(sourceFile, id) {
                             }
                         }
                     });
+
                     let members = [];
                     //设置属性信息
                     node.members.forEach((member) => {
@@ -108,9 +135,32 @@ function addMetadataTransformer(sourceFile, id) {
                                     let resourceModifiers = member.modifiers;
                                     //没有splice方法，
                                     const filterModifiers = resourceModifiers.filter((item, index) => index !== resourceDecoratorIndex);
-                                    const newModifiers = member.modifiers ? [...filterModifiers, newResourceDecorator] : [newResourceDecorator];
+                                    const filterDecoratorModifiers = filterModifiers.filter((item, index) => item.kind === ts.SyntaxKind.Decorator);
+                                    const filterNotDecoratorModifiers = filterModifiers.filter((item, index) => item.kind !== ts.SyntaxKind.Decorator);
+                                    const newModifiers = member.modifiers ? [newResourceDecorator, ...filterModifiers] : [newResourceDecorator];
                                     newMember = ts.factory.updatePropertyDeclaration(member, newModifiers, // 修饰符，添加新的装饰器
                                         member.name, member.questionToken, member.type, member.initializer);
+                                }
+                            }
+                        } else if (ts.isMethodDeclaration(member)) {
+                            let beanDecoratorIndex = getDecoratorIndex(member, TypeIocBean.name);
+                            if (beanDecoratorIndex > -1) {
+                                const memTypeName = member.type?.typeName?.text;
+                                if (memTypeName) {
+                                    const fullPath = classAllPathMap.get(memTypeName);
+                                    const newBeanDecorator = ts.factory.createDecorator(
+                                        ts.factory.createCallExpression(
+                                            ts.factory.createIdentifier(TypeIocBean.name),
+                                            undefined,
+                                            [
+                                                ts.factory.createStringLiteral(fullPath)
+                                            ]));
+                                    let resourceModifiers = member.modifiers;
+                                    //没有splice方法，
+                                    const filterModifiers = resourceModifiers.filter((item, index) => index !== beanDecoratorIndex);
+                                    const newModifiers = member.modifiers ? [newBeanDecorator, ...filterModifiers] : [newBeanDecorator];
+                                    newMember = ts.factory.updateMethodDeclaration(member, newModifiers, // 修饰符，添加新的装饰器
+                                        member.asteriskToken, member.name, member.questionToken, member.typeParameters, member.parameters, member.type, member.body);
                                 }
                             }
                         }
@@ -179,7 +229,6 @@ export default function typeIocJsPlugin(): Plugin {
         enforce: 'pre',
         transform(code, id) {
             if (/.ts$|.tsx$|.vue$/.test(id)) {
-                console.log(id)
                 let content;
                 if (/.ts$|.tsx$/.test(id)) {
                     content = code;
@@ -190,7 +239,8 @@ export default function typeIocJsPlugin(): Plugin {
                 const printer: ts.Printer = ts.createPrinter();
                 // const sourceFile = ts.createSourceFile(id, content, ts.ScriptTarget.Latest, true);
                 const sourceFile = ts.createSourceFile(id, content, ts.ScriptTarget.Latest);
-                const result = ts.transform(sourceFile, [addMetadataTransformer(sourceFile, id)]);
+                const packageCache = new Map()
+                const result = ts.transform(sourceFile, [addMetadataTransformer(sourceFile, id, packageCache)]);
                 const transformedSourceFile: ts.SourceFile = result.transformed[0];
                 let str = printer.printFile(transformedSourceFile);
                 /* if (!str.includes('reflect-metadata')) {
