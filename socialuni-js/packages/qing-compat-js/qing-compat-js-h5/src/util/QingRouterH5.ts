@@ -9,6 +9,8 @@ class QingRouterH5 {
     @TypeIocBean
     registryQingRouterInterface(): QingRouterInterface {
         const router = useRouter()
-        return Object.assign({}, router)
+        console.log(989898)
+        console.log(router)
+        return router
     }
 }

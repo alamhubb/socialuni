@@ -8,7 +8,12 @@ import typeIocJsPlugin from "typeiocjs/src";
 export default defineConfig({
     esbuild: {
         target: 'es2022',
-        sourcemap: true
+        sourcemap: true,
+        tsconfigRaw: {
+            compilerOptions: {
+                useDefineForClassFields: true
+            }
+        }
     },
     build: {
         // sourcemap: false,

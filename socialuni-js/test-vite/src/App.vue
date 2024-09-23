@@ -13,7 +13,7 @@ import B, {TTTTAaaa} from "./ioc/Testaa.ts";
 import typeIocContainer from "typeiocjs/src/TypeIocContainer.ts";
 
 import {TypeIocResource, TypeIocService} from "typeiocjs/src/TypeIocDecorator.ts";
-import {qingRouter, QingRouterUtilNew} from "qing-compat-js/src/util/QingRouterUtilNew.ts";
+import {qingRouter, QingRouterUtilNew} from "./ioc/QingRouterUtilNew.ts";
 
 @TypeIocService
 @Component({
@@ -40,6 +40,7 @@ class App extends Vue {
     console.log(typeIocContainer)
     console.log(QingRouterUtilNew.qingRouter)
     console.log(qingRouter)
+    console.log(qingRouter.currentRoute)
     this.d = typeIocContainer.containerGet("E:/qkyproject/socialuni/socialuni-js/test-vite/src/code/test/fasdf/fasdfas/TestSerivce.ts$TestSerivce")
     console.log(this.d?.test())
   }

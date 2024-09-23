@@ -4,6 +4,7 @@
     /* Modules */
     "module": "ES2022",
     "esModuleInterop": true,
+    "useDefineForClassFields": true,
     "forceConsistentCasingInFileNames": true,
     "strict": false,
     "skipLibCheck": true,

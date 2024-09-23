@@ -136,7 +136,7 @@ function addMetadataTransformer(sourceFile, id, packageCache) {
                                 if (memTypeName) {
                                     const fullPath = classAllPathMap.get(memTypeName);
                                     const newResourceDecorator = ts.factory.createDecorator(ts.factory.createCallExpression(ts.factory.createIdentifier(TypeIocResource.name), undefined, [
-                                        ts.factory.createStringLiteral(fullPath)
+                                        ts.factory.createStringLiteral(memTypeName)
                                     ]));
                                     let resourceModifiers = member.modifiers;
                                     //没有splice方法，
@@ -159,7 +159,7 @@ function addMetadataTransformer(sourceFile, id, packageCache) {
                                             ts.factory.createIdentifier(TypeIocBean.name),
                                             undefined,
                                             [
-                                                ts.factory.createStringLiteral(fullPath)
+                                                ts.factory.createStringLiteral(memTypeName)
                                             ]));
                                     let resourceModifiers = member.modifiers;
                                     //没有splice方法，
@@ -194,13 +194,14 @@ function addMetadataTransformer(sourceFile, id, packageCache) {
                         newServiceDecorator = ts.factory.createDecorator(ts.factory.createCallExpression(ts.factory.createIdentifier(TypeIocService.name), undefined, [
                             ts.factory.createArrayLiteralExpression(decoratorAry.map(name => {
                                 const fullPath = classAllPathMap.get(name);
-                                return ts.factory.createStringLiteral(fullPath);
+                                return ts.factory.createStringLiteral(name)
                             }))
                         ]));
                     } else {
                         const fullPath = classAllPathMap.get(decoratorAry[0]);
                         newServiceDecorator = ts.factory.createDecorator(ts.factory.createCallExpression(ts.factory.createIdentifier(TypeIocService.name), undefined, [
-                            ts.factory.createStringLiteral(fullPath)
+                            // ts.factory.createStringLiteral(fullPath)
+                            ts.factory.createStringLiteral(decoratorAry[0])
                         ]));
                     }
                     let modifiers = node.modifiers;

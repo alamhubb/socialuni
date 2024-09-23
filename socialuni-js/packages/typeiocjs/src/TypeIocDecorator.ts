@@ -7,8 +7,51 @@ export const spliceSymbol = '$$';
 
 // 定义命名空间
 export function TypeIocService(serviceNames: string | string[]) {
-    function setFieldResourceData(obj: any, ctx: any, serviceName: string) {
-        console.log(222)
+    function setFieldResourceData(serviceName: string, target: any, ctx: any, obj: any) {
+        //注册对象中的bean
+        // 但是我们也可以通过 Object.getPrototypeOf 来手动遍历原型上的方法
+        const proto = Object.getPrototypeOf(obj);
+        // 获取原型上的所有属性
+        const methodNames = Object.getOwnPropertyNames(proto);
+        console.log(serviceName)
+        console.log(123)
+        for (const methodName of methodNames) {
+            if (methodName !== 'constructor') {
+                const beanName = ctx.metadata[fieldBeanNameMetadataKey + spliceSymbol + methodName];
+                if (beanName) {
+                    console.log(methodName)
+                    console.log(serviceNames)
+                    console.log(serviceName)
+                    console.log(beanName)
+                    if (beanName !== serviceName) {
+                        let beanData = null;
+                        if (typeof obj[methodName] === 'function') {
+                            beanData = obj[methodName]()
+                        } else {
+                            beanData = obj[methodName]
+                        }
+                        if (!beanName) {
+                            console.log(77777)
+                            console.log(ctx)
+                            console.log(serviceName)
+                        }
+                        typeIocContainer.publish(beanName, beanData);
+                    } else {
+                        console.error('resource self')
+                    }
+                }
+            }
+        }
+
+
+        // 获取原型上的所有属性
+        const propertyNames = Object.getOwnPropertyNames(target);
+        console.log(8888)
+        console.log(serviceName)
+        console.log(target)
+        console.log(propertyNames)
+
+        //设置对象上的值
         for (const fieldName in obj) {
             console.log(333)
             console.log(fieldName)
@@ -28,38 +71,6 @@ export function TypeIocService(serviceNames: string | string[]) {
                 }
             }
         }
-        // 但是我们也可以通过 Object.getPrototypeOf 来手动遍历原型上的方法
-        const proto = Object.getPrototypeOf(obj);
-        // 获取原型上的所有属性
-        const propertyNames = Object.getOwnPropertyNames(proto);
-        console.log(123)
-        for (const methodName of propertyNames) {
-            if (methodName !== 'constructor') {
-                const beanName = ctx.metadata[fieldBeanNameMetadataKey + spliceSymbol + methodName];
-                if (beanName){
-                    console.log(methodName)
-                    console.log(serviceNames)
-                    console.log(serviceName)
-                    console.log(beanName)
-                    if (beanName !== serviceName) {
-                        let beanData = null;
-                        if (typeof obj[methodName] === 'function') {
-                            beanData = obj[methodName]()
-                        } else {
-                            beanData = obj[methodName]
-                        }
-                        if (!beanName){
-                            console.log(77777)
-                            console.log(ctx)
-                            console.log(serviceName)
-                        }
-                        typeIocContainer.publish(beanName, beanData);
-                    } else {
-                        console.error('resource self')
-                    }
-                }
-            }
-        }
     }
 
     function registryService(serviceName: string, target: any, obj: any, ctx: any) {
@@ -74,7 +85,7 @@ export function TypeIocService(serviceNames: string | string[]) {
         // }
         //给订阅的全部赋值
         typeIocContainer.publish(serviceName, obj);
-        setFieldResourceData(obj, ctx, serviceName);
+        setFieldResourceData(serviceName, target, ctx, obj);
     }
 
     return (target: any, ctx: any) => {

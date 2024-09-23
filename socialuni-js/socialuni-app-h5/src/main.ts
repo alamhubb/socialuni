@@ -17,6 +17,7 @@ import SocialuniImH5 from "socialuni-im-view-h5/src";
 import CommonUtil from "qing-util/src/util/CommonUtil.ts";
 import {socialuniPluginsModule} from "socialuni/src/store/SocialuniPluginsModule.ts";
 import SocialuniUserViewH5 from "socialuni-user-view-h5";
+import {QingCompatJs} from "qing-compat-js/src";
 
 
 export const getImageUrl = (path: string): string => {
@@ -39,7 +40,7 @@ declare module '@vue/runtime-core' {
 
     app.config.globalProperties.$DateUtil = DateUtil;
     app.config.globalProperties.$getImageUrl = getImageUrl;
-
+    app.use(QingCompatJs)
     app.use(SocialuniUiH5)
     app.use(SocialuniAppViewH5)
     app.use(SocialuniUser)
