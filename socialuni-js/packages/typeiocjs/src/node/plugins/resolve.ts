@@ -32,7 +32,12 @@ export function tryNodeResolveNew(
     // console.log(basedir)
     const pkg = resolvePackageData(pkgId, basedir, preserveSymlinks, packageCache)
     if (pkg) {
-        let resolved = `${pkg.dir}/${id.replace(`${pkgId}/`, '')}`;
+        let resolved
+        if (deepMatch) {
+            resolved = `${pkg.dir}/${id.replace(`${pkgId}/`, '')}`;
+        } else {
+            resolved = `${pkg.dir}`;
+        }
         return {
             id: resolved,
         }

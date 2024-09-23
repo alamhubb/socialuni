@@ -45,38 +45,18 @@ function invalidatePackageData(packageCache: PackageCache, pkgPath: string): voi
 }
 
 export function resolvePackageData(pkgName: string, basedir: string, preserveSymlinks = false, packageCache?: PackageCache): PackageData | null {
-    console.log(22222)
     const originalBasedir = basedir;
-    console.log(basedir)
     while (basedir) {
         if (packageCache) {
-            console.log(33333)
             const cached = getRpdCache(packageCache, pkgName, basedir, originalBasedir, preserveSymlinks);
             if (cached)
                 return cached;
         }
         const pkg = path.join(basedir, 'node_modules', pkgName, 'package.json');
-        console.log(pkg)
-        console.log(basedir)
-        console.log(pkgName)
-        console.log(44444)
         try {
-            console.log(4445555)
-            console.log(fs.existsSync(pkg))
             if (fs.existsSync(pkg)) {
-                console.log(55555)
-                console.log(55533)
-                console.log(preserveSymlinks)
-                console.log(pkg)
-                console.log(safeRealpathSync)
-                console.log(safeRealpathSync(pkg))
                 const pkgPath = preserveSymlinks ? pkg : safeRealpathSync(pkg);
-                console.log(555444)
-                console.log(pkgPath)
                 const pkgData = loadPackageData(pkgPath);
-                console.log(555666)
-                console.log(pkgData)
-                console.log(555777)
                 if (packageCache) {
                     setRpdCache(packageCache, pkgData, pkgName, basedir, originalBasedir, preserveSymlinks);
                 }
@@ -84,12 +64,10 @@ export function resolvePackageData(pkgName: string, basedir: string, preserveSym
             }
         } catch {
         }
-        console.log(66666)
         const nextBasedir = path.dirname(basedir);
         if (nextBasedir === basedir)
             break;
         basedir = nextBasedir;
-        console.log(7777777)
     }
     return null;
 }

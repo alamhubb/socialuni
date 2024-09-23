@@ -1,7 +1,7 @@
 import type {Plugin} from 'vite';
 import ts, {isMethodDeclaration, SyntaxKind} from "typescript";
 import {parse as parseSfc, SFCBlock} from '@vue/compiler-sfc';
-import {TypeIocBean, TypeIocResource, TypeIocService} from "./TypeIocDecorator";
+import {spliceSymbol, TypeIocBean, TypeIocResource, TypeIocService} from "./TypeIocDecorator";
 import path from 'node:path';
 import {tryNodeResolve, tryNodeResolveNew} from "./node/plugins/resolve";
 
@@ -57,18 +57,18 @@ function addMetadataTransformer(sourceFile, id, packageCache) {
                     //有实现接口，则设置接口信息
                     //设置类型信息
                     const className = node.name.text;
-                    const setFullPath = id + '$$' + className;
+                    const setFullPath = id + spliceSymbol + className;
                     setClassAllPathMap(className, setFullPath);
                     const decoratorAry = [className];
                     // 遍历导入声明
                     sourceFile.statements.forEach(statement => {
                         if (ts.isInterfaceDeclaration(statement)) {
                             const interfaceName = statement.name.text;
-                            const interfaceNameFullPath = id + '$$' + interfaceName;
+                            const interfaceNameFullPath = id + spliceSymbol + interfaceName;
                             setClassAllPathMap(interfaceName, interfaceNameFullPath);
                         } else if (ts.isClassDeclaration(statement)) {
                             const declClassName = statement.name.text;
-                            const declClassNameFullPath = id + '$$' + declClassName;
+                            const declClassNameFullPath = id + spliceSymbol + declClassName;
                             setClassAllPathMap(declClassName, declClassNameFullPath);
                         } else if (ts.isImportDeclaration(statement)) {
                             const filePath = (statement.moduleSpecifier as ts.StringLiteral).text;
@@ -80,17 +80,8 @@ function addMetadataTransformer(sourceFile, id, packageCache) {
                             if (filePath.startsWith('\.')) {
                                 fileFullPath = path.resolve(directoryPath, filePath);
                             } else {
-
-
-                                console.log(import.meta.url)
                                 const projectRoot = process.cwd();
-                                console.log(projectRoot)
-                                console.log(filePath)
-                                console.log(id)
-                                console.log(directoryPath)
-
-                                console.log('zhixingle')
-                                const filsadf = tryNodeResolveNew(
+                                fileFullPath = tryNodeResolveNew(
                                     filePath,
                                     projectRoot,
                                     {
@@ -109,10 +100,7 @@ function addMetadataTransformer(sourceFile, id, packageCache) {
                                         isRequire: false,
                                     },
                                     false,
-                                )
-
-                                console.log(filsadf?.id)
-                                fileFullPath = path.resolve(directoryPath, filePath);
+                                )?.id
                             }
                             const importClause = statement.importClause;
                             if (!importClause) {
@@ -124,14 +112,14 @@ function addMetadataTransformer(sourceFile, id, packageCache) {
                                     for (const importName of importNames) {
                                         if (importName.name) {
                                             const importNameText = importName.name.text;
-                                            const importNameTextFullPath = fileFullPath + '$$' + importNameText;
+                                            const importNameTextFullPath = fileFullPath + spliceSymbol + importNameText;
                                             setClassAllPathMap(importNameText, importNameTextFullPath);
                                         }
                                     }
                                 }
                             } else {
                                 const importNameText = importClause.name.text;
-                                const importNameTextFullPath = fileFullPath + '$$' + importNameText;
+                                const importNameTextFullPath = fileFullPath + spliceSymbol + importNameText;
                                 setClassAllPathMap(importNameText, importNameTextFullPath);
                             }
                         }
