@@ -4,6 +4,7 @@ export const bareImportRE = /^(?![a-zA-Z]:)[\w@](?!.*:\/\/)/;
 export const deepImportRE = /^([^@][^/]*)\/|^(@[^/]+\/[^/]+)\//;
 import path from 'node:path'
 import fs from 'node:fs'
+import {cleanUrl} from "../../shared/utils";
 
 export function tryNodeResolve(
     id: string,
