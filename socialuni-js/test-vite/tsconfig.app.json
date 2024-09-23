@@ -15,7 +15,7 @@
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
-    "experimentalDecorators": false,
+    "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "noEmit": true,
     "jsx": "preserve",

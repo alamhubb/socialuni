@@ -19,7 +19,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "experimentalDecorators": false,
+    "experimentalDecorators": true,
     "strictNullChecks": false,
     "noImplicitAny": false,
     "composite": true,
