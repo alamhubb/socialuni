@@ -35,8 +35,8 @@ class App extends Vue {
   printa() {
     // this.d.eat()
     console.log(typeIocContainer)
-    this.d = typeIocContainer.containerGet("E:/qkyproject/socialuni/socialuni-js/test-vite/src/TestSerivce.ts$TestSerivce")
-    console.log(this.d)
+    this.d = typeIocContainer.containerGet("E:/qkyproject/socialuni/socialuni-js/test-vite/src/code/test/fasdf/fasdfas/TestSerivce.ts$TestSerivce")
+    console.log(this.d?.test())
   }
 }
 
