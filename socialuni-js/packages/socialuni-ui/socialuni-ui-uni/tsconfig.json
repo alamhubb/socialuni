@@ -3,6 +3,6 @@
     "target": "es2022",
     "module": "esnext",
     "moduleResolution": "Node",
-    "experimentalDecorators": true
+    "experimentalDecorators": false
   }
 }
