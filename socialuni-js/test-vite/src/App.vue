@@ -7,8 +7,8 @@
 
 <script lang="ts">
 import {Component, Vue, toNative} from 'vue-facing-decorator';
-import TestSerivce from "./code/test/fasdf/fasdfas/TestSerivce.ts";
-import B, {TTTTAaaa} from "./Testaa.ts";
+import TestSerivce from "./ioc/TestSerivce.ts";
+import B, {TTTTAaaa} from "./ioc/Testaa.ts";
 import typeIocContainer from "typeiocjs/src/TypeIocContainer.ts";
 import {Resource, Service} from "typeiocjs/src/TypeIocDecorator.ts";
 

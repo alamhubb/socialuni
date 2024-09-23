@@ -204,12 +204,16 @@ export default function typeIocJsPlugin(): Plugin {
 }
 
 
-// export const typeIocJs = {
-//     async install(app: App, componentScan: string) {
-//         const modules = import.meta.glob(componentScan);
-//         console.log(modules)
-//         /*for (const module in modules) {
-//             console.log('jiazai:', module)
-//         }*/
-//     }
-// }
+export const typeIocJs = {
+    async install(app: App) {
+        // const __filename = fileURLToPath(import.meta.url);
+        // const __dirname = dirname(__filename);
+        console.log(1111)
+        console.log(import.meta.url)
+        // const modules = import.meta.glob('./**/*.ts', {eager: true});
+    }
+}
+
+export const loadSrcAllTs = () => {
+    return import.meta.glob('./**/*.ts', {eager: true});
+};
