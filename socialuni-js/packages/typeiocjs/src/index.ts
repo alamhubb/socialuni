@@ -1,7 +1,7 @@
 import type {Plugin} from 'vite';
 import ts, {SyntaxKind} from "typescript";
 import {parse as parseSfc, SFCBlock} from '@vue/compiler-sfc';
-import {Resource, Service} from "./TypeIocDecorator";
+import {TypeIocResource, TypeIocService} from "./TypeIocDecorator";
 import path from 'node:path';
 
 function toPosixPath(inputPath) {
@@ -31,7 +31,7 @@ function addMetadataTransformer(sourceFile, id) {
         function visit(node: ts.Node): ts.Node {
             try {
                 if (ts.isClassDeclaration(node)) {
-                    let decoratorIndex = getDecoratorIndex(node, Service.name);
+                    let decoratorIndex = getDecoratorIndex(node, TypeIocService.name);
                     if (decoratorIndex < 0) {
                         return node;
                     }
@@ -97,12 +97,12 @@ function addMetadataTransformer(sourceFile, id) {
                     node.members.forEach((member) => {
                         let newMember = member;
                         if (ts.isPropertyDeclaration(member)) {
-                            let resourceDecoratorIndex = getDecoratorIndex(member, Resource.name);
+                            let resourceDecoratorIndex = getDecoratorIndex(member, TypeIocResource.name);
                             if (resourceDecoratorIndex > -1) {
                                 const memTypeName = member.type?.typeName?.text;
                                 if (memTypeName) {
                                     const fullPath = classAllPathMap.get(memTypeName);
-                                    const newResourceDecorator = ts.factory.createDecorator(ts.factory.createCallExpression(ts.factory.createIdentifier(Resource.name), undefined, [
+                                    const newResourceDecorator = ts.factory.createDecorator(ts.factory.createCallExpression(ts.factory.createIdentifier(TypeIocResource.name), undefined, [
                                         ts.factory.createStringLiteral(fullPath)
                                     ]));
                                     let resourceModifiers = member.modifiers;
@@ -135,7 +135,7 @@ function addMetadataTransformer(sourceFile, id) {
                     }
                     let newServiceDecorator;
                     if (decoratorAry.length > 1) {
-                        newServiceDecorator = ts.factory.createDecorator(ts.factory.createCallExpression(ts.factory.createIdentifier(Service.name), undefined, [
+                        newServiceDecorator = ts.factory.createDecorator(ts.factory.createCallExpression(ts.factory.createIdentifier(TypeIocService.name), undefined, [
                             ts.factory.createArrayLiteralExpression(decoratorAry.map(name => {
                                 const fullPath = classAllPathMap.get(name);
                                 return ts.factory.createStringLiteral(fullPath);
@@ -143,7 +143,7 @@ function addMetadataTransformer(sourceFile, id) {
                         ]));
                     } else {
                         const fullPath = classAllPathMap.get(decoratorAry[0]);
-                        newServiceDecorator = ts.factory.createDecorator(ts.factory.createCallExpression(ts.factory.createIdentifier(Service.name), undefined, [
+                        newServiceDecorator = ts.factory.createDecorator(ts.factory.createCallExpression(ts.factory.createIdentifier(TypeIocService.name), undefined, [
                             ts.factory.createStringLiteral(fullPath)
                         ]));
                     }

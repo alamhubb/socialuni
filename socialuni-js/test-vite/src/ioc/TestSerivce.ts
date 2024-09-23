@@ -1,10 +1,10 @@
-import {Resource, Service} from "typeiocjs/src/TypeIocDecorator.ts";
+import {TypeIocResource, TypeIocService} from "typeiocjs/src/TypeIocDecorator.ts";
 import {TTTTAaaa} from "./Testaa.ts";
 
-@Service
+@TypeIocService
 export default class TestSerivce {
 
-    @Resource
+    @TypeIocResource
     testA: TTTTAaaa
 
     test() {

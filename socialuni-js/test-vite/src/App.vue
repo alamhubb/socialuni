@@ -10,9 +10,9 @@ import {Component, Vue, toNative} from 'vue-facing-decorator';
 import TestSerivce from "./ioc/TestSerivce.ts";
 import B, {TTTTAaaa} from "./ioc/Testaa.ts";
 import typeIocContainer from "typeiocjs/src/TypeIocContainer.ts";
-import {Resource, Service} from "typeiocjs/src/TypeIocDecorator.ts";
+import {TypeIocResource, TypeIocService} from "typeiocjs/src/TypeIocDecorator.ts";
 
-@Service
+@TypeIocService
 @Component({
   components: {}
 })

@@ -5,10 +5,11 @@
 </template>
 
 <script lang="ts">
-import B, {type TTTTAaaa} from "@/plugins/TypeIoc/Testaa.ts";
-import typeIocContainer, {Resource, Service} from "@/plugins/TypeIoc/TypeIocContainer";
+import {Component, toNative, Vue} from "vue-facing-decorator";
+import {TTTTAaaa} from "../ioc/Testaa.ts";
+import {TypeIocService} from "typeiocjs/src/TypeIocDecorator.ts";
 
-@Service
+@TypeIocService
 @Component({
   components: {}
 })

@@ -1,10 +1,10 @@
-import {Service} from "typeiocjs/src/TypeIocDecorator.ts";
+import {TypeIocService} from "typeiocjs/src/TypeIocDecorator.ts";
 
 export interface TTTTAaaa {
     eat()
 }
 
-@Service
+@TypeIocService
 export default class B implements TTTTAaaa {
     static name: haha = 'dada'
 

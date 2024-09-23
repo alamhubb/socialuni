@@ -17,6 +17,7 @@
     "socialuni-app-api": "^0.1.18",
     "socialuni-constant": "^0.1.18",
     "socialuni-user-api": "^0.1.18",
+    "typeiocjs": "^0.1.18",
     "vue": "^3.3.2"
   },
   "devDependencies": {
