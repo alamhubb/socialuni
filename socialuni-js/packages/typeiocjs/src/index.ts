@@ -3,7 +3,7 @@ import ts, {isMethodDeclaration, SyntaxKind} from "typescript";
 import {parse as parseSfc, SFCBlock} from '@vue/compiler-sfc';
 import {TypeIocBean, TypeIocResource, TypeIocService} from "./TypeIocDecorator";
 import path from 'node:path';
-import {tryNodeResolve} from "./node/plugins/resolve";
+import {tryNodeResolve, tryNodeResolveNew} from "./node/plugins/resolve";
 
 export const DEFAULT_EXTENSIONS = [
     '.mjs',
@@ -77,32 +77,41 @@ function addMetadataTransformer(sourceFile, id, packageCache) {
                             //为相对路径
                             const directoryPath = path.dirname(id);
 
-                            console.log('zhixingle')
-                            const filsadf = tryNodeResolve(
-                                filePath,
-                                id,
-                                {
-                                    root: directoryPath,
-                                    isBuild: false,
-                                    isProduction: false,
-                                    preferRelative: false,
-                                    tryIndex: true,
-                                    mainFields: [],
-                                    conditions: [],
-                                    overrideConditions: ['node'],
-                                    dedupe: [],
-                                    extensions: DEFAULT_EXTENSIONS,
-                                    preserveSymlinks: false,
-                                    packageCache,
-                                    isRequire: false,
-                                },
-                                false,
-                            )
-
-                            console.log(filsadf?.id)
                             if (filePath.startsWith('\.')) {
                                 fileFullPath = path.resolve(directoryPath, filePath);
                             } else {
+
+
+                                console.log(import.meta.url)
+                                const projectRoot = process.cwd();
+                                console.log(projectRoot)
+                                console.log(filePath)
+                                console.log(id)
+                                console.log(directoryPath)
+
+                                console.log('zhixingle')
+                                const filsadf = tryNodeResolveNew(
+                                    filePath,
+                                    projectRoot,
+                                    {
+                                        root: projectRoot,
+                                        isBuild: false,
+                                        isProduction: false,
+                                        preferRelative: false,
+                                        tryIndex: true,
+                                        mainFields: [],
+                                        conditions: [],
+                                        overrideConditions: ['node'],
+                                        dedupe: [],
+                                        extensions: DEFAULT_EXTENSIONS,
+                                        preserveSymlinks: false,
+                                        packageCache,
+                                        isRequire: false,
+                                    },
+                                    false,
+                                )
+
+                                console.log(filsadf?.id)
                                 fileFullPath = path.resolve(directoryPath, filePath);
                             }
                             const importClause = statement.importClause;
@@ -231,6 +240,7 @@ function addMetadataTransformer(sourceFile, id, packageCache) {
     };
 }
 
+const packageCache = new Map()
 // Vite 插件
 export default function typeIocJsPlugin(): Plugin {
     return {
@@ -248,7 +258,6 @@ export default function typeIocJsPlugin(): Plugin {
                 const printer: ts.Printer = ts.createPrinter();
                 // const sourceFile = ts.createSourceFile(id, content, ts.ScriptTarget.Latest, true);
                 const sourceFile = ts.createSourceFile(id, content, ts.ScriptTarget.Latest);
-                const packageCache = new Map()
                 const result = ts.transform(sourceFile, [addMetadataTransformer(sourceFile, id, packageCache)]);
                 const transformedSourceFile: ts.SourceFile = result.transformed[0];
                 let str = printer.printFile(transformedSourceFile);
