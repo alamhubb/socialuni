@@ -5,11 +5,6 @@ export const deepImportRE = /^([^@][^/]*)\/|^(@[^/]+\/[^/]+)\//;
 import path from 'node:path'
 import fs from 'node:fs'
 
-const postfixRE = /[?#].*$/;
-export function cleanUrl(url: string): string {
-  return url.replace(postfixRE, '');
-}
-
 export function tryNodeResolve(
     id: string,
     importer: string | null | undefined,
